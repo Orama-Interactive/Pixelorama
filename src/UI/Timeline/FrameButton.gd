@@ -4,24 +4,24 @@ enum { REMOVE, CLONE, MOVE_LEFT, MOVE_RIGHT, PROPERTIES, REVERSE, CENTER }
 
 var frame := 0
 
-onready var popup_menu: PopupMenu = $PopupMenu
-onready var frame_properties: ConfirmationDialog = Global.control.find_node("FrameProperties")
+@onready var popup_menu: PopupMenu = $PopupMenu
+@onready var frame_properties: ConfirmationDialog = Global.control.find_child("FrameProperties")
 
 
 func _ready() -> void:
-	rect_min_size.x = Global.animation_timeline.cel_size
+	custom_minimum_size.x = Global.animation_timeline.cel_size
 	text = str(frame + 1)
-	connect("pressed", self, "_button_pressed")
-	connect("mouse_entered", self, "_update_tooltip")
+	pressed.connect(_button_pressed)
+	mouse_entered.connect(_update_tooltip)
 
 
 func _update_tooltip() -> void:
-	var duration: float = Global.current_project.frames[frame].duration
+	var duration := Global.current_project.frames[frame].duration
 	var duration_sec := duration * (1.0 / Global.current_project.fps)
 	var duration_str := str(duration_sec)
 	if "." in duration_str:  # If its a decimal value
 		duration_str = "%.2f" % duration_sec  # Up to 2 decimal places
-	hint_tooltip = "%s: %sx (%s sec)" % [tr("Duration"), str(duration), duration_str]
+	tooltip_text = "%s: %sx (%s sec)" % [tr("Duration"), str(duration), duration_str]
 
 
 func _button_pressed() -> void:
@@ -29,7 +29,7 @@ func _button_pressed() -> void:
 		Global.canvas.selection.transform_content_confirm()
 		var prev_curr_frame := Global.current_project.current_frame
 		if Input.is_action_pressed("shift"):
-			var frame_diff_sign := sign(frame - prev_curr_frame)
+			var frame_diff_sign := signi(frame - prev_curr_frame)
 			if frame_diff_sign == 0:
 				frame_diff_sign = 1
 			for i in range(prev_curr_frame, frame + frame_diff_sign, frame_diff_sign):
@@ -67,12 +67,12 @@ func _button_pressed() -> void:
 			if frame < Global.current_project.frames.size() - 1:
 				popup_menu.set_item_disabled(MOVE_RIGHT, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
-		pressed = !pressed
+		button_pressed = !button_pressed
 	elif Input.is_action_just_released("middle_mouse"):
-		pressed = !pressed
+		button_pressed = !button_pressed
 		Global.animation_timeline.delete_frames(_get_frame_indices())
 	else:  # An example of this would be Space
-		pressed = !pressed
+		button_pressed = !button_pressed
 
 
 func _on_PopupMenu_id_pressed(id: int) -> void:
@@ -98,26 +98,26 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 func change_frame_order(rate: int) -> void:
 	var change := frame + rate
-	var project = Global.current_project
+	var project := Global.current_project
 
 	project.undo_redo.create_action("Change Frame Order")
-	project.undo_redo.add_do_method(project, "move_frame", frame, change)
-	project.undo_redo.add_undo_method(project, "move_frame", change, frame)
+	project.undo_redo.add_do_method(project.move_frame.bind(frame, change))
+	project.undo_redo.add_undo_method(project.move_frame.bind(change, frame))
 
 	if project.current_frame == frame:
-		project.undo_redo.add_do_method(project, "change_cel", change)
+		project.undo_redo.add_do_method(project.change_cel.bind(change))
 	else:
-		project.undo_redo.add_do_method(project, "change_cel", project.current_frame)
+		project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame))
 
-	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
-func get_drag_data(_position: Vector2) -> Array:
+func _get_drag_data(_position: Vector2) -> Variant:
 	var button := Button.new()
-	button.rect_size = rect_size
+	button.size = size
 	button.theme = Global.control.theme
 	button.text = text
 	set_drag_preview(button)
@@ -125,7 +125,7 @@ func get_drag_data(_position: Vector2) -> Array:
 	return ["Frame", frame]
 
 
-func can_drop_data(_pos: Vector2, data) -> bool:
+func _can_drop_data(_pos: Vector2, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
 		if data[0] == "Frame":
 			if data[1] != frame:  # Can't move to same frame
@@ -139,21 +139,21 @@ func can_drop_data(_pos: Vector2, data) -> bool:
 					else:
 						region = _get_region_rect(0.875, 1.125)
 						region.position.x += 2  # Container spacing
-				Global.animation_timeline.drag_highlight.rect_global_position = region.position
-				Global.animation_timeline.drag_highlight.rect_size = region.size
+				Global.animation_timeline.drag_highlight.global_position = region.position
+				Global.animation_timeline.drag_highlight.size = region.size
 				Global.animation_timeline.drag_highlight.visible = true
 				return true
 	Global.animation_timeline.drag_highlight.visible = false
 	return false
 
 
-func drop_data(_pos: Vector2, data) -> void:
-	var drop_frame = data[1]
-	var project = Global.current_project
+func _drop_data(_pos: Vector2, data) -> void:
+	var drop_frame: int = data[1]
+	var project := Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
 	if Input.is_action_pressed("ctrl"):  # Swap frames
-		project.undo_redo.add_do_method(project, "swap_frame", frame, drop_frame)
-		project.undo_redo.add_undo_method(project, "swap_frame", frame, drop_frame)
+		project.undo_redo.add_do_method(project.swap_frame.bind(frame, drop_frame))
+		project.undo_redo.add_undo_method(project.swap_frame.bind(frame, drop_frame))
 	else:  # Move frames
 		var to_frame: int
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
@@ -162,16 +162,16 @@ func drop_data(_pos: Vector2, data) -> void:
 			to_frame = frame + 1
 		if drop_frame < frame:
 			to_frame -= 1
-		project.undo_redo.add_do_method(project, "move_frame", drop_frame, to_frame)
-		project.undo_redo.add_undo_method(project, "move_frame", to_frame, drop_frame)
+		project.undo_redo.add_do_method(project.move_frame.bind(drop_frame, to_frame))
+		project.undo_redo.add_undo_method(project.move_frame.bind(to_frame, drop_frame))
 
 	if project.current_frame == drop_frame:
-		project.undo_redo.add_do_method(project, "change_cel", frame)
+		project.undo_redo.add_do_method(project.change_cel.bind(frame))
 	else:
-		project.undo_redo.add_do_method(project, "change_cel", project.current_frame)
-	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+		project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 

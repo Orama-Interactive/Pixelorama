@@ -3,35 +3,35 @@ extends Button
 
 const HIERARCHY_DEPTH_PIXEL_SHIFT = 8
 
-export var hide_expand_button := true
+@export var hide_expand_button := true
 
 var layer := 0
 
-onready var expand_button: BaseButton = find_node("ExpandButton")
-onready var visibility_button: BaseButton = find_node("VisibilityButton")
-onready var lock_button: BaseButton = find_node("LockButton")
-onready var label: Label = find_node("Label")
-onready var line_edit: LineEdit = find_node("LineEdit")
-onready var hierarchy_spacer: Control = find_node("HierarchySpacer")
-onready var linked_button: BaseButton = find_node("LinkButton")
+@onready var expand_button: BaseButton = find_child("ExpandButton")
+@onready var visibility_button: BaseButton = find_child("VisibilityButton")
+@onready var lock_button: BaseButton = find_child("LockButton")
+@onready var label: Label = find_child("Label")
+@onready var line_edit: LineEdit = find_child("LineEdit")
+@onready var hierarchy_spacer: Control = find_child("HierarchySpacer")
+@onready var linked_button: BaseButton = find_child("LinkButton")
 
 
 func _ready() -> void:
-	rect_min_size.y = Global.animation_timeline.cel_size
+	custom_minimum_size.y = Global.animation_timeline.cel_size
 
 	label.text = Global.current_project.layers[layer].name
 	line_edit.text = Global.current_project.layers[layer].name
 
-	var layer_buttons = find_node("LayerButtons")
+	var layer_buttons = find_child("LayerButtons")
 	for child in layer_buttons.get_children():
 		var texture = child.get_child(0)
 		texture.modulate = Global.modulate_icon_color
 
 	# Visualize how deep into the hierarchy the layer is
-	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
-	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+	var hierarchy_depth := Global.current_project.layers[layer].get_hierarchy_depth()
+	hierarchy_spacer.custom_minimum_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 
-	if Global.control.theme.get_color("font_color", "Button").v > 0.5:  # Light text is dark theme
+	if Global.control.theme.get_color("font_color", "Button").v > 0.5:  # Light3D text is dark theme
 		self_modulate.v = 1 + hierarchy_depth * 0.4
 	else:  # Dark text should be light theme
 		self_modulate.v = 1 - hierarchy_depth * 0.075
@@ -74,44 +74,40 @@ func update_buttons() -> void:
 			lock_button.modulate.a = 0.33
 
 
-# When pressing a button, change the appearance of other layers (ie: expand or visible)
+## When pressing a button, change the appearance of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
 	for layer_button in Global.layer_vbox.get_children():
 		layer_button.update_buttons()
-		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
+		var expanded := Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
 		layer_button.visible = expanded
 		Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
 
 
 func _draw() -> void:
-	if hierarchy_spacer.rect_size.x > 0.1:
+	if hierarchy_spacer.size.x > 0.1:
 		var color := Color(1, 1, 1, 0.33)
-		color.v = round(Global.control.theme.get_color("font_color", "Button").v)
-		var x = (
-			hierarchy_spacer.rect_global_position.x
-			- rect_global_position.x
-			+ hierarchy_spacer.rect_size.x
-		)
-		draw_line(Vector2(x, 0), Vector2(x, rect_size.y), color)
+		color.v = roundf(Global.control.theme.get_color("font_color", "Button").v)
+		var x := hierarchy_spacer.global_position.x - global_position.x + hierarchy_spacer.size.x
+		draw_line(Vector2(x, 0), Vector2(x, size.y), color)
 
 
 func _input(event: InputEvent) -> void:
 	if (
 		(event.is_action_released("ui_accept") or event.is_action_released("ui_cancel"))
 		and line_edit.visible
-		and event.scancode != KEY_SPACE
+		and event.keycode != KEY_SPACE
 	):
 		_save_layer_name(line_edit.text)
 
 
 func _on_LayerContainer_gui_input(event: InputEvent) -> void:
-	var project = Global.current_project
+	var project := Global.current_project
 
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		Global.canvas.selection.transform_content_confirm()
-		var prev_curr_layer: int = project.current_layer
+		var prev_curr_layer := project.current_layer
 		if Input.is_action_pressed("shift"):
-			var layer_diff_sign = sign(layer - prev_curr_layer)
+			var layer_diff_sign := signi(layer - prev_curr_layer)
 			if layer_diff_sign == 0:
 				layer_diff_sign = 1
 			for i in range(0, project.frames.size()):
@@ -129,7 +125,7 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 		else:  # If the button is pressed without Shift or Control
 			_select_current_layer()
 
-		if event.doubleclick:
+		if event.double_click:
 			label.visible = false
 			line_edit.visible = true
 			line_edit.editable = true
@@ -156,7 +152,7 @@ func _on_ExpandButton_pressed() -> void:
 func _on_VisibilityButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 	if Global.select_layer_on_button_click:
 		_select_current_layer()
 	_update_buttons_all_layers()
@@ -172,7 +168,9 @@ func _on_LockButton_pressed() -> void:
 
 func _on_LinkButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	var layer_class: PixelLayer = Global.current_project.layers[layer]
+	var layer_class := Global.current_project.layers[layer]
+	if not layer_class is PixelLayer:
+		return
 	layer_class.new_cels_linked = !layer_class.new_cels_linked
 	update_buttons()
 	if Global.select_layer_on_button_click:
@@ -188,7 +186,7 @@ func _select_current_layer() -> void:
 	Global.current_project.change_cel(-1, layer)
 
 
-func get_drag_data(_position: Vector2) -> Array:
+func _get_drag_data(_position: Vector2) -> Variant:
 	var layers := range(
 		layer - Global.current_project.layers[layer].get_child_count(true), layer + 1
 	)
@@ -196,7 +194,7 @@ func get_drag_data(_position: Vector2) -> Array:
 	var box := VBoxContainer.new()
 	for i in layers.size():
 		var button := Button.new()
-		button.rect_min_size = rect_size
+		button.custom_minimum_size = size
 		button.theme = Global.control.theme
 		button.text = Global.current_project.layers[layers[-1 - i]].name
 		box.add_child(button)
@@ -205,7 +203,7 @@ func get_drag_data(_position: Vector2) -> Array:
 	return ["Layer", layer]
 
 
-func can_drop_data(_pos: Vector2, data) -> bool:
+func _can_drop_data(_pos: Vector2, data) -> bool:
 	if typeof(data) != TYPE_ARRAY:
 		Global.animation_timeline.drag_highlight.visible = false
 		return false
@@ -220,16 +218,16 @@ func can_drop_data(_pos: Vector2, data) -> bool:
 		return false
 
 	var region: Rect2
-	var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+	var depth := Global.current_project.layers[layer].get_hierarchy_depth()
 
 	if Input.is_action_pressed("ctrl"):  # Swap layers
-		if drag_layer.is_a_parent_of(curr_layer) or curr_layer.is_a_parent_of(drag_layer):
+		if drag_layer.is_ancestor_of(curr_layer) or curr_layer.is_ancestor_of(drag_layer):
 			Global.animation_timeline.drag_highlight.visible = false
 			return false
 		region = get_global_rect()
 
 	else:  # Shift layers
-		if drag_layer.is_a_parent_of(curr_layer):
+		if drag_layer.is_ancestor_of(curr_layer):
 			Global.animation_timeline.drag_highlight.visible = false
 			return false
 		# If accepted as a child, is it in the center region?
@@ -249,15 +247,15 @@ func can_drop_data(_pos: Vector2, data) -> bool:
 	# Shift drawn region to the right a bit for hierarchy depth visualization:
 	region.position.x += depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 	region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
-	Global.animation_timeline.drag_highlight.rect_global_position = region.position
-	Global.animation_timeline.drag_highlight.rect_size = region.size
+	Global.animation_timeline.drag_highlight.global_position = region.position
+	Global.animation_timeline.drag_highlight.size = region.size
 	Global.animation_timeline.drag_highlight.visible = true
 	return true
 
 
-func drop_data(_pos: Vector2, data) -> void:
+func _drop_data(_pos: Vector2, data) -> void:
 	var drop_layer: int = data[1]
-	var project: Project = Global.current_project
+	var project := Global.current_project
 
 	project.undo_redo.create_action("Change Layer Order")
 	var layers: Array = project.layers  # This shouldn't be modified directly
@@ -295,12 +293,12 @@ func drop_data(_pos: Vector2, data) -> void:
 		a.to_parents[-1] = drop_from_parents[-1]
 		b.to_parents[-1] = a_from_parents[-1]
 
-		project.undo_redo.add_do_method(project, "swap_layers", a, b)
+		project.undo_redo.add_do_method(project.swap_layers.bind(a, b))
 		project.undo_redo.add_undo_method(
-			project,
-			"swap_layers",
-			{"from": a.to, "to": a.from, "to_parents": a_from_parents},
-			{"from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents}
+			project.swap_layers.bind(
+				{"from": a.to, "to": a.from, "to_parents": a_from_parents},
+				{"from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents}
+			)
 		)
 
 	else:  # Move layers
@@ -324,7 +322,7 @@ func drop_data(_pos: Vector2, data) -> void:
 				if layers[layer].has_children():
 					to_index = layers[layer].get_children(true)[0].index
 
-					if layers[layer].is_a_parent_of(layers[drop_layer]):
+					if layers[layer].is_ancestor_of(layers[drop_layer]):
 						to_index += drop_from_indices.size()
 				else:
 					to_index = layer
@@ -339,18 +337,18 @@ func drop_data(_pos: Vector2, data) -> void:
 		to_parents[-1] = to_parent
 
 		project.undo_redo.add_do_method(
-			project, "move_layers", drop_from_indices, drop_to_indices, to_parents
+			project.move_layers.bind(drop_from_indices, drop_to_indices, to_parents)
 		)
 		project.undo_redo.add_undo_method(
-			project, "move_layers", drop_to_indices, drop_from_indices, drop_from_parents
+			project.move_layers.bind(drop_to_indices, drop_from_indices, drop_from_parents)
 		)
 	if project.current_layer == drop_layer:
-		project.undo_redo.add_do_method(project, "change_cel", -1, layer)
+		project.undo_redo.add_do_method(project.change_cel.bind(-1, layer))
 	else:
-		project.undo_redo.add_do_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+		project.undo_redo.add_do_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 

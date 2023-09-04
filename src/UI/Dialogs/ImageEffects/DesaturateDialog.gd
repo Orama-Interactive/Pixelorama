@@ -5,30 +5,31 @@ var green := true
 var blue := true
 var alpha := false
 
-var shader: Shader = preload("res://src/Shaders/Desaturate.shader")
+var shader := preload("res://src/Shaders/Desaturate.gdshader")
 
 
 func _ready() -> void:
+	super._ready()
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var selection_tex := ImageTexture.new()
-	if selection_checkbox.pressed and project.has_selection:
-		selection_tex.create_from_image(project.selection_map, 0)
+func commit_action(cel: Image, project := Global.current_project) -> void:
+	var selection_tex: ImageTexture
+	if selection_checkbox.button_pressed and project.has_selection:
+		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
 	var params := {
 		"red": red, "blue": blue, "green": green, "alpha": alpha, "selection": selection_tex
 	}
-	if !confirmed:
+	if !has_been_confirmed:
 		for param in params:
-			preview.material.set_shader_param(param, params[param])
+			preview.material.set_shader_parameter(param, params[param])
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
+		await gen.done
 
 
 func _on_RButton_toggled(button_pressed: bool) -> void:

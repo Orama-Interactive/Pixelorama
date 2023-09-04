@@ -34,7 +34,7 @@ void fragment() {
 	// Get color from the sprite texture at the current pixel we are rendering
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	
+
 	vec3 col = original_color.rgb;
 	vec3 hsb = rgb2hsb(col);
 	// If not greyscale
@@ -55,7 +55,7 @@ void fragment() {
 	else if (val_shift < 0.0) {
 		hsb.z =  mix(0, hsb.z , 1.0 - abs(val_shift));
 	}
-	
+
 	col = hsb2rgb(hsb);
 	vec3 output = mix(original_color.rgb, col, selection_color.a);
 	COLOR = vec4(output.rgb, original_color.a);

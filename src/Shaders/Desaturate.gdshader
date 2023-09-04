@@ -8,7 +8,7 @@ uniform bool alpha;
 uniform sampler2D selection;
 
 float stolChannel(float x) {
-	return (x < 0.04045) ? (x / 12.92) : pow((x + 0.055) / 1.055, 2.4);	
+	return (x < 0.04045) ? (x / 12.92) : pow((x + 0.055) / 1.055, 2.4);
 }
 
 vec3 standardToLinear(vec3 c) {
@@ -39,7 +39,7 @@ void fragment() {
 	// Get color from the sprite texture at the current pixel we are rendering
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	
+
 	// Transform from standard RGB to linear RGB.
 	vec3 std = original_color.rgb;
 	vec3 lin = standardToLinear(std);

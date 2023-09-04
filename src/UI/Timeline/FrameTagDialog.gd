@@ -4,9 +4,9 @@ var current_tag_id := 0
 var tag_vboxes := []
 var delete_tag_button: Button
 
-onready var main_vbox_cont: VBoxContainer = $VBoxContainer/ScrollContainer/VBoxTagContainer
-onready var add_tag_button: Button = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
-onready var options_dialog = $TagOptions
+@onready var main_vbox_cont: VBoxContainer = $VBoxContainer/ScrollContainer/VBoxTagContainer
+@onready var add_tag_button: Button = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
+@onready var options_dialog = $TagOptions
 
 
 func _ready() -> void:
@@ -33,7 +33,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		var edit_button := Button.new()
 		edit_button.text = "Edit"
 		edit_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		edit_button.connect("pressed", self, "_on_EditButton_pressed", [i, edit_button])
+		edit_button.pressed.connect(_on_EditButton_pressed.bind(i, edit_button))
 		hbox_cont.add_child(edit_button)
 		vbox_cont.add_child(hbox_cont)
 
@@ -43,7 +43,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		vbox_cont.add_child(name_label)
 
 		var hsep := HSeparator.new()
-		hsep.size_flags_horizontal = SIZE_EXPAND_FILL
+		hsep.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		vbox_cont.add_child(hsep)
 
 		main_vbox_cont.add_child(vbox_cont)
@@ -55,16 +55,17 @@ func _on_FrameTagDialog_about_to_show() -> void:
 	main_vbox_cont.move_child(add_tag_button, main_vbox_cont.get_child_count() - 1)
 
 
-func _on_FrameTagDialog_popup_hide() -> void:
-	Global.dialog_open(false)
+func _on_FrameTagDialog_visibility_changed() -> void:
+	if not visible:
+		Global.dialog_open(false)
 
 
 func _on_AddTag_pressed() -> void:
-	var x_pos = add_tag_button.rect_global_position.x
-	var y_pos = add_tag_button.rect_global_position.y + 2 * add_tag_button.rect_size.y
-	options_dialog.popup(Rect2(Vector2(x_pos, y_pos), options_dialog.rect_size))
+	var x_pos := add_tag_button.global_position.x
+	var y_pos := add_tag_button.global_position.y + 2 * add_tag_button.size.y
+	options_dialog.popup(Rect2i(position + Vector2i(x_pos, y_pos), options_dialog.size))
 	current_tag_id = Global.current_project.animation_tags.size()
-	# Determine tag values (Array sort method)...
+	# Determine tag values (array sort method)
 	var frames := []
 	for cel in Global.current_project.selected_cels:
 		frames.append(cel[0])
@@ -78,9 +79,9 @@ func _on_AddTag_pressed() -> void:
 
 
 func _on_EditButton_pressed(_tag_id: int, edit_button: Button) -> void:
-	var x_pos = edit_button.rect_global_position.x
-	var y_pos = edit_button.rect_global_position.y + 2 * edit_button.rect_size.y
-	options_dialog.popup(Rect2(Vector2(x_pos, y_pos), options_dialog.rect_size))
+	var x_pos = edit_button.global_position.x
+	var y_pos = edit_button.global_position.y + 2 * edit_button.size.y
+	options_dialog.popup(Rect2i(position + Vector2i(x_pos, y_pos), options_dialog.size))
 	current_tag_id = _tag_id
 	var animation_tag: AnimationTag = Global.current_project.animation_tags[_tag_id]
 	options_dialog.get_node("GridContainer/NameLineEdit").text = animation_tag.name
@@ -127,8 +128,8 @@ func _on_TagOptions_confirmed() -> void:
 	# Handle Undo/Redo
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Modify Frame Tag")
-	Global.current_project.undo_redo.add_do_method(Global, "general_redo")
-	Global.current_project.undo_redo.add_undo_method(Global, "general_undo")
+	Global.current_project.undo_redo.add_do_method(Global.general_redo)
+	Global.current_project.undo_redo.add_undo_method(Global.general_undo)
 	Global.current_project.undo_redo.add_do_property(
 		Global.current_project, "animation_tags", new_animation_tags
 	)
@@ -142,12 +143,12 @@ func _on_TagOptions_confirmed() -> void:
 func _on_TagOptions_custom_action(action: String) -> void:
 	if action == "delete_tag":
 		var new_animation_tags := Global.current_project.animation_tags.duplicate()
-		new_animation_tags.remove(current_tag_id)
+		new_animation_tags.remove_at(current_tag_id)
 		# Handle Undo/Redo
 		Global.current_project.undos += 1
 		Global.current_project.undo_redo.create_action("Delete Frame Tag")
-		Global.current_project.undo_redo.add_do_method(Global, "general_redo")
-		Global.current_project.undo_redo.add_undo_method(Global, "general_undo")
+		Global.current_project.undo_redo.add_do_method(Global.general_redo)
+		Global.current_project.undo_redo.add_undo_method(Global.general_undo)
 		Global.current_project.undo_redo.add_do_property(
 			Global.current_project, "animation_tags", new_animation_tags
 		)
@@ -160,7 +161,7 @@ func _on_TagOptions_custom_action(action: String) -> void:
 		_on_FrameTagDialog_about_to_show()
 
 
-func _on_TagOptions_popup_hide() -> void:
+func _on_TagOptions_visibility_changed() -> void:
 	if delete_tag_button:
 		delete_tag_button.visible = false
 

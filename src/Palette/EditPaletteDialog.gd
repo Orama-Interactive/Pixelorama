@@ -12,14 +12,14 @@ var origin_height := 0
 
 var old_name := ""
 
-onready var name_input := $VBoxContainer/PaletteMetadata/Name
-onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
-onready var width_input := $VBoxContainer/PaletteMetadata/Width
-onready var height_input := $VBoxContainer/PaletteMetadata/Height
-onready var path_input := $VBoxContainer/PaletteMetadata/Path
+@onready var name_input := $VBoxContainer/PaletteMetadata/Name
+@onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
+@onready var width_input := $VBoxContainer/PaletteMetadata/Width
+@onready var height_input := $VBoxContainer/PaletteMetadata/Height
+@onready var path_input := $VBoxContainer/PaletteMetadata/Path3D
 
-onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
-onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
+@onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
+@onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
 
 
 func _ready() -> void:
@@ -50,43 +50,42 @@ func open(current_palette: Palette) -> void:
 		popup_centered()
 
 
-# Shows/hides a warning when palette size is being reduced
-func toggle_size_reduced_warning(visible: bool) -> void:
-	size_reduced_warning.visible = visible
+## Shows/hides a warning when palette size is being reduced
+func toggle_size_reduced_warning(to_show: bool) -> void:
+	size_reduced_warning.visible = to_show
 	# Required to resize window to correct size if warning causes content overflow
-	rect_size = rect_size
+	size = size
 
 
-# Shows/hides a warning when palette already exists
-func toggle_already_exists_warning(visible: bool) -> void:
-	already_exists_warning.visible = visible
+## Shows/hides a warning when palette already exists
+func toggle_already_exists_warning(to_show: bool) -> void:
+	already_exists_warning.visible = to_show
 
 	# Disable confirm button so user cannot save
-	get_ok().disabled = visible
+	get_ok_button().disabled = to_show
 
 	# Required to resize window to correct size if warning causes content overflow
-	rect_size = rect_size
+	size = size
 
 
-func _on_EditPaletteDialog_popup_hide() -> void:
+func _on_EditPaletteDialog_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 
 func _on_EditPaletteDialog_confirmed() -> void:
-	emit_signal("saved", name_input.text, comment_input.text, width_input.value, height_input.value)
+	saved.emit(name_input.text, comment_input.text, width_input.value, height_input.value)
 
 
 func _on_EditPaletteDialog_custom_action(action: String) -> void:
 	if action == DELETE_ACTION:
 		hide()
-		emit_signal("deleted")
+		deleted.emit(deleted)
 
 
 func _on_size_value_changed(_value):
 	# Toggle resize warning label if palette size was reduced
 	var size_decreased: bool = (
-		height_input.value < origin_height
-		or width_input.value < origin_width
+		height_input.value < origin_height or width_input.value < origin_width
 	)
 	toggle_size_reduced_warning(size_decreased)
 
@@ -100,4 +99,4 @@ func _on_Name_text_changed(new_name):
 
 		# Disable ok button on empty name
 		if new_name == "":
-			get_ok().disabled = true
+			get_ok_button().disabled = true

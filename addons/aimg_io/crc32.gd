@@ -1,4 +1,4 @@
-tool
+@tool
 class_name AImgIOCRC32
 extends Resource
 # CRC32 implementation that uses a Resource for better caching
@@ -6,10 +6,10 @@ extends Resource
 const INIT = 0xFFFFFFFF
 
 # The reversed polynomial.
-export var reversed_polynomial: int = 0xEDB88320
+@export var reversed_polynomial: int = 0xEDB88320
 
 # The mask (and initialization value).
-export var mask: int = 0xFFFFFFFF
+@export var mask: int = 0xFFFFFFFF
 
 var crc32_table = []
 var _table_init_mutex: Mutex = Mutex.new()
@@ -38,7 +38,7 @@ func ensure_ready():
 # Performs the update step of CRC32 over some bytes.
 # Note that this is not the whole story.
 # The CRC must be initialized to 0xFFFFFFFF, then updated, then bitwise-inverted.
-func update(crc: int, data: PoolByteArray) -> int:
+func update(crc: int, data: PackedByteArray) -> int:
 	var i := 0
 	var l := len(data)
 	while i < l:

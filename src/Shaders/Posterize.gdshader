@@ -9,7 +9,7 @@ void fragment()
 {
 	vec4 color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	
+
 	float a = floor(mod(UV.x / TEXTURE_PIXEL_SIZE.x, 2.0));
 	float b = floor(mod(UV.y / TEXTURE_PIXEL_SIZE.y, 2.0));
 	float c = mod(a + b, 2.0);

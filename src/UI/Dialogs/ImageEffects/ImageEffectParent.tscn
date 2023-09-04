@@ -1,98 +1,92 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://bybqhhayl5ay5"]
 
-[ext_resource path="res://src/UI/Nodes/AnimatePanel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Classes/ImageEffect.gd" type="Script" id=3]
-[ext_resource path="res://assets/graphics/misc/animate.png" type="Texture" id=4]
+[ext_resource type="PackedScene" uid="uid://dmlgx1jgau8a5" path="res://src/UI/Nodes/AnimatePanel.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
+[ext_resource type="Script" path="res://src/Classes/ImageEffect.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://blrd4x0ma7b3h" path="res://assets/graphics/misc/animate.png" id="4"]
 
 [node name="ImageEffectParent" type="ConfirmationDialog"]
-margin_right = 294.0
-margin_bottom = 334.0
-rect_min_size = Vector2( 172, 60.2 )
-resizable = true
-script = ExtResource( 3 )
+canvas_item_default_texture_filter = 0
+size = Vector2i(360, 316)
+exclusive = false
+script = ExtResource("3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 368.0
-margin_bottom = 298.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 352.0
+offset_bottom = 267.0
 
 [node name="ShowAnimate" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-margin_left = 340.0
-margin_right = 360.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 0 )
-mouse_default_cursor_shape = 2
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
 size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
 toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ShowAnimate"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -2.0
-texture = ExtResource( 4 )
-expand = true
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+texture = ExtResource("4")
+expand_mode = 1
 stretch_mode = 6
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 360.0
-margin_bottom = 262.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 61.0
-margin_right = 299.0
-margin_bottom = 238.0
-rect_min_size = Vector2( 200, 200 )
-expand = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+expand_mode = 1
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("2")]
 show_behind_parent = true
+layout_mode = 0
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
 
 [node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 266.0
-margin_right = 360.0
-margin_bottom = 290.0
+layout_mode = 2
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_right = 178.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
-pressed = true
+mouse_default_cursor_shape = 2
+button_pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 182.0
-margin_right = 360.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
-text = "Selected cels"
-items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+mouse_default_cursor_shape = 2
+item_count = 4
 selected = 0
+popup/item_0/text = "Selected cels"
+popup/item_0/id = 0
+popup/item_1/text = "Current frame"
+popup/item_1/id = 1
+popup/item_2/text = "All frames"
+popup/item_2/id = 2
+popup/item_3/text = "All projects"
+popup/item_3/id = 3
 
 [node name="AnimateDialog" type="Popup" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 368.0
-margin_bottom = 298.0
-rect_min_size = Vector2( 360, 270 )
+size = Vector2i(350, 200)
+unresizable = false
 
-[node name="AnimatePanel" parent="AnimateDialog" instance=ExtResource( 1 )]
+[node name="AnimatePanel" parent="AnimateDialog" instance=ExtResource("1")]
 unique_name_in_owner = true
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0

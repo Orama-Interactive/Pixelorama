@@ -4,56 +4,41 @@ signal dynamics_changed
 
 enum { ALPHA, SIZE }
 
-var alpha_last_pressed: BaseButton = null
-var size_last_pressed: BaseButton = null
+@onready var grid_container: GridContainer = find_child("GridContainer")
+@onready var horizontal_mirror: BaseButton = grid_container.get_node("Horizontal")
+@onready var vertical_mirror: BaseButton = grid_container.get_node("Vertical")
+@onready var pixel_perfect: BaseButton = grid_container.get_node("PixelPerfect")
+@onready var dynamics: Button = $"%Dynamics"
 
-onready var grid_container: GridContainer = find_node("GridContainer")
-onready var horizontal_mirror: BaseButton = grid_container.get_node("Horizontal")
-onready var vertical_mirror: BaseButton = grid_container.get_node("Vertical")
-onready var pixel_perfect: BaseButton = grid_container.get_node("PixelPerfect")
-onready var dynamics: Button = $"%Dynamics"
-
-onready var dynamics_panel: PopupPanel = $DynamicsPanel
-onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
-onready var alpha_velocity_button: Button = $"%AlphaVelocityButton"
-onready var size_pressure_button: Button = $"%SizePressureButton"
-onready var size_velocity_button: Button = $"%SizeVelocityButton"
-onready var pressure_preview: ProgressBar = $"%PressurePreview"
-onready var velocity_preview: ProgressBar = $"%VelocityPreview"
-onready var alpha_group: ButtonGroup = alpha_pressure_button.group
-onready var size_group: ButtonGroup = size_pressure_button.group
+@onready var dynamics_panel: PopupPanel = $DynamicsPanel
+@onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
+@onready var alpha_velocity_button: Button = $"%AlphaVelocityButton"
+@onready var size_pressure_button: Button = $"%SizePressureButton"
+@onready var size_velocity_button: Button = $"%SizeVelocityButton"
+@onready var pressure_preview: ProgressBar = $"%PressurePreview"
+@onready var velocity_preview: ProgressBar = $"%VelocityPreview"
+@onready var alpha_group := alpha_pressure_button.button_group
+@onready var size_group := size_pressure_button.button_group
 
 
 func _ready() -> void:
 	# Resize tools panel when window gets resized
-	get_tree().get_root().connect("size_changed", self, "_on_resized")
-	horizontal_mirror.pressed = Tools.horizontal_mirror
-	vertical_mirror.pressed = Tools.vertical_mirror
-	pixel_perfect.pressed = Tools.pixel_perfect
+	get_tree().get_root().size_changed.connect(_on_resized)
+	horizontal_mirror.button_pressed = Tools.horizontal_mirror
+	vertical_mirror.button_pressed = Tools.vertical_mirror
+	pixel_perfect.button_pressed = Tools.pixel_perfect
 
-	alpha_pressure_button.connect(
-		"toggled",
-		self,
-		"_on_Dynamics_toggled",
-		[alpha_pressure_button, ALPHA, Tools.Dynamics.PRESSURE]
+	alpha_pressure_button.toggled.connect(
+		_on_Dynamics_toggled.bind(alpha_pressure_button, ALPHA, Tools.Dynamics.PRESSURE)
 	)
-	alpha_velocity_button.connect(
-		"toggled",
-		self,
-		"_on_Dynamics_toggled",
-		[alpha_velocity_button, ALPHA, Tools.Dynamics.VELOCITY]
+	alpha_velocity_button.toggled.connect(
+		_on_Dynamics_toggled.bind(alpha_velocity_button, ALPHA, Tools.Dynamics.VELOCITY)
 	)
-	size_pressure_button.connect(
-		"toggled",
-		self,
-		"_on_Dynamics_toggled",
-		[size_pressure_button, SIZE, Tools.Dynamics.PRESSURE]
+	size_pressure_button.toggled.connect(
+		_on_Dynamics_toggled.bind(size_pressure_button, SIZE, Tools.Dynamics.PRESSURE)
 	)
-	size_velocity_button.connect(
-		"toggled",
-		self,
-		"_on_Dynamics_toggled",
-		[size_velocity_button, SIZE, Tools.Dynamics.VELOCITY]
+	size_velocity_button.toggled.connect(
+		_on_Dynamics_toggled.bind(size_velocity_button, SIZE, Tools.Dynamics.VELOCITY)
 	)
 
 
@@ -62,11 +47,11 @@ func _input(event: InputEvent) -> void:
 	velocity_preview.value = 0
 	if event is InputEventMouseMotion:
 		pressure_preview.value = event.pressure
-		velocity_preview.value = event.speed.length() / Tools.mouse_velocity_max
+		velocity_preview.value = event.velocity.length() / Tools.mouse_velocity_max
 
 
 func _on_resized() -> void:
-	var tool_panel_size := rect_size
+	var tool_panel_size := size
 	var column_n := tool_panel_size.x / 36.5
 
 	if column_n < 1:
@@ -79,8 +64,7 @@ func _on_Horizontal_toggled(button_pressed: bool) -> void:
 	Global.config_cache.set_value("preferences", "horizontal_mirror", button_pressed)
 	Global.show_y_symmetry_axis = button_pressed
 	Global.current_project.y_symmetry_axis.visible = (
-		Global.show_y_symmetry_axis
-		and Global.show_guides
+		Global.show_y_symmetry_axis and Global.show_guides
 	)
 
 	var texture_button: TextureRect = horizontal_mirror.get_node("TextureRect")
@@ -96,8 +80,7 @@ func _on_Vertical_toggled(button_pressed: bool) -> void:
 	Global.show_x_symmetry_axis = button_pressed
 	# If the button is not pressed but another button is, keep the symmetry guide visible
 	Global.current_project.x_symmetry_axis.visible = (
-		Global.show_x_symmetry_axis
-		and Global.show_guides
+		Global.show_x_symmetry_axis and Global.show_guides
 	)
 
 	var texture_button: TextureRect = vertical_mirror.get_node("TextureRect")
@@ -118,34 +101,15 @@ func _on_PixelPerfect_toggled(button_pressed: bool) -> void:
 
 
 func _on_Dynamics_pressed() -> void:
-	var pos := dynamics.rect_global_position + Vector2(0, 32)
-	dynamics_panel.popup(Rect2(pos, dynamics_panel.rect_size))
+	var pos := dynamics.global_position + Vector2(0, 32)
+	dynamics_panel.popup(Rect2(pos, dynamics_panel.size))
 
 
 func _on_Dynamics_toggled(
 	button_pressed: bool, button: BaseButton, property: int, dynamic: int
 ) -> void:
-	if button_pressed:
-		var last_pressed: BaseButton
-		# The button calling this method is the one that was just selected
-#		var pressed_button: BaseButton
-		match property:
-			ALPHA:
-				last_pressed = alpha_last_pressed
-#				pressed_button = alpha_group.get_pressed_button()
-			SIZE:
-				last_pressed = size_last_pressed
-#				pressed_button = size_group.get_pressed_button()
-		if last_pressed == button:
-			# The button calling the method was the last one that was selected (we clicked it twice in a row)
-			# Toggle it off and set last_pressed to null so we can click it a third time to toggle it back on
-			button.pressed = false
-			_set_last_pressed_button(property, null)
-		# Update the last button pressed if we clicked something different
-		else:
-			_set_last_pressed_button(property, button)
 	var final_dynamic := dynamic
-	if not button.pressed:
+	if not button.button_pressed:
 		final_dynamic = Tools.Dynamics.NONE
 	match property:
 		ALPHA:
@@ -155,45 +119,37 @@ func _on_Dynamics_toggled(
 
 	var texture_button: TextureRect = button.get_node("TextureRect")
 	var file_name := "check.png"
-	if !button.pressed:
+	if !button.button_pressed:
 		file_name = "uncheck.png"
 	Global.change_button_texturerect(texture_button, file_name)
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()
 
 
-func _set_last_pressed_button(prop: int, value: BaseButton) -> void:
-	match prop:
-		ALPHA:
-			alpha_last_pressed = value
-		SIZE:
-			size_last_pressed = value
+func _on_ThresholdPressure_updated(value_1: float, value_2: float) -> void:
+	Tools.pen_pressure_min = minf(value_1, value_2)
+	Tools.pen_pressure_max = maxf(value_1, value_2)
 
 
-func _on_ThresholdPressure_updated(value_1, value_2) -> void:
-	Tools.pen_pressure_min = min(value_1, value_2)
-	Tools.pen_pressure_max = max(value_1, value_2)
-
-
-func _on_ThresholdVelocity_updated(value_1, value_2) -> void:
-	Tools.mouse_velocity_min_thres = min(value_1, value_2)
-	Tools.mouse_velocity_max_thres = max(value_1, value_2)
+func _on_ThresholdVelocity_updated(value_1: float, value_2: float) -> void:
+	Tools.mouse_velocity_min_thres = minf(value_1, value_2)
+	Tools.mouse_velocity_max_thres = maxf(value_1, value_2)
 
 
 func _on_AlphaMin_value_changed(value: float) -> void:
 	Tools.alpha_min = value
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()
 
 
 func _on_AlphaMax_value_changed(value: float) -> void:
 	Tools.alpha_max = value
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()
 
 
 func _on_SizeMin_value_changed(value: float) -> void:
 	Tools.brush_size_min = int(value)
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()
 
 
 func _on_SizeMax_value_changed(value: float) -> void:
 	Tools.brush_size_max = int(value)
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()

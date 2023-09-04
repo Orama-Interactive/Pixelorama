@@ -5,35 +5,38 @@ const MOVE_ACTIONS := ["move_mouse_left", "move_mouse_right", "move_mouse_up", "
 const CURSOR_SPEED_RATE := 6.0
 
 var current_pixel := Vector2.ZERO
-var sprite_changed_this_frame := false  # For optimization purposes
+var sprite_changed_this_frame := false  ## For optimization purposes
 var move_preview_location := Vector2.ZERO
 
-onready var currently_visible_frame: Viewport = $CurrentlyVisibleFrame
-onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
-onready var tile_mode = $TileMode
-onready var pixel_grid = $PixelGrid
-onready var grid = $Grid
-onready var selection = $Selection
-onready var onion_past := $OnionPast as Node2D
-onready var onion_future := $OnionFuture as Node2D
-onready var crop_rect := $CropRect as CropRect
-onready var indicators = $Indicators
-onready var previews = $Previews
-onready var mouse_guide_container = $MouseGuideContainer
-onready var gizmos_3d: Node2D = $Gizmos3D
+@onready var currently_visible_frame := $CurrentlyVisibleFrame as SubViewport
+@onready var current_frame_drawer := $CurrentlyVisibleFrame/CurrentFrameDrawer as Node2D
+@onready var tile_mode := $TileMode as Node2D
+@onready var pixel_grid := $PixelGrid as Node2D
+@onready var grid := $Grid as Node2D
+@onready var selection := $Selection as Node2D
+@onready var onion_past := $OnionPast as Node2D
+@onready var onion_future := $OnionFuture as Node2D
+@onready var crop_rect := $CropRect as CropRect
+@onready var indicators := $Indicators as Node2D
+@onready var previews := $Previews as Node2D
+@onready var mouse_guide_container := $MouseGuideContainer as Node2D
+@onready var gizmos_3d := $Gizmos3D as Node2D
 
 
 func _ready() -> void:
+	Global.project_changed.connect(queue_redraw)
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE
 	onion_future.blue_red_color = Global.onion_skinning_future_color
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	camera_zoom()
 
 
 func _draw() -> void:
-	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
+	var current_cels: Array = (
+		Global.current_project.frames[Global.current_project.current_frame].cels
+	)
 	var position_tmp := position
 	var scale_tmp := scale
 	if Global.mirror_view:
@@ -60,9 +63,9 @@ func _draw() -> void:
 	if Global.onion_skinning:
 		refresh_onion()
 	currently_visible_frame.size = Global.current_project.size
-	current_frame_drawer.update()
+	current_frame_drawer.queue_redraw()
 	if Global.current_project.tiles.mode != Tiles.MODE.NONE:
-		tile_mode.update()
+		tile_mode.queue_redraw()
 	draw_set_transform(position, rotation, scale)
 
 
@@ -94,38 +97,25 @@ func _input(event: InputEvent) -> void:
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
 	if Global.has_focus:
-		update()
+		queue_redraw()
 
 	sprite_changed_this_frame = false
 
-	Tools.handle_draw(current_pixel.floor(), event)
+	Tools.handle_draw(Vector2i(current_pixel.floor()), event)
 
 	if sprite_changed_this_frame:
 		update_selected_cels_textures()
 
 
 func camera_zoom() -> void:
-	# Set camera zoom based on the sprite size
-	var bigger_canvas_axis = max(Global.current_project.size.x, Global.current_project.size.y)
-	var zoom_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
-
 	for camera in Global.cameras:
-		if zoom_max > Vector2.ONE:
-			camera.zoom_max = zoom_max
-		else:
-			camera.zoom_max = Vector2.ONE
-
-		if camera == Global.camera_preview:
-			Global.preview_zoom_slider.max_value = -camera.zoom_min.x
-			Global.preview_zoom_slider.min_value = -camera.zoom_max.x
-
 		camera.fit_to_frame(Global.current_project.size)
 		camera.save_values_to_project()
 
 	Global.transparent_checker.update_rect()
 
 
-func update_texture(layer_i: int, frame_i := -1, project: Project = Global.current_project) -> void:
+func update_texture(layer_i: int, frame_i := -1, project := Global.current_project) -> void:
 	if frame_i == -1:
 		frame_i = project.current_frame
 
@@ -134,7 +124,7 @@ func update_texture(layer_i: int, frame_i := -1, project: Project = Global.curre
 		current_cel.update_texture()
 
 
-func update_selected_cels_textures(project: Project = Global.current_project) -> void:
+func update_selected_cels_textures(project := Global.current_project) -> void:
 	for cel_index in project.selected_cels:
 		var frame_index: int = cel_index[0]
 		var layer_index: int = cel_index[1]
@@ -144,5 +134,5 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 
 
 func refresh_onion() -> void:
-	onion_past.update()
-	onion_future.update()
+	onion_past.queue_redraw()
+	onion_future.queue_redraw()

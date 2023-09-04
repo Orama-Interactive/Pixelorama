@@ -3,10 +3,6 @@ extends BaseButton
 var brush = Global.brushes_popup.Brush.new()
 
 
-func _ready():
-	$TransparentChecker.fit_rect($BrushTexture.get_rect())
-
-
 func _on_BrushButton_pressed() -> void:
 	# Delete the brush on middle mouse press
 	if Input.is_action_just_released("middle_mouse"):

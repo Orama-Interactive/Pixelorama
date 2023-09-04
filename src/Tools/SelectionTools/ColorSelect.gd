@@ -1,11 +1,11 @@
 extends SelectionTool
 
-var shader: Shader = preload("res://src/Shaders/ColorSelect.gdshader")
+var shader := preload("res://src/Shaders/ColorSelect.gdshader")
 var _similarity := 100
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["similarity"] = _similarity
 	return config
 
@@ -24,19 +24,17 @@ func _on_Similarity_value_changed(value: float) -> void:
 	save_config()
 
 
-func apply_selection(position: Vector2) -> void:
-	.apply_selection(position)
-	var project: Project = Global.current_project
-	if position.x < 0 or position.y < 0:
+func apply_selection(pos: Vector2i) -> void:
+	super.apply_selection(pos)
+	var project := Global.current_project
+	if pos.x < 0 or pos.y < 0:
 		return
-	if position.x > project.size.x - 1 or position.y > project.size.y - 1:
+	if pos.x > project.size.x - 1 or pos.y > project.size.y - 1:
 		return
 
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
-	cel_image.lock()
-	var color := cel_image.get_pixelv(position)
-	cel_image.unlock()
+	var color := cel_image.get_pixelv(pos)
 	var operation := 0
 	if _subtract:
 		operation = 1
@@ -45,8 +43,7 @@ func apply_selection(position: Vector2) -> void:
 
 	var params := {"color": color, "similarity_percent": _similarity, "operation": operation}
 	if _add or _subtract or _intersect:
-		var selection_tex := ImageTexture.new()
-		selection_tex.create_from_image(project.selection_map, 0)
+		var selection_tex := ImageTexture.create_from_image(project.selection_map)
 		params["selection"] = selection_tex
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel_image, shader, params, project.size)

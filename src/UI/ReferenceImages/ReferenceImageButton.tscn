@@ -1,167 +1,123 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://5quwfcfl5o1e"]
 
-[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
+[ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" id="2"]
 
 [node name="ReferenceImageButton" type="PanelContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -969.0
-margin_bottom = -581.0
+offset_right = -969.0
+offset_bottom = -581.0
 size_flags_horizontal = 3
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Interior" type="VBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 325.0
-margin_bottom = 133.0
+layout_mode = 2
 
 [node name="PathHeader" type="HBoxContainer" parent="Interior"]
-margin_right = 318.0
-margin_bottom = 14.0
-custom_constants/separation = 0
+layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="Path" type="LinkButton" parent="Interior/PathHeader"]
-modulate = Color( 0.552941, 1, 0.298039, 1 )
-margin_right = 106.0
-margin_bottom = 14.0
+[node name="Path3D" type="LinkButton" parent="Interior/PathHeader"]
+modulate = Color(0.552941, 1, 0.298039, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 underline = 1
 
 [node name="PathHTML" type="Label" parent="Interior/PathHeader"]
-self_modulate = Color( 0.552941, 1, 0.298039, 1 )
-margin_left = 106.0
-margin_right = 212.0
-margin_bottom = 14.0
+self_modulate = Color(0.552941, 1, 0.298039, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HSeparator" type="HSeparator" parent="Interior/PathHeader"]
-margin_left = 212.0
-margin_right = 318.0
-margin_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PreviewAndOptions" type="HBoxContainer" parent="Interior"]
-margin_top = 18.0
-margin_right = 318.0
-margin_bottom = 98.0
+layout_mode = 2
 
 [node name="Options" type="GridContainer" parent="Interior/PreviewAndOptions"]
-margin_right = 234.0
-margin_bottom = 80.0
+layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
 
 [node name="PosLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
-margin_top = 5.0
-margin_right = 56.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "Position:"
-align = 2
 
 [node name="Position" type="HBoxContainer" parent="Interior/PreviewAndOptions/Options"]
-margin_left = 60.0
-margin_right = 234.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="X" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource( 1 )]
-margin_right = 85.0
+[node name="X" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource("1")]
+layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
-[node name="Y" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource( 1 )]
-margin_left = 89.0
-margin_right = 174.0
+[node name="Y" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource("1")]
+layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
 [node name="ScaleLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
-margin_top = 33.0
-margin_right = 56.0
-margin_bottom = 47.0
+layout_mode = 2
 text = "Scale:"
-align = 2
 
-[node name="Scale" parent="Interior/PreviewAndOptions/Options" instance=ExtResource( 1 )]
-margin_left = 60.0
-margin_top = 28.0
-margin_right = 234.0
-margin_bottom = 52.0
+[node name="Scale" parent="Interior/PreviewAndOptions/Options" instance=ExtResource("1")]
+layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
 [node name="OpacityLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
-margin_top = 61.0
-margin_right = 56.0
-margin_bottom = 75.0
+layout_mode = 2
 text = "Opacity:"
-align = 2
 
-[node name="Opacity" parent="Interior/PreviewAndOptions/Options" instance=ExtResource( 1 )]
-margin_left = 60.0
-margin_top = 56.0
-margin_right = 234.0
-margin_bottom = 80.0
+[node name="Opacity" parent="Interior/PreviewAndOptions/Options" instance=ExtResource("1")]
+layout_mode = 2
 
 [node name="PreviewPanel" type="Panel" parent="Interior/PreviewAndOptions"]
-margin_left = 238.0
-margin_right = 318.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 80, 80 )
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
 
 [node name="Warning" type="Label" parent="Interior/PreviewAndOptions/PreviewPanel"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-align = 1
-valign = 1
-autowrap = true
 
 [node name="Preview" type="TextureRect" parent="Interior/PreviewAndOptions/PreviewPanel"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -2.0
-expand = true
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+expand_mode = 1
 
 [node name="OtherOptions" type="HBoxContainer" parent="Interior"]
-margin_top = 102.0
-margin_right = 318.0
-margin_bottom = 126.0
+layout_mode = 2
 alignment = 2
 
 [node name="ApplyFilter" type="CheckBox" parent="Interior/OtherOptions"]
-margin_right = 101.0
-margin_bottom = 24.0
-hint_tooltip = "Uses a magnifying filter, to enable smooth zooming in of the texture."
+layout_mode = 2
+tooltip_text = "Uses a magnifying filter, to enable smooth zooming in of the texture."
 text = "Apply Filter"
-align = 1
 
 [node name="Silhouette" type="CheckBox" parent="Interior/OtherOptions"]
-margin_left = 105.0
-margin_right = 198.0
-margin_bottom = 24.0
-hint_tooltip = "Blacks out the image and makes all opaque pixels a dark color."
+layout_mode = 2
 text = "Silhouette"
 
 [node name="Reset" type="Button" parent="Interior/OtherOptions"]
-margin_left = 202.0
-margin_right = 250.0
-margin_bottom = 24.0
+layout_mode = 2
 text = "Reset"
-icon_align = 1
 
 [node name="Remove" type="Button" parent="Interior/OtherOptions"]
-margin_left = 254.0
-margin_right = 318.0
-margin_bottom = 24.0
-custom_colors/font_color = Color( 1, 0.266667, 0.266667, 1 )
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.266667, 0.266667, 1)
 text = "Remove"
 
-[connection signal="pressed" from="Interior/PathHeader/Path" to="." method="_on_Path_pressed"]
+[connection signal="pressed" from="Interior/PathHeader/Path3D" to="." method="_on_Path_pressed"]
 [connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Position/X" to="." method="_on_X_value_changed"]
 [connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Position/Y" to="." method="_on_Y_value_changed"]
 [connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Scale" to="." method="_on_Scale_value_changed"]

@@ -1,8 +1,9 @@
 class_name Layer3D
 extends BaseLayer
+## A class for 3D layer properties.
 
 
-func _init(_project, _name := "") -> void:
+func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
 
@@ -11,7 +12,7 @@ func _init(_project, _name := "") -> void:
 
 
 func serialize() -> Dictionary:
-	var dict = .serialize()
+	var dict = super.serialize()
 	dict["type"] = get_layer_type()
 	return dict
 
@@ -29,4 +30,4 @@ func can_layer_get_drawn() -> bool:
 
 
 func instantiate_layer_button() -> Node:
-	return Global.base_layer_button_node.instance()
+	return Global.base_layer_button_node.instantiate()

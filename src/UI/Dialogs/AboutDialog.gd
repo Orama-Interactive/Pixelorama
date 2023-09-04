@@ -1,6 +1,6 @@
-extends WindowDialog
+extends Window
 
-const CONTRIBUTORS := [
+const CONTRIBUTORS: PackedStringArray = [
 	"20kdc",
 	"Aaron Franke (aaronfranke)",
 	"AbhinavKDev (abhinav3967)",
@@ -23,6 +23,7 @@ const CONTRIBUTORS := [
 	"gschwind",
 	"Haoyu Qiu (timothyqiu)",
 	"Hugo Locurcio (Calinou)",
+	"huskee",
 	"Igor Santarek (jegor377)",
 	"Jeremy Behreandt (behreajj)",
 	"John Jerome Romero (Wishdream)",
@@ -50,12 +51,11 @@ const CONTRIBUTORS := [
 	"TheLsbt",
 	"THWLF",
 	"Vriska Weaver (henlo-birb)",
-	"Xenofon Konitsas (huskee)",
 ]
 
 const TRANSLATORS_DICTIONARY := {
 	"Emmanouil Papadeas (Overloaded)": ["Greek"],
-	"Xenofon Konitsas (huskee)": ["Greek"],
+	"huskee": ["Greek"],
 	"Lena Louloudaki (Soliscital)": ["Greek"],
 	"Hugo Locurcio (Calinou)": ["French"],
 	"blackjoker77777": ["French"],
@@ -174,7 +174,7 @@ const TRANSLATORS_DICTIONARY := {
 	],
 }
 
-const DONORS := [
+const DONORS: PackedStringArray = [
 	"BasicIncomePlz",
 	"Benedikt",
 	"David Maziarka",
@@ -194,22 +194,22 @@ const DONORS := [
 	"Πολιτισμός Τύπου 1",
 ]
 
-export(Array, String, MULTILINE) var licenses: Array
+@export_multiline var licenses: PackedStringArray
 
-onready var credits := $AboutUI/Credits as HSplitContainer
-onready var groups := $AboutUI/Credits/Groups as Tree
-onready var developer_container := $AboutUI/Credits/Developers as VBoxContainer
-onready var contributors_container := $AboutUI/Credits/Contributors as VBoxContainer
-onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
-onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
-onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
+@onready var credits := $AboutUI/Credits as HSplitContainer
+@onready var groups := $AboutUI/Credits/Groups as Tree
+@onready var developer_container := $AboutUI/Credits/Developers as VBoxContainer
+@onready var contributors_container := $AboutUI/Credits/Contributors as VBoxContainer
+@onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
+@onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
+@onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
 
-onready var developers := $AboutUI/Credits/Developers/DeveloperTree as Tree
-onready var contributors := $AboutUI/Credits/Contributors/ContributorTree as Tree
-onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
-onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
-onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as Tabs
-onready var license_text := $AboutUI/Credits/Licenses/LicenseText as TextEdit
+@onready var developers := $AboutUI/Credits/Developers/DeveloperTree as Tree
+@onready var contributors := $AboutUI/Credits/Contributors/ContributorTree as Tree
+@onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
+@onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
+@onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as TabBar
+@onready var license_text := $AboutUI/Credits/Licenses/LicenseText as TextEdit
 
 
 func _ready() -> void:
@@ -221,7 +221,6 @@ func _ready() -> void:
 	license_tabs.add_tab("mbed TLS")
 	license_tabs.add_tab("Keychain")
 	license_tabs.add_tab("Roboto")
-	license_tabs.add_tab("DroidSansFallback")
 	license_tabs.add_tab("Dockable Container")
 	license_tabs.add_tab("aimgio")
 	license_tabs.add_tab("godot-gdgifexporter")
@@ -232,7 +231,7 @@ func _ready() -> void:
 
 
 func _on_AboutDialog_about_to_show() -> void:
-	window_title = tr("About Pixelorama") + " " + Global.current_version
+	title = tr("About Pixelorama") + " " + Global.current_version
 
 	var groups_root := groups.create_item()
 	var developers_button := groups.create_item(groups_root)
@@ -258,10 +257,13 @@ func _on_AboutDialog_about_to_show() -> void:
 	create_translators()
 
 
-func _on_AboutDialog_popup_hide() -> void:
+func _on_visibility_changed() -> void:
+	if visible:
+		return
 	groups.clear()
 	developers.clear()
 	translators.clear()
+	Global.dialog_open(false)
 
 
 func _on_Groups_item_selected() -> void:
@@ -332,3 +334,7 @@ func create_translators() -> void:
 
 func _on_LicenseTabs_tab_changed(tab: int) -> void:
 	license_text.text = licenses[tab]
+
+
+func _on_close_requested() -> void:
+	hide()

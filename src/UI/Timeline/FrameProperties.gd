@@ -1,8 +1,8 @@
 extends ConfirmationDialog
 
 var frame_indices := []
-onready var frame_num = $VBoxContainer/GridContainer/FrameNum
-onready var frame_dur = $VBoxContainer/GridContainer/FrameTime
+@onready var frame_num = $VBoxContainer/GridContainer/FrameNum
+@onready var frame_dur = $VBoxContainer/GridContainer/FrameTime
 
 
 func _on_FrameProperties_about_to_show() -> void:
@@ -17,12 +17,12 @@ func _on_FrameProperties_about_to_show() -> void:
 	frame_dur.set_value(duration)
 
 
-func _on_FrameProperties_popup_hide() -> void:
+func _on_FrameProperties_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 
 func _on_FrameProperties_confirmed() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var new_duration: float = frame_dur.get_value()
 	project.undos += 1
 	project.undo_redo.create_action("Change frame duration")
@@ -31,6 +31,6 @@ func _on_FrameProperties_confirmed() -> void:
 		project.undo_redo.add_undo_property(
 			project.frames[frame], "duration", project.frames[frame].duration
 		)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()

@@ -1,26 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://3pmb60gpst7b"]
 
-[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=1]
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.gd" type="Script" id=2]
+[ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="1"]
+[ext_resource type="Script" path="res://src/UI/Nodes/TransparentChecker.gd" id="2"]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 1 )
-shader_param/size = 10.0
-shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
-shader_param/color2 = Color( 1, 1, 1, 1 )
-shader_param/offset = Vector2( 0, 0 )
-shader_param/scale = Vector2( 0, 0 )
-shader_param/rect_size = Vector2( 0, 0 )
-shader_param/follow_movement = false
-shader_param/follow_scale = false
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("1")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
 
 [node name="TransparentChecker" type="ColorRect"]
-material = SubResource( 1 )
-margin_right = 40.0
-margin_bottom = 40.0
+material = SubResource("1")
+anchors_preset = -1
 mouse_filter = 2
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
+metadata/_edit_use_anchors_ = true
+
 [connection signal="resized" from="." to="." method="_on_TransparentChecker_resized"]

@@ -6,36 +6,36 @@ enum Mode { DEFAULT, ADD, SUBTRACT, INTERSECT }
 var undo_data: Dictionary
 var _move := false
 var _move_content := true
-var _start_pos := Vector2.ZERO
-var _offset := Vector2.ZERO
-# For tools such as the Polygon selection tool where you have to
-# click multiple times to create a selection
+var _start_pos := Vector2i.ZERO
+var _offset := Vector2i.ZERO
+## For tools such as the Polygon selection tool where you have to
+## click multiple times to create a selection
 var _ongoing_selection := false
 
 var _mode_selected := 0
-var _add := false  # Shift + Mouse Click
-var _subtract := false  # Ctrl + Mouse Click
-var _intersect := false  # Shift + Ctrl + Mouse Click
+var _add := false  ## Shift + Mouse Click
+var _subtract := false  ## Ctrl + Mouse Click
+var _intersect := false  ## Shift + Ctrl + Mouse Click
 
-# Used to check if the state of content transformation has been changed
-# while draw_move() is being called. For example, pressing Enter while still moving content
+## Used to check if the state of content transformation has been changed
+## while draw_move() is being called. For example, pressing Enter while still moving content
 var _content_transformation_check := false
 var _skip_slider_logic := false
 
-onready var selection_node: Node2D = Global.canvas.selection
-onready var position_sliders := $Position as ValueSliderV2
-onready var size_sliders := $Size as ValueSliderV2
-onready var timer := $Timer as Timer
+@onready var selection_node: Node2D = Global.canvas.selection
+@onready var position_sliders := $Position as ValueSliderV2
+@onready var size_sliders := $Size as ValueSliderV2
+@onready var timer := $Timer as Timer
 
 
 func _ready() -> void:
+	super._ready()
 	set_spinbox_values()
 	refresh_options()
 
 
+## Ensure all items are added when we are selecting an option (bad things will happen otherwise)
 func refresh_options() -> void:
-	# The existence of this function is to ensure all items
-	# are added when we are selecting an option (bad things will happen otherwise)
 	$Modes.clear()
 	$Modes.add_item("Replace selection")
 	$Modes.add_item("Add to selection")
@@ -45,7 +45,7 @@ func refresh_options() -> void:
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["mode_selected"] = _mode_selected
 	return config
 
@@ -60,8 +60,8 @@ func update_config() -> void:
 
 func set_spinbox_values() -> void:
 	_skip_slider_logic = true
-	var select_rect: Rect2 = selection_node.big_bounding_rectangle
-	var has_selection := not select_rect.has_no_area()
+	var select_rect: Rect2i = selection_node.big_bounding_rectangle
+	var has_selection := select_rect.has_area()
 	if not has_selection:
 		size_sliders.press_ratio_button(false)
 	position_sliders.editable = has_selection
@@ -71,27 +71,27 @@ func set_spinbox_values() -> void:
 	_skip_slider_logic = false
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_start(position)
+func draw_start(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if selection_node.arrow_key_move:
 		return
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	undo_data = selection_node.get_undo_data(false)
 	_intersect = Input.is_action_pressed("selection_intersect", true)
 	_add = Input.is_action_pressed("selection_add", true)
 	_subtract = Input.is_action_pressed("selection_subtract", true)
-	_start_pos = position
-	_offset = position
+	_start_pos = pos
+	_offset = pos
 
-	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
-	var offsetted_pos := position
+	var selection_position: Vector2i = selection_node.big_bounding_rectangle.position
+	var offsetted_pos := pos
 	if selection_position.x < 0:
 		offsetted_pos.x -= selection_position.x
 	if selection_position.y < 0:
 		offsetted_pos.y -= selection_position.y
 
-	var quick_copy: bool = Input.is_action_pressed("transform_copy_selection_content", true)
+	var quick_copy := Input.is_action_pressed("transform_copy_selection_content", true)
 	if (
 		offsetted_pos.x >= 0
 		and offsetted_pos.y >= 0
@@ -99,7 +99,12 @@ func draw_start(position: Vector2) -> void:
 		and (!_add and !_subtract and !_intersect or quick_copy)
 		and !_ongoing_selection
 	):
-		if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		if !(
+			Global
+			. current_project
+			. layers[Global.current_project.current_layer]
+			. can_layer_get_drawn()
+		):
 			return
 		# Move current selection
 		_move = true
@@ -110,7 +115,7 @@ func draw_start(position: Vector2) -> void:
 					image.blit_rect_mask(
 						selection_node.preview_image,
 						selection_node.preview_image,
-						Rect2(Vector2.ZERO, project.selection_map.get_size()),
+						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 						selection_node.big_bounding_rectangle.position
 					)
 
@@ -127,7 +132,7 @@ func draw_start(position: Vector2) -> void:
 					image.blit_rect_mask(
 						selection_node.preview_image,
 						selection_node.preview_image,
-						Rect2(Vector2.ZERO, project.selection_map.get_size()),
+						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 						selection_node.big_bounding_rectangle.position
 					)
 				Global.canvas.update_selected_cels_textures()
@@ -146,9 +151,9 @@ func draw_start(position: Vector2) -> void:
 	_content_transformation_check = selection_node.is_moving_content
 
 
-func draw_move(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_move(position)
+func draw_move(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if selection_node.arrow_key_move:
 		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
@@ -159,51 +164,50 @@ func draw_move(position: Vector2) -> void:
 		return
 
 	if Input.is_action_pressed("transform_snap_axis"):  # Snap to axis
-		var angle := position.angle_to_point(_start_pos)
-		if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
-			position.y = _start_pos.y
+		var angle := Vector2(pos).angle_to_point(_start_pos)
+		if absf(angle) <= PI / 4 or absf(angle) >= 3 * PI / 4:
+			pos.y = _start_pos.y
 		else:
-			position.x = _start_pos.x
+			pos.x = _start_pos.x
 	if Input.is_action_pressed("transform_snap_grid"):
 		_offset = _offset.snapped(Global.grid_size)
-		var prev_pos: Vector2 = selection_node.big_bounding_rectangle.position
+		var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
 		selection_node.big_bounding_rectangle.position = prev_pos.snapped(Global.grid_size)
-		selection_node.marching_ants_outline.offset += (
-			selection_node.big_bounding_rectangle.position
-			- prev_pos
+		selection_node.marching_ants_outline.offset += Vector2(
+			selection_node.big_bounding_rectangle.position - prev_pos
 		)
-		position = position.snapped(Global.grid_size)
+		pos = pos.snapped(Global.grid_size)
 		var grid_offset := Global.grid_offset
-		grid_offset = Vector2(
+		grid_offset = Vector2i(
 			fmod(grid_offset.x, Global.grid_size.x), fmod(grid_offset.y, Global.grid_size.y)
 		)
-		position += grid_offset
+		pos += grid_offset
 
 	if _move_content:
-		selection_node.move_content(position - _offset)
+		selection_node.move_content(pos - _offset)
 	else:
-		selection_node.move_borders(position - _offset)
+		selection_node.move_borders(pos - _offset)
 
-	_offset = position
+	_offset = pos
 	_set_cursor_text(selection_node.big_bounding_rectangle)
 
 
-func draw_end(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_end(position)
+func draw_end(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	if selection_node.arrow_key_move:
 		return
 	if _content_transformation_check == selection_node.is_moving_content:
 		if _move:
 			selection_node.move_borders_end()
 		else:
-			apply_selection(position)
+			apply_selection(pos)
 
 	_move = false
 	cursor_text = ""
 
 
-func apply_selection(_position: Vector2) -> void:
+func apply_selection(_position: Vector2i) -> void:
 	# if a shortcut is activated then that will be obeyed instead
 	match _mode_selected:
 		Mode.ADD:
@@ -222,16 +226,16 @@ func _on_Modes_item_selected(index: int) -> void:
 	save_config()
 
 
-func _set_cursor_text(rect: Rect2) -> void:
+func _set_cursor_text(rect: Rect2i) -> void:
 	cursor_text = "%s, %s" % [rect.position.x, rect.position.y]
 	cursor_text += " -> %s, %s" % [rect.end.x - 1, rect.end.y - 1]
 	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
 
 
-func _on_Position_value_changed(value: Vector2) -> void:
+func _on_Position_value_changed(value: Vector2i) -> void:
 	if _skip_slider_logic:
 		return
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if !project.has_selection:
 		return
 
@@ -247,7 +251,7 @@ func _on_Position_value_changed(value: Vector2) -> void:
 	project.selection_map_changed()
 
 
-func _on_Size_value_changed(value: Vector2) -> void:
+func _on_Size_value_changed(value: Vector2i) -> void:
 	if _skip_slider_logic:
 		return
 	if !Global.current_project.has_selection:

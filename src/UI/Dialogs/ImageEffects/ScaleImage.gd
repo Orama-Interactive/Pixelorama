@@ -2,12 +2,12 @@ extends ConfirmationDialog
 
 var aspect_ratio := 1.0
 
-onready var width_value: SpinBox = find_node("WidthValue")
-onready var height_value: SpinBox = find_node("HeightValue")
-onready var width_value_perc: SpinBox = find_node("WidthValuePerc")
-onready var height_value_perc: SpinBox = find_node("HeightValuePerc")
-onready var interpolation_type: OptionButton = find_node("InterpolationType")
-onready var ratio_box: BaseButton = find_node("AspectRatioButton")
+@onready var width_value: SpinBox = find_child("WidthValue")
+@onready var height_value: SpinBox = find_child("HeightValue")
+@onready var width_value_perc: SpinBox = find_child("WidthValuePerc")
+@onready var height_value_perc: SpinBox = find_child("HeightValuePerc")
+@onready var interpolation_type: OptionButton = find_child("InterpolationType")
+@onready var ratio_box: BaseButton = find_child("AspectRatioButton")
 
 
 func _ready() -> void:
@@ -19,15 +19,13 @@ func _ready() -> void:
 	interpolation_type.add_item("Scale3X", DrawingAlgos.Interpolation.SCALE3X)
 	interpolation_type.add_item("cleanEdge", DrawingAlgos.Interpolation.CLEANEDGE)
 	interpolation_type.add_item("OmniScale", DrawingAlgos.Interpolation.OMNISCALE)
-	if not DrawingAlgos.omniscale_shader:
-		interpolation_type.set_item_disabled(DrawingAlgos.Interpolation.OMNISCALE, true)
 
 
 func _on_ScaleImage_about_to_show() -> void:
 	if DrawingAlgos.clean_edge_shader == null:
 		DrawingAlgos.clean_edge_shader = load("res://src/Shaders/Rotation/cleanEdge.gdshader")
 	Global.canvas.selection.transform_content_confirm()
-	aspect_ratio = Global.current_project.size.x / Global.current_project.size.y
+	aspect_ratio = float(Global.current_project.size.x) / float(Global.current_project.size.y)
 	width_value.value = Global.current_project.size.x
 	height_value.value = Global.current_project.size.y
 	width_value_perc.value = 100
@@ -41,18 +39,18 @@ func _on_ScaleImage_confirmed() -> void:
 	DrawingAlgos.scale_image(width, height, interpolation)
 
 
-func _on_ScaleImage_popup_hide() -> void:
+func _on_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 
 func _on_WidthValue_value_changed(value: float) -> void:
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		height_value.value = width_value.value / aspect_ratio
 	width_value_perc.value = (value * 100) / Global.current_project.size.x
 
 
 func _on_HeightValue_value_changed(value: float) -> void:
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		width_value.value = height_value.value * aspect_ratio
 	height_value_perc.value = (value * 100) / Global.current_project.size.y
 

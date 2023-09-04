@@ -3,40 +3,41 @@ extends ImageEffect
 enum { LINEAR, RADIAL, LINEAR_DITHERING, RADIAL_DITHERING }
 enum Animate { POSITION, SIZE, ANGLE, CENTER_X, CENTER_Y, RADIUS_X, RADIUS_Y }
 
-var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
-var shader_linear_dither: Shader = preload("res://src/Shaders/Gradients/LinearDithering.gdshader")
+var shader_linear := preload("res://src/Shaders/Gradients/Linear.gdshader")
+var shader_linear_dither := preload("res://src/Shaders/Gradients/LinearDithering.gdshader")
 
-var shader: Shader = shader_linear
-var dither_matrices := [
+var shader := shader_linear
+var dither_matrices: Array[DitherMatrix] = [
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png"), "Bayer 2x2"),
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer4.png"), "Bayer 4x4"),
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer8.png"), "Bayer 8x8"),
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer16.png"), "Bayer 16x16"),
 ]
-var selected_dither_matrix: DitherMatrix = dither_matrices[0]
+var selected_dither_matrix := dither_matrices[0]
 
-onready var options_cont: Container = $VBoxContainer/GradientOptions
-onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
-onready var shape_option_button: OptionButton = $"%ShapeOptionButton"
-onready var dithering_option_button: OptionButton = $"%DitheringOptionButton"
-onready var repeat_option_button: OptionButton = $"%RepeatOptionButton"
-onready var position_slider: ValueSlider = $"%PositionSlider"
-onready var size_slider: ValueSlider = $"%SizeSlider"
-onready var angle_slider: ValueSlider = $"%AngleSlider"
-onready var center_slider := $"%CenterSlider" as ValueSliderV2
-onready var radius_slider := $"%RadiusSlider" as ValueSliderV2
+@onready var options_cont: Container = $VBoxContainer/GradientOptions
+@onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
+@onready var shape_option_button: OptionButton = $"%ShapeOptionButton"
+@onready var dithering_option_button: OptionButton = $"%DitheringOptionButton"
+@onready var repeat_option_button: OptionButton = $"%RepeatOptionButton"
+@onready var position_slider: ValueSlider = $"%PositionSlider"
+@onready var size_slider: ValueSlider = $"%SizeSlider"
+@onready var angle_slider: ValueSlider = $"%AngleSlider"
+@onready var center_slider := $"%CenterSlider" as ValueSliderV2
+@onready var radius_slider := $"%RadiusSlider" as ValueSliderV2
 
 
 class DitherMatrix:
-	var texture: Texture
+	var texture: Texture2D
 	var name: String
 
-	func _init(_texture: Texture, _name: String) -> void:
+	func _init(_texture: Texture2D, _name: String) -> void:
 		texture = _texture
 		name = _name
 
 
 func _ready() -> void:
+	super._ready()
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
@@ -54,44 +55,30 @@ func _ready() -> void:
 	animate_panel.add_float_property("Radius Y", radius_slider.get_sliders()[1])
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var selection: Image
-	var selection_tex := ImageTexture.new()
-	if selection_checkbox.pressed and project.has_selection:
-		selection = project.selection_map
-	else:  # This is needed to prevent a weird bug with the dithering shaders and GLES2
-		selection = Image.new()
-		selection.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
-	selection_tex.create_from_image(selection, 0)
+func commit_action(cel: Image, project := Global.current_project) -> void:
+	var selection_tex: ImageTexture
+	if selection_checkbox.button_pressed and project.has_selection:
+		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
-	var dither_texture: Texture = selected_dither_matrix.texture
-	var pixel_size := dither_texture.get_width()
-	var gradient: Gradient = gradient_edit.gradient
+	var dither_texture := selected_dither_matrix.texture
+	var gradient := gradient_edit.gradient
 	var n_of_colors := gradient.offsets.size()
 	# Pass the gradient offsets as an array to the shader
 	# ...but since Godot 3.x doesn't support uniform arrays, instead we construct
 	# a nx1 grayscale texture with each offset stored in each pixel, and pass it to the shader
-	var offsets_image := Image.new()
-	offsets_image.create(n_of_colors, 1, false, Image.FORMAT_L8)
+	var offsets_image := Image.create(n_of_colors, 1, false, Image.FORMAT_L8)
 	# Construct an image that contains the selected colors of the gradient without interpolation
-	var gradient_image := Image.new()
-	gradient_image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
-	offsets_image.lock()
-	gradient_image.lock()
+	var gradient_image := Image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
 	for i in n_of_colors:
 		var c := gradient.offsets[i]
 		offsets_image.set_pixel(i, 0, Color(c, c, c, c))
 		gradient_image.set_pixel(i, 0, gradient.colors[i])
-	offsets_image.unlock()
-	gradient_image.unlock()
-	var offsets_tex := ImageTexture.new()
-	offsets_tex.create_from_image(offsets_image, 0)
-	var gradient_tex: Texture
+	var offsets_tex := ImageTexture.create_from_image(offsets_image)
+	var gradient_tex: Texture2D
 	if shader == shader_linear:
 		gradient_tex = gradient_edit.texture
 	else:
-		gradient_tex = ImageTexture.new()
-		gradient_tex.create_from_image(gradient_image, 0)
+		gradient_tex = ImageTexture.create_from_image(gradient_image)
 	var center := Vector2(
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_X),
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_Y)
@@ -111,20 +98,17 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"center": center / 100.0,
 		"radius": radius,
 		"dither_texture": dither_texture,
-		"image_size": project.size,
-		"pixel_size": pixel_size,
 		"shape": shape_option_button.selected,
-		"n_of_colors": n_of_colors
 	}
 
-	if !confirmed:
+	if !has_been_confirmed:
 		preview.material.shader = shader
 		for param in params:
-			preview.material.set_shader_param(param, params[param])
+			preview.material.set_shader_parameter(param, params[param])
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
+		await gen.done
 
 
 func _on_ShapeOptionButton_item_selected(index: int) -> void:

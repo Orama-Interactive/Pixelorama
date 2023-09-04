@@ -1,9 +1,9 @@
 extends "res://src/Tools/Draw.gd"
 
-var _original_pos := Vector2.ZERO
-var _start := Vector2.ZERO
-var _offset := Vector2.ZERO
-var _dest := Vector2.ZERO
+var _original_pos := Vector2i.ZERO
+var _start := Vector2i.ZERO
+var _offset := Vector2i.ZERO
+var _dest := Vector2i.ZERO
 var _drawing := false
 var _displace_origin := false
 var _thickness := 1
@@ -28,34 +28,34 @@ func _on_Thickness_value_changed(value: int) -> void:
 
 func update_indicator() -> void:
 	var bitmap := BitMap.new()
-	bitmap.create(Vector2.ONE * _thickness)
-	bitmap.set_bit_rect(Rect2(Vector2.ZERO, Vector2.ONE * _thickness), true)
+	bitmap.create(Vector2i.ONE * _thickness)
+	bitmap.set_bit_rect(Rect2i(Vector2i.ZERO, Vector2i.ONE * _thickness), true)
 	_indicator = bitmap
 	_polylines = _create_polylines(_indicator)
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
-	.set_config(config)
+	super.set_config(config)
 	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
-	.update_config()
+	super.update_config()
 	$ThicknessSlider.value = _thickness
 
 
-func _get_shape_points(_size: Vector2) -> PoolVector2Array:
-	return PoolVector2Array()
+func _get_shape_points(_size: Vector2i) -> Array[Vector2i]:
+	return []
 
 
-func _get_shape_points_filled(_size: Vector2) -> PoolVector2Array:
-	return PoolVector2Array()
+func _get_shape_points_filled(_size: Vector2i) -> Array[Vector2i]:
+	return []
 
 
 func _input(event: InputEvent) -> void:
@@ -66,12 +66,12 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_start(position)
+func draw_start(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if Input.is_action_pressed("shape_displace"):
 		_picking_color = true
-		_pick_color(position)
+		_pick_color(pos)
 		return
 	_picking_color = false
 
@@ -80,29 +80,29 @@ func draw_start(position: Vector2) -> void:
 
 	if Global.mirror_view:
 		# mirroring position is ONLY required by "Preview"
-		position.x = Global.current_project.size.x - position.x - 1
-	_original_pos = position
-	_start = position
-	_offset = position
-	_dest = position
+		pos.x = Global.current_project.size.x - pos.x - 1
+	_original_pos = pos
+	_start = pos
+	_offset = pos
+	_dest = pos
 	_drawing = true
 
 
-func draw_move(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_move(position)
+func draw_move(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("shape_displace"):
-			_pick_color(position)
+			_pick_color(pos)
 		return
 
 	if _drawing:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = Global.current_project.size.x - position.x - 1
+			pos.x = Global.current_project.size.x - pos.x - 1
 		if _displace_origin:
-			_original_pos += position - _offset
-		var d := _line_angle_constraint(_original_pos, position)
+			_original_pos += pos - _offset
+		var d := _line_angle_constraint(_original_pos, pos)
 		_dest = d.position
 
 		if Input.is_action_pressed("shape_center"):
@@ -110,12 +110,12 @@ func draw_move(position: Vector2) -> void:
 		else:
 			_start = _original_pos
 		cursor_text = d.text
-		_offset = position
+		_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_end(position)
+func draw_end(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	if _picking_color:
 		return
 
@@ -153,17 +153,17 @@ func draw_preview() -> void:
 
 		var points := _get_points()
 		var t_offset := _thickness - 1
-		var t_offsetv := Vector2(t_offset, t_offset)
-		indicator.create((_dest - _start).abs() + t_offsetv * 2 + Vector2.ONE)
+		var t_offsetv := Vector2i(t_offset, t_offset)
+		indicator.create((_dest - _start).abs() + t_offsetv * 2 + Vector2i.ONE)
 
 		for point in points:
-			var p: Vector2 = point - start + t_offsetv
-			indicator.set_bit(p, 1)
+			var p := point - start + t_offsetv
+			indicator.set_bitv(p, 1)
 
 		canvas.draw_set_transform(start - t_offsetv, canvas.rotation, canvas.scale)
 
 		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PoolVector2Array(line), Color.black)
+			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
@@ -181,22 +181,22 @@ func _draw_shape() -> void:
 	commit_undo()
 
 
-func _get_points() -> PoolVector2Array:
-	var array := []
-	var dx := int(abs(_dest.x - _start.x))
-	var dy := int(-abs(_dest.y - _start.y))
+func _get_points() -> Array[Vector2i]:
+	var array: Array[Vector2i] = []
+	var dx := absi(_dest.x - _start.x)
+	var dy := -absi(_dest.y - _start.y)
 	var err := dx + dy
 	var e2 := err << 1
-	var sx = 1 if _start.x < _dest.x else -1
-	var sy = 1 if _start.y < _dest.y else -1
-	var x = _start.x
-	var y = _start.y
+	var sx := 1 if _start.x < _dest.x else -1
+	var sy := 1 if _start.y < _dest.y else -1
+	var x := _start.x
+	var y := _start.y
 
-	var start := _start - Vector2.ONE * (_thickness >> 1)
-	var end := start + Vector2.ONE * _thickness
+	var start := _start - Vector2i.ONE * (_thickness >> 1)
+	var end := start + Vector2i.ONE * _thickness
 	for yy in range(start.y, end.y):
 		for xx in range(start.x, end.x):
-			array.append(Vector2(xx, yy))
+			array.append(Vector2i(xx, yy))
 
 	while !(x == _dest.x && y == _dest.y):
 		e2 = err << 1
@@ -207,33 +207,33 @@ func _get_points() -> PoolVector2Array:
 			err += dx
 			y += sy
 
-		var pos := Vector2(x, y)
-		start = pos - Vector2.ONE * (_thickness >> 1)
-		end = start + Vector2.ONE * _thickness
+		var pos := Vector2i(x, y)
+		start = pos - Vector2i.ONE * (_thickness >> 1)
+		end = start + Vector2i.ONE * _thickness
 		for yy in range(start.y, end.y):
 			for xx in range(start.x, end.x):
-				array.append(Vector2(xx, yy))
+				array.append(Vector2i(xx, yy))
 
-	return PoolVector2Array(array)
+	return array
 
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
-	var angle := rad2deg(end.angle_to_point(start))
+	var angle := rad_to_deg(start.angle_to_point(end))
 	var distance := start.distance_to(end)
 	if Input.is_action_pressed("shape_perfect"):
-		angle = stepify(angle, 22.5)
+		angle = snappedf(angle, 22.5)
 		if step_decimals(angle) != 0:
 			var diff := end - start
-			var v := Vector2(2, 1) if abs(diff.x) > abs(diff.y) else Vector2(1, 2)
+			var v := Vector2(2, 1) if absf(diff.x) > absf(diff.y) else Vector2(1, 2)
 			var p := diff.project(diff.sign() * v).abs().round()
-			var f := p.y if abs(diff.x) > abs(diff.y) else p.x
+			var f := p.y if absf(diff.x) > absf(diff.y) else p.x
 			end = start + diff.sign() * v * f - diff.sign()
-			angle = rad2deg(atan2(sign(diff.y) * v.y, sign(diff.x) * v.x))
+			angle = rad_to_deg(atan2(signi(diff.y) * v.y, signi(diff.x) * v.x))
 		else:
-			end = start + Vector2.RIGHT.rotated(deg2rad(angle)) * distance
+			end = start + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance
 	angle *= -1
 	angle += 360 if angle < 0 else 0
-	result.text = str(stepify(angle, 0.01)) + "°"
+	result.text = str(snappedf(angle, 0.01)) + "°"
 	result.position = end.round()
 	return result

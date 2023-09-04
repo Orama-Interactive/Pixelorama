@@ -1,3 +1,4 @@
+class_name PreviewDialog
 extends ConfirmationDialog
 
 enum ImageImportOptions {
@@ -16,38 +17,36 @@ enum BrushTypes { FILE, PROJECT, RANDOM }
 
 var path: String
 var image: Image
-var current_import_option: int = ImageImportOptions.NEW_TAB
-var smart_slice = false
-var recycle_last_slice_result = false  # should we recycle the current sliced_rects
-var sliced_rects: Dictionary
+var current_import_option := ImageImportOptions.NEW_TAB
+var smart_slice := false
+var recycle_last_slice_result := false  # Should we recycle the current sliced_rects
+var sliced_rects: RegionUnpacker.RectData
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
-var brush_type: int = BrushTypes.FILE
-var opened_once = false
-var is_master: bool = false
-var hiding: bool = false
-var _content_offset = rect_size - get_child(0).rect_size  # A workaround for a pixelorama bug
+var brush_type := BrushTypes.FILE
+var opened_once := false
+var is_main := false
+var hiding := false
 
-onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
-onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
-onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
-onready var smart_slice_checkbox = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartSlice
-onready var merge_threshold = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Threshold
-# gdlint: ignore=max-line-length
-onready var merge_dist: TextureProgress = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/MergeDist
-# gdlint: ignore=max-line-length
-onready var spritesheet_manual_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual
-onready var spritesheet_smart_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart
-onready var spritesheet_tab_options = spritesheet_smart_tab_options.get_parent()
-onready var spritesheet_lay_opt = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
-onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
-onready var replace_cel_options = $VBoxContainer/HBoxContainer/ReplaceCelOptions
-onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
-onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
-onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
+@onready var texture_rect: TextureRect = $VBoxContainer/AspectRatioContainer/TextureRect
+@onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
+@onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
+@onready var smart_slice_checkbox := %SmartSliceButton as CheckBox
+@onready var merge_threshold := %SmartOptions/Threshold as ValueSlider
+@onready var merge_dist := %SmartOptions/MergeDist as ValueSlider
+@onready
+var spritesheet_manual_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual
+@onready var spritesheet_smart_tab_options := %SmartOptions as HBoxContainer
+@onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
+@onready var spritesheet_lay_opt = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
+@onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
+@onready var replace_cel_options = $VBoxContainer/HBoxContainer/ReplaceCelOptions
+@onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
+@onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
+@onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
 
-onready var import_options: OptionButton = $VBoxContainer/HBoxContainer/ImportOption
-onready var apply_all: CheckBox = $VBoxContainer/ApplyAll
+@onready var import_options: OptionButton = $VBoxContainer/HBoxContainer/ImportOption
+@onready var apply_all: CheckBox = $VBoxContainer/ApplyAll
 
 
 func _on_PreviewDialog_about_to_show() -> void:
@@ -68,10 +67,9 @@ func _on_PreviewDialog_about_to_show() -> void:
 
 	# Select the option that the preview dialog before it had selected
 	import_options.select(OpenSave.last_dialog_option)
-	import_options.emit_signal("item_selected", OpenSave.last_dialog_option)
+	import_options.item_selected.emit(OpenSave.last_dialog_option)
 
-	var img_texture := ImageTexture.new()
-	img_texture.create_from_image(image, 0)
+	var img_texture := ImageTexture.create_from_image(image)
 	texture_rect.texture = img_texture
 	spritesheet_manual_tab_options.get_node("HorizontalFrames").max_value = min(
 		spritesheet_manual_tab_options.get_node("HorizontalFrames").max_value, image.get_size().x
@@ -80,29 +78,23 @@ func _on_PreviewDialog_about_to_show() -> void:
 		spritesheet_manual_tab_options.get_node("VerticalFrames").max_value, image.get_size().y
 	)
 	image_size_label.text = (
-		tr("Image Size")
-		+ ": "
-		+ str(image.get_size().x)
-		+ "×"
-		+ str(image.get_size().y)
+		tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	)
 	frame_size_label.text = (
-		tr("Frame Size")
-		+ ": "
-		+ str(image.get_size().x)
-		+ "×"
-		+ str(image.get_size().y)
+		tr("Frame Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	)
 	if OpenSave.preview_dialogs.size() > 1:
 		apply_all.visible = true
 
 
-func _on_PreviewDialog_popup_hide() -> void:
-	if hiding:  # if the popup is hiding because of master
+func _on_visibility_changed() -> void:
+	if visible:
 		return
-	elif is_master:  # if the master is closed then close others too
+	if hiding:  # if the popup is hiding because of main
+		return
+	elif is_main:  # if the main dialog is closed then close others too
 		for child in Global.control.get_children():
-			if "PreviewDialog" in child.name:
+			if child is PreviewDialog:
 				OpenSave.preview_dialogs.erase(child)
 				child.queue_free()
 	else:  # dialogs being closed separately
@@ -115,12 +107,12 @@ func _on_PreviewDialog_popup_hide() -> void:
 
 
 func _on_PreviewDialog_confirmed() -> void:
-	if is_master:  # if the master is confirmed then confirm others too
-		is_master = false
+	if is_main:  # if the main dialog is confirmed then confirm others too
+		is_main = false
 		synchronize()
 		for child in Global.control.get_children():
-			if "PreviewDialog" in child.name:
-				child.emit_signal("confirmed")
+			if child is PreviewDialog:
+				child.confirmed.emit()
 	else:
 		if current_import_option == ImageImportOptions.NEW_TAB:
 			OpenSave.open_image_as_new_tab(path, image)
@@ -130,7 +122,7 @@ func _on_PreviewDialog_confirmed() -> void:
 				if !recycle_last_slice_result:
 					obtain_sliced_data()
 				OpenSave.open_image_as_spritesheet_tab_smart(
-					path, image, sliced_rects["rects"], sliced_rects["frame_size"]
+					path, image, sliced_rects.rects, sliced_rects.frame_size
 				)
 			else:
 				OpenSave.open_image_as_spritesheet_tab(
@@ -174,7 +166,7 @@ func _on_PreviewDialog_confirmed() -> void:
 			OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
 
 		elif current_import_option == ImageImportOptions.NEW_REFERENCE_IMAGE:
-			if OS.get_name() == "HTML5":
+			if OS.get_name() == "Web":
 				OpenSave.import_reference_image_from_image(image)
 			else:
 				OpenSave.import_reference_image_from_path(path)
@@ -193,20 +185,20 @@ func _on_PreviewDialog_confirmed() -> void:
 			Global.patterns_popup.add(image, file_name)
 
 			# Copy the image file into the "pixelorama/Patterns" directory
-			var location := "Patterns".plus_file(file_name_ext)
-			var dir = Directory.new()
-			dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+			var location := "Patterns".path_join(file_name_ext)
+			var dir := DirAccess.open(path)
+			dir.copy(path, Global.home_data_directory.path_join(location))
 
 
-func _on_ApplyAll_toggled(pressed) -> void:
-	is_master = pressed
+func _on_ApplyAll_toggled(pressed: bool) -> void:
+	is_main = pressed
 	# below 4 (and the last) line is needed for correct popup placement
-	var old_rect = get_rect()
-	disconnect("popup_hide", self, "_on_PreviewDialog_popup_hide")
+	var old_rect := Rect2i(position, size)
+	visibility_changed.disconnect(_on_visibility_changed)
 	hide()
-	connect("popup_hide", self, "_on_PreviewDialog_popup_hide")
+	visibility_changed.connect(_on_visibility_changed)
 	for child in Global.control.get_children():
-		if child != self and "PreviewDialog" in child.name:
+		if child != self and child is PreviewDialog:
 			child.hiding = pressed
 			if pressed:
 				child.hide()
@@ -218,12 +210,12 @@ func _on_ApplyAll_toggled(pressed) -> void:
 
 func synchronize() -> void:
 	for child in Global.control.get_children():
-		if child != self and "PreviewDialog" in child.name:
-			var dialog = child
+		if child != self and child is PreviewDialog:
+			var dialog := child as PreviewDialog
 			#sync modes
-			var id = current_import_option
+			var id := current_import_option
 			dialog.import_options.select(id)
-			dialog.import_options.emit_signal("item_selected", id)
+			dialog.import_options.item_selected.emit(id)
 
 			#sync properties (if any)
 			if (
@@ -239,40 +231,38 @@ func synchronize() -> void:
 					image.get_size().y
 				)
 				if id == ImageImportOptions.SPRITESHEET_LAYER:
-					dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (spritesheet_lay_opt.get_node(
-						"AtFrameSpinbox"
-					).value)
+					dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (
+						spritesheet_lay_opt.get_node("AtFrameSpinbox").value
+					)
 
 			elif id == ImageImportOptions.NEW_FRAME:
-				dialog.new_frame_options.get_node("AtLayerOption").selected = (new_frame_options.get_node(
-					"AtLayerOption"
-				).selected)
+				dialog.new_frame_options.get_node("AtLayerOption").selected = (
+					new_frame_options.get_node("AtLayerOption").selected
+				)
 
 			elif id == ImageImportOptions.REPLACE_CEL:
-				dialog.replace_cel_options.get_node("AtLayerOption").selected = (replace_cel_options.get_node(
-					"AtLayerOption"
-				).selected)
-				dialog.replace_cel_options.get_node("AtFrameSpinbox").value = (replace_cel_options.get_node(
-					"AtFrameSpinbox"
-				).value)
+				dialog.replace_cel_options.get_node("AtLayerOption").selected = (
+					replace_cel_options.get_node("AtLayerOption").selected
+				)
+				dialog.replace_cel_options.get_node("AtFrameSpinbox").value = (
+					replace_cel_options.get_node("AtFrameSpinbox").value
+				)
 
 			elif id == ImageImportOptions.NEW_LAYER:
-				dialog.new_layer_options.get_node("AtFrameSpinbox").value = (new_layer_options.get_node(
-					"AtFrameSpinbox"
-				).value)
+				dialog.new_layer_options.get_node("AtFrameSpinbox").value = (
+					new_layer_options.get_node("AtFrameSpinbox").value
+				)
 
 			elif id == ImageImportOptions.BRUSH:
 				var type = new_brush_options.get_node("BrushTypeOption").selected
 				dialog.new_brush_options.get_node("BrushTypeOption").select(type)
-				dialog.new_brush_options.get_node("BrushTypeOption").emit_signal(
-					"item_selected", type
-				)
+				dialog.new_brush_options.get_node("BrushTypeOption").item_selected.emit(type)
 
 
-func _on_ImportOption_item_selected(id: int) -> void:
+func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 	current_import_option = id
 	OpenSave.last_dialog_option = current_import_option
-	smart_slice_checkbox.pressed = false
+	smart_slice_checkbox.button_pressed = false
 	apply_all.disabled = false
 	smart_slice = false
 	smart_slice_checkbox.visible = false
@@ -306,7 +296,7 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		var at_layer_option: OptionButton = new_frame_options.get_node("AtLayerOption")
 		at_layer_option.clear()
 		var layers := Global.current_project.layers.duplicate()
-		layers.invert()
+		layers.reverse()
 		var i := 0
 		for l in layers:
 			if not l is PixelLayer:
@@ -321,7 +311,7 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		var at_layer_option: OptionButton = replace_cel_options.get_node("AtLayerOption")
 		at_layer_option.clear()
 		var layers := Global.current_project.layers.duplicate()
-		layers.invert()
+		layers.reverse()
 		var i := 0
 		for l in layers:
 			if not l is PixelLayer:
@@ -335,56 +325,56 @@ func _on_ImportOption_item_selected(id: int) -> void:
 
 	elif id == ImageImportOptions.NEW_LAYER:
 		new_layer_options.visible = true
-		new_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+		new_layer_options.get_node("AtFrameSpinbox").max_value = (
+			Global.current_project.frames.size()
+		)
 
 	elif id == ImageImportOptions.BRUSH:
 		new_brush_options.visible = true
-
-	rect_size = get_child(0).rect_size + _content_offset
-	update()
+	_call_queue_redraw()
 
 
-func _on_SmartSlice_toggled(button_pressed: bool) -> void:
+func _on_smart_slice_toggled(button_pressed: bool) -> void:
 	setup_smart_slice(button_pressed)
 
 
 func setup_smart_slice(enabled: bool) -> void:
 	spritesheet_smart_tab_options.visible = enabled
 	spritesheet_manual_tab_options.visible = !enabled
-	if is_master:  # disable apply all (the algorithm is not fast enough for this)
-		apply_all.pressed = false
+	if is_main:  # Disable apply all (the algorithm is not fast enough for this)
+		apply_all.button_pressed = false
 	apply_all.disabled = enabled
 	smart_slice = enabled
 	if !recycle_last_slice_result and enabled:
 		slice_preview()
-	update()
+	_call_queue_redraw()
 
 
 func obtain_sliced_data() -> void:
 	var unpak := RegionUnpacker.new(merge_threshold.value, merge_dist.value)
-	sliced_rects = unpak.get_used_rects(texture_rect.texture.get_data())
+	sliced_rects = unpak.get_used_rects(texture_rect.texture.get_image())
 
 
 func slice_preview():
-	sliced_rects.clear()
+	sliced_rects = null
 	obtain_sliced_data()
 	recycle_last_slice_result = true
-	var size = sliced_rects["frame_size"]
-	frame_size_label.text = tr("Frame Size") + ": " + str(size.x) + "×" + str(size.y)
+	var frame_size := sliced_rects.frame_size
+	frame_size_label.text = tr("Frame Size") + ": " + str(frame_size.x) + "×" + str(frame_size.y)
 
 
-func _on_Threshold_value_changed(_value: float) -> void:
+func _on_threshold_value_changed(_value: float) -> void:
 	recycle_last_slice_result = false
 
 
-func _on_MergeDist_value_changed(_value: float) -> void:
+func _on_merge_dist_value_changed(_value: float) -> void:
 	recycle_last_slice_result = false
 
 
-func _on_Slice_pressed() -> void:
+func _on_slice_pressed() -> void:
 	if !recycle_last_slice_result:
 		slice_preview()
-	update()
+	_call_queue_redraw()
 
 
 func _on_HorizontalFrames_value_changed(value: int) -> void:
@@ -398,13 +388,13 @@ func _on_VerticalFrames_value_changed(value: int) -> void:
 
 
 func spritesheet_frame_value_changed() -> void:
-	var frame_width = floor(image.get_size().x / spritesheet_horizontal)
-	var frame_height = floor(image.get_size().y / spritesheet_vertical)
+	var frame_width := floori(image.get_size().x / spritesheet_horizontal)
+	var frame_height := floori(image.get_size().y / spritesheet_vertical)
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
-	update()
+	_call_queue_redraw()
 
 
-func _on_BrushTypeOption_item_selected(index: int) -> void:
+func _on_BrushTypeOption_item_selected(index: BrushTypes) -> void:
 	brush_type = index
 	new_brush_name.visible = false
 	if brush_type == BrushTypes.RANDOM:
@@ -421,9 +411,9 @@ func add_brush() -> void:
 		Brushes.add_file_brush([image], file_name)
 
 		# Copy the image file into the "pixelorama/Brushes" directory
-		var location := "Brushes".plus_file(file_name_ext)
-		var dir = Directory.new()
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		var location := "Brushes".path_join(file_name_ext)
+		var dir := DirAccess.open(path)
+		dir.copy(path, Global.home_data_directory.path_join(location))
 
 	elif brush_type == BrushTypes.PROJECT:
 		var file_name: String = path.get_file().get_basename()
@@ -434,12 +424,11 @@ func add_brush() -> void:
 		var brush_name = new_brush_name.get_node("BrushNameLineEdit").text.to_lower()
 		if !brush_name.is_valid_filename():
 			return
-		var dir := Directory.new()
-		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
+		var dir := DirAccess.open(Global.home_data_directory.path_join("Brushes"))
 		if !dir.dir_exists(brush_name):
 			dir.make_dir(brush_name)
 
-		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes").plus_file(brush_name))
+		dir = DirAccess.open(Global.home_data_directory.path_join("Brushes").path_join(brush_name))
 		var random_brushes := []
 		dir.list_dir_begin()
 		var curr_file := dir.get_next()
@@ -449,43 +438,43 @@ func add_brush() -> void:
 			curr_file = dir.get_next()
 		dir.list_dir_end()
 
-		var file_ext: String = path.get_file().get_extension()
-		var index: int = random_brushes.size() + 1
+		var file_ext := path.get_file().get_extension()
+		var index := random_brushes.size() + 1
 		var file_name = "~" + brush_name + str(index) + "." + file_ext
-		var location := "Brushes".plus_file(brush_name).plus_file(file_name)
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		var location := "Brushes".path_join(brush_name).path_join(file_name)
+		dir.copy(path, Global.home_data_directory.path_join(location))
 
 
-# Checks if the file already exists
-# If it does, add a number to its name, for example
-# "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
-func file_name_replace(name: String, folder: String) -> String:
+## Checks if the file already exists
+## If it does, add a number to its name, for example
+## "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
+func file_name_replace(file_name: String, folder: String) -> String:
 	var i := 1
-	var file_ext = name.get_extension()
-	var temp_name := name
-	var dir := Directory.new()
-	dir.open(Global.directory_module.xdg_data_home.plus_file(folder))
+	var file_ext := file_name.get_extension()
+	var temp_name := file_name
+	var dir := DirAccess.open(Global.home_data_directory.path_join(folder))
 	while dir.file_exists(temp_name):
 		i += 1
-		temp_name = name.get_basename() + " (%s)" % i
+		temp_name = file_name.get_basename() + " (%s)" % i
 		temp_name += "." + file_ext
-	name = temp_name
-	return name
+	file_name = temp_name
+	return file_name
 
 
-func _on_PreviewDialog_item_rect_changed() -> void:
-	update()
-
-
-func _draw() -> void:
-	$"%SmartSlice".show_preview([])
+func _call_queue_redraw() -> void:
+	var empty_array: Array[Rect2i] = []
+	$"%SmartSlice".show_preview(empty_array)
 	$"%RowColumnLines".show_preview(1, 1)
 	if (
 		current_import_option == ImageImportOptions.SPRITESHEET_TAB
 		or current_import_option == ImageImportOptions.SPRITESHEET_LAYER
 	):
 		if smart_slice:
-			if "rects" in sliced_rects.keys():
-				$"%SmartSlice".show_preview(sliced_rects["rects"])
+			if is_instance_valid(sliced_rects) and not sliced_rects.rects.is_empty():
+				$"%SmartSlice".show_preview(sliced_rects.rects)
 		else:
 			$"%RowColumnLines".show_preview(spritesheet_vertical, spritesheet_horizontal)
+
+
+func _on_size_changed() -> void:
+	_call_queue_redraw()

@@ -1,14 +1,14 @@
 extends SelectionTool
 
-var _rect := Rect2(0, 0, 0, 0)
+var _rect := Rect2i(0, 0, 0, 0)
 
-var _square := false  # Mouse Click + Shift
-var _expand_from_center := false  # Mouse Click + Ctrl
-var _displace_origin = false  # Mouse Click + Alt
+var _square := false  ## Mouse Click + Shift
+var _expand_from_center := false  ## Mouse Click + Ctrl
+var _displace_origin = false  ## Mouse Click + Alt
 
 
 func _input(event: InputEvent) -> void:
-	if !_move and !_rect.has_no_area():
+	if !_move and _rect.has_area():
 		if event.is_action_pressed("shape_perfect"):
 			_square = true
 		elif event.is_action_released("shape_perfect"):
@@ -23,60 +23,60 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_move(position: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	.draw_move(position)
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if !_move:
 		if _displace_origin:
-			_start_pos += position - _offset
-		_rect = _get_result_rect(_start_pos, position)
+			_start_pos += pos - _offset
+		_rect = _get_result_rect(_start_pos, pos)
 		_set_cursor_text(_rect)
-		_offset = position
+		_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	.draw_end(position)
-	_rect = Rect2(0, 0, 0, 0)
+	pos = snap_position(pos)
+	super.draw_end(pos)
+	_rect = Rect2i(0, 0, 0, 0)
 	_square = false
 	_expand_from_center = false
 	_displace_origin = false
 
 
 func draw_preview() -> void:
-	if !_move && !_rect.has_no_area():
+	if !_move && _rect.has_area():
 		var canvas: Node2D = Global.canvas.previews
-		var position := canvas.position
-		var scale := canvas.scale
-		var temp_rect = _rect
+		var pos := canvas.position
+		var canvas_scale := canvas.scale
+		var temp_rect := _rect
 		if Global.mirror_view:
-			position.x = position.x + Global.current_project.size.x
+			pos.x = pos.x + Global.current_project.size.x
 			temp_rect.position.x = Global.current_project.size.x - temp_rect.position.x
-			scale.x = -1
+			canvas_scale.x = -1
 
-		var border := _get_shape_points_filled(temp_rect.size)
+		var border := DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, temp_rect.size)
 		var indicator := _fill_bitmap_with_points(border, temp_rect.size)
 
-		canvas.draw_set_transform(temp_rect.position, canvas.rotation, scale)
+		canvas.draw_set_transform(temp_rect.position, canvas.rotation, canvas_scale)
 		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PoolVector2Array(line), Color.black)
+			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func apply_selection(_position: Vector2) -> void:
-	.apply_selection(_position)
-	var project: Project = Global.current_project
+func apply_selection(_position: Vector2i) -> void:
+	super.apply_selection(_position)
+	var project := Global.current_project
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
-		if _rect.size == Vector2.ZERO and Global.current_project.has_selection:
+		if _rect.size == Vector2i.ZERO and Global.current_project.has_selection:
 			Global.canvas.selection.commit_undo("Select", undo_data)
 
-	if _rect.size != Vector2.ZERO:
+	if _rect.size != Vector2i.ZERO:
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		set_ellipse(selection_map_copy, _rect.position)
@@ -85,27 +85,21 @@ func apply_selection(_position: Vector2) -> void:
 		if Tools.horizontal_mirror:
 			var mirror_x_rect := _rect
 			mirror_x_rect.position.x = (
-				Global.current_project.x_symmetry_point
-				- _rect.position.x
-				+ 1
+				Global.current_project.x_symmetry_point - _rect.position.x + 1
 			)
 			mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
 			set_ellipse(selection_map_copy, mirror_x_rect.abs().position)
 			if Tools.vertical_mirror:
 				var mirror_xy_rect := mirror_x_rect
 				mirror_xy_rect.position.y = (
-					Global.current_project.y_symmetry_point
-					- _rect.position.y
-					+ 1
+					Global.current_project.y_symmetry_point - _rect.position.y + 1
 				)
 				mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 				set_ellipse(selection_map_copy, mirror_xy_rect.abs().position)
 		if Tools.vertical_mirror:
 			var mirror_y_rect := _rect
 			mirror_y_rect.position.y = (
-				Global.current_project.y_symmetry_point
-				- _rect.position.y
-				+ 1
+				Global.current_project.y_symmetry_point - _rect.position.y + 1
 			)
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			set_ellipse(selection_map_copy, mirror_y_rect.abs().position)
@@ -115,148 +109,50 @@ func apply_selection(_position: Vector2) -> void:
 		Global.canvas.selection.commit_undo("Select", undo_data)
 
 
-func set_ellipse(selection_map: SelectionMap, position: Vector2) -> void:
-	var project: Project = Global.current_project
-	var bitmap_size: Vector2 = selection_map.get_size()
+func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
+	var project := Global.current_project
+	var bitmap_size := selection_map.get_size()
 	if _intersect:
 		selection_map.clear()
-	var points := _get_shape_points_filled(_rect.size)
+	var points := DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, _rect.size)
 	for p in points:
-		var pos: Vector2 = position + p
-		if pos.x < 0 or pos.y < 0 or pos.x >= bitmap_size.x or pos.y >= bitmap_size.y:
+		var fill_p := pos + Vector2i(p)
+		if fill_p.x < 0 or fill_p.y < 0 or fill_p.x >= bitmap_size.x or fill_p.y >= bitmap_size.y:
 			continue
 		if _intersect:
-			if project.selection_map.is_pixel_selected(pos):
-				selection_map.select_pixel(pos, true)
+			if project.selection_map.is_pixel_selected(fill_p):
+				selection_map.select_pixel(fill_p, true)
 		else:
-			selection_map.select_pixel(pos, !_subtract)
+			selection_map.select_pixel(fill_p, !_subtract)
 
 
 # Given an origin point and destination point, returns a rect representing
 # where the shape will be drawn and what is its size
-func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
-	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
+func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
+	var rect := Rect2i()
 
 	# Center the rect on the mouse
 	if _expand_from_center:
-		var new_size := (dest - origin).floor()
+		var new_size := dest - origin
 		# Make rect 1:1 while centering it on the mouse
 		if _square:
-			var square_size := max(abs(new_size.x), abs(new_size.y))
-			new_size = Vector2(square_size, square_size)
+			var square_size := maxi(absi(new_size.x), absi(new_size.y))
+			new_size = Vector2i(square_size, square_size)
 
 		origin -= new_size
 		dest = origin + 2 * new_size
 
 	# Make rect 1:1 while not trying to center it
 	if _square:
-		var square_size := min(abs(origin.x - dest.x), abs(origin.y - dest.y))
+		var square_size := mini(absi(origin.x - dest.x), absi(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size
-		rect.size = Vector2(square_size, square_size)
+		rect.size = Vector2i(square_size, square_size)
 	# Get the rect without any modifications
 	else:
-		rect.position = Vector2(min(origin.x, dest.x), min(origin.y, dest.y))
+		rect.position = Vector2i(mini(origin.x, dest.x), mini(origin.y, dest.y))
 		rect.size = (origin - dest).abs()
 
-	rect.size += Vector2.ONE
+	rect.size += Vector2i.ONE
 
 	return rect
-
-
-func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
-	var border := _get_ellipse_points(Vector2.ZERO, size)
-	var filling := []
-	var bitmap := _fill_bitmap_with_points(border, size)
-
-	for x in range(1, ceil(size.x / 2)):
-		var fill := false
-		var prev_is_true := false
-		for y in range(0, ceil(size.y / 2)):
-			var top_l_p := Vector2(x, y)
-			var bit := bitmap.get_bit(top_l_p)
-
-			if bit and not fill:
-				prev_is_true = true
-				continue
-
-			if not bit and (fill or prev_is_true):
-				filling.append(top_l_p)
-				filling.append(Vector2(x, size.y - y - 1))
-				filling.append(Vector2(size.x - x - 1, y))
-				filling.append(Vector2(size.x - x - 1, size.y - y - 1))
-
-				if prev_is_true:
-					fill = true
-					prev_is_true = false
-			elif bit and fill:
-				break
-
-	return PoolVector2Array(border + filling)
-
-
-# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func _get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
-	var array := []
-	var x0 := int(pos.x)
-	var x1 := pos.x + int(size.x - 1)
-	var y0 := int(pos.y)
-	var y1 := int(pos.y) + int(size.y - 1)
-	var a := int(abs(x1 - x0))
-	var b := int(abs(y1 - x0))
-	var b1 := b & 1
-	var dx := 4 * (1 - a) * b * b
-	var dy := 4 * (b1 + 1) * a * a
-	var err := dx + dy + b1 * a * a
-	var e2 := 0
-
-	if x0 > x1:
-		x0 = x1
-		x1 += a
-
-	if y0 > y1:
-		y0 = y1
-
-# warning-ignore:integer_division
-	y0 += (b + 1) / 2
-	y1 = y0 - b1
-	a *= 8 * a
-	b1 = 8 * b * b
-
-	while x0 <= x1:
-		var v1 := Vector2(x1, y0)
-		var v2 := Vector2(x0, y0)
-		var v3 := Vector2(x0, y1)
-		var v4 := Vector2(x1, y1)
-		array.append(v1)
-		array.append(v2)
-		array.append(v3)
-		array.append(v4)
-
-		e2 = 2 * err
-
-		if e2 <= dy:
-			y0 += 1
-			y1 -= 1
-			dy += a
-			err += dy
-
-		if e2 >= dx || 2 * err > dy:
-			x0 += 1
-			x1 -= 1
-			dx += b1
-			err += dx
-
-	while y0 - y1 < b:
-		var v1 := Vector2(x0 - 1, y0)
-		var v2 := Vector2(x1 + 1, y0)
-		var v3 := Vector2(x0 - 1, y1)
-		var v4 := Vector2(x1 + 1, y1)
-		array.append(v1)
-		array.append(v2)
-		array.append(v3)
-		array.append(v4)
-		y0 += 1
-		y1 -= 1
-
-	return array

@@ -1,18 +1,22 @@
 extends AcceptDialog
 
-onready var slider: ValueSlider = $VBoxContainer/ValueSlider
-onready var fullscreen_warning: Label = $VBoxContainer/FullscreenWarning
-onready var main_canvas = Global.control.find_node("Main Canvas")
+@onready var slider: ValueSlider = $VBoxContainer/ValueSlider
+@onready var fullscreen_warning: Label = $VBoxContainer/FullscreenWarning
+@onready var main_canvas = Global.control.find_child("Main Canvas")
 
 
 func _ready() -> void:
-	yield(get_tree(), "idle_frame")
-	Global.control.ui.connect("sort_children", self, "_recalculate_opacity")
+	await get_tree().process_frame
+	Global.control.ui.sort_children.connect(_recalculate_opacity)
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:
-	OS.window_per_pixel_transparency_enabled = true
-	slider.editable = !OS.window_fullscreen
+	get_tree().root.transparent = true
+	get_tree().root.transparent_bg = true
+	slider.editable = !(
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	)
 	fullscreen_warning.visible = !slider.editable
 
 
@@ -21,7 +25,10 @@ func _recalculate_opacity() -> void:
 
 
 func set_window_opacity(value: float) -> void:
-	if OS.window_fullscreen:
+	if (
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	):
 		value = 100.0
 		slider.value = value
 
@@ -36,5 +43,5 @@ func set_window_opacity(value: float) -> void:
 	Global.transparent_checker.update_transparency(value)
 
 
-func _on_WindowOpacityDialog_popup_hide() -> void:
+func _on_visibility_changed() -> void:
 	Global.dialog_open(false)

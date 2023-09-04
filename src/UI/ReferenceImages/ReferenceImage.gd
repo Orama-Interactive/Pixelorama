@@ -1,16 +1,15 @@
 class_name ReferenceImage
-extends Sprite
-# A class describing a reference image
+extends Sprite2D
+## A class describing a reference image
 
 signal properties_changed
 
-var project = Global.current_project
+var project := Global.current_project
 
-var shader: Shader = preload("res://src/Shaders/SilhouetteShader.gdshader")
+var shader := preload("res://src/Shaders/SilhouetteShader.gdshader")
 
-var image_path: String = ""
-
-var filter = false
+var image_path := ""
+var filter := false
 var silhouette := false
 
 
@@ -19,22 +18,25 @@ func _ready() -> void:
 
 
 func change_properties() -> void:
-	emit_signal("properties_changed")
+	properties_changed.emit()
 
 
-# Resets the position and scale of the reference image.
+## Resets the position and scale of the reference image.
 func position_reset() -> void:
 	position = project.size / 2.0
 	if texture != null:
 		scale = (
 			Vector2.ONE
-			* min(project.size.x / texture.get_width(), project.size.y / texture.get_height())
+			* minf(
+				float(project.size.x) / texture.get_width(),
+				float(project.size.y) / texture.get_height()
+			)
 		)
 	else:
 		scale = Vector2.ONE
 
 
-# Serialize details of the reference image.
+## Serialize details of the reference image.
 func serialize() -> Dictionary:
 	return {
 		"x": position.x,
@@ -51,28 +53,25 @@ func serialize() -> Dictionary:
 	}
 
 
-# Load details of the reference image from a dictionary.
-# Be aware that new ReferenceImages are created via deserialization.
-# This is because deserialization sets up some nice defaults.
+## Load details of the reference image from a dictionary.
+## Be aware that new ReferenceImages are created via deserialization.
+## This is because deserialization sets up some nice defaults.
 func deserialize(d: Dictionary) -> void:
 	modulate = Color(1, 1, 1, 0.5)
 	if d.has("image_path"):
 		# Note that reference images are referred to by path.
 		# These images may be rather big.
-		# Also
 		image_path = d["image_path"]
 		var img := Image.new()
 		if img.load(image_path) == OK:
-			var itex := ImageTexture.new()
-			# don't do FLAG_REPEAT - it could cause visual issues
-			itex.create_from_image(img, Texture.FLAG_MIPMAPS)
+			var itex := ImageTexture.create_from_image(img)
 			texture = itex
 		# Apply the silhouette shader
-		var mat = ShaderMaterial.new()
+		var mat := ShaderMaterial.new()
 		mat.shader = shader
 		# TODO: Lsbt - Add a option in prefrences to customize the color
 		# This color is almost black because it is less harsh
-		mat.set_shader_param("silhouette_color", Color(0.069, 0.069326, 0.074219))
+		mat.set_shader_parameter("silhouette_color", Color(0.069, 0.069326, 0.074219))
 		set_material(mat)
 
 	# Now that the image may have been established...
@@ -96,14 +95,12 @@ func deserialize(d: Dictionary) -> void:
 	if d.has("filter"):
 		filter = d["filter"]
 	if d.has("silhouette"):
-		get_material().set_shader_param("show_silhouette", d["silhouette"])
+		get_material().set_shader_parameter("show_silhouette", d["silhouette"])
 	change_properties()
 
 
-# Useful for HTML5
+## Useful for Web
 func create_from_image(image: Image) -> void:
-	var itex := ImageTexture.new()
-	# don't do FLAG_REPEAT - it could cause visual issues
-	itex.create_from_image(image, Texture.FLAG_MIPMAPS | Texture.FLAG_FILTER)
+	var itex := ImageTexture.create_from_image(image)
 	texture = itex
 	position_reset()

@@ -1,6 +1,6 @@
 extends Node
 
-# use these variables in your extension to access the api
+# Use these variables in your extension to access the api
 var general := GeneralAPI.new()
 var menu := MenuAPI.new()
 var dialog := DialogAPI.new()
@@ -12,7 +12,7 @@ var project := ProjectAPI.new()
 var exports := ExportAPI.new()
 var signals := SignalsAPI.new()
 
-# This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
+## This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
 
 
@@ -54,12 +54,12 @@ func remove_action(action: String):
 
 func wait_frame():  # as yield is not available to classes below, so this is the solution
 	# use by yield(ExtensionsApi.wait_frame(), "completed")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
+	await get_tree().process_frame
 
 
 func _get_caller_extension_name() -> String:
-	var stack = get_stack()
+	var stack := get_stack()
 	for trace in stack:
 		# Get extension name that called the action
 		var arr: Array = trace["source"].split("/")
@@ -197,13 +197,13 @@ class PanelAPI:
 		# we must make tabs_visible = true for a few moments if it is false
 		if dockable.tabs_visible == false:
 			dockable.tabs_visible = true
-			yield(ExtensionsApi.wait_frame(), "completed")
+			await ExtensionsApi.wait_frame()
 			dockable.tabs_visible = false
 		ExtensionsApi.add_action("add_tab")
 
 	func remove_node_from_tab(node: Node) -> void:
 		var top_menu_container = Global.top_menu_container
-		var dockable = Global.control.find_node("DockableContainer")
+		var dockable = Global.control.find_child("DockableContainer")
 		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
 		# find the tab that contains the node
 		if node == null:
@@ -227,13 +227,13 @@ class PanelAPI:
 		# we must make tabs_visible = true for a few moments if it is false
 		if dockable.tabs_visible == false:
 			dockable.tabs_visible = true
-			yield(ExtensionsApi.wait_frame(), "completed")
+			await ExtensionsApi.wait_frame()
 			dockable.tabs_visible = false
 		ExtensionsApi.remove_action("add_tab")
 
 	# PRIVATE METHODS
 	func _get_dockable_container_ui() -> Node:
-		return Global.control.find_node("DockableContainer")
+		return Global.control.find_child("DockableContainer")
 
 	func _find_tab_with_node(node_name: String, dockable_container):
 		var root = dockable_container.layout.root
@@ -290,22 +290,22 @@ class PanelAPI:
 
 class ThemeAPI:
 	func add_theme(theme: Theme) -> void:
-		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
+		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		themes.themes.append(theme)
 		themes.add_theme(theme)
 		ExtensionsApi.add_action("add_theme")
 
 	func find_theme_index(theme: Theme) -> int:
-		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
+		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		return themes.themes.find(theme)
 
 	func get_theme() -> Theme:
 		return Global.control.theme
 
 	func set_theme(idx: int) -> bool:
-		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
+		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		if idx >= 0 and idx < themes.themes.size():
-			themes.buttons_container.get_child(idx).emit_signal("pressed")
+			themes.buttons_container.get_child(idx).pressed.emit()
 			return true
 		else:
 			return false
@@ -321,10 +321,10 @@ class ToolAPI:
 		tool_name: String,
 		display_name: String,
 		shortcut: String,
-		scene: PackedScene,
+		scene: String,
 		extra_hint := "",
 		extra_shortucts := [],
-		layer_types: PoolIntArray = []
+		layer_types: PackedInt32Array = []
 	) -> void:
 		var tool_class := Tools.Tool.new(
 			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortucts
@@ -335,8 +335,8 @@ class ToolAPI:
 
 	func remove_tool(tool_name: String) -> void:
 		# Re-assigning the tools in case the tool to be removed is also active
-		Tools.assign_tool("Pencil", BUTTON_LEFT)
-		Tools.assign_tool("Eraser", BUTTON_RIGHT)
+		Tools.assign_tool("Pencil", MOUSE_BUTTON_LEFT)
+		Tools.assign_tool("Eraser", MOUSE_BUTTON_RIGHT)
 		var tool_class: Tools.Tool = Tools.tools[tool_name]
 		if tool_class:
 			Tools.remove_tool(tool_class)
@@ -350,11 +350,11 @@ class SelectionAPI:
 	func select_all() -> void:
 		Global.canvas.selection.select_all()
 
-	func select_rect(select_rect: Rect2, operation := 0) -> void:
+	func select_rect(rect: Rect2i, operation := 0) -> void:
 		# 0 for adding, 1 for subtracting, 2 for intersection
 		Global.canvas.selection.transform_content_confirm()
 		var undo_data_tmp = Global.canvas.selection.get_undo_data(false)
-		Global.canvas.selection.select_rect(select_rect, operation)
+		Global.canvas.selection.select_rect(rect, operation)
 		Global.canvas.selection.commit_undo("Select", undo_data_tmp)
 
 	func move_selection(destination: Vector2, with_content := true, transform_standby := false):
@@ -402,19 +402,19 @@ class ProjectAPI:
 		frames := [],
 		name := tr("untitled"),
 		size := Vector2(64, 64),
-		fill_color := Color.transparent
+		fill_color := Color.TRANSPARENT
 	) -> Project:
 		if !name.is_valid_filename():
 			name = tr("untitled")
 		if size.x <= 0 or size.y <= 0:
 			size.x = 1
 			size.y = 1
-		var new_project := Project.new(frames, name, size.floor())
-		new_project.layers.append(PixelLayer.new(new_project))
-		new_project.fill_color = fill_color
-		new_project.frames.append(new_project.new_empty_frame())
-		Global.projects.append(new_project)
-		return new_project
+		var new_proj := Project.new(frames, name, size.floor())
+		new_proj.layers.append(PixelLayer.new(new_proj))
+		new_proj.fill_color = fill_color
+		new_proj.frames.append(new_proj.new_empty_frame())
+		Global.projects.append(new_proj)
+		return new_proj
 
 	func switch_to(project: Project):
 		Global.tabs.current_tab = Global.projects.find(project)
@@ -442,7 +442,7 @@ class ProjectAPI:
 			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
 
 	func add_new_frame(after_frame: int):
-		var project = Global.current_project
+		var project := Global.current_project
 		if after_frame < project.frames.size() and after_frame >= 0:
 			var old_current = project.current_frame
 			project.current_frame = after_frame  # temporary assignment
@@ -498,7 +498,7 @@ class ExportAPI:
 		for i in Export.FileFormat.size():  # use an empty id if it's available
 			if !Export.FileFormat.values().has(i):
 				id = i
-		Export.FileFormat.merge({format_name: id})
+#		Export.FileFormat.merge({format_name: id})
 		#  add exporter generator
 		Export.custom_exporter_generators.merge({id: [exporter_generator, extension]})
 		#  add to animated (or not)
@@ -536,50 +536,50 @@ class SignalsAPI:
 	var _last_cel: BaseCel
 
 	func _init() -> void:
-		Global.connect("project_changed", self, "_update_texture_signal")
-		Global.connect("cel_changed", self, "_update_texture_signal")
+		Global.project_changed.connect(_update_texture_signal)
+		Global.cel_changed.connect(_update_texture_signal)
 
 	func _update_texture_signal():
 		if _last_cel:
-			_last_cel.disconnect("texture_changed", self, "_on_texture_changed")
+			_last_cel.texture_changed.disconnect(_on_texture_changed)
 		if Global.current_project:
 			_last_cel = Global.current_project.get_current_cel()
-			_last_cel.connect("texture_changed", self, "_on_texture_changed")
+			_last_cel.texture_changed.connect(_on_texture_changed)
 
 	func _on_texture_changed():
-		emit_signal("texture_changed")
+		texture_changed.emit()
 
 	# Global signals
 	func connect_project_changed(target: Object, method: String):
-		Global.connect("project_changed", target, method)
+		Global.project_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("project_changed")
 
 	func disconnect_project_changed(target: Object, method: String):
-		Global.disconnect("project_changed", target, method)
+		Global.project_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("project_changed")
 
 	func connect_cel_changed(target: Object, method: String):
-		Global.connect("cel_changed", target, method)
+		Global.cel_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("cel_changed")
 
 	func disconnect_cel_changed(target: Object, method: String):
-		Global.disconnect("cel_changed", target, method)
+		Global.cel_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("cel_changed")
 
 	# Tool Signal
 	func connect_tool_color_changed(target: Object, method: String):
-		Tools.connect("color_changed", target, method)
+		Tools.color_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("color_changed")
 
 	func disconnect_tool_color_changed(target: Object, method: String):
-		Tools.disconnect("color_changed", target, method)
+		Tools.color_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("color_changed")
 
 	# updater signals
 	func connect_current_cel_texture_changed(target: Object, method: String):
-		connect("texture_changed", target, method)
+		texture_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("texture_changed")
 
 	func disconnect_current_cel_texture_changed(target: Object, method: String):
-		disconnect("texture_changed", target, method)
+		texture_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("texture_changed")

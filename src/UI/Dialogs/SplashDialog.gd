@@ -5,52 +5,50 @@ var artworks := [
 		"Roroto Sic",
 		preload("res://assets/graphics/splash_screen/artworks/roroto.png"),
 		"https://linktr.ee/Roroto_Sic",
-		Color.white
+		Color.WHITE
 	],
 	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
 		"Exuvita",
 		preload("res://assets/graphics/splash_screen/artworks/exuvita.png"),
 		"",
-		Color.black
+		Color.BLACK
 	],
 	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
 		"Uch",
 		preload("res://assets/graphics/splash_screen/artworks/uch.png"),
 		"https://www.instagram.com/vs.pxl/",
-		Color.black
+		Color.BLACK
 	],
 	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
 		"Wishdream",
 		preload("res://assets/graphics/splash_screen/artworks/wishdream.png"),
 		"https://twitter.com/WishdreamStar",
-		Color.black
+		Color.BLACK
 	],
 ]
 
 var chosen_artwork: int
-var splash_art_texturerect: TextureRect
-var art_by_label: Button
-
-onready var version_text: TextureRect = find_node("VersionText")
+@onready var art_by_label := %ArtistName as Button
+@onready var splash_art_texturerect := %SplashArt as TextureRect
+@onready var version_text := %VersionText as TextureRect
 
 
 func _ready() -> void:
-	get_ok().visible = false
+	get_ok_button().visible = false
 
 
 func _on_SplashDialog_about_to_show() -> void:
-	splash_art_texturerect = find_node("SplashArt")
-	art_by_label = find_node("ArtistName")
-	var show_on_startup_button: CheckBox = find_node("ShowOnStartup")
-
+	var show_on_startup_button: CheckBox = find_child("ShowOnStartup")
 	if Global.config_cache.has_section_key("preferences", "startup"):
-		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
-	window_title = "Pixelorama" + " " + Global.current_version
+		show_on_startup_button.button_pressed = !Global.config_cache.get_value(
+			"preferences", "startup"
+		)
+	title = "Pixelorama" + " " + Global.current_version
 
 	chosen_artwork = randi() % artworks.size()
 	change_artwork(0)
 
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
 
 
@@ -63,7 +61,7 @@ func change_artwork(direction: int) -> void:
 	splash_art_texturerect.texture = artworks[chosen_artwork][1]
 
 	art_by_label.text = tr("Art by: %s") % artworks[chosen_artwork][0]
-	art_by_label.hint_tooltip = artworks[chosen_artwork][2]
+	art_by_label.tooltip_text = artworks[chosen_artwork][2]
 
 	version_text.modulate = artworks[chosen_artwork][3]
 

@@ -1,9 +1,9 @@
 class_name PixelLayer
 extends BaseLayer
-# A class for standard pixel layer properties.
+## A class for standard pixel layer properties.
 
 
-func _init(_project, _name := "") -> void:
+func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
 
@@ -12,14 +12,14 @@ func _init(_project, _name := "") -> void:
 
 
 func serialize() -> Dictionary:
-	var dict := .serialize()
+	var dict := super.serialize()
 	dict["type"] = get_layer_type()
 	dict["new_cels_linked"] = new_cels_linked
 	return dict
 
 
 func deserialize(dict: Dictionary) -> void:
-	.deserialize(dict)
+	super.deserialize(dict)
 	new_cels_linked = dict.new_cels_linked
 
 
@@ -28,8 +28,7 @@ func get_layer_type() -> int:
 
 
 func new_empty_cel() -> BaseCel:
-	var image := Image.new()
-	image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	return PixelCel.new(image)
 
 
@@ -38,4 +37,4 @@ func can_layer_get_drawn() -> bool:
 
 
 func instantiate_layer_button() -> Node:
-	return Global.pixel_layer_button_node.instance()
+	return Global.pixel_layer_button_node.instantiate()

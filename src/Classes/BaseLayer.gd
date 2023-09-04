@@ -1,31 +1,31 @@
 class_name BaseLayer
-extends Reference
-# Base class for layer properties. Different layer types extend from this class.
+extends RefCounted
+## Base class for layer properties. Different layer types extend from this class.
 
 var name := ""
-var project
+var project: Project
 var index: int
 var parent: BaseLayer
 var visible := true
 var locked := false
 var new_cels_linked := false
-var cel_link_sets := []  # Array of Dictionaries (Each Dictionary represents a cel's "link set")
+var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
 
 
-# Returns true if this is a direct or indirect parent of layer
-func is_a_parent_of(layer: BaseLayer) -> bool:
+## Returns true if this is a direct or indirect parent of layer
+func is_ancestor_of(layer: BaseLayer) -> bool:
 	if layer.parent == self:
 		return true
 	elif is_instance_valid(layer.parent):
-		return is_a_parent_of(layer.parent)
+		return is_ancestor_of(layer.parent)
 	return false
 
 
-func get_children(recursive: bool) -> Array:
-	var children := []
+func get_children(recursive: bool) -> Array[BaseLayer]:
+	var children: Array[BaseLayer] = []
 	if recursive:
 		for i in index:
-			if is_a_parent_of(project.layers[i]):
+			if is_ancestor_of(project.layers[i]):
 				children.append(project.layers[i])
 	else:
 		for i in index:
@@ -38,7 +38,7 @@ func get_child_count(recursive: bool) -> int:
 	var count := 0
 	if recursive:
 		for i in index:
-			if is_a_parent_of(project.layers[i]):
+			if is_ancestor_of(project.layers[i]):
 				count += 1
 	else:
 		for i in index:
@@ -83,14 +83,14 @@ func get_layer_path() -> String:
 	return name
 
 
-# Links a cel to link_set if its a Dictionary, or unlinks if null.
-# Content/image_texture are handled separately for undo related reasons
+## Links a cel to link_set if its a Dictionary, or unlinks if null.
+## Content/image_texture are handled separately for undo related reasons
 func link_cel(cel: BaseCel, link_set = null) -> void:
 	# Erase from the cel's current link_set
 	if cel.link_set != null:
 		if cel.link_set.has("cels"):
 			cel.link_set["cels"].erase(cel)
-			if cel.link_set["cels"].empty():
+			if cel.link_set["cels"].is_empty():
 				cel_link_sets.erase(cel.link_set)
 		else:
 			cel_link_sets.erase(cel.link_set)
@@ -102,11 +102,11 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 		link_set["cels"].append(cel)
 		if not cel_link_sets.has(link_set):
 			if not link_set.has("hue"):
-				var hues := PoolRealArray()
+				var hues := PackedFloat32Array()
 				for other_link_set in cel_link_sets:
 					hues.append(other_link_set["hue"])
-				if hues.empty():
-					link_set["hue"] = Color.green.h
+				if hues.is_empty():
+					link_set["hue"] = Color.GREEN.h
 				else:  # Calculate the largest gap in hue between existing link sets:
 					hues.sort()
 					# Start gap between the highest and lowest hues, otherwise its hard to include
@@ -132,7 +132,7 @@ func serialize() -> Dictionary:
 		"locked": locked,
 		"parent": parent.index if is_instance_valid(parent) else -1
 	}
-	if not cel_link_sets.empty():
+	if not cel_link_sets.is_empty():
 		var cels := []  # Cels array for easy finding of the frame index for link_set saving
 		for frame in project.frames:
 			cels.append(frame.cels[index])
@@ -150,8 +150,8 @@ func deserialize(dict: Dictionary) -> void:
 	locked = dict.locked
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
-	if dict.has("linked_cels") and not dict["linked_cels"].empty():  # Backwards compatibility
-		dict["link_sets"] = [{"cels": dict["linked_cels"], "hue": Color.green.h}]
+	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility
+		dict["link_sets"] = [{"cels": dict["linked_cels"], "hue": Color.GREEN.h}]
 	if dict.has("link_sets"):
 		for serialized_link_set in dict["link_sets"]:
 			var link_set := {"cels": [], "hue": serialized_link_set["hue"]}

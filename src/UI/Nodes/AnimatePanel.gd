@@ -2,16 +2,16 @@ class_name AnimatePanel
 extends PanelContainer
 
 var image_effect_node: ConfirmationDialog
-var frames := []  # Set this value before calling "get_animated_value"
-var properties := []  # Contains dictionary of properties
-var resetter_values := []  # Contains the Original properties without any change
-var _current_id := 0  # The property currently selected in "property_list"
+var frames := []  ## Set this value before calling "get_animated_value"
+var properties := []  ## Contains dictionary of properties
+var resetter_values := []  ## Contains the Original properties without any change
+var _current_id := 0  ## The property currently selected in "property_list"
 
-onready var can_animate_button: CheckBox = $"%CanAnimate"
-onready var property_list: ItemList = $"%PropertyList"
-onready var initial_value: ValueSlider = $"%Initial"
-onready var final_value: ValueSlider = $"%Final"
-onready var preview_slider: TextureProgress = $"%PreviewSlider"
+@onready var can_animate_button: CheckBox = $"%CanAnimate"
+@onready var property_list: ItemList = $"%PropertyList"
+@onready var initial_value: ValueSlider = $"%Initial"
+@onready var final_value: ValueSlider = $"%Final"
+@onready var preview_slider: TextureProgressBar = $"%PreviewSlider"
 
 
 func _ready() -> void:
@@ -39,11 +39,10 @@ func add_float_property(prop_name: String, property_node: Range):
 	properties.append(info)
 	resetter_values.append(property_node.value)
 	property_list.add_item(prop_name)
-	property_node.connect("value_changed", self, "_on_range_node_value_changed")
+	property_node.value_changed.connect(_on_range_node_value_changed)
 
 
 func get_animated_value(frame_idx: int, property_idx := 0) -> float:
-	var tween := SceneTreeTween.new()
 	if property_idx <= 0 or property_idx < properties.size():
 		if frame_idx in frames:
 			if properties[property_idx]["can_animate"] and frames.size() > 1:
@@ -53,9 +52,10 @@ func get_animated_value(frame_idx: int, property_idx := 0) -> float:
 				var delta = properties[property_idx]["range_node"].value - initial
 				var transition_type = properties[property_idx]["transition_type"]
 				var ease_type = properties[property_idx]["ease_type"]
-				return tween.interpolate_value(
+				var value = Tween.interpolate_value(
 					initial, delta, elapsed, duration, transition_type, ease_type
 				)
+				return value
 			else:
 				return properties[property_idx]["range_node"].value
 		else:
@@ -78,10 +78,10 @@ func _on_Final_value_changed(value: float) -> void:
 func _on_range_node_value_changed(_value) -> void:
 	# Value is changed from outside the Animate Panel
 	if properties[_current_id]["range_node"].value != final_value.value:
-		if final_value.is_connected("value_changed", self, "_on_Final_value_changed"):
-			final_value.disconnect("value_changed", self, "_on_Final_value_changed")
+		if final_value.value_changed.is_connected(_on_Final_value_changed):
+			final_value.value_changed.disconnect(_on_Final_value_changed)
 		final_value.value = properties[_current_id]["range_node"].value
-		final_value.connect("value_changed", self, "_on_Final_value_changed")
+		final_value.value_changed.connect(_on_Final_value_changed)
 
 
 func _on_CanAnimate_toggled(button_pressed: bool) -> void:
@@ -102,10 +102,10 @@ func _on_PropertyList_item_selected(index: int) -> void:
 
 
 func _refresh_properties(idx: int):
-	if initial_value.is_connected("value_changed", self, "_on_Initial_value_changed"):
-		initial_value.disconnect("value_changed", self, "_on_Initial_value_changed")
-	if final_value.is_connected("value_changed", self, "_on_Final_value_changed"):
-		final_value.disconnect("value_changed", self, "_on_Final_value_changed")
+	if initial_value.value_changed.is_connected(_on_Initial_value_changed):
+		initial_value.value_changed.disconnect(_on_Initial_value_changed)
+	if final_value.value_changed.is_connected(_on_Final_value_changed):
+		final_value.value_changed.disconnect(_on_Final_value_changed)
 
 	# Nodes setup
 	var property_node: Range = properties[idx]["range_node"]
@@ -124,7 +124,7 @@ func _refresh_properties(idx: int):
 	initial_value.step = property_node.step
 
 	# Update values
-	can_animate_button.pressed = properties[idx]["can_animate"]
+	can_animate_button.button_pressed = properties[idx]["can_animate"]
 	initial_value.value = properties[idx]["initial_value"]
 	if properties[idx]["range_node"].value != final_value.value:
 		final_value.value = properties[idx]["range_node"].value
@@ -132,8 +132,8 @@ func _refresh_properties(idx: int):
 	$"%EaseType".select($"%EaseType".get_item_index(properties[idx]["ease_type"]))
 	$"%TransitionType".select($"%TransitionType".get_item_index(properties[idx]["transition_type"]))
 
-	initial_value.connect("value_changed", self, "_on_Initial_value_changed")
-	final_value.connect("value_changed", self, "_on_Final_value_changed")
+	initial_value.value_changed.connect(_on_Initial_value_changed)
+	final_value.value_changed.connect(_on_Final_value_changed)
 
 
 func _populate_ease_type():
@@ -155,6 +155,7 @@ func _populate_transition_type():
 	$"%TransitionType".add_item("Wiggling around the edges", Tween.TRANS_ELASTIC)
 	$"%TransitionType".add_item("Bouncing at the end", Tween.TRANS_BOUNCE)
 	$"%TransitionType".add_item("Backing out at ends", Tween.TRANS_BACK)
+	$"%TransitionType".add_item("Spring towards the end", Tween.TRANS_SPRING)
 
 
 func _on_EaseType_item_selected(index: int) -> void:

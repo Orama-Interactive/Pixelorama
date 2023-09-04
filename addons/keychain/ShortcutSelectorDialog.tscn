@@ -1,49 +1,69 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bfjcafe2kvx7n"]
 
-[ext_resource path="res://addons/keychain/ShortcutSelectorDialog.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/keychain/ShortcutSelectorDialog.gd" id="1"]
 
 [node name="ShortcutSelectorDialog" type="ConfirmationDialog"]
-margin_right = 200.0
-margin_bottom = 70.0
-popup_exclusive = true
-window_title = "Set the shortcut"
-script = ExtResource( 1 )
+size = Vector2i(417, 169)
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 341.0
-margin_bottom = 64.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 409.0
+offset_bottom = 120.0
 
 [node name="InputTypeLabel" type="Label" parent="VBoxContainer"]
-margin_right = 333.0
-margin_bottom = 14.0
+layout_mode = 2
 text = "Press a key or a key combination to set the shortcut"
 
 [node name="EnteredShortcut" type="LineEdit" parent="VBoxContainer"]
 visible = false
-margin_top = 18.0
-margin_right = 333.0
-margin_bottom = 32.0
-align = 1
+layout_mode = 2
 editable = false
 virtual_keyboard_enabled = false
 
 [node name="OptionButton" type="OptionButton" parent="VBoxContainer"]
-margin_top = 18.0
-margin_right = 333.0
-margin_bottom = 38.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="AlreadyExistsLabel" type="Label" parent="VBoxContainer"]
-margin_top = 42.0
-margin_right = 333.0
-margin_bottom = 56.0
-align = 1
+[node name="ModifierButtons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
 
-[connection signal="about_to_show" from="." to="." method="_on_ShortcutSelectorDialog_about_to_show"]
+[node name="Alt" type="CheckBox" parent="VBoxContainer/ModifierButtons"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Alt"
+
+[node name="Shift" type="CheckBox" parent="VBoxContainer/ModifierButtons"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Shift"
+
+[node name="Control" type="CheckBox" parent="VBoxContainer/ModifierButtons"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Control"
+
+[node name="Meta" type="CheckBox" parent="VBoxContainer/ModifierButtons"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Meta"
+
+[node name="CommandOrControl" type="CheckBox" parent="VBoxContainer/ModifierButtons"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Command / Control (auto)"
+
+[node name="AlreadyExistsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[connection signal="about_to_popup" from="." to="." method="_on_ShortcutSelectorDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ShortcutSelectorDialog_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_ShortcutSelectorDialog_popup_hide"]
 [connection signal="focus_entered" from="VBoxContainer/EnteredShortcut" to="." method="_on_EnteredShortcut_focus_entered"]
 [connection signal="focus_exited" from="VBoxContainer/EnteredShortcut" to="." method="_on_EnteredShortcut_focus_exited"]
 [connection signal="item_selected" from="VBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="toggled" from="VBoxContainer/ModifierButtons/Alt" to="." method="_on_alt_toggled"]
+[connection signal="toggled" from="VBoxContainer/ModifierButtons/Shift" to="." method="_on_shift_toggled"]
+[connection signal="toggled" from="VBoxContainer/ModifierButtons/Control" to="." method="_on_control_toggled"]
+[connection signal="toggled" from="VBoxContainer/ModifierButtons/Meta" to="." method="_on_meta_toggled"]
+[connection signal="toggled" from="VBoxContainer/ModifierButtons/CommandOrControl" to="." method="_on_command_or_control_toggled"]

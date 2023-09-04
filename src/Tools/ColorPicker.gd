@@ -46,47 +46,43 @@ func update_config() -> void:
 	$ColorPicker/ExtractFrom.selected = _mode
 
 
-func draw_start(position: Vector2) -> void:
-	.draw_start(position)
-	_pick_color(position)
+func draw_start(pos: Vector2i) -> void:
+	super.draw_start(pos)
+	_pick_color(pos)
 
 
-func draw_move(position: Vector2) -> void:
-	.draw_move(position)
-	_pick_color(position)
+func draw_move(pos: Vector2i) -> void:
+	super.draw_move(pos)
+	_pick_color(pos)
 
 
-func draw_end(position: Vector2) -> void:
-	.draw_end(position)
+func draw_end(pos: Vector2i) -> void:
+	super.draw_end(pos)
 
 
-func _pick_color(position: Vector2) -> void:
-	var project: Project = Global.current_project
-	position = project.tiles.get_canon_position(position)
+func _pick_color(pos: Vector2i) -> void:
+	var project := Global.current_project
+	pos = project.tiles.get_canon_position(pos)
 
-	if position.x < 0 or position.y < 0:
+	if pos.x < 0 or pos.y < 0:
 		return
 
 	var color := Color(0, 0, 0, 0)
 	var image := Image.new()
 	image.copy_from(_get_draw_image())
-	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
+	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
 		return
 	match _mode:
 		TOP_COLOR:
-			var curr_frame: Frame = project.frames[project.current_frame]
+			var curr_frame := project.frames[project.current_frame]
 			for layer in project.layers.size():
-				var idx = (project.layers.size() - 1) - layer
+				var idx := (project.layers.size() - 1) - layer
 				if project.layers[idx].is_visible_in_hierarchy():
 					image = curr_frame.cels[idx].get_image()
-					image.lock()
-					color = image.get_pixelv(position)
-					image.unlock()
-					if color != Color(0, 0, 0, 0):
+					color = image.get_pixelv(pos)
+					if not color.is_equal_approx(Color(0, 0, 0, 0)):
 						break
 		CURRENT_LAYER:
-			image.lock()
-			color = image.get_pixelv(position)
-			image.unlock()
-	var button := BUTTON_LEFT if _color_slot == 0 else BUTTON_RIGHT
+			color = image.get_pixelv(pos)
+	var button := MOUSE_BUTTON_LEFT if _color_slot == 0 else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

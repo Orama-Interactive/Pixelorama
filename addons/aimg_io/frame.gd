@@ -1,5 +1,6 @@
+@tool
 class_name AImgIOFrame
-extends Reference
+extends RefCounted
 # Represents a variable-timed frame of an animation.
 # Typically stuffed into an array.
 

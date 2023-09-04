@@ -1,20 +1,20 @@
-extends Reference
+extends RefCounted
 
-var converter = preload("../converter.gd").new()
+var converter := preload("../converter.gd").new()
 var transparency := false
 
 
 func longest_axis(colors: Array) -> int:
-	var start := [255, 255, 255]
-	var end := [0, 0, 0]
+	var start: PackedInt32Array = [255, 255, 255]
+	var end: PackedInt32Array = [0, 0, 0]
 	for color in colors:
 		for i in 3:
-			start[i] = min(color[i], start[i])
-			end[i] = max(color[i], end[i])
+			start[i] = mini(color[i], start[i])
+			end[i] = maxi(color[i], end[i])
 
-	var max_r = end[0] - start[0]
-	var max_g = end[1] - start[1]
-	var max_b = end[2] - start[2]
+	var max_r := end[0] - start[0]
+	var max_g := end[1] - start[1]
+	var max_b := end[2] - start[2]
 
 	if max_r > max_g:
 		if max_r > max_b:
@@ -73,16 +73,14 @@ func average_colors(buckets: Array) -> Dictionary:
 
 
 func pixels_to_colors(image: Image) -> Array:
-	image.lock()
 	var result := []
-	var data: PoolByteArray = image.get_data()
+	var data: PackedByteArray = image.get_data()
 
 	for i in range(0, data.size(), 4):
 		if data[i + 3] == 0:
 			transparency = true
 			continue
 		result.append([data[i], data[i + 1], data[i + 2]])
-	image.unlock()
 	return result
 
 
@@ -93,7 +91,7 @@ func remove_smallest_bucket(buckets: Array) -> Array:
 	for i in range(buckets.size()):
 		if buckets[i].size() < buckets[i_of_smallest_bucket].size():
 			i_of_smallest_bucket = i
-	buckets.remove(i_of_smallest_bucket)
+	buckets.remove_at(i_of_smallest_bucket)
 	return buckets
 
 
@@ -103,15 +101,15 @@ func remove_empty_buckets(buckets: Array) -> Array:
 
 	var i := buckets.find([])
 	while i != -1:
-		buckets.remove(i)
+		buckets.remove_at(i)
 		i = buckets.find([])
 
 	return buckets
 
 
-# quantizes to gif ready codes
+## Quantizes to gif ready codes
 func quantize(image: Image) -> Array:
-	var pixels = pixels_to_colors(image)
+	var pixels := pixels_to_colors(image)
 	if pixels.size() == 0:
 		return pixels
 
@@ -158,6 +156,6 @@ func quantize(image: Image) -> Array:
 	if transparency:
 		color_array = [[0, 0, 0]] + color_array
 
-	var data: PoolByteArray = converter.get_similar_indexed_datas(image, color_array)
+	var data: PackedByteArray = converter.get_similar_indexed_datas(image, color_array)
 
 	return [data, color_array, transparency]

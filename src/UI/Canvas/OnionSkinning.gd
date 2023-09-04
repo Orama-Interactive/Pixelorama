@@ -3,19 +3,19 @@ extends Node2D
 enum { PAST, FUTURE }
 
 var type := PAST
-var blue_red_color := Color.blue
+var blue_red_color := Color.BLUE
 var rate := Global.onion_skinning_past_rate
 
 
 func _draw() -> void:
-	var project = Global.current_project
+	var project := Global.current_project
 	if !Global.onion_skinning:
 		return
 	rate = Global.onion_skinning_past_rate if type == PAST else Global.onion_skinning_future_rate
 	if rate <= 0:
 		return
 
-	var color := blue_red_color if Global.onion_skinning_blue_red else Color.white
+	var color := blue_red_color if Global.onion_skinning_blue_red else Color.WHITE
 	var position_tmp := position
 	var scale_tmp := scale
 	if Global.mirror_view:

@@ -4,32 +4,31 @@ signal frame_saved
 
 enum Mode { CANVAS, PIXELORAMA }
 
-var mode: int = Mode.CANVAS
+var mode := Mode.CANVAS
 var chosen_dir := ""
 var save_dir := ""
 var project: Project
-var cache := []  # Array of images stored during recording
-var frame_captured := 0  # A variable used to visualize frames captured
-var skip_amount := 1  # No of "do" actions after which a frame can be captured
-var current_frame_no := 0  # used to compare with skip_amount to see if it can be captured
+var cache: Array[Image] = []  ## Images stored during recording
+var frame_captured := 0  ## Used to visualize frames captured
+var skip_amount := 1  ## Number of "do" actions after which a frame can be captured
+var current_frame_no := 0  ## Used to compare with skip_amount to see if it can be captured
 
 var resize := 100
 
-onready var project_list := $"%TargetProjectOption" as OptionButton
-onready var folder_button := $"%Folder" as Button
-onready var start_button := $"%Start" as Button
-onready var size_label := $"%Size" as Label
-onready var path_field := $"%Path" as LineEdit
+@onready var project_list := $"%TargetProjectOption" as OptionButton
+@onready var folder_button := $"%Folder" as Button
+@onready var start_button := $"%Start" as Button
+@onready var size_label := $"%Size" as Label
+@onready var path_field := $"%Path" as LineEdit
 
 
 func _ready() -> void:
 	refresh_projects_list()
 	project = Global.current_project
-	connect("frame_saved", self, "_on_frame_saved")
+	frame_saved.connect(_on_frame_saved)
 	# Make a recordings folder if there isn't one
-	var dir := Directory.new()
-	chosen_dir = Global.directory_module.xdg_data_home.plus_file("Recordings")
-	dir.make_dir_recursive(chosen_dir)
+	chosen_dir = Global.home_data_directory.path_join("Recordings")
+	DirAccess.make_dir_recursive_absolute(chosen_dir)
 	path_field.text = chosen_dir
 	size_label.text = str("(", project.size.x, "×", project.size.y, ")")
 
@@ -54,13 +53,10 @@ func initialize_recording() -> void:
 		save_dir[-1] = ""
 
 	# Create a new directory based on time
-	var folder = str(
-		project.name, OS.get_time().hour, "_", OS.get_time().minute, "_", OS.get_time().second
-	)
-	save_dir = save_dir.plus_file(folder)
-	var dir := Directory.new()
-
-# warning-ignore:return_value_discarded
+	var time_dict := Time.get_time_dict_from_system()
+	var folder := str(project.name, time_dict.hour, "_", time_dict.minute, "_", time_dict.second)
+	var dir := DirAccess.open(save_dir)
+	save_dir = save_dir.path_join(folder)
 	dir.make_dir_recursive(save_dir)
 
 	capture_frame()  # capture first frame
@@ -72,19 +68,21 @@ func capture_frame() -> void:
 	if current_frame_no != skip_amount:
 		return
 	current_frame_no = 0
-	var image := Image.new()
+	var image: Image
 	if mode == Mode.PIXELORAMA:
-		image = get_tree().root.get_viewport().get_texture().get_data()
-		image.flip_y()
+		image = get_tree().root.get_viewport().get_texture().get_image()
 	else:
-		var frame = project.frames[project.current_frame]
-		image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		Export.blend_all_layers(image, frame, Vector2(0, 0), project)
+		var frame := project.frames[project.current_frame]
+		image = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		Export.blend_all_layers(image, frame, Vector2i.ZERO, project)
 
 	if mode == Mode.CANVAS:
 		if resize != 100:
-			image.unlock()
-			image.resize(image.get_size().x * resize / 100, image.get_size().y * resize / 100, 0)
+			image.resize(
+				image.get_size().x * resize / 100,
+				image.get_size().y * resize / 100,
+				Image.INTERPOLATE_NEAREST
+			)
 
 	cache.append(image)
 
@@ -93,13 +91,13 @@ func _on_Timer_timeout() -> void:
 	# Saves frames little by little during recording
 	if cache.size() > 0:
 		save_frame(cache[0])
-		cache.remove(0)
+		cache.remove_at(0)
 
 
 func save_frame(img: Image) -> void:
-	var save_file = str(project.name, "_", frame_captured, ".png")
-	img.save_png(save_dir.plus_file(save_file))
-	emit_signal("frame_saved")
+	var save_file := str(project.name, "_", frame_captured, ".png")
+	img.save_png(save_dir.path_join(save_file))
+	frame_saved.emit()
 
 
 func _on_frame_saved() -> void:
@@ -123,11 +121,11 @@ func finalize_recording() -> void:
 
 
 func disconnect_undo() -> void:
-	project.undo_redo.disconnect("version_changed", self, "capture_frame")
+	project.undo_redo.version_changed.disconnect(capture_frame)
 
 
 func connect_undo() -> void:
-	project.undo_redo.connect("version_changed", self, "capture_frame")
+	project.undo_redo.version_changed.connect(capture_frame)
 
 
 func _on_TargetProjectOption_item_selected(index: int) -> void:
@@ -154,9 +152,9 @@ func _on_Start_toggled(button_pressed: bool) -> void:
 
 
 func _on_Settings_pressed() -> void:
-	var settings := $Dialogs/Options as WindowDialog
-	var pos := rect_position
-	settings.popup(Rect2(pos, settings.rect_size))
+	var settings := $Dialogs/Options as Window
+	var pos := position
+	settings.popup(Rect2(pos, settings.size))
 
 
 func _on_SkipAmount_value_changed(value: float) -> void:
@@ -195,5 +193,9 @@ func _on_Path_dir_selected(dir: String) -> void:
 
 func _on_Fps_value_changed(value: float) -> void:
 	var dur_label := $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration as Label
-	var duration := stepify(1.0 / value, 0.0001)
+	var duration := snappedf(1.0 / value, 0.0001)
 	dur_label.text = str("= ", duration, " sec")
+
+
+func _on_options_close_requested() -> void:
+	$Dialogs/Options.hide()

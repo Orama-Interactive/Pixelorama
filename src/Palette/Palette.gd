@@ -1,22 +1,22 @@
 class_name Palette
 extends Resource
 
-const DEFAULT_WIDTH = 8
-const DEFAULT_HEIGHT = 8
+const DEFAULT_WIDTH := 8
+const DEFAULT_HEIGHT := 8
 
 # Metadata
-export var name: String = "Custom Palette"
-export var comment: String = ""
+@export var name := "Custom Palette"
+@export var comment := ""
 
 # Grid size
-export var width := DEFAULT_WIDTH
-export var height := DEFAULT_HEIGHT
+@export var width := DEFAULT_WIDTH
+@export var height := DEFAULT_HEIGHT
 
-# Sparse colors dictionary - actual color position in the palette is determined by its index
-export var colors: Dictionary = {}
+## Sparse colors dictionary - actual color position in the palette is determined by its index
+@export var colors := {}
 
-# How many colors fit in palette grid
-export var colors_max := 0
+## How many colors fit in palette grid
+@export var colors_max := 0
 
 
 func _init(
@@ -54,8 +54,8 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 		reindex_colors_on_width_increase(old_width)
 
 
-# Iterates all colors from lowest index and reindexes them so they start at zero index
-# Remove trailing removes all colors that are over colors_max limit and thus don't fit into grid
+## Iterates all colors from lowest index and reindexes them so they start at zero index
+## Remove trailing removes all colors that are over colors_max limit and thus don't fit into grid
 func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
 	var sorted_colors_indexes = colors.keys()
 	sorted_colors_indexes.sort()
@@ -75,8 +75,8 @@ func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
 		new_index += 1
 
 
-# Adds difference of old and new width to color indexes
-# so they remain on the same position as before resize
+## Adds difference of old and new width to color indexes
+## so they remain on the same position as before resize
 func reindex_colors_on_width_increase(old_width: int) -> void:
 	var sorted_colors_indexes = colors.keys()
 	sorted_colors_indexes.sort()
@@ -89,7 +89,7 @@ func reindex_colors_on_width_increase(old_width: int) -> void:
 	colors = new_colors
 
 
-# Adds new color to the first empty swatch
+## Adds new color to the first empty swatch
 func add_color(new_color: Color, start_index: int = 0) -> void:
 	if start_index >= colors_max:
 		return
@@ -105,7 +105,7 @@ func add_color(new_color: Color, start_index: int = 0) -> void:
 			break
 
 
-# Returns color at index or null if no color exists
+## Returns color at index or null if no color exists
 func get_color(index: int):
 	var palette_color = colors.get(index)
 	if palette_color != null:
@@ -113,19 +113,19 @@ func get_color(index: int):
 	return null
 
 
-# Changes color data
+## Changes color data
 func set_color(index: int, new_color: Color) -> void:
 	if self.colors.has(index):
 		self.colors[index].color = new_color
 
 
-# Removes a color at the specified index
+## Removes a color at the specified index
 func remove_color(index: int) -> void:
 	colors.erase(index)
 
 
-# Inserts a color to the specified index
-# If index is already occupied move the original color to right
+## Inserts a color to the specified index
+## If index is already occupied move the original color to right
 func insert_color(index: int, new_color: Color) -> void:
 	var c := PaletteColor.new(new_color, index)
 	# If insert happens on non empty swatch recursively move the original color
@@ -135,7 +135,7 @@ func insert_color(index: int, new_color: Color) -> void:
 	colors[index] = c
 
 
-# Recursive function that moves every color to right until one of them is moved to empty swatch
+## Recursive function that moves every color to right until one of them is moved to empty swatch
 func move_right(index: int) -> void:
 	# Moving colors to right would overflow the size of the palette
 	# so increase its height automatically
@@ -150,7 +150,7 @@ func move_right(index: int) -> void:
 	colors[index + 1] = colors.get(index)
 
 
-# Swaps two colors
+## Swaps two colors
 func swap_colors(from_index: int, to_index: int) -> void:
 	var from_color = colors.get(from_index)
 	var to_color = colors.get(to_index)
@@ -170,7 +170,7 @@ func swap_colors(from_index: int, to_index: int) -> void:
 		colors[from_index].index = from_index
 
 
-# Copies color
+## Copies color
 func copy_colors(from_index: int, to_index: int) -> void:
 	# Only allow copy of existing colors
 	if colors.has(from_index):
@@ -178,27 +178,27 @@ func copy_colors(from_index: int, to_index: int) -> void:
 		colors[to_index].index = to_index
 
 
-# True if all swatches are occupied
+## True if all swatches are occupied
 func is_full() -> bool:
 	return self.colors.size() >= self.colors_max
 
 
-# True if palette has no colors
+## True if palette has no colors
 func is_empty() -> bool:
 	return self.colors.size() == 0
 
 
-func has_color(color: Color) -> bool:
+func has_theme_color(color: Color) -> bool:
 	for palette_color in colors.values():
 		if palette_color.color == color:
 			return true
 	return false
 
 
-# Sets name that is used to save the palette to disk
+## Sets name that is used to save the palette to disk
 func set_resource_name(new_resource_name: String) -> void:
 	# Store palette path name only with valid path characters
-	resource_name = strip_unvalid_characters(new_resource_name)
+	resource_name = Palette.strip_unvalid_characters(new_resource_name)
 
 
 static func strip_unvalid_characters(string_to_strip: String) -> String:

@@ -1,8 +1,8 @@
-extends ViewportContainer
+extends SubViewportContainer
 
-export(NodePath) var camera_path
+@export var camera_path: NodePath
 
-onready var camera := get_node(camera_path) as Camera2D
+@onready var camera := get_node(camera_path) as Camera2D
 
 
 func _ready() -> void:

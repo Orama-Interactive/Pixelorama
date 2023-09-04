@@ -17,8 +17,8 @@ var _value_amount := 10
 class LightenDarkenOp:
 	extends Drawer.ColorOp
 	var changed := false
-	var shading_mode: int = ShadingMode.SIMPLE
-	var lighten_or_darken: int = LightenDarken.LIGHTEN
+	var shading_mode := ShadingMode.SIMPLE
+	var lighten_or_darken := LightenDarken.LIGHTEN
 	var hue_amount := 10.0
 	var sat_amount := 10.0
 	var value_amount := 10.0
@@ -52,7 +52,7 @@ class LightenDarkenOp:
 				hue_shift = hue_limit_lighten(dst.h, hue_shift)
 				dst.h = fposmod(dst.h + hue_shift, 1)
 				if dst.s > sat_lighten_limit:
-					dst.s = max(dst.s - min(sat_shift, dst.s), sat_lighten_limit)
+					dst.s = maxf(dst.s - minf(sat_shift, dst.s), sat_lighten_limit)
 				dst.v += value_shift
 
 			else:
@@ -60,7 +60,7 @@ class LightenDarkenOp:
 				dst.h = fposmod(dst.h - hue_shift, 1)
 				dst.s += sat_shift
 				if dst.v > value_darken_limit:
-					dst.v = max(dst.v - min(value_shift, dst.v), value_darken_limit)
+					dst.v = maxf(dst.v - minf(value_shift, dst.v), value_darken_limit)
 
 		return dst
 
@@ -162,7 +162,7 @@ func _on_LightenDarken_value_value_changed(value: float) -> void:
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["shading_mode"] = _shading_mode
 	config["mode"] = _mode
 	config["amount"] = _amount
@@ -173,7 +173,7 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	.set_config(config)
+	super.set_config(config)
 	_shading_mode = config.get("shading_mode", _shading_mode)
 	_drawer.color_op.shading_mode = _shading_mode
 	_mode = config.get("mode", _mode)
@@ -185,7 +185,7 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	.update_config()
+	super.update_config()
 	$ShadingMode.selected = _shading_mode
 	$LightenDarken.selected = _mode
 	$AmountSlider.value = _amount
@@ -205,12 +205,12 @@ func update_strength() -> void:
 	_drawer.color_op.value_amount = _value_amount
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_start(position)
+func draw_start(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
-		_pick_color(position)
+		_pick_color(pos)
 		return
 	_picking_color = false
 
@@ -226,43 +226,43 @@ func draw_start(position: Vector2) -> void:
 	if _draw_line:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = (Global.current_project.size.x - 1) - position.x
-		_line_start = position
-		_line_end = position
+			pos.x = (Global.current_project.size.x - 1) - pos.x
+		_line_start = pos
+		_line_end = pos
 		update_line_polylines(_line_start, _line_end)
 	else:
-		draw_tool(position)
-		_last_position = position
+		draw_tool(pos)
+		_last_position = pos
 		Global.canvas.sprite_changed_this_frame = true
 	cursor_text = ""
 
 
-func draw_move(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_move(position)
+func draw_move(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("draw_color_picker"):
-			_pick_color(position)
+			_pick_color(pos)
 		return
 
 	if _draw_line:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = (Global.current_project.size.x - 1) - position.x
-		var d := _line_angle_constraint(_line_start, position)
+			pos.x = (Global.current_project.size.x - 1) - pos.x
+		var d := _line_angle_constraint(_line_start, pos)
 		_line_end = d.position
 		cursor_text = d.text
 		update_line_polylines(_line_start, _line_end)
 	else:
-		draw_fill_gap(_last_position, position)
-		_last_position = position
+		draw_fill_gap(_last_position, pos)
+		_last_position = pos
 		cursor_text = ""
 		Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_end(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_end(position)
+func draw_end(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	if _picking_color:
 		return
 
@@ -280,17 +280,15 @@ func draw_end(position: Vector2) -> void:
 	update_random_image()
 
 
-func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
 	_changed = true
-	image.lock()
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:
 			if image.get_pixel(xx, yy).a > 0:
-				var pos := Vector2(xx, yy) + dst - src_rect.position
+				var pos := Vector2i(xx, yy) + dst - src_rect.position
 				_set_pixel(pos, true)
-	image.unlock()
 
 
 func update_brush() -> void:
-	.update_brush()
+	super.update_brush()
 	$ColorInterpolation.visible = false

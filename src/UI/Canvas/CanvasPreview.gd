@@ -10,30 +10,30 @@ var end_sprite_sheet_frame := 1
 var sprite_frames := []
 var frame_index := 0
 
-onready var animation_timer := $AnimationTimer as Timer
-onready var transparent_checker = get_parent().get_node("TransparentChecker") as ColorRect
+@onready var animation_timer := $AnimationTimer as Timer
+@onready var transparent_checker = get_parent().get_node("TransparentChecker") as ColorRect
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", self, "_cel_changed")
+	Global.cel_changed.connect(_cel_changed)
 
 
 func _draw() -> void:
-	var current_project: Project = Global.current_project
+	var current_project := Global.current_project
 	match mode:
 		Mode.TIMELINE:
-			var modulate_color := Color.white
+			var modulate_color := Color.WHITE
 			if frame_index >= current_project.frames.size():
 				frame_index = current_project.current_frame
 			if animation_timer.is_stopped():
 				frame_index = current_project.current_frame
-			var frame: Frame = current_project.frames[frame_index]
+			var frame := current_project.frames[frame_index]
 			animation_timer.wait_time = frame.duration * (1.0 / current_project.fps)
-			var current_cels: Array = frame.cels
+			var current_cels := frame.cels
 
 			# Draw current frame layers
 			for i in range(current_cels.size()):
-				var cel: BaseCel = current_cels[i]
+				var cel := current_cels[i]
 				if cel is GroupCel:
 					continue
 				modulate_color = Color(1, 1, 1, cel.opacity)
@@ -45,8 +45,7 @@ func _draw() -> void:
 		Mode.SPRITESHEET:
 			var texture_to_draw: ImageTexture
 			var target_frame: Frame = current_project.frames[current_project.current_frame]
-			var frame_image := Image.new()
-			frame_image.create(
+			var frame_image := Image.create(
 				current_project.size.x, current_project.size.y, false, Image.FORMAT_RGBA8
 			)
 			Export.blend_all_layers(frame_image, target_frame)
@@ -63,16 +62,16 @@ func _draw() -> void:
 			texture_to_draw = sprite_frames[frame_index]
 			draw_texture(texture_to_draw, Vector2.ZERO)
 
-			var rect := Rect2(Vector2.ZERO, texture_to_draw.get_data().get_size())
+			var rect := Rect2(Vector2.ZERO, texture_to_draw.get_image().get_size())
 			transparent_checker.fit_rect(rect)
 
 
 func _on_AnimationTimer_timeout() -> void:
 	match mode:
 		Mode.TIMELINE:
-			var current_project: Project = Global.current_project
+			var current_project := Global.current_project
 			var first_frame := 0
-			var last_frame: int = current_project.frames.size() - 1
+			var last_frame := current_project.frames.size() - 1
 
 			if Global.play_only_tags:
 				for tag in current_project.animation_tags:
@@ -89,8 +88,7 @@ func _on_AnimationTimer_timeout() -> void:
 				frame_index = first_frame
 
 			animation_timer.wait_time = (
-				current_project.frames[frame_index].duration
-				* (1.0 / current_project.fps)
+				current_project.frames[frame_index].duration * (1.0 / current_project.fps)
 			)
 
 		Mode.SPRITESHEET:
@@ -98,26 +96,25 @@ func _on_AnimationTimer_timeout() -> void:
 			animation_timer.wait_time = (1.0 / Global.current_project.fps)
 	animation_timer.set_one_shot(true)
 	animation_timer.start()
-	update()
+	queue_redraw()
 
 
 func _cel_changed() -> void:
-	update()
+	queue_redraw()
 
 
 func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
 	var result := []
-	horiz = min(horiz, image.get_size().x)
-	vert = min(vert, image.get_size().y)
+	horiz = mini(horiz, image.get_size().x)
+	vert = mini(vert, image.get_size().y)
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
 	for yy in range(vert):
 		for xx in range(horiz):
-			var tex := ImageTexture.new()
 			var cropped_image := Image.new()
 			var rect := Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
-			cropped_image = image.get_rect(rect)
+			cropped_image = image.get_region(rect)
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			tex.create_from_image(cropped_image, 0)
+			var tex := ImageTexture.create_from_image(cropped_image)
 			result.append(tex)
 	return result

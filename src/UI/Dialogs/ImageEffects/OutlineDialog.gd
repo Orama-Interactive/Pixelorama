@@ -1,41 +1,31 @@
 extends ImageEffect
 
 enum Animate { THICKNESS }
-var color := Color.black
+var color := Color.BLACK
 var thickness := 1
 var pattern := 0
 var inside_image := false
-var shader: Shader
+var shader := preload("res://src/Shaders/OutlineInline.gdshader")
 
-onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
+@onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
 
 
 func _ready() -> void:
-	if _is_webgl1():
-		$VBoxContainer/OptionsContainer/PatternOptionButton.disabled = true
-	else:
-		shader = load("res://src/Shaders/OutlineInline.gdshader")
-		var sm := ShaderMaterial.new()
-		sm.shader = shader
-		preview.set_material(sm)
+	super._ready()
+	var sm := ShaderMaterial.new()
+	sm.shader = shader
+	preview.set_material(sm)
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color
-	# set as in enum
+	# Set in the order of the Animate enum
 	animate_panel.add_float_property("Thickness", $VBoxContainer/OutlineOptions/ThickValue)
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var anim_thickness = animate_panel.get_animated_value(commit_idx, Animate.THICKNESS)
-
-	if !shader:  # Web version
-		DrawingAlgos.generate_outline(
-			cel, selection_checkbox.pressed, project, color, anim_thickness, false, inside_image
-		)
-		return
-
-	var selection_tex := ImageTexture.new()
-	if selection_checkbox.pressed and project.has_selection:
-		selection_tex.create_from_image(project.selection_map, 0)
+func commit_action(cel: Image, project := Global.current_project) -> void:
+	var anim_thickness := animate_panel.get_animated_value(commit_idx, Animate.THICKNESS)
+	var selection_tex: ImageTexture
+	if selection_checkbox.button_pressed and project.has_selection:
+		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
 	var params := {
 		"color": color,
@@ -44,13 +34,13 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"inside": inside_image,
 		"selection": selection_tex
 	}
-	if !confirmed:
+	if !has_been_confirmed:
 		for param in params:
-			preview.material.set_shader_param(param, params[param])
+			preview.material.set_shader_parameter(param, params[param])
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
+		await gen.done
 
 
 func _on_ThickValue_value_changed(value: int) -> void:

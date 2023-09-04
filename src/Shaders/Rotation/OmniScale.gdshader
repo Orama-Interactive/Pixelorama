@@ -31,7 +31,7 @@ shader_type canvas_item;
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-// 
+//
 
 uniform int ScaleMultiplier : hint_range(0, 100) = 4;
 
@@ -42,9 +42,8 @@ uniform int ScaleMultiplier : hint_range(0, 100) = 4;
 // Pixelorama-specific uniforms
 uniform float angle;
 uniform sampler2D selection_tex;
-uniform vec2 selection_pivot;
-uniform vec2 selection_size;
-uniform bool preview;
+uniform vec2 pivot_pixel;
+uniform bool preview = false;
 
 
 bool is_different(vec4 a, vec4 b)
@@ -285,7 +284,7 @@ vec4 scale(sampler2D image, vec2 coord, vec2 pxSize) {
         }
         return mix(r, w4, (dist + pixel_size / 2.0 - 0.5) / pixel_size>0.5?1.0:0.0);
     }
-    
+
     return w4;
 }
 
@@ -312,7 +311,7 @@ void fragment()
 	vec4 original = texture(TEXTURE, UV);
 	float selection = texture(selection_tex, UV).a;
 	vec2 size = 1.0 / TEXTURE_PIXEL_SIZE;
-	vec2 pivot = selection_pivot / size; // Normalize pivot position
+	vec2 pivot = pivot_pixel / size; // Normalize pivot position
 	float ratio = size.x / size.y; // Resolution ratio
 	vec2 pixelated_uv = floor(UV * size) / (size - 1.0); // Pixelate UV to fit resolution
 	vec2 rotated_uv;
@@ -324,7 +323,7 @@ void fragment()
 	}
 	vec4 c;
 	c = scale(TEXTURE, rotated_uv, TEXTURE_PIXEL_SIZE);
-	
+
 	// Taken from NearestNeighbour shader
 	c.a *= texture(selection_tex, rotated_uv).a; // Combine with selection mask
 	// Make a border to prevent stretching pixels on the edge
@@ -347,4 +346,4 @@ void fragment()
 	COLOR.a = mix(COLOR.a, 1.0, c.a * border); // Combine alpha of original image and rotated
 	//c.a = step(0.5,c.a);
 	//COLOR = c;
-} 
+}

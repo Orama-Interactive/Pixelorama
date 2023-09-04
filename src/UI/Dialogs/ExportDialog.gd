@@ -1,54 +1,51 @@
 extends ConfirmationDialog
 
-# called when user resumes export after filename collision
+## Called when user resumes export after filename collision
 signal resume_export_function
 
 var preview_current_frame := 0
 var preview_frames := []
 
-# allow custom exporters to be added
+## Allow custom exporters to be added
 var image_exports := [Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
 var spritesheet_exports := [Export.FileFormat.PNG]
 
-onready var tabs: Tabs = $VBoxContainer/Tabs
-onready var checker: ColorRect = $"%TransparentChecker"
-onready var previews: GridContainer = $"%Previews"
+@onready var tabs: TabBar = $VBoxContainer/TabBar
+@onready var checker: ColorRect = $"%TransparentChecker"
+@onready var previews: GridContainer = $"%Previews"
 
-onready var spritesheet_orientation: OptionButton = $"%Orientation"
-onready var spritesheet_lines_count: SpinBox = $"%LinesCount"
-onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
+@onready var spritesheet_orientation: OptionButton = $"%Orientation"
+@onready var spritesheet_lines_count: SpinBox = $"%LinesCount"
+@onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
 
-onready var frames_option_button: OptionButton = $"%Frames"
-onready var layers_option_button: OptionButton = $"%Layers"
-onready var options_resize: ValueSlider = $"%Resize"
-onready var dimension_label: Label = $"%DimensionLabel"
+@onready var frames_option_button: OptionButton = $"%Frames"
+@onready var layers_option_button: OptionButton = $"%Layers"
+@onready var options_resize: ValueSlider = $"%Resize"
+@onready var dimension_label: Label = $"%DimensionLabel"
 
-onready var path_line_edit: LineEdit = $"%PathLineEdit"
-onready var file_line_edit: LineEdit = $"%FileLineEdit"
-onready var file_format_options: OptionButton = $"%FileFormat"
+@onready var path_line_edit: LineEdit = $"%PathLineEdit"
+@onready var file_line_edit: LineEdit = $"%FileLineEdit"
+@onready var file_format_options: OptionButton = $"%FileFormat"
 
-onready var options_interpolation: OptionButton = $"%Interpolation"
+@onready var options_interpolation: OptionButton = $"%Interpolation"
 
-onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
-onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
-onready var path_dialog_popup: FileDialog = $Popups/PathDialog
-onready var export_progress_popup: WindowDialog = $Popups/ExportProgressBar
-onready var export_progress_bar: ProgressBar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
-onready var frame_timer: Timer = $FrameTimer
+@onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
+@onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
+@onready var path_dialog_popup: FileDialog = $Popups/PathDialog
+@onready var export_progress_popup: Window = $Popups/ExportProgressBar
+@onready var export_progress_bar := %ProgressBar as ProgressBar
+@onready var frame_timer: Timer = $FrameTimer
 
 
 func _ready() -> void:
-	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tabs.add_tab("Image")
 	tabs.add_tab("Spritesheet")
 	if OS.get_name() == "Windows":
 		file_exists_alert_popup.add_button("Cancel Export", true, "cancel")
 	else:
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
-
-	# Remove close button from export progress bar
-	export_progress_popup.get_close_button().hide()
 
 
 func show_tab() -> void:
@@ -95,7 +92,7 @@ func set_preview() -> void:
 			previews.columns = 1
 			add_animated_preview()
 		else:
-			previews.columns = ceil(sqrt(Export.processed_images.size()))
+			previews.columns = ceili(sqrt(Export.processed_images.size()))
 			for i in range(Export.processed_images.size()):
 				add_image_preview(Export.processed_images[i], i + 1)
 
@@ -112,14 +109,13 @@ func _on_GifWarning_meta_clicked(meta) -> void:
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 	var container := create_preview_container()
 	var preview := create_preview_rect()
-	preview.texture = ImageTexture.new()
-	preview.texture.create_from_image(image, 0)
+	preview.texture = ImageTexture.create_from_image(image)
 	container.add_child(preview)
 
 	if canvas_number != -1:
 		var label := Label.new()
-		label.align = Label.ALIGN_CENTER
-		label.text = String(canvas_number)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.text = str(canvas_number)
 		container.add_child(label)
 
 	previews.add_child(container)
@@ -130,8 +126,7 @@ func add_animated_preview() -> void:
 	preview_frames = []
 
 	for processed_image in Export.processed_images:
-		var texture := ImageTexture.new()
-		texture.create_from_image(processed_image, 0)
+		var texture := ImageTexture.create_from_image(processed_image)
 		preview_frames.push_back(texture)
 
 	var container := create_preview_container()
@@ -149,17 +144,17 @@ func add_animated_preview() -> void:
 
 func create_preview_container() -> VBoxContainer:
 	var container := VBoxContainer.new()
-	container.size_flags_horizontal = SIZE_EXPAND_FILL
-	container.size_flags_vertical = SIZE_EXPAND_FILL
-	container.rect_min_size = Vector2(0, 128)
+	container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	container.custom_minimum_size = Vector2(0, 128)
 	return container
 
 
 func create_preview_rect() -> TextureRect:
 	var preview := TextureRect.new()
 	preview.expand = true
-	preview.size_flags_horizontal = SIZE_EXPAND_FILL
-	preview.size_flags_vertical = SIZE_EXPAND_FILL
+	preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	preview.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	return preview
 
@@ -177,10 +172,10 @@ func set_file_format_selector() -> void:
 			_set_file_format_selector_suitable_file_formats(spritesheet_exports)
 
 
-# Updates the suitable list of file formats. First is preferred.
-# Note that if the current format is in the list, it stays for consistency.
+## Updates the suitable list of file formats. First is preferred.
+## Note that if the current format is in the list, it stays for consistency.
 func _set_file_format_selector_suitable_file_formats(formats: Array) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	file_format_options.clear()
 	var needs_update := true
 	for i in formats:
@@ -231,9 +226,9 @@ func update_dimensions_label() -> void:
 
 func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 	# 0 is invalid path, 1 is invalid name
-	var error_text := "Directory path and file name are not valid!"
+	var error_text := "DirAccess path and file name are not valid!"
 	if path_or_name == 0:
-		error_text = "Directory path is not valid!"
+		error_text = "DirAccess path is not valid!"
 	elif path_or_name == 1:
 		error_text = "File name is not valid!"
 
@@ -242,8 +237,8 @@ func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 	path_validation_alert_popup.popup_centered()
 
 
-func open_file_exists_alert_popup(dialog_text: String) -> void:
-	file_exists_alert_popup.dialog_text = dialog_text
+func open_file_exists_alert_popup(text: String) -> void:
+	file_exists_alert_popup.dialog_text = text
 	file_exists_alert_popup.popup_centered()
 
 
@@ -259,15 +254,15 @@ func set_export_progress_bar(value: float) -> void:
 
 
 func _on_ExportDialog_about_to_show() -> void:
-	get_ok().text = "Export"
+	get_ok_button().text = "Export"
 	Global.canvas.selection.transform_content_confirm()
-	var project: Project = Global.current_project
-	# If we're on HTML5, don't let the user change the directory path
-	if OS.get_name() == "HTML5":
+	var project := Global.current_project
+	# If we're on Web, don't let the user change the directory path
+	if OS.get_name() == "Web":
 		get_tree().call_group("NotHTML5", "hide")
 		project.directory_path = "user://"
 
-	if project.directory_path.empty():
+	if project.directory_path.is_empty():
 		project.directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
@@ -282,15 +277,15 @@ func _on_ExportDialog_about_to_show() -> void:
 	show_tab()
 
 	# Set the size of the preview checker
-	checker.rect_size = checker.get_parent().rect_size
+	checker.size = checker.get_parent().size
 
 
-func _on_Tabs_tab_clicked(tab: int) -> void:
+func _on_Tabs_tab_clicked(tab: Export.ExportTab) -> void:
 	Export.current_tab = tab
 	show_tab()
 
 
-func _on_Orientation_item_selected(id: int) -> void:
+func _on_Orientation_item_selected(id: Export.Orientation) -> void:
 	Export.orientation = id
 	if Export.orientation == Export.Orientation.ROWS:
 		spritesheet_lines_count_label.text = "Columns:"
@@ -309,7 +304,7 @@ func _on_LinesCount_value_changed(value: float) -> void:
 	set_preview()
 
 
-func _on_Direction_item_selected(id: int) -> void:
+func _on_Direction_item_selected(id: Export.AnimationDirection) -> void:
 	Export.direction = id
 	preview_current_frame = 0
 	Export.process_data()
@@ -321,13 +316,13 @@ func _on_Resize_value_changed(value: float) -> void:
 	update_dimensions_label()
 
 
-func _on_Interpolation_item_selected(id: int) -> void:
+func _on_Interpolation_item_selected(id: Image.Interpolation) -> void:
 	Export.interpolation = id
 
 
 func _on_ExportDialog_confirmed() -> void:
 	Global.current_project.export_overwrite = false
-	if Export.export_processed_images(false, self, Global.current_project):
+	if await Export.export_processed_images(false, self, Global.current_project):
 		hide()
 
 
@@ -349,7 +344,7 @@ func _on_FileDialog_dir_selected(dir: String) -> void:
 
 
 func _on_FileFormat_item_selected(idx: int) -> void:
-	var id := file_format_options.get_item_id(idx)
+	var id := file_format_options.get_item_id(idx) as Export.FileFormat
 	Global.current_project.file_format = id
 	if not Export.is_single_file_format():
 		get_tree().set_group("ExportMultipleFilesOptions", "disabled", false)
@@ -365,7 +360,7 @@ func _on_FileExistsAlert_confirmed() -> void:
 	# Overwrite existing file
 	file_exists_alert_popup.dialog_text = Export.file_exists_alert
 	Export.stop_export = false
-	emit_signal("resume_export_function")
+	resume_export_function.emit()
 
 
 func _on_FileExistsAlert_custom_action(action: String) -> void:
@@ -373,7 +368,7 @@ func _on_FileExistsAlert_custom_action(action: String) -> void:
 		# Cancel export
 		file_exists_alert_popup.dialog_text = Export.file_exists_alert
 		Export.stop_export = true
-		emit_signal("resume_export_function")
+		resume_export_function.emit()
 		file_exists_alert_popup.hide()
 
 

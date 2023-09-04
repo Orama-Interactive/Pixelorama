@@ -1,12 +1,12 @@
 extends "res://src/Tools/Draw.gd"
 
 var _prev_mode := false
-var _last_position := Vector2.INF
+var _last_position := Vector2i(Vector2.INF)
 var _changed := false
 var _overwrite := false
 var _fill_inside := false
-var _draw_points := Array()
-var _old_spacing_mode := false  # needed to reset spacing mode in case we change it
+var _draw_points := PackedVector2Array()
+var _old_spacing_mode := false  ## Needed to reset spacing mode in case we change it
 
 
 class PencilOp:
@@ -55,17 +55,17 @@ func _input(event: InputEvent) -> void:
 	var overwrite_button: CheckBox = $Overwrite
 
 	if event.is_action_pressed("change_tool_mode"):
-		_prev_mode = overwrite_button.pressed
+		_prev_mode = overwrite_button.button_pressed
 	if event.is_action("change_tool_mode"):
-		overwrite_button.pressed = !_prev_mode
-		_overwrite = overwrite_button.pressed
+		overwrite_button.button_pressed = !_prev_mode
+		_overwrite = overwrite_button.button_pressed
 	if event.is_action_released("change_tool_mode"):
-		overwrite_button.pressed = _prev_mode
-		_overwrite = overwrite_button.pressed
+		overwrite_button.button_pressed = _prev_mode
+		_overwrite = overwrite_button.button_pressed
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["overwrite"] = _overwrite
 	config["fill_inside"] = _fill_inside
 	config["spacing_mode"] = _spacing_mode
@@ -74,7 +74,7 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	.set_config(config)
+	super.set_config(config)
 	_overwrite = config.get("overwrite", _overwrite)
 	_fill_inside = config.get("fill_inside", _fill_inside)
 	_spacing_mode = config.get("spacing_mode", _spacing_mode)
@@ -82,21 +82,21 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	.update_config()
-	$Overwrite.pressed = _overwrite
-	$FillInside.pressed = _fill_inside
-	$SpacingMode.pressed = _spacing_mode
+	super.update_config()
+	$Overwrite.button_pressed = _overwrite
+	$FillInside.button_pressed = _fill_inside
+	$SpacingMode.button_pressed = _spacing_mode
 	$Spacing.visible = _spacing_mode
 	$Spacing.value = _spacing
 
 
-func draw_start(position: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	_old_spacing_mode = _spacing_mode
-	position = snap_position(position)
-	.draw_start(position)
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
-		_pick_color(position)
+		_pick_color(pos)
 		return
 	_picking_color = false
 
@@ -108,7 +108,7 @@ func draw_start(position: Vector2) -> void:
 	_changed = false
 	_drawer.color_op.changed = false
 	_drawer.color_op.overwrite = _overwrite
-	_draw_points = Array()
+	_draw_points = []
 
 	prepare_undo("Draw")
 	_drawer.reset()
@@ -118,48 +118,48 @@ func draw_start(position: Vector2) -> void:
 		_spacing_mode = false  # spacing mode is disabled during line mode
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = (Global.current_project.size.x - 1) - position.x
-		_line_start = position
-		_line_end = position
+			pos.x = (Global.current_project.size.x - 1) - pos.x
+		_line_start = pos
+		_line_end = pos
 		update_line_polylines(_line_start, _line_end)
 	else:
 		if _fill_inside:
-			_draw_points.append(position)
-		draw_tool(position)
-		_last_position = position
+			_draw_points.append(pos)
+		draw_tool(pos)
+		_last_position = pos
 		Global.canvas.sprite_changed_this_frame = true
 	cursor_text = ""
 
 
-func draw_move(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_move(position)
+func draw_move(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("draw_color_picker"):
-			_pick_color(position)
+			_pick_color(pos)
 		return
 
 	if _draw_line:
 		_spacing_mode = false  # spacing mode is disabled during line mode
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = (Global.current_project.size.x - 1) - position.x
-		var d := _line_angle_constraint(_line_start, position)
+			pos.x = (Global.current_project.size.x - 1) - pos.x
+		var d := _line_angle_constraint(_line_start, pos)
 		_line_end = d.position
 		cursor_text = d.text
 		update_line_polylines(_line_start, _line_end)
 	else:
-		draw_fill_gap(_last_position, position)
-		_last_position = position
+		draw_fill_gap(_last_position, pos)
+		_last_position = pos
 		cursor_text = ""
 		Global.canvas.sprite_changed_this_frame = true
 		if _fill_inside:
-			_draw_points.append(position)
+			_draw_points.append(pos)
 
 
-func draw_end(position: Vector2) -> void:
-	position = snap_position(position)
-	.draw_end(position)
+func draw_end(pos: Vector2i) -> void:
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	if _picking_color:
 		return
 
@@ -174,15 +174,15 @@ func draw_end(position: Vector2) -> void:
 		_draw_line = false
 	else:
 		if _fill_inside:
-			_draw_points.append(position)
+			_draw_points.append(pos)
 			if _draw_points.size() > 3:
-				var v = Vector2()
-				var image_size = Global.current_project.size
+				var v := Vector2i()
+				var image_size := Global.current_project.size
 				for x in image_size.x:
 					v.x = x
 					for y in image_size.y:
 						v.y = y
-						if Geometry.is_point_in_polygon(v, _draw_points):
+						if Geometry2D.is_point_in_polygon(v, _draw_points):
 							if _spacing_mode:
 								# use of get_spacing_position() in Pencil.gd is a rare case
 								# (you would ONLY need _spacing_mode and _spacing in most cases)
@@ -195,7 +195,7 @@ func draw_end(position: Vector2) -> void:
 	_spacing_mode = _old_spacing_mode
 
 
-func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
 	_changed = true
 	var images := _get_selected_draw_images()
 	if _overwrite:

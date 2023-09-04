@@ -5,43 +5,43 @@ extends ConfirmationDialog
 
 enum { SELECTED_CELS, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
-var affect := SELECTED_CELS
-var selected_cels := Image.new()
-var current_frame := Image.new()
+var affect: int = SELECTED_CELS
+var selected_cels: Image
+var current_frame: Image
 var preview_image := Image.new()
 var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
 var animate_panel: AnimatePanel
-var commit_idx := -1  # the current frame, image effect is applied to
-var confirmed := false
-var _preview_idx := 0  # the current frame, being previewed
+var commit_idx := -1  ## The current frame the image effect is being applied to
+var has_been_confirmed := false
+var _preview_idx := 0  ## The current frame being previewed
 
 
 func _ready() -> void:
 	set_nodes()
-	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	current_frame.create(
+	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	current_frame = Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	selected_cels.create(
+	selected_cels = Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	connect("about_to_show", self, "_about_to_show")
-	connect("popup_hide", self, "_popup_hide")
-	connect("confirmed", self, "_confirmed")
+	about_to_popup.connect(_about_to_popup)
+	visibility_changed.connect(_visibility_changed)
+	confirmed.connect(_confirmed)
 	if selection_checkbox:
-		selection_checkbox.connect("toggled", self, "_on_SelectionCheckBox_toggled")
+		selection_checkbox.toggled.connect(_on_SelectionCheckBox_toggled)
 	if affect_option_button:
-		affect_option_button.connect("item_selected", self, "_on_AffectOptionButton_item_selected")
+		affect_option_button.item_selected.connect(_on_AffectOptionButton_item_selected)
 	if animate_panel:
-		$"%ShowAnimate".connect("pressed", self, "display_animate_dialog")
+		$"%ShowAnimate".pressed.connect(display_animate_dialog)
 
 
-func _about_to_show() -> void:
-	confirmed = false
+func _about_to_popup() -> void:
+	has_been_confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	prepare_animator(Global.current_project)
 	set_and_update_preview_image(Global.current_project.current_frame)
@@ -50,11 +50,11 @@ func _about_to_show() -> void:
 
 # prepares "animate_panel.frames" according to affect
 func prepare_animator(project: Project) -> void:
-	var frames = []
+	var frames: PackedInt32Array = []
 	if affect == SELECTED_CELS:
-		for fram_layer in project.selected_cels:
-			if not fram_layer[0] in frames:
-				frames.append(fram_layer[0])
+		for frame_layer in project.selected_cels:
+			if not frame_layer[0] in frames:
+				frames.append(frame_layer[0])
 		frames.sort()  # To always start animating from left side of the timeline
 		animate_panel.frames = frames
 	elif affect == FRAME:
@@ -67,21 +67,20 @@ func prepare_animator(project: Project) -> void:
 
 
 func _confirmed() -> void:
-	confirmed = true
+	has_been_confirmed = true
 	commit_idx = -1
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if affect == SELECTED_CELS:
 		prepare_animator(project)
 		var undo_data := _get_undo_data(project)
 		for cel_index in project.selected_cels:
 			if !project.layers[cel_index[1]].can_layer_get_drawn():
 				continue
-			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+			var cel := project.frames[cel_index[0]].cels[cel_index[1]]
 			if not cel is PixelCel:
 				continue
-			var cel_image: Image = cel.image
 			commit_idx = cel_index[0]  # frame is cel_index[0] in this mode
-			commit_action(cel_image)
+			commit_action(cel.image)
 		_commit_undo("Draw", undo_data, project)
 
 	elif affect == FRAME:
@@ -132,7 +131,7 @@ func _confirmed() -> void:
 			_commit_undo("Draw", undo_data, _project)
 
 
-func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
+func commit_action(_cel: Image, _project := Global.current_project) -> void:
 	pass
 
 
@@ -146,8 +145,8 @@ func set_nodes() -> void:
 
 func display_animate_dialog():
 	var animate_dialog: Popup = animate_panel.get_parent()
-	var pos = Vector2(rect_global_position.x + rect_size.x, rect_global_position.y)
-	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.rect_size.x, rect_size.y))
+	var pos := Vector2(position.x + size.x, position.y)
+	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.size.x, size.y))
 	animate_dialog.popup(animate_dialog_rect)
 	animate_panel.re_calibrate_preview_slider()
 
@@ -160,8 +159,8 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
 	for image in undo_data:
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false, -1, -1, project)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, -1, -1, project)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, -1, -1, project))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, -1, -1, project))
 	project.undo_redo.commit_action()
 
 
@@ -169,23 +168,22 @@ func _get_undo_data(project: Project) -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images(project)
 	for image in images:
-		image.unlock()
 		data[image] = image.data
 	return data
 
 
-func _get_selected_draw_images(project: Project) -> Array:  # Array of Images
-	var images := []
+func _get_selected_draw_images(project: Project) -> Array[Image]:
+	var images: Array[Image] = []
 	if affect == SELECTED_CELS:
 		for cel_index in project.selected_cels:
 			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 			if cel is PixelCel:
-				images.append(cel.image)
+				images.append(cel.get_image())
 	else:
 		for frame in project.frames:
 			for cel in frame.cels:
 				if cel is PixelCel:
-					images.append(cel.image)
+					images.append(cel.get_image())
 	return images
 
 
@@ -203,7 +201,7 @@ func _on_AffectOptionButton_item_selected(index: int) -> void:
 
 func set_and_update_preview_image(frame_idx: int) -> void:
 	_preview_idx = frame_idx
-	var frame: Frame = Global.current_project.frames[frame_idx]
+	var frame := Global.current_project.frames[frame_idx]
 	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
 	selected_cels.fill(Color(0, 0, 0, 0))
 	Export.blend_selected_cels(selected_cels, frame)
@@ -221,30 +219,25 @@ func update_preview() -> void:
 			preview_image.copy_from(current_frame)
 	commit_idx = _preview_idx
 	commit_action(preview_image)
-	preview_image.unlock()
-	preview_texture.create_from_image(preview_image, 0)
+	preview_texture = ImageTexture.create_from_image(preview_image)
 	preview.texture = preview_texture
 
 
 func update_transparent_background_size() -> void:
 	if !preview:
 		return
-	var image_size_y := preview.rect_size.y
-	var image_size_x := preview.rect_size.x
+	var image_size_y := preview.size.y
+	var image_size_x := preview.size.x
 	if preview_image.get_size().x > preview_image.get_size().y:
-		var scale_ratio = preview_image.get_size().x / image_size_x
+		var scale_ratio := preview_image.get_size().x / image_size_x
 		image_size_y = preview_image.get_size().y / scale_ratio
 	else:
-		var scale_ratio = preview_image.get_size().y / image_size_y
+		var scale_ratio := preview_image.get_size().y / image_size_y
 		image_size_x = preview_image.get_size().x / scale_ratio
 
-	preview.get_node("TransparentChecker").rect_size.x = image_size_x
-	preview.get_node("TransparentChecker").rect_size.y = image_size_y
+	preview.get_node("TransparentChecker").size.x = image_size_x
+	preview.get_node("TransparentChecker").size.y = image_size_y
 
 
-func _popup_hide() -> void:
+func _visibility_changed() -> void:
 	Global.dialog_open(false)
-
-
-func _is_webgl1() -> bool:
-	return OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2

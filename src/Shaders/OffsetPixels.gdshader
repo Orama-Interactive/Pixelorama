@@ -12,7 +12,7 @@ void fragment() {
 	if (wrap_around) {
 		uv = fract(uv);
 	}
-	
+
 	vec4 output = texture(TEXTURE, uv);
 	// Cut original selected content
 	original_color.a = 0.0 * step(0.5, selection_color.a) + original_color.a * step(selection_color.a, 0.5);

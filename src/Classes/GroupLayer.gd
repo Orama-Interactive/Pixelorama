@@ -1,40 +1,35 @@
 class_name GroupLayer
 extends BaseLayer
-# A class for group layer properties
+## A class for group layer properties
 
 var expanded := true
 
 
-func _init(_project, _name := "") -> void:
+func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
 
 
-func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
-	var image := Image.new()
-	image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+## Blends all of the images of children layer of the group layer into a single image.
+func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
+	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	var children := get_children(false)
-	var blend_rect := Rect2(Vector2.ZERO, project.size)
+	var blend_rect := Rect2i(Vector2i.ZERO, project.size)
 	for layer in children:
 		if not layer.is_visible_in_hierarchy():
 			continue
-		# Checks if layer is GroupLayer, cannot define this due to cyclic reference error
-		if layer is get_script():
+		if layer is GroupLayer:
 			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
 		else:
-			var cel: BaseCel = frame.cels[layer.index]
+			var cel := frame.cels[layer.index]
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.get_image())
-			if cel.opacity < 1:  # If we have cel transparency
-				cel_image.lock()
+			if cel.opacity < 1.0:  # If we have cel transparency
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
 						var pixel_color := cel_image.get_pixel(xx, yy)
-						var alpha: float = pixel_color.a * cel.opacity
-						cel_image.set_pixel(
-							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-						)
-				cel_image.unlock()
+						pixel_color.a *= cel.opacity
+						cel_image.set_pixel(xx, yy, pixel_color)
 			image.blend_rect(cel_image, blend_rect, origin)
 	return image
 
@@ -43,14 +38,14 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 
 
 func serialize() -> Dictionary:
-	var data := .serialize()
+	var data := super.serialize()
 	data["type"] = get_layer_type()
 	data["expanded"] = expanded
 	return data
 
 
 func deserialize(dict: Dictionary) -> void:
-	.deserialize(dict)
+	super.deserialize(dict)
 	expanded = dict.expanded
 
 
@@ -71,4 +66,4 @@ func accepts_child(_layer: BaseLayer) -> bool:
 
 
 func instantiate_layer_button() -> Node:
-	return Global.group_layer_button_node.instance()
+	return Global.group_layer_button_node.instantiate()

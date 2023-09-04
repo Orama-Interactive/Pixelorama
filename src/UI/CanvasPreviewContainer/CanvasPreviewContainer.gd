@@ -1,14 +1,23 @@
 extends PanelContainer
 
-onready var canvas_preview := $"%CanvasPreview" as Node2D
-onready var camera := $"%CameraPreview" as Camera2D
-onready var play_button := $"%PlayButton" as Button
-onready var start_frame := $"%StartFrame" as ValueSlider
-onready var end_frame := $"%EndFrame" as ValueSlider
+@onready var preview_zoom_slider := $VBox/HBox/VBoxContainer/PreviewZoomSlider as VSlider
+@onready var canvas_preview := $"%CanvasPreview" as Node2D
+@onready var camera := $"%CameraPreview" as Camera2D
+@onready var play_button := $"%PlayButton" as Button
+@onready var start_frame := $"%StartFrame" as ValueSlider
+@onready var end_frame := $"%EndFrame" as ValueSlider
+
+
+func _ready() -> void:
+	camera.zoom_changed.connect(_zoom_changed)
+
+
+func _zoom_changed() -> void:
+	preview_zoom_slider.value = camera.zoom.x
 
 
 func _on_PreviewZoomSlider_value_changed(value: float) -> void:
-	camera.zoom = -Vector2(value, value)
+	camera.zoom = Vector2(value, value)
 	camera.save_values_to_project()
 	camera.update_transparent_checker_offset()
 
@@ -17,11 +26,11 @@ func _on_PlayButton_toggled(button_pressed: bool) -> void:
 	if button_pressed:
 		if canvas_preview.mode == canvas_preview.Mode.TIMELINE:
 			if Global.current_project.frames.size() <= 1:
-				play_button.pressed = false
+				play_button.button_pressed = false
 				return
 		else:
 			if start_frame.value == end_frame.value:
-				play_button.pressed = false
+				play_button.button_pressed = false
 				return
 		canvas_preview.animation_timer.start()
 		Global.change_button_texturerect(play_button.get_child(0), "pause.png")
@@ -31,7 +40,7 @@ func _on_PlayButton_toggled(button_pressed: bool) -> void:
 
 
 func _on_OptionButton_item_selected(index: int) -> void:
-	play_button.pressed = false
+	play_button.button_pressed = false
 	canvas_preview.mode = index
 	if index == 0:
 		$VBox/Animation/VBoxContainer/Options.visible = false
@@ -40,7 +49,7 @@ func _on_OptionButton_item_selected(index: int) -> void:
 		)
 	else:
 		$VBox/Animation/VBoxContainer/Options.visible = true
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_HFrames_value_changed(value: float) -> void:
@@ -48,7 +57,7 @@ func _on_HFrames_value_changed(value: float) -> void:
 	var frames: int = canvas_preview.h_frames * canvas_preview.v_frames
 	start_frame.max_value = frames
 	end_frame.max_value = frames
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_VFrames_value_changed(value: float) -> void:
@@ -56,7 +65,7 @@ func _on_VFrames_value_changed(value: float) -> void:
 	var frames: int = canvas_preview.h_frames * canvas_preview.v_frames
 	start_frame.max_value = frames
 	end_frame.max_value = frames
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_StartFrame_value_changed(value: float) -> void:
@@ -64,7 +73,7 @@ func _on_StartFrame_value_changed(value: float) -> void:
 	canvas_preview.start_sprite_sheet_frame = value
 	if end_frame.value < value:
 		end_frame.value = value
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_EndFrame_value_changed(value: float) -> void:
@@ -72,7 +81,7 @@ func _on_EndFrame_value_changed(value: float) -> void:
 	if start_frame.value > value:
 		start_frame.value = value
 		canvas_preview.frame_index = value - 1
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_PreviewViewportContainer_mouse_entered() -> void:

@@ -3,20 +3,18 @@ extends Node
 
 # Presets for creating a new palette
 enum NewPalettePresetType {
-	EMPTY = 0,
-	FROM_CURRENT_PALETTE = 1,
-	FROM_CURRENT_SPRITE = 2,
-	FROM_CURRENT_SELECTION = 3
+	EMPTY = 0, FROM_CURRENT_PALETTE = 1, FROM_CURRENT_SPRITE = 2, FROM_CURRENT_SELECTION = 3
 }
 
 # Color options when user creates a new palette from current sprite or selection
 enum GetColorsFrom { CURRENT_FRAME = 0, CURRENT_CEL = 1, ALL_FRAMES = 2 }
 
-const DEFAULT_PALETTE_NAME = "Default"
+const DEFAULT_PALETTE_NAME := "Default"
+var palettes_write_path := Global.home_data_directory.path_join("Palettes")
 # All available palettes
 var palettes := {}
 # Currently displayed palette
-var current_palette = null
+var current_palette: Palette = null
 
 # Indexes of colors that are selected in palette
 # by left and right mouse button
@@ -64,23 +62,27 @@ func _current_palette_save() -> String:
 	return save_path
 
 
-func _save_palette(palette: Palette) -> String:
-	Global.directory_module.ensure_xdg_user_dirs_exist()
-	var palettes_write_path: String = Global.directory_module.get_palette_write_path()
+func _ensure_palette_directory_exists() -> void:
+	var dir := DirAccess.open(Global.home_data_directory)
+	if not dir.dir_exists(palettes_write_path):
+		dir.make_dir(palettes_write_path)
 
+
+func _save_palette(palette: Palette) -> String:
+	_ensure_palette_directory_exists()
 	# Save old resource name and set new resource name
-	var old_resource_name = palette.resource_name
+	var old_resource_name := palette.resource_name
 	palette.set_resource_name(palette.name)
 
 	# If resource name changed remove the old palette file
 	if old_resource_name != palette.resource_name:
-		var old_palette = palettes_write_path.plus_file(old_resource_name) + ".tres"
+		var old_palette := palettes_write_path.path_join(old_resource_name) + ".tres"
 		_delete_palette(old_palette)
 
 	# Save palette
-	var save_path = palettes_write_path.plus_file(palette.resource_name) + ".tres"
+	var save_path := palettes_write_path.path_join(palette.resource_name) + ".tres"
 	palette.resource_path = save_path
-	var err = ResourceSaver.save(save_path, palette)
+	var err := ResourceSaver.save(palette, save_path)
 	if err != OK:
 		Global.notification_label("Failed to save palette")
 	return save_path
@@ -88,93 +90,95 @@ func _save_palette(palette: Palette) -> String:
 
 func create_new_palette(
 	preset: int,
-	name: String,
+	palette_name: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ) -> void:
-	_check_palette_settings_values(name, width, height)
+	_check_palette_settings_values(palette_name, width, height)
 	match preset:
 		NewPalettePresetType.EMPTY:
-			_create_new_empty_palette(name, comment, width, height)
+			_create_new_empty_palette(palette_name, comment, width, height)
 		NewPalettePresetType.FROM_CURRENT_PALETTE:
-			_create_new_palette_from_current_palette(name, comment)
+			_create_new_palette_from_current_palette(palette_name, comment)
 		NewPalettePresetType.FROM_CURRENT_SPRITE:
 			_create_new_palette_from_current_sprite(
-				name, comment, width, height, add_alpha_colors, get_colors_from
+				palette_name, comment, width, height, add_alpha_colors, get_colors_from
 			)
 		NewPalettePresetType.FROM_CURRENT_SELECTION:
 			_create_new_palette_from_current_selection(
-				name, comment, width, height, add_alpha_colors, get_colors_from
+				palette_name, comment, width, height, add_alpha_colors, get_colors_from
 			)
 
 
-func _create_new_empty_palette(name: String, comment: String, width: int, height: int) -> void:
-	var new_palette: Palette = Palette.new(name, width, height, comment)
+func _create_new_empty_palette(
+	palette_name: String, comment: String, width: int, height: int
+) -> void:
+	var new_palette: Palette = Palette.new(palette_name, width, height, comment)
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
 
 
-func _create_new_palette_from_current_palette(name: String, comment: String) -> void:
+func _create_new_palette_from_current_palette(palette_name: String, comment: String) -> void:
 	if !current_palette:
 		return
-	var new_palette: Palette = current_palette.duplicate()
-	new_palette.name = name
+	var new_palette := current_palette.duplicate() as Palette
+	new_palette.name = palette_name
 	new_palette.comment = comment
-	new_palette.set_resource_name(name)
+	new_palette.set_resource_name(palette_name)
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
 
 
 func _create_new_palette_from_current_selection(
-	name: String,
+	palette_name: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ):
-	var new_palette: Palette = Palette.new(name, width, height, comment)
-	var current_project = Global.current_project
-	var pixels := []
+	var new_palette := Palette.new(palette_name, width, height, comment)
+	var current_project := Global.current_project
+	var pixels: Array[Vector2i] = []
 	for x in current_project.size.x:
 		for y in current_project.size.y:
-			var pos := Vector2(x, y)
+			var pos := Vector2i(x, y)
 			if current_project.selection_map.is_pixel_selected(pos):
 				pixels.append(pos)
 	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from)
 
 
 func _create_new_palette_from_current_sprite(
-	name: String,
+	palette_name: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ):
-	var new_palette: Palette = Palette.new(name, width, height, comment)
-	var current_project = Global.current_project
-	var pixels := []
+	var new_palette := Palette.new(palette_name, width, height, comment)
+	var current_project := Global.current_project
+	var pixels: Array[Vector2i] = []
 	for x in current_project.size.x:
 		for y in current_project.size.y:
-			pixels.append(Vector2(x, y))
+			pixels.append(Vector2i(x, y))
 	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from)
 
 
 func _fill_new_palette_with_colors(
-	pixels: Array, new_palette: Palette, add_alpha_colors: bool, get_colors_from: int
+	pixels: Array[Vector2i], new_palette: Palette, add_alpha_colors: bool, get_colors_from: int
 ):
-	var current_project = Global.current_project
-	var cels := []
+	var current_project := Global.current_project
+	var cels: Array[BaseCel] = []
 	match get_colors_from:
 		GetColorsFrom.CURRENT_CEL:
 			for cel_index in current_project.selected_cels:
-				var cel = current_project.frames[cel_index[0]].cels[cel_index[1]]
+				var cel := current_project.frames[cel_index[0]].cels[cel_index[1]]
 				cels.append(cel)
 		GetColorsFrom.CURRENT_FRAME:
 			for cel in current_project.frames[current_project.current_frame].cels:
@@ -187,33 +191,30 @@ func _fill_new_palette_with_colors(
 	for cel in cels:
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
-		cel_image.lock()
 		if cel_image.is_invisible():
 			continue
 		for i in pixels:
-			var color: Color = cel_image.get_pixelv(i)
+			var color := cel_image.get_pixelv(i)
 			if color.a > 0:
 				if not add_alpha_colors:
 					color.a = 1
-				if not new_palette.has_color(color):
+				if not new_palette.has_theme_color(color):
 					new_palette.add_color(color)
-		cel_image.unlock()
 
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
 
 
-func current_palette_edit(name: String, comment: String, width: int, height: int) -> void:
-	_check_palette_settings_values(name, width, height)
-	current_palette.edit(name, width, height, comment)
-	var palette_path = _current_palette_save()
+func current_palette_edit(palette_name: String, comment: String, width: int, height: int) -> void:
+	_check_palette_settings_values(palette_name, width, height)
+	current_palette.edit(palette_name, width, height, comment)
+	var palette_path := _current_palette_save()
 	palettes[palette_path] = current_palette
 
 
 func _delete_palette(path: String) -> void:
-	var dir = Directory.new()
-	dir.remove(path)
+	DirAccess.open(path).remove(path)
 	palettes.erase(path)
 
 
@@ -229,10 +230,10 @@ func current_palete_delete() -> void:
 func current_palette_add_color(mouse_button: int, start_index: int = 0) -> void:
 	if (
 		not current_palette.is_full()
-		and (mouse_button == BUTTON_LEFT or mouse_button == BUTTON_RIGHT)
+		and (mouse_button == MOUSE_BUTTON_LEFT or mouse_button == MOUSE_BUTTON_RIGHT)
 	):
 		# Get color on left or right tool
-		var color = Tools.get_assigned_color(mouse_button)
+		var color := Tools.get_assigned_color(mouse_button)
 		current_palette.add_color(color, start_index)
 		_current_palette_save()
 
@@ -253,7 +254,7 @@ func current_palette_delete_color(index: int) -> void:
 
 func current_palette_swap_colors(source_index: int, target_index: int) -> void:
 	current_palette.swap_colors(source_index, target_index)
-	_select_color(BUTTON_LEFT, target_index)
+	_select_color(MOUSE_BUTTON_LEFT, target_index)
 	_current_palette_save()
 
 
@@ -271,23 +272,23 @@ func current_palette_insert_color(from: int, to: int) -> void:
 
 func current_palette_get_selected_color_index(mouse_button: int) -> int:
 	match mouse_button:
-		BUTTON_LEFT:
+		MOUSE_BUTTON_LEFT:
 			return left_selected_color
-		BUTTON_RIGHT:
+		MOUSE_BUTTON_RIGHT:
 			return right_selected_color
 		_:
 			return -1
 
 
 func current_palette_select_color(mouse_button: int, index: int) -> void:
-	var color = current_palette_get_color(index)
+	var color := current_palette_get_color(index)
 	if color == null:
 		return
 
 	match mouse_button:
-		BUTTON_LEFT:
+		MOUSE_BUTTON_LEFT:
 			Tools.assign_color(color, mouse_button)
-		BUTTON_RIGHT:
+		MOUSE_BUTTON_RIGHT:
 			Tools.assign_color(color, mouse_button)
 
 	_select_color(mouse_button, index)
@@ -295,9 +296,9 @@ func current_palette_select_color(mouse_button: int, index: int) -> void:
 
 func _select_color(mouse_button: int, index: int) -> void:
 	match mouse_button:
-		BUTTON_LEFT:
+		MOUSE_BUTTON_LEFT:
 			left_selected_color = index
-		BUTTON_RIGHT:
+		MOUSE_BUTTON_RIGHT:
 			right_selected_color = index
 
 
@@ -314,37 +315,36 @@ func current_palette_is_full() -> bool:
 	return current_palette.is_full()
 
 
-func _check_palette_settings_values(name: String, width: int, height: int) -> bool:
+func _check_palette_settings_values(palette_name: String, width: int, height: int) -> bool:
 	# Just in case. These values should be not allowed in gui.
-	if name.length() <= 0 or width <= 0 or height <= 0:
+	if palette_name.length() <= 0 or width <= 0 or height <= 0:
 		printerr("Palette width, height and name length must be greater than 0!")
 		return false
 	return true
 
 
 func _load_palettes() -> void:
-	Global.directory_module.ensure_xdg_user_dirs_exist()
-	var search_locations = Global.directory_module.get_palette_search_path_in_order()
+	_ensure_palette_directory_exists()
+	var search_locations := Global.path_join_array(Global.data_directories, "Palettes")
 	var priority_ordered_files := _get_palette_priority_file_map(search_locations)
-	var palettes_write_path: String = Global.directory_module.get_palette_write_path()
 
 	# Iterate backwards, so any palettes defined in default files
 	# get overwritten by those of the same name in user files
-	search_locations.invert()
-	priority_ordered_files.invert()
+	search_locations.reverse()
+	priority_ordered_files.reverse()
 	var default_palette_name = Global.config_cache.get_value(
 		"data", "last_palette", DEFAULT_PALETTE_NAME
 	)
-	for i in range(len(search_locations)):
+	for i in range(search_locations.size()):
 		# If palette is not in palettes write path - make its copy in the write path
 		var make_copy := false
 		if search_locations[i] != palettes_write_path:
 			make_copy = true
 
-		var base_directory: String = search_locations[i]
+		var base_directory := search_locations[i]
 		var palette_files: Array = priority_ordered_files[i]
 		for file_name in palette_files:
-			var palette: Palette = load(base_directory.plus_file(file_name))
+			var palette := load(base_directory.path_join(file_name)) as Palette
 			if palette:
 				if make_copy:
 					_save_palette(palette)  # Makes a copy of the palette
@@ -394,17 +394,16 @@ func _get_palette_priority_file_map(looking_paths: Array) -> Array:
 # Get the palette files in a single directory.
 # if it does not exist, return []
 func _get_palette_files(path: String) -> Array:
-	var dir := Directory.new()
-	var results = []
+	var dir := DirAccess.open(path)
+	var results := []
 
-	if not dir.dir_exists(path):
+	if not is_instance_valid(dir) or not dir.dir_exists(path):
 		return []
 
-	dir.open(path)
 	dir.list_dir_begin()
 
 	while true:
-		var file_name = dir.get_next()
+		var file_name := dir.get_next()
 		if file_name == "":
 			break
 		elif (
@@ -422,11 +421,11 @@ func _get_palette_files(path: String) -> Array:
 # If none is found in the directories, then do nothing and return null
 func _get_best_palette_file_location(looking_paths: Array, fname: String):  # -> String:
 	var priority_fmap: Array = _get_palette_priority_file_map(looking_paths)
-	for i in range(len(looking_paths)):
+	for i in range(looking_paths.size()):
 		var base_path: String = looking_paths[i]
 		var the_files: Array = priority_fmap[i]
 		if the_files.has(fname):
-			return base_path.plus_file(fname)
+			return base_path.path_join(fname)
 	return null
 
 
@@ -438,18 +437,12 @@ func import_palette_from_path(path: String) -> void:
 	var palette: Palette = null
 	match path.to_lower().get_extension():
 		"gpl":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
-				var text = file.get_as_text()
-				file.close()
+			if FileAccess.file_exists(path):
+				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_gpl(path, text)
 		"pal":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
-				var text = file.get_as_text()
-				file.close()
+			if FileAccess.file_exists(path):
+				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_pal_palette(path, text)
 		"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp":
 			var image := Image.new()
@@ -457,11 +450,8 @@ func import_palette_from_path(path: String) -> void:
 			if !err:
 				palette = _import_image_palette(path, image)
 		"json":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
-				var text = file.get_as_text()
-				file.close()
+			if FileAccess.file_exists(path):
+				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_json_palette(text)
 
 	import_palette(palette, path.get_file())
@@ -488,11 +478,11 @@ func import_palette(palette: Palette, file_name: String) -> void:
 func _import_gpl(path: String, text: String) -> Palette:
 	# Refer to app/core/gimppalette-load.c of the GIMP for the "living spec"
 	var result: Palette = null
-	var lines = text.split("\n")
+	var lines := text.split("\n")
 	var line_number := 0
 	var palette_name := path.get_basename().get_file()
 	var comments := ""
-	var colors := PoolColorArray()
+	var colors := PackedColorArray()
 
 	for line in lines:
 		# Check if valid Gimp Palette Library file
@@ -513,11 +503,11 @@ func _import_gpl(path: String, text: String) -> Palette:
 			continue
 		elif line_number > 0 && line.length() >= 9:
 			line = line.replace("\t", " ")
-			var color_data: PoolStringArray = line.split(" ", false, 4)
+			var color_data: PackedStringArray = line.split(" ", false, 4)
 			var red: float = color_data[0].to_float() / 255.0
 			var green: float = color_data[1].to_float() / 255.0
 			var blue: float = color_data[2].to_float() / 255.0
-			var color = Color(red, green, blue)
+			var color := Color(red, green, blue)
 			if color_data.size() >= 4:
 				# Ignore color name for now - result.add_color(color, color_data[3])
 				colors.append(color)
@@ -527,7 +517,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 		line_number += 1
 
 	if line_number > 0:
-		var height: int = ceil(colors.size() / 8.0)
+		var height := ceili(colors.size() / 8.0)
 		result = Palette.new(palette_name, 8, height, comments)
 		for color in colors:
 			result.add_color(color)
@@ -537,13 +527,13 @@ func _import_gpl(path: String, text: String) -> Palette:
 
 func _import_pal_palette(path: String, text: String) -> Palette:
 	var result: Palette = null
-	var colors := PoolColorArray()
-	var lines = text.split("\n")
+	var colors := PackedColorArray()
+	var lines := text.split("\n")
 
 	if not "JASC-PAL" in lines[0] or not "0100" in lines[1]:
 		return result
 
-	var num_colors = int(lines[2])
+	var num_colors := int(lines[2])
 
 	for i in range(3, num_colors + 3):
 		var color_data = lines[i].split(" ")
@@ -551,10 +541,10 @@ func _import_pal_palette(path: String, text: String) -> Palette:
 		var green: float = color_data[1].to_float() / 255.0
 		var blue: float = color_data[2].to_float() / 255.0
 
-		var color = Color(red, green, blue)
+		var color := Color(red, green, blue)
 		colors.append(color)
 
-	var height: int = ceil(colors.size() / 8.0)
+	var height := ceili(colors.size() / 8.0)
 	result = Palette.new(path.get_basename().get_file(), 8, height)
 	for color in colors:
 		result.add_color(color)
@@ -563,19 +553,17 @@ func _import_pal_palette(path: String, text: String) -> Palette:
 
 func _import_image_palette(path: String, image: Image) -> Palette:
 	var colors := []
-	var height: int = image.get_height()
-	var width: int = image.get_width()
+	var height := image.get_height()
+	var width := image.get_width()
 
 	# Iterate all pixels and store unique colors to palette
-	image.lock()
 	for y in range(0, height):
 		for x in range(0, width):
-			var color: Color = image.get_pixel(x, y)
+			var color := image.get_pixel(x, y)
 			if !colors.has(color):
 				colors.append(color)
-	image.unlock()
 
-	var palette_height: int = ceil(colors.size() / 8.0)
+	var palette_height := ceili(colors.size() / 8.0)
 	var result: Palette = Palette.new(path.get_basename().get_file(), 8, palette_height)
 	for color in colors:
 		result.add_color(color)
@@ -583,10 +571,12 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 	return result
 
 
-# Import of deprecated older json palette format
+## Import of deprecated older json palette format
 func _import_json_palette(text: String) -> Palette:
-	var result: Palette = Palette.new()
-	var result_json = JSON.parse(text)
+	var result := Palette.new()
+	var test_json_conv := JSON.new()
+	test_json_conv.parse(text)
+	var result_json = test_json_conv.get_data()
 
 	if result_json.error != OK:  # If parse has errors
 		printerr("JSON palette import error")
@@ -602,7 +592,7 @@ func _import_json_palette(text: String) -> Palette:
 				result.comment = data.comments
 			if data.has("colors"):
 				for color_data in data.colors:
-					var color: Color = Color(color_data.data)
+					var color := Color(color_data.data)
 					result.add_color(color)
 
 	return result
