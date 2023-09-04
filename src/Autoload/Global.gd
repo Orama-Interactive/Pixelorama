@@ -565,7 +565,7 @@ func notification_label(text: String) -> void:
 	control.add_child(notif)
 
 
-func general_undo(project:= current_project) -> void:
+func general_undo(project := current_project) -> void:
 	project.undos -= 1
 	var action_name := project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)

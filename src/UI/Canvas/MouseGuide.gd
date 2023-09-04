@@ -34,7 +34,7 @@ func _input(event: InputEvent) -> void:
 			Vector2(0.5, 0.5)
 		)
 
-		var project_size: = Global.current_project.size
+		var project_size := Global.current_project.size
 		if Rect2(Vector2.ZERO, project_size).has_point(mouse_point):
 			visible = true
 		else:
