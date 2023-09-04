@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-08-28 12:13\n"
+"PO-Revision-Date: 2023-09-04 13:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1719,34 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "Frame actuelle en spritesheet"
 
 msgid "Jump to the first frame\n"
-"(%s)"
-msgstr "Aller à la première frame\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the previous frame\n"
-"(%s)"
-msgstr "Aller à la frame précédente\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "Jouer l'animation à l'envers (de la fin vers le début)\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "Jouer l'animation (du début vers la fin)\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "Aller à la prochaine frame\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
-msgstr "Aller à la dernière frame\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr "Paramètres de la peau d'oignon"
@@ -2688,6 +2676,10 @@ msgstr "Rebond à la fin"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
 msgstr ""
 
 msgid "Silhouette"
