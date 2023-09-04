@@ -47,12 +47,13 @@ func _ready() -> void:
 	var file_names: PackedStringArray = []
 	var dir := DirAccess.open("user://")
 	dir.make_dir(EXTENSIONS_PATH)
+	dir = DirAccess.open(EXTENSIONS_PATH)
 	if DirAccess.get_open_error() == OK:
 		dir.list_dir_begin()
 		var file_name := dir.get_next()
 		while file_name != "":
 			var ext := file_name.to_lower().get_extension()
-			if !dir.current_is_dir() and ext in ["pck", "zip"]:
+			if not dir.current_is_dir() and ext in ["pck", "zip"]:
 				file_names.append(file_name)
 			file_name = dir.get_next()
 		dir.list_dir_end()
@@ -65,8 +66,8 @@ func _ready() -> void:
 
 
 func install_extension(path: String) -> void:
-	var file_name: String = path.get_file()
-	var dir := DirAccess.open(path)
+	var file_name := path.get_file()
+	var dir := DirAccess.open(path.get_base_dir())
 	dir.copy(path, EXTENSIONS_PATH.path_join(file_name))
 	_add_extension(file_name)
 
@@ -128,8 +129,8 @@ func _add_extension(file_name: String) -> void:
 		await get_tree().process_frame
 		await get_tree().process_frame
 
-	var file_name_no_ext: String = file_name.get_basename()
-	var file_path: String = EXTENSIONS_PATH.path_join(file_name)
+	var file_name_no_ext := file_name.get_basename()
+	var file_path := EXTENSIONS_PATH.path_join(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
 	if !success:
 		print("Failed loading resource pack.")
@@ -137,8 +138,8 @@ func _add_extension(file_name: String) -> void:
 		dir.remove(file_path)
 		return
 
-	var extension_path: String = "res://src/Extensions/%s/" % file_name_no_ext
-	var extension_config_file_path: String = extension_path.path_join("extension.json")
+	var extension_path := "res://src/Extensions/%s/" % file_name_no_ext
+	var extension_config_file_path := extension_path.path_join("extension.json")
 	var extension_config_file := FileAccess.open(extension_config_file_path, FileAccess.READ)
 	var err := FileAccess.get_open_error()
 	if err != OK:
@@ -146,24 +147,25 @@ func _add_extension(file_name: String) -> void:
 		extension_config_file.close()
 		return
 
-	var test_json_conv = JSON.new()
+	var test_json_conv := JSON.new()
 	test_json_conv.parse(extension_config_file.get_as_text())
 	var extension_json = test_json_conv.get_data()
 	extension_config_file.close()
 
-	if !extension_json:
+	if not extension_json:
 		print("No JSON data found.")
 		return
 
 	if extension_json.has("supported_api_versions"):
 		var supported_api_versions = extension_json["supported_api_versions"]
 		if typeof(supported_api_versions) == TYPE_ARRAY:
-			if !ExtensionsApi.get_api_version() in supported_api_versions:
+			supported_api_versions = PackedInt32Array(supported_api_versions)
+			if not ExtensionsApi.get_api_version() in supported_api_versions:
 				var err_text := (
 					"The extension %s will not work on this version of Pixelorama \n"
 					% file_name_no_ext
 				)
-				var required_text := "Requires Api : %s" % str(supported_api_versions)
+				var required_text := "Requires API version: %s" % str(supported_api_versions)
 				Global.error_dialog.set_text(str(err_text, required_text))
 				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
