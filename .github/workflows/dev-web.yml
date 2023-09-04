@@ -34,6 +34,7 @@ jobs:
           apt-get update && apt-get install -y rsync
       # Workaround for SharedArrayBuffer support on GitHub Pages
       # See: https://github.com/godotengine/godot-docs/issues/7084
+      - name: Enable SharedArrayBuffer for GitHub Pages
       - run: |
           cd ./build/web
           curl -fsSL https://github.com/gzuidhof/coi-serviceworker/raw/master/coi-serviceworker.js > coi-serviceworker.js
