@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-08-28 12:14\n"
+"PO-Revision-Date: 2023-09-04 13:32\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1719,34 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "Поточний кадр як таблиця спрайтів"
 
 msgid "Jump to the first frame\n"
-"(%s)"
-msgstr "Перейти до першого кадру\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the previous frame\n"
-"(%s)"
-msgstr "Перейти до попереднього кадру\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "Відтворити анімацію зворотно (з кінця до початку)\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "Відтворити анімацію (з початку до кінця)\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "Перейти до наступного кадру\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
-msgstr "Перейти до останнього кадру\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr "Налаштування шлейфу сусідніх кадрів"
@@ -2688,6 +2676,10 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
 msgstr ""
 
 msgid "Silhouette"
