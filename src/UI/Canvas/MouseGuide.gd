@@ -28,13 +28,13 @@ func _input(event: InputEvent) -> void:
 		return
 	visible = true
 	if event is InputEventMouseMotion:
-		var tmp_transform = get_canvas_transform().affine_inverse()
-		var tmp_position = Global.main_viewport.get_local_mouse_position()
-		var mouse_point = (tmp_transform.basis_xform(tmp_position) + tmp_transform.origin).snapped(
+		var tmp_transform := get_canvas_transform().affine_inverse()
+		var tmp_position := Global.main_viewport.get_local_mouse_position()
+		var mouse_point := (tmp_transform.basis_xform(tmp_position) + tmp_transform.origin).snapped(
 			Vector2(0.5, 0.5)
 		)
 
-		var project_size = Global.current_project.size
+		var project_size: = Global.current_project.size
 		if Rect2(Vector2.ZERO, project_size).has_point(mouse_point):
 			visible = true
 		else:
@@ -51,11 +51,11 @@ func _input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	width = Global.camera.zoom.x * 2
-	var viewport_size: Vector2 = Global.main_viewport.size
-	var zoom: Vector2 = Global.camera.zoom
+	var viewport_size := Global.main_viewport.size
+	var zoom := Global.camera.zoom
 
 	# viewport_poly is an array of the points that make up the corners of the viewport
-	var viewport_poly := [
+	var viewport_poly: PackedVector2Array = [
 		Vector2.ZERO, Vector2(viewport_size.x, 0), viewport_size, Vector2(0, viewport_size.y)
 	]
 	# Adjusting viewport_poly to take into account the camera offset, zoom, and rotation

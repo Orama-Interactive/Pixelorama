@@ -410,7 +410,7 @@ func _ready() -> void:
 	default_fill_color = config_cache.get_value(
 		"preferences", "default_fill_color", default_fill_color
 	)
-	var proj_size := Vector2(default_width, default_height)
+	var proj_size := Vector2i(default_width, default_height)
 	projects.append(Project.new([], tr("untitled"), proj_size))
 	current_project = projects[0]
 	current_project.fill_color = default_fill_color
@@ -565,13 +565,13 @@ func notification_label(text: String) -> void:
 	control.add_child(notif)
 
 
-func general_undo(project: Project = current_project) -> void:
+func general_undo(project:= current_project) -> void:
 	project.undos -= 1
 	var action_name := project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
-func general_redo(project: Project = current_project) -> void:
+func general_redo(project := current_project) -> void:
 	if project.undos < project.undo_redo.get_version():  # If we did undo and then redo
 		project.undos = project.undo_redo.get_version()
 	if control.redone:
@@ -580,7 +580,7 @@ func general_redo(project: Project = current_project) -> void:
 
 
 func undo_or_redo(
-	undo: bool, frame_index := -1, layer_index := -1, project: Project = current_project
+	undo: bool, frame_index := -1, layer_index := -1, project := current_project
 ) -> void:
 	if undo:
 		general_undo(project)

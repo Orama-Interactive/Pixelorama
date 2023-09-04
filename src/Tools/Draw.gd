@@ -322,8 +322,8 @@ func _prepare_circle_tool(fill: bool) -> void:
 				)
 
 
-# Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
-# drawn if it can (except for the generic brush, when it's actually drawing them)
+## Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
+## drawn if it can (except for the generic brush, when it's actually drawing them)
 func _draw_tool(pos: Vector2) -> PackedVector2Array:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return PackedVector2Array()  # empty fallback

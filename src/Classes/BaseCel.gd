@@ -50,7 +50,7 @@ func get_image() -> Image:
 func update_texture() -> void:
 	texture_changed.emit()
 	if link_set != null:
-		var frame: int = Global.current_project.current_frame
+		var frame := Global.current_project.current_frame
 		# This check is needed in case the user has selected multiple cels that are also linked
 		if self in Global.current_project.frames[frame].cels:
 			for cel in link_set["cels"]:

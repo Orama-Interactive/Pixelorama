@@ -1,6 +1,6 @@
 class_name AnimationTag
 extends RefCounted
-# A class for frame tag properties
+## A class for frame tag properties
 
 var name: String
 var color: Color

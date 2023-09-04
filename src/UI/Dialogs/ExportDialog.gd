@@ -14,7 +14,9 @@ var image_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.GIF,
 	Export.FileFormat.APNG
 ]
-var spritesheet_exports := [Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG]
+var spritesheet_exports: Array[Export.FileFormat]= [
+	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG
+]
 
 @onready var tabs: TabBar = $VBoxContainer/TabBar
 @onready var checker: ColorRect = $"%TransparentChecker"
@@ -158,7 +160,6 @@ func create_preview_container() -> VBoxContainer:
 
 func create_preview_rect() -> TextureRect:
 	var preview := TextureRect.new()
-	preview.expand = true
 	preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	preview.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -180,7 +181,7 @@ func set_file_format_selector() -> void:
 
 ## Updates the suitable list of file formats. First is preferred.
 ## Note that if the current format is in the list, it stays for consistency.
-func _set_file_format_selector_suitable_file_formats(formats: Array) -> void:
+func _set_file_format_selector_suitable_file_formats(formats: Array[Export.FileFormat]) -> void:
 	var project := Global.current_project
 	file_format_options.clear()
 	var needs_update := true
@@ -362,8 +363,8 @@ func _on_FileFormat_item_selected(idx: int) -> void:
 	set_preview()
 
 
+## Overwrite existing file
 func _on_FileExistsAlert_confirmed() -> void:
-	# Overwrite existing file
 	file_exists_alert_popup.dialog_text = Export.file_exists_alert
 	Export.stop_export = false
 	resume_export_function.emit()

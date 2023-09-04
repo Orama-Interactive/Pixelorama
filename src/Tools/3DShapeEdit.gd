@@ -246,7 +246,7 @@ func _add_object(type: int, file_path := "") -> void:
 	var dict := {"type": type, "file_path": file_path}
 	var new_objects := _cel.object_properties.duplicate()
 	new_objects[_cel.current_object_id] = dict
-	var undo_redo: UndoRedo = Global.current_project.undo_redo
+	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add 3D object")
 	undo_redo.add_do_property(_cel, "object_properties", new_objects)
 	undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
@@ -277,7 +277,7 @@ func _on_RemoveObject_pressed() -> void:
 
 
 func _object_property_changed(object: Cel3DObject) -> void:
-	var undo_redo: UndoRedo = Global.current_project.undo_redo
+	var undo_redo := Global.current_project.undo_redo
 	var new_properties := _cel.object_properties.duplicate()
 	new_properties[object.id] = object.serialize()
 	undo_redo.create_action("Change object transform")

@@ -24,9 +24,9 @@ func _draw() -> void:
 	draw_set_transform(position_tmp, rotation, scale_tmp)
 
 	for i in range(1, rate + 1):
-		var change: int = project.current_frame
+		var change := project.current_frame
 		change += i if type == FUTURE else -i
-		if change == clamp(change, 0, project.frames.size() - 1):
+		if change == clampi(change, 0, project.frames.size() - 1):
 			var layer_i := 0
 			for cel in project.frames[change].cels:
 				var layer: BaseLayer = project.layers[layer_i]

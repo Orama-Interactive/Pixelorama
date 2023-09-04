@@ -1,9 +1,9 @@
 class_name GIFAnimationExporter
 extends AImgIOBaseExporter
-# Acts as the interface between the AImgIO format-independent interface and gdgifexporter.
-# Note that if the interface needs changing for new features, do just change it!
+## Acts as the interface between the AImgIO format-independent interface and gdgifexporter.
+## Note that if the interface needs changing for new features, do just change it!
 
-# Gif exporter
+## Gif exporter
 const GIFExporter := preload("res://addons/gdgifexporter/exporter.gd")
 const MedianCutQuantization := preload("res://addons/gdgifexporter/quantization/median_cut.gd")
 
