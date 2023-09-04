@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2023-08-28 12:14\n"
+"PO-Revision-Date: 2023-09-04 13:31\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -1670,34 +1670,22 @@ msgid "Current frame as spritesheet"
 msgstr ""
 
 msgid "Jump to the first frame\n"
-"(%s)"
-msgstr "קפיצה לפריים הראשון\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the previous frame\n"
-"(%s)"
-msgstr "מעבר לפריים הקודם\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "ניגון האנימציה לאחור (מהסוף להתחלה)\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "ניגון האנימציה קדימה (מההתחלה לסוף)\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "מעבר לפריים הבא\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
-msgstr "קפיצה לפריים האחרון\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr ""
@@ -2634,6 +2622,10 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
 msgstr ""
 
 msgid "Silhouette"
