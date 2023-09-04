@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-08-29 18:12\n"
+"PO-Revision-Date: 2023-09-04 13:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1718,34 +1718,22 @@ msgid "Current frame as spritesheet"
 msgstr "Quadro atual como spritesheet"
 
 msgid "Jump to the first frame\n"
-"(%s)"
-msgstr "Pular para o primeiro quadro\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the previous frame\n"
-"(%s)"
-msgstr "Ir para o quadro anterior\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "Toque a animação de trás pra frente (do fim até o começo)\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "Toque a animação de frente pra trás (do começo até o fim)\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "Ir para o proxímo quadro\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
-msgstr "Pular para o último quadro\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr "Configurações do Onion Skinning"
@@ -2688,6 +2676,10 @@ msgstr "Quicando no final"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr "Recuando nos finais"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr ""
 
 msgid "Silhouette"
 msgstr "Silhueta"
