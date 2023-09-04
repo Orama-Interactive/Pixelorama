@@ -36,7 +36,7 @@ jobs:
           echo 'export/windows/wine = "/usr/bin/wine"' >> ~/.config/godot/editor_settings-4.tres
           echo 'export/windows/rcedit = "/github/home/.local/share/rcedit/rcedit-x64.exe"' >> ~/.config/godot/editor_settings-4.tres
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup 💻
@@ -63,7 +63,7 @@ jobs:
       image: docker://barichello/godot-ci:4.1.1
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup 💻
@@ -96,7 +96,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup environment 🔧
