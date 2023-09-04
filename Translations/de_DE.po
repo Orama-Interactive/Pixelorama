@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-09-04 13:31\n"
+"PO-Revision-Date: 2023-09-04 15:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1718,22 +1718,22 @@ msgid "Current frame as spritesheet"
 msgstr "Aktueller Frame als Spritesheet"
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "Zum ersten Frame springen\n"
 
 msgid "Go to the previous frame\n"
-msgstr ""
+msgstr "Zum vorherigen Frame gehen\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-msgstr ""
+msgstr "Spiele die Animation rückwärts ab (vom Ende bis zum Anfang)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-msgstr ""
+msgstr "Spiele die Animation vorwärts ab (vom Anfang bis zum Ende)\n"
 
 msgid "Go to the next frame\n"
-msgstr ""
+msgstr "Gehe zum nächsten Frame\n"
 
 msgid "Jump to the last frame\n"
-msgstr ""
+msgstr "Springe zum letzten Frame\n"
 
 msgid "Onion Skinning settings"
 msgstr "Onion Skinning Einstellungen"
@@ -2678,7 +2678,7 @@ msgstr "Backing out am Ende"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "Zum Ende hinspringen"
 
 msgid "Silhouette"
 msgstr "Silhouette"
