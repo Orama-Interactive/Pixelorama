@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-09-04 13:31\n"
+"PO-Revision-Date: 2023-09-05 08:20\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1719,22 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "Model sayfası olarak geçerli kare"
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "İlk kareye atla\n"
 
 msgid "Go to the previous frame\n"
-msgstr ""
+msgstr "Önceki kareye git\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-msgstr ""
+msgstr "Animasyonu tersten oynat (sondan başa)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-msgstr ""
+msgstr "Animasyonu ileri oynat (baştan sonra)\n"
 
 msgid "Go to the next frame\n"
-msgstr ""
+msgstr "Sonraki kareye git\n"
 
 msgid "Jump to the last frame\n"
-msgstr ""
+msgstr "Son kareye atla\n"
 
 msgid "Onion Skinning settings"
 msgstr "Onion Skinning özellikleri"
@@ -2680,7 +2680,7 @@ msgstr "Sonunda geri çekilme"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "Sona doğru hızlan"
 
 msgid "Silhouette"
 msgstr "Silüet"
