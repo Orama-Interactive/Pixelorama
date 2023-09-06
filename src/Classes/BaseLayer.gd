@@ -2,10 +2,25 @@ class_name BaseLayer
 extends RefCounted
 ## Base class for layer properties. Different layer types extend from this class.
 
+enum BlendModes {
+	NORMAL,
+	ADD,
+	SUB,
+	MUL,
+	SCREEN,
+	DIFFERENCE,
+	BURN,
+	DODGE,
+	OVERLAY,
+	SOFT_LIGHT,
+	HARD_LIGHT,
+}
+
 var name := ""
 var project: Project
 var index: int
 var parent: BaseLayer
+var blend_mode := BlendModes.NORMAL
 var visible := true
 var locked := false
 var new_cels_linked := false

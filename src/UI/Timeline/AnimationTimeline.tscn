@@ -371,6 +371,43 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("5")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Blend mode:"
+
+[node name="BlendModes" type="OptionButton" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+item_count = 11
+selected = 0
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Add"
+popup/item_1/id = 1
+popup/item_2/text = "Subtract"
+popup/item_2/id = 2
+popup/item_3/text = "Multiply"
+popup/item_3/id = 3
+popup/item_4/text = "Screen"
+popup/item_4/id = 4
+popup/item_5/text = "Difference"
+popup/item_5/id = 5
+popup/item_6/text = "Burn"
+popup/item_6/id = 6
+popup/item_7/text = "Dodge"
+popup/item_7/id = 7
+popup/item_8/text = "Overlay"
+popup/item_8/id = 8
+popup/item_9/text = "Soft Light"
+popup/item_9/id = 9
+popup/item_10/text = "Hard Light"
+popup/item_10/id = 10
+
 [node name="BlendingHBox" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
@@ -920,6 +957,7 @@ script = ExtResource("12")
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [false]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
+[connection signal="item_selected" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer/BlendModes" to="." method="_on_blend_modes_item_selected"]
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/BlendingHBox/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]

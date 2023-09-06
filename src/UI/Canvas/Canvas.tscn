@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://ba24iuv55m4l3"]
+[gd_scene load_steps=20 format=3 uid="uid://ba24iuv55m4l3"]
 
 [ext_resource type="Script" path="res://src/UI/Canvas/Canvas.gd" id="1"]
+[ext_resource type="Shader" path="res://src/Shaders/BlendLayers.gdshader" id="1_253dh"]
 [ext_resource type="Script" path="res://src/UI/Canvas/Grid.gd" id="2"]
 [ext_resource type="Script" path="res://src/UI/Canvas/Indicators.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/Canvas/TileMode.gd" id="4"]
@@ -14,6 +15,11 @@
 [ext_resource type="Script" path="res://src/UI/Canvas/OnionSkinning.gd" id="12"]
 [ext_resource type="Script" path="res://src/UI/Canvas/CropRect.gd" id="13"]
 [ext_resource type="Script" path="res://src/UI/Canvas/Gizmos3D.gd" id="14"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6b0ox"]
+shader = ExtResource("1_253dh")
+shader_parameter/opacities = null
+shader_parameter/blend_modes = null
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 4
@@ -31,6 +37,7 @@ shader_parameter/stripe_direction = 0.5
 shader = ExtResource("10")
 
 [node name="Canvas" type="Node2D"]
+material = SubResource("ShaderMaterial_6b0ox")
 script = ExtResource("1")
 
 [node name="CurrentlyVisibleFrame" type="SubViewport" parent="."]

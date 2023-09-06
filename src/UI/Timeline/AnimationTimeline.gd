@@ -19,6 +19,7 @@ var frame_button_node := preload("res://src/UI/Timeline/FrameButton.tscn")
 @onready var tag_spacer = find_child("TagSpacer")
 @onready var start_spacer = find_child("StartSpacer")
 @onready var add_layer_list: MenuButton = $"%AddLayerList"
+@onready var blend_modes := %BlendModes as OptionButton
 
 @onready var timeline_scroll: ScrollContainer = find_child("TimelineScroll")
 @onready var frame_scroll_container: Control = find_child("FrameScrollContainer")
@@ -150,6 +151,11 @@ func _cel_size_changed(value: int) -> void:
 		tag_c.size.x = (tag_size + 1) * tag_base_size - 4
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.custom_minimum_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
+
+
+func _on_blend_modes_item_selected(index: int) -> void:
+	Global.current_project.layers[Global.current_project.current_layer].blend_mode = index
+	Global.canvas.draw_layers()
 
 
 func add_frame() -> void:
