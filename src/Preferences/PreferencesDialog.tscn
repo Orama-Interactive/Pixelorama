@@ -1308,6 +1308,7 @@ filters = PackedStringArray("*.pck ; Godot Resource Pack File", "*.zip ;")
 show_hidden_files = true
 
 [node name="Store" parent="Popups" instance=ExtResource("8_jmnx8")]
+transient = true
 
 [connection signal="about_to_popup" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="visibility_changed" from="." to="." method="_on_PreferencesDialog_visibility_changed"]
