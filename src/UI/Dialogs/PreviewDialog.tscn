@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4_e0gk1"]
 
 [node name="PreviewDialog" type="ConfirmationDialog"]
+canvas_item_default_texture_filter = 0
 size = Vector2i(316, 417)
 script = ExtResource("1")
 
