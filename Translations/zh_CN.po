@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-09-04 13:32\n"
+"PO-Revision-Date: 2023-09-07 02:40\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1719,22 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "当前帧为精灵表"
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "跳转到第一帧\n"
 
 msgid "Go to the previous frame\n"
-msgstr ""
+msgstr "转到上一帧\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-msgstr ""
+msgstr "向后播放动画(从结束到开始)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-msgstr ""
+msgstr "向前播放动画(从开始到结束)\n"
 
 msgid "Go to the next frame\n"
-msgstr ""
+msgstr "转到下一帧\n"
 
 msgid "Jump to the last frame\n"
-msgstr ""
+msgstr "跳转到最后一帧\n"
 
 msgid "Onion Skinning settings"
 msgstr "洋葱皮设置"
@@ -2680,7 +2680,7 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "跳转到结束"
 
 msgid "Silhouette"
 msgstr "轮廓"
