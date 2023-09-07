@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-09-07 02:40\n"
+"PO-Revision-Date: 2023-09-07 09:11\n"
 
 msgid "OK"
 msgstr "确定"
@@ -565,7 +565,7 @@ msgstr "组图层："
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D 图层："
 
 msgid "Direction:"
 msgstr "方向："
@@ -1507,7 +1507,7 @@ msgstr "打开文件夹"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "动态"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1535,11 +1535,11 @@ msgstr "阈值"
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "开始比赛"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "结束"
 
 msgid "Brush:"
 msgstr "画笔:"
@@ -1865,15 +1865,15 @@ msgstr "创建一个新的图层"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "添加像素图层"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "添加图层组"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "添加 3D 图层"
 
 msgid "Remove current layer"
 msgstr "移除当前图层"
@@ -2257,7 +2257,7 @@ msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "分隔符:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
@@ -2506,7 +2506,7 @@ msgid "Frustum"
 msgstr ""
 
 msgid "Rotation:"
-msgstr ""
+msgstr "旋转"
 
 msgid "Scale:"
 msgstr "缩放："
@@ -2529,7 +2529,7 @@ msgstr "可见："
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "变换"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
