@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-09-04 13:31\n"
+"PO-Revision-Date: 2023-09-08 14:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1719,22 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "Cadrul curent ca foaie cu grafice bidimensionale"
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "Sari la primul cadru\n"
 
 msgid "Go to the previous frame\n"
-msgstr ""
+msgstr "Mergi la cadrul anterior\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-msgstr ""
+msgstr "Redă animația înapoi (de la sfârșit până la început)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-msgstr ""
+msgstr "Redă animația înainte (de la început până la sfârșit)\n"
 
 msgid "Go to the next frame\n"
-msgstr ""
+msgstr "Mergi la cadrul următor\n"
 
 msgid "Jump to the last frame\n"
-msgstr ""
+msgstr "Sari la ultimul cadru\n"
 
 msgid "Onion Skinning settings"
 msgstr "Setări pentru cadre multiple simultane"
@@ -2680,7 +2680,7 @@ msgstr "În retragere la capete"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "Salt spre final"
 
 msgid "Silhouette"
 msgstr "Siluetă"
