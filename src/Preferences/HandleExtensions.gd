@@ -67,7 +67,10 @@ func _ready() -> void:
 
 func install_extension(path: String) -> void:
 	var file_name := path.get_file()
-	var dir := DirAccess.copy_absolute(path, EXTENSIONS_PATH.path_join(file_name))
+	var err := DirAccess.copy_absolute(path, EXTENSIONS_PATH.path_join(file_name))
+	if err != OK:
+		print(err)
+		return
 	_add_extension(file_name)
 
 
