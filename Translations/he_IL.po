@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2023-09-04 13:31\n"
+"PO-Revision-Date: 2023-09-09 15:06\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "ייצא"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "להחליף"
 
 msgid "Export..."
 msgstr "ייצא..."
@@ -361,10 +361,10 @@ msgstr ""
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
-msgstr ""
+msgstr "אישור להכל"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "פרוייקטים אחרונים"
 
 msgid "New project"
 msgstr ""
@@ -378,32 +378,32 @@ msgid "Spritesheet (new layer)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "פריים חדש"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
-msgstr ""
+msgstr "שכבה חדשה"
 
 msgid "New reference image"
-msgstr ""
+msgstr "תמונת רפרנס חדשה"
 
 msgid "New palette"
 msgstr ""
 
 msgid "New brush"
-msgstr ""
+msgstr "מברשת חדשה"
 
 msgid "New pattern"
-msgstr ""
+msgstr "תבנית חדשה"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "פריימים מאוזנים:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "פריימים מאונכים:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
@@ -411,11 +411,11 @@ msgstr ""
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "סף:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "תמונות בעלות צד הקטן מהערך הזה יחצו את הסף"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
@@ -470,23 +470,24 @@ msgid "The following files already exist. Do you wish to overwrite them?\n"
 msgstr ""
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "נתיב תיקייה לא תקין!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "שם קובץ לא תקין!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "נתיב תיקייה וששםש קובץ לא תקינים!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "ייצוא בתהליך..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "לא ניתן לטעון קובץ '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "לא ניתן לטעון קובץ '%s'.\n"
+"קוד שגיאה: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
@@ -539,30 +540,30 @@ msgstr "רקע:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "פריימים שנבחרו"
 
 msgid "Layers:"
-msgstr ""
+msgstr "שכבות:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "שכבות נראות"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "שכבות שנבחרו"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "שכבת פיקסלים:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "שכבת קבוצה:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "שכבה תלת-מימדית:"
 
 msgid "Direction:"
 msgstr "כיוון:"
@@ -590,7 +591,7 @@ msgstr "שורות:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "מימדי ייצוא:"
 
 msgid "Path:"
 msgstr "נתיב:"
@@ -606,7 +607,7 @@ msgstr "קובץ:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "אפשרויות מתקדמות"
 
 msgid "Interpolation:"
 msgstr "אינטרפולציה:"
@@ -627,32 +628,32 @@ msgid "Constant"
 msgstr ""
 
 msgid "General"
-msgstr ""
+msgstr "כללי"
 
 msgid "Startup"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "שפה"
 
 msgid "Interface"
-msgstr ""
+msgstr "ממשק"
 
 msgid "Themes"
 msgstr ""
 
 msgid "Canvas"
-msgstr ""
+msgstr "קנבס"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "ציר זמן"
 
 msgid "Selection"
-msgstr ""
+msgstr "בחירה"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "קיצורי דרך"
 
 msgid "Backup"
 msgstr ""
@@ -820,10 +821,10 @@ msgid "Drop Shadow"
 msgstr "הצללה"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "היסט X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "היסט Y:"
 
 msgid "Shadow color:"
 msgstr "צבע צל:"
@@ -838,20 +839,20 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "חלוקה לחלקים שווים"
 
 msgid "Parts:"
-msgstr ""
+msgstr "חלקים:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "הוספת נקודות בסוף"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Shape:"
-msgstr ""
+msgstr "צורה:"
 
 msgid "Linear"
 msgstr "קווי"
@@ -861,15 +862,15 @@ msgstr "מעגלי"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "חזרתי:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "חזרתי"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "מראה"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
@@ -894,7 +895,7 @@ msgid "Angle:"
 msgstr "זווית:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "גוון:"
 
 msgid "Saturation:"
 msgstr ""
@@ -903,22 +904,22 @@ msgid "Value:"
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "אישור"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "אלכסוני"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "מיקום בתוך תמונה"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "עובי:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "צבעים:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "צעדים:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
@@ -948,31 +949,31 @@ msgid "Changelog"
 msgstr ""
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "אודות Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr ""
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "פותח על ידי Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "אתר אינטרנט"
 
 msgid "GitHub Repo"
 msgstr ""
 
 msgid "Donate"
-msgstr ""
+msgstr "תרומות"
 
 msgid "Developers"
-msgstr ""
+msgstr "מפתחים"
 
 msgid "Contributors"
-msgstr ""
+msgstr "מתנדבים"
 
 msgid "Donors"
 msgstr "תורמות ותורמים"
@@ -1221,29 +1222,30 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "מרובע"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "אליפסה"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "בחרו צבע לכלי השמאלי"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "בחרו צבע לכלי הימני"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "החליפו צבע שמאלי וימני\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "אפסו את הצבעים לערך ברירת המחדל (שחור בשמאל, לבן בימין)"
 
 msgid "Left tool"
-msgstr ""
+msgstr "כלי שמאלי"
 
 msgid "Right tool"
-msgstr ""
+msgstr "כלי ימני"
 
 msgid "Left pixel indicator"
 msgstr ""
