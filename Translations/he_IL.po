@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2023-09-09 15:06\n"
+"PO-Revision-Date: 2023-09-09 16:06\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -1465,19 +1465,19 @@ msgstr ""
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "לחץ"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "מהירות"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "אלפא"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "גודל"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
@@ -1485,15 +1485,15 @@ msgstr ""
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "ערכי סף"
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "התחלה"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "End"
 
 msgid "Brush:"
 msgstr "מברשת:"
@@ -1505,16 +1505,16 @@ msgid "Pixel brush"
 msgstr "מברשת פיקסל"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "מברשת עיגול"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "מברשת עיגול מלא"
 
 msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
-msgstr ""
+msgstr "גודל מברשת:"
 
 msgid "Overwrite color"
 msgstr ""
@@ -1593,10 +1593,10 @@ msgid "Hue Shifting"
 msgstr ""
 
 msgid "Lighten"
-msgstr ""
+msgstr "הבהרה"
 
 msgid "Darken"
-msgstr ""
+msgstr "האפלה"
 
 msgid "Amount:"
 msgstr "כמות:"
@@ -1605,7 +1605,7 @@ msgid "Lighten/Darken amount"
 msgstr ""
 
 msgid "Pick for:"
-msgstr ""
+msgstr "בחירה בשביל:"
 
 msgid "Left Color"
 msgstr "צבע שמאלי"
@@ -1633,22 +1633,22 @@ msgstr "זום 100%"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "החלפת בחירה"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "הוספה לבחירה"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "הורדה מבחירה"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
 msgstr ""
 
 msgid "Mirroring"
-msgstr ""
+msgstr "מראה"
 
 msgid "Horizontal"
 msgstr "אופקי"
@@ -1666,7 +1666,7 @@ msgid "Current frame:"
 msgstr "פריים נוכחי:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "מצב הנפשה:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
@@ -1728,22 +1728,22 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "שם:"
 
 msgid "From:"
-msgstr ""
+msgstr "מ:"
 
 msgid "To:"
-msgstr ""
+msgstr "ל:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "נגן אנימציה על פריימים עם אותו התג בלבד"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "תג %s (פריים %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "תג %s (פריימים %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1751,7 +1751,7 @@ msgstr ""
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "מצב צבע"
 
 msgid "Show past frames:"
 msgstr ""
@@ -1803,13 +1803,13 @@ msgid "Reverse Frames"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "שכבה"
 
 msgid "Group"
-msgstr ""
+msgstr "קבוצה"
 
 msgid "Layers"
-msgstr ""
+msgstr "שכבות"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -1817,21 +1817,21 @@ msgstr ""
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "הוספת שכבת פיקסלים"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "הוספת שכבת קבוצה"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "הוספת שכבה תלת-מימדית"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "הסרת השכבה הנוכחית"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "הזזה לשכבה הנוכחית"
 
 msgid "Move down the current layer"
 msgstr ""
@@ -1967,19 +1967,19 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "קובץ נשמר"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "קובץ נשמר אוטומטית"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "פתיחת קובץ נכשלה. קוד שגיאה %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "שמירת קובץ נכשלה. קוד שגיאה %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "קובץ/קבצים יוצאו"
 
 msgid "New Empty Palette"
 msgstr ""
@@ -2003,7 +2003,7 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "שגיאה"
 
 msgid "Error: Palette must have a valid name."
 msgstr ""
@@ -2024,7 +2024,7 @@ msgid "Get colors from"
 msgstr ""
 
 msgid "Patrons:"
-msgstr ""
+msgstr "פטרונים:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
@@ -2066,34 +2066,34 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "לאורך"
 
 msgid "Landscape"
-msgstr ""
+msgstr "לרוחב"
 
 msgid "Templates:"
-msgstr ""
+msgstr "תבניות:"
 
 msgid "Preset"
-msgstr ""
+msgstr "הגדרה קבועה מראש"
 
 msgid "Preset:"
-msgstr ""
+msgstr "הגדרה קבועה מראש:"
 
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 msgid "Custom"
-msgstr ""
+msgstr "מותאם אישית"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "בחירה ריבועית"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "בחירה אליפטית"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "בחירה מצולעת"
 
 msgid "Select By Color"
 msgstr ""
@@ -2150,7 +2150,7 @@ msgid "Already assigned"
 msgstr ""
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "כלי שמאלי:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr ""
