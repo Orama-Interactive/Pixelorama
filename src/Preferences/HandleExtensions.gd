@@ -67,15 +67,16 @@ func _ready() -> void:
 
 func install_extension(path: String) -> void:
 	var file_name := path.get_file()
-	var dir := DirAccess.open(path.get_base_dir())
-	dir.copy(path, EXTENSIONS_PATH.path_join(file_name))
+	var err := DirAccess.copy_absolute(path, EXTENSIONS_PATH.path_join(file_name))
+	if err != OK:
+		print(err)
+		return
 	_add_extension(file_name)
 
 
 func _uninstall_extension(file_name := "", remove_file := true, item := extension_selected) -> void:
 	if remove_file:
-		var dir := DirAccess.open(EXTENSIONS_PATH.path_join(file_name))
-		var err := dir.remove(EXTENSIONS_PATH.path_join(file_name))
+		var err := DirAccess.remove_absolute(EXTENSIONS_PATH.path_join(file_name))
 		if err != OK:
 			print(err)
 			return
