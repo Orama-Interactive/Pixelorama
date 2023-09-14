@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2023-09-04 13:31\n"
+"PO-Revision-Date: 2023-09-14 17:17\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -118,22 +118,22 @@ msgid "Export PNG as..."
 msgstr "Exportera PNG som..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Avsluta"
 
 msgid "Undo"
 msgstr "Ångra"
 
 msgid "Redo"
-msgstr ""
+msgstr "Gör om"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopiera"
 
 msgid "Cut"
-msgstr ""
+msgstr "Klipp ut"
 
 msgid "Paste"
-msgstr ""
+msgstr "Klistra in"
 
 msgid "Paste in Place"
 msgstr ""
@@ -145,16 +145,16 @@ msgid "New Brush"
 msgstr ""
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Skala Bild"
 
 msgid "Pixels"
 msgstr "Pixlar"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Procent"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Beskär Bild"
 
 msgid "Resize Canvas"
 msgstr ""
@@ -186,10 +186,10 @@ msgid "Smear options:"
 msgstr ""
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolerans:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Ursprunglig vinkel:"
 
 msgid "Clear"
 msgstr "Rensa"
@@ -198,16 +198,16 @@ msgid "Invert"
 msgstr "Invertera"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Gråskalevy"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Spegla Bild"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Vänd Horisontellt"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Vänd Lodrätt"
 
 msgid "Preferences"
 msgstr ""
