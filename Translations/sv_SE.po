@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2023-09-14 17:17\n"
+"PO-Revision-Date: 2023-09-15 15:10\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -240,7 +240,7 @@ msgid "Use Current Frame"
 msgstr ""
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Återställ Mask"
 
 msgid "Window Opacity"
 msgstr ""
@@ -255,7 +255,7 @@ msgid "Panels"
 msgstr ""
 
 msgid "Layouts"
-msgstr ""
+msgstr "Vyer"
 
 msgid "Moveable Panels"
 msgstr ""
@@ -276,7 +276,7 @@ msgid "Double click to set as new startup layout"
 msgstr ""
 
 msgid "Add"
-msgstr ""
+msgstr "Lägg till"
 
 msgid "Add Layout"
 msgstr ""
