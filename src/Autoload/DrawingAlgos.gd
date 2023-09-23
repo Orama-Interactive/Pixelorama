@@ -767,3 +767,7 @@ func generate_outline(
 	image.unlock()
 	new_image.unlock()
 	image.copy_from(new_image)
+
+
+func undo_redo_draw_op(image: Object, compressed_image_data: Dictionary, buffer_size: int) -> void:
+	image["data"]["data"] = compressed_image_data["data"].decompress(buffer_size)

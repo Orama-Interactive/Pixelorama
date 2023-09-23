@@ -213,7 +213,7 @@ func commit_undo() -> void:
 		var buffer_size = compressed_data["data"].size()
 		compressed_data["data"] = compressed_data["data"].compress()
 		project.undo_redo.add_do_method(
-			self, "undo_redo_draw_op", image, compressed_data, buffer_size
+			DrawingAlgos, "undo_redo_draw_op", image, compressed_data, buffer_size
 		)
 		image.unlock()
 	for image in _undo_data:
@@ -221,17 +221,13 @@ func commit_undo() -> void:
 		var buffer_size = compressed_data["data"].size()
 		compressed_data["data"] = compressed_data["data"].compress()
 		project.undo_redo.add_undo_method(
-			self, "undo_redo_draw_op", image, compressed_data, buffer_size
+			DrawingAlgos, "undo_redo_draw_op", image, compressed_data, buffer_size
 		)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer)
 	project.undo_redo.commit_action()
 
 	_undo_data.clear()
-
-
-func undo_redo_draw_op(image: Object, compressed_image_data: Dictionary, buffer_size: int) -> void:
-	image["data"]["data"] = compressed_image_data["data"].decompress(buffer_size)
 
 
 func draw_tool(position: Vector2) -> void:
