@@ -689,3 +689,15 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 	for _path in basepaths:
 		res.append(_path.path_join(subpath))
 	return res
+
+
+func undo_redo_draw_op(
+	image: Image, compressed_image_data: PackedByteArray, buffer_size: int
+) -> void:
+	image.set_data(
+		image.get_width(),
+		image.get_height(),
+		image.has_mipmaps(),
+		image.get_format(),
+		compressed_image_data.decompress(buffer_size)
+	)
