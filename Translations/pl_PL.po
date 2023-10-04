@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-09-05 03:26\n"
+"PO-Revision-Date: 2023-10-04 15:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -627,6 +627,14 @@ msgstr "Trójlinowa"
 
 msgid "Constant"
 msgstr "Stała"
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr ""
 
 msgid "General"
 msgstr "Ogólne"
