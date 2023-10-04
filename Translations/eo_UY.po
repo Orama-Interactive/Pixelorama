@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2023-09-04 13:32\n"
+"PO-Revision-Date: 2023-10-04 15:28\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -626,6 +626,14 @@ msgid "Trilinear"
 msgstr "Trilinia"
 
 msgid "Constant"
+msgstr ""
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
 msgstr ""
 
 msgid "General"
