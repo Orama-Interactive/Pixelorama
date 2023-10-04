@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2023-09-04 13:32\n"
+"PO-Revision-Date: 2023-10-04 15:27\n"
 
 msgid "OK"
 msgstr "ठीक है"
@@ -624,6 +624,14 @@ msgid "Trilinear"
 msgstr ""
 
 msgid "Constant"
+msgstr ""
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
 msgstr ""
 
 msgid "General"
