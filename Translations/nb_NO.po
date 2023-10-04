@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2023-09-04 13:32\n"
+"PO-Revision-Date: 2023-10-04 15:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -625,6 +625,14 @@ msgid "Trilinear"
 msgstr "Trilineær"
 
 msgid "Constant"
+msgstr ""
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
 msgstr ""
 
 msgid "General"
