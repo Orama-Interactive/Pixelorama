@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-09-14 08:26\n"
+"PO-Revision-Date: 2023-10-04 15:27\n"
 
 msgid "OK"
 msgstr "确定"
@@ -628,6 +628,14 @@ msgstr "三线性"
 
 msgid "Constant"
 msgstr "常量"
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr ""
 
 msgid "General"
 msgstr "常规​​​​​"
