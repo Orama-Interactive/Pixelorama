@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-10-04 15:27\n"
+"PO-Revision-Date: 2023-10-04 16:46\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -631,11 +631,11 @@ msgstr "Sabit"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "Renk uzayı:"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Doğrusal sRGB"
 
 msgid "General"
 msgstr "Genel"
