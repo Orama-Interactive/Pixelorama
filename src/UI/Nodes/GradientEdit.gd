@@ -178,6 +178,10 @@ func _on_InterpolationOptionButton_item_selected(index: Gradient.InterpolationMo
 	gradient.interpolation_mode = index
 
 
+func _on_color_space_option_button_item_selected(index: Gradient.ColorSpace) -> void:
+	gradient.interpolation_color_space = index
+
+
 func _on_DivideButton_pressed() -> void:
 	divide_dialog.popup_centered()
 

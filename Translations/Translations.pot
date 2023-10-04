@@ -615,6 +615,14 @@ msgstr ""
 msgid "Constant"
 msgstr ""
 
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr ""
+
 msgid "General"
 msgstr ""
 

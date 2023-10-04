@@ -34,10 +34,10 @@ offset_bottom = 7.0
 [node name="Popup" type="PopupPanel" parent="."]
 
 [node name="ColorPicker" type="ColorPicker" parent="Popup"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 294.0
-offset_bottom = 572.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 298.0
+offset_bottom = 576.0
 
 [node name="InterpolationContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -58,6 +58,27 @@ popup/item_0/id = 0
 popup/item_1/text = "Constant"
 popup/item_1/id = 1
 popup/item_2/text = "Cubic"
+popup/item_2/id = 2
+
+[node name="ColorSpaceContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorSpaceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Color space:"
+
+[node name="ColorSpaceOptionButton" type="OptionButton" parent="ColorSpaceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "sRGB"
+popup/item_0/id = 0
+popup/item_1/text = "Linear sRGB"
+popup/item_1/id = 1
+popup/item_2/text = "Oklab"
 popup/item_2/id = 2
 
 [node name="DivideButton" type="Button" parent="."]
@@ -103,5 +124,6 @@ text = "Add point at the end"
 [connection signal="resized" from="." to="." method="_on_GradientEdit_resized"]
 [connection signal="color_changed" from="Popup/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
 [connection signal="item_selected" from="InterpolationContainer/InterpolationOptionButton" to="." method="_on_InterpolationOptionButton_item_selected"]
+[connection signal="item_selected" from="ColorSpaceContainer/ColorSpaceOptionButton" to="." method="_on_color_space_option_button_item_selected"]
 [connection signal="pressed" from="DivideButton" to="." method="_on_DivideButton_pressed"]
 [connection signal="confirmed" from="DivideConfirmationDialog" to="." method="_on_DivideConfirmationDialog_confirmed"]
