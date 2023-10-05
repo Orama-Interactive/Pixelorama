@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-10-05 10:13\n"
+"PO-Revision-Date: 2023-10-05 11:26\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -635,7 +635,7 @@ msgstr "Ruang warna:"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "sRGB linear"
 
 msgid "General"
 msgstr "Umum"
