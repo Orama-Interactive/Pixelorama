@@ -456,9 +456,9 @@ func _blend_layers(
 	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
 	if export_layers == 0:
-		blend_all_layers(image, frame, origin, project)
+		DrawingAlgos.blend_all_layers(image, frame, origin, project)
 	elif export_layers == 1:
-		blend_selected_cels(image, frame, origin, project)
+		DrawingAlgos.blend_selected_cels(image, frame, origin, project)
 	else:
 		var layer := project.layers[export_layers - 2]
 		var layer_image := Image.new()
@@ -467,58 +467,6 @@ func _blend_layers(
 		else:
 			layer_image.copy_from(frame.cels[export_layers - 2].get_image())
 		image.blend_rect(layer_image, Rect2i(Vector2i.ZERO, project.size), origin)
-
-
-## Blends canvas layers into passed image starting from the origin position
-func blend_all_layers(
-	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
-) -> void:
-	var layer_i := 0
-	for cel in frame.cels:
-		if not project.layers[layer_i].is_visible_in_hierarchy():
-			layer_i += 1
-			continue
-		if cel is GroupCel:
-			layer_i += 1
-			continue
-		var cel_image := Image.new()
-		cel_image.copy_from(cel.get_image())
-		if cel.opacity < 1:  # If we have cel transparency
-			for xx in cel_image.get_size().x:
-				for yy in cel_image.get_size().y:
-					var pixel_color := cel_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * cel.opacity
-					cel_image.set_pixel(
-						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-					)
-		image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
-		layer_i += 1
-
-
-## Blends selected cels of the given frame into passed image starting from the origin position
-func blend_selected_cels(
-	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
-) -> void:
-	for cel_ind in frame.cels.size():
-		var test_array := [project.current_frame, cel_ind]
-		if not test_array in project.selected_cels:
-			continue
-		if frame.cels[cel_ind] is GroupCel:
-			continue
-		if not project.layers[cel_ind].is_visible_in_hierarchy():
-			continue
-		var cel: BaseCel = frame.cels[cel_ind]
-		var cel_image := Image.new()
-		cel_image.copy_from(cel.get_image())
-		if cel.opacity < 1:  # If we have cel transparency
-			for xx in cel_image.get_size().x:
-				for yy in cel_image.get_size().y:
-					var pixel_color := cel_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * cel.opacity
-					cel_image.set_pixel(
-						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-					)
-		image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
 
 
 func frames_divided_by_spritesheet_lines() -> int:

@@ -3,8 +3,70 @@ extends Node
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 ## Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
+var blend_layers_shader := preload("res://src/Shaders/BlendLayers.gdshader")
 var clean_edge_shader: Shader
 var omniscale_shader := preload("res://src/Shaders/Rotation/OmniScale.gdshader")
+
+
+## Blends canvas layers into passed image starting from the origin position
+func blend_all_layers(
+	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
+) -> void:
+	var current_cels := frame.cels
+	var textures: Array[Image] = []
+	var opacities := PackedFloat32Array()
+	var blend_modes := PackedInt32Array()
+	# Draw current frame layers
+	for i in Global.current_project.layers.size():
+		if current_cels[i] is GroupCel:
+			continue
+		if Global.current_project.layers[i].is_visible_in_hierarchy():
+			textures.append(current_cels[i].get_image())
+			opacities.append(current_cels[i].opacity)
+			blend_modes.append(Global.current_project.layers[i].blend_mode)
+	var texture_array := Texture2DArray.new()
+	texture_array.create_from_images(textures)
+	var params := {
+		"layers": texture_array,
+		"opacities": opacities,
+		"blend_modes": blend_modes,
+	}
+	var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
+	var gen := ShaderImageEffect.new()
+	gen.generate_image(blended, blend_layers_shader, params, project.size)
+	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
+
+
+## Blends selected cels of the given frame into passed image starting from the origin position
+func blend_selected_cels(
+	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
+) -> void:
+	var textures: Array[Image] = []
+	var opacities := PackedFloat32Array()
+	var blend_modes := PackedInt32Array()
+	for cel_ind in frame.cels.size():
+		var test_array := [project.current_frame, cel_ind]
+		if not test_array in project.selected_cels:
+			continue
+		if frame.cels[cel_ind] is GroupCel:
+			continue
+		if not project.layers[cel_ind].is_visible_in_hierarchy():
+			continue
+		var cel: BaseCel = frame.cels[cel_ind]
+		textures.append(cel.get_image())
+		opacities.append(cel.opacity)
+		blend_modes.append(Global.current_project.layers[cel_ind].blend_mode)
+	var texture_array := Texture2DArray.new()
+	texture_array.create_from_images(textures)
+	var params := {
+		"layers": texture_array,
+		"opacities": opacities,
+		"blend_modes": blend_modes,
+	}
+	var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
+	var gen := ShaderImageEffect.new()
+	gen.generate_image(blended, blend_layers_shader, params, project.size)
+	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html

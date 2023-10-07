@@ -48,7 +48,7 @@ func _draw() -> void:
 			var frame_image := Image.create(
 				current_project.size.x, current_project.size.y, false, Image.FORMAT_RGBA8
 			)
-			Export.blend_all_layers(frame_image, target_frame)
+			DrawingAlgos.blend_all_layers(frame_image, target_frame)
 			sprite_frames = _split_spritesheet(frame_image, h_frames, v_frames)
 
 			# limit start and end
