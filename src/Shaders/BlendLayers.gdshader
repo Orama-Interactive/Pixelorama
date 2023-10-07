@@ -2,8 +2,8 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform sampler2DArray layers : filter_nearest;
-uniform float[999] opacities;
-uniform int[999] blend_modes;
+uniform float[1024] opacities;
+uniform int[1024] blend_modes;
 
 
 vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
