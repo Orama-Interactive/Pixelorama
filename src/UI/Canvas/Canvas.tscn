@@ -47,6 +47,7 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="CurrentFrameDrawer" type="Node2D" parent="CurrentlyVisibleFrame"]
+material = SubResource("ShaderMaterial_6b0ox")
 script = ExtResource("5")
 
 [node name="TileMode" type="Node2D" parent="."]

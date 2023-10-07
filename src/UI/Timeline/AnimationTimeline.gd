@@ -153,7 +153,7 @@ func _cel_size_changed(value: int) -> void:
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
 
 
-func _on_blend_modes_item_selected(index: int) -> void:
+func _on_blend_modes_item_selected(index: BaseLayer.BlendModes) -> void:
 	Global.current_project.layers[Global.current_project.current_layer].blend_mode = index
 	Global.canvas.draw_layers()
 
