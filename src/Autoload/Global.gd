@@ -617,3 +617,7 @@ func convert_dictionary_values(dict: Dictionary) -> void:
 			dict[key] = str2var("Vector2" + dict[key])
 		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
 			dict[key] = str2var("Vector3" + dict[key])
+
+
+func undo_redo_draw_op(image: Object, compressed_image_data: Dictionary, buffer_size: int) -> void:
+	image["data"]["data"] = compressed_image_data["data"].decompress(buffer_size)
