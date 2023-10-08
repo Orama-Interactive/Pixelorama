@@ -145,6 +145,7 @@ func serialize() -> Dictionary:
 		"name": name,
 		"visible": visible,
 		"locked": locked,
+		"blend_mode": blend_mode,
 		"parent": parent.index if is_instance_valid(parent) else -1
 	}
 	if not cel_link_sets.is_empty():
@@ -163,6 +164,8 @@ func deserialize(dict: Dictionary) -> void:
 	name = dict.name
 	visible = dict.visible
 	locked = dict.locked
+	if dict.has("blend_mode"):
+		blend_mode = dict.blend_mode
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility
