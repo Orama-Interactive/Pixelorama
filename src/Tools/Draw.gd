@@ -217,32 +217,20 @@ func commit_undo() -> void:
 		var buffer_size: int = compressed_data["data"].size()
 		compressed_data["data"] = compressed_data["data"].compress()
 		project.undo_redo.add_do_method(
-			undo_redo_draw_op.bind(image, compressed_data["data"], buffer_size)
+			Global.undo_redo_draw_op.bind(image, compressed_data["data"], buffer_size)
 		)
 	for image in _undo_data:
 		var compressed_data: Dictionary = _undo_data[image]
 		var buffer_size: int = compressed_data["data"].size()
 		compressed_data["data"] = compressed_data["data"].compress()
 		project.undo_redo.add_undo_method(
-			undo_redo_draw_op.bind(image, compressed_data["data"], buffer_size)
+			Global.undo_redo_draw_op.bind(image, compressed_data["data"], buffer_size)
 		)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
 
 	_undo_data.clear()
-
-
-func undo_redo_draw_op(
-	image: Image, compressed_image_data: PackedByteArray, buffer_size: int
-) -> void:
-	image.set_data(
-		image.get_width(),
-		image.get_height(),
-		image.has_mipmaps(),
-		image.get_format(),
-		compressed_image_data.decompress(buffer_size)
-	)
 
 
 func draw_tool(pos: Vector2i) -> void:

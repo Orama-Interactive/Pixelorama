@@ -11,7 +11,7 @@ var drag_start_position := Vector2.ZERO
 
 
 func _ready() -> void:
-	# Hide default scollbars
+	# Hide default scrollbars
 	scroll_container.get_h_scroll_bar().scale = Vector2.ZERO
 	scroll_container.get_v_scroll_bar().scale = Vector2.ZERO
 
