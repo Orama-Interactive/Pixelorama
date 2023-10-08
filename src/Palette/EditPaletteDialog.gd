@@ -16,7 +16,7 @@ var old_name := ""
 @onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
 @onready var width_input := $VBoxContainer/PaletteMetadata/Width
 @onready var height_input := $VBoxContainer/PaletteMetadata/Height
-@onready var path_input := $VBoxContainer/PaletteMetadata/Path3D
+@onready var path_input := $VBoxContainer/PaletteMetadata/Path
 
 @onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
 @onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
@@ -79,7 +79,7 @@ func _on_EditPaletteDialog_confirmed() -> void:
 func _on_EditPaletteDialog_custom_action(action: String) -> void:
 	if action == DELETE_ACTION:
 		hide()
-		deleted.emit(deleted)
+		emit_signal("deleted")
 
 
 func _on_size_value_changed(_value):
