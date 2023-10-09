@@ -50,7 +50,7 @@ func _on_RequestDelay_timeout() -> void:
 func _on_ImageRequest_request_completed(
 	_result, _response_code, _headers, body: PackedByteArray
 ) -> void:
-	# Update the recieved image
+	# Update the received image
 	$ImageRequest.queue_free()
 	var image = Image.new()
 	# for images on internet there is a hagh chance that extension is wrong
