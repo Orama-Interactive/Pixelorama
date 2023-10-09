@@ -94,16 +94,17 @@ func _uninstall_extension(file_name := "", remove_file := true, item := extensio
 
 func _add_extension(file_name: String) -> void:
 	var tester_file: FileAccess  # For testing and deleting damaged extensions
-	var remover_directory := DirAccess.open(EXTENSIONS_PATH)
 	# Remove any extension that was proven guilty before this extension is loaded
-	if remover_directory.file_exists(EXTENSIONS_PATH.path_join("Faulty.txt")):
+	if FileAccess.file_exists(EXTENSIONS_PATH.path_join("Faulty.txt")):
 		# This code will only run if pixelorama crashed
 		var faulty_path := EXTENSIONS_PATH.path_join("Faulty.txt")
 		tester_file = FileAccess.open(faulty_path, FileAccess.READ)
 		damaged_extension = tester_file.get_as_text()
 		tester_file.close()
-		remover_directory.remove(EXTENSIONS_PATH.path_join(damaged_extension))
-		remover_directory.remove(EXTENSIONS_PATH.path_join("Faulty.txt"))
+		# don't delete the extension permanently
+		# Context: pixelorama deletes v0.11.x extensions when you open v1.0, this will prevent it
+		OS.move_to_trash(EXTENSIONS_PATH.path_join(damaged_extension))
+		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 
 	# Don't load a deleted extension
 	if damaged_extension == file_name:
@@ -172,7 +173,7 @@ func _add_extension(file_name: String) -> void:
 				Global.dialog_open(true)
 				print("Incompatible API")
 				# Don't put it in faulty, (it's merely incompatible)
-				remover_directory.remove(EXTENSIONS_PATH.path_join("Faulty.txt"))
+				DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 				return
 
 	var extension := Extension.new()
@@ -188,7 +189,7 @@ func _add_extension(file_name: String) -> void:
 
 	# If an extension doesn't crash pixelorama then it is proven innocent
 	# And we should now delete its "Faulty.txt" file
-	remover_directory.remove(EXTENSIONS_PATH.path_join("Faulty.txt"))
+	DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 
 
 func _enable_extension(extension: Extension, save_to_config := true) -> void:
