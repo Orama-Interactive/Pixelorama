@@ -1,12 +1,12 @@
 extends Panel
 
 
-var extension_container :VBoxContainer
+var extension_container: VBoxContainer
 var thumbnail := ""
 var download_link := ""
 var download_path := ""
 var tags := PackedStringArray()
-var is_update = false  # An update instead of download
+var is_update := false  # An update instead of download
 
 @onready var ext_name = $Panel/HBoxContainer/VBoxContainer/Name
 @onready var ext_discription = $Panel/HBoxContainer/VBoxContainer/Description
@@ -36,19 +36,21 @@ func set_info(info: Array, extension_path: String) -> void:
 					tags.append_array(item)
 					emit_signal("tags_detected", tags)
 
-	DirAccess.make_dir_recursive_absolute(str(extension_path,"Download/"))
-	download_path = str(extension_path,"Download/",info[0],".pck")
+	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
+	download_path = str(extension_path,"Download/",info[0], ".pck")
 
-	$RequestDelay.wait_time = randf() * 2 # to prevent sending bulk requests
+	$RequestDelay.wait_time = randf() * 2  # to prevent sending bulk requests
 	$RequestDelay.start()
 
 
 func _on_RequestDelay_timeout() -> void:
-	$RequestDelay.queue_free() # node no longer needed
-	var _error = $ImageRequest.request(thumbnail) #image
+	$RequestDelay.queue_free()  # node no longer needed
+	var _error = $ImageRequest.request(thumbnail)  # image
 
 
-func _on_ImageRequest_request_completed(_result, _response_code, _headers, body: PackedByteArray) -> void:
+func _on_ImageRequest_request_completed(
+	_result, _response_code, _headers, body: PackedByteArray
+) -> void:
 	# Update the recieved image
 	$ImageRequest.queue_free()
 	var image = Image.new()
@@ -85,7 +87,9 @@ func _on_DownloadRequest_request_completed(result: int, _response_code, _headers
 			is_update = false
 		announce_done(true)
 	else:
-		$Alert/Text.text = str("Unable to Download extension...\nHttp Code (",result,")").c_unescape()
+		$Alert/Text.text = (
+			str("Unable to Download extension...\nHttp Code (",result,")").c_unescape()
+		)
 		$Alert.popup_centered()
 		announce_done(false)
 	DirAccess.remove_absolute(download_path)

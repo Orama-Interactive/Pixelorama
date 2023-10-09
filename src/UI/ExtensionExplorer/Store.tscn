@@ -91,7 +91,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/Heading"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Store Links:"
 
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/Heading"]
@@ -99,6 +99,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Guide" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/Heading"]
+visible = false
 layout_mode = 2
 text = "Guide to making a Store File"
 
