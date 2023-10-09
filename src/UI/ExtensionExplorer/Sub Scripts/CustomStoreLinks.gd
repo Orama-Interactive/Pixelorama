@@ -27,7 +27,9 @@ func _on_NewLink_pressed() -> void:
 
 func add_field(link: String = "") -> void:
 	var link_field = LineEdit.new()
-	link_field.placeholder_text = "Paste Store link, provided by the store owner (will automatically be removed if left empty)"
+	link_field.placeholder_text = (
+		"Paste Store link, given by the store owner (will automatically be removed if left empty)"
+		)
 	link_field.text = link
 	$Links.add_child(link_field)
 	link_field.connect("text_changed", Callable(self, "field_text_changed"))
@@ -43,5 +45,7 @@ func _on_Options_visibility_changed() -> void:
 			child.queue_free()
 
 # Uncomment it when we have a proper guide for writing a store_info file
-#func _on_Guide_pressed() -> void:
+func _on_Guide_pressed() -> void:
+	pass
+# gdlint: ignore=max-line-length
 #	OS.shell_open("https://github.com/Variable-Interactive/Variable-Store/tree/master#rules-for-writing-a-store_info-file")

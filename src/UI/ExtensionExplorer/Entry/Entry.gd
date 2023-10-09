@@ -55,15 +55,15 @@ func _on_ImageRequest_request_completed(
 	var image = Image.new()
 	# for images on internet there is a hagh chance that extension is wrong
 	# so check all of them even if they give error
-	var _error = image.load_png_from_buffer(body)
-	if _error != OK:
-		var _err1 = image.load_jpg_from_buffer(body)
-		if _err1 != OK:
-			var _err2 = image.load_webp_from_buffer(body)
-			if _err2 != OK:
-				var _err3 = image.load_tga_from_buffer(body)
-				if _err3 != OK:
-					var _err4 = image.load_bmp_from_buffer(body)
+	var err = image.load_png_from_buffer(body)
+	if err != OK:
+		var err_a = image.load_jpg_from_buffer(body)
+		if err_a != OK:
+			var err_b = image.load_webp_from_buffer(body)
+			if err_b != OK:
+				var err_c = image.load_tga_from_buffer(body)
+				if err_c != OK:
+					var _err_d = image.load_bmp_from_buffer(body)
 	var texture = ImageTexture.create_from_image(image)
 	ext_picture.texture_normal = texture
 	ext_picture.connect("pressed", Callable(self, "enlarge_thumbnail").bind(texture))

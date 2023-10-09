@@ -1,7 +1,7 @@
 extends LineEdit
 
-@onready var tag_list: VBoxContainer = $"%TagList"
 var available_tags := PackedStringArray()
+@onready var tag_list: VBoxContainer = $"%TagList"
 
 
 func _on_SearchManager_text_changed(_new_text: String) -> void:

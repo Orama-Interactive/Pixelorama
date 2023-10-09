@@ -5,12 +5,14 @@ extends Window
 ### Don't touch anything else
 
 const STORE_NAME: String = "Extension Explorer"
+# gdlint: ignore=max-line-length
 const STORE_LINK: String = "https://raw.githubusercontent.com/Variable-Interactive/Variable-Store/4.0/store_info.txt"
-const store_information_file = STORE_NAME + ".txt"  # contains information about extensions available for download
+# gdlint: ignore=max-line-length
+const STORE_INFORMATION_FILE = STORE_NAME + ".txt"  # file that will contain information about extensions available for download
 
 # variables placed here due to their frequent use
 var extension_container: VBoxContainer
-var extension_path: String  # the base path where extensions will be stored (obtained from pixelorama)
+var extension_path: String  # the path where extensions will be stored (obtained from pixelorama)
 var custom_links_remaining: int  # remaining custom links to be processed
 var redirects: Array[String]
 var faulty_custom_links: Array[String]
@@ -36,7 +38,7 @@ func _ready() -> void:
 	# Get the path that pixelorama uses to store extensions
 	extension_path = ProjectSettings.globalize_path(extension_container.EXTENSIONS_PATH)
 	# tell the downloader where to download the store information
-	store_info_downloader.download_file = extension_path.path_join(store_information_file)
+	store_info_downloader.download_file = extension_path.path_join(STORE_INFORMATION_FILE)
 
 
 func _on_Store_about_to_show() -> void:
@@ -75,7 +77,7 @@ func _on_StoreInformation_request_completed(
 	if result == HTTPRequest.RESULT_SUCCESS:
 		# process the info contained in the file
 		var file = FileAccess.open(
-			extension_path.path_join(store_information_file), FileAccess.READ
+			extension_path.path_join(STORE_INFORMATION_FILE), FileAccess.READ
 		)
 		while not file.eof_reached():
 			var info = file.get_line()
@@ -89,7 +91,7 @@ func _on_StoreInformation_request_completed(
 					if !info in redirects:
 						redirects.append(info)
 		file.close()
-		DirAccess.remove_absolute(extension_path.path_join(store_information_file))
+		DirAccess.remove_absolute(extension_path.path_join(STORE_INFORMATION_FILE))
 		# Hide the progress bar because it's no longer required
 		close_progress()
 	else:
