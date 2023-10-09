@@ -1,6 +1,7 @@
 extends Control
 
 const EXTENSIONS_PATH := "user://extensions"
+const BUG_EXTENSIONS_PATH := "user://give_in_bug_report"
 
 var extensions := {}  ## Extension name: Extension class
 var extension_selected := -1
@@ -102,8 +103,12 @@ func _add_extension(file_name: String) -> void:
 		damaged_extension = tester_file.get_as_text()
 		tester_file.close()
 		# don't delete the extension permanently
-		# Context: pixelorama deletes v0.11.x extensions when you open v1.0, this will prevent it
-		OS.move_to_trash(EXTENSIONS_PATH.path_join(damaged_extension))
+		# (so that it may be given to the developer in the bug report)
+		DirAccess.make_dir_recursive_absolute(BUG_EXTENSIONS_PATH)
+		DirAccess.rename_absolute(
+			EXTENSIONS_PATH.path_join(damaged_extension),
+			BUG_EXTENSIONS_PATH.path_join(damaged_extension)
+		)
 		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 
 	# Don't load a deleted extension
@@ -135,11 +140,16 @@ func _add_extension(file_name: String) -> void:
 	var file_path := EXTENSIONS_PATH.path_join(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
 	if !success:
-		print("Failed loading resource pack.")
-		var dir := DirAccess.open(EXTENSIONS_PATH)
-		dir.remove(file_path)
+		# Don't delete the extension
+		# Context: pixelorama deletes v0.11.x extensions when you open v1.0, this will prevent it.
+#		OS.move_to_trash(file_path)
+		print(
+			"Failed loading resource pack %s.
+	There may be errors in extension code or extension is incompatible" % file_name
+		)
+		# Delete the faulty.txt, (it's fate has already been decided)
+		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 		return
-
 	var extension_path := "res://src/Extensions/%s/" % file_name_no_ext
 	var extension_config_file_path := extension_path.path_join("extension.json")
 	var extension_config_file := FileAccess.open(extension_config_file_path, FileAccess.READ)
