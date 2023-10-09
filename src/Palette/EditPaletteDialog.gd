@@ -79,7 +79,7 @@ func _on_EditPaletteDialog_confirmed() -> void:
 func _on_EditPaletteDialog_custom_action(action: String) -> void:
 	if action == DELETE_ACTION:
 		hide()
-		emit_signal("deleted")
+		deleted.emit()
 
 
 func _on_size_value_changed(_value):
