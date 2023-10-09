@@ -5,6 +5,7 @@ signal saved(name, comment, width, height)
 signal deleted
 
 const DELETE_ACTION := "delete"
+const BIN_ACTION := "trash"
 
 # Keeps original size of edited palette
 var origin_width := 0
@@ -20,11 +21,13 @@ var old_name := ""
 
 @onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
 @onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
+@onready var delete_confirmation: AcceptDialog = $DeleteConfirmation
 
 
 func _ready() -> void:
 	# Add delete button to edit palette dialog
 	add_button(tr("Delete"), false, DELETE_ACTION)
+	delete_confirmation.add_button("Move to Trash", false, BIN_ACTION)
 
 
 func open(current_palette: Palette) -> void:
@@ -78,8 +81,20 @@ func _on_EditPaletteDialog_confirmed() -> void:
 
 func _on_EditPaletteDialog_custom_action(action: String) -> void:
 	if action == DELETE_ACTION:
+		delete_confirmation.popup_centered()
+
+
+func _on_delete_confirmation_confirmed() -> void:
+	deleted.emit(true)
+	delete_confirmation.hide()
+	hide()
+
+
+func _on_delete_confirmation_custom_action(action: StringName) -> void:
+	if action == BIN_ACTION:
+		deleted.emit(false)
+		delete_confirmation.hide()
 		hide()
-		deleted.emit()
 
 
 func _on_size_value_changed(_value):

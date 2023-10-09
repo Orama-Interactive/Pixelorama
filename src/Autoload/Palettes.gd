@@ -213,13 +213,16 @@ func current_palette_edit(palette_name: String, comment: String, width: int, hei
 	palettes[palette_path] = current_palette
 
 
-func _delete_palette(path: String) -> void:
-	OS.move_to_trash(path)
+func _delete_palette(path: String, permanent := true) -> void:
+	if permanent:
+		DirAccess.remove_absolute(path)
+	else:
+		OS.move_to_trash(path)
 	palettes.erase(path)
 
 
-func current_palete_delete() -> void:
-	_delete_palette(current_palette.resource_path)
+func current_palete_delete(permanent := true) -> void:
+	_delete_palette(current_palette.resource_path, permanent)
 
 	if palettes.size() > 0:
 		select_palette(palettes.keys()[0])
