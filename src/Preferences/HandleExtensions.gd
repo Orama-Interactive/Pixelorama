@@ -77,7 +77,7 @@ func install_extension(path: String) -> void:
 
 func _uninstall_extension(file_name := "", remove_file := true, item := extension_selected) -> void:
 	if remove_file:
-		var err := DirAccess.remove_absolute(EXTENSIONS_PATH.path_join(file_name))
+		var err = OS.move_to_trash(EXTENSIONS_PATH.path_join(file_name))
 		if err != OK:
 			print(err)
 			return
