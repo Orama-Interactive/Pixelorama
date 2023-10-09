@@ -65,7 +65,9 @@ func _on_StoreInformation_request_completed(result: int, _response_code: int, _h
 		# process the info contained in the file
 		var file = FileAccess.open(extension_path.path_join(store_information_file), FileAccess.READ)
 		while not file.eof_reached():
-			var info = str_to_var(file.get_line())
+			var info = file.get_line()
+			if !info.strip_edges().begins_with("#"):
+				info = str_to_var(info)
 			if typeof(info) == TYPE_ARRAY:
 				add_entry(info)
 			elif typeof(info) == TYPE_STRING:  # redirect store_link detected

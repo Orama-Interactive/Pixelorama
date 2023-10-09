@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://src/Preferences/HandleThemes.gd" id="5"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="7"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="8"]
-[ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/Store/Store.tscn" id="8_jmnx8"]
+[ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/Store.tscn" id="8_jmnx8"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
 
@@ -1299,10 +1299,22 @@ layout_mode = 2
 layout_mode = 2
 text = "Pixelorama must be restarted for changes to take effect."
 
-[node name="Popups" type="Node" parent="."]
+[node name="Popups" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="AddExtensionFileDialog" type="FileDialog" parent="Popups"]
 mode = 1
+title = "Open File(s)"
+position = Vector2i(0, 36)
+size = Vector2i(650, 400)
+ok_button_text = "Open"
+file_mode = 1
 access = 2
 filters = PackedStringArray("*.pck ; Godot Resource Pack File", "*.zip ;")
 show_hidden_files = true
