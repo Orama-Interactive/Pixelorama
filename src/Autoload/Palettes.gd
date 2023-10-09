@@ -212,8 +212,7 @@ func current_palette_edit(name: String, comment: String, width: int, height: int
 
 
 func _delete_palette(path: String) -> void:
-	var dir = Directory.new()
-	dir.remove(path)
+	OS.move_to_trash(path)
 	palettes.erase(path)
 
 
