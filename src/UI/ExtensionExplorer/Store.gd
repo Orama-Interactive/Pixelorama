@@ -1,29 +1,38 @@
 extends Window
 
 ### Usage:
-### Change the and "STORE_LINK" from the (Main.gd)
+### Change the "STORE_NAME" and "STORE_LINK"
 ### Don't touch anything else
 
 const STORE_NAME :String = "Extension Explorer"
-const store_information_file = STORE_NAME + ".txt"  # contains information about extensions available for download
 const STORE_LINK: String = "https://raw.githubusercontent.com/Variable-Interactive/Variable-Store/4.0/store_info.txt"
+const store_information_file = STORE_NAME + ".txt"  # contains information about extensions available for download
 
 # variables placed here due to their frequent use
 var extension_container :VBoxContainer
 var extension_path: String  # the base path where extensions will be stored (obtained from pixelorama)
 var custom_links_remaining: int  # remaining custom links to be processed
-var redirects :Array
-var faulty_custom_links: Array
+var redirects :Array[String]
+var faulty_custom_links: Array[String]
 
-# node references
+# node references used in this script
 @onready var content: VBoxContainer = $"%Content"
-@onready var store_info_downloader = $StoreInformationDownloader
+@onready var store_info_downloader: HTTPRequest = %StoreInformationDownloader
+@onready var main_store_link: LineEdit = %MainStoreLink
+@onready var custom_store_links: VBoxContainer = %CustomStoreLinks
+@onready var search_manager: LineEdit = %SearchManager
+@onready var tab_container: TabContainer = %TabContainer
+@onready var progress_bar: ProgressBar = %ProgressBar
+@onready var update_timer: Timer = %UpdateTimer
+@onready var faulty_links_label: Label = %FaultyLinks
+@onready var custom_link_error: AcceptDialog = %ErrorCustom
+@onready var error_get_info: AcceptDialog = %Error
 
 
 func _ready() -> void:
 	# Basic setup
 	extension_container = Global.preferences_dialog.find_child("Extensions")
-	$"%MainStore".text = STORE_LINK
+	main_store_link.text = STORE_LINK
 	# Get the path that pixelorama uses to store extensions
 	extension_path = ProjectSettings.globalize_path(extension_container.EXTENSIONS_PATH)
 	# tell the downloader where to download the store information
@@ -32,14 +41,14 @@ func _ready() -> void:
 
 func _on_Store_about_to_show() -> void:
 	# clear old tags
-	$"%SearchManager".available_tags = PackedStringArray()
-	for tag in $"%SearchManager".tag_list.get_children():
+	search_manager.available_tags = PackedStringArray()
+	for tag in search_manager.tag_list.get_children():
 		tag.queue_free()
 	#Clear old entries
 	for entry in content.get_children():
 		entry.queue_free()
 	faulty_custom_links.clear()
-	custom_links_remaining = $"%CustomStoreLinks".custom_links.size()
+	custom_links_remaining = custom_store_links.custom_links.size()
 	fetch_info(STORE_LINK)
 
 
@@ -105,7 +114,7 @@ func _on_ManualDownload_pressed():
 # ADDS A NEW EXTENSION ENTRY TO THE "content"
 func add_entry(info: Array) -> void:
 	var entry = preload("res://src/UI/ExtensionExplorer/Entry/Entry.tscn").instantiate()
-	entry.connect("tags_detected", Callable($"%SearchManager", "add_new_tags"))
+	entry.connect("tags_detected", Callable(search_manager, "add_new_tags"))
 	entry.extension_container = extension_container
 	content.add_child(entry)
 	entry.set_info(info, extension_path)
@@ -115,33 +124,33 @@ func add_entry(info: Array) -> void:
 func error_getting_info(result: int) -> void:
 	# Shows a popup if error is from main link (i-e MainStore)
 	# Popups for errors in custom_links are handled in close_progress()
-	if custom_links_remaining == $"%CustomStoreLinks".custom_links.size():
-		$Error.popup_centered()
-		$Error.title = error_string(result)
+	if custom_links_remaining == custom_store_links.custom_links.size():
+		error_get_info.popup_centered()
+		error_get_info.title = error_string(result)
 	else:
-		faulty_custom_links.append($"%CustomStoreLinks".custom_links[custom_links_remaining])
+		faulty_custom_links.append(custom_store_links.custom_links[custom_links_remaining])
 	close_progress()
 
 
 # PROGRESS BAR METHOD
 func prepare_progress():
-	$ProgressContainer.visible = true
-	$TabContainer.visible = false
-	$ProgressContainer/ProgressBar.value = 0
-	$ProgressContainer/UpdateTimer.start()
+	progress_bar.get_parent().visible = true
+	tab_container.visible = false
+	progress_bar.value = 0
+	update_timer.start()
 
 
 # PROGRESS BAR METHOD
 func update_progress():
 	var down = store_info_downloader.get_downloaded_bytes()
 	var total = store_info_downloader.get_body_size()
-	$ProgressContainer/ProgressBar.value = (float(down) / float(total)) * 100.0
+	progress_bar.value = (float(down) / float(total)) * 100.0
 
 
 func close_progress():
-	$ProgressContainer.visible = false
-	$TabContainer.visible = true
-	$ProgressContainer/UpdateTimer.stop()
+	progress_bar.get_parent().visible = false
+	tab_container.visible = true
+	update_timer.stop()
 	if redirects.size() > 0:
 		var next_link = redirects.pop_front()
 		fetch_info(next_link)
@@ -149,14 +158,14 @@ func close_progress():
 		# no more redirects, jump to the next store
 		custom_links_remaining -= 1
 		if custom_links_remaining >= 0:
-			var next_link = $"%CustomStoreLinks".custom_links[custom_links_remaining]
+			var next_link = custom_store_links.custom_links[custom_links_remaining]
 			fetch_info(next_link)
 		else:
 			if faulty_custom_links.size() > 0:  # manage custom faulty links
-				$"%FaultyLinks".text = ""
+				faulty_links_label.text = ""
 				for link in faulty_custom_links:
-					$"%FaultyLinks".text += str(link, "\n")
-				$ErrorCustom.popup_centered()
+					faulty_links_label.text += str(link, "\n")
+				custom_link_error.popup_centered()
 
 
 

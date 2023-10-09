@@ -15,6 +15,7 @@ exclusive = true
 script = ExtResource("1_pwcwi")
 
 [node name="TabContainer" type="TabContainer" parent="."]
+unique_name_in_owner = true
 clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,7 +102,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Guide to making a Store File"
 
-[node name="MainStore" type="LineEdit" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+[node name="MainStoreLink" type="LineEdit" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
 unique_name_in_owner = true
 layout_mode = 2
 editable = false
@@ -130,6 +131,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="ProgressContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,6 +143,7 @@ offset_bottom = -5.0
 alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="ProgressContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
@@ -151,11 +154,14 @@ Please Wait"
 horizontal_alignment = 1
 
 [node name="UpdateTimer" type="Timer" parent="ProgressContainer"]
+unique_name_in_owner = true
 wait_time = 0.1
 
 [node name="StoreInformationDownloader" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
 
 [node name="Error" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(545, 305)
 unresizable = true
@@ -248,6 +254,7 @@ text = "Or download \"Flatseal\" from your linux package manager and set permiss
 autowrap_mode = 3
 
 [node name="ErrorCustom" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(357, 110)
 
@@ -270,6 +277,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_Store_about_to_show"]
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
 [connection signal="text_changed" from="TabContainer/Store/Parameters/SearchManager" to="TabContainer/Store/Parameters/SearchManager" method="_on_SearchManager_text_changed"]
 [connection signal="visibility_changed" from="TabContainer/Options" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Options_visibility_changed"]
 [connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/Heading/Guide" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Guide_pressed"]

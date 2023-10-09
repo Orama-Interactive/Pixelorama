@@ -1304,6 +1304,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -1335,4 +1339,3 @@ transient = true
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/UninstallButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_UninstallButton_pressed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/OpenFolderButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_OpenFolderButton_pressed"]
 [connection signal="files_selected" from="Popups/AddExtensionFileDialog" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_AddExtensionFileDialog_files_selected"]
-[connection signal="close_requested" from="Popups/Store" to="Popups/Store" method="_on_close_requested"]

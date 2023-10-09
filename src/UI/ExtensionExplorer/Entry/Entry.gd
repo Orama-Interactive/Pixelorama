@@ -16,6 +16,7 @@ var is_update = false  # An update instead of download
 
 signal tags_detected
 
+
 func set_info(info: Array, extension_path: String) -> void:
 	ext_name.text = str(info[0], "-v", info[1])  # Name with version
 	change_button_if_updatable(info[0], info[1])
@@ -34,7 +35,6 @@ func set_info(info: Array, extension_path: String) -> void:
 				if identifier == "Tags":
 					tags.append_array(item)
 					emit_signal("tags_detected", tags)
-
 
 	DirAccess.make_dir_recursive_absolute(str(extension_path,"Download/"))
 	download_path = str(extension_path,"Download/",info[0],".pck")
@@ -115,9 +115,9 @@ func tags_match(tag_array: PackedStringArray):
 
 
 # UPDATES THE ENTRY NODE'S UI IF IT HAS AN UPDATE AVAILABLE
-func change_button_if_updatable(name: String, new_version: float):
+func change_button_if_updatable(extension_name: String, new_version: float):
 	for extension in extension_container.extensions.keys():
-		if extension_container.extensions[extension].file_name == name:
+		if extension_container.extensions[extension].file_name == extension_name:
 			var old_version = str_to_var(extension_container.extensions[extension].version)
 			if typeof(old_version) == TYPE_FLOAT:
 				if new_version > old_version:
