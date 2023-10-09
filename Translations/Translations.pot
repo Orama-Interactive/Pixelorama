@@ -130,6 +130,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr ""
+
 msgid "New Brush"
 msgstr ""
 

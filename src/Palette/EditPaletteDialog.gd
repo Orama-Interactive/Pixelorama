@@ -27,7 +27,7 @@ var old_name := ""
 func _ready() -> void:
 	# Add delete button to edit palette dialog
 	add_button(tr("Delete"), false, DELETE_ACTION)
-	delete_confirmation.add_button("Move to Trash", false, BIN_ACTION)
+	delete_confirmation.add_button(tr("Move to Trash"), false, BIN_ACTION)
 
 
 func open(current_palette: Palette) -> void:
