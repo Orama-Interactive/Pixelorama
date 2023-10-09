@@ -1,6 +1,5 @@
 extends Panel
 
-
 var extension_container: VBoxContainer
 var thumbnail := ""
 var download_link := ""
@@ -37,7 +36,7 @@ func set_info(info: Array, extension_path: String) -> void:
 					emit_signal("tags_detected", tags)
 
 	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
-	download_path = str(extension_path,"Download/",info[0], ".pck")
+	download_path = str(extension_path, "Download/", info[0], ".pck")
 
 	$RequestDelay.wait_time = randf() * 2  # to prevent sending bulk requests
 	$RequestDelay.start()
@@ -88,7 +87,7 @@ func _on_DownloadRequest_request_completed(result: int, _response_code, _headers
 		announce_done(true)
 	else:
 		$Alert/Text.text = (
-			str("Unable to Download extension...\nHttp Code (",result,")").c_unescape()
+			str("Unable to Download extension...\nHttp Code (", result, ")").c_unescape()
 		)
 		$Alert.popup_centered()
 		announce_done(false)

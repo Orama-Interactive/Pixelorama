@@ -42,7 +42,6 @@ func _on_Options_visibility_changed() -> void:
 		if child.text == "":
 			child.queue_free()
 
-
 # Uncomment it when we have a proper guide for writing a store_info file
 #func _on_Guide_pressed() -> void:
 #	OS.shell_open("https://github.com/Variable-Interactive/Variable-Store/tree/master#rules-for-writing-a-store_info-file")
