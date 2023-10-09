@@ -21,7 +21,7 @@ var old_name := ""
 
 @onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
 @onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
-@onready var delete_confirmation: AcceptDialog = $DeleteConfirmation
+@onready var delete_confirmation := $DeleteConfirmation
 
 
 func _ready() -> void:

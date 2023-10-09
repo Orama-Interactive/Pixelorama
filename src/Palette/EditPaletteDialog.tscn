@@ -92,7 +92,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="DeleteConfirmation" type="AcceptDialog" parent="."]
+[node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
 size = Vector2i(445, 105)
 ok_button_text = "Delete Permanently"
 
