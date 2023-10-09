@@ -1,5 +1,7 @@
 extends Panel
 
+signal tags_detected
+
 var extension_container: VBoxContainer
 var thumbnail := ""
 var download_link := ""
@@ -12,8 +14,6 @@ var is_update := false  # An update instead of download
 @onready var ext_picture = $Panel/HBoxContainer/Picture
 @onready var down_button = $Panel/HBoxContainer/VBoxContainer/Download
 @onready var extension_downloader = $DownloadRequest
-
-signal tags_detected
 
 
 func set_info(info: Array, extension_path: String) -> void:
@@ -44,7 +44,7 @@ func set_info(info: Array, extension_path: String) -> void:
 
 func _on_RequestDelay_timeout() -> void:
 	$RequestDelay.queue_free()  # node no longer needed
-	var _error = $ImageRequest.request(thumbnail)  # image
+	$ImageRequest.request(thumbnail)  # image
 
 
 func _on_ImageRequest_request_completed(
@@ -63,7 +63,7 @@ func _on_ImageRequest_request_completed(
 			if err_b != OK:
 				var err_c = image.load_tga_from_buffer(body)
 				if err_c != OK:
-					var _err_d = image.load_bmp_from_buffer(body)
+					image.load_bmp_from_buffer(body)
 	var texture = ImageTexture.create_from_image(image)
 	ext_picture.texture_normal = texture
 	ext_picture.connect("pressed", Callable(self, "enlarge_thumbnail").bind(texture))
