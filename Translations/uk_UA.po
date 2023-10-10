@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-10-10 20:09\n"
+"PO-Revision-Date: 2023-10-10 21:29\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -167,11 +167,11 @@ msgstr "Зсув:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Обгорнути:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Центрувати кадри"
 
 msgid "Rotate Image"
 msgstr "Повернути зображення"
