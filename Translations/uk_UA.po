@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-10-04 15:27\n"
+"PO-Revision-Date: 2023-10-10 20:09\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -160,10 +160,10 @@ msgid "Resize Canvas"
 msgstr "Змінити розмір полотна"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Зсув Зображення"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Зсув:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
