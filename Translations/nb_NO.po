@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2023-10-04 15:28\n"
+"PO-Revision-Date: 2023-10-11 16:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -140,6 +140,13 @@ msgstr ""
 
 msgid "Delete"
 msgstr "Slett"
+
+msgid "Delete Permanently"
+msgstr ""
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr ""
 
 msgid "New Brush"
 msgstr "Ny Børste"
