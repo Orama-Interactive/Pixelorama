@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-10-04 15:27\n"
+"PO-Revision-Date: 2023-10-11 16:41\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -140,6 +140,13 @@ msgstr "Επιτόπια επικόλληση"
 
 msgid "Delete"
 msgstr "Διαγραφή"
+
+msgid "Delete Permanently"
+msgstr ""
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr ""
 
 msgid "New Brush"
 msgstr "Νέο πινέλο"
