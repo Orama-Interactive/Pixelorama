@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-10-05 11:26\n"
+"PO-Revision-Date: 2023-10-11 16:41\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -140,6 +140,13 @@ msgstr "Tempel di Tempat"
 
 msgid "Delete"
 msgstr "Hapus"
+
+msgid "Delete Permanently"
+msgstr ""
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr ""
 
 msgid "New Brush"
 msgstr "Kuas Baru"
