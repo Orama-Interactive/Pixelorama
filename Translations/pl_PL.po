@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-10-04 15:27\n"
+"PO-Revision-Date: 2023-10-11 16:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -140,6 +140,13 @@ msgstr "Wklej w miejscu"
 
 msgid "Delete"
 msgstr "Usuń"
+
+msgid "Delete Permanently"
+msgstr ""
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr ""
 
 msgid "New Brush"
 msgstr "Nowy pędzel"
