@@ -215,8 +215,8 @@ func _on_HiddenColorPickerButton_popup_closed():
 	Palettes.current_palette_set_color(edited_swatch_index, edited_swatch_color)
 
 
-func _on_EditPaletteDialog_deleted() -> void:
-	Palettes.current_palete_delete()
+func _on_EditPaletteDialog_deleted(permanent: bool) -> void:
+	Palettes.current_palete_delete(permanent)
 	setup_palettes_selector()
 	redraw_current_palette()
 
