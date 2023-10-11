@@ -250,7 +250,7 @@ func save_pxo_file(
 		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
-		if file:  # this chould be null if we attempt to save filenames such as "//\\||.pxo"
+		if file:  # this would be null if we attempt to save filenames such as "//\\||.pxo"
 			file.close()
 		return false
 
