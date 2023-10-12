@@ -3,6 +3,9 @@ class_name Project
 extends RefCounted
 ## A class for project properties.
 
+signal about_to_serialize
+signal about_to_deserialize(Dictionary)
+
 var name := "":
 	set(value):
 		name = value
@@ -102,6 +105,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 		directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
+	Global.project_created.emit(self)
 
 
 func remove() -> void:
@@ -256,6 +260,7 @@ func change_project() -> void:
 
 
 func serialize() -> Dictionary:
+	about_to_serialize.emit()
 	var layer_data := []
 	for layer in layers:
 		layer_data.append(layer.serialize())
@@ -336,6 +341,7 @@ func serialize() -> Dictionary:
 
 
 func deserialize(dict: Dictionary) -> void:
+	about_to_deserialize.emit(dict)
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y

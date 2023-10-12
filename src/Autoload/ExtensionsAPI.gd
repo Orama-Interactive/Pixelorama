@@ -94,7 +94,7 @@ class GeneralAPI:
 	func get_drawing_algos() -> DrawingAlgos:
 		return DrawingAlgos
 
-	func get_shader_image_effect() -> ShaderImageEffect:
+	func get_new_shader_image_effect() -> ShaderImageEffect:
 		return ShaderImageEffect.new()
 
 	func get_extensions_node() -> Node:
@@ -549,7 +549,44 @@ class SignalsAPI:
 	func _on_texture_changed():
 		texture_changed.emit()
 
-	# Global signals
+	# GLOBAL SIGNALS
+	# pixelorama_opened
+	func connect_pixelorama_opened(target: Object, method: String):
+		Global.pixelorama_opened.connect(Callable(target, method))
+		ExtensionsApi.add_action("pixelorama_opened")
+
+	func disconnect_pixelorama_opened(target: Object, method: String):
+		Global.pixelorama_opened.disconnect(Callable(target, method))
+		ExtensionsApi.remove_action("pixelorama_opened")
+
+	# pixelorama_about_to_close
+	func connect_pixelorama_about_to_close(target: Object, method: String):
+		Global.pixelorama_about_to_close.connect(Callable(target, method))
+		ExtensionsApi.add_action("pixelorama_about_to_close")
+
+	func disconnect_pixelorama_about_to_close(target: Object, method: String):
+		Global.pixelorama_about_to_close.disconnect(Callable(target, method))
+		ExtensionsApi.remove_action("pixelorama_about_to_close")
+
+	# project_created -> signal has argument of type "Project"
+	func connect_project_created(target: Object, method: String):
+		Global.project_created.connect(Callable(target, method))
+		ExtensionsApi.add_action("project_created")
+
+	func disconnect_project_created(target: Object, method: String):
+		Global.project_created.disconnect(Callable(target, method))
+		ExtensionsApi.remove_action("project_created")
+
+	# project_saved
+	func connect_project_about_to_save(target: Object, method: String):
+		Global.project_saved.connect(Callable(target, method))
+		ExtensionsApi.add_action("project_saved")
+
+	func disconnect_project_saved(target: Object, method: String):
+		Global.project_saved.disconnect(Callable(target, method))
+		ExtensionsApi.remove_action("project_saved")
+
+	# project_changed
 	func connect_project_changed(target: Object, method: String):
 		Global.project_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("project_changed")
@@ -558,6 +595,7 @@ class SignalsAPI:
 		Global.project_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("project_changed")
 
+	# cel_changed
 	func connect_cel_changed(target: Object, method: String):
 		Global.cel_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("cel_changed")
@@ -566,7 +604,8 @@ class SignalsAPI:
 		Global.cel_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("cel_changed")
 
-	# Tool Signal
+	# TOOL SIGNALs
+	# cel_changed
 	func connect_tool_color_changed(target: Object, method: String):
 		Tools.color_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("color_changed")
@@ -575,7 +614,8 @@ class SignalsAPI:
 		Tools.color_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("color_changed")
 
-	# updater signals
+	# UPDATER SIGNALS
+	# current_cel_texture_changed
 	func connect_current_cel_texture_changed(target: Object, method: String):
 		texture_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("texture_changed")

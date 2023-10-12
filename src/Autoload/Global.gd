@@ -1,5 +1,8 @@
 extends Node
 
+signal pixelorama_opened
+signal pixelorama_about_to_close
+signal project_created(Project)
 signal project_changed
 signal cel_changed
 
