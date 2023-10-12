@@ -3,7 +3,7 @@ class_name Project
 extends RefCounted
 ## A class for project properties.
 
-signal about_to_serialize
+signal serialized(Dictionary)
 signal about_to_deserialize(Dictionary)
 
 var name := "":
@@ -260,7 +260,6 @@ func change_project() -> void:
 
 
 func serialize() -> Dictionary:
-	about_to_serialize.emit()
 	var layer_data := []
 	for layer in layers:
 		layer_data.append(layer.serialize())
@@ -337,6 +336,7 @@ func serialize() -> Dictionary:
 		"metadata": metadata
 	}
 
+	serialized.emit(project_data)
 	return project_data
 
 

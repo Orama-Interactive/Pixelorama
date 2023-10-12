@@ -302,7 +302,7 @@ func save_pxo_file(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
 		)
-		Global.project_saved.emit()
+		project_saved.emit()
 
 	save_project_to_recent_list(path)
 
