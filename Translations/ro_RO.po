@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-10-11 16:41\n"
+"PO-Revision-Date: 2023-10-12 06:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -142,11 +142,11 @@ msgid "Delete"
 msgstr "Ștergere"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Ștergere permanenetă"
 
 #. When you move something to recycle bin
 msgid "Move to Trash"
-msgstr ""
+msgstr "Mutare în coșul de gunoi"
 
 msgid "New Brush"
 msgstr "Pensulă nouă"
