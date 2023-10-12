@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-10-11 16:41\n"
+"PO-Revision-Date: 2023-10-12 09:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -142,11 +142,11 @@ msgid "Delete"
 msgstr "削除"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "完全に削除"
 
 #. When you move something to recycle bin
 msgid "Move to Trash"
-msgstr ""
+msgstr "ゴミ箱へ移動"
 
 msgid "New Brush"
 msgstr "新しいブラシ"
