@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-10-11 16:41\n"
+"PO-Revision-Date: 2023-10-13 13:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -142,11 +142,11 @@ msgid "Delete"
 msgstr "Löschen"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Dauerhaft Löschen"
 
 #. When you move something to recycle bin
 msgid "Move to Trash"
-msgstr ""
+msgstr "In Papierkorb verschieben"
 
 msgid "New Brush"
 msgstr "Neuer Pinsel"
