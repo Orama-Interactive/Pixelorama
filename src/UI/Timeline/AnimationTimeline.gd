@@ -19,7 +19,7 @@ var frame_button_node := preload("res://src/UI/Timeline/FrameButton.tscn")
 @onready var tag_spacer = find_child("TagSpacer")
 @onready var start_spacer = find_child("StartSpacer")
 @onready var add_layer_list: MenuButton = $"%AddLayerList"
-@onready var blend_modes_option_button := %BlendModes as OptionButton
+@onready var blend_modes_button := %BlendModes as OptionButton
 
 @onready var timeline_scroll: ScrollContainer = find_child("TimelineScroll")
 @onready var frame_scroll_container: Control = find_child("FrameScrollContainer")
