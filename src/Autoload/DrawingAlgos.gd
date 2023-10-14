@@ -16,14 +16,15 @@ func blend_all_layers(
 	var textures: Array[Image] = []
 	var opacities := PackedFloat32Array()
 	var blend_modes := PackedInt32Array()
-	# Draw current frame layers
+
 	for i in Global.current_project.layers.size():
 		if current_cels[i] is GroupCel:
 			continue
-		if Global.current_project.layers[i].is_visible_in_hierarchy():
-			textures.append(current_cels[i].get_image())
-			opacities.append(current_cels[i].opacity)
-			blend_modes.append(Global.current_project.layers[i].blend_mode)
+		if not Global.current_project.layers[i].is_visible_in_hierarchy():
+			continue
+		textures.append(current_cels[i].get_image())
+		opacities.append(current_cels[i].opacity)
+		blend_modes.append(Global.current_project.layers[i].blend_mode)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {
@@ -52,7 +53,7 @@ func blend_selected_cels(
 			continue
 		if not project.layers[cel_ind].is_visible_in_hierarchy():
 			continue
-		var cel: BaseCel = frame.cels[cel_ind]
+		var cel := frame.cels[cel_ind]
 		textures.append(cel.get_image())
 		opacities.append(cel.opacity)
 		blend_modes.append(Global.current_project.layers[cel_ind].blend_mode)
