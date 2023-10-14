@@ -383,7 +383,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 15
+item_count = 16
 selected = 0
 popup/item_0/text = "Normal"
 popup/item_0/id = 0
@@ -415,6 +415,8 @@ popup/item_13/text = "Exclusion"
 popup/item_13/id = 13
 popup/item_14/text = "Subtract"
 popup/item_14/id = 14
+popup/item_15/text = "Divide"
+popup/item_15/id = 15
 
 [node name="BlendingHBox" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
 layout_mode = 2

@@ -18,6 +18,7 @@ enum BlendModes {
 	DIFFERENCE,
 	EXCLUSION,
 	SUBTRACT,
+	DIVIDE,
 }
 
 var name := ""

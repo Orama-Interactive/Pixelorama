@@ -57,6 +57,9 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 		case 14: // Subtract
 			result.rgb = prev_color.rgb - current_color.rgb;
 			break;
+		case 15: // Divide
+			result.rgb = prev_color.rgb / current_color.rgb;
+			break;
 		default: // Normal (case 0)
 			result.rgb = prev_color.rgb * (1.0 - current_color.a) + current_color.rgb;
 			break;
