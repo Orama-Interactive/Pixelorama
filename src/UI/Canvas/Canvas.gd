@@ -6,7 +6,7 @@ const CURSOR_SPEED_RATE := 6.0
 
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  ## For optimization purposes
-var move_preview_location := Vector2.ZERO
+var move_preview_location := Vector2i.ZERO
 
 @onready var currently_visible_frame := $CurrentlyVisibleFrame as SubViewport
 @onready var current_frame_drawer := $CurrentlyVisibleFrame/CurrentFrameDrawer as Node2D
@@ -124,19 +124,26 @@ func draw_layers() -> void:
 	var textures: Array[Image] = []
 	var opacities := PackedFloat32Array()
 	var blend_modes := PackedInt32Array()
+	var origins := PackedVector2Array()
 	# Draw current frame layers
 	for i in Global.current_project.layers.size():
 		if current_cels[i] is GroupCel:
 			continue
 		if Global.current_project.layers[i].is_visible_in_hierarchy():
-			textures.append(current_cels[i].get_image())
+			var cel_image := current_cels[i].get_image()
+			textures.append(cel_image)
 			opacities.append(current_cels[i].opacity)
+			if [Global.current_project.current_frame, i] in Global.current_project.selected_cels:
+				origins.append(Vector2(move_preview_location) / Vector2(cel_image.get_size()))
+			else:
+				origins.append(Vector2.ZERO)
 			blend_modes.append(Global.current_project.layers[i].blend_mode)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	material.set_shader_parameter("layers", texture_array)
 	material.set_shader_parameter("opacities", opacities)
 	material.set_shader_parameter("blend_modes", blend_modes)
+	material.set_shader_parameter("origins", origins)
 
 
 func refresh_onion() -> void:

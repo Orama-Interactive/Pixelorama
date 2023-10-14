@@ -4,6 +4,7 @@ render_mode unshaded;
 uniform sampler2DArray layers : filter_nearest;
 uniform float[1024] opacities;
 uniform int[1024] blend_modes;
+uniform vec2[1024] origins;
 
 
 vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
@@ -55,11 +56,11 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 
 
 void fragment() {
-	vec4 col = texture(layers, vec3(UV, 0.0));
+	vec4 col = texture(layers, vec3(UV - origins[0], 0.0));
 	col.a *= opacities[0];
 	for(int i = 1; i < textureSize(layers, 0).z; i++) // Loops through every layer
 	{
-		col = blend(blend_modes[i], texture(layers, vec3(UV, float(i))), col, opacities[i]);
+		col = blend(blend_modes[i], texture(layers, vec3(UV - origins[i], float(i))), col, opacities[i]);
 	}
 	COLOR = col;
 }

@@ -20,7 +20,7 @@
 shader = ExtResource("1_253dh")
 shader_parameter/opacities = null
 shader_parameter/blend_modes = null
-shader_parameter/origin = Vector2(0, 0)
+shader_parameter/origins = null
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 4
