@@ -4,16 +4,20 @@ extends RefCounted
 
 enum BlendModes {
 	NORMAL,
-	ADD,
-	SUB,
-	MUL,
+	DARKEN,
+	MULTIPLY,
+	COLOR_BURN,
+	LINEAR_BURN,
+	LIGHTEN,
 	SCREEN,
-	DIFFERENCE,
-	BURN,
-	DODGE,
+	COLOR_DODGE,
+	ADD,
 	OVERLAY,
 	SOFT_LIGHT,
 	HARD_LIGHT,
+	DIFFERENCE,
+	EXCLUSION,
+	SUBTRACT,
 }
 
 var name := ""
