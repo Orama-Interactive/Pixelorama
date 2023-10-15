@@ -154,8 +154,18 @@ func _cel_size_changed(value: int) -> void:
 
 
 func _on_blend_modes_item_selected(index: BaseLayer.BlendModes) -> void:
-	Global.current_project.layers[Global.current_project.current_layer].blend_mode = index
-	Global.canvas.draw_layers()
+	var current_layer := Global.current_project.layers[Global.current_project.current_layer]
+	var previous_index := current_layer.blend_mode
+	Global.current_project.undo_redo.create_action("Set Blend Mode")
+	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	Global.current_project.undo_redo.add_do_property(current_layer, "blend_mode", index)
+	Global.current_project.undo_redo.add_do_method(blend_modes_button.select.bind(index))
+	Global.current_project.undo_redo.add_do_method(Global.canvas.draw_layers)
+	Global.current_project.undo_redo.add_undo_property(current_layer, "blend_mode", previous_index)
+	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	Global.current_project.undo_redo.add_undo_method(blend_modes_button.select.bind(previous_index))
+	Global.current_project.undo_redo.add_undo_method(Global.canvas.draw_layers)
+	Global.current_project.undo_redo.commit_action()
 
 
 func add_frame() -> void:
