@@ -19,6 +19,10 @@ enum BlendModes {
 	EXCLUSION,
 	SUBTRACT,
 	DIVIDE,
+	HUE,
+	SATURATION,
+	COLOR,
+	LUMINOSITY
 }
 
 var name := ""
