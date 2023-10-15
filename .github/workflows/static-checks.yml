@@ -29,4 +29,5 @@ jobs:
         uses: codespell-project/actions-codespell@v2
         with:
           skip: ./addons,*.po
+          exclude_file: src/UI/Dialogs/AboutDialog.gd
           ignore_words_list: chello,doubleclick,Manuel
