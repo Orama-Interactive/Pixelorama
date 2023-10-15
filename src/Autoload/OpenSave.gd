@@ -1,6 +1,8 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
+signal project_saved
+
 var current_save_paths: PackedStringArray = []
 ## Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths: PackedStringArray = []
@@ -301,6 +303,7 @@ func save_pxo_file(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
 		)
+		project_saved.emit()
 
 	save_project_to_recent_list(path)
 	return true

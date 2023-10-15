@@ -67,6 +67,7 @@ func _ready() -> void:
 		OS.request_permissions()
 
 	_show_splash_screen()
+	Global.pixelorama_opened.emit()
 
 
 func _input(event: InputEvent) -> void:
@@ -348,6 +349,7 @@ func _on_QuitAndSaveDialog_confirmed() -> void:
 
 
 func _quit() -> void:
+	Global.pixelorama_about_to_close.emit()
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)

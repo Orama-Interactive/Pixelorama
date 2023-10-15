@@ -94,7 +94,7 @@ class GeneralAPI:
 	func get_drawing_algos() -> DrawingAlgos:
 		return DrawingAlgos
 
-	func get_shader_image_effect() -> ShaderImageEffect:
+	func get_new_shader_image_effect() -> ShaderImageEffect:
 		return ShaderImageEffect.new()
 
 	func get_extensions_node() -> Node:
@@ -549,37 +549,77 @@ class SignalsAPI:
 	func _on_texture_changed():
 		texture_changed.emit()
 
-	# Global signals
-	func connect_project_changed(target: Object, method: String):
-		Global.project_changed.connect(Callable(target, method))
+	# GLOBAL SIGNALS
+	# pixelorama_opened
+	func connect_pixelorama_opened(callable: Callable):
+		Global.pixelorama_opened.connect(callable)
+		ExtensionsApi.add_action("pixelorama_opened")
+
+	func disconnect_pixelorama_opened(callable: Callable):
+		Global.pixelorama_opened.disconnect(callable)
+		ExtensionsApi.remove_action("pixelorama_opened")
+
+	# pixelorama_about_to_close
+	func connect_pixelorama_about_to_close(callable: Callable):
+		Global.pixelorama_about_to_close.connect(callable)
+		ExtensionsApi.add_action("pixelorama_about_to_close")
+
+	func disconnect_pixelorama_about_to_close(callable: Callable):
+		Global.pixelorama_about_to_close.disconnect(callable)
+		ExtensionsApi.remove_action("pixelorama_about_to_close")
+
+	# project_created -> signal has argument of type "Project"
+	func connect_project_created(callable: Callable):
+		Global.project_created.connect(callable)
+		ExtensionsApi.add_action("project_created")
+
+	func disconnect_project_created(callable: Callable):
+		Global.project_created.disconnect(callable)
+		ExtensionsApi.remove_action("project_created")
+
+	# project_saved
+	func connect_project_about_to_save(callable: Callable):
+		Global.project_saved.connect(callable)
+		ExtensionsApi.add_action("project_saved")
+
+	func disconnect_project_saved(callable: Callable):
+		Global.project_saved.disconnect(callable)
+		ExtensionsApi.remove_action("project_saved")
+
+	# project_changed
+	func connect_project_changed(callable: Callable):
+		Global.project_changed.connect(callable)
 		ExtensionsApi.add_action("project_changed")
 
-	func disconnect_project_changed(target: Object, method: String):
-		Global.project_changed.disconnect(Callable(target, method))
+	func disconnect_project_changed(callable: Callable):
+		Global.project_changed.disconnect(callable)
 		ExtensionsApi.remove_action("project_changed")
 
-	func connect_cel_changed(target: Object, method: String):
-		Global.cel_changed.connect(Callable(target, method))
+	# cel_changed
+	func connect_cel_changed(callable: Callable):
+		Global.cel_changed.connect(callable)
 		ExtensionsApi.add_action("cel_changed")
 
-	func disconnect_cel_changed(target: Object, method: String):
-		Global.cel_changed.disconnect(Callable(target, method))
+	func disconnect_cel_changed(callable: Callable):
+		Global.cel_changed.disconnect(callable)
 		ExtensionsApi.remove_action("cel_changed")
 
-	# Tool Signal
-	func connect_tool_color_changed(target: Object, method: String):
-		Tools.color_changed.connect(Callable(target, method))
+	# TOOL SIGNALs
+	# cel_changed
+	func connect_tool_color_changed(callable: Callable):
+		Tools.color_changed.connect(callable)
 		ExtensionsApi.add_action("color_changed")
 
-	func disconnect_tool_color_changed(target: Object, method: String):
-		Tools.color_changed.disconnect(Callable(target, method))
+	func disconnect_tool_color_changed(callable: Callable):
+		Tools.color_changed.disconnect(callable)
 		ExtensionsApi.remove_action("color_changed")
 
-	# updater signals
-	func connect_current_cel_texture_changed(target: Object, method: String):
-		texture_changed.connect(Callable(target, method))
+	# UPDATER SIGNALS
+	# current_cel_texture_changed
+	func connect_current_cel_texture_changed(callable: Callable):
+		texture_changed.connect(callable)
 		ExtensionsApi.add_action("texture_changed")
 
-	func disconnect_current_cel_texture_changed(target: Object, method: String):
-		texture_changed.disconnect(Callable(target, method))
+	func disconnect_current_cel_texture_changed(callable: Callable):
+		texture_changed.disconnect(callable)
 		ExtensionsApi.remove_action("texture_changed")
