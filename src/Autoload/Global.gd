@@ -272,7 +272,7 @@ func set_integer_zoom(enabled: bool):
 	else:
 		zoom_slider.snap_step = 1
 		zoom_slider.step = 1
-	zoom_slider.value = zoom_slider.value  # to trigger signal emmission
+	zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
 
 func _initialize_keychain() -> void:

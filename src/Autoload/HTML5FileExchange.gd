@@ -72,7 +72,7 @@ func _define_js() -> void:
 
 
 # If (load_directly = false) then image info (image and its name)
-# will not be directly farwarded it to OpenSave
+# will not be directly forwarded it to OpenSave
 func load_image(load_directly := true):
 	if OS.get_name() != "HTML5" or !OS.has_feature("JavaScript"):
 		return

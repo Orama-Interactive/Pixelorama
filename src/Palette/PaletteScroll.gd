@@ -11,7 +11,7 @@ onready var scroll_container := $"%ScrollContainer"
 
 
 func _ready() -> void:
-	# Hide default scollbars
+	# Hide default scrollbars
 	scroll_container.get_h_scrollbar().rect_scale = Vector2.ZERO
 	scroll_container.get_v_scrollbar().rect_scale = Vector2.ZERO
 
