@@ -8,6 +8,7 @@
 [node name="ExportDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
 title = "Export..."
+position = Vector2i(0, 36)
 size = Vector2i(700, 600)
 exclusive = false
 dialog_hide_on_ok = false
@@ -17,8 +18,8 @@ script = ExtResource("1")
 custom_minimum_size = Vector2(330, 0)
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 524.0
-offset_bottom = 494.0
+offset_right = 692.0
+offset_bottom = 551.0
 size_flags_vertical = 3
 
 [node name="TabBar" type="TabBar" parent="VBoxContainer"]
@@ -300,8 +301,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 524.0
-offset_bottom = 494.0
+offset_right = 692.0
+offset_bottom = 551.0
 mouse_filter = 2
 
 [node name="PathDialog" type="FileDialog" parent="Popups"]

@@ -560,3 +560,12 @@ class SignalsAPI:
 	func disconnect_current_cel_texture_changed(target: Object, method: String):
 		texture_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("texture_changed")
+
+	# Export dialog signals
+	func connect_export_about_to_preview(target: Object, method: String):
+		Global.export_dialog.about_to_preview.connect(Callable(target, method))
+		ExtensionsApi.add_action("export_about_to_preview")
+
+	func disconnect_export_about_to_preview(target: Object, method: String):
+		Global.export_dialog.about_to_preview.disconnect(Callable(target, method))
+		ExtensionsApi.remove_action("export_about_to_preview")
