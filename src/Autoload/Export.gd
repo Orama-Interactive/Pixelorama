@@ -10,6 +10,7 @@ enum FileFormat { PNG, WEBP, JPEG, GIF, APNG }
 var animated_formats := [FileFormat.GIF, FileFormat.APNG]
 
 ## A dictionary of custom exporter generators (received from extensions)
+var custom_file_formats := {}
 var custom_exporter_generators := {}
 
 var current_tab := ExportTab.IMAGE
@@ -51,16 +52,47 @@ func _multithreading_enabled() -> bool:
 	return ProjectSettings.get_setting("rendering/driver/threads/thread_model") == 2
 
 
-func add_file_format(_format: String) -> int:
-	var id := FileFormat.size()
-#	FileFormat.merge({format: id})
+func add_custom_file_format(
+	format_name: String,
+	extension: String,
+	exporter_generator: Object,
+	tab :int,
+	is_animated :bool
+	) -> int:
+	# Obtain a unique id
+	var id := Export.FileFormat.size()
+	for i in Export.custom_file_formats.size():
+		var format_id = id + i
+		if !Export.custom_file_formats.values().has(i):
+			id = format_id
+	# Add to custom_file_formats
+	custom_file_formats.merge({format_name: id})
+	custom_exporter_generators.merge({id: [exporter_generator, extension]})
+	if is_animated:
+		Export.animated_formats.append(id)
+	# Add to export dialog
+	match tab:
+		ExportTab.IMAGE:
+			Global.export_dialog.image_exports.append(id)
+		ExportTab.SPRITESHEET:
+			Global.export_dialog.spritesheet_exports.append(id)
+		_:  # Both
+			Global.export_dialog.image_exports.append(id)
+			Global.export_dialog.spritesheet_exports.append(id)
 	return id
 
 
 func remove_file_format(id: int) -> void:
-	for key in Export.FileFormat.keys():
-		if Export.FileFormat[key] == id:
-#			Export.FileFormat.erase(key)
+	for key in custom_file_formats.keys():
+		if custom_file_formats[key] == id:
+			custom_file_formats.erase(key)
+			# remove exporter generator
+			Export.custom_exporter_generators.erase(id)
+			#  remove from animated (if it is present there)
+			Export.animated_formats.erase(id)
+			#  remove from export dialog
+			Global.export_dialog.image_exports.erase(id)
+			Global.export_dialog.spritesheet_exports.erase(id)
 			return
 
 
@@ -392,8 +424,8 @@ func file_format_description(format_enum: int) -> String:
 			return "APNG Image"
 		_:
 			# If a file format description is not found, try generating one
-			for key in FileFormat.keys():
-				if FileFormat[key] == format_enum:
+			for key in custom_file_formats.keys():
+				if custom_file_formats[key] == format_enum:
 					return str(key.capitalize())
 			return ""
 
