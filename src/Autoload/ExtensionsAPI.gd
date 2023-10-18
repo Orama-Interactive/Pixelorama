@@ -476,7 +476,10 @@ class ExportAPI:
 	var ExportTab := Export.ExportTab
 
 	func add_export_option(
-		format_info: Dictionary, exporter_generator: Object, tab := ExportTab.IMAGE, is_animated := true
+		format_info: Dictionary,
+		exporter_generator: Object,
+		tab := ExportTab.IMAGE,
+		is_animated := true
 	) -> int:
 		# Separate enum name and file name
 		var extension = ""

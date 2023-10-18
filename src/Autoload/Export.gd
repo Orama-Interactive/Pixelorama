@@ -53,12 +53,8 @@ func _multithreading_enabled() -> bool:
 
 
 func add_custom_file_format(
-	format_name: String,
-	extension: String,
-	exporter_generator: Object,
-	tab :int,
-	is_animated :bool
-	) -> int:
+	format_name: String, extension: String, exporter_generator: Object, tab: int, is_animated: bool
+) -> int:
 	# Obtain a unique id
 	var id := Export.FileFormat.size()
 	for i in Export.custom_file_formats.size():
