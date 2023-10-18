@@ -476,57 +476,37 @@ class ExportAPI:
 	var ExportTab := Export.ExportTab
 
 	func add_export_option(
-		format_info: Dictionary, exporter_generator, tab := ExportTab.IMAGE, is_animated := true
+		format_info: Dictionary,
+		exporter_generator: Object,
+		tab := ExportTab.IMAGE,
+		is_animated := true
 	) -> int:
-		# separate enum name and file name
+		# Separate enum name and file name
 		var extension = ""
 		var format_name = ""
 		if format_info.has("extension"):
 			extension = format_info["extension"]
 		if format_info.has("description"):
-			format_name = format_info["description"].to_upper().replace(" ", "_")
-		# change format name if another one uses the same name
-		for i in range(Export.FileFormat.size()):
+			format_name = format_info["description"].strip_edges().to_upper().replace(" ", "_")
+		# Change format name if another one uses the same name
+		var existing_format_names = Export.FileFormat.keys() + Export.custom_file_formats.keys()
+		for i in range(existing_format_names.size()):
 			var test_name = format_name
 			if i != 0:
 				test_name = str(test_name, "_", i)
-			if !Export.FileFormat.keys().has(test_name):
+			if !existing_format_names.has(test_name):
 				format_name = test_name
 				break
-		#  add to FileFormat enum
-		var id := Export.FileFormat.size()
-		for i in Export.FileFormat.size():  # use an empty id if it's available
-			if !Export.FileFormat.values().has(i):
-				id = i
-#		Export.FileFormat.merge({format_name: id})
-		#  add exporter generator
-		Export.custom_exporter_generators.merge({id: [exporter_generator, extension]})
-		#  add to animated (or not)
-		if is_animated:
-			Export.animated_formats.append(id)
-		#  add to export dialog
-		match tab:
-			ExportTab.IMAGE:
-				Global.export_dialog.image_exports.append(id)
-			ExportTab.SPRITESHEET:
-				Global.export_dialog.spritesheet_exports.append(id)
-			_:  # Both
-				Global.export_dialog.image_exports.append(id)
-				Global.export_dialog.spritesheet_exports.append(id)
+		# Setup complete, add the exporter
+		var id = Export.add_custom_file_format(
+			format_name, extension, exporter_generator, tab, is_animated
+		)
 		ExtensionsApi.add_action("add_exporter")
 		return id
 
 	func remove_export_option(id: int):
 		if Export.custom_exporter_generators.has(id):
-			# remove enum
-			Export.remove_file_format(id)
-			# remove exporter generator
-			Export.custom_exporter_generators.erase(id)
-			#  remove from animated (or not)
-			Export.animated_formats.erase(id)
-			#  add to export dialog
-			Global.export_dialog.image_exports.erase(id)
-			Global.export_dialog.spritesheet_exports.erase(id)
+			Export.remove_custom_file_format(id)
 			ExtensionsApi.remove_action("add_exporter")
 
 
@@ -623,3 +603,12 @@ class SignalsAPI:
 	func disconnect_current_cel_texture_changed(callable: Callable):
 		texture_changed.disconnect(callable)
 		ExtensionsApi.remove_action("texture_changed")
+
+	# Export dialog signals
+	func connect_export_about_to_preview(target: Object, method: String):
+		Global.export_dialog.about_to_preview.connect(Callable(target, method))
+		ExtensionsApi.add_action("export_about_to_preview")
+
+	func disconnect_export_about_to_preview(target: Object, method: String):
+		Global.export_dialog.about_to_preview.disconnect(Callable(target, method))
+		ExtensionsApi.remove_action("export_about_to_preview")
