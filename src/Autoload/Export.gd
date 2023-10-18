@@ -82,7 +82,7 @@ func add_custom_file_format(
 	return id
 
 
-func remove_file_format(id: int) -> void:
+func remove_custom_file_format(id: int) -> void:
 	for key in custom_file_formats.keys():
 		if custom_file_formats[key] == id:
 			custom_file_formats.erase(key)

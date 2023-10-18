@@ -503,7 +503,7 @@ class ExportAPI:
 
 	func remove_export_option(id: int):
 		if Export.custom_exporter_generators.has(id):
-			Export.remove_file_format(id)
+			Export.remove_custom_file_format(id)
 			ExtensionsApi.remove_action("add_exporter")
 
 
