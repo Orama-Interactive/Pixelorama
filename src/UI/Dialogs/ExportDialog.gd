@@ -4,8 +4,6 @@ extends ConfirmationDialog
 signal resume_export_function
 signal about_to_preview(Dictionary)
 
-var _preview_images: Array[Image]
-var _preview_durations: PackedFloat32Array
 var preview_current_frame := 0
 var preview_frames: Array[Texture2D] = []
 
@@ -20,6 +18,9 @@ var image_exports: Array[Export.FileFormat] = [
 var spritesheet_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG
 ]
+
+var _preview_images: Array[Image]
+var _preview_durations: PackedFloat32Array
 
 @onready var tabs: TabBar = $VBoxContainer/TabBar
 @onready var checker: ColorRect = $"%TransparentChecker"
