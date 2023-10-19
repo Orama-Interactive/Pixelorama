@@ -386,16 +386,24 @@ class ThemeAPI:
 		ExtensionsApi.remove_action("add_theme")
 
 
+## Gives ability to add/remove tools.
 class ToolAPI:
-	# Tool methods
+	const LayerTypes = Global.LayerTypes
+	## Adds a tool to pixelorama with name [param tool_name] (without spaces),
+	## display name [param display_name], tool scene [param scene], layers that the tool works
+	## on [param layer_types] defined by [constant LayerTypes],
+	## [param extra_hint] (text that appears when mouse havers tool icon), primary shortcut
+	## name [param shortcut] and any extra shortcuts [param extra_shortucts].
+	## [br][br]At the moment extensions can't make their own shortcuts so you can ignore
+	## [param shortcut] and [param extra_shortucts].
 	func add_tool(
 		tool_name: String,
 		display_name: String,
-		shortcut: String,
 		scene: String,
+		layer_types: PackedInt32Array = [],
 		extra_hint := "",
-		extra_shortucts := [],
-		layer_types: PackedInt32Array = []
+		shortcut: String = "",
+		extra_shortucts: PackedStringArray = [],
 	) -> void:
 		var tool_class := Tools.Tool.new(
 			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortucts
@@ -404,6 +412,8 @@ class ToolAPI:
 		Tools.add_tool_button(tool_class)
 		ExtensionsApi.add_action("add_tool")
 
+	## Removes a tool with name [param tool_name]
+	## and assign Pencil as left tool, Eraser as right tool.
 	func remove_tool(tool_name: String) -> void:
 		# Re-assigning the tools in case the tool to be removed is also active
 		Tools.assign_tool("Pencil", MOUSE_BUTTON_LEFT)
