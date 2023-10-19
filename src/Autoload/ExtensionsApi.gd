@@ -108,28 +108,47 @@ func get_api_version() -> int:
 	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
 
 
+## Gives Access to the general stuff.
+##
+## This part of Api provides stuff like commonly used Autoloads, App's version info etc
+## the most basic (but important) stuff.
 class GeneralAPI:
-	# Version And Config
+	## Returns the current version of pixelorama.
 	func get_pixelorama_version() -> String:
 		return ProjectSettings.get_setting("application/config/Version")
 
+	## Returns the [ConfigFile] contains all the settings (Brushes, sizes, preferences, etc...).
 	func get_config_file() -> ConfigFile:
 		return Global.config_cache
 
-	# Nodes
+	## Returns the Global autoload used by Pixelorama.[br]
+	## Contains references to almost all UI Elements, Variables that indicate different
+	## settings etc..., In short it is the most important autoload of Pixelorama.
 	func get_global() -> Global:
 		return Global
 
+	## Returns the DrawingAlgos autoload, contains different drawing algorithms used by Pixelorama.
 	func get_drawing_algos() -> DrawingAlgos:
 		return DrawingAlgos
 
+	## Gives you a new ShaderImageEffect class. this class can apply shader to an image.[br]
+	## It contains method:
+	## [code]generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector2)[/code]
+	## [br]Whose parameters are identified as:
+	## [br][param img] --> image that the shader will be pasted to (Empty Image of size same as
+	## project).
+	## [br][param shader] --> preload of the shader.
+	## [br][param params] --> a dictionary of params used by the shader.
+	## [br][param size] --> It is the project's size.
 	func get_new_shader_image_effect() -> ShaderImageEffect:
 		return ShaderImageEffect.new()
 
+	## Returns parent of the nodes listed in extension.json -> "nodes".
 	func get_extensions_node() -> Node:
-		# node where the nodes listed in "nodes" from extension.json gets placed
 		return Global.control.get_node("Extensions")
 
+	## Returns the main [code]Canvas[/code] node,
+	## normally used to add a custom preview to the canvas.
 	func get_canvas() -> Canvas:
 		return Global.canvas
 
