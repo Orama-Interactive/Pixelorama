@@ -206,7 +206,7 @@ class MenuAPI:
 
 ## Gives access to common dialog related functions.
 class DialogAPI:
-	## Shows an alert dialog with the given [param text]
+	## Shows an alert dialog with the given [param text].
 	## Useful for displaying messages like "Incompatible API" etc...
 	func show_error(text: String) -> void:
 		Global.error_dialog.set_text(text)
@@ -222,15 +222,19 @@ class DialogAPI:
 		Global.dialog_open(open)
 
 
+## Gives access to Tabs and Dockable Container related functions.
 class PanelAPI:
-	func set_tabs_visible(visible: bool) -> void:
-		var dockable := _get_dockable_container_ui()
-		dockable.set_tabs_visible(visible)
+	## Sets the visibility of dokable tabs.
+	var tabs_visible: bool:
+		set(value):
+			var dockable := _get_dockable_container_ui()
+			dockable.tabs_visible = value
+		get:
+			var dockable := _get_dockable_container_ui()
+			return dockable.tabs_visible
 
-	func get_tabs_visible() -> bool:
-		var dockable := _get_dockable_container_ui()
-		return dockable.get_tabs_visible()
-
+	## Adds the [param node] as a tab. Initially it's placed on the same panel as the tools tab,
+	## but can be changed through adding custom layouts.
 	func add_node_as_tab(node: Node) -> void:
 		var dockable := _get_dockable_container_ui()
 		var top_menu_container = Global.top_menu_container
@@ -260,6 +264,7 @@ class PanelAPI:
 			dockable.tabs_visible = false
 		ExtensionsApi.add_action("add_tab")
 
+	## Removes the [param node] from the DockableContainer.
 	func remove_node_from_tab(node: Node) -> void:
 		var top_menu_container = Global.top_menu_container
 		var dockable = Global.control.find_child("DockableContainer")
