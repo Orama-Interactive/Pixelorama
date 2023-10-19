@@ -403,7 +403,7 @@ class ToolAPI:
 		layer_types: PackedInt32Array = [],
 		extra_hint := "",
 		shortcut: String = "",
-		extra_shortucts: PackedStringArray = [],
+		extra_shortucts: PackedStringArray = []
 	) -> void:
 		var tool_class := Tools.Tool.new(
 			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortucts
@@ -424,20 +424,29 @@ class ToolAPI:
 		ExtensionsApi.remove_action("add_tool")
 
 
+## Gives access to pixelorama's selection system.
 class SelectionAPI:
+	## Clears the selection Gizmo.
 	func clear_selection() -> void:
 		Global.canvas.selection.clear_selection(true)
 
+	## Select the entire region of current cel.
 	func select_all() -> void:
 		Global.canvas.selection.select_all()
 
+	## Selects a portion defined by [param rect] of the current cel.
+	## [param operation] influences it's behaviour with previous selection rects
+	## (0 for adding, 1 for subtracting, 2 for intersection).
 	func select_rect(rect: Rect2i, operation := 0) -> void:
-		# 0 for adding, 1 for subtracting, 2 for intersection
 		Global.canvas.selection.transform_content_confirm()
 		var undo_data_tmp = Global.canvas.selection.get_undo_data(false)
 		Global.canvas.selection.select_rect(rect, operation)
 		Global.canvas.selection.commit_undo("Select", undo_data_tmp)
 
+	## Moves a selection to [param destination],
+	## with content if [param with_content] is [code]true[/code].
+	## If [param transform_standby] is [code]true[/code] then the transformation will not be
+	## applied immediatelyunless [kbd]Enter[/kbd] is pressed.
 	func move_selection(destination: Vector2, with_content := true, transform_standby := false):
 		if not with_content:
 			Global.canvas.selection.transform_content_confirm()
@@ -450,6 +459,10 @@ class SelectionAPI:
 		if not transform_standby and with_content:
 			Global.canvas.selection.transform_content_confirm()
 
+	## Resizes the selection to [param new_size],
+	## with content if [param with_content] is [code]true[/code].
+	## If [param transform_standby] is [code]true[/code] then the transformation will not be
+	## applied immediatelyunless [kbd]Enter[/kbd] is pressed.
 	func resize_selection(new_size: Vector2, with_content := true, transform_standby := false):
 		if not with_content:
 			Global.canvas.selection.transform_content_confirm()
@@ -462,18 +475,23 @@ class SelectionAPI:
 		if not transform_standby and with_content:
 			Global.canvas.selection.transform_content_confirm()
 
+	## Inverts the selection gizmo.
 	func invert() -> void:
 		Global.canvas.selection.invert()
 
+	## Makes a project brush out of the current selection's content.
 	func make_brush() -> void:
 		Global.canvas.selection.new_brush()
 
+	## Copies the selection content (works in or between pixelorama instances only).
 	func copy() -> void:
 		Global.canvas.selection.copy()
 
+	## Pastes the selection content.
 	func paste(in_place := false) -> void:
 		Global.canvas.selection.paste(in_place)
 
+	## Deletes the drawing on current cel enclosed within the selection's area.
 	func delete_content() -> void:
 		Global.canvas.selection.delete()
 
