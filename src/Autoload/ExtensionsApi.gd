@@ -1,21 +1,45 @@
 extends Node
+# NOTE: Type "ExtensionsApi" in Search Help to read the curated documentation of the Api
 
-# Use these variables in your extension to access the api
+## The Official ExtensionAPI for pixelorama.
+##
+## This Api gives you the essentials eo develop a working extension for Pixelorama.[br]
+## The Api consists of many smaller Apis, each giving access to different areas of the Software.
+## [br][br]
+## Keep in mind that this API is targeted towards users who are not fully familiar with Pixelorama's
+## source code. If you need to do something more complicated and more low-level, you would need to
+## interact directly with the source code.
+##
+## @tutorial(Add Tutorial here):            https://the/tutorial1/url.com
+
+## Gives access to the general, app related functions of pixelorama itself
+## such as Autoloads, Software Version, Config file etc...
 var general := GeneralAPI.new()
+## Gives ability to add/remove items from menus in the top bar.
 var menu := MenuAPI.new()
+## Gives access to Dialog related functions.
 var dialog := DialogAPI.new()
+## Gives access to Tabs and Dockable Container related functions.
 var panel := PanelAPI.new()
+## Gives access to theme related functions.
 var theme := ThemeAPI.new()
+## Gives ability to add/remove tools.
 var tools := ToolAPI.new()
+## Gives access to pixelorama's selection system.
 var selection := SelectionAPI.new()
+## Gives access to project manipulation.
 var project := ProjectAPI.new()
+## Gives access to adding custom exporters.
 var exports := ExportAPI.new()
+## Gives access to the basic commonly used signals.
+## Some less common signals are not mentioned in api but could be accessed through source directly.
 var signals := SignalsAPI.new()
 
 ## This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
 
 
+## [code]This function is used internally and not meant to be used by extensions.[/code]
 func check_sanity(extension_name: String):
 	if extension_name in _action_history.keys():
 		var extension_history = _action_history[extension_name]
@@ -30,11 +54,13 @@ func check_sanity(extension_name: String):
 			print(error_msg)
 
 
+## [code]This function is used internally and not meant to be used by extensions.[/code]
 func clear_history(extension_name: String):
 	if extension_name in _action_history.keys():
 		_action_history.erase(extension_name)
 
 
+## [code]This function is used internally and not meant to be used by extensions.[/code]
 func add_action(action: String):
 	var extension_name = _get_caller_extension_name()
 	if extension_name != "Unknown":
@@ -45,13 +71,14 @@ func add_action(action: String):
 			_action_history[extension_name] = [action]
 
 
+## [code]This function is used internally and not meant to be used by extensions.[/code]
 func remove_action(action: String):
 	var extension_name = _get_caller_extension_name()
 	if extension_name != "Unknown":
 		if extension_name in _action_history.keys():
 			_action_history[extension_name].erase(action)
 
-
+## [code]This function is used internally and not meant to be used by extensions.[/code]
 func wait_frame():  # as yield is not available to classes below, so this is the solution
 	# use by yield(ExtensionsApi.wait_frame(), "completed")
 	await get_tree().process_frame
@@ -75,6 +102,7 @@ func _exit_tree():
 
 
 # The Api Methods Start Here
+## Returns the version of the ExtensionsApi.
 func get_api_version() -> int:
 	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
 
