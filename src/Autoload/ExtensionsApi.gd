@@ -389,6 +389,7 @@ class ThemeAPI:
 ## Gives ability to add/remove tools.
 class ToolAPI:
 	const LayerTypes = Global.LayerTypes
+
 	## Adds a tool to pixelorama with name [param tool_name] (without spaces),
 	## display name [param display_name], tool scene [param scene], layers that the tool works
 	## on [param layer_types] defined by [constant LayerTypes],
