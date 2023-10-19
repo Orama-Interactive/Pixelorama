@@ -352,20 +352,26 @@ class PanelAPI:
 		return tabs
 
 
+## Gives access to theme related functions.
 class ThemeAPI:
+	## Adds the [param theme] to [code]Edit -> Preferences -> Interface -> Themes[/code].
 	func add_theme(theme: Theme) -> void:
 		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		themes.themes.append(theme)
 		themes.add_theme(theme)
 		ExtensionsApi.add_action("add_theme")
 
+	## Returns index of the [param theme] in preferences.
 	func find_theme_index(theme: Theme) -> int:
 		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		return themes.themes.find(theme)
 
+	## Returns the current theme resource.
 	func get_theme() -> Theme:
 		return Global.control.theme
 
+	## Sets a theme located at a given [param idx] in preferences. If theme set successfully then
+	## return [code]true[/code], else [code]false[/code].
 	func set_theme(idx: int) -> bool:
 		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		if idx >= 0 and idx < themes.themes.size():
@@ -374,6 +380,7 @@ class ThemeAPI:
 		else:
 			return false
 
+	## Remove the [param theme] from preferences.
 	func remove_theme(theme: Theme) -> void:
 		Global.preferences_dialog.themes.remove_theme(theme)
 		ExtensionsApi.remove_action("add_theme")
