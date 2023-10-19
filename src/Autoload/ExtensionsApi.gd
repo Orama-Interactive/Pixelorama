@@ -496,7 +496,12 @@ class SelectionAPI:
 		Global.canvas.selection.delete()
 
 
+## Gives access to basic project manipulation functions.
 class ProjectAPI:
+	## Creates a new project (with new tab) with name [param name], size [param size],
+	## fill color [param fill_color] and frames [param frames]. The created project also
+	## gets returned.[br][br]
+	## [param frames] is an [Array] of type Frames. Usually it can be left as [code][][/code].
 	func new_project(
 		frames := [],
 		name := tr("untitled"),
@@ -515,31 +520,41 @@ class ProjectAPI:
 		Global.projects.append(new_proj)
 		return new_proj
 
+	## Switches to the tab that contains the [param project].
 	func switch_to(project: Project):
 		Global.tabs.current_tab = Global.projects.find(project)
 
+	## Returns the project in focus.
 	func get_current_project() -> Project:
 		return Global.current_project
 
+	## Returns a dictionary containing all the project information.
 	func get_project_info(project: Project) -> Dictionary:
 		return project.serialize()
 
+	## Returns the current cel.
+	## Cel type can be checked using function [method get_class_name] inside the cel
+	## type can be GroupCel, PixelCel, Cel3D, or BaseCel.
 	func get_current_cel() -> BaseCel:
 		return get_current_project().get_current_cel()
 
+	## Frames are counted from left to right, layers are counted  from bottom to top.
+	## Frames/layers start at "0" and end at [param project.frames.size() - 1] and
+	## [param project.layers.size() - 1] respectively.
 	func get_cel_at(project: Project, frame: int, layer: int) -> BaseCel:
-		# frames from left to right, layers from bottom to top
 		clampi(frame, 0, project.frames.size() - 1)
 		clampi(layer, 0, project.layers.size() - 1)
 		return project.frames[frame].cels[layer]
 
+	## Sets an [param image] at [param frame] and [param layer] on the current project.
+	## Frames are counted from left to right, layers are counted from bottom to top.
 	func set_pixelcel_image(image: Image, frame: int, layer: int) -> void:
-		# frames from left to right, layers from bottom to top
 		if get_cel_at(get_current_project(), frame, layer).get_class_name() == "PixelCel":
 			OpenSave.open_image_at_cel(image, layer, frame)
 		else:
 			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
 
+	## Adds a new frame in the current project after frame [param after_frame].
 	func add_new_frame(after_frame: int):
 		var project := Global.current_project
 		if after_frame < project.frames.size() and after_frame >= 0:
@@ -550,9 +565,12 @@ class ProjectAPI:
 		else:
 			print("invalid (after_frame)")
 
+	## Adds a new Layer of name [param name] in the current project above layer [param above_layer]
+	## ([param above_layer] = 0 is the bottom-most layer and so on).
+	## [br][param type] = 0 --> PixelLayer,
+	## [br][param type] = 1 --> GroupLayer,
+	## [br][param type] = 2 --> 3DLayer
 	func add_new_layer(above_layer: int, name := "", type := Global.LayerTypes.PIXEL):
-		# type = 0 --> PixelLayer, type = 1 --> GroupLayer, type = 2 --> 3DLayer
-		# above_layer = 0 is the bottom-most layer and so on
 		var project = ExtensionsApi.project.get_current_project()
 		if above_layer < project.layers.size() and above_layer >= 0:
 			var old_current = project.current_layer
@@ -570,10 +588,22 @@ class ProjectAPI:
 			print("invalid (above_layer)")
 
 
+## Gives access to adding custom exporters.
 class ExportAPI:
 	# gdlint: ignore=class-variable-name
-	var ExportTab := Export.ExportTab
+	const ExportTab := Export.ExportTab
 
+	## [param format_info] has keys: [code]extension[/code] and [code]description[/code]
+	## whose values are of type [String] e.g:[codeblock]
+	## format_info = {"extension": ".gif", "description": "GIF Image"}
+	## [/codeblock]
+	## [param exporter_generator] is a node with a script containing the method
+	## [method override_export] which takes 1 argument of type Dictionary which is automatically
+	## passed to [method override_export] at time of export and contains
+	## keys: [code]processed_images[/code], [code]durations[/code], [code]export_dialog[/code],
+	## [code]export_paths[/code], [code]project[/code][br]
+	## If the value of [param tab] is not in [constant ExportTab] then the format will be added to
+	## both tabs. Returns the index of exporter, which can be used to remove exporter later.
 	func add_export_option(
 		format_info: Dictionary,
 		exporter_generator: Object,
@@ -603,14 +633,21 @@ class ExportAPI:
 		ExtensionsApi.add_action("add_exporter")
 		return id
 
+	## Removes the exporter with [param id] from Pixelorama.
 	func remove_export_option(id: int):
 		if Export.custom_exporter_generators.has(id):
 			Export.remove_custom_file_format(id)
 			ExtensionsApi.remove_action("add_exporter")
 
 
+## Gives access to the basic commonly used signals.
+##
+## Gives access to the basic commonly used signals.
+## Some less common signals are not mentioned in Api but could be accessed through source directly.
 class SignalsAPI:
 	# system to auto-adjust texture_changed to the "current cel"
+	## This signal is not meant to be used directly.
+	## Use [method connect_current_cel_texture_changed] instead
 	signal texture_changed
 	var _last_cel: BaseCel
 
@@ -629,85 +666,106 @@ class SignalsAPI:
 		texture_changed.emit()
 
 	# GLOBAL SIGNALS
-	# pixelorama_opened
+	## connects a signal to [param method] present in [param target], that emits
+	## when pixelorama is just opened.
 	func connect_pixelorama_opened(callable: Callable):
 		Global.pixelorama_opened.connect(callable)
 		ExtensionsApi.add_action("pixelorama_opened")
 
+	## reverse of [method connect_pixelorama_opened].
 	func disconnect_pixelorama_opened(callable: Callable):
 		Global.pixelorama_opened.disconnect(callable)
 		ExtensionsApi.remove_action("pixelorama_opened")
 
-	# pixelorama_about_to_close
+	## connects a signal to [param method] present in [param target], that emits
+	## when pixelorama is about to close.
 	func connect_pixelorama_about_to_close(callable: Callable):
 		Global.pixelorama_about_to_close.connect(callable)
 		ExtensionsApi.add_action("pixelorama_about_to_close")
 
+	## reverse of [method connect_pixelorama_about_to_close].
 	func disconnect_pixelorama_about_to_close(callable: Callable):
 		Global.pixelorama_about_to_close.disconnect(callable)
 		ExtensionsApi.remove_action("pixelorama_about_to_close")
 
-	# project_created -> signal has argument of type "Project"
+	## connects a signal to [param method] present in [param target], that emits
+	## whenever a new project is created.[br]
+	## [b]Binds: [/b]It has one bind of type [code]Project[/code] which is the newly created project
 	func connect_project_created(callable: Callable):
 		Global.project_created.connect(callable)
 		ExtensionsApi.add_action("project_created")
 
+	## reverse of [method connect_project_created].
 	func disconnect_project_created(callable: Callable):
 		Global.project_created.disconnect(callable)
 		ExtensionsApi.remove_action("project_created")
 
-	# project_saved
+	## connects a signal to [param method] present in [param target], that emits
+	## whenever project is about to be saved.
 	func connect_project_about_to_save(callable: Callable):
 		Global.project_saved.connect(callable)
 		ExtensionsApi.add_action("project_saved")
 
+	## reverse of [method connect_project_about_to_save].
 	func disconnect_project_saved(callable: Callable):
 		Global.project_saved.disconnect(callable)
 		ExtensionsApi.remove_action("project_saved")
 
-	# project_changed
+	## connects a signal to [param method] present in [param target], that emits
+	## whenever you switch to some other project.
 	func connect_project_changed(callable: Callable):
 		Global.project_changed.connect(callable)
 		ExtensionsApi.add_action("project_changed")
 
+	## reverse of [method connect_project_changed].
 	func disconnect_project_changed(callable: Callable):
 		Global.project_changed.disconnect(callable)
 		ExtensionsApi.remove_action("project_changed")
 
-	# cel_changed
+	## connects a signal to [param method] present in [param target], that emits
+	## whenever you select a different cel.
 	func connect_cel_changed(callable: Callable):
 		Global.cel_changed.connect(callable)
 		ExtensionsApi.add_action("cel_changed")
 
+	## reverse of [method connect_cel_changed].
 	func disconnect_cel_changed(callable: Callable):
 		Global.cel_changed.disconnect(callable)
 		ExtensionsApi.remove_action("cel_changed")
 
-	# TOOL SIGNALs
-	# cel_changed
+	# TOOL SIGNALS
+	## connects a signal to [param method] present in [param target], that emits
+	## whenever a tool changes color.
 	func connect_tool_color_changed(callable: Callable):
 		Tools.color_changed.connect(callable)
 		ExtensionsApi.add_action("color_changed")
 
+	## reverse of [method connect_tool_color_changed].
 	func disconnect_tool_color_changed(callable: Callable):
 		Tools.color_changed.disconnect(callable)
 		ExtensionsApi.remove_action("color_changed")
 
 	# UPDATER SIGNALS
-	# current_cel_texture_changed
+	## connects a signal to [param method] present in [param target], that emits
+	## whenever texture of the currently focused cel changes.
 	func connect_current_cel_texture_changed(callable: Callable):
 		texture_changed.connect(callable)
 		ExtensionsApi.add_action("texture_changed")
 
+	## reverse of [method connect_current_cel_texture_changed].
 	func disconnect_current_cel_texture_changed(callable: Callable):
 		texture_changed.disconnect(callable)
 		ExtensionsApi.remove_action("texture_changed")
 
-	# Export dialog signals
+	## connects a signal to [param method] present in [param target], that emits
+	## whenever preview is about to be drawn.[br]
+	## [b]Binds: [/b]It has one bind of type [Dictionary] with keys: [code]exporter_id[/code],
+	## [code]export_tab[/code], [code]preview_images[/code], [code]durations[/code]
 	func connect_export_about_to_preview(target: Object, method: String):
 		Global.export_dialog.about_to_preview.connect(Callable(target, method))
 		ExtensionsApi.add_action("export_about_to_preview")
 
+	## reverse of [method connect_export_about_to_preview].
 	func disconnect_export_about_to_preview(target: Object, method: String):
 		Global.export_dialog.about_to_preview.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("export_about_to_preview")
