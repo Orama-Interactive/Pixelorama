@@ -538,7 +538,7 @@ class ProjectAPI:
 	func get_current_cel() -> BaseCel:
 		return get_current_project().get_current_cel()
 
-	## Frames are counted from left to right, layers are counted  from bottom to top.
+	## Frames are counted from left to right, layers are counted from bottom to top.
 	## Frames/layers start at "0" and end at [param project.frames.size() - 1] and
 	## [param project.layers.size() - 1] respectively.
 	func get_cel_at(project: Project, frame: int, layer: int) -> BaseCel:
