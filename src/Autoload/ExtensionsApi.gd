@@ -204,16 +204,20 @@ class MenuAPI:
 		ExtensionsApi.remove_action("add_menu")
 
 
+## Gives access to common dialog related functions.
 class DialogAPI:
+	## Shows an alert dialog with the given [param text]
+	## Useful for displaying messages like "Incompatible API" etc...
 	func show_error(text: String) -> void:
-		# useful for displaying messages like "Incompatible API" etc...
 		Global.error_dialog.set_text(text)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 
+	## Returns the node that is the parent of dialogs used in pixelorama.
 	func get_dialogs_parent_node() -> Node:
 		return Global.control.get_node("Dialogs")
 
+	## Tells pixelorama that some dialog is about to open or close.
 	func dialog_open(open: bool) -> void:
 		Global.dialog_open(open)
 
