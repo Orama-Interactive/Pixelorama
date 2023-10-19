@@ -388,7 +388,7 @@ class ThemeAPI:
 
 ## Gives ability to add/remove tools.
 class ToolAPI:
-	# gdlint: ignore=class-name
+	# gdlint: ignore=constant-name
 	const LayerTypes = Global.LayerTypes
 
 	## Adds a tool to pixelorama with name [param tool_name] (without spaces),
@@ -592,7 +592,7 @@ class ProjectAPI:
 
 ## Gives access to adding custom exporters.
 class ExportAPI:
-	# gdlint: ignore=class-name
+	# gdlint: ignore=constant-name
 	const ExportTab := Export.ExportTab
 
 	## [param format_info] has keys: [code]extension[/code] and [code]description[/code]
