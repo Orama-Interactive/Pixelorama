@@ -153,6 +153,7 @@ class GeneralAPI:
 		return Global.canvas
 
 
+## Gives ability to add/remove items from menus in the top bar.
 class MenuAPI:
 	enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
 
@@ -175,9 +176,13 @@ class MenuAPI:
 				return Global.top_menu_container.help_menu_button.get_popup()
 		return null
 
+	## Adds a menu item of title [param item_name] to the [param menu_type] defined by
+	## [enum @unnamed_enums].
+	## [br][param item_metadata] is usually a window node you want to appear when you click the
+	## [param item_name]. That window node should also have a [param menu_item_clicked]
+	## function inside its script.[br]
+	## Index of the added item is returned (which can be used to remove menu item later on).
 	func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := -1) -> int:
-		# item_metadata is usually a popup node you want to appear when you click the item_name
-		# that popup should also have an (menu_item_clicked) function inside its script
 		var popup_menu: PopupMenu = _get_popup_menu(menu_type)
 		if not popup_menu:
 			return -1
@@ -189,6 +194,8 @@ class MenuAPI:
 		ExtensionsApi.add_action("add_menu")
 		return idx
 
+	## Removes a menu item at index [param item_idx] from the [param menu_type] defined by
+	## [enum @unnamed_enums].
 	func remove_menu_item(menu_type: int, item_idx: int) -> void:
 		var popup_menu: PopupMenu = _get_popup_menu(menu_type)
 		if not popup_menu:
