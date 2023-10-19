@@ -78,6 +78,7 @@ func remove_action(action: String):
 		if extension_name in _action_history.keys():
 			_action_history[extension_name].erase(action)
 
+
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
 func wait_frame():  # as yield is not available to classes below, so this is the solution
 	# use by yield(ExtensionsApi.wait_frame(), "completed")
