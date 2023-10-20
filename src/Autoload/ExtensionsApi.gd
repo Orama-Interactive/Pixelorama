@@ -1,5 +1,6 @@
 extends Node
-# NOTE: Type "ExtensionsApi" in Search Help to read the curated documentation of the Api
+# NOTE: Goto File-->Save then type "ExtensionsApi" in "Search Help" to read the curated documentation
+# of the Api
 
 ## The Official ExtensionAPI for pixelorama.
 ##
