@@ -1,8 +1,8 @@
 extends Node
-# NOTE: Goto File-->Save then type "ExtensionsApi" in "Search Help" to read the curated documentation
-# of the Api
+# NOTE: Goto File-->Save then type "ExtensionsApi" in "Search Help" to read the
+# curated documentation of the Api
 
-## The Official ExtensionAPI for pixelorama.
+## The Official ExtensionsAPI for pixelorama.
 ##
 ## This Api gives you the essentials eo develop a working extension for Pixelorama.[br]
 ## The Api consists of many smaller Apis, each giving access to different areas of the Software.
