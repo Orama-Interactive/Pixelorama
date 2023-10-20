@@ -3,10 +3,9 @@ extends RefCounted
 ## Base class for cel properties.
 ## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
-signal texture_changed
+signal texture_changed  ## Emitted whenever cel's tecture is changed
 
-## Opacity/Transparency of the cel.
-var opacity := 1.0
+var opacity := 1.0  ## Opacity/Transparency of the cel.
 ## The image stored in the cel.
 var image_texture: Texture2D:
 	get = _get_image_texture

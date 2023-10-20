@@ -13,28 +13,18 @@ extends Node
 ##
 ## @tutorial(Add Tutorial here):            https://the/tutorial1/url.com
 
-## Gives access to the general, app related functions of pixelorama itself
+## Gives access to the general, app related functions of pixelorama
 ## such as Autoloads, Software Version, Config file etc...
 var general := GeneralAPI.new()
-## Gives ability to add/remove items from menus in the top bar.
-var menu := MenuAPI.new()
-## Gives access to Dialog related functions.
-var dialog := DialogAPI.new()
-## Gives access to Tabs and Dockable Container related functions.
-var panel := PanelAPI.new()
-## Gives access to theme related functions.
-var theme := ThemeAPI.new()
-## Gives ability to add/remove tools.
-var tools := ToolAPI.new()
-## Gives access to pixelorama's selection system.
-var selection := SelectionAPI.new()
-## Gives access to project manipulation.
-var project := ProjectAPI.new()
-## Gives access to adding custom exporters.
-var exports := ExportAPI.new()
-## Gives access to the basic commonly used signals.
-## Some less common signals are not mentioned in api but could be accessed through source directly.
-var signals := SignalsAPI.new()
+var menu := MenuAPI.new()  ## Gives ability to add/remove items from menus in the top bar.
+var dialog := DialogAPI.new()  ## Gives access to Dialog related functions.
+var panel := PanelAPI.new()  ## Gives access to Tabs and Dockable Container related functions.
+var theme := ThemeAPI.new()  ## Gives access to theme related functions.
+var tools := ToolAPI.new()  ## Gives ability to add/remove tools.
+var selection := SelectionAPI.new()  ## Gives access to pixelorama's selection system.
+var project := ProjectAPI.new()  ## Gives access to project manipulation.
+var exports := ExportAPI.new()  ## Gives access to adding custom exporters.
+var signals := SignalsAPI.new()  ## Gives access to the basic commonly used signals.
 
 ## This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
@@ -82,7 +72,7 @@ func remove_action(action: String):
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
 func wait_frame():  # as yield is not available to classes below, so this is the solution
-	# use by yield(ExtensionsApi.wait_frame(), "completed")
+	# use by {await ExtensionsApi.wait_frame()}
 	await get_tree().process_frame
 	await get_tree().process_frame
 

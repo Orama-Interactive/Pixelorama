@@ -43,14 +43,10 @@ extends RefCounted
 ##    Global.current_project.undo_redo.commit_action()
 ## [/codeblock]
 
-## Name of tag
-var name: String
-## Color of tag
-var color: Color
-## First frame number in the tag (first frame in timeline is numbered 1)
-var from: int
-## First frame number in the tag (first frame in timeline is numbered 1)
-var to: int
+var name: String  ## Name of tag
+var color: Color  ## Color of tag
+var from: int  ## First frame number in the tag (first frame in timeline is numbered 1)
+var to: int  ## First frame number in the tag (first frame in timeline is numbered 1)
 
 
 ## Class Constructor (used as [code]AnimationTag.new(name, color, from, to)[/code])
