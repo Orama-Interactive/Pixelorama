@@ -68,12 +68,12 @@ func update_texture() -> void:
 				cel.texture_changed.emit()
 
 
-## Returns a curated [Dictionary] from the cel data.
+## Returns a curated [Dictionary] containing the cel data.
 func serialize() -> Dictionary:
 	return {"opacity": opacity}
 
 
-## Set the cel data according to a curated [Dictionary] obtained from [method serialize].
+## Sets the cel data according to a curated [Dictionary] obtained from [method serialize].
 func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
 
