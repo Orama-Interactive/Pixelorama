@@ -5,12 +5,16 @@ extends RefCounted
 
 signal texture_changed
 
+## Opacity/Transparency of the cel.
 var opacity := 1.0
+## The image stored in the cel.
 var image_texture: Texture2D:
 	get = _get_image_texture
-## If the cel is linked a ref to the link set Dictionary this cel is in, or null if not linked:
-var link_set = null  ## { "cels": Array, "hue": float } or null
-var transformed_content: Image  ## Used in transformations (moving, scaling etc with selections)
+## If the cel is linked then this contains a reference to the link set [Dictionary] this cel is in:
+## [param { "cels": Array, "hue": float }].
+## [br] If the cel is not linked then it is [code]null[/code].
+var link_set = null  # { "cels": Array, "hue": float } or null
+var transformed_content: Image  ## Used in transformations (moving, scaling etc with selections).
 
 # Methods to Override:
 
@@ -20,33 +24,41 @@ func _get_image_texture() -> Texture2D:
 
 
 ## The content methods deal with the unique content of each cel type. For example, an Image for
-## PixelLayers, or a Dictionary of settings for a procedural layer type, and null for Groups.
+## PixelCel, or a Dictionary of settings for a procedural layer type, and null for Groups.
 ## Can be used for linking/unlinking cels, copying, and deleting content
-func get_content():
+func get_content() -> Variant:
 	return null
 
 
+## The content methods deal with the unique content of each cel type. For example, an Image for
+## PixelCel, or a Dictionary of settings for a procedural layer type, and null for Groups.
+## Can be used for linking/unlinking cels, copying, and deleting content.
 func set_content(_content, _texture: ImageTexture = null) -> void:
 	return
 
 
-## Can be used to delete the content of the cel with set_content
-## (using the old content from get_content as undo data)
-func create_empty_content():
+## The content methods deal with the unique content of each cel type. For example, an Image for
+## PixelCel, or a Dictionary of settings for a procedural layer type, and null for Groups.
+## Can be used to delete the content of the cel with [method set_content]
+## (using the old content from get_content as undo data).
+func create_empty_content() -> Variant:
 	return []
 
 
-## Can be used for creating copy content for copying cels or unlinking cels
-func copy_content():
+## The content methods deal with the unique content of each cel type. For example, an Image for
+## PixelCel, or a Dictionary of settings for a procedural layer type, and null for Groups.
+## Can be used for creating copy content for copying cels or unlinking cels.
+func copy_content() -> Variant:
 	return []
 
 
-## Returns the image var for image based cel types, or a render for procedural types.
+## Returns the image of image based cel types, or a render for procedural types.
 ## It's meant for read-only usage of image data, such as copying selections or color picking.
 func get_image() -> Image:
 	return null
 
 
+## Used to update the texture of the cel.
 func update_texture() -> void:
 	texture_changed.emit()
 	if link_set != null:
@@ -57,29 +69,36 @@ func update_texture() -> void:
 				cel.texture_changed.emit()
 
 
+## Returns a curated [Dictionary] from the cel data.
 func serialize() -> Dictionary:
 	return {"opacity": opacity}
 
 
+## Set the cel data according to a curated [Dictionary] obtained from [method serialize].
 func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
 
 
+## Used to save cel image/thumbnail during saving of a pxo file.
 func save_image_data_to_pxo(_file: FileAccess) -> void:
 	return
 
 
+## Used to load cel image/thumbnail during loading of a pxo file.
 func load_image_data_from_pxo(_file: FileAccess, _project_size: Vector2i) -> void:
 	return
 
 
+## Used to perform cleanup after a cel is removed.
 func on_remove() -> void:
 	pass
 
 
+## Returns an instance of the cel button that will be added to the timeline.
 func instantiate_cel_button() -> Node:
 	return null
 
 
+## Returns to get the type of the cel class.
 func get_class_name() -> String:
 	return "BaseCel"
