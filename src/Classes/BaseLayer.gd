@@ -2,10 +2,34 @@ class_name BaseLayer
 extends RefCounted
 ## Base class for layer properties. Different layer types extend from this class.
 
+enum BlendModes {
+	NORMAL,
+	DARKEN,
+	MULTIPLY,
+	COLOR_BURN,
+	LINEAR_BURN,
+	LIGHTEN,
+	SCREEN,
+	COLOR_DODGE,
+	ADD,
+	OVERLAY,
+	SOFT_LIGHT,
+	HARD_LIGHT,
+	DIFFERENCE,
+	EXCLUSION,
+	SUBTRACT,
+	DIVIDE,
+	HUE,
+	SATURATION,
+	COLOR,
+	LUMINOSITY
+}
+
 var name := ""
 var project: Project
 var index: int
 var parent: BaseLayer
+var blend_mode := BlendModes.NORMAL
 var visible := true
 var locked := false
 var new_cels_linked := false
@@ -130,6 +154,7 @@ func serialize() -> Dictionary:
 		"name": name,
 		"visible": visible,
 		"locked": locked,
+		"blend_mode": blend_mode,
 		"parent": parent.index if is_instance_valid(parent) else -1
 	}
 	if not cel_link_sets.is_empty():
@@ -148,6 +173,8 @@ func deserialize(dict: Dictionary) -> void:
 	name = dict.name
 	visible = dict.visible
 	locked = dict.locked
+	if dict.has("blend_mode"):
+		blend_mode = dict.blend_mode
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility

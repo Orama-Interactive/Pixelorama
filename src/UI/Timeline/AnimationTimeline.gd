@@ -19,6 +19,7 @@ var frame_button_node := preload("res://src/UI/Timeline/FrameButton.tscn")
 @onready var tag_spacer = find_child("TagSpacer")
 @onready var start_spacer = find_child("StartSpacer")
 @onready var add_layer_list: MenuButton = $"%AddLayerList"
+@onready var blend_modes_button := %BlendModes as OptionButton
 
 @onready var timeline_scroll: ScrollContainer = find_child("TimelineScroll")
 @onready var frame_scroll_container: Control = find_child("FrameScrollContainer")
@@ -150,6 +151,21 @@ func _cel_size_changed(value: int) -> void:
 		tag_c.size.x = (tag_size + 1) * tag_base_size - 4
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.custom_minimum_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
+
+
+func _on_blend_modes_item_selected(index: BaseLayer.BlendModes) -> void:
+	var current_layer := Global.current_project.layers[Global.current_project.current_layer]
+	var previous_index := current_layer.blend_mode
+	Global.current_project.undo_redo.create_action("Set Blend Mode")
+	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	Global.current_project.undo_redo.add_do_property(current_layer, "blend_mode", index)
+	Global.current_project.undo_redo.add_do_method(blend_modes_button.select.bind(index))
+	Global.current_project.undo_redo.add_do_method(Global.canvas.draw_layers)
+	Global.current_project.undo_redo.add_undo_property(current_layer, "blend_mode", previous_index)
+	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	Global.current_project.undo_redo.add_undo_method(blend_modes_button.select.bind(previous_index))
+	Global.current_project.undo_redo.add_undo_method(Global.canvas.draw_layers)
+	Global.current_project.undo_redo.commit_action()
 
 
 func add_frame() -> void:
@@ -842,21 +858,30 @@ func _on_MergeDownLayer_pressed() -> void:
 	for frame in project.frames:
 		top_cels.append(frame.cels[top_layer.index])  # Store for undo purposes
 
-		var top_image := Image.new()
-		top_image.copy_from(frame.cels[top_layer.index].get_image())
-
-		if frame.cels[top_layer.index].opacity < 1:  # If we have layer transparency
-			for xx in top_image.get_size().x:
-				for yy in top_image.get_size().y:
-					var pixel_color := top_image.get_pixel(xx, yy)
-					var alpha := pixel_color.a * frame.cels[top_layer.index].opacity
-					top_image.set_pixel(
-						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-					)
+		var top_image := frame.cels[top_layer.index].get_image()
 		var bottom_cel := frame.cels[bottom_layer.index]
-		var bottom_image := Image.new()
-		bottom_image.copy_from(bottom_cel.get_image())
-		bottom_image.blend_rect(top_image, Rect2i(Vector2i.ZERO, project.size), Vector2i.ZERO)
+		var textures: Array[Image] = []
+		var opacities := PackedFloat32Array()
+		var blend_modes := PackedInt32Array()
+		textures.append(bottom_cel.get_image())
+		opacities.append(bottom_cel.opacity)
+		blend_modes.append(bottom_layer.blend_mode)
+		textures.append(top_image)
+		opacities.append(frame.cels[top_layer.index].opacity)
+		blend_modes.append(top_layer.blend_mode)
+		var texture_array := Texture2DArray.new()
+		texture_array.create_from_images(textures)
+		var params := {
+			"layers": texture_array,
+			"opacities": opacities,
+			"blend_modes": blend_modes,
+		}
+		var bottom_image := Image.create(
+			top_image.get_width(), top_image.get_height(), false, top_image.get_format()
+		)
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(bottom_image, DrawingAlgos.blend_layers_shader, params, project.size)
+
 		if (
 			bottom_cel.link_set != null
 			and bottom_cel.link_set.size() > 1
