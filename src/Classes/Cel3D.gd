@@ -183,20 +183,70 @@ func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
 	scene_properties = {}
 	var scene_properties_str: Dictionary = dict["scene_properties"]
-	for prop in scene_properties_str:
-		scene_properties[prop] = str_to_var(scene_properties_str[prop])
 	var objects_copy_str: Dictionary = dict["object_properties"]
-	for object in objects_copy_str:
-		if typeof(object) != TYPE_STRING:
+	if dict.has("pxo_version"):
+		if dict["pxo_version"] == 2:  # It's a 0.x project convert it to 1.0 format
+			_convert_scene_dictionary(scene_properties_str)
+			_convert_objects_dictionary(objects_copy_str)
+			for object_id_as_str in objects_copy_str:
+				var temp_dict = objects_copy_str[object_id_as_str]
+				_convert_objects_dictionary(temp_dict)
+				objects_copy_str[object_id_as_str] = var_to_str(temp_dict)
+			dict["object_properties"] = objects_copy_str
+
+	for prop in scene_properties_str:
+		scene_properties[prop] = str_to_var(str(scene_properties_str[prop]))
+	for object_id_as_str in objects_copy_str:
+		if typeof(object_id_as_str) != TYPE_STRING:  # failsafe in case sometning has gone wrong
 			return
-		var id := int(object)
+		var id := int(object_id_as_str)
 		if current_object_id < id:
 			current_object_id = id
-		object_properties[id] = str_to_var(objects_copy_str[object])
+		object_properties[id] = str_to_var(objects_copy_str[object_id_as_str])
 	current_object_id += 1
 	deserialize_scene_properties()
 	for object in object_properties:
 		_add_object_node(object)
+
+
+# Used if the pxo was made in 0.x, so we have to modify it
+func _convert_objects_dictionary(objects_dict: Dictionary) -> void:
+	for key in objects_dict:
+		if key == "mesh_mid_height":
+			objects_dict["mesh_height"] = objects_dict["mesh_mid_height"]
+		if key == "id" or key == "type":
+			objects_dict[key] = int(objects_dict[key])
+			continue
+		if typeof(objects_dict[key]) != TYPE_STRING:
+			continue
+		if "transform" in key:  # Convert a String to a Transform
+			var transform_string: String = objects_dict[key].replace(" - ", ", ")
+			objects_dict[key] = str_to_var("Transform3D(" + transform_string + ")")
+		elif "color" in key:  # Convert a String to a Color
+			objects_dict[key] = str_to_var("Color(" + objects_dict[key] + ")")
+		elif "v2" in key:  # Convert a String to a Vector2
+			objects_dict[key] = str_to_var("Vector2" + objects_dict[key])
+		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
+			objects_dict[key] = str_to_var("Vector3" + objects_dict[key])
+
+
+# Used if the pxo was made in 0.x, so we have to modify it
+func _convert_scene_dictionary(scene_dict: Dictionary) -> void:
+	for key in scene_dict:
+		if key == "id" or key == "type":
+			scene_dict[key] = int(scene_dict[key])
+			continue
+		if typeof(scene_dict[key]) != TYPE_STRING:
+			continue
+		if "transform" in key:  # Convert a String to a Transform
+			var transform_string: String = scene_dict[key].replace(" - ", ", ")
+			scene_dict[key] = ("Transform3D(" + transform_string + ")")
+		elif "color" in key:  # Convert a String to a Color
+			scene_dict[key] = ("Color(" + scene_dict[key] + ")")
+		elif "v2" in key:  # Convert a String to a Vector2
+			scene_dict[key] = ("Vector2" + scene_dict[key])
+		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
+			scene_dict[key] = ("Vector3" + scene_dict[key])
 
 
 func on_remove() -> void:
