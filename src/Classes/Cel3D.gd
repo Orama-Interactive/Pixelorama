@@ -5,13 +5,16 @@ signal selected_object(object)
 signal scene_property_changed
 signal objects_changed
 
-var size: Vector2i
-var viewport: SubViewport
-var parent_node: Node3D
-var camera: Camera3D
+var size: Vector2i  ## Size of the image rendered by the cel.
+var viewport: SubViewport  ## SubViewport used by the cel.
+var parent_node: Node3D  ## Parent node of the 3d objects placed in the cel.
+var camera: Camera3D  ## Camera that is used to render the Image.
+## A [Dictionary] of the scene properties such as [param ambient_light_color] etc...
 var scene_properties := {}
-## Key = Cel3DObject's id, Value = Dictionary containing the properties of the Cel3DObject
+## Keys are the ids of all [Cel3DObject]'s present in the scene, and their corresponding values
+## point to a [Dictionary] containing the properties of that [Cel3DObject].
 var object_properties := {}
+## The currently selected [Cel3DObject].
 var selected: Cel3DObject = null:
 	set(value):
 		if value == selected:
@@ -22,9 +25,10 @@ var selected: Cel3DObject = null:
 		if is_instance_valid(selected):  # Select new object
 			selected.select()
 		selected_object.emit(value)
-var current_object_id := 0  ## Its value never decreases
+var current_object_id := 0  ## Its value never decreases.
 
 
+## Class Constructor (used as [code]Cel3D.new(size, from_pxo, object_prop, scene_prop)[/code])
 func _init(_size: Vector2i, from_pxo := false, _object_prop := {}, _scene_prop := {}) -> void:
 	size = _size
 	object_properties = _object_prop
