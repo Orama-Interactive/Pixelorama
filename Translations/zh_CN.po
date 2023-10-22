@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-10-17 04:06\n"
+"PO-Revision-Date: 2023-10-22 15:13\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1904,6 +1904,90 @@ msgstr "克隆当前图层"
 
 msgid "Merge current layer with the one below"
 msgstr "当前图层与下面图层合并"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr ""
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr ""
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr ""
 
 msgid "Opacity:"
 msgstr "不透明度:"
