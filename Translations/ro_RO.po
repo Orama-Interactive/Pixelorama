@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-10-22 18:48\n"
+"PO-Revision-Date: 2023-10-22 20:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1927,7 +1927,7 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "Ecran"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
@@ -1935,59 +1935,59 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Contrast"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Suprapunere"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Lumină delicată"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Lumină dură"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Inversare"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Diferență"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Excludere"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Scădere"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Împărțire"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Componentă"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Nuanță"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Saturație"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Culoare"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Luminozitate"
 
 msgid "Opacity:"
 msgstr "Opacitate:"
