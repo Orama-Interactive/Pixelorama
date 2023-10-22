@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-10-22 15:14\n"
+"PO-Revision-Date: 2023-10-22 16:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -142,11 +142,11 @@ msgid "Delete"
 msgstr "Usuń"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Usuń trwale"
 
 #. When you move something to recycle bin
 msgid "Move to Trash"
-msgstr ""
+msgstr "Przenieś do kosza"
 
 msgid "New Brush"
 msgstr "Nowy pędzel"
@@ -641,7 +641,7 @@ msgstr ""
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Liniowy sRGB"
 
 msgid "General"
 msgstr "Ogólne"
@@ -1906,15 +1906,15 @@ msgstr "Połącz obecną warstwę z warstwą powyżej"
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "Rodzaj mieszania:"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "Normalny"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "Mnożenie"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
