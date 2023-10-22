@@ -206,7 +206,9 @@ func convert_dict(dict: Dictionary) -> void:
 	# Converting the scene dictionary
 	var scene_dict: Dictionary = dict["scene_properties"]
 	var old_transform_string = scene_dict["camera_transform"]
-	scene_dict["camera_transform"] = "Transform3D(" + old_transform_string.replace(" - ", ", ") + ")"
+	scene_dict["camera_transform"] = (
+		"Transform3D(" + old_transform_string.replace(" - ", ", ") + ")"
+	)
 	scene_dict["camera_projection"] = var_to_str(int(scene_dict["camera_projection"]))
 	scene_dict["camera_fov"] = var_to_str(scene_dict["camera_fov"])
 	scene_dict["camera_size"] = var_to_str(scene_dict["camera_size"])
