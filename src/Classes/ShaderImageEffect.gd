@@ -31,7 +31,7 @@ func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector
 	RenderingServer.canvas_item_set_material(ci_rid, mat_rid)
 	for key in params:
 		var param = params[key]
-		if param is Texture2D:
+		if param is Texture2D or param is Texture2DArray:
 			RenderingServer.material_set_param(mat_rid, key, [param])
 		else:
 			RenderingServer.material_set_param(mat_rid, key, param)

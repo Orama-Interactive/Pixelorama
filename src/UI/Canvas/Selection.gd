@@ -770,7 +770,7 @@ func paste(in_place := false) -> void:
 			camera_center.y = clampf(camera_center.y, 0, max_pos.y)
 		else:
 			camera_center.y = 0
-		big_bounding_rectangle.position = camera_center.floor()
+		big_bounding_rectangle.position = Vector2i(camera_center.floor())
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 
 	big_bounding_rectangle = big_bounding_rectangle
@@ -907,7 +907,7 @@ func clear_selection(use_undo := false) -> void:
 func _get_preview_image() -> void:
 	var project := Global.current_project
 	var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-	Export.blend_selected_cels(blended_image, project.frames[project.current_frame])
+	DrawingAlgos.blend_selected_cels(blended_image, project.frames[project.current_frame])
 	if original_preview_image.is_empty():
 		original_preview_image = blended_image.get_region(big_bounding_rectangle)
 		# For non-rectangular selections
