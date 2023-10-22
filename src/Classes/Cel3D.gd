@@ -180,22 +180,15 @@ func serialize() -> Dictionary:
 
 
 func deserialize(dict: Dictionary) -> void:
+	if dict.has("pxo_version"):
+		if dict["pxo_version"] == 2:  # It's a 0.x project convert it to 1.0 format
+			convert_dict(dict)
 	super.deserialize(dict)
 	scene_properties = {}
 	var scene_properties_str: Dictionary = dict["scene_properties"]
 	var objects_copy_str: Dictionary = dict["object_properties"]
-	if dict.has("pxo_version"):
-		if dict["pxo_version"] == 2:  # It's a 0.x project convert it to 1.0 format
-			_convert_scene_dictionary(scene_properties_str)
-			_convert_objects_dictionary(objects_copy_str)
-			for object_id_as_str in objects_copy_str:
-				var temp_dict = objects_copy_str[object_id_as_str]
-				_convert_objects_dictionary(temp_dict)
-				objects_copy_str[object_id_as_str] = var_to_str(temp_dict)
-			dict["object_properties"] = objects_copy_str
-
 	for prop in scene_properties_str:
-		scene_properties[prop] = str_to_var(str(scene_properties_str[prop]))
+		scene_properties[prop] = str_to_var(scene_properties_str[prop])
 	for object_id_as_str in objects_copy_str:
 		if typeof(object_id_as_str) != TYPE_STRING:  # failsafe in case sometning has gone wrong
 			return
@@ -209,44 +202,60 @@ func deserialize(dict: Dictionary) -> void:
 		_add_object_node(object)
 
 
-# Used if the pxo was made in 0.x, so we have to modify it
-func _convert_objects_dictionary(objects_dict: Dictionary) -> void:
-	for key in objects_dict:
-		if key == "mesh_mid_height":
-			objects_dict["mesh_height"] = objects_dict["mesh_mid_height"]
-		if key == "id" or key == "type":
-			objects_dict[key] = int(objects_dict[key])
-			continue
-		if typeof(objects_dict[key]) != TYPE_STRING:
-			continue
-		if "transform" in key:  # Convert a String to a Transform
-			var transform_string: String = objects_dict[key].replace(" - ", ", ")
-			objects_dict[key] = str_to_var("Transform3D(" + transform_string + ")")
-		elif "color" in key:  # Convert a String to a Color
-			objects_dict[key] = str_to_var("Color(" + objects_dict[key] + ")")
-		elif "v2" in key:  # Convert a String to a Vector2
-			objects_dict[key] = str_to_var("Vector2" + objects_dict[key])
-		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
-			objects_dict[key] = str_to_var("Vector3" + objects_dict[key])
-
-
-# Used if the pxo was made in 0.x, so we have to modify it
-func _convert_scene_dictionary(scene_dict: Dictionary) -> void:
-	for key in scene_dict:
-		if key == "id" or key == "type":
-			scene_dict[key] = int(scene_dict[key])
-			continue
-		if typeof(scene_dict[key]) != TYPE_STRING:
-			continue
-		if "transform" in key:  # Convert a String to a Transform
-			var transform_string: String = scene_dict[key].replace(" - ", ", ")
-			scene_dict[key] = ("Transform3D(" + transform_string + ")")
-		elif "color" in key:  # Convert a String to a Color
-			scene_dict[key] = ("Color(" + scene_dict[key] + ")")
-		elif "v2" in key:  # Convert a String to a Vector2
-			scene_dict[key] = ("Vector2" + scene_dict[key])
-		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
-			scene_dict[key] = ("Vector3" + scene_dict[key])
+func convert_dict(dict: Dictionary) -> void:
+	# Converting the scene dictionary
+	var scene_dict: Dictionary = dict["scene_properties"]
+	var old_transform_string = scene_dict["camera_transform"]
+	scene_dict["camera_transform"] = "Transform3D(" + old_transform_string.replace(" - ", ", ") + ")"
+	scene_dict["camera_projection"] = var_to_str(int(scene_dict["camera_projection"]))
+	scene_dict["camera_fov"] = var_to_str(scene_dict["camera_fov"])
+	scene_dict["camera_size"] = var_to_str(scene_dict["camera_size"])
+	scene_dict["ambient_light_color"] = "Color(" + scene_dict["ambient_light_color"] + ")"
+	scene_dict["ambient_light_energy"] = var_to_str(scene_dict["ambient_light_energy"])
+	# Converting the objects dictionary
+	var objects_copy_str: Dictionary = dict["object_properties"]
+	for object_id_as_str in objects_copy_str.keys():
+		var object_info = objects_copy_str[object_id_as_str]
+		for object_property in object_info:
+			if object_property == "id" or object_property == "type":
+				object_info[object_property] = int(object_info[object_property])
+			elif object_property == "mesh_mid_height":
+				object_info["mesh_height"] = object_info["mesh_mid_height"]
+			elif typeof(object_info[object_property]) != TYPE_STRING:
+				continue
+			elif "color" in object_property:  # Convert a String to a Color
+				object_info[object_property] = str_to_var(
+					"Color(" + object_info[object_property] + ")"
+				)
+			elif "transform" in object_property:  # Convert a String to a Transform
+				var transform_string: String = object_info[object_property].replace(" - ", ", ")
+				object_info[object_property] = str_to_var("Transform3D(" + transform_string + ")")
+			elif "v2" in object_property:  # Convert a String to a Vector2
+				object_info[object_property] = str_to_var("Vector2" + object_info[object_property])
+			elif "size" in object_property or "center_offset" in object_property:
+				# Convert a String to a Vector3
+				object_info[object_property] = str_to_var("Vector3" + object_info[object_property])
+		# Special operations to adjust gizmo
+		match object_info["type"]:
+			0: # BOX
+				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
+				object_info["mesh_size"] = object_info["mesh_size"] / 2
+			1: # SPHERE
+				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
+				object_info["mesh_radius"] = object_info["mesh_radius"] / 2
+				object_info["mesh_height"] = object_info["mesh_height"] / 2
+			3: # CYLINDER
+				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
+				object_info["mesh_height"] = object_info["mesh_height"] / 2
+				object_info["mesh_bottom_radius"] = object_info["mesh_bottom_radius"] / 2
+				object_info["mesh_top_radius"] = object_info["mesh_top_radius"] / 2
+			4: # PRISM
+				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
+				object_info["mesh_size"] = object_info["mesh_size"] / 2
+			6: # PLANE
+				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
+				object_info["mesh_sizev2"] = object_info["mesh_sizev2"] / 2
+		objects_copy_str[object_id_as_str] = var_to_str(objects_copy_str[object_id_as_str])
 
 
 func on_remove() -> void:
