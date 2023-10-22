@@ -237,22 +237,22 @@ func convert_dict(dict: Dictionary) -> void:
 				object_info[object_property] = str_to_var("Vector3" + object_info[object_property])
 		# Special operations to adjust gizmo
 		match object_info["type"]:
-			0: # BOX
+			0:  # BOX
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
 				object_info["mesh_size"] = object_info["mesh_size"] / 2
-			1: # SPHERE
+			1:  # SPHERE
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
 				object_info["mesh_radius"] = object_info["mesh_radius"] / 2
 				object_info["mesh_height"] = object_info["mesh_height"] / 2
-			3: # CYLINDER
+			3:  # CYLINDER
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
 				object_info["mesh_height"] = object_info["mesh_height"] / 2
 				object_info["mesh_bottom_radius"] = object_info["mesh_bottom_radius"] / 2
 				object_info["mesh_top_radius"] = object_info["mesh_top_radius"] / 2
-			4: # PRISM
+			4:  # PRISM
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
 				object_info["mesh_size"] = object_info["mesh_size"] / 2
-			6: # PLANE
+			6:  # PLANE
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
 				object_info["mesh_sizev2"] = object_info["mesh_sizev2"] / 2
 		objects_copy_str[object_id_as_str] = var_to_str(objects_copy_str[object_id_as_str])
