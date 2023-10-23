@@ -221,8 +221,6 @@ func convert_dict(dict: Dictionary) -> void:
 		for object_property in object_info:
 			if object_property == "id" or object_property == "type":
 				object_info[object_property] = int(object_info[object_property])
-			elif object_property == "mesh_mid_height":
-				object_info["mesh_height"] = object_info["mesh_mid_height"]
 			elif typeof(object_info[object_property]) != TYPE_STRING:
 				continue
 			elif "color" in object_property:  # Convert a String to a Color
@@ -247,13 +245,9 @@ func convert_dict(dict: Dictionary) -> void:
 				object_info["mesh_radius"] /= object_info["mesh_radius"] / 2
 				object_info["mesh_height"] /= 2
 			2:  # CAPSULE
-				object_info["transform"] = (
-					object_info["transform"]
-					. scaled(Vector3.ONE * 2)
-					. rotated_local(Vector3.LEFT, deg_to_rad(-90))
-				)
+				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2).rotated_local(Vector3.LEFT, deg_to_rad(-90))
 				object_info["mesh_radius"] /= 2
-				object_info["mesh_height"] *= 2
+				object_info["mesh_height"] = object_info["mesh_mid_height"] + object_info["mesh_radius"]
 			3:  # CYLINDER
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
 				object_info["mesh_height"] /= 2
