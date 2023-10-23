@@ -242,7 +242,7 @@ func convert_dict(dict: Dictionary) -> void:
 				object_info["mesh_size"] /= 2
 			1:  # SPHERE
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
-				object_info["mesh_radius"] /= object_info["mesh_radius"] / 2
+				object_info["mesh_radius"] /= 2
 				object_info["mesh_height"] /= 2
 			2:  # CAPSULE
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2).rotated_local(Vector3.LEFT, deg_to_rad(-90))
