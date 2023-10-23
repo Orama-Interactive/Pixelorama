@@ -526,10 +526,17 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if current_frame < frames.size():  # Set opacity slider
 		var cel_opacity := frames[current_frame].cels[current_layer].opacity
 		Global.layer_opacity_slider.value = cel_opacity * 100
-		Global.animation_timeline.blend_modes_button.selected = layers[current_layer].blend_mode
-	Global.canvas.queue_redraw()
+		var blend_mode_index: int = Global.animation_timeline.blend_modes_button.get_item_index(
+			layers[current_layer].blend_mode
+		)
+		Global.animation_timeline.blend_modes_button.selected = blend_mode_index
+
 	Global.transparent_checker.update_rect()
 	Global.cel_changed.emit()
+	if get_current_cel() is Cel3D:
+		await RenderingServer.frame_post_draw
+		await RenderingServer.frame_post_draw
+	Global.canvas.queue_redraw()
 
 
 func toggle_frame_buttons() -> void:
