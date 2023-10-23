@@ -505,7 +505,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
 layout_mode = 2
@@ -609,7 +608,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 4
+item_count = 3
 selected = 0
 popup/item_0/text = "Left"
 popup/item_0/id = 0
@@ -617,10 +616,8 @@ popup/item_1/text = "Center"
 popup/item_1/id = 1
 popup/item_2/text = "Right"
 popup/item_2/id = 2
-popup/item_3/text = "Fill"
-popup/item_3/id = 3
 
-[node name="sMeshVerticalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="32"]
+[node name="MeshVerticalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="32"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Vertical alignment:"
