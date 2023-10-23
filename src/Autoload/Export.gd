@@ -10,6 +10,7 @@ enum FileFormat { PNG, WEBP, JPEG, GIF, APNG }
 var animated_formats := [FileFormat.GIF, FileFormat.APNG]
 
 ## A dictionary of custom exporter generators (received from extensions)
+var custom_file_formats := {}
 var custom_exporter_generators := {}
 
 var current_tab := ExportTab.IMAGE
@@ -51,16 +52,43 @@ func _multithreading_enabled() -> bool:
 	return ProjectSettings.get_setting("rendering/driver/threads/thread_model") == 2
 
 
-func add_file_format(_format: String) -> int:
-	var id := FileFormat.size()
-#	FileFormat.merge({format: id})
+func add_custom_file_format(
+	format_name: String, extension: String, exporter_generator: Object, tab: int, is_animated: bool
+) -> int:
+	# Obtain a unique id
+	var id := Export.FileFormat.size()
+	for i in Export.custom_file_formats.size():
+		var format_id = id + i
+		if !Export.custom_file_formats.values().has(i):
+			id = format_id
+	# Add to custom_file_formats
+	custom_file_formats.merge({format_name: id})
+	custom_exporter_generators.merge({id: [exporter_generator, extension]})
+	if is_animated:
+		Export.animated_formats.append(id)
+	# Add to export dialog
+	match tab:
+		ExportTab.IMAGE:
+			Global.export_dialog.image_exports.append(id)
+		ExportTab.SPRITESHEET:
+			Global.export_dialog.spritesheet_exports.append(id)
+		_:  # Both
+			Global.export_dialog.image_exports.append(id)
+			Global.export_dialog.spritesheet_exports.append(id)
 	return id
 
 
-func remove_file_format(id: int) -> void:
-	for key in Export.FileFormat.keys():
-		if Export.FileFormat[key] == id:
-#			Export.FileFormat.erase(key)
+func remove_custom_file_format(id: int) -> void:
+	for key in custom_file_formats.keys():
+		if custom_file_formats[key] == id:
+			custom_file_formats.erase(key)
+			# remove exporter generator
+			Export.custom_exporter_generators.erase(id)
+			#  remove from animated (if it is present there)
+			Export.animated_formats.erase(id)
+			#  remove from export dialog
+			Global.export_dialog.image_exports.erase(id)
+			Global.export_dialog.spritesheet_exports.erase(id)
 			return
 
 
@@ -392,8 +420,8 @@ func file_format_description(format_enum: int) -> String:
 			return "APNG Image"
 		_:
 			# If a file format description is not found, try generating one
-			for key in FileFormat.keys():
-				if FileFormat[key] == format_enum:
+			for key in custom_file_formats.keys():
+				if custom_file_formats[key] == format_enum:
 					return str(key.capitalize())
 			return ""
 
@@ -456,9 +484,9 @@ func _blend_layers(
 	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
 	if export_layers == 0:
-		blend_all_layers(image, frame, origin, project)
+		DrawingAlgos.blend_all_layers(image, frame, origin, project)
 	elif export_layers == 1:
-		blend_selected_cels(image, frame, origin, project)
+		DrawingAlgos.blend_selected_cels(image, frame, origin, project)
 	else:
 		var layer := project.layers[export_layers - 2]
 		var layer_image := Image.new()
@@ -467,58 +495,6 @@ func _blend_layers(
 		else:
 			layer_image.copy_from(frame.cels[export_layers - 2].get_image())
 		image.blend_rect(layer_image, Rect2i(Vector2i.ZERO, project.size), origin)
-
-
-## Blends canvas layers into passed image starting from the origin position
-func blend_all_layers(
-	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
-) -> void:
-	var layer_i := 0
-	for cel in frame.cels:
-		if not project.layers[layer_i].is_visible_in_hierarchy():
-			layer_i += 1
-			continue
-		if cel is GroupCel:
-			layer_i += 1
-			continue
-		var cel_image := Image.new()
-		cel_image.copy_from(cel.get_image())
-		if cel.opacity < 1:  # If we have cel transparency
-			for xx in cel_image.get_size().x:
-				for yy in cel_image.get_size().y:
-					var pixel_color := cel_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * cel.opacity
-					cel_image.set_pixel(
-						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-					)
-		image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
-		layer_i += 1
-
-
-## Blends selected cels of the given frame into passed image starting from the origin position
-func blend_selected_cels(
-	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
-) -> void:
-	for cel_ind in frame.cels.size():
-		var test_array := [project.current_frame, cel_ind]
-		if not test_array in project.selected_cels:
-			continue
-		if frame.cels[cel_ind] is GroupCel:
-			continue
-		if not project.layers[cel_ind].is_visible_in_hierarchy():
-			continue
-		var cel: BaseCel = frame.cels[cel_ind]
-		var cel_image := Image.new()
-		cel_image.copy_from(cel.get_image())
-		if cel.opacity < 1:  # If we have cel transparency
-			for xx in cel_image.get_size().x:
-				for yy in cel_image.get_size().y:
-					var pixel_color := cel_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * cel.opacity
-					cel_image.set_pixel(
-						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-					)
-		image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
 
 
 func frames_divided_by_spritesheet_lines() -> int:

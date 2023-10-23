@@ -203,6 +203,7 @@ theme_override_constants/separation = 9
 [node name="AddLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(44, 22)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 tooltip_text = "Create a new layer"
 focus_mode = 0
@@ -255,6 +256,7 @@ texture = ExtResource("10")
 [node name="RemoveLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 tooltip_text = "Remove current layer"
 focus_mode = 0
@@ -279,6 +281,7 @@ texture = ExtResource("6")
 [node name="MoveUpLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 tooltip_text = "Move up the current layer"
 focus_mode = 0
@@ -303,6 +306,7 @@ texture = ExtResource("4")
 [node name="MoveDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 tooltip_text = "Move down the current layer"
 focus_mode = 0
@@ -327,6 +331,7 @@ texture = ExtResource("3")
 [node name="CloneLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 tooltip_text = "Clone current layer"
 focus_mode = 0
@@ -350,6 +355,7 @@ texture = ExtResource("7")
 [node name="MergeDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 tooltip_text = "Merge current layer with the one below"
 focus_mode = 0
@@ -371,6 +377,20 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("5")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Blend mode:"
+
+[node name="BlendModes" type="OptionButton" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+
 [node name="BlendingHBox" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
@@ -378,7 +398,6 @@ size_flags_vertical = 10
 [node name="OpacitySlider" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/BlendingHBox" instance=ExtResource("9")]
 custom_minimum_size = Vector2(207, 24)
 layout_mode = 2
-size_flags_horizontal = 1
 size_flags_vertical = 0
 value = 100.0
 prefix = "Opacity:"
@@ -920,6 +939,7 @@ script = ExtResource("12")
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [false]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
+[connection signal="item_selected" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer/BlendModes" to="." method="_on_blend_modes_item_selected"]
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/BlendingHBox/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]

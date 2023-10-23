@@ -166,7 +166,11 @@ func _add_extension(file_name: String) -> void:
 					"The extension %s will not work on this version of Pixelorama \n"
 					% file_name_no_ext
 				)
-				var required_text := "Requires API version: %s" % str(supported_api_versions)
+				var required_text := str(
+					"Extension works on API versions: %s" % str(supported_api_versions),
+					"\n",
+					"But Pixelorama's API version is: %s" % ExtensionsApi.get_api_version()
+				)
 				Global.error_dialog.set_text(str(err_text, required_text))
 				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)

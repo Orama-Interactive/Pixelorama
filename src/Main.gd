@@ -67,6 +67,7 @@ func _ready() -> void:
 		OS.request_permissions()
 
 	_show_splash_screen()
+	Global.pixelorama_opened.emit()
 
 
 func _input(event: InputEvent) -> void:
@@ -284,12 +285,13 @@ func save_project(path: String) -> void:
 	var zstd: bool = (
 		Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").button_pressed
 	)
-	OpenSave.save_pxo_file(path, false, zstd)
-	Global.open_sprites_dialog.current_dir = path.get_base_dir()
-	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
+	var success = OpenSave.save_pxo_file(path, false, zstd)
+	if success:
+		Global.open_sprites_dialog.current_dir = path.get_base_dir()
+		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
-	if is_quitting_on_save:
-		_quit()
+		if is_quitting_on_save:
+			_quit()
 
 
 func _on_SaveSpriteHTML5_confirmed() -> void:
@@ -347,6 +349,7 @@ func _on_QuitAndSaveDialog_confirmed() -> void:
 
 
 func _quit() -> void:
+	Global.pixelorama_about_to_close.emit()
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)

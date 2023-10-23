@@ -1,5 +1,8 @@
 extends Node
 
+signal pixelorama_opened
+signal pixelorama_about_to_close
+signal project_created(Project)
 signal project_changed
 signal cel_changed
 
@@ -586,7 +589,7 @@ func undo_or_redo(
 		general_undo(project)
 	else:
 		general_redo(project)
-	var action_name: String = project.undo_redo.get_current_action_name()
+	var action_name := project.undo_redo.get_current_action_name()
 	if (
 		action_name
 		in [
@@ -612,7 +615,7 @@ func undo_or_redo(
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
-					var current_cel: BaseCel = project.frames[i].cels[j]
+					var current_cel := project.frames[i].cels[j]
 					if current_cel is Cel3D:
 						current_cel.size_changed(project.size)
 					else:
@@ -625,6 +628,7 @@ func undo_or_redo(
 			project.selection_map_changed()
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
+	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()
 	second_viewport.get_child(0).get_node("CanvasPreview").queue_redraw()
 	canvas_preview_container.canvas_preview.queue_redraw()
@@ -689,3 +693,15 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 	for _path in basepaths:
 		res.append(_path.path_join(subpath))
 	return res
+
+
+func undo_redo_draw_op(
+	image: Image, compressed_image_data: PackedByteArray, buffer_size: int
+) -> void:
+	image.set_data(
+		image.get_width(),
+		image.get_height(),
+		image.has_mipmaps(),
+		image.get_format(),
+		compressed_image_data.decompress(buffer_size)
+	)

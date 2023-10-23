@@ -19,7 +19,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Path3D" type="LinkButton" parent="Interior/PathHeader"]
+[node name="Path" type="LinkButton" parent="Interior/PathHeader"]
 modulate = Color(0.552941, 1, 0.298039, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -117,7 +117,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.266667, 0.266667, 1)
 text = "Remove"
 
-[connection signal="pressed" from="Interior/PathHeader/Path3D" to="." method="_on_Path_pressed"]
+[connection signal="pressed" from="Interior/PathHeader/Path" to="." method="_on_Path_pressed"]
 [connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Position/X" to="." method="_on_X_value_changed"]
 [connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Position/Y" to="." method="_on_Y_value_changed"]
 [connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Scale" to="." method="_on_Scale_value_changed"]
