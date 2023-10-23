@@ -6,7 +6,7 @@ const CURSOR_SPEED_RATE := 6.0
 
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  ## For optimization purposes
-var move_preview_location := Vector2.ZERO
+var move_preview_location := Vector2i.ZERO
 
 @onready var currently_visible_frame := $CurrentlyVisibleFrame as SubViewport
 @onready var current_frame_drawer := $CurrentlyVisibleFrame/CurrentFrameDrawer as Node2D
@@ -34,32 +34,18 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	var current_cels: Array = (
-		Global.current_project.frames[Global.current_project.current_frame].cels
-	)
 	var position_tmp := position
 	var scale_tmp := scale
 	if Global.mirror_view:
 		position_tmp.x = position_tmp.x + Global.current_project.size.x
 		scale_tmp.x = -1
 	draw_set_transform(position_tmp, rotation, scale_tmp)
-	# Draw current frame layers
-	for i in range(Global.current_project.layers.size()):
-		if current_cels[i] is GroupCel:
-			continue
-		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
-		if Global.current_project.layers[i].is_visible_in_hierarchy():
-			var selected_layers = []
-			if move_preview_location != Vector2.ZERO:
-				for cel_pos in Global.current_project.selected_cels:
-					if cel_pos[0] == Global.current_project.current_frame:
-						if Global.current_project.layers[cel_pos[1]].can_layer_get_drawn():
-							selected_layers.append(cel_pos[1])
-			if i in selected_layers:
-				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
-			else:
-				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
-
+	# Placeholder so we can have a material here
+	draw_texture(
+		Global.current_project.frames[Global.current_project.current_frame].cels[0].image_texture,
+		Vector2.ZERO
+	)
+	draw_layers()
 	if Global.onion_skinning:
 		refresh_onion()
 	currently_visible_frame.size = Global.current_project.size
@@ -131,6 +117,33 @@ func update_selected_cels_textures(project := Global.current_project) -> void:
 		if frame_index < project.frames.size() and layer_index < project.layers.size():
 			var current_cel: BaseCel = project.frames[frame_index].cels[layer_index]
 			current_cel.update_texture()
+
+
+func draw_layers() -> void:
+	var current_cels := Global.current_project.frames[Global.current_project.current_frame].cels
+	var textures: Array[Image] = []
+	var opacities := PackedFloat32Array()
+	var blend_modes := PackedInt32Array()
+	var origins := PackedVector2Array()
+	# Draw current frame layers
+	for i in Global.current_project.layers.size():
+		if current_cels[i] is GroupCel:
+			continue
+		if Global.current_project.layers[i].is_visible_in_hierarchy():
+			var cel_image := current_cels[i].get_image()
+			textures.append(cel_image)
+			opacities.append(current_cels[i].opacity)
+			if [Global.current_project.current_frame, i] in Global.current_project.selected_cels:
+				origins.append(Vector2(move_preview_location) / Vector2(cel_image.get_size()))
+			else:
+				origins.append(Vector2.ZERO)
+			blend_modes.append(Global.current_project.layers[i].blend_mode)
+	var texture_array := Texture2DArray.new()
+	texture_array.create_from_images(textures)
+	material.set_shader_parameter("layers", texture_array)
+	material.set_shader_parameter("opacities", opacities)
+	material.set_shader_parameter("blend_modes", blend_modes)
+	material.set_shader_parameter("origins", origins)
 
 
 func refresh_onion() -> void:

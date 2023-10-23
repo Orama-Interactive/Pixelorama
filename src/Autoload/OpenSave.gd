@@ -1,6 +1,8 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
+signal project_saved
+
 var current_save_paths: PackedStringArray = []
 ## Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths: PackedStringArray = []
@@ -208,7 +210,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 
 func save_pxo_file(
 	path: String, autosave: bool, use_zstd := true, project := Global.current_project
-) -> void:
+) -> bool:
 	if !autosave:
 		project.name = path.get_file()
 	var serialized_data := project.serialize()
@@ -218,7 +220,7 @@ func save_pxo_file(
 		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
-		return
+		return false
 	var to_save := JSON.stringify(serialized_data)
 	if !to_save:
 		Global.error_dialog.set_text(
@@ -226,7 +228,7 @@ func save_pxo_file(
 		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
-		return
+		return false
 
 	# Check if a file with the same name exists. If it does, rename the new file temporarily.
 	# Needed in case of a crash, so that the old file won't be replaced with an empty one.
@@ -244,14 +246,15 @@ func save_pxo_file(
 	var err := FileAccess.get_open_error()
 	if err != OK:
 		if temp_path.is_valid_filename():
-			return
+			return false
 		Global.error_dialog.set_text(
 			tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
-		file.close()
-		return
+		if file:  # this would be null if we attempt to save filenames such as "//\\||.pxo"
+			file.close()
+		return false
 
 	if !autosave:
 		current_save_paths[Global.current_project_index] = path
@@ -300,8 +303,10 @@ func save_pxo_file(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
 		)
+		project_saved.emit()
 
 	save_project_to_recent_list(path)
+	return true
 
 
 func open_image_as_new_tab(path: String, image: Image) -> void:

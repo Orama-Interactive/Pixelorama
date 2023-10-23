@@ -7,11 +7,11 @@ var _ignore_spinbox_changes := false
 
 func _ready():
 	if OS.get_name() == "Web":
-		$Interior/PathHeader/Path3D.visible = false
+		$Interior/PathHeader/Path.visible = false
 		$Interior/PathHeader/PathHTML.text = element.image_path
 	else:
 		$Interior/PathHeader/PathHTML.visible = false
-		$Interior/PathHeader/Path3D.text = element.image_path
+		$Interior/PathHeader/Path.text = element.image_path
 
 	if !element.texture:
 		$Interior/PreviewAndOptions/PreviewPanel/Warning.text = "Image not found!"
@@ -79,7 +79,7 @@ func _on_Opacity_value_changed(value: float):
 
 
 func _on_Path_pressed() -> void:
-	OS.shell_open($Interior/PathHeader/Path3D.text.get_base_dir())
+	OS.shell_open($Interior/PathHeader/Path.text.get_base_dir())
 
 
 func _on_Silhouette_toggled(button_pressed: bool) -> void:

@@ -3,6 +3,9 @@ class_name Project
 extends RefCounted
 ## A class for project properties.
 
+signal serialized(Dictionary)
+signal about_to_deserialize(Dictionary)
+
 var name := "":
 	set(value):
 		name = value
@@ -102,6 +105,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 		directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
+	Global.project_created.emit(self)
 
 
 func remove() -> void:
@@ -332,10 +336,12 @@ func serialize() -> Dictionary:
 		"metadata": metadata
 	}
 
+	serialized.emit(project_data)
 	return project_data
 
 
 func deserialize(dict: Dictionary) -> void:
+	about_to_deserialize.emit(dict)
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
@@ -516,11 +522,19 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 		toggle_layer_buttons()
 
 	if current_frame < frames.size():  # Set opacity slider
-		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
+		var cel_opacity := frames[current_frame].cels[current_layer].opacity
 		Global.layer_opacity_slider.value = cel_opacity * 100
-	Global.canvas.queue_redraw()
+		var blend_mode_index: int = Global.animation_timeline.blend_modes_button.get_item_index(
+			layers[current_layer].blend_mode
+		)
+		Global.animation_timeline.blend_modes_button.selected = blend_mode_index
+
 	Global.transparent_checker.update_rect()
 	Global.cel_changed.emit()
+	if get_current_cel() is Cel3D:
+		await RenderingServer.frame_post_draw
+		await RenderingServer.frame_post_draw
+	Global.canvas.queue_redraw()
 
 
 func toggle_frame_buttons() -> void:
