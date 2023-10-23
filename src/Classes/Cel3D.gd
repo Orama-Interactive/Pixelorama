@@ -260,8 +260,9 @@ func convert_dict(dict: Dictionary) -> void:
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
 				object_info["mesh_sizev2"] /= 2
 			7:  # TEXT
-				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE * 2)
-				object_info["mesh_pixel_size"] /= 2
+				object_info["mesh_vertical_alignment"] = VERTICAL_ALIGNMENT_BOTTOM
+				object_info["mesh_font_size"] = 12
+				object_info["mesh_offset"] = Vector2.UP * 3
 		objects_copy_str[object_id_as_str] = var_to_str(objects_copy_str[object_id_as_str])
 
 

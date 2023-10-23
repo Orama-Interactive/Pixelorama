@@ -285,6 +285,7 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Size:"
+clip_text = true
 
 [node name="MeshSize" parent="ObjectOptions/MeshOptions/GridContainer" index="1" instance=ExtResource("7")]
 unique_name_in_owner = true
@@ -299,6 +300,7 @@ show_ratio = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Size:"
+clip_text = true
 
 [node name="MeshSizeV2" parent="ObjectOptions/MeshOptions/GridContainer" index="3" instance=ExtResource("3")]
 unique_name_in_owner = true
@@ -313,6 +315,7 @@ snap_step = 0.01
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Left to right:"
+clip_text = true
 
 [node name="MeshLeftToRight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="5"]
 unique_name_in_owner = true
@@ -336,6 +339,7 @@ script = ExtResource("5")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Radius:"
+clip_text = true
 
 [node name="MeshRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="7"]
 unique_name_in_owner = true
@@ -360,6 +364,7 @@ script = ExtResource("5")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Height:"
+clip_text = true
 
 [node name="MeshHeight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="9"]
 unique_name_in_owner = true
@@ -384,6 +389,7 @@ script = ExtResource("5")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Radial segments:"
+clip_text = true
 
 [node name="MeshRadialSegments" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="11"]
 unique_name_in_owner = true
@@ -407,6 +413,7 @@ script = ExtResource("5")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Rings:"
+clip_text = true
 
 [node name="MeshRings" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="13"]
 unique_name_in_owner = true
@@ -430,6 +437,7 @@ script = ExtResource("5")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Is hemisphere:"
+clip_text = true
 
 [node name="MeshIsHemisphere" type="CheckBox" parent="ObjectOptions/MeshOptions/GridContainer" index="15"]
 unique_name_in_owner = true
@@ -442,6 +450,7 @@ text = "On"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Top radius:"
+clip_text = true
 
 [node name="MeshTopRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="17"]
 unique_name_in_owner = true
@@ -465,6 +474,7 @@ script = ExtResource("5")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Bottom radius:"
+clip_text = true
 
 [node name="MeshBottomRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="19"]
 unique_name_in_owner = true
@@ -488,16 +498,20 @@ script = ExtResource("5")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Text:"
+clip_text = true
 
-[node name="MeshText" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
+[node name="MeshText" type="TextEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pixel size:"
+clip_text = true
 
 [node name="MeshPixelSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
 unique_name_in_owner = true
@@ -519,12 +533,53 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 snap_step = 0.01
 
-[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
+[node name="MeshFontSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Font size:"
+clip_text = true
+
+[node name="MeshFontSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("5")
+
+[node name="MeshOffsetLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Offset:"
+clip_text = true
+
+[node name="MeshOffsetV2" parent="ObjectOptions/MeshOptions/GridContainer" index="27" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = Vector2(10, 10)
+allow_greater = true
+allow_lesser = true
+show_ratio = true
+snap_step = 0.01
+
+[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Curve step:"
+clip_text = true
 
-[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
+[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="29"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -543,23 +598,46 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
+[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="30"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Horizontal alignment:"
+clip_text = true
 
-[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
+[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="31"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
+item_count = 4
 selected = 0
 popup/item_0/text = "Left"
 popup/item_0/id = 0
 popup/item_1/text = "Center"
 popup/item_1/id = 1
 popup/item_2/text = "Right"
+popup/item_2/id = 2
+popup/item_3/text = "Fill"
+popup/item_3/id = 3
+
+[node name="sMeshVerticalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="32"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vertical alignment:"
+clip_text = true
+
+[node name="MeshVerticalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="33"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Top"
+popup/item_0/id = 0
+popup/item_1/text = "Center"
+popup/item_1/id = 1
+popup/item_2/text = "Bottom"
 popup/item_2/id = 2
 
 [node name="LightOptions" type="VBoxContainer" parent="ObjectOptions" index="3"]
