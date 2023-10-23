@@ -121,8 +121,8 @@ func _ready() -> void:
 			node.color_changed.connect(_object_property_color_changed.bind(prop))
 		elif node is CheckBox:
 			node.toggled.connect(_object_property_toggled.bind(prop))
-		elif node is LineEdit:
-			node.text_changed.connect(_object_property_text_changed.bind(prop))
+		elif node is TextEdit:
+			node.text_changed.connect(_object_property_text_changed.bind(node, prop))
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -446,8 +446,8 @@ func _object_property_toggled(value: bool, prop: String) -> void:
 	_value_handle_change()
 
 
-func _object_property_text_changed(value: String, prop: String) -> void:
-	_set_value_from_node(_cel.selected, value, prop)
+func _object_property_text_changed(text_edit: TextEdit, prop: String) -> void:
+	_set_value_from_node(_cel.selected, text_edit.text, prop)
 	_value_handle_change()
 
 
