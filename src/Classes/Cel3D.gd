@@ -182,7 +182,7 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	if dict.has("pxo_version"):
 		if dict["pxo_version"] == 2:  # It's a 0.x project convert it to 1.0 format
-			convert_dict(dict)
+			convert_0x_to_1x(dict)
 	super.deserialize(dict)
 	scene_properties = {}
 	var scene_properties_str: Dictionary = dict["scene_properties"]
@@ -190,7 +190,7 @@ func deserialize(dict: Dictionary) -> void:
 	for prop in scene_properties_str:
 		scene_properties[prop] = str_to_var(scene_properties_str[prop])
 	for object_id_as_str in objects_copy_str:
-		if typeof(object_id_as_str) != TYPE_STRING:  # failsafe in case sometning has gone wrong
+		if typeof(object_id_as_str) != TYPE_STRING:  # failsafe in case something has gone wrong
 			return
 		var id := int(object_id_as_str)
 		if current_object_id < id:
@@ -202,7 +202,8 @@ func deserialize(dict: Dictionary) -> void:
 		_add_object_node(object)
 
 
-func convert_dict(dict: Dictionary) -> void:
+## Used to convert 3d cels found in projects exported from a 0.x version to 1.x
+func convert_0x_to_1x(dict: Dictionary) -> void:
 	# Converting the scene dictionary
 	var scene_dict: Dictionary = dict["scene_properties"]
 	var old_transform_string = scene_dict["camera_transform"]
