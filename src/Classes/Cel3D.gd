@@ -219,31 +219,45 @@ func convert_1x_to_0x(dict: Dictionary) -> void:
 		# we are using a separate variable to make it easy to write
 		var object_info: Dictionary = objects_copy[object_id_as_str]
 		# Special operations to adjust gizmo
+		# take note of origin
+		var origin = object_info["transform"].origin
 		match object_info["type"]:
 			0:  # BOX
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
+				object_info["transform"].origin = origin
 				object_info["mesh_size"] *= 2
 			1:  # SPHERE
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
+				object_info["transform"].origin = origin
 				object_info["mesh_radius"] *= 2
 				object_info["mesh_height"] *= 2
 			2:  # CAPSULE
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
-				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.RIGHT, deg2rad(-90))
+#				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.LEFT, deg2rad(90))
+				var euler = object_info["transform"].basis.get_euler()
+				# the 3 lines below resets all rotations
+				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.RIGHT, euler.x)
+				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.UP, euler.y)
+				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.FORWARD, euler.z)
+				# set new transformations (Todo: i haven't found how to do it yet)
+				object_info["transform"].origin = origin
 				object_info["mesh_radius"] *= 2
 				object_info["mesh_mid_height"] = (
 					object_info["mesh_height"] - object_info["mesh_radius"]
 				)
 			3:  # CYLINDER
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
+				object_info["transform"].origin = origin
 				object_info["mesh_height"] *= 2
 				object_info["mesh_bottom_radius"] *= 2
 				object_info["mesh_top_radius"] *= 2
 			4:  # PRISM
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
+				object_info["transform"].origin = origin
 				object_info["mesh_size"] *= 2
 			6:  # PLANE
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
+				object_info["transform"].origin = origin
 				object_info["mesh_sizev2"] *= 2
 			_:
 				if not "shadow_color" in object_info.keys():
