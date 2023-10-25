@@ -239,7 +239,8 @@ func convert_1x_to_0x(dict: Dictionary) -> void:
 				object_info["transform"].origin = origin
 				object_info["mesh_radius"] *= 2
 				object_info["mesh_mid_height"] = (
-					object_info["mesh_height"] - (object_info["mesh_radius"] / 2)
+					object_info["mesh_height"]
+					- (object_info["mesh_radius"] / 2)
 				)
 			3:  # CYLINDER
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
