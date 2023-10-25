@@ -2,9 +2,9 @@ name: Development desktop builds
 
 on:
   push:
-    branches: [ master ]
+    branches: [ 0.x ]
   pull_request:
-    branches: [ master ]
+    branches: [ 0.x ]
     paths-ignore: 
     - "Translations/*"
     - "installer/*.pot"
