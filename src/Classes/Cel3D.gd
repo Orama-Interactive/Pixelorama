@@ -232,18 +232,14 @@ func convert_1x_to_0x(dict: Dictionary) -> void:
 				object_info["mesh_radius"] *= 2
 				object_info["mesh_height"] *= 2
 			2:  # CAPSULE
-				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
-#				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.LEFT, deg2rad(90))
-				var euler = object_info["transform"].basis.get_euler()
-				# the 3 lines below resets all rotations
-				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.RIGHT, euler.x)
-				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.UP, euler.y)
-				object_info["transform"].basis = object_info["transform"].basis.rotated(Vector3.FORWARD, euler.z)
-				# set new transformations (Todo: i haven't found how to do it yet)
+				object_info["transform"] = object_info["transform"].scaled(-(Vector3.ONE / 2))
+				var basis = object_info["transform"].basis
+				var new_transform: Transform = Transform(basis.x, -basis.z, -basis.y, origin)
+				object_info["transform"] = new_transform
 				object_info["transform"].origin = origin
 				object_info["mesh_radius"] *= 2
 				object_info["mesh_mid_height"] = (
-					object_info["mesh_height"] - object_info["mesh_radius"]
+					object_info["mesh_height"] - (object_info["mesh_radius"] / 2)
 				)
 			3:  # CYLINDER
 				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
