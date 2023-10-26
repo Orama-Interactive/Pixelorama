@@ -2,10 +2,37 @@ class_name BaseLayer
 extends RefCounted
 ## Base class for layer properties. Different layer types extend from this class.
 
+## All currently supported layer blend modes between two layers. The upper layer
+## is the blend layer, and the bottom layer is the base layer.
+## For more information, refer to: [url]https://en.wikipedia.org/wiki/Blend_modes[/url]
+enum BlendModes {
+	NORMAL,  ## The blend layer colors are simply placed on top of the base colors.
+	DARKEN,  ## Keeps the darker colors between the blend and the base layers.
+	MULTIPLY,  ## Multiplies the numerical values of the two colors, giving a darker result.
+	COLOR_BURN,  ## Darkens by increasing the contrast between the blend and base colors.
+	LINEAR_BURN,  ## Darkens the base colors based on the value of the blend colors.
+	LIGHTEN,  ## Keeps the lighter colors between the blend and the base layers.
+	SCREEN,  ## Lightens the colors by multiplying the inverse of the blend and base colors.
+	COLOR_DODGE,  ## Lightens by decreasing the contrast between the blend and base colors.
+	ADD,  ## Lightens by adding the numerical values of the two colors. Also known as linear dodge.
+	OVERLAY,  ## Like Screen mode in bright base colors and Multiply mode in darker base colors.
+	SOFT_LIGHT,  ## Similar to Overlay, but more subtle.
+	HARD_LIGHT,  ## Like Screen mode in bright blending colors and Multiply mode in darker colors.
+	DIFFERENCE,  ## Subtracts the blend color from the base or vice versa, depending on the brightness.
+	EXCLUSION,  ## Similar to Difference mode, but with less contrast between the colors.
+	SUBTRACT,  ## Darkens by subtracting the numerical values of the blend colors from the base.
+	DIVIDE,  ## Divides the numerical values of the base colors by the blend.
+	HUE,  ## Uses the blend hue while preserving the base saturation and luminosity.
+	SATURATION,  ## Uses the blend saturation while preserving the base hue and luminosity.
+	COLOR,  ## Uses the blend hue and saturation while preserving the base luminosity.
+	LUMINOSITY  ## Uses the blend luminosity while preserving the base hue and saturation.
+}
+
 var name := ""
 var project: Project
 var index: int
 var parent: BaseLayer
+var blend_mode := BlendModes.NORMAL
 var visible := true
 var locked := false
 var new_cels_linked := false
@@ -130,6 +157,7 @@ func serialize() -> Dictionary:
 		"name": name,
 		"visible": visible,
 		"locked": locked,
+		"blend_mode": blend_mode,
 		"parent": parent.index if is_instance_valid(parent) else -1
 	}
 	if not cel_link_sets.is_empty():
@@ -148,6 +176,8 @@ func deserialize(dict: Dictionary) -> void:
 	name = dict.name
 	visible = dict.visible
 	locked = dict.locked
+	if dict.has("blend_mode"):
+		blend_mode = dict.blend_mode
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility
