@@ -8,7 +8,7 @@ const GIZMO_WIDTH := 1.1
 const SCALE_CIRCLE_LENGTH := 8
 const SCALE_CIRCLE_RADIUS := 1
 const CHAR_SCALE := 0.16
-const DISAPPEAR_THRESHOLD := 1  ## length of arrow below which system wont draw it (for cleaner UI)
+const DISAPPEAR_THRESHOLD := 1  ## length of arrow below which system won't draw it (for cleaner UI)
 
 var always_visible := {}  ## Key = Cel3DObject, Value = Texture2D
 var points_per_object := {}  ## Key = Cel3DObject, Value = PackedVector2Array
