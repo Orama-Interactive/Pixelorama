@@ -232,7 +232,7 @@ func _draw() -> void:
 
 
 ## resizes the vector [param v] by amount [param l] but clamps the resized length to original length
-func _resize_vector(v: Vector2, l: float, max_length := 0) -> Vector2:
+func _resize_vector(v: Vector2, l: float) -> Vector2:
 	return (v.normalized() * l).limit_length(v.length())
 
 
