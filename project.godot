@@ -24,7 +24,7 @@ config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/Version="v1.0-dev"
 config/ExtensionsAPI_Version=4
-config/Pxo_Version=2
+config/Pxo_Version=3
 
 [audio]
 

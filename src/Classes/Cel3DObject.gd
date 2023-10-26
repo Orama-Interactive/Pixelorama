@@ -95,8 +95,11 @@ func serialize() -> Dictionary:
 			Type.TEXT:
 				dict["mesh_text"] = mesh.text
 				dict["mesh_pixel_size"] = mesh.pixel_size
+				dict["mesh_font_size"] = mesh.font_size
+				dict["mesh_offset"] = mesh.offset
 				dict["mesh_curve_step"] = mesh.curve_step
 				dict["mesh_horizontal_alignment"] = mesh.horizontal_alignment
+				dict["mesh_vertical_alignment"] = mesh.vertical_alignment
 	else:
 		dict["light_color"] = node3d_type.light_color
 		dict["light_energy"] = node3d_type.light_energy
@@ -153,8 +156,11 @@ func deserialize(dict: Dictionary) -> void:
 			Type.TEXT:
 				mesh.text = dict["mesh_text"]
 				mesh.pixel_size = dict["mesh_pixel_size"]
+				mesh.font_size = dict["mesh_font_size"]
+				mesh.offset = dict["mesh_offset"]
 				mesh.curve_step = dict["mesh_curve_step"]
 				mesh.horizontal_alignment = dict["mesh_horizontal_alignment"]
+				mesh.vertical_alignment = dict["mesh_vertical_alignment"]
 	else:
 		node3d_type.light_color = dict["light_color"]
 		node3d_type.light_energy = dict["light_energy"]

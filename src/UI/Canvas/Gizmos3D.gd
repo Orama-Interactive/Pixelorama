@@ -185,7 +185,7 @@ func _draw() -> void:
 			continue
 		if object.selected:
 			# Draw bounding box outline
-			draw_multiline(points, selected_color, 1.0)
+			draw_multiline(points, selected_color, 0.5)
 			if object.applying_gizmos == Cel3DObject.Gizmos.X_ROT:
 				draw_line(gizmos_origin, Global.canvas.current_pixel, Color.RED)
 				continue
@@ -224,7 +224,7 @@ func _draw() -> void:
 			draw_char(font, proj_back_local_scale / CHAR_SCALE, "Z")
 			draw_set_transform_matrix(Transform2D())
 		elif object.hovered:
-			draw_multiline(points, hovered_color, 1.0)
+			draw_multiline(points, hovered_color)
 
 
 func _resize_vector(v: Vector2, l: float) -> Vector2:
