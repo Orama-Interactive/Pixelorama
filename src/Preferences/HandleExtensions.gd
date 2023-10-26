@@ -144,8 +144,7 @@ func _add_extension(file_name: String) -> void:
 		# Context: pixelorama deletes v0.11.x extensions when you open v1.0, this will prevent it.
 #		OS.move_to_trash(file_path)
 		print(
-			"EXTENSION ERROR:
-	Failed loading resource pack %s.
+			"EXTENSION ERROR: Failed loading resource pack %s.
 	There may be errors in extension code or extension is incompatible" % file_name
 		)
 		# Delete the faulty.txt, (it's fate has already been decided)
