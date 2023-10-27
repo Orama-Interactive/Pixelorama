@@ -1,7 +1,10 @@
 extends Control
 
+enum UninstallMode { KEEP_FILE, FILE_TO_BIN, REMOVE_PERMANENT}
+
 const EXTENSIONS_PATH := "user://extensions"
 const BUG_EXTENSIONS_PATH := "user://give_in_bug_report"
+const BIN_ACTION := "trash"
 
 var extensions := {}  ## Extension name: Extension class
 var extension_selected := -1
@@ -75,9 +78,18 @@ func install_extension(path: String) -> void:
 	_add_extension(file_name)
 
 
-func _uninstall_extension(file_name := "", remove_file := true, item := extension_selected) -> void:
-	if remove_file:
-		var err = OS.move_to_trash(EXTENSIONS_PATH.path_join(file_name))
+func _uninstall_extension(
+	file_name := "", remove_mode := UninstallMode.REMOVE_PERMANENT, item := extension_selected
+) -> void:
+	var err := OK
+	match remove_mode:
+		UninstallMode.FILE_TO_BIN:
+			err = OS.move_to_trash(
+				ProjectSettings.globalize_path(EXTENSIONS_PATH).path_join(file_name)
+			)
+		UninstallMode.REMOVE_PERMANENT:
+			err = DirAccess.remove_absolute(EXTENSIONS_PATH.path_join(file_name))
+	if remove_mode != UninstallMode.KEEP_FILE:
 		if err != OK:
 			print(err)
 			return
@@ -131,7 +143,7 @@ func _add_extension(file_name: String) -> void:
 		if item == -1:
 			print("Failed to find %s" % file_name)
 			return
-		_uninstall_extension(file_name, false, item)
+		_uninstall_extension(file_name, UninstallMode.KEEP_FILE, item)
 		# Wait two frames so the previous nodes can get freed
 		await get_tree().process_frame
 		await get_tree().process_frame
@@ -278,3 +290,15 @@ func _on_OpenFolderButton_pressed() -> void:
 func _on_AddExtensionFileDialog_files_selected(paths: PackedStringArray) -> void:
 	for path in paths:
 		install_extension(path)
+
+
+func _on_delete_confirmation_custom_action(action: StringName) -> void:
+	if action == BIN_ACTION:
+		_uninstall_extension(
+			extension_list.get_item_metadata(extension_selected), UninstallMode.FILE_TO_BIN
+		)
+	hide()
+
+
+func _on_delete_confirmation_confirmed() -> void:
+	_uninstall_extension(extension_list.get_item_metadata(extension_selected))
