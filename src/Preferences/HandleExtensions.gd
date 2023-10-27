@@ -1,6 +1,6 @@
 extends Control
 
-enum UninstallMode { KEEP_FILE, FILE_TO_BIN, REMOVE_PERMANENT}
+enum UninstallMode { KEEP_FILE, FILE_TO_BIN, REMOVE_PERMANENT }
 
 const EXTENSIONS_PATH := "user://extensions"
 const BUG_EXTENSIONS_PATH := "user://give_in_bug_report"
