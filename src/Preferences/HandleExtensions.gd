@@ -14,6 +14,7 @@ var damaged_extension: String
 @onready var enable_button: Button = $HBoxContainer/EnableButton
 @onready var uninstall_button: Button = $HBoxContainer/UninstallButton
 @onready var extension_parent: Node = Global.control.get_node("Extensions")
+@onready var delete_confirmation: ConfirmationDialog = %DeleteConfirmation
 
 
 class Extension:
@@ -44,6 +45,7 @@ class Extension:
 
 
 func _ready() -> void:
+	delete_confirmation.add_button(tr("Move to Trash"), false, BIN_ACTION)
 	if OS.get_name() == "Web":
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false
@@ -280,7 +282,7 @@ func _on_EnableButton_pressed() -> void:
 
 
 func _on_UninstallButton_pressed() -> void:
-	_uninstall_extension(extension_list.get_item_metadata(extension_selected))
+	delete_confirmation.popup_centered()
 
 
 func _on_OpenFolderButton_pressed() -> void:
@@ -297,7 +299,7 @@ func _on_delete_confirmation_custom_action(action: StringName) -> void:
 		_uninstall_extension(
 			extension_list.get_item_metadata(extension_selected), UninstallMode.FILE_TO_BIN
 		)
-	hide()
+	delete_confirmation.hide()
 
 
 func _on_delete_confirmation_confirmed() -> void:
