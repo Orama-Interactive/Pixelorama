@@ -28,7 +28,7 @@ Built using Godot 4.1.2
 - Performance when drawing and doing operations such as bucket area fill should be better now. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Dividing by zero in value sliders and spinboxes no longer crashes the program.
 
-## [v0.11.3] - Unreleased
+## [v0.11.3] - 2023-10-30
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
