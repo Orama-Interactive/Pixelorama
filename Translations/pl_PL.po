@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-10-22 16:10\n"
+"PO-Revision-Date: 2023-10-30 16:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -637,7 +637,7 @@ msgstr "Stała"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "Przestrzeń barw:"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1934,59 +1934,59 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Kontrast"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Nakładanie"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Łagodne światło"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Twarde światło"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Negatyw"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Różnica"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Wykluczenie"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Odejmowanie"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Dzielenie"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Komponent"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Barwa (Hue)"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Nasycenie"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Kolor"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Jaskrawość"
 
 msgid "Opacity:"
 msgstr "Przezroczystość:"
