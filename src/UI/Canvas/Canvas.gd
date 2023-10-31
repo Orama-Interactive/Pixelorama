@@ -70,7 +70,7 @@ func _input(event: InputEvent) -> void:
 		):
 			return
 
-	var tmp_position: Vector2 = Global.main_viewport.get_local_mouse_position()
+	var tmp_position := Global.main_viewport.get_local_mouse_position()
 	if get_velocity:
 		var velocity := Input.get_vector(
 			"move_mouse_left", "move_mouse_right", "move_mouse_up", "move_mouse_down"
@@ -83,14 +83,12 @@ func _input(event: InputEvent) -> void:
 	var tmp_transform := get_canvas_transform().affine_inverse()
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
-	if Global.has_focus:
-		queue_redraw()
-
 	sprite_changed_this_frame = false
-
 	Tools.handle_draw(Vector2i(current_pixel.floor()), event)
 
 	if sprite_changed_this_frame:
+		if Global.has_focus:
+			queue_redraw()
 		update_selected_cels_textures()
 
 
@@ -107,7 +105,7 @@ func update_texture(layer_i: int, frame_i := -1, project := Global.current_proje
 		frame_i = project.current_frame
 
 	if frame_i < project.frames.size() and layer_i < project.layers.size():
-		var current_cel: BaseCel = project.frames[frame_i].cels[layer_i]
+		var current_cel := project.frames[frame_i].cels[layer_i]
 		current_cel.update_texture()
 
 
@@ -116,7 +114,7 @@ func update_selected_cels_textures(project := Global.current_project) -> void:
 		var frame_index: int = cel_index[0]
 		var layer_index: int = cel_index[1]
 		if frame_index < project.frames.size() and layer_index < project.layers.size():
-			var current_cel: BaseCel = project.frames[frame_index].cels[layer_index]
+			var current_cel := project.frames[frame_index].cels[layer_index]
 			current_cel.update_texture()
 
 
@@ -130,7 +128,8 @@ func draw_layers() -> void:
 	for i in Global.current_project.layers.size():
 		if current_cels[i] is GroupCel:
 			continue
-		if Global.current_project.layers[i].is_visible_in_hierarchy():
+		var layer := Global.current_project.layers[i]
+		if layer.is_visible_in_hierarchy():
 			var cel_image := current_cels[i].get_image()
 			textures.append(cel_image)
 			opacities.append(current_cels[i].opacity)
@@ -138,7 +137,7 @@ func draw_layers() -> void:
 				origins.append(Vector2(move_preview_location) / Vector2(cel_image.get_size()))
 			else:
 				origins.append(Vector2.ZERO)
-			blend_modes.append(Global.current_project.layers[i].blend_mode)
+			blend_modes.append(layer.blend_mode)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	material.set_shader_parameter("layers", texture_array)
