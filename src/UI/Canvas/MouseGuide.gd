@@ -78,5 +78,3 @@ func _draw() -> void:
 				)
 			)
 		)
-
-	draw_set_transform(viewport_poly[0], Global.camera.rotation, zoom / 2)

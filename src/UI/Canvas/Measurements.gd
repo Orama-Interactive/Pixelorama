@@ -29,6 +29,8 @@ func _draw() -> void:
 
 func draw_move_measurement():
 	var p_size = Global.current_project.size
+	var dashed_color = line_color
+	dashed_color.a = 0.5
 	# Draw boundary
 	var boundary = Rect2i(rect_bounds)
 	boundary.position += Global.canvas.move_preview_location
@@ -63,29 +65,23 @@ func draw_move_measurement():
 			lines.append([bottom, p_vertical[0]])
 	for line in lines:
 		if !Rect2i(Vector2.ZERO, p_size + Vector2i.ONE).has_point(line[1]):
+			var point_a := Vector2.ZERO
+			var point_b := Vector2.ZERO
 			# project lines if needed
 			if line[1] == p_vertical[0]:  # upper horizontal projection
-				draw_dashed_line(
-					Vector2(p_size.x / 2, 0), Vector2(top.x, 0), line_color, apparent_width
-				)
+				point_a = Vector2(p_size.x / 2, 0)
+				point_b = Vector2(top.x, 0)
 			elif line[1] == p_vertical[1]:  # lower horizontal projection
-				draw_dashed_line(
-					Vector2(p_size.x / 2, p_size.y),
-					Vector2(bottom.x, p_size.y),
-					line_color,
-					apparent_width
-				)
+				point_a = Vector2(p_size.x / 2, p_size.y)
+				point_b = Vector2(bottom.x, p_size.y)
 			elif line[1] == p_horizontal[0]:  # left vertical projection
-				draw_dashed_line(
-					Vector2(0, p_size.y / 2), Vector2(0, left.y), line_color, apparent_width
-				)
+				point_a = Vector2(0, p_size.y / 2)
+				point_b = Vector2(0, left.y)
 			elif line[1] == p_horizontal[1]:  # right vertical projection
-				draw_dashed_line(
-					Vector2(p_size.x, p_size.y / 2),
-					Vector2(p_size.x, right.y),
-					line_color,
-					apparent_width
-					)
+				point_a = Vector2(p_size.x, p_size.y / 2)
+				point_b = Vector2(p_size.x, right.y)
+			var offset = (point_b - point_a).normalized() * (boundary.size / 2.0)
+			draw_dashed_line(point_a + offset, point_b + offset, dashed_color, apparent_width)
 		draw_line(line[0], line[1], line_color, apparent_width)
 		var string_vec = line[0] + (line[1] - line[0]) / 2
 		draw_set_transform(Vector2.ZERO, Global.camera.rotation, Vector2.ONE / Global.camera.zoom)
@@ -105,7 +101,10 @@ func _input(_event: InputEvent) -> void:
 func _prepare_movement_rect():
 	var project := Global.current_project
 	if project.has_selection:
-		rect_bounds = Global.canvas.selection.big_bounding_rectangle
+		rect_bounds = Global.canvas.selection.preview_image.get_used_rect()
+		rect_bounds.position += Vector2i(
+			Global.canvas.selection.big_bounding_rectangle.position
+		)
 		return
 	if rect_bounds.has_area():
 		return

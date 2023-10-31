@@ -5,10 +5,12 @@
 [node name="MouseGuideContainer" type="Node2D"]
 
 [node name="Vertical" type="Line2D" parent="."]
+visible = false
 points = PackedVector2Array(0, 19999, 0, -19999)
 script = ExtResource("2")
 
 [node name="Horizontal" type="Line2D" parent="."]
+visible = false
 points = PackedVector2Array(-19999, 0, 19999, 0)
 script = ExtResource("2")
 type = 1
