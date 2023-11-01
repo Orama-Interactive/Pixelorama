@@ -6,6 +6,7 @@ const INPUT_WIDTH := 4
 var track_mouse := true
 var _texture := preload("res://assets/graphics/dotted_line.png")
 
+
 func _ready() -> void:
 	# Add a subtle difference to the normal guide color by mixing in some green
 	default_color = Global.guide_color.lerp(Color(0.2, 0.92, 0.2), .6)
