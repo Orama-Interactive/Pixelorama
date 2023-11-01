@@ -370,7 +370,7 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 
 func resize_selection() -> void:
 	var size := big_bounding_rectangle.size.abs()
-	var selection_map: SelectionMap = Global.current_project.selection_map
+	var selection_map := Global.current_project.selection_map
 	if is_moving_content:
 		selection_map = original_bitmap
 		preview_image.copy_from(original_preview_image)
@@ -389,6 +389,7 @@ func resize_selection() -> void:
 	Global.current_project.selection_map = selection_map_copy
 	Global.current_project.selection_map_changed()
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func _gizmo_rotate() -> void:  # Does not work properly yet
@@ -423,6 +424,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	Global.current_project.selection_map_changed()
 	big_bounding_rectangle = bitmap_image.get_used_rect()
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func select_rect(rect: Rect2i, operation: int = SelectionOperation.ADD) -> void:
@@ -475,6 +477,7 @@ func move_borders(move: Vector2i) -> void:
 	marching_ants_outline.offset += Vector2(move)
 	big_bounding_rectangle.position += move
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func move_borders_end() -> void:
@@ -487,6 +490,7 @@ func move_borders_end() -> void:
 	else:
 		Global.current_project.selection_map_changed()
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func transform_content_start() -> void:
@@ -503,6 +507,7 @@ func transform_content_start() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = Global.current_project.selection_offset
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func move_content(move: Vector2) -> void:
@@ -547,6 +552,7 @@ func transform_content_confirm() -> void:
 	is_moving_content = false
 	is_pasting = false
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func transform_content_cancel() -> void:
@@ -577,6 +583,7 @@ func transform_content_cancel() -> void:
 	original_bitmap = SelectionMap.new()
 	is_pasting = false
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
