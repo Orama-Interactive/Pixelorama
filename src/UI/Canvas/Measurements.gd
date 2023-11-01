@@ -22,12 +22,53 @@ func _draw() -> void:
 	match mode:
 		Global.MeasurementMode.MOVE:
 			_prepare_movement_rect()
-			draw_move_measurement()
+			_draw_move_measurement()
 		_:
 			rect_bounds = Rect2i()
 
 
-func draw_move_measurement():
+func _input(_event: InputEvent) -> void:
+	apparent_width = WIDTH / Global.camera.zoom.x
+
+
+func _prepare_movement_rect():
+	var project := Global.current_project
+	if project.has_selection:
+		rect_bounds = Global.canvas.selection.preview_image.get_used_rect()
+		rect_bounds.position += Vector2i(Global.canvas.selection.big_bounding_rectangle.position)
+		if !rect_bounds.has_area():
+			rect_bounds = Global.canvas.selection.big_bounding_rectangle
+		return
+	if rect_bounds.has_area():
+		return
+	var selected_cels = Global.current_project.selected_cels
+	var frames = []
+	for selected_cel in selected_cels:
+		if not selected_cel[0] in frames:
+			frames.append(selected_cel[0])
+	for frame in frames:
+		# Find used rect of the current frame (across all of the layers)
+		var used_rect := Rect2i()
+		for cel_idx in project.frames[frame].cels.size():
+			if not [frame, cel_idx] in selected_cels:
+				continue
+			var cel = project.frames[frame].cels[cel_idx]
+			if not cel is PixelCel:
+				continue
+			var cel_rect := cel.get_image().get_used_rect()
+			if cel_rect.has_area():
+				used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
+		if not used_rect.has_area():
+			continue
+		if !rect_bounds.has_area():
+			rect_bounds = used_rect
+		else:
+			rect_bounds = rect_bounds.merge(used_rect)
+	if not rect_bounds.has_area():
+		rect_bounds = Rect2(Vector2.ZERO, project.size)
+
+
+func _draw_move_measurement():
 	var p_size = Global.current_project.size
 	var dashed_color = line_color
 	dashed_color.a = 0.5
@@ -92,44 +133,3 @@ func draw_move_measurement():
 			HORIZONTAL_ALIGNMENT_LEFT
 		)
 		draw_set_transform(Vector2.ZERO, Global.camera.rotation, Vector2.ONE)
-
-
-func _input(_event: InputEvent) -> void:
-	apparent_width = WIDTH / Global.camera.zoom.x
-
-
-func _prepare_movement_rect():
-	var project := Global.current_project
-	if project.has_selection:
-		rect_bounds = Global.canvas.selection.preview_image.get_used_rect()
-		rect_bounds.position += Vector2i(
-			Global.canvas.selection.big_bounding_rectangle.position
-		)
-		return
-	if rect_bounds.has_area():
-		return
-	var selected_cels = Global.current_project.selected_cels
-	var frames = []
-	for selected_cel in selected_cels:
-		if not selected_cel[0] in frames:
-			frames.append(selected_cel[0])
-	for frame in frames:
-		# Find used rect of the current frame (across all of the layers)
-		var used_rect := Rect2i()
-		for cel_idx in project.frames[frame].cels.size():
-			if not [frame, cel_idx] in selected_cels:
-				continue
-			var cel = project.frames[frame].cels[cel_idx]
-			if not cel is PixelCel:
-				continue
-			var cel_rect := cel.get_image().get_used_rect()
-			if cel_rect.has_area():
-				used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
-		if not used_rect.has_area():
-			continue
-		if !rect_bounds.has_area():
-			rect_bounds = used_rect
-		else:
-			rect_bounds = rect_bounds.merge(used_rect)
-	if not rect_bounds.has_area():
-		rect_bounds = Rect2(Vector2.ZERO, project.size)
