@@ -45,7 +45,8 @@ func draw_start(pos: Vector2i) -> void:
 	if Global.current_project.has_selection:
 		selection_node.transform_content_start()
 	_content_transformation_check = selection_node.is_moving_content
-	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
+	Global.canvas.sprite_changed_this_frame = true
+  Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
 
 
 func draw_move(pos: Vector2i) -> void:
@@ -63,7 +64,8 @@ func draw_move(pos: Vector2i) -> void:
 	else:
 		Global.canvas.move_preview_location = pos - _start_pos
 	_offset = pos
-	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
+	Global.canvas.sprite_changed_this_frame = true
+  Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
 
 
 func draw_end(pos: Vector2i) -> void:
@@ -93,7 +95,8 @@ func draw_end(pos: Vector2i) -> void:
 
 	_start_pos = Vector2.INF
 	_snap_to_grid = false
-	Global.canvas.measurements.update_measurement(Global.MeasurementMode.NONE)
+	Global.canvas.sprite_changed_this_frame = true
+  Global.canvas.measurements.update_measurement(Global.MeasurementMode.NONE)
 
 
 func _snap_position(pos: Vector2) -> Vector2:
