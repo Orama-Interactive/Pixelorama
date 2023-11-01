@@ -6,6 +6,7 @@ extends PanelContainer
 @onready var play_button := $"%PlayButton" as Button
 @onready var start_frame := $"%StartFrame" as ValueSlider
 @onready var end_frame := $"%EndFrame" as ValueSlider
+@onready var options := $VBox/Animation/Options as VBoxContainer
 
 
 func _ready() -> void:
@@ -43,12 +44,12 @@ func _on_OptionButton_item_selected(index: int) -> void:
 	play_button.button_pressed = false
 	canvas_preview.mode = index
 	if index == 0:
-		$VBox/Animation/VBoxContainer/Options.visible = false
+		options.visible = false
 		canvas_preview.transparent_checker.fit_rect(
 			Rect2(Vector2.ZERO, Global.current_project.size)
 		)
 	else:
-		$VBox/Animation/VBoxContainer/Options.visible = true
+		options.visible = true
 	canvas_preview.queue_redraw()
 
 
