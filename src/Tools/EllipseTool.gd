@@ -12,7 +12,7 @@ func _get_shape_points(shape_size: Vector2i) -> Array[Vector2i]:
 
 	var size_offset := Vector2i.ONE * (_thickness - 1)
 	var new_size := shape_size + size_offset
-	var inner_ellipse_size := new_size - size_offset
+	var inner_ellipse_size := new_size - 2 * size_offset
 
 	# The inner ellipse is to small to create a gap in the middle of the ellipse,
 	# just return a filled ellipse
