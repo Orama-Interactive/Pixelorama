@@ -26,13 +26,12 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ShowAnimate"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("4")
 expand_mode = 1
 stretch_mode = 6

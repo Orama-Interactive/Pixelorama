@@ -6,18 +6,11 @@
 
 [node name="DropShadowDialog" instance=ExtResource("1")]
 title = "Drop Shadow"
+size = Vector2i(360, 413)
 script = ExtResource("2")
 
 [node name="VBoxContainer" parent="." index="3"]
-offset_bottom = 340.0
-
-[node name="TextureRect" parent="VBoxContainer/ShowAnimate" index="0"]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_bottom = 364.0
 
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" index="0"]
 anchor_right = 0.0
