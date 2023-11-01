@@ -1,6 +1,6 @@
 extends Node2D
 
-const WIDTH = 1
+const WIDTH = 2
 
 var font: Font
 var line_color = Global.guide_color
