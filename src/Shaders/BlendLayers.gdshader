@@ -135,12 +135,22 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 }
 
 
+// Zeroes the alpha values of textures when UV < 0 and UV > 1
+float border_trim(vec4 color, vec2 uv) {
+	return min(step(uv.x, 1.0) * step(0.0, uv.x) * step(uv.y, 1.0) * step(0.0, uv.y), color.a);
+}
+
+
 void fragment() {
 	vec4 col = texture(layers, vec3(UV - origins[0], 0.0));
+	col.a = border_trim(col, UV - origins[0]);
 	col.a *= opacities[0];
 	for(int i = 1; i < textureSize(layers, 0).z; i++) // Loops through every layer
 	{
-		col = blend(blend_modes[i], texture(layers, vec3(UV - origins[i], float(i))), col, opacities[i]);
+		vec2 uv = UV - origins[i];
+		vec4 texture_color = texture(layers, vec3(uv, float(i)));
+		texture_color.a = border_trim(texture_color, uv);
+		col = blend(blend_modes[i], texture_color, col, opacities[i]);
 	}
 	COLOR = col;
 }
