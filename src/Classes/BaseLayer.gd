@@ -37,6 +37,17 @@ var locked := false  ##  Images of a locked layer won't be overritten.
 var new_cels_linked := false  ##  Determines if new cel of the layer should be linked or not.
 var blend_mode := BlendModes.NORMAL  ##  Blend mode of the current layer.
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
+var effects: Array[FX]
+
+class FX:
+	var shader: Shader
+	var params := {}
+
+
+func apply_fx(image: Image) -> void:
+	for effect in effects:
+		var shader_image_effect := ShaderImageEffect.new()
+		shader_image_effect.generate_image(image, effect.shader, effect.params, image.get_size())
 
 
 ## Returns true if this is a direct or indirect parent of layer
