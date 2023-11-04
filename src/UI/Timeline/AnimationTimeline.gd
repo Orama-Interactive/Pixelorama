@@ -1074,3 +1074,8 @@ func project_cel_removed(frame: int, layer: int) -> void:
 	var cel_hbox := Global.cel_vbox.get_child(Global.cel_vbox.get_child_count() - 1 - layer)
 	cel_hbox.get_child(frame).queue_free()
 	cel_hbox.remove_child(cel_hbox.get_child(frame))
+
+
+func _on_layer_fx_pressed() -> void:
+	$LayerFXSettings.popup_centered()
+	Global.dialog_open(true)
