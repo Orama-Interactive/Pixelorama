@@ -1077,5 +1077,5 @@ func project_cel_removed(frame: int, layer: int) -> void:
 
 
 func _on_layer_fx_pressed() -> void:
-	$LayerFXSettings.popup_centered()
+	$LayerEffectsSettings.popup_centered()
 	Global.dialog_open(true)

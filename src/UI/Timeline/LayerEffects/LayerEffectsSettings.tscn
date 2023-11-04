@@ -1,11 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://dd1fkkc3vjh78"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/LayerFXSettings.gd" id="1_t12ex"]
+[ext_resource type="Script" path="res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.gd" id="1_h6h7b"]
 
-[node name="LayerFXSettings" type="AcceptDialog"]
+[node name="LayerEffectsSettings" type="AcceptDialog"]
 title = "Layer effects"
 size = Vector2i(400, 400)
-script = ExtResource("1_t12ex")
+exclusive = false
+script = ExtResource("1_h6h7b")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 8.0
@@ -17,4 +18,8 @@ offset_bottom = 351.0
 layout_mode = 2
 text = "Add effect"
 
+[node name="EffectContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

@@ -42,6 +42,8 @@ var effects: Array[LayerEffect]
 
 func apply_fx(image: Image) -> void:
 	for effect in effects:
+		if not effect.enabled:
+			continue
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, effect.params, image.get_size())
 
