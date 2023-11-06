@@ -5,13 +5,16 @@ const MOVE_DOWN_TEXTURE := preload("res://assets/graphics/layers/move_down.png")
 const MOVE_UP_TEXTURE := preload("res://assets/graphics/layers/move_up.png")
 
 var effects: Array[LayerEffect] = [
-	LayerEffect.new("Outline", preload("res://src/Shaders/OutlineInline.gdshader")),
-	LayerEffect.new("Drop Shadow", preload("res://src/Shaders/DropShadow.gdshader")),
-	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Invert.gdshader")),
-	LayerEffect.new("Desaturation", preload("res://src/Shaders/Desaturate.gdshader")),
-	LayerEffect.new("Adjust Hue/Saturation/Value", preload("res://src/Shaders/HSV.gdshader")),
-	LayerEffect.new("Posterize", preload("res://src/Shaders/Posterize.gdshader")),
-	LayerEffect.new("Gradient Map", preload("res://src/Shaders/GradientMap.gdshader")),
+	LayerEffect.new("Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
+	LayerEffect.new("Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader")),
+	LayerEffect.new("Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader")),
+	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Effects/Invert.gdshader")),
+	LayerEffect.new("Desaturation", preload("res://src/Shaders/Effects/Desaturate.gdshader")),
+	LayerEffect.new(
+		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader"
+	)),
+	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader")),
+	LayerEffect.new("Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader")),
 ]
 
 @onready var effect_list: MenuButton = $VBoxContainer/EffectList
@@ -78,7 +81,9 @@ func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
 	Global.canvas.queue_redraw()
 
 
-func _re_order_effect(effect: LayerEffect, layer: BaseLayer, container: HBoxContainer, direction: int) -> void:
+func _re_order_effect(
+	effect: LayerEffect, layer: BaseLayer, container: HBoxContainer, direction: int
+) -> void:
 	assert(layer.effects.size() == effect_container.get_child_count())
 	var effect_index := container.get_index()
 	var new_index := effect_index + direction
