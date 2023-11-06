@@ -396,6 +396,7 @@ func resize_selection() -> void:
 	Global.current_project.selection_map = selection_map_copy
 	Global.current_project.selection_map_changed()
 	update()
+	Global.canvas.update()
 
 
 func _gizmo_rotate() -> void:  # Does not work properly yet
@@ -430,6 +431,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	Global.current_project.selection_map_changed()
 	self.big_bounding_rectangle = bitmap_image.get_used_rect()
 	update()
+	Global.canvas.update()
 
 
 func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
@@ -482,6 +484,7 @@ func move_borders(move: Vector2) -> void:
 	marching_ants_outline.offset += move
 	self.big_bounding_rectangle.position += move
 	update()
+	Global.canvas.update()
 
 
 func move_borders_end() -> void:
@@ -494,6 +497,7 @@ func move_borders_end() -> void:
 	else:
 		Global.current_project.selection_map_changed()
 	update()
+	Global.canvas.update()
 
 
 func transform_content_start() -> void:
@@ -510,6 +514,7 @@ func transform_content_start() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = Global.current_project.selection_offset
 	update()
+	Global.canvas.update()
 
 
 func move_content(move: Vector2) -> void:
@@ -554,6 +559,7 @@ func transform_content_confirm() -> void:
 	is_moving_content = false
 	is_pasting = false
 	update()
+	Global.canvas.update()
 
 
 func transform_content_cancel() -> void:
@@ -584,6 +590,7 @@ func transform_content_cancel() -> void:
 	original_bitmap = SelectionMap.new()
 	is_pasting = false
 	update()
+	Global.canvas.update()
 
 
 func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:

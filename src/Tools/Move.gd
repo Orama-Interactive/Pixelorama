@@ -46,6 +46,7 @@ func draw_start(position: Vector2) -> void:
 	if Global.current_project.has_selection:
 		selection_node.transform_content_start()
 	_content_transformation_check = selection_node.is_moving_content
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func draw_move(position: Vector2) -> void:
@@ -63,6 +64,7 @@ func draw_move(position: Vector2) -> void:
 	else:
 		Global.canvas.move_preview_location = position - _start_pos
 	_offset = position
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func draw_end(position: Vector2) -> void:
@@ -92,6 +94,7 @@ func draw_end(position: Vector2) -> void:
 
 	_start_pos = Vector2.INF
 	_snap_to_grid = false
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func _snap_position(position: Vector2) -> Vector2:

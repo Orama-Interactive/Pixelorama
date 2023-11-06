@@ -76,6 +76,7 @@ onready var object_properties := {
 func sprite_changed_this_frame():
 	_checker_update_qued = true
 	_old_cel_image = _cel.get_image()
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func _input(_event: InputEvent) -> void:

@@ -93,14 +93,12 @@ func _input(event: InputEvent) -> void:
 	var tmp_transform := get_canvas_transform().affine_inverse()
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
-	if Global.has_focus:
-		update()
-
 	sprite_changed_this_frame = false
-
 	Tools.handle_draw(current_pixel.floor(), event)
 
 	if sprite_changed_this_frame:
+		if Global.has_focus:
+			update()
 		update_selected_cels_textures()
 
 
