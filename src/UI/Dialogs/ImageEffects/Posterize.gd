@@ -1,6 +1,6 @@
 extends ImageEffect
 
-var shader := preload("res://src/Shaders/Posterize.gdshader")
+var shader := preload("res://src/Shaders/Effects/Posterize.gdshader")
 var levels := 2.0
 var dither := 0.0
 

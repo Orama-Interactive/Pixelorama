@@ -5,7 +5,7 @@ var green := true
 var blue := true
 var alpha := false
 
-var shader := preload("res://src/Shaders/Invert.gdshader")
+var shader := preload("res://src/Shaders/Effects/Invert.gdshader")
 
 
 func _ready() -> void:

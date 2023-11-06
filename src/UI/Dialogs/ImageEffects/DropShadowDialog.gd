@@ -2,7 +2,7 @@ extends ImageEffect
 
 enum Animate { OFFSET_X, OFFSET_Y }
 var color := Color.BLACK
-var shader := preload("res://src/Shaders/DropShadow.gdshader")
+var shader := preload("res://src/Shaders/Effects/DropShadow.gdshader")
 
 @onready var shadow_color := $VBoxContainer/ShadowOptions/ShadowColor as ColorPickerButton
 
