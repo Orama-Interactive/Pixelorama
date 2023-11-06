@@ -157,8 +157,9 @@ func update_brush() -> void:
 func update_random_image() -> void:
 	if _brush.type != Brushes.RANDOM_FILE:
 		return
-	var random = randi() % _brush.random.size()
+	var random := randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
+	_orignal_brush_image = _brush_image
 	_brush_texture.create_from_image(_brush_image, 0)
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()
