@@ -12,7 +12,7 @@ func _get_shape_points(shape_size: Vector2i) -> Array[Vector2i]:
 
 	var size_offset := Vector2i.ONE * (_thickness - 1)
 	var new_size := shape_size + size_offset
-	var inner_ellipse_size := new_size - size_offset
+	var inner_ellipse_size := new_size - 2 * size_offset
 
 	# The inner ellipse is to small to create a gap in the middle of the ellipse,
 	# just return a filled ellipse
@@ -31,9 +31,9 @@ func _get_shape_points(shape_size: Vector2i) -> Array[Vector2i]:
 	var scan_dir := Vector2i(0, 1) if smallest_side == new_size.x else Vector2i(1, 0)
 	var iscan_dir := Vector2i(1, 0) if smallest_side == new_size.x else Vector2i(0, 1)
 	var ie_relevant_offset_side := size_offset.x if smallest_side == new_size.x else size_offset.y
-	var h_ls_c := ceili(largest_side / 2)
+	var h_ls_c := ceili(largest_side / 2.0)
 
-	for s in range(ceili(smallest_side / 2)):
+	for s in range(ceili(smallest_side / 2.0)):
 		if s <= ie_relevant_offset_side:
 			var can_draw := false
 			for l in range(h_ls_c):

@@ -3,8 +3,8 @@ extends ImageEffect
 enum { LINEAR, RADIAL, LINEAR_DITHERING, RADIAL_DITHERING }
 enum Animate { POSITION, SIZE, ANGLE, CENTER_X, CENTER_Y, RADIUS_X, RADIUS_Y }
 
-var shader_linear := preload("res://src/Shaders/Gradients/Linear.gdshader")
-var shader_linear_dither := preload("res://src/Shaders/Gradients/LinearDithering.gdshader")
+var shader_linear := preload("res://src/Shaders/Effects/Gradients/Linear.gdshader")
+var shader_linear_dither := preload("res://src/Shaders/Effects/Gradients/LinearDithering.gdshader")
 
 var shader := shader_linear
 var dither_matrices: Array[DitherMatrix] = [

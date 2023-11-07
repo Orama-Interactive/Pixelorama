@@ -1,14 +1,25 @@
 extends Node2D
 
 enum Mode { TIMELINE, SPRITESHEET }
-var mode: int = Mode.TIMELINE
-
+var mode := Mode.TIMELINE
+## Use this material only when the animation of the canvas preview is playing
+## This way we optimize drawing when the frame being shown is the same as the main canvas
+var animation_material := material as ShaderMaterial
 var h_frames := 1
 var v_frames := 1
 var start_sprite_sheet_frame := 1
 var end_sprite_sheet_frame := 1
-var sprite_frames := []
-var frame_index := 0
+var frame_index := 0:
+	set(value):
+		frame_index = value
+		if mode == Mode.SPRITESHEET:
+			return
+		if frame_index == Global.current_project.current_frame:  # Animation not playing
+			if material != Global.canvas.material:
+				material = Global.canvas.material
+		else:  # The animation of the canvas preview is playing
+			if material != animation_material:
+				material = animation_material
 
 @onready var animation_timer := $AnimationTimer as Timer
 @onready var transparent_checker = get_parent().get_node("TransparentChecker") as ColorRect
@@ -16,84 +27,85 @@ var frame_index := 0
 
 func _ready() -> void:
 	Global.cel_changed.connect(_cel_changed)
+	material = Global.canvas.material
 
 
 func _draw() -> void:
-	var current_project := Global.current_project
+	var project := Global.current_project
 	match mode:
 		Mode.TIMELINE:
-			var modulate_color := Color.WHITE
-			if frame_index >= current_project.frames.size():
-				frame_index = current_project.current_frame
+			if frame_index >= project.frames.size():
+				frame_index = project.current_frame
 			if animation_timer.is_stopped():
-				frame_index = current_project.current_frame
-			var frame := current_project.frames[frame_index]
-			animation_timer.wait_time = frame.duration * (1.0 / current_project.fps)
-			var current_cels := frame.cels
-
-			# Draw current frame layers
-			for i in range(current_cels.size()):
-				var cel := current_cels[i]
-				if cel is GroupCel:
-					continue
-				modulate_color = Color(1, 1, 1, cel.opacity)
-				if (
-					i < current_project.layers.size()
-					and current_project.layers[i].is_visible_in_hierarchy()
-				):
-					draw_texture(cel.image_texture, Vector2.ZERO, modulate_color)
+				frame_index = project.current_frame
+			var frame := project.frames[frame_index]
+			animation_timer.wait_time = frame.duration * (1.0 / project.fps)
+			var texture := frame.cels[0].image_texture
+			draw_texture(texture, Vector2.ZERO)  # Placeholder so we can have a material here
+			if material == animation_material:
+				# Only use a unique material if the animation of the canvas preview is playing
+				# Otherwise showing a different frame than the main canvas is impossible
+				_draw_layers()
 		Mode.SPRITESHEET:
-			var texture_to_draw: ImageTexture
-			var target_frame: Frame = current_project.frames[current_project.current_frame]
-			var frame_image := Image.create(
-				current_project.size.x, current_project.size.y, false, Image.FORMAT_RGBA8
-			)
-			Export.blend_all_layers(frame_image, target_frame)
-			sprite_frames = _split_spritesheet(frame_image, h_frames, v_frames)
-
-			# limit start and end
-			if end_sprite_sheet_frame > sprite_frames.size():
-				end_sprite_sheet_frame = sprite_frames.size()
+			var image := project.frames[project.current_frame].cels[0].get_image()
+			var slices := _split_spritesheet(image, h_frames, v_frames)
+			# Limit start and end
+			if end_sprite_sheet_frame > slices.size():
+				end_sprite_sheet_frame = slices.size()
 			if start_sprite_sheet_frame < 0:
 				start_sprite_sheet_frame = 0
-			# reset frame if required
 			if frame_index >= end_sprite_sheet_frame:
 				frame_index = start_sprite_sheet_frame - 1
-			texture_to_draw = sprite_frames[frame_index]
-			draw_texture(texture_to_draw, Vector2.ZERO)
-
-			var rect := Rect2(Vector2.ZERO, texture_to_draw.get_image().get_size())
+			var src_rect := slices[frame_index]
+			var rect := Rect2(Vector2.ZERO, src_rect.size)
+			var texture := project.frames[project.current_frame].cels[0].image_texture
+			# Placeholder so we can have a material here
+			draw_texture_rect_region(texture, rect, src_rect)
 			transparent_checker.fit_rect(rect)
+
+
+func _draw_layers() -> void:
+	var current_cels := Global.current_project.frames[frame_index].cels
+	var textures: Array[Image] = []
+	var opacities := PackedFloat32Array()
+	var blend_modes := PackedInt32Array()
+	# Draw current frame layers
+	for i in Global.current_project.layers.size():
+		if current_cels[i] is GroupCel:
+			continue
+		if Global.current_project.layers[i].is_visible_in_hierarchy():
+			textures.append(current_cels[i].get_image())
+			opacities.append(current_cels[i].opacity)
+			blend_modes.append(Global.current_project.layers[i].blend_mode)
+	var texture_array := Texture2DArray.new()
+	texture_array.create_from_images(textures)
+	material.set_shader_parameter("layers", texture_array)
+	material.set_shader_parameter("opacities", opacities)
+	material.set_shader_parameter("blend_modes", blend_modes)
 
 
 func _on_AnimationTimer_timeout() -> void:
 	match mode:
 		Mode.TIMELINE:
-			var current_project := Global.current_project
+			var project := Global.current_project
 			var first_frame := 0
-			var last_frame := current_project.frames.size() - 1
+			var last_frame := project.frames.size() - 1
 
 			if Global.play_only_tags:
-				for tag in current_project.animation_tags:
-					if (
-						current_project.current_frame + 1 >= tag.from
-						&& current_project.current_frame + 1 <= tag.to
-					):
+				for tag in project.animation_tags:
+					if project.current_frame + 1 >= tag.from && project.current_frame + 1 <= tag.to:
 						first_frame = tag.from - 1
-						last_frame = min(current_project.frames.size() - 1, tag.to - 1)
+						last_frame = mini(project.frames.size() - 1, tag.to - 1)
 
 			if frame_index < last_frame:
 				frame_index += 1
 			else:
 				frame_index = first_frame
-
-			animation_timer.wait_time = (
-				current_project.frames[frame_index].duration * (1.0 / current_project.fps)
-			)
+			animation_timer.wait_time = project.frames[frame_index].duration * (1.0 / project.fps)
 
 		Mode.SPRITESHEET:
 			frame_index += 1
-			animation_timer.wait_time = (1.0 / Global.current_project.fps)
+			animation_timer.wait_time = 1.0 / Global.current_project.fps
 	animation_timer.set_one_shot(true)
 	animation_timer.start()
 	queue_redraw()
@@ -103,18 +115,13 @@ func _cel_changed() -> void:
 	queue_redraw()
 
 
-func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
-	var result := []
+func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array[Rect2]:
+	var result: Array[Rect2] = []
 	horiz = mini(horiz, image.get_size().x)
 	vert = mini(vert, image.get_size().y)
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
 	for yy in range(vert):
 		for xx in range(horiz):
-			var cropped_image := Image.new()
-			var rect := Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
-			cropped_image = image.get_region(rect)
-			cropped_image.convert(Image.FORMAT_RGBA8)
-			var tex := ImageTexture.create_from_image(cropped_image)
-			result.append(tex)
+			result.append(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
 	return result

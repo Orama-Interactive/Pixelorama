@@ -2,7 +2,7 @@ extends ImageEffect
 
 enum Animate { OFFSET_X, OFFSET_Y }
 
-var shader := preload("res://src/Shaders/OffsetPixels.gdshader")
+var shader := preload("res://src/Shaders/Effects/OffsetPixels.gdshader")
 var wrap_around := false
 
 @onready var offset_sliders := $VBoxContainer/OffsetOptions/OffsetSliders as ValueSliderV2

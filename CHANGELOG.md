@@ -5,10 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 <br><br>
 
 ## [v1.0] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
 Built using Godot 4.1.2
 
 ### Added
+- Support for multiple layer blend modes are finally here! [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
 - Export to webp and jpeg file formats. Webp is currently only for static images and does not support animations.
 - Added some missing shortcuts for buttons. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - The brush increment/decrement shortcuts can now be changed. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
@@ -19,12 +22,13 @@ Built using Godot 4.1.2
 ### Changed
 - The color picker has been vastly improved, thanks to the update to Godot 4. Users can now use the OKHSL color mode, and choose between four different picker shapes: HSV Rectangle (default), HSV Wheel, VHS Circle and OKHSL Circle.
 - Every shader-based image effect is automatically working without the need to change renderers, and they all work now on the Web version. This comes at the cost of less compatibility, as the desktop version now requires OpenGL 3.3 minimum instead of 2.1, and the Web version requires WebGL 2 instead of WebGL 1. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
+- When deleting an extension, a confirmation window now appears that lets users either to delete the palette permanently, move it to trash, or cancel. [#919](https://github.com/Orama-Interactive/Pixelorama/pull/919)
 
 ### Fixed
 - Performance when drawing and doing operations such as bucket area fill should be better now. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Dividing by zero in value sliders and spinboxes no longer crashes the program.
 
-## [v0.11.3] - Unreleased
+## [v0.11.3] - 2023-10-30
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
@@ -36,6 +40,7 @@ Built using Godot 3.5.2
 ### Fixed
 - Fixed undo/redo history not working when the tool changes. [#916](https://github.com/Orama-Interactive/Pixelorama/pull/916)
 - Pixelorama no longer closes when the project fails to be saved if "Save & Exit" is selected. [#920](https://github.com/Orama-Interactive/Pixelorama/pull/920)
+- Projects with 3D cels saved in 1.x can now be opened in 0.11.3. [#928](https://github.com/Orama-Interactive/Pixelorama/pull/928)
 
 ## [v0.11.2] - 2023-08-31
 This update has been brought to you by the contributions of:

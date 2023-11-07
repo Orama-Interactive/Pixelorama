@@ -58,9 +58,12 @@ var _object_names := {
 	"node3d_type:mesh:top_radius": $"%MeshTopRadius",
 	"node3d_type:mesh:bottom_radius": $"%MeshBottomRadius",
 	"node3d_type:mesh:text": $"%MeshText",
+	"node3d_type:mesh:offset": $"%MeshOffsetV2",
 	"node3d_type:mesh:pixel_size": $"%MeshPixelSize",
+	"node3d_type:mesh:font_size": $"%MeshFontSize",
 	"node3d_type:mesh:curve_step": $"%MeshCurveStep",
 	"node3d_type:mesh:horizontal_alignment": $"%MeshHorizontalAlignment",
+	"node3d_type:mesh:vertical_alignment": $"%MeshVerticalAlignment",
 	"node3d_type:light_color": $"%LightColor",
 	"node3d_type:light_energy": $"%LightEnergy",
 	"node3d_type:light_negative": $"%LightNegative",
@@ -74,6 +77,7 @@ var _object_names := {
 func sprite_changed_this_frame():
 	_checker_update_qued = true
 	_old_cel_image = _cel.get_image()
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func _input(_event: InputEvent) -> void:
@@ -118,8 +122,8 @@ func _ready() -> void:
 			node.color_changed.connect(_object_property_color_changed.bind(prop))
 		elif node is CheckBox:
 			node.toggled.connect(_object_property_toggled.bind(prop))
-		elif node is LineEdit:
-			node.text_changed.connect(_object_property_text_changed.bind(prop))
+		elif node is TextEdit:
+			node.text_changed.connect(_object_property_text_changed.bind(node, prop))
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -369,7 +373,7 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 			node.color = value
 		elif node is CheckBox:
 			node.button_pressed = value
-		elif node is LineEdit:
+		elif node is TextEdit:
 			if node.text != value:
 				node.text = value
 
@@ -443,8 +447,8 @@ func _object_property_toggled(value: bool, prop: String) -> void:
 	_value_handle_change()
 
 
-func _object_property_text_changed(value: String, prop: String) -> void:
-	_set_value_from_node(_cel.selected, value, prop)
+func _object_property_text_changed(text_edit: TextEdit, prop: String) -> void:
+	_set_value_from_node(_cel.selected, text_edit.text, prop)
 	_value_handle_change()
 
 

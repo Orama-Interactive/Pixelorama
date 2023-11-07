@@ -164,6 +164,7 @@ func update_random_image() -> void:
 		return
 	var random := randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
+	_orignal_brush_image = _brush_image
 	_brush_texture = ImageTexture.create_from_image(_brush_image)
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()

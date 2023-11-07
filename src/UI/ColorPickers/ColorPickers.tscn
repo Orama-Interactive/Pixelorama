@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3vcvhh4d8hd7"]
+[gd_scene load_steps=12 format=3 uid="uid://c3vcvhh4d8hd7"]
 
 [ext_resource type="Texture2D" uid="uid://dkpxkdk1xf0ea" path="res://assets/graphics/misc/color_defaults.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://d0v821l01w7go" path="res://assets/graphics/misc/color_switch.png" id="2"]
@@ -7,7 +7,11 @@
 [ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="5"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="6"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_5llr2"]
+action = &"switch_colors"
+
 [sub_resource type="Shortcut" id="19"]
+events = [SubResource("InputEventAction_5llr2")]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("5")

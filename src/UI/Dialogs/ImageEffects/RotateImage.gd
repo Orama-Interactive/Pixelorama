@@ -4,8 +4,8 @@ enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
 enum Animate { ANGLE, INITIAL_ANGLE }
 
 var live_preview := true
-var rotxel_shader := preload("res://src/Shaders/Rotation/SmearRotxel.gdshader")
-var nn_shader := preload("res://src/Shaders/Rotation/NearestNeighbour.gdshader")
+var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
+var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -37,7 +37,9 @@ func _ready() -> void:
 
 func _about_to_popup() -> void:
 	if DrawingAlgos.clean_edge_shader == null:
-		DrawingAlgos.clean_edge_shader = load("res://src/Shaders/Rotation/cleanEdge.gdshader")
+		DrawingAlgos.clean_edge_shader = load(
+			"res://src/Shaders/Effects/Rotation/cleanEdge.gdshader"
+		)
 	drag_pivot = false
 	if pivot == Vector2.INF:
 		_calculate_pivot()
