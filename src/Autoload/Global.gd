@@ -1043,7 +1043,9 @@ func create_ui_for_shader_uniforms(
 				else:
 					params[u_name] = gradient_edit.texture
 				value_changed.call(gradient_edit.get_node("TextureRect").texture, u_name)
-				gradient_edit.updated.connect(func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name))
+				gradient_edit.updated.connect(
+					func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
+				)
 				hbox.add_child(gradient_edit)
 			else:
 				var file_dialog := FileDialog.new()

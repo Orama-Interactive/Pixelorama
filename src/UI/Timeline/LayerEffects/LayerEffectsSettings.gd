@@ -74,7 +74,8 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	hbox.add_child(delete_button)
 	hbox.add_child(move_up_button)
 	hbox.add_child(move_down_button)
-	var parameter_vbox := VBoxContainer.new()
+	var parameter_vbox := CollapsibleContainer.new()
+	parameter_vbox.text = "Parameters"
 	Global.create_ui_for_shader_uniforms(
 		effect.shader,
 		effect.params,
@@ -85,6 +86,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	vbox.add_child(hbox)
 	vbox.add_child(parameter_vbox)
 	effect_container.add_child(vbox)
+	parameter_vbox.set_visible_children(false)
 
 
 func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
