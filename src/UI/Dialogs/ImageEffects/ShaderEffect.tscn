@@ -55,7 +55,7 @@ layout_mode = 2
 
 [node name="FileDialog" type="FileDialog" parent="."]
 access = 2
-filters = PackedStringArray("*shader; Godot Shader File")
+filters = PackedStringArray("*gdshader; Godot Shader File")
 show_hidden_files = true
 
 [connection signal="pressed" from="VBoxContainer/ChooseShader" to="." method="_on_ChooseShader_pressed"]

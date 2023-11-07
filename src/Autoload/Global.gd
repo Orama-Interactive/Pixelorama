@@ -68,6 +68,7 @@ const OVERRIDE_FILE := "override.cfg"
 const HOME_SUBDIR_NAME := "pixelorama"
 ## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
+const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/ValueSliderV2.tscn")
 
 ## It is path to the executable's base drectory.
 var root_directory := "."
@@ -899,3 +900,201 @@ func undo_redo_move(diff: Vector2i, images: Array[Image]) -> void:
 		image_copy.copy_from(image)
 		image.fill(Color(0, 0, 0, 0))
 		image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, image.get_size()), diff)
+
+
+func create_ui_for_shader_uniforms(
+	shader: Shader,
+	params: Dictionary,
+	parent_node: Control,
+	value_changed: Callable,
+	file_selected: Callable
+) -> void:
+	var code := shader.code.split("\n")
+	var uniforms: PackedStringArray = []
+	for line in code:
+		if line.begins_with("uniform"):
+			uniforms.append(line)
+
+	for uniform in uniforms:
+		# Example uniform:
+		# uniform float parameter_name : hint_range(0, 255) = 100.0;
+		var uniform_split := uniform.split("=")
+		var u_value := ""
+		if uniform_split.size() > 1:
+			u_value = uniform_split[1].replace(";", "").strip_edges()
+		else:
+			uniform_split[0] = uniform_split[0].replace(";", "").strip_edges()
+
+		var u_left_side := uniform_split[0].split(":")
+		var u_hint := ""
+		if u_left_side.size() > 1:
+			u_hint = u_left_side[1].strip_edges()
+			u_hint = u_hint.replace(";", "")
+
+		var u_init := u_left_side[0].split(" ")
+		var u_type := u_init[1]
+		var u_name := u_init[2]
+
+		if u_type == "float" or u_type == "int":
+			var label := Label.new()
+			label.text = u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var slider := ValueSlider.new()
+			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var min_value := 0.0
+			var max_value := 255.0
+			var step := 1.0
+			var range_values_array: PackedStringArray
+			if "hint_range" in u_hint:
+				var range_values: String = u_hint.replace("hint_range(", "")
+				range_values = range_values.replace(")", "").strip_edges()
+				range_values_array = range_values.split(",")
+
+			if u_type == "float":
+				if range_values_array.size() >= 1:
+					min_value = float(range_values_array[0])
+				else:
+					min_value = 0.01
+
+				if range_values_array.size() >= 2:
+					max_value = float(range_values_array[1])
+
+				if range_values_array.size() >= 3:
+					step = float(range_values_array[2])
+				else:
+					step = 0.01
+
+				if u_value != "":
+					slider.value = float(u_value)
+			else:
+				if range_values_array.size() >= 1:
+					min_value = int(range_values_array[0])
+
+				if range_values_array.size() >= 2:
+					max_value = int(range_values_array[1])
+
+				if range_values_array.size() >= 3:
+					step = int(range_values_array[2])
+
+				if u_value != "":
+					slider.value = int(u_value)
+			if params.has(u_name):
+				slider.value = params[u_name]
+			else:
+				params[u_name] = slider.value
+			slider.min_value = min_value
+			slider.max_value = max_value
+			slider.step = step
+			slider.value_changed.connect(value_changed.bind(u_name))
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(slider)
+			parent_node.add_child(hbox)
+		elif u_type == "vec2":
+			var label := Label.new()
+			label.text = u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var vector2 := _vec2str_to_vector2(u_value)
+			var slider := VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
+			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			slider.value = vector2
+			if params.has(u_name):
+				slider.value = params[u_name]
+			else:
+				params[u_name] = slider.value
+			slider.value_changed.connect(value_changed.bind(u_name))
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(slider)
+			parent_node.add_child(hbox)
+		elif u_type == "vec4":
+			if "source_color" in u_hint:
+				var label := Label.new()
+				label.text = u_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				var color := _vec4str_to_color(u_value)
+				var color_button := ColorPickerButton.new()
+				color_button.custom_minimum_size = Vector2(20, 20)
+				color_button.color = color
+				if params.has(u_name):
+					color_button.color = params[u_name]
+				else:
+					params[u_name] = color_button.color
+				color_button.color_changed.connect(value_changed.bind(u_name))
+				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				var hbox := HBoxContainer.new()
+				hbox.add_child(label)
+				hbox.add_child(color_button)
+				parent_node.add_child(hbox)
+		elif u_type == "sampler2D":
+			if u_name == "selection":
+				continue
+			var label := Label.new()
+			label.text = u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var file_dialog := FileDialog.new()
+			file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+			file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+			file_dialog.size = Vector2(384, 281)
+			file_dialog.file_selected.connect(file_selected.bind(u_name))
+			var button := Button.new()
+			button.text = "Load texture"
+			button.pressed.connect(file_dialog.popup_centered)
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(button)
+			parent_node.add_child(hbox)
+			parent_node.add_child(file_dialog)
+		elif u_type == "bool":
+			var label := Label.new()
+			label.text = u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var checkbox := CheckBox.new()
+			checkbox.text = "On"
+			if u_value == "true":
+				checkbox.button_pressed = true
+			if params.has(u_name):
+				checkbox.button_pressed = params[u_name]
+			else:
+				params[u_name] = checkbox.button_pressed
+			checkbox.toggled.connect(value_changed.bind(u_name))
+			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(checkbox)
+			parent_node.add_child(hbox)
+
+
+func _vec2str_to_vector2(vec2: String) -> Vector2:
+	vec2 = vec2.replace("vec2(", "")
+	vec2 = vec2.replace(")", "")
+	var vec_values: PackedStringArray = vec2.split(",")
+	if vec_values.size() == 0:
+		return Vector2.ZERO
+	var y := float(vec_values[0])
+	if vec_values.size() == 2:
+		y = float(vec_values[1])
+	var vector2 := Vector2(float(vec_values[0]), y)
+	return vector2
+
+
+func _vec4str_to_color(vec4: String) -> Color:
+	vec4 = vec4.replace("vec4(", "")
+	vec4 = vec4.replace(")", "")
+	var rgba_values: PackedStringArray = vec4.split(",")
+	var red := float(rgba_values[0])
+
+	var green := float(rgba_values[0])
+	if rgba_values.size() >= 2:
+		green = float(rgba_values[1])
+
+	var blue := float(rgba_values[0])
+	if rgba_values.size() >= 3:
+		blue = float(rgba_values[2])
+
+	var alpha := float(rgba_values[0])
+	if rgba_values.size() == 4:
+		alpha = float(rgba_values[3])
+	var color := Color(red, green, blue, alpha)
+	return color

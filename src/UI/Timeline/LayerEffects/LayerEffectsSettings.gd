@@ -11,8 +11,8 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Effects/Invert.gdshader")),
 	LayerEffect.new("Desaturation", preload("res://src/Shaders/Effects/Desaturate.gdshader")),
 	LayerEffect.new(
-		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader"
-	)),
+		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader")
+	),
 	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader")),
 	LayerEffect.new("Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader")),
 ]
@@ -49,6 +49,7 @@ func _on_effect_list_id_pressed(index: int) -> void:
 
 
 func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
+	var vbox := VBoxContainer.new()
 	var hbox := HBoxContainer.new()
 	var enable_checkbox := CheckBox.new()
 	enable_checkbox.button_pressed = effect.enabled
@@ -63,17 +64,27 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	var move_up_button := TextureButton.new()
 	move_up_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	move_up_button.texture_normal = MOVE_UP_TEXTURE
-	move_up_button.pressed.connect(_re_order_effect.bind(effect, layer, hbox, -1))
+	move_up_button.pressed.connect(_re_order_effect.bind(effect, layer, vbox, -1))
 	var move_down_button := TextureButton.new()
 	move_down_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	move_down_button.texture_normal = MOVE_DOWN_TEXTURE
-	move_down_button.pressed.connect(_re_order_effect.bind(effect, layer, hbox, 1))
+	move_down_button.pressed.connect(_re_order_effect.bind(effect, layer, vbox, 1))
 	hbox.add_child(enable_checkbox)
 	hbox.add_child(label)
 	hbox.add_child(delete_button)
 	hbox.add_child(move_up_button)
 	hbox.add_child(move_down_button)
-	effect_container.add_child(hbox)
+	var parameter_vbox := VBoxContainer.new()
+	Global.create_ui_for_shader_uniforms(
+		effect.shader,
+		effect.params,
+		parameter_vbox,
+		_set_parameter.bind(effect),
+		_load_parameter_texture.bind(effect)
+	)
+	vbox.add_child(hbox)
+	vbox.add_child(parameter_vbox)
+	effect_container.add_child(vbox)
 
 
 func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
@@ -82,7 +93,7 @@ func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
 
 
 func _re_order_effect(
-	effect: LayerEffect, layer: BaseLayer, container: HBoxContainer, direction: int
+	effect: LayerEffect, layer: BaseLayer, container: VBoxContainer, direction: int
 ) -> void:
 	assert(layer.effects.size() == effect_container.get_child_count())
 	var effect_index := container.get_index()
@@ -104,3 +115,18 @@ func _delete_effect(effect: LayerEffect) -> void:
 	effect_container.get_child(index).queue_free()
 	layer.effects.remove_at(index)
 	Global.canvas.queue_redraw()
+
+
+func _set_parameter(value, param: String, effect: LayerEffect) -> void:
+	effect.params[param] = value
+	Global.canvas.queue_redraw()
+
+
+func _load_parameter_texture(path: String, effect: LayerEffect, param: String) -> void:
+	var image := Image.new()
+	image.load(path)
+	if !image:
+		print("Error loading texture")
+		return
+	var image_tex := ImageTexture.create_from_image(image)
+	_set_parameter(image_tex, param, effect)
