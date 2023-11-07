@@ -1,10 +1,10 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform bool red;
-uniform bool blue;
-uniform bool green;
-uniform bool alpha;
+uniform bool red = true;
+uniform bool blue = true;
+uniform bool green = true;
+uniform bool alpha = false;
 uniform sampler2D selection;
 
 float stolChannel(float x) {

@@ -69,6 +69,7 @@ const HOME_SUBDIR_NAME := "pixelorama"
 ## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
 const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/ValueSliderV2.tscn")
+const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 
 ## It is path to the executable's base drectory.
 var root_directory := "."
@@ -1032,20 +1033,32 @@ func create_ui_for_shader_uniforms(
 			var label := Label.new()
 			label.text = u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var file_dialog := FileDialog.new()
-			file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-			file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-			file_dialog.size = Vector2(384, 281)
-			file_dialog.file_selected.connect(file_selected.bind(u_name))
-			var button := Button.new()
-			button.text = "Load texture"
-			button.pressed.connect(file_dialog.popup_centered)
-			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
-			hbox.add_child(button)
+			if u_name.begins_with("gradient_"):
+				var gradient_edit := GRADIENT_EDIT_TSCN.instantiate() as GradientEditNode
+				gradient_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				if params.has(u_name) and params[u_name] is GradientTexture2D:
+					gradient_edit.set_gradient_texture(params[u_name])
+				else:
+					params[u_name] = gradient_edit.texture
+				value_changed.call(gradient_edit.get_node("TextureRect").texture, u_name)
+				gradient_edit.updated.connect(func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name))
+				hbox.add_child(gradient_edit)
+			else:
+				var file_dialog := FileDialog.new()
+				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+				file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+				file_dialog.size = Vector2(384, 281)
+				file_dialog.file_selected.connect(file_selected.bind(u_name))
+				var button := Button.new()
+				button.text = "Load texture"
+				button.pressed.connect(file_dialog.popup_centered)
+				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				hbox.add_child(button)
+				parent_node.add_child(file_dialog)
 			parent_node.add_child(hbox)
-			parent_node.add_child(file_dialog)
+
 		elif u_type == "bool":
 			var label := Label.new()
 			label.text = u_name
@@ -1069,7 +1082,7 @@ func create_ui_for_shader_uniforms(
 func _vec2str_to_vector2(vec2: String) -> Vector2:
 	vec2 = vec2.replace("vec2(", "")
 	vec2 = vec2.replace(")", "")
-	var vec_values: PackedStringArray = vec2.split(",")
+	var vec_values := vec2.split(",")
 	if vec_values.size() == 0:
 		return Vector2.ZERO
 	var y := float(vec_values[0])
@@ -1082,7 +1095,7 @@ func _vec2str_to_vector2(vec2: String) -> Vector2:
 func _vec4str_to_color(vec4: String) -> Color:
 	vec4 = vec4.replace("vec4(", "")
 	vec4 = vec4.replace(")", "")
-	var rgba_values: PackedStringArray = vec4.split(",")
+	var rgba_values := vec4.split(",")
 	var red := float(rgba_values[0])
 
 	var green := float(rgba_values[0])

@@ -14,4 +14,4 @@ func _init(_name: String, _shader: Shader, _params := {}) -> void:
 
 
 func duplicate() -> LayerEffect:
-	return LayerEffect.new(name, shader, params)
+	return LayerEffect.new(name, shader, params.duplicate())
