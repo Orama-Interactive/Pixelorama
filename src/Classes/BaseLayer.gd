@@ -34,7 +34,7 @@ var index: int  ##  Index of layer in the timeline.
 var parent: BaseLayer  ##  Parent of the layer.
 var visible := true  ##  Sets visibility of the layer.
 var locked := false  ##  Images of a locked layer won't be overritten.
-var new_cels_linked := false  ##  Determins if new cel of the layer should be linked or not.
+var new_cels_linked := false  ##  Determines if new cel of the layer should be linked or not.
 var blend_mode := BlendModes.NORMAL  ##  Blend mode of the current layer.
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
 
