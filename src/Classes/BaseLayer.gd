@@ -27,6 +27,7 @@ enum BlendModes {
 	COLOR,  ## Uses the blend hue and saturation while preserving the base luminosity.
 	LUMINOSITY  ## Uses the blend luminosity while preserving the base hue and saturation.
 }
+
 var name := ""  ## Name of the layer.
 var project: Project  ## Project, the layer belongs to.
 var index: int  ##  Index of layer in the timeline.
