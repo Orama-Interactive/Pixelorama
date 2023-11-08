@@ -11,24 +11,13 @@ signal project_created(Project)  ## Emitted when a new project class is initiali
 signal project_changed  ## Emitted whenever you switch to some other project tab.
 signal cel_changed  ## Emitted whenever you select a different cel.
 
-enum LayerTypes {
-	PIXEL,  ## The layer is a Pixel Layer.
-	GROUP,  ## The layer is a Group Layer.
-	THREE_D  ## The layer is a 3D Layer.
-}
-enum GridTypes {
-	CARTESIAN,  ## The grid is Cartesian grid.
-	ISOMETRIC,  ## The grid is an Isometric grid.
-	ALL  ##  The grid is both Cartesian and Isometric.
-}
-enum ColorFrom {
-	THEME,  ## The color is taken from the current theme.
-	CUSTOM  ## The color is a custom color.
-}
-enum ButtonSize {
-	SMALL,  ## The button is large.
-	BIG  ## The button is small.
-}
+enum LayerTypes { PIXEL, GROUP, THREE_D }
+enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
+## ## Used to tell whether a color is being taken from the current theme,
+## or if it is a custom color.
+enum ColorFrom { THEME, CUSTOM }
+enum ButtonSize { SMALL, BIG }
+
 
 ##  Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
@@ -440,11 +429,11 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 ## The control node (aka Main node). It has the [param Main.gd] script attached.
 @onready var control := get_tree().current_scene
 
-## The canvas node. It has the [param Canvas.gd] script attached.
+## The main canvas node. It has the [param Canvas.gd] script attached.
 @onready var canvas: Canvas = control.find_child("Canvas")
 ## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
-## The main viewport. It has the [param ViewportContainer.gd] script attached.
+## The viewport of the main canvas. It has the [param ViewportContainer.gd] script attached.
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
 @onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
 @onready var canvas_preview_container: Container = control.find_child("Canvas Preview")
