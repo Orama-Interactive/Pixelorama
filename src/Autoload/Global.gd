@@ -211,7 +211,10 @@ var checker_follow_scale := false:
 	set(value):
 		checker_follow_scale = value
 		transparent_checker.update_rect()
-var tilemode_opacity := 1.0
+var tilemode_opacity := 1.0:
+	set(value):
+		tilemode_opacity = value
+		canvas.tile_mode.queue_redraw()
 
 var select_layer_on_button_click := false
 var onion_skinning_past_color := Color.RED:
@@ -307,15 +310,6 @@ var onion_skinning := false
 var onion_skinning_past_rate := 1.0
 var onion_skinning_future_rate := 1.0
 var onion_skinning_blue_red := false
-
-# Palettes
-var palettes := {}
-
-# Crop Options:
-var crop_top := 0
-var crop_bottom := 0
-var crop_left := 0
-var crop_right := 0
 
 # Nodes
 var base_layer_button_node: PackedScene = load("res://src/UI/Timeline/BaseLayerButton.tscn")
