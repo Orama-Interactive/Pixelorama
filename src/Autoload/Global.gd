@@ -487,7 +487,7 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-## The play farward button.
+## The play forward button.
 @onready var play_forward: BaseButton = animation_timeline.find_child("PlayForward")
 ## The play backward button.
 @onready var play_backwards: BaseButton = animation_timeline.find_child("PlayBackwards")
@@ -734,7 +734,7 @@ func general_redo(project := current_project) -> void:
 ## [member general_redo] a step further. Does further work if the current action requires it
 ## like refreshing textures, redraw UI elements etc...[br]
 ## [param frame_index] and [param layer_index] are there for optimizzation. if the undo or redo
-## happens only in one cel then the cel's frame and layer chould be passed to [param frame_index]
+## happens only in one cel then the cel's frame and layer should be passed to [param frame_index]
 ## and [param layer_index] respectively, otherwise the entire timeline will be refreshed.
 func undo_or_redo(
 	undo: bool, frame_index := -1, layer_index := -1, project := current_project
