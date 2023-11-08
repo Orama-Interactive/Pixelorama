@@ -428,12 +428,12 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 ## The control node (aka Main node). It has the [param Main.gd] script attached.
 @onready var control := get_tree().current_scene
 
-## The main canvas node. It has the [param Canvas.gd] script attached.
-@onready var canvas: Canvas = control.find_child("Canvas")
 ## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
 ## Contains viewport of the main canvas. It has the [param ViewportContainer.gd] script attached.
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
+## The main canvas node. It has the [param Canvas.gd] script attached.
+@onready var canvas: Canvas = main_viewport.find_child("Canvas")
 ## Contains viewport of the second canvas preview.
 ## It has the [param ViewportContainer.gd] script attached.
 @onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
@@ -461,40 +461,71 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
 
-@onready var brushes_popup: Popup = control.find_child("BrushesPopup")
-@onready var patterns_popup: Popup = control.find_child("PatternsPopup")
+## The palettes panel. It has the [param PalettePanel.gd] script attached.
 @onready var palette_panel: PalettePanel = control.find_child("Palettes")
-
+## The reference images panel. It has the [param ReferencesPanel.gd] script attached.
 @onready var references_panel: ReferencesPanel = control.find_child("Reference Images")
+## The perspectice editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
 
+## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
-@onready var cursor_position_label: Label = control.find_child("CursorPosition")
-@onready var current_frame_mark_label: Label = control.find_child("CurrentFrameMark")
+## The label indicating cursor position.
+@onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
+## The label indicating current frame number.
+@onready var current_frame_mark_label: Label = top_menu_container.find_child("CurrentFrameMark")
 
+## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
+## The timer used by the animation timeline.
 @onready var animation_timer: Timer = animation_timeline.find_child("AnimationTimer")
+## The container of frame buttons
 @onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
+## The container of layer buttons
 @onready var layer_vbox: VBoxContainer = animation_timeline.find_child("LayerVBox")
+## At runtime HBoxContainers containing cel buttons get added to it.
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
+## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
+## The play farward button.
 @onready var play_forward: BaseButton = animation_timeline.find_child("PlayForward")
+## The play backward button.
 @onready var play_backwards: BaseButton = animation_timeline.find_child("PlayBackwards")
+## The remove frame button.
 @onready var remove_frame_button: BaseButton = animation_timeline.find_child("DeleteFrame")
+## The move frame left button.
 @onready var move_left_frame_button: BaseButton = animation_timeline.find_child("MoveLeft")
+## The move frame right button.
 @onready var move_right_frame_button: BaseButton = animation_timeline.find_child("MoveRight")
+## The remove layer button.
 @onready var remove_layer_button: BaseButton = animation_timeline.find_child("RemoveLayer")
+## The move layer up button.
 @onready var move_up_layer_button: BaseButton = animation_timeline.find_child("MoveUpLayer")
+## The move layer down button.
 @onready var move_down_layer_button: BaseButton = animation_timeline.find_child("MoveDownLayer")
+## The merge with layer below button.
 @onready var merge_down_layer_button: BaseButton = animation_timeline.find_child("MergeDownLayer")
+## The layer opacity slider.
 @onready var layer_opacity_slider: ValueSlider = animation_timeline.find_child("OpacitySlider")
 
+## The brushes popup dialog used to display brushes.
+## It has the [param BrushesPopup.gd] script attached.
+@onready var brushes_popup: Popup = control.find_child("BrushesPopup")
+## The patterns popup dialog used to display patterns
+## It has the [param PatternsPopup.gd] script attached.
+@onready var patterns_popup: Popup = control.find_child("PatternsPopup")
 @onready var tile_mode_offset_dialog: AcceptDialog = control.find_child("TileModeOffsetsDialog")
+## Dialog used to navigate and open images and projects.
 @onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
+## Dialog used to save (.pxo) projects.
 @onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
+## Html version of [member save_sprites_dialog] used to save (.pxo) projects.
 @onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_child("SaveSpriteHTML5")
+## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
+## The preferences dialog. It has the [param PreferencesDialog.gd] script attached.
 @onready var preferences_dialog: AcceptDialog = control.find_child("PreferencesDialog")
+## An error dialog to show errors.
 @onready var error_dialog: AcceptDialog = control.find_child("ErrorDialog")
 
 
@@ -674,6 +705,7 @@ func _initialize_keychain() -> void:
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 
 
+## Generates an animated notification label showing [param text].
 func notification_label(text: String) -> void:
 	var notif := NotificationLabel.new()
 	notif.text = tr(text)
@@ -682,12 +714,14 @@ func notification_label(text: String) -> void:
 	control.add_child(notif)
 
 
+## Performs the general, bare minimum stuff needed after an undo is done.
 func general_undo(project := current_project) -> void:
 	project.undos -= 1
 	var action_name := project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
+## Performs the general, bare minimum stuff needed after a redo is done.
 func general_redo(project := current_project) -> void:
 	if project.undos < project.undo_redo.get_version():  # If we did undo and then redo
 		project.undos = project.undo_redo.get_version()
@@ -696,6 +730,12 @@ func general_redo(project := current_project) -> void:
 		notification_label("Redo: %s" % action_name)
 
 
+## Performs actions done after an undo or redo is done. this takes [member general_undo] and
+## [member general_redo] a step further. Does further work if the current action requires it
+## like refreshing textures, redraw UI elements etc...[br]
+## [param frame_index] and [param layer_index] are there for optimizzation. if the undo or redo
+## happens only in one cel then the cel's frame and layer chould be passed to [param frame_index]
+## and [param layer_index] respectively, otherwise the entire timeline will be refreshed.
 func undo_or_redo(
 	undo: bool, frame_index := -1, layer_index := -1, project := current_project
 ) -> void:
@@ -767,6 +807,7 @@ func _renderer_changed(value: int) -> void:
 #	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
+## Use this to prepare Pixelorama before opening a dialog.
 func dialog_open(open: bool) -> void:
 	var dim_color := Color.WHITE
 	if open:
@@ -780,6 +821,8 @@ func dialog_open(open: bool) -> void:
 	tween.tween_property(control, "modulate", dim_color, 0.1)
 
 
+## sets the [member BaseButton.disabled] property of the [param button] to [param disable],
+## changes the cursor shape for it accordingly, and dims/brightens any textures it may have.
 func disable_button(button: BaseButton, disable: bool) -> void:
 	button.disabled = disable
 	if disable:
@@ -794,14 +837,18 @@ func disable_button(button: BaseButton, disable: bool) -> void:
 				break
 
 
-func change_button_texturerect(texture_button: TextureRect, new_file_name: String) -> void:
-	if !texture_button.texture:
+## Changes the texture of the [param texture_rect] to another texture of name [param new_file_name]
+## present in the same directory as the old one.
+func change_button_texturerect(texture_rect: TextureRect, new_file_name: String) -> void:
+	if !texture_rect.texture:
 		return
-	var file_name := texture_button.texture.resource_path.get_basename().get_file()
-	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
-	texture_button.texture = load(directory_path.path_join(new_file_name))
+	var file_name := texture_rect.texture.resource_path.get_basename().get_file()
+	var directory_path := texture_rect.texture.resource_path.get_basename().replace(file_name, "")
+	texture_rect.texture = load(directory_path.path_join(new_file_name))
 
 
+## Joins each [String] path in [param basepaths] with [param subpath] using
+## [method String.path_join]
 func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStringArray:
 	var res := PackedStringArray()
 	for _path in basepaths:
@@ -809,6 +856,8 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 	return res
 
 
+## Decompresses the [param compressed_image_data] with [params buffer_size] to the [param image]
+## This is an opmization method used by [param Draw.gd] while performing undo/redo.
 func undo_redo_draw_op(
 	image: Image, compressed_image_data: PackedByteArray, buffer_size: int
 ) -> void:
