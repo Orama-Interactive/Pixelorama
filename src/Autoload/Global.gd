@@ -1,12 +1,12 @@
 extends Node
 
-## The Global autoload of pixelorama.
+## The Global autoload of Pixelorama.
 ##
 ## This Autoload contains signals, enums, constants, variables and
 ## references to many UI elements used within Pixelorama.
 
-signal pixelorama_opened  ## Emitted as soon as pixelorama fully opens up.
-signal pixelorama_about_to_close  ## Emitted just before pixelorama is about to close.
+signal pixelorama_opened  ## Emitted as soon as Pixelorama fully opens up.
+signal pixelorama_about_to_close  ## Emitted just before Pixelorama is about to close.
 signal project_created(Project)  ## Emitted when a new project class is initialized.
 signal project_changed  ## Emitted whenever you switch to some other project tab.
 signal cel_changed  ## Emitted whenever you select a different cel.
@@ -76,7 +76,7 @@ enum HelpMenu {
 
 ## The file used to save preferences that use [code]ProjectSettings.save_custom()[/code].
 const OVERRIDE_FILE := "override.cfg"
-## The name of folder containing pixelorama preferences.
+## The name of folder containing Pixelorama preferences.
 const HOME_SUBDIR_NAME := "pixelorama"
 ## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
@@ -84,7 +84,7 @@ const CONFIG_SUBDIR_NAME := "pixelorama_data"
 ## It is the executable drectory.
 var root_directory := "."
 ## The path where preferences and other subdirectories for stuff like layouts, extensions, logs etc.
-## will get stored by pixelorama.
+## will get stored by Pixelorama.
 var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
 ## Only read from these directories. This is an [Array] of directories potentially containing
 ## stuff such as Brushes, Palettes and Patterns in sub-directories.
@@ -124,9 +124,13 @@ var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
 
 # Preferences
+## (Preference Variable) if [code]true[/code], the last saved project will open on startup.
 var open_last_project := false
+## (Preference Variable) if [code]true[/code], asks for permission to quit on exit.
 var quit_confirmation := false
+## (Preference Variable) if [code]true[/code], the zoom is smooth.
 var smooth_zoom := true
+## (Preference Variable) if [code]true[/code], the zoom is restricted to integral multiples of 100%.
 var integer_zoom := false:
 	set(value):
 		integer_zoom = value
@@ -141,14 +145,19 @@ var integer_zoom := false:
 			zoom_slider.step = 1
 		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
+## (Preference Variable) the scale of the Interface.
 var shrink := 1.0
+## (Preference Variable) the font size used by the Interface.
 var font_size := 16:
 	set(value):
 		font_size = value
 		control.theme.default_font_size = value
 		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
+## (Preference Variable) if [code]true[/code], the Interface dims on popups.
 var dim_on_popup := true
+## (Preference Variable) The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
+## (Preference Variable) determins if [param modulate_icon_color] uses custom or theme color.
 var icon_color_from := ColorFrom.THEME:
 	set(value):
 		icon_color_from = value
@@ -159,24 +168,30 @@ var icon_color_from := ColorFrom.THEME:
 		else:
 			modulate_icon_color = custom_icon_color
 		themes.change_icon_colors()
+## (Preference Variable) Color of icons when [member icon_color_from] is set to use custom colors.
 var custom_icon_color := Color.GRAY:
 	set(value):
 		custom_icon_color = value
 		if icon_color_from == ColorFrom.CUSTOM:
 			modulate_icon_color = custom_icon_color
 			preferences_dialog.themes.change_icon_colors()
+## (Preference Variable) The modulation color (or simply color) of canvas background
+## (aside from checker background).
 var modulate_clear_color := Color.GRAY:
 	set(value):
 		modulate_clear_color = value
 		preferences_dialog.themes.change_clear_color()
+## (Preference Variable) determins if [param modulate_clear_color] uses custom or theme color.
 var clear_color_from := ColorFrom.THEME:
 	set(value):
 		clear_color_from = value
 		preferences_dialog.themes.change_clear_color()
+## (Preference Variable) The selected size mode of tool buttons using [enum ButtonSize] enum.
 var tool_button_size := ButtonSize.SMALL:
 	set(value):
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## (Preference Variable) The left tool color.
 var left_tool_color := Color("0086cf"):
 	set(value):
 		left_tool_color = value
@@ -184,6 +199,7 @@ var left_tool_color := Color("0086cf"):
 			var background: NinePatchRect = child.get_node("BackgroundLeft")
 			background.modulate = value
 		Tools._slots[MOUSE_BUTTON_LEFT].tool_node.color_rect.color = value
+## (Preference Variable) The right tool color.
 var right_tool_color := Color("fd6d14"):
 	set(value):
 		right_tool_color = value
@@ -192,93 +208,117 @@ var right_tool_color := Color("fd6d14"):
 			background.modulate = value
 		Tools._slots[MOUSE_BUTTON_RIGHT].tool_node.color_rect.color = value
 
-var default_width := 64
-var default_height := 64
+var default_width := 64  ## (Preference Variable) The default width of startup project.
+var default_height := 64  ## (Preference Variable) The default height of startup project.
+## (Preference Variable) The fill color of startup project.
 var default_fill_color := Color(0, 0, 0, 0)
+## (Preference Variable) The distance to the guide or grig below which cursor snapping activates.
 var snapping_distance := 32.0
+## (Preference Variable) The grid type defined by [enum GridTypes] enum.
 var grid_type := GridTypes.CARTESIAN:
 	set(value):
 		grid_type = value
 		canvas.grid.queue_redraw()
+## (Preference Variable) The size of rectangular grid.
 var grid_size := Vector2i(2, 2):
 	set(value):
 		grid_size = value
 		canvas.grid.queue_redraw()
+## (Preference Variable) The size of isometric grid.
 var isometric_grid_size := Vector2i(16, 8):
 	set(value):
 		isometric_grid_size = value
 		canvas.grid.queue_redraw()
+## (Preference Variable) The grid offset from top-left corner of the canvas.
 var grid_offset := Vector2i.ZERO:
 	set(value):
 		grid_offset = value
 		canvas.grid.queue_redraw()
+## (Preference Variable) if [code]true[code], The grid draws over the area extended by
+## tile-mode as well.
 var grid_draw_over_tile_mode := false:
 	set(value):
 		grid_draw_over_tile_mode = value
 		canvas.grid.queue_redraw()
+## (Preference Variable) The color of grid.
 var grid_color := Color.BLACK:
 	set(value):
 		grid_color = value
 		canvas.grid.queue_redraw()
+## (Preference Variable) The minimum zoom after which pixel grid gets drawn if enabled.
 var pixel_grid_show_at_zoom := 1500.0:  # percentage
 	set(value):
 		pixel_grid_show_at_zoom = value
 		canvas.pixel_grid.queue_redraw()
+## (Preference Variable) The color of pixel grid.
 var pixel_grid_color := Color("21212191"):
 	set(value):
 		pixel_grid_color = value
 		canvas.pixel_grid.queue_redraw()
+## (Preference Variable) The color of guides.
 var guide_color := Color.PURPLE:
 	set(value):
 		guide_color = value
 		for guide in canvas.get_children():
 			if guide is Guide:
 				guide.set_color(guide_color)
+## (Preference Variable) The size of checkers in the checker background.
 var checker_size := 10:
 	set(value):
 		checker_size = value
 		transparent_checker.update_rect()
+## (Preference Variable) The color of first checker.
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1):
 	set(value):
 		checker_color_1 = value
 		transparent_checker.update_rect()
+## (Preference Variable) The color of second checker.
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1):
 	set(value):
 		checker_color_2 = value
 		transparent_checker.update_rect()
+## (Preference Variable) The color of second checker.
 var checker_follow_movement := false:
 	set(value):
 		checker_follow_movement = value
 		transparent_checker.update_rect()
+## (Preference Variable) If [code]true[/code], the checker follows zoom.
 var checker_follow_scale := false:
 	set(value):
 		checker_follow_scale = value
 		transparent_checker.update_rect()
+## (Preference Variable) Opacity of the sprites drawn on the extended area of tile-mode.
 var tilemode_opacity := 1.0
 
+## (Preference Variable) If [code]true[/code], layers get selected when their buttons are pressed.
 var select_layer_on_button_click := false
+## (Preference Variable) The onion color of past frames
 var onion_skinning_past_color := Color.RED:
 	set(value):
 		onion_skinning_past_color = value
 		canvas.onion_past.blue_red_color = value
 		canvas.onion_past.queue_redraw()
+## (Preference Variable) The onion color of future frames
 var onion_skinning_future_color := Color.BLUE:
 	set(value):
 		onion_skinning_future_color = value
 		canvas.onion_future.blue_red_color = value
 		canvas.onion_future.queue_redraw()
 
+## (Preference Variable) If [code]true[/code], the selection rect has animated borders
 var selection_animated_borders := true:
 	set(value):
 		selection_animated_borders = value
 		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
+## (Preference Variable) The first color of border.
 var selection_border_color_1 := Color.WHITE:
 	set(value):
 		selection_border_color_1 = value
 		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
 		canvas.selection.queue_redraw()
+## (Preference Variable) The second color of border.
 var selection_border_color_2 := Color.BLACK:
 	set(value):
 		selection_border_color_2 = value
@@ -286,23 +326,29 @@ var selection_border_color_2 := Color.BLACK:
 		marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
 		canvas.selection.queue_redraw()
 
+## (Preference Variable) If [code]true[/code], Pixelorama pauses when unfocused to save cpu usege.
 var pause_when_unfocused := true
+## (Preference Variable) The max fps Pixelorama is allowed to use (does not limit fps if it is 0).
 var fps_limit := 0:
 	set(value):
 		fps_limit = value
 		Engine.max_fps = fps_limit
 
+## (Preference Variable) The time (in minutes) after which backup is created (if enabled).
 var autosave_interval := 1.0:
 	set(value):
 		autosave_interval = value
 		OpenSave.update_autosave()
+## (Preference Variable) If [code]true[/code], generation of backups get enabled.
 var enable_autosave := true:
 	set(value):
 		enable_autosave = value
 		OpenSave.update_autosave()
 		preferences_dialog.autosave_interval.editable = enable_autosave
+## (Preference Variable) The index of graphics renderer used by Pixelorama.
 var renderer := 0:
 	set = _renderer_changed
+## (Preference Variable) The index of tablet driver used by Pixelorama.
 var tablet_driver := 0:
 	set(value):
 		tablet_driver = value
