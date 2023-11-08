@@ -146,7 +146,7 @@ var font_size := 16:
 var dim_on_popup := true
 ## (Preference Variable) The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
-## (Preference Variable) Determins if [member modulate_icon_color] uses custom or theme color.
+## (Preference Variable) Determines if [member modulate_icon_color] uses custom or theme color.
 var icon_color_from := ColorFrom.THEME:
 	set(value):
 		icon_color_from = value
@@ -170,7 +170,7 @@ var modulate_clear_color := Color.GRAY:
 	set(value):
 		modulate_clear_color = value
 		preferences_dialog.themes.change_clear_color()
-## (Preference Variable) Determins if [member modulate_clear_color] uses custom or theme color.
+## (Preference Variable) Determines if [member modulate_clear_color] uses custom or theme color.
 var clear_color_from := ColorFrom.THEME:
 	set(value):
 		clear_color_from = value
