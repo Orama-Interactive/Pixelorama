@@ -419,6 +419,9 @@ var onion_skinning_past_rate := 1  ## Number of past frames shown when onion ski
 var onion_skinning_future_rate := 1
 var onion_skinning_blue_red := false  ## If [code]true[/code], then blue-red mode is enabled.
 
+## The current version of pixelorama
+var current_version: String = ProjectSettings.get_setting("application/config/Version")
+
 # Nodes
 ## The preload of button used by the [BaseLayer].
 var base_layer_button_node: PackedScene = load("res://src/UI/Timeline/BaseLayerButton.tscn")
@@ -433,11 +436,15 @@ var group_cel_button_node: PackedScene = load("res://src/UI/Timeline/GroupCelBut
 ## The preload of button used by the [Cel3D].
 var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.tscn")
 
-@onready var main_window := get_window()
+@onready var main_window := get_window()  ## The main Pixelorama [Window].
+## The control node (aka Main node). It has the [param Main.gd] script attached.
 @onready var control := get_tree().current_scene
 
+## The canvas node. It has the [param Canvas.gd] script attached.
 @onready var canvas: Canvas = control.find_child("Canvas")
+## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
+## The main viewport. It has the [param ViewportContainer.gd] script attached.
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
 @onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
 @onready var canvas_preview_container: Container = control.find_child("Canvas Preview")
@@ -488,8 +495,6 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
 @onready var preferences_dialog: AcceptDialog = control.find_child("PreferencesDialog")
 @onready var error_dialog: AcceptDialog = control.find_child("ErrorDialog")
-
-@onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
 
 func _init() -> void:
