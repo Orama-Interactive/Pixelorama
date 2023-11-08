@@ -11,7 +11,7 @@ extends Node
 ## Keep in mind that this API is targeted towards users who are not fully familiar with Pixelorama's
 ## source code. If you need to do something more complicated and more low-level, you would need to
 ## interact directly with the source code.
-##
+## [br][br]
 ## To access this anywhere in the extension use [code]get_node_or_null("/root/ExtensionsApi")[/code]
 ##
 ## @tutorial(Add Tutorial here):            https://the/tutorial1/url.com

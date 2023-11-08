@@ -1,5 +1,10 @@
 extends Node
 
+## The Global autoload of pixelorama.
+##
+## This Autoload contains signals, enums, constants, variables and
+## references to many UI elements used within Pixelorama.
+
 signal pixelorama_opened  ## Emitted as soon as pixelorama fully opens up.
 signal pixelorama_about_to_close  ## Emitted just before pixelorama is about to close.
 signal project_created(Project)  ## Emitted when a new project class is initialized.
@@ -107,13 +112,15 @@ var current_project_index := 0:  ## The index of project currently in focus.
 ## [code]false[code] when we are moving some gizmo and don't want the current tool to accidentally
 ## start drawing.[br](This does not depend on layer invisibility or lock/unlock status)
 var can_draw := false
-# (Intended to be used as getter only) Is the user allowed to move the guide while still on canvas.
+# (Intended to be used as getter only) Tells if the user allowed to move the guide while on canvas.
 var move_guides_on_canvas := true
 # Is canvas in focus.
 var has_focus := false
 
-var play_only_tags := true
+var play_only_tags := true  ## if [code]true[/code], animation plays only on frames of the same tag
+# (Intended to be used as getter only) Tells if the x symmetry guide ( -- ) is visible.
 var show_x_symmetry_axis := false
+# (Intended to be used as getter only) Tells if the x symmetry guide ( | ) is visible.
 var show_y_symmetry_axis := false
 
 # Preferences
