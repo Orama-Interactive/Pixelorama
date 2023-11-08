@@ -50,6 +50,7 @@ size_flags_horizontal = 3
 text = "Interpolation:"
 
 [node name="InterpolationOptionButton" type="OptionButton" parent="InterpolationContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -71,6 +72,7 @@ size_flags_horizontal = 3
 text = "Color space:"
 
 [node name="ColorSpaceOptionButton" type="OptionButton" parent="ColorSpaceContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
