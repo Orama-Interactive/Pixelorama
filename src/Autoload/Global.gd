@@ -289,7 +289,10 @@ var checker_follow_scale := false:
 		checker_follow_scale = value
 		transparent_checker.update_rect()
 ## (Preference Variable) Opacity of the sprites rendered on the extended area of tile-mode.
-var tilemode_opacity := 1.0
+var tilemode_opacity := 1.0:
+	set(value):
+		tilemode_opacity = value
+		canvas.tile_mode.queue_redraw()
 
 ## (Preference Variable) If [code]true[/code], layers get selected when their buttons are pressed.
 var select_layer_on_button_click := false
@@ -360,10 +363,15 @@ var tablet_driver := 0:
 		ProjectSettings.save_custom(OVERRIDE_FILE)
 
 # Tools & options
+## (Preference Variable) If [code]true[/code], the cursor's left tool icon is visible.
 var show_left_tool_icon := true
+## (Preference Variable) If [code]true[/code], the cursor's right tool icon is visible.
 var show_right_tool_icon := true
+## (Preference Variable) If [code]true[/code], the left tool's brush indicator is visible.
 var left_square_indicator_visible := true
+## (Preference Variable) If [code]true[/code], the right tool's brush indicator is visible.
 var right_square_indicator_visible := true
+## (Preference Variable) If [code]true[/code], native cursors are used instead of default cursors.
 var native_cursors := false:
 	set(value):
 		native_cursors = value
@@ -371,6 +379,7 @@ var native_cursors := false:
 			Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS, Vector2(15, 15))
 		else:
 			control.set_custom_cursor()
+## (Preference Variable) If [code]true[/code], cursor becomes cross shaped when hovering the canvas.
 var cross_cursor := true:
 	set(value):
 		cross_cursor = value
@@ -380,39 +389,48 @@ var cross_cursor := true:
 			main_viewport.mouse_default_cursor_shape = Control.CURSOR_ARROW
 
 # View menu options
+## If [code]true[/code], the canvas is in greyscale.
 var greyscale_view := false
+## If [code]true[/code], the content of canvas is flipped.
 var mirror_view := false
+## If [code]true[/code], the grid is visible.
 var draw_grid := false
+## If [code]true[/code], the pixel grid is visible.
 var draw_pixel_grid := false
+## If [code]true[/code], the rulers are visible.
 var show_rulers := true
+## If [code]true[/code], the guides are visible.
 var show_guides := true
+## If [code]true[/code], the mouse guides are visible.
 var show_mouse_guides := false
+## If [code]true[/code], cursor snaps to the boundary of rectangular grid boxes.
 var snap_to_rectangular_grid_boundary := false
+## If [code]true[/code], cursor snaps to the center of rectangular grid boxes.
 var snap_to_rectangular_grid_center := false
+## If [code]true[/code], cursor snaps to regular guides.
 var snap_to_guides := false
+## If [code]true[/code], cursor snaps to perspective guides.
 var snap_to_perspective_guides := false
 
 # Onion skinning options
-var onion_skinning := false
-var onion_skinning_past_rate := 1.0
-var onion_skinning_future_rate := 1.0
-var onion_skinning_blue_red := false
-
-# Palettes
-var palettes := {}
-
-# Crop Options:
-var crop_top := 0
-var crop_bottom := 0
-var crop_left := 0
-var crop_right := 0
+var onion_skinning := false  ## If [code]true[/code], onion skinning is enabled.
+var onion_skinning_past_rate := 1  ## Number of past frames shown when onion skinning is enabled.
+## Number of future frames shown when onion skinning is enabled.
+var onion_skinning_future_rate := 1
+var onion_skinning_blue_red := false  ## If [code]true[/code], then blue-red mode is enabled.
 
 # Nodes
+## The preload of button used by the [BaseLayer].
 var base_layer_button_node: PackedScene = load("res://src/UI/Timeline/BaseLayerButton.tscn")
+## The preload of button used by the [PixelLayer].
 var pixel_layer_button_node: PackedScene = load("res://src/UI/Timeline/PixelLayerButton.tscn")
+## The preload of button used by the [GroupLayer].
 var group_layer_button_node: PackedScene = load("res://src/UI/Timeline/GroupLayerButton.tscn")
+## The preload of button used by the [PixelCel].
 var pixel_cel_button_node: PackedScene = load("res://src/UI/Timeline/PixelCelButton.tscn")
+## The preload of button used by the [GroupCel].
 var group_cel_button_node: PackedScene = load("res://src/UI/Timeline/GroupCelButton.tscn")
+## The preload of button used by the [Cel3D].
 var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.tscn")
 
 @onready var main_window := get_window()
