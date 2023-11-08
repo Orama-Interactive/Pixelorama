@@ -37,7 +37,8 @@ var locked := false  ##  Images of a locked layer won't be overritten.
 var new_cels_linked := false  ##  Determines if new cel of the layer should be linked or not.
 var blend_mode := BlendModes.NORMAL  ##  Blend mode of the current layer.
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
-var effects: Array[LayerEffect]
+var effects: Array[LayerEffect]  ## An array for non-destructive effects of the layer.
+var effects_enabled := true  ## If [code]true[/code], the effects are being applied.
 
 
 ## Returns true if this is a direct or indirect parent of layer
@@ -183,20 +184,21 @@ func get_cel_from_frame(frame: Frame) -> BaseCel:
 ## the [param frame] parameter with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
-func apply_fx(frame: Frame) -> Image:
+func apply_effects(frame: Frame) -> Image:
 	var image := Image.new()
 	image.copy_from(get_cel_from_frame(frame).get_image())
+	var image_size := image.get_size()
 	for effect in effects:
 		if not effect.enabled:
 			continue
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(image, effect.shader, effect.params, image.get_size())
+		shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
 	for ancestor in get_ancestors():
 		for effect in ancestor.effects:
 			if not effect.enabled:
 				continue
 			var shader_image_effect := ShaderImageEffect.new()
-			shader_image_effect.generate_image(image, effect.shader, effect.params, image.get_size())
+			shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
 	return image
 
 
