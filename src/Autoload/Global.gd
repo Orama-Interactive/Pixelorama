@@ -1,18 +1,35 @@
 extends Node
 
-signal pixelorama_opened
-signal pixelorama_about_to_close
-signal project_created(Project)
-signal project_changed
-signal cel_changed
+signal pixelorama_opened  ## Emitted as soon as pixelorama fully opens up.
+signal pixelorama_about_to_close  ## Emitted just before pixelorama is about to close.
+signal project_created(Project)  ## Emitted when a new project class is initialized.
+signal project_changed  ## Emitted whenever you switch to some other project tab.
+signal cel_changed  ## Emitted whenever you select a different cel.
 
-enum LayerTypes { PIXEL, GROUP, THREE_D }
-enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
-enum ColorFrom { THEME, CUSTOM }
-enum ButtonSize { SMALL, BIG }
+enum LayerTypes {
+	PIXEL,  ## The layer is a Pixel Layer.
+	GROUP,  ## The layer is a Group Layer.
+	THREE_D  ## The layer is a 3D Layer.
+}
+enum GridTypes {
+	CARTESIAN,  ## The grid is Cartesian grid.
+	ISOMETRIC,  ## The grid is an Isometric grid.
+	ALL  ##  The grid is both Cartesian and Isometric.
+}
+enum ColorFrom {
+	THEME,  ## The color is taken from the current theme.
+	CUSTOM  ## The color is a custom color.
+}
+enum ButtonSize {
+	SMALL,  ## The button is large.
+	BIG  ## The button is small.
+}
 
+##  Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
+##  Enumeration of items present in the Edit Menu.
 enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
+##  Enumeration of items present in the View Menu.
 enum ViewMenu {
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
@@ -25,7 +42,9 @@ enum ViewMenu {
 	SHOW_MOUSE_GUIDES,
 	SNAP_TO,
 }
+##  Enumeration of items present in the Window Menu.
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
+##  Enumeration of items present in the Image Menu.
 enum ImageMenu {
 	RESIZE_CANVAS,
 	OFFSET_IMAGE,
@@ -43,23 +62,35 @@ enum ImageMenu {
 	GRADIENT_MAP,
 	SHADER
 }
+##  Enumeration of items present in the Select Menu.
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
+##  Enumeration of items present in the Help Menu.
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA
 }
 
+## The file used to save preferences that use [code]ProjectSettings.save_custom()[/code].
 const OVERRIDE_FILE := "override.cfg"
+## The name of folder containing pixelorama preferences.
 const HOME_SUBDIR_NAME := "pixelorama"
+## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
 
+## It is the executable drectory.
 var root_directory := "."
+## The path where preferences and other subdirectories for stuff like layouts, extensions, logs etc.
+## will get stored by pixelorama.
 var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
-var data_directories: PackedStringArray = [home_data_directory]  ## Only read from these directories
+## Only read from these directories. This is an [Array] of directories potentially containing
+## stuff such as Brushes, Palettes and Patterns in sub-directories.
+## ([member home_data_directory] and [member root_directory] are also included in this array).[br]
+var data_directories: PackedStringArray = [home_data_directory]
+## The config file used to get/set preferences, tool settings etc.
 var config_cache := ConfigFile.new()
 
-var projects: Array[Project] = []
-var current_project: Project
-var current_project_index := 0:
+var projects: Array[Project] = []  ## Array of currently open projects.
+var current_project: Project  ## The project currently in focus.
+var current_project_index := 0:  ## The index of project currently in focus.
 	set(value):
 		if value >= projects.size():
 			return
@@ -72,8 +103,13 @@ var current_project_index := 0:
 		cel_changed.emit()
 
 # Canvas related stuff
+## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
+## [code]false[code] when we are moving some gizmo and don't want the current tool to accidentally
+## start drawing.[br](This does not depend on layer invisibility or lock/unlock status)
 var can_draw := false
-var move_guides_on_canvas := false
+# (Intended to be used as getter only) Is the user allowed to move the guide while still on canvas.
+var move_guides_on_canvas := true
+# Is canvas in focus.
 var has_focus := false
 
 var play_only_tags := true
