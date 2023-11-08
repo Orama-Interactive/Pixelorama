@@ -385,7 +385,7 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 
 
 func _init() -> void:
-	if OS.has_feature("standalone"):
+	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	data_directories.append(root_directory.path_join(CONFIG_SUBDIR_NAME))
 	if OS.get_name() in ["Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]:
