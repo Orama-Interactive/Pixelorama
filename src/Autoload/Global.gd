@@ -487,25 +487,25 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-## The play forward button.
+## Play forward button.
 @onready var play_forward: BaseButton = animation_timeline.find_child("PlayForward")
-## The play backward button.
+## Play backward button.
 @onready var play_backwards: BaseButton = animation_timeline.find_child("PlayBackwards")
-## The remove frame button.
+## Remove frame button.
 @onready var remove_frame_button: BaseButton = animation_timeline.find_child("DeleteFrame")
-## The move frame left button.
+## Move frame left button.
 @onready var move_left_frame_button: BaseButton = animation_timeline.find_child("MoveLeft")
-## The move frame right button.
+## Move frame right button.
 @onready var move_right_frame_button: BaseButton = animation_timeline.find_child("MoveRight")
-## The remove layer button.
+## Remove layer button.
 @onready var remove_layer_button: BaseButton = animation_timeline.find_child("RemoveLayer")
-## The move layer up button.
+## Move layer up button.
 @onready var move_up_layer_button: BaseButton = animation_timeline.find_child("MoveUpLayer")
-## The move layer down button.
+## Move layer down button.
 @onready var move_down_layer_button: BaseButton = animation_timeline.find_child("MoveDownLayer")
-## The merge with layer below button.
+## Merge with layer below button.
 @onready var merge_down_layer_button: BaseButton = animation_timeline.find_child("MergeDownLayer")
-## The layer opacity slider.
+## Layer opacity slider.
 @onready var layer_opacity_slider: ValueSlider = animation_timeline.find_child("OpacitySlider")
 
 ## The brushes popup dialog used to display brushes.
