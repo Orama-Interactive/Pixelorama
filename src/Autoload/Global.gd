@@ -81,21 +81,22 @@ const HOME_SUBDIR_NAME := "pixelorama"
 ## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
 
-## It is the executable drectory.
+## It is path to the executable's base drectory.
 var root_directory := "."
 ## The path where preferences and other subdirectories for stuff like layouts, extensions, logs etc.
 ## will get stored by Pixelorama.
 var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
 ## Only read from these directories. This is an [Array] of directories potentially containing
-## stuff such as Brushes, Palettes and Patterns in sub-directories.
-## ([member home_data_directory] and [member root_directory] are also included in this array).[br]
+## stuff such as Brushes, Palettes and Patterns in sub-directories.[br]
+## ([member home_data_directory] and [member root_directory] are also included in this array).
 var data_directories: PackedStringArray = [home_data_directory]
 ## The config file used to get/set preferences, tool settings etc.
 var config_cache := ConfigFile.new()
 
 var projects: Array[Project] = []  ## Array of currently open projects.
-var current_project: Project  ## The project currently in focus.
-var current_project_index := 0:  ## The index of project currently in focus.
+var current_project: Project  ## The project that currently in focus.
+## The index of project that is currently in focus.
+var current_project_index := 0:
 	set(value):
 		if value >= projects.size():
 			return
@@ -109,28 +110,28 @@ var current_project_index := 0:  ## The index of project currently in focus.
 
 # Canvas related stuff
 ## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
-## [code]false[code] when we are moving some gizmo and don't want the current tool to accidentally
-## start drawing.[br](This does not depend on layer invisibility or lock/unlock status)
+## [code]false[/code] when we are moving some gizmo and don't want the current tool to accidentally
+## start drawing.[br](This does not depend on layer invisibility or lock/unlock status).
 var can_draw := false
-# (Intended to be used as getter only) Tells if the user allowed to move the guide while on canvas.
+## (Intended to be used as getter only) Tells if the user allowed to move the guide while on canvas.
 var move_guides_on_canvas := true
-# Is canvas in focus.
+## Tells if the canvas in currently in focus.
 var has_focus := false
 
-var play_only_tags := true  ## if [code]true[/code], animation plays only on frames of the same tag
-# (Intended to be used as getter only) Tells if the x symmetry guide ( -- ) is visible.
+var play_only_tags := true  ## If [code]true[/code], animation plays only on frames of the same tag.
+## (Intended to be used as getter only) Tells if the x-symmetry guide ( -- ) is visible.
 var show_x_symmetry_axis := false
-# (Intended to be used as getter only) Tells if the x symmetry guide ( | ) is visible.
+## (Intended to be used as getter only) Tells if the y-symmetry guide ( | ) is visible.
 var show_y_symmetry_axis := false
 
 # Preferences
-## (Preference Variable) if [code]true[/code], the last saved project will open on startup.
+## (Preference Variable) If [code]true[/code], the last saved project will open on startup.
 var open_last_project := false
-## (Preference Variable) if [code]true[/code], asks for permission to quit on exit.
+## (Preference Variable) If [code]true[/code], asks for permission to quit on exit.
 var quit_confirmation := false
-## (Preference Variable) if [code]true[/code], the zoom is smooth.
+## (Preference Variable) If [code]true[/code], the zoom is smooth.
 var smooth_zoom := true
-## (Preference Variable) if [code]true[/code], the zoom is restricted to integral multiples of 100%.
+## (Preference Variable) If [code]true[/code], the zoom is restricted to integral multiples of 100%.
 var integer_zoom := false:
 	set(value):
 		integer_zoom = value
@@ -145,19 +146,19 @@ var integer_zoom := false:
 			zoom_slider.step = 1
 		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
-## (Preference Variable) the scale of the Interface.
+## (Preference Variable) The scale of the Interface.
 var shrink := 1.0
-## (Preference Variable) the font size used by the Interface.
+## (Preference Variable) The font size used by the Interface.
 var font_size := 16:
 	set(value):
 		font_size = value
 		control.theme.default_font_size = value
 		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
-## (Preference Variable) if [code]true[/code], the Interface dims on popups.
+## (Preference Variable) If [code]true[/code], the Interface dims on popups.
 var dim_on_popup := true
 ## (Preference Variable) The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
-## (Preference Variable) determins if [param modulate_icon_color] uses custom or theme color.
+## (Preference Variable) Determins if [member modulate_icon_color] uses custom or theme color.
 var icon_color_from := ColorFrom.THEME:
 	set(value):
 		icon_color_from = value
@@ -181,7 +182,7 @@ var modulate_clear_color := Color.GRAY:
 	set(value):
 		modulate_clear_color = value
 		preferences_dialog.themes.change_clear_color()
-## (Preference Variable) determins if [param modulate_clear_color] uses custom or theme color.
+## (Preference Variable) Determins if [member modulate_clear_color] uses custom or theme color.
 var clear_color_from := ColorFrom.THEME:
 	set(value):
 		clear_color_from = value
@@ -234,7 +235,7 @@ var grid_offset := Vector2i.ZERO:
 	set(value):
 		grid_offset = value
 		canvas.grid.queue_redraw()
-## (Preference Variable) if [code]true[code], The grid draws over the area extended by
+## (Preference Variable) If [code]true[/code], The grid draws over the area extended by
 ## tile-mode as well.
 var grid_draw_over_tile_mode := false:
 	set(value):
@@ -287,25 +288,25 @@ var checker_follow_scale := false:
 	set(value):
 		checker_follow_scale = value
 		transparent_checker.update_rect()
-## (Preference Variable) Opacity of the sprites drawn on the extended area of tile-mode.
+## (Preference Variable) Opacity of the sprites rendered on the extended area of tile-mode.
 var tilemode_opacity := 1.0
 
 ## (Preference Variable) If [code]true[/code], layers get selected when their buttons are pressed.
 var select_layer_on_button_click := false
-## (Preference Variable) The onion color of past frames
+## (Preference Variable) The onion color of past frames.
 var onion_skinning_past_color := Color.RED:
 	set(value):
 		onion_skinning_past_color = value
 		canvas.onion_past.blue_red_color = value
 		canvas.onion_past.queue_redraw()
-## (Preference Variable) The onion color of future frames
+## (Preference Variable) The onion color of future frames.
 var onion_skinning_future_color := Color.BLUE:
 	set(value):
 		onion_skinning_future_color = value
 		canvas.onion_future.blue_red_color = value
 		canvas.onion_future.queue_redraw()
 
-## (Preference Variable) If [code]true[/code], the selection rect has animated borders
+## (Preference Variable) If [code]true[/code], the selection rect has animated borders.
 var selection_animated_borders := true:
 	set(value):
 		selection_animated_borders = value
@@ -326,9 +327,9 @@ var selection_border_color_2 := Color.BLACK:
 		marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
 		canvas.selection.queue_redraw()
 
-## (Preference Variable) If [code]true[/code], Pixelorama pauses when unfocused to save cpu usege.
+## (Preference Variable) If [code]true[/code], Pixelorama pauses when unfocused to save cpu usage.
 var pause_when_unfocused := true
-## (Preference Variable) The max fps Pixelorama is allowed to use (does not limit fps if it is 0).
+## (Preference Variable) The max fps, Pixelorama is allowed to use (does not limit fps if it is 0).
 var fps_limit := 0:
 	set(value):
 		fps_limit = value
