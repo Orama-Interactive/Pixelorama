@@ -432,20 +432,33 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 @onready var canvas: Canvas = control.find_child("Canvas")
 ## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
-## The viewport of the main canvas. It has the [param ViewportContainer.gd] script attached.
+## Contains viewport of the main canvas. It has the [param ViewportContainer.gd] script attached.
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
+## Contains viewport of the second canvas preview.
+## It has the [param ViewportContainer.gd] script attached.
 @onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
+## The panel container of the canvas preview.
+## It has the [param CanvasPreviewContainer.gd] script attached.
 @onready var canvas_preview_container: Container = control.find_child("Canvas Preview")
+## The global tool options. It has the [param GlobalToolOptions.gd] script attached.
 @onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
+## Contains viewport of the canvas preview.
 @onready var small_preview_viewport: SubViewportContainer = canvas_preview_container.find_child(
 	"PreviewViewportContainer"
 )
+## Camera of the main canvas. It has the [param CameraMovement.gd] script attached.
 @onready var camera: Camera2D = main_viewport.find_child("Camera2D")
+## Camera of the second canvas preview. It has the [param CameraMovement.gd] script attached.
 @onready var camera2: Camera2D = second_viewport.find_child("Camera2D2")
+## Camera of the canvas preview. It has the [param CameraMovement.gd] script attached.
 @onready var camera_preview: Camera2D = control.find_child("CameraPreview")
+## Array of cameras used in Pixelorama.
 @onready var cameras := [camera, camera2, camera_preview]
+## Horizontal ruler of the main canvas. It has the [param HorizontalRuler.gd] script attached.
 @onready var horizontal_ruler: BaseButton = control.find_child("HorizontalRuler")
+## Vertical ruler of the main canvas. It has the [param VerticalRuler.gd] script attached.
 @onready var vertical_ruler: BaseButton = control.find_child("VerticalRuler")
+## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
 
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")
