@@ -889,7 +889,7 @@ func _on_MergeDownLayer_pressed() -> void:
 	for frame in project.frames:
 		top_cels.append(frame.cels[top_layer.index])  # Store for undo purposes
 
-		var top_image := frame.cels[top_layer.index].get_image()
+		var top_image := top_layer.apply_effects(frame)
 		var bottom_cel := frame.cels[bottom_layer.index]
 		var textures: Array[Image] = []
 		var opacities := PackedFloat32Array()

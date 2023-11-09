@@ -72,7 +72,8 @@ func _draw() -> void:
 
 
 func _draw_layers() -> void:
-	var current_cels := Global.current_project.frames[frame_index].cels
+	var current_frame := Global.current_project.frames[frame_index]
+	var current_cels := current_frame.cels
 	var textures: Array[Image] = []
 	var opacities := PackedFloat32Array()
 	var blend_modes := PackedInt32Array()
@@ -80,10 +81,12 @@ func _draw_layers() -> void:
 	for i in Global.current_project.layers.size():
 		if current_cels[i] is GroupCel:
 			continue
-		if Global.current_project.layers[i].is_visible_in_hierarchy():
+		var layer := Global.current_project.layers[i]
+		if layer.is_visible_in_hierarchy():
+			var cel_image := layer.apply_effects(current_frame)
 			textures.append(current_cels[i].get_image())
 			opacities.append(current_cels[i].opacity)
-			blend_modes.append(Global.current_project.layers[i].blend_mode)
+			blend_modes.append(layer.blend_mode)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	material.set_shader_parameter("layers", texture_array)

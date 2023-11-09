@@ -187,6 +187,8 @@ func get_cel_from_frame(frame: Frame) -> BaseCel:
 func apply_effects(frame: Frame) -> Image:
 	var image := Image.new()
 	image.copy_from(get_cel_from_frame(frame).get_image())
+	if not effects_enabled:
+		return image
 	var image_size := image.get_size()
 	for effect in effects:
 		if not effect.enabled:
