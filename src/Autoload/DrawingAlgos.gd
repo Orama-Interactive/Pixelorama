@@ -23,7 +23,7 @@ func blend_all_layers(
 		var layer := Global.current_project.layers[i]
 		if not layer.is_visible_in_hierarchy():
 			continue
-		var cel_image := layer.apply_effects(frame)
+		var cel_image := layer.apply_effects(current_cels[i])
 		textures.append(cel_image)
 		opacities.append(current_cels[i].opacity)
 		blend_modes.append(layer.blend_mode)
@@ -57,7 +57,7 @@ func blend_selected_cels(
 		if not layer.is_visible_in_hierarchy():
 			continue
 		var cel := frame.cels[cel_ind]
-		var cel_image := layer.apply_effects(frame)
+		var cel_image := layer.apply_effects(cel)
 		textures.append(cel_image)
 		opacities.append(cel.opacity)
 		blend_modes.append(layer.blend_mode)

@@ -83,7 +83,7 @@ func _draw_layers() -> void:
 			continue
 		var layer := Global.current_project.layers[i]
 		if layer.is_visible_in_hierarchy():
-			var cel_image := layer.apply_effects(current_frame)
+			var cel_image := layer.apply_effects(current_cels[i])
 			textures.append(cel_image)
 			opacities.append(current_cels[i].opacity)
 			blend_modes.append(layer.blend_mode)

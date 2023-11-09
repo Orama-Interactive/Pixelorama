@@ -174,19 +174,12 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 			cel_link_sets.append(link_set)
 
 
-## Returns the [BaseCel] that maps to this layer and the [param frame] parameter.
-func get_cel_from_frame(frame: Frame) -> BaseCel:
-	var frame_index := project.frames.find(frame)
-	return project.frames[frame_index].cels[index]
-
-
-## Returns a copy of the [Image] of the [BaseCel] that maps to this layer and
-## the [param frame] parameter with all of the effects applied to it.
+## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
-func apply_effects(frame: Frame) -> Image:
+func apply_effects(cel: BaseCel) -> Image:
 	var image := Image.new()
-	image.copy_from(get_cel_from_frame(frame).get_image())
+	image.copy_from(cel.get_image())
 	if not effects_enabled:
 		return image
 	var image_size := image.get_size()
@@ -195,7 +188,10 @@ func apply_effects(frame: Frame) -> Image:
 			continue
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
+	# Inherit effects from the parents
 	for ancestor in get_ancestors():
+		if not ancestor.effects_enabled:
+			continue
 		for effect in ancestor.effects:
 			if not effect.enabled:
 				continue
