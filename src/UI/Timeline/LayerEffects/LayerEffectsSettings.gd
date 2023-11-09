@@ -1,8 +1,8 @@
 extends AcceptDialog
 
-const DELETE_TEXTURE := preload("res://assets/graphics/layers/delete.png")
-const MOVE_DOWN_TEXTURE := preload("res://assets/graphics/layers/move_down.png")
-const MOVE_UP_TEXTURE := preload("res://assets/graphics/layers/move_up.png")
+const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
+const MOVE_UP_TEXTURE := preload("res://assets/graphics/misc/move_up_arrow.svg")
+const MOVE_DOWN_TEXTURE := preload("res://assets/graphics/misc/move_down_arrow.svg")
 
 var effects: Array[LayerEffect] = [
 	LayerEffect.new("Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
@@ -18,7 +18,7 @@ var effects: Array[LayerEffect] = [
 ]
 
 @onready var effect_list: MenuButton = $VBoxContainer/EffectList
-@onready var effect_container: VBoxContainer = $VBoxContainer/EffectContainer
+@onready var effect_container: VBoxContainer = $VBoxContainer/ScrollContainer/EffectContainer
 
 
 func _ready() -> void:
@@ -49,6 +49,7 @@ func _on_effect_list_id_pressed(index: int) -> void:
 
 
 func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
+	var panel_container := PanelContainer.new()
 	var vbox := VBoxContainer.new()
 	var hbox := HBoxContainer.new()
 	var enable_checkbox := CheckBox.new()
@@ -57,23 +58,24 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	enable_checkbox.toggled.connect(_enable_effect.bind(effect))
 	var label := Label.new()
 	label.text = effect.name
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var move_up_button := TextureButton.new()
+	move_up_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	move_up_button.texture_normal = MOVE_UP_TEXTURE
+	move_up_button.pressed.connect(_re_order_effect.bind(effect, layer, panel_container, -1))
+	var move_down_button := TextureButton.new()
+	move_down_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	move_down_button.texture_normal = MOVE_DOWN_TEXTURE
+	move_down_button.pressed.connect(_re_order_effect.bind(effect, layer, panel_container, 1))
 	var delete_button := TextureButton.new()
 	delete_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	delete_button.texture_normal = DELETE_TEXTURE
 	delete_button.pressed.connect(_delete_effect.bind(effect))
-	var move_up_button := TextureButton.new()
-	move_up_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	move_up_button.texture_normal = MOVE_UP_TEXTURE
-	move_up_button.pressed.connect(_re_order_effect.bind(effect, layer, vbox, -1))
-	var move_down_button := TextureButton.new()
-	move_down_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	move_down_button.texture_normal = MOVE_DOWN_TEXTURE
-	move_down_button.pressed.connect(_re_order_effect.bind(effect, layer, vbox, 1))
 	hbox.add_child(enable_checkbox)
 	hbox.add_child(label)
-	hbox.add_child(delete_button)
 	hbox.add_child(move_up_button)
 	hbox.add_child(move_down_button)
+	hbox.add_child(delete_button)
 	var parameter_vbox := CollapsibleContainer.new()
 	parameter_vbox.text = "Parameters"
 	Global.create_ui_for_shader_uniforms(
@@ -85,7 +87,8 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	)
 	vbox.add_child(hbox)
 	vbox.add_child(parameter_vbox)
-	effect_container.add_child(vbox)
+	panel_container.add_child(vbox)
+	effect_container.add_child(panel_container)
 	parameter_vbox.set_visible_children(false)
 
 
@@ -95,7 +98,7 @@ func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
 
 
 func _re_order_effect(
-	effect: LayerEffect, layer: BaseLayer, container: VBoxContainer, direction: int
+	effect: LayerEffect, layer: BaseLayer, container: Container, direction: int
 ) -> void:
 	assert(layer.effects.size() == effect_container.get_child_count())
 	var effect_index := container.get_index()

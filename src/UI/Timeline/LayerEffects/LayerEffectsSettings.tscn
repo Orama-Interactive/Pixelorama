@@ -18,8 +18,14 @@ offset_bottom = 351.0
 layout_mode = 2
 text = "Add effect"
 
-[node name="EffectContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EffectContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
