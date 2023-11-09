@@ -199,17 +199,8 @@ func get_action_name(action: String) -> String:
 		display_name = Keychain.actions[action].display_name
 
 	if display_name.is_empty():
-		display_name = _humanize_snake_case(action)
+		display_name = Keychain.humanize_snake_case(action)
 	return display_name
-
-
-func _humanize_snake_case(text: String) -> String:
-	text = text.replace("_", " ")
-	var first_letter := text.left(1)
-	first_letter = first_letter.capitalize()
-	text = text.right(-1)
-	text = text.insert(0, first_letter)
-	return text
 
 
 func add_event_tree_item(event: InputEvent, action_tree_item: TreeItem) -> void:
