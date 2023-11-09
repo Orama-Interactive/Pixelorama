@@ -935,10 +935,11 @@ func create_ui_for_shader_uniforms(
 		var u_init := u_left_side[0].split(" ")
 		var u_type := u_init[1]
 		var u_name := u_init[2]
+		var humanized_u_name := Keychain.humanize_snake_case(u_name)
 
 		if u_type == "float" or u_type == "int":
 			var label := Label.new()
-			label.text = u_name
+			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var slider := ValueSlider.new()
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -993,7 +994,7 @@ func create_ui_for_shader_uniforms(
 			parent_node.add_child(hbox)
 		elif u_type == "vec2":
 			var label := Label.new()
-			label.text = u_name
+			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var vector2 := _vec2str_to_vector2(u_value)
 			var slider := VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
@@ -1011,7 +1012,7 @@ func create_ui_for_shader_uniforms(
 		elif u_type == "vec4":
 			if "source_color" in u_hint:
 				var label := Label.new()
-				label.text = u_name
+				label.text = humanized_u_name
 				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				var color := _vec4str_to_color(u_value)
 				var color_button := ColorPickerButton.new()
@@ -1031,7 +1032,7 @@ func create_ui_for_shader_uniforms(
 			if u_name == "selection":
 				continue
 			var label := Label.new()
-			label.text = u_name
+			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
@@ -1063,7 +1064,7 @@ func create_ui_for_shader_uniforms(
 
 		elif u_type == "bool":
 			var label := Label.new()
-			label.text = u_name
+			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var checkbox := CheckBox.new()
 			checkbox.text = "On"
