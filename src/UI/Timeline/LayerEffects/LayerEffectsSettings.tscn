@@ -13,9 +13,19 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 392.0
 offset_bottom = 351.0
+size_flags_horizontal = 3
 
-[node name="EffectList" type="MenuButton" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="EnabledButton" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Enabled"
+
+[node name="EffectList" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
 text = "Add effect"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
@@ -29,3 +39,4 @@ size_flags_vertical = 3
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/EnabledButton" to="." method="_on_enabled_button_toggled"]

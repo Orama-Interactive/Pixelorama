@@ -17,7 +17,8 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new("Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader")),
 ]
 
-@onready var effect_list: MenuButton = $VBoxContainer/EffectList
+@onready var enabled_button: CheckButton = $VBoxContainer/HBoxContainer/EnabledButton
+@onready var effect_list: MenuButton = $VBoxContainer/HBoxContainer/EffectList
 @onready var effect_container: VBoxContainer = $VBoxContainer/ScrollContainer/EffectContainer
 
 
@@ -29,6 +30,7 @@ func _ready() -> void:
 
 func _on_about_to_popup() -> void:
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	enabled_button.button_pressed = layer.effects_enabled
 	for effect in layer.effects:
 		_create_effect_ui(layer, effect)
 
@@ -52,7 +54,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	var panel_container := PanelContainer.new()
 	var vbox := VBoxContainer.new()
 	var hbox := HBoxContainer.new()
-	var enable_checkbox := CheckBox.new()
+	var enable_checkbox := CheckButton.new()
 	enable_checkbox.button_pressed = effect.enabled
 	enable_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	enable_checkbox.toggled.connect(_enable_effect.bind(effect))
@@ -135,3 +137,9 @@ func _load_parameter_texture(path: String, effect: LayerEffect, param: String) -
 		return
 	var image_tex := ImageTexture.create_from_image(image)
 	_set_parameter(image_tex, param, effect)
+
+
+func _on_enabled_button_toggled(button_pressed: bool) -> void:
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	layer.effects_enabled = button_pressed
+	Global.canvas.queue_redraw()
