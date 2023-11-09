@@ -158,6 +158,7 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
+## Returns the currently selected [BaseCel].
 func get_current_cel() -> BaseCel:
 	return frames[current_frame].cels[current_layer]
 
@@ -642,6 +643,22 @@ func can_pixel_get_drawn(
 		return image.is_pixel_selected(pixel)
 	else:
 		return true
+
+
+## Loops through all of the cels until it finds a drawable (non-[GroupCel]) [BaseCel]
+## in the specified [param frame] and returns it. If no drawable cel is found,
+## meaning that all of the cels are [GroupCel]s, the method returns null.
+## If no [param frame] is specified, the method will use the current frame.
+func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
+	var result: BaseCel
+	var cel := frame.cels[0]
+	var i := 0
+	while cel is GroupCel and i < layers.size():
+		cel = frame.cels[i]
+		i += 1
+	if not cel is GroupCel:
+		result = cel
+	return result
 
 
 # Timeline modifications
