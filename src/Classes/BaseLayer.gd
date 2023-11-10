@@ -177,7 +177,7 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 ## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
-func apply_effects(cel: BaseCel) -> Image:
+func display_effects(cel: BaseCel) -> Image:
 	var image := Image.new()
 	image.copy_from(cel.get_image())
 	if not effects_enabled:

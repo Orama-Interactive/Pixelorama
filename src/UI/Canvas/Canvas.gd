@@ -133,7 +133,7 @@ func draw_layers() -> void:
 		if layer.is_visible_in_hierarchy():
 			var cel_image: Image
 			if Global.display_layer_effects:
-				cel_image = layer.apply_effects(current_cels[i])
+				cel_image = layer.display_effects(current_cels[i])
 			else:
 				cel_image = current_cels[i].get_image()
 			textures.append(cel_image)
