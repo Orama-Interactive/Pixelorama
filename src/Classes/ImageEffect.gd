@@ -23,12 +23,8 @@ func _ready() -> void:
 	set_nodes()
 	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	current_frame.create(
-		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
-	)
-	selected_cels.create(
-		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
-	)
+	current_frame.create(1, 1, false, Image.FORMAT_RGBA8)
+	selected_cels.create(1, 1, false, Image.FORMAT_RGBA8)
 	connect("about_to_show", self, "_about_to_show")
 	connect("popup_hide", self, "_popup_hide")
 	connect("confirmed", self, "_confirmed")
@@ -244,6 +240,10 @@ func update_transparent_background_size() -> void:
 
 func _popup_hide() -> void:
 	Global.dialog_open(false)
+	# Resize the images to (1, 1) so they do not waste unneeded RAM
+	selected_cels.resize(1, 1)
+	current_frame.resize(1, 1)
+	preview_image = Image.new()
 
 
 func _is_webgl1() -> bool:

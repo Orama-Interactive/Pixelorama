@@ -4,7 +4,7 @@ var width := 64
 var height := 64
 var offset_x := 0
 var offset_y := 0
-var image: Image
+var image := Image.new()
 
 onready var width_spinbox: SpinBox = $VBoxContainer/OptionsContainer/WidthValue
 onready var height_spinbox: SpinBox = $VBoxContainer/OptionsContainer/HeightValue
@@ -13,13 +13,13 @@ onready var y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
 onready var preview_rect: TextureRect = $VBoxContainer/AspectRatioContainer/Preview
 
 
+func _ready() -> void:
+	image.create(1, 1, false, Image.FORMAT_RGBA8)
+
+
 func _on_ResizeCanvas_about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	image = Image.new()
-	image.create(
-		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
-	)
-
+	image.resize(Global.current_project.size.x, Global.current_project.size.y)
 	var layer_i := 0
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
 		if cel is PixelCel and Global.current_project.layers[layer_i].is_visible_in_hierarchy():
@@ -109,3 +109,5 @@ func update_transparent_background_size(preview_image: Image) -> void:
 
 func _on_ResizeCanvas_popup_hide() -> void:
 	Global.dialog_open(false)
+	# Resize the image to (1, 1) so it does not waste unneeded RAM
+	image.resize(1, 1)
