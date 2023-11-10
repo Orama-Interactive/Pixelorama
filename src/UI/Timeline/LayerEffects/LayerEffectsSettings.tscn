@@ -26,6 +26,7 @@ text = "Enabled"
 [node name="EffectList" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+mouse_default_cursor_shape = 2
 text = "Add effect"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]

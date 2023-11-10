@@ -64,14 +64,20 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	var move_up_button := TextureButton.new()
 	move_up_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	move_up_button.texture_normal = MOVE_UP_TEXTURE
+	move_up_button.add_to_group(&"UIButtons")
+	move_up_button.modulate = Global.modulate_icon_color
 	move_up_button.pressed.connect(_re_order_effect.bind(effect, layer, panel_container, -1))
 	var move_down_button := TextureButton.new()
 	move_down_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	move_down_button.texture_normal = MOVE_DOWN_TEXTURE
+	move_down_button.add_to_group(&"UIButtons")
+	move_down_button.modulate = Global.modulate_icon_color
 	move_down_button.pressed.connect(_re_order_effect.bind(effect, layer, panel_container, 1))
 	var delete_button := TextureButton.new()
 	delete_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	delete_button.texture_normal = DELETE_TEXTURE
+	delete_button.add_to_group(&"UIButtons")
+	delete_button.modulate = Global.modulate_icon_color
 	delete_button.pressed.connect(_delete_effect.bind(effect))
 	hbox.add_child(enable_checkbox)
 	hbox.add_child(label)
