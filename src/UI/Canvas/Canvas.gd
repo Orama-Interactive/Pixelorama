@@ -131,7 +131,11 @@ func draw_layers() -> void:
 			continue
 		var layer := Global.current_project.layers[i]
 		if layer.is_visible_in_hierarchy():
-			var cel_image := layer.apply_effects(current_cels[i])
+			var cel_image: Image
+			if Global.display_layer_effects:
+				cel_image = layer.apply_effects(current_cels[i])
+			else:
+				cel_image = current_cels[i].get_image()
 			textures.append(cel_image)
 			opacities.append(current_cels[i].opacity)
 			if [Global.current_project.current_frame, i] in Global.current_project.selected_cels:

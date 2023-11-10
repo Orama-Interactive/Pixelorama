@@ -33,6 +33,7 @@ enum ViewMenu {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 	SHOW_MOUSE_GUIDES,
+	DISPLAY_LAYER_EFFECTS,
 	SNAP_TO,
 }
 ##  Enumeration of items present in the Window Menu.
@@ -393,6 +394,12 @@ var show_rulers := true
 var show_guides := true
 ## If [code]true[/code], the mouse guides are visible.
 var show_mouse_guides := false
+var display_layer_effects := true:
+	set(value):
+		display_layer_effects = value
+		if is_instance_valid(top_menu_container):
+			top_menu_container.view_menu.set_item_checked(ViewMenu.DISPLAY_LAYER_EFFECTS, value)
+			canvas.queue_redraw()
 ## If [code]true[/code], cursor snaps to the boundary of rectangular grid boxes.
 var snap_to_rectangular_grid_boundary := false
 ## If [code]true[/code], cursor snaps to the center of rectangular grid boxes.
@@ -608,6 +615,7 @@ func _initialize_keychain() -> void:
 		"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),
 		"show_guides": Keychain.InputAction.new("", "View menu", true),
 		"show_rulers": Keychain.InputAction.new("", "View menu", true),
+		&"display_layer_effects": Keychain.InputAction.new("", "View menu", true),
 		"moveable_panels": Keychain.InputAction.new("", "Window menu", true),
 		"zen_mode": Keychain.InputAction.new("", "Window menu", true),
 		"toggle_fullscreen": Keychain.InputAction.new("", "Window menu", true),
