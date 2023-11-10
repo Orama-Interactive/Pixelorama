@@ -13,8 +13,7 @@ func _about_to_popup() -> void:
 	DrawingAlgos.blend_selected_cels(selected_cels, frame)
 
 	preview_image.copy_from(selected_cels)
-	preview_texture = ImageTexture.create_from_image(preview_image)
-	preview.texture = preview_texture
+	preview.texture = ImageTexture.create_from_image(preview_image)
 	super._about_to_popup()
 
 

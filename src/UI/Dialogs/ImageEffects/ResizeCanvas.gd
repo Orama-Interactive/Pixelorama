@@ -4,7 +4,7 @@ var width := 64
 var height := 64
 var offset_x := 0
 var offset_y := 0
-var image: Image
+var image := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 
 @onready var width_spinbox: SpinBox = $VBoxContainer/OptionsContainer/WidthValue
 @onready var height_spinbox: SpinBox = $VBoxContainer/OptionsContainer/HeightValue
@@ -15,9 +15,7 @@ var image: Image
 
 func _on_ResizeCanvas_about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	image = Image.create(
-		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
-	)
+	image.resize(Global.current_project.size.x, Global.current_project.size.y)
 
 	var layer_i := 0
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
@@ -81,8 +79,7 @@ func update_preview() -> void:
 	preview_image.blend_rect(
 		image, Rect2i(Vector2i.ZERO, Global.current_project.size), Vector2i(offset_x, offset_y)
 	)
-	var preview_texture := ImageTexture.create_from_image(preview_image)
-	preview_rect.texture = preview_texture
+	preview_rect.texture = ImageTexture.create_from_image(preview_image)
 	update_transparent_background_size(preview_image)
 
 
@@ -101,4 +98,8 @@ func update_transparent_background_size(preview_image: Image) -> void:
 
 
 func _on_visibility_changed() -> void:
+	if visible:
+		return
 	Global.dialog_open(false)
+	# Resize the image to (1, 1) so it does not waste unneeded RAM
+	image.resize(1, 1)
