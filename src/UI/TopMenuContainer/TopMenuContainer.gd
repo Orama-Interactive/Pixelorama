@@ -77,6 +77,7 @@ func _setup_file_menu() -> void:
 
 
 func _setup_recent_projects_submenu(item: String) -> void:
+	recent_projects_submenu.name = "RecentProjectsPopupMenu"
 	recent_projects = Global.config_cache.get_value("data", "recent_projects", [])
 	recent_projects_submenu.id_pressed.connect(_on_recent_projects_submenu_id_pressed)
 	update_recent_projects_submenu()
