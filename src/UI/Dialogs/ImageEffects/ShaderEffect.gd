@@ -28,7 +28,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		params[param] = param_data
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
-	await gen.done
 
 
 func _on_ChooseShader_pressed() -> void:

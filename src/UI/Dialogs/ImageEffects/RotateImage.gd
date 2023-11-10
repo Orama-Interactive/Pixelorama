@@ -130,7 +130,6 @@ func commit_action(cel: Image, _project := Global.current_project) -> void:
 			params["preview"] = false
 			var gen := ShaderImageEffect.new()
 			gen.generate_image(cel, shader, params, _project.size)
-			await gen.done
 	else:
 		match type_option_button.get_selected_id():
 			ROTXEL:
