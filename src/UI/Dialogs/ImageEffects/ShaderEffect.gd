@@ -30,7 +30,6 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
 	selected_cels.unlock()
-	yield(gen, "done")
 
 
 func _on_ChooseShader_pressed() -> void:

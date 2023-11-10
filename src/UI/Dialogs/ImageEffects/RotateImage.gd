@@ -128,7 +128,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			else:
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, rotxel_shader, params, _project.size)
-				yield(gen, "done")
 
 		CLEANEDGE:
 			var params := {
@@ -147,7 +146,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				params["preview"] = false
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, DrawingAlgos.clean_edge_shader, params, _project.size)
-				yield(gen, "done")
 		OMNISCALE:
 			var params := {
 				"angle": angle,
@@ -163,7 +161,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				params["preview"] = false
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, DrawingAlgos.omniscale_shader, params, _project.size)
-				yield(gen, "done")
 		NNS:
 			var params := {
 				"angle": angle,
@@ -177,7 +174,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			else:
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, nn_shader, params, _project.size)
-				yield(gen, "done")
 		ROTXEL:
 			DrawingAlgos.rotxel(image, angle, pivot)
 		NN:

@@ -42,7 +42,6 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
 
 
 func _on_OffsetSliders_value_changed(_value: Vector2) -> void:

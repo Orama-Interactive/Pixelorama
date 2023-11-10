@@ -124,7 +124,6 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
 
 
 func _on_ShapeOptionButton_item_selected(index: int) -> void:
