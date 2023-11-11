@@ -2,6 +2,7 @@
 
 [node name="SaveSpriteHTML5" type="ConfirmationDialog"]
 exclusive = false
+popup_window = true
 
 [node name="FileNameContainer" type="HBoxContainer" parent="."]
 anchors_preset = 10

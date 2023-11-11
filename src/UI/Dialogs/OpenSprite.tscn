@@ -4,6 +4,7 @@
 title = "Open File(s)"
 size = Vector2i(558, 400)
 exclusive = false
+popup_window = true
 ok_button_text = "Open"
 file_mode = 1
 access = 2

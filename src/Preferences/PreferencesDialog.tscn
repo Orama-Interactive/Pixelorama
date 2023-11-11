@@ -14,6 +14,7 @@
 title = "Preferences"
 size = Vector2i(800, 500)
 exclusive = false
+popup_window = true
 script = ExtResource("1")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
@@ -1296,6 +1297,8 @@ text = "Pixelorama must be restarted for changes to take effect."
 
 [node name="AddExtensionFileDialog" type="FileDialog" parent="Popups"]
 mode = 1
+exclusive = false
+popup_window = true
 access = 2
 filters = PackedStringArray("*.pck ; Godot Resource Pack File", "*.zip ;")
 show_hidden_files = true
@@ -1304,6 +1307,8 @@ show_hidden_files = true
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(500, 100)
+exclusive = false
+popup_window = true
 ok_button_text = "Delete Permanently"
 
 [node name="Label" type="Label" parent="DeleteConfirmation"]
