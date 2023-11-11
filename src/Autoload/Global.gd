@@ -1,18 +1,28 @@
 extends Node
 
-signal pixelorama_opened
-signal pixelorama_about_to_close
-signal project_created(Project)
-signal project_changed
-signal cel_changed
+## The Global autoload of Pixelorama.
+##
+## This Autoload contains signals, enums, constants, variables and
+## references to many UI elements used within Pixelorama.
+
+signal pixelorama_opened  ## Emitted as soon as Pixelorama fully opens up.
+signal pixelorama_about_to_close  ## Emitted just before Pixelorama is about to close.
+signal project_created(Project)  ## Emitted when a new project class is initialized.
+signal project_changed  ## Emitted whenever you switch to some other project tab.
+signal cel_changed  ## Emitted whenever you select a different cel.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
+## ## Used to tell whether a color is being taken from the current theme,
+## or if it is a custom color.
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
+##  Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
+##  Enumeration of items present in the Edit Menu.
 enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
+##  Enumeration of items present in the View Menu.
 enum ViewMenu {
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
@@ -25,7 +35,9 @@ enum ViewMenu {
 	SHOW_MOUSE_GUIDES,
 	SNAP_TO,
 }
+##  Enumeration of items present in the Window Menu.
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
+##  Enumeration of items present in the Image Menu.
 enum ImageMenu {
 	RESIZE_CANVAS,
 	OFFSET_IMAGE,
@@ -43,22 +55,35 @@ enum ImageMenu {
 	GRADIENT_MAP,
 	SHADER
 }
+##  Enumeration of items present in the Select Menu.
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
+##  Enumeration of items present in the Help Menu.
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA
 }
 
+## The file used to save preferences that use [code]ProjectSettings.save_custom()[/code].
 const OVERRIDE_FILE := "override.cfg"
+## The name of folder containing Pixelorama preferences.
 const HOME_SUBDIR_NAME := "pixelorama"
+## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
 
+## It is path to the executable's base drectory.
 var root_directory := "."
+## The path where preferences and other subdirectories for stuff like layouts, extensions, logs etc.
+## will get stored by Pixelorama.
 var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
-var data_directories: PackedStringArray = [home_data_directory]  ## Only read from these directories
+## Only read from these directories. This is an [Array] of directories potentially containing
+## stuff such as Brushes, Palettes and Patterns in sub-directories.[br]
+## ([member home_data_directory] and [member root_directory] are also included in this array).
+var data_directories: PackedStringArray = [home_data_directory]
+## The config file used to get/set preferences, tool settings etc.
 var config_cache := ConfigFile.new()
 
-var projects: Array[Project] = []
-var current_project: Project
+var projects: Array[Project] = []  ## Array of currently open projects.
+var current_project: Project  ## The project that currently in focus.
+## The index of project that is currently in focus.
 var current_project_index := 0:
 	set(value):
 		if value >= projects.size():
@@ -72,18 +97,29 @@ var current_project_index := 0:
 		cel_changed.emit()
 
 # Canvas related stuff
+## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
+## [code]false[/code] when we are moving some gizmo and don't want the current tool to accidentally
+## start drawing.[br](This does not depend on layer invisibility or lock/unlock status).
 var can_draw := false
-var move_guides_on_canvas := false
+## (Intended to be used as getter only) Tells if the user allowed to move the guide while on canvas.
+var move_guides_on_canvas := true
+## Tells if the canvas in currently in focus.
 var has_focus := false
 
-var play_only_tags := true
+var play_only_tags := true  ## If [code]true[/code], animation plays only on frames of the same tag.
+## (Intended to be used as getter only) Tells if the x-symmetry guide ( -- ) is visible.
 var show_x_symmetry_axis := false
+## (Intended to be used as getter only) Tells if the y-symmetry guide ( | ) is visible.
 var show_y_symmetry_axis := false
 
 # Preferences
+## Found in Preferences. If [code]true[/code], the last saved project will open on startup.
 var open_last_project := false
+## Found in Preferences. If [code]true[/code], asks for permission to quit on exit.
 var quit_confirmation := false
+## Found in Preferences. If [code]true[/code], the zoom is smooth.
 var smooth_zoom := true
+## Found in Preferences. If [code]true[/code], the zoom is restricted to integral multiples of 100%.
 var integer_zoom := false:
 	set(value):
 		integer_zoom = value
@@ -98,14 +134,19 @@ var integer_zoom := false:
 			zoom_slider.step = 1
 		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
+## Found in Preferences. The scale of the Interface.
 var shrink := 1.0
+## Found in Preferences. The font size used by the Interface.
 var font_size := 16:
 	set(value):
 		font_size = value
 		control.theme.default_font_size = value
 		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
+## Found in Preferences. If [code]true[/code], the Interface dims on popups.
 var dim_on_popup := true
+## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
+## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
 var icon_color_from := ColorFrom.THEME:
 	set(value):
 		icon_color_from = value
@@ -116,24 +157,30 @@ var icon_color_from := ColorFrom.THEME:
 		else:
 			modulate_icon_color = custom_icon_color
 		themes.change_icon_colors()
+## Found in Preferences. Color of icons when [member icon_color_from] is set to use custom colors.
 var custom_icon_color := Color.GRAY:
 	set(value):
 		custom_icon_color = value
 		if icon_color_from == ColorFrom.CUSTOM:
 			modulate_icon_color = custom_icon_color
 			preferences_dialog.themes.change_icon_colors()
+## Found in Preferences. The modulation color (or simply color) of canvas background
+## (aside from checker background).
 var modulate_clear_color := Color.GRAY:
 	set(value):
 		modulate_clear_color = value
 		preferences_dialog.themes.change_clear_color()
+## Found in Preferences. Determines if [member modulate_clear_color] uses custom or theme color.
 var clear_color_from := ColorFrom.THEME:
 	set(value):
 		clear_color_from = value
 		preferences_dialog.themes.change_clear_color()
+## Found in Preferences. The selected size mode of tool buttons using [enum ButtonSize] enum.
 var tool_button_size := ButtonSize.SMALL:
 	set(value):
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences. The left tool color.
 var left_tool_color := Color("0086cf"):
 	set(value):
 		left_tool_color = value
@@ -141,6 +188,7 @@ var left_tool_color := Color("0086cf"):
 			var background: NinePatchRect = child.get_node("BackgroundLeft")
 			background.modulate = value
 		Tools._slots[MOUSE_BUTTON_LEFT].tool_node.color_rect.color = value
+## Found in Preferences. The right tool color.
 var right_tool_color := Color("fd6d14"):
 	set(value):
 		right_tool_color = value
@@ -149,96 +197,120 @@ var right_tool_color := Color("fd6d14"):
 			background.modulate = value
 		Tools._slots[MOUSE_BUTTON_RIGHT].tool_node.color_rect.color = value
 
-var default_width := 64
-var default_height := 64
+var default_width := 64  ## Found in Preferences. The default width of startup project.
+var default_height := 64  ## Found in Preferences. The default height of startup project.
+## Found in Preferences. The fill color of startup project.
 var default_fill_color := Color(0, 0, 0, 0)
+## Found in Preferences. The distance to the guide or grig below which cursor snapping activates.
 var snapping_distance := 32.0
+## Found in Preferences. The grid type defined by [enum GridTypes] enum.
 var grid_type := GridTypes.CARTESIAN:
 	set(value):
 		grid_type = value
 		canvas.grid.queue_redraw()
+## Found in Preferences. The size of rectangular grid.
 var grid_size := Vector2i(2, 2):
 	set(value):
 		grid_size = value
 		canvas.grid.queue_redraw()
+## Found in Preferences. The size of isometric grid.
 var isometric_grid_size := Vector2i(16, 8):
 	set(value):
 		isometric_grid_size = value
 		canvas.grid.queue_redraw()
+## Found in Preferences. The grid offset from top-left corner of the canvas.
 var grid_offset := Vector2i.ZERO:
 	set(value):
 		grid_offset = value
 		canvas.grid.queue_redraw()
+## Found in Preferences. If [code]true[/code], The grid draws over the area extended by
+## tile-mode as well.
 var grid_draw_over_tile_mode := false:
 	set(value):
 		grid_draw_over_tile_mode = value
 		canvas.grid.queue_redraw()
+## Found in Preferences. The color of grid.
 var grid_color := Color.BLACK:
 	set(value):
 		grid_color = value
 		canvas.grid.queue_redraw()
+## Found in Preferences. The minimum zoom after which pixel grid gets drawn if enabled.
 var pixel_grid_show_at_zoom := 1500.0:  # percentage
 	set(value):
 		pixel_grid_show_at_zoom = value
 		canvas.pixel_grid.queue_redraw()
+## Found in Preferences. The color of pixel grid.
 var pixel_grid_color := Color("21212191"):
 	set(value):
 		pixel_grid_color = value
 		canvas.pixel_grid.queue_redraw()
+## Found in Preferences. The color of guides.
 var guide_color := Color.PURPLE:
 	set(value):
 		guide_color = value
 		for guide in canvas.get_children():
 			if guide is Guide:
 				guide.set_color(guide_color)
+## Found in Preferences. The size of checkers in the checker background.
 var checker_size := 10:
 	set(value):
 		checker_size = value
 		transparent_checker.update_rect()
+## Found in Preferences. The color of first checker.
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1):
 	set(value):
 		checker_color_1 = value
 		transparent_checker.update_rect()
+## Found in Preferences. The color of second checker.
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1):
 	set(value):
 		checker_color_2 = value
 		transparent_checker.update_rect()
+## Found in Preferences. The color of second checker.
 var checker_follow_movement := false:
 	set(value):
 		checker_follow_movement = value
 		transparent_checker.update_rect()
+## Found in Preferences. If [code]true[/code], the checker follows zoom.
 var checker_follow_scale := false:
 	set(value):
 		checker_follow_scale = value
 		transparent_checker.update_rect()
+## Found in Preferences. Opacity of the sprites rendered on the extended area of tile-mode.
 var tilemode_opacity := 1.0:
 	set(value):
 		tilemode_opacity = value
 		canvas.tile_mode.queue_redraw()
 
+## Found in Preferences. If [code]true[/code], layers get selected when their buttons are pressed.
 var select_layer_on_button_click := false
+## Found in Preferences. The onion color of past frames.
 var onion_skinning_past_color := Color.RED:
 	set(value):
 		onion_skinning_past_color = value
 		canvas.onion_past.blue_red_color = value
 		canvas.onion_past.queue_redraw()
+## Found in Preferences. The onion color of future frames.
 var onion_skinning_future_color := Color.BLUE:
 	set(value):
 		onion_skinning_future_color = value
 		canvas.onion_future.blue_red_color = value
 		canvas.onion_future.queue_redraw()
 
+## Found in Preferences. If [code]true[/code], the selection rect has animated borders.
 var selection_animated_borders := true:
 	set(value):
 		selection_animated_borders = value
 		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
+## Found in Preferences. The first color of border.
 var selection_border_color_1 := Color.WHITE:
 	set(value):
 		selection_border_color_1 = value
 		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
 		canvas.selection.queue_redraw()
+## Found in Preferences. The second color of border.
 var selection_border_color_2 := Color.BLACK:
 	set(value):
 		selection_border_color_2 = value
@@ -246,23 +318,29 @@ var selection_border_color_2 := Color.BLACK:
 		marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
 		canvas.selection.queue_redraw()
 
+## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save cpu usage.
 var pause_when_unfocused := true
+## Found in Preferences. The max fps, Pixelorama is allowed to use (does not limit fps if it is 0).
 var fps_limit := 0:
 	set(value):
 		fps_limit = value
 		Engine.max_fps = fps_limit
 
+## Found in Preferences. The time (in minutes) after which backup is created (if enabled).
 var autosave_interval := 1.0:
 	set(value):
 		autosave_interval = value
 		OpenSave.update_autosave()
+## Found in Preferences. If [code]true[/code], generation of backups get enabled.
 var enable_autosave := true:
 	set(value):
 		enable_autosave = value
 		OpenSave.update_autosave()
 		preferences_dialog.autosave_interval.editable = enable_autosave
+## Found in Preferences. The index of graphics renderer used by Pixelorama.
 var renderer := 0:
 	set = _renderer_changed
+## Found in Preferences. The index of tablet driver used by Pixelorama.
 var tablet_driver := 0:
 	set(value):
 		tablet_driver = value
@@ -273,10 +351,15 @@ var tablet_driver := 0:
 		ProjectSettings.save_custom(OVERRIDE_FILE)
 
 # Tools & options
+## Found in Preferences. If [code]true[/code], the cursor's left tool icon is visible.
 var show_left_tool_icon := true
+## Found in Preferences. If [code]true[/code], the cursor's right tool icon is visible.
 var show_right_tool_icon := true
+## Found in Preferences. If [code]true[/code], the left tool's brush indicator is visible.
 var left_square_indicator_visible := true
+## Found in Preferences. If [code]true[/code], the right tool's brush indicator is visible.
 var right_square_indicator_visible := true
+## Found in Preferences. If [code]true[/code], native cursors are used instead of default cursors.
 var native_cursors := false:
 	set(value):
 		native_cursors = value
@@ -284,6 +367,7 @@ var native_cursors := false:
 			Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS, Vector2(15, 15))
 		else:
 			control.set_custom_cursor()
+## Found in Preferences. If [code]true[/code], cursor becomes cross shaped when hovering the canvas.
 var cross_cursor := true:
 	set(value):
 		cross_cursor = value
@@ -293,89 +377,156 @@ var cross_cursor := true:
 			main_viewport.mouse_default_cursor_shape = Control.CURSOR_ARROW
 
 # View menu options
+## If [code]true[/code], the canvas is in greyscale.
 var greyscale_view := false
+## If [code]true[/code], the content of canvas is flipped.
 var mirror_view := false
+## If [code]true[/code], the grid is visible.
 var draw_grid := false
+## If [code]true[/code], the pixel grid is visible.
 var draw_pixel_grid := false
+## If [code]true[/code], the rulers are visible.
 var show_rulers := true
+## If [code]true[/code], the guides are visible.
 var show_guides := true
+## If [code]true[/code], the mouse guides are visible.
 var show_mouse_guides := false
+## If [code]true[/code], cursor snaps to the boundary of rectangular grid boxes.
 var snap_to_rectangular_grid_boundary := false
+## If [code]true[/code], cursor snaps to the center of rectangular grid boxes.
 var snap_to_rectangular_grid_center := false
+## If [code]true[/code], cursor snaps to regular guides.
 var snap_to_guides := false
+## If [code]true[/code], cursor snaps to perspective guides.
 var snap_to_perspective_guides := false
 
 # Onion skinning options
-var onion_skinning := false
-var onion_skinning_past_rate := 1.0
-var onion_skinning_future_rate := 1.0
-var onion_skinning_blue_red := false
+var onion_skinning := false  ## If [code]true[/code], onion skinning is enabled.
+var onion_skinning_past_rate := 1  ## Number of past frames shown when onion skinning is enabled.
+## Number of future frames shown when onion skinning is enabled.
+var onion_skinning_future_rate := 1
+var onion_skinning_blue_red := false  ## If [code]true[/code], then blue-red mode is enabled.
+
+## The current version of pixelorama
+var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
 # Nodes
+## The preload of button used by the [BaseLayer].
 var base_layer_button_node: PackedScene = load("res://src/UI/Timeline/BaseLayerButton.tscn")
+## The preload of button used by the [PixelLayer].
 var pixel_layer_button_node: PackedScene = load("res://src/UI/Timeline/PixelLayerButton.tscn")
+## The preload of button used by the [GroupLayer].
 var group_layer_button_node: PackedScene = load("res://src/UI/Timeline/GroupLayerButton.tscn")
+## The preload of button used by the [PixelCel].
 var pixel_cel_button_node: PackedScene = load("res://src/UI/Timeline/PixelCelButton.tscn")
+## The preload of button used by the [GroupCel].
 var group_cel_button_node: PackedScene = load("res://src/UI/Timeline/GroupCelButton.tscn")
+## The preload of button used by the [Cel3D].
 var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.tscn")
 
-@onready var main_window := get_window()
+@onready var main_window := get_window()  ## The main Pixelorama [Window].
+## The control node (aka Main node). It has the [param Main.gd] script attached.
 @onready var control := get_tree().current_scene
 
-@onready var canvas: Canvas = control.find_child("Canvas")
+## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
+## Contains viewport of the main canvas. It has the [param ViewportContainer.gd] script attached.
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
+## The main canvas node. It has the [param Canvas.gd] script attached.
+@onready var canvas: Canvas = main_viewport.find_child("Canvas")
+## Contains viewport of the second canvas preview.
+## It has the [param ViewportContainer.gd] script attached.
 @onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
+## The panel container of the canvas preview.
+## It has the [param CanvasPreviewContainer.gd] script attached.
 @onready var canvas_preview_container: Container = control.find_child("Canvas Preview")
+## The global tool options. It has the [param GlobalToolOptions.gd] script attached.
 @onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
+## Contains viewport of the canvas preview.
 @onready var small_preview_viewport: SubViewportContainer = canvas_preview_container.find_child(
 	"PreviewViewportContainer"
 )
+## Camera of the main canvas. It has the [param CameraMovement.gd] script attached.
 @onready var camera: Camera2D = main_viewport.find_child("Camera2D")
+## Camera of the second canvas preview. It has the [param CameraMovement.gd] script attached.
 @onready var camera2: Camera2D = second_viewport.find_child("Camera2D2")
+## Camera of the canvas preview. It has the [param CameraMovement.gd] script attached.
 @onready var camera_preview: Camera2D = control.find_child("CameraPreview")
+## Array of cameras used in Pixelorama.
 @onready var cameras := [camera, camera2, camera_preview]
+## Horizontal ruler of the main canvas. It has the [param HorizontalRuler.gd] script attached.
 @onready var horizontal_ruler: BaseButton = control.find_child("HorizontalRuler")
+## Vertical ruler of the main canvas. It has the [param VerticalRuler.gd] script attached.
 @onready var vertical_ruler: BaseButton = control.find_child("VerticalRuler")
+## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
 
-@onready var brushes_popup: Popup = control.find_child("BrushesPopup")
-@onready var patterns_popup: Popup = control.find_child("PatternsPopup")
+## The palettes panel. It has the [param PalettePanel.gd] script attached.
 @onready var palette_panel: PalettePanel = control.find_child("Palettes")
-
+## The reference images panel. It has the [param ReferencesPanel.gd] script attached.
 @onready var references_panel: ReferencesPanel = control.find_child("Reference Images")
+## The perspectice editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
 
+## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
-@onready var cursor_position_label: Label = control.find_child("CursorPosition")
-@onready var current_frame_mark_label: Label = control.find_child("CurrentFrameMark")
+## The label indicating cursor position.
+@onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
+## The label indicating current frame number.
+@onready var current_frame_mark_label: Label = top_menu_container.find_child("CurrentFrameMark")
 
+## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
+## The timer used by the animation timeline.
 @onready var animation_timer: Timer = animation_timeline.find_child("AnimationTimer")
+## The container of frame buttons
 @onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
+## The container of layer buttons
 @onready var layer_vbox: VBoxContainer = animation_timeline.find_child("LayerVBox")
+## At runtime HBoxContainers containing cel buttons get added to it.
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
+## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
+## Play forward button.
 @onready var play_forward: BaseButton = animation_timeline.find_child("PlayForward")
+## Play backward button.
 @onready var play_backwards: BaseButton = animation_timeline.find_child("PlayBackwards")
+## Remove frame button.
 @onready var remove_frame_button: BaseButton = animation_timeline.find_child("DeleteFrame")
+## Move frame left button.
 @onready var move_left_frame_button: BaseButton = animation_timeline.find_child("MoveLeft")
+## Move frame right button.
 @onready var move_right_frame_button: BaseButton = animation_timeline.find_child("MoveRight")
+## Remove layer button.
 @onready var remove_layer_button: BaseButton = animation_timeline.find_child("RemoveLayer")
+## Move layer up button.
 @onready var move_up_layer_button: BaseButton = animation_timeline.find_child("MoveUpLayer")
+## Move layer down button.
 @onready var move_down_layer_button: BaseButton = animation_timeline.find_child("MoveDownLayer")
+## Merge with layer below button.
 @onready var merge_down_layer_button: BaseButton = animation_timeline.find_child("MergeDownLayer")
+## Layer opacity slider.
 @onready var layer_opacity_slider: ValueSlider = animation_timeline.find_child("OpacitySlider")
 
+## The brushes popup dialog used to display brushes.
+## It has the [param BrushesPopup.gd] script attached.
+@onready var brushes_popup: Popup = control.find_child("BrushesPopup")
+## The patterns popup dialog used to display patterns
+## It has the [param PatternsPopup.gd] script attached.
+@onready var patterns_popup: Popup = control.find_child("PatternsPopup")
 @onready var tile_mode_offset_dialog: AcceptDialog = control.find_child("TileModeOffsetsDialog")
+## Dialog used to navigate and open images and projects.
 @onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
+## Dialog used to save (.pxo) projects.
 @onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
+## Html version of [member save_sprites_dialog] used to save (.pxo) projects.
 @onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_child("SaveSpriteHTML5")
+## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
+## The preferences dialog. It has the [param PreferencesDialog.gd] script attached.
 @onready var preferences_dialog: AcceptDialog = control.find_child("PreferencesDialog")
+## An error dialog to show errors.
 @onready var error_dialog: AcceptDialog = control.find_child("ErrorDialog")
-
-@onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
 
 func _init() -> void:
@@ -554,6 +705,7 @@ func _initialize_keychain() -> void:
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 
 
+## Generates an animated notification label showing [param text].
 func notification_label(text: String) -> void:
 	var notif := NotificationLabel.new()
 	notif.text = tr(text)
@@ -562,12 +714,14 @@ func notification_label(text: String) -> void:
 	control.add_child(notif)
 
 
+## Performs the general, bare minimum stuff needed after an undo is done.
 func general_undo(project := current_project) -> void:
 	project.undos -= 1
 	var action_name := project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
+## Performs the general, bare minimum stuff needed after a redo is done.
 func general_redo(project := current_project) -> void:
 	if project.undos < project.undo_redo.get_version():  # If we did undo and then redo
 		project.undos = project.undo_redo.get_version()
@@ -576,6 +730,12 @@ func general_redo(project := current_project) -> void:
 		notification_label("Redo: %s" % action_name)
 
 
+## Performs actions done after an undo or redo is done. this takes [member general_undo] and
+## [member general_redo] a step further. Does further work if the current action requires it
+## like refreshing textures, redraw UI elements etc...[br]
+## [param frame_index] and [param layer_index] are there for optimizzation. if the undo or redo
+## happens only in one cel then the cel's frame and layer should be passed to [param frame_index]
+## and [param layer_index] respectively, otherwise the entire timeline will be refreshed.
 func undo_or_redo(
 	undo: bool, frame_index := -1, layer_index := -1, project := current_project
 ) -> void:
@@ -647,6 +807,7 @@ func _renderer_changed(value: int) -> void:
 #	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
+## Use this to prepare Pixelorama before opening a dialog.
 func dialog_open(open: bool) -> void:
 	var dim_color := Color.WHITE
 	if open:
@@ -660,6 +821,8 @@ func dialog_open(open: bool) -> void:
 	tween.tween_property(control, "modulate", dim_color, 0.1)
 
 
+## sets the [member BaseButton.disabled] property of the [param button] to [param disable],
+## changes the cursor shape for it accordingly, and dims/brightens any textures it may have.
 func disable_button(button: BaseButton, disable: bool) -> void:
 	button.disabled = disable
 	if disable:
@@ -674,14 +837,18 @@ func disable_button(button: BaseButton, disable: bool) -> void:
 				break
 
 
-func change_button_texturerect(texture_button: TextureRect, new_file_name: String) -> void:
-	if !texture_button.texture:
+## Changes the texture of the [param texture_rect] to another texture of name [param new_file_name]
+## present in the same directory as the old one.
+func change_button_texturerect(texture_rect: TextureRect, new_file_name: String) -> void:
+	if !texture_rect.texture:
 		return
-	var file_name := texture_button.texture.resource_path.get_basename().get_file()
-	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
-	texture_button.texture = load(directory_path.path_join(new_file_name))
+	var file_name := texture_rect.texture.resource_path.get_basename().get_file()
+	var directory_path := texture_rect.texture.resource_path.get_basename().replace(file_name, "")
+	texture_rect.texture = load(directory_path.path_join(new_file_name))
 
 
+## Joins each [String] path in [param basepaths] with [param subpath] using
+## [method String.path_join]
 func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStringArray:
 	var res := PackedStringArray()
 	for _path in basepaths:
@@ -689,6 +856,8 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 	return res
 
 
+## Decompresses the [param compressed_image_data] with [params buffer_size] to the [param image]
+## This is an opmization method used by [param Draw.gd] while performing undo/redo.
 func undo_redo_draw_op(
 	image: Image, compressed_image_data: PackedByteArray, buffer_size: int
 ) -> void:
