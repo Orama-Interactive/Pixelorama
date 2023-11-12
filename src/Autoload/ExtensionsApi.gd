@@ -313,7 +313,7 @@ class PanelAPI:
 		while child_number < 2:
 			# If parent isn't a (layout_split) resource then there is no point
 			# in continuing (this is just a sanity check and should always pass)
-			if !scan_target.has_method("get_first"):
+			if !scan_target is DockableLayoutSplit:
 				break
 
 			var child_resource
@@ -323,11 +323,11 @@ class PanelAPI:
 				child_resource = scan_target.get_second()  # Second child
 
 			# If the child resource is a tab and it wasn't discovered before, add it to "paths"
-			if child_resource.has_method("get_current_tab"):
+			if child_resource is DockableLayoutPanel:
 				if !tabs.has(child_resource):
 					tabs.append(child_resource)
 			# If "child_resource" is another layout_split resource then we need to scan it too
-			elif child_resource.has_method("get_first") and !scanned.has(child_resource):
+			elif child_resource is DockableLayoutSplit and !scanned.has(child_resource):
 				scanned.append(child_resource)
 				parents.append(child_resource)
 				scan_target = parents[-1]  # Set this as the next scan target
