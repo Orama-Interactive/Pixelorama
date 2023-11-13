@@ -131,6 +131,10 @@ var tools := {
 		preload("res://src/Tools/Shading.tscn"),
 		[Global.LayerTypes.PIXEL]
 	),
+	"Text":
+	Tool.new(
+		"Text", "Text", "text", preload("res://src/Tools/Text.tscn"),[Global.LayerTypes.VECTOR]
+	),
 	"LineTool":
 	Tool.new(
 		"LineTool",
@@ -184,10 +188,12 @@ var _curr_layer_type: int = Global.LayerTypes.PIXEL
 var _left_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Pencil",
 	Global.LayerTypes.THREE_D: "3DShapeEdit",
+	Global.LayerTypes.VECTOR: "Text",
 }
 var _right_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Eraser",
 	Global.LayerTypes.THREE_D: "Pan",
+	Global.LayerTypes.VECTOR: "Pan",
 }
 var _tool_buttons: Node
 var _active_button := -1
@@ -507,7 +513,7 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 				_slots[_active_button].tool_node.draw_move(draw_pos)
 
 	var project: Project = Global.current_project
-	var text := "[%s×%s]" % [project.size.x, project.size.y]
+	var text := "[%s�%s]" % [project.size.x, project.size.y]
 	if Global.has_focus:
 		text += "    %s, %s" % [position.x, position.y]
 	if not _slots[BUTTON_LEFT].tool_node.cursor_text.empty():

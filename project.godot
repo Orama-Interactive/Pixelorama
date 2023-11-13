@@ -273,6 +273,26 @@ _global_script_classes=[ {
 "class": "ValueSliderV3",
 "language": "GDScript",
 "path": "res://src/UI/Nodes/ValueSliderV3.gd"
+}, {
+"base": "Reference",
+"class": "VectorBaseShape",
+"language": "GDScript",
+"path": "res://src/Classes/VectorShapes/VectorBaseShape.gd"
+}, {
+"base": "BaseCel",
+"class": "VectorCel",
+"language": "GDScript",
+"path": "res://src/Classes/VectorCel.gd"
+}, {
+"base": "BaseLayer",
+"class": "VectorLayer",
+"language": "GDScript",
+"path": "res://src/Classes/VectorLayer.gd"
+}, {
+"base": "VectorBaseShape",
+"class": "VectorTextShape",
+"language": "GDScript",
+"path": "res://src/Classes/VectorShapes/VectorTextShape.gd"
 } ]
 _global_script_class_icons={
 "AImgIOAPNGExporter": "",
@@ -327,7 +347,11 @@ _global_script_class_icons={
 "Tiles": "",
 "ValueSlider": "",
 "ValueSliderV2": "",
-"ValueSliderV3": ""
+"ValueSliderV3": "",
+"VectorBaseShape": "",
+"VectorCel": "",
+"VectorLayer": "",
+"VectorTextShape": ""
 }
 
 [application]

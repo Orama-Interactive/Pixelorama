@@ -172,7 +172,7 @@ func _on_LockButton_pressed() -> void:
 
 func _on_LinkButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	var layer_class: PixelLayer = Global.current_project.layers[layer]
+	var layer_class: BaseLayer = Global.current_project.layers[layer]
 	layer_class.new_cels_linked = !layer_class.new_cels_linked
 	update_buttons()
 	if Global.select_layer_on_button_click:

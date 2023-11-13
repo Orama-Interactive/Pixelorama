@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Tools/BaseTool.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Tools/Text.gd" type="Script" id=2]
+[ext_resource path="res://addons/keychain/assets/folder.svg" type="Texture" id=3]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=4]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Editor" type="VBoxContainer" parent="." index="2"]
+margin_top = 26.0
+margin_right = 116.0
+margin_bottom = 150.0
+
+[node name="TextEdit" type="TextEdit" parent="Editor" index="0"]
+unique_name_in_owner = true
+margin_right = 116.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="ApplyText" type="Button" parent="Editor" index="1"]
+margin_top = 104.0
+margin_right = 116.0
+margin_bottom = 124.0
+text = "Apply Text"
+
+[node name="FontLabel" type="Label" parent="." index="3"]
+margin_top = 154.0
+margin_right = 116.0
+margin_bottom = 168.0
+text = "Font:"
+
+[node name="Font" type="HBoxContainer" parent="." index="4"]
+margin_top = 172.0
+margin_right = 116.0
+margin_bottom = 194.0
+
+[node name="FontOptionButton" type="OptionButton" parent="Font" index="0"]
+unique_name_in_owner = true
+margin_right = 84.0
+margin_bottom = 22.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Roboto"
+items = [ "Roboto", null, false, 0, null, "NotoSansCJK", null, false, 1, null ]
+selected = 0
+
+[node name="LoadFontButton" type="Button" parent="Font" index="1"]
+margin_left = 88.0
+margin_right = 116.0
+margin_bottom = 22.0
+mouse_default_cursor_shape = 2
+icon = ExtResource( 3 )
+
+[node name="TextSizeSlider" parent="." index="5" instance=ExtResource( 4 )]
+margin_top = 198.0
+margin_right = 116.0
+margin_bottom = 222.0
+min_value = 1.0
+max_value = 128.0
+value = 16.0
+allow_greater = true
+prefix = "Size:"
+
+[node name="FontFileDialog" type="FileDialog" parent="." index="6"]
+unique_name_in_owner = true
+margin_right = 400.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 400, 400 )
+window_title = "Open File(s)"
+resizable = true
+mode = 1
+access = 2
+filters = PoolStringArray( "*.ttf", "*.otf" )
+show_hidden_files = true
+
+[node name="OutlineLabel" type="Label" parent="." index="7"]
+margin_top = 226.0
+margin_right = 116.0
+margin_bottom = 240.0
+text = "Outline:"
+
+[node name="OutlineContainer" type="HBoxContainer" parent="." index="8"]
+margin_top = 244.0
+margin_right = 116.0
+margin_bottom = 268.0
+alignment = 1
+
+[node name="OutlineColorPickerButton" type="ColorPickerButton" parent="OutlineContainer" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+mouse_default_cursor_shape = 2
+color = Color( 1, 1, 1, 1 )
+
+[node name="OutlineSlider" parent="OutlineContainer" index="1" instance=ExtResource( 4 )]
+margin_left = 28.0
+margin_right = 116.0
+allow_greater = true
+
+[node name="AACheckBox" type="CheckBox" parent="." index="9"]
+margin_top = 272.0
+margin_right = 116.0
+margin_bottom = 296.0
+text = "Antialiasing"
+
+[connection signal="text_changed" from="Editor/TextEdit" to="." method="_on_TextEdit_text_changed"]
+[connection signal="pressed" from="Editor/ApplyText" to="." method="_on_ApplyText_pressed"]
+[connection signal="item_selected" from="Font/FontOptionButton" to="." method="_on_FontOptionButton_item_selected"]
+[connection signal="pressed" from="Font/LoadFontButton" to="." method="_on_LoadFontButton_pressed"]
+[connection signal="value_changed" from="TextSizeSlider" to="." method="_on_TextSizeSlider_value_changed"]
+[connection signal="files_selected" from="FontFileDialog" to="." method="_on_FontFileDialog_files_selected"]
+[connection signal="popup_hide" from="FontFileDialog" to="." method="_on_FontFileDialog_popup_hide"]
+[connection signal="color_changed" from="OutlineContainer/OutlineColorPickerButton" to="." method="_on_OutlineColorPickerButton_color_changed"]
+[connection signal="value_changed" from="OutlineContainer/OutlineSlider" to="." method="_on_OutlineSlider_value_changed"]

@@ -3,7 +3,8 @@ extends Node
 signal project_changed
 signal cel_changed
 
-enum LayerTypes { PIXEL, GROUP, THREE_D }
+enum LayerTypes { PIXEL, GROUP, THREE_D, VECTOR }
+enum VectorShapeTypes { TEXT }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
@@ -480,9 +481,10 @@ func undo_or_redo(
 			"Center Frames",
 			"Merge Layer",
 			"Link Cel",
-			"Unlink Cel"
+			"Unlink Cel",
+			"Add Text"
 		]
-	):
+	):  # TODO: probably shouldn't add more stuff here
 		if layer_index > -1 and frame_index > -1:
 			canvas.update_texture(layer_index, frame_index, project)
 		else:
@@ -503,7 +505,7 @@ func undo_or_redo(
 			canvas.grid.update()
 			canvas.pixel_grid.update()
 			project.selection_map_changed()
-			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+			cursor_position_label.text = "[%s�%s]" % [project.size.x, project.size.y]
 
 	canvas.update()
 	second_viewport.get_child(0).get_node("CanvasPreview").update()
