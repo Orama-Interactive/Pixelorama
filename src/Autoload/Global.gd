@@ -856,7 +856,10 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 	return res
 
 
-func undo_redo_compress_images(redo_data: Dictionary, undo_data: Dictionary, project := current_project) -> void:
+## Used by undo/redo operations to store compressed images in memory.
+func undo_redo_compress_images(
+	redo_data: Dictionary, undo_data: Dictionary, project := current_project
+) -> void:
 	for image in redo_data:
 		if not image is Image:
 			continue
@@ -873,8 +876,8 @@ func undo_redo_compress_images(redo_data: Dictionary, undo_data: Dictionary, pro
 		)
 
 
-## Decompresses the [param compressed_image_data] with [params buffer_size] to the [param image]
-## This is an opmization method used by [param Draw.gd] while performing undo/redo.
+## Decompresses the [param compressed_image_data] with [param buffer_size] to the [param image]
+## This is an optimization method used while performing undo/redo drawing operations.
 func undo_redo_draw_op(
 	image: Image, compressed_image_data: PackedByteArray, buffer_size: int
 ) -> void:
@@ -885,3 +888,13 @@ func undo_redo_draw_op(
 		image.get_format(),
 		compressed_image_data.decompress(buffer_size)
 	)
+
+
+## Used by the Move tool for undo/redo, moves all of the [Image]s in [param images]
+## by [param diff] pixels.
+func undo_redo_move(diff: Vector2i, images: Array[Image]) -> void:
+	for image in images:
+		var image_copy := Image.new()
+		image_copy.copy_from(image)
+		image.fill(Color(0, 0, 0, 0))
+		image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, image.get_size()), diff)
