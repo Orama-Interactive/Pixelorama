@@ -610,14 +610,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	)
 
 	if undo_data_tmp["undo_image"]:
-		for image in redo_data:
-			if not image is Image:
-				continue
-			project.undo_redo.add_do_property(image, "data", redo_data[image])
-		for image in undo_data_tmp:
-			if not image is Image:
-				continue
-			project.undo_redo.add_undo_property(image, "data", undo_data_tmp[image])
+		Global.undo_redo_compress_images(redo_data, undo_data_tmp, project)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(project.selection_map_changed)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))

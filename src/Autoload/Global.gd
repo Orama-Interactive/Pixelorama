@@ -856,6 +856,23 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 	return res
 
 
+func undo_redo_compress_images(redo_data: Dictionary, undo_data: Dictionary, project := current_project) -> void:
+	for image in redo_data:
+		if not image is Image:
+			continue
+		var buffer_size: int = redo_data[image]["data"].size()
+		var compressed_data: PackedByteArray = redo_data[image]["data"].compress()
+		project.undo_redo.add_do_method(undo_redo_draw_op.bind(image, compressed_data, buffer_size))
+	for image in undo_data:
+		if not image is Image:
+			continue
+		var buffer_size: int = undo_data[image]["data"].size()
+		var compressed_data: PackedByteArray = undo_data[image]["data"].compress()
+		project.undo_redo.add_undo_method(
+			undo_redo_draw_op.bind(image, compressed_data, buffer_size)
+		)
+
+
 ## Decompresses the [param compressed_image_data] with [params buffer_size] to the [param image]
 ## This is an opmization method used by [param Draw.gd] while performing undo/redo.
 func undo_redo_draw_op(
