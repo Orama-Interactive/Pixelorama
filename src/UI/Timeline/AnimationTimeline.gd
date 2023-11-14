@@ -923,15 +923,14 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_undo_method(
 				bottom_layer.link_cel.bind(bottom_cel, bottom_cel.link_set)
 			)
-			project.undo_redo.add_do_property(bottom_cel, "image_texture", ImageTexture.new())
-			project.undo_redo.add_undo_property(
-				bottom_cel, "image_texture", bottom_cel.image_texture
-			)
 			project.undo_redo.add_do_property(bottom_cel, "image", bottom_image)
 			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			project.undo_redo.add_do_property(bottom_cel.image, "data", bottom_image.data)
-			project.undo_redo.add_undo_property(bottom_cel.image, "data", bottom_cel.image.data)
+			Global.undo_redo_compress_images(
+				{bottom_cel.image: bottom_image.data},
+				{bottom_cel.image: bottom_cel.image.data},
+				project
+			)
 
 	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
 	project.undo_redo.add_undo_method(
