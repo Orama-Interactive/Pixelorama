@@ -863,31 +863,32 @@ func undo_redo_compress_images(
 	for image in redo_data:
 		if not image is Image:
 			continue
-		var buffer_size: int = redo_data[image]["data"].size()
-		var compressed_data: PackedByteArray = redo_data[image]["data"].compress()
-		project.undo_redo.add_do_method(undo_redo_draw_op.bind(image, compressed_data, buffer_size))
+		var new_image: Dictionary = redo_data[image]
+		var new_size := Vector2i(new_image["width"], new_image["height"])
+		var buffer_size: int = new_image["data"].size()
+		var compressed_data: PackedByteArray = new_image["data"].compress()
+		project.undo_redo.add_do_method(
+			undo_redo_draw_op.bind(image, new_size, compressed_data, buffer_size)
+		)
 	for image in undo_data:
 		if not image is Image:
 			continue
-		var buffer_size: int = undo_data[image]["data"].size()
-		var compressed_data: PackedByteArray = undo_data[image]["data"].compress()
+		var new_image: Dictionary = undo_data[image]
+		var new_size := Vector2i(new_image["width"], new_image["height"])
+		var buffer_size: int = new_image["data"].size()
+		var compressed_data: PackedByteArray = new_image["data"].compress()
 		project.undo_redo.add_undo_method(
-			undo_redo_draw_op.bind(image, compressed_data, buffer_size)
+			undo_redo_draw_op.bind(image, new_size, compressed_data, buffer_size)
 		)
 
 
 ## Decompresses the [param compressed_image_data] with [param buffer_size] to the [param image]
 ## This is an optimization method used while performing undo/redo drawing operations.
 func undo_redo_draw_op(
-	image: Image, compressed_image_data: PackedByteArray, buffer_size: int
+	image: Image, new_size: Vector2i, compressed_image_data: PackedByteArray, buffer_size: int
 ) -> void:
-	image.set_data(
-		image.get_width(),
-		image.get_height(),
-		image.has_mipmaps(),
-		image.get_format(),
-		compressed_image_data.decompress(buffer_size)
-	)
+	var decompressed := compressed_image_data.decompress(buffer_size)
+	image.set_data(new_size.x, new_size.y, image.has_mipmaps(), image.get_format(), decompressed)
 
 
 ## Used by the Move tool for undo/redo, moves all of the [Image]s in [param images]

@@ -477,10 +477,11 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 
 	for f in Global.current_project.frames:
 		for i in range(f.cels.size() - 1, -1, -1):
-			if not f.cels[i] is PixelCel:
+			var cel := f.cels[i]
+			if not cel is PixelCel:
 				continue
 			var sprite := Image.new()
-			sprite.copy_from(f.cels[i].get_image())
+			sprite.copy_from(cel.get_image())
 			if interpolation == Interpolation.SCALE3X:
 				var times := Vector2i(
 					ceili(width / (3.0 * sprite.get_width())),
@@ -497,10 +498,7 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 				gen.generate_image(sprite, omniscale_shader, {}, Vector2i(width, height))
 			else:
 				sprite.resize(width, height, interpolation)
-			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(
-				f.cels[i].image, "data", f.cels[i].image.data
-			)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
@@ -529,8 +527,7 @@ func center(indices: Array) -> void:
 				continue
 			var sprite := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(cel.image, used_rect, offset)
-			project.undo_redo.add_do_property(cel.image, "data", sprite.data)
-			project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
@@ -565,8 +562,7 @@ func crop_image() -> void:
 			if not cel is PixelCel:
 				continue
 			var sprite := cel.get_image().get_region(used_rect)
-			Global.current_project.undo_redo.add_do_property(cel.image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
@@ -574,17 +570,16 @@ func crop_image() -> void:
 func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> void:
 	general_do_scale(width, height)
 	for f in Global.current_project.frames:
-		for c in f.cels:
-			if not c is PixelCel:
+		for cel in f.cels:
+			if not cel is PixelCel:
 				continue
 			var sprite := Image.create(width, height, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(
-				c.get_image(),
+				cel.get_image(),
 				Rect2i(Vector2i.ZERO, Global.current_project.size),
 				Vector2i(offset_x, offset_y)
 			)
-			Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
