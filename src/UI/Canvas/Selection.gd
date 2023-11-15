@@ -586,13 +586,11 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	project.undos += 1
 	project.undo_redo.create_action(action)
 	Global.undo_redo_compress_images(redo_data, undo_data_tmp, project)
-#	project.undo_redo.add_do_property(project, "selection_map", redo_data["selection_map"])
 	project.undo_redo.add_do_property(
 		self, "big_bounding_rectangle", redo_data["big_bounding_rectangle"]
 	)
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
 
-#	project.undo_redo.add_undo_property(project, "selection_map", undo_data_tmp["selection_map"])
 	project.undo_redo.add_undo_property(
 		self, "big_bounding_rectangle", undo_data_tmp["big_bounding_rectangle"]
 	)
@@ -600,7 +598,6 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 		project, "selection_offset", undo_data_tmp["outline_offset"]
 	)
 
-#	if undo_data_tmp["undo_image"]:
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(project.selection_map_changed)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
