@@ -27,29 +27,26 @@ func apply_selection(pos: Vector2i) -> void:
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
 
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
 	if _intersect:
-		selection_map_copy.clear()
+		project.selection_map.clear()
 
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
-	_flood_fill(pos, cel_image, selection_map_copy)
+	_flood_fill(pos, cel_image, project.selection_map)
 
 	# Handle mirroring
 	if Tools.horizontal_mirror:
 		var mirror_x := pos
 		mirror_x.x = Global.current_project.x_symmetry_point - pos.x
-		_flood_fill(mirror_x, cel_image, selection_map_copy)
+		_flood_fill(mirror_x, cel_image, project.selection_map)
 		if Tools.vertical_mirror:
 			var mirror_xy := mirror_x
 			mirror_xy.y = Global.current_project.y_symmetry_point - pos.y
-			_flood_fill(mirror_xy, cel_image, selection_map_copy)
+			_flood_fill(mirror_xy, cel_image, project.selection_map)
 	if Tools.vertical_mirror:
 		var mirror_y := pos
 		mirror_y.y = Global.current_project.y_symmetry_point - pos.y
-		_flood_fill(mirror_y, cel_image, selection_map_copy)
-	project.selection_map = selection_map_copy
+		_flood_fill(mirror_y, cel_image, project.selection_map)
 	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)
 
