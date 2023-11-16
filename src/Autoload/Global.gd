@@ -620,7 +620,9 @@ func convert_dictionary_values(dict: Dictionary) -> void:
 			dict[key] = str2var("Vector3" + dict[key])
 
 
-func undo_redo_compress_images(redo_data: Dictionary, undo_data: Dictionary, project := current_project) -> void:
+func undo_redo_compress_images(
+	redo_data: Dictionary, undo_data: Dictionary, project := current_project
+) -> void:
 	for image in redo_data:
 		if not image is Image:
 			continue
@@ -650,7 +652,6 @@ func undo_redo_draw_op(
 	var decompressed := compressed_image_data.decompress(buffer_size)
 	image.crop(new_size.x, new_size.y)
 	image.data["data"] = decompressed
-
 
 
 ## Used by the Move tool for undo/redo, moves all of the Images in the images array
