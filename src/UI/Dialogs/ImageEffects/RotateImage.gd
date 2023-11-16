@@ -181,10 +181,11 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		URD:
 			DrawingAlgos.fake_rotsprite(image, angle, pivot)
 
-	if _project.has_selection and selection_checkbox.pressed and !_type_is_shader():
-		cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
-	else:
-		cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+	if not _type_is_shader():
+		if _project.has_selection and selection_checkbox.pressed:
+			cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+		else:
+			cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 
 
 func _type_is_shader() -> bool:
