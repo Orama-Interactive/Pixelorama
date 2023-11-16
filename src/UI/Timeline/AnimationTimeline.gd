@@ -268,10 +268,11 @@ func delete_frames(indices := []) -> void:
 
 
 func _on_CopyFrame_pressed() -> void:
-	copy_frames()
+	# Do not select new cels, If they are copied.
+	copy_frames([], -1, false)
 
 
-func copy_frames(indices := [], destination := -1) -> void:
+func copy_frames(indices := [], destination := -1, select_new_cels := true) -> void:
 	var project: Project = Global.current_project
 
 	if indices.size() == 0:
@@ -353,19 +354,20 @@ func copy_frames(indices := [], destination := -1) -> void:
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
-	# Select all the new frames so that it is easier to move/offset collectively if user wants
-	# To ease animation workflow, new current frame is the first copied frame instead of the last
-	var range_start: int = copied_indices[-1]
-	var range_end = copied_indices[0]
-	var frame_diff_sign = sign(range_end - range_start)
-	if frame_diff_sign == 0:
-		frame_diff_sign = 1
-	for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
-		for j in range(0, Global.current_project.layers.size()):
-			var frame_layer := [i, j]
-			if !Global.current_project.selected_cels.has(frame_layer):
-				Global.current_project.selected_cels.append(frame_layer)
-	Global.current_project.change_cel(range_end, -1)
+	if select_new_cels:
+		# Select all the new frames so that it is easier to move/offset collectively if user wants
+		# To ease animation workflow, new current frame is the first copied frame instead of the last
+		var range_start: int = copied_indices[-1]
+		var range_end = copied_indices[0]
+		var frame_diff_sign = sign(range_end - range_start)
+		if frame_diff_sign == 0:
+			frame_diff_sign = 1
+		for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
+			for j in range(0, Global.current_project.layers.size()):
+				var frame_layer := [i, j]
+				if !Global.current_project.selected_cels.has(frame_layer):
+					Global.current_project.selected_cels.append(frame_layer)
+		Global.current_project.change_cel(range_end, -1)
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	adjust_scroll_container()
