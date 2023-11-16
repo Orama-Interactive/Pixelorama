@@ -480,7 +480,8 @@ func undo_or_redo(
 			"Center Frames",
 			"Merge Layer",
 			"Link Cel",
-			"Unlink Cel"
+			"Unlink Cel",
+			"Replaced Cel"
 		]
 	):
 		if layer_index > -1 and frame_index > -1:
@@ -619,5 +620,44 @@ func convert_dictionary_values(dict: Dictionary) -> void:
 			dict[key] = str2var("Vector3" + dict[key])
 
 
-func undo_redo_draw_op(image: Object, compressed_image_data: Dictionary, buffer_size: int) -> void:
-	image["data"]["data"] = compressed_image_data["data"].decompress(buffer_size)
+func undo_redo_compress_images(redo_data: Dictionary, undo_data: Dictionary, project := current_project) -> void:
+	for image in redo_data:
+		if not image is Image:
+			continue
+		var new_image: Dictionary = redo_data[image]
+		var new_size := Vector2(new_image["width"], new_image["height"])
+		var buffer_size: int = new_image["data"].size()
+		var compressed_data: PoolByteArray = new_image["data"].compress()
+		project.undo_redo.add_do_method(
+			self, "undo_redo_draw_op", image, new_size, compressed_data, buffer_size
+		)
+		image.unlock()
+	for image in undo_data:
+		if not image is Image:
+			continue
+		var new_image: Dictionary = undo_data[image]
+		var new_size := Vector2(new_image["width"], new_image["height"])
+		var buffer_size: int = new_image["data"].size()
+		var compressed_data: PoolByteArray = new_image["data"].compress()
+		project.undo_redo.add_undo_method(
+			self, "undo_redo_draw_op", image, new_size, compressed_data, buffer_size
+		)
+
+
+func undo_redo_draw_op(
+	image: Image, new_size: Vector2, compressed_image_data: PoolByteArray, buffer_size: int
+) -> void:
+	var decompressed := compressed_image_data.decompress(buffer_size)
+	image.crop(new_size.x, new_size.y)
+	image.data["data"] = decompressed
+
+
+
+## Used by the Move tool for undo/redo, moves all of the Images in the images array
+## by diff pixels.
+func undo_redo_move(diff: Vector2, images: Array) -> void:
+	for image in images:
+		var image_copy := Image.new()
+		image_copy.copy_from(image)
+		image.fill(Color(0, 0, 0, 0))
+		image.blit_rect(image_copy, Rect2(Vector2.ZERO, image.get_size()), diff)
