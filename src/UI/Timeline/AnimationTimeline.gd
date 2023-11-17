@@ -125,6 +125,9 @@ func _frame_scroll_changed(_value: float) -> void:
 
 func _on_LayerVBox_resized() -> void:
 	frame_scroll_bar.offset_left = frame_scroll_container.position.x
+	# it doesn't update properly without yields (for the first time after pixelorama starts)
+	await get_tree().process_frame
+	await get_tree().process_frame
 	adjust_scroll_container()
 
 
