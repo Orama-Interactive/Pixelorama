@@ -473,7 +473,6 @@ func move_borders(move: Vector2i) -> void:
 	marching_ants_outline.offset += Vector2(move)
 	big_bounding_rectangle.position += move
 	queue_redraw()
-	Global.canvas.queue_redraw()
 
 
 func move_borders_end() -> void:
@@ -530,7 +529,7 @@ func transform_content_confirm() -> void:
 		cel_image.blit_rect_mask(
 			src,
 			src,
-			Rect2(Vector2.ZERO, project.selection_map.get_size()),
+			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 			big_bounding_rectangle.position
 		)
 	project.selection_map.move_bitmap_values(project)
@@ -888,17 +887,16 @@ func _get_preview_image() -> void:
 	var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	DrawingAlgos.blend_selected_cels(blended_image, project.frames[project.current_frame])
 	if original_preview_image.is_empty():
-		original_preview_image = blended_image.get_region(big_bounding_rectangle)
-		# For non-rectangular selections
-		for x in range(0, big_bounding_rectangle.size.x):
-			for y in range(0, big_bounding_rectangle.size.y):
-				var pos := Vector2i(x, y)
-				if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
-					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
-
+		original_preview_image = Image.create(
+			big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
+		)
+		original_preview_image.blit_rect_mask(
+			blended_image, project.selection_map, big_bounding_rectangle, Vector2i.ZERO
+		)
 		if original_preview_image.is_invisible():
 			original_preview_image = Image.new()
 			return
+
 		preview_image.copy_from(original_preview_image)
 		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
@@ -914,7 +912,7 @@ func _get_preview_image() -> void:
 		cel_image.blit_rect_mask(
 			clear_image,
 			cel.transformed_content,
-			Rect2(Vector2.ZERO, project.selection_map.get_size()),
+			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 			big_bounding_rectangle.position
 		)
 	for cel_index in project.selected_cels:
@@ -923,12 +921,8 @@ func _get_preview_image() -> void:
 
 func _get_selected_image(cel_image: Image) -> Image:
 	var project := Global.current_project
-	var image := Image.new()
-	image = cel_image.get_region(big_bounding_rectangle)
-	# For non-rectangular selections
-	for x in range(0, big_bounding_rectangle.size.x):
-		for y in range(0, big_bounding_rectangle.size.y):
-			var pos := Vector2i(x, y)
-			if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
-				image.set_pixelv(pos, Color(0, 0, 0, 0))
+	var image := Image.create(
+		big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
+	)
+	image.blit_rect_mask(cel_image, project.selection_map, big_bounding_rectangle, Vector2i.ZERO)
 	return image
