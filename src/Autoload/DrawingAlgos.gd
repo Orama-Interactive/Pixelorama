@@ -550,10 +550,6 @@ func general_do_scale(width: int, height: int) -> void:
 	var x_ratio = project.size.x / width
 	var y_ratio = project.size.y / height
 
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy.crop(size.x, size.y)
-
 	var new_x_symmetry_point = project.x_symmetry_point / x_ratio
 	var new_y_symmetry_point = project.y_symmetry_point / y_ratio
 	var new_x_symmetry_axis_points = project.x_symmetry_axis.points
@@ -566,7 +562,7 @@ func general_do_scale(width: int, height: int) -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Scale")
 	project.undo_redo.add_do_property(project, "size", size)
-	project.undo_redo.add_do_property(project, "selection_map", selection_map_copy)
+	project.undo_redo.add_do_method(project.selection_map, "crop", size.x, size.y)
 	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
 	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
 	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
@@ -576,7 +572,7 @@ func general_do_scale(width: int, height: int) -> void:
 func general_undo_scale() -> void:
 	var project: Project = Global.current_project
 	project.undo_redo.add_undo_property(project, "size", project.size)
-	project.undo_redo.add_undo_property(project, "selection_map", project.selection_map)
+	project.undo_redo.add_undo_method(project.selection_map, "crop", project.size.x, project.size.y)
 	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
 	project.undo_redo.add_undo_property(project, "y_symmetry_point", project.y_symmetry_point)
 	project.undo_redo.add_undo_property(

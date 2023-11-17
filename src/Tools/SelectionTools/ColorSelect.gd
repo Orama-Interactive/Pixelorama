@@ -52,8 +52,6 @@ func apply_selection(position: Vector2) -> void:
 	gen.generate_image(cel_image, shader, params, project.size)
 	cel_image.convert(Image.FORMAT_LA8)
 
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(cel_image)
-	project.selection_map = selection_map_copy
+	project.selection_map.copy_from(cel_image)
 	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)

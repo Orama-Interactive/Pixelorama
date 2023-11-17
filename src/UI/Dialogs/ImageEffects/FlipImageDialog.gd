@@ -57,9 +57,7 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 	project.undo_redo.create_action(action)
 	Global.undo_redo_compress_images(redo_data, undo_data, project)
 	if redo_data.has("outline_offset"):
-		project.undo_redo.add_do_property(project, "selection_map", redo_data["selection_map"])
 		project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
-		project.undo_redo.add_undo_property(project, "selection_map", undo_data["selection_map"])
 		project.undo_redo.add_undo_property(
 			project, "selection_offset", undo_data["outline_offset"]
 		)
@@ -74,9 +72,7 @@ func _get_undo_data(project: Project) -> Dictionary:
 	var affect_selection := selection_checkbox.pressed and project.has_selection
 	var data := {}
 	if affect_selection:
-		var bitmap_image := SelectionMap.new()
-		bitmap_image.copy_from(project.selection_map)
-		data["selection_map"] = bitmap_image
+		data[project.selection_map] = project.selection_map.data
 		data["outline_offset"] = project.selection_offset
 
 	var images := _get_selected_draw_images(project)
@@ -89,21 +85,17 @@ func _get_undo_data(project: Project) -> Dictionary:
 func _flip_selection(project: Project = Global.current_project) -> void:
 	if !(selection_checkbox.pressed and project.has_selection):
 		return
-
-	var bitmap_image := SelectionMap.new()
-	bitmap_image.copy_from(project.selection_map)
-	var selection_rect := bitmap_image.get_used_rect()
-	var smaller_bitmap_image := bitmap_image.get_rect(selection_rect)
+	var selection_rect := project.selection_map.get_used_rect()
+	var smaller_bitmap_image := project.selection_map.get_rect(selection_rect)
 
 	if flip_h.pressed:
 		smaller_bitmap_image.flip_x()
 	if flip_v.pressed:
 		smaller_bitmap_image.flip_y()
 
-	bitmap_image.fill(Color(0, 0, 0, 0))
-	bitmap_image.blend_rect(
+	project.selection_map.fill(Color(0, 0, 0, 0))
+	project.selection_map.blend_rect(
 		smaller_bitmap_image,
 		Rect2(Vector2.ZERO, smaller_bitmap_image.get_size()),
 		selection_rect.position
 	)
-	project.selection_map = bitmap_image
