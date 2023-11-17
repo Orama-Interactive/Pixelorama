@@ -333,7 +333,7 @@ func _on_CopyFrame_pressed() -> void:
 ## [param destination]. if [param select_all_cels] is [code]true[/code] then all of the new copied
 ## cels will be selected, otherwise only the cels corresponding to the original selected cels will
 ## get selected.
-## [br]Note: [param indices] must be in assending order
+## [br]Note: [param indices] must be in ascending order
 func copy_frames(indices := [], destination := -1, select_all_cels := true) -> void:
 	var project := Global.current_project
 
