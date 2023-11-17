@@ -1,6 +1,8 @@
 extends PopupMenu
 
 @onready var tag_container: Control = Global.animation_timeline.find_child("TagContainer")
+
+
 func _ready() -> void:
 	id_pressed.connect(_on_TagList_id_pressed)
 	tag_container.gui_input.connect(_on_TagContainer_gui_input)
