@@ -935,19 +935,16 @@ func _get_preview_image() -> void:
 	blended_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	Export.blend_selected_cels(blended_image, project.frames[project.current_frame])
 	if original_preview_image.is_empty():
-		original_preview_image = blended_image.get_rect(big_bounding_rectangle)
-		original_preview_image.lock()
-		# For non-rectangular selections
-		for x in range(0, big_bounding_rectangle.size.x):
-			for y in range(0, big_bounding_rectangle.size.y):
-				var pos := Vector2(x, y)
-				if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
-					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
-
-		original_preview_image.unlock()
+		original_preview_image.create(
+			big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
+		)
+		original_preview_image.blit_rect_mask(
+			blended_image, project.selection_map, big_bounding_rectangle, Vector2.ZERO
+		)
 		if original_preview_image.is_invisible():
 			original_preview_image = Image.new()
 			return
+
 		preview_image.copy_from(original_preview_image)
 		preview_image_texture.create_from_image(preview_image, 0)
 
@@ -974,14 +971,8 @@ func _get_preview_image() -> void:
 func _get_selected_image(cel_image: Image) -> Image:
 	var project: Project = Global.current_project
 	var image := Image.new()
-	image = cel_image.get_rect(big_bounding_rectangle)
-	image.lock()
-	# For non-rectangular selections
-	for x in range(0, big_bounding_rectangle.size.x):
-		for y in range(0, big_bounding_rectangle.size.y):
-			var pos := Vector2(x, y)
-			if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
-				image.set_pixelv(pos, Color(0, 0, 0, 0))
-
-	image.unlock()
+	image.create(
+		big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
+	)
+	image.blit_rect_mask(cel_image, project.selection_map, big_bounding_rectangle, Vector2.ZERO)
 	return image
