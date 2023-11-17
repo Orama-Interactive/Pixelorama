@@ -370,9 +370,8 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 
 func resize_selection() -> void:
 	var size := big_bounding_rectangle.size.abs()
-	var selection_map := Global.current_project.selection_map
 	if is_moving_content:
-		selection_map = original_bitmap
+		Global.current_project.selection_map.copy_from(original_bitmap)
 		preview_image.copy_from(original_preview_image)
 		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 		if temp_rect.size.x < 0:
