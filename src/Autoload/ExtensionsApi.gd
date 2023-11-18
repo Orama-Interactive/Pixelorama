@@ -5,7 +5,7 @@ extends Node
 
 ## The Official ExtensionsAPI for pixelorama.
 ##
-## This Api gives you the essentials eo develop a working extension for Pixelorama.[br]
+## This Api gives you the essentials to develop a working extension for Pixelorama.[br]
 ## The Api consists of many smaller Apis, each giving access to different areas of the Software.
 ## [br][br]
 ## Keep in mind that this API is targeted towards users who are not fully familiar with Pixelorama's
@@ -218,7 +218,7 @@ class DialogAPI:
 
 ## Gives access to Tabs and Dockable Container related functions.
 class PanelAPI:
-	## Sets the visibility of dokable tabs.
+	## Sets the visibility of dockable tabs.
 	var tabs_visible: bool:
 		set(value):
 			var dockable := _get_dockable_container_ui()
@@ -458,7 +458,7 @@ class SelectionAPI:
 	## Resizes the selection to [param new_size],
 	## with content if [param with_content] is [code]true[/code].
 	## If [param transform_standby] is [code]true[/code] then the transformation will not be
-	## applied immediatelyunless [kbd]Enter[/kbd] is pressed.
+	## applied immediately unless [kbd]Enter[/kbd] is pressed.
 	func resize_selection(new_size: Vector2, with_content := true, transform_standby := false):
 		if not with_content:
 			Global.canvas.selection.transform_content_confirm()
@@ -662,106 +662,106 @@ class SignalsAPI:
 		texture_changed.emit()
 
 	# GLOBAL SIGNALS
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## when pixelorama is just opened.
 	func connect_pixelorama_opened(callable: Callable):
 		Global.pixelorama_opened.connect(callable)
 		ExtensionsApi.add_action("pixelorama_opened")
 
-	## reverse of [method connect_pixelorama_opened].
+	## Reverse of [method connect_pixelorama_opened].
 	func disconnect_pixelorama_opened(callable: Callable):
 		Global.pixelorama_opened.disconnect(callable)
 		ExtensionsApi.remove_action("pixelorama_opened")
 
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## when pixelorama is about to close.
 	func connect_pixelorama_about_to_close(callable: Callable):
 		Global.pixelorama_about_to_close.connect(callable)
 		ExtensionsApi.add_action("pixelorama_about_to_close")
 
-	## reverse of [method connect_pixelorama_about_to_close].
+	## Reverse of [method connect_pixelorama_about_to_close].
 	func disconnect_pixelorama_about_to_close(callable: Callable):
 		Global.pixelorama_about_to_close.disconnect(callable)
 		ExtensionsApi.remove_action("pixelorama_about_to_close")
 
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## whenever a new project is created.[br]
 	## [b]Binds: [/b]It has one bind of type [code]Project[/code] which is the newly created project
 	func connect_project_created(callable: Callable):
 		Global.project_created.connect(callable)
 		ExtensionsApi.add_action("project_created")
 
-	## reverse of [method connect_project_created].
+	## Reverse of [method connect_project_created].
 	func disconnect_project_created(callable: Callable):
 		Global.project_created.disconnect(callable)
 		ExtensionsApi.remove_action("project_created")
 
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## whenever project is about to be saved.
 	func connect_project_about_to_save(callable: Callable):
 		Global.project_saved.connect(callable)
 		ExtensionsApi.add_action("project_saved")
 
-	## reverse of [method connect_project_about_to_save].
+	## Reverse of [method connect_project_about_to_save].
 	func disconnect_project_saved(callable: Callable):
 		Global.project_saved.disconnect(callable)
 		ExtensionsApi.remove_action("project_saved")
 
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## whenever you switch to some other project.
 	func connect_project_changed(callable: Callable):
 		Global.project_changed.connect(callable)
 		ExtensionsApi.add_action("project_changed")
 
-	## reverse of [method connect_project_changed].
+	## Reverse of [method connect_project_changed].
 	func disconnect_project_changed(callable: Callable):
 		Global.project_changed.disconnect(callable)
 		ExtensionsApi.remove_action("project_changed")
 
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## whenever you select a different cel.
 	func connect_cel_changed(callable: Callable):
 		Global.cel_changed.connect(callable)
 		ExtensionsApi.add_action("cel_changed")
 
-	## reverse of [method connect_cel_changed].
+	## Reverse of [method connect_cel_changed].
 	func disconnect_cel_changed(callable: Callable):
 		Global.cel_changed.disconnect(callable)
 		ExtensionsApi.remove_action("cel_changed")
 
 	# TOOL SIGNALS
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## whenever a tool changes color.
 	func connect_tool_color_changed(callable: Callable):
 		Tools.color_changed.connect(callable)
 		ExtensionsApi.add_action("color_changed")
 
-	## reverse of [method connect_tool_color_changed].
+	## Reverse of [method connect_tool_color_changed].
 	func disconnect_tool_color_changed(callable: Callable):
 		Tools.color_changed.disconnect(callable)
 		ExtensionsApi.remove_action("color_changed")
 
 	# UPDATER SIGNALS
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## whenever texture of the currently focused cel changes.
 	func connect_current_cel_texture_changed(callable: Callable):
 		texture_changed.connect(callable)
 		ExtensionsApi.add_action("texture_changed")
 
-	## reverse of [method connect_current_cel_texture_changed].
+	## Reverse of [method connect_current_cel_texture_changed].
 	func disconnect_current_cel_texture_changed(callable: Callable):
 		texture_changed.disconnect(callable)
 		ExtensionsApi.remove_action("texture_changed")
 
-	## connects a signal to [param method] present in [param target], that emits
+	## connects a signal to [param callable], that emits
 	## whenever preview is about to be drawn.[br]
 	## [b]Binds: [/b]It has one bind of type [Dictionary] with keys: [code]exporter_id[/code],
 	## [code]export_tab[/code], [code]preview_images[/code], [code]durations[/code]
-	func connect_export_about_to_preview(target: Object, method: String):
-		Global.export_dialog.about_to_preview.connect(Callable(target, method))
+	func connect_export_about_to_preview(callable: Callable):
+		Global.export_dialog.about_to_preview.connect(callable)
 		ExtensionsApi.add_action("export_about_to_preview")
 
-	## reverse of [method connect_export_about_to_preview].
-	func disconnect_export_about_to_preview(target: Object, method: String):
-		Global.export_dialog.about_to_preview.disconnect(Callable(target, method))
+	## Reverse of [method connect_export_about_to_preview].
+	func disconnect_export_about_to_preview(callable: Callable):
+		Global.export_dialog.about_to_preview.disconnect(callable)
 		ExtensionsApi.remove_action("export_about_to_preview")
