@@ -479,6 +479,9 @@ class SelectionAPI:
 	func make_brush() -> void:
 		Global.canvas.selection.new_brush()
 
+	func get_enclosed_image() -> Image:
+		return Global.canvas.selection.get_enclosed_image()
+
 	## Copies the selection content (works in or between pixelorama instances only).
 	func copy() -> void:
 		Global.canvas.selection.copy()

@@ -807,42 +807,28 @@ func delete(selected_cels := true) -> void:
 
 
 func new_brush() -> void:
+	var brush = get_enclosed_image()
+	if brush and !brush.is_invisible():
+		var brush_used: Image = brush.get_region(brush.get_used_rect())
+		Global.current_project.brushes.append(brush_used)
+		Brushes.add_project_brush(brush_used)
+
+
+func get_enclosed_image() -> Image:
 	var project := Global.current_project
 	if !project.has_selection:
 		return
 
 	var image := project.get_current_cel().get_image()
-	var brush := Image.new()
+	var enclosed_img := Image.new()
 	if is_moving_content:
-		brush.copy_from(preview_image)
+		enclosed_img.copy_from(preview_image)
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		selection_map_copy.move_bitmap_values(project, false)
-		var clipboard = str_to_var(DisplayServer.clipboard_get())
-		if typeof(clipboard) == TYPE_DICTIONARY:  # A sanity check
-			if not clipboard.has_all(
-				["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
-			):
-				return
-			clipboard.selection_map = selection_map_copy
 	else:
-		brush = image.get_region(big_bounding_rectangle)
-		# Remove unincluded pixels if the selection is not a single rectangle
-		for x in brush.get_size().x:
-			for y in brush.get_size().y:
-				var pos := Vector2i(x, y)
-				var offset_pos := big_bounding_rectangle.position
-				if offset_pos.x < 0:
-					offset_pos.x = 0
-				if offset_pos.y < 0:
-					offset_pos.y = 0
-				if not project.selection_map.is_pixel_selected(pos + offset_pos):
-					brush.set_pixelv(pos, Color(0))
-
-	if !brush.is_invisible():
-		var brush_used: Image = brush.get_region(brush.get_used_rect())
-		project.brushes.append(brush_used)
-		Brushes.add_project_brush(brush_used)
+		enclosed_img = _get_selected_image(image)
+	return enclosed_img
 
 
 func select_all() -> void:
