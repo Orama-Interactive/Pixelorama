@@ -422,7 +422,7 @@ class ToolAPI:
 
 ## Gives access to pixelorama's selection system.
 class SelectionAPI:
-	## Clears the selection Gizmo.
+	## Clears the selection gizmo.
 	func clear_selection() -> void:
 		Global.canvas.selection.clear_selection(true)
 
@@ -479,6 +479,8 @@ class SelectionAPI:
 	func make_brush() -> void:
 		Global.canvas.selection.new_brush()
 
+	## Returns the portion of current cel's image enclosed by the selection.
+	## It's similar to [method make_brush] but it returns the image instead.
 	func get_enclosed_image() -> Image:
 		return Global.canvas.selection.get_enclosed_image()
 
@@ -491,8 +493,8 @@ class SelectionAPI:
 		Global.canvas.selection.paste(in_place)
 
 	## Deletes the drawing on current cel enclosed within the selection's area.
-	func delete_content() -> void:
-		Global.canvas.selection.delete()
+	func delete_content(selected_cels := true) -> void:
+		Global.canvas.selection.delete(selected_cels)
 
 
 ## Gives access to basic project manipulation functions.

@@ -645,6 +645,24 @@ func _get_selected_draw_images() -> Array[Image]:
 	return images
 
 
+## Returns the portion of current cel's image enclosed by the selection.
+func get_enclosed_image() -> Image:
+	var project := Global.current_project
+	if !project.has_selection:
+		return
+
+	var image := project.get_current_cel().get_image()
+	var enclosed_img := Image.new()
+	if is_moving_content:
+		enclosed_img.copy_from(preview_image)
+		var selection_map_copy := SelectionMap.new()
+		selection_map_copy.copy_from(project.selection_map)
+		selection_map_copy.move_bitmap_values(project, false)
+	else:
+		enclosed_img = _get_selected_image(image)
+	return enclosed_img
+
+
 func cut() -> void:
 	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
@@ -653,6 +671,7 @@ func cut() -> void:
 	delete(false)
 
 
+## Copies the selection content (works in or between pixelorama instances only).
 func copy() -> void:
 	var project := Global.current_project
 	var cl_image := Image.new()
@@ -709,6 +728,7 @@ func copy() -> void:
 		container.get_child(0).get_child(0).texture = tex
 
 
+## Pastes the selection content.
 func paste(in_place := false) -> void:
 	if !FileAccess.file_exists(CLIPBOARD_FILE_PATH):
 		return
@@ -769,6 +789,7 @@ func paste(in_place := false) -> void:
 	project.selection_map_changed()
 
 
+## Deletes the drawing enclosed within the selection's area.
 func delete(selected_cels := true) -> void:
 	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
@@ -806,6 +827,7 @@ func delete(selected_cels := true) -> void:
 	commit_undo("Draw", undo_data_tmp)
 
 
+## Makes a project brush out of the current selection's content.
 func new_brush() -> void:
 	var brush = get_enclosed_image()
 	if brush and !brush.is_invisible():
@@ -814,23 +836,7 @@ func new_brush() -> void:
 		Brushes.add_project_brush(brush_used)
 
 
-func get_enclosed_image() -> Image:
-	var project := Global.current_project
-	if !project.has_selection:
-		return
-
-	var image := project.get_current_cel().get_image()
-	var enclosed_img := Image.new()
-	if is_moving_content:
-		enclosed_img.copy_from(preview_image)
-		var selection_map_copy := SelectionMap.new()
-		selection_map_copy.copy_from(project.selection_map)
-		selection_map_copy.move_bitmap_values(project, false)
-	else:
-		enclosed_img = _get_selected_image(image)
-	return enclosed_img
-
-
+## Select the entire region of current cel.
 func select_all() -> void:
 	var undo_data_tmp := get_undo_data(false)
 	clear_selection()
@@ -839,6 +845,7 @@ func select_all() -> void:
 	commit_undo("Select", undo_data_tmp)
 
 
+## Inverts the selection gizmo.
 func invert() -> void:
 	transform_content_confirm()
 	var project := Global.current_project
@@ -851,6 +858,7 @@ func invert() -> void:
 	commit_undo("Select", undo_data_tmp)
 
 
+## Clears the selection gizmo.
 func clear_selection(use_undo := false) -> void:
 	var project := Global.current_project
 	if !project.has_selection:
