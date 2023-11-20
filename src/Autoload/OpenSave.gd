@@ -544,8 +544,9 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 			cel_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
 			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 			var cel: PixelCel = project.frames[i].cels[layer_index]
-			project.undo_redo.add_do_property(cel, "image", cel_image)
-			project.undo_redo.add_undo_property(cel, "image", cel.image)
+			Global.undo_redo_compress_images(
+				{cel.image: cel_image.data}, {cel.image: cel.image.data}, project
+			)
 
 	project.undo_redo.add_do_property(project, "selected_cels", [])
 	project.undo_redo.add_do_method(project, "change_cel", frame_index, layer_index)
