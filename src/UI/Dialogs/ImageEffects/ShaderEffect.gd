@@ -13,8 +13,7 @@ func _about_to_popup() -> void:
 	DrawingAlgos.blend_selected_cels(selected_cels, frame)
 
 	preview_image.copy_from(selected_cels)
-	preview_texture = ImageTexture.create_from_image(preview_image)
-	preview.texture = preview_texture
+	preview.texture = ImageTexture.create_from_image(preview_image)
 	super._about_to_popup()
 
 
@@ -28,7 +27,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		params[param] = param_data
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
-	await gen.done
 
 
 func _on_ChooseShader_pressed() -> void:

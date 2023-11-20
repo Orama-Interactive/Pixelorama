@@ -5,7 +5,7 @@ var color := Color.BLACK
 var thickness := 1
 var pattern := 0
 var inside_image := false
-var shader := preload("res://src/Shaders/OutlineInline.gdshader")
+var shader := preload("res://src/Shaders/Effects/OutlineInline.gdshader")
 
 @onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
 
@@ -40,7 +40,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		await gen.done
 
 
 func _on_ThickValue_value_changed(value: int) -> void:

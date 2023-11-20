@@ -4,8 +4,8 @@ enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
 enum Animate { ANGLE, INITIAL_ANGLE }
 
 var live_preview := true
-var rotxel_shader := preload("res://src/Shaders/Rotation/SmearRotxel.gdshader")
-var nn_shader := preload("res://src/Shaders/Rotation/NearestNeighbour.gdshader")
+var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
+var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -37,7 +37,9 @@ func _ready() -> void:
 
 func _about_to_popup() -> void:
 	if DrawingAlgos.clean_edge_shader == null:
-		DrawingAlgos.clean_edge_shader = load("res://src/Shaders/Rotation/cleanEdge.gdshader")
+		DrawingAlgos.clean_edge_shader = load(
+			"res://src/Shaders/Effects/Rotation/cleanEdge.gdshader"
+		)
 	drag_pivot = false
 	if pivot == Vector2.INF:
 		_calculate_pivot()
@@ -128,7 +130,6 @@ func commit_action(cel: Image, _project := Global.current_project) -> void:
 			params["preview"] = false
 			var gen := ShaderImageEffect.new()
 			gen.generate_image(cel, shader, params, _project.size)
-			await gen.done
 	else:
 		match type_option_button.get_selected_id():
 			ROTXEL:
@@ -138,10 +139,10 @@ func commit_action(cel: Image, _project := Global.current_project) -> void:
 			URD:
 				DrawingAlgos.fake_rotsprite(image, angle, pivot)
 
-	if _project.has_selection and selection_checkbox.button_pressed and !_type_is_shader():
-		cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-	else:
-		cel.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+		if _project.has_selection and selection_checkbox.button_pressed:
+			cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+		else:
+			cel.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 
 
 func _type_is_shader() -> bool:

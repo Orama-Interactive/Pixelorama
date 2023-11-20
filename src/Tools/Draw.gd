@@ -164,6 +164,7 @@ func update_random_image() -> void:
 		return
 	var random := randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
+	_orignal_brush_image = _brush_image
 	_brush_texture = ImageTexture.create_from_image(_brush_image)
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()
@@ -212,20 +213,7 @@ func commit_undo() -> void:
 		layer = project.current_layer
 
 	project.undos += 1
-	for image in redo_data:
-		var compressed_data: Dictionary = redo_data[image]
-		var buffer_size: int = compressed_data["data"].size()
-		compressed_data["data"] = compressed_data["data"].compress()
-		project.undo_redo.add_do_method(
-			Global.undo_redo_draw_op.bind(image, compressed_data["data"], buffer_size)
-		)
-	for image in _undo_data:
-		var compressed_data: Dictionary = _undo_data[image]
-		var buffer_size: int = compressed_data["data"].size()
-		compressed_data["data"] = compressed_data["data"].compress()
-		project.undo_redo.add_undo_method(
-			Global.undo_redo_draw_op.bind(image, compressed_data["data"], buffer_size)
-		)
+	Global.undo_redo_compress_images(redo_data, _undo_data, project)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()

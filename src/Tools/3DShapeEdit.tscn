@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cg7d36746on67"]
+[gd_scene load_steps=10 format=3 uid="uid://cg7d36746on67"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/3DShapeEdit.gd" id="2"]
@@ -8,7 +8,11 @@
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="6"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV3.tscn" id="7"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_8sqgw"]
+action = &"delete"
+
 [sub_resource type="Shortcut" id="34"]
+events = [SubResource("InputEventAction_8sqgw")]
 
 [node name="3DShapeEdit" instance=ExtResource("1")]
 script = ExtResource("2")

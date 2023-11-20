@@ -5,7 +5,7 @@ enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
 var blend_layers_shader := preload("res://src/Shaders/BlendLayers.gdshader")
 var clean_edge_shader: Shader
-var omniscale_shader := preload("res://src/Shaders/Rotation/OmniScale.gdshader")
+var omniscale_shader := preload("res://src/Shaders/Effects/Rotation/OmniScale.gdshader")
 
 
 ## Blends canvas layers into passed image starting from the origin position
@@ -477,10 +477,11 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 
 	for f in Global.current_project.frames:
 		for i in range(f.cels.size() - 1, -1, -1):
-			if not f.cels[i] is PixelCel:
+			var cel := f.cels[i]
+			if not cel is PixelCel:
 				continue
 			var sprite := Image.new()
-			sprite.copy_from(f.cels[i].get_image())
+			sprite.copy_from(cel.get_image())
 			if interpolation == Interpolation.SCALE3X:
 				var times := Vector2i(
 					ceili(width / (3.0 * sprite.get_width())),
@@ -497,10 +498,7 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 				gen.generate_image(sprite, omniscale_shader, {}, Vector2i(width, height))
 			else:
 				sprite.resize(width, height, interpolation)
-			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(
-				f.cels[i].image, "data", f.cels[i].image.data
-			)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
@@ -529,8 +527,7 @@ func center(indices: Array) -> void:
 				continue
 			var sprite := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(cel.image, used_rect, offset)
-			project.undo_redo.add_do_property(cel.image, "data", sprite.data)
-			project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
@@ -565,8 +562,7 @@ func crop_image() -> void:
 			if not cel is PixelCel:
 				continue
 			var sprite := cel.get_image().get_region(used_rect)
-			Global.current_project.undo_redo.add_do_property(cel.image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
@@ -574,17 +570,16 @@ func crop_image() -> void:
 func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> void:
 	general_do_scale(width, height)
 	for f in Global.current_project.frames:
-		for c in f.cels:
-			if not c is PixelCel:
+		for cel in f.cels:
+			if not cel is PixelCel:
 				continue
 			var sprite := Image.create(width, height, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(
-				c.get_image(),
+				cel.get_image(),
 				Rect2i(Vector2i.ZERO, Global.current_project.size),
 				Vector2i(offset_x, offset_y)
 			)
-			Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
@@ -594,10 +589,6 @@ func general_do_scale(width: int, height: int) -> void:
 	var size := Vector2i(width, height)
 	var x_ratio := float(project.size.x) / width
 	var y_ratio := float(project.size.y) / height
-
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy.crop(size.x, size.y)
 
 	var new_x_symmetry_point := project.x_symmetry_point / x_ratio
 	var new_y_symmetry_point := project.y_symmetry_point / y_ratio
@@ -611,7 +602,7 @@ func general_do_scale(width: int, height: int) -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Scale")
 	project.undo_redo.add_do_property(project, "size", size)
-	project.undo_redo.add_do_property(project, "selection_map", selection_map_copy)
+	project.undo_redo.add_do_method(project.selection_map.crop.bind(size.x, size.y))
 	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
 	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
 	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
@@ -621,7 +612,9 @@ func general_do_scale(width: int, height: int) -> void:
 func general_undo_scale() -> void:
 	var project := Global.current_project
 	project.undo_redo.add_undo_property(project, "size", project.size)
-	project.undo_redo.add_undo_property(project, "selection_map", project.selection_map)
+	project.undo_redo.add_undo_method(
+		project.selection_map.crop.bind(project.size.x, project.size.y)
+	)
 	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
 	project.undo_redo.add_undo_property(project, "y_symmetry_point", project.y_symmetry_point)
 	project.undo_redo.add_undo_property(

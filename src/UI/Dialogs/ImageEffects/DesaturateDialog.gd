@@ -5,7 +5,7 @@ var green := true
 var blue := true
 var alpha := false
 
-var shader := preload("res://src/Shaders/Desaturate.gdshader")
+var shader := preload("res://src/Shaders/Effects/Desaturate.gdshader")
 
 
 func _ready() -> void:
@@ -29,7 +29,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		await gen.done
 
 
 func _on_RButton_toggled(button_pressed: bool) -> void:

@@ -119,11 +119,7 @@ func draw_start(pos: Vector2i) -> void:
 						selection_node.big_bounding_rectangle.position
 					)
 
-				var selection_map_copy := SelectionMap.new()
-				selection_map_copy.copy_from(project.selection_map)
-				selection_map_copy.move_bitmap_values(project)
-
-				project.selection_map = selection_map_copy
+				project.selection_map.move_bitmap_values(project)
 				selection_node.commit_undo("Move Selection", selection_node.undo_data)
 				selection_node.undo_data = selection_node.get_undo_data(true)
 			else:
@@ -244,10 +240,7 @@ func _on_Position_value_changed(value: Vector2i) -> void:
 	timer.start()
 	selection_node.big_bounding_rectangle.position = value
 
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy.move_bitmap_values(project)
-	project.selection_map = selection_map_copy
+	project.selection_map.move_bitmap_values(project)
 	project.selection_map_changed()
 
 

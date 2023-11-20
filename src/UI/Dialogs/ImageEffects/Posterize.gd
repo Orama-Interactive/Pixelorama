@@ -1,6 +1,6 @@
 extends ImageEffect
 
-var shader := preload("res://src/Shaders/Posterize.gdshader")
+var shader := preload("res://src/Shaders/Effects/Posterize.gdshader")
 var levels := 2.0
 var dither := 0.0
 
@@ -25,7 +25,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		await gen.done
 
 
 func _on_LevelsSlider_value_changed(value: float) -> void:

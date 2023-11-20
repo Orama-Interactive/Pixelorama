@@ -28,14 +28,14 @@ enum BlendModes {
 	LUMINOSITY  ## Uses the blend luminosity while preserving the base hue and saturation.
 }
 
-var name := ""
-var project: Project
-var index: int
-var parent: BaseLayer
-var blend_mode := BlendModes.NORMAL
-var visible := true
-var locked := false
-var new_cels_linked := false
+var name := ""  ## Name of the layer.
+var project: Project  ## Project, the layer belongs to.
+var index: int  ##  Index of layer in the timeline.
+var parent: BaseLayer  ##  Parent of the layer.
+var visible := true  ##  Sets visibility of the layer.
+var locked := false  ##  Images of a locked layer won't be overritten.
+var new_cels_linked := false  ##  Determines if new cel of the layer should be linked or not.
+var blend_mode := BlendModes.NORMAL  ##  Blend mode of the current layer.
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
 
 
@@ -48,6 +48,8 @@ func is_ancestor_of(layer: BaseLayer) -> bool:
 	return false
 
 
+## Returns an [Array] of layers that are children of this layer.
+## The process is recursive if [param recursive] is [code]true[/code].
 func get_children(recursive: bool) -> Array[BaseLayer]:
 	var children: Array[BaseLayer] = []
 	if recursive:
@@ -61,6 +63,8 @@ func get_children(recursive: bool) -> Array[BaseLayer]:
 	return children
 
 
+## Returns the number of child nodes.
+## The process is recursive if [param recursive] is [code]true[/code].
 func get_child_count(recursive: bool) -> int:
 	var count := 0
 	if recursive:
@@ -74,36 +78,46 @@ func get_child_count(recursive: bool) -> int:
 	return count
 
 
+## Tells if the layer has child layers ([code]true[/code]) or not ([code]false[/code]).
 func has_children() -> bool:
 	if index == 0:
 		return false
 	return project.layers[index - 1].parent == self
 
 
+## Tells if the layer is expanded ([code]true[/code]) or collapsed ([code]false[/code])
+## in the hierarchy.
 func is_expanded_in_hierarchy() -> bool:
 	if is_instance_valid(parent):
+		# "expanded" variable is located in GroupLayer.gd
 		return parent.expanded and parent.is_expanded_in_hierarchy()
 	return true
 
 
+## Tells if the layer's content is visible ([code]true[/code]) or hidden ([code]false[/code])
+## in the layer tree. This is influenced by the eye button.
 func is_visible_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and visible:
 		return parent.is_visible_in_hierarchy()
 	return visible
 
 
+## Tells if the layer's content is locked ([code]true[/code]) or not ([code]false[/code])
+## in the layer tree. This is influenced by the lock button.
 func is_locked_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and not locked:
 		return parent.is_locked_in_hierarchy()
 	return locked
 
 
+## Returns the number of parents above this layer.
 func get_hierarchy_depth() -> int:
 	if is_instance_valid(parent):
 		return parent.get_hierarchy_depth() + 1
 	return 0
 
 
+## Returns the path of the layer in the timeline as a [String]
 func get_layer_path() -> String:
 	if is_instance_valid(parent):
 		return str(parent.get_layer_path(), "/", name)
@@ -151,6 +165,7 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 # Methods to Override:
 
 
+## Returns a curated [Dictionary] containing the layer data.
 func serialize() -> Dictionary:
 	assert(index == project.layers.find(self))
 	var dict := {
@@ -172,6 +187,7 @@ func serialize() -> Dictionary:
 	return dict
 
 
+## Sets the layer data according to a curated [Dictionary] obtained from [method serialize].
 func deserialize(dict: Dictionary) -> void:
 	name = dict.name
 	visible = dict.visible
@@ -194,25 +210,33 @@ func deserialize(dict: Dictionary) -> void:
 			cel_link_sets.append(link_set)
 
 
+## Returns a layer type that is one of the [param LayerTypes]
+## enum in ["src/Autoload/Global.gd"] Autoload.
 func get_layer_type() -> int:
 	return -1
 
 
+## Returns a new empty [BaseCel]
 func new_empty_cel() -> BaseCel:
 	return null
 
 
+## Sets layer name to the default name followed by [param number].
 func set_name_to_default(number: int) -> void:
 	name = tr("Layer") + " %s" % number
 
 
+## Tells if the user is allowed to draw on current layer ([code]true[/code])
+## or not ([code]false[/code]).
 func can_layer_get_drawn() -> bool:
 	return false
 
 
+## Tells if the layer allows child layers ([code]true[/code]) or not ([code]true[/code])
 func accepts_child(_layer: BaseLayer) -> bool:
 	return false
 
 
+## Returns an instance of the layer button that will be added to the timeline.
 func instantiate_layer_button() -> Node:
 	return null

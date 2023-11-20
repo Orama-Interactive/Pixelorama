@@ -6,10 +6,9 @@ extends ConfirmationDialog
 enum { SELECTED_CELS, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
 var affect: int = SELECTED_CELS
-var selected_cels: Image
-var current_frame: Image
+var selected_cels := Image.create(1, 1, false, Image.FORMAT_RGBA8)
+var current_frame := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 var preview_image := Image.new()
-var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
@@ -23,12 +22,6 @@ func _ready() -> void:
 	set_nodes()
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	current_frame = Image.create(
-		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
-	)
-	selected_cels = Image.create(
-		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
-	)
 	about_to_popup.connect(_about_to_popup)
 	visibility_changed.connect(_visibility_changed)
 	confirmed.connect(_confirmed)
@@ -155,10 +148,7 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	for image in redo_data:
-		project.undo_redo.add_do_property(image, "data", redo_data[image])
-	for image in undo_data:
-		project.undo_redo.add_undo_property(image, "data", undo_data[image])
+	Global.undo_redo_compress_images(redo_data, undo_data, project)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, -1, -1, project))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, -1, -1, project))
 	project.undo_redo.commit_action()
@@ -219,8 +209,7 @@ func update_preview() -> void:
 			preview_image.copy_from(current_frame)
 	commit_idx = _preview_idx
 	commit_action(preview_image)
-	preview_texture = ImageTexture.create_from_image(preview_image)
-	preview.texture = preview_texture
+	preview.texture = ImageTexture.create_from_image(preview_image)
 
 
 func update_transparent_background_size() -> void:
@@ -240,4 +229,10 @@ func update_transparent_background_size() -> void:
 
 
 func _visibility_changed() -> void:
+	if visible:
+		return
 	Global.dialog_open(false)
+	# Resize the images to (1, 1) so they do not waste unneeded RAM
+	selected_cels.resize(1, 1)
+	current_frame.resize(1, 1)
+	preview_image = Image.new()

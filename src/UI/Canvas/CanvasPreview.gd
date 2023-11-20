@@ -2,12 +2,24 @@ extends Node2D
 
 enum Mode { TIMELINE, SPRITESHEET }
 var mode := Mode.TIMELINE
-
+## Use this material only when the animation of the canvas preview is playing
+## This way we optimize drawing when the frame being shown is the same as the main canvas
+var animation_material := material as ShaderMaterial
 var h_frames := 1
 var v_frames := 1
 var start_sprite_sheet_frame := 1
 var end_sprite_sheet_frame := 1
-var frame_index := 0
+var frame_index := 0:
+	set(value):
+		frame_index = value
+		if mode == Mode.SPRITESHEET:
+			return
+		if frame_index == Global.current_project.current_frame:  # Animation not playing
+			if material != Global.canvas.material:
+				material = Global.canvas.material
+		else:  # The animation of the canvas preview is playing
+			if material != animation_material:
+				material = animation_material
 
 @onready var animation_timer := $AnimationTimer as Timer
 @onready var transparent_checker = get_parent().get_node("TransparentChecker") as ColorRect
@@ -15,6 +27,7 @@ var frame_index := 0
 
 func _ready() -> void:
 	Global.cel_changed.connect(_cel_changed)
+	material = Global.canvas.material
 
 
 func _draw() -> void:
@@ -27,8 +40,16 @@ func _draw() -> void:
 				frame_index = project.current_frame
 			var frame := project.frames[frame_index]
 			animation_timer.wait_time = frame.duration * (1.0 / project.fps)
-			var texture := frame.cels[0].image_texture
-			draw_texture(texture, Vector2.ZERO)  # Placeholder so we can have a material here
+			# If we just use the first cel and it happens to be a GroupCel
+			# nothing will get drawn
+			var cel_to_draw := Global.current_project.find_first_drawable_cel(frame)
+			# Placeholder so we can have a material here
+			if is_instance_valid(cel_to_draw):
+				draw_texture(cel_to_draw.image_texture, Vector2.ZERO)
+			if material == animation_material:
+				# Only use a unique material if the animation of the canvas preview is playing
+				# Otherwise showing a different frame than the main canvas is impossible
+				_draw_layers()
 		Mode.SPRITESHEET:
 			var image := project.frames[project.current_frame].cels[0].get_image()
 			var slices := _split_spritesheet(image, h_frames, v_frames)
@@ -41,11 +62,13 @@ func _draw() -> void:
 				frame_index = start_sprite_sheet_frame - 1
 			var src_rect := slices[frame_index]
 			var rect := Rect2(Vector2.ZERO, src_rect.size)
-			var texture := project.frames[project.current_frame].cels[0].image_texture
+			# If we just use the first cel and it happens to be a GroupCel
+			# nothing will get drawn
+			var cel_to_draw := Global.current_project.find_first_drawable_cel()
 			# Placeholder so we can have a material here
-			draw_texture_rect_region(texture, rect, src_rect)
+			if is_instance_valid(cel_to_draw):
+				draw_texture_rect_region(cel_to_draw.image_texture, rect, src_rect)
 			transparent_checker.fit_rect(rect)
-	_draw_layers()
 
 
 func _draw_layers() -> void:
