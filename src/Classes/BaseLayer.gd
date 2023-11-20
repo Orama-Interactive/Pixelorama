@@ -29,13 +29,13 @@ enum BlendModes {
 }
 
 var name := ""  ## Name of the layer.
-var project: Project  ## The Project the layer belongs to.
-var index: int  ##  Index of layer in the timeline.
-var parent: BaseLayer  ##  Parent of the layer.
-var visible := true  ##  Sets visibility of the layer.
-var locked := false  ##  Images of a locked layer won't be overritten.
-var new_cels_linked := false  ##  Determines if new cel of the layer should be linked or not.
-var blend_mode := BlendModes.NORMAL  ##  Blend mode of the current layer.
+var project: Project  ## The project the layer belongs to.
+var index: int  ## Index of layer in the timeline.
+var parent: BaseLayer  ## Parent of the layer.
+var visible := true  ## Sets visibility of the layer.
+var locked := false  ## Images of a locked layer won't be overritten.
+var new_cels_linked := false  ## Determines if new cel of the layer should be linked or not.
+var blend_mode := BlendModes.NORMAL  ## Blend mode of the current layer.
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
 var effects: Array[LayerEffect]  ## An array for non-destructive effects of the layer.
 var effects_enabled := true  ## If [code]true[/code], the effects are being applied.
