@@ -845,7 +845,7 @@ func select_all() -> void:
 	commit_undo("Select", undo_data_tmp)
 
 
-## Inverts the selection gizmo.
+## Inverts the selection.
 func invert() -> void:
 	transform_content_confirm()
 	var project := Global.current_project
@@ -858,7 +858,7 @@ func invert() -> void:
 	commit_undo("Select", undo_data_tmp)
 
 
-## Clears the selection gizmo.
+## Clears the selection.
 func clear_selection(use_undo := false) -> void:
 	var project := Global.current_project
 	if !project.has_selection:

@@ -422,7 +422,7 @@ class ToolAPI:
 
 ## Gives access to pixelorama's selection system.
 class SelectionAPI:
-	## Clears the selection gizmo.
+	## Clears the selection.
 	func clear_selection() -> void:
 		Global.canvas.selection.clear_selection(true)
 
@@ -471,7 +471,7 @@ class SelectionAPI:
 		if not transform_standby and with_content:
 			Global.canvas.selection.transform_content_confirm()
 
-	## Inverts the selection gizmo.
+	## Inverts the selection.
 	func invert() -> void:
 		Global.canvas.selection.invert()
 
