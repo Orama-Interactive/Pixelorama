@@ -430,8 +430,8 @@ class ProjectAPI:
 
 	func get_cel_at(project: Project, frame: int, layer: int) -> BaseCel:
 		# frames from left to right, layers from bottom to top
-		clamp(frame, 0, project.frames.size() - 1)
-		clamp(layer, 0, project.layers.size() - 1)
+		frame = clamp(frame, 0, project.frames.size() - 1)
+		layer = clamp(layer, 0, project.layers.size() - 1)
 		return project.frames[frame].cels[layer]
 
 	func set_pixelcel_image(image: Image, frame: int, layer: int) -> void:
