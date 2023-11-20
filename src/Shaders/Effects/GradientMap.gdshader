@@ -1,7 +1,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform sampler2D gradient_map;  // GradientTexture
+uniform sampler2D gradient_map : filter_nearest;  // GradientTexture
 uniform sampler2D selection;
 
 void fragment() {
