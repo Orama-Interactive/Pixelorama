@@ -499,6 +499,13 @@ class SelectionAPI:
 
 ## Gives access to basic project manipulation functions.
 class ProjectAPI:
+	## The project currently in focus
+	var current_project: Project:
+		set(value):
+			Global.tabs.current_tab = Global.projects.find(value)
+		get:
+			return Global.current_project
+
 	## Creates a new project (with new tab) with name [param name], size [param size],
 	## fill color [param fill_color] and frames [param frames]. The created project also
 	## gets returned.[br][br]
@@ -521,36 +528,44 @@ class ProjectAPI:
 		Global.projects.append(new_proj)
 		return new_proj
 
-	## Switches to the tab that contains the [param project].
-	func switch_to(project: Project):
-		Global.tabs.current_tab = Global.projects.find(project)
-
-	## Returns the project in focus.
-	func get_current_project() -> Project:
-		return Global.current_project
-
 	## Returns a dictionary containing all the project information.
 	func get_project_info(project: Project) -> Dictionary:
 		return project.serialize()
+
+	## Selects the cels and makes the last entry of [param selected_array] as the current cel
+	## [param selected_array] is an [Array] of [Arrays] of 2 integers (frame & layer).[br]
+	## Frames are counted from left to right, layers are counted from bottom to top.
+	## Frames/layers start at "0" and end at [param project.frames.size() - 1] and
+	## [param project.layers.size() - 1] respectively.
+	func select_cels(selected_array := [[0, 0]]):
+		var project := Global.current_project
+		project.selected_cels.clear()
+		for cel_position in selected_array:
+			if typeof(cel_position) == TYPE_ARRAY and cel_position.size() == 2:
+				var frame = clampi(cel_position[0], 0, project.frames.size() - 1)
+				var layer = clampi(cel_position[1], 0, project.layers.size() - 1)
+				if not [frame, layer] in project.selected_cels:
+					project.selected_cels.append([frame, layer])
+		project.change_cel(project.selected_cels[-1][0], project.selected_cels[-1][1])
 
 	## Returns the current cel.
 	## Cel type can be checked using function [method get_class_name] inside the cel
 	## type can be GroupCel, PixelCel, Cel3D, or BaseCel.
 	func get_current_cel() -> BaseCel:
-		return get_current_project().get_current_cel()
+		return current_project.get_current_cel()
 
 	## Frames are counted from left to right, layers are counted from bottom to top.
 	## Frames/layers start at "0" and end at [param project.frames.size() - 1] and
 	## [param project.layers.size() - 1] respectively.
 	func get_cel_at(project: Project, frame: int, layer: int) -> BaseCel:
-		clampi(frame, 0, project.frames.size() - 1)
-		clampi(layer, 0, project.layers.size() - 1)
+		frame = clampi(frame, 0, project.frames.size() - 1)
+		layer = clampi(layer, 0, project.layers.size() - 1)
 		return project.frames[frame].cels[layer]
 
 	## Sets an [param image] at [param frame] and [param layer] on the current project.
 	## Frames are counted from left to right, layers are counted from bottom to top.
 	func set_pixelcel_image(image: Image, frame: int, layer: int) -> void:
-		if get_cel_at(get_current_project(), frame, layer).get_class_name() == "PixelCel":
+		if get_cel_at(current_project, frame, layer).get_class_name() == "PixelCel":
 			OpenSave.open_image_at_cel(image, layer, frame)
 		else:
 			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
