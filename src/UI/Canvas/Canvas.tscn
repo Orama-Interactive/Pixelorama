@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ba24iuv55m4l3"]
+[gd_scene load_steps=21 format=3 uid="uid://ba24iuv55m4l3"]
 
 [ext_resource type="Script" path="res://src/UI/Canvas/Canvas.gd" id="1"]
 [ext_resource type="Shader" path="res://src/Shaders/BlendLayers.gdshader" id="1_253dh"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://src/UI/Canvas/OnionSkinning.gd" id="12"]
 [ext_resource type="Script" path="res://src/UI/Canvas/CropRect.gd" id="13"]
 [ext_resource type="Script" path="res://src/UI/Canvas/Gizmos3D.gd" id="14"]
+[ext_resource type="Script" path="res://src/UI/Canvas/Measurements.gd" id="16_nxilb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6b0ox"]
 shader = ExtResource("1_253dh")
@@ -90,3 +91,6 @@ script = ExtResource("12")
 
 [node name="Gizmos3D" type="Node2D" parent="."]
 script = ExtResource("14")
+
+[node name="Measurements" type="Node2D" parent="."]
+script = ExtResource("16_nxilb")

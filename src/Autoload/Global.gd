@@ -17,6 +17,7 @@ enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 ## or if it is a custom color.
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
+enum MeasurementMode { NONE, MOVE }
 
 ##  Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }

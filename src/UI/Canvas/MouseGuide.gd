@@ -4,12 +4,18 @@ enum Types { VERTICAL, HORIZONTAL }
 const INPUT_WIDTH := 4
 @export var type := 0
 var track_mouse := true
+var _texture := preload("res://assets/graphics/dotted_line.png")
 
 
 func _ready() -> void:
 	# Add a subtle difference to the normal guide color by mixing in some green
 	default_color = Global.guide_color.lerp(Color(0.2, 0.92, 0.2), .6)
-	width = Global.camera.zoom.x * 2
+	texture = _texture
+	texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	texture_mode = Line2D.LINE_TEXTURE_TILE
+	await get_tree().process_frame
+	await get_tree().process_frame
+	width = 2.0 / Global.camera.zoom.x
 	draw_guide_line()
 
 
@@ -50,7 +56,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
-	width = Global.camera.zoom.x * 2
+	width = 2.0 / Global.camera.zoom.x
 	var viewport_size := Global.main_viewport.size
 	var zoom := Global.camera.zoom
 
@@ -65,13 +71,11 @@ func _draw() -> void:
 			+ Vector2(
 				(
 					Global.camera.offset.x
-					- (viewport_size.rotated(Global.camera.rotation).x / 2) * zoom.x
+					- (viewport_size.rotated(Global.camera.rotation).x / 2) / zoom.x
 				),
 				(
 					Global.camera.offset.y
-					- (viewport_size.rotated(Global.camera.rotation).y / 2) * zoom.y
+					- (viewport_size.rotated(Global.camera.rotation).y / 2) / zoom.y
 				)
 			)
 		)
-
-	draw_set_transform(viewport_poly[0], Global.camera.rotation, zoom * 2)
