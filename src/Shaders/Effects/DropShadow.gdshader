@@ -1,21 +1,21 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform vec2 shadow_offset; // Offset, in pixel coordinate [0, 1, 2, and so on]
-uniform vec4 shadow_color;
+uniform vec2 offset = vec2(5.0, 5.0); // Offset, in pixel coordinate [0, 1, 2, and so on]
+uniform vec4 shadow_color : source_color = vec4(0.08, 0.08, 0.08, 0.63);
 uniform sampler2D selection;
 
 
 void fragment() {
-	vec2 offset = shadow_offset * TEXTURE_PIXEL_SIZE; // Normalize shadow_offset to [0..1]
+	vec2 normalized_offset = offset * TEXTURE_PIXEL_SIZE; // Normalize offset to [0..1]
 	vec4 original = texture(TEXTURE, UV); // Original texture
-	float shadow = texture(TEXTURE, UV - offset).a; // Shadow, alpha only
+	float shadow = texture(TEXTURE, UV - normalized_offset).a; // Shadow, alpha only
 	shadow *= shadow_color.a; // Multiply this mask by shadow alpha
 	shadow = mix(0.0, shadow, texture(selection, UV).a); // Clip shadow by selection mask
 	shadow = mix(shadow, 0.0, original.a); // Erase shadow alpha on original area
 
 	// Make a border to prevent stretching pixels on the edge
-	vec2 border_uv = UV - offset;
+	vec2 border_uv = UV - normalized_offset;
 	border_uv -= 0.5;
 	border_uv *= 2.0;
 	border_uv = abs(border_uv);

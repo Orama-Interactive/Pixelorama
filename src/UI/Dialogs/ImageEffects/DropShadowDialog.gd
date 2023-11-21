@@ -32,9 +32,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
 	var params := {
-		"shadow_offset": Vector2(offset_x, offset_y),
-		"shadow_color": color,
-		"selection": selection_tex,
+		"offset": Vector2(offset_x, offset_y), "shadow_color": color, "selection": selection_tex
 	}
 	if !has_been_confirmed:
 		for param in params:

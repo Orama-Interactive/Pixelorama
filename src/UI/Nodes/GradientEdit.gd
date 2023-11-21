@@ -100,6 +100,8 @@ class GradientCursor:
 
 func _ready() -> void:
 	_create_cursors()
+	%InterpolationOptionButton.select(gradient.interpolation_mode)
+	%ColorSpaceOptionButton.select(gradient.interpolation_color_space)
 
 
 func _create_cursors() -> void:
@@ -163,12 +165,18 @@ func get_gradient_color(x: float) -> Color:
 	return gradient.sample(x / x_offset)
 
 
+func set_gradient_texture(new_texture: GradientTexture2D) -> void:
+	$TextureRect.texture = new_texture
+	texture = new_texture
+	gradient = texture.gradient
+
+
 func _on_ColorPicker_color_changed(color: Color) -> void:
 	active_cursor.set_color(color)
 
 
 func _on_GradientEdit_resized() -> void:
-	if not gradient:
+	if not is_instance_valid(texture_rect):
 		return
 	x_offset = size.x - GradientCursor.WIDTH
 	_create_cursors()
@@ -176,10 +184,12 @@ func _on_GradientEdit_resized() -> void:
 
 func _on_InterpolationOptionButton_item_selected(index: Gradient.InterpolationMode) -> void:
 	gradient.interpolation_mode = index
+	updated.emit(gradient, continuous_change)
 
 
 func _on_color_space_option_button_item_selected(index: Gradient.ColorSpace) -> void:
 	gradient.interpolation_color_space = index
+	updated.emit(gradient, continuous_change)
 
 
 func _on_DivideButton_pressed() -> void:

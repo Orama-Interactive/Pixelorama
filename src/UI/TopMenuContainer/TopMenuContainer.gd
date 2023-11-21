@@ -129,6 +129,7 @@ func _setup_view_menu() -> void:
 		"Show Rulers": "show_rulers",
 		"Show Guides": "show_guides",
 		"Show Mouse Guides": "",
+		"Display Layer Effects": &"display_layer_effects",
 		"Snap To": "",
 	}
 	view_menu = view_menu_button.get_popup()
@@ -145,6 +146,7 @@ func _setup_view_menu() -> void:
 			_set_menu_shortcut(view_menu_items[item], view_menu, i)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
+	view_menu.set_item_checked(Global.ViewMenu.DISPLAY_LAYER_EFFECTS, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.id_pressed.connect(view_menu_id_pressed)
 
@@ -346,7 +348,7 @@ func _setup_help_menu() -> void:
 	help_menu.id_pressed.connect(help_menu_id_pressed)
 
 
-func _set_menu_shortcut(action: String, menu: PopupMenu, index: int) -> void:
+func _set_menu_shortcut(action: StringName, menu: PopupMenu, index: int) -> void:
 	if action.is_empty():
 		return
 	var shortcut := Shortcut.new()
@@ -497,6 +499,8 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_guides()
 		Global.ViewMenu.SHOW_MOUSE_GUIDES:
 			_toggle_show_mouse_guides()
+		Global.ViewMenu.DISPLAY_LAYER_EFFECTS:
+			Global.display_layer_effects = not Global.display_layer_effects
 		_:
 			_handle_metadata(id, view_menu_button)
 

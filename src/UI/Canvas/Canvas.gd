@@ -120,7 +120,8 @@ func update_selected_cels_textures(project := Global.current_project) -> void:
 
 
 func draw_layers() -> void:
-	var current_cels := Global.current_project.frames[Global.current_project.current_frame].cels
+	var current_frame := Global.current_project.frames[Global.current_project.current_frame]
+	var current_cels := current_frame.cels
 	var textures: Array[Image] = []
 	var opacities := PackedFloat32Array()
 	var blend_modes := PackedInt32Array()
@@ -131,7 +132,11 @@ func draw_layers() -> void:
 			continue
 		var layer := Global.current_project.layers[i]
 		if layer.is_visible_in_hierarchy():
-			var cel_image := current_cels[i].get_image()
+			var cel_image: Image
+			if Global.display_layer_effects:
+				cel_image = layer.display_effects(current_cels[i])
+			else:
+				cel_image = current_cels[i].get_image()
 			textures.append(cel_image)
 			opacities.append(current_cels[i].opacity)
 			if [Global.current_project.current_frame, i] in Global.current_project.selected_cels:
