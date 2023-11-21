@@ -57,10 +57,8 @@ mouse_filter = 2
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource("28")]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource("12")]
-show_hidden_files = true
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource("11")]
-show_hidden_files = true
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource("8")]
 
