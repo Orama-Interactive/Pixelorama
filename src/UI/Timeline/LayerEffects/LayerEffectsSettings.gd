@@ -88,11 +88,10 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	delete_button.pressed.connect(_delete_effect.bind(effect))
 	hbox.add_child(enable_checkbox)
 	hbox.add_child(label)
-	var current_cel := Global.current_project.get_current_cel()
-	if current_cel is PixelCel:
+	if layer is PixelLayer:
 		var apply_button := Button.new()
 		apply_button.text = "Apply"
-		apply_button.pressed.connect(_apply_effect.bind(layer, current_cel, effect))
+		apply_button.pressed.connect(_apply_effect.bind(layer, effect))
 		hbox.add_child(apply_button)
 	hbox.add_child(move_up_button)
 	hbox.add_child(move_down_button)
@@ -165,16 +164,22 @@ func _delete_effect(effect: LayerEffect) -> void:
 	effect_container.get_child(index).queue_free()
 
 
-func _apply_effect(layer: BaseLayer, cel: BaseCel, effect: LayerEffect) -> void:
+func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	var index := layer.effects.find(effect)
-	var new_image := Image.new()
-	new_image.copy_from(cel.get_image())
-	var image_size := new_image.get_size()
-	var shader_image_effect := ShaderImageEffect.new()
-	shader_image_effect.generate_image(new_image, effect.shader, effect.params, image_size)
+	var redo_data := {}
+	var undo_data := {}
+	for frame in Global.current_project.frames:
+		var cel := frame.cels[layer.index]
+		var new_image := Image.new()
+		new_image.copy_from(cel.get_image())
+		var image_size := new_image.get_size()
+		var shader_image_effect := ShaderImageEffect.new()
+		shader_image_effect.generate_image(new_image, effect.shader, effect.params, image_size)
+		redo_data[cel.image] = new_image.data
+		undo_data[cel.image] = cel.image.data
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Apply layer effect")
-	Global.undo_redo_compress_images({cel.image: new_image.data}, {cel.image: cel.image.data})
+	Global.undo_redo_compress_images(redo_data, undo_data)
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
