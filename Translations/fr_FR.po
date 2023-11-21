@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-10-22 15:13\n"
+"PO-Revision-Date: 2023-11-21 23:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -321,6 +321,10 @@ msgstr "Afficher les guides"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Afficher les Guides de Souris"
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -1684,6 +1688,9 @@ msgstr "Zoom avant"
 msgid "Zoom out"
 msgstr "Zoom arrière"
 
+msgid "Options"
+msgstr ""
+
 msgid "Options:"
 msgstr "Options :"
 
@@ -2786,4 +2793,16 @@ msgstr "Silhouette"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr "Noircit l'image et donne une couleur foncée à tous les pixels opaques."
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr ""
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr ""
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
+msgstr ""
 
