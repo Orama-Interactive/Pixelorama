@@ -45,9 +45,16 @@ func _on_visibility_changed() -> void:
 func _on_effect_list_id_pressed(index: int) -> void:
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var effect := effects[index].duplicate()
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Add layer effect")
+	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
+	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.erase(effect))
+	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	Global.current_project.undo_redo.commit_action()
 	_create_effect_ui(layer, effect)
-	layer.effects.append(effect)
-	Global.canvas.queue_redraw()
 
 
 func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
@@ -81,6 +88,12 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	delete_button.pressed.connect(_delete_effect.bind(effect))
 	hbox.add_child(enable_checkbox)
 	hbox.add_child(label)
+	var current_cel := Global.current_project.get_current_cel()
+	if current_cel is PixelCel:
+		var apply_button := Button.new()
+		apply_button.text = "Apply"
+		apply_button.pressed.connect(_apply_effect.bind(layer, current_cel, effect))
+		hbox.add_child(apply_button)
 	hbox.add_child(move_up_button)
 	hbox.add_child(move_down_button)
 	hbox.add_child(delete_button)
@@ -115,19 +128,61 @@ func _re_order_effect(
 		return
 	if new_index >= effect_container.get_child_count():
 		return
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Re-arrange layer effect")
+	Global.current_project.undo_redo.add_do_method(
+		swap_array.bind(layer.effects, effect_index, new_index, effect)
+	)
+	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	Global.current_project.undo_redo.add_undo_method(
+		swap_array.bind(layer.effects, new_index, effect_index, effect)
+	)
+	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	Global.current_project.undo_redo.commit_action()
 	effect_container.move_child(container, new_index)
-	var temp := layer.effects[new_index]
-	layer.effects[new_index] = effect
-	layer.effects[effect_index] = temp
-	Global.canvas.queue_redraw()
+
+
+func swap_array(array: Array, old_index: int, new_index: int, new_item: Variant) -> void:
+	var temp = array[new_index]
+	array[new_index] = new_item
+	array[old_index] = temp
 
 
 func _delete_effect(effect: LayerEffect) -> void:
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var index := layer.effects.find(effect)
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Delete layer effect")
+	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
+	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
+	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	Global.current_project.undo_redo.commit_action()
 	effect_container.get_child(index).queue_free()
-	layer.effects.remove_at(index)
-	Global.canvas.queue_redraw()
+
+
+func _apply_effect(layer: BaseLayer, cel: BaseCel, effect: LayerEffect) -> void:
+	var index := layer.effects.find(effect)
+	var new_image := Image.new()
+	new_image.copy_from(cel.get_image())
+	var image_size := new_image.get_size()
+	var shader_image_effect := ShaderImageEffect.new()
+	shader_image_effect.generate_image(new_image, effect.shader, effect.params, image_size)
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Apply layer effect")
+	Global.undo_redo_compress_images({cel.image: new_image.data}, {cel.image: cel.image.data})
+	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
+	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
+	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	Global.current_project.undo_redo.commit_action()
+	effect_container.get_child(index).queue_free()
 
 
 func _set_parameter(value, param: String, effect: LayerEffect) -> void:
