@@ -996,6 +996,7 @@ func create_ui_for_shader_uniforms(
 			slider.max_value = max_value
 			slider.step = step
 			slider.value_changed.connect(value_changed.bind(u_name))
+			slider.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(slider)
@@ -1032,6 +1033,7 @@ func create_ui_for_shader_uniforms(
 					params[u_name] = color_button.color
 				color_button.color_changed.connect(value_changed.bind(u_name))
 				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				color_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				var hbox := HBoxContainer.new()
 				hbox.add_child(label)
 				hbox.add_child(color_button)
@@ -1066,6 +1068,7 @@ func create_ui_for_shader_uniforms(
 				button.text = "Load texture"
 				button.pressed.connect(file_dialog.popup_centered)
 				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				hbox.add_child(button)
 				parent_node.add_child(file_dialog)
 			parent_node.add_child(hbox)
@@ -1084,6 +1087,7 @@ func create_ui_for_shader_uniforms(
 				params[u_name] = checkbox.button_pressed
 			checkbox.toggled.connect(value_changed.bind(u_name))
 			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(checkbox)
