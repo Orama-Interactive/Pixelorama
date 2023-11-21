@@ -1624,6 +1624,9 @@ msgstr ""
 msgid "Zoom out"
 msgstr ""
 
+msgid "Options"
+msgstr ""
+
 msgid "Options:"
 msgstr ""
 

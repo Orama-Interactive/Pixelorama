@@ -85,7 +85,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	hbox.add_child(move_down_button)
 	hbox.add_child(delete_button)
 	var parameter_vbox := CollapsibleContainer.new()
-	parameter_vbox.text = "Parameters"
+	parameter_vbox.text = "Options"
 	Global.create_ui_for_shader_uniforms(
 		effect.shader,
 		effect.params,

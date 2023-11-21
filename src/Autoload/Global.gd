@@ -943,7 +943,7 @@ func create_ui_for_shader_uniforms(
 		var u_init := u_left_side[0].split(" ")
 		var u_type := u_init[1]
 		var u_name := u_init[2]
-		var humanized_u_name := Keychain.humanize_snake_case(u_name)
+		var humanized_u_name := Keychain.humanize_snake_case(u_name) + ":"
 
 		if u_type == "float" or u_type == "int":
 			var label := Label.new()

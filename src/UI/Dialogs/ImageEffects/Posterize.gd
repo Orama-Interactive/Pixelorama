@@ -17,7 +17,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	if selection_checkbox.button_pressed and project.has_selection:
 		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
-	var params := {"colors": levels, "dither": dither, "selection": selection_tex}
+	var params := {"colors": levels, "dither_intensity": dither, "selection": selection_tex}
 
 	if !has_been_confirmed:
 		for param in params:
