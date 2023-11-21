@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-10-22 15:14\n"
+"PO-Revision-Date: 2023-11-21 23:11\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -321,6 +321,10 @@ msgstr "Εμφάνιση οδηγών"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Εμφάνιση οδηγών ποντικιού"
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -1684,6 +1688,9 @@ msgstr "Μεγέθυνση"
 msgid "Zoom out"
 msgstr "Σμίκρυνση"
 
+msgid "Options"
+msgstr ""
+
 msgid "Options:"
 msgstr "Επιλογές:"
 
@@ -2786,4 +2793,16 @@ msgstr "Σιλουέτα"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr "Μαυρίζει την εικόνα και κάνει όλα τα αδιαφανή εικονοστοιχεία ένα σκούρο χρώμα."
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr ""
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr ""
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
+msgstr ""
 
