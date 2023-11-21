@@ -125,6 +125,9 @@ func _frame_scroll_changed(_value: float) -> void:
 
 func _on_LayerVBox_resized() -> void:
 	frame_scroll_bar.offset_left = frame_scroll_container.position.x
+	# it doesn't update properly without yields (for the first time after pixelorama starts)
+	await get_tree().process_frame
+	await get_tree().process_frame
 	adjust_scroll_container()
 
 
@@ -322,10 +325,16 @@ func delete_frames(indices := []) -> void:
 
 
 func _on_CopyFrame_pressed() -> void:
-	copy_frames()
+	copy_frames([], -1, false)
 
 
-func copy_frames(indices := [], destination := -1) -> void:
+## Copies frames located at [param indices] and inserts them at [param destination].
+## When [param destination] is -1, the new frames will be placed right next to the last frame in
+## [param destination]. if [param select_all_cels] is [code]true[/code] then all of the new copied
+## cels will be selected, otherwise only the cels corresponding to the original selected cels will
+## get selected.
+## [br]Note: [param indices] must be in ascending order
+func copy_frames(indices := [], destination := -1, select_all_cels := true) -> void:
 	var project := Global.current_project
 
 	if indices.size() == 0:
@@ -354,6 +363,7 @@ func copy_frames(indices := [], destination := -1) -> void:
 		)
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
+	var last_focus_cels = []
 	for f in indices:
 		var src_frame := project.frames[f]
 		var new_frame := Frame.new()
@@ -361,6 +371,8 @@ func copy_frames(indices := [], destination := -1) -> void:
 
 		new_frame.duration = src_frame.duration
 		for l in range(project.layers.size()):
+			if [f, l] in project.selected_cels:
+				last_focus_cels.append([copied_indices[indices.find(f)], l])
 			var src_cel := project.frames[f].cels[l]  # Cel we're copying from, the source
 			var new_cel: BaseCel
 			var selected_id := -1
@@ -402,29 +414,37 @@ func copy_frames(indices := [], destination := -1) -> void:
 				tag.to += 1
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	# Note: temporarily set the selected cels to an empty array (needed for undo/redo)
+	project.undo_redo.add_do_property(Global.current_project, "selected_cels", [])
+	project.undo_redo.add_undo_property(Global.current_project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.add_frames.bind(copied_frames, copied_indices))
 	project.undo_redo.add_undo_method(project.remove_frames.bind(copied_indices))
-	project.undo_redo.add_do_method(project.change_cel.bind(copied_indices[0]))
+	if select_all_cels:
+		var all_new_cels = []
+		# Select all the new frames so that it is easier to move/offset collectively if user wants
+		# To ease animation workflow, new current frame is the first copied frame instead of the last
+		var range_start := copied_indices[-1]
+		var range_end := copied_indices[0]
+		var frame_diff_sign := signi(range_end - range_start)
+		if frame_diff_sign == 0:
+			frame_diff_sign = 1
+		for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
+			for j in range(0, Global.current_project.layers.size()):
+				var frame_layer := [i, j]
+				if !all_new_cels.has(frame_layer):
+					all_new_cels.append(frame_layer)
+		project.undo_redo.add_do_property(Global.current_project, "selected_cels", all_new_cels)
+		project.undo_redo.add_do_method(project.change_cel.bind(range_end))
+	else:
+		project.undo_redo.add_do_property(Global.current_project, "selected_cels", last_focus_cels)
+		project.undo_redo.add_do_method(project.change_cel.bind(copied_indices[0]))
+	project.undo_redo.add_undo_property(
+		Global.current_project, "selected_cels", project.selected_cels
+	)
 	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
-	# Select all the new frames so that it is easier to move/offset collectively if user wants
-	# To ease animation workflow, new current frame is the first copied frame instead of the last
-	var range_start := copied_indices[-1]
-	var range_end := copied_indices[0]
-	var frame_diff_sign := signi(range_end - range_start)
-	if frame_diff_sign == 0:
-		frame_diff_sign = 1
-	for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
-		for j in range(0, Global.current_project.layers.size()):
-			var frame_layer := [i, j]
-			if !Global.current_project.selected_cels.has(frame_layer):
-				Global.current_project.selected_cels.append(frame_layer)
-	Global.current_project.change_cel(range_end, -1)
-	await get_tree().process_frame
-	await get_tree().process_frame
-	adjust_scroll_container()
 
 
 func _on_FrameTagButton_pressed() -> void:

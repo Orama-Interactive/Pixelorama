@@ -1,8 +1,9 @@
 extends PopupMenu
 
+@onready var tag_container: Control = Global.animation_timeline.find_child("TagContainer")
+
 
 func _ready() -> void:
-	var tag_container: Control = Global.animation_timeline.find_child("TagContainer")
 	id_pressed.connect(_on_TagList_id_pressed)
 	tag_container.gui_input.connect(_on_TagContainer_gui_input)
 
@@ -25,9 +26,7 @@ func _on_TagContainer_gui_input(event: InputEvent) -> void:
 			add_icon_item(tex, tag_name)
 		var frame_idx := Global.current_project.current_frame + 2
 		add_separator(str("The pasted frames will start at (Frame ", frame_idx, ")"))
-
-
-#		popup(Rect2(get_global_mouse_position(), Vector2.ONE))
+		popup(Rect2i(tag_container.get_global_mouse_position(), Vector2.ONE))
 
 
 func _on_TagList_id_pressed(id: int) -> void:
