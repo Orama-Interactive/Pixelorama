@@ -336,9 +336,12 @@ func _on_CopyFrame_pressed() -> void:
 ## When [param destination] is -1, the new frames will be placed right next to the last frame in
 ## [param destination]. if [param select_all_cels] is [code]true[/code] then all of the new copied
 ## cels will be selected, otherwise only the cels corresponding to the original selected cels will
-## get selected.
+## get selected. if [param tag_name_from] holds an animation tag then a tag of it's name will be
+## created over the new frames.
 ## [br]Note: [param indices] must be in ascending order
-func copy_frames(indices := [], destination := -1, select_all_cels := true) -> void:
+func copy_frames(
+	indices := [], destination := -1, select_all_cels := true, tag_name_from: AnimationTag = null
+) -> void:
 	var project := Global.current_project
 
 	if indices.size() == 0:
@@ -410,12 +413,22 @@ func copy_frames(indices := [], destination := -1, select_all_cels := true) -> v
 						new_cel.selected = new_cel.get_object_from_id(selected_id)
 			new_frame.cels.append(new_cel)
 
-		for tag in new_animation_tags:  # Loop through the tags to see if the frame is in one
+		# After adding one frame, loop through the tags to see if the frame was in an animation tag
+		for tag in new_animation_tags:
 			if copied_indices[0] >= tag.from && copied_indices[0] <= tag.to:
 				tag.to += 1
 			elif copied_indices[0] < tag.from:
 				tag.from += 1
 				tag.to += 1
+	if tag_name_from:
+		new_animation_tags.append(
+			AnimationTag.new(
+				tag_name_from.name,
+				tag_name_from.color,
+				copied_indices[0] + 1,
+				copied_indices[-1] + 1
+			)
+		)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	# Note: temporarily set the selected cels to an empty array (needed for undo/redo)

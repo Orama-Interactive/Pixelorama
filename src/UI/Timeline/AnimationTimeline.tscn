@@ -938,8 +938,9 @@ mouse_filter = 2
 color = Color(0, 0.741176, 1, 0.501961)
 
 [node name="PasteTagPopup" type="Popup" parent="."]
-size = Vector2i(250, 200)
-min_size = Vector2i(250, 200)
+size = Vector2i(250, 307)
+visible = true
+min_size = Vector2i(250, 0)
 script = ExtResource("12")
 
 [node name="PanelContainer" type="PanelContainer" parent="PasteTagPopup"]
@@ -952,20 +953,45 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="PasteTagPopup/PanelContainer"]
 layout_mode = 2
 
-[node name="ProjectList" type="OptionButton" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Import Tags"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "From: "
+
+[node name="ProjectList" type="OptionButton" parent="PasteTagPopup/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="CreateTags" type="CheckButton" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create new tags"
 
 [node name="Instructions" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Paste content from tag:"
+text = "Available tags:"
 autowrap_mode = 3
 
 [node name="TagList" type="ItemList" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="StartFrame" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [0]]

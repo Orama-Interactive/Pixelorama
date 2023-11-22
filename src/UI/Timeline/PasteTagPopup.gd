@@ -1,10 +1,12 @@
 extends Popup
 
 var from_project: Project
+var create_new_tags := false
 
-@onready var animation_tags_list: ItemList = $PanelContainer/VBoxContainer/TagList
-@onready var from_project_list: OptionButton = $PanelContainer/VBoxContainer/ProjectList
-@onready var start_frame: Label = $PanelContainer/VBoxContainer/StartFrame
+@onready var from_project_list: OptionButton = %ProjectList
+@onready var create_tags: CheckButton = %CreateTags
+@onready var animation_tags_list: ItemList = %TagList
+@onready var start_frame: Label = %StartFrame
 
 
 func _ready() -> void:
@@ -13,6 +15,7 @@ func _ready() -> void:
 	tag_container.connect("gui_input", _on_TagContainer_gui_input)
 	from_project_list.connect("item_selected", _on_FromProject_changed)
 	animation_tags_list.connect("item_selected", _on_TagList_id_pressed)
+	create_tags.connect("toggled", _on_CreateTags_toggled)
 
 
 func refresh_list() -> void:
@@ -24,6 +27,10 @@ func refresh_list() -> void:
 		if tag_title == "":
 			tag_title = "(Untitled)"
 		animation_tags_list.add_item(tag_title, tex)
+
+
+func _on_CreateTags_toggled(pressed: bool) -> void:
+	create_new_tags = pressed
 
 
 func _on_TagContainer_gui_input(event: InputEvent) -> void:
@@ -43,7 +50,7 @@ func _on_TagContainer_gui_input(event: InputEvent) -> void:
 		refresh_list()
 		var frame_idx := Global.current_project.current_frame + 2
 		start_frame.text = str("The pasted frames will start at (Frame ", frame_idx, ")")
-		popup(Rect2i(Global.control.get_global_mouse_position(), size))
+		popup(Rect2i(Global.control.get_global_mouse_position(), Vector2i.ONE))
 
 
 func _on_FromProject_changed(id: int) -> void:
@@ -56,15 +63,18 @@ func _on_TagList_id_pressed(id: int) -> void:
 	var frames = []
 	for i in range(tag.from - 1, tag.to):
 		frames.append(i)
-	add_animation(frames, Global.current_project.current_frame)
+	if create_new_tags:
+		add_animation(frames, Global.current_project.current_frame, tag)
+	else:
+		add_animation(frames, Global.current_project.current_frame)
 	hide()
 
 
 ## Gets frame indices of [member from_project] and dumps it in the current project.
-func add_animation(indices: Array, destination: int):
+func add_animation(indices: Array, destination: int, from_tag: AnimationTag = null):
 	var project: Project = Global.current_project
 	if from_project == project:  ## If we are copying tags within project
-		Global.animation_timeline.copy_frames(indices, destination)
+		Global.animation_timeline.copy_frames(indices, destination, true, from_tag)
 		return
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -110,7 +120,6 @@ func add_animation(indices: Array, destination: int):
 		var from_layers_size = layer_from_to.keys().duplicate(true)
 		from_layers_size.sort()  # it's values should now be from (layer size - 1) to zero
 		for i in from_layers_size:
-			var queue_add_parents := {}
 			if layer_from_to[i] == -1:
 				var type = from_project.layers[i].get_layer_type()
 				var l: BaseLayer
@@ -189,6 +198,12 @@ func add_animation(indices: Array, destination: int):
 			elif copied_indices[0] < tag.from:
 				tag.from += 1
 				tag.to += 1
+	if from_tag:
+		new_animation_tags.append(
+			AnimationTag.new(
+				from_tag.name, from_tag.color, copied_indices[0] + 1, copied_indices[-1] + 1
+			)
+		)
 	project.undo_redo.add_undo_method(project.remove_frames.bind(copied_indices))
 	project.undo_redo.add_do_method(project.add_layers.bind(added_layers, added_idx, added_cels))
 	project.undo_redo.add_do_method(project.add_frames.bind(imported_frames, copied_indices))
