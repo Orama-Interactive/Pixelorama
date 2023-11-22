@@ -951,6 +951,8 @@ func create_ui_for_shader_uniforms(
 			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var slider := ValueSlider.new()
+			slider.allow_greater = true
+			slider.allow_lesser = true
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var min_value := 0.0
 			var max_value := 255.0
@@ -1008,6 +1010,8 @@ func create_ui_for_shader_uniforms(
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var vector2 := _vec2str_to_vector2(u_value)
 			var slider := VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
+			slider.allow_greater = true
+			slider.allow_lesser = true
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = vector2
 			if params.has(u_name):
