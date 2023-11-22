@@ -89,9 +89,9 @@ layout_mode = 2
 
 [node name="PlayButton" type="Button" parent="VBox/Animation" groups=["UIButtons"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
