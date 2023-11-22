@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-11-22 16:21\n"
+"PO-Revision-Date: 2023-11-22 17:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1977,23 +1977,23 @@ msgstr "Dividieren"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Komponente"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Farbton"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Sättigung"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Farbe"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Helligkeit"
 
 msgid "Opacity:"
 msgstr "Deckkraft"
