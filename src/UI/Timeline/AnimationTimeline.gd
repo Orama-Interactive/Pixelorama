@@ -18,9 +18,10 @@ var frame_button_node := preload("res://src/UI/Timeline/FrameButton.tscn")
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
 @onready var tag_spacer = find_child("TagSpacer")
 @onready var start_spacer = find_child("StartSpacer")
+@onready var layer_settings_container: VBoxContainer = %LayerSettingsContainer
+@onready var layer_container: VBoxContainer = %LayerContainer
 @onready var add_layer_list: MenuButton = $"%AddLayerList"
 @onready var blend_modes_button := %BlendModes as OptionButton
-
 @onready var timeline_scroll: ScrollContainer = find_child("TimelineScroll")
 @onready var frame_scroll_container: Control = find_child("FrameScrollContainer")
 @onready var frame_scroll_bar: HScrollBar = find_child("FrameScrollBar")
@@ -100,6 +101,9 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		drag_highlight.hide()
+	elif what == NOTIFICATION_THEME_CHANGED:
+		if is_instance_valid(layer_settings_container):
+			layer_container.custom_minimum_size.x = layer_settings_container.size.x
 
 
 func _input(event: InputEvent) -> void:
