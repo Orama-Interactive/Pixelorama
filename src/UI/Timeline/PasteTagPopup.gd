@@ -145,7 +145,8 @@ func add_animation(indices: Array, destination: int):
 			var new_cel: BaseCel
 			if to in layer_from_to.values():
 				var from = layer_from_to.find_key(to)
-				var src_cel: BaseCel = from_project.frames[f].cels[from]  # Cel we're copying from, the source
+				# Cel we're copying from, the source
+				var src_cel: BaseCel = from_project.frames[f].cels[from]
 				var selected_id := -1
 				if src_cel is Cel3D:
 					new_cel = src_cel.get_script().new(
@@ -204,7 +205,9 @@ func add_animation(indices: Array, destination: int):
 			if !all_new_cels.has(frame_layer):
 				all_new_cels.append(frame_layer)
 	project.undo_redo.add_do_property(Global.current_project, "selected_cels", all_new_cels)
-	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame, project.current_layer))
+	project.undo_redo.add_undo_method(
+		project.change_cel.bind(project.current_frame, project.current_layer)
+	)
 	project.undo_redo.add_do_method(project.change_cel.bind(range_end))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
