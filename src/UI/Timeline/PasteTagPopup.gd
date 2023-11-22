@@ -6,8 +6,6 @@ extends Popup
 
 var from_project: Project
 
-@onready var tag_container: Control = Global.animation_timeline.find_child("TagContainer")
-
 
 func _ready() -> void:
 	var tag_container: Control = Global.animation_timeline.find_child("TagContainer")
@@ -68,7 +66,6 @@ func add_animation(indices: Array, destination: int):
 	if from_project == project:  ## If we are copying tags within project
 		Global.animation_timeline.copy_frames(indices, destination)
 		return
-
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as project.animation_tags's classes. Needed for undo/redo to work properly.
@@ -113,9 +110,9 @@ func add_animation(indices: Array, destination: int):
 		var from_layers_size = layer_from_to.keys().duplicate(true)
 		from_layers_size.sort()  # it's values should now be from (layer size - 1) to zero
 		for i in from_layers_size:
+			var queue_add_parents := {}
 			if layer_from_to[i] == -1:
 				var type = from_project.layers[i].get_layer_type()
-				var current_layer = combined_copy[-1]
 				var l: BaseLayer
 				match type:
 					Global.LayerTypes.PIXEL:
@@ -127,15 +124,22 @@ func add_animation(indices: Array, destination: int):
 				var cels := []
 				for f in project.frames:
 					cels.append(l.new_empty_cel())
-
-				var new_layer_idx = combined_copy.size()
-				l.parent = current_layer.parent
 				l.name = from_project.layers[i].name  # this will set it to the required layer name
+
+				# Set an appropriate parent
+				var new_layer_idx = combined_copy.size()
 				layer_from_to[i] = new_layer_idx
+				var from_children = from_project.layers[i].get_children(false)
+				for from_child in from_children:  # If this layer had children
+					var child_to_idx = layer_from_to[from_project.layers.find(from_child)]
+					var to_child = combined_copy[child_to_idx]
+					if to_child in added_layers:  # if child was added recently
+						to_child.parent = l
+
 				combined_copy.insert(new_layer_idx, l)
-				added_layers.append(l)
-				added_idx.append(new_layer_idx)
-				added_cels.append(cels)
+				added_layers.append(l)  # layer is now added
+				added_idx.append(new_layer_idx)  # at index new_layer_idx
+				added_cels.append(cels)  # with cels
 
 	# Now initiate import
 	for f in indices:
