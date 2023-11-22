@@ -110,41 +110,6 @@ func add_animation(indices: Array, destination: int):
 
 	if layer_from_to.values().count(-1) > 0:
 		# As it is extracted from a dictionary, so i assume the keys aren't sorted
-			new_animation_tags[i].color,
-			new_animation_tags[i].from,
-			new_animation_tags[i].to
-		)
-	var imported_frames: Array[Frame] = []  # The copied frames
-	# the indices of newly copied frames
-	var copied_indices: PackedInt32Array = range(
-		destination + 1, (destination + 1) + indices.size()
-	)
-	project.undos += 1
-	project.undo_redo.create_action("Import Tag")
-	# Step 1: calculate layers to generate
-	var layer_to_names := PackedStringArray()  # names of currently existing layers
-	for l in project.layers:
-		layer_to_names.append(l.name)
-
-	# the goal of this section is to mark existing layers with their indices else with -1
-	var layer_from_to := {}  # indices of layers from and to
-	for from in from_project.layers.size():
-		var to = layer_to_names.find(from_project.layers[from].name)
-		if project.layers[to].get_layer_type() != from_project.layers[from].get_layer_type():
-			to = -1
-		if to in layer_from_to.values():  # from_project has layers with duplicate frames
-			to = -1
-		layer_from_to[from] = to
-
-	# Step 2: generate required layers
-	var combined_copy := Array()  # Makes calculations easy
-	combined_copy.append_array(project.layers)
-	var added_layers := Array()  # Array of layers
-	var added_idx := Array()  # Array of indices to add the respective layers (in added_layers) to
-	var added_cels := Array()  # Array of an Array of cels (added in same order as their layer)
-
-	if layer_from_to.values().count(-1) > 0:
-		# As it is extracted from a dictionary, so i assume the keys aren't sorted
 		var from_layers_size = layer_from_to.keys().duplicate(true)
 		from_layers_size.sort()  # it's values should now be from (layer size - 1) to zero
 		for i in from_layers_size:
