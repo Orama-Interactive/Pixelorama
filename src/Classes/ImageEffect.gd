@@ -43,6 +43,8 @@ func _about_to_popup() -> void:
 
 # prepares "animate_panel.frames" according to affect
 func prepare_animator(project: Project) -> void:
+	if not is_instance_valid(animate_panel):
+		return
 	var frames: PackedInt32Array = []
 	if affect == SELECTED_CELS:
 		for frame_layer in project.selected_cels:

@@ -6,10 +6,12 @@
 
 [node name="Posterize" instance=ExtResource("1")]
 title = "Posterize"
+position = Vector2i(0, 36)
+size = Vector2i(360, 348)
 script = ExtResource("3")
 
 [node name="VBoxContainer" parent="." index="3"]
-offset_bottom = 316.0
+offset_bottom = 299.0
 
 [node name="ShowAnimate" parent="VBoxContainer" index="0"]
 visible = false

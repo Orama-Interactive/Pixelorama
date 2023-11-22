@@ -907,9 +907,10 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undo_redo.create_action("Merge Layer")
 
 	for frame in project.frames:
-		top_cels.append(frame.cels[top_layer.index])  # Store for undo purposes
+		var top_cel := frame.cels[top_layer.index]
+		top_cels.append(top_cel)  # Store for undo purposes
 
-		var top_image := frame.cels[top_layer.index].get_image()
+		var top_image := top_layer.display_effects(top_cel)
 		var bottom_cel := frame.cels[bottom_layer.index]
 		var textures: Array[Image] = []
 		var opacities := PackedFloat32Array()
@@ -1094,3 +1095,8 @@ func project_cel_removed(frame: int, layer: int) -> void:
 	var cel_hbox := Global.cel_vbox.get_child(Global.cel_vbox.get_child_count() - 1 - layer)
 	cel_hbox.get_child(frame).queue_free()
 	cel_hbox.remove_child(cel_hbox.get_child(frame))
+
+
+func _on_layer_fx_pressed() -> void:
+	$LayerEffectsSettings.popup_centered()
+	Global.dialog_open(true)

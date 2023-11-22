@@ -20,11 +20,13 @@ func blend_all_layers(
 	for i in Global.current_project.layers.size():
 		if current_cels[i] is GroupCel:
 			continue
-		if not Global.current_project.layers[i].is_visible_in_hierarchy():
+		var layer := Global.current_project.layers[i]
+		if not layer.is_visible_in_hierarchy():
 			continue
-		textures.append(current_cels[i].get_image())
+		var cel_image := layer.display_effects(current_cels[i])
+		textures.append(cel_image)
 		opacities.append(current_cels[i].opacity)
-		blend_modes.append(Global.current_project.layers[i].blend_mode)
+		blend_modes.append(layer.blend_mode)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {
@@ -51,12 +53,14 @@ func blend_selected_cels(
 			continue
 		if frame.cels[cel_ind] is GroupCel:
 			continue
-		if not project.layers[cel_ind].is_visible_in_hierarchy():
+		var layer := project.layers[cel_ind]
+		if not layer.is_visible_in_hierarchy():
 			continue
 		var cel := frame.cels[cel_ind]
-		textures.append(cel.get_image())
+		var cel_image := layer.display_effects(cel)
+		textures.append(cel_image)
 		opacities.append(cel.opacity)
-		blend_modes.append(Global.current_project.layers[cel_ind].blend_mode)
+		blend_modes.append(layer.blend_mode)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {

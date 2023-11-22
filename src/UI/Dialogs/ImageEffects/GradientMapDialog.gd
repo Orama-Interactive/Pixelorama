@@ -15,7 +15,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	if selection_checkbox.button_pressed and project.has_selection:
 		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
-	var params := {"selection": selection_tex, "map": $VBoxContainer/GradientEdit.texture}
+	var params := {"selection": selection_tex, "gradient_map": $VBoxContainer/GradientEdit.texture}
 
 	if !has_been_confirmed:
 		for param in params:

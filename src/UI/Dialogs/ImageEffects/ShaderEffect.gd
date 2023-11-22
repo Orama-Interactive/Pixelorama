@@ -1,7 +1,7 @@
 extends ImageEffect
 
 var shader: Shader
-var param_names: PackedStringArray = []
+var params := {}
 
 @onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
 @onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
@@ -21,10 +21,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	if !shader:
 		return
 
-	var params := {}
-	for param in param_names:
-		var param_data = preview.material.get_shader_parameter(param)
-		params[param] = param_data
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
 
@@ -51,210 +47,19 @@ func change_shader(shader_tmp: Shader, shader_name: String) -> void:
 	shader = shader_tmp
 	preview.material.shader = shader_tmp
 	shader_loaded_label.text = tr("Shader loaded:") + " " + shader_name
-	param_names.clear()
+	params.clear()
 	for child in shader_params.get_children():
 		child.queue_free()
 
-	var code := shader.code.split("\n")
-	var uniforms: PackedStringArray = []
-	for line in code:
-		if line.begins_with("uniform"):
-			uniforms.append(line)
-
-	for uniform in uniforms:
-		# Example uniform:
-		# uniform float parameter_name : hint_range(0, 255) = 100.0;
-		var uniform_split := uniform.split("=")
-		var u_value := ""
-		if uniform_split.size() > 1:
-			u_value = uniform_split[1].replace(";", "").strip_edges()
-		else:
-			uniform_split[0] = uniform_split[0].replace(";", "").strip_edges()
-
-		var u_left_side := uniform_split[0].split(":")
-		var u_hint := ""
-		if u_left_side.size() > 1:
-			u_hint = u_left_side[1].strip_edges()
-			u_hint = u_hint.replace(";", "")
-
-		var u_init := u_left_side[0].split(" ")
-		var u_type := u_init[1]
-		var u_name := u_init[2]
-		param_names.append(u_name)
-
-		if u_type == "float" or u_type == "int":
-			var label := Label.new()
-			label.text = u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var slider := ValueSlider.new()
-			var min_value := 0.0
-			var max_value := 255.0
-			var step := 1.0
-			var range_values_array: PackedStringArray
-			if "hint_range" in u_hint:
-				var range_values: String = u_hint.replace("hint_range(", "")
-				range_values = range_values.replace(")", "").strip_edges()
-				range_values_array = range_values.split(",")
-
-			if u_type == "float":
-				if range_values_array.size() >= 1:
-					min_value = float(range_values_array[0])
-				else:
-					min_value = 0.01
-
-				if range_values_array.size() >= 2:
-					max_value = float(range_values_array[1])
-
-				if range_values_array.size() >= 3:
-					step = float(range_values_array[2])
-				else:
-					step = 0.01
-
-				if u_value != "":
-					slider.value = float(u_value)
-			else:
-				if range_values_array.size() >= 1:
-					min_value = int(range_values_array[0])
-
-				if range_values_array.size() >= 2:
-					max_value = int(range_values_array[1])
-
-				if range_values_array.size() >= 3:
-					step = int(range_values_array[2])
-
-				if u_value != "":
-					slider.value = int(u_value)
-			slider.min_value = min_value
-			slider.max_value = max_value
-			slider.step = step
-			slider.value_changed.connect(set_shader_parameter.bind(u_name))
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(slider)
-			shader_params.add_child(hbox)
-		elif u_type == "vec2":
-			var label := Label.new()
-			label.text = u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var vector2 := _vec2str_to_vector2(u_value)
-			var slider1 := ValueSlider.new()
-			slider1.value = vector2.x
-			slider1.value_changed.connect(_set_vector2_shader_param.bind(u_name, true))
-			var slider2 := ValueSlider.new()
-			slider2.value = vector2.y
-			slider2.value_changed.connect(_set_vector2_shader_param.bind(u_name, false))
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(slider1)
-			hbox.add_child(slider2)
-			shader_params.add_child(hbox)
-		elif u_type == "vec4":
-			if "source_color" in u_hint:
-				var label := Label.new()
-				label.text = u_name
-				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				var color := _vec4str_to_color(u_value)
-				var color_button := ColorPickerButton.new()
-				color_button.custom_minimum_size = Vector2(20, 20)
-				color_button.color = color
-				color_button.color_changed.connect(set_shader_parameter.bind(u_name))
-				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				var hbox := HBoxContainer.new()
-				hbox.add_child(label)
-				hbox.add_child(color_button)
-				shader_params.add_child(hbox)
-		elif u_type == "sampler2D":
-			var label := Label.new()
-			label.text = u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var file_dialog := FileDialog.new()
-			file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-			file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-			file_dialog.resizable = true
-			file_dialog.custom_minimum_size = Vector2(200, 70)
-			file_dialog.size = Vector2(384, 281)
-			file_dialog.file_selected.connect(_load_texture.bind(u_name))
-			var button := Button.new()
-			button.text = "Load texture"
-			button.pressed.connect(file_dialog.popup_centered)
-			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(button)
-			shader_params.add_child(hbox)
-			shader_params.add_child(file_dialog)
-		elif u_type == "bool":
-			var label := Label.new()
-			label.text = u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var checkbox := CheckBox.new()
-			checkbox.text = "On"
-			if u_value == "true":
-				checkbox.button_pressed = true
-			checkbox.toggled.connect(set_shader_parameter.bind(u_name))
-			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(checkbox)
-			shader_params.add_child(hbox)
+	Global.create_ui_for_shader_uniforms(
+		shader_tmp, params, shader_params, _set_shader_parameter, _load_texture
+	)
 
 
-#		print("---")
-#		print(uniform_split)
-#		print(u_type)
-#		print(u_name)
-#		print(u_hint)
-#		print(u_value)
-#		print("--")
-
-
-func set_shader_parameter(value, param: String) -> void:
+func _set_shader_parameter(value, param: String) -> void:
 	var mat: ShaderMaterial = preview.material
 	mat.set_shader_parameter(param, value)
-
-
-func _set_vector2_shader_param(value: float, param: String, x: bool) -> void:
-	var mat: ShaderMaterial = preview.material
-	var vector2: Vector2 = mat.get_shader_parameter(param)
-	if x:
-		vector2.x = value
-	else:
-		vector2.y = value
-	set_shader_parameter(vector2, param)
-
-
-func _vec2str_to_vector2(vec2: String) -> Vector2:
-	vec2 = vec2.replace("vec2(", "")
-	vec2 = vec2.replace(")", "")
-	var vec_values: PackedStringArray = vec2.split(",")
-	if vec_values.size() == 0:
-		return Vector2.ZERO
-	var y := float(vec_values[0])
-	if vec_values.size() == 2:
-		y = float(vec_values[1])
-	var vector2 := Vector2(float(vec_values[0]), y)
-	return vector2
-
-
-func _vec4str_to_color(vec4: String) -> Color:
-	vec4 = vec4.replace("vec4(", "")
-	vec4 = vec4.replace(")", "")
-	var rgba_values: PackedStringArray = vec4.split(",")
-	var red := float(rgba_values[0])
-
-	var green := float(rgba_values[0])
-	if rgba_values.size() >= 2:
-		green = float(rgba_values[1])
-
-	var blue := float(rgba_values[0])
-	if rgba_values.size() >= 3:
-		blue = float(rgba_values[2])
-
-	var alpha := float(rgba_values[0])
-	if rgba_values.size() == 4:
-		alpha = float(rgba_values[3])
-	var color: Color = Color(red, green, blue, alpha)
-	return color
+	params[param] = value
 
 
 func _load_texture(path: String, param: String) -> void:
@@ -264,4 +69,4 @@ func _load_texture(path: String, param: String) -> void:
 		print("Error loading texture")
 		return
 	var image_tex := ImageTexture.create_from_image(image)
-	set_shader_parameter(image_tex, param)
+	_set_shader_parameter(image_tex, param)

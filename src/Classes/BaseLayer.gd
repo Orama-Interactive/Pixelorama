@@ -29,14 +29,16 @@ enum BlendModes {
 }
 
 var name := ""  ## Name of the layer.
-var project: Project  ## Project, the layer belongs to.
-var index: int  ##  Index of layer in the timeline.
-var parent: BaseLayer  ##  Parent of the layer.
-var visible := true  ##  Sets visibility of the layer.
-var locked := false  ##  Images of a locked layer won't be overritten.
-var new_cels_linked := false  ##  Determines if new cel of the layer should be linked or not.
-var blend_mode := BlendModes.NORMAL  ##  Blend mode of the current layer.
+var project: Project  ## The project the layer belongs to.
+var index: int  ## Index of layer in the timeline.
+var parent: BaseLayer  ## Parent of the layer.
+var visible := true  ## Sets visibility of the layer.
+var locked := false  ## Images of a locked layer won't be overritten.
+var new_cels_linked := false  ## Determines if new cel of the layer should be linked or not.
+var blend_mode := BlendModes.NORMAL  ## Blend mode of the current layer.
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
+var effects: Array[LayerEffect]  ## An array for non-destructive effects of the layer.
+var effects_enabled := true  ## If [code]true[/code], the effects are being applied.
 
 
 ## Returns true if this is a direct or indirect parent of layer
@@ -48,7 +50,7 @@ func is_ancestor_of(layer: BaseLayer) -> bool:
 	return false
 
 
-## Returns an [Array] of layers that are children of this layer.
+## Returns an [Array] of [BaseLayer]s that are children of this layer.
 ## The process is recursive if [param recursive] is [code]true[/code].
 func get_children(recursive: bool) -> Array[BaseLayer]:
 	var children: Array[BaseLayer] = []
@@ -110,6 +112,16 @@ func is_locked_in_hierarchy() -> bool:
 	return locked
 
 
+## Returns an [Array] of [BaseLayer]s that are ancestors of this layer.
+## If there are no ancestors, returns an empty array.
+func get_ancestors() -> Array[BaseLayer]:
+	var ancestors: Array[BaseLayer] = []
+	if is_instance_valid(parent):
+		ancestors.append(parent)
+		ancestors.append_array(parent.get_ancestors())
+	return ancestors
+
+
 ## Returns the number of parents above this layer.
 func get_hierarchy_depth() -> int:
 	if is_instance_valid(parent):
@@ -117,7 +129,7 @@ func get_hierarchy_depth() -> int:
 	return 0
 
 
-## Returns the path of the layer in the timeline as a [String]
+## Returns the path of the layer in the timeline as a [String].
 func get_layer_path() -> String:
 	if is_instance_valid(parent):
 		return str(parent.get_layer_path(), "/", name)
@@ -160,6 +172,32 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 							largest_gap_size = gap_size
 					link_set["hue"] = wrapf(largest_gap_pos + largest_gap_size / 2.0, 0, 1)
 			cel_link_sets.append(link_set)
+
+
+## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
+## This method is not destructive as it does NOT change the data of the image,
+## it just returns a copy.
+func display_effects(cel: BaseCel) -> Image:
+	var image := Image.new()
+	image.copy_from(cel.get_image())
+	if not effects_enabled:
+		return image
+	var image_size := image.get_size()
+	for effect in effects:
+		if not effect.enabled:
+			continue
+		var shader_image_effect := ShaderImageEffect.new()
+		shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
+	# Inherit effects from the parents
+	for ancestor in get_ancestors():
+		if not ancestor.effects_enabled:
+			continue
+		for effect in ancestor.effects:
+			if not effect.enabled:
+				continue
+			var shader_image_effect := ShaderImageEffect.new()
+			shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
+	return image
 
 
 # Methods to Override:
