@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-11-21 23:11\n"
+"PO-Revision-Date: 2023-11-22 06:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -324,7 +324,7 @@ msgstr "Pokaż Prowadnice Myszki"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Wyświetl efekty warstw"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -1688,7 +1688,7 @@ msgid "Zoom out"
 msgstr "Oddal"
 
 msgid "Options"
-msgstr ""
+msgstr "Opcje"
 
 msgid "Options:"
 msgstr "Opcje:"
@@ -2795,13 +2795,13 @@ msgstr "Zaciemnia obraz i zamienia nieprzezroczyste piksele na ciemny kolor."
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Włączone"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr ""
+msgstr "Efekty warstw"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "Dodaj efekt"
 
