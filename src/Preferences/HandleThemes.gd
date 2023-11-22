@@ -25,6 +25,8 @@ func _ready() -> void:
 		theme_id = 0
 	if theme_id != 0:
 		change_theme(theme_id)
+	else:
+		change_clear_color()
 	buttons_container.get_child(theme_id).button_pressed = true
 
 
@@ -73,7 +75,7 @@ func change_theme(id: int) -> void:
 	var theme := themes[id]
 	theme.default_font_size = Global.font_size
 	theme.set_font_size("font_size", "HeaderSmall", Global.font_size + 2)
-	var icon_color: Color = theme.get_color("modulate_color", "Icons")
+	var icon_color := theme.get_color("modulate_color", "Icons")
 
 	if Global.icon_color_from == Global.ColorFrom.THEME:
 		Global.modulate_icon_color = icon_color
@@ -81,15 +83,6 @@ func change_theme(id: int) -> void:
 	Global.control.theme = theme
 	change_clear_color()
 	change_icon_colors()
-
-	# Temporary code
-	var clear_color: Color = theme.get_color("clear_color", "Misc")
-	if !clear_color:
-		var panel_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
-		if panel_stylebox is StyleBoxFlat:
-			clear_color = panel_stylebox.bg_color
-		else:
-			clear_color = Color.GRAY
 
 	for child in Global.preferences_dialog.get_node("Popups").get_children():
 		child.theme = theme

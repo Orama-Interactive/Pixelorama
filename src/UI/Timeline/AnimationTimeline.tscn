@@ -193,15 +193,16 @@ size_flags_horizontal = 3
 [node name="LayerTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools"]
+[node name="LayerSettingsContainer" type="VBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LayerButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
+[node name="LayerButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 9
 
-[node name="AddLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
+[node name="AddLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(44, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -211,7 +212,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_tpvn2")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer"]
 layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -222,7 +223,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2")
 
-[node name="AddLayerList" type="MenuButton" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer"]
+[node name="AddLayerList" type="MenuButton" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 0
@@ -242,7 +243,7 @@ popup/item_1/id = 1
 popup/item_2/text = "Add 3D Layer"
 popup/item_2/id = 2
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer/AddLayerList"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer/AddLayerList"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -254,7 +255,7 @@ offset_right = 6.0
 offset_bottom = 6.0
 texture = ExtResource("10")
 
-[node name="RemoveLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
+[node name="RemoveLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -265,7 +266,7 @@ mouse_default_cursor_shape = 8
 disabled = true
 shortcut = SubResource("Shortcut_xar00")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/RemoveLayer"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/RemoveLayer"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -279,7 +280,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("6")
 
-[node name="MoveUpLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
+[node name="MoveUpLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -290,7 +291,7 @@ mouse_default_cursor_shape = 8
 disabled = true
 shortcut = SubResource("Shortcut_r300c")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveUpLayer"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MoveUpLayer"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -304,7 +305,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("4")
 
-[node name="MoveDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
+[node name="MoveDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -315,7 +316,7 @@ mouse_default_cursor_shape = 8
 disabled = true
 shortcut = SubResource("Shortcut_763li")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveDownLayer"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MoveDownLayer"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -329,7 +330,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("3")
 
-[node name="CloneLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
+[node name="CloneLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -339,7 +340,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_0o4ap")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/CloneLayer"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/CloneLayer"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -353,7 +354,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("7")
 
-[node name="MergeDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
+[node name="MergeDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -364,7 +365,7 @@ mouse_default_cursor_shape = 8
 disabled = true
 shortcut = SubResource("Shortcut_wbf7k")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MergeDownLayer"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MergeDownLayer"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -378,29 +379,25 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("5")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer"]
 layout_mode = 2
 
-[node name="LayerFX" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer"]
+[node name="LayerFX" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "FX"
 
-[node name="Label" type="Label" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer"]
+[node name="BlendModeLabel" type="Label" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/HBoxContainer"]
 layout_mode = 2
 text = "Blend mode:"
 
-[node name="BlendModes" type="OptionButton" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer"]
+[node name="BlendModes" type="OptionButton" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="BlendingHBox" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-
-[node name="OpacitySlider" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/BlendingHBox" instance=ExtResource("9")]
+[node name="OpacitySlider" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer" instance=ExtResource("9")]
 custom_minimum_size = Vector2(207, 24)
 layout_mode = 2
 size_flags_vertical = 0
@@ -762,6 +759,7 @@ The more FPS, the faster the animation plays."
 min_value = 0.1
 step = 0.1
 value = 6.0
+allow_greater = true
 suffix = "FPS"
 
 [node name="TagScroll" type="ScrollContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer"]
@@ -802,14 +800,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit"]
+[node name="LayerContainer" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LayerLabel" type="Label" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/VBoxContainer"]
+[node name="LayerLabel" type="Label" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/LayerContainer"]
 layout_mode = 2
 text = "Layers"
 
-[node name="LayerVBox" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/VBoxContainer"]
+[node name="LayerVBox" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/LayerContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -969,15 +968,15 @@ size_flags_vertical = 3
 layout_mode = 2
 autowrap_mode = 3
 
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [0]]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [true]]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [false]]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer/LayerFX" to="." method="_on_layer_fx_pressed"]
-[connection signal="item_selected" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/HBoxContainer/BlendModes" to="." method="_on_blend_modes_item_selected"]
-[connection signal="value_changed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/BlendingHBox/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [0]]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [true]]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [false]]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/HBoxContainer/LayerFX" to="." method="_on_layer_fx_pressed"]
+[connection signal="item_selected" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/HBoxContainer/BlendModes" to="." method="_on_blend_modes_item_selected"]
+[connection signal="value_changed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
@@ -995,7 +994,7 @@ autowrap_mode = 3
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
 [connection signal="gui_input" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit" to="." method="_on_LayerFrameSplitContainer_gui_input"]
-[connection signal="resized" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/VBoxContainer/LayerVBox" to="." method="_on_LayerVBox_resized"]
+[connection signal="resized" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/LayerContainer/LayerVBox" to="." method="_on_LayerVBox_resized"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 [connection signal="close_requested" from="OnionSkinningSettings" to="." method="_on_onion_skinning_settings_close_requested"]
 [connection signal="visibility_changed" from="OnionSkinningSettings" to="." method="_on_onion_skinning_settings_visibility_changed"]

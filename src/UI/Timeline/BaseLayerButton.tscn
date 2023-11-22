@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://dhc0pnnqojd2m" path="res://assets/graphics/layers/unlock.png" id="3"]
 
 [node name="BaseLayerButton" type="Button"]
-custom_minimum_size = Vector2(205, 36)
 offset_right = 200.0
 offset_bottom = 36.0
 focus_mode = 0

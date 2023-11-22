@@ -31,12 +31,14 @@ func _ready() -> void:
 	var hierarchy_depth := Global.current_project.layers[layer].get_hierarchy_depth()
 	hierarchy_spacer.custom_minimum_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 
-	if Global.control.theme.get_color("font_color", "Button").v > 0.5:  # Light3D text is dark theme
+	if Global.control.theme.get_color("font_color", "Button").v > 0.5:  # Light text is dark theme
 		self_modulate.v = 1 + hierarchy_depth * 0.4
 	else:  # Dark text should be light theme
 		self_modulate.v = 1 - hierarchy_depth * 0.075
 
 	update_buttons()
+	await get_tree().process_frame
+	queue_redraw()
 
 
 func update_buttons() -> void:
@@ -141,7 +143,8 @@ func _save_layer_name(new_name: String) -> void:
 	line_edit.visible = false
 	line_edit.editable = false
 	label.text = new_name
-	Global.current_project.layers[layer].name = new_name
+	if layer < Global.current_project.layers.size():
+		Global.current_project.layers[layer].name = new_name
 
 
 func _on_ExpandButton_pressed() -> void:
