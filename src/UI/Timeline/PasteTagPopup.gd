@@ -1,10 +1,10 @@
 extends Popup
 
+var from_project: Project
+
 @onready var animation_tags_list: ItemList = $PanelContainer/VBoxContainer/TagList
 @onready var from_project_list: OptionButton = $PanelContainer/VBoxContainer/ProjectList
 @onready var start_frame: Label = $PanelContainer/VBoxContainer/StartFrame
-
-var from_project: Project
 
 
 func _ready() -> void:
