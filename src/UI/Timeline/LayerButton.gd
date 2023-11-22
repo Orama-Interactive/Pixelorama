@@ -141,7 +141,8 @@ func _save_layer_name(new_name: String) -> void:
 	line_edit.visible = false
 	line_edit.editable = false
 	label.text = new_name
-	Global.current_project.layers[layer].name = new_name
+	if layer < Global.current_project.layers.size():
+		Global.current_project.layers[layer].name = new_name
 
 
 func _on_ExpandButton_pressed() -> void:
