@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-11-22 06:31\n"
+"PO-Revision-Date: 2023-11-23 18:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -97,7 +97,7 @@ msgid "Use ZSTD Compression"
 msgstr "Użyj kompresji ZSTD"
 
 msgid "Import"
-msgstr "Importowanie"
+msgstr "Importuj"
 
 msgid "Export"
 msgstr "Eksportuj"
