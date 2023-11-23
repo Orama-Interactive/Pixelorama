@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-11-23 18:27\n"
+"PO-Revision-Date: 2023-11-23 19:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -205,7 +205,7 @@ msgid "Invert"
 msgstr "Odwróć"
 
 msgid "Grayscale View"
-msgstr "Widok Czarno-biały"
+msgstr "Czarno-biały widok"
 
 msgid "Mirror Image"
 msgstr "Lustrzane Odbicie"
@@ -474,7 +474,7 @@ msgid "Export Sprite"
 msgstr "Eksportuj obraz"
 
 msgid "File Exists, Overwrite?"
-msgstr "Plik istnieje! Nadpisać?"
+msgstr "Plik już istnieje, Nadpisać?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
