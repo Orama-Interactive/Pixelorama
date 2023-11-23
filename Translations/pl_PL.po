@@ -97,7 +97,7 @@ msgid "Use ZSTD Compression"
 msgstr "Użyj kompresji ZSTD"
 
 msgid "Import"
-msgstr "Importowanie"
+msgstr "Importuj"
 
 msgid "Export"
 msgstr "Eksportuj"
@@ -198,7 +198,7 @@ msgid "Invert"
 msgstr "Odwróć"
 
 msgid "Grayscale View"
-msgstr "Widok Czarno-biały"
+msgstr "Czarno-biały widok"
 
 msgid "Mirror Image"
 msgstr "Lustrzane Odbicie"
@@ -321,11 +321,11 @@ msgstr "Przyciągaj do"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Przyciągaj do prostokątnej obwiedni siatki"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Przyciągaj do środka siatki prostokątnej”
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -463,7 +463,7 @@ msgid "Export Sprite"
 msgstr "Eksportuj obraz"
 
 msgid "File Exists, Overwrite?"
-msgstr "Plik istnieje! Nadpisać?"
+msgstr "Plik istnieje, Nadpisać?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
