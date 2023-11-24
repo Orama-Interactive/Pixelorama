@@ -155,6 +155,7 @@ func _on_ExpandButton_pressed() -> void:
 func _on_VisibilityButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
+	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 	if Global.select_layer_on_button_click:
 		_select_current_layer()

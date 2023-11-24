@@ -917,20 +917,16 @@ func _on_MergeDownLayer_pressed() -> void:
 		var top_image := top_layer.display_effects(top_cel)
 		var bottom_cel := frame.cels[bottom_layer.index]
 		var textures: Array[Image] = []
-		var opacities := PackedFloat32Array()
-		var blend_modes := PackedInt32Array()
+		var metadata_image := Image.create(2, 3, false, Image.FORMAT_R8)
 		textures.append(bottom_cel.get_image())
-		opacities.append(bottom_cel.opacity)
-		blend_modes.append(bottom_layer.blend_mode)
+		metadata_image.set_pixel(0, 1, Color(1.0, 0.0, 0.0, 0.0))
 		textures.append(top_image)
-		opacities.append(frame.cels[top_layer.index].opacity)
-		blend_modes.append(top_layer.blend_mode)
+		metadata_image.set_pixel(1, 0, Color(top_layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+		metadata_image.set_pixel(1, 1, Color(frame.cels[top_layer.index].opacity, 0.0, 0.0, 0.0))
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
 		var params := {
-			"layers": texture_array,
-			"opacities": opacities,
-			"blend_modes": blend_modes,
+			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
 		}
 		var bottom_image := Image.create(
 			top_image.get_width(), top_image.get_height(), false, top_image.get_format()

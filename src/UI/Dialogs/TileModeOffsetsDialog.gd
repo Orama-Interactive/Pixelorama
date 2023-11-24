@@ -125,7 +125,7 @@ func change_mask():
 	var tiles := Global.current_project.tiles
 	var tiles_size := tiles.tile_size
 	var image := Image.create(tiles_size.x, tiles_size.y, false, Image.FORMAT_RGBA8)
-	DrawingAlgos.blend_all_layers(image, current_frame)
+	DrawingAlgos.blend_layers(image, current_frame)
 	if (
 		image.get_used_rect().size == Vector2i.ZERO
 		or not $VBoxContainer/HBoxContainer/Masking.button_pressed

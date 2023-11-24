@@ -538,6 +538,7 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if get_current_cel() is Cel3D:
 		await RenderingServer.frame_post_draw
 		await RenderingServer.frame_post_draw
+	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 
 

@@ -19,9 +19,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6b0ox"]
 shader = ExtResource("1_253dh")
-shader_parameter/opacities = null
-shader_parameter/blend_modes = null
-shader_parameter/origins = null
+shader_parameter/origin_x_positive = true
+shader_parameter/origin_y_positive = true
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 4

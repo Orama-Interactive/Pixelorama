@@ -9,64 +9,39 @@ var omniscale_shader := preload("res://src/Shaders/Effects/Rotation/OmniScale.gd
 
 
 ## Blends canvas layers into passed image starting from the origin position
-func blend_all_layers(
-	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
-) -> void:
-	var current_cels := frame.cels
-	var textures: Array[Image] = []
-	var opacities := PackedFloat32Array()
-	var blend_modes := PackedInt32Array()
-
-	for i in Global.current_project.layers.size():
-		if current_cels[i] is GroupCel:
-			continue
-		var layer := Global.current_project.layers[i]
-		if not layer.is_visible_in_hierarchy():
-			continue
-		var cel_image := layer.display_effects(current_cels[i])
-		textures.append(cel_image)
-		opacities.append(current_cels[i].opacity)
-		blend_modes.append(layer.blend_mode)
-	var texture_array := Texture2DArray.new()
-	texture_array.create_from_images(textures)
-	var params := {
-		"layers": texture_array,
-		"opacities": opacities,
-		"blend_modes": blend_modes,
-	}
-	var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
-	var gen := ShaderImageEffect.new()
-	gen.generate_image(blended, blend_layers_shader, params, project.size)
-	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
-
-
-## Blends selected cels of the given frame into passed image starting from the origin position
-func blend_selected_cels(
-	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
+func blend_layers(
+	image: Image,
+	frame: Frame,
+	origin := Vector2i.ZERO,
+	project := Global.current_project,
+	only_selected := false
 ) -> void:
 	var textures: Array[Image] = []
-	var opacities := PackedFloat32Array()
-	var blend_modes := PackedInt32Array()
-	for cel_ind in frame.cels.size():
-		var test_array := [project.current_frame, cel_ind]
-		if not test_array in project.selected_cels:
-			continue
-		if frame.cels[cel_ind] is GroupCel:
-			continue
-		var layer := project.layers[cel_ind]
-		if not layer.is_visible_in_hierarchy():
-			continue
-		var cel := frame.cels[cel_ind]
+	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
+	# the second are the opacities and the third are the origins
+	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
+	for i in project.layers.size():
+		var layer := project.layers[i]
+		var include := true if layer.is_visible_in_hierarchy() else false
+		if only_selected and include:
+			var test_array := [project.frames.find(frame), i]
+			if not test_array in project.selected_cels:
+				include = false
+		var cel := frame.cels[i]
 		var cel_image := layer.display_effects(cel)
 		textures.append(cel_image)
-		opacities.append(cel.opacity)
-		blend_modes.append(layer.blend_mode)
+		# Store the blend mode
+		metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+		# Store the opacity
+		if include:
+			metadata_image.set_pixel(i, 1, Color(cel.opacity, 0.0, 0.0, 0.0))
+		else:
+			metadata_image.set_pixel(i, 1, Color())
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {
 		"layers": texture_array,
-		"opacities": opacities,
-		"blend_modes": blend_modes,
+		"metadata": ImageTexture.create_from_image(metadata_image),
 	}
 	var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
 	var gen := ShaderImageEffect.new()

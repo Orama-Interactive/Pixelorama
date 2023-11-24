@@ -878,7 +878,9 @@ func clear_selection(use_undo := false) -> void:
 func _get_preview_image() -> void:
 	var project := Global.current_project
 	var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-	DrawingAlgos.blend_selected_cels(blended_image, project.frames[project.current_frame])
+	DrawingAlgos.blend_layers(
+		blended_image, project.frames[project.current_frame], Vector2i.ZERO, project, true
+	)
 	if original_preview_image.is_empty():
 		original_preview_image = Image.create(
 			big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8

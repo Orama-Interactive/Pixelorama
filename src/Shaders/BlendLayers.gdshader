@@ -5,9 +5,11 @@ const float HCV_EPSILON = 1e-10;
 const float HSL_EPSILON = 1e-10;
 
 uniform sampler2DArray layers : filter_nearest;
-uniform float[1024] opacities;
-uniform int[1024] blend_modes;
-uniform vec2[1024] origins;
+// Nx3 texture, where N is the number of layers and the first row are the blend modes,
+// the second are the opacities and the third are the origins
+uniform sampler2D metadata : filter_nearest;
+uniform bool origin_x_positive = true;
+uniform bool origin_y_positive = true;
 
 // Conversion functions from
 // https://gist.github.com/unitycoder/aaf94ddfe040ec2da93b58d3c65ab9d9
@@ -54,7 +56,7 @@ vec3 rgb_to_hsl(vec3 rgb)
 
 vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 	vec4 result;
-	if (current_color.a <= 0.01) {
+	if (current_color.a <= 0.001 || opacity <= 0.001) {
 		return prev_color;
 	}
 	current_color.rgb = current_color.rgb * opacity; // Premultiply with the layer texture's alpha to prevent semi transparent pixels from being too bright (ALL LAYER TYPES!)
@@ -142,15 +144,36 @@ float border_trim(vec4 color, vec2 uv) {
 
 
 void fragment() {
-	vec4 col = texture(layers, vec3(UV - origins[0], 0.0));
-	col.a = border_trim(col, UV - origins[0]);
-	col.a *= opacities[0];
+	ivec2 metadata_size = textureSize(metadata, 0) - 1;
+	vec2 first_origin = texture(metadata, vec2(0.0, 2.0 / float(metadata_size.y))).rg;
+	if (!origin_x_positive) {
+		first_origin.x = -first_origin.x;
+	}
+	if (!origin_y_positive) {
+		first_origin.y = -first_origin.y;
+	}
+	float first_opacity = texture(metadata, vec2(0.0, 1.0 / float(metadata_size.y))).r;
+	vec4 col = texture(layers, vec3(UV - first_origin, 0.0));
+	col.a = border_trim(col, UV - first_origin);
+	col.a *= first_opacity;
 	for(int i = 1; i < textureSize(layers, 0).z; i++) // Loops through every layer
 	{
-		vec2 uv = UV - origins[i];
+		float blend_mode_float = texture(metadata, vec2(float(i) / float(metadata_size.x), 0.0)).r;
+		// Blend modes are being stored as integers divided by 255, so convert them back to
+		// their integer form
+		int current_blend_mode = int(floor(blend_mode_float * 255.0));
+		vec2 current_origin = texture(metadata, vec2(float(i) / float(metadata_size.x), 2.0 / float(metadata_size.y))).rg;
+		if (!origin_x_positive) {
+			current_origin.x = -current_origin.x;
+		}
+		if (!origin_y_positive) {
+			current_origin.y = -current_origin.y;
+		}
+		float current_opacity = texture(metadata, vec2(float(i) / float(metadata_size.x), 1.0 / float(metadata_size.y))).r;
+		vec2 uv = UV - current_origin;
 		vec4 texture_color = texture(layers, vec3(uv, float(i)));
 		texture_color.a = border_trim(texture_color, uv);
-		col = blend(blend_modes[i], texture_color, col, opacities[i]);
+		col = blend(current_blend_mode, texture_color, col, current_opacity);
 	}
 	COLOR = col;
 }
