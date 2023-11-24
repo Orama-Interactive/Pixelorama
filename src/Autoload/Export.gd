@@ -485,7 +485,7 @@ func blend_selected_cels(
 	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
 ) -> void:
 	for cel_ind in frame.cels.size():
-		var test_array := [project.current_frame, cel_ind]
+		var test_array := [project.frames.find(frame), cel_ind]
 		if not test_array in project.selected_cels:
 			continue
 		if frame.cels[cel_ind] is GroupCel:
