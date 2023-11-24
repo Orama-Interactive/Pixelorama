@@ -813,10 +813,7 @@ func delete(selected_cels := true) -> void:
 
 	if project.has_selection:
 		var blank := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		var selection_map_copy := SelectionMap.new()
-		selection_map_copy.copy_from(project.selection_map)
-		# In case the selection map is bigger than the canvas
-		selection_map_copy.crop(project.size.x, project.size.y)
+		var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 		for image in images:
 			image.blit_rect_mask(
 				blank, selection_map_copy, big_bounding_rectangle, big_bounding_rectangle.position
@@ -885,8 +882,9 @@ func _get_preview_image() -> void:
 		original_preview_image = Image.create(
 			big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
 		)
+		var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 		original_preview_image.blit_rect_mask(
-			blended_image, project.selection_map, big_bounding_rectangle, Vector2i.ZERO
+			blended_image, selection_map_copy, big_bounding_rectangle, Vector2i.ZERO
 		)
 		if original_preview_image.is_invisible():
 			original_preview_image = Image.new()
@@ -919,5 +917,6 @@ func _get_selected_image(cel_image: Image) -> Image:
 	var image := Image.create(
 		big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
 	)
-	image.blit_rect_mask(cel_image, project.selection_map, big_bounding_rectangle, Vector2i.ZERO)
+	var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
+	image.blit_rect_mask(cel_image, selection_map_copy, big_bounding_rectangle, Vector2i.ZERO)
 	return image

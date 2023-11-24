@@ -85,6 +85,15 @@ func invert() -> void:
 	self.convert(Image.FORMAT_LA8)
 
 
+## Returns a copy of itself that is cropped to [param size].
+## Used for when the selection map is bigger than the [Project] size.
+func return_cropped_copy(size: Vector2i) -> SelectionMap:
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(self)
+	selection_map_copy.crop(size.x, size.y)
+	return selection_map_copy
+
+
 func move_bitmap_values(project: Project, move_offset := true) -> void:
 	var size := project.size
 	var selection_node = Global.canvas.selection
