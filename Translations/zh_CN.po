@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-11-21 23:12\n"
+"PO-Revision-Date: 2023-11-24 03:58\n"
 
 msgid "OK"
 msgstr "确定"
@@ -324,7 +324,7 @@ msgstr "显示鼠标向导"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "显示图层效果"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -1689,7 +1689,7 @@ msgid "Zoom out"
 msgstr "缩小"
 
 msgid "Options"
-msgstr ""
+msgstr "选项"
 
 msgid "Options:"
 msgstr "选项:"
@@ -2796,13 +2796,13 @@ msgstr "使图像变黑，并使所有不透明像素变成深色。"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "已启用"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr ""
+msgstr "图层效果"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "添加效果"
 
