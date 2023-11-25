@@ -196,10 +196,10 @@ func set_and_update_preview_image(frame_idx: int) -> void:
 	var frame := Global.current_project.frames[frame_idx]
 	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
 	selected_cels.fill(Color(0, 0, 0, 0))
-	DrawingAlgos.blend_selected_cels(selected_cels, frame)
+	DrawingAlgos.blend_layers(selected_cels, frame, Vector2i.ZERO, Global.current_project, true)
 	current_frame.resize(Global.current_project.size.x, Global.current_project.size.y)
 	current_frame.fill(Color(0, 0, 0, 0))
-	DrawingAlgos.blend_all_layers(current_frame, frame)
+	DrawingAlgos.blend_layers(current_frame, frame)
 	update_preview()
 
 

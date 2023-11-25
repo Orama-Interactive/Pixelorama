@@ -10,7 +10,7 @@ var params := {}
 func _about_to_popup() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var frame := Global.current_project.frames[Global.current_project.current_frame]
-	DrawingAlgos.blend_selected_cels(selected_cels, frame)
+	DrawingAlgos.blend_layers(selected_cels, frame, Vector2i.ZERO, Global.current_project, true)
 
 	preview_image.copy_from(selected_cels)
 	preview.texture = ImageTexture.create_from_image(preview_image)

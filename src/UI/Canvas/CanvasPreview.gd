@@ -72,30 +72,33 @@ func _draw() -> void:
 
 
 func _draw_layers() -> void:
-	var current_frame := Global.current_project.frames[frame_index]
+	var project := Global.current_project
+	var current_frame := project.frames[frame_index]
 	var current_cels := current_frame.cels
 	var textures: Array[Image] = []
-	var opacities := PackedFloat32Array()
-	var blend_modes := PackedInt32Array()
+	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
+	# the second are the opacities and the third are the origins
+	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
 	# Draw current frame layers
-	for i in Global.current_project.layers.size():
+	for i in project.layers.size():
 		if current_cels[i] is GroupCel:
 			continue
-		var layer := Global.current_project.layers[i]
+		var layer := project.layers[i]
+		var cel_image: Image
+		if Global.display_layer_effects:
+			cel_image = layer.display_effects(current_cels[i])
+		else:
+			cel_image = current_cels[i].get_image()
+		textures.append(cel_image)
+		metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
 		if layer.is_visible_in_hierarchy():
-			var cel_image: Image
-			if Global.display_layer_effects:
-				cel_image = layer.display_effects(current_cels[i])
-			else:
-				cel_image = current_cels[i].get_image()
-			textures.append(cel_image)
-			opacities.append(current_cels[i].opacity)
-			blend_modes.append(layer.blend_mode)
+			metadata_image.set_pixel(i, 1, Color(current_cels[i].opacity, 0.0, 0.0, 0.0))
+		else:
+			metadata_image.set_pixel(i, 1, Color(0.0, 0.0, 0.0, 0.0))
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	material.set_shader_parameter("layers", texture_array)
-	material.set_shader_parameter("opacities", opacities)
-	material.set_shader_parameter("blend_modes", blend_modes)
+	material.set_shader_parameter("metadata", ImageTexture.create_from_image(metadata_image))
 
 
 func _on_AnimationTimer_timeout() -> void:

@@ -9,8 +9,9 @@ signal about_to_deserialize(Dictionary)
 var name := "":
 	set(value):
 		name = value
-		if Global.tabs.tab_count < Global.tabs.current_tab:
-			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+		var project_index := Global.projects.find(self)
+		if project_index < Global.tabs.tab_count and project_index > -1:
+			Global.tabs.set_tab_title(project_index, name)
 var size: Vector2i:
 	set = _size_changed
 var undo_redo := UndoRedo.new()
@@ -537,6 +538,7 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if get_current_cel() is Cel3D:
 		await RenderingServer.frame_post_draw
 		await RenderingServer.frame_post_draw
+	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 
 

@@ -6,7 +6,11 @@ const CURSOR_SPEED_RATE := 6.0
 
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  ## For optimization purposes
+var update_all_layers := false
 var move_preview_location := Vector2i.ZERO
+var layer_texture_array := Texture2DArray.new()
+var layer_metadata_image := Image.new()
+var layer_metadata_texture := ImageTexture.new()
 
 @onready var currently_visible_frame := $CurrentlyVisibleFrame as SubViewport
 @onready var current_frame_drawer := $CurrentlyVisibleFrame/CurrentFrameDrawer as Node2D
@@ -108,6 +112,19 @@ func update_texture(layer_i: int, frame_i := -1, project := Global.current_proje
 	if frame_i < project.frames.size() and layer_i < project.layers.size():
 		var current_cel := project.frames[frame_i].cels[layer_i]
 		current_cel.update_texture()
+		# Needed so that changes happening to the non-selected layer(s) are also visible
+		# e.g. when undoing/redoing, when applying image effects to the entire frame, etc
+		var layer := project.layers[layer_i]
+		var cel_image: Image
+		if Global.display_layer_effects:
+			cel_image = layer.display_effects(current_cel)
+		else:
+			cel_image = current_cel.get_image()
+		if (
+			cel_image.get_size()
+			== Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
+		):
+			layer_texture_array.update_layer(cel_image, layer_i)
 
 
 func update_selected_cels_textures(project := Global.current_project) -> void:
@@ -120,36 +137,72 @@ func update_selected_cels_textures(project := Global.current_project) -> void:
 
 
 func draw_layers() -> void:
-	var current_frame := Global.current_project.frames[Global.current_project.current_frame]
-	var current_cels := current_frame.cels
-	var textures: Array[Image] = []
-	var opacities := PackedFloat32Array()
-	var blend_modes := PackedInt32Array()
-	var origins := PackedVector2Array()
-	# Draw current frame layers
-	for i in Global.current_project.layers.size():
-		if current_cels[i] is GroupCel:
-			continue
-		var layer := Global.current_project.layers[i]
-		if layer.is_visible_in_hierarchy():
+	var project := Global.current_project
+	var current_cels := project.frames[project.current_frame].cels
+	var recreate_texture_array := (
+		layer_texture_array.get_layers() != project.layers.size()
+		or layer_texture_array.get_width() != project.size.x
+		or layer_texture_array.get_height() != project.size.y
+	)
+	if recreate_texture_array:
+		var textures: Array[Image] = []
+		# Nx3 texture, where N is the number of layers and the first row are the blend modes,
+		# the second are the opacities and the third are the origins
+		layer_metadata_image = Image.create(project.layers.size(), 3, false, Image.FORMAT_RG8)
+		# Draw current frame layers
+		for i in project.layers.size():
+			var layer := project.layers[i]
 			var cel_image: Image
 			if Global.display_layer_effects:
 				cel_image = layer.display_effects(current_cels[i])
 			else:
 				cel_image = current_cels[i].get_image()
 			textures.append(cel_image)
-			opacities.append(current_cels[i].opacity)
-			if [Global.current_project.current_frame, i] in Global.current_project.selected_cels:
-				origins.append(Vector2(move_preview_location) / Vector2(cel_image.get_size()))
+			# Store the blend mode
+			layer_metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+			# Store the opacity
+			if layer.is_visible_in_hierarchy():
+				layer_metadata_image.set_pixel(i, 1, Color(current_cels[i].opacity, 0.0, 0.0, 0.0))
 			else:
-				origins.append(Vector2.ZERO)
-			blend_modes.append(layer.blend_mode)
-	var texture_array := Texture2DArray.new()
-	texture_array.create_from_images(textures)
-	material.set_shader_parameter("layers", texture_array)
-	material.set_shader_parameter("opacities", opacities)
-	material.set_shader_parameter("blend_modes", blend_modes)
-	material.set_shader_parameter("origins", origins)
+				layer_metadata_image.set_pixel(i, 1, Color())
+			# Store the origin
+			if [project.current_frame, i] in project.selected_cels:
+				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
+				layer_metadata_image.set_pixel(i, 2, Color(origin.x, origin.y, 0.0, 0.0))
+			else:
+				layer_metadata_image.set_pixel(i, 2, Color())
+
+		layer_texture_array.create_from_images(textures)
+		layer_metadata_texture.set_image(layer_metadata_image)
+	else:  # Update the TextureArray
+		if layer_texture_array.get_layers() > 0:
+			for i in project.layers.size():
+				var layer := project.layers[i]
+				var test_array := [project.current_frame, i]
+				if not update_all_layers:
+					if not test_array in project.selected_cels:
+						continue
+				var cel := current_cels[i]
+				var cel_image: Image
+				if Global.display_layer_effects:
+					cel_image = layer.display_effects(cel)
+				else:
+					cel_image = cel.get_image()
+				layer_texture_array.update_layer(cel_image, i)
+				layer_metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+				if layer.is_visible_in_hierarchy():
+					layer_metadata_image.set_pixel(i, 1, Color(cel.opacity, 0.0, 0.0, 0.0))
+				else:
+					layer_metadata_image.set_pixel(i, 1, Color())
+				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
+				layer_metadata_image.set_pixel(i, 2, Color(origin.x, origin.y, 0.0, 0.0))
+			layer_metadata_texture.update(layer_metadata_image)
+
+	material.set_shader_parameter("layers", layer_texture_array)
+	material.set_shader_parameter("metadata", layer_metadata_texture)
+	material.set_shader_parameter("origin_x_positive", move_preview_location.x > 0)
+	material.set_shader_parameter("origin_y_positive", move_preview_location.y > 0)
+	update_all_layers = false
 
 
 func refresh_onion() -> void:
