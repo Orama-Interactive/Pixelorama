@@ -1,7 +1,7 @@
 extends Node2D
 
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
-const KEY_MOVE_ACTION_NAMES: PackedStringArray = ["ui_up", "ui_down", "ui_left", "ui_right"]
+const KEY_MOVE_ACTION_NAMES: PackedStringArray = [&"ui_up", &"ui_down", &"ui_left", &"ui_right"]
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
 # flags (additional properties of selection that can be toggled)
@@ -220,7 +220,7 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 # Check if an event is a ui_up/down/left/right event-press
 func _is_action_direction_pressed(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action_pressed(action):
+		if event.is_action_pressed(action, false, true):
 			return true
 	return false
 
@@ -228,7 +228,7 @@ func _is_action_direction_pressed(event: InputEvent) -> bool:
 # Check if an event is a ui_up/down/left/right event release
 func _is_action_direction(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action(action):
+		if event.is_action(action, true):
 			return true
 	return false
 
@@ -236,7 +236,7 @@ func _is_action_direction(event: InputEvent) -> bool:
 # Check if an event is a ui_up/down/left/right event release
 func _is_action_direction_released(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action_released(action):
+		if event.is_action_released(action, true):
 			return true
 	return false
 
