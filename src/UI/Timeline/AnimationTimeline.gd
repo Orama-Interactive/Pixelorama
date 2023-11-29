@@ -644,16 +644,20 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 func _on_NextFrame_pressed() -> void:
 	var project := Global.current_project
+	project.selected_cels.clear()
 	if project.current_frame < project.frames.size() - 1:
-		project.selected_cels.clear()
 		project.change_cel(project.current_frame + 1, -1)
+	else:
+		project.change_cel(0, -1)
 
 
 func _on_PreviousFrame_pressed() -> void:
 	var project := Global.current_project
+	project.selected_cels.clear()
 	if project.current_frame > 0:
-		project.selected_cels.clear()
 		project.change_cel(project.current_frame - 1, -1)
+	else:
+		project.change_cel(project.frames.size() - 1, -1)
 
 
 func _on_LastFrame_pressed() -> void:
