@@ -78,11 +78,6 @@ func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
 
 
-## Used to save cel image/thumbnail during saving of a pxo file.
-func save_image_data_to_pxo(_file: FileAccess) -> void:
-	return
-
-
 ## Used to load cel image/thumbnail during loading of a pxo file.
 func load_image_data_from_pxo(_file: FileAccess, _project_size: Vector2i) -> void:
 	return

@@ -50,14 +50,6 @@ func _ready() -> void:
 	if OS.has_feature("clickable"):
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
-
-	var zstd_checkbox := CheckBox.new()
-	zstd_checkbox.name = "ZSTDCompression"
-	zstd_checkbox.button_pressed = true
-	zstd_checkbox.text = "Use ZSTD Compression"
-	zstd_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	Global.save_sprites_dialog.get_vbox().add_child(zstd_checkbox)
-
 	_handle_backup()
 
 	_handle_cmdline_arguments()
@@ -282,10 +274,7 @@ func _on_SaveSprite_file_selected(path: String) -> void:
 
 
 func save_project(path: String) -> void:
-	var zstd: bool = (
-		Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").button_pressed
-	)
-	var success = OpenSave.save_pxo_file(path, false, zstd)
+	var success = OpenSave.save_pxo_file(path, false)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
@@ -300,7 +289,7 @@ func _on_SaveSpriteHTML5_confirmed() -> void:
 	)
 	file_name += ".pxo"
 	var path := "user://".path_join(file_name)
-	OpenSave.save_pxo_file(path, false, false)
+	OpenSave.save_pxo_file(path, false)
 
 
 func _on_open_sprite_visibility_changed() -> void:

@@ -208,9 +208,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 	save_project_to_recent_list(path)
 
 
-func save_pxo_file(
-	path: String, autosave: bool, use_zstd := true, project := Global.current_project
-) -> bool:
+func save_pxo_file(path: String, autosave: bool, project := Global.current_project) -> bool:
 	if !autosave:
 		project.name = path.get_file()
 	var serialized_data := project.serialize()
@@ -233,17 +231,11 @@ func save_pxo_file(
 	# Check if a file with the same name exists. If it does, rename the new file temporarily.
 	# Needed in case of a crash, so that the old file won't be replaced with an empty one.
 	var temp_path := path
-	var dir := DirAccess.open("user://")
-	if dir.file_exists(path):
+	if FileAccess.file_exists(path):
 		temp_path = path + "1"
 
-	var file: FileAccess
-	if use_zstd:
-		file = FileAccess.open_compressed(temp_path, FileAccess.WRITE, FileAccess.COMPRESSION_ZSTD)
-	else:
-		file = FileAccess.open(temp_path, FileAccess.WRITE)
-
-	var err := FileAccess.get_open_error()
+	var zip_packer := ZIPPacker.new()
+	var err := zip_packer.open(temp_path)
 	if err != OK:
 		if temp_path.is_valid_filename():
 			return false
@@ -252,37 +244,56 @@ func save_pxo_file(
 		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
-		if file:  # this would be null if we attempt to save filenames such as "//\\||.pxo"
-			file.close()
+		if zip_packer:  # this would be null if we attempt to save filenames such as "//\\||.pxo"
+			zip_packer.close()
 		return false
+	zip_packer.start_file("data.json")
+	zip_packer.write_file(to_save.to_utf8_buffer())
+	zip_packer.close_file()
 
 	if !autosave:
 		current_save_paths[Global.current_project_index] = path
 
-	file.store_line(to_save)
+	var frame_index := 1
 	for frame in project.frames:
+		var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		DrawingAlgos.blend_layers(blended_image, frame, Vector2i.ZERO, project)
+		zip_packer.start_file("image_data/final_image_%s" % frame_index)
+		zip_packer.write_file(blended_image.get_data())
+		zip_packer.close_file()
+		var cel_index := 1
 		for cel in frame.cels:
-			cel.save_image_data_to_pxo(file)
+			var cel_image := cel.get_image()
+			if is_instance_valid(cel_image):
+				zip_packer.start_file("image_data/frames/%s/layer_%s" % [frame_index, cel_index])
+				zip_packer.write_file(cel_image.get_data())
+				zip_packer.close_file()
+			cel_index += 1
+		frame_index += 1
+	var brush_index := 0
 	for brush in project.brushes:
-		file.store_buffer(brush.get_data())
+		zip_packer.start_file("image_data/brushes/brush_%s" % brush_index)
+		zip_packer.write_file(brush.get_data())
+		zip_packer.close_file()
+		brush_index += 1
 	if project.tiles.has_mask:
-		file.store_buffer(project.tiles.tile_mask.get_data())
-
-	file.close()
+		zip_packer.start_file("image_data/tile_map")
+		zip_packer.write_file(project.tiles.tile_mask.get_data())
+		zip_packer.close_file()
+	zip_packer.close()
 
 	if temp_path != path:
 		# Rename the new file to its proper name and remove the old file, if it exists.
-		dir.rename(temp_path, path)
+		DirAccess.rename_absolute(temp_path, path)
 
-	if OS.has_feature("web") and !autosave:
-		file = FileAccess.open(path, FileAccess.READ)
+	if OS.has_feature("web") and not autosave:
+		var file := FileAccess.open(path, FileAccess.READ)
 		if FileAccess.get_open_error() == OK:
-			var file_data := Array(file.get_buffer(file.get_length()))
+			var file_data := file.get_buffer(file.get_length())
 			JavaScriptBridge.download_buffer(file_data, path.get_file())
 		file.close()
 		# Remove the .pxo file from memory, as we don't need it anymore
-		var browser_dir := DirAccess.open(path)
-		browser_dir.remove(path)
+		DirAccess.remove_absolute(path)
 
 	if autosave:
 		Global.notification_label("File autosaved")
@@ -688,7 +699,7 @@ func _on_Autosave_timeout() -> void:
 			)
 
 		store_backup_path(i)
-		save_pxo_file(backup_save_paths[i], true, true, Global.projects[i])
+		save_pxo_file(backup_save_paths[i], true, Global.projects[i])
 
 
 ## Backup paths are stored in two ways:

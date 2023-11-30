@@ -57,10 +57,6 @@ func update_texture() -> void:
 	super.update_texture()
 
 
-func save_image_data_to_pxo(file: FileAccess) -> void:
-	file.store_buffer(image.get_data())
-
-
 func load_image_data_from_pxo(file: FileAccess, project_size: Vector2i) -> void:
 	var buffer := file.get_buffer(project_size.x * project_size.y * 4)
 	image = Image.create_from_data(
