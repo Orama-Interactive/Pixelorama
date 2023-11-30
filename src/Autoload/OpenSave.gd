@@ -113,19 +113,6 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 
 
 func open_pxo_file(path: String, untitled_backup := false, replace_empty := true) -> void:
-	var file := FileAccess.open_compressed(path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
-	if FileAccess.get_open_error() == ERR_FILE_UNRECOGNIZED:
-		# If the file is not compressed open it raw (pre-v0.7)
-		file = FileAccess.open(path, FileAccess.READ)
-	var err := FileAccess.get_open_error()
-	if err != OK:
-		Global.error_dialog.set_text(
-			tr("File failed to open. Error code %s (%s)") % [err, error_string(err)]
-		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
-		return
-
 	var empty_project := Global.current_project.is_empty() and replace_empty
 	var new_project: Project
 	if empty_project:
@@ -136,50 +123,72 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 		new_project.name = path.get_file()
 	else:
 		new_project = Project.new([], path.get_file())
-
-	var first_line := file.get_line()
-	var test_json_conv := JSON.new()
-	var error := test_json_conv.parse(first_line)
-	if error != OK:
-		print("Error, corrupt pxo file")
-		file.close()
+	var zip_reader := ZIPReader.new()
+	var err := zip_reader.open(path)
+	if err == FAILED:
+		var success := open_v0_pxo_file(path, new_project)
+		if not success:
+			return
+	elif err != OK:
+		Global.error_dialog.set_text(
+			tr("File failed to open. Error code %s (%s)") % [err, error_string(err)]
+		)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		return
 	else:
+		var data_json := zip_reader.read_file("data.json").get_string_from_utf8()
+		var test_json_conv := JSON.new()
+		var error := test_json_conv.parse(data_json)
+		if error != OK:
+			print("Error, corrupt pxo file")
+			zip_reader.close()
+			return
 		var result = test_json_conv.get_data()
 		if typeof(result) != TYPE_DICTIONARY:
 			print("Error, json parsed result is: %s" % typeof(result))
-			file.close()
+			zip_reader.close()
 			return
 
 		new_project.deserialize(result)
-		for frame in new_project.frames:
-			for cel in frame.cels:
-				cel.load_image_data_from_pxo(file, new_project.size)
-
-		if result.has("brushes"):
-			for brush in result.brushes:
-				var b_width = brush.size_x
-				var b_height = brush.size_y
-				var buffer := file.get_buffer(b_width * b_height * 4)
+		for frame_index in new_project.frames.size():
+			var frame := new_project.frames[frame_index]
+			for cel_index in frame.cels.size():
+				var cel := frame.cels[cel_index]
+				if not cel is PixelCel:
+					continue
+				var image_data := zip_reader.read_file(
+					"image_data/frames/%s/layer_%s" % [frame_index + 1, cel_index + 1]
+				)
 				var image := Image.create_from_data(
-					b_width, b_height, false, Image.FORMAT_RGBA8, buffer
+					new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, image_data
+				)
+				cel.image_changed(image)
+		if result.has("brushes"):
+			var brush_index := 0
+			for brush in result.brushes:
+				var b_width: int = brush.size_x
+				var b_height: int = brush.size_y
+				var image_data := zip_reader.read_file("image_data/brushes/brush_%s" % brush_index)
+				var image := Image.create_from_data(
+					b_width, b_height, false, Image.FORMAT_RGBA8, image_data
 				)
 				new_project.brushes.append(image)
 				Brushes.add_project_brush(image)
-
+				brush_index += 1
 		if result.has("tile_mask") and result.has("has_mask"):
 			if result.has_mask:
 				var t_width = result.tile_mask.size_x
 				var t_height = result.tile_mask.size_y
-				var buffer := file.get_buffer(t_width * t_height * 4)
+				var image_data := zip_reader.read_file("image_data/tile_map")
 				var image := Image.create_from_data(
-					t_width, t_height, false, Image.FORMAT_RGBA8, buffer
+					t_width, t_height, false, Image.FORMAT_RGBA8, image_data
 				)
 				new_project.tiles.tile_mask = image
 			else:
 				new_project.tiles.reset_mask()
+		zip_reader.close()
 
-	file.close()
 	if empty_project:
 		new_project.change_project()
 		Global.project_changed.emit()
@@ -206,6 +215,73 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 
 	save_project_to_recent_list(path)
+
+
+func open_v0_pxo_file(path: String, new_project: Project) -> bool:
+	var file := FileAccess.open_compressed(path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
+	if FileAccess.get_open_error() == ERR_FILE_UNRECOGNIZED:
+		# If the file is not compressed open it raw (pre-v0.7)
+		file = FileAccess.open(path, FileAccess.READ)
+	var err := FileAccess.get_open_error()
+	if err != OK:
+		Global.error_dialog.set_text(
+			tr("File failed to open. Error code %s (%s)") % [err, error_string(err)]
+		)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return false
+
+	var first_line := file.get_line()
+	var test_json_conv := JSON.new()
+	var error := test_json_conv.parse(first_line)
+	if error != OK:
+		print("Error, corrupt pxo file")
+		file.close()
+		return false
+
+	var result = test_json_conv.get_data()
+	if typeof(result) != TYPE_DICTIONARY:
+		print("Error, json parsed result is: %s" % typeof(result))
+		file.close()
+		return false
+
+	new_project.deserialize(result)
+	for frame in new_project.frames:
+		for cel in frame.cels:
+			if cel is PixelCel:
+				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
+				var image := Image.create_from_data(
+					new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, buffer
+				)
+				cel.image_changed(image)
+			elif cel is Cel3D:
+				# Don't do anything with it, just read it so that the file can move on
+				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
+
+	if result.has("brushes"):
+		for brush in result.brushes:
+			var b_width = brush.size_x
+			var b_height = brush.size_y
+			var buffer := file.get_buffer(b_width * b_height * 4)
+			var image := Image.create_from_data(
+				b_width, b_height, false, Image.FORMAT_RGBA8, buffer
+			)
+			new_project.brushes.append(image)
+			Brushes.add_project_brush(image)
+
+	if result.has("tile_mask") and result.has("has_mask"):
+		if result.has_mask:
+			var t_width = result.tile_mask.size_x
+			var t_height = result.tile_mask.size_y
+			var buffer := file.get_buffer(t_width * t_height * 4)
+			var image := Image.create_from_data(
+				t_width, t_height, false, Image.FORMAT_RGBA8, buffer
+			)
+			new_project.tiles.tile_mask = image
+		else:
+			new_project.tiles.reset_mask()
+	file.close()
+	return true
 
 
 func save_pxo_file(path: String, autosave: bool, project := Global.current_project) -> bool:
@@ -258,7 +334,7 @@ func save_pxo_file(path: String, autosave: bool, project := Global.current_proje
 	for frame in project.frames:
 		var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		DrawingAlgos.blend_layers(blended_image, frame, Vector2i.ZERO, project)
-		zip_packer.start_file("image_data/final_image_%s" % frame_index)
+		zip_packer.start_file("image_data/final_images/%s" % frame_index)
 		zip_packer.write_file(blended_image.get_data())
 		zip_packer.close_file()
 		var cel_index := 1

@@ -57,14 +57,6 @@ func update_texture() -> void:
 	super.update_texture()
 
 
-func load_image_data_from_pxo(file: FileAccess, project_size: Vector2i) -> void:
-	var buffer := file.get_buffer(project_size.x * project_size.y * 4)
-	image = Image.create_from_data(
-		project_size.x, project_size.y, false, Image.FORMAT_RGBA8, buffer
-	)
-	image_changed(image)
-
-
 func instantiate_cel_button() -> Node:
 	return Global.pixel_cel_button_node.instantiate()
 

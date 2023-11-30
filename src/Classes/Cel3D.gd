@@ -289,10 +289,6 @@ func on_remove() -> void:
 	if is_instance_valid(viewport):
 		viewport.queue_free()
 
-## Don't do anything with it, just read it so that the file can move on
-func load_image_data_from_pxo(file: FileAccess, project_size: Vector2i) -> void:
-	file.get_buffer(project_size.x * project_size.y * 4)
-
 
 func instantiate_cel_button() -> Node:
 	return Global.cel_3d_button_node.instantiate()
