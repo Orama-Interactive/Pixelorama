@@ -65,8 +65,7 @@ func _setup_file_menu() -> void:
 		if item == "Recent projects":
 			_setup_recent_projects_submenu(item)
 		else:
-			file_menu.add_item(item, i)
-			_set_menu_shortcut(file_menu_items[item], file_menu, i)
+			_set_menu_shortcut(file_menu_items[item], file_menu, i, item)
 		i += 1
 
 	file_menu.id_pressed.connect(file_menu_id_pressed)
@@ -109,8 +108,10 @@ func _setup_edit_menu() -> void:
 	var edit_menu: PopupMenu = edit_menu_button.get_popup()
 	var i := 0
 	for item in edit_menu_items:
-		edit_menu.add_item(item, i)
-		_set_menu_shortcut(edit_menu_items[item], edit_menu, i)
+		var echo := false
+		if item in ["Undo", "Redo"]:
+			echo = true
+		_set_menu_shortcut(edit_menu_items[item], edit_menu, i, item, false, echo)
 		i += 1
 
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, true)
@@ -142,8 +143,7 @@ func _setup_view_menu() -> void:
 		elif item == "Tile Mode Offsets":
 			view_menu.add_item(item, i)
 		else:
-			view_menu.add_check_item(item, i)
-			_set_menu_shortcut(view_menu_items[item], view_menu, i)
+			_set_menu_shortcut(view_menu_items[item], view_menu, i, item, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
 	view_menu.set_item_checked(Global.ViewMenu.DISPLAY_LAYER_EFFECTS, true)
@@ -223,8 +223,7 @@ func _setup_window_menu() -> void:
 		elif item == "Window Opacity":
 			window_menu.add_item(item, i)
 		else:
-			window_menu.add_check_item(item, i)
-			_set_menu_shortcut(window_menu_items[item], window_menu, i)
+			_set_menu_shortcut(window_menu_items[item], window_menu, i, item, true)
 		i += 1
 	window_menu.hide_on_checkable_item_selection = false
 	window_menu.id_pressed.connect(window_menu_id_pressed)
@@ -302,8 +301,7 @@ func _setup_image_menu() -> void:
 	var image_menu: PopupMenu = image_menu_button.get_popup()
 	var i := 0
 	for item in image_menu_items:
-		image_menu.add_item(item, i)
-		_set_menu_shortcut(image_menu_items[item], image_menu, i)
+		_set_menu_shortcut(image_menu_items[item], image_menu, i, item)
 		i += 1
 
 	image_menu.id_pressed.connect(image_menu_id_pressed)
@@ -323,8 +321,7 @@ func _setup_select_menu() -> void:
 		if item == "Tile Mode":
 			select_menu.add_check_item(item, i)
 		else:
-			select_menu.add_item(item, i)
-			_set_menu_shortcut(select_menu_items[item], select_menu, i)
+			_set_menu_shortcut(select_menu_items[item], select_menu, i, item)
 	select_menu.id_pressed.connect(select_menu_id_pressed)
 
 
@@ -341,21 +338,30 @@ func _setup_help_menu() -> void:
 	var help_menu: PopupMenu = help_menu_button.get_popup()
 	var i := 0
 	for item in help_menu_items:
-		help_menu.add_item(item, i)
-		_set_menu_shortcut(help_menu_items[item], help_menu, i)
+		_set_menu_shortcut(help_menu_items[item], help_menu, i, item)
 		i += 1
 
 	help_menu.id_pressed.connect(help_menu_id_pressed)
 
 
-func _set_menu_shortcut(action: StringName, menu: PopupMenu, index: int) -> void:
+func _set_menu_shortcut(
+	action: StringName, menu: PopupMenu, index: int, text: String, is_check := false, echo := false
+) -> void:
 	if action.is_empty():
+		if is_check:
+			menu.add_item(text, index)
+		else:
+			menu.add_check_item(text, index)
 		return
 	var shortcut := Shortcut.new()
 	var event := InputEventAction.new()
 	event.action = action
 	shortcut.events.append(event)
-	menu.set_item_shortcut(index, shortcut)
+	if is_check:
+		menu.add_check_shortcut(shortcut, index)
+	else:
+		menu.add_shortcut(shortcut, index, false, echo)
+	menu.set_item_text(index, text)
 
 
 func _handle_metadata(id: int, menu_button: MenuButton) -> void:
@@ -363,8 +369,8 @@ func _handle_metadata(id: int, menu_button: MenuButton) -> void:
 	var metadata = menu_button.get_popup().get_item_metadata(id)
 	if metadata:
 		if metadata is Object:
-			if metadata.has_method("menu_item_clicked"):
-				metadata.call("menu_item_clicked")
+			if metadata.has_method(&"menu_item_clicked"):
+				metadata.call(&"menu_item_clicked")
 
 
 func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
