@@ -40,7 +40,16 @@ func _ready() -> void:
 	Global.save_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
-
+	var include_blended := CheckBox.new()
+	include_blended.name = "IncludeBlended"
+	include_blended.text = "Include blended images"
+	include_blended.tooltip_text = """
+If enabled, the final blended images are also being stored in the pxo, for each frame.
+This makes the pxo file larger and is useful for importing by third-party software
+or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.
+"""
+	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	Global.save_sprites_dialog.get_vbox().add_child(include_blended)
 	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
 	# Additionally, AppArmor policies prevent the app from writing to the /home
 	# directory. Until the proper AppArmor policies are determined to write to these
@@ -274,7 +283,10 @@ func _on_SaveSprite_file_selected(path: String) -> void:
 
 
 func save_project(path: String) -> void:
-	var success = OpenSave.save_pxo_file(path, false)
+	var include_blended: bool = (
+		Global.save_sprites_dialog.get_vbox().get_node("IncludeBlended").button_pressed
+	)
+	var success := OpenSave.save_pxo_file(path, false, include_blended)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())

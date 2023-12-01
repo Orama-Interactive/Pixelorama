@@ -126,6 +126,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 	var zip_reader := ZIPReader.new()
 	var err := zip_reader.open(path)
 	if err == FAILED:
+		# Most likely uses the old pxo format, load that
 		var success := open_v0_pxo_file(path, new_project)
 		if not success:
 			return
@@ -256,7 +257,7 @@ func open_v0_pxo_file(path: String, new_project: Project) -> bool:
 				cel.image_changed(image)
 			elif cel is Cel3D:
 				# Don't do anything with it, just read it so that the file can move on
-				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
+				file.get_buffer(new_project.size.x * new_project.size.y * 4)
 
 	if result.has("brushes"):
 		for brush in result.brushes:
@@ -284,7 +285,9 @@ func open_v0_pxo_file(path: String, new_project: Project) -> bool:
 	return true
 
 
-func save_pxo_file(path: String, autosave: bool, project := Global.current_project) -> bool:
+func save_pxo_file(
+	path: String, autosave: bool, include_blended := false, project := Global.current_project
+) -> bool:
 	if !autosave:
 		project.name = path.get_file()
 	var serialized_data := project.serialize()
@@ -332,15 +335,16 @@ func save_pxo_file(path: String, autosave: bool, project := Global.current_proje
 
 	var frame_index := 1
 	for frame in project.frames:
-		var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		DrawingAlgos.blend_layers(blended_image, frame, Vector2i.ZERO, project)
-		zip_packer.start_file("image_data/final_images/%s" % frame_index)
-		zip_packer.write_file(blended_image.get_data())
-		zip_packer.close_file()
+		if not autosave and include_blended:
+			var blended := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
+			zip_packer.start_file("image_data/final_images/%s" % frame_index)
+			zip_packer.write_file(blended.get_data())
+			zip_packer.close_file()
 		var cel_index := 1
 		for cel in frame.cels:
 			var cel_image := cel.get_image()
-			if is_instance_valid(cel_image):
+			if is_instance_valid(cel_image) and cel is PixelCel:
 				zip_packer.start_file("image_data/frames/%s/layer_%s" % [frame_index, cel_index])
 				zip_packer.write_file(cel_image.get_data())
 				zip_packer.close_file()
@@ -775,7 +779,7 @@ func _on_Autosave_timeout() -> void:
 			)
 
 		store_backup_path(i)
-		save_pxo_file(backup_save_paths[i], true, Global.projects[i])
+		save_pxo_file(backup_save_paths[i], true, false, Global.projects[i])
 
 
 ## Backup paths are stored in two ways:

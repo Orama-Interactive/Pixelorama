@@ -82,7 +82,14 @@ msgstr ""
 msgid "Save as..."
 msgstr ""
 
-msgid "Use ZSTD Compression"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr ""
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
 msgstr ""
 
 msgid "Import"
