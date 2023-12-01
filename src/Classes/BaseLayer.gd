@@ -206,12 +206,16 @@ func display_effects(cel: BaseCel) -> Image:
 ## Returns a curated [Dictionary] containing the layer data.
 func serialize() -> Dictionary:
 	assert(index == project.layers.find(self))
+	var effect_data: Array[Dictionary] = []
+	for effect in effects:
+		effect_data.append(effect.serialize())
 	var dict := {
 		"name": name,
 		"visible": visible,
 		"locked": locked,
 		"blend_mode": blend_mode,
-		"parent": parent.index if is_instance_valid(parent) else -1
+		"parent": parent.index if is_instance_valid(parent) else -1,
+		"effects": effect_data
 	}
 	if not cel_link_sets.is_empty():
 		var cels := []  # Cels array for easy finding of the frame index for link_set saving
@@ -246,6 +250,14 @@ func deserialize(dict: Dictionary) -> void:
 				var linked_cel: BaseCel = link_set["cels"][0]
 				cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
 			cel_link_sets.append(link_set)
+	if dict.has("effects"):
+		for effect_dict in dict["effects"]:
+			if not typeof(effect_dict) == TYPE_DICTIONARY:
+				print("Loading effect failed, not a dictionary.")
+				continue
+			var effect := LayerEffect.new()
+			effect.deserialize(effect_dict)
+			effects.append(effect)
 
 
 ## Returns a layer type that is one of the [param LayerTypes]
