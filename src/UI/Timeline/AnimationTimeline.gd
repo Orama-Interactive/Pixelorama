@@ -1,5 +1,7 @@
 extends Panel
 
+const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
+
 var is_animation_running := false
 var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
@@ -13,24 +15,21 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
-var frame_button_node := preload("res://src/UI/Timeline/FrameButton.tscn")
-
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
-@onready var tag_spacer = find_child("TagSpacer")
-@onready var start_spacer = find_child("StartSpacer")
-@onready var layer_settings_container: VBoxContainer = %LayerSettingsContainer
-@onready var layer_container: VBoxContainer = %LayerContainer
-@onready var add_layer_list: MenuButton = $"%AddLayerList"
+@onready var tag_spacer := %TagSpacer as Control
+@onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
+@onready var layer_container := %LayerContainer as VBoxContainer
+@onready var add_layer_list := $"%AddLayerList" as MenuButton
 @onready var blend_modes_button := %BlendModes as OptionButton
-@onready var timeline_scroll: ScrollContainer = find_child("TimelineScroll")
-@onready var frame_scroll_container: Control = find_child("FrameScrollContainer")
-@onready var frame_scroll_bar: HScrollBar = find_child("FrameScrollBar")
-@onready var tag_scroll_container: ScrollContainer = find_child("TagScroll")
-@onready var layer_frame_h_split: HSplitContainer = find_child("LayerFrameHSplit")
-@onready var fps_spinbox: ValueSlider = find_child("FPSValue")
-@onready var onion_skinning_button: BaseButton = find_child("OnionSkinning")
-@onready var loop_animation_button: BaseButton = find_child("LoopAnim")
-@onready var drag_highlight: ColorRect = find_child("DragHighlight")
+@onready var frame_scroll_container := %FrameScrollContainer as Control
+@onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
+@onready var tag_scroll_container := %TagScroll as ScrollContainer
+@onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
+@onready var fps_spinbox := %FPSValue as ValueSlider
+@onready var onion_skinning_button := %OnionSkinning as BaseButton
+@onready var onion_skinning_settings := $OnionSkinningSettings as Popup
+@onready var loop_animation_button := %LoopAnim as BaseButton
+@onready var drag_highlight := $DragHighlight as ColorRect
 
 
 func _ready() -> void:
@@ -86,14 +85,14 @@ func _ready() -> void:
 	var future_above = Global.config_cache.get_value(
 		"timeline", "future_above_canvas", future_above_canvas
 	)
-	$"%PastOnionSkinning".value = past_rate
-	$"%FutureOnionSkinning".value = future_rate
-	$"%BlueRedMode".button_pressed = blue_red
-	$"%PastPlacement".select(0 if past_above else 1)
-	$"%FuturePlacement".select(0 if future_above else 1)
+	%PastOnionSkinning.value = past_rate
+	%FutureOnionSkinning.value = future_rate
+	%BlueRedMode.button_pressed = blue_red
+	%PastPlacement.select(0 if past_above else 1)
+	%FuturePlacement.select(0 if future_above else 1)
 	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
-	$"%PastPlacement".item_selected.emit(0 if past_above else 1)
-	$"%FuturePlacement".item_selected.emit(0 if future_above else 1)
+	%PastPlacement.item_selected.emit(0 if past_above else 1)
+	%FuturePlacement.item_selected.emit(0 if future_above else 1)
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.emit_signal.call_deferred("resized")
 
@@ -488,14 +487,8 @@ func _on_OnionSkinning_pressed() -> void:
 
 
 func _on_OnionSkinningSettings_pressed() -> void:
-	$OnionSkinningSettings.popup(
-		Rect2(
-			onion_skinning_button.global_position.x - $OnionSkinningSettings.size.x - 16,
-			onion_skinning_button.global_position.y - $OnionSkinningSettings.size.y + 32,
-			136,
-			126
-		)
-	)
+	var pos := Vector2i(onion_skinning_button.global_position) - onion_skinning_settings.size
+	onion_skinning_settings.popup(Rect2i(pos.x - 16, pos.y + 32, 136, 126))
 
 
 func _on_LoopAnim_pressed() -> void:
@@ -981,11 +974,11 @@ func _on_OpacitySlider_value_changed(value: float) -> void:
 
 
 func _on_onion_skinning_settings_close_requested() -> void:
-	$OnionSkinningSettings.hide()
+	onion_skinning_settings.hide()
 
 
 func _on_onion_skinning_settings_visibility_changed() -> void:
-	Global.can_draw = not $OnionSkinningSettings.visible
+	Global.can_draw = not onion_skinning_settings.visible
 
 
 # Methods to update the UI in response to changes in the current project
@@ -1005,7 +998,7 @@ func project_changed() -> void:
 	for i in project.layers.size():
 		project_layer_added(i)
 	for f in project.frames.size():
-		var button := frame_button_node.instantiate() as Button
+		var button := FRAME_BUTTON_TSCN.instantiate() as Button
 		button.frame = f
 		Global.frame_hbox.add_child(button)
 
@@ -1030,7 +1023,7 @@ func project_changed() -> void:
 
 func project_frame_added(frame: int) -> void:
 	var project := Global.current_project
-	var button := frame_button_node.instantiate() as Button
+	var button := FRAME_BUTTON_TSCN.instantiate() as Button
 	button.frame = frame
 	Global.frame_hbox.add_child(button)
 	Global.frame_hbox.move_child(button, frame)
