@@ -39,7 +39,6 @@ script = ExtResource("3")
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 13
 alignment = 1
 
 [node name="ButtonVBoxContainer" type="VBoxContainer" parent="ColorPickersHorizontal"]
@@ -103,6 +102,7 @@ offset_top = 36.0
 offset_right = 30.0
 offset_bottom = 58.0
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 button_mask = 3
 
 [node name="AverageColor" type="ColorRect" parent="ColorPickersHorizontal/ButtonVBoxContainer/ColorButtons/CopyAverage"]
