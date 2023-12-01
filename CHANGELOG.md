@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
-Built using Godot 4.1.2
+Built using Godot 4.2
 
 ### Added
 - Support for multiple layer blend modes are finally here! [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
