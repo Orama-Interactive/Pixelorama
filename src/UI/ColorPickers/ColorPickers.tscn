@@ -32,13 +32,12 @@ action = &"reset_colors_default"
 events = [SubResource("InputEventAction_nptxe")]
 
 [node name="ColorPickers" type="PanelContainer"]
-offset_left = 958.0
-offset_top = 170.0
-offset_right = 1276.0
-offset_bottom = 229.062
+offset_right = 298.0
+offset_bottom = 300.0
 script = ExtResource("3")
 
 [node name="ColorPickersHorizontal" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 13
 alignment = 1
@@ -161,7 +160,17 @@ tooltip_text = "Choose a color for the right tool"
 mouse_default_cursor_shape = 2
 color = Color(1, 1, 1, 1)
 
-[connection signal="color_changed" from="ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_color_changed" binds= [false]]
+[node name="ColorPicker" type="ColorPicker" parent="."]
+layout_mode = 2
+alignment = 1
+deferred_mode = true
+can_add_swatches = false
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+presets_visible = false
+
+[connection signal="color_changed" from="ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="popup_closed" from="ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_popup_closed"]
 [connection signal="pressed" from="ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_pressed"]
 [connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
@@ -170,6 +179,6 @@ color = Color(1, 1, 1, 1)
 [connection signal="button_up" from="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/CopyAverage" to="." method="_on_CopyAverage_button_up"]
 [connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/ToRight" to="." method="_on_ToRight_pressed"]
 [connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
-[connection signal="color_changed" from="ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_ColorPickerButton_color_changed" binds= [true]]
+[connection signal="color_changed" from="ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="popup_closed" from="ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_ColorPickerButton_popup_closed"]
 [connection signal="pressed" from="ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_ColorPickerButton_pressed"]

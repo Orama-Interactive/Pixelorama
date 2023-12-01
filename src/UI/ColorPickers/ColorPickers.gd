@@ -3,6 +3,7 @@ extends Container
 @onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton as ColorPickerButton
 @onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton as ColorPickerButton
 @onready var average_color := $"%AverageColor" as ColorRect
+@onready var color_picker: ColorPicker = $ColorPicker
 
 
 func _ready() -> void:
@@ -10,6 +11,25 @@ func _ready() -> void:
 	left_picker.get_picker().presets_visible = false
 	right_picker.get_picker().presets_visible = false
 	_average(left_picker.color, right_picker.color)
+
+	await get_tree().process_frame
+	var picker_margin_container := color_picker.get_child(0, true) as MarginContainer
+	picker_margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var picker_vbox_container := picker_margin_container.get_child(0, true) as VBoxContainer
+	var shapes_container := picker_vbox_container.get_child(0, true) as HBoxContainer
+	shapes_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var square_picker := shapes_container.get_child(0, true) as Control
+	var shape_aspect_ratio := shapes_container.get_child(1, true) as AspectRatioContainer
+	square_picker.custom_minimum_size = Vector2(32, 32)
+	shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
+	var sampler_cont := picker_vbox_container.get_child(1, true) as HBoxContainer
+	var color_texture_rect := sampler_cont.get_child(1, true) as TextureRect
+	color_texture_rect.visible = false
+	var hex_cont :=  picker_vbox_container.get_child(4, true).get_child(1, true) as Container
+	var hex_edit := hex_cont.get_child(2, true)
+	hex_cont.remove_child(hex_edit)
+	sampler_cont.add_child(hex_edit)
+	sampler_cont.move_child(hex_edit, 1)
 
 
 func _on_ColorSwitch_pressed() -> void:
