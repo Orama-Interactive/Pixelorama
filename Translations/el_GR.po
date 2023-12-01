@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-11-21 23:11\n"
+"PO-Revision-Date: 2023-12-01 02:27\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -142,11 +142,11 @@ msgid "Delete"
 msgstr "Διαγραφή"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Οριστική διαγραφή"
 
 #. When you move something to recycle bin
 msgid "Move to Trash"
-msgstr ""
+msgstr "Μετακίνηση στον κάδο απορριμμάτων"
 
 msgid "New Brush"
 msgstr "Νέο πινέλο"
@@ -646,7 +646,7 @@ msgstr ""
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Γραμμικό sRGB"
 
 msgid "General"
 msgstr "Γενικά"
@@ -1689,7 +1689,7 @@ msgid "Zoom out"
 msgstr "Σμίκρυνση"
 
 msgid "Options"
-msgstr ""
+msgstr "Επιλογές"
 
 msgid "Options:"
 msgstr "Επιλογές:"
@@ -2796,7 +2796,7 @@ msgstr "Μαυρίζει την εικόνα και κάνει όλα τα αδ�
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Ενεργό"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
@@ -2804,5 +2804,5 @@ msgstr ""
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "Προσθήκη εφέ"
 
