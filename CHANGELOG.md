@@ -8,10 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
-Built using Godot 4.1.2
+Built using Godot 4.2
 
 ### Added
 - Support for multiple layer blend modes are finally here! [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
+- Non-destructive layer effects have been implemented. [#940](https://github.com/Orama-Interactive/Pixelorama/pull/940)
 - Export to webp and jpeg file formats. Webp is currently only for static images and does not support animations.
 - Added some missing shortcuts for buttons. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - The brush increment/decrement shortcuts can now be changed. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
@@ -29,11 +30,14 @@ Built using Godot 4.1.2
 - Dividing by zero in value sliders and spinboxes no longer crashes the program.
 
 ## [v0.11.4] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
 Built using Godot 3.5.2
 
 ### Changed
 - High res display is now enabled on macOS. [#936](https://github.com/Orama-Interactive/Pixelorama/issues/936)
+- Make cloned frames only select a cel if its corresponding original cel was selected as well. [#941](https://github.com/Orama-Interactive/Pixelorama/pull/941)
 
 ### Fixed
 - Memory usage has been greatly optimized when doing operations such as drawing, image effects, selecting, transforming, etc, as the images stored in memory are now compressed. [#883](https://github.com/Orama-Interactive/Pixelorama/issues/883)
@@ -41,6 +45,7 @@ Built using Godot 3.5.2
 - Tool shortcuts can now work with <kbd>Control</kbd>. [#935](https://github.com/Orama-Interactive/Pixelorama/issues/935)
 - Optimize canvas drawing by only updating it when the image(s) have changed. [ac6a4db43d9296ebc03e639d8199dd3878a25d86](https://github.com/Orama-Interactive/Pixelorama/commit/ac6a4db43d9296ebc03e639d8199dd3878a25d86)
 - The ellipse tool no longer produces gaps with large sizes. [4f3a7a305a264e0d2fe86c201af76eca4b2fea0a](https://github.com/Orama-Interactive/Pixelorama/commit/4f3a7a305a264e0d2fe86c201af76eca4b2fea0a)
+- Fix "visible layers" option on the export dialog producing wrong results. [346d1f071a8c6b1defb1072d39aea9c642f1ef59](https://github.com/Orama-Interactive/Pixelorama/commit/346d1f071a8c6b1defb1072d39aea9c642f1ef59)
 - Random brushes now work again. [1317e40ffa5e9f01a9d214221bb5133db20a1de9](https://github.com/Orama-Interactive/Pixelorama/commit/1317e40ffa5e9f01a9d214221bb5133db20a1de9)
 
 ## [v0.11.3] - 2023-10-30

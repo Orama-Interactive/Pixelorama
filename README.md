@@ -61,7 +61,7 @@ You can find Online Documentation for Pixelorama here: https://orama-interactive
 It's still work in progress so there are some pages missing. If you want to contribute, you can do so in [Pixelorama-Docs' GitHub Repository](https://github.com/Orama-Interactive/Pixelorama-Docs).
 
 ## Cloning Instructions
-Pixelorama uses Godot 4.1, so you will need to have it in order to run the project. Older versions will not work.
+Pixelorama uses Godot 4.2, so you will need to have it in order to run the project. Older versions will not work.
 As of right now, most of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
 ## Current features:
@@ -91,5 +91,5 @@ As of right now, most of the code is written using GDScript, so the mono version
 - https://github.com/Orama-Interactive/Keychain - the plugin Pixelorama's shortcut system uses for extensive customizability.
 - https://github.com/jegor377/godot-gdgifexporter - the gif exporter Pixelorama uses.
 - https://github.com/Pukkah/HTML5-File-Exchange-for-Godot - responsible for file exchange in Pixelorama's HTML5 (Web) version.
-- https://github.com/aBARICHELLO/godot-ci - for creating a Godot Docker image that lets us export Pixelorama automatically using GitHub Actions, as well as https://github.com/huskeee/godot-headless-mac for automated macOS exporting and https://github.com/hiulit/Unofficial-Godot-Engine-Raspberry-Pi for automated Raspberry Pi 4 exporting.
+- https://github.com/aBARICHELLO/godot-ci - for creating a Godot Docker image that lets us export Pixelorama automatically using GitHub Actions.
 - The entire Pixelorama community! Contributors, donors, translators, users, you all have a special place in our hearts! <3

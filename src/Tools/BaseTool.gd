@@ -8,7 +8,8 @@ var cursor_text := ""
 var _cursor := Vector2i(Vector2.INF)
 
 var _draw_cache: Array[Vector2i] = []  ## For storing already drawn pixels
-@warning_ignore("unused_private_class_variable") var _for_frame := 0  ## Cache for which frame
+@warning_ignore("unused_private_class_variable")
+var _for_frame := 0  ## Cache for which frame
 
 # Only use _spacing_mode and _spacing variables (the others are set automatically)
 # The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd)

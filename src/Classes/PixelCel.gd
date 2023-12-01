@@ -3,24 +3,21 @@ extends BaseCel
 ## A class for the properties of cels in PixelLayers.
 ## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
-## This variable is where the image data of each cel are.
+## This variable is where the image data of the cel are.
 var image: Image:
 	set = image_changed
 
 
-func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
-	if _image_texture:
-		image_texture = _image_texture
-	else:
-		image_texture = ImageTexture.new()
+func _init(_image := Image.new(), _opacity := 1.0) -> void:
+	image_texture = ImageTexture.new()
 	image = _image  # Set image and call setter
 	opacity = _opacity
 
 
 func image_changed(value: Image) -> void:
 	image = value
-	if !image.is_empty():
-		image_texture = ImageTexture.create_from_image(image)
+	if not image.is_empty() and is_instance_valid(image_texture):
+		image_texture.set_image(image)
 
 
 func get_content():
@@ -29,12 +26,12 @@ func get_content():
 
 func set_content(content, texture: ImageTexture = null) -> void:
 	image = content
-	if is_instance_valid(texture):
+	if is_instance_valid(texture) and is_instance_valid(texture.get_image()):
 		image_texture = texture
 		if image_texture.get_image().get_size() != image.get_size():
-			image_texture = ImageTexture.create_from_image(image)
+			image_texture.set_image(image)
 	else:
-		image_texture = ImageTexture.create_from_image(image)
+		image_texture.update(image)
 
 
 func create_empty_content():
