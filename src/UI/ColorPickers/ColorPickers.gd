@@ -12,6 +12,7 @@ func _ready() -> void:
 	Tools.color_changed.connect(update_color)
 	_average(left_color_rect.color, right_color_rect.color)
 
+	# Make changes to the UI of the color picker by modifying its internal children
 	await get_tree().process_frame
 	var picker_margin_container := color_picker.get_child(0, true) as MarginContainer
 	picker_margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -75,7 +76,7 @@ func _average(color_1: Color, color_2: Color) -> void:
 	var average_a := (color_1.a + color_2.a) / 2.0
 	var average := Color(average_r, average_g, average_b, average_a)
 
-	var copy_button = average_color.get_parent()
+	var copy_button := average_color.get_parent() as Control
 	copy_button.tooltip_text = str("Average Color:\n#", average.to_html())
 	average_color.color = average
 
