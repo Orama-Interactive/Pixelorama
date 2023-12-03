@@ -71,6 +71,11 @@ func _on_ColorDefaults_pressed() -> void:
 	Tools.default_color()
 
 
+func _on_expand_button_toggled(toggled_on: bool) -> void:
+	color_picker.color_modes_visible = toggled_on
+	color_picker.sliders_visible = toggled_on
+
+
 func _average(color_1: Color, color_2: Color) -> void:
 	var average_r := (color_1.r + color_2.r) / 2.0
 	var average_g := (color_1.g + color_2.g) / 2.0

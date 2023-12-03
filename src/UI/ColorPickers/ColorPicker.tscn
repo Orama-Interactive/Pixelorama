@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3vcvhh4d8hd7"]
+[gd_scene load_steps=13 format=3 uid="uid://c3vcvhh4d8hd7"]
 
 [ext_resource type="Script" path="res://src/UI/ColorPickers/ColorPicker.gd" id="1_r8ot0"]
 [ext_resource type="Texture2D" uid="uid://d0v821l01w7go" path="res://assets/graphics/misc/color_switch.png" id="2_ojj3i"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="3_vjkb0"]
 [ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="4_oxnnt"]
-[ext_resource type="Texture2D" uid="uid://dkpxkdk1xf0ea" path="res://assets/graphics/misc/color_defaults.png" id="5_67w67"]
+[ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="6_b86m2"]
+[ext_resource type="Texture2D" uid="uid://bhkmiijflfqxx" path="res://assets/graphics/misc/value_arrow_up.svg" id="7_p4te3"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_02x7w"]
 
@@ -34,8 +35,9 @@ events = [SubResource("InputEventAction_nptxe")]
 
 [node name="ColorPicker" type="PanelContainer"]
 offset_right = 298.0
-offset_bottom = 349.0
+offset_bottom = 358.0
 script = ExtResource("1_r8ot0")
+metadata/_edit_horizontal_guides_ = [312.0, 340.0, 310.0, 342.0]
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
@@ -44,7 +46,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = -18
+theme_override_constants/separation = -6
 alignment = 1
 
 [node name="ColorPicker" type="ColorPicker" parent="ScrollContainer/VerticalContainer"]
@@ -52,7 +54,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
 can_add_swatches = false
 color_modes_visible = false
 sliders_visible = false
@@ -116,10 +117,11 @@ metadata/_edit_lock_ = true
 
 [node name="ColorButtonsVertical" type="VBoxContainer" parent="ScrollContainer/VerticalContainer/ColorButtons"]
 layout_mode = 2
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="CopyAverage" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical"]
-custom_minimum_size = Vector2(16, 14)
+custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
@@ -132,10 +134,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -7.0
-offset_top = -6.0
-offset_right = 7.0
-offset_bottom = 6.0
+offset_left = -5.5
+offset_top = -5.5
+offset_right = 5.5
+offset_bottom = 5.5
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
@@ -151,13 +153,48 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="ColorDefaults" type="TextureButton" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical"]
+[node name="ColorDefaults" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical"]
+custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_horizontal = 4
 tooltip_text = "Reset the colors to their default state (black for left, white for right)"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_uay2n")
-texture_normal = ExtResource("5_67w67")
+
+[node name="ColorRectBackground" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.686275, 0.686275, 0.686275, 1)
+
+[node name="ColorRectBlack" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 7.0
+offset_bottom = 13.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRectWhite" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 2.0
+offset_right = 13.0
+offset_bottom = 13.0
+mouse_filter = 2
+
+[node name="ExpandButton" type="TextureButton" parent="ScrollContainer/VerticalContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("6_b86m2")
+texture_pressed = ExtResource("7_p4te3")
 
 [connection signal="color_changed" from="ScrollContainer/VerticalContainer/ColorPicker" to="." method="_on_color_picker_color_changed"]
 [connection signal="toggled" from="ScrollContainer/VerticalContainer/ColorButtons/LeftColorButton" to="." method="_on_left_color_button_toggled"]
@@ -166,3 +203,4 @@ texture_normal = ExtResource("5_67w67")
 [connection signal="button_up" from="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage" to="." method="_on_CopyAverage_button_up"]
 [connection signal="gui_input" from="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage" to="." method="_on_copy_average_gui_input"]
 [connection signal="pressed" from="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
+[connection signal="toggled" from="ScrollContainer/VerticalContainer/ExpandButton" to="." method="_on_expand_button_toggled"]
