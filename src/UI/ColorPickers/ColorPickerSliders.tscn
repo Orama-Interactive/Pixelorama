@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8gpqnh33fbto"]
+
+[ext_resource type="Script" path="res://src/UI/ColorPickers/ColorPickerSliders.gd" id="1_u3v1p"]
+
+[node name="ColorPickerSliders" type="PanelContainer"]
+offset_right = 356.0
+offset_bottom = 199.0
+script = ExtResource("1_u3v1p")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+
+[node name="ColorPicker" type="ColorPicker" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+picker_shape = 4
+can_add_swatches = false
+sampler_visible = false
+hex_visible = false
+presets_visible = false
+
+[connection signal="color_changed" from="ScrollContainer/ColorPicker" to="." method="_on_color_picker_color_changed"]

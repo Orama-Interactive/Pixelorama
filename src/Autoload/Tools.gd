@@ -4,6 +4,7 @@ signal color_changed(color, button)
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 
+var picking_color_for := MOUSE_BUTTON_LEFT
 var horizontal_mirror := false
 var vertical_mirror := false
 var pixel_perfect := false

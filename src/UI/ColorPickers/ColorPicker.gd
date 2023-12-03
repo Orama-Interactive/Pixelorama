@@ -1,7 +1,5 @@
 extends Container
 
-var picking_color := MOUSE_BUTTON_LEFT
-
 @onready var average_color := %AverageColor as ColorRect
 @onready var color_picker := %ColorPicker as ColorPicker
 @onready var right_color_rect := %RightColorRect as ColorRect
@@ -34,25 +32,25 @@ func _ready() -> void:
 
 
 func _on_color_picker_color_changed(color: Color) -> void:
-	if picking_color == MOUSE_BUTTON_RIGHT:
+	if Tools.picking_color_for == MOUSE_BUTTON_RIGHT:
 		right_color_rect.color = color
 	else:
 		left_color_rect.color = color
-	Tools.assign_color(color, picking_color)
+	Tools.assign_color(color, Tools.picking_color_for)
 
 
 func _on_left_color_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		picking_color = MOUSE_BUTTON_LEFT
+		Tools.picking_color_for = MOUSE_BUTTON_LEFT
 		color_picker.color = left_color_rect.color
 	else:
-		picking_color = MOUSE_BUTTON_RIGHT
+		Tools.picking_color_for = MOUSE_BUTTON_RIGHT
 		color_picker.color = right_color_rect.color
 	_average(left_color_rect.color, right_color_rect.color)
 
 
 func update_color(color: Color, button: int) -> void:
-	if picking_color == button:
+	if Tools.picking_color_for == button:
 		color_picker.color = color
 	if button == MOUSE_BUTTON_RIGHT:
 		right_color_rect.color = color
