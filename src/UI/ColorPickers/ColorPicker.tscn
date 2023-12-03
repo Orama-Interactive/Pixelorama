@@ -34,7 +34,7 @@ action = &"reset_colors_default"
 events = [SubResource("InputEventAction_nptxe")]
 
 [node name="ColorPicker" type="PanelContainer"]
-offset_right = 298.0
+offset_right = 312.0
 offset_bottom = 358.0
 script = ExtResource("1_r8ot0")
 metadata/_edit_horizontal_guides_ = [312.0, 340.0, 310.0, 342.0]
@@ -188,7 +188,7 @@ offset_right = 13.0
 offset_bottom = 13.0
 mouse_filter = 2
 
-[node name="ExpandButton" type="TextureButton" parent="ScrollContainer/VerticalContainer"]
+[node name="ExpandButton" type="TextureButton" parent="ScrollContainer/VerticalContainer" groups=["UIButtons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
