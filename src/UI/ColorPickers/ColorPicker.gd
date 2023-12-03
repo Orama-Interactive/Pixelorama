@@ -1,9 +1,10 @@
 extends Container
 
-@onready var average_color := %AverageColor as ColorRect
 @onready var color_picker := %ColorPicker as ColorPicker
-@onready var right_color_rect := %RightColorRect as ColorRect
+@onready var color_buttons := %ColorButtons as HBoxContainer
 @onready var left_color_rect := %LeftColorRect as ColorRect
+@onready var right_color_rect := %RightColorRect as ColorRect
+@onready var average_color := %AverageColor as ColorRect
 
 
 func _ready() -> void:
@@ -29,6 +30,9 @@ func _ready() -> void:
 	hex_cont.remove_child(hex_edit)
 	sampler_cont.add_child(hex_edit)
 	sampler_cont.move_child(hex_edit, 1)
+	color_buttons.get_parent().remove_child(color_buttons)
+	sampler_cont.add_child(color_buttons)
+	sampler_cont.move_child(color_buttons, 0)
 
 
 func _on_color_picker_color_changed(color: Color) -> void:

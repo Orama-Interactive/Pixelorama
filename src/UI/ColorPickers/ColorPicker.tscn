@@ -60,14 +60,13 @@ hex_visible = false
 presets_visible = false
 
 [node name="ColorButtons" type="HBoxContainer" parent="ScrollContainer/VerticalContainer"]
-custom_minimum_size = Vector2(60, 60)
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/separation = 13
 alignment = 1
 
 [node name="LeftColorButton" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons"]
-custom_minimum_size = Vector2(64, 32)
+custom_minimum_size = Vector2(42, 32)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
@@ -80,19 +79,16 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 62.0
+offset_right = 40.0
 offset_bottom = 30.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="ColorButtonsVertical" type="VBoxContainer" parent="ScrollContainer/VerticalContainer/ColorButtons"]
-layout_mode = 2
-alignment = 1
-
-[node name="ColorSwitch" type="TextureButton" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical" groups=["UIButtons"]]
+[node name="ColorSwitch" type="TextureButton" parent="ScrollContainer/VerticalContainer/ColorButtons" groups=["UIButtons"]]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 tooltip_text = "Switch left and right colors
 (%s)"
 mouse_default_cursor_shape = 2
@@ -100,8 +96,30 @@ shortcut = SubResource("19")
 shortcut_in_tooltip = false
 texture_normal = ExtResource("2_ojj3i")
 
+[node name="RightColorButton" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons"]
+custom_minimum_size = Vector2(42, 32)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_02x7w")
+
+[node name="RightColorRect" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/RightColorButton"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 30.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorButtonsVertical" type="VBoxContainer" parent="ScrollContainer/VerticalContainer/ColorButtons"]
+layout_mode = 2
+alignment = 1
+
 [node name="CopyAverage" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical"]
-custom_minimum_size = Vector2(22, 22)
+custom_minimum_size = Vector2(16, 14)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
@@ -114,10 +132,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -9.0
-offset_right = 9.0
-offset_bottom = 9.0
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 7.0
+offset_bottom = 6.0
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
@@ -141,27 +159,9 @@ mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_uay2n")
 texture_normal = ExtResource("5_67w67")
 
-[node name="RightColorButton" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons"]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-size_flags_vertical = 4
-mouse_default_cursor_shape = 2
-toggle_mode = true
-button_group = SubResource("ButtonGroup_02x7w")
-
-[node name="RightColorRect" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/RightColorButton"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 62.0
-offset_bottom = 30.0
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
 [connection signal="color_changed" from="ScrollContainer/VerticalContainer/ColorPicker" to="." method="_on_color_picker_color_changed"]
 [connection signal="toggled" from="ScrollContainer/VerticalContainer/ColorButtons/LeftColorButton" to="." method="_on_left_color_button_toggled"]
-[connection signal="pressed" from="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
+[connection signal="pressed" from="ScrollContainer/VerticalContainer/ColorButtons/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
 [connection signal="button_down" from="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage" to="." method="_on_CopyAverage_button_down"]
 [connection signal="button_up" from="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage" to="." method="_on_CopyAverage_button_up"]
 [connection signal="gui_input" from="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage" to="." method="_on_copy_average_gui_input"]
