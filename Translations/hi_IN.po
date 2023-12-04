@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2023-11-21 23:12\n"
+"PO-Revision-Date: 2023-12-04 13:10\n"
 
 msgid "OK"
 msgstr "ठीक है"
@@ -1474,6 +1474,10 @@ msgstr ""
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
+msgstr ""
+
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
 msgstr ""
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
