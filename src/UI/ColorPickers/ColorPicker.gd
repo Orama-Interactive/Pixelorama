@@ -23,23 +23,35 @@ func _ready() -> void:
 
 	# Make changes to the UI of the color picker by modifying its internal children
 	await get_tree().process_frame
+	# The MarginContainer that contains all of the color picker nodes.
 	var picker_margin_container := color_picker.get_child(0, true) as MarginContainer
 	picker_margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	var picker_vbox_container := picker_margin_container.get_child(0, true) as VBoxContainer
+	# The HBoxContainer of the picker shapes.
 	var shapes_container := picker_vbox_container.get_child(0, true) as HBoxContainer
 	shapes_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	var square_picker := shapes_container.get_child(0, true) as Control
+	# The Control of the HSV Rectangle picker shape
+	var hsv_rectangle_control := shapes_container.get_child(0, true) as Control
+	hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
+	# The AspectRatioContainer that holds the rest of the picker shapes
 	var shape_aspect_ratio := shapes_container.get_child(1, true) as AspectRatioContainer
-	square_picker.custom_minimum_size = Vector2(32, 32)
 	shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
+	# The HBoxContainer of the screen color picker, the color preview rectangle and the
+	# button that lets users change the picker shape. It is visible because
+	# color_picker.sampler_visible is set to true.
+	# We are hiding the color preview rectangle, adding the hex LineEdit, the
+	# left/right color buttons and the color switch, default and average butttons.
 	var sampler_cont := picker_vbox_container.get_child(1, true) as HBoxContainer
+	# The color preview rectangle that we're hiding.
 	var color_texture_rect := sampler_cont.get_child(1, true) as TextureRect
 	color_texture_rect.visible = false
+	# The HBoxContainer where we get the hex LineEdit node from, and moving it to sampler_cont
 	var hex_cont := picker_vbox_container.get_child(4, true).get_child(1, true) as Container
 	var hex_edit := hex_cont.get_child(2, true)
 	hex_cont.remove_child(hex_edit)
 	sampler_cont.add_child(hex_edit)
 	sampler_cont.move_child(hex_edit, 1)
+	# Move the color buttons (left, right, switch, default, average) on the sampler container
 	color_buttons.get_parent().remove_child(color_buttons)
 	sampler_cont.add_child(color_buttons)
 	sampler_cont.move_child(color_buttons, 0)
