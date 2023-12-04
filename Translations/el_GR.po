@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-12-04 13:10\n"
+"PO-Revision-Date: 2023-12-04 14:23\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1530,7 +1530,7 @@ msgstr "Δυναμικές"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "Σταθεροποιητής"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
