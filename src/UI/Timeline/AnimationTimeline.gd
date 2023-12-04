@@ -1052,7 +1052,7 @@ func project_layer_added(layer: int) -> void:
 	var project := Global.current_project
 
 	var layer_button := project.layers[layer].instantiate_layer_button() as LayerButton
-	layer_button.layer = layer
+	layer_button.layer_index = layer
 	if project.layers[layer].name == "":
 		project.layers[layer].set_name_to_default(Global.current_project.layers.size())
 

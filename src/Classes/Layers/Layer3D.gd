@@ -27,7 +27,3 @@ func new_empty_cel() -> BaseCel:
 
 func can_layer_get_drawn() -> bool:
 	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()
-
-
-func instantiate_layer_button() -> Node:
-	return Global.base_layer_button_node.instantiate()

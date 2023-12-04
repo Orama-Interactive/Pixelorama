@@ -884,7 +884,7 @@ func _update_frame_ui() -> void:
 func _update_layer_ui() -> void:
 	for l in layers.size():
 		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer_index = l
 		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
 			cel_hbox.get_child(f).layer = l

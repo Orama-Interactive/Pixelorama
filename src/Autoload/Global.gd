@@ -421,12 +421,8 @@ var onion_skinning_blue_red := false  ## If [code]true[/code], then blue-red mod
 var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
 # Nodes
-## The preload of button used by the [BaseLayer].
-var base_layer_button_node: PackedScene = load("res://src/UI/Timeline/BaseLayerButton.tscn")
-## The preload of button used by the [PixelLayer].
-var pixel_layer_button_node: PackedScene = load("res://src/UI/Timeline/PixelLayerButton.tscn")
-## The preload of button used by the [GroupLayer].
-var group_layer_button_node: PackedScene = load("res://src/UI/Timeline/GroupLayerButton.tscn")
+## TThe [PackedScene] of the button used by layers in the timeline.
+var layer_button_node := preload("res://src/UI/Timeline/LayerButton.tscn")
 ## The [PackedScene] of the button used by cels in the timeline.
 var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 

@@ -63,7 +63,3 @@ func set_name_to_default(number: int) -> void:
 
 func accepts_child(_layer: BaseLayer) -> bool:
 	return true
-
-
-func instantiate_layer_button() -> Node:
-	return Global.group_layer_button_node.instantiate()
