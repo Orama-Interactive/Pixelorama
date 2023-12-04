@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-12-04 18:34\n"
+"PO-Revision-Date: 2023-12-04 22:18\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -93,8 +93,15 @@ msgstr "Kaydet..."
 msgid "Save as..."
 msgstr "Farklı Kaydet..."
 
-msgid "Use ZSTD Compression"
-msgstr "ZSTD sıkıştırması kullan"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr ""
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr ""
 
 msgid "Import"
 msgstr "İçe aktar"
@@ -1298,13 +1305,20 @@ msgstr "Sol araç için renk seç"
 msgid "Choose a color for the right tool"
 msgstr "Sağ araç için renk seç"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "Sağ ve sol renklerini yer değiştir\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Renkleri varsayılan durumuna sıfırla (sol için siyah, sağ için beyaz)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr ""
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr ""
 
 msgid "Left tool"
 msgstr "Sol araç"
