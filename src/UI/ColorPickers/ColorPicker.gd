@@ -17,6 +17,9 @@ func _ready() -> void:
 	color_picker.color_mode = Global.config_cache.get_value(
 		"color_picker", "color_mode", ColorPicker.MODE_RGB
 	)
+	color_picker.picker_shape = Global.config_cache.get_value(
+		"color_picker", "picker_shape", ColorPicker.SHAPE_HSV_RECTANGLE
+	)
 
 	# Make changes to the UI of the color picker by modifying its internal children
 	await get_tree().process_frame
@@ -69,6 +72,7 @@ func update_color(color: Color, button: int) -> void:
 		left_color_rect.color = color
 	_average(left_color_rect.color, right_color_rect.color)
 	Global.config_cache.set_value("color_picker", "color_mode", color_picker.color_mode)
+	Global.config_cache.set_value("color_picker", "picker_shape", color_picker.picker_shape)
 
 
 func _on_ColorSwitch_pressed() -> void:
