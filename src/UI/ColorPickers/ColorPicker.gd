@@ -40,7 +40,7 @@ func _ready() -> void:
 	# button that lets users change the picker shape. It is visible because
 	# color_picker.sampler_visible is set to true.
 	# We are hiding the color preview rectangle, adding the hex LineEdit, the
-	# left/right color buttons and the color switch, default and average butttons.
+	# left/right color buttons and the color switch, default and average buttons.
 	var sampler_cont := picker_vbox_container.get_child(1, true) as HBoxContainer
 	# The color preview rectangle that we're hiding.
 	var color_texture_rect := sampler_cont.get_child(1, true) as TextureRect
