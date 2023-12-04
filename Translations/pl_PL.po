@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-12-04 22:18\n"
+"PO-Revision-Date: 2023-12-04 23:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -95,13 +95,15 @@ msgstr "Zapisz jako..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Dołącz mieszane obrazy"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "Jeśli ta opcja jest włączona, ostateczne połączone obrazy są również przechowywane w pliku pxo dla każdej klatki.\n"
+" Dzięki temu plik pxo jest większy i jest przydatny w przypadku importowania za pomocą oprogramowania innych firm\n"
+" lub eksport CLI. Ładowanie plików pxo w Pixeloramie nie wymaga włączenia tej opcji.\n"
 
 msgid "Import"
 msgstr "Importuj"
@@ -1306,18 +1308,18 @@ msgstr "Wybiera kolor dla prawego narzędzia"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Podmień lewy kolor z prawym kolorem."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetuje kolory do stanu domyślnego (czarny po lewej, biały po prawej)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Wybierz kolor z ekranu."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Wybierz kształt selektora."
 
 msgid "Left tool"
 msgstr "Lewe narzędzie"
