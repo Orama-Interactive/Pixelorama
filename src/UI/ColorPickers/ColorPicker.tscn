@@ -37,7 +37,6 @@ events = [SubResource("InputEventAction_nptxe")]
 offset_right = 312.0
 offset_bottom = 358.0
 script = ExtResource("1_r8ot0")
-metadata/_edit_horizontal_guides_ = [312.0, 340.0, 310.0, 342.0]
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
