@@ -427,12 +427,8 @@ var base_layer_button_node: PackedScene = load("res://src/UI/Timeline/BaseLayerB
 var pixel_layer_button_node: PackedScene = load("res://src/UI/Timeline/PixelLayerButton.tscn")
 ## The preload of button used by the [GroupLayer].
 var group_layer_button_node: PackedScene = load("res://src/UI/Timeline/GroupLayerButton.tscn")
-## The preload of button used by the [PixelCel].
-var pixel_cel_button_node: PackedScene = load("res://src/UI/Timeline/PixelCelButton.tscn")
-## The preload of button used by the [GroupCel].
-var group_cel_button_node: PackedScene = load("res://src/UI/Timeline/GroupCelButton.tscn")
-## The preload of button used by the [Cel3D].
-var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.tscn")
+## The [PackedScene] of the button used by cels in the timeline.
+var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 @onready var main_window := get_window()  ## The main Pixelorama [Window].
 ## The control node (aka Main node). It has the [param Main.gd] script attached.

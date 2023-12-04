@@ -85,7 +85,7 @@ func on_remove() -> void:
 
 ## Returns an instance of the cel button that will be added to the timeline.
 func instantiate_cel_button() -> Node:
-	return null
+	return Global.cel_button_scene.instantiate()
 
 
 ## Returns to get the type of the cel class.

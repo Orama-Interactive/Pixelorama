@@ -57,9 +57,5 @@ func update_texture() -> void:
 	super.update_texture()
 
 
-func instantiate_cel_button() -> Node:
-	return Global.pixel_cel_button_node.instantiate()
-
-
 func get_class_name() -> String:
 	return "PixelCel"

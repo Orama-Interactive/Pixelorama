@@ -17,6 +17,8 @@ func _ready() -> void:
 	button_setup()
 	_dim_checker()
 	cel.texture_changed.connect(_dim_checker)
+	if cel is GroupCel:
+		transparent_checker.visible = false
 
 
 func button_setup() -> void:
@@ -84,7 +86,7 @@ func _on_CelButton_pressed() -> void:
 			release_focus()
 
 	elif Input.is_action_just_released("right_mouse"):
-		if is_instance_valid(popup_menu):
+		if cel is PixelCel:
 			popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		button_pressed = !button_pressed
 	elif Input.is_action_just_released("middle_mouse"):

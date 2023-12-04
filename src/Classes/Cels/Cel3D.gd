@@ -290,9 +290,5 @@ func on_remove() -> void:
 		viewport.queue_free()
 
 
-func instantiate_cel_button() -> Node:
-	return Global.cel_3d_button_node.instantiate()
-
-
 func get_class_name() -> String:
 	return "Cel3D"

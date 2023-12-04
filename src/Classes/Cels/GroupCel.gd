@@ -16,9 +16,5 @@ func get_image() -> Image:
 	return image
 
 
-func instantiate_cel_button() -> Node:
-	return Global.group_cel_button_node.instantiate()
-
-
 func get_class_name() -> String:
 	return "GroupCel"
