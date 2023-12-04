@@ -178,12 +178,6 @@ func change_project() -> void:
 	Global.animation_timeline.project_changed()
 
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-
-	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
-	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(
-		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
-	)
 	toggle_layer_buttons()
 	animation_tags = animation_tags
 
@@ -519,19 +513,10 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if new_frame != current_frame:  # If the frame has changed
 		current_frame = new_frame
 		Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-		toggle_frame_buttons()
 
 	if new_layer != current_layer:  # If the layer has changed
 		current_layer = new_layer
 		toggle_layer_buttons()
-
-	if current_frame < frames.size():  # Set opacity slider
-		var cel_opacity := frames[current_frame].cels[current_layer].opacity
-		Global.layer_opacity_slider.value = cel_opacity * 100
-		var blend_mode_index: int = Global.animation_timeline.blend_modes_button.get_item_index(
-			layers[current_layer].blend_mode
-		)
-		Global.animation_timeline.blend_modes_button.selected = blend_mode_index
 
 	Global.transparent_checker.update_rect()
 	Global.cel_changed.emit()
@@ -540,14 +525,6 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 		await RenderingServer.frame_post_draw
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
-
-
-func toggle_frame_buttons() -> void:
-	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
-	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(
-		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
-	)
 
 
 func toggle_layer_buttons() -> void:

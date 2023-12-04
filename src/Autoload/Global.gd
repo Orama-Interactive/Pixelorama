@@ -489,16 +489,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-## Play forward button.
-@onready var play_forward: BaseButton = animation_timeline.find_child("PlayForward")
-## Play backward button.
-@onready var play_backwards: BaseButton = animation_timeline.find_child("PlayBackwards")
-## Remove frame button.
-@onready var remove_frame_button: BaseButton = animation_timeline.find_child("DeleteFrame")
-## Move frame left button.
-@onready var move_left_frame_button: BaseButton = animation_timeline.find_child("MoveLeft")
-## Move frame right button.
-@onready var move_right_frame_button: BaseButton = animation_timeline.find_child("MoveRight")
 ## Remove layer button.
 @onready var remove_layer_button: BaseButton = animation_timeline.find_child("RemoveLayer")
 ## Move layer up button.
@@ -507,8 +497,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var move_down_layer_button: BaseButton = animation_timeline.find_child("MoveDownLayer")
 ## Merge with layer below button.
 @onready var merge_down_layer_button: BaseButton = animation_timeline.find_child("MergeDownLayer")
-## Layer opacity slider.
-@onready var layer_opacity_slider: ValueSlider = animation_timeline.find_child("OpacitySlider")
 
 ## The brushes popup dialog used to display brushes.
 ## It has the [param BrushesPopup.gd] script attached.

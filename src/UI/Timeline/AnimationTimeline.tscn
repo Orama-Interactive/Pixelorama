@@ -442,6 +442,7 @@ offset_bottom = 6.0
 texture = ExtResource("19")
 
 [node name="DeleteFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -506,7 +507,8 @@ offset_right = 7.0
 offset_bottom = 7.0
 texture = ExtResource("28")
 
-[node name="MoveLeft" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="MoveFrameLeft" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -515,7 +517,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_kwn1u")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveLeft"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveFrameLeft"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -528,7 +530,8 @@ offset_bottom = 5.5
 texture = ExtResource("8")
 flip_h = true
 
-[node name="MoveRight" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="MoveFrameRight" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -537,7 +540,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_m2mvi")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveRight"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveFrameRight"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -593,6 +596,7 @@ offset_bottom = 6.0
 texture = ExtResource("23")
 
 [node name="PlayBackwards" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Play the animation backwards (from end to beginning)"
@@ -614,6 +618,7 @@ offset_bottom = 6.0
 texture = ExtResource("24")
 
 [node name="PlayForward" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -806,6 +811,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="OpacitySlider" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/LayerFrameHSplit/LayerContainer" instance=ExtResource("9")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(207, 30)
 layout_mode = 2
 size_flags_vertical = 0
@@ -952,8 +958,8 @@ script = ExtResource("12")
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveLeft" to="." method="_on_MoveLeft_pressed"]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveRight" to="." method="_on_MoveRight_pressed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveFrameLeft" to="." method="_on_MoveLeft_pressed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveFrameRight" to="." method="_on_MoveRight_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
 [connection signal="toggled" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]

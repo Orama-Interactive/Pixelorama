@@ -19,12 +19,18 @@ var future_above_canvas := true
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
-@onready var add_layer_list := $"%AddLayerList" as MenuButton
+@onready var add_layer_list := %AddLayerList as MenuButton
 @onready var blend_modes_button := %BlendModes as OptionButton
+@onready var opacity_slider: ValueSlider = %OpacitySlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
+@onready var delete_frame: Button = %DeleteFrame
+@onready var move_frame_left: Button = %MoveFrameLeft
+@onready var move_frame_right: Button = %MoveFrameRight
+@onready var play_backwards := %PlayBackwards as Button
+@onready var play_forward := %PlayForward as Button
 @onready var fps_spinbox := %FPSValue as ValueSlider
 @onready var onion_skinning_button := %OnionSkinning as BaseButton
 @onready var onion_skinning_settings := $OnionSkinningSettings as Popup
@@ -93,6 +99,7 @@ func _ready() -> void:
 	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
 	%PastPlacement.item_selected.emit(0 if past_above else 1)
 	%FuturePlacement.item_selected.emit(0 if future_above else 1)
+	Global.cel_changed.connect(_cel_changed)
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.emit_signal.call_deferred("resized")
 
@@ -510,25 +517,25 @@ func _on_LoopAnim_pressed() -> void:
 
 func _on_PlayForward_toggled(button_pressed: bool) -> void:
 	if button_pressed:
-		Global.change_button_texturerect(Global.play_forward.get_child(0), "pause.png")
+		Global.change_button_texturerect(play_forward.get_child(0), "pause.png")
 	else:
-		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
+		Global.change_button_texturerect(play_forward.get_child(0), "play.png")
 	play_animation(button_pressed, true)
 
 
 func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 	if button_pressed:
-		Global.change_button_texturerect(Global.play_backwards.get_child(0), "pause.png")
+		Global.change_button_texturerect(play_backwards.get_child(0), "pause.png")
 	else:
-		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
+		Global.change_button_texturerect(play_backwards.get_child(0), "play_backwards.png")
 	play_animation(button_pressed, false)
 
 
-# Called on each frame of the animation
+## Called on each frame of the animation
 func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
-		Global.play_forward.button_pressed = false
-		Global.play_backwards.button_pressed = false
+		play_forward.button_pressed = false
+		play_backwards.button_pressed = false
 		Global.animation_timer.stop()
 		return
 
@@ -546,8 +553,8 @@ func _on_AnimationTimer_timeout() -> void:
 		else:
 			match animation_loop:
 				0:  # No loop
-					Global.play_forward.button_pressed = false
-					Global.play_backwards.button_pressed = false
+					play_forward.button_pressed = false
+					play_backwards.button_pressed = false
 					Global.animation_timer.stop()
 					is_animation_running = false
 				1:  # Cycle loop
@@ -572,8 +579,8 @@ func _on_AnimationTimer_timeout() -> void:
 		else:
 			match animation_loop:
 				0:  # No loop
-					Global.play_backwards.button_pressed = false
-					Global.play_forward.button_pressed = false
+					play_backwards.button_pressed = false
+					play_forward.button_pressed = false
 					Global.animation_timer.stop()
 					is_animation_running = false
 				1:  # Cycle loop
@@ -605,21 +612,21 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 	if first_frame == last_frame:
 		if forward_dir:
-			Global.play_forward.button_pressed = false
+			play_forward.button_pressed = false
 		else:
-			Global.play_backwards.button_pressed = false
+			play_backwards.button_pressed = false
 		return
 
 	if forward_dir:
-		Global.play_backwards.toggled.disconnect(_on_PlayBackwards_toggled)
-		Global.play_backwards.button_pressed = false
-		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
-		Global.play_backwards.toggled.connect(_on_PlayBackwards_toggled)
+		play_backwards.toggled.disconnect(_on_PlayBackwards_toggled)
+		play_backwards.button_pressed = false
+		Global.change_button_texturerect(play_backwards.get_child(0), "play_backwards.png")
+		play_backwards.toggled.connect(_on_PlayBackwards_toggled)
 	else:
-		Global.play_forward.toggled.disconnect(_on_PlayForward_toggled)
-		Global.play_forward.button_pressed = false
-		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
-		Global.play_forward.toggled.connect(_on_PlayForward_toggled)
+		play_forward.toggled.disconnect(_on_PlayForward_toggled)
+		play_forward.button_pressed = false
+		Global.change_button_texturerect(play_forward.get_child(0), "play.png")
+		play_forward.toggled.connect(_on_PlayForward_toggled)
 
 	if play:
 		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
@@ -984,8 +991,27 @@ func _on_onion_skinning_settings_visibility_changed() -> void:
 # Methods to update the UI in response to changes in the current project
 
 
+func _cel_changed() -> void:
+	_toggle_frame_buttons()
+	var project := Global.current_project
+	var cel_opacity := project.get_current_cel().opacity
+	opacity_slider.value = cel_opacity * 100
+	var blend_mode_index := blend_modes_button.get_item_index(
+		project.layers[project.current_layer].blend_mode
+	)
+	blend_modes_button.selected = blend_mode_index
+
+
+func _toggle_frame_buttons() -> void:
+	var project := Global.current_project
+	Global.disable_button(delete_frame, project.frames.size() == 1)
+	Global.disable_button(move_frame_left, project.current_frame == 0)
+	Global.disable_button(move_frame_right, project.current_frame == project.frames.size() - 1)
+
+
 func project_changed() -> void:
 	var project := Global.current_project
+	_toggle_frame_buttons()
 	# These must be removed from tree immediately to not mess up the indices of
 	# the new buttons, so use either free or queue_free + parent.remove_child
 	for layer_button in Global.layer_vbox.get_children():
@@ -1029,7 +1055,7 @@ func project_frame_added(frame: int) -> void:
 	Global.frame_hbox.move_child(button, frame)
 	# Make it visible, yes 3 call_deferreds are required
 	frame_scroll_container.call_deferred(
-		"call_deferred", "call_deferred", "ensure_control_visible", button
+		&"call_deferred", &"call_deferred", &"ensure_control_visible", button
 	)
 	var layer := Global.cel_vbox.get_child_count() - 1
 	for cel_hbox in Global.cel_vbox.get_children():

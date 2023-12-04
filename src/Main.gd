@@ -26,7 +26,6 @@ func _ready() -> void:
 	Global.current_project.layers.append(PixelLayer.new(Global.current_project))
 	Global.current_project.frames.append(Global.current_project.new_empty_frame())
 	Global.animation_timeline.project_changed()
-	Global.current_project.toggle_frame_buttons()
 
 	Import.import_brushes(Global.path_join_array(Global.data_directories, "Brushes"))
 	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
