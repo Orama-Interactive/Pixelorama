@@ -1465,6 +1465,10 @@ msgstr ""
 msgid "Dynamics"
 msgstr ""
 
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr ""
+
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
 msgstr ""

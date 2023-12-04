@@ -45,7 +45,6 @@ gradient = SubResource("3")
 gradient = SubResource("3")
 
 [node name="Global Tool Options" type="PanelContainer"]
-custom_minimum_size = Vector2(0, 36)
 offset_left = 1.0
 offset_right = 195.0
 offset_bottom = 50.0
@@ -147,12 +146,38 @@ texture = ExtResource("6")
 
 [node name="DynamicsPanel" type="PopupPanel" parent="."]
 canvas_item_default_texture_filter = 0
+size = Vector2i(300, 334)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DynamicsPanel"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 186.0
-offset_bottom = 288.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 326.0
+
+[node name="StabilizerContainer" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="EnableStabilizer" type="CheckButton" parent="DynamicsPanel/VBoxContainer/StabilizerContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Stabilizer"
+
+[node name="StabilizerValue" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/StabilizerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+max_value = 64.0
+value = 16.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("5")
 
 [node name="DynamicsOptions" type="GridContainer" parent="DynamicsPanel/VBoxContainer"]
 layout_mode = 2
@@ -412,6 +437,8 @@ offset_bottom = 23.0
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Vertical" to="." method="_on_Vertical_toggled"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/PixelPerfect" to="." method="_on_PixelPerfect_toggled"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Dynamics" to="." method="_on_Dynamics_pressed"]
+[connection signal="toggled" from="DynamicsPanel/VBoxContainer/StabilizerContainer/EnableStabilizer" to="." method="_on_enable_stabilizer_toggled"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/StabilizerContainer/StabilizerValue" to="." method="_on_stabilizer_value_value_changed"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMin" to="." method="_on_AlphaMin_value_changed"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMax" to="." method="_on_AlphaMax_value_changed"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMin" to="." method="_on_SizeMin_value_changed"]

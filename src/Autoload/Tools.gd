@@ -9,6 +9,8 @@ var vertical_mirror := false
 var pixel_perfect := false
 
 # Dynamics
+var stabilizer_enabled := false
+var stabilizer_value := 16
 var dynamics_alpha: int = Dynamics.NONE
 var dynamics_size: int = Dynamics.NONE
 var pen_pressure := 1.0
