@@ -77,12 +77,7 @@ func _on_expand_button_toggled(toggled_on: bool) -> void:
 
 
 func _average(color_1: Color, color_2: Color) -> void:
-	var average_r := (color_1.r + color_2.r) / 2.0
-	var average_g := (color_1.g + color_2.g) / 2.0
-	var average_b := (color_1.b + color_2.b) / 2.0
-	var average_a := (color_1.a + color_2.a) / 2.0
-	var average := Color(average_r, average_g, average_b, average_a)
-
+	var average := (color_1 + color_2) / 2.0
 	var copy_button := average_color.get_parent() as Control
 	copy_button.tooltip_text = str("Average Color:\n#", average.to_html())
 	average_color.color = average
