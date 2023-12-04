@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2023-12-04 13:10\n"
+"PO-Revision-Date: 2023-12-04 22:18\n"
 
 msgid "OK"
 msgstr "確定"
@@ -93,8 +93,15 @@ msgstr "儲存"
 msgid "Save as..."
 msgstr "儲存為"
 
-msgid "Use ZSTD Compression"
-msgstr "使用 ZSTD 壓縮"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr ""
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr ""
 
 msgid "Import"
 msgstr "匯入"
@@ -1257,13 +1264,20 @@ msgstr "選擇左鍵工具顏色"
 msgid "Choose a color for the right tool"
 msgstr "選擇右鍵工具顏色"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "左右工具顏色互換\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "顏色改回初始值(左黑色, 右白色)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr ""
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr ""
 
 msgid "Left tool"
 msgstr "左鍵工具"
