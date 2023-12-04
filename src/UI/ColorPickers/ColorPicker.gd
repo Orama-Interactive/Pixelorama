@@ -5,11 +5,18 @@ extends Container
 @onready var left_color_rect := %LeftColorRect as ColorRect
 @onready var right_color_rect := %RightColorRect as ColorRect
 @onready var average_color := %AverageColor as ColorRect
+@onready var expand_button: TextureButton = $ScrollContainer/VerticalContainer/ExpandButton
 
 
 func _ready() -> void:
 	Tools.color_changed.connect(update_color)
 	_average(left_color_rect.color, right_color_rect.color)
+	expand_button.button_pressed = Global.config_cache.get_value(
+		"color_picker", "is_expanded", false
+	)
+	color_picker.color_mode = Global.config_cache.get_value(
+		"color_picker", "color_mode", ColorPicker.MODE_RGB
+	)
 
 	# Make changes to the UI of the color picker by modifying its internal children
 	await get_tree().process_frame
@@ -61,6 +68,7 @@ func update_color(color: Color, button: int) -> void:
 	else:
 		left_color_rect.color = color
 	_average(left_color_rect.color, right_color_rect.color)
+	Global.config_cache.set_value("color_picker", "color_mode", color_picker.color_mode)
 
 
 func _on_ColorSwitch_pressed() -> void:
@@ -74,6 +82,7 @@ func _on_ColorDefaults_pressed() -> void:
 func _on_expand_button_toggled(toggled_on: bool) -> void:
 	color_picker.color_modes_visible = toggled_on
 	color_picker.sliders_visible = toggled_on
+	Global.config_cache.set_value("color_picker", "is_expanded", toggled_on)
 
 
 func _average(color_1: Color, color_2: Color) -> void:
