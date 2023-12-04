@@ -70,6 +70,7 @@ alignment = 1
 custom_minimum_size = Vector2(42, 32)
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "Choose a color for the left tool"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_pressed = true
@@ -90,17 +91,16 @@ metadata/_edit_lock_ = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-tooltip_text = "Switch left and right colors
-(%s)"
+tooltip_text = "Switch left and right colors."
 mouse_default_cursor_shape = 2
 shortcut = SubResource("19")
-shortcut_in_tooltip = false
 texture_normal = ExtResource("2_ojj3i")
 
 [node name="RightColorButton" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons"]
 custom_minimum_size = Vector2(42, 32)
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "Choose a color for the right tool"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_02x7w")
