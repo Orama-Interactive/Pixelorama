@@ -58,6 +58,7 @@ size_flags_vertical = 0
 texture = ExtResource("2_enrtd")
 
 [node name="VisibilityButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -81,6 +82,7 @@ size_flags_vertical = 0
 texture = ExtResource("2_ef6fb")
 
 [node name="LockButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -136,16 +138,19 @@ mouse_default_cursor_shape = 2
 alignment = 1
 
 [node name="HierarchySpacer" type="Control" parent="HBoxContainer/LayerName"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/LayerName"]
+[node name="LayerNameLabel" type="Label" parent="HBoxContainer/LayerName"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Layer 0"
 clip_text = true
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer/LayerName"]
+[node name="LayerNameLineEdit" type="LineEdit" parent="HBoxContainer/LayerName"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -164,4 +169,4 @@ mouse_filter = 2
 [connection signal="pressed" from="HBoxContainer/LayerButtons/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LockButton" to="." method="_on_LockButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LinkButton" to="." method="_on_LinkButton_pressed"]
-[connection signal="focus_exited" from="HBoxContainer/LayerName/LineEdit" to="." method="_on_LineEdit_focus_exited"]
+[connection signal="focus_exited" from="HBoxContainer/LayerName/LayerNameLineEdit" to="." method="_on_LineEdit_focus_exited"]

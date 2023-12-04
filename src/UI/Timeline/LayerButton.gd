@@ -6,11 +6,11 @@ const HIERARCHY_DEPTH_PIXEL_SHIFT := 8
 var layer_index := 0
 
 @onready var expand_button := %ExpandButton as BaseButton
-@onready var visibility_button: BaseButton = find_child("VisibilityButton")
-@onready var lock_button: BaseButton = find_child("LockButton")
-@onready var label: Label = find_child("Label")
-@onready var line_edit: LineEdit = find_child("LineEdit")
-@onready var hierarchy_spacer: Control = find_child("HierarchySpacer")
+@onready var visibility_button := %VisibilityButton as BaseButton
+@onready var lock_button := %LockButton as BaseButton
+@onready var label := %LayerNameLabel as Label
+@onready var line_edit := %LayerNameLineEdit as LineEdit
+@onready var hierarchy_spacer := %HierarchySpacer as Control
 @onready var linked_button := %LinkButton as BaseButton
 
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 	label.text = layer.name
 	line_edit.text = layer.name
 
-	var layer_buttons = find_child("LayerButtons")
+	var layer_buttons := find_child("LayerButtons")
 	for child in layer_buttons.get_children():
 		var texture = child.get_child(0)
 		texture.modulate = Global.modulate_icon_color
@@ -97,7 +97,7 @@ func _draw() -> void:
 
 func _input(event: InputEvent) -> void:
 	if (
-		(event.is_action_released("ui_accept") or event.is_action_released("ui_cancel"))
+		(event.is_action_released(&"ui_accept") or event.is_action_released(&"ui_cancel"))
 		and line_edit.visible
 		and event.keycode != KEY_SPACE
 	):
@@ -110,7 +110,7 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		Global.canvas.selection.transform_content_confirm()
 		var prev_curr_layer := project.current_layer
-		if Input.is_action_pressed("shift"):
+		if Input.is_action_pressed(&"shift"):
 			var layer_diff_sign := signi(layer_index - prev_curr_layer)
 			if layer_diff_sign == 0:
 				layer_diff_sign = 1
@@ -120,7 +120,7 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 					if !project.selected_cels.has(frame_layer):
 						project.selected_cels.append(frame_layer)
 			project.change_cel(-1, layer_index)
-		elif Input.is_action_pressed("ctrl"):
+		elif Input.is_action_pressed(&"ctrl"):
 			for i in range(0, project.frames.size()):
 				var frame_layer := [i, layer_index]
 				if !project.selected_cels.has(frame_layer):
@@ -228,7 +228,7 @@ func _can_drop_data(_pos: Vector2, data) -> bool:
 	var region: Rect2
 	var depth := curr_layer.get_hierarchy_depth()
 
-	if Input.is_action_pressed("ctrl"):  # Swap layers
+	if Input.is_action_pressed(&"ctrl"):  # Swap layers
 		if drag_layer.is_ancestor_of(curr_layer) or curr_layer.is_ancestor_of(drag_layer):
 			Global.animation_timeline.drag_highlight.visible = false
 			return false
