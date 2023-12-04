@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-12-04 13:10\n"
+"PO-Revision-Date: 2023-12-04 22:18\n"
 
 msgid "OK"
 msgstr "예"
@@ -93,8 +93,15 @@ msgstr "저장하기..."
 msgid "Save as..."
 msgstr "다른 이름으로 저장하기..."
 
-msgid "Use ZSTD Compression"
-msgstr "ZSTD 압축 사용"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr ""
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr ""
 
 msgid "Import"
 msgstr "불러오기"
@@ -1294,13 +1301,20 @@ msgstr "왼쪽 툴의 색상 선택"
 msgid "Choose a color for the right tool"
 msgstr "오른쪽 툴의 색상 선택"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "좌/우 색상 변경\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "색상을 기본 상태로 복원 (블랙을 왼쪽, 화이트를 오른쪽)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr ""
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr ""
 
 msgid "Left tool"
 msgstr "왼쪽 툴"
