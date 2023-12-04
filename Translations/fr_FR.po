@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-12-04 22:17\n"
+"PO-Revision-Date: 2023-12-04 23:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1307,14 +1307,14 @@ msgstr "Choisissez une couleur pour l'outil droit"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Échange les couleurs gauche et droite."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Choisir une couleur sur l'écran."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1936,7 +1936,7 @@ msgstr ""
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2822,5 +2822,5 @@ msgstr ""
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "Ajouter effet"
 
