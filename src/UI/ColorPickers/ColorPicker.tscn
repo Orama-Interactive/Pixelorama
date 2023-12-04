@@ -54,6 +54,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_width = 28
 can_add_swatches = false
 color_modes_visible = false
 sliders_visible = false
@@ -160,16 +161,6 @@ size_flags_horizontal = 4
 tooltip_text = "Reset the colors to their default state (black for left, white for right)"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_uay2n")
-
-[node name="ColorRectBackground" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.686275, 0.686275, 0.686275, 1)
 
 [node name="ColorRectBlack" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults"]
 layout_mode = 0

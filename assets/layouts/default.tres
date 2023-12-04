@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DockableLayout" load_steps=27 format=3]
+[gd_resource type="Resource" script_class="DockableLayout" load_steps=27 format=3 uid="uid://4xtpiowddm7p"]
 
 [ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="1_jp0wv"]
 [ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="2_fa4kc"]
