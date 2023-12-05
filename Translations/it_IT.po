@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-12-04 22:18\n"
+"PO-Revision-Date: 2023-12-05 03:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -95,13 +95,15 @@ msgstr "Salva come..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Includi immagini miscelate"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "Se abilitata, anche le immagini sfumate finali vengono memorizzate nel pxo, per ogni fotogramma.\n"
+"Questo rende il file pxo più grande ed è utile per l'importazione da software di terze parti\n"
+"o per l'esportazione CLI. Caricamento dei file pxo in Pixelorama non ha bisogno di questa opzione per essere abilitato.\n"
 
 msgid "Import"
 msgstr "Importa"
@@ -1307,18 +1309,18 @@ msgstr "Scegli un colore per lo strumento destro"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Cambia i colori destro e sinistro."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetta i colori al loro stato originale (nero per sinistra, bianco per destra)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Scegli un colore dallo schermo."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Selezionare una forma di selezione."
 
 msgid "Left tool"
 msgstr "Strumento sinistra"
