@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-12-05 06:20\n"
+"PO-Revision-Date: 2023-12-05 10:29\n"
 
 msgid "OK"
 msgstr "예"
@@ -149,7 +149,7 @@ msgid "Delete"
 msgstr "삭제"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "영구 삭제"
 
 #. When you move something to recycle bin
 msgid "Move to Trash"
@@ -582,7 +582,7 @@ msgstr ""
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D 레이어:"
 
 msgid "Direction:"
 msgstr "방향:"
@@ -703,7 +703,7 @@ msgstr "표기 아이콘"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "변경 사항을 적용하려면 프로그램을 다시 시작해야합니다."
 
 msgid "On"
 msgstr "켜짐"
@@ -773,7 +773,7 @@ msgid "Theme"
 msgstr "테마"
 
 msgid "Buttons"
-msgstr ""
+msgstr "버튼"
 
 msgid "Icon color from:"
 msgstr "아이콘 색상 출처:"
@@ -782,13 +782,13 @@ msgid "Icon color:"
 msgstr "아이콘 색상:"
 
 msgid "Background"
-msgstr ""
+msgstr "배경"
 
 msgid "Background color from:"
 msgstr ""
 
 msgid "Background color:"
-msgstr ""
+msgstr "배경 색상:"
 
 msgid "Left tool color:"
 msgstr "왼쪽 도구 색상"
@@ -879,7 +879,7 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr ""
 
 msgid "Shape:"
-msgstr ""
+msgstr "도형:"
 
 msgid "Linear"
 msgstr "선형"
@@ -1367,7 +1367,7 @@ msgstr "스냅"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "스냅 거리"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
