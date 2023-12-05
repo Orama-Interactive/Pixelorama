@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-12-04 22:18\n"
+"PO-Revision-Date: 2023-12-05 07:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -95,13 +95,14 @@ msgstr "名前をつけて保存"
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "ブレンドした画像を含む"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "有効にすると、最終的にブレンドされたイメージもフレームごとに PXO に保存されます。\n"
+"これにより、pxo ファイルが大きくなり、サードパーティ ソフトウェアまたは CLI エクスポートによるインポートに役立ちます。 Pixelorama に pxo ファイルをロードする場合、このオプションを有効にする必要はありません。"
 
 msgid "Import"
 msgstr "インポート"
@@ -1307,18 +1308,18 @@ msgstr "右のツールの色を選択してください"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "左右の色を切り替えます。"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "色を既定の状態にリセットします (左は黒、右は白)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "画面から色を選択します。"
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "ピッカー形状を選択します。"
 
 msgid "Left tool"
 msgstr "左のツール"
