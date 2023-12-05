@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-12-04 22:18\n"
+"PO-Revision-Date: 2023-12-05 06:20\n"
 
 msgid "OK"
 msgstr "예"
@@ -1363,7 +1363,7 @@ msgstr "캔버스에 표시되는 줄자 안내선의 색상"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "스냅"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
@@ -1397,11 +1397,11 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "아이소메트릭 격자 크기"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "격자 오프셋:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
