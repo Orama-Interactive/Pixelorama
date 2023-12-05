@@ -254,6 +254,7 @@ offset_bottom = 6.0
 texture = ExtResource("10")
 
 [node name="RemoveLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -279,6 +280,7 @@ size_flags_vertical = 0
 texture = ExtResource("6")
 
 [node name="MoveUpLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -304,6 +306,7 @@ size_flags_vertical = 0
 texture = ExtResource("4")
 
 [node name="MoveDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -353,6 +356,7 @@ size_flags_vertical = 0
 texture = ExtResource("7")
 
 [node name="MergeDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3

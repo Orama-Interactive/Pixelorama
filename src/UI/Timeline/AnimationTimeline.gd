@@ -20,15 +20,19 @@ var future_above_canvas := true
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
 @onready var add_layer_list := %AddLayerList as MenuButton
+@onready var remove_layer := %RemoveLayer as Button
+@onready var move_up_layer := %MoveUpLayer as Button
+@onready var move_down_layer := %MoveDownLayer as Button
+@onready var merge_down_layer := %MergeDownLayer as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider: ValueSlider = %OpacitySlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
-@onready var delete_frame: Button = %DeleteFrame
-@onready var move_frame_left: Button = %MoveFrameLeft
-@onready var move_frame_right: Button = %MoveFrameRight
+@onready var delete_frame := %DeleteFrame as Button
+@onready var move_frame_left := %MoveFrameLeft as Button
+@onready var move_frame_right := %MoveFrameRight as Button
 @onready var play_backwards := %PlayBackwards as Button
 @onready var play_forward := %PlayForward as Button
 @onready var fps_spinbox := %FPSValue as ValueSlider
@@ -993,6 +997,7 @@ func _on_onion_skinning_settings_visibility_changed() -> void:
 
 func _cel_changed() -> void:
 	_toggle_frame_buttons()
+	_toggle_layer_buttons()
 	var project := Global.current_project
 	var cel_opacity := project.get_current_cel().opacity
 	opacity_slider.value = cel_opacity * 100
@@ -1009,9 +1014,36 @@ func _toggle_frame_buttons() -> void:
 	Global.disable_button(move_frame_right, project.current_frame == project.frames.size() - 1)
 
 
+func _toggle_layer_buttons() -> void:
+	var project := Global.current_project
+	if project.layers.is_empty() or project.current_layer >= project.layers.size():
+		return
+	var layer := project.layers[project.current_layer]
+	var child_count := layer.get_child_count(true)
+
+	Global.disable_button(
+		remove_layer, layer.is_locked_in_hierarchy() or project.layers.size() == child_count + 1
+	)
+	Global.disable_button(move_up_layer, project.current_layer == project.layers.size() - 1)
+	Global.disable_button(
+		move_down_layer,
+		project.current_layer == child_count and not is_instance_valid(layer.parent)
+	)
+	Global.disable_button(
+		merge_down_layer,
+		(
+			project.current_layer == child_count
+			or layer is GroupLayer
+			or project.layers[project.current_layer - 1] is GroupLayer
+			or project.layers[project.current_layer - 1] is Layer3D
+		)
+	)
+
+
 func project_changed() -> void:
 	var project := Global.current_project
 	_toggle_frame_buttons()
+	_toggle_layer_buttons()
 	# These must be removed from tree immediately to not mess up the indices of
 	# the new buttons, so use either free or queue_free + parent.remove_child
 	for layer_button in Global.layer_vbox.get_children():

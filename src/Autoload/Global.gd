@@ -489,14 +489,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-## Remove layer button.
-@onready var remove_layer_button: BaseButton = animation_timeline.find_child("RemoveLayer")
-## Move layer up button.
-@onready var move_up_layer_button: BaseButton = animation_timeline.find_child("MoveUpLayer")
-## Move layer down button.
-@onready var move_down_layer_button: BaseButton = animation_timeline.find_child("MoveDownLayer")
-## Merge with layer below button.
-@onready var merge_down_layer_button: BaseButton = animation_timeline.find_child("MergeDownLayer")
 
 ## The brushes popup dialog used to display brushes.
 ## It has the [param BrushesPopup.gd] script attached.
