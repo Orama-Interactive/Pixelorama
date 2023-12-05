@@ -3,7 +3,13 @@ class_name DockableLayoutNode
 extends Resource
 ## Base class for DockableLayout tree nodes
 
-var parent: DockableLayoutSplit = null
+var parent: DockableLayoutSplit:
+	get:
+		return _parent_ref.get_ref()
+	set(value):
+		_parent_ref = weakref(value)
+
+var _parent_ref := WeakRef.new()
 
 
 func emit_tree_changed() -> void:

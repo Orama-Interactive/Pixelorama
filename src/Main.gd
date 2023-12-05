@@ -26,7 +26,6 @@ func _ready() -> void:
 	Global.current_project.layers.append(PixelLayer.new(Global.current_project))
 	Global.current_project.frames.append(Global.current_project.new_empty_frame())
 	Global.animation_timeline.project_changed()
-	Global.current_project.toggle_frame_buttons()
 
 	Import.import_brushes(Global.path_join_array(Global.data_directories, "Brushes"))
 	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
@@ -40,7 +39,16 @@ func _ready() -> void:
 	Global.save_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
-
+	var include_blended := CheckBox.new()
+	include_blended.name = "IncludeBlended"
+	include_blended.text = "Include blended images"
+	include_blended.tooltip_text = """
+If enabled, the final blended images are also being stored in the pxo, for each frame.
+This makes the pxo file larger and is useful for importing by third-party software
+or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.
+"""
+	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	Global.save_sprites_dialog.get_vbox().add_child(include_blended)
 	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
 	# Additionally, AppArmor policies prevent the app from writing to the /home
 	# directory. Until the proper AppArmor policies are determined to write to these
@@ -50,14 +58,6 @@ func _ready() -> void:
 	if OS.has_feature("clickable"):
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
-
-	var zstd_checkbox := CheckBox.new()
-	zstd_checkbox.name = "ZSTDCompression"
-	zstd_checkbox.button_pressed = true
-	zstd_checkbox.text = "Use ZSTD Compression"
-	zstd_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	Global.save_sprites_dialog.get_vbox().add_child(zstd_checkbox)
-
 	_handle_backup()
 
 	_handle_cmdline_arguments()
@@ -282,10 +282,10 @@ func _on_SaveSprite_file_selected(path: String) -> void:
 
 
 func save_project(path: String) -> void:
-	var zstd: bool = (
-		Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").button_pressed
+	var include_blended: bool = (
+		Global.save_sprites_dialog.get_vbox().get_node("IncludeBlended").button_pressed
 	)
-	var success = OpenSave.save_pxo_file(path, false, zstd)
+	var success := OpenSave.save_pxo_file(path, false, include_blended)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
@@ -300,7 +300,7 @@ func _on_SaveSpriteHTML5_confirmed() -> void:
 	)
 	file_name += ".pxo"
 	var path := "user://".path_join(file_name)
-	OpenSave.save_pxo_file(path, false, false)
+	OpenSave.save_pxo_file(path, false)
 
 
 func _on_open_sprite_visibility_changed() -> void:

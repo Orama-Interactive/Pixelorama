@@ -318,7 +318,7 @@ func _draw_tool(pos: Vector2) -> PackedVector2Array:
 
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func draw_fill_gap(start: Vector2, end: Vector2) -> void:
+func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 	if Global.mirror_view:
 		# Even brushes are not perfectly centred and are offsetted by 1 px so we add it
 		if int(_stroke_dimensions.x) % 2 == 0:

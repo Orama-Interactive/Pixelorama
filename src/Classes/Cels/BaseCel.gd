@@ -78,16 +78,6 @@ func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
 
 
-## Used to save cel image/thumbnail during saving of a pxo file.
-func save_image_data_to_pxo(_file: FileAccess) -> void:
-	return
-
-
-## Used to load cel image/thumbnail during loading of a pxo file.
-func load_image_data_from_pxo(_file: FileAccess, _project_size: Vector2i) -> void:
-	return
-
-
 ## Used to perform cleanup after a cel is removed.
 func on_remove() -> void:
 	pass
@@ -95,7 +85,7 @@ func on_remove() -> void:
 
 ## Returns an instance of the cel button that will be added to the timeline.
 func instantiate_cel_button() -> Node:
-	return null
+	return Global.cel_button_scene.instantiate()
 
 
 ## Returns to get the type of the cel class.

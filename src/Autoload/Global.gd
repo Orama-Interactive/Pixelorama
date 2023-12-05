@@ -421,18 +421,10 @@ var onion_skinning_blue_red := false  ## If [code]true[/code], then blue-red mod
 var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
 # Nodes
-## The preload of button used by the [BaseLayer].
-var base_layer_button_node: PackedScene = load("res://src/UI/Timeline/BaseLayerButton.tscn")
-## The preload of button used by the [PixelLayer].
-var pixel_layer_button_node: PackedScene = load("res://src/UI/Timeline/PixelLayerButton.tscn")
-## The preload of button used by the [GroupLayer].
-var group_layer_button_node: PackedScene = load("res://src/UI/Timeline/GroupLayerButton.tscn")
-## The preload of button used by the [PixelCel].
-var pixel_cel_button_node: PackedScene = load("res://src/UI/Timeline/PixelCelButton.tscn")
-## The preload of button used by the [GroupCel].
-var group_cel_button_node: PackedScene = load("res://src/UI/Timeline/GroupCelButton.tscn")
-## The preload of button used by the [Cel3D].
-var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.tscn")
+## The [PackedScene] of the button used by layers in the timeline.
+var layer_button_node := preload("res://src/UI/Timeline/LayerButton.tscn")
+## The [PackedScene] of the button used by cels in the timeline.
+var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 @onready var main_window := get_window()  ## The main Pixelorama [Window].
 ## The control node (aka Main node). It has the [param Main.gd] script attached.
@@ -497,26 +489,6 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-## Play forward button.
-@onready var play_forward: BaseButton = animation_timeline.find_child("PlayForward")
-## Play backward button.
-@onready var play_backwards: BaseButton = animation_timeline.find_child("PlayBackwards")
-## Remove frame button.
-@onready var remove_frame_button: BaseButton = animation_timeline.find_child("DeleteFrame")
-## Move frame left button.
-@onready var move_left_frame_button: BaseButton = animation_timeline.find_child("MoveLeft")
-## Move frame right button.
-@onready var move_right_frame_button: BaseButton = animation_timeline.find_child("MoveRight")
-## Remove layer button.
-@onready var remove_layer_button: BaseButton = animation_timeline.find_child("RemoveLayer")
-## Move layer up button.
-@onready var move_up_layer_button: BaseButton = animation_timeline.find_child("MoveUpLayer")
-## Move layer down button.
-@onready var move_down_layer_button: BaseButton = animation_timeline.find_child("MoveDownLayer")
-## Merge with layer below button.
-@onready var merge_down_layer_button: BaseButton = animation_timeline.find_child("MergeDownLayer")
-## Layer opacity slider.
-@onready var layer_opacity_slider: ValueSlider = animation_timeline.find_child("OpacitySlider")
 
 ## The brushes popup dialog used to display brushes.
 ## It has the [param BrushesPopup.gd] script attached.

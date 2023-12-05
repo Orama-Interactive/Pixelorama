@@ -66,11 +66,12 @@ func draw_start(pos: Vector2i) -> void:
 	cursor_text = ""
 
 
-func draw_move(pos: Vector2i) -> void:
+func draw_move(pos_i: Vector2i) -> void:
+	var pos := _get_stabilized_position(pos_i)
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("draw_color_picker"):
+		if Input.is_action_pressed(&"draw_color_picker"):
 			_pick_color(pos)
 		return
 

@@ -153,3 +153,11 @@ func _on_SizeMin_value_changed(value: float) -> void:
 func _on_SizeMax_value_changed(value: float) -> void:
 	Tools.brush_size_max = int(value)
 	dynamics_changed.emit()
+
+
+func _on_enable_stabilizer_toggled(toggled_on: bool) -> void:
+	Tools.stabilizer_enabled = toggled_on
+
+
+func _on_stabilizer_value_value_changed(value: float) -> void:
+	Tools.stabilizer_value = value

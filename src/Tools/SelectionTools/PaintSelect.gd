@@ -40,9 +40,10 @@ func draw_start(pos: Vector2i) -> void:
 		_last_position = pos
 
 
-func draw_move(pos: Vector2i) -> void:
+func draw_move(pos_i: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
+	var pos := _get_stabilized_position(pos_i)
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if !_move:
@@ -56,8 +57,6 @@ func draw_end(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	pos = snap_position(pos)
-	if !_move:
-		_draw_points.append_array(draw_tool(pos))
 	super.draw_end(pos)
 
 

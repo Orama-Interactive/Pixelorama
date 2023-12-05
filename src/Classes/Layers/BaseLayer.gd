@@ -289,4 +289,4 @@ func accepts_child(_layer: BaseLayer) -> bool:
 
 ## Returns an instance of the layer button that will be added to the timeline.
 func instantiate_layer_button() -> Node:
-	return null
+	return Global.layer_button_node.instantiate()

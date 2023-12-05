@@ -178,13 +178,6 @@ func change_project() -> void:
 	Global.animation_timeline.project_changed()
 
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-
-	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
-	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(
-		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
-	)
-	toggle_layer_buttons()
 	animation_tags = animation_tags
 
 	# Change the guides
@@ -519,19 +512,9 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if new_frame != current_frame:  # If the frame has changed
 		current_frame = new_frame
 		Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-		toggle_frame_buttons()
 
 	if new_layer != current_layer:  # If the layer has changed
 		current_layer = new_layer
-		toggle_layer_buttons()
-
-	if current_frame < frames.size():  # Set opacity slider
-		var cel_opacity := frames[current_frame].cels[current_layer].opacity
-		Global.layer_opacity_slider.value = cel_opacity * 100
-		var blend_mode_index: int = Global.animation_timeline.blend_modes_button.get_item_index(
-			layers[current_layer].blend_mode
-		)
-		Global.animation_timeline.blend_modes_button.selected = blend_mode_index
 
 	Global.transparent_checker.update_rect()
 	Global.cel_changed.emit()
@@ -540,39 +523,6 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 		await RenderingServer.frame_post_draw
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
-
-
-func toggle_frame_buttons() -> void:
-	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
-	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(
-		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
-	)
-
-
-func toggle_layer_buttons() -> void:
-	if layers.is_empty() or current_layer >= layers.size():
-		return
-	var child_count: int = layers[current_layer].get_child_count(true)
-
-	Global.disable_button(
-		Global.remove_layer_button,
-		layers[current_layer].is_locked_in_hierarchy() or layers.size() == child_count + 1
-	)
-	Global.disable_button(Global.move_up_layer_button, current_layer == layers.size() - 1)
-	Global.disable_button(
-		Global.move_down_layer_button,
-		current_layer == child_count and not is_instance_valid(layers[current_layer].parent)
-	)
-	Global.disable_button(
-		Global.merge_down_layer_button,
-		(
-			current_layer == child_count
-			or layers[current_layer] is GroupLayer
-			or layers[current_layer - 1] is GroupLayer
-			or layers[current_layer - 1] is Layer3D
-		)
-	)
 
 
 func _animation_tags_changed(value: Array[AnimationTag]) -> void:
@@ -884,9 +834,8 @@ func _update_frame_ui() -> void:
 func _update_layer_ui() -> void:
 	for l in layers.size():
 		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer_index = l
 		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
 			cel_hbox.get_child(f).layer = l
 			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
