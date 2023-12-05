@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-12-04 22:17\n"
+"PO-Revision-Date: 2023-12-05 00:20\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -95,13 +95,15 @@ msgstr "Αποθήκευση ως..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Συμπερίληψη αναμεμειγμένων εικόνων"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "Αν είναι ενεργοποιημένο, οι τελικές αναμεμειγμένες εικόνες αποθηκεύονται επίσης στο pxo, για κάθε καρέ.\n"
+"Αυτό κάνει το αρχείο pxo μεγαλύτερο και είναι χρήσιμο για την εισαγωγή από λογισμικό τρίτων\n"
+"ή για την εξαγωγή μέσω CLI. Η φόρτωση αρχείων pxo στο Pixelorama δεν χρειάζεται αυτή την επιλογή να είναι ενεργοποιημένη.\n"
 
 msgid "Import"
 msgstr "Εισαγωγή"
@@ -1307,18 +1309,18 @@ msgstr "Επιλέξτε ένα χρώμα για το δεξί εργαλείο
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Επιλέξτε ένα χρώμα από την οθόνη."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Επιλέξτε ένα σχήμα επιλογέα."
 
 msgid "Left tool"
 msgstr "Αριστερό εργαλείο"
