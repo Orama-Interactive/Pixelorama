@@ -861,7 +861,6 @@ func _update_frame_ui() -> void:
 
 ## Update the layer indices and layer/cel buttons
 func _update_layer_ui() -> void:
-	order_layers()
 	for l in layers.size():
 		layers[l].index = l
 		Global.layer_vbox.get_child(layers.size() - 1 - l).layer_index = l
@@ -869,3 +868,4 @@ func _update_layer_ui() -> void:
 		for f in frames.size():
 			cel_hbox.get_child(f).layer = l
 			cel_hbox.get_child(f).button_setup()
+	order_layers()
