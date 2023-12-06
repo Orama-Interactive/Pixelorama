@@ -64,7 +64,7 @@ func _current_palette_save() -> String:
 
 func _ensure_palette_directory_exists() -> void:
 	var dir := DirAccess.open(Global.home_data_directory)
-	if not dir.dir_exists(palettes_write_path):
+	if is_instance_valid(dir) and not dir.dir_exists(palettes_write_path):
 		dir.make_dir(palettes_write_path)
 
 
