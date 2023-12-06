@@ -24,7 +24,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
 			var cel := frame.cels[layer.index]
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.get_image())
-			if cel.opacity < 1.0:  # If we have cel transparency
+			if cel.get_final_opacity(layer) < 1.0:  # If we have cel transparency
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
 						var pixel_color := cel_image.get_pixel(xx, yy)

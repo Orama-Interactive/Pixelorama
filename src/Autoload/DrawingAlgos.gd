@@ -21,22 +21,24 @@ func blend_layers(
 	# the second are the opacities and the third are the origins
 	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
 	for i in project.layers.size():
-		var layer := project.layers[i]
+		var ordered_index := project.ordered_layers[i]
+		var layer := project.layers[ordered_index]
 		var include := true if layer.is_visible_in_hierarchy() else false
 		if only_selected and include:
 			var test_array := [project.frames.find(frame), i]
 			if not test_array in project.selected_cels:
 				include = false
-		var cel := frame.cels[i]
+		var cel := frame.cels[ordered_index]
 		var cel_image := layer.display_effects(cel)
 		textures.append(cel_image)
 		# Store the blend mode
-		metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+		metadata_image.set_pixel(ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
 		# Store the opacity
 		if include:
-			metadata_image.set_pixel(i, 1, Color(cel.opacity, 0.0, 0.0, 0.0))
+			var opacity := cel.get_final_opacity(layer)
+			metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
 		else:
-			metadata_image.set_pixel(i, 1, Color())
+			metadata_image.set_pixel(ordered_index, 1, Color())
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {
