@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-12-06 00:12\n"
+"PO-Revision-Date: 2023-12-06 01:51\n"
 
 msgid "OK"
 msgstr "예"
@@ -1876,11 +1876,14 @@ msgstr ""
 msgid "Unlink Cels"
 msgstr ""
 
-msgid "Frame Properties"
-msgstr "프레임 속성"
+msgid "Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "프레임 속성"
+
+msgid "Cel properties"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
