@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2023-12-06 03:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1881,7 +1881,7 @@ msgid "Unlink Cels"
 msgstr "Délier le Cellulo"
 
 msgid "Properties"
-msgstr ""
+msgstr "Propriétés"
 
 msgid "Frame properties"
 msgstr "Propriétés de la frame"
