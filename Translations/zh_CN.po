@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-12-06 03:58\n"
+"PO-Revision-Date: 2023-12-06 05:23\n"
 
 msgid "OK"
 msgstr "确定"
@@ -95,13 +95,15 @@ msgstr "另存为..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "包含混合图像"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "如果启用，则最终的混合图像也会存储在每一帧的 pxo 中。\n"
+"这使得 pxo 文件更大，对于通过第三方软件导入很有用\n"
+"或 CLI 导出。在 Pixelorama 中加载 pxo 文件不需要启用此选项。"
 
 msgid "Import"
 msgstr "导入"
@@ -1307,18 +1309,18 @@ msgstr "选择右键工具颜色"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "切换左右颜色。"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "重置颜色为默认状态（黑色为左，白色为右）"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "拾取屏幕上的颜色。"
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "选择一个选择器形状。"
 
 msgid "Left tool"
 msgstr "左键工具"
@@ -1544,7 +1546,7 @@ msgstr "动态"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "稳定器"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
