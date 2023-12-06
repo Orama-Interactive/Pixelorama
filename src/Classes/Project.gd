@@ -34,6 +34,10 @@ var layers: Array[BaseLayer] = []
 var current_frame := 0
 var current_layer := 0
 var selected_cels := [[0, 0]]  ## Array of Arrays of 2 integers (frame & layer)
+## Array that contains the order of the [BaseLayer] indices that are being drawn.
+## Takes into account each [BaseCel]'s invidiual z-index. If all z-indexes are 0, then the
+## array just contains the indices of the layers in increasing order.
+## See [method order_layers].
 var ordered_layers: Array[int] = [0]
 
 var animation_tags: Array[AnimationTag] = []:
@@ -615,6 +619,8 @@ func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
 	return result
 
 
+## Re-order layers to take each cel's z-index into account. If all z-indexes are 0,
+## then the order of drawing is the same as the order of the layers itself.
 func order_layers(frame_index := current_frame) -> void:
 	ordered_layers = []
 	for i in layers.size():
@@ -622,6 +628,8 @@ func order_layers(frame_index := current_frame) -> void:
 	ordered_layers.sort_custom(_z_index_sort.bind(frame_index))
 
 
+## Used as a [Callable] for [method Array.sort_custom] to sort layers
+## while taking each cel's z-index into account.
 func _z_index_sort(a: int, b: int, frame_index: int) -> bool:
 	var z_index_a := frames[frame_index].cels[a].z_index
 	var z_index_b := frames[frame_index].cels[b].z_index

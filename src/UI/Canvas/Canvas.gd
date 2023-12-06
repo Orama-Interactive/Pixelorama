@@ -169,7 +169,8 @@ func draw_layers() -> void:
 			)
 			# Store the opacity
 			if layer.is_visible_in_hierarchy():
-				layer_metadata_image.set_pixel(ordered_index, 1, Color(cel.opacity, 0.0, 0.0, 0.0))
+				var opacity := cel.get_final_opacity(layer)
+				layer_metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
 			else:
 				layer_metadata_image.set_pixel(ordered_index, 1, Color())
 			# Store the origin
@@ -203,9 +204,8 @@ func draw_layers() -> void:
 					ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0)
 				)
 				if layer.is_visible_in_hierarchy():
-					layer_metadata_image.set_pixel(
-						ordered_index, 1, Color(cel.opacity, 0.0, 0.0, 0.0)
-					)
+					var opacity := cel.get_final_opacity(layer)
+					layer_metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
 				else:
 					layer_metadata_image.set_pixel(ordered_index, 1, Color())
 				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())

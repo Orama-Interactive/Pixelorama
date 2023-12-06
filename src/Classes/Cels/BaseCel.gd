@@ -14,7 +14,14 @@ var image_texture: Texture2D:
 ## [br] If the cel is not linked then it is [code]null[/code].
 var link_set = null  # { "cels": Array, "hue": float } or null
 var transformed_content: Image  ## Used in transformations (moving, scaling etc with selections).
+## Used for individual cel ordering. Used for when cels need to be drawn above or below
+## their corresponding layer.
 var z_index := 0
+
+
+func get_final_opacity(layer: BaseLayer) -> float:
+	return layer.opacity * opacity
+
 
 # Methods to Override:
 

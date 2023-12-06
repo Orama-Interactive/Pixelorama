@@ -35,7 +35,8 @@ func blend_layers(
 		metadata_image.set_pixel(ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
 		# Store the opacity
 		if include:
-			metadata_image.set_pixel(ordered_index, 1, Color(cel.opacity, 0.0, 0.0, 0.0))
+			var opacity := cel.get_final_opacity(layer)
+			metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
 		else:
 			metadata_image.set_pixel(ordered_index, 1, Color())
 	var texture_array := Texture2DArray.new()

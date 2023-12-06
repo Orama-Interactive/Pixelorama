@@ -36,6 +36,7 @@ var visible := true  ## Sets visibility of the layer.
 var locked := false  ## Images of a locked layer won't be overritten.
 var new_cels_linked := false  ## Determines if new cel of the layer should be linked or not.
 var blend_mode := BlendModes.NORMAL  ## Blend mode of the current layer.
+var opacity := 1.0  ## The opacity of the layer, affects all frames that belong to that layer.
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
 var effects: Array[LayerEffect]  ## An array for non-destructive effects of the layer.
 var effects_enabled := true  ## If [code]true[/code], the effects are being applied.
@@ -214,6 +215,7 @@ func serialize() -> Dictionary:
 		"visible": visible,
 		"locked": locked,
 		"blend_mode": blend_mode,
+		"opacity": opacity,
 		"parent": parent.index if is_instance_valid(parent) else -1,
 		"effects": effect_data
 	}
@@ -236,6 +238,8 @@ func deserialize(dict: Dictionary) -> void:
 	locked = dict.locked
 	if dict.has("blend_mode"):
 		blend_mode = dict.blend_mode
+	if dict.has("opacity"):
+		opacity = dict.opacity
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility

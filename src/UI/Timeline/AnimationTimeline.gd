@@ -930,7 +930,8 @@ func _on_MergeDownLayer_pressed() -> void:
 		metadata_image.set_pixel(0, 1, Color(1.0, 0.0, 0.0, 0.0))
 		textures.append(top_image)
 		metadata_image.set_pixel(1, 0, Color(top_layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
-		metadata_image.set_pixel(1, 1, Color(frame.cels[top_layer.index].opacity, 0.0, 0.0, 0.0))
+		var opacity := frame.cels[top_layer.index].get_final_opacity(top_layer)
+		metadata_image.set_pixel(1, 1, Color(opacity, 0.0, 0.0, 0.0))
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
 		var params := {
@@ -978,9 +979,8 @@ func _on_OpacitySlider_value_changed(value: float) -> void:
 	# Also update all selected frames.
 	for idx_pair in Global.current_project.selected_cels:
 		if idx_pair[1] == current_layer_idx:
-			var frame := Global.current_project.frames[idx_pair[0]]
-			var cel := frame.cels[current_layer_idx]
-			cel.opacity = new_opacity
+			var layer := Global.current_project.layers[current_layer_idx]
+			layer.opacity = new_opacity
 	Global.canvas.queue_redraw()
 
 
@@ -999,8 +999,8 @@ func _cel_changed() -> void:
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
 	var project := Global.current_project
-	var cel_opacity := project.get_current_cel().opacity
-	opacity_slider.value = cel_opacity * 100
+	var layer_opacity := project.layers[project.current_layer].opacity
+	opacity_slider.value = layer_opacity * 100
 	var blend_mode_index := blend_modes_button.get_item_index(
 		project.layers[project.current_layer].blend_mode
 	)

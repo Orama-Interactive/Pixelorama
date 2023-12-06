@@ -19,10 +19,12 @@ func _on_ResizeCanvas_about_to_show() -> void:
 
 	var layer_i := 0
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-		if cel is PixelCel and Global.current_project.layers[layer_i].is_visible_in_hierarchy():
+		var layer := Global.current_project.layers[layer_i]
+		if cel is PixelCel and layer.is_visible_in_hierarchy():
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.get_image())
-			if cel.opacity < 1:  # If we have cel transparency
+			var opacity := cel.get_final_opacity(layer)
+			if opacity < 1.0:  # If we have cel transparency
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
 						var pixel_color := cel_image.get_pixel(xx, yy)
