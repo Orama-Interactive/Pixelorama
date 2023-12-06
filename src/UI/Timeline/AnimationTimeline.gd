@@ -712,7 +712,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 # Layer buttons
 
 
-func add_layer(type: int) -> void:
+func add_layer(type := 0) -> void:
 	var project := Global.current_project
 	var current_layer := project.layers[project.current_layer]
 	var l: BaseLayer

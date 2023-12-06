@@ -950,7 +950,7 @@ color = Color(0, 0.741176, 1, 0.501961)
 [node name="PasteTagPopup" type="PopupMenu" parent="."]
 script = ExtResource("12")
 
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [0]]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer" to="." method="add_layer"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [true]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [false]]
