@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-12-04 22:18\n"
+"PO-Revision-Date: 2023-12-06 01:51\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1880,11 +1880,14 @@ msgstr "Tautkan Cel ke"
 msgid "Unlink Cels"
 msgstr "Putuskan Cel"
 
-msgid "Frame Properties"
-msgstr "Properti Bingkai"
+msgid "Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Properti bingkai"
+
+msgid "Cel properties"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
