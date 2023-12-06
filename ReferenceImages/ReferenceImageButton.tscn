@@ -1,0 +1,128 @@
+[gd_scene load_steps=3 format=3 uid="uid://5quwfcfl5o1e"]
+
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
+[ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" id="2"]
+
+[node name="ReferenceImageButton" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -969.0
+offset_bottom = -581.0
+size_flags_horizontal = 3
+script = ExtResource("2")
+
+[node name="Interior" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PathHeader" type="HBoxContainer" parent="Interior"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Path" type="LinkButton" parent="Interior/PathHeader"]
+modulate = Color(0.552941, 1, 0.298039, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+underline = 1
+
+[node name="PathHTML" type="Label" parent="Interior/PathHeader"]
+self_modulate = Color(0.552941, 1, 0.298039, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="Interior/PathHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PreviewAndOptions" type="HBoxContainer" parent="Interior"]
+layout_mode = 2
+
+[node name="Options" type="GridContainer" parent="Interior/PreviewAndOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="PosLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
+layout_mode = 2
+text = "Position:"
+
+[node name="Position" type="HBoxContainer" parent="Interior/PreviewAndOptions/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="X" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource("1")]
+layout_mode = 2
+allow_greater = true
+allow_lesser = true
+
+[node name="Y" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource("1")]
+layout_mode = 2
+allow_greater = true
+allow_lesser = true
+
+[node name="ScaleLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
+layout_mode = 2
+text = "Scale:"
+
+[node name="Scale" parent="Interior/PreviewAndOptions/Options" instance=ExtResource("1")]
+layout_mode = 2
+allow_greater = true
+allow_lesser = true
+
+[node name="OpacityLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
+layout_mode = 2
+text = "Opacity:"
+
+[node name="Opacity" parent="Interior/PreviewAndOptions/Options" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="PreviewPanel" type="Panel" parent="Interior/PreviewAndOptions"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Warning" type="Label" parent="Interior/PreviewAndOptions/PreviewPanel"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Preview" type="TextureRect" parent="Interior/PreviewAndOptions/PreviewPanel"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+expand_mode = 1
+
+[node name="OtherOptions" type="HBoxContainer" parent="Interior"]
+layout_mode = 2
+alignment = 2
+
+[node name="ApplyFilter" type="CheckBox" parent="Interior/OtherOptions"]
+layout_mode = 2
+tooltip_text = "Uses a magnifying filter, to enable smooth zooming in of the texture."
+text = "Apply Filter"
+
+[node name="Silhouette" type="CheckBox" parent="Interior/OtherOptions"]
+layout_mode = 2
+text = "Silhouette"
+
+[node name="Reset" type="Button" parent="Interior/OtherOptions"]
+layout_mode = 2
+text = "Reset"
+
+[node name="Remove" type="Button" parent="Interior/OtherOptions"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.266667, 0.266667, 1)
+text = "Remove"
+
+[connection signal="pressed" from="Interior/PathHeader/Path" to="." method="_on_Path_pressed"]
+[connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Position/X" to="." method="_on_X_value_changed"]
+[connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Position/Y" to="." method="_on_Y_value_changed"]
+[connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Scale" to="." method="_on_Scale_value_changed"]
+[connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Opacity" to="." method="_on_Opacity_value_changed"]
+[connection signal="toggled" from="Interior/OtherOptions/ApplyFilter" to="." method="_on_ApplyFilter_toggled"]
+[connection signal="toggled" from="Interior/OtherOptions/Silhouette" to="." method="_on_Silhouette_toggled"]
+[connection signal="pressed" from="Interior/OtherOptions/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="pressed" from="Interior/OtherOptions/Remove" to="." method="_on_Remove_pressed"]
