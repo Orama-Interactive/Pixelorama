@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2023-12-06 13:12\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1882,13 +1882,13 @@ msgid "Unlink Cels"
 msgstr "Hücre bağlantısını kaldır"
 
 msgid "Properties"
-msgstr ""
+msgstr "Özellikler"
 
 msgid "Frame properties"
 msgstr "Kare özellikleri"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Hücre özellikleri"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
