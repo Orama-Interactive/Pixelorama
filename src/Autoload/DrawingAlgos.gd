@@ -20,12 +20,15 @@ func blend_layers(
 	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
 	# the second are the opacities and the third are the origins
 	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
+	var frame_index := project.frames.find(frame)
+	var previous_ordered_layers: Array[int] = Array(project.ordered_layers)
+	project.order_layers(frame_index)
 	for i in project.layers.size():
 		var ordered_index := project.ordered_layers[i]
 		var layer := project.layers[ordered_index]
 		var include := true if layer.is_visible_in_hierarchy() else false
 		if only_selected and include:
-			var test_array := [project.frames.find(frame), i]
+			var test_array := [frame_index, i]
 			if not test_array in project.selected_cels:
 				include = false
 		var cel := frame.cels[ordered_index]
@@ -49,6 +52,8 @@ func blend_layers(
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(blended, blend_layers_shader, params, project.size)
 	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
+	# Re-order the layers again to ensure correct canvas drawing
+	project.ordered_layers = Array(previous_ordered_layers)
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html

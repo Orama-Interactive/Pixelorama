@@ -522,6 +522,7 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if new_layer != current_layer:  # If the layer has changed
 		current_layer = new_layer
 
+	order_layers()
 	Global.transparent_checker.update_rect()
 	Global.cel_changed.emit()
 	if get_current_cel() is Cel3D:
@@ -868,4 +869,3 @@ func _update_layer_ui() -> void:
 		for f in frames.size():
 			cel_hbox.get_child(f).layer = l
 			cel_hbox.get_child(f).button_setup()
-	order_layers()
