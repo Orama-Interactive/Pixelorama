@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2023-12-06 14:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1881,13 +1881,13 @@ msgid "Unlink Cels"
 msgstr "Deconectare celuri"
 
 msgid "Properties"
-msgstr ""
+msgstr "Proprietăți"
 
 msgid "Frame properties"
 msgstr "Proprietățile cadrului"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Proprietăți cel"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
