@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-12-04 22:17\n"
+"PO-Revision-Date: 2023-12-06 01:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1878,11 +1878,14 @@ msgstr "Enlazar celdas a"
 msgid "Unlink Cels"
 msgstr "Desvincular celdas"
 
-msgid "Frame Properties"
-msgstr "Propiedades de los Fotogramas"
+msgid "Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Propiedades de los fotogramas"
+
+msgid "Cel properties"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
