@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-12-05 10:29\n"
+"PO-Revision-Date: 2023-12-06 00:12\n"
 
 msgid "OK"
 msgstr "예"
@@ -1749,7 +1749,7 @@ msgid "Current frame:"
 msgstr "현재 프레임:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "애니메이션 모드:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
@@ -1835,7 +1835,7 @@ msgstr "선택 되었다면, 같은 태그의 프레임만 애니메이션이 �
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "색상 모드"
 
 msgid "Show past frames:"
 msgstr "이전 프래임 보기"
@@ -2004,7 +2004,7 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "색상"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
@@ -2147,7 +2147,7 @@ msgid "File failed to save. Error code %s"
 msgstr "코드 에러. 파일을 저장을 실패했읍니다"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "내보낸 파일(들)"
 
 msgid "New Empty Palette"
 msgstr "새 빈 팔레트"
@@ -2548,31 +2548,31 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "큐브"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "구형"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "캡슐"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "원통"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "프리즘"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "토루스"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "평면"
 
 msgid "Text"
 msgstr ""
