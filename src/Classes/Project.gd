@@ -33,14 +33,15 @@ var frames: Array[Frame] = []
 var layers: Array[BaseLayer] = []
 var current_frame := 0
 var current_layer := 0
-var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
+var selected_cels := [[0, 0]]  ## Array of Arrays of 2 integers (frame & layer)
+var ordered_layers: Array[int] = [0]
 
 var animation_tags: Array[AnimationTag] = []:
 	set = _animation_tags_changed
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
 var reference_images: Array[ReferenceImage] = []
-var vanishing_points := []  # Array of Vanishing Points
+var vanishing_points := []  ## Array of Vanishing Points
 var fps := 6.0
 
 var x_symmetry_point: float
@@ -49,15 +50,15 @@ var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
 
 var selection_map := SelectionMap.new()
-# This is useful for when the selection is outside of the canvas boundaries,
-# on the left and/or above (negative coords)
+## This is useful for when the selection is outside of the canvas boundaries,
+## on the left and/or above (negative coords)
 var selection_offset := Vector2i.ZERO:
 	set(value):
 		selection_offset = value
 		Global.canvas.selection.marching_ants_outline.offset = selection_offset
 var has_selection := false
 
-# For every camera (currently there are 3)
+## For every camera (currently there are 3)
 var cameras_rotation: PackedFloat32Array = [0.0, 0.0, 0.0]
 var cameras_zoom: PackedVector2Array = [
 	Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)
@@ -436,6 +437,7 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("fps"):
 		fps = dict.fps
 	_deserialize_metadata(self, dict)
+	order_layers()
 
 
 func _serialize_metadata(object: Object) -> Dictionary:
@@ -611,6 +613,25 @@ func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
 	if not cel is GroupCel:
 		result = cel
 	return result
+
+
+func order_layers(frame_index := current_frame) -> void:
+	ordered_layers = []
+	for i in layers.size():
+		ordered_layers.append(i)
+	ordered_layers.sort_custom(_z_index_sort.bind(frame_index))
+
+
+func _z_index_sort(a: int, b: int, frame_index: int) -> bool:
+	var z_index_a := frames[frame_index].cels[a].z_index
+	var z_index_b := frames[frame_index].cels[b].z_index
+	var layer_index_a := layers[a].index + z_index_a
+	var layer_index_b := layers[b].index + z_index_b
+	if layer_index_a < layer_index_b:
+		return true
+	if layer_index_a == layer_index_b and z_index_a < z_index_b:
+		return true
+	return false
 
 
 # Timeline modifications
@@ -832,6 +853,7 @@ func _update_frame_ui() -> void:
 
 ## Update the layer indices and layer/cel buttons
 func _update_layer_ui() -> void:
+	order_layers()
 	for l in layers.size():
 		layers[l].index = l
 		Global.layer_vbox.get_child(layers.size() - 1 - l).layer_index = l

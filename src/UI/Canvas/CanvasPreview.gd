@@ -80,7 +80,7 @@ func _draw_layers() -> void:
 	# the second are the opacities and the third are the origins
 	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
 	# Draw current frame layers
-	for i in project.layers.size():
+	for i in project.ordered_layers:
 		if current_cels[i] is GroupCel:
 			continue
 		var layer := project.layers[i]
