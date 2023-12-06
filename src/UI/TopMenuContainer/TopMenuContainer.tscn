@@ -7,7 +7,6 @@
 custom_minimum_size = Vector2(0, 28)
 offset_right = 1280.0
 offset_bottom = 28.0
-theme_type_variation = &"TopMenuPanel"
 script = ExtResource("2")
 
 [node name="MenuItems" type="HBoxContainer" parent="."]

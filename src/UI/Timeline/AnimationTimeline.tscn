@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=77 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d3gx4phcox58s" path="res://assets/graphics/layers/clone.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://dt6cysvv1w77u" path="res://assets/graphics/layers/fx.png" id="9_yphnd"]
 [ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="10"]
 [ext_resource type="Script" path="res://src/UI/Timeline/FrameScrollContainer.gd" id="11"]
 [ext_resource type="Script" path="res://src/UI/Timeline/PasteTagPopup.gd" id="12"]
@@ -211,7 +212,8 @@ mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_tpvn2")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_top = -11.0
@@ -220,6 +222,7 @@ offset_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2")
+stretch_mode = 3
 
 [node name="AddLayerList" type="MenuButton" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/AddLayer"]
 unique_name_in_owner = true
@@ -266,18 +269,16 @@ disabled = true
 shortcut = SubResource("Shortcut_xar00")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/RemoveLayer"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -7.0
-offset_top = -7.0
-offset_right = 7.0
-offset_bottom = 7.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("6")
+stretch_mode = 3
 
 [node name="MoveUpLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 unique_name_in_owner = true
@@ -292,18 +293,16 @@ disabled = true
 shortcut = SubResource("Shortcut_r300c")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MoveUpLayer"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -11.0
-offset_right = 11.0
-offset_bottom = 11.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("4")
+stretch_mode = 3
 
 [node name="MoveDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 unique_name_in_owner = true
@@ -318,18 +317,16 @@ disabled = true
 shortcut = SubResource("Shortcut_763li")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MoveDownLayer"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -11.0
-offset_right = 11.0
-offset_bottom = 11.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("3")
+stretch_mode = 3
 
 [node name="CloneLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
@@ -342,18 +339,16 @@ mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_0o4ap")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/CloneLayer"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -11.0
-offset_right = 11.0
-offset_bottom = 11.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("7")
+stretch_mode = 3
 
 [node name="MergeDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 unique_name_in_owner = true
@@ -368,25 +363,34 @@ disabled = true
 shortcut = SubResource("Shortcut_wbf7k")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/MergeDownLayer"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -11.0
-offset_right = 11.0
-offset_bottom = 11.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("5")
+stretch_mode = 3
 
-[node name="LayerFX" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons"]
+[node name="LayerFX" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-text = "FX"
+
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer/LayerButtons/LayerFX"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("9_yphnd")
+stretch_mode = 3
 
 [node name="BlendContainer" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/LayerSettingsContainer"]
 layout_mode = 2
