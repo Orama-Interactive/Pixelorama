@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2023-12-07 14:13\n"
 
 msgid "OK"
 msgstr "예"
@@ -212,7 +212,7 @@ msgid "Invert"
 msgstr "반전"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "흑백 뷰"
 
 msgid "Mirror Image"
 msgstr "미러 이미지"
@@ -279,7 +279,7 @@ msgstr "레이아웃 관리"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "미리보기"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
@@ -562,7 +562,7 @@ msgid "Selected frames"
 msgstr ""
 
 msgid "Layers:"
-msgstr ""
+msgstr "레이어:"
 
 #. Found in the export dialog
 msgid "Visible layers"
@@ -1755,7 +1755,7 @@ msgid "Current frame as spritesheet"
 msgstr ""
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "첫 프레임으로 이동\n"
 
 msgid "Go to the previous frame\n"
 msgstr ""
