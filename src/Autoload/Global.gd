@@ -465,8 +465,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 ## The palettes panel. It has the [param PalettePanel.gd] script attached.
 @onready var palette_panel: PalettePanel = control.find_child("Palettes")
-## The reference images panel. It has the [param ReferencesPanel.gd] script attached.
-@onready var references_panel: ReferencesPanel = control.find_child("Reference Images")
 ## The perspectice editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
 

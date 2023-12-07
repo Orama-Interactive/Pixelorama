@@ -2,6 +2,7 @@
 extends Node
 
 signal project_saved
+signal reference_image_imported
 
 var current_save_paths: PackedStringArray = []
 ## Stores a filename of a backup file in user:// until user saves manually
@@ -725,7 +726,7 @@ func import_reference_image_from_path(path: String) -> void:
 	ri.project = project
 	ri.deserialize({"image_path": path})
 	Global.canvas.add_child(ri)
-	project.change_project()
+	reference_image_imported.emit()
 
 
 ## Useful for Web
@@ -735,7 +736,7 @@ func import_reference_image_from_image(image: Image) -> void:
 	ri.project = project
 	ri.create_from_image(image)
 	Global.canvas.add_child(ri)
-	project.change_project()
+	reference_image_imported.emit()
 
 
 func set_new_imported_tab(project: Project, path: String) -> void:

@@ -46,7 +46,7 @@ func _on_Remove_pressed():
 		queue_free()
 		element.queue_free()
 		Global.current_project.reference_images.remove_at(index)
-		Global.current_project.change_project()
+		OpenSave.reference_image_imported.emit()
 
 
 func _on_Scale_value_changed(value: float):

@@ -6,7 +6,12 @@ var reference_image_button_tscn := preload("res://src/UI/ReferenceImages/Referen
 @onready var list = $"Scroll/List"
 
 
-func project_changed():
+func _ready() -> void:
+	Global.project_changed.connect(_update_reference_images)
+	OpenSave.reference_image_imported.connect(_update_reference_images)
+
+
+func _update_reference_images():
 	for c in list.get_children():
 		c.queue_free()
 	# Just do this here because I'm not sure where it's done.
