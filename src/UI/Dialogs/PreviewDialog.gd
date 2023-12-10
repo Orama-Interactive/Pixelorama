@@ -186,7 +186,7 @@ func _on_PreviewDialog_confirmed() -> void:
 
 			# Copy the image file into the "pixelorama/Patterns" directory
 			var location := "Patterns".path_join(file_name_ext)
-			var dir := DirAccess.open(path)
+			var dir := DirAccess.open(path.get_base_dir())
 			dir.copy(path, Global.home_data_directory.path_join(location))
 
 
@@ -412,7 +412,7 @@ func add_brush() -> void:
 
 		# Copy the image file into the "pixelorama/Brushes" directory
 		var location := "Brushes".path_join(file_name_ext)
-		var dir := DirAccess.open(path)
+		var dir := DirAccess.open(path.get_base_dir())
 		dir.copy(path, Global.home_data_directory.path_join(location))
 
 	elif brush_type == BrushTypes.PROJECT:
