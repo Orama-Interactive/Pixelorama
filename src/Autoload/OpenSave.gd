@@ -7,10 +7,14 @@ signal reference_image_imported
 var current_save_paths: PackedStringArray = []
 ## Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths: PackedStringArray = []
-var preview_dialog_tscn := preload("res://src/UI/Dialogs/PreviewDialog.tscn")
+var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
 var preview_dialogs := []  ## Array of preview dialogs
 var last_dialog_option := 0
 var autosave_timer: Timer
+
+# custom importer related dictionaries (received from extensions)
+var custom_import_names := {}  ## Contains importer names as keys and ids as values
+var custom_importer_scenes := {}  ## Contains ids keys and import option preloads as values
 
 
 func _ready() -> void:
@@ -72,8 +76,38 @@ func handle_loading_file(file: String) -> void:
 		handle_loading_image(file, image)
 
 
+func add_import_option(import_name: StringName, import_scene: PackedScene) -> int:
+	# Change format name if another one uses the same name
+	var existing_format_names = (
+		ImportPreviewDialog.ImageImportOptions.keys() + custom_import_names.keys()
+	)
+	for i in range(existing_format_names.size()):
+		var test_name = import_name
+		if i != 0:
+			test_name = str(test_name, "_", i)
+		if !existing_format_names.has(test_name):
+			import_name = test_name
+			break
+
+	# Obtain a unique id
+	var id := ImportPreviewDialog.ImageImportOptions.size()
+	for i in custom_import_names.size():
+		var format_id = id + i
+		if !custom_import_names.values().has(i):
+			id = format_id
+	# Add to custom_file_formats
+	custom_import_names.merge({import_name: id})
+	custom_importer_scenes.merge({id: import_scene})
+	return id
+
+
 func handle_loading_image(file: String, image: Image) -> void:
-	var preview_dialog := preview_dialog_tscn.instantiate() as PreviewDialog
+	var preview_dialog := preview_dialog_tscn.instantiate() as ImportPreviewDialog
+	# add custom importers to preview dialog
+	for import_name in custom_import_names.keys():
+		var id = custom_import_names[import_name]
+		var new_import_option = custom_importer_scenes[id].instantiate()
+		preview_dialog.custom_importers[id] = new_import_option
 	preview_dialogs.append(preview_dialog)
 	preview_dialog.path = file
 	preview_dialog.image = image
@@ -630,17 +664,15 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Cel")
 
-	for i in project.frames.size():
-		if i == frame_index:
-			image.convert(Image.FORMAT_RGBA8)
-			var cel := project.frames[i].cels[layer_index]
-			if not cel is PixelCel:
-				continue
-			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-			Global.undo_redo_compress_images(
-				{cel.image: cel_image.data}, {cel.image: cel.image.data}, project
-			)
+	var cel := project.frames[frame_index].cels[layer_index]
+	if not cel is PixelCel:
+		return
+	image.convert(Image.FORMAT_RGBA8)
+	var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+	Global.undo_redo_compress_images(
+		{cel.image: cel_image.data}, {cel.image: cel.image.data}, project
+	)
 
 	project.undo_redo.add_do_property(project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.change_cel.bind(frame_index, layer_index))
