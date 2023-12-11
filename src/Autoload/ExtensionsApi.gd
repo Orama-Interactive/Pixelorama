@@ -722,11 +722,26 @@ class SignalsAPI:
 	func signal_cel_changed(callable: Callable, disconnect := false):
 		_connect_disconnect(Global.cel_changed, callable, disconnect)
 
-	# TOOL SIGNALS
+	# TOOL RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
-	## whenever a tool changes color.
+	## whenever a tool changes color.[br]
+	## [b]Binds: [/b] It has two bind of type [Color] (indicating new color)
+	## and [int] (Indicating button that tool is assigned to, see [enum @GlobalScope.MouseButton])
 	func signal_tool_color_changed(callable: Callable, disconnect := false):
 		_connect_disconnect(Tools.color_changed, callable, disconnect)
+
+	# TIMELINE RELATED SIGNALS
+	## connects/disconnects a signal to [param callable], that emits
+	## whenever timeline animation starts.[br]
+	## [b]Binds: [/b] It has one bind of type [bool] which indicated if animation is in
+	## farward direction ([code]true[/code]) or backward direction ([code]false[/code])
+	func signal_timeline_animation_started(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.animation_timeline.animation_started, callable, disconnect)
+
+	## connects/disconnects a signal to [param callable], that emits
+	## whenever timeline animation stops.
+	func signal_timeline_animation_finished(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.animation_timeline.animation_finished, callable, disconnect)
 
 	# UPDATER SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
