@@ -45,7 +45,7 @@ func check_sanity(extension_name: String):
 				extension_history,
 				" which are not removed properly"
 			)
-			print(error_msg)
+			printerr(error_msg)
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
@@ -55,7 +55,8 @@ func clear_history(extension_name: String):
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func add_action(action: String):
+func add_action(section: String, key: String):
+	var action = str(section, "/", key)
 	var extension_name = _get_caller_extension_name()
 	if extension_name != "Unknown":
 		if extension_name in _action_history.keys():
@@ -66,7 +67,8 @@ func add_action(action: String):
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func remove_action(action: String):
+func remove_action(section: String, key: String):
+	var action = str(section, "/", key)
 	var extension_name = _get_caller_extension_name()
 	if extension_name != "Unknown":
 		if extension_name in _action_history.keys():
@@ -185,7 +187,7 @@ class MenuAPI:
 		if item_id == -1:
 			idx = popup_menu.get_item_count() - 1
 		popup_menu.set_item_metadata(idx, item_metadata)
-		ExtensionsApi.add_action("add_menu")
+		ExtensionsApi.add_action("MenuAPI", "add_menu")
 		return idx
 
 	## Removes a menu item at index [param item_idx] from the [param menu_type] defined by
@@ -195,7 +197,7 @@ class MenuAPI:
 		if not popup_menu:
 			return
 		popup_menu.remove_item(item_idx)
-		ExtensionsApi.remove_action("add_menu")
+		ExtensionsApi.remove_action("MenuAPI", "add_menu")
 
 
 ## Gives access to common dialog related functions.
@@ -256,7 +258,7 @@ class PanelAPI:
 			dockable.tabs_visible = true
 			await ExtensionsApi.wait_frame()
 			dockable.tabs_visible = false
-		ExtensionsApi.add_action("add_tab")
+		ExtensionsApi.add_action("PanelAPI", "add_tab")
 
 	## Removes the [param node] from the DockableContainer.
 	func remove_node_from_tab(node: Node) -> void:
@@ -287,7 +289,7 @@ class PanelAPI:
 			dockable.tabs_visible = true
 			await ExtensionsApi.wait_frame()
 			dockable.tabs_visible = false
-		ExtensionsApi.remove_action("add_tab")
+		ExtensionsApi.remove_action("PanelAPI", "add_tab")
 
 	# PRIVATE METHODS
 	func _get_dockable_container_ui() -> Node:
@@ -353,7 +355,7 @@ class ThemeAPI:
 		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		themes.themes.append(theme)
 		themes.add_theme(theme)
-		ExtensionsApi.add_action("add_theme")
+		ExtensionsApi.add_action("ThemeAPI", "add_theme")
 
 	## Returns index of the [param theme] in preferences.
 	func find_theme_index(theme: Theme) -> int:
@@ -377,7 +379,7 @@ class ThemeAPI:
 	## Remove the [param theme] from preferences.
 	func remove_theme(theme: Theme) -> void:
 		Global.preferences_dialog.themes.remove_theme(theme)
-		ExtensionsApi.remove_action("add_theme")
+		ExtensionsApi.remove_action("ThemeAPI", "add_theme")
 
 
 ## Gives ability to add/remove tools.
@@ -406,7 +408,7 @@ class ToolAPI:
 		)
 		Tools.tools[tool_name] = tool_class
 		Tools.add_tool_button(tool_class)
-		ExtensionsApi.add_action("add_tool")
+		ExtensionsApi.add_action("ToolAPI", "add_tool")
 
 	## Removes a tool with name [param tool_name]
 	## and assign Pencil as left tool, Eraser as right tool.
@@ -417,7 +419,7 @@ class ToolAPI:
 		var tool_class: Tools.Tool = Tools.tools[tool_name]
 		if tool_class:
 			Tools.remove_tool(tool_class)
-		ExtensionsApi.remove_action("add_tool")
+		ExtensionsApi.remove_action("ToolAPI", "add_tool")
 
 
 ## Gives access to pixelorama's selection system.
@@ -646,14 +648,14 @@ class ExportAPI:
 		var id = Export.add_custom_file_format(
 			format_name, extension, exporter_generator, tab, is_animated
 		)
-		ExtensionsApi.add_action("add_exporter")
+		ExtensionsApi.add_action("ExportAPI", "add_exporter")
 		return id
 
 	## Removes the exporter with [param id] from Pixelorama.
 	func remove_export_option(id: int):
 		if Export.custom_exporter_generators.has(id):
 			Export.remove_custom_file_format(id)
-			ExtensionsApi.remove_action("add_exporter")
+			ExtensionsApi.remove_action("ExportAPI", "add_exporter")
 
 
 ## Gives access to the basic commonly used signals.
@@ -684,10 +686,10 @@ class SignalsAPI:
 	func _connect_disconnect(signal_class: Signal, callable: Callable, disconnect := false):
 		if !disconnect:
 			signal_class.connect(callable)
-			ExtensionsApi.add_action(signal_class.get_name())
+			ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
 		else:
 			signal_class.disconnect(callable)
-			ExtensionsApi.remove_action(signal_class.get_name())
+			ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
 
 	# APP RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
@@ -708,8 +710,8 @@ class SignalsAPI:
 		_connect_disconnect(Global.project_created, callable, disconnect)
 
 	## connects/disconnects a signal to [param callable], that emits
-	## whenever project is about to be saved.
-	func signal_project_about_to_save(callable: Callable, disconnect := false):
+	## after a project is saved.
+	func signal_project_saved(callable: Callable, disconnect := false):
 		_connect_disconnect(OpenSave.project_saved, callable, disconnect)
 
 	## connects/disconnects a signal to [param callable], that emits
