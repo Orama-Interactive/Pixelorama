@@ -736,7 +736,7 @@ class SignalsAPI:
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever timeline animation starts.[br]
 	## [b]Binds: [/b] It has one bind of type [bool] which indicated if animation is in
-	## farward direction ([code]true[/code]) or backward direction ([code]false[/code])
+	## forward direction ([code]true[/code]) or backward direction ([code]false[/code])
 	func signal_timeline_animation_started(callable: Callable, disconnect := false):
 		_connect_disconnect(Global.animation_timeline.animation_started, callable, disconnect)
 

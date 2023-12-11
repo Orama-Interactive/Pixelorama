@@ -1,6 +1,6 @@
 extends Panel
 
-signal animation_started(farward: bool)
+signal animation_started(forward: bool)
 signal animation_finished
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
