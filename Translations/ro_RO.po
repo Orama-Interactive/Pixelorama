@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-08-28 14:06\n"
+"PO-Revision-Date: 2023-12-06 14:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -93,8 +93,15 @@ msgstr "Salvare..."
 msgid "Save as..."
 msgstr "Salvare ca..."
 
-msgid "Use ZSTD Compression"
-msgstr "Utilizare comprimare ZSTD"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr "Include imaginile amestecate"
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr "Dacă opțiunea este activată, imaginile amestecate finale sunt, de asemenea, stocate în pxo pentru fiecare cadru. Acest lucru face fișierul pxo mai mare și este util pentru importul de programe informatice terțe sau exportul în CLI. Încărcarea fișierelor pxo în Pixelorama nu necesită această opțiune pentru a fi activată.\n"
 
 msgid "Import"
 msgstr "Importare"
@@ -140,6 +147,13 @@ msgstr "Lipire în loc"
 
 msgid "Delete"
 msgstr "Ștergere"
+
+msgid "Delete Permanently"
+msgstr "Ștergere permanenetă"
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr "Mutare în coșul de gunoi"
 
 msgid "New Brush"
 msgstr "Pensulă nouă"
@@ -314,6 +328,10 @@ msgstr "Afișare ghidaje"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Afișare ghiduri maus"
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr "Afișare efecte strat"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -628,6 +646,14 @@ msgstr "Triliniară"
 
 msgid "Constant"
 msgstr "Constantă"
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr "Spațiu de culori:"
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr "sRGB liniar"
 
 msgid "General"
 msgstr "General"
@@ -1279,13 +1305,20 @@ msgstr "Alege o culoare pentru instrumentul din stânga"
 msgid "Choose a color for the right tool"
 msgstr "Alege o culoare pentru instrumentul din dreapta"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "Comută culorile din stânga și dreapta\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr "Comută culorile din stânga și dreapta."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetează culorile la starea lor implicită (negru pentru stânga, alb pentru dreapta)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr "Alege o culoare de pe ecran."
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr "Selectează o formă pentru selector."
 
 msgid "Left tool"
 msgstr "Instrument stânga"
@@ -1509,6 +1542,10 @@ msgstr "Deschidere dosar"
 msgid "Dynamics"
 msgstr "Dinamică"
 
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr "Stabilizator"
+
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
 msgstr "Presiune"
@@ -1669,6 +1706,9 @@ msgstr "Apropiere"
 msgid "Zoom out"
 msgstr "Depărtare"
 
+msgid "Options"
+msgstr "Opțiuni"
+
 msgid "Options:"
 msgstr "Opțiuni:"
 
@@ -1719,34 +1759,22 @@ msgid "Current frame as spritesheet"
 msgstr "Cadrul curent ca foaie cu grafice bidimensionale"
 
 msgid "Jump to the first frame\n"
-"(%s)"
 msgstr "Sari la primul cadru\n"
-"(%s)"
 
 msgid "Go to the previous frame\n"
-"(%s)"
 msgstr "Mergi la cadrul anterior\n"
-"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
 msgstr "Redă animația înapoi (de la sfârșit până la început)\n"
-"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
 msgstr "Redă animația înainte (de la început până la sfârșit)\n"
-"(%s)"
 
 msgid "Go to the next frame\n"
-"(%s)"
 msgstr "Mergi la cadrul următor\n"
-"(%s)"
 
 msgid "Jump to the last frame\n"
-"(%s)"
 msgstr "Sari la ultimul cadru\n"
-"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "Setări pentru cadre multiple simultane"
@@ -1852,11 +1880,14 @@ msgstr "Conectare celuri la"
 msgid "Unlink Cels"
 msgstr "Deconectare celuri"
 
-msgid "Frame Properties"
-msgstr "Proprietățile cadrului"
+msgid "Properties"
+msgstr "Proprietăți"
 
 msgid "Frame properties"
 msgstr "Proprietățile cadrului"
+
+msgid "Cel properties"
+msgstr "Proprietăți cel"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1901,6 +1932,90 @@ msgstr "Clonează stratul actual"
 
 msgid "Merge current layer with the one below"
 msgstr "Îmbină stratul actual cu cel de mai jos"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr "Mod amestecare:"
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr "Normal"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr "Multiplicare"
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr "Supraexpunere coloră"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr "Supraexpunere liniară"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr "Ecran"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr "Subexpunere coloră"
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr "Contrast"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr "Suprapunere"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr "Lumină delicată"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr "Lumină dură"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr "Inversare"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr "Diferență"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr "Excludere"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr "Scădere"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr "Împărțire"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr "Componentă"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr "Nuanță"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr "Saturație"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr "Culoare"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr "Luminozitate"
 
 msgid "Opacity:"
 msgstr "Opacitate:"
@@ -2690,9 +2805,25 @@ msgstr "În salt la capăt"
 msgid "Backing out at ends"
 msgstr "În retragere la capete"
 
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr "Salt spre final"
+
 msgid "Silhouette"
 msgstr "Siluetă"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr "Înnegrește imaginea și face ca toți pixelii opaci să aibă o culoare închisă."
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr "Activat"
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr "Efecte strat"
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
+msgstr "Adăugare efect"
 

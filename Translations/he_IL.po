@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2023-08-28 12:14\n"
+"PO-Revision-Date: 2023-12-06 01:51\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -93,8 +93,15 @@ msgstr "שמור..."
 msgid "Save as..."
 msgstr "שמור בשם..."
 
-msgid "Use ZSTD Compression"
-msgstr "השתמש בדחיסת ZSTD"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr ""
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr ""
 
 msgid "Import"
 msgstr "ייבא"
@@ -103,7 +110,7 @@ msgid "Export"
 msgstr "ייצא"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "להחליף"
 
 msgid "Export..."
 msgstr "ייצא..."
@@ -140,6 +147,13 @@ msgstr "הדבקה במקום"
 
 msgid "Delete"
 msgstr "מחק"
+
+msgid "Delete Permanently"
+msgstr ""
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr ""
 
 msgid "New Brush"
 msgstr "מברשת חדשה"
@@ -315,6 +329,10 @@ msgstr "הצג קווים מנחים"
 msgid "Show Mouse Guides"
 msgstr ""
 
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr ""
+
 #. Found under the View menu.
 msgid "Snap To"
 msgstr ""
@@ -361,10 +379,10 @@ msgstr ""
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
-msgstr ""
+msgstr "אישור להכל"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "פרוייקטים אחרונים"
 
 msgid "New project"
 msgstr ""
@@ -378,32 +396,32 @@ msgid "Spritesheet (new layer)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "פריים חדש"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
-msgstr ""
+msgstr "שכבה חדשה"
 
 msgid "New reference image"
-msgstr ""
+msgstr "תמונת רפרנס חדשה"
 
 msgid "New palette"
 msgstr ""
 
 msgid "New brush"
-msgstr ""
+msgstr "מברשת חדשה"
 
 msgid "New pattern"
-msgstr ""
+msgstr "תבנית חדשה"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "פריימים מאוזנים:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "פריימים מאונכים:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
@@ -411,11 +429,11 @@ msgstr ""
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "סף:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "תמונות בעלות צד הקטן מהערך הזה יחצו את הסף"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
@@ -470,23 +488,24 @@ msgid "The following files already exist. Do you wish to overwrite them?\n"
 msgstr ""
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "נתיב תיקייה לא תקין!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "שם קובץ לא תקין!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "נתיב תיקייה וששםש קובץ לא תקינים!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "ייצוא בתהליך..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "לא ניתן לטעון קובץ '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "לא ניתן לטעון קובץ '%s'.\n"
+"קוד שגיאה: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
@@ -539,30 +558,30 @@ msgstr "רקע:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "פריימים שנבחרו"
 
 msgid "Layers:"
-msgstr ""
+msgstr "שכבות:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "שכבות נראות"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "שכבות שנבחרו"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "שכבת פיקסלים:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "שכבת קבוצה:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "שכבה תלת-מימדית:"
 
 msgid "Direction:"
 msgstr "כיוון:"
@@ -590,7 +609,7 @@ msgstr "שורות:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "מימדי ייצוא:"
 
 msgid "Path:"
 msgstr "נתיב:"
@@ -606,7 +625,7 @@ msgstr "קובץ:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "אפשרויות מתקדמות"
 
 msgid "Interpolation:"
 msgstr "אינטרפולציה:"
@@ -626,33 +645,41 @@ msgstr ""
 msgid "Constant"
 msgstr ""
 
-msgid "General"
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
 msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr ""
+
+msgid "General"
+msgstr "כללי"
 
 msgid "Startup"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "שפה"
 
 msgid "Interface"
-msgstr ""
+msgstr "ממשק"
 
 msgid "Themes"
 msgstr ""
 
 msgid "Canvas"
-msgstr ""
+msgstr "קנבס"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "ציר זמן"
 
 msgid "Selection"
-msgstr ""
+msgstr "בחירה"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "קיצורי דרך"
 
 msgid "Backup"
 msgstr ""
@@ -820,10 +847,10 @@ msgid "Drop Shadow"
 msgstr "הצללה"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "היסט X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "היסט Y:"
 
 msgid "Shadow color:"
 msgstr "צבע צל:"
@@ -838,20 +865,20 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "חלוקה לחלקים שווים"
 
 msgid "Parts:"
-msgstr ""
+msgstr "חלקים:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "הוספת נקודות בסוף"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Shape:"
-msgstr ""
+msgstr "צורה:"
 
 msgid "Linear"
 msgstr "קווי"
@@ -861,15 +888,15 @@ msgstr "מעגלי"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "חזרתי:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "חזרתי"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "מראה"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
@@ -894,7 +921,7 @@ msgid "Angle:"
 msgstr "זווית:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "גוון:"
 
 msgid "Saturation:"
 msgstr ""
@@ -903,22 +930,22 @@ msgid "Value:"
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "אישור"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "אלכסוני"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "מיקום בתוך תמונה"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "עובי:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "צבעים:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "צעדים:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
@@ -948,31 +975,31 @@ msgid "Changelog"
 msgstr ""
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "אודות Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr ""
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "פותח על ידי Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "אתר אינטרנט"
 
 msgid "GitHub Repo"
 msgstr ""
 
 msgid "Donate"
-msgstr ""
+msgstr "תרומות"
 
 msgid "Developers"
-msgstr ""
+msgstr "מפתחים"
 
 msgid "Contributors"
-msgstr ""
+msgstr "מתנדבים"
 
 msgid "Donors"
 msgstr "תורמות ותורמים"
@@ -1221,29 +1248,37 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "מרובע"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "אליפסה"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "בחרו צבע לכלי השמאלי"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "בחרו צבע לכלי הימני"
 
-msgid "Switch left and right colors\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
 msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
+msgstr "אפסו את הצבעים לערך ברירת המחדל (שחור בשמאל, לבן בימין)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr ""
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
 msgstr ""
 
 msgid "Left tool"
-msgstr ""
+msgstr "כלי שמאלי"
 
 msgid "Right tool"
-msgstr ""
+msgstr "כלי ימני"
 
 msgid "Left pixel indicator"
 msgstr ""
@@ -1461,21 +1496,25 @@ msgstr "פתיחת תיקייה"
 msgid "Dynamics"
 msgstr ""
 
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr ""
+
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "לחץ"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "מהירות"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "אלפא"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "גודל"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
@@ -1483,15 +1522,15 @@ msgstr ""
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "ערכי סף"
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "התחלה"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "End"
 
 msgid "Brush:"
 msgstr "מברשת:"
@@ -1503,16 +1542,16 @@ msgid "Pixel brush"
 msgstr "מברשת פיקסל"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "מברשת עיגול"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "מברשת עיגול מלא"
 
 msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
-msgstr ""
+msgstr "גודל מברשת:"
 
 msgid "Overwrite color"
 msgstr ""
@@ -1591,10 +1630,10 @@ msgid "Hue Shifting"
 msgstr ""
 
 msgid "Lighten"
-msgstr ""
+msgstr "הבהרה"
 
 msgid "Darken"
-msgstr ""
+msgstr "האפלה"
 
 msgid "Amount:"
 msgstr "כמות:"
@@ -1603,7 +1642,7 @@ msgid "Lighten/Darken amount"
 msgstr ""
 
 msgid "Pick for:"
-msgstr ""
+msgstr "בחירה בשביל:"
 
 msgid "Left Color"
 msgstr "צבע שמאלי"
@@ -1620,6 +1659,9 @@ msgstr "התקרבות"
 msgid "Zoom out"
 msgstr "התרחקות"
 
+msgid "Options"
+msgstr ""
+
 msgid "Options:"
 msgstr "אפשרויות:"
 
@@ -1631,22 +1673,22 @@ msgstr "זום 100%"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "החלפת בחירה"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "הוספה לבחירה"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "הורדה מבחירה"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
 msgstr ""
 
 msgid "Mirroring"
-msgstr ""
+msgstr "מראה"
 
 msgid "Horizontal"
 msgstr "אופקי"
@@ -1664,40 +1706,28 @@ msgid "Current frame:"
 msgstr "פריים נוכחי:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "מצב הנפשה:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
 
 msgid "Jump to the first frame\n"
-"(%s)"
-msgstr "קפיצה לפריים הראשון\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the previous frame\n"
-"(%s)"
-msgstr "מעבר לפריים הקודם\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "ניגון האנימציה לאחור (מהסוף להתחלה)\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "ניגון האנימציה קדימה (מההתחלה לסוף)\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "מעבר לפריים הבא\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
-msgstr "קפיצה לפריים האחרון\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr ""
@@ -1738,22 +1768,22 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "שם:"
 
 msgid "From:"
-msgstr ""
+msgstr "מ:"
 
 msgid "To:"
-msgstr ""
+msgstr "ל:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "נגן אנימציה על פריימים עם אותו התג בלבד"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "תג %s (פריים %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "תג %s (פריימים %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1761,7 +1791,7 @@ msgstr ""
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "מצב צבע"
 
 msgid "Show past frames:"
 msgstr ""
@@ -1802,10 +1832,13 @@ msgstr ""
 msgid "Unlink Cels"
 msgstr ""
 
-msgid "Frame Properties"
+msgid "Properties"
 msgstr ""
 
 msgid "Frame properties"
+msgstr ""
+
+msgid "Cel properties"
 msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
@@ -1813,13 +1846,13 @@ msgid "Reverse Frames"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "שכבה"
 
 msgid "Group"
-msgstr ""
+msgstr "קבוצה"
 
 msgid "Layers"
-msgstr ""
+msgstr "שכבות"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -1827,21 +1860,21 @@ msgstr ""
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "הוספת שכבת פיקסלים"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "הוספת שכבת קבוצה"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "הוספת שכבה תלת-מימדית"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "הסרת השכבה הנוכחית"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "הזזה לשכבה הנוכחית"
 
 msgid "Move down the current layer"
 msgstr ""
@@ -1851,6 +1884,90 @@ msgstr "שכפול השכבה הנוכחית"
 
 msgid "Merge current layer with the one below"
 msgstr "איחוד השכבה הנוכחית עם השכבה מתחת"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr ""
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr ""
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr ""
 
 msgid "Opacity:"
 msgstr "אטימות:"
@@ -1977,19 +2094,19 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "קובץ נשמר"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "קובץ נשמר אוטומטית"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "פתיחת קובץ נכשלה. קוד שגיאה %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "שמירת קובץ נכשלה. קוד שגיאה %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "קובץ/קבצים יוצאו"
 
 msgid "New Empty Palette"
 msgstr ""
@@ -2013,7 +2130,7 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "שגיאה"
 
 msgid "Error: Palette must have a valid name."
 msgstr ""
@@ -2034,7 +2151,7 @@ msgid "Get colors from"
 msgstr ""
 
 msgid "Patrons:"
-msgstr ""
+msgstr "פטרונים:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
@@ -2076,34 +2193,34 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "לאורך"
 
 msgid "Landscape"
-msgstr ""
+msgstr "לרוחב"
 
 msgid "Templates:"
-msgstr ""
+msgstr "תבניות:"
 
 msgid "Preset"
-msgstr ""
+msgstr "הגדרה קבועה מראש"
 
 msgid "Preset:"
-msgstr ""
+msgstr "הגדרה קבועה מראש:"
 
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 msgid "Custom"
-msgstr ""
+msgstr "מותאם אישית"
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "בחירה ריבועית"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "בחירה אליפטית"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "בחירה מצולעת"
 
 msgid "Select By Color"
 msgstr ""
@@ -2160,7 +2277,7 @@ msgid "Already assigned"
 msgstr ""
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "כלי שמאלי:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr ""
@@ -2636,9 +2753,25 @@ msgstr ""
 msgid "Backing out at ends"
 msgstr ""
 
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr ""
+
 msgid "Silhouette"
 msgstr ""
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr ""
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr ""
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr ""
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
 msgstr ""
 

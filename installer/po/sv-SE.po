@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-05-21 17:41\n"
+"PO-Revision-Date: 2023-09-14 16:08\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -20,50 +20,50 @@ msgstr ""
 #. SecInstall
 #: ..\pixelorama.nsi:84
 msgid "Install ${APPNAME}"
-msgstr ""
+msgstr "Installera ${APPNAME}"
 
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "Skapa genvägar i Startmenyn (valfritt)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Skapa genvägar på skrivbordet (valfritt)"
 
 #. un.SecUninstall
 #: ..\pixelorama.nsi:87
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr ""
+msgstr "Avinstallera ${APPNAME} ${APPVERSION}"
 
 #. un.SecConfig
 #: ..\pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
-msgstr ""
+msgstr "Ta bort konfigurationsfiler (valfritt)"
 
 #. DESC_SecInstall
 #: ..\pixelorama.nsi:200
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr ""
+msgstr "Installerar ${APPNAME} ${APPVERSION}."
 
 #. DESC_SecStartmenu
 #: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "Skapar genvägar i Startmenyn för ${APPNAME}."
 
 #. DESC_SecDesktop
 #: ..\pixelorama.nsi:202
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "Skapar skrivbordsgenvägar för ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: ..\pixelorama.nsi:203
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "Avinstallerar ${APPNAME} ${APPVERSION} och tar bort alla genvägar."
 
 #. DESC_un.SecConfig
 #: ..\pixelorama.nsi:204
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "Tar bort konfigurationsfiler för ${APPNAME}."
 
