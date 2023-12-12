@@ -1,0 +1,255 @@
+[gd_scene load_steps=6 format=3 uid="uid://nba3nryom3ud"]
+
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImportPreviewDialog.gd" id="1_r16hn"]
+[ext_resource type="Script" path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" id="2_yokw4"]
+[ext_resource type="Script" path="res://src/UI/Dialogs/HelperScripts/SmartSlicePreview.gd" id="3_aeccv"]
+[ext_resource type="PackedScene" uid="uid://cii2hpylme60s" path="res://src/UI/Nodes/CollapsibleContainer.tscn" id="4_6ispq"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4_nmo33"]
+
+[node name="ImportPreviewDialog" type="ConfirmationDialog"]
+canvas_item_default_texture_filter = 0
+position = Vector2i(0, 36)
+size = Vector2i(316, 446)
+script = ExtResource("1_r16hn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/AspectRatioContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RowColumnLines" type="Control" parent="VBoxContainer/VBoxContainer/AspectRatioContainer/TextureRect"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_yokw4")
+
+[node name="SmartSlice" type="Control" parent="VBoxContainer/VBoxContainer/AspectRatioContainer/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_aeccv")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ApplyAll" type="CheckBox" parent="VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Apply to all"
+
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="ImageSizeLabel" type="Label" parent="VBoxContainer/VBoxContainer/SizeContainer"]
+layout_mode = 2
+text = "Image Size: 64×64"
+
+[node name="FrameSizeLabel" type="Label" parent="VBoxContainer/VBoxContainer/SizeContainer"]
+visible = false
+layout_mode = 2
+text = "Frame size: 64×64"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Import as:"
+
+[node name="ImportOption" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+
+[node name="ImportOptionsContainer" parent="VBoxContainer" instance=ExtResource("4_6ispq")]
+layout_mode = 2
+text = "Import Options"
+
+[node name="ImportOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Manual" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+layout_mode = 2
+text = "Horizontal frames:"
+
+[node name="HorizontalFrames" type="SpinBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+
+[node name="Label2" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+layout_mode = 2
+text = "Vertical frames:"
+
+[node name="VerticalFrames" type="SpinBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+
+[node name="Smart" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
+visible = false
+layout_mode = 2
+
+[node name="Threshold" type="TextureProgressBar" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Images that have any one side smaller than this value will cross the threshold"
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
+value = 10.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("4_nmo33")
+prefix = "Threshold:"
+suffix = "px"
+
+[node name="MergeDist" type="TextureProgressBar" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
+value = 3.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("4_nmo33")
+prefix = "Merge distance:"
+suffix = "px"
+
+[node name="Slice" type="Button" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Refresh"
+
+[node name="SmartSliceToggle" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Smart Slice"
+
+[node name="AtFrame" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtFrame"]
+layout_mode = 2
+text = "At frame:"
+
+[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtFrame"]
+layout_mode = 2
+size_flags_vertical = 0
+min_value = 1.0
+value = 1.0
+
+[node name="AtLayer" type="GridContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtLayer"]
+layout_mode = 2
+text = "At layer:"
+
+[node name="AtLayerOption" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtLayer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="NewBrushOptions" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+visible = false
+layout_mode = 2
+
+[node name="Type" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type"]
+layout_mode = 2
+text = "Brush type:"
+
+[node name="BrushTypeOption" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "File brush"
+popup/item_0/id = 0
+popup/item_1/text = "Project brush"
+popup/item_1/id = 1
+popup/item_2/text = "Random brush"
+popup/item_2/id = 2
+
+[node name="BrushName" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/BrushName"]
+layout_mode = 2
+text = "Brush name:"
+
+[node name="BrushNameLineEdit" type="LineEdit" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/BrushName"]
+layout_mode = 2
+
+[connection signal="about_to_popup" from="." to="." method="_on_ImportPreviewDialog_about_to_show"]
+[connection signal="confirmed" from="." to="." method="_on_ImportPreviewDialog_confirmed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="resized" from="VBoxContainer/VBoxContainer" to="." method="_on_preview_container_size_changed"]
+[connection signal="toggled" from="VBoxContainer/VBoxContainer/ApplyAll" to="." method="_on_ApplyAll_toggled"]
+[connection signal="item_selected" from="VBoxContainer/VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/Threshold" to="." method="_on_threshold_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/MergeDist" to="." method="_on_merge_dist_value_changed"]
+[connection signal="pressed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/Slice" to="." method="_on_slice_pressed"]
+[connection signal="toggled" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/SmartSliceToggle" to="." method="_on_smart_slice_toggled"]
+[connection signal="item_selected" from="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type/BrushTypeOption" to="." method="_on_BrushTypeOption_item_selected"]
