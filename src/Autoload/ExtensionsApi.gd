@@ -26,7 +26,8 @@ var theme := ThemeAPI.new()  ## Gives access to theme related functions.
 var tools := ToolAPI.new()  ## Gives ability to add/remove tools.
 var selection := SelectionAPI.new()  ## Gives access to pixelorama's selection system.
 var project := ProjectAPI.new()  ## Gives access to project manipulation.
-var exports := ExportAPI.new()  ## Gives access to adding custom exporters.
+var export := ExportAPI.new()  ## Gives access to adding custom exporters.
+var import := ImportAPI.new()  ## Gives access to adding custom exporters.
 var signals := SignalsAPI.new()  ## Gives access to the basic commonly used signals.
 
 ## This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
@@ -102,6 +103,18 @@ func _exit_tree():
 ## Returns the version of the ExtensionsApi.
 func get_api_version() -> int:
 	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
+
+
+## Returns the initial nodes of an extension named [param extension_name].
+## initial nodes are the nodes whose paths are in the [code]nodes[/code] key of an
+## extension.json file.
+func get_main_nodes(extension_name: StringName) -> Array[Node]:
+	var extensions_node = Global.control.get_node("Extensions")
+	var nodes: Array[Node] = []
+	for child: Node in extensions_node.get_children():
+		if child.is_in_group(extension_name):
+			nodes.append(child)
+	return nodes
 
 
 ## Gives Access to the general stuff.
@@ -656,6 +669,33 @@ class ExportAPI:
 		if Export.custom_exporter_generators.has(id):
 			Export.remove_custom_file_format(id)
 			ExtensionsApi.remove_action("ExportAPI", "add_exporter")
+
+
+## Gives access to adding custom import options.
+class ImportAPI:
+	## [param import_scene] is a scene preload that will be instanced and added to "import options"
+	## section of pixelorama's import dialogs and will appears whenever [param import_name] is
+	## chosen from import menu.
+	## [br]
+	## [param import_scene] must have a a script containing:[br]
+	## 1. An optional variable named [code]import_preview_dialog[/code] of type [ConfirmationDialog],
+	## If present, it will automatically be assigned a reference to the relevant import dialog's
+	## [code]ImportPreviewDialog[/code] class so that you can easily access variables and
+	## methods of that class. (This variable is meant to be read-only)[br]
+	## 2. The method [method initiate_import] which takes 2 arguments: [code]path[/code],
+	## [code]image[/code], which are automatically passed to [method initiate_import] at
+	## time of import.
+	func add_import_option(import_name: StringName, import_scene_preload: PackedScene):
+		var id = OpenSave.add_import_option(import_name, import_scene_preload)
+		ExtensionsApi.add_action("add_import_option")
+		return id
+
+	## Removes the import option with [param id] from Pixelorama.
+	func remove_import_option(id: int):
+		var import_name = OpenSave.custom_import_names.find_key(id)
+		OpenSave.custom_import_names.erase(import_name)
+		OpenSave.custom_importer_scenes.erase(id)
+		ExtensionsApi.remove_action("add_import_option")
 
 
 ## Gives access to the basic commonly used signals.
