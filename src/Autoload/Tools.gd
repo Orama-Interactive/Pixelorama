@@ -33,7 +33,7 @@ var tools := {
 		"Pencil",
 		"Pencil",
 		"pencil",
-		"res://src/Tools/Pencil.tscn",
+		"res://src/BasicTools/Pencil.tscn",
 		[Global.LayerTypes.PIXEL],
 		"Hold %s to make a line",
 		["draw_create_line"]
@@ -43,7 +43,7 @@ var tools := {
 		"Eraser",
 		"Eraser",
 		"eraser",
-		"res://src/Tools/Eraser.tscn",
+		"res://src/BasicTools/Eraser.tscn",
 		[Global.LayerTypes.PIXEL],
 		"Hold %s to make a line",
 		["draw_create_line"]
@@ -53,12 +53,12 @@ var tools := {
 		"3DShapeEdit",
 		"3D Shape Edit",
 		"3dshapeedit",
-		"res://src/Tools/3DShapeEdit.tscn",
+		"res://src/BasicTools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
 }
 
-var _tool_button_scene := preload("res://src/UI/Tools/ToolButton.tscn")
+var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
 var _slots := {}
 var _panels := {}
 var _curr_layer_type := Global.LayerTypes.PIXEL

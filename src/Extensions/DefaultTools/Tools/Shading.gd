@@ -1,4 +1,4 @@
-extends "res://src/Tools/CommonUI/Draw.gd"
+extends "res://src/BasicTools/CommonUI/Draw.gd"
 
 enum ShadingMode { SIMPLE, HUE_SHIFTING }
 enum LightenDarken { LIGHTEN, DARKEN }

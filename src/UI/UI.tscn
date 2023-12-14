@@ -1,6 +1,6 @@
 [gd_scene load_steps=54 format=3 uid="uid://c8dsi6ggkqa7a"]
 
-[ext_resource type="PackedScene" uid="uid://byu3rtoipuvoc" path="res://src/UI/Tools/Tools.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://byu3rtoipuvoc" path="res://src/UI/ToolsPanel/Tools.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
 [ext_resource type="Script" path="res://src/UI/Tabs.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/Canvas/Rulers/VerticalRuler.gd" id="4"]
