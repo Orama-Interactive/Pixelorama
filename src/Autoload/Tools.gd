@@ -28,66 +28,6 @@ var brush_size_min := 1
 var brush_size_max := 4
 
 var tools := {
-	"RectSelect":
-	Tool.new(
-		"RectSelect",
-		"Rectangular Selection",
-		"rectangle_select",
-		"res://src/Tools/SelectionTools/RectSelect.tscn"
-	),
-	"EllipseSelect":
-	Tool.new(
-		"EllipseSelect",
-		"Elliptical Selection",
-		"ellipse_select",
-		"res://src/Tools/SelectionTools/EllipseSelect.tscn"
-	),
-	"PolygonSelect":
-	Tool.new(
-		"PolygonSelect",
-		"Polygonal Selection",
-		"polygon_select",
-		"res://src/Tools/SelectionTools/PolygonSelect.tscn",
-		[],
-		"Double-click to connect the last point to the starting point"
-	),
-	"ColorSelect":
-	Tool.new(
-		"ColorSelect",
-		"Select By Color",
-		"color_select",
-		"res://src/Tools/SelectionTools/ColorSelect.tscn"
-	),
-	"MagicWand":
-	Tool.new(
-		"MagicWand", "Magic Wand", "magic_wand", "res://src/Tools/SelectionTools/MagicWand.tscn"
-	),
-	"Lasso":
-	Tool.new(
-		"Lasso", "Lasso / Free Select Tool", "lasso", "res://src/Tools/SelectionTools/Lasso.tscn"
-	),
-	"PaintSelect":
-	Tool.new(
-		"PaintSelect",
-		"Select by Drawing",
-		"paint_selection",
-		"res://src/Tools/SelectionTools/PaintSelect.tscn"
-	),
-	"Move":
-	Tool.new("Move", "Move", "move", "res://src/Tools/Move.tscn", [Global.LayerTypes.PIXEL]),
-	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/Zoom.tscn"),
-	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/Pan.tscn"),
-	"ColorPicker":
-	Tool.new(
-		"ColorPicker",
-		"Color Picker",
-		"colorpicker",
-		"res://src/Tools/ColorPicker.tscn",
-		[],
-		"Select a color from a pixel of the sprite"
-	),
-	"Crop":
-	Tool.new("Crop", "Crop", "crop", "res://src/Tools/CropTool.tscn", [], "Resize the canvas"),
 	"Pencil":
 	Tool.new(
 		"Pencil",
@@ -108,61 +48,6 @@ var tools := {
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
-	"Bucket":
-	Tool.new("Bucket", "Bucket", "fill", "res://src/Tools/Bucket.tscn", [Global.LayerTypes.PIXEL]),
-	"Shading":
-	Tool.new(
-		"Shading",
-		"Shading Tool",
-		"shading",
-		"res://src/Tools/Shading.tscn",
-		[Global.LayerTypes.PIXEL]
-	),
-	"LineTool":
-	(
-		Tool
-		. new(
-			"LineTool",
-			"Line Tool",
-			"linetool",
-			"res://src/Tools/LineTool.tscn",
-			[Global.LayerTypes.PIXEL],
-			"""Hold %s to snap the angle of the line
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin""",
-			["shape_perfect", "shape_center", "shape_displace"]
-		)
-	),
-	"RectangleTool":
-	(
-		Tool
-		. new(
-			"RectangleTool",
-			"Rectangle Tool",
-			"rectangletool",
-			"res://src/Tools/RectangleTool.tscn",
-			[Global.LayerTypes.PIXEL],
-			"""Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin""",
-			["shape_perfect", "shape_center", "shape_displace"]
-		)
-	),
-	"EllipseTool":
-	(
-		Tool
-		. new(
-			"EllipseTool",
-			"Ellipse Tool",
-			"ellipsetool",
-			"res://src/Tools/EllipseTool.tscn",
-			[Global.LayerTypes.PIXEL],
-			"""Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin""",
-			["shape_perfect", "shape_center", "shape_displace"]
-		)
-	),
 	"3DShapeEdit":
 	Tool.new(
 		"3DShapeEdit",
@@ -173,7 +58,7 @@ Hold %s to displace the shape's origin""",
 	),
 }
 
-var _tool_button_scene := preload("res://src/Tools/ToolButton.tscn")
+var _tool_button_scene := preload("res://src/UI/Tools/ToolButton.tscn")
 var _slots := {}
 var _panels := {}
 var _curr_layer_type := Global.LayerTypes.PIXEL
@@ -329,10 +214,13 @@ func _ready() -> void:
 	update_tool_cursors()
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
+
+	# Yield is necessary to hide irrelevent tools added by extensions
+	await get_tree().process_frame
 	_show_relevant_tools(layer_type)
 
 
-func add_tool_button(t: Tool) -> void:
+func add_tool_button(t: Tool, insert_pos := -1) -> void:
 	var tool_button: BaseButton = _tool_button_scene.instantiate()
 	tool_button.name = t.name
 	tool_button.get_node("BackgroundLeft").modulate = Global.left_tool_color
@@ -341,6 +229,9 @@ func add_tool_button(t: Tool) -> void:
 	tool_button.tooltip_text = t.generate_hint_tooltip()
 	t.button_node = tool_button
 	_tool_buttons.add_child(tool_button)
+	if insert_pos > -1:
+		insert_pos = min(insert_pos, _tool_buttons.get_child_count() - 1)
+		_tool_buttons.move_child(tool_button, insert_pos)
 	tool_button.pressed.connect(_tool_buttons._on_Tool_pressed.bind(tool_button))
 
 
@@ -432,7 +323,6 @@ func update_tool_buttons() -> void:
 
 
 func update_hint_tooltips() -> void:
-	await get_tree().process_frame
 	for tool_name in tools:
 		var t: Tool = tools[tool_name]
 		t.button_node.tooltip_text = t.generate_hint_tooltip()

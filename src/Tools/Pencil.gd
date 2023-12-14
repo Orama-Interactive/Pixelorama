@@ -1,4 +1,4 @@
-extends "res://src/Tools/Draw.gd"
+extends "res://src/Tools/CommonUI/Draw.gd"
 
 var _prev_mode := false
 var _last_position := Vector2i(Vector2.INF)
