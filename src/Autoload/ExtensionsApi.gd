@@ -46,7 +46,7 @@ func check_sanity(extension_name: String):
 				extension_history,
 				" which are not removed properly"
 			)
-			print(error_msg)
+			printerr(error_msg)
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
@@ -56,7 +56,8 @@ func clear_history(extension_name: String):
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func add_action(action: String):
+func add_action(section: String, key: String):
+	var action = str(section, "/", key)
 	var extension_name = _get_caller_extension_name()
 	if extension_name != "Unknown":
 		if extension_name in _action_history.keys():
@@ -67,7 +68,8 @@ func add_action(action: String):
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func remove_action(action: String):
+func remove_action(section: String, key: String):
+	var action = str(section, "/", key)
 	var extension_name = _get_caller_extension_name()
 	if extension_name != "Unknown":
 		if extension_name in _action_history.keys():
@@ -97,7 +99,7 @@ func _exit_tree():
 		check_sanity(keys)
 
 
-# The Api Methods Start Here
+# The API Methods Start Here
 ## Returns the version of the ExtensionsApi.
 func get_api_version() -> int:
 	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
@@ -198,7 +200,7 @@ class MenuAPI:
 		if item_id == -1:
 			idx = popup_menu.get_item_count() - 1
 		popup_menu.set_item_metadata(idx, item_metadata)
-		ExtensionsApi.add_action("add_menu")
+		ExtensionsApi.add_action("MenuAPI", "add_menu")
 		return idx
 
 	## Removes a menu item at index [param item_idx] from the [param menu_type] defined by
@@ -208,7 +210,7 @@ class MenuAPI:
 		if not popup_menu:
 			return
 		popup_menu.remove_item(item_idx)
-		ExtensionsApi.remove_action("add_menu")
+		ExtensionsApi.remove_action("MenuAPI", "add_menu")
 
 
 ## Gives access to common dialog related functions.
@@ -269,7 +271,7 @@ class PanelAPI:
 			dockable.tabs_visible = true
 			await ExtensionsApi.wait_frame()
 			dockable.tabs_visible = false
-		ExtensionsApi.add_action("add_tab")
+		ExtensionsApi.add_action("PanelAPI", "add_tab")
 
 	## Removes the [param node] from the DockableContainer.
 	func remove_node_from_tab(node: Node) -> void:
@@ -300,7 +302,7 @@ class PanelAPI:
 			dockable.tabs_visible = true
 			await ExtensionsApi.wait_frame()
 			dockable.tabs_visible = false
-		ExtensionsApi.remove_action("add_tab")
+		ExtensionsApi.remove_action("PanelAPI", "add_tab")
 
 	# PRIVATE METHODS
 	func _get_dockable_container_ui() -> Node:
@@ -366,7 +368,7 @@ class ThemeAPI:
 		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		themes.themes.append(theme)
 		themes.add_theme(theme)
-		ExtensionsApi.add_action("add_theme")
+		ExtensionsApi.add_action("ThemeAPI", "add_theme")
 
 	## Returns index of the [param theme] in preferences.
 	func find_theme_index(theme: Theme) -> int:
@@ -390,7 +392,7 @@ class ThemeAPI:
 	## Remove the [param theme] from preferences.
 	func remove_theme(theme: Theme) -> void:
 		Global.preferences_dialog.themes.remove_theme(theme)
-		ExtensionsApi.remove_action("add_theme")
+		ExtensionsApi.remove_action("ThemeAPI", "add_theme")
 
 
 ## Gives ability to add/remove tools.
@@ -419,7 +421,7 @@ class ToolAPI:
 		)
 		Tools.tools[tool_name] = tool_class
 		Tools.add_tool_button(tool_class)
-		ExtensionsApi.add_action("add_tool")
+		ExtensionsApi.add_action("ToolAPI", "add_tool")
 
 	## Removes a tool with name [param tool_name]
 	## and assign Pencil as left tool, Eraser as right tool.
@@ -430,7 +432,7 @@ class ToolAPI:
 		var tool_class: Tools.Tool = Tools.tools[tool_name]
 		if tool_class:
 			Tools.remove_tool(tool_class)
-		ExtensionsApi.remove_action("add_tool")
+		ExtensionsApi.remove_action("ToolAPI", "add_tool")
 
 
 ## Gives access to pixelorama's selection system.
@@ -659,14 +661,14 @@ class ExportAPI:
 		var id = Export.add_custom_file_format(
 			format_name, extension, exporter_generator, tab, is_animated
 		)
-		ExtensionsApi.add_action("add_exporter")
+		ExtensionsApi.add_action("ExportAPI", "add_exporter")
 		return id
 
 	## Removes the exporter with [param id] from Pixelorama.
 	func remove_export_option(id: int):
 		if Export.custom_exporter_generators.has(id):
 			Export.remove_custom_file_format(id)
-			ExtensionsApi.remove_action("add_exporter")
+			ExtensionsApi.remove_action("ExportAPI", "add_exporter")
 
 
 ## Gives access to adding custom import options.
@@ -721,107 +723,78 @@ class SignalsAPI:
 	func _on_texture_changed():
 		texture_changed.emit()
 
-	# GLOBAL SIGNALS
-	## connects a signal to [param callable], that emits
+	func _connect_disconnect(signal_class: Signal, callable: Callable, disconnect := false):
+		if !disconnect:
+			signal_class.connect(callable)
+			ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
+		else:
+			signal_class.disconnect(callable)
+			ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
+
+	# APP RELATED SIGNALS
+	## connects/disconnects a signal to [param callable], that emits
 	## when pixelorama is just opened.
-	func connect_pixelorama_opened(callable: Callable):
-		Global.pixelorama_opened.connect(callable)
-		ExtensionsApi.add_action("pixelorama_opened")
+	func signal_pixelorama_opened(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.pixelorama_opened, callable, disconnect)
 
-	## Reverse of [method connect_pixelorama_opened].
-	func disconnect_pixelorama_opened(callable: Callable):
-		Global.pixelorama_opened.disconnect(callable)
-		ExtensionsApi.remove_action("pixelorama_opened")
-
-	## connects a signal to [param callable], that emits
+	## connects/disconnects a signal to [param callable], that emits
 	## when pixelorama is about to close.
-	func connect_pixelorama_about_to_close(callable: Callable):
-		Global.pixelorama_about_to_close.connect(callable)
-		ExtensionsApi.add_action("pixelorama_about_to_close")
+	func signal_pixelorama_about_to_close(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.pixelorama_about_to_close, callable, disconnect)
 
-	## Reverse of [method connect_pixelorama_about_to_close].
-	func disconnect_pixelorama_about_to_close(callable: Callable):
-		Global.pixelorama_about_to_close.disconnect(callable)
-		ExtensionsApi.remove_action("pixelorama_about_to_close")
-
-	## connects a signal to [param callable], that emits
+	# PROJECT RELATED SIGNALS
+	## connects/disconnects a signal to [param callable], that emits
 	## whenever a new project is created.[br]
 	## [b]Binds: [/b]It has one bind of type [code]Project[/code] which is the newly created project
-	func connect_project_created(callable: Callable):
-		Global.project_created.connect(callable)
-		ExtensionsApi.add_action("project_created")
+	func signal_project_created(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.project_created, callable, disconnect)
 
-	## Reverse of [method connect_project_created].
-	func disconnect_project_created(callable: Callable):
-		Global.project_created.disconnect(callable)
-		ExtensionsApi.remove_action("project_created")
+	## connects/disconnects a signal to [param callable], that emits
+	## after a project is saved.
+	func signal_project_saved(callable: Callable, disconnect := false):
+		_connect_disconnect(OpenSave.project_saved, callable, disconnect)
 
-	## connects a signal to [param callable], that emits
-	## whenever project is about to be saved.
-	func connect_project_about_to_save(callable: Callable):
-		Global.project_saved.connect(callable)
-		ExtensionsApi.add_action("project_saved")
-
-	## Reverse of [method connect_project_about_to_save].
-	func disconnect_project_saved(callable: Callable):
-		Global.project_saved.disconnect(callable)
-		ExtensionsApi.remove_action("project_saved")
-
-	## connects a signal to [param callable], that emits
+	## connects/disconnects a signal to [param callable], that emits
 	## whenever you switch to some other project.
-	func connect_project_changed(callable: Callable):
-		Global.project_changed.connect(callable)
-		ExtensionsApi.add_action("project_changed")
+	func signal_project_changed(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.project_changed, callable, disconnect)
 
-	## Reverse of [method connect_project_changed].
-	func disconnect_project_changed(callable: Callable):
-		Global.project_changed.disconnect(callable)
-		ExtensionsApi.remove_action("project_changed")
-
-	## connects a signal to [param callable], that emits
+	## connects/disconnects a signal to [param callable], that emits
 	## whenever you select a different cel.
-	func connect_cel_changed(callable: Callable):
-		Global.cel_changed.connect(callable)
-		ExtensionsApi.add_action("cel_changed")
+	func signal_cel_changed(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.cel_changed, callable, disconnect)
 
-	## Reverse of [method connect_cel_changed].
-	func disconnect_cel_changed(callable: Callable):
-		Global.cel_changed.disconnect(callable)
-		ExtensionsApi.remove_action("cel_changed")
+	# TOOL RELATED SIGNALS
+	## connects/disconnects a signal to [param callable], that emits
+	## whenever a tool changes color.[br]
+	## [b]Binds: [/b] It has two bind of type [Color] (indicating new color)
+	## and [int] (Indicating button that tool is assigned to, see [enum @GlobalScope.MouseButton])
+	func signal_tool_color_changed(callable: Callable, disconnect := false):
+		_connect_disconnect(Tools.color_changed, callable, disconnect)
 
-	# TOOL SIGNALS
-	## connects a signal to [param callable], that emits
-	## whenever a tool changes color.
-	func connect_tool_color_changed(callable: Callable):
-		Tools.color_changed.connect(callable)
-		ExtensionsApi.add_action("color_changed")
+	# TIMELINE RELATED SIGNALS
+	## connects/disconnects a signal to [param callable], that emits
+	## whenever timeline animation starts.[br]
+	## [b]Binds: [/b] It has one bind of type [bool] which indicated if animation is in
+	## forward direction ([code]true[/code]) or backward direction ([code]false[/code])
+	func signal_timeline_animation_started(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.animation_timeline.animation_started, callable, disconnect)
 
-	## Reverse of [method connect_tool_color_changed].
-	func disconnect_tool_color_changed(callable: Callable):
-		Tools.color_changed.disconnect(callable)
-		ExtensionsApi.remove_action("color_changed")
+	## connects/disconnects a signal to [param callable], that emits
+	## whenever timeline animation stops.
+	func signal_timeline_animation_finished(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.animation_timeline.animation_finished, callable, disconnect)
 
 	# UPDATER SIGNALS
-	## connects a signal to [param callable], that emits
+	## connects/disconnects a signal to [param callable], that emits
 	## whenever texture of the currently focused cel changes.
-	func connect_current_cel_texture_changed(callable: Callable):
-		texture_changed.connect(callable)
-		ExtensionsApi.add_action("texture_changed")
+	func signal_current_cel_texture_changed(callable: Callable, disconnect := false):
+		_connect_disconnect(texture_changed, callable, disconnect)
 
-	## Reverse of [method connect_current_cel_texture_changed].
-	func disconnect_current_cel_texture_changed(callable: Callable):
-		texture_changed.disconnect(callable)
-		ExtensionsApi.remove_action("texture_changed")
-
-	## connects a signal to [param callable], that emits
+	## connects/disconnects a signal to [param callable], that emits
 	## whenever preview is about to be drawn.[br]
 	## [b]Binds: [/b]It has one bind of type [Dictionary] with keys: [code]exporter_id[/code],
 	## [code]export_tab[/code], [code]preview_images[/code], [code]durations[/code]
-	func connect_export_about_to_preview(callable: Callable):
-		Global.export_dialog.about_to_preview.connect(callable)
-		ExtensionsApi.add_action("export_about_to_preview")
-
-	## Reverse of [method connect_export_about_to_preview].
-	func disconnect_export_about_to_preview(callable: Callable):
-		Global.export_dialog.about_to_preview.disconnect(callable)
-		ExtensionsApi.remove_action("export_about_to_preview")
+	## [br] Use this if you plan on changing preview of export
+	func signal_export_about_to_preview(callable: Callable, disconnect := false):
+		_connect_disconnect(Global.export_dialog.about_to_preview, callable, disconnect)

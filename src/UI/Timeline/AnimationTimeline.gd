@@ -1,5 +1,8 @@
 extends Panel
 
+signal animation_started(forward: bool)
+signal animation_finished
+
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 
 var is_animation_running := false
@@ -560,6 +563,7 @@ func _on_AnimationTimer_timeout() -> void:
 					play_forward.button_pressed = false
 					play_backwards.button_pressed = false
 					Global.animation_timer.stop()
+					animation_finished.emit()
 					is_animation_running = false
 				1:  # Cycle loop
 					project.selected_cels.clear()
@@ -586,6 +590,7 @@ func _on_AnimationTimer_timeout() -> void:
 					play_backwards.button_pressed = false
 					play_forward.button_pressed = false
 					Global.animation_timer.stop()
+					animation_finished.emit()
 					is_animation_running = false
 				1:  # Cycle loop
 					project.selected_cels.clear()
@@ -640,8 +645,10 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 		Global.animation_timer.wait_time = duration * (1 / Global.current_project.fps)
 		Global.animation_timer.start()
 		animation_forward = forward_dir
+		animation_started.emit(forward_dir)
 	else:
 		Global.animation_timer.stop()
+		animation_finished.emit()
 
 	is_animation_running = play
 
