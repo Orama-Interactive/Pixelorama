@@ -687,7 +687,7 @@ class ImportAPI:
 	## time of import.
 	func add_import_option(import_name: StringName, import_scene_preload: PackedScene):
 		var id = OpenSave.add_import_option(import_name, import_scene_preload)
-		ExtensionsApi.add_action("add_import_option")
+		ExtensionsApi.add_action("ImportAPI", "add_import_option")
 		return id
 
 	## Removes the import option with [param id] from Pixelorama.
@@ -695,7 +695,7 @@ class ImportAPI:
 		var import_name = OpenSave.custom_import_names.find_key(id)
 		OpenSave.custom_import_names.erase(import_name)
 		OpenSave.custom_importer_scenes.erase(id)
-		ExtensionsApi.remove_action("add_import_option")
+		ExtensionsApi.remove_action("ImportAPI", "add_import_option")
 
 
 ## Gives access to the basic commonly used signals.
