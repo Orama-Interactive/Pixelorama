@@ -660,6 +660,10 @@ func _initialize_keychain() -> void:
 		Keychain.InputAction.new("", "Transformation tools", false),
 		"transform_copy_selection_content":
 		Keychain.InputAction.new("", "Transformation tools", false),
+		"reference_rotate": Keychain.InputAction.new("", "Reference images", false),
+		"reference_scale": Keychain.InputAction.new("", "Reference images", false),
+		"reference_quick_menu": Keychain.InputAction.new("", "Reference images", false),
+		"cancel_reference_transform": Keychain.InputAction.new("", "Reference images", false)
 	}
 
 	Keychain.groups = {
@@ -682,6 +686,7 @@ func _initialize_keychain() -> void:
 		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Reference images": Keychain.InputGroup.new("Canvas")
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 

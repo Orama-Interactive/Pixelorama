@@ -26,11 +26,10 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var mouse_guide_container := $MouseGuideContainer as Node2D
 @onready var gizmos_3d := $Gizmos3D as Node2D
 @onready var measurements := $Measurements as Node2D
+@onready var reference_image_container := $ReferenceImages as Node2D
 
 
 func _ready() -> void:
-	material.set_shader_parameter("layers", layer_texture_array)
-	material.set_shader_parameter("metadata", layer_metadata_texture)
 	Global.project_changed.connect(queue_redraw)
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
@@ -126,7 +125,7 @@ func update_texture(layer_i: int, frame_i := -1, project := Global.current_proje
 			cel_image.get_size()
 			== Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
 		):
-			layer_texture_array.update_layer(cel_image, project.ordered_layers[layer_i])
+			layer_texture_array.update_layer(cel_image, layer_i)
 
 
 func update_selected_cels_textures(project := Global.current_project) -> void:
@@ -148,72 +147,60 @@ func draw_layers() -> void:
 	)
 	if recreate_texture_array:
 		var textures: Array[Image] = []
-		textures.resize(project.layers.size())
 		# Nx3 texture, where N is the number of layers and the first row are the blend modes,
 		# the second are the opacities and the third are the origins
 		layer_metadata_image = Image.create(project.layers.size(), 3, false, Image.FORMAT_RG8)
 		# Draw current frame layers
 		for i in project.layers.size():
-			var ordered_index := project.ordered_layers[i]
 			var layer := project.layers[i]
-			var cel := current_cels[i]
 			var cel_image: Image
 			if Global.display_layer_effects:
-				cel_image = layer.display_effects(cel)
+				cel_image = layer.display_effects(current_cels[i])
 			else:
-				cel_image = cel.get_image()
-			textures[ordered_index] = cel_image
+				cel_image = current_cels[i].get_image()
+			textures.append(cel_image)
 			# Store the blend mode
-			layer_metadata_image.set_pixel(
-				ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0)
-			)
+			layer_metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
 			# Store the opacity
 			if layer.is_visible_in_hierarchy():
-				var opacity := cel.get_final_opacity(layer)
-				layer_metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
+				layer_metadata_image.set_pixel(i, 1, Color(current_cels[i].opacity, 0.0, 0.0, 0.0))
 			else:
-				layer_metadata_image.set_pixel(ordered_index, 1, Color())
+				layer_metadata_image.set_pixel(i, 1, Color())
 			# Store the origin
 			if [project.current_frame, i] in project.selected_cels:
 				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
-				layer_metadata_image.set_pixel(
-					ordered_index, 2, Color(origin.x, origin.y, 0.0, 0.0)
-				)
+				layer_metadata_image.set_pixel(i, 2, Color(origin.x, origin.y, 0.0, 0.0))
 			else:
-				layer_metadata_image.set_pixel(ordered_index, 2, Color())
+				layer_metadata_image.set_pixel(i, 2, Color())
 
 		layer_texture_array.create_from_images(textures)
 		layer_metadata_texture.set_image(layer_metadata_image)
 	else:  # Update the TextureArray
 		if layer_texture_array.get_layers() > 0:
 			for i in project.layers.size():
+				var layer := project.layers[i]
+				var test_array := [project.current_frame, i]
 				if not update_all_layers:
-					var test_array := [project.current_frame, i]
 					if not test_array in project.selected_cels:
 						continue
-				var ordered_index := project.ordered_layers[i]
-				var layer := project.layers[i]
 				var cel := current_cels[i]
 				var cel_image: Image
 				if Global.display_layer_effects:
 					cel_image = layer.display_effects(cel)
 				else:
 					cel_image = cel.get_image()
-				layer_texture_array.update_layer(cel_image, ordered_index)
-				layer_metadata_image.set_pixel(
-					ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0)
-				)
+				layer_texture_array.update_layer(cel_image, i)
+				layer_metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
 				if layer.is_visible_in_hierarchy():
-					var opacity := cel.get_final_opacity(layer)
-					layer_metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
+					layer_metadata_image.set_pixel(i, 1, Color(cel.opacity, 0.0, 0.0, 0.0))
 				else:
-					layer_metadata_image.set_pixel(ordered_index, 1, Color())
+					layer_metadata_image.set_pixel(i, 1, Color())
 				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
-				layer_metadata_image.set_pixel(
-					ordered_index, 2, Color(origin.x, origin.y, 0.0, 0.0)
-				)
+				layer_metadata_image.set_pixel(i, 2, Color(origin.x, origin.y, 0.0, 0.0))
 			layer_metadata_texture.update(layer_metadata_image)
 
+	material.set_shader_parameter("layers", layer_texture_array)
+	material.set_shader_parameter("metadata", layer_metadata_texture)
 	material.set_shader_parameter("origin_x_positive", move_preview_location.x > 0)
 	material.set_shader_parameter("origin_y_positive", move_preview_location.y > 0)
 	update_all_layers = false

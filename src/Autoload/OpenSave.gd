@@ -757,7 +757,7 @@ func import_reference_image_from_path(path: String) -> void:
 	var ri := ReferenceImage.new()
 	ri.project = project
 	ri.deserialize({"image_path": path})
-	Global.canvas.add_child(ri)
+	Global.canvas.reference_image_container.add_child(ri)
 	reference_image_imported.emit()
 
 
@@ -767,7 +767,7 @@ func import_reference_image_from_image(image: Image) -> void:
 	var ri := ReferenceImage.new()
 	ri.project = project
 	ri.create_from_image(image)
-	Global.canvas.add_child(ri)
+	Global.canvas.reference_image_container.add_child(ri)
 	reference_image_imported.emit()
 
 

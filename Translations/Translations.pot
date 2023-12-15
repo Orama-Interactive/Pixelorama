@@ -2740,11 +2740,12 @@ msgstr ""
 msgid "Spring towards the end"
 msgstr ""
 
-msgid "Silhouette"
+#. Used to turn images into a singular color
+msgid "Monochrome"
 msgstr ""
 
-msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr ""
+#. A tooltip to tell users to hold the Shift key while clicking the remove button
+msgid "Hold Shift while pressing to instantly remove"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
