@@ -330,7 +330,7 @@ func _ready() -> void:
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
 
-	# Yield is necessary to hide irrelevent tools added by extensions
+	# Yield is necessary to hide irrelevant tools added by extensions
 	await get_tree().process_frame
 	_show_relevant_tools(layer_type)
 
