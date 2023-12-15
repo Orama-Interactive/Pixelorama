@@ -404,9 +404,9 @@ class ToolAPI:
 	## display name [param display_name], tool scene [param scene], layers that the tool works
 	## on [param layer_types] defined by [constant LayerTypes],
 	## [param extra_hint] (text that appears when mouse havers tool icon), primary shortcut
-	## name [param shortcut] and any extra shortcuts [param extra_shortucts].
+	## name [param shortcut] and any extra shortcuts [param extra_shortcuts].
 	## [br][br]At the moment extensions can't make their own shortcuts so you can ignore
-	## [param shortcut] and [param extra_shortucts].
+	## [param shortcut] and [param extra_shortcuts].
 	## [br] to determine the position of tool in tool list, use [param insert_point]
 	## (if you leave it empty then the added tool will be placed at bottom)
 	func add_tool(
@@ -416,11 +416,11 @@ class ToolAPI:
 		layer_types: PackedInt32Array = [],
 		extra_hint := "",
 		shortcut: String = "",
-		extra_shortucts: PackedStringArray = [],
+		extra_shortcuts: PackedStringArray = [],
 		insert_point := -1
 	) -> void:
 		var tool_class := Tools.Tool.new(
-			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortucts
+			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortcuts
 		)
 		Tools.tools[tool_name] = tool_class
 		Tools.add_tool_button(tool_class, insert_point)

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbvl7e5ip85ce"]
-
-[ext_resource type="Script" path="res://src/Extensions/DefaultTools/initializer.gd" id="1_ad4ks"]
-
-[node name="DefaultTools" type="Node"]
-script = ExtResource("1_ad4ks")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqr6hr0p3ew6a"]
+
+[ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/SelectionTools/SelectionTool.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/SelectionTools/ColorSelect.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
+
+[node name="ToolOptions" instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="SimilaritySlider" parent="." index="9" instance=ExtResource("3")]
+layout_mode = 2
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
+value = 100.0
+prefix = "Similarity:"
+
+[connection signal="value_changed" from="SimilaritySlider" to="." method="_on_Similarity_value_changed"]

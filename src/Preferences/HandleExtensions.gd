@@ -29,7 +29,7 @@ class Extension:
 		set(value):
 			enabled = value
 			enabled_once = true
-	var default := false
+	var internal := false
 	var enabled_once := false
 
 	func serialize(dict: Dictionary) -> void:
@@ -55,7 +55,7 @@ func _ready() -> void:
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false
 
-	add_default_extensions()
+	_add_internal_extensions()
 
 	var file_names: PackedStringArray = []
 	var dir := DirAccess.open("user://")
@@ -78,8 +78,11 @@ func _ready() -> void:
 		_add_extension(file_name)
 
 
-func add_default_extensions() -> void:
-	read_extension("DefaultTools", true)
+func _add_internal_extensions() -> void:
+	## at the moment this is an empty function but you should add all internal extensions here
+	# for example:
+	#read_extension("ExtensionName", true)
+	pass
 
 
 func install_extension(path: String) -> void:
@@ -175,7 +178,7 @@ func _add_extension(file_name: String) -> void:
 	read_extension(file_name)
 
 
-func read_extension(extension_file_or_folder_name: StringName, default := false):
+func read_extension(extension_file_or_folder_name: StringName, internal := false):
 	var file_name_no_ext := extension_file_or_folder_name.get_basename()
 	var extension_path := "res://src/Extensions/%s/" % file_name_no_ext
 	var extension_config_file_path := extension_path.path_join("extension.json")
@@ -213,20 +216,20 @@ func read_extension(extension_file_or_folder_name: StringName, default := false)
 				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
 				print("Incompatible API")
-				if !default:  # the file isn't created for default extensions, no need to remove it
+				if !internal:  # the file isn't created for internal extensions, no need for removal
 					# Don't put it in faulty, (it's merely incompatible)
 					DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 				return
 
 	var extension := Extension.new()
 	extension.serialize(extension_json)
-	extension.default = default
+	extension.internal = internal
 	extensions[extension_file_or_folder_name] = extension
 	extension_list.add_item(extension.display_name)
 	var item_count := extension_list.get_item_count() - 1
 	extension_list.set_item_tooltip(item_count, extension.description)
 	extension_list.set_item_metadata(item_count, extension_file_or_folder_name)
-	if default:  # enable default extensions if it is for the first time
+	if internal:  # enable internal extensions if it is for the first time
 		extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, true)
 	else:
 		extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, false)
@@ -235,7 +238,7 @@ func read_extension(extension_file_or_folder_name: StringName, default := false)
 
 	# If an extension doesn't crash pixelorama then it is proven innocent
 	# And we should now delete its "Faulty.txt" file
-	if !default:  # the file isn't created for default extensions, so no need to remove it
+	if !internal:  # the file isn't created for internal extensions, so no need to remove it
 		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 
 
@@ -279,7 +282,7 @@ func _on_InstalledExtensions_item_selected(index: int) -> void:
 	else:
 		enable_button.text = "Enable"
 	enable_button.disabled = false
-	if !extension.default:
+	if !extension.internal:
 		uninstall_button.disabled = false
 	else:
 		uninstall_button.disabled = true
@@ -299,7 +302,7 @@ func _on_EnableButton_pressed() -> void:
 	var extension: Extension = extensions[file_name]
 	extension.enabled = !extension.enabled
 	# Don't allow disabling internal extensions through this button.
-	if extension.default and extension.enabled_once:
+	if extension.internal and extension.enabled_once:
 		Global.preferences_dialog.preference_update(true)
 	else:
 		_enable_extension(extension)
