@@ -4,7 +4,6 @@
 	"description": "DefaultTools",
 	"author": "Pixelorama",
 	"version": "0.1",
-	"supported_api_versions": [4],
 	"license": "MIT",
 	"nodes": [
 		"default_tools.tscn"

@@ -25,8 +25,12 @@ class Extension:
 	var version := ""
 	var license := ""
 	var nodes := []
-	var enabled := false
+	var enabled: bool:
+		set(value):
+			enabled = value
+			enabled_once = true
 	var default := false
+	var enabled_once := false
 
 	func serialize(dict: Dictionary) -> void:
 		if dict.has("name"):
@@ -222,7 +226,10 @@ func read_extension(extension_file_or_folder_name: StringName, default := false)
 	var item_count := extension_list.get_item_count() - 1
 	extension_list.set_item_tooltip(item_count, extension.description)
 	extension_list.set_item_metadata(item_count, extension_file_or_folder_name)
-	extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, false)
+	if default:  # enable default extensions if it is for the first time
+		extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, true)
+	else:
+		extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, false)
 	if extension.enabled:
 		_enable_extension(extension)
 
@@ -291,7 +298,12 @@ func _on_EnableButton_pressed() -> void:
 	var file_name: String = extension_list.get_item_metadata(extension_selected)
 	var extension: Extension = extensions[file_name]
 	extension.enabled = !extension.enabled
-	_enable_extension(extension)
+	# Don't allow disabling internal extensions through this button.
+	if extension.default and extension.enabled_once:
+		Global.preferences_dialog.preference_update(true)
+	else:
+		_enable_extension(extension)
+
 	if extension.enabled:
 		enable_button.text = "Disable"
 	else:
