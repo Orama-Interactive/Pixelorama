@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2023-12-16 20:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2469,8 +2469,9 @@ msgstr "Палитра с таким названием по такому пут
 msgid "Palette name is required!"
 msgstr "Необходимо указать имя палитры!"
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr "Уменьшение размера палитры сбросит позиции цветов. Цвета, которые не поместятся в новую палитру, будут потеряны!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
+msgstr ""
 
 msgid "Position:"
 msgstr "Положение:"
