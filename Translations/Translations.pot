@@ -2403,7 +2403,8 @@ msgstr ""
 msgid "Palette name is required!"
 msgstr ""
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
 msgstr ""
 
 msgid "Position:"

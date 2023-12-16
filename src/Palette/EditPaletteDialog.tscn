@@ -4,7 +4,7 @@
 
 [node name="EditPaletteDialog" type="ConfirmationDialog"]
 title = "Edit Palette"
-size = Vector2i(409, 559)
+size = Vector2i(409, 359)
 exclusive = false
 popup_window = true
 script = ExtResource("1")
@@ -16,7 +16,7 @@ anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = -49.0
+offset_bottom = -45.0
 
 [node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -79,12 +79,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="SizeReducedWarning" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.603922, 0.603922, 1)
-text = "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+text = "Reducing palette size will reset positions of colors.
+Colors that don't fit in new palette size will be lost!"
 horizontal_alignment = 1
 vertical_alignment = 2
-autowrap_mode = 3
 
 [node name="AlreadyExistsWarning" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -92,7 +93,6 @@ theme_override_colors/font_color = Color(1, 0.603922, 0.603922, 1)
 text = "Palette with the same name and path already exists!"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 3
 
 [node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
 size = Vector2i(445, 105)
