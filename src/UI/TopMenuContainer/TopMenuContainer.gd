@@ -2,9 +2,6 @@ extends Panel
 # gdlint: ignore=max-line-length
 const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v011---2023-06-13"
 
-var file_menu: PopupMenu
-var view_menu: PopupMenu
-var window_menu: PopupMenu
 var recent_projects := []
 var layouts := [
 	["Default", preload("res://assets/layouts/default.tres")],
@@ -16,13 +13,13 @@ var zen_mode := false
 
 @onready var ui := Global.control.find_child("DockableContainer") as DockableContainer
 @onready var ui_elements := ui.get_children()
-@onready var file_menu_button := $MenuItems/FileMenu
-@onready var edit_menu_button := $MenuItems/EditMenu
-@onready var select_menu_button := $MenuItems/SelectMenu
-@onready var image_menu_button := $MenuItems/ImageMenu
-@onready var view_menu_button := $MenuItems/ViewMenu
-@onready var window_menu_button := $MenuItems/WindowMenu
-@onready var help_menu_button := $MenuItems/HelpMenu
+@onready var file_menu: PopupMenu = $MenuBar/File
+@onready var edit_menu: PopupMenu = $MenuBar/Edit
+@onready var select_menu: PopupMenu = $MenuBar/Select
+@onready var image_menu: PopupMenu = $MenuBar/Image
+@onready var view_menu: PopupMenu = $MenuBar/View
+@onready var window_menu: PopupMenu = $MenuBar/Window
+@onready var help_menu: PopupMenu = $MenuBar/Help
 
 @onready var greyscale_vision: ColorRect = ui.find_child("GreyscaleVision")
 @onready var new_image_dialog: ConfirmationDialog = Global.control.find_child("CreateNewImage")
@@ -59,7 +56,6 @@ func _setup_file_menu() -> void:
 		"Export as...": "export_file_as",
 		"Quit": "quit",
 	}
-	file_menu = file_menu_button.get_popup()
 	var i := 0
 	for item in file_menu_items:
 		if item == "Recent projects":
@@ -105,7 +101,6 @@ func _setup_edit_menu() -> void:
 		"New Brush": "new_brush",
 		"Preferences": "preferences"
 	}
-	var edit_menu: PopupMenu = edit_menu_button.get_popup()
 	var i := 0
 	for item in edit_menu_items:
 		var echo := false
@@ -133,7 +128,6 @@ func _setup_view_menu() -> void:
 		"Display Layer Effects": &"display_layer_effects",
 		"Snap To": "",
 	}
-	view_menu = view_menu_button.get_popup()
 	for i in view_menu_items.size():
 		var item: String = view_menu_items.keys()[i]
 		if item == "Tile Mode":
@@ -213,7 +207,6 @@ func _setup_window_menu() -> void:
 		"Zen Mode": "zen_mode",
 		"Fullscreen Mode": "toggle_fullscreen",
 	}
-	window_menu = window_menu_button.get_popup()
 	var i := 0
 	for item in window_menu_items:
 		if item == "Panels":
@@ -298,7 +291,6 @@ func _setup_image_menu() -> void:
 		"Gradient Map": "gradient_map",
 		# "Shader": ""
 	}
-	var image_menu: PopupMenu = image_menu_button.get_popup()
 	var i := 0
 	for item in image_menu_items:
 		_set_menu_shortcut(image_menu_items[item], image_menu, i, item)
@@ -315,7 +307,6 @@ func _setup_select_menu() -> void:
 		"Invert": "invert_selection",
 		"Tile Mode": ""
 	}
-	var select_menu: PopupMenu = select_menu_button.get_popup()
 	for i in select_menu_items.size():
 		var item: String = select_menu_items.keys()[i]
 		if item == "Tile Mode":
@@ -335,7 +326,6 @@ func _setup_help_menu() -> void:
 		"Changelog": "changelog",
 		"About Pixelorama": "about_pixelorama",
 	}
-	var help_menu: PopupMenu = help_menu_button.get_popup()
 	var i := 0
 	for item in help_menu_items:
 		_set_menu_shortcut(help_menu_items[item], help_menu, i, item)
@@ -364,9 +354,9 @@ func _set_menu_shortcut(
 	menu.set_item_text(index, text)
 
 
-func _handle_metadata(id: int, menu_button: MenuButton) -> void:
+func _handle_metadata(id: int, popup_menu: PopupMenu) -> void:
 	# Used for extensions that want to add extra menu items
-	var metadata = menu_button.get_popup().get_item_metadata(id)
+	var metadata = popup_menu.get_item_metadata(id)
 	if metadata:
 		if metadata is Object:
 			if metadata.has_method(&"menu_item_clicked"):
@@ -399,7 +389,7 @@ func file_menu_id_pressed(id: int) -> void:
 		Global.FileMenu.QUIT:
 			Global.control.show_quit_dialog()
 		_:
-			_handle_metadata(id, file_menu_button)
+			_handle_metadata(id, file_menu)
 
 
 func _on_new_project_file_menu_option_pressed() -> void:
@@ -482,7 +472,7 @@ func edit_menu_id_pressed(id: int) -> void:
 		Global.EditMenu.PREFERENCES:
 			_popup_dialog(Global.preferences_dialog)
 		_:
-			_handle_metadata(id, edit_menu_button)
+			_handle_metadata(id, edit_menu)
 
 
 func view_menu_id_pressed(id: int) -> void:
@@ -508,7 +498,7 @@ func view_menu_id_pressed(id: int) -> void:
 		Global.ViewMenu.DISPLAY_LAYER_EFFECTS:
 			Global.display_layer_effects = not Global.display_layer_effects
 		_:
-			_handle_metadata(id, view_menu_button)
+			_handle_metadata(id, view_menu)
 
 	Global.canvas.queue_redraw()
 
@@ -527,7 +517,7 @@ func window_menu_id_pressed(id: int) -> void:
 		Global.WindowMenu.FULLSCREEN_MODE:
 			_toggle_fullscreen()
 		_:
-			_handle_metadata(id, window_menu_button)
+			_handle_metadata(id, window_menu)
 
 
 func _tile_mode_submenu_id_pressed(id: Tiles.MODE) -> void:
@@ -748,7 +738,7 @@ func image_menu_id_pressed(id: int) -> void:
 #			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ShaderEffect"))
 
 		_:
-			_handle_metadata(id, image_menu_button)
+			_handle_metadata(id, image_menu)
 
 
 func select_menu_id_pressed(id: int) -> void:
@@ -762,11 +752,11 @@ func select_menu_id_pressed(id: int) -> void:
 		Global.SelectMenu.INVERT:
 			Global.canvas.selection.invert()
 		Global.SelectMenu.TILE_MODE:
-			var state = select_menu_button.get_popup().is_item_checked(id)
+			var state = select_menu.is_item_checked(id)
 			Global.canvas.selection.flag_tilemode = !state
-			select_menu_button.get_popup().set_item_checked(id, !state)
+			select_menu.set_item_checked(id, !state)
 		_:
-			_handle_metadata(id, select_menu_button)
+			_handle_metadata(id, select_menu)
 
 
 func help_menu_id_pressed(id: int) -> void:
@@ -788,4 +778,4 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))
 		_:
-			_handle_metadata(id, help_menu_button)
+			_handle_metadata(id, help_menu)

@@ -9,53 +9,25 @@ offset_right = 1280.0
 offset_bottom = 28.0
 script = ExtResource("2")
 
-[node name="MenuItems" type="HBoxContainer" parent="."]
-layout_mode = 0
+[node name="MenuBar" type="MenuBar" parent="."]
+layout_mode = 2
 offset_left = 7.0
-offset_top = 4.0
-offset_right = 1010.0
+offset_right = 356.0
+offset_bottom = 27.0
 
-[node name="FileMenu" type="MenuButton" parent="MenuItems"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "File"
-switch_on_hover = true
+[node name="File" type="PopupMenu" parent="MenuBar"]
 
-[node name="EditMenu" type="MenuButton" parent="MenuItems"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Edit"
-switch_on_hover = true
+[node name="Edit" type="PopupMenu" parent="MenuBar"]
 
-[node name="SelectMenu" type="MenuButton" parent="MenuItems"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Select"
-switch_on_hover = true
+[node name="Select" type="PopupMenu" parent="MenuBar"]
 
-[node name="ImageMenu" type="MenuButton" parent="MenuItems"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Image"
-switch_on_hover = true
+[node name="Image" type="PopupMenu" parent="MenuBar"]
 
-[node name="ViewMenu" type="MenuButton" parent="MenuItems"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "View"
-switch_on_hover = true
+[node name="View" type="PopupMenu" parent="MenuBar"]
 
-[node name="WindowMenu" type="MenuButton" parent="MenuItems"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Window"
-switch_on_hover = true
+[node name="Window" type="PopupMenu" parent="MenuBar"]
 
-[node name="HelpMenu" type="MenuButton" parent="MenuItems"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Help"
-switch_on_hover = true
+[node name="Help" type="PopupMenu" parent="MenuBar"]
 
 [node name="TopLabels" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -117,7 +89,7 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -330.0
-offset_top = -10.0
+offset_top = -14.0
 offset_right = 0.00012207
 offset_bottom = 13.0
 grow_horizontal = 2
