@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-12-16 20:27\n"
+"PO-Revision-Date: 2023-12-16 21:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2473,7 +2473,8 @@ msgstr "Wymagana jest nazwa palety!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Zmniejszenie rozmiaru palety spowoduje zresetowanie pozycji kolorów.\n"
+" Kolory nie mieszczące się w nowym rozmiarze palety zostaną utracone!"
 
 msgid "Position:"
 msgstr "Pozycja:"
