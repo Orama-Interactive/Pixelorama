@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2023-12-16 20:26\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -2425,7 +2425,8 @@ msgstr ""
 msgid "Palette name is required!"
 msgstr ""
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
 msgstr ""
 
 msgid "Position:"
