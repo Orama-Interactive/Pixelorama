@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-12-16 20:27\n"
+"PO-Revision-Date: 2023-12-16 21:28\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -2473,7 +2473,8 @@ msgstr "Palet adı gerekli!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Palet boyutunu küçültmek renklerin konumlarını sıfırlar.\n"
+"Yeni palet boyutuna uymayan renkler kaybolacak!"
 
 msgid "Position:"
 msgstr "Konum:"
