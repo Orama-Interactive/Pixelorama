@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-12-07 14:13\n"
+"PO-Revision-Date: 2023-12-16 20:26\n"
 
 msgid "OK"
 msgstr "예"
@@ -2464,8 +2464,9 @@ msgstr "동일한 이름과 경로를가진 팔레트가 이미 존재합니다!
 msgid "Palette name is required!"
 msgstr "팔레트의 이름이 필요합니다!"
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr "팔레트 크기를 줄이면 색상 위치가 재설정됩니다. 새로운 팔레트 크기에 맞지 않는 색상은 손실됩니다!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
+msgstr ""
 
 msgid "Position:"
 msgstr "위치:"
