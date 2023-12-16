@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-12-06 02:55\n"
+"PO-Revision-Date: 2023-12-16 20:26\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2472,8 +2472,9 @@ msgstr "Υπάρχει ήδη παλέτα με το ίδιο όνομα και 
 msgid "Palette name is required!"
 msgstr "Απαιτείται όνομα παλέτας!"
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr "Η μείωση του μεγέθους της παλέτας θα επηρεάσει τις θέσεις των χρωμάτων. Τα χρώματα που δεν χωρούν στο νέο μέγεθος της παλέτας θα χαθούν!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
+msgstr ""
 
 msgid "Position:"
 msgstr "Θέση:"
