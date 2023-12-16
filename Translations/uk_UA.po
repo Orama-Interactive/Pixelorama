@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2023-12-16 20:27\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -2470,8 +2470,9 @@ msgstr "Палітра з такою назвою та шляхом вже іс�
 msgid "Palette name is required!"
 msgstr "Назва палітри обов’язкова!"
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr "Зміна розміру палітри призведе до пересування кольорів. Кольори, для яких не вистачить місця з новим розміром палітри, буде втрачено!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
+msgstr ""
 
 msgid "Position:"
 msgstr "Позиція:"
