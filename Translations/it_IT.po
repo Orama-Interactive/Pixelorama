@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-12-16 20:26\n"
+"PO-Revision-Date: 2023-12-17 14:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2474,7 +2474,7 @@ msgstr "Il nome della tavolozza è richiesto!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Ridurre la dimensione della tavolozza ripristinerà le posizioni dei colori. I colori che non si adattano alle nuove dimensioni della tavolozza andranno persi!"
 
 msgid "Position:"
 msgstr "Posizione:"
