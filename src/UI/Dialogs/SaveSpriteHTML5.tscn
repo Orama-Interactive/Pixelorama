@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://cltlo2whtiejd"]
 
 [node name="SaveSpriteHTML5" type="ConfirmationDialog"]
-exclusive = false
-popup_window = true
+ok_button_text = "Save"
 
 [node name="FileNameContainer" type="HBoxContainer" parent="."]
 anchors_preset = 10

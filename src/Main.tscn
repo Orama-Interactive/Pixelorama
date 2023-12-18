@@ -84,9 +84,8 @@ dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs"]
 title = "Save before exiting?"
-exclusive = false
-popup_window = true
-dialog_text = "You have unsaved progress. How do you wish to proceed?"
+ok_button_text = "Save & Exit"
+dialog_text = "Project %s has unsaved progress. How do you wish to proceed?"
 
 [node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
 exclusive = false
