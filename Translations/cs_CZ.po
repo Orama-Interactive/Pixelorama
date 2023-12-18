@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2023-12-16 20:26\n"
+"PO-Revision-Date: 2023-12-18 19:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1136,8 +1136,8 @@ msgstr "Máte neuložené změny. Pokud budete pokračovat, pokrok, kterého jst
 msgid "Save before exiting?"
 msgstr "Uložit před ukončením?"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "Máte neuložené změny. Jak si přejete pokračovat?"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr ""
 
 msgid "Save & Exit"
 msgstr "Uložit a ukončit"
