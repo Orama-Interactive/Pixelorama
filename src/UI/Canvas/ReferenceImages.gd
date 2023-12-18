@@ -141,7 +141,7 @@ func _input(event: InputEvent) -> void:
 					floorf(rad_to_deg(ri.rotation)),
 					"°"
 				)
-			else: 
+			else:
 				move_reference_image(local_mouse_pos, ri)
 				text = str("Scaling to: ", og_pos.floor(), " -> ", ri.position.floor())
 
