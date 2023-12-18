@@ -3,6 +3,8 @@ extends PanelContainer
 var _ignore_spinbox_changes: bool = false
 var _prev_index: int = -1
 
+@onready var confirm_remove_dialog := $ConfirmRemoveDialog as ConfirmationDialog
+
 var reference_image_container: Node2D:
 	get:
 		return Global.canvas.reference_image_container
@@ -128,27 +130,10 @@ func _on_Remove_pressed():
 		if Input.is_action_pressed("shift"):
 			reference_image_container.remove_reference_image(index)
 		else:
-			var dialog := ConfirmationDialog.new()
-			dialog.dialog_text = " Are you sure you want to remove this image?"
-			dialog.ok_button_text = "Yes"
-			dialog.cancel_button_text = "No"
-			Global.control.get_node("Dialogs").add_child(dialog)
-			dialog.position = Global.control.get_global_mouse_position()
-			dialog.popup()
+			confirm_remove_dialog.position = Global.control.get_global_mouse_position()
+			confirm_remove_dialog.popup()
 			Global.dialog_open(true)
-			# Signals
-			dialog.confirmed.connect(
-				func():
-					reference_image_container.remove_reference_image(index)
-					dialog.queue_free()
-					Global.dialog_open(false)
-			)
-			dialog.canceled.connect(
-				func():
-					dialog.queue_free()
-					Global.dialog_open(false)
-			)
-		
+
 
 func _on_X_value_changed(value: float):
 	if _ignore_spinbox_changes:
@@ -233,6 +218,15 @@ func _on_ColorClamping_value_changed(value: float):
 
 func _on_timer_timeout() -> void:
 	reference_image_container.commit_undo("Reference Image Changed", undo_data)
+
+func _on_remove_confirm_dialog_confirmed() -> void:
+	var index : int = get_parent().list_btn_group.get_pressed_button().get_index() - 1
+	if index > -1:
+		reference_image_container.remove_reference_image(index)
+		Global.dialog_open(false)
+
+func _on_confirm_remove_dialog_canceled() -> void:
+	Global.dialog_open(false)
 
 
 func _on_reference_image_porperties_changed() -> void:

@@ -285,7 +285,6 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 				ri, key, undo_data_tmp.get(key)
 			)
 			
-	print(redo_data.get("overlay_color"))
 			
 	project.undo_redo.add_do_method(Global.general_redo.bind(project))
 	project.undo_redo.add_do_method(ri.change_properties)

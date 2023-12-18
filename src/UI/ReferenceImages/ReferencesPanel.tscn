@@ -200,6 +200,11 @@ script = ExtResource("2_1qu4x")
 wait_time = 0.2
 one_shot = true
 
+[node name="ConfirmRemoveDialog" type="ConfirmationDialog" parent="ReferenceEditPanel"]
+size = Vector2i(443, 100)
+visible = true
+dialog_text = "Are you sure you want to remove this reference image?"
+
 [connection signal="pressed" from="ReferenceEditPanel/ReferenceEdit/ImageOptions/Remove" to="ReferenceEditPanel" method="_on_Remove_pressed"]
 [connection signal="toggled" from="ReferenceEditPanel/ReferenceEdit/Tools/Filter" to="ReferenceEditPanel" method="_on_Filter_toggled"]
 [connection signal="pressed" from="ReferenceEditPanel/ReferenceEdit/Options/Reset" to="ReferenceEditPanel" method="_on_Reset_pressed"]
@@ -212,3 +217,5 @@ one_shot = true
 [connection signal="value_changed" from="ReferenceEditPanel/ReferenceEdit/Options/Opacity" to="ReferenceEditPanel" method="_on_Opacity_value_changed"]
 [connection signal="value_changed" from="ReferenceEditPanel/ReferenceEdit/Options/ColorClamping" to="ReferenceEditPanel" method="_on_ColorClamping_value_changed"]
 [connection signal="timeout" from="ReferenceEditPanel/Timer" to="ReferenceEditPanel" method="_on_timer_timeout"]
+[connection signal="canceled" from="ReferenceEditPanel/ConfirmRemoveDialog" to="ReferenceEditPanel" method="_on_confirm_remove_dialog_canceled"]
+[connection signal="confirmed" from="ReferenceEditPanel/ConfirmRemoveDialog" to="ReferenceEditPanel" method="_on_remove_confirm_dialog_confirmed"]
