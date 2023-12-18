@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-12-18 19:07\n"
+"PO-Revision-Date: 2023-12-18 20:08\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1141,7 +1141,7 @@ msgid "Save before exiting?"
 msgstr "Çıkıştan önce kaydetsin mi?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "%s projesinin kaydedilmemiş işlemi var. Ne yapılmasını istersin?"
 
 msgid "Save & Exit"
 msgstr "Kaydet ve Çık"
