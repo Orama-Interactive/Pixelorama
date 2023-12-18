@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-12-16 20:27\n"
+"PO-Revision-Date: 2023-12-18 19:07\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1141,8 +1141,8 @@ msgstr "您有未保存的更改。如果您继续，您的进度将会丢失。
 msgid "Save before exiting?"
 msgstr "退出前保存吗？"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "您有未保存的进度。您想继续吗？"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr ""
 
 msgid "Save & Exit"
 msgstr "保存并退出"
