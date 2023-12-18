@@ -15,6 +15,7 @@ Built using Godot 3.5.2
 - Loop through frames when clicking on go to previous/next frame buttons on the timeline.
 - High res display is now enabled on macOS. [#936](https://github.com/Orama-Interactive/Pixelorama/issues/936)
 - Make cloned frames only select a cel if its corresponding original cel was selected as well. [#941](https://github.com/Orama-Interactive/Pixelorama/pull/941)
+- All of the timeline buttons now have the same size (24x24).
 
 ### Fixed
 - Memory usage has been greatly optimized when doing operations such as drawing, image effects, selecting, transforming, etc, as the images stored in memory are now compressed. [#883](https://github.com/Orama-Interactive/Pixelorama/issues/883)
