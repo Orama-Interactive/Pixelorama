@@ -324,7 +324,7 @@ func save_pxo_file(
 	path: String, autosave: bool, include_blended := false, project := Global.current_project
 ) -> bool:
 	if !autosave:
-		project.name = path.get_file()
+		project.name = path.get_file().trim_suffix(".pxo")
 	var serialized_data := project.serialize()
 	if !serialized_data:
 		Global.error_dialog.set_text(
