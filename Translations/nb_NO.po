@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2023-12-16 20:27\n"
+"PO-Revision-Date: 2023-12-18 19:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1136,8 +1136,8 @@ msgstr "Du har ulagrede endringer. Hvis du fortsetter vil fremgangen du har gjor
 msgid "Save before exiting?"
 msgstr "Lagre før du avslutter?"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "Du har ulagret fremgang. Hvordan ønsker du å fortsette?"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr ""
 
 msgid "Save & Exit"
 msgstr "Lagre & Avslutt"
