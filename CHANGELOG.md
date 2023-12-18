@@ -11,6 +11,8 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 Built using Godot 3.5.2
 
 ### Changed
+- When quitting, multiple save confirmation dialogs now appear, each for every project that has changes.
+- Loop through frames when clicking on go to previous/next frame buttons on the timeline.
 - High res display is now enabled on macOS. [#936](https://github.com/Orama-Interactive/Pixelorama/issues/936)
 - Make cloned frames only select a cel if its corresponding original cel was selected as well. [#941](https://github.com/Orama-Interactive/Pixelorama/pull/941)
 
