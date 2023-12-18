@@ -246,7 +246,7 @@ func _update_on_zoom() -> void:
 func get_undo_data() -> Dictionary:
 	var ri : ReferenceImage = Global.current_project.get_current_reference_image()
 	
-	if ri == null:
+	if !ri:
 		return {}
 	
 	var data := {}

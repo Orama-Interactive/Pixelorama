@@ -128,7 +128,7 @@ func _on_Remove_pressed():
 		if Input.is_action_pressed("shift"):
 			reference_image_container.remove_reference_image(index)
 		else:
-			var dialog = ConfirmationDialog.new()
+			var dialog := ConfirmationDialog.new()
 			dialog.dialog_text = " Are you sure you want to remove this image?"
 			dialog.ok_button_text = "Yes"
 			dialog.cancel_button_text = "No"
