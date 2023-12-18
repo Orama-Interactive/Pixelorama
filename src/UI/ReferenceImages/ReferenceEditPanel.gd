@@ -1,6 +1,5 @@
 extends PanelContainer
 
-
 var _prev_index: int = -1
 var _ignore_spinbox_changes: bool = false
 

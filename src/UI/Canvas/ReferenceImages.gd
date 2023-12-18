@@ -4,7 +4,6 @@ extends Node2D
 
 signal reference_image_changed(index: int)
 
-
 var index: int:
 	get:
 		return Global.current_project.reference_index
