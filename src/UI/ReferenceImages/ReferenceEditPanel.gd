@@ -26,16 +26,16 @@ func _update_properties():
 	# This is because otherwise a little dance will occur.
 	# This also breaks non-uniform scales (not supported UI-wise, but...)
 	_ignore_spinbox_changes = true
-	
+
 	# Image Path
 	if OS.get_name() == "Web":
 		$ReferenceEdit/ImageOptions/ImagePath.disabled = true
 	else:
 		$ReferenceEdit/ImageOptions/ImagePath.disabled = false
-		
+
 	$ReferenceEdit/ImageOptions/ImagePath.text = ri.image_path
 	$ReferenceEdit/ImageOptions/ImagePath.tooltip_text = ri.image_path
-	
+
 	if !ri.texture:
 		$ReferenceEdit/ImageOptions/WarningLabel.visible = true
 		$ReferenceEdit/ImageOptions/ImagePath.visible = false
@@ -51,14 +51,14 @@ func _update_properties():
 	$ReferenceEdit/Options/Position/Y.max_value = ri.project.size.y
 	$ReferenceEdit/Options/Scale.value = ri.scale.x * 100
 	$ReferenceEdit/Options/Rotation.value = ri.rotation_degrees
-	
+
 	# Color
 	$ReferenceEdit/Options/Monochrome.button_pressed = ri.monochrome
 	$ReferenceEdit/Options/Overlay.color = Color(ri.overlay_color, 1.0)
 	$ReferenceEdit/Options/Opacity.value = ri.overlay_color.a * 100
 	$ReferenceEdit/Options/ColorClamping.value = ri.color_clamping * 100
 	_ignore_spinbox_changes = false
-	
+
 	# Fore update the "gizmo" drawing
 	Global.canvas.reference_image_container.queue_redraw()
 
@@ -70,10 +70,8 @@ func _reset_properties() -> void:
 	$ReferenceEdit/ImageOptions/ImagePath.text = "None"
 	$ReferenceEdit/ImageOptions/ImagePath.tooltip_text = "None"
 	$ReferenceEdit/ImageOptions/ImagePath.disabled = true
-	
 	$ReferenceEdit/ImageOptions/WarningLabel.visible = false
 	$ReferenceEdit/ImageOptions/ImagePath.visible = true
-
 	# Tools
 	$ReferenceEdit/Tools/Filter.button_pressed = false
 	# Transform
@@ -89,7 +87,6 @@ func _reset_properties() -> void:
 	$ReferenceEdit/Options/Opacity.value = 0.0
 	$ReferenceEdit/Options/ColorClamping.value = 0.0
 	_ignore_spinbox_changes = false
-	
 	# Fore update the "gizmo" drawing
 	Global.canvas.reference_image_container.queue_redraw()
 
@@ -218,7 +215,7 @@ func _on_Opacity_value_changed(value: float):
 func _on_ColorClamping_value_changed(value: float):
 	if _ignore_spinbox_changes:
 		return
-	var ri : ReferenceImage = Global.current_project.get_current_reference_image()
+	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 	if !ri:
 		return
 	if timer.is_stopped():
@@ -260,9 +257,9 @@ func _on_reference_image_changed(index: int) -> void:
 		Global.current_project.reference_images[index].properties_changed.connect(
 			_on_reference_image_porperties_changed
 		)
-	
+
 	_prev_index = index
-	
+
 	if index < 0:
 		_reset_properties()
 	else:

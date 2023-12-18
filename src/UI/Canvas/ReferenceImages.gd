@@ -22,7 +22,7 @@ var og_rotation: float
 
 var undo_data: Dictionary
 
-var reference_menu:= PopupMenu.new()
+var reference_menu := PopupMenu.new()
 
 
 func _ready() -> void:
@@ -57,7 +57,7 @@ func _input(event: InputEvent) -> void:
 	if !ri:
 		Global.can_draw = true
 		return
-		
+
 	# Check if want to cancelthe reference transform
 	if event.is_action_pressed("cancel_reference_transform") and dragging:
 		ri.position = og_pos
@@ -66,9 +66,8 @@ func _input(event: InputEvent) -> void:
 		dragging = false
 		Global.can_draw = true
 		commit_undo("Cancel Transform Content", undo_data)
-		#queue_redraw()
 		return 
-	
+
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed():
@@ -89,7 +88,7 @@ func _input(event: InputEvent) -> void:
 					commit_undo("Transform Content", undo_data)
 				else:
 					# Overlapping reference images
-					var overlapping : Array[ReferenceImage] = []
+					var overlapping: Array[ReferenceImage] = []
 					
 					for idx: int in Global.current_project.reference_images.size():
 						var r = Global.current_project.reference_images[idx]
@@ -97,7 +96,7 @@ func _input(event: InputEvent) -> void:
 						var p := get_reference_polygon(idx)
 						if Geometry2D.is_point_in_polygon(local_mouse_pos, p):
 							overlapping.append(r)
-						
+
 					# Some special cases
 					# 1. There is only one Reference Image
 					if overlapping.size() == 1:
@@ -111,11 +110,11 @@ func _input(event: InputEvent) -> void:
 					# 3. There are no Reference Images
 					else:
 						Global.current_project.set_reference_image_index(-1)
-				
+
 				undo_data.clear()
 				dragging = false
 				lmb_held = false
-		
+
 	if event is InputEventMouseMotion:
 		# We check if the LMB is pressed and if we're not dragging then we force the
 		# draggin state.
@@ -124,10 +123,10 @@ func _input(event: InputEvent) -> void:
 		# if the mouse had moved enough.
 		if lmb_held and !dragging:
 			dragging = true
-			
+
 		if dragging:
 			var text := ""
-			
+
 			# Scale
 			if Input.is_action_pressed("reference_scale"):
 				scale_reference_image(local_mouse_pos, ri)
@@ -141,13 +140,13 @@ func _input(event: InputEvent) -> void:
 					"° -> ",
 					floorf(rad_to_deg(ri.rotation)),
 					"°"
- 				)
+				)
 			else: 
 				move_reference_image(local_mouse_pos, ri)
 				text = str("Scaling to: ", og_pos.floor(), " -> ", ri.position.floor())
-				
+
 			Global.cursor_position_label.text = text
-		
+
 		queue_redraw()
 
 
@@ -160,7 +159,7 @@ func scale_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
 			float(mouse_pos.y - drag_start_pos.y),
 		)
 	)
-	
+
 	img.scale = (og_scale + (s / 100.0))
 
 
@@ -182,7 +181,7 @@ func move_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
 func get_reference_polygon(i: int) -> PackedVector2Array:
 	if i < 0:
 		return []
-		
+
 	var ri: ReferenceImage = Global.current_project.reference_images[i]
 	var rect := ri.get_rect()
 	var poly = get_transformed_rect_polygon(rect, ri.transform)
@@ -195,7 +194,7 @@ func get_transformed_rect_polygon(rect: Rect2, t: Transform2D) -> PackedVector2A
 	# First we scale the Rect2
 	rect.position *= t.get_scale()
 	rect.size *= t.get_scale()
-	
+
 	# We create a polygon based on the Rect2
 	var p: PackedVector2Array = [
 		rect.position,
@@ -203,13 +202,13 @@ func get_transformed_rect_polygon(rect: Rect2, t: Transform2D) -> PackedVector2A
 		rect.end,
 		Vector2(rect.position.x, rect.end.y)
 	]
-	
+
 	# Finally rotate and move the polygon
 	var final: PackedVector2Array = []
 	for v: Vector2 in p:
 		var vert := v.rotated(t.get_rotation()) + t.get_origin()
 		final.append(vert)
-	
+
 	return final
 
 
@@ -219,7 +218,7 @@ func populate_reference_menu(items: Array[ReferenceImage], default := false):
 	if default:
 		reference_menu.add_item("None", 0)
 		reference_menu.add_separator()
-		
+
 	for ri: ReferenceImage in items:
 		var idx: int = ri.get_index() + 1
 		var label: String = "(%o) %s" % [idx, ri.image_path]
@@ -250,10 +249,10 @@ func _update_on_zoom() -> void:
 
 func get_undo_data() -> Dictionary:
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
-	
+
 	if !ri:
 		return {}
-	
+
 	var data := {}
 	data["position"] = ri.position
 	data["scale"] = ri.scale
@@ -262,7 +261,6 @@ func get_undo_data() -> Dictionary:
 	data["filter"] = ri.filter
 	data["monochrome"] = ri.monochrome
 	data["color_clamping"] = ri.color_clamping
-	
 	return data
 
 
@@ -270,29 +268,28 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	if !undo_data_tmp:
 		print("No undo data found for ReferenceImages.gd!")
 		return
-		
+
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 	if !ri:
 		print("No Reference Image ReferenceImages.gd!")
 		return
-	
+
 	var redo_data: Dictionary = get_undo_data()
 	var project := Global.current_project
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	
+
 	for key in undo_data_tmp.keys():
 		if redo_data.has(key):
 			project.undo_redo.add_do_property(ri, key, redo_data.get(key))
 			project.undo_redo.add_undo_property(ri, key, undo_data_tmp.get(key))
-			
-			
+
 	project.undo_redo.add_do_method(Global.general_redo.bind(project))
 	project.undo_redo.add_do_method(ri.change_properties)
 	project.undo_redo.add_undo_method(Global.general_undo.bind(project))
 	project.undo_redo.add_undo_method(ri.change_properties)
-	
+
 	project.undo_redo.commit_action()
 	undo_data.clear()
 
@@ -308,7 +305,7 @@ func _draw() -> void:
 		var prev_poly := get_transformed_rect_polygon(i.get_rect(), prev_transform)
 		prev_poly.append(prev_poly[0])
 		draw_polyline(prev_poly, Color(1, 0.29, 0.29), line_width)
-	
+
 	# First we highlight the Reference Images under the mouse with yellow
 	for ri: ReferenceImage in Global.current_project.reference_images:
 		var p := get_transformed_rect_polygon(ri.get_rect(), ri.transform)

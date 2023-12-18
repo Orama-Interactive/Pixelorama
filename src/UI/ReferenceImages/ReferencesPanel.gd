@@ -11,7 +11,6 @@ func _ready() -> void:
 	Global.canvas.reference_image_container.reference_image_changed.connect(
 		_on_reference_image_changed
 	)
-	
 	OpenSave.reference_image_imported.connect(_on_references_changed)
 	# We call this funtion to update the buttons
 	_on_references_changed()
@@ -37,7 +36,7 @@ func _on_reference_image_changed(index: int) -> void:
 func _on_references_changed():
 	# When we change the project we set the defualt
 	Global.current_project.set_reference_image_index(-1)
-	
+
 	for c in list.get_children():
 		if c is Button:
 			c.button_group = null
@@ -46,7 +45,7 @@ func _on_references_changed():
 	for ref in Global.canvas.reference_image_container.get_children():
 		if ref is ReferenceImage:
 			ref.visible = false
-	
+
 	# The defualt button
 	var defualt = Button.new()
 	defualt.button_group = list_btn_group
@@ -55,7 +54,7 @@ func _on_references_changed():
 	defualt.toggle_mode = true
 	defualt.button_pressed = true
 	list.add_child(defualt)
-	
+
 	# And update.
 	for ref in Global.current_project.reference_images:
 		ref.visible = true
