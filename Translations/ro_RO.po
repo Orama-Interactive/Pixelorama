@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-12-18 11:54\n"
+"PO-Revision-Date: 2023-12-18 19:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1139,8 +1139,8 @@ msgstr "Ai modificări nesalvate. Dacă continui, progresul efectuat va fi pierd
 msgid "Save before exiting?"
 msgstr "Salvezi înainte de ieșire?"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "Ai progres nesalvat. Cum dorești să continui?"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr ""
 
 msgid "Save & Exit"
 msgstr "Salvare și ieșire"
