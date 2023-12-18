@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-12-17 02:09\n"
+"PO-Revision-Date: 2023-12-18 19:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1140,8 +1140,8 @@ msgstr "保存されていない変更があります。続行すると、進行
 msgid "Save before exiting?"
 msgstr "終了する前に保存しますか？"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "保存されていない進行状況があります。どのように進めますか？"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr ""
 
 msgid "Save & Exit"
 msgstr "セーブして終了"
