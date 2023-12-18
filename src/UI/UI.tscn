@@ -383,22 +383,22 @@ margin_bottom = 716.0
 margin_left = 997.0
 margin_top = 8.0
 margin_right = 1276.0
-margin_bottom = 98.0
+margin_bottom = 118.0
 
 [node name="Color Pickers" parent="DockableContainer" instance=ExtResource( 17 )]
 margin_left = 997.0
-margin_top = 122.0
-margin_bottom = 184.0
+margin_top = 142.0
+margin_bottom = 204.0
 
 [node name="Global Tool Options" parent="DockableContainer" instance=ExtResource( 10 )]
 margin_left = 997.0
-margin_top = 208.0
+margin_top = 228.0
 margin_right = 1276.0
-margin_bottom = 258.0
+margin_bottom = 278.0
 
 [node name="Left Tool Options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 997.0
-margin_top = 282.0
+margin_top = 302.0
 margin_right = 1126.5
 margin_bottom = 592.0
 rect_min_size = Vector2( 72, 72 )
@@ -408,21 +408,21 @@ __meta__ = {
 
 [node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left Tool Options"]
 margin_right = 130.0
-margin_bottom = 298.0
+margin_bottom = 278.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Right Tool Options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 1146.5
-margin_top = 282.0
+margin_top = 302.0
 margin_right = 1276.0
 margin_bottom = 592.0
 rect_min_size = Vector2( 72, 72 )
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
 margin_right = 130.0
-margin_bottom = 298.0
+margin_bottom = 278.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3

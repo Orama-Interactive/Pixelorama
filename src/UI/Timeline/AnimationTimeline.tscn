@@ -100,25 +100,25 @@ margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="LayerTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons"]
-margin_right = 221.0
+margin_right = 223.0
 margin_bottom = 74.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 214.0
+margin_right = 216.0
 margin_bottom = 67.0
 
 [node name="LayerButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
-margin_right = 207.0
-margin_bottom = 22.0
+margin_right = 209.0
+margin_bottom = 24.0
 size_flags_vertical = 0
 custom_constants/separation = 9
 
 [node name="AddLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 margin_right = 44.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 44, 22 )
+margin_bottom = 24.0
+rect_min_size = Vector2( 44, 24 )
 hint_tooltip = "Create a new layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -159,9 +159,9 @@ texture = ExtResource( 10 )
 
 [node name="RemoveLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 53.0
-margin_right = 75.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
+margin_right = 77.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Remove current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -184,10 +184,10 @@ __meta__ = {
 }
 
 [node name="MoveUpLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 84.0
-margin_right = 106.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
+margin_left = 86.0
+margin_right = 110.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Move up the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -205,15 +205,12 @@ margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MoveDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 115.0
-margin_right = 137.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
+margin_left = 119.0
+margin_right = 143.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Move down the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -236,10 +233,10 @@ __meta__ = {
 }
 
 [node name="CloneLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 146.0
-margin_right = 168.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
+margin_left = 152.0
+margin_right = 176.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Clone current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -261,10 +258,10 @@ __meta__ = {
 }
 
 [node name="MergeDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 177.0
-margin_right = 199.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
+margin_left = 185.0
+margin_right = 209.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Merge current layer with the one below"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -288,7 +285,7 @@ __meta__ = {
 
 [node name="BlendingHBox" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
 margin_top = 36.0
-margin_right = 207.0
+margin_right = 209.0
 margin_bottom = 60.0
 size_flags_vertical = 10
 
@@ -301,27 +298,27 @@ value = 100.0
 prefix = "Opacity:"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TimelineContainer/TimelineButtons"]
-margin_left = 225.0
+margin_left = 227.0
 margin_right = 902.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="AnimationToolsScrollContainer" type="ScrollContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer"]
-margin_right = 677.0
+margin_right = 675.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 scroll_vertical_enabled = false
 
 [node name="AnimationTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer"]
-margin_left = 159.0
-margin_right = 677.0
+margin_left = 97.0
+margin_right = 675.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
 
 [node name="AnimationButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 511.0
+margin_right = 571.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
@@ -332,14 +329,13 @@ __meta__ = {
 }
 
 [node name="FrameButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons"]
-margin_right = 140.0
+margin_right = 164.0
 margin_bottom = 24.0
 
 [node name="AddFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-margin_top = 2.0
-margin_right = 20.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Add a new frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -361,11 +357,10 @@ __meta__ = {
 }
 
 [node name="DeleteFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-margin_left = 24.0
-margin_top = 2.0
-margin_right = 44.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 28.0
+margin_right = 52.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Remove Frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -389,11 +384,10 @@ __meta__ = {
 }
 
 [node name="CopyFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-margin_left = 48.0
-margin_top = 2.0
-margin_right = 68.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Clone Frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -412,11 +406,10 @@ margin_bottom = 7.0
 texture = ExtResource( 27 )
 
 [node name="FrameTagButton" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-margin_left = 72.0
-margin_top = 2.0
-margin_right = 92.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 84.0
+margin_right = 108.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Manage frame tags"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -435,11 +428,10 @@ margin_bottom = 7.0
 texture = ExtResource( 28 )
 
 [node name="MoveLeft" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-margin_left = 96.0
-margin_top = 2.0
-margin_right = 116.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Move the selected frame to the left."
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -462,11 +454,10 @@ __meta__ = {
 }
 
 [node name="MoveRight" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-margin_left = 120.0
-margin_top = 2.0
-margin_right = 140.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 140.0
+margin_right = 164.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Move the selected frame to the right."
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -485,15 +476,14 @@ margin_bottom = 5.5
 texture = ExtResource( 8 )
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons"]
-margin_left = 180.0
-margin_right = 320.0
+margin_left = 204.0
+margin_right = 368.0
 margin_bottom = 24.0
 
 [node name="FirstFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
-margin_top = 2.0
-margin_right = 20.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Jump to the first frame
 (%s)"
 focus_mode = 0
@@ -517,11 +507,10 @@ __meta__ = {
 }
 
 [node name="PreviousFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
-margin_left = 24.0
-margin_top = 2.0
-margin_right = 44.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 28.0
+margin_right = 52.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Go to the previous frame
 (%s)"
 focus_mode = 0
@@ -545,11 +534,10 @@ __meta__ = {
 }
 
 [node name="PlayBackwards" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
-margin_left = 48.0
-margin_top = 2.0
-margin_right = 68.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Play the animation backwards (from end to beginning)
 (%s)"
 focus_mode = 0
@@ -574,11 +562,10 @@ __meta__ = {
 }
 
 [node name="PlayForward" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
-margin_left = 72.0
-margin_top = 2.0
-margin_right = 92.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 84.0
+margin_right = 108.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Play the animation forward (from beginning to end)
 (%s)"
 focus_mode = 0
@@ -604,11 +591,10 @@ __meta__ = {
 }
 
 [node name="NextFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
-margin_left = 96.0
-margin_top = 2.0
-margin_right = 116.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Go to the next frame
 (%s)"
 focus_mode = 0
@@ -632,11 +618,10 @@ __meta__ = {
 }
 
 [node name="LastFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
-margin_left = 120.0
-margin_top = 2.0
-margin_right = 140.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 140.0
+margin_right = 164.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Jump to the last frame
 (%s)"
 focus_mode = 0
@@ -660,15 +645,14 @@ __meta__ = {
 }
 
 [node name="LoopButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons"]
-margin_left = 360.0
-margin_right = 504.0
+margin_left = 408.0
+margin_right = 564.0
 margin_bottom = 24.0
 
 [node name="OnionSkinningSettings" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
-margin_top = 2.0
-margin_right = 20.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Onion Skinning settings"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -692,11 +676,10 @@ __meta__ = {
 }
 
 [node name="OnionSkinning" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
-margin_left = 24.0
-margin_top = 2.0
-margin_right = 44.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 28.0
+margin_right = 52.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Enable/disable Onion Skinning"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -716,11 +699,10 @@ size_flags_vertical = 0
 texture = ExtResource( 29 )
 
 [node name="LoopAnim" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
-margin_left = 48.0
-margin_top = 2.0
-margin_right = 68.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 20, 0 )
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Cycle loop"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -738,8 +720,8 @@ margin_bottom = 7.0
 texture = ExtResource( 31 )
 
 [node name="FPSValue" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" instance=ExtResource( 9 )]
-margin_left = 72.0
-margin_right = 144.0
+margin_left = 84.0
+margin_right = 156.0
 rect_min_size = Vector2( 72, 24 )
 hint_tooltip = "How many frames per second should the animation preview be?
 The more FPS, the faster the animation plays."
@@ -752,7 +734,7 @@ suffix = "FPS"
 
 [node name="TagScroll" type="ScrollContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer"]
 margin_top = 42.0
-margin_right = 677.0
+margin_right = 675.0
 margin_bottom = 74.0
 rect_min_size = Vector2( 0, 32 )
 mouse_filter = 2
@@ -761,7 +743,7 @@ theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/TagScroll"]
-margin_right = 677.0
+margin_right = 675.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -771,7 +753,7 @@ custom_constants/separation = 0
 margin_bottom = 32.0
 
 [node name="TagContainer" type="Control" parent="TimelineContainer/TimelineButtons/VBoxContainer/TagScroll/HBoxContainer"]
-margin_right = 677.0
+margin_right = 675.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 
