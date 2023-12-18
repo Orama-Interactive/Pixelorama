@@ -281,7 +281,7 @@ func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 func show_save_dialog(project := Global.current_project) -> void:
 	Global.dialog_open(true)
 	if OS.get_name() == "Web":
-		var save_filename := save_sprite_html5.get_node("FileNameContainer/FileNameLineEdit")
+		var save_filename := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_sprite_html5.popup_centered()
 		save_filename.text = project.name
 	else:
@@ -294,29 +294,23 @@ func _on_SaveSprite_file_selected(path: String) -> void:
 
 
 func save_project(path: String) -> void:
-	var include_blended: bool = (
-		Global.save_sprites_dialog.get_vbox().get_node("IncludeBlended").button_pressed
-	)
 	var project_to_save := Global.current_project
 	if is_quitting_on_save:
 		project_to_save = changed_projects_on_quit[0]
+	var include_blended := false
+	if OS.get_name() == "Web":
+		var file_name: String = save_sprite_html5.get_node("%FileNameLineEdit").text
+		file_name += ".pxo"
+		path = "user://".path_join(file_name)
+		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
+	else:
+		include_blended = (
+			Global.save_sprites_dialog.get_vbox().get_node("IncludeBlended").button_pressed
+		)
 	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
-	if is_quitting_on_save:
-		changed_projects_on_quit.pop_front()
-		_save_on_quit_confirmation()
-
-
-func _on_SaveSpriteHTML5_confirmed() -> void:
-	var file_name: String = save_sprite_html5.get_node("FileNameContainer/FileNameLineEdit").text
-	file_name += ".pxo"
-	var path := "user://".path_join(file_name)
-	var project_to_save := Global.current_project
-	if is_quitting_on_save:
-		project_to_save = changed_projects_on_quit[0]
-	OpenSave.save_pxo_file(path, false, false, project_to_save)
 	if is_quitting_on_save:
 		changed_projects_on_quit.pop_front()
 		_save_on_quit_confirmation()
