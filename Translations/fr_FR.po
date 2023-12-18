@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-12-18 19:07\n"
+"PO-Revision-Date: 2023-12-18 20:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1140,7 +1140,7 @@ msgid "Save before exiting?"
 msgstr "Enregistrer avant de quitter?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Le projet %s a des progrès non enregistrés. Comment voulez-vous procéder ?"
 
 msgid "Save & Exit"
 msgstr "Enregistrer et quitter"
