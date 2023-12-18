@@ -4,9 +4,6 @@ extends Node2D
 
 signal reference_image_changed(index: int)
 
-const MenuLabelMaxLength := 22
-
-enum MenuPopulation { Mouse, All }
 
 var index: int:
 	get:
@@ -223,7 +220,7 @@ func populate_reference_menu(items: Array[ReferenceImage], default := false):
 		var idx: int = ri.get_index() + 1
 		var label: String = "(%o) %s" % [idx, ri.image_path]
 		# We trim the length of the title
-		label = label.left(MenuLabelMaxLength) + "..."
+		label = label.left(22) + "..."
 		reference_menu.add_item(label, idx)
 
 

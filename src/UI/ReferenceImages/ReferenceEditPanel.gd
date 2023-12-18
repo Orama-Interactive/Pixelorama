@@ -1,15 +1,16 @@
 extends PanelContainer
 
-var _ignore_spinbox_changes: bool = false
-var _prev_index: int = -1
 
-@onready var confirm_remove_dialog := $ConfirmRemoveDialog as ConfirmationDialog
+var _prev_index: int = -1
+var _ignore_spinbox_changes: bool = false
 
 var reference_image_container: Node2D:
 	get:
 		return Global.canvas.reference_image_container
+
 var undo_data: Dictionary
 
+@onready var confirm_remove_dialog := $ConfirmRemoveDialog as ConfirmationDialog
 @onready var timer := $Timer as Timer
 
 
