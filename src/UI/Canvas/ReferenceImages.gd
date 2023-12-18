@@ -28,7 +28,7 @@ var reference_menu := PopupMenu.new()
 func _ready() -> void:
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 	Global.control.get_node("Dialogs").add_child(reference_menu)
-	
+
 	# Makes sure that the dark overlay disapears when the popup is hidden
 	reference_menu.visibility_changed.connect(func(): Global.dialog_open(reference_menu.visible))
 	# Emiited when a item is selected from the menu
@@ -44,16 +44,16 @@ func update_index(new_index: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	var local_mouse_pos := get_local_mouse_position()
-	
+
 	# Check if that event was for the quick menu (opened by the shortcut)
 	if event.is_action_pressed("reference_quick_menu"):
 		var list: Array[ReferenceImage] = Global.current_project.reference_images
 		populate_reference_menu(list, true)
 		reference_menu.position = Global.control.get_global_mouse_position()
 		reference_menu.popup()
-	
+
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
-	
+
 	if !ri:
 		Global.can_draw = true
 		return
@@ -66,7 +66,7 @@ func _input(event: InputEvent) -> void:
 		dragging = false
 		Global.can_draw = true
 		commit_undo("Cancel Transform Content", undo_data)
-		return 
+		return
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -80,16 +80,16 @@ func _input(event: InputEvent) -> void:
 				og_pos = ri.position
 				og_scale = ri.scale
 				og_rotation = ri.rotation
-				
+
 			if !event.is_pressed():
 				Global.can_draw = true
-				
+
 				if dragging:
 					commit_undo("Transform Content", undo_data)
 				else:
 					# Overlapping reference images
 					var overlapping: Array[ReferenceImage] = []
-					
+
 					for idx: int in Global.current_project.reference_images.size():
 						var r = Global.current_project.reference_images[idx]
 						# The bounding polygon

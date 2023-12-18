@@ -51,7 +51,6 @@ func _update_properties():
 	$ReferenceEdit/Options/Position/Y.max_value = ri.project.size.y
 	$ReferenceEdit/Options/Scale.value = ri.scale.x * 100
 	$ReferenceEdit/Options/Rotation.value = ri.rotation_degrees
-
 	# Color
 	$ReferenceEdit/Options/Monochrome.button_pressed = ri.monochrome
 	$ReferenceEdit/Options/Overlay.color = Color(ri.overlay_color, 1.0)
