@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2023-12-16 20:27\n"
+"PO-Revision-Date: 2023-12-18 19:07\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -1135,8 +1135,8 @@ msgstr "Имате несачуване измене. Ако наставите 
 msgid "Save before exiting?"
 msgstr "Сачувајте прије изласка?"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "Имате несачуваних измјена. Како желите да наставите?"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr ""
 
 msgid "Save & Exit"
 msgstr "Сачувај & изађи"
