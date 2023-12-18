@@ -221,7 +221,6 @@ onready var layer_opacity_slider: ValueSlider = animation_timeline.find_node("Op
 onready var tile_mode_offset_dialog: AcceptDialog = control.find_node("TileModeOffsetsDialog")
 onready var open_sprites_dialog: FileDialog = control.find_node("OpenSprite")
 onready var save_sprites_dialog: FileDialog = control.find_node("SaveSprite")
-onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_node("SaveSpriteHTML5")
 onready var export_dialog: AcceptDialog = control.find_node("ExportDialog")
 onready var preferences_dialog: AcceptDialog = control.find_node("PreferencesDialog")
 onready var error_dialog: AcceptDialog = control.find_node("ErrorDialog")

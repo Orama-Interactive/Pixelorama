@@ -3,6 +3,7 @@
 [node name="SaveSpriteHTML5" type="ConfirmationDialog"]
 margin_right = 200.0
 margin_bottom = 70.0
+popup_exclusive = true
 
 [node name="FileNameContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0

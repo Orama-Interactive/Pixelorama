@@ -3,10 +3,12 @@ extends Control
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
+var changed_projects_on_quit := []  ## Array of Project(s)
 var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
 onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
+onready var save_sprite_html5: ConfirmationDialog = $Dialogs/SaveSpriteHTML5
 onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
 onready var left_cursor: Sprite = $LeftCursor
@@ -281,28 +283,43 @@ func _on_OpenSprite_files_selected(paths: PoolStringArray) -> void:
 	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
 
+func show_save_dialog(project := Global.current_project) -> void:
+	Global.dialog_open(true)
+	if OS.get_name() == "HTML5":
+		var save_filename := save_sprite_html5.get_node("FileNameContainer/FileNameLineEdit")
+		save_sprite_html5.popup_centered()
+		save_filename.text = project.name
+	else:
+		Global.save_sprites_dialog.popup_centered()
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+		Global.save_sprites_dialog.get_line_edit().text = project.name
+
+
 func _on_SaveSprite_file_selected(path: String) -> void:
 	save_project(path)
 
 
 func save_project(path: String) -> void:
-	var zstd: bool = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
-	var success = OpenSave.save_pxo_file(path, false, zstd)
+	var project_to_save := Global.current_project
+	if is_quitting_on_save:
+		project_to_save = changed_projects_on_quit[0]
+	var zstd := false
+	if OS.get_name() == "HTML5":
+		var file_name = save_sprite_html5.get_node("FileNameContainer/FileNameLineEdit").text
+		file_name += ".pxo"
+		path = "user://".plus_file(file_name)
+	else:
+		zstd = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
+	var success := OpenSave.save_pxo_file(path, false, zstd, project_to_save)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
-		if is_quitting_on_save:
-			_quit()
-
-
-func _on_SaveSpriteHTML5_confirmed() -> void:
-	var file_name = Global.save_sprites_html5_dialog.get_node(
-		"FileNameContainer/FileNameLineEdit"
-	).text
-	file_name += ".pxo"
-	var path = "user://".plus_file(file_name)
-	OpenSave.save_pxo_file(path, false, false)
+	if is_quitting_on_save:
+		changed_projects_on_quit.pop_front()
+		_save_on_quit_confirmation()
+		is_quitting_on_save = false
 
 
 func _on_OpenSprite_popup_hide() -> void:
@@ -315,22 +332,37 @@ func _can_draw_true() -> void:
 
 
 func show_quit_dialog() -> void:
-	var changed_project := false
+	changed_projects_on_quit = []
 	for project in Global.projects:
 		if project.has_changed:
-			changed_project = true
-			break
+			changed_projects_on_quit.append(project)
 
-	if !quit_dialog.visible:
-		if !changed_project:
+	if not quit_dialog.visible:
+		if changed_projects_on_quit.size() == 0:
 			if Global.quit_confirmation:
-				quit_dialog.call_deferred("popup_centered")
+				quit_dialog.popup_centered()
 			else:
 				_quit()
 		else:
-			quit_and_save_dialog.call_deferred("popup_centered")
+			quit_and_save_dialog.dialog_text = (
+				tr("Project %s has unsaved progress. How do you wish to proceed?")
+				% changed_projects_on_quit[0].name
+			)
+			quit_and_save_dialog.popup_centered()
 
 	Global.dialog_open(true)
+
+
+func _save_on_quit_confirmation() -> void:
+	if changed_projects_on_quit.size() == 0:
+		_quit()
+	else:
+		quit_and_save_dialog.dialog_text = (
+			tr("Project %s has unsaved progress. How do you wish to proceed?")
+			% changed_projects_on_quit[0].name
+		)
+		quit_and_save_dialog.popup_centered()
+		Global.dialog_open(true)
 
 
 func _on_QuitDialog_confirmed() -> void:
@@ -339,15 +371,13 @@ func _on_QuitDialog_confirmed() -> void:
 
 func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
 	if action == "ExitWithoutSaving":
-		_quit()
+		changed_projects_on_quit.pop_front()
+		_save_on_quit_confirmation()
 
 
 func _on_QuitAndSaveDialog_confirmed() -> void:
 	is_quitting_on_save = true
-	Global.save_sprites_dialog.get_ok().text = "Save & Exit"
-	Global.save_sprites_dialog.popup_centered()
-	quit_dialog.hide()
-	Global.dialog_open(true)
+	show_save_dialog(changed_projects_on_quit[0])
 
 
 func _quit() -> void:

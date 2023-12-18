@@ -1098,7 +1098,7 @@ msgstr ""
 msgid "Save before exiting?"
 msgstr ""
 
-msgid "You have unsaved progress. How do you wish to proceed?"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
 msgstr ""
 
 msgid "Save & Exit"

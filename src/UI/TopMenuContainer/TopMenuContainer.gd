@@ -357,7 +357,7 @@ func file_menu_id_pressed(id: int) -> void:
 		Global.FileMenu.SAVE:
 			_save_project_file()
 		Global.FileMenu.SAVE_AS:
-			_save_project_file_as()
+			Global.control.show_save_dialog()
 		Global.FileMenu.EXPORT:
 			_export_file()
 		Global.FileMenu.EXPORT_AS:
@@ -392,24 +392,9 @@ func _on_open_last_project_file_menu_option_pressed() -> void:
 func _save_project_file() -> void:
 	var path: String = OpenSave.current_save_paths[Global.current_project_index]
 	if path == "":
-		_save_project_file_as()
+		Global.control.show_save_dialog()
 	else:
 		Global.control.save_project(path)
-
-
-func _save_project_file_as() -> void:
-	Global.dialog_open(true)
-	if OS.get_name() == "HTML5":
-		var save_dialog: ConfirmationDialog = Global.save_sprites_html5_dialog
-		var save_filename = save_dialog.get_node("FileNameContainer/FileNameLineEdit")
-		save_dialog.popup_centered()
-		save_filename.text = Global.current_project.name
-	else:
-		Global.save_sprites_dialog.get_ok().text = "Save"
-		Global.save_sprites_dialog.popup_centered()
-		yield(get_tree(), "idle_frame")
-		yield(get_tree(), "idle_frame")
-		Global.save_sprites_dialog.get_line_edit().text = Global.current_project.name
 
 
 func _export_file() -> void:
