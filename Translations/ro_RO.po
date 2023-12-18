@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-12-16 20:26\n"
+"PO-Revision-Date: 2023-12-18 11:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2472,7 +2472,8 @@ msgstr "Denumirea paletei este necesară!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Reducerea dimensiunii paletei va reseta pozițiile culorilor.\n"
+"Culorile care nu se potrivesc cu dimensiunea paletei noi vor fi pierdute!"
 
 msgid "Position:"
 msgstr "Poziție:"
