@@ -314,6 +314,7 @@ func save_project(path: String) -> void:
 	if is_quitting_on_save:
 		changed_projects_on_quit.pop_front()
 		_save_on_quit_confirmation()
+		is_quitting_on_save = false
 
 
 func _on_open_sprite_visibility_changed() -> void:
