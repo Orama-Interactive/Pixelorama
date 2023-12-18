@@ -45,7 +45,7 @@ var animation_tags: Array[AnimationTag] = []:
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
 var reference_images: Array[ReferenceImage] = []
-var reference_index: int = -1 # The currently selected index ReferenceImage
+var reference_index: int = -1  # The currently selected index ReferenceImage
 var vanishing_points := []  ## Array of Vanishing Points
 var fps := 6.0
 

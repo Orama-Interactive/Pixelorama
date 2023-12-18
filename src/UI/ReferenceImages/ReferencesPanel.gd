@@ -8,16 +8,19 @@ var list_btn_group := ButtonGroup.new()
 
 func _ready() -> void:
 	list_btn_group.pressed.connect(_on_reference_image_button_pressed)
-	Global.canvas.reference_image_container.reference_image_changed.connect(_on_reference_image_changed)
+	Global.canvas.reference_image_container.reference_image_changed.connect(
+		_on_reference_image_changed
+	)
 	
 	OpenSave.reference_image_imported.connect(_on_references_changed)
 	# We call this funtion to update the buttons
 	_on_references_changed()
-	
+
 
 func _on_reference_image_button_pressed(button: Button) -> void:
 	# We subtract 1 because we already have a default button to "select no reference image
 	Global.current_project.set_reference_image_index(button.get_index() - 1)
+
 
 # In case the signal is emited for another node and not from a pressed button
 func _on_reference_image_changed(index: int) -> void:
@@ -29,7 +32,6 @@ func _on_reference_image_changed(index: int) -> void:
 				b.set_pressed_no_signal(true)
 			else:
 				b.set_pressed_no_signal(false)
-	
 
 
 func _on_references_changed():

@@ -6,41 +6,41 @@ signal reference_image_changed(index: int)
 
 const MenuLabelMaxLength := 22
 
-enum MenuPopulation {Mouse, All}
+enum MenuPopulation { Mouse, All }
 
 var index: int:
-	get: return Global.current_project.reference_index
+	get:
+		return Global.current_project.reference_index
 var drag_start_pos: Vector2
 var dragging := false
-var lmb_held := false ## Holds whether the LBB is being held (use dragging for actual checks)
+var lmb_held := false  ## Holds whether the LBB is being held (use dragging for actual checks)
 
 # Original Transform
 var og_pos: Vector2
 var og_scale: Vector2
 var og_rotation: float
 
-var undo_data : Dictionary
+var undo_data: Dictionary
 
 var reference_menu:= PopupMenu.new()
 
 
 func _ready() -> void:
 	Global.camera.zoom_changed.connect(_update_on_zoom)
-	Global.control.get_node("Dialogs").add_child(reference_menu) 
+	Global.control.get_node("Dialogs").add_child(reference_menu)
 	
 	# Makes sure that the dark overlay disapears when the popup is hidden
-	reference_menu.visibility_changed.connect(
-		func(): Global.dialog_open(reference_menu.visible)
-	)
+	reference_menu.visibility_changed.connect(func(): Global.dialog_open(reference_menu.visible))
 	# Emiited when a item is selected from the menu
 	reference_menu.id_pressed.connect(_reference_menu_id_pressed)
-	
+
 
 ## Updates the index and configures the "gizmo"
 func update_index(new_index: int) -> void:
 	index = new_index
 	reference_image_changed.emit(new_index)
 	queue_redraw()
+
 
 func _input(event: InputEvent) -> void:
 	var local_mouse_pos := get_local_mouse_position()
@@ -111,20 +111,17 @@ func _input(event: InputEvent) -> void:
 					# 3. There are no Reference Images
 					else:
 						Global.current_project.set_reference_image_index(-1)
-						
 				
 				undo_data.clear()
 				dragging = false
 				lmb_held = false
-		
-		
 		
 	if event is InputEventMouseMotion:
 		# We check if the LMB is pressed and if we're not dragging then we force the
 		# draggin state.
 		# We dont use timers becuase it makes more sense to wait fot the users mouse to move
 		# and thats what defines dragging. It would be smart to add a "deadzone" to determine
-		# if the mouse had moved enough. 
+		# if the mouse had moved enough.
 		if lmb_held and !dragging:
 			dragging = true
 			
@@ -134,29 +131,30 @@ func _input(event: InputEvent) -> void:
 			# Scale
 			if Input.is_action_pressed("reference_scale"):
 				scale_reference_image(local_mouse_pos, ri)
-				text = str("Moving: ",
-					(og_scale * 100).floor(), " -> ", (ri.scale * 100).floor()
-				)
+				text = str("Moving: ", (og_scale * 100).floor(), " -> ", (ri.scale * 100).floor())
 			# Rotate
 			elif Input.is_action_pressed("reference_rotate"):
 				rotate_reference_image(local_mouse_pos, ri)
-				text = str("Rotating: ",
-					floorf(rad_to_deg(og_rotation)), "° -> ", floorf(rad_to_deg(ri.rotation)), "°"
-				)
+				text = str(
+					"Rotating: ",
+					floorf(rad_to_deg(og_rotation)),
+					"° -> ",
+					floorf(rad_to_deg(ri.rotation)),
+					"°"
+ 				)
 			else: 
 				move_reference_image(local_mouse_pos, ri)
-				text = str("Scaling to: ",
-					og_pos.floor(), " -> ", ri.position.floor()
-				)
+				text = str("Scaling to: ", og_pos.floor(), " -> ", ri.position.floor())
 				
 			Global.cursor_position_label.text = text
 		
-		# Getting the mouse cursor
 		queue_redraw()
+
 
 ## Uniformly scales the [ReferenceImage] using this nodes "local_mouse_position".
 func scale_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
-	var s = (Vector2.ONE
+	var s = (
+		Vector2.ONE
 		* minf(
 			float(mouse_pos.x - drag_start_pos.x),
 			float(mouse_pos.y - drag_start_pos.y),
@@ -165,13 +163,15 @@ func scale_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
 	
 	img.scale = (og_scale + (s / 100.0))
 
+
 ## Rotate the [ReferenceImage] using this nodes "local_mouse_position".
 func rotate_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
-	var starting_angle = (og_rotation - og_pos.angle_to_point(drag_start_pos))
+	var starting_angle = og_rotation - og_pos.angle_to_point(drag_start_pos)
 	var new_angle = img.position.angle_to_point(mouse_pos)
 	var angle = starting_angle + new_angle
 	angle = deg_to_rad(floorf(rad_to_deg(wrapf(angle, -PI, PI))))
 	img.rotation = angle
+
 
 ## Move the [ReferenceImage] using this nodes "local_mouse_position".
 func move_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
@@ -183,7 +183,7 @@ func get_reference_polygon(i: int) -> PackedVector2Array:
 	if i < 0:
 		return []
 		
-	var ri : ReferenceImage = Global.current_project.reference_images[i]
+	var ri: ReferenceImage = Global.current_project.reference_images[i]
 	var rect := ri.get_rect()
 	var poly = get_transformed_rect_polygon(rect, ri.transform)
 	return poly
@@ -197,21 +197,23 @@ func get_transformed_rect_polygon(rect: Rect2, t: Transform2D) -> PackedVector2A
 	rect.size *= t.get_scale()
 	
 	# We create a polygon based on the Rect2
-	var p : PackedVector2Array = [
-		rect.position, Vector2(rect.end.x, rect.position.y),
-		rect.end, Vector2(rect.position.x, rect.end.y)
+	var p: PackedVector2Array = [
+		rect.position,
+		Vector2(rect.end.x, rect.position.y),
+		rect.end,
+		Vector2(rect.position.x, rect.end.y)
 	]
 	
-	# Finally rotate and move the polygon 
-	var final : PackedVector2Array = []
-	for v : Vector2 in p:
+	# Finally rotate and move the polygon
+	var final: PackedVector2Array = []
+	for v: Vector2 in p:
 		var vert := v.rotated(t.get_rotation()) + t.get_origin()
 		final.append(vert)
 	
 	return final
 
 
-func populate_reference_menu(items: Array[ReferenceImage], default:= false):
+func populate_reference_menu(items: Array[ReferenceImage], default := false):
 	reference_menu.clear()
 	# Default / Reset
 	if default:
@@ -220,7 +222,7 @@ func populate_reference_menu(items: Array[ReferenceImage], default:= false):
 		
 	for ri: ReferenceImage in items:
 		var idx: int = ri.get_index() + 1
-		var label: String = "(%o) %s" %[idx, ri.image_path]
+		var label: String = "(%o) %s" % [idx, ri.image_path]
 		# We trim the length of the title
 		label = label.left(MenuLabelMaxLength) + "..."
 		reference_menu.add_item(label, idx)
@@ -232,6 +234,7 @@ func _reference_menu_id_pressed(id: int) -> void:
 	Global.current_project.set_reference_image_index(id - 1)
 	reference_menu.hide()
 
+
 func remove_reference_image(idx: int) -> void:
 	var ri: ReferenceImage = Global.current_project.get_reference_image(idx)
 	Global.current_project.reference_images.remove_at(idx)
@@ -240,11 +243,13 @@ func remove_reference_image(idx: int) -> void:
 	Global.current_project.change_project()
 	Global.control.ui.find_child("Reference Images")._on_references_changed()
 
+
 func _update_on_zoom() -> void:
 	queue_redraw()
 
+
 func get_undo_data() -> Dictionary:
-	var ri : ReferenceImage = Global.current_project.get_current_reference_image()
+	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 	
 	if !ri:
 		return {}
@@ -259,6 +264,7 @@ func get_undo_data() -> Dictionary:
 	data["color_clamping"] = ri.color_clamping
 	
 	return data
+
 
 func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	if !undo_data_tmp:
@@ -278,12 +284,8 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	
 	for key in undo_data_tmp.keys():
 		if redo_data.has(key):
-			project.undo_redo.add_do_property(
-				ri, key, redo_data.get(key)
-			)
-			project.undo_redo.add_undo_property(
-				ri, key, undo_data_tmp.get(key)
-			)
+			project.undo_redo.add_do_property(ri, key, redo_data.get(key))
+			project.undo_redo.add_undo_property(ri, key, undo_data_tmp.get(key))
 			
 			
 	project.undo_redo.add_do_method(Global.general_redo.bind(project))
@@ -293,7 +295,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	
 	project.undo_redo.commit_action()
 	undo_data.clear()
-	
+
 
 func _draw() -> void:
 	if index < 0:
@@ -308,7 +310,7 @@ func _draw() -> void:
 		draw_polyline(prev_poly, Color(1, 0.29, 0.29), line_width)
 	
 	# First we highlight the Reference Images under the mouse with yellow
-	for ri : ReferenceImage in Global.current_project.reference_images:
+	for ri: ReferenceImage in Global.current_project.reference_images:
 		var p := get_transformed_rect_polygon(ri.get_rect(), ri.transform)
 		p.append(p[0])
 		if ri.get_index() == index:
