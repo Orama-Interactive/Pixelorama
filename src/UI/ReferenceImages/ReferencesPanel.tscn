@@ -202,7 +202,6 @@ one_shot = true
 
 [node name="ConfirmRemoveDialog" type="ConfirmationDialog" parent="ReferenceEditPanel"]
 size = Vector2i(443, 100)
-visible = true
 dialog_text = "Are you sure you want to remove this reference image?"
 
 [connection signal="pressed" from="ReferenceEditPanel/ReferenceEdit/ImageOptions/Remove" to="ReferenceEditPanel" method="_on_Remove_pressed"]
