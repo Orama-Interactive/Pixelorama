@@ -7,7 +7,6 @@ var undo_data: Dictionary
 
 @onready var confirm_remove_dialog := $ConfirmRemoveDialog as ConfirmationDialog
 @onready var timer := $Timer as Timer
-@onready var reference_image_container := Global.canvas.reference_image_container as Node2D
 
 
 func _ready() -> void:
@@ -94,7 +93,7 @@ func _on_Monochrome_toggled(pressed: bool) -> void:
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.monochrome = pressed
 
@@ -106,7 +105,7 @@ func _on_Filter_toggled(pressed: bool) -> void:
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.filter = pressed
 
@@ -115,9 +114,11 @@ func _on_Reset_pressed():
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 	if !ri:
 		return
-	var undo_data_tmp = reference_image_container.get_undo_data()
+	var undo_data_tmp = Global.canvas.reference_image_container.get_undo_data()
 	ri.position_reset()
-	reference_image_container.commit_undo("Reset Reference Image Position", undo_data_tmp)
+	Global.canvas.reference_image_container.commit_undo(
+		"Reset Reference Image Position", undo_data_tmp
+	)
 
 
 func _on_Remove_pressed():
@@ -128,7 +129,7 @@ func _on_Remove_pressed():
 	if index > -1:
 		# If shift is pressed we just remove it without a dialog
 		if Input.is_action_pressed("shift"):
-			reference_image_container.remove_reference_image(index)
+			Global.canvas.reference_image_container.remove_reference_image(index)
 		else:
 			confirm_remove_dialog.position = Global.control.get_global_mouse_position()
 			confirm_remove_dialog.popup()
@@ -142,7 +143,7 @@ func _on_X_value_changed(value: float):
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.position.x = value
 
@@ -154,7 +155,7 @@ func _on_Y_value_changed(value: float):
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.position.y = value
 
@@ -166,7 +167,7 @@ func _on_Scale_value_changed(value: float):
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.scale.x = value / 100
 	ri.scale.y = value / 100
@@ -179,7 +180,7 @@ func _on_Rotation_value_changed(value: float):
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.rotation_degrees = value
 
@@ -191,7 +192,7 @@ func _on_Overlay_color_changed(color: Color):
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.overlay_color = Color(color, ri.overlay_color.a)
 
@@ -203,7 +204,7 @@ func _on_Opacity_value_changed(value: float):
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.overlay_color.a = value / 100
 
@@ -215,19 +216,19 @@ func _on_ColorClamping_value_changed(value: float):
 	if !ri:
 		return
 	if timer.is_stopped():
-		undo_data = reference_image_container.get_undo_data()
+		undo_data = Global.canvas.reference_image_container.get_undo_data()
 	timer.start()
 	ri.color_clamping = value / 100
 
 
 func _on_timer_timeout() -> void:
-	reference_image_container.commit_undo("Reference Image Changed", undo_data)
+	Global.canvas.reference_image_container.commit_undo("Reference Image Changed", undo_data)
 
 
 func _on_remove_confirm_dialog_confirmed() -> void:
 	var index: int = get_parent().list_btn_group.get_pressed_button().get_index() - 1
 	if index > -1:
-		reference_image_container.remove_reference_image(index)
+		Global.canvas.reference_image_container.remove_reference_image(index)
 		Global.dialog_open(false)
 
 
