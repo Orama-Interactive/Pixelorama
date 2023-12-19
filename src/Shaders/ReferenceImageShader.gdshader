@@ -4,7 +4,7 @@ shader_type canvas_item;
 
 
 uniform bool monochrome = false;
-// Used becuase modulate doesnt work when monochrome is true
+// Used because modulate does not work when monochrome is true
 uniform vec4 monchrome_color : source_color;
 // Clamp the color by using the greyscale of the image to identify the brightness of each pixel 
 uniform float clamping : hint_range(0.0, 1.0, 0.01) = 0.0;

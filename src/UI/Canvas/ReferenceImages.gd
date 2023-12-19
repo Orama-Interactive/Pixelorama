@@ -25,9 +25,9 @@ func _ready() -> void:
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 	Global.control.get_node("Dialogs").add_child(reference_menu)
 
-	# Makes sure that the dark overlay disapears when the popup is hidden
+	# Makes sure that the dark overlay disappears when the popup is hidden
 	reference_menu.visibility_changed.connect(func(): Global.dialog_open(reference_menu.visible))
-	# Emiited when a item is selected from the menu
+	# Emitted when a item is selected from the menu
 	reference_menu.id_pressed.connect(_reference_menu_id_pressed)
 
 
@@ -114,8 +114,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		# We check if the LMB is pressed and if we're not dragging then we force the
 		# draggin state.
-		# We dont use timers becuase it makes more sense to wait fot the users mouse to move
-		# and thats what defines dragging. It would be smart to add a "deadzone" to determine
+		# We dont use timers because it makes more sense to wait for the users mouse to move
+		# and that's what defines dragging. It would be smart to add a "deadzone" to determine
 		# if the mouse had moved enough.
 		if lmb_held and !dragging:
 			dragging = true
@@ -294,7 +294,7 @@ func _draw() -> void:
 	if index < 0:
 		return
 	var line_width := 2.0 / Global.camera.zoom.x
-	# If we are dragging show where the Reference was comming from
+	# If we are dragging show where the Reference was coming from
 	if dragging:
 		var i: ReferenceImage = Global.current_project.get_current_reference_image()
 		var prev_transform = Transform2D(og_rotation, og_scale, 0.0, og_pos)

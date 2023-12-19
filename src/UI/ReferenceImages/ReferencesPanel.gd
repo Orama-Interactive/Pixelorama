@@ -12,7 +12,7 @@ func _ready() -> void:
 		_on_reference_image_changed
 	)
 	OpenSave.reference_image_imported.connect(_on_references_changed)
-	# We call this funtion to update the buttons
+	# We call this function to update the buttons
 	_on_references_changed()
 
 
@@ -21,7 +21,7 @@ func _on_reference_image_button_pressed(button: Button) -> void:
 	Global.current_project.set_reference_image_index(button.get_index() - 1)
 
 
-# In case the signal is emited for another node and not from a pressed button
+# In case the signal is emitted for another node and not from a pressed button
 func _on_reference_image_changed(index: int) -> void:
 	if list_btn_group.get_buttons().size() > 0:
 		# First we loop through the buttons to "unpress them all"
@@ -34,7 +34,7 @@ func _on_reference_image_changed(index: int) -> void:
 
 
 func _on_references_changed():
-	# When we change the project we set the defualt
+	# When we change the project we set the default
 	Global.current_project.set_reference_image_index(-1)
 
 	for c in list.get_children():
@@ -46,14 +46,14 @@ func _on_references_changed():
 		if ref is ReferenceImage:
 			ref.visible = false
 
-	# The defualt button
-	var defualt = Button.new()
-	defualt.button_group = list_btn_group
-	defualt.text = "none"
-	defualt.custom_minimum_size = Vector2(64, 64)
-	defualt.toggle_mode = true
-	defualt.button_pressed = true
-	list.add_child(defualt)
+	# The default button
+	var default = Button.new()
+	default.button_group = list_btn_group
+	default.text = "none"
+	default.custom_minimum_size = Vector2(64, 64)
+	default.toggle_mode = true
+	default.button_pressed = true
+	list.add_child(default)
 
 	# And update.
 	for ref in Global.current_project.reference_images:
