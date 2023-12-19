@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-12-18 19:08\n"
+"PO-Revision-Date: 2023-12-19 13:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -95,13 +95,15 @@ msgstr "Salvar como..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Incluir imagens combinadas"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "Se ativado, as imagens finais combinadas também serão armazenadas no .pxo, para cada quadro.\n"
+"Isto aumenta o arquivo .pxo e é útil para importação por software de terceiros\n"
+"ou pela exportação CLI. Carregando arquivos .pxo no Pixelorama não precisa ativar esta opção.\n"
 
 msgid "Import"
 msgstr "Importar"
@@ -149,11 +151,11 @@ msgid "Delete"
 msgstr "Deletar"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Excluir permanentemente"
 
 #. When you move something to recycle bin
 msgid "Move to Trash"
-msgstr ""
+msgstr "Mover para a Lixeira"
 
 msgid "New Brush"
 msgstr "Novo Pincel"
@@ -331,7 +333,7 @@ msgstr "Mostrar Guias do Mouse"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Exibir Efeitos da Camada"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -648,11 +650,11 @@ msgstr "Constante"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "Espaço de Cor:"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Linear sRGB"
 
 msgid "General"
 msgstr "Geral"
@@ -1139,7 +1141,7 @@ msgid "Save before exiting?"
 msgstr "Salvar antes de sair?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Projeto %s tem progresso não salvo. Como deseja continuar?"
 
 msgid "Save & Exit"
 msgstr "Salvar & Sair"
@@ -1306,18 +1308,18 @@ msgstr "Escolha uma cor para a ferramenta direita"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Alternar cores esquerda e direita."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Redefina as cores para o seu estado padrão (preto para a esquerda, branco para a direita)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Escolha uma cor da tela."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Selecione uma forma de seleção."
 
 msgid "Left tool"
 msgstr "Ferramenta da esquerda"
@@ -1374,7 +1376,7 @@ msgstr "Distância do snap:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Esta é a distância em pixels, onde a guia e o snap de aderência são ativados."
 
 msgid "Grid"
 msgstr "Grade"
@@ -1543,7 +1545,7 @@ msgstr "Dinâmicas"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "Estabilizador"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1706,7 +1708,7 @@ msgid "Zoom out"
 msgstr "Diminuir zoom"
 
 msgid "Options"
-msgstr ""
+msgstr "Opções"
 
 msgid "Options:"
 msgstr "Opções:"
@@ -1880,13 +1882,13 @@ msgid "Unlink Cels"
 msgstr "Desvincular Células"
 
 msgid "Properties"
-msgstr ""
+msgstr "Propriedades"
 
 msgid "Frame properties"
 msgstr "Propriedades do quadro"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Propriedades da Cel"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1934,87 +1936,87 @@ msgstr "Combinar camada atual com a de baixo"
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "Modo de mesclagem:"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "Multiplicar"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr ""
+msgstr "Superexposição de cores"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
-msgstr ""
+msgstr "Superexposição linear"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "Divisão"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
-msgstr ""
+msgstr "Subexposição de cores"
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Contraste"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Sobreposição"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Luz suave"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Luz dura"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Inversão"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Diferença"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Exclusão"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Subtrair"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Divisão"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Componente"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Matriz"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Saturação"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Cor"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Luminosidade"
 
 msgid "Opacity:"
 msgstr "Opacidade:"
@@ -2817,13 +2819,13 @@ msgstr "Apaga a imagem e torna todos os pixels opacos em uma cor escura."
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Ativado"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr ""
+msgstr "Efeitos de Camada"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "Adicionar Efeito"
 
