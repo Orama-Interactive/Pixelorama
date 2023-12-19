@@ -1,9 +1,9 @@
 extends PanelContainer
 
+var undo_data: Dictionary
+
 var _prev_index: int = -1
 var _ignore_spinbox_changes: bool = false
-
-var undo_data: Dictionary
 
 @onready var confirm_remove_dialog := $ConfirmRemoveDialog as ConfirmationDialog
 @onready var timer := $Timer as Timer
