@@ -8,7 +8,7 @@ var edited_swatch_index := -1
 var edited_swatch_color := Color.TRANSPARENT
 
 @onready var palette_select := $"%PaletteSelect"
-@onready var palette_grid := $"%PaletteGrid"
+@onready var palette_grid := $"%PaletteGrid" as PaletteGrid
 @onready var palette_scroll := $"%PaletteScroll"
 
 @onready var add_color_button := $"%AddColor"
@@ -115,7 +115,7 @@ func _on_AddColor_gui_input(event: InputEvent) -> void:
 			# Gets the grid index that corresponds to the top left of current grid window
 			# Color will be added at the start of the currently scrolled part of palette
 			# - not the absolute beginning of palette
-			var start_index = palette_grid.convert_grid_index_to_palette_index(0)
+			var start_index := palette_grid.convert_grid_index_to_palette_index(0)
 			Palettes.current_palette_add_color(event.button_index, start_index)
 			redraw_current_palette()
 			toggle_add_delete_buttons()
@@ -124,7 +124,7 @@ func _on_AddColor_gui_input(event: InputEvent) -> void:
 func _on_DeleteColor_gui_input(event: InputEvent) -> void:
 	if Palettes.is_any_palette_selected():
 		if event is InputEventMouseButton and event.pressed:
-			var selected_color_index = Palettes.current_palette_get_selected_color_index(
+			var selected_color_index := Palettes.current_palette_get_selected_color_index(
 				event.button_index
 			)
 

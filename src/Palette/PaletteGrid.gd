@@ -12,8 +12,8 @@ const MAX_SWATCH_SIZE := Vector2(64, 64)
 
 var swatches: Array[PaletteSwatch] = []
 var current_palette: Palette = null
-var grid_window_origin := Vector2.ZERO
-var grid_size := Vector2.ZERO
+var grid_window_origin := Vector2i.ZERO
+var grid_size := Vector2i.ZERO
 var swatch_size := DEFAULT_SWATCH_SIZE
 
 
@@ -79,7 +79,7 @@ func draw_palette() -> void:
 				swatch.empty = true
 
 
-func scroll_palette(origin: Vector2) -> void:
+func scroll_palette(origin: Vector2i) -> void:
 	grid_window_origin = origin
 	draw_palette()
 

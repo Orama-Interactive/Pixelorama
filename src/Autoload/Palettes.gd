@@ -35,9 +35,9 @@ func get_current_palette() -> Palette:
 
 
 func does_palette_exist(palette_name: String) -> bool:
-	for palette_path in palettes.keys():
-		var file_name = palette_path.get_basename().get_file()
-		var stripped_palette_name = Palette.strip_unvalid_characters(palette_name)
+	for palette_path: String in palettes.keys():
+		var file_name := palette_path.get_basename().get_file()
+		var stripped_palette_name := Palette.strip_unvalid_characters(palette_name)
 		if file_name == stripped_palette_name:
 			return true
 	return false
@@ -116,7 +116,7 @@ func create_new_palette(
 func _create_new_empty_palette(
 	palette_name: String, comment: String, width: int, height: int
 ) -> void:
-	var new_palette: Palette = Palette.new(palette_name, width, height, comment)
+	var new_palette := Palette.new(palette_name, width, height, comment)
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
