@@ -345,7 +345,7 @@ func _load_palettes() -> void:
 			make_copy = true
 
 		var base_directory := search_locations[i]
-		var palette_files: Array = priority_ordered_files[i]
+		var palette_files := priority_ordered_files[i]
 		for file_name in palette_files:
 			var palette := load(base_directory.path_join(file_name)) as Palette
 			if palette:
@@ -364,26 +364,24 @@ func _load_palettes() -> void:
 		select_palette(palettes.keys()[0])
 
 
-# This returns an array of arrays, with priorities.
-# In particular, it takes an array of paths to look for
-# arrays in, in order of file and palette override priority
-# such that the files in the first directory override the
-# second, third, etc. ^.^
-# It returns an array of arrays, where each output array
-# corresponds to the given input array at the same index, and
-# contains the (relative to the given directory) palette files
-# to load, excluding all ones already existing in higher-priority
-# directories. nya
-# in particular, this also means you can run backwards on the result
-# so that palettes with the given palette name in the higher priority
-# directories override those set in lower priority directories :)
-func _get_palette_priority_file_map(looking_paths: Array) -> Array:
-	var final_list := []
+## This returns an array of arrays, with priorities.
+## In particular, it takes an array of paths to look for
+## arrays in, in order of file and palette override priority
+## such that the files in the first directory override the second, third, etc.
+## It returns an array of arrays, where each output array
+## corresponds to the given input array at the same index, and
+## contains the (relative to the given directory) palette files
+## to load, excluding all ones already existing in higher-priority directories.
+## This also means you can run backwards on the result
+## so that palettes with the given palette name in the higher priority
+## directories override those set in lower priority directories.
+func _get_palette_priority_file_map(looking_paths: PackedStringArray) -> Array[PackedStringArray]:
+	var final_list: Array[PackedStringArray] = []
 	# Holds pattern files already found
 	var working_file_set: Dictionary = {}
 	for search_directory in looking_paths:
-		var to_add_files := []
-		var files = _get_palette_files(search_directory)
+		var to_add_files: PackedStringArray = []
+		var files := _get_palette_files(search_directory)
 		# files to check
 		for maybe_to_add in files:
 			if not maybe_to_add in working_file_set:
@@ -394,11 +392,11 @@ func _get_palette_priority_file_map(looking_paths: Array) -> Array:
 	return final_list
 
 
-# Get the palette files in a single directory.
-# if it does not exist, return []
-func _get_palette_files(path: String) -> Array:
+## Get the palette files in a single directory.
+## if it does not exist, return []
+func _get_palette_files(path: String) -> PackedStringArray:
 	var dir := DirAccess.open(path)
-	var results := []
+	var results: PackedStringArray = []
 
 	if not is_instance_valid(dir) or not dir.dir_exists(path):
 		return []
@@ -418,17 +416,6 @@ func _get_palette_files(path: String) -> Array:
 
 	dir.list_dir_end()
 	return results
-
-
-# Locate the highest priority palette by the given relative filename
-# If none is found in the directories, then do nothing and return null
-func _get_best_palette_file_location(looking_paths: Array, fname: String):  # -> String:
-	var priority_fmap := _get_palette_priority_file_map(looking_paths)
-	for i in range(looking_paths.size()):
-		var base_path: String = looking_paths[i]
-		if priority_fmap.has(fname):
-			return base_path.path_join(fname)
-	return null
 
 
 func import_palette_from_path(path: String) -> void:
@@ -554,7 +541,7 @@ func _import_pal_palette(path: String, text: String) -> Palette:
 
 
 func _import_image_palette(path: String, image: Image) -> Palette:
-	var colors := []
+	var colors: PackedColorArray = []
 	var height := image.get_height()
 	var width := image.get_width()
 
@@ -566,7 +553,7 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 				colors.append(color)
 
 	var palette_height := ceili(colors.size() / 8.0)
-	var result: Palette = Palette.new(path.get_basename().get_file(), 8, palette_height)
+	var result := Palette.new(path.get_basename().get_file(), 8, palette_height)
 	for color in colors:
 		result.add_color(color)
 

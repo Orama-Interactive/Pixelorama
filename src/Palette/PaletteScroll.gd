@@ -73,7 +73,7 @@ func _on_PaletteScroll_resized() -> void:
 	reset_sliders()
 
 
-func _on_PaletteScroll_gui_input(event) -> void:
+func _on_PaletteScroll_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		var scroll_vector := Vector2i.ZERO
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
