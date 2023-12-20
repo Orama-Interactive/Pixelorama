@@ -404,9 +404,11 @@ class ToolAPI:
 	## display name [param display_name], tool scene [param scene], layers that the tool works
 	## on [param layer_types] defined by [constant LayerTypes],
 	## [param extra_hint] (text that appears when mouse havers tool icon), primary shortcut
-	## name [param shortcut] and any extra shortcuts [param extra_shortucts].
+	## name [param shortcut] and any extra shortcuts [param extra_shortcuts].
 	## [br][br]At the moment extensions can't make their own shortcuts so you can ignore
-	## [param shortcut] and [param extra_shortucts].
+	## [param shortcut] and [param extra_shortcuts].
+	## [br] to determine the position of tool in tool list, use [param insert_point]
+	## (if you leave it empty then the added tool will be placed at bottom)
 	func add_tool(
 		tool_name: String,
 		display_name: String,
@@ -414,13 +416,14 @@ class ToolAPI:
 		layer_types: PackedInt32Array = [],
 		extra_hint := "",
 		shortcut: String = "",
-		extra_shortucts: PackedStringArray = []
+		extra_shortcuts: PackedStringArray = [],
+		insert_point := -1
 	) -> void:
 		var tool_class := Tools.Tool.new(
-			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortucts
+			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortcuts
 		)
 		Tools.tools[tool_name] = tool_class
-		Tools.add_tool_button(tool_class)
+		Tools.add_tool_button(tool_class, insert_point)
 		ExtensionsApi.add_action("ToolAPI", "add_tool")
 
 	## Removes a tool with name [param tool_name]
@@ -723,8 +726,8 @@ class SignalsAPI:
 	func _on_texture_changed():
 		texture_changed.emit()
 
-	func _connect_disconnect(signal_class: Signal, callable: Callable, disconnect := false):
-		if !disconnect:
+	func _connect_disconnect(signal_class: Signal, callable: Callable, is_disconnecting := false):
+		if !is_disconnecting:
 			signal_class.connect(callable)
 			ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
 		else:
@@ -734,67 +737,69 @@ class SignalsAPI:
 	# APP RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
 	## when pixelorama is just opened.
-	func signal_pixelorama_opened(callable: Callable, disconnect := false):
-		_connect_disconnect(Global.pixelorama_opened, callable, disconnect)
+	func signal_pixelorama_opened(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(Global.pixelorama_opened, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## when pixelorama is about to close.
-	func signal_pixelorama_about_to_close(callable: Callable, disconnect := false):
-		_connect_disconnect(Global.pixelorama_about_to_close, callable, disconnect)
+	func signal_pixelorama_about_to_close(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(Global.pixelorama_about_to_close, callable, is_disconnecting)
 
 	# PROJECT RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever a new project is created.[br]
 	## [b]Binds: [/b]It has one bind of type [code]Project[/code] which is the newly created project
-	func signal_project_created(callable: Callable, disconnect := false):
-		_connect_disconnect(Global.project_created, callable, disconnect)
+	func signal_project_created(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(Global.project_created, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## after a project is saved.
-	func signal_project_saved(callable: Callable, disconnect := false):
-		_connect_disconnect(OpenSave.project_saved, callable, disconnect)
+	func signal_project_saved(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(OpenSave.project_saved, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever you switch to some other project.
-	func signal_project_changed(callable: Callable, disconnect := false):
-		_connect_disconnect(Global.project_changed, callable, disconnect)
+	func signal_project_changed(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(Global.project_changed, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever you select a different cel.
-	func signal_cel_changed(callable: Callable, disconnect := false):
-		_connect_disconnect(Global.cel_changed, callable, disconnect)
+	func signal_cel_changed(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(Global.cel_changed, callable, is_disconnecting)
 
 	# TOOL RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever a tool changes color.[br]
 	## [b]Binds: [/b] It has two bind of type [Color] (indicating new color)
 	## and [int] (Indicating button that tool is assigned to, see [enum @GlobalScope.MouseButton])
-	func signal_tool_color_changed(callable: Callable, disconnect := false):
-		_connect_disconnect(Tools.color_changed, callable, disconnect)
+	func signal_tool_color_changed(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(Tools.color_changed, callable, is_disconnecting)
 
 	# TIMELINE RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever timeline animation starts.[br]
 	## [b]Binds: [/b] It has one bind of type [bool] which indicated if animation is in
 	## forward direction ([code]true[/code]) or backward direction ([code]false[/code])
-	func signal_timeline_animation_started(callable: Callable, disconnect := false):
-		_connect_disconnect(Global.animation_timeline.animation_started, callable, disconnect)
+	func signal_timeline_animation_started(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(Global.animation_timeline.animation_started, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever timeline animation stops.
-	func signal_timeline_animation_finished(callable: Callable, disconnect := false):
-		_connect_disconnect(Global.animation_timeline.animation_finished, callable, disconnect)
+	func signal_timeline_animation_finished(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(
+			Global.animation_timeline.animation_finished, callable, is_disconnecting
+		)
 
 	# UPDATER SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever texture of the currently focused cel changes.
-	func signal_current_cel_texture_changed(callable: Callable, disconnect := false):
-		_connect_disconnect(texture_changed, callable, disconnect)
+	func signal_current_cel_texture_changed(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(texture_changed, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever preview is about to be drawn.[br]
 	## [b]Binds: [/b]It has one bind of type [Dictionary] with keys: [code]exporter_id[/code],
 	## [code]export_tab[/code], [code]preview_images[/code], [code]durations[/code]
 	## [br] Use this if you plan on changing preview of export
-	func signal_export_about_to_preview(callable: Callable, disconnect := false):
-		_connect_disconnect(Global.export_dialog.about_to_preview, callable, disconnect)
+	func signal_export_about_to_preview(callable: Callable, is_disconnecting := false):
+		_connect_disconnect(Global.export_dialog.about_to_preview, callable, is_disconnecting)

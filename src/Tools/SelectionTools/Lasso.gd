@@ -1,4 +1,4 @@
-extends SelectionTool
+extends BaseSelectionTool
 
 var _last_position := Vector2.INF
 var _draw_points: Array[Vector2i] = []

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cu37uo35mcfom"]
 
-[ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/SelectionTools/SelectionTool.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/BaseSelectionTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/SelectionTools/Lasso.gd" id="2"]
 
 [node name="ToolOptions" instance=ExtResource("1")]

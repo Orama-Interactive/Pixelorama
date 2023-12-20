@@ -1,4 +1,4 @@
-extends SelectionTool
+extends BaseSelectionTool
 
 var _rect := Rect2i(0, 0, 0, 0)
 

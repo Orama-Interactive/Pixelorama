@@ -1,4 +1,4 @@
-extends "res://src/Tools/Draw.gd"
+extends "res://src/Tools/BaseDraw.gd"
 
 var _last_position := Vector2.INF
 var _clear_image: Image

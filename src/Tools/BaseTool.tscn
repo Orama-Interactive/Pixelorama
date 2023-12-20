@@ -18,3 +18,4 @@ layout_mode = 2
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Tool Name"
+horizontal_alignment = 1

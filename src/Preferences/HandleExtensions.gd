@@ -25,7 +25,12 @@ class Extension:
 	var version := ""
 	var license := ""
 	var nodes := []
-	var enabled := false
+	var enabled: bool:
+		set(value):
+			enabled = value
+			enabled_once = true
+	var internal := false
+	var enabled_once := false
 
 	func serialize(dict: Dictionary) -> void:
 		if dict.has("name"):
@@ -50,6 +55,8 @@ func _ready() -> void:
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false
 
+	_add_internal_extensions()
+
 	var file_names: PackedStringArray = []
 	var dir := DirAccess.open("user://")
 	dir.make_dir(EXTENSIONS_PATH)
@@ -69,6 +76,13 @@ func _ready() -> void:
 
 	for file_name in file_names:
 		_add_extension(file_name)
+
+
+func _add_internal_extensions() -> void:
+	## at the moment this is an empty function but you should add all internal extensions here
+	# for example:
+	#read_extension("ExtensionName", true)
+	pass
 
 
 func install_extension(path: String) -> void:
@@ -150,7 +164,6 @@ func _add_extension(file_name: String) -> void:
 		await get_tree().process_frame
 		await get_tree().process_frame
 
-	var file_name_no_ext := file_name.get_basename()
 	var file_path := EXTENSIONS_PATH.path_join(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
 	if !success:
@@ -162,6 +175,11 @@ func _add_extension(file_name: String) -> void:
 		# Delete the faulty.txt, (it's fate has already been decided)
 		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 		return
+	read_extension(file_name)
+
+
+func read_extension(extension_file_or_folder_name: StringName, internal := false):
+	var file_name_no_ext := extension_file_or_folder_name.get_basename()
 	var extension_path := "res://src/Extensions/%s/" % file_name_no_ext
 	var extension_config_file_path := extension_path.path_join("extension.json")
 	var extension_config_file := FileAccess.open(extension_config_file_path, FileAccess.READ)
@@ -198,24 +216,30 @@ func _add_extension(file_name: String) -> void:
 				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
 				print("Incompatible API")
-				# Don't put it in faulty, (it's merely incompatible)
-				DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
+				if !internal:  # the file isn't created for internal extensions, no need for removal
+					# Don't put it in faulty, (it's merely incompatible)
+					DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 				return
 
 	var extension := Extension.new()
 	extension.serialize(extension_json)
-	extensions[file_name] = extension
+	extension.internal = internal
+	extensions[extension_file_or_folder_name] = extension
 	extension_list.add_item(extension.display_name)
 	var item_count := extension_list.get_item_count() - 1
 	extension_list.set_item_tooltip(item_count, extension.description)
-	extension_list.set_item_metadata(item_count, file_name)
-	extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, false)
+	extension_list.set_item_metadata(item_count, extension_file_or_folder_name)
+	if internal:  # enable internal extensions if it is for the first time
+		extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, true)
+	else:
+		extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, false)
 	if extension.enabled:
 		_enable_extension(extension)
 
 	# If an extension doesn't crash pixelorama then it is proven innocent
 	# And we should now delete its "Faulty.txt" file
-	DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
+	if !internal:  # the file isn't created for internal extensions, so no need to remove it
+		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 
 
 func _enable_extension(extension: Extension, save_to_config := true) -> void:
@@ -258,7 +282,10 @@ func _on_InstalledExtensions_item_selected(index: int) -> void:
 	else:
 		enable_button.text = "Enable"
 	enable_button.disabled = false
-	uninstall_button.disabled = false
+	if !extension.internal:
+		uninstall_button.disabled = false
+	else:
+		uninstall_button.disabled = true
 
 
 func _on_InstalledExtensions_empty_clicked(_position: Vector2, _button_index: int) -> void:
@@ -274,7 +301,12 @@ func _on_EnableButton_pressed() -> void:
 	var file_name: String = extension_list.get_item_metadata(extension_selected)
 	var extension: Extension = extensions[file_name]
 	extension.enabled = !extension.enabled
-	_enable_extension(extension)
+	# Don't allow disabling internal extensions through this button.
+	if extension.internal and extension.enabled_once:
+		Global.preferences_dialog.preference_update(true)
+	else:
+		_enable_extension(extension)
+
 	if extension.enabled:
 		enable_button.text = "Disable"
 	else:

@@ -1,4 +1,4 @@
-class_name SelectionTool
+class_name BaseSelectionTool
 extends BaseTool
 
 enum Mode { DEFAULT, ADD, SUBTRACT, INTERSECT }
