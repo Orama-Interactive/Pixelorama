@@ -170,19 +170,19 @@ class MenuAPI:
 	func _get_popup_menu(menu_type: int) -> PopupMenu:
 		match menu_type:
 			FILE:
-				return Global.top_menu_container.file_menu_button.get_popup()
+				return Global.top_menu_container.file_menu
 			EDIT:
-				return Global.top_menu_container.edit_menu_button.get_popup()
+				return Global.top_menu_container.edit_menu
 			SELECT:
-				return Global.top_menu_container.select_menu_button.get_popup()
+				return Global.top_menu_container.select_menu
 			IMAGE:
-				return Global.top_menu_container.image_menu_button.get_popup()
+				return Global.top_menu_container.image_menu
 			VIEW:
-				return Global.top_menu_container.view_menu_button.get_popup()
+				return Global.top_menu_container.view_menu
 			WINDOW:
-				return Global.top_menu_container.window_menu_button.get_popup()
+				return Global.top_menu_container.window_menu
 			HELP:
-				return Global.top_menu_container.help_menu_button.get_popup()
+				return Global.top_menu_container.help_menu
 		return null
 
 	## Adds a menu item of title [param item_name] to the [param menu_type] defined by

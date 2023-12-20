@@ -175,7 +175,7 @@ func selection_map_changed() -> void:
 	if has_selection:
 		image_texture = ImageTexture.create_from_image(selection_map)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
-	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
+	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 
 
@@ -245,7 +245,7 @@ func change_project() -> void:
 	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.queue_redraw()
-	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
+	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 
 	var i := 0
