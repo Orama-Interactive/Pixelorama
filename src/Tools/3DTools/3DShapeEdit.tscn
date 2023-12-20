@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cg7d36746on67"]
 
-[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/CommonUI/BaseTool.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Tools/3DShapeEdit.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/3DTools/3DShapeEdit.gd" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="4"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="5"]

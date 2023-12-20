@@ -105,7 +105,7 @@ func _input(event: InputEvent) -> void:
 
 func _has_selection_tool() -> bool:
 	for slot in Tools._slots.values():
-		if slot.tool_node is SelectionTool:
+		if slot.tool_node is BaseSelectionTool:
 			return true
 	return false
 

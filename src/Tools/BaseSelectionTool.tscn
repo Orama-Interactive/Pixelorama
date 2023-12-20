@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bd62qfjn380wf"]
 
-[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/CommonUI/BaseTool.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Tools/SelectionTools/SelectionTool.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/BaseSelectionTool.gd" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="4"]
 
 [node name="ToolOptions" instance=ExtResource("1")]

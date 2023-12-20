@@ -1,4 +1,4 @@
-extends SelectionTool
+extends BaseSelectionTool
 
 var _brush_size := 2
 var _brush := Brushes.get_default_brush()

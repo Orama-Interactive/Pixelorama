@@ -1,4 +1,4 @@
-extends SelectionTool
+extends BaseSelectionTool
 
 ## Working array used as buffer for segments while flooding
 var _allegro_flood_segments: Array[Segment]

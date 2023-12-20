@@ -1,4 +1,4 @@
-extends SelectionTool
+extends BaseSelectionTool
 
 var shader := preload("res://src/Shaders/ColorSelect.gdshader")
 var _similarity := 100
