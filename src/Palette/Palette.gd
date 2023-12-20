@@ -34,13 +34,13 @@ func _init(
 
 
 func edit(new_name: String, new_width: int, new_height: int, new_comment: String) -> void:
-	var old_width = width
+	var old_width := width
 	width = new_width
 	height = new_height
 	name = new_name
 	comment = new_comment
 
-	var old_colors_max = colors_max
+	var old_colors_max := colors_max
 	colors_max = width * height
 
 	if colors_max < old_colors_max:
@@ -57,11 +57,11 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 ## Iterates all colors from lowest index and reindexes them so they start at zero index
 ## Remove trailing removes all colors that are over colors_max limit and thus don't fit into grid
 func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
-	var sorted_colors_indexes = colors.keys()
+	var sorted_colors_indexes := colors.keys()
 	sorted_colors_indexes.sort()
 
-	var new_index = 0
-	for old_index in sorted_colors_indexes:
+	var new_index := 0
+	for old_index: int in sorted_colors_indexes:
 		# Color cannot fit into grid anymore - erase it
 		if remove_trailing and new_index >= colors_max:
 			colors.erase(old_index)
@@ -78,12 +78,12 @@ func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
 ## Adds difference of old and new width to color indexes
 ## so they remain on the same position as before resize
 func reindex_colors_on_width_increase(old_width: int) -> void:
-	var sorted_colors_indexes = colors.keys()
+	var sorted_colors_indexes := colors.keys()
 	sorted_colors_indexes.sort()
 
-	var new_colors = {}
-	for old_index in sorted_colors_indexes:
-		var new_index: int = old_index + (width - old_width) * (old_index / old_width)
+	var new_colors := {}
+	for old_index: int in sorted_colors_indexes:
+		var new_index := old_index + (width - old_width) * (old_index / old_width)
 		new_colors[new_index] = colors[old_index]
 
 	colors = new_colors

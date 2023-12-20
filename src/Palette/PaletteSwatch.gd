@@ -20,6 +20,12 @@ var empty := true:
 			mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_THEME_CHANGED:
+		if empty:
+			empty = true
+
+
 func set_swatch_size(swatch_size: Vector2) -> void:
 	custom_minimum_size = swatch_size
 	size = swatch_size

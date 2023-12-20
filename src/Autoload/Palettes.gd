@@ -423,11 +423,10 @@ func _get_palette_files(path: String) -> Array:
 # Locate the highest priority palette by the given relative filename
 # If none is found in the directories, then do nothing and return null
 func _get_best_palette_file_location(looking_paths: Array, fname: String):  # -> String:
-	var priority_fmap: Array = _get_palette_priority_file_map(looking_paths)
+	var priority_fmap := _get_palette_priority_file_map(looking_paths)
 	for i in range(looking_paths.size()):
 		var base_path: String = looking_paths[i]
-		var the_files: Array = priority_fmap[i]
-		if the_files.has(fname):
+		if priority_fmap.has(fname):
 			return base_path.path_join(fname)
 	return null
 

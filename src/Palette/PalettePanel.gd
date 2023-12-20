@@ -66,11 +66,6 @@ func select_palette(palette_path: String) -> void:
 		toggle_add_delete_buttons()
 
 
-## Has to be called on every Pixelorama theme change
-func reset_empty_palette_swatches_color() -> void:
-	palette_grid.reset_empty_swatches_color()
-
-
 func redraw_current_palette() -> void:
 	# Select and display current palette
 	var current_palette := Palettes.get_current_palette()
