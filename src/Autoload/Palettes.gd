@@ -1,19 +1,17 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
-# Presets for creating a new palette
+## Presets for creating a new palette
 enum NewPalettePresetType {
 	EMPTY = 0, FROM_CURRENT_PALETTE = 1, FROM_CURRENT_SPRITE = 2, FROM_CURRENT_SELECTION = 3
 }
-
-# Color options when user creates a new palette from current sprite or selection
+## Color options when user creates a new palette from current sprite or selection
 enum GetColorsFrom { CURRENT_FRAME = 0, CURRENT_CEL = 1, ALL_FRAMES = 2 }
-
 const DEFAULT_PALETTE_NAME := "Default"
 var palettes_write_path := Global.home_data_directory.path_join("Palettes")
-# All available palettes
+## All available palettes
 var palettes := {}
-# Currently displayed palette
+## Currently displayed palette
 var current_palette: Palette = null
 
 # Indexes of colors that are selected in palette
@@ -24,14 +22,6 @@ var right_selected_color := -1
 
 func _ready() -> void:
 	_load_palettes()
-
-
-func get_palettes() -> Dictionary:
-	return palettes
-
-
-func get_current_palette() -> Palette:
-	return current_palette
 
 
 func does_palette_exist(palette_name: String) -> bool:
@@ -50,7 +40,7 @@ func select_palette(palette_path: String) -> void:
 
 
 func is_any_palette_selected() -> bool:
-	if self.current_palette:
+	if is_instance_valid(current_palette):
 		return true
 	return false
 
