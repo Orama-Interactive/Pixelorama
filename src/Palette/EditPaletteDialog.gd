@@ -30,7 +30,7 @@ var old_name := ""
 
 
 func _ready() -> void:
-	# Add delete button to edit palette dialog
+	# Add delete and export buttons to edit palette dialog
 	add_button(tr("Delete"), false, DELETE_ACTION)
 	add_button(tr("Export"), false, EXPORT_ACTION)
 	delete_confirmation.add_button(tr("Move to Trash"), false, BIN_ACTION)
@@ -43,6 +43,7 @@ func open(current_palette: Palette) -> void:
 		width_input.value = current_palette.width
 		height_input.value = current_palette.height
 		path_input.text = current_palette.path
+		export_file_dialog.current_file = current_palette.name
 
 		# Store original size so it can be compared with changed values
 		# and warning can be shown if it is reduced
