@@ -161,9 +161,7 @@ func _input(event: InputEvent) -> void:
 				)
 			elif mode == Mode.Scale:
 				scale_reference_image(local_mouse_pos, ri)
-				text = str(
-					"Moving: ", (og_scale * 100).floor(), " -> ", (ri.scale * 100).floor()
-				)
+				text = str("Moving: ", (og_scale * 100).floor(), " -> ", (ri.scale * 100).floor())
 
 			Global.cursor_position_label.text = text
 
@@ -334,11 +332,3 @@ func _draw() -> void:
 			draw_polyline(p, Color(0.50, 0.99, 0.29), line_width)
 		elif Geometry2D.is_point_in_polygon(get_local_mouse_position(), p) and !dragging:
 			draw_polyline(p, Color(0.98, 0.80, 0.29), line_width)
-
-
-## This function creates random images with random colors
-func generate_random_images(amount: int, size: Vector2) -> void:
-	for i in range(amount):
-		var image = Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-		image.fill(Color(randf(), randf(), randf()))
-		OpenSave.import_reference_image_from_image(image)

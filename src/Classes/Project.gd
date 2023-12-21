@@ -891,6 +891,6 @@ func get_reference_image(index: int) -> ReferenceImage:
 
 ## Reorders the position of the reference image in the tree / reference_images array
 func reorder_reference_image(from: int, to: int) -> void:
-	var ri : ReferenceImage = reference_images.pop_at(from)
+	var ri: ReferenceImage = reference_images.pop_at(from)
 	reference_images.insert(to, ri)
 	Global.canvas.reference_image_container.move_child(ri, to)

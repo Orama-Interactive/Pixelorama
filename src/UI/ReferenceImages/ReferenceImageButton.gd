@@ -23,14 +23,14 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 		return false
 
 	var index := get_index() - 1
-	var from_index : int = data[1]
+	var from_index: int = data[1]
 	# If the index < 0 then that means this button is the "reset button"
 	# Or we are trying to drop on the same button
 	if index < 0 or index == from_index:
 		Global.reference_panel.drag_highlight.visible = false
 		return false
 
-	var side : int = -1
+	var side: int = -1
 	if get_local_mouse_position().x > size.x / 2:
 		side = 1
 
@@ -48,7 +48,7 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
-	var from_index : int = data[1]
+	var from_index: int = data[1]
 	var to_index := get_index()
 
 	if get_local_mouse_position().x > size.x / 2:

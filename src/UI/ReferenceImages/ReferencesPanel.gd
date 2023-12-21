@@ -5,13 +5,14 @@ extends PanelContainer
 const ReferenceImageButton = preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn")
 
 var list_btn_group := ButtonGroup.new()
-var transform_button_group : ButtonGroup
+var transform_button_group: ButtonGroup
 var _ignore_ui_updates := false
 
 @onready var list := %List as HBoxContainer
 @onready var drag_highlight := $Overlay/DragHighlight as ColorRect
 @onready var remove_btn := $ScrollContainer/Container/ReferenceEdit/ImageOptions/Remove as Button
 @onready var transform_tools_btns := $ScrollContainer/Container/Tools/TransformTools
+
 
 func _ready() -> void:
 	transform_button_group = transform_tools_btns.get_child(0).button_group
@@ -24,7 +25,6 @@ func _ready() -> void:
 	# We call this function to update the buttons
 	_on_references_changed()
 	_update_ui()
-	Global.canvas.reference_image_container.generate_random_images(3, Vector2(100, 100))
 
 
 func _notification(what: int) -> void:
@@ -37,12 +37,12 @@ func _on_transform_tool_button_group_pressed(button: Button) -> void:
 
 
 func _on_move_image_left_pressed() -> void:
-	var index : int = Global.current_project.reference_index
+	var index: int = Global.current_project.reference_index
 	reorder_reference_image(index, index - 1)
 
 
 func _on_move_image_right_pressed() -> void:
-	var index : int = Global.current_project.reference_index
+	var index: int = Global.current_project.reference_index
 	reorder_reference_image(index, index + 1)
 
 
@@ -76,8 +76,7 @@ func reorder_reference_image(from: int, to: int, update_reference_index := true)
 
 
 func _update_ui() -> void:
-	var index : int = Global.current_project.reference_index
-	print("Updating ui: ", index)
+	var index: int = Global.current_project.reference_index
 
 	# Enable the buttons as a default
 	%MoveImageRightBtn.disabled = false
@@ -150,7 +149,7 @@ func _on_references_changed():
 	# And update.
 	for ref in Global.current_project.reference_images:
 		ref.visible = true
-		var l : Button = ReferenceImageButton.instantiate()
+		var l: Button = ReferenceImageButton.instantiate()
 		l.button_group = list_btn_group
 		if ref.texture:
 			l.icon = ref.texture

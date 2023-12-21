@@ -11,9 +11,7 @@ var _ignore_spinbox_changes: bool = false
 
 
 func _ready() -> void:
-	references_container.reference_image_changed.connect(
-		_on_reference_image_changed
-	)
+	references_container.reference_image_changed.connect(_on_reference_image_changed)
 
 
 func _update_properties():
@@ -272,4 +270,3 @@ func _on_reference_image_changed(index: int) -> void:
 		_reset_properties()
 	else:
 		_update_properties()
-
