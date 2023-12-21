@@ -113,6 +113,7 @@ func deserialize(json_string: String) -> void:
 		width = data.width
 	if data.has("height"):
 		height = data.height
+	colors_max = width * height
 
 
 func save_to_file() -> Error:
@@ -267,3 +268,11 @@ static func strip_unvalid_characters(string_to_strip: String) -> String:
 	var regex := RegEx.new()
 	regex.compile("[^a-zA-Z0-9_]+")
 	return regex.sub(string_to_strip, "", true)
+
+
+func convert_to_image() -> Image:
+	var image := Image.create(colors_max, 1, false, Image.FORMAT_RGBA8)
+	for i in colors_max:
+		if colors.has(i):
+			image.set_pixel(i, 0, colors[i].color)
+	return image

@@ -1,11 +1,15 @@
 extends ConfirmationDialog
 
-# Emitted when user confirms their changes
-signal saved(name, comment, width, height)
+## Emitted when the user confirms their changes
+signal saved(name: String, comment: String, width: int, height: int)
+## Emitted when the user deletes a palette
 signal deleted
+## Emitted when the user exports a palette
+signal exported(path: String)
 
-const DELETE_ACTION := "delete"
-const BIN_ACTION := "trash"
+const EXPORT_ACTION := &"export"
+const DELETE_ACTION := &"delete"
+const BIN_ACTION := &"trash"
 
 # Keeps original size of edited palette
 var origin_width := 0
@@ -22,11 +26,13 @@ var old_name := ""
 @onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
 @onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
 @onready var delete_confirmation := $DeleteConfirmation
+@onready var export_file_dialog: FileDialog = $ExportFileDialog
 
 
 func _ready() -> void:
 	# Add delete button to edit palette dialog
 	add_button(tr("Delete"), false, DELETE_ACTION)
+	add_button(tr("Export"), false, EXPORT_ACTION)
 	delete_confirmation.add_button(tr("Move to Trash"), false, BIN_ACTION)
 
 
@@ -79,9 +85,11 @@ func _on_EditPaletteDialog_confirmed() -> void:
 	saved.emit(name_input.text, comment_input.text, width_input.value, height_input.value)
 
 
-func _on_EditPaletteDialog_custom_action(action: String) -> void:
+func _on_EditPaletteDialog_custom_action(action: StringName) -> void:
 	if action == DELETE_ACTION:
 		delete_confirmation.popup_centered()
+	elif action == EXPORT_ACTION:
+		export_file_dialog.popup_centered()
 
 
 func _on_delete_confirmation_confirmed() -> void:
@@ -97,7 +105,7 @@ func _on_delete_confirmation_custom_action(action: StringName) -> void:
 		hide()
 
 
-func _on_size_value_changed(_value):
+func _on_size_value_changed(_value: int):
 	# Toggle resize warning label if palette size was reduced
 	var size_decreased: bool = (
 		height_input.value < origin_height or width_input.value < origin_width
@@ -105,7 +113,7 @@ func _on_size_value_changed(_value):
 	toggle_size_reduced_warning(size_decreased)
 
 
-func _on_Name_text_changed(new_name):
+func _on_Name_text_changed(new_name: String):
 	if old_name != new_name:
 		if Palettes.does_palette_exist(new_name):
 			toggle_already_exists_warning(true)
@@ -115,3 +123,7 @@ func _on_Name_text_changed(new_name):
 		# Disable ok button on empty name
 		if new_name == "":
 			get_ok_button().disabled = true
+
+
+func _on_export_file_dialog_file_selected(path: String) -> void:
+	exported.emit(path)

@@ -4,7 +4,7 @@
 
 [node name="EditPaletteDialog" type="ConfirmationDialog"]
 title = "Edit Palette"
-size = Vector2i(409, 359)
+size = Vector2i(421, 371)
 exclusive = false
 popup_window = true
 script = ExtResource("1")
@@ -16,7 +16,7 @@ anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = -45.0
+offset_bottom = -49.0
 
 [node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -77,6 +77,7 @@ text = "Path:"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
+editable = false
 
 [node name="SizeReducedWarning" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 27)
@@ -114,6 +115,11 @@ text = "Delete Palette?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ExportFileDialog" type="FileDialog" parent="."]
+size = Vector2i(677, 400)
+access = 2
+filters = PackedStringArray("*.png ; PNG Image", "*.jpg,*.jpeg ; JPEG Image", "*.webp ; WebP Image")
+
 [connection signal="confirmed" from="." to="." method="_on_EditPaletteDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_EditPaletteDialog_custom_action"]
 [connection signal="visibility_changed" from="." to="." method="_on_EditPaletteDialog_visibility_changed"]
@@ -122,3 +128,4 @@ vertical_alignment = 1
 [connection signal="value_changed" from="VBoxContainer/PaletteMetadata/Height" to="." method="_on_size_value_changed"]
 [connection signal="confirmed" from="DeleteConfirmation" to="." method="_on_delete_confirmation_confirmed"]
 [connection signal="custom_action" from="DeleteConfirmation" to="." method="_on_delete_confirmation_custom_action"]
+[connection signal="file_selected" from="ExportFileDialog" to="." method="_on_export_file_dialog_file_selected"]
