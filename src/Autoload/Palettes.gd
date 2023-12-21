@@ -213,7 +213,7 @@ func current_palete_delete(permanent := true) -> void:
 		current_palette = null
 
 
-func current_palette_add_color(mouse_button: int, start_index: int = 0) -> void:
+func current_palette_add_color(mouse_button: int, start_index := 0) -> void:
 	if (
 		not current_palette.is_full()
 		and (mouse_button == MOUSE_BUTTON_LEFT or mouse_button == MOUSE_BUTTON_RIGHT)
@@ -328,7 +328,7 @@ func _load_palettes() -> void:
 		var palette_files := priority_ordered_files[i]
 		for file_name in palette_files:
 			var path := base_directory.path_join(file_name)
-			import_palette_from_path(path, make_copy)
+			import_palette_from_path(path, make_copy, true)
 
 	if not current_palette && palettes.size() > 0:
 		select_palette(palettes.keys()[0])
@@ -388,7 +388,7 @@ func _get_palette_files(path: String) -> PackedStringArray:
 	return results
 
 
-func import_palette_from_path(path: String, make_copy := false) -> void:
+func import_palette_from_path(path: String, make_copy := false, is_initialising := false) -> void:
 	if does_palette_exist(path.get_basename().get_file()):
 		# If there is a palette with same name ignore import for now
 		return
@@ -399,35 +399,35 @@ func import_palette_from_path(path: String, make_copy := false) -> void:
 			if FileAccess.file_exists(path):
 				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_gpl(path, text)
-				make_copy = true
 		"pal":
 			if FileAccess.file_exists(path):
 				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_pal_palette(path, text)
-				make_copy = true
 		"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp":
 			var image := Image.new()
 			var err := image.load(path)
 			if !err:
 				palette = _import_image_palette(path, image)
-				make_copy = true
 		"json":
 			if FileAccess.file_exists(path):
 				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = Palette.new(path.get_basename().get_file())
 				palette.path = path
 				palette.deserialize(text)
-				make_copy = true
 
-	if palette:
+	if is_instance_valid(palette):
 		if make_copy:
 			_save_palette(palette)  # Makes a copy of the palette
 		palettes[palette.name] = palette
 		var default_palette_name = Global.config_cache.get_value(
 			"data", "last_palette", DEFAULT_PALETTE_NAME
 		)
-		# Store index of the default palette
-		if palette.name == default_palette_name:
+		if is_initialising:
+			# Store index of the default palette
+			if palette.name == default_palette_name:
+				select_palette(palette.name)
+		else:
+			Global.palette_panel.setup_palettes_selector()
 			select_palette(palette.name)
 	else:
 		Global.error_dialog.set_text(

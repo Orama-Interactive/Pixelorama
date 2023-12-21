@@ -189,7 +189,7 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 				OpenSave.import_reference_image_from_path(path)
 
 		elif current_import_option == ImageImportOptions.PALETTE:
-			Palettes.import_palette_from_path(path)
+			Palettes.import_palette_from_path(path, true)
 
 		elif current_import_option == ImageImportOptions.BRUSH:
 			add_brush()

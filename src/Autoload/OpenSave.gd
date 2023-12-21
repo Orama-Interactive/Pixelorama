@@ -37,7 +37,7 @@ func handle_loading_file(file: String) -> void:
 		return
 
 	elif file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
-		Palettes.import_palette_from_path(file)
+		Palettes.import_palette_from_path(file, true)
 
 	elif file_ext in ["pck", "zip"]:  # Godot resource pack file
 		Global.preferences_dialog.extensions.install_extension(file)
