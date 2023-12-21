@@ -35,6 +35,7 @@ func select_palette(palette_name: String) -> void:
 	current_palette = palettes.get(palette_name)
 	_clear_selected_colors()
 	Global.config_cache.set_value("data", "last_palette", current_palette.name)
+	Global.palette_panel.select_palette(palette_name)
 
 
 func is_any_palette_selected() -> bool:
@@ -396,21 +397,25 @@ func import_palette_from_path(path: String, make_copy := false) -> void:
 			if FileAccess.file_exists(path):
 				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_gpl(path, text)
+				make_copy = true
 		"pal":
 			if FileAccess.file_exists(path):
 				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_pal_palette(path, text)
+				make_copy = true
 		"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp":
 			var image := Image.new()
 			var err := image.load(path)
 			if !err:
 				palette = _import_image_palette(path, image)
+				make_copy = true
 		"json":
 			if FileAccess.file_exists(path):
 				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = Palette.new(path.get_basename().get_file())
 				palette.path = path
 				palette.deserialize(text)
+				make_copy = true
 
 	if palette:
 		if make_copy:
@@ -422,6 +427,12 @@ func import_palette_from_path(path: String, make_copy := false) -> void:
 		# Store index of the default palette
 		if palette.name == default_palette_name:
 			select_palette(palette.name)
+	else:
+		Global.error_dialog.set_text(
+			tr("Can't load file '%s'.\nThis is not a valid palette file.") % [path]
+		)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 
 
 func _import_gpl(path: String, text: String) -> Palette:
