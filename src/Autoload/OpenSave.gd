@@ -32,14 +32,7 @@ func handle_loading_file(file: String) -> void:
 		open_pxo_file(file)
 
 	elif file_ext == "tres":  # Godot resource file
-		var resource := load(file)
-		if resource is Palette:
-			Palettes.import_palette(resource, file.get_file())
-		else:
-			var file_name: String = file.get_file()
-			Global.error_dialog.set_text(tr("Can't load file '%s'.") % [file_name])
-			Global.error_dialog.popup_centered()
-			Global.dialog_open(true)
+		return
 	elif file_ext == "tscn":  # Godot scene file
 		return
 

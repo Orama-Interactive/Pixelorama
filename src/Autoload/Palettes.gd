@@ -25,16 +25,14 @@ func _ready() -> void:
 
 
 func does_palette_exist(palette_name: String) -> bool:
-	for palette_path: String in palettes.keys():
-		var file_name := palette_path.get_basename().get_file()
-		var stripped_palette_name := Palette.strip_unvalid_characters(palette_name)
-		if file_name == stripped_palette_name:
+	for name_to_test: String in palettes.keys():
+		if name_to_test == palette_name:
 			return true
 	return false
 
 
-func select_palette(palette_path: String) -> void:
-	current_palette = palettes.get(palette_path)
+func select_palette(palette_name: String) -> void:
+	current_palette = palettes.get(palette_name)
 	_clear_selected_colors()
 	Global.config_cache.set_value("data", "last_palette", current_palette.name)
 
@@ -45,37 +43,30 @@ func is_any_palette_selected() -> bool:
 	return false
 
 
-func _current_palette_save() -> String:
-	var save_path := ""
-	if current_palette:
-		save_path = _save_palette(self.current_palette)
-	return save_path
-
-
 func _ensure_palette_directory_exists() -> void:
 	var dir := DirAccess.open(Global.home_data_directory)
 	if is_instance_valid(dir) and not dir.dir_exists(palettes_write_path):
 		dir.make_dir(palettes_write_path)
 
 
-func _save_palette(palette: Palette) -> String:
+func _save_palette(palette: Palette = current_palette) -> void:
 	_ensure_palette_directory_exists()
+	if not is_instance_valid(palette):
+		return
 	# Save old resource name and set new resource name
-	var old_resource_name := palette.resource_name
-	palette.set_resource_name(palette.name)
-
+	#var old_resource_name := palette.resource_name
+	#palette.set_resource_name(palette.name)
 	# If resource name changed remove the old palette file
-	if old_resource_name != palette.resource_name:
-		var old_palette := palettes_write_path.path_join(old_resource_name) + ".tres"
-		_delete_palette(old_palette)
+	#if old_resource_name != palette.resource_name:
+		#var old_palette := palettes_write_path.path_join(old_resource_name) + ".tres"
+		#_delete_palette(old_palette)
 
 	# Save palette
-	var save_path := palettes_write_path.path_join(palette.resource_name) + ".tres"
-	palette.resource_path = save_path
-	var err := ResourceSaver.save(palette, save_path)
+	var save_path := palettes_write_path.path_join(palette.name) + ".json"
+	palette.path = save_path
+	var err := palette.save_to_file()
 	if err != OK:
 		Global.notification_label("Failed to save palette")
-	return save_path
 
 
 func create_new_palette(
@@ -107,9 +98,9 @@ func _create_new_empty_palette(
 	palette_name: String, comment: String, width: int, height: int
 ) -> void:
 	var new_palette := Palette.new(palette_name, width, height, comment)
-	var palette_path := _save_palette(new_palette)
-	palettes[palette_path] = new_palette
-	select_palette(palette_path)
+	_save_palette(new_palette)
+	palettes[palette_name] = new_palette
+	select_palette(palette_name)
 
 
 func _create_new_palette_from_current_palette(palette_name: String, comment: String) -> void:
@@ -119,9 +110,9 @@ func _create_new_palette_from_current_palette(palette_name: String, comment: Str
 	new_palette.name = palette_name
 	new_palette.comment = comment
 	new_palette.set_resource_name(palette_name)
-	var palette_path := _save_palette(new_palette)
-	palettes[palette_path] = new_palette
-	select_palette(palette_path)
+	_save_palette(new_palette)
+	palettes[palette_name] = new_palette
+	select_palette(palette_name)
 
 
 func _create_new_palette_from_current_selection(
@@ -191,28 +182,29 @@ func _fill_new_palette_with_colors(
 				if not new_palette.has_theme_color(color):
 					new_palette.add_color(color)
 
-	var palette_path := _save_palette(new_palette)
-	palettes[palette_path] = new_palette
-	select_palette(palette_path)
+	_save_palette(new_palette)
+	palettes[new_palette.name] = new_palette
+	select_palette(new_palette.name)
 
 
 func current_palette_edit(palette_name: String, comment: String, width: int, height: int) -> void:
 	_check_palette_settings_values(palette_name, width, height)
 	current_palette.edit(palette_name, width, height, comment)
-	var palette_path := _current_palette_save()
-	palettes[palette_path] = current_palette
+	_save_palette()
+	palettes[palette_name] = current_palette
 
 
-func _delete_palette(path: String, permanent := true) -> void:
-	if permanent:
-		DirAccess.remove_absolute(path)
-	else:
-		OS.move_to_trash(path)
-	palettes.erase(path)
+func _delete_palette(palette: Palette, permanent := true) -> void:
+	if not palette.path.is_empty():
+		if permanent:
+			DirAccess.remove_absolute(palette.path)
+		else:
+			OS.move_to_trash(palette.path)
+	palettes.erase(palette.name)
 
 
 func current_palete_delete(permanent := true) -> void:
-	_delete_palette(current_palette.resource_path, permanent)
+	_delete_palette(current_palette, permanent)
 
 	if palettes.size() > 0:
 		select_palette(palettes.keys()[0])
@@ -228,7 +220,7 @@ func current_palette_add_color(mouse_button: int, start_index: int = 0) -> void:
 		# Get color on left or right tool
 		var color := Tools.get_assigned_color(mouse_button)
 		current_palette.add_color(color, start_index)
-		_current_palette_save()
+		_save_palette()
 
 
 func current_palette_get_color(index: int) -> Color:
@@ -237,30 +229,30 @@ func current_palette_get_color(index: int) -> Color:
 
 func current_palette_set_color(index: int, color: Color) -> void:
 	current_palette.set_color(index, color)
-	_current_palette_save()
+	_save_palette()
 
 
 func current_palette_delete_color(index: int) -> void:
 	current_palette.remove_color(index)
-	_current_palette_save()
+	_save_palette()
 
 
 func current_palette_swap_colors(source_index: int, target_index: int) -> void:
 	current_palette.swap_colors(source_index, target_index)
 	_select_color(MOUSE_BUTTON_LEFT, target_index)
-	_current_palette_save()
+	_save_palette()
 
 
 func current_palette_copy_colors(from: int, to: int) -> void:
 	current_palette.copy_colors(from, to)
-	_current_palette_save()
+	_save_palette()
 
 
 func current_palette_insert_color(from: int, to: int) -> void:
-	var from_color = current_palette.colors[from]
+	var from_color := current_palette.colors[from]
 	current_palette.remove_color(from)
 	current_palette.insert_color(to, from_color.color)
-	_current_palette_save()
+	_save_palette()
 
 
 func current_palette_get_selected_color_index(mouse_button: int) -> int:
@@ -325,9 +317,6 @@ func _load_palettes() -> void:
 	# get overwritten by those of the same name in user files
 	search_locations.reverse()
 	priority_ordered_files.reverse()
-	var default_palette_name = Global.config_cache.get_value(
-		"data", "last_palette", DEFAULT_PALETTE_NAME
-	)
 	for i in range(search_locations.size()):
 		# If palette is not in palettes write path - make its copy in the write path
 		var make_copy := false
@@ -337,18 +326,8 @@ func _load_palettes() -> void:
 		var base_directory := search_locations[i]
 		var palette_files := priority_ordered_files[i]
 		for file_name in palette_files:
-			var palette := load(base_directory.path_join(file_name)) as Palette
-			if palette:
-				if make_copy:
-					_save_palette(palette)  # Makes a copy of the palette
-				palette.resource_name = palette.resource_path.get_file().trim_suffix(".tres")
-				# On Windows for some reason paths can contain "res://" in front of them which breaks saving
-				palette.resource_path = palette.resource_path.trim_prefix("res://")
-				palettes[palette.resource_path] = palette
-
-				# Store index of the default palette
-				if palette.name == default_palette_name:
-					select_palette(palette.resource_path)
+			var path := base_directory.path_join(file_name)
+			import_palette_from_path(path, make_copy)
 
 	if not current_palette && palettes.size() > 0:
 		select_palette(palettes.keys()[0])
@@ -399,7 +378,7 @@ func _get_palette_files(path: String) -> PackedStringArray:
 			break
 		elif (
 			(not file_name.begins_with("."))
-			&& file_name.to_lower().ends_with("tres")
+			&& file_name.to_lower().ends_with("json")
 			&& not dir.current_is_dir()
 		):
 			results.append(file_name)
@@ -408,7 +387,7 @@ func _get_palette_files(path: String) -> PackedStringArray:
 	return results
 
 
-func import_palette_from_path(path: String) -> void:
+func import_palette_from_path(path: String, make_copy := false) -> void:
 	if does_palette_exist(path.get_basename().get_file()):
 		# If there is a palette with same name ignore import for now
 		return
@@ -431,27 +410,19 @@ func import_palette_from_path(path: String) -> void:
 		"json":
 			if FileAccess.file_exists(path):
 				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
-				palette = _import_json_palette(text)
+				palette = Palette.new(path.get_basename().get_file())
+				palette.deserialize(text)
 
-	import_palette(palette, path.get_file())
-
-
-func import_palette(palette: Palette, file_name: String) -> void:
-	if does_palette_exist(file_name.get_basename()):
-		# If there is a palette with same name ignore import for now
-		return
 	if palette:
-		var palette_path := _save_palette(palette)
-		palettes[palette_path] = palette
-		select_palette(palette_path)
-		Global.palette_panel.setup_palettes_selector()
-		Global.palette_panel.select_palette(palette_path)
-	else:
-		Global.error_dialog.set_text(
-			tr("Can't load file '%s'.\nThis is not a valid palette file.") % [file_name]
+		if make_copy:
+			_save_palette(palette)  # Makes a copy of the palette
+		palettes[palette.name] = palette
+		var default_palette_name = Global.config_cache.get_value(
+			"data", "last_palette", DEFAULT_PALETTE_NAME
 		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		# Store index of the default palette
+		if palette.name == default_palette_name:
+			select_palette(palette.name)
 
 
 func _import_gpl(path: String, text: String) -> Palette:
@@ -490,7 +461,6 @@ func _import_gpl(path: String, text: String) -> Palette:
 			if color_data.size() >= 4:
 				# Ignore color name for now - result.add_color(color, color_data[3])
 				colors.append(color)
-				#
 			else:
 				colors.append(color)
 		line_number += 1
@@ -546,32 +516,5 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 	var result := Palette.new(path.get_basename().get_file(), 8, palette_height)
 	for color in colors:
 		result.add_color(color)
-
-	return result
-
-
-## Import of deprecated older json palette format
-func _import_json_palette(text: String) -> Palette:
-	var result := Palette.new()
-	var test_json_conv := JSON.new()
-	test_json_conv.parse(text)
-	var result_json = test_json_conv.get_data()
-
-	if result_json.error != OK:  # If parse has errors
-		printerr("JSON palette import error")
-		printerr("Error: ", result_json.error)
-		printerr("Error Line: ", result_json.error_line)
-		printerr("Error String: ", result_json.error_string)
-		result = null
-	else:  # If parse OK
-		var data = result_json.result
-		if data.has("name"):  # If data is 'valid' palette file
-			result.name = data.name
-			if data.has("comments"):
-				result.comment = data.comments
-			if data.has("colors"):
-				for color_data in data.colors:
-					var color := Color(color_data.data)
-					result.add_color(color)
 
 	return result

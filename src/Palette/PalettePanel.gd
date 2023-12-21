@@ -39,21 +39,21 @@ func setup_palettes_selector() -> void:
 	palette_select.clear()
 
 	var id := 0
-	for palette_path in Palettes.palettes:
+	for palette_name in Palettes.palettes:
 		# Add palette selector item
-		palette_select.add_item(Palettes.palettes[palette_path].name, id)
+		palette_select.add_item(Palettes.palettes[palette_name].name, id)
 
 		# Map palette paths to item id's and otherwise
-		palettes_path_id[palette_path] = id
-		palettes_id_path[id] = palette_path
+		palettes_path_id[palette_name] = id
+		palettes_id_path[id] = palette_name
 		id += 1
 
 
-func select_palette(palette_path: String) -> void:
-	var palette_id = palettes_path_id.get(palette_path)
+func select_palette(palette_name: String) -> void:
+	var palette_id = palettes_path_id.get(palette_name)
 	if palette_id != null:
 		palette_select.selected = palette_id
-		Palettes.select_palette(palette_path)
+		Palettes.select_palette(palette_name)
 		palette_grid.set_palette(Palettes.current_palette)
 		palette_scroll.resize_grid()
 		palette_scroll.set_sliders(Palettes.current_palette, palette_grid.grid_window_origin)
@@ -69,7 +69,7 @@ func select_palette(palette_path: String) -> void:
 ## Select and display current palette
 func redraw_current_palette() -> void:
 	if is_instance_valid(Palettes.current_palette):
-		select_palette(Palettes.current_palette.resource_path)
+		select_palette(Palettes.current_palette.name)
 		add_color_button.show()
 		delete_color_button.show()
 	else:

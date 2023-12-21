@@ -1,36 +1,53 @@
 class_name Palette
-extends Resource
+extends RefCounted
 
 const DEFAULT_WIDTH := 8
 const DEFAULT_HEIGHT := 8
 
 # Metadata
-@export var name := "Custom Palette"
-@export var comment := ""
+var name := "Custom Palette"
+var comment := ""
+var path := ""
 
-# Grid size
-@export var width := DEFAULT_WIDTH
-@export var height := DEFAULT_HEIGHT
-
+## The width of the grid
+var width := DEFAULT_WIDTH
+## The height of the grid
+var height := DEFAULT_HEIGHT
 ## Sparse colors dictionary - actual color position in the palette is determined by its index
-@export var colors := {}
-
+var colors: Array[PaletteColor] = []
 ## How many colors fit in palette grid
-@export var colors_max := 0
+var colors_max := 0
+
+class PaletteColor:
+	var color := Color.TRANSPARENT
+	var index := -1
+
+	func _init(init_color := Color.BLACK, init_index := -1) -> void:
+		color = init_color
+		index = init_index
+
+	func duplicate() -> PaletteColor:
+		return PaletteColor.new(color, index)
+
+	func serialize() -> Dictionary:
+		return {"color": color, "index": index}
+
+	func deserialize(dict: Dictionary) -> void:
+		if dict.has("color"):
+			color = dict["color"]
+		if dict.has("index"):
+			color = dict["index"]
 
 
 func _init(
-	init_name: String = "Custom Palette",
-	init_width: int = DEFAULT_WIDTH,
-	init_height: int = DEFAULT_HEIGHT,
-	init_comment: String = ""
+	_name := "Custom Palette", _width := DEFAULT_WIDTH, _height := DEFAULT_HEIGHT, _comment := ""
 ) -> void:
-	name = init_name
-	comment = init_comment
-	width = init_width
-	height = init_height
-	colors_max = init_width * init_height
-	colors = {}
+	name = _name
+	comment = _comment
+	width = _width
+	height = _height
+	colors_max = _width * _height
+	colors = []
 
 
 func edit(new_name: String, new_width: int, new_height: int, new_comment: String) -> void:
@@ -54,23 +71,68 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 		reindex_colors_on_width_increase(old_width)
 
 
+func _serialize() -> String:
+	var serialize_data := {
+		"name" : name,
+		"comment" : comment,
+		"colors" : [],
+		"width" : width,
+		"height" : height,
+	}
+	for color in colors:
+		serialize_data.colors.push_back(color.serialize())
+
+	return JSON.stringify(serialize_data, " ")
+
+
+func deserialize(json_string: String) -> void:
+	var result := Palette.new()
+	var test_json_conv := JSON.new()
+	var err := test_json_conv.parse(json_string)
+	if err != OK:  # If parse has errors
+		printerr("JSON palette import error")
+		printerr("Error: ", err)
+		printerr("Error Line: ", test_json_conv.get_error_line())
+		printerr("Error String: ", test_json_conv.get_error_message())
+		return
+
+	var data = test_json_conv.get_data()
+	if not typeof(data) == TYPE_DICTIONARY:
+		return
+	if data.has("name"):  # If data is 'valid' palette file
+		name = data.name
+		if data.has("comment"):
+			comment = data.comment
+		if data.has("colors"):
+			for color_data in data.colors:
+				var color := str_to_var("Color" + color_data["color"]) as Color
+				var palette_color := PaletteColor.new(color, color_data["index"])
+				colors.append(palette_color)
+
+
+func save_to_file() -> Error:
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if not is_instance_valid(file):
+		return FileAccess.get_open_error()
+	file.store_string(_serialize())
+	file.close()
+	return OK
+
+
 ## Iterates all colors from lowest index and reindexes them so they start at zero index
 ## Remove trailing removes all colors that are over colors_max limit and thus don't fit into grid
 func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
-	var sorted_colors_indexes := colors.keys()
-	sorted_colors_indexes.sort()
-
 	var new_index := 0
-	for old_index: int in sorted_colors_indexes:
+	for old_index in colors.size():
 		# Color cannot fit into grid anymore - erase it
 		if remove_trailing and new_index >= colors_max:
-			colors.erase(old_index)
+			colors.remove_at(old_index)
 
 		# Move color to new lower index - erase it from its original index
 		elif new_index < old_index:
 			colors[new_index] = colors[old_index]
 			colors[new_index].index = new_index
-			colors.erase(old_index)
+			colors.remove_at(old_index)
 
 		new_index += 1
 
@@ -78,11 +140,8 @@ func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
 ## Adds difference of old and new width to color indexes
 ## so they remain on the same position as before resize
 func reindex_colors_on_width_increase(old_width: int) -> void:
-	var sorted_colors_indexes := colors.keys()
-	sorted_colors_indexes.sort()
-
-	var new_colors := {}
-	for old_index: int in sorted_colors_indexes:
+	var new_colors := []
+	for old_index in colors.size():
 		var new_index := old_index + (width - old_width) * (old_index / old_width)
 		new_colors[new_index] = colors[old_index]
 
@@ -90,7 +149,7 @@ func reindex_colors_on_width_increase(old_width: int) -> void:
 
 
 ## Adds new color to the first empty swatch
-func add_color(new_color: Color, start_index: int = 0) -> void:
+func add_color(new_color: Color, start_index := 0) -> void:
 	if start_index >= colors_max:
 		return
 
@@ -100,14 +159,19 @@ func add_color(new_color: Color, start_index: int = 0) -> void:
 
 	# Find the first empty index since start index and insert a new color
 	for i in range(start_index, colors_max):
-		if not colors.has(i):
+		if i >= colors.size():
+			colors.append(PaletteColor.new(new_color, i))
+			break
+		if colors[i] == null:
 			colors[i] = PaletteColor.new(new_color, i)
 			break
 
 
 ## Returns color at index or null if no color exists
 func get_color(index: int):
-	var palette_color = colors.get(index)
+	if index >= colors.size():
+		return null
+	var palette_color := colors[index]
 	if palette_color != null:
 		return palette_color.color
 	return null
@@ -115,13 +179,13 @@ func get_color(index: int):
 
 ## Changes color data
 func set_color(index: int, new_color: Color) -> void:
-	if self.colors.has(index):
-		self.colors[index].color = new_color
+	if is_instance_valid(colors[index]):
+		colors[index].color = new_color
 
 
 ## Removes a color at the specified index
 func remove_color(index: int) -> void:
-	colors.erase(index)
+	colors[index] = null
 
 
 ## Inserts a color to the specified index
@@ -130,7 +194,7 @@ func insert_color(index: int, new_color: Color) -> void:
 	var c := PaletteColor.new(new_color, index)
 	# If insert happens on non empty swatch recursively move the original color
 	# and every other color to its right one swatch to right
-	if colors.get(index) != null:
+	if colors[index] != null:
 		move_right(index)
 	colors[index] = c
 
@@ -144,16 +208,16 @@ func move_right(index: int) -> void:
 		colors_max = width * height
 
 	# If swatch to right to this color is not empty move that color right too
-	if colors.get(index + 1) != null:
+	if colors[index + 1] != null:
 		move_right(index + 1)
 
-	colors[index + 1] = colors.get(index)
+	colors[index + 1] = colors[index]
 
 
 ## Swaps two colors
 func swap_colors(from_index: int, to_index: int) -> void:
-	var from_color = colors.get(from_index)
-	var to_color = colors.get(to_index)
+	var from_color := colors[from_index]
+	var to_color := colors[to_index]
 
 	if not from_color and to_color:
 		colors[from_index] = to_color
@@ -173,32 +237,26 @@ func swap_colors(from_index: int, to_index: int) -> void:
 ## Copies color
 func copy_colors(from_index: int, to_index: int) -> void:
 	# Only allow copy of existing colors
-	if colors.has(from_index):
+	if colors[from_index] != null:
 		colors[to_index] = colors[from_index].duplicate()
 		colors[to_index].index = to_index
 
 
 ## True if all swatches are occupied
 func is_full() -> bool:
-	return self.colors.size() >= self.colors_max
+	return colors.size() >= colors_max
 
 
 ## True if palette has no colors
 func is_empty() -> bool:
-	return self.colors.size() == 0
+	return colors.size() == 0
 
 
 func has_theme_color(color: Color) -> bool:
-	for palette_color in colors.values():
+	for palette_color in colors:
 		if palette_color.color == color:
 			return true
 	return false
-
-
-## Sets name that is used to save the palette to disk
-func set_resource_name(new_resource_name: String) -> void:
-	# Store palette path name only with valid path characters
-	resource_name = Palette.strip_unvalid_characters(new_resource_name)
 
 
 static func strip_unvalid_characters(string_to_strip: String) -> String:

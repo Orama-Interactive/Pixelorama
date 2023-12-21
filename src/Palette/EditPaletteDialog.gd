@@ -36,7 +36,7 @@ func open(current_palette: Palette) -> void:
 		comment_input.text = current_palette.comment
 		width_input.value = current_palette.width
 		height_input.value = current_palette.height
-		path_input.text = current_palette.resource_path
+		path_input.text = current_palette.path
 
 		# Store original size so it can be compared with changed values
 		# and warning can be shown if it is reduced
