@@ -42,6 +42,7 @@ func open(current_palette: Palette) -> void:
 		width_input.value = current_palette.width
 		height_input.value = current_palette.height
 		path_input.text = current_palette.resource_path
+		export_file_dialog.current_file = current_palette.name
 
 		# Store original size so it can be compared with changed values
 		# and warning can be shown if it is reduced
