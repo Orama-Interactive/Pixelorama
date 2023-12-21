@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxhs8qy5ilufv"]
+[gd_scene load_steps=13 format=3 uid="uid://cxhs8qy5ilufv"]
 
 [ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferencesPanel.gd" id="1"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="2_1qu4x"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="2_uqbp6"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3_1w6gu"]
+[ext_resource type="Texture2D" uid="uid://d2m7enib3dplc" path="res://assets/graphics/reference_images/Select.png" id="3_ikegk"]
 [ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferenceEdit.gd" id="3_skjtb"]
+[ext_resource type="Texture2D" uid="uid://cedsyi8gf2n2i" path="res://assets/graphics/reference_images/Move.png" id="4_iskr4"]
+[ext_resource type="Texture2D" uid="uid://dtd43nvphu3jj" path="res://assets/graphics/reference_images/Rotate.png" id="5_p8kax"]
+[ext_resource type="Texture2D" uid="uid://nfabwr5mgdir" path="res://assets/graphics/reference_images/Scale.png" id="6_62aqj"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_unp5j"]
 action = &"move_frame_right"
@@ -12,7 +16,7 @@ action = &"move_frame_right"
 [sub_resource type="Shortcut" id="Shortcut_uucm4"]
 events = [SubResource("InputEventAction_unp5j")]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_w2sra"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_adw61"]
 
 [node name="Reference Images" type="PanelContainer"]
 custom_minimum_size = Vector2(300, 0)
@@ -101,30 +105,110 @@ size_flags_horizontal = 3
 [node name="TransformTools" type="HBoxContainer" parent="ScrollContainer/Container/Tools"]
 layout_mode = 2
 
-[node name="Select" type="Button" parent="ScrollContainer/Container/Tools/TransformTools"]
+[node name="Select" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Move the selected reference image to the right"
+focus_mode = 0
+mouse_default_cursor_shape = 2
 toggle_mode = true
 button_pressed = true
-button_group = SubResource("ButtonGroup_w2sra")
+button_group = SubResource("ButtonGroup_adw61")
+shortcut = SubResource("Shortcut_uucm4")
 
-[node name="Move" type="Button" parent="ScrollContainer/Container/Tools/TransformTools"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Select"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ikegk")
+
+[node name="Move" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Move the selected reference image to the right"
+focus_mode = 0
+mouse_default_cursor_shape = 2
 toggle_mode = true
-button_group = SubResource("ButtonGroup_w2sra")
+button_group = SubResource("ButtonGroup_adw61")
+shortcut = SubResource("Shortcut_uucm4")
 
-[node name="Rotate" type="Button" parent="ScrollContainer/Container/Tools/TransformTools"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Move"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_iskr4")
+
+[node name="Rotate" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Move the selected reference image to the right"
+focus_mode = 0
+mouse_default_cursor_shape = 2
 toggle_mode = true
-button_group = SubResource("ButtonGroup_w2sra")
+button_group = SubResource("ButtonGroup_adw61")
+shortcut = SubResource("Shortcut_uucm4")
 
-[node name="Scale" type="Button" parent="ScrollContainer/Container/Tools/TransformTools"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Rotate"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_p8kax")
+
+[node name="Scale" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Move the selected reference image to the right"
+focus_mode = 0
+mouse_default_cursor_shape = 2
 toggle_mode = true
-button_group = SubResource("ButtonGroup_w2sra")
+button_group = SubResource("ButtonGroup_adw61")
+shortcut = SubResource("Shortcut_uucm4")
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Scale"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_62aqj")
 
 [node name="ReferenceImages" type="ScrollContainer" parent="ScrollContainer/Container"]
 layout_mode = 2

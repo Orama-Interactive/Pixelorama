@@ -89,6 +89,16 @@ func _reset_properties() -> void:
 	references_container.queue_redraw()
 
 
+func _on_image_path_pressed() -> void:
+	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
+	if !ri:
+		return
+	if ri.image_path.is_empty():
+		print("No path for this image")
+		return
+	OS.shell_open(ri.image_path.get_base_dir())
+
+
 func _on_Monochrome_toggled(pressed: bool) -> void:
 	if _ignore_spinbox_changes:
 		return
