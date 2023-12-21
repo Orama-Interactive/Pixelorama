@@ -150,6 +150,8 @@ func _create_new_palette_from_current_sprite(
 	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from)
 
 
+## Fills [param new_palette] with the colors of the [param pixels] of the current sprite.
+## Used when creating a new palette from the UI.
 func _fill_new_palette_with_colors(
 	pixels: Array[Vector2i], new_palette: Palette, add_alpha_colors: bool, get_colors_from: int
 ):
@@ -435,8 +437,8 @@ func import_palette_from_path(path: String, make_copy := false) -> void:
 		Global.dialog_open(true)
 
 
+## Refer to app/core/gimppalette-load.c of the GNU Image Manipulation Program for the "living spec"
 func _import_gpl(path: String, text: String) -> Palette:
-	# Refer to app/core/gimppalette-load.c of the GIMP for the "living spec"
 	var result: Palette = null
 	var lines := text.split("\n")
 	var line_number := 0
@@ -445,7 +447,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 	var colors := PackedColorArray()
 
 	for line in lines:
-		# Check if valid Gimp Palette Library file
+		# Check if the file is a valid palette
 		if line_number == 0:
 			if not "GIMP Palette" in line:
 				return result
@@ -476,11 +478,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 		line_number += 1
 
 	if line_number > 0:
-		var height := ceili(colors.size() / 8.0)
-		result = Palette.new(palette_name, 8, height, comments)
-		for color in colors:
-			result.add_color(color)
-
+		return _fill_imported_palette_with_colors(path.get_basename().get_file(), colors, comments)
 	return result
 
 
@@ -503,11 +501,7 @@ func _import_pal_palette(path: String, text: String) -> Palette:
 		var color := Color(red, green, blue)
 		colors.append(color)
 
-	var height := ceili(colors.size() / 8.0)
-	result = Palette.new(path.get_basename().get_file(), 8, height)
-	for color in colors:
-		result.add_color(color)
-	return result
+	return _fill_imported_palette_with_colors(path.get_basename().get_file(), colors)
 
 
 func _import_image_palette(path: String, image: Image) -> Palette:
@@ -522,8 +516,16 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 			if !colors.has(color):
 				colors.append(color)
 
-	var palette_height := ceili(colors.size() / 8.0)
-	var result := Palette.new(path.get_basename().get_file(), 8, palette_height)
+	return _fill_imported_palette_with_colors(path.get_basename().get_file(), colors)
+
+
+## Fills a new [Palette] with colors. Used when importing files.
+## TODO: Somehow let the users choose the fixed height or width, instead of hardcoding 8.
+func _fill_imported_palette_with_colors(
+	palette_name: String, colors: PackedColorArray, comment := ""
+) -> Palette:
+	var height := ceili(colors.size() / 8.0)
+	var result := Palette.new(palette_name, 8, height, comment)
 	for color in colors:
 		result.add_color(color)
 
