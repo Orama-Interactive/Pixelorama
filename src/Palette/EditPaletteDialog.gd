@@ -3,7 +3,9 @@ extends ConfirmationDialog
 # Emitted when user confirms their changes
 signal saved(name, comment, width, height)
 signal deleted
+signal exported(path)
 
+const EXPORT_ACTION := "export"
 const DELETE_ACTION := "delete"
 const BIN_ACTION := "trash"
 
@@ -22,11 +24,13 @@ onready var path_input := $VBoxContainer/PaletteMetadata/Path
 onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
 onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
 onready var delete_confirmation := $DeleteConfirmation
+onready var export_file_dialog: FileDialog = $ExportFileDialog
 
 
 func _ready() -> void:
-	# Add delete button to edit palette dialog
+	# Add delete and export buttons to edit palette dialog
 	add_button(tr("Delete"), false, DELETE_ACTION)
+	add_button(tr("Export"), false, EXPORT_ACTION)
 	delete_confirmation.get_ok().text = tr("Delete Permanently")
 	delete_confirmation.add_button(tr("Move to Trash"), false, BIN_ACTION)
 
@@ -83,6 +87,8 @@ func _on_EditPaletteDialog_confirmed() -> void:
 func _on_EditPaletteDialog_custom_action(action: String) -> void:
 	if action == DELETE_ACTION:
 		delete_confirmation.popup_centered()
+	elif action == EXPORT_ACTION:
+		export_file_dialog.popup_centered()
 
 
 func _on_delete_confirmation_confirmed() -> void:
@@ -117,3 +123,7 @@ func _on_Name_text_changed(new_name):
 		# Disable ok button on empty name
 		if new_name == "":
 			get_ok().disabled = true
+
+
+func _on_ExportFileDialog_file_selected(path: String) -> void:
+	emit_signal("exported", path)

@@ -223,3 +223,11 @@ func _color_changed(_color: Color, button: int) -> void:
 			Palettes.right_selected_color = -1
 
 		palette_grid.unselect_swatch(button, swatch_to_unselect)
+
+
+func _on_EditPaletteDialog_exported(path: String) -> void:
+	var extension := path.get_extension()
+	match extension:
+		"png":
+			var image: Image = Palettes.current_palette.convert_to_image()
+			image.save_png(path)

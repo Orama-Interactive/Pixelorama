@@ -140,8 +140,10 @@ __meta__ = {
 }
 
 [node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
-margin_right = 170.0
-margin_bottom = 60.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 551.0
+margin_bottom = 499.0
 rect_min_size = Vector2( 170, 59.5 )
 
 [node name="Label2" type="Label" parent="DeleteConfirmation"]
@@ -155,6 +157,14 @@ text = "Delete Palette?"
 align = 1
 valign = 1
 
+[node name="ExportFileDialog" type="FileDialog" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 551.0
+margin_bottom = 499.0
+access = 2
+filters = PoolStringArray( "*.png ; PNG Image" )
+
 [connection signal="confirmed" from="." to="." method="_on_EditPaletteDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_EditPaletteDialog_custom_action"]
 [connection signal="popup_hide" from="." to="." method="_on_EditPaletteDialog_popup_hide"]
@@ -163,3 +173,4 @@ valign = 1
 [connection signal="value_changed" from="VBoxContainer/PaletteMetadata/Height" to="." method="_on_size_value_changed"]
 [connection signal="confirmed" from="DeleteConfirmation" to="." method="_on_delete_confirmation_confirmed"]
 [connection signal="custom_action" from="DeleteConfirmation" to="." method="_on_delete_confirmation_custom_action"]
+[connection signal="file_selected" from="ExportFileDialog" to="." method="_on_ExportFileDialog_file_selected"]

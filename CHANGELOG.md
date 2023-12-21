@@ -10,6 +10,9 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
 Built using Godot 3.5.2
 
+### Added
+- Exporting palettes to png files is now possible.
+
 ### Changed
 - When quitting, multiple save confirmation dialogs now appear, each for every project that has changes.
 - Loop through frames when clicking on go to previous/next frame buttons on the timeline.
