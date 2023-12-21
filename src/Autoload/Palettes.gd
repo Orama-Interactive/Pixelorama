@@ -249,7 +249,7 @@ func current_palette_copy_colors(from: int, to: int) -> void:
 
 
 func current_palette_insert_color(from: int, to: int) -> void:
-	var from_color := current_palette.colors[from]
+	var from_color: Palette.PaletteColor = current_palette.colors[from]
 	current_palette.remove_color(from)
 	current_palette.insert_color(to, from_color.color)
 	_save_palette()

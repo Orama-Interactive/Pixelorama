@@ -13,10 +13,12 @@ var path := ""
 var width := DEFAULT_WIDTH
 ## The height of the grid
 var height := DEFAULT_HEIGHT
-## Sparse colors dictionary - actual color position in the palette is determined by its index
-var colors: Array[PaletteColor] = []
+## Sparse colors dictionary of [int] and [PaletteColor]
+## Actual color position in the palette is determined by its index
+var colors := {}
 ## How many colors fit in palette grid
 var colors_max := 0
+
 
 class PaletteColor:
 	var color := Color.TRANSPARENT
@@ -47,7 +49,7 @@ func _init(
 	width = _width
 	height = _height
 	colors_max = _width * _height
-	colors = []
+	colors = {}
 
 
 func edit(new_name: String, new_width: int, new_height: int, new_comment: String) -> void:
@@ -73,20 +75,19 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 
 func _serialize() -> String:
 	var serialize_data := {
-		"name" : name,
-		"comment" : comment,
-		"colors" : [],
-		"width" : width,
-		"height" : height,
+		"name": name,
+		"comment": comment,
+		"colors": [],
+		"width": width,
+		"height": height,
 	}
 	for color in colors:
-		serialize_data.colors.push_back(color.serialize())
+		serialize_data.colors.push_back(colors[color].serialize())
 
 	return JSON.stringify(serialize_data, " ")
 
 
 func deserialize(json_string: String) -> void:
-	var result := Palette.new()
 	var test_json_conv := JSON.new()
 	var err := test_json_conv.parse(json_string)
 	if err != OK:  # If parse has errors
@@ -106,8 +107,9 @@ func deserialize(json_string: String) -> void:
 		if data.has("colors"):
 			for color_data in data.colors:
 				var color := str_to_var("Color" + color_data["color"]) as Color
-				var palette_color := PaletteColor.new(color, color_data["index"])
-				colors.append(palette_color)
+				var index := color_data["index"] as int
+				var palette_color := PaletteColor.new(color, index)
+				colors[index] = palette_color
 
 
 func save_to_file() -> Error:
@@ -122,17 +124,19 @@ func save_to_file() -> Error:
 ## Iterates all colors from lowest index and reindexes them so they start at zero index
 ## Remove trailing removes all colors that are over colors_max limit and thus don't fit into grid
 func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
+	var sorted_colors_indexes := colors.keys()
+	sorted_colors_indexes.sort()
 	var new_index := 0
-	for old_index in colors.size():
+	for old_index: int in sorted_colors_indexes:
 		# Color cannot fit into grid anymore - erase it
 		if remove_trailing and new_index >= colors_max:
-			colors.remove_at(old_index)
+			colors.erase(old_index)
 
 		# Move color to new lower index - erase it from its original index
 		elif new_index < old_index:
 			colors[new_index] = colors[old_index]
 			colors[new_index].index = new_index
-			colors.remove_at(old_index)
+			colors.erase(old_index)
 
 		new_index += 1
 
@@ -140,8 +144,10 @@ func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
 ## Adds difference of old and new width to color indexes
 ## so they remain on the same position as before resize
 func reindex_colors_on_width_increase(old_width: int) -> void:
-	var new_colors := []
-	for old_index in colors.size():
+	var sorted_colors_indexes := colors.keys()
+	sorted_colors_indexes.sort()
+	var new_colors := {}
+	for old_index: int in sorted_colors_indexes:
 		var new_index := old_index + (width - old_width) * (old_index / old_width)
 		new_colors[new_index] = colors[old_index]
 
@@ -159,19 +165,14 @@ func add_color(new_color: Color, start_index := 0) -> void:
 
 	# Find the first empty index since start index and insert a new color
 	for i in range(start_index, colors_max):
-		if i >= colors.size():
-			colors.append(PaletteColor.new(new_color, i))
-			break
-		if colors[i] == null:
+		if not colors.has(i):
 			colors[i] = PaletteColor.new(new_color, i)
 			break
 
 
 ## Returns color at index or null if no color exists
 func get_color(index: int):
-	if index >= colors.size():
-		return null
-	var palette_color := colors[index]
+	var palette_color: PaletteColor = colors.get(index)
 	if palette_color != null:
 		return palette_color.color
 	return null
@@ -179,13 +180,13 @@ func get_color(index: int):
 
 ## Changes color data
 func set_color(index: int, new_color: Color) -> void:
-	if is_instance_valid(colors[index]):
+	if colors.has(index):
 		colors[index].color = new_color
 
 
 ## Removes a color at the specified index
 func remove_color(index: int) -> void:
-	colors[index] = null
+	colors.erase(index)
 
 
 ## Inserts a color to the specified index
@@ -216,8 +217,8 @@ func move_right(index: int) -> void:
 
 ## Swaps two colors
 func swap_colors(from_index: int, to_index: int) -> void:
-	var from_color := colors[from_index]
-	var to_color := colors[to_index]
+	var from_color: PaletteColor = colors.get(from_index)
+	var to_color: PaletteColor = colors.get(to_index)
 
 	if not from_color and to_color:
 		colors[from_index] = to_color
@@ -253,7 +254,7 @@ func is_empty() -> bool:
 
 
 func has_theme_color(color: Color) -> bool:
-	for palette_color in colors:
+	for palette_color in colors.values():
 		if palette_color.color == color:
 			return true
 	return false
