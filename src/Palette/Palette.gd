@@ -74,13 +74,7 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 
 
 func _serialize() -> String:
-	var serialize_data := {
-		"name": name,
-		"comment": comment,
-		"colors": [],
-		"width": width,
-		"height": height,
-	}
+	var serialize_data := {"comment": comment, "colors": [], "width": width, "height": height}
 	for color in colors:
 		serialize_data.colors.push_back(colors[color].serialize())
 
@@ -100,16 +94,18 @@ func deserialize(json_string: String) -> void:
 	var data = test_json_conv.get_data()
 	if not typeof(data) == TYPE_DICTIONARY:
 		return
-	if data.has("name"):  # If data is 'valid' palette file
-		name = data.name
-		if data.has("comment"):
-			comment = data.comment
-		if data.has("colors"):
-			for color_data in data.colors:
-				var color := str_to_var("Color" + color_data["color"]) as Color
-				var index := color_data["index"] as int
-				var palette_color := PaletteColor.new(color, index)
-				colors[index] = palette_color
+	if data.has("comment"):
+		comment = data.comment
+	if data.has("colors"):
+		for color_data in data.colors:
+			var color := str_to_var("Color" + color_data["color"]) as Color
+			var index := color_data["index"] as int
+			var palette_color := PaletteColor.new(color, index)
+			colors[index] = palette_color
+	if data.has("width"):
+		width = data.width
+	if data.has("height"):
+		height = data.height
 
 
 func save_to_file() -> Error:
