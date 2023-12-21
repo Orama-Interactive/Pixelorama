@@ -53,13 +53,11 @@ func _save_palette(palette: Palette = current_palette) -> void:
 	_ensure_palette_directory_exists()
 	if not is_instance_valid(palette):
 		return
-	# Save old resource name and set new resource name
-	#var old_resource_name := palette.resource_name
-	#palette.set_resource_name(palette.name)
-	# If resource name changed remove the old palette file
-	#if old_resource_name != palette.resource_name:
-		#var old_palette := palettes_write_path.path_join(old_resource_name) + ".tres"
-		#_delete_palette(old_palette)
+	var old_name := palette.path.get_basename().get_file()
+	# If the palette's name has changed, remove the old palette file
+	if old_name != palette.name:
+		DirAccess.remove_absolute(palette.path)
+		palettes.erase(old_name)
 
 	# Save palette
 	var save_path := palettes_write_path.path_join(palette.name) + ".json"
@@ -411,6 +409,7 @@ func import_palette_from_path(path: String, make_copy := false) -> void:
 			if FileAccess.file_exists(path):
 				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = Palette.new(path.get_basename().get_file())
+				palette.path = path
 				palette.deserialize(text)
 
 	if palette:
