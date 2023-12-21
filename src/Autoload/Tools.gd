@@ -18,6 +18,7 @@ var pen_pressure := 1.0
 var pen_pressure_min := 0.2
 var pen_pressure_max := 0.8
 var pressure_buf := [0, 0]  # past pressure value buffer
+var pen_inverted := false
 var mouse_velocity := 1.0
 var mouse_velocity_min_thres := 0.2
 var mouse_velocity_max_thres := 0.8
@@ -485,16 +486,18 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
 
-	if event.is_action_pressed("activate_left_tool") and _active_button == -1:
+	if event.is_action_pressed("activate_left_tool") and _active_button == -1 and not pen_inverted:
 		_active_button = MOUSE_BUTTON_LEFT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
 	elif event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_LEFT:
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
-	elif event.is_action_pressed("activate_right_tool") and _active_button == -1:
+	elif ((event.is_action_pressed("activate_right_tool") and _active_button == -1 and not pen_inverted)
+			or (event.is_action_pressed("activate_left_tool") and _active_button == -1 and pen_inverted)):
 		_active_button = MOUSE_BUTTON_RIGHT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
-	elif event.is_action_released("activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT:
+	elif ((event.is_action_released("activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT)
+			or (event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_RIGHT)):
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
 
@@ -511,6 +514,8 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		pressure_buf.push_front(pen_pressure)
 		pen_pressure = remap(pen_pressure, pen_pressure_min, pen_pressure_max, 0.0, 1.0)
 		pen_pressure = clampf(pen_pressure, 0.0, 1.0)
+		
+		pen_inverted = event.pen_inverted
 
 		mouse_velocity = event.velocity.length() / mouse_velocity_max
 		mouse_velocity = remap(
