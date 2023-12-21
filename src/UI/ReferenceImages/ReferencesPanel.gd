@@ -100,14 +100,6 @@ func _update_ui() -> void:
 	else:
 		%MoveImageRightBtn.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 
-	# Update the buttons to show which one is pressed
-	if list_btn_group.get_buttons().size() > 0:
-		# First we loop through the buttons to "unpress them all"
-		for b: Button in list_btn_group.get_buttons():
-			b.set_pressed_no_signal(false)
-		# Then we get the wanted button and we press it
-		list_btn_group.get_buttons()[index + 1].set_pressed_no_signal(true)
-
 	# Update the remove button
 	remove_btn.disabled = index == -1
 	if remove_btn.disabled:
@@ -124,6 +116,13 @@ func _on_reference_image_button_pressed(button: Button) -> void:
 # In case the signal is emitted for another node and not from a pressed button
 func _on_reference_image_changed(index: int) -> void:
 	_update_ui()
+	# Update the buttons to show which one is pressed
+	if list_btn_group.get_buttons().size() > 0:
+		# First we loop through the buttons to "unpress them all"
+		for b: Button in list_btn_group.get_buttons():
+			b.set_pressed_no_signal(false)
+		# Then we get the wanted button and we press it
+		list_btn_group.get_buttons()[index + 1].set_pressed_no_signal(true)
 
 
 func _on_references_changed():

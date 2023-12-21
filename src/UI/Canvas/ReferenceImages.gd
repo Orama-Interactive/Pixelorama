@@ -4,9 +4,9 @@ extends Node2D
 
 signal reference_image_changed(index: int)
 
-enum Mode { Select, Move, Rotate, Scale }
+enum Mode { SELECT, MOVE, ROTATE, SCALE }
 
-var mode: Mode = Mode.Select
+var mode: Mode = Mode.SELECT
 
 var index: int:
 	get:
@@ -127,7 +127,7 @@ func _input(event: InputEvent) -> void:
 		if dragging:
 			var text := ""
 
-			if mode == Mode.Select:
+			if mode == Mode.SELECT:
 				# Scale
 				if Input.is_action_pressed("reference_scale"):
 					scale_reference_image(local_mouse_pos, ri)
@@ -147,10 +147,10 @@ func _input(event: InputEvent) -> void:
 				else:
 					move_reference_image(local_mouse_pos, ri)
 					text = str("Moving to: ", og_pos.floor(), " -> ", ri.position.floor())
-			elif mode == Mode.Move:
+			elif mode == Mode.MOVE:
 				move_reference_image(local_mouse_pos, ri)
 				text = str("Moving to: ", og_pos.floor(), " -> ", ri.position.floor())
-			elif mode == Mode.Rotate:
+			elif mode == Mode.ROTATE:
 				rotate_reference_image(local_mouse_pos, ri)
 				text = str(
 					"Rotating: ",
@@ -159,7 +159,7 @@ func _input(event: InputEvent) -> void:
 					floorf(rad_to_deg(ri.rotation)),
 					"°"
 				)
-			elif mode == Mode.Scale:
+			elif mode == Mode.SCALE:
 				scale_reference_image(local_mouse_pos, ri)
 				text = str("Moving: ", (og_scale * 100).floor(), " -> ", (ri.scale * 100).floor())
 

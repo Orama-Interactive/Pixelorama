@@ -1,7 +1,7 @@
 extends Button
 
 
-func _get_drag_data(at_position: Vector2) -> Variant:
+func _get_drag_data(_at_position: Vector2) -> Variant:
 	var index := get_index() - 1
 	# If the index < 0 then that means this button is the "reset button"
 	if index < 0:
@@ -14,7 +14,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 	return data
 
 
-func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	if typeof(data) != TYPE_ARRAY:
 		Global.reference_panel.drag_highlight.visible = false
 		return false
@@ -47,7 +47,7 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	return true
 
 
-func _drop_data(at_position: Vector2, data: Variant) -> void:
+func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	var from_index: int = data[1]
 	var to_index := get_index()
 
