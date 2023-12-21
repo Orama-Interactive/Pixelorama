@@ -105,10 +105,10 @@ func _create_new_empty_palette(
 func _create_new_palette_from_current_palette(palette_name: String, comment: String) -> void:
 	if !current_palette:
 		return
-	var new_palette := current_palette.duplicate() as Palette
+	var new_palette := current_palette.duplicate()
 	new_palette.name = palette_name
 	new_palette.comment = comment
-	new_palette.set_resource_name(palette_name)
+	new_palette.path = palettes_write_path.path_join(new_palette.name) + ".json"
 	_save_palette(new_palette)
 	palettes[palette_name] = new_palette
 	select_palette(palette_name)

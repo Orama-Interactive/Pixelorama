@@ -73,6 +73,13 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 		reindex_colors_on_width_increase(old_width)
 
 
+func duplicate() -> Palette:
+	var new_palette := Palette.new(name, width, height, comment)
+	var new_colors := colors.duplicate(true)
+	new_palette.colors = new_colors
+	return new_palette
+
+
 func _serialize() -> String:
 	var serialize_data := {"comment": comment, "colors": [], "width": width, "height": height}
 	for color in colors:
