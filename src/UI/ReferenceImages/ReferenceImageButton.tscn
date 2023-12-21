@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://by3300fom3plf"]
+
+[ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" id="1_nf0dd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53xjd"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tuwm6"]
+
+[node name="ReferenceImageButton" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+theme_override_styles/pressed = SubResource("StyleBoxFlat_53xjd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tuwm6")
+toggle_mode = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("1_nf0dd")

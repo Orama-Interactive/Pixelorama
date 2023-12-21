@@ -873,8 +873,8 @@ func _update_layer_ui() -> void:
 
 ## Change the current reference image
 func set_reference_image_index(new_index: int) -> void:
-	reference_index = new_index
-	Global.canvas.reference_image_container.update_index(new_index)
+	reference_index = clamp(-1, new_index, reference_images.size() - 1)
+	Global.canvas.reference_image_container.update_index(reference_index)
 
 
 ## Returns the reference image based on reference_index
@@ -887,3 +887,10 @@ func get_reference_image(index: int) -> ReferenceImage:
 	if index < 0 or index > reference_images.size() - 1:
 		return null
 	return reference_images[index]
+
+
+## Reorders the position of the reference image in the tree / reference_images array
+func reorder_reference_image(from: int, to: int) -> void:
+	var ri : ReferenceImage = reference_images.pop_at(from)
+	reference_images.insert(to, ri)
+	Global.canvas.reference_image_container.move_child(ri, to)
