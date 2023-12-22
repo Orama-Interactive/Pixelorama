@@ -1,6 +1,9 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
+signal palette_selected(palette_name: String)
+signal new_palette_imported()
+
 ## Presets for creating a new palette
 enum NewPalettePresetType {
 	EMPTY = 0, FROM_CURRENT_PALETTE = 1, FROM_CURRENT_SPRITE = 2, FROM_CURRENT_SELECTION = 3
@@ -35,7 +38,7 @@ func select_palette(palette_name: String) -> void:
 	current_palette = palettes.get(palette_name)
 	_clear_selected_colors()
 	Global.config_cache.set_value("data", "last_palette", current_palette.name)
-	Global.palette_panel.select_palette(palette_name)
+	palette_selected.emit(palette_name)
 
 
 func is_any_palette_selected() -> bool:
@@ -427,7 +430,7 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 			if palette.name == default_palette_name:
 				select_palette(palette.name)
 		else:
-			Global.palette_panel.setup_palettes_selector()
+			new_palette_imported.emit()
 			select_palette(palette.name)
 	else:
 		Global.error_dialog.set_text(

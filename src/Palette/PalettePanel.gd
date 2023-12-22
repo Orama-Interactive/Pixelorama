@@ -22,6 +22,8 @@ var edited_swatch_color := Color.TRANSPARENT
 
 
 func _ready() -> void:
+	Palettes.palette_selected.connect(select_palette)
+	Palettes.new_palette_imported.connect(setup_palettes_selector)
 	Tools.color_changed.connect(_color_changed)
 
 	setup_palettes_selector()

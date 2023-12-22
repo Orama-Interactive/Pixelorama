@@ -19,6 +19,7 @@ var swatch_size := DEFAULT_SWATCH_SIZE
 
 func _ready() -> void:
 	swatch_size = Global.config_cache.get_value("palettes", "swatch_size", DEFAULT_SWATCH_SIZE)
+	Tools.color_changed.connect(find_and_select_color)
 
 
 func set_palette(new_palette: Palette) -> void:
@@ -84,7 +85,9 @@ func scroll_palette(origin: Vector2i) -> void:
 	draw_palette()
 
 
-func find_and_select_color(mouse_button: int, target_color: Color) -> void:
+## Called when the color changes, either the left or the right, determined by [param mouse_button].
+## If current palette has [param target_color] as a [Color], then select it.
+func find_and_select_color(target_color: Color, mouse_button: int) -> void:
 	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	for color_ind in swatches.size():
 		if target_color.is_equal_approx(swatches[color_ind].color):
