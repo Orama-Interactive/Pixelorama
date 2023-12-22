@@ -2,7 +2,7 @@
 extends Node
 
 signal palette_selected(palette_name: String)
-signal new_palette_imported()
+signal new_palette_imported
 
 ## Presets for creating a new palette
 enum NewPalettePresetType {
