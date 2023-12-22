@@ -61,7 +61,7 @@ func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 		queue_redraw()
 
 
-func _get_drag_data(_position: Vector2):
+func _get_drag_data(_position: Vector2) -> Variant:
 	var data = null
 	if not empty:
 		var drag_icon: PaletteSwatch = self.duplicate()

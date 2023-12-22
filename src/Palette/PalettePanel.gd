@@ -206,7 +206,7 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 
 
 ## Saves edited swatch to palette file when color selection dialog is closed
-func _on_HiddenColorPickerButton_popup_closed():
+func _on_HiddenColorPickerButton_popup_closed() -> void:
 	Palettes.current_palette_set_color(edited_swatch_index, edited_swatch_color)
 
 

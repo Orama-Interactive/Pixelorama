@@ -52,7 +52,7 @@ func _on_HSlider_value_changed(value: int) -> void:
 	scroll_grid()
 
 
-func _on_PaletteGrid_gui_input(event) -> void:
+func _on_PaletteGrid_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 			drag_started = true

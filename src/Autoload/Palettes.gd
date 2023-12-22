@@ -123,7 +123,7 @@ func _create_new_palette_from_current_selection(
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
-):
+) -> void:
 	var new_palette := Palette.new(palette_name, width, height, comment)
 	var current_project := Global.current_project
 	var pixels: Array[Vector2i] = []
@@ -142,7 +142,7 @@ func _create_new_palette_from_current_sprite(
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
-):
+) -> void:
 	var new_palette := Palette.new(palette_name, width, height, comment)
 	var current_project := Global.current_project
 	var pixels: Array[Vector2i] = []
@@ -156,7 +156,7 @@ func _create_new_palette_from_current_sprite(
 ## Used when creating a new palette from the UI.
 func _fill_new_palette_with_colors(
 	pixels: Array[Vector2i], new_palette: Palette, add_alpha_colors: bool, get_colors_from: int
-):
+) -> void:
 	var current_project := Global.current_project
 	var cels: Array[BaseCel] = []
 	match get_colors_from:
@@ -421,7 +421,7 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 		if make_copy:
 			_save_palette(palette)  # Makes a copy of the palette
 		palettes[palette.name] = palette
-		var default_palette_name = Global.config_cache.get_value(
+		var default_palette_name: String = Global.config_cache.get_value(
 			"data", "last_palette", DEFAULT_PALETTE_NAME
 		)
 		if is_initialising:
@@ -495,10 +495,10 @@ func _import_pal_palette(path: String, text: String) -> Palette:
 	var num_colors := int(lines[2])
 
 	for i in range(3, num_colors + 3):
-		var color_data = lines[i].split(" ")
-		var red: float = color_data[0].to_float() / 255.0
-		var green: float = color_data[1].to_float() / 255.0
-		var blue: float = color_data[2].to_float() / 255.0
+		var color_data := lines[i].split(" ")
+		var red := color_data[0].to_float() / 255.0
+		var green := color_data[1].to_float() / 255.0
+		var blue := color_data[2].to_float() / 255.0
 
 		var color := Color(red, green, blue)
 		colors.append(color)
