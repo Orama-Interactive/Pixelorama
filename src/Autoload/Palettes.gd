@@ -481,7 +481,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 		line_number += 1
 
 	if line_number > 0:
-		return _fill_imported_palette_with_colors(path.get_basename().get_file(), colors, comments)
+		return _fill_imported_palette_with_colors(palette_name, colors, comments)
 	return result
 
 
