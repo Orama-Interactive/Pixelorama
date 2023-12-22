@@ -1,4 +1,3 @@
-# gdlint: ignore=max-public-methods
 extends Node
 
 signal palette_selected(palette_name: String)
