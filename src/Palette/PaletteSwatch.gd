@@ -1,9 +1,9 @@
 class_name PaletteSwatch
 extends ColorRect
 
-signal pressed(mouse_button)
-signal double_clicked(mouse_button, position)
-signal dropped(source_index, new_index)
+signal pressed(mouse_button: int)
+signal double_clicked(mouse_button: int, position: Vector2)
+signal dropped(source_index: int, new_index: int)
 
 const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 

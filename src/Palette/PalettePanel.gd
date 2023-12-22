@@ -17,7 +17,7 @@ var edited_swatch_color := Color.TRANSPARENT
 @onready var edit_palette_dialog := $"%EditPaletteDialog"
 @onready var create_palette_dialog := $"%CreatePaletteDialog"
 
-# Color picker button itself is hidden but its popup is used to edit color swatches
+## This color picker button itself is hidden, but its popup is used to edit color swatches.
 @onready var hidden_color_picker := $"%HiddenColorPickerButton" as ColorPickerButton
 
 

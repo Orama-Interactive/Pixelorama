@@ -80,7 +80,7 @@ func _on_PaletteScroll_gui_input(event: InputEvent) -> void:
 			if event.ctrl_pressed:
 				palette_grid.change_swatch_size(Vector2i.ONE)
 			else:
-				scroll_vector = Vector2.LEFT if event.shift_pressed else Vector2.UP
+				scroll_vector = Vector2i.LEFT if event.shift_pressed else Vector2i.UP
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			if event.ctrl_pressed:
 				palette_grid.change_swatch_size(-Vector2i.ONE)

@@ -1,9 +1,9 @@
 class_name PaletteGrid
 extends GridContainer
 
-signal swatch_pressed(mouse_button, index)
-signal swatch_double_clicked(mouse_button, index, position)
-signal swatch_dropped(source_index, target_index)
+signal swatch_pressed(mouse_button: int, index: int)
+signal swatch_double_clicked(mouse_button: int, index: int, position: Vector2)
+signal swatch_dropped(source_index: int, target_index: int)
 
 const PALETTE_SWATCH_SCENE := preload("res://src/Palette/PaletteSwatch.tscn")
 const DEFAULT_SWATCH_SIZE := Vector2(26, 26)
