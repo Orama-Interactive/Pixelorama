@@ -87,9 +87,6 @@ func change_theme(id: int) -> void:
 	for child in Global.preferences_dialog.get_node("Popups").get_children():
 		child.theme = theme
 
-	# Sets disabled theme color on palette swatches
-	Global.palette_panel.reset_empty_palette_swatches_color()
-
 
 func change_clear_color() -> void:
 	var clear_color: Color = Global.control.theme.get_color("clear_color", "Misc")
