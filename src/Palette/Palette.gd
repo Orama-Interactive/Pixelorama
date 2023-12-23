@@ -247,6 +247,40 @@ func copy_colors(from_index: int, to_index: int) -> void:
 		colors[to_index].index = to_index
 
 
+func reverse_colors() -> void:
+	var reversed_colors := colors.values()
+	reversed_colors.reverse()
+	colors.clear()
+	for i in reversed_colors.size():
+		reversed_colors[i].index = i
+		colors[i] = reversed_colors[i]
+
+
+func sort(option: Palettes.SortOptions) -> void:
+	var sorted_colors := colors.values()
+	var sort_method: Callable
+	match option:
+		Palettes.SortOptions.HUE:
+			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.h < b.color.h
+		Palettes.SortOptions.SATURATION:
+			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.s < b.color.s
+		Palettes.SortOptions.VALUE:
+			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.v < b.color.v
+		Palettes.SortOptions.RED:
+			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.r < b.color.r
+		Palettes.SortOptions.GREEN:
+			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.g < b.color.g
+		Palettes.SortOptions.BLUE:
+			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.b < b.color.b
+		Palettes.SortOptions.ALPHA:
+			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.a < b.color.a
+	sorted_colors.sort_custom(sort_method)
+	colors.clear()
+	for i in sorted_colors.size():
+		sorted_colors[i].index = i
+		colors[i] = sorted_colors[i]
+
+
 ## True if all swatches are occupied
 func is_full() -> bool:
 	return colors.size() >= colors_max

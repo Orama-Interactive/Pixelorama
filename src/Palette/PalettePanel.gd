@@ -13,6 +13,7 @@ var edited_swatch_color := Color.TRANSPARENT
 
 @onready var add_color_button := $"%AddColor"
 @onready var delete_color_button := $"%DeleteColor"
+@onready var sort_button := %Sort as MenuButton
 
 @onready var edit_palette_dialog := $"%EditPaletteDialog"
 @onready var create_palette_dialog := $"%CreatePaletteDialog"
@@ -22,9 +23,20 @@ var edited_swatch_color := Color.TRANSPARENT
 
 
 func _ready() -> void:
+	sort_button.get_popup().add_item("Reverse colors", Palettes.SortOptions.REVERSE)
+	sort_button.get_popup().add_separator()
+	sort_button.get_popup().add_item("Sort by hue", Palettes.SortOptions.HUE)
+	sort_button.get_popup().add_item("Sort by saturation", Palettes.SortOptions.SATURATION)
+	sort_button.get_popup().add_item("Sort by value", Palettes.SortOptions.VALUE)
+	sort_button.get_popup().add_separator()
+	sort_button.get_popup().add_item("Sort by red", Palettes.SortOptions.RED)
+	sort_button.get_popup().add_item("Sort by green", Palettes.SortOptions.GREEN)
+	sort_button.get_popup().add_item("Sort by blue", Palettes.SortOptions.BLUE)
+	sort_button.get_popup().add_item("Sort by alpha", Palettes.SortOptions.ALPHA)
 	Palettes.palette_selected.connect(select_palette)
 	Palettes.new_palette_imported.connect(setup_palettes_selector)
 	Tools.color_changed.connect(_color_changed)
+	sort_button.get_popup().id_pressed.connect(sort_pressed)
 
 	setup_palettes_selector()
 	redraw_current_palette()
@@ -73,9 +85,11 @@ func redraw_current_palette() -> void:
 		Palettes.select_palette(Palettes.current_palette.name)
 		add_color_button.show()
 		delete_color_button.show()
+		sort_button.show()
 	else:
 		add_color_button.hide()
 		delete_color_button.hide()
+		sort_button.hide()
 
 
 func toggle_add_delete_buttons() -> void:
@@ -85,10 +99,13 @@ func toggle_add_delete_buttons() -> void:
 	else:
 		add_color_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 	delete_color_button.disabled = Palettes.current_palette_is_empty()
+	sort_button.disabled = Palettes.current_palette_is_empty()
 	if delete_color_button.disabled:
 		delete_color_button.mouse_default_cursor_shape = CURSOR_FORBIDDEN
+		sort_button.mouse_default_cursor_shape = CURSOR_FORBIDDEN
 	else:
 		delete_color_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
+		sort_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 
 
 func _on_AddPalette_pressed() -> void:
@@ -132,6 +149,11 @@ func _on_DeleteColor_gui_input(event: InputEvent) -> void:
 				Palettes.current_palette_delete_color(selected_color_index)
 				redraw_current_palette()
 				toggle_add_delete_buttons()
+
+
+func sort_pressed(id: Palettes.SortOptions) -> void:
+	Palettes.current_palette_sort_colors(id)
+	redraw_current_palette()
 
 
 func _on_CreatePaletteDialog_saved(

@@ -3,6 +3,7 @@ extends Node
 signal palette_selected(palette_name: String)
 signal new_palette_imported
 
+enum SortOptions { REVERSE, HUE, SATURATION, VALUE, RED, GREEN, BLUE, ALPHA }
 ## Presets for creating a new palette
 enum NewPalettePresetType {
 	EMPTY = 0, FROM_CURRENT_PALETTE = 1, FROM_CURRENT_SPRITE = 2, FROM_CURRENT_SELECTION = 3
@@ -237,6 +238,14 @@ func current_palette_set_color(index: int, color: Color) -> void:
 
 func current_palette_delete_color(index: int) -> void:
 	current_palette.remove_color(index)
+	_save_palette()
+
+
+func current_palette_sort_colors(id: SortOptions) -> void:
+	if id == SortOptions.REVERSE:
+		current_palette.reverse_colors()
+	else:
+		current_palette.sort(id)
 	_save_palette()
 
 
