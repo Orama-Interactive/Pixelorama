@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2023-12-23 17:15\n"
+"PO-Revision-Date: 2023-12-23 23:27\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -169,6 +169,9 @@ msgstr ""
 
 msgid "Crop Image"
 msgstr "Tondi bildon"
+
+msgid "Trim Image"
+msgstr ""
 
 msgid "Resize Canvas"
 msgstr "Ŝanĝi la dimensiojn de la tavolo"
