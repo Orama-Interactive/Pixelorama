@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2023-12-23 17:14\n"
+"PO-Revision-Date: 2023-12-23 23:27\n"
 
 msgid "OK"
 msgstr "Goed"
@@ -168,6 +168,9 @@ msgid "Percentage"
 msgstr ""
 
 msgid "Crop Image"
+msgstr ""
+
+msgid "Trim Image"
 msgstr ""
 
 msgid "Resize Canvas"
