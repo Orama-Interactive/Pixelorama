@@ -86,6 +86,15 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
+[node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/LeftColorButton/LeftColorRect" instance=ExtResource("3_vjkb0")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ColorSwitch" type="TextureButton" parent="ScrollContainer/VerticalContainer/ColorButtons" groups=["UIButtons"]]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -113,6 +122,15 @@ offset_right = 40.0
 offset_bottom = 30.0
 mouse_filter = 2
 metadata/_edit_lock_ = true
+
+[node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/RightColorButton/RightColorRect" instance=ExtResource("3_vjkb0")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorButtonsVertical" type="VBoxContainer" parent="ScrollContainer/VerticalContainer/ColorButtons"]
 layout_mode = 2
