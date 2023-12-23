@@ -210,9 +210,9 @@ func _dim_checker() -> void:
 	if image == null:
 		return
 	if image.is_empty() or image.is_invisible():
-		transparent_checker.self_modulate.a = 0.5
+		transparent_checker.visible = false
 	else:
-		transparent_checker.self_modulate.a = 1.0
+		transparent_checker.visible = true
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
