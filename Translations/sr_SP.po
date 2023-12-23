@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2023-12-23 17:15\n"
+"PO-Revision-Date: 2023-12-23 23:27\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -169,6 +169,9 @@ msgstr "Посто"
 
 msgid "Crop Image"
 msgstr "Исеци слику"
+
+msgid "Trim Image"
+msgstr ""
 
 msgid "Resize Canvas"
 msgstr "Промијените величину канваса"
