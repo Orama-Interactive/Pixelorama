@@ -18,4 +18,5 @@ size_flags_horizontal = 3
 
 [node name="ToolButtons" type="HFlowContainer" parent="PanelContainer"]
 layout_mode = 2
+alignment = 1
 script = ExtResource("1")
