@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-12-23 18:14\n"
+"PO-Revision-Date: 2023-12-23 19:14\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -253,7 +253,7 @@ msgid "Reset"
 msgstr "Atur ulang"
 
 msgid "Use Current Frame"
-msgstr "Gunakan Bingkai Saat Ini"
+msgstr "Gunakan Bingkai Ini"
 
 msgid "Reset Mask"
 msgstr "Atur ulang Mask"
@@ -313,7 +313,7 @@ msgid "Tallscreen"
 msgstr "Layar tinggi"
 
 msgid "Mirror View"
-msgstr "Tampilan Cermin"
+msgstr "Cerminkan Tampilan"
 
 msgid "Show Grid"
 msgstr "Tampilkan Kisi"
@@ -333,7 +333,7 @@ msgstr "Tampilkan Panduan Tetikus"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr "Tampilkan Efek Lapisan"
+msgstr "Munculkan Efek Lapisan"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -1921,19 +1921,19 @@ msgid "Add 3D Layer"
 msgstr "Tambah Lapisan 3D"
 
 msgid "Remove current layer"
-msgstr "Hapus lapisan saat ini"
+msgstr "Hapus lapisan ini"
 
 msgid "Move up the current layer"
-msgstr "Geser ke atas lapisan ini"
+msgstr "Geser lapisan ini ke atas"
 
 msgid "Move down the current layer"
-msgstr "Geser ke bawah lapisan ini"
+msgstr "Geser lapisan ini ke bawah"
 
 msgid "Clone current layer"
 msgstr "Duplikatkan lapisan ini"
 
 msgid "Merge current layer with the one below"
-msgstr "Satukan lapisan ini dengan yang di bawah"
+msgstr "Leburkan lapisan ini dengan yang di bawah"
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
@@ -2088,10 +2088,10 @@ msgid "Redo: Remove Layer"
 msgstr "Ulangi: Hapus lapisan"
 
 msgid "Undo: Merge Layer"
-msgstr "Urungkan: Satukan lapisan"
+msgstr "Urungkan: Leburkan lapisan"
 
 msgid "Redo: Merge Layer"
-msgstr "Ulangi: Satukan lapisan"
+msgstr "Ulangi: Leburkan lapisan"
 
 msgid "Undo: Change Layer Order"
 msgstr "Urungkan: Perubahan urutan lapisan"
