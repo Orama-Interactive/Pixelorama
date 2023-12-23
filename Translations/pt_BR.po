@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-12-23 17:15\n"
+"PO-Revision-Date: 2023-12-23 23:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -171,6 +171,9 @@ msgstr "Percentagem"
 
 msgid "Crop Image"
 msgstr "Cortar imagem"
+
+msgid "Trim Image"
+msgstr ""
 
 msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
