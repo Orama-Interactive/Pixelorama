@@ -643,6 +643,10 @@ crop_image={
 "deadzone": 0.5,
 "events": []
 }
+trim_image={
+"deadzone": 0.5,
+"events": []
+}
 mirror_image={
 "deadzone": 0.5,
 "events": []

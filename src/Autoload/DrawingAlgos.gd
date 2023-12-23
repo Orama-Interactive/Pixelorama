@@ -456,8 +456,6 @@ func color_distance(c1: Color, c2: Color) -> float:
 
 
 # Image effects
-
-
 func scale_image(width: int, height: int, interpolation: int) -> void:
 	general_do_scale(width, height)
 
@@ -519,7 +517,27 @@ func center(indices: Array) -> void:
 	project.undo_redo.commit_action()
 
 
+## Sets the size of the project to be the same as the size of the active selection.
 func crop_image() -> void:
+	if not Global.current_project.has_selection:
+		return
+	Global.canvas.selection.transform_content_confirm()
+	var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
+	general_do_scale(rect.size.x, rect.size.y)
+	# Loop through all the cels to crop them
+	for f in Global.current_project.frames:
+		for cel in f.cels:
+			if not cel is PixelCel:
+				continue
+			var sprite := cel.get_image().get_region(rect)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
+
+	general_undo_scale()
+
+
+## Automatically makes the project smaller by looping through all of the cels and
+## trimming out the pixels that are transparent in all cels.
+func trim_image() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var used_rect := Rect2i()
 	for f in Global.current_project.frames:
@@ -542,7 +560,7 @@ func crop_image() -> void:
 	var width := used_rect.size.x
 	var height := used_rect.size.y
 	general_do_scale(width, height)
-	# Loop through all the cels to crop them
+	# Loop through all the cels to trim them
 	for f in Global.current_project.frames:
 		for cel in f.cels:
 			if not cel is PixelCel:

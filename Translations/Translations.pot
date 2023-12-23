@@ -159,6 +159,9 @@ msgstr ""
 msgid "Crop Image"
 msgstr ""
 
+msgid "Trim Image"
+msgstr ""
+
 msgid "Resize Canvas"
 msgstr ""
 
