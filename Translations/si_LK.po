@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Sinhala\n"
 "Language: si_LK\n"
-"PO-Revision-Date: 2023-12-23 17:15\n"
+"PO-Revision-Date: 2023-12-23 23:27\n"
 
 msgid "OK"
 msgstr "හරි"
@@ -168,6 +168,9 @@ msgid "Percentage"
 msgstr ""
 
 msgid "Crop Image"
+msgstr ""
+
+msgid "Trim Image"
 msgstr ""
 
 msgid "Resize Canvas"
