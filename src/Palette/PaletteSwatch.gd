@@ -34,12 +34,12 @@ func set_swatch_size(swatch_size: Vector2) -> void:
 func _draw() -> void:
 	if not empty:
 		# Black border around swatches with a color
-		draw_rect(Rect2(Vector2.ZERO, size), Color.BLACK, false, 1)
+		draw_rect(Rect2(Vector2.ONE, size), Color.BLACK, false, 1)
 
 	if show_left_highlight:
 		# Display outer border highlight
-		draw_rect(Rect2(Vector2.ZERO, size), Color.WHITE, false, 1)
-		draw_rect(Rect2(Vector2.ONE, size - Vector2(2, 2)), Color.BLACK, false, 1)
+		draw_rect(Rect2(Vector2.ONE, size), Color.WHITE, false, 1)
+		draw_rect(Rect2(Vector2(2, 2), size - Vector2(2, 2)), Color.BLACK, false, 1)
 
 	if show_right_highlight:
 		# Display inner border highlight
