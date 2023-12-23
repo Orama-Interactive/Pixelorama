@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-12-23 19:14\n"
+"PO-Revision-Date: 2023-12-23 23:27\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -170,6 +170,9 @@ msgstr "Yüzde"
 
 msgid "Crop Image"
 msgstr "Resmi Kırp"
+
+msgid "Trim Image"
+msgstr ""
 
 msgid "Resize Canvas"
 msgstr "Tuvali Yeniden Boyutlandır"
