@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2023-12-23 17:14\n"
+"PO-Revision-Date: 2023-12-23 23:27\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -169,6 +169,9 @@ msgstr "Percentatge"
 
 msgid "Crop Image"
 msgstr "Retallar l'imatge"
+
+msgid "Trim Image"
+msgstr ""
 
 msgid "Resize Canvas"
 msgstr "Redimensionar llenç"
