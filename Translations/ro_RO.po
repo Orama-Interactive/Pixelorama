@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-12-23 23:27\n"
+"PO-Revision-Date: 2023-12-24 22:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -171,7 +171,7 @@ msgid "Crop Image"
 msgstr "Decupare imagine"
 
 msgid "Trim Image"
-msgstr ""
+msgstr "Trunchiere imagine"
 
 msgid "Resize Canvas"
 msgstr "Redimensionare pânză"
