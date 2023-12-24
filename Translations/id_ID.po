@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-12-23 23:27\n"
+"PO-Revision-Date: 2023-12-24 03:33\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -173,7 +173,7 @@ msgid "Crop Image"
 msgstr "Pangkas Gambar"
 
 msgid "Trim Image"
-msgstr ""
+msgstr "Potong Gambar"
 
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
@@ -2593,7 +2593,7 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Ukuran terkunci\n\n"
-"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi pangkas.\n\n"
+"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi berpangkas.\n\n"
 "Saat dinonaktifkan dengan alat di kanvas hanya akan membuat persegi."
 
 #. A tool used in 3D layers, that edits 3D objects.
