@@ -116,6 +116,9 @@ func update_texture(layer_i: int, frame_i := -1, project := Global.current_proje
 		current_cel.update_texture()
 		# Needed so that changes happening to the non-selected layer(s) are also visible
 		# e.g. when undoing/redoing, when applying image effects to the entire frame, etc
+		if frame_i != project.current_frame:
+			# Don't update if the cel is on a different frame (can happen with undo/redo)
+			return
 		var layer := project.layers[layer_i]
 		var cel_image: Image
 		if Global.display_layer_effects:
