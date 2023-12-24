@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-12-23 23:27\n"
+"PO-Revision-Date: 2023-12-24 08:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -173,7 +173,7 @@ msgid "Crop Image"
 msgstr "Ritaglia l'immagine"
 
 msgid "Trim Image"
-msgstr ""
+msgstr "Ritaglia Immagine"
 
 msgid "Resize Canvas"
 msgstr "Ridimensiona Canvas"
@@ -2471,39 +2471,39 @@ msgstr "Rimuovi un colore selezionato"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "Ordina tavolozza"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "Inverti colori"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Ordina per tonalità"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Ordina per saturazione"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Ordina per valore"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Ordina per rosso"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Ordina per verde"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Ordina per blu"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Ordina per alfa"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Tavolozza con lo stesso nome e percorso esiste già!"
