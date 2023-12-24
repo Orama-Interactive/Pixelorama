@@ -492,12 +492,20 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	elif event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_LEFT:
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
-	elif ((event.is_action_pressed("activate_right_tool") and _active_button == -1 and not pen_inverted)
-			or (event.is_action_pressed("activate_left_tool") and _active_button == -1 and pen_inverted)):
+	elif (
+		(
+			event.is_action_pressed("activate_right_tool")
+			and _active_button == -1
+			and not pen_inverted
+		)
+		or (event.is_action_pressed("activate_left_tool") and _active_button == -1 and pen_inverted)
+	):
 		_active_button = MOUSE_BUTTON_RIGHT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
-	elif ((event.is_action_released("activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT)
-			or (event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_RIGHT)):
+	elif (
+		(event.is_action_released("activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT)
+		or (event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_RIGHT)
+	):
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
 
@@ -514,7 +522,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		pressure_buf.push_front(pen_pressure)
 		pen_pressure = remap(pen_pressure, pen_pressure_min, pen_pressure_max, 0.0, 1.0)
 		pen_pressure = clampf(pen_pressure, 0.0, 1.0)
-		
+
 		pen_inverted = event.pen_inverted
 
 		mouse_velocity = event.velocity.length() / mouse_velocity_max

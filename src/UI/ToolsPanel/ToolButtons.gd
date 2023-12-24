@@ -1,7 +1,7 @@
 extends FlowContainer
 
-
 var pen_inverted := false
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -32,6 +32,13 @@ func _input(event: InputEvent) -> void:
 func _on_Tool_pressed(tool_pressed: BaseButton) -> void:
 	var button := -1
 	button = MOUSE_BUTTON_LEFT if Input.is_action_just_released("left_mouse") else button
-	button = MOUSE_BUTTON_RIGHT if Input.is_action_just_released("right_mouse") or (pen_inverted and Input.is_action_just_released("left_mouse")) else button
+	button = (
+		MOUSE_BUTTON_RIGHT
+		if (
+			Input.is_action_just_released("right_mouse")
+			or (pen_inverted and Input.is_action_just_released("left_mouse"))
+		)
+		else button
+	)
 	if button != -1:
 		Tools.assign_tool(tool_pressed.name, button)
