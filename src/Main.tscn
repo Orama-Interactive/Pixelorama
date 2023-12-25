@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://dbylw5k04ulp8"]
 
-[ext_resource type="Theme" uid="uid://w1q3piojx08s" path="res://assets/themes/dark/theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://bka2dkyhkqpmq" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bsgwar3l6qtgv" path="res://src/UI/TopMenuContainer/TopMenuContainer.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://c8dsi6ggkqa7a" path="res://src/UI/UI.tscn" id="4"]
@@ -84,9 +84,8 @@ dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs"]
 title = "Save before exiting?"
-exclusive = false
-popup_window = true
-dialog_text = "You have unsaved progress. How do you wish to proceed?"
+ok_button_text = "Save & Exit"
+dialog_text = "Project %s has unsaved progress. How do you wish to proceed?"
 
 [node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
 exclusive = false
@@ -121,7 +120,7 @@ visible = false
 [connection signal="visibility_changed" from="Dialogs/OpenSprite" to="." method="_on_open_sprite_visibility_changed"]
 [connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="visibility_changed" from="Dialogs/SaveSprite" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="Dialogs/SaveSpriteHTML5" to="." method="_on_SaveSpriteHTML5_confirmed"]
+[connection signal="confirmed" from="Dialogs/SaveSpriteHTML5" to="." method="save_project" binds= [""]]
 [connection signal="visibility_changed" from="Dialogs/SaveSpriteHTML5" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/ExportDialog" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/UnsavedCanvasDialog" to="." method="_can_draw_true"]

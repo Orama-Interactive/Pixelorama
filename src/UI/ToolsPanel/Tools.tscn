@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://byu3rtoipuvoc"]
+
+[ext_resource type="Script" path="res://src/UI/ToolsPanel/ToolButtons.gd" id="1"]
+
+[node name="Tools" type="ScrollContainer"]
+custom_minimum_size = Vector2(36, 36)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1242.0
+offset_bottom = -230.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ToolButtons" type="HFlowContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("1")

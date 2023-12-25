@@ -1,9 +1,9 @@
 class_name BaseCel
 extends RefCounted
 ## Base class for cel properties.
-## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
+## "Cel" is short for the term "celluloid" [url]https://en.wikipedia.org/wiki/Cel[/url].
 
-signal texture_changed  ## Emitted whenever cel's tecture is changed
+signal texture_changed  ## Emitted whenever the cel's texture is changed
 
 var opacity := 1.0  ## Opacity/Transparency of the cel.
 ## The image stored in the cel.
@@ -14,6 +14,14 @@ var image_texture: Texture2D:
 ## [br] If the cel is not linked then it is [code]null[/code].
 var link_set = null  # { "cels": Array, "hue": float } or null
 var transformed_content: Image  ## Used in transformations (moving, scaling etc with selections).
+## Used for individual cel ordering. Used for when cels need to be drawn above or below
+## their corresponding layer.
+var z_index := 0
+
+
+func get_final_opacity(layer: BaseLayer) -> float:
+	return layer.opacity * opacity
+
 
 # Methods to Override:
 
@@ -70,12 +78,14 @@ func update_texture() -> void:
 
 ## Returns a curated [Dictionary] containing the cel data.
 func serialize() -> Dictionary:
-	return {"opacity": opacity}
+	return {"opacity": opacity, "z_index": z_index}
 
 
 ## Sets the cel data according to a curated [Dictionary] obtained from [method serialize].
 func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
+	if dict.has("z_index"):
+		z_index = dict["z_index"]
 
 
 ## Used to perform cleanup after a cel is removed.

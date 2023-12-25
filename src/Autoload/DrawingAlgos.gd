@@ -20,23 +20,28 @@ func blend_layers(
 	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
 	# the second are the opacities and the third are the origins
 	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
+	var frame_index := project.frames.find(frame)
+	var previous_ordered_layers: Array[int] = Array(project.ordered_layers)
+	project.order_layers(frame_index)
 	for i in project.layers.size():
-		var layer := project.layers[i]
+		var ordered_index := project.ordered_layers[i]
+		var layer := project.layers[ordered_index]
 		var include := true if layer.is_visible_in_hierarchy() else false
 		if only_selected and include:
-			var test_array := [project.frames.find(frame), i]
+			var test_array := [frame_index, i]
 			if not test_array in project.selected_cels:
 				include = false
-		var cel := frame.cels[i]
+		var cel := frame.cels[ordered_index]
 		var cel_image := layer.display_effects(cel)
 		textures.append(cel_image)
 		# Store the blend mode
-		metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+		metadata_image.set_pixel(ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
 		# Store the opacity
 		if include:
-			metadata_image.set_pixel(i, 1, Color(cel.opacity, 0.0, 0.0, 0.0))
+			var opacity := cel.get_final_opacity(layer)
+			metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
 		else:
-			metadata_image.set_pixel(i, 1, Color())
+			metadata_image.set_pixel(ordered_index, 1, Color())
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {
@@ -47,6 +52,8 @@ func blend_layers(
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(blended, blend_layers_shader, params, project.size)
 	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
+	# Re-order the layers again to ensure correct canvas drawing
+	project.ordered_layers = Array(previous_ordered_layers)
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html
@@ -449,8 +456,6 @@ func color_distance(c1: Color, c2: Color) -> float:
 
 
 # Image effects
-
-
 func scale_image(width: int, height: int, interpolation: int) -> void:
 	general_do_scale(width, height)
 
@@ -512,7 +517,27 @@ func center(indices: Array) -> void:
 	project.undo_redo.commit_action()
 
 
+## Sets the size of the project to be the same as the size of the active selection.
 func crop_image() -> void:
+	if not Global.current_project.has_selection:
+		return
+	Global.canvas.selection.transform_content_confirm()
+	var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
+	general_do_scale(rect.size.x, rect.size.y)
+	# Loop through all the cels to crop them
+	for f in Global.current_project.frames:
+		for cel in f.cels:
+			if not cel is PixelCel:
+				continue
+			var sprite := cel.get_image().get_region(rect)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
+
+	general_undo_scale()
+
+
+## Automatically makes the project smaller by looping through all of the cels and
+## trimming out the pixels that are transparent in all cels.
+func trim_image() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var used_rect := Rect2i()
 	for f in Global.current_project.frames:
@@ -535,7 +560,7 @@ func crop_image() -> void:
 	var width := used_rect.size.x
 	var height := used_rect.size.y
 	general_do_scale(width, height)
-	# Loop through all the cels to crop them
+	# Loop through all the cels to trim them
 	for f in Global.current_project.frames:
 		for cel in f.cels:
 			if not cel is PixelCel:

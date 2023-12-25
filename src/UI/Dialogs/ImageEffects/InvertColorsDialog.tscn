@@ -20,6 +20,7 @@ size_flags_horizontal = 3
 tooltip_text = "Modify Red Channel"
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_pressed = true
 text = "R"
 
 [node name="GButton" type="Button" parent="VBoxContainer/RGBAContainer" index="1"]
@@ -28,6 +29,7 @@ size_flags_horizontal = 3
 tooltip_text = "Modify Green Channel"
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_pressed = true
 text = "G"
 
 [node name="BButton" type="Button" parent="VBoxContainer/RGBAContainer" index="2"]
@@ -36,6 +38,7 @@ size_flags_horizontal = 3
 tooltip_text = "Modify Blue Channel"
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_pressed = true
 text = "B"
 
 [node name="AButton" type="Button" parent="VBoxContainer/RGBAContainer" index="3"]

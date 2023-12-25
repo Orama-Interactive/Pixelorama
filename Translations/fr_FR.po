@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-08-28 12:13\n"
+"PO-Revision-Date: 2023-12-06 03:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -93,8 +93,15 @@ msgstr "Enregistrer..."
 msgid "Save as..."
 msgstr "Enregistrer sous..."
 
-msgid "Use ZSTD Compression"
-msgstr "Utiliser la compression ZSTD"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr ""
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr ""
 
 msgid "Import"
 msgstr "Importer"
@@ -140,6 +147,13 @@ msgstr "Coller en place"
 
 msgid "Delete"
 msgstr "Supprimer"
+
+msgid "Delete Permanently"
+msgstr "Supprimer définitivement"
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr "Déplacer vers la corbeille"
 
 msgid "New Brush"
 msgstr "Nouveau pinceau"
@@ -314,6 +328,10 @@ msgstr "Afficher les guides"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Afficher les Guides de Souris"
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -628,6 +646,14 @@ msgstr "Trilinéaire"
 
 msgid "Constant"
 msgstr "Constant"
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr "Espace colorimétrique :"
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr ""
 
 msgid "General"
 msgstr "Général"
@@ -1279,13 +1305,20 @@ msgstr "Choisissez une couleur pour l'outil gauche"
 msgid "Choose a color for the right tool"
 msgstr "Choisissez une couleur pour l'outil droit"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "Alterner les couleurs de gauche et de droite\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr "Échange les couleurs gauche et droite."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr "Choisir une couleur sur l'écran."
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr ""
 
 msgid "Left tool"
 msgstr "Outil gauche"
@@ -1509,6 +1542,10 @@ msgstr "Ouvrir le dossier"
 msgid "Dynamics"
 msgstr "Dynamiques"
 
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr ""
+
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
 msgstr "Pression"
@@ -1669,6 +1706,9 @@ msgstr "Zoom avant"
 msgid "Zoom out"
 msgstr "Zoom arrière"
 
+msgid "Options"
+msgstr "Options"
+
 msgid "Options:"
 msgstr "Options :"
 
@@ -1719,34 +1759,22 @@ msgid "Current frame as spritesheet"
 msgstr "Frame actuelle en spritesheet"
 
 msgid "Jump to the first frame\n"
-"(%s)"
 msgstr "Aller à la première frame\n"
-"(%s)"
 
 msgid "Go to the previous frame\n"
-"(%s)"
 msgstr "Aller à la frame précédente\n"
-"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
 msgstr "Jouer l'animation à l'envers (de la fin vers le début)\n"
-"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
 msgstr "Jouer l'animation (du début vers la fin)\n"
-"(%s)"
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "Aller à la prochaine frame\n"
-"(%s)"
+msgstr "Aller à la frame suivante\n"
 
 msgid "Jump to the last frame\n"
-"(%s)"
 msgstr "Aller à la dernière frame\n"
-"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "Paramètres de la peau d'oignon"
@@ -1852,11 +1880,14 @@ msgstr "Lier le Cellulo à"
 msgid "Unlink Cels"
 msgstr "Délier le Cellulo"
 
-msgid "Frame Properties"
-msgstr "Propriétés de la frame"
+msgid "Properties"
+msgstr "Propriétés"
 
 msgid "Frame properties"
 msgstr "Propriétés de la frame"
+
+msgid "Cel properties"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1901,6 +1932,90 @@ msgstr "Cloner le calque"
 
 msgid "Merge current layer with the one below"
 msgstr "Fusionner le calque vers le bas"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr ""
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr "Normal"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr ""
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr ""
 
 msgid "Opacity:"
 msgstr "Opacité:"
@@ -2690,9 +2805,25 @@ msgstr "Rebond à la fin"
 msgid "Backing out at ends"
 msgstr ""
 
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr ""
+
 msgid "Silhouette"
 msgstr "Silhouette"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr "Noircit l'image et donne une couleur foncée à tous les pixels opaques."
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr ""
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr ""
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
+msgstr "Ajouter effet"
 

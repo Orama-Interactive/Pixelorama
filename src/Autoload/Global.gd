@@ -45,6 +45,7 @@ enum ImageMenu {
 	OFFSET_IMAGE,
 	SCALE_IMAGE,
 	CROP_IMAGE,
+	TRIM_IMAGE,
 	FLIP,
 	ROTATE,
 	OUTLINE,
@@ -463,13 +464,8 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
 
-## The palettes panel. It has the [param PalettePanel.gd] script attached.
-@onready var palette_panel: PalettePanel = control.find_child("Palettes")
-## The reference images panel. It has the [param ReferencesPanel.gd] script attached.
-@onready var references_panel: ReferencesPanel = control.find_child("Reference Images")
-## The perspectice editor. It has the [param PerspectiveEditor.gd] script attached.
+## The perspective editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
-
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
 ## The label indicating cursor position.
@@ -501,8 +497,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
 ## Dialog used to save (.pxo) projects.
 @onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
-## Html version of [member save_sprites_dialog] used to save (.pxo) projects.
-@onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_child("SaveSpriteHTML5")
 ## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
 ## The preferences dialog. It has the [param PreferencesDialog.gd] script attached.
@@ -571,6 +565,7 @@ func _initialize_keychain() -> void:
 		"preferences": Keychain.InputAction.new("", "Edit menu", true),
 		"scale_image": Keychain.InputAction.new("", "Image menu", true),
 		"crop_image": Keychain.InputAction.new("", "Image menu", true),
+		"trim_image": Keychain.InputAction.new("", "Image menu", true),
 		"resize_canvas": Keychain.InputAction.new("", "Image menu", true),
 		"offset_image": Keychain.InputAction.new("", "Image menu", true),
 		"mirror_image": Keychain.InputAction.new("", "Image menu", true),

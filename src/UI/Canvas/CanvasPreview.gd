@@ -80,19 +80,21 @@ func _draw_layers() -> void:
 	# the second are the opacities and the third are the origins
 	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
 	# Draw current frame layers
-	for i in project.layers.size():
+	for i in project.ordered_layers:
+		var cel := current_cels[i]
 		if current_cels[i] is GroupCel:
 			continue
 		var layer := project.layers[i]
 		var cel_image: Image
 		if Global.display_layer_effects:
-			cel_image = layer.display_effects(current_cels[i])
+			cel_image = layer.display_effects(cel)
 		else:
-			cel_image = current_cels[i].get_image()
+			cel_image = cel.get_image()
 		textures.append(cel_image)
 		metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
 		if layer.is_visible_in_hierarchy():
-			metadata_image.set_pixel(i, 1, Color(current_cels[i].opacity, 0.0, 0.0, 0.0))
+			var opacity := cel.get_final_opacity(layer)
+			metadata_image.set_pixel(i, 1, Color(opacity, 0.0, 0.0, 0.0))
 		else:
 			metadata_image.set_pixel(i, 1, Color(0.0, 0.0, 0.0, 0.0))
 	var texture_array := Texture2DArray.new()

@@ -4,7 +4,7 @@
 
 [node name="CreatePaletteDialog" type="ConfirmationDialog"]
 title = "Create a new palette"
-size = Vector2i(325, 437)
+size = Vector2i(386, 406)
 exclusive = false
 popup_window = true
 script = ExtResource("1")
@@ -13,10 +13,10 @@ script = ExtResource("1")
 anchors_preset = -1
 anchor_left = 0.000793701
 anchor_right = 0.000793701
-offset_left = 7.74205
+offset_left = 7.69363
 offset_top = 8.0
-offset_right = 316.742
-offset_bottom = 388.0
+offset_right = 377.694
+offset_bottom = 361.0
 
 [node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -124,7 +124,6 @@ theme_override_colors/font_color = Color(1, 0.603922, 0.603922, 1)
 text = "Palette with the same name and path already exists!"
 horizontal_alignment = 1
 vertical_alignment = 2
-autowrap_mode = 3
 
 [node name="EnterNameWarning" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -133,7 +132,6 @@ theme_override_colors/font_color = Color(1, 0.603922, 0.603922, 1)
 text = "Palette name is required!"
 horizontal_alignment = 1
 vertical_alignment = 2
-autowrap_mode = 3
 
 [connection signal="confirmed" from="." to="." method="_on_CreatePaletteDialog_confirmed"]
 [connection signal="visibility_changed" from="." to="." method="_on_CreatePaletteDialog_visibility_changed"]

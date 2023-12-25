@@ -156,7 +156,7 @@ void fragment() {
 	vec4 col = texture(layers, vec3(UV - first_origin, 0.0));
 	col.a = border_trim(col, UV - first_origin);
 	col.a *= first_opacity;
-	for(int i = 1; i < textureSize(layers, 0).z; i++) // Loops through every layer
+	for(int i = 1; i < metadata_size.x + 1; i++) // Loops through every layer
 	{
 		float blend_mode_float = texture(metadata, vec2(float(i) / float(metadata_size.x), 0.0)).r;
 		// Blend modes are being stored as integers divided by 255, so convert them back to

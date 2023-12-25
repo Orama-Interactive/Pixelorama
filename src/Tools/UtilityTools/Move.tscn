@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://64l4dmyfeev7"]
+
+[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/UtilityTools/Move.gd" id="2"]
+
+[node name="ToolOptions" instance=ExtResource("1")]
+script = ExtResource("2")

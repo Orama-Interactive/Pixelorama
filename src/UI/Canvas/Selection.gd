@@ -14,7 +14,7 @@ var big_bounding_rectangle := Rect2i():
 	set(value):
 		big_bounding_rectangle = value
 		for slot in Tools._slots.values():
-			if slot.tool_node is SelectionTool:
+			if slot.tool_node is BaseSelectionTool:
 				slot.tool_node.set_spinbox_values()
 		_update_gizmos()
 var image_current_pixel := Vector2.ZERO  ## The ACTUAL pixel coordinate of image
@@ -182,7 +182,7 @@ func _input(event: InputEvent) -> void:
 func _move_with_arrow_keys(event: InputEvent) -> void:
 	var selection_tool_selected := false
 	for slot in Tools._slots.values():
-		if slot.tool_node is SelectionTool:
+		if slot.tool_node is BaseSelectionTool:
 			selection_tool_selected = true
 			break
 	if !selection_tool_selected:
