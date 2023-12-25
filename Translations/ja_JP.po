@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-12-24 03:33\n"
+"PO-Revision-Date: 2023-12-25 09:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -653,11 +653,11 @@ msgstr "固定"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "色空間"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "リニアsRGB"
 
 msgid "General"
 msgstr "一般"
@@ -1548,7 +1548,7 @@ msgstr "ダイナミクス"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "スタビライザー"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1885,13 +1885,13 @@ msgid "Unlink Cels"
 msgstr "セルのリンクを解除"
 
 msgid "Properties"
-msgstr ""
+msgstr "プロパティ"
 
 msgid "Frame properties"
 msgstr "フレームのプロパティ"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "セルプロパティ"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
