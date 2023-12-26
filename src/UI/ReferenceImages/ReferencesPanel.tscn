@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="2_1qu4x"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="2_uqbp6"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3_1w6gu"]
-[ext_resource type="Texture2D" uid="uid://d2m7enib3dplc" path="res://assets/graphics/reference_images/Select.png" id="3_ikegk"]
 [ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferenceEdit.gd" id="3_skjtb"]
-[ext_resource type="Texture2D" uid="uid://cedsyi8gf2n2i" path="res://assets/graphics/reference_images/Move.png" id="4_iskr4"]
-[ext_resource type="Texture2D" uid="uid://dtd43nvphu3jj" path="res://assets/graphics/reference_images/Rotate.png" id="5_p8kax"]
-[ext_resource type="Texture2D" uid="uid://nfabwr5mgdir" path="res://assets/graphics/reference_images/Scale.png" id="6_62aqj"]
+[ext_resource type="Texture2D" uid="uid://d2m7enib3dplc" path="res://assets/graphics/reference_images/select.png" id="3_us8st"]
+[ext_resource type="Texture2D" uid="uid://cedsyi8gf2n2i" path="res://assets/graphics/reference_images/move.png" id="4_8mlcg"]
+[ext_resource type="Texture2D" uid="uid://dtd43nvphu3jj" path="res://assets/graphics/reference_images/rotate.png" id="5_ifey7"]
+[ext_resource type="Texture2D" uid="uid://nfabwr5mgdir" path="res://assets/graphics/reference_images/scale.png" id="6_7v0q5"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_unp5j"]
 action = &"move_frame_right"
@@ -58,7 +58,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Move the selected reference image  to the left."
+tooltip_text = "Move the selected reference image to the left"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_uucm4")
@@ -109,7 +109,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Move the selected reference image to the right"
+tooltip_text = "Selects a reference image on the canvas"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -130,13 +130,13 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_ikegk")
+texture = ExtResource("3_us8st")
 
 [node name="Move" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Move the selected reference image to the right"
+tooltip_text = "Move the selected reference image"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -156,13 +156,13 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_iskr4")
+texture = ExtResource("4_8mlcg")
 
 [node name="Rotate" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Move the selected reference image to the right"
+tooltip_text = "Rotate the selected image"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -182,13 +182,13 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_p8kax")
+texture = ExtResource("5_ifey7")
 
 [node name="Scale" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Move the selected reference image to the right"
+tooltip_text = "Scale the selected reference image"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -208,7 +208,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_62aqj")
+texture = ExtResource("6_7v0q5")
 
 [node name="ReferenceImages" type="ScrollContainer" parent="ScrollContainer/Container"]
 layout_mode = 2

@@ -2796,6 +2796,22 @@ msgstr ""
 msgid "Move the selected reference image to the left"
 msgstr ""
 
+#. Select a reference on the canvas
+msgid "Selects a reference image on the canvas"
+msgstr ""
+
+#. Moves the reference on the canvas
+msgid "Move the selected reference image"
+msgstr ""
+
+#. Rotates the reference on the canvas
+msgid "Rotate the selected reference image"
+msgstr ""
+
+#. Rotates the reference on the canvas
+msgid "Scale the selected reference image"
+msgstr ""
+
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
 msgstr ""
