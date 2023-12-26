@@ -6,15 +6,38 @@ signal properties_changed
 
 var project := Global.current_project
 
-var shader := preload("res://src/Shaders/SilhouetteShader.gdshader")
+var shader := preload("res://src/Shaders/ReferenceImageShader.gdshader")
 
 var image_path := ""
-var filter := false
-var silhouette := false
+var filter := false:
+	set(value):
+		filter = value
+		if value:
+			texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		else:
+			texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+var monochrome := false:
+	set(value):
+		monochrome = value
+		if material:
+			get_material().set_shader_parameter("monochrome", value)
+var overlay_color := Color.WHITE:
+	set(value):
+		overlay_color = value
+		modulate = value
+		if material:
+			get_material().set_shader_parameter("monchrome_color", value)
+var color_clamping := 0.0:
+	set(value):
+		color_clamping = value
+		if material:
+			get_material().set_shader_parameter("clamping", value)
 
 
 func _ready() -> void:
 	project.reference_images.append(self)
+	# Make this show behind parent because we want to use _draw() to draw over it
+	show_behind_parent = true
 
 
 func change_properties() -> void:
@@ -24,6 +47,7 @@ func change_properties() -> void:
 ## Resets the position and scale of the reference image.
 func position_reset() -> void:
 	position = project.size / 2.0
+	rotation_degrees = 0.0
 	if texture != null:
 		scale = (
 			Vector2.ONE
@@ -43,12 +67,14 @@ func serialize() -> Dictionary:
 		"y": position.y,
 		"scale_x": scale.x,
 		"scale_y": scale.y,
-		"modulate_r": modulate.r,
-		"modulate_g": modulate.g,
-		"modulate_b": modulate.b,
-		"modulate_a": modulate.a,
+		"rotation_degrees": rotation_degrees,
+		"overlay_color_r": overlay_color.r,
+		"overlay_color_g": overlay_color.g,
+		"overlay_color_b": overlay_color.b,
+		"overlay_color_a": overlay_color.a,
 		"filter": filter,
-		"silhouette": silhouette,
+		"monochrome": monochrome,
+		"color_clamping": color_clamping,
 		"image_path": image_path
 	}
 
@@ -57,7 +83,7 @@ func serialize() -> Dictionary:
 ## Be aware that new ReferenceImages are created via deserialization.
 ## This is because deserialization sets up some nice defaults.
 func deserialize(d: Dictionary) -> void:
-	modulate = Color(1, 1, 1, 0.5)
+	overlay_color = Color(1, 1, 1, 0.5)
 	if d.has("image_path"):
 		# Note that reference images are referred to by path.
 		# These images may be rather big.
@@ -69,9 +95,6 @@ func deserialize(d: Dictionary) -> void:
 		# Apply the silhouette shader
 		var mat := ShaderMaterial.new()
 		mat.shader = shader
-		# TODO: Lsbt - Add a option in prefrences to customize the color
-		# This color is almost black because it is less harsh
-		mat.set_shader_parameter("silhouette_color", Color(0.069, 0.069326, 0.074219))
 		set_material(mat)
 
 	# Now that the image may have been established...
@@ -82,20 +105,24 @@ func deserialize(d: Dictionary) -> void:
 		position.y = d["y"]
 	if d.has("scale_x"):
 		scale.x = d["scale_x"]
+	if d.has("rotation_degrees"):
+		rotation_degrees = d["rotation_degrees"]
 	if d.has("scale_y"):
 		scale.y = d["scale_y"]
-	if d.has("modulate_r"):
-		modulate.r = d["modulate_r"]
-	if d.has("modulate_g"):
-		modulate.g = d["modulate_g"]
-	if d.has("modulate_b"):
-		modulate.b = d["modulate_b"]
-	if d.has("modulate_a"):
-		modulate.a = d["modulate_a"]
+	if d.has("overlay_color_r"):
+		overlay_color.r = d["overlay_color_r"]
+	if d.has("overlay_color_g"):
+		overlay_color.g = d["overlay_color_g"]
+	if d.has("overlay_color_b"):
+		overlay_color.b = d["overlay_color_b"]
+	if d.has("overlay_color_a"):
+		overlay_color.a = d["overlay_color_a"]
 	if d.has("filter"):
 		filter = d["filter"]
-	if d.has("silhouette"):
-		get_material().set_shader_parameter("show_silhouette", d["silhouette"])
+	if d.has("monochrome"):
+		monochrome = d["monochrome"]
+	if d.has("color_clamping"):
+		color_clamping = d["color_clamping"]
 	change_properties()
 
 
