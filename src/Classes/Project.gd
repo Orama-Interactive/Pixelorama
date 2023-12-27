@@ -251,6 +251,23 @@ func change_project() -> void:
 	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 
+	# We loop through all the reference image nodes and the ones that are not apart
+	# of the current project we remove from the tree
+	# They will still be in memory though
+	for ri: ReferenceImage in Global.canvas.reference_image_container.get_children():
+		if !reference_images.has(ri):
+			Global.canvas.reference_image_container.remove_child(ri)
+	# Now we loop through this projects reference images and add them back to the tree
+	var canvas_references := Global.canvas.reference_image_container.get_children()
+	for ri: ReferenceImage in reference_images:
+		if !canvas_references.has(ri) and !ri.is_inside_tree():
+			Global.canvas.reference_image_container.add_child(ri)
+
+
+
+	# Tell the reference images that the project changed
+	Global.reference_panel.project_changed()
+
 	var i := 0
 	for camera in Global.cameras:
 		camera.rotation = cameras_rotation[i]

@@ -125,6 +125,13 @@ func _on_reference_image_changed(index: int) -> void:
 		list_btn_group.get_buttons()[index + 1].set_pressed_no_signal(true)
 
 
+func project_changed() -> void:
+	var project_reference_index := Global.current_project.reference_index
+	_on_references_changed()
+	_update_ui()
+	Global.current_project.set_reference_image_index(project_reference_index)
+
+
 func _on_references_changed():
 	# When we change the project we set the default
 	Global.current_project.set_reference_image_index(-1)
@@ -133,10 +140,6 @@ func _on_references_changed():
 		if c is Button:
 			c.button_group = null
 		c.queue_free()
-	# Made it only look in the ReferenceImages Node for reference images
-	for ref in Global.canvas.reference_image_container.get_children():
-		if ref is ReferenceImage:
-			ref.visible = false
 
 	# The default button
 	var default = ReferenceImageButton.instantiate()
@@ -147,7 +150,6 @@ func _on_references_changed():
 
 	# And update.
 	for ref in Global.current_project.reference_images:
-		ref.visible = true
 		var l: Button = ReferenceImageButton.instantiate()
 		l.button_group = list_btn_group
 		if ref.texture:
