@@ -263,8 +263,6 @@ func change_project() -> void:
 		if !canvas_references.has(ri) and !ri.is_inside_tree():
 			Global.canvas.reference_image_container.add_child(ri)
 
-
-
 	# Tell the reference images that the project changed
 	Global.reference_panel.project_changed()
 
