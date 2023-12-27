@@ -82,7 +82,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("3_0e27e")
 
-[node name="Sort" type="MenuButton" parent="PaletteVBoxContainer/PaletteButtons"]
+[node name="Sort" type="MenuButton" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
