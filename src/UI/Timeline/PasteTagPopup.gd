@@ -19,6 +19,7 @@ func _ready() -> void:
 
 
 func refresh_list() -> void:
+	animation_tags_list.clear()
 	for tag in from_project.animation_tags:
 		var img = Image.create(5, 5, true, Image.FORMAT_RGBA8)
 		img.fill(tag.color)
@@ -39,7 +40,6 @@ func _on_TagContainer_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_released("right_mouse"):
 		# Reset UI
 		from_project_list.clear()
-		animation_tags_list.clear()
 		if Global.projects.find(from_project) < 0:
 			from_project = Global.current_project
 		# Populate project list
