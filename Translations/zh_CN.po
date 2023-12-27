@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-12-23 23:27\n"
+"PO-Revision-Date: 2023-12-27 01:44\n"
 
 msgid "OK"
 msgstr "确定"
@@ -173,7 +173,7 @@ msgid "Crop Image"
 msgstr "裁剪图像"
 
 msgid "Trim Image"
-msgstr ""
+msgstr "裁剪图像"
 
 msgid "Resize Canvas"
 msgstr "调整画布尺寸"
@@ -992,7 +992,7 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "© 版权所有 2022 - Orama Interactive 和贡献者"
+msgstr "© 版权所有 2019~2024 - Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -1145,7 +1145,7 @@ msgid "Save before exiting?"
 msgstr "退出前保存吗？"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "项目 %s 有未保存的进度。您想如何继续？"
 
 msgid "Save & Exit"
 msgstr "保存并退出"
@@ -1557,7 +1557,7 @@ msgstr "压力"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "速度"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
@@ -2377,7 +2377,7 @@ msgstr "分钟"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "在文件名中包含帧标签"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2393,7 +2393,7 @@ msgstr "分隔符:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "分隔文件名称和帧编号的字符(秒)"
 
 msgid "Close"
 msgstr "关闭"
@@ -2471,39 +2471,39 @@ msgstr "删除所选颜色"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "排序调色板"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "反向颜色"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "按色相排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "按饱和度排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "按值排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "按红色排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "按绿色排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "按蓝色排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "按 Alpha 排序"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "具有相同名称和路径的调色板已经存在！"
@@ -2513,7 +2513,7 @@ msgstr "调色板名称为必填项！"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "减小调色板尺寸将重置颜色的位置。不适合新调色板尺寸的颜色将丢失！"
 
 msgid "Position:"
 msgstr "位置："
@@ -2601,7 +2601,7 @@ msgstr "3D 形状编辑"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "正方体"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
@@ -2644,7 +2644,7 @@ msgstr "点光"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "自定义模型"
 
 msgid "Selected object:"
 msgstr "已选对象"
@@ -2672,7 +2672,7 @@ msgstr "正交"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "椎体"
 
 msgid "Rotation:"
 msgstr "旋转"
@@ -2682,15 +2682,15 @@ msgstr "缩放："
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "环境"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "环境颜色："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "环境颜色能量："
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
@@ -2706,7 +2706,7 @@ msgstr "网格"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "从左到右"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
@@ -2714,15 +2714,15 @@ msgstr "半径："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "字段数量："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "圆环"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "半球："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
@@ -2741,10 +2741,10 @@ msgstr "像素大小："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "曲线步骤："
 
 msgid "Horizontal alignment:"
-msgstr ""
+msgstr "水平对齐"
 
 msgid "Left"
 msgstr "左"
@@ -2754,18 +2754,18 @@ msgstr "右"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "能量："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
-msgstr ""
+msgstr "负片："
 
 msgid "Shadow:"
-msgstr ""
+msgstr "阴影："
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "范围："
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
@@ -2845,7 +2845,7 @@ msgstr "结束时的反弹"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "在线束时倒退"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
