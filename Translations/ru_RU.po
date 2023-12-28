@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-12-23 23:27\n"
+"PO-Revision-Date: 2023-12-28 11:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -153,7 +153,7 @@ msgstr ""
 
 #. When you move something to recycle bin
 msgid "Move to Trash"
-msgstr ""
+msgstr "Переместить в корзину"
 
 msgid "New Brush"
 msgstr "Новая кисть"
@@ -750,7 +750,7 @@ msgid "System Language"
 msgstr "Системный язык"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Масштаб интерфейса:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Затемнять интерфейс при появлении диалога"
@@ -1910,15 +1910,15 @@ msgstr "Создать новый слой"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Добавить Пиксельный cлой"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Добавить Групповой cлой"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Добавить 3D слой"
 
 msgid "Remove current layer"
 msgstr "Удалить текущий слой"
@@ -2157,7 +2157,7 @@ msgid "File failed to save. Error code %s"
 msgstr "Не удалось сохранить файл. Код ошибки %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Файл(ы) экспортированы"
 
 msgid "New Empty Palette"
 msgstr "Создать пустую палитру"
