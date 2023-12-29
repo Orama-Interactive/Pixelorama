@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-12-28 11:11\n"
+"PO-Revision-Date: 2023-12-29 21:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -334,7 +334,7 @@ msgstr ""
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Показать эффекты слоя"
 
 #. Found under the View menu.
 msgid "Snap To"
