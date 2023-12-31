@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-12-31 12:27\n"
+"PO-Revision-Date: 2023-12-31 13:28\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -172,7 +172,7 @@ msgid "Crop Image"
 msgstr "Resmi Kırp"
 
 msgid "Trim Image"
-msgstr ""
+msgstr "Görüntüyü Kırp"
 
 msgid "Resize Canvas"
 msgstr "Tuvali Yeniden Boyutlandır"
@@ -2853,35 +2853,35 @@ msgstr "Sona doğru hızlan"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Tek Renk"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Anında kaldırmak için basarken Shift tuşunu basılı tutun"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Seçilen referans görüntüyü sağa taşı"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Seçilen referans görüntüyü sola taşı"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Tuval üzerinde referans görüntü seçer"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Seçilen referans görüntüyü taşı"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Seçilen referans görüntüyü döndür"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Seçilen referans görüntüyü ölçekle"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
