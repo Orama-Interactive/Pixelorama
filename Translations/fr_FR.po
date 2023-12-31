@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-12-31 12:27\n"
+"PO-Revision-Date: 2023-12-31 16:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -725,11 +725,11 @@ msgstr "Ajoute une transition plus douce lors d'un zoom avant ou arrière"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Zoom entier"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Restreint la valeur à un multiple entier de 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilité à la pression de la tablette :"
@@ -2006,19 +2006,19 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Teinte"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Saturation"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Couleur "
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Luminosité"
 
 msgid "Opacity:"
 msgstr "Opacité:"
@@ -2469,7 +2469,7 @@ msgstr "Supprimer une couleur sélectionnée"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "Trier la palette"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
@@ -2477,31 +2477,31 @@ msgstr ""
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Trier par teinte"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Trier par saturation"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Trier par valeur"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Trier par rouge"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Trier par vert"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Trier par bleu"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Trier par alpha"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Une palette avec le même nom et le même chemin existe déjà !"
@@ -2851,39 +2851,39 @@ msgstr ""
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Monochrome"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Maintenez Maj enfoncé tout en appuyant pour supprimer instantanément"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Déplacer l'image de référence sélectionnée vers la droite"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Déplacer l'image de référence sélectionnée vers la gauche"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Sélectionne une image de référence sur le canevas"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Déplacer l'image de référence sélectionnée"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Pivoter l'image de référence sélectionnée"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Redimensionner l'image de référence sélectionnée"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Activé"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
