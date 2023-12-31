@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-12-31 12:27\n"
+"PO-Revision-Date: 2023-12-31 15:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2853,35 +2853,35 @@ msgstr "終了へ向かって跳ぶ"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "モノクローム"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Shiftキーを押しながら押すと即座に削除します"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "選択した参照画像を右に移動"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "選択した参照画像を左に移動"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "キャンバス上の参照画像を選択"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "選択した参照画像を移動する"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "選択した参照画像を回転"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "選択した参照画像を拡大縮小"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
