@@ -1,7 +1,6 @@
 class_name Canvas
 extends Node2D
 
-const MOVE_ACTIONS := ["move_mouse_left", "move_mouse_right", "move_mouse_up", "move_mouse_down"]
 const CURSOR_SPEED_RATE := 6.0
 
 var current_pixel := Vector2.ZERO
@@ -65,29 +64,26 @@ func _draw() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# Don't process anything below if the input isn't a mouse event, or Shift/Ctrl.
+	# Move the cursor with the keyboard (numpad keys by default)
+	var mouse_movement := Input.get_vector(
+		&"move_mouse_left", &"move_mouse_right", &"move_mouse_up", &"move_mouse_down"
+	)
+	# Don't process anything below if the input isn't a mouse event, a tool activation shortcut,
+	# or the numpad keys that move the cursor.
 	# This decreases CPU/GPU usage slightly.
-	var get_velocity := false
 	if not event is InputEventMouseMotion:
-		for action in MOVE_ACTIONS:
-			if event.is_action(action):
-				get_velocity = true
 		if (
-			!get_velocity
-			and !(event.is_action("activate_left_tool") or event.is_action("activate_right_tool"))
+			mouse_movement == Vector2.ZERO
+			and not (
+				event.is_action(&"activate_left_tool") or event.is_action(&"activate_right_tool")
+			)
 		):
 			return
-
-	var tmp_position := Global.main_viewport.get_local_mouse_position()
-	if get_velocity:
-		var velocity := Input.get_vector(
-			"move_mouse_left", "move_mouse_right", "move_mouse_up", "move_mouse_down"
-		)
-		if velocity != Vector2.ZERO:
-			tmp_position += velocity * CURSOR_SPEED_RATE
-			Global.main_viewport.warp_mouse(tmp_position)
-	# Do not use self.get_local_mouse_position() because it return unexpected
-	# value when shrink parameter is not equal to one. At godot version 3.2.3
+	# Get the viewport's mouse position instead of the local mouse position to use warp_mouse
+	var tmp_position := get_viewport().get_mouse_position()
+	if mouse_movement != Vector2.ZERO:
+		tmp_position += mouse_movement * CURSOR_SPEED_RATE
+		get_viewport().warp_mouse(tmp_position)
 	var tmp_transform := get_canvas_transform().affine_inverse()
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
