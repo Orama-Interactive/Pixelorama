@@ -26,6 +26,7 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var mouse_guide_container := $MouseGuideContainer as Node2D
 @onready var gizmos_3d := $Gizmos3D as Node2D
 @onready var measurements := $Measurements as Node2D
+@onready var reference_image_container := $ReferenceImages as Node2D
 
 
 func _ready() -> void:

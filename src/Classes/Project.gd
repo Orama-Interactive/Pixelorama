@@ -45,6 +45,7 @@ var animation_tags: Array[AnimationTag] = []:
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
 var reference_images: Array[ReferenceImage] = []
+var reference_index: int = -1  # The currently selected index ReferenceImage
 var vanishing_points := []  ## Array of Vanishing Points
 var fps := 6.0
 
@@ -249,6 +250,21 @@ func change_project() -> void:
 	Global.canvas.selection.queue_redraw()
 	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
+
+	# We loop through all the reference image nodes and the ones that are not apart
+	# of the current project we remove from the tree
+	# They will still be in memory though
+	for ri: ReferenceImage in Global.canvas.reference_image_container.get_children():
+		if !reference_images.has(ri):
+			Global.canvas.reference_image_container.remove_child(ri)
+	# Now we loop through this projects reference images and add them back to the tree
+	var canvas_references := Global.canvas.reference_image_container.get_children()
+	for ri: ReferenceImage in reference_images:
+		if !canvas_references.has(ri) and !ri.is_inside_tree():
+			Global.canvas.reference_image_container.add_child(ri)
+
+	# Tell the reference images that the project changed
+	Global.reference_panel.project_changed()
 
 	var i := 0
 	for camera in Global.cameras:
@@ -870,3 +886,28 @@ func _update_layer_ui() -> void:
 		for f in frames.size():
 			cel_hbox.get_child(f).layer = l
 			cel_hbox.get_child(f).button_setup()
+
+
+## Change the current reference image
+func set_reference_image_index(new_index: int) -> void:
+	reference_index = clamp(-1, new_index, reference_images.size() - 1)
+	Global.canvas.reference_image_container.update_index(reference_index)
+
+
+## Returns the reference image based on reference_index
+func get_current_reference_image() -> ReferenceImage:
+	return get_reference_image(reference_index)
+
+
+## Returns the reference image based on the index or null if index < 0
+func get_reference_image(index: int) -> ReferenceImage:
+	if index < 0 or index > reference_images.size() - 1:
+		return null
+	return reference_images[index]
+
+
+## Reorders the position of the reference image in the tree / reference_images array
+func reorder_reference_image(from: int, to: int) -> void:
+	var ri: ReferenceImage = reference_images.pop_at(from)
+	reference_images.insert(to, ri)
+	Global.canvas.reference_image_container.move_child(ri, to)
