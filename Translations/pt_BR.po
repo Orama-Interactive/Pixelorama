@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-12-23 23:27\n"
+"PO-Revision-Date: 2023-12-31 12:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2850,11 +2850,37 @@ msgstr "Recuando nos finais"
 msgid "Spring towards the end"
 msgstr "Movimento súbido para o fim"
 
-msgid "Silhouette"
-msgstr "Silhueta"
+#. Used to turn images into a singular color
+msgid "Monochrome"
+msgstr ""
 
-msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr "Apaga a imagem e torna todos os pixels opacos em uma cor escura."
+#. A tooltip to tell users to hold the Shift key while clicking the remove button
+msgid "Hold Shift while pressing to instantly remove"
+msgstr ""
+
+#. Moves the reference image up in the list
+msgid "Move the selected reference image to the right"
+msgstr ""
+
+#. Moves the reference image down in the list
+msgid "Move the selected reference image to the left"
+msgstr ""
+
+#. Select a reference on the canvas
+msgid "Selects a reference image on the canvas"
+msgstr ""
+
+#. Moves the reference on the canvas
+msgid "Move the selected reference image"
+msgstr ""
+
+#. Rotates the reference on the canvas
+msgid "Rotate the selected reference image"
+msgstr ""
+
+#. Rotates the reference on the canvas
+msgid "Scale the selected reference image"
+msgstr ""
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
