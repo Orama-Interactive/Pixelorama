@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-12-31 12:27\n"
+"PO-Revision-Date: 2023-12-31 13:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2853,35 +2853,35 @@ msgstr "Vai alla fine"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Monocromatico"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Tieni premuto Shift mentre per rimuovere istantaneamente"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Sposta l'immagine di riferimento selezionata a destra"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Sposta l'immagine di riferimento selezionata a sinistra"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Seleziona un'immagine di riferimento sulla tela"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Sposta l'immagine di riferimento selezionata"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Ruota l'immagine di riferimento selezionata"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Scala l'immagine di riferimento selezionata"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
