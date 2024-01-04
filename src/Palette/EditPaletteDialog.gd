@@ -90,7 +90,10 @@ func _on_EditPaletteDialog_custom_action(action: StringName) -> void:
 	if action == DELETE_ACTION:
 		delete_confirmation.popup_centered()
 	elif action == EXPORT_ACTION:
-		export_file_dialog.popup_centered()
+		if OS.has_feature("web"):
+			exported.emit()
+		else:
+			export_file_dialog.popup_centered()
 
 
 func _on_delete_confirmation_confirmed() -> void:
