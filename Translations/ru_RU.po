@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-12-31 12:27\n"
+"PO-Revision-Date: 2024-01-04 15:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,7 +151,7 @@ msgstr "Удалить"
 msgid "Delete Permanently"
 msgstr ""
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr "Переместить в корзину"
 
@@ -167,10 +167,12 @@ msgstr "Пиксели"
 msgid "Percentage"
 msgstr "Процент"
 
-msgid "Crop Image"
-msgstr "Обрезать изображение"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr ""
 
-msgid "Trim Image"
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
 msgstr ""
 
 msgid "Resize Canvas"
