@@ -12,6 +12,7 @@ Built using Godot 3.5.2
 
 ### Added
 - Exporting palettes to png files is now possible.
+- Progressive Web App (PWA) has been enabled for the Web version.
 
 ### Changed
 - When quitting, multiple save confirmation dialogs now appear, each for every project that has changes.
