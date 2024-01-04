@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-12-31 12:27\n"
+"PO-Revision-Date: 2024-01-04 15:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,7 +151,7 @@ msgstr "Löschen"
 msgid "Delete Permanently"
 msgstr "Dauerhaft Löschen"
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr "In Papierkorb verschieben"
 
@@ -167,10 +167,12 @@ msgstr "Pixel"
 msgid "Percentage"
 msgstr "Prozent"
 
-msgid "Crop Image"
-msgstr "Bild zuschneiden"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr ""
 
-msgid "Trim Image"
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
 msgstr ""
 
 msgid "Resize Canvas"
@@ -2849,7 +2851,7 @@ msgstr "Zum Ende hinspringen"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Monochrom"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
