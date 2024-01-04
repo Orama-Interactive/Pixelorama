@@ -256,9 +256,7 @@ func _on_edit_palette_dialog_exported(path := "") -> void:
 	var image := Palettes.current_palette.convert_to_image()
 	if OS.has_feature("web"):
 		JavaScriptBridge.download_buffer(
-			image.save_png_to_buffer(),
-			Palettes.current_palette.name,
-			"image/png"
+			image.save_png_to_buffer(), Palettes.current_palette.name, "image/png"
 		)
 	if path.is_empty():
 		return
