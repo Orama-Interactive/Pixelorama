@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-01-04 15:57\n"
+"PO-Revision-Date: 2024-01-04 18:09\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -170,11 +170,11 @@ msgstr "Yüzde"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Seçime Kırp"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "İçeriğe Kırp"
 
 msgid "Resize Canvas"
 msgstr "Tuvali Yeniden Boyutlandır"
