@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-01-01 15:51\n"
+"PO-Revision-Date: 2024-01-04 15:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,7 +151,7 @@ msgstr "Ștergere"
 msgid "Delete Permanently"
 msgstr "Ștergere permanenetă"
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr "Mutare în coșul de gunoi"
 
@@ -167,11 +167,13 @@ msgstr "Pixeli"
 msgid "Percentage"
 msgstr "Procentaj"
 
-msgid "Crop Image"
-msgstr "Decupare imagine"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr ""
 
-msgid "Trim Image"
-msgstr "Trunchiere imagine"
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
+msgstr ""
 
 msgid "Resize Canvas"
 msgstr "Redimensionare pânză"
