@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-01-04 15:57\n"
+"PO-Revision-Date: 2024-01-04 16:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -171,11 +171,11 @@ msgstr "Procentowo"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Przytnij do zaznaczenia"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Przytnij do zawartości"
 
 msgid "Resize Canvas"
 msgstr "Zmień rozmiar płótna"
