@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-01-04 15:57\n"
+"PO-Revision-Date: 2024-01-04 20:01\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -171,11 +171,11 @@ msgstr "Ποσοστό"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Περικοπή στην επιλογή"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Περικοπή στο περιεχόμενο"
 
 msgid "Resize Canvas"
 msgstr "Αλλαγή μεγέθους καμβά"
