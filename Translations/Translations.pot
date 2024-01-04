@@ -140,7 +140,7 @@ msgstr ""
 msgid "Delete Permanently"
 msgstr ""
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr ""
 
@@ -156,10 +156,12 @@ msgstr ""
 msgid "Percentage"
 msgstr ""
 
-msgid "Crop Image"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
 msgstr ""
 
-msgid "Trim Image"
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
 msgstr ""
 
 msgid "Resize Canvas"

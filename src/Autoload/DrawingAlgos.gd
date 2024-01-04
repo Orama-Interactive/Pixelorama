@@ -518,7 +518,7 @@ func center(indices: Array) -> void:
 
 
 ## Sets the size of the project to be the same as the size of the active selection.
-func crop_image() -> void:
+func crop_to_selection() -> void:
 	if not Global.current_project.has_selection:
 		return
 	Global.canvas.selection.transform_content_confirm()
@@ -537,7 +537,7 @@ func crop_image() -> void:
 
 ## Automatically makes the project smaller by looping through all of the cels and
 ## trimming out the pixels that are transparent in all cels.
-func trim_image() -> void:
+func crop_to_content() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var used_rect := Rect2i()
 	for f in Global.current_project.frames:

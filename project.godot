@@ -639,11 +639,11 @@ scale_image={
 "deadzone": 0.5,
 "events": []
 }
-crop_image={
+crop_to_selection={
 "deadzone": 0.5,
 "events": []
 }
-trim_image={
+crop_to_content={
 "deadzone": 0.5,
 "events": []
 }

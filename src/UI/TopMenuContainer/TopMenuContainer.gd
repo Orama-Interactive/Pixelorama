@@ -278,8 +278,8 @@ func _setup_image_menu() -> void:
 		"Resize Canvas": "resize_canvas",
 		"Offset Image": "offset_image",
 		"Scale Image": "scale_image",
-		"Crop Image": "crop_image",
-		"Trim Image": "trim_image",
+		"Crop to Selection": "crop_to_selection",
+		"Crop to Content": "crop_to_content",
 		"Mirror Image": "mirror_image",
 		"Rotate Image": "rotate_image",
 		"Outline": "outline",
@@ -296,7 +296,7 @@ func _setup_image_menu() -> void:
 	for item in image_menu_items:
 		_set_menu_shortcut(image_menu_items[item], image_menu, i, item)
 		i += 1
-	image_menu.set_item_disabled(Global.ImageMenu.CROP_IMAGE, true)
+	image_menu.set_item_disabled(Global.ImageMenu.CROP_TO_SELECTION, true)
 	image_menu.id_pressed.connect(image_menu_id_pressed)
 
 
@@ -682,10 +682,10 @@ func image_menu_id_pressed(id: int) -> void:
 			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ScaleImage"))
 		Global.ImageMenu.OFFSET_IMAGE:
 			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/OffsetImage"))
-		Global.ImageMenu.CROP_IMAGE:
-			DrawingAlgos.crop_image()
-		Global.ImageMenu.TRIM_IMAGE:
-			DrawingAlgos.trim_image()
+		Global.ImageMenu.CROP_TO_SELECTION:
+			DrawingAlgos.crop_to_selection()
+		Global.ImageMenu.CROP_TO_CONTENT:
+			DrawingAlgos.crop_to_content()
 		Global.ImageMenu.RESIZE_CANVAS:
 			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas"))
 		Global.ImageMenu.FLIP:
