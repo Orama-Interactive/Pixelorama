@@ -89,7 +89,10 @@ func _on_EditPaletteDialog_custom_action(action: String) -> void:
 	if action == DELETE_ACTION:
 		delete_confirmation.popup_centered()
 	elif action == EXPORT_ACTION:
-		export_file_dialog.popup_centered()
+		if OS.get_name() == "HTML5":
+			emit_signal("exported")
+		else:
+			export_file_dialog.popup_centered()
 
 
 func _on_delete_confirmation_confirmed() -> void:
