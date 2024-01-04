@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-12-31 12:27\n"
+"PO-Revision-Date: 2024-01-04 15:57\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -153,7 +153,7 @@ msgstr "Διαγραφή"
 msgid "Delete Permanently"
 msgstr "Οριστική διαγραφή"
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr "Μετακίνηση στον κάδο απορριμμάτων"
 
@@ -169,10 +169,12 @@ msgstr "Εικονοστοιχεία"
 msgid "Percentage"
 msgstr "Ποσοστό"
 
-msgid "Crop Image"
-msgstr "Περικοπή"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr ""
 
-msgid "Trim Image"
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
 msgstr ""
 
 msgid "Resize Canvas"
@@ -1145,7 +1147,7 @@ msgid "Save before exiting?"
 msgstr "Αποθήκευση πριν την έξοδο;"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Το έργο %s έχει μη αποθηκευμένη πρόοδο. Πώς θέλετε να προχωρήσετε;"
 
 msgid "Save & Exit"
 msgstr "Αποθήκευση & έξοδος"
@@ -2471,39 +2473,39 @@ msgstr "Αφαίρεση επιλεγμένου χρώματος"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "Ταξινόμηση παλέτας"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "Αντιστροφή χρωμάτων"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Ταξινόμηση κατά απόχρωσης"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Ταξινόμηση κατά κορεσμού"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Ταξινόμηση κατά τιμής"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Ταξινόμηση κατά κόκκινου"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Ταξινόμηση κατά πράσινου"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Ταξινόμηση κατά μπλε"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Ταξινόμηση κατά αδιαφάνειας"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Υπάρχει ήδη παλέτα με το ίδιο όνομα και διαδρομή!"
@@ -2513,7 +2515,7 @@ msgstr "Απαιτείται όνομα παλέτας!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Η μείωση του μεγέθους της παλέτας θα επηρεάσει τις θέσεις των χρωμάτων. Τα χρώματα που δε χωρούν στο νέο μέγεθος της παλέτας θα χαθούν!"
 
 msgid "Position:"
 msgstr "Θέση:"
@@ -2853,35 +2855,35 @@ msgstr "Αναπήδηση προς το τέλος"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Μονόχρωμο"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Κρατήστε πατημένο το Shift για άμεση αφαίρεση"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Μετακίνηση της επιλεγμένης εικόνας αναφοράς στα δεξιά"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Μετακίνηση της επιλεγμένης εικόνας αναφοράς προς τα αριστερά"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Επιλέγει μια εικόνα αναφοράς στον καμβά"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Μετακίνηση της επιλεγμένης εικόνας αναφοράς"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Περιστροφή της επιλεγμένης εικόνας αναφοράς"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Κλιμάκωση της επιλεγμένης εικόνας αναφοράς"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
