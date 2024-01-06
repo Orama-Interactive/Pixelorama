@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-01-04 15:56\n"
+"PO-Revision-Date: 2024-01-06 10:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,11 +169,11 @@ msgstr "Procentaj"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Trunchiere la selecție"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Trunchiere la conținut"
 
 msgid "Resize Canvas"
 msgstr "Redimensionare pânză"
@@ -2557,7 +2557,7 @@ msgid "Recorder"
 msgstr "Înregistrator"
 
 msgid "Crop"
-msgstr "Decupare"
+msgstr "Trunchiere"
 
 msgid "Resize the canvas"
 msgstr "Redimensionare pânză"
@@ -2593,7 +2593,7 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Dimensiune blocată\n\n"
-"Când este activată opțiunea, folosirea instrumentului pe pânză doar va muta dreptunghiul de decupare.\n\n"
+"Când este activată opțiunea, folosirea instrumentului pe pânză doar va muta dreptunghiul de trunchiere.\n\n"
 "Când este dezactivată opțiunea, folosirea uneltei pe pânză va desena dreptunghiul."
 
 #. A tool used in 3D layers, that edits 3D objects.
