@@ -43,6 +43,7 @@ size_flags_horizontal = 3
 focus_mode = 2
 mouse_default_cursor_shape = 2
 text = "Add new object"
+flat = false
 
 [node name="RemoveObject" type="Button" parent="HandleObjects" index="3"]
 unique_name_in_owner = true
