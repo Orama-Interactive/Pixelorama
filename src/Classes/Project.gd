@@ -23,6 +23,7 @@ var has_changed := false:
 	set(value):
 		has_changed = value
 		if value:
+			Global.project_changed.emit(self)
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
 		else:
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
@@ -541,7 +542,7 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 
 	order_layers()
 	Global.transparent_checker.update_rect()
-	Global.cel_changed.emit()
+	Global.cel_switched.emit()
 	if get_current_cel() is Cel3D:
 		await RenderingServer.frame_post_draw
 		await RenderingServer.frame_post_draw

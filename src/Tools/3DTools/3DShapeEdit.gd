@@ -89,8 +89,8 @@ func _input(_event: InputEvent) -> void:
 
 func _ready() -> void:
 	super._ready()
-	Global.cel_changed.connect(_cel_changed)
-	_cel_changed()
+	Global.cel_switched.connect(_cel_switched)
+	_cel_switched()
 	var new_object_popup := new_object_menu_button.get_popup()
 	for object in _object_names:
 		new_object_popup.add_item(_object_names[object], object)
@@ -214,7 +214,7 @@ func _on_ObjectOptionButton_item_selected(index: int) -> void:
 	_cel.selected = object
 
 
-func _cel_changed() -> void:
+func _cel_switched() -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		get_child(0).visible = false  # Just to ensure that the content of the tool is hidden
 		return

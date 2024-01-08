@@ -220,8 +220,8 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 
 	if empty_project:
 		new_project.change_project()
-		Global.project_changed.emit()
-		Global.cel_changed.emit()
+		Global.project_switched.emit()
+		Global.cel_switched.emit()
 	else:
 		Global.projects.append(new_project)
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1

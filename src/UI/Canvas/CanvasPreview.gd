@@ -26,7 +26,7 @@ var frame_index := 0:
 
 
 func _ready() -> void:
-	Global.cel_changed.connect(_cel_changed)
+	Global.cel_switched.connect(_cel_switched)
 	material = Global.canvas.material
 
 
@@ -130,7 +130,7 @@ func _on_AnimationTimer_timeout() -> void:
 	queue_redraw()
 
 
-func _cel_changed() -> void:
+func _cel_switched() -> void:
 	queue_redraw()
 
 
