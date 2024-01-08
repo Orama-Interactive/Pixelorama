@@ -713,8 +713,8 @@ class SignalsAPI:
 	var _last_cel: BaseCel
 
 	func _init() -> void:
-		Global.project_changed.connect(_update_texture_signal)
-		Global.cel_changed.connect(_update_texture_signal)
+		Global.project_switched.connect(_update_texture_signal)
+		Global.cel_switched.connect(_update_texture_signal)
 
 	func _update_texture_signal():
 		if _last_cel:
@@ -760,12 +760,12 @@ class SignalsAPI:
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever you switch to some other project.
 	func signal_project_changed(callable: Callable, is_disconnecting := false):
-		_connect_disconnect(Global.project_changed, callable, is_disconnecting)
+		_connect_disconnect(Global.project_switched, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever you select a different cel.
 	func signal_cel_changed(callable: Callable, is_disconnecting := false):
-		_connect_disconnect(Global.cel_changed, callable, is_disconnecting)
+		_connect_disconnect(Global.cel_switched, callable, is_disconnecting)
 
 	# TOOL RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits

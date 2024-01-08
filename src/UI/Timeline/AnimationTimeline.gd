@@ -106,7 +106,7 @@ func _ready() -> void:
 	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
 	%PastPlacement.item_selected.emit(0 if past_above else 1)
 	%FuturePlacement.item_selected.emit(0 if future_above else 1)
-	Global.cel_changed.connect(_cel_changed)
+	Global.cel_switched.connect(_cel_switched)
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.emit_signal.call_deferred("resized")
 
@@ -1015,7 +1015,7 @@ func _on_onion_skinning_settings_visibility_changed() -> void:
 # Methods to update the UI in response to changes in the current project
 
 
-func _cel_changed() -> void:
+func _cel_switched() -> void:
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
 	var project := Global.current_project

@@ -33,7 +33,7 @@ var gizmo_rot_z := PackedVector2Array()
 
 func _ready() -> void:
 	set_process_input(false)
-	Global.cel_changed.connect(_cel_changed)
+	Global.cel_switched.connect(_cel_switched)
 	Global.camera.zoom_changed.connect(queue_redraw)
 
 
@@ -68,7 +68,7 @@ func get_hovering_gizmo(pos: Vector2) -> int:
 	return Cel3DObject.Gizmos.NONE
 
 
-func _cel_changed() -> void:
+func _cel_switched() -> void:
 	queue_redraw()
 	set_process_input(Global.current_project.get_current_cel() is Cel3D)
 

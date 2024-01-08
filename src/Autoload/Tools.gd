@@ -297,7 +297,7 @@ class Slot:
 
 
 func _ready() -> void:
-	Global.cel_changed.connect(_cel_changed)
+	Global.cel_switched.connect(_cel_switched)
 	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
@@ -558,7 +558,7 @@ func get_alpha_dynamic(strength := 1.0) -> float:
 	return strength
 
 
-func _cel_changed() -> void:
+func _cel_switched() -> void:
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
 	# Do not make any changes when its the same type of layer, or a group layer

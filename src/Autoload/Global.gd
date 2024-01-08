@@ -8,8 +8,8 @@ extends Node
 signal pixelorama_opened  ## Emitted as soon as Pixelorama fully opens up.
 signal pixelorama_about_to_close  ## Emitted just before Pixelorama is about to close.
 signal project_created(Project)  ## Emitted when a new project class is initialized.
-signal project_changed  ## Emitted whenever you switch to some other project tab.
-signal cel_changed  ## Emitted whenever you select a different cel.
+signal project_switched  ## Emitted whenever you switch to some other project tab.
+signal cel_switched  ## Emitted whenever you select a different cel.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
@@ -96,10 +96,10 @@ var current_project_index := 0:
 		canvas.selection.transform_content_confirm()
 		current_project_index = value
 		current_project = projects[value]
-		project_changed.connect(current_project.change_project)
-		project_changed.emit()
-		project_changed.disconnect(current_project.change_project)
-		cel_changed.emit()
+		project_switched.connect(current_project.change_project)
+		project_switched.emit()
+		project_switched.disconnect(current_project.change_project)
+		cel_switched.emit()
 
 # Canvas related stuff
 ## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
@@ -544,7 +544,7 @@ func _ready() -> void:
 	current_project.fill_color = default_fill_color
 
 	await get_tree().process_frame
-	project_changed.emit()
+	project_switched.emit()
 
 
 func _initialize_keychain() -> void:
@@ -774,9 +774,9 @@ func undo_or_redo(
 	second_viewport.get_child(0).get_node("CanvasPreview").queue_redraw()
 	canvas_preview_container.canvas_preview.queue_redraw()
 	if !project.has_changed:
-		project.has_changed = true
 		if project == current_project:
 			main_window.title = main_window.title + "(*)"
+	project.has_changed = true
 
 
 func _renderer_changed(value: int) -> void:
