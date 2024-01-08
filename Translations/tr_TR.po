@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-01-08 21:04\n"
+"PO-Revision-Date: 2024-01-08 22:02\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1111,7 +1111,7 @@ msgstr "Belarusça"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Baş Geliştirici"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1119,7 +1119,7 @@ msgstr "Kullanıcı Arayüzü Tasarımcısı"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Yazarlar"
 
 msgid "Art by: %s"
 msgstr "Sanatçı: %s"
