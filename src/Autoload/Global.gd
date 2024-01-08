@@ -8,8 +8,10 @@ extends Node
 signal pixelorama_opened  ## Emitted as soon as Pixelorama fully opens up.
 signal pixelorama_about_to_close  ## Emitted just before Pixelorama is about to close.
 signal project_created(Project)  ## Emitted when a new project class is initialized.
+signal project_about_to_switch ## Emitted before a project is about to be switched
 signal project_switched  ## Emitted whenever you switch to some other project tab.
 signal cel_switched  ## Emitted whenever you select a different cel.
+signal project_changed(Project) ## Emitted whenever a project is changed.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
@@ -95,6 +97,7 @@ var current_project_index := 0:
 			return
 		canvas.selection.transform_content_confirm()
 		current_project_index = value
+		project_about_to_switch.emit()
 		current_project = projects[value]
 		project_switched.connect(current_project.change_project)
 		project_switched.emit()

@@ -5,7 +5,6 @@ extends RefCounted
 
 signal serialized(Dictionary)
 signal about_to_deserialize(Dictionary)
-signal project_changed()
 
 var name := "":
 	set(value):
@@ -24,7 +23,7 @@ var has_changed := false:
 	set(value):
 		has_changed = value
 		if value:
-			project_changed.emit()
+			Global.project_changed.emit(self)
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
 		else:
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
