@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-01-04 15:57\n"
+"PO-Revision-Date: 2024-01-08 06:17\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -171,11 +171,11 @@ msgstr "Persentase"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Pangkas ke Seleksi"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Pangkas ke Isi"
 
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
@@ -448,7 +448,7 @@ msgstr "Jarak peleburan:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr "Gambar yang melewati ambang batas akan dileburkan menjadi gambar lebih besar, jika masih dalam jarak ini"
+msgstr "Gambar yang melewati ambang batas akan dileburkan jadi gambar lebih besar, jika masih dalam jarak ini"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
@@ -733,7 +733,7 @@ msgstr "Keker Integer"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr "Membatasi nilai menjadi kelipatan bilangan bulat 100%"
+msgstr "Membatasi nilai jadi kelipatan bilangan bulat 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Kepekaan tekanan tablet:"
@@ -874,7 +874,7 @@ msgid "Gradient Map"
 msgstr "Peta Gradien"
 
 msgid "Divide into equal parts"
-msgstr "Bagi menjadi sama rata"
+msgstr "Bagi jadi sama rata"
 
 msgid "Parts:"
 msgstr "Bagian:"
@@ -2856,35 +2856,35 @@ msgstr "Langsung ke ujung"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Ekawarna"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Tahan Shift saat menekan untuk langsung hapus"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Pindahkan gambar rujukan terpilih ke kanan"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Pindahkan gambar rujukan terpilih ke kiri"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Memilih yang jadi gambar rujukan di kanvas"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Pindahkan gambar rujukan terpilih"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Putar gambar rujukan terpilih"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Skalakan gambar rujukan terpilih"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
