@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-01-04 15:57\n"
+"PO-Revision-Date: 2024-01-08 21:04\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1108,17 +1108,17 @@ msgstr "Голландська"
 msgid "Belarusian"
 msgstr "Білоруська"
 
-msgid "Development Team"
-msgstr "Команда розробників"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr ""
 
-msgid "Lead Programmer"
-msgstr "Головний програміст"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "UI дизайнер"
 
-msgid "GitHub Contributors"
-msgstr "Учасники на Github"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr ""
 
 msgid "Art by: %s"
 msgstr "Художник: %s"
