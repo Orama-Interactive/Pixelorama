@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-01-08 06:17\n"
+"PO-Revision-Date: 2024-01-08 21:04\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1110,17 +1110,17 @@ msgstr "Bhs. Belanda"
 msgid "Belarusian"
 msgstr "Bhs. Belarus"
 
-msgid "Development Team"
-msgstr "Regu Pengembangan"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr ""
 
-msgid "Lead Programmer"
-msgstr "Pemrogram Utama"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "Perancang UI"
 
-msgid "GitHub Contributors"
-msgstr "Penyumbangsih Github"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr ""
 
 msgid "Art by: %s"
 msgstr "Gambar oleh %s"
