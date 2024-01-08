@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2024-01-04 15:57\n"
+"PO-Revision-Date: 2024-01-08 21:04\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1106,17 +1106,17 @@ msgstr ""
 msgid "Belarusian"
 msgstr ""
 
-msgid "Development Team"
-msgstr "Teamo de ellaboro"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr ""
 
-msgid "Lead Programmer"
-msgstr "Ĉefa programisto"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "UIa desegnilo"
 
-msgid "GitHub Contributors"
-msgstr "Kontribuantoj de GitHub"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr ""
 
 msgid "Art by: %s"
 msgstr ""
