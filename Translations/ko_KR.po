@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-01-04 15:57\n"
+"PO-Revision-Date: 2024-01-08 21:04\n"
 
 msgid "OK"
 msgstr "예"
@@ -1106,17 +1106,17 @@ msgstr "네덜란드어"
 msgid "Belarusian"
 msgstr ""
 
-msgid "Development Team"
-msgstr "개발팀"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr ""
 
-msgid "Lead Programmer"
-msgstr "리드 프로그래머"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "UI 디자이너"
 
-msgid "GitHub Contributors"
-msgstr "GitHub 기여자"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr ""
 
 msgid "Art by: %s"
 msgstr "작가: %s"
