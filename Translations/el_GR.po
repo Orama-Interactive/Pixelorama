@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-01-04 20:01\n"
+"PO-Revision-Date: 2024-01-08 21:04\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1110,17 +1110,17 @@ msgstr "Ολλανδικά"
 msgid "Belarusian"
 msgstr "Λευκορωσικά"
 
-msgid "Development Team"
-msgstr "Ομάδα Ανάπτυξης"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr ""
 
-msgid "Lead Programmer"
-msgstr "Επικεφαλής Προγραμματιστής"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "Σχεδιαστής UI"
 
-msgid "GitHub Contributors"
-msgstr "Συνεισφέροντες στο GitHub"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr ""
 
 msgid "Art by: %s"
 msgstr "Ζωγραφιά από: %s"
