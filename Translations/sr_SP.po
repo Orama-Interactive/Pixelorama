@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2024-01-04 15:57\n"
+"PO-Revision-Date: 2024-01-08 21:04\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -1104,17 +1104,17 @@ msgstr ""
 msgid "Belarusian"
 msgstr ""
 
-msgid "Development Team"
-msgstr "Развојни тим"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr ""
 
-msgid "Lead Programmer"
-msgstr "Главни програмер"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "UI дизајнер"
 
-msgid "GitHub Contributors"
-msgstr "GitHub сарадници"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr ""
 
 msgid "Art by: %s"
 msgstr ""
