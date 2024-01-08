@@ -84,32 +84,16 @@ layout_mode = 2
 theme_override_constants/item_margin = -2
 hide_root = true
 
-[node name="Developers" type="VBoxContainer" parent="AboutUI/Credits"]
+[node name="Authors" type="VBoxContainer" parent="AboutUI/Credits"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="AboutUI/Credits/Developers"]
+[node name="Label" type="Label" parent="AboutUI/Credits/Authors"]
 layout_mode = 2
-text = "Development Team"
+text = "Authors"
 
-[node name="DeveloperTree" type="Tree" parent="AboutUI/Credits/Developers"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/item_margin = -2
-theme_override_constants/button_margin = 2
-hide_root = true
-
-[node name="Contributors" type="VBoxContainer" parent="AboutUI/Credits"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="AboutUI/Credits/Contributors"]
-layout_mode = 2
-text = "GitHub Contributors"
-
-[node name="ContributorTree" type="Tree" parent="AboutUI/Credits/Contributors"]
+[node name="AuthorTree" type="Tree" parent="AboutUI/Credits/Authors"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/item_margin = -2
