@@ -1093,16 +1093,16 @@ msgstr ""
 msgid "Belarusian"
 msgstr ""
 
-msgid "Development Team"
+#. Found in the About dialog.
+msgid "Lead Developer"
 msgstr ""
 
-msgid "Lead Programmer"
-msgstr ""
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr ""
 
-msgid "GitHub Contributors"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
 msgstr ""
 
 msgid "Art by: %s"

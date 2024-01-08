@@ -1,6 +1,6 @@
 extends Window
 
-const CONTRIBUTORS: PackedStringArray = [
+const AUTHORS: PackedStringArray = [
 	"20kdc",
 	"Aaron Franke (aaronfranke)",
 	"AbhinavKDev (abhinav3967)",
@@ -198,14 +198,12 @@ const DONORS: PackedStringArray = [
 
 @onready var credits := $AboutUI/Credits as HSplitContainer
 @onready var groups := $AboutUI/Credits/Groups as Tree
-@onready var developer_container := $AboutUI/Credits/Developers as VBoxContainer
-@onready var contributors_container := $AboutUI/Credits/Contributors as VBoxContainer
+@onready var authors_container := $AboutUI/Credits/Authors as VBoxContainer
 @onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
 @onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
 @onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
 
-@onready var developers := $AboutUI/Credits/Developers/DeveloperTree as Tree
-@onready var contributors := $AboutUI/Credits/Contributors/ContributorTree as Tree
+@onready var authors := $AboutUI/Credits/Authors/AuthorTree as Tree
 @onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
 @onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
 @onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as TabBar
@@ -214,7 +212,6 @@ const DONORS: PackedStringArray = [
 
 func _ready() -> void:
 	create_donors()
-	create_contributors()
 	license_tabs.add_tab("Pixelorama")
 	license_tabs.add_tab("Godot")
 	license_tabs.add_tab("FreeType")
@@ -234,18 +231,15 @@ func _on_AboutDialog_about_to_show() -> void:
 	title = tr("About Pixelorama") + " " + Global.current_version
 
 	var groups_root := groups.create_item()
-	var developers_button := groups.create_item(groups_root)
-	var contributors_button := groups.create_item(groups_root)
+	#var developers_button := groups.create_item(groups_root)
+	var authors_button := groups.create_item(groups_root)
 	var donors_button := groups.create_item(groups_root)
 	var translators_button := groups.create_item(groups_root)
 	var licenses_button := groups.create_item(groups_root)
-
-	developers_button.set_text(0, "  " + tr("Developers"))
+	authors_button.set_text(0, "  " + tr("Authors"))
 	# We use metadata to avoid being affected by translations
-	developers_button.set_metadata(0, "Developers")
-	developers_button.select(0)
-	contributors_button.set_text(0, "  " + tr("Contributors"))
-	contributors_button.set_metadata(0, "Contributors")
+	authors_button.set_metadata(0, "Authors")
+	authors_button.select(0)
 	donors_button.set_text(0, "  " + tr("Donors"))
 	donors_button.set_metadata(0, "Donors")
 	translators_button.set_text(0, "  " + tr("Translators"))
@@ -253,7 +247,7 @@ func _on_AboutDialog_about_to_show() -> void:
 	licenses_button.set_text(0, "  " + tr("Licenses"))
 	licenses_button.set_metadata(0, "Licenses")
 
-	create_developers()
+	create_authors()
 	create_translators()
 
 
@@ -261,7 +255,7 @@ func _on_visibility_changed() -> void:
 	if visible:
 		return
 	groups.clear()
-	developers.clear()
+	authors.clear()
 	translators.clear()
 	Global.dialog_open(false)
 
@@ -272,10 +266,8 @@ func _on_Groups_item_selected() -> void:
 			child.visible = false
 
 	var selected: String = groups.get_selected().get_metadata(0)
-	if "Developers" in selected:
-		developer_container.visible = true
-	elif "Contributors" in selected:
-		contributors_container.visible = true
+	if "Authors" in selected:
+		authors_container.visible = true
 	elif "Donors" in selected:
 		donors_container.visible = true
 	elif "Translators" in selected:
@@ -296,24 +288,20 @@ func _on_Donate_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")
 
 
-func create_developers() -> void:
-	var dev_root := developers.create_item()
-	developers.create_item(dev_root).set_text(
-		0, "  Emmanouil Papadeas (Overloaded) - " + tr("Lead Programmer")
-	)
-	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
-
-
 func create_donors() -> void:
 	var donors_root := donors.create_item()
 	for donor in DONORS:
 		donors.create_item(donors_root).set_text(0, "  " + donor)
 
 
-func create_contributors() -> void:
-	var contributor_root := contributors.create_item()
-	for contributor in CONTRIBUTORS:
-		contributors.create_item(contributor_root).set_text(0, "  " + contributor)
+func create_authors() -> void:
+	var author_root := authors.create_item()
+	authors.create_item(author_root).set_text(
+		0, "  Emmanouil Papadeas (Overloaded) - " + tr("Lead Developer")
+	)
+	authors.create_item(author_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
+	for author in AUTHORS:
+		authors.create_item(author_root).set_text(0, "  " + author)
 
 
 func create_translators() -> void:
