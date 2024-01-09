@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 var global: Node
-var custom_links: Array[String] = []
+var custom_links := []
 
 
 func _ready() -> void:

@@ -9,6 +9,7 @@ const STORE_NAME := "Extension Explorer"
 const STORE_LINK := "https://raw.githubusercontent.com/Variable-Interactive/Variable-Store/4.0/store_info.txt"
 ## File that will contain information about extensions available for download
 const STORE_INFORMATION_FILE := STORE_NAME + ".txt"
+const EXTENSION_ENTRY_TSCN := preload("res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.tscn")
 
 # Variables placed here due to their frequent use
 var extension_container: VBoxContainer
@@ -134,7 +135,7 @@ func _on_CopyCommand_pressed():
 
 ## Adds a new extension entry to the "content"
 func add_entry(info: Array) -> void:
-	var entry = preload("res://src/UI/ExtensionExplorer/Entry/Entry.tscn").instantiate()
+	var entry := EXTENSION_ENTRY_TSCN.instantiate()
 	entry.tags_detected.connect(search_manager.add_new_tags)
 	entry.extension_container = extension_container
 	content.add_child(entry)

@@ -9,8 +9,8 @@ func _on_SearchManager_text_changed(_new_text: String) -> void:
 
 
 func tag_text_search() -> void:
-	var result = text_search(text)
-	var tags = []
+	var result := text_search(text)
+	var tags := []
 	for tag in tag_list.get_children():
 		if tag.button_pressed:
 			tags.append(tag.text)
@@ -21,9 +21,9 @@ func tag_text_search() -> void:
 
 
 func text_search(text_to_search: String) -> Array:
-	var result = []
+	var result := []
 	for entry in $"%Content".get_children():
-		var visibility = true
+		var visibility := true
 		if text_to_search != "":
 			var extension_name = entry.ext_name.text.to_lower()
 			var extension_description = entry.ext_discription.text.to_lower()

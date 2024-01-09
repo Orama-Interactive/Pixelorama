@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://chy5d42l72crk"]
 
 [ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Store.gd" id="1_pwcwi"]
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Sub Scripts/SearchManager.gd" id="2_a824e"]
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Sub Scripts/CustomStoreLinks.gd" id="3_fe55i"]
+[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
+[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/CustomStoreLinks.gd" id="3_dk1xf"]
 [ext_resource type="Texture2D" uid="uid://c4433pa25cxp2" path="res://addons/keychain/assets/add.svg" id="4_46g0u"]
 
 [node name="Store" type="Window"]
@@ -37,7 +37,7 @@ size_flags_horizontal = 0
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Search..."
-script = ExtResource("2_a824e")
+script = ExtResource("2_uqsvm")
 
 [node name="Heading" type="HBoxContainer" parent="TabContainer/Store/Parameters"]
 layout_mode = 2
@@ -84,7 +84,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("3_fe55i")
+script = ExtResource("3_dk1xf")
 
 [node name="Heading" type="HBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
 layout_mode = 2

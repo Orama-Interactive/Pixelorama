@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnjpemuehkxsn"]
 
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Entry/Entry.gd" id="1_uq32t"]
-[ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2_ytxoo"]
+[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.gd" id="1_3no3v"]
+[ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2_qhsve"]
 
 [node name="Entry" type="Panel"]
 self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
@@ -9,7 +9,7 @@ custom_minimum_size = Vector2(300, 150)
 offset_right = 284.0
 offset_bottom = 150.0
 size_flags_horizontal = 3
-script = ExtResource("1_uq32t")
+script = ExtResource("1_3no3v")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -32,7 +32,7 @@ offset_bottom = -8.0
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("2_ytxoo")
+texture_normal = ExtResource("2_qhsve")
 ignore_texture_size = true
 stretch_mode = 5
 
