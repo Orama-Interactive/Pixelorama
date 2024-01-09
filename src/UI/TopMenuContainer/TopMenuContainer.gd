@@ -1,6 +1,13 @@
 extends Panel
+
+const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
+const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
+const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
 const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v011---2023-06-13"
+const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
+const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
+const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
 
 var recent_projects := []
 var layouts := [
@@ -326,33 +333,54 @@ func _setup_help_menu() -> void:
 		"Open Logs Folder": "open_logs_folder",
 		"Changelog": "changelog",
 		"About Pixelorama": "about_pixelorama",
+		"Support Pixelorama's Development": &"",
 	}
 	var i := 0
 	for item in help_menu_items:
-		_set_menu_shortcut(help_menu_items[item], help_menu, i, item)
+		var icon: Texture2D = null
+		if (
+			i == Global.HelpMenu.ONLINE_DOCS
+			or i == Global.HelpMenu.ISSUE_TRACKER
+			or i == Global.HelpMenu.CHANGELOG
+		):
+			icon = EXTERNAL_LINK_ICON
+		if i == Global.HelpMenu.ABOUT_PIXELORAMA:
+			icon = PIXELORAMA_ICON
+		elif i == Global.HelpMenu.SUPPORT_PIXELORAMA:
+			icon = HEART_ICON
+		_set_menu_shortcut(help_menu_items[item], help_menu, i, item, false, false, icon)
+
 		i += 1
 
 	help_menu.id_pressed.connect(help_menu_id_pressed)
 
 
 func _set_menu_shortcut(
-	action: StringName, menu: PopupMenu, index: int, text: String, is_check := false, echo := false
+	action: StringName,
+	menu: PopupMenu,
+	index: int,
+	text: String,
+	is_check := false,
+	echo := false,
+	icon: Texture2D = null
 ) -> void:
 	if action.is_empty():
 		if is_check:
-			menu.add_item(text, index)
-		else:
 			menu.add_check_item(text, index)
-		return
-	var shortcut := Shortcut.new()
-	var event := InputEventAction.new()
-	event.action = action
-	shortcut.events.append(event)
-	if is_check:
-		menu.add_check_shortcut(shortcut, index)
+		else:
+			menu.add_item(text, index)
 	else:
-		menu.add_shortcut(shortcut, index, false, echo)
-	menu.set_item_text(index, text)
+		var shortcut := Shortcut.new()
+		var event := InputEventAction.new()
+		event.action = action
+		shortcut.events.append(event)
+		if is_check:
+			menu.add_check_shortcut(shortcut, index)
+		else:
+			menu.add_shortcut(shortcut, index, false, echo)
+		menu.set_item_text(index, text)
+	if is_instance_valid(icon):
+		menu.set_item_icon(index, icon)
 
 
 func _handle_metadata(id: int, popup_menu: PopupMenu) -> void:
@@ -740,9 +768,9 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.VIEW_SPLASH_SCREEN:
 			_popup_dialog(Global.control.get_node("Dialogs/SplashDialog"))
 		Global.HelpMenu.ONLINE_DOCS:
-			OS.shell_open("https://www.oramainteractive.com/Pixelorama-Docs/")
+			OS.shell_open(DOCS_URL)
 		Global.HelpMenu.ISSUE_TRACKER:
-			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
+			OS.shell_open(ISSUES_URL)
 		Global.HelpMenu.OPEN_LOGS_FOLDER:
 			var dir := DirAccess.open("user://logs")
 			dir.make_dir_recursive("user://logs")  # In case someone deleted it
@@ -751,5 +779,7 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(CHANGELOG_URL)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))
+		Global.HelpMenu.SUPPORT_PIXELORAMA:
+			OS.shell_open(SUPPORT_URL)
 		_:
 			_handle_metadata(id, help_menu)

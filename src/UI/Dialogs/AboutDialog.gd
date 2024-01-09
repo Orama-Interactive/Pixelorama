@@ -284,10 +284,6 @@ func _on_GitHub_pressed() -> void:
 	OS.shell_open("https://github.com/Orama-Interactive/Pixelorama")
 
 
-func _on_Donate_pressed() -> void:
-	OS.shell_open("https://www.patreon.com/OramaInteractive")
-
-
 func create_donors() -> void:
 	var donors_root := donors.create_item()
 	for donor in DONORS:
