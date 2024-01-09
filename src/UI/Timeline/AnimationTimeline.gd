@@ -1,5 +1,10 @@
 extends Panel
 
+signal animation_started(forward: bool)
+signal animation_finished
+
+const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
+
 var is_animation_running := false
 var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
@@ -13,23 +18,31 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
-var frame_button_node := preload("res://src/UI/Timeline/FrameButton.tscn")
-
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
-@onready var tag_spacer = find_child("TagSpacer")
-@onready var start_spacer = find_child("StartSpacer")
-@onready var add_layer_list: MenuButton = $"%AddLayerList"
+@onready var tag_spacer := %TagSpacer as Control
+@onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
+@onready var layer_container := %LayerContainer as VBoxContainer
+@onready var add_layer_list := %AddLayerList as MenuButton
+@onready var remove_layer := %RemoveLayer as Button
+@onready var move_up_layer := %MoveUpLayer as Button
+@onready var move_down_layer := %MoveDownLayer as Button
+@onready var merge_down_layer := %MergeDownLayer as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
-
-@onready var timeline_scroll: ScrollContainer = find_child("TimelineScroll")
-@onready var frame_scroll_container: Control = find_child("FrameScrollContainer")
-@onready var frame_scroll_bar: HScrollBar = find_child("FrameScrollBar")
-@onready var tag_scroll_container: ScrollContainer = find_child("TagScroll")
-@onready var layer_frame_h_split: HSplitContainer = find_child("LayerFrameHSplit")
-@onready var fps_spinbox: ValueSlider = find_child("FPSValue")
-@onready var onion_skinning_button: BaseButton = find_child("OnionSkinning")
-@onready var loop_animation_button: BaseButton = find_child("LoopAnim")
-@onready var drag_highlight: ColorRect = find_child("DragHighlight")
+@onready var opacity_slider: ValueSlider = %OpacitySlider
+@onready var frame_scroll_container := %FrameScrollContainer as Control
+@onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
+@onready var tag_scroll_container := %TagScroll as ScrollContainer
+@onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
+@onready var delete_frame := %DeleteFrame as Button
+@onready var move_frame_left := %MoveFrameLeft as Button
+@onready var move_frame_right := %MoveFrameRight as Button
+@onready var play_backwards := %PlayBackwards as Button
+@onready var play_forward := %PlayForward as Button
+@onready var fps_spinbox := %FPSValue as ValueSlider
+@onready var onion_skinning_button := %OnionSkinning as BaseButton
+@onready var onion_skinning_settings := $OnionSkinningSettings as Popup
+@onready var loop_animation_button := %LoopAnim as BaseButton
+@onready var drag_highlight := $DragHighlight as ColorRect
 
 
 func _ready() -> void:
@@ -85,14 +98,15 @@ func _ready() -> void:
 	var future_above = Global.config_cache.get_value(
 		"timeline", "future_above_canvas", future_above_canvas
 	)
-	$"%PastOnionSkinning".value = past_rate
-	$"%FutureOnionSkinning".value = future_rate
-	$"%BlueRedMode".button_pressed = blue_red
-	$"%PastPlacement".select(0 if past_above else 1)
-	$"%FuturePlacement".select(0 if future_above else 1)
+	%PastOnionSkinning.value = past_rate
+	%FutureOnionSkinning.value = future_rate
+	%BlueRedMode.button_pressed = blue_red
+	%PastPlacement.select(0 if past_above else 1)
+	%FuturePlacement.select(0 if future_above else 1)
 	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
-	$"%PastPlacement".item_selected.emit(0 if past_above else 1)
-	$"%FuturePlacement".item_selected.emit(0 if future_above else 1)
+	%PastPlacement.item_selected.emit(0 if past_above else 1)
+	%FuturePlacement.item_selected.emit(0 if future_above else 1)
+	Global.cel_switched.connect(_cel_switched)
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.emit_signal.call_deferred("resized")
 
@@ -100,6 +114,9 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		drag_highlight.hide()
+	elif what == NOTIFICATION_THEME_CHANGED:
+		if is_instance_valid(layer_settings_container):
+			layer_container.custom_minimum_size.x = layer_settings_container.size.x
 
 
 func _input(event: InputEvent) -> void:
@@ -125,6 +142,9 @@ func _frame_scroll_changed(_value: float) -> void:
 
 func _on_LayerVBox_resized() -> void:
 	frame_scroll_bar.offset_left = frame_scroll_container.position.x
+	# it doesn't update properly without yields (for the first time after pixelorama starts)
+	await get_tree().process_frame
+	await get_tree().process_frame
 	adjust_scroll_container()
 
 
@@ -322,10 +342,19 @@ func delete_frames(indices := []) -> void:
 
 
 func _on_CopyFrame_pressed() -> void:
-	copy_frames()
+	copy_frames([], -1, false)
 
 
-func copy_frames(indices := [], destination := -1) -> void:
+## Copies frames located at [param indices] and inserts them at [param destination].
+## When [param destination] is -1, the new frames will be placed right next to the last frame in
+## [param destination]. if [param select_all_cels] is [code]true[/code] then all of the new copied
+## cels will be selected, otherwise only the cels corresponding to the original selected cels will
+## get selected. if [param tag_name_from] holds an animation tag then a tag of it's name will be
+## created over the new frames.
+## [br]Note: [param indices] must be in ascending order
+func copy_frames(
+	indices := [], destination := -1, select_all_cels := true, tag_name_from: AnimationTag = null
+) -> void:
 	var project := Global.current_project
 
 	if indices.size() == 0:
@@ -354,6 +383,7 @@ func copy_frames(indices := [], destination := -1) -> void:
 		)
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
+	var last_focus_cels = []
 	for f in indices:
 		var src_frame := project.frames[f]
 		var new_frame := Frame.new()
@@ -361,6 +391,8 @@ func copy_frames(indices := [], destination := -1) -> void:
 
 		new_frame.duration = src_frame.duration
 		for l in range(project.layers.size()):
+			if [f, l] in project.selected_cels:
+				last_focus_cels.append([copied_indices[indices.find(f)], l])
 			var src_cel := project.frames[f].cels[l]  # Cel we're copying from, the source
 			var new_cel: BaseCel
 			var selected_id := -1
@@ -394,37 +426,55 @@ func copy_frames(indices := [], destination := -1) -> void:
 						new_cel.selected = new_cel.get_object_from_id(selected_id)
 			new_frame.cels.append(new_cel)
 
-		for tag in new_animation_tags:  # Loop through the tags to see if the frame is in one
+		# After adding one frame, loop through the tags to see if the frame was in an animation tag
+		for tag in new_animation_tags:
 			if copied_indices[0] >= tag.from && copied_indices[0] <= tag.to:
 				tag.to += 1
 			elif copied_indices[0] < tag.from:
 				tag.from += 1
 				tag.to += 1
+	if tag_name_from:
+		new_animation_tags.append(
+			AnimationTag.new(
+				tag_name_from.name,
+				tag_name_from.color,
+				copied_indices[0] + 1,
+				copied_indices[-1] + 1
+			)
+		)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	# Note: temporarily set the selected cels to an empty array (needed for undo/redo)
+	project.undo_redo.add_do_property(Global.current_project, "selected_cels", [])
+	project.undo_redo.add_undo_property(Global.current_project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.add_frames.bind(copied_frames, copied_indices))
 	project.undo_redo.add_undo_method(project.remove_frames.bind(copied_indices))
-	project.undo_redo.add_do_method(project.change_cel.bind(copied_indices[0]))
+	if select_all_cels:
+		var all_new_cels = []
+		# Select all the new frames so that it is easier to move/offset collectively if user wants
+		# To ease animation workflow, new current frame is the first copied frame instead of the last
+		var range_start := copied_indices[-1]
+		var range_end := copied_indices[0]
+		var frame_diff_sign := signi(range_end - range_start)
+		if frame_diff_sign == 0:
+			frame_diff_sign = 1
+		for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
+			for j in range(0, Global.current_project.layers.size()):
+				var frame_layer := [i, j]
+				if !all_new_cels.has(frame_layer):
+					all_new_cels.append(frame_layer)
+		project.undo_redo.add_do_property(Global.current_project, "selected_cels", all_new_cels)
+		project.undo_redo.add_do_method(project.change_cel.bind(range_end))
+	else:
+		project.undo_redo.add_do_property(Global.current_project, "selected_cels", last_focus_cels)
+		project.undo_redo.add_do_method(project.change_cel.bind(copied_indices[0]))
+	project.undo_redo.add_undo_property(
+		Global.current_project, "selected_cels", project.selected_cels
+	)
 	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
-	# Select all the new frames so that it is easier to move/offset collectively if user wants
-	# To ease animation workflow, new current frame is the first copied frame instead of the last
-	var range_start := copied_indices[-1]
-	var range_end := copied_indices[0]
-	var frame_diff_sign := signi(range_end - range_start)
-	if frame_diff_sign == 0:
-		frame_diff_sign = 1
-	for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
-		for j in range(0, Global.current_project.layers.size()):
-			var frame_layer := [i, j]
-			if !Global.current_project.selected_cels.has(frame_layer):
-				Global.current_project.selected_cels.append(frame_layer)
-	Global.current_project.change_cel(range_end, -1)
-	await get_tree().process_frame
-	await get_tree().process_frame
-	adjust_scroll_container()
 
 
 func _on_FrameTagButton_pressed() -> void:
@@ -464,14 +514,8 @@ func _on_OnionSkinning_pressed() -> void:
 
 
 func _on_OnionSkinningSettings_pressed() -> void:
-	$OnionSkinningSettings.popup(
-		Rect2(
-			onion_skinning_button.global_position.x - $OnionSkinningSettings.size.x - 16,
-			onion_skinning_button.global_position.y - $OnionSkinningSettings.size.y + 32,
-			136,
-			126
-		)
-	)
+	var pos := Vector2i(onion_skinning_button.global_position) - onion_skinning_settings.size
+	onion_skinning_settings.popup(Rect2i(pos.x - 16, pos.y + 32, 136, 126))
 
 
 func _on_LoopAnim_pressed() -> void:
@@ -493,25 +537,25 @@ func _on_LoopAnim_pressed() -> void:
 
 func _on_PlayForward_toggled(button_pressed: bool) -> void:
 	if button_pressed:
-		Global.change_button_texturerect(Global.play_forward.get_child(0), "pause.png")
+		Global.change_button_texturerect(play_forward.get_child(0), "pause.png")
 	else:
-		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
+		Global.change_button_texturerect(play_forward.get_child(0), "play.png")
 	play_animation(button_pressed, true)
 
 
 func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 	if button_pressed:
-		Global.change_button_texturerect(Global.play_backwards.get_child(0), "pause.png")
+		Global.change_button_texturerect(play_backwards.get_child(0), "pause.png")
 	else:
-		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
+		Global.change_button_texturerect(play_backwards.get_child(0), "play_backwards.png")
 	play_animation(button_pressed, false)
 
 
-# Called on each frame of the animation
+## Called on each frame of the animation
 func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
-		Global.play_forward.button_pressed = false
-		Global.play_backwards.button_pressed = false
+		play_forward.button_pressed = false
+		play_backwards.button_pressed = false
 		Global.animation_timer.stop()
 		return
 
@@ -529,9 +573,10 @@ func _on_AnimationTimer_timeout() -> void:
 		else:
 			match animation_loop:
 				0:  # No loop
-					Global.play_forward.button_pressed = false
-					Global.play_backwards.button_pressed = false
+					play_forward.button_pressed = false
+					play_backwards.button_pressed = false
 					Global.animation_timer.stop()
+					animation_finished.emit()
 					is_animation_running = false
 				1:  # Cycle loop
 					project.selected_cels.clear()
@@ -555,9 +600,10 @@ func _on_AnimationTimer_timeout() -> void:
 		else:
 			match animation_loop:
 				0:  # No loop
-					Global.play_backwards.button_pressed = false
-					Global.play_forward.button_pressed = false
+					play_backwards.button_pressed = false
+					play_forward.button_pressed = false
 					Global.animation_timer.stop()
+					animation_finished.emit()
 					is_animation_running = false
 				1:  # Cycle loop
 					project.selected_cels.clear()
@@ -588,21 +634,21 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 	if first_frame == last_frame:
 		if forward_dir:
-			Global.play_forward.button_pressed = false
+			play_forward.button_pressed = false
 		else:
-			Global.play_backwards.button_pressed = false
+			play_backwards.button_pressed = false
 		return
 
 	if forward_dir:
-		Global.play_backwards.toggled.disconnect(_on_PlayBackwards_toggled)
-		Global.play_backwards.button_pressed = false
-		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
-		Global.play_backwards.toggled.connect(_on_PlayBackwards_toggled)
+		play_backwards.toggled.disconnect(_on_PlayBackwards_toggled)
+		play_backwards.button_pressed = false
+		Global.change_button_texturerect(play_backwards.get_child(0), "play_backwards.png")
+		play_backwards.toggled.connect(_on_PlayBackwards_toggled)
 	else:
-		Global.play_forward.toggled.disconnect(_on_PlayForward_toggled)
-		Global.play_forward.button_pressed = false
-		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
-		Global.play_forward.toggled.connect(_on_PlayForward_toggled)
+		play_forward.toggled.disconnect(_on_PlayForward_toggled)
+		play_forward.button_pressed = false
+		Global.change_button_texturerect(play_forward.get_child(0), "play.png")
+		play_forward.toggled.connect(_on_PlayForward_toggled)
 
 	if play:
 		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
@@ -612,24 +658,30 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 		Global.animation_timer.wait_time = duration * (1 / Global.current_project.fps)
 		Global.animation_timer.start()
 		animation_forward = forward_dir
+		animation_started.emit(forward_dir)
 	else:
 		Global.animation_timer.stop()
+		animation_finished.emit()
 
 	is_animation_running = play
 
 
 func _on_NextFrame_pressed() -> void:
 	var project := Global.current_project
+	project.selected_cels.clear()
 	if project.current_frame < project.frames.size() - 1:
-		project.selected_cels.clear()
 		project.change_cel(project.current_frame + 1, -1)
+	else:
+		project.change_cel(0, -1)
 
 
 func _on_PreviousFrame_pressed() -> void:
 	var project := Global.current_project
+	project.selected_cels.clear()
 	if project.current_frame > 0:
-		project.selected_cels.clear()
 		project.change_cel(project.current_frame - 1, -1)
+	else:
+		project.change_cel(project.frames.size() - 1, -1)
 
 
 func _on_LastFrame_pressed() -> void:
@@ -680,7 +732,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 # Layer buttons
 
 
-func add_layer(type: int) -> void:
+func add_layer(type := 0) -> void:
 	var project := Global.current_project
 	var current_layer := project.layers[project.current_layer]
 	var l: BaseLayer
@@ -887,25 +939,23 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undo_redo.create_action("Merge Layer")
 
 	for frame in project.frames:
-		top_cels.append(frame.cels[top_layer.index])  # Store for undo purposes
+		var top_cel := frame.cels[top_layer.index]
+		top_cels.append(top_cel)  # Store for undo purposes
 
-		var top_image := frame.cels[top_layer.index].get_image()
+		var top_image := top_layer.display_effects(top_cel)
 		var bottom_cel := frame.cels[bottom_layer.index]
 		var textures: Array[Image] = []
-		var opacities := PackedFloat32Array()
-		var blend_modes := PackedInt32Array()
+		var metadata_image := Image.create(2, 3, false, Image.FORMAT_R8)
 		textures.append(bottom_cel.get_image())
-		opacities.append(bottom_cel.opacity)
-		blend_modes.append(bottom_layer.blend_mode)
+		metadata_image.set_pixel(0, 1, Color(1.0, 0.0, 0.0, 0.0))
 		textures.append(top_image)
-		opacities.append(frame.cels[top_layer.index].opacity)
-		blend_modes.append(top_layer.blend_mode)
+		metadata_image.set_pixel(1, 0, Color(top_layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+		var opacity := frame.cels[top_layer.index].get_final_opacity(top_layer)
+		metadata_image.set_pixel(1, 1, Color(opacity, 0.0, 0.0, 0.0))
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
 		var params := {
-			"layers": texture_array,
-			"opacities": opacities,
-			"blend_modes": blend_modes,
+			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
 		}
 		var bottom_image := Image.create(
 			top_image.get_width(), top_image.get_height(), false, top_image.get_format()
@@ -923,15 +973,14 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_undo_method(
 				bottom_layer.link_cel.bind(bottom_cel, bottom_cel.link_set)
 			)
-			project.undo_redo.add_do_property(bottom_cel, "image_texture", ImageTexture.new())
-			project.undo_redo.add_undo_property(
-				bottom_cel, "image_texture", bottom_cel.image_texture
-			)
 			project.undo_redo.add_do_property(bottom_cel, "image", bottom_image)
 			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			project.undo_redo.add_do_property(bottom_cel.image, "data", bottom_image.data)
-			project.undo_redo.add_undo_property(bottom_cel.image, "data", bottom_cel.image.data)
+			Global.undo_redo_compress_images(
+				{bottom_cel.image: bottom_image.data},
+				{bottom_cel.image: bottom_cel.image.data},
+				project
+			)
 
 	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
 	project.undo_redo.add_undo_method(
@@ -950,25 +999,71 @@ func _on_OpacitySlider_value_changed(value: float) -> void:
 	# Also update all selected frames.
 	for idx_pair in Global.current_project.selected_cels:
 		if idx_pair[1] == current_layer_idx:
-			var frame := Global.current_project.frames[idx_pair[0]]
-			var cel := frame.cels[current_layer_idx]
-			cel.opacity = new_opacity
+			var layer := Global.current_project.layers[current_layer_idx]
+			layer.opacity = new_opacity
 	Global.canvas.queue_redraw()
 
 
 func _on_onion_skinning_settings_close_requested() -> void:
-	$OnionSkinningSettings.hide()
+	onion_skinning_settings.hide()
 
 
 func _on_onion_skinning_settings_visibility_changed() -> void:
-	Global.can_draw = not $OnionSkinningSettings.visible
+	Global.can_draw = not onion_skinning_settings.visible
 
 
 # Methods to update the UI in response to changes in the current project
 
 
+func _cel_switched() -> void:
+	_toggle_frame_buttons()
+	_toggle_layer_buttons()
+	var project := Global.current_project
+	var layer_opacity := project.layers[project.current_layer].opacity
+	opacity_slider.value = layer_opacity * 100
+	var blend_mode_index := blend_modes_button.get_item_index(
+		project.layers[project.current_layer].blend_mode
+	)
+	blend_modes_button.selected = blend_mode_index
+
+
+func _toggle_frame_buttons() -> void:
+	var project := Global.current_project
+	Global.disable_button(delete_frame, project.frames.size() == 1)
+	Global.disable_button(move_frame_left, project.current_frame == 0)
+	Global.disable_button(move_frame_right, project.current_frame == project.frames.size() - 1)
+
+
+func _toggle_layer_buttons() -> void:
+	var project := Global.current_project
+	if project.layers.is_empty() or project.current_layer >= project.layers.size():
+		return
+	var layer := project.layers[project.current_layer]
+	var child_count := layer.get_child_count(true)
+
+	Global.disable_button(
+		remove_layer, layer.is_locked_in_hierarchy() or project.layers.size() == child_count + 1
+	)
+	Global.disable_button(move_up_layer, project.current_layer == project.layers.size() - 1)
+	Global.disable_button(
+		move_down_layer,
+		project.current_layer == child_count and not is_instance_valid(layer.parent)
+	)
+	Global.disable_button(
+		merge_down_layer,
+		(
+			project.current_layer == child_count
+			or layer is GroupLayer
+			or project.layers[project.current_layer - 1] is GroupLayer
+			or project.layers[project.current_layer - 1] is Layer3D
+		)
+	)
+
+
 func project_changed() -> void:
 	var project := Global.current_project
+	_toggle_frame_buttons()
+	_toggle_layer_buttons()
 	# These must be removed from tree immediately to not mess up the indices of
 	# the new buttons, so use either free or queue_free + parent.remove_child
 	for layer_button in Global.layer_vbox.get_children():
@@ -981,7 +1076,7 @@ func project_changed() -> void:
 	for i in project.layers.size():
 		project_layer_added(i)
 	for f in project.frames.size():
-		var button := frame_button_node.instantiate() as Button
+		var button := FRAME_BUTTON_TSCN.instantiate() as Button
 		button.frame = f
 		Global.frame_hbox.add_child(button)
 
@@ -1006,13 +1101,13 @@ func project_changed() -> void:
 
 func project_frame_added(frame: int) -> void:
 	var project := Global.current_project
-	var button := frame_button_node.instantiate() as Button
+	var button := FRAME_BUTTON_TSCN.instantiate() as Button
 	button.frame = frame
 	Global.frame_hbox.add_child(button)
 	Global.frame_hbox.move_child(button, frame)
 	# Make it visible, yes 3 call_deferreds are required
 	frame_scroll_container.call_deferred(
-		"call_deferred", "call_deferred", "ensure_control_visible", button
+		&"call_deferred", &"call_deferred", &"ensure_control_visible", button
 	)
 	var layer := Global.cel_vbox.get_child_count() - 1
 	for cel_hbox in Global.cel_vbox.get_children():
@@ -1035,7 +1130,7 @@ func project_layer_added(layer: int) -> void:
 	var project := Global.current_project
 
 	var layer_button := project.layers[layer].instantiate_layer_button() as LayerButton
-	layer_button.layer = layer
+	layer_button.layer_index = layer
 	if project.layers[layer].name == "":
 		project.layers[layer].set_name_to_default(Global.current_project.layers.size())
 
@@ -1075,3 +1170,8 @@ func project_cel_removed(frame: int, layer: int) -> void:
 	var cel_hbox := Global.cel_vbox.get_child(Global.cel_vbox.get_child_count() - 1 - layer)
 	cel_hbox.get_child(frame).queue_free()
 	cel_hbox.remove_child(cel_hbox.get_child(frame))
+
+
+func _on_layer_fx_pressed() -> void:
+	$LayerEffectsSettings.popup_centered()
+	Global.dialog_open(true)

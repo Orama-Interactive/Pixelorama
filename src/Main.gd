@@ -3,10 +3,12 @@ extends Control
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-var cursor_image: Texture2D = preload("res://assets/graphics/cursor.png")
+var changed_projects_on_quit: Array[Project]
+var cursor_image := preload("res://assets/graphics/cursor.png")
 
 @onready var ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 @onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
+@onready var save_sprite_html5: ConfirmationDialog = $Dialogs/SaveSpriteHTML5
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 @onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
 @onready var left_cursor: Sprite2D = $LeftCursor
@@ -26,13 +28,11 @@ func _ready() -> void:
 	Global.current_project.layers.append(PixelLayer.new(Global.current_project))
 	Global.current_project.frames.append(Global.current_project.new_empty_frame())
 	Global.animation_timeline.project_changed()
-	Global.current_project.toggle_frame_buttons()
 
 	Import.import_brushes(Global.path_join_array(Global.data_directories, "Brushes"))
 	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
-	quit_and_save_dialog.get_ok_button().text = "Save & Exit"
 
 	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -40,7 +40,16 @@ func _ready() -> void:
 	Global.save_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
-
+	var include_blended := CheckBox.new()
+	include_blended.name = "IncludeBlended"
+	include_blended.text = "Include blended images"
+	include_blended.tooltip_text = """
+If enabled, the final blended images are also being stored in the pxo, for each frame.
+This makes the pxo file larger and is useful for importing by third-party software
+or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.
+"""
+	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	Global.save_sprites_dialog.get_vbox().add_child(include_blended)
 	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
 	# Additionally, AppArmor policies prevent the app from writing to the /home
 	# directory. Until the proper AppArmor policies are determined to write to these
@@ -50,14 +59,6 @@ func _ready() -> void:
 	if OS.has_feature("clickable"):
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
-
-	var zstd_checkbox := CheckBox.new()
-	zstd_checkbox.name = "ZSTDCompression"
-	zstd_checkbox.button_pressed = true
-	zstd_checkbox.text = "Use ZSTD Compression"
-	zstd_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	Global.save_sprites_dialog.get_vbox().add_child(zstd_checkbox)
-
 	_handle_backup()
 
 	_handle_cmdline_arguments()
@@ -277,30 +278,43 @@ func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
 
+func show_save_dialog(project := Global.current_project) -> void:
+	Global.dialog_open(true)
+	if OS.get_name() == "Web":
+		var save_filename := save_sprite_html5.get_node("%FileNameLineEdit")
+		save_sprite_html5.popup_centered()
+		save_filename.text = project.name
+	else:
+		Global.save_sprites_dialog.popup_centered()
+		Global.save_sprites_dialog.get_line_edit().text = project.name
+
+
 func _on_SaveSprite_file_selected(path: String) -> void:
 	save_project(path)
 
 
 func save_project(path: String) -> void:
-	var zstd: bool = (
-		Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").button_pressed
-	)
-	var success = OpenSave.save_pxo_file(path, false, zstd)
+	var project_to_save := Global.current_project
+	if is_quitting_on_save:
+		project_to_save = changed_projects_on_quit[0]
+	var include_blended := false
+	if OS.get_name() == "Web":
+		var file_name: String = save_sprite_html5.get_node("%FileNameLineEdit").text
+		file_name += ".pxo"
+		path = "user://".path_join(file_name)
+		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
+	else:
+		include_blended = (
+			Global.save_sprites_dialog.get_vbox().get_node("IncludeBlended").button_pressed
+		)
+	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
-
-		if is_quitting_on_save:
-			_quit()
-
-
-func _on_SaveSpriteHTML5_confirmed() -> void:
-	var file_name: String = (
-		Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text
-	)
-	file_name += ".pxo"
-	var path := "user://".path_join(file_name)
-	OpenSave.save_pxo_file(path, false, false)
+	if is_quitting_on_save:
+		changed_projects_on_quit.pop_front()
+		_save_on_quit_confirmation()
+		is_quitting_on_save = false
 
 
 func _on_open_sprite_visibility_changed() -> void:
@@ -313,22 +327,37 @@ func _can_draw_true() -> void:
 
 
 func show_quit_dialog() -> void:
-	var changed_project := false
+	changed_projects_on_quit = []
 	for project in Global.projects:
 		if project.has_changed:
-			changed_project = true
-			break
+			changed_projects_on_quit.append(project)
 
-	if !quit_dialog.visible:
-		if !changed_project:
+	if not quit_dialog.visible:
+		if changed_projects_on_quit.size() == 0:
 			if Global.quit_confirmation:
-				quit_dialog.call_deferred("popup_centered")
+				quit_dialog.popup_centered()
 			else:
 				_quit()
 		else:
-			quit_and_save_dialog.call_deferred("popup_centered")
+			quit_and_save_dialog.dialog_text = (
+				tr("Project %s has unsaved progress. How do you wish to proceed?")
+				% changed_projects_on_quit[0].name
+			)
+			quit_and_save_dialog.popup_centered()
 
 	Global.dialog_open(true)
+
+
+func _save_on_quit_confirmation() -> void:
+	if changed_projects_on_quit.size() == 0:
+		_quit()
+	else:
+		quit_and_save_dialog.dialog_text = (
+			tr("Project %s has unsaved progress. How do you wish to proceed?")
+			% changed_projects_on_quit[0].name
+		)
+		quit_and_save_dialog.popup_centered()
+		Global.dialog_open(true)
 
 
 func _on_QuitDialog_confirmed() -> void:
@@ -337,15 +366,13 @@ func _on_QuitDialog_confirmed() -> void:
 
 func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
 	if action == "ExitWithoutSaving":
-		_quit()
+		changed_projects_on_quit.pop_front()
+		_save_on_quit_confirmation()
 
 
 func _on_QuitAndSaveDialog_confirmed() -> void:
 	is_quitting_on_save = true
-	Global.save_sprites_dialog.get_ok_button().text = "Save & Exit"
-	Global.save_sprites_dialog.popup_centered()
-	quit_dialog.hide()
-	Global.dialog_open(true)
+	show_save_dialog(changed_projects_on_quit[0])
 
 
 func _quit() -> void:

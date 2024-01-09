@@ -15,7 +15,7 @@ config/description="A free & open-source 2D sprite editor"
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="pixelorama"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.145098, 0.145098, 0.164706, 1)
 boot_splash/image="res://assets/graphics/splash.png"
@@ -24,7 +24,7 @@ config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/Version="v1.0-dev"
 config/ExtensionsAPI_Version=4
-config/Pxo_Version=2
+config/Pxo_Version=3
 
 [audio]
 
@@ -41,7 +41,7 @@ Html5FileExchange="*res://src/Autoload/HTML5FileExchange.gd"
 Export="*res://src/Autoload/Export.gd"
 Palettes="*res://src/Autoload/Palettes.gd"
 Keychain="*res://addons/keychain/Keychain.gd"
-ExtensionsApi="*res://src/Autoload/ExtensionsAPI.gd"
+ExtensionsApi="*res://src/Autoload/ExtensionsApi.gd"
 
 [debug]
 
@@ -639,7 +639,11 @@ scale_image={
 "deadzone": 0.5,
 "events": []
 }
-crop_image={
+crop_to_selection={
+"deadzone": 0.5,
+"events": []
+}
+crop_to_content={
 "deadzone": 0.5,
 "events": []
 }
@@ -680,6 +684,10 @@ gradient_map={
 "events": []
 }
 posterize={
+"deadzone": 0.5,
+"events": []
+}
+display_layer_effects={
 "deadzone": 0.5,
 "events": []
 }
@@ -756,7 +764,8 @@ add_frame={
 }
 remove_frame={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194312,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 clone_frame={
 "deadzone": 0.5,
@@ -811,6 +820,26 @@ onion_skinning_settings={
 "deadzone": 0.5,
 "events": []
 }
+reference_rotate={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+reference_scale={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194328,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+reference_quick_menu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+cancel_reference_transform={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [internationalization]
 
@@ -820,5 +849,7 @@ locale/translations=PackedStringArray("res://Translations/en_US.po")
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 threads/thread_model=2
 vram_compression/import_etc=true

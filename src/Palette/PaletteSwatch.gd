@@ -1,9 +1,9 @@
 class_name PaletteSwatch
 extends ColorRect
 
-signal pressed(mouse_button)
-signal double_clicked(mouse_button, position)
-signal dropped(source_index, new_index)
+signal pressed(mouse_button: int)
+signal double_clicked(mouse_button: int, position: Vector2)
+signal dropped(source_index: int, new_index: int)
 
 const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 
@@ -20,6 +20,12 @@ var empty := true:
 			mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_THEME_CHANGED:
+		if empty:
+			empty = true
+
+
 func set_swatch_size(swatch_size: Vector2) -> void:
 	custom_minimum_size = swatch_size
 	size = swatch_size
@@ -28,12 +34,12 @@ func set_swatch_size(swatch_size: Vector2) -> void:
 func _draw() -> void:
 	if not empty:
 		# Black border around swatches with a color
-		draw_rect(Rect2(Vector2.ZERO, size), Color.BLACK, false, 1)
+		draw_rect(Rect2(Vector2.ONE, size), Color.BLACK, false, 1)
 
 	if show_left_highlight:
 		# Display outer border highlight
-		draw_rect(Rect2(Vector2.ZERO, size), Color.WHITE, false, 1)
-		draw_rect(Rect2(Vector2.ONE, size - Vector2(2, 2)), Color.BLACK, false, 1)
+		draw_rect(Rect2(Vector2.ONE, size), Color.WHITE, false, 1)
+		draw_rect(Rect2(Vector2(2, 2), size - Vector2(2, 2)), Color.BLACK, false, 1)
 
 	if show_right_highlight:
 		# Display inner border highlight
@@ -55,7 +61,7 @@ func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 		queue_redraw()
 
 
-func _get_drag_data(_position: Vector2):
+func _get_drag_data(_position: Vector2) -> Variant:
 	var data = null
 	if not empty:
 		var drag_icon: PaletteSwatch = self.duplicate()

@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 4.1.2
+  GODOT_VERSION: 4.2.1
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.1.2
+      image: docker://barichello/godot-ci:4.2.1
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
@@ -50,7 +50,7 @@ jobs:
           cp -R ./pixelorama_data ./build/windows-64bit
           rm ./build/windows-64bit/pixelorama_data/.gdignore
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Windows-64bit
           path: ./build/windows-64bit/
@@ -60,7 +60,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.1.2
+      image: docker://barichello/godot-ci:4.2.1
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -85,7 +85,7 @@ jobs:
           cd build
           tar zcvf linux-64bit.tar.gz linux-64bit
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Linux-64bit
           path: ./build/linux-64bit.tar.gz
@@ -136,7 +136,7 @@ jobs:
       - name: Create DMG archive 🔧
         run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Mac
           path: ./build/mac/Pixelorama.dmg

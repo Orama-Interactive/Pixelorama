@@ -20,9 +20,10 @@ When reporting a bug, make sure to provide enough details, such as information a
 
 ## Contributing pull requests
 If you want to add new features or fix bugs, please make sure that:
-- The code you are submitting follows the recommended [GDScript style guide.](https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_styleguide.html)
-  [Static typing](https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/static_typing.html) is used in the code, so please make sure the code in your PRs also use it.
+- The code you are submitting follows the recommended [GDScript style guide.](https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_styleguide.html). Downloading the [gdtoolkit](https://github.com/Scony/godot-gdscript-toolkit) and running `gdformat .` to automatically format your code, and `gdlint .` to give you tips on how to improve the code's style on the `src` folder is recommended before pushing your commits.
+- [Static typing](https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/static_typing.html) is used in the code, so please make sure the code in your PRs also use it.
 - Avoid including unneeded files in your commits. This is true mostly for Main.tscn and other scenes, as Godot likes to change them by itself. If you haven't made changes to scenes, please **do NOT** include them in your commits.
+- Please take a look at the differences of your changes and the main branch, and ensure you're not accidentally reverting something. This can often happen when your work is based on an older commit of the main repository's master branch.
 - Please have **Trim Trailing Whitespace On Save** enabled. This makes for cleaner VCS diffs. It's usually considered good practice to avoid trailing whitespace in files, and to make sure all files end with a single blank line.
   You can enable **Text Editor > Files > Trim Trailing Whitespace On Save** in the Editor Settings to do this automatically in the script editor.
 - Make sure your branch is up to date with the master branch. If it's not, please rebase it, if it's possible.
@@ -32,7 +33,6 @@ If you want to add new features or fix bugs, please make sure that:
 - If you want to make changes to UI elements that are PackedScenes, please edit them in their own scene files (open their scenes in the editor) instead of Main.tscn, or their parent scene in general.
 - If you are making changes to popup (and as an extension, dialog) nodes as different scenes, please don't forget to turn off their visibility.
 - When you're creating a new script, Godot will place some comments and methods for you. If you're not using them, please remove them. They're taking unnecessary space.
-- Avoid using the "pass" keyword. It has no actual usage, besides being used as a placeholder for temporarily empty methods and empty cases. Make sure you don't include empty methods and cases in the code of your PR.
 - If you are adding new interactive UI elements such as buttons, don't forget to change their mouse default cursor shape to pointing arrow. Hint tooltips that explain the element's usage to the user are welcome too, just make sure to also include them in `Translations.pot`.
 - If you are adding new scripts and/or scenes, please put them somewhere inside the `src/` directory, and make sure to use PascalCase for your file and folder names. [Read this guide for more information.](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/)
 - If you are adding images or any type of asset, please put them somewhere inside the `assets/` directory, and make sure to use snake_case for your file and folder names.
@@ -61,4 +61,4 @@ To communicate with developers (e.g. to discuss a feature you want to implement 
   can also create a new issue/discussion.
 - [Our Discord Server](https://discord.gg/GTMtr8s): All developers and most contributors are there, so it's the best way for direct chat
   about Pixelorama. You can use the channel `#pixelorama-dev` to stay up to date with Pixelorama's developments real-time,
-  or talk about the developments and request new features. If you seek support, please use the `#pixelorama-help` channel instead.
+  or talk about the developments and request new features. If you seek support, please use the `#pixelorama-help` channel instead. Please avoid DMing developers and contributors, unless they tell you otherwise.

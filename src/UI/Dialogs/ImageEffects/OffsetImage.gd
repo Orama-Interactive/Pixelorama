@@ -2,7 +2,7 @@ extends ImageEffect
 
 enum Animate { OFFSET_X, OFFSET_Y }
 
-var shader := preload("res://src/Shaders/OffsetPixels.gdshader")
+var shader := preload("res://src/Shaders/Effects/OffsetPixels.gdshader")
 var wrap_around := false
 
 @onready var offset_sliders := $VBoxContainer/OffsetOptions/OffsetSliders as ValueSliderV2
@@ -43,7 +43,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		await gen.done
 
 
 func _on_OffsetSliders_value_changed(_value: Vector2) -> void:

@@ -9,7 +9,7 @@
 ## Keychain
 
 - Upstream: https://github.com/Orama-Interactive/Keychain
-- Version: 4a08d6b380929031b2c9202811ae0a65d850a5ac
+- Version: [5031af557efcff4eb1ae77550e91868ab57cb1c0](https://github.com/Orama-Interactive/Keychain/commit/5031af557efcff4eb1ae77550e91868ab57cb1c0)
 - License: [MIT](https://github.com/Orama-Interactive/Keychain/blob/main/LICENSE)
 
 ## gdgifexporter
@@ -24,7 +24,7 @@ Files extracted from source:
 ## godot-dockable-container
 
 - Upstream: https://github.com/gilzoide/godot-dockable-container
-- Version: 9a93231d7f449aad039b28ff05bc1ef40a9956ce
+- Version: 63943c37835c504b1178a83b4b0050815ecf69c0
 - License: [CC0-1.0](https://github.com/gilzoide/godot-dockable-container/blob/main/LICENSE)
 
 ## SmartSlicer

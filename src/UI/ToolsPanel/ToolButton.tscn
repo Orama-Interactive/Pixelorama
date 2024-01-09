@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddrry0n03t66c"]
+
+[ext_resource type="Texture2D" uid="uid://cnomk15kl7go0" path="res://assets/graphics/tools/tool_background.png" id="1_voklp"]
+[ext_resource type="Texture2D" uid="uid://4h6t2v7tf6r2" path="res://assets/graphics/tools/tool_background_right.png" id="2_v8t3o"]
+[ext_resource type="Texture2D" uid="uid://chg3ejelsgcwm" path="res://assets/graphics/tools/rectselect.png" id="3_hl32r"]
+
+[node name="Tool" type="Button" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+offset_right = 24.0
+offset_bottom = 24.0
+tooltip_text = "Rectangular Selection
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_vertical = 2
+texture = ExtResource("1_voklp")
+region_rect = Rect2(0, 0, 11, 24)
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+
+[node name="BackgroundRight" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2_v8t3o")
+patch_margin_left = 11
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="ToolIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_hl32r")

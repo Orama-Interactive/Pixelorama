@@ -1,9 +1,9 @@
 class_name PaletteGrid
 extends GridContainer
 
-signal swatch_pressed(mouse_button, index)
-signal swatch_double_clicked(mouse_button, index, position)
-signal swatch_dropped(source_index, target_index)
+signal swatch_pressed(mouse_button: int, index: int)
+signal swatch_double_clicked(mouse_button: int, index: int, position: Vector2)
+signal swatch_dropped(source_index: int, target_index: int)
 
 const PALETTE_SWATCH_SCENE := preload("res://src/Palette/PaletteSwatch.tscn")
 const DEFAULT_SWATCH_SIZE := Vector2(26, 26)
@@ -12,13 +12,14 @@ const MAX_SWATCH_SIZE := Vector2(64, 64)
 
 var swatches: Array[PaletteSwatch] = []
 var current_palette: Palette = null
-var grid_window_origin := Vector2.ZERO
-var grid_size := Vector2.ZERO
+var grid_window_origin := Vector2i.ZERO
+var grid_size := Vector2i.ZERO
 var swatch_size := DEFAULT_SWATCH_SIZE
 
 
 func _ready() -> void:
 	swatch_size = Global.config_cache.get_value("palettes", "swatch_size", DEFAULT_SWATCH_SIZE)
+	Tools.color_changed.connect(find_and_select_color)
 
 
 func set_palette(new_palette: Palette) -> void:
@@ -32,7 +33,7 @@ func set_palette(new_palette: Palette) -> void:
 
 func setup_swatches() -> void:
 	# Columns cannot be 0
-	columns = 1.0 if grid_size.x == 0.0 else grid_size.x
+	columns = 1 if grid_size.x == 0 else grid_size.x
 	if grid_size.x * grid_size.y > swatches.size():
 		for i in range(swatches.size(), grid_size.x * grid_size.y):
 			var swatch := PALETTE_SWATCH_SCENE.instantiate() as PaletteSwatch
@@ -67,9 +68,9 @@ func draw_palette() -> void:
 		for i in range(grid_size.x):
 			var grid_index := i + grid_size.x * j
 			var index := convert_grid_index_to_palette_index(grid_index)
-			var swatch = swatches[grid_index]
-			swatch.show_left_highlight = false
-			swatch.show_right_highlight = false
+			var swatch := swatches[grid_index]
+			swatch.show_left_highlight = Palettes.left_selected_color == index
+			swatch.show_right_highlight = Palettes.right_selected_color == index
 			var color = current_palette.get_color(index)
 			if color != null:
 				swatch.color = color
@@ -79,13 +80,15 @@ func draw_palette() -> void:
 				swatch.empty = true
 
 
-func scroll_palette(origin: Vector2) -> void:
+func scroll_palette(origin: Vector2i) -> void:
 	grid_window_origin = origin
 	draw_palette()
 
 
-func find_and_select_color(mouse_button: int, target_color: Color) -> void:
-	var old_index = Palettes.current_palette_get_selected_color_index(mouse_button)
+## Called when the color changes, either the left or the right, determined by [param mouse_button].
+## If current palette has [param target_color] as a [Color], then select it.
+func find_and_select_color(target_color: Color, mouse_button: int) -> void:
+	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	for color_ind in swatches.size():
 		if target_color.is_equal_approx(swatches[color_ind].color):
 			select_swatch(mouse_button, color_ind, old_index)
@@ -99,8 +102,8 @@ func find_and_select_color(mouse_button: int, target_color: Color) -> void:
 
 ## Displays a left/right highlight over a swatch
 func select_swatch(mouse_button: int, palette_index: int, old_palette_index: int) -> void:
-	var index = convert_palette_index_to_grid_index(palette_index)
-	var old_index = convert_palette_index_to_grid_index(old_palette_index)
+	var index := convert_palette_index_to_grid_index(palette_index)
+	var old_index := convert_palette_index_to_grid_index(old_palette_index)
 	if index >= 0 and index < swatches.size():
 		# Remove highlight from old index swatch and add to index swatch
 		if old_index >= 0 and old_index < swatches.size():
@@ -110,29 +113,22 @@ func select_swatch(mouse_button: int, palette_index: int, old_palette_index: int
 
 
 func unselect_swatch(mouse_button: int, palette_index: int) -> void:
-	var index = convert_palette_index_to_grid_index(palette_index)
+	var index := convert_palette_index_to_grid_index(palette_index)
 	if index >= 0 and index < swatches.size():
 		swatches[index].show_selected_highlight(false, mouse_button)
 
 
 func set_swatch_color(palette_index: int, color: Color) -> void:
-	var index = convert_palette_index_to_grid_index(palette_index)
+	var index := convert_palette_index_to_grid_index(palette_index)
 	if index >= 0 and index < swatches.size():
 		swatches[index].color = color
 
 
 func get_swatch_color(palette_index: int) -> Color:
-	var index = convert_palette_index_to_grid_index(palette_index)
+	var index := convert_palette_index_to_grid_index(palette_index)
 	if index >= 0 and index < swatches.size():
 		return swatches[index].color
 	return Color.TRANSPARENT
-
-
-## Used to reload empty swatch color from a theme
-func reset_empty_swatches_color() -> void:
-	for swatch in swatches:
-		if swatch.empty:
-			swatch.empty = true
 
 
 ## Grid index adds grid window origin
@@ -178,12 +174,12 @@ func change_swatch_size(size_diff: Vector2) -> void:
 
 
 func _on_PaletteSwatch_pressed(mouse_button: int, index: int) -> void:
-	var palette_index = convert_grid_index_to_palette_index(index)
+	var palette_index := convert_grid_index_to_palette_index(index)
 	swatch_pressed.emit(mouse_button, palette_index)
 
 
 func _on_PaletteSwatch_double_clicked(mouse_button: int, pos: Vector2, index: int) -> void:
-	var palette_index = convert_grid_index_to_palette_index(index)
+	var palette_index := convert_grid_index_to_palette_index(index)
 	swatch_double_clicked.emit(mouse_button, palette_index, pos)
 
 

@@ -4,17 +4,21 @@ signal color_changed(color, button)
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 
+var picking_color_for := MOUSE_BUTTON_LEFT
 var horizontal_mirror := false
 var vertical_mirror := false
 var pixel_perfect := false
 
 # Dynamics
+var stabilizer_enabled := false
+var stabilizer_value := 16
 var dynamics_alpha: int = Dynamics.NONE
 var dynamics_size: int = Dynamics.NONE
 var pen_pressure := 1.0
 var pen_pressure_min := 0.2
 var pen_pressure_max := 0.8
 var pressure_buf := [0, 0]  # past pressure value buffer
+var pen_inverted := false
 var mouse_velocity := 1.0
 var mouse_velocity_min_thres := 0.2
 var mouse_velocity_max_thres := 0.8
@@ -71,26 +75,35 @@ var tools := {
 		"res://src/Tools/SelectionTools/PaintSelect.tscn"
 	),
 	"Move":
-	Tool.new("Move", "Move", "move", "res://src/Tools/Move.tscn", [Global.LayerTypes.PIXEL]),
-	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/Zoom.tscn"),
-	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/Pan.tscn"),
+	Tool.new(
+		"Move", "Move", "move", "res://src/Tools/UtilityTools/Move.tscn", [Global.LayerTypes.PIXEL]
+	),
+	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/UtilityTools/Zoom.tscn"),
+	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/UtilityTools/Pan.tscn"),
 	"ColorPicker":
 	Tool.new(
 		"ColorPicker",
 		"Color Picker",
 		"colorpicker",
-		"res://src/Tools/ColorPicker.tscn",
+		"res://src/Tools/UtilityTools/ColorPicker.tscn",
 		[],
 		"Select a color from a pixel of the sprite"
 	),
 	"Crop":
-	Tool.new("Crop", "Crop", "crop", "res://src/Tools/CropTool.tscn", [], "Resize the canvas"),
+	Tool.new(
+		"Crop",
+		"Crop",
+		"crop",
+		"res://src/Tools/UtilityTools/CropTool.tscn",
+		[],
+		"Resize the canvas"
+	),
 	"Pencil":
 	Tool.new(
 		"Pencil",
 		"Pencil",
 		"pencil",
-		"res://src/Tools/Pencil.tscn",
+		"res://src/Tools/DesignTools/Pencil.tscn",
 		[Global.LayerTypes.PIXEL],
 		"Hold %s to make a line",
 		["draw_create_line"]
@@ -100,19 +113,25 @@ var tools := {
 		"Eraser",
 		"Eraser",
 		"eraser",
-		"res://src/Tools/Eraser.tscn",
+		"res://src/Tools/DesignTools/Eraser.tscn",
 		[Global.LayerTypes.PIXEL],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
 	"Bucket":
-	Tool.new("Bucket", "Bucket", "fill", "res://src/Tools/Bucket.tscn", [Global.LayerTypes.PIXEL]),
+	Tool.new(
+		"Bucket",
+		"Bucket",
+		"fill",
+		"res://src/Tools/DesignTools/Bucket.tscn",
+		[Global.LayerTypes.PIXEL]
+	),
 	"Shading":
 	Tool.new(
 		"Shading",
 		"Shading Tool",
 		"shading",
-		"res://src/Tools/Shading.tscn",
+		"res://src/Tools/DesignTools/Shading.tscn",
 		[Global.LayerTypes.PIXEL]
 	),
 	"LineTool":
@@ -122,7 +141,7 @@ var tools := {
 			"LineTool",
 			"Line Tool",
 			"linetool",
-			"res://src/Tools/LineTool.tscn",
+			"res://src/Tools/DesignTools/LineTool.tscn",
 			[Global.LayerTypes.PIXEL],
 			"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
@@ -137,7 +156,7 @@ Hold %s to displace the shape's origin""",
 			"RectangleTool",
 			"Rectangle Tool",
 			"rectangletool",
-			"res://src/Tools/RectangleTool.tscn",
+			"res://src/Tools/DesignTools/RectangleTool.tscn",
 			[Global.LayerTypes.PIXEL],
 			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
@@ -152,7 +171,7 @@ Hold %s to displace the shape's origin""",
 			"EllipseTool",
 			"Ellipse Tool",
 			"ellipsetool",
-			"res://src/Tools/EllipseTool.tscn",
+			"res://src/Tools/DesignTools/EllipseTool.tscn",
 			[Global.LayerTypes.PIXEL],
 			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
@@ -165,12 +184,12 @@ Hold %s to displace the shape's origin""",
 		"3DShapeEdit",
 		"3D Shape Edit",
 		"3dshapeedit",
-		"res://src/Tools/3DShapeEdit.tscn",
+		"res://src/Tools/3DTools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
 }
 
-var _tool_button_scene := preload("res://src/Tools/ToolButton.tscn")
+var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
 var _slots := {}
 var _panels := {}
 var _curr_layer_type := Global.LayerTypes.PIXEL
@@ -207,7 +226,7 @@ class Tool:
 		_scene_path: String,
 		_layer_types: PackedInt32Array = [],
 		_extra_hint := "",
-		_extra_shortucts: PackedStringArray = []
+		_extra_shortcuts: PackedStringArray = []
 	) -> void:
 		name = _name
 		display_name = _display_name
@@ -215,7 +234,7 @@ class Tool:
 		scene_path = _scene_path
 		layer_types = _layer_types
 		extra_hint = _extra_hint
-		extra_shortcuts = _extra_shortucts
+		extra_shortcuts = _extra_shortcuts
 		icon = load("res://assets/graphics/tools/%s.png" % name.to_lower())
 		cursor_icon = load("res://assets/graphics/tools/cursors/%s.png" % name.to_lower())
 
@@ -278,7 +297,7 @@ class Slot:
 
 
 func _ready() -> void:
-	Global.cel_changed.connect(_cel_changed)
+	Global.cel_switched.connect(_cel_switched)
 	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
@@ -326,10 +345,13 @@ func _ready() -> void:
 	update_tool_cursors()
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
+
+	# Yield is necessary to hide irrelevant tools added by extensions
+	await get_tree().process_frame
 	_show_relevant_tools(layer_type)
 
 
-func add_tool_button(t: Tool) -> void:
+func add_tool_button(t: Tool, insert_pos := -1) -> void:
 	var tool_button: BaseButton = _tool_button_scene.instantiate()
 	tool_button.name = t.name
 	tool_button.get_node("BackgroundLeft").modulate = Global.left_tool_color
@@ -338,6 +360,9 @@ func add_tool_button(t: Tool) -> void:
 	tool_button.tooltip_text = t.generate_hint_tooltip()
 	t.button_node = tool_button
 	_tool_buttons.add_child(tool_button)
+	if insert_pos > -1:
+		insert_pos = min(insert_pos, _tool_buttons.get_child_count() - 1)
+		_tool_buttons.move_child(tool_button, insert_pos)
 	tool_button.pressed.connect(_tool_buttons._on_Tool_pressed.bind(tool_button))
 
 
@@ -406,8 +431,6 @@ func assign_color(color: Color, button: int, change_alpha := true) -> void:
 	_slots[button].color = color
 	Global.config_cache.set_value(_slots[button].kname, "color", color)
 	color_changed.emit(color, button)
-	# If current palette has that color then select that color
-	Global.palette_panel.palette_grid.find_and_select_color(button, color)
 
 
 func get_assigned_color(button: int) -> Color:
@@ -429,7 +452,6 @@ func update_tool_buttons() -> void:
 
 
 func update_hint_tooltips() -> void:
-	await get_tree().process_frame
 	for tool_name in tools:
 		var t: Tool = tools[tool_name]
 		t.button_node.tooltip_text = t.generate_hint_tooltip()
@@ -462,16 +484,26 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
 
-	if event.is_action_pressed("activate_left_tool") and _active_button == -1:
+	if event.is_action_pressed("activate_left_tool") and _active_button == -1 and not pen_inverted:
 		_active_button = MOUSE_BUTTON_LEFT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
 	elif event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_LEFT:
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
-	elif event.is_action_pressed("activate_right_tool") and _active_button == -1:
+	elif (
+		(
+			event.is_action_pressed("activate_right_tool")
+			and _active_button == -1
+			and not pen_inverted
+		)
+		or (event.is_action_pressed("activate_left_tool") and _active_button == -1 and pen_inverted)
+	):
 		_active_button = MOUSE_BUTTON_RIGHT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
-	elif event.is_action_released("activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT:
+	elif (
+		(event.is_action_released("activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT)
+		or (event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_RIGHT)
+	):
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
 
@@ -488,6 +520,8 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		pressure_buf.push_front(pen_pressure)
 		pen_pressure = remap(pen_pressure, pen_pressure_min, pen_pressure_max, 0.0, 1.0)
 		pen_pressure = clampf(pen_pressure, 0.0, 1.0)
+
+		pen_inverted = event.pen_inverted
 
 		mouse_velocity = event.velocity.length() / mouse_velocity_max
 		mouse_velocity = remap(
@@ -524,7 +558,7 @@ func get_alpha_dynamic(strength := 1.0) -> float:
 	return strength
 
 
-func _cel_changed() -> void:
+func _cel_switched() -> void:
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
 	# Do not make any changes when its the same type of layer, or a group layer

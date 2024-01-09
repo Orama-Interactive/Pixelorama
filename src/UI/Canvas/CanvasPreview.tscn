@@ -7,6 +7,7 @@
 shader = ExtResource("1_28j41")
 shader_parameter/opacities = null
 shader_parameter/blend_modes = null
+shader_parameter/origins = null
 
 [node name="CanvasPreview" type="Node2D"]
 material = SubResource("ShaderMaterial_21d5l")

@@ -1,6 +1,6 @@
 extends ImageEffect
 
-var shader := preload("res://src/Shaders/GradientMap.gdshader")
+var shader := preload("res://src/Shaders/Effects/GradientMap.gdshader")
 
 
 func _ready() -> void:
@@ -15,7 +15,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	if selection_checkbox.button_pressed and project.has_selection:
 		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
-	var params := {"selection": selection_tex, "map": $VBoxContainer/GradientEdit.texture}
+	var params := {"selection": selection_tex, "gradient_map": $VBoxContainer/GradientEdit.texture}
 
 	if !has_been_confirmed:
 		for param in params:
@@ -23,7 +23,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		await gen.done
 
 
 func _on_GradientEdit_updated(_gradient: Gradient, _cc: bool) -> void:

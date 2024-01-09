@@ -9,8 +9,9 @@ signal about_to_deserialize(Dictionary)
 var name := "":
 	set(value):
 		name = value
-		if Global.tabs.tab_count < Global.tabs.current_tab:
-			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+		var project_index := Global.projects.find(self)
+		if project_index < Global.tabs.tab_count and project_index > -1:
+			Global.tabs.set_tab_title(project_index, name)
 var size: Vector2i:
 	set = _size_changed
 var undo_redo := UndoRedo.new()
@@ -22,6 +23,7 @@ var has_changed := false:
 	set(value):
 		has_changed = value
 		if value:
+			Global.project_changed.emit(self)
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
 		else:
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
@@ -32,14 +34,20 @@ var frames: Array[Frame] = []
 var layers: Array[BaseLayer] = []
 var current_frame := 0
 var current_layer := 0
-var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
+var selected_cels := [[0, 0]]  ## Array of Arrays of 2 integers (frame & layer)
+## Array that contains the order of the [BaseLayer] indices that are being drawn.
+## Takes into account each [BaseCel]'s invidiual z-index. If all z-indexes are 0, then the
+## array just contains the indices of the layers in increasing order.
+## See [method order_layers].
+var ordered_layers: Array[int] = [0]
 
 var animation_tags: Array[AnimationTag] = []:
 	set = _animation_tags_changed
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
 var reference_images: Array[ReferenceImage] = []
-var vanishing_points := []  # Array of Vanishing Points
+var reference_index: int = -1  # The currently selected index ReferenceImage
+var vanishing_points := []  ## Array of Vanishing Points
 var fps := 6.0
 
 var x_symmetry_point: float
@@ -48,15 +56,15 @@ var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
 
 var selection_map := SelectionMap.new()
-# This is useful for when the selection is outside of the canvas boundaries,
-# on the left and/or above (negative coords)
+## This is useful for when the selection is outside of the canvas boundaries,
+## on the left and/or above (negative coords)
 var selection_offset := Vector2i.ZERO:
 	set(value):
 		selection_offset = value
 		Global.canvas.selection.marching_ants_outline.offset = selection_offset
 var has_selection := false
 
-# For every camera (currently there are 3)
+## For every camera (currently there are 3)
 var cameras_rotation: PackedFloat32Array = [0.0, 0.0, 0.0]
 var cameras_zoom: PackedVector2Array = [
 	Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)
@@ -158,6 +166,7 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
+## Returns the currently selected [BaseCel].
 func get_current_cel() -> BaseCel:
 	return frames[current_frame].cels[current_layer]
 
@@ -168,21 +177,16 @@ func selection_map_changed() -> void:
 	if has_selection:
 		image_texture = ImageTexture.create_from_image(selection_map)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
-	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
-	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
+	Global.top_menu_container.edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
+	Global.top_menu_container.image_menu.set_item_disabled(
+		Global.ImageMenu.CROP_TO_SELECTION, !has_selection
+	)
 
 
 func change_project() -> void:
 	Global.animation_timeline.project_changed()
 
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-
-	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
-	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(
-		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
-	)
-	toggle_layer_buttons()
 	animation_tags = animation_tags
 
 	# Change the guides
@@ -205,7 +209,6 @@ func change_project() -> void:
 
 	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
-	Global.references_panel.project_changed()
 	Global.perspective_editor.update_points()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
@@ -246,8 +249,23 @@ func change_project() -> void:
 	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.queue_redraw()
-	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
+	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
+
+	# We loop through all the reference image nodes and the ones that are not apart
+	# of the current project we remove from the tree
+	# They will still be in memory though
+	for ri: ReferenceImage in Global.canvas.reference_image_container.get_children():
+		if !reference_images.has(ri):
+			Global.canvas.reference_image_container.remove_child(ri)
+	# Now we loop through this projects reference images and add them back to the tree
+	var canvas_references := Global.canvas.reference_image_container.get_children()
+	for ri: ReferenceImage in reference_images:
+		if !canvas_references.has(ri) and !ri.is_inside_tree():
+			Global.canvas.reference_image_container.add_child(ri)
+
+	# Tell the reference images that the project changed
+	Global.reference_panel.project_changed()
 
 	var i := 0
 	for camera in Global.cameras:
@@ -377,6 +395,8 @@ func deserialize(dict: Dictionary) -> void:
 						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
 						cels.append(Cel3D.new(size, true))
+				if dict.has("pxo_version"):
+					cel["pxo_version"] = dict["pxo_version"]
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
@@ -439,6 +459,7 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("fps"):
 		fps = dict.fps
 	_deserialize_metadata(self, dict)
+	order_layers()
 
 
 func _serialize_metadata(object: Object) -> Dictionary:
@@ -515,59 +536,18 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if new_frame != current_frame:  # If the frame has changed
 		current_frame = new_frame
 		Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-		toggle_frame_buttons()
 
 	if new_layer != current_layer:  # If the layer has changed
 		current_layer = new_layer
-		toggle_layer_buttons()
 
-	if current_frame < frames.size():  # Set opacity slider
-		var cel_opacity := frames[current_frame].cels[current_layer].opacity
-		Global.layer_opacity_slider.value = cel_opacity * 100
-		var blend_mode_index: int = Global.animation_timeline.blend_modes_button.get_item_index(
-			layers[current_layer].blend_mode
-		)
-		Global.animation_timeline.blend_modes_button.selected = blend_mode_index
-
+	order_layers()
 	Global.transparent_checker.update_rect()
-	Global.cel_changed.emit()
+	Global.cel_switched.emit()
 	if get_current_cel() is Cel3D:
 		await RenderingServer.frame_post_draw
 		await RenderingServer.frame_post_draw
+	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
-
-
-func toggle_frame_buttons() -> void:
-	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
-	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(
-		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
-	)
-
-
-func toggle_layer_buttons() -> void:
-	if layers.is_empty() or current_layer >= layers.size():
-		return
-	var child_count: int = layers[current_layer].get_child_count(true)
-
-	Global.disable_button(
-		Global.remove_layer_button,
-		layers[current_layer].is_locked_in_hierarchy() or layers.size() == child_count + 1
-	)
-	Global.disable_button(Global.move_up_layer_button, current_layer == layers.size() - 1)
-	Global.disable_button(
-		Global.move_down_layer_button,
-		current_layer == child_count and not is_instance_valid(layers[current_layer].parent)
-	)
-	Global.disable_button(
-		Global.merge_down_layer_button,
-		(
-			current_layer == child_count
-			or layers[current_layer] is GroupLayer
-			or layers[current_layer - 1] is GroupLayer
-			or layers[current_layer - 1] is Layer3D
-		)
-	)
 
 
 func _animation_tags_changed(value: Array[AnimationTag]) -> void:
@@ -640,6 +620,45 @@ func can_pixel_get_drawn(
 		return image.is_pixel_selected(pixel)
 	else:
 		return true
+
+
+## Loops through all of the cels until it finds a drawable (non-[GroupCel]) [BaseCel]
+## in the specified [param frame] and returns it. If no drawable cel is found,
+## meaning that all of the cels are [GroupCel]s, the method returns null.
+## If no [param frame] is specified, the method will use the current frame.
+func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
+	var result: BaseCel
+	var cel := frame.cels[0]
+	var i := 0
+	while cel is GroupCel and i < layers.size():
+		cel = frame.cels[i]
+		i += 1
+	if not cel is GroupCel:
+		result = cel
+	return result
+
+
+## Re-order layers to take each cel's z-index into account. If all z-indexes are 0,
+## then the order of drawing is the same as the order of the layers itself.
+func order_layers(frame_index := current_frame) -> void:
+	ordered_layers = []
+	for i in layers.size():
+		ordered_layers.append(i)
+	ordered_layers.sort_custom(_z_index_sort.bind(frame_index))
+
+
+## Used as a [Callable] for [method Array.sort_custom] to sort layers
+## while taking each cel's z-index into account.
+func _z_index_sort(a: int, b: int, frame_index: int) -> bool:
+	var z_index_a := frames[frame_index].cels[a].z_index
+	var z_index_b := frames[frame_index].cels[b].z_index
+	var layer_index_a := layers[a].index + z_index_a
+	var layer_index_b := layers[b].index + z_index_b
+	if layer_index_a < layer_index_b:
+		return true
+	if layer_index_a == layer_index_b and z_index_a < z_index_b:
+		return true
+	return false
 
 
 # Timeline modifications
@@ -863,9 +882,33 @@ func _update_frame_ui() -> void:
 func _update_layer_ui() -> void:
 	for l in layers.size():
 		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer_index = l
 		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
 			cel_hbox.get_child(f).layer = l
 			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+
+
+## Change the current reference image
+func set_reference_image_index(new_index: int) -> void:
+	reference_index = clamp(-1, new_index, reference_images.size() - 1)
+	Global.canvas.reference_image_container.update_index(reference_index)
+
+
+## Returns the reference image based on reference_index
+func get_current_reference_image() -> ReferenceImage:
+	return get_reference_image(reference_index)
+
+
+## Returns the reference image based on the index or null if index < 0
+func get_reference_image(index: int) -> ReferenceImage:
+	if index < 0 or index > reference_images.size() - 1:
+		return null
+	return reference_images[index]
+
+
+## Reorders the position of the reference image in the tree / reference_images array
+func reorder_reference_image(from: int, to: int) -> void:
+	var ri: ReferenceImage = reference_images.pop_at(from)
+	reference_images.insert(to, ri)
+	Global.canvas.reference_image_container.move_child(ri, to)

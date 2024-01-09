@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-08-29 12:29\n"
+"PO-Revision-Date: 2023-12-06 02:55\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -93,8 +93,17 @@ msgstr "Αποθήκευση..."
 msgid "Save as..."
 msgstr "Αποθήκευση ως..."
 
-msgid "Use ZSTD Compression"
-msgstr "Χρήση συμπίεσης ZSTD"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr "Συμπερίληψη αναμεμειγμένων εικόνων"
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr "Αν είναι ενεργοποιημένο, οι τελικές αναμεμειγμένες εικόνες αποθηκεύονται επίσης στο pxo, για κάθε καρέ.\n"
+"Αυτό κάνει το αρχείο pxo μεγαλύτερο και είναι χρήσιμο για την εισαγωγή από λογισμικό τρίτων\n"
+"ή για την εξαγωγή μέσω CLI. Η φόρτωση αρχείων pxo στο Pixelorama δεν χρειάζεται αυτή την επιλογή να είναι ενεργοποιημένη.\n"
 
 msgid "Import"
 msgstr "Εισαγωγή"
@@ -140,6 +149,13 @@ msgstr "Επιτόπια επικόλληση"
 
 msgid "Delete"
 msgstr "Διαγραφή"
+
+msgid "Delete Permanently"
+msgstr "Οριστική διαγραφή"
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr "Μετακίνηση στον κάδο απορριμμάτων"
 
 msgid "New Brush"
 msgstr "Νέο πινέλο"
@@ -314,6 +330,10 @@ msgstr "Εμφάνιση οδηγών"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Εμφάνιση οδηγών ποντικιού"
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr "Εμφάνιση εφέ στρώσης"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -628,6 +648,14 @@ msgstr "Τριγραμμική"
 
 msgid "Constant"
 msgstr "Σταθερή"
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr "Χρωματικός χώρος:"
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr "Γραμμικό sRGB"
 
 msgid "General"
 msgstr "Γενικά"
@@ -1279,13 +1307,20 @@ msgstr "Επιλέξτε ένα χρώμα για το αριστερό εργα
 msgid "Choose a color for the right tool"
 msgstr "Επιλέξτε ένα χρώμα για το δεξί εργαλείο"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr "Επιλέξτε ένα χρώμα από την οθόνη."
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr "Επιλέξτε ένα σχήμα επιλογέα."
 
 msgid "Left tool"
 msgstr "Αριστερό εργαλείο"
@@ -1509,6 +1544,10 @@ msgstr "Άνοιγμα φακέλου"
 msgid "Dynamics"
 msgstr "Δυναμικές"
 
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr "Σταθεροποιητής"
+
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
 msgstr "Πίεση"
@@ -1669,6 +1708,9 @@ msgstr "Μεγέθυνση"
 msgid "Zoom out"
 msgstr "Σμίκρυνση"
 
+msgid "Options"
+msgstr "Επιλογές"
+
 msgid "Options:"
 msgstr "Επιλογές:"
 
@@ -1719,34 +1761,22 @@ msgid "Current frame as spritesheet"
 msgstr "Τρέχον πλαίσιο ως φύλλο καρέ"
 
 msgid "Jump to the first frame\n"
-"(%s)"
 msgstr "Μετάβαση στο πρώτο καρέ\n"
-"(%s)"
 
 msgid "Go to the previous frame\n"
-"(%s)"
 msgstr "Μετάβαση στο προηγούμενο καρέ\n"
-"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
 msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n"
-"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
 msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n"
-"(%s)"
 
 msgid "Go to the next frame\n"
-"(%s)"
 msgstr "Μετάβαση στο επόμενο καρέ\n"
-"(%s)"
 
 msgid "Jump to the last frame\n"
-"(%s)"
 msgstr "Μετάβαση στο τελευταίο καρέ\n"
-"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "Ρυθμίσεις Onion Skinning"
@@ -1852,11 +1882,14 @@ msgstr "Σύνδεση cels με"
 msgid "Unlink Cels"
 msgstr "Αποσύνδεση cels"
 
-msgid "Frame Properties"
-msgstr "Ιδιότητες Καρέ"
+msgid "Properties"
+msgstr "Ιδιότητες"
 
 msgid "Frame properties"
 msgstr "Ιδιότητες καρέ"
+
+msgid "Cel properties"
+msgstr "Ιδιότητες cel"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1901,6 +1934,90 @@ msgstr "Κλωνοποίηση της τρέχουσας στρώσης"
 
 msgid "Merge current layer with the one below"
 msgstr "Συγχώνευση της τρέχουσας στρώσης με την από κάτω"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr "Λειτουργία στρώσης:"
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr "Κανονικό"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr "Πολλαπλασιασμός"
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr "Χρωματικό κάψιμο"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr "Γραμμικό κάψιμο"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr "Οθόνη"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr "Χρωματική υπεκφυγή"
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr "Αντίθεση"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr "Επικάλυψη"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr "Ήπιο φως"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr "Σκληρό φως"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr "Αναστροφή"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr "Διαφορά"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr "Αποκλεισμός"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr "Αφαίρεση"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr "Διαίρεση"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr "Συστατικό"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr "Απόχρωση"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr "Κορεσμός"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr "Χρώμα"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr "Φωτεινότητα"
 
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
@@ -2690,9 +2807,25 @@ msgstr "Αναπήδηση στο τέλος"
 msgid "Backing out at ends"
 msgstr "Υποχώρηση στα άκρα"
 
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr "Αναπήδηση προς το τέλος"
+
 msgid "Silhouette"
 msgstr "Σιλουέτα"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr "Μαυρίζει την εικόνα και κάνει όλα τα αδιαφανή εικονοστοιχεία ένα σκούρο χρώμα."
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr "Ενεργό"
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr "Εφέ στρώσης"
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
+msgstr "Προσθήκη εφέ"
 

@@ -260,6 +260,8 @@ text = "Choose"
 
 [node name="Path" type="FileDialog" parent="Dialogs"]
 mode = 2
+exclusive = false
+popup_window = true
 access = 2
 
 [node name="Timer" type="Timer" parent="."]

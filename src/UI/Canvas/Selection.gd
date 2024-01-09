@@ -1,7 +1,7 @@
 extends Node2D
 
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
-const KEY_MOVE_ACTION_NAMES: PackedStringArray = ["ui_up", "ui_down", "ui_left", "ui_right"]
+const KEY_MOVE_ACTION_NAMES: PackedStringArray = [&"ui_up", &"ui_down", &"ui_left", &"ui_right"]
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
 # flags (additional properties of selection that can be toggled)
@@ -14,7 +14,7 @@ var big_bounding_rectangle := Rect2i():
 	set(value):
 		big_bounding_rectangle = value
 		for slot in Tools._slots.values():
-			if slot.tool_node is SelectionTool:
+			if slot.tool_node is BaseSelectionTool:
 				slot.tool_node.set_spinbox_values()
 		_update_gizmos()
 var image_current_pixel := Vector2.ZERO  ## The ACTUAL pixel coordinate of image
@@ -182,7 +182,7 @@ func _input(event: InputEvent) -> void:
 func _move_with_arrow_keys(event: InputEvent) -> void:
 	var selection_tool_selected := false
 	for slot in Tools._slots.values():
-		if slot.tool_node is SelectionTool:
+		if slot.tool_node is BaseSelectionTool:
 			selection_tool_selected = true
 			break
 	if !selection_tool_selected:
@@ -220,7 +220,7 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 # Check if an event is a ui_up/down/left/right event-press
 func _is_action_direction_pressed(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action_pressed(action):
+		if event.is_action_pressed(action, false, true):
 			return true
 	return false
 
@@ -228,7 +228,7 @@ func _is_action_direction_pressed(event: InputEvent) -> bool:
 # Check if an event is a ui_up/down/left/right event release
 func _is_action_direction(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action(action):
+		if event.is_action(action, true):
 			return true
 	return false
 
@@ -236,7 +236,7 @@ func _is_action_direction(event: InputEvent) -> bool:
 # Check if an event is a ui_up/down/left/right event release
 func _is_action_direction_released(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action_released(action):
+		if event.is_action_released(action, true):
 			return true
 	return false
 
@@ -370,9 +370,8 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 
 func resize_selection() -> void:
 	var size := big_bounding_rectangle.size.abs()
-	var selection_map: SelectionMap = Global.current_project.selection_map
 	if is_moving_content:
-		selection_map = original_bitmap
+		Global.current_project.selection_map.copy_from(original_bitmap)
 		preview_image.copy_from(original_preview_image)
 		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 		if temp_rect.size.x < 0:
@@ -381,14 +380,12 @@ func resize_selection() -> void:
 			preview_image.flip_y()
 		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(selection_map)
-	selection_map_copy.resize_bitmap_values(
+	Global.current_project.selection_map.resize_bitmap_values(
 		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
 	)
-	Global.current_project.selection_map = selection_map_copy
 	Global.current_project.selection_map_changed()
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func _gizmo_rotate() -> void:  # Does not work properly yet
@@ -423,12 +420,11 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	Global.current_project.selection_map_changed()
 	big_bounding_rectangle = bitmap_image.get_used_rect()
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func select_rect(rect: Rect2i, operation: int = SelectionOperation.ADD) -> void:
 	var project := Global.current_project
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
 	# Used only if the selection is outside of the canvas boundaries,
 	# on the left and/or above (negative coords)
 	var offset_position := Vector2i.ZERO
@@ -441,27 +437,28 @@ func select_rect(rect: Rect2i, operation: int = SelectionOperation.ADD) -> void:
 
 	if offset_position != Vector2i.ZERO:
 		big_bounding_rectangle.position -= offset_position
-		selection_map_copy.move_bitmap_values(project)
+		project.selection_map.move_bitmap_values(project)
 
 	if operation == SelectionOperation.ADD:
-		selection_map_copy.fill_rect(rect, Color(1, 1, 1, 1))
+		project.selection_map.fill_rect(rect, Color(1, 1, 1, 1))
 	elif operation == SelectionOperation.SUBTRACT:
-		selection_map_copy.fill_rect(rect, Color(0))
+		project.selection_map.fill_rect(rect, Color(0))
 	elif operation == SelectionOperation.INTERSECT:
-		selection_map_copy.clear()
+		project.selection_map.clear()
 		for x in range(rect.position.x, rect.end.x):
 			for y in range(rect.position.y, rect.end.y):
 				var pos := Vector2i(x, y)
-				if !Rect2i(Vector2i.ZERO, selection_map_copy.get_size()).has_point(pos):
+				if !Rect2i(Vector2i.ZERO, project.selection_map.get_size()).has_point(pos):
 					continue
-				selection_map_copy.select_pixel(pos, project.selection_map.is_pixel_selected(pos))
-	big_bounding_rectangle = selection_map_copy.get_used_rect()
+				project.selection_map.select_pixel(
+					pos, project.selection_map.is_pixel_selected(pos)
+				)
+	big_bounding_rectangle = project.selection_map.get_used_rect()
 
 	if offset_position != Vector2i.ZERO:
 		big_bounding_rectangle.position += offset_position
-		selection_map_copy.move_bitmap_values(project)
+		project.selection_map.move_bitmap_values(project)
 
-	project.selection_map = selection_map_copy
 	big_bounding_rectangle = big_bounding_rectangle  # call getter method
 
 
@@ -478,15 +475,13 @@ func move_borders(move: Vector2i) -> void:
 
 
 func move_borders_end() -> void:
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(Global.current_project.selection_map)
-	selection_map_copy.move_bitmap_values(Global.current_project)
-	Global.current_project.selection_map = selection_map_copy
+	Global.current_project.selection_map.move_bitmap_values(Global.current_project)
 	if not is_moving_content:
 		commit_undo("Select", undo_data)
 	else:
 		Global.current_project.selection_map_changed()
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func transform_content_start() -> void:
@@ -503,6 +498,7 @@ func transform_content_start() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = Global.current_project.selection_offset
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func move_content(move: Vector2) -> void:
@@ -532,13 +528,10 @@ func transform_content_confirm() -> void:
 		cel_image.blit_rect_mask(
 			src,
 			src,
-			Rect2(Vector2.ZERO, project.selection_map.get_size()),
+			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 			big_bounding_rectangle.position
 		)
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy.move_bitmap_values(project)
-	project.selection_map = selection_map_copy
+	project.selection_map.move_bitmap_values(project)
 	commit_undo("Move Selection", undo_data)
 
 	original_preview_image = Image.new()
@@ -547,6 +540,7 @@ func transform_content_confirm() -> void:
 	is_moving_content = false
 	is_pasting = false
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func transform_content_cancel() -> void:
@@ -557,16 +551,16 @@ func transform_content_cancel() -> void:
 
 	is_moving_content = false
 	big_bounding_rectangle = original_big_bounding_rectangle
-	project.selection_map = original_bitmap
+	project.selection_map.copy_from(original_bitmap)
 	project.selection_map_changed()
 	preview_image = original_preview_image
 	for cel in _get_selected_draw_cels():
-		var cel_image: Image = cel.get_image()
+		var cel_image := cel.get_image()
 		if !is_pasting:
 			cel_image.blit_rect_mask(
 				cel.transformed_content,
 				cel.transformed_content,
-				Rect2(Vector2.ZERO, Global.current_project.selection_map.get_size()),
+				Rect2i(Vector2i.ZERO, Global.current_project.selection_map.get_size()),
 				big_bounding_rectangle.position
 			)
 			cel.transformed_content = null
@@ -577,6 +571,7 @@ func transform_content_cancel() -> void:
 	original_bitmap = SelectionMap.new()
 	is_pasting = false
 	queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
@@ -588,13 +583,12 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	project.undo_redo.add_do_property(project, "selection_map", redo_data["selection_map"])
+	Global.undo_redo_compress_images(redo_data, undo_data_tmp, project)
 	project.undo_redo.add_do_property(
 		self, "big_bounding_rectangle", redo_data["big_bounding_rectangle"]
 	)
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
 
-	project.undo_redo.add_undo_property(project, "selection_map", undo_data_tmp["selection_map"])
 	project.undo_redo.add_undo_property(
 		self, "big_bounding_rectangle", undo_data_tmp["big_bounding_rectangle"]
 	)
@@ -602,15 +596,6 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 		project, "selection_offset", undo_data_tmp["outline_offset"]
 	)
 
-	if undo_data_tmp["undo_image"]:
-		for image in redo_data:
-			if not image is Image:
-				continue
-			project.undo_redo.add_do_property(image, "data", redo_data[image])
-		for image in undo_data_tmp:
-			if not image is Image:
-				continue
-			project.undo_redo.add_undo_property(image, "data", undo_data_tmp[image])
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(project.selection_map_changed)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
@@ -623,7 +608,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 func get_undo_data(undo_image: bool) -> Dictionary:
 	var data := {}
 	var project := Global.current_project
-	data["selection_map"] = project.selection_map
+	data[project.selection_map] = project.selection_map.data
 	data["big_bounding_rectangle"] = big_bounding_rectangle
 	data["outline_offset"] = Global.current_project.selection_offset
 	data["undo_image"] = undo_image
@@ -660,6 +645,24 @@ func _get_selected_draw_images() -> Array[Image]:
 	return images
 
 
+## Returns the portion of current cel's image enclosed by the selection.
+func get_enclosed_image() -> Image:
+	var project := Global.current_project
+	if !project.has_selection:
+		return
+
+	var image := project.get_current_cel().get_image()
+	var enclosed_img := Image.new()
+	if is_moving_content:
+		enclosed_img.copy_from(preview_image)
+		var selection_map_copy := SelectionMap.new()
+		selection_map_copy.copy_from(project.selection_map)
+		selection_map_copy.move_bitmap_values(project, false)
+	else:
+		enclosed_img = _get_selected_image(image)
+	return enclosed_img
+
+
 func cut() -> void:
 	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
@@ -668,6 +671,7 @@ func cut() -> void:
 	delete(false)
 
 
+## Copies the selection content (works in or between pixelorama instances only).
 func copy() -> void:
 	var project := Global.current_project
 	var cl_image := Image.new()
@@ -685,10 +689,8 @@ func copy() -> void:
 	else:
 		if is_moving_content:
 			to_copy.copy_from(preview_image)
-			var selection_map_copy := SelectionMap.new()
-			selection_map_copy.copy_from(project.selection_map)
-			selection_map_copy.move_bitmap_values(project, false)
-			cl_selection_map = selection_map_copy
+			project.selection_map.move_bitmap_values(project, false)
+			cl_selection_map = project.selection_map
 		else:
 			to_copy = image.get_region(big_bounding_rectangle)
 			# Remove unincluded pixels if the selection is not a single rectangle
@@ -726,6 +728,7 @@ func copy() -> void:
 		container.get_child(0).get_child(0).texture = tex
 
 
+## Pastes the selection content.
 func paste(in_place := false) -> void:
 	if !FileAccess.file_exists(CLIPBOARD_FILE_PATH):
 		return
@@ -754,7 +757,7 @@ func paste(in_place := false) -> void:
 		max(clip_map.get_size().y, project.selection_map.get_size().y)
 	)
 
-	project.selection_map = clip_map
+	project.selection_map.copy_from(clip_map)
 	project.selection_map.crop(max_size.x, max_size.y)
 	project.selection_offset = clipboard.selection_offset
 	big_bounding_rectangle = clipboard.big_bounding_rectangle
@@ -786,6 +789,7 @@ func paste(in_place := false) -> void:
 	project.selection_map_changed()
 
 
+## Deletes the drawing enclosed within the selection's area.
 func delete(selected_cels := true) -> void:
 	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
@@ -809,10 +813,7 @@ func delete(selected_cels := true) -> void:
 
 	if project.has_selection:
 		var blank := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		var selection_map_copy := SelectionMap.new()
-		selection_map_copy.copy_from(project.selection_map)
-		# In case the selection map is bigger than the canvas
-		selection_map_copy.crop(project.size.x, project.size.y)
+		var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 		for image in images:
 			image.blit_rect_mask(
 				blank, selection_map_copy, big_bounding_rectangle, big_bounding_rectangle.position
@@ -823,45 +824,16 @@ func delete(selected_cels := true) -> void:
 	commit_undo("Draw", undo_data_tmp)
 
 
+## Makes a project brush out of the current selection's content.
 func new_brush() -> void:
-	var project := Global.current_project
-	if !project.has_selection:
-		return
-
-	var image := project.get_current_cel().get_image()
-	var brush := Image.new()
-	if is_moving_content:
-		brush.copy_from(preview_image)
-		var selection_map_copy := SelectionMap.new()
-		selection_map_copy.copy_from(project.selection_map)
-		selection_map_copy.move_bitmap_values(project, false)
-		var clipboard = str_to_var(DisplayServer.clipboard_get())
-		if typeof(clipboard) == TYPE_DICTIONARY:  # A sanity check
-			if not clipboard.has_all(
-				["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
-			):
-				return
-			clipboard.selection_map = selection_map_copy
-	else:
-		brush = image.get_region(big_bounding_rectangle)
-		# Remove unincluded pixels if the selection is not a single rectangle
-		for x in brush.get_size().x:
-			for y in brush.get_size().y:
-				var pos := Vector2i(x, y)
-				var offset_pos := big_bounding_rectangle.position
-				if offset_pos.x < 0:
-					offset_pos.x = 0
-				if offset_pos.y < 0:
-					offset_pos.y = 0
-				if not project.selection_map.is_pixel_selected(pos + offset_pos):
-					brush.set_pixelv(pos, Color(0))
-
-	if !brush.is_invisible():
+	var brush = get_enclosed_image()
+	if brush and !brush.is_invisible():
 		var brush_used: Image = brush.get_region(brush.get_used_rect())
-		project.brushes.append(brush_used)
+		Global.current_project.brushes.append(brush_used)
 		Brushes.add_project_brush(brush_used)
 
 
+## Select the entire region of current cel.
 func select_all() -> void:
 	var undo_data_tmp := get_undo_data(false)
 	clear_selection()
@@ -870,32 +842,28 @@ func select_all() -> void:
 	commit_undo("Select", undo_data_tmp)
 
 
+## Inverts the selection.
 func invert() -> void:
 	transform_content_confirm()
 	var project := Global.current_project
 	var undo_data_tmp := get_undo_data(false)
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy.crop(project.size.x, project.size.y)
-	selection_map_copy.invert()
-	project.selection_map = selection_map_copy
+	project.selection_map.crop(project.size.x, project.size.y)
+	project.selection_map.invert()
 	project.selection_map_changed()
-	big_bounding_rectangle = selection_map_copy.get_used_rect()
+	big_bounding_rectangle = project.selection_map.get_used_rect()
 	project.selection_offset = Vector2.ZERO
 	commit_undo("Select", undo_data_tmp)
 
 
+## Clears the selection.
 func clear_selection(use_undo := false) -> void:
 	var project := Global.current_project
 	if !project.has_selection:
 		return
 	transform_content_confirm()
 	var undo_data_tmp := get_undo_data(false)
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy.crop(project.size.x, project.size.y)
-	selection_map_copy.clear()
-	project.selection_map = selection_map_copy
+	project.selection_map.crop(project.size.x, project.size.y)
+	project.selection_map.clear()
 
 	big_bounding_rectangle = Rect2()
 	project.selection_offset = Vector2.ZERO
@@ -907,19 +875,21 @@ func clear_selection(use_undo := false) -> void:
 func _get_preview_image() -> void:
 	var project := Global.current_project
 	var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-	DrawingAlgos.blend_selected_cels(blended_image, project.frames[project.current_frame])
+	DrawingAlgos.blend_layers(
+		blended_image, project.frames[project.current_frame], Vector2i.ZERO, project, true
+	)
 	if original_preview_image.is_empty():
-		original_preview_image = blended_image.get_region(big_bounding_rectangle)
-		# For non-rectangular selections
-		for x in range(0, big_bounding_rectangle.size.x):
-			for y in range(0, big_bounding_rectangle.size.y):
-				var pos := Vector2i(x, y)
-				if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
-					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
-
+		original_preview_image = Image.create(
+			big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
+		)
+		var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
+		original_preview_image.blit_rect_mask(
+			blended_image, selection_map_copy, big_bounding_rectangle, Vector2i.ZERO
+		)
 		if original_preview_image.is_invisible():
 			original_preview_image = Image.new()
 			return
+
 		preview_image.copy_from(original_preview_image)
 		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
@@ -935,7 +905,7 @@ func _get_preview_image() -> void:
 		cel_image.blit_rect_mask(
 			clear_image,
 			cel.transformed_content,
-			Rect2(Vector2.ZERO, project.selection_map.get_size()),
+			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 			big_bounding_rectangle.position
 		)
 	for cel_index in project.selected_cels:
@@ -944,12 +914,9 @@ func _get_preview_image() -> void:
 
 func _get_selected_image(cel_image: Image) -> Image:
 	var project := Global.current_project
-	var image := Image.new()
-	image = cel_image.get_region(big_bounding_rectangle)
-	# For non-rectangular selections
-	for x in range(0, big_bounding_rectangle.size.x):
-		for y in range(0, big_bounding_rectangle.size.y):
-			var pos := Vector2i(x, y)
-			if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
-				image.set_pixelv(pos, Color(0, 0, 0, 0))
+	var image := Image.create(
+		big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
+	)
+	var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
+	image.blit_rect_mask(cel_image, selection_map_copy, big_bounding_rectangle, Vector2i.ZERO)
 	return image

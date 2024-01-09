@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-08-29 04:07\n"
+"PO-Revision-Date: 2023-12-06 05:23\n"
 
 msgid "OK"
 msgstr "确定"
@@ -93,8 +93,17 @@ msgstr "保存..."
 msgid "Save as..."
 msgstr "另存为..."
 
-msgid "Use ZSTD Compression"
-msgstr "使用 ZSTD 压缩"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr "包含混合图像"
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr "如果启用，则最终的混合图像也会存储在每一帧的 pxo 中。\n"
+"这使得 pxo 文件更大，对于通过第三方软件导入很有用\n"
+"或 CLI 导出。在 Pixelorama 中加载 pxo 文件不需要启用此选项。"
 
 msgid "Import"
 msgstr "导入"
@@ -140,6 +149,13 @@ msgstr "原位粘贴"
 
 msgid "Delete"
 msgstr "删除"
+
+msgid "Delete Permanently"
+msgstr "永久删除"
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr "移动到回收站"
 
 msgid "New Brush"
 msgstr "新建画笔"
@@ -314,6 +330,10 @@ msgstr "显示参考线"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "显示鼠标向导"
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr "显示图层效果"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -565,7 +585,7 @@ msgstr "组图层："
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D 图层："
 
 msgid "Direction:"
 msgstr "方向："
@@ -628,6 +648,14 @@ msgstr "三线性"
 
 msgid "Constant"
 msgstr "常量"
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr "色彩空间："
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr "线性 sRGB"
 
 msgid "General"
 msgstr "常规​​​​​"
@@ -1279,13 +1307,20 @@ msgstr "选择左键工具颜色"
 msgid "Choose a color for the right tool"
 msgstr "选择右键工具颜色"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "左右切换颜色\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr "切换左右颜色。"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "重置颜色为默认状态（黑色为左，白色为右）"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr "拾取屏幕上的颜色。"
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr "选择一个选择器形状。"
 
 msgid "Left tool"
 msgstr "左键工具"
@@ -1507,11 +1542,15 @@ msgstr "打开文件夹"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "动态"
+
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr "稳定器"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "压力"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
@@ -1535,11 +1574,11 @@ msgstr "阈值"
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "开始比赛"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "结束"
 
 msgid "Brush:"
 msgstr "画笔:"
@@ -1669,6 +1708,9 @@ msgstr "放大"
 msgid "Zoom out"
 msgstr "缩小"
 
+msgid "Options"
+msgstr "选项"
+
 msgid "Options:"
 msgstr "选项:"
 
@@ -1719,34 +1761,22 @@ msgid "Current frame as spritesheet"
 msgstr "当前帧为精灵表"
 
 msgid "Jump to the first frame\n"
-"(%s)"
 msgstr "跳转到第一帧\n"
-"(%s)"
 
 msgid "Go to the previous frame\n"
-"(%s)"
 msgstr "转到上一帧\n"
-"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "向后播放动画（从头到尾）\n"
-"(%s)"
+msgstr "向后播放动画(从结束到开始)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "向前播放动画（从头到尾）\n"
-"(%s)"
+msgstr "向前播放动画(从开始到结束)\n"
 
 msgid "Go to the next frame\n"
-"(%s)"
 msgstr "转到下一帧\n"
-"(%s)"
 
 msgid "Jump to the last frame\n"
-"(%s)"
 msgstr "跳转到最后一帧\n"
-"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "洋葱皮设置"
@@ -1852,15 +1882,18 @@ msgstr "链接单元格到"
 msgid "Unlink Cels"
 msgstr "取消链接单元格"
 
-msgid "Frame Properties"
-msgstr "帧属性"
+msgid "Properties"
+msgstr "属性"
 
 msgid "Frame properties"
 msgstr "帧属性"
 
+msgid "Cel properties"
+msgstr "单元格属性"
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "反向帧"
 
 msgid "Layer"
 msgstr "图层"
@@ -1877,15 +1910,15 @@ msgstr "创建一个新的图层"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "添加像素图层"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "添加图层组"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "添加 3D 图层"
 
 msgid "Remove current layer"
 msgstr "移除当前图层"
@@ -1901,6 +1934,90 @@ msgstr "克隆当前图层"
 
 msgid "Merge current layer with the one below"
 msgstr "当前图层与下面图层合并"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr "混合模式："
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr "Normal"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr "相乘"
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr "颜色加深"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr "线性加深"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr "屏幕"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr "颜色减淡"
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr "对比度"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr "叠加"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr "柔光"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr "硬光"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr "反转"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr "差值"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr "排除"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr "减去"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr "相除"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr "组件"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr "色相"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr "饱和度"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr "颜色"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr "明度"
 
 msgid "Opacity:"
 msgstr "不透明度:"
@@ -2269,7 +2386,7 @@ msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "分隔符:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
@@ -2440,7 +2557,7 @@ msgstr "锁定大小\n\n"
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "3D 形状编辑"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
@@ -2475,15 +2592,15 @@ msgstr "文本"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "平行光"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "聚光灯"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "点光"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
@@ -2518,7 +2635,7 @@ msgid "Frustum"
 msgstr ""
 
 msgid "Rotation:"
-msgstr ""
+msgstr "旋转"
 
 msgid "Scale:"
 msgstr "缩放："
@@ -2541,7 +2658,7 @@ msgstr "可见："
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "变换"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
@@ -2690,9 +2807,25 @@ msgstr "结束时的反弹"
 msgid "Backing out at ends"
 msgstr ""
 
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr "跳转到结束"
+
 msgid "Silhouette"
 msgstr "轮廓"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr "使图像变黑，并使所有不透明像素变成深色。"
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr "已启用"
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr "图层效果"
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
+msgstr "添加效果"
 

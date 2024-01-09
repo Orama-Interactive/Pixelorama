@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-08-28 12:14\n"
+"PO-Revision-Date: 2023-12-07 14:13\n"
 
 msgid "OK"
 msgstr "예"
@@ -93,8 +93,15 @@ msgstr "저장하기..."
 msgid "Save as..."
 msgstr "다른 이름으로 저장하기..."
 
-msgid "Use ZSTD Compression"
-msgstr "ZSTD 압축 사용"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr ""
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr ""
 
 msgid "Import"
 msgstr "불러오기"
@@ -140,6 +147,13 @@ msgstr ""
 
 msgid "Delete"
 msgstr "삭제"
+
+msgid "Delete Permanently"
+msgstr "영구 삭제"
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr ""
 
 msgid "New Brush"
 msgstr "새 브러시"
@@ -198,7 +212,7 @@ msgid "Invert"
 msgstr "반전"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "흑백 뷰"
 
 msgid "Mirror Image"
 msgstr "미러 이미지"
@@ -265,7 +279,7 @@ msgstr "레이아웃 관리"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "미리보기"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
@@ -313,6 +327,10 @@ msgstr "안내선 표시"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
 msgstr ""
 
 #. Found under the View menu.
@@ -544,7 +562,7 @@ msgid "Selected frames"
 msgstr ""
 
 msgid "Layers:"
-msgstr ""
+msgstr "레이어:"
 
 #. Found in the export dialog
 msgid "Visible layers"
@@ -564,7 +582,7 @@ msgstr ""
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D 레이어:"
 
 msgid "Direction:"
 msgstr "방향:"
@@ -628,6 +646,14 @@ msgstr "Trilinear"
 msgid "Constant"
 msgstr "고정"
 
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr ""
+
 msgid "General"
 msgstr "일반적"
 
@@ -677,7 +703,7 @@ msgstr "표기 아이콘"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "변경 사항을 적용하려면 프로그램을 다시 시작해야합니다."
 
 msgid "On"
 msgstr "켜짐"
@@ -747,7 +773,7 @@ msgid "Theme"
 msgstr "테마"
 
 msgid "Buttons"
-msgstr ""
+msgstr "버튼"
 
 msgid "Icon color from:"
 msgstr "아이콘 색상 출처:"
@@ -756,13 +782,13 @@ msgid "Icon color:"
 msgstr "아이콘 색상:"
 
 msgid "Background"
-msgstr ""
+msgstr "배경"
 
 msgid "Background color from:"
 msgstr ""
 
 msgid "Background color:"
-msgstr ""
+msgstr "배경 색상:"
 
 msgid "Left tool color:"
 msgstr "왼쪽 도구 색상"
@@ -853,7 +879,7 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr ""
 
 msgid "Shape:"
-msgstr ""
+msgstr "도형:"
 
 msgid "Linear"
 msgstr "선형"
@@ -1275,13 +1301,20 @@ msgstr "왼쪽 툴의 색상 선택"
 msgid "Choose a color for the right tool"
 msgstr "오른쪽 툴의 색상 선택"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "좌/우 색상 변경\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "색상을 기본 상태로 복원 (블랙을 왼쪽, 화이트를 오른쪽)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr ""
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr ""
 
 msgid "Left tool"
 msgstr "왼쪽 툴"
@@ -1330,11 +1363,11 @@ msgstr "캔버스에 표시되는 줄자 안내선의 색상"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "스냅"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "스냅 거리"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
@@ -1364,11 +1397,11 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "아이소메트릭 격자 크기"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "격자 오프셋:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
@@ -1503,6 +1536,10 @@ msgstr "폴더 열기"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
+msgstr ""
+
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
 msgstr ""
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
@@ -1665,6 +1702,9 @@ msgstr "확대"
 msgid "Zoom out"
 msgstr "축소"
 
+msgid "Options"
+msgstr ""
+
 msgid "Options:"
 msgstr "옵션:"
 
@@ -1709,40 +1749,28 @@ msgid "Current frame:"
 msgstr "현재 프레임:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "애니메이션 모드:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
 
 msgid "Jump to the first frame\n"
-"(%s)"
 msgstr "첫 프레임으로 이동\n"
-"(%s)"
 
 msgid "Go to the previous frame\n"
-"(%s)"
-msgstr "이전 프레임으로 이동\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "애니메이션 반대로 재생 (끝에서 처음으로)\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "애니메이션 앞으로 재생 (처음에서 끝으로)\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "다음 프레임으로 이동\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
-msgstr "마지막 프레임으로 이동\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr "어니언 스키닝 설정"
@@ -1807,7 +1835,7 @@ msgstr "선택 되었다면, 같은 태그의 프레임만 애니메이션이 �
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "색상 모드"
 
 msgid "Show past frames:"
 msgstr "이전 프래임 보기"
@@ -1848,11 +1876,14 @@ msgstr ""
 msgid "Unlink Cels"
 msgstr ""
 
-msgid "Frame Properties"
-msgstr "프레임 속성"
+msgid "Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "프레임 속성"
+
+msgid "Cel properties"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1897,6 +1928,90 @@ msgstr "현재 레이어 복제"
 
 msgid "Merge current layer with the one below"
 msgstr "현재 레이어와 그 아래 레이어를 병합"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr ""
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr ""
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr "색상"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr ""
 
 msgid "Opacity:"
 msgstr "투명도:"
@@ -2035,7 +2150,7 @@ msgid "File failed to save. Error code %s"
 msgstr "코드 에러. 파일을 저장을 실패했읍니다"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "내보낸 파일(들)"
 
 msgid "New Empty Palette"
 msgstr "새 빈 팔레트"
@@ -2436,31 +2551,31 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "큐브"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "구형"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "캡슐"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "원통"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "프리즘"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "토루스"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "평면"
 
 msgid "Text"
 msgstr ""
@@ -2682,9 +2797,25 @@ msgstr ""
 msgid "Backing out at ends"
 msgstr ""
 
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr ""
+
 msgid "Silhouette"
 msgstr ""
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr ""
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr ""
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr ""
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
 msgstr ""
 

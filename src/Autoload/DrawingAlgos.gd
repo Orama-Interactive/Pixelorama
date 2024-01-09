@@ -5,69 +5,55 @@ enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
 var blend_layers_shader := preload("res://src/Shaders/BlendLayers.gdshader")
 var clean_edge_shader: Shader
-var omniscale_shader := preload("res://src/Shaders/Rotation/OmniScale.gdshader")
+var omniscale_shader := preload("res://src/Shaders/Effects/Rotation/OmniScale.gdshader")
 
 
 ## Blends canvas layers into passed image starting from the origin position
-func blend_all_layers(
-	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
+func blend_layers(
+	image: Image,
+	frame: Frame,
+	origin := Vector2i.ZERO,
+	project := Global.current_project,
+	only_selected := false
 ) -> void:
-	var current_cels := frame.cels
 	var textures: Array[Image] = []
-	var opacities := PackedFloat32Array()
-	var blend_modes := PackedInt32Array()
-
-	for i in Global.current_project.layers.size():
-		if current_cels[i] is GroupCel:
-			continue
-		if not Global.current_project.layers[i].is_visible_in_hierarchy():
-			continue
-		textures.append(current_cels[i].get_image())
-		opacities.append(current_cels[i].opacity)
-		blend_modes.append(Global.current_project.layers[i].blend_mode)
+	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
+	# the second are the opacities and the third are the origins
+	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
+	var frame_index := project.frames.find(frame)
+	var previous_ordered_layers: Array[int] = Array(project.ordered_layers)
+	project.order_layers(frame_index)
+	for i in project.layers.size():
+		var ordered_index := project.ordered_layers[i]
+		var layer := project.layers[ordered_index]
+		var include := true if layer.is_visible_in_hierarchy() else false
+		if only_selected and include:
+			var test_array := [frame_index, i]
+			if not test_array in project.selected_cels:
+				include = false
+		var cel := frame.cels[ordered_index]
+		var cel_image := layer.display_effects(cel)
+		textures.append(cel_image)
+		# Store the blend mode
+		metadata_image.set_pixel(ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+		# Store the opacity
+		if include:
+			var opacity := cel.get_final_opacity(layer)
+			metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
+		else:
+			metadata_image.set_pixel(ordered_index, 1, Color())
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {
 		"layers": texture_array,
-		"opacities": opacities,
-		"blend_modes": blend_modes,
+		"metadata": ImageTexture.create_from_image(metadata_image),
 	}
 	var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(blended, blend_layers_shader, params, project.size)
 	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
-
-
-## Blends selected cels of the given frame into passed image starting from the origin position
-func blend_selected_cels(
-	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
-) -> void:
-	var textures: Array[Image] = []
-	var opacities := PackedFloat32Array()
-	var blend_modes := PackedInt32Array()
-	for cel_ind in frame.cels.size():
-		var test_array := [project.current_frame, cel_ind]
-		if not test_array in project.selected_cels:
-			continue
-		if frame.cels[cel_ind] is GroupCel:
-			continue
-		if not project.layers[cel_ind].is_visible_in_hierarchy():
-			continue
-		var cel := frame.cels[cel_ind]
-		textures.append(cel.get_image())
-		opacities.append(cel.opacity)
-		blend_modes.append(Global.current_project.layers[cel_ind].blend_mode)
-	var texture_array := Texture2DArray.new()
-	texture_array.create_from_images(textures)
-	var params := {
-		"layers": texture_array,
-		"opacities": opacities,
-		"blend_modes": blend_modes,
-	}
-	var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
-	var gen := ShaderImageEffect.new()
-	gen.generate_image(blended, blend_layers_shader, params, project.size)
-	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
+	# Re-order the layers again to ensure correct canvas drawing
+	project.ordered_layers = Array(previous_ordered_layers)
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html
@@ -470,17 +456,16 @@ func color_distance(c1: Color, c2: Color) -> float:
 
 
 # Image effects
-
-
 func scale_image(width: int, height: int, interpolation: int) -> void:
 	general_do_scale(width, height)
 
 	for f in Global.current_project.frames:
 		for i in range(f.cels.size() - 1, -1, -1):
-			if not f.cels[i] is PixelCel:
+			var cel := f.cels[i]
+			if not cel is PixelCel:
 				continue
 			var sprite := Image.new()
-			sprite.copy_from(f.cels[i].get_image())
+			sprite.copy_from(cel.get_image())
 			if interpolation == Interpolation.SCALE3X:
 				var times := Vector2i(
 					ceili(width / (3.0 * sprite.get_width())),
@@ -497,10 +482,7 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 				gen.generate_image(sprite, omniscale_shader, {}, Vector2i(width, height))
 			else:
 				sprite.resize(width, height, interpolation)
-			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(
-				f.cels[i].image, "data", f.cels[i].image.data
-			)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
@@ -529,14 +511,33 @@ func center(indices: Array) -> void:
 				continue
 			var sprite := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(cel.image, used_rect, offset)
-			project.undo_redo.add_do_property(cel.image, "data", sprite.data)
-			project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
-func crop_image() -> void:
+## Sets the size of the project to be the same as the size of the active selection.
+func crop_to_selection() -> void:
+	if not Global.current_project.has_selection:
+		return
+	Global.canvas.selection.transform_content_confirm()
+	var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
+	general_do_scale(rect.size.x, rect.size.y)
+	# Loop through all the cels to crop them
+	for f in Global.current_project.frames:
+		for cel in f.cels:
+			if not cel is PixelCel:
+				continue
+			var sprite := cel.get_image().get_region(rect)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
+
+	general_undo_scale()
+
+
+## Automatically makes the project smaller by looping through all of the cels and
+## trimming out the pixels that are transparent in all cels.
+func crop_to_content() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var used_rect := Rect2i()
 	for f in Global.current_project.frames:
@@ -559,14 +560,13 @@ func crop_image() -> void:
 	var width := used_rect.size.x
 	var height := used_rect.size.y
 	general_do_scale(width, height)
-	# Loop through all the cels to crop them
+	# Loop through all the cels to trim them
 	for f in Global.current_project.frames:
 		for cel in f.cels:
 			if not cel is PixelCel:
 				continue
 			var sprite := cel.get_image().get_region(used_rect)
-			Global.current_project.undo_redo.add_do_property(cel.image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
@@ -574,17 +574,16 @@ func crop_image() -> void:
 func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> void:
 	general_do_scale(width, height)
 	for f in Global.current_project.frames:
-		for c in f.cels:
-			if not c is PixelCel:
+		for cel in f.cels:
+			if not cel is PixelCel:
 				continue
 			var sprite := Image.create(width, height, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(
-				c.get_image(),
+				cel.get_image(),
 				Rect2i(Vector2i.ZERO, Global.current_project.size),
 				Vector2i(offset_x, offset_y)
 			)
-			Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
-			Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
+			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 
 	general_undo_scale()
 
@@ -594,10 +593,6 @@ func general_do_scale(width: int, height: int) -> void:
 	var size := Vector2i(width, height)
 	var x_ratio := float(project.size.x) / width
 	var y_ratio := float(project.size.y) / height
-
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy.crop(size.x, size.y)
 
 	var new_x_symmetry_point := project.x_symmetry_point / x_ratio
 	var new_y_symmetry_point := project.y_symmetry_point / y_ratio
@@ -611,7 +606,7 @@ func general_do_scale(width: int, height: int) -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Scale")
 	project.undo_redo.add_do_property(project, "size", size)
-	project.undo_redo.add_do_property(project, "selection_map", selection_map_copy)
+	project.undo_redo.add_do_method(project.selection_map.crop.bind(size.x, size.y))
 	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
 	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
 	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
@@ -621,7 +616,9 @@ func general_do_scale(width: int, height: int) -> void:
 func general_undo_scale() -> void:
 	var project := Global.current_project
 	project.undo_redo.add_undo_property(project, "size", project.size)
-	project.undo_redo.add_undo_property(project, "selection_map", project.selection_map)
+	project.undo_redo.add_undo_method(
+		project.selection_map.crop.bind(project.size.x, project.size.y)
+	)
 	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
 	project.undo_redo.add_undo_property(project, "y_symmetry_point", project.y_symmetry_point)
 	project.undo_redo.add_undo_property(

@@ -128,11 +128,13 @@ func _can_drop_data(_position: Vector2, data) -> bool:
 
 
 func _drop_data(_position: Vector2, data) -> void:
-	var from_node := get_node(data.from_path) as DockablePanel
+	var from_node := get_node(data.from_path)
+	if from_node is TabBar:
+		from_node = from_node.get_parent()
 	if from_node == _drag_panel and _drag_panel.get_child_count() == 1:
 		return
-
-	var moved_tab := from_node.get_tab_control(data.tabc_element)
+	var tab_index = data.tabc_element if data.has("tabc_element") else data.tab_index
+	var moved_tab = from_node.get_tab_control(tab_index)
 	if moved_tab is DockableReferenceControl:
 		moved_tab = moved_tab.reference_to
 	if not _is_managed_node(moved_tab):
@@ -234,7 +236,7 @@ func get_tab_count() -> int:
 
 
 func _can_handle_drag_data(data) -> bool:
-	if data is Dictionary and data.get("type") == "tabc_element":
+	if data is Dictionary and data.get("type") in ["tab_container_tab", "tabc_element"]:
 		var tabc := get_node_or_null(data.get("from_path"))
 		return (
 			tabc

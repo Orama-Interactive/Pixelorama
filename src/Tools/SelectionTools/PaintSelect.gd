@@ -1,4 +1,4 @@
-extends SelectionTool
+extends BaseSelectionTool
 
 var _brush_size := 2
 var _brush := Brushes.get_default_brush()
@@ -40,9 +40,10 @@ func draw_start(pos: Vector2i) -> void:
 		_last_position = pos
 
 
-func draw_move(pos: Vector2i) -> void:
+func draw_move(pos_i: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
+	var pos := _get_stabilized_position(pos_i)
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if !_move:
@@ -56,8 +57,6 @@ func draw_end(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	pos = snap_position(pos)
-	if !_move:
-		_draw_points.append_array(draw_tool(pos))
 	super.draw_end(pos)
 
 
@@ -110,21 +109,18 @@ func apply_selection(pos: Vector2i) -> void:
 		Global.canvas.selection.clear_selection()
 	# This is paint selection so we've done >= 1 nstead of > 1
 	if _draw_points.size() >= 1:
-		var selection_map_copy := SelectionMap.new()
-		selection_map_copy.copy_from(project.selection_map)
 		if _intersect:
-			selection_map_copy.clear()
-		paint_selection(selection_map_copy, _draw_points)
+			project.selection_map.clear()
+		paint_selection(project.selection_map, _draw_points)
 
 		# Handle mirroring
 		if Tools.horizontal_mirror:
-			paint_selection(selection_map_copy, mirror_array(_draw_points, true, false))
+			paint_selection(project.selection_map, mirror_array(_draw_points, true, false))
 			if Tools.vertical_mirror:
-				paint_selection(selection_map_copy, mirror_array(_draw_points, true, true))
+				paint_selection(project.selection_map, mirror_array(_draw_points, true, true))
 		if Tools.vertical_mirror:
-			paint_selection(selection_map_copy, mirror_array(_draw_points, false, true))
+			paint_selection(project.selection_map, mirror_array(_draw_points, false, true))
 
-		project.selection_map = selection_map_copy
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:

@@ -1,7 +1,7 @@
 extends ImageEffect
 
 enum Animate { HUE, SATURATION, VALUE }
-var shader := preload("res://src/Shaders/HSV.gdshader")
+var shader := preload("res://src/Shaders/Effects/HSV.gdshader")
 
 @onready var hue_slider := $VBoxContainer/HueSlider as ValueSlider
 @onready var sat_slider := $VBoxContainer/SaturationSlider as ValueSlider
@@ -32,14 +32,13 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	if selection_checkbox.button_pressed and project.has_selection:
 		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
-	var params := {"hue_shift": hue, "sat_shift": sat, "val_shift": val, "selection": selection_tex}
+	var params := {"hue": hue, "saturation": sat, "value": val, "selection": selection_tex}
 	if !has_been_confirmed:
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		await gen.done
 
 
 func _reset() -> void:

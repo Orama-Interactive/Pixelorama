@@ -10,8 +10,7 @@ var last: Vector2
 
 
 func _ready() -> void:
-	Global.project_changed.connect(queue_redraw)
-	Global.main_viewport.item_rect_changed.connect(queue_redraw)
+	Global.project_switched.connect(queue_redraw)
 
 
 func _gui_input(event: InputEvent) -> void:

@@ -24,7 +24,7 @@ func _init() -> void:
 func _ready() -> void:
 	_button.toggle_mode = true
 	_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	_button.toggled.connect(_on_Button_toggled)
+	_button.toggled.connect(set_visible_children)
 	add_child(_button, false, Node.INTERNAL_MODE_FRONT)
 	_texture_rect.anchor_top = 0.5
 	_texture_rect.anchor_bottom = 0.5
@@ -53,11 +53,8 @@ func _notification(what: int) -> void:
 		_texture_rect.texture = get_theme_icon("arrow_normal", "CollapsibleContainer")
 
 
-func _on_Button_toggled(button_pressed: bool) -> void:
-	_set_visible(button_pressed)
-
-
-func _set_visible(pressed: bool) -> void:
+## Toggles whether the children of the container are visible or not
+func set_visible_children(pressed: bool) -> void:
 	var angle := 0.0 if pressed else -90.0
 	create_tween().tween_property(_texture_rect, "rotation_degrees", angle, 0.05)
 	for child in get_children():

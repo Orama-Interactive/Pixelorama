@@ -82,7 +82,14 @@ msgstr ""
 msgid "Save as..."
 msgstr ""
 
-msgid "Use ZSTD Compression"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr ""
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
 msgstr ""
 
 msgid "Import"
@@ -133,7 +140,7 @@ msgstr ""
 msgid "Delete Permanently"
 msgstr ""
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr ""
 
@@ -149,7 +156,12 @@ msgstr ""
 msgid "Percentage"
 msgstr ""
 
-msgid "Crop Image"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr ""
+
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
 msgstr ""
 
 msgid "Resize Canvas"
@@ -309,6 +321,10 @@ msgstr ""
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
 msgstr ""
 
 #. Found under the View menu.
@@ -1077,16 +1093,16 @@ msgstr ""
 msgid "Belarusian"
 msgstr ""
 
-msgid "Development Team"
+#. Found in the About dialog.
+msgid "Lead Developer"
 msgstr ""
 
-msgid "Lead Programmer"
-msgstr ""
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr ""
 
-msgid "GitHub Contributors"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
 msgstr ""
 
 msgid "Art by: %s"
@@ -1113,7 +1129,7 @@ msgstr ""
 msgid "Save before exiting?"
 msgstr ""
 
-msgid "You have unsaved progress. How do you wish to proceed?"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
 msgstr ""
 
 msgid "Save & Exit"
@@ -1232,11 +1248,19 @@ msgstr ""
 msgid "Choose a color for the right tool"
 msgstr ""
 
-msgid "Switch left and right colors\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
 msgstr ""
 
 msgid "Reset the colors to their default state (black for left, white for right)"
+msgstr ""
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr ""
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
 msgstr ""
 
 msgid "Left tool"
@@ -1461,6 +1485,10 @@ msgstr ""
 msgid "Dynamics"
 msgstr ""
 
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr ""
+
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
 msgstr ""
@@ -1618,6 +1646,9 @@ msgid "Zoom in"
 msgstr ""
 
 msgid "Zoom out"
+msgstr ""
+
+msgid "Options"
 msgstr ""
 
 msgid "Options:"
@@ -1789,10 +1820,13 @@ msgstr ""
 msgid "Unlink Cels"
 msgstr ""
 
-msgid "Frame Properties"
+msgid "Properties"
 msgstr ""
 
 msgid "Frame properties"
+msgstr ""
+
+msgid "Cel properties"
 msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
@@ -2368,13 +2402,50 @@ msgstr ""
 msgid "Remove a selected color"
 msgstr ""
 
+#. Tooltip of the Sort button found in the palette panel.
+msgid "Sort palette"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
+msgid "Reverse colors"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
+msgid "Sort by hue"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
+msgid "Sort by saturation"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
+msgid "Sort by value"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
+msgid "Sort by red"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
+msgid "Sort by green"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
+msgid "Sort by blue"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
+msgid "Sort by alpha"
+msgstr ""
+
 msgid "Palette with the same name and path already exists!"
 msgstr ""
 
 msgid "Palette name is required!"
 msgstr ""
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
 msgstr ""
 
 msgid "Position:"
@@ -2711,8 +2782,46 @@ msgstr ""
 msgid "Spring towards the end"
 msgstr ""
 
-msgid "Silhouette"
+#. Used to turn images into a singular color
+msgid "Monochrome"
 msgstr ""
 
-msgid "Blacks out the image and makes all opaque pixels a dark color."
+#. A tooltip to tell users to hold the Shift key while clicking the remove button
+msgid "Hold Shift while pressing to instantly remove"
+msgstr ""
+
+#. Moves the reference image up in the list
+msgid "Move the selected reference image to the right"
+msgstr ""
+
+#. Moves the reference image down in the list
+msgid "Move the selected reference image to the left"
+msgstr ""
+
+#. Select a reference on the canvas
+msgid "Selects a reference image on the canvas"
+msgstr ""
+
+#. Moves the reference on the canvas
+msgid "Move the selected reference image"
+msgstr ""
+
+#. Rotates the reference on the canvas
+msgid "Rotate the selected reference image"
+msgstr ""
+
+#. Rotates the reference on the canvas
+msgid "Scale the selected reference image"
+msgstr ""
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr ""
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr ""
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
 msgstr ""

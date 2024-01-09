@@ -1,4 +1,4 @@
-extends SelectionTool
+extends BaseSelectionTool
 
 var _last_position := Vector2i(Vector2.INF)
 var _draw_points: Array[Vector2i] = []
@@ -119,21 +119,18 @@ func apply_selection(pos: Vector2i) -> void:
 		cleared = true
 		Global.canvas.selection.clear_selection()
 	if _draw_points.size() > 3:
-		var selection_map_copy := SelectionMap.new()
-		selection_map_copy.copy_from(project.selection_map)
 		if _intersect:
-			selection_map_copy.clear()
-		lasso_selection(selection_map_copy, _draw_points)
+			project.selection_map.clear()
+		lasso_selection(project.selection_map, _draw_points)
 
 		# Handle mirroring
 		if Tools.horizontal_mirror:
-			lasso_selection(selection_map_copy, mirror_array(_draw_points, true, false))
+			lasso_selection(project.selection_map, mirror_array(_draw_points, true, false))
 			if Tools.vertical_mirror:
-				lasso_selection(selection_map_copy, mirror_array(_draw_points, true, true))
+				lasso_selection(project.selection_map, mirror_array(_draw_points, true, true))
 		if Tools.vertical_mirror:
-			lasso_selection(selection_map_copy, mirror_array(_draw_points, false, true))
+			lasso_selection(project.selection_map, mirror_array(_draw_points, false, true))
 
-		project.selection_map = selection_map_copy
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:

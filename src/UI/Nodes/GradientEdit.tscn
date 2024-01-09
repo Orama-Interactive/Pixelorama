@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" path="res://src/UI/Nodes/GradientEdit.gd" id="1"]
 
-[sub_resource type="Gradient" id="1"]
+[sub_resource type="Gradient" id="Gradient_1k8kj"]
+resource_local_to_scene = true
 
-[sub_resource type="GradientTexture2D" id="2"]
-gradient = SubResource("1")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fau1l"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_1k8kj")
 
 [node name="GradientEdit" type="VBoxContainer"]
 anchors_preset = 15
@@ -17,7 +19,7 @@ script = ExtResource("1")
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 3
-texture = SubResource("2")
+texture = SubResource("GradientTexture2D_fau1l")
 expand_mode = 1
 
 [node name="Value" type="Label" parent="TextureRect"]
@@ -34,10 +36,10 @@ offset_bottom = 7.0
 [node name="Popup" type="PopupPanel" parent="."]
 
 [node name="ColorPicker" type="ColorPicker" parent="Popup"]
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 298.0
-offset_bottom = 576.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 294.0
+offset_bottom = 572.0
 
 [node name="InterpolationContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -48,6 +50,7 @@ size_flags_horizontal = 3
 text = "Interpolation:"
 
 [node name="InterpolationOptionButton" type="OptionButton" parent="InterpolationContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -69,6 +72,7 @@ size_flags_horizontal = 3
 text = "Color space:"
 
 [node name="ColorSpaceOptionButton" type="OptionButton" parent="ColorSpaceContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2

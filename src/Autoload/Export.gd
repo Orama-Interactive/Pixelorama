@@ -484,9 +484,9 @@ func _blend_layers(
 	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
 	if export_layers == 0:
-		DrawingAlgos.blend_all_layers(image, frame, origin, project)
+		DrawingAlgos.blend_layers(image, frame, origin, project)
 	elif export_layers == 1:
-		DrawingAlgos.blend_selected_cels(image, frame, origin, project)
+		DrawingAlgos.blend_layers(image, frame, origin, project, true)
 	else:
 		var layer := project.layers[export_layers - 2]
 		var layer_image := Image.new()

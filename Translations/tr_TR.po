@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-08-28 19:53\n"
+"PO-Revision-Date: 2023-12-06 13:12\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -93,8 +93,16 @@ msgstr "Kaydet..."
 msgid "Save as..."
 msgstr "Farklı Kaydet..."
 
-msgid "Use ZSTD Compression"
-msgstr "ZSTD sıkıştırması kullan"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr "Harmanlanmış görüntüleri dahil et"
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr "Etkinleştirilirse, son harmanlanmış görüntüler de her kare için pxo'da saklanır.\n"
+"Bu, pxo dosyasını daha büyük hale getirir ve üçüncü taraf yazılımlar tarafından içe ya da CLI dışa aktarma için kullanışlıdır. Pixelorama'da pxo dosyalarını yüklemek için bu seçeneğin etkinleştirilmesine gerek yoktur.\n"
 
 msgid "Import"
 msgstr "İçe aktar"
@@ -140,6 +148,13 @@ msgstr "Yerinde Yapıştır"
 
 msgid "Delete"
 msgstr "Sil"
+
+msgid "Delete Permanently"
+msgstr "Kalıcı Olarak Sil"
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr "Çöp Kutusuna Taşı"
 
 msgid "New Brush"
 msgstr "Yeni Fırça"
@@ -314,6 +329,10 @@ msgstr "Kılavuzları Göster"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Faker Kılavuzlarını Göster"
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr "Katman Efektlerini Göster"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -628,6 +647,14 @@ msgstr "Üç çizgili"
 
 msgid "Constant"
 msgstr "Sabit"
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr "Renk uzayı:"
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr "Doğrusal sRGB"
 
 msgid "General"
 msgstr "Genel"
@@ -1279,13 +1306,20 @@ msgstr "Sol araç için renk seç"
 msgid "Choose a color for the right tool"
 msgstr "Sağ araç için renk seç"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "Sağ ve sol renklerini yer değiştir\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr "Sağ ve sol renklerini yer değiştir."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Renkleri varsayılan durumuna sıfırla (sol için siyah, sağ için beyaz)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr "Ekrandan renk seç."
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr "Seçici şekli seç."
 
 msgid "Left tool"
 msgstr "Sol araç"
@@ -1509,6 +1543,10 @@ msgstr "Klasörü Aç"
 msgid "Dynamics"
 msgstr "Dinamikler"
 
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr "Sabitleyici"
+
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
 msgstr "Basınç"
@@ -1669,6 +1707,9 @@ msgstr "Yakınlaştır"
 msgid "Zoom out"
 msgstr "Uzaklaştır"
 
+msgid "Options"
+msgstr "Seçenekler"
+
 msgid "Options:"
 msgstr "Seçenekler:"
 
@@ -1719,34 +1760,22 @@ msgid "Current frame as spritesheet"
 msgstr "Model sayfası olarak geçerli kare"
 
 msgid "Jump to the first frame\n"
-"(%s)"
 msgstr "İlk kareye atla\n"
-"(%s)"
 
 msgid "Go to the previous frame\n"
-"(%s)"
 msgstr "Önceki kareye git\n"
-"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "Animasyonu tersten oynat (son kareden ilk kareye)\n"
-"(%s)"
+msgstr "Animasyonu tersten oynat (sondan başa)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "Animasyonu oynat (ilk kareden son kareye)\n"
-"(%s)"
+msgstr "Animasyonu ileri oynat (baştan sonra)\n"
 
 msgid "Go to the next frame\n"
-"(%s)"
 msgstr "Sonraki kareye git\n"
-"(%s)"
 
 msgid "Jump to the last frame\n"
-"(%s)"
 msgstr "Son kareye atla\n"
-"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "Onion Skinning özellikleri"
@@ -1852,11 +1881,14 @@ msgstr "Hücreleri şuraya bağla"
 msgid "Unlink Cels"
 msgstr "Hücre bağlantısını kaldır"
 
-msgid "Frame Properties"
-msgstr "Kare Özellikleri"
+msgid "Properties"
+msgstr "Özellikler"
 
 msgid "Frame properties"
 msgstr "Kare özellikleri"
+
+msgid "Cel properties"
+msgstr "Hücre özellikleri"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1901,6 +1933,90 @@ msgstr "Katmanı klonla"
 
 msgid "Merge current layer with the one below"
 msgstr "Aktif katmanı alttaki katmanla birleştir"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr "Harmanlama kipi:"
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr "Normal"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr "Çarp"
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr "Renk yanması"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr "Doğrusal yanma"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr "Ekran"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr "Renk soldurma"
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr "Karşıtlık"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr "Kaplama"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr "Yumuşak ışık"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr "Sert ışık"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr "Tersine çevir"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr "Fark"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr "Hariç tut"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr "Çıkart"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr "Böl"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr "Bileşen"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr "Renk tonu"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr "Doygunluk"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr "Renk"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr "Renk parlaklığı"
 
 msgid "Opacity:"
 msgstr "Matlık:"
@@ -2690,9 +2806,25 @@ msgstr "Sonunda zıplama"
 msgid "Backing out at ends"
 msgstr "Sonunda geri çekilme"
 
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr "Sona doğru hızlan"
+
 msgid "Silhouette"
 msgstr "Silüet"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr "Görüntüyü karartır ve tüm mat pikselleri koyu renge dönüştürür."
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr "Etkin"
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr "Katman efektleri"
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
+msgstr "Efekt ekle"
 

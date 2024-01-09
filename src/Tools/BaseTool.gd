@@ -6,9 +6,11 @@ var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""
 var _cursor := Vector2i(Vector2.INF)
+var _stabilizer_center := Vector2.ZERO
 
 var _draw_cache: Array[Vector2i] = []  ## For storing already drawn pixels
-@warning_ignore("unused_private_class_variable") var _for_frame := 0  ## Cache for which frame
+@warning_ignore("unused_private_class_variable")
+var _for_frame := 0  ## Cache for which frame
 
 # Only use _spacing_mode and _spacing variables (the others are set automatically)
 # The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd)
@@ -53,6 +55,7 @@ func update_config() -> void:
 
 
 func draw_start(pos: Vector2i) -> void:
+	_stabilizer_center = pos
 	_draw_cache = []
 	is_moving = true
 	Global.current_project.can_undo = false
@@ -257,6 +260,17 @@ func _snap_to_guide(
 		snap_to = closest_point
 
 	return snap_to
+
+
+func _get_stabilized_position(normal_pos: Vector2) -> Vector2:
+	if not Tools.stabilizer_enabled:
+		return normal_pos
+	var difference := normal_pos - _stabilizer_center
+	var distance := difference.length() / Tools.stabilizer_value
+	var angle := difference.angle()
+	var pos := _stabilizer_center + Vector2(distance, distance) * Vector2.from_angle(angle)
+	_stabilizer_center = pos
+	return pos
 
 
 func _get_draw_rect() -> Rect2i:

@@ -16,6 +16,7 @@ title = "Preferences"
 position = Vector2i(0, 36)
 size = Vector2i(800, 500)
 exclusive = false
+popup_window = true
 script = ExtResource("1")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
@@ -1315,8 +1316,9 @@ mouse_filter = 2
 [node name="AddExtensionFileDialog" type="FileDialog" parent="Popups"]
 mode = 1
 title = "Open File(s)"
-position = Vector2i(0, 36)
-size = Vector2i(650, 400)
+size = Vector2i(560, 400)
+exclusive = false
+popup_window = true
 ok_button_text = "Open"
 file_mode = 1
 access = 2
@@ -1325,6 +1327,23 @@ show_hidden_files = true
 
 [node name="Store" parent="Popups" instance=ExtResource("8_jmnx8")]
 transient = true
+
+[node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+position = Vector2i(0, 36)
+size = Vector2i(500, 100)
+exclusive = false
+popup_window = true
+ok_button_text = "Delete Permanently"
+
+[node name="Label" type="Label" parent="DeleteConfirmation"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 492.0
+offset_bottom = 51.0
+text = "Delete Extension?"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="about_to_popup" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="visibility_changed" from="." to="." method="_on_PreferencesDialog_visibility_changed"]
@@ -1339,3 +1358,5 @@ transient = true
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/UninstallButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_UninstallButton_pressed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/OpenFolderButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_OpenFolderButton_pressed"]
 [connection signal="files_selected" from="Popups/AddExtensionFileDialog" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_AddExtensionFileDialog_files_selected"]
+[connection signal="confirmed" from="DeleteConfirmation" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_delete_confirmation_confirmed"]
+[connection signal="custom_action" from="DeleteConfirmation" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_delete_confirmation_custom_action"]

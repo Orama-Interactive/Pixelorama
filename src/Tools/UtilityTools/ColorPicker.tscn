@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://2onobu8eymt8"]
+
+[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/UtilityTools/ColorPicker.gd" id="2"]
+
+[node name="ToolOptions" instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="ColorPicker" type="VBoxContainer" parent="." index="2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorPicker" index="0"]
+layout_mode = 2
+size_flags_vertical = 1
+mouse_default_cursor_shape = 2
+text = "Pick for:"
+
+[node name="Options" type="OptionButton" parent="ColorPicker" index="1"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Left Color"
+popup/item_0/id = 0
+popup/item_1/text = "Right Color"
+popup/item_1/id = 1
+
+[node name="Label2" type="Label" parent="ColorPicker" index="2"]
+layout_mode = 2
+size_flags_vertical = 1
+mouse_default_cursor_shape = 2
+text = "Pick mode:"
+
+[node name="ExtractFrom" type="OptionButton" parent="ColorPicker" index="3"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Top Color"
+popup/item_0/id = 0
+popup/item_1/text = "Current Layer"
+popup/item_1/id = 1
+
+[connection signal="item_selected" from="ColorPicker/Options" to="." method="_on_Options_item_selected"]
+[connection signal="item_selected" from="ColorPicker/ExtractFrom" to="." method="_on_ExtractFrom_item_selected"]

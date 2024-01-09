@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://wplk62pbgih4"]
+[gd_scene load_steps=15 format=3 uid="uid://wplk62pbgih4"]
 
 [ext_resource type="PackedScene" uid="uid://c0p84w7umxwt1" path="res://src/Palette/EditPaletteDialog.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://biyn51upnlxle" path="res://assets/graphics/palette/edit.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="2_j1lig"]
 [ext_resource type="Texture2D" uid="uid://b7ydn1tt37rcl" path="res://assets/graphics/palette/add.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bt72662c3gp2f" path="res://assets/graphics/timeline/remove_frame.png" id="3_0e27e"]
 [ext_resource type="PackedScene" uid="uid://68aakj2l6ee1" path="res://src/Palette/CreatePaletteDialog.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://db4i3w3yencxg" path="res://assets/graphics/palette/sort.png" id="4_hcsuy"]
 [ext_resource type="Script" path="res://src/Palette/PaletteGrid.gd" id="5"]
 [ext_resource type="Script" path="res://src/Palette/PaletteScroll.gd" id="6"]
 [ext_resource type="Script" path="res://src/Palette/PalettePanel.gd" id="8"]
@@ -20,17 +23,89 @@ action = &"new_palette"
 [sub_resource type="Shortcut" id="Shortcut_6f4gc"]
 events = [SubResource("InputEventAction_mdfjt")]
 
-[node name="PalettePanel" type="PanelContainer"]
+[node name="PalettePanel" type="MarginContainer"]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("8")
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer"]
 layout_mode = 2
+
+[node name="AddColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Add a new color"
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/AddColor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_j1lig")
+
+[node name="DeleteColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+tooltip_text = "Remove a selected color"
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/DeleteColor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -1.0
+offset_right = 6.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_0e27e")
+
+[node name="Sort" type="MenuButton" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+tooltip_text = "Sort palette"
+mouse_default_cursor_shape = 2
+flat = false
+
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/Sort"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_hcsuy")
 
 [node name="PaletteSelect" type="OptionButton" parent="PaletteVBoxContainer/PaletteButtons"]
 unique_name_in_owner = true
@@ -39,6 +114,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Choose a palette"
 mouse_default_cursor_shape = 2
+alignment = 1
 clip_text = true
 
 [node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
@@ -49,18 +125,16 @@ mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_jl8vt")
 
 [node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/EditPalette"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -11.0
-offset_right = 11.0
-offset_bottom = 11.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2")
+stretch_mode = 3
 
 [node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
@@ -70,18 +144,16 @@ mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_6f4gc")
 
 [node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/AddPalette"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -11.0
-offset_right = 11.0
-offset_bottom = 11.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("3")
+stretch_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="PaletteVBoxContainer"]
 layout_mode = 2
@@ -90,25 +162,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="ColorButtons" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
-layout_mode = 2
-
-[node name="AddColor" type="Button" parent="PaletteVBoxContainer/SwatchesContainer/ColorButtons"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-tooltip_text = "Add a new color"
-mouse_default_cursor_shape = 2
-text = "+"
-
-[node name="DeleteColor" type="Button" parent="PaletteVBoxContainer/SwatchesContainer/ColorButtons"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-tooltip_text = "Remove a selected color"
-mouse_default_cursor_shape = 2
-text = "-"
 
 [node name="PaletteScroll" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
 unique_name_in_owner = true
@@ -133,6 +186,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 
 [node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
@@ -174,11 +229,11 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
+[connection signal="gui_input" from="PaletteVBoxContainer/PaletteButtons/AddColor" to="." method="_on_AddColor_gui_input"]
+[connection signal="gui_input" from="PaletteVBoxContainer/PaletteButtons/DeleteColor" to="." method="_on_DeleteColor_gui_input"]
 [connection signal="item_selected" from="PaletteVBoxContainer/PaletteButtons/PaletteSelect" to="." method="_on_PaletteSelect_item_selected"]
 [connection signal="pressed" from="PaletteVBoxContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]
 [connection signal="pressed" from="PaletteVBoxContainer/PaletteButtons/AddPalette" to="." method="_on_AddPalette_pressed"]
-[connection signal="gui_input" from="PaletteVBoxContainer/SwatchesContainer/ColorButtons/AddColor" to="." method="_on_AddColor_gui_input"]
-[connection signal="gui_input" from="PaletteVBoxContainer/SwatchesContainer/ColorButtons/DeleteColor" to="." method="_on_DeleteColor_gui_input"]
 [connection signal="gui_input" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_PaletteScroll_gui_input"]
 [connection signal="resized" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_PaletteScroll_resized"]
 [connection signal="gui_input" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer/PaletteGrid" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_PaletteGrid_gui_input"]
@@ -188,6 +243,7 @@ layout_mode = 2
 [connection signal="value_changed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/HScrollBar" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_HSlider_value_changed"]
 [connection signal="value_changed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/MarginContainer/VScrollBar" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_VSlider_value_changed"]
 [connection signal="deleted" from="EditPaletteDialog" to="." method="_on_EditPaletteDialog_deleted"]
+[connection signal="exported" from="EditPaletteDialog" to="." method="_on_edit_palette_dialog_exported"]
 [connection signal="saved" from="EditPaletteDialog" to="." method="_on_EditPaletteDialog_saved"]
 [connection signal="saved" from="CreatePaletteDialog" to="." method="_on_CreatePaletteDialog_saved"]
 [connection signal="color_changed" from="HiddenColorPickerButton" to="." method="_on_ColorPicker_color_changed"]

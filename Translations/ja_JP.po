@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-08-28 14:06\n"
+"PO-Revision-Date: 2023-12-06 01:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -93,8 +93,16 @@ msgstr "保存..."
 msgid "Save as..."
 msgstr "名前をつけて保存"
 
-msgid "Use ZSTD Compression"
-msgstr "ZSTD圧縮を使用する"
+#. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
+msgid "Include blended images"
+msgstr "ブレンドした画像を含む"
+
+#. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
+msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
+"This makes the pxo file larger and is useful for importing by third-party software\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+msgstr "有効にすると、最終的にブレンドされたイメージもフレームごとに PXO に保存されます。\n"
+"これにより、pxo ファイルが大きくなり、サードパーティ ソフトウェアまたは CLI エクスポートによるインポートに役立ちます。 Pixelorama に pxo ファイルをロードする場合、このオプションを有効にする必要はありません。"
 
 msgid "Import"
 msgstr "インポート"
@@ -140,6 +148,13 @@ msgstr "現在の場所に貼り付け"
 
 msgid "Delete"
 msgstr "削除"
+
+msgid "Delete Permanently"
+msgstr "完全に削除"
+
+#. When you move something to recycle bin
+msgid "Move to Trash"
+msgstr "ゴミ箱へ移動"
 
 msgid "New Brush"
 msgstr "新しいブラシ"
@@ -314,6 +329,10 @@ msgstr "ガイドを表示"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "マウスガイドを表示"
+
+#. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
+msgid "Display Layer Effects"
+msgstr "レイヤーエフェクトを表示"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -628,6 +647,14 @@ msgstr "トライリニア"
 
 msgid "Constant"
 msgstr "固定"
+
+#. Refers to https://en.wikipedia.org/wiki/Color_space
+msgid "Color space:"
+msgstr ""
+
+#. A type of color space.
+msgid "Linear sRGB"
+msgstr ""
 
 msgid "General"
 msgstr "一般"
@@ -1279,13 +1306,20 @@ msgstr "左ツールの色を選択してくだ"
 msgid "Choose a color for the right tool"
 msgstr "右のツールの色を選択してください"
 
-msgid "Switch left and right colors\n"
-"(%s)"
-msgstr "左右の色を切り替える\n"
-"(%s)"
+#. Tooltip of the switch colors button found in the color picker panel.
+msgid "Switch left and right colors."
+msgstr "左右の色を切り替えます。"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "色を既定の状態にリセットします (左は黒、右は白)"
+
+#. Tooltip of the screen color picker button found in the color picker panel.
+msgid "Pick a color from the screen."
+msgstr "画面から色を選択します。"
+
+#. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
+msgid "Select a picker shape."
+msgstr "ピッカー形状を選択します。"
 
 msgid "Left tool"
 msgstr "左のツール"
@@ -1509,6 +1543,10 @@ msgstr "フォルダーを開く"
 msgid "Dynamics"
 msgstr "ダイナミクス"
 
+#. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
+msgid "Stabilizer"
+msgstr ""
+
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
 msgstr "圧力"
@@ -1669,6 +1707,9 @@ msgstr "ズームイン"
 msgid "Zoom out"
 msgstr "ズームアウト"
 
+msgid "Options"
+msgstr "オプション"
+
 msgid "Options:"
 msgstr "オプション："
 
@@ -1719,34 +1760,22 @@ msgid "Current frame as spritesheet"
 msgstr "スプライトシートとしての現在のフレーム"
 
 msgid "Jump to the first frame\n"
-"(%s)"
 msgstr "最初のフレームにジャンプ\n"
-"(%s)"
 
 msgid "Go to the previous frame\n"
-"(%s)"
 msgstr "前のフレームに移動\n"
-"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "アニメーションを逆方向に再生する (終了から始めまで)\n"
-"(%s)"
+msgstr "アニメーションを逆方向に再生 (終了から開始まで)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "アニメーションを前方に再生する(開始から終了まで)\n"
-"(%s)"
+msgstr "アニメーションを前方に再生する (開始から終了まで)\n"
 
 msgid "Go to the next frame\n"
-"(%s)"
 msgstr "次のフレームに移動\n"
-"(%s)"
 
 msgid "Jump to the last frame\n"
-"(%s)"
 msgstr "最後のフレームにジャンプ\n"
-"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "オニオンスキン設定"
@@ -1852,11 +1881,14 @@ msgstr "セルをリンクする"
 msgid "Unlink Cels"
 msgstr "セルのリンクを解除"
 
-msgid "Frame Properties"
-msgstr "フレームのプロパティ"
+msgid "Properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "フレームのプロパティ"
+
+msgid "Cel properties"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1901,6 +1933,90 @@ msgstr "現在のレイヤーを複製"
 
 msgid "Merge current layer with the one below"
 msgstr "現在のレイヤーと下のレイヤーを結合"
+
+#. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Blend mode:"
+msgstr "ブレンドモード:"
+
+#. Adjective, refers to something usual/regular, such as the normal blend mode.
+msgid "Normal"
+msgstr "通常"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Multiply"
+msgstr "乗算"
+
+# .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color burn"
+msgstr "焼き込みカラー"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Linear burn"
+msgstr "焼き込み（リニア）"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Screen"
+msgstr "スクリーン"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color dodge"
+msgstr "覆い焼きカラー"
+
+#. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Contrast"
+msgstr "コントラスト"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Overlay"
+msgstr "オーバーレイ"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Soft light"
+msgstr "ソフトライト"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hard light"
+msgstr "ハードライト"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Inversion"
+msgstr "反転"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Difference"
+msgstr "差分"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Exclusion"
+msgstr "排他"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Subtract"
+msgstr "減算"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Divide"
+msgstr "除法"
+
+#. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Component"
+msgstr "コンポーネント"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Hue"
+msgstr "色相"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Saturation"
+msgstr "彩度"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Color"
+msgstr "色"
+
+#. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
+msgid "Luminosity"
+msgstr "輝度"
 
 msgid "Opacity:"
 msgstr "不透明度:"
@@ -2690,9 +2806,25 @@ msgstr "終了時にバウンス"
 msgid "Backing out at ends"
 msgstr "終了時にバックアウト"
 
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr "終了へ向かって跳ぶ"
+
 msgid "Silhouette"
 msgstr "シルエット"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr "画像をブラックアウトし、すべての不透明なピクセルを暗い色にします。"
+
+#. Used in checkbuttons (like on/off switches) that enable/disable something.
+msgid "Enabled"
+msgstr "有効"
+
+#. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
+msgid "Layer effects"
+msgstr "レイヤーエフェクト"
+
+#. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
+msgid "Add effect"
+msgstr "エフェクトを追加"
 
