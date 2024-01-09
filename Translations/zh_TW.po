@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-01-08 21:04\n"
+"PO-Revision-Date: 2024-01-09 22:35\n"
 
 msgid "OK"
 msgstr "確定"
@@ -981,6 +981,10 @@ msgstr "更新紀錄"
 msgid "About Pixelorama"
 msgstr "關於 Pixelorama"
 
+#. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
+msgid "Support Pixelorama's Development"
+msgstr ""
+
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - 像素化你的夢想！"
 
@@ -993,8 +997,9 @@ msgstr ""
 msgid "Website"
 msgstr "官網"
 
-msgid "GitHub Repo"
-msgstr "GitHub 項目"
+#. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
+msgid "Source Code"
+msgstr ""
 
 msgid "Donate"
 msgstr "捐款"
