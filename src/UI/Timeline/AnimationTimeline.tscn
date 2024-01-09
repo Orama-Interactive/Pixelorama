@@ -953,8 +953,7 @@ mouse_filter = 2
 color = Color(0, 0.741176, 1, 0.501961)
 
 [node name="PasteTagPopup" type="Popup" parent="."]
-size = Vector2i(250, 307)
-visible = true
+size = Vector2i(250, 574)
 min_size = Vector2i(250, 0)
 script = ExtResource("12")
 
