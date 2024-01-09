@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-01-08 21:04\n"
+"PO-Revision-Date: 2024-01-09 22:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -984,6 +984,10 @@ msgstr "Änderungen"
 msgid "About Pixelorama"
 msgstr "Über Pixelorama"
 
+#. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
+msgid "Support Pixelorama's Development"
+msgstr ""
+
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - Vollpixele deine Träume!"
 
@@ -996,8 +1000,9 @@ msgstr "@2019-Gegenwart von Orama Interactive und Mitwirkenden"
 msgid "Website"
 msgstr "Website"
 
-msgid "GitHub Repo"
-msgstr "GitHub Repo"
+#. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
+msgid "Source Code"
+msgstr ""
 
 msgid "Donate"
 msgstr "Spenden"
