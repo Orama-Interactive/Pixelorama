@@ -121,6 +121,7 @@ func close_progress() -> void:
 					faulty_links_label.text += str(link, "\n")
 				custom_link_error.popup_centered()
 
+
 ## Signal connected from StoreButton.tscn
 func _on_explore_pressed() -> void:
 	popup_centered()
