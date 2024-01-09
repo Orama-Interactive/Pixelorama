@@ -759,12 +759,12 @@ class SignalsAPI:
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever you switch to some other project.
-	func signal_project_changed(callable: Callable, is_disconnecting := false):
+	func signal_project_switched(callable: Callable, is_disconnecting := false):
 		_connect_disconnect(Global.project_switched, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever you select a different cel.
-	func signal_cel_changed(callable: Callable, is_disconnecting := false):
+	func signal_cel_switched(callable: Callable, is_disconnecting := false):
 		_connect_disconnect(Global.cel_switched, callable, is_disconnecting)
 
 	# TOOL RELATED SIGNALS
