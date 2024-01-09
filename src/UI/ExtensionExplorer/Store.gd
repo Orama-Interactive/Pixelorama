@@ -67,7 +67,7 @@ func fetch_info(link: String) -> void:
 		if error == OK:
 			prepare_progress()
 		else:
-			printerr("Unable to Get info from remote repository...")
+			printerr("Unable to get info from remote repository.")
 			error_getting_info(error)
 
 

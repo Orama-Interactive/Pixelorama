@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Store.gd" id="1_pwcwi"]
 [ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
 [ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/CustomStoreLinks.gd" id="3_dk1xf"]
-[ext_resource type="Texture2D" uid="uid://c4433pa25cxp2" path="res://addons/keychain/assets/add.svg" id="4_46g0u"]
+[ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="4_ntl7p"]
 
 [node name="Store" type="Window"]
 title = "Explore Online"
@@ -25,55 +25,47 @@ offset_top = 8.0
 offset_right = -7.0
 offset_bottom = -8.0
 
-[node name="Store" type="HBoxContainer" parent="TabContainer"]
+[node name="Store" type="MarginContainer" parent="TabContainer"]
 layout_mode = 2
 
-[node name="Parameters" type="VBoxContainer" parent="TabContainer/Store"]
+[node name="StoreMainContainer" type="HSplitContainer" parent="TabContainer/Store"]
+layout_mode = 2
+
+[node name="Parameters" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 0
 
-[node name="SearchManager" type="LineEdit" parent="TabContainer/Store/Parameters"]
+[node name="SearchManager" type="LineEdit" parent="TabContainer/Store/StoreMainContainer/Parameters"]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Search..."
 script = ExtResource("2_uqsvm")
 
-[node name="Heading" type="HBoxContainer" parent="TabContainer/Store/Parameters"]
+[node name="Header" type="Label" parent="TabContainer/Store/StoreMainContainer/Parameters"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="TabContainer/Store/Parameters/Heading"]
-layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Tags:"
 
-[node name="HSeparator" type="HSeparator" parent="TabContainer/Store/Parameters/Heading"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Store/Parameters"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Store/StoreMainContainer/Parameters"]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="TagList" type="VBoxContainer" parent="TabContainer/Store/Parameters/ScrollContainer"]
+[node name="TagList" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer/Parameters/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="TabContainer/Store"]
-layout_mode = 2
-
-[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Store"]
+[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Store/StoreMainContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Content" type="VBoxContainer" parent="TabContainer/Store/ContentScrollContainer"]
+[node name="Content" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer/ContentScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Options" type="PanelContainer" parent="TabContainer"]
+[node name="Options" type="MarginContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
 
@@ -86,22 +78,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_dk1xf")
 
-[node name="Heading" type="HBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/Heading"]
+[node name="Header" type="Label" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Store Links:"
-
-[node name="HSeparator" type="HSeparator" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/Heading"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Guide" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/Heading"]
-visible = false
-layout_mode = 2
-text = "Guide to making a Store File"
 
 [node name="MainStoreLink" type="LineEdit" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
 unique_name_in_owner = true
@@ -111,12 +91,20 @@ editable = false
 [node name="Links" type="VBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
 layout_mode = 2
 
-[node name="NewLink" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
-custom_minimum_size = Vector2(40, 40)
+[node name="ButtonContainer" type="HBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+layout_mode = 2
+
+[node name="Guide" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer"]
+visible = false
+layout_mode = 2
+text = "Guide to making a Store File"
+
+[node name="NewLink" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="TextureRect" type="TextureRect" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/NewLink"]
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/NewLink"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,8 +115,7 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_46g0u")
-expand_mode = 1
+texture = ExtResource("4_ntl7p")
 stretch_mode = 5
 
 [node name="ProgressContainer" type="VBoxContainer" parent="."]
@@ -164,10 +151,10 @@ unique_name_in_owner = true
 [node name="Error" type="AcceptDialog" parent="."]
 unique_name_in_owner = true
 position = Vector2i(0, 36)
-size = Vector2i(545, 305)
+size = Vector2i(545, 385)
 unresizable = true
 
-[node name="Panel" type="Panel" parent="Error"]
+[node name="Content" type="VBoxContainer" parent="Error"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -178,80 +165,30 @@ offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Content" type="VBoxContainer" parent="Error/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Error/Panel/Content"]
-modulate = Color(1, 0, 0, 1)
+[node name="Label" type="Label" parent="Error/Content"]
 layout_mode = 2
-text = "Unable to Get info from remote repository..."
+text = "Unable to get info from remote repository.
+- Make sure you are connected to the internet.
+- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
 autowrap_mode = 2
 
-[node name="Reason" type="GridContainer" parent="Error/Panel/Content"]
-layout_mode = 2
-columns = 2
-
-[node name="Number" type="Label" parent="Error/Panel/Content/Reason"]
-modulate = Color(0.968627, 0, 1, 1)
-layout_mode = 2
-size_flags_vertical = 5
-text = "1)"
-
-[node name="Label" type="Label" parent="Error/Panel/Content/Reason"]
-modulate = Color(0.968627, 1, 0, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Check you internet connection."
-autowrap_mode = 3
-
-[node name="HSeparator" type="HSeparator" parent="Error/Panel/Content"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Error/Content"]
 layout_mode = 2
 
-[node name="Reason2" type="GridContainer" parent="Error/Panel/Content"]
-layout_mode = 2
-columns = 2
-
-[node name="Number" type="Label" parent="Error/Panel/Content/Reason2"]
-modulate = Color(0.968627, 0, 1, 1)
-layout_mode = 2
-size_flags_vertical = 5
-text = "2)"
-
-[node name="Label" type="Label" parent="Error/Panel/Content/Reason2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "You may be using the \"Flatpak\" Version of Pixelorama which does not have Internet Permission
-Run it from terminal using command:"
-autowrap_mode = 3
-
-[node name="Empty" type="Control" parent="Error/Panel/Content/Reason2"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Error/Panel/Content/Reason2"]
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="Error/Panel/Content/Reason2/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Error/Content/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "sudo flatpak override com.orama_interactive.Pixelorama --share=network"
 editable = false
 
-[node name="CopyCommand" type="Button" parent="Error/Panel/Content/Reason2/HBoxContainer"]
+[node name="CopyCommand" type="Button" parent="Error/Content/HBoxContainer"]
 layout_mode = 2
 text = "Copy"
 
-[node name="Empty2" type="Control" parent="Error/Panel/Content/Reason2"]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="Error/Panel/Content/Reason2"]
+[node name="Label2" type="Label" parent="Error/Content"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Or download \"Flatseal\" from your linux package manager and set permissions for Flatpak apps there"
+text = "Alternatively, you download Flatseal and set permissions for Flatpak apps there."
 autowrap_mode = 3
 
 [node name="ErrorCustom" type="AcceptDialog" parent="."]
@@ -269,9 +206,8 @@ offset_right = -8.0
 offset_bottom = -49.0
 
 [node name="Label" type="Label" parent="ErrorCustom/Content"]
-modulate = Color(1, 0, 0, 1)
 layout_mode = 2
-text = "Unable to Get info from remote repository..."
+text = "Unable to get info from remote repository."
 
 [node name="FaultyLinks" type="Label" parent="ErrorCustom/Content"]
 unique_name_in_owner = true
@@ -279,10 +215,10 @@ layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_Store_about_to_show"]
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
-[connection signal="text_changed" from="TabContainer/Store/Parameters/SearchManager" to="TabContainer/Store/Parameters/SearchManager" method="_on_SearchManager_text_changed"]
+[connection signal="text_changed" from="TabContainer/Store/StoreMainContainer/Parameters/SearchManager" to="TabContainer/Store/StoreMainContainer/Parameters/SearchManager" method="_on_SearchManager_text_changed"]
 [connection signal="visibility_changed" from="TabContainer/Options" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Options_visibility_changed"]
-[connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/Heading/Guide" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Guide_pressed"]
-[connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/NewLink" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_NewLink_pressed"]
+[connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/Guide" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Guide_pressed"]
+[connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/NewLink" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_NewLink_pressed"]
 [connection signal="timeout" from="ProgressContainer/UpdateTimer" to="." method="_on_UpdateTimer_timeout"]
 [connection signal="request_completed" from="StoreInformationDownloader" to="." method="_on_StoreInformation_request_completed"]
-[connection signal="pressed" from="Error/Panel/Content/Reason2/HBoxContainer/CopyCommand" to="." method="_on_CopyCommand_pressed"]
+[connection signal="pressed" from="Error/Content/HBoxContainer/CopyCommand" to="." method="_on_CopyCommand_pressed"]

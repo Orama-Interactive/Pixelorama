@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.gd" id="1_3no3v"]
 [ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2_qhsve"]
 
-[node name="Entry" type="Panel"]
+[node name="ExtensionEntry" type="Panel"]
 self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
 custom_minimum_size = Vector2(300, 150)
 offset_right = 284.0
@@ -11,24 +11,18 @@ offset_bottom = 150.0
 size_flags_horizontal = 3
 script = ExtResource("1_3no3v")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 4.0
-offset_right = -3.0
-offset_bottom = -4.0
-mouse_filter = 1
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -6.0
-offset_bottom = -8.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
 
-[node name="Picture" type="TextureButton" parent="Panel/HBoxContainer"]
+[node name="Picture" type="TextureButton" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -36,36 +30,36 @@ texture_normal = ExtResource("2_qhsve")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Name" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Extension Name..."
 
-[node name="Description" type="TextEdit" parent="Panel/HBoxContainer/VBoxContainer"]
+[node name="Description" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Description"
 editable = false
 wrap_mode = 1
 
-[node name="Done" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
+[node name="Done" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 visible = false
 self_modulate = Color(0.337255, 1, 0, 1)
 layout_mode = 2
 text = "Done!!!"
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/HBoxContainer/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="ProgressTimer" type="Timer" parent="Panel/HBoxContainer/VBoxContainer/ProgressBar"]
+[node name="ProgressTimer" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar"]
 wait_time = 0.1
 
-[node name="Download" type="Button" parent="Panel/HBoxContainer/VBoxContainer"]
+[node name="Download" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Download"
 
@@ -109,8 +103,8 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 5
 
-[connection signal="timeout" from="Panel/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer" to="." method="_on_ProgressTimer_timeout"]
-[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/Download" to="." method="_on_Download_pressed"]
+[connection signal="timeout" from="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer" to="." method="_on_ProgressTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Download" to="." method="_on_Download_pressed"]
 [connection signal="timeout" from="RequestDelay" to="." method="_on_RequestDelay_timeout"]
 [connection signal="request_completed" from="ImageRequest" to="." method="_on_ImageRequest_request_completed"]
 [connection signal="request_completed" from="DownloadRequest" to="." method="_on_DownloadRequest_request_completed"]

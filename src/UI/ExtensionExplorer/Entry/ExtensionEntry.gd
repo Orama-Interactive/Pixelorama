@@ -10,10 +10,10 @@ var download_path := ""
 var tags := PackedStringArray()
 var is_update := false  ## An update instead of download
 
-@onready var ext_name := $Panel/HBoxContainer/VBoxContainer/Name as Label
-@onready var ext_discription := $Panel/HBoxContainer/VBoxContainer/Description as TextEdit
-@onready var ext_picture := $Panel/HBoxContainer/Picture as TextureButton
-@onready var down_button := $Panel/HBoxContainer/VBoxContainer/Download as Button
+@onready var ext_name := $MarginContainer/HBoxContainer/VBoxContainer/Name as Label
+@onready var ext_discription := $MarginContainer/HBoxContainer/VBoxContainer/Description as TextEdit
+@onready var ext_picture := $MarginContainer/HBoxContainer/Picture as TextureButton
+@onready var down_button := $MarginContainer/HBoxContainer/VBoxContainer/Download as Button
 @onready var extension_downloader := $DownloadRequest as HTTPRequest
 
 
