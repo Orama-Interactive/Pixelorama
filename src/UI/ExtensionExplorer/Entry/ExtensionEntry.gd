@@ -1,7 +1,7 @@
 class_name ExtensionEntry
 extends Panel
 
-signal tags_detected
+signal tags_detected(tags: PackedStringArray)
 
 var extension_container: VBoxContainer
 var thumbnail := ""
@@ -34,7 +34,7 @@ func set_info(info: Array, extension_path: String) -> void:
 				# check for tags
 				if identifier == "Tags":
 					tags.append_array(item)
-					emit_signal("tags_detected", tags)
+					tags_detected.emit(tags)
 
 	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
 	download_path = str(extension_path, "Download/", info[0], ".pck")
@@ -97,7 +97,7 @@ func _on_DownloadRequest_request_completed(
 
 
 ## Updates the entry node's UI
-func announce_done(success: bool):
+func announce_done(success: bool) -> void:
 	close_progress()
 	down_button.disabled = false
 	if success:
@@ -107,7 +107,7 @@ func announce_done(success: bool):
 
 
 ## Returns true if entry contains ALL tags in tag_array
-func tags_match(tag_array: PackedStringArray):
+func tags_match(tag_array: PackedStringArray) -> bool:
 	if tags.size() > 0:
 		for tag in tag_array:
 			if !tag in tags:
@@ -120,7 +120,7 @@ func tags_match(tag_array: PackedStringArray):
 
 
 ## Updates the entry node's UI if it has an update available
-func change_button_if_updatable(extension_name: String, new_version: float):
+func change_button_if_updatable(extension_name: String, new_version: float) -> void:
 	for extension in extension_container.extensions.keys():
 		if extension_container.extensions[extension].file_name == extension_name:
 			var old_version = str_to_var(extension_container.extensions[extension].version)
@@ -133,7 +133,7 @@ func change_button_if_updatable(extension_name: String, new_version: float):
 
 
 ## Show an enlarged version of the thumbnail
-func enlarge_thumbnail(texture: ImageTexture):
+func enlarge_thumbnail(texture: ImageTexture) -> void:
 	$"%Enlarged".texture = texture
 	$"%Enlarged".get_parent().popup_centered()
 
@@ -144,27 +144,27 @@ func _on_DoneDelay_timeout() -> void:
 
 
 ## Progress bar method
-func prepare_progress():
+func prepare_progress() -> void:
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar.visible = true
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar.value = 0
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer.start()
 
 
 ## Progress bar method
-func update_progress():
+func update_progress() -> void:
 	var down := extension_downloader.get_downloaded_bytes()
 	var total := extension_downloader.get_body_size()
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar.value = (float(down) / float(total)) * 100.0
 
 
 ## Progress bar method
-func close_progress():
+func close_progress() -> void:
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar.visible = false
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer.stop()
 
 
 ## Progress bar method
-func _on_ProgressTimer_timeout():
+func _on_ProgressTimer_timeout() -> void:
 	update_progress()
 
 

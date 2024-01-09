@@ -101,7 +101,7 @@ func _on_StoreInformation_request_completed(
 		error_getting_info(result)
 
 
-func close_progress():
+func close_progress() -> void:
 	progress_bar.get_parent().visible = false
 	tab_container.visible = true
 	update_timer.stop()
@@ -127,7 +127,7 @@ func _on_explore_pressed() -> void:
 
 
 ## Function related to error dialog
-func _on_CopyCommand_pressed():
+func _on_CopyCommand_pressed() -> void:
 	DisplayServer.clipboard_set(
 		"sudo flatpak override com.orama_interactive.Pixelorama --share=network"
 	)
@@ -155,7 +155,7 @@ func error_getting_info(result: int) -> void:
 
 
 ## Progress bar method
-func prepare_progress():
+func prepare_progress() -> void:
 	progress_bar.get_parent().visible = true
 	tab_container.visible = false
 	progress_bar.value = 0
@@ -163,12 +163,12 @@ func prepare_progress():
 
 
 ## Progress bar method
-func update_progress():
+func update_progress() -> void:
 	var down := store_info_downloader.get_downloaded_bytes()
 	var total := store_info_downloader.get_body_size()
 	progress_bar.value = (float(down) / float(total)) * 100.0
 
 
 ## Progress bar method
-func _on_UpdateTimer_timeout():
+func _on_UpdateTimer_timeout() -> void:
 	update_progress()
