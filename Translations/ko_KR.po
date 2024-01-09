@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-01-08 21:04\n"
+"PO-Revision-Date: 2024-01-09 22:34\n"
 
 msgid "OK"
 msgstr "예"
@@ -983,6 +983,10 @@ msgstr "변경 사항"
 msgid "About Pixelorama"
 msgstr "Pixelorama에 대하여"
 
+#. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
+msgid "Support Pixelorama's Development"
+msgstr ""
+
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - 당신의 꿈을 픽셀 화하세요!"
 
@@ -995,8 +999,9 @@ msgstr "©2019-2020 by Orama Interactive and contributors"
 msgid "Website"
 msgstr "웹사이트"
 
-msgid "GitHub Repo"
-msgstr "GitHub Repo"
+#. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
+msgid "Source Code"
+msgstr ""
 
 msgid "Donate"
 msgstr "후원하기"
