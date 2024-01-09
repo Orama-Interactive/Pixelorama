@@ -1,19 +1,19 @@
 extends Window
 
-### Usage:
-### Change the "STORE_NAME" and "STORE_LINK"
-### Don't touch anything else
+## Usage:
+## Change the "STORE_NAME" and "STORE_LINK"
+## Don't touch anything else
 
-const STORE_NAME: String = "Extension Explorer"
+const STORE_NAME := "Extension Explorer"
 # gdlint: ignore=max-line-length
-const STORE_LINK: String = "https://raw.githubusercontent.com/Variable-Interactive/Variable-Store/4.0/store_info.txt"
-# gdlint: ignore=max-line-length
-const STORE_INFORMATION_FILE = STORE_NAME + ".txt"  # file that will contain information about extensions available for download
+const STORE_LINK := "https://raw.githubusercontent.com/Variable-Interactive/Variable-Store/4.0/store_info.txt"
+## File that will contain information about extensions available for download
+const STORE_INFORMATION_FILE := STORE_NAME + ".txt"
 
-# variables placed here due to their frequent use
+# Variables placed here due to their frequent use
 var extension_container: VBoxContainer
-var extension_path: String  # the path where extensions will be stored (obtained from pixelorama)
-var custom_links_remaining: int  # remaining custom links to be processed
+var extension_path: String  ## The path where extensions will be stored (obtained from pixelorama)
+var custom_links_remaining: int  ## Remaining custom links to be processed
 var redirects: Array[String]
 var faulty_custom_links: Array[String]
 
@@ -42,11 +42,11 @@ func _ready() -> void:
 
 
 func _on_Store_about_to_show() -> void:
-	# clear old tags
+	# Clear old tags
 	search_manager.available_tags = PackedStringArray()
 	for tag in search_manager.tag_list.get_children():
 		tag.queue_free()
-	#Clear old entries
+	# Clear old entries
 	for entry in content.get_children():
 		entry.queue_free()
 	faulty_custom_links.clear()
@@ -62,7 +62,7 @@ func fetch_info(link: String) -> void:
 	if extension_path != "":  # Did everything went smoothly in _ready() function?
 		# everything is ready, now request the store information
 		# so that available extensions could be displayed
-		var error = store_info_downloader.request(link)
+		var error := store_info_downloader.request(link)
 		if error == OK:
 			prepare_progress()
 		else:
@@ -70,32 +70,33 @@ func fetch_info(link: String) -> void:
 			error_getting_info(error)
 
 
-# If downloading is completed
+## When downloading is finished
 func _on_StoreInformation_request_completed(
 	result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray
 ) -> void:
 	if result == HTTPRequest.RESULT_SUCCESS:
 		# process the info contained in the file
-		var file = FileAccess.open(
+		var file := FileAccess.open(
 			extension_path.path_join(STORE_INFORMATION_FILE), FileAccess.READ
 		)
 		while not file.eof_reached():
-			var info = file.get_line()
-			if !info.strip_edges().begins_with("#"):
-				info = str_to_var(info)
-			if typeof(info) == TYPE_ARRAY:
-				add_entry(info)
-			elif typeof(info) == TYPE_STRING:  # redirect store_link detected
-				var link: String = info.strip_edges()
+			var file_line := file.get_line()
+			var extension_info
+			if !file_line.strip_edges().begins_with("#"):
+				extension_info = str_to_var(file_line)
+			if typeof(extension_info) == TYPE_ARRAY:
+				add_entry(extension_info)
+			elif typeof(extension_info) == TYPE_STRING:  # redirect store_link detected
+				var link: String = extension_info.strip_edges()
 				if !link.begins_with("#") and link != "":
-					if !info in redirects:
-						redirects.append(info)
+					if !extension_info in redirects:
+						redirects.append(extension_info)
 		file.close()
 		DirAccess.remove_absolute(extension_path.path_join(STORE_INFORMATION_FILE))
 		# Hide the progress bar because it's no longer required
 		close_progress()
 	else:
-		printerr("Unable to Get info from remote repository...")
+		printerr("Unable to get info from remote repository...")
 		error_getting_info(result)
 
 
@@ -104,13 +105,13 @@ func close_progress():
 	tab_container.visible = true
 	update_timer.stop()
 	if redirects.size() > 0:
-		var next_link = redirects.pop_front()
+		var next_link := redirects.pop_front() as String
 		fetch_info(next_link)
 	else:
 		# no more redirects, jump to the next store
 		custom_links_remaining -= 1
 		if custom_links_remaining >= 0:
-			var next_link = custom_store_links.custom_links[custom_links_remaining]
+			var next_link: String = custom_store_links.custom_links[custom_links_remaining]
 			fetch_info(next_link)
 		else:
 			if faulty_custom_links.size() > 0:  # manage custom faulty links
@@ -119,38 +120,28 @@ func close_progress():
 					faulty_links_label.text += str(link, "\n")
 				custom_link_error.popup_centered()
 
-
-################# HELPER METHODS #################
-
-
-# SIGNAL CONNECTED FROM StoreButton.tscn
+## Signal connected from StoreButton.tscn
 func _on_explore_pressed() -> void:
 	popup_centered()
 
 
-# FUNCTION RELATED TO ERROR DIALOG
+## Function related to error dialog
 func _on_CopyCommand_pressed():
 	DisplayServer.clipboard_set(
 		"sudo flatpak override com.orama_interactive.Pixelorama --share=network"
 	)
 
 
-# FUNCTION RELATED TO ERROR DIALOG
-func _on_ManualDownload_pressed():
-	# warning-ignore:return_value_discarded
-	OS.shell_open("https://variable-interactive.itch.io/pixelorama-extensions")
-
-
-# ADDS A NEW EXTENSION ENTRY TO THE "content"
+## Adds a new extension entry to the "content"
 func add_entry(info: Array) -> void:
 	var entry = preload("res://src/UI/ExtensionExplorer/Entry/Entry.tscn").instantiate()
-	entry.connect("tags_detected", Callable(search_manager, "add_new_tags"))
+	entry.tags_detected.connect(search_manager.add_new_tags)
 	entry.extension_container = extension_container
 	content.add_child(entry)
 	entry.set_info(info, extension_path)
 
 
-# GETS CALLED WHEN DATA COULDN'T BE FETCHED FROM REMOTE REPOSITORY
+## Gets called when data couldn't be fetched from remote repository
 func error_getting_info(result: int) -> void:
 	# Shows a popup if error is from main link (i-e MainStore)
 	# Popups for errors in custom_links are handled in close_progress()
@@ -162,7 +153,7 @@ func error_getting_info(result: int) -> void:
 	close_progress()
 
 
-# PROGRESS BAR METHOD
+## Progress bar method
 func prepare_progress():
 	progress_bar.get_parent().visible = true
 	tab_container.visible = false
@@ -170,13 +161,13 @@ func prepare_progress():
 	update_timer.start()
 
 
-# PROGRESS BAR METHOD
+## Progress bar method
 func update_progress():
-	var down = store_info_downloader.get_downloaded_bytes()
-	var total = store_info_downloader.get_body_size()
+	var down := store_info_downloader.get_downloaded_bytes()
+	var total := store_info_downloader.get_body_size()
 	progress_bar.value = (float(down) / float(total)) * 100.0
 
 
-# PROGRESS BAR METHOD
+## Progress bar method
 func _on_UpdateTimer_timeout():
 	update_progress()

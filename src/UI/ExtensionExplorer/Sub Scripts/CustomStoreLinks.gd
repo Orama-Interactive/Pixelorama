@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 var global: Node
-var custom_links: Array = []
+var custom_links: Array[String] = []
 
 
 func _ready() -> void:
@@ -25,13 +25,13 @@ func _on_NewLink_pressed() -> void:
 	add_field()
 
 
-func add_field(link: String = "") -> void:
-	var link_field = LineEdit.new()
+func add_field(link := "") -> void:
+	var link_field := LineEdit.new()
 	# gdlint: ignore=max-line-length
 	link_field.placeholder_text = "Paste Store link, given by the store owner (will automatically be removed if left empty)"
 	link_field.text = link
 	$Links.add_child(link_field)
-	link_field.connect("text_changed", Callable(self, "field_text_changed"))
+	link_field.text_changed.connect(field_text_changed)
 
 
 func field_text_changed(_text: String) -> void:

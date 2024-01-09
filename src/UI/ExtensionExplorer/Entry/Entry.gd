@@ -7,13 +7,13 @@ var thumbnail := ""
 var download_link := ""
 var download_path := ""
 var tags := PackedStringArray()
-var is_update := false  # An update instead of download
+var is_update := false  ## An update instead of download
 
-@onready var ext_name = $Panel/HBoxContainer/VBoxContainer/Name
-@onready var ext_discription = $Panel/HBoxContainer/VBoxContainer/Description
-@onready var ext_picture = $Panel/HBoxContainer/Picture
-@onready var down_button = $Panel/HBoxContainer/VBoxContainer/Download
-@onready var extension_downloader = $DownloadRequest
+@onready var ext_name := $Panel/HBoxContainer/VBoxContainer/Name as Label
+@onready var ext_discription := $Panel/HBoxContainer/VBoxContainer/Description as TextEdit
+@onready var ext_picture := $Panel/HBoxContainer/Picture as TextureButton
+@onready var down_button := $Panel/HBoxContainer/VBoxContainer/Download as Button
+@onready var extension_downloader := $DownloadRequest as HTTPRequest
 
 
 func set_info(info: Array, extension_path: String) -> void:
@@ -52,33 +52,34 @@ func _on_ImageRequest_request_completed(
 ) -> void:
 	# Update the received image
 	$ImageRequest.queue_free()
-	var image = Image.new()
+	var image := Image.new()
 	# for images on internet there is a hagh chance that extension is wrong
 	# so check all of them even if they give error
-	var err = image.load_png_from_buffer(body)
+	var err := image.load_png_from_buffer(body)
 	if err != OK:
-		var err_a = image.load_jpg_from_buffer(body)
+		var err_a := image.load_jpg_from_buffer(body)
 		if err_a != OK:
-			var err_b = image.load_webp_from_buffer(body)
+			var err_b := image.load_webp_from_buffer(body)
 			if err_b != OK:
-				var err_c = image.load_tga_from_buffer(body)
+				var err_c := image.load_tga_from_buffer(body)
 				if err_c != OK:
 					image.load_bmp_from_buffer(body)
-	var texture = ImageTexture.create_from_image(image)
+	var texture := ImageTexture.create_from_image(image)
 	ext_picture.texture_normal = texture
-	ext_picture.connect("pressed", Callable(self, "enlarge_thumbnail").bind(texture))
+	ext_picture.pressed.connect(enlarge_thumbnail.bind(texture))
 
 
 func _on_Download_pressed() -> void:
-	# Download File
 	down_button.disabled = true
 	extension_downloader.download_file = download_path
 	extension_downloader.request(download_link)
 	prepare_progress()
 
 
-# CALLED AFTER THE EXTENSION DOWNLOADER HAS FINISHED IT'S JOB
-func _on_DownloadRequest_request_completed(result: int, _response_code, _headers, _body) -> void:
+## Called after the extension downloader has finished its job
+func _on_DownloadRequest_request_completed(
+	result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray
+) -> void:
 	if result == HTTPRequest.RESULT_SUCCESS:
 		# Add extension
 		extension_container.install_extension(download_path)
@@ -94,7 +95,7 @@ func _on_DownloadRequest_request_completed(result: int, _response_code, _headers
 	DirAccess.remove_absolute(download_path)
 
 
-# UPDATES THE ENTRY NODE'S UI
+## Updates the entry node's UI
 func announce_done(success: bool):
 	close_progress()
 	down_button.disabled = false
@@ -104,7 +105,7 @@ func announce_done(success: bool):
 		$DoneDelay.start()
 
 
-# returns true if entry contains ALL tags in tag_array
+## Returns true if entry contains ALL tags in tag_array
 func tags_match(tag_array: PackedStringArray):
 	if tags.size() > 0:
 		for tag in tag_array:
@@ -117,7 +118,7 @@ func tags_match(tag_array: PackedStringArray):
 		return true
 
 
-# UPDATES THE ENTRY NODE'S UI IF IT HAS AN UPDATE AVAILABLE
+## Updates the entry node's UI if it has an update available
 func change_button_if_updatable(extension_name: String, new_version: float):
 	for extension in extension_container.extensions.keys():
 		if extension_container.extensions[extension].file_name == extension_name:
@@ -130,38 +131,38 @@ func change_button_if_updatable(extension_name: String, new_version: float):
 					down_button.text = "Re-Download"
 
 
-# Show an enlarged version of the thumbnail
+## Show an enlarged version of the thumbnail
 func enlarge_thumbnail(texture: ImageTexture):
 	$"%Enlarged".texture = texture
 	$"%Enlarged".get_parent().popup_centered()
 
 
-# A BEAUTIFICATION FUNCTION THAT HIDES "Done" label BAR AFTER SOME TIME
+## A beautification function that hides the "Done" label bar after some time
 func _on_DoneDelay_timeout() -> void:
 	$Panel/HBoxContainer/VBoxContainer/Done.visible = false
 
 
-# PROGRESS BAR METHOD
+## Progress bar method
 func prepare_progress():
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar.visible = true
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar.value = 0
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer.start()
 
 
-# PROGRESS BAR METHOD
+## Progress bar method
 func update_progress():
-	var down = extension_downloader.get_downloaded_bytes()
-	var total = extension_downloader.get_body_size()
+	var down := extension_downloader.get_downloaded_bytes()
+	var total := extension_downloader.get_body_size()
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar.value = (float(down) / float(total)) * 100.0
 
 
-# PROGRESS BAR METHOD
+## Progress bar method
 func close_progress():
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar.visible = false
 	$Panel/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer.stop()
 
 
-# PROGRESS BAR METHOD
+## Progress bar method
 func _on_ProgressTimer_timeout():
 	update_progress()
 

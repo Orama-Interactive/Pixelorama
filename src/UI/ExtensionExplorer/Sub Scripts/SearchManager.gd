@@ -40,10 +40,10 @@ func add_new_tags(tag_array: Array):
 	for tag in tag_array:
 		if !tag in available_tags:
 			available_tags.append(tag)
-			var tag_checkbox = CheckBox.new()
+			var tag_checkbox := CheckBox.new()
 			tag_checkbox.text = tag
 			tag_list.add_child(tag_checkbox)
-			tag_checkbox.connect("toggled", Callable(self, "start_tag_search"))
+			tag_checkbox.toggled.connect(start_tag_search)
 
 
 func start_tag_search(_button_pressed) -> void:
