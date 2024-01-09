@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-01-08 21:04\n"
+"PO-Revision-Date: 2024-01-09 10:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1110,7 +1110,7 @@ msgstr "Belarusă"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Dezvoltator principal"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1118,7 +1118,7 @@ msgstr "Proiectant UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Autori"
 
 msgid "Art by: %s"
 msgstr "Artă realizată de: %s"
