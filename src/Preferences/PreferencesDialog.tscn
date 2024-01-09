@@ -1297,8 +1297,12 @@ text = "Pixelorama must be restarted for changes to take effect."
 
 [node name="AddExtensionFileDialog" type="FileDialog" parent="Popups"]
 mode = 1
+title = "Open File(s)"
+size = Vector2i(560, 400)
 exclusive = false
 popup_window = true
+ok_button_text = "Open"
+file_mode = 1
 access = 2
 filters = PackedStringArray("*.pck ; Godot Resource Pack File", "*.zip ;")
 show_hidden_files = true
