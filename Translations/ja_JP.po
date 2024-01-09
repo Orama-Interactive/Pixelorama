@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-01-08 21:04\n"
+"PO-Revision-Date: 2024-01-09 02:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1111,7 +1111,7 @@ msgstr "ベラルーシ語"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "リード開発者"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1119,7 +1119,7 @@ msgstr "UI Designer"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "著者"
 
 msgid "Art by: %s"
 msgstr "Art by: %s"
