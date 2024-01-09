@@ -10,8 +10,8 @@ func _on_SearchManager_text_changed(_new_text: String) -> void:
 
 func tag_text_search() -> void:
 	var result := text_search(text)
-	var tags := []
-	for tag in tag_list.get_children():
+	var tags := PackedStringArray([])
+	for tag: Button in tag_list.get_children():
 		if tag.button_pressed:
 			tags.append(tag.text)
 
@@ -20,13 +20,13 @@ func tag_text_search() -> void:
 			entry.visible = false
 
 
-func text_search(text_to_search: String) -> Array:
-	var result := []
-	for entry in $"%Content".get_children():
+func text_search(text_to_search: String) -> Array[ExtensionEntry]:
+	var result: Array[ExtensionEntry] = []
+	for entry: ExtensionEntry in $"%Content".get_children():
 		var visibility := true
 		if text_to_search != "":
-			var extension_name = entry.ext_name.text.to_lower()
-			var extension_description = entry.ext_discription.text.to_lower()
+			var extension_name := entry.ext_name.text.to_lower()
+			var extension_description := entry.ext_discription.text.to_lower()
 			if not text_to_search.to_lower() in extension_name:
 				if not text_to_search.to_lower() in extension_description:
 					visibility = false
@@ -36,7 +36,7 @@ func text_search(text_to_search: String) -> Array:
 	return result
 
 
-func add_new_tags(tag_array: Array):
+func add_new_tags(tag_array: PackedStringArray) -> void:
 	for tag in tag_array:
 		if !tag in available_tags:
 			available_tags.append(tag)
@@ -46,5 +46,5 @@ func add_new_tags(tag_array: Array):
 			tag_checkbox.toggled.connect(start_tag_search)
 
 
-func start_tag_search(_button_pressed) -> void:
+func start_tag_search(_button_pressed: bool) -> void:
 	tag_text_search()

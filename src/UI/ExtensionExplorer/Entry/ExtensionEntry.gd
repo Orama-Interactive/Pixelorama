@@ -1,3 +1,4 @@
+class_name ExtensionEntry
 extends Panel
 
 signal tags_detected
