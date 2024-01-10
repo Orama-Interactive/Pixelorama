@@ -151,8 +151,9 @@ unique_name_in_owner = true
 [node name="Error" type="AcceptDialog" parent="."]
 unique_name_in_owner = true
 position = Vector2i(0, 36)
-size = Vector2i(545, 385)
+size = Vector2i(596, 324)
 unresizable = true
+popup_window = true
 
 [node name="Content" type="VBoxContainer" parent="Error"]
 anchors_preset = 15
@@ -166,8 +167,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Error/Content"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "Unable to get info from remote repository.
+
+Possible Solutions:
 - Make sure you are connected to the internet.
 - If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
 autowrap_mode = 2
@@ -186,6 +190,7 @@ layout_mode = 2
 text = "Copy"
 
 [node name="Label2" type="Label" parent="Error/Content"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Alternatively, you download Flatseal and set permissions for Flatpak apps there."
@@ -195,6 +200,7 @@ autowrap_mode = 3
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(357, 110)
+popup_window = true
 
 [node name="Content" type="VBoxContainer" parent="ErrorCustom"]
 anchors_preset = 15

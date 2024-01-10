@@ -10,11 +10,18 @@ var download_path := ""
 var tags := PackedStringArray()
 var is_update := false  ## An update instead of download
 
-@onready var ext_name := $MarginContainer/HBoxContainer/VBoxContainer/Name as Label
-@onready var ext_discription := $MarginContainer/HBoxContainer/VBoxContainer/Description as TextEdit
-@onready var ext_picture := $MarginContainer/HBoxContainer/Picture as TextureButton
-@onready var down_button := $MarginContainer/HBoxContainer/VBoxContainer/Download as Button
-@onready var extension_downloader := $DownloadRequest as HTTPRequest
+# node references used in this script
+@onready var ext_name := %ExtensionName as Label
+@onready var ext_discription := %ExtensionDescription as TextEdit
+@onready var small_picture := %Picture as TextureButton
+@onready var enlarged_picture := %Enlarged as TextureRect
+@onready var request_delay := %RequestDelay as Timer
+@onready var thumbnail_request := %ImageRequest as HTTPRequest
+@onready var extension_downloader := %DownloadRequest as HTTPRequest
+@onready var down_button := %DownloadButton as Button
+@onready var progress_bar := %ProgressBar as ProgressBar
+@onready var done_label := %Done as Label
+@onready var alert_dialog := %Alert as AcceptDialog
 
 
 func set_info(info: Array, extension_path: String) -> void:
@@ -39,20 +46,20 @@ func set_info(info: Array, extension_path: String) -> void:
 	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
 	download_path = str(extension_path, "Download/", info[0], ".pck")
 
-	$RequestDelay.wait_time = randf() * 2  # to prevent sending bulk requests
-	$RequestDelay.start()
+	request_delay.wait_time = randf() * 2  # to prevent sending bulk requests
+	request_delay.start()
 
 
 func _on_RequestDelay_timeout() -> void:
-	$RequestDelay.queue_free()  # node no longer needed
-	$ImageRequest.request(thumbnail)  # image
+	request_delay.queue_free()  # node no longer needed
+	thumbnail_request.request(thumbnail)  # image
 
 
 func _on_ImageRequest_request_completed(
 	_result, _response_code, _headers, body: PackedByteArray
 ) -> void:
 	# Update the received image
-	$ImageRequest.queue_free()
+	thumbnail_request.queue_free()
 	var image := Image.new()
 	# for images on internet there is a hagh chance that extension is wrong
 	# so check all of them even if they give error
@@ -66,8 +73,8 @@ func _on_ImageRequest_request_completed(
 				if err_c != OK:
 					image.load_bmp_from_buffer(body)
 	var texture := ImageTexture.create_from_image(image)
-	ext_picture.texture_normal = texture
-	ext_picture.pressed.connect(enlarge_thumbnail.bind(texture))
+	small_picture.texture_normal = texture
+	small_picture.pressed.connect(enlarge_thumbnail.bind(texture))
 
 
 func _on_Download_pressed() -> void:
@@ -88,10 +95,16 @@ func _on_DownloadRequest_request_completed(
 			is_update = false
 		announce_done(true)
 	else:
-		$Alert/Text.text = (
-			str("Unable to Download extension...\nHttp Code (", result, ")").c_unescape()
+		alert_dialog.get_node("Text").text = (
+			str(
+				"Unable to Download extension...\nHttp Code: ",
+				result,
+				" (",
+				error_string(result),
+				")"
+			).c_unescape()
 		)
-		$Alert.popup_centered()
+		alert_dialog.popup_centered()
 		announce_done(false)
 	DirAccess.remove_absolute(download_path)
 
@@ -101,9 +114,9 @@ func announce_done(success: bool) -> void:
 	close_progress()
 	down_button.disabled = false
 	if success:
-		$Panel/HBoxContainer/VBoxContainer/Done.visible = true
+		done_label.visible = true
 		down_button.text = "Re-Download"
-		$DoneDelay.start()
+		done_label.get_node("DoneDelay").start()
 
 
 ## Returns true if entry contains ALL tags in tag_array
@@ -134,33 +147,33 @@ func change_button_if_updatable(extension_name: String, new_version: float) -> v
 
 ## Show an enlarged version of the thumbnail
 func enlarge_thumbnail(texture: ImageTexture) -> void:
-	$"%Enlarged".texture = texture
-	$"%Enlarged".get_parent().popup_centered()
+	enlarged_picture.texture = texture
+	enlarged_picture.get_parent().popup_centered()
 
 
 ## A beautification function that hides the "Done" label bar after some time
 func _on_DoneDelay_timeout() -> void:
-	$Panel/HBoxContainer/VBoxContainer/Done.visible = false
+	done_label.visible = false
 
 
 ## Progress bar method
 func prepare_progress() -> void:
-	$Panel/HBoxContainer/VBoxContainer/ProgressBar.visible = true
-	$Panel/HBoxContainer/VBoxContainer/ProgressBar.value = 0
-	$Panel/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer.start()
+	progress_bar.visible = true
+	progress_bar.value = 0
+	progress_bar.get_node("ProgressTimer").start()
 
 
 ## Progress bar method
 func update_progress() -> void:
 	var down := extension_downloader.get_downloaded_bytes()
 	var total := extension_downloader.get_body_size()
-	$Panel/HBoxContainer/VBoxContainer/ProgressBar.value = (float(down) / float(total)) * 100.0
+	progress_bar.value = (float(down) / float(total)) * 100.0
 
 
 ## Progress bar method
 func close_progress() -> void:
-	$Panel/HBoxContainer/VBoxContainer/ProgressBar.visible = false
-	$Panel/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer.stop()
+	progress_bar.visible = false
+	progress_bar.get_node("ProgressTimer").stop()
 
 
 ## Progress bar method
@@ -169,8 +182,8 @@ func _on_ProgressTimer_timeout() -> void:
 
 
 func _manage_enlarded_thumbnail_close() -> void:
-	$EnlardedThumbnail.hide()
+	enlarged_picture.get_parent().hide()
 
 
 func _manage_alert_close() -> void:
-	$Alert.hide()
+	alert_dialog.hide()

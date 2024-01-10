@@ -23,6 +23,7 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Picture" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -34,11 +35,13 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ExtensionName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Extension Name..."
 
-[node name="Description" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ExtensionDescription" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Description"
@@ -46,12 +49,17 @@ editable = false
 wrap_mode = 1
 
 [node name="Done" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.337255, 1, 0, 1)
 layout_mode = 2
 text = "Done!!!"
 
+[node name="DoneDelay" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/Done"]
+wait_time = 2.0
+
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -59,23 +67,25 @@ layout_mode = 2
 [node name="ProgressTimer" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar"]
 wait_time = 0.1
 
-[node name="Download" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Download"
 
 [node name="RequestDelay" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
 autostart = true
 
 [node name="ImageRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
 
 [node name="DownloadRequest" type="HTTPRequest" parent="."]
-
-[node name="DoneDelay" type="Timer" parent="."]
-wait_time = 2.0
+unique_name_in_owner = true
 
 [node name="Alert" type="AcceptDialog" parent="."]
-size = Vector2i(295, 100)
+unique_name_in_owner = true
+size = Vector2i(421, 106)
 
 [node name="Text" type="Label" parent="Alert"]
 anchors_preset = 15
@@ -103,12 +113,12 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 5
 
+[connection signal="timeout" from="MarginContainer/HBoxContainer/VBoxContainer/Done/DoneDelay" to="." method="_on_DoneDelay_timeout"]
 [connection signal="timeout" from="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer" to="." method="_on_ProgressTimer_timeout"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Download" to="." method="_on_Download_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/DownloadButton" to="." method="_on_Download_pressed"]
 [connection signal="timeout" from="RequestDelay" to="." method="_on_RequestDelay_timeout"]
 [connection signal="request_completed" from="ImageRequest" to="." method="_on_ImageRequest_request_completed"]
 [connection signal="request_completed" from="DownloadRequest" to="." method="_on_DownloadRequest_request_completed"]
-[connection signal="timeout" from="DoneDelay" to="." method="_on_DoneDelay_timeout"]
 [connection signal="close_requested" from="Alert" to="." method="_manage_alert_close"]
 [connection signal="focus_exited" from="Alert" to="." method="_manage_alert_close"]
 [connection signal="close_requested" from="EnlardedThumbnail" to="." method="_manage_enlarded_thumbnail_close"]

@@ -1,13 +1,10 @@
 extends VBoxContainer
 
-var global: Node
 var custom_links := []
 
 
 func _ready() -> void:
-	global = get_node_or_null("/root/Global")
-	if global:
-		custom_links = global.config_cache.get_value("ExtensionExplorer", "custom_links", [])
+	custom_links = Global.config_cache.get_value("ExtensionExplorer", "custom_links", [])
 	for link in custom_links:
 		add_field(link)
 
@@ -17,8 +14,7 @@ func update_links() -> void:
 	for child in $Links.get_children():
 		if child.text != "":
 			custom_links.append(child.text)
-	if global:
-		global.config_cache.set_value("ExtensionExplorer", "custom_links", custom_links)
+	Global.config_cache.set_value("ExtensionExplorer", "custom_links", custom_links)
 
 
 func _on_NewLink_pressed() -> void:
