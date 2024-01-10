@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-01-09 23:50\n"
+"PO-Revision-Date: 2024-01-10 00:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1151,7 +1151,7 @@ msgid "Save before exiting?"
 msgstr "Zapisać przed wyjściem?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Projekt %s ma niezapisany postęp. Co chcesz zrobić?"
 
 msgid "Save & Exit"
 msgstr "Zapisz i wyjdź"
@@ -1892,13 +1892,13 @@ msgid "Unlink Cels"
 msgstr "Rozłącz kalki"
 
 msgid "Properties"
-msgstr ""
+msgstr "Właściwości"
 
 msgid "Frame properties"
 msgstr "Właściwości klatki"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Właściwości komórki"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2856,7 +2856,7 @@ msgstr "Wycofująca się na końcach"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "Przejdź do końca"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
