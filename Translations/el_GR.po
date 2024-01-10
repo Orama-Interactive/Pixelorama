@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-01-09 22:34\n"
+"PO-Revision-Date: 2024-01-10 00:47\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -989,7 +989,7 @@ msgstr "Σχετικά με το Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Υποστηρίξτε την ανάπτυξη του Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - Pixelate your dreams!"
@@ -1005,7 +1005,7 @@ msgstr "Ιστοσελίδα"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Πηγαίος κώδικας"
 
 msgid "Donate"
 msgstr "Κάντε μια δωρεά"
@@ -1117,7 +1117,7 @@ msgstr "Λευκορωσικά"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Επικεφαλής προγραμματιστής"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1125,7 +1125,7 @@ msgstr "Σχεδιαστής UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Δημιουργοί"
 
 msgid "Art by: %s"
 msgstr "Ζωγραφιά από: %s"
