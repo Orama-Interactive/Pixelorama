@@ -102,7 +102,8 @@ func _on_DownloadRequest_request_completed(
 				" (",
 				error_string(result),
 				")"
-			).c_unescape()
+			)
+			.c_unescape()
 		)
 		alert_dialog.popup_centered()
 		announce_done(false)
