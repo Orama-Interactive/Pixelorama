@@ -64,7 +64,13 @@ enum ImageMenu {
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
 ##  Enumeration of items present in the Help Menu.
 enum HelpMenu {
-	VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA
+	VIEW_SPLASH_SCREEN,
+	ONLINE_DOCS,
+	ISSUE_TRACKER,
+	OPEN_LOGS_FOLDER,
+	CHANGELOG,
+	ABOUT_PIXELORAMA,
+	SUPPORT_PIXELORAMA
 }
 
 ## The file used to save preferences that use [code]ProjectSettings.save_custom()[/code].

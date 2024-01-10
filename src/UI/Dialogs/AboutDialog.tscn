@@ -12,6 +12,7 @@ font = ExtResource("3_jqhhb")
 font_size = 12
 
 [node name="AboutDialog" type="Popup"]
+position = Vector2i(0, 36)
 size = Vector2i(700, 470)
 unresizable = false
 borderless = false
@@ -54,18 +55,15 @@ layout_mode = 2
 
 [node name="Website" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Website"
 
 [node name="GitHub" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-text = "GitHub Repo"
-
-[node name="Donate" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Donate"
+text = "Source Code"
 
 [node name="OramaLogo" type="TextureRect" parent="AboutUI/IconsButtons"]
 layout_mode = 2
@@ -159,6 +157,5 @@ label_settings = SubResource("LabelSettings_aewb6")
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/Website" to="." method="_on_Website_pressed"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/GitHub" to="." method="_on_GitHub_pressed"]
-[connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/Donate" to="." method="_on_Donate_pressed"]
 [connection signal="item_selected" from="AboutUI/Credits/Groups" to="." method="_on_Groups_item_selected"]
 [connection signal="tab_changed" from="AboutUI/Credits/Licenses/LicenseTabs" to="." method="_on_LicenseTabs_tab_changed"]
