@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-01-10 00:47\n"
+"PO-Revision-Date: 2024-01-10 01:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -102,8 +102,8 @@ msgid "If enabled, the final blended images are also being stored in the pxo, fo
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
 msgstr "Jeśli ta opcja jest włączona, ostateczne połączone obrazy są również przechowywane w pliku pxo dla każdej klatki.\n"
-" Dzięki temu plik pxo jest większy i jest przydatny w przypadku importowania za pomocą oprogramowania innych firm\n"
-" lub eksport CLI. Ładowanie plików pxo w Pixeloramie nie wymaga włączenia tej opcji.\n"
+" Sprawia to iż plik pxo jest większy i jest przydatny w przypadku importowania za pomocą oprogramowania innych firm\n"
+" lub eksportu CLI. Obsługa plików pxo w Pixeloramie nie wymaga włączenia tej opcji.\n"
 
 msgid "Import"
 msgstr "Importuj"
@@ -213,10 +213,10 @@ msgid "Initial angle:"
 msgstr "Kąt początkowy:"
 
 msgid "Clear"
-msgstr "Wyczyść"
+msgstr "Usuń zaznaczenie"
 
 msgid "Invert"
-msgstr "Odwróć"
+msgstr "Odwróć zaznaczenie"
 
 msgid "Grayscale View"
 msgstr "Czarno-biały widok"
