@@ -21,11 +21,9 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	if !visible:
+	if not visible:
 		return
-	var tmp_transform := get_canvas_transform().affine_inverse()
-	var tmp_position: Vector2 = Global.main_viewport.get_local_mouse_position()
-	mouse_pos = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
+	mouse_pos = get_local_mouse_position()
 
 	var point0 := points[0]
 	var point1 := points[1]
@@ -39,20 +37,20 @@ func _input(_event: InputEvent) -> void:
 	rect.position = point0
 	rect.end = point1
 	if (
-		Input.is_action_just_pressed("left_mouse")
+		Input.is_action_just_pressed(&"left_mouse")
 		and Global.can_draw
 		and Global.has_focus
 		and rect.has_point(mouse_pos)
 	):
 		if (
-			!Rect2(Vector2.ZERO, project.size).has_point(Global.canvas.current_pixel)
+			!Rect2i(Vector2i.ZERO, project.size).has_point(Global.canvas.current_pixel)
 			or Global.move_guides_on_canvas
 		):
 			has_focus = true
 			Global.can_draw = false
 			queue_redraw()
 	if has_focus:
-		if Input.is_action_pressed("left_mouse"):
+		if Input.is_action_pressed(&"left_mouse"):
 			if type == Types.HORIZONTAL:
 				var yy := snappedf(mouse_pos.y, 0.5)
 				points[0].y = yy
@@ -62,7 +60,7 @@ func _input(_event: InputEvent) -> void:
 				points[0].x = xx
 				points[1].x = xx
 			modulate.a = 0.5 if _outside_canvas() else 1.0
-		elif Input.is_action_just_released("left_mouse"):
+		elif Input.is_action_just_released(&"left_mouse"):
 			Global.can_draw = true
 			has_focus = false
 			if _outside_canvas():
@@ -75,13 +73,13 @@ func _input(_event: InputEvent) -> void:
 func _draw() -> void:
 	if !has_focus:
 		return
-	var viewport_size: Vector2 = Global.main_viewport.size
-	var zoom: Vector2 = Global.camera.zoom
+	var viewport_size := get_viewport_rect().size
+	var zoom := Global.camera.zoom
 
-	# viewport_poly is an array of the points that make up the corners of the viewport
-	var viewport_poly := [
-		Vector2.ZERO, Vector2(viewport_size.x, 0), viewport_size, Vector2(0, viewport_size.y)
-	]
+	# An array of the points that make up the corners of the viewport
+	var viewport_poly := PackedVector2Array(
+		[Vector2.ZERO, Vector2(viewport_size.x, 0), viewport_size, Vector2(0, viewport_size.y)]
+	)
 	# Adjusting viewport_poly to take into account the camera offset, zoom, and rotation
 	for p in range(viewport_poly.size()):
 		viewport_poly[p] = (
