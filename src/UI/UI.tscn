@@ -251,6 +251,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("35")
 tabs_visible = false
+tabs_visible_if_more_than_one = true
 layout = SubResource("Resource_b6o2t")
 
 [node name="Tools" parent="DockableContainer" instance=ExtResource("1")]

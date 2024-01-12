@@ -26,10 +26,15 @@ const DragNDropPanel := preload("drag_n_drop_panel.gd")
 	get:
 		return _tabs_visible
 	set(value):
-		_tabs_visible = value
-		for i in range(1, _panel_container.get_child_count()):
-			var panel := _panel_container.get_child(i) as DockablePanel
-			panel.tabs_visible = value
+		set_tabs_visible(value)
+## Always ensure that tabs are visible if a panel has more than one tab.
+## Only takes effect is [member tabs_visible] is [code]false[/code].
+@export var tabs_visible_if_more_than_one := false:
+	get:
+		return _tabs_visible_if_more_than_one
+	set(value):
+		_tabs_visible_if_more_than_one = value
+		set_tabs_visible(_tabs_visible)
 @export var rearrange_group := 0
 @export var layout := DockableLayout.new():
 	get:
@@ -49,6 +54,7 @@ var _drag_panel: DockablePanel
 var _tab_align := TabBar.ALIGNMENT_CENTER
 var _tabs_visible := true
 var _use_hidden_tabs_for_min_size := false
+var _tabs_visible_if_more_than_one := false
 var _current_panel_index := 0
 var _current_split_index := 0
 var _children_names := {}
@@ -187,15 +193,18 @@ func set_layout(value: DockableLayout) -> void:
 	queue_sort()
 
 
-func set_tab_alignment(value: TabBar.AlignmentMode) -> void:
-	_tab_align = value
+func set_tabs_visible(value: bool) -> void:
+	_tabs_visible = value
 	for i in range(1, _panel_container.get_child_count()):
-		var panel = _panel_container.get_child(i)
-		panel.tab_alignment = value
+		var panel := _panel_container.get_child(i) as DockablePanel
+		if _tabs_visible_if_more_than_one and panel.get_tab_count() > 1:
+			panel.tabs_visible = true
+		else:
+			panel.tabs_visible = value
 
 
-func get_tab_align() -> int:
-	return _tab_align
+func get_tabs_visible() -> bool:
+	return _tabs_visible
 
 
 func set_use_hidden_tabs_for_min_size(value: bool) -> void:
@@ -321,6 +330,8 @@ func _resort() -> void:
 
 	_untrack_children_after(_panel_container, _current_panel_index)
 	_untrack_children_after(_split_container, _current_split_index)
+	if not tabs_visible and tabs_visible_if_more_than_one:
+		set_tabs_visible(_tabs_visible)
 
 
 ## Calculate DockablePanel and SplitHandle minimum sizes, skipping empty
