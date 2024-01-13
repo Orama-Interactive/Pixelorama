@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://by3300fom3plf"]
+[gd_scene load_steps=6 format=3 uid="uid://by3300fom3plf"]
 
 [ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" id="1_nf0dd"]
+[ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2_mf5ob"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytt38"]
+bg_color = Color(0, 0, 0, 0.470588)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53xjd"]
 draw_center = false
@@ -13,9 +17,20 @@ border_width_bottom = 2
 
 [node name="ReferenceImageButton" type="Button"]
 custom_minimum_size = Vector2(64, 64)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ytt38")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ytt38")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_53xjd")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tuwm6")
 toggle_mode = true
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("1_nf0dd")
+
+[node name="TransparentChecker" parent="." instance=ExtResource("2_mf5ob")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

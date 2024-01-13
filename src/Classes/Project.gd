@@ -256,6 +256,7 @@ func change_project() -> void:
 	# of the current project we remove from the tree
 	# They will still be in memory though
 	for ri: ReferenceImage in Global.canvas.reference_image_container.get_children():
+		print(ri)
 		if !reference_images.has(ri):
 			Global.canvas.reference_image_container.remove_child(ri)
 	# Now we loop through this projects reference images and add them back to the tree
@@ -439,7 +440,7 @@ func deserialize(dict: Dictionary) -> void:
 			var ri := ReferenceImage.new()
 			ri.project = self
 			ri.deserialize(g)
-			Global.canvas.add_child(ri)
+			Global.canvas.reference_image_container.add_child(ri)
 	if dict.has("vanishing_points"):
 		vanishing_points = dict.vanishing_points
 		Global.perspective_editor.queue_redraw()
