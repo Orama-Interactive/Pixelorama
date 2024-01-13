@@ -256,7 +256,6 @@ func change_project() -> void:
 	# of the current project we remove from the tree
 	# They will still be in memory though
 	for ri: ReferenceImage in Global.canvas.reference_image_container.get_children():
-		print(ri)
 		if !reference_images.has(ri):
 			Global.canvas.reference_image_container.remove_child(ri)
 	# Now we loop through this projects reference images and add them back to the tree
