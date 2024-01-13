@@ -130,7 +130,10 @@ func _on_reference_image_changed(index: int) -> void:
 		for b: Button in list_btn_group.get_buttons():
 			b.set_pressed_no_signal(false)
 		# Then we get the wanted button and we press it
-		list_btn_group.get_buttons()[index + 1].set_pressed_no_signal(true)
+		# NOTE: using list_btn_group.get_buttons()[index + 1] here was causing a bug that
+		# if you re-arrange by drag and drop, then click on a button, then button before it
+		# becomes selected instead of the clicked button
+		list.get_child(index + 1).set_pressed_no_signal(true)
 
 
 func project_changed() -> void:
