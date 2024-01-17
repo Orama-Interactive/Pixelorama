@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-01-09 22:35\n"
+"PO-Revision-Date: 2024-01-17 11:47\n"
 
 msgid "OK"
 msgstr "确定"
@@ -171,11 +171,11 @@ msgstr "百分比"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "裁剪到选区"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "裁剪到内容"
 
 msgid "Resize Canvas"
 msgstr "调整画布尺寸"
@@ -989,7 +989,7 @@ msgstr "关于 Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "支持 Pixelorama 的开发"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - 像素化您的梦想！"
@@ -1005,7 +1005,7 @@ msgstr "网站"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "源代码"
 
 msgid "Donate"
 msgstr "捐赠"
@@ -1117,7 +1117,7 @@ msgstr "白俄罗斯语"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "首席开发者"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1125,7 +1125,7 @@ msgstr "UI 设计师"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "作者"
 
 msgid "Art by: %s"
 msgstr "艺术作者： %s"
@@ -2860,35 +2860,35 @@ msgstr "跳转到结束"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "单色"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "按住 Shift 键同时点击删除"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "将选中的参考图像移动到右侧"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "将选中的参考图像移动到左侧"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "在画布上选择一个参考图像"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "移动选中的参考图像"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "移动选中的参考图像"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "缩放选中的参考图像"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
