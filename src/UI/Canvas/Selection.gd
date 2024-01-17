@@ -388,14 +388,12 @@ func resize_selection() -> void:
 	Global.canvas.queue_redraw()
 
 
-func _gizmo_rotate() -> void:  # Does not work properly yet
+func _gizmo_rotate() -> void:  ## Currently unused, as it does not work properly yet
 	var angle := image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
 	angle = deg_to_rad(floorf(rad_to_deg(angle)))
 	if angle == prev_angle:
 		return
 	prev_angle = angle
-#	var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
-#	var pivot = Vector2(original_preview_image.get_width()/2, original_preview_image.get_height()/2)
 	var pivot := Vector2(big_bounding_rectangle.size.x / 2.0, big_bounding_rectangle.size.y / 2.0)
 	preview_image.copy_from(original_preview_image)
 	if original_big_bounding_rectangle.position != big_bounding_rectangle.position:
@@ -403,22 +401,22 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 		var pos_diff := (
 			(original_big_bounding_rectangle.position - big_bounding_rectangle.position).abs()
 		)
-#		pos_diff.y = 0
 		preview_image.blit_rect(
 			original_preview_image, Rect2(Vector2.ZERO, preview_image.get_size()), pos_diff
 		)
 	DrawingAlgos.nn_rotate(preview_image, angle, pivot)
 	preview_image_texture = ImageTexture.create_from_image(preview_image)
 
-	var bitmap_image := original_bitmap
+	var bitmap_image := SelectionMap.new()
+	bitmap_image.copy_from(original_bitmap)
 	var bitmap_pivot := (
 		original_big_bounding_rectangle.position
 		+ ((original_big_bounding_rectangle.end - original_big_bounding_rectangle.position) / 2)
 	)
 	DrawingAlgos.nn_rotate(bitmap_image, angle, bitmap_pivot)
-	Global.current_project.selection_map = bitmap_image
+	Global.current_project.selection_map.copy_from(bitmap_image)
 	Global.current_project.selection_map_changed()
-	big_bounding_rectangle = bitmap_image.get_used_rect()
+	big_bounding_rectangle = Global.current_project.selection_map.get_used_rect()
 	queue_redraw()
 	Global.canvas.queue_redraw()
 
