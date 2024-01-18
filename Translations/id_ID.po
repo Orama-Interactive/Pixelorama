@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-01-09 22:35\n"
+"PO-Revision-Date: 2024-01-18 12:08\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -989,7 +989,7 @@ msgstr "Tentang Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Dukung Pengembangan Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - Pikselisasikan mimpimu!"
@@ -1005,7 +1005,7 @@ msgstr "Situs web"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Kode Sumber"
 
 msgid "Donate"
 msgstr "Menyumbang"
@@ -1117,7 +1117,7 @@ msgstr "Bhs. Belarus"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Pengembang Utama"
 
 #. Found in the About dialog.
 msgid "UI Designer"
