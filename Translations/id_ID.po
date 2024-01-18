@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-01-18 12:08\n"
+"PO-Revision-Date: 2024-01-18 13:16\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1125,7 +1125,7 @@ msgstr "Perancang UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Pengarang"
 
 msgid "Art by: %s"
 msgstr "Gambar oleh %s"
