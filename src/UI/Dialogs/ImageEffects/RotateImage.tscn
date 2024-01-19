@@ -138,6 +138,5 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Zero" to="." method="_on_quick_change_angle_pressed" binds= [0]]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Add45" to="." method="_on_quick_change_angle_pressed" binds= [45]]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Add90" to="." method="_on_quick_change_angle_pressed" binds= [90]]
-
 [connection signal="value_changed" from="VBoxContainer/SmearOptions/ToleranceSlider" to="." method="_on_ToleranceSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SmearOptions/InitialAngleSlider" to="." method="_on_InitialAngleSlider_value_changed"]
