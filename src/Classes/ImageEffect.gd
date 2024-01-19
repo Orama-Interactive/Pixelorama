@@ -212,8 +212,8 @@ func set_and_update_preview_image(frame_idx: int) -> void:
 	update_preview()
 
 
-func update_preview(live := true) -> void:
-	if !live:
+func update_preview(using_timer := false) -> void:
+	if !live_preview and !using_timer:
 		wait_apply_timer.start()
 		return
 
@@ -262,7 +262,7 @@ func _on_live_checkbox_toggled(toggled_on: bool) -> void:
 
 
 func _on_wait_apply_timeout() -> void:
-	update_preview()
+	update_preview(true)
 
 
 func _on_wait_time_value_changed(value: float) -> void:

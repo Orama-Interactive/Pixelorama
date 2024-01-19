@@ -175,15 +175,15 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 
 
 func _on_AngleSlider_value_changed(_value: float) -> void:
-	update_preview(live_preview)
+	update_preview()
 
 
 func _on_InitialAngleSlider_value_changed(_value: float) -> void:
-	update_preview(live_preview)
+	update_preview()
 
 
 func _on_ToleranceSlider_value_changed(_value: float) -> void:
-	update_preview(live_preview)
+	update_preview()
 
 
 func _on_quick_change_angle_pressed(angle_value: int) -> void:
