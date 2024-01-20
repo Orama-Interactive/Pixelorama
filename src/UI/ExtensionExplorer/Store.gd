@@ -169,7 +169,8 @@ func _on_UpdateTimer_timeout() -> void:
 func process_line(line: String):
 	# If the line isn't a comment, we will check data type
 	var raw_data
-	if !line.strip_edges().begins_with("#"):
+	line = line.strip_edges()
+	if !line.begins_with("#") or !line.begins_with("//"):
 		raw_data = str_to_var(line)
 
 		# Determine action based on data type
