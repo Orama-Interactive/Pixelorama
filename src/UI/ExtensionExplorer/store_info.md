@@ -1,5 +1,5 @@
 // This file is for online use.<br>
-//
+
 ## Rules for writing a (store_info) file:
 // 1.	The Store Entry is one large Array (reffered to as "entry") consisting of sub-arrays (reffered to as "data")<br>
 //		e.g `[[keyword, ....], [keyword, ....], [keyword, ....], .......]`<br>
@@ -18,5 +18,6 @@
 //		and the link becomes `"https://github.com/Variable-ind/Pixelorama-Extensions/raw/master/Extensions/Example.pck"`<br>
 
 // For further help see the entries below for reference of how it's done
+## Entries:
 
 [["name", "Swappy"], ["version", 0.2], ["description", "Helper Extension for Re-Coloring. Replaces all instances of a Color with a New Color."], ["tags", "Tool", "UI"], ["thumbnail", "https://user-images.githubusercontent.com/77773850/246190032-e4d1e2b9-03d8-4a6d-9834-e29ca7fbf463.png"], ["download_link", "https://github.com/Variable-ind/Pixelorama-Extensions/raw/4.0/Extensions/Swappy.pck"]]
