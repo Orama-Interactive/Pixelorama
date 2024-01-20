@@ -310,7 +310,7 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 		drag_pivot = false
 	if drag_pivot:
 		var img_size := preview_image.get_size()
-		var mouse_pos := get_local_mouse_position() - pivot_indicator.rect_position
+		var mouse_pos := pivot_indicator.get_local_mouse_position()
 		var ratio := img_size / pivot_indicator.rect_size
 		# we need to set the scale according to the larger side
 		var conversion_scale: float
