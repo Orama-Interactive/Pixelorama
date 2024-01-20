@@ -19,5 +19,9 @@
 
 // For further help see the entries below for reference of how it's done
 ## Entries:
+// Put Official Extensions Here
 
-[["name", "Swappy"], ["version", 0.2], ["description", "Helper Extension for Re-Coloring. Replaces all instances of a Color with a New Color."], ["tags", "Tool", "UI"], ["thumbnail", "https://user-images.githubusercontent.com/77773850/246190032-e4d1e2b9-03d8-4a6d-9834-e29ca7fbf463.png"], ["download_link", "https://github.com/Variable-ind/Pixelorama-Extensions/raw/4.0/Extensions/Swappy.pck"]]
+
+## Other Store Links:
+### VariableStore
+https://raw.githubusercontent.com/Variable-ind/Pixelorama-Extensions/4.0/store_info.md
