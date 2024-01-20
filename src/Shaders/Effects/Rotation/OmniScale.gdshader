@@ -33,6 +33,8 @@ shader_type canvas_item;
 // SOFTWARE.
 //
 
+#include "res://src/Shaders/Effects/Rotation/CommonRotation.gdshaderinc"
+
 uniform int ScaleMultiplier : hint_range(0, 100) = 4;
 
 // vertex compatibility #defines
@@ -40,9 +42,6 @@ uniform int ScaleMultiplier : hint_range(0, 100) = 4;
 // #define outsize vec4(OutputSize, 1.0 / OutputSize)
 
 // Pixelorama-specific uniforms
-uniform float angle;
-uniform sampler2D selection_tex;
-uniform vec2 pivot_pixel;
 uniform bool preview = false;
 
 
@@ -289,27 +288,9 @@ vec4 scale(sampler2D image, vec2 coord, vec2 pxSize) {
 }
 
 
-vec2 rotate(vec2 uv, vec2 pivot, float ratio) {  // Taken from NearestNeighbour shader
-	// Scale and center image
-	uv.x -= pivot.x;
-	uv.x *= ratio;
-	uv.x += pivot.x;
-
-	// Rotate image
-	uv -= pivot;
-	uv = vec2(cos(angle) * uv.x + sin(angle) * uv.y,
-				-sin(angle) * uv.x + cos(angle) * uv.y);
-	uv.x /= ratio;
-	uv += pivot;
-
-	return uv;
-}
-
-
 void fragment()
 {
 	vec4 original = texture(TEXTURE, UV);
-	float selection = texture(selection_tex, UV).a;
 	vec2 size = 1.0 / TEXTURE_PIXEL_SIZE;
 	vec2 pivot = pivot_pixel / size; // Normalize pivot position
 	float ratio = size.x / size.y; // Resolution ratio
@@ -321,29 +302,8 @@ void fragment()
 	else {
 		rotated_uv = rotate(UV, pivot, ratio);
 	}
-	vec4 c;
-	c = scale(TEXTURE, rotated_uv, TEXTURE_PIXEL_SIZE);
+	vec4 c = scale(TEXTURE, rotated_uv, TEXTURE_PIXEL_SIZE);
 
-	// Taken from NearestNeighbour shader
-	c.a *= texture(selection_tex, rotated_uv).a; // Combine with selection mask
-	// Make a border to prevent stretching pixels on the edge
-	vec2 border_uv = rotated_uv;
-
-	// Center the border
-	border_uv -= 0.5;
-	border_uv *= 2.0;
-	border_uv = abs(border_uv);
-
-	float border = max(border_uv.x, border_uv.y); // This is a rectangular gradient
-	border = floor(border - TEXTURE_PIXEL_SIZE.x); // Turn the grad into a rectangle shape
-	border = 1.0 - clamp(border, 0.0, 1.0); // Invert the rectangle
-
-	float mask = mix(selection, 1.0, 1.0 - ceil(original.a)); // Combine selection mask with area outside original
-
-	// Combine original and rotated image only when intersecting, otherwise just pure rotated image.
-	COLOR.rgb = mix(mix(original.rgb, c.rgb, c.a * border), c.rgb, mask);
-	COLOR.a = mix(original.a, 0.0, selection); // Remove alpha on the selected area
-	COLOR.a = mix(COLOR.a, 1.0, c.a * border); // Combine alpha of original image and rotated
-	//c.a = step(0.5,c.a);
-	//COLOR = c;
+	// Pixelorama edit
+	COLOR = mix_rotated_and_original(c, original, UV, rotated_uv, TEXTURE_PIXEL_SIZE);
 }

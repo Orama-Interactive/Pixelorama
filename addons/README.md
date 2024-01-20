@@ -24,7 +24,7 @@ Files extracted from source:
 ## godot-dockable-container
 
 - Upstream: https://github.com/gilzoide/godot-dockable-container
-- Version: 63943c37835c504b1178a83b4b0050815ecf69c0
+- Version: [274ea7264440003071bcd024f31e130c984df3c6](https://github.com/gilzoide/godot-dockable-container/pull/27/commits/274ea7264440003071bcd024f31e130c984df3c6) (PR #27)
 - License: [CC0-1.0](https://github.com/gilzoide/godot-dockable-container/blob/main/LICENSE)
 
 ## SmartSlicer
