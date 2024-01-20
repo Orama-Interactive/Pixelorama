@@ -198,16 +198,16 @@ func parse_extension_data(raw_data: Array) -> Dictionary:
 			if typeof(identifier) == TYPE_STRING and item.size() > 0:
 				match identifier:
 					"name":
-						identifier["name"] = item[0]
+						result["name"] = item[0]
 					"version":
-						identifier["version"] = item[0]
+						result["version"] = item[0]
 					"description":
-						identifier["description"] = item[0]
+						result["description"] = item[0]
 					"thumbnail":
-						identifier["thumbnail"] = item[0]
+						result["thumbnail"] = item[0]
 					"download_link":
-						identifier["download_link"] = item[0]
+						result["download_link"] = item[0]
 					"tags":  # (this should remain as an array)
-						identifier["tags"] = item
+						result["tags"] = item
 						search_manager.add_new_tags(item)
 	return result

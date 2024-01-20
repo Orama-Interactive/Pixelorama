@@ -24,21 +24,21 @@ var is_update := false  ## An update instead of download
 
 func set_info(info: Dictionary, extension_path: String) -> void:
 	if "name" in info.keys() and "version" in info.keys():
-		ext_name.text = str(info["name"], "-v", info["version"])  # Name with version
+		ext_name.text = str(info["name"], "-v", info["version"])
+		# check for updates
 		change_button_if_updatable(info["name"], info["version"])
+		# Setting path extension will be "temporarily" downloaded to before install
+		DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
+		download_path = str(extension_path, "Download/", info["name"], ".pck")
 	if "description" in info.keys():
-		ext_discription.text = info["description"]  # Description
+		ext_discription.text = info["description"]
 		ext_discription.tooltip_text = ext_discription.text
 	if "thumbnail" in info.keys():
-		thumbnail = info["thumbnail"]  # Image link
+		thumbnail = info["thumbnail"]
 	if "download_link" in info.keys():
 		download_link = info["download_link"]
 	if "tags" in info.keys():
 		tags.append_array(info["tags"])
-
-	# Setting path extension will be "temporarily" downloaded to before install
-	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
-	download_path = str(extension_path, "Download/", info[0], ".pck")
 
 	# Adding a tiny delay to prevent sending bulk requests
 	request_delay.wait_time = randf() * 2
