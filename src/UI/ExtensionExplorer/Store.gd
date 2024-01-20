@@ -6,9 +6,9 @@ extends Window
 
 const STORE_NAME := "Extension Explorer"
 # gdlint: ignore=max-line-length
-const STORE_LINK := "https://raw.githubusercontent.com/Variable-Interactive/Variable-Store/4.0/store_info.txt"
+const STORE_LINK := "https://raw.githubusercontent.com/Variable-ind/Pixelorama/integrate-store/src/UI/ExtensionExplorer/store_info.md"
 ## File that will contain information about extensions available for download
-const STORE_INFORMATION_FILE := STORE_NAME + ".txt"
+const STORE_INFORMATION_FILE := STORE_NAME + ".md"
 const EXTENSION_ENTRY_TSCN := preload("res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.tscn")
 
 # Variables placed here due to their frequent use
@@ -81,18 +81,9 @@ func _on_StoreInformation_request_completed(
 			extension_path.path_join(STORE_INFORMATION_FILE), FileAccess.READ
 		)
 		while not file.eof_reached():
-			var file_line := file.get_line()
-			var extension_info
-			if !file_line.strip_edges().begins_with("#"):
-				extension_info = str_to_var(file_line)
-			if typeof(extension_info) == TYPE_ARRAY:
-				add_entry(extension_info)
-			elif typeof(extension_info) == TYPE_STRING:  # redirect store_link detected
-				var link: String = extension_info.strip_edges()
-				if !link.begins_with("#") and link != "":
-					if !extension_info in redirects:
-						redirects.append(extension_info)
+			process_line(file.get_line())
 		file.close()
+
 		DirAccess.remove_absolute(extension_path.path_join(STORE_INFORMATION_FILE))
 		# Hide the progress bar because it's no longer required
 		close_progress()
@@ -135,9 +126,8 @@ func _on_CopyCommand_pressed() -> void:
 
 
 ## Adds a new extension entry to the "content"
-func add_entry(info: Array) -> void:
+func add_entry(info: Dictionary) -> void:
 	var entry := EXTENSION_ENTRY_TSCN.instantiate()
-	entry.tags_detected.connect(search_manager.add_new_tags)
 	entry.extension_container = extension_container
 	content.add_child(entry)
 	entry.set_info(info, extension_path)
@@ -173,3 +163,50 @@ func update_progress() -> void:
 ## Progress bar method
 func _on_UpdateTimer_timeout() -> void:
 	update_progress()
+
+
+# DATA PROCESSORS
+func process_line(line: String):
+	# If the line isn't a comment, we will check data type
+	var raw_data
+	if !line.strip_edges().begins_with("#"):
+		raw_data = str_to_var(line)
+
+		# Determine action based on data type
+		match typeof(raw_data):
+			TYPE_ARRAY:
+				var extension_data: Dictionary = parse_extension_data(raw_data)
+				add_entry(extension_data)
+			TYPE_STRING:
+				# it's most probably a store link
+				var link: String = raw_data.strip_edges()
+				if !link.begins_with("#") and link != "":
+					if !link in redirects:
+						redirects.append(link)
+
+
+func parse_extension_data(raw_data: Array) -> Dictionary:
+	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
+	var result := {}
+	var tags = []
+	# Check for non-compulsory things if they exist
+	for item in raw_data:
+		if typeof(item) == TYPE_ARRAY:
+			# first array element should always be an identifier text type
+			var identifier = item.pop_front()
+			if typeof(identifier) == TYPE_STRING and item.size() > 0:
+				match identifier:
+					"name":
+						identifier["name"] = item[0]
+					"version":
+						identifier["version"] = item[0]
+					"description":
+						identifier["description"] = item[0]
+					"thumbnail":
+						identifier["thumbnail"] = item[0]
+					"download_link":
+						identifier["download_link"] = item[0]
+					"tags":  # (this should remain as an array)
+						identifier["tags"] = item
+						search_manager.add_new_tags(item)
+	return result

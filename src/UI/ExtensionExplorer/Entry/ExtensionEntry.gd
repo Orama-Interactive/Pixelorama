@@ -1,8 +1,6 @@
 class_name ExtensionEntry
 extends Panel
 
-signal tags_detected(tags: PackedStringArray)
-
 var extension_container: VBoxContainer
 var thumbnail := ""
 var download_link := ""
@@ -24,29 +22,26 @@ var is_update := false  ## An update instead of download
 @onready var alert_dialog := %Alert as AcceptDialog
 
 
-func set_info(info: Array, extension_path: String) -> void:
-	ext_name.text = str(info[0], "-v", info[1])  # Name with version
-	change_button_if_updatable(info[0], info[1])
-	ext_discription.text = info[2]  # Description
-	ext_discription.tooltip_text = ext_discription.text
-	thumbnail = info[-2]  # Image link
-	download_link = info[-1]  # Download link
+func set_info(info: Dictionary, extension_path: String) -> void:
+	if "name" in info.keys() and "version" in info.keys():
+		ext_name.text = str(info["name"], "-v", info["version"])  # Name with version
+		change_button_if_updatable(info["name"], info["version"])
+	if "description" in info.keys():
+		ext_discription.text = info["description"]  # Description
+		ext_discription.tooltip_text = ext_discription.text
+	if "thumbnail" in info.keys():
+		thumbnail = info["thumbnail"]  # Image link
+	if "download_link" in info.keys():
+		download_link = info["download_link"]
+	if "tags" in info.keys():
+		tags.append_array(info["tags"])
 
-	# Check for non-compulsory things if they exist
-	for item in info:
-		if typeof(item) == TYPE_ARRAY:
-			# first array element should always be an identifier text type
-			var identifier = item.pop_front()
-			if identifier:
-				# check for tags
-				if identifier == "Tags":
-					tags.append_array(item)
-					tags_detected.emit(tags)
-
+	# Setting path extension will be "temporarily" downloaded to before install
 	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
 	download_path = str(extension_path, "Download/", info[0], ".pck")
 
-	request_delay.wait_time = randf() * 2  # to prevent sending bulk requests
+	# Adding a tiny delay to prevent sending bulk requests
+	request_delay.wait_time = randf() * 2
 	request_delay.start()
 
 
