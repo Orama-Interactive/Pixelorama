@@ -4,10 +4,14 @@ enum ExportTab { IMAGE = 0, SPRITESHEET = 1 }
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 ## See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4 }
+enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV }
+
+const TEMP_PATH := "user://tmp"
 
 ## List of animated formats
-var animated_formats := [FileFormat.GIF, FileFormat.APNG, FileFormat.MP4]
+var animated_formats := [
+	FileFormat.GIF, FileFormat.APNG, FileFormat.MP4, FileFormat.AVI, FileFormat.OGV, FileFormat.MKV
+]
 
 ## A dictionary of custom exporter generators (received from extensions)
 var custom_file_formats := {}
@@ -262,29 +266,8 @@ func export_processed_images(
 			return result
 
 	if is_single_file_format(project):
-		if project.file_format == FileFormat.MP4:
-			var temp_path := "user://tmp"
-			DirAccess.make_dir_absolute(temp_path)
-			var temp_path_real := ProjectSettings.globalize_path(temp_path)
-			var input_file_path := temp_path_real.path_join("input.txt")
-			var input_file := FileAccess.open(input_file_path, FileAccess.WRITE)
-			for i in range(processed_images.size()):
-				var temp_file_name := str(i + 1).pad_zeros(number_of_digits) + ".png"
-				var temp_file_path := temp_path_real.path_join(temp_file_name)
-				processed_images[i].save_png(temp_file_path)
-				input_file.store_line("file '" + temp_file_name + "'")
-				input_file.store_line("duration %s" % durations[i])
-			input_file.close()
-			var ffmpeg_execute: PackedStringArray = [
-				"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
-			]
-			var output := []
-			OS.execute("ffmpeg", ffmpeg_execute, output, true)
-			print(output)
-			var temp_dir := DirAccess.open(temp_path)
-			for file in temp_dir.get_files():
-				temp_dir.remove(file)
-			DirAccess.remove_absolute(temp_path)
+		if is_using_ffmpeg(project.file_format):
+			export_video(export_paths)
 		else:
 			var exporter: AImgIOBaseExporter
 			if project.file_format == FileFormat.APNG:
@@ -358,6 +341,31 @@ func export_processed_images(
 	return true
 
 
+## Uses FFMPEG to export a video
+func export_video(export_paths: PackedStringArray) -> void:
+	DirAccess.make_dir_absolute(TEMP_PATH)
+	var temp_path_real := ProjectSettings.globalize_path(TEMP_PATH)
+	var input_file_path := temp_path_real.path_join("input.txt")
+	var input_file := FileAccess.open(input_file_path, FileAccess.WRITE)
+	for i in range(processed_images.size()):
+		var temp_file_name := str(i + 1).pad_zeros(number_of_digits) + ".png"
+		var temp_file_path := temp_path_real.path_join(temp_file_name)
+		processed_images[i].save_png(temp_file_path)
+		input_file.store_line("file '" + temp_file_name + "'")
+		input_file.store_line("duration %s" % durations[i])
+	input_file.close()
+	var ffmpeg_execute: PackedStringArray = [
+		"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
+	]
+	var output := []
+	OS.execute("ffmpeg", ffmpeg_execute, output, true)
+	print(output)
+	var temp_dir := DirAccess.open(TEMP_PATH)
+	for file in temp_dir.get_files():
+		temp_dir.remove(file)
+	DirAccess.remove_absolute(TEMP_PATH)
+
+
 func export_animated(args: Dictionary) -> void:
 	var project: Project = args["project"]
 	var exporter: AImgIOBaseExporter = args["exporter"]
@@ -423,6 +431,12 @@ func file_format_string(format_enum: int) -> String:
 			return ".apng"
 		FileFormat.MP4:
 			return ".mp4"
+		FileFormat.AVI:
+			return ".avi"
+		FileFormat.OGV:
+			return ".ogv"
+		FileFormat.MKV:
+			return ".mkv"
 		_:
 			# If a file format description is not found, try generating one
 			if custom_exporter_generators.has(format_enum):
@@ -445,7 +459,13 @@ func file_format_description(format_enum: int) -> String:
 		FileFormat.APNG:
 			return "APNG Image"
 		FileFormat.MP4:
-			return "MP4 Video"
+			return "MPEG-4 Video"
+		FileFormat.AVI:
+			return "AVI Video"
+		FileFormat.OGV:
+			return "OGV Video"
+		FileFormat.MKV:
+			return "Matroska Video"
 		_:
 			# If a file format description is not found, try generating one
 			for key in custom_file_formats.keys():
@@ -454,10 +474,14 @@ func file_format_description(format_enum: int) -> String:
 			return ""
 
 
-## True when exporting to .gif and .apng (and potentially video formats in the future)
-## False when exporting to .png, and other non-animated formats in the future
+## True when exporting to .gif, .apng and video
+## False when exporting to .png, .jpg and static .webp
 func is_single_file_format(project := Global.current_project) -> bool:
 	return animated_formats.has(project.file_format)
+
+
+func is_using_ffmpeg(format: FileFormat) -> bool:
+	return format >= FileFormat.MP4 and format <= FileFormat.MKV
 
 
 func _create_export_path(multifile: bool, project: Project, frame := 0) -> String:
