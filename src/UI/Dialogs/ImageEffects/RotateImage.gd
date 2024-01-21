@@ -250,14 +250,13 @@ func _on_Indicator_draw() -> void:
 	else:
 		conversion_scale = ratio.y
 	var pivot_position := pivot * conversion_scale
-	var width = 1
-	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.YELLOW, width)
-	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.WHITE, width)
+	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.YELLOW)
+	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.WHITE)
 	pivot_indicator.draw_line(
-		pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.WHITE, width
+		pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.WHITE
 	)
 	pivot_indicator.draw_line(
-		pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.WHITE, width
+		pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.WHITE
 	)
 
 

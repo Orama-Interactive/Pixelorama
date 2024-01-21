@@ -29,9 +29,11 @@ func deserialize(data: Dictionary):
 
 func initiate(data: Dictionary, vanishing_point: Node):
 	_vanishing_point = vanishing_point
-	width = LINE_WIDTH / Global.camera.zoom.x
 	Global.canvas.add_child(self)
 	deserialize(data)
+	# a small delay is needed for Global.camera.zoom to have correct value
+	await get_tree().process_frame
+	width = LINE_WIDTH / Global.camera.zoom.x
 	refresh()
 
 
@@ -126,6 +128,7 @@ func try_rotate_scale():
 
 
 func _draw() -> void:
+	width = LINE_WIDTH / Global.camera.zoom.x
 	var mouse_point := Global.canvas.current_pixel
 	var arc_points := PackedVector2Array()
 	draw_circle(points[0], CIRCLE_RAD / Global.camera.zoom.x, default_color)  # Starting circle
@@ -150,8 +153,9 @@ func _draw() -> void:
 			arc_points.append(points[1])
 
 	for point in arc_points:
-		draw_arc(point, CIRCLE_RAD * 2 / Global.camera.zoom.x, 0, 360, 360, default_color, 0.5)
+		# if we put width <= -1, then the arc line will automatically adjust itself to remain thin
+		# in 0.x this behavior was achieved at  width <= 1
+		draw_arc(point, CIRCLE_RAD * 2 / Global.camera.zoom.x, 0, 360, 360, default_color)
 
-	width = LINE_WIDTH / Global.camera.zoom.x
 	if is_hidden:  # Hidden line
 		return
