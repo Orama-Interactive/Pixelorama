@@ -13,7 +13,8 @@ var image_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.WEBP,
 	Export.FileFormat.JPEG,
 	Export.FileFormat.GIF,
-	Export.FileFormat.APNG
+	Export.FileFormat.APNG,
+	Export.FileFormat.MP4,
 ]
 var spritesheet_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG
