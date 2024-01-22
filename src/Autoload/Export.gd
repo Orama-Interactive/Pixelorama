@@ -4,13 +4,19 @@ enum ExportTab { IMAGE = 0, SPRITESHEET = 1 }
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 ## See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV }
+enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
 
 const TEMP_PATH := "user://tmp"
 
 ## List of animated formats
 var animated_formats := [
-	FileFormat.GIF, FileFormat.APNG, FileFormat.MP4, FileFormat.AVI, FileFormat.OGV, FileFormat.MKV
+	FileFormat.GIF,
+	FileFormat.APNG,
+	FileFormat.MP4,
+	FileFormat.AVI,
+	FileFormat.OGV,
+	FileFormat.MKV,
+	FileFormat.WEBM
 ]
 
 ## A dictionary of custom exporter generators (received from extensions)
@@ -437,6 +443,8 @@ func file_format_string(format_enum: int) -> String:
 			return ".ogv"
 		FileFormat.MKV:
 			return ".mkv"
+		FileFormat.WEBM:
+			return ".webm"
 		_:
 			# If a file format description is not found, try generating one
 			if custom_exporter_generators.has(format_enum):
@@ -466,6 +474,8 @@ func file_format_description(format_enum: int) -> String:
 			return "OGV Video"
 		FileFormat.MKV:
 			return "Matroska Video"
+		FileFormat.WEBM:
+			return "WebM video"
 		_:
 			# If a file format description is not found, try generating one
 			for key in custom_file_formats.keys():
@@ -481,7 +491,7 @@ func is_single_file_format(project := Global.current_project) -> bool:
 
 
 func is_using_ffmpeg(format: FileFormat) -> bool:
-	return format >= FileFormat.MP4 and format <= FileFormat.MKV
+	return format >= FileFormat.MP4 and format <= FileFormat.WEBM
 
 
 func _create_export_path(multifile: bool, project: Project, frame := 0) -> String:

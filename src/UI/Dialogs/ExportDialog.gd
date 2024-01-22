@@ -18,6 +18,7 @@ var image_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.AVI,
 	Export.FileFormat.OGV,
 	Export.FileFormat.MKV,
+	Export.FileFormat.WEBM,
 ]
 var spritesheet_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG
