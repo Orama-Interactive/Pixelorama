@@ -371,6 +371,11 @@ func export_video(export_paths: PackedStringArray) -> bool:
 	]
 	var output := []
 	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, output, true)
+	print(output)
+	var temp_dir := DirAccess.open(TEMP_PATH)
+	for file in temp_dir.get_files():
+		temp_dir.remove(file)
+	DirAccess.remove_absolute(TEMP_PATH)
 	if success < 0 or success > 1:
 		var fail_text := """Video failed to export. Make sure you have FFMPEG installed
 			and have set the correct path in the preferences."""
@@ -378,11 +383,6 @@ func export_video(export_paths: PackedStringArray) -> bool:
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		return false
-	print(output)
-	var temp_dir := DirAccess.open(TEMP_PATH)
-	for file in temp_dir.get_files():
-		temp_dir.remove(file)
-	DirAccess.remove_absolute(TEMP_PATH)
 	return true
 
 
