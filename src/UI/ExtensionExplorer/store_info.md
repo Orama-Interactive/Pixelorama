@@ -1,7 +1,7 @@
 // This file is for online use.<br>
 
 ## Rules for writing a (store_info) file:
-// 1.	The Store Entry is one large Array (reffered to as "entry") consisting of sub-arrays (reffered to as "data")<br>
+// 1.	The Store Entry is one large Array (referred to as "entry") consisting of sub-arrays (referred to as "data")<br>
 //		e.g `[[keyword, ....], [keyword, ....], [keyword, ....], .......]`<br>
 // 2.	Each data must have a keyword of type `String` at it's first index which helps in identifying what the data represents.<br>
 //		e.g, ["name", "name of extension"] is the data giving information about "name".<br>
