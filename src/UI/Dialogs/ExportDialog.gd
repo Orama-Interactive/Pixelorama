@@ -257,9 +257,9 @@ func update_dimensions_label() -> void:
 
 func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 	# 0 is invalid path, 1 is invalid name
-	var error_text := "DirAccess path and file name are not valid!"
+	var error_text := "Directory path and file name are not valid!"
 	if path_or_name == 0:
-		error_text = "DirAccess path is not valid!"
+		error_text = "Directory path is not valid!"
 	elif path_or_name == 1:
 		error_text = "File name is not valid!"
 

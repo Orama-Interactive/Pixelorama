@@ -277,7 +277,9 @@ func export_processed_images(
 
 	if is_single_file_format(project):
 		if is_using_ffmpeg(project.file_format):
-			export_video(export_paths)
+			var video_exported := export_video(export_paths)
+			if not video_exported:
+				return false
 		else:
 			var exporter: AImgIOBaseExporter
 			if project.file_format == FileFormat.APNG:
@@ -352,7 +354,7 @@ func export_processed_images(
 
 
 ## Uses FFMPEG to export a video
-func export_video(export_paths: PackedStringArray) -> void:
+func export_video(export_paths: PackedStringArray) -> bool:
 	DirAccess.make_dir_absolute(TEMP_PATH)
 	var temp_path_real := ProjectSettings.globalize_path(TEMP_PATH)
 	var input_file_path := temp_path_real.path_join("input.txt")
@@ -368,12 +370,20 @@ func export_video(export_paths: PackedStringArray) -> void:
 		"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
 	]
 	var output := []
-	OS.execute(Global.ffmpeg_path, ffmpeg_execute, output, true)
+	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, output, true)
+	if success < 0 or success > 1:
+		var fail_text := """Video failed to export. Make sure you have FFMPEG installed
+			and have set the correct path in the preferences."""
+		Global.error_dialog.set_text(tr(fail_text))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return false
 	print(output)
 	var temp_dir := DirAccess.open(TEMP_PATH)
 	for file in temp_dir.get_files():
 		temp_dir.remove(file)
 	DirAccess.remove_absolute(TEMP_PATH)
+	return true
 
 
 func export_animated(args: Dictionary) -> void:
