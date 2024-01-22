@@ -173,7 +173,7 @@ func process_line(line: String):
 	if !line.begins_with("#") and !line.begins_with("//") and line != "":
 		# attempting to convert to a variable other than a string
 		raw_data = str_to_var(line)
-		if !raw_data: # attempt failed, using it as string
+		if !raw_data:  # attempt failed, using it as string
 			raw_data = line
 
 		# Determine action based on data type
