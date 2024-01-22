@@ -90,6 +90,13 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "On"
 
+[node name="FFMPEGPathLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/StartupContainer"]
+layout_mode = 2
+text = "FFMPEG path"
+
+[node name="FFMPEGPath" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/StartupContainer"]
+layout_mode = 2
+
 [node name="Language" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
 visible = false
 layout_mode = 2

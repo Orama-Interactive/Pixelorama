@@ -193,6 +193,12 @@ func set_file_format_selector() -> void:
 	match Export.current_tab:
 		Export.ExportTab.IMAGE:
 			_set_file_format_selector_suitable_file_formats(image_exports)
+			if Export.is_ffmpeg_installed():
+				for format in Export.ffmpeg_formats:
+					file_format_options.set_item_disabled(format, false)
+			else:
+				for format in Export.ffmpeg_formats:
+					file_format_options.set_item_disabled(format, true)
 		Export.ExportTab.SPRITESHEET:
 			_set_file_format_selector_suitable_file_formats(spritesheet_exports)
 

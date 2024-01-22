@@ -19,6 +19,10 @@ var animated_formats := [
 	FileFormat.WEBM
 ]
 
+var ffmpeg_formats := [
+	FileFormat.MP4, FileFormat.AVI, FileFormat.OGV, FileFormat.MKV, FileFormat.WEBM
+]
+
 ## A dictionary of custom exporter generators (received from extensions)
 var custom_file_formats := {}
 var custom_exporter_generators := {}
@@ -364,7 +368,7 @@ func export_video(export_paths: PackedStringArray) -> void:
 		"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
 	]
 	var output := []
-	OS.execute("ffmpeg", ffmpeg_execute, output, true)
+	OS.execute(Global.ffmpeg_path, ffmpeg_execute, output, true)
 	print(output)
 	var temp_dir := DirAccess.open(TEMP_PATH)
 	for file in temp_dir.get_files():
@@ -475,7 +479,7 @@ func file_format_description(format_enum: int) -> String:
 		FileFormat.MKV:
 			return "Matroska Video"
 		FileFormat.WEBM:
-			return "WebM video"
+			return "WebM Video"
 		_:
 			# If a file format description is not found, try generating one
 			for key in custom_file_formats.keys():
@@ -491,7 +495,16 @@ func is_single_file_format(project := Global.current_project) -> bool:
 
 
 func is_using_ffmpeg(format: FileFormat) -> bool:
-	return format >= FileFormat.MP4 and format <= FileFormat.WEBM
+	return ffmpeg_formats.has(format)
+
+
+func is_ffmpeg_installed() -> bool:
+	if Global.ffmpeg_path.is_empty():
+		return false
+	var ffmpeg_executed := OS.execute(Global.ffmpeg_path, [])
+	if ffmpeg_executed == 0 or ffmpeg_executed == 1:
+		return true
+	return false
 
 
 func _create_export_path(multifile: bool, project: Project, frame := 0) -> String:
