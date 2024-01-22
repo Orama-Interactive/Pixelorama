@@ -22,7 +22,6 @@ var live_preview := true
 var _preview_idx := 0  ## The current frame being previewed
 
 
-
 func _ready() -> void:
 	set_nodes()
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
