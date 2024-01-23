@@ -427,39 +427,6 @@ func color_distance(c1: Color, c2: Color) -> float:
 # Image effects
 
 
-func scale_image(width: int, height: int, interpolation: int) -> void:
-	general_do_scale(width, height)
-
-	for f in Global.current_project.frames:
-		for i in range(f.cels.size() - 1, -1, -1):
-			var cel: BaseCel = f.cels[i]
-			if not cel is PixelCel:
-				continue
-			var sprite := Image.new()
-			sprite.copy_from(cel.image)
-			if interpolation == Interpolation.SCALE3X:
-				var times: Vector2 = Vector2(
-					ceil(width / (3.0 * sprite.get_width())),
-					ceil(height / (3.0 * sprite.get_height()))
-				)
-				for _j in range(max(times.x, times.y)):
-					sprite.copy_from(scale_3x(sprite))
-				sprite.resize(width, height, 0)
-			elif interpolation == Interpolation.CLEANEDGE:
-				var params := {"angle": 0, "slope": true, "cleanup": true, "preview": false}
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, clean_edge_shader, params, Vector2(width, height))
-			elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
-				var params := {"angle": 0, "preview": false}
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, omniscale_shader, params, Vector2(width, height))
-			else:
-				sprite.resize(width, height, interpolation)
-			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
-
-	general_undo_scale()
-
-
 func center(indices: Array) -> void:
 	var project: Project = Global.current_project
 	Global.canvas.selection.transform_content_confirm()
@@ -491,6 +458,40 @@ func center(indices: Array) -> void:
 	project.undo_redo.commit_action()
 
 
+func scale_image(width: int, height: int, interpolation: int) -> void:
+	var redo_data := {}
+	var undo_data := {}
+	for f in Global.current_project.frames:
+		for i in range(f.cels.size() - 1, -1, -1):
+			var cel: BaseCel = f.cels[i]
+			if not cel is PixelCel:
+				continue
+			var sprite := Image.new()
+			sprite.copy_from(cel.image)
+			if interpolation == Interpolation.SCALE3X:
+				var times: Vector2 = Vector2(
+					ceil(width / (3.0 * sprite.get_width())),
+					ceil(height / (3.0 * sprite.get_height()))
+				)
+				for _j in range(max(times.x, times.y)):
+					sprite.copy_from(scale_3x(sprite))
+				sprite.resize(width, height, 0)
+			elif interpolation == Interpolation.CLEANEDGE:
+				var params := {"angle": 0, "slope": true, "cleanup": true, "preview": false}
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(sprite, clean_edge_shader, params, Vector2(width, height))
+			elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
+				var params := {"angle": 0, "preview": false}
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(sprite, omniscale_shader, params, Vector2(width, height))
+			else:
+				sprite.resize(width, height, interpolation)
+			redo_data[cel.image] = sprite.data
+			undo_data[cel.image] = cel.image.data
+
+	general_do_and_undo_scale(width, height, redo_data, undo_data)
+
+
 func crop_image() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var used_rect := Rect2()
@@ -514,20 +515,23 @@ func crop_image() -> void:
 
 	var width := used_rect.size.x
 	var height := used_rect.size.y
-	general_do_scale(width, height)
+	var redo_data := {}
+	var undo_data := {}
 	# Loop through all the cels to crop them
 	for f in Global.current_project.frames:
 		for cel in f.cels:
 			if not cel is PixelCel:
 				continue
 			var sprite: Image = cel.image.get_rect(used_rect)
-			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
+			redo_data[cel.image] = sprite.data
+			undo_data[cel.image] = cel.image.data
 
-	general_undo_scale()
+	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
 
 func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> void:
-	general_do_scale(width, height)
+	var redo_data := {}
+	var undo_data := {}
 	for f in Global.current_project.frames:
 		for cel in f.cels:
 			if not cel is PixelCel:
@@ -539,12 +543,15 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 				Rect2(Vector2.ZERO, Global.current_project.size),
 				Vector2(offset_x, offset_y)
 			)
-			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
+			redo_data[cel.image] = sprite.data
+			undo_data[cel.image] = cel.image.data
 
-	general_undo_scale()
+	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
 
-func general_do_scale(width: int, height: int) -> void:
+func general_do_and_undo_scale(
+	width: int, height: int, redo_data: Dictionary, undo_data: Dictionary
+) -> void:
 	var project: Project = Global.current_project
 	var size := Vector2(width, height).floor()
 	var x_ratio = project.size.x / width
@@ -567,10 +574,7 @@ func general_do_scale(width: int, height: int) -> void:
 	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
 	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
 	project.undo_redo.add_do_property(project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
-
-
-func general_undo_scale() -> void:
-	var project: Project = Global.current_project
+	Global.undo_redo_compress_images(redo_data, undo_data)
 	project.undo_redo.add_undo_property(project, "size", project.size)
 	project.undo_redo.add_undo_method(project.selection_map, "crop", project.size.x, project.size.y)
 	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
