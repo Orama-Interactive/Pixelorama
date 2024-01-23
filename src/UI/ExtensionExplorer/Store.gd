@@ -6,7 +6,7 @@ extends Window
 
 const STORE_NAME := "Extension Explorer"
 # gdlint: ignore=max-line-length
-const STORE_LINK := "https://raw.githubusercontent.com/Variable-ind/Pixelorama/integrate-store/src/UI/ExtensionExplorer/store_info.md"
+const STORE_LINK := "https://raw.githubusercontent.com/Orama-Interactive/Pixelorama/master/src/UI/ExtensionExplorer/store_info.md"
 ## File that will contain information about extensions available for download
 const STORE_INFORMATION_FILE := STORE_NAME + ".md"
 const EXTENSION_ENTRY_TSCN := preload("res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.tscn")
@@ -191,7 +191,6 @@ func process_line(line: String):
 func parse_extension_data(raw_data: Array) -> Dictionary:
 	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
 	var result := {}
-	var tags = []
 	# Check for non-compulsory things if they exist
 	for item in raw_data:
 		if typeof(item) == TYPE_ARRAY:
