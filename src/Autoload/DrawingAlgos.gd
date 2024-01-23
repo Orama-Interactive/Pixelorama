@@ -21,7 +21,7 @@ func blend_layers(
 	# the second are the opacities and the third are the origins
 	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
 	var frame_index := project.frames.find(frame)
-	var previous_ordered_layers: Array[int] = Array(project.ordered_layers)
+	var previous_ordered_layers: Array[int] = project.ordered_layers
 	project.order_layers(frame_index)
 	for i in project.layers.size():
 		var ordered_index := project.ordered_layers[i]
@@ -53,7 +53,7 @@ func blend_layers(
 	gen.generate_image(blended, blend_layers_shader, params, project.size)
 	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
 	# Re-order the layers again to ensure correct canvas drawing
-	project.ordered_layers = Array(previous_ordered_layers)
+	project.ordered_layers = previous_ordered_layers
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html
