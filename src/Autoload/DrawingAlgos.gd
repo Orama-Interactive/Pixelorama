@@ -603,6 +603,12 @@ func general_do_and_undo_scale(
 	var x_ratio := float(project.size.x) / width
 	var y_ratio := float(project.size.y) / height
 
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(project.selection_map)
+	selection_map_copy.crop(size.x, size.y)
+	redo_data[project.selection_map] = selection_map_copy.data
+	undo_data[project.selection_map] = project.selection_map.data
+
 	var new_x_symmetry_point := project.x_symmetry_point / x_ratio
 	var new_y_symmetry_point := project.y_symmetry_point / y_ratio
 	var new_x_symmetry_axis_points := project.x_symmetry_axis.points
@@ -615,16 +621,12 @@ func general_do_and_undo_scale(
 	project.undos += 1
 	project.undo_redo.create_action("Scale")
 	project.undo_redo.add_do_property(project, "size", size)
-	project.undo_redo.add_do_method(project.selection_map.crop.bind(size.x, size.y))
 	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
 	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
 	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
 	project.undo_redo.add_do_property(project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
 	Global.undo_redo_compress_images(redo_data, undo_data)
 	project.undo_redo.add_undo_property(project, "size", project.size)
-	project.undo_redo.add_undo_method(
-		project.selection_map.crop.bind(project.size.x, project.size.y)
-	)
 	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
 	project.undo_redo.add_undo_property(project, "y_symmetry_point", project.y_symmetry_point)
 	project.undo_redo.add_undo_property(
