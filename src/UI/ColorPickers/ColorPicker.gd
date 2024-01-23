@@ -1,5 +1,7 @@
 extends Container
 
+## The swatches button of the [ColorPicker] node. Used to ensure that swatches are always invisible
+var swatches_button: Button
 @onready var color_picker := %ColorPicker as ColorPicker
 @onready var color_buttons := %ColorButtons as HBoxContainer
 @onready var left_color_rect := %LeftColorRect as ColorRect
@@ -55,6 +57,14 @@ func _ready() -> void:
 	color_buttons.get_parent().remove_child(color_buttons)
 	sampler_cont.add_child(color_buttons)
 	sampler_cont.move_child(color_buttons, 0)
+	swatches_button = picker_vbox_container.get_child(5, true) as Button
+	swatches_button.visible = false
+	# The GridContainer that contains the swatch buttons. These are not visible in our case
+	# but for some reason its h_separation needs to be set to a value larger than 4,
+	# otherwise a weird bug occurs with the Recent Colors where, adding new colors
+	# increases the size of the color buttons.
+	var presets_container := picker_vbox_container.get_child(6, true) as GridContainer
+	presets_container.add_theme_constant_override("h_separation", 5)
 
 
 func _on_color_picker_color_changed(color: Color) -> void:
@@ -98,6 +108,9 @@ func _on_ColorDefaults_pressed() -> void:
 func _on_expand_button_toggled(toggled_on: bool) -> void:
 	color_picker.color_modes_visible = toggled_on
 	color_picker.sliders_visible = toggled_on
+	color_picker.presets_visible = toggled_on
+	if is_instance_valid(swatches_button):
+		swatches_button.visible = false
 	Global.config_cache.set_value("color_picker", "is_expanded", toggled_on)
 
 
