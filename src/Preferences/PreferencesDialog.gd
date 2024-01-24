@@ -14,6 +14,13 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"use_native_file_dialogs", "Interface/InterfaceOptions/NativeFileDialogs", "button_pressed"
 	),
+	Preference.new(
+		"single_window_mode",
+		"Interface/InterfaceOptions/SingleWindowMode",
+		"button_pressed",
+		true,
+		true
+	),
 	Preference.new("icon_color_from", "Interface/ButtonOptions/IconColorOptionButton", "selected"),
 	Preference.new("custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color"),
 	Preference.new("left_tool_color", "Interface/ButtonOptions/LeftToolColorButton", "color"),

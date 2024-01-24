@@ -158,6 +158,8 @@ var font_size := 16:
 		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
+## Found in Preferences. If [code]true[/code], the native file dialogs of the
+## operating system are being used, instead of Godot's FileDialog node.
 var use_native_file_dialogs := false:
 	set(value):
 		use_native_file_dialogs = value
@@ -165,6 +167,14 @@ var use_native_file_dialogs := false:
 			await tree_entered
 			await get_tree().process_frame
 		get_tree().set_group(&"FileDialogs", "use_native_dialog", value)
+## Found in Preferences. If [code]true[/code], subwindows are embedded in the main window.
+var single_window_mode := true:
+	set(value):
+		single_window_mode = value
+		if OS.has_feature("editor"):
+			return
+		ProjectSettings.set_setting("display/window/subwindows/embed_subwindows", value)
+		ProjectSettings.save_custom(OVERRIDE_FILE)
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
 ## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
@@ -542,6 +552,7 @@ func _init() -> void:
 				data_directories.append(default_loc.path_join(HOME_SUBDIR_NAME))
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
+	single_window_mode = ProjectSettings.get_setting("display/window/subwindows/embed_subwindows")
 
 
 func _ready() -> void:
