@@ -398,8 +398,6 @@ func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
 
 
 func file_menu_id_pressed(id: int) -> void:
-	if not Global.can_draw:
-		return
 	match id:
 		Global.FileMenu.NEW:
 			_on_new_project_file_menu_option_pressed()
@@ -464,8 +462,6 @@ func _on_recent_projects_submenu_id_pressed(id: int) -> void:
 
 
 func edit_menu_id_pressed(id: int) -> void:
-	if not Global.can_draw:
-		return
 	match id:
 		Global.EditMenu.UNDO:
 			Global.current_project.commit_undo()
@@ -490,8 +486,6 @@ func edit_menu_id_pressed(id: int) -> void:
 
 
 func view_menu_id_pressed(id: int) -> void:
-	if not Global.can_draw:
-		return
 	match id:
 		Global.ViewMenu.TILE_MODE_OFFSETS:
 			_popup_dialog(Global.control.get_node("Dialogs/TileModeOffsetsDialog"))
@@ -518,8 +512,6 @@ func view_menu_id_pressed(id: int) -> void:
 
 
 func window_menu_id_pressed(id: int) -> void:
-	if not Global.can_draw:
-		return
 	match id:
 		Global.WindowMenu.WINDOW_OPACITY:
 			_popup_dialog(window_opacity_dialog)
@@ -703,8 +695,6 @@ func _toggle_fullscreen() -> void:
 
 
 func image_menu_id_pressed(id: int) -> void:
-	if not Global.can_draw:
-		return
 	match id:
 		Global.ImageMenu.SCALE_IMAGE:
 			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ScaleImage"))
@@ -744,8 +734,6 @@ func image_menu_id_pressed(id: int) -> void:
 
 
 func select_menu_id_pressed(id: int) -> void:
-	if not Global.can_draw:
-		return
 	match id:
 		Global.SelectMenu.SELECT_ALL:
 			Global.canvas.selection.select_all()
@@ -762,8 +750,6 @@ func select_menu_id_pressed(id: int) -> void:
 
 
 func help_menu_id_pressed(id: int) -> void:
-	if not Global.can_draw:
-		return
 	match id:
 		Global.HelpMenu.VIEW_SPLASH_SCREEN:
 			_popup_dialog(Global.control.get_node("Dialogs/SplashDialog"))
