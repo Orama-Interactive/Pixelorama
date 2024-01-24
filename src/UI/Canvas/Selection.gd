@@ -88,7 +88,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	var project := Global.current_project
-	if not project.has_selection:
+	if big_bounding_rectangle.size == Vector2i(0, 0):
 		return
 	image_current_pixel = canvas.current_pixel
 	if Global.mirror_view:
@@ -119,6 +119,7 @@ func _input(event: InputEvent) -> void:
 				Global.can_draw = false
 				mouse_pos_on_gizmo_drag = image_current_pixel
 				dragged_gizmo = gizmo_hover
+				original_bitmap.copy_from(Global.current_project.selection_map)
 				if Input.is_action_pressed("transform_move_selection_only"):
 					transform_content_confirm()
 				if not is_moving_content:
@@ -150,6 +151,7 @@ func _input(event: InputEvent) -> void:
 		elif dragged_gizmo:  # Mouse released, deselect gizmo
 			Global.can_draw = true
 			dragged_gizmo = null
+			original_bitmap = SelectionMap.new()
 			if not is_moving_content:
 				commit_undo("Select", undo_data)
 
@@ -362,8 +364,8 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 
 func resize_selection() -> void:
 	var size := big_bounding_rectangle.size.abs()
+	Global.current_project.selection_map.copy_from(original_bitmap)
 	if is_moving_content:
-		Global.current_project.selection_map.copy_from(original_bitmap)
 		preview_image.copy_from(original_preview_image)
 		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 		if temp_rect.size.x < 0:

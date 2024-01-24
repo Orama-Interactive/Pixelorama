@@ -252,6 +252,7 @@ func _on_Size_value_changed(value: Vector2i) -> void:
 
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
+		selection_node.original_bitmap.copy_from(Global.current_project.selection_map)
 	timer.start()
 	selection_node.big_bounding_rectangle.size = value
 	selection_node.resize_selection()
