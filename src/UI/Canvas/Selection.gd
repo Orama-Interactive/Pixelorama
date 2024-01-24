@@ -119,10 +119,10 @@ func _input(event: InputEvent) -> void:
 				Global.can_draw = false
 				mouse_pos_on_gizmo_drag = image_current_pixel
 				dragged_gizmo = gizmo_hover
-				original_bitmap.copy_from(Global.current_project.selection_map)
 				if Input.is_action_pressed("transform_move_selection_only"):
 					transform_content_confirm()
 				if not is_moving_content:
+					original_bitmap.copy_from(Global.current_project.selection_map)
 					if Input.is_action_pressed("transform_move_selection_only"):
 						undo_data = get_undo_data(false)
 						temp_rect = big_bounding_rectangle

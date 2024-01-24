@@ -252,7 +252,8 @@ func _on_Size_value_changed(value: Vector2i) -> void:
 
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
-		selection_node.original_bitmap.copy_from(Global.current_project.selection_map)
+		if not selection_node.is_moving_content:
+			selection_node.original_bitmap.copy_from(Global.current_project.selection_map)
 	timer.start()
 	selection_node.big_bounding_rectangle.size = value
 	selection_node.resize_selection()
@@ -263,5 +264,5 @@ func _on_Size_ratio_toggled(button_pressed: bool) -> void:
 
 
 func _on_Timer_timeout() -> void:
-	if !selection_node.is_moving_content:
+	if not selection_node.is_moving_content:
 		selection_node.commit_undo("Move Selection", undo_data)
