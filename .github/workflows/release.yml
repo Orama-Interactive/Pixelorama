@@ -9,7 +9,7 @@ env:
   GODOT_VERSION_MAC: 3.5.2
   RASPBERRY_PI_BUILDS_VERSION: 1.15.0
   EXPORT_NAME: Pixelorama
-  TAG: v0.11.3
+  TAG: v0.11.4
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:

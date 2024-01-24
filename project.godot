@@ -343,7 +343,7 @@ config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
-config/Version="v0.11.4-dev"
+config/Version="v0.11.4-rc1"
 config/ExtensionsAPI_Version=3
 config/Pxo_Version=2
 
