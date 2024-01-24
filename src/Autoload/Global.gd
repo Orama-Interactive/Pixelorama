@@ -805,11 +805,8 @@ func _renderer_changed(value: int) -> void:
 func dialog_open(open: bool) -> void:
 	var dim_color := Color.WHITE
 	if open:
-		can_draw = false
 		if dim_on_popup:
 			dim_color = Color(0.5, 0.5, 0.5)
-	else:
-		can_draw = true
 
 	var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	tween.tween_property(control, "modulate", dim_color, 0.1)
