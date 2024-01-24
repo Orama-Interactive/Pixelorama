@@ -151,8 +151,8 @@ func _input(event: InputEvent) -> void:
 		elif dragged_gizmo:  # Mouse released, deselect gizmo
 			Global.can_draw = true
 			dragged_gizmo = null
-			original_bitmap = SelectionMap.new()
 			if not is_moving_content:
+				original_bitmap = SelectionMap.new()
 				commit_undo("Select", undo_data)
 
 	if dragged_gizmo:
