@@ -34,7 +34,6 @@ var preview_image_texture := ImageTexture.new()
 var undo_data: Dictionary
 var gizmos: Array[Gizmo] = []
 var dragged_gizmo: Gizmo = null
-var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var resize_keep_ratio := false
 
@@ -53,24 +52,24 @@ class Gizmo:
 		type = _type
 		direction = _direction
 
-	func get_cursor() -> Control.CursorShape:
-		var cursor := Control.CURSOR_MOVE
+	func get_cursor() -> DisplayServer.CursorShape:
+		var cursor := DisplayServer.CURSOR_MOVE
 		if direction == Vector2i.ZERO:
-			return Control.CURSOR_POINTING_HAND
+			return DisplayServer.CURSOR_POINTING_HAND
 		elif direction == Vector2i(-1, -1) or direction == Vector2i(1, 1):  # Top left or bottom right
 			if Global.mirror_view:
-				cursor = Control.CURSOR_BDIAGSIZE
+				cursor = DisplayServer.CURSOR_BDIAGSIZE
 			else:
-				cursor = Control.CURSOR_FDIAGSIZE
+				cursor = DisplayServer.CURSOR_FDIAGSIZE
 		elif direction == Vector2i(1, -1) or direction == Vector2i(-1, 1):  # Top right or bottom left
 			if Global.mirror_view:
-				cursor = Control.CURSOR_FDIAGSIZE
+				cursor = DisplayServer.CURSOR_FDIAGSIZE
 			else:
-				cursor = Control.CURSOR_BDIAGSIZE
+				cursor = DisplayServer.CURSOR_BDIAGSIZE
 		elif direction == Vector2i(0, -1) or direction == Vector2i(0, 1):  # Center top or center bottom
-			cursor = Control.CURSOR_VSIZE
+			cursor = DisplayServer.CURSOR_VSIZE
 		elif direction == Vector2i(-1, 0) or direction == Vector2i(1, 0):  # Center left or center right
-			cursor = Control.CURSOR_HSIZE
+			cursor = DisplayServer.CURSOR_HSIZE
 		return cursor
 
 
@@ -84,12 +83,13 @@ func _ready() -> void:
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(0, 1)))  # Center bottom
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, 1)))  # Bottom left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, 0)))  # Center left
-
-
-#	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
+	#gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
 
 
 func _input(event: InputEvent) -> void:
+	var project := Global.current_project
+	if not project.has_selection:
+		return
 	image_current_pixel = canvas.current_pixel
 	if Global.mirror_view:
 		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
@@ -99,7 +99,6 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_pressed("transformation_cancel"):
 			transform_content_cancel()
 
-	var project := Global.current_project
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if event is InputEventKey:
@@ -129,11 +128,6 @@ func _input(event: InputEvent) -> void:
 					else:
 						transform_content_start()
 					project.selection_offset = Vector2.ZERO
-					if dragged_gizmo.type == Gizmo.Type.ROTATE:
-						var img_size := maxi(
-							original_preview_image.get_width(), original_preview_image.get_height()
-						)
-						original_preview_image.crop(img_size, img_size)
 				else:
 					var prev_temp_rect := temp_rect
 					dragged_gizmo.direction.x *= signi(temp_rect.size.x)
@@ -166,17 +160,17 @@ func _input(event: InputEvent) -> void:
 			_gizmo_rotate()
 	else:  # Set the appropriate cursor
 		if gizmo_hover:
-			Global.main_viewport.mouse_default_cursor_shape = gizmo_hover.get_cursor()
+			DisplayServer.cursor_set_shape(gizmo_hover.get_cursor())
 		else:
-			var cursor := Control.CURSOR_ARROW
+			var cursor := DisplayServer.CURSOR_ARROW
 			if Global.cross_cursor:
-				cursor = Control.CURSOR_CROSS
+				cursor = DisplayServer.CURSOR_CROSS
 			var layer: BaseLayer = project.layers[project.current_layer]
 			if not layer.can_layer_get_drawn():
-				cursor = Control.CURSOR_FORBIDDEN
+				cursor = DisplayServer.CURSOR_FORBIDDEN
 
-			if Global.main_viewport.mouse_default_cursor_shape != cursor:
-				Global.main_viewport.mouse_default_cursor_shape = cursor
+			if DisplayServer.cursor_get_shape() != cursor:
+				DisplayServer.cursor_set_shape(cursor)
 
 
 func _move_with_arrow_keys(event: InputEvent) -> void:
@@ -210,14 +204,14 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 		var move := input.rotated(snappedf(Global.camera.rotation, PI / 2))
 		# These checks are needed to fix a bug where the selection got stuck
 		# to the canvas boundaries when they were 1px away from them
-		if is_equal_approx(absf(move.x), 0.0):
+		if is_zero_approx(absf(move.x)):
 			move.x = 0
-		if is_equal_approx(absf(move.y), 0.0):
+		if is_zero_approx(absf(move.y)):
 			move.y = 0
 		move_content(move * step)
 
 
-# Check if an event is a ui_up/down/left/right event-press
+## Check if an event is a ui_up/down/left/right event pressed
 func _is_action_direction_pressed(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
 		if event.is_action_pressed(action, false, true):
@@ -225,7 +219,7 @@ func _is_action_direction_pressed(event: InputEvent) -> bool:
 	return false
 
 
-# Check if an event is a ui_up/down/left/right event release
+## Check if an event is a ui_up/down/left/right event
 func _is_action_direction(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
 		if event.is_action(action, true):
@@ -233,7 +227,7 @@ func _is_action_direction(event: InputEvent) -> bool:
 	return false
 
 
-# Check if an event is a ui_up/down/left/right event release
+## Check if an event is a ui_up/down/left/right event release
 func _is_action_direction_released(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
 		if event.is_action_released(action, true):
@@ -282,9 +276,9 @@ func _update_gizmos() -> void:
 	)
 
 	# Rotation gizmo (temp)
-#	gizmos[8].rect = Rect2(
-#		Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size
-#	)
+	#gizmos[8].rect = Rect2(
+	#Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size
+	#)
 	queue_redraw()
 
 
@@ -337,8 +331,6 @@ func _gizmo_resize() -> void:
 			temp_rect.position.y = end_y - temp_rect.size.y
 
 	big_bounding_rectangle = temp_rect.abs()
-#	big_bounding_rectangle.position = Vector2(big_bounding_rectangle.position).ceil()
-#	big_bounding_rectangle.size = big_bounding_rectangle.size.floor()
 	if big_bounding_rectangle.size.x == 0:
 		big_bounding_rectangle.size.x = 1
 	if big_bounding_rectangle.size.y == 0:
@@ -390,20 +382,8 @@ func resize_selection() -> void:
 
 func _gizmo_rotate() -> void:  ## Currently unused, as it does not work properly yet
 	var angle := image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
-	angle = deg_to_rad(floorf(rad_to_deg(angle)))
-	if angle == prev_angle:
-		return
-	prev_angle = angle
 	var pivot := Vector2(big_bounding_rectangle.size.x / 2.0, big_bounding_rectangle.size.y / 2.0)
 	preview_image.copy_from(original_preview_image)
-	if original_big_bounding_rectangle.position != big_bounding_rectangle.position:
-		preview_image.fill(Color(0, 0, 0, 0))
-		var pos_diff := (
-			(original_big_bounding_rectangle.position - big_bounding_rectangle.position).abs()
-		)
-		preview_image.blit_rect(
-			original_preview_image, Rect2(Vector2.ZERO, preview_image.get_size()), pos_diff
-		)
 	DrawingAlgos.nn_rotate(preview_image, angle, pivot)
 	preview_image_texture = ImageTexture.create_from_image(preview_image)
 
@@ -421,7 +401,7 @@ func _gizmo_rotate() -> void:  ## Currently unused, as it does not work properly
 	Global.canvas.queue_redraw()
 
 
-func select_rect(rect: Rect2i, operation: int = SelectionOperation.ADD) -> void:
+func select_rect(rect: Rect2i, operation := SelectionOperation.ADD) -> void:
 	var project := Global.current_project
 	# Used only if the selection is outside of the canvas boundaries,
 	# on the left and/or above (negative coords)
