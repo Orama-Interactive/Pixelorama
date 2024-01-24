@@ -209,6 +209,18 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
+[node name="NativeFileDialogsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Use native file dialogs"
+
+[node name="NativeFileDialogs" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
 [node name="ThemesHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
 layout_mode = 2
 theme_override_constants/separation = 0
