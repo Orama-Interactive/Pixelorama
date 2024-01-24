@@ -4,10 +4,24 @@ enum ExportTab { IMAGE = 0, SPRITESHEET = 1 }
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 ## See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG, WEBP, JPEG, GIF, APNG }
+enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
+
+const TEMP_PATH := "user://tmp"
 
 ## List of animated formats
-var animated_formats := [FileFormat.GIF, FileFormat.APNG]
+var animated_formats := [
+	FileFormat.GIF,
+	FileFormat.APNG,
+	FileFormat.MP4,
+	FileFormat.AVI,
+	FileFormat.OGV,
+	FileFormat.MKV,
+	FileFormat.WEBM
+]
+
+var ffmpeg_formats := [
+	FileFormat.MP4, FileFormat.AVI, FileFormat.OGV, FileFormat.MKV, FileFormat.WEBM
+]
 
 ## A dictionary of custom exporter generators (received from extensions)
 var custom_file_formats := {}
@@ -262,23 +276,28 @@ func export_processed_images(
 			return result
 
 	if is_single_file_format(project):
-		var exporter: AImgIOBaseExporter
-		if project.file_format == FileFormat.APNG:
-			exporter = AImgIOAPNGExporter.new()
+		if is_using_ffmpeg(project.file_format):
+			var video_exported := export_video(export_paths)
+			if not video_exported:
+				return false
 		else:
-			exporter = GIFAnimationExporter.new()
-		var details := {
-			"exporter": exporter,
-			"export_dialog": export_dialog,
-			"export_paths": export_paths,
-			"project": project
-		}
-		if not _multithreading_enabled():
-			export_animated(details)
-		else:
-			if gif_export_thread.is_started():
-				gif_export_thread.wait_to_finish()
-			gif_export_thread.start(export_animated.bind(details))
+			var exporter: AImgIOBaseExporter
+			if project.file_format == FileFormat.APNG:
+				exporter = AImgIOAPNGExporter.new()
+			else:
+				exporter = GIFAnimationExporter.new()
+			var details := {
+				"exporter": exporter,
+				"export_dialog": export_dialog,
+				"export_paths": export_paths,
+				"project": project
+			}
+			if not _multithreading_enabled():
+				export_animated(details)
+			else:
+				if gif_export_thread.is_started():
+					gif_export_thread.wait_to_finish()
+				gif_export_thread.start(export_animated.bind(details))
 	else:
 		var succeeded := true
 		for i in range(processed_images.size()):
@@ -331,6 +350,39 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
+	return true
+
+
+## Uses FFMPEG to export a video
+func export_video(export_paths: PackedStringArray) -> bool:
+	DirAccess.make_dir_absolute(TEMP_PATH)
+	var temp_path_real := ProjectSettings.globalize_path(TEMP_PATH)
+	var input_file_path := temp_path_real.path_join("input.txt")
+	var input_file := FileAccess.open(input_file_path, FileAccess.WRITE)
+	for i in range(processed_images.size()):
+		var temp_file_name := str(i + 1).pad_zeros(number_of_digits) + ".png"
+		var temp_file_path := temp_path_real.path_join(temp_file_name)
+		processed_images[i].save_png(temp_file_path)
+		input_file.store_line("file '" + temp_file_name + "'")
+		input_file.store_line("duration %s" % durations[i])
+	input_file.close()
+	var ffmpeg_execute: PackedStringArray = [
+		"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
+	]
+	var output := []
+	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, output, true)
+	print(output)
+	var temp_dir := DirAccess.open(TEMP_PATH)
+	for file in temp_dir.get_files():
+		temp_dir.remove(file)
+	DirAccess.remove_absolute(TEMP_PATH)
+	if success < 0 or success > 1:
+		var fail_text := """Video failed to export. Make sure you have FFMPEG installed
+			and have set the correct path in the preferences."""
+		Global.error_dialog.set_text(tr(fail_text))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return false
 	return true
 
 
@@ -397,6 +449,16 @@ func file_format_string(format_enum: int) -> String:
 			return ".gif"
 		FileFormat.APNG:
 			return ".apng"
+		FileFormat.MP4:
+			return ".mp4"
+		FileFormat.AVI:
+			return ".avi"
+		FileFormat.OGV:
+			return ".ogv"
+		FileFormat.MKV:
+			return ".mkv"
+		FileFormat.WEBM:
+			return ".webm"
 		_:
 			# If a file format description is not found, try generating one
 			if custom_exporter_generators.has(format_enum):
@@ -418,6 +480,16 @@ func file_format_description(format_enum: int) -> String:
 			return "GIF Image"
 		FileFormat.APNG:
 			return "APNG Image"
+		FileFormat.MP4:
+			return "MPEG-4 Video"
+		FileFormat.AVI:
+			return "AVI Video"
+		FileFormat.OGV:
+			return "OGV Video"
+		FileFormat.MKV:
+			return "Matroska Video"
+		FileFormat.WEBM:
+			return "WebM Video"
 		_:
 			# If a file format description is not found, try generating one
 			for key in custom_file_formats.keys():
@@ -426,10 +498,23 @@ func file_format_description(format_enum: int) -> String:
 			return ""
 
 
-## True when exporting to .gif and .apng (and potentially video formats in the future)
-## False when exporting to .png, and other non-animated formats in the future
+## True when exporting to .gif, .apng and video
+## False when exporting to .png, .jpg and static .webp
 func is_single_file_format(project := Global.current_project) -> bool:
 	return animated_formats.has(project.file_format)
+
+
+func is_using_ffmpeg(format: FileFormat) -> bool:
+	return ffmpeg_formats.has(format)
+
+
+func is_ffmpeg_installed() -> bool:
+	if Global.ffmpeg_path.is_empty():
+		return false
+	var ffmpeg_executed := OS.execute(Global.ffmpeg_path, [])
+	if ffmpeg_executed == 0 or ffmpeg_executed == 1:
+		return true
+	return false
 
 
 func _create_export_path(multifile: bool, project: Project, frame := 0) -> String:

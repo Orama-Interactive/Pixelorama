@@ -131,6 +131,8 @@ var show_y_symmetry_axis := false
 var open_last_project := false
 ## Found in Preferences. If [code]true[/code], asks for permission to quit on exit.
 var quit_confirmation := false
+## Found in Preferences. Refers to the ffmpeg location path.
+var ffmpeg_path := ""
 ## Found in Preferences. If [code]true[/code], the zoom is smooth.
 var smooth_zoom := true
 ## Found in Preferences. If [code]true[/code], the zoom is restricted to integral multiples of 100%.
