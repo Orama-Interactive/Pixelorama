@@ -117,8 +117,6 @@ var current_project_index := 0:
 var can_draw := false
 ## (Intended to be used as getter only) Tells if the user allowed to move the guide while on canvas.
 var move_guides_on_canvas := true
-## Tells if the canvas in currently in focus.
-var has_focus := false
 
 var play_only_tags := true  ## If [code]true[/code], animation plays only on frames of the same tag.
 ## (Intended to be used as getter only) Tells if the x-symmetry guide ( -- ) is visible.

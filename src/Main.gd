@@ -206,7 +206,6 @@ func _notification(what: int) -> void:
 		# If the mouse exits the window and another application has the focus,
 		# pause the application
 		NOTIFICATION_APPLICATION_FOCUS_OUT:
-			Global.has_focus = false
 			if Global.pause_when_unfocused:
 				get_tree().paused = true
 		NOTIFICATION_WM_MOUSE_EXIT:
@@ -217,12 +216,6 @@ func _notification(what: int) -> void:
 			get_tree().paused = false
 		NOTIFICATION_APPLICATION_FOCUS_IN:
 			get_tree().paused = false
-			var mouse_pos := get_global_mouse_position()
-			var viewport_rect := Rect2(
-				Global.main_viewport.global_position, Global.main_viewport.size
-			)
-			if viewport_rect.has_point(mouse_pos):
-				Global.has_focus = true
 
 
 func _on_files_dropped(files: PackedStringArray) -> void:
