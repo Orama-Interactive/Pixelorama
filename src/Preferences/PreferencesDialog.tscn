@@ -1320,7 +1320,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AddExtensionFileDialog" type="FileDialog" parent="Popups"]
+[node name="AddExtensionFileDialog" type="FileDialog" parent="Popups" groups=["FileDialogs"]]
 mode = 1
 title = "Open File(s)"
 size = Vector2i(560, 400)

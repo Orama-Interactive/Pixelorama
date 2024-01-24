@@ -306,7 +306,7 @@ offset_right = 692.0
 offset_bottom = 551.0
 mouse_filter = 2
 
-[node name="PathDialog" type="FileDialog" parent="Popups"]
+[node name="PathDialog" type="FileDialog" parent="Popups" groups=["FileDialogs"]]
 mode = 2
 title = "Open a Directory"
 size = Vector2i(675, 500)

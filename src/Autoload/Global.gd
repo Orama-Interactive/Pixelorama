@@ -148,16 +148,23 @@ var integer_zoom := false:
 			zoom_slider.step = 1
 		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
-## Found in Preferences. The scale of the Interface.
+## Found in Preferences. The scale of the interface.
 var shrink := 1.0
-## Found in Preferences. The font size used by the Interface.
+## Found in Preferences. The font size used by the interface.
 var font_size := 16:
 	set(value):
 		font_size = value
 		control.theme.default_font_size = value
 		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
-## Found in Preferences. If [code]true[/code], the Interface dims on popups.
+## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
+var use_native_file_dialogs := false:
+	set(value):
+		use_native_file_dialogs = value
+		if not is_inside_tree():
+			await tree_entered
+			await get_tree().process_frame
+		get_tree().set_group(&"FileDialogs", "use_native_dialog", value)
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
 ## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
@@ -1055,6 +1062,7 @@ func create_ui_for_shader_uniforms(
 				file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 				file_dialog.size = Vector2(384, 281)
 				file_dialog.file_selected.connect(file_selected.bind(u_name))
+				file_dialog.use_native_dialog = use_native_file_dialogs
 				var button := Button.new()
 				button.text = "Load texture"
 				button.pressed.connect(file_dialog.popup_centered)

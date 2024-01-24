@@ -53,7 +53,7 @@ text = "No shader loaded!"
 [node name="ShaderParams" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
 access = 2
 filters = PackedStringArray("*gdshader; Godot Shader File")
 show_hidden_files = true
