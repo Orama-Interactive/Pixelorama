@@ -13,6 +13,11 @@ var is_pasting := false
 var big_bounding_rectangle := Rect2i():
 	set(value):
 		big_bounding_rectangle = value
+		if value.size == Vector2i(0, 0):
+			set_process_input(false)
+			Global.can_draw = true
+		else:
+			set_process_input(true)
 		for slot in Tools._slots.values():
 			if slot.tool_node is BaseSelectionTool:
 				slot.tool_node.set_spinbox_values()
@@ -88,8 +93,6 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	var project := Global.current_project
-	if big_bounding_rectangle.size == Vector2i(0, 0):
-		return
 	image_current_pixel = canvas.current_pixel
 	if Global.mirror_view:
 		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
@@ -123,6 +126,7 @@ func _input(event: InputEvent) -> void:
 					transform_content_confirm()
 				if not is_moving_content:
 					original_bitmap.copy_from(Global.current_project.selection_map)
+					original_big_bounding_rectangle = big_bounding_rectangle
 					if Input.is_action_pressed("transform_move_selection_only"):
 						undo_data = get_undo_data(false)
 						temp_rect = big_bounding_rectangle
@@ -387,19 +391,18 @@ func resize_selection() -> void:
 
 func _gizmo_rotate() -> void:  ## Currently unused, as it does not work properly yet
 	var angle := image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
-	var pivot := Vector2(big_bounding_rectangle.size.x / 2.0, big_bounding_rectangle.size.y / 2.0)
-	preview_image.copy_from(original_preview_image)
-	DrawingAlgos.nn_rotate(preview_image, angle, pivot)
-	preview_image_texture = ImageTexture.create_from_image(preview_image)
+	if is_moving_content:
+		var pivot := Vector2(big_bounding_rectangle.size.x / 2.0, big_bounding_rectangle.size.y / 2.0)
+		preview_image.copy_from(original_preview_image)
+		DrawingAlgos.nn_rotate(preview_image, angle, pivot)
+		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
-	var bitmap_image := SelectionMap.new()
-	bitmap_image.copy_from(original_bitmap)
+	Global.current_project.selection_map.copy_from(original_bitmap)
 	var bitmap_pivot := (
 		original_big_bounding_rectangle.position
 		+ ((original_big_bounding_rectangle.end - original_big_bounding_rectangle.position) / 2)
 	)
-	DrawingAlgos.nn_rotate(bitmap_image, angle, bitmap_pivot)
-	Global.current_project.selection_map.copy_from(bitmap_image)
+	DrawingAlgos.nn_rotate(Global.current_project.selection_map, angle, bitmap_pivot)
 	Global.current_project.selection_map_changed()
 	big_bounding_rectangle = Global.current_project.selection_map.get_used_rect()
 	queue_redraw()
