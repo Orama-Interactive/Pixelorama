@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2024-01-09 22:34\n"
+"PO-Revision-Date: 2024-01-24 03:28\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -752,6 +752,10 @@ msgid "Display scale:"
 msgstr ""
 
 msgid "Dim interface on dialog popup"
+msgstr ""
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
+msgid "Use native file dialogs"
 msgstr ""
 
 msgid "Dark"
@@ -2314,6 +2318,10 @@ msgid "Opens last opened project on startup"
 msgstr ""
 
 msgid "Quit confirmation"
+msgstr ""
+
+#. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
+msgid "FFMPEG path"
 msgstr ""
 
 msgid "Enable autosave"
