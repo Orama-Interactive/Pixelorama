@@ -177,9 +177,6 @@ func serialize() -> Dictionary:
 
 
 func deserialize(dict: Dictionary) -> void:
-	if dict.has("pxo_version"):
-		if dict["pxo_version"] == 3:  # It's a 1.x project convert it to 0.x format
-			convert_1x_to_0x(dict)
 	.deserialize(dict)
 	scene_properties = dict["scene_properties"]
 	var objects_copy = dict["object_properties"]
@@ -196,70 +193,6 @@ func deserialize(dict: Dictionary) -> void:
 	deserialize_scene_properties()
 	for object in object_properties:
 		_add_object_node(object)
-
-
-## Used to convert 3d cels found in projects exported from a 0.x version to 1.x
-func convert_1x_to_0x(dict: Dictionary) -> void:
-	# Converting the scene dictionary
-	var scene_dict: Dictionary = dict["scene_properties"]
-	scene_dict["camera_transform"] = str2var(
-		scene_dict["camera_transform"].replace("Transform3D", "Transform")
-	)
-	scene_dict["camera_projection"] = str2var(scene_dict["camera_projection"])
-	scene_dict["camera_fov"] = str2var(scene_dict["camera_fov"])
-	scene_dict["camera_size"] = str2var(scene_dict["camera_size"])
-	scene_dict["ambient_light_color"] = str2var(scene_dict["ambient_light_color"])
-	scene_dict["ambient_light_energy"] = str2var(scene_dict["ambient_light_energy"])
-	# Converting the objects dictionary
-	var objects_copy: Dictionary = dict["object_properties"]
-	for object_id_as_str in objects_copy.keys():
-		objects_copy[object_id_as_str] = str2var(
-			objects_copy[object_id_as_str].replace("Transform3D", "Transform")
-		)
-		# we are using a separate variable to make it easy to write
-		var object_info: Dictionary = objects_copy[object_id_as_str]
-		# Special operations to adjust gizmo
-		# take note of origin
-		var origin = object_info["transform"].origin
-		match object_info["type"]:
-			0:  # BOX
-				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
-				object_info["transform"].origin = origin
-				object_info["mesh_size"] *= 2
-			1:  # SPHERE
-				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
-				object_info["transform"].origin = origin
-				object_info["mesh_radius"] *= 2
-				object_info["mesh_height"] *= 2
-			2:  # CAPSULE
-				object_info["transform"] = object_info["transform"].scaled(-(Vector3.ONE / 2))
-				var basis = object_info["transform"].basis
-				var new_transform: Transform = Transform(basis.x, -basis.z, -basis.y, origin)
-				object_info["transform"] = new_transform
-				object_info["transform"].origin = origin
-				object_info["mesh_radius"] *= 2
-				object_info["mesh_mid_height"] = (
-					object_info["mesh_height"]
-					- (object_info["mesh_radius"] / 2)
-				)
-			3:  # CYLINDER
-				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
-				object_info["transform"].origin = origin
-				object_info["mesh_height"] *= 2
-				object_info["mesh_bottom_radius"] *= 2
-				object_info["mesh_top_radius"] *= 2
-			4:  # PRISM
-				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
-				object_info["transform"].origin = origin
-				object_info["mesh_size"] *= 2
-			6:  # PLANE
-				object_info["transform"] = object_info["transform"].scaled(Vector3.ONE / 2)
-				object_info["transform"].origin = origin
-				object_info["mesh_sizev2"] *= 2
-			_:
-				if not "shadow_color" in object_info.keys():
-					object_info["shadow_color"] = Color.black
-		objects_copy[object_id_as_str] = objects_copy[object_id_as_str]
 
 
 func on_remove() -> void:

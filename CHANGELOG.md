@@ -44,7 +44,6 @@ Built using Godot 3.5.2
 ### Fixed
 - Fixed undo/redo history not working when the tool changes. [#916](https://github.com/Orama-Interactive/Pixelorama/pull/916)
 - Pixelorama no longer closes when the project fails to be saved if "Save & Exit" is selected. [#920](https://github.com/Orama-Interactive/Pixelorama/pull/920)
-- Projects with 3D cels saved in 1.x can now be opened in 0.11.3. [#928](https://github.com/Orama-Interactive/Pixelorama/pull/928)
 
 ## [v0.11.2] - 2023-08-31
 This update has been brought to you by the contributions of:

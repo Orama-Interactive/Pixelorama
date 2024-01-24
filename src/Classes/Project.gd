@@ -380,8 +380,6 @@ func deserialize(dict: Dictionary) -> void:
 						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
 						cels.append(Cel3D.new(size, true))
-				if dict.has("pxo_version"):
-					cel["pxo_version"] = dict["pxo_version"]
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
