@@ -364,7 +364,10 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 
 func resize_selection() -> void:
 	var size := big_bounding_rectangle.size.abs()
-	Global.current_project.selection_map.copy_from(original_bitmap)
+	if original_bitmap.is_empty():
+		print("original_bitmap is empty, this shouldn't happen.")
+	else:
+		Global.current_project.selection_map.copy_from(original_bitmap)
 	if is_moving_content:
 		preview_image.copy_from(original_preview_image)
 		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
