@@ -817,6 +817,12 @@ func dialog_open(open: bool) -> void:
 	tween.tween_property(control, "modulate", dim_color, 0.1)
 
 
+func popup_error(text: String) -> void:
+	error_dialog.set_text(text)
+	error_dialog.popup_centered()
+	dialog_open(true)
+
+
 ## sets the [member BaseButton.disabled] property of the [param button] to [param disable],
 ## changes the cursor shape for it accordingly, and dims/brightens any textures it may have.
 func disable_button(button: BaseButton, disable: bool) -> void:

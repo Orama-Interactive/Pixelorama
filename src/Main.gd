@@ -248,9 +248,7 @@ func load_last_project() -> void:
 			Global.config_cache.set_value("data", "current_dir", file_path.get_base_dir())
 		else:
 			# If file doesn't exist on disk then warn user about this
-			Global.error_dialog.set_text("Cannot find last project file.")
-			Global.error_dialog.popup_centered()
-			Global.dialog_open(true)
+			Global.popup_error("Cannot find last project file.")
 
 
 func load_recent_project_file(path: String) -> void:
@@ -266,9 +264,7 @@ func load_recent_project_file(path: String) -> void:
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 	else:
 		# If file doesn't exist on disk then warn user about this
-		Global.error_dialog.set_text("Cannot find project file.")
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error("Cannot find project file.")
 
 
 func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:

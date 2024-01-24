@@ -441,11 +441,7 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 			new_palette_imported.emit()
 			select_palette(palette.name)
 	else:
-		Global.error_dialog.set_text(
-			tr("Can't load file '%s'.\nThis is not a valid palette file.") % [path]
-		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error(tr("Can't load file '%s'.\nThis is not a valid palette file.") % [path])
 
 
 ## Refer to app/core/gimppalette-load.c of the GNU Image Manipulation Program for the "living spec"

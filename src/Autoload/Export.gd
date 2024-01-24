@@ -330,11 +330,9 @@ func export_processed_images(
 				elif project.file_format == FileFormat.JPEG:
 					err = processed_images[i].save_jpg(export_paths[i])
 				if err != OK:
-					Global.error_dialog.set_text(
+					Global.popup_error(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 					)
-					Global.error_dialog.popup_centered()
-					Global.dialog_open(true)
 					succeeded = false
 		if succeeded:
 			Global.notification_label("File(s) exported")
@@ -379,9 +377,7 @@ func export_video(export_paths: PackedStringArray) -> bool:
 	if success < 0 or success > 1:
 		var fail_text := """Video failed to export. Make sure you have FFMPEG installed
 			and have set the correct path in the preferences."""
-		Global.error_dialog.set_text(tr(fail_text))
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error(tr(fail_text))
 		return false
 	return true
 
