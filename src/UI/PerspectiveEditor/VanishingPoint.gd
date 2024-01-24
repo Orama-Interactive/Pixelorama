@@ -75,7 +75,6 @@ func _input(_event: InputEvent):
 	if (
 		Input.is_action_just_pressed("left_mouse")
 		and Global.can_draw
-		and Global.has_focus
 		and mouse_point.distance_to(start) < 8 / Global.camera.zoom.x
 	):
 		if (

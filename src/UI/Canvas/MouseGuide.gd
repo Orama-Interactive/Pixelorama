@@ -29,7 +29,7 @@ func draw_guide_line():
 
 
 func _input(event: InputEvent) -> void:
-	if !Global.show_mouse_guides or !Global.can_draw or !Global.has_focus:
+	if !Global.show_mouse_guides or !Global.can_draw:
 		visible = false
 		return
 	visible = true
