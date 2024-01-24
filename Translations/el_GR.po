@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-01-24 17:10\n"
+"PO-Revision-Date: 2024-01-24 19:39\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -761,19 +761,19 @@ msgstr "Σκοτείνιασμα περιβάλλοντος όταν εμφαν�
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr "Χρήση εγγενών διαλόγων αρχείων"
+msgstr "Χρήση εγγενών παραθύρων αρχείων"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Όταν αυτή η ρύθμιση είναι ενεργοποιημένη, χρησιμοποιούνται τα εγγενή παράθυρα αρχείων του λειτουργικού συστήματος, αντί των παραθύρων του Pixelorama."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Λειτουργία ενός παραθύρου"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Όταν αυτή η ρύθμιση είναι ενεργοποιημένη, τα υποπαράθυρα του Pixelorama θα ενσωματωθούν στο κύριο παράθυρο, αλλιώς κάθε παράθυρο θα είναι ξεχωριστό."
 
 msgid "Dark"
 msgstr "Σκούρο"
