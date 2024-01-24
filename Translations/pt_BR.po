@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-01-24 03:28\n"
+"PO-Revision-Date: 2024-01-24 17:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -760,6 +760,18 @@ msgstr "Escurecer a interface em um pop-up de diálogo"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Use native file dialogs" option.
+msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
+msgstr ""
+
+#. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
+msgid "Single window mode"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Single window mode" option.
+msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr ""
 
 msgid "Dark"
