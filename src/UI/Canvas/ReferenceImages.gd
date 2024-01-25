@@ -55,7 +55,6 @@ func _input(event: InputEvent) -> void:
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 
 	if !ri:
-		Global.can_draw = true
 		return
 
 	# Check if want to cancelthe reference transform

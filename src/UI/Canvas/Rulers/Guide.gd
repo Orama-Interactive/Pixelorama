@@ -39,7 +39,6 @@ func _input(_event: InputEvent) -> void:
 	if (
 		Input.is_action_just_pressed(&"left_mouse")
 		and Global.can_draw
-		and Global.has_focus
 		and rect.has_point(mouse_pos)
 	):
 		if (

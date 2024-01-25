@@ -3,11 +3,17 @@ extends FlowContainer
 var pen_inverted := false
 
 
+func _ready() -> void:
+	# Ensure to only call _input() if the cursor is inside the main canvas viewport
+	Global.main_viewport.mouse_entered.connect(set_process_input.bind(true))
+	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		pen_inverted = event.pen_inverted
 		return
-	if not Global.has_focus or not Global.can_draw:
+	if not Global.can_draw:
 		return
 	for action in ["undo", "redo"]:
 		if event.is_action_pressed(action):

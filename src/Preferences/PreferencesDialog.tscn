@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3hkjj3s6pe4x"]
+[gd_scene load_steps=10 format=3 uid="uid://b3hkjj3s6pe4x"]
 
 [ext_resource type="Script" path="res://src/Preferences/PreferencesDialog.gd" id="1"]
 [ext_resource type="Script" path="res://src/Preferences/HandleExtensions.gd" id="2"]
@@ -7,11 +7,13 @@
 [ext_resource type="Script" path="res://src/Preferences/HandleThemes.gd" id="5"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="7"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/Store.tscn" id="8_jmnx8"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
 title = "Preferences"
+position = Vector2i(0, 36)
 size = Vector2i(800, 500)
 exclusive = false
 popup_window = true
@@ -28,7 +30,7 @@ offset_bottom = -49.0
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 theme_override_constants/autohide = 0
-split_offset = 150
+split_offset = 125
 
 [node name="List" type="ItemList" parent="HSplitContainer"]
 custom_minimum_size = Vector2(85, 0)
@@ -89,6 +91,13 @@ text = "Quit confirmation"
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "On"
+
+[node name="FFMPEGPathLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/StartupContainer"]
+layout_mode = 2
+text = "FFMPEG path"
+
+[node name="FFMPEGPath" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/StartupContainer"]
+layout_mode = 2
 
 [node name="Language" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
 visible = false
@@ -196,6 +205,32 @@ text = "Dim interface on dialog popup"
 [node name="DimCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
+[node name="NativeFileDialogsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Use native file dialogs"
+
+[node name="NativeFileDialogs" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
+[node name="SingleWindowModeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Single window mode"
+
+[node name="SingleWindowMode" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
@@ -1076,6 +1111,7 @@ tooltip_text = "Specifies the tablet driver being used on Windows. If you have W
 mouse_default_cursor_shape = 2
 
 [node name="Extensions" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 script = ExtResource("2")
@@ -1092,6 +1128,10 @@ text = "Extensions"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Explore" type="Button" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader"]
+layout_mode = 2
+text = "Explore Online"
 
 [node name="InstalledExtensions" type="ItemList" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions"]
 layout_mode = 2
@@ -1293,9 +1333,20 @@ layout_mode = 2
 layout_mode = 2
 text = "Pixelorama must be restarted for changes to take effect."
 
-[node name="Popups" type="Node" parent="."]
+[node name="Popups" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="AddExtensionFileDialog" type="FileDialog" parent="Popups"]
+[node name="AddExtensionFileDialog" type="FileDialog" parent="Popups" groups=["FileDialogs"]]
 mode = 1
 title = "Open File(s)"
 size = Vector2i(560, 400)
@@ -1306,6 +1357,9 @@ file_mode = 1
 access = 2
 filters = PackedStringArray("*.pck ; Godot Resource Pack File", "*.zip ;")
 show_hidden_files = true
+
+[node name="Store" parent="Popups" instance=ExtResource("8_jmnx8")]
+transient = true
 
 [node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
@@ -1329,6 +1383,7 @@ vertical_alignment = 1
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Language/System Language" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Language" method="_on_Language_pressed" binds= [1]]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer/ShrinkApplyButton" to="." method="_on_ShrinkApplyButton_pressed"]
+[connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader/Explore" to="Popups/Store" method="_on_explore_pressed"]
 [connection signal="empty_clicked" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/InstalledExtensions" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_InstalledExtensions_empty_clicked"]
 [connection signal="item_selected" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/InstalledExtensions" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_InstalledExtensions_item_selected"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/AddExtensionButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_AddExtensionButton_pressed"]

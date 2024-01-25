@@ -773,7 +773,7 @@ script = ExtResource("5")
 wait_time = 0.2
 one_shot = true
 
-[node name="LoadModelDialog" type="FileDialog" parent="." index="6"]
+[node name="LoadModelDialog" type="FileDialog" parent="." index="6" groups=["FileDialogs"]]
 mode = 1
 title = "Open File(s)"
 size = Vector2i(558, 300)

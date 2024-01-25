@@ -117,8 +117,6 @@ var current_project_index := 0:
 var can_draw := false
 ## (Intended to be used as getter only) Tells if the user allowed to move the guide while on canvas.
 var move_guides_on_canvas := true
-## Tells if the canvas in currently in focus.
-var has_focus := false
 
 var play_only_tags := true  ## If [code]true[/code], animation plays only on frames of the same tag.
 ## (Intended to be used as getter only) Tells if the x-symmetry guide ( -- ) is visible.
@@ -131,6 +129,8 @@ var show_y_symmetry_axis := false
 var open_last_project := false
 ## Found in Preferences. If [code]true[/code], asks for permission to quit on exit.
 var quit_confirmation := false
+## Found in Preferences. Refers to the ffmpeg location path.
+var ffmpeg_path := ""
 ## Found in Preferences. If [code]true[/code], the zoom is smooth.
 var smooth_zoom := true
 ## Found in Preferences. If [code]true[/code], the zoom is restricted to integral multiples of 100%.
@@ -148,16 +148,33 @@ var integer_zoom := false:
 			zoom_slider.step = 1
 		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
-## Found in Preferences. The scale of the Interface.
+## Found in Preferences. The scale of the interface.
 var shrink := 1.0
-## Found in Preferences. The font size used by the Interface.
+## Found in Preferences. The font size used by the interface.
 var font_size := 16:
 	set(value):
 		font_size = value
 		control.theme.default_font_size = value
 		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
-## Found in Preferences. If [code]true[/code], the Interface dims on popups.
+## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
+## Found in Preferences. If [code]true[/code], the native file dialogs of the
+## operating system are being used, instead of Godot's FileDialog node.
+var use_native_file_dialogs := false:
+	set(value):
+		use_native_file_dialogs = value
+		if not is_inside_tree():
+			await tree_entered
+			await get_tree().process_frame
+		get_tree().set_group(&"FileDialogs", "use_native_dialog", value)
+## Found in Preferences. If [code]true[/code], subwindows are embedded in the main window.
+var single_window_mode := true:
+	set(value):
+		single_window_mode = value
+		if OS.has_feature("editor"):
+			return
+		ProjectSettings.set_setting("display/window/subwindows/embed_subwindows", value)
+		ProjectSettings.save_custom(OVERRIDE_FILE)
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
 ## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
@@ -535,6 +552,7 @@ func _init() -> void:
 				data_directories.append(default_loc.path_join(HOME_SUBDIR_NAME))
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
+	single_window_mode = ProjectSettings.get_setting("display/window/subwindows/embed_subwindows")
 
 
 func _ready() -> void:
@@ -769,9 +787,7 @@ func undo_or_redo(
 					if current_cel is Cel3D:
 						current_cel.size_changed(project.size)
 					else:
-						current_cel.image_texture = ImageTexture.create_from_image(
-							current_cel.get_image()
-						)
+						current_cel.image_texture.set_image(current_cel.get_image())
 			canvas.camera_zoom()
 			canvas.grid.queue_redraw()
 			canvas.pixel_grid.queue_redraw()
@@ -807,14 +823,17 @@ func _renderer_changed(value: int) -> void:
 func dialog_open(open: bool) -> void:
 	var dim_color := Color.WHITE
 	if open:
-		can_draw = false
 		if dim_on_popup:
 			dim_color = Color(0.5, 0.5, 0.5)
-	else:
-		can_draw = true
 
 	var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	tween.tween_property(control, "modulate", dim_color, 0.1)
+
+
+func popup_error(text: String) -> void:
+	error_dialog.set_text(text)
+	error_dialog.popup_centered()
+	dialog_open(true)
 
 
 ## sets the [member BaseButton.disabled] property of the [param button] to [param disable],
@@ -1054,6 +1073,7 @@ func create_ui_for_shader_uniforms(
 				file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 				file_dialog.size = Vector2(384, 281)
 				file_dialog.file_selected.connect(file_selected.bind(u_name))
+				file_dialog.use_native_dialog = use_native_file_dialogs
 				var button := Button.new()
 				button.text = "Load texture"
 				button.pressed.connect(file_dialog.popup_centered)

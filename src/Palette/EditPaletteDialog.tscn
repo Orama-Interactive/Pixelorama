@@ -115,7 +115,7 @@ text = "Delete Palette?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExportFileDialog" type="FileDialog" parent="."]
+[node name="ExportFileDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
 size = Vector2i(677, 400)
 access = 2
 filters = PackedStringArray("*.png ; PNG Image", "*.jpg,*.jpeg ; JPEG Image", "*.webp ; WebP Image")

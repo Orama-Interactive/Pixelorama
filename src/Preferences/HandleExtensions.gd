@@ -212,9 +212,7 @@ func read_extension(extension_file_or_folder_name: StringName, internal := false
 					"\n",
 					"But Pixelorama's API version is: %s" % ExtensionsApi.get_api_version()
 				)
-				Global.error_dialog.set_text(str(err_text, required_text))
-				Global.error_dialog.popup_centered()
-				Global.dialog_open(true)
+				Global.popup_error(str(err_text, required_text))
 				print("Incompatible API")
 				if !internal:  # the file isn't created for internal extensions, no need for removal
 					# Don't put it in faulty, (it's merely incompatible)

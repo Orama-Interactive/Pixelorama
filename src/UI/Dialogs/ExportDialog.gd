@@ -13,7 +13,12 @@ var image_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.WEBP,
 	Export.FileFormat.JPEG,
 	Export.FileFormat.GIF,
-	Export.FileFormat.APNG
+	Export.FileFormat.APNG,
+	Export.FileFormat.MP4,
+	Export.FileFormat.AVI,
+	Export.FileFormat.OGV,
+	Export.FileFormat.MKV,
+	Export.FileFormat.WEBM,
 ]
 var spritesheet_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG
@@ -188,6 +193,12 @@ func set_file_format_selector() -> void:
 	match Export.current_tab:
 		Export.ExportTab.IMAGE:
 			_set_file_format_selector_suitable_file_formats(image_exports)
+			if Export.is_ffmpeg_installed():
+				for format in Export.ffmpeg_formats:
+					file_format_options.set_item_disabled(format, false)
+			else:
+				for format in Export.ffmpeg_formats:
+					file_format_options.set_item_disabled(format, true)
 		Export.ExportTab.SPRITESHEET:
 			_set_file_format_selector_suitable_file_formats(spritesheet_exports)
 
@@ -246,9 +257,9 @@ func update_dimensions_label() -> void:
 
 func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 	# 0 is invalid path, 1 is invalid name
-	var error_text := "DirAccess path and file name are not valid!"
+	var error_text := "Directory path and file name are not valid!"
 	if path_or_name == 0:
-		error_text = "DirAccess path is not valid!"
+		error_text = "Directory path is not valid!"
 	elif path_or_name == 1:
 		error_text = "File name is not valid!"
 

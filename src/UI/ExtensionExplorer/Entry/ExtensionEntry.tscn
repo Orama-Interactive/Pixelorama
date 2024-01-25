@@ -1,0 +1,125 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnjpemuehkxsn"]
+
+[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.gd" id="1_3no3v"]
+[ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2_qhsve"]
+
+[node name="ExtensionEntry" type="Panel"]
+self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
+custom_minimum_size = Vector2(300, 150)
+offset_right = 284.0
+offset_bottom = 150.0
+size_flags_horizontal = 3
+script = ExtResource("1_3no3v")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Picture" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_qhsve")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExtensionName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Extension Name..."
+
+[node name="ExtensionDescription" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Description"
+editable = false
+wrap_mode = 1
+
+[node name="Done" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.337255, 1, 0, 1)
+layout_mode = 2
+text = "Done!!!"
+
+[node name="DoneDelay" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/Done"]
+wait_time = 2.0
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ProgressTimer" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar"]
+wait_time = 0.1
+
+[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Download"
+
+[node name="RequestDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+autostart = true
+
+[node name="ImageRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="DownloadRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="Alert" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+size = Vector2i(421, 106)
+
+[node name="Text" type="Label" parent="Alert"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+horizontal_alignment = 1
+
+[node name="EnlardedThumbnail" type="Window" parent="."]
+position = Vector2i(0, 36)
+size = Vector2i(440, 360)
+visible = false
+transient = true
+exclusive = true
+
+[node name="Enlarged" type="TextureRect" parent="EnlardedThumbnail"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[connection signal="timeout" from="MarginContainer/HBoxContainer/VBoxContainer/Done/DoneDelay" to="." method="_on_DoneDelay_timeout"]
+[connection signal="timeout" from="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer" to="." method="_on_ProgressTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/DownloadButton" to="." method="_on_Download_pressed"]
+[connection signal="timeout" from="RequestDelay" to="." method="_on_RequestDelay_timeout"]
+[connection signal="request_completed" from="ImageRequest" to="." method="_on_ImageRequest_request_completed"]
+[connection signal="request_completed" from="DownloadRequest" to="." method="_on_DownloadRequest_request_completed"]
+[connection signal="close_requested" from="Alert" to="." method="_manage_alert_close"]
+[connection signal="focus_exited" from="Alert" to="." method="_manage_alert_close"]
+[connection signal="close_requested" from="EnlardedThumbnail" to="." method="_manage_enlarded_thumbnail_close"]
+[connection signal="focus_exited" from="EnlardedThumbnail" to="." method="_manage_enlarded_thumbnail_close"]
