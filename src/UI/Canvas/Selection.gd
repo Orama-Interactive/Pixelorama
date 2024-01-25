@@ -39,6 +39,8 @@ var preview_image_texture := ImageTexture.new()
 var undo_data: Dictionary
 var gizmos: Array[Gizmo] = []
 var dragged_gizmo: Gizmo = null
+var angle := 0.0
+var content_pivot := Vector2.ZERO
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var resize_keep_ratio := false
 
@@ -158,6 +160,7 @@ func _input(event: InputEvent) -> void:
 			if not is_moving_content:
 				original_bitmap = SelectionMap.new()
 				commit_undo("Select", undo_data)
+				angle = 0.0
 
 	if dragged_gizmo:
 		if dragged_gizmo.type == Gizmo.Type.SCALE:
@@ -373,28 +376,14 @@ func resize_selection() -> void:
 	else:
 		Global.current_project.selection_map.copy_from(original_bitmap)
 	if is_moving_content:
+		content_pivot = original_big_bounding_rectangle.size / 2.0
 		preview_image.copy_from(original_preview_image)
+		DrawingAlgos.nn_rotate(preview_image, angle, content_pivot)
 		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 		if temp_rect.size.x < 0:
 			preview_image.flip_x()
 		if temp_rect.size.y < 0:
 			preview_image.flip_y()
-		preview_image_texture = ImageTexture.create_from_image(preview_image)
-
-	Global.current_project.selection_map.resize_bitmap_values(
-		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
-	)
-	Global.current_project.selection_map_changed()
-	queue_redraw()
-	Global.canvas.queue_redraw()
-
-
-func _gizmo_rotate() -> void:  ## Currently unused, as it does not work properly yet
-	var angle := image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
-	if is_moving_content:
-		var pivot := Vector2(big_bounding_rectangle.size.x / 2.0, big_bounding_rectangle.size.y / 2.0)
-		preview_image.copy_from(original_preview_image)
-		DrawingAlgos.nn_rotate(preview_image, angle, pivot)
 		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
 	Global.current_project.selection_map.copy_from(original_bitmap)
@@ -403,10 +392,17 @@ func _gizmo_rotate() -> void:  ## Currently unused, as it does not work properly
 		+ ((original_big_bounding_rectangle.end - original_big_bounding_rectangle.position) / 2)
 	)
 	DrawingAlgos.nn_rotate(Global.current_project.selection_map, angle, bitmap_pivot)
+	Global.current_project.selection_map.resize_bitmap_values(
+		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
+	)
 	Global.current_project.selection_map_changed()
-	big_bounding_rectangle = Global.current_project.selection_map.get_used_rect()
 	queue_redraw()
 	Global.canvas.queue_redraw()
+
+
+func _gizmo_rotate() -> void:
+	angle = image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
+	resize_selection()
 
 
 func select_rect(rect: Rect2i, operation := SelectionOperation.ADD) -> void:
@@ -496,15 +492,15 @@ func transform_content_confirm() -> void:
 		return
 	var project := Global.current_project
 	for cel in _get_selected_draw_cels():
-		var cel_image: Image = cel.get_image()
-		var src: Image = preview_image
+		var cel_image := cel.get_image()
+		var src := Image.new()
+		src.copy_from(preview_image)
 		if not is_pasting:
 			src.copy_from(cel.transformed_content)
 			cel.transformed_content = null
+			DrawingAlgos.nn_rotate(src, angle, content_pivot)
 			src.resize(
-				big_bounding_rectangle.size.x,
-				big_bounding_rectangle.size.y,
-				Image.INTERPOLATE_NEAREST
+				preview_image.get_width(), preview_image.get_height(), Image.INTERPOLATE_NEAREST
 			)
 			if temp_rect.size.x < 0:
 				src.flip_x()
@@ -525,6 +521,8 @@ func transform_content_confirm() -> void:
 	original_bitmap = SelectionMap.new()
 	is_moving_content = false
 	is_pasting = false
+	angle = 0.0
+	content_pivot = Vector2.ZERO
 	queue_redraw()
 	Global.canvas.queue_redraw()
 
@@ -556,6 +554,8 @@ func transform_content_cancel() -> void:
 	preview_image = Image.new()
 	original_bitmap = SelectionMap.new()
 	is_pasting = false
+	angle = 0.0
+	content_pivot = Vector2.ZERO
 	queue_redraw()
 	Global.canvas.queue_redraw()
 

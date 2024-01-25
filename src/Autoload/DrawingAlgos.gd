@@ -425,6 +425,8 @@ func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 
 func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
+	if is_zero_approx(angle):
+		return
 	var aux := Image.new()
 	aux.copy_from(sprite)
 	var ox: int
