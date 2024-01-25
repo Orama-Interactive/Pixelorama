@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-01-24 17:10\n"
+"PO-Revision-Date: 2024-01-25 14:15\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -761,19 +761,19 @@ msgstr "Redupkan antarmuka pada sembulan dialog"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Gunakan dialog berkas biasa"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Saat ini dinyalakan, sistem operasi akan menggunakan dialog berkas biasa, dan bukan yang kustom Pixelorama."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Mode satu jendela"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Saat ini dinyalakan, subjendela Pixelorama akan disematkan ke jendela utama, jika tidak maka dialog akan pisah sendiri-sendiri."
 
 msgid "Dark"
 msgstr "Gelap"
@@ -2391,7 +2391,7 @@ msgstr "Ditanya saat keluar"
 
 #. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
 msgid "FFMPEG path"
-msgstr ""
+msgstr "Jalur FFMPEG"
 
 msgid "Enable autosave"
 msgstr "Aktifkan simpan otomatis"
