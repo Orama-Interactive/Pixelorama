@@ -7,9 +7,20 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "button_pressed"
 	),
+	Preference.new("ffmpeg_path", "Startup/StartupContainer/FFMPEGPath", "text"),
 	Preference.new("shrink", "%ShrinkSlider", "value"),
 	Preference.new("font_size", "Interface/InterfaceOptions/FontSizeSlider", "value"),
 	Preference.new("dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed"),
+	Preference.new(
+		"use_native_file_dialogs", "Interface/InterfaceOptions/NativeFileDialogs", "button_pressed"
+	),
+	Preference.new(
+		"single_window_mode",
+		"Interface/InterfaceOptions/SingleWindowMode",
+		"button_pressed",
+		true,
+		true
+	),
 	Preference.new("icon_color_from", "Interface/ButtonOptions/IconColorOptionButton", "selected"),
 	Preference.new("custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color"),
 	Preference.new("left_tool_color", "Interface/ButtonOptions/LeftToolColorButton", "color"),
@@ -200,6 +211,10 @@ func _ready() -> void:
 				)
 			"selected":
 				node.item_selected.connect(
+					_on_Preference_value_changed.bind(pref, restore_default_button)
+				)
+			"text":
+				node.text_changed.connect(
 					_on_Preference_value_changed.bind(pref, restore_default_button)
 				)
 

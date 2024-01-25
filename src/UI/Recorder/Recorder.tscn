@@ -26,7 +26,8 @@ layout_mode = 2
 size_flags_vertical = 0
 columns = 4
 
-[node name="Captured" type="Label" parent="ScrollContainer/CenterContainer/GridContainer"]
+[node name="CapturedLabel" type="Label" parent="ScrollContainer/CenterContainer/GridContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
@@ -80,16 +81,14 @@ offset_bottom = 10.5
 texture = ExtResource("3")
 stretch_mode = 6
 
-[node name="Folder" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
-unique_name_in_owner = true
-visible = false
+[node name="OpenFolder" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Open Folder"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Folder"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/OpenFolder"]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -104,110 +103,95 @@ stretch_mode = 6
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Options" type="Window" parent="Dialogs"]
+[node name="OptionsDialog" type="AcceptDialog" parent="Dialogs"]
+position = Vector2i(0, 36)
 size = Vector2i(400, 300)
-visible = false
+exclusive = false
+popup_window = true
 
-[node name="PanelContainer" type="PanelContainer" parent="Dialogs/Options"]
+[node name="PanelContainer" type="MarginContainer" parent="Dialogs/OptionsDialog"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = 9.0
-offset_right = -9.0
-offset_bottom = -9.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/Options/PanelContainer"]
+[node name="OptionsContainer" type="VBoxContainer" parent="Dialogs/OptionsDialog/PanelContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="IntervalHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+[node name="IntervalHeader" type="HBoxContainer" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/IntervalHeader"]
+[node name="Label" type="Label" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/IntervalHeader"]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Interval"
 
-[node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/IntervalHeader"]
+[node name="HSeparator" type="HSeparator" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/IntervalHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ActionGap" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+[node name="ActionGap" type="HBoxContainer" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
+[node name="Label" type="Label" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/ActionGap"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Capture frame every"
 
-[node name="SkipAmount" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
+[node name="SkipAmount" type="SpinBox" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/ActionGap"]
 layout_mode = 2
+size_flags_horizontal = 3
+suffix = "actions"
 
-[node name="Label2" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
-layout_mode = 2
-text = "Actions"
-
-[node name="Fps" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
-layout_mode = 2
-text = "Fps:"
-
-[node name="Fps" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
-layout_mode = 2
-min_value = 1.0
-value = 30.0
-allow_greater = true
-
-[node name="Duration" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
-layout_mode = 2
-text = "= 0.0333 sec"
-
-[node name="ModeHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
+[node name="ModeHeader" type="HBoxContainer" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer" groups=["visible during recording"]]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
+[node name="Label" type="Label" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/ModeHeader"]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Mode"
 
-[node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
+[node name="HSeparator" type="HSeparator" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/ModeHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ModeType" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
+[node name="ModeType" type="HBoxContainer" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer" groups=["visible during recording"]]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
+[node name="Label" type="Label" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/ModeType"]
 layout_mode = 2
-text = "Canvas Only"
+size_flags_horizontal = 3
+text = "Record canvas only"
 
-[node name="Mode" type="CheckButton" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
+[node name="Mode" type="CheckButton" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/ModeType"]
 layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 
-[node name="Label2" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
-layout_mode = 2
-text = "Pixelorama"
-
-[node name="OutputScale" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+[node name="OutputScale" type="HBoxContainer" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/OutputScale"]
+[node name="Label" type="Label" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/OutputScale"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Output Scale:"
 
-[node name="Size" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/OutputScale"]
+[node name="Size" type="Label" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/OutputScale"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Resize" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/OutputScale"]
+[node name="Resize" type="SpinBox" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/OutputScale"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 min_value = 50.0
 max_value = 1000.0
@@ -216,49 +200,34 @@ value = 100.0
 allow_greater = true
 suffix = "%"
 
-[node name="PathHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+[node name="PathHeader" type="HBoxContainer" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
+[node name="Label" type="Label" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/PathHeader"]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Path"
 
-[node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
+[node name="HSeparator" type="HSeparator" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/PathHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PathContainer" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+[node name="PathContainer" type="HBoxContainer" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer"]
 layout_mode = 2
 
-[node name="Path" type="LineEdit" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
+[node name="Path" type="LineEdit" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/PathContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Choose Destination --->"
+placeholder_text = "Choose destination"
 editable = false
 
-[node name="Open" type="Button" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
-custom_minimum_size = Vector2(25, 25)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Open"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-texture = ExtResource("4")
-stretch_mode = 6
-
-[node name="Choose" type="Button" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
+[node name="Choose" type="Button" parent="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/PathContainer"]
 layout_mode = 2
 text = "Choose"
 
-[node name="Path" type="FileDialog" parent="Dialogs"]
+[node name="Path" type="FileDialog" parent="Dialogs" groups=["FileDialogs"]]
 mode = 2
 exclusive = false
 popup_window = true
@@ -270,13 +239,10 @@ access = 2
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/TargetProjectOption" to="." method="_on_TargetProjectOption_pressed"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Start" to="." method="_on_Start_toggled"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Settings" to="." method="_on_Settings_pressed"]
-[connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Folder" to="." method="_on_Open_pressed"]
-[connection signal="close_requested" from="Dialogs/Options" to="." method="_on_options_close_requested"]
-[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap/SkipAmount" to="." method="_on_SkipAmount_value_changed"]
-[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/Fps/Fps" to="." method="_on_Fps_value_changed"]
-[connection signal="toggled" from="Dialogs/Options/PanelContainer/VBoxContainer/ModeType/Mode" to="." method="_on_Mode_toggled"]
-[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/OutputScale/Resize" to="." method="_on_SpinBox_value_changed"]
-[connection signal="pressed" from="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Open" to="." method="_on_Open_pressed"]
-[connection signal="pressed" from="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Choose" to="." method="_on_Choose_pressed"]
+[connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/OpenFolder" to="." method="_on_open_folder_pressed"]
+[connection signal="value_changed" from="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/ActionGap/SkipAmount" to="." method="_on_SkipAmount_value_changed"]
+[connection signal="toggled" from="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/ModeType/Mode" to="." method="_on_Mode_toggled"]
+[connection signal="value_changed" from="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/OutputScale/Resize" to="." method="_on_SpinBox_value_changed"]
+[connection signal="pressed" from="Dialogs/OptionsDialog/PanelContainer/OptionsContainer/PathContainer/Choose" to="." method="_on_Choose_pressed"]
 [connection signal="dir_selected" from="Dialogs/Path" to="." method="_on_Path_dir_selected"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -541,8 +541,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 
 	var project := Global.current_project
 	var text := "[%s×%s]" % [project.size.x, project.size.y]
-	if Global.has_focus:
-		text += "    %s, %s" % [position.x, position.y]
+	text += "    %s, %s" % [position.x, position.y]
 	if not _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text.is_empty():
 		text += "    %s" % _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text
 	if not _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text.is_empty():

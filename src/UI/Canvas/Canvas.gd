@@ -91,8 +91,7 @@ func _input(event: InputEvent) -> void:
 	Tools.handle_draw(Vector2i(current_pixel.floor()), event)
 
 	if sprite_changed_this_frame:
-		if Global.has_focus:
-			queue_redraw()
+		queue_redraw()
 		update_selected_cels_textures()
 
 

@@ -1,0 +1,230 @@
+[gd_scene load_steps=5 format=3 uid="uid://chy5d42l72crk"]
+
+[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Store.gd" id="1_pwcwi"]
+[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
+[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/CustomStoreLinks.gd" id="3_dk1xf"]
+[ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="4_ntl7p"]
+
+[node name="Store" type="Window"]
+title = "Explore Online"
+position = Vector2i(0, 36)
+size = Vector2i(760, 470)
+visible = false
+wrap_controls = true
+exclusive = true
+script = ExtResource("1_pwcwi")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+unique_name_in_owner = true
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = -8.0
+
+[node name="Store" type="MarginContainer" parent="TabContainer"]
+layout_mode = 2
+
+[node name="StoreMainContainer" type="HSplitContainer" parent="TabContainer/Store"]
+layout_mode = 2
+
+[node name="Parameters" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="SearchManager" type="LineEdit" parent="TabContainer/Store/StoreMainContainer/Parameters"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Search..."
+script = ExtResource("2_uqsvm")
+
+[node name="Header" type="Label" parent="TabContainer/Store/StoreMainContainer/Parameters"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Tags:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Store/StoreMainContainer/Parameters"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="TagList" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer/Parameters/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Store/StoreMainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer/ContentScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Options" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Options"]
+layout_mode = 2
+
+[node name="CustomStoreLinks" type="VBoxContainer" parent="TabContainer/Options/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_dk1xf")
+
+[node name="Header" type="Label" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Store Links:"
+
+[node name="MainStoreLink" type="LineEdit" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+unique_name_in_owner = true
+layout_mode = 2
+editable = false
+
+[node name="Links" type="VBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+layout_mode = 2
+
+[node name="Guide" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer"]
+visible = false
+layout_mode = 2
+text = "Guide to making a Store File"
+
+[node name="NewLink" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/NewLink"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ntl7p")
+stretch_mode = 5
+
+[node name="ProgressContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 51.0
+offset_top = 21.0
+offset_right = -37.0
+offset_bottom = -5.0
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="ProgressContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ProgressContainer"]
+layout_mode = 2
+text = "Fetching data from Remote Repository
+Please Wait"
+horizontal_alignment = 1
+
+[node name="UpdateTimer" type="Timer" parent="ProgressContainer"]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[node name="StoreInformationDownloader" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="Error" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+position = Vector2i(0, 36)
+size = Vector2i(511, 326)
+unresizable = true
+popup_window = true
+
+[node name="Content" type="VBoxContainer" parent="Error"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Error/Content"]
+custom_minimum_size = Vector2(495, 180)
+layout_mode = 2
+text = "Unable to get info from remote repository.
+
+Possible Solutions:
+- Make sure you are connected to the internet.
+- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Error/Content"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Error/Content/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "sudo flatpak override com.orama_interactive.Pixelorama --share=network"
+editable = false
+
+[node name="CopyCommand" type="Button" parent="Error/Content/HBoxContainer"]
+layout_mode = 2
+text = "Copy"
+
+[node name="Label2" type="Label" parent="Error/Content"]
+custom_minimum_size = Vector2(495, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Alternatively, you download Flatseal and set permissions for Flatpak apps there."
+autowrap_mode = 3
+
+[node name="ErrorCustom" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+position = Vector2i(0, 36)
+size = Vector2i(357, 110)
+popup_window = true
+
+[node name="Content" type="VBoxContainer" parent="ErrorCustom"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+
+[node name="Label" type="Label" parent="ErrorCustom/Content"]
+layout_mode = 2
+text = "Unable to get info from remote repository."
+
+[node name="FaultyLinks" type="Label" parent="ErrorCustom/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="about_to_popup" from="." to="." method="_on_Store_about_to_show"]
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="text_changed" from="TabContainer/Store/StoreMainContainer/Parameters/SearchManager" to="TabContainer/Store/StoreMainContainer/Parameters/SearchManager" method="_on_SearchManager_text_changed"]
+[connection signal="visibility_changed" from="TabContainer/Options" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Options_visibility_changed"]
+[connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/Guide" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Guide_pressed"]
+[connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/NewLink" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_NewLink_pressed"]
+[connection signal="timeout" from="ProgressContainer/UpdateTimer" to="." method="_on_UpdateTimer_timeout"]
+[connection signal="request_completed" from="StoreInformationDownloader" to="." method="_on_StoreInformation_request_completed"]
+[connection signal="pressed" from="Error/Content/HBoxContainer/CopyCommand" to="." method="_on_CopyCommand_pressed"]

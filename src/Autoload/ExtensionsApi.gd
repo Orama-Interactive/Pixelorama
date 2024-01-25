@@ -218,9 +218,7 @@ class DialogAPI:
 	## Shows an alert dialog with the given [param text].
 	## Useful for displaying messages like "Incompatible API" etc...
 	func show_error(text: String) -> void:
-		Global.error_dialog.set_text(text)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error(text)
 
 	## Returns the node that is the parent of dialogs used in pixelorama.
 	func get_dialogs_parent_node() -> Node:

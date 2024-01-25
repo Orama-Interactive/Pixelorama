@@ -13,13 +13,15 @@ var frame_captured := 0  ## Used to visualize frames captured
 var skip_amount := 1  ## Number of "do" actions after which a frame can be captured
 var current_frame_no := 0  ## Used to compare with skip_amount to see if it can be captured
 
-var resize := 100
+var resize_percent := 100
 
+@onready var captured_label := %CapturedLabel as Label
 @onready var project_list := $"%TargetProjectOption" as OptionButton
-@onready var folder_button := $"%Folder" as Button
 @onready var start_button := $"%Start" as Button
 @onready var size_label := $"%Size" as Label
 @onready var path_field := $"%Path" as LineEdit
+@onready var options_dialog := $Dialogs/OptionsDialog as AcceptDialog
+@onready var options_container := %OptionsContainer as VBoxContainer
 
 
 func _ready() -> void:
@@ -40,10 +42,9 @@ func initialize_recording() -> void:
 	current_frame_no = skip_amount - 1
 
 	# disable some options that are not required during recording
-	folder_button.visible = true
 	project_list.visible = false
-	$ScrollContainer/CenterContainer/GridContainer/Captured.visible = true
-	for child in $Dialogs/Options/PanelContainer/VBoxContainer.get_children():
+	captured_label.visible = true
+	for child in options_container.get_children():
 		if !child.is_in_group("visible during recording"):
 			child.visible = false
 
@@ -77,11 +78,10 @@ func capture_frame() -> void:
 		DrawingAlgos.blend_layers(image, frame, Vector2i.ZERO, project)
 
 	if mode == Mode.CANVAS:
-		if resize != 100:
+		if resize_percent != 100:
+			var resize := resize_percent / 100
 			image.resize(
-				image.get_size().x * resize / 100,
-				image.get_size().y * resize / 100,
-				Image.INTERPOLATE_NEAREST
+				image.get_width() * resize, image.get_height() * resize, Image.INTERPOLATE_NEAREST
 			)
 
 	cache.append(image)
@@ -102,7 +102,7 @@ func save_frame(img: Image) -> void:
 
 func _on_frame_saved() -> void:
 	frame_captured += 1
-	$ScrollContainer/CenterContainer/GridContainer/Captured.text = str("Saved: ", frame_captured)
+	captured_label.text = str("Saved: ", frame_captured)
 
 
 func finalize_recording() -> void:
@@ -111,10 +111,9 @@ func finalize_recording() -> void:
 		save_frame(img)
 	cache.clear()
 	disconnect_undo()
-	folder_button.visible = false
 	project_list.visible = true
-	$ScrollContainer/CenterContainer/GridContainer/Captured.visible = false
-	for child in $Dialogs/Options/PanelContainer/VBoxContainer.get_children():
+	captured_label.visible = false
+	for child in options_container.get_children():
 		child.visible = true
 	if mode == Mode.PIXELORAMA:
 		size_label.get_parent().visible = false
@@ -152,9 +151,7 @@ func _on_Start_toggled(button_pressed: bool) -> void:
 
 
 func _on_Settings_pressed() -> void:
-	var settings := $Dialogs/Options as Window
-	var pos := position
-	settings.popup(Rect2(pos, settings.size))
+	options_dialog.popup(Rect2(position, options_dialog.size))
 
 
 func _on_SkipAmount_value_changed(value: float) -> void:
@@ -171,8 +168,8 @@ func _on_Mode_toggled(button_pressed: bool) -> void:
 
 
 func _on_SpinBox_value_changed(value: float) -> void:
-	resize = value
-	var new_size: Vector2 = project.size * (resize / 100.0)
+	resize_percent = value
+	var new_size: Vector2 = project.size * (resize_percent / 100.0)
 	size_label.text = str("(", new_size.x, "×", new_size.y, ")")
 
 
@@ -181,7 +178,7 @@ func _on_Choose_pressed() -> void:
 	$Dialogs/Path.current_dir = chosen_dir
 
 
-func _on_Open_pressed() -> void:
+func _on_open_folder_pressed() -> void:
 	OS.shell_open(path_field.text)
 
 
@@ -189,13 +186,3 @@ func _on_Path_dir_selected(dir: String) -> void:
 	chosen_dir = dir
 	path_field.text = chosen_dir
 	start_button.disabled = false
-
-
-func _on_Fps_value_changed(value: float) -> void:
-	var dur_label := $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration as Label
-	var duration := snappedf(1.0 / value, 0.0001)
-	dur_label.text = str("= ", duration, " sec")
-
-
-func _on_options_close_requested() -> void:
-	$Dialogs/Options.hide()

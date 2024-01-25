@@ -222,13 +222,13 @@ func _on_Indicator_draw() -> void:
 	else:
 		conversion_scale = ratio.y
 	var pivot_position := pivot * conversion_scale
-	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.YELLOW, 0.5)
-	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.WHITE, 0.5)
+	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.YELLOW)
+	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.WHITE)
 	pivot_indicator.draw_line(
-		pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.WHITE, 0.5
+		pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.WHITE
 	)
 	pivot_indicator.draw_line(
-		pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.WHITE, 0.5
+		pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.WHITE
 	)
 
 
@@ -239,8 +239,7 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 		drag_pivot = false
 	if drag_pivot:
 		var img_size := preview_image.get_size()
-#		var mouse_pos := get_local_mouse_position() - pivot_indicator.position
-		var mouse_pos := pivot_indicator.position
+		var mouse_pos := pivot_indicator.get_local_mouse_position()
 		var ratio := Vector2(img_size) / pivot_indicator.size
 		# we need to set the scale according to the larger side
 		var conversion_scale: float

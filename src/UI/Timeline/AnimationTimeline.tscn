@@ -953,7 +953,7 @@ mouse_filter = 2
 color = Color(0, 0.741176, 1, 0.501961)
 
 [node name="PasteTagPopup" type="Popup" parent="."]
-size = Vector2i(250, 574)
+size = Vector2i(250, 335)
 min_size = Vector2i(250, 0)
 script = ExtResource("12")
 
@@ -992,6 +992,7 @@ layout_mode = 2
 text = "Create new tags"
 
 [node name="Instructions" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 23)
 layout_mode = 2
 text = "Available tags:"
 autowrap_mode = 3
@@ -1004,6 +1005,7 @@ size_flags_vertical = 3
 
 [node name="StartFrame" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 23)
 layout_mode = 2
 horizontal_alignment = 1
 autowrap_mode = 3

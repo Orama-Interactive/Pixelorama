@@ -62,9 +62,7 @@ func handle_loading_file(file: String) -> void:
 		var image := Image.load_from_file(file)
 		if not is_instance_valid(image):  # An error occurred
 			var file_name: String = file.get_file()
-			Global.error_dialog.set_text(tr("Can't load file '%s'.") % [file_name])
-			Global.error_dialog.popup_centered()
-			Global.dialog_open(true)
+			Global.popup_error(tr("Can't load file '%s'.") % [file_name])
 			return
 		handle_loading_image(file, image)
 
@@ -159,11 +157,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 		if not success:
 			return
 	elif err != OK:
-		Global.error_dialog.set_text(
-			tr("File failed to open. Error code %s (%s)") % [err, error_string(err)]
-		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error(tr("File failed to open. Error code %s (%s)") % [err, error_string(err)])
 		return
 	else:
 		var data_json := zip_reader.read_file("data.json").get_string_from_utf8()
@@ -253,11 +247,7 @@ func open_v0_pxo_file(path: String, new_project: Project) -> bool:
 		file = FileAccess.open(path, FileAccess.READ)
 	var err := FileAccess.get_open_error()
 	if err != OK:
-		Global.error_dialog.set_text(
-			tr("File failed to open. Error code %s (%s)") % [err, error_string(err)]
-		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error(tr("File failed to open. Error code %s (%s)") % [err, error_string(err)])
 		return false
 
 	var first_line := file.get_line()
@@ -320,19 +310,11 @@ func save_pxo_file(
 		project.name = path.get_file().trim_suffix(".pxo")
 	var serialized_data := project.serialize()
 	if !serialized_data:
-		Global.error_dialog.set_text(
-			tr("File failed to save. Converting project data to dictionary failed.")
-		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error(tr("File failed to save. Converting project data to dictionary failed."))
 		return false
 	var to_save := JSON.stringify(serialized_data)
 	if !to_save:
-		Global.error_dialog.set_text(
-			tr("File failed to save. Converting dictionary to JSON failed.")
-		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error(tr("File failed to save. Converting dictionary to JSON failed."))
 		return false
 
 	# Check if a file with the same name exists. If it does, rename the new file temporarily.
@@ -346,11 +328,7 @@ func save_pxo_file(
 	if err != OK:
 		if temp_path.is_valid_filename():
 			return false
-		Global.error_dialog.set_text(
-			tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
-		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.popup_error(tr("File failed to save. Error code %s (%s)") % [err, error_string(err)])
 		if zip_packer:  # this would be null if we attempt to save filenames such as "//\\||.pxo"
 			zip_packer.close()
 		return false
