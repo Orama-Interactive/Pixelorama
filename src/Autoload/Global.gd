@@ -114,7 +114,7 @@ var current_project_index := 0:
 ## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
 ## [code]false[/code] when we are moving some gizmo and don't want the current tool to accidentally
 ## start drawing.[br](This does not depend on layer invisibility or lock/unlock status).
-var can_draw := false
+var can_draw := true
 ## (Intended to be used as getter only) Tells if the user allowed to move the guide while on canvas.
 var move_guides_on_canvas := true
 

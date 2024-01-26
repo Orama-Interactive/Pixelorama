@@ -153,8 +153,6 @@ func _show_splash_screen() -> void:
 
 		$Dialogs/SplashDialog.popup_centered()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
-	else:
-		Global.can_draw = true
 
 
 func _handle_backup() -> void:
@@ -176,7 +174,6 @@ func _handle_backup() -> void:
 				_on_BackupConfirmation_custom_action.bind(project_paths, backup_paths)
 			)
 			backup_confirmation.popup_centered()
-			Global.can_draw = false
 			modulate = Color(0.5, 0.5, 0.5)
 		else:
 			if Global.open_last_project:
