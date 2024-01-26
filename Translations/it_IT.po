@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-01-24 17:10\n"
+"PO-Revision-Date: 2024-01-26 00:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -765,15 +765,15 @@ msgstr "Usa finestre di dialogo dei file nativi"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Quando questa impostazione è abilitata, vengono utilizzate le finestre di dialogo dei file nativi del sistema operativo, invece di quelle personalizzate di Pixelorama."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Modalità finestra singola"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Quando questa impostazione è abilitata, le sotto-finestre di Pixelorama saranno incorporate nella finestra principale, altrimenti ogni finestra di dialogo sarà la propria finestra separata."
 
 msgid "Dark"
 msgstr "Scuro"
