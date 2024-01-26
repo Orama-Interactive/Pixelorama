@@ -26,7 +26,6 @@ var image_current_pixel := Vector2.ZERO  ## The ACTUAL pixel coordinate of image
 
 var temp_rect := Rect2()
 var rect_aspect_ratio := 0.0
-var temp_rect_size := Vector2.ZERO
 var temp_rect_pivot := Vector2.ZERO
 
 var original_big_bounding_rectangle := Rect2i()
@@ -136,23 +135,22 @@ func _input(event: InputEvent) -> void:
 						transform_content_start()
 					project.selection_offset = Vector2.ZERO
 				else:
-					var prev_temp_rect := temp_rect
-					dragged_gizmo.direction.x *= signi(temp_rect.size.x)
-					dragged_gizmo.direction.y *= signi(temp_rect.size.y)
+					var horizontal_flip := signi(temp_rect.size.x)
+					var vertical_flip := signi(temp_rect.size.y)
+					dragged_gizmo.direction.x *= horizontal_flip
+					dragged_gizmo.direction.y *= vertical_flip
 					temp_rect = big_bounding_rectangle
-					# If prev_temp_rect, which used to be the previous temp_rect, has negative size,
-					# switch the position and end point in temp_rect
-					if prev_temp_rect.size.x < 0:
+					# If temp_rect had negative size, switch the position and end points
+					if horizontal_flip < 0:
 						var pos := temp_rect.position.x
 						temp_rect.position.x = temp_rect.end.x
 						temp_rect.end.x = pos
-					if prev_temp_rect.size.y < 0:
+					if vertical_flip < 0:
 						var pos := temp_rect.position.y
 						temp_rect.position.y = temp_rect.end.y
 						temp_rect.end.y = pos
 				rect_aspect_ratio = absf(temp_rect.size.y / temp_rect.size.x)
-				temp_rect_size = temp_rect.size
-				temp_rect_pivot = (temp_rect.position + ((temp_rect.end - temp_rect.position) / 2))
+				temp_rect_pivot = temp_rect.get_center()
 
 		elif dragged_gizmo:  # Mouse released, deselect gizmo
 			Global.can_draw = true
@@ -356,8 +354,6 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 		var end_x := temp_rect.end.x
 		temp_rect.position.x = pos.x
 		temp_rect.end.x = end_x
-	else:
-		temp_rect.size.x = temp_rect_size.x
 
 	if dir.y > 0:
 		temp_rect.size.y = pos.y - temp_rect.position.y
@@ -365,8 +361,6 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 		var end_y := temp_rect.end.y
 		temp_rect.position.y = pos.y
 		temp_rect.end.y = end_y
-	else:
-		temp_rect.size.y = temp_rect_size.y
 
 
 func resize_selection() -> void:
@@ -387,10 +381,8 @@ func resize_selection() -> void:
 		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
 	Global.current_project.selection_map.copy_from(original_bitmap)
-	var bitmap_pivot := (
-		original_big_bounding_rectangle.position
-		+ ((original_big_bounding_rectangle.end - original_big_bounding_rectangle.position) / 2)
-	)
+
+	var bitmap_pivot := original_big_bounding_rectangle.get_center()
 	DrawingAlgos.nn_rotate(Global.current_project.selection_map, angle, bitmap_pivot)
 	Global.current_project.selection_map.resize_bitmap_values(
 		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
