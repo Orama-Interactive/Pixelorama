@@ -2,6 +2,7 @@
 # Godot-specific ignores
 .import/
 .godot/
+override.cfg
 
 # Imported translations (automatically generated from CSV files)
 *.translation
