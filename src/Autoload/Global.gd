@@ -174,7 +174,7 @@ var single_window_mode := true:
 		if OS.has_feature("editor"):
 			return
 		ProjectSettings.set_setting("display/window/subwindows/embed_subwindows", value)
-		ProjectSettings.save_custom(OVERRIDE_FILE)
+		ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
 ## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
@@ -379,7 +379,7 @@ var tablet_driver := 0:
 			return
 		var tablet_driver_name := DisplayServer.tablet_get_current_driver()
 		ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
-		ProjectSettings.save_custom(OVERRIDE_FILE)
+		ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
 
 # Tools & options
 ## Found in Preferences. If [code]true[/code], the cursor's left tool icon is visible.
@@ -816,7 +816,7 @@ func _renderer_changed(value: int) -> void:
 #	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
 #	var renderer_name := OS.get_video_driver_name(renderer)
 #	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
-#	ProjectSettings.save_custom(OVERRIDE_FILE)
+#	ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
 
 
 ## Use this to prepare Pixelorama before opening a dialog.
