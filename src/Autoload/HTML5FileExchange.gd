@@ -29,7 +29,9 @@ func _define_js() -> void:
 		canceled = true;
 		var input = document.createElement('INPUT');
 		input.setAttribute("type", "file");
-		input.setAttribute("accept", "image/png, image/jpeg, image/webp, image/bmp, image/x-tga");
+		input.setAttribute(
+			"accept", ".pxo, image/png, image/jpeg, image/webp, image/bmp, image/x-tga"
+		);
 		input.click();
 		input.addEventListener('change', event => {
 			if (event.target.files.length > 0){
@@ -87,19 +89,19 @@ func load_image(load_directly := true):
 		return
 
 	# Use data from png data
-	var image_data
+	var image_data: PackedByteArray
 	while true:
 		image_data = JavaScriptBridge.eval("fileData;", true)
 		if image_data != null:
 			break
 		await get_tree().create_timer(1.0).timeout  # Need more time to load data
 
-	var image_type = JavaScriptBridge.eval("fileType;", true)
-	var image_name = JavaScriptBridge.eval("fileName;", true)
+	var image_type: String = JavaScriptBridge.eval("fileType;", true)
+	var image_name: String = JavaScriptBridge.eval("fileName;", true)
 
 	var image := Image.new()
-	var image_error
-	var image_info: Dictionary = {}
+	var image_error: Error
+	var image_info := {}
 	match image_type:
 		"image/png":
 			if load_directly:
@@ -121,6 +123,14 @@ func load_image(load_directly := true):
 		"image/x-tga":
 			image_error = image.load_tga_from_buffer(image_data)
 		var invalid_type:
+			if image_name.get_extension().to_lower() == "pxo":
+				var temp_file_path := "user://%s" % image_name
+				var temp_file := FileAccess.open(temp_file_path, FileAccess.WRITE)
+				temp_file.store_buffer(image_data)
+				temp_file.close()
+				OpenSave.open_pxo_file(temp_file_path)
+				DirAccess.remove_absolute(temp_file_path)
+				return
 			print("Invalid type: " + invalid_type)
 			return
 	if image_error:
