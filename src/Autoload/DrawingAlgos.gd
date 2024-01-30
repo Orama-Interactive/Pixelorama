@@ -442,19 +442,10 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 
 func similar_colors(c1: Color, c2: Color, tol := 100.0) -> bool:
-	var dist := color_distance(c1, c2)
-	return dist <= tol
-
-
-func color_distance(c1: Color, c2: Color) -> float:
-	return sqrt(
-		(
-			pow((c1.r - c2.r) * 255, 2)
-			+ pow((c1.g - c2.g) * 255, 2)
-			+ pow((c1.b - c2.b) * 255, 2)
-			+ pow((c1.a - c2.a) * 255, 2)
-		)
-	)
+	var v1 := Vector4(c1.r, c1.g, c1.b, c1.a)
+	var v2 := Vector4(c2.r, c2.g, c2.b, c2.a)
+	var dist := v2.distance_to(v1)
+	return dist <= (tol / 255.0)
 
 
 # Image effects
