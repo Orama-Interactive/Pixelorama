@@ -156,36 +156,22 @@ func scale_3x(sprite: Image, tol := 50.0) -> Image:
 	var scaled := Image.create(
 		sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8
 	)
-	var a: Color
-	var b: Color
-	var c: Color
-	var d: Color
-	var e: Color
-	var f: Color
-	var g: Color
-	var h: Color
-	var i: Color
-
+	var width_minus_one := sprite.get_width() - 1
+	var height_minus_one := sprite.get_height() - 1
 	for x in range(0, sprite.get_width()):
 		for y in range(0, sprite.get_height()):
 			var xs := 3 * x
 			var ys := 3 * y
 
-			a = sprite.get_pixel(maxi(x - 1, 0), maxi(y - 1, 0))
-			b = sprite.get_pixel(mini(x, sprite.get_width() - 1), maxi(y - 1, 0))
-			c = sprite.get_pixel(mini(x + 1, sprite.get_width() - 1), maxi(y - 1, 0))
-			d = sprite.get_pixel(maxi(x - 1, 0), mini(y, sprite.get_height() - 1))
-			e = sprite.get_pixel(mini(x, sprite.get_width() - 1), mini(y, sprite.get_height() - 1))
-			f = sprite.get_pixel(
-				mini(x + 1, sprite.get_width() - 1), mini(y, sprite.get_height() - 1)
-			)
-			g = sprite.get_pixel(maxi(x - 1, 0), mini(y + 1, sprite.get_height() - 1))
-			h = sprite.get_pixel(
-				mini(x, sprite.get_width() - 1), mini(y + 1, sprite.get_height() - 1)
-			)
-			i = sprite.get_pixel(
-				mini(x + 1, sprite.get_width() - 1), mini(y + 1, sprite.get_height() - 1)
-			)
+			var a := sprite.get_pixel(maxi(x - 1, 0), maxi(y - 1, 0))
+			var b := sprite.get_pixel(mini(x, width_minus_one), maxi(y - 1, 0))
+			var c := sprite.get_pixel(mini(x + 1, width_minus_one), maxi(y - 1, 0))
+			var d := sprite.get_pixel(maxi(x - 1, 0), mini(y, height_minus_one))
+			var e := sprite.get_pixel(mini(x, width_minus_one), mini(y, height_minus_one))
+			var f := sprite.get_pixel(mini(x + 1, width_minus_one), mini(y, height_minus_one))
+			var g := sprite.get_pixel(maxi(x - 1, 0), mini(y + 1, height_minus_one))
+			var h := sprite.get_pixel(mini(x, width_minus_one), mini(y + 1, height_minus_one))
+			var i := sprite.get_pixel(mini(x + 1, width_minus_one), mini(y + 1, height_minus_one))
 
 			var db: bool = similar_colors(d, b, tol)
 			var dh: bool = similar_colors(d, h, tol)
@@ -223,7 +209,7 @@ func scale_3x(sprite: Image, tol := 50.0) -> Image:
 
 func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 	# If angle is simple, then nn rotation is the best
-	if angle == 0 || angle == PI / 2 || angle == PI || angle == 2 * PI:
+	if angle == 0 || angle == PI / 2 || angle == PI || angle == 3.0 * PI / 2.0 || angle == TAU:
 		nn_rotate(sprite, angle, pivot)
 		return
 
@@ -231,7 +217,6 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 	aux.copy_from(sprite)
 	var ox: int
 	var oy: int
-	var p: Color
 	for x in sprite.get_size().x:
 		for y in sprite.get_size().y:
 			var dx := 3 * (x - pivot.x)
@@ -269,27 +254,19 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 			ox = roundi((ox - 1) / 3.0)
 			oy = roundi((oy - 1) / 3.0)
-			var a: Color
-			var b: Color
-			var c: Color
-			var d: Color
-			var e: Color
-			var f: Color
-			var g: Color
-			var h: Color
-			var i: Color
+			var p: Color
 			if ox == 0 || ox == sprite.get_width() - 1 || oy == 0 || oy == sprite.get_height() - 1:
 				p = aux.get_pixel(ox, oy)
 			else:
-				a = aux.get_pixel(ox - 1, oy - 1)
-				b = aux.get_pixel(ox, oy - 1)
-				c = aux.get_pixel(ox + 1, oy - 1)
-				d = aux.get_pixel(ox - 1, oy)
-				e = aux.get_pixel(ox, oy)
-				f = aux.get_pixel(ox + 1, oy)
-				g = aux.get_pixel(ox - 1, oy + 1)
-				h = aux.get_pixel(ox, oy + 1)
-				i = aux.get_pixel(ox + 1, oy + 1)
+				var a := aux.get_pixel(ox - 1, oy - 1)
+				var b := aux.get_pixel(ox, oy - 1)
+				var c := aux.get_pixel(ox + 1, oy - 1)
+				var d := aux.get_pixel(ox - 1, oy)
+				var e := aux.get_pixel(ox, oy)
+				var f := aux.get_pixel(ox + 1, oy)
+				var g := aux.get_pixel(ox - 1, oy + 1)
+				var h := aux.get_pixel(ox, oy + 1)
+				var i := aux.get_pixel(ox + 1, oy + 1)
 
 				match index:
 					0:
@@ -414,9 +391,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 
 func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
-	var selected_sprite := Image.new()
-	selected_sprite.copy_from(sprite)
-	selected_sprite.copy_from(scale_3x(selected_sprite))
+	var selected_sprite := scale_3x(sprite)
 	nn_rotate(selected_sprite, angle, pivot * 3)
 	selected_sprite.resize(
 		selected_sprite.get_width() / 3, selected_sprite.get_height() / 3, Image.INTERPOLATE_NEAREST
@@ -429,12 +404,12 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 		return
 	var aux := Image.new()
 	aux.copy_from(sprite)
-	var ox: int
-	var oy: int
+	var angle_sin := sin(angle)
+	var angle_cos := cos(angle)
 	for x in range(sprite.get_width()):
 		for y in range(sprite.get_height()):
-			ox = (x - pivot.x) * cos(angle) + (y - pivot.y) * sin(angle) + pivot.x
-			oy = -(x - pivot.x) * sin(angle) + (y - pivot.y) * cos(angle) + pivot.y
+			var ox := (x - pivot.x) * angle_cos + (y - pivot.y) * angle_sin + pivot.x
+			var oy := -(x - pivot.x) * angle_sin + (y - pivot.y) * angle_cos + pivot.y
 			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
 				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
 			else:
