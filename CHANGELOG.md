@@ -11,9 +11,13 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([R
 Built using Godot 4.2.1
 
 ### Added
-- Support for multiple layer blend modes are finally here! [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
+- Multiple layer blend modes are finally here! [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
 - Non-destructive layer effects have been implemented. [#940](https://github.com/Orama-Interactive/Pixelorama/pull/940)
+- An extension explorer has been integrated into Pixelorama, allowing for easy extension downloading from the internet. [#910](https://github.com/Orama-Interactive/Pixelorama/pull/910)
+- Export to video formats. FFMPEG is required to be installed in the device in order for video exporting to work. [#980](https://github.com/Orama-Interactive/Pixelorama/pull/980)
 - Export to webp and jpeg file formats. Webp is currently only for static images and does not support animations.
+- Native file dialogs are now supported and can be enabled from the Preferences!
+- Dialog popups can now be native OS windows instead of embedded within Pixelorama's main window. This can be changed from the Preferences.
 - Added some missing shortcuts for buttons. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Palette colors can now be sorted.
 - The brush increment/decrement shortcuts can now be changed. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
@@ -44,6 +48,7 @@ Built using Godot 4.2.1
 
 ### Fixed
 - Performance when drawing and doing operations such as bucket area fill should be better now. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
+- Selections now scale properly when they are not transforming any image content. [#774](https://github.com/Orama-Interactive/Pixelorama/issues/774)
 - Dividing by zero in value sliders and spinboxes no longer crashes the program.
 
 ## [v0.11.4] - Unreleased
@@ -69,9 +74,11 @@ Built using Godot 3.5.2
 - Tool shortcuts can now work with <kbd>Control</kbd>. [#935](https://github.com/Orama-Interactive/Pixelorama/issues/935)
 - Optimize canvas drawing by only updating it when the image(s) have changed. [ac6a4db43d9296ebc03e639d8199dd3878a25d86](https://github.com/Orama-Interactive/Pixelorama/commit/ac6a4db43d9296ebc03e639d8199dd3878a25d86)
 - Fix bug where using shortcuts to switch between frames also moved the selection, causing deletions.
+- Pxo files can now be loaded from the Open menu option in the Web version. [3dcc51705a999145e53a8e6d4de217dc03b0f147](https://github.com/Orama-Interactive/Pixelorama/commit/3dcc51705a999145e53a8e6d4de217dc03b0f147)
 - The ellipse tool no longer produces gaps with large sizes. [4f3a7a305a264e0d2fe86c201af76eca4b2fea0a](https://github.com/Orama-Interactive/Pixelorama/commit/4f3a7a305a264e0d2fe86c201af76eca4b2fea0a)
 - Fix "visible layers" option on the export dialog producing wrong results. [346d1f071a8c6b1defb1072d39aea9c642f1ef59](https://github.com/Orama-Interactive/Pixelorama/commit/346d1f071a8c6b1defb1072d39aea9c642f1ef59)
 - Random brushes now work again. [1317e40ffa5e9f01a9d214221bb5133db20a1de9](https://github.com/Orama-Interactive/Pixelorama/commit/1317e40ffa5e9f01a9d214221bb5133db20a1de9)
+- The gizmo in the rotation image effect dialog is now accurately following the mouse.
 
 ## [v0.11.3] - 2023-10-30
 This update has been brought to you by the contributions of:
@@ -85,7 +92,6 @@ Built using Godot 3.5.2
 ### Fixed
 - Fixed undo/redo history not working when the tool changes. [#916](https://github.com/Orama-Interactive/Pixelorama/pull/916)
 - Pixelorama no longer closes when the project fails to be saved if "Save & Exit" is selected. [#920](https://github.com/Orama-Interactive/Pixelorama/pull/920)
-- Projects with 3D cels saved in 1.x can now be opened in 0.11.3. [#928](https://github.com/Orama-Interactive/Pixelorama/pull/928)
 
 ## [v0.11.2] - 2023-08-31
 This update has been brought to you by the contributions of:
