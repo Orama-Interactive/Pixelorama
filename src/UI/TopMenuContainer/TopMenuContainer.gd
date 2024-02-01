@@ -10,11 +10,6 @@ const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
 
 var recent_projects := []
-var layouts: Array[DockableLayout] = [
-	preload("res://assets/layouts/Default.tres"),
-	preload("res://assets/layouts/Tallscreen.tres"),
-]
-var default_layout_size := layouts.size()
 var selected_layout := 0
 var zen_mode := false
 
@@ -39,8 +34,6 @@ var zen_mode := false
 
 
 func _ready() -> void:
-	var dir := DirAccess.open("user://")
-	dir.make_dir("user://layouts")
 	_setup_file_menu()
 	_setup_edit_menu()
 	_setup_view_menu()
@@ -248,19 +241,6 @@ func _setup_panels_submenu(item: String) -> void:
 
 
 func _setup_layouts_submenu(item: String) -> void:
-	var path := "user://layouts"
-	var dir := DirAccess.open(path)
-	if DirAccess.get_open_error() == OK:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if !dir.current_is_dir():
-				var layout := ResourceLoader.load(path.path_join(file_name))
-				if layout is DockableLayout:
-					layouts.append(layout)
-			file_name = dir.get_next()
-		dir.list_dir_end()
-
 	layouts_submenu.set_name("layouts_submenu")
 	layouts_submenu.hide_on_checkable_item_selection = false
 	populate_layouts_submenu()
@@ -269,14 +249,14 @@ func _setup_layouts_submenu(item: String) -> void:
 	window_menu.add_child(layouts_submenu)
 	window_menu.add_submenu_item(item, layouts_submenu.get_name())
 
-	var saved_layout = Global.config_cache.get_value("window", "layout", 0)
+	var saved_layout: int = Global.config_cache.get_value("window", "layout", 0)
 	set_layout(saved_layout)
 
 
 func populate_layouts_submenu() -> void:
 	layouts_submenu.clear()  # Does not do anything if it's called for the first time
 	layouts_submenu.add_item("Manage Layouts", 0)
-	for layout in layouts:
+	for layout in Global.layouts:
 		var layout_name := layout.resource_path.get_basename().get_file()
 		layouts_submenu.add_radio_check_item(layout_name)
 
@@ -570,11 +550,13 @@ func _layouts_submenu_id_pressed(id: int) -> void:
 
 
 func set_layout(id: int) -> void:
-	if id >= layouts.size():
+	if Global.layouts.size() == 0:
+		return
+	if id >= Global.layouts.size():
 		id = 0
 	selected_layout = id
-	main_ui.layout = layouts[id].clone()  # Clone is needed to avoid modifying premade layouts
-	for i in layouts.size():
+	main_ui.layout = Global.layouts[id].clone()
+	for i in Global.layouts.size():
 		var offset := i + 1
 		layouts_submenu.set_item_checked(offset, offset == (id + 1))
 

@@ -13,8 +13,8 @@ var is_editing := false
 
 
 func _on_ManageLayouts_about_to_show() -> void:
-	for layout in Global.top_menu_container.layouts:
-		layout_list.add_item(layout[0])
+	for layout in Global.layouts:
+		layout_list.add_item(layout.resource_path.get_basename().get_file())
 	refresh_preview()
 	if layout_selected != -1:
 		layout_list.select(layout_selected)
@@ -33,8 +33,8 @@ func _on_SavedLayouts_item_activated(index: int) -> void:
 
 func _on_SavedLayouts_item_selected(index: int) -> void:
 	layout_selected = index
-	edit_layout.disabled = index < Global.top_menu_container.default_layout_size
-	delete_layout.disabled = index < Global.top_menu_container.default_layout_size
+	edit_layout.disabled = false
+	delete_layout.disabled = false
 	refresh_preview()
 
 
@@ -73,14 +73,13 @@ func _on_LayoutSettings_confirmed() -> void:
 			var old_file_name: String = layout_list.get_item_text(layout_selected) + ".tres"
 			if old_file_name != file_name:
 				delete_layout_file(old_file_name)
-			Global.top_menu_container.layouts[layout_selected][0] = layout_name.text
-			Global.top_menu_container.layouts[layout_selected][1] = layout
+			Global.layouts[layout_selected] = layout
 			layout_list.set_item_text(layout_selected, layout_name.text)
 			Global.top_menu_container.layouts_submenu.set_item_text(
 				layout_selected + 1, layout_name.text
 			)
 		else:
-			Global.top_menu_container.layouts.append([layout_name.text, layout])
+			Global.layouts.append(layout)
 			layout_list.add_item(layout_name.text)
 			Global.top_menu_container.populate_layouts_submenu()
 			var n: int = Global.top_menu_container.layouts_submenu.get_item_count()
@@ -96,7 +95,7 @@ func delete_layout_file(file_name: String) -> void:
 
 func _on_DeleteConfirmation_confirmed() -> void:
 	delete_layout_file(layout_list.get_item_text(layout_selected) + ".tres")
-	Global.top_menu_container.layouts.remove_at(layout_selected)
+	Global.layouts.remove_at(layout_selected)
 	layout_list.remove_item(layout_selected)
 	Global.top_menu_container.populate_layouts_submenu()
 	layout_selected = -1
@@ -108,7 +107,7 @@ func _on_DeleteConfirmation_confirmed() -> void:
 func refresh_preview():
 	for tab in mimic_ui.get_tabs():
 		mimic_ui.remove_child(tab)
-	for item in Global.top_menu_container.main_ui.get_tabs():
+	for item in Global.control.main_ui.get_tabs():
 		var box := TextEdit.new()
 		box.name = item.name
 		box.text = item.name
@@ -118,4 +117,4 @@ func refresh_preview():
 		mimic_ui.visible = false
 		return
 	mimic_ui.visible = true
-	mimic_ui.set_layout(Global.top_menu_container.layouts[layout_selected][1].clone())
+	mimic_ui.set_layout(Global.layouts[layout_selected].clone())

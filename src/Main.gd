@@ -17,6 +17,7 @@ var cursor_image := preload("res://assets/graphics/cursor.png")
 
 func _init() -> void:
 	Global.shrink = _get_auto_display_scale()
+	_handle_layout_files()
 
 
 func _ready() -> void:
@@ -94,6 +95,23 @@ func _get_auto_display_scale() -> float:
 	elif smallest_dimension >= 1700:
 		return 1.5  # Likely a hiDPI display, but we aren't certain due to the returned DPI.
 	return 1.0
+
+
+func _handle_layout_files() -> void:
+	if not DirAccess.dir_exists_absolute(Global.LAYOUT_DIR):
+		DirAccess.make_dir_absolute(Global.LAYOUT_DIR)
+	var dir := DirAccess.open(Global.LAYOUT_DIR)
+	var files := dir.get_files()
+	if files.size() == 0:
+		for layout in Global.default_layouts:
+			var file_name := layout.resource_path.get_basename().get_file() + ".tres"
+			print(Global.LAYOUT_DIR.path_join(file_name))
+			ResourceSaver.save(layout, Global.LAYOUT_DIR.path_join(file_name))
+		files = dir.get_files()
+	for file in files:
+		var layout := ResourceLoader.load(Global.LAYOUT_DIR.path_join(file))
+		if layout is DockableLayout:
+			Global.layouts.append(layout)
 
 
 func _setup_application_window_size() -> void:

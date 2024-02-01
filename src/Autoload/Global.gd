@@ -79,6 +79,8 @@ const OVERRIDE_FILE := "override.cfg"
 const HOME_SUBDIR_NAME := "pixelorama"
 ## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
+## The path of the directory where the UI layouts are being stored.
+const LAYOUT_DIR := "user://layouts"
 const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/ValueSliderV2.tscn")
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 
@@ -109,6 +111,11 @@ var current_project_index := 0:
 		project_switched.emit()
 		project_switched.disconnect(current_project.change_project)
 		cel_switched.emit()
+var default_layouts: Array[DockableLayout] = [
+	preload("res://assets/layouts/Default.tres"),
+	preload("res://assets/layouts/Tallscreen.tres"),
+]
+var layouts: Array[DockableLayout] = []
 
 # Canvas related stuff
 ## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
