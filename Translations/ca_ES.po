@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2024-01-24 17:10\n"
+"PO-Revision-Date: 2024-02-01 22:21\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1522,14 +1522,22 @@ msgstr "Només es poden modificar els presets personalitzats"
 msgid "Set application FPS limit:"
 msgstr "Estableix el límit d'FPS de l'aplicació:"
 
-msgid "Pause application when it loses focus"
-msgstr "Pausa l'aplicació en perdre el focus"
-
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Estableix el límit de fotogrames per segon de l'aplicació. Com més baix, menys càrrega rep la CPU, però l'aplicació s'alenteix i pot no respondre correctament. 0 vol dir que no hi ha cap límit."
 
+msgid "Pause application when it loses focus"
+msgstr "Pausa l'aplicació en perdre el focus"
+
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Si això està activat quan l'aplicació perd el focus, es posa en pausa. Això ajuda a reduir l'ús de la CPU mentre no estàs actiu. L'aplicació es resumeix quan el ratolí entra a la finestra de l'aplicació."
+
+#. An option found in the preferences, under the Performance section.
+msgid "Enable window transparency"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Enable window transparency" option.
+msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
