@@ -64,7 +64,7 @@ func _on_DeleteLayout_pressed() -> void:
 func _on_LayoutSettings_confirmed() -> void:
 	var file_name := layout_name.text + ".tres"
 	var path := "user://layouts/".path_join(file_name)
-	var layout: DockableLayout = Global.control.ui.layout
+	var layout: DockableLayout = Global.control.main_ui.layout
 	var err := ResourceSaver.save(layout, path)
 	if err != OK:
 		print(err)
@@ -108,7 +108,7 @@ func _on_DeleteConfirmation_confirmed() -> void:
 func refresh_preview():
 	for tab in mimic_ui.get_tabs():
 		mimic_ui.remove_child(tab)
-	for item in Global.top_menu_container.ui.get_tabs():
+	for item in Global.top_menu_container.main_ui.get_tabs():
 		var box := TextEdit.new()
 		box.name = item.name
 		box.text = item.name

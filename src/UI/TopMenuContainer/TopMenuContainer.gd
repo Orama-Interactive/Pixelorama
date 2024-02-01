@@ -18,8 +18,8 @@ var default_layout_size := layouts.size()
 var selected_layout := 0
 var zen_mode := false
 
-@onready var ui := Global.control.find_child("DockableContainer") as DockableContainer
-@onready var ui_elements := ui.get_children()
+@onready var main_ui := Global.control.find_child("DockableContainer") as DockableContainer
+@onready var ui_elements := main_ui.get_children()
 @onready var file_menu: PopupMenu = $MenuBar/File
 @onready var edit_menu: PopupMenu = $MenuBar/Edit
 @onready var select_menu: PopupMenu = $MenuBar/Select
@@ -28,7 +28,7 @@ var zen_mode := false
 @onready var window_menu: PopupMenu = $MenuBar/Window
 @onready var help_menu: PopupMenu = $MenuBar/Help
 
-@onready var greyscale_vision: ColorRect = ui.find_child("GreyscaleVision")
+@onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
 @onready var new_image_dialog: ConfirmationDialog = Global.control.find_child("CreateNewImage")
 @onready var window_opacity_dialog: AcceptDialog = Global.control.find_child("WindowOpacityDialog")
 @onready var tile_mode_submenu := PopupMenu.new()
@@ -239,7 +239,7 @@ func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.hide_on_checkable_item_selection = false
 	for element in ui_elements:
 		panels_submenu.add_check_item(element.name)
-		var is_hidden: bool = ui.is_control_hidden(element)
+		var is_hidden: bool = main_ui.is_control_hidden(element)
 		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
 
 	panels_submenu.id_pressed.connect(_panels_submenu_id_pressed)
@@ -516,8 +516,8 @@ func window_menu_id_pressed(id: int) -> void:
 		Global.WindowMenu.WINDOW_OPACITY:
 			_popup_dialog(window_opacity_dialog)
 		Global.WindowMenu.MOVABLE_PANELS:
-			ui.tabs_visible = !ui.tabs_visible
-			window_menu.set_item_checked(id, ui.tabs_visible)
+			main_ui.tabs_visible = !main_ui.tabs_visible
+			window_menu.set_item_checked(id, main_ui.tabs_visible)
 		Global.WindowMenu.ZEN_MODE:
 			_toggle_zen_mode()
 		Global.WindowMenu.FULLSCREEN_MODE:
@@ -557,13 +557,13 @@ func _panels_submenu_id_pressed(id: int) -> void:
 		return
 
 	var element_visible := panels_submenu.is_item_checked(id)
-	ui.set_control_hidden(ui_elements[id], element_visible)
+	main_ui.set_control_hidden(ui_elements[id], element_visible)
 	panels_submenu.set_item_checked(id, !element_visible)
-	if ui.tabs_visible == false:
-		ui.tabs_visible = true
+	if main_ui.tabs_visible == false:
+		main_ui.tabs_visible = true
 		await get_tree().process_frame
 		await get_tree().process_frame
-		ui.tabs_visible = false
+		main_ui.tabs_visible = false
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
@@ -577,13 +577,13 @@ func set_layout(id: int) -> void:
 	if id >= layouts.size():
 		id = 0
 	selected_layout = id
-	ui.layout = layouts[id][1].clone()  # Clone is needed to avoid modifying premade layouts
+	main_ui.layout = layouts[id][1].clone()  # Clone is needed to avoid modifying premade layouts
 	for i in layouts.size():
 		var offset := i + 1
 		layouts_submenu.set_item_checked(offset, offset == (id + 1))
 
 	for i in ui_elements.size():
-		var is_hidden := ui.is_control_hidden(ui_elements[i])
+		var is_hidden := main_ui.is_control_hidden(ui_elements[i])
 		panels_submenu.set_item_checked(i, !is_hidden)
 
 	if zen_mode:  # Turn zen mode off
@@ -595,7 +595,7 @@ func set_layout(id: int) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	# Call set_tabs_visible to keep tabs visible if there are 2 or more in the same panel
-	ui.tabs_visible = ui.tabs_visible
+	main_ui.tabs_visible = main_ui.tabs_visible
 
 
 func _toggle_greyscale_view() -> void:
@@ -665,7 +665,7 @@ func _toggle_zen_mode() -> void:
 			continue
 		if !panels_submenu.is_item_checked(i):
 			continue
-		ui.set_control_hidden(ui_elements[i], !zen_mode)
+		main_ui.set_control_hidden(ui_elements[i], !zen_mode)
 	Global.control.find_child("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, zen_mode)

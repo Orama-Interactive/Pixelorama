@@ -6,7 +6,7 @@ var is_quitting_on_save := false
 var changed_projects_on_quit: Array[Project]
 var cursor_image := preload("res://assets/graphics/cursor.png")
 
-@onready var ui := $MenuAndUI/UI/DockableContainer as DockableContainer
+@onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 @onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 @onready var save_sprite_html5: ConfirmationDialog = $Dialogs/SaveSpriteHTML5
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog

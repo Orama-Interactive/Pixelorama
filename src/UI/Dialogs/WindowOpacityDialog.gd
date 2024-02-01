@@ -7,7 +7,7 @@ extends AcceptDialog
 
 func _ready() -> void:
 	await get_tree().process_frame
-	Global.control.ui.sort_children.connect(_recalculate_opacity)
+	Global.control.main_ui.sort_children.connect(_recalculate_opacity)
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:
@@ -34,7 +34,7 @@ func set_window_opacity(value: float) -> void:
 
 	value = value / 100.0
 	# Find the TabContainer that has the Main Canvas panel
-	for container: Control in Global.control.ui._panel_container.get_children():
+	for container: Control in Global.control.main_ui._panel_container.get_children():
 		if container is TabContainer:
 			var center := container.get_rect().get_center()
 			if main_canvas.get_rect().has_point(center):
