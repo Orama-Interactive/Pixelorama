@@ -101,6 +101,13 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"pause_when_unfocused", "Performance/PerformanceContainer/PauseAppFocus", "button_pressed"
 	),
+	Preference.new(
+		"window_transparency",
+		"Performance/PerformanceContainer/WindowTransparency",
+		"button_pressed",
+		true,
+		false
+	),
 	#	Preference.new(
 	#		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
 	#	),

@@ -52,7 +52,6 @@ gdscript/warnings/narrowing_conversion=false
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/allowed.android=false
 window/per_pixel_transparency/allowed.web=false
 

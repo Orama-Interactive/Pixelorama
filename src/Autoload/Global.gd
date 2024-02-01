@@ -170,9 +170,9 @@ var use_native_file_dialogs := false:
 ## Found in Preferences. If [code]true[/code], subwindows are embedded in the main window.
 var single_window_mode := true:
 	set(value):
-		single_window_mode = value
-		if OS.has_feature("editor"):
+		if value == single_window_mode:
 			return
+		single_window_mode = value
 		ProjectSettings.set_setting("display/window/subwindows/embed_subwindows", value)
 		ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
 ## Found in Preferences. The modulation color (or simply color) of icons.
@@ -356,6 +356,16 @@ var fps_limit := 0:
 	set(value):
 		fps_limit = value
 		Engine.max_fps = fps_limit
+## Found in Preferences. Affects the per_pixel_transparency project setting.
+## If [code]true[/code], it allows for the window to be transparent.
+## This affects performance, so keep it [code]false[/code] if you don't need it.
+var window_transparency := false:
+	set(value):
+		if value == window_transparency:
+			return
+		window_transparency = value
+		ProjectSettings.set_setting("display/window/per_pixel_transparency/allowed", value)
+		ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
 
 ## Found in Preferences. The time (in minutes) after which backup is created (if enabled).
 var autosave_interval := 1.0:
@@ -374,9 +384,9 @@ var renderer := 0:
 ## Found in Preferences. The index of tablet driver used by Pixelorama.
 var tablet_driver := 0:
 	set(value):
-		tablet_driver = value
-		if OS.has_feature("editor"):
+		if value == tablet_driver:
 			return
+		tablet_driver = value
 		var tablet_driver_name := DisplayServer.tablet_get_current_driver()
 		ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
 		ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
@@ -553,6 +563,9 @@ func _init() -> void:
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
 	single_window_mode = ProjectSettings.get_setting("display/window/subwindows/embed_subwindows")
+	window_transparency = ProjectSettings.get_setting(
+		"display/window/per_pixel_transparency/allowed"
+	)
 
 
 func _ready() -> void:
