@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-02-01 22:20\n"
+"PO-Revision-Date: 2024-02-01 23:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1535,11 +1535,11 @@ msgstr "Si activé, l'application est mise en pause quand le focus est perdu. Ce
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Activer la transparence de fenêtre"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Si cette option est activée, la fenêtre d'application peut devenir transparente. Cela affecte les performances, donc désactivez-la si vous n'en avez pas besoin."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
