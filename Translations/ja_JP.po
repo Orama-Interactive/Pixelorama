@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-01-25 03:49\n"
+"PO-Revision-Date: 2024-02-01 22:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1525,14 +1525,22 @@ msgstr "カスタムプリセットのみ変更できます"
 msgid "Set application FPS limit:"
 msgstr "アプリのFPS上限を設定:"
 
-msgid "Pause application when it loses focus"
-msgstr "フォーカスを失ったときにアプリケーションを一時停止する"
-
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "アプリケーションのフレーム/秒の制限を設定します。 数値が低いほどCPU使用率が低くなりますが、アプリケーションが遅く、粗く、応答がなくなります。0は制限がないことを意味します。"
 
+msgid "Pause application when it loses focus"
+msgstr "フォーカスを失ったときにアプリケーションを一時停止する"
+
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失ったときに一時停止します。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったとき、アプリケーションは一時停止を解除します。"
+
+#. An option found in the preferences, under the Performance section.
+msgid "Enable window transparency"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Enable window transparency" option.
+msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
