@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-01-24 17:11\n"
+"PO-Revision-Date: 2024-02-01 22:21\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1483,13 +1483,21 @@ msgstr "只能修改自訂配置"
 msgid "Set application FPS limit:"
 msgstr ""
 
-msgid "Pause application when it loses focus"
-msgstr ""
-
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
 
+msgid "Pause application when it loses focus"
+msgstr ""
+
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
+
+#. An option found in the preferences, under the Performance section.
+msgid "Enable window transparency"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Enable window transparency" option.
+msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
