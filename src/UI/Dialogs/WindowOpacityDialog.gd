@@ -1,8 +1,8 @@
 extends AcceptDialog
 
-@onready var slider: ValueSlider = $VBoxContainer/ValueSlider
-@onready var fullscreen_warning: Label = $VBoxContainer/FullscreenWarning
-@onready var main_canvas = Global.control.find_child("Main Canvas")
+@onready var slider := $VBoxContainer/ValueSlider as ValueSlider
+@onready var fullscreen_warning := $VBoxContainer/FullscreenWarning as Label
+@onready var main_canvas := Global.control.find_child("Main Canvas") as Control
 
 
 func _ready() -> void:
@@ -33,13 +33,12 @@ func set_window_opacity(value: float) -> void:
 		slider.value = value
 
 	value = value / 100.0
-	for container in Global.control.ui._panel_container.get_children():
+	# Find the TabContainer that has the Main Canvas panel
+	for container: Control in Global.control.ui._panel_container.get_children():
 		if container is TabContainer:
-			var point = container.get_rect().position + (container.get_rect().size / 2.0)
-			if main_canvas.get_rect().has_point(point):
+			var center := container.get_rect().get_center()
+			if main_canvas.get_rect().has_point(center):
 				container.self_modulate.a = value
-			else:
-				container.self_modulate.a = 1.0
 	Global.transparent_checker.update_transparency(value)
 
 
