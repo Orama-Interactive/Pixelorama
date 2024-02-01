@@ -555,15 +555,9 @@ func _snap_to_submenu_id_pressed(id: int) -> void:
 func _panels_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
-
 	var element_visible := panels_submenu.is_item_checked(id)
 	main_ui.set_control_hidden(ui_elements[id], element_visible)
 	panels_submenu.set_item_checked(id, !element_visible)
-	if main_ui.tabs_visible == false:
-		main_ui.tabs_visible = true
-		await get_tree().process_frame
-		await get_tree().process_frame
-		main_ui.tabs_visible = false
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
@@ -590,12 +584,6 @@ func set_layout(id: int) -> void:
 		Global.control.find_child("TabsContainer").visible = true
 		zen_mode = false
 		window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, false)
-
-	# Hacky but without 2 idle frames it doesn't work properly. Should be replaced eventually
-	await get_tree().process_frame
-	await get_tree().process_frame
-	# Call set_tabs_visible to keep tabs visible if there are 2 or more in the same panel
-	main_ui.tabs_visible = main_ui.tabs_visible
 
 
 func _toggle_greyscale_view() -> void:
