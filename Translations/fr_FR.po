@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-01-25 23:12\n"
+"PO-Revision-Date: 2024-02-01 22:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1524,14 +1524,22 @@ msgstr "Seul le préréglage personnalisé peut être modifié"
 msgid "Set application FPS limit:"
 msgstr "Définir la limite FPS de l'application :"
 
-msgid "Pause application when it loses focus"
-msgstr "Met l'application en pause quand elle perd le focus"
-
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
 
+msgid "Pause application when it loses focus"
+msgstr "Met l'application en pause quand elle perd le focus"
+
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Si activé, l'application est mise en pause quand le focus est perdu. Cela aide à réduire l'usage du processeur en période d'inactivité. L'application sort de pause quand la souris entre à nouveau dans sa fenêtre."
+
+#. An option found in the preferences, under the Performance section.
+msgid "Enable window transparency"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Enable window transparency" option.
+msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
