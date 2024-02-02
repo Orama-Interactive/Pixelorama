@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-02-01 22:21\n"
+"PO-Revision-Date: 2024-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,8 +300,14 @@ msgstr "Añadir"
 msgid "Add Layout"
 msgstr "Añadir Vista"
 
-msgid "Edit Layout"
-msgstr "Editar Vista"
+msgid "Copy from"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename Layout"
+msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "¿Seguro que quieres eliminar esta vista?"
