@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2024-02-01 22:21\n"
+"PO-Revision-Date: 2024-02-02 01:12\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -300,8 +300,14 @@ msgstr "Aldoni"
 msgid "Add Layout"
 msgstr "Aldoni poziciaron"
 
-msgid "Edit Layout"
-msgstr "Redakti poziciaron"
+msgid "Copy from"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename Layout"
+msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Ĉu vi vere volas forigi tiun ĉi poziciaron?"
