@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-02-01 22:20\n"
+"PO-Revision-Date: 2024-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -301,8 +301,14 @@ msgstr "追加"
 msgid "Add Layout"
 msgstr "レイアウトを追加"
 
-msgid "Edit Layout"
-msgstr "レイアウトを編集"
+msgid "Copy from"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename Layout"
+msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "本当にこのレイアウトを削除してよろしいですか？"
