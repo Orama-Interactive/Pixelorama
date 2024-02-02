@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-02-02 01:11\n"
+"PO-Revision-Date: 2024-02-02 02:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -303,13 +303,13 @@ msgid "Add Layout"
 msgstr "Dodaj Szablon"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Skopiuj z"
 
 msgid "Rename"
-msgstr ""
+msgstr "Zmień nazwę"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Zmień nazwę układu"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Czy jesteś pewien, że chcesz usunąć ten szablon?"
