@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-02-02 11:04\n"
+"PO-Revision-Date: 2024-02-02 12:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1340,14 +1340,14 @@ msgstr "Choisissez une couleur pour l'outil droit"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr "Échange les couleurs gauche et droite."
+msgstr "Inverser les couleurs de gauche et droite."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr "Choisir une couleur sur l'écran."
+msgstr "Récupérer une couleur sur l'écran."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -2331,7 +2331,7 @@ msgid "Pan"
 msgstr "Déplacer"
 
 msgid "Color Picker"
-msgstr "Sélecteur de couleurs"
+msgstr "Pipette"
 
 msgid "Pencil"
 msgstr "Crayon"
@@ -2575,7 +2575,7 @@ msgid "Canvas Preview"
 msgstr "Aperçu du canevas"
 
 msgid "Color Pickers"
-msgstr "Sélecteurs de couleurs"
+msgstr "Pipettes"
 
 msgid "Global Tool Options"
 msgstr "Options Générales des Outils"
