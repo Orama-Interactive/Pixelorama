@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-02-01 22:21\n"
+"PO-Revision-Date: 2024-02-02 01:11\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -301,8 +301,14 @@ msgstr "Ekle"
 msgid "Add Layout"
 msgstr "Düzen Ekle"
 
-msgid "Edit Layout"
-msgstr "Düzeni Düzenle"
+msgid "Copy from"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename Layout"
+msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Bu düzeni silmek istediğinize emin misiniz?"
