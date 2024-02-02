@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2024-02-01 22:21\n"
+"PO-Revision-Date: 2024-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,8 +300,14 @@ msgstr "Дадаць"
 msgid "Add Layout"
 msgstr "Дадаць макет"
 
-msgid "Edit Layout"
-msgstr "Рэдагаваць макет"
+msgid "Copy from"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename Layout"
+msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Вы сапраўды хочаце выдаліць гэты макет?"
