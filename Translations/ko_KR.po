@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-02-01 22:21\n"
+"PO-Revision-Date: 2024-02-02 01:11\n"
 
 msgid "OK"
 msgstr "예"
@@ -300,8 +300,14 @@ msgstr "추가"
 msgid "Add Layout"
 msgstr "레이아웃 추가"
 
-msgid "Edit Layout"
-msgstr "레이아웃 수정"
+msgid "Copy from"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename Layout"
+msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "이 레이아웃을 삭제하고 싶습니까?"
