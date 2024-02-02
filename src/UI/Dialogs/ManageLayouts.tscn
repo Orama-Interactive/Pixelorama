@@ -16,6 +16,7 @@ resource_name = "Layout"
 script = ExtResource("3")
 root = SubResource("1")
 hidden_tabs = {}
+save_on_change = false
 
 [node name="ManageLayouts" type="AcceptDialog"]
 title = "Manage Layouts"

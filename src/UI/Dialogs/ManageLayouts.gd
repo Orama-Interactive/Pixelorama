@@ -63,8 +63,10 @@ func _on_DeleteLayout_pressed() -> void:
 
 func _on_LayoutSettings_confirmed() -> void:
 	var file_name := layout_name.text + ".tres"
-	var path := "user://layouts/".path_join(file_name)
-	var layout: DockableLayout = Global.control.main_ui.layout
+	var path := Global.LAYOUT_DIR.path_join(file_name)
+	var layout: DockableLayout = Global.control.main_ui.layout.clone()
+	layout.resource_name = layout_name.text
+	layout.resource_path = path
 	var err := ResourceSaver.save(layout, path)
 	if err != OK:
 		print(err)
@@ -80,6 +82,9 @@ func _on_LayoutSettings_confirmed() -> void:
 			)
 		else:
 			Global.layouts.append(layout)
+			# Save the layout every time it changes
+			layout.save_on_change = true
+			Global.control.main_ui.layout = layout
 			layout_list.add_item(layout_name.text)
 			Global.top_menu_container.populate_layouts_submenu()
 			var n: int = Global.top_menu_container.layouts_submenu.get_item_count()
@@ -87,10 +92,10 @@ func _on_LayoutSettings_confirmed() -> void:
 
 
 func delete_layout_file(file_name: String) -> void:
-	var dir := DirAccess.open("user://layouts/")
+	var dir := DirAccess.open(Global.LAYOUT_DIR)
 	if not is_instance_valid(dir):
 		return
-	dir.remove("user://layouts/".path_join(file_name))
+	dir.remove(Global.LAYOUT_DIR.path_join(file_name))
 
 
 func _on_DeleteConfirmation_confirmed() -> void:

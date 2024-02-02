@@ -165,7 +165,7 @@ first = SubResource("Resource_atmme")
 second = SubResource("Resource_2qk0j")
 
 [resource]
-resource_name = "Layout"
+resource_name = "Default"
 script = ExtResource("3_bjjec")
 root = SubResource("Resource_msuil")
 hidden_tabs = {
@@ -176,3 +176,4 @@ hidden_tabs = {
 "Reference Images": true,
 "Second Canvas": true
 }
+save_on_change = false

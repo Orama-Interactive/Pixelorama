@@ -23,6 +23,15 @@ enum { MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM, MARGIN_CENTER }
 		if value != _hidden_tabs:
 			_hidden_tabs = value
 			changed.emit()
+@export var save_on_change := false:
+	set(value):
+		save_on_change = value
+		if value:
+			if not changed.is_connected(save):
+				changed.connect(save)
+		else:
+			if changed.is_connected(save):
+				changed.disconnect(save)
 
 var _changed_signal_queued := false
 var _first_leaf: DockableLayoutPanel
@@ -59,6 +68,12 @@ func clone() -> DockableLayout:
 
 func get_names() -> PackedStringArray:
 	return _root.get_names()
+
+
+func save(path := resource_path) -> void:
+	if path.is_empty():
+		return
+	ResourceSaver.save(self, path)
 
 
 ## Add missing nodes on first leaf and remove nodes outside indices from leaves.

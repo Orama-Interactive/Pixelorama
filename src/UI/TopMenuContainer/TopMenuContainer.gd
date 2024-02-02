@@ -555,7 +555,7 @@ func set_layout(id: int) -> void:
 	if id >= Global.layouts.size():
 		id = 0
 	selected_layout = id
-	main_ui.layout = Global.layouts[id].clone()
+	main_ui.layout = Global.layouts[id]
 	for i in Global.layouts.size():
 		var offset := i + 1
 		layouts_submenu.set_item_checked(offset, offset == (id + 1))

@@ -204,6 +204,7 @@ hidden_tabs = {
 "Recorder": true,
 "Second Canvas": true
 }
+save_on_change = false
 
 [sub_resource type="ShaderMaterial" id="2"]
 shader = ExtResource("9")
@@ -253,6 +254,7 @@ script = ExtResource("35")
 tabs_visible = false
 tabs_visible_if_more_than_one = true
 layout = SubResource("Resource_b6o2t")
+clone_layout_on_ready = false
 
 [node name="Tools" parent="DockableContainer" instance=ExtResource("1")]
 layout_mode = 2

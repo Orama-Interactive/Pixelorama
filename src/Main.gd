@@ -105,13 +105,14 @@ func _handle_layout_files() -> void:
 	if files.size() == 0:
 		for layout in Global.default_layouts:
 			var file_name := layout.resource_path.get_basename().get_file() + ".tres"
-			print(Global.LAYOUT_DIR.path_join(file_name))
 			ResourceSaver.save(layout, Global.LAYOUT_DIR.path_join(file_name))
 		files = dir.get_files()
 	for file in files:
 		var layout := ResourceLoader.load(Global.LAYOUT_DIR.path_join(file))
 		if layout is DockableLayout:
 			Global.layouts.append(layout)
+			# Save the layout every time it changes
+			layout.save_on_change = true
 
 
 func _setup_application_window_size() -> void:

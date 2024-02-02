@@ -137,7 +137,7 @@ first = SubResource("Resource_otntk")
 second = SubResource("Resource_1xpva")
 
 [resource]
-resource_name = "Layout"
+resource_name = "Tallscreen"
 script = ExtResource("3_ox7l5")
 root = SubResource("Resource_6dytr")
 hidden_tabs = {
@@ -145,3 +145,4 @@ hidden_tabs = {
 "Recorder": true,
 "Second Canvas": true
 }
+save_on_change = false
