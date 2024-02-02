@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-02-02 01:11\n"
+"PO-Revision-Date: 2024-02-02 19:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1541,11 +1541,11 @@ msgstr "Dacă această opțiune este activată, în momentul în care fereastra 
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Activează transparența ferestrei"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Dacă opțiunea este activată, fereastra aplicației poate deveni transparentă. Aceasta afectează performanța, așa că este recomandată dezactivarea opțiunii dacă nu este necesară."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
