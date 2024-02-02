@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-02-02 01:11\n"
+"PO-Revision-Date: 2024-02-02 07:03\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -302,13 +302,13 @@ msgid "Add Layout"
 msgstr "Düzen Ekle"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Şuradan kopyala"
 
 msgid "Rename"
-msgstr ""
+msgstr "Yeniden adlandır"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Düzeni Yeniden Adlandır"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Bu düzeni silmek istediğinize emin misiniz?"
@@ -1542,11 +1542,11 @@ msgstr "Bu açılırsa, uygulamanın penceresi odağı kaybettiğinde duraklatı
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Pencere saydamlığını etkinleştir"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Etkinleştirilirse uygulama penceresi saydam olur. Başarımı etkilediği için ihtiyacınız yoksa kapatınız."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
