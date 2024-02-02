@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-02-02 09:23\n"
+"PO-Revision-Date: 2024-02-02 11:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -95,13 +95,14 @@ msgstr "Enregistrer sous..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Inclure les images fusionnées"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "Si activée, les rendus finals mélangés sont aussi stockés dans le pxo, pour chaque Frame.\n"
+"Cela rend le fichier pxo plus volumineux et est utile pour les importations par un logiciel tiers ou les exportations CLI. Le chargement de fichiers pxo dans Pixelorama ne nécessite pas que cette option soit activée."
 
 msgid "Import"
 msgstr "Importer"
@@ -186,7 +187,7 @@ msgstr "Décalage :"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Envelopper :"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
@@ -342,7 +343,7 @@ msgstr "Afficher les Guides de Souris"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Afficher les Effets de Calque"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -350,11 +351,11 @@ msgstr "Aimanter à"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Aimanter aux Bords de la Grille Rectangulaire"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Aimanter au Centre de la Grille Rectangulaire"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1137,7 +1138,7 @@ msgstr "Biélorusse"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Développeur Principal"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1145,7 +1146,7 @@ msgstr "Designer de l'interface"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Auteurs"
 
 msgid "Art by: %s"
 msgstr "Auteur : %s"
@@ -1350,7 +1351,7 @@ msgstr "Choisir une couleur sur l'écran."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Sélectionner une forme de Pipette."
 
 msgid "Left tool"
 msgstr "Outil gauche"
@@ -1407,7 +1408,7 @@ msgstr "Distance d'Aimantation:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "C'est la distance en pixels (d'écran) d'activation de l'effet d'aimantation des guides et des grilles."
 
 msgid "Grid"
 msgstr "Grille"
@@ -1584,7 +1585,7 @@ msgstr "Dynamiques"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "Stabilisateur"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1927,7 +1928,7 @@ msgid "Frame properties"
 msgstr "Propriétés de la frame"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Propriétés du Cellulo"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1975,7 +1976,7 @@ msgstr "Fusionner le calque vers le bas"
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "Mode de fusion :"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -1983,63 +1984,63 @@ msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "Multiplier / Multiply"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr ""
+msgstr "Densité de Couleur + / Color Burn"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
-msgstr ""
+msgstr "Densité Linéaire + / Linear Burn"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "Superposition / Screen"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
-msgstr ""
+msgstr "Densité de Couleur - / Color Dodge"
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Contraste / Contrast"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Incrustation / Overlay"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Lumière Douce / Soft Light"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Lumière Dure / Hard Light"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Inversion / Inversion"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Différence / Difference"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Exclusion / Exclusion"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Soustraction / Subtract"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Diviser / Divide"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Composant / Component"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
@@ -2514,7 +2515,7 @@ msgstr "Trier la palette"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "Inverser les Couleurs / Reverse colors"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
@@ -2552,7 +2553,8 @@ msgstr "Le nom de la palette est obligatoire !"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Réduire la taille de la palette réinitialisera les positions des couleurs.\n"
+"Les couleurs qui ne rentrent pas dans la nouvelle taille de palette seront perdues !"
 
 msgid "Position:"
 msgstr "Position :"
@@ -2808,11 +2810,11 @@ msgstr "Portée :"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
-msgstr ""
+msgstr "Propriétés Animables"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
-msgstr ""
+msgstr "Prévisualiser la Frame :"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
@@ -2876,7 +2878,7 @@ msgstr "Sinus"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr ""
+msgstr "Tortiller les bords"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
