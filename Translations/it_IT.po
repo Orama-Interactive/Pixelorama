@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-02-02 01:11\n"
+"PO-Revision-Date: 2024-02-02 11:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -303,13 +303,13 @@ msgid "Add Layout"
 msgstr "Aggiungi Layout"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Copia da"
 
 msgid "Rename"
-msgstr ""
+msgstr "Rinomina"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Rinomina disposizione"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Sei sicuro di voler eliminare questo layout?"
@@ -1543,11 +1543,11 @@ msgstr "Se questa opzione viene attivata, quando la finestra dell'applicazione p
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Abilita trasparenza finestra"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Se abilitata, la finestra dell'applicazione può diventare trasparente. Ciò influisce sulle prestazioni, quindi tenerla spenta se non ne hai bisogno."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
