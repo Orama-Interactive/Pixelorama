@@ -90,18 +90,20 @@ func _on_LayoutSettings_confirmed() -> void:
 			delete_layout_file(old_file_name)
 		Global.layouts[layout_selected] = layout
 		layout_list.set_item_text(layout_selected, layout_name.text)
-		Global.top_menu_container.layouts_submenu.set_item_text(
-			layout_selected + 1, layout_name.text
-		)
 	else:
 		Global.layouts.append(layout)
 		# Save the layout every time it changes
 		layout.save_on_change = true
 		Global.control.main_ui.layout = layout
 		layout_list.add_item(layout_name.text)
-		Global.top_menu_container.populate_layouts_submenu()
-		var n: int = Global.top_menu_container.layouts_submenu.get_item_count()
-		Global.top_menu_container.layouts_submenu.set_item_checked(n - 1, true)
+	Global.layouts.sort_custom(
+		func(a: DockableLayout, b: DockableLayout): return (
+			a.resource_path.get_file() < b.resource_path.get_file()
+		)
+	)
+	var layout_index := Global.layouts.find(layout)
+	Global.top_menu_container.populate_layouts_submenu()
+	Global.top_menu_container.layouts_submenu.set_item_checked(layout_index + 1, true)
 
 
 func delete_layout_file(file_name: String) -> void:

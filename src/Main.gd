@@ -421,7 +421,7 @@ func _on_backup_confirmation_visibility_changed() -> void:
 
 
 func _exit_tree() -> void:
-	Global.config_cache.set_value("window", "layout", Global.top_menu_container.selected_layout)
+	Global.config_cache.set_value("window", "layout", Global.layouts.find(main_ui.layout))
 	Global.config_cache.set_value("window", "screen", get_window().current_screen)
 	Global.config_cache.set_value(
 		"window",
