@@ -80,6 +80,8 @@ class Gizmo:
 
 
 func _ready() -> void:
+	# It's being set to true only when the big_bounding_rectangle has a size larger than 0
+	set_process_input(false)
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, -1)))  # Top left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(0, -1)))  # Center top

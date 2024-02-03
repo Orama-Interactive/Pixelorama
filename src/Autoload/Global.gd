@@ -416,13 +416,7 @@ var native_cursors := false:
 		else:
 			control.set_custom_cursor()
 ## Found in Preferences. If [code]true[/code], cursor becomes cross shaped when hovering the canvas.
-var cross_cursor := true:
-	set(value):
-		cross_cursor = value
-		if cross_cursor:
-			main_viewport.mouse_default_cursor_shape = Control.CURSOR_CROSS
-		else:
-			main_viewport.mouse_default_cursor_shape = Control.CURSOR_ARROW
+var cross_cursor := true
 
 # View menu options
 ## If [code]true[/code], the canvas is in greyscale.
