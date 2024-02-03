@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-02-03 08:47\n"
+"PO-Revision-Date: 2024-02-03 09:47\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1547,7 +1547,7 @@ msgstr "Aktifkan transparansi jendela"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Jika diaktifkan, jendela aplikasi akan tampil transparan. Ini juga menguras kinerja, nonaktifkan saja jika tidak perlu."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
