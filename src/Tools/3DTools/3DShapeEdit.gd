@@ -89,6 +89,7 @@ func _input(_event: InputEvent) -> void:
 
 func _ready() -> void:
 	super._ready()
+	load_model_dialog.use_native_dialog = Global.use_native_file_dialogs
 	Global.cel_switched.connect(_cel_switched)
 	_cel_switched()
 	var new_object_popup := new_object_menu_button.get_popup()
