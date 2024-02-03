@@ -284,7 +284,7 @@ func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 
 
 func show_save_dialog(project := Global.current_project) -> void:
-	Global.dialog_open(true)
+	Global.dialog_open(true, true)
 	if OS.get_name() == "Web":
 		var save_filename := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_sprite_html5.popup_centered()

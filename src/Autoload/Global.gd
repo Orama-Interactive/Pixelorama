@@ -840,7 +840,9 @@ func _renderer_changed(value: int) -> void:
 
 
 ## Use this to prepare Pixelorama before opening a dialog.
-func dialog_open(open: bool) -> void:
+func dialog_open(open: bool, is_file_dialog := false) -> void:
+	if is_file_dialog and use_native_file_dialogs:
+		return
 	var dim_color := Color.WHITE
 	if open:
 		if dim_on_popup:

@@ -376,13 +376,14 @@ func _handle_metadata(id: int, popup_menu: PopupMenu) -> void:
 
 func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
 	dialog.popup_centered(dialog_size)
-	Global.dialog_open(true)
+	var is_file_dialog := dialog is FileDialog
+	Global.dialog_open(true, is_file_dialog)
 
 
 func file_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.FileMenu.NEW:
-			_on_new_project_file_menu_option_pressed()
+			_popup_dialog(new_image_dialog)
 		Global.FileMenu.OPEN:
 			_open_project_file()
 		Global.FileMenu.OPEN_LAST_PROJECT:
@@ -399,11 +400,6 @@ func file_menu_id_pressed(id: int) -> void:
 			Global.control.show_quit_dialog()
 		_:
 			_handle_metadata(id, file_menu)
-
-
-func _on_new_project_file_menu_option_pressed() -> void:
-	new_image_dialog.popup_centered()
-	Global.dialog_open(true)
 
 
 func _open_project_file() -> void:

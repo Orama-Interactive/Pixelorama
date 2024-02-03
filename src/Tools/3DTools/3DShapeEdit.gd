@@ -241,7 +241,7 @@ func _cel_switched() -> void:
 func _new_object_popup_id_pressed(id: int) -> void:
 	if id == Cel3DObject.Type.IMPORTED:
 		load_model_dialog.popup_centered()
-		Global.dialog_open(true)
+		Global.dialog_open(true, true)
 	else:
 		_add_object(id)
 
@@ -488,4 +488,4 @@ func _on_LoadModelDialog_files_selected(paths: PackedStringArray) -> void:
 
 
 func _on_load_model_dialog_visibility_changed() -> void:
-	Global.dialog_open(false)
+	Global.dialog_open(false, true)
