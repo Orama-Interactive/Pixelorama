@@ -41,7 +41,8 @@ var _root: DockableLayoutNode = DockableLayoutPanel.new()
 
 
 func _init() -> void:
-	resource_name = "Layout"
+	if resource_name.is_empty():
+		resource_name = "Layout"
 
 
 func set_root(value: DockableLayoutNode, should_emit_changed := true) -> void:
