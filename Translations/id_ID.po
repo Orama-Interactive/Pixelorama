@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-02-02 01:11\n"
+"PO-Revision-Date: 2024-02-03 08:47\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -101,7 +101,7 @@ msgstr "Sertakan gambar tercampur"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr "Jika diaktifkan, bentuk akhir gambar campur akan disimpan jadi pxo, untuk tiap bingkai.\n"
+msgstr "Jika diaktifkan, bentuk akhir ubahan gambar akan disimpan jadi pxo, untuk tiap bingkai.\n"
 "Berkas pxo akan lebih besar dan mampu diimpor dengan peranti lunak pihak ketiga\n"
 "atau diekspor CLI. Memuat pxo di Pixelorama tidak perlu mengaktifkan opsi ini.\n"
 
@@ -303,13 +303,13 @@ msgid "Add Layout"
 msgstr "Tambah Tata Letak"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Salin dari"
 
 msgid "Rename"
-msgstr ""
+msgstr "Ubah Nama"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Ubah Nama Tata Letak"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Apakah yakin ingin menghapus tata letak ini?"
@@ -907,7 +907,7 @@ msgstr "Tambah titik di akhir"
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr "Jika diaktifkan, titik yang terakhir akan ditambah ke ujung gradien.\n"
-"Matikan ini jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
+"Nonaktifkan jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
 
 msgid "Shape:"
 msgstr "Bentuk:"
@@ -1543,7 +1543,7 @@ msgstr "Jika dinyalakan, saat jendela aplikasi hilang fokus, nanti akan dijeda. 
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Aktifkan transparansi jendela"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
