@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://c35n21ii7onhe"]
+[gd_scene load_steps=8 format=3 uid="uid://c35n21ii7onhe"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/UtilityTools/CropTool.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://bgrq56ndc4ydj" path="res://assets/graphics/misc/unlocked_size.png" id="4"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="5"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_inhdu"]
+action = &"transformation_confirm"
+
+[sub_resource type="Shortcut" id="Shortcut_5ydch"]
+events = [SubResource("InputEventAction_inhdu")]
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("3")
@@ -53,8 +59,6 @@ text = "Margins:"
 [node name="Top" parent="MarginsContainer" index="1" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 allow_greater = true
 allow_lesser = true
 prefix = "Top:"
@@ -62,8 +66,6 @@ prefix = "Top:"
 [node name="Bottom" parent="MarginsContainer" index="2" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 allow_greater = true
 allow_lesser = true
 prefix = "Bottom:"
@@ -71,8 +73,6 @@ prefix = "Bottom:"
 [node name="Left" parent="MarginsContainer" index="3" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 allow_greater = true
 allow_lesser = true
 prefix = "Left:"
@@ -80,8 +80,6 @@ prefix = "Left:"
 [node name="Right" parent="MarginsContainer" index="4" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 allow_greater = true
 allow_lesser = true
 prefix = "Right:"
@@ -101,8 +99,6 @@ layout_mode = 2
 [node name="RatioX" parent="RatioContainer/HBoxContainer" index="0" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 min_value = 1.0
 value = 1.0
 allow_greater = true
@@ -114,8 +110,6 @@ text = ":"
 [node name="RatioY" parent="RatioContainer/HBoxContainer" index="2" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 min_value = 1.0
 value = 1.0
 allow_greater = true
@@ -151,6 +145,7 @@ prefix_y = "Height:"
 [node name="Apply" type="Button" parent="." index="7"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_5ydch")
 text = "Apply"
 
 [node name="DimensionsLabel" type="Label" parent="." index="8"]
