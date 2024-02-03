@@ -58,24 +58,24 @@ class Gizmo:
 		type = _type
 		direction = _direction
 
-	func get_cursor() -> DisplayServer.CursorShape:
-		var cursor := DisplayServer.CURSOR_MOVE
+	func get_cursor() -> Input.CursorShape:
+		var cursor := Input.CURSOR_MOVE
 		if direction == Vector2i.ZERO:
-			return DisplayServer.CURSOR_POINTING_HAND
+			return Input.CURSOR_POINTING_HAND
 		elif direction == Vector2i(-1, -1) or direction == Vector2i(1, 1):  # Top left or bottom right
 			if Global.mirror_view:
-				cursor = DisplayServer.CURSOR_BDIAGSIZE
+				cursor = Input.CURSOR_BDIAGSIZE
 			else:
-				cursor = DisplayServer.CURSOR_FDIAGSIZE
+				cursor = Input.CURSOR_FDIAGSIZE
 		elif direction == Vector2i(1, -1) or direction == Vector2i(-1, 1):  # Top right or bottom left
 			if Global.mirror_view:
-				cursor = DisplayServer.CURSOR_FDIAGSIZE
+				cursor = Input.CURSOR_FDIAGSIZE
 			else:
-				cursor = DisplayServer.CURSOR_BDIAGSIZE
+				cursor = Input.CURSOR_BDIAGSIZE
 		elif direction == Vector2i(0, -1) or direction == Vector2i(0, 1):  # Center top or center bottom
-			cursor = DisplayServer.CURSOR_VSIZE
+			cursor = Input.CURSOR_VSIZE
 		elif direction == Vector2i(-1, 0) or direction == Vector2i(1, 0):  # Center left or center right
-			cursor = DisplayServer.CURSOR_HSIZE
+			cursor = Input.CURSOR_HSIZE
 		return cursor
 
 
@@ -167,17 +167,17 @@ func _input(event: InputEvent) -> void:
 			_gizmo_rotate()
 	else:  # Set the appropriate cursor
 		if gizmo_hover:
-			DisplayServer.cursor_set_shape(gizmo_hover.get_cursor())
+			Input.set_default_cursor_shape(gizmo_hover.get_cursor())
 		else:
-			var cursor := DisplayServer.CURSOR_ARROW
+			var cursor := Input.CURSOR_ARROW
 			if Global.cross_cursor:
-				cursor = DisplayServer.CURSOR_CROSS
+				cursor = Input.CURSOR_CROSS
 			var layer: BaseLayer = project.layers[project.current_layer]
 			if not layer.can_layer_get_drawn():
-				cursor = DisplayServer.CURSOR_FORBIDDEN
+				cursor = Input.CURSOR_FORBIDDEN
 
 			if DisplayServer.cursor_get_shape() != cursor:
-				DisplayServer.cursor_set_shape(cursor)
+				Input.set_default_cursor_shape(cursor)
 
 
 func _move_with_arrow_keys(event: InputEvent) -> void:

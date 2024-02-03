@@ -305,7 +305,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 2
-mouse_default_cursor_shape = 3
 stretch = true
 script = ExtResource("23")
 camera_path = NodePath("SubViewport/Camera2D")
