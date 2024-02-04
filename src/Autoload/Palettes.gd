@@ -71,7 +71,7 @@ func _save_palette(palette: Palette = current_palette) -> void:
 		Global.notification_label("Failed to save palette")
 
 
-func copy_palette(palette := current_palette) -> void:
+func copy_palette() -> void:
 	var new_palette_name := current_palette.name
 	while does_palette_exist(new_palette_name):
 		new_palette_name += " copy"
