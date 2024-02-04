@@ -14,6 +14,7 @@ var edited_swatch_color := Color.TRANSPARENT
 @onready var add_color_button := $"%AddColor"
 @onready var delete_color_button := $"%DeleteColor"
 @onready var sort_button := %Sort as MenuButton
+@onready var sort_button_popup := sort_button.get_popup()
 
 @onready var edit_palette_dialog := $"%EditPaletteDialog"
 @onready var create_palette_dialog := $"%CreatePaletteDialog"
@@ -23,20 +24,22 @@ var edited_swatch_color := Color.TRANSPARENT
 
 
 func _ready() -> void:
-	sort_button.get_popup().add_item("Reverse colors", Palettes.SortOptions.REVERSE)
-	sort_button.get_popup().add_separator()
-	sort_button.get_popup().add_item("Sort by hue", Palettes.SortOptions.HUE)
-	sort_button.get_popup().add_item("Sort by saturation", Palettes.SortOptions.SATURATION)
-	sort_button.get_popup().add_item("Sort by value", Palettes.SortOptions.VALUE)
-	sort_button.get_popup().add_separator()
-	sort_button.get_popup().add_item("Sort by red", Palettes.SortOptions.RED)
-	sort_button.get_popup().add_item("Sort by green", Palettes.SortOptions.GREEN)
-	sort_button.get_popup().add_item("Sort by blue", Palettes.SortOptions.BLUE)
-	sort_button.get_popup().add_item("Sort by alpha", Palettes.SortOptions.ALPHA)
+	sort_button_popup.add_check_item("Create a new palette", Palettes.SortOptions.NEW_PALETTE)
+	sort_button_popup.set_item_checked(Palettes.SortOptions.NEW_PALETTE, true)
+	sort_button_popup.add_item("Reverse colors", Palettes.SortOptions.REVERSE)
+	sort_button_popup.add_separator()
+	sort_button_popup.add_item("Sort by hue", Palettes.SortOptions.HUE)
+	sort_button_popup.add_item("Sort by saturation", Palettes.SortOptions.SATURATION)
+	sort_button_popup.add_item("Sort by value", Palettes.SortOptions.VALUE)
+	sort_button_popup.add_separator()
+	sort_button_popup.add_item("Sort by red", Palettes.SortOptions.RED)
+	sort_button_popup.add_item("Sort by green", Palettes.SortOptions.GREEN)
+	sort_button_popup.add_item("Sort by blue", Palettes.SortOptions.BLUE)
+	sort_button_popup.add_item("Sort by alpha", Palettes.SortOptions.ALPHA)
 	Palettes.palette_selected.connect(select_palette)
 	Palettes.new_palette_imported.connect(setup_palettes_selector)
 	Tools.color_changed.connect(_color_changed)
-	sort_button.get_popup().id_pressed.connect(sort_pressed)
+	sort_button_popup.id_pressed.connect(sort_pressed)
 
 	setup_palettes_selector()
 	redraw_current_palette()
@@ -152,6 +155,13 @@ func _on_DeleteColor_gui_input(event: InputEvent) -> void:
 
 
 func sort_pressed(id: Palettes.SortOptions) -> void:
+	var new_palette := sort_button_popup.is_item_checked(Palettes.SortOptions.NEW_PALETTE)
+	if id == Palettes.SortOptions.NEW_PALETTE:
+		sort_button_popup.set_item_checked(Palettes.SortOptions.NEW_PALETTE, not new_palette)
+		return
+	if new_palette:
+		Palettes.copy_palette()
+		setup_palettes_selector()
 	Palettes.current_palette_sort_colors(id)
 	redraw_current_palette()
 

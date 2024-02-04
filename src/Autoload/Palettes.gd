@@ -3,7 +3,7 @@ extends Node
 signal palette_selected(palette_name: String)
 signal new_palette_imported
 
-enum SortOptions { REVERSE, HUE, SATURATION, VALUE, RED, GREEN, BLUE, ALPHA }
+enum SortOptions { NEW_PALETTE, REVERSE, HUE, SATURATION, VALUE, RED, GREEN, BLUE, ALPHA }
 ## Presets for creating a new palette
 enum NewPalettePresetType {
 	EMPTY = 0, FROM_CURRENT_PALETTE = 1, FROM_CURRENT_SPRITE = 2, FROM_CURRENT_SELECTION = 3
@@ -69,6 +69,14 @@ func _save_palette(palette: Palette = current_palette) -> void:
 	var err := palette.save_to_file()
 	if err != OK:
 		Global.notification_label("Failed to save palette")
+
+
+func copy_palette(palette := current_palette) -> void:
+	var new_palette_name := current_palette.name
+	while does_palette_exist(new_palette_name):
+		new_palette_name += " copy"
+	var comment := current_palette.comment
+	_create_new_palette_from_current_palette(new_palette_name, comment)
 
 
 func create_new_palette(
@@ -242,6 +250,8 @@ func current_palette_delete_color(index: int) -> void:
 
 
 func current_palette_sort_colors(id: SortOptions) -> void:
+	if id == SortOptions.NEW_PALETTE:
+		return
 	if id == SortOptions.REVERSE:
 		current_palette.reverse_colors()
 	else:
