@@ -155,12 +155,9 @@ func draw_start(pos: Vector2i) -> void:
 		return
 
 	Global.canvas.selection.transform_content_confirm()
-	if (
-		!Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn()
-		or !Rect2i(Vector2i.ZERO, Global.current_project.size).has_point(pos)
-	):
+	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
-	if Global.current_project.has_selection and not Global.current_project.can_pixel_get_drawn(pos):
+	if not Global.current_project.can_pixel_get_drawn(pos):
 		return
 	var undo_data := _get_undo_data()
 	match _fill_area:
