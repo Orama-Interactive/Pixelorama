@@ -60,7 +60,9 @@ func handle_loading_file(file: String) -> void:
 			return
 		# Attempt to load as a regular image.
 		var image := Image.load_from_file(file)
-		if not is_instance_valid(image):  # An error occurred
+		if not is_instance_valid(image):  # Failed to import as image
+			if handle_loading_video(file):
+				return  # Succeeded in loading as video, so return early before the error appears
 			var file_name: String = file.get_file()
 			Global.popup_error(tr("Can't load file '%s'.") % [file_name])
 			return
@@ -136,6 +138,48 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 		project.frames.append(frame)
 
 	set_new_imported_tab(project, path)
+
+
+## Uses FFMPEG to attempt to load a video file as a new project. Works by splitting the video file
+## to multiple png images for each of the video's frames,
+## and then it imports these images as frames of a new project.
+## TODO: Don't allow large files (how large?) to be imported, to avoid crashes due to lack of memory
+## TODO: Find the video's fps and use that for the new project.
+func handle_loading_video(file: String) -> bool:
+	DirAccess.make_dir_absolute(Export.TEMP_PATH)
+	var temp_path_real := ProjectSettings.globalize_path(Export.TEMP_PATH)
+	var output_file_path := temp_path_real.path_join("%04d.png")
+	# ffmpeg -y -i input_file %04d.png
+	var ffmpeg_execute: PackedStringArray = ["-y", "-i", file, output_file_path]
+	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
+	if success < 0 or success > 1:  # FFMPEG is probably not installed correctly
+		DirAccess.remove_absolute(Export.TEMP_PATH)
+		return false
+	var images_to_import: Array[Image] = []
+	var project_size := Vector2i.ZERO
+	var temp_dir := DirAccess.open(Export.TEMP_PATH)
+	for temp_file in temp_dir.get_files():
+		var temp_image := Image.load_from_file(Export.TEMP_PATH.path_join(temp_file))
+		temp_dir.remove(temp_file)
+		if not is_instance_valid(temp_image):
+			continue
+		images_to_import.append(temp_image)
+		if temp_image.get_width() > project_size.x:
+			project_size.x = temp_image.get_width()
+		if temp_image.get_height() > project_size.y:
+			project_size.y = temp_image.get_height()
+	DirAccess.remove_absolute(Export.TEMP_PATH)
+	if images_to_import.size() == 0 or project_size == Vector2i.ZERO:
+		return false  # We didn't find any images, return
+	# If we found images, create a new project out of them
+	var new_project := Project.new([], file.get_basename().get_file(), project_size)
+	new_project.layers.append(PixelLayer.new(new_project))
+	for temp_image in images_to_import:
+		open_image_as_new_frame(temp_image, 0, new_project, false)
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+	return true
 
 
 func open_pxo_file(path: String, untitled_backup := false, replace_empty := true) -> void:
@@ -657,8 +701,9 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	project.undo_redo.commit_action()
 
 
-func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
-	var project := Global.current_project
+func open_image_as_new_frame(
+	image: Image, layer_index := 0, project := Global.current_project, undo := true
+) -> void:
 	var project_width := maxi(image.get_width(), project.size.x)
 	var project_height := maxi(image.get_height(), project.size.y)
 	if project.size < Vector2i(project_width, project_height):
@@ -673,7 +718,9 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 			frame.cels.append(PixelCel.new(cel_image, 1))
 		else:
 			frame.cels.append(project.layers[i].new_empty_cel())
-
+	if not undo:
+		project.frames.append(frame)
+		return
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
