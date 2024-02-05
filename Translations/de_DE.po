@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-02-02 01:11\n"
+"PO-Revision-Date: 2024-02-05 10:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,9 @@ msgstr "Gemischte Bilder einbeziehen"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "Wenn aktiviert, werden die letzten überlagerten Bilder für jeden Frame auch in der pxo gespeichert.\n"
+"Dies macht die pxo-Datei größer und ist nützlich für den Import durch Software von Drittanbietern\n"
+"oder den CLI-Export. Beim Laden von pxo-Dateien in Pixelorama muss diese Option nicht aktiviert sein.\n"
 
 msgid "Import"
 msgstr "Importieren"
@@ -169,11 +171,11 @@ msgstr "Prozent"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Auf Auswahl zuschneiden"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Auf Inhalt zuschneiden"
 
 msgid "Resize Canvas"
 msgstr "Canvas skalieren"
@@ -301,13 +303,13 @@ msgid "Add Layout"
 msgstr "Layout hinzufügen"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Kopieren von"
 
 msgid "Rename"
-msgstr ""
+msgstr "Umbenennen"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Layout umbenennen"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Sind Sie sicher, dass Sie dieses Layout löschen möchten?"
@@ -764,19 +766,19 @@ msgstr "Oberfläche abdunkeln wenn ein Popup sich öffnet"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Native Datei-Dialoge verwenden"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Wenn diese Einstellung aktiviert ist, werden die nativen Datei-Dialoge des Betriebssystems anstelle des Dialogs von Pixelorama verwendet."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Einzelfenstermodus"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Wenn diese Einstellung aktiviert ist, werden Pixeloramas Unterfenster in das Hauptfenster eingebettet, andernfalls wird jeder Dialog ein eigenes Fenster."
 
 msgid "Dark"
 msgstr "Dunkel"
@@ -1008,7 +1010,7 @@ msgstr "Über Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Unterstütze Pixeloramas Entwicklung"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - Vollpixele deine Träume!"
@@ -1024,7 +1026,7 @@ msgstr "Website"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Quellcode"
 
 msgid "Donate"
 msgstr "Spenden"
@@ -1136,7 +1138,7 @@ msgstr "Weißrussisch"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Leitender Entwickler"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1144,7 +1146,7 @@ msgstr "UI Designer"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Autoren"
 
 msgid "Art by: %s"
 msgstr "Kunst von: %s"
@@ -1171,7 +1173,7 @@ msgid "Save before exiting?"
 msgstr "Speichere vor dem Verlassen?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Projekt %s hat ungespeicherten Fortschritt. Wie wollen Sie fortfahren?"
 
 msgid "Save & Exit"
 msgstr "Speichern & Beenden"
@@ -1338,18 +1340,18 @@ msgstr "Wähle eine Farbe für das rechte Werkzeug"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Wechsle die linke und rechte Farben."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Wähle eine Farbe des Bildschirms aus."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Wähle eine Picker-Form."
 
 msgid "Left tool"
 msgstr "Linkes Werkzeug"
@@ -1540,11 +1542,11 @@ msgstr "Wenn dies eingeschaltet ist und das Fenster der Anwendung den Fokus verl
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Fenster-Transparenz aktivieren"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Wenn aktiviert, kann das Anwendungsfenster transparent werden. Dies wirkt sich jedoch negative auf die Leistung aus, schalten Sie die Option deshalb aus, solange Sie sie nicht benötigen."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1583,7 +1585,7 @@ msgstr "Dynamik"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "Stabilisator"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1920,13 +1922,13 @@ msgid "Unlink Cels"
 msgstr "Cels entfernen"
 
 msgid "Properties"
-msgstr ""
+msgstr "Eigenschaften"
 
 msgid "Frame properties"
 msgstr "Frame-Eigenschaften"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Cel-Eigenschaften"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2402,7 +2404,7 @@ msgstr "Beenden bestätigen"
 
 #. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
 msgid "FFMPEG path"
-msgstr ""
+msgstr "FFMPEG-Pfad"
 
 msgid "Enable autosave"
 msgstr "Autospeichern aktivieren"
@@ -2508,39 +2510,39 @@ msgstr "Eine ausgewählte Farbe entfernen"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "Palette sortieren"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "Farben umkehren"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Nach Farbton sortieren"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Nach Sättigung sortieren"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Nach Wert sortieren"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Nach Rot sortieren"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Nach Grün sortieren"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Nach Blau sortieren"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Nach Alpha sortieren"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Eine Palette mit dem gleichen Namen und Pfad existiert bereits!"
@@ -2550,7 +2552,8 @@ msgstr "Palettenname ist erforderlich!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Die Verkleinerung der Farbpalette wird die Position der Farben zurücksetzen.\n"
+"Farben, die nicht in die neue Farbpalette passen, gehen verloren!"
 
 msgid "Position:"
 msgstr "Position:"
@@ -2894,31 +2897,31 @@ msgstr "Monochrom"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Halte Shift gedrückt, zur Sofort-Entfernung"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Ausgewähltes Referenzbild nach rechts verschieben"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Ausgewähltes Referenzbild nach links verschieben"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Wählt ein Referenzbild auf dem Canvas aus"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Ausgewähltes Referenzbild verschieben"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Ausgewähltes Referenzbild drehen"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Ausgewähltes Referenzbild skalieren"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
