@@ -21,7 +21,8 @@ var should_tween := true
 
 
 func _ready() -> void:
-	set_process_input(false)
+	if not DisplayServer.is_touchscreen_available():
+		set_process_input(false)
 	if index == Cameras.MAIN:
 		rotation_slider = Global.top_menu_container.get_node("%RotationSlider")
 		rotation_slider.value_changed.connect(_rotation_value_changed)
@@ -72,22 +73,22 @@ func _input(event: InputEvent) -> void:
 		drag = false
 		return
 	mouse_pos = viewport_container.get_local_mouse_position()
-	if event.is_action_pressed("pan"):
+	if event.is_action_pressed(&"pan"):
 		drag = true
-	elif event.is_action_released("pan"):
+	elif event.is_action_released(&"pan"):
 		drag = false
-	elif event.is_action_pressed("zoom_in", false, true):  # Wheel Up Event
+	elif event.is_action_pressed(&"zoom_in", false, true):  # Wheel Up Event
 		zoom_camera(1)
-	elif event.is_action_pressed("zoom_out", false, true):  # Wheel Down Event
+	elif event.is_action_pressed(&"zoom_out", false, true):  # Wheel Down Event
 		zoom_camera(-1)
 
-	elif event is InputEventMagnifyGesture:  # Zoom Gesture on a laptop touchpad
-		if event.factor < 1:
+	elif event is InputEventMagnifyGesture:  # Zoom gesture on touchscreens
+		if event.factor >= 1:  # Zoom in
 			zoom_camera(1)
-		else:
+		else:  # Zoom out
 			zoom_camera(-1)
-	elif event is InputEventPanGesture and OS.get_name() != "Android":
-		# Pan Gesture on a laptop touchpad
+	elif event is InputEventPanGesture:
+		# Pan gesture on touchscreens
 		offset = offset + event.delta.rotated(rotation) * 7.0 / zoom
 	elif event is InputEventMouseMotion:
 		if drag:
@@ -95,9 +96,9 @@ func _input(event: InputEvent) -> void:
 			update_transparent_checker_offset()
 			_update_rulers()
 	else:
-		var velocity := Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
-		if velocity != Vector2.ZERO and !_has_selection_tool():
-			offset += (velocity.rotated(rotation) / zoom) * CAMERA_SPEED_RATE
+		var dir := Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down")
+		if dir != Vector2.ZERO and !_has_selection_tool():
+			offset += (dir.rotated(rotation) / zoom) * CAMERA_SPEED_RATE
 			_update_rulers()
 
 	save_values_to_project()
