@@ -173,30 +173,25 @@ func _cel_size_changed(value: int) -> void:
 	cel_size = clampi(value, min_cel_size, max_cel_size)
 	update_minimum_size()
 	Global.config_cache.set_value("timeline", "cel_size", cel_size)
-	for layer_button in Global.layer_vbox.get_children():
+	for layer_button: Control in Global.layer_vbox.get_children():
 		layer_button.custom_minimum_size.y = cel_size
 		layer_button.size.y = cel_size
-	for cel_hbox in Global.cel_vbox.get_children():
-		for cel_button in cel_hbox.get_children():
+	for cel_hbox: Control in Global.cel_vbox.get_children():
+		for cel_button: Control in cel_hbox.get_children():
 			cel_button.custom_minimum_size.x = cel_size
 			cel_button.custom_minimum_size.y = cel_size
 			cel_button.size.x = cel_size
 			cel_button.size.y = cel_size
 
-	for frame_id in Global.frame_hbox.get_children():
+	for frame_id: Control in Global.frame_hbox.get_children():
 		frame_id.custom_minimum_size.x = cel_size
 		frame_id.size.x = cel_size
 
-	for tag_c in Global.tag_container.get_children():
-		var tag_base_size := cel_size + 4
+	for tag_c: Control in Global.tag_container.get_children():
 		var tag: AnimationTag = tag_c.tag
-		# Added 1 to answer to get starting position of next cel
-		tag_c.position.x = (tag.from - 1) * tag_base_size + 1
-		var tag_size := tag.to - tag.from
-		# We dont need the 4 pixels at the end of last cel
-		tag_c.custom_minimum_size.x = (tag_size + 1) * tag_base_size - 4
-		# We dont need the 4 pixels at the end of last cel
-		tag_c.size.x = (tag_size + 1) * tag_base_size - 4
+		tag_c.position = tag.get_position()
+		tag_c.custom_minimum_size.x = tag.get_minimum_size()
+		tag_c.size.x = tag_c.custom_minimum_size.x
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.custom_minimum_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
 

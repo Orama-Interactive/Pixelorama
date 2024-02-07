@@ -556,7 +556,6 @@ func _animation_tags_changed(value: Array[AnimationTag]) -> void:
 		child.queue_free()
 
 	for tag in animation_tags:
-		var tag_base_size = Global.animation_timeline.cel_size + 4
 		var tag_c: Container = animation_tag_node.instantiate()
 		Global.tag_container.add_child(tag_c)
 		tag_c.tag = tag
@@ -565,13 +564,8 @@ func _animation_tags_changed(value: Array[AnimationTag]) -> void:
 		tag_c.get_node("Label").text = tag.name
 		tag_c.get_node("Label").modulate = tag.color
 		tag_c.get_node("Line2D").default_color = tag.color
-
-		# Added 1 to answer to get starting position of next cel
-		tag_c.position.x = (tag.from - 1) * tag_base_size + 1
-		var tag_size := tag.to - tag.from
-		# We dont need the 4 pixels at the end of last cel
-		tag_c.custom_minimum_size.x = (tag_size + 1) * tag_base_size - 8
-		tag_c.position.y = 1  # To make top line of tag visible
+		tag_c.position = tag.get_position()
+		tag_c.custom_minimum_size.x = tag.get_minimum_size()
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.custom_minimum_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
 

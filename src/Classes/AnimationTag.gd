@@ -43,6 +43,8 @@ extends RefCounted
 ##    Global.current_project.undo_redo.commit_action()
 ## [/codeblock]
 
+const CEL_SEPARATION := 4
+
 var name: String  ## Name of tag
 var color: Color  ## Color of tag
 var from: int  ## First frame number in the tag (first frame in timeline is numbered 1)
@@ -55,3 +57,14 @@ func _init(_name, _color, _from, _to) -> void:
 	color = _color
 	from = _from
 	to = _to
+
+
+func get_position() -> Vector2:
+	var tag_base_size: int = Global.animation_timeline.cel_size + CEL_SEPARATION
+	return Vector2((from - 1) * tag_base_size + 1, 1)
+
+
+func get_minimum_size() -> int:
+	var tag_base_size: int = Global.animation_timeline.cel_size + CEL_SEPARATION
+	var tag_size := to - from
+	return (tag_size + 1) * tag_base_size - 8
