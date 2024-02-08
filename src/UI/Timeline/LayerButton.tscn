@@ -11,6 +11,7 @@ offset_right = 200.0
 offset_bottom = 36.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
+theme_type_variation = &"LayerFrameButton"
 toggle_mode = true
 action_mode = 0
 script = ExtResource("1_6hlpe")
@@ -42,6 +43,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 tooltip_text = "Expand/collapse group"
 mouse_default_cursor_shape = 2
+flat = true
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/ExpandButton"]
 layout_mode = 0
@@ -66,6 +68,7 @@ size_flags_vertical = 4
 tooltip_text = "Toggle layer's visibility"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+flat = true
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/VisibilityButton"]
 layout_mode = 0
@@ -90,6 +93,7 @@ size_flags_vertical = 4
 tooltip_text = "Lock/unlock layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+flat = true
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/LockButton"]
 layout_mode = 0
@@ -116,6 +120,7 @@ tooltip_text = "Enable/disable automatic linking of new cels when creating new f
 
 Linked cels share content across multiple frames"
 mouse_default_cursor_shape = 2
+flat = true
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/LinkButton"]
 layout_mode = 0

@@ -1130,6 +1130,7 @@ func project_layer_added(layer: int) -> void:
 		project.layers[layer].set_name_to_default(Global.current_project.layers.size())
 
 	var cel_hbox := HBoxContainer.new()
+	cel_hbox.add_theme_constant_override("separation", 0)
 	for f in project.frames.size():
 		var cel_button := project.frames[f].cels[layer].instantiate_cel_button()
 		cel_button.frame = f

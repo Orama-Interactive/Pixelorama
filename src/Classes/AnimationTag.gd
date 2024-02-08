@@ -43,7 +43,7 @@ extends RefCounted
 ##    Global.current_project.undo_redo.commit_action()
 ## [/codeblock]
 
-const CEL_SEPARATION := 4
+const CEL_SEPARATION := 0
 
 var name: String  ## Name of tag
 var color: Color  ## Color of tag

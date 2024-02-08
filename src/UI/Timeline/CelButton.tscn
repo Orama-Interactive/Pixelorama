@@ -19,25 +19,44 @@ shader_parameter/follow_scale = false
 
 [node name="CelButton" type="Button"]
 custom_minimum_size = Vector2(36, 36)
-offset_top = 18.0
 offset_right = 36.0
-offset_bottom = 54.0
-pivot_offset = Vector2(-18, 6)
+offset_bottom = 36.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 focus_mode = 0
 mouse_default_cursor_shape = 2
+theme_type_variation = &"CelButton"
 toggle_mode = true
 button_mask = 7
 script = ExtResource("1_iewgo")
 
+[node name="Linked" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -8.0
+offset_right = -1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 1, 0.4, 1)
+
 [node name="CelTexture" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 1.78536
-offset_right = 34.0
-offset_bottom = 33.7854
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 expand_mode = 1
@@ -63,12 +82,6 @@ item_2/text = "Link Cels to"
 item_2/id = 2
 item_3/text = "Unlink Cels"
 item_3/id = 3
-
-[node name="LinkedIndicator" type="Polygon2D" parent="."]
-color = Color(0, 1, 0, 1)
-invert_enabled = true
-invert_border = 1.0
-polygon = PackedVector2Array(0, 0, 36, 0, 36, 36, 0, 36)
 
 [node name="Properties" type="AcceptDialog" parent="."]
 title = "Cel properties"
@@ -126,7 +139,6 @@ stretch_margin_bottom = 3
 script = ExtResource("4_wcpcc")
 
 [connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
-[connection signal="resized" from="." to="." method="_on_CelButton_resized"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
 [connection signal="visibility_changed" from="Properties" to="." method="_on_properties_visibility_changed"]
 [connection signal="value_changed" from="Properties/GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]

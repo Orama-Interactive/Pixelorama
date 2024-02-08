@@ -2,12 +2,10 @@ extends Container
 
 const PADDING := 1
 
-@export var h_scroll_bar_node_path: NodePath
-@onready var h_scroll_bar: HScrollBar = get_node_or_null(h_scroll_bar_node_path)
+@export var h_scroll_bar: HScrollBar
 
 
 func _ready():
-	clip_contents = true
 	sort_children.connect(_on_sort_children)
 	if is_instance_valid(h_scroll_bar):
 		h_scroll_bar.resized.connect(_update_scroll)

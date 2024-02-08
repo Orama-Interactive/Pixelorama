@@ -7,7 +7,7 @@ var layer := 0
 var cel: BaseCel
 
 @onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
-@onready var linked_indicator: Polygon2D = get_node_or_null("LinkedIndicator")
+@onready var linked: ColorRect = $Linked
 @onready var cel_texture: TextureRect = $CelTexture
 @onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
 @onready var properties: AcceptDialog = $Properties
@@ -15,12 +15,32 @@ var cel: BaseCel
 
 
 func _ready() -> void:
+	Global.cel_switched.connect(cel_switched)
 	cel = Global.current_project.frames[frame].cels[layer]
 	button_setup()
 	_dim_checker()
 	cel.texture_changed.connect(_dim_checker)
+	for selected in Global.current_project.selected_cels:
+		if selected[1] == layer and selected[0] == frame:
+			button_pressed = true
 	if cel is GroupCel:
 		transparent_checker.visible = false
+
+
+func cel_switched() -> void:
+	var current_theme: Theme = Global.control.theme
+	var is_guide := false
+	for selected in Global.current_project.selected_cels:
+		if selected[1] == layer or selected[0] == frame:
+			is_guide = true
+			break
+	if is_guide:
+		var guide_stylebox := current_theme.get_stylebox("guide", "CelButton")
+		add_theme_stylebox_override("normal", guide_stylebox)
+	else:
+		var normal_stylebox := current_theme.get_stylebox("normal", "CelButton")
+		add_theme_stylebox_override("normal", normal_stylebox)
+	z_index = 1 if button_pressed else 0
 
 
 func button_setup() -> void:
@@ -30,21 +50,10 @@ func button_setup() -> void:
 	var base_layer := Global.current_project.layers[layer]
 	tooltip_text = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
 	cel_texture.texture = cel.image_texture
-	if is_instance_valid(linked_indicator):
-		linked_indicator.visible = cel.link_set != null
+	if is_instance_valid(linked):
+		linked.visible = cel.link_set != null
 		if cel.link_set != null:
-			linked_indicator.color.h = cel.link_set["hue"]
-
-
-func _on_CelButton_resized() -> void:
-	cel_texture.custom_minimum_size.x = custom_minimum_size.x - 4
-	cel_texture.custom_minimum_size.y = custom_minimum_size.y - 4
-
-	if is_instance_valid(linked_indicator):
-		linked_indicator.polygon[1].x = custom_minimum_size.x
-		linked_indicator.polygon[2].x = custom_minimum_size.x
-		linked_indicator.polygon[2].y = custom_minimum_size.y
-		linked_indicator.polygon[3].y = custom_minimum_size.y
+			linked.color.h = cel.link_set["hue"]
 
 
 func _on_CelButton_pressed() -> void:

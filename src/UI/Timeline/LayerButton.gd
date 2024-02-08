@@ -15,6 +15,7 @@ var layer_index := 0
 
 
 func _ready() -> void:
+	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
 	var layer := Global.current_project.layers[layer_index]
 	if layer is PixelLayer:
 		linked_button.visible = true

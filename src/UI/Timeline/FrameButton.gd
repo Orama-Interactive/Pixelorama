@@ -9,6 +9,7 @@ var frame := 0
 
 
 func _ready() -> void:
+	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
 	custom_minimum_size.x = Global.animation_timeline.cel_size
 	text = str(frame + 1)
 	pressed.connect(_button_pressed)
