@@ -1,12 +1,12 @@
-[gd_resource type="Theme" load_steps=80 format=3 uid="uid://bcfsxuu6eykiq"]
+[gd_resource type="Theme" load_steps=81 format=3 uid="uid://bcfsxuu6eykiq"]
 
-[ext_resource type="Texture2D" uid="uid://brdgp0y4tarar" path="res://assets/graphics/misc/radio_unpressed.png" id="1_xme5o"]
-[ext_resource type="Texture2D" uid="uid://ybfsxkc2qap7" path="res://assets/graphics/misc/checkbox_unpressed.png" id="2_hjv6j"]
-[ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="3_a7h0n"]
-[ext_resource type="Texture2D" uid="uid://bq8h66v4ie8xl" path="res://assets/graphics/misc/value_arrow_hover.svg" id="4_lvo3d"]
-[ext_resource type="Texture2D" uid="uid://hhxenhteahv6" path="res://assets/graphics/misc/value_arrow_press.svg" id="5_o3s4v"]
-[ext_resource type="Texture2D" uid="uid://c7u0yofrpm50a" path="res://assets/graphics/misc/value_slider.png" id="6_rpq74"]
-[ext_resource type="FontFile" uid="uid://cvc4lelf6hl7x" path="res://assets/fonts/Roboto-Regular.ttf" id="7_j355g"]
+[ext_resource type="Texture2D" uid="uid://brdgp0y4tarar" path="res://assets/graphics/misc/radio_unpressed.png" id="1_dakkn"]
+[ext_resource type="Texture2D" uid="uid://ybfsxkc2qap7" path="res://assets/graphics/misc/checkbox_unpressed.png" id="2_yf73r"]
+[ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="3_a0rg0"]
+[ext_resource type="Texture2D" uid="uid://bq8h66v4ie8xl" path="res://assets/graphics/misc/value_arrow_hover.svg" id="4_gvo0i"]
+[ext_resource type="Texture2D" uid="uid://hhxenhteahv6" path="res://assets/graphics/misc/value_arrow_press.svg" id="5_02c0a"]
+[ext_resource type="Texture2D" uid="uid://c7u0yofrpm50a" path="res://assets/graphics/misc/value_slider.png" id="6_drhin"]
+[ext_resource type="FontFile" uid="uid://cvc4lelf6hl7x" path="res://assets/fonts/Roboto-Regular.ttf" id="7_0r7jt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_755mo"]
 content_margin_left = 8.0
@@ -39,6 +39,14 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nv6tl"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+bg_color = Color(0.227451, 0.227451, 0.227451, 0.5)
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0f5f"]
 content_margin_left = 6.0
@@ -664,7 +672,7 @@ expand_margin_bottom = 4.0
 
 [resource]
 resource_name = "Gray"
-default_font = ExtResource("7_j355g")
+default_font = ExtResource("7_0r7jt")
 default_font_size = 16
 AcceptDialog/styles/panel = SubResource("StyleBoxFlat_755mo")
 BoxContainer/constants/separation = 4
@@ -682,13 +690,13 @@ Button/colors/icon_normal_color = Color(1, 1, 1, 1)
 Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
 Button/styles/disabled = SubResource("23")
 Button/styles/focus = SubResource("StyleBoxFlat_kpwev")
-Button/styles/hover = SubResource("23")
+Button/styles/hover = SubResource("StyleBoxFlat_nv6tl")
 Button/styles/normal = SubResource("23")
 Button/styles/pressed = SubResource("StyleBoxFlat_t0f5f")
-CheckBox/icons/radio_unchecked = ExtResource("1_xme5o")
-CheckBox/icons/radio_unchecked_disabled = ExtResource("1_xme5o")
-CheckBox/icons/unchecked = ExtResource("2_hjv6j")
-CheckBox/icons/unchecked_disabled = ExtResource("2_hjv6j")
+CheckBox/icons/radio_unchecked = ExtResource("1_dakkn")
+CheckBox/icons/radio_unchecked_disabled = ExtResource("1_dakkn")
+CheckBox/icons/unchecked = ExtResource("2_yf73r")
+CheckBox/icons/unchecked_disabled = ExtResource("2_yf73r")
 CheckBox/styles/disabled = SubResource("StyleBoxFlat_lbyuh")
 CheckBox/styles/focus = SubResource("StyleBoxFlat_4dymj")
 CheckBox/styles/hover = SubResource("StyleBoxFlat_4jbvl")
@@ -702,7 +710,7 @@ CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_viauy")
 CheckButton/styles/normal = SubResource("StyleBoxFlat_ygru1")
 CheckButton/styles/pressed = SubResource("StyleBoxFlat_h750t")
 CollapsibleContainer/base_type = &"VBoxContainer"
-CollapsibleContainer/icons/arrow_normal = ExtResource("3_a7h0n")
+CollapsibleContainer/icons/arrow_normal = ExtResource("3_a0rg0")
 ColorPicker/constants/h_width = 28
 ColorPicker/constants/margin = 8
 ColorPickerButton/styles/disabled = null
@@ -766,10 +774,10 @@ Panel/styles/panel = SubResource("103")
 PanelContainer/styles/panel = SubResource("104")
 PopupMenu/colors/font_color = Color(0.776471, 0.776471, 0.776471, 1)
 PopupMenu/colors/font_disabled_color = Color(0.776471, 0.776471, 0.776471, 0.5)
-PopupMenu/icons/radio_unchecked = ExtResource("1_xme5o")
-PopupMenu/icons/radio_unchecked_disabled = ExtResource("1_xme5o")
-PopupMenu/icons/unchecked = ExtResource("2_hjv6j")
-PopupMenu/icons/unchecked_disabled = ExtResource("2_hjv6j")
+PopupMenu/icons/radio_unchecked = ExtResource("1_dakkn")
+PopupMenu/icons/radio_unchecked_disabled = ExtResource("1_dakkn")
+PopupMenu/icons/unchecked = ExtResource("2_yf73r")
+PopupMenu/icons/unchecked_disabled = ExtResource("2_yf73r")
 PopupMenu/styles/hover = SubResource("112")
 PopupMenu/styles/labeled_separator_left = SubResource("113")
 PopupMenu/styles/labeled_separator_right = SubResource("114")
@@ -825,7 +833,7 @@ Tree/colors/guide_color = Color(1, 1, 1, 0.05)
 Tree/colors/relationship_line_color = Color(1, 1, 1, 0.1)
 Tree/colors/title_button_color = Color(0.77832, 0.77832, 0.77832, 1)
 Tree/constants/scroll_border = 40
-Tree/icons/unchecked = ExtResource("2_hjv6j")
+Tree/icons/unchecked = ExtResource("2_yf73r")
 Tree/styles/button_pressed = SubResource("156")
 Tree/styles/cursor = SubResource("157")
 Tree/styles/cursor_unfocused = SubResource("157")
@@ -851,12 +859,12 @@ VSplitContainer/constants/separation = 8
 ValueSlider/base_type = &"TextureProgressBar"
 ValueSlider/colors/progress_color = Color(0.227451, 0.227451, 0.227451, 1)
 ValueSlider/colors/under_color = Color(0.227451, 0.227451, 0.227451, 1)
-ValueSlider/icons/arrow_hover = ExtResource("4_lvo3d")
-ValueSlider/icons/arrow_normal = ExtResource("3_a7h0n")
-ValueSlider/icons/arrow_pressed = ExtResource("5_o3s4v")
+ValueSlider/icons/arrow_hover = ExtResource("4_gvo0i")
+ValueSlider/icons/arrow_normal = ExtResource("3_a0rg0")
+ValueSlider/icons/arrow_pressed = ExtResource("5_02c0a")
 ValueSlider/icons/texture_over = null
-ValueSlider/icons/texture_progress = ExtResource("6_rpq74")
-ValueSlider/icons/texture_under = ExtResource("6_rpq74")
+ValueSlider/icons/texture_progress = ExtResource("6_drhin")
+ValueSlider/icons/texture_under = ExtResource("6_drhin")
 Window/colors/title_color = Color(0.776471, 0.776471, 0.776471, 1)
 Window/constants/title_height = 24
 Window/styles/embedded_border = SubResource("StyleBoxFlat_pgljm")
