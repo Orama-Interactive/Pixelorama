@@ -10,6 +10,7 @@ var theme_button_group := ButtonGroup.new()
 	preload("res://assets/themes/caramel/theme.tres"),
 	preload("res://assets/themes/light/theme.tres"),
 	preload("res://assets/themes/purple/theme.tres"),
+	preload("res://assets/themes/rose/theme.tres"),
 ]
 
 @onready var buttons_container: BoxContainer = $ThemeButtons
