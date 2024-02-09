@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://clbjfkdupw52l"]
+
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="1_85pb7"]
+[ext_resource type="Script" path="res://src/UI/Timeline/CelProperties.gd" id="1_lyy7i"]
+
+[node name="CelProperties" type="AcceptDialog"]
+title = "Cel properties"
+size = Vector2i(300, 111)
+exclusive = false
+popup_window = true
+script = ExtResource("1_lyy7i")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 66.0
+columns = 2
+
+[node name="OpacityLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Opacity:"
+
+[node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_85pb7")
+
+[node name="ZIndexLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Z-Index:"
+
+[node name="ZIndexSlider" type="TextureProgressBar" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -64.0
+max_value = 64.0
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_85pb7")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
+[connection signal="value_changed" from="GridContainer/ZIndexSlider" to="." method="_on_z_index_slider_value_changed"]

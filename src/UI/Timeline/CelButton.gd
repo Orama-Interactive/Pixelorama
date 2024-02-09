@@ -15,8 +15,7 @@ var _call_theme_changed := true
 @onready var linked: ColorRect = $Linked
 @onready var cel_texture: TextureRect = $CelTexture
 @onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
-@onready var properties: AcceptDialog = $Properties
-@onready var opacity_slider: ValueSlider = %OpacitySlider
+@onready var properties: AcceptDialog = Global.control.find_child("CelProperties")
 
 
 func _ready() -> void:
@@ -120,7 +119,7 @@ func _on_CelButton_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		MenuOptions.PROPERTIES:
-			opacity_slider.value = cel.opacity * 100.0
+			properties.cel = cel
 			properties.popup_centered()
 		MenuOptions.DELETE:
 			_delete_cel_content()
@@ -318,19 +317,3 @@ func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
 	rect.position.x += rect.size.x * x_begin
 	rect.size.x *= x_end - x_begin
 	return rect
-
-
-func _on_opacity_slider_value_changed(value: float) -> void:
-	cel.opacity = value / 100.0
-	Global.canvas.queue_redraw()
-
-
-func _on_z_index_slider_value_changed(value: float) -> void:
-	cel.z_index = value
-	Global.current_project.order_layers()
-	Global.canvas.update_all_layers = true
-	Global.canvas.queue_redraw()
-
-
-func _on_properties_visibility_changed() -> void:
-	Global.dialog_open(properties.visible)
