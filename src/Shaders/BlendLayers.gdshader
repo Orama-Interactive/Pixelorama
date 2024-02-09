@@ -55,12 +55,11 @@ vec3 rgb_to_hsl(vec3 rgb)
 
 
 vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
-	vec4 result;
 	if (current_color.a <= 0.001 || opacity <= 0.001) {
 		return prev_color;
 	}
-	current_color.rgb = current_color.rgb * opacity; // Premultiply with the layer texture's alpha to prevent semi transparent pixels from being too bright (ALL LAYER TYPES!)
-	current_color.a = current_color.a * opacity;  // Combine the layer opacity
+	vec4 result;
+	current_color.a *= opacity;  // Combine the layer opacity
 	switch(blend_type) {
 		case 1: // Darken
 			result.rgb = min(prev_color.rgb, current_color.rgb);
@@ -128,7 +127,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			result.rgb = hsl_to_rgb(vec3(prev_hsl.r, prev_hsl.g, current_hsl.b));
 			break;
 		default: // Normal (case 0)
-			result.rgb = prev_color.rgb * (1.0 - current_color.a) + current_color.rgb;
+			result.rgb = mix(prev_color.rgb, current_color.rgb, current_color.a);
 			break;
 	}
 	result.a = prev_color.a * (1.0 - current_color.a) + current_color.a;
