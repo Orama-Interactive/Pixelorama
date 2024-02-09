@@ -9,13 +9,12 @@ script = ExtResource("2")
 
 [node name="ThicknessSlider" parent="." index="2" instance=ExtResource("3")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 min_value = 1.0
 value = 1.0
 prefix = "Size:"
 suffix = "px"
-is_global = true
+global_increment_action = "brush_size_increment"
+global_decrement_action = "brush_size_decrement"
 
 [node name="Brush" parent="." index="3"]
 visible = false
