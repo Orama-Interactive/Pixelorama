@@ -116,7 +116,7 @@ func _notification(what: int) -> void:
 		drag_highlight.hide()
 	elif what == NOTIFICATION_THEME_CHANGED:
 		if is_instance_valid(layer_settings_container):
-			layer_container.custom_minimum_size.x = layer_settings_container.size.x
+			layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 
 
 func _input(event: InputEvent) -> void:
