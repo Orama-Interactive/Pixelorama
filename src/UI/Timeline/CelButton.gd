@@ -6,6 +6,11 @@ var frame := 0
 var layer := 0
 var cel: BaseCel
 
+## Without this variable, [signal Control.theme_changed] calls [method cel_switched], which calls
+## [method Control.add_theme_stylebox_override], firing [signal Control.theme_changed]
+## and thus resulting in an endless loop.
+var _call_theme_changed := true
+
 @onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
 @onready var linked: ColorRect = $Linked
 @onready var cel_texture: TextureRect = $CelTexture
@@ -16,6 +21,7 @@ var cel: BaseCel
 
 func _ready() -> void:
 	Global.cel_switched.connect(cel_switched)
+	theme_changed.connect(cel_switched)
 	cel = Global.current_project.frames[frame].cels[layer]
 	button_setup()
 	_dim_checker()
@@ -28,12 +34,16 @@ func _ready() -> void:
 
 
 func cel_switched() -> void:
+	if not _call_theme_changed:
+		_call_theme_changed = true
+		return
 	var current_theme: Theme = Global.control.theme
 	var is_guide := false
 	for selected in Global.current_project.selected_cels:
 		if selected[1] == layer or selected[0] == frame:
 			is_guide = true
 			break
+	_call_theme_changed = false
 	if is_guide:
 		var guide_stylebox := current_theme.get_stylebox("guide", "CelButton")
 		add_theme_stylebox_override("normal", guide_stylebox)
