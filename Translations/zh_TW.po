@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-02-02 01:12\n"
+"PO-Revision-Date: 2024-02-10 14:14\n"
 
 msgid "OK"
 msgstr "確定"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "檔案名稱："
 
 msgid "Project Name:"
-msgstr ""
+msgstr "專案名稱："
 
 msgid "Image Size"
 msgstr "圖片大小"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "編輯"
 
 msgid "Select"
-msgstr ""
+msgstr "選擇"
 
 msgid "View"
 msgstr "檢視"
@@ -143,7 +143,7 @@ msgid "Paste"
 msgstr "貼上"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "原位黏貼"
 
 msgid "Delete"
 msgstr "刪除"
@@ -295,7 +295,7 @@ msgid "Double click to set as new startup layout"
 msgstr ""
 
 msgid "Add"
-msgstr ""
+msgstr "新增"
 
 msgid "Add Layout"
 msgstr ""
@@ -304,7 +304,7 @@ msgid "Copy from"
 msgstr ""
 
 msgid "Rename"
-msgstr ""
+msgstr "重新命名"
 
 msgid "Rename Layout"
 msgstr ""
