@@ -14,6 +14,7 @@ layout_mode = 2
 offset_left = 7.0
 offset_right = 356.0
 offset_bottom = 27.0
+flat = true
 
 [node name="File" type="PopupMenu" parent="MenuBar"]
 
