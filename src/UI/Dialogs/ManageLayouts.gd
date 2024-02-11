@@ -104,6 +104,7 @@ func _on_DeleteConfirmation_confirmed() -> void:
 func refresh_preview():
 	for tab in mimic_ui.get_tabs():
 		mimic_ui.remove_child(tab)
+		tab.queue_free()
 	for item in Global.top_menu_container.ui.get_tabs():
 		var box := TextEdit.new()
 		box.name = item.name

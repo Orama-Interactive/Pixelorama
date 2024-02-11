@@ -24,6 +24,7 @@ Built using Godot 3.5.2
 ### Fixed
 - Memory usage has been greatly optimized when doing operations such as drawing, image effects, selecting, transforming, etc, as the images stored in memory are now compressed. [#883](https://github.com/Orama-Interactive/Pixelorama/issues/883)
 - Fixed memory leak when applying image effects. [7235617db7c21837edc7ba7b95f2e7eeb1140691](https://github.com/Orama-Interactive/Pixelorama/commit/7235617db7c21837edc7ba7b95f2e7eeb1140691)
+- Fixed memory leak when previewing layouts in the Manage Layouts dialog.
 - Tool shortcuts can now work with <kbd>Control</kbd>. [#935](https://github.com/Orama-Interactive/Pixelorama/issues/935)
 - Optimize canvas drawing by only updating it when the image(s) have changed. [ac6a4db43d9296ebc03e639d8199dd3878a25d86](https://github.com/Orama-Interactive/Pixelorama/commit/ac6a4db43d9296ebc03e639d8199dd3878a25d86)
 - Fix bug where using shortcuts to switch between frames also moved the selection, causing deletions.
