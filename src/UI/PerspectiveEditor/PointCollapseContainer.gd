@@ -27,7 +27,7 @@ func _set_visible(press: bool) -> void:
 	if press:
 		$TextureRect.rotation = 0
 	else:
-		$TextureRect.rotation = -90
+		$TextureRect.rotation = -PI / 2
 	content.visible = press
 
 
