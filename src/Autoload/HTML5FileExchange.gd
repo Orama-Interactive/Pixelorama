@@ -171,4 +171,5 @@ func load_shader() -> void:
 	shader.code = file_data
 
 	var shader_effect_dialog = Global.control.get_node("Dialogs/ImageEffects/ShaderEffect")
-	shader_effect_dialog.change_shader(shader, file_name.get_basename())
+	if is_instance_valid(shader_effect_dialog):
+		shader_effect_dialog.change_shader(shader, file_name.get_basename())
