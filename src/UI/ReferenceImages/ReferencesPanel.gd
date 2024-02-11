@@ -6,7 +6,6 @@ const ReferenceImageButton = preload("res://src/UI/ReferenceImages/ReferenceImag
 
 var list_btn_group := ButtonGroup.new()
 var transform_button_group: ButtonGroup
-var _ignore_ui_updates := false
 
 @onready var list := %List as HBoxContainer
 @onready var drag_highlight := $Overlay/DragHighlight as ColorRect
