@@ -46,10 +46,10 @@ var _preview_durations: PackedFloat32Array
 
 @onready var options_interpolation: OptionButton = $"%Interpolation"
 
-@onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
-@onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
-@onready var path_dialog_popup: FileDialog = $Popups/PathDialog
-@onready var export_progress_popup: Window = $Popups/ExportProgressBar
+@onready var file_exists_alert_popup: AcceptDialog = $FileExistsAlert
+@onready var path_validation_alert_popup: AcceptDialog = $PathValidationAlert
+@onready var path_dialog_popup: FileDialog = $PathDialog
+@onready var export_progress_popup: Window = $ExportProgressBar
 @onready var export_progress_bar := %ProgressBar as ProgressBar
 @onready var frame_timer: Timer = $FrameTimer
 
@@ -121,15 +121,6 @@ func set_preview() -> void:
 			previews.columns = ceili(sqrt(_preview_images.size()))
 			for i in range(_preview_images.size()):
 				add_image_preview(_preview_images[i], i + 1)
-
-	if Global.current_project.file_format == Export.FileFormat.GIF:
-		$"%GifWarning".visible = true
-	else:
-		$"%GifWarning".visible = false
-
-
-func _on_GifWarning_meta_clicked(meta) -> void:
-	OS.shell_open(meta)
 
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:

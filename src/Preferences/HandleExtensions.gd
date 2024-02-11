@@ -6,6 +6,8 @@ const EXTENSIONS_PATH := "user://extensions"
 const BUG_EXTENSIONS_PATH := "user://give_in_bug_report"
 const BIN_ACTION := "trash"
 
+@export var add_extension_file_dialog: FileDialog
+
 var extensions := {}  ## Extension name: Extension class
 var extension_selected := -1
 var damaged_extension: String
@@ -292,7 +294,7 @@ func _on_InstalledExtensions_empty_clicked(_position: Vector2, _button_index: in
 
 
 func _on_AddExtensionButton_pressed() -> void:
-	Global.preferences_dialog.get_node("Popups/AddExtensionFileDialog").popup_centered()
+	add_extension_file_dialog.popup_centered()
 
 
 func _on_EnableButton_pressed() -> void:

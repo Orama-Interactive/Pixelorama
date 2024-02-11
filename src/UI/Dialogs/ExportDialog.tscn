@@ -231,14 +231,6 @@ mouse_default_cursor_shape = 2
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="GifWarning" type="RichTextLabel" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]If exported GIF is distorted, it is recommended to convert to APNG and then use any online tool like [color=blue][url]https://ezgif.com/apng-to-gif[/url][/color] to turn it to GIF[/center]"
-
 [node name="CollapsibleContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
@@ -297,16 +289,7 @@ layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
 
-[node name="Popups" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 692.0
-offset_bottom = 551.0
-mouse_filter = 2
-
-[node name="PathDialog" type="FileDialog" parent="Popups" groups=["FileDialogs"]]
+[node name="PathDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
 mode = 2
 title = "Open a Directory"
 size = Vector2i(675, 500)
@@ -315,17 +298,17 @@ file_mode = 2
 access = 2
 show_hidden_files = true
 
-[node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
+[node name="PathValidationAlert" type="AcceptDialog" parent="."]
 dialog_text = "DirAccess path and file name are not valid!"
 
-[node name="FileExistsAlert" type="AcceptDialog" parent="Popups"]
+[node name="FileExistsAlert" type="AcceptDialog" parent="."]
 dialog_text = "File %s already exists. Overwrite?"
 
-[node name="ExportProgressBar" type="Window" parent="Popups"]
+[node name="ExportProgressBar" type="Window" parent="."]
 visible = false
 exclusive = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Popups/ExportProgressBar"]
+[node name="MarginContainer" type="MarginContainer" parent="ExportProgressBar"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -334,7 +317,7 @@ offset_top = 5.0
 offset_right = -5.0
 offset_bottom = -5.0
 
-[node name="ProgressBar" type="ProgressBar" parent="Popups/ExportProgressBar/MarginContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="ExportProgressBar/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -354,12 +337,11 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_PathButton_pressed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileLineEdit" to="." method="_on_FileLineEdit_text_changed"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileFormat" to="." method="_on_FileFormat_item_selected"]
-[connection signal="meta_clicked" from="VBoxContainer/VSplitContainer/VBoxContainer/GifWarning" to="." method="_on_GifWarning_meta_clicked"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/Interpolation" to="." method="_on_Interpolation_item_selected"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/IncludeTagsInFilename" to="." method="_on_IncludeTagsInFilename_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/SeparatorCharacter" to="." method="_on_SeparatorCharacter_text_changed"]
-[connection signal="dir_selected" from="Popups/PathDialog" to="." method="_on_FileDialog_dir_selected"]
-[connection signal="confirmed" from="Popups/FileExistsAlert" to="." method="_on_FileExistsAlert_confirmed"]
-[connection signal="custom_action" from="Popups/FileExistsAlert" to="." method="_on_FileExistsAlert_custom_action"]
+[connection signal="dir_selected" from="PathDialog" to="." method="_on_FileDialog_dir_selected"]
+[connection signal="confirmed" from="FileExistsAlert" to="." method="_on_FileExistsAlert_confirmed"]
+[connection signal="custom_action" from="FileExistsAlert" to="." method="_on_FileExistsAlert_custom_action"]
 [connection signal="timeout" from="FrameTimer" to="." method="_on_FrameTimer_timeout"]

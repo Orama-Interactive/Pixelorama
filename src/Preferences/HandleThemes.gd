@@ -77,16 +77,12 @@ func change_theme(id: int) -> void:
 	theme.default_font_size = Global.font_size
 	theme.set_font_size("font_size", "HeaderSmall", Global.font_size + 2)
 	var icon_color := theme.get_color("modulate_color", "Icons")
-
 	if Global.icon_color_from == Global.ColorFrom.THEME:
 		Global.modulate_icon_color = icon_color
 
 	Global.control.theme = theme
 	change_clear_color()
 	change_icon_colors()
-
-	for child in Global.preferences_dialog.get_node("Popups").get_children():
-		child.theme = theme
 
 
 func change_clear_color() -> void:

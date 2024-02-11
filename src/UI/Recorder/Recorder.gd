@@ -20,8 +20,9 @@ var resize_percent := 100
 @onready var start_button := $"%Start" as Button
 @onready var size_label := $"%Size" as Label
 @onready var path_field := $"%Path" as LineEdit
-@onready var options_dialog := $Dialogs/OptionsDialog as AcceptDialog
+@onready var options_dialog := $OptionsDialog as AcceptDialog
 @onready var options_container := %OptionsContainer as VBoxContainer
+@onready var path_dialog := $Path as FileDialog
 
 
 func _ready() -> void:
@@ -174,8 +175,8 @@ func _on_SpinBox_value_changed(value: float) -> void:
 
 
 func _on_Choose_pressed() -> void:
-	$Dialogs/Path.popup_centered()
-	$Dialogs/Path.current_dir = chosen_dir
+	path_dialog.popup_centered()
+	path_dialog.current_dir = chosen_dir
 
 
 func _on_open_folder_pressed() -> void:
