@@ -30,6 +30,7 @@ var gradient_map_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Gradien
 var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.tscn")
 var shader_effect_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn")
 var manage_layouts_dialog := Dialog.new("res://src/UI/Dialogs/ManageLayouts.tscn")
+var window_opacity_dialog := Dialog.new("res://src/UI/Dialogs/WindowOpacityDialog.tscn")
 var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 
 @onready var main_ui := Global.control.find_child("DockableContainer") as DockableContainer
@@ -43,7 +44,6 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var help_menu: PopupMenu = $MenuBar/Help
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
-@onready var window_opacity_dialog: AcceptDialog = Global.control.find_child("WindowOpacityDialog")
 @onready var tile_mode_submenu := PopupMenu.new()
 @onready var snap_to_submenu := PopupMenu.new()
 @onready var panels_submenu := PopupMenu.new()
@@ -534,7 +534,7 @@ func view_menu_id_pressed(id: int) -> void:
 func window_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.WindowMenu.WINDOW_OPACITY:
-			_popup_dialog(window_opacity_dialog)
+			window_opacity_dialog.popup()
 		Global.WindowMenu.MOVABLE_PANELS:
 			main_ui.tabs_visible = !main_ui.tabs_visible
 			window_menu.set_item_checked(id, main_ui.tabs_visible)
@@ -682,26 +682,13 @@ func _toggle_zen_mode() -> void:
 
 
 func _toggle_fullscreen() -> void:
-	get_window().mode = (
-		Window.MODE_EXCLUSIVE_FULLSCREEN
-		if (!(
-			(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
-			or (get_window().mode == Window.MODE_FULLSCREEN)
-		))
-		else Window.MODE_WINDOWED
-	)
-	window_menu.set_item_checked(
-		Global.WindowMenu.FULLSCREEN_MODE,
-		(
-			(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
-			or (get_window().mode == Window.MODE_FULLSCREEN)
-		)
-	)
-	if (
+	var is_fullscreen := (
 		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
 		or (get_window().mode == Window.MODE_FULLSCREEN)
-	):  # If window is fullscreen then reset transparency
-		window_opacity_dialog.set_window_opacity(100.0)
+	)
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if !is_fullscreen else Window.MODE_WINDOWED
+	is_fullscreen = not is_fullscreen
+	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, is_fullscreen)
 
 
 func image_menu_id_pressed(id: int) -> void:
