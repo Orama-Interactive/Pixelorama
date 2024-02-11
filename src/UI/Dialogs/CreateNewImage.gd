@@ -219,3 +219,8 @@ func switch_width_height() -> void:
 
 	width_value.value_changed.connect(_on_SizeValue_value_changed)
 	height_value.value_changed.connect(_on_SizeValue_value_changed)
+
+
+func _on_visibility_changed() -> void:
+	if not visible:
+		Global.dialog_open(false)

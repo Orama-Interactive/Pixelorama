@@ -218,6 +218,7 @@ color = Color(0, 0, 0, 0)
 
 [connection signal="about_to_popup" from="." to="." method="_on_CreateNewImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="item_selected" from="VBoxContainer/VBoxContainer/Templates/TemplatesContainer/TemplatesOptions" to="." method="_on_TemplatesOptions_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_SizeValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/HeightContainer/HeightValue" to="." method="_on_SizeValue_value_changed"]

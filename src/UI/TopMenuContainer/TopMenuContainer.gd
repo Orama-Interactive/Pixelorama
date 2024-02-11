@@ -13,6 +13,25 @@ var recent_projects := []
 var selected_layout := 0
 var zen_mode := false
 
+# Dialogs
+var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
+var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetImage.tscn")
+var scale_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn")
+var resize_canvas_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn")
+var mirror_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn")
+var rotate_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/RotateImage.tscn")
+var invert_colors_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.tscn")
+var desaturate_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/DesaturateDialog.tscn")
+var outline_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OutlineDialog.tscn")
+var drop_shadow_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/DropShadowDialog.tscn")
+var hsv_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn")
+var gradient_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn")
+var gradient_map_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientMapDialog.tscn")
+var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.tscn")
+var shader_effect_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn")
+var manage_layouts_dialog := Dialog.new("res://src/UI/Dialogs/ManageLayouts.tscn")
+var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
+
 @onready var main_ui := Global.control.find_child("DockableContainer") as DockableContainer
 @onready var ui_elements := main_ui.get_children()
 @onready var file_menu: PopupMenu = $MenuBar/File
@@ -24,13 +43,36 @@ var zen_mode := false
 @onready var help_menu: PopupMenu = $MenuBar/Help
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
-@onready var new_image_dialog: ConfirmationDialog = Global.control.find_child("CreateNewImage")
 @onready var window_opacity_dialog: AcceptDialog = Global.control.find_child("WindowOpacityDialog")
 @onready var tile_mode_submenu := PopupMenu.new()
 @onready var snap_to_submenu := PopupMenu.new()
 @onready var panels_submenu := PopupMenu.new()
 @onready var layouts_submenu := PopupMenu.new()
 @onready var recent_projects_submenu := PopupMenu.new()
+
+
+class Dialog:
+	## This class is used to help with lazy loading dialog scenes in order to
+	## reduce Pixelorama's initial loading time, by only loading each dialog
+	## scene when it's actually needed.
+	var scene_path := ""
+	var node: Window
+
+	func _init(_scene_path: String) -> void:
+		scene_path = _scene_path
+
+	func popup(dialog_size := Vector2i.ZERO) -> void:
+		if not is_instance_valid(node):
+			var scene := load(scene_path)
+			if not scene is PackedScene:
+				return
+			node = scene.instantiate()
+			if not is_instance_valid(node):
+				return
+			Global.control.get_node("Dialogs").add_child(node)
+		node.popup_centered(dialog_size)
+		var is_file_dialog := node is FileDialog
+		Global.dialog_open(true, is_file_dialog)
 
 
 func _ready() -> void:
@@ -383,7 +425,7 @@ func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
 func file_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.FileMenu.NEW:
-			_popup_dialog(new_image_dialog)
+			new_image_dialog.popup()
 		Global.FileMenu.OPEN:
 			_open_project_file()
 		Global.FileMenu.OPEN_LAST_PROJECT:
@@ -466,7 +508,7 @@ func edit_menu_id_pressed(id: int) -> void:
 func view_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.ViewMenu.TILE_MODE_OFFSETS:
-			_popup_dialog(Global.control.get_node("Dialogs/TileModeOffsetsDialog"))
+			_popup_dialog(Global.tile_mode_offset_dialog)
 		Global.ViewMenu.GREYSCALE_VIEW:
 			_toggle_greyscale_view()
 		Global.ViewMenu.MIRROR_VIEW:
@@ -540,7 +582,7 @@ func _panels_submenu_id_pressed(id: int) -> void:
 
 func _layouts_submenu_id_pressed(id: int) -> void:
 	if id == 0:
-		_popup_dialog(Global.control.get_node("Dialogs/ManageLayouts"))
+		manage_layouts_dialog.popup()
 	else:
 		set_layout(id - 1)
 
@@ -665,38 +707,37 @@ func _toggle_fullscreen() -> void:
 func image_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.ImageMenu.SCALE_IMAGE:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ScaleImage"))
+			scale_image_dialog.popup()
 		Global.ImageMenu.OFFSET_IMAGE:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/OffsetImage"))
+			offset_image_dialog.popup()
 		Global.ImageMenu.CROP_TO_SELECTION:
 			DrawingAlgos.crop_to_selection()
 		Global.ImageMenu.CROP_TO_CONTENT:
 			DrawingAlgos.crop_to_content()
 		Global.ImageMenu.RESIZE_CANVAS:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas"))
+			resize_canvas_dialog.popup()
 		Global.ImageMenu.FLIP:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog"))
+			mirror_image_dialog.popup()
 		Global.ImageMenu.ROTATE:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/RotateImage"))
+			rotate_image_dialog.popup()
 		Global.ImageMenu.INVERT_COLORS:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/InvertColorsDialog"))
+			invert_colors_dialog.popup()
 		Global.ImageMenu.DESATURATION:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/DesaturateDialog"))
+			desaturate_dialog.popup()
 		Global.ImageMenu.OUTLINE:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/OutlineDialog"))
+			outline_dialog.popup()
 		Global.ImageMenu.DROP_SHADOW:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/DropShadowDialog"))
+			drop_shadow_dialog.popup()
 		Global.ImageMenu.HSV:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/HSVDialog"))
+			hsv_dialog.popup()
 		Global.ImageMenu.GRADIENT:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/GradientDialog"))
+			gradient_dialog.popup()
 		Global.ImageMenu.GRADIENT_MAP:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog"))
+			gradient_map_dialog.popup()
 		Global.ImageMenu.POSTERIZE:
-			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/Posterize"))
-#		Global.ImageMenu.SHADER:
-#			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ShaderEffect"))
-
+			posterize_dialog.popup()
+		#Global.ImageMenu.SHADER:
+		#shader_effect_dialog.popup()
 		_:
 			_handle_metadata(id, image_menu)
 
@@ -732,7 +773,7 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(CHANGELOG_URL)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
-			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))
+			about_dialog.popup()
 		Global.HelpMenu.SUPPORT_PIXELORAMA:
 			OS.shell_open(SUPPORT_URL)
 		_:

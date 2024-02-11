@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dbylw5k04ulp8"]
+[gd_scene load_steps=17 format=3 uid="uid://dbylw5k04ulp8"]
 
 [ext_resource type="Theme" uid="uid://cngbvfpwjoimv" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
@@ -6,19 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://c8dsi6ggkqa7a" path="res://src/UI/UI.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://d1jyt8wleg8ft" path="res://src/UI/Buttons/PatternsPopup.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://c5x85ysdouh4t" path="res://src/UI/Buttons/BrushesPopup.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://cfihuvhy4ocx7" path="res://src/UI/Dialogs/ImageEffects/ImageEffects.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cltlo2whtiejd" path="res://src/UI/Dialogs/SaveSpriteHTML5.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://bs3dnnvnxyp68" path="res://src/UI/Timeline/FrameProperties.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://bcdt0pa7rojy5" path="res://src/UI/Dialogs/WindowOpacityDialog.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://d4euwo633u33b" path="res://src/UI/Dialogs/SaveSprite.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://b3aeqj2k58wdk" path="res://src/UI/Dialogs/OpenSprite.tscn" id="12"]
-[ext_resource type="PackedScene" uid="uid://d1phd84dk4t5e" path="res://src/UI/Dialogs/ManageLayouts.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://c0nuukjakmai2" path="res://src/UI/Dialogs/TileModeOffsetsDialog.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://clbjfkdupw52l" path="res://src/UI/Timeline/CelProperties.tscn" id="17_ucs64"]
 [ext_resource type="PackedScene" uid="uid://bnpb1aip3wdvw" path="res://src/UI/Dialogs/SplashDialog.tscn" id="27"]
-[ext_resource type="PackedScene" uid="uid://btjf3lj873q1t" path="res://src/UI/Dialogs/CreateNewImage.tscn" id="28"]
 [ext_resource type="PackedScene" uid="uid://b3hkjj3s6pe4x" path="res://src/Preferences/PreferencesDialog.tscn" id="32"]
-[ext_resource type="PackedScene" uid="uid://w1v6plnv6ppt" path="res://src/UI/Dialogs/AboutDialog.tscn" id="34"]
 [ext_resource type="PackedScene" uid="uid://clgu8wb5o6oup" path="res://src/UI/Dialogs/ExportDialog.tscn" id="39"]
 
 [node name="Control" type="Control"]
@@ -47,15 +43,11 @@ layout_mode = 2
 anchors_preset = 0
 mouse_filter = 2
 
-[node name="ImageEffects" parent="Dialogs" instance=ExtResource("7")]
-
 [node name="BrushesPopup" parent="Dialogs" instance=ExtResource("6")]
 
 [node name="PatternsPopup" parent="Dialogs" instance=ExtResource("5")]
 
 [node name="SplashDialog" parent="Dialogs" instance=ExtResource("27")]
-
-[node name="CreateNewImage" parent="Dialogs" instance=ExtResource("28")]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource("12")]
 
@@ -66,11 +58,6 @@ mouse_filter = 2
 [node name="ExportDialog" parent="Dialogs" instance=ExtResource("39")]
 
 [node name="PreferencesDialog" parent="Dialogs" instance=ExtResource("32")]
-
-[node name="ManageLayouts" parent="Dialogs" instance=ExtResource("13")]
-
-[node name="AboutDialog" parent="Dialogs" instance=ExtResource("34")]
-position = Vector2i(0, 24)
 
 [node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs"]
 title = "Unsaved Image"
@@ -118,7 +105,6 @@ visible = false
 visible = false
 
 [connection signal="visibility_changed" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]
-[connection signal="visibility_changed" from="Dialogs/CreateNewImage" to="." method="_can_draw_true"]
 [connection signal="files_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_files_selected"]
 [connection signal="visibility_changed" from="Dialogs/OpenSprite" to="." method="_on_open_sprite_visibility_changed"]
 [connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]
