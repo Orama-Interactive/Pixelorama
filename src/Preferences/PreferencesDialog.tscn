@@ -256,16 +256,10 @@ script = ExtResource("5")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ThemeColorsSpacer" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/Themes"]
+[node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/Themes"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Control" type="Control" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/Themes/ThemeColorsSpacer"]
-layout_mode = 2
-
-[node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/Themes/ThemeColorsSpacer"]
-layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 16
 
 [node name="ButtonHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
 layout_mode = 2

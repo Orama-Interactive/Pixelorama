@@ -14,7 +14,7 @@ var theme_button_group := ButtonGroup.new()
 ]
 
 @onready var buttons_container: BoxContainer = $ThemeButtons
-@onready var colors_container: BoxContainer = $ThemeColorsSpacer/ThemeColors
+@onready var colors_container: BoxContainer = $ThemeColors
 @onready var theme_color_preview_scene := preload("res://src/Preferences/ThemeColorPreview.tscn")
 
 
@@ -62,8 +62,8 @@ func add_theme(theme: Theme) -> void:
 
 func remove_theme(theme: Theme) -> void:
 	var index := themes.find(theme)
-	var theme_button = buttons_container.get_child(index)
-	var color_previews = colors_container.get_child(index)
+	var theme_button := buttons_container.get_child(index)
+	var color_previews := colors_container.get_child(index)
 	buttons_container.remove_child(theme_button)
 	theme_button.queue_free()
 	colors_container.remove_child(color_previews)
