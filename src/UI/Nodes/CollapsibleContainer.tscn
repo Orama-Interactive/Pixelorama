@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cii2hpylme60s"]
-
-[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="2"]
-
-[node name="CollapsibleContainer" type="VBoxContainer"]
-offset_right = 40.0
-offset_bottom = 20.0
-theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("2")

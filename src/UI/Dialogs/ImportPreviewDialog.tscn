@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImportPreviewDialog.gd" id="1_r16hn"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" id="2_yokw4"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/HelperScripts/SmartSlicePreview.gd" id="3_aeccv"]
-[ext_resource type="PackedScene" uid="uid://cii2hpylme60s" path="res://src/UI/Nodes/CollapsibleContainer.tscn" id="4_6ispq"]
+[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_7dy5o"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4_nmo33"]
 
 [node name="ImportPreviewDialog" type="ConfirmationDialog"]
@@ -91,8 +91,10 @@ layout_mode = 2
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 
-[node name="ImportOptionsContainer" parent="VBoxContainer" instance=ExtResource("4_6ispq")]
+[node name="ImportOptionsContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"CollapsibleContainer"
+script = ExtResource("4_7dy5o")
 text = "Import Options"
 
 [node name="ImportOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer"]

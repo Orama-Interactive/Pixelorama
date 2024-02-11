@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://c7smxwfa8826j" path="res://assets/graphics/timeline/play.png" id="6"]
-[ext_resource type="PackedScene" uid="uid://cii2hpylme60s" path="res://src/UI/Nodes/CollapsibleContainer.tscn" id="7"]
+[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="7_o7sn3"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="8"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -131,9 +131,11 @@ popup/item_0/id = 0
 popup/item_1/text = "Current frame as spritesheet"
 popup/item_1/id = 1
 
-[node name="Options" parent="VBox/Animation/VBoxContainer" instance=ExtResource("7")]
+[node name="Options" type="VBoxContainer" parent="VBox/Animation/VBoxContainer"]
 visible = false
 layout_mode = 2
+theme_type_variation = &"CollapsibleContainer"
+script = ExtResource("7_o7sn3")
 text = "Spritesheet options"
 
 [node name="GridContainer" type="GridContainer" parent="VBox/Animation/VBoxContainer/Options"]
