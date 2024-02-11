@@ -10,6 +10,7 @@ var image := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 @onready var height_spinbox: SpinBox = $VBoxContainer/OptionsContainer/HeightValue
 @onready var x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
 @onready var y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
+@onready var aspect_ratio_container: AspectRatioContainer = $VBoxContainer/AspectRatioContainer
 @onready var preview_rect: TextureRect = $VBoxContainer/AspectRatioContainer/Preview
 
 
@@ -82,21 +83,7 @@ func update_preview() -> void:
 		image, Rect2i(Vector2i.ZERO, Global.current_project.size), Vector2i(offset_x, offset_y)
 	)
 	preview_rect.texture = ImageTexture.create_from_image(preview_image)
-	update_transparent_background_size(preview_image)
-
-
-func update_transparent_background_size(preview_image: Image) -> void:
-	var image_size_y := preview_rect.size.y
-	var image_size_x := preview_rect.size.x
-	if preview_image.get_size().x > preview_image.get_size().y:
-		var scale_ratio := preview_image.get_size().x / image_size_x
-		image_size_y = preview_image.get_size().y / scale_ratio
-	else:
-		var scale_ratio := preview_image.get_size().y / image_size_y
-		image_size_x = preview_image.get_size().x / scale_ratio
-
-	preview_rect.get_node("TransparentChecker").size.x = image_size_x
-	preview_rect.get_node("TransparentChecker").size.y = image_size_y
+	aspect_ratio_container.ratio = float(preview_image.get_width()) / preview_image.get_height()
 
 
 func _on_visibility_changed() -> void:

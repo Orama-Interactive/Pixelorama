@@ -9,6 +9,7 @@ var affect: int = SELECTED_CELS
 var selected_cels := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 var current_frame := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 var preview_image := Image.new()
+var aspect_ratio_container: AspectRatioContainer
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
@@ -38,7 +39,7 @@ func _about_to_popup() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	prepare_animator(Global.current_project)
 	set_and_update_preview_image(Global.current_project.current_frame)
-	update_transparent_background_size()
+	aspect_ratio_container.ratio = float(preview_image.get_width()) / preview_image.get_height()
 
 
 # prepares "animate_panel.frames" according to affect
@@ -131,6 +132,7 @@ func commit_action(_cel: Image, _project := Global.current_project) -> void:
 
 
 func set_nodes() -> void:
+	aspect_ratio_container = $VBoxContainer/AspectRatioContainer
 	preview = $VBoxContainer/AspectRatioContainer/Preview
 	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
@@ -212,22 +214,6 @@ func update_preview() -> void:
 	commit_idx = _preview_idx
 	commit_action(preview_image)
 	preview.texture = ImageTexture.create_from_image(preview_image)
-
-
-func update_transparent_background_size() -> void:
-	if !preview:
-		return
-	var image_size_y := preview.size.y
-	var image_size_x := preview.size.x
-	if preview_image.get_size().x > preview_image.get_size().y:
-		var scale_ratio := preview_image.get_size().x / image_size_x
-		image_size_y = preview_image.get_size().y / scale_ratio
-	else:
-		var scale_ratio := preview_image.get_size().y / image_size_y
-		image_size_x = preview_image.get_size().x / scale_ratio
-
-	preview.get_node("TransparentChecker").size.x = image_size_x
-	preview.get_node("TransparentChecker").size.y = image_size_y
 
 
 func _visibility_changed() -> void:
