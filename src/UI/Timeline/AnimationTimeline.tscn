@@ -837,7 +837,6 @@ layout_mode = 2
 theme_override_constants/separation = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer"]
-editor_description = "Its entire purpose is to add a single pixel on the right of the opacity slider"
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 2
@@ -857,30 +856,37 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="FrameScrollContainer" type="Container" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit" node_paths=PackedStringArray("h_scroll_bar")]
+[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit"]
+layout_mode = 2
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="FrameScrollContainer" type="Container" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer" node_paths=PackedStringArray("h_scroll_bar")]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 script = ExtResource("11")
-h_scroll_bar = NodePath("../../../../BreakFreeFromContainer/FrameScrollBar")
+h_scroll_bar = NodePath("../../../../../BreakFreeFromContainer/FrameScrollBar")
 
-[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/FrameScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
+theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="FrameAndCelBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/FrameScrollContainer/MarginContainer"]
+[node name="FrameAndCelBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/FrameScrollContainer/MarginContainer/FrameAndCelBox"]
+[node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer/MarginContainer/FrameAndCelBox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/FrameScrollContainer/MarginContainer/FrameAndCelBox"]
+[node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer/MarginContainer/FrameAndCelBox"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
