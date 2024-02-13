@@ -231,19 +231,10 @@ func fill_in_color(pos: Vector2i) -> void:
 func fill_in_area(pos: Vector2i) -> void:
 	var project := Global.current_project
 	_flood_fill(pos)
-
-	# Handle Mirroring
-	var mirror_x := project.x_symmetry_point - pos.x
-	var mirror_y := project.y_symmetry_point - pos.y
-	var mirror_x_inside := project.can_pixel_get_drawn(Vector2i(mirror_x, pos.y))
-	var mirror_y_inside := project.can_pixel_get_drawn(Vector2i(pos.x, mirror_y))
-
-	if Tools.horizontal_mirror and mirror_x_inside:
-		_flood_fill(Vector2i(mirror_x, pos.y))
-		if Tools.vertical_mirror and mirror_y_inside:
-			_flood_fill(Vector2i(mirror_x, mirror_y))
-	if Tools.vertical_mirror and mirror_y_inside:
-		_flood_fill(Vector2i(pos.x, mirror_y))
+	# Handle mirroring
+	for mirror_pos in Tools.get_mirrored_positions(pos, project):
+		if project.can_pixel_get_drawn(mirror_pos):
+			_flood_fill(mirror_pos)
 
 
 func fill_in_selection() -> void:

@@ -437,6 +437,25 @@ func get_assigned_color(button: int) -> Color:
 	return _slots[button].color
 
 
+func get_mirrored_positions(
+	pos: Vector2i, project := Global.current_project, offset := 0
+) -> Array[Vector2i]:
+	var positions: Array[Vector2i] = []
+	if horizontal_mirror:
+		var mirror_x := pos
+		mirror_x.x = project.x_symmetry_point - pos.x + offset
+		positions.append(mirror_x)
+		if vertical_mirror:
+			var mirror_xy := mirror_x
+			mirror_xy.y = project.y_symmetry_point - pos.y + offset
+			positions.append(mirror_xy)
+	if vertical_mirror:
+		var mirror_y := pos
+		mirror_y.y = project.y_symmetry_point - pos.y + offset
+		positions.append(mirror_y)
+	return positions
+
+
 func set_button_size(button_size: int) -> void:
 	var size := Vector2(24, 24) if button_size == Global.ButtonSize.SMALL else Vector2(32, 32)
 	for t in _tool_buttons.get_children():

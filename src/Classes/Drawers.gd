@@ -7,8 +7,6 @@ var pixel_perfect := false:
 			drawers = pixel_perfect_drawers.duplicate()
 		else:
 			drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
-var horizontal_mirror := false
-var vertical_mirror := false
 var color_op := ColorOp.new()
 
 var simple_drawer := SimpleDrawer.new()
@@ -72,14 +70,9 @@ func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring 
 	drawers[0].set_pixel(image, position, color, color_op)
 	if ignore_mirroring:
 		return
-
-	# Handle Mirroring
-	var mirror_x := project.x_symmetry_point - position.x
-	var mirror_y := project.y_symmetry_point - position.y
-
-	if horizontal_mirror and project.can_pixel_get_drawn(Vector2i(mirror_x, position.y)):
-		drawers[1].set_pixel(image, Vector2i(mirror_x, position.y), color, color_op)
-		if vertical_mirror and project.can_pixel_get_drawn(Vector2i(position.x, mirror_y)):
-			drawers[2].set_pixel(image, Vector2i(mirror_x, mirror_y), color, color_op)
-	if vertical_mirror and project.can_pixel_get_drawn(Vector2i(position.x, mirror_y)):
-		drawers[3].set_pixel(image, Vector2i(position.x, mirror_y), color, color_op)
+	# Handle mirroring
+	var i := 1
+	for mirror_pos in Tools.get_mirrored_positions(position, project):
+		if project.can_pixel_get_drawn(mirror_pos):
+			drawers[i].set_pixel(image, mirror_pos, color, color_op)
+		i += 1

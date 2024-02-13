@@ -50,33 +50,24 @@ func draw_end(pos: Vector2i) -> void:
 func draw_preview() -> void:
 	if _move:
 		return
+	var project := Global.current_project
 	var canvas: Node2D = Global.canvas.previews
 	var pos := canvas.position
 	var canvas_scale := canvas.scale
 	if Global.mirror_view:
-		pos.x = pos.x + Global.current_project.size.x
+		pos.x = pos.x + project.size.x
 		canvas_scale.x = -1
 	canvas.draw_set_transform(pos, canvas.rotation, canvas_scale)
 	canvas.draw_rect(_rect, Color.BLACK, false)
-
 	# Handle mirroring
-	if Tools.horizontal_mirror:
-		var mirror_x_rect := _rect
-		mirror_x_rect.position.x = Global.current_project.x_symmetry_point - _rect.position.x + 1
-		mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
-		canvas.draw_rect(mirror_x_rect, Color.BLACK, false)
-		if Tools.vertical_mirror:
-			var mirror_xy_rect := mirror_x_rect
-			mirror_xy_rect.position.y = (
-				Global.current_project.y_symmetry_point - _rect.position.y + 1
-			)
-			mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
-			canvas.draw_rect(mirror_xy_rect, Color.BLACK, false)
-	if Tools.vertical_mirror:
-		var mirror_y_rect := _rect
-		mirror_y_rect.position.y = Global.current_project.y_symmetry_point - _rect.position.y + 1
-		mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
-		canvas.draw_rect(mirror_y_rect, Color.BLACK, false)
+	var mirror_positions := Tools.get_mirrored_positions(_rect.position, project, 1)
+	var mirror_ends := Tools.get_mirrored_positions(_rect.end, project, 1)
+	for i in mirror_positions.size():
+		var mirror_rect := Rect2i()
+		mirror_rect.position = mirror_positions[i]
+		mirror_rect.end = mirror_ends[i]
+		canvas.draw_rect(mirror_rect, Color.BLACK, false)
+
 	canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
@@ -95,23 +86,14 @@ func apply_selection(pos: Vector2i) -> void:
 	elif _intersect:
 		operation = 2
 	Global.canvas.selection.select_rect(_rect, operation)
-
 	# Handle mirroring
-	if Tools.horizontal_mirror:
-		var mirror_x_rect := _rect
-		mirror_x_rect.position.x = project.x_symmetry_point - _rect.position.x + 1
-		mirror_x_rect.end.x = project.x_symmetry_point - _rect.end.x + 1
-		Global.canvas.selection.select_rect(mirror_x_rect.abs(), operation)
-		if Tools.vertical_mirror:
-			var mirror_xy_rect := mirror_x_rect
-			mirror_xy_rect.position.y = project.y_symmetry_point - _rect.position.y + 1
-			mirror_xy_rect.end.y = project.y_symmetry_point - _rect.end.y + 1
-			Global.canvas.selection.select_rect(mirror_xy_rect.abs(), operation)
-	if Tools.vertical_mirror:
-		var mirror_y_rect := _rect
-		mirror_y_rect.position.y = project.y_symmetry_point - _rect.position.y + 1
-		mirror_y_rect.end.y = project.y_symmetry_point - _rect.end.y + 1
-		Global.canvas.selection.select_rect(mirror_y_rect.abs(), operation)
+	var mirror_positions := Tools.get_mirrored_positions(_rect.position, project, 1)
+	var mirror_ends := Tools.get_mirrored_positions(_rect.end, project, 1)
+	for i in mirror_positions.size():
+		var mirror_rect := Rect2i()
+		mirror_rect.position = mirror_positions[i]
+		mirror_rect.end = mirror_ends[i]
+		Global.canvas.selection.select_rect(mirror_rect.abs(), operation)
 
 	Global.canvas.selection.commit_undo("Select", undo_data)
 

@@ -262,8 +262,6 @@ func _prepare_tool() -> void:
 			lerpf(Tools.brush_size_min, Tools.brush_size_max, Tools.mouse_velocity)
 		)
 	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
-	_drawer.horizontal_mirror = Tools.horizontal_mirror
-	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
