@@ -132,7 +132,8 @@ func _on_reference_image_changed(index: int) -> void:
 		# NOTE: using list_btn_group.get_buttons()[index + 1] here was causing a bug that
 		# if you re-arrange by drag and drop, then click on a button, then button before it
 		# becomes selected instead of the clicked button
-		list.get_child(index + 1).set_pressed_no_signal(true)
+		if index + 1 < list.get_child_count():
+			list.get_child(index + 1).set_pressed_no_signal(true)
 
 
 func project_changed() -> void:
