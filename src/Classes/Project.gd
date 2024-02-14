@@ -439,7 +439,7 @@ func deserialize(dict: Dictionary) -> void:
 			var ri := ReferenceImage.new()
 			ri.project = self
 			ri.deserialize(g)
-			Global.canvas.add_child(ri)
+			Global.canvas.reference_image_container.add_child(ri)
 	if dict.has("vanishing_points"):
 		vanishing_points = dict.vanishing_points
 		Global.perspective_editor.queue_redraw()

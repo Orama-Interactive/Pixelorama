@@ -202,6 +202,7 @@ hidden_tabs = {
 "Color Picker Sliders": true,
 "Perspective Editor": true,
 "Recorder": true,
+"Reference Images": true,
 "Second Canvas": true
 }
 save_on_change = false
@@ -312,7 +313,7 @@ camera_path = NodePath("SubViewport/Camera2D")
 [node name="SubViewport" type="SubViewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(2, 2)
+size = Vector2i(862, 515)
 render_target_update_mode = 4
 
 [node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("5")]

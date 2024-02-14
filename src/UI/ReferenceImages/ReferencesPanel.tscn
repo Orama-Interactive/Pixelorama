@@ -29,6 +29,7 @@ script = ExtResource("1")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
+horizontal_scroll_mode = 0
 
 [node name="Container" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
@@ -47,7 +48,7 @@ text = "My Reference Images"
 [node name="Tip" type="Label" parent="ScrollContainer/Container"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-text = "When opening an image, it may be imported as a reference."
+text = "Select an image below to change it's properties"
 autowrap_mode = 2
 
 [node name="Tools" type="HBoxContainer" parent="ScrollContainer/Container"]
@@ -210,19 +211,43 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_7v0q5")
 
-[node name="ReferenceImages" type="ScrollContainer" parent="ScrollContainer/Container"]
+[node name="Images" type="Panel" parent="ScrollContainer/Container"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
+mouse_filter = 1
 
-[node name="List" type="HBoxContainer" parent="ScrollContainer/Container/ReferenceImages"]
+[node name="ImportTip" type="Label" parent="ScrollContainer/Container/Images"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "When opening an image, it may be imported as a reference."
+autowrap_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/Container/Images"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="List" type="HFlowContainer" parent="ScrollContainer/Container/Images/ScrollContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ReferenceEdit" type="VBoxContainer" parent="ScrollContainer/Container"]
 layout_mode = 2
 script = ExtResource("3_skjtb")
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/Container/ReferenceEdit"]
+layout_mode = 2
 
 [node name="ImageOptions" type="HBoxContainer" parent="ScrollContainer/Container/ReferenceEdit"]
 layout_mode = 2

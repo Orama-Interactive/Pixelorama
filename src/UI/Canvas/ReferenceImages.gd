@@ -237,8 +237,11 @@ func populate_reference_menu(items: Array[ReferenceImage], default := false):
 		reference_menu.add_separator()
 
 	for ri: ReferenceImage in items:
+		# NOTE: using image_path.get_file() instead of full image_path because usually paths are
+		# long and if we are limiting to 22 characters as well, then every entry will end up
+		# looking the same
 		var idx: int = ri.get_index() + 1
-		var label: String = "(%o) %s" % [idx, ri.image_path]
+		var label: String = "(%o) %s" % [idx, ri.image_path.get_file()]
 		# We trim the length of the title
 		label = label.left(22) + "..."
 		reference_menu.add_item(label, idx)

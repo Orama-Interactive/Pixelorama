@@ -7,10 +7,16 @@ const ReferenceImageButton = preload("res://src/UI/ReferenceImages/ReferenceImag
 var list_btn_group := ButtonGroup.new()
 var transform_button_group: ButtonGroup
 
-@onready var list := %List as HBoxContainer
+@onready var list := %List as HFlowContainer
 @onready var drag_highlight := $Overlay/DragHighlight as ColorRect
 @onready var remove_btn := $ScrollContainer/Container/ReferenceEdit/ImageOptions/Remove as Button
 @onready var transform_tools_btns := $ScrollContainer/Container/Tools/TransformTools
+
+# these will change their visibility if there are no references
+@onready var tip: Label = $ScrollContainer/Container/Tip
+@onready var import_tip: Label = $ScrollContainer/Container/Images/ImportTip
+@onready var reference_edit: VBoxContainer = $ScrollContainer/Container/ReferenceEdit
+@onready var tools: HBoxContainer = $ScrollContainer/Container/Tools
 
 
 func _ready() -> void:
@@ -80,10 +86,12 @@ func _update_ui() -> void:
 	# Enable the buttons as a default
 	%MoveImageRightBtn.disabled = false
 	%MoveImageLeftBtn.disabled = false
+	reference_edit.visible = true
 
 	if index == -1:
 		%MoveImageLeftBtn.disabled = true
 		%MoveImageRightBtn.disabled = true
+		reference_edit.visible = false
 	if index == 0:
 		%MoveImageLeftBtn.disabled = true
 	if index == Global.current_project.reference_images.size() - 1:
@@ -121,7 +129,10 @@ func _on_reference_image_changed(index: int) -> void:
 		for b: Button in list_btn_group.get_buttons():
 			b.set_pressed_no_signal(false)
 		# Then we get the wanted button and we press it
-		list_btn_group.get_buttons()[index + 1].set_pressed_no_signal(true)
+		# NOTE: using list_btn_group.get_buttons()[index + 1] here was causing a bug that
+		# if you re-arrange by drag and drop, then click on a button, then button before it
+		# becomes selected instead of the clicked button
+		list.get_child(index + 1).set_pressed_no_signal(true)
 
 
 func project_changed() -> void:
@@ -144,8 +155,20 @@ func _on_references_changed():
 	var default = ReferenceImageButton.instantiate()
 	default.button_group = list_btn_group
 	default.text = "none"
+	default.get_child(0).visible = false  # Hide it's transparent checker
 	default.button_pressed = true
 	list.add_child(default)
+
+	# if there are no references, hide the none button and show message
+	tools.visible = true
+	tip.visible = true
+	import_tip.visible = false
+	reference_edit.visible = true
+	if Global.current_project.reference_images.size() == 0:
+		default.visible = false
+		tip.visible = false
+		import_tip.visible = true
+		reference_edit.visible = false
 
 	# And update.
 	for ref in Global.current_project.reference_images:
