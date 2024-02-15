@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-02-10 14:14\n"
+"PO-Revision-Date: 2024-02-15 16:50\n"
 
 msgid "OK"
 msgstr "確定"
@@ -307,6 +307,10 @@ msgid "Rename"
 msgstr "重新命名"
 
 msgid "Rename Layout"
+msgstr ""
+
+#. Refers to the current layout of the user interface.
+msgid "Current layout"
 msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
@@ -2149,6 +2153,10 @@ msgstr "檔案開啟失敗. 錯誤代碼: %s"
 
 msgid "File failed to save. Error code %s"
 msgstr "檔案儲存失敗. 錯誤代碼: %s"
+
+#. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
+msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
+msgstr ""
 
 msgid "File(s) exported"
 msgstr ""
