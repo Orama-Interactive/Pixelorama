@@ -279,6 +279,9 @@ func export_processed_images(
 		if is_using_ffmpeg(project.file_format):
 			var video_exported := export_video(export_paths)
 			if not video_exported:
+				Global.popup_error(
+					tr("Video failed to export. Ensure that FFMPEG is installed correctly.")
+				)
 				return false
 		else:
 			var exporter: AImgIOBaseExporter
@@ -299,7 +302,6 @@ func export_processed_images(
 					gif_export_thread.wait_to_finish()
 				gif_export_thread.start(export_animated.bind(details))
 	else:
-		var succeeded := true
 		for i in range(processed_images.size()):
 			if OS.has_feature("web"):
 				if project.file_format == FileFormat.PNG:
@@ -333,10 +335,9 @@ func export_processed_images(
 					Global.popup_error(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 					)
-					succeeded = false
-		if succeeded:
-			Global.notification_label("File(s) exported")
+					return false
 
+	Global.notification_label("File(s) exported")
 	# Store settings for quick export and when the dialog is opened again
 	var file_name_with_ext := project.file_name + file_format_string(project.file_format)
 	project.was_exported = true
@@ -348,6 +349,8 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
+	project.directory_path = export_paths[0].get_base_dir()
+	Global.config_cache.set_value("data", "current_dir", project.directory_path)
 	return true
 
 
