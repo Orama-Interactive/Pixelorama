@@ -7,35 +7,20 @@
 
 [node name="RotateImage" instance=ExtResource("2")]
 title = "Rotate Image"
+size = Vector2i(362, 535)
 script = ExtResource("1")
 
 [node name="VBoxContainer" parent="." index="3"]
-offset_bottom = 416.0
+offset_bottom = 486.0
 
 [node name="Indicator" type="Control" parent="VBoxContainer/AspectRatioContainer" index="1"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="LiveSettings" type="HBoxContainer" parent="VBoxContainer" index="2"]
-layout_mode = 2
-alignment = 1
+[node name="LiveSettings" parent="VBoxContainer" index="2"]
+visible = true
 
-[node name="LiveCheckbox" type="CheckBox" parent="VBoxContainer/LiveSettings" index="0"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Live Preview"
-
-[node name="WaitTime" parent="VBoxContainer" index="3" instance=ExtResource("3")]
-visible = false
-layout_mode = 2
-min_value = 1.0
-max_value = 1000.0
-value = 200.0
-editable = false
-prefix = "Preview delay:"
-suffix = "ms"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" index="4"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" index="3"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" index="0"]
@@ -48,10 +33,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer" index="5"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" index="4"]
 layout_mode = 2
 
-[node name="PivotOptions" type="HBoxContainer" parent="VBoxContainer" index="6"]
+[node name="PivotOptions" type="HBoxContainer" parent="VBoxContainer" index="5"]
 layout_mode = 2
 
 [node name="Pivot" parent="VBoxContainer/PivotOptions" index="0" instance=ExtResource("4")]
@@ -70,17 +55,17 @@ tooltip_text = "Places the pivot at the center of the image, or at the center of
 mouse_default_cursor_shape = 2
 text = "Center"
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" index="7"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" index="6"]
 layout_mode = 2
 
-[node name="AngleSlider" parent="VBoxContainer" index="8" instance=ExtResource("3")]
+[node name="AngleSlider" parent="VBoxContainer" index="7" instance=ExtResource("3")]
 layout_mode = 2
 max_value = 359.0
 prefix = "Angle:"
 suffix = "°"
 snap_step = 45.0
 
-[node name="QuickRotations" type="HBoxContainer" parent="VBoxContainer" index="9"]
+[node name="QuickRotations" type="HBoxContainer" parent="VBoxContainer" index="8"]
 layout_mode = 2
 alignment = 1
 
@@ -114,7 +99,7 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "+90"
 
-[node name="SmearOptions" type="VBoxContainer" parent="VBoxContainer" index="10"]
+[node name="SmearOptions" type="VBoxContainer" parent="VBoxContainer" index="9"]
 visible = false
 layout_mode = 2
 
@@ -139,15 +124,11 @@ prefix = "Initial angle:"
 suffix = "°"
 snap_step = 45.0
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" index="11"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" index="10"]
 layout_mode = 2
-
-[node name="WaitApply" type="Timer" parent="." index="5"]
 
 [connection signal="draw" from="VBoxContainer/AspectRatioContainer/Indicator" to="." method="_on_Indicator_draw"]
 [connection signal="gui_input" from="VBoxContainer/AspectRatioContainer/Indicator" to="." method="_on_Indicator_gui_input"]
-[connection signal="toggled" from="VBoxContainer/LiveSettings/LiveCheckbox" to="." method="_on_LiveCheckbox_toggled"]
-[connection signal="value_changed" from="VBoxContainer/WaitTime" to="." method="_on_WaitTime_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer2/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/PivotOptions/Pivot" to="." method="_on_Pivot_value_changed"]
 [connection signal="pressed" from="VBoxContainer/PivotOptions/Centre" to="." method="_on_Centre_pressed"]
@@ -159,4 +140,3 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Add90" to="." method="_on_quick_change_angle_pressed" binds= [90]]
 [connection signal="value_changed" from="VBoxContainer/SmearOptions/ToleranceSlider" to="." method="_on_ToleranceSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SmearOptions/InitialAngleSlider" to="." method="_on_InitialAngleSlider_value_changed"]
-[connection signal="timeout" from="WaitApply" to="." method="_on_WaitApply_timeout"]

@@ -3,7 +3,6 @@ extends ImageEffect
 enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
 enum Animate { ANGLE, INITIAL_ANGLE }
 
-var live_preview := true
 var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
 var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var pivot := Vector2.INF
@@ -16,8 +15,6 @@ var drag_pivot := false
 @onready var smear_options: Container = $VBoxContainer/SmearOptions
 @onready var init_angle_slider: ValueSlider = smear_options.get_node("InitialAngleSlider")
 @onready var tolerance_slider: ValueSlider = smear_options.get_node("ToleranceSlider")
-@onready var wait_apply_timer: Timer = $WaitApply
-@onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
 
 
 func _ready() -> void:
@@ -178,40 +175,15 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 
 
 func _on_AngleSlider_value_changed(_value: float) -> void:
-	if live_preview:
-		update_preview()
-	else:
-		wait_apply_timer.start()
-
-
-func _on_InitialAngleSlider_value_changed(_value: float) -> void:
-	if live_preview:
-		update_preview()
-	else:
-		wait_apply_timer.start()
-
-
-func _on_ToleranceSlider_value_changed(_value: float) -> void:
-	if live_preview:
-		update_preview()
-	else:
-		wait_apply_timer.start()
-
-
-func _on_WaitApply_timeout() -> void:
 	update_preview()
 
 
-func _on_WaitTime_value_changed(value: float) -> void:
-	wait_apply_timer.wait_time = value / 1000.0
+func _on_InitialAngleSlider_value_changed(_value: float) -> void:
+	update_preview()
 
 
-func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
-	live_preview = button_pressed
-	wait_time_slider.editable = !live_preview
-	wait_time_slider.visible = !live_preview
-	if !button_pressed:
-		size.y += 1  # Reset size of dialog
+func _on_ToleranceSlider_value_changed(_value: float) -> void:
+	update_preview()
 
 
 func _on_quick_change_angle_pressed(angle_value: int) -> void:

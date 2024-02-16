@@ -11,11 +11,15 @@ var current_frame := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 var preview_image := Image.new()
 var aspect_ratio_container: AspectRatioContainer
 var preview: TextureRect
+var live_checkbox: CheckBox
+var wait_time_slider: ValueSlider
+var wait_apply_timer: Timer
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
 var animate_panel: AnimatePanel
 var commit_idx := -1  ## The current frame the image effect is being applied to
 var has_been_confirmed := false
+var live_preview := true
 var _preview_idx := 0  ## The current frame being previewed
 
 
@@ -134,10 +138,14 @@ func commit_action(_cel: Image, _project := Global.current_project) -> void:
 func set_nodes() -> void:
 	aspect_ratio_container = $VBoxContainer/AspectRatioContainer
 	preview = $VBoxContainer/AspectRatioContainer/Preview
+	live_checkbox = $VBoxContainer/LiveSettings/LiveCheckbox
+	wait_time_slider = $VBoxContainer/LiveSettings/WaitTime
+	wait_apply_timer = $VBoxContainer/LiveSettings/WaitApply
 	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 	animate_panel = $"%AnimatePanel"
 	animate_panel.image_effect_node = self
+	live_checkbox.button_pressed = live_preview
 
 
 func display_animate_dialog():
@@ -205,7 +213,11 @@ func set_and_update_preview_image(frame_idx: int) -> void:
 	update_preview()
 
 
-func update_preview() -> void:
+func update_preview(using_timer := false) -> void:
+	if !live_preview and !using_timer:
+		wait_apply_timer.start()
+		return
+
 	match affect:
 		SELECTED_CELS:
 			preview_image.copy_from(selected_cels)
@@ -224,3 +236,19 @@ func _visibility_changed() -> void:
 	selected_cels.resize(1, 1)
 	current_frame.resize(1, 1)
 	preview_image = Image.new()
+
+
+func _on_live_checkbox_toggled(toggled_on: bool) -> void:
+	live_preview = toggled_on
+	wait_time_slider.editable = !live_preview
+	wait_time_slider.visible = !live_preview
+	if !toggled_on:
+		size.y += 1  # Reset size of dialog
+
+
+func _on_wait_apply_timeout() -> void:
+	update_preview(true)
+
+
+func _on_wait_time_value_changed(value: float) -> void:
+	wait_apply_timer.wait_time = value / 1000.0
