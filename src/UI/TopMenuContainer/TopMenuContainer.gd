@@ -536,8 +536,8 @@ func window_menu_id_pressed(id: int) -> void:
 		Global.WindowMenu.WINDOW_OPACITY:
 			window_opacity_dialog.popup()
 		Global.WindowMenu.MOVABLE_PANELS:
-			main_ui.tabs_visible = !main_ui.tabs_visible
-			window_menu.set_item_checked(id, main_ui.tabs_visible)
+			main_ui.hide_single_tab = not main_ui.hide_single_tab
+			window_menu.set_item_checked(id, not main_ui.hide_single_tab)
 		Global.WindowMenu.ZEN_MODE:
 			_toggle_zen_mode()
 		Global.WindowMenu.FULLSCREEN_MODE:

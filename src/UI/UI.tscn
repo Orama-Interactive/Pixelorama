@@ -252,8 +252,7 @@ offset_right = -8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("35")
-tabs_visible = false
-tabs_visible_if_more_than_one = true
+hide_single_tab = true
 layout = SubResource("Resource_b6o2t")
 clone_layout_on_ready = false
 

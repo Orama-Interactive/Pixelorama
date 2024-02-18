@@ -8,8 +8,22 @@ var leaf: DockableLayoutPanel:
 		return get_leaf()
 	set(value):
 		set_leaf(value)
+var show_tabs := true:
+	get:
+		return _show_tabs
+	set(value):
+		_show_tabs = value
+		_handle_tab_visibility()
+var hide_single_tab := false:
+	get:
+		return _hide_single_tab
+	set(value):
+		_hide_single_tab = value
+		_handle_tab_visibility()
 
 var _leaf: DockableLayoutPanel
+var _show_tabs := true
+var _hide_single_tab := false
 
 
 func _ready() -> void:
@@ -48,6 +62,7 @@ func track_nodes(nodes: Array[Control], new_leaf: DockableLayoutPanel) -> void:
 		ref_control.reference_to = nodes[i]
 		set_tab_title(i, nodes[i].name)
 	set_leaf(new_leaf)
+	_handle_tab_visibility()
 
 
 func get_child_rect() -> Rect2:
@@ -84,3 +99,10 @@ func _on_tab_changed(tab: int) -> void:
 	var name_index_in_leaf := _leaf.find_name(tab_name)
 	if name_index_in_leaf != tab:  # NOTE: this handles added tabs (index == -1)
 		tab_layout_changed.emit(tab)
+
+
+func _handle_tab_visibility() -> void:
+	if _hide_single_tab and get_tab_count() == 1:
+		tabs_visible = false
+	else:
+		tabs_visible = _show_tabs

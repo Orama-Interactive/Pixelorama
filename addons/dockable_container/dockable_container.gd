@@ -26,15 +26,21 @@ const DragNDropPanel := preload("drag_n_drop_panel.gd")
 	get:
 		return _tabs_visible
 	set(value):
-		set_tabs_visible(value)
-## Always ensure that tabs are visible if a panel has more than one tab.
-## Only takes effect is [member tabs_visible] is [code]false[/code].
-@export var tabs_visible_if_more_than_one := false:
+		_tabs_visible = value
+		for i in range(1, _panel_container.get_child_count()):
+			var panel := _panel_container.get_child(i) as DockablePanel
+			panel.show_tabs = _tabs_visible
+## If [code]true[/code] and a panel only has one tab, it keeps that tab hidden even if
+## [member tabs_visible] is [code]true[/code].
+## Only takes effect is [member tabs_visible] is [code]true[/code].
+@export var hide_single_tab := false:
 	get:
-		return _tabs_visible_if_more_than_one
+		return _hide_single_tab
 	set(value):
-		_tabs_visible_if_more_than_one = value
-		set_tabs_visible(_tabs_visible)
+		_hide_single_tab = value
+		for i in range(1, _panel_container.get_child_count()):
+			var panel := _panel_container.get_child(i) as DockablePanel
+			panel.hide_single_tab = _hide_single_tab
 @export var rearrange_group := 0
 @export var layout := DockableLayout.new():
 	get:
@@ -54,7 +60,7 @@ var _drag_panel: DockablePanel
 var _tab_align := TabBar.ALIGNMENT_CENTER
 var _tabs_visible := true
 var _use_hidden_tabs_for_min_size := false
-var _tabs_visible_if_more_than_one := false
+var _hide_single_tab := false
 var _current_panel_index := 0
 var _current_split_index := 0
 var _children_names := {}
@@ -193,20 +199,6 @@ func set_layout(value: DockableLayout) -> void:
 	queue_sort()
 
 
-func set_tabs_visible(value: bool) -> void:
-	_tabs_visible = value
-	for i in range(1, _panel_container.get_child_count()):
-		var panel := _panel_container.get_child(i) as DockablePanel
-		if _tabs_visible_if_more_than_one and panel.get_tab_count() > 1:
-			panel.tabs_visible = true
-		else:
-			panel.tabs_visible = value
-
-
-func get_tabs_visible() -> bool:
-	return _tabs_visible
-
-
 func set_use_hidden_tabs_for_min_size(value: bool) -> void:
 	_use_hidden_tabs_for_min_size = value
 	for i in range(1, _panel_container.get_child_count()):
@@ -330,8 +322,6 @@ func _resort() -> void:
 
 	_untrack_children_after(_panel_container, _current_panel_index)
 	_untrack_children_after(_split_container, _current_split_index)
-	if not tabs_visible and tabs_visible_if_more_than_one:
-		set_tabs_visible(_tabs_visible)
 
 
 ## Calculate DockablePanel and SplitHandle minimum sizes, skipping empty
@@ -407,7 +397,8 @@ func _get_panel(idx: int) -> DockablePanel:
 		return _panel_container.get_child(idx)
 	var panel := DockablePanel.new()
 	panel.tab_alignment = _tab_align
-	panel.tabs_visible = _tabs_visible
+	panel.show_tabs = _tabs_visible
+	panel.hide_single_tab = _hide_single_tab
 	panel.use_hidden_tabs_for_min_size = _use_hidden_tabs_for_min_size
 	panel.set_tabs_rearrange_group(maxi(0, rearrange_group))
 	_panel_container.add_child(panel)
