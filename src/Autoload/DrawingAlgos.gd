@@ -4,8 +4,16 @@ enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 ## Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
 var blend_layers_shader := preload("res://src/Shaders/BlendLayers.gdshader")
-var clean_edge_shader: Shader
-var omniscale_shader := preload("res://src/Shaders/Effects/Rotation/OmniScale.gdshader")
+var clean_edge_shader: Shader:
+	get:
+		if clean_edge_shader == null:
+			clean_edge_shader = load("res://src/Shaders/Effects/Rotation/cleanEdge.gdshader")
+		return clean_edge_shader
+var omniscale_shader: Shader:
+	get:
+		if omniscale_shader == null:
+			omniscale_shader = load("res://src/Shaders/Effects/Rotation/OmniScale.gdshader")
+		return omniscale_shader
 
 
 ## Blends canvas layers into passed image starting from the origin position

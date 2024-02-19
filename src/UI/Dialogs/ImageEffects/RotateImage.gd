@@ -33,10 +33,6 @@ func _ready() -> void:
 
 
 func _about_to_popup() -> void:
-	if DrawingAlgos.clean_edge_shader == null:
-		DrawingAlgos.clean_edge_shader = load(
-			"res://src/Shaders/Effects/Rotation/cleanEdge.gdshader"
-		)
 	drag_pivot = false
 	if pivot == Vector2.INF:
 		_calculate_pivot()

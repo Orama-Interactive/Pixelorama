@@ -22,10 +22,6 @@ func _ready() -> void:
 
 
 func _on_ScaleImage_about_to_show() -> void:
-	if DrawingAlgos.clean_edge_shader == null:
-		DrawingAlgos.clean_edge_shader = load(
-			"res://src/Shaders/Effects/Rotation/cleanEdge.gdshader"
-		)
 	Global.canvas.selection.transform_content_confirm()
 	aspect_ratio = float(Global.current_project.size.x) / float(Global.current_project.size.y)
 	width_value.value = Global.current_project.size.x
