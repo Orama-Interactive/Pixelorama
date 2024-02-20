@@ -15,6 +15,7 @@ Built using Godot 4.2.1
 - Non-destructive layer effects have been implemented. [#940](https://github.com/Orama-Interactive/Pixelorama/pull/940)
 - An extension explorer has been integrated into Pixelorama, allowing for easy extension downloading from the internet. [#910](https://github.com/Orama-Interactive/Pixelorama/pull/910)
 - Export to video formats. FFMPEG is required to be installed in the device in order for video exporting to work. [#980](https://github.com/Orama-Interactive/Pixelorama/pull/980)
+- Importing video formats and gif files is also possible, but FFMPEG is again required for this.
 - Export to webp and jpeg file formats. Webp is currently only for static images and does not support animations.
 - Native file dialogs are now supported and can be enabled from the Preferences!
 - Dialog popups can now be native OS windows instead of embedded within Pixelorama's main window. This can be changed from the Preferences.
@@ -30,15 +31,20 @@ Built using Godot 4.2.1
 - It is now possible to change the color space of gradients from sRGB, which is the default, to Linear sRGB and Oklab.
 - 3D layers now support torus shapes. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Image effect animation now supports the tweening transition method of spring. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
+- Added a new Rose theme.
 
 ### Changed
 - The file format of pxo files has been changed. Pxo files are now zip files in disguise. [#952](https://github.com/Orama-Interactive/Pixelorama/pull/952)
 - Similarly, the file format of Pixelorama's palette files has been changed from .tres back to .json as they used to be in the past. This change had to happen due to [security concerns regarding Godot's resource files](https://github.com/godotengine/godot-proposals/issues/4925). [#967](https://github.com/Orama-Interactive/Pixelorama/pull/967)
+- Changes made to the User Interface layouts are now automatically being saved. To restore a default layout, users can go to Window > Manage Layouts > Add and select from one of the default layouts.
 - The colors of the themes has been limited and grouped to allow for easier theming, using this [new stand-alone tool](https://github.com/Orama-Interactive/PixeloramaThemeCreator).
 - The color picker is now always visible in the user interface as its own panel, instead of being a popup. The previous color buttons have been re-purposed to allow for setting whether the color being selected is for the left or the right tool.
 - The color pickers has been vastly improved, thanks to the update to Godot 4. Users can now use the OKHSL color mode, and choose between four different picker shapes: HSV Rectangle (default), HSV Wheel, VHS Circle and OKHSL Circle.
 - The opacity slider in the timeline now affects layer opacity and not cel opacity. Cel opacity has been moved to the cel properties dialog.
+- The timeline's UI has been changed to better indicate which cels are selected.
+- Linked cels no longer have a colored outline, they now have a rectangle behind their preview which makes linked cels look like they are chained together.
 - "Crop Image" has been renamed to "Crop to Content".
+- Window opacity is disabled by default to improve performance, but it can be enabled in the Preferences.
 - Reference images have received some nice improvements, including undo/redo and easy transformations directly on the canvas. [#961](https://github.com/Orama-Interactive/Pixelorama/pull/961)
 - The add/remove swatch color buttons have been moved to the same horizontal container as the palette select and add/edit palette buttons, allowing for Inkscape-like horizontal placement of the palette panel, without any wasted space.
 - Cel buttons now hide their transparent background when their corresponding cels are empty, instead of just dimming them.
@@ -49,6 +55,7 @@ Built using Godot 4.2.1
 ### Fixed
 - Performance when drawing and doing operations such as bucket area fill should be better now. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Selections now scale properly when they are not transforming any image content. [#774](https://github.com/Orama-Interactive/Pixelorama/issues/774)
+- The aspect ratio is now being kept correctly in image effect dialog previews.
 - Dividing by zero in value sliders and spinboxes no longer crashes the program.
 
 ## [v0.11.4] - Unreleased
@@ -71,6 +78,8 @@ Built using Godot 3.5.2
 ### Fixed
 - Memory usage has been greatly optimized when doing operations such as drawing, image effects, selecting, transforming, etc, as the images stored in memory are now compressed. [#883](https://github.com/Orama-Interactive/Pixelorama/issues/883)
 - Fixed memory leak when applying image effects. [7235617db7c21837edc7ba7b95f2e7eeb1140691](https://github.com/Orama-Interactive/Pixelorama/commit/7235617db7c21837edc7ba7b95f2e7eeb1140691)
+- Fixed memory leak when previewing layouts in the Manage Layouts dialog.
+- Attempting to load an invalid pxo file no longer crashes the application. [3f6e1385e06cd7801fe12fbf90a9649557ea8f2e](https://github.com/Orama-Interactive/Pixelorama/commit/3f6e1385e06cd7801fe12fbf90a9649557ea8f2e)
 - Tool shortcuts can now work with <kbd>Control</kbd>. [#935](https://github.com/Orama-Interactive/Pixelorama/issues/935)
 - Optimize canvas drawing by only updating it when the image(s) have changed. [ac6a4db43d9296ebc03e639d8199dd3878a25d86](https://github.com/Orama-Interactive/Pixelorama/commit/ac6a4db43d9296ebc03e639d8199dd3878a25d86)
 - Fix bug where using shortcuts to switch between frames also moved the selection, causing deletions.
