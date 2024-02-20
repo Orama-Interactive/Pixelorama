@@ -131,6 +131,16 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		file.close()
 		return
 
+	var first_line := file.get_line()
+	var dict := JSON.parse(first_line)
+	if dict.error != OK:
+		print("Error, corrupt pxo file")
+		file.close()
+		return
+	if typeof(dict.result) != TYPE_DICTIONARY:
+		print("Error, json parsed result is: %s" % typeof(dict.result))
+		file.close()
+		return
 	var empty_project: bool = Global.current_project.is_empty() and replace_empty
 	var new_project: Project
 	if empty_project:
@@ -142,43 +152,31 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 	else:
 		new_project = Project.new([], path.get_file())
 
-	var first_line := file.get_line()
-	var dict := JSON.parse(first_line)
-	if dict.error != OK:
-		print("Error, corrupt pxo file")
-		file.close()
-		return
-	else:
-		if typeof(dict.result) != TYPE_DICTIONARY:
-			print("Error, json parsed result is: %s" % typeof(dict.result))
-			file.close()
-			return
+	new_project.deserialize(dict.result)
+	for frame in new_project.frames:
+		for cel in frame.cels:
+			cel.load_image_data_from_pxo(file, new_project.size)
 
-		new_project.deserialize(dict.result)
-		for frame in new_project.frames:
-			for cel in frame.cels:
-				cel.load_image_data_from_pxo(file, new_project.size)
+	if dict.result.has("brushes"):
+		for brush in dict.result.brushes:
+			var b_width = brush.size_x
+			var b_height = brush.size_y
+			var buffer := file.get_buffer(b_width * b_height * 4)
+			var image := Image.new()
+			image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
+			new_project.brushes.append(image)
+			Brushes.add_project_brush(image)
 
-		if dict.result.has("brushes"):
-			for brush in dict.result.brushes:
-				var b_width = brush.size_x
-				var b_height = brush.size_y
-				var buffer := file.get_buffer(b_width * b_height * 4)
-				var image := Image.new()
-				image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
-				new_project.brushes.append(image)
-				Brushes.add_project_brush(image)
-
-		if dict.result.has("tile_mask") and dict.result.has("has_mask"):
-			if dict.result.has_mask:
-				var t_width = dict.result.tile_mask.size_x
-				var t_height = dict.result.tile_mask.size_y
-				var buffer := file.get_buffer(t_width * t_height * 4)
-				var image := Image.new()
-				image.create_from_data(t_width, t_height, false, Image.FORMAT_RGBA8, buffer)
-				new_project.tiles.tile_mask = image
-			else:
-				new_project.tiles.reset_mask()
+	if dict.result.has("tile_mask") and dict.result.has("has_mask"):
+		if dict.result.has_mask:
+			var t_width = dict.result.tile_mask.size_x
+			var t_height = dict.result.tile_mask.size_y
+			var buffer := file.get_buffer(t_width * t_height * 4)
+			var image := Image.new()
+			image.create_from_data(t_width, t_height, false, Image.FORMAT_RGBA8, buffer)
+			new_project.tiles.tile_mask = image
+		else:
+			new_project.tiles.reset_mask()
 
 	file.close()
 	if empty_project:
