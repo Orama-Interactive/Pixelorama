@@ -37,9 +37,9 @@ var _action_history: Dictionary = {}
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
 func check_sanity(extension_name: String):
 	if extension_name in _action_history.keys():
-		var extension_history = _action_history[extension_name]
+		var extension_history: Array = _action_history[extension_name]
 		if extension_history != []:
-			var error_msg = str(
+			var error_msg := str(
 				"Extension: ",
 				extension_name,
 				" contains actons: ",
@@ -57,8 +57,8 @@ func clear_history(extension_name: String):
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
 func add_action(section: String, key: String):
-	var action = str(section, "/", key)
-	var extension_name = _get_caller_extension_name()
+	var action := str(section, "/", key)
+	var extension_name := _get_caller_extension_name()
 	if extension_name != "Unknown":
 		if extension_name in _action_history.keys():
 			var extension_history: Array = _action_history[extension_name]
@@ -69,15 +69,15 @@ func add_action(section: String, key: String):
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
 func remove_action(section: String, key: String):
-	var action = str(section, "/", key)
-	var extension_name = _get_caller_extension_name()
+	var action := str(section, "/", key)
+	var extension_name := _get_caller_extension_name()
 	if extension_name != "Unknown":
 		if extension_name in _action_history.keys():
 			_action_history[extension_name].erase(action)
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func wait_frame():  # as yield is not available to classes below, so this is the solution
+func wait_frame():  # Await is not available to classes below, so this is the solution
 	# use by {await ExtensionsApi.wait_frame()}
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -94,7 +94,7 @@ func _get_caller_extension_name() -> String:
 	return "Unknown"
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	for keys in _action_history.keys():
 		check_sanity(keys)
 
@@ -247,7 +247,7 @@ class PanelAPI:
 		var top_menu_container = Global.top_menu_container
 		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
 		# adding the node to the first tab we find, it'll be re-ordered by layout anyway
-		var tabs = _get_tabs_in_root(dockable.layout.root)
+		var tabs := _get_tabs_in_root(dockable.layout.root)
 		if tabs.size() != 0:
 			dockable.add_child(node)
 			tabs[0].insert_node(0, node)  # Insert at the beginning
@@ -260,7 +260,7 @@ class PanelAPI:
 		panels_submenu.clear()
 		for element in new_elements:
 			panels_submenu.add_check_item(element.name)
-			var is_hidden: bool = dockable.is_control_hidden(element)
+			var is_hidden := dockable.is_control_hidden(element)
 			panels_submenu.set_item_checked(new_elements.find(element), !is_hidden)
 		# re-assigning layout
 		top_menu_container.set_layout(top_menu_container.selected_layout)
@@ -273,13 +273,13 @@ class PanelAPI:
 
 	## Removes the [param node] from the DockableContainer.
 	func remove_node_from_tab(node: Node) -> void:
-		var top_menu_container = Global.top_menu_container
-		var dockable = Global.control.find_child("DockableContainer")
+		var top_menu_container := Global.top_menu_container
+		var dockable := _get_dockable_container_ui()
 		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
 		# find the tab that contains the node
 		if node == null:
 			return
-		var tab = _find_tab_with_node(node.name, dockable)
+		var tab := _find_tab_with_node(node.name, dockable)
 		if not tab:
 			push_error("Tab not found")
 			return
@@ -303,25 +303,27 @@ class PanelAPI:
 		ExtensionsApi.remove_action("PanelAPI", "add_tab")
 
 	# PRIVATE METHODS
-	func _get_dockable_container_ui() -> Node:
+	func _get_dockable_container_ui() -> DockableContainer:
 		return Global.control.find_child("DockableContainer")
 
-	func _find_tab_with_node(node_name: String, dockable_container):
-		var root = dockable_container.layout.root
-		var tabs = _get_tabs_in_root(root)
+	func _find_tab_with_node(
+		node_name: String, dockable_container: DockableContainer
+	) -> DockableLayoutPanel:
+		var root := dockable_container.layout.root
+		var tabs := _get_tabs_in_root(root)
 		for tab in tabs:
-			var idx = tab.find_name(node_name)
+			var idx := tab.find_name(node_name)
 			if idx != -1:
 				return tab
 		return null
 
-	func _get_tabs_in_root(parent_resource) -> Array:
+	func _get_tabs_in_root(parent_resource: DockableLayoutNode) -> Array[DockableLayoutPanel]:
 		var parents := []  # Resources have no get_parent_resource() so this is an alternative
 		var scanned := []  # To keep track of already discovered layout_split resources
 		var child_number := 0
 		parents.append(parent_resource)
-		var scan_target = parent_resource
-		var tabs := []
+		var scan_target := parent_resource
+		var tabs: Array[DockableLayoutPanel] = []
 		# Get children in the parent, the initial parent is the node we entered as "parent"
 		while child_number < 2:
 			# If parent isn't a (layout_split) resource then there is no point
@@ -329,11 +331,11 @@ class PanelAPI:
 			if !scan_target is DockableLayoutSplit:
 				break
 
-			var child_resource
+			var child_resource: DockableLayoutNode
 			if child_number == 0:
-				child_resource = scan_target.get_first()  # First child
+				child_resource = (scan_target as DockableLayoutSplit).get_first()  # First child
 			elif child_number == 1:
-				child_resource = scan_target.get_second()  # Second child
+				child_resource = (scan_target as DockableLayoutSplit).get_second()  # Second child
 
 			# If the child resource is a tab and it wasn't discovered before, add it to "paths"
 			if child_resource is DockableLayoutPanel:
@@ -396,7 +398,7 @@ class ThemeAPI:
 ## Gives ability to add/remove tools.
 class ToolAPI:
 	# gdlint: ignore=constant-name
-	const LayerTypes = Global.LayerTypes
+	const LayerTypes := Global.LayerTypes
 
 	## Adds a tool to pixelorama with name [param tool_name] (without spaces),
 	## display name [param display_name], tool scene [param scene], layers that the tool works
@@ -459,14 +461,17 @@ class SelectionAPI:
 	## with content if [param with_content] is [code]true[/code].
 	## If [param transform_standby] is [code]true[/code] then the transformation will not be
 	## applied immediatelyunless [kbd]Enter[/kbd] is pressed.
-	func move_selection(destination: Vector2, with_content := true, transform_standby := false):
+	func move_selection(
+		destination: Vector2i, with_content := true, transform_standby := false
+	) -> void:
 		if not with_content:
 			Global.canvas.selection.transform_content_confirm()
 			Global.canvas.selection.move_borders_start()
 		else:
 			Global.canvas.selection.transform_content_start()
-		var rel_direction = destination - Global.canvas.selection.big_bounding_rectangle.position
-		Global.canvas.selection.move_content(rel_direction.floor())
+		var selection_rectangle: Rect2i = Global.canvas.selection.big_bounding_rectangle
+		var rel_direction := destination - selection_rectangle.position
+		Global.canvas.selection.move_content(rel_direction)
 		Global.canvas.selection.move_borders_end()
 		if not transform_standby and with_content:
 			Global.canvas.selection.transform_content_confirm()
@@ -475,7 +480,9 @@ class SelectionAPI:
 	## with content if [param with_content] is [code]true[/code].
 	## If [param transform_standby] is [code]true[/code] then the transformation will not be
 	## applied immediately unless [kbd]Enter[/kbd] is pressed.
-	func resize_selection(new_size: Vector2, with_content := true, transform_standby := false):
+	func resize_selection(
+		new_size: Vector2i, with_content := true, transform_standby := false
+	) -> void:
 		if not with_content:
 			Global.canvas.selection.transform_content_confirm()
 			Global.canvas.selection.move_borders_start()
@@ -553,13 +560,13 @@ class ProjectAPI:
 	## Frames are counted from left to right, layers are counted from bottom to top.
 	## Frames/layers start at "0" and end at [param project.frames.size() - 1] and
 	## [param project.layers.size() - 1] respectively.
-	func select_cels(selected_array := [[0, 0]]):
+	func select_cels(selected_array := [[0, 0]]) -> void:
 		var project := Global.current_project
 		project.selected_cels.clear()
 		for cel_position in selected_array:
 			if typeof(cel_position) == TYPE_ARRAY and cel_position.size() == 2:
-				var frame = clampi(cel_position[0], 0, project.frames.size() - 1)
-				var layer = clampi(cel_position[1], 0, project.layers.size() - 1)
+				var frame := clampi(cel_position[0], 0, project.frames.size() - 1)
+				var layer := clampi(cel_position[1], 0, project.layers.size() - 1)
 				if not [frame, layer] in project.selected_cels:
 					project.selected_cels.append([frame, layer])
 		project.change_cel(project.selected_cels[-1][0], project.selected_cels[-1][1])
@@ -602,16 +609,16 @@ class ProjectAPI:
 	## [br][param type] = 0 --> PixelLayer,
 	## [br][param type] = 1 --> GroupLayer,
 	## [br][param type] = 2 --> 3DLayer
-	func add_new_layer(above_layer: int, name := "", type := Global.LayerTypes.PIXEL):
-		var project = ExtensionsApi.project.get_current_project()
+	func add_new_layer(above_layer: int, name := "", type := Global.LayerTypes.PIXEL) -> void:
+		var project := ExtensionsApi.project.current_project
 		if above_layer < project.layers.size() and above_layer >= 0:
-			var old_current = project.current_layer
+			var old_current := project.current_layer
 			project.current_layer = above_layer  # temporary assignment
 			if type >= 0 and type < Global.LayerTypes.size():
 				Global.animation_timeline.add_layer(type)
 				if name != "":
 					project.layers[above_layer + 1].name = name
-					var l_idx = Global.layer_vbox.get_child_count() - (above_layer + 2)
+					var l_idx := Global.layer_vbox.get_child_count() - (above_layer + 2)
 					Global.layer_vbox.get_child(l_idx).label.text = name
 				project.current_layer = old_current
 			else:
@@ -643,30 +650,30 @@ class ExportAPI:
 		is_animated := true
 	) -> int:
 		# Separate enum name and file name
-		var extension = ""
-		var format_name = ""
+		var extension := ""
+		var format_name := ""
 		if format_info.has("extension"):
 			extension = format_info["extension"]
 		if format_info.has("description"):
 			format_name = format_info["description"].strip_edges().to_upper().replace(" ", "_")
 		# Change format name if another one uses the same name
-		var existing_format_names = Export.FileFormat.keys() + Export.custom_file_formats.keys()
+		var existing_format_names := Export.FileFormat.keys() + Export.custom_file_formats.keys()
 		for i in range(existing_format_names.size()):
-			var test_name = format_name
+			var test_name := format_name
 			if i != 0:
 				test_name = str(test_name, "_", i)
 			if !existing_format_names.has(test_name):
 				format_name = test_name
 				break
 		# Setup complete, add the exporter
-		var id = Export.add_custom_file_format(
+		var id := Export.add_custom_file_format(
 			format_name, extension, exporter_generator, tab, is_animated
 		)
 		ExtensionsApi.add_action("ExportAPI", "add_exporter")
 		return id
 
 	## Removes the exporter with [param id] from Pixelorama.
-	func remove_export_option(id: int):
+	func remove_export_option(id: int) -> void:
 		if Export.custom_exporter_generators.has(id):
 			Export.remove_custom_file_format(id)
 			ExtensionsApi.remove_action("ExportAPI", "add_exporter")
@@ -686,13 +693,13 @@ class ImportAPI:
 	## 2. The method [method initiate_import] which takes 2 arguments: [code]path[/code],
 	## [code]image[/code], which are automatically passed to [method initiate_import] at
 	## time of import.
-	func add_import_option(import_name: StringName, import_scene_preload: PackedScene):
-		var id = OpenSave.add_import_option(import_name, import_scene_preload)
+	func add_import_option(import_name: StringName, import_scene_preload: PackedScene) -> int:
+		var id := OpenSave.add_import_option(import_name, import_scene_preload)
 		ExtensionsApi.add_action("ImportAPI", "add_import_option")
 		return id
 
 	## Removes the import option with [param id] from Pixelorama.
-	func remove_import_option(id: int):
+	func remove_import_option(id: int) -> void:
 		var import_name = OpenSave.custom_import_names.find_key(id)
 		OpenSave.custom_import_names.erase(import_name)
 		OpenSave.custom_importer_scenes.erase(id)
@@ -714,17 +721,19 @@ class SignalsAPI:
 		Global.project_switched.connect(_update_texture_signal)
 		Global.cel_switched.connect(_update_texture_signal)
 
-	func _update_texture_signal():
+	func _update_texture_signal() -> void:
 		if _last_cel:
 			_last_cel.texture_changed.disconnect(_on_texture_changed)
 		if Global.current_project:
 			_last_cel = Global.current_project.get_current_cel()
 			_last_cel.texture_changed.connect(_on_texture_changed)
 
-	func _on_texture_changed():
+	func _on_texture_changed() -> void:
 		texture_changed.emit()
 
-	func _connect_disconnect(signal_class: Signal, callable: Callable, is_disconnecting := false):
+	func _connect_disconnect(
+		signal_class: Signal, callable: Callable, is_disconnecting := false
+	) -> void:
 		if !is_disconnecting:
 			signal_class.connect(callable)
 			ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
@@ -735,34 +744,34 @@ class SignalsAPI:
 	# APP RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
 	## when pixelorama is just opened.
-	func signal_pixelorama_opened(callable: Callable, is_disconnecting := false):
+	func signal_pixelorama_opened(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.pixelorama_opened, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## when pixelorama is about to close.
-	func signal_pixelorama_about_to_close(callable: Callable, is_disconnecting := false):
+	func signal_pixelorama_about_to_close(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.pixelorama_about_to_close, callable, is_disconnecting)
 
 	# PROJECT RELATED SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever a new project is created.[br]
 	## [b]Binds: [/b]It has one bind of type [code]Project[/code] which is the newly created project
-	func signal_project_created(callable: Callable, is_disconnecting := false):
+	func signal_project_created(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.project_created, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## after a project is saved.
-	func signal_project_saved(callable: Callable, is_disconnecting := false):
+	func signal_project_saved(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(OpenSave.project_saved, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever you switch to some other project.
-	func signal_project_switched(callable: Callable, is_disconnecting := false):
+	func signal_project_switched(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.project_switched, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever you select a different cel.
-	func signal_cel_switched(callable: Callable, is_disconnecting := false):
+	func signal_cel_switched(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.cel_switched, callable, is_disconnecting)
 
 	# TOOL RELATED SIGNALS
@@ -770,7 +779,7 @@ class SignalsAPI:
 	## whenever a tool changes color.[br]
 	## [b]Binds: [/b] It has two bind of type [Color] (indicating new color)
 	## and [int] (Indicating button that tool is assigned to, see [enum @GlobalScope.MouseButton])
-	func signal_tool_color_changed(callable: Callable, is_disconnecting := false):
+	func signal_tool_color_changed(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Tools.color_changed, callable, is_disconnecting)
 
 	# TIMELINE RELATED SIGNALS
@@ -778,12 +787,12 @@ class SignalsAPI:
 	## whenever timeline animation starts.[br]
 	## [b]Binds: [/b] It has one bind of type [bool] which indicated if animation is in
 	## forward direction ([code]true[/code]) or backward direction ([code]false[/code])
-	func signal_timeline_animation_started(callable: Callable, is_disconnecting := false):
+	func signal_timeline_animation_started(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.animation_timeline.animation_started, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever timeline animation stops.
-	func signal_timeline_animation_finished(callable: Callable, is_disconnecting := false):
+	func signal_timeline_animation_finished(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(
 			Global.animation_timeline.animation_finished, callable, is_disconnecting
 		)
@@ -791,7 +800,7 @@ class SignalsAPI:
 	# UPDATER SIGNALS
 	## connects/disconnects a signal to [param callable], that emits
 	## whenever texture of the currently focused cel changes.
-	func signal_current_cel_texture_changed(callable: Callable, is_disconnecting := false):
+	func signal_current_cel_texture_changed(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(texture_changed, callable, is_disconnecting)
 
 	## connects/disconnects a signal to [param callable], that emits
@@ -799,5 +808,5 @@ class SignalsAPI:
 	## [b]Binds: [/b]It has one bind of type [Dictionary] with keys: [code]exporter_id[/code],
 	## [code]export_tab[/code], [code]preview_images[/code], [code]durations[/code]
 	## [br] Use this if you plan on changing preview of export
-	func signal_export_about_to_preview(callable: Callable, is_disconnecting := false):
+	func signal_export_about_to_preview(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.export_dialog.about_to_preview, callable, is_disconnecting)
