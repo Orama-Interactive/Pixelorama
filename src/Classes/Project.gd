@@ -23,7 +23,7 @@ var has_changed := false:
 	set(value):
 		has_changed = value
 		if value:
-			Global.project_changed.emit(self)
+			Global.project_data_changed.emit(self)
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
 		else:
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name)

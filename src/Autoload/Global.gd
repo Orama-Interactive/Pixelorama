@@ -11,7 +11,7 @@ signal project_created(project: Project)  ## Emitted when a new project class is
 signal project_about_to_switch  ## Emitted before a project is about to be switched
 signal project_switched  ## Emitted whenever you switch to some other project tab.
 signal cel_switched  ## Emitted whenever you select a different cel.
-signal project_changed(project: Project)  ## Emitted when project data is modified.
+signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
