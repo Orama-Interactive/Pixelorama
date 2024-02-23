@@ -119,15 +119,13 @@ func _setup_application_window_size() -> void:
 	var root := get_tree().root
 	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	root.min_size = Vector2(1024, 576)
 	root.content_scale_factor = Global.shrink
 	set_custom_cursor()
 
 	if OS.get_name() == "Web":
 		return
-	# Set a minimum window size to prevent UI elements from collapsing on each other.
-	get_window().min_size = Vector2(1024, 576)
-
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
 		get_window().current_screen = Global.config_cache.get_value("window", "screen")
