@@ -532,9 +532,9 @@ class ProjectAPI:
 	## Creates a new project (with new tab) with name [param name], size [param size],
 	## fill color [param fill_color] and frames [param frames]. The created project also
 	## gets returned.[br][br]
-	## [param frames] is an [Array] of type Frames. Usually it can be left as [code][][/code].
+	## [param frames] is an [Array] of type [Frame]. Usually it can be left as [code][][/code].
 	func new_project(
-		frames := [],
+		frames: Array[Frame] = [],
 		name := tr("untitled"),
 		size := Vector2(64, 64),
 		fill_color := Color.TRANSPARENT
@@ -548,6 +548,12 @@ class ProjectAPI:
 		new_proj.layers.append(PixelLayer.new(new_proj))
 		new_proj.fill_color = fill_color
 		new_proj.frames.append(new_proj.new_empty_frame())
+		Global.projects.append(new_proj)
+		return new_proj
+
+	## Creates and returns a new [Project], with an optional [param name].
+	func new_empty_project(name := tr("untitled")) -> Project:
+		var new_proj := Project.new([], name)
 		Global.projects.append(new_proj)
 		return new_proj
 
