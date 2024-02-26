@@ -787,6 +787,10 @@ msgstr ""
 msgid "Purple"
 msgstr ""
 
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
+
 msgid "Theme"
 msgstr ""
 
