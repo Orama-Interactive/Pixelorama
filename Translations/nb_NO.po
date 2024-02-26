@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2024-02-15 16:51\n"
+"PO-Revision-Date: 2024-02-26 18:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -798,6 +798,10 @@ msgstr "Lys"
 
 msgid "Purple"
 msgstr "Lilla"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
 
 msgid "Theme"
 msgstr "Utseende"
