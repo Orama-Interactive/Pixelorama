@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-02-17 12:27\n"
+"PO-Revision-Date: 2024-02-26 18:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -800,6 +800,10 @@ msgstr "Luminos"
 
 msgid "Purple"
 msgstr "Mov"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
 
 msgid "Theme"
 msgstr "Temă"
