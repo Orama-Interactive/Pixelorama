@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-02-26 18:35\n"
+"PO-Revision-Date: 2024-02-26 19:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -804,7 +804,7 @@ msgstr "Fioletowy"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Różowy"
 
 msgid "Theme"
 msgstr "Motyw"
