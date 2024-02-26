@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2024-02-15 16:51\n"
+"PO-Revision-Date: 2024-02-26 18:36\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -799,6 +799,10 @@ msgstr "Hela"
 
 msgid "Purple"
 msgstr "Purpura"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
 
 msgid "Theme"
 msgstr "Temo"
