@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-02-15 18:08\n"
+"PO-Revision-Date: 2024-02-26 18:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -801,6 +801,10 @@ msgstr "ライト"
 
 msgid "Purple"
 msgstr "紫"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
 
 msgid "Theme"
 msgstr "テーマ"
