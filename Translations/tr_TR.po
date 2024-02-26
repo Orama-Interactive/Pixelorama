@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-02-15 21:26\n"
+"PO-Revision-Date: 2024-02-26 18:36\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -801,6 +801,10 @@ msgstr "Açık"
 
 msgid "Purple"
 msgstr "Mor"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
 
 msgid "Theme"
 msgstr "Tema"
