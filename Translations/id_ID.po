@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-02-26 18:35\n"
+"PO-Revision-Date: 2024-02-27 14:19\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -805,7 +805,7 @@ msgstr "Ungu"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Mawar"
 
 msgid "Theme"
 msgstr "Tema"
