@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2024-02-26 18:36\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -151,7 +151,7 @@ msgstr "Forigi"
 msgid "Delete Permanently"
 msgstr ""
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr ""
 
@@ -167,8 +167,13 @@ msgstr "Rastrumeroj"
 msgid "Percentage"
 msgstr ""
 
-msgid "Crop Image"
-msgstr "Tondi bildon"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr ""
+
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
+msgstr ""
 
 msgid "Resize Canvas"
 msgstr "Ŝanĝi la dimensiojn de la tavolo"
@@ -295,8 +300,18 @@ msgstr "Aldoni"
 msgid "Add Layout"
 msgstr "Aldoni poziciaron"
 
-msgid "Edit Layout"
-msgstr "Redakti poziciaron"
+msgid "Copy from"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename Layout"
+msgstr ""
+
+#. Refers to the current layout of the user interface.
+msgid "Current layout"
+msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Ĉu vi vere volas forigi tiun ĉi poziciaron?"
@@ -751,6 +766,22 @@ msgstr ""
 msgid "Dim interface on dialog popup"
 msgstr ""
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
+msgid "Use native file dialogs"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Use native file dialogs" option.
+msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
+msgstr ""
+
+#. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
+msgid "Single window mode"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Single window mode" option.
+msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
+msgstr ""
+
 msgid "Dark"
 msgstr "Malhela"
 
@@ -768,6 +799,10 @@ msgstr "Hela"
 
 msgid "Purple"
 msgstr "Purpura"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
 
 msgid "Theme"
 msgstr "Temo"
@@ -978,6 +1013,10 @@ msgstr "Ŝanĝprotokolo"
 msgid "About Pixelorama"
 msgstr "Pri Pixelorama"
 
+#. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
+msgid "Support Pixelorama's Development"
+msgstr ""
+
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr ""
 
@@ -990,7 +1029,8 @@ msgstr ""
 msgid "Website"
 msgstr "Retejo"
 
-msgid "GitHub Repo"
+#. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
+msgid "Source Code"
 msgstr ""
 
 msgid "Donate"
@@ -1101,17 +1141,17 @@ msgstr ""
 msgid "Belarusian"
 msgstr ""
 
-msgid "Development Team"
-msgstr "Teamo de ellaboro"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr ""
 
-msgid "Lead Programmer"
-msgstr "Ĉefa programisto"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "UIa desegnilo"
 
-msgid "GitHub Contributors"
-msgstr "Kontribuantoj de GitHub"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr ""
 
 msgid "Art by: %s"
 msgstr ""
@@ -1137,8 +1177,8 @@ msgstr "Vi havas nekonservitajn ŝanĝojn. Se vi daŭrigos, la progreso de vi fa
 msgid "Save before exiting?"
 msgstr "Ĉu konservi antaŭ elirado?"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "Vi havas nekonservitan progreson. Kiel vi deziras procedi?"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr ""
 
 msgid "Save & Exit"
 msgstr "Konservi kaj eliri"
@@ -1449,13 +1489,21 @@ msgstr ""
 msgid "Set application FPS limit:"
 msgstr ""
 
-msgid "Pause application when it loses focus"
-msgstr ""
-
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Agordas la kvoto de renoviĝoj de bildo po sekundo. Ju malpli estas la numero, des malpli multe da procesora tempo estas uzata, sed la programo iĝas malpli rapida kaj reagema. 0 signifas, ke ne ekzistas limo."
 
+msgid "Pause application when it loses focus"
+msgstr ""
+
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
+
+#. An option found in the preferences, under the Performance section.
+msgid "Enable window transparency"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Enable window transparency" option.
+msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
@@ -2101,6 +2149,10 @@ msgstr ""
 msgid "File failed to save. Error code %s"
 msgstr ""
 
+#. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
+msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
+msgstr ""
+
 msgid "File(s) exported"
 msgstr ""
 
@@ -2308,6 +2360,10 @@ msgstr "Malfermas lastan apertigitan projekton dum startigo"
 msgid "Quit confirmation"
 msgstr ""
 
+#. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
+msgid "FFMPEG path"
+msgstr ""
+
 msgid "Enable autosave"
 msgstr "Ŝalti aŭtokonservadon"
 
@@ -2410,13 +2466,50 @@ msgstr ""
 msgid "Remove a selected color"
 msgstr ""
 
+#. Tooltip of the Sort button found in the palette panel.
+msgid "Sort palette"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
+msgid "Reverse colors"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
+msgid "Sort by hue"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
+msgid "Sort by saturation"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
+msgid "Sort by value"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
+msgid "Sort by red"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
+msgid "Sort by green"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
+msgid "Sort by blue"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
+msgid "Sort by alpha"
+msgstr ""
+
 msgid "Palette with the same name and path already exists!"
 msgstr ""
 
 msgid "Palette name is required!"
 msgstr ""
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
 msgstr ""
 
 msgid "Position:"
@@ -2753,10 +2846,36 @@ msgstr ""
 msgid "Spring towards the end"
 msgstr ""
 
-msgid "Silhouette"
+#. Used to turn images into a singular color
+msgid "Monochrome"
 msgstr ""
 
-msgid "Blacks out the image and makes all opaque pixels a dark color."
+#. A tooltip to tell users to hold the Shift key while clicking the remove button
+msgid "Hold Shift while pressing to instantly remove"
+msgstr ""
+
+#. Moves the reference image up in the list
+msgid "Move the selected reference image to the right"
+msgstr ""
+
+#. Moves the reference image down in the list
+msgid "Move the selected reference image to the left"
+msgstr ""
+
+#. Select a reference on the canvas
+msgid "Selects a reference image on the canvas"
+msgstr ""
+
+#. Moves the reference on the canvas
+msgid "Move the selected reference image"
+msgstr ""
+
+#. Rotates the reference on the canvas
+msgid "Rotate the selected reference image"
+msgstr ""
+
+#. Rotates the reference on the canvas
+msgid "Scale the selected reference image"
 msgstr ""
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.

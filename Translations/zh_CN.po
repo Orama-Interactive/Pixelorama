@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-12-06 05:23\n"
+"PO-Revision-Date: 2024-02-26 18:35\n"
 
 msgid "OK"
 msgstr "确定"
@@ -153,7 +153,7 @@ msgstr "删除"
 msgid "Delete Permanently"
 msgstr "永久删除"
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr "移动到回收站"
 
@@ -169,8 +169,13 @@ msgstr "像素"
 msgid "Percentage"
 msgstr "百分比"
 
-msgid "Crop Image"
-msgstr "裁剪图像"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr "裁剪到选区"
+
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
+msgstr "裁剪到内容"
 
 msgid "Resize Canvas"
 msgstr "调整画布尺寸"
@@ -297,8 +302,18 @@ msgstr "添加"
 msgid "Add Layout"
 msgstr "添加布局"
 
-msgid "Edit Layout"
-msgstr "编辑布局"
+msgid "Copy from"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Rename Layout"
+msgstr ""
+
+#. Refers to the current layout of the user interface.
+msgid "Current layout"
+msgstr ""
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "您确定要删除此布局吗？"
@@ -754,6 +769,22 @@ msgstr "显示比例："
 msgid "Dim interface on dialog popup"
 msgstr "对话框弹出时变暗界面"
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
+msgid "Use native file dialogs"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Use native file dialogs" option.
+msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
+msgstr ""
+
+#. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
+msgid "Single window mode"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Single window mode" option.
+msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
+msgstr ""
+
 msgid "Dark"
 msgstr "深色"
 
@@ -771,6 +802,10 @@ msgstr "白色"
 
 msgid "Purple"
 msgstr "紫色"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
 
 msgid "Theme"
 msgstr "主题"
@@ -982,6 +1017,10 @@ msgstr "更新日志"
 msgid "About Pixelorama"
 msgstr "关于 Pixelorama"
 
+#. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
+msgid "Support Pixelorama's Development"
+msgstr "支持 Pixelorama 的开发"
+
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - 像素化您的梦想！"
 
@@ -989,13 +1028,14 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "© 版权所有 2022 - Orama Interactive 和贡献者"
+msgstr "© 版权所有 2019~2024 - Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
 
-msgid "GitHub Repo"
-msgstr "GitHub 项目"
+#. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
+msgid "Source Code"
+msgstr "源代码"
 
 msgid "Donate"
 msgstr "捐赠"
@@ -1105,17 +1145,17 @@ msgstr "荷兰语"
 msgid "Belarusian"
 msgstr "白俄罗斯语"
 
-msgid "Development Team"
-msgstr "开发团队"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr "首席开发者"
 
-msgid "Lead Programmer"
-msgstr "首席程序员"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "UI 设计师"
 
-msgid "GitHub Contributors"
-msgstr "GitHub 贡献者"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr "作者"
 
 msgid "Art by: %s"
 msgstr "艺术作者： %s"
@@ -1141,8 +1181,8 @@ msgstr "您有未保存的更改。如果您继续，您的进度将会丢失。
 msgid "Save before exiting?"
 msgstr "退出前保存吗？"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "您有未保存的进度。您想继续吗？"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr "项目 %s 有未保存的进度。您想如何继续？"
 
 msgid "Save & Exit"
 msgstr "保存并退出"
@@ -1500,14 +1540,22 @@ msgstr "仅修改自定义预设"
 msgid "Set application FPS limit:"
 msgstr "设置应用程序 FPS 限制："
 
-msgid "Pause application when it loses focus"
-msgstr "失去焦点时暂停应用程序"
-
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越低，但应用程序变慢，限制且反应不灵。0 表示没有限制。"
 
+msgid "Pause application when it loses focus"
+msgstr "失去焦点时暂停应用程序"
+
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "如果打开此选项，当应用程序的窗口失去焦点时，它会暂停。 这有助于在空闲时降低 CPU 使用率。 当鼠标进入应用程序的窗口时，应用程序被取消暂停。"
+
+#. An option found in the preferences, under the Performance section.
+msgid "Enable window transparency"
+msgstr ""
+
+#. Found in the preferences, tooltip of the "Enable window transparency" option.
+msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1554,7 +1602,7 @@ msgstr "压力"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "速度"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
@@ -2156,6 +2204,10 @@ msgstr "打开文件失败。错误代码 %s"
 msgid "File failed to save. Error code %s"
 msgstr "保存文件失败。错误代码 %s"
 
+#. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
+msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
+msgstr ""
+
 msgid "File(s) exported"
 msgstr "文件已导出"
 
@@ -2363,6 +2415,10 @@ msgstr "在启动时打开最后打开的项目"
 msgid "Quit confirmation"
 msgstr "退出确认"
 
+#. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
+msgid "FFMPEG path"
+msgstr ""
+
 msgid "Enable autosave"
 msgstr "启用自动保存"
 
@@ -2374,7 +2430,7 @@ msgstr "分钟"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "在文件名中包含帧标签"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2390,7 +2446,7 @@ msgstr "分隔符:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "分隔文件名称和帧编号的字符(秒)"
 
 msgid "Close"
 msgstr "关闭"
@@ -2466,13 +2522,50 @@ msgstr "添加一个新颜色"
 msgid "Remove a selected color"
 msgstr "删除所选颜色"
 
+#. Tooltip of the Sort button found in the palette panel.
+msgid "Sort palette"
+msgstr "排序调色板"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
+msgid "Reverse colors"
+msgstr "反向颜色"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
+msgid "Sort by hue"
+msgstr "按色相排序"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
+msgid "Sort by saturation"
+msgstr "按饱和度排序"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
+msgid "Sort by value"
+msgstr "按值排序"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
+msgid "Sort by red"
+msgstr "按红色排序"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
+msgid "Sort by green"
+msgstr "按绿色排序"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
+msgid "Sort by blue"
+msgstr "按蓝色排序"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
+msgid "Sort by alpha"
+msgstr "按 Alpha 排序"
+
 msgid "Palette with the same name and path already exists!"
 msgstr "具有相同名称和路径的调色板已经存在！"
 
 msgid "Palette name is required!"
 msgstr "调色板名称为必填项！"
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
 msgstr "减小调色板尺寸将重置颜色的位置。不适合新调色板尺寸的颜色将丢失！"
 
 msgid "Position:"
@@ -2561,7 +2654,7 @@ msgstr "3D 形状编辑"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "正方体"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
@@ -2604,7 +2697,7 @@ msgstr "点光"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "自定义模型"
 
 msgid "Selected object:"
 msgstr "已选对象"
@@ -2632,7 +2725,7 @@ msgstr "正交"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "椎体"
 
 msgid "Rotation:"
 msgstr "旋转"
@@ -2642,15 +2735,15 @@ msgstr "缩放："
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "环境"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "环境颜色："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "环境颜色能量："
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
@@ -2666,7 +2759,7 @@ msgstr "网格"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "从左到右"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
@@ -2674,15 +2767,15 @@ msgstr "半径："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "字段数量："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "圆环"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "半球："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
@@ -2701,10 +2794,10 @@ msgstr "像素大小："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "曲线步骤："
 
 msgid "Horizontal alignment:"
-msgstr ""
+msgstr "水平对齐"
 
 msgid "Left"
 msgstr "左"
@@ -2714,18 +2807,18 @@ msgstr "右"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "能量："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
-msgstr ""
+msgstr "负片："
 
 msgid "Shadow:"
-msgstr ""
+msgstr "阴影："
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "范围："
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
@@ -2805,17 +2898,43 @@ msgstr "结束时的反弹"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "在线束时倒退"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
 msgstr "跳转到结束"
 
-msgid "Silhouette"
-msgstr "轮廓"
+#. Used to turn images into a singular color
+msgid "Monochrome"
+msgstr "单色"
 
-msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr "使图像变黑，并使所有不透明像素变成深色。"
+#. A tooltip to tell users to hold the Shift key while clicking the remove button
+msgid "Hold Shift while pressing to instantly remove"
+msgstr "按住 Shift 键同时点击删除"
+
+#. Moves the reference image up in the list
+msgid "Move the selected reference image to the right"
+msgstr "将选中的参考图像移动到右侧"
+
+#. Moves the reference image down in the list
+msgid "Move the selected reference image to the left"
+msgstr "将选中的参考图像移动到左侧"
+
+#. Select a reference on the canvas
+msgid "Selects a reference image on the canvas"
+msgstr "在画布上选择一个参考图像"
+
+#. Moves the reference on the canvas
+msgid "Move the selected reference image"
+msgstr "移动选中的参考图像"
+
+#. Rotates the reference on the canvas
+msgid "Rotate the selected reference image"
+msgstr "移动选中的参考图像"
+
+#. Rotates the reference on the canvas
+msgid "Scale the selected reference image"
+msgstr "缩放选中的参考图像"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"

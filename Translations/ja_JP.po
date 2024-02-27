@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2024-02-26 18:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -152,7 +152,7 @@ msgstr "削除"
 msgid "Delete Permanently"
 msgstr "完全に削除"
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr "ゴミ箱へ移動"
 
@@ -168,8 +168,13 @@ msgstr "ピクセル"
 msgid "Percentage"
 msgstr "割合"
 
-msgid "Crop Image"
-msgstr "画像のトリミング"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr "選択範囲に合わせてトリミング"
+
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
+msgstr "コンテンツにトリミング"
 
 msgid "Resize Canvas"
 msgstr "キャンバスサイズを変更"
@@ -296,8 +301,18 @@ msgstr "追加"
 msgid "Add Layout"
 msgstr "レイアウトを追加"
 
-msgid "Edit Layout"
-msgstr "レイアウトを編集"
+msgid "Copy from"
+msgstr "コピー元"
+
+msgid "Rename"
+msgstr "名前を変更"
+
+msgid "Rename Layout"
+msgstr "レイアウト名の変更"
+
+#. Refers to the current layout of the user interface.
+msgid "Current layout"
+msgstr "現在のレイアウト"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "本当にこのレイアウトを削除してよろしいですか？"
@@ -650,11 +665,11 @@ msgstr "固定"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "色空間"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "リニアsRGB"
 
 msgid "General"
 msgstr "一般"
@@ -753,6 +768,22 @@ msgstr "表示スケール:"
 msgid "Dim interface on dialog popup"
 msgstr "ダイアログポップアップ時にインターフェースを薄暗くする"
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
+msgid "Use native file dialogs"
+msgstr "ネイティブのファイルダイアログを使用"
+
+#. Found in the preferences, tooltip of the "Use native file dialogs" option.
+msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
+msgstr "この設定を有効にすると、Pixeloramaのカスタムダイアログではなく、オペレーティングシステムのネイティブファイルダイアログが使用されます。"
+
+#. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
+msgid "Single window mode"
+msgstr "シングルウィンドウモード"
+
+#. Found in the preferences, tooltip of the "Single window mode" option.
+msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
+msgstr "この設定を有効にすると、Pixeloramaのサブウィンドウがメインウィンドウに埋め込まれます。そうでなければ、各ダイアログは個別のウィンドウになります。"
+
 msgid "Dark"
 msgstr "ダーク"
 
@@ -770,6 +801,10 @@ msgstr "ライト"
 
 msgid "Purple"
 msgstr "紫"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr ""
 
 msgid "Theme"
 msgstr "テーマ"
@@ -981,6 +1016,10 @@ msgstr "更新履歴"
 msgid "About Pixelorama"
 msgstr "Pixelorama について"
 
+#. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
+msgid "Support Pixelorama's Development"
+msgstr "Pixeloramaの開発を支援する"
+
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - 夢をピクセル化しよう!"
 
@@ -993,8 +1032,9 @@ msgstr "©2019-present by Orama Interactive and contributors"
 msgid "Website"
 msgstr "ウェブサイト"
 
-msgid "GitHub Repo"
-msgstr "GitHub Repo"
+#. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
+msgid "Source Code"
+msgstr "ソースコード"
 
 msgid "Donate"
 msgstr "Donate"
@@ -1104,17 +1144,17 @@ msgstr "オランダ語"
 msgid "Belarusian"
 msgstr "ベラルーシ語"
 
-msgid "Development Team"
-msgstr "Development Team"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr "リード開発者"
 
-msgid "Lead Programmer"
-msgstr "Lead Programmer"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "UI Designer"
 
-msgid "GitHub Contributors"
-msgstr "GitHub Contributors"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr "著者"
 
 msgid "Art by: %s"
 msgstr "Art by: %s"
@@ -1140,8 +1180,8 @@ msgstr "保存されていない変更があります。続行すると、進行
 msgid "Save before exiting?"
 msgstr "終了する前に保存しますか？"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "保存されていない進行状況があります。どのように進めますか？"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr "プロジェクト %s は進行状況が保存されていません。どのように進めますか？"
 
 msgid "Save & Exit"
 msgstr "セーブして終了"
@@ -1499,14 +1539,22 @@ msgstr "カスタムプリセットのみ変更できます"
 msgid "Set application FPS limit:"
 msgstr "アプリのFPS上限を設定:"
 
-msgid "Pause application when it loses focus"
-msgstr "フォーカスを失ったときにアプリケーションを一時停止する"
-
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "アプリケーションのフレーム/秒の制限を設定します。 数値が低いほどCPU使用率が低くなりますが、アプリケーションが遅く、粗く、応答がなくなります。0は制限がないことを意味します。"
 
+msgid "Pause application when it loses focus"
+msgstr "フォーカスを失ったときにアプリケーションを一時停止する"
+
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失ったときに一時停止します。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったとき、アプリケーションは一時停止を解除します。"
+
+#. An option found in the preferences, under the Performance section.
+msgid "Enable window transparency"
+msgstr "ウィンドウの透明度を有効化"
+
+#. Found in the preferences, tooltip of the "Enable window transparency" option.
+msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+msgstr "有効にすると、アプリケーションウィンドウは透明になります。これはパフォーマンスに影響しますので、必要がない場合はオフにしておいてください。"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1545,7 +1593,7 @@ msgstr "ダイナミクス"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "スタビライザー"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1882,13 +1930,13 @@ msgid "Unlink Cels"
 msgstr "セルのリンクを解除"
 
 msgid "Properties"
-msgstr ""
+msgstr "プロパティ"
 
 msgid "Frame properties"
 msgstr "フレームのプロパティ"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "セルプロパティ"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2155,6 +2203,10 @@ msgstr "ファイルを開けませんでした。エラーコード %s"
 msgid "File failed to save. Error code %s"
 msgstr "ファイルを保存できませんでした。エラーコード %s"
 
+#. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
+msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
+msgstr "動画のエクスポートに失敗しました。FFMPEGが正しくインストールされていることを確認してください。"
+
 msgid "File(s) exported"
 msgstr "ファイルをエクスポートしました"
 
@@ -2362,6 +2414,10 @@ msgstr "起動時に最後に開いたプロジェクトを開く"
 msgid "Quit confirmation"
 msgstr "終了の確認"
 
+#. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
+msgid "FFMPEG path"
+msgstr "FFMPEGパス"
+
 msgid "Enable autosave"
 msgstr "自動保存を有効化"
 
@@ -2465,14 +2521,52 @@ msgstr "新しい色を追加"
 msgid "Remove a selected color"
 msgstr "選択した色を削除"
 
+#. Tooltip of the Sort button found in the palette panel.
+msgid "Sort palette"
+msgstr "パレットのソート"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
+msgid "Reverse colors"
+msgstr "色を反転"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
+msgid "Sort by hue"
+msgstr "色相でソート"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
+msgid "Sort by saturation"
+msgstr "彩度でソート"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
+msgid "Sort by value"
+msgstr "値でソート"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
+msgid "Sort by red"
+msgstr "赤でソート"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
+msgid "Sort by green"
+msgstr "緑でソート"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
+msgid "Sort by blue"
+msgstr "青でソート"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
+msgid "Sort by alpha"
+msgstr "アルファでソート"
+
 msgid "Palette with the same name and path already exists!"
 msgstr "同じ名前とパスを持つパレットが既に存在します！"
 
 msgid "Palette name is required!"
 msgstr "パレット名が必要です！"
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr "パレットサイズを小さくすると、色の位置がリセットされます。新しいパレットサイズに合わない色は失われます！"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
+msgstr "パレットサイズを小さくすると色の位置がリセットされます。\n"
+"新しいパレットサイズに合わない色は失われます！"
 
 msgid "Position:"
 msgstr "ポジション:"
@@ -2810,11 +2904,37 @@ msgstr "終了時にバックアウト"
 msgid "Spring towards the end"
 msgstr "終了へ向かって跳ぶ"
 
-msgid "Silhouette"
-msgstr "シルエット"
+#. Used to turn images into a singular color
+msgid "Monochrome"
+msgstr "モノクローム"
 
-msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr "画像をブラックアウトし、すべての不透明なピクセルを暗い色にします。"
+#. A tooltip to tell users to hold the Shift key while clicking the remove button
+msgid "Hold Shift while pressing to instantly remove"
+msgstr "Shiftキーを押しながら押すと即座に削除します"
+
+#. Moves the reference image up in the list
+msgid "Move the selected reference image to the right"
+msgstr "選択した参照画像を右に移動"
+
+#. Moves the reference image down in the list
+msgid "Move the selected reference image to the left"
+msgstr "選択した参照画像を左に移動"
+
+#. Select a reference on the canvas
+msgid "Selects a reference image on the canvas"
+msgstr "キャンバス上の参照画像を選択"
+
+#. Moves the reference on the canvas
+msgid "Move the selected reference image"
+msgstr "選択した参照画像を移動する"
+
+#. Rotates the reference on the canvas
+msgid "Rotate the selected reference image"
+msgstr "選択した参照画像を回転"
+
+#. Rotates the reference on the canvas
+msgid "Scale the selected reference image"
+msgstr "選択した参照画像を拡大縮小"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"

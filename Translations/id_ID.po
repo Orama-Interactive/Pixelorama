@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-12-06 01:51\n"
+"PO-Revision-Date: 2024-02-27 15:20\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -95,13 +95,15 @@ msgstr "Simpan sebagai..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Sertakan gambar tercampur"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "Jika diaktifkan, bentuk akhir gambar tercampur akan disimpan jadi pxo, ke tiap bingkai.\n"
+"Berkas pxo akan lebih besar dan mampu diimpor dengan peranti lunak pihak ketiga\n"
+"atau diekspor CLI. Memuat pxo di Pixelorama tidak perlu mengaktifkan opsi ini.\n"
 
 msgid "Import"
 msgstr "Impor"
@@ -149,11 +151,11 @@ msgid "Delete"
 msgstr "Hapus"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Hapus Permanen"
 
-#. When you move something to recycle bin
+#. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Ke Tempat Sampah"
 
 msgid "New Brush"
 msgstr "Kuas Baru"
@@ -167,8 +169,13 @@ msgstr "Piksel"
 msgid "Percentage"
 msgstr "Persentase"
 
-msgid "Crop Image"
-msgstr "Potong Gambar"
+#. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
+msgid "Crop to Selection"
+msgstr "Pangkas ke Seleksi"
+
+#. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
+msgid "Crop to Content"
+msgstr "Pangkas ke Isi"
 
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
@@ -251,7 +258,7 @@ msgid "Reset"
 msgstr "Atur ulang"
 
 msgid "Use Current Frame"
-msgstr "Gunakan Bingkai Saat Ini"
+msgstr "Gunakan Bingkai Ini"
 
 msgid "Reset Mask"
 msgstr "Atur ulang Mask"
@@ -295,8 +302,18 @@ msgstr "Tambah"
 msgid "Add Layout"
 msgstr "Tambah Tata Letak"
 
-msgid "Edit Layout"
-msgstr "Sunting Tata Letak"
+msgid "Copy from"
+msgstr "Salin dari"
+
+msgid "Rename"
+msgstr "Ubah Nama"
+
+msgid "Rename Layout"
+msgstr "Ubah Nama Tata Letak"
+
+#. Refers to the current layout of the user interface.
+msgid "Current layout"
+msgstr "Tata letak sekarang"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Apakah yakin ingin menghapus tata letak ini?"
@@ -311,7 +328,7 @@ msgid "Tallscreen"
 msgstr "Layar tinggi"
 
 msgid "Mirror View"
-msgstr "Tampilan Cermin"
+msgstr "Cerminkan Tampilan"
 
 msgid "Show Grid"
 msgstr "Tampilkan Kisi"
@@ -331,7 +348,7 @@ msgstr "Tampilkan Panduan Tetikus"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Munculkan Efek Lapisan"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -441,7 +458,7 @@ msgstr "Jarak peleburan:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr "Gambar yang melewati ambang batas akan dileburkan menjadi gambar lebih besar, jika masih dalam jarak ini"
+msgstr "Gambar yang melewati ambang batas akan dileburkan jadi gambar lebih besar, jika masih dalam jarak ini"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
@@ -726,7 +743,7 @@ msgstr "Keker Integer"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr "Membatasi nilai menjadi kelipatan bilangan bulat 100%"
+msgstr "Membatasi nilai jadi kelipatan bilangan bulat 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Kepekaan tekanan tablet:"
@@ -752,6 +769,22 @@ msgstr "Skala tampilan:"
 msgid "Dim interface on dialog popup"
 msgstr "Redupkan antarmuka pada sembulan dialog"
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
+msgid "Use native file dialogs"
+msgstr "Gunakan dialog berkas biasa"
+
+#. Found in the preferences, tooltip of the "Use native file dialogs" option.
+msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
+msgstr "Saat ini dinyalakan, sistem operasi akan menggunakan dialog berkas biasa, dan bukan yang kustom Pixelorama."
+
+#. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
+msgid "Single window mode"
+msgstr "Mode satu jendela"
+
+#. Found in the preferences, tooltip of the "Single window mode" option.
+msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
+msgstr "Saat ini dinyalakan, subjendela Pixelorama akan disematkan ke jendela utama, jika tidak maka dialog akan pisah sendiri-sendiri."
+
 msgid "Dark"
 msgstr "Gelap"
 
@@ -769,6 +802,10 @@ msgstr "Terang"
 
 msgid "Purple"
 msgstr "Ungu"
+
+#. A theme. Rose refers to the color rose.
+msgid "Rose"
+msgstr "Mawar"
 
 msgid "Theme"
 msgstr "Tema"
@@ -867,7 +904,7 @@ msgid "Gradient Map"
 msgstr "Peta Gradien"
 
 msgid "Divide into equal parts"
-msgstr "Pisah menjadi sama rata"
+msgstr "Bagi jadi sama rata"
 
 msgid "Parts:"
 msgstr "Bagian:"
@@ -878,13 +915,13 @@ msgstr "Tambah titik di akhir"
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr "Jika diaktifkan, titik yang terakhir akan ditambah ke ujung gradien.\n"
-"Matikan ini jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
+"Nonaktifkan jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
 
 msgid "Shape:"
 msgstr "Bentuk:"
 
 msgid "Linear"
-msgstr "Linier"
+msgstr "\"Linear\""
 
 msgid "Radial"
 msgstr "Radial"
@@ -980,8 +1017,12 @@ msgstr "Catatan ubah"
 msgid "About Pixelorama"
 msgstr "Tentang Pixelorama"
 
+#. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
+msgid "Support Pixelorama's Development"
+msgstr "Dukung Pengembangan Pixelorama"
+
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr "Pixelorama - Pikselisasikan mimpimu!"
+msgstr "Pixelorama - Pikselkan mimpimu!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Dikembangkan oleh Orama Interactive"
@@ -992,8 +1033,9 @@ msgstr "©2019-dipersembahkan oleh Orama Interactive dan penyumbangsih"
 msgid "Website"
 msgstr "Situs web"
 
-msgid "GitHub Repo"
-msgstr "Repositori GitHub"
+#. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
+msgid "Source Code"
+msgstr "Kode Sumber"
 
 msgid "Donate"
 msgstr "Menyumbang"
@@ -1103,17 +1145,17 @@ msgstr "Bhs. Belanda"
 msgid "Belarusian"
 msgstr "Bhs. Belarus"
 
-msgid "Development Team"
-msgstr "Regu Pengembangan"
+#. Found in the About dialog.
+msgid "Lead Developer"
+msgstr "Pengembang Utama"
 
-msgid "Lead Programmer"
-msgstr "Pemrogram Utama"
-
+#. Found in the About dialog.
 msgid "UI Designer"
 msgstr "Perancang UI"
 
-msgid "GitHub Contributors"
-msgstr "Penyumbangsih Github"
+#. Found in the About dialog. Refers to the people who have contributed code to the project.
+msgid "Authors"
+msgstr "Pengarang"
 
 msgid "Art by: %s"
 msgstr "Gambar oleh %s"
@@ -1139,8 +1181,8 @@ msgstr "Perubahan belum disimpan, perubahan tadi akan hilang jika tetap lanjut."
 msgid "Save before exiting?"
 msgstr "Simpan sebelum keluar?"
 
-msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "Progres belum disimpan. Sebaiknya ini bagaimana?"
+msgid "Project %s has unsaved progress. How do you wish to proceed?"
+msgstr "Progres proyek %s belum disimpan. Sebaiknya ini bagaimana?"
 
 msgid "Save & Exit"
 msgstr "Simpan & Keluar"
@@ -1174,7 +1216,7 @@ msgstr "Seleksi Poligon\n\n"
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Pilih mengikuti Warna\n\n"
+msgstr "Pilih sesuai Warna\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan"
 
@@ -1217,7 +1259,7 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "Pengambil Warna\n\n"
+msgstr "Pemilih Warna\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Pilih warna dari piksel gambar sprite"
@@ -1307,18 +1349,18 @@ msgstr "Pilih warna untuk alat di sebelah kanan"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Tukar warna kiri dan kanan."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Kembalikan ke warna bawaan (hitam di kiri, putih di kanan)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Ambil warna dari layar."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Pilih bentuk pemilih."
 
 msgid "Left tool"
 msgstr "Alat di kiri"
@@ -1463,13 +1505,13 @@ msgid "Follow Canvas Movement"
 msgstr "Ikuti Pergerakan Kanvas"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr "Pola catur transparan mengikuti pergerakan kanvas"
+msgstr "Pola catur transparan sesuai pergerakan kanvas"
 
 msgid "Follow Canvas Zoom Level"
 msgstr "Ikuti Tingkat Kekeran Kanvas"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr "Pola catur transparan mengikuti tingkat kekeran kanvas"
+msgstr "Pola catur transparan sesuai tingkat kekeran kanvas"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
@@ -1498,14 +1540,22 @@ msgstr "Hanya praatur kustom yang bisa disunting"
 msgid "Set application FPS limit:"
 msgstr "Batas FPS aplikasi:"
 
-msgid "Pause application when it loses focus"
-msgstr "Jedakan aplikasi saat hilang fokus"
-
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
 
+msgid "Pause application when it loses focus"
+msgstr "Jedakan aplikasi saat hilang fokus"
+
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Jika dinyalakan, saat jendela aplikasi hilang fokus, nanti akan dijeda. Ini membantu mengurangi penggunaan CPU saat terbiar. Aplikasi akan tidak dijeda saat tetikus ada pada jendela aplikasi."
+
+#. An option found in the preferences, under the Performance section.
+msgid "Enable window transparency"
+msgstr "Aktifkan transparansi jendela"
+
+#. Found in the preferences, tooltip of the "Enable window transparency" option.
+msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+msgstr "Jika diaktifkan, jendela aplikasi akan tampil transparan. Ini juga menguras kinerja, nonaktifkan saja jika tidak perlu."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1544,7 +1594,7 @@ msgstr "Dinamika"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "Penstabil"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1707,7 +1757,7 @@ msgid "Zoom out"
 msgstr "Perkecil"
 
 msgid "Options"
-msgstr ""
+msgstr "Opsi"
 
 msgid "Options:"
 msgstr "Opsi:"
@@ -1756,7 +1806,7 @@ msgid "Animation mode:"
 msgstr "Mode animasi:"
 
 msgid "Current frame as spritesheet"
-msgstr "Bingkai ini jadikan lembar sprite"
+msgstr "Jadikan bingkai ini lembar sprite"
 
 msgid "Jump to the first frame\n"
 msgstr "Lompat ke bingkai pertama\n"
@@ -1881,13 +1931,13 @@ msgid "Unlink Cels"
 msgstr "Putuskan Cel"
 
 msgid "Properties"
-msgstr ""
+msgstr "Properti"
 
 msgid "Frame properties"
 msgstr "Properti bingkai"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Properti Cel"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1919,103 +1969,103 @@ msgid "Add 3D Layer"
 msgstr "Tambah Lapisan 3D"
 
 msgid "Remove current layer"
-msgstr "Hapus lapisan saat ini"
+msgstr "Hapus lapisan ini"
 
 msgid "Move up the current layer"
-msgstr "Geser ke atas lapisan ini"
+msgstr "Geser lapisan ini ke atas"
 
 msgid "Move down the current layer"
-msgstr "Geser ke bawah lapisan ini"
+msgstr "Geser lapisan ini ke bawah"
 
 msgid "Clone current layer"
 msgstr "Duplikatkan lapisan ini"
 
 msgid "Merge current layer with the one below"
-msgstr "Satukan lapisan ini dengan yang di bawah"
+msgstr "Leburkan lapisan ini dengan yang di bawah"
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "Mode campuran:"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "Berganda"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr ""
+msgstr "Panas warna"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
-msgstr ""
+msgstr "Panas linear"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "Saring"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
-msgstr ""
+msgstr "Dingin warna"
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Kontras"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Hamparan"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Cahaya lembut"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Cahaya kasar"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Penerbalikan"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Selisih"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Pengecualian"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Kurangi"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Bagi"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Komponen"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Rona"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Saturasi"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Warna"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Kekilauan"
 
 msgid "Opacity:"
 msgstr "Kelegapan:"
@@ -2086,10 +2136,10 @@ msgid "Redo: Remove Layer"
 msgstr "Ulangi: Hapus lapisan"
 
 msgid "Undo: Merge Layer"
-msgstr "Urungkan: Satukan lapisan"
+msgstr "Urungkan: Leburkan lapisan"
 
 msgid "Redo: Merge Layer"
-msgstr "Ulangi: Satukan lapisan"
+msgstr "Ulangi: Leburkan lapisan"
 
 msgid "Undo: Change Layer Order"
 msgstr "Urungkan: Perubahan urutan lapisan"
@@ -2153,6 +2203,10 @@ msgstr "Berkas gagal dibuka. Kode galat %s"
 
 msgid "File failed to save. Error code %s"
 msgstr "Berkas gagal disimpan. Kode galat %s"
+
+#. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
+msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
+msgstr "Video gagal diekspor. Pastikan FFMPEG sudah benar dipasang."
 
 msgid "File(s) exported"
 msgstr "Berkas sudah diekspor"
@@ -2272,7 +2326,7 @@ msgid "Polygonal Selection"
 msgstr "Seleksi Poligon"
 
 msgid "Select By Color"
-msgstr "Pilih mengikuti warna"
+msgstr "Pilih sesuai warna"
 
 msgid "Magic Wand"
 msgstr "Tongkat Ajaib"
@@ -2290,7 +2344,7 @@ msgid "Pan"
 msgstr "Geser"
 
 msgid "Color Picker"
-msgstr "Pengambil Warna"
+msgstr "Pemilih Warna"
 
 msgid "Pencil"
 msgstr "Pensil"
@@ -2360,6 +2414,10 @@ msgstr "Membuka proyek yang terakhir dibuka saat mulai"
 
 msgid "Quit confirmation"
 msgstr "Ditanya saat keluar"
+
+#. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
+msgid "FFMPEG path"
+msgstr "Jalur FFMPEG"
 
 msgid "Enable autosave"
 msgstr "Aktifkan simpan otomatis"
@@ -2464,14 +2522,52 @@ msgstr "Tambah warna baru"
 msgid "Remove a selected color"
 msgstr "Hapus warna yang dipilih"
 
+#. Tooltip of the Sort button found in the palette panel.
+msgid "Sort palette"
+msgstr "Urut palet"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
+msgid "Reverse colors"
+msgstr "Terbalikkan warna"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
+msgid "Sort by hue"
+msgstr "Urut ikut rona"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
+msgid "Sort by saturation"
+msgstr "Urut ikut saturasi"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
+msgid "Sort by value"
+msgstr "Urut ikut nilai"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
+msgid "Sort by red"
+msgstr "Urut ikut merah"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
+msgid "Sort by green"
+msgstr "Urut ikut hijau"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
+msgid "Sort by blue"
+msgstr "Urut ikut biru"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
+msgid "Sort by alpha"
+msgstr "Urut ikut alfa"
+
 msgid "Palette with the same name and path already exists!"
 msgstr "Palet dengan nama dan jalur yang sama sudah ada!"
 
 msgid "Palette name is required!"
 msgstr "Palet perlu dinamakan!"
 
-msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr "Mengurangi ukuran palet akan mengatur ulang posisi warna. Ingat, warna yang tidak pas di ukuran palet baru akan hilang!"
+msgid "Reducing palette size will reset positions of colors.\n"
+"Colors that don't fit in new palette size will be lost!"
+msgstr "Mengurangi ukuran palet akan mengatur ulang posisi warna.\n"
+"Ingat, warna akan hilang jika tidak pas di ukuran palet baru!"
 
 msgid "Position:"
 msgstr "Posisi:"
@@ -2492,7 +2588,7 @@ msgid "Canvas Preview"
 msgstr "Pratayang Kanvas"
 
 msgid "Color Pickers"
-msgstr "Pengambil Warna"
+msgstr "Pemilih Warna"
 
 msgid "Global Tool Options"
 msgstr "Opsi Global Untuk Alat"
@@ -2550,7 +2646,7 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Ukuran terkunci\n\n"
-"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi pangkas.\n\n"
+"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi berpangkas.\n\n"
 "Saat dinonaktifkan dengan alat di kanvas hanya akan membuat persegi."
 
 #. A tool used in 3D layers, that edits 3D objects.
@@ -2809,21 +2905,47 @@ msgstr "\"Back out\" di akhir"
 msgid "Spring towards the end"
 msgstr "Langsung ke ujung"
 
-msgid "Silhouette"
-msgstr "Siluet"
+#. Used to turn images into a singular color
+msgid "Monochrome"
+msgstr "Ekawarna"
 
-msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr "Menggelapkan gambar dan membuat semua piksel legap menjadi hitam."
+#. A tooltip to tell users to hold the Shift key while clicking the remove button
+msgid "Hold Shift while pressing to instantly remove"
+msgstr "Tahan Shift saat menekan untuk langsung hapus"
+
+#. Moves the reference image up in the list
+msgid "Move the selected reference image to the right"
+msgstr "Pindahkan gambar rujukan terpilih ke kanan"
+
+#. Moves the reference image down in the list
+msgid "Move the selected reference image to the left"
+msgstr "Pindahkan gambar rujukan terpilih ke kiri"
+
+#. Select a reference on the canvas
+msgid "Selects a reference image on the canvas"
+msgstr "Memilih yang jadi gambar rujukan di kanvas"
+
+#. Moves the reference on the canvas
+msgid "Move the selected reference image"
+msgstr "Pindahkan gambar rujukan terpilih"
+
+#. Rotates the reference on the canvas
+msgid "Rotate the selected reference image"
+msgstr "Putar gambar rujukan terpilih"
+
+#. Rotates the reference on the canvas
+msgid "Scale the selected reference image"
+msgstr "Skalakan gambar rujukan terpilih"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Diaktifkan"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr ""
+msgstr "Efek lapisan"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "Tambah efek"
 
