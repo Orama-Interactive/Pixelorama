@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-02-27 14:19\n"
+"PO-Revision-Date: 2024-02-27 15:20\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1216,7 +1216,7 @@ msgstr "Seleksi Poligon\n\n"
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Pilih mengikuti Warna\n\n"
+msgstr "Pilih sesuai Warna\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan"
 
@@ -1259,7 +1259,7 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "Pengambil Warna\n\n"
+msgstr "Pemilih Warna\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Pilih warna dari piksel gambar sprite"
@@ -1360,7 +1360,7 @@ msgstr "Ambil warna dari layar."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr "Pilih bentuk pengambil."
+msgstr "Pilih bentuk pemilih."
 
 msgid "Left tool"
 msgstr "Alat di kiri"
@@ -1505,13 +1505,13 @@ msgid "Follow Canvas Movement"
 msgstr "Ikuti Pergerakan Kanvas"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr "Pola catur transparan mengikuti pergerakan kanvas"
+msgstr "Pola catur transparan sesuai pergerakan kanvas"
 
 msgid "Follow Canvas Zoom Level"
 msgstr "Ikuti Tingkat Kekeran Kanvas"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr "Pola catur transparan mengikuti tingkat kekeran kanvas"
+msgstr "Pola catur transparan sesuai tingkat kekeran kanvas"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
@@ -2326,7 +2326,7 @@ msgid "Polygonal Selection"
 msgstr "Seleksi Poligon"
 
 msgid "Select By Color"
-msgstr "Pilih mengikuti warna"
+msgstr "Pilih sesuai warna"
 
 msgid "Magic Wand"
 msgstr "Tongkat Ajaib"
@@ -2344,7 +2344,7 @@ msgid "Pan"
 msgstr "Geser"
 
 msgid "Color Picker"
-msgstr "Pengambil Warna"
+msgstr "Pemilih Warna"
 
 msgid "Pencil"
 msgstr "Pensil"
@@ -2588,7 +2588,7 @@ msgid "Canvas Preview"
 msgstr "Pratayang Kanvas"
 
 msgid "Color Pickers"
-msgstr "Pengambil Warna"
+msgstr "Pemilih Warna"
 
 msgid "Global Tool Options"
 msgstr "Opsi Global Untuk Alat"
