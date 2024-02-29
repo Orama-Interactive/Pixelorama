@@ -529,9 +529,9 @@ class ProjectAPI:
 		get:
 			return Global.current_project
 
-	## Creates a new project (with new tab) with name [param name], size [param size],
-	## fill color [param fill_color] and frames [param frames]. The created project also
-	## gets returned.[br][br]
+	## Creates a new project in a new tab with one starting layer and frame,
+	## name [param name], size [param size], fill color [param fill_color] and
+	## frames [param frames]. The created project also gets returned.[br][br]
 	## [param frames] is an [Array] of type [Frame]. Usually it can be left as [code][][/code].
 	func new_project(
 		frames: Array[Frame] = [],
@@ -551,7 +551,9 @@ class ProjectAPI:
 		Global.projects.append(new_proj)
 		return new_proj
 
-	## Creates and returns a new [Project], with an optional [param name].
+	## Creates and returns a new [Project] in a new tab, with an optional [param name].
+	## Unlike [method new_project], no starting frame/layer gets created.
+	## Useful if you want to deserialize project data.
 	func new_empty_project(name := tr("untitled")) -> Project:
 		var new_proj := Project.new([], name)
 		Global.projects.append(new_proj)
@@ -600,10 +602,10 @@ class ProjectAPI:
 			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
 
 	## Adds a new frame in the current project after frame [param after_frame].
-	func add_new_frame(after_frame: int):
+	func add_new_frame(after_frame: int) -> void:
 		var project := Global.current_project
 		if after_frame < project.frames.size() and after_frame >= 0:
-			var old_current = project.current_frame
+			var old_current := project.current_frame
 			project.current_frame = after_frame  # temporary assignment
 			Global.animation_timeline.add_frame()
 			project.current_frame = old_current
