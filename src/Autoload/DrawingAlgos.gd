@@ -218,11 +218,8 @@ func scale_3x(sprite: Image, tol := 50.0) -> Image:
 func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 	if is_zero_approx(angle) or is_equal_approx(angle, TAU):
 		return
-	if is_equal_approx(angle, PI / 2.0):
-		sprite.rotate_90(CLOCKWISE)
-		return
-	if is_equal_approx(angle, 3.0 * PI / 2.0):
-		sprite.rotate_90(COUNTERCLOCKWISE)
+	if is_equal_approx(angle, PI / 2.0) or is_equal_approx(angle, 3.0 * PI / 2.0):
+		nn_rotate(sprite, angle, pivot)
 		return
 	if is_equal_approx(angle, PI):
 		sprite.rotate_180()
@@ -408,11 +405,8 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
 	if is_zero_approx(angle) or is_equal_approx(angle, TAU):
 		return
-	if is_equal_approx(angle, PI / 2.0):
-		sprite.rotate_90(CLOCKWISE)
-		return
-	if is_equal_approx(angle, 3.0 * PI / 2.0):
-		sprite.rotate_90(COUNTERCLOCKWISE)
+	if is_equal_approx(angle, PI / 2.0) or is_equal_approx(angle, 3.0 * PI / 2.0):
+		nn_rotate(sprite, angle, pivot)
 		return
 	if is_equal_approx(angle, PI):
 		sprite.rotate_180()
@@ -427,12 +421,6 @@ func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 	if is_zero_approx(angle) or is_equal_approx(angle, TAU):
-		return
-	if is_equal_approx(angle, PI / 2.0):
-		sprite.rotate_90(CLOCKWISE)
-		return
-	if is_equal_approx(angle, 3.0 * PI / 2.0):
-		sprite.rotate_90(COUNTERCLOCKWISE)
 		return
 	if is_equal_approx(angle, PI):
 		sprite.rotate_180()
