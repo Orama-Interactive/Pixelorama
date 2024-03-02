@@ -37,11 +37,11 @@ func _flip_rotate_updated(
 ):
 	$BrushTexture.set_flip_h(flip_x)
 	$BrushTexture.set_flip_v(flip_y)
-	var rotation_BrushTexture = 0
+	var brush_texture_rotation = 0
 	if rotate_90 == true:
-		rotation_BrushTexture += 90
+		brush_texture_rotation += 90
 	if rotate_180 == true:
-		rotation_BrushTexture += 180
+		brush_texture_rotation += 180
 	if rotate_270 == true:
-		rotation_BrushTexture += 270
-	$BrushTexture.rotation_degrees = rotation_BrushTexture
+		brush_texture_rotation += 270
+	$BrushTexture.rotation_degrees = brush_texture_rotation
