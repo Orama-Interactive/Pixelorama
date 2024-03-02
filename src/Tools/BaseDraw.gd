@@ -59,6 +59,8 @@ func _on_BrushType_pressed() -> void:
 		if child is GridContainer:
 			child.columns = columns
 	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
+	Tools.flip_rotate.emit(_brush_flip_x, _brush_flip_y, _brush_rotate_90, _brush_rotate_180, _brush_rotate_270)
+
 
 
 func _on_Brush_selected(brush: Brushes.Brush) -> void:
@@ -168,8 +170,6 @@ func update_brush() -> void:
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
-	#$Brush/Type/Texture.set_flip_v(Tools.brush_flip_x)
-	#$Brush/Type/Texture.set_flip_h(Tools.brush_flip_y)
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
 
 
