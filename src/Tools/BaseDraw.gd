@@ -59,8 +59,9 @@ func _on_BrushType_pressed() -> void:
 		if child is GridContainer:
 			child.columns = columns
 	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
-	Tools.flip_rotate.emit(_brush_flip_x, _brush_flip_y, _brush_rotate_90, _brush_rotate_180, _brush_rotate_270)
-
+	Tools.flip_rotate.emit(
+		_brush_flip_x, _brush_flip_y, _brush_rotate_90, _brush_rotate_180, _brush_rotate_270
+	)
 
 
 func _on_Brush_selected(brush: Brushes.Brush) -> void:
@@ -195,16 +196,16 @@ func update_mirror_brush() -> void:
 
 
 func update_brush_image_flip_and_rotate() -> void:
-		if _brush_flip_x == true:
-			_brush_image.flip_x()
-		if _brush_flip_y == true:
-			_brush_image.flip_y()
-		if _brush_rotate_90 == true:
-			_brush_image.rotate_90(CLOCKWISE)
-		if _brush_rotate_180 == true:
-			_brush_image.rotate_180()
-		if _brush_rotate_270 == true:
-			_brush_image.rotate_90(COUNTERCLOCKWISE)
+	if _brush_flip_x == true:
+		_brush_image.flip_x()
+	if _brush_flip_y == true:
+		_brush_image.flip_y()
+	if _brush_rotate_90 == true:
+		_brush_image.rotate_90(CLOCKWISE)
+	if _brush_rotate_180 == true:
+		_brush_image.rotate_180()
+	if _brush_rotate_270 == true:
+		_brush_image.rotate_90(COUNTERCLOCKWISE)
 
 
 func update_mask(can_skip := true) -> void:
@@ -736,7 +737,6 @@ func _pick_color(pos: Vector2i) -> void:
 		else MOUSE_BUTTON_RIGHT
 	)
 	Tools.assign_color(color, button, false)
-
 
 
 func _on_flip_x_toggled(button_pressed: bool) -> void:
