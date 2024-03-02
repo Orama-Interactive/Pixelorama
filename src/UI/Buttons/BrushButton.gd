@@ -33,7 +33,7 @@ func _on_BrushButton_mouse_exited() -> void:
 
 
 func _flip_rotate_updated(
-	flip_x: bool, flip_y: bool, rotate_90: bool, rotate_180: bool,rotate_270: bool
+	flip_x: bool, flip_y: bool, rotate_90: bool, rotate_180: bool, rotate_270: bool
 ):
 	$BrushTexture.set_flip_h(flip_x)
 	$BrushTexture.set_flip_v(flip_y)
