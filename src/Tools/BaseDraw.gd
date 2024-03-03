@@ -147,25 +147,31 @@ func update_config() -> void:
 
 func _update_brush_config(
 	b_brush, b_size, b_flip_x, b_flip_y, b_rotate_90, b_rotate_180, b_rotate_270
-	)-> void:
-		if _i_shared_my_brush == false:
-			_brush = b_brush
-			_brush_size = b_size
-			_brush_flip_x = b_flip_x
-			_brush_flip_y = b_flip_y
-			_brush_rotate_90 = b_rotate_90
-			_brush_rotate_180 = b_rotate_180
-			_brush_rotate_270 = b_rotate_270
-			update_config()
-		else:
-			_i_shared_my_brush = false
+) -> void:
+	if _i_shared_my_brush == false:
+		_brush = b_brush
+		_brush_size = b_size
+		_brush_flip_x = b_flip_x
+		_brush_flip_y = b_flip_y
+		_brush_rotate_90 = b_rotate_90
+		_brush_rotate_180 = b_rotate_180
+		_brush_rotate_270 = b_rotate_270
+		update_config()
+	else:
+		_i_shared_my_brush = false
 
 
 func _sharing_brush() -> void:
 	_i_shared_my_brush = true
 	Tools.share_brush_config.emit(
-		_brush, _brush_size, _brush_flip_x, _brush_flip_y, _brush_rotate_90, _brush_rotate_180, _brush_rotate_270
-		)
+		_brush,
+		_brush_size,
+		_brush_flip_x,
+		_brush_flip_y,
+		_brush_rotate_90,
+		_brush_rotate_180,
+		_brush_rotate_270
+	)
 
 
 func update_brush() -> void:
