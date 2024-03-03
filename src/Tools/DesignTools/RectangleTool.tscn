@@ -5,3 +5,9 @@
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
+
+[node name="Flip" parent="." index="4"]
+visible = false
+
+[node name="Rotate" parent="." index="5"]
+visible = false
