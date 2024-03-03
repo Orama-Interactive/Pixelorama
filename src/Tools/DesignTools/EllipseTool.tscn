@@ -11,3 +11,6 @@ visible = false
 
 [node name="Rotate" parent="." index="5"]
 visible = false
+
+[node name="ShareBrushConfig" parent="." index="8"]
+visible = false

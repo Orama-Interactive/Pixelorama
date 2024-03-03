@@ -2,6 +2,7 @@ extends Node
 
 signal color_changed(color, button)
 signal flip_rotate(flip_x, flip_y, rotate_90, rotate_180, rotate_270)
+signal share_brush_config(_brush, _size, _flip_x, _flip_y, _rotate_90, _rotate_180, _rotate_270)
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 

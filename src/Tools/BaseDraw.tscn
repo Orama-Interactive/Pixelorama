@@ -91,6 +91,10 @@ layout_mode = 2
 tooltip_text = "0: Color from the brush itself, 100: the currently selected color"
 prefix = "Brush color from:"
 
+[node name="ShareBrushConfig" type="CheckBox" parent="." index="6"]
+layout_mode = 2
+text = "Share Brush Config"
+
 [connection signal="toggled" from="Flip/FlipX" to="." method="_on_flip_x_toggled"]
 [connection signal="toggled" from="Flip/FlipY" to="." method="_on_flip_y_toggled"]
 [connection signal="toggled" from="Rotate/Rotate90" to="." method="_on_rotate_90_toggled"]
@@ -99,3 +103,4 @@ prefix = "Brush color from:"
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]
 [connection signal="value_changed" from="ColorInterpolation" to="." method="_on_InterpolateFactor_value_changed"]
+[connection signal="toggled" from="ShareBrushConfig" to="." method="_on_share_brush_config_toggled"]

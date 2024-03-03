@@ -25,4 +25,7 @@ visible = false
 [node name="Brush" parent="." index="5"]
 visible = false
 
+[node name="ShareBrushConfig" parent="." index="7"]
+visible = false
+
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
