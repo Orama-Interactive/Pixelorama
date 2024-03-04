@@ -3,9 +3,9 @@ class_name Project
 extends RefCounted
 ## A class for project properties.
 
-signal serialized(Dictionary)
-signal about_to_deserialize(Dictionary)
-signal timeline_updated()
+signal serialized(dict: Dictionary)
+signal about_to_deserialize(dict: Dictionary)
+signal timeline_updated
 
 var name := "":
 	set(value):
