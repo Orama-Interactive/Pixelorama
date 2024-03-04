@@ -5,6 +5,7 @@ extends RefCounted
 
 signal serialized(Dictionary)
 signal about_to_deserialize(Dictionary)
+signal timeline_updated()
 
 var name := "":
 	set(value):
@@ -870,6 +871,7 @@ func _update_frame_ui() -> void:
 			cel_hbox.get_child(f).frame = f
 			cel_hbox.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
+	timeline_updated.emit()
 
 
 ## Update the layer indices and layer/cel buttons
@@ -881,6 +883,7 @@ func _update_layer_ui() -> void:
 		for f in frames.size():
 			cel_hbox.get_child(f).layer = l
 			cel_hbox.get_child(f).button_setup()
+	timeline_updated.emit()
 
 
 ## Change the current reference image
