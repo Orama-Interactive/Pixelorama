@@ -298,7 +298,7 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 	var test_json_conv := JSON.new()
 	var error := test_json_conv.parse(first_line)
 	if error != OK:
-		print("Error, corrupt pxo file. Error code %s (%s)" % [error, error_string(error)])
+		print("Error, corrupt legacy pxo file. Error code %s (%s)" % [error, error_string(error)])
 		file.close()
 		return null
 

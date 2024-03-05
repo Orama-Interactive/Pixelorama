@@ -22,7 +22,8 @@ func blend_layers(
 	frame: Frame,
 	origin := Vector2i.ZERO,
 	project := Global.current_project,
-	only_selected := false
+	only_selected_cels := false,
+	only_selected_layers := false,
 ) -> void:
 	var textures: Array[Image] = []
 	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
@@ -35,9 +36,17 @@ func blend_layers(
 		var ordered_index := project.ordered_layers[i]
 		var layer := project.layers[ordered_index]
 		var include := true if layer.is_visible_in_hierarchy() else false
-		if only_selected and include:
+		if only_selected_cels and include:
 			var test_array := [frame_index, i]
 			if not test_array in project.selected_cels:
+				include = false
+		if only_selected_layers and include:
+			var layer_is_selected := false
+			for selected_cel in project.selected_cels:
+				if i == selected_cel[1]:
+					layer_is_selected = true
+					break
+			if not layer_is_selected:
 				include = false
 		var cel := frame.cels[ordered_index]
 		var cel_image := layer.display_effects(cel)

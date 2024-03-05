@@ -182,7 +182,7 @@ func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 	if frame_current_tag > 1:  # Specific tag
 		var frame_start: int = project.animation_tags[frame_current_tag - 2].from
 		var frame_end: int = project.animation_tags[frame_current_tag - 2].to
-		frames = project.frames.slice(frame_start - 1, frame_end - 1, 1, true)
+		frames = project.frames.slice(frame_start - 1, frame_end, 1, true)
 	elif frame_current_tag == 1:  # Selected frames
 		for cel in project.selected_cels:
 			frames.append(project.frames[cel[0]])
@@ -570,7 +570,7 @@ func _blend_layers(
 	if export_layers == 0:
 		DrawingAlgos.blend_layers(image, frame, origin, project)
 	elif export_layers == 1:
-		DrawingAlgos.blend_layers(image, frame, origin, project, true)
+		DrawingAlgos.blend_layers(image, frame, origin, project, false, true)
 	else:
 		var layer := project.layers[export_layers - 2]
 		var layer_image := Image.new()
