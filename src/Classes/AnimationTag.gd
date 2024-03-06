@@ -59,6 +59,14 @@ func _init(_name, _color, _from, _to) -> void:
 	to = _to
 
 
+func get_size() -> int:
+	return to - from + 1
+
+
+func has_frame(index: int) -> bool:
+	return from <= (index + 1) and (index + 1) <= to
+
+
 func get_position() -> Vector2:
 	var tag_base_size: int = Global.animation_timeline.cel_size + CEL_SEPARATION
 	return Vector2((from - 1) * tag_base_size + 1, 1)
@@ -66,5 +74,4 @@ func get_position() -> Vector2:
 
 func get_minimum_size() -> int:
 	var tag_base_size: int = Global.animation_timeline.cel_size + CEL_SEPARATION
-	var tag_size := to - from
-	return (tag_size + 1) * tag_base_size - 8
+	return get_size() * tag_base_size - 8

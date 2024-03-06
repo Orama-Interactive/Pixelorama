@@ -89,11 +89,8 @@ func show_tab() -> void:
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
-			if Export.orientation == Export.Orientation.ROWS:
-				spritesheet_lines_count_label.text = "Columns:"
-			else:
-				spritesheet_lines_count_label.text = "Rows:"
 			get_tree().call_group("ExportSpritesheetOptions", "show")
+			_handle_orientation_ui()
 	set_preview()
 	update_dimensions_label()
 	tabs.current_tab = Export.current_tab
@@ -309,14 +306,25 @@ func _on_Tabs_tab_clicked(tab: Export.ExportTab) -> void:
 
 func _on_Orientation_item_selected(id: Export.Orientation) -> void:
 	Export.orientation = id
-	if Export.orientation == Export.Orientation.ROWS:
-		spritesheet_lines_count_label.text = "Columns:"
-	else:
-		spritesheet_lines_count_label.text = "Rows:"
+	_handle_orientation_ui()
 	spritesheet_lines_count.value = Export.frames_divided_by_spritesheet_lines()
 	Export.process_spritesheet()
 	update_dimensions_label()
 	set_preview()
+
+
+func _handle_orientation_ui() -> void:
+	if Export.orientation == Export.Orientation.ROWS:
+		spritesheet_lines_count_label.visible = true
+		spritesheet_lines_count.visible = true
+		spritesheet_lines_count_label.text = "Columns:"
+	elif Export.orientation == Export.Orientation.COLUMNS:
+		spritesheet_lines_count_label.visible = true
+		spritesheet_lines_count.visible = true
+		spritesheet_lines_count_label.text = "Rows:"
+	else:
+		spritesheet_lines_count_label.visible = false
+		spritesheet_lines_count.visible = false
 
 
 func _on_LinesCount_value_changed(value: float) -> void:

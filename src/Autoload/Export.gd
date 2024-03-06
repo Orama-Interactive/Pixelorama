@@ -1,11 +1,12 @@
 extends Node
 
-enum ExportTab { IMAGE = 0, SPRITESHEET = 1 }
-enum Orientation { ROWS = 0, COLUMNS = 1 }
-enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
+enum ExportTab { IMAGE, SPRITESHEET }
+enum Orientation { COLUMNS, ROWS, TAGS_BY_COLUMN, TAGS_BY_ROW }
+enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
 
+## This path is used to temporarily store png files that FFMPEG uses to convert them to video
 const TEMP_PATH := "user://tmp"
 
 ## List of animated formats
@@ -33,7 +34,7 @@ var processed_images: Array[Image] = []
 var durations: PackedFloat32Array = []
 
 # Spritesheet options
-var orientation := Orientation.ROWS
+var orientation := Orientation.COLUMNS
 var lines_count := 1  ## How many rows/columns before new line is added
 
 # General options
@@ -125,23 +126,46 @@ func process_spritesheet(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
 	# Then store the size of frames for other functions
 	number_of_frames = frames.size()
-
+	# Used when the orientation is based off the animation tags
+	var tag_origins := {0: 0}
+	var frames_without_tag := number_of_frames
+	var spritesheet_columns := 1
+	var spritesheet_rows := 1
 	# If rows mode selected calculate columns count and vice versa
-	var spritesheet_columns := (
-		lines_count if orientation == Orientation.ROWS else frames_divided_by_spritesheet_lines()
-	)
-	var spritesheet_rows := (
-		lines_count if orientation == Orientation.COLUMNS else frames_divided_by_spritesheet_lines()
-	)
-
+	if orientation == Orientation.COLUMNS:
+		spritesheet_columns = frames_divided_by_spritesheet_lines()
+		spritesheet_rows = lines_count
+	elif orientation == Orientation.ROWS:
+		spritesheet_columns = lines_count
+		spritesheet_rows = frames_divided_by_spritesheet_lines()
+	else:
+		spritesheet_rows = project.animation_tags.size() + 1
+		if spritesheet_rows == 1:
+			spritesheet_columns = number_of_frames
+		else:
+			var max_tag_size := 1
+			for tag in project.animation_tags:
+				tag_origins[tag] = 0
+				frames_without_tag -= tag.get_size()
+				if tag.get_size() > max_tag_size:
+					max_tag_size = tag.get_size()
+			if frames_without_tag > max_tag_size:
+				max_tag_size = frames_without_tag
+			spritesheet_columns = max_tag_size
+		if frames_without_tag == 0:
+			# If all frames have a tag, remove the first row
+			spritesheet_rows -= 1
+		if orientation == Orientation.TAGS_BY_ROW:
+			# Switch rows and columns
+			var temp := spritesheet_rows
+			spritesheet_rows = spritesheet_columns
+			spritesheet_columns = temp
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
-
 	var whole_image := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	var origin := Vector2i.ZERO
 	var hh := 0
 	var vv := 0
-
 	for frame in frames:
 		if orientation == Orientation.ROWS:
 			if vv < spritesheet_columns:
@@ -152,7 +176,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.x = 0
 				vv = 1
 				origin.y = project.size.y * hh
-		else:
+		elif orientation == Orientation.COLUMNS:
 			if hh < spritesheet_rows:
 				origin.y = project.size.y * hh
 				hh += 1
@@ -161,6 +185,44 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.y = 0
 				hh = 1
 				origin.x = project.size.x * vv
+		elif orientation == Orientation.TAGS_BY_COLUMN:
+			var frame_index := project.frames.find(frame)
+			var frame_has_tag := false
+			for i in project.animation_tags.size():
+				var tag := project.animation_tags[i]
+				if tag.has_frame(frame_index):
+					origin.x = project.size.x * tag_origins[tag]
+					if frames_without_tag == 0:
+						# If all frames have a tag, remove the first row
+						origin.y = project.size.y * i
+					else:
+						origin.y = project.size.y * (i + 1)
+					tag_origins[tag] += 1
+					frame_has_tag = true
+					break
+			if not frame_has_tag:
+				origin.x = project.size.x * tag_origins[0]
+				origin.y = 0
+				tag_origins[0] += 1
+		elif orientation == Orientation.TAGS_BY_ROW:
+			var frame_index := project.frames.find(frame)
+			var frame_has_tag := false
+			for i in project.animation_tags.size():
+				var tag := project.animation_tags[i]
+				if tag.has_frame(frame_index):
+					origin.y = project.size.y * tag_origins[tag]
+					if frames_without_tag == 0:
+						# If all frames have a tag, remove the first row
+						origin.x = project.size.x * i
+					else:
+						origin.x = project.size.x * (i + 1)
+					tag_origins[tag] += 1
+					frame_has_tag = true
+					break
+			if not frame_has_tag:
+				origin.y = project.size.y * tag_origins[0]
+				origin.x = 0
+				tag_origins[0] += 1
 		_blend_layers(whole_image, frame, origin)
 
 	processed_images.append(whole_image)
