@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-02-28 02:48\n"
+"PO-Revision-Date: 2024-03-06 18:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -624,6 +624,14 @@ msgstr "行"
 
 msgid "Rows:"
 msgstr "行:"
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
+msgid "Tags by column"
+msgstr ""
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
+msgid "Tags by row"
+msgstr ""
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
