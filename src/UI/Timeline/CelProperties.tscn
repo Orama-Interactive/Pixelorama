@@ -5,7 +5,7 @@
 
 [node name="CelProperties" type="AcceptDialog"]
 title = "Cel properties"
-size = Vector2i(300, 111)
+size = Vector2i(300, 161)
 exclusive = false
 popup_window = true
 script = ExtResource("1_lyy7i")
@@ -14,8 +14,26 @@ script = ExtResource("1_lyy7i")
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
-offset_bottom = 66.0
+offset_bottom = 112.0
 columns = 2
+
+[node name="Frame" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Frame"
+
+[node name="FrameNum" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="Layer" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Layer"
+
+[node name="LayerNum" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
 
 [node name="OpacityLabel" type="Label" parent="GridContainer"]
 layout_mode = 2

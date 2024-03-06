@@ -119,7 +119,7 @@ func _on_CelButton_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		MenuOptions.PROPERTIES:
-			properties.cel = cel
+			properties.cel_indices = _get_cel_indices()
 			properties.popup_centered()
 		MenuOptions.DELETE:
 			_delete_cel_content()
@@ -128,7 +128,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			var project := Global.current_project
 			if id == MenuOptions.UNLINK:
 				project.undo_redo.create_action("Unlink Cel")
-				var selected_cels := project.selected_cels.duplicate()
+				var selected_cels := _get_cel_indices(true)
 				if not selected_cels.has([frame, layer]):
 					selected_cels.append([frame, layer])  # Include this cel with the selected ones
 				for cel_index in selected_cels:
@@ -206,20 +206,29 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 func _delete_cel_content() -> void:
+	var indices := _get_cel_indices()
 	var project := Global.current_project
-	var empty_content = cel.create_empty_content()
-	var old_content = cel.get_content()
 	project.undos += 1
 	project.undo_redo.create_action("Draw")
-	if cel.link_set == null:
-		project.undo_redo.add_do_method(cel.set_content.bind(empty_content))
-		project.undo_redo.add_undo_method(cel.set_content.bind(old_content))
-	else:
-		for linked_cel in cel.link_set["cels"]:
-			project.undo_redo.add_do_method(linked_cel.set_content.bind(empty_content))
-			project.undo_redo.add_undo_method(linked_cel.set_content.bind(old_content))
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer, project))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer, project))
+	for cel_index in indices:
+		var frame_index: int = cel_index[0]
+		var layer_index: int = cel_index[1]
+		var selected_cel := project.frames[frame_index].cels[layer_index]
+		var empty_content = selected_cel.create_empty_content()
+		var old_content = selected_cel.get_content()
+		if selected_cel.link_set == null:
+			project.undo_redo.add_do_method(selected_cel.set_content.bind(empty_content))
+			project.undo_redo.add_undo_method(selected_cel.set_content.bind(old_content))
+		else:
+			for linked_cel in selected_cel.link_set["cels"]:
+				project.undo_redo.add_do_method(linked_cel.set_content.bind(empty_content))
+				project.undo_redo.add_undo_method(linked_cel.set_content.bind(old_content))
+		project.undo_redo.add_do_method(
+			Global.undo_or_redo.bind(false, frame_index, layer_index, project)
+		)
+		project.undo_redo.add_undo_method(
+			Global.undo_or_redo.bind(true, frame_index, layer_index, project)
+		)
 	project.undo_redo.commit_action()
 
 
@@ -317,3 +326,13 @@ func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
 	rect.position.x += rect.size.x * x_begin
 	rect.size.x *= x_end - x_begin
 	return rect
+
+
+func _get_cel_indices(add_current_cel := false) -> Array:
+	var indices := Global.current_project.selected_cels.duplicate()
+	if not [frame, layer] in indices:
+		if add_current_cel:
+			indices.append([frame, layer])
+		else:
+			indices = [[frame, layer]]
+	return indices
