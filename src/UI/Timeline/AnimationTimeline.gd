@@ -990,12 +990,9 @@ func _on_MergeDownLayer_pressed() -> void:
 
 func _on_OpacitySlider_value_changed(value: float) -> void:
 	var new_opacity := value / 100.0
-	var current_layer_idx := Global.current_project.current_layer
-	# Also update all selected frames.
 	for idx_pair in Global.current_project.selected_cels:
-		if idx_pair[1] == current_layer_idx:
-			var layer := Global.current_project.layers[current_layer_idx]
-			layer.opacity = new_opacity
+		var layer := Global.current_project.layers[idx_pair[1]]
+		layer.opacity = new_opacity
 	Global.canvas.queue_redraw()
 
 
