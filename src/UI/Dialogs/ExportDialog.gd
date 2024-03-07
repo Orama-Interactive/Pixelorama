@@ -2,7 +2,7 @@ extends ConfirmationDialog
 
 ## Called when user resumes export after filename collision
 signal resume_export_function
-signal about_to_preview(Dictionary)
+signal about_to_preview(dict: Dictionary)
 
 var preview_current_frame := 0
 var preview_frames: Array[Texture2D] = []
@@ -24,8 +24,7 @@ var spritesheet_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG
 ]
 
-var _preview_images: Array[Image]
-var _preview_durations: PackedFloat32Array
+var _preview_images: Array[Export.ProcessedImage]
 
 @onready var tabs: TabBar = $VBoxContainer/TabBar
 @onready var checker: ColorRect = $"%TransparentChecker"
@@ -97,19 +96,17 @@ func show_tab() -> void:
 
 
 func set_preview() -> void:
-	_preview_images = Export.processed_images.duplicate()
-	_preview_durations = Export.durations.duplicate()
+	_preview_images = Export.processed_images
 	var preview_data = {
 		"exporter_id": Global.current_project.file_format,
 		"export_tab": Export.current_tab,
 		"preview_images": _preview_images,
-		"durations": _preview_durations
 	}
 	about_to_preview.emit(preview_data)
 	remove_previews()
 	if _preview_images.size() == 1:
 		previews.columns = 1
-		add_image_preview(_preview_images[0])
+		add_image_preview(_preview_images[0].image)
 	else:
 		if Export.is_single_file_format():
 			previews.columns = 1
@@ -117,7 +114,7 @@ func set_preview() -> void:
 		else:
 			previews.columns = ceili(sqrt(_preview_images.size()))
 			for i in range(_preview_images.size()):
-				add_image_preview(_preview_images[i], i + 1)
+				add_image_preview(_preview_images[i].image, i + 1)
 
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
@@ -140,7 +137,7 @@ func add_animated_preview() -> void:
 	preview_frames = []
 
 	for processed_image in _preview_images:
-		var texture := ImageTexture.create_from_image(processed_image)
+		var texture := ImageTexture.create_from_image(processed_image.image)
 		preview_frames.push_back(texture)
 
 	var container := create_preview_container()
@@ -152,7 +149,7 @@ func add_animated_preview() -> void:
 
 	previews.add_child(container)
 	frame_timer.set_one_shot(true)  # wait_time can't change correctly if the timer is playing
-	frame_timer.wait_time = _preview_durations[preview_current_frame]
+	frame_timer.wait_time = _preview_images[preview_current_frame].duration
 	frame_timer.start()
 
 
@@ -239,7 +236,7 @@ func create_layer_list() -> void:
 
 func update_dimensions_label() -> void:
 	if _preview_images.size() > 0:
-		var new_size: Vector2 = _preview_images[0].get_size() * (Export.resize / 100.0)
+		var new_size: Vector2 = _preview_images[0].image.get_size() * (Export.resize / 100.0)
 		dimension_label.text = str(new_size.x, "×", new_size.y)
 
 
@@ -413,7 +410,7 @@ func _on_FrameTimer_timeout() -> void:
 	else:
 		preview_current_frame += 1
 
-	frame_timer.wait_time = _preview_durations[preview_current_frame - 1]
+	frame_timer.wait_time = _preview_images[preview_current_frame - 1].duration
 	frame_timer.start()
 
 

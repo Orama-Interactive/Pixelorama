@@ -30,8 +30,7 @@ var custom_exporter_generators := {}
 
 var current_tab := ExportTab.IMAGE
 ## All frames and their layers processed/blended into images
-var processed_images: Array[Image] = []
-var durations: PackedFloat32Array = []
+var processed_images: Array[ProcessedImage] = []
 
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -56,6 +55,15 @@ var file_exists_alert := "The following files already exist. Do you wish to over
 var export_progress_fraction := 0.0
 var export_progress := 0.0
 @onready var gif_export_thread := Thread.new()
+
+
+class ProcessedImage:
+	var image: Image
+	var duration: float
+
+	func _init(_image: Image, _duration := 1.0) -> void:
+		image = _image
+		duration = _duration
 
 
 func _exit_tree() -> void:
@@ -225,18 +233,17 @@ func process_spritesheet(project := Global.current_project) -> void:
 				tag_origins[0] += 1
 		_blend_layers(whole_image, frame, origin)
 
-	processed_images.append(whole_image)
+	processed_images.append(ProcessedImage.new(whole_image))
 
 
 func process_animation(project := Global.current_project) -> void:
 	processed_images.clear()
-	durations.clear()
 	var frames := _calculate_frames(project)
 	for frame in frames:
 		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		_blend_layers(image, frame)
-		processed_images.append(image)
-		durations.append(frame.duration * (1.0 / project.fps))
+		var duration := frame.duration * (1.0 / project.fps)
+		processed_images.append(ProcessedImage.new(image, duration))
 
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
@@ -320,7 +327,6 @@ func export_processed_images(
 			var result := true
 			var details := {
 				"processed_images": processed_images,
-				"durations": durations,
 				"export_dialog": export_dialog,
 				"export_paths": export_paths,
 				"project": project
@@ -368,19 +374,19 @@ func export_processed_images(
 			if OS.has_feature("web"):
 				if project.file_format == FileFormat.PNG:
 					JavaScriptBridge.download_buffer(
-						processed_images[i].save_png_to_buffer(),
+						processed_images[i].image.save_png_to_buffer(),
 						export_paths[i].get_file(),
 						"image/png"
 					)
 				elif project.file_format == FileFormat.WEBP:
 					JavaScriptBridge.download_buffer(
-						processed_images[i].save_webp_to_buffer(),
+						processed_images[i].image.save_webp_to_buffer(),
 						export_paths[i].get_file(),
 						"image/webp"
 					)
 				elif project.file_format == FileFormat.JPEG:
 					JavaScriptBridge.download_buffer(
-						processed_images[i].save_jpg_to_buffer(),
+						processed_images[i].image.save_jpg_to_buffer(),
 						export_paths[i].get_file(),
 						"image/jpeg"
 					)
@@ -388,11 +394,11 @@ func export_processed_images(
 			else:
 				var err: Error
 				if project.file_format == FileFormat.PNG:
-					err = processed_images[i].save_png(export_paths[i])
+					err = processed_images[i].image.save_png(export_paths[i])
 				elif project.file_format == FileFormat.WEBP:
-					err = processed_images[i].save_webp(export_paths[i])
+					err = processed_images[i].image.save_webp(export_paths[i])
 				elif project.file_format == FileFormat.JPEG:
-					err = processed_images[i].save_jpg(export_paths[i])
+					err = processed_images[i].image.save_jpg(export_paths[i])
 				if err != OK:
 					Global.popup_error(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
@@ -425,9 +431,9 @@ func export_video(export_paths: PackedStringArray) -> bool:
 	for i in range(processed_images.size()):
 		var temp_file_name := str(i + 1).pad_zeros(number_of_digits) + ".png"
 		var temp_file_path := temp_path_real.path_join(temp_file_name)
-		processed_images[i].save_png(temp_file_path)
+		processed_images[i].image.save_png(temp_file_path)
 		input_file.store_line("file '" + temp_file_name + "'")
-		input_file.store_line("duration %s" % durations[i])
+		input_file.store_line("duration %s" % processed_images[i].duration)
 	input_file.close()
 	var ffmpeg_execute: PackedStringArray = [
 		"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
@@ -464,8 +470,8 @@ func export_animated(args: Dictionary) -> void:
 	var frames := []
 	for i in range(processed_images.size()):
 		var frame: AImgIOFrame = AImgIOFrame.new()
-		frame.content = processed_images[i]
-		frame.duration = durations[i]
+		frame.content = processed_images[i].image
+		frame.duration = processed_images[i].duration
 		frames.push_back(frame)
 
 	# Export and save GIF/APNG
@@ -489,13 +495,12 @@ func _increase_export_progress(export_dialog: Node) -> void:
 
 
 func _scale_processed_images() -> void:
+	var resize_f := resize / 100.0
 	for processed_image in processed_images:
-		if resize != 100:
-			processed_image.resize(
-				processed_image.get_size().x * resize / 100,
-				processed_image.get_size().y * resize / 100,
-				interpolation
-			)
+		if is_equal_approx(resize, 1.0):
+			continue
+		var image := processed_image.image
+		image.resize(image.get_size().x * resize_f, image.get_size().y * resize_f, interpolation)
 
 
 func file_format_string(format_enum: int) -> String:
