@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2024-03-06 18:01\n"
+"PO-Revision-Date: 2024-03-07 14:18\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -2391,6 +2391,10 @@ msgstr "Időköz az automatikus mentések között:"
 
 msgid "minute(s)"
 msgstr "perc(ek)"
+
+#. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
+msgid "Split layers"
+msgstr ""
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
