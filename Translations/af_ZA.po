@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2024-03-06 18:01\n"
+"PO-Revision-Date: 2024-03-07 14:18\n"
 
 msgid "OK"
 msgstr "Goed"
@@ -2377,6 +2377,10 @@ msgid "Autosave interval:"
 msgstr ""
 
 msgid "minute(s)"
+msgstr ""
+
+#. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
+msgid "Split layers"
 msgstr ""
 
 #. Found in the export dialog.
