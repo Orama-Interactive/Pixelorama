@@ -31,6 +31,7 @@ var custom_exporter_generators := {}
 var current_tab := ExportTab.IMAGE
 ## All frames and their layers processed/blended into images
 var processed_images: Array[ProcessedImage] = []
+var split_layers := false
 
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -240,10 +241,17 @@ func process_animation(project := Global.current_project) -> void:
 	processed_images.clear()
 	var frames := _calculate_frames(project)
 	for frame in frames:
-		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		_blend_layers(image, frame)
-		var duration := frame.duration * (1.0 / project.fps)
-		processed_images.append(ProcessedImage.new(image, duration))
+		if split_layers:
+			for cel in frame.cels:
+				var image := Image.new()
+				image.copy_from(cel.get_image())
+				var duration := frame.duration * (1.0 / project.fps)
+				processed_images.append(ProcessedImage.new(image, duration))
+		else:
+			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			_blend_layers(image, frame)
+			var duration := frame.duration * (1.0 / project.fps)
+			processed_images.append(ProcessedImage.new(image, duration))
 
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
@@ -290,7 +298,12 @@ func export_processed_images(
 	var paths_of_existing_files := ""
 	for i in range(processed_images.size()):
 		stop_export = false
-		var export_path := _create_export_path(multiple_files, project, i + 1)
+		var frame_index := i + 1
+		var layer_index := -1
+		if split_layers:
+			frame_index = i / project.layers.size() + 1
+			layer_index = posmod(i, project.layers.size())
+		var export_path := _create_export_path(multiple_files, project, frame_index, layer_index)
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
@@ -583,11 +596,15 @@ func is_ffmpeg_installed() -> bool:
 	return false
 
 
-func _create_export_path(multifile: bool, project: Project, frame := 0) -> String:
+func _create_export_path(multifile: bool, project: Project, frame := 0, layer := -1) -> String:
 	var path := project.file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
-		var path_extras := separator_character + str(frame).pad_zeros(number_of_digits)
+		var path_extras := ""
+		if layer > -1:
+			var layer_name := project.layers[layer].name
+			path_extras += "(%s) " % layer_name
+		path_extras += separator_character + str(frame).pad_zeros(number_of_digits)
 		var frame_tag_and_start_id := _get_proccessed_image_animation_tag_and_start_id(
 			project, frame - 1
 		)
@@ -622,10 +639,7 @@ func _get_proccessed_image_animation_tag_and_start_id(
 	for animation_tag in project.animation_tags:
 		# Check if processed image is in frame tag and assign frame tag and start id if yes
 		# Then stop
-		if (
-			(processed_image_id + 1) >= animation_tag.from
-			and (processed_image_id + 1) <= animation_tag.to
-		):
+		if animation_tag.has_frame(processed_image_id):
 			result_animation_tag_and_start_id = [animation_tag.name, animation_tag.from]
 			break
 	return result_animation_tag_and_start_id

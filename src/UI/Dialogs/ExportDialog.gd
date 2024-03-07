@@ -418,6 +418,11 @@ func _on_ExportDialog_popup_hide() -> void:
 	frame_timer.stop()
 
 
+func _on_split_layers_toggled(toggled_on: bool) -> void:
+	Export.split_layers = toggled_on
+	show_tab()
+
+
 func _on_IncludeTagsInFilename_toggled(button_pressed: bool) -> void:
 	Export.include_tag_in_filename = button_pressed
 
