@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ubyatap3sylf"]
+[gd_scene load_steps=7 format=3 uid="uid://ubyatap3sylf"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/BaseDraw.gd" id="3"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_7u3x0"]
+resource_name = "rotate"
+allow_unpress = true
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(1, 1, 1, 1)
@@ -41,14 +45,17 @@ layout_mode = 2
 
 [node name="Rotate90" type="CheckBox" parent="Rotate" index="0"]
 layout_mode = 2
+button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 90"
 
 [node name="Rotate180" type="CheckBox" parent="Rotate" index="1"]
 layout_mode = 2
+button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 180"
 
 [node name="Rotate270" type="CheckBox" parent="Rotate" index="2"]
 layout_mode = 2
+button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 270"
 
 [node name="Brush" type="HBoxContainer" parent="." index="4"]
