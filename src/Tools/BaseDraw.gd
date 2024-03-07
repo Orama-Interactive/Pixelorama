@@ -172,8 +172,9 @@ func update_brush() -> void:
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
-	$Flip.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
-	$Rotate.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+	$ExpandButton.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+	if $ExpandButton.visible == false:
+		$ExpandButton.set_pressed(false)
 
 
 func update_random_image() -> void:
@@ -764,3 +765,8 @@ func _on_rotate_180_toggled(button_pressed: bool) -> void:
 func _on_rotate_270_toggled(button_pressed: bool) -> void:
 	_brush_rotate_270 = button_pressed
 	update_brush()
+
+
+func _on_expand_button_toggled(button_pressed: bool) -> void:
+	$Flip.visible = button_pressed
+	$Rotate.visible = button_pressed
