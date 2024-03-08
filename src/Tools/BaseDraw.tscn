@@ -46,10 +46,12 @@ layout_mode = 2
 
 [node name="FlipX" type="CheckBox" parent="Flip" index="0"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Flip X"
 
 [node name="FlipY" type="CheckBox" parent="Flip" index="1"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Flip Y"
 
 [node name="Rotate" type="HBoxContainer" parent="." index="4"]
@@ -58,16 +60,19 @@ layout_mode = 2
 
 [node name="Rotate90" type="CheckBox" parent="Rotate" index="0"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 90"
 
 [node name="Rotate180" type="CheckBox" parent="Rotate" index="1"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 180"
 
 [node name="Rotate270" type="CheckBox" parent="Rotate" index="2"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 270"
 
