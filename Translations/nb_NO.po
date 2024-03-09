@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2024-03-07 14:18\n"
+"PO-Revision-Date: 2024-03-09 01:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1659,6 +1659,15 @@ msgstr "Overskriver en farge i stedet for å blande den. Dette valget gjelder ba
 msgid "Pixel Perfect"
 msgstr "Pikselperfekt"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pikselperfekt\n"
+"Gjør linjer glatte ved å fjerne de ekstra pikslene på kantene"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "Fyll inn"
 
@@ -1673,11 +1682,6 @@ msgstr ""
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr ""
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Pikselperfekt\n"
-"Gjør linjer glatte ved å fjerne de ekstra pikslene på kantene"
 
 msgid "Fill Shape"
 msgstr "Fyll Form"
