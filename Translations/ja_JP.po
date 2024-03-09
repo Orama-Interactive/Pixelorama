@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-03-09 01:45\n"
+"PO-Revision-Date: 2024-03-09 02:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1672,7 +1672,7 @@ msgstr "ピクセルパーフェクト\n"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "アルファをロック"
 
 msgid "Fill inside"
 msgstr "中を塗りつぶす"
