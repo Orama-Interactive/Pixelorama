@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-03-09 01:46\n"
+"PO-Revision-Date: 2024-03-09 12:49\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1672,7 +1672,7 @@ msgstr "Mükemmel Piksel\n"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Alfayı kilitle"
 
 msgid "Fill inside"
 msgstr "İçini doldur"
