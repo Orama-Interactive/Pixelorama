@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-03-07 14:18\n"
+"PO-Revision-Date: 2024-03-09 01:45\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1666,6 +1666,15 @@ msgstr "覆盖颜色而不是混合颜色。 此选项仅与不完全不透明�
 msgid "Pixel Perfect"
 msgstr "平滑像素"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "完美像素\n"
+"通过去除边缘上的额外像素使线条平滑"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "内部填充"
 
@@ -1680,11 +1689,6 @@ msgstr "间隙 X："
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "间隙 Y："
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "完美像素\n"
-"通过去除边缘上的额外像素使线条平滑"
 
 msgid "Fill Shape"
 msgstr "填充形状"
