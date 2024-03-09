@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-03-07 22:12\n"
+"PO-Revision-Date: 2024-03-09 01:46\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1665,6 +1665,15 @@ msgstr "Renkleri karıştırmak yerine rengin üzerine yazar. Bu seçenek sadece
 msgid "Pixel Perfect"
 msgstr "Mükemmel Piksel"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Mükemmel Piksel\n"
+"Kenarlardaki fazla pikselleri kaldırarak çizgileri pürüzsüzleştirir"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "İçini doldur"
 
@@ -1679,11 +1688,6 @@ msgstr "Boşluk X:"
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "Boşluk Y:"
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Mükemmel Piksel\n"
-"Kenarlardaki fazla pikselleri kaldırarak çizgileri pürüzsüzleştirir"
 
 msgid "Fill Shape"
 msgstr "Şekli Doldur"
