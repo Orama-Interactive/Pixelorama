@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2024-03-09 01:45\n"
+"PO-Revision-Date: 2024-03-09 14:52\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -190,7 +190,7 @@ msgstr ""
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "توسيط الإطار"
 
 msgid "Rotate Image"
 msgstr "تدوير الصورة"
@@ -208,7 +208,7 @@ msgid "Tolerance:"
 msgstr ""
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "الزاوية الأولية:"
 
 msgid "Clear"
 msgstr "مسح"
@@ -217,7 +217,7 @@ msgid "Invert"
 msgstr "عكس"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "العرض الرمادي"
 
 msgid "Mirror Image"
 msgstr ""
@@ -323,7 +323,7 @@ msgid "Widescreen"
 msgstr "شاشة عريضة"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "شاشة طويلة"
 
 msgid "Mirror View"
 msgstr "عرض المرآة"
@@ -342,15 +342,15 @@ msgstr "إظهار الإرشادات"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "إظهار أدلة الفأرة"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "عرض تأثيرات الطبقة"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "حصر إلي"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
@@ -440,7 +440,7 @@ msgstr "الأطر العمودية:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "تقطيع ذكي"
 
 #. A value that is a threshold
 msgid "Threshold:"
@@ -506,16 +506,16 @@ msgid "Directory path is not valid!"
 msgstr ""
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "إسم الملف غير صالح!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "مسار المجلد أو اسم الملف غير صالح!"
 
 msgid "Exporting in progress..."
 msgstr "جاري التصدير..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "لا يمكن تحميل الملف '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -524,7 +524,8 @@ msgstr "لا يمكن تحميل الملف '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "لا يمكن تحميل الملف '%s'.\n"
+"هذا ملف غير صالح للوحة الألوان."
 
 msgid "Frame"
 msgstr "الإطار"
@@ -573,22 +574,22 @@ msgstr "الخلفيّة:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "الإطارات المختارة"
 
 msgid "Layers:"
-msgstr ""
+msgstr "الطبقات:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "الطبقات الظاهرة"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "الإطارات المختارة"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "طبقة البكسل:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
@@ -648,25 +649,25 @@ msgstr ""
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "الخيارات المتقدمة"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "الفلتر:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "الأقرب"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "ثنائي"
 
 msgid "Cubic"
-msgstr ""
+msgstr "مكعبي"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "ثلاثي"
 
 msgid "Constant"
-msgstr ""
+msgstr "ثابت"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
@@ -674,10 +675,10 @@ msgstr ""
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "خطي sRGB"
 
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 msgid "Startup"
 msgstr ""
@@ -689,7 +690,7 @@ msgid "Interface"
 msgstr "الواجهة"
 
 msgid "Themes"
-msgstr ""
+msgstr "السمات"
 
 msgid "Canvas"
 msgstr ""
@@ -718,14 +719,14 @@ msgid "Extensions"
 msgstr ""
 
 msgid "Cursors"
-msgstr ""
+msgstr "مؤشرات الفأرة"
 
 msgid "Indicators"
-msgstr ""
+msgstr "المؤشرات"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "يجب إعادة تشغيل Pixelorama لتفعيل التغييرات."
 
 msgid "On"
 msgstr ""
@@ -830,64 +831,64 @@ msgid "Background color from:"
 msgstr ""
 
 msgid "Background color:"
-msgstr ""
+msgstr "لون الخلفية"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "لون الأداة اليسري:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "لون الأداة اليمنى:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "حجم زر الأداة:"
 
 msgid "Small"
-msgstr ""
+msgstr "صغير"
 
 msgid "Big"
-msgstr ""
+msgstr "كبير"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "التأثير على المحدد فقط"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "القطع المحددة"
 
 msgid "Current cel"
-msgstr ""
+msgstr "القطعة الحالية"
 
 msgid "Current frame"
-msgstr ""
+msgstr "الإطار الحالي"
 
 msgid "All frames"
-msgstr ""
+msgstr "كل الإطارات"
 
 msgid "All projects"
-msgstr ""
+msgstr "كل المشاريع"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "عكس الألوان"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "تعديل القناة الحمراء"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "تعديل القناة الخضراء"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "تعديل القناة الزرقاء"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "تعديل قناة الشفافية"
 
 msgid "Desaturation"
 msgstr ""
 
 msgid "Outline"
-msgstr ""
+msgstr "تحديد خارجي"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "ظل خلفي"
 
 msgid "Offset X:"
 msgstr ""
@@ -908,10 +909,10 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "تقسيم إلى أجزاء متساوية"
 
 msgid "Parts:"
-msgstr ""
+msgstr "الأجزاء:"
 
 msgid "Add point at the end"
 msgstr ""
@@ -935,11 +936,11 @@ msgstr ""
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "تكرار"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "انعكاس"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
@@ -949,7 +950,7 @@ msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "المركز:"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -958,10 +959,10 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "النوع:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "الزاوية:"
 
 msgid "Hue:"
 msgstr ""
@@ -970,7 +971,7 @@ msgid "Saturation:"
 msgstr ""
 
 msgid "Value:"
-msgstr ""
+msgstr "القيمة:"
 
 msgid "Apply"
 msgstr "تطبيق"
@@ -979,16 +980,16 @@ msgid "Diagonal"
 msgstr ""
 
 msgid "Place inside image"
-msgstr ""
+msgstr "وضع داخل الصورة"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "السماكة:"
 
 msgid "Colors:"
 msgstr "الألوان:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "الخطوات:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
@@ -1375,7 +1376,7 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "الاجتذاب"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
@@ -1386,22 +1387,22 @@ msgid "This is the distance in screen pixels where guide and grid snapping gets 
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "الشبكة"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "نوع الشبكة:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "مستطيلة"
 
 msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "الكل"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
@@ -1447,7 +1448,7 @@ msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
-msgstr ""
+msgstr "الشفافية"
 
 msgid "Checker size:"
 msgstr ""
@@ -1495,10 +1496,10 @@ msgid "Animated selection borders"
 msgstr ""
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "لون الحدود 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "لون الحدود 2:"
 
 msgid "Only custom preset can be modified"
 msgstr ""
@@ -1533,23 +1534,23 @@ msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "مشغل الجهاز اللوحي:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr ""
 
 msgid "Add Extension"
-msgstr ""
+msgstr "إضافة ملحق"
 
 msgid "Enable"
-msgstr ""
+msgstr "تفعيل"
 
 msgid "Disable"
-msgstr ""
+msgstr "تعطيل"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "إلغاء التثبيت"
 
 msgid "Open Folder"
 msgstr "فتح المجلد"
@@ -1564,7 +1565,7 @@ msgstr ""
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "الضغط"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
@@ -1572,11 +1573,11 @@ msgstr ""
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "الشفافية"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "الحجم"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
@@ -1588,14 +1589,14 @@ msgstr ""
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "البداية"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "النهاية"
 
 msgid "Brush:"
-msgstr ""
+msgstr "الفرشاة:"
 
 msgid "Select a brush"
 msgstr ""
@@ -1630,14 +1631,14 @@ msgstr ""
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "قفل الشفافية"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "ملء داخلي"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "التباعد"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
@@ -1648,7 +1649,7 @@ msgid "Gap Y:"
 msgstr ""
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "ملء الشكل"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
@@ -1661,7 +1662,7 @@ msgstr ""
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "ملء المساحة:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
@@ -1669,18 +1670,18 @@ msgstr ""
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "الألوان المماثلة"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "جميع المحدد"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "املأ بـ:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "اللون المحدد"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
@@ -1702,7 +1703,7 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "الكمية:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
@@ -1711,7 +1712,7 @@ msgid "Pick for:"
 msgstr ""
 
 msgid "Left Color"
-msgstr ""
+msgstr "اللون الأيسر"
 
 msgid "Right Color"
 msgstr ""
