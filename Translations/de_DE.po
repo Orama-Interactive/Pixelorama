@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-03-07 14:18\n"
+"PO-Revision-Date: 2024-03-09 01:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1665,6 +1665,15 @@ msgstr "Überschreibt die Farbe anstatt sie zu mischen. Diese Option ist nur fü
 msgid "Pixel Perfect"
 msgstr "Perfekte Pixel"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pixel Perfekt\n"
+"macht Linien glatt, indem die zusätzlichen Pixel an den Kanten entfernt werden"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "Einfüllen"
 
@@ -1679,11 +1688,6 @@ msgstr "Abstand X:"
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "Abstand Y:"
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Pixel Perfekt\n"
-"macht Linien glatt, indem die zusätzlichen Pixel an den Kanten entfernt werden"
 
 msgid "Fill Shape"
 msgstr "Füllform"
