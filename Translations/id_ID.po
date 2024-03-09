@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-03-07 14:18\n"
+"PO-Revision-Date: 2024-03-09 01:45\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1666,6 +1666,15 @@ msgstr "Warnanya ditimpa dan tak dicampur. Opsi ini hanya relevan bagi warna yan
 msgid "Pixel Perfect"
 msgstr "Pas Piksel"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pas Sesuai Piksel\n"
+"Membuat garis terlihat mulus dengan menghapus piksel tambahan di tepinya"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "Warnai dalamnya"
 
@@ -1680,11 +1689,6 @@ msgstr "Celah X:"
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "Celah Y:"
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Pas Sesuai Piksel\n"
-"Membuat garis terlihat mulus dengan menghapus piksel tambahan di tepinya"
 
 msgid "Fill Shape"
 msgstr "Warnai Bentuk"
