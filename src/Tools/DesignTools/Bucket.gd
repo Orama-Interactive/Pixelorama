@@ -182,6 +182,8 @@ func fill_in_color(pos: Vector2i) -> void:
 	var project := Global.current_project
 	var images := _get_selected_draw_images()
 	for image in images:
+		if Tools.check_alpha_lock(image, pos):
+			continue
 		var color: Color = image.get_pixelv(pos)
 		var pattern_image: Image
 		if _fill_with == FillWith.COLOR or _pattern == null:
@@ -296,11 +298,11 @@ func _add_new_segment(y := 0) -> void:
 ## Fill an horizontal segment around the specified position, and adds it to the
 ## list of segments filled. Returns the first x coordinate after the part of the
 ## line that has been filled.
+## Τhis method is called by [method _flood_fill] after the required data structures
+## have been initialized.
 func _flood_line_around_point(
 	pos: Vector2i, project: Project, image: Image, src_color: Color
 ) -> int:
-	# this method is called by `_flood_fill` after the required data structures
-	# have been initialized
 	if not image.get_pixelv(pos).is_equal_approx(src_color):
 		return pos.x + 1
 	var west := pos
@@ -382,6 +384,8 @@ func _flood_fill(pos: Vector2i) -> void:
 	var project := Global.current_project
 	var images := _get_selected_draw_images()
 	for image in images:
+		if Tools.check_alpha_lock(image, pos):
+			continue
 		var color: Color = image.get_pixelv(pos)
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			# end early if we are filling with the same color

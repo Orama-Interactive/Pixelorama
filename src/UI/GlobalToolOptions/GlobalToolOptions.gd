@@ -8,6 +8,7 @@ enum { ALPHA, SIZE }
 @onready var horizontal_mirror: BaseButton = grid_container.get_node("Horizontal")
 @onready var vertical_mirror: BaseButton = grid_container.get_node("Vertical")
 @onready var pixel_perfect: BaseButton = grid_container.get_node("PixelPerfect")
+@onready var alpha_lock: BaseButton = grid_container.get_node("AlphaLock")
 @onready var dynamics: Button = $"%Dynamics"
 
 @onready var dynamics_panel: PopupPanel = $DynamicsPanel
@@ -97,6 +98,16 @@ func _on_PixelPerfect_toggled(button_pressed: bool) -> void:
 	var file_name := "pixel_perfect_on.png"
 	if !button_pressed:
 		file_name = "pixel_perfect_off.png"
+	Global.change_button_texturerect(texture_button, file_name)
+
+
+func _on_alpha_lock_toggled(toggled_on: bool) -> void:
+	Tools.alpha_locked = toggled_on
+	Global.config_cache.set_value("preferences", "alpha_locked", toggled_on)
+	var texture_button: TextureRect = alpha_lock.get_node("TextureRect")
+	var file_name := "alpha_lock_on.png"
+	if not toggled_on:
+		file_name = "alpha_lock_off.png"
 	Global.change_button_texturerect(texture_button, file_name)
 
 

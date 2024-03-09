@@ -67,12 +67,13 @@ func reset() -> void:
 
 func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring := false) -> void:
 	var project := Global.current_project
-	drawers[0].set_pixel(image, position, color, color_op)
+	if not Tools.check_alpha_lock(image, position):
+		drawers[0].set_pixel(image, position, color, color_op)
 	if ignore_mirroring:
 		return
 	# Handle mirroring
-	var i := 1
-	for mirror_pos in Tools.get_mirrored_positions(position, project):
-		if project.can_pixel_get_drawn(mirror_pos):
-			drawers[i].set_pixel(image, mirror_pos, color, color_op)
-		i += 1
+	var mirrored_positions := Tools.get_mirrored_positions(position, project)
+	for i in mirrored_positions.size():
+		var mirror_pos := mirrored_positions[i]
+		if project.can_pixel_get_drawn(mirror_pos) && not Tools.check_alpha_lock(image, mirror_pos):
+			drawers[i + 1].set_pixel(image, mirror_pos, color, color_op)
