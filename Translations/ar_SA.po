@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2024-03-09 14:52\n"
+"PO-Revision-Date: 2024-03-09 15:57\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "عرض"
 
 msgid "Window"
-msgstr ""
+msgstr "النافذة"
 
 msgid "Image"
 msgstr "الصورة"
@@ -95,13 +95,15 @@ msgstr "حفظ باسم..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "تضمين الصور المختلطة"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr ""
+msgstr "في حالة التفعيل، يتم أيضا تخزين الصور الممزوجة النهائية في ملف pxo لكل إطار.\n"
+"هذا يجعل ملف pxo أكبر ومفيد للاستيراد بواسطة برنامج أخرأو CLI.\n"
+"تحميل ملفات pxo في Pixelorama لا يحتاج إلى تمكين هذا الخيار.\n"
 
 msgid "Import"
 msgstr "استيراد"
@@ -110,7 +112,7 @@ msgid "Export"
 msgstr "تصدير"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "إستبدال"
 
 msgid "Export..."
 msgstr "تصدير..."
@@ -149,11 +151,11 @@ msgid "Delete"
 msgstr "حذف"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "حذف بشكل نهائي"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "نقل إلى سلة المهملات"
 
 msgid "New Brush"
 msgstr "فرشاة جديدة"
@@ -256,13 +258,13 @@ msgid "Reset"
 msgstr ""
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "إستخدام الإطار الحالي"
 
 msgid "Reset Mask"
 msgstr ""
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "شفافية النافذة"
 
 msgid "Window opacity does not work on fullscreen mode."
 msgstr ""
@@ -284,7 +286,7 @@ msgstr ""
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "معاينة"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
@@ -301,10 +303,10 @@ msgid "Add Layout"
 msgstr ""
 
 msgid "Copy from"
-msgstr ""
+msgstr "نسخ من"
 
 msgid "Rename"
-msgstr ""
+msgstr "إعادة تسمية"
 
 msgid "Rename Layout"
 msgstr ""
@@ -387,10 +389,10 @@ msgid "Open File(s)"
 msgstr "فتح ملفات"
 
 msgid "Import Options"
-msgstr "خيارات الاستيراد"
+msgstr "خيارات الإستيراد"
 
 msgid "Import as:"
-msgstr "استيراد باسم:"
+msgstr "إستيراد كـ:"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
@@ -404,7 +406,7 @@ msgstr "مشروع جديد"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "مصفوفة الكائنات (مشروع جديد)"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
@@ -415,13 +417,13 @@ msgstr "إطار جديد"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
-msgstr ""
+msgstr "إستبدال العنصر"
 
 msgid "New layer"
 msgstr "طبقة جديدة"
 
 msgid "New reference image"
-msgstr ""
+msgstr "صورة مرجعية جديدة"
 
 msgid "New palette"
 msgstr "لوحة جديدة"
@@ -452,7 +454,7 @@ msgstr ""
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "مسافة الدمج:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
@@ -460,19 +462,19 @@ msgstr ""
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "تحديث"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "إطار البداية:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "إطار النهاية:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "عند الإطار:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "عند الطبقة:"
 
 msgid "Brush type:"
 msgstr "نوع الفرشاة:"
@@ -593,11 +595,11 @@ msgstr "طبقة البكسل:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "جامع الطبقات:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "طبقة ثلاثية الأبعاد:"
 
 msgid "Direction:"
 msgstr "الاتجاه:"
@@ -645,7 +647,7 @@ msgid "Create Folder"
 msgstr "إنشاء مجلد"
 
 msgid "File:"
-msgstr ""
+msgstr "الملف:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -697,7 +699,7 @@ msgstr ""
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "الجدول الزمني"
 
 msgid "Selection"
 msgstr ""
@@ -706,17 +708,17 @@ msgid "Shortcuts"
 msgstr "اختصارات"
 
 msgid "Backup"
-msgstr ""
+msgstr "نسخ إحتياطي"
 
 msgid "Performance"
-msgstr ""
+msgstr "الأداء"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "معرف الأنظمة"
 
 msgid "Extensions"
-msgstr ""
+msgstr "الإضافات"
 
 msgid "Cursors"
 msgstr "مؤشرات الفأرة"
@@ -729,14 +731,14 @@ msgid "Pixelorama must be restarted for changes to take effect."
 msgstr "يجب إعادة تشغيل Pixelorama لتفعيل التغييرات."
 
 msgid "On"
-msgstr ""
+msgstr "مفعل"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "إستعادة القيمة الإفتراضية"
 
 #. Found in the preferences, under Canvas.
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "التكبير السلس"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Smooth Zoom".
 msgid "Adds a smoother transition when zooming in or out"
@@ -744,7 +746,7 @@ msgstr ""
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "تكبير بعدد صحيح"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
@@ -754,7 +756,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "لا شيء"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
@@ -769,14 +771,14 @@ msgid "System Language"
 msgstr "لغة النظام"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "مقياس العرض:"
 
 msgid "Dim interface on dialog popup"
 msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "استخدام نوافذ نظام التشغيل الأصلية"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
@@ -784,7 +786,7 @@ msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "وضع النافذة الفردية"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -800,7 +802,7 @@ msgid "Blue"
 msgstr "أزرق"
 
 msgid "Caramel"
-msgstr ""
+msgstr "كراميل"
 
 msgid "Light"
 msgstr "فاتح"
@@ -810,25 +812,25 @@ msgstr "بنفسجي"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "وردي"
 
 msgid "Theme"
-msgstr ""
+msgstr "المظهر"
 
 msgid "Buttons"
-msgstr ""
+msgstr "الأزرار"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "لون الأيقونة من:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "لون الأيقونة:"
 
 msgid "Background"
-msgstr ""
+msgstr "الخلفية"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "لون الخلفية من:"
 
 msgid "Background color:"
 msgstr "لون الخلفية"
@@ -922,7 +924,7 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr ""
 
 msgid "Shape:"
-msgstr ""
+msgstr "الشكل:"
 
 msgid "Linear"
 msgstr ""
@@ -932,7 +934,7 @@ msgstr ""
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "التكرار:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
@@ -1013,7 +1015,7 @@ msgid "Issue Tracker"
 msgstr "متعقب المشاكل"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "فتح مجلد السجلات"
 
 msgid "Changelog"
 msgstr "سِجل التغييرات"
@@ -1023,7 +1025,7 @@ msgstr "حول Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "دعم تطوير بيكسلوراما"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "بيكسلوراما - بيكسل أحلامك!"
@@ -1032,14 +1034,14 @@ msgid "Developed by Orama Interactive"
 msgstr "تم تطويره بواسطة Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "حقوق الطبع والنشر ©2019 مملوكة الي أوراما انتراكتيف والمساهمين"
 
 msgid "Website"
 msgstr "الموقع"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "مصدر أكواد المشروع"
 
 msgid "Donate"
 msgstr "تبرّع"
@@ -1057,7 +1059,7 @@ msgid "Translators"
 msgstr "المترجمون"
 
 msgid "Licenses"
-msgstr ""
+msgstr "التراخيص"
 
 msgid "English"
 msgstr "الإنجليزية"
@@ -1151,7 +1153,7 @@ msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "المطور الرائد"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1159,7 +1161,7 @@ msgstr "مصمم UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "الناشرون"
 
 msgid "Art by: %s"
 msgstr "الفن بواسطة: %s"
@@ -1186,7 +1188,7 @@ msgid "Save before exiting?"
 msgstr "حفظ قبل الخروج؟"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "لم تقم بحفظ التغييرات. كيف ترغب في المتابعة؟"
 
 msgid "Save & Exit"
 msgstr "حفظ وخروج"
@@ -1197,12 +1199,16 @@ msgstr "الخروج دون حفظ"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "التحديد المستطيلى\n\n"
+"%s لزر الفأرة الأيسر\n"
+"%s لزر الفأرة الأيمن"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "التحديد الدائرى\n\n"
+"%s لزر الفأرة الأيسر\n"
+"%s لزر الفأرة الأيمن"
 
 msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
@@ -1306,7 +1312,7 @@ msgid "Rectangle"
 msgstr "مستطيل"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "بيضاوي"
 
 msgid "Choose a color for the left tool"
 msgstr "اختر لون الأداة اليسرى"
@@ -1316,14 +1322,14 @@ msgstr "اختر لون الأداة اليمنى"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "تبديل بين اللون الأيسر و الأيمن."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "إعادة تعيين الألوان إلى حالتها الافتراضية (أسود لليسار، أبيض لليمين)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "إختيار لون من الشاشة."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1342,34 +1348,34 @@ msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
 msgstr "إظهار مؤشر الماوس الأيسر بكسل أو الفرشاة على الكانفا عند الرسم"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "مؤشر البكسل الأيمن"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "إظهار أيقونة الأداة اليسرى"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr ""
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "إظهار أيقونة الأداة اليمنى"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "استخدام مؤشرات فأرة نظام التشغيل"
 
 msgid "Use cross cursor for the canvas"
 msgstr ""
 
 msgid "Guides"
-msgstr ""
+msgstr "خطوط الإرشاد"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "لون خطوط الإرشاد:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
@@ -1511,14 +1517,14 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr ""
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "إيقاف مؤقت للتطبيق عند تغيير النوافذ"
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "تمكين شفافية النافذة"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
@@ -1581,7 +1587,7 @@ msgstr "الحجم"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "حدود القيمة"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
@@ -1602,7 +1608,7 @@ msgid "Select a brush"
 msgstr ""
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "الفرشاة"
 
 msgid "Circle brush"
 msgstr "فرشاة الدائرة"
@@ -1611,13 +1617,13 @@ msgid "Filled circle brush"
 msgstr ""
 
 msgid "Custom brush"
-msgstr ""
+msgstr "فرشاة مخصصة"
 
 msgid "Brush size:"
 msgstr "حجم الفرشاة:"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "إستبدال اللون"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr ""
@@ -1697,10 +1703,10 @@ msgid "Hue Shifting"
 msgstr ""
 
 msgid "Lighten"
-msgstr ""
+msgstr "تفتيح"
 
 msgid "Darken"
-msgstr ""
+msgstr "تعتيم"
 
 msgid "Amount:"
 msgstr "الكمية:"
@@ -1715,22 +1721,22 @@ msgid "Left Color"
 msgstr "اللون الأيسر"
 
 msgid "Right Color"
-msgstr ""
+msgstr "اللون الأيمن"
 
 msgid "Mode:"
-msgstr ""
+msgstr "النمط:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "تكبير"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "تصغير"
 
 msgid "Options"
-msgstr ""
+msgstr "الخيارات"
 
 msgid "Options:"
-msgstr ""
+msgstr "الخيارات:"
 
 msgid "Fit to frame"
 msgstr ""
@@ -1758,7 +1764,7 @@ msgid "Mirroring"
 msgstr ""
 
 msgid "Horizontal"
-msgstr ""
+msgstr "أفقي"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
@@ -1767,13 +1773,13 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "رأسي"
 
 msgid "Current frame:"
 msgstr "الإطار الحالي:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "وضع الرسوم المتحركة:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
@@ -1819,10 +1825,10 @@ msgid "Onion Skinning:"
 msgstr ""
 
 msgid "Past Frames"
-msgstr ""
+msgstr "الإطارات السابقة"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "الإطارات المقبلة"
 
 msgid "Manage frame tags"
 msgstr ""
@@ -1884,10 +1890,10 @@ msgid "Clone Frame"
 msgstr ""
 
 msgid "Move Left"
-msgstr ""
+msgstr "تحريك لليسار"
 
 msgid "Move Right"
-msgstr ""
+msgstr "تحريك لليمين"
 
 msgid "Add Frame Tag"
 msgstr ""
@@ -1899,7 +1905,7 @@ msgid "Unlink Cels"
 msgstr ""
 
 msgid "Properties"
-msgstr ""
+msgstr "الخصائص"
 
 msgid "Frame properties"
 msgstr ""
@@ -1912,13 +1918,13 @@ msgid "Reverse Frames"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "الطبقة"
 
 msgid "Group"
-msgstr ""
+msgstr "المجموعة"
 
 msgid "Layers"
-msgstr ""
+msgstr "الطبقات"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -1946,26 +1952,26 @@ msgid "Move down the current layer"
 msgstr ""
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "إستنساخ الطبقة الحالية"
 
 msgid "Merge current layer with the one below"
 msgstr ""
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "وضع المزج:"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "عادي"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "مضاعفة"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr ""
+msgstr "إحراق اللون"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
@@ -1973,15 +1979,15 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "الشاشة"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
-msgstr ""
+msgstr "مراوغة اللون"
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "التباين"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
@@ -2001,23 +2007,23 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "الفارق"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "إقصاء"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "الطرح"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "القسمة"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "العنصر"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
@@ -2029,14 +2035,14 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "اللون"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
 msgstr ""
 
 msgid "Opacity:"
-msgstr ""
+msgstr "الشفافية:"
 
 msgid "Tile mode opacity:"
 msgstr ""
@@ -2160,10 +2166,10 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "تم حفظ الملف"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "تم حفظ الملف تلقائياً"
 
 msgid "File failed to open. Error code %s"
 msgstr ""
@@ -2176,7 +2182,7 @@ msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
 msgstr ""
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "تم تصدير الملف/الملفات"
 
 msgid "New Empty Palette"
 msgstr ""
@@ -2200,7 +2206,7 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "خطأ"
 
 msgid "Error: Palette must have a valid name."
 msgstr ""
@@ -2218,46 +2224,46 @@ msgid "Get colors only from selection"
 msgstr ""
 
 msgid "Get colors from"
-msgstr ""
+msgstr "الحصول على الألوان من"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "الرعاة:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "كن راعياً بلاتيني"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "كن راعياً ذهبياً"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "كن راعيًا لنا"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "عدم العرض مرة أخرى"
 
 msgid "Image Options"
 msgstr "خيارات الصورة"
 
 msgid "Default width:"
-msgstr ""
+msgstr "العرض الافتراضي:"
 
 msgid "A default width of a new image"
-msgstr ""
+msgstr "العرض الافتراضي للصور الجديدة"
 
 msgid "Default height:"
-msgstr ""
+msgstr "الارتفاع الافتراضي:"
 
 msgid "A default height of a new image"
-msgstr ""
+msgstr "الارتفاع الافتراضي للصور الجديدة"
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "لون الملء الافتراضي:"
 
 msgid "A default background color of a new image"
-msgstr ""
+msgstr "لون الخلفية الافتراضي للصور الجديدة"
 
 msgid "Lock aspect ratio"
 msgstr ""
@@ -2278,7 +2284,7 @@ msgid "Preset:"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "الافتراضي"
 
 msgid "Custom"
 msgstr ""
@@ -2302,19 +2308,19 @@ msgid "Lasso / Free Select Tool"
 msgstr ""
 
 msgid "Move"
-msgstr ""
+msgstr "تحريك"
 
 msgid "Zoom"
-msgstr ""
+msgstr "تكبير"
 
 msgid "Pan"
-msgstr ""
+msgstr "تحريك جانبي"
 
 msgid "Color Picker"
 msgstr ""
 
 msgid "Pencil"
-msgstr ""
+msgstr "قلم"
 
 msgid "Eraser"
 msgstr "ممحاة"
@@ -2323,37 +2329,37 @@ msgid "Bucket"
 msgstr ""
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "أداة التظليل"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "أداة الخط"
 
 msgid "Rectangle Tool"
 msgstr "أداة المستطيل"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "أداة الدوائر"
 
 msgid "Switch Colors"
-msgstr ""
+msgstr "تبديل الألوان"
 
 msgid "Set the shortcut"
-msgstr ""
+msgstr "تعيين الاختصار"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr ""
+msgstr "اضغط على مفتاح أو مجموعة مفاتيح لتعيين الاختصار"
 
 msgid "Already assigned"
 msgstr ""
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "الأداة اليسرى:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr ""
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "الأداة اليمنى:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr ""
@@ -2362,7 +2368,7 @@ msgid "Cannot find last project file."
 msgstr ""
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "لا يمكن العثور على ملف المشروع."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
@@ -2374,30 +2380,30 @@ msgid "Open last project..."
 msgstr "فتح آخر مشروع..."
 
 msgid "Open last project on startup"
-msgstr ""
+msgstr "فتح آخر مشروع عند بدء التشغيل"
 
 msgid "Opens last opened project on startup"
 msgstr ""
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "تأكيد الخروج"
 
 #. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
 msgid "FFMPEG path"
 msgstr ""
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "تفعيل الحفظ التلقائي"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "الفاصل للحفظ التلقائي:"
 
 msgid "minute(s)"
-msgstr ""
+msgstr "دقيقة(دقائق)"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
-msgstr ""
+msgstr "تقسيم الطبقات"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
@@ -2445,7 +2451,7 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr ""
 
 msgid "and"
-msgstr ""
+msgstr "و"
 
 msgid "Move the selected frame to the left."
 msgstr ""
@@ -2454,7 +2460,7 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
-msgstr ""
+msgstr "مدة الإطار"
 
 msgid "Duration"
 msgstr "المدة"
@@ -2472,10 +2478,10 @@ msgid "Create a new palette"
 msgstr ""
 
 msgid "Comment:"
-msgstr ""
+msgstr "تعليق:"
 
 msgid "Empty"
-msgstr ""
+msgstr "فارغ"
 
 msgid "From Current Palette"
 msgstr ""
@@ -2539,10 +2545,10 @@ msgid "Reducing palette size will reset positions of colors.\n"
 msgstr ""
 
 msgid "Position:"
-msgstr ""
+msgstr "الموقع:"
 
 msgid "Tools"
-msgstr ""
+msgstr "الأدوات"
 
 msgid "Main Canvas"
 msgstr ""
@@ -2563,10 +2569,10 @@ msgid "Global Tool Options"
 msgstr ""
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "خيارات الأداة اليسرى"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "خيارات الأداة اليمنى"
 
 msgid "Reference Images"
 msgstr ""
@@ -2579,7 +2585,7 @@ msgid "Recorder"
 msgstr ""
 
 msgid "Crop"
-msgstr ""
+msgstr "قص"
 
 msgid "Resize the canvas"
 msgstr ""
@@ -2600,16 +2606,16 @@ msgid "Aspect Ratio:"
 msgstr ""
 
 msgid "Top:"
-msgstr ""
+msgstr "أعلى:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "أسفل:"
 
 msgid "Left:"
-msgstr ""
+msgstr "يسار:"
 
 msgid "Right:"
-msgstr ""
+msgstr "يمين:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
@@ -2618,23 +2624,23 @@ msgstr ""
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "تحرير الشكل ثلاثي الأبعاد"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "صندوق"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "كرة"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "كبسولة"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "إسطوانة"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
@@ -2646,10 +2652,10 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "مسطح"
 
 msgid "Text"
-msgstr ""
+msgstr "نص"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2668,16 +2674,16 @@ msgid "Custom model"
 msgstr ""
 
 msgid "Selected object:"
-msgstr ""
+msgstr "الكائن المحدد:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "إضافة كائن جديد"
 
 msgid "Remove object"
-msgstr ""
+msgstr "حذف الكائن"
 
 msgid "Camera"
-msgstr ""
+msgstr "الكاميرا"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
@@ -2703,7 +2709,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "البيئة"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
@@ -2715,7 +2721,7 @@ msgstr ""
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr ""
+msgstr "مرئي:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
@@ -2754,7 +2760,7 @@ msgid "Bottom radius:"
 msgstr ""
 
 msgid "Text:"
-msgstr ""
+msgstr "النص:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -2768,25 +2774,25 @@ msgid "Horizontal alignment:"
 msgstr ""
 
 msgid "Left"
-msgstr ""
+msgstr "يسار"
 
 msgid "Right"
-msgstr ""
+msgstr "يمين"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "الطاقة:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
 msgstr ""
 
 msgid "Shadow:"
-msgstr ""
+msgstr "الظل:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "المدى:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
@@ -2798,11 +2804,11 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
-msgstr ""
+msgstr "تحريك"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
-msgstr ""
+msgstr "القيمة الأولية:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
@@ -2906,13 +2912,13 @@ msgstr ""
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "مفعل"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr ""
+msgstr "تأثيرات الطبقة"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "إضافة تأثير"
 
