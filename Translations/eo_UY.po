@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2024-03-07 14:18\n"
+"PO-Revision-Date: 2024-03-09 01:46\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1615,6 +1615,14 @@ msgstr "Superskribas koloron anstataŭ miksi ĝin kun suba koloro. La opcio nur 
 msgid "Pixel Perfect"
 msgstr "Rastumera precizemo"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr ""
 
@@ -1628,10 +1636,6 @@ msgstr ""
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
