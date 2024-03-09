@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-03-07 16:22\n"
+"PO-Revision-Date: 2024-03-09 01:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1664,6 +1664,15 @@ msgstr "Suprascrie culoarea în loc să o amestece. Această opțiune se aplică
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pixel Perfect\n"
+"Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "Umplere pe interior"
 
@@ -1678,11 +1687,6 @@ msgstr "Decalaj X:"
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "Decalaj Y:"
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Pixel Perfect\n"
-"Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
 
 msgid "Fill Shape"
 msgstr "Umplere formă"
