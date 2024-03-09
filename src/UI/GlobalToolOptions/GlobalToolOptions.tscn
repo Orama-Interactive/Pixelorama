@@ -129,8 +129,7 @@ texture = ExtResource("4")
 [node name="AlphaLock" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-tooltip_text = "Pixel Perfect
-Makes lines smooth by removing the extra pixels on the edges"
+tooltip_text = "Lock alpha"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_vcyug")
