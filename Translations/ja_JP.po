@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-03-07 15:14\n"
+"PO-Revision-Date: 2024-03-09 01:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1665,6 +1665,15 @@ msgstr "ブレンドの代わりに色を上書きします。このオプショ
 msgid "Pixel Perfect"
 msgstr "ピクセルパーフェクト"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "ピクセルパーフェクト\n"
+"角の余分なピクセルを除去することで線を滑らかにします"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "中を塗りつぶす"
 
@@ -1679,11 +1688,6 @@ msgstr "間隔 X:"
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "間隔 Y:"
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "ピクセルパーフェクト\n"
-"角の余分なピクセルを除去することで線を滑らかにします"
 
 msgid "Fill Shape"
 msgstr "図形の塗りつぶし"
