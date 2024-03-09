@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-03-09 01:45\n"
+"PO-Revision-Date: 2024-03-09 13:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1671,7 +1671,7 @@ msgstr "Pixel Perfect\n"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Blocare valoare alfa"
 
 msgid "Fill inside"
 msgstr "Umplere pe interior"
