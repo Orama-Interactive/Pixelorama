@@ -12,7 +12,7 @@ uniform float similarity_percent : hint_range(0.0, 100.0);
 uniform sampler2D selection;
 
 uniform bool has_pattern;
-uniform sampler2D pattern;
+uniform sampler2D pattern: repeat_enable;
 uniform vec2 pattern_size;
 uniform vec2 pattern_uv_offset;
 
