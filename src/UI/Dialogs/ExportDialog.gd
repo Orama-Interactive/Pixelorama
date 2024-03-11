@@ -336,6 +336,7 @@ func _on_Direction_item_selected(id: Export.AnimationDirection) -> void:
 	preview_current_frame = 0
 	Export.process_data()
 	set_preview()
+	update_dimensions_label()
 
 
 func _on_Resize_value_changed(value: float) -> void:
@@ -420,7 +421,8 @@ func _on_ExportDialog_popup_hide() -> void:
 
 func _on_split_layers_toggled(toggled_on: bool) -> void:
 	Export.split_layers = toggled_on
-	show_tab()
+	Export.process_data()
+	set_preview()
 
 
 func _on_IncludeTagsInFilename_toggled(button_pressed: bool) -> void:
