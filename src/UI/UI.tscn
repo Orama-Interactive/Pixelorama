@@ -310,6 +310,7 @@ script = ExtResource("23")
 camera_path = NodePath("SubViewport/Camera2D")
 
 [node name="SubViewport" type="SubViewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer"]
+disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(862, 515)
@@ -346,6 +347,7 @@ script = ExtResource("23")
 camera_path = NodePath("SubViewport/Camera2D2")
 
 [node name="SubViewport" type="SubViewport" parent="DockableContainer/Second Canvas"]
+disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(2, 2)
