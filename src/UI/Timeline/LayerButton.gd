@@ -80,9 +80,9 @@ func update_buttons() -> void:
 
 ## When pressing a button, change the appearance of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
-	var layer := Global.current_project.layers[layer_index]
-	for layer_button in Global.layer_vbox.get_children():
+	for layer_button: LayerButton in get_parent().get_children():
 		layer_button.update_buttons()
+		var layer := Global.current_project.layers[layer_button.layer_index]
 		var expanded := layer.is_expanded_in_hierarchy()
 		layer_button.visible = expanded
 		Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
