@@ -148,9 +148,10 @@ func draw_layers() -> void:
 	if recreate_texture_array:
 		var textures: Array[Image] = []
 		textures.resize(project.layers.size())
-		# Nx3 texture, where N is the number of layers and the first row are the blend modes,
-		# the second are the opacities and the third are the origins
-		layer_metadata_image = Image.create(project.layers.size(), 3, false, Image.FORMAT_RG8)
+		# Nx4 texture, where N is the number of layers and the first row are the blend modes,
+		# the second are the opacities, the third are the origins and the fourth are the
+		# clipping mask booleans.
+		layer_metadata_image = Image.create(project.layers.size(), 4, false, Image.FORMAT_RG8)
 		# Draw current frame layers
 		for i in project.layers.size():
 			var ordered_index := project.ordered_layers[i]
@@ -162,16 +163,7 @@ func draw_layers() -> void:
 			else:
 				cel_image = cel.get_image()
 			textures[ordered_index] = cel_image
-			# Store the blend mode
-			layer_metadata_image.set_pixel(
-				ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0)
-			)
-			# Store the opacity
-			if layer.is_visible_in_hierarchy():
-				var opacity := cel.get_final_opacity(layer)
-				layer_metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
-			else:
-				layer_metadata_image.set_pixel(ordered_index, 1, Color())
+			DrawingAlgos.set_layer_metadata_image(layer, cel, layer_metadata_image, ordered_index)
 			# Store the origin
 			if [project.current_frame, i] in project.selected_cels:
 				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
@@ -199,14 +191,10 @@ func draw_layers() -> void:
 				else:
 					cel_image = cel.get_image()
 				layer_texture_array.update_layer(cel_image, ordered_index)
-				layer_metadata_image.set_pixel(
-					ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0)
+				DrawingAlgos.set_layer_metadata_image(
+					layer, cel, layer_metadata_image, ordered_index
 				)
-				if layer.is_visible_in_hierarchy():
-					var opacity := cel.get_final_opacity(layer)
-					layer_metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
-				else:
-					layer_metadata_image.set_pixel(ordered_index, 1, Color())
+				# Update the origin
 				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
 				layer_metadata_image.set_pixel(
 					ordered_index, 2, Color(origin.x, origin.y, 0.0, 0.0)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bai814sqvk68f"]
+[gd_scene load_steps=7 format=3 uid="uid://bai814sqvk68f"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/LayerButton.gd" id="1_6hlpe"]
 [ext_resource type="Texture2D" uid="uid://c2b3htff5yox8" path="res://assets/graphics/layers/layer_visible.png" id="2_ef6fb"]
 [ext_resource type="Texture2D" uid="uid://dndlglvqc7v6a" path="res://assets/graphics/layers/group_expanded.png" id="2_enrtd"]
 [ext_resource type="Texture2D" uid="uid://dhc0pnnqojd2m" path="res://assets/graphics/layers/unlock.png" id="3_ah1my"]
 [ext_resource type="Texture2D" uid="uid://cofw1x6chh4i" path="res://assets/graphics/layers/unlinked_layer.png" id="4_058qm"]
+[ext_resource type="Texture2D" uid="uid://ieo8fsapcgsy" path="res://assets/graphics/layers/clipping_mask.png" id="6_73j5q"]
 
 [node name="LayerButton" type="Button"]
 offset_right = 200.0
@@ -147,6 +148,13 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
+[node name="ClippingMask" type="TextureRect" parent="HBoxContainer/LayerName"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("6_73j5q")
+stretch_mode = 5
+
 [node name="LayerNameLabel" type="Label" parent="HBoxContainer/LayerName"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -169,9 +177,17 @@ caret_blink_interval = 0.5
 layout_mode = 2
 mouse_filter = 2
 
+[node name="PopupMenu" type="PopupMenu" parent="."]
+disable_3d = true
+item_count = 1
+item_0/text = "Clipping mask"
+item_0/checkable = 1
+item_0/id = 0
+
 [connection signal="gui_input" from="." to="." method="_on_LayerContainer_gui_input"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/ExpandButton" to="." method="_on_ExpandButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LockButton" to="." method="_on_LockButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LinkButton" to="." method="_on_LinkButton_pressed"]
 [connection signal="focus_exited" from="HBoxContainer/LayerName/LayerNameLineEdit" to="." method="_on_LineEdit_focus_exited"]
+[connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]

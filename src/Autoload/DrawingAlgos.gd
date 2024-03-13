@@ -26,9 +26,10 @@ func blend_layers(
 	only_selected_layers := false,
 ) -> void:
 	var textures: Array[Image] = []
-	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
-	# the second are the opacities and the third are the origins
-	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
+	# Nx4 texture, where N is the number of layers and the first row are the blend modes,
+	# the second are the opacities, the third are the origins and the fourth are the
+	# clipping mask booleans.
+	var metadata_image := Image.create(project.layers.size(), 4, false, Image.FORMAT_R8)
 	var frame_index := project.frames.find(frame)
 	var previous_ordered_layers: Array[int] = project.ordered_layers
 	project.order_layers(frame_index)
@@ -51,14 +52,7 @@ func blend_layers(
 		var cel := frame.cels[ordered_index]
 		var cel_image := layer.display_effects(cel)
 		textures.append(cel_image)
-		# Store the blend mode
-		metadata_image.set_pixel(ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
-		# Store the opacity
-		if include:
-			var opacity := cel.get_final_opacity(layer)
-			metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
-		else:
-			metadata_image.set_pixel(ordered_index, 1, Color())
+		set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {
@@ -71,6 +65,24 @@ func blend_layers(
 	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
 	# Re-order the layers again to ensure correct canvas drawing
 	project.ordered_layers = previous_ordered_layers
+
+
+func set_layer_metadata_image(
+	layer: BaseLayer, cel: BaseCel, image: Image, index: int, include := true
+) -> void:
+	# Store the blend mode
+	image.set_pixel(index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+	# Store the opacity
+	if layer.is_visible_in_hierarchy() and include:
+		var opacity := cel.get_final_opacity(layer)
+		image.set_pixel(index, 1, Color(opacity, 0.0, 0.0, 0.0))
+	else:
+		image.set_pixel(index, 1, Color())
+	# Store the clipping mask boolean
+	if layer.clipping_mask:
+		image.set_pixel(index, 3, Color.WHITE)
+	else:
+		image.set_pixel(index, 3, Color.BLACK)
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html

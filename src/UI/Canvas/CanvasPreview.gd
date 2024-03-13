@@ -76,9 +76,10 @@ func _draw_layers() -> void:
 	var current_frame := project.frames[frame_index]
 	var current_cels := current_frame.cels
 	var textures: Array[Image] = []
-	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
-	# the second are the opacities and the third are the origins
-	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
+	# Nx4 texture, where N is the number of layers and the first row are the blend modes,
+	# the second are the opacities, the third are the origins and the fourth are the
+	# clipping mask booleans.
+	var metadata_image := Image.create(project.layers.size(), 4, false, Image.FORMAT_R8)
 	# Draw current frame layers
 	for i in project.ordered_layers:
 		var cel := current_cels[i]
@@ -91,12 +92,7 @@ func _draw_layers() -> void:
 		else:
 			cel_image = cel.get_image()
 		textures.append(cel_image)
-		metadata_image.set_pixel(i, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
-		if layer.is_visible_in_hierarchy():
-			var opacity := cel.get_final_opacity(layer)
-			metadata_image.set_pixel(i, 1, Color(opacity, 0.0, 0.0, 0.0))
-		else:
-			metadata_image.set_pixel(i, 1, Color(0.0, 0.0, 0.0, 0.0))
+		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	material.set_shader_parameter("layers", texture_array)

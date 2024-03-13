@@ -12,6 +12,8 @@ var layer_index := 0
 @onready var line_edit := %LayerNameLineEdit as LineEdit
 @onready var hierarchy_spacer := %HierarchySpacer as Control
 @onready var linked_button := %LinkButton as BaseButton
+@onready var clipping_mask_icon := %ClippingMask as TextureRect
+@onready var popup_menu := $PopupMenu as PopupMenu
 
 
 func _ready() -> void:
@@ -71,6 +73,8 @@ func update_buttons() -> void:
 
 	visibility_button.modulate.a = 1
 	lock_button.modulate.a = 1
+	popup_menu.set_item_checked(0, layer.clipping_mask)
+	clipping_mask_icon.visible = layer.clipping_mask
 	if is_instance_valid(layer.parent):
 		if not layer.parent.is_visible_in_hierarchy():
 			visibility_button.modulate.a = 0.33
@@ -108,7 +112,9 @@ func _input(event: InputEvent) -> void:
 func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 	var project := Global.current_project
 
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if not event is InputEventMouseButton:
+		return
+	if event.button_index == MOUSE_BUTTON_LEFT:
 		Global.canvas.selection.transform_content_confirm()
 		var prev_curr_layer := project.current_layer
 		if Input.is_action_pressed(&"shift"):
@@ -135,6 +141,10 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 			line_edit.visible = true
 			line_edit.editable = true
 			line_edit.grab_focus()
+	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		var layer := Global.current_project.layers[layer_index]
+		if not layer is GroupLayer:
+			popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 
 
 func _on_LineEdit_focus_exited() -> void:
@@ -368,3 +378,12 @@ func _get_region_rect(y_begin: float, y_end: float) -> Rect2:
 	rect.position.y += rect.size.y * y_begin
 	rect.size.y *= y_end - y_begin
 	return rect
+
+
+func _on_popup_menu_id_pressed(id: int) -> void:
+	var layer := Global.current_project.layers[layer_index]
+	if id == 0:
+		layer.clipping_mask = not layer.clipping_mask
+		popup_menu.set_item_checked(0, layer.clipping_mask)
+		clipping_mask_icon.visible = layer.clipping_mask
+		Global.canvas.draw_layers()

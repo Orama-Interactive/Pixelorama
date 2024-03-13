@@ -5,8 +5,9 @@ const float HCV_EPSILON = 1e-10;
 const float HSL_EPSILON = 1e-10;
 
 uniform sampler2DArray layers : filter_nearest;
-// Nx3 texture, where N is the number of layers and the first row are the blend modes,
-// the second are the opacities and the third are the origins
+// Nx4 texture, where N is the number of layers and the first row are the blend modes,
+// the second are the opacities, the third are the origins and the fourth are the
+// clipping mask booleans.
 uniform sampler2D metadata : filter_nearest;
 uniform bool origin_x_positive = true;
 uniform bool origin_y_positive = true;
@@ -153,9 +154,9 @@ void fragment() {
 		first_origin.y = -first_origin.y;
 	}
 	float first_opacity = texture(metadata, vec2(0.0, 1.0 / float(metadata_size.y))).r;
-	vec4 col = texture(layers, vec3(UV - first_origin, 0.0));
-	col.a = border_trim(col, UV - first_origin);
-	col.a *= first_opacity;
+	vec4 result_color = texture(layers, vec3(UV - first_origin, 0.0));
+	result_color.a = border_trim(result_color, UV - first_origin);
+	result_color.a *= first_opacity;
 	for(int i = 1; i < metadata_size.x + 1; i++) // Loops through every layer
 	{
 		float blend_mode_float = texture(metadata, vec2(float(i) / float(metadata_size.x), 0.0)).r;
@@ -171,9 +172,12 @@ void fragment() {
 		}
 		float current_opacity = texture(metadata, vec2(float(i) / float(metadata_size.x), 1.0 / float(metadata_size.y))).r;
 		vec2 uv = UV - current_origin;
-		vec4 texture_color = texture(layers, vec3(uv, float(i)));
-		texture_color.a = border_trim(texture_color, uv);
-		col = blend(current_blend_mode, texture_color, col, current_opacity);
+		vec4 layer_color = texture(layers, vec3(uv, float(i)));
+		vec4 prev_layer_color = texture(layers, vec3(uv, float(i - 1)));
+		float clipping_mask = texture(metadata, vec2(float(i) / float(metadata_size.x), 3.0 / float(metadata_size.y))).r;
+		layer_color.a *= prev_layer_color.a * step(0.5, clipping_mask) + 1.0 * step(clipping_mask, 0.5);
+		layer_color.a = border_trim(layer_color, uv);
+		result_color = blend(current_blend_mode, layer_color, result_color, current_opacity);
 	}
-	COLOR = col;
+	COLOR = result_color;
 }

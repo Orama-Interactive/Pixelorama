@@ -36,6 +36,7 @@ var visible := true  ## Sets visibility of the layer.
 var locked := false  ## Images of a locked layer won't be overritten.
 var new_cels_linked := false  ## Determines if new cel of the layer should be linked or not.
 var blend_mode := BlendModes.NORMAL  ## Blend mode of the current layer.
+var clipping_mask := false  ## If [code]true[/code], the layer acts as a clipping mask.
 var opacity := 1.0  ## The opacity of the layer, affects all frames that belong to that layer.
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
 var effects: Array[LayerEffect]  ## An array for non-destructive effects of the layer.
@@ -215,6 +216,7 @@ func serialize() -> Dictionary:
 		"visible": visible,
 		"locked": locked,
 		"blend_mode": blend_mode,
+		"clipping_mask": clipping_mask,
 		"opacity": opacity,
 		"parent": parent.index if is_instance_valid(parent) else -1,
 		"effects": effect_data
@@ -233,13 +235,12 @@ func serialize() -> Dictionary:
 
 ## Sets the layer data according to a curated [Dictionary] obtained from [method serialize].
 func deserialize(dict: Dictionary) -> void:
-	name = dict.name
-	visible = dict.visible
-	locked = dict.locked
-	if dict.has("blend_mode"):
-		blend_mode = dict.blend_mode
-	if dict.has("opacity"):
-		opacity = dict.opacity
+	name = dict.get("name", "")
+	visible = dict.get("visible", true)
+	locked = dict.get("locked", false)
+	blend_mode = dict.get("blend_mode", BlendModes.NORMAL)
+	clipping_mask = dict.get("clipping_mask", false)
+	opacity = dict.get("opacity", 1.0)
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility
