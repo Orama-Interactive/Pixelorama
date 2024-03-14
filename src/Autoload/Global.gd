@@ -12,6 +12,10 @@ signal project_about_to_switch  ## Emitted before a project is about to be switc
 signal project_switched  ## Emitted whenever you switch to some other project tab.
 signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
+## Emitted when the theme is switched. Unlike [signal Control.theme_changed],
+## this doesn't get emitted when a stylebox of a control changes, only when the
+## main theme gets switched to another.
+signal theme_switched
 
 enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
@@ -466,7 +470,7 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 @onready var main_window := get_window()  ## The main Pixelorama [Window].
 ## The control node (aka Main node). It has the [param Main.gd] script attached.
-@onready var control := get_tree().current_scene
+@onready var control := get_tree().current_scene as Control
 
 ## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
