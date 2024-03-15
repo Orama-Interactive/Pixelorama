@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-15 19:37\n"
+"PO-Revision-Date: 2024-03-15 20:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -149,7 +149,7 @@ msgid "Delete"
 msgstr "Удалить"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Удалить навсегда"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
@@ -598,7 +598,7 @@ msgstr "Групповой слой:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D слой:"
 
 msgid "Direction:"
 msgstr "Направление:"
@@ -672,11 +672,11 @@ msgstr "Константа"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "Цветовое пространство:"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Линейный sRGB"
 
 msgid "General"
 msgstr "Общие"
@@ -698,7 +698,7 @@ msgstr "Холст"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Хронология"
 
 msgid "Selection"
 msgstr "Выделение"
@@ -1024,7 +1024,7 @@ msgstr "О Pixeloram'е"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Поддержите развитие Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - пикселизуйте свои мечты!"
@@ -1040,7 +1040,7 @@ msgstr "Сайт"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Исходный код"
 
 msgid "Donate"
 msgstr "Пожертвовать"
@@ -1152,7 +1152,7 @@ msgstr "Белорусский"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Ведущий разработчик"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1187,7 +1187,7 @@ msgid "Save before exiting?"
 msgstr "Сохранить перед выходом?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Проект %s имеет несохраненные изменения. Как хотите продолжить?"
 
 msgid "Save & Exit"
 msgstr "Сохранить и выйти"
@@ -1354,14 +1354,14 @@ msgstr "Выбор цвета для правого инструмента"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Поменять левый и правый цвета местами."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Сбросить цвета по умолчанию (слева черный, справа белый)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Выберите цвет на экране."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1448,7 +1448,7 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Размер изометрической сетки:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
@@ -1603,7 +1603,7 @@ msgstr ""
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "Давление"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
@@ -1619,7 +1619,7 @@ msgstr "Размер"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "Ограничения значений"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
@@ -1627,11 +1627,11 @@ msgstr ""
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "Начало"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "Конец"
 
 msgid "Brush:"
 msgstr "Кисть:"
@@ -1766,7 +1766,7 @@ msgid "Zoom out"
 msgstr "Уменьшить"
 
 msgid "Options"
-msgstr ""
+msgstr "Настройки"
 
 msgid "Options:"
 msgstr "Опции:"
@@ -1812,19 +1812,19 @@ msgid "Current frame:"
 msgstr "Текущий кадр:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Режим анимации:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "Перейти к первому кадру\n"
 
 msgid "Go to the previous frame\n"
-msgstr ""
+msgstr "На предыдущий кадр\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-msgstr ""
+msgstr "Проиграть анимацию задом наперед (с конца в начало)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
 msgstr ""
@@ -1833,7 +1833,7 @@ msgid "Go to the next frame\n"
 msgstr ""
 
 msgid "Jump to the last frame\n"
-msgstr ""
+msgstr "Перейти на последний кадр\n"
 
 msgid "Onion Skinning settings"
 msgstr "Настройки шлейфа соседних кадров"
@@ -2070,7 +2070,7 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Цвет"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
