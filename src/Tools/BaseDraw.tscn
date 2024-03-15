@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ubyatap3sylf"]
+[gd_scene load_steps=7 format=3 uid="uid://ubyatap3sylf"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/BaseDraw.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="3_4bfcu"]
-[ext_resource type="Texture2D" uid="uid://bhkmiijflfqxx" path="res://assets/graphics/misc/value_arrow_up.svg" id="4_8a8ae"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_7u3x0"]
 resource_name = "rotate"
@@ -31,17 +29,7 @@ anti_aliasing = false
 [node name="ToolOptions" instance=ExtResource("2")]
 script = ExtResource("3")
 
-[node name="ExpandButton" type="TextureButton" parent="." index="2" groups=["UIButtons"]]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-mouse_default_cursor_shape = 2
-toggle_mode = true
-texture_normal = ExtResource("3_4bfcu")
-texture_pressed = ExtResource("4_8a8ae")
-
-[node name="Flip" type="HBoxContainer" parent="." index="3"]
-visible = false
+[node name="Flip" type="HBoxContainer" parent="." index="2"]
 layout_mode = 2
 
 [node name="FlipX" type="CheckBox" parent="Flip" index="0"]
@@ -54,8 +42,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Flip Y"
 
-[node name="Rotate" type="HBoxContainer" parent="." index="4"]
-visible = false
+[node name="Rotate" type="HBoxContainer" parent="." index="3"]
 layout_mode = 2
 
 [node name="Rotate90" type="CheckBox" parent="Rotate" index="0"]
@@ -79,7 +66,7 @@ mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 270"
 
-[node name="Brush" type="HBoxContainer" parent="." index="5"]
+[node name="Brush" type="HBoxContainer" parent="." index="4"]
 layout_mode = 2
 alignment = 1
 
@@ -113,13 +100,12 @@ suffix = "px"
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="ColorInterpolation" parent="." index="6" instance=ExtResource("1")]
+[node name="ColorInterpolation" parent="." index="5" instance=ExtResource("1")]
 visible = false
 layout_mode = 2
 tooltip_text = "0: Color from the brush itself, 100: the currently selected color"
 prefix = "Brush color from:"
 
-[connection signal="toggled" from="ExpandButton" to="." method="_on_expand_button_toggled"]
 [connection signal="toggled" from="Flip/FlipX" to="." method="_on_flip_x_toggled"]
 [connection signal="toggled" from="Flip/FlipY" to="." method="_on_flip_y_toggled"]
 [connection signal="toggled" from="Rotate/Rotate90" to="." method="_on_rotate_90_toggled"]
