@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-15 08:13\n"
+"PO-Revision-Date: 2024-03-15 19:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -301,10 +301,10 @@ msgid "Add Layout"
 msgstr "Добавить компоновку"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Копировать из"
 
 msgid "Rename"
-msgstr ""
+msgstr "Переименовать"
 
 msgid "Rename Layout"
 msgstr ""
@@ -1160,7 +1160,7 @@ msgstr "Дизайнер интерфейса"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Авторы"
 
 msgid "Art by: %s"
 msgstr "Художник: %s"
