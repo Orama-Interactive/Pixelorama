@@ -1,13 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://4hp76lf38bc7"]
+[gd_scene load_steps=4 format=3 uid="uid://4hp76lf38bc7"]
 
 [ext_resource type="PackedScene" uid="uid://n40lhf8hm7o1" path="res://src/Tools/BaseShapeDrawer.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/EllipseTool.gd" id="2"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_q7ttl"]
+resource_name = "rotate"
+allow_unpress = true
+
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="Flip" parent="." index="4"]
-visible = false
+[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_q7ttl")
 
-[node name="Rotate" parent="." index="5"]
-visible = false
+[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_q7ttl")
+
+[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_q7ttl")

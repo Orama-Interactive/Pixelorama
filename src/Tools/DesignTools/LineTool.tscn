@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ceahf2toaq47l"]
+[gd_scene load_steps=5 format=3 uid="uid://ceahf2toaq47l"]
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/LineTool.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ko8wf"]
+resource_name = "rotate"
+allow_unpress = true
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
@@ -16,13 +20,16 @@ suffix = "px"
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="Flip" parent="." index="3"]
-visible = false
+[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_ko8wf")
 
-[node name="Rotate" parent="." index="4"]
-visible = false
+[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_ko8wf")
 
-[node name="Brush" parent="." index="5"]
+[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_ko8wf")
+
+[node name="Brush" parent="." index="4"]
 visible = false
 
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]

@@ -130,11 +130,11 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$ColorInterpolation.value = _brush_interpolate
-	$Flip/FlipX.button_pressed = _brush_flip_x
-	$Flip/FlipY.button_pressed = _brush_flip_y
-	$Rotate/Rotate90.button_pressed = _brush_rotate_90
-	$Rotate/Rotate180.button_pressed = _brush_rotate_180
-	$Rotate/Rotate270.button_pressed = _brush_rotate_270
+	$RotationOptions/Flip/FlipX.button_pressed = _brush_flip_x
+	$RotationOptions/Flip/FlipY.button_pressed = _brush_flip_y
+	$RotationOptions/Rotate/Rotate90.button_pressed = _brush_rotate_90
+	$RotationOptions/Rotate/Rotate180.button_pressed = _brush_rotate_180
+	$RotationOptions/Rotate/Rotate270.button_pressed = _brush_rotate_270
 	update_brush()
 
 
@@ -172,8 +172,7 @@ func update_brush() -> void:
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
-	$Flip.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
-	$Rotate.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+	$RotationOptions.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
 
 
 func update_random_image() -> void:

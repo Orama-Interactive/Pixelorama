@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ubyatap3sylf"]
+[gd_scene load_steps=8 format=3 uid="uid://ubyatap3sylf"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/BaseDraw.gd" id="3"]
+[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3_76bek"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_7u3x0"]
 resource_name = "rotate"
@@ -29,44 +30,53 @@ anti_aliasing = false
 [node name="ToolOptions" instance=ExtResource("2")]
 script = ExtResource("3")
 
-[node name="Flip" type="HBoxContainer" parent="." index="2"]
+[node name="RotationOptions" type="VBoxContainer" parent="." index="2"]
+visible = false
+layout_mode = 2
+theme_type_variation = &"CollapsibleContainer"
+script = ExtResource("3_76bek")
+text = "Rotation options"
+
+[node name="Flip" type="HBoxContainer" parent="RotationOptions" index="1"]
+visible = false
 layout_mode = 2
 
-[node name="FlipX" type="CheckBox" parent="Flip" index="0"]
+[node name="FlipX" type="CheckBox" parent="RotationOptions/Flip" index="0"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Flip X"
 
-[node name="FlipY" type="CheckBox" parent="Flip" index="1"]
+[node name="FlipY" type="CheckBox" parent="RotationOptions/Flip" index="1"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Flip Y"
 
-[node name="Rotate" type="HBoxContainer" parent="." index="3"]
+[node name="Rotate" type="HBoxContainer" parent="RotationOptions" index="2"]
+visible = false
 layout_mode = 2
 
-[node name="Rotate90" type="CheckBox" parent="Rotate" index="0"]
+[node name="Rotate90" type="CheckBox" parent="RotationOptions/Rotate" index="0"]
 layout_mode = 2
 tooltip_text = "rotate the brush 90 degrees"
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 90"
 
-[node name="Rotate180" type="CheckBox" parent="Rotate" index="1"]
+[node name="Rotate180" type="CheckBox" parent="RotationOptions/Rotate" index="1"]
 layout_mode = 2
 tooltip_text = "rotate the brush 180 degrees"
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 180"
 
-[node name="Rotate270" type="CheckBox" parent="Rotate" index="2"]
+[node name="Rotate270" type="CheckBox" parent="RotationOptions/Rotate" index="2"]
 layout_mode = 2
 tooltip_text = "rotate the brush 270 degrees"
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
 text = "R 270"
 
-[node name="Brush" type="HBoxContainer" parent="." index="4"]
+[node name="Brush" type="HBoxContainer" parent="." index="3"]
 layout_mode = 2
 alignment = 1
 
@@ -100,17 +110,17 @@ suffix = "px"
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="ColorInterpolation" parent="." index="5" instance=ExtResource("1")]
+[node name="ColorInterpolation" parent="." index="4" instance=ExtResource("1")]
 visible = false
 layout_mode = 2
 tooltip_text = "0: Color from the brush itself, 100: the currently selected color"
 prefix = "Brush color from:"
 
-[connection signal="toggled" from="Flip/FlipX" to="." method="_on_flip_x_toggled"]
-[connection signal="toggled" from="Flip/FlipY" to="." method="_on_flip_y_toggled"]
-[connection signal="toggled" from="Rotate/Rotate90" to="." method="_on_rotate_90_toggled"]
-[connection signal="toggled" from="Rotate/Rotate180" to="." method="_on_rotate_180_toggled"]
-[connection signal="toggled" from="Rotate/Rotate270" to="." method="_on_rotate_270_toggled"]
+[connection signal="toggled" from="RotationOptions/Flip/FlipX" to="." method="_on_flip_x_toggled"]
+[connection signal="toggled" from="RotationOptions/Flip/FlipY" to="." method="_on_flip_y_toggled"]
+[connection signal="toggled" from="RotationOptions/Rotate/Rotate90" to="." method="_on_rotate_90_toggled"]
+[connection signal="toggled" from="RotationOptions/Rotate/Rotate180" to="." method="_on_rotate_180_toggled"]
+[connection signal="toggled" from="RotationOptions/Rotate/Rotate270" to="." method="_on_rotate_270_toggled"]
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]
 [connection signal="value_changed" from="ColorInterpolation" to="." method="_on_InterpolateFactor_value_changed"]
