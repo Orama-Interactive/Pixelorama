@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ubyatap3sylf"]
+[gd_scene load_steps=12 format=3 uid="uid://ubyatap3sylf"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
@@ -7,11 +7,24 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0i4gy"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlpcn"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_024wk"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_51tm8"]
 
 [sub_resource type="Theme" id="Theme_i7q3e"]
 Button/styles/focus = SubResource("StyleBoxEmpty_0i4gy")
-Button/styles/pressed = SubResource("StyleBoxEmpty_dlpcn")
+Button/styles/pressed = SubResource("StyleBoxFlat_024wk")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_51tm8")
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_7u3x0"]
 resource_name = "rotate"
