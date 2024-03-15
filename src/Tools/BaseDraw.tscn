@@ -1,9 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://ubyatap3sylf"]
+[gd_scene load_steps=11 format=3 uid="uid://ubyatap3sylf"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/BaseDraw.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3_76bek"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0i4gy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlpcn"]
+
+[sub_resource type="Theme" id="Theme_i7q3e"]
+Button/styles/focus = SubResource("StyleBoxEmpty_0i4gy")
+Button/styles/pressed = SubResource("StyleBoxEmpty_dlpcn")
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_7u3x0"]
 resource_name = "rotate"
@@ -33,6 +41,7 @@ script = ExtResource("3")
 [node name="RotationOptions" type="VBoxContainer" parent="." index="2"]
 visible = false
 layout_mode = 2
+theme = SubResource("Theme_i7q3e")
 theme_type_variation = &"CollapsibleContainer"
 script = ExtResource("3_76bek")
 text = "Rotation options"
