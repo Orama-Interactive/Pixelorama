@@ -314,6 +314,7 @@ func _on_Direction_item_selected(id: int) -> void:
 	preview_current_frame = 0
 	Export.process_data()
 	set_preview()
+	update_dimensions_label()
 
 
 func _on_Resize_value_changed(value: float) -> void:
