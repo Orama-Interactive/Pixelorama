@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-03-09 01:46\n"
+"PO-Revision-Date: 2024-03-16 02:48\n"
 
 msgid "OK"
 msgstr "確定"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "影格大小"
 
 msgid "Size:"
-msgstr ""
+msgstr "大小"
 
 msgid "Width:"
 msgstr "寬度："
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "檢視"
 
 msgid "Window"
-msgstr ""
+msgstr "視窗"
 
 msgid "Image"
 msgstr "圖片"
@@ -153,16 +153,16 @@ msgstr ""
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "移到垃圾桶"
 
 msgid "New Brush"
-msgstr ""
+msgstr "新增筆刷"
 
 msgid "Scale Image"
 msgstr "調整尺寸"
 
 msgid "Pixels"
-msgstr ""
+msgstr "像素"
 
 msgid "Percentage"
 msgstr ""
@@ -301,7 +301,7 @@ msgid "Add Layout"
 msgstr ""
 
 msgid "Copy from"
-msgstr ""
+msgstr "複製至"
 
 msgid "Rename"
 msgstr "重新命名"
