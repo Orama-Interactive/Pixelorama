@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-02-27 15:20\n"
+"PO-Revision-Date: 2024-03-10 00:28\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -625,6 +625,14 @@ msgstr "Baris"
 
 msgid "Rows:"
 msgstr "Baris:"
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
+msgid "Tags by column"
+msgstr "Tag sesuai kolom"
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
+msgid "Tags by row"
+msgstr "Tag sesuai barisan"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -1656,7 +1664,16 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "Warnanya ditimpa dan tak dicampur. Opsi ini hanya relevan bagi warna yang tidak sepenuhnya legap (opaque)"
 
 msgid "Pixel Perfect"
-msgstr "Pas Sesuai Piksel"
+msgstr "Pas Piksel"
+
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pas Sesuai Piksel\n"
+"Membuat garis terlihat mulus dengan menghapus piksel tambahan di tepinya"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr "Kuncikan alfa"
 
 msgid "Fill inside"
 msgstr "Warnai dalamnya"
@@ -1672,11 +1689,6 @@ msgstr "Celah X:"
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "Celah Y:"
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Pas Sesuai Piksel\n"
-"Membuat garis terlihat mulus dengan menghapus piksel tambahan di tepinya"
 
 msgid "Fill Shape"
 msgstr "Warnai Bentuk"
@@ -2077,7 +2089,7 @@ msgid "Toggle layer's visibility"
 msgstr "Cetik keterlihatan lapisan"
 
 msgid "Lock/unlock layer"
-msgstr "Mengunci/buka lapisan"
+msgstr "Kuncikan/buka lapisan"
 
 msgid "Frame: %s, Layer: %s"
 msgstr "Bingkai: %s, Lapisan: %s"
@@ -2427,6 +2439,10 @@ msgstr "Selang waktu simpan otomatis:"
 
 msgid "minute(s)"
 msgstr "menit"
+
+#. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
+msgid "Split layers"
+msgstr "Pisah lapisan"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"

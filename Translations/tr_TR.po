@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-02-26 22:38\n"
+"PO-Revision-Date: 2024-03-09 12:49\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -624,6 +624,14 @@ msgstr "Satırlar"
 
 msgid "Rows:"
 msgstr "Sıralar:"
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
+msgid "Tags by column"
+msgstr "Sütuna göre etiketle"
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
+msgid "Tags by row"
+msgstr "Satıra göre etiketle"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -1657,6 +1665,15 @@ msgstr "Renkleri karıştırmak yerine rengin üzerine yazar. Bu seçenek sadece
 msgid "Pixel Perfect"
 msgstr "Mükemmel Piksel"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Mükemmel Piksel\n"
+"Kenarlardaki fazla pikselleri kaldırarak çizgileri pürüzsüzleştirir"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr "Alfayı kilitle"
+
 msgid "Fill inside"
 msgstr "İçini doldur"
 
@@ -1671,11 +1688,6 @@ msgstr "Boşluk X:"
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "Boşluk Y:"
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Mükemmel Piksel\n"
-"Kenarlardaki fazla pikselleri kaldırarak çizgileri pürüzsüzleştirir"
 
 msgid "Fill Shape"
 msgstr "Şekli Doldur"
@@ -2426,6 +2438,10 @@ msgstr "Otomatik kaydetme sıklığı:"
 
 msgid "minute(s)"
 msgstr "dakika"
+
+#. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
+msgid "Split layers"
+msgstr "Katmanları ayır"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"

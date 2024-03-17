@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-02-26 18:36\n"
+"PO-Revision-Date: 2024-03-15 20:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -149,7 +149,7 @@ msgid "Delete"
 msgstr "Удалить"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Удалить навсегда"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
@@ -301,10 +301,10 @@ msgid "Add Layout"
 msgstr "Добавить компоновку"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Копировать из"
 
 msgid "Rename"
-msgstr ""
+msgstr "Переименовать"
 
 msgid "Rename Layout"
 msgstr ""
@@ -598,7 +598,7 @@ msgstr "Групповой слой:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D слой:"
 
 msgid "Direction:"
 msgstr "Направление:"
@@ -623,6 +623,14 @@ msgstr "Строки"
 
 msgid "Rows:"
 msgstr "Строки:"
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
+msgid "Tags by column"
+msgstr ""
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
+msgid "Tags by row"
+msgstr ""
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -664,11 +672,11 @@ msgstr "Константа"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "Цветовое пространство:"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Линейный sRGB"
 
 msgid "General"
 msgstr "Общие"
@@ -690,7 +698,7 @@ msgstr "Холст"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Хронология"
 
 msgid "Selection"
 msgstr "Выделение"
@@ -1016,7 +1024,7 @@ msgstr "О Pixeloram'е"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Поддержите развитие Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - пикселизуйте свои мечты!"
@@ -1032,7 +1040,7 @@ msgstr "Сайт"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Исходный код"
 
 msgid "Donate"
 msgstr "Пожертвовать"
@@ -1144,7 +1152,7 @@ msgstr "Белорусский"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Ведущий разработчик"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1152,7 +1160,7 @@ msgstr "Дизайнер интерфейса"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Авторы"
 
 msgid "Art by: %s"
 msgstr "Художник: %s"
@@ -1179,7 +1187,7 @@ msgid "Save before exiting?"
 msgstr "Сохранить перед выходом?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Проект %s имеет несохраненные изменения. Как хотите продолжить?"
 
 msgid "Save & Exit"
 msgstr "Сохранить и выйти"
@@ -1346,14 +1354,14 @@ msgstr "Выбор цвета для правого инструмента"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Поменять левый и правый цвета местами."
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Сбросить цвета по умолчанию (слева черный, справа белый)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Выберите цвет на экране."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1440,7 +1448,7 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Размер изометрической сетки:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
@@ -1595,7 +1603,7 @@ msgstr ""
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "Давление"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
@@ -1611,7 +1619,7 @@ msgstr "Размер"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "Ограничения значений"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
@@ -1619,11 +1627,11 @@ msgstr ""
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "Начало"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "Конец"
 
 msgid "Brush:"
 msgstr "Кисть:"
@@ -1655,6 +1663,15 @@ msgstr "Перезаписывает цвет вместо смешивания.
 msgid "Pixel Perfect"
 msgstr "Пиксельная точность"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "\"С точностью до пикселя\"\n"
+"Делает линии плавными, удаляя лишние пиксели по краям"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "Залить внутри"
 
@@ -1669,11 +1686,6 @@ msgstr ""
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr ""
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "\"С точностью до пикселя\"\n"
-"Делает линии плавными, удаляя лишние пиксели по краям"
 
 msgid "Fill Shape"
 msgstr "Заполнить фигуру"
@@ -1754,7 +1766,7 @@ msgid "Zoom out"
 msgstr "Уменьшить"
 
 msgid "Options"
-msgstr ""
+msgstr "Настройки"
 
 msgid "Options:"
 msgstr "Опции:"
@@ -1800,19 +1812,19 @@ msgid "Current frame:"
 msgstr "Текущий кадр:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Режим анимации:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "Перейти к первому кадру\n"
 
 msgid "Go to the previous frame\n"
-msgstr ""
+msgstr "На предыдущий кадр\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-msgstr ""
+msgstr "Проиграть анимацию задом наперед (с конца в начало)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
 msgstr ""
@@ -1821,7 +1833,7 @@ msgid "Go to the next frame\n"
 msgstr ""
 
 msgid "Jump to the last frame\n"
-msgstr ""
+msgstr "Перейти на последний кадр\n"
 
 msgid "Onion Skinning settings"
 msgstr "Настройки шлейфа соседних кадров"
@@ -2058,7 +2070,7 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Цвет"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
@@ -2424,6 +2436,10 @@ msgstr "Интервал автосохранения:"
 
 msgid "minute(s)"
 msgstr "мин."
+
+#. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
+msgid "Split layers"
+msgstr ""
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
@@ -2873,11 +2889,11 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr ""
+msgstr "Экспоненциально (мощность Х)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Квадратный корень"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
@@ -2901,45 +2917,45 @@ msgstr ""
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Монохром"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Удерживайте Shift, чтобы мгновенно удалить"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Переместить выбранное изображение вправо"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Переместить выбранное изображение влево"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Выбор изображения на холсте"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Переместить выбранное изображение"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Повернуть выбранное изображение"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Масштабировать выбранное изображение"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Включено"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr ""
+msgstr "Эффекты слоя"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "Добавить эффект"
 

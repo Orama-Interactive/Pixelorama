@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-02-26 18:35\n"
+"PO-Revision-Date: 2024-03-09 01:45\n"
 
 msgid "OK"
 msgstr "예"
@@ -622,6 +622,14 @@ msgstr "행"
 
 msgid "Rows:"
 msgstr "행:"
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
+msgid "Tags by column"
+msgstr ""
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
+msgid "Tags by row"
+msgstr ""
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -1652,6 +1660,15 @@ msgstr "색을 섞는 대신 덮어씁니다. 이 옵션은 완전 불투명한 
 msgid "Pixel Perfect"
 msgstr "픽셀 퍼펙트"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "픽셀 퍼펙트\n"
+"모서리의 불필요한 픽셀을 제거해서 선을 부드럽게 만듭니다"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "안에 채우기"
 
@@ -1666,11 +1683,6 @@ msgstr ""
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr ""
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "픽셀 퍼펙트\n"
-"모서리의 불필요한 픽셀을 제거해서 선을 부드럽게 만듭니다"
 
 msgid "Fill Shape"
 msgstr "도형 채우기"
@@ -2420,6 +2432,10 @@ msgstr "자동 저장 주기:"
 
 msgid "minute(s)"
 msgstr "분"
+
+#. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
+msgid "Split layers"
+msgstr ""
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"

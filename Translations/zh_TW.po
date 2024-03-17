@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-02-26 18:36\n"
+"PO-Revision-Date: 2024-03-16 02:48\n"
 
 msgid "OK"
 msgstr "確定"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "影格大小"
 
 msgid "Size:"
-msgstr ""
+msgstr "大小"
 
 msgid "Width:"
 msgstr "寬度："
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "檢視"
 
 msgid "Window"
-msgstr ""
+msgstr "視窗"
 
 msgid "Image"
 msgstr "圖片"
@@ -153,16 +153,16 @@ msgstr ""
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "移到垃圾桶"
 
 msgid "New Brush"
-msgstr ""
+msgstr "新增筆刷"
 
 msgid "Scale Image"
 msgstr "調整尺寸"
 
 msgid "Pixels"
-msgstr ""
+msgstr "像素"
 
 msgid "Percentage"
 msgstr ""
@@ -301,7 +301,7 @@ msgid "Add Layout"
 msgstr ""
 
 msgid "Copy from"
-msgstr ""
+msgstr "複製至"
 
 msgid "Rename"
 msgstr "重新命名"
@@ -620,6 +620,14 @@ msgstr "列"
 
 msgid "Rows:"
 msgstr "列："
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
+msgid "Tags by column"
+msgstr ""
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
+msgid "Tags by row"
+msgstr ""
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -1615,6 +1623,14 @@ msgstr "覆寫顏色而不是混合顏色，此選項只適用於半透明的顏
 msgid "Pixel Perfect"
 msgstr "完美像素"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr ""
 
@@ -1628,10 +1644,6 @@ msgstr ""
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
@@ -2381,6 +2393,10 @@ msgstr "自動儲存間隔："
 
 msgid "minute(s)"
 msgstr "分鐘"
+
+#. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
+msgid "Split layers"
+msgstr ""
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
