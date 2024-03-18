@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-15 20:33\n"
+"PO-Revision-Date: 2024-03-18 06:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,11 +169,11 @@ msgstr "Процент"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Обрезать по выбранному"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Обрезать по содержимому"
 
 msgid "Resize Canvas"
 msgstr "Изменить размер холста"
@@ -182,7 +182,7 @@ msgid "Offset Image"
 msgstr ""
 
 msgid "Offset:"
-msgstr ""
+msgstr "Смещение:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
@@ -190,7 +190,7 @@ msgstr ""
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Центрировать кадры"
 
 msgid "Rotate Image"
 msgstr "Повернуть изображение"
@@ -307,11 +307,11 @@ msgid "Rename"
 msgstr "Переименовать"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Переименовать слой"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr ""
+msgstr "Текущий слой"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Вы уверены, что хотите удалить эту компоновку?"
@@ -460,7 +460,7 @@ msgstr ""
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "Обновить"
 
 msgid "Start frame:"
 msgstr "Начальный кадр:"
@@ -1815,7 +1815,7 @@ msgid "Animation mode:"
 msgstr "Режим анимации:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Текущий кадр как спрайт лист"
 
 msgid "Jump to the first frame\n"
 msgstr "Перейти к первому кадру\n"
@@ -1827,10 +1827,10 @@ msgid "Play the animation backwards (from end to beginning)\n"
 msgstr "Проиграть анимацию задом наперед (с конца в начало)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-msgstr ""
+msgstr "Проиграть анимацию по умолчанию (с начала)\n"
 
 msgid "Go to the next frame\n"
-msgstr ""
+msgstr "На следующий кадр\n"
 
 msgid "Jump to the last frame\n"
 msgstr "Перейти на последний кадр\n"
@@ -2030,19 +2030,19 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Мягкий свет"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Жесткий свет"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Инверсия"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Разница"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
@@ -2545,31 +2545,31 @@ msgstr ""
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Отсортировать по оттенку"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Отсортировать по насыщенности"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Отсортировать по значению"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Отсортировать по красному"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Отсортировать по зеленому"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Отсортировать по синему"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Отсортировать по алфавиту"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Палитра с таким названием по такому пути уже существует!"
