@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-18 06:36\n"
+"PO-Revision-Date: 2024-03-18 08:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2677,11 +2677,11 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Цилиндр"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Призма"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
@@ -2692,7 +2692,7 @@ msgid "Plane"
 msgstr ""
 
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2711,16 +2711,16 @@ msgid "Custom model"
 msgstr ""
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Выбранный объект:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Добавить новый объект"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Удалить объект"
 
 msgid "Camera"
-msgstr ""
+msgstr "Камера"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
@@ -2728,7 +2728,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Перспектива"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
@@ -2825,7 +2825,7 @@ msgid "Negative:"
 msgstr ""
 
 msgid "Shadow:"
-msgstr ""
+msgstr "Тень:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
@@ -2845,11 +2845,11 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
-msgstr ""
+msgstr "Начальное значение:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
-msgstr ""
+msgstr "Конечное значение:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
