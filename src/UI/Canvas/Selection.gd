@@ -742,7 +742,7 @@ func paste(in_place := false) -> void:
 	project.selection_offset = clipboard.selection_offset
 	big_bounding_rectangle = clipboard.big_bounding_rectangle
 	if not in_place:  # If "Paste" is selected, and not "Paste in Place"
-		var camera_center := Global.camera.get_screen_center_position()
+		var camera_center := Global.camera.camera_screen_center
 		camera_center -= Vector2(big_bounding_rectangle.size) / 2.0
 		var max_pos := project.size - big_bounding_rectangle.size
 		if max_pos.x >= 0:

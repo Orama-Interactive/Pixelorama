@@ -11,6 +11,9 @@ var last: Vector2
 
 func _ready() -> void:
 	Global.project_switched.connect(queue_redraw)
+	Global.camera.zoom_changed.connect(queue_redraw)
+	Global.camera.rotation_changed.connect(queue_redraw)
+	Global.camera.offset_changed.connect(queue_redraw)
 
 
 func _gui_input(event: InputEvent) -> void:

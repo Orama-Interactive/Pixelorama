@@ -491,11 +491,11 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 	"PreviewViewportContainer"
 )
 ## Camera of the main canvas. It has the [param CameraMovement.gd] script attached.
-@onready var camera: Camera2D = main_viewport.find_child("Camera2D")
+@onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
 ## Camera of the second canvas preview. It has the [param CameraMovement.gd] script attached.
-@onready var camera2: Camera2D = second_viewport.find_child("Camera2D2")
+@onready var camera2: CanvasCamera = second_viewport.find_child("Camera2D2")
 ## Camera of the canvas preview. It has the [param CameraMovement.gd] script attached.
-@onready var camera_preview: Camera2D = control.find_child("CameraPreview")
+@onready var camera_preview: CanvasCamera = control.find_child("CameraPreview")
 ## Array of cameras used in Pixelorama.
 @onready var cameras := [camera, camera2, camera_preview]
 ## Horizontal ruler of the main canvas. It has the [param HorizontalRuler.gd] script attached.

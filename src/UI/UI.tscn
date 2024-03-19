@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://src/UI/Canvas/Rulers/VerticalRuler.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="5"]
 [ext_resource type="Script" path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" id="6"]
-[ext_resource type="Script" path="res://src/UI/Canvas/CameraMovement.gd" id="7"]
+[ext_resource type="Script" path="res://src/UI/Canvas/CanvasCamera.gd" id="7"]
 [ext_resource type="Shader" path="res://src/Shaders/Greyscale.gdshader" id="8"]
 [ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
 [ext_resource type="PackedScene" uid="uid://wo0hqxkst808" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" id="10"]
@@ -322,8 +322,7 @@ anchors_preset = 0
 
 [node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("19")]
 
-[node name="Camera2D" type="Camera2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport"]
-zoom = Vector2(0.15, 0.15)
+[node name="Camera2D" type="Node2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport"]
 script = ExtResource("7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport"]
@@ -359,8 +358,7 @@ anchors_preset = 0
 
 [node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("2")]
 
-[node name="Camera2D2" type="Camera2D" parent="DockableContainer/Second Canvas/SubViewport"]
-zoom = Vector2(0.15, 0.15)
+[node name="Camera2D2" type="Node2D" parent="DockableContainer/Second Canvas/SubViewport"]
 script = ExtResource("7")
 index = 1
 
