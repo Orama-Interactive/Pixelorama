@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-18 08:01\n"
+"PO-Revision-Date: 2024-03-19 06:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -350,7 +350,7 @@ msgstr "Показать эффекты слоя"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Привязка к объекту"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
@@ -2665,15 +2665,15 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Прямоугольник"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Сфера"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Капсула"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
@@ -2704,7 +2704,7 @@ msgstr ""
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Точечный источник света"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
