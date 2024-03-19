@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-19 10:04\n"
+"PO-Revision-Date: 2024-03-19 16:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -759,7 +759,7 @@ msgid "None"
 msgstr "Нет"
 
 msgid "Affect Brush's Alpha"
-msgstr "Влияние на альфу кисти"
+msgstr "Влияние на прозрачность кисти"
 
 msgid "Color:"
 msgstr "Цвет:"
@@ -1671,7 +1671,7 @@ msgstr "Pixel Perfect\n"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr "Зафиксировать альфу"
+msgstr "Зафиксировать прозрачность"
 
 msgid "Fill inside"
 msgstr "Заполнить"
