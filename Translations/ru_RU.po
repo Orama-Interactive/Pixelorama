@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-19 08:33\n"
+"PO-Revision-Date: 2024-03-19 10:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -180,7 +180,7 @@ msgid "Resize Canvas"
 msgstr "Изменить размер холста"
 
 msgid "Offset Image"
-msgstr "Смещение изображения"
+msgstr "Сместить изображение"
 
 msgid "Offset:"
 msgstr "Смещение:"
@@ -233,7 +233,7 @@ msgid "Preferences"
 msgstr "Настройки"
 
 msgid "Tile Mode"
-msgstr "Бесшовный режим"
+msgstr "Режим тайла"
 
 msgid "Tile Mode Offsets"
 msgstr "Сдвиг в бесшовном режиме"
@@ -479,7 +479,7 @@ msgid "Brush type:"
 msgstr "Тип кисти:"
 
 msgid "File brush"
-msgstr "Кисть файла"
+msgstr "Файл кисти"
 
 msgid "Project brush"
 msgstr "Кисть проекта"
@@ -497,7 +497,7 @@ msgid "Export Sprite"
 msgstr "Экспортировать спрайт"
 
 msgid "File Exists, Overwrite?"
-msgstr "Файл существует, перезаписать?"
+msgstr "Файл уже существует, перезаписать?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
@@ -505,7 +505,7 @@ msgstr "Указанные ниже файлы уже существуют. Пе
 "%s"
 
 msgid "Directory path is not valid!"
-msgstr "Недопустимый путь к каталогу!"
+msgstr "Недопустимый путь к папке!"
 
 msgid "File name is not valid!"
 msgstr "Неправильное имя файла!"
@@ -657,13 +657,13 @@ msgid "Interpolation:"
 msgstr "Интерполяция:"
 
 msgid "Nearest"
-msgstr "Ближайший"
+msgstr "Ближайшая"
 
 msgid "Bilinear"
-msgstr "Бинарный"
+msgstr "Билинейная"
 
 msgid "Cubic"
-msgstr "Кубический"
+msgstr "Кубическая"
 
 msgid "Trilinear"
 msgstr "Трилинейный"
@@ -677,7 +677,7 @@ msgstr "Цветовое пространство:"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr "Линейный sRGB"
+msgstr "Линейное sRGB"
 
 msgid "General"
 msgstr "Общие"
@@ -724,11 +724,11 @@ msgid "Cursors"
 msgstr "Курсоры"
 
 msgid "Indicators"
-msgstr "Индикатор"
+msgstr "Индикаторы"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr "Следует перезапустить Pixeloram’у, чтобы применить изменения."
+msgstr "Для применения изменений перезапустите Pixeloram’у."
 
 msgid "On"
 msgstr "Вкл"
@@ -927,10 +927,10 @@ msgid "Shape:"
 msgstr "Форма:"
 
 msgid "Linear"
-msgstr "Линейный"
+msgstr "Линейная"
 
 msgid "Radial"
-msgstr "Радиальный"
+msgstr "Радиальная"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
@@ -1009,13 +1009,13 @@ msgid "View Splash Screen"
 msgstr "Экран приветствия"
 
 msgid "Online Docs"
-msgstr "Онлайн-документация"
+msgstr "Онлайн документация"
 
 msgid "Issue Tracker"
-msgstr "Баг-трекер"
+msgstr "Баг трекер"
 
 msgid "Open Logs Folder"
-msgstr "Открыть папку журналов"
+msgstr "Открыть папку с логами"
 
 msgid "Changelog"
 msgstr "Список изменений"
@@ -1034,7 +1034,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Разработано Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "©2019-настоящее время Orama Interactive и участники"
+msgstr "©2019-2024 Orama Interactive и участники"
 
 msgid "Website"
 msgstr "Сайт"
@@ -1662,19 +1662,19 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "Перезаписывает цвет вместо смешивания. Этот параметр применим только к цветам, которые не являются полностью непрозрачными"
 
 msgid "Pixel Perfect"
-msgstr "Пиксельная точность"
+msgstr "Pixel Perfect"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "\"С точностью до пикселя\"\n"
+msgstr "Pixel Perfect\n"
 "Делает линии плавными, удаляя лишние пиксели по краям"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr "Зафиксировать альфа"
+msgstr "Зафиксировать альфу"
 
 msgid "Fill inside"
-msgstr "Залить внутри"
+msgstr "Заполнить"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
@@ -1844,8 +1844,8 @@ msgstr "Включить/выключить шлейф кадров"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Сколько кадров в секунду для просмотра анимации?\n"
-"Большее число кадров в секунду ускорит анимацию."
+msgstr "Количество кадров в секунду анимации.\n"
+"Больше кадров - плавнее анимация."
 
 msgid "No loop"
 msgstr "Не зацикливать"
@@ -1857,7 +1857,7 @@ msgid "Ping-pong loop"
 msgstr "Туда-сюда"
 
 msgid "Onion Skinning:"
-msgstr "Шлейф смежных кадров:"
+msgstr "Калькирование:"
 
 msgid "Past Frames"
 msgstr "Предыдущие кадры"
@@ -1968,11 +1968,11 @@ msgstr "Создать новый слой"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr "Добавить Пиксельный cлой"
+msgstr "Добавить пиксельный cлой"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr "Добавить Групповой cлой"
+msgstr "Добавить групповой cлой"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
@@ -2098,7 +2098,7 @@ msgstr "Включить/отключить автоматическую при�
 "Содержание привязанных ячеей используется в нескольких кадрах"
 
 msgid "Expand/collapse group"
-msgstr "Развернуть/свернуть"
+msgstr "Развернуть/свернуть группу"
 
 msgid "Palette"
 msgstr "Палитра"
@@ -2261,19 +2261,19 @@ msgid "Get colors only from selection"
 msgstr "Получить цвета только из выделенного"
 
 msgid "Get colors from"
-msgstr "Получить цвета от"
+msgstr "Получить цвета из"
 
 msgid "Patrons:"
-msgstr "Меценаты:"
+msgstr "Материальная поддержка (Patreon):"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Хотите, чтобы ваше имя или компания были показаны на заставке?"
 
 msgid "Become a Platinum Sponsor"
-msgstr "Стать Платиновым Спонсором"
+msgstr "Стать платиновым спонсором"
 
 msgid "Become a Gold Sponsor"
-msgstr "Стать Золотым Спонсором"
+msgstr "Стать золотым спонсором"
 
 msgid "Become a Patron"
 msgstr "Стать спонсором"
@@ -2351,7 +2351,7 @@ msgid "Zoom"
 msgstr "Масштаб"
 
 msgid "Pan"
-msgstr "Сдвиг"
+msgstr "Рука"
 
 msgid "Color Picker"
 msgstr "Выбор цвета (пипетка)"
@@ -2378,7 +2378,7 @@ msgid "Ellipse Tool"
 msgstr "Рисование эллипсов"
 
 msgid "Switch Colors"
-msgstr "Сменить цвета"
+msgstr "Переключить цвета"
 
 msgid "Set the shortcut"
 msgstr "Выставить горячую(ие) клавишу(и)"
@@ -2658,7 +2658,9 @@ msgstr "Справа:"
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Зафиксированный размер.\n\n"
+"При включении инструмента на холсте прямоугольник обрезки будет только перемещаться.\n\n"
+"При отключении инструмента на холсте прямоугольник будет нарисован."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
@@ -2686,7 +2688,7 @@ msgstr "Призма"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr "Кисть"
+msgstr "Тороид"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
@@ -2854,39 +2856,39 @@ msgstr "Конечное значение:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
-msgstr ""
+msgstr "Тип ease-анимации:"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr ""
+msgstr "Начинается медленно и ускоряется к концу"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr ""
+msgstr "Начинается быстро и замедляется к концу"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr ""
+msgstr "Медленно в конце и в начале, быстро в середине"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr ""
+msgstr "Быстро в конце и в начале, медленно в середине"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
-msgstr ""
+msgstr "Квадратичная (во 2 степени)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Cubic (power of 3)"
-msgstr ""
+msgstr "Кубическая (в 3 степени)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr ""
+msgstr "Биквадратная (в 4 степени)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr ""
+msgstr "Пятый порядок (в 5 степени)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
@@ -2906,15 +2908,15 @@ msgstr "Вибрирование по краям"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr ""
+msgstr "Прыжок в конце"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "Обратный отскок в конце"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "Пружинная анимация в конце"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
