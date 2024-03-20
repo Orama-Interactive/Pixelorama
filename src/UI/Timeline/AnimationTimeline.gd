@@ -54,6 +54,7 @@ var layer_effect_settings: AcceptDialog:
 
 func _ready() -> void:
 	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
+	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 	cel_size = min_cel_size
 	add_layer_list.get_popup().id_pressed.connect(add_layer)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
