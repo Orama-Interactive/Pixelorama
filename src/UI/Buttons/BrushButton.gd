@@ -4,7 +4,7 @@ var brush = Global.brushes_popup.Brush.new()
 
 
 func _ready() -> void:
-	Tools.flip_rotate.connect(_flip_rotate_updated)
+	Tools.flip_rotated.connect(_flip_rotate_updated)
 
 
 func _on_BrushButton_pressed() -> void:

@@ -36,6 +36,7 @@ layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 script = ExtResource("3_76bek")
 text = "Rotation options"
+flat = true
 
 [node name="Flip" type="HBoxContainer" parent="RotationOptions" index="1"]
 visible = false

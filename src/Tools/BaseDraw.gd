@@ -59,7 +59,7 @@ func _on_BrushType_pressed() -> void:
 		if child is GridContainer:
 			child.columns = columns
 	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
-	Tools.flip_rotate.emit(
+	Tools.flip_rotated.emit(
 		_brush_flip_x, _brush_flip_y, _brush_rotate_90, _brush_rotate_180, _brush_rotate_270
 	)
 
