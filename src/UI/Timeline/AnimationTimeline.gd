@@ -4,6 +4,7 @@ signal animation_started(forward: bool)
 signal animation_finished
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
+const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 
 var is_animation_running := false
 var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
@@ -17,6 +18,12 @@ var min_cel_size := 36
 var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
+var layer_effect_settings: AcceptDialog:
+	get:
+		if not is_instance_valid(layer_effect_settings):
+			layer_effect_settings = load(LAYER_FX_SCENE_PATH).instantiate()
+			add_child(layer_effect_settings)
+		return layer_effect_settings
 
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
 @onready var tag_spacer := %TagSpacer as Control
@@ -940,13 +947,11 @@ func _on_MergeDownLayer_pressed() -> void:
 		var top_image := top_layer.display_effects(top_cel)
 		var bottom_cel := frame.cels[bottom_layer.index]
 		var textures: Array[Image] = []
-		var metadata_image := Image.create(2, 3, false, Image.FORMAT_R8)
 		textures.append(bottom_cel.get_image())
-		metadata_image.set_pixel(0, 1, Color(1.0, 0.0, 0.0, 0.0))
 		textures.append(top_image)
-		metadata_image.set_pixel(1, 0, Color(top_layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
-		var opacity := frame.cels[top_layer.index].get_final_opacity(top_layer)
-		metadata_image.set_pixel(1, 1, Color(opacity, 0.0, 0.0, 0.0))
+		var metadata_image := Image.create(2, 4, false, Image.FORMAT_R8)
+		DrawingAlgos.set_layer_metadata_image(bottom_layer, bottom_cel, metadata_image, 0)
+		DrawingAlgos.set_layer_metadata_image(top_layer, top_cel, metadata_image, 1)
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
 		var params := {
@@ -990,12 +995,9 @@ func _on_MergeDownLayer_pressed() -> void:
 
 func _on_OpacitySlider_value_changed(value: float) -> void:
 	var new_opacity := value / 100.0
-	var current_layer_idx := Global.current_project.current_layer
-	# Also update all selected frames.
 	for idx_pair in Global.current_project.selected_cels:
-		if idx_pair[1] == current_layer_idx:
-			var layer := Global.current_project.layers[current_layer_idx]
-			layer.opacity = new_opacity
+		var layer := Global.current_project.layers[idx_pair[1]]
+		layer.opacity = new_opacity
 	Global.canvas.queue_redraw()
 
 
@@ -1169,5 +1171,5 @@ func project_cel_removed(frame: int, layer: int) -> void:
 
 
 func _on_layer_fx_pressed() -> void:
-	$LayerEffectsSettings.popup_centered()
+	layer_effect_settings.popup_centered()
 	Global.dialog_open(true)

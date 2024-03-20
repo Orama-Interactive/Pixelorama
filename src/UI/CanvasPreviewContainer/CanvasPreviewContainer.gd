@@ -2,7 +2,7 @@ extends PanelContainer
 
 @onready var preview_zoom_slider := $VBox/HBox/VBoxContainer/PreviewZoomSlider as VSlider
 @onready var canvas_preview := $"%CanvasPreview" as Node2D
-@onready var camera := $"%CameraPreview" as Camera2D
+@onready var camera := $"%CameraPreview" as CanvasCamera
 @onready var play_button := $"%PlayButton" as Button
 @onready var start_frame := $"%StartFrame" as ValueSlider
 @onready var end_frame := $"%EndFrame" as ValueSlider

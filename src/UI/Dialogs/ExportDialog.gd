@@ -2,7 +2,7 @@ extends ConfirmationDialog
 
 ## Called when user resumes export after filename collision
 signal resume_export_function
-signal about_to_preview(Dictionary)
+signal about_to_preview(dict: Dictionary)
 
 var preview_current_frame := 0
 var preview_frames: Array[Texture2D] = []
@@ -24,8 +24,7 @@ var spritesheet_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG
 ]
 
-var _preview_images: Array[Image]
-var _preview_durations: PackedFloat32Array
+var _preview_images: Array[Export.ProcessedImage]
 
 @onready var tabs: TabBar = $VBoxContainer/TabBar
 @onready var checker: ColorRect = $"%TransparentChecker"
@@ -89,30 +88,25 @@ func show_tab() -> void:
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
-			if Export.orientation == Export.Orientation.ROWS:
-				spritesheet_lines_count_label.text = "Columns:"
-			else:
-				spritesheet_lines_count_label.text = "Rows:"
 			get_tree().call_group("ExportSpritesheetOptions", "show")
+			_handle_orientation_ui()
 	set_preview()
 	update_dimensions_label()
 	tabs.current_tab = Export.current_tab
 
 
 func set_preview() -> void:
-	_preview_images = Export.processed_images.duplicate()
-	_preview_durations = Export.durations.duplicate()
+	_preview_images = Export.processed_images
 	var preview_data = {
 		"exporter_id": Global.current_project.file_format,
 		"export_tab": Export.current_tab,
 		"preview_images": _preview_images,
-		"durations": _preview_durations
 	}
 	about_to_preview.emit(preview_data)
 	remove_previews()
 	if _preview_images.size() == 1:
 		previews.columns = 1
-		add_image_preview(_preview_images[0])
+		add_image_preview(_preview_images[0].image)
 	else:
 		if Export.is_single_file_format():
 			previews.columns = 1
@@ -120,7 +114,7 @@ func set_preview() -> void:
 		else:
 			previews.columns = ceili(sqrt(_preview_images.size()))
 			for i in range(_preview_images.size()):
-				add_image_preview(_preview_images[i], i + 1)
+				add_image_preview(_preview_images[i].image, i + 1)
 
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
@@ -143,7 +137,7 @@ func add_animated_preview() -> void:
 	preview_frames = []
 
 	for processed_image in _preview_images:
-		var texture := ImageTexture.create_from_image(processed_image)
+		var texture := ImageTexture.create_from_image(processed_image.image)
 		preview_frames.push_back(texture)
 
 	var container := create_preview_container()
@@ -155,7 +149,7 @@ func add_animated_preview() -> void:
 
 	previews.add_child(container)
 	frame_timer.set_one_shot(true)  # wait_time can't change correctly if the timer is playing
-	frame_timer.wait_time = _preview_durations[preview_current_frame]
+	frame_timer.wait_time = _preview_images[preview_current_frame].duration
 	frame_timer.start()
 
 
@@ -242,7 +236,7 @@ func create_layer_list() -> void:
 
 func update_dimensions_label() -> void:
 	if _preview_images.size() > 0:
-		var new_size: Vector2 = _preview_images[0].get_size() * (Export.resize / 100.0)
+		var new_size: Vector2 = _preview_images[0].image.get_size() * (Export.resize / 100.0)
 		dimension_label.text = str(new_size.x, "×", new_size.y)
 
 
@@ -309,14 +303,25 @@ func _on_Tabs_tab_clicked(tab: Export.ExportTab) -> void:
 
 func _on_Orientation_item_selected(id: Export.Orientation) -> void:
 	Export.orientation = id
-	if Export.orientation == Export.Orientation.ROWS:
-		spritesheet_lines_count_label.text = "Columns:"
-	else:
-		spritesheet_lines_count_label.text = "Rows:"
+	_handle_orientation_ui()
 	spritesheet_lines_count.value = Export.frames_divided_by_spritesheet_lines()
 	Export.process_spritesheet()
 	update_dimensions_label()
 	set_preview()
+
+
+func _handle_orientation_ui() -> void:
+	if Export.orientation == Export.Orientation.ROWS:
+		spritesheet_lines_count_label.visible = true
+		spritesheet_lines_count.visible = true
+		spritesheet_lines_count_label.text = "Columns:"
+	elif Export.orientation == Export.Orientation.COLUMNS:
+		spritesheet_lines_count_label.visible = true
+		spritesheet_lines_count.visible = true
+		spritesheet_lines_count_label.text = "Rows:"
+	else:
+		spritesheet_lines_count_label.visible = false
+		spritesheet_lines_count.visible = false
 
 
 func _on_LinesCount_value_changed(value: float) -> void:
@@ -331,6 +336,7 @@ func _on_Direction_item_selected(id: Export.AnimationDirection) -> void:
 	preview_current_frame = 0
 	Export.process_data()
 	set_preview()
+	update_dimensions_label()
 
 
 func _on_Resize_value_changed(value: float) -> void:
@@ -405,12 +411,18 @@ func _on_FrameTimer_timeout() -> void:
 	else:
 		preview_current_frame += 1
 
-	frame_timer.wait_time = _preview_durations[preview_current_frame - 1]
+	frame_timer.wait_time = _preview_images[preview_current_frame - 1].duration
 	frame_timer.start()
 
 
 func _on_ExportDialog_popup_hide() -> void:
 	frame_timer.stop()
+
+
+func _on_split_layers_toggled(toggled_on: bool) -> void:
+	Export.split_layers = toggled_on
+	Export.process_data()
+	set_preview()
 
 
 func _on_IncludeTagsInFilename_toggled(button_pressed: bool) -> void:

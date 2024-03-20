@@ -9,6 +9,7 @@ var picking_color_for := MOUSE_BUTTON_LEFT
 var horizontal_mirror := false
 var vertical_mirror := false
 var pixel_perfect := false
+var alpha_locked := false
 
 # Dynamics
 var stabilizer_enabled := false
@@ -567,6 +568,12 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	if not _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text.is_empty():
 		text += "    %s" % _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text
 	Global.cursor_position_label.text = text
+
+
+## Returns [code]true[/code] if [member alpha_locked] is [code]true[/code]
+## and the [param image]'s pixel at [param position] is transparent.
+func check_alpha_lock(image: Image, position: Vector2i) -> bool:
+	return alpha_locked and is_zero_approx(image.get_pixelv(position).a)
 
 
 func get_alpha_dynamic(strength := 1.0) -> float:

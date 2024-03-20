@@ -3,8 +3,9 @@ class_name Project
 extends RefCounted
 ## A class for project properties.
 
-signal serialized(Dictionary)
-signal about_to_deserialize(Dictionary)
+signal serialized(dict: Dictionary)
+signal about_to_deserialize(dict: Dictionary)
+signal timeline_updated
 
 var name := "":
 	set(value):
@@ -358,7 +359,7 @@ func serialize() -> Dictionary:
 	return project_data
 
 
-func deserialize(dict: Dictionary) -> void:
+func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAccess = null) -> void:
 	about_to_deserialize.emit(dict)
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
@@ -390,10 +391,26 @@ func deserialize(dict: Dictionary) -> void:
 			for cel in frame.cels:
 				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
 					Global.LayerTypes.PIXEL:
-						cels.append(PixelCel.new(Image.new()))
+						var image := Image.new()
+						if is_instance_valid(zip_reader):  # For pxo files saved in 1.0+
+							var image_data := zip_reader.read_file(
+								"image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
+							)
+							image = Image.create_from_data(
+								size.x, size.y, false, Image.FORMAT_RGBA8, image_data
+							)
+						elif is_instance_valid(file):  # For pxo files saved in 0.x
+							var buffer := file.get_buffer(size.x * size.y * 4)
+							image = Image.create_from_data(
+								size.x, size.y, false, Image.FORMAT_RGBA8, buffer
+							)
+						cels.append(PixelCel.new(image))
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
+						if is_instance_valid(file):  # For pxo files saved in 0.x
+							# Don't do anything with it, just read it so that the file can move on
+							file.get_buffer(size.x * size.y * 4)
 						cels.append(Cel3D.new(size, true))
 				if dict.has("pxo_version"):
 					cel["pxo_version"] = dict["pxo_version"]
@@ -870,6 +887,7 @@ func _update_frame_ui() -> void:
 			cel_hbox.get_child(f).frame = f
 			cel_hbox.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
+	timeline_updated.emit()
 
 
 ## Update the layer indices and layer/cel buttons
@@ -881,6 +899,7 @@ func _update_layer_ui() -> void:
 		for f in frames.size():
 			cel_hbox.get_child(f).layer = l
 			cel_hbox.get_child(f).button_setup()
+	timeline_updated.emit()
 
 
 ## Change the current reference image

@@ -6,10 +6,7 @@ var frame := 0
 var layer := 0
 var cel: BaseCel
 
-## Without this variable, [signal Control.theme_changed] calls [method cel_switched], which calls
-## [method Control.add_theme_stylebox_override], firing [signal Control.theme_changed]
-## and thus resulting in an endless loop.
-var _call_theme_changed := true
+var _is_guide_stylebox := false
 
 @onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
 @onready var linked: ColorRect = $Linked
@@ -20,7 +17,7 @@ var _call_theme_changed := true
 
 func _ready() -> void:
 	Global.cel_switched.connect(cel_switched)
-	theme_changed.connect(cel_switched)
+	Global.theme_switched.connect(cel_switched.bind(true))
 	cel = Global.current_project.frames[frame].cels[layer]
 	button_setup()
 	_dim_checker()
@@ -32,24 +29,24 @@ func _ready() -> void:
 		transparent_checker.visible = false
 
 
-func cel_switched() -> void:
-	if not _call_theme_changed:
-		_call_theme_changed = true
-		return
-	var current_theme: Theme = Global.control.theme
+func cel_switched(force_stylebox_change := false) -> void:
+	z_index = 1 if button_pressed else 0
+	var current_theme := Global.control.theme
 	var is_guide := false
 	for selected in Global.current_project.selected_cels:
 		if selected[1] == layer or selected[0] == frame:
 			is_guide = true
 			break
-	_call_theme_changed = false
 	if is_guide:
-		var guide_stylebox := current_theme.get_stylebox("guide", "CelButton")
-		add_theme_stylebox_override("normal", guide_stylebox)
+		if not _is_guide_stylebox or force_stylebox_change:
+			var guide_stylebox := current_theme.get_stylebox("guide", "CelButton")
+			add_theme_stylebox_override("normal", guide_stylebox)
+			_is_guide_stylebox = true
 	else:
-		var normal_stylebox := current_theme.get_stylebox("normal", "CelButton")
-		add_theme_stylebox_override("normal", normal_stylebox)
-	z_index = 1 if button_pressed else 0
+		if _is_guide_stylebox or force_stylebox_change:
+			var normal_stylebox := current_theme.get_stylebox("normal", "CelButton")
+			add_theme_stylebox_override("normal", normal_stylebox)
+			_is_guide_stylebox = false
 
 
 func button_setup() -> void:
@@ -119,7 +116,7 @@ func _on_CelButton_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		MenuOptions.PROPERTIES:
-			properties.cel = cel
+			properties.cel_indices = _get_cel_indices()
 			properties.popup_centered()
 		MenuOptions.DELETE:
 			_delete_cel_content()
@@ -128,7 +125,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			var project := Global.current_project
 			if id == MenuOptions.UNLINK:
 				project.undo_redo.create_action("Unlink Cel")
-				var selected_cels := project.selected_cels.duplicate()
+				var selected_cels := _get_cel_indices(true)
 				if not selected_cels.has([frame, layer]):
 					selected_cels.append([frame, layer])  # Include this cel with the selected ones
 				for cel_index in selected_cels:
@@ -206,20 +203,29 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 func _delete_cel_content() -> void:
+	var indices := _get_cel_indices()
 	var project := Global.current_project
-	var empty_content = cel.create_empty_content()
-	var old_content = cel.get_content()
 	project.undos += 1
 	project.undo_redo.create_action("Draw")
-	if cel.link_set == null:
-		project.undo_redo.add_do_method(cel.set_content.bind(empty_content))
-		project.undo_redo.add_undo_method(cel.set_content.bind(old_content))
-	else:
-		for linked_cel in cel.link_set["cels"]:
-			project.undo_redo.add_do_method(linked_cel.set_content.bind(empty_content))
-			project.undo_redo.add_undo_method(linked_cel.set_content.bind(old_content))
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer, project))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer, project))
+	for cel_index in indices:
+		var frame_index: int = cel_index[0]
+		var layer_index: int = cel_index[1]
+		var selected_cel := project.frames[frame_index].cels[layer_index]
+		var empty_content = selected_cel.create_empty_content()
+		var old_content = selected_cel.get_content()
+		if selected_cel.link_set == null:
+			project.undo_redo.add_do_method(selected_cel.set_content.bind(empty_content))
+			project.undo_redo.add_undo_method(selected_cel.set_content.bind(old_content))
+		else:
+			for linked_cel in selected_cel.link_set["cels"]:
+				project.undo_redo.add_do_method(linked_cel.set_content.bind(empty_content))
+				project.undo_redo.add_undo_method(linked_cel.set_content.bind(old_content))
+		project.undo_redo.add_do_method(
+			Global.undo_or_redo.bind(false, frame_index, layer_index, project)
+		)
+		project.undo_redo.add_undo_method(
+			Global.undo_or_redo.bind(true, frame_index, layer_index, project)
+		)
 	project.undo_redo.commit_action()
 
 
@@ -317,3 +323,13 @@ func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
 	rect.position.x += rect.size.x * x_begin
 	rect.size.x *= x_end - x_begin
 	return rect
+
+
+func _get_cel_indices(add_current_cel := false) -> Array:
+	var indices := Global.current_project.selected_cels.duplicate()
+	if not [frame, layer] in indices:
+		if add_current_cel:
+			indices.append([frame, layer])
+		else:
+			indices = [[frame, layer]]
+	return indices

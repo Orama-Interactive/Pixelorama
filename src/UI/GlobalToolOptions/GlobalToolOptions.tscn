@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene load_steps=21 format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
 [ext_resource type="Script" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://22h12g8p3jtd" path="res://assets/graphics/misc/pixel_perfect_off.png" id="4"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://j8eywwy082a4" path="res://assets/graphics/misc/alpha_lock_off.png" id="5_jv20x"]
 [ext_resource type="Texture2D" uid="uid://dg3dumyfj1682" path="res://assets/graphics/misc/dynamics.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://di8au2u87jgv5" path="res://assets/graphics/misc/uncheck.png" id="7"]
 [ext_resource type="PackedScene" uid="uid://bmsc0s03pwji4" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
@@ -62,7 +63,7 @@ size_flags_vertical = 3
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-columns = 4
+columns = 5
 
 [node name="Horizontal" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(32, 32)
@@ -125,6 +126,26 @@ offset_right = 11.0
 offset_bottom = 10.0
 texture = ExtResource("4")
 
+[node name="AlphaLock" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Lock alpha"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut = SubResource("Shortcut_vcyug")
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/AlphaLock"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 11.0
+offset_bottom = 10.0
+texture = ExtResource("5_jv20x")
+
 [node name="Dynamics" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
@@ -149,10 +170,10 @@ canvas_item_default_texture_filter = 0
 size = Vector2i(300, 334)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DynamicsPanel"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 292.0
-offset_bottom = 326.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 296.0
+offset_bottom = 330.0
 
 [node name="StabilizerContainer" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
 layout_mode = 2
@@ -436,6 +457,7 @@ offset_bottom = 23.0
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Horizontal" to="." method="_on_Horizontal_toggled"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Vertical" to="." method="_on_Vertical_toggled"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/PixelPerfect" to="." method="_on_PixelPerfect_toggled"]
+[connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/AlphaLock" to="." method="_on_alpha_lock_toggled"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Dynamics" to="." method="_on_Dynamics_pressed"]
 [connection signal="toggled" from="DynamicsPanel/VBoxContainer/StabilizerContainer/EnableStabilizer" to="." method="_on_enable_stabilizer_toggled"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/StabilizerContainer/StabilizerValue" to="." method="_on_stabilizer_value_value_changed"]

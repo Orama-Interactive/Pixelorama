@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=77 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -21,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://esistdjfbrc4" path="res://assets/graphics/timeline/play_backwards.png" id="24"]
 [ext_resource type="Texture2D" uid="uid://l4jj86y1hukm" path="res://assets/graphics/timeline/go_to_last_frame.png" id="25"]
 [ext_resource type="Texture2D" uid="uid://b2ndrc0cvy1m5" path="res://assets/graphics/timeline/next_frame.png" id="26"]
-[ext_resource type="PackedScene" uid="uid://dd1fkkc3vjh78" path="res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn" id="26_vbrbd"]
 [ext_resource type="Texture2D" uid="uid://cerkv5yx4cqeh" path="res://assets/graphics/timeline/copy_frame.png" id="27"]
 [ext_resource type="Texture2D" uid="uid://i13jhsg117kd" path="res://assets/graphics/timeline/tag.png" id="28"]
 [ext_resource type="Texture2D" uid="uid://dukip7mvotxsp" path="res://assets/graphics/timeline/onion_skinning_off.png" id="29"]
@@ -984,8 +983,6 @@ popup/item_1/text = "Below canvas"
 popup/item_1/id = 1
 
 [node name="FrameTagDialog" parent="." instance=ExtResource("42")]
-
-[node name="LayerEffectsSettings" parent="." instance=ExtResource("26_vbrbd")]
 
 [node name="DragHighlight" type="ColorRect" parent="."]
 visible = false

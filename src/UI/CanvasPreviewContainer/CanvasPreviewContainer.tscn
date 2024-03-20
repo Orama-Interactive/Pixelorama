@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
 [ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="2"]
-[ext_resource type="Script" path="res://src/UI/Canvas/CameraMovement.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="5"]
+[ext_resource type="Script" path="res://src/UI/Canvas/CanvasCamera.gd" id="5_ge2km"]
 [ext_resource type="Texture2D" uid="uid://c7smxwfa8826j" path="res://assets/graphics/timeline/play.png" id="6"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="7_o7sn3"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="8"]
@@ -77,11 +77,9 @@ anchors_preset = 0
 [node name="CanvasPreview" parent="VBox/HBox/PreviewViewportContainer/SubViewport" instance=ExtResource("5")]
 unique_name_in_owner = true
 
-[node name="CameraPreview" type="Camera2D" parent="VBox/HBox/PreviewViewportContainer/SubViewport"]
+[node name="CameraPreview" type="Node2D" parent="VBox/HBox/PreviewViewportContainer/SubViewport"]
 unique_name_in_owner = true
-offset = Vector2(32, 32)
-zoom = Vector2(0.15, 0.15)
-script = ExtResource("3")
+script = ExtResource("5_ge2km")
 index = 2
 
 [node name="Animation" type="HBoxContainer" parent="VBox"]

@@ -1,11 +1,12 @@
 extends Node
 
-enum ExportTab { IMAGE = 0, SPRITESHEET = 1 }
-enum Orientation { ROWS = 0, COLUMNS = 1 }
-enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
+enum ExportTab { IMAGE, SPRITESHEET }
+enum Orientation { COLUMNS, ROWS, TAGS_BY_COLUMN, TAGS_BY_ROW }
+enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
 
+## This path is used to temporarily store png files that FFMPEG uses to convert them to video
 const TEMP_PATH := "user://tmp"
 
 ## List of animated formats
@@ -29,11 +30,11 @@ var custom_exporter_generators := {}
 
 var current_tab := ExportTab.IMAGE
 ## All frames and their layers processed/blended into images
-var processed_images: Array[Image] = []
-var durations: PackedFloat32Array = []
+var processed_images: Array[ProcessedImage] = []
+var split_layers := false
 
 # Spritesheet options
-var orientation := Orientation.ROWS
+var orientation := Orientation.COLUMNS
 var lines_count := 1  ## How many rows/columns before new line is added
 
 # General options
@@ -55,6 +56,15 @@ var file_exists_alert := "The following files already exist. Do you wish to over
 var export_progress_fraction := 0.0
 var export_progress := 0.0
 @onready var gif_export_thread := Thread.new()
+
+
+class ProcessedImage:
+	var image: Image
+	var duration: float
+
+	func _init(_image: Image, _duration := 1.0) -> void:
+		image = _image
+		duration = _duration
 
 
 func _exit_tree() -> void:
@@ -125,23 +135,46 @@ func process_spritesheet(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
 	# Then store the size of frames for other functions
 	number_of_frames = frames.size()
-
+	# Used when the orientation is based off the animation tags
+	var tag_origins := {0: 0}
+	var frames_without_tag := number_of_frames
+	var spritesheet_columns := 1
+	var spritesheet_rows := 1
 	# If rows mode selected calculate columns count and vice versa
-	var spritesheet_columns := (
-		lines_count if orientation == Orientation.ROWS else frames_divided_by_spritesheet_lines()
-	)
-	var spritesheet_rows := (
-		lines_count if orientation == Orientation.COLUMNS else frames_divided_by_spritesheet_lines()
-	)
-
+	if orientation == Orientation.COLUMNS:
+		spritesheet_columns = frames_divided_by_spritesheet_lines()
+		spritesheet_rows = lines_count
+	elif orientation == Orientation.ROWS:
+		spritesheet_columns = lines_count
+		spritesheet_rows = frames_divided_by_spritesheet_lines()
+	else:
+		spritesheet_rows = project.animation_tags.size() + 1
+		if spritesheet_rows == 1:
+			spritesheet_columns = number_of_frames
+		else:
+			var max_tag_size := 1
+			for tag in project.animation_tags:
+				tag_origins[tag] = 0
+				frames_without_tag -= tag.get_size()
+				if tag.get_size() > max_tag_size:
+					max_tag_size = tag.get_size()
+			if frames_without_tag > max_tag_size:
+				max_tag_size = frames_without_tag
+			spritesheet_columns = max_tag_size
+		if frames_without_tag == 0:
+			# If all frames have a tag, remove the first row
+			spritesheet_rows -= 1
+		if orientation == Orientation.TAGS_BY_ROW:
+			# Switch rows and columns
+			var temp := spritesheet_rows
+			spritesheet_rows = spritesheet_columns
+			spritesheet_columns = temp
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
-
 	var whole_image := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	var origin := Vector2i.ZERO
 	var hh := 0
 	var vv := 0
-
 	for frame in frames:
 		if orientation == Orientation.ROWS:
 			if vv < spritesheet_columns:
@@ -152,7 +185,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.x = 0
 				vv = 1
 				origin.y = project.size.y * hh
-		else:
+		elif orientation == Orientation.COLUMNS:
 			if hh < spritesheet_rows:
 				origin.y = project.size.y * hh
 				hh += 1
@@ -161,20 +194,64 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.y = 0
 				hh = 1
 				origin.x = project.size.x * vv
+		elif orientation == Orientation.TAGS_BY_COLUMN:
+			var frame_index := project.frames.find(frame)
+			var frame_has_tag := false
+			for i in project.animation_tags.size():
+				var tag := project.animation_tags[i]
+				if tag.has_frame(frame_index):
+					origin.x = project.size.x * tag_origins[tag]
+					if frames_without_tag == 0:
+						# If all frames have a tag, remove the first row
+						origin.y = project.size.y * i
+					else:
+						origin.y = project.size.y * (i + 1)
+					tag_origins[tag] += 1
+					frame_has_tag = true
+					break
+			if not frame_has_tag:
+				origin.x = project.size.x * tag_origins[0]
+				origin.y = 0
+				tag_origins[0] += 1
+		elif orientation == Orientation.TAGS_BY_ROW:
+			var frame_index := project.frames.find(frame)
+			var frame_has_tag := false
+			for i in project.animation_tags.size():
+				var tag := project.animation_tags[i]
+				if tag.has_frame(frame_index):
+					origin.y = project.size.y * tag_origins[tag]
+					if frames_without_tag == 0:
+						# If all frames have a tag, remove the first row
+						origin.x = project.size.x * i
+					else:
+						origin.x = project.size.x * (i + 1)
+					tag_origins[tag] += 1
+					frame_has_tag = true
+					break
+			if not frame_has_tag:
+				origin.y = project.size.y * tag_origins[0]
+				origin.x = 0
+				tag_origins[0] += 1
 		_blend_layers(whole_image, frame, origin)
 
-	processed_images.append(whole_image)
+	processed_images.append(ProcessedImage.new(whole_image))
 
 
 func process_animation(project := Global.current_project) -> void:
 	processed_images.clear()
-	durations.clear()
 	var frames := _calculate_frames(project)
 	for frame in frames:
-		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		_blend_layers(image, frame)
-		processed_images.append(image)
-		durations.append(frame.duration * (1.0 / project.fps))
+		if split_layers:
+			for cel in frame.cels:
+				var image := Image.new()
+				image.copy_from(cel.get_image())
+				var duration := frame.duration * (1.0 / project.fps)
+				processed_images.append(ProcessedImage.new(image, duration))
+		else:
+			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			_blend_layers(image, frame)
+			var duration := frame.duration * (1.0 / project.fps)
+			processed_images.append(ProcessedImage.new(image, duration))
 
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
@@ -182,7 +259,7 @@ func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 	if frame_current_tag > 1:  # Specific tag
 		var frame_start: int = project.animation_tags[frame_current_tag - 2].from
 		var frame_end: int = project.animation_tags[frame_current_tag - 2].to
-		frames = project.frames.slice(frame_start - 1, frame_end - 1, 1, true)
+		frames = project.frames.slice(frame_start - 1, frame_end, 1, true)
 	elif frame_current_tag == 1:  # Selected frames
 		for cel in project.selected_cels:
 			frames.append(project.frames[cel[0]])
@@ -221,7 +298,12 @@ func export_processed_images(
 	var paths_of_existing_files := ""
 	for i in range(processed_images.size()):
 		stop_export = false
-		var export_path := _create_export_path(multiple_files, project, i + 1)
+		var frame_index := i + 1
+		var layer_index := -1
+		if split_layers:
+			frame_index = i / project.layers.size() + 1
+			layer_index = posmod(i, project.layers.size())
+		var export_path := _create_export_path(multiple_files, project, frame_index, layer_index)
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
@@ -258,7 +340,6 @@ func export_processed_images(
 			var result := true
 			var details := {
 				"processed_images": processed_images,
-				"durations": durations,
 				"export_dialog": export_dialog,
 				"export_paths": export_paths,
 				"project": project
@@ -306,19 +387,19 @@ func export_processed_images(
 			if OS.has_feature("web"):
 				if project.file_format == FileFormat.PNG:
 					JavaScriptBridge.download_buffer(
-						processed_images[i].save_png_to_buffer(),
+						processed_images[i].image.save_png_to_buffer(),
 						export_paths[i].get_file(),
 						"image/png"
 					)
 				elif project.file_format == FileFormat.WEBP:
 					JavaScriptBridge.download_buffer(
-						processed_images[i].save_webp_to_buffer(),
+						processed_images[i].image.save_webp_to_buffer(),
 						export_paths[i].get_file(),
 						"image/webp"
 					)
 				elif project.file_format == FileFormat.JPEG:
 					JavaScriptBridge.download_buffer(
-						processed_images[i].save_jpg_to_buffer(),
+						processed_images[i].image.save_jpg_to_buffer(),
 						export_paths[i].get_file(),
 						"image/jpeg"
 					)
@@ -326,11 +407,11 @@ func export_processed_images(
 			else:
 				var err: Error
 				if project.file_format == FileFormat.PNG:
-					err = processed_images[i].save_png(export_paths[i])
+					err = processed_images[i].image.save_png(export_paths[i])
 				elif project.file_format == FileFormat.WEBP:
-					err = processed_images[i].save_webp(export_paths[i])
+					err = processed_images[i].image.save_webp(export_paths[i])
 				elif project.file_format == FileFormat.JPEG:
-					err = processed_images[i].save_jpg(export_paths[i])
+					err = processed_images[i].image.save_jpg(export_paths[i])
 				if err != OK:
 					Global.popup_error(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
@@ -363,9 +444,9 @@ func export_video(export_paths: PackedStringArray) -> bool:
 	for i in range(processed_images.size()):
 		var temp_file_name := str(i + 1).pad_zeros(number_of_digits) + ".png"
 		var temp_file_path := temp_path_real.path_join(temp_file_name)
-		processed_images[i].save_png(temp_file_path)
+		processed_images[i].image.save_png(temp_file_path)
 		input_file.store_line("file '" + temp_file_name + "'")
-		input_file.store_line("duration %s" % durations[i])
+		input_file.store_line("duration %s" % processed_images[i].duration)
 	input_file.close()
 	var ffmpeg_execute: PackedStringArray = [
 		"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
@@ -402,8 +483,8 @@ func export_animated(args: Dictionary) -> void:
 	var frames := []
 	for i in range(processed_images.size()):
 		var frame: AImgIOFrame = AImgIOFrame.new()
-		frame.content = processed_images[i]
-		frame.duration = durations[i]
+		frame.content = processed_images[i].image
+		frame.duration = processed_images[i].duration
 		frames.push_back(frame)
 
 	# Export and save GIF/APNG
@@ -427,13 +508,12 @@ func _increase_export_progress(export_dialog: Node) -> void:
 
 
 func _scale_processed_images() -> void:
+	var resize_f := resize / 100.0
 	for processed_image in processed_images:
-		if resize != 100:
-			processed_image.resize(
-				processed_image.get_size().x * resize / 100,
-				processed_image.get_size().y * resize / 100,
-				interpolation
-			)
+		if is_equal_approx(resize, 1.0):
+			continue
+		var image := processed_image.image
+		image.resize(image.get_size().x * resize_f, image.get_size().y * resize_f, interpolation)
 
 
 func file_format_string(format_enum: int) -> String:
@@ -516,11 +596,15 @@ func is_ffmpeg_installed() -> bool:
 	return false
 
 
-func _create_export_path(multifile: bool, project: Project, frame := 0) -> String:
+func _create_export_path(multifile: bool, project: Project, frame := 0, layer := -1) -> String:
 	var path := project.file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
-		var path_extras := separator_character + str(frame).pad_zeros(number_of_digits)
+		var path_extras := ""
+		if layer > -1:
+			var layer_name := project.layers[layer].name
+			path_extras += "(%s) " % layer_name
+		path_extras += separator_character + str(frame).pad_zeros(number_of_digits)
 		var frame_tag_and_start_id := _get_proccessed_image_animation_tag_and_start_id(
 			project, frame - 1
 		)
@@ -555,10 +639,7 @@ func _get_proccessed_image_animation_tag_and_start_id(
 	for animation_tag in project.animation_tags:
 		# Check if processed image is in frame tag and assign frame tag and start id if yes
 		# Then stop
-		if (
-			(processed_image_id + 1) >= animation_tag.from
-			and (processed_image_id + 1) <= animation_tag.to
-		):
+		if animation_tag.has_frame(processed_image_id):
 			result_animation_tag_and_start_id = [animation_tag.name, animation_tag.from]
 			break
 	return result_animation_tag_and_start_id
@@ -570,7 +651,7 @@ func _blend_layers(
 	if export_layers == 0:
 		DrawingAlgos.blend_layers(image, frame, origin, project)
 	elif export_layers == 1:
-		DrawingAlgos.blend_layers(image, frame, origin, project, true)
+		DrawingAlgos.blend_layers(image, frame, origin, project, false, true)
 	else:
 		var layer := project.layers[export_layers - 2]
 		var layer_image := Image.new()

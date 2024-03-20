@@ -2,7 +2,7 @@ extends SubViewportContainer
 
 @export var camera_path: NodePath
 
-@onready var camera := get_node(camera_path) as Camera2D
+@onready var camera := get_node(camera_path) as CanvasCamera
 
 
 func _ready() -> void:

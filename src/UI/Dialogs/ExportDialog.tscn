@@ -81,12 +81,16 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 2
+item_count = 4
 selected = 0
-popup/item_0/text = "Rows"
-popup/item_0/id = 0
-popup/item_1/text = "Columns"
-popup/item_1/id = 1
+popup/item_0/text = "Columns"
+popup/item_0/id = 1
+popup/item_1/text = "Rows"
+popup/item_1/id = 0
+popup/item_2/text = "Tags by column"
+popup/item_2/id = 2
+popup/item_3/text = "Tags by row"
+popup/item_3/id = 3
 
 [node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
@@ -231,24 +235,24 @@ mouse_default_cursor_shape = 2
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CollapsibleContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+[node name="AdvancedOptions" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 script = ExtResource("3")
 text = "Advanced options"
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions"]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="InterpolationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer"]
+[node name="InterpolationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Interpolation:"
 
-[node name="Interpolation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer"]
+[node name="Interpolation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -266,28 +270,33 @@ popup/item_3/id = 3
 popup/item_4/text = "Lanczos"
 popup/item_4/id = 4
 
-[node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Include frame tags in the file name"
-
-[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
-visible = false
-layout_mode = 2
-tooltip_text = "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-mouse_default_cursor_shape = 2
-text = "Create new folder for each frame tag"
-
-[node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions"]]
+[node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Separator character(s):"
 
-[node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions"]]
+[node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions"]]
 layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
+
+[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Split layers"
+
+[node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Include frame tags in the file name"
+
+[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+visible = false
+layout_mode = 2
+tooltip_text = "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+mouse_default_cursor_shape = 2
+text = "Create new folder for each frame tag"
 
 [node name="PathDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
 mode = 2
@@ -337,10 +346,11 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_PathButton_pressed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileLineEdit" to="." method="_on_FileLineEdit_text_changed"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileFormat" to="." method="_on_FileFormat_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/Interpolation" to="." method="_on_Interpolation_item_selected"]
-[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/IncludeTagsInFilename" to="." method="_on_IncludeTagsInFilename_toggled"]
-[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
-[connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/SeparatorCharacter" to="." method="_on_SeparatorCharacter_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/Interpolation" to="." method="_on_Interpolation_item_selected"]
+[connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SeparatorCharacter" to="." method="_on_SeparatorCharacter_text_changed"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SplitLayers" to="." method="_on_split_layers_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/IncludeTagsInFilename" to="." method="_on_IncludeTagsInFilename_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
 [connection signal="dir_selected" from="PathDialog" to="." method="_on_FileDialog_dir_selected"]
 [connection signal="confirmed" from="FileExistsAlert" to="." method="_on_FileExistsAlert_confirmed"]
 [connection signal="custom_action" from="FileExistsAlert" to="." method="_on_FileExistsAlert_custom_action"]

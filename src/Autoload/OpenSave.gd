@@ -185,30 +185,30 @@ func handle_loading_video(file: String) -> bool:
 func open_pxo_file(path: String, untitled_backup := false, replace_empty := true) -> void:
 	var empty_project := Global.current_project.is_empty() and replace_empty
 	var new_project: Project
-	if empty_project:
-		new_project = Global.current_project
-		new_project.frames = []
-		new_project.layers = []
-		new_project.animation_tags.clear()
-		new_project.name = path.get_file()
-	else:
-		new_project = Project.new([], path.get_file())
 	var zip_reader := ZIPReader.new()
 	var err := zip_reader.open(path)
 	if err == FAILED:
 		# Most likely uses the old pxo format, load that
-		var success := open_v0_pxo_file(path, new_project)
-		if not success:
+		new_project = open_v0_pxo_file(path, empty_project)
+		if not is_instance_valid(new_project):
 			return
 	elif err != OK:
 		Global.popup_error(tr("File failed to open. Error code %s (%s)") % [err, error_string(err)])
 		return
 	else:
+		if empty_project:
+			new_project = Global.current_project
+			new_project.frames = []
+			new_project.layers = []
+			new_project.animation_tags.clear()
+			new_project.name = path.get_file()
+		else:
+			new_project = Project.new([], path.get_file())
 		var data_json := zip_reader.read_file("data.json").get_string_from_utf8()
 		var test_json_conv := JSON.new()
 		var error := test_json_conv.parse(data_json)
 		if error != OK:
-			print("Error, corrupt pxo file")
+			print("Error, corrupt pxo file. Error code %s (%s)" % [error, error_string(error)])
 			zip_reader.close()
 			return
 		var result = test_json_conv.get_data()
@@ -217,20 +217,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 			zip_reader.close()
 			return
 
-		new_project.deserialize(result)
-		for frame_index in new_project.frames.size():
-			var frame := new_project.frames[frame_index]
-			for cel_index in frame.cels.size():
-				var cel := frame.cels[cel_index]
-				if not cel is PixelCel:
-					continue
-				var image_data := zip_reader.read_file(
-					"image_data/frames/%s/layer_%s" % [frame_index + 1, cel_index + 1]
-				)
-				var image := Image.create_from_data(
-					new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, image_data
-				)
-				cel.image_changed(image)
+		new_project.deserialize(result, zip_reader)
 		if result.has("brushes"):
 			var brush_index := 0
 			for brush in result.brushes:
@@ -284,7 +271,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 	save_project_to_recent_list(path)
 
 
-func open_v0_pxo_file(path: String, new_project: Project) -> bool:
+func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 	var file := FileAccess.open_compressed(path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
 	if FileAccess.get_open_error() == ERR_FILE_UNRECOGNIZED:
 		# If the file is not compressed open it raw (pre-v0.7)
@@ -292,35 +279,32 @@ func open_v0_pxo_file(path: String, new_project: Project) -> bool:
 	var err := FileAccess.get_open_error()
 	if err != OK:
 		Global.popup_error(tr("File failed to open. Error code %s (%s)") % [err, error_string(err)])
-		return false
+		return null
 
 	var first_line := file.get_line()
 	var test_json_conv := JSON.new()
 	var error := test_json_conv.parse(first_line)
 	if error != OK:
-		print("Error, corrupt pxo file")
+		print("Error, corrupt legacy pxo file. Error code %s (%s)" % [error, error_string(error)])
 		file.close()
-		return false
+		return null
 
 	var result = test_json_conv.get_data()
 	if typeof(result) != TYPE_DICTIONARY:
 		print("Error, json parsed result is: %s" % typeof(result))
 		file.close()
-		return false
+		return null
 
-	new_project.deserialize(result)
-	for frame in new_project.frames:
-		for cel in frame.cels:
-			if cel is PixelCel:
-				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
-				var image := Image.create_from_data(
-					new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, buffer
-				)
-				cel.image_changed(image)
-			elif cel is Cel3D:
-				# Don't do anything with it, just read it so that the file can move on
-				file.get_buffer(new_project.size.x * new_project.size.y * 4)
-
+	var new_project: Project
+	if empty_project:
+		new_project = Global.current_project
+		new_project.frames = []
+		new_project.layers = []
+		new_project.animation_tags.clear()
+		new_project.name = path.get_file()
+	else:
+		new_project = Project.new([], path.get_file())
+	new_project.deserialize(result, null, file)
 	if result.has("brushes"):
 		for brush in result.brushes:
 			var b_width = brush.size_x
@@ -344,7 +328,7 @@ func open_v0_pxo_file(path: String, new_project: Project) -> bool:
 		else:
 			new_project.tiles.reset_mask()
 	file.close()
-	return true
+	return new_project
 
 
 func save_pxo_file(

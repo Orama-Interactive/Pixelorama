@@ -22,12 +22,14 @@ func blend_layers(
 	frame: Frame,
 	origin := Vector2i.ZERO,
 	project := Global.current_project,
-	only_selected := false
+	only_selected_cels := false,
+	only_selected_layers := false,
 ) -> void:
 	var textures: Array[Image] = []
-	# Nx3 texture, where N is the number of layers and the first row are the blend modes,
-	# the second are the opacities and the third are the origins
-	var metadata_image := Image.create(project.layers.size(), 3, false, Image.FORMAT_R8)
+	# Nx4 texture, where N is the number of layers and the first row are the blend modes,
+	# the second are the opacities, the third are the origins and the fourth are the
+	# clipping mask booleans.
+	var metadata_image := Image.create(project.layers.size(), 4, false, Image.FORMAT_R8)
 	var frame_index := project.frames.find(frame)
 	var previous_ordered_layers: Array[int] = project.ordered_layers
 	project.order_layers(frame_index)
@@ -35,21 +37,22 @@ func blend_layers(
 		var ordered_index := project.ordered_layers[i]
 		var layer := project.layers[ordered_index]
 		var include := true if layer.is_visible_in_hierarchy() else false
-		if only_selected and include:
+		if only_selected_cels and include:
 			var test_array := [frame_index, i]
 			if not test_array in project.selected_cels:
+				include = false
+		if only_selected_layers and include:
+			var layer_is_selected := false
+			for selected_cel in project.selected_cels:
+				if i == selected_cel[1]:
+					layer_is_selected = true
+					break
+			if not layer_is_selected:
 				include = false
 		var cel := frame.cels[ordered_index]
 		var cel_image := layer.display_effects(cel)
 		textures.append(cel_image)
-		# Store the blend mode
-		metadata_image.set_pixel(ordered_index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
-		# Store the opacity
-		if include:
-			var opacity := cel.get_final_opacity(layer)
-			metadata_image.set_pixel(ordered_index, 1, Color(opacity, 0.0, 0.0, 0.0))
-		else:
-			metadata_image.set_pixel(ordered_index, 1, Color())
+		set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
 	var texture_array := Texture2DArray.new()
 	texture_array.create_from_images(textures)
 	var params := {
@@ -62,6 +65,24 @@ func blend_layers(
 	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
 	# Re-order the layers again to ensure correct canvas drawing
 	project.ordered_layers = previous_ordered_layers
+
+
+func set_layer_metadata_image(
+	layer: BaseLayer, cel: BaseCel, image: Image, index: int, include := true
+) -> void:
+	# Store the blend mode
+	image.set_pixel(index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+	# Store the opacity
+	if layer.is_visible_in_hierarchy() and include:
+		var opacity := cel.get_final_opacity(layer)
+		image.set_pixel(index, 1, Color(opacity, 0.0, 0.0, 0.0))
+	else:
+		image.set_pixel(index, 1, Color())
+	# Store the clipping mask boolean
+	if layer.clipping_mask:
+		image.set_pixel(index, 3, Color.WHITE)
+	else:
+		image.set_pixel(index, 3, Color.BLACK)
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html
@@ -216,9 +237,13 @@ func scale_3x(sprite: Image, tol := 50.0) -> Image:
 
 
 func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
-	# If angle is simple, then nn rotation is the best
-	if angle == 0 || angle == PI / 2 || angle == PI || angle == 3.0 * PI / 2.0 || angle == TAU:
+	if is_zero_approx(angle) or is_equal_approx(angle, TAU):
+		return
+	if is_equal_approx(angle, PI / 2.0) or is_equal_approx(angle, 3.0 * PI / 2.0):
 		nn_rotate(sprite, angle, pivot)
+		return
+	if is_equal_approx(angle, PI):
+		sprite.rotate_180()
 		return
 
 	var aux := Image.new()
@@ -399,6 +424,14 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 
 func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
+	if is_zero_approx(angle) or is_equal_approx(angle, TAU):
+		return
+	if is_equal_approx(angle, PI / 2.0) or is_equal_approx(angle, 3.0 * PI / 2.0):
+		nn_rotate(sprite, angle, pivot)
+		return
+	if is_equal_approx(angle, PI):
+		sprite.rotate_180()
+		return
 	var selected_sprite := scale_3x(sprite)
 	nn_rotate(selected_sprite, angle, pivot * 3)
 	selected_sprite.resize(
@@ -408,7 +441,10 @@ func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 
 func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
-	if is_zero_approx(angle):
+	if is_zero_approx(angle) or is_equal_approx(angle, TAU):
+		return
+	if is_equal_approx(angle, PI):
+		sprite.rotate_180()
 		return
 	var aux := Image.new()
 	aux.copy_from(sprite)

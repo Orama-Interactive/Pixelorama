@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-02-26 18:35\n"
+"PO-Revision-Date: 2024-03-09 01:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -622,6 +622,14 @@ msgstr "Filas"
 
 msgid "Rows:"
 msgstr "Filas:"
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
+msgid "Tags by column"
+msgstr ""
+
+#. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
+msgid "Tags by row"
+msgstr ""
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -1655,6 +1663,14 @@ msgstr "Sobrescribe el color en lugar de mezclarlo. Esta opción solo es relevan
 msgid "Pixel Perfect"
 msgstr "Pixelado perfecto"
 
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pixel Perfect hace que las líneas sean suaves eliminando los píxeles sobrantes en los bordes"
+
+#. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
+msgid "Lock alpha"
+msgstr ""
+
 msgid "Fill inside"
 msgstr "Rellenar el interior"
 
@@ -1669,10 +1685,6 @@ msgstr "Espacio X:"
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
 msgstr "Espacio Y:"
-
-msgid "Pixel Perfect\n"
-"Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Pixel Perfect hace que las líneas sean suaves eliminando los píxeles sobrantes en los bordes"
 
 msgid "Fill Shape"
 msgstr "Rellena forma"
@@ -2423,6 +2435,10 @@ msgstr "Intervalo de guardado automático:"
 
 msgid "minute(s)"
 msgstr "minuto(s)"
+
+#. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
+msgid "Split layers"
+msgstr ""
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"

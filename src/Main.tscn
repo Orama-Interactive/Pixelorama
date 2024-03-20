@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dbylw5k04ulp8"]
+[gd_scene load_steps=15 format=3 uid="uid://dbylw5k04ulp8"]
 
 [ext_resource type="Theme" uid="uid://cngbvfpwjoimv" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://b3aeqj2k58wdk" path="res://src/UI/Dialogs/OpenSprite.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://c0nuukjakmai2" path="res://src/UI/Dialogs/TileModeOffsetsDialog.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://clbjfkdupw52l" path="res://src/UI/Timeline/CelProperties.tscn" id="17_ucs64"]
-[ext_resource type="PackedScene" uid="uid://bnpb1aip3wdvw" path="res://src/UI/Dialogs/SplashDialog.tscn" id="27"]
 [ext_resource type="PackedScene" uid="uid://b3hkjj3s6pe4x" path="res://src/Preferences/PreferencesDialog.tscn" id="32"]
 [ext_resource type="PackedScene" uid="uid://clgu8wb5o6oup" path="res://src/UI/Dialogs/ExportDialog.tscn" id="39"]
 
@@ -45,8 +44,6 @@ mouse_filter = 2
 [node name="BrushesPopup" parent="Dialogs" instance=ExtResource("6")]
 
 [node name="PatternsPopup" parent="Dialogs" instance=ExtResource("5")]
-
-[node name="SplashDialog" parent="Dialogs" instance=ExtResource("27")]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource("12")]
 
@@ -101,7 +98,6 @@ visible = false
 [node name="RightCursor" type="Sprite2D" parent="."]
 visible = false
 
-[connection signal="visibility_changed" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]
 [connection signal="files_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_files_selected"]
 [connection signal="visibility_changed" from="Dialogs/OpenSprite" to="." method="_on_open_sprite_visibility_changed"]
 [connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]

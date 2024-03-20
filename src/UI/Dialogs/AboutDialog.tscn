@@ -139,6 +139,7 @@ mouse_default_cursor_shape = 2
 [node name="LicenseText" type="TextEdit" parent="AboutUI/Credits/Licenses"]
 layout_mode = 2
 size_flags_vertical = 3
+editable = false
 
 [node name="HSeparator2" type="HSeparator" parent="AboutUI"]
 layout_mode = 2

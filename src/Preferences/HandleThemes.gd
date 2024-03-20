@@ -83,6 +83,7 @@ func change_theme(id: int) -> void:
 	Global.control.theme = theme
 	change_clear_color()
 	change_icon_colors()
+	Global.theme_switched.emit()
 
 
 func change_clear_color() -> void:
