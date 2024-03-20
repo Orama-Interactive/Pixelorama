@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-19 16:12\n"
+"PO-Revision-Date: 2024-03-20 11:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2908,7 +2908,7 @@ msgstr "Вибрирование по краям"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr "Прыжок в конце"
+msgstr "Отскок в конце"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
