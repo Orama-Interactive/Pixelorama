@@ -106,9 +106,13 @@ func _on_OpenLastBtn_pressed() -> void:
 	Global.top_menu_container.file_menu_id_pressed(2)
 
 
-func _on_ChangeArtBtnLeft_pressed():
+func _on_ChangeArtBtnLeft_pressed() -> void:
 	change_artwork(-1)
 
 
-func _on_ChangeArtBtnRight_pressed():
+func _on_ChangeArtBtnRight_pressed() -> void:
 	change_artwork(1)
+
+
+func _on_visibility_changed() -> void:
+	Global.dialog_open(false)

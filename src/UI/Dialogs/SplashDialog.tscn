@@ -260,6 +260,7 @@ mouse_default_cursor_shape = 2
 text = "Don't show again"
 
 [connection signal="about_to_popup" from="." to="." method="_on_SplashDialog_about_to_show"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnLeft" to="." method="_on_ChangeArtBtnLeft_pressed"]
 [connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnRight" to="." method="_on_ChangeArtBtnRight_pressed"]
 [connection signal="pressed" from="Contents/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]

@@ -748,7 +748,7 @@ func select_menu_id_pressed(id: int) -> void:
 func help_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.HelpMenu.VIEW_SPLASH_SCREEN:
-			_popup_dialog(Global.control.get_node("Dialogs/SplashDialog"))
+			_popup_dialog(Global.control.splash_dialog)
 		Global.HelpMenu.ONLINE_DOCS:
 			OS.shell_open(DOCS_URL)
 		Global.HelpMenu.ISSUE_TRACKER:

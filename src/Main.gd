@@ -1,10 +1,18 @@
 extends Control
 
+const SPLASH_DIALOG_SCENE_PATH := "res://src/UI/Dialogs/SplashDialog.tscn"
+
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
 var changed_projects_on_quit: Array[Project]
 var cursor_image := preload("res://assets/graphics/cursor.png")
+var splash_dialog: AcceptDialog:
+	get:
+		if not is_instance_valid(splash_dialog):
+			splash_dialog = load(SPLASH_DIALOG_SCENE_PATH).instantiate()
+			add_child(splash_dialog)
+		return splash_dialog
 
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 @onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
@@ -168,7 +176,7 @@ func _show_splash_screen() -> void:
 		await get_tree().process_frame
 		await get_tree().process_frame
 
-		$Dialogs/SplashDialog.popup_centered()  # Splash screen
+		splash_dialog.popup_centered()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
 
 
@@ -235,7 +243,6 @@ func _notification(what: int) -> void:
 func _on_files_dropped(files: PackedStringArray) -> void:
 	for file in files:
 		OpenSave.handle_loading_file(file)
-	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
 	if splash_dialog.visible:
 		splash_dialog.hide()
 
