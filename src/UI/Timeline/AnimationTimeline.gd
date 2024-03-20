@@ -4,6 +4,7 @@ signal animation_started(forward: bool)
 signal animation_finished
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
+const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 
 var is_animation_running := false
 var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
@@ -17,6 +18,12 @@ var min_cel_size := 36
 var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
+var layer_effect_settings: AcceptDialog:
+	get:
+		if not is_instance_valid(layer_effect_settings):
+			layer_effect_settings = load(LAYER_FX_SCENE_PATH).instantiate()
+			add_child(layer_effect_settings)
+		return layer_effect_settings
 
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
 @onready var tag_spacer := %TagSpacer as Control
@@ -1164,5 +1171,5 @@ func project_cel_removed(frame: int, layer: int) -> void:
 
 
 func _on_layer_fx_pressed() -> void:
-	$LayerEffectsSettings.popup_centered()
+	layer_effect_settings.popup_centered()
 	Global.dialog_open(true)
