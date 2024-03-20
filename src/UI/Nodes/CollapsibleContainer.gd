@@ -11,6 +11,10 @@ extends VBoxContainer
 	set(value):
 		visible_content = value
 		_button.button_pressed = value
+@export var flat := false:
+	set(value):
+		flat = value
+		_button.flat = value
 
 var _button := Button.new()
 var _texture_rect := TextureRect.new()
@@ -22,6 +26,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	_button.flat = flat
 	_button.toggle_mode = true
 	_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	_button.toggled.connect(set_visible_children)
