@@ -329,9 +329,10 @@ func _ready() -> void:
 	set_tool(tool_name, MOUSE_BUTTON_RIGHT)
 	update_tool_buttons()
 
-	horizontal_mirror = Global.config_cache.get_value("preferences", "horizontal_mirror", false)
-	vertical_mirror = Global.config_cache.get_value("preferences", "vertical_mirror", false)
-	pixel_perfect = Global.config_cache.get_value("preferences", "pixel_perfect", false)
+	horizontal_mirror = Global.config_cache.get_value("tools", "horizontal_mirror", false)
+	vertical_mirror = Global.config_cache.get_value("tools", "vertical_mirror", false)
+	pixel_perfect = Global.config_cache.get_value("tools", "pixel_perfect", false)
+	alpha_locked = Global.config_cache.get_value("tools", "alpha_locked", false)
 
 	# Yield is necessary for the color picker nodes to update their color values
 	await get_tree().process_frame

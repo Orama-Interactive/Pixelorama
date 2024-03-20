@@ -258,7 +258,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
 		Global.save_sprites_dialog.current_path = path
 		# Set last opened project path and save
-		Global.config_cache.set_value("preferences", "last_project_path", path)
+		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
 		new_project.directory_path = path.get_base_dir()
 		new_project.file_name = path.get_file().trim_suffix(".pxo")
@@ -420,7 +420,7 @@ func save_pxo_file(
 		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
 
 		# Set last opened project path and save
-		Global.config_cache.set_value("preferences", "last_project_path", path)
+		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
 		if !project.was_exported:
 			project.file_name = path.get_file().trim_suffix(".pxo")

@@ -251,9 +251,9 @@ func load_last_project() -> void:
 	if OS.get_name() == "Web":
 		return
 	# Check if any project was saved or opened last time
-	if Global.config_cache.has_section_key("preferences", "last_project_path"):
+	if Global.config_cache.has_section_key("data", "last_project_path"):
 		# Check if file still exists on disk
-		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
+		var file_path = Global.config_cache.get_value("data", "last_project_path")
 		if FileAccess.file_exists(file_path):  # If yes then load the file
 			OpenSave.open_pxo_file(file_path)
 			# Sync file dialogs
