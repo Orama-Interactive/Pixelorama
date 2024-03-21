@@ -19,6 +19,7 @@ offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
+pivot_offset = Vector2(16, 16)
 expand_mode = 1
 stretch_mode = 6
 

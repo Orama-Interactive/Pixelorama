@@ -3,6 +3,13 @@ extends BaseTool
 var _brush := Brushes.get_default_brush()
 var _brush_size := 1
 var _brush_size_dynamics := 1
+var _brush_flip_x := false
+var _brush_flip_y := false
+var _brush_rotate_90 := false
+var _brush_rotate_180 := false
+var _brush_rotate_270 := false
+var _i_shared_my_brush := false
+var _brush_sharing_check := false
 var _cache_limit := 3
 var _brush_interpolate := 0
 var _brush_image := Image.new()
@@ -37,6 +44,7 @@ func _ready() -> void:
 	Global.global_tool_options.dynamics_changed.connect(_reset_dynamics)
 	Tools.color_changed.connect(_on_Color_changed)
 	Global.brushes_popup.brush_removed.connect(_on_Brush_removed)
+	Tools.share_brush_config.connect(_update_brush_config)
 
 
 func _on_BrushType_pressed() -> void:
@@ -54,10 +62,15 @@ func _on_BrushType_pressed() -> void:
 		if child is GridContainer:
 			child.columns = columns
 	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
+	Tools.flip_rotate.emit(
+		_brush_flip_x, _brush_flip_y, _brush_rotate_90, _brush_rotate_180, _brush_rotate_270
+	)
 
 
 func _on_Brush_selected(brush: Brushes.Brush) -> void:
 	_brush = brush
+	if _brush_sharing_check == true:
+		_sharing_brush()
 	update_brush()
 	save_config()
 
@@ -65,6 +78,8 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 func _on_BrushSize_value_changed(value: float) -> void:
 	if _brush_size != int(value):
 		_brush_size = int(value)
+		if _brush_sharing_check == true:
+			_sharing_brush()
 		_brush_size_dynamics = _brush_size
 		if Tools.dynamics_size != Tools.Dynamics.NONE:
 			_brush_size_dynamics = Tools.brush_size_min
@@ -122,7 +137,41 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$ColorInterpolation.value = _brush_interpolate
+	$Flip/FlipX.button_pressed = _brush_flip_x
+	$Flip/FlipY.button_pressed = _brush_flip_y
+	$Rotate/Rotate90.button_pressed = _brush_rotate_90
+	$Rotate/Rotate180.button_pressed = _brush_rotate_180
+	$Rotate/Rotate270.button_pressed = _brush_rotate_270
 	update_brush()
+
+
+func _update_brush_config(
+	b_brush, b_size, b_flip_x, b_flip_y, b_rotate_90, b_rotate_180, b_rotate_270
+) -> void:
+	if _i_shared_my_brush == false:
+		_brush = b_brush
+		_brush_size = b_size
+		_brush_flip_x = b_flip_x
+		_brush_flip_y = b_flip_y
+		_brush_rotate_90 = b_rotate_90
+		_brush_rotate_180 = b_rotate_180
+		_brush_rotate_270 = b_rotate_270
+		update_config()
+	else:
+		_i_shared_my_brush = false
+
+
+func _sharing_brush() -> void:
+	_i_shared_my_brush = true
+	Tools.share_brush_config.emit(
+		_brush,
+		_brush_size,
+		_brush_flip_x,
+		_brush_flip_y,
+		_brush_rotate_90,
+		_brush_rotate_180,
+		_brush_rotate_270
+	)
 
 
 func update_brush() -> void:
@@ -151,6 +200,7 @@ func update_brush() -> void:
 				var random := randi() % _brush.random.size()
 				_orignal_brush_image = _brush.random[random]
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
+			update_brush_image_flip_and_rotate()
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
@@ -166,6 +216,7 @@ func update_random_image() -> void:
 	var random := randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
 	_orignal_brush_image = _brush_image
+	update_brush_image_flip_and_rotate()
 	_brush_texture = ImageTexture.create_from_image(_brush_image)
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()
@@ -178,6 +229,19 @@ func update_mirror_brush() -> void:
 	_mirror_brushes.y.flip_y()
 	_mirror_brushes.xy = _mirror_brushes.x.duplicate()
 	_mirror_brushes.xy.flip_y()
+
+
+func update_brush_image_flip_and_rotate() -> void:
+	if _brush_flip_x == true:
+		_brush_image.flip_x()
+	if _brush_flip_y == true:
+		_brush_image.flip_y()
+	if _brush_rotate_90 == true:
+		_brush_image.rotate_90(CLOCKWISE)
+	if _brush_rotate_180 == true:
+		_brush_image.rotate_180()
+	if _brush_rotate_270 == true:
+		_brush_image.rotate_90(COUNTERCLOCKWISE)
 
 
 func update_mask(can_skip := true) -> void:
@@ -241,6 +305,7 @@ func draw_end(pos: Vector2i) -> void:
 	match _brush.type:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
+			update_brush_image_flip_and_rotate()
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
@@ -279,6 +344,7 @@ func _prepare_tool() -> void:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			# save _brush_image for safe keeping
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
+			update_brush_image_flip_and_rotate()
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
@@ -707,3 +773,44 @@ func _pick_color(pos: Vector2i) -> void:
 		else MOUSE_BUTTON_RIGHT
 	)
 	Tools.assign_color(color, button, false)
+
+
+func _on_flip_x_toggled(button_pressed: bool) -> void:
+	_brush_flip_x = button_pressed
+	if _brush_sharing_check == true:
+		_sharing_brush()
+	update_brush()
+
+
+func _on_flip_y_toggled(button_pressed: bool) -> void:
+	_brush_flip_y = button_pressed
+	if _brush_sharing_check == true:
+		_sharing_brush()
+	update_brush()
+
+
+func _on_rotate_90_toggled(button_pressed: bool) -> void:
+	_brush_rotate_90 = button_pressed
+	if _brush_sharing_check == true:
+		_sharing_brush()
+	update_brush()
+
+
+func _on_rotate_180_toggled(button_pressed: bool) -> void:
+	_brush_rotate_180 = button_pressed
+	if _brush_sharing_check == true:
+		_sharing_brush()
+	update_brush()
+
+
+func _on_rotate_270_toggled(button_pressed: bool) -> void:
+	_brush_rotate_270 = button_pressed
+	if _brush_sharing_check == true:
+		_sharing_brush()
+	update_brush()
+
+
+func _on_share_brush_config_toggled(button_pressed: bool) -> void:
+	_brush_sharing_check = button_pressed
+	if _brush_sharing_check == true:
+		_sharing_brush()
