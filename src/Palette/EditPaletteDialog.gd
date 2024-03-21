@@ -30,6 +30,7 @@ var old_name := ""
 
 
 func _ready() -> void:
+	export_file_dialog.use_native_dialog = Global.use_native_file_dialogs
 	# Add delete and export buttons to edit palette dialog
 	add_button(tr("Delete"), false, DELETE_ACTION)
 	add_button(tr("Export"), false, EXPORT_ACTION)
@@ -79,7 +80,7 @@ func toggle_already_exists_warning(to_show: bool) -> void:
 
 
 func _on_EditPaletteDialog_visibility_changed() -> void:
-	Global.dialog_open(false)
+	Global.dialog_open(visible)
 
 
 func _on_EditPaletteDialog_confirmed() -> void:

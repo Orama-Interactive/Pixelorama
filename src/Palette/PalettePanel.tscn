@@ -1,11 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://wplk62pbgih4"]
+[gd_scene load_steps=13 format=3 uid="uid://wplk62pbgih4"]
 
-[ext_resource type="PackedScene" uid="uid://c0p84w7umxwt1" path="res://src/Palette/EditPaletteDialog.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://biyn51upnlxle" path="res://assets/graphics/palette/edit.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="2_j1lig"]
 [ext_resource type="Texture2D" uid="uid://b7ydn1tt37rcl" path="res://assets/graphics/palette/add.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://bt72662c3gp2f" path="res://assets/graphics/timeline/remove_frame.png" id="3_0e27e"]
-[ext_resource type="PackedScene" uid="uid://68aakj2l6ee1" path="res://src/Palette/CreatePaletteDialog.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://db4i3w3yencxg" path="res://assets/graphics/palette/sort.png" id="4_hcsuy"]
 [ext_resource type="Script" path="res://src/Palette/PaletteGrid.gd" id="5"]
 [ext_resource type="Script" path="res://src/Palette/PaletteScroll.gd" id="6"]
@@ -218,12 +216,6 @@ step = 1.0
 page = 8.0
 custom_step = 1.0
 
-[node name="EditPaletteDialog" parent="." instance=ExtResource("1")]
-unique_name_in_owner = true
-
-[node name="CreatePaletteDialog" parent="." instance=ExtResource("4")]
-unique_name_in_owner = true
-
 [node name="HiddenColorPickerButton" type="ColorPickerButton" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -242,9 +234,5 @@ layout_mode = 2
 [connection signal="swatch_pressed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_pressed"]
 [connection signal="value_changed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/HScrollBar" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_HSlider_value_changed"]
 [connection signal="value_changed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/MarginContainer/VScrollBar" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_VSlider_value_changed"]
-[connection signal="deleted" from="EditPaletteDialog" to="." method="_on_EditPaletteDialog_deleted"]
-[connection signal="exported" from="EditPaletteDialog" to="." method="_on_edit_palette_dialog_exported"]
-[connection signal="saved" from="EditPaletteDialog" to="." method="_on_EditPaletteDialog_saved"]
-[connection signal="saved" from="CreatePaletteDialog" to="." method="_on_CreatePaletteDialog_saved"]
 [connection signal="color_changed" from="HiddenColorPickerButton" to="." method="_on_ColorPicker_color_changed"]
 [connection signal="popup_closed" from="HiddenColorPickerButton" to="." method="_on_HiddenColorPickerButton_popup_closed"]

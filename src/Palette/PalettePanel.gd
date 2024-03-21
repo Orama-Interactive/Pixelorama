@@ -1,11 +1,31 @@
 class_name PalettePanel
 extends Container
 
+const CREATE_PALETTE_SCENE_PATH := "res://src/Palette/CreatePaletteDialog.tscn"
+const EDIT_PALETTE_SCENE_PATH := "res://src/Palette/EditPaletteDialog.tscn"
+
 var palettes_path_id := {}
 var palettes_id_path := {}
 
 var edited_swatch_index := -1
 var edited_swatch_color := Color.TRANSPARENT
+
+var create_palette_dialog: ConfirmationDialog:
+	get:
+		if not is_instance_valid(create_palette_dialog):
+			create_palette_dialog = load(CREATE_PALETTE_SCENE_PATH).instantiate()
+			create_palette_dialog.saved.connect(_on_create_palette_dialog_saved)
+			add_child(create_palette_dialog)
+		return create_palette_dialog
+var edit_palette_dialog: ConfirmationDialog:
+	get:
+		if not is_instance_valid(edit_palette_dialog):
+			edit_palette_dialog = load(EDIT_PALETTE_SCENE_PATH).instantiate()
+			edit_palette_dialog.deleted.connect(_on_edit_palette_dialog_deleted)
+			edit_palette_dialog.exported.connect(_on_edit_palette_dialog_exported)
+			edit_palette_dialog.saved.connect(_on_edit_palette_dialog_saved)
+			add_child(edit_palette_dialog)
+		return edit_palette_dialog
 
 @onready var palette_select := $"%PaletteSelect"
 @onready var palette_grid := $"%PaletteGrid" as PaletteGrid
@@ -15,9 +35,6 @@ var edited_swatch_color := Color.TRANSPARENT
 @onready var delete_color_button := $"%DeleteColor"
 @onready var sort_button := %Sort as MenuButton
 @onready var sort_button_popup := sort_button.get_popup()
-
-@onready var edit_palette_dialog := $"%EditPaletteDialog"
-@onready var create_palette_dialog := $"%CreatePaletteDialog"
 
 ## This color picker button itself is hidden, but its popup is used to edit color swatches.
 @onready var hidden_color_picker := $"%HiddenColorPickerButton" as ColorPickerButton
@@ -166,7 +183,7 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 	redraw_current_palette()
 
 
-func _on_CreatePaletteDialog_saved(
+func _on_create_palette_dialog_saved(
 	preset: int,
 	palette_name: String,
 	comment: String,
@@ -182,7 +199,7 @@ func _on_CreatePaletteDialog_saved(
 	redraw_current_palette()
 
 
-func _on_EditPaletteDialog_saved(
+func _on_edit_palette_dialog_saved(
 	palette_name: String, comment: String, width: int, height: int
 ) -> void:
 	Palettes.current_palette_edit(palette_name, comment, width, height)
@@ -242,7 +259,7 @@ func _on_HiddenColorPickerButton_popup_closed() -> void:
 	Palettes.current_palette_set_color(edited_swatch_index, edited_swatch_color)
 
 
-func _on_EditPaletteDialog_deleted(permanent: bool) -> void:
+func _on_edit_palette_dialog_deleted(permanent: bool) -> void:
 	Palettes.current_palete_delete(permanent)
 	setup_palettes_selector()
 	redraw_current_palette()
