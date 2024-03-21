@@ -454,7 +454,6 @@ var enable_autosave := true:
 			return
 		enable_autosave = value
 		OpenSave.update_autosave()
-		preferences_dialog.autosave_interval.editable = enable_autosave
 ## Found in Preferences. The index of graphics renderer used by Pixelorama.
 var renderer := 0:
 	set = _renderer_changed
