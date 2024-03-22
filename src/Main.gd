@@ -254,21 +254,12 @@ func load_last_project() -> void:
 	if Global.config_cache.has_section_key("data", "last_project_path"):
 		# Check if file still exists on disk
 		var file_path = Global.config_cache.get_value("data", "last_project_path")
-		if FileAccess.file_exists(file_path):  # If yes then load the file
-			OpenSave.open_pxo_file(file_path)
-			# Sync file dialogs
-			Global.save_sprites_dialog.current_dir = file_path.get_base_dir()
-			Global.open_sprites_dialog.current_dir = file_path.get_base_dir()
-			Global.config_cache.set_value("data", "current_dir", file_path.get_base_dir())
-		else:
-			# If file doesn't exist on disk then warn user about this
-			Global.popup_error("Cannot find last project file.")
+		load_recent_project_file(file_path)
 
 
 func load_recent_project_file(path: String) -> void:
 	if OS.get_name() == "Web":
 		return
-
 	# Check if file still exists on disk
 	if FileAccess.file_exists(path):  # If yes then load the file
 		OpenSave.handle_loading_file(path)
