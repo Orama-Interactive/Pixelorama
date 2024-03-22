@@ -280,14 +280,17 @@ func export_processed_images(
 	ignore_overwrites: bool, export_dialog: ConfirmationDialog, project := Global.current_project
 ) -> bool:
 	# Stop export if directory path or file name are not valid
-	var dir := DirAccess.open(project.directory_path)
-	if not dir.dir_exists(project.directory_path) or not project.file_name.is_valid_filename():
-		if not dir.dir_exists(project.directory_path) and project.file_name.is_valid_filename():
+	var dir := DirAccess.open(project.export_directory_path)
+	var dir_exists := dir.dir_exists(project.export_directory_path)
+	var is_valid_filename := project.file_name.is_valid_filename()
+	if not dir_exists:
+		if is_valid_filename:  # Directory path not valid, file name is valid
 			export_dialog.open_path_validation_alert_popup(0)
-		elif not project.file_name.is_valid_filename() and dir.dir_exists(project.directory_path):
-			export_dialog.open_path_validation_alert_popup(1)
-		else:
+		else:  # Both directory path and file name are invalid
 			export_dialog.open_path_validation_alert_popup()
+		return false
+	if not is_valid_filename:  # Directory path is valid, file name is invalid
+		export_dialog.open_path_validation_alert_popup(1)
 		return false
 
 	var multiple_files := false
@@ -309,7 +312,7 @@ func export_processed_images(
 		if multiple_files and new_dir_for_each_frame_tag:
 			var frame_tag_directory := DirAccess.open(export_path.get_base_dir())
 			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
-				frame_tag_directory = DirAccess.open(project.directory_path)
+				frame_tag_directory = DirAccess.open(project.export_directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 
 		if not ignore_overwrites:  # Check if the files already exist
@@ -430,8 +433,8 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
-	project.directory_path = export_paths[0].get_base_dir()
-	Global.config_cache.set_value("data", "current_dir", project.directory_path)
+	project.export_directory_path = export_paths[0].get_base_dir()
+	Global.config_cache.set_value("data", "current_dir", project.export_directory_path)
 	return true
 
 
@@ -624,12 +627,12 @@ func _create_export_path(multifile: bool, project: Project, frame := 0, layer :=
 				)
 			if new_dir_for_each_frame_tag:
 				path += path_extras
-				return project.directory_path.path_join(frame_tag_dir).path_join(
+				return project.export_directory_path.path_join(frame_tag_dir).path_join(
 					path + file_format_string(project.file_format)
 				)
 		path += path_extras
 
-	return project.directory_path.path_join(path + file_format_string(project.file_format))
+	return project.export_directory_path.path_join(path + file_format_string(project.file_format))
 
 
 func _get_proccessed_image_animation_tag_and_start_id(

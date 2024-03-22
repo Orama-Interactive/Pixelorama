@@ -396,7 +396,7 @@ func _quit() -> void:
 func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array) -> void:
 	OpenSave.reload_backup_file(project_paths, backup_paths)
 	Global.current_project.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
-	Global.current_project.directory_path = OpenSave.current_save_paths[0].get_base_dir()
+	Global.current_project.export_directory_path = OpenSave.current_save_paths[0].get_base_dir()
 	Global.current_project.was_exported = false
 	Global.top_menu_container.file_menu.set_item_text(
 		Global.FileMenu.SAVE, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file()

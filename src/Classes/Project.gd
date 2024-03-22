@@ -73,7 +73,7 @@ var cameras_zoom: PackedVector2Array = [
 var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 
 # Export directory path and export file name
-var directory_path := ""
+var export_directory_path := ""
 var file_name := "untitled"
 var file_format := Export.FileFormat.PNG
 var was_exported := false
@@ -109,9 +109,9 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	Global.canvas.add_child(y_symmetry_axis)
 
 	if OS.get_name() == "Web":
-		directory_path = "user://"
+		export_directory_path = "user://"
 	else:
-		directory_path = Global.config_cache.get_value(
+		export_directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
 	Global.project_created.emit(self)
@@ -347,7 +347,7 @@ func serialize() -> Dictionary:
 		"brushes": brush_data,
 		"reference_images": reference_image_data,
 		"vanishing_points": vanishing_points,
-		"export_directory_path": directory_path,
+		"export_directory_path": export_directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
@@ -467,7 +467,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		for point in y_symmetry_axis.points.size():
 			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
 	if dict.has("export_directory_path"):
-		directory_path = dict.export_directory_path
+		export_directory_path = dict.export_directory_path
 	if dict.has("export_file_name"):
 		file_name = dict.export_file_name
 	if dict.has("export_file_format"):

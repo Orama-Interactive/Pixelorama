@@ -260,7 +260,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 		# Set last opened project path and save
 		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		new_project.directory_path = path.get_base_dir()
+		new_project.export_directory_path = path.get_base_dir()
 		new_project.file_name = path.get_file().trim_suffix(".pxo")
 		new_project.was_exported = false
 		Global.top_menu_container.file_menu.set_item_text(
@@ -424,7 +424,7 @@ func save_pxo_file(
 		Global.config_cache.save("user://cache.ini")
 		if !project.was_exported:
 			project.file_name = path.get_file().trim_suffix(".pxo")
-			project.directory_path = path.get_base_dir()
+			project.export_directory_path = path.get_base_dir()
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
 		)
@@ -783,8 +783,8 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	if project.has_changed:
 		Global.main_window.title = Global.main_window.title + "(*)"
 	var file_name := path.get_basename().get_file()
-	var directory_path := path.get_base_dir()
-	project.directory_path = directory_path
+	var export_directory_path := path.get_base_dir()
+	project.export_directory_path = export_directory_path
 	project.file_name = file_name
 	project.was_exported = true
 	if path.get_extension().to_lower() == "png":
