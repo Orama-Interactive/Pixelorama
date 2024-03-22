@@ -29,7 +29,7 @@ func deserialize(dict: Dictionary) -> void:
 		name = dict["name"]
 	if dict.has("shader_path"):
 		var path: String = dict["shader_path"]
-		var shader_to_load = load(path)
+		var shader_to_load := load(path)
 		if is_instance_valid(shader_to_load) and shader_to_load is Shader:
 			shader = shader_to_load
 	if dict.has("params"):

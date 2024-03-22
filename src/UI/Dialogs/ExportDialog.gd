@@ -97,7 +97,7 @@ func show_tab() -> void:
 
 func set_preview() -> void:
 	_preview_images = Export.processed_images
-	var preview_data = {
+	var preview_data := {
 		"exporter_id": Global.current_project.file_format,
 		"export_tab": Export.current_tab,
 		"preview_images": _preview_images,

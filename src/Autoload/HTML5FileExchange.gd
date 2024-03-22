@@ -77,7 +77,7 @@ func _define_js() -> void:
 
 ## If (load_directly = false) then image info (image and its name)
 ## will not be directly forwarded it to OpenSave
-func load_image(load_directly := true):
+func load_image(load_directly := true) -> void:
 	if !OS.has_feature("web"):
 		return
 	# Execute JS function

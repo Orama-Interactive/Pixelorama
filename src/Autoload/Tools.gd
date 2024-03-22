@@ -1,6 +1,6 @@
 extends Node
 
-signal color_changed(color, button)
+signal color_changed(color: Color, button: int)
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 

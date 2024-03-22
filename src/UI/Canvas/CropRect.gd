@@ -34,7 +34,7 @@ func _ready() -> void:
 	reset()
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	Global.config_cache.set_value("tools", "crop_mode", mode)
 	Global.config_cache.set_value("tools", "crop_locked_size", locked_size)
 

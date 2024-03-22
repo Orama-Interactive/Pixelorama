@@ -90,7 +90,7 @@ func _input(event: InputEvent) -> void:
 					var overlapping: Array[ReferenceImage] = []
 
 					for idx: int in Global.current_project.reference_images.size():
-						var r = Global.current_project.reference_images[idx]
+						var r := Global.current_project.reference_images[idx]
 						# The bounding polygon
 						var p := get_reference_polygon(idx)
 						if Geometry2D.is_point_in_polygon(local_mouse_pos, p):
@@ -169,7 +169,7 @@ func _input(event: InputEvent) -> void:
 
 ## Uniformly scales the [ReferenceImage] using this nodes "local_mouse_position".
 func scale_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
-	var s = (
+	var s := (
 		Vector2.ONE
 		* minf(
 			float(mouse_pos.x - drag_start_pos.x),
@@ -182,9 +182,9 @@ func scale_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
 
 ## Rotate the [ReferenceImage] using this nodes "local_mouse_position".
 func rotate_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
-	var starting_angle = og_rotation - og_pos.angle_to_point(drag_start_pos)
-	var new_angle = img.position.angle_to_point(mouse_pos)
-	var angle = starting_angle + new_angle
+	var starting_angle := og_rotation - og_pos.angle_to_point(drag_start_pos)
+	var new_angle := img.position.angle_to_point(mouse_pos)
+	var angle := starting_angle + new_angle
 	angle = deg_to_rad(floorf(rad_to_deg(wrapf(angle, -PI, PI))))
 	img.rotation = angle
 
@@ -201,7 +201,7 @@ func get_reference_polygon(i: int) -> PackedVector2Array:
 
 	var ri: ReferenceImage = Global.current_project.reference_images[i]
 	var rect := ri.get_rect()
-	var poly = get_transformed_rect_polygon(rect, ri.transform)
+	var poly := get_transformed_rect_polygon(rect, ri.transform)
 	return poly
 
 

@@ -6,7 +6,6 @@
 
 [node name="Posterize" instance=ExtResource("1")]
 title = "Posterize"
-position = Vector2i(0, 36)
 size = Vector2i(360, 348)
 script = ExtResource("3")
 

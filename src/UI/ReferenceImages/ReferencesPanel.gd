@@ -2,7 +2,7 @@ class_name ReferencesPanel
 extends PanelContainer
 ## Panel for reference image management
 
-const ReferenceImageButton = preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn")
+const REFERENCE_IMAGE_BUTTON = preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn")
 
 var list_btn_group := ButtonGroup.new()
 var transform_button_group: ButtonGroup
@@ -143,7 +143,7 @@ func project_changed() -> void:
 	Global.current_project.set_reference_image_index(project_reference_index)
 
 
-func _on_references_changed():
+func _on_references_changed() -> void:
 	# When we change the project we set the default
 	Global.current_project.set_reference_image_index(-1)
 
@@ -153,7 +153,7 @@ func _on_references_changed():
 		c.queue_free()
 
 	# The default button
-	var default = ReferenceImageButton.instantiate()
+	var default := REFERENCE_IMAGE_BUTTON.instantiate()
 	default.button_group = list_btn_group
 	default.text = "none"
 	default.get_child(0).visible = false  # Hide it's transparent checker
@@ -173,7 +173,7 @@ func _on_references_changed():
 
 	# And update.
 	for ref in Global.current_project.reference_images:
-		var l: Button = ReferenceImageButton.instantiate()
+		var l: Button = REFERENCE_IMAGE_BUTTON.instantiate()
 		l.button_group = list_btn_group
 		if ref.texture:
 			l.icon = ref.texture

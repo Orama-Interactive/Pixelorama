@@ -1,7 +1,7 @@
 class_name Cel3D
 extends BaseCel
 
-signal selected_object(object)
+signal selected_object(object: Cel3DObject)
 signal scene_property_changed
 signal objects_changed
 

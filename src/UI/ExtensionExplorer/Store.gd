@@ -166,7 +166,7 @@ func _on_UpdateTimer_timeout() -> void:
 
 
 # DATA PROCESSORS
-func process_line(line: String):
+func process_line(line: String) -> void:
 	# If the line isn't a comment, we will check data type
 	var raw_data
 	line = line.strip_edges()

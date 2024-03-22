@@ -11,7 +11,7 @@ var tile_mask := Image.new()
 var has_mask := false
 
 
-func _init(size: Vector2i):
+func _init(size: Vector2i) -> void:
 	x_basis = Vector2i(size.x, 0)
 	y_basis = Vector2i(0, size.y)
 	tile_size = size
@@ -97,7 +97,7 @@ func has_point(point: Vector2i) -> bool:
 	return false
 
 
-func reset_mask():
+func reset_mask() -> void:
 	tile_mask = Image.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
 	tile_mask.fill(Color.WHITE)
 	has_mask = false

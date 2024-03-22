@@ -304,10 +304,9 @@ func serialize() -> Dictionary:
 			continue
 		if !is_instance_valid(guide):
 			continue
-		var coords = guide.points[0].x
+		var coords := guide.points[0].x
 		if guide.type == Guide.Types.HORIZONTAL:
 			coords = guide.points[0].y
-
 		guide_data.append({"type": guide.type, "pos": coords})
 
 	var frame_data := []
