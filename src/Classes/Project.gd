@@ -73,11 +73,13 @@ var cameras_zoom: PackedVector2Array = [
 var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 
 # Export directory path and export file name
+var save_path := ""
 var export_directory_path := ""
 var file_name := "untitled"
 var file_format := Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
+var backup_path := ""
 
 var animation_tag_node := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
@@ -88,20 +90,15 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	size = _size
 	tiles = Tiles.new(size)
 	selection_map.copy_from(Image.create(size.x, size.y, false, Image.FORMAT_LA8))
-
 	Global.tabs.add_tab(name)
-	OpenSave.current_save_paths.append("")
-	OpenSave.backup_save_paths.append("")
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1
-
 	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
 	x_symmetry_axis.project = self
 	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point / 2 + 0.5))
 	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point / 2 + 0.5))
 	Global.canvas.add_child(x_symmetry_axis)
-
 	y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
 	y_symmetry_axis.project = self
 	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, -19999))
@@ -118,6 +115,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 
 
 func remove() -> void:
+	remove_backup_file()
 	undo_redo.free()
 	for ri in reference_images:
 		ri.queue_free()
@@ -136,6 +134,12 @@ func remove() -> void:
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
 	layers.clear()
 	Global.projects.erase(self)
+
+
+func remove_backup_file() -> void:
+	if not backup_path.is_empty():
+		if FileAccess.file_exists(backup_path):
+			DirAccess.remove_absolute(backup_path)
 
 
 func commit_undo() -> void:

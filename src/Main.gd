@@ -24,6 +24,8 @@ var splash_dialog: AcceptDialog:
 
 
 func _init() -> void:
+	if not DirAccess.dir_exists_absolute("user://backups"):
+		DirAccess.make_dir_recursive_absolute("user://backups")
 	Global.shrink = _get_auto_display_scale()
 	_handle_layout_files()
 
@@ -171,27 +173,14 @@ func _show_splash_screen() -> void:
 func _handle_backup() -> void:
 	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
 	backup_confirmation.add_button("Discard All", false, "discard")
-	if Global.config_cache.has_section("backups"):
-		var project_paths = Global.config_cache.get_section_keys("backups")
-		if project_paths.size() > 0:
-			# Get backup paths
-			var backup_paths := []
-			for p_path in project_paths:
-				backup_paths.append(Global.config_cache.get_value("backups", p_path))
-			# Temporatily stop autosave until user confirms backup
-			OpenSave.autosave_timer.stop()
-			backup_confirmation.confirmed.connect(
-				_on_BackupConfirmation_confirmed.bind(project_paths, backup_paths)
-			)
-			backup_confirmation.custom_action.connect(
-				_on_BackupConfirmation_custom_action.bind(project_paths, backup_paths)
-			)
-			await get_tree().process_frame
-			backup_confirmation.popup_centered()
-			modulate = Color(0.5, 0.5, 0.5)
-		else:
-			if Global.open_last_project:
-				load_last_project()
+	var backup_dir := DirAccess.open("user://backups")
+	if backup_dir.get_files().size() > 0:
+		# Temporatily stop autosave until user confirms backup
+		OpenSave.autosave_timer.stop()
+		backup_confirmation.confirmed.connect(_on_BackupConfirmation_confirmed)
+		backup_confirmation.custom_action.connect(_on_BackupConfirmation_custom_action)
+		backup_confirmation.popup_centered()
+		modulate = Color(0.5, 0.5, 0.5)
 	else:
 		if Global.open_last_project:
 			load_last_project()
@@ -367,18 +356,15 @@ func _quit() -> void:
 	get_tree().quit()
 
 
-func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array) -> void:
-	OpenSave.reload_backup_file(project_paths, backup_paths)
+func _on_BackupConfirmation_confirmed() -> void:
+	OpenSave.reload_backup_file()
 
 
-func _on_BackupConfirmation_custom_action(
-	action: String, project_paths: Array, backup_paths: Array
-) -> void:
+func _on_BackupConfirmation_custom_action(action: String) -> void:
 	backup_confirmation.hide()
 	if action != "discard":
 		return
-	for i in range(project_paths.size()):
-		OpenSave.remove_backup_by_path(project_paths[i], backup_paths[i])
+	_clear_backup_files()
 	# Reopen last project
 	if Global.open_last_project:
 		load_last_project()
@@ -390,6 +376,11 @@ func _on_backup_confirmation_visibility_changed() -> void:
 	if Global.enable_autosave:
 		OpenSave.autosave_timer.start()
 	Global.dialog_open(false)
+
+
+func _clear_backup_files() -> void:
+	for file in DirAccess.get_files_at("user://backups"):
+		DirAccess.remove_absolute("user://backups".path_join(file))
 
 
 func _exit_tree() -> void:
@@ -415,8 +406,7 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
 	Global.config_cache.save("user://cache.ini")
 
-	var i := 0
 	for project in Global.projects:
 		project.remove()
-		OpenSave.remove_backup(i)
-		i += 1
+	# For some reason, the above is not enough to remove all backup files
+	_clear_backup_files()

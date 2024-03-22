@@ -4,9 +4,6 @@ extends Node
 signal project_saved
 signal reference_image_imported
 
-var current_save_paths: PackedStringArray = []
-## Stores a filename of a backup file in user:// until user saves manually
-var backup_save_paths: PackedStringArray = []
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
 var preview_dialogs := []  ## Array of preview dialogs
 var last_dialog_option := 0
@@ -253,9 +250,11 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
-	if not is_backup:
+	if is_backup:
+		new_project.backup_path = path
+	else:
 		# Loading a backup should not change window title and save path
-		current_save_paths[Global.current_project_index] = path
+		new_project.save_path = path
 		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
 		Global.save_sprites_dialog.current_path = path
 		# Set last opened project path and save
@@ -366,8 +365,8 @@ func save_pxo_file(
 	zip_packer.write_file(to_save.to_utf8_buffer())
 	zip_packer.close_file()
 
-	if !autosave:
-		current_save_paths[Global.current_project_index] = path
+	if not autosave:
+		project.save_path = path
 
 	var frame_index := 1
 	for frame in project.frames:
@@ -417,7 +416,7 @@ func save_pxo_file(
 		# First remove backup then set current save path
 		if project.has_changed:
 			project.has_changed = false
-		remove_backup(Global.current_project_index)
+		Global.current_project.remove_backup_file()
 		Global.notification_label("File saved")
 		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
 
@@ -809,83 +808,22 @@ func update_autosave() -> void:
 
 
 func _on_Autosave_timeout() -> void:
-	for i in range(backup_save_paths.size()):
-		if backup_save_paths[i] == "":
-			# Create a new backup file if it doesn't exist yet
-			backup_save_paths[i] = (
-				"user://backup-" + str(Time.get_unix_time_from_system()) + "-%s" % i
+	for i in Global.projects.size():
+		var project := Global.projects[i]
+		if project.backup_path.is_empty():
+			project.backup_path = (
+				"user://backups/backup-" + str(Time.get_unix_time_from_system()) + "-%s" % i
 			)
-
-		store_backup_path(i)
-		save_pxo_file(backup_save_paths[i], true, false, Global.projects[i])
+		save_pxo_file(project.backup_path, true, false, project)
 
 
-## Backup paths are stored in two ways:
-## 1) User already manually saved and defined a save path -> {current_save_path, backup_save_path}
-## 2) User didn't manually save, "untitled" backup is stored -> {backup_save_path, backup_save_path}
-func store_backup_path(i: int) -> void:
-	if current_save_paths[i] != "":
-		# Remove "untitled" backup if it existed on this project instance
-		if Global.config_cache.has_section_key("backups", backup_save_paths[i]):
-			Global.config_cache.erase_section_key("backups", backup_save_paths[i])
-
-		Global.config_cache.set_value("backups", current_save_paths[i], backup_save_paths[i])
-	else:
-		Global.config_cache.set_value("backups", backup_save_paths[i], backup_save_paths[i])
-
-	Global.config_cache.save("user://cache.ini")
-
-
-func remove_backup(i: int) -> void:
-	# Remove backup file
-	if backup_save_paths[i] != "":
-		if current_save_paths[i] != "":
-			remove_backup_by_path(current_save_paths[i], backup_save_paths[i])
-		else:
-			# If manual save was not yet done - remove "untitled" backup
-			remove_backup_by_path(backup_save_paths[i], backup_save_paths[i])
-		backup_save_paths[i] = ""
-
-
-func remove_backup_by_path(project_path: String, backup_path: String) -> void:
-	DirAccess.open("user://").remove(backup_path)
-	if Global.config_cache.has_section_key("backups", project_path):
-		Global.config_cache.erase_section_key("backups", project_path)
-	elif Global.config_cache.has_section_key("backups", backup_path):
-		Global.config_cache.erase_section_key("backups", backup_path)
-	Global.config_cache.save("user://cache.ini")
-
-
-func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
-	assert(project_paths.size() == backup_paths.size())
-	# Clear non-existent backups
-	var existing_backups_count := 0
-	for i in range(backup_paths.size()):
-		var dir := DirAccess.open("user://")
-		if dir.file_exists(backup_paths[i]):
-			project_paths[existing_backups_count] = project_paths[i]
-			backup_paths[existing_backups_count] = backup_paths[i]
-			existing_backups_count += 1
-		else:
-			if Global.config_cache.has_section_key("backups", backup_paths[i]):
-				Global.config_cache.erase_section_key("backups", backup_paths[i])
-				Global.config_cache.save("user://cache.ini")
-	project_paths.resize(existing_backups_count)
-	backup_paths.resize(existing_backups_count)
-
-	# Load the backup files
-	for i in range(project_paths.size()):
-		open_pxo_file(backup_paths[i], true, i == 0)
-		backup_save_paths[i] = backup_paths[i]
-
-		# If project path is the same as backup save path -> the backup was untitled
-		if project_paths[i] != backup_paths[i]:  # If the user has saved
-			current_save_paths[i] = project_paths[i]
-			Global.main_window.title = (
-				project_paths[i].get_file() + " - Pixelorama(*) " + Global.current_version
-			)
-			Global.current_project.has_changed = true
-
+## Load the backup files
+func reload_backup_file() -> void:
+	var dir := DirAccess.open("user://backups")
+	var i := 0
+	for file in dir.get_files():
+		open_pxo_file("user://backups".path_join(file), true, i == 0)
+		i += 1
 	Global.notification_label("Backup reloaded")
 
 

@@ -461,7 +461,7 @@ func _on_open_last_project_file_menu_option_pressed() -> void:
 
 
 func _save_project_file() -> void:
-	var path: String = OpenSave.current_save_paths[Global.current_project_index]
+	var path: String = Global.current_project.save_path
 	if path == "":
 		Global.control.show_save_dialog()
 	else:
