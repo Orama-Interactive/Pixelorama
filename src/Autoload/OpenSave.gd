@@ -242,7 +242,7 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 			else:
 				new_project.tiles.reset_mask()
 		zip_reader.close()
-	new_project.export_directory_path = path.get_basename()
+	new_project.export_directory_path = path.get_base_dir()
 
 	if empty_project:
 		new_project.change_project()
