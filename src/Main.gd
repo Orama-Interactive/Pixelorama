@@ -59,14 +59,11 @@ or CLI exporting. Loading pxo files in Pixelorama does not need this option to b
 """
 	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	Global.save_sprites_dialog.get_vbox().add_child(include_blended)
-	_handle_backup()
-
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
-
 	if OS.get_name() == "Android":
 		OS.request_permissions()
-
+	_handle_backup()
 	_show_splash_screen()
 	Global.pixelorama_opened.emit()
 
@@ -189,6 +186,7 @@ func _handle_backup() -> void:
 			backup_confirmation.custom_action.connect(
 				_on_BackupConfirmation_custom_action.bind(project_paths, backup_paths)
 			)
+			await get_tree().process_frame
 			backup_confirmation.popup_centered()
 			modulate = Color(0.5, 0.5, 0.5)
 		else:
