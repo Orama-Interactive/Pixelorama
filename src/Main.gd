@@ -263,10 +263,6 @@ func load_recent_project_file(path: String) -> void:
 	# Check if file still exists on disk
 	if FileAccess.file_exists(path):  # If yes then load the file
 		OpenSave.handle_loading_file(path)
-		# Sync file dialogs
-		Global.save_sprites_dialog.current_dir = path.get_base_dir()
-		Global.open_sprites_dialog.current_dir = path.get_base_dir()
-		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 	else:
 		# If file doesn't exist on disk then warn user about this
 		Global.popup_error("Cannot find project file.")
@@ -276,7 +272,6 @@ func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 	for path in paths:
 		OpenSave.handle_loading_file(path)
 	Global.save_sprites_dialog.current_dir = paths[0].get_base_dir()
-	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
 
 func show_save_dialog(project := Global.current_project) -> void:
@@ -311,7 +306,6 @@ func save_project(path: String) -> void:
 	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
-		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 	if is_quitting_on_save:
 		changed_projects_on_quit.pop_front()
 		_save_on_quit_confirmation()

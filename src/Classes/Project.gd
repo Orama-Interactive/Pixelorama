@@ -217,12 +217,11 @@ func change_project() -> void:
 	if has_changed:
 		Global.main_window.title = Global.main_window.title + "(*)"
 
-	var save_path := OpenSave.current_save_paths[Global.current_project_index]
-	if save_path != "":
-		Global.open_sprites_dialog.current_path = save_path
-		Global.save_sprites_dialog.current_path = save_path
+	if export_directory_path != "":
+		Global.open_sprites_dialog.current_path = export_directory_path
+		Global.save_sprites_dialog.current_path = export_directory_path
 		Global.top_menu_container.file_menu.set_item_text(
-			Global.FileMenu.SAVE, tr("Save") + " %s" % save_path.get_file()
+			Global.FileMenu.SAVE, tr("Save") + " %s" % file_name
 		)
 	else:
 		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
@@ -347,7 +346,6 @@ func serialize() -> Dictionary:
 		"brushes": brush_data,
 		"reference_images": reference_image_data,
 		"vanishing_points": vanishing_points,
-		"export_directory_path": export_directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
@@ -466,8 +464,6 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			x_symmetry_axis.points[point].y = floorf(y_symmetry_point / 2 + 1)
 		for point in y_symmetry_axis.points.size():
 			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
-	if dict.has("export_directory_path"):
-		export_directory_path = dict.export_directory_path
 	if dict.has("export_file_name"):
 		file_name = dict.export_file_name
 	if dict.has("export_file_format"):
