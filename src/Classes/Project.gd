@@ -337,7 +337,6 @@ func serialize() -> Dictionary:
 		"tile_mode_x_basis_y": tiles.x_basis.y,
 		"tile_mode_y_basis_x": tiles.y_basis.x,
 		"tile_mode_y_basis_y": tiles.y_basis.y,
-		"save_path": OpenSave.current_save_paths[Global.projects.find(self)],
 		"layers": layer_data,
 		"tags": tag_data,
 		"guides": guide_data,
@@ -369,8 +368,6 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if dict.has("tile_mode_y_basis_x") and dict.has("tile_mode_y_basis_y"):
 		tiles.y_basis.x = dict.tile_mode_y_basis_x
 		tiles.y_basis.y = dict.tile_mode_y_basis_y
-	if dict.has("save_path"):
-		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames") and dict.has("layers"):
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):

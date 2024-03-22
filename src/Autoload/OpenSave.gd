@@ -182,7 +182,7 @@ func handle_loading_video(file: String) -> bool:
 	return true
 
 
-func open_pxo_file(path: String, untitled_backup := false, replace_empty := true) -> void:
+func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> void:
 	var empty_project := Global.current_project.is_empty() and replace_empty
 	var new_project: Project
 	var zip_reader := ZIPReader.new()
@@ -253,8 +253,8 @@ func open_pxo_file(path: String, untitled_backup := false, replace_empty := true
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
-	if not untitled_backup:
-		# Untitled backup should not change window title and save path
+	if not is_backup:
+		# Loading a backup should not change window title and save path
 		current_save_paths[Global.current_project_index] = path
 		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
 		Global.save_sprites_dialog.current_path = path
@@ -875,7 +875,7 @@ func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 
 	# Load the backup files
 	for i in range(project_paths.size()):
-		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i], i == 0)
+		open_pxo_file(backup_paths[i], true, i == 0)
 		backup_save_paths[i] = backup_paths[i]
 
 		# If project path is the same as backup save path -> the backup was untitled
