@@ -49,6 +49,7 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var panels_submenu := PopupMenu.new()
 @onready var layouts_submenu := PopupMenu.new()
 @onready var recent_projects_submenu := PopupMenu.new()
+@onready var current_frame_mark := $HBoxContainer/CurrentFrameMark as Label
 
 
 class Dialog:
@@ -76,6 +77,8 @@ class Dialog:
 
 
 func _ready() -> void:
+	Global.project_switched.connect(_update_current_frame_mark)
+	Global.cel_switched.connect(_update_current_frame_mark)
 	_setup_file_menu()
 	_setup_edit_menu()
 	_setup_view_menu()
@@ -83,6 +86,11 @@ func _ready() -> void:
 	_setup_image_menu()
 	_setup_select_menu()
 	_setup_help_menu()
+
+
+func _update_current_frame_mark() -> void:
+	var project := Global.current_project
+	current_frame_mark.text = "%s/%s" % [str(project.current_frame + 1), project.frames.size()]
 
 
 func _setup_file_menu() -> void:

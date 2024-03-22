@@ -20,13 +20,14 @@ var transform_button_group: ButtonGroup
 
 
 func _ready() -> void:
+	Global.project_switched.connect(project_changed)
+	OpenSave.reference_image_imported.connect(_on_references_changed)
 	transform_button_group = transform_tools_btns.get_child(0).button_group
 	transform_button_group.pressed.connect(_on_transform_tool_button_group_pressed)
 	list_btn_group.pressed.connect(_on_reference_image_button_pressed)
 	Global.canvas.reference_image_container.reference_image_changed.connect(
 		_on_reference_image_changed
 	)
-	OpenSave.reference_image_imported.connect(_on_references_changed)
 	# We call this function to update the buttons
 	_on_references_changed()
 	_update_ui()
@@ -57,7 +58,7 @@ func reorder_reference_image(from: int, to: int, update_reference_index := true)
 	var project := Global.current_project
 	project.undo_redo.create_action("Reorder Reference Image")
 	project.undo_redo.add_do_method(project.reorder_reference_image.bind(from, to))
-	project.undo_redo.add_do_method(Global.reference_panel._on_references_changed)
+	project.undo_redo.add_do_method(_on_references_changed)
 	if update_reference_index:
 		project.undo_redo.add_do_method(project.set_reference_image_index.bind(to))
 	else:
@@ -67,7 +68,7 @@ func reorder_reference_image(from: int, to: int, update_reference_index := true)
 	project.undo_redo.add_do_method(_update_ui)
 
 	project.undo_redo.add_undo_method(project.reorder_reference_image.bind(to, from))
-	project.undo_redo.add_undo_method(Global.reference_panel._on_references_changed)
+	project.undo_redo.add_undo_method(_on_references_changed)
 	if update_reference_index:
 		project.undo_redo.add_undo_method(project.set_reference_image_index.bind(from))
 	else:

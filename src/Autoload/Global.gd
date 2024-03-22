@@ -584,9 +584,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
 ## The label indicating cursor position.
 @onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
-## The label indicating current frame number.
-@onready var current_frame_mark_label: Label = top_menu_container.find_child("CurrentFrameMark")
-
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
 ## The timer used by the animation timeline.

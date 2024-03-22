@@ -1060,6 +1060,7 @@ func _toggle_layer_buttons() -> void:
 
 func project_changed() -> void:
 	var project := Global.current_project
+	fps_spinbox.value = project.fps
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
 	# These must be removed from tree immediately to not mess up the indices of

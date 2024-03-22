@@ -190,10 +190,7 @@ func selection_map_changed() -> void:
 
 func change_project() -> void:
 	Global.animation_timeline.project_changed()
-
-	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 	animation_tags = animation_tags
-
 	# Change the guides
 	for guide in Global.canvas.get_children():
 		if guide is Guide:
@@ -206,14 +203,12 @@ func change_project() -> void:
 						guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 			else:
 				guide.visible = false
-
 	# Change the project brushes
 	Brushes.clear_project_brush()
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 
 	Global.transparent_checker.update_rect()
-	Global.animation_timeline.fps_spinbox.value = fps
 	Global.perspective_editor.update_points()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
@@ -230,7 +225,7 @@ func change_project() -> void:
 	else:
 		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
 
-	if !was_exported:
+	if not was_exported:
 		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 	else:
 		if export_overwrite:
@@ -247,12 +242,7 @@ func change_project() -> void:
 	for j in Tiles.MODE.values():
 		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tiles.mode)
 
-	# Change selection effect & bounding rectangle
-	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 	selection_map_changed()
-	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
-	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
-	Global.canvas.selection.queue_redraw()
 	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 
@@ -267,18 +257,6 @@ func change_project() -> void:
 	for ri: ReferenceImage in reference_images:
 		if !canvas_references.has(ri) and !ri.is_inside_tree():
 			Global.canvas.reference_image_container.add_child(ri)
-
-	# Tell the reference images that the project changed
-	Global.reference_panel.project_changed()
-
-	var i := 0
-	for camera in Global.cameras:
-		camera.rotation = cameras_rotation[i]
-		camera.zoom = cameras_zoom[i]
-		camera.offset = cameras_offset[i]
-		camera.rotation_changed.emit()
-		camera.zoom_changed.emit()
-		i += 1
 
 
 func serialize() -> Dictionary:
@@ -548,7 +526,6 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 
 	if new_frame != current_frame:  # If the frame has changed
 		current_frame = new_frame
-		Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	if new_layer != current_layer:  # If the layer has changed
 		current_layer = new_layer
