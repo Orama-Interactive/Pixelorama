@@ -59,15 +59,6 @@ or CLI exporting. Loading pxo files in Pixelorama does not need this option to b
 """
 	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	Global.save_sprites_dialog.get_vbox().add_child(include_blended)
-	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
-	# Additionally, AppArmor policies prevent the app from writing to the /home
-	# directory. Until the proper AppArmor policies are determined to write to these
-	# files accordingly, use the user data folder where cache.ini is stored.
-	# Ubuntu Touch users can access these files in the File Manager at the directory
-	# ~/.local/pixelorama.orama-interactive/godot/app_userdata/Pixelorama.
-	if OS.has_feature("clickable"):
-		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
-		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
 	_handle_backup()
 
 	_handle_cmdline_arguments()
