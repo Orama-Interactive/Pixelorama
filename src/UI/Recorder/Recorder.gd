@@ -12,8 +12,20 @@ var cache: Array[Image] = []  ## Images stored during recording
 var frame_captured := 0  ## Used to visualize frames captured
 var skip_amount := 1  ## Number of "do" actions after which a frame can be captured
 var current_frame_no := 0  ## Used to compare with skip_amount to see if it can be captured
-
 var resize_percent := 100
+var _path_dialog: FileDialog:
+	get:
+		if not is_instance_valid(_path_dialog):
+			_path_dialog = FileDialog.new()
+			_path_dialog.exclusive = false
+			_path_dialog.popup_window = true
+			_path_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+			_path_dialog.access = FileDialog.ACCESS_FILESYSTEM
+			_path_dialog.use_native_dialog = Global.use_native_file_dialogs
+			_path_dialog.add_to_group(&"FileDialogs")
+			_path_dialog.dir_selected.connect(_on_path_dialog_dir_selected)
+			add_child(_path_dialog)
+		return _path_dialog
 
 @onready var captured_label := %CapturedLabel as Label
 @onready var project_list := $"%TargetProjectOption" as OptionButton
@@ -22,7 +34,6 @@ var resize_percent := 100
 @onready var path_field := $"%Path" as LineEdit
 @onready var options_dialog := $OptionsDialog as AcceptDialog
 @onready var options_container := %OptionsContainer as VBoxContainer
-@onready var path_dialog := $Path as FileDialog
 
 
 func _ready() -> void:
@@ -175,15 +186,15 @@ func _on_SpinBox_value_changed(value: float) -> void:
 
 
 func _on_Choose_pressed() -> void:
-	path_dialog.popup_centered()
-	path_dialog.current_dir = chosen_dir
+	_path_dialog.popup_centered()
+	_path_dialog.current_dir = chosen_dir
 
 
 func _on_open_folder_pressed() -> void:
 	OS.shell_open(path_field.text)
 
 
-func _on_Path_dir_selected(dir: String) -> void:
+func _on_path_dialog_dir_selected(dir: String) -> void:
 	chosen_dir = dir
 	path_field.text = chosen_dir
 	start_button.disabled = false

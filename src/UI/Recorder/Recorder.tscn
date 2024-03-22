@@ -223,12 +223,6 @@ editable = false
 layout_mode = 2
 text = "Choose"
 
-[node name="Path" type="FileDialog" parent="." groups=["FileDialogs"]]
-mode = 2
-exclusive = false
-popup_window = true
-access = 2
-
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="item_selected" from="ScrollContainer/CenterContainer/GridContainer/TargetProjectOption" to="." method="_on_TargetProjectOption_item_selected"]
@@ -240,5 +234,4 @@ access = 2
 [connection signal="toggled" from="OptionsDialog/PanelContainer/OptionsContainer/ModeType/Mode" to="." method="_on_Mode_toggled"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/OutputScale/Resize" to="." method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="OptionsDialog/PanelContainer/OptionsContainer/PathContainer/Choose" to="." method="_on_Choose_pressed"]
-[connection signal="dir_selected" from="Path" to="." method="_on_Path_dir_selected"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
