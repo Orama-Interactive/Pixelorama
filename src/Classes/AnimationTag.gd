@@ -59,6 +59,10 @@ func _init(_name: String, _color: Color, _from: int, _to: int) -> void:
 	to = _to
 
 
+func serialize() -> Dictionary:
+	return {"name": name, "color": color.to_html(), "from": from, "to": to}
+
+
 func get_size() -> int:
 	return to - from + 1
 

@@ -211,21 +211,9 @@ func serialize() -> Dictionary:
 	for layer in layers:
 		layer_data.append(layer.serialize())
 		layer_data[-1]["metadata"] = _serialize_metadata(layer)
-
 	var tag_data := []
 	for tag in animation_tags:
-		(
-			tag_data
-			. append(
-				{
-					"name": tag.name,
-					"color": tag.color.to_html(),
-					"from": tag.from,
-					"to": tag.to,
-				}
-			)
-		)
-
+		tag_data.append(tag.serialize())
 	var guide_data := []
 	for guide in guides:
 		if guide is SymmetryGuide:
