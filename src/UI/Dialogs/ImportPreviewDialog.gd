@@ -393,7 +393,7 @@ func obtain_sliced_data() -> void:
 	sliced_rects = unpak.get_used_rects(texture_rect.texture.get_image())
 
 
-func slice_preview():
+func slice_preview() -> void:
 	sliced_rects = null
 	obtain_sliced_data()
 	recycle_last_slice_result = true

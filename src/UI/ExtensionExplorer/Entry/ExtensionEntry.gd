@@ -51,7 +51,7 @@ func _on_RequestDelay_timeout() -> void:
 
 
 func _on_ImageRequest_request_completed(
-	_result, _response_code, _headers, body: PackedByteArray
+	_result: int, _response_code: int, _headers: PackedStringArray, body: PackedByteArray
 ) -> void:
 	# Update the received image
 	thumbnail_request.queue_free()

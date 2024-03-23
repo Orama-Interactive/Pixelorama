@@ -4,7 +4,7 @@
 class_name GradientEditNode
 extends Control
 
-signal updated(gradient, cc)
+signal updated(gradient: Gradient, cc: bool)
 
 var continuous_change := true
 var active_cursor: GradientCursor  ## Showing a color picker popup to change a cursor's color
@@ -91,10 +91,10 @@ class GradientCursor:
 		grand_parent.update_from_value()
 		queue_redraw()
 
-	func _can_drop_data(_position, data) -> bool:
+	func _can_drop_data(_position: Vector2, data) -> bool:
 		return typeof(data) == TYPE_COLOR
 
-	func _drop_data(_position, data) -> void:
+	func _drop_data(_position: Vector2, data) -> void:
 		set_color(data)
 
 

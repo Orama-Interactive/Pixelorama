@@ -80,6 +80,7 @@ class Gizmo:
 
 
 func _ready() -> void:
+	Global.project_switched.connect(_project_switched)
 	# It's being set to true only when the big_bounding_rectangle has a size larger than 0
 	set_process_input(false)
 	Global.camera.zoom_changed.connect(_update_on_zoom)
@@ -806,7 +807,7 @@ func delete(selected_cels := true) -> void:
 
 ## Makes a project brush out of the current selection's content.
 func new_brush() -> void:
-	var brush = get_enclosed_image()
+	var brush := get_enclosed_image()
 	if brush and !brush.is_invisible():
 		var brush_used: Image = brush.get_region(brush.get_used_rect())
 		Global.current_project.brushes.append(brush_used)
@@ -850,6 +851,13 @@ func clear_selection(use_undo := false) -> void:
 	queue_redraw()
 	if use_undo:
 		commit_undo("Clear Selection", undo_data_tmp)
+
+
+func _project_switched() -> void:
+	marching_ants_outline.offset = Global.current_project.selection_offset
+	big_bounding_rectangle = Global.current_project.selection_map.get_used_rect()
+	big_bounding_rectangle.position += Global.current_project.selection_offset
+	queue_redraw()
 
 
 func _get_preview_image() -> void:

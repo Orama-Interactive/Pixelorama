@@ -19,7 +19,7 @@ func _ready() -> void:
 	draw_guide_line()
 
 
-func draw_guide_line():
+func draw_guide_line() -> void:
 	if type == Types.HORIZONTAL:
 		points[0] = Vector2(-19999, 0)
 		points[1] = Vector2(19999, 0)

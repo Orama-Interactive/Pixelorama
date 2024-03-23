@@ -43,6 +43,7 @@ var should_tween := true
 
 
 func _ready() -> void:
+	Global.project_switched.connect(_project_switched)
 	if not DisplayServer.is_touchscreen_available():
 		set_process_input(false)
 	if index == Cameras.MAIN:
@@ -247,6 +248,12 @@ func _has_selection_tool() -> bool:
 		if slot.tool_node is BaseSelectionTool:
 			return true
 	return false
+
+
+func _project_switched() -> void:
+	camera_angle = Global.current_project.cameras_rotation[index]
+	zoom = Global.current_project.cameras_zoom[index]
+	offset = Global.current_project.cameras_offset[index]
 
 
 func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:

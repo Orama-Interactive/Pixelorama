@@ -24,6 +24,8 @@ var splash_dialog: AcceptDialog:
 
 
 func _init() -> void:
+	if not DirAccess.dir_exists_absolute("user://backups"):
+		DirAccess.make_dir_recursive_absolute("user://backups")
 	Global.shrink = _get_auto_display_scale()
 	_handle_layout_files()
 
@@ -59,23 +61,11 @@ or CLI exporting. Loading pxo files in Pixelorama does not need this option to b
 """
 	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	Global.save_sprites_dialog.get_vbox().add_child(include_blended)
-	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
-	# Additionally, AppArmor policies prevent the app from writing to the /home
-	# directory. Until the proper AppArmor policies are determined to write to these
-	# files accordingly, use the user data folder where cache.ini is stored.
-	# Ubuntu Touch users can access these files in the File Manager at the directory
-	# ~/.local/pixelorama.orama-interactive/godot/app_userdata/Pixelorama.
-	if OS.has_feature("clickable"):
-		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
-		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
-	_handle_backup()
-
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
-
 	if OS.get_name() == "Android":
 		OS.request_permissions()
-
+	_handle_backup()
 	_show_splash_screen()
 	Global.pixelorama_opened.emit()
 
@@ -183,26 +173,14 @@ func _show_splash_screen() -> void:
 func _handle_backup() -> void:
 	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
 	backup_confirmation.add_button("Discard All", false, "discard")
-	if Global.config_cache.has_section("backups"):
-		var project_paths = Global.config_cache.get_section_keys("backups")
-		if project_paths.size() > 0:
-			# Get backup paths
-			var backup_paths := []
-			for p_path in project_paths:
-				backup_paths.append(Global.config_cache.get_value("backups", p_path))
-			# Temporatily stop autosave until user confirms backup
-			OpenSave.autosave_timer.stop()
-			backup_confirmation.confirmed.connect(
-				_on_BackupConfirmation_confirmed.bind(project_paths, backup_paths)
-			)
-			backup_confirmation.custom_action.connect(
-				_on_BackupConfirmation_custom_action.bind(project_paths, backup_paths)
-			)
-			backup_confirmation.popup_centered()
-			modulate = Color(0.5, 0.5, 0.5)
-		else:
-			if Global.open_last_project:
-				load_last_project()
+	var backup_dir := DirAccess.open("user://backups")
+	if backup_dir.get_files().size() > 0:
+		# Temporatily stop autosave until user confirms backup
+		OpenSave.autosave_timer.stop()
+		backup_confirmation.confirmed.connect(_on_BackupConfirmation_confirmed)
+		backup_confirmation.custom_action.connect(_on_BackupConfirmation_custom_action)
+		backup_confirmation.popup_centered()
+		modulate = Color(0.5, 0.5, 0.5)
 	else:
 		if Global.open_last_project:
 			load_last_project()
@@ -251,31 +229,18 @@ func load_last_project() -> void:
 	if OS.get_name() == "Web":
 		return
 	# Check if any project was saved or opened last time
-	if Global.config_cache.has_section_key("preferences", "last_project_path"):
+	if Global.config_cache.has_section_key("data", "last_project_path"):
 		# Check if file still exists on disk
-		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
-		if FileAccess.file_exists(file_path):  # If yes then load the file
-			OpenSave.open_pxo_file(file_path)
-			# Sync file dialogs
-			Global.save_sprites_dialog.current_dir = file_path.get_base_dir()
-			Global.open_sprites_dialog.current_dir = file_path.get_base_dir()
-			Global.config_cache.set_value("data", "current_dir", file_path.get_base_dir())
-		else:
-			# If file doesn't exist on disk then warn user about this
-			Global.popup_error("Cannot find last project file.")
+		var file_path = Global.config_cache.get_value("data", "last_project_path")
+		load_recent_project_file(file_path)
 
 
 func load_recent_project_file(path: String) -> void:
 	if OS.get_name() == "Web":
 		return
-
 	# Check if file still exists on disk
 	if FileAccess.file_exists(path):  # If yes then load the file
 		OpenSave.handle_loading_file(path)
-		# Sync file dialogs
-		Global.save_sprites_dialog.current_dir = path.get_base_dir()
-		Global.open_sprites_dialog.current_dir = path.get_base_dir()
-		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 	else:
 		# If file doesn't exist on disk then warn user about this
 		Global.popup_error("Cannot find project file.")
@@ -285,7 +250,6 @@ func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 	for path in paths:
 		OpenSave.handle_loading_file(path)
 	Global.save_sprites_dialog.current_dir = paths[0].get_base_dir()
-	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
 
 func show_save_dialog(project := Global.current_project) -> void:
@@ -320,7 +284,6 @@ func save_project(path: String) -> void:
 	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
-		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 	if is_quitting_on_save:
 		changed_projects_on_quit.pop_front()
 		_save_on_quit_confirmation()
@@ -393,25 +356,15 @@ func _quit() -> void:
 	get_tree().quit()
 
 
-func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array) -> void:
-	OpenSave.reload_backup_file(project_paths, backup_paths)
-	Global.current_project.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
-	Global.current_project.directory_path = OpenSave.current_save_paths[0].get_base_dir()
-	Global.current_project.was_exported = false
-	Global.top_menu_container.file_menu.set_item_text(
-		Global.FileMenu.SAVE, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file()
-	)
-	Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
+func _on_BackupConfirmation_confirmed() -> void:
+	OpenSave.reload_backup_file()
 
 
-func _on_BackupConfirmation_custom_action(
-	action: String, project_paths: Array, backup_paths: Array
-) -> void:
+func _on_BackupConfirmation_custom_action(action: String) -> void:
 	backup_confirmation.hide()
 	if action != "discard":
 		return
-	for i in range(project_paths.size()):
-		OpenSave.remove_backup_by_path(project_paths[i], backup_paths[i])
+	_clear_backup_files()
 	# Reopen last project
 	if Global.open_last_project:
 		load_last_project()
@@ -423,6 +376,11 @@ func _on_backup_confirmation_visibility_changed() -> void:
 	if Global.enable_autosave:
 		OpenSave.autosave_timer.start()
 	Global.dialog_open(false)
+
+
+func _clear_backup_files() -> void:
+	for file in DirAccess.get_files_at("user://backups"):
+		DirAccess.remove_absolute("user://backups".path_join(file))
 
 
 func _exit_tree() -> void:
@@ -448,8 +406,7 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
 	Global.config_cache.save("user://cache.ini")
 
-	var i := 0
 	for project in Global.projects:
 		project.remove()
-		OpenSave.remove_backup(i)
-		i += 1
+	# For some reason, the above is not enough to remove all backup files
+	_clear_backup_files()

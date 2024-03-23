@@ -121,11 +121,11 @@ func _average(color_1: Color, color_2: Color) -> void:
 	average_color.color = average
 
 
-func _on_CopyAverage_button_down():
+func _on_CopyAverage_button_down() -> void:
 	average_color.visible = false
 
 
-func _on_CopyAverage_button_up():
+func _on_CopyAverage_button_up() -> void:
 	average_color.visible = true
 
 

@@ -49,6 +49,7 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var panels_submenu := PopupMenu.new()
 @onready var layouts_submenu := PopupMenu.new()
 @onready var recent_projects_submenu := PopupMenu.new()
+@onready var current_frame_mark := $HBoxContainer/CurrentFrameMark as Label
 
 
 class Dialog:
@@ -76,6 +77,8 @@ class Dialog:
 
 
 func _ready() -> void:
+	Global.project_switched.connect(_project_switched)
+	Global.cel_switched.connect(_update_current_frame_mark)
 	_setup_file_menu()
 	_setup_edit_menu()
 	_setup_view_menu()
@@ -83,6 +86,32 @@ func _ready() -> void:
 	_setup_image_menu()
 	_setup_select_menu()
 	_setup_help_menu()
+
+
+func _project_switched() -> void:
+	var project := Global.current_project
+	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
+	if project.export_directory_path.is_empty():
+		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
+	else:
+		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save") + " %s" % project.file_name)
+	if project.was_exported:
+		var f_name := " %s" % (project.file_name + Export.file_format_string(project.file_format))
+		if project.export_overwrite:
+			file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Overwrite") + f_name)
+		else:
+			file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export") + f_name)
+	else:
+		file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
+	for j in Tiles.MODE.values():
+		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
+
+	_update_current_frame_mark()
+
+
+func _update_current_frame_mark() -> void:
+	var project := Global.current_project
+	current_frame_mark.text = "%s/%s" % [str(project.current_frame + 1), project.frames.size()]
 
 
 func _setup_file_menu() -> void:
@@ -453,15 +482,14 @@ func _open_project_file() -> void:
 
 
 func _on_open_last_project_file_menu_option_pressed() -> void:
-	if Global.config_cache.has_section_key("preferences", "last_project_path"):
+	if Global.config_cache.has_section_key("data", "last_project_path"):
 		Global.control.load_last_project()
 	else:
-		Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
-		_popup_dialog(Global.error_dialog)
+		Global.popup_error("You haven't saved or opened any project in Pixelorama yet!")
 
 
 func _save_project_file() -> void:
-	var path: String = OpenSave.current_save_paths[Global.current_project_index]
+	var path: String = Global.current_project.save_path
 	if path == "":
 		Global.control.show_save_dialog()
 	else:

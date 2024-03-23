@@ -73,11 +73,13 @@ var cameras_zoom: PackedVector2Array = [
 var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 
 # Export directory path and export file name
-var directory_path := ""
+var save_path := ""
+var export_directory_path := ""
 var file_name := "untitled"
 var file_format := Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
+var backup_path := ""
 
 var animation_tag_node := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
@@ -88,20 +90,15 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	size = _size
 	tiles = Tiles.new(size)
 	selection_map.copy_from(Image.create(size.x, size.y, false, Image.FORMAT_LA8))
-
 	Global.tabs.add_tab(name)
-	OpenSave.current_save_paths.append("")
-	OpenSave.backup_save_paths.append("")
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1
-
 	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
 	x_symmetry_axis.project = self
 	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point / 2 + 0.5))
 	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point / 2 + 0.5))
 	Global.canvas.add_child(x_symmetry_axis)
-
 	y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
 	y_symmetry_axis.project = self
 	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, -19999))
@@ -109,15 +106,16 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	Global.canvas.add_child(y_symmetry_axis)
 
 	if OS.get_name() == "Web":
-		directory_path = "user://"
+		export_directory_path = "user://"
 	else:
-		directory_path = Global.config_cache.get_value(
+		export_directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
 	Global.project_created.emit(self)
 
 
 func remove() -> void:
+	remove_backup_file()
 	undo_redo.free()
 	for ri in reference_images:
 		ri.queue_free()
@@ -136,6 +134,12 @@ func remove() -> void:
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
 	layers.clear()
 	Global.projects.erase(self)
+
+
+func remove_backup_file() -> void:
+	if not backup_path.is_empty():
+		if FileAccess.file_exists(backup_path):
+			DirAccess.remove_absolute(backup_path)
 
 
 func commit_undo() -> void:
@@ -186,96 +190,20 @@ func selection_map_changed() -> void:
 
 func change_project() -> void:
 	Global.animation_timeline.project_changed()
-
-	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 	animation_tags = animation_tags
-
-	# Change the guides
-	for guide in Global.canvas.get_children():
-		if guide is Guide:
-			if guide in guides:
-				guide.visible = Global.show_guides
-				if guide is SymmetryGuide:
-					if guide.type == Guide.Types.HORIZONTAL:
-						guide.visible = Global.show_x_symmetry_axis and Global.show_guides
-					else:
-						guide.visible = Global.show_y_symmetry_axis and Global.show_guides
-			else:
-				guide.visible = false
-
 	# Change the project brushes
 	Brushes.clear_project_brush()
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
-
 	Global.transparent_checker.update_rect()
-	Global.animation_timeline.fps_spinbox.value = fps
-	Global.perspective_editor.update_points()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
-
 	Global.main_window.title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.main_window.title = Global.main_window.title + "(*)"
-
-	var save_path := OpenSave.current_save_paths[Global.current_project_index]
-	if save_path != "":
-		Global.open_sprites_dialog.current_path = save_path
-		Global.save_sprites_dialog.current_path = save_path
-		Global.top_menu_container.file_menu.set_item_text(
-			Global.FileMenu.SAVE, tr("Save") + " %s" % save_path.get_file()
-		)
-	else:
-		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
-
-	if !was_exported:
-		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
-	else:
-		if export_overwrite:
-			Global.top_menu_container.file_menu.set_item_text(
-				Global.FileMenu.EXPORT,
-				tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
-			)
-		else:
-			Global.top_menu_container.file_menu.set_item_text(
-				Global.FileMenu.EXPORT,
-				tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
-			)
-
-	for j in Tiles.MODE.values():
-		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tiles.mode)
-
-	# Change selection effect & bounding rectangle
-	Global.canvas.selection.marching_ants_outline.offset = selection_offset
+	if export_directory_path != "":
+		Global.open_sprites_dialog.current_path = export_directory_path
+		Global.save_sprites_dialog.current_path = export_directory_path
 	selection_map_changed()
-	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
-	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
-	Global.canvas.selection.queue_redraw()
-	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu
-	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
-
-	# We loop through all the reference image nodes and the ones that are not apart
-	# of the current project we remove from the tree
-	# They will still be in memory though
-	for ri: ReferenceImage in Global.canvas.reference_image_container.get_children():
-		if !reference_images.has(ri):
-			Global.canvas.reference_image_container.remove_child(ri)
-	# Now we loop through this projects reference images and add them back to the tree
-	var canvas_references := Global.canvas.reference_image_container.get_children()
-	for ri: ReferenceImage in reference_images:
-		if !canvas_references.has(ri) and !ri.is_inside_tree():
-			Global.canvas.reference_image_container.add_child(ri)
-
-	# Tell the reference images that the project changed
-	Global.reference_panel.project_changed()
-
-	var i := 0
-	for camera in Global.cameras:
-		camera.rotation = cameras_rotation[i]
-		camera.zoom = cameras_zoom[i]
-		camera.offset = cameras_offset[i]
-		camera.rotation_changed.emit()
-		camera.zoom_changed.emit()
-		i += 1
 
 
 func serialize() -> Dictionary:
@@ -283,31 +211,18 @@ func serialize() -> Dictionary:
 	for layer in layers:
 		layer_data.append(layer.serialize())
 		layer_data[-1]["metadata"] = _serialize_metadata(layer)
-
 	var tag_data := []
 	for tag in animation_tags:
-		(
-			tag_data
-			. append(
-				{
-					"name": tag.name,
-					"color": tag.color.to_html(),
-					"from": tag.from,
-					"to": tag.to,
-				}
-			)
-		)
-
+		tag_data.append(tag.serialize())
 	var guide_data := []
 	for guide in guides:
 		if guide is SymmetryGuide:
 			continue
 		if !is_instance_valid(guide):
 			continue
-		var coords = guide.points[0].x
+		var coords := guide.points[0].x
 		if guide.type == Guide.Types.HORIZONTAL:
 			coords = guide.points[0].y
-
 		guide_data.append({"type": guide.type, "pos": coords})
 
 	var frame_data := []
@@ -339,7 +254,6 @@ func serialize() -> Dictionary:
 		"tile_mode_x_basis_y": tiles.x_basis.y,
 		"tile_mode_y_basis_x": tiles.y_basis.x,
 		"tile_mode_y_basis_y": tiles.y_basis.y,
-		"save_path": OpenSave.current_save_paths[Global.projects.find(self)],
 		"layers": layer_data,
 		"tags": tag_data,
 		"guides": guide_data,
@@ -348,7 +262,6 @@ func serialize() -> Dictionary:
 		"brushes": brush_data,
 		"reference_images": reference_image_data,
 		"vanishing_points": vanishing_points,
-		"export_directory_path": directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
@@ -372,8 +285,6 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if dict.has("tile_mode_y_basis_x") and dict.has("tile_mode_y_basis_y"):
 		tiles.y_basis.x = dict.tile_mode_y_basis_x
 		tiles.y_basis.y = dict.tile_mode_y_basis_y
-	if dict.has("save_path"):
-		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames") and dict.has("layers"):
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
@@ -467,8 +378,6 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			x_symmetry_axis.points[point].y = floorf(y_symmetry_point / 2 + 1)
 		for point in y_symmetry_axis.points.size():
 			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
-	if dict.has("export_directory_path"):
-		directory_path = dict.export_directory_path
 	if dict.has("export_file_name"):
 		file_name = dict.export_file_name
 	if dict.has("export_file_format"):
@@ -552,7 +461,6 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 
 	if new_frame != current_frame:  # If the frame has changed
 		current_frame = new_frame
-		Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	if new_layer != current_layer:  # If the layer has changed
 		current_layer = new_layer

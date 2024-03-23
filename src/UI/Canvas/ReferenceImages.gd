@@ -90,7 +90,7 @@ func _input(event: InputEvent) -> void:
 					var overlapping: Array[ReferenceImage] = []
 
 					for idx: int in Global.current_project.reference_images.size():
-						var r = Global.current_project.reference_images[idx]
+						var r := Global.current_project.reference_images[idx]
 						# The bounding polygon
 						var p := get_reference_polygon(idx)
 						if Geometry2D.is_point_in_polygon(local_mouse_pos, p):
@@ -169,7 +169,7 @@ func _input(event: InputEvent) -> void:
 
 ## Uniformly scales the [ReferenceImage] using this nodes "local_mouse_position".
 func scale_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
-	var s = (
+	var s := (
 		Vector2.ONE
 		* minf(
 			float(mouse_pos.x - drag_start_pos.x),
@@ -182,9 +182,9 @@ func scale_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
 
 ## Rotate the [ReferenceImage] using this nodes "local_mouse_position".
 func rotate_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
-	var starting_angle = og_rotation - og_pos.angle_to_point(drag_start_pos)
-	var new_angle = img.position.angle_to_point(mouse_pos)
-	var angle = starting_angle + new_angle
+	var starting_angle := og_rotation - og_pos.angle_to_point(drag_start_pos)
+	var new_angle := img.position.angle_to_point(mouse_pos)
+	var angle := starting_angle + new_angle
 	angle = deg_to_rad(floorf(rad_to_deg(wrapf(angle, -PI, PI))))
 	img.rotation = angle
 
@@ -201,7 +201,7 @@ func get_reference_polygon(i: int) -> PackedVector2Array:
 
 	var ri: ReferenceImage = Global.current_project.reference_images[i]
 	var rect := ri.get_rect()
-	var poly = get_transformed_rect_polygon(rect, ri.transform)
+	var poly := get_transformed_rect_polygon(rect, ri.transform)
 	return poly
 
 
@@ -229,7 +229,7 @@ func get_transformed_rect_polygon(rect: Rect2, t: Transform2D) -> PackedVector2A
 	return final
 
 
-func populate_reference_menu(items: Array[ReferenceImage], default := false):
+func populate_reference_menu(items: Array[ReferenceImage], default := false) -> void:
 	reference_menu.clear()
 	# Default / Reset
 	if default:
@@ -260,7 +260,6 @@ func remove_reference_image(idx: int) -> void:
 	ri.queue_free()
 	Global.current_project.set_reference_image_index(-1)
 	Global.current_project.change_project()
-	Global.reference_panel._on_references_changed()
 
 
 func _update_on_zoom() -> void:
@@ -321,7 +320,7 @@ func _draw() -> void:
 	# If we are dragging show where the Reference was coming from
 	if dragging:
 		var i: ReferenceImage = Global.current_project.get_current_reference_image()
-		var prev_transform = Transform2D(og_rotation, og_scale, 0.0, og_pos)
+		var prev_transform := Transform2D(og_rotation, og_scale, 0.0, og_pos)
 		var prev_poly := get_transformed_rect_polygon(i.get_rect(), prev_transform)
 		prev_poly.append(prev_poly[0])
 		draw_polyline(prev_poly, Color(1, 0.29, 0.29), line_width)

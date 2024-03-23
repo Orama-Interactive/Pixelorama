@@ -69,7 +69,7 @@ func toggle_ok_button_disability(disable: bool) -> void:
 
 
 func _on_CreatePaletteDialog_visibility_changed() -> void:
-	Global.dialog_open(false)
+	Global.dialog_open(visible)
 
 
 func _on_CreatePaletteDialog_confirmed() -> void:

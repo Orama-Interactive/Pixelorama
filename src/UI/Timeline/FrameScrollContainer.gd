@@ -5,7 +5,7 @@ const PADDING := 1
 @export var h_scroll_bar: HScrollBar
 
 
-func _ready():
+func _ready() -> void:
 	sort_children.connect(_on_sort_children)
 	if is_instance_valid(h_scroll_bar):
 		h_scroll_bar.resized.connect(_update_scroll)
@@ -34,7 +34,7 @@ func _update_scroll() -> void:
 			get_child(0).position.x = -h_scroll_bar.value + PADDING
 
 
-func ensure_control_visible(control: Control):
+func ensure_control_visible(control: Control) -> void:
 	if not is_instance_valid(control):
 		return
 	# Based on Godot's implementation in ScrollContainer

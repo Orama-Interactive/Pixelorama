@@ -35,7 +35,7 @@ var _action_history: Dictionary = {}
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func check_sanity(extension_name: String):
+func check_sanity(extension_name: String) -> void:
 	if extension_name in _action_history.keys():
 		var extension_history: Array = _action_history[extension_name]
 		if extension_history != []:
@@ -50,13 +50,13 @@ func check_sanity(extension_name: String):
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func clear_history(extension_name: String):
+func clear_history(extension_name: String) -> void:
 	if extension_name in _action_history.keys():
 		_action_history.erase(extension_name)
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func add_action(section: String, key: String):
+func add_action(section: String, key: String) -> void:
 	var action := str(section, "/", key)
 	var extension_name := _get_caller_extension_name()
 	if extension_name != "Unknown":
@@ -68,7 +68,7 @@ func add_action(section: String, key: String):
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func remove_action(section: String, key: String):
+func remove_action(section: String, key: String) -> void:
 	var action := str(section, "/", key)
 	var extension_name := _get_caller_extension_name()
 	if extension_name != "Unknown":
@@ -77,7 +77,7 @@ func remove_action(section: String, key: String):
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
-func wait_frame():  # Await is not available to classes below, so this is the solution
+func wait_frame() -> void:  # Await is not available to classes below, so this is the solution
 	# use by {await ExtensionsApi.wait_frame()}
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -244,7 +244,7 @@ class PanelAPI:
 	## but can be changed through adding custom layouts.
 	func add_node_as_tab(node: Node) -> void:
 		var dockable := _get_dockable_container_ui()
-		var top_menu_container = Global.top_menu_container
+		var top_menu_container := Global.top_menu_container
 		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
 		# adding the node to the first tab we find, it'll be re-ordered by layout anyway
 		var tabs := _get_tabs_in_root(dockable.layout.root)

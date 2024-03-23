@@ -8,7 +8,7 @@ const GIFExporter := preload("res://addons/gdgifexporter/exporter.gd")
 const MedianCutQuantization := preload("res://addons/gdgifexporter/quantization/median_cut.gd")
 
 
-func _init():
+func _init() -> void:
 	mime_type = "image/gif"
 
 

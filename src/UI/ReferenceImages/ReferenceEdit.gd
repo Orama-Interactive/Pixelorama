@@ -1,7 +1,7 @@
 extends VBoxContainer
 
+@export var references_panel: ReferencesPanel
 var undo_data: Dictionary
-
 var _prev_index: int = -1
 var _ignore_spinbox_changes: bool = false
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 	references_container.reference_image_changed.connect(_on_reference_image_changed)
 
 
-func _update_properties():
+func _update_properties() -> void:
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 	if !ri:
 		return
@@ -121,7 +121,7 @@ func _on_Filter_toggled(pressed: bool) -> void:
 	ri.filter = pressed
 
 
-func _on_Reset_pressed():
+func _on_Reset_pressed() -> void:
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 	if !ri:
 		return
@@ -130,7 +130,7 @@ func _on_Reset_pressed():
 	references_container.commit_undo("Reset Reference Image Position", undo_data_tmp)
 
 
-func _on_Remove_pressed():
+func _on_Remove_pressed() -> void:
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 	if !ri:
 		return
@@ -139,13 +139,14 @@ func _on_Remove_pressed():
 		# If shift is pressed we just remove it without a dialog
 		if Input.is_action_pressed("shift"):
 			references_container.remove_reference_image(index)
+			references_panel._on_references_changed()
 		else:
 			confirm_remove_dialog.position = Global.control.get_global_mouse_position()
 			confirm_remove_dialog.popup()
 			Global.dialog_open(true)
 
 
-func _on_X_value_changed(value: float):
+func _on_X_value_changed(value: float) -> void:
 	if _ignore_spinbox_changes:
 		return
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
@@ -157,7 +158,7 @@ func _on_X_value_changed(value: float):
 	ri.position.x = value
 
 
-func _on_Y_value_changed(value: float):
+func _on_Y_value_changed(value: float) -> void:
 	if _ignore_spinbox_changes:
 		return
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
@@ -169,7 +170,7 @@ func _on_Y_value_changed(value: float):
 	ri.position.y = value
 
 
-func _on_Scale_value_changed(value: float):
+func _on_Scale_value_changed(value: float) -> void:
 	if _ignore_spinbox_changes:
 		return
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
@@ -182,7 +183,7 @@ func _on_Scale_value_changed(value: float):
 	ri.scale.y = value / 100
 
 
-func _on_Rotation_value_changed(value: float):
+func _on_Rotation_value_changed(value: float) -> void:
 	if _ignore_spinbox_changes:
 		return
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
@@ -194,7 +195,7 @@ func _on_Rotation_value_changed(value: float):
 	ri.rotation_degrees = value
 
 
-func _on_Overlay_color_changed(color: Color):
+func _on_Overlay_color_changed(color: Color) -> void:
 	if _ignore_spinbox_changes:
 		return
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
@@ -206,7 +207,7 @@ func _on_Overlay_color_changed(color: Color):
 	ri.overlay_color = Color(color, ri.overlay_color.a)
 
 
-func _on_Opacity_value_changed(value: float):
+func _on_Opacity_value_changed(value: float) -> void:
 	if _ignore_spinbox_changes:
 		return
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
@@ -218,7 +219,7 @@ func _on_Opacity_value_changed(value: float):
 	ri.overlay_color.a = value / 100
 
 
-func _on_ColorClamping_value_changed(value: float):
+func _on_ColorClamping_value_changed(value: float) -> void:
 	if _ignore_spinbox_changes:
 		return
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
@@ -238,6 +239,7 @@ func _on_confirm_remove_dialog_confirmed() -> void:
 	var index: int = Global.current_project.reference_index
 	if index > -1:
 		references_container.remove_reference_image(index)
+		references_panel._on_references_changed()
 		Global.dialog_open(false)
 
 

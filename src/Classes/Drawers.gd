@@ -29,7 +29,7 @@ class ColorOp:
 class SimpleDrawer:
 	func set_pixel(image: Image, position: Vector2i, color: Color, op: ColorOp) -> void:
 		var color_old := image.get_pixelv(position)
-		var color_str = color.to_html()
+		var color_str := color.to_html()
 		var color_new := op.process(Color(color_str), color_old)
 		if not color_new.is_equal_approx(color_old):
 			image.set_pixelv(position, color_new)

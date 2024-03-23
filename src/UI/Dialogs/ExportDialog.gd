@@ -97,7 +97,7 @@ func show_tab() -> void:
 
 func set_preview() -> void:
 	_preview_images = Export.processed_images
-	var preview_data = {
+	var preview_data := {
 		"exporter_id": Global.current_project.file_format,
 		"export_tab": Export.current_tab,
 		"preview_images": _preview_images,
@@ -276,18 +276,18 @@ func _on_ExportDialog_about_to_show() -> void:
 	# If we're on Web, don't let the user change the directory path
 	if OS.get_name() == "Web":
 		get_tree().call_group("NotHTML5", "hide")
-		project.directory_path = "user://"
+		project.export_directory_path = "user://"
 
-	if project.directory_path.is_empty():
-		project.directory_path = Global.config_cache.get_value(
+	if project.export_directory_path.is_empty():
+		project.export_directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
 
 	# If export already occurred - sets GUI to show previous settings
 	options_resize.value = Export.resize
 	options_interpolation.selected = Export.interpolation
-	path_line_edit.text = project.directory_path
-	path_dialog_popup.current_dir = project.directory_path
+	path_line_edit.text = project.export_directory_path
+	path_dialog_popup.current_dir = project.export_directory_path
 	file_line_edit.text = project.file_name
 	file_format_options.selected = project.file_format
 	show_tab()
@@ -359,7 +359,7 @@ func _on_PathButton_pressed() -> void:
 
 
 func _on_PathLineEdit_text_changed(new_text: String) -> void:
-	Global.current_project.directory_path = new_text
+	Global.current_project.export_directory_path = new_text
 
 
 func _on_FileLineEdit_text_changed(new_text: String) -> void:
@@ -368,7 +368,7 @@ func _on_FileLineEdit_text_changed(new_text: String) -> void:
 
 func _on_FileDialog_dir_selected(dir: String) -> void:
 	path_line_edit.text = dir
-	Global.current_project.directory_path = dir
+	Global.current_project.export_directory_path = dir
 
 
 func _on_FileFormat_item_selected(idx: int) -> void:

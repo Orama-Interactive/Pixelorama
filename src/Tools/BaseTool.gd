@@ -1,7 +1,7 @@
 class_name BaseTool
 extends VBoxContainer
 
-var is_moving = false
+var is_moving := false
 var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""

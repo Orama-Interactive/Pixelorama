@@ -147,6 +147,8 @@ var smooth_zoom := true
 ## Found in Preferences. If [code]true[/code], the zoom is restricted to integral multiples of 100%.
 var integer_zoom := false:
 	set(value):
+		if value == integer_zoom:
+			return
 		integer_zoom = value
 		var zoom_slider: ValueSlider = top_menu_container.get_node("%ZoomSlider")
 		if value:
@@ -164,6 +166,8 @@ var shrink := 1.0
 ## Found in Preferences. The font size used by the interface.
 var font_size := 16:
 	set(value):
+		if font_size == value:
+			return
 		font_size = value
 		control.theme.default_font_size = value
 		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
@@ -173,6 +177,8 @@ var dim_on_popup := true
 ## operating system are being used, instead of Godot's FileDialog node.
 var use_native_file_dialogs := false:
 	set(value):
+		if value == use_native_file_dialogs:
+			return
 		use_native_file_dialogs = value
 		if not is_inside_tree():
 			await tree_entered
@@ -191,6 +197,8 @@ var modulate_icon_color := Color.GRAY
 ## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
 var icon_color_from := ColorFrom.THEME:
 	set(value):
+		if value == icon_color_from:
+			return
 		icon_color_from = value
 		var themes = preferences_dialog.themes
 		if icon_color_from == ColorFrom.THEME:
@@ -202,6 +210,8 @@ var icon_color_from := ColorFrom.THEME:
 ## Found in Preferences. Color of icons when [member icon_color_from] is set to use custom colors.
 var custom_icon_color := Color.GRAY:
 	set(value):
+		if value == custom_icon_color:
+			return
 		custom_icon_color = value
 		if icon_color_from == ColorFrom.CUSTOM:
 			modulate_icon_color = custom_icon_color
@@ -210,21 +220,29 @@ var custom_icon_color := Color.GRAY:
 ## (aside from checker background).
 var modulate_clear_color := Color.GRAY:
 	set(value):
+		if value == modulate_clear_color:
+			return
 		modulate_clear_color = value
 		preferences_dialog.themes.change_clear_color()
 ## Found in Preferences. Determines if [member modulate_clear_color] uses custom or theme color.
 var clear_color_from := ColorFrom.THEME:
 	set(value):
+		if value == clear_color_from:
+			return
 		clear_color_from = value
 		preferences_dialog.themes.change_clear_color()
 ## Found in Preferences. The selected size mode of tool buttons using [enum ButtonSize] enum.
 var tool_button_size := ButtonSize.SMALL:
 	set(value):
+		if value == tool_button_size:
+			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
 ## Found in Preferences. The left tool color.
 var left_tool_color := Color("0086cf"):
 	set(value):
+		if value == left_tool_color:
+			return
 		left_tool_color = value
 		for child in Tools._tool_buttons.get_children():
 			var background: NinePatchRect = child.get_node("BackgroundLeft")
@@ -233,6 +251,8 @@ var left_tool_color := Color("0086cf"):
 ## Found in Preferences. The right tool color.
 var right_tool_color := Color("fd6d14"):
 	set(value):
+		if value == right_tool_color:
+			return
 		right_tool_color = value
 		for child in Tools._tool_buttons.get_children():
 			var background: NinePatchRect = child.get_node("BackgroundRight")
@@ -248,47 +268,65 @@ var snapping_distance := 32.0
 ## Found in Preferences. The grid type defined by [enum GridTypes] enum.
 var grid_type := GridTypes.CARTESIAN:
 	set(value):
+		if value == grid_type:
+			return
 		grid_type = value
 		canvas.grid.queue_redraw()
 ## Found in Preferences. The size of rectangular grid.
 var grid_size := Vector2i(2, 2):
 	set(value):
+		if value == grid_size:
+			return
 		grid_size = value
 		canvas.grid.queue_redraw()
 ## Found in Preferences. The size of isometric grid.
 var isometric_grid_size := Vector2i(16, 8):
 	set(value):
+		if value == isometric_grid_size:
+			return
 		isometric_grid_size = value
 		canvas.grid.queue_redraw()
 ## Found in Preferences. The grid offset from top-left corner of the canvas.
 var grid_offset := Vector2i.ZERO:
 	set(value):
+		if value == grid_offset:
+			return
 		grid_offset = value
 		canvas.grid.queue_redraw()
 ## Found in Preferences. If [code]true[/code], The grid draws over the area extended by
 ## tile-mode as well.
 var grid_draw_over_tile_mode := false:
 	set(value):
+		if value == grid_draw_over_tile_mode:
+			return
 		grid_draw_over_tile_mode = value
 		canvas.grid.queue_redraw()
 ## Found in Preferences. The color of grid.
 var grid_color := Color.BLACK:
 	set(value):
+		if value == grid_color:
+			return
 		grid_color = value
 		canvas.grid.queue_redraw()
 ## Found in Preferences. The minimum zoom after which pixel grid gets drawn if enabled.
 var pixel_grid_show_at_zoom := 1500.0:  # percentage
 	set(value):
+		if value == pixel_grid_show_at_zoom:
+			return
 		pixel_grid_show_at_zoom = value
 		canvas.pixel_grid.queue_redraw()
 ## Found in Preferences. The color of pixel grid.
 var pixel_grid_color := Color("21212191"):
 	set(value):
+		if value == pixel_grid_color:
+			return
 		pixel_grid_color = value
 		canvas.pixel_grid.queue_redraw()
 ## Found in Preferences. The color of guides.
 var guide_color := Color.PURPLE:
 	set(value):
+		if value == guide_color:
+			return
 		guide_color = value
 		for guide in canvas.get_children():
 			if guide is Guide:
@@ -296,31 +334,43 @@ var guide_color := Color.PURPLE:
 ## Found in Preferences. The size of checkers in the checker background.
 var checker_size := 10:
 	set(value):
+		if value == checker_size:
+			return
 		checker_size = value
 		transparent_checker.update_rect()
 ## Found in Preferences. The color of first checker.
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1):
 	set(value):
+		if value == checker_color_1:
+			return
 		checker_color_1 = value
 		transparent_checker.update_rect()
 ## Found in Preferences. The color of second checker.
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1):
 	set(value):
+		if value == checker_color_2:
+			return
 		checker_color_2 = value
 		transparent_checker.update_rect()
 ## Found in Preferences. The color of second checker.
 var checker_follow_movement := false:
 	set(value):
+		if value == checker_follow_movement:
+			return
 		checker_follow_movement = value
 		transparent_checker.update_rect()
 ## Found in Preferences. If [code]true[/code], the checker follows zoom.
 var checker_follow_scale := false:
 	set(value):
+		if value == checker_follow_scale:
+			return
 		checker_follow_scale = value
 		transparent_checker.update_rect()
 ## Found in Preferences. Opacity of the sprites rendered on the extended area of tile-mode.
 var tilemode_opacity := 1.0:
 	set(value):
+		if value == tilemode_opacity:
+			return
 		tilemode_opacity = value
 		canvas.tile_mode.queue_redraw()
 
@@ -329,12 +379,16 @@ var select_layer_on_button_click := false
 ## Found in Preferences. The onion color of past frames.
 var onion_skinning_past_color := Color.RED:
 	set(value):
+		if value == onion_skinning_past_color:
+			return
 		onion_skinning_past_color = value
 		canvas.onion_past.blue_red_color = value
 		canvas.onion_past.queue_redraw()
 ## Found in Preferences. The onion color of future frames.
 var onion_skinning_future_color := Color.BLUE:
 	set(value):
+		if value == onion_skinning_future_color:
+			return
 		onion_skinning_future_color = value
 		canvas.onion_future.blue_red_color = value
 		canvas.onion_future.queue_redraw()
@@ -342,12 +396,16 @@ var onion_skinning_future_color := Color.BLUE:
 ## Found in Preferences. If [code]true[/code], the selection rect has animated borders.
 var selection_animated_borders := true:
 	set(value):
+		if value == selection_animated_borders:
+			return
 		selection_animated_borders = value
 		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
 ## Found in Preferences. The first color of border.
 var selection_border_color_1 := Color.WHITE:
 	set(value):
+		if value == selection_border_color_1:
+			return
 		selection_border_color_1 = value
 		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
@@ -355,6 +413,8 @@ var selection_border_color_1 := Color.WHITE:
 ## Found in Preferences. The second color of border.
 var selection_border_color_2 := Color.BLACK:
 	set(value):
+		if value == selection_border_color_2:
+			return
 		selection_border_color_2 = value
 		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
@@ -365,6 +425,8 @@ var pause_when_unfocused := true
 ## Found in Preferences. The max fps, Pixelorama is allowed to use (does not limit fps if it is 0).
 var fps_limit := 0:
 	set(value):
+		if value == fps_limit:
+			return
 		fps_limit = value
 		Engine.max_fps = fps_limit
 ## Found in Preferences. Affects the per_pixel_transparency project setting.
@@ -381,14 +443,17 @@ var window_transparency := false:
 ## Found in Preferences. The time (in minutes) after which backup is created (if enabled).
 var autosave_interval := 1.0:
 	set(value):
+		if value == autosave_interval:
+			return
 		autosave_interval = value
 		OpenSave.update_autosave()
 ## Found in Preferences. If [code]true[/code], generation of backups get enabled.
 var enable_autosave := true:
 	set(value):
+		if value == enable_autosave:
+			return
 		enable_autosave = value
 		OpenSave.update_autosave()
-		preferences_dialog.autosave_interval.editable = enable_autosave
 ## Found in Preferences. The index of graphics renderer used by Pixelorama.
 var renderer := 0:
 	set = _renderer_changed
@@ -414,6 +479,8 @@ var right_square_indicator_visible := true
 ## Found in Preferences. If [code]true[/code], native cursors are used instead of default cursors.
 var native_cursors := false:
 	set(value):
+		if value == native_cursors:
+			return
 		native_cursors = value
 		if native_cursors:
 			Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS, Vector2(15, 15))
@@ -439,6 +506,8 @@ var show_guides := true
 var show_mouse_guides := false
 var display_layer_effects := true:
 	set(value):
+		if value == display_layer_effects:
+			return
 		display_layer_effects = value
 		if is_instance_valid(top_menu_container):
 			top_menu_container.view_menu.set_item_checked(ViewMenu.DISPLAY_LAYER_EFFECTS, value)
@@ -507,17 +576,10 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 ## The perspective editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
-
-## The reference panel. It has the [param ReferencesPanel.gd] script attached.
-@onready var reference_panel: ReferencesPanel = control.find_child("Reference Images")
-
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
 ## The label indicating cursor position.
 @onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
-## The label indicating current frame number.
-@onready var current_frame_mark_label: Label = top_menu_container.find_child("CurrentFrameMark")
-
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
 ## The timer used by the animation timeline.

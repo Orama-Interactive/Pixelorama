@@ -52,11 +52,15 @@ var to: int  ## First frame number in the tag (first frame in timeline is number
 
 
 ## Class Constructor (used as [code]AnimationTag.new(name, color, from, to)[/code])
-func _init(_name, _color, _from, _to) -> void:
+func _init(_name: String, _color: Color, _from: int, _to: int) -> void:
 	name = _name
 	color = _color
 	from = _from
 	to = _to
+
+
+func serialize() -> Dictionary:
+	return {"name": name, "color": color.to_html(), "from": from, "to": to}
 
 
 func get_size() -> int:
