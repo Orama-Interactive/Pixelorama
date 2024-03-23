@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=76 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -26,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://dukip7mvotxsp" path="res://assets/graphics/timeline/onion_skinning_off.png" id="29"]
 [ext_resource type="Texture2D" uid="uid://dinubfua8gqhw" path="res://assets/graphics/timeline/expandable.png" id="30"]
 [ext_resource type="Texture2D" uid="uid://fbwld5ofmocm" path="res://assets/graphics/timeline/loop.png" id="31"]
-[ext_resource type="PackedScene" uid="uid://c6je8lgr850wf" path="res://src/UI/Timeline/FrameTagDialog.tscn" id="42"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_r3l7p"]
 action = &"new_layer"
@@ -981,8 +980,6 @@ popup/item_0/text = "Above canvas"
 popup/item_0/id = 0
 popup/item_1/text = "Below canvas"
 popup/item_1/id = 1
-
-[node name="FrameTagDialog" parent="." instance=ExtResource("42")]
 
 [node name="DragHighlight" type="ColorRect" parent="."]
 visible = false

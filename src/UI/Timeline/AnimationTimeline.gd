@@ -5,6 +5,7 @@ signal animation_finished
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
+const FRAME_TAG_DIALOG_SCENE_PATH := "res://src/UI/Timeline/FrameTagDialog.tscn"
 
 var is_animation_running := false
 var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
@@ -24,6 +25,12 @@ var layer_effect_settings: AcceptDialog:
 			layer_effect_settings = load(LAYER_FX_SCENE_PATH).instantiate()
 			add_child(layer_effect_settings)
 		return layer_effect_settings
+var frame_tag_dialog: AcceptDialog:
+	get:
+		if not is_instance_valid(frame_tag_dialog):
+			frame_tag_dialog = load(FRAME_TAG_DIALOG_SCENE_PATH).instantiate()
+			add_child(frame_tag_dialog)
+		return frame_tag_dialog
 
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
 @onready var tag_spacer := %TagSpacer as Control
@@ -481,7 +488,7 @@ func copy_frames(
 
 
 func _on_FrameTagButton_pressed() -> void:
-	find_child("FrameTagDialog").popup_centered()
+	frame_tag_dialog.popup_centered()
 
 
 func _on_MoveLeft_pressed() -> void:
