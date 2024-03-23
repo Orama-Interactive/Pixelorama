@@ -1,13 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://rbyd7i6snxjc"]
+[gd_scene load_steps=5 format=3 uid="uid://rbyd7i6snxjc"]
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/Shading.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_se02m"]
+resource_name = "rotate"
+allow_unpress = true
+
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="LightenDarken" type="OptionButton" parent="." index="4"]
+[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_se02m")
+
+[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_se02m")
+
+[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_se02m")
+
+[node name="LightenDarken" type="OptionButton" parent="." index="5"]
 custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -18,7 +31,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Darken"
 popup/item_1/id = 1
 
-[node name="ShadingMode" type="OptionButton" parent="." index="5"]
+[node name="ShadingMode" type="OptionButton" parent="." index="6"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 item_count = 2
@@ -28,37 +41,29 @@ popup/item_0/id = 0
 popup/item_1/text = "Hue Shifting"
 popup/item_1/id = 1
 
-[node name="AmountSlider" parent="." index="6" instance=ExtResource("3")]
+[node name="AmountSlider" parent="." index="7" instance=ExtResource("3")]
 layout_mode = 2
 tooltip_text = "Lighten/Darken amount"
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 value = 10.0
 prefix = "Amount:"
 
-[node name="HueShiftingOptions" type="VBoxContainer" parent="." index="7"]
+[node name="HueShiftingOptions" type="VBoxContainer" parent="." index="8"]
 visible = false
 layout_mode = 2
 
 [node name="HueSlider" parent="HueShiftingOptions" index="0" instance=ExtResource("3")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 max_value = 180.0
 value = 10.0
 prefix = "Hue:"
 
 [node name="SatSlider" parent="HueShiftingOptions" index="1" instance=ExtResource("3")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 value = 10.0
 prefix = "Saturation:"
 
 [node name="ValueSlider" parent="HueShiftingOptions" index="2" instance=ExtResource("3")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 value = 10.0
 prefix = "Value:"
 

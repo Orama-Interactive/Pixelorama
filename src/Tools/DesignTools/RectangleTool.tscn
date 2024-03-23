@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhlab4q2dwu0a"]
+[gd_scene load_steps=4 format=3 uid="uid://dhlab4q2dwu0a"]
 
 [ext_resource type="PackedScene" uid="uid://n40lhf8hm7o1" path="res://src/Tools/BaseShapeDrawer.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/RectangleTool.gd" id="2"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_cyxrj"]
+resource_name = "rotate"
+allow_unpress = true
+
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
+
+[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_cyxrj")
+
+[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_cyxrj")
+
+[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_cyxrj")

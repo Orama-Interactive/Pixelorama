@@ -1,6 +1,7 @@
 extends Node
 
 signal color_changed(color: Color, button: int)
+signal flip_rotated(flip_x, flip_y, rotate_90, rotate_180, rotate_270)
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 

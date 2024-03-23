@@ -3,6 +3,11 @@ extends BaseTool
 var _brush := Brushes.get_default_brush()
 var _brush_size := 1
 var _brush_size_dynamics := 1
+var _brush_flip_x := false
+var _brush_flip_y := false
+var _brush_rotate_90 := false
+var _brush_rotate_180 := false
+var _brush_rotate_270 := false
 var _cache_limit := 3
 var _brush_interpolate := 0
 var _brush_image := Image.new()
@@ -54,6 +59,9 @@ func _on_BrushType_pressed() -> void:
 		if child is GridContainer:
 			child.columns = columns
 	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
+	Tools.flip_rotated.emit(
+		_brush_flip_x, _brush_flip_y, _brush_rotate_90, _brush_rotate_180, _brush_rotate_270
+	)
 
 
 func _on_Brush_selected(brush: Brushes.Brush) -> void:
@@ -122,6 +130,11 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$ColorInterpolation.value = _brush_interpolate
+	$RotationOptions/Flip/FlipX.button_pressed = _brush_flip_x
+	$RotationOptions/Flip/FlipY.button_pressed = _brush_flip_y
+	$RotationOptions/Rotate/Rotate90.button_pressed = _brush_rotate_90
+	$RotationOptions/Rotate/Rotate180.button_pressed = _brush_rotate_180
+	$RotationOptions/Rotate/Rotate270.button_pressed = _brush_rotate_270
 	update_brush()
 
 
@@ -151,6 +164,7 @@ func update_brush() -> void:
 				var random := randi() % _brush.random.size()
 				_orignal_brush_image = _brush.random[random]
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
+			update_brush_image_flip_and_rotate()
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
@@ -158,6 +172,7 @@ func update_brush() -> void:
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+	$RotationOptions.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
 
 
 func update_random_image() -> void:
@@ -166,6 +181,7 @@ func update_random_image() -> void:
 	var random := randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
 	_orignal_brush_image = _brush_image
+	update_brush_image_flip_and_rotate()
 	_brush_texture = ImageTexture.create_from_image(_brush_image)
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()
@@ -178,6 +194,19 @@ func update_mirror_brush() -> void:
 	_mirror_brushes.y.flip_y()
 	_mirror_brushes.xy = _mirror_brushes.x.duplicate()
 	_mirror_brushes.xy.flip_y()
+
+
+func update_brush_image_flip_and_rotate() -> void:
+	if _brush_flip_x == true:
+		_brush_image.flip_x()
+	if _brush_flip_y == true:
+		_brush_image.flip_y()
+	if _brush_rotate_90 == true:
+		_brush_image.rotate_90(CLOCKWISE)
+	if _brush_rotate_180 == true:
+		_brush_image.rotate_180()
+	if _brush_rotate_270 == true:
+		_brush_image.rotate_90(COUNTERCLOCKWISE)
 
 
 func update_mask(can_skip := true) -> void:
@@ -241,6 +270,7 @@ func draw_end(pos: Vector2i) -> void:
 	match _brush.type:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
+			update_brush_image_flip_and_rotate()
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
@@ -279,6 +309,7 @@ func _prepare_tool() -> void:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			# save _brush_image for safe keeping
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
+			update_brush_image_flip_and_rotate()
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
@@ -707,3 +738,28 @@ func _pick_color(pos: Vector2i) -> void:
 		else MOUSE_BUTTON_RIGHT
 	)
 	Tools.assign_color(color, button, false)
+
+
+func _on_flip_x_toggled(button_pressed: bool) -> void:
+	_brush_flip_x = button_pressed
+	update_brush()
+
+
+func _on_flip_y_toggled(button_pressed: bool) -> void:
+	_brush_flip_y = button_pressed
+	update_brush()
+
+
+func _on_rotate_90_toggled(button_pressed: bool) -> void:
+	_brush_rotate_90 = button_pressed
+	update_brush()
+
+
+func _on_rotate_180_toggled(button_pressed: bool) -> void:
+	_brush_rotate_180 = button_pressed
+	update_brush()
+
+
+func _on_rotate_270_toggled(button_pressed: bool) -> void:
+	_brush_rotate_270 = button_pressed
+	update_brush()
