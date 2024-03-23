@@ -13,6 +13,7 @@ var project := Global.current_project
 
 
 func _ready() -> void:
+	Global.project_switched.connect(_project_switched)
 	width = 2.0 / Global.camera.zoom.x
 	default_color = Global.guide_color
 	project.guides.append(self)
@@ -206,6 +207,18 @@ func force_input(event: InputEvent) -> void:
 
 func set_color(color: Color) -> void:
 	default_color = color
+
+
+func _project_switched() -> void:
+	if self in Global.current_project.guides:
+		visible = Global.show_guides
+		if self is SymmetryGuide:
+			if type == Types.HORIZONTAL:
+				visible = Global.show_x_symmetry_axis and Global.show_guides
+			else:
+				visible = Global.show_y_symmetry_axis and Global.show_guides
+	else:
+		visible = false
 
 
 func _outside_canvas() -> bool:

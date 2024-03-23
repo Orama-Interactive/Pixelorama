@@ -5,9 +5,7 @@ extends Sprite2D
 signal properties_changed
 
 var project := Global.current_project
-
 var shader := preload("res://src/Shaders/ReferenceImageShader.gdshader")
-
 var image_path := ""
 var filter := false:
 	set(value):
@@ -33,8 +31,11 @@ var color_clamping := 0.0:
 		if material:
 			get_material().set_shader_parameter("clamping", value)
 
+@onready var parent := get_parent()
+
 
 func _ready() -> void:
+	Global.project_switched.connect(_project_switched)
 	project.reference_images.append(self)
 	# Make this show behind parent because we want to use _draw() to draw over it
 	show_behind_parent = true
@@ -131,3 +132,14 @@ func create_from_image(image: Image) -> void:
 	var itex := ImageTexture.create_from_image(image)
 	texture = itex
 	position_reset()
+
+
+func _project_switched() -> void:
+	# Remove from the tree if it doesn't belong to the current project.
+	# It will still be in memory though.
+	if Global.current_project.reference_images.has(self):
+		if not is_inside_tree():
+			parent.add_child(self)
+	else:
+		if is_inside_tree():
+			parent.remove_child(self)

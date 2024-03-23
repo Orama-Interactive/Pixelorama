@@ -191,72 +191,19 @@ func selection_map_changed() -> void:
 func change_project() -> void:
 	Global.animation_timeline.project_changed()
 	animation_tags = animation_tags
-	# Change the guides
-	for guide in Global.canvas.get_children():
-		if guide is Guide:
-			if guide in guides:
-				guide.visible = Global.show_guides
-				if guide is SymmetryGuide:
-					if guide.type == Guide.Types.HORIZONTAL:
-						guide.visible = Global.show_x_symmetry_axis and Global.show_guides
-					else:
-						guide.visible = Global.show_y_symmetry_axis and Global.show_guides
-			else:
-				guide.visible = false
 	# Change the project brushes
 	Brushes.clear_project_brush()
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
-
 	Global.transparent_checker.update_rect()
-	Global.perspective_editor.update_points()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
-
 	Global.main_window.title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.main_window.title = Global.main_window.title + "(*)"
-
 	if export_directory_path != "":
 		Global.open_sprites_dialog.current_path = export_directory_path
 		Global.save_sprites_dialog.current_path = export_directory_path
-		Global.top_menu_container.file_menu.set_item_text(
-			Global.FileMenu.SAVE, tr("Save") + " %s" % file_name
-		)
-	else:
-		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
-
-	if not was_exported:
-		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
-	else:
-		if export_overwrite:
-			Global.top_menu_container.file_menu.set_item_text(
-				Global.FileMenu.EXPORT,
-				tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
-			)
-		else:
-			Global.top_menu_container.file_menu.set_item_text(
-				Global.FileMenu.EXPORT,
-				tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
-			)
-
-	for j in Tiles.MODE.values():
-		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tiles.mode)
-
 	selection_map_changed()
-	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu
-	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
-
-	# We loop through all the reference image nodes and the ones that are not apart
-	# of the current project we remove from the tree
-	# They will still be in memory though
-	for ri: ReferenceImage in Global.canvas.reference_image_container.get_children():
-		if !reference_images.has(ri):
-			Global.canvas.reference_image_container.remove_child(ri)
-	# Now we loop through this projects reference images and add them back to the tree
-	var canvas_references := Global.canvas.reference_image_container.get_children()
-	for ri: ReferenceImage in reference_images:
-		if !canvas_references.has(ri) and !ri.is_inside_tree():
-			Global.canvas.reference_image_container.add_child(ri)
 
 
 func serialize() -> Dictionary:

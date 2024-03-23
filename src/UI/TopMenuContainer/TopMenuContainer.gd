@@ -77,7 +77,7 @@ class Dialog:
 
 
 func _ready() -> void:
-	Global.project_switched.connect(_update_current_frame_mark)
+	Global.project_switched.connect(_project_switched)
 	Global.cel_switched.connect(_update_current_frame_mark)
 	_setup_file_menu()
 	_setup_edit_menu()
@@ -86,6 +86,27 @@ func _ready() -> void:
 	_setup_image_menu()
 	_setup_select_menu()
 	_setup_help_menu()
+
+
+func _project_switched() -> void:
+	var project := Global.current_project
+	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
+	if project.export_directory_path.is_empty():
+		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
+	else:
+		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save") + " %s" % project.file_name)
+	if project.was_exported:
+		var f_name := " %s" % (project.file_name + Export.file_format_string(project.file_format))
+		if project.export_overwrite:
+			file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Overwrite") + f_name)
+		else:
+			file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export") + f_name)
+	else:
+		file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
+	for j in Tiles.MODE.values():
+		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
+
+	_update_current_frame_mark()
 
 
 func _update_current_frame_mark() -> void:
