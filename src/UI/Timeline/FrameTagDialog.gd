@@ -6,7 +6,7 @@ var delete_tag_button: Button
 
 @onready var main_vbox_cont: VBoxContainer = $VBoxContainer/ScrollContainer/VBoxTagContainer
 @onready var add_tag_button: Button = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
-@onready var options_dialog = $TagOptions
+@onready var options_dialog := $TagOptions
 
 
 func _ready() -> void:
@@ -79,8 +79,8 @@ func _on_AddTag_pressed() -> void:
 
 
 func _on_EditButton_pressed(_tag_id: int, edit_button: Button) -> void:
-	var x_pos = edit_button.global_position.x
-	var y_pos = edit_button.global_position.y + 2 * edit_button.size.y
+	var x_pos := edit_button.global_position.x
+	var y_pos := edit_button.global_position.y + 2 * edit_button.size.y
 	options_dialog.popup(Rect2i(position + Vector2i(x_pos, y_pos), options_dialog.size))
 	current_tag_id = _tag_id
 	var animation_tag: AnimationTag = Global.current_project.animation_tags[_tag_id]

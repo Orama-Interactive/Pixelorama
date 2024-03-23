@@ -807,7 +807,7 @@ func delete(selected_cels := true) -> void:
 
 ## Makes a project brush out of the current selection's content.
 func new_brush() -> void:
-	var brush = get_enclosed_image()
+	var brush := get_enclosed_image()
 	if brush and !brush.is_invisible():
 		var brush_used: Image = brush.get_region(brush.get_used_rect())
 		Global.current_project.brushes.append(brush_used)

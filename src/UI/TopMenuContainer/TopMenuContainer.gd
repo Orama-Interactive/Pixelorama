@@ -485,8 +485,7 @@ func _on_open_last_project_file_menu_option_pressed() -> void:
 	if Global.config_cache.has_section_key("data", "last_project_path"):
 		Global.control.load_last_project()
 	else:
-		Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
-		_popup_dialog(Global.error_dialog)
+		Global.popup_error("You haven't saved or opened any project in Pixelorama yet!")
 
 
 func _save_project_file() -> void:

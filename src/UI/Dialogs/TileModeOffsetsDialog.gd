@@ -45,7 +45,7 @@ func _on_TileModeOffsetsDialog_about_to_show() -> void:
 	update_preview()
 
 
-func _show_options():
+func _show_options() -> void:
 	x_basis_x_spinbox.visible = true
 	x_basis_y_spinbox.visible = true
 	y_basis_x_spinbox.visible = true
@@ -102,12 +102,12 @@ func _on_TileModeOffsetsDialog_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 
-func _on_TileModeOffsetsDialog_size_changed():
+func _on_TileModeOffsetsDialog_size_changed() -> void:
 	if tile_mode:
 		update_preview()
 
 
-func _on_Reset_pressed():
+func _on_Reset_pressed() -> void:
 	tile_mode.tiles.x_basis = Vector2i(Global.current_project.size.x, 0)
 	tile_mode.tiles.y_basis = Vector2i(0, Global.current_project.size.y)
 	x_basis_x_spinbox.value = Global.current_project.size.x
@@ -117,7 +117,7 @@ func _on_Reset_pressed():
 	update_preview()
 
 
-func change_mask():
+func change_mask() -> void:
 	if Global.current_project.tiles.mode == Tiles.MODE.NONE:
 		return
 	var frame_idx := Global.current_project.current_frame
@@ -135,7 +135,7 @@ func change_mask():
 		load_mask(image)
 
 
-func load_mask(image: Image):
+func load_mask(image: Image) -> void:
 	Global.current_project.tiles.tile_mask = image
 	Global.current_project.tiles.has_mask = true
 

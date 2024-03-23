@@ -21,10 +21,10 @@ func _ready() -> void:
 func refresh_list() -> void:
 	animation_tags_list.clear()
 	for tag in from_project.animation_tags:
-		var img = Image.create(5, 5, true, Image.FORMAT_RGBA8)
+		var img := Image.create(5, 5, true, Image.FORMAT_RGBA8)
 		img.fill(tag.color)
-		var tex = ImageTexture.create_from_image(img)
-		var tag_title = tag.name
+		var tex := ImageTexture.create_from_image(img)
+		var tag_title := tag.name
 		if tag_title == "":
 			tag_title = "(Untitled)"
 		animation_tags_list.add_item(tag_title, tex)
@@ -60,7 +60,7 @@ func _on_FromProject_changed(id: int) -> void:
 
 func _on_TagList_id_pressed(id: int) -> void:
 	var tag: AnimationTag = from_project.animation_tags[id]
-	var frames = []
+	var frames := []
 	for i in range(tag.from - 1, tag.to):
 		frames.append(i)
 	if create_new_tags:
@@ -71,7 +71,7 @@ func _on_TagList_id_pressed(id: int) -> void:
 
 
 ## Gets frame indices of [member from_project] and dumps it in the current project.
-func add_animation(indices: Array, destination: int, from_tag: AnimationTag = null):
+func add_animation(indices: Array, destination: int, from_tag: AnimationTag = null) -> void:
 	var project: Project = Global.current_project
 	if from_project == project:  ## If we are copying tags within project
 		Global.animation_timeline.copy_frames(indices, destination, true, from_tag)
@@ -212,7 +212,7 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 	project.undo_redo.add_do_property(Global.current_project, "selected_cels", [])
 	project.undo_redo.add_undo_property(Global.current_project, "selected_cels", [])
 
-	var all_new_cels = []
+	var all_new_cels := []
 	# Select all the new frames so that it is easier to move/offset collectively if user wants
 	# To ease animation workflow, new current frame is the first copied frame instead of the last
 	var range_start: int = copied_indices[-1]

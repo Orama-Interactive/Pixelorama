@@ -55,7 +55,7 @@ func delete_point(idx: int) -> void:
 
 
 func do_delete_point(idx: int) -> void:
-	var point = vanishing_point_container.get_child(idx)
+	var point := vanishing_point_container.get_child(idx)
 	delete_pool.append(point.serialize())
 	point.queue_free()
 	point.update_data_to_project(true)

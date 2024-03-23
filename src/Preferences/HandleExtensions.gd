@@ -80,10 +80,10 @@ func _ready() -> void:
 		_add_extension(file_name)
 
 
+## This is an empty function at the moment, but internal extensions here should be added here
+## For example:
+## [code]read_extension("ExtensionName", true)[/code]
 func _add_internal_extensions() -> void:
-	## at the moment this is an empty function but you should add all internal extensions here
-	# for example:
-	#read_extension("ExtensionName", true)
 	pass
 
 
@@ -180,7 +180,7 @@ func _add_extension(file_name: String) -> void:
 	read_extension(file_name)
 
 
-func read_extension(extension_file_or_folder_name: StringName, internal := false):
+func read_extension(extension_file_or_folder_name: StringName, internal := false) -> void:
 	var file_name_no_ext := extension_file_or_folder_name.get_basename()
 	var extension_path := "res://src/Extensions/%s/" % file_name_no_ext
 	var extension_config_file_path := extension_path.path_join("extension.json")

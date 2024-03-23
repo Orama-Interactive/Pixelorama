@@ -1,7 +1,7 @@
 class_name Patterns
 extends PopupPanel
 
-signal pattern_selected(pattern)
+signal pattern_selected(pattern: Pattern)
 
 var default_pattern: Pattern = null
 
@@ -31,10 +31,10 @@ func create_button(image: Image) -> Node:
 
 
 func add(image: Image, hint := "") -> void:
-	var button = create_button(image)
+	var button := create_button(image)
 	button.pattern.image = image
 	button.tooltip_text = hint
-	var container = get_node("ScrollContainer/PatternContainer")
+	var container := get_node("ScrollContainer/PatternContainer")
 	container.add_child(button)
 	button.pattern.index = button.get_index()
 
@@ -44,7 +44,7 @@ func add(image: Image, hint := "") -> void:
 
 func get_pattern(index: int) -> Pattern:
 	var container = Global.patterns_popup.get_node("ScrollContainer/PatternContainer")
-	var pattern = default_pattern
+	var pattern := default_pattern
 	if index < container.get_child_count():
 		pattern = container.get_child(index).pattern
 	return pattern

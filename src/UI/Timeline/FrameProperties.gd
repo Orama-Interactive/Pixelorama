@@ -1,8 +1,8 @@
 extends ConfirmationDialog
 
 var frame_indices := []
-@onready var frame_num = $GridContainer/FrameNum
-@onready var frame_dur = $GridContainer/FrameTime
+@onready var frame_num := $GridContainer/FrameNum
+@onready var frame_dur := $GridContainer/FrameTime
 
 
 func _on_FrameProperties_about_to_show() -> void:

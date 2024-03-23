@@ -229,7 +229,7 @@ func get_transformed_rect_polygon(rect: Rect2, t: Transform2D) -> PackedVector2A
 	return final
 
 
-func populate_reference_menu(items: Array[ReferenceImage], default := false):
+func populate_reference_menu(items: Array[ReferenceImage], default := false) -> void:
 	reference_menu.clear()
 	# Default / Reset
 	if default:
@@ -320,7 +320,7 @@ func _draw() -> void:
 	# If we are dragging show where the Reference was coming from
 	if dragging:
 		var i: ReferenceImage = Global.current_project.get_current_reference_image()
-		var prev_transform = Transform2D(og_rotation, og_scale, 0.0, og_pos)
+		var prev_transform := Transform2D(og_rotation, og_scale, 0.0, og_pos)
 		var prev_poly := get_transformed_rect_polygon(i.get_rect(), prev_transform)
 		prev_poly.append(prev_poly[0])
 		draw_polyline(prev_poly, Color(1, 0.29, 0.29), line_width)

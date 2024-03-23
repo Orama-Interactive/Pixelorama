@@ -7,10 +7,10 @@ const CIRCLE_RAD := 4
 var angle := 0
 var length := 19999
 
-var is_hidden = false
+var is_hidden := false
 var has_focus := false
 var track_mouse := false
-var change_length = false
+var change_length := false
 
 var line_button: Node
 var _vanishing_point: Node
@@ -20,14 +20,14 @@ func serialize() -> Dictionary:
 	return {"angle": angle, "length": length}
 
 
-func deserialize(data: Dictionary):
+func deserialize(data: Dictionary) -> void:
 	if data.has("angle"):
 		angle = data.angle
 	if data.has("length"):
 		length = data.length
 
 
-func initiate(data: Dictionary, vanishing_point: Node):
+func initiate(data: Dictionary, vanishing_point: Node) -> void:
 	_vanishing_point = vanishing_point
 	Global.canvas.add_child(self)
 	deserialize(data)
@@ -37,12 +37,12 @@ func initiate(data: Dictionary, vanishing_point: Node):
 	refresh()
 
 
-func refresh():
+func refresh() -> void:
 	default_color = _vanishing_point.color
 	draw_perspective_line()
 
 
-func draw_perspective_line():
+func draw_perspective_line() -> void:
 	var start := Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
 	points[0] = start
 	if is_hidden:
@@ -53,7 +53,7 @@ func draw_perspective_line():
 		)
 
 
-func hide_perspective_line():
+func hide_perspective_line() -> void:
 	var start := Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
 	points[1] = start
 	is_hidden = true
@@ -88,7 +88,7 @@ func _input(event: InputEvent) -> void:
 		queue_redraw()
 
 
-func try_rotate_scale():
+func try_rotate_scale() -> void:
 	var mouse_point := Global.canvas.current_pixel
 	var project_size := Global.current_project.size
 	var test_line := (points[1] - points[0]).rotated(deg_to_rad(90)).normalized()

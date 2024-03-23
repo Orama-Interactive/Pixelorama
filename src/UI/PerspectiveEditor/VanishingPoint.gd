@@ -5,10 +5,10 @@ var perspective_lines := []
 var color := Color(randf(), randf(), randf(), 1)
 
 var tracker_line: PerspectiveLine
-@onready var color_picker_button = $"%ColorPickerButton"
+@onready var color_picker_button := $"%ColorPickerButton" as ColorPickerButton
 @onready var title := $"%PointCollapseContainer"
-@onready var pos_x := $"%X"
-@onready var pos_y := $"%Y"
+@onready var pos_y := $"%Y" as ValueSlider
+@onready var pos_x := $"%X" as ValueSlider
 @onready var line_buttons_container := $"%LinesContainer"
 @onready var boundary_l := $Content/BoundaryL
 @onready var boundary_r := $Content/BoundaryR
@@ -19,7 +19,7 @@ func serialize() -> Dictionary:
 	var lines_data := []
 	for line in perspective_lines:
 		lines_data.append(line.serialize())
-	var data = {
+	var data := {
 		"pos_x": pos_x.value,
 		"pos_y": pos_y.value,
 		"lines": lines_data,
@@ -28,7 +28,7 @@ func serialize() -> Dictionary:
 	return data
 
 
-func deserialize(start_data: Dictionary):
+func deserialize(start_data: Dictionary) -> void:
 	if start_data:  # Data is not {} means the project knows about this point
 		if start_data.has("pos_x") and start_data.has("pos_y"):
 			pos_x.value = start_data.pos_x
@@ -47,7 +47,7 @@ func deserialize(start_data: Dictionary):
 	update_boundary_color()
 
 
-func initiate(start_data: Dictionary = {}, idx = -1) -> void:
+func initiate(start_data := {}, idx := -1) -> void:
 	deserialize(start_data)
 	# Title of Vanishing point button
 	if idx != -1:  # If the initialization is part of a Redo
@@ -60,7 +60,7 @@ func initiate(start_data: Dictionary = {}, idx = -1) -> void:
 	pos_y.value_changed.connect(_on_pos_value_changed)
 
 
-func update_boundary_color():
+func update_boundary_color() -> void:
 	var luminance := (0.2126 * color.r) + (0.7152 * color.g) + (0.0722 * color.b)
 	color.a = 0.9 - luminance * 0.4  # Interpolates between 0.5 to 0.9
 	boundary_l.color = color
@@ -68,10 +68,10 @@ func update_boundary_color():
 	boundary_b.color = color
 
 
-func _input(_event: InputEvent):
-	var mouse_point = Global.canvas.current_pixel
-	var project_size = Global.current_project.size
-	var start = Vector2(pos_x.value, pos_y.value)
+func _input(_event: InputEvent) -> void:
+	var mouse_point := Global.canvas.current_pixel
+	var project_size := Global.current_project.size
+	var start := Vector2(pos_x.value, pos_y.value)
 	if (
 		Input.is_action_just_pressed("left_mouse")
 		and Global.can_draw
@@ -104,7 +104,7 @@ func _on_Delete_pressed() -> void:
 	Global.perspective_editor.delete_point(get_index())
 
 
-func _on_color_changed(_color: Color):
+func _on_color_changed(_color: Color) -> void:
 	update_boundary_color()
 	color = _color
 	refresh(-1)
@@ -116,32 +116,32 @@ func _on_pos_value_changed(_value: float) -> void:
 	update_data_to_project()
 
 
-func angle_changed(value: float, line_button):
+func angle_changed(value: float, line_button: Node) -> void:
 	# check if the properties are changing the line or is the line changing properties
-	var angle_slider = line_button.find_child("AngleSlider")
+	var angle_slider := line_button.find_child("AngleSlider")
 	if angle_slider.value != value:  # the line is changing the properties
 		angle_slider.value = value
 	else:
-		var line_index = line_button.get_index()
+		var line_index := line_button.get_index()
 		perspective_lines[line_index].angle = value
 		refresh(line_index)
 	update_data_to_project()
 
 
-func length_changed(value: float, line_button):
+func length_changed(value: float, line_button: Node) -> void:
 	# check if the properties are changing the line or is the line changing properties
-	var length_slider = line_button.find_child("LengthSlider")
+	var length_slider := line_button.find_child("LengthSlider")
 	if length_slider.value != value:  # the line is changing the properties
 		length_slider.value = value
 	else:
-		var line_index = line_button.get_index()
+		var line_index := line_button.get_index()
 		perspective_lines[line_index].length = value
 		refresh(line_index)
 	update_data_to_project()
 
 
-func _remove_line_pressed(line_button):
-	var index = line_button.get_index()
+func _remove_line_pressed(line_button: Node) -> void:
+	var index := line_button.get_index()
 	remove_line(index)
 	line_button.queue_free()
 	update_data_to_project()
@@ -159,7 +159,7 @@ func generate_line_data(initial_data: Dictionary = {}) -> Dictionary:
 	return line_data
 
 
-func add_line(loaded_line_data := {}, is_tracker := false):
+func add_line(loaded_line_data := {}, is_tracker := false) -> void:
 	var p_size := Global.current_project.size  # for use later in function
 
 	# Note: line_data will automatically get default values if loaded_line_data = {}
@@ -190,7 +190,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 	else:  # Settings for Normal mode
 		var line_button := preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instantiate()
 		line_buttons_container.add_child(line_button)
-		var index = line_button.get_parent().get_child_count() - 2
+		var index := line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
 
 		var line_name := str("Line", line_button.get_index() + 1, " (", absi(line_data.angle), "°)")
@@ -210,13 +210,13 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		perspective_lines.append(line)
 
 
-func remove_line(line_index):
+func remove_line(line_index: int) -> void:
 	var line_to_remove = perspective_lines[line_index]
 	perspective_lines.remove_at(line_index)
 	line_to_remove.queue_free()
 
 
-func update_data_to_project(removal := false):
+func update_data_to_project(removal := false) -> void:
 	var project := Global.current_project
 	var idx := get_index()
 	# If deletion is requested
@@ -233,7 +233,7 @@ func update_data_to_project(removal := false):
 	Global.current_project.has_changed = true
 
 
-func refresh(index: int):
+func refresh(index: int) -> void:
 	if index == -1:  # means all lines should be refreshed (including the tracker line)
 		refresh_tracker()
 		for i in perspective_lines.size():
@@ -242,15 +242,15 @@ func refresh(index: int):
 		refresh_line(index)
 
 
-func refresh_line(index: int):
-	var line_button = line_buttons_container.get_child(index)
+func refresh_line(index: int) -> void:
+	var line_button := line_buttons_container.get_child(index)
 	var line_data = perspective_lines[index].serialize()
 	var line_name := str("Line", line_button.get_index() + 1, " (", absi(line_data.angle), "°)")
 	line_button.text = line_name
 	perspective_lines[index].refresh()
 
 
-func refresh_tracker():
+func refresh_tracker() -> void:
 	tracker_line.refresh()
 
 

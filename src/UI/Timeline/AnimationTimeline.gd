@@ -156,7 +156,7 @@ func _on_LayerVBox_resized() -> void:
 	adjust_scroll_container()
 
 
-func adjust_scroll_container():
+func adjust_scroll_container() -> void:
 	tag_spacer.custom_minimum_size.x = (
 		frame_scroll_container.global_position.x - tag_scroll_container.global_position.x
 	)
@@ -386,7 +386,7 @@ func copy_frames(
 		)
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
-	var last_focus_cels = []
+	var last_focus_cels := []
 	for f in indices:
 		var src_frame := project.frames[f]
 		var new_frame := Frame.new()
@@ -453,7 +453,7 @@ func copy_frames(
 	project.undo_redo.add_do_method(project.add_frames.bind(copied_frames, copied_indices))
 	project.undo_redo.add_undo_method(project.remove_frames.bind(copied_indices))
 	if select_all_cels:
-		var all_new_cels = []
+		var all_new_cels := []
 		# Select all the new frames so that it is easier to move/offset collectively if user wants
 		# To ease animation workflow, new current frame is the first copied frame instead of the last
 		var range_start := copied_indices[-1]
@@ -884,7 +884,7 @@ func change_layer_order(up: bool) -> void:
 	for l in from_indices:
 		from_parents.append(project.layers[l].parent)
 	var to_parents := from_parents.duplicate()
-	var to_index = layer.index - child_count  # the index where the LOWEST shifted layer should end up
+	var to_index := layer.index - child_count  # the index where the LOWEST shifted layer should end up
 
 	if up:
 		var above_layer := project.layers[project.current_layer + 1]
@@ -1091,10 +1091,10 @@ func project_changed() -> void:
 		if layer < vbox_child_count:
 			var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(vbox_child_count - 1 - layer)
 			if frame < cel_hbox.get_child_count():
-				var cel_button = cel_hbox.get_child(frame)
+				var cel_button := cel_hbox.get_child(frame)
 				cel_button.button_pressed = true
 
-			var layer_button = Global.layer_vbox.get_child(vbox_child_count - 1 - layer)
+			var layer_button := Global.layer_vbox.get_child(vbox_child_count - 1 - layer)
 			layer_button.button_pressed = true
 
 
