@@ -260,7 +260,6 @@ func remove_reference_image(idx: int) -> void:
 	ri.queue_free()
 	Global.current_project.set_reference_image_index(-1)
 	Global.current_project.change_project()
-	Global.reference_panel._on_references_changed()
 
 
 func _update_on_zoom() -> void:

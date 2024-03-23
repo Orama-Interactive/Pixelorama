@@ -576,10 +576,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 ## The perspective editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
-
-## The reference panel. It has the [param ReferencesPanel.gd] script attached.
-@onready var reference_panel: ReferencesPanel = control.find_child("Reference Images")
-
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
 ## The label indicating cursor position.

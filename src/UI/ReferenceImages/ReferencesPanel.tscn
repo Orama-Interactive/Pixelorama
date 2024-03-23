@@ -242,9 +242,10 @@ custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ReferenceEdit" type="VBoxContainer" parent="ScrollContainer/Container"]
+[node name="ReferenceEdit" type="VBoxContainer" parent="ScrollContainer/Container" node_paths=PackedStringArray("references_panel")]
 layout_mode = 2
 script = ExtResource("3_skjtb")
+references_panel = NodePath("../../..")
 
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/Container/ReferenceEdit"]
 layout_mode = 2

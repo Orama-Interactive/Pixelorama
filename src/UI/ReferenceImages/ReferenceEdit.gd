@@ -1,7 +1,7 @@
 extends VBoxContainer
 
+@export var references_panel: ReferencesPanel
 var undo_data: Dictionary
-
 var _prev_index: int = -1
 var _ignore_spinbox_changes: bool = false
 
@@ -139,6 +139,7 @@ func _on_Remove_pressed():
 		# If shift is pressed we just remove it without a dialog
 		if Input.is_action_pressed("shift"):
 			references_container.remove_reference_image(index)
+			references_panel._on_references_changed()
 		else:
 			confirm_remove_dialog.position = Global.control.get_global_mouse_position()
 			confirm_remove_dialog.popup()
@@ -238,6 +239,7 @@ func _on_confirm_remove_dialog_confirmed() -> void:
 	var index: int = Global.current_project.reference_index
 	if index > -1:
 		references_container.remove_reference_image(index)
+		references_panel._on_references_changed()
 		Global.dialog_open(false)
 
 

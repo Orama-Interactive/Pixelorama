@@ -2,7 +2,7 @@ class_name ReferencesPanel
 extends PanelContainer
 ## Panel for reference image management
 
-const REFERENCE_IMAGE_BUTTON = preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn")
+const REFERENCE_IMAGE_BUTTON := preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn")
 
 var list_btn_group := ButtonGroup.new()
 var transform_button_group: ButtonGroup
@@ -155,6 +155,7 @@ func _on_references_changed() -> void:
 
 	# The default button
 	var default := REFERENCE_IMAGE_BUTTON.instantiate()
+	default.references_panel = self
 	default.button_group = list_btn_group
 	default.text = "none"
 	default.get_child(0).visible = false  # Hide it's transparent checker
@@ -175,6 +176,7 @@ func _on_references_changed() -> void:
 	# And update.
 	for ref in Global.current_project.reference_images:
 		var l: Button = REFERENCE_IMAGE_BUTTON.instantiate()
+		l.references_panel = self
 		l.button_group = list_btn_group
 		if ref.texture:
 			l.icon = ref.texture
