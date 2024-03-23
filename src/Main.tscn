@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dbylw5k04ulp8"]
+[gd_scene load_steps=16 format=3 uid="uid://dbylw5k04ulp8"]
 
 [ext_resource type="Theme" uid="uid://cngbvfpwjoimv" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d4euwo633u33b" path="res://src/UI/Dialogs/SaveSprite.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://b3aeqj2k58wdk" path="res://src/UI/Dialogs/OpenSprite.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://c0nuukjakmai2" path="res://src/UI/Dialogs/TileModeOffsetsDialog.tscn" id="14"]
+[ext_resource type="Script" path="res://src/HandleExtensions.gd" id="15_v0k2h"]
 [ext_resource type="PackedScene" uid="uid://clbjfkdupw52l" path="res://src/UI/Timeline/CelProperties.tscn" id="17_ucs64"]
 [ext_resource type="PackedScene" uid="uid://b3hkjj3s6pe4x" path="res://src/Preferences/PreferencesDialog.tscn" id="32"]
 [ext_resource type="PackedScene" uid="uid://clgu8wb5o6oup" path="res://src/UI/Dialogs/ExportDialog.tscn" id="39"]
@@ -90,6 +91,7 @@ dialog_autowrap = true
 
 [node name="Extensions" type="Control" parent="."]
 anchors_preset = 0
+script = ExtResource("15_v0k2h")
 
 [node name="LeftCursor" type="Sprite2D" parent="."]
 visible = false

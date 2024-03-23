@@ -37,7 +37,7 @@ func handle_loading_file(file: String) -> void:
 		Palettes.import_palette_from_path(file, true)
 
 	elif file_ext in ["pck", "zip"]:  # Godot resource pack file
-		Global.preferences_dialog.extensions.install_extension(file)
+		Global.control.get_node("Extensions").install_extension(file)
 
 	elif file_ext == "shader" or file_ext == "gdshader":  # Godot shader file
 		var shader := load(file)

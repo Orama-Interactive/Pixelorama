@@ -1,7 +1,6 @@
 class_name ExtensionEntry
 extends Panel
 
-var extension_container: VBoxContainer
 var thumbnail := ""
 var download_link := ""
 var download_path := ""
@@ -9,6 +8,7 @@ var tags := PackedStringArray()
 var is_update := false  ## An update instead of download
 
 # node references used in this script
+@onready var extensions := Global.control.get_node("Extensions") as Extensions
 @onready var ext_name := %ExtensionName as Label
 @onready var ext_discription := %ExtensionDescription as TextEdit
 @onready var small_picture := %Picture as TextureButton
@@ -85,7 +85,7 @@ func _on_DownloadRequest_request_completed(
 ) -> void:
 	if result == HTTPRequest.RESULT_SUCCESS:
 		# Add extension
-		extension_container.install_extension(download_path)
+		extensions.install_extension(download_path)
 		if is_update:
 			is_update = false
 		announce_done(true)
@@ -130,9 +130,9 @@ func tags_match(tag_array: PackedStringArray) -> bool:
 
 ## Updates the entry node's UI if it has an update available
 func change_button_if_updatable(extension_name: String, new_version: float) -> void:
-	for extension in extension_container.extensions.keys():
-		if extension_container.extensions[extension].file_name == extension_name:
-			var old_version = str_to_var(extension_container.extensions[extension].version)
+	for extension in extensions.extensions.keys():
+		if extensions.extensions[extension].file_name == extension_name:
+			var old_version = str_to_var(extensions.extensions[extension].version)
 			if typeof(old_version) == TYPE_FLOAT:
 				if new_version > old_version:
 					down_button.text = "Update"

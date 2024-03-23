@@ -12,7 +12,6 @@ const STORE_INFORMATION_FILE := STORE_NAME + ".md"
 const EXTENSION_ENTRY_TSCN := preload("res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.tscn")
 
 # Variables placed here due to their frequent use
-var extension_container: VBoxContainer
 var extension_path: String  ## The path where extensions will be stored (obtained from pixelorama)
 var custom_links_remaining: int  ## Remaining custom links to be processed
 var redirects: Array[String]
@@ -34,10 +33,9 @@ var faulty_custom_links: Array[String]
 
 func _ready() -> void:
 	# Basic setup
-	extension_container = Global.preferences_dialog.find_child("Extensions")
 	main_store_link.text = STORE_LINK
 	# Get the path that pixelorama uses to store extensions
-	extension_path = ProjectSettings.globalize_path(extension_container.EXTENSIONS_PATH)
+	extension_path = ProjectSettings.globalize_path(Extensions.EXTENSIONS_PATH)
 	# tell the downloader where to download the store information
 	store_info_downloader.download_file = extension_path.path_join(STORE_INFORMATION_FILE)
 
@@ -128,7 +126,6 @@ func _on_CopyCommand_pressed() -> void:
 ## Adds a new extension entry to the "content"
 func add_entry(info: Dictionary) -> void:
 	var entry := EXTENSION_ENTRY_TSCN.instantiate()
-	entry.extension_container = extension_container
 	content.add_child(entry)
 	entry.set_info(info, extension_path)
 

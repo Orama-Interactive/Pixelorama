@@ -1,4 +1,8 @@
+class_name Extensions
 extends Control
+
+signal extension_loaded(extension: Extension, extension_name: String)
+signal extension_uninstalled(file_name: String)
 
 enum UninstallMode { KEEP_FILE, FILE_TO_BIN, REMOVE_PERMANENT }
 
@@ -6,17 +10,9 @@ const EXTENSIONS_PATH := "user://extensions"
 const BUG_EXTENSIONS_PATH := "user://give_in_bug_report"
 const BIN_ACTION := "trash"
 
-@export var add_extension_file_dialog: FileDialog
-
 var extensions := {}  ## Extension name: Extension class
 var extension_selected := -1
 var damaged_extension: String
-
-@onready var extension_list: ItemList = $InstalledExtensions
-@onready var enable_button: Button = $HBoxContainer/EnableButton
-@onready var uninstall_button: Button = $HBoxContainer/UninstallButton
-@onready var extension_parent: Node = Global.control.get_node("Extensions")
-@onready var delete_confirmation: ConfirmationDialog = %DeleteConfirmation
 
 
 class Extension:
@@ -52,11 +48,6 @@ class Extension:
 
 
 func _ready() -> void:
-	delete_confirmation.add_button(tr("Move to Trash"), false, BIN_ACTION)
-	if OS.get_name() == "Web":
-		$HBoxContainer/AddExtensionButton.disabled = true
-		$HBoxContainer/OpenFolderButton.visible = false
-
 	_add_internal_extensions()
 
 	var file_names: PackedStringArray = []
@@ -82,7 +73,7 @@ func _ready() -> void:
 
 ## This is an empty function at the moment, but internal extensions here should be added here
 ## For example:
-## [code]read_extension("ExtensionName", true)[/code]
+## [code]_load_extension("ExtensionName", true)[/code]
 func _add_internal_extensions() -> void:
 	pass
 
@@ -94,33 +85,6 @@ func install_extension(path: String) -> void:
 		print(err)
 		return
 	_add_extension(file_name)
-
-
-func _uninstall_extension(
-	file_name := "", remove_mode := UninstallMode.REMOVE_PERMANENT, item := extension_selected
-) -> void:
-	var err := OK
-	match remove_mode:
-		UninstallMode.FILE_TO_BIN:
-			err = OS.move_to_trash(
-				ProjectSettings.globalize_path(EXTENSIONS_PATH).path_join(file_name)
-			)
-		UninstallMode.REMOVE_PERMANENT:
-			err = DirAccess.remove_absolute(EXTENSIONS_PATH.path_join(file_name))
-	if remove_mode != UninstallMode.KEEP_FILE:
-		if err != OK:
-			print(err)
-			return
-
-	var extension: Extension = extensions[file_name]
-	extension.enabled = false
-	_enable_extension(extension, false)
-
-	extensions.erase(file_name)
-	extension_list.remove_item(item)
-	extension_selected = -1
-	enable_button.disabled = true
-	uninstall_button.disabled = true
 
 
 func _add_extension(file_name: String) -> void:
@@ -149,19 +113,11 @@ func _add_extension(file_name: String) -> void:
 
 	# The new (about to load) extension will be considered guilty till it's proven innocent
 	tester_file = FileAccess.open(EXTENSIONS_PATH.path_join("Faulty.txt"), FileAccess.WRITE)
-	tester_file.store_string(file_name)  # Guilty till proven innocent ;)
+	tester_file.store_string(file_name)
 	tester_file.close()
 
 	if extensions.has(file_name):
-		var item := -1
-		for i in extension_list.get_item_count():
-			if extension_list.get_item_metadata(i) == file_name:
-				item = i
-				break
-		if item == -1:
-			print("Failed to find %s" % file_name)
-			return
-		_uninstall_extension(file_name, UninstallMode.KEEP_FILE, item)
+		uninstall_extension(file_name, UninstallMode.KEEP_FILE)
 		# Wait two frames so the previous nodes can get freed
 		await get_tree().process_frame
 		await get_tree().process_frame
@@ -171,16 +127,15 @@ func _add_extension(file_name: String) -> void:
 	if !success:
 		# Don't delete the extension
 		# Context: pixelorama deletes v0.11.x extensions when you open v1.0, this will prevent it.
-#		OS.move_to_trash(file_path)
 		print("EXTENSION ERROR: Failed loading resource pack %s." % file_name)
-		print("	There may be errors in extension code or extension is incompatible")
-		# Delete the faulty.txt, (it's fate has already been decided)
+		print("There may be errors in extension code or extension is incompatible")
+		# Delete the faulty.txt, its fate has already been decided
 		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 		return
-	read_extension(file_name)
+	_load_extension(file_name)
 
 
-func read_extension(extension_file_or_folder_name: StringName, internal := false) -> void:
+func _load_extension(extension_file_or_folder_name: StringName, internal := false) -> void:
 	var file_name_no_ext := extension_file_or_folder_name.get_basename()
 	var extension_path := "res://src/Extensions/%s/" % file_name_no_ext
 	var extension_config_file_path := extension_path.path_join("extension.json")
@@ -216,8 +171,8 @@ func read_extension(extension_file_or_folder_name: StringName, internal := false
 				)
 				Global.popup_error(str(err_text, required_text))
 				print("Incompatible API")
-				if !internal:  # the file isn't created for internal extensions, no need for removal
-					# Don't put it in faulty, (it's merely incompatible)
+				if !internal:  # The file isn't created for internal extensions, no need for removal
+					# Don't put it in faulty, it's merely incompatible
 					DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 				return
 
@@ -225,16 +180,11 @@ func read_extension(extension_file_or_folder_name: StringName, internal := false
 	extension.serialize(extension_json)
 	extension.internal = internal
 	extensions[extension_file_or_folder_name] = extension
-	extension_list.add_item(extension.display_name)
-	var item_count := extension_list.get_item_count() - 1
-	extension_list.set_item_tooltip(item_count, extension.description)
-	extension_list.set_item_metadata(item_count, extension_file_or_folder_name)
-	if internal:  # enable internal extensions if it is for the first time
-		extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, true)
-	else:
-		extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, false)
+	extension_loaded.emit(extension, extension_file_or_folder_name)
+	# Enable internal extensions if it is the first time they are being loaded
+	extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, internal)
 	if extension.enabled:
-		_enable_extension(extension)
+		enable_extension(extension)
 
 	# If an extension doesn't crash pixelorama then it is proven innocent
 	# And we should now delete its "Faulty.txt" file
@@ -242,7 +192,7 @@ func read_extension(extension_file_or_folder_name: StringName, internal := false
 		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
 
 
-func _enable_extension(extension: Extension, save_to_config := true) -> void:
+func enable_extension(extension: Extension, save_to_config := true) -> void:
 	var extension_path: String = "res://src/Extensions/%s/" % extension.file_name
 
 	# A unique id for the extension (currently set to file_name). More parameters (version etc.)
@@ -257,14 +207,14 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 			var extension_scene: PackedScene = load(scene_path)
 			if extension_scene:
 				var extension_node: Node = extension_scene.instantiate()
-				extension_parent.add_child(extension_node)
+				add_child(extension_node)
 				extension_node.add_to_group(id)  # Keep track of what to remove later
 			else:
 				print("Failed to load extension %s" % id)
 	else:
-		for ext_node in extension_parent.get_children():
+		for ext_node in get_children():
 			if ext_node.is_in_group(id):  # Node for extension found
-				extension_parent.remove_child(ext_node)
+				remove_child(ext_node)
 				ext_node.queue_free()
 		ExtensionsApi.check_sanity(extension.file_name)
 
@@ -273,66 +223,24 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 		Global.config_cache.save("user://cache.ini")
 
 
-func _on_InstalledExtensions_item_selected(index: int) -> void:
-	extension_selected = index
-	var file_name: String = extension_list.get_item_metadata(extension_selected)
+func uninstall_extension(file_name := "", remove_mode := UninstallMode.REMOVE_PERMANENT) -> void:
+	var err := OK
+	match remove_mode:
+		UninstallMode.FILE_TO_BIN:
+			err = OS.move_to_trash(
+				ProjectSettings.globalize_path(EXTENSIONS_PATH).path_join(file_name)
+			)
+		UninstallMode.REMOVE_PERMANENT:
+			err = DirAccess.remove_absolute(EXTENSIONS_PATH.path_join(file_name))
+	if remove_mode != UninstallMode.KEEP_FILE:
+		if err != OK:
+			print(err)
+			return
+
 	var extension: Extension = extensions[file_name]
-	if extension.enabled:
-		enable_button.text = "Disable"
-	else:
-		enable_button.text = "Enable"
-	enable_button.disabled = false
-	if !extension.internal:
-		uninstall_button.disabled = false
-	else:
-		uninstall_button.disabled = true
+	extension.enabled = false
+	enable_extension(extension, false)
 
-
-func _on_InstalledExtensions_empty_clicked(_position: Vector2, _button_index: int) -> void:
-	enable_button.disabled = true
-	uninstall_button.disabled = true
-
-
-func _on_AddExtensionButton_pressed() -> void:
-	add_extension_file_dialog.popup_centered()
-
-
-func _on_EnableButton_pressed() -> void:
-	var file_name: String = extension_list.get_item_metadata(extension_selected)
-	var extension: Extension = extensions[file_name]
-	extension.enabled = !extension.enabled
-	# Don't allow disabling internal extensions through this button.
-	if extension.internal and extension.enabled_once:
-		Global.preferences_dialog.preference_update(true)
-	else:
-		_enable_extension(extension)
-
-	if extension.enabled:
-		enable_button.text = "Disable"
-	else:
-		enable_button.text = "Enable"
-
-
-func _on_UninstallButton_pressed() -> void:
-	delete_confirmation.popup_centered()
-
-
-func _on_OpenFolderButton_pressed() -> void:
-	OS.shell_open(ProjectSettings.globalize_path(EXTENSIONS_PATH))
-
-
-func _on_AddExtensionFileDialog_files_selected(paths: PackedStringArray) -> void:
-	for path in paths:
-		install_extension(path)
-
-
-func _on_delete_confirmation_custom_action(action: StringName) -> void:
-	if action == BIN_ACTION:
-		_uninstall_extension(
-			extension_list.get_item_metadata(extension_selected), UninstallMode.FILE_TO_BIN
-		)
-	delete_confirmation.hide()
-
-
-func _on_delete_confirmation_confirmed() -> void:
-	_uninstall_extension(extension_list.get_item_metadata(extension_selected))
+	extensions.erase(file_name)
+	extension_selected = -1
+	extension_uninstalled.emit(file_name)
