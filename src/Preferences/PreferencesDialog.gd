@@ -119,6 +119,7 @@ var selected_item := 0
 
 @onready var list: ItemList = $HSplitContainer/List
 @onready var right_side: VBoxContainer = $"%RightSide"
+@onready var language: VBoxContainer = %Language
 @onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 @onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 @onready var shrink_slider: ValueSlider = $"%ShrinkSlider"
@@ -183,6 +184,21 @@ func _ready() -> void:
 		for driver in DisplayServer.tablet_get_driver_count():
 			var driver_name := DisplayServer.tablet_get_driver_name(driver)
 			tablet_driver.add_item(driver_name, driver)
+
+	# Create buttons for each language
+	var system_language := language.get_node(^"System Language") as Button
+	var button_group: ButtonGroup = system_language.button_group
+	for locale in Global.loaded_locales:  # Create radiobuttons for each language
+		var button := CheckBox.new()
+		button.text = Global.LANGUAGES_DICT[locale][0] + " [%s]" % [locale]
+		button.name = Global.LANGUAGES_DICT[locale][1]
+		button.tooltip_text = Global.LANGUAGES_DICT[locale][1]
+		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		button.button_group = button_group
+		if locale == TranslationServer.get_locale():
+			button.button_pressed = true
+		language.add_child(button)
+		button.pressed.connect(_on_language_pressed.bind(button.get_index()))
 
 	for pref in preferences:
 		var node := right_side.get_node(pref.node_path)
@@ -322,3 +338,17 @@ func _on_ShrinkApplyButton_pressed() -> void:
 	Global.dialog_open(true)
 	await get_tree().process_frame
 	Global.camera.fit_to_frame(Global.current_project.size)
+
+
+func _on_language_pressed(index: int) -> void:
+	var locale := OS.get_locale()
+	if index > 1:
+		locale = Global.loaded_locales[index - 2]
+	Global.set_locale(locale)
+	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
+	Global.config_cache.save("user://cache.ini")
+
+	# Update some UI elements with the new translations
+	Tools.update_hint_tooltips()
+	list.clear()
+	add_tabs(true)

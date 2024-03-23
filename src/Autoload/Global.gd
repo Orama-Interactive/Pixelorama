@@ -77,6 +77,33 @@ enum HelpMenu {
 	SUPPORT_PIXELORAMA
 }
 
+const LANGUAGES_DICT := {
+	"en_US": ["English", "English"],
+	"cs_CZ": ["Czech", "Czech"],
+	"da_DK": ["Dansk", "Danish"],
+	"de_DE": ["Deutsch", "German"],
+	"el_GR": ["Ελληνικά", "Greek"],
+	"eo_UY": ["Esperanto", "Esperanto"],
+	"es_ES": ["Español", "Spanish"],
+	"fr_FR": ["Français", "French"],
+	"id_ID": ["Indonesian", "Indonesian"],
+	"it_IT": ["Italiano", "Italian"],
+	"lv_LV": ["Latvian", "Latvian"],
+	"pl_PL": ["Polski", "Polish"],
+	"pt_BR": ["Português Brasileiro", "Brazilian Portuguese"],
+	"pt_PT": ["Português", "Portuguese"],
+	"ru_RU": ["Русский", "Russian"],
+	"zh_CN": ["简体中文", "Chinese Simplified"],
+	"zh_TW": ["繁體中文", "Chinese Traditional"],
+	"nb_NO": ["Norsk Bokmål", "Norwegian Bokmål"],
+	"hu_HU": ["Magyar", "Hungarian"],
+	"ro_RO": ["Română", "Romanian"],
+	"ko_KR": ["한국어", "Korean"],
+	"tr_TR": ["Türkçe", "Turkish"],
+	"ja_JP": ["日本語", "Japanese"],
+	"uk_UA": ["Українська", "Ukrainian"],
+}
+
 ## The file used to save preferences that use [code]ProjectSettings.save_custom()[/code].
 const OVERRIDE_FILE := "override.cfg"
 ## The name of folder containing Pixelorama preferences.
@@ -99,6 +126,7 @@ var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
 var data_directories: PackedStringArray = [home_data_directory]
 ## The config file used to get/set preferences, tool settings etc.
 var config_cache := ConfigFile.new()
+var loaded_locales: PackedStringArray = LANGUAGES_DICT.keys()
 
 var projects: Array[Project] = []  ## Array of currently open projects.
 var current_project: Project  ## The project that currently in focus.
@@ -559,11 +587,11 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var small_preview_viewport: SubViewportContainer = canvas_preview_container.find_child(
 	"PreviewViewportContainer"
 )
-## Camera of the main canvas. It has the [param CameraMovement.gd] script attached.
+## Camera of the main canvas.
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
-## Camera of the second canvas preview. It has the [param CameraMovement.gd] script attached.
+## Camera of the second canvas preview.
 @onready var camera2: CanvasCamera = second_viewport.find_child("Camera2D2")
-## Camera of the canvas preview. It has the [param CameraMovement.gd] script attached.
+## Camera of the canvas preview.
 @onready var camera_preview: CanvasCamera = control.find_child("CameraPreview")
 ## Array of cameras used in Pixelorama.
 @onready var cameras := [camera, camera2, camera_preview]
@@ -613,6 +641,9 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 
 func _init() -> void:
+	# Load settings from the config file
+	config_cache.load("user://cache.ini")
+	loaded_locales.sort()  # Make sure locales are always sorted
 	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	data_directories.append(root_directory.path_join(CONFIG_SUBDIR_NAME))
@@ -637,9 +668,13 @@ func _init() -> void:
 
 func _ready() -> void:
 	_initialize_keychain()
-	# Load settings from the config file
-	config_cache.load("user://cache.ini")
-
+	var locale_index := -1
+	var saved_locale := OS.get_locale()
+	# Load language
+	if config_cache.has_section_key("preferences", "locale"):
+		saved_locale = config_cache.get_value("preferences", "locale")
+		locale_index = loaded_locales.find(saved_locale)
+	set_locale(saved_locale)  # If no language is saved, OS' locale is used
 	default_width = config_cache.get_value("preferences", "default_width", default_width)
 	default_height = config_cache.get_value("preferences", "default_height", default_height)
 	default_fill_color = config_cache.get_value(
@@ -951,6 +986,17 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 	for _path in basepaths:
 		res.append(_path.path_join(subpath))
 	return res
+
+
+func set_locale(locale: String) -> void:
+	if TranslationServer.get_locale() == locale:
+		return
+	if not locale in TranslationServer.get_loaded_locales():
+		var translation := load("res://Translations/%s.po" % locale)
+		if is_instance_valid(translation) and translation is Translation:
+			TranslationServer.add_translation(translation)
+		Keychain.load_translation(locale)
+	TranslationServer.set_locale(locale)
 
 
 ## Used by undo/redo operations to store compressed images in memory.
