@@ -17,7 +17,7 @@ var _is_guide_stylebox := false
 
 func _ready() -> void:
 	Global.cel_switched.connect(cel_switched)
-	Global.theme_switched.connect(cel_switched.bind(true))
+	Themes.theme_switched.connect(cel_switched.bind(true))
 	cel = Global.current_project.frames[frame].cels[layer]
 	button_setup()
 	_dim_checker()

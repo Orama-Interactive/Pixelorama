@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/Preferences/PreferencesDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bq7ibhm0txl5p" path="res://addons/keychain/ShortcutEdit.tscn" id="3"]
-[ext_resource type="Script" path="res://src/Preferences/HandleThemes.gd" id="5"]
+[ext_resource type="Script" path="res://src/Preferences/ThemesPreferences.gd" id="3_nvl8k"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="7"]
 [ext_resource type="Script" path="res://src/Preferences/ExtensionsPreferences.gd" id="7_8ume5"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="8"]
@@ -250,7 +250,7 @@ size_flags_horizontal = 3
 
 [node name="Themes" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
 layout_mode = 2
-script = ExtResource("5")
+script = ExtResource("3_nvl8k")
 
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/Themes"]
 layout_mode = 2

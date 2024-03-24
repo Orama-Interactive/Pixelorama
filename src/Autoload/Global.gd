@@ -12,10 +12,6 @@ signal project_about_to_switch  ## Emitted before a project is about to be switc
 signal project_switched  ## Emitted whenever you switch to some other project tab.
 signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
-## Emitted when the theme is switched. Unlike [signal Control.theme_changed],
-## this doesn't get emitted when a stylebox of a control changes, only when the
-## main theme gets switched to another.
-signal theme_switched
 
 enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
@@ -228,13 +224,12 @@ var icon_color_from := ColorFrom.THEME:
 		if value == icon_color_from:
 			return
 		icon_color_from = value
-		var themes = preferences_dialog.themes
 		if icon_color_from == ColorFrom.THEME:
-			var current_theme: Theme = themes.themes[themes.theme_index]
+			var current_theme := Themes.themes[Themes.theme_index]
 			modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
 		else:
 			modulate_icon_color = custom_icon_color
-		themes.change_icon_colors()
+		Themes.change_icon_colors()
 ## Found in Preferences. Color of icons when [member icon_color_from] is set to use custom colors.
 var custom_icon_color := Color.GRAY:
 	set(value):
@@ -243,7 +238,7 @@ var custom_icon_color := Color.GRAY:
 		custom_icon_color = value
 		if icon_color_from == ColorFrom.CUSTOM:
 			modulate_icon_color = custom_icon_color
-			preferences_dialog.themes.change_icon_colors()
+			Themes.change_icon_colors()
 ## Found in Preferences. The modulation color (or simply color) of canvas background
 ## (aside from checker background).
 var modulate_clear_color := Color.GRAY:
@@ -251,14 +246,14 @@ var modulate_clear_color := Color.GRAY:
 		if value == modulate_clear_color:
 			return
 		modulate_clear_color = value
-		preferences_dialog.themes.change_clear_color()
+		Themes.change_clear_color()
 ## Found in Preferences. Determines if [member modulate_clear_color] uses custom or theme color.
 var clear_color_from := ColorFrom.THEME:
 	set(value):
 		if value == clear_color_from:
 			return
 		clear_color_from = value
-		preferences_dialog.themes.change_clear_color()
+		Themes.change_clear_color()
 ## Found in Preferences. The selected size mode of tool buttons using [enum ButtonSize] enum.
 var tool_button_size := ButtonSize.SMALL:
 	set(value):
@@ -668,12 +663,10 @@ func _init() -> void:
 
 func _ready() -> void:
 	_initialize_keychain()
-	var locale_index := -1
 	var saved_locale := OS.get_locale()
 	# Load language
 	if config_cache.has_section_key("preferences", "locale"):
 		saved_locale = config_cache.get_value("preferences", "locale")
-		locale_index = loaded_locales.find(saved_locale)
 	set_locale(saved_locale)  # If no language is saved, OS' locale is used
 	default_width = config_cache.get_value("preferences", "default_width", default_width)
 	default_height = config_cache.get_value("preferences", "default_height", default_height)
