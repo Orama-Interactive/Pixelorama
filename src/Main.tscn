@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dbylw5k04ulp8"]
+[gd_scene load_steps=15 format=3 uid="uid://dbylw5k04ulp8"]
 
 [ext_resource type="Theme" uid="uid://cngbvfpwjoimv" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://c0nuukjakmai2" path="res://src/UI/Dialogs/TileModeOffsetsDialog.tscn" id="14"]
 [ext_resource type="Script" path="res://src/HandleExtensions.gd" id="15_v0k2h"]
 [ext_resource type="PackedScene" uid="uid://clbjfkdupw52l" path="res://src/UI/Timeline/CelProperties.tscn" id="17_ucs64"]
-[ext_resource type="PackedScene" uid="uid://b3hkjj3s6pe4x" path="res://src/Preferences/PreferencesDialog.tscn" id="32"]
 [ext_resource type="PackedScene" uid="uid://clgu8wb5o6oup" path="res://src/UI/Dialogs/ExportDialog.tscn" id="39"]
 
 [node name="Control" type="Control"]
@@ -53,8 +52,6 @@ mouse_filter = 2
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource("8")]
 
 [node name="ExportDialog" parent="Dialogs" instance=ExtResource("39")]
-
-[node name="PreferencesDialog" parent="Dialogs" instance=ExtResource("32")]
 
 [node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs"]
 title = "Unsaved Image"

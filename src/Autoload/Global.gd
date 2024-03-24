@@ -629,8 +629,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
 ## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
-## The preferences dialog. It has the [param PreferencesDialog.gd] script attached.
-@onready var preferences_dialog: AcceptDialog = control.find_child("PreferencesDialog")
 ## An error dialog to show errors.
 @onready var error_dialog: AcceptDialog = control.find_child("ErrorDialog")
 
@@ -680,6 +678,12 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 	project_switched.emit()
+	# Load preferences from the config file
+	for pref in config_cache.get_section_keys("preferences"):
+		if get(pref) == null:
+			continue
+		var value = config_cache.get_value("preferences", pref)
+		set(pref, value)
 
 
 func _initialize_keychain() -> void:
