@@ -18,6 +18,8 @@ enum { ALPHA, SIZE }
 @onready var size_velocity_button: Button = $"%SizeVelocityButton"
 @onready var pressure_preview: ProgressBar = $"%PressurePreview"
 @onready var velocity_preview: ProgressBar = $"%VelocityPreview"
+@onready var limits_header: HBoxContainer = %LimitsHeader
+@onready var thresholds_header: HBoxContainer = %ThresholdsHeader
 @onready var alpha_group := alpha_pressure_button.button_group
 @onready var size_group := size_pressure_button.button_group
 
@@ -117,7 +119,7 @@ func _on_Dynamics_pressed() -> void:
 
 
 func _on_Dynamics_toggled(
-	button_pressed: bool, button: BaseButton, property: int, dynamic: int
+	button_pressed: bool, button: BaseButton, property: int, dynamic: Tools.Dynamics
 ) -> void:
 	var final_dynamic := dynamic
 	if not button.button_pressed:
@@ -127,7 +129,22 @@ func _on_Dynamics_toggled(
 			Tools.dynamics_alpha = final_dynamic
 		SIZE:
 			Tools.dynamics_size = final_dynamic
-
+	var has_alpha_dynamic := Tools.dynamics_alpha != Tools.Dynamics.NONE
+	var has_size_dynamic := Tools.dynamics_size != Tools.Dynamics.NONE
+	var has_pressure_dynamic := (
+		Tools.dynamics_alpha == Tools.Dynamics.PRESSURE
+		or Tools.dynamics_size == Tools.Dynamics.PRESSURE
+	)
+	var has_velocity_dynamic := (
+		Tools.dynamics_alpha == Tools.Dynamics.VELOCITY
+		or Tools.dynamics_size == Tools.Dynamics.VELOCITY
+	)
+	limits_header.visible = has_alpha_dynamic or has_size_dynamic
+	thresholds_header.visible = limits_header.visible
+	get_tree().set_group(&"VisibleOnAlpha", "visible", has_alpha_dynamic)
+	get_tree().set_group(&"VisibleOnSize", "visible", has_size_dynamic)
+	get_tree().set_group(&"VisibleOnPressure", "visible", has_pressure_dynamic)
+	get_tree().set_group(&"VisibleOnVelocity", "visible", has_velocity_dynamic)
 	var texture_button: TextureRect = button.get_node("TextureRect")
 	var file_name := "check.png"
 	if !button.button_pressed:

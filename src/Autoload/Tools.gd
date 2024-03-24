@@ -14,8 +14,8 @@ var alpha_locked := false
 # Dynamics
 var stabilizer_enabled := false
 var stabilizer_value := 16
-var dynamics_alpha: int = Dynamics.NONE
-var dynamics_size: int = Dynamics.NONE
+var dynamics_alpha := Dynamics.NONE
+var dynamics_size := Dynamics.NONE
 var pen_pressure := 1.0
 var pen_pressure_min := 0.2
 var pen_pressure_max := 0.8
