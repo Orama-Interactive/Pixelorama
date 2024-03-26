@@ -26,7 +26,7 @@ func _on_Options_item_selected(id: int) -> void:
 	save_config()
 
 
-func _on_ExtractFrom_item_selected(index):
+func _on_ExtractFrom_item_selected(index: int) -> void:
 	_mode = index
 	update_config()
 	save_config()
@@ -80,7 +80,7 @@ func _pick_color(pos: Vector2i) -> void:
 				if project.layers[idx].is_visible_in_hierarchy():
 					image = curr_frame.cels[idx].get_image()
 					color = image.get_pixelv(pos)
-					if not color.is_equal_approx(Color(0, 0, 0, 0)):
+					if not is_zero_approx(color.a):
 						break
 		CURRENT_LAYER:
 			color = image.get_pixelv(pos)

@@ -730,7 +730,7 @@ func _pick_color(pos: Vector2i) -> void:
 		if project.layers[idx].is_visible_in_hierarchy():
 			image = curr_frame.cels[idx].get_image()
 			color = image.get_pixelv(pos)
-			if color != Color(0, 0, 0, 0):
+			if not is_zero_approx(color.a):
 				break
 	var button := (
 		MOUSE_BUTTON_LEFT
