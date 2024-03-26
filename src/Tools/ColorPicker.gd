@@ -82,7 +82,7 @@ func _pick_color(position: Vector2) -> void:
 					image.lock()
 					color = image.get_pixelv(position)
 					image.unlock()
-					if color != Color(0, 0, 0, 0):
+					if not is_zero_approx(color.a):
 						break
 		CURRENT_LAYER:
 			image.lock()
