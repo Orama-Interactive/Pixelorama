@@ -6,24 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.0] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt), [RorotoSic](https://github.com/RorotoSic)
 
 Built using Godot 4.2.1
 
 ### Added
-- Multiple layer blend modes are finally here! [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
+- Multiple layer blend modes are finally here! Note that right now group blending is not supported. [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
 - Non-destructive layer effects have been implemented. [#940](https://github.com/Orama-Interactive/Pixelorama/pull/940)
 - An extension explorer has been integrated into Pixelorama, allowing for easy extension downloading from the internet. [#910](https://github.com/Orama-Interactive/Pixelorama/pull/910)
 - Export to video formats. FFMPEG is required to be installed in the device in order for video exporting to work. [#980](https://github.com/Orama-Interactive/Pixelorama/pull/980)
 - Importing video formats and gif files is also possible, but FFMPEG is again required for this.
+- Basic clipping mask functionality has been implemented. Enabling clipping mask on a layer will use the layer directly below it as the mask. Note that right now group layers cannot be used as masks.
+- Alpha lock has been added as a global tool option. When enabled, users can only draw on non-transparent pixels.
 - Export to webp and jpeg file formats. Webp is currently only for static images and does not support animations.
 - Native file dialogs are now supported and can be enabled from the Preferences!
 - Dialog popups can now be native OS windows instead of embedded within Pixelorama's main window. This can be changed from the Preferences.
 - Added some missing shortcuts for buttons. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Palette colors can now be sorted.
+- Exporting each layer as a different file is now possible.
 - The brush increment/decrement shortcuts can now be changed. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - A "Crop to Selection" option has been added to the Image menu, that crops the image based on the active selection.
 - A stabilizer for smoother drawing has been implemented.
+- Image brushes can now be flipped and rotated with 90 degree steps in the tool options. [#988](https://github.com/Orama-Interactive/Pixelorama/pull/988)
 - Added support for inverted tablet pens. [#966](https://github.com/Orama-Interactive/Pixelorama/pull/966)
 - Added a new dialog for cel properties, which can be accessed by right-clicking cel buttons in the timeline.
 - A new z-index property has been added to the cel properties, allowing for independent, per-frame layer ordering.
@@ -41,7 +45,7 @@ Built using Godot 4.2.1
 - The color picker is now always visible in the user interface as its own panel, instead of being a popup. The previous color buttons have been re-purposed to allow for setting whether the color being selected is for the left or the right tool.
 - The color pickers has been vastly improved, thanks to the update to Godot 4. Users can now use the OKHSL color mode, and choose between four different picker shapes: HSV Rectangle (default), HSV Wheel, VHS Circle and OKHSL Circle.
 - The opacity slider in the timeline now affects layer opacity and not cel opacity. Cel opacity has been moved to the cel properties dialog.
-- The timeline's UI has been changed to better indicate which cels are selected.
+- The timeline's UI has been changed to better indicate which cels are selected and improves on how child layers of groups are being shown.
 - Linked cels no longer have a colored outline, they now have a rectangle behind their preview which makes linked cels look like they are chained together.
 - "Crop Image" has been renamed to "Crop to Content".
 - Window opacity is disabled by default to improve performance, but it can be enabled in the Preferences.
@@ -49,6 +53,7 @@ Built using Godot 4.2.1
 - The add/remove swatch color buttons have been moved to the same horizontal container as the palette select and add/edit palette buttons, allowing for Inkscape-like horizontal placement of the palette panel, without any wasted space.
 - Cel buttons now hide their transparent background when their corresponding cels are empty, instead of just dimming them.
 - Every shader-based image effect is automatically working without the need to change renderers, and they all work now on the Web version. This comes at the cost of less compatibility, as the desktop version now requires OpenGL 3.3 minimum instead of 2.1, and the Web version requires WebGL 2 instead of WebGL 1. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
+- The dynamics popup only show the relevant properties to which dynamics are currently toggled on.
 - When deleting an extension, a confirmation window now appears that lets users either to delete the palette permanently, move it to trash, or cancel. [#919](https://github.com/Orama-Interactive/Pixelorama/pull/919)
 - "Developers" and "Contributors" have been merged into "Authors" in the About dialog. "Donate" has also been removed from there, and a new "Support Pixelorama's Development" option has been added to the Help menu.
 
@@ -84,10 +89,14 @@ Built using Godot 3.5.2
 - Optimize canvas drawing by only updating it when the image(s) have changed. [ac6a4db43d9296ebc03e639d8199dd3878a25d86](https://github.com/Orama-Interactive/Pixelorama/commit/ac6a4db43d9296ebc03e639d8199dd3878a25d86)
 - Fix bug where using shortcuts to switch between frames also moved the selection, causing deletions.
 - Pxo files can now be loaded from the Open menu option in the Web version. [3dcc51705a999145e53a8e6d4de217dc03b0f147](https://github.com/Orama-Interactive/Pixelorama/commit/3dcc51705a999145e53a8e6d4de217dc03b0f147)
+- Fixed crash due to division by zero when locking two or three ValueSliders, and one of them has the value of 0 and the user attempts to change it.
+- Fixed exporting selected layers not including the non-selected frames.
+- Made the color picker not select fully transparent pixels that are not black. [#999](https://github.com/Orama-Interactive/Pixelorama/issues/999)
 - The ellipse tool no longer produces gaps with large sizes. [4f3a7a305a264e0d2fe86c201af76eca4b2fea0a](https://github.com/Orama-Interactive/Pixelorama/commit/4f3a7a305a264e0d2fe86c201af76eca4b2fea0a)
 - Fix "visible layers" option on the export dialog producing wrong results. [346d1f071a8c6b1defb1072d39aea9c642f1ef59](https://github.com/Orama-Interactive/Pixelorama/commit/346d1f071a8c6b1defb1072d39aea9c642f1ef59)
 - Random brushes now work again. [1317e40ffa5e9f01a9d214221bb5133db20a1de9](https://github.com/Orama-Interactive/Pixelorama/commit/1317e40ffa5e9f01a9d214221bb5133db20a1de9)
 - The gizmo in the rotation image effect dialog is now accurately following the mouse.
+- Fixed the size label not being updated on the Export dialog's spritesheet tab when the direction changes.
 
 ## [v0.11.3] - 2023-10-30
 This update has been brought to you by the contributions of:
