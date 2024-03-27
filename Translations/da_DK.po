@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2024-03-09 01:45\n"
+"PO-Revision-Date: 2024-03-21 12:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -149,11 +149,11 @@ msgid "Delete"
 msgstr "Slet"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Slet Permanent"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Flyt til Papirkurv"
 
 msgid "New Brush"
 msgstr "Ny Pensel"
