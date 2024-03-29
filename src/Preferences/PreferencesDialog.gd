@@ -9,7 +9,7 @@ var preferences: Array[Preference] = [
 	),
 	Preference.new("ffmpeg_path", "Startup/StartupContainer/FFMPEGPath", "text", ""),
 	Preference.new("shrink", "%ShrinkSlider", "value", 1.0),
-	Preference.new("font_size", "Interface/InterfaceOptions/FontSizeSlider", "value", 16),
+	Preference.new("font_size", "%FontSizeSlider", "value", 16),
 	Preference.new(
 		"dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed", true
 	),
@@ -196,7 +196,6 @@ var selected_item := 0
 @onready var language: VBoxContainer = %Language
 @onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 @onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
-@onready var shrink_slider: ValueSlider = $"%ShrinkSlider"
 @onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
 @onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
 @onready var tablet_driver_label: Label = $"%TabletDriverLabel"
@@ -233,7 +232,6 @@ func _ready() -> void:
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok_button().text = "Close"
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	shrink_slider.value = Global.shrink  # In case shrink is not equal to 1
 
 	shortcuts.profile_option_button.item_selected.connect(func(_i): Tools.update_hint_tooltips())
 	if shortcuts.profile_option_button.selected != 0:
@@ -282,7 +280,7 @@ func _ready() -> void:
 		restore_default_button.default_value = pref.default_value
 		restore_default_button.require_restart = pref.require_restart
 		restore_default_button.node = node
-		if pref.node_path == "%ShrinkSlider":
+		if pref.node_path in ["%ShrinkSlider", "%FontSizeSlider"]:
 			# Add the default button to the shrink slider's grandparent
 			var node_position := node.get_parent().get_index()
 			node.get_parent().get_parent().add_child(restore_default_button)
@@ -379,7 +377,7 @@ func _on_List_item_selected(index: int) -> void:
 		child.visible = child.name == content_list[index]
 
 
-func _on_ShrinkApplyButton_pressed() -> void:
+func _on_shrink_apply_button_pressed() -> void:
 	var root := get_tree().root
 	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
@@ -391,6 +389,11 @@ func _on_ShrinkApplyButton_pressed() -> void:
 	Global.dialog_open(true)
 	await get_tree().process_frame
 	Global.camera.fit_to_frame(Global.current_project.size)
+
+
+func _on_font_size_apply_button_pressed() -> void:
+	Global.control.theme.default_font_size = Global.font_size
+	Global.control.theme.set_font_size("font_size", "HeaderSmall", Global.font_size + 2)
 
 
 func _on_language_pressed(index: int) -> void:

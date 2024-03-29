@@ -188,13 +188,7 @@ var integer_zoom := false:
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
 ## Found in Preferences. The font size used by the interface.
-var font_size := 16:
-	set(value):
-		if font_size == value:
-			return
-		font_size = value
-		control.theme.default_font_size = value
-		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
+var font_size := 16
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
 ## Found in Preferences. If [code]true[/code], the native file dialogs of the

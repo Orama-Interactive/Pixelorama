@@ -32,7 +32,6 @@ func _init() -> void:
 
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
-	_setup_application_window_size()
 
 	Global.main_window.title = tr("untitled") + " - Pixelorama " + Global.current_version
 
@@ -66,6 +65,8 @@ or CLI exporting. Loading pxo files in Pixelorama does not need this option to b
 	if OS.get_name() == "Android":
 		OS.request_permissions()
 	_handle_backup()
+	await get_tree().process_frame
+	_setup_application_window_size()
 	_show_splash_screen()
 	Global.pixelorama_opened.emit()
 
@@ -120,6 +121,9 @@ func _setup_application_window_size() -> void:
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	root.min_size = Vector2(1024, 576)
 	root.content_scale_factor = Global.shrink
+	if Global.font_size != theme.default_font_size:
+		theme.default_font_size = Global.font_size
+		theme.set_font_size("font_size", "HeaderSmall", Global.font_size + 2)
 	set_custom_cursor()
 
 	if OS.get_name() == "Web":
@@ -163,7 +167,6 @@ func _show_splash_screen() -> void:
 
 	if Global.config_cache.get_value("preferences", "startup"):
 		# Wait for the window to adjust itself, so the popup is correctly centered
-		await get_tree().process_frame
 		await get_tree().process_frame
 
 		splash_dialog.popup_centered()  # Splash screen

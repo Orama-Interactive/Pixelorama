@@ -181,8 +181,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Font size:"
 
-[node name="FontSizeSlider" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+[node name="FontSizeContainer" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
 layout_mode = 2
+
+[node name="FontSizeSlider" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/FontSizeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
@@ -196,6 +201,11 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("8")
+
+[node name="FontSizeApplyButton" type="Button" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/FontSizeContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Apply"
 
 [node name="DimLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
 layout_mode = 2
@@ -1377,7 +1387,8 @@ vertical_alignment = 1
 [connection signal="visibility_changed" from="." to="." method="_on_PreferencesDialog_visibility_changed"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Language/System Language" to="." method="_on_language_pressed" binds= [1]]
-[connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer/ShrinkApplyButton" to="." method="_on_ShrinkApplyButton_pressed"]
+[connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer/ShrinkApplyButton" to="." method="_on_shrink_apply_button_pressed"]
+[connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/FontSizeContainer/FontSizeApplyButton" to="." method="_on_font_size_apply_button_pressed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader/Explore" to="Store" method="_on_explore_pressed"]
 [connection signal="empty_clicked" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/InstalledExtensions" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_InstalledExtensions_empty_clicked"]
 [connection signal="item_selected" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/InstalledExtensions" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_InstalledExtensions_item_selected"]
