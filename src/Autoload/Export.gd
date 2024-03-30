@@ -262,7 +262,9 @@ func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 		frames = project.frames.slice(frame_start - 1, frame_end, 1, true)
 	elif frame_current_tag == 1:  # Selected frames
 		for cel in project.selected_cels:
-			frames.append(project.frames[cel[0]])
+			var frame := project.frames[cel[0]]
+			if not frames.has(frame):
+				frames.append(frame)
 	else:  # All frames
 		frames = project.frames.duplicate()
 
