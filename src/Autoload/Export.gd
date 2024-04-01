@@ -555,6 +555,16 @@ func file_format_description(format_enum: int) -> String:
 	return ""
 
 
+func get_file_format_from_extension(file_extension: String) -> FileFormat:
+	if not file_extension.begins_with("."):
+		file_extension = "." + file_extension
+	for format: FileFormat in file_format_dictionary:
+		var extension: String = file_format_dictionary[format][0]
+		if file_extension.to_lower() == extension:
+			return format
+	return FileFormat.PNG
+
+
 ## True when exporting to .gif, .apng and video
 ## False when exporting to .png, .jpg and static .webp
 func is_single_file_format(project := Global.current_project) -> bool:

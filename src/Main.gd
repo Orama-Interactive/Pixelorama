@@ -193,13 +193,85 @@ func _handle_cmdline_arguments() -> void:
 	var args := OS.get_cmdline_args()
 	if args.is_empty():
 		return
-
+	# Load the files first
 	for arg in args:
+		var file_path := arg
+		if file_path.is_relative_path():
+			file_path = OS.get_executable_path().get_base_dir().path_join(arg)
+		OpenSave.handle_loading_file(file_path)
+
+	var project := Global.current_project
+	# True when exporting from the CLI.
+	# Exporting should be done last, this variable helps with that
+	var should_export := false
+	for i in args.size():  # Handle the rest of the CLI arguments
+		var arg := args[i]
+		var arg_lower := arg.to_lower()
 		if arg.begins_with("-") or arg.begins_with("--"):
-			# TODO: Add code to handle custom command line arguments
-			continue
-		else:
-			OpenSave.handle_loading_file(arg)
+			if arg_lower == "--pixelorama-version":
+				print(Global.current_version)
+			elif arg_lower == "--size":
+				print(project.size)
+			elif arg_lower == "--framecount":
+				print(project.frames.size())
+			elif arg_lower == "--export":
+				should_export = true
+			elif arg_lower == "--spritesheet":
+				Export.current_tab = Export.ExportTab.SPRITESHEET
+				should_export = true
+			elif arg_lower == "--output" or arg_lower == "-o":
+				if i + 1 < args.size():
+					var next_argument := args[i + 1]
+					project.file_name = next_argument.get_basename()
+					var extension := next_argument.get_extension()
+					project.file_format = Export.get_file_format_from_extension(extension)
+			elif arg_lower == "--scale":
+				if i + 1 < args.size():
+					var next_argument := args[i + 1]
+					if next_argument.is_valid_float():
+						Export.resize = next_argument.to_float() * 100
+			elif arg_lower == "--frames":
+				if i + 1 < args.size():
+					var next_argument := args[i + 1]
+					if next_argument.contains("-"):
+						var frame_numbers := next_argument.split("-")
+						if frame_numbers.size() > 1:
+							project.selected_cels.clear()
+							var frame_number_1 := 0
+							if frame_numbers[0].is_valid_int():
+								frame_number_1 = frame_numbers[0].to_int() - 1
+							frame_number_1 = clampi(frame_number_1, 0, project.frames.size() - 1)
+							var frame_number_2 := project.frames.size() - 1
+							if frame_numbers[1].is_valid_int():
+								frame_number_2 = frame_numbers[1].to_int() - 1
+							frame_number_2 = clampi(frame_number_2, 0, project.frames.size() - 1)
+							for frame in range(frame_number_1, frame_number_2 + 1):
+								project.selected_cels.append([frame, project.current_layer])
+								project.change_cel(frame)
+								Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+					elif next_argument.is_valid_int():
+						var frame_number := next_argument.to_int() - 1
+						frame_number = clampi(frame_number, 0, project.frames.size() - 1)
+						project.selected_cels = [[frame_number, project.current_layer]]
+						project.change_cel(frame_number)
+						Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+			elif arg_lower == "--direction":
+				if i + 1 < args.size():
+					var next_argument := args[i + 1].to_lower()
+					if next_argument == "0" or next_argument.contains("forward"):
+						Export.direction = Export.AnimationDirection.FORWARD
+					elif next_argument == "1" or next_argument.contains("backward"):
+						Export.direction = Export.AnimationDirection.BACKWARDS
+					elif next_argument == "2" or next_argument.contains("ping"):
+						Export.direction = Export.AnimationDirection.PING_PONG
+					else:
+						print(Export.AnimationDirection.keys()[Export.direction])
+				else:
+					print(Export.AnimationDirection.keys()[Export.direction])
+			elif arg_lower == "--split-layers":
+				Export.split_layers = true
+	if should_export:
+		Export.external_export(project)
 
 
 func _notification(what: int) -> void:
