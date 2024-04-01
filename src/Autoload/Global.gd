@@ -261,6 +261,8 @@ var left_tool_color := Color("0086cf"):
 		if value == left_tool_color:
 			return
 		left_tool_color = value
+		if not is_instance_valid(Tools._tool_buttons):
+			await get_tree().process_frame
 		for child in Tools._tool_buttons.get_children():
 			var background: NinePatchRect = child.get_node("BackgroundLeft")
 			background.modulate = value
@@ -271,6 +273,8 @@ var right_tool_color := Color("fd6d14"):
 		if value == right_tool_color:
 			return
 		right_tool_color = value
+		if not is_instance_valid(Tools._tool_buttons):
+			await get_tree().process_frame
 		for child in Tools._tool_buttons.get_children():
 			var background: NinePatchRect = child.get_node("BackgroundRight")
 			background.modulate = value
@@ -288,28 +292,32 @@ var grid_type := GridTypes.CARTESIAN:
 		if value == grid_type:
 			return
 		grid_type = value
-		canvas.grid.queue_redraw()
+		if is_instance_valid(canvas.grid):
+			canvas.grid.queue_redraw()
 ## Found in Preferences. The size of rectangular grid.
 var grid_size := Vector2i(2, 2):
 	set(value):
 		if value == grid_size:
 			return
 		grid_size = value
-		canvas.grid.queue_redraw()
+		if is_instance_valid(canvas.grid):
+			canvas.grid.queue_redraw()
 ## Found in Preferences. The size of isometric grid.
 var isometric_grid_size := Vector2i(16, 8):
 	set(value):
 		if value == isometric_grid_size:
 			return
 		isometric_grid_size = value
-		canvas.grid.queue_redraw()
+		if is_instance_valid(canvas.grid):
+			canvas.grid.queue_redraw()
 ## Found in Preferences. The grid offset from top-left corner of the canvas.
 var grid_offset := Vector2i.ZERO:
 	set(value):
 		if value == grid_offset:
 			return
 		grid_offset = value
-		canvas.grid.queue_redraw()
+		if is_instance_valid(canvas.grid):
+			canvas.grid.queue_redraw()
 ## Found in Preferences. If [code]true[/code], The grid draws over the area extended by
 ## tile-mode as well.
 var grid_draw_over_tile_mode := false:
@@ -317,28 +325,32 @@ var grid_draw_over_tile_mode := false:
 		if value == grid_draw_over_tile_mode:
 			return
 		grid_draw_over_tile_mode = value
-		canvas.grid.queue_redraw()
+		if is_instance_valid(canvas.grid):
+			canvas.grid.queue_redraw()
 ## Found in Preferences. The color of grid.
 var grid_color := Color.BLACK:
 	set(value):
 		if value == grid_color:
 			return
 		grid_color = value
-		canvas.grid.queue_redraw()
+		if is_instance_valid(canvas.grid):
+			canvas.grid.queue_redraw()
 ## Found in Preferences. The minimum zoom after which pixel grid gets drawn if enabled.
 var pixel_grid_show_at_zoom := 1500.0:  # percentage
 	set(value):
 		if value == pixel_grid_show_at_zoom:
 			return
 		pixel_grid_show_at_zoom = value
-		canvas.pixel_grid.queue_redraw()
+		if is_instance_valid(canvas.pixel_grid):
+			canvas.pixel_grid.queue_redraw()
 ## Found in Preferences. The color of pixel grid.
 var pixel_grid_color := Color("21212191"):
 	set(value):
 		if value == pixel_grid_color:
 			return
 		pixel_grid_color = value
-		canvas.pixel_grid.queue_redraw()
+		if is_instance_valid(canvas.pixel_grid):
+			canvas.pixel_grid.queue_redraw()
 ## Found in Preferences. The color of guides.
 var guide_color := Color.PURPLE:
 	set(value):
@@ -389,7 +401,8 @@ var tilemode_opacity := 1.0:
 		if value == tilemode_opacity:
 			return
 		tilemode_opacity = value
-		canvas.tile_mode.queue_redraw()
+		if is_instance_valid(canvas.tile_mode):
+			canvas.tile_mode.queue_redraw()
 
 ## Found in Preferences. If [code]true[/code], layers get selected when their buttons are pressed.
 var select_layer_on_button_click := false
@@ -399,16 +412,18 @@ var onion_skinning_past_color := Color.RED:
 		if value == onion_skinning_past_color:
 			return
 		onion_skinning_past_color = value
-		canvas.onion_past.blue_red_color = value
-		canvas.onion_past.queue_redraw()
+		if is_instance_valid(canvas.onion_past):
+			canvas.onion_past.blue_red_color = value
+			canvas.onion_past.queue_redraw()
 ## Found in Preferences. The onion color of future frames.
 var onion_skinning_future_color := Color.BLUE:
 	set(value):
 		if value == onion_skinning_future_color:
 			return
 		onion_skinning_future_color = value
-		canvas.onion_future.blue_red_color = value
-		canvas.onion_future.queue_redraw()
+		if is_instance_valid(canvas.onion_future):
+			canvas.onion_future.blue_red_color = value
+			canvas.onion_future.queue_redraw()
 
 ## Found in Preferences. If [code]true[/code], the selection rect has animated borders.
 var selection_animated_borders := true:
@@ -416,26 +431,29 @@ var selection_animated_borders := true:
 		if value == selection_animated_borders:
 			return
 		selection_animated_borders = value
-		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
-		marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
+		if is_instance_valid(canvas.selection):
+			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
+			marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
 ## Found in Preferences. The first color of border.
 var selection_border_color_1 := Color.WHITE:
 	set(value):
 		if value == selection_border_color_1:
 			return
 		selection_border_color_1 = value
-		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
-		marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
-		canvas.selection.queue_redraw()
+		if is_instance_valid(canvas.selection):
+			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
+			marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
+			canvas.selection.queue_redraw()
 ## Found in Preferences. The second color of border.
 var selection_border_color_2 := Color.BLACK:
 	set(value):
 		if value == selection_border_color_2:
 			return
 		selection_border_color_2 = value
-		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
-		marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
-		canvas.selection.queue_redraw()
+		if is_instance_valid(canvas.selection):
+			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
+			marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
+			canvas.selection.queue_redraw()
 
 ## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save cpu usage.
 var pause_when_unfocused := true
@@ -670,14 +688,14 @@ func _ready() -> void:
 	current_project = projects[0]
 	current_project.fill_color = default_fill_color
 
-	await get_tree().process_frame
-	project_switched.emit()
 	# Load preferences from the config file
 	for pref in config_cache.get_section_keys("preferences"):
 		if get(pref) == null:
 			continue
 		var value = config_cache.get_value("preferences", pref)
 		set(pref, value)
+	await get_tree().process_frame
+	project_switched.emit()
 
 
 func _initialize_keychain() -> void:

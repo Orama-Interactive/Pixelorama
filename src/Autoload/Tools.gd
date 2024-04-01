@@ -461,6 +461,8 @@ func get_mirrored_positions(
 
 func set_button_size(button_size: int) -> void:
 	var size := Vector2(24, 24) if button_size == Global.ButtonSize.SMALL else Vector2(32, 32)
+	if not is_instance_valid(_tool_buttons):
+		await get_tree().process_frame
 	for t in _tool_buttons.get_children():
 		t.custom_minimum_size = size
 

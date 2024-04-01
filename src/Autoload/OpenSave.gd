@@ -798,6 +798,8 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 
 
 func update_autosave() -> void:
+	if not is_instance_valid(autosave_timer):
+		return
 	autosave_timer.stop()
 	# Interval parameter is in minutes, wait_time is seconds
 	autosave_timer.wait_time = Global.autosave_interval * 60
