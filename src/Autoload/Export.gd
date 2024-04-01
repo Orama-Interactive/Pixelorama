@@ -25,6 +25,19 @@ var animated_formats := [
 var ffmpeg_formats := [
 	FileFormat.MP4, FileFormat.AVI, FileFormat.OGV, FileFormat.MKV, FileFormat.WEBM
 ]
+## A dictionary of [enum FileFormat] enums and their file extensions and short descriptions.
+var file_format_dictionary := {
+	FileFormat.PNG: [".png", "PNG Image"],
+	FileFormat.WEBP: [".webp", "WebP Image"],
+	FileFormat.JPEG: [".jpg", "JPG Image"],
+	FileFormat.GIF: [".gif", "GIF Image"],
+	FileFormat.APNG: [".apng", "APNG Image"],
+	FileFormat.MP4: [".mp4", "MPEG-4 Video"],
+	FileFormat.AVI: [".avi", "AVI Video"],
+	FileFormat.OGV: [".ogv", "OGV Video"],
+	FileFormat.MKV: [".mkv", "Matroska Video"],
+	FileFormat.WEBM: [".webm", "WebM Video"],
+}
 
 ## A dictionary of custom exporter generators (received from extensions)
 var custom_file_formats := {}
@@ -524,64 +537,22 @@ func _scale_processed_images() -> void:
 
 
 func file_format_string(format_enum: int) -> String:
-	match format_enum:
-		FileFormat.PNG:
-			return ".png"
-		FileFormat.WEBP:
-			return ".webp"
-		FileFormat.JPEG:
-			return ".jpg"
-		FileFormat.GIF:
-			return ".gif"
-		FileFormat.APNG:
-			return ".apng"
-		FileFormat.MP4:
-			return ".mp4"
-		FileFormat.AVI:
-			return ".avi"
-		FileFormat.OGV:
-			return ".ogv"
-		FileFormat.MKV:
-			return ".mkv"
-		FileFormat.WEBM:
-			return ".webm"
-		_:
-			# If a file format description is not found, try generating one
-			if custom_exporter_generators.has(format_enum):
-				return custom_exporter_generators[format_enum][1]
-			return ""
+	if file_format_dictionary.has(format_enum):
+		return file_format_dictionary[format_enum][0]
+	# If a file format description is not found, try generating one
+	if custom_exporter_generators.has(format_enum):
+		return custom_exporter_generators[format_enum][1]
+	return ""
 
 
 func file_format_description(format_enum: int) -> String:
-	match format_enum:
-		# these are overrides
-		# (if they are not given, they will generate themselves based on the enum key name)
-		FileFormat.PNG:
-			return "PNG Image"
-		FileFormat.WEBP:
-			return "WEBP Image"
-		FileFormat.JPEG:
-			return "JPEG Image"
-		FileFormat.GIF:
-			return "GIF Image"
-		FileFormat.APNG:
-			return "APNG Image"
-		FileFormat.MP4:
-			return "MPEG-4 Video"
-		FileFormat.AVI:
-			return "AVI Video"
-		FileFormat.OGV:
-			return "OGV Video"
-		FileFormat.MKV:
-			return "Matroska Video"
-		FileFormat.WEBM:
-			return "WebM Video"
-		_:
-			# If a file format description is not found, try generating one
-			for key in custom_file_formats.keys():
-				if custom_file_formats[key] == format_enum:
-					return str(key.capitalize())
-			return ""
+	if file_format_dictionary.has(format_enum):
+		return file_format_dictionary[format_enum][1]
+	# If a file format description is not found, try generating one
+	for key in custom_file_formats.keys():
+		if custom_file_formats[key] == format_enum:
+			return str(key.capitalize())
+	return ""
 
 
 ## True when exporting to .gif, .apng and video
