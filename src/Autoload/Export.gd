@@ -605,6 +605,8 @@ func is_ffmpeg_installed() -> bool:
 
 func _create_export_path(multifile: bool, project: Project, frame := 0, layer := -1) -> String:
 	var path := project.file_name
+	if path.contains("{name}"):
+		path = path.replace("{name}", project.name)
 	# Only append frame number when there are multiple files exported
 	if multifile:
 		var path_extras := ""
