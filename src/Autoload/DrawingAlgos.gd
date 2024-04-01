@@ -25,14 +25,14 @@ func blend_layers(
 	only_selected_cels := false,
 	only_selected_layers := false,
 ) -> void:
+	var frame_index := project.frames.find(frame)
+	var previous_ordered_layers: Array[int] = project.ordered_layers
+	project.order_layers(frame_index)
 	var textures: Array[Image] = []
 	# Nx4 texture, where N is the number of layers and the first row are the blend modes,
 	# the second are the opacities, the third are the origins and the fourth are the
 	# clipping mask booleans.
 	var metadata_image := Image.create(project.layers.size(), 4, false, Image.FORMAT_R8)
-	var frame_index := project.frames.find(frame)
-	var previous_ordered_layers: Array[int] = project.ordered_layers
-	project.order_layers(frame_index)
 	for i in project.layers.size():
 		var ordered_index := project.ordered_layers[i]
 		var layer := project.layers[ordered_index]
@@ -50,19 +50,34 @@ func blend_layers(
 			if not layer_is_selected:
 				include = false
 		var cel := frame.cels[ordered_index]
-		var cel_image := layer.display_effects(cel)
-		textures.append(cel_image)
-		set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
-	var texture_array := Texture2DArray.new()
-	texture_array.create_from_images(textures)
-	var params := {
-		"layers": texture_array,
-		"metadata": ImageTexture.create_from_image(metadata_image),
-	}
-	var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
-	var gen := ShaderImageEffect.new()
-	gen.generate_image(blended, blend_layers_shader, params, project.size)
-	image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
+		if DisplayServer.get_name() == "headless":
+			var opacity := cel.get_final_opacity(layer)
+			var cel_image := Image.new()
+			cel_image.copy_from(cel.get_image())
+			if opacity < 1.0:  # If we have cel or layer transparency
+				for xx in cel_image.get_size().x:
+					for yy in cel_image.get_size().y:
+						var pixel_color := cel_image.get_pixel(xx, yy)
+						var alpha := pixel_color.a * opacity
+						cel_image.set_pixel(
+							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
+						)
+			image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
+		else:
+			var cel_image := layer.display_effects(cel)
+			textures.append(cel_image)
+			set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
+	if DisplayServer.get_name() != "headless":
+		var texture_array := Texture2DArray.new()
+		texture_array.create_from_images(textures)
+		var params := {
+			"layers": texture_array,
+			"metadata": ImageTexture.create_from_image(metadata_image),
+		}
+		var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(blended, blend_layers_shader, params, project.size)
+		image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
 	# Re-order the layers again to ensure correct canvas drawing
 	project.ordered_layers = previous_ordered_layers
 
