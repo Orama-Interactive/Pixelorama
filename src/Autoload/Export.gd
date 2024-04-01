@@ -5,6 +5,7 @@ enum Orientation { COLUMNS, ROWS, TAGS_BY_COLUMN, TAGS_BY_ROW }
 enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
+enum { VISIBLE_LAYERS, SELECTED_LAYERS }
 
 ## This path is used to temporarily store png files that FFMPEG uses to convert them to video
 const TEMP_PATH := "user://tmp"
@@ -653,9 +654,36 @@ func _get_proccessed_image_animation_tag_and_start_id(
 func _blend_layers(
 	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
-	if export_layers == 0:
-		DrawingAlgos.blend_layers(image, frame, origin, project)
-	elif export_layers == 1:
+	if export_layers == VISIBLE_LAYERS:
+		var load_result_from_pxo := not project.save_path.is_empty() and not project.has_changed
+		if load_result_from_pxo:
+			# Attempt to read the image data directly from the pxo file, without having to blend
+			# This is mostly useful for when running Pixelorama in headless mode
+			# To handle exporting from a CLI
+			var zip_reader := ZIPReader.new()
+			var err := zip_reader.open(project.save_path)
+			if err == OK:
+				var frame_index := project.frames.find(frame) + 1
+				var image_path := "image_data/final_images/%s" % frame_index
+				if zip_reader.file_exists(image_path):
+					# "Include blended" must be toggled on when saving the pxo file
+					# in order for this to work.
+					var image_data := zip_reader.read_file(image_path)
+					image.set_data(
+						image.get_width(),
+						image.get_height(),
+						image.has_mipmaps(),
+						image.get_format(),
+						image_data
+					)
+				else:
+					load_result_from_pxo = false
+				zip_reader.close()
+			else:
+				load_result_from_pxo = false
+		if not load_result_from_pxo:
+			DrawingAlgos.blend_layers(image, frame, origin, project)
+	elif export_layers == SELECTED_LAYERS:
 		DrawingAlgos.blend_layers(image, frame, origin, project, false, true)
 	else:
 		var layer := project.layers[export_layers - 2]
