@@ -643,13 +643,14 @@ func _blend_layers(
 					# "Include blended" must be toggled on when saving the pxo file
 					# in order for this to work.
 					var image_data := zip_reader.read_file(image_path)
-					image.set_data(
-						image.get_width(),
-						image.get_height(),
+					var loaded_image := Image.create_from_data(
+						project.size.x,
+						project.size.y,
 						image.has_mipmaps(),
 						image.get_format(),
 						image_data
 					)
+					image.blend_rect(loaded_image, Rect2i(Vector2i.ZERO, project.size), origin)
 				else:
 					load_result_from_pxo = false
 				zip_reader.close()
