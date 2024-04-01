@@ -6,6 +6,7 @@ enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
 enum { VISIBLE_LAYERS, SELECTED_LAYERS }
+enum ExportFrames { ALL_FRAMES, SELECTED_FRAMES }
 
 ## This path is used to temporarily store png files that FFMPEG uses to convert them to video
 const TEMP_PATH := "user://tmp"
@@ -257,11 +258,11 @@ func process_animation(project := Global.current_project) -> void:
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 	var frames: Array[Frame] = []
-	if frame_current_tag > 1:  # Specific tag
-		var frame_start: int = project.animation_tags[frame_current_tag - 2].from
-		var frame_end: int = project.animation_tags[frame_current_tag - 2].to
+	if frame_current_tag >= ExportFrames.size():  # Export a specific tag
+		var frame_start: int = project.animation_tags[frame_current_tag - ExportFrames.size()].from
+		var frame_end: int = project.animation_tags[frame_current_tag - ExportFrames.size()].to
 		frames = project.frames.slice(frame_start - 1, frame_end, 1, true)
-	elif frame_current_tag == 1:  # Selected frames
+	elif frame_current_tag == ExportFrames.SELECTED_FRAMES:
 		for cel in project.selected_cels:
 			var frame := project.frames[cel[0]]
 			if not frames.has(frame):
