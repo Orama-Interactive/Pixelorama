@@ -198,9 +198,9 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 			new_project.frames = []
 			new_project.layers = []
 			new_project.animation_tags.clear()
-			new_project.name = path.get_file()
+			new_project.name = path.get_file().get_basename()
 		else:
-			new_project = Project.new([], path.get_file())
+			new_project = Project.new([], path.get_file().get_basename())
 		var data_json := zip_reader.read_file("data.json").get_string_from_utf8()
 		var test_json_conv := JSON.new()
 		var error := test_json_conv.parse(data_json)
@@ -255,13 +255,12 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 	else:
 		# Loading a backup should not change window title and save path
 		new_project.save_path = path
-		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
+		Global.main_window.title = new_project.name + " - Pixelorama " + Global.current_version
 		Global.save_sprites_dialog.current_path = path
 		# Set last opened project path and save
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		new_project.export_directory_path = path.get_base_dir()
 		new_project.file_name = path.get_file().trim_suffix(".pxo")
 		new_project.was_exported = false
 		Global.top_menu_container.file_menu.set_item_text(
@@ -302,9 +301,9 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 		new_project.frames = []
 		new_project.layers = []
 		new_project.animation_tags.clear()
-		new_project.name = path.get_file()
+		new_project.name = path.get_file().get_basename()
 	else:
-		new_project = Project.new([], path.get_file())
+		new_project = Project.new([], path.get_file().get_basename())
 	new_project.deserialize(result, null, file)
 	if result.has("brushes"):
 		for brush in result.brushes:
@@ -418,7 +417,7 @@ func save_pxo_file(
 			project.has_changed = false
 		Global.current_project.remove_backup_file()
 		Global.notification_label("File saved")
-		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
+		Global.main_window.title = project.name + " - Pixelorama " + Global.current_version
 
 		# Set last opened project path and save
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
@@ -785,8 +784,7 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	if project.has_changed:
 		Global.main_window.title = Global.main_window.title + "(*)"
 	var file_name := path.get_basename().get_file()
-	var export_directory_path := path.get_base_dir()
-	project.export_directory_path = export_directory_path
+	project.export_directory_path = path.get_base_dir()
 	project.file_name = file_name
 	project.was_exported = true
 	if path.get_extension().to_lower() == "png":
