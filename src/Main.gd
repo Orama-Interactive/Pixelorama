@@ -23,6 +23,135 @@ var splash_dialog: AcceptDialog:
 @onready var right_cursor: Sprite2D = $RightCursor
 
 
+class CLI:
+	static var args_list = {
+		["--version", "--pixelorama-version"] : [
+			CLI.print_version, "Prints current Pixelorama version"
+		],
+		["--size"] : [CLI.print_project_size, "Prints size of the given project"],
+		["--framecount"] : [CLI.print_frame_count, "Prints total frames in the current project"],
+		["--export", "-e"] : [CLI.enable_export, "Indicates given project should be exported"],
+		["--spritesheet", "-s"] : [
+			CLI.enable_spritesheet, "Indicates given project should be exported as spritesheet"
+		],
+		["--output", "-o"] : [CLI.set_output, "[path] Name of output file (with extension)"],
+		["--scale"] : [CLI.set_export_scale, "[integer] Scales up the export image by a number"],
+		["--frames", "-f"] : [CLI.set_frames, "[integer-integer] Used to specify frame range"],
+		["--direction", "-d"] : [CLI.set_direction, "[0, 1, 2] Specifies direction"],
+		["--split-layers"] : [CLI.set_split_layers, "Each layer exports separately"],
+		["--help" ,"-h"] : [CLI.generate_help, "Use to print HELP"]
+	}
+
+	static func generate_help(_project: Project, _next_arg: String):
+		var help := str("""
+=========================================================================\n
+Help for Pixelorama's CLI.
+
+Usage:
+\t%s [SYSTEM OPTIONS] -- [USER OPTIONS] [FILES]...
+
+Use -h in place of [SYSTEM OPTIONS] to see [SYSTEM OPTIONS].
+Or use -h in place of [USER OPTIONS] to see [USER OPTIONS].
+
+some useful [SYSTEM OPTIONS] are:
+--headless     Run in headless mode.
+--quit         Close pixelorama after current command.
+
+
+[USER OPTIONS]:\n
+(The terms in [ ] reflects the valid type for corresponding argument).
+
+""" % OS.get_executable_path().get_file())
+		for command_group: Array in args_list.keys():
+			help += str(
+				var_to_str(command_group).replace("[", "").replace("]", "").replace("\"", ""),
+				"\t\t".c_unescape(),
+				args_list[command_group][1],
+				"\n".c_unescape())
+		help += "========================================================================="
+		print(help)
+
+
+	## Dedicated place for command line args callables
+	static func print_version(_project: Project, _next_arg: String) -> void:
+		print(Global.current_version)
+
+
+	static func print_project_size(project: Project, _next_arg: String) -> void:
+		print(project.size)
+
+
+	static func print_frame_count(project: Project, _next_arg: String) -> void:
+		print(project.frames.size())
+
+
+	static func enable_export(project: Project, _next_arg: String):
+		return true
+
+
+	static func enable_spritesheet(_project: Project, _next_arg: String):
+		Export.current_tab = Export.ExportTab.SPRITESHEET
+		return true
+
+
+	static func set_output(project: Project, next_arg: String) -> void:
+		if not next_arg.is_empty():
+			project.file_name = next_arg.get_basename()
+			var extension := next_arg.get_extension()
+			project.file_format = Export.get_file_format_from_extension(extension)
+
+
+	static func set_export_scale(_project: Project, next_arg: String) -> void:
+		if not next_arg.is_empty():
+			if next_arg.is_valid_float():
+				Export.resize = next_arg.to_float() * 100
+
+
+	static func set_frames(project: Project, next_arg: String) -> void:
+		if not next_arg.is_empty():
+			if next_arg.contains("-"):
+				var frame_numbers := next_arg.split("-")
+				if frame_numbers.size() > 1:
+					project.selected_cels.clear()
+					var frame_number_1 := 0
+					if frame_numbers[0].is_valid_int():
+						frame_number_1 = frame_numbers[0].to_int() - 1
+					frame_number_1 = clampi(frame_number_1, 0, project.frames.size() - 1)
+					var frame_number_2 := project.frames.size() - 1
+					if frame_numbers[1].is_valid_int():
+						frame_number_2 = frame_numbers[1].to_int() - 1
+					frame_number_2 = clampi(frame_number_2, 0, project.frames.size() - 1)
+					for frame in range(frame_number_1, frame_number_2 + 1):
+						project.selected_cels.append([frame, project.current_layer])
+						project.change_cel(frame)
+						Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+			elif next_arg.is_valid_int():
+				var frame_number := next_arg.to_int() - 1
+				frame_number = clampi(frame_number, 0, project.frames.size() - 1)
+				project.selected_cels = [[frame_number, project.current_layer]]
+				project.change_cel(frame_number)
+				Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+
+
+	static func set_direction(_project: Project, next_arg: String) -> void:
+		if not next_arg.is_empty():
+			next_arg = next_arg.to_lower()
+			if next_arg == "0" or next_arg.contains("forward"):
+				Export.direction = Export.AnimationDirection.FORWARD
+			elif next_arg == "1" or next_arg.contains("backward"):
+				Export.direction = Export.AnimationDirection.BACKWARDS
+			elif next_arg == "2" or next_arg.contains("ping"):
+				Export.direction = Export.AnimationDirection.PING_PONG
+			else:
+				print(Export.AnimationDirection.keys()[Export.direction])
+		else:
+			print(Export.AnimationDirection.keys()[Export.direction])
+
+
+	static func set_split_layers(_project: Project, _next_arg: String) -> void:
+		Export.split_layers = true
+
+
 func _init() -> void:
 	if not DirAccess.dir_exists_absolute("user://backups"):
 		DirAccess.make_dir_recursive_absolute("user://backups")
@@ -221,6 +350,9 @@ func _handle_cmdline_arguments() -> void:
 				var output = callable.call(project, next_argument)
 				if typeof(output) == TYPE_BOOL:
 					should_export = output
+			else:
+				print("Unknown option %s", arg)
+				get_tree().quit()
 	if should_export:
 		Export.external_export(project)
 
@@ -436,133 +568,3 @@ func _exit_tree() -> void:
 		project.remove()
 	# For some reason, the above is not enough to remove all backup files
 	_clear_backup_files()
-
-
-class CLI:
-	func _init() -> void:
-		pass
-
-	static var args_list = {
-		["--version", "--pixelorama-version"] : [CLI.print_version, "Prints current Pixelorama version"],
-		["--size"] : [CLI.print_project_size, "Prints size of the given project"],
-		["--framecount"] : [CLI.print_frame_count, "Prints total frames in the current project"],
-		["--export", "-e"] : [CLI.enable_export, "Indicates given project should be exported"],
-		["--spritesheet", "-s"] : [CLI.enable_spritesheet, "Indicates given project should be exported as spritesheet"],
-		["--output", "-o"] : [CLI.set_output, "[path] Name of output file (with extension)"],
-		["--scale"] : [CLI.set_export_scale, "[integer] Scales up the export image by a number"],
-		["--frames", "-f"] : [CLI.set_frames, "[integer-integer] Used to specify frame range"],
-		["--direction", "-d"] : [CLI.set_direction, "[0, 1, 2] Specifies direction"],
-		["--split-layers"] : [CLI.set_split_layers, "Each layer exports separately"],
-		["--help" ,"-h"] : [CLI.generate_help, "Use to print HELP"]
-	}
-
-	static func generate_help(_project: Project, _next_arg: String):
-		var help := str("""
-=========================================================================\n
-Help for Pixelorama's CLI.
-
-Usage:
-\t%s [SYSTEM OPTIONS] -- [USER OPTIONS] [FILES]...
-
-Use -h in place of [SYSTEM OPTIONS] to see [SYSTEM OPTIONS].
-Or use -h in place of [USER OPTIONS] to see [USER OPTIONS].
-
-some useful [SYSTEM OPTIONS] are:
---headless     Run in headless mode.
---quit         Close pixelorama after current command.
-
-
-[USER OPTIONS]:\n
-(The terms in [ ] reflects the valid type for corresponding argument).
-
-""" % OS.get_executable_path().get_file())
-		for command_group: Array in args_list.keys():
-			help += str(
-				var_to_str(command_group).replace("[", "").replace("]", "").replace("\"", ""),
-				"\t\t".c_unescape(),
-				args_list[command_group][1],
-				"\n".c_unescape())
-		help += "========================================================================="
-		print(help)
-
-
-	## Dedicated place for command line args callables
-	static func print_version(_project: Project, _next_arg: String) -> void:
-		print(Global.current_version)
-
-
-	static func print_project_size(project: Project, _next_arg: String) -> void:
-		print(project.size)
-
-
-	static func print_frame_count(project: Project, _next_arg: String) -> void:
-		print(project.frames.size())
-
-
-	static func enable_export(project: Project, _next_arg: String):
-		return true
-
-
-	static func enable_spritesheet(_project: Project, _next_arg: String):
-		Export.current_tab = Export.ExportTab.SPRITESHEET
-		return true
-
-
-	static func set_output(project: Project, next_arg: String) -> void:
-		if not next_arg.is_empty():
-			project.file_name = next_arg.get_basename()
-			var extension := next_arg.get_extension()
-			project.file_format = Export.get_file_format_from_extension(extension)
-
-
-	static func set_export_scale(_project: Project, next_arg: String) -> void:
-		if not next_arg.is_empty():
-			if next_arg.is_valid_float():
-				Export.resize = next_arg.to_float() * 100
-
-
-	static func set_frames(project: Project, next_arg: String) -> void:
-		if not next_arg.is_empty():
-			if next_arg.contains("-"):
-				var frame_numbers := next_arg.split("-")
-				if frame_numbers.size() > 1:
-					project.selected_cels.clear()
-					var frame_number_1 := 0
-					if frame_numbers[0].is_valid_int():
-						frame_number_1 = frame_numbers[0].to_int() - 1
-					frame_number_1 = clampi(frame_number_1, 0, project.frames.size() - 1)
-					var frame_number_2 := project.frames.size() - 1
-					if frame_numbers[1].is_valid_int():
-						frame_number_2 = frame_numbers[1].to_int() - 1
-					frame_number_2 = clampi(frame_number_2, 0, project.frames.size() - 1)
-					for frame in range(frame_number_1, frame_number_2 + 1):
-						project.selected_cels.append([frame, project.current_layer])
-						project.change_cel(frame)
-						Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
-			elif next_arg.is_valid_int():
-				var frame_number := next_arg.to_int() - 1
-				frame_number = clampi(frame_number, 0, project.frames.size() - 1)
-				project.selected_cels = [[frame_number, project.current_layer]]
-				project.change_cel(frame_number)
-				Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
-
-
-	static func set_direction(_project: Project, next_arg: String) -> void:
-		if not next_arg.is_empty():
-			next_arg = next_arg.to_lower()
-			if next_arg == "0" or next_arg.contains("forward"):
-				Export.direction = Export.AnimationDirection.FORWARD
-			elif next_arg == "1" or next_arg.contains("backward"):
-				Export.direction = Export.AnimationDirection.BACKWARDS
-			elif next_arg == "2" or next_arg.contains("ping"):
-				Export.direction = Export.AnimationDirection.PING_PONG
-			else:
-				print(Export.AnimationDirection.keys()[Export.direction])
-		else:
-			print(Export.AnimationDirection.keys()[Export.direction])
-
-
-	static func set_split_layers(_project: Project, _next_arg: String) -> void:
-		Export.split_layers = true
-
-
