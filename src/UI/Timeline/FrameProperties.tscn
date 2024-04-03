@@ -26,7 +26,7 @@ text = "1"
 
 [node name="FrameDuration" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "Frame duration"
+text = "Frame duration:"
 
 [node name="FrameTime" type="SpinBox" parent="GridContainer"]
 layout_mode = 2
@@ -40,6 +40,7 @@ suffix = "x"
 
 [node name="UserDataLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "User data:"
 
 [node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]

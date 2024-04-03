@@ -2430,7 +2430,12 @@ msgstr ""
 msgid "Move the selected frame to the right."
 msgstr ""
 
-msgid "Frame duration"
+#. Refers to the duration of the frame. Found in the frame properties.
+msgid "Frame duration:"
+msgstr ""
+
+#. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
+msgid "User data:"
 msgstr ""
 
 msgid "Duration"

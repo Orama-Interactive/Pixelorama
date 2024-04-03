@@ -126,6 +126,7 @@ allow_greater = true
 
 [node name="UserDataLabel" type="Label" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "User data:"
 
 [node name="UserDataTextEdit" type="TextEdit" parent="TagOptions/GridContainer"]
