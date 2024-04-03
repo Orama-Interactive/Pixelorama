@@ -49,6 +49,7 @@ var name: String  ## Name of tag
 var color: Color  ## Color of tag
 var from: int  ## First frame number in the tag (first frame in timeline is numbered 1)
 var to: int  ## First frame number in the tag (first frame in timeline is numbered 1)
+var user_data := ""  ## User defined data, set in the tag properties.
 
 
 ## Class Constructor (used as [code]AnimationTag.new(name, color, from, to)[/code])
@@ -60,7 +61,10 @@ func _init(_name: String, _color: Color, _from: int, _to: int) -> void:
 
 
 func serialize() -> Dictionary:
-	return {"name": name, "color": color.to_html(), "from": from, "to": to}
+	var dict := {"name": name, "color": color.to_html(), "from": from, "to": to}
+	if not user_data.is_empty():
+		dict["user_data"] = user_data
+	return dict
 
 
 func get_size() -> int:

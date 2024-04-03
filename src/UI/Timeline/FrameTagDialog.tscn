@@ -63,7 +63,7 @@ button_pressed = true
 text = "Animation plays only on frames of the same tag"
 
 [node name="TagOptions" type="ConfirmationDialog" parent="."]
-size = Vector2i(303, 127)
+size = Vector2i(303, 240)
 exclusive = false
 popup_window = true
 
@@ -71,35 +71,41 @@ popup_window = true
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 295.0
-offset_bottom = 78.0
+offset_bottom = 191.0
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
-columns = 4
+columns = 2
 
 [node name="NameLabel" type="Label" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Name:"
 
 [node name="NameLineEdit" type="LineEdit" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 caret_blink = true
 caret_blink_interval = 0.5
 
 [node name="ColorLabel" type="Label" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Color:"
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 color = Color(1, 0, 0, 1)
 
 [node name="FromLabel" type="Label" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "From:"
 
 [node name="FromSpinBox" type="SpinBox" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
@@ -107,14 +113,24 @@ allow_greater = true
 
 [node name="ToLabel" type="Label" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "To:"
 
 [node name="ToSpinBox" type="SpinBox" parent="TagOptions/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 allow_greater = true
+
+[node name="UserDataLabel" type="Label" parent="TagOptions/GridContainer"]
+layout_mode = 2
+text = "User data:"
+
+[node name="UserDataTextEdit" type="TextEdit" parent="TagOptions/GridContainer"]
+layout_mode = 2
+scroll_fit_content_height = true
 
 [connection signal="about_to_popup" from="." to="." method="_on_FrameTagDialog_about_to_show"]
 [connection signal="visibility_changed" from="." to="." method="_on_FrameTagDialog_visibility_changed"]

@@ -232,9 +232,12 @@ func serialize() -> Dictionary:
 			cel_data.append(cel.serialize())
 			cel_data[-1]["metadata"] = _serialize_metadata(cel)
 
-		frame_data.append(
-			{"cels": cel_data, "duration": frame.duration, "metadata": _serialize_metadata(frame)}
-		)
+		var current_frame_data := {
+			"cels": cel_data, "duration": frame.duration, "metadata": _serialize_metadata(frame)
+		}
+		if not frame.user_data.is_empty():
+			current_frame_data["user_data"] = frame.user_data
+		frame_data.append(current_frame_data)
 	var brush_data := []
 	for brush in brushes:
 		brush_data.append({"size_x": brush.get_size().x, "size_y": brush.get_size().y})
@@ -335,6 +338,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				duration = dict.frame_duration[frame_i]
 
 			var frame_class := Frame.new(cels, duration)
+			frame_class.user_data = frame.get("user_data", "")
 			_deserialize_metadata(frame_class, frame)
 			frames.append(frame_class)
 			frame_i += 1
@@ -347,7 +351,9 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
-			animation_tags.append(AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to))
+			var new_tag := AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to)
+			new_tag.user_data = tag.get("user_data", "")
+			animation_tags.append(new_tag)
 		animation_tags = animation_tags
 	if dict.has("guides"):
 		for g in dict.guides:

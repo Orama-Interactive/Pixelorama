@@ -17,6 +17,7 @@ var transformed_content: Image  ## Used in transformations (moving, scaling etc 
 ## Used for individual cel ordering. Used for when cels need to be drawn above or below
 ## their corresponding layer.
 var z_index := 0
+var user_data := ""  ## User defined data, set in the cel properties.
 
 
 func get_final_opacity(layer: BaseLayer) -> float:
@@ -78,14 +79,17 @@ func update_texture() -> void:
 
 ## Returns a curated [Dictionary] containing the cel data.
 func serialize() -> Dictionary:
-	return {"opacity": opacity, "z_index": z_index}
+	var dict := {"opacity": opacity, "z_index": z_index}
+	if not user_data.is_empty():
+		dict["user_data"] = user_data
+	return dict
 
 
 ## Sets the cel data according to a curated [Dictionary] obtained from [method serialize].
 func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
-	if dict.has("z_index"):
-		z_index = dict["z_index"]
+	z_index = dict.get("z_index", z_index)
+	user_data = dict.get("user_data", user_data)
 
 
 ## Used to perform cleanup after a cel is removed.

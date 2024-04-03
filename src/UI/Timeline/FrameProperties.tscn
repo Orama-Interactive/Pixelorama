@@ -38,6 +38,14 @@ value = 1.0
 allow_greater = true
 suffix = "x"
 
+[node name="UserDataLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "User data:"
+
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+layout_mode = 2
+scroll_fit_content_height = true
+
 [connection signal="about_to_popup" from="." to="." method="_on_FrameProperties_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_FrameProperties_confirmed"]
 [connection signal="visibility_changed" from="." to="." method="_on_FrameProperties_visibility_changed"]

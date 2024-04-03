@@ -5,7 +5,7 @@
 
 [node name="CelProperties" type="AcceptDialog"]
 title = "Cel properties"
-size = Vector2i(300, 161)
+size = Vector2i(300, 188)
 exclusive = false
 popup_window = true
 script = ExtResource("1_lyy7i")
@@ -14,7 +14,7 @@ script = ExtResource("1_lyy7i")
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
-offset_bottom = 112.0
+offset_bottom = 139.0
 columns = 2
 
 [node name="Frame" type="Label" parent="GridContainer"]
@@ -76,6 +76,15 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("1_85pb7")
 
+[node name="UserDataLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "User data:"
+
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+layout_mode = 2
+scroll_fit_content_height = true
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
 [connection signal="value_changed" from="GridContainer/ZIndexSlider" to="." method="_on_z_index_slider_value_changed"]
+[connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
