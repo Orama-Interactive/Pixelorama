@@ -345,7 +345,12 @@ func _handle_cmdline_arguments() -> void:
 				if typeof(output) == TYPE_BOOL:
 					should_export = output
 			else:
-				print("Unknown option %s", arg)
+				print("==========")
+				print("Unknown option: %s" % arg)
+				for compare_arg in parse_dic.keys():
+					if arg.similarity(compare_arg) >= 0.4:
+						print("Similar option: %s" % compare_arg)
+				print("==========")
 				get_tree().quit()
 	if should_export:
 		Export.external_export(project)
