@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-03-20 11:40\n"
+"PO-Revision-Date: 2024-04-03 23:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2497,8 +2497,13 @@ msgstr "Переместить выделенный кадр влево."
 msgid "Move the selected frame to the right."
 msgstr "Переместить выделенный кадр вправо."
 
-msgid "Frame duration"
-msgstr "Длительность кадра"
+#. Refers to the duration of the frame. Found in the frame properties.
+msgid "Frame duration:"
+msgstr ""
+
+#. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
+msgid "User data:"
+msgstr ""
 
 msgid "Duration"
 msgstr "Длительность"
