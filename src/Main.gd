@@ -351,7 +351,9 @@ func _handle_cmdline_arguments() -> void:
 					if arg.similarity(compare_arg) >= 0.4:
 						print("Similar option: %s" % compare_arg)
 				print("==========")
+				should_export = false
 				get_tree().quit()
+				break
 	if should_export:
 		Export.external_export(project)
 
