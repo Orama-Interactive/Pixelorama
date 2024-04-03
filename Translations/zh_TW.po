@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-03-16 02:48\n"
+"PO-Revision-Date: 2024-04-03 23:50\n"
 
 msgid "OK"
 msgstr "確定"
@@ -2452,8 +2452,13 @@ msgstr "移動所選影格到左邊。"
 msgid "Move the selected frame to the right."
 msgstr "移動所選影格到右邊。"
 
-msgid "Frame duration"
-msgstr "影格持續時間"
+#. Refers to the duration of the frame. Found in the frame properties.
+msgid "Frame duration:"
+msgstr ""
+
+#. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
+msgid "User data:"
+msgstr ""
 
 msgid "Duration"
 msgstr ""
