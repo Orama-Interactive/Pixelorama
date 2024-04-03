@@ -25,26 +25,26 @@ var splash_dialog: AcceptDialog:
 
 class CLI:
 	static var args_list = {
-		["--version", "--pixelorama-version"] : [
-			CLI.print_version, "Prints current Pixelorama version"
-		],
-		["--size"] : [CLI.print_project_size, "Prints size of the given project"],
-		["--framecount"] : [CLI.print_frame_count, "Prints total frames in the current project"],
-		["--export", "-e"] : [CLI.enable_export, "Indicates given project should be exported"],
-		["--spritesheet", "-s"] : [
-			CLI.enable_spritesheet, "Indicates given project should be exported as spritesheet"
-		],
-		["--output", "-o"] : [CLI.set_output, "[path] Name of output file (with extension)"],
-		["--scale"] : [CLI.set_export_scale, "[integer] Scales up the export image by a number"],
-		["--frames", "-f"] : [CLI.set_frames, "[integer-integer] Used to specify frame range"],
-		["--direction", "-d"] : [CLI.set_direction, "[0, 1, 2] Specifies direction"],
-		["--split-layers"] : [CLI.set_split_layers, "Each layer exports separately"],
-		["--help" ,"-h"] : [CLI.generate_help, "Use to print HELP"]
+		["--version", "--pixelorama-version"]:
+		[CLI.print_version, "Prints current Pixelorama version"],
+		["--size"]: [CLI.print_project_size, "Prints size of the given project"],
+		["--framecount"]: [CLI.print_frame_count, "Prints total frames in the current project"],
+		["--export", "-e"]: [CLI.enable_export, "Indicates given project should be exported"],
+		["--spritesheet", "-s"]:
+		[CLI.enable_spritesheet, "Indicates given project should be exported as spritesheet"],
+		["--output", "-o"]: [CLI.set_output, "[path] Name of output file (with extension)"],
+		["--scale"]: [CLI.set_export_scale, "[integer] Scales up the export image by a number"],
+		["--frames", "-f"]: [CLI.set_frames, "[integer-integer] Used to specify frame range"],
+		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
+		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
+		["--help", "-h"]: [CLI.generate_help, "Use to print HELP"]
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
-		var help := str("""
-=========================================================================\n
+		var help := str(
+			(
+				"""
+ =========================================================================\n
 Help for Pixelorama's CLI.
 
 Usage:
@@ -61,38 +61,36 @@ some useful [SYSTEM OPTIONS] are:
 [USER OPTIONS]:\n
 (The terms in [ ] reflects the valid type for corresponding argument).
 
-""" % OS.get_executable_path().get_file())
+"""
+				% OS.get_executable_path().get_file()
+			)
+		)
 		for command_group: Array in args_list.keys():
 			help += str(
-				var_to_str(command_group).replace("[", "").replace("]", "").replace("\"", ""),
+				var_to_str(command_group).replace("[", "").replace("]", "").replace('"', ""),
 				"\t\t".c_unescape(),
 				args_list[command_group][1],
-				"\n".c_unescape())
+				"\n".c_unescape()
+			)
 		help += "========================================================================="
 		print(help)
-
 
 	## Dedicated place for command line args callables
 	static func print_version(_project: Project, _next_arg: String) -> void:
 		print(Global.current_version)
 
-
 	static func print_project_size(project: Project, _next_arg: String) -> void:
 		print(project.size)
-
 
 	static func print_frame_count(project: Project, _next_arg: String) -> void:
 		print(project.frames.size())
 
-
 	static func enable_export(project: Project, _next_arg: String):
 		return true
-
 
 	static func enable_spritesheet(_project: Project, _next_arg: String):
 		Export.current_tab = Export.ExportTab.SPRITESHEET
 		return true
-
 
 	static func set_output(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
@@ -100,12 +98,10 @@ some useful [SYSTEM OPTIONS] are:
 			var extension := next_arg.get_extension()
 			project.file_format = Export.get_file_format_from_extension(extension)
 
-
 	static func set_export_scale(_project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
 			if next_arg.is_valid_float():
 				Export.resize = next_arg.to_float() * 100
-
 
 	static func set_frames(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
@@ -132,7 +128,6 @@ some useful [SYSTEM OPTIONS] are:
 				project.change_cel(frame_number)
 				Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
 
-
 	static func set_direction(_project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
 			next_arg = next_arg.to_lower()
@@ -146,7 +141,6 @@ some useful [SYSTEM OPTIONS] are:
 				print(Export.AnimationDirection.keys()[Export.direction])
 		else:
 			print(Export.AnimationDirection.keys()[Export.direction])
-
 
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
