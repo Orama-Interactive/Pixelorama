@@ -85,7 +85,7 @@ some useful [SYSTEM OPTIONS] are:
 	static func print_frame_count(project: Project, _next_arg: String) -> void:
 		print(project.frames.size())
 
-	static func enable_export(project: Project, _next_arg: String):
+	static func enable_export(_project: Project, _next_arg: String):
 		return true
 
 	static func enable_spritesheet(_project: Project, _next_arg: String):
