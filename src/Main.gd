@@ -439,29 +439,50 @@ func _exit_tree() -> void:
 
 
 class CLI:
+	func _init() -> void:
+		pass
+
 	static var args_list = {
-		["--version", "--pixelorama-version"] : [print_version, "Prints current Pixelorama version"],
-		["--size"] : [print_project_size, "Prints size of the given project"],
-		["--framecount"] : [print_frame_count, "Prints total frames in the current project"],
-		["--export", "-e"] : [print_version, "Indicates given project should be exported"],
-		["--spritesheet", "-s"] : [print_version, "Indicates given project should be exported as spritesheet"],
-		["--output", "-o"] : [set_output, "[path] Name of output file (with extension)"],
-		["--scale"] : [set_export_scale, "[integer] Scales up the export image by a number"],
-		["--frames", "-f"] : [set_frames, "[integer-integer] Used to specify frame range"],
-		["--direction", "-d"] : [set_direction, "[0, 1, 2] Specifies direction"],
-		["--split-layers"] : [set_split_layers, "Each layer exports separately"],
-		["-h"] : [generate_help, "Use to print HELP"]
+		["--version", "--pixelorama-version"] : [CLI.print_version, "Prints current Pixelorama version"],
+		["--size"] : [CLI.print_project_size, "Prints size of the given project"],
+		["--framecount"] : [CLI.print_frame_count, "Prints total frames in the current project"],
+		["--export", "-e"] : [CLI.enable_export, "Indicates given project should be exported"],
+		["--spritesheet", "-s"] : [CLI.enable_spritesheet, "Indicates given project should be exported as spritesheet"],
+		["--output", "-o"] : [CLI.set_output, "[path] Name of output file (with extension)"],
+		["--scale"] : [CLI.set_export_scale, "[integer] Scales up the export image by a number"],
+		["--frames", "-f"] : [CLI.set_frames, "[integer-integer] Used to specify frame range"],
+		["--direction", "-d"] : [CLI.set_direction, "[0, 1, 2] Specifies direction"],
+		["--split-layers"] : [CLI.set_split_layers, "Each layer exports separately"],
+		["--help" ,"-h"] : [CLI.generate_help, "Use to print HELP"]
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
-		var help := "Help for Pixelorama's CLI, (The terms in [] hint the valid argument types)\n"
+		var help := str("""
+=========================================================================\n
+Help for Pixelorama's CLI.
 
+Usage:
+\t%s [SYSTEM OPTIONS] -- [USER OPTIONS] [FILES]...
+
+Use -h in place of [SYSTEM OPTIONS] to see [SYSTEM OPTIONS].
+Or use -h in place of [USER OPTIONS] to see [USER OPTIONS].
+
+some useful [SYSTEM OPTIONS] are:
+--headless     Run in headless mode.
+--quit         Close pixelorama after current command.
+
+
+[USER OPTIONS]:\n
+(The terms in [ ] reflects the valid type for corresponding argument).
+
+""" % OS.get_executable_path().get_file())
 		for command_group: Array in args_list.keys():
 			help += str(
-				var_to_str(command_group).replace("[", "").replace("]", ""),
-				"\t".c_unescape(),
+				var_to_str(command_group).replace("[", "").replace("]", "").replace("\"", ""),
+				"\t\t".c_unescape(),
 				args_list[command_group][1],
 				"\n".c_unescape())
+		help += "========================================================================="
 		print(help)
 
 
