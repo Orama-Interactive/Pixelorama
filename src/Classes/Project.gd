@@ -50,6 +50,7 @@ var reference_images: Array[ReferenceImage] = []
 var reference_index: int = -1  # The currently selected index ReferenceImage
 var vanishing_points := []  ## Array of Vanishing Points
 var fps := 6.0
+var user_data := ""  ## User defined data, set in the project properties.
 
 var x_symmetry_point: float
 var y_symmetry_point: float
@@ -268,6 +269,7 @@ func serialize() -> Dictionary:
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
+		"user_data": user_data,
 		"metadata": metadata
 	}
 
@@ -384,12 +386,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			x_symmetry_axis.points[point].y = floorf(y_symmetry_point / 2 + 1)
 		for point in y_symmetry_axis.points.size():
 			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
-	if dict.has("export_file_name"):
-		file_name = dict.export_file_name
-	if dict.has("export_file_format"):
-		file_format = dict.export_file_format
-	if dict.has("fps"):
-		fps = dict.fps
+	file_name = dict.get("export_file_name", file_name)
+	file_format = dict.get("export_file_format", file_name)
+	fps = dict.get("fps", file_name)
+	user_data = dict.get("user_data", user_data)
 	_deserialize_metadata(self, dict)
 	order_layers()
 

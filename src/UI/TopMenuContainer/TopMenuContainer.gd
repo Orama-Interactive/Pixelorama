@@ -15,6 +15,7 @@ var zen_mode := false
 
 # Dialogs
 var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
+var project_properties_dialog := Dialog.new("res://src/UI/Dialogs/ProjectProperties.tscn")
 var preferences_dialog := Dialog.new("res://src/Preferences/PreferencesDialog.tscn")
 var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetImage.tscn")
 var scale_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn")
@@ -171,6 +172,7 @@ func _setup_edit_menu() -> void:
 		"Paste in Place": "paste_in_place",
 		"Delete": "delete",
 		"New Brush": "new_brush",
+		"Project properties": "project_properties",
 		"Preferences": "preferences"
 	}
 	var i := 0
@@ -528,6 +530,8 @@ func edit_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.delete()
 		Global.EditMenu.NEW_BRUSH:
 			Global.canvas.selection.new_brush()
+		Global.EditMenu.PROJECT_PROPERTIES:
+			project_properties_dialog.popup()
 		Global.EditMenu.PREFERENCES:
 			preferences_dialog.popup()
 		_:

@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnjcs2l1ri38n"]
+
+[ext_resource type="Script" path="res://src/UI/Dialogs/ProjectProperties.gd" id="1_0n4uc"]
+
+[node name="ProjectProperties" type="AcceptDialog"]
+title = "Project properties"
+size = Vector2i(197, 235)
+exclusive = false
+popup_window = true
+script = ExtResource("1_0n4uc")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 189.0
+offset_bottom = 186.0
+columns = 2
+
+[node name="SizeLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Size:"
+
+[node name="SizeValueLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "64x64"
+
+[node name="FramesLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Frames:"
+
+[node name="FramesValueLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "64x64"
+
+[node name="LayersLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Layers:"
+
+[node name="LayersValueLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "64x64"
+
+[node name="NameLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name:"
+
+[node name="NameLineEdit" type="LineEdit" parent="GridContainer"]
+layout_mode = 2
+
+[node name="UserDataLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "User data:"
+
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+scroll_fit_content_height = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
+[connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
