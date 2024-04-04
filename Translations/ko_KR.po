@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-04-04 00:55\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "예"
@@ -1937,6 +1937,9 @@ msgid "Unlink Cels"
 msgstr ""
 
 msgid "Properties"
+msgstr ""
+
+msgid "Project properties"
 msgstr ""
 
 msgid "Frame properties"
