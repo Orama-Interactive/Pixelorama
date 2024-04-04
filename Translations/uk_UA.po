@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-04-04 00:55\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1941,6 +1941,9 @@ msgid "Unlink Cels"
 msgstr "Відв'язати клітинки"
 
 msgid "Properties"
+msgstr ""
+
+msgid "Project properties"
 msgstr ""
 
 msgid "Frame properties"
