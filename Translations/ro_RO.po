@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-04-04 10:34\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1942,6 +1942,9 @@ msgstr "Deconectare celuri"
 
 msgid "Properties"
 msgstr "Proprietăți"
+
+msgid "Project properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Proprietățile cadrului"
