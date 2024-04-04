@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2024-04-04 00:54\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -1906,6 +1906,9 @@ msgstr ""
 
 msgid "Properties"
 msgstr "الخصائص"
+
+msgid "Project properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr ""
