@@ -163,10 +163,12 @@ caret_blink_interval = 0.5
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
 disable_3d = true
-item_count = 1
-item_0/text = "Clipping mask"
-item_0/checkable = 1
+item_count = 2
+item_0/text = "Properties"
 item_0/id = 0
+item_1/text = "Clipping mask"
+item_1/checkable = 1
+item_1/id = 1
 
 [connection signal="pressed" from="VisibilityButton" to="." method="_on_visibility_button_pressed"]
 [connection signal="pressed" from="LockButton" to="." method="_on_lock_button_pressed"]

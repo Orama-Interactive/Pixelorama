@@ -2,6 +2,8 @@ class_name BaseLayer
 extends RefCounted
 ## Base class for layer properties. Different layer types extend from this class.
 
+signal name_changed  ## Emits when [member name] is changed.
+
 ## All currently supported layer blend modes between two layers. The upper layer
 ## is the blend layer, and the bottom layer is the base layer.
 ## For more information, refer to: [url]https://en.wikipedia.org/wiki/Blend_modes[/url]
@@ -28,7 +30,10 @@ enum BlendModes {
 	LUMINOSITY  ## Uses the blend luminosity while preserving the base hue and saturation.
 }
 
-var name := ""  ## Name of the layer.
+var name := "":  ## Name of the layer.
+	set(value):
+		name = value
+		name_changed.emit()
 var project: Project  ## The project the layer belongs to.
 var index: int  ## Index of layer in the timeline.
 var parent: BaseLayer  ## Parent of the layer.
@@ -41,6 +46,7 @@ var opacity := 1.0  ## The opacity of the layer, affects all frames that belong 
 var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
 var effects: Array[LayerEffect]  ## An array for non-destructive effects of the layer.
 var effects_enabled := true  ## If [code]true[/code], the effects are being applied.
+var user_data := ""  ## User defined data, set in the layer properties.
 
 
 ## Returns true if this is a direct or indirect parent of layer
@@ -221,6 +227,8 @@ func serialize() -> Dictionary:
 		"parent": parent.index if is_instance_valid(parent) else -1,
 		"effects": effect_data
 	}
+	if not user_data.is_empty():
+		dict["user_data"] = user_data
 	if not cel_link_sets.is_empty():
 		var cels := []  # Cels array for easy finding of the frame index for link_set saving
 		for frame in project.frames:
@@ -241,6 +249,7 @@ func deserialize(dict: Dictionary) -> void:
 	blend_mode = dict.get("blend_mode", BlendModes.NORMAL)
 	clipping_mask = dict.get("clipping_mask", false)
 	opacity = dict.get("opacity", 1.0)
+	user_data = dict.get("user_data", user_data)
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility

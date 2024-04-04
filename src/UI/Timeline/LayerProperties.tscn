@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3dt1gdlf7hox"]
+
+[ext_resource type="Script" path="res://src/UI/Timeline/LayerProperties.gd" id="1_54q1t"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="2_bwpwc"]
+
+[node name="LayerProperties" type="AcceptDialog"]
+title = "Layer properties"
+exclusive = false
+popup_window = true
+script = ExtResource("1_54q1t")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+
+[node name="NameLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name:"
+
+[node name="NameLineEdit" type="LineEdit" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OpacityLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Opacity:"
+
+[node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("2_bwpwc")
+
+[node name="BlendModeLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blend mode:"
+
+[node name="BlendModeOptionButton" type="OptionButton" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+
+[node name="UserDataLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "User data:"
+
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+scroll_fit_content_height = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
+[connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
+[connection signal="item_selected" from="GridContainer/BlendModeOptionButton" to="." method="_on_blend_mode_option_button_item_selected"]
+[connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]

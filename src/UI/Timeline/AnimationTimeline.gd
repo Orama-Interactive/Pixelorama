@@ -42,7 +42,7 @@ var frame_tag_dialog: AcceptDialog:
 @onready var move_down_layer := %MoveDownLayer as Button
 @onready var merge_down_layer := %MergeDownLayer as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
-@onready var opacity_slider: ValueSlider = %OpacitySlider
+@onready var opacity_slider := %OpacitySlider as ValueSlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
@@ -60,6 +60,7 @@ var frame_tag_dialog: AcceptDialog:
 
 
 func _ready() -> void:
+	Global.control.find_child("LayerProperties").visibility_changed.connect(_update_layer_ui)
 	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
 	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 	cel_size = min_cel_size
@@ -1023,6 +1024,10 @@ func _on_onion_skinning_settings_visibility_changed() -> void:
 func _cel_switched() -> void:
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
+	_update_layer_ui()
+
+
+func _update_layer_ui() -> void:
 	var project := Global.current_project
 	var layer_opacity := project.layers[project.current_layer].opacity
 	opacity_slider.value = layer_opacity * 100

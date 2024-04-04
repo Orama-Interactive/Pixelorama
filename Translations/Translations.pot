@@ -1881,6 +1881,9 @@ msgstr ""
 msgid "Frame properties"
 msgstr ""
 
+msgid "Layer properties"
+msgstr ""
+
 msgid "Cel properties"
 msgstr ""
 

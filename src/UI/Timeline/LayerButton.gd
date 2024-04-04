@@ -15,6 +15,7 @@ var button_pressed := false:
 	get:
 		return main_button.button_pressed
 
+@onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
 @onready var main_button := %LayerMainButton as Button
 @onready var expand_button := %ExpandButton as BaseButton
 @onready var visibility_button := %VisibilityButton as BaseButton
@@ -32,6 +33,7 @@ func _ready() -> void:
 	main_button.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
 	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
 	var layer := Global.current_project.layers[layer_index]
+	layer.name_changed.connect(func(): label.text = layer.name)
 	if layer is PixelLayer:
 		linked_button.visible = true
 	elif layer is GroupLayer:
@@ -153,7 +155,6 @@ func _save_layer_name(new_name: String) -> void:
 	label.visible = true
 	line_edit.visible = false
 	line_edit.editable = false
-	label.text = new_name
 	if layer_index < Global.current_project.layers.size():
 		Global.current_project.layers[layer_index].name = new_name
 
@@ -207,7 +208,22 @@ func _select_current_layer() -> void:
 func _on_popup_menu_id_pressed(id: int) -> void:
 	var layer := Global.current_project.layers[layer_index]
 	if id == 0:
+		properties.layer_indices = _get_layer_indices()
+		properties.popup_centered()
+	if id == 1:
 		layer.clipping_mask = not layer.clipping_mask
 		popup_menu.set_item_checked(0, layer.clipping_mask)
 		clipping_mask_icon.visible = layer.clipping_mask
 		Global.canvas.draw_layers()
+
+
+func _get_layer_indices() -> Array:
+	var indices := []
+	for cel in Global.current_project.selected_cels:
+		var l: int = cel[1]
+		if not l in indices:
+			indices.append(l)
+	indices.sort()
+	if not layer_index in indices:
+		indices = [layer_index]
+	return indices
