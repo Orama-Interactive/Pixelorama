@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-04-04 10:34\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1943,6 +1943,9 @@ msgstr "Délier le Cellulo"
 
 msgid "Properties"
 msgstr "Propriétés"
+
+msgid "Project properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Propriétés de la frame"
