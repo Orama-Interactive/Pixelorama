@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-04-04 00:55\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1943,6 +1943,9 @@ msgstr "Desvincular Células"
 
 msgid "Properties"
 msgstr "Propriedades"
+
+msgid "Project properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Propriedades do quadro"
