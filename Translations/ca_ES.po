@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2024-04-03 23:49\n"
+"PO-Revision-Date: 2024-04-04 00:54\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1942,6 +1942,9 @@ msgstr ""
 
 msgid "Frame properties"
 msgstr "Propietats del fotograma"
+
+msgid "Layer properties"
+msgstr ""
 
 msgid "Cel properties"
 msgstr ""
