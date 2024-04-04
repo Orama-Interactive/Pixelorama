@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-04-04 00:55\n"
+"PO-Revision-Date: 2024-04-04 20:33\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1949,7 +1949,7 @@ msgid "Frame properties"
 msgstr "Properti bingkai"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Properti bingkai"
 
 msgid "Cel properties"
 msgstr "Properti Cel"
@@ -2504,11 +2504,11 @@ msgstr "Pindahkan bingkai terpilih ke kanan."
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr ""
+msgstr "Durasi bingkai:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Data pengguna:"
 
 msgid "Duration"
 msgstr "Durasi"
