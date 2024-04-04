@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-04-04 03:51\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1943,6 +1943,9 @@ msgstr "セルのリンクを解除"
 
 msgid "Properties"
 msgstr "プロパティ"
+
+msgid "Project properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "フレームのプロパティ"
