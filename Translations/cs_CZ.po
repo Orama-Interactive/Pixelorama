@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-04-03 23:49\n"
+"PO-Revision-Date: 2024-04-04 00:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1936,6 +1936,9 @@ msgstr ""
 
 msgid "Frame properties"
 msgstr "Vlastnosti snímku"
+
+msgid "Layer properties"
+msgstr ""
 
 msgid "Cel properties"
 msgstr ""
