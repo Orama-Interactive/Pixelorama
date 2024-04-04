@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-04-04 07:56\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1942,6 +1942,9 @@ msgstr "Отвязать ячейки"
 
 msgid "Properties"
 msgstr "Свойства"
+
+msgid "Project properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Свойства кадра"
