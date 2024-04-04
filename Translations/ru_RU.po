@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-04-03 23:49\n"
+"PO-Revision-Date: 2024-04-04 00:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1945,6 +1945,9 @@ msgstr "Свойства"
 
 msgid "Frame properties"
 msgstr "Свойства кадра"
+
+msgid "Layer properties"
+msgstr ""
 
 msgid "Cel properties"
 msgstr "Свойства клетки"
