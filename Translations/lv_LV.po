@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2024-04-03 23:50\n"
+"PO-Revision-Date: 2024-04-04 00:55\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1900,6 +1900,9 @@ msgid "Properties"
 msgstr ""
 
 msgid "Frame properties"
+msgstr ""
+
+msgid "Layer properties"
 msgstr ""
 
 msgid "Cel properties"
