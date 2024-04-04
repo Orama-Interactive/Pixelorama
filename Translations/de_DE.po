@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-04-04 00:54\n"
+"PO-Revision-Date: 2024-04-04 06:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -313,7 +313,7 @@ msgstr "Layout umbenennen"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr ""
+msgstr "Aktuelles Layout"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Sind Sie sicher, dass Sie dieses Layout löschen möchten?"
@@ -1948,7 +1948,7 @@ msgid "Frame properties"
 msgstr "Frame-Eigenschaften"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Ebenen-Eigenschaften"
 
 msgid "Cel properties"
 msgstr "Cel-Eigenschaften"
