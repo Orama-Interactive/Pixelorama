@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2024-04-04 00:55\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1936,6 +1936,9 @@ msgid "Unlink Cels"
 msgstr ""
 
 msgid "Properties"
+msgstr ""
+
+msgid "Project properties"
 msgstr ""
 
 msgid "Frame properties"
