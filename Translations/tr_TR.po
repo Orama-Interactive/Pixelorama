@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-04-03 23:50\n"
+"PO-Revision-Date: 2024-04-04 00:55\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1947,6 +1947,9 @@ msgstr "Özellikler"
 msgid "Frame properties"
 msgstr "Kare özellikleri"
 
+msgid "Layer properties"
+msgstr ""
+
 msgid "Cel properties"
 msgstr "Hücre özellikleri"
 
@@ -2500,11 +2503,11 @@ msgstr "Seçili kareyi sağa taşı."
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr ""
+msgstr "Kare süresi:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Kullanıcı verileri:"
 
 msgid "Duration"
 msgstr "Süre"
