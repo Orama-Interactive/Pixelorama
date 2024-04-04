@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-04-03 23:50\n"
+"PO-Revision-Date: 2024-04-04 00:55\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1947,6 +1947,9 @@ msgstr "属性"
 
 msgid "Frame properties"
 msgstr "帧属性"
+
+msgid "Layer properties"
+msgstr ""
 
 msgid "Cel properties"
 msgstr "单元格属性"
