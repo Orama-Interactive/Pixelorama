@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2024-04-03 23:49\n"
+"PO-Revision-Date: 2024-04-04 00:55\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -1896,6 +1896,9 @@ msgid "Properties"
 msgstr ""
 
 msgid "Frame properties"
+msgstr ""
+
+msgid "Layer properties"
 msgstr ""
 
 msgid "Cel properties"
