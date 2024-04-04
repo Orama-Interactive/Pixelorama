@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-04-04 00:54\n"
+"PO-Revision-Date: 2024-04-04 10:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2502,11 +2502,11 @@ msgstr "Deplasează cadrul selectat la dreapta."
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr ""
+msgstr "Durata cadrului:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Datele utilizatorului:"
 
 msgid "Duration"
 msgstr "Durată"
