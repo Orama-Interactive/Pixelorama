@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-04-04 00:54\n"
+"PO-Revision-Date: 2024-04-04 23:29\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1944,6 +1944,9 @@ msgstr "Αποσύνδεση cels"
 
 msgid "Properties"
 msgstr "Ιδιότητες"
+
+msgid "Project properties"
+msgstr ""
 
 msgid "Frame properties"
 msgstr "Ιδιότητες καρέ"
