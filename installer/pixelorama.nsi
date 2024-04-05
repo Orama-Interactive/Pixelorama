@@ -6,7 +6,7 @@
 ; Helper variables so that we don't change 20 instances of the version for every update
 
   !define APPNAME "Pixelorama"
-  !define APPVERSION "v0.11.2"
+  !define APPVERSION "v0.11.3"
   !define COMPANYNAME "Orama Interactive"
 
 
@@ -81,7 +81,7 @@
 
 ; Multilingual support
 
-  !insertmacro MUI_LANGUAGE "English"
+  !insertmacro MUI_LANGUAGE "Polski"
   ;@INSERT_TRANSLATIONS@
   
 
@@ -152,7 +152,7 @@
       WriteRegStr HKCR "Pixelorama project\DefaultIcon" "" "$INSTDIR\pxo.ico"
 
       WriteRegStr HKCR "Pixelorama project\shell\open\command" "" '$INSTDIR\${APPNAME}.exe "%1"'
-      WriteRegStr HKCR "Pixelorama project\shell\edit" "" "Edit project in ${APPNAME}"
+      WriteRegStr HKCR "Pixelorama project\shell\edit" "" "Edytuj projekt w ${APPNAME}"
       WriteRegStr HKCR "Pixelorama project\shell\edit\command" "" '$INSTDIR\${APPNAME}.exe "%1"'
   SectionEnd
 
