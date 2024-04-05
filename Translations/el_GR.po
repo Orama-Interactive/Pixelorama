@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-04-04 23:29\n"
+"PO-Revision-Date: 2024-04-05 22:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1946,13 +1946,13 @@ msgid "Properties"
 msgstr "Ιδιότητες"
 
 msgid "Project properties"
-msgstr ""
+msgstr "Ιδιότητες έργου"
 
 msgid "Frame properties"
 msgstr "Ιδιότητες καρέ"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Ιδιότητες στρώσης"
 
 msgid "Cel properties"
 msgstr "Ιδιότητες cel"
@@ -2507,11 +2507,11 @@ msgstr "Μετακίνηση του επιλεγμένου καρέ προς τ�
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr ""
+msgstr "Διάρκεια καρέ:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Δεδομένα χρήστη:"
 
 msgid "Duration"
 msgstr "Διάρκεια"
