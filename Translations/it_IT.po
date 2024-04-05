@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-04-04 23:29\n"
+"PO-Revision-Date: 2024-04-05 08:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1946,13 +1946,13 @@ msgid "Properties"
 msgstr "Proprietà"
 
 msgid "Project properties"
-msgstr ""
+msgstr "Proprietà progetto"
 
 msgid "Frame properties"
 msgstr "Proprietà del frame"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Proprietà del livello"
 
 msgid "Cel properties"
 msgstr "Proprietà cel"
@@ -2507,11 +2507,11 @@ msgstr "Sposta il riquadro selezionato a destra."
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr ""
+msgstr "Durata del frame:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Dati utente:"
 
 msgid "Duration"
 msgstr "Durata"
