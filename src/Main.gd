@@ -238,6 +238,8 @@ func _handle_layout_files() -> void:
 
 
 func _setup_application_window_size() -> void:
+	if DisplayServer.get_name() == "headless":
+		return
 	var root := get_tree().root
 	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
@@ -271,7 +273,6 @@ func _setup_application_window_size() -> void:
 func set_custom_cursor() -> void:
 	if Global.native_cursors:
 		return
-
 	if Global.shrink == 1.0:
 		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	else:
@@ -543,6 +544,12 @@ func _clear_backup_files() -> void:
 
 
 func _exit_tree() -> void:
+	for project in Global.projects:
+		project.remove()
+	# For some reason, the above is not enough to remove all backup files
+	_clear_backup_files()
+	if DisplayServer.get_name() == "headless":
+		return
 	Global.config_cache.set_value("window", "layout", Global.layouts.find(main_ui.layout))
 	Global.config_cache.set_value("window", "screen", get_window().current_screen)
 	Global.config_cache.set_value(
@@ -564,8 +571,3 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
 	Global.config_cache.save("user://cache.ini")
-
-	for project in Global.projects:
-		project.remove()
-	# For some reason, the above is not enough to remove all backup files
-	_clear_backup_files()

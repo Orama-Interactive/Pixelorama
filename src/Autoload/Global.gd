@@ -518,6 +518,8 @@ var native_cursors := false:
 	set(value):
 		if value == native_cursors:
 			return
+		if DisplayServer.get_name() == "headless":
+			return
 		native_cursors = value
 		if native_cursors:
 			Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS, Vector2(15, 15))
