@@ -651,13 +651,3 @@ func undo_redo_draw_op(
 	var decompressed := compressed_image_data.decompress(buffer_size)
 	image.crop(new_size.x, new_size.y)
 	image.data["data"] = decompressed
-
-
-## Used by the Move tool for undo/redo, moves all of the Images in the images array
-## by diff pixels.
-func undo_redo_move(diff: Vector2, images: Array) -> void:
-	for image in images:
-		var image_copy := Image.new()
-		image_copy.copy_from(image)
-		image.fill(Color(0, 0, 0, 0))
-		image.blit_rect(image_copy, Rect2(Vector2.ZERO, image.get_size()), diff)
