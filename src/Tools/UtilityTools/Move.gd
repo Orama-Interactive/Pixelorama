@@ -2,11 +2,11 @@ extends BaseTool
 
 var _start_pos: Vector2i
 var _offset: Vector2i
-
 ## Used to check if the state of content transformation has been changed
 ## while draw_move() is being called. For example, pressing Enter while still moving content
 var _content_transformation_check := false
 var _snap_to_grid := false  ## Mouse Click + Ctrl
+var _undo_data := {}
 
 @onready var selection_node: Node2D = Global.canvas.selection
 
@@ -40,6 +40,7 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	_start_pos = pos
 	_offset = pos
+	_undo_data = _get_undo_data()
 	if Global.current_project.has_selection:
 		selection_node.transform_content_start()
 	_content_transformation_check = selection_node.is_moving_content
@@ -82,8 +83,13 @@ func draw_end(pos: Vector2i) -> void:
 		else:
 			var pixel_diff := pos - _start_pos
 			Global.canvas.move_preview_location = Vector2i.ZERO
-
-			_commit_undo("Draw", pixel_diff)
+			var images := _get_selected_draw_images()
+			for image in images:
+				var image_copy := Image.new()
+				image_copy.copy_from(image)
+				image.fill(Color(0, 0, 0, 0))
+				image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, project.size), pixel_diff)
+			_commit_undo("Draw")
 
 	_start_pos = Vector2.INF
 	_snap_to_grid = false
@@ -115,7 +121,8 @@ func _snap_position(pos: Vector2) -> Vector2:
 	return pos
 
 
-func _commit_undo(action: String, diff: Vector2i) -> void:
+func _commit_undo(action: String) -> void:
+	var redo_data := _get_undo_data()
 	var project := Global.current_project
 	var frame := -1
 	var layer := -1
@@ -123,11 +130,29 @@ func _commit_undo(action: String, diff: Vector2i) -> void:
 		frame = project.current_frame
 		layer = project.current_layer
 
-	var images := _get_selected_draw_images()
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	project.undo_redo.add_do_method(Global.undo_redo_move.bind(diff, images))
+	Global.undo_redo_compress_images(redo_data, _undo_data, project)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
-	project.undo_redo.add_undo_method(Global.undo_redo_move.bind(-diff, images))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
+	_undo_data.clear()
+
+
+func _get_undo_data() -> Dictionary:
+	var data := {}
+	var project := Global.current_project
+	var cels: Array[BaseCel] = []
+	if Global.animation_timer.is_stopped():
+		for cel_index in project.selected_cels:
+			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])
+	else:
+		for frame in project.frames:
+			var cel := frame.cels[project.current_layer]
+			cels.append(cel)
+	for cel in cels:
+		if not cel is PixelCel:
+			continue
+		var image: Image = cel.image
+		data[image] = image.data
+	return data

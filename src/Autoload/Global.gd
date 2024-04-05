@@ -1012,6 +1012,8 @@ func set_locale(locale: String) -> void:
 
 
 ## Used by undo/redo operations to store compressed images in memory.
+## [param redo_data] and [param undo_data] are Dictionaries,
+## with keys of type [Image] and [Dictionary] values, coming from [member Image.data].
 func undo_redo_compress_images(
 	redo_data: Dictionary, undo_data: Dictionary, project := current_project
 ) -> void:
@@ -1038,22 +1040,12 @@ func undo_redo_compress_images(
 
 
 ## Decompresses the [param compressed_image_data] with [param buffer_size] to the [param image]
-## This is an optimization method used while performing undo/redo drawing operations.
+## This is a memory optimization method used while performing undo/redo drawing operations.
 func undo_redo_draw_op(
 	image: Image, new_size: Vector2i, compressed_image_data: PackedByteArray, buffer_size: int
 ) -> void:
 	var decompressed := compressed_image_data.decompress(buffer_size)
 	image.set_data(new_size.x, new_size.y, image.has_mipmaps(), image.get_format(), decompressed)
-
-
-## Used by the Move tool for undo/redo, moves all of the [Image]s in [param images]
-## by [param diff] pixels.
-func undo_redo_move(diff: Vector2i, images: Array[Image]) -> void:
-	for image in images:
-		var image_copy := Image.new()
-		image_copy.copy_from(image)
-		image.fill(Color(0, 0, 0, 0))
-		image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, image.get_size()), diff)
 
 
 func create_ui_for_shader_uniforms(
