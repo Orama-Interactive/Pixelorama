@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-04-04 23:29\n"
+"PO-Revision-Date: 2024-04-05 00:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1945,7 +1945,7 @@ msgid "Properties"
 msgstr "Właściwości"
 
 msgid "Project properties"
-msgstr ""
+msgstr "Właściwości projektu"
 
 msgid "Frame properties"
 msgstr "Właściwości klatki"
