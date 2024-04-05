@@ -539,7 +539,7 @@ func _renderer_changed(value: int) -> void:
 	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
 	var renderer_name := OS.get_video_driver_name(renderer)
 	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
-	ProjectSettings.save_custom(OVERRIDE_FILE)
+	ProjectSettings.save_custom(root_directory.plus_file(OVERRIDE_FILE))
 
 
 func _tablet_driver_changed(value: int) -> void:
@@ -548,7 +548,7 @@ func _tablet_driver_changed(value: int) -> void:
 		return
 	var tablet_driver_name := OS.get_tablet_driver_name(tablet_driver)
 	ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
-	ProjectSettings.save_custom(OVERRIDE_FILE)
+	ProjectSettings.save_custom(root_directory.plus_file(OVERRIDE_FILE))
 
 
 func dialog_open(open: bool) -> void:
