@@ -92,6 +92,9 @@ func add_import_option(import_name: StringName, import_scene: PackedScene) -> in
 
 
 func handle_loading_image(file: String, image: Image) -> void:
+	if Global.projects.size() <= 1 and Global.current_project.is_empty():
+		open_image_as_new_tab(file, image)
+		return
 	var preview_dialog := preview_dialog_tscn.instantiate() as ImportPreviewDialog
 	# add custom importers to preview dialog
 	for import_name in custom_import_names.keys():
