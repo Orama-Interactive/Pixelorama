@@ -37,6 +37,7 @@ Built using Godot 3.5.2
 - The ellipse tool no longer produces gaps with large sizes. [4f3a7a305a264e0d2fe86c201af76eca4b2fea0a](https://github.com/Orama-Interactive/Pixelorama/commit/4f3a7a305a264e0d2fe86c201af76eca4b2fea0a)
 - Fix "visible layers" option on the export dialog producing wrong results. [346d1f071a8c6b1defb1072d39aea9c642f1ef59](https://github.com/Orama-Interactive/Pixelorama/commit/346d1f071a8c6b1defb1072d39aea9c642f1ef59)
 - Random brushes now work again. [1317e40ffa5e9f01a9d214221bb5133db20a1de9](https://github.com/Orama-Interactive/Pixelorama/commit/1317e40ffa5e9f01a9d214221bb5133db20a1de9)
+- Fixed issue where the override.cfg file would be created at the wrong location, if Pixelorama is launched through a shortcut.
 - The gizmo in the rotation image effect dialog is now accurately following the mouse.
 - Fixed the size label not being updated on the Export dialog's spritesheet tab when the direction changes.
 
