@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-04-06 00:48\n"
+"PO-Revision-Date: 2024-04-06 15:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2446,7 +2446,7 @@ msgstr "minut(e)"
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "Exportare date JSON"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
