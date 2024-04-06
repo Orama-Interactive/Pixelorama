@@ -24,7 +24,7 @@ var splash_dialog: AcceptDialog:
 
 
 class CLI:
-	static var args_list = {
+	static var args_list := {
 		["--version", "--pixelorama-version"]:
 		[CLI.print_version, "Prints current Pixelorama version"],
 		["--size"]: [CLI.print_project_size, "Prints size of the given project"],
@@ -36,8 +36,9 @@ class CLI:
 		["--scale"]: [CLI.set_export_scale, "[integer] Scales up the export image by a number"],
 		["--frames", "-f"]: [CLI.set_frames, "[integer-integer] Used to specify frame range"],
 		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
+		["--json"]: [CLI.set_json, "Export the JSON data of the project"],
 		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
-		["--help", "-h"]: [CLI.generate_help, "Use to print HELP"]
+		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"]
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
@@ -59,7 +60,7 @@ some useful [SYSTEM OPTIONS] are:
 
 
 [USER OPTIONS]:\n
-(The terms in [ ] reflects the valid type for corresponding argument).
+(The terms in [ ] reflect the valid type for corresponding argument).
 
 """
 				% OS.get_executable_path().get_file()
@@ -141,6 +142,9 @@ some useful [SYSTEM OPTIONS] are:
 				print(Export.AnimationDirection.keys()[Export.direction])
 		else:
 			print(Export.AnimationDirection.keys()[Export.direction])
+
+	static func set_json(_project: Project, _next_arg: String) -> void:
+		Export.export_json = true
 
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true

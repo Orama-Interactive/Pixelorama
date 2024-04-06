@@ -281,7 +281,12 @@ layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
 
-[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
+[node name="ExportJSON" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Export JSON data"
+
+[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Split layers"
@@ -348,6 +353,7 @@ size_flags_horizontal = 3
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileFormat" to="." method="_on_FileFormat_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/Interpolation" to="." method="_on_Interpolation_item_selected"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SeparatorCharacter" to="." method="_on_SeparatorCharacter_text_changed"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ExportJSON" to="." method="_on_export_json_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SplitLayers" to="." method="_on_split_layers_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/IncludeTagsInFilename" to="." method="_on_IncludeTagsInFilename_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]

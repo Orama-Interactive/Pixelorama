@@ -46,6 +46,7 @@ var custom_exporter_generators := {}
 var current_tab := ExportTab.IMAGE
 ## All frames and their layers processed/blended into images
 var processed_images: Array[ProcessedImage] = []
+var export_json := false
 var split_layers := false
 
 # Spritesheet options
@@ -351,7 +352,16 @@ func export_processed_images(
 			return false
 
 	_scale_processed_images()
-
+	if export_json:
+		var json := JSON.stringify(project.serialize())
+		var json_file_name := project.name + ".json"
+		if OS.has_feature("web"):
+			var json_buffer := json.to_utf8_buffer()
+			JavaScriptBridge.download_buffer(json_buffer, json_file_name, "application/json")
+		else:
+			var json_path := project.export_directory_path.path_join(json_file_name)
+			var json_file := FileAccess.open(json_path, FileAccess.WRITE)
+			json_file.store_string(json)
 	# override if a custom export is chosen
 	if project.file_format in custom_exporter_generators.keys():
 		# Divert the path to the custom exporter instead

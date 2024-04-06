@@ -419,6 +419,10 @@ func _on_ExportDialog_popup_hide() -> void:
 	frame_timer.stop()
 
 
+func _on_export_json_toggled(toggled_on: bool) -> void:
+	Export.export_json = toggled_on
+
+
 func _on_split_layers_toggled(toggled_on: bool) -> void:
 	Export.split_layers = toggled_on
 	Export.process_data()
