@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-04-06 00:49\n"
+"PO-Revision-Date: 2024-04-06 03:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1951,7 +1951,7 @@ msgid "Frame properties"
 msgstr "フレームのプロパティ"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "レイヤーのプロパティ"
 
 msgid "Cel properties"
 msgstr "セルプロパティ"
@@ -2447,7 +2447,7 @@ msgstr "分"
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "JSONデータをエクスポート"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
