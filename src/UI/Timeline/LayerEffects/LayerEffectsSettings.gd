@@ -195,7 +195,7 @@ func _set_parameter(value, param: String, effect: LayerEffect) -> void:
 	Global.canvas.queue_redraw()
 
 
-func _load_parameter_texture(path: String, effect: LayerEffect, param: String) -> void:
+func _load_parameter_texture(path: String, param: String, effect: LayerEffect) -> void:
 	var image := Image.new()
 	image.load(path)
 	if !image:
