@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2024-04-06 00:48\n"
+"PO-Revision-Date: 2024-04-08 23:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1938,7 +1938,7 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-msgid "Project properties"
+msgid "Project Properties"
 msgstr ""
 
 msgid "Frame properties"
