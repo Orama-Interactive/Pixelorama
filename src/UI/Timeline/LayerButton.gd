@@ -34,6 +34,7 @@ func _ready() -> void:
 	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
 	var layer := Global.current_project.layers[layer_index]
 	layer.name_changed.connect(func(): label.text = layer.name)
+	layer.visibility_changed.connect(update_buttons)
 	if layer is PixelLayer:
 		linked_button.visible = true
 	elif layer is GroupLayer:

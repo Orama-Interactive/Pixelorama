@@ -3,6 +3,7 @@ extends RefCounted
 ## Base class for layer properties. Different layer types extend from this class.
 
 signal name_changed  ## Emits when [member name] is changed.
+signal visibility_changed  ## Emits when [member visible] is changed.
 
 ## All currently supported layer blend modes between two layers. The upper layer
 ## is the blend layer, and the bottom layer is the base layer.
@@ -37,7 +38,10 @@ var name := "":  ## Name of the layer.
 var project: Project  ## The project the layer belongs to.
 var index: int  ## Index of layer in the timeline.
 var parent: BaseLayer  ## Parent of the layer.
-var visible := true  ## Sets visibility of the layer.
+var visible := true:  ## Sets visibility of the layer.
+	set(value):
+		visible = value
+		visibility_changed.emit()
 var locked := false  ## Images of a locked layer won't be overritten.
 var new_cels_linked := false  ## Determines if new cel of the layer should be linked or not.
 var blend_mode := BlendModes.NORMAL  ## Blend mode of the current layer.

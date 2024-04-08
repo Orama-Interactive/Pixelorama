@@ -948,7 +948,6 @@ func _on_MergeDownLayer_pressed() -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
-
 	for frame in project.frames:
 		var top_cel := frame.cels[top_layer.index]
 		top_cels.append(top_cel)  # Store for undo purposes
@@ -1000,6 +999,7 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
+	bottom_layer.visible = true
 
 
 func _on_OpacitySlider_value_changed(value: float) -> void:
