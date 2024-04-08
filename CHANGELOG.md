@@ -20,7 +20,7 @@ Built using Godot 4.2.1
 - Alpha lock has been added as a global tool option. When enabled, users can only draw on non-transparent pixels.
 - Export to webp and jpeg file formats. Webp is currently only for static images and does not support animations.
 - A basic Command Line Interface has been implemented, to help with automating mass project file exporting. [#579](https://github.com/Orama-Interactive/Pixelorama/discussions/579)
-- Exporting the project data in a separate JSON file is now possible from the export dialog.
+- Exporting the project's data to a separate JSON file is now possible from the export dialog.
 - Native file dialogs are now supported and can be enabled from the Preferences!
 - Dialog popups can now be native OS windows instead of embedded within Pixelorama's main window. This can be changed from the Preferences.
 - Added some missing shortcuts for buttons. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
@@ -32,7 +32,7 @@ Built using Godot 4.2.1
 - Users can now add custom data in the form of text in their projects, layers, frames, tags and cels.
 - Image brushes can now be flipped and rotated with 90 degree steps in the tool options. [#988](https://github.com/Orama-Interactive/Pixelorama/pull/988)
 - Added support for inverted tablet pens. [#966](https://github.com/Orama-Interactive/Pixelorama/pull/966)
-- Added new dialogs for cel, layer and project properties. Cel and layer which can be accessed by right-clicking cel and the layer buttons in the timeline respectively, while project properties can be found under the Edit menu.
+- Added new dialogs for cel, layer and project properties. Cel and layer which can be accessed by right-clicking cel and the layer buttons in the timeline respectively, while project properties can be found under the Image menu.
 - A new z-index property has been added to the cel properties, allowing for independent, per-frame layer ordering.
 - Pasting tags from other projects is now possible. [#946](https://github.com/Orama-Interactive/Pixelorama/pull/946)
 - It is now possible to change the color space of gradients from sRGB, which is the default, to Linear sRGB and Oklab.
@@ -49,6 +49,7 @@ Built using Godot 4.2.1
 - The color pickers has been vastly improved, thanks to the update to Godot 4. Users can now use the OKHSL color mode, and choose between four different picker shapes: HSV Rectangle (default), HSV Wheel, VHS Circle and OKHSL Circle.
 - The opacity slider in the timeline now affects layer opacity and not cel opacity. Cel opacity has been moved to the cel properties dialog.
 - The timeline's UI has been changed to better indicate which cels are selected and improves on how child layers of groups are being shown.
+- Cel-specific effects have been moved from the Image menu into the new Effects menu.
 - Linked cels no longer have a colored outline, they now have a rectangle behind their preview which makes linked cels look like they are chained together.
 - "Crop Image" has been renamed to "Crop to Content".
 - Imported images automatically become new projects without opening the import dialog, if there is only one project open, and that project is empty.
