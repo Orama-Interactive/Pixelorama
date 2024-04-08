@@ -1878,7 +1878,7 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-msgid "Project properties"
+msgid "Project Properties"
 msgstr ""
 
 msgid "Frame properties"

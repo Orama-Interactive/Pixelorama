@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/UI/Dialogs/ProjectProperties.gd" id="1_0n4uc"]
 
 [node name="ProjectProperties" type="AcceptDialog"]
-title = "Project properties"
+title = "Project Properties"
 size = Vector2i(197, 235)
 exclusive = false
 popup_window = true

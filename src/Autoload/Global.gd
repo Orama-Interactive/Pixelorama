@@ -24,9 +24,7 @@ enum MeasurementMode { NONE, MOVE }
 ##  Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
 ##  Enumeration of items present in the Edit Menu.
-enum EditMenu {
-	UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PROJECT_PROPERTIES, PREFERENCES
-}
+enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
 ##  Enumeration of items present in the View Menu.
 enum ViewMenu {
 	TILE_MODE,
@@ -45,11 +43,15 @@ enum ViewMenu {
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
 ##  Enumeration of items present in the Image Menu.
 enum ImageMenu {
+	PROJECT_PROPERTIES,
 	RESIZE_CANVAS,
-	OFFSET_IMAGE,
 	SCALE_IMAGE,
 	CROP_TO_SELECTION,
 	CROP_TO_CONTENT,
+}
+## Enumeration of items present in the Effects menu.
+enum EffectsMenu {
+	OFFSET_IMAGE,
 	FLIP,
 	ROTATE,
 	OUTLINE,
@@ -721,23 +723,23 @@ func _initialize_keychain() -> void:
 		"paste_in_place": Keychain.InputAction.new("", "Edit menu", true),
 		"delete": Keychain.InputAction.new("", "Edit menu", true),
 		"new_brush": Keychain.InputAction.new("", "Edit menu", true),
-		&"project_properties": Keychain.InputAction.new("", "Edit menu", true),
 		"preferences": Keychain.InputAction.new("", "Edit menu", true),
+		&"project_properties": Keychain.InputAction.new("", "Image menu", true),
 		"scale_image": Keychain.InputAction.new("", "Image menu", true),
 		"crop_to_selection": Keychain.InputAction.new("", "Image menu", true),
 		"crop_to_content": Keychain.InputAction.new("", "Image menu", true),
 		"resize_canvas": Keychain.InputAction.new("", "Image menu", true),
-		"offset_image": Keychain.InputAction.new("", "Image menu", true),
-		"mirror_image": Keychain.InputAction.new("", "Image menu", true),
-		"rotate_image": Keychain.InputAction.new("", "Image menu", true),
-		"invert_colors": Keychain.InputAction.new("", "Image menu", true),
-		"desaturation": Keychain.InputAction.new("", "Image menu", true),
-		"outline": Keychain.InputAction.new("", "Image menu", true),
-		"drop_shadow": Keychain.InputAction.new("", "Image menu", true),
-		"adjust_hsv": Keychain.InputAction.new("", "Image menu", true),
-		"gradient": Keychain.InputAction.new("", "Image menu", true),
-		"gradient_map": Keychain.InputAction.new("", "Image menu", true),
-		"posterize": Keychain.InputAction.new("", "Image menu", true),
+		"offset_image": Keychain.InputAction.new("", "Effects menu", true),
+		"mirror_image": Keychain.InputAction.new("", "Effects menu", true),
+		"rotate_image": Keychain.InputAction.new("", "Effects menu", true),
+		"invert_colors": Keychain.InputAction.new("", "Effects menu", true),
+		"desaturation": Keychain.InputAction.new("", "Effects menu", true),
+		"outline": Keychain.InputAction.new("", "Effects menu", true),
+		"drop_shadow": Keychain.InputAction.new("", "Effects menu", true),
+		"adjust_hsv": Keychain.InputAction.new("", "Effects menu", true),
+		"gradient": Keychain.InputAction.new("", "Effects menu", true),
+		"gradient_map": Keychain.InputAction.new("", "Effects menu", true),
+		"posterize": Keychain.InputAction.new("", "Effects menu", true),
 		"mirror_view": Keychain.InputAction.new("", "View menu", true),
 		"show_grid": Keychain.InputAction.new("", "View menu", true),
 		"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),

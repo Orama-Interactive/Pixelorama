@@ -41,6 +41,7 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var edit_menu: PopupMenu = $MenuBar/Edit
 @onready var select_menu: PopupMenu = $MenuBar/Select
 @onready var image_menu: PopupMenu = $MenuBar/Image
+@onready var effects_menu: PopupMenu = $MenuBar/Effects
 @onready var view_menu: PopupMenu = $MenuBar/View
 @onready var window_menu: PopupMenu = $MenuBar/Window
 @onready var help_menu: PopupMenu = $MenuBar/Help
@@ -86,6 +87,7 @@ func _ready() -> void:
 	_setup_view_menu()
 	_setup_window_menu()
 	_setup_image_menu()
+	_setup_effects_menu()
 	_setup_select_menu()
 	_setup_help_menu()
 
@@ -172,7 +174,6 @@ func _setup_edit_menu() -> void:
 		"Paste in Place": "paste_in_place",
 		"Delete": "delete",
 		"New Brush": "new_brush",
-		"Project properties": "project_properties",
 		"Preferences": "preferences"
 	}
 	var i := 0
@@ -338,11 +339,24 @@ func populate_layouts_submenu() -> void:
 func _setup_image_menu() -> void:
 	# Order as in Global.ImageMenu enum
 	var image_menu_items := {
+		"Project Properties": "project_properties",
 		"Resize Canvas": "resize_canvas",
-		"Offset Image": "offset_image",
 		"Scale Image": "scale_image",
 		"Crop to Selection": "crop_to_selection",
 		"Crop to Content": "crop_to_content",
+	}
+	var i := 0
+	for item in image_menu_items:
+		_set_menu_shortcut(image_menu_items[item], image_menu, i, item)
+		i += 1
+	image_menu.set_item_disabled(Global.ImageMenu.CROP_TO_SELECTION, true)
+	image_menu.id_pressed.connect(image_menu_id_pressed)
+
+
+func _setup_effects_menu() -> void:
+	# Order as in Global.EffectMenu enum
+	var menu_items := {
+		"Offset Image": "offset_image",
 		"Mirror Image": "mirror_image",
 		"Rotate Image": "rotate_image",
 		"Outline": "outline",
@@ -356,11 +370,10 @@ func _setup_image_menu() -> void:
 		# "Shader": ""
 	}
 	var i := 0
-	for item in image_menu_items:
-		_set_menu_shortcut(image_menu_items[item], image_menu, i, item)
+	for item in menu_items:
+		_set_menu_shortcut(menu_items[item], effects_menu, i, item)
 		i += 1
-	image_menu.set_item_disabled(Global.ImageMenu.CROP_TO_SELECTION, true)
-	image_menu.id_pressed.connect(image_menu_id_pressed)
+	effects_menu.id_pressed.connect(effects_menu_id_pressed)
 
 
 func _setup_select_menu() -> void:
@@ -530,8 +543,6 @@ func edit_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.delete()
 		Global.EditMenu.NEW_BRUSH:
 			Global.canvas.selection.new_brush()
-		Global.EditMenu.PROJECT_PROPERTIES:
-			project_properties_dialog.popup()
 		Global.EditMenu.PREFERENCES:
 			preferences_dialog.popup()
 		_:
@@ -726,40 +737,46 @@ func _toggle_fullscreen() -> void:
 
 func image_menu_id_pressed(id: int) -> void:
 	match id:
+		Global.ImageMenu.PROJECT_PROPERTIES:
+			project_properties_dialog.popup()
 		Global.ImageMenu.SCALE_IMAGE:
 			scale_image_dialog.popup()
-		Global.ImageMenu.OFFSET_IMAGE:
-			offset_image_dialog.popup()
 		Global.ImageMenu.CROP_TO_SELECTION:
 			DrawingAlgos.crop_to_selection()
 		Global.ImageMenu.CROP_TO_CONTENT:
 			DrawingAlgos.crop_to_content()
 		Global.ImageMenu.RESIZE_CANVAS:
 			resize_canvas_dialog.popup()
-		Global.ImageMenu.FLIP:
+
+
+func effects_menu_id_pressed(id: int) -> void:
+	match id:
+		Global.EffectsMenu.OFFSET_IMAGE:
+			offset_image_dialog.popup()
+		Global.EffectsMenu.FLIP:
 			mirror_image_dialog.popup()
-		Global.ImageMenu.ROTATE:
+		Global.EffectsMenu.ROTATE:
 			rotate_image_dialog.popup()
-		Global.ImageMenu.INVERT_COLORS:
+		Global.EffectsMenu.INVERT_COLORS:
 			invert_colors_dialog.popup()
-		Global.ImageMenu.DESATURATION:
+		Global.EffectsMenu.DESATURATION:
 			desaturate_dialog.popup()
-		Global.ImageMenu.OUTLINE:
+		Global.EffectsMenu.OUTLINE:
 			outline_dialog.popup()
-		Global.ImageMenu.DROP_SHADOW:
+		Global.EffectsMenu.DROP_SHADOW:
 			drop_shadow_dialog.popup()
-		Global.ImageMenu.HSV:
+		Global.EffectsMenu.HSV:
 			hsv_dialog.popup()
-		Global.ImageMenu.GRADIENT:
+		Global.EffectsMenu.GRADIENT:
 			gradient_dialog.popup()
-		Global.ImageMenu.GRADIENT_MAP:
+		Global.EffectsMenu.GRADIENT_MAP:
 			gradient_map_dialog.popup()
-		Global.ImageMenu.POSTERIZE:
+		Global.EffectsMenu.POSTERIZE:
 			posterize_dialog.popup()
-		#Global.ImageMenu.SHADER:
+		#Global.EffectsMenu.SHADER:
 		#shader_effect_dialog.popup()
 		_:
-			_handle_metadata(id, image_menu)
+			_handle_metadata(id, effects_menu)
 
 
 func select_menu_id_pressed(id: int) -> void:

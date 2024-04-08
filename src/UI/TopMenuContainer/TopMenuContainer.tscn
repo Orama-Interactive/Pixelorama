@@ -24,6 +24,8 @@ flat = true
 
 [node name="Image" type="PopupMenu" parent="MenuBar"]
 
+[node name="Effects" type="PopupMenu" parent="MenuBar"]
+
 [node name="View" type="PopupMenu" parent="MenuBar"]
 
 [node name="Window" type="PopupMenu" parent="MenuBar"]
@@ -31,12 +33,15 @@ flat = true
 [node name="Help" type="PopupMenu" parent="MenuBar"]
 
 [node name="TopLabels" type="HBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -65.5
 offset_right = 65.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 20
 
 [node name="RotationSlider" type="TextureProgressBar" parent="TopLabels"]
@@ -84,7 +89,8 @@ layout_mode = 2
 text = "[64×64]"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -93,7 +99,8 @@ offset_left = -330.0
 offset_top = -14.0
 offset_right = 0.00012207
 offset_bottom = 13.0
-grow_horizontal = 2
+grow_horizontal = 0
+grow_vertical = 2
 alignment = 1
 
 [node name="CurrentFrame" type="Label" parent="HBoxContainer"]
