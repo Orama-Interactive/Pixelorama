@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2024-04-06 00:49\n"
+"PO-Revision-Date: 2024-04-08 23:09\n"
 
 msgid "OK"
 msgstr "ഓക്കേ"
@@ -1889,7 +1889,7 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-msgid "Project properties"
+msgid "Project Properties"
 msgstr ""
 
 msgid "Frame properties"
