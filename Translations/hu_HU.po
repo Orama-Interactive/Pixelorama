@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2024-04-06 00:49\n"
+"PO-Revision-Date: 2024-04-08 23:08\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1902,7 +1902,7 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-msgid "Project properties"
+msgid "Project Properties"
 msgstr ""
 
 msgid "Frame properties"
