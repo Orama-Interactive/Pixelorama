@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-04-08 23:08\n"
+"PO-Revision-Date: 2024-04-09 00:53\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1945,7 +1945,7 @@ msgid "Properties"
 msgstr "Özellikler"
 
 msgid "Project Properties"
-msgstr ""
+msgstr "Proje Özellikleri"
 
 msgid "Frame properties"
 msgstr "Kare özellikleri"
