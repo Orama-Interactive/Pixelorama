@@ -45,7 +45,7 @@ func _ready() -> void:
 	for child in get_children():
 		if not child is Button:
 			continue
-		var texture = child.get_child(0)
+		var texture := child.get_child(0)
 		if not texture is TextureRect:
 			continue
 		texture.modulate = Global.modulate_icon_color
