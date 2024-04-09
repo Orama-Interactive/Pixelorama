@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2024-04-08 23:09\n"
+"PO-Revision-Date: 2024-04-09 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -989,6 +989,14 @@ msgstr "Farger:"
 
 msgid "Steps:"
 msgstr "Trinn:"
+
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+msgid "Palettize"
+msgstr ""
+
+#. An image effect. It makes the input image pixelated.
+msgid "Pixelize"
+msgstr ""
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
