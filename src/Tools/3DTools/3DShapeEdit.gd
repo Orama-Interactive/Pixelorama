@@ -463,8 +463,15 @@ func _fill_object_option_button() -> void:
 		return
 	object_option_button.clear()
 	object_option_button.add_item("None", 0)
+	var existing_names := {}
 	for id in _cel.object_properties:
 		var item_name: String = _object_names[_cel.object_properties[id]["type"]]
+		if item_name in existing_names:
+			# If there is already an object with the same name, under a number next to it
+			existing_names[item_name] += 1
+			item_name += " (%s)" % existing_names[item_name]
+		else:
+			existing_names[item_name] = 1
 		object_option_button.add_item(item_name, id + 1)
 
 
