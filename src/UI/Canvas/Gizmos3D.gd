@@ -4,7 +4,7 @@ enum { X, Y, Z }
 
 const ARROW_LENGTH := 14
 const LIGHT_ARROW_LENGTH := 25
-const GIZMO_WIDTH := 1.1
+const GIZMO_WIDTH := 0.4
 const SCALE_CIRCLE_LENGTH := 8
 const SCALE_CIRCLE_RADIUS := 1
 const CHAR_SCALE := 0.16
