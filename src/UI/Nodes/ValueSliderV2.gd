@@ -4,7 +4,7 @@ extends HBoxContainer
 ## A class that combines two ValueSlider nodes, for easy usage with Vector2 values.
 ## Also supports aspect ratio locking.
 
-signal value_changed(value: float)
+signal value_changed(value: Vector2)
 signal ratio_toggled(button_pressed: bool)
 
 @export var editable := true:

@@ -13,6 +13,8 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new(
 		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader")
 	),
+	LayerEffect.new("Palettize", preload("res://src/Shaders/Effects/Palettize.gdshader")),
+	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader")),
 	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader")),
 	LayerEffect.new("Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader")),
 ]

@@ -59,6 +59,8 @@ enum EffectsMenu {
 	INVERT_COLORS,
 	DESATURATION,
 	HSV,
+	PALETTIZE,
+	PIXELIZE,
 	POSTERIZE,
 	GRADIENT,
 	GRADIENT_MAP,
@@ -739,6 +741,8 @@ func _initialize_keychain() -> void:
 		"adjust_hsv": Keychain.InputAction.new("", "Effects menu", true),
 		"gradient": Keychain.InputAction.new("", "Effects menu", true),
 		"gradient_map": Keychain.InputAction.new("", "Effects menu", true),
+		&"palettize": Keychain.InputAction.new("", "Effects menu", true),
+		&"pixelize": Keychain.InputAction.new("", "Effects menu", true),
 		"posterize": Keychain.InputAction.new("", "Effects menu", true),
 		"mirror_view": Keychain.InputAction.new("", "View menu", true),
 		"show_grid": Keychain.InputAction.new("", "View menu", true),
@@ -1144,14 +1148,16 @@ func create_ui_for_shader_uniforms(
 			hbox.add_child(label)
 			hbox.add_child(slider)
 			parent_node.add_child(hbox)
-		elif u_type == "vec2":
+		elif u_type == "vec2" or u_type == "ivec2" or u_type == "uvec2":
 			var label := Label.new()
 			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var vector2 := _vec2str_to_vector2(u_value)
 			var slider := VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
+			slider.show_ratio = true
 			slider.allow_greater = true
-			slider.allow_lesser = true
+			if u_type != "uvec2":
+				slider.allow_lesser = true
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = vector2
 			if params.has(u_name):
@@ -1185,6 +1191,17 @@ func create_ui_for_shader_uniforms(
 				parent_node.add_child(hbox)
 		elif u_type == "sampler2D":
 			if u_name == "selection":
+				continue
+			if u_name == "palette_texture":
+				var palette := Palettes.current_palette
+				var palette_texture := ImageTexture.create_from_image(palette.convert_to_image())
+				value_changed.call(palette_texture, u_name)
+				Palettes.palette_selected.connect(
+					func(_name): _shader_change_palette(value_changed, u_name)
+				)
+				palette.data_changed.connect(
+					func(): _shader_update_palette_texture(palette, value_changed, u_name)
+				)
 				continue
 			var label := Label.new()
 			label.text = humanized_u_name
@@ -1241,6 +1258,8 @@ func create_ui_for_shader_uniforms(
 
 
 func _vec2str_to_vector2(vec2: String) -> Vector2:
+	vec2 = vec2.replace("uvec2", "vec2")
+	vec2 = vec2.replace("ivec2", "vec2")
 	vec2 = vec2.replace("vec2(", "")
 	vec2 = vec2.replace(")", "")
 	var vec_values := vec2.split(",")
@@ -1272,3 +1291,18 @@ func _vec4str_to_color(vec4: String) -> Color:
 		alpha = float(rgba_values[3])
 	var color := Color(red, green, blue, alpha)
 	return color
+
+
+func _shader_change_palette(value_changed: Callable, parameter_name: String) -> void:
+	var palette := Palettes.current_palette
+	_shader_update_palette_texture(palette, value_changed, parameter_name)
+	#if not palette.data_changed.is_connected(_shader_update_palette_texture):
+	palette.data_changed.connect(
+		func(): _shader_update_palette_texture(palette, value_changed, parameter_name)
+	)
+
+
+func _shader_update_palette_texture(
+	palette: Palette, value_changed: Callable, parameter_name: String
+) -> void:
+	value_changed.call(ImageTexture.create_from_image(palette.convert_to_image()), parameter_name)

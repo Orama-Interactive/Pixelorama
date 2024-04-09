@@ -29,6 +29,8 @@ var drop_shadow_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/DropShad
 var hsv_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn")
 var gradient_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn")
 var gradient_map_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientMapDialog.tscn")
+var palettize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PalettizeDialog.tscn")
+var pixelize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PixelizeDialog.tscn")
 var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.tscn")
 var shader_effect_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn")
 var manage_layouts_dialog := Dialog.new("res://src/UI/Dialogs/ManageLayouts.tscn")
@@ -364,6 +366,8 @@ func _setup_effects_menu() -> void:
 		"Invert Colors": "invert_colors",
 		"Desaturation": "desaturation",
 		"Adjust Hue/Saturation/Value": "adjust_hsv",
+		"Palettize": "palettize",
+		"Pixelize": "pixelize",
 		"Posterize": "posterize",
 		"Gradient": "gradient",
 		"Gradient Map": "gradient_map",
@@ -771,6 +775,10 @@ func effects_menu_id_pressed(id: int) -> void:
 			gradient_dialog.popup()
 		Global.EffectsMenu.GRADIENT_MAP:
 			gradient_map_dialog.popup()
+		Global.EffectsMenu.PALETTIZE:
+			palettize_dialog.popup()
+		Global.EffectsMenu.PIXELIZE:
+			pixelize_dialog.popup()
 		Global.EffectsMenu.POSTERIZE:
 			posterize_dialog.popup()
 		#Global.EffectsMenu.SHADER:

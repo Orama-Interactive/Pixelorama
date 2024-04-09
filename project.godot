@@ -845,6 +845,14 @@ project_properties={
 "deadzone": 0.5,
 "events": []
 }
+palettize={
+"deadzone": 0.5,
+"events": []
+}
+pixelize={
+"deadzone": 0.5,
+"events": []
+}
 
 [input_devices]
 
