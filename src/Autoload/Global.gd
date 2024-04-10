@@ -796,6 +796,8 @@ func _initialize_keychain() -> void:
 		"go_to_last_frame": Keychain.InputAction.new("", "Buttons"),
 		"go_to_previous_frame": Keychain.InputAction.new("", "Buttons"),
 		"go_to_next_frame": Keychain.InputAction.new("", "Buttons"),
+		"go_to_previous_layer": Keychain.InputAction.new("", "Buttons"),
+		"go_to_next_layer": Keychain.InputAction.new("", "Buttons"),
 		"play_backwards": Keychain.InputAction.new("", "Buttons"),
 		"play_forward": Keychain.InputAction.new("", "Buttons"),
 		"onion_skinning_toggle": Keychain.InputAction.new("", "Buttons"),

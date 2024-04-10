@@ -136,6 +136,20 @@ func _notification(what: int) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	var project := Global.current_project
+	if event.is_action_pressed("go_to_previous_layer"):
+		project.selected_cels.clear()
+		if project.current_layer > 0:
+			project.change_cel(-1, project.current_layer - 1)
+		else:
+			project.change_cel(-1, project.layers.size() - 1)
+	elif event.is_action_pressed("go_to_next_layer"):
+		project.selected_cels.clear()
+		if project.current_layer < project.layers.size() - 1:
+			project.change_cel(-1, project.current_layer + 1)
+		else:
+			project.change_cel(-1, 0)
+
 	var mouse_pos := get_global_mouse_position()
 	var timeline_rect := Rect2(global_position, size)
 	if timeline_rect.has_point(mouse_pos):
