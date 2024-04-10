@@ -39,14 +39,14 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 
 @onready var main_ui := Global.control.find_child("DockableContainer") as DockableContainer
 @onready var ui_elements := main_ui.get_children()
-@onready var file_menu: PopupMenu = $MenuBar/File
-@onready var edit_menu: PopupMenu = $MenuBar/Edit
-@onready var select_menu: PopupMenu = $MenuBar/Select
-@onready var image_menu: PopupMenu = $MenuBar/Image
-@onready var effects_menu: PopupMenu = $MenuBar/Effects
-@onready var view_menu: PopupMenu = $MenuBar/View
-@onready var window_menu: PopupMenu = $MenuBar/Window
-@onready var help_menu: PopupMenu = $MenuBar/Help
+@onready var file_menu := $MarginContainer/HBoxContainer/MenuBar/File as PopupMenu
+@onready var edit_menu := $MarginContainer/HBoxContainer/MenuBar/Edit as PopupMenu
+@onready var select_menu := $MarginContainer/HBoxContainer/MenuBar/Select as PopupMenu
+@onready var image_menu := $MarginContainer/HBoxContainer/MenuBar/Image as PopupMenu
+@onready var effects_menu := $MarginContainer/HBoxContainer/MenuBar/Effects as PopupMenu
+@onready var view_menu := $MarginContainer/HBoxContainer/MenuBar/View as PopupMenu
+@onready var window_menu := $MarginContainer/HBoxContainer/MenuBar/Window as PopupMenu
+@onready var help_menu := $MarginContainer/HBoxContainer/MenuBar/Help as PopupMenu
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
 @onready var tile_mode_submenu := PopupMenu.new()
@@ -54,7 +54,7 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var panels_submenu := PopupMenu.new()
 @onready var layouts_submenu := PopupMenu.new()
 @onready var recent_projects_submenu := PopupMenu.new()
-@onready var current_frame_mark := $HBoxContainer/CurrentFrameMark as Label
+@onready var current_frame_mark := %CurrentFrameMark as Label
 
 
 class Dialog:

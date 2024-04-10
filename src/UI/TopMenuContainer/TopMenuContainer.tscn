@@ -9,42 +9,47 @@ offset_right = 1280.0
 offset_bottom = 28.0
 script = ExtResource("2")
 
-[node name="MenuBar" type="MenuBar" parent="."]
-layout_mode = 2
-offset_left = 7.0
-offset_right = 356.0
-offset_bottom = 27.0
-flat = true
-
-[node name="File" type="PopupMenu" parent="MenuBar"]
-
-[node name="Edit" type="PopupMenu" parent="MenuBar"]
-
-[node name="Select" type="PopupMenu" parent="MenuBar"]
-
-[node name="Image" type="PopupMenu" parent="MenuBar"]
-
-[node name="Effects" type="PopupMenu" parent="MenuBar"]
-
-[node name="View" type="PopupMenu" parent="MenuBar"]
-
-[node name="Window" type="PopupMenu" parent="MenuBar"]
-
-[node name="Help" type="PopupMenu" parent="MenuBar"]
-
-[node name="TopLabels" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -65.5
-offset_right = 65.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(575, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+flat = true
+
+[node name="File" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+
+[node name="Edit" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+
+[node name="Select" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+
+[node name="Image" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+
+[node name="Effects" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+
+[node name="View" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+
+[node name="Window" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+
+[node name="Help" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+
+[node name="TopLabels" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="RotationSlider" type="TextureProgressBar" parent="TopLabels"]
+[node name="RotationSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
@@ -65,7 +70,7 @@ stretch_margin_bottom = 3
 script = ExtResource("1")
 suffix = "°"
 
-[node name="ZoomSlider" type="TextureProgressBar" parent="TopLabels"]
+[node name="ZoomSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
@@ -74,8 +79,9 @@ focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0
-max_value = 50000.0
+max_value = 5000.0
 value = 50.0
+allow_greater = true
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
@@ -84,31 +90,21 @@ stretch_margin_bottom = 3
 script = ExtResource("1")
 suffix = "%"
 
-[node name="CursorPosition" type="Label" parent="TopLabels"]
+[node name="CursorPosition" type="Label" parent="MarginContainer/HBoxContainer/TopLabels"]
 layout_mode = 2
 text = "[64×64]"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -330.0
-offset_top = -14.0
-offset_right = 0.00012207
-offset_bottom = 13.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="CurrentFrame" type="Label" parent="HBoxContainer"]
+[node name="CurrentFrame" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Current frame:"
 
-[node name="CurrentFrameMark" type="Label" parent="HBoxContainer"]
+[node name="CurrentFrameMark" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 text = "1/1"
