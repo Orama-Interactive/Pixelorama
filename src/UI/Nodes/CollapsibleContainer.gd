@@ -68,6 +68,11 @@ func set_visible_children(pressed: bool) -> void:
 		child.visible = pressed
 
 
+## Returns [member _button].
+func get_button() -> Button:
+	return _button
+
+
 ## Checks if a child becomes visible from another sure and ensures
 ## it remains invisible if the button is not pressed
 func _child_visibility_changed(child: CanvasItem) -> void:
