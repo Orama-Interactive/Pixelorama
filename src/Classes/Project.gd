@@ -630,14 +630,18 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 	_update_frame_ui()
 
 
-func move_frame(from_index: int, to_index: int) -> void:
+# from_indices and to_indicies should be in ascending order
+func move_frames(from_indices: PackedInt32Array, to_indices: PackedInt32Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	var frame := frames[from_index]
-	frames.remove_at(from_index)
-	Global.animation_timeline.project_frame_removed(from_index)
-	frames.insert(to_index, frame)
-	Global.animation_timeline.project_frame_added(to_index)
+	var removed_frames := []
+	for i in from_indices.size():
+		# With each removed index, future indices need to be lowered, so subtract by i
+		removed_frames.append(frames.pop_at(from_indices[i] - i))
+		Global.animation_timeline.project_frame_removed(from_indices[i] - i)
+	for i in to_indices.size():
+		frames.insert(to_indices[i], removed_frames[i])
+		Global.animation_timeline.project_frame_added(to_indices[i])
 	_update_frame_ui()
 
 

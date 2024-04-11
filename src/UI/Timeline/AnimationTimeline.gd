@@ -509,13 +509,46 @@ func _on_FrameTagButton_pressed() -> void:
 func _on_MoveLeft_pressed() -> void:
 	if Global.current_project.current_frame == 0:
 		return
-	Global.frame_hbox.get_child(Global.current_project.current_frame).change_frame_order(-1)
+	move_frames(Global.current_project.current_frame, -1)
 
 
 func _on_MoveRight_pressed() -> void:
 	if Global.current_project.current_frame == Global.current_project.frames.size() - 1:
 		return
-	Global.frame_hbox.get_child(Global.current_project.current_frame).change_frame_order(1)
+	move_frames(Global.current_project.current_frame, 1)
+
+
+func move_frames(frame: int, rate: int) -> void:
+	var project := Global.current_project
+	var frame_indices: PackedInt32Array = []
+	var moved_frame_indices: PackedInt32Array = []
+	for cel in project.selected_cels:
+		var frame_index: int = cel[0]
+		if not frame_indices.has(frame_index):
+			frame_indices.append(frame_index)
+			moved_frame_indices.append(frame_index + rate)
+	frame_indices.sort()
+	moved_frame_indices.sort()
+	if not frame in frame_indices:
+		frame_indices = [frame]
+		moved_frame_indices = [frame + rate]
+	for moved_index in moved_frame_indices:
+		# Don't allow frames to be moved if they are out of bounds
+		if moved_index < 0 or moved_index >= project.frames.size():
+			return
+	project.undo_redo.create_action("Change Frame Order")
+	project.undo_redo.add_do_method(project.move_frames.bind(frame_indices, moved_frame_indices))
+	project.undo_redo.add_undo_method(project.move_frames.bind(moved_frame_indices, frame_indices))
+
+	if project.current_frame in frame_indices:
+		project.undo_redo.add_do_method(project.change_cel.bind(frame + rate))
+	else:
+		project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame))
+
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.commit_action()
 
 
 func reverse_frames(indices := []) -> void:
