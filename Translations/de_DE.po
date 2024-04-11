@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-04-09 23:28\n"
+"PO-Revision-Date: 2024-04-11 11:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -996,11 +996,11 @@ msgstr "Schritte:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
 msgid "Palettize"
-msgstr ""
+msgstr "Palettieren"
 
 #. An image effect. It makes the input image pixelated.
 msgid "Pixelize"
-msgstr ""
+msgstr "Pixelieren"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
@@ -1953,7 +1953,7 @@ msgid "Properties"
 msgstr "Eigenschaften"
 
 msgid "Project Properties"
-msgstr ""
+msgstr "Projekteinstellungen"
 
 msgid "Frame properties"
 msgstr "Frame-Eigenschaften"
@@ -2455,7 +2455,7 @@ msgstr "Minute(n)"
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "JSON-Daten exportieren"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
