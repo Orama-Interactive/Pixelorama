@@ -6,7 +6,7 @@ uniform vec4 color : source_color = vec4(1.0);
 uniform float width : hint_range(0, 10, 1) = 1.0;
 uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
 uniform bool inside = false;
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 
 bool has_contrary_neighbour(vec2 uv, vec2 texture_pixel_size, sampler2D tex) {

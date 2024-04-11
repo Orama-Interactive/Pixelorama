@@ -2,7 +2,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform sampler2D selection_tex;
+uniform sampler2D selection_tex : filter_nearest;
 uniform float initial_angle = 0.0;
 uniform float ending_angle = 0.0;
 uniform float tolerance : hint_range(0.0, 255.0) = 100.0;

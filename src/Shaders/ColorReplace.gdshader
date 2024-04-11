@@ -9,7 +9,7 @@ uniform float similarity_percent : hint_range(0.0, 100.0);
 
 // Must be the same size as image
 // Selected pixels are 1,1,1,1 and unselected 0,0,0,0
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 uniform bool has_pattern;
 uniform sampler2D pattern: repeat_enable;

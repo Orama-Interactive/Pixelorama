@@ -5,7 +5,7 @@ uniform bool red = true;
 uniform bool blue = true;
 uniform bool green = true;
 uniform bool alpha = false;
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 float stolChannel(float x) {
 	return (x < 0.04045) ? (x / 12.92) : pow((x + 0.055) / 1.055, 2.4);

@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform vec2 offset = vec2(5.0, 5.0); // Offset, in pixel coordinate [0, 1, 2, and so on]
 uniform vec4 shadow_color : source_color = vec4(0.08, 0.08, 0.08, 0.63);
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 
 void fragment() {

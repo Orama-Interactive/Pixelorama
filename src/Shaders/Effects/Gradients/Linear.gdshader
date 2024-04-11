@@ -1,8 +1,8 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform sampler2D selection;
-uniform sampler2D gradient_texture;
+uniform sampler2D selection : filter_nearest;
+uniform sampler2D gradient_texture : filter_nearest;
 uniform float position : hint_range(-0.5, 0.5) = 0.0;
 uniform float size : hint_range(0.01, 2.0) = 1.0;
 uniform float angle : hint_range(0.0, 360.0) = 0.0;

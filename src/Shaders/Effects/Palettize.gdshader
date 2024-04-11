@@ -3,7 +3,7 @@
 shader_type canvas_item;
 
 uniform sampler2D palette_texture : filter_nearest;
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 vec4 swap_color(vec4 color) {
 	if (color.a <= 0.01) {

@@ -1,4 +1,4 @@
-uniform sampler2D selection_tex;
+uniform sampler2D selection_tex : filter_nearest;
 uniform vec2 pivot_pixel;
 uniform float angle;
 

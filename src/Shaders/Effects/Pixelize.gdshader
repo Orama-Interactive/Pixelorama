@@ -7,7 +7,7 @@ This shader is under MIT license
 shader_type canvas_item;
 
 uniform uvec2 pixel_size = uvec2(4);
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);

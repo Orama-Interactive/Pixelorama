@@ -4,7 +4,7 @@ render_mode unshaded;
 uniform float hue : hint_range(-1, 1);
 uniform float saturation : hint_range(-1, 1);
 uniform float value : hint_range(-1, 1);
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 vec3 rgb2hsb(vec3 c){
 	vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);

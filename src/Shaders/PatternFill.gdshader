@@ -1,8 +1,8 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform sampler2D selection;
-uniform sampler2D pattern: repeat_enable;
+uniform sampler2D selection : filter_nearest;
+uniform sampler2D pattern : filter_nearest, repeat_enable;
 uniform vec2 size;
 uniform vec2 pattern_size;
 uniform vec2 pattern_uv_offset;

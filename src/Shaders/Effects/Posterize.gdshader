@@ -1,7 +1,7 @@
 // https://godotshaders.com/shader/color-reduction-and-dither/
 shader_type canvas_item;
 
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 uniform float colors : hint_range(1.0, 255.0) = 2.0;
 uniform float dither_intensity : hint_range(0.0, 0.5) = 0.0;
 

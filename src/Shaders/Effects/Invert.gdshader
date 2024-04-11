@@ -5,7 +5,7 @@ uniform bool red = true;
 uniform bool blue = true;
 uniform bool green = true;
 uniform bool alpha = false;
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 
 void fragment() {

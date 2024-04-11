@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 uniform vec2 offset = vec2(0.0); // In pixels
 uniform bool wrap_around = false;
 

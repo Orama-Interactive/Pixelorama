@@ -2,7 +2,7 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform sampler2D gradient_map : filter_nearest;  // GradientTexture
-uniform sampler2D selection;
+uniform sampler2D selection : filter_nearest;
 
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);

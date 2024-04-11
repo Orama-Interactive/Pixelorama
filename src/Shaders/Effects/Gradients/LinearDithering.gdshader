@@ -1,10 +1,10 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform sampler2D selection;
-uniform sampler2D gradient_texture;
-uniform sampler2D dither_texture : repeat_enable;
-uniform sampler2D offset_texture;
+uniform sampler2D selection : filter_nearest;
+uniform sampler2D gradient_texture : filter_nearest;
+uniform sampler2D dither_texture : filter_nearest, repeat_enable;
+uniform sampler2D offset_texture : filter_nearest;
 uniform float position : hint_range(-0.5, 0.5) = 0.0;
 uniform float size : hint_range(0.01, 2.0) = 1.0;
 uniform float angle : hint_range(0.0, 360.0) = 0.0;
@@ -69,9 +69,9 @@ void fragment() {
 		modified_uv = mirror_fract(modified_uv);
 
 	int n_of_colors = textureSize(offset_texture, 0).x;
+	float colors_minus = float(n_of_colors - 1);
 	vec4 output;
 	for (int i = 1; i <= n_of_colors; i++) {
-		float colors_minus = float(n_of_colors - 1);
 		float off = texture(offset_texture, vec2(float(i) / colors_minus)).r;
 		float off_prev = texture(offset_texture, vec2(float(i - 1) / colors_minus)).r;
 		vec4 first = texture(gradient_texture, vec2(float((i - 1)) / colors_minus));
