@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-04-09 23:28\n"
+"PO-Revision-Date: 2024-04-11 06:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -999,7 +999,7 @@ msgstr ""
 
 #. An image effect. It makes the input image pixelated.
 msgid "Pixelize"
-msgstr ""
+msgstr "Пикселизация"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
