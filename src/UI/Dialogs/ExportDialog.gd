@@ -236,7 +236,7 @@ func create_layer_list() -> void:
 
 func update_dimensions_label() -> void:
 	if _preview_images.size() > 0:
-		var new_size: Vector2 = _preview_images[0].image.get_size() * (Export.resize / 100.0)
+		var new_size: Vector2i = _preview_images[0].image.get_size() * (Export.resize / 100.0)
 		dimension_label.text = str(new_size.x, "×", new_size.y)
 
 
