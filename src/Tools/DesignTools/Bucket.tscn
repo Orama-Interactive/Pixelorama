@@ -49,8 +49,6 @@ popup/item_2/id = 2
 [node name="SimilaritySlider" parent="." index="4" instance=ExtResource("1")]
 visible = false
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 value = 100.0
 prefix = "Similarity:"
 
@@ -96,14 +94,10 @@ stretch_mode = 6
 
 [node name="OffsetX" parent="FillPattern" index="1" instance=ExtResource("1")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 prefix = "Offset X:"
 
 [node name="OffsetY" parent="FillPattern" index="2" instance=ExtResource("1")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 prefix = "Offset Y:"
 
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]

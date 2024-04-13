@@ -85,7 +85,7 @@ func commit_action(cel: Image, _project := Global.current_project) -> void:
 	var image := Image.new()
 	image.copy_from(cel)
 	if _project.has_selection and selection_checkbox.button_pressed:
-		var selection := _project.selection_map
+		var selection := _project.selection_map.return_cropped_copy(_project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
 
 		if !_type_is_shader():

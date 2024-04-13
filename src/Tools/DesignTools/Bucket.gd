@@ -199,7 +199,7 @@ func fill_in_color(pos: Vector2i) -> void:
 		var selection: Image
 		var selection_tex: ImageTexture
 		if project.has_selection:
-			selection = project.selection_map
+			selection = project.selection_map.return_cropped_copy(project.size)
 		else:
 			selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			selection.fill(Color(1, 1, 1, 1))
@@ -263,7 +263,7 @@ func fill_in_selection() -> void:
 		var selection: Image
 		var selection_tex: ImageTexture
 		if project.has_selection:
-			selection = project.selection_map
+			selection = project.selection_map.return_cropped_copy(project.size)
 		else:
 			selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			selection.fill(Color(1, 1, 1, 1))

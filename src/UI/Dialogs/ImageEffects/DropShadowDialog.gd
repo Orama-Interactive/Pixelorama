@@ -29,7 +29,8 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	var offset_y := animate_panel.get_animated_value(commit_idx, Animate.OFFSET_Y)
 	var selection_tex: ImageTexture
 	if selection_checkbox.button_pressed and project.has_selection:
-		selection_tex = ImageTexture.create_from_image(project.selection_map)
+		var selection := project.selection_map.return_cropped_copy(project.size)
+		selection_tex = ImageTexture.create_from_image(selection)
 
 	var params := {
 		"offset": Vector2(offset_x, offset_y), "shadow_color": color, "selection": selection_tex
