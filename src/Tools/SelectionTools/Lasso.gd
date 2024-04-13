@@ -21,7 +21,7 @@ func draw_move(pos_i: Vector2i) -> void:
 	if !_move:
 		append_gap(_last_position, pos)
 		_last_position = pos
-		_draw_points.append(pos)
+		_draw_points.append(Vector2i(pos))
 		_offset = pos
 
 
