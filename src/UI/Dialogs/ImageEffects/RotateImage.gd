@@ -97,8 +97,8 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		var selection_rectangle: Rect2 = _project.selection_map.get_used_rect()
 		selection_size = selection_rectangle.size
 
-		var selection: Image = _project.selection_map
-		selection_tex.create_from_image(selection, 0)
+		var selection := _project.selection_map
+		selection_tex.create_from_image(selection.return_cropped_copy(_project.size), 0)
 
 		if !_type_is_shader():
 			image.lock()

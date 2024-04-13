@@ -189,7 +189,7 @@ func fill_in_color(position: Vector2) -> void:
 		var selection: Image
 		var selection_tex := ImageTexture.new()
 		if project.has_selection:
-			selection = project.selection_map
+			selection = project.selection_map.return_cropped_copy(project.size)
 		else:
 			selection = Image.new()
 			selection.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
@@ -248,10 +248,7 @@ func fill_in_selection() -> void:
 			filler.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			filler.fill(tool_slot.color)
 			var rect: Rect2 = Global.canvas.selection.big_bounding_rectangle
-			var selection_map_copy := SelectionMap.new()
-			selection_map_copy.copy_from(project.selection_map)
-			# In case the selection map is bigger than the canvas
-			selection_map_copy.crop(project.size.x, project.size.y)
+			var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 			for image in images:
 				image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
 		else:
@@ -267,7 +264,7 @@ func fill_in_selection() -> void:
 		var selection: Image
 		var selection_tex := ImageTexture.new()
 		if project.has_selection:
-			selection = project.selection_map
+			selection = project.selection_map.return_cropped_copy(project.size)
 		else:
 			selection = Image.new()
 			selection.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)

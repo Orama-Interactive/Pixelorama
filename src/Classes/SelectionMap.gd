@@ -92,6 +92,25 @@ func invert() -> void:
 	self.convert(Image.FORMAT_LA8)
 
 
+## Return Image because Godot 3.x doesn't like when the class name is referenced inside the class
+func return_cropped_copy(size: Vector2) -> Image:
+	var selection_map_copy: Image = get_script().new()
+	selection_map_copy.copy_from(self)
+	var diff := Vector2.ZERO
+	var selection_position: Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+	if selection_position.x < 0:
+		diff.x += selection_position.x
+	if selection_position.y < 0:
+		diff.y += selection_position.y
+	if diff != Vector2.ZERO:
+		# If there are pixels out of bounds on the negative side (left & up),
+		# move them before resizing
+		selection_map_copy.fill(Color(0))
+		selection_map_copy.blit_rect(self, Rect2(Vector2.ZERO, get_size()), diff)
+	selection_map_copy.crop(size.x, size.y)
+	return selection_map_copy
+
+
 func move_bitmap_values(project, move_offset := true) -> void:
 	var size: Vector2 = project.size
 	var selection_node = Global.canvas.selection

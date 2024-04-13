@@ -17,7 +17,7 @@ func _ready() -> void:
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
-		selection_tex.create_from_image(project.selection_map, 0)
+		selection_tex.create_from_image(project.selection_map.return_cropped_copy(project.size), 0)
 
 	var params := {
 		"red": red, "blue": blue, "green": green, "alpha": alpha, "selection": selection_tex
