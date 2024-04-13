@@ -451,14 +451,16 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 	elif operation == SelectionOperation.SUBTRACT:
 		project.selection_map.fill_rect(rect, Color(0))
 	elif operation == SelectionOperation.INTERSECT:
+		var previous_selection_map := SelectionMap.new()  # Used for intersect
+		previous_selection_map.copy_from(project.selection_map)
 		project.selection_map.clear()
 		for x in range(rect.position.x, rect.end.x):
 			for y in range(rect.position.y, rect.end.y):
 				var pos := Vector2(x, y)
-				if !Rect2(Vector2.ZERO, project.selection_map.get_size()).has_point(pos):
+				if !Rect2(Vector2.ZERO, previous_selection_map.get_size()).has_point(pos):
 					continue
 				project.selection_map.select_pixel(
-					pos, project.selection_map.is_pixel_selected(pos)
+					pos, previous_selection_map.is_pixel_selected(pos)
 				)
 	big_bounding_rectangle = project.selection_map.get_used_rect()
 

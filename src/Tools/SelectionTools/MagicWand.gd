@@ -12,30 +12,31 @@ func apply_selection(position: Vector2) -> void:
 	var size: Vector2 = project.size
 	if position.x < 0 or position.y < 0 or position.x >= size.x or position.y >= size.y:
 		return
+	var previous_selection_map := SelectionMap.new()  # Used for intersect
+	previous_selection_map.copy_from(project.selection_map)
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
-
 	if _intersect:
 		project.selection_map.clear()
 
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
 	cel_image.lock()
-	_flood_fill(position, cel_image, project.selection_map)
+	_flood_fill(position, cel_image, project.selection_map, previous_selection_map)
 
 	# Handle mirroring
 	if Tools.horizontal_mirror:
 		var mirror_x := position
 		mirror_x.x = Global.current_project.x_symmetry_point - position.x
-		_flood_fill(mirror_x, cel_image, project.selection_map)
+		_flood_fill(mirror_x, cel_image, project.selection_map, previous_selection_map)
 		if Tools.vertical_mirror:
 			var mirror_xy := mirror_x
 			mirror_xy.y = Global.current_project.y_symmetry_point - position.y
-			_flood_fill(mirror_xy, cel_image, project.selection_map)
+			_flood_fill(mirror_xy, cel_image, project.selection_map, previous_selection_map)
 	if Tools.vertical_mirror:
 		var mirror_y := position
 		mirror_y.y = Global.current_project.y_symmetry_point - position.y
-		_flood_fill(mirror_y, cel_image, project.selection_map)
+		_flood_fill(mirror_y, cel_image, project.selection_map, previous_selection_map)
 	cel_image.unlock()
 	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)
@@ -127,18 +128,20 @@ func _check_flooded_segment(
 	return ret
 
 
-func _flood_fill(position: Vector2, image: Image, selection_map: SelectionMap) -> void:
+func _flood_fill(
+	pos: Vector2, image: Image, selection_map: SelectionMap, previous_selection_map: SelectionMap
+) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
 	var project: Project = Global.current_project
-	var color: Color = image.get_pixelv(position)
+	var color: Color = image.get_pixelv(pos)
 	# init flood data structures
 	_allegro_flood_segments = []
 	_allegro_image_segments = []
-	_compute_segments_for_image(position, project, image, color)
+	_compute_segments_for_image(pos, project, image, color)
 	# now actually color the image: since we have already checked a few things for the points
 	# we'll process here, we're going to skip a bunch of safety checks to speed things up.
-	_select_segments(selection_map)
+	_select_segments(selection_map, previous_selection_map)
 
 
 func _compute_segments_for_image(
@@ -170,18 +173,17 @@ func _compute_segments_for_image(
 					done = false
 
 
-func _select_segments(selection_map: SelectionMap) -> void:
+func _select_segments(selection_map: SelectionMap, previous_selection_map: SelectionMap) -> void:
 	# short circuit for flat colors
 	for c in _allegro_image_segments.size():
 		var p = _allegro_image_segments[c]
 		for px in range(p.left_position, p.right_position + 1):
 			# We don't have to check again whether the point being processed is within the bounds
-			_set_bit(Vector2(px, p.y), selection_map)
+			_set_bit(Vector2(px, p.y), selection_map, previous_selection_map)
 
 
-func _set_bit(p: Vector2, selection_map: SelectionMap) -> void:
-	var project: Project = Global.current_project
+func _set_bit(p: Vector2, selection_map: SelectionMap, prev_selection_map: SelectionMap) -> void:
 	if _intersect:
-		selection_map.select_pixel(p, project.selection_map.is_pixel_selected(p))
+		selection_map.select_pixel(p, prev_selection_map.is_pixel_selected(p))
 	else:
 		selection_map.select_pixel(p, !_subtract)

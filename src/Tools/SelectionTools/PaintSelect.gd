@@ -105,6 +105,8 @@ func apply_selection(_position) -> void:
 	.apply_selection(_position)
 	var project: Project = Global.current_project
 	var cleared := false
+	var previous_selection_map := SelectionMap.new()  # Used for intersect
+	previous_selection_map.copy_from(project.selection_map)
 	if !_add and !_subtract and !_intersect:
 		cleared = true
 		Global.canvas.selection.clear_selection()
@@ -112,15 +114,18 @@ func apply_selection(_position) -> void:
 	if _draw_points.size() >= 1:
 		if _intersect:
 			project.selection_map.clear()
-		paint_selection(project.selection_map, _draw_points)
+		paint_selection(project.selection_map, previous_selection_map, _draw_points)
 
 		# Handle mirroring
 		if Tools.horizontal_mirror:
-			paint_selection(project.selection_map, mirror_array(_draw_points, true, false))
+			var mirror_x := mirror_array(_draw_points, true, false)
+			paint_selection(project.selection_map, previous_selection_map, mirror_x)
 			if Tools.vertical_mirror:
-				paint_selection(project.selection_map, mirror_array(_draw_points, true, true))
+				var mirror_xy := mirror_array(_draw_points, true, true)
+				paint_selection(project.selection_map, previous_selection_map, mirror_xy)
 		if Tools.vertical_mirror:
-			paint_selection(project.selection_map, mirror_array(_draw_points, false, true))
+			var mirror_y := mirror_array(_draw_points, false, true)
+			paint_selection(project.selection_map, previous_selection_map, mirror_y)
 
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
@@ -132,14 +137,15 @@ func apply_selection(_position) -> void:
 	_last_position = Vector2.INF
 
 
-func paint_selection(selection_map: SelectionMap, points: PoolVector2Array) -> void:
-	var project: Project = Global.current_project
+func paint_selection(
+	selection_map: SelectionMap, previous_selection_map: SelectionMap, points: PoolVector2Array
+) -> void:
 	var size := selection_map.get_size()
 	for point in points:
 		if point.x < 0 or point.y < 0 or point.x >= size.x or point.y >= size.y:
 			continue
 		if _intersect:
-			if project.selection_map.is_pixel_selected(point):
+			if previous_selection_map.is_pixel_selected(point):
 				selection_map.select_pixel(point, true)
 		else:
 			selection_map.select_pixel(point, !_subtract)
