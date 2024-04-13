@@ -526,11 +526,7 @@ func is_empty() -> bool:
 	)
 
 
-func can_pixel_get_drawn(
-	pixel: Vector2i,
-	image: SelectionMap = selection_map,
-	selection_position: Vector2i = Global.canvas.selection.big_bounding_rectangle.position
-) -> bool:
+func can_pixel_get_drawn(pixel: Vector2i, image := selection_map) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
 
@@ -538,10 +534,6 @@ func can_pixel_get_drawn(
 		return false
 
 	if has_selection:
-		if selection_position.x < 0:
-			pixel.x -= selection_position.x
-		if selection_position.y < 0:
-			pixel.y -= selection_position.y
 		return image.is_pixel_selected(pixel)
 	else:
 		return true

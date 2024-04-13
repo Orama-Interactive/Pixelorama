@@ -84,27 +84,13 @@ func draw_start(pos: Vector2i) -> void:
 	_start_pos = pos
 	_offset = pos
 
-	var selection_position: Vector2i = selection_node.big_bounding_rectangle.position
-	var offsetted_pos := pos
-	if selection_position.x < 0:
-		offsetted_pos.x -= selection_position.x
-	if selection_position.y < 0:
-		offsetted_pos.y -= selection_position.y
-
 	var quick_copy := Input.is_action_pressed("transform_copy_selection_content", true)
 	if (
-		offsetted_pos.x >= 0
-		and offsetted_pos.y >= 0
-		and project.selection_map.is_pixel_selected(offsetted_pos)
+		project.selection_map.is_pixel_selected(pos)
 		and (!_add and !_subtract and !_intersect or quick_copy)
 		and !_ongoing_selection
 	):
-		if !(
-			Global
-			. current_project
-			. layers[Global.current_project.current_layer]
-			. can_layer_get_drawn()
-		):
+		if not project.layers[project.current_layer].can_layer_get_drawn():
 			return
 		# Move current selection
 		_move = true

@@ -4,7 +4,13 @@ extends Image
 var invert_shader := preload("res://src/Shaders/Effects/Invert.gdshader")
 
 
-func is_pixel_selected(pixel: Vector2i) -> bool:
+func is_pixel_selected(pixel: Vector2i, calculate_offset := true) -> bool:
+	var selection_position: Vector2i = Global.canvas.selection.big_bounding_rectangle.position
+	if calculate_offset:
+		if selection_position.x < 0:
+			pixel.x -= selection_position.x
+		if selection_position.y < 0:
+			pixel.y -= selection_position.y
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= get_width() or pixel.y >= get_height():
 		return false
 	var selected: bool = get_pixelv(pixel).a > 0
