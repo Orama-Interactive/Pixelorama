@@ -43,6 +43,7 @@ Built using Godot 3.5.2
 - Fixed issue where the override.cfg file would be created at the wrong location, if Pixelorama is launched through a shortcut. [0c6566de761a683a0e8a781131024a1dedb9734f](https://github.com/Orama-Interactive/Pixelorama/commit/0c6566de761a683a0e8a781131024a1dedb9734f)
 - The gizmo in the rotation image effect dialog is now accurately following the mouse.
 - Fixed the size label not being updated on the Export dialog's spritesheet tab when the direction changes. [9a5eb9720d2328f914f8efc3b9aa605dadca99b0](https://github.com/Orama-Interactive/Pixelorama/commit/9a5eb9720d2328f914f8efc3b9aa605dadca99b0)
+- The "Export dimensions" label in the export dialog no longer shows fractions as the final image's size.
 
 ## [v0.11.3] - 2023-10-30
 This update has been brought to you by the contributions of:
