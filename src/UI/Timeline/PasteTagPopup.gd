@@ -112,7 +112,8 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 	var combined_copy := Array()  # Makes calculations easy
 	combined_copy.append_array(project.layers)
 	var added_layers := Array()  # Array of layers
-	var added_idx := Array()  # Array of indices to add the respective layers (in added_layers) to
+	# Array of indices to add the respective layers (in added_layers) to
+	var added_idx := PackedInt32Array()
 	var added_cels := Array()  # Array of an Array of cels (added in same order as their layer)
 
 	if layer_from_to.values().count(-1) > 0:

@@ -68,11 +68,11 @@ func handle_loading_file(file: String) -> void:
 
 func add_import_option(import_name: StringName, import_scene: PackedScene) -> int:
 	# Change format name if another one uses the same name
-	var existing_format_names = (
+	var existing_format_names := (
 		ImportPreviewDialog.ImageImportOptions.keys() + custom_import_names.keys()
 	)
 	for i in range(existing_format_names.size()):
-		var test_name = import_name
+		var test_name := import_name
 		if i != 0:
 			test_name = str(test_name, "_", i)
 		if !existing_format_names.has(test_name):
@@ -82,7 +82,7 @@ func add_import_option(import_name: StringName, import_scene: PackedScene) -> in
 	# Obtain a unique id
 	var id := ImportPreviewDialog.ImageImportOptions.size()
 	for i in custom_import_names.size():
-		var format_id = id + i
+		var format_id := id + i
 		if !custom_import_names.values().has(i):
 			id = format_id
 	# Add to custom_file_formats
@@ -514,7 +514,7 @@ func open_image_as_spritesheet_layer_smart(
 	# Create new frames (if needed)
 	var new_frames_size := maxi(project.frames.size(), start_frame + sliced_rects.size())
 	var frames := []
-	var frame_indices := []
+	var frame_indices := PackedInt32Array([])
 	if new_frames_size > project.frames.size():
 		var required_frames := new_frames_size - project.frames.size()
 		frame_indices = range(
@@ -595,7 +595,7 @@ func open_image_as_spritesheet_layer(
 	# Create new frames (if needed)
 	var new_frames_size := maxi(project.frames.size(), start_frame + (vertical * horizontal))
 	var frames := []
-	var frame_indices := []
+	var frame_indices := PackedInt32Array([])
 	if new_frames_size > project.frames.size():
 		var required_frames := new_frames_size - project.frames.size()
 		frame_indices = range(

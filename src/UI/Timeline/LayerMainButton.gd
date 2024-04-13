@@ -72,8 +72,8 @@ func _drop_data(_pos: Vector2, data) -> void:
 	var drop_layer: int = data[1]
 	var project := Global.current_project
 	project.undo_redo.create_action("Change Layer Order")
-	var layers: Array = project.layers  # This shouldn't be modified directly
-	var drop_from_indices := range(
+	var layers := project.layers  # This shouldn't be modified directly
+	var drop_from_indices: PackedInt32Array = range(
 		drop_layer - layers[drop_layer].get_child_count(true), drop_layer + 1
 	)
 	var drop_from_parents := []
@@ -99,7 +99,7 @@ func _drop_data(_pos: Vector2, data) -> void:
 		for l in a.from:
 			a_from_parents.append(layers[l].parent)
 
-		# to_parents starts as a dulpicate of from_parents, set the root layer's (with one layer or
+		# to_parents starts as a duplicate of from_parents, set the root layer's (with one layer or
 		# group with its children, this will always be the last layer [-1]) parent to the other
 		# root layer's parent
 		a["to_parents"] = a_from_parents.duplicate()
@@ -144,7 +144,7 @@ func _drop_data(_pos: Vector2, data) -> void:
 		if drop_layer < layer_index:
 			to_index -= drop_from_indices.size()
 
-		var drop_to_indices := range(to_index, to_index + drop_from_indices.size())
+		var drop_to_indices: PackedInt32Array = range(to_index, to_index + drop_from_indices.size())
 		var to_parents := drop_from_parents.duplicate()
 		to_parents[-1] = to_parent
 

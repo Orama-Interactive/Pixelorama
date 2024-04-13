@@ -586,7 +586,8 @@ func _z_index_sort(a: int, b: int, frame_index: int) -> bool:
 # use remove, and vice versa. To undo a move or swap, use move or swap with the parameters swapped.
 
 
-func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order
+# indices should be in ascending order
+func add_frames(new_frames: Array, indices: PackedInt32Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in new_frames.size():
@@ -603,14 +604,14 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 	_update_frame_ui()
 
 
-func remove_frames(indices: Array) -> void:  # indices should be in ascending order
+func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
 		# For each linked cel in the frame, update its layer's cel_link_sets
 		for l in layers.size():
-			var cel: BaseCel = frames[indices[i] - i].cels[l]
+			var cel := frames[indices[i] - i].cels[l]
 			cel.on_remove()
 			if cel.link_set != null:
 				cel.link_set["cels"].erase(cel)
@@ -650,11 +651,11 @@ func swap_frame(a_index: int, b_index: int) -> void:
 	_set_timeline_first_and_last_frames()
 
 
-func reverse_frames(frame_indices: Array) -> void:
+func reverse_frames(frame_indices: PackedInt32Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	for i in frame_indices.size() / 2:
-		var index: int = frame_indices[i]
-		var reverse_index: int = frame_indices[-i - 1]
+		var index := frame_indices[i]
+		var reverse_index := frame_indices[-i - 1]
 		var temp := frames[index]
 		frames[index] = frames[reverse_index]
 		frames[reverse_index] = temp
@@ -666,7 +667,8 @@ func reverse_frames(frame_indices: Array) -> void:
 	change_cel(-1)
 
 
-func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels
+## [param cels] is 2d Array of [BaseCel]s
+func add_layers(new_layers: Array, indices: PackedInt32Array, cels: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in indices.size():
@@ -678,7 +680,7 @@ func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels
 	_update_layer_ui()
 
 
-func remove_layers(indices: Array) -> void:
+func remove_layers(indices: PackedInt32Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in indices.size():
@@ -692,7 +694,9 @@ func remove_layers(indices: Array) -> void:
 
 
 # from_indices and to_indicies should be in ascending order
-func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
+func move_layers(
+	from_indices: PackedInt32Array, to_indices: PackedInt32Array, to_parents: Array
+) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	var removed_layers := []

@@ -169,7 +169,7 @@ func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
 	return rect
 
 
-func _get_frame_indices() -> Array:
+func _get_frame_indices() -> PackedInt32Array:
 	var indices := []
 	for cel in Global.current_project.selected_cels:
 		var f: int = cel[0]

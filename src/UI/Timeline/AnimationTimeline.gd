@@ -300,7 +300,7 @@ func _on_DeleteFrame_pressed() -> void:
 	delete_frames()
 
 
-func delete_frames(indices := []) -> void:
+func delete_frames(indices: PackedInt32Array = []) -> void:
 	var project := Global.current_project
 	if project.frames.size() == 1:
 		return
@@ -551,7 +551,7 @@ func move_frames(frame: int, rate: int) -> void:
 	project.undo_redo.commit_action()
 
 
-func reverse_frames(indices := []) -> void:
+func reverse_frames(indices: PackedInt32Array = []) -> void:
 	var project := Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
 	project.undo_redo.add_do_method(project.reverse_frames.bind(indices))
@@ -885,7 +885,9 @@ func _on_CloneLayer_pressed() -> void:
 		else:  # Add (Copy) to the name if its not a child of another copied layer
 			cl_layer.name = str(cl_layer.name, " (", tr("copy"), ")")
 
-	var indices := range(project.current_layer + 1, project.current_layer + clones.size() + 1)
+	var indices: PackedInt32Array = range(
+		project.current_layer + 1, project.current_layer + clones.size() + 1
+	)
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
@@ -934,7 +936,7 @@ func change_layer_order(up: bool) -> void:
 	var project := Global.current_project
 	var layer := project.layers[project.current_layer]
 	var child_count := layer.get_child_count(true)
-	var from_indices := range(layer.index - child_count, layer.index + 1)
+	var from_indices: PackedInt32Array = range(layer.index - child_count, layer.index + 1)
 	var from_parents := []
 	for l in from_indices:
 		from_parents.append(project.layers[l].parent)
@@ -971,7 +973,7 @@ func change_layer_order(up: bool) -> void:
 			else:
 				to_index = to_index - 1
 
-	var to_indices := range(to_index, to_index + child_count + 1)
+	var to_indices: PackedInt32Array = range(to_index, to_index + child_count + 1)
 
 	project.undo_redo.create_action("Change Layer Order")
 	project.undo_redo.add_do_method(project.move_layers.bind(from_indices, to_indices, to_parents))
