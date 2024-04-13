@@ -92,8 +92,9 @@ func apply_selection(_position: Vector2i) -> void:
 
 
 func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
-	var project := Global.current_project
 	var bitmap_size := selection_map.get_size()
+	var previous_selection_map := SelectionMap.new()  # Used for intersect
+	previous_selection_map.copy_from(selection_map)
 	if _intersect:
 		selection_map.clear()
 	var points := DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, _rect.size)
@@ -102,7 +103,7 @@ func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
 		if fill_p.x < 0 or fill_p.y < 0 or fill_p.x >= bitmap_size.x or fill_p.y >= bitmap_size.y:
 			continue
 		if _intersect:
-			if project.selection_map.is_pixel_selected(fill_p):
+			if previous_selection_map.is_pixel_selected(fill_p):
 				selection_map.select_pixel(fill_p, true)
 		else:
 			selection_map.select_pixel(fill_p, !_subtract)

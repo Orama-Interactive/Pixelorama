@@ -1,7 +1,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform sampler2D selection : hint_default_black;
+uniform sampler2D selection : filter_nearest, hint_default_black;
 uniform vec4 color;
 uniform float similarity_percent : hint_range(0.0, 100.0);
 uniform int operation = 0; // 0 = add, 1 = subtract, 2 = intersect
