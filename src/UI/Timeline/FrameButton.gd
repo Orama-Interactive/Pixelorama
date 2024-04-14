@@ -116,9 +116,10 @@ func _can_drop_data(_pos: Vector2, data) -> bool:
 		return false
 	var drop_frames: PackedInt32Array = data[1]
 	# Can't move to same frame
-	if drop_frames[-1] == frame:
-		Global.animation_timeline.drag_highlight.visible = false
-		return false
+	for drop_frame in drop_frames:
+		if drop_frame == frame:
+			Global.animation_timeline.drag_highlight.visible = false
+			return false
 	var region: Rect2
 	if Input.is_action_pressed("ctrl") and drop_frames.size() == 1:  # Swap frames
 		region = get_global_rect()
@@ -146,8 +147,9 @@ func _drop_data(_pos: Vector2, data) -> void:
 			to_frame = frame
 		else:  # Right
 			to_frame = frame + 1
-		if drop_frames[-1] < frame:
-			to_frame -= drop_frames.size()
+		for drop_frame in drop_frames:
+			if drop_frame < frame:
+				to_frame -= 1
 		var to_frames := range(to_frame, to_frame + drop_frames.size())
 		project.undo_redo.add_do_method(project.move_frames.bind(drop_frames, to_frames))
 		project.undo_redo.add_undo_method(project.move_frames.bind(to_frames, drop_frames))
