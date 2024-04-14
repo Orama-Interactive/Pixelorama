@@ -110,38 +110,40 @@ func _input(event: InputEvent) -> void:
 		_save_layer_name(line_edit.text)
 
 
-func _on_main_button_gui_input(event: InputEvent) -> void:
+func _on_layer_main_button_pressed() -> void:
 	var project := Global.current_project
+	Global.canvas.selection.transform_content_confirm()
+	var prev_curr_layer := project.current_layer
+	if Input.is_action_pressed(&"shift"):
+		var layer_diff_sign := signi(layer_index - prev_curr_layer)
+		if layer_diff_sign == 0:
+			layer_diff_sign = 1
+		for i in range(0, project.frames.size()):
+			for j in range(prev_curr_layer, layer_index + layer_diff_sign, layer_diff_sign):
+				var frame_layer := [i, j]
+				if !project.selected_cels.has(frame_layer):
+					project.selected_cels.append(frame_layer)
+		project.change_cel(-1, layer_index)
+	elif Input.is_action_pressed(&"ctrl"):
+		for i in range(0, project.frames.size()):
+			var frame_layer := [i, layer_index]
+			if !project.selected_cels.has(frame_layer):
+				project.selected_cels.append(frame_layer)
+		project.change_cel(-1, layer_index)
+	else:  # If the button is pressed without Shift or Control
+		_select_current_layer()
 
+
+func _on_main_button_gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT:
-		Global.canvas.selection.transform_content_confirm()
-		var prev_curr_layer := project.current_layer
-		if Input.is_action_pressed(&"shift"):
-			var layer_diff_sign := signi(layer_index - prev_curr_layer)
-			if layer_diff_sign == 0:
-				layer_diff_sign = 1
-			for i in range(0, project.frames.size()):
-				for j in range(prev_curr_layer, layer_index + layer_diff_sign, layer_diff_sign):
-					var frame_layer := [i, j]
-					if !project.selected_cels.has(frame_layer):
-						project.selected_cels.append(frame_layer)
-			project.change_cel(-1, layer_index)
-		elif Input.is_action_pressed(&"ctrl"):
-			for i in range(0, project.frames.size()):
-				var frame_layer := [i, layer_index]
-				if !project.selected_cels.has(frame_layer):
-					project.selected_cels.append(frame_layer)
-			project.change_cel(-1, layer_index)
-		else:  # If the button is pressed without Shift or Control
-			_select_current_layer()
-
 		if event.double_click:
 			label.visible = false
 			line_edit.visible = true
 			line_edit.editable = true
 			line_edit.grab_focus()
+
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		var layer := Global.current_project.layers[layer_index]
 		if not layer is GroupLayer:
@@ -218,7 +220,7 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 		Global.canvas.draw_layers()
 
 
-func _get_layer_indices() -> Array:
+func _get_layer_indices() -> PackedInt32Array:
 	var indices := []
 	for cel in Global.current_project.selected_cels:
 		var l: int = cel[1]

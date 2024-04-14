@@ -1,6 +1,6 @@
 extends AcceptDialog
 
-var layer_indices: Array
+var layer_indices: PackedInt32Array
 
 @onready var name_line_edit := $GridContainer/NameLineEdit as LineEdit
 @onready var opacity_slider := $GridContainer/OpacitySlider as ValueSlider
