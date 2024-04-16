@@ -20,13 +20,16 @@ Built using Godot 4.2.1
 - Alpha lock has been added as a global tool option. When enabled, users can only draw on non-transparent pixels.
 - Export to webp and jpeg file formats. Webp is currently only for static images and does not support animations.
 - A basic Command Line Interface has been implemented, to help with automating mass project file exporting. [#579](https://github.com/Orama-Interactive/Pixelorama/discussions/579)
+- Dragging and dropping multiple frames or layers to re-arrange them is now (finally!) supported, instead of only moving the last layer/frame selected.
 - Exporting the project's data to a separate JSON file is now possible from the export dialog.
 - Native file dialogs are now supported and can be enabled from the Preferences!
 - Dialog popups can now be native OS windows instead of embedded within Pixelorama's main window. This can be changed from the Preferences.
 - Added some missing shortcuts for buttons. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Palette colors can now be sorted.
+- Added new Pixelize and Palettize effects. Pixelize makes the image pixelated, and Palettize maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. Can also act as a workaround for the current lack of a proper indexed mode.
 - Exporting each layer as a different file is now possible.
 - The brush increment/decrement shortcuts can now be changed. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
+- Changing layers is now possible with keyboard shortcuts (Control + Up/Down arrow keys by default).
 - A "Crop to Selection" option has been added to the Image menu, that crops the image based on the active selection.
 - A stabilizer for smoother drawing has been implemented.
 - Users can now add custom data in the form of text in their projects, layers, frames, tags and cels.
@@ -88,22 +91,26 @@ Built using Godot 3.5.2
 ### Fixed
 - Memory usage has been greatly optimized when doing operations such as drawing, image effects, selecting, transforming, etc, as the images stored in memory are now compressed. [#883](https://github.com/Orama-Interactive/Pixelorama/issues/883)
 - Fixed memory leak when applying image effects. [7235617db7c21837edc7ba7b95f2e7eeb1140691](https://github.com/Orama-Interactive/Pixelorama/commit/7235617db7c21837edc7ba7b95f2e7eeb1140691)
-- Fixed memory leak when previewing layouts in the Manage Layouts dialog.
+- Fixed memory leak when previewing layouts in the Manage Layouts dialog. [b2f511c45be61cd26f01e134bf7a6a55109f46ad](https://github.com/Orama-Interactive/Pixelorama/commit/b2f511c45be61cd26f01e134bf7a6a55109f46ad)
 - Attempting to load an invalid pxo file no longer crashes the application. [3f6e1385e06cd7801fe12fbf90a9649557ea8f2e](https://github.com/Orama-Interactive/Pixelorama/commit/3f6e1385e06cd7801fe12fbf90a9649557ea8f2e)
 - Tool shortcuts can now work with <kbd>Control</kbd>. [#935](https://github.com/Orama-Interactive/Pixelorama/issues/935)
 - Optimize canvas drawing by only updating it when the image(s) have changed. [ac6a4db43d9296ebc03e639d8199dd3878a25d86](https://github.com/Orama-Interactive/Pixelorama/commit/ac6a4db43d9296ebc03e639d8199dd3878a25d86)
 - Fix bug where using shortcuts to switch between frames also moved the selection, causing deletions.
 - Pxo files can now be loaded from the Open menu option in the Web version. [3dcc51705a999145e53a8e6d4de217dc03b0f147](https://github.com/Orama-Interactive/Pixelorama/commit/3dcc51705a999145e53a8e6d4de217dc03b0f147)
 - The same frames are no longer being exported multiple times when "Selected frames" is selected, and multiple cels of the same frames are currently selected on the timeline. [#1001](https://github.com/Orama-Interactive/Pixelorama/issues/1001)
-- Fixed crash due to division by zero when locking two or three ValueSliders, and one of them has the value of 0 and the user attempts to change it.
-- Fixed exporting selected layers not including the non-selected frames.
+- Fixed crash due to division by zero when locking two or three ValueSliders, and one of them has the value of 0 and the user attempts to change it. [3b8c63c4a6a3325707ef624942ea50834634e45c](https://github.com/Orama-Interactive/Pixelorama/commit/3b8c63c4a6a3325707ef624942ea50834634e45c)
+- Fixed exporting selected layers not including the non-selected frames. [324e21776de853e6ea24703d5724a491547371ab](https://github.com/Orama-Interactive/Pixelorama/commit/324e21776de853e6ea24703d5724a491547371ab)
+- Fix bug where images with width or height 1 are being completely cleared by image effects. [fcfc606861d247856db5473b702628ebd71df43f](https://github.com/Orama-Interactive/Pixelorama/commit/fcfc606861d247856db5473b702628ebd71df43f)
 - Made the color picker not select fully transparent pixels that are not black. [#999](https://github.com/Orama-Interactive/Pixelorama/issues/999)
+- Brushes are no longer being drawn outside the selection, if the selection is outside the canvas. [5f43a3e2829a7119d18d0762796222f20170f410](https://github.com/Orama-Interactive/Pixelorama/commit/5f43a3e2829a7119d18d0762796222f20170f410)
+- Bucket "similar color" and "whole selection" modes and image effects no longer affect pixels outside the selection area, if the selection is outside the canvas. [436406a527f0db67c5e2b58a90b43597b3168600](https://github.com/Orama-Interactive/Pixelorama/commit/436406a527f0db67c5e2b58a90b43597b3168600)
 - The ellipse tool no longer produces gaps with large sizes. [4f3a7a305a264e0d2fe86c201af76eca4b2fea0a](https://github.com/Orama-Interactive/Pixelorama/commit/4f3a7a305a264e0d2fe86c201af76eca4b2fea0a)
 - Fix "visible layers" option on the export dialog producing wrong results. [346d1f071a8c6b1defb1072d39aea9c642f1ef59](https://github.com/Orama-Interactive/Pixelorama/commit/346d1f071a8c6b1defb1072d39aea9c642f1ef59)
 - Random brushes now work again. [1317e40ffa5e9f01a9d214221bb5133db20a1de9](https://github.com/Orama-Interactive/Pixelorama/commit/1317e40ffa5e9f01a9d214221bb5133db20a1de9)
-- Fixed issue where the override.cfg file would be created at the wrong location, if Pixelorama is launched through a shortcut.
+- Fixed issue where the override.cfg file would be created at the wrong location, if Pixelorama is launched through a shortcut. [0c6566de761a683a0e8a781131024a1dedb9734f](https://github.com/Orama-Interactive/Pixelorama/commit/0c6566de761a683a0e8a781131024a1dedb9734f)
 - The gizmo in the rotation image effect dialog is now accurately following the mouse.
-- Fixed the size label not being updated on the Export dialog's spritesheet tab when the direction changes.
+- Fixed the size label not being updated on the Export dialog's spritesheet tab when the direction changes. [9a5eb9720d2328f914f8efc3b9aa605dadca99b0](https://github.com/Orama-Interactive/Pixelorama/commit/9a5eb9720d2328f914f8efc3b9aa605dadca99b0)
+- The "Export dimensions" label in the export dialog no longer shows fractions as the final image's size.
 
 ## [v0.11.3] - 2023-10-30
 This update has been brought to you by the contributions of:
