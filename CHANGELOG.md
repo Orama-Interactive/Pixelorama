@@ -71,7 +71,7 @@ Built using Godot 4.2.1
 - The aspect ratio is now being kept correctly in image effect dialog previews.
 - Dividing by zero in value sliders and spinboxes no longer crashes the program.
 
-## [v0.11.4] - Unreleased
+## [v0.11.4] - 2024-04-17
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
