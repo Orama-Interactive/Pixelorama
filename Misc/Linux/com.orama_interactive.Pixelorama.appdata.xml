@@ -6,8 +6,7 @@
   <summary>2D sprite editor with animation support</summary>
   <description>
     <p>
-      Pixelorama is a free and open source 2D sprite editor, made by Orama
-      Interactive in the Godot Engine using GDScript.
+      Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features.
     </p>
   </description>
   <metadata_license>CC0-1.0</metadata_license>
@@ -37,6 +36,7 @@
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
+	<release version="0.11.4" date="2024-04-17"/>
 	<release version="0.11.3" date="2023-10-30"/>
 	<release version="0.11.2" date="2023-08-31"/>
 	<release version="0.11.1" date="2023-08-12"/>

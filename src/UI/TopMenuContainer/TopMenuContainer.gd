@@ -714,12 +714,12 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		Global.HelpMenu.OPEN_LOGS_FOLDER:
-			var dir = Directory.new()
+			var dir := Directory.new()
 			dir.make_dir_recursive("user://logs")  # In case someone deleted it
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0113---2023-10-30"
+				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0114---2024-04-17"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))

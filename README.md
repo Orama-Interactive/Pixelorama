@@ -2,7 +2,7 @@
     <h1 align = "center">Pixelorama - pixelate your dreams!</h1>
 </p>
 <p align="center">
-    Pixelorama is a free and open source pixel art editor, proudly created with the Godot Engine, by Orama Interactive. Whether you want to make animated pixel art, game graphics, tiles and any kind of pixel art you want, Pixelorama has you covered with its variety of tools and features. Free to use for everyone, forever!
+    Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features.
 </p>
 <p align="center">
     <a href="https://github.com/Orama-Interactive/Pixelorama/actions">
@@ -56,32 +56,28 @@ You can also find early access builds in the [GitHub Actions page](https://githu
 Keep in mind that these versions will have bugs and are unstable. Unless you're interested in testing the main branch of Pixelorama, it's recommended that you stick to a stable version.
 
 ## Documentation
-You can find Online Documentation for Pixelorama here: https://orama-interactive.github.io/Pixelorama-Docs
+You can find online Documentation for Pixelorama here: https://orama-interactive.github.io/Pixelorama-Docs
 
 It's still work in progress so there are some pages missing. If you want to contribute, you can do so in [Pixelorama-Docs' GitHub Repository](https://github.com/Orama-Interactive/Pixelorama-Docs).
 
 ## Cloning Instructions
-Pixelorama uses Godot 3.5, so you will need to have it in order to run the project. Older versions may not work.
+Pixelorama uses Godot 3.5.2, so you will need to have it in order to run the project. Older versions may not work.
 As of right now, most of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
-## Current features:
-- A variety of different tools to help you draw, with the ability to map a different tool in each left and right mouse buttons.
-- Are you an animator? Pixelorama has its own animation timeline just for you! You can work at an individual cel level, where each cel refers to a unique layer and frame. Supports onion skinning, cel linking, motion drawing and frame grouping with tags.
-- Custom brushes, including random brushes.
-- Create or import custom palettes.
-- Import images and edit them inside Pixelorama. If you import multiple files, they will be added as individual animation frames. Importing spritesheets is also supported.
-- Export your gorgeous art as `PNG`, as a single file, a spritesheet or multiple files, or `GIF` and `APNG` animated file.
-- Pixel perfect mode for perfect lines, for the pencil, eraser & lighten/darken tools.
-- Dynamics, such as tablet pen pressure.
+## Features:
+- A variety of different tools to help you create, with the ability to dynamically map each one on the left and the right mouse buttons with a single click.
+- Animation support with a timeline composed of layers and frames, with onion skinning, frame tags and the ability to draw while the animation is playing.
+- Pixel perfect mode for perfect pixel lines.
+- Pre-made palettes as well as many palette importing options.
+- Multiple image manipulation effects.
+- A powerful drawing canvas with guides, a rectangular and an isometric grid, and tile mode for easier seamless pattern creation.
 - Autosave support, with data recovery in case of a software crash.
+- Comprehensive user interface with many customizability options.
+- Export to PNG, as well as spritesheets, GIFs and animated PNGs.
+- Import spritesheets and multiple images as separate frames.
+- Various rotation and scaling algorithms tailored for pixel art, such as [cleanEdge](http://torcado.com/cleanEdge/), OmniScale and rotxel.
 - 3D layers that allow you to bring 3D shapes and models into your 2D canvas.
-- Load reference images to help you draw.
-- Horizontal & vertical mirrored drawing.
-- Tile Mode for pattern creation.
-- Rectangular & isometric grid types.
-- Guides that can be snapped to.
-- A perspective editor to help you create artwork with depth.
-- Scale, rotate and apply multiple image effects to your drawings. Rotation offers multiple algorithms, tailored for pixel art.
+- Fully open source with free updates, forever!
 - Multi-language localization support! See our [Crowdin page](https://crowdin.com/project/pixelorama) for more details.
 
 

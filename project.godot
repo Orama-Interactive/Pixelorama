@@ -333,7 +333,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Pixelorama"
-config/description="A free & open-source 2D sprite editor"
+config/description="Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features. "
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 run/low_processor_mode=true
@@ -343,7 +343,7 @@ config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
-config/Version="v0.11.4-rc3"
+config/Version="v0.11.4-stable"
 config/ExtensionsAPI_Version=3
 config/Pxo_Version=2
 
