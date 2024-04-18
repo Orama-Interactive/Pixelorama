@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-04-18 01:47\n"
+"PO-Revision-Date: 2024-04-18 02:49\n"
 
 msgid "OK"
 msgstr "确定"
@@ -25,13 +25,13 @@ msgid "Save"
 msgstr "保存"
 
 msgid "Please Confirm..."
-msgstr "确认..."
+msgstr "请确认..."
 
 msgid "File Name:"
 msgstr "文件名称："
 
 msgid "Project Name:"
-msgstr "项目名称："
+msgstr "项目名称:"
 
 msgid "Image Size"
 msgstr "图像大小"
@@ -46,10 +46,10 @@ msgid "Size:"
 msgstr "尺寸："
 
 msgid "Width:"
-msgstr "宽度:"
+msgstr "宽度："
 
 msgid "Height:"
-msgstr "高度:"
+msgstr "高度："
 
 msgid "Center"
 msgstr "中心"
@@ -207,10 +207,10 @@ msgid "Smear options:"
 msgstr "涂抹选项："
 
 msgid "Tolerance:"
-msgstr "容差:"
+msgstr "容差："
 
 msgid "Initial angle:"
-msgstr "初始角度:"
+msgstr "初始角度："
 
 msgid "Clear"
 msgstr "取消选中"
@@ -240,16 +240,16 @@ msgid "Tile Mode Offsets"
 msgstr "平铺模式偏移"
 
 msgid "X-basis x:"
-msgstr "X-基准 x:"
+msgstr "X-基准 x："
 
 msgid "X-basis y:"
-msgstr "X-基准 y:"
+msgstr "X-基准 y："
 
 msgid "Y-basis x:"
-msgstr "Y-基准 x:"
+msgstr "Y-基准 x："
 
 msgid "Y-basis y:"
-msgstr "Y-基准 y:"
+msgstr "Y-基准 y："
 
 msgid "Tile Mask"
 msgstr "平铺蒙版"
@@ -380,7 +380,7 @@ msgid "Fullscreen Mode"
 msgstr "全屏模式"
 
 msgid "Fill with color:"
-msgstr "使用颜色填充:"
+msgstr "使用颜色填充："
 
 msgid "Open a File"
 msgstr "打开一个文件"
@@ -534,7 +534,7 @@ msgid "Frame"
 msgstr "帧"
 
 msgid "Frames:"
-msgstr "帧:"
+msgstr "帧："
 
 msgid "All Frames"
 msgstr "所有帧"
@@ -549,7 +549,7 @@ msgid "Preview:"
 msgstr "预览："
 
 msgid "Frame:"
-msgstr "帧:"
+msgstr "帧："
 
 msgid "Orientation:"
 msgstr "方向："
@@ -558,7 +558,7 @@ msgid "Browse"
 msgstr "浏览"
 
 msgid "Resize:"
-msgstr "调整大小:"
+msgstr "调整大小："
 
 msgid "Cancel Export"
 msgstr "取消导出"
@@ -618,7 +618,7 @@ msgid "Columns"
 msgstr "列"
 
 msgid "Columns:"
-msgstr "列:"
+msgstr "列："
 
 msgid "Rows"
 msgstr "行"
@@ -639,16 +639,16 @@ msgid "Export dimensions:"
 msgstr "导出尺寸："
 
 msgid "Path:"
-msgstr "路径:"
+msgstr "路径："
 
 msgid "Directories & Files:"
-msgstr "目录和文件:"
+msgstr "目录和文件："
 
 msgid "Create Folder"
 msgstr "创建文件夹"
 
 msgid "File:"
-msgstr "文件:"
+msgstr "文件："
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -763,10 +763,10 @@ msgid "Affect Brush's Alpha"
 msgstr "效果笔刷 Alpha"
 
 msgid "Color:"
-msgstr "颜色:"
+msgstr "颜色："
 
 msgid "Guide color:"
-msgstr "辅助线颜色:"
+msgstr "辅助线颜色："
 
 msgid "System Language"
 msgstr "系统语言"
@@ -987,10 +987,10 @@ msgid "Place inside image"
 msgstr "放置在图片中"
 
 msgid "Thickness:"
-msgstr "厚度:"
+msgstr "厚度："
 
 msgid "Colors:"
-msgstr "颜色:"
+msgstr "颜色："
 
 msgid "Steps:"
 msgstr "步骤："
@@ -1645,7 +1645,7 @@ msgid "End"
 msgstr "结束"
 
 msgid "Brush:"
-msgstr "画笔:"
+msgstr "画笔："
 
 msgid "Select a brush"
 msgstr "选择一个画笔"
@@ -1663,7 +1663,7 @@ msgid "Custom brush"
 msgstr "自定义画笔"
 
 msgid "Brush size:"
-msgstr "画笔大小:"
+msgstr "画笔大小："
 
 msgid "Overwrite color"
 msgstr "覆盖颜色"
@@ -1753,13 +1753,13 @@ msgid "Darken"
 msgstr "加深"
 
 msgid "Amount:"
-msgstr "数量:"
+msgstr "数量："
 
 msgid "Lighten/Darken amount"
 msgstr "减淡/加深数量"
 
 msgid "Pick for:"
-msgstr "拾取:"
+msgstr "拾取："
 
 msgid "Left Color"
 msgstr "左键颜色"
@@ -1780,7 +1780,7 @@ msgid "Options"
 msgstr "选项"
 
 msgid "Options:"
-msgstr "选项:"
+msgstr "选项："
 
 msgid "Fit to frame"
 msgstr "适合帧率"
@@ -1820,7 +1820,7 @@ msgid "Vertical"
 msgstr "垂直"
 
 msgid "Current frame:"
-msgstr "当前帧:"
+msgstr "当前帧："
 
 msgid "Animation mode:"
 msgstr "动画模式："
@@ -1867,7 +1867,7 @@ msgid "Ping-pong loop"
 msgstr "乒乓循环"
 
 msgid "Onion Skinning:"
-msgstr "洋葱皮:"
+msgstr "洋葱皮："
 
 msgid "Past Frames"
 msgstr "过去帧"
@@ -2094,7 +2094,7 @@ msgid "Luminosity"
 msgstr "明度"
 
 msgid "Opacity:"
-msgstr "不透明度:"
+msgstr "不透明度："
 
 msgid "Tile mode opacity:"
 msgstr "平铺模式不透明度："
@@ -2247,10 +2247,10 @@ msgid "Create Palette From Current Sprite"
 msgstr "从当前 Sprite 创建调色板"
 
 msgid "Palette Name:"
-msgstr "调色板名称:"
+msgstr "调色板名称："
 
 msgid "Color Name:"
-msgstr "颜色名称:"
+msgstr "颜色名称："
 
 msgid "Use current left & right colors"
 msgstr "使用当前左侧和右侧颜色"
@@ -2280,7 +2280,7 @@ msgid "Get colors from"
 msgstr "获取颜色从"
 
 msgid "Patrons:"
-msgstr "赞助:"
+msgstr "赞助："
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "想要在启动屏幕上显示您的名字或公司吗？"
@@ -2334,7 +2334,7 @@ msgid "Preset"
 msgstr "预设"
 
 msgid "Preset:"
-msgstr "预设:"
+msgstr "预设："
 
 msgid "Default"
 msgstr "默认"
@@ -2519,11 +2519,11 @@ msgstr "移动所选帧到右侧。"
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr "帧持续时间："
+msgstr "帧持续时间:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr "用户数据："
+msgstr "用户数据:"
 
 msgid "Duration"
 msgstr "持续时间"
@@ -2663,10 +2663,10 @@ msgid "Locked Aspect Ratio"
 msgstr "锁定长宽比"
 
 msgid "Margins:"
-msgstr "边距:"
+msgstr "边距："
 
 msgid "Aspect Ratio:"
-msgstr "长宽比:"
+msgstr "长宽比："
 
 msgid "Top:"
 msgstr "顶部："
@@ -2825,7 +2825,7 @@ msgid "Bottom radius:"
 msgstr "下半径："
 
 msgid "Text:"
-msgstr "文本:"
+msgstr "文本："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
