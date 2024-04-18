@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 4.2.1
+  GODOT_VERSION: 4.2.2
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.2.1
+      image: docker://barichello/godot-ci:4.2.2
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
@@ -60,7 +60,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.2.1
+      image: docker://barichello/godot-ci:4.2.2
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
