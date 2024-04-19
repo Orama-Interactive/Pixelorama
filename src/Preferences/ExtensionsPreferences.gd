@@ -11,6 +11,9 @@ extends VBoxContainer
 
 
 func _ready() -> void:
+	for extension_name: String in extensions.extensions:
+		var extension: Extensions.Extension = extensions.extensions[extension_name]
+		_extension_loaded(extension, extension_name)
 	extensions.extension_loaded.connect(_extension_loaded)
 	extensions.extension_uninstalled.connect(_extension_uninstalled)
 	delete_confirmation.add_button(tr("Move to Trash"), false, Extensions.BIN_ACTION)
