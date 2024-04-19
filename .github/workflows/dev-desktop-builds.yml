@@ -119,6 +119,7 @@ jobs:
         run: |
           chown runner ./Godot.app/Contents/MacOS/Godot
           chmod +x ./Godot.app/Contents/MacOS/Godot
+          rm ./pixelorama_data/.gdignore
           ./Godot.app/Contents/MacOS/Godot --headless -v --export-release "macOS" ./build/mac/Pixelorama.zip
       - name: Make application executable 🔧
         run: |
@@ -127,10 +128,6 @@ jobs:
           rm ./build/mac/Pixelorama.zip
       - name: Fix application icon 🖼
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
-      - name: Copy pixelorama_data folder 📁
-        run: |
-          cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/Resources
-          rm ./build/mac/Pixelorama.app/Contents/Resources/pixelorama_data/.gdignore
       - name: Ad-hoc signing ✍️
         run: codesign -s - --force --deep ./build/mac/Pixelorama.app
       - name: Create DMG archive 🔧

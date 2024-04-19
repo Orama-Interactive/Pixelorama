@@ -659,6 +659,8 @@ func _init() -> void:
 	loaded_locales.sort()  # Make sure locales are always sorted
 	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()
+	if OS.get_name() == "macOS":
+		root_directory = "res://"
 	data_directories.append(root_directory.path_join(CONFIG_SUBDIR_NAME))
 	if OS.get_name() in ["Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]:
 		# Checks the list of files var, and processes them.
