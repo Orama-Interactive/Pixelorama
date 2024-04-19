@@ -53,7 +53,7 @@ unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.337255, 1, 0, 1)
 layout_mode = 2
-text = "Done!!!"
+text = "Downloaded successfully"
 
 [node name="DoneDelay" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/Done"]
 wait_time = 2.0

@@ -47,7 +47,8 @@ func set_info(info: Dictionary, extension_path: String) -> void:
 
 func _on_RequestDelay_timeout() -> void:
 	request_delay.queue_free()  # node no longer needed
-	thumbnail_request.request(thumbnail)  # image
+	if not thumbnail.is_empty():
+		thumbnail_request.request(thumbnail)  # image
 
 
 func _on_ImageRequest_request_completed(
@@ -92,7 +93,7 @@ func _on_DownloadRequest_request_completed(
 	else:
 		alert_dialog.get_node("Text").text = (
 			str(
-				"Unable to Download extension...\nHttp Code: ",
+				"Unable to download extension.\nHttp Code: ",
 				result,
 				" (",
 				error_string(result),
@@ -111,7 +112,7 @@ func announce_done(success: bool) -> void:
 	down_button.disabled = false
 	if success:
 		done_label.visible = true
-		down_button.text = "Re-Download"
+		down_button.text = "Redownload"
 		done_label.get_node("DoneDelay").start()
 
 
@@ -138,7 +139,7 @@ func change_button_if_updatable(extension_name: String, new_version: float) -> v
 					down_button.text = "Update"
 					is_update = true
 				elif new_version == old_version:
-					down_button.text = "Re-Download"
+					down_button.text = "Redownload"
 
 
 ## Show an enlarged version of the thumbnail
