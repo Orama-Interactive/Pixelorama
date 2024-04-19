@@ -27,7 +27,8 @@ var tools := ToolAPI.new()  ## Gives ability to add/remove tools.
 var selection := SelectionAPI.new()  ## Gives access to pixelorama's selection system.
 var project := ProjectAPI.new()  ## Gives access to project manipulation.
 var export := ExportAPI.new()  ## Gives access to adding custom exporters.
-var import := ImportAPI.new()  ## Gives access to adding custom exporters.
+var import := ImportAPI.new()  ## Gives access to adding custom import options.
+var palette := PaletteAPI.new()  ## Gives access to palettes.
 var signals := SignalsAPI.new()  ## Gives access to the basic commonly used signals.
 
 ## This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
@@ -710,6 +711,19 @@ class ImportAPI:
 		OpenSave.custom_import_names.erase(import_name)
 		OpenSave.custom_importer_scenes.erase(id)
 		ExtensionsApi.remove_action("ImportAPI", "add_import_option")
+
+
+## Gives access to palettes.
+class PaletteAPI:
+	## Creates and adds a new [Palette] with name [param palette_name] with [param data]
+	## in the form of a [Dictionary].
+	func create_palette_from_data(palette_name: String, data: Dictionary) -> void:
+		var palette := Palette.new(palette_name)
+		palette.deserialize_from_dictionary(data)
+		Palettes.save_palette(palette)
+		Palettes.palettes[palette_name] = palette
+		Palettes.select_palette(palette_name)
+		Palettes.new_palette_created.emit()
 
 
 ## Gives access to the basic commonly used signals.

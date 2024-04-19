@@ -54,6 +54,7 @@ func _ready() -> void:
 	sort_button_popup.add_item("Sort by blue", Palettes.SortOptions.BLUE)
 	sort_button_popup.add_item("Sort by alpha", Palettes.SortOptions.ALPHA)
 	Palettes.palette_selected.connect(select_palette)
+	Palettes.new_palette_created.connect(_new_palette_created)
 	Palettes.new_palette_imported.connect(setup_palettes_selector)
 	Tools.color_changed.connect(_color_changed)
 	sort_button_popup.id_pressed.connect(sort_pressed)
@@ -113,13 +114,13 @@ func redraw_current_palette() -> void:
 
 
 func toggle_add_delete_buttons() -> void:
-	add_color_button.disabled = Palettes.current_palette_is_full()
+	add_color_button.disabled = Palettes.current_palette.is_full()
 	if add_color_button.disabled:
 		add_color_button.mouse_default_cursor_shape = CURSOR_FORBIDDEN
 	else:
 		add_color_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
-	delete_color_button.disabled = Palettes.current_palette_is_empty()
-	sort_button.disabled = Palettes.current_palette_is_empty()
+	delete_color_button.disabled = Palettes.current_palette.is_empty()
+	sort_button.disabled = Palettes.current_palette.is_empty()
 	if delete_color_button.disabled:
 		delete_color_button.mouse_default_cursor_shape = CURSOR_FORBIDDEN
 		sort_button.mouse_default_cursor_shape = CURSOR_FORBIDDEN
@@ -195,8 +196,6 @@ func _on_create_palette_dialog_saved(
 	Palettes.create_new_palette(
 		preset, palette_name, comment, width, height, add_alpha_colors, colors_from
 	)
-	setup_palettes_selector()
-	redraw_current_palette()
 
 
 func _on_edit_palette_dialog_saved(
@@ -261,6 +260,11 @@ func _on_HiddenColorPickerButton_popup_closed() -> void:
 
 func _on_edit_palette_dialog_deleted(permanent: bool) -> void:
 	Palettes.current_palete_delete(permanent)
+	setup_palettes_selector()
+	redraw_current_palette()
+
+
+func _new_palette_created() -> void:
 	setup_palettes_selector()
 	redraw_current_palette()
 

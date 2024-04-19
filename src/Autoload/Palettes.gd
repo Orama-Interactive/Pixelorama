@@ -1,15 +1,14 @@
 extends Node
 
 signal palette_selected(palette_name: String)
+signal new_palette_created
 signal new_palette_imported
 
 enum SortOptions { NEW_PALETTE, REVERSE, HUE, SATURATION, VALUE, RED, GREEN, BLUE, ALPHA }
 ## Presets for creating a new palette
-enum NewPalettePresetType {
-	EMPTY = 0, FROM_CURRENT_PALETTE = 1, FROM_CURRENT_SPRITE = 2, FROM_CURRENT_SELECTION = 3
-}
+enum NewPalettePresetType {EMPTY, FROM_CURRENT_PALETTE, FROM_CURRENT_SPRITE, FROM_CURRENT_SELECTION}
 ## Color options when user creates a new palette from current sprite or selection
-enum GetColorsFrom { CURRENT_FRAME = 0, CURRENT_CEL = 1, ALL_FRAMES = 2 }
+enum GetColorsFrom { CURRENT_FRAME, CURRENT_CEL, ALL_FRAMES }
 const DEFAULT_PALETTE_NAME := "Default"
 var palettes_write_path := Global.home_data_directory.path_join("Palettes")
 ## All available palettes
@@ -53,7 +52,7 @@ func _ensure_palette_directory_exists() -> void:
 		dir.make_dir(palettes_write_path)
 
 
-func _save_palette(palette: Palette = current_palette) -> void:
+func save_palette(palette: Palette = current_palette) -> void:
 	_ensure_palette_directory_exists()
 	if not is_instance_valid(palette):
 		return
@@ -102,13 +101,14 @@ func create_new_palette(
 			_create_new_palette_from_current_selection(
 				palette_name, comment, width, height, add_alpha_colors, get_colors_from
 			)
+	new_palette_created.emit()
 
 
 func _create_new_empty_palette(
 	palette_name: String, comment: String, width: int, height: int
 ) -> void:
 	var new_palette := Palette.new(palette_name, width, height, comment)
-	_save_palette(new_palette)
+	save_palette(new_palette)
 	palettes[palette_name] = new_palette
 	select_palette(palette_name)
 
@@ -120,7 +120,7 @@ func _create_new_palette_from_current_palette(palette_name: String, comment: Str
 	new_palette.name = palette_name
 	new_palette.comment = comment
 	new_palette.path = palettes_write_path.path_join(new_palette.name) + ".json"
-	_save_palette(new_palette)
+	save_palette(new_palette)
 	palettes[palette_name] = new_palette
 	select_palette(palette_name)
 
@@ -194,7 +194,7 @@ func _fill_new_palette_with_colors(
 				if not new_palette.has_theme_color(color):
 					new_palette.add_color(color)
 
-	_save_palette(new_palette)
+	save_palette(new_palette)
 	palettes[new_palette.name] = new_palette
 	select_palette(new_palette.name)
 
@@ -202,7 +202,7 @@ func _fill_new_palette_with_colors(
 func current_palette_edit(palette_name: String, comment: String, width: int, height: int) -> void:
 	_check_palette_settings_values(palette_name, width, height)
 	current_palette.edit(palette_name, width, height, comment)
-	_save_palette()
+	save_palette()
 	palettes[palette_name] = current_palette
 
 
@@ -232,7 +232,7 @@ func current_palette_add_color(mouse_button: int, start_index := 0) -> void:
 		# Get color on left or right tool
 		var color := Tools.get_assigned_color(mouse_button)
 		current_palette.add_color(color, start_index)
-		_save_palette()
+		save_palette()
 
 
 func current_palette_get_color(index: int) -> Color:
@@ -241,12 +241,12 @@ func current_palette_get_color(index: int) -> Color:
 
 func current_palette_set_color(index: int, color: Color) -> void:
 	current_palette.set_color(index, color)
-	_save_palette()
+	save_palette()
 
 
 func current_palette_delete_color(index: int) -> void:
 	current_palette.remove_color(index)
-	_save_palette()
+	save_palette()
 
 
 func current_palette_sort_colors(id: SortOptions) -> void:
@@ -256,25 +256,25 @@ func current_palette_sort_colors(id: SortOptions) -> void:
 		current_palette.reverse_colors()
 	else:
 		current_palette.sort(id)
-	_save_palette()
+	save_palette()
 
 
 func current_palette_swap_colors(source_index: int, target_index: int) -> void:
 	current_palette.swap_colors(source_index, target_index)
 	_select_color(MOUSE_BUTTON_LEFT, target_index)
-	_save_palette()
+	save_palette()
 
 
 func current_palette_copy_colors(from: int, to: int) -> void:
 	current_palette.copy_colors(from, to)
-	_save_palette()
+	save_palette()
 
 
 func current_palette_insert_color(from: int, to: int) -> void:
 	var from_color: Palette.PaletteColor = current_palette.colors[from]
 	current_palette.remove_color(from)
 	current_palette.insert_color(to, from_color.color)
-	_save_palette()
+	save_palette()
 
 
 func current_palette_get_selected_color_index(mouse_button: int) -> int:
@@ -312,14 +312,6 @@ func _select_color(mouse_button: int, index: int) -> void:
 func _clear_selected_colors() -> void:
 	left_selected_color = -1
 	right_selected_color = -1
-
-
-func current_palette_is_empty() -> bool:
-	return current_palette.is_empty()
-
-
-func current_palette_is_full() -> bool:
-	return current_palette.is_full()
 
 
 func _check_palette_settings_values(palette_name: String, width: int, height: int) -> bool:
@@ -438,7 +430,7 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 
 	if is_instance_valid(palette):
 		if make_copy:
-			_save_palette(palette)  # Makes a copy of the palette
+			save_palette(palette)  # Makes a copy of the palette
 		palettes[palette.name] = palette
 		var default_palette_name: String = Global.config_cache.get_value(
 			"data", "last_palette", DEFAULT_PALETTE_NAME

@@ -103,11 +103,19 @@ func deserialize(json_string: String) -> void:
 	var data = test_json_conv.get_data()
 	if not typeof(data) == TYPE_DICTIONARY:
 		return
+	deserialize_from_dictionary(data)
+
+
+func deserialize_from_dictionary(data: Dictionary) -> void:
 	if data.has("comment"):
 		comment = data.comment
 	if data.has("colors"):
 		for color_data in data.colors:
-			var color := str_to_var("Color" + color_data["color"]) as Color
+			var color: Color
+			if typeof(color_data["color"]) == TYPE_STRING:
+				color = str_to_var("Color" + color_data["color"])
+			elif typeof(color_data["color"]) == TYPE_COLOR:
+				color = color_data["color"]
 			var index := color_data["index"] as int
 			var palette_color := PaletteColor.new(color, index)
 			colors[index] = palette_color
