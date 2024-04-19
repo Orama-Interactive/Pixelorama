@@ -19,10 +19,9 @@
 
 // For further help see the entries below for reference of how it's done
 ## Entries:
-// Put Official Extensions Here
 [["name", "LospecPaletteImporter"], ["version", 1.0], ["description", "A Pixelorama extension for downloading and importing palettes directly from Lospec. "], ["tags", "Palettes"], ["download_link", "https://github.com/OverloadedOrama/Lospec-Palette-Importer/releases/download/v1.0/LospecPaletteImporter.pck"]]
 
 
-## Other Store Links:
+## Other store links:
 ### VariableStore
 https://raw.githubusercontent.com/Variable-ind/Pixelorama-Extensions/4.0/store_info.md
