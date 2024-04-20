@@ -19,7 +19,8 @@
 
 // For further help see the entries below for reference of how it's done
 ## Entries:
-[["name", "LospecPaletteImporter"], ["version", 1.0], ["description", "A Pixelorama extension for downloading and importing palettes directly from Lospec. "], ["tags", "Palettes"], ["download_link", "https://github.com/OverloadedOrama/Lospec-Palette-Importer/releases/download/v1.0/LospecPaletteImporter.pck"]]
+[["name", "LospecPaletteImporter"], ["version", 1.0], ["description", "A Pixelorama extension for downloading and importing palettes directly from Lospec."], ["tags", "Palettes"], ["download_link", "https://github.com/OverloadedOrama/Lospec-Palette-Importer/releases/download/v1.0/LospecPaletteImporter.pck"]]
+[["name", "OpenDyslexicFont"], ["version", 1.0], ["description", "A Pixelorama extension that sets the OpenDyslexic font as the main font of the user interface."], ["tags", "Palettes"], ["download_link", "https://github.com/OverloadedOrama/OpenDyslexic-Pixelorama-Extension/releases/download/v1.0/OpenDyslexicFont.pck"]]
 
 
 ## Other store links:
