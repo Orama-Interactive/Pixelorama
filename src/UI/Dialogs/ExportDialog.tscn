@@ -286,7 +286,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Export JSON data"
 
-[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer"]
+[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Split layers"
