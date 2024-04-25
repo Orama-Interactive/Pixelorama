@@ -46,6 +46,7 @@ If you like, consider helping us by sponsoring this project! It would enable us 
 
 ## Download
 Stable versions:
+- [Steam (available soon on Windows & Linux)](https://store.steampowered.com/app/2779170?utm_source=github)
 - [Itch.io (Windows, Linux, Mac & Web)](https://orama-interactive.itch.io/pixelorama)
 - [GitHub Releases (Windows, Linux & Mac)](https://github.com/Orama-Interactive/Pixelorama/releases)
 - [GitHub Pages (Web)](https://orama-interactive.github.io/Pixelorama/)
