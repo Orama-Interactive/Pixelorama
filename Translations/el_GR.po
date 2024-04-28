@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-03-15 00:51\n"
+"PO-Revision-Date: 2024-04-15 00:43\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -995,6 +995,14 @@ msgstr "Χρώματα:"
 msgid "Steps:"
 msgstr "Βαθμίδες:"
 
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+msgid "Palettize"
+msgstr "Παλετοποίηση"
+
+#. An image effect. It makes the input image pixelated.
+msgid "Pixelize"
+msgstr "Δημιουργία εικονοστοιχείων"
+
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
 msgstr "Αφίσα"
@@ -1945,8 +1953,14 @@ msgstr "Αποσύνδεση cels"
 msgid "Properties"
 msgstr "Ιδιότητες"
 
+msgid "Project Properties"
+msgstr "Ιδιότητες έργου"
+
 msgid "Frame properties"
 msgstr "Ιδιότητες καρέ"
+
+msgid "Layer properties"
+msgstr "Ιδιότητες στρώσης"
 
 msgid "Cel properties"
 msgstr "Ιδιότητες cel"
@@ -2440,6 +2454,10 @@ msgstr "Χρονικό διάστημα αυτόματης αποθήκευση�
 msgid "minute(s)"
 msgstr "λεπτό(ά)"
 
+#. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
+msgid "Export JSON data"
+msgstr "Εξαγωγή δεδομένων JSON"
+
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
 msgstr "Διαχωρισμός στρώσεων"
@@ -2499,8 +2517,13 @@ msgstr "Μετακίνηση του επιλεγμένου καρέ προς τ�
 msgid "Move the selected frame to the right."
 msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά."
 
-msgid "Frame duration"
-msgstr "Διάρκεια καρέ"
+#. Refers to the duration of the frame. Found in the frame properties.
+msgid "Frame duration:"
+msgstr "Διάρκεια καρέ:"
+
+#. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
+msgid "User data:"
+msgstr "Δεδομένα χρήστη:"
 
 msgid "Duration"
 msgstr "Διάρκεια"

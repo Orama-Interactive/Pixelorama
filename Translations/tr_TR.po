@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-03-09 12:49\n"
+"PO-Revision-Date: 2024-04-09 23:29\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -994,6 +994,14 @@ msgstr "Renkler:"
 msgid "Steps:"
 msgstr "Adımlar:"
 
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+msgid "Palettize"
+msgstr "Paletleştir"
+
+#. An image effect. It makes the input image pixelated.
+msgid "Pixelize"
+msgstr "Pikselleştir"
+
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
 msgstr "Posterleştir"
@@ -1944,8 +1952,14 @@ msgstr "Hücre bağlantısını kaldır"
 msgid "Properties"
 msgstr "Özellikler"
 
+msgid "Project Properties"
+msgstr "Proje Özellikleri"
+
 msgid "Frame properties"
 msgstr "Kare özellikleri"
+
+msgid "Layer properties"
+msgstr "Katman Özellikleri"
 
 msgid "Cel properties"
 msgstr "Hücre özellikleri"
@@ -2439,6 +2453,10 @@ msgstr "Otomatik kaydetme sıklığı:"
 msgid "minute(s)"
 msgstr "dakika"
 
+#. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
+msgid "Export JSON data"
+msgstr "JSON verilerini dışa aktar"
+
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
 msgstr "Katmanları ayır"
@@ -2498,8 +2516,13 @@ msgstr "Seçili kareyi sola taşı."
 msgid "Move the selected frame to the right."
 msgstr "Seçili kareyi sağa taşı."
 
-msgid "Frame duration"
-msgstr "Kare süresi"
+#. Refers to the duration of the frame. Found in the frame properties.
+msgid "Frame duration:"
+msgstr "Kare süresi:"
+
+#. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
+msgid "User data:"
+msgstr "Kullanıcı verileri:"
 
 msgid "Duration"
 msgstr "Süre"

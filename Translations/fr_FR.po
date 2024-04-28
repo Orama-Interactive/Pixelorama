@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-03-09 01:45\n"
+"PO-Revision-Date: 2024-04-10 18:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -994,6 +994,14 @@ msgstr "Couleurs:"
 msgid "Steps:"
 msgstr "Étapes:"
 
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+msgid "Palettize"
+msgstr ""
+
+#. An image effect. It makes the input image pixelated.
+msgid "Pixelize"
+msgstr "Pixeliser"
+
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
 msgstr "Postériser"
@@ -1944,8 +1952,14 @@ msgstr "Délier le Cellulo"
 msgid "Properties"
 msgstr "Propriétés"
 
+msgid "Project Properties"
+msgstr "Propriétés du projet"
+
 msgid "Frame properties"
 msgstr "Propriétés de la frame"
+
+msgid "Layer properties"
+msgstr "Propriétés du calque"
 
 msgid "Cel properties"
 msgstr "Propriétés du Cellulo"
@@ -2439,6 +2453,10 @@ msgstr "Intervalle de l'enregistrement automatique :"
 msgid "minute(s)"
 msgstr "minute(s)"
 
+#. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
+msgid "Export JSON data"
+msgstr "Exporter les données JSON"
+
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
 msgstr "Séparer les calques"
@@ -2498,8 +2516,13 @@ msgstr "Déplacer la frame sélectionnée vers la gauche."
 msgid "Move the selected frame to the right."
 msgstr "Déplacer la frame sélectionnée vers la droite."
 
-msgid "Frame duration"
-msgstr "Durée de la frame"
+#. Refers to the duration of the frame. Found in the frame properties.
+msgid "Frame duration:"
+msgstr "Durée de la frame :"
+
+#. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
+msgid "User data:"
+msgstr "Données utilisateur :"
 
 msgid "Duration"
 msgstr "Durée"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Finnish\n"
 "Language: fi_FI\n"
-"PO-Revision-Date: 2024-03-09 01:45\n"
+"PO-Revision-Date: 2024-04-09 23:28\n"
 
 msgid "OK"
 msgstr ""
@@ -989,6 +989,14 @@ msgstr ""
 msgid "Steps:"
 msgstr ""
 
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+msgid "Palettize"
+msgstr ""
+
+#. An image effect. It makes the input image pixelated.
+msgid "Pixelize"
+msgstr ""
+
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
 msgstr ""
@@ -1889,7 +1897,13 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
+msgid "Project Properties"
+msgstr ""
+
 msgid "Frame properties"
+msgstr ""
+
+msgid "Layer properties"
 msgstr ""
 
 msgid "Cel properties"
@@ -2383,6 +2397,10 @@ msgstr ""
 msgid "minute(s)"
 msgstr ""
 
+#. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
+msgid "Export JSON data"
+msgstr ""
+
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
 msgstr ""
@@ -2441,7 +2459,12 @@ msgstr ""
 msgid "Move the selected frame to the right."
 msgstr ""
 
-msgid "Frame duration"
+#. Refers to the duration of the frame. Found in the frame properties.
+msgid "Frame duration:"
+msgstr ""
+
+#. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
+msgid "User data:"
 msgstr ""
 
 msgid "Duration"
