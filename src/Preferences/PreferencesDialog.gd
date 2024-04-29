@@ -188,7 +188,7 @@ var preferences: Array[Preference] = [
 	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0, true)
 ]
 
-var content_list := []
+var content_list := PackedStringArray([])
 var selected_item := 0
 
 @onready var list: ItemList = $HSplitContainer/List
@@ -242,12 +242,10 @@ func _ready() -> void:
 			continue
 		child.confirmed.connect(Tools.update_hint_tooltips)
 
-	for child in right_side.get_children():
-		content_list.append(child.name)
-
 	if OS.get_name() == "Web":
-		content_list.erase("Startup")
-		right_side.get_node("Startup").queue_free()
+		var startup := right_side.get_node("Startup")
+		right_side.remove_child(startup)
+		startup.queue_free()
 		right_side.get_node("Language").visible = true
 		Global.open_last_project = false
 	elif OS.get_name() == "Windows":
@@ -256,6 +254,11 @@ func _ready() -> void:
 		for driver in DisplayServer.tablet_get_driver_count():
 			var driver_name := DisplayServer.tablet_get_driver_name(driver)
 			tablet_driver.add_item(driver_name, driver)
+	if not OS.has_feature("pc"):
+		get_tree().call_group(&"DesktopOnly", &"queue_free")
+
+	for child in right_side.get_children():
+		content_list.append(child.name)
 
 	# Create buttons for each language
 	var system_language := language.get_node(^"System Language") as Button
@@ -273,6 +276,8 @@ func _ready() -> void:
 		button.pressed.connect(_on_language_pressed.bind(button.get_index()))
 
 	for pref in preferences:
+		if not right_side.has_node(pref.node_path):
+			continue
 		var node := right_side.get_node(pref.node_path)
 		var restore_default_button := RestoreDefaultButton.new()
 		restore_default_button.setting_name = pref.prop_name
