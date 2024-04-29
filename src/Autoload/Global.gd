@@ -660,7 +660,9 @@ func _init() -> void:
 	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	if OS.get_name() == "macOS":
-		data_directories.append(root_directory.path_join("../Resources").path_join(CONFIG_SUBDIR_NAME))
+		data_directories.append(
+			root_directory.path_join("../Resources").path_join(CONFIG_SUBDIR_NAME)
+		)
 	data_directories.append(root_directory.path_join(CONFIG_SUBDIR_NAME))
 	if OS.get_name() in ["Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]:
 		# Checks the list of files var, and processes them.
