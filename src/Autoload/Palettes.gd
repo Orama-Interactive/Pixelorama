@@ -381,7 +381,7 @@ func _get_palette_files(path: String) -> PackedStringArray:
 	var dir := DirAccess.open(path)
 	var results: PackedStringArray = []
 
-	if not is_instance_valid(dir) or not dir.dir_exists(path):
+	if !dir:
 		return []
 
 	dir.list_dir_begin()
