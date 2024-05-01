@@ -41,19 +41,19 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/windows-64bit  ~/.local/share/godot/export_templates
+          mkdir -v -p build/${EXPORT_NAME}-Windows-64bit  ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Windows Build 🔧
-        run: godot --headless -v --export-release "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
+        run: godot --headless -v --export-release "Windows Desktop 64-bit" ./build/${EXPORT_NAME}-Windows-64bit/$EXPORT_NAME.exe
       - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama_data ./build/windows-64bit
-          rm ./build/windows-64bit/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Windows-64bit
+          rm ./build/${EXPORT_NAME}-Windows-64bit/pixelorama_data/.gdignore
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-64bit
-          path: ./build/windows-64bit/
+          name: ${EXPORT_NAME}-Windows-64bit
+          path: ./build/${EXPORT_NAME}-Windows-64bit/
           retention-days: 14
 
   export-linux:
@@ -68,27 +68,27 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/linux-64bit ~/.local/share/godot/export_templates
+          mkdir -v -p build/${EXPORT_NAME}-Linux-64bit ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Linux Build 🔧
         run: |
-          godot --headless -v --export-release "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
+          godot --headless -v --export-release "Linux/X11 64-bit" ./build/${EXPORT_NAME}-Linux-64bit/$EXPORT_NAME.x86_64
       - name: Give execute permission ☑️
         run: |
-          chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
+          chmod +x ./build/${EXPORT_NAME}-Linux-64bit/$EXPORT_NAME.x86_64
       - name: Copy pixelorama_data folder 📁
         run: |
           rm ./pixelorama_data/.gdignore
-          cp -R ./pixelorama_data ./build/linux-64bit
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Linux-64bit
       - name: Create tar.gz archive 🗜️
         run: |
           cd build
-          tar zcvf linux-64bit.tar.gz linux-64bit
+          tar zcvf ${EXPORT_NAME}-Linux-64bit.tar.gz ${EXPORT_NAME}-Linux-64bit
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v4
         with:
-          name: Linux-64bit
-          path: ./build/linux-64bit.tar.gz
+          name: ${EXPORT_NAME}-Linux-64bit
+          path: ./build/${EXPORT_NAME}-Linux-64bit.tar.gz
           retention-days: 14
 
   export-mac:
@@ -102,7 +102,7 @@ jobs:
       - name: Setup environment 🔧
         run: |
           export GODOT_VERSION=${GODOT_VERSION}
-          export EXPORT_NAME=Pixelorama
+          export EXPORT_NAME=${EXPORT_NAME}
       - name: Download and extract export templates 💾
         run: |
           mkdir -v -p "/Users/runner/Library/Application Support/Godot/export_templates/${GODOT_VERSION}.stable"
@@ -119,25 +119,25 @@ jobs:
         run: |
           chown runner ./Godot.app/Contents/MacOS/Godot
           chmod +x ./Godot.app/Contents/MacOS/Godot
-          ./Godot.app/Contents/MacOS/Godot --headless -v --export-release "macOS" ./build/mac/Pixelorama.zip
+          ./Godot.app/Contents/MacOS/Godot --headless -v --export-release "macOS" ./build/mac/${EXPORT_NAME}.zip
       - name: Make application executable 🔧
         run: |
-          unzip -a ./build/mac/Pixelorama.zip -d ./build/mac
-          chmod +x ./build/mac/Pixelorama.app/Contents/MacOS/Pixelorama
-          rm ./build/mac/Pixelorama.zip
+          unzip -a ./build/mac/${EXPORT_NAME}.zip -d ./build/mac
+          chmod +x ./build/mac/${EXPORT_NAME}.app/Contents/MacOS/${EXPORT_NAME}
+          rm ./build/mac/${EXPORT_NAME}.zip
       - name: Fix application icon 🖼
-        run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
+        run: sips -s format icns ./build/mac/${EXPORT_NAME}.app/Contents/Resources/icon.icns --out ./build/mac/${EXPORT_NAME}.app/Contents/Resources/icon.icns
       - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/Resources
-          rm ./build/mac/Pixelorama.app/Contents/Resources/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/mac/${EXPORT_NAME}.app/Contents/Resources
+          rm ./build/mac/${EXPORT_NAME}.app/Contents/Resources/pixelorama_data/.gdignore
       - name: Ad-hoc signing ✍️
-        run: codesign -s - --force --deep ./build/mac/Pixelorama.app
+        run: codesign -s - --force --deep ./build/mac/${EXPORT_NAME}.app
       - name: Create DMG archive 🔧
-        run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname Pixelorama ./build/mac/Pixelorama.dmg
+        run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname ${EXPORT_NAME} ./build/mac/${EXPORT_NAME}.dmg
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v4
         with:
-          name: Mac
-          path: ./build/mac/Pixelorama.dmg
+          name: ${EXPORT_NAME}-Mac
+          path: ./build/mac/${EXPORT_NAME}.dmg
           retention-days: 14

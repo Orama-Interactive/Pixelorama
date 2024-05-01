@@ -5,7 +5,7 @@ on:
     branches: [ release ]
 
 env:
-  GODOT_VERSION: 4.1.1
+  GODOT_VERSION: 4.2.2
   EXPORT_NAME: Pixelorama
   TAG: v1.0
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
@@ -15,7 +15,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.1.1
+      image: docker://barichello/godot-ci:4.2.2
     steps:
       - name: Setup WINE, rcedit and NSIS 🍷
         run: |
@@ -33,34 +33,34 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/windows-64bit build/windows-32bit ~/.local/share/godot/export_templates
+          mkdir -v -p build/${EXPORT_NAME}-Windows-64bit build/${EXPORT_NAME}-Windows-32bit ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Windows Build 🔧
         run: |
-          godot --headless -v --export-release "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
-          godot --headless -v --export-release "Windows Desktop 32-bit" ./build/windows-32bit/$EXPORT_NAME.exe
+          godot --headless -v --export-release "Windows Desktop 64-bit" ./build/${EXPORT_NAME}-Windows-64bit/${EXPORT_NAME}.exe
+          godot --headless -v --export-release "Windows Desktop 32-bit" ./build/${EXPORT_NAME}-Windows-32bit/${EXPORT_NAME}.exe
       - name: Copy pixelorama_data folder 📁
         run: |
           rm ./pixelorama_data/.gdignore
-          cp -R ./pixelorama_data ./build/windows-64bit
-          cp -R ./pixelorama_data ./build/windows-32bit
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Windows-64bit
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Windows-32bit
           cp -R ./pixelorama_data ./build
       - name: Zip 🗜️
         working-directory: ./build
         run: |
-          zip -r Pixelorama.Windows-64bit.zip windows-64bit
-          zip -r Pixelorama.Windows-32bit.zip windows-32bit
+          zip -r ${EXPORT_NAME}-Windows-64bit.zip ${EXPORT_NAME}-Windows-64bit
+          zip -r ${EXPORT_NAME}-Windows-32bit.zip ${EXPORT_NAME}-Windows-32bit
       - name: Build installer 🔧
         run: |
           python3 ./installer/utils/po2nsi.py -i ./installer/pixelorama.nsi -o ./installer/pixelorama_loc.nsi -p ./installer/po -l "English" -v
           makensis ./installer/pixelorama_loc.nsi
           mkdir ./build/installer
-          mv ./installer/${EXPORT_NAME}_${TAG}_setup.exe ./build/installer
+          mv ./installer/${EXPORT_NAME}_${TAG}_setup.exe ./build
       - name: Upload Release Assets to itch.io 🎮
         run: |
-          butler push ./build/windows-64bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-64 --userversion ${{env.TAG}}
-          butler push ./build/windows-32bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-32 --userversion ${{env.TAG}}
-          butler push ./build/installer ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-installer --userversion ${{env.TAG}}
+          butler push ./build/${EXPORT_NAME}-Windows-64bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-64 --userversion ${TAG}
+          butler push ./build/${EXPORT_NAME}-Windows-32bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-32 --userversion ${TAG}
+          butler push ./build/${EXPORT_NAME}_${TAG}_setup.exe ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-installer --userversion ${TAG}
       - name: Upload Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
@@ -74,7 +74,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.1.1
+      image: docker://barichello/godot-ci:4.2.2
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -82,35 +82,45 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/linux-64bit build/linux-32bit ~/.local/share/godot/export_templates
+          mkdir -v -p build/${EXPORT_NAME}-Linux-64bit build/${EXPORT_NAME}-Linux-32bit build/${EXPORT_NAME}-Linux-ARM64 build/${EXPORT_NAME}-Linux-ARM32 ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Linux Build 🔧
         run: |
-          godot --headless -v --export-release "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
-          godot --headless -v --export-release "Linux/X11 32-bit" ./build/linux-32bit/$EXPORT_NAME.x86
+          godot --headless -v --export-release "Linux/X11 64-bit" ./build/${EXPORT_NAME}-Linux-64bit/${EXPORT_NAME}.x86_64
+          godot --headless -v --export-release "Linux/X11 32-bit" ./build/${EXPORT_NAME}-Linux-32bit/${EXPORT_NAME}.x86
+          godot --headless -v --export-release "Linux/X11 ARM64" ./build/${EXPORT_NAME}-Linux-ARM64/${EXPORT_NAME}.arm64
+          godot --headless -v --export-release "Linux/X11 ARM32" ./build/${EXPORT_NAME}-Linux-ARM32/${EXPORT_NAME}.arm32
       - name: Give execute permission ☑️
         run: |
-          chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
-          chmod +x ./build/linux-32bit/$EXPORT_NAME.x86
+          chmod +x ./build/${EXPORT_NAME}-Linux-64bit/${EXPORT_NAME}.x86_64
+          chmod +x ./build/${EXPORT_NAME}-Linux-32bit/${EXPORT_NAME}.x86
+          chmod +x ./build/${EXPORT_NAME}-Linux-ARM64/${EXPORT_NAME}.arm64
+          chmod +x ./build/${EXPORT_NAME}-Linux-ARM32/${EXPORT_NAME}.arm32
       - name: Copy pixelorama_data folder 📁
         run: |
           rm ./pixelorama_data/.gdignore
-          cp -R ./pixelorama_data ./build/linux-64bit
-          cp -R ./pixelorama_data ./build/linux-32bit
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Linux-64bit
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Linux-32bit
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Linux-ARM64
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Linux-ARM32
       - name: Create tar.gz archive 🗜️
         run: |
           cd build
-          tar zcvf Pixelorama.Linux-64bit.tar.gz linux-64bit
-          tar zcvf Pixelorama.Linux-32bit.tar.gz linux-32bit
+          tar zcvf ${EXPORT_NAME}-Linux-64bit.tar.gz ${EXPORT_NAME}-Linux-64bit
+          tar zcvf ${EXPORT_NAME}-Linux-32bit.tar.gz ${EXPORT_NAME}-Linux-32bit
+          tar zcvf ${EXPORT_NAME}-Linux-ARM64.tar.gz ${EXPORT_NAME}-Linux-ARM64
+          tar zcvf ${EXPORT_NAME}-Linux-ARM32.tar.gz ${EXPORT_NAME}-Linux-ARM32
       - name: Upload Release Assets to itch.io 🎮
         run: |
-          butler push ./build/Pixelorama.Linux-64bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-64 --userversion ${{env.TAG}}
-          butler push ./build/Pixelorama.Linux-32bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-32 --userversion ${{env.TAG}}
+          butler push ./build/${{env.EXPORT_NAME}}-Linux-64bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-x86_64 --userversion ${{env.TAG}}
+          butler push ./build/${{env.EXPORT_NAME}}-Linux-32bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-x86 --userversion ${{env.TAG}}
+          butler push ./build/${{env.EXPORT_NAME}}-Linux-ARM64.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-arm64 --userversion ${{env.TAG}}
+          butler push ./build/${{env.EXPORT_NAME}}-Linux-ARM32.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-arm32 --userversion ${{env.TAG}}
       - name: Upload Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/Pixelorama.Linux-*.tar.gz
+          file: ./build/${{env.EXPORT_NAME}}-Linux-*.tar.gz
           tag: ${{env.TAG}}
           overwrite: true
           file_glob: true
@@ -143,34 +153,33 @@ jobs:
         run: |
           chown runner ./Godot.app/Contents/MacOS/Godot
           chmod +x ./Godot.app/Contents/MacOS/Godot
-          ./Godot.app/Contents/MacOS/Godot --headless -v --export-release "macOS" ./build/mac/Pixelorama.zip
+          ./Godot.app/Contents/MacOS/Godot --headless -v --export-release "macOS" ./build/mac/${EXPORT_NAME}.zip
       - name: Make application executable 🔧
         run: |
-          unzip -a ./build/mac/Pixelorama.zip -d ./build/mac
-          chmod +x ./build/mac/Pixelorama.app/Contents/MacOS/Pixelorama
-          rm ./build/mac/Pixelorama.zip
+          unzip -a ./build/mac/${EXPORT_NAME}.zip -d ./build/mac
+          chmod +x ./build/mac/${EXPORT_NAME}.app/Contents/MacOS/${EXPORT_NAME}
+          rm ./build/mac/${EXPORT_NAME}.zip
       - name: Fix application icon 🖼
-        run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
+        run: sips -s format icns ./build/mac/${EXPORT_NAME}.app/Contents/Resources/icon.icns --out ./build/mac/${EXPORT_NAME}.app/Contents/Resources/icon.icns
       - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/Resources
-          rm ./build/mac/Pixelorama.app/Contents/Resources/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/mac/${EXPORT_NAME}.app/Contents/Resources
+          rm ./build/mac/${EXPORT_NAME}.app/Contents/Resources/pixelorama_data/.gdignore
       - name: Ad-hoc signing ✍️
-        run: codesign -s - --force --deep ./build/mac/Pixelorama.app
+        run: codesign -s - --force --deep ./build/mac/${EXPORT_NAME}.app
       - name: Create DMG archive 🔧
-        run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname Pixelorama ./build/mac/Pixelorama.dmg
+        run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname ${EXPORT_NAME} ./build/mac/${EXPORT_NAME}-Mac.dmg
       - name: Upload Release Assets to itch.io 🎮
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/darwin-amd64/LATEST/archive/default
           unzip butler.zip
           chmod +x butler
-          ./butler push ./build/mac/Pixelorama.dmg ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:mac --userversion ${{env.TAG}}
+          ./butler push ./build/mac/${{env.EXPORT_NAME}}-Mac.dmg ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:mac --userversion ${{env.TAG}}
       - name: Upload Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/mac/Pixelorama.dmg
-          asset_name: ${{env.EXPORT_NAME}}[Mac].dmg
+          file: ./build/mac/${{env.EXPORT_NAME}}-Mac.dmg
           tag: ${{env.TAG}}
           overwrite: true
     
@@ -178,7 +187,7 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.1.1
+      image: docker://barichello/godot-ci:4.2.2
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
