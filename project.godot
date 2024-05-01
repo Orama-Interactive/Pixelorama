@@ -622,7 +622,8 @@ activate_right_tool={
 }
 open_last_project={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":true,"pressed":false,"keycode":84,"physical_keycode":0,"key_label":0,"unicode":84,"echo":false,"script":null)
+]
 }
 preferences={
 "deadzone": 0.5,
