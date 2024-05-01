@@ -24,7 +24,7 @@ jobs:
         run: |
           cp -R ./pixelorama_data ./Misc/Clickable
       - name: Upload data files for click package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: pixelorama_click_data
           path: Misc/Clickable/
@@ -63,7 +63,7 @@ jobs:
         env:
           CLICKABLE_ARCH: ${{ matrix.architectures }}
       - name: Upload click package artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: pixelorama_click_packages
           path: Misc/Clickable/build/**.click
