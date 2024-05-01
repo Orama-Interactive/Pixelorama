@@ -332,16 +332,11 @@ func _load_palettes() -> void:
 	search_locations.reverse()
 	priority_ordered_files.reverse()
 	for i in range(search_locations.size()):
-		# If palette is not in palettes write path - make its copy in the write path
-		var make_copy := false
-		if search_locations[i] != palettes_write_path:
-			make_copy = true
-
 		var base_directory := search_locations[i]
 		var palette_files := priority_ordered_files[i]
 		for file_name in palette_files:
 			var path := base_directory.path_join(file_name)
-			import_palette_from_path(path, make_copy, true)
+			import_palette_from_path(path, false, true)
 
 	if not current_palette && palettes.size() > 0:
 		select_palette(palettes.keys()[0])
@@ -383,7 +378,6 @@ func _get_palette_files(path: String) -> PackedStringArray:
 
 	if !dir:
 		return []
-
 	dir.list_dir_begin()
 
 	while true:
