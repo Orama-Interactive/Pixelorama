@@ -15,7 +15,7 @@ jobs:
       image: docker://barichello/godot-ci:3.5
     steps:
       - name: Clone source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: true
       - name: Linux Build 🔧
@@ -40,7 +40,7 @@ jobs:
           - arm64
     steps:
       - name: Clone source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install clickable dependencies
         run: |
           sudo add-apt-repository ppa:bhdouglass/clickable
