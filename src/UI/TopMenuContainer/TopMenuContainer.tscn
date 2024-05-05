@@ -69,6 +69,7 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("1")
 suffix = "°"
+snap_step = 45.0
 
 [node name="ZoomSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
 unique_name_in_owner = true
@@ -89,6 +90,7 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("1")
 suffix = "%"
+snap_step = 100.0
 
 [node name="CursorPosition" type="Label" parent="MarginContainer/HBoxContainer/TopLabels"]
 layout_mode = 2
