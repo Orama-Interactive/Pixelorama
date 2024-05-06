@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 var tag: AnimationTag
-@onready var options_dialog := Global.control.find_child("TagProperties") as ConfirmationDialog
+@onready var tag_properties := Global.control.find_child("TagProperties") as ConfirmationDialog
 
 
 func _ready() -> void:
@@ -23,4 +23,4 @@ func update_position_and_size() -> void:
 
 func _on_button_pressed() -> void:
 	var tag_id = Global.current_project.animation_tags.find(tag)
-	options_dialog.show_dialog(Rect2i(), tag_id, true)
+	tag_properties.show_dialog(Rect2i(), tag_id, true)

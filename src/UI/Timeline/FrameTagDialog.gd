@@ -5,11 +5,11 @@ var called_tag_properties := false  ## True when tag properties has been shown b
 
 @onready var main_vbox_cont: VBoxContainer = $VBoxContainer/ScrollContainer/VBoxTagContainer
 @onready var add_tag_button: Button = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
-@onready var options_dialog := Global.control.find_child("TagProperties") as ConfirmationDialog
+@onready var tag_properties := Global.control.find_child("TagProperties") as ConfirmationDialog
 
 
 func _ready() -> void:
-	options_dialog.visibility_changed.connect(_on_tag_options_visibility_changed)
+	tag_properties.visibility_changed.connect(_on_tag_options_visibility_changed)
 
 
 func _on_tag_options_visibility_changed() -> void:
@@ -68,22 +68,22 @@ func _on_FrameTagDialog_visibility_changed() -> void:
 func _on_AddTag_pressed() -> void:
 	var x_pos := add_tag_button.global_position.x
 	var y_pos := add_tag_button.global_position.y + 2 * add_tag_button.size.y
-	var dialog_position := Rect2i(position + Vector2i(x_pos, y_pos), options_dialog.size)
+	var dialog_position := Rect2i(position + Vector2i(x_pos, y_pos), tag_properties.size)
 	var current_tag_id := Global.current_project.animation_tags.size()
 	# Determine tag values (array sort method)
 	var frames := PackedInt32Array([])
 	for cel in Global.current_project.selected_cels:
 		frames.append(cel[0])
 	frames.sort()
-	options_dialog.show_dialog(dialog_position, current_tag_id, false, frames)
+	tag_properties.show_dialog(dialog_position, current_tag_id, false, frames)
 	called_tag_properties = true
 
 
 func _on_EditButton_pressed(_tag_id: int, edit_button: Button) -> void:
 	var x_pos := edit_button.global_position.x
 	var y_pos := edit_button.global_position.y + 2 * edit_button.size.y
-	var dialog_position := Rect2i(position + Vector2i(x_pos, y_pos), options_dialog.size)
-	options_dialog.show_dialog(dialog_position, _tag_id, true)
+	var dialog_position := Rect2i(position + Vector2i(x_pos, y_pos), tag_properties.size)
+	tag_properties.show_dialog(dialog_position, _tag_id, true)
 	called_tag_properties = true
 
 

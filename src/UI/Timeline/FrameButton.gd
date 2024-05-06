@@ -1,11 +1,12 @@
 extends Button
 
-enum { PROPERTIES, REMOVE, CLONE, MOVE_LEFT, MOVE_RIGHT, REVERSE, CENTER }
+enum { PROPERTIES, REMOVE, CLONE, MOVE_LEFT, MOVE_RIGHT, NEW_TAG, REVERSE, CENTER }
 
 var frame := 0
 
 @onready var popup_menu: PopupMenu = $PopupMenu
-@onready var frame_properties: ConfirmationDialog = Global.control.find_child("FrameProperties")
+@onready var frame_properties := Global.control.find_child("FrameProperties") as ConfirmationDialog
+@onready var tag_properties := Global.control.find_child("TagProperties") as ConfirmationDialog
 
 
 func _ready() -> void:
@@ -79,6 +80,10 @@ func _button_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	var indices := _get_frame_indices()
 	match id:
+		PROPERTIES:
+			frame_properties.frame_indices = indices
+			frame_properties.popup_centered()
+			Global.dialog_open(true)
 		REMOVE:
 			Global.animation_timeline.delete_frames(indices)
 		CLONE:
@@ -87,10 +92,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			Global.animation_timeline.move_frames(frame, -1)
 		MOVE_RIGHT:
 			Global.animation_timeline.move_frames(frame, 1)
-		PROPERTIES:
-			frame_properties.frame_indices = indices
-			frame_properties.popup_centered()
-			Global.dialog_open(true)
+		NEW_TAG:
+			var current_tag_id := Global.current_project.animation_tags.size()
+			tag_properties.show_dialog(Rect2i(), current_tag_id, false, indices)
 		REVERSE:
 			Global.animation_timeline.reverse_frames(indices)
 		CENTER:
