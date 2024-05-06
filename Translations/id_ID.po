@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-05-06 21:20\n"
+"PO-Revision-Date: 2024-05-06 22:35\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -773,6 +773,10 @@ msgstr "Bahasa Sistem"
 
 msgid "Display scale:"
 msgstr "Skala tampilan:"
+
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Redupkan antarmuka pada sembulan dialog"
@@ -1984,6 +1988,10 @@ msgstr "Kelompok"
 
 msgid "Layers"
 msgstr "Lapisan"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
