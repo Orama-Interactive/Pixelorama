@@ -43,7 +43,7 @@ theme_override_constants/separation = 0
 [node name="Label" type="Label" parent="ScrollContainer/Container/Header"]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
-text = "My Reference Images"
+text = "Reference Images"
 
 [node name="Tip" type="Label" parent="ScrollContainer/Container"]
 custom_minimum_size = Vector2(10, 0)
@@ -163,7 +163,7 @@ texture = ExtResource("4_8mlcg")
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Rotate the selected image"
+tooltip_text = "Rotate the selected reference image"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true

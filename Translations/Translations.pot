@@ -758,6 +758,10 @@ msgstr ""
 msgid "Display scale:"
 msgstr ""
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr ""
+
 msgid "Dim interface on dialog popup"
 msgstr ""
 
@@ -1916,6 +1920,10 @@ msgid "Group"
 msgstr ""
 
 msgid "Layers"
+msgstr ""
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
 msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.

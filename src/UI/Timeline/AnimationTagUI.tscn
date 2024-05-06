@@ -19,6 +19,7 @@ end_cap_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+auto_translate = false
 mouse_default_cursor_shape = 2
 text = "Idle"
 flat = true

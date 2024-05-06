@@ -213,9 +213,9 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 	if id == 0:
 		properties.layer_indices = _get_layer_indices()
 		properties.popup_centered()
-	if id == 1:
+	elif id == 1:
 		layer.clipping_mask = not layer.clipping_mask
-		popup_menu.set_item_checked(0, layer.clipping_mask)
+		popup_menu.set_item_checked(id, layer.clipping_mask)
 		clipping_mask_icon.visible = layer.clipping_mask
 		Global.canvas.draw_layers()
 
