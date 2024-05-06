@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-04-18 02:49\n"
+"PO-Revision-Date: 2024-05-06 17:54\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1964,6 +1964,13 @@ msgstr "图层属性"
 
 msgid "Cel properties"
 msgstr "单元格属性"
+
+msgid "Tag properties"
+msgstr ""
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
