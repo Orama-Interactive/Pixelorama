@@ -218,12 +218,7 @@ func _cel_size_changed(value: int) -> void:
 		frame_id.size.x = cel_size
 
 	for tag_c: Control in Global.tag_container.get_children():
-		var tag: AnimationTag = tag_c.tag
-		tag_c.position = tag.get_position()
-		tag_c.custom_minimum_size.x = tag.get_minimum_size()
-		tag_c.size.x = tag_c.custom_minimum_size.x
-		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.custom_minimum_size.x, 0)
-		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
+		tag_c.update_position_and_size()
 
 
 func _on_blend_modes_item_selected(index: int) -> void:

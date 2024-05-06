@@ -488,17 +488,10 @@ func _animation_tags_changed(value: Array[AnimationTag]) -> void:
 
 	for tag in animation_tags:
 		var tag_c: Container = animation_tag_node.instantiate()
-		Global.tag_container.add_child(tag_c)
 		tag_c.tag = tag
+		Global.tag_container.add_child(tag_c)
 		var tag_position := Global.tag_container.get_child_count() - 1
 		Global.tag_container.move_child(tag_c, tag_position)
-		tag_c.get_node("Label").text = tag.name
-		tag_c.get_node("Label").modulate = tag.color
-		tag_c.get_node("Line2D").default_color = tag.color
-		tag_c.position = tag.get_position()
-		tag_c.custom_minimum_size.x = tag.get_minimum_size()
-		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.custom_minimum_size.x, 0)
-		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
 
 	_set_timeline_first_and_last_frames()
 
