@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-05-06 17:53\n"
+"PO-Revision-Date: 2024-05-06 19:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1965,11 +1965,11 @@ msgid "Cel properties"
 msgstr "Właściwości komórki"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "Właściwości tagu"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "Nowy tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
