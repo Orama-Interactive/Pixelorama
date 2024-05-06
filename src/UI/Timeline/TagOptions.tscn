@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6fyrnyt3663o"]
+
+[ext_resource type="Script" path="res://src/UI/Timeline/TagOptions.gd" id="1_wbmaq"]
+
+[node name="TagOptions" type="ConfirmationDialog"]
+size = Vector2i(303, 240)
+exclusive = false
+popup_window = true
+script = ExtResource("1_wbmaq")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 295.0
+offset_bottom = 191.0
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="NameLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name:"
+
+[node name="NameLineEdit" type="LineEdit" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="ColorLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Color:"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+color = Color(1, 0, 0, 1)
+
+[node name="FromLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "From:"
+
+[node name="FromSpinBox" type="SpinBox" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="ToLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "To:"
+
+[node name="ToSpinBox" type="SpinBox" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="UserDataLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "User data:"
+
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+layout_mode = 2
+scroll_fit_content_height = true
+
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
+[connection signal="custom_action" from="." to="." method="_on_custom_action"]
