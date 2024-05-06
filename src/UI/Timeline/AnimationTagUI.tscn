@@ -15,8 +15,12 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Button" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 text = "Idle"
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

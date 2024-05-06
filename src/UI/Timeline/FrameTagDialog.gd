@@ -1,10 +1,21 @@
 extends AcceptDialog
 
 var tag_vboxes := []
+var called_tag_properties := false  ## True when tag properties has been shown by this dialog
 
 @onready var main_vbox_cont: VBoxContainer = $VBoxContainer/ScrollContainer/VBoxTagContainer
 @onready var add_tag_button: Button = $VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag
-@onready var options_dialog := $TagOptions as ConfirmationDialog
+@onready var options_dialog := Global.control.find_child("TagProperties") as ConfirmationDialog
+
+
+func _ready() -> void:
+	options_dialog.visibility_changed.connect(_on_tag_options_visibility_changed)
+
+
+func _on_tag_options_visibility_changed() -> void:
+	if called_tag_properties:
+		called_tag_properties = false
+		popup_centered.call_deferred()
 
 
 func _on_FrameTagDialog_about_to_show() -> void:
@@ -65,6 +76,7 @@ func _on_AddTag_pressed() -> void:
 		frames.append(cel[0])
 	frames.sort()
 	options_dialog.show_dialog(dialog_position, current_tag_id, false, frames)
+	called_tag_properties = true
 
 
 func _on_EditButton_pressed(_tag_id: int, edit_button: Button) -> void:
@@ -72,10 +84,7 @@ func _on_EditButton_pressed(_tag_id: int, edit_button: Button) -> void:
 	var y_pos := edit_button.global_position.y + 2 * edit_button.size.y
 	var dialog_position := Rect2i(position + Vector2i(x_pos, y_pos), options_dialog.size)
 	options_dialog.show_dialog(dialog_position, _tag_id, true)
-
-
-func _on_tag_options_visibility_changed() -> void:
-	_on_FrameTagDialog_about_to_show.call_deferred()
+	called_tag_properties = true
 
 
 func _on_PlayOnlyTags_toggled(button_pressed: bool) -> void:

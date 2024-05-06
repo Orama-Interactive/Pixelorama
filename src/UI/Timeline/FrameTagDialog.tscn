@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6je8lgr850wf"]
+[gd_scene load_steps=3 format=3 uid="uid://c6je8lgr850wf"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/FrameTagDialog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="2"]
-[ext_resource type="PackedScene" uid="uid://c6fyrnyt3663o" path="res://src/UI/Timeline/TagOptions.tscn" id="3_hw52m"]
 
 [node name="FrameTagDialog" type="AcceptDialog"]
 title = "Frame Tag Properties"
@@ -63,10 +62,7 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "Animation plays only on frames of the same tag"
 
-[node name="TagOptions" parent="." instance=ExtResource("3_hw52m")]
-
 [connection signal="about_to_popup" from="." to="." method="_on_FrameTagDialog_about_to_show"]
 [connection signal="visibility_changed" from="." to="." method="_on_FrameTagDialog_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag" to="." method="_on_AddTag_pressed"]
 [connection signal="toggled" from="VBoxContainer/PlayOnlyTags" to="." method="_on_PlayOnlyTags_toggled"]
-[connection signal="visibility_changed" from="TagOptions" to="." method="_on_tag_options_visibility_changed"]

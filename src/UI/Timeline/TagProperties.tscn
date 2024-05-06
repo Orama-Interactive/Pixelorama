@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://c6fyrnyt3663o"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/TagOptions.gd" id="1_wbmaq"]
+[ext_resource type="Script" path="res://src/UI/Timeline/TagProperties.gd" id="1_wbmaq"]
 
-[node name="TagOptions" type="ConfirmationDialog"]
+[node name="TagProperties" type="ConfirmationDialog"]
+title = "Tag properties"
 size = Vector2i(303, 240)
 exclusive = false
 popup_window = true

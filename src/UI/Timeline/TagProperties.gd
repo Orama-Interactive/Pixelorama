@@ -31,7 +31,10 @@ func show_dialog(
 		color_picker_button.color = Color(randf(), randf(), randf())
 		user_data_text_edit.text = ""
 		delete_tag_button.visible = false
-	popup(popup_rect)
+	if popup_rect == Rect2i():
+		popup_centered()
+	else:
+		popup(popup_rect)
 
 
 func _on_confirmed() -> void:
