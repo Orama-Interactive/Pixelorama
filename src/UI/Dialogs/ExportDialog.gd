@@ -366,9 +366,20 @@ func _on_FileLineEdit_text_changed(new_text: String) -> void:
 	Global.current_project.file_name = new_text
 
 
-func _on_FileDialog_dir_selected(dir: String) -> void:
+func _on_path_dialog_dir_selected(dir: String) -> void:
 	path_line_edit.text = dir
 	Global.current_project.export_directory_path = dir
+	# Needed because if native file dialogs are enabled
+	# the export dialog closes when the path dialog closes
+	if not visible:
+		show()
+
+
+func _on_path_dialog_canceled() -> void:
+	# Needed because if native file dialogs are enabled
+	# the export dialog closes when the path dialog closes
+	if not visible:
+		show()
 
 
 func _on_FileFormat_item_selected(idx: int) -> void:
