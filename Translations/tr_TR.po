@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-04-09 23:29\n"
+"PO-Revision-Date: 2024-05-06 17:54\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1963,6 +1963,13 @@ msgstr "Katman Özellikleri"
 
 msgid "Cel properties"
 msgstr "Hücre özellikleri"
+
+msgid "Tag properties"
+msgstr ""
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
