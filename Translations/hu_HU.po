@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2024-05-06 17:53\n"
+"PO-Revision-Date: 2024-05-06 22:35\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -768,6 +768,10 @@ msgid "System Language"
 msgstr "Rendszer nyelv"
 
 msgid "Display scale:"
+msgstr ""
+
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
 msgstr ""
 
 msgid "Dim interface on dialog popup"
@@ -1941,6 +1945,10 @@ msgstr ""
 
 msgid "Layers"
 msgstr "Rétegek"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
