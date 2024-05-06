@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-04-11 09:14\n"
+"PO-Revision-Date: 2024-05-06 17:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1962,6 +1962,13 @@ msgstr "Параметры слоя"
 
 msgid "Cel properties"
 msgstr "Свойства клетки"
+
+msgid "Tag properties"
+msgstr ""
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
