@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-05-06 17:53\n"
+"PO-Revision-Date: 2024-05-06 21:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -153,7 +153,7 @@ msgstr ""
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Mover a la papelera"
 
 msgid "New Brush"
 msgstr "Nuevo Pincel"
@@ -169,11 +169,11 @@ msgstr "Porcentaje"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Recortar según la selección"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Recortar según los contenidos"
 
 msgid "Resize Canvas"
 msgstr "Redimensionar lienzo"
@@ -301,10 +301,10 @@ msgid "Add Layout"
 msgstr "Añadir Vista"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Copiar desde"
 
 msgid "Rename"
-msgstr ""
+msgstr "Renombrar"
 
 msgid "Rename Layout"
 msgstr ""
