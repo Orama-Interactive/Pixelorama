@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-05-06 21:20\n"
+"PO-Revision-Date: 2024-05-06 22:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -770,6 +770,10 @@ msgstr "Idioma del sistema"
 
 msgid "Display scale:"
 msgstr "Escala de la interfaz:"
+
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Atenuar interface al abrir ventana emergente"
@@ -1980,6 +1984,10 @@ msgstr "Agrupar"
 
 msgid "Layers"
 msgstr "Capas"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
