@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-05-06 18:59\n"
+"PO-Revision-Date: 2024-05-06 22:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -771,6 +771,10 @@ msgstr "Limba sistemului"
 
 msgid "Display scale:"
 msgstr "Scară de afișare:"
+
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Întunecă interfața la apariția ferestrei de dialog"
@@ -1982,6 +1986,10 @@ msgstr "Grup"
 
 msgid "Layers"
 msgstr "Straturi"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
