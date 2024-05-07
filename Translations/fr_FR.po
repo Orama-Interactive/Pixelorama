@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-05-06 22:35\n"
+"PO-Revision-Date: 2024-05-07 21:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -775,7 +775,7 @@ msgstr "Taille d'Affichage:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Taille de police :"
 
 msgid "Dim interface on dialog popup"
 msgstr "Assombrir l'arrière-plan derrière une boite de dialogue"
@@ -1969,11 +1969,11 @@ msgid "Cel properties"
 msgstr "Propriétés du Cellulo"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "Propriétés du tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "Nouveau tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
