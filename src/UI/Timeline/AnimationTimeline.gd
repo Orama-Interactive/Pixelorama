@@ -5,7 +5,6 @@ signal animation_finished
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
-const FRAME_TAG_DIALOG_SCENE_PATH := "res://src/UI/Timeline/FrameTagDialog.tscn"
 
 var is_animation_running := false
 var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
@@ -25,12 +24,6 @@ var layer_effect_settings: AcceptDialog:
 			layer_effect_settings = load(LAYER_FX_SCENE_PATH).instantiate()
 			add_child(layer_effect_settings)
 		return layer_effect_settings
-var frame_tag_dialog: AcceptDialog:
-	get:
-		if not is_instance_valid(frame_tag_dialog):
-			frame_tag_dialog = load(FRAME_TAG_DIALOG_SCENE_PATH).instantiate()
-			add_child(frame_tag_dialog)
-		return frame_tag_dialog
 
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
 @onready var tag_spacer := %TagSpacer as Control
@@ -54,7 +47,8 @@ var frame_tag_dialog: AcceptDialog:
 @onready var play_forward := %PlayForward as Button
 @onready var fps_spinbox := %FPSValue as ValueSlider
 @onready var onion_skinning_button := %OnionSkinning as BaseButton
-@onready var onion_skinning_settings := $OnionSkinningSettings as Popup
+@onready var timeline_settings := $TimelineSettings as Popup
+@onready var cel_size_slider := %CelSizeSlider as ValueSlider
 @onready var loop_animation_button := %LoopAnim as BaseButton
 @onready var drag_highlight := $DragHighlight as ColorRect
 
@@ -64,6 +58,9 @@ func _ready() -> void:
 	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
 	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 	cel_size = min_cel_size
+	cel_size_slider.min_value = min_cel_size
+	cel_size_slider.max_value = max_cel_size
+	cel_size_slider.value = cel_size
 	add_layer_list.get_popup().id_pressed.connect(add_layer)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
@@ -201,6 +198,7 @@ func _cel_size_changed(value: int) -> void:
 	if cel_size == value:
 		return
 	cel_size = clampi(value, min_cel_size, max_cel_size)
+	cel_size_slider.value = cel_size
 	update_minimum_size()
 	Global.config_cache.set_value("timeline", "cel_size", cel_size)
 	for layer_button: Control in Global.layer_vbox.get_children():
@@ -497,10 +495,6 @@ func copy_frames(
 	project.undo_redo.commit_action()
 
 
-func _on_FrameTagButton_pressed() -> void:
-	frame_tag_dialog.popup_centered()
-
-
 func _on_MoveLeft_pressed() -> void:
 	if Global.current_project.current_frame == 0:
 		return
@@ -566,9 +560,9 @@ func _on_OnionSkinning_pressed() -> void:
 		Global.change_button_texturerect(texture_button, "onion_skinning_off.png")
 
 
-func _on_OnionSkinningSettings_pressed() -> void:
-	var pos := Vector2i(onion_skinning_button.global_position) - onion_skinning_settings.size
-	onion_skinning_settings.popup(Rect2i(pos.x - 16, pos.y + 32, 136, 126))
+func _on_timeline_settings_button_pressed() -> void:
+	var pos := Vector2i(onion_skinning_button.global_position) - timeline_settings.size
+	timeline_settings.popup(Rect2i(pos.x - 16, pos.y + 32, 136, 126))
 
 
 func _on_LoopAnim_pressed() -> void:
@@ -768,6 +762,10 @@ func _on_BlueRedMode_toggled(button_pressed: bool) -> void:
 	Global.onion_skinning_blue_red = button_pressed
 	Global.config_cache.set_value("timeline", "blue_red", Global.onion_skinning_blue_red)
 	Global.canvas.queue_redraw()
+
+
+func _on_play_only_tags_toggled(toggled_on: bool) -> void:
+	Global.play_only_tags = toggled_on
 
 
 func _on_PastPlacement_item_selected(index: int) -> void:
@@ -1054,12 +1052,12 @@ func _on_OpacitySlider_value_changed(value: float) -> void:
 	Global.canvas.queue_redraw()
 
 
-func _on_onion_skinning_settings_close_requested() -> void:
-	onion_skinning_settings.hide()
+func _on_timeline_settings_close_requested() -> void:
+	timeline_settings.hide()
 
 
-func _on_onion_skinning_settings_visibility_changed() -> void:
-	Global.can_draw = not onion_skinning_settings.visible
+func _on_timeline_settings_visibility_changed() -> void:
+	Global.can_draw = not timeline_settings.visible
 
 
 # Methods to update the UI in response to changes in the current project
@@ -1231,3 +1229,7 @@ func project_cel_removed(frame: int, layer: int) -> void:
 func _on_layer_fx_pressed() -> void:
 	layer_effect_settings.popup_centered()
 	Global.dialog_open(true)
+
+
+func _on_cel_size_slider_value_changed(value: float) -> void:
+	cel_size = value

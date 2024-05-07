@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=74 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -21,8 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://esistdjfbrc4" path="res://assets/graphics/timeline/play_backwards.png" id="24"]
 [ext_resource type="Texture2D" uid="uid://l4jj86y1hukm" path="res://assets/graphics/timeline/go_to_last_frame.png" id="25"]
 [ext_resource type="Texture2D" uid="uid://b2ndrc0cvy1m5" path="res://assets/graphics/timeline/next_frame.png" id="26"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="26_tfw1u"]
 [ext_resource type="Texture2D" uid="uid://cerkv5yx4cqeh" path="res://assets/graphics/timeline/copy_frame.png" id="27"]
-[ext_resource type="Texture2D" uid="uid://i13jhsg117kd" path="res://assets/graphics/timeline/tag.png" id="28"]
 [ext_resource type="Texture2D" uid="uid://dukip7mvotxsp" path="res://assets/graphics/timeline/onion_skinning_off.png" id="29"]
 [ext_resource type="Texture2D" uid="uid://dinubfua8gqhw" path="res://assets/graphics/timeline/expandable.png" id="30"]
 [ext_resource type="Texture2D" uid="uid://fbwld5ofmocm" path="res://assets/graphics/timeline/loop.png" id="31"]
@@ -80,12 +80,6 @@ action = &"clone_frame"
 
 [sub_resource type="Shortcut" id="Shortcut_5g7t7"]
 events = [SubResource("InputEventAction_yptjb")]
-
-[sub_resource type="InputEventAction" id="InputEventAction_jp76a"]
-action = &"manage_frame_tags"
-
-[sub_resource type="Shortcut" id="Shortcut_renbb"]
-events = [SubResource("InputEventAction_jp76a")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_ar42u"]
 action = &"move_frame_left"
@@ -501,27 +495,6 @@ offset_right = 5.0
 offset_bottom = 7.0
 texture = ExtResource("27")
 
-[node name="FrameTagButton" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-size_flags_horizontal = 0
-tooltip_text = "Manage frame tags"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-shortcut = SubResource("Shortcut_renbb")
-
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/FrameTagButton"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -7.0
-offset_top = -7.0
-offset_right = 7.0
-offset_bottom = 7.0
-texture = ExtResource("28")
-
 [node name="MoveFrameLeft" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
@@ -698,16 +671,16 @@ texture = ExtResource("25")
 [node name="LoopButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons"]
 layout_mode = 2
 
-[node name="OnionSkinningSettings" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
+[node name="TimelineSettingsButton" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Onion Skinning settings"
+tooltip_text = "Timeline settings"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_tke6v")
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/OnionSkinningSettings"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/TimelineSettingsButton"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -806,6 +779,7 @@ size_flags_horizontal = 3
 [node name="MainBodyPanel" type="PanelContainer" parent="TimelineContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 
 [node name="MainBodyVBoxContainer" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel"]
 layout_mode = 2
@@ -901,62 +875,101 @@ size_flags_horizontal = 3
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
-[node name="OnionSkinningSettings" type="Popup" parent="."]
+[node name="TimelineSettings" type="Popup" parent="."]
 position = Vector2i(0, 24)
 size = Vector2i(296, 211)
 unresizable = false
 borderless = false
 
-[node name="MarginContainer" type="MarginContainer" parent="OnionSkinningSettings"]
-offset_right = 16.0
-offset_bottom = 4.0
+[node name="MarginContainer" type="MarginContainer" parent="TimelineSettings"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="OnionSkinningButtons" type="VBoxContainer" parent="OnionSkinningSettings/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TimelineSettings/MarginContainer"]
 layout_mode = 2
 
-[node name="OnionSkinningPast" type="Label" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons"]
-layout_mode = 2
-text = "Past Frames"
-
-[node name="PastOnionSkinning" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons" instance=ExtResource("9")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 1
-max_value = 10.0
-value = 1.0
-allow_greater = true
-suffix = "Frames"
-
-[node name="OnionSkinningFuture" type="Label" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons"]
-layout_mode = 2
-text = "Future Frames"
-
-[node name="FutureOnionSkinning" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons" instance=ExtResource("9")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 1
-max_value = 10.0
-value = 1.0
-allow_greater = true
-suffix = "Frames"
-
-[node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons"]
-unique_name_in_owner = true
+[node name="PlayOnlyTags" type="CheckBox" parent="TimelineSettings/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+tooltip_text = "If it's selected, the animation plays only on the frames that have the same tag.
+If it's not, the animation will play for all frames, ignoring tags."
 mouse_default_cursor_shape = 2
-text = "Color mode"
+button_pressed = true
+text = "Animation plays only on frames of the same tag"
 
-[node name="GridContainer" type="GridContainer" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons"]
+[node name="GridContainer" type="GridContainer" parent="TimelineSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="CelSizeLabel" type="Label" parent="TimelineSettings/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cel size:"
+
+[node name="CelSizeSlider" type="TextureProgressBar" parent="TimelineSettings/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("26_tfw1u")
+
+[node name="HeaderContainer" type="HBoxContainer" parent="TimelineSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="TimelineSettings/MarginContainer/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Onion Skinning"
+
+[node name="HSeparator" type="HSeparator" parent="TimelineSettings/MarginContainer/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OnionSkinningOptionsContainer" type="GridContainer" parent="TimelineSettings/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 columns = 2
 
-[node name="PastPlacementLabel" type="Label" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/GridContainer"]
+[node name="OnionSkinningPast" type="Label" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer"]
+layout_mode = 2
+text = "Past Frames"
+
+[node name="PastOnionSkinning" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer" instance=ExtResource("9")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+max_value = 10.0
+value = 1.0
+allow_greater = true
+suffix = "Frames"
+
+[node name="OnionSkinningFuture" type="Label" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer"]
+layout_mode = 2
+text = "Future Frames"
+
+[node name="FutureOnionSkinning" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer" instance=ExtResource("9")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 1
+max_value = 10.0
+value = 1.0
+allow_greater = true
+suffix = "Frames"
+
+[node name="PastPlacementLabel" type="Label" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer"]
 layout_mode = 2
 text = "Show past frames:"
 
-[node name="PastPlacement" type="OptionButton" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/GridContainer"]
+[node name="PastPlacement" type="OptionButton" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -967,11 +980,11 @@ popup/item_0/id = 0
 popup/item_1/text = "Below canvas"
 popup/item_1/id = 1
 
-[node name="FuturePlacementLabel" type="Label" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/GridContainer"]
+[node name="FuturePlacementLabel" type="Label" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer"]
 layout_mode = 2
 text = "Show future frames:"
 
-[node name="FuturePlacement" type="OptionButton" parent="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/GridContainer"]
+[node name="FuturePlacement" type="OptionButton" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -981,8 +994,16 @@ popup/item_0/id = 0
 popup/item_1/text = "Below canvas"
 popup/item_1/id = 1
 
+[node name="BlueRedMode" type="CheckBox" parent="TimelineSettings/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+text = "Color mode"
+
 [node name="DragHighlight" type="ColorRect" parent="."]
 visible = false
+z_index = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1058,7 +1079,6 @@ autowrap_mode = 3
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveFrameLeft" to="." method="_on_MoveLeft_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveFrameRight" to="." method="_on_MoveRight_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
@@ -1067,7 +1087,7 @@ autowrap_mode = 3
 [connection signal="toggled" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/NextFrame" to="." method="_on_NextFrame_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/LastFrame" to="." method="_on_LastFrame_pressed"]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_pressed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/TimelineSettingsButton" to="." method="_on_timeline_settings_button_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
@@ -1075,10 +1095,12 @@ autowrap_mode = 3
 [connection signal="value_changed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/MarginContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="resized" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/LayerVBox" to="." method="_on_LayerVBox_resized"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
-[connection signal="close_requested" from="OnionSkinningSettings" to="." method="_on_onion_skinning_settings_close_requested"]
-[connection signal="visibility_changed" from="OnionSkinningSettings" to="." method="_on_onion_skinning_settings_visibility_changed"]
-[connection signal="value_changed" from="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
-[connection signal="value_changed" from="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
-[connection signal="toggled" from="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
-[connection signal="item_selected" from="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/GridContainer/PastPlacement" to="." method="_on_PastPlacement_item_selected"]
-[connection signal="item_selected" from="OnionSkinningSettings/MarginContainer/OnionSkinningButtons/GridContainer/FuturePlacement" to="." method="_on_FuturePlacement_item_selected"]
+[connection signal="close_requested" from="TimelineSettings" to="." method="_on_timeline_settings_close_requested"]
+[connection signal="visibility_changed" from="TimelineSettings" to="." method="_on_timeline_settings_visibility_changed"]
+[connection signal="toggled" from="TimelineSettings/MarginContainer/VBoxContainer/PlayOnlyTags" to="." method="_on_play_only_tags_toggled"]
+[connection signal="value_changed" from="TimelineSettings/MarginContainer/VBoxContainer/GridContainer/CelSizeSlider" to="." method="_on_cel_size_slider_value_changed"]
+[connection signal="value_changed" from="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
+[connection signal="value_changed" from="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
+[connection signal="item_selected" from="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer/PastPlacement" to="." method="_on_PastPlacement_item_selected"]
+[connection signal="item_selected" from="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer/FuturePlacement" to="." method="_on_FuturePlacement_item_selected"]
+[connection signal="toggled" from="TimelineSettings/MarginContainer/VBoxContainer/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
