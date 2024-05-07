@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-05-07 04:50\n"
+"PO-Revision-Date: 2024-05-07 22:49\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1850,8 +1850,8 @@ msgstr "Ke bingkai selanjutnya\n"
 msgid "Jump to the last frame\n"
 msgstr "Lompat ke bingkai terakhir\n"
 
-msgid "Onion Skinning settings"
-msgstr "Pengaturan Onion Skinning"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Aktif/nonaktifkan Onion Skinning"
@@ -1911,7 +1911,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
 "Jika tidak, maka animasi akan diputar untuk semua bingkai."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Mode warna"
 
