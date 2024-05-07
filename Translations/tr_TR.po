@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-05-06 22:35\n"
+"PO-Revision-Date: 2024-05-07 05:51\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -775,7 +775,7 @@ msgstr "Ekran ölçeği:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Yazı tipi boyutu:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Diyalog penceresinde arayüzü karart"
@@ -1990,7 +1990,7 @@ msgstr "Katmanlar"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr ""
+msgstr "Kırpma maskesi"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
