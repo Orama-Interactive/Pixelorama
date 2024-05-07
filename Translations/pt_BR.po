@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-05-06 22:35\n"
+"PO-Revision-Date: 2024-05-07 22:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1849,8 +1849,8 @@ msgstr "Ir para o proxímo quadro\n"
 msgid "Jump to the last frame\n"
 msgstr "Ir para o último quadro\n"
 
-msgid "Onion Skinning settings"
-msgstr "Configurações do Onion Skinning"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Ativar/desativar Onion Skinning"
@@ -1910,7 +1910,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Se selecionado, a animação é reproduzida apenas nos quadros que possuem a mesma tag.\n"
 "Caso contrário, a animação será reproduzida em todos os quadros, ignorando as tags."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Modo de cor"
 
