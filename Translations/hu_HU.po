@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2024-05-06 22:35\n"
+"PO-Revision-Date: 2024-05-07 22:49\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1807,8 +1807,8 @@ msgstr ""
 msgid "Jump to the last frame\n"
 msgstr ""
 
-msgid "Onion Skinning settings"
-msgstr "Hagymabőr beállítások"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Hagymabőr be/ki kapcsolása"
@@ -1868,7 +1868,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Ha ez ki van választva, akkor az animáció csak az azonos címkével ellátott képkockákat játssza le.\n"
 "Ha nem, az animáció minden képkockát lejátszódik, figyelmen kívül hagyva a címkéket."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr ""
 
