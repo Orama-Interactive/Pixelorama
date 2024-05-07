@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-05-07 15:59\n"
+"PO-Revision-Date: 2024-05-07 22:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1848,8 +1848,8 @@ msgstr "На следующий кадр\n"
 msgid "Jump to the last frame\n"
 msgstr "Перейти на последний кадр\n"
 
-msgid "Onion Skinning settings"
-msgstr "Настройки шлейфа соседних кадров"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Включить/выключить шлейф кадров"
@@ -1909,7 +1909,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Если этот параметр включён, при анимации будут проигрываться только кадры с той же меткой.\n"
 "Если выключен, анимация будет включать все кадры, независимо от меток."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Режим цвета"
 
