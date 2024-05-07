@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-05-07 12:41\n"
+"PO-Revision-Date: 2024-05-07 22:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1848,8 +1848,8 @@ msgstr "Mergi la cadrul următor\n"
 msgid "Jump to the last frame\n"
 msgstr "Sari la ultimul cadru\n"
 
-msgid "Onion Skinning settings"
-msgstr "Setări pentru cadre multiple simultane"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Activează/dezactivează cadrele multiple simultane"
@@ -1909,7 +1909,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Dacă opțiunea este selectată, animația va rula doar pe cadrele cu aceeași etichetă.\n"
 "În caz contrar, animația va rula pentru toate cadrele, ignorând etichetele."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Mod culoare"
 
