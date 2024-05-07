@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Control
 
 var tag: AnimationTag
 @onready var tag_properties := Global.control.find_child("TagProperties") as ConfirmationDialog

@@ -2,10 +2,13 @@
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTagUI.gd" id="1"]
 
-[node name="AnimationTagUI" type="VBoxContainer"]
+[node name="AnimationTagUI" type="Control"]
 custom_minimum_size = Vector2(39, 32)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 39.0
 offset_bottom = 32.0
+mouse_filter = 2
 script = ExtResource("1")
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -16,7 +19,18 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.5
+offset_top = -16.0
+offset_right = 18.5
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 auto_translate = false

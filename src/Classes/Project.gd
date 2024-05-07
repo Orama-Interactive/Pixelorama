@@ -487,7 +487,7 @@ func _animation_tags_changed(value: Array[AnimationTag]) -> void:
 		child.queue_free()
 
 	for tag in animation_tags:
-		var tag_c: Container = animation_tag_node.instantiate()
+		var tag_c := animation_tag_node.instantiate()
 		tag_c.tag = tag
 		Global.tag_container.add_child(tag_c)
 		var tag_position := Global.tag_container.get_child_count() - 1
@@ -506,7 +506,7 @@ func _set_timeline_first_and_last_frames() -> void:
 		for tag in animation_tags:
 			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
 				Global.animation_timeline.first_frame = tag.from - 1
-				Global.animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
+				Global.animation_timeline.last_frame = mini(frames.size() - 1, tag.to - 1)
 
 
 func is_empty() -> bool:
