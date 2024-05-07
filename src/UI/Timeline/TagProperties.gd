@@ -40,25 +40,16 @@ func show_dialog(
 func _on_confirmed() -> void:
 	var tag_name := name_line_edit.text
 	var tag_color := color_picker_button.color
-	var tag_from := from_spinbox.value
-	var tag_to := to_spinbox.value
+	var tag_to := clampi(to_spinbox.value, 0, Global.current_project.frames.size())
+	var tag_from := clampi(from_spinbox.value, 0, tag_to)
 	var user_data := user_data_text_edit.text
-
-	if tag_to > Global.current_project.frames.size():
-		tag_to = Global.current_project.frames.size()
-
-	if tag_from > tag_to:
-		tag_from = tag_to
-
-	var new_animation_tags := Global.current_project.animation_tags.duplicate()
+	var new_animation_tags: Array[AnimationTag] = []
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
-	for i in new_animation_tags.size():
-		var prev_tag: AnimationTag = new_animation_tags[i]
-		new_animation_tags[i] = AnimationTag.new(
-			prev_tag.name, prev_tag.color, prev_tag.from, prev_tag.to
-		)
-		new_animation_tags[i].user_data = prev_tag.user_data
+	for tag in Global.current_project.animation_tags:
+		var new_tag := AnimationTag.new(tag.name, tag.color, tag.from, tag.to)
+		new_tag.user_data = tag.user_data
+		new_animation_tags.append(new_tag)
 
 	if current_tag_id == Global.current_project.animation_tags.size():
 		var new_tag := AnimationTag.new(tag_name, tag_color, tag_from, tag_to)
@@ -77,16 +68,16 @@ func _on_confirmed() -> void:
 	Global.current_project.undo_redo.add_do_method(Global.general_redo)
 	Global.current_project.undo_redo.add_undo_method(Global.general_undo)
 	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "animation_tags", new_animation_tags
+		Global.current_project, &"animation_tags", new_animation_tags
 	)
 	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "animation_tags", Global.current_project.animation_tags
+		Global.current_project, &"animation_tags", Global.current_project.animation_tags
 	)
 	Global.current_project.undo_redo.commit_action()
 
 
-func _on_custom_action(action: String) -> void:
-	if action != "delete_tag":
+func _on_custom_action(action: StringName) -> void:
+	if action != &"delete_tag":
 		return
 	var new_animation_tags := Global.current_project.animation_tags.duplicate()
 	new_animation_tags.remove_at(current_tag_id)
@@ -96,10 +87,10 @@ func _on_custom_action(action: String) -> void:
 	Global.current_project.undo_redo.add_do_method(Global.general_redo)
 	Global.current_project.undo_redo.add_undo_method(Global.general_undo)
 	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "animation_tags", new_animation_tags
+		Global.current_project, &"animation_tags", new_animation_tags
 	)
 	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "animation_tags", Global.current_project.animation_tags
+		Global.current_project, &"animation_tags", Global.current_project.animation_tags
 	)
 	Global.current_project.undo_redo.commit_action()
 
