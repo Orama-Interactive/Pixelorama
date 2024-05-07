@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-05-07 21:39\n"
+"PO-Revision-Date: 2024-05-07 22:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1849,8 +1849,8 @@ msgstr "Aller à la frame suivante\n"
 msgid "Jump to the last frame\n"
 msgstr "Aller à la dernière frame\n"
 
-msgid "Onion Skinning settings"
-msgstr "Paramètres de la peau d'oignon"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Activer/désactiver la peau d'oignon"
@@ -1910,7 +1910,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le même tag.\n"
 "Si ce n'est pas le cas, l'animation sera jouée sur toutes les frames, ignorant les tags."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Mode couleur"
 
