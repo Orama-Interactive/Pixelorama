@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-05-06 22:35\n"
+"PO-Revision-Date: 2024-05-07 22:49\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1850,8 +1850,8 @@ msgstr "Μετάβαση στο επόμενο καρέ\n"
 msgid "Jump to the last frame\n"
 msgstr "Μετάβαση στο τελευταίο καρέ\n"
 
-msgid "Onion Skinning settings"
-msgstr "Ρυθμίσεις Onion Skinning"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Ενεργοποίηση/απενεργοποίηση Onion Skinning"
@@ -1911,7 +1911,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Αν είναι επιλεγμένο, η κίνηση παίζει μόνο σε καρέ που έχουν την ίδια καρτέλα.\n"
 "Αλλιώς, η κίνηση θα παίζει σε όλα τα καρέ, αγνοώντας τις καρτέλες."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Λειτουργία χρώματος"
 
