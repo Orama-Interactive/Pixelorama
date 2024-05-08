@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-05-08 06:26\n"
+"PO-Revision-Date: 2024-05-08 14:28\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1380,6 +1380,10 @@ msgstr "Ekrandan renk seç."
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
 msgstr "Seçici şekli seç."
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
+msgstr ""
 
 msgid "Left tool"
 msgstr "Sol araç"
