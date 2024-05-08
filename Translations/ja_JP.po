@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-05-08 14:28\n"
+"PO-Revision-Date: 2024-05-08 15:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1383,7 +1383,7 @@ msgstr "ピッカー形状を選択します。"
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "色設定"
 
 msgid "Left tool"
 msgstr "左のツール"
