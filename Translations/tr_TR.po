@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-05-08 14:28\n"
+"PO-Revision-Date: 2024-05-08 16:34\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1383,7 +1383,7 @@ msgstr "Seçici şekli seç."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Renk seçenekleri"
 
 msgid "Left tool"
 msgstr "Sol araç"
