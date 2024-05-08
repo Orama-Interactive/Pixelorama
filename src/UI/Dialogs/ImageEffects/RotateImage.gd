@@ -1,7 +1,7 @@
 extends ImageEffect
 
 enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
-enum Animate { ANGLE, INITIAL_ANGLE }
+enum Animate { ANGLE, INIT_ANGLE }
 
 var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
 var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
@@ -79,7 +79,7 @@ func _calculate_pivot() -> void:
 
 func commit_action(cel: Image, _project := Global.current_project) -> void:
 	var angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
-	var init_angle := animate_panel.get_animated_value(commit_idx, Animate.INITIAL_ANGLE)
+	var init_angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.INIT_ANGLE))
 
 	var selection_tex: ImageTexture
 	var image := Image.new()
@@ -105,7 +105,7 @@ func commit_action(cel: Image, _project := Global.current_project) -> void:
 			ROTXEL_SMEAR:
 				params = {
 					"initial_angle": init_angle,
-					"ending_angle": rad_to_deg(angle),
+					"ending_angle": angle,
 					"tolerance": tolerance_slider.value,
 					"selection_tex": selection_tex,
 					"origin": pivot / Vector2(cel.get_size()),

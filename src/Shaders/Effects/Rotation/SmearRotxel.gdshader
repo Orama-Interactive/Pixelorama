@@ -26,15 +26,13 @@ vec4 rotate(sampler2D tex, vec2 uv, vec2 tex_pixel_size) {
 	float dir;
 	float mag;
 	float init_angle = initial_angle < ending_angle ? initial_angle : ending_angle;
-	for (float angle = ending_angle; angle >= init_angle && color.a == 0.0; angle -= 1.0) {
-		float ang = angle*3.1416/180.0;
-
+	for (float angle = ending_angle; angle >= init_angle && color.a <= 0.0001; angle -= 0.0174) {
 		for (int k = 0; k < 9; k++) {
 			int i = -1 + int(k % 3);
 			int j = -1 + k / 3;
 			dir = atan(float(dy + j), float(dx + i));
 			mag = sqrt(pow(float(dx + i), 2.0) + pow(float(dy + j), 2.0));
-			dir -= ang;
+			dir -= angle;
 			ox = int(round(3.0 * center.x + 1.0 + mag * cos(dir)));
 			oy = int(round(3.0 * center.y + 1.0 + mag * sin(dir)));
 
@@ -125,15 +123,13 @@ vec4 rotate_uniform(sampler2D tex, vec2 uv, vec2 tex_pixel_size) {
 	float dir;
 	float mag;
 	float init_angle = initial_angle < ending_angle ? initial_angle : ending_angle;
-	for (float angle = ending_angle; angle >= init_angle && color.a == 0.0; angle -= 1.0) {
-		float ang = angle*3.1416/180.0;
-
+	for (float angle = ending_angle; angle >= init_angle && color.a <= 0.0001; angle -= 0.0174) {
 		for (int k = 0; k < 9; k++) {
 			int i = -1 + int(k % 3);
 			int j = -1 + k / 3;
 			dir = atan(float(dy + j), float(dx + i));
 			mag = sqrt(pow(float(dx + i), 2.0) + pow(float(dy + j), 2.0));
-			dir -= ang;
+			dir -= angle;
 			ox = int(round(3.0 * center.x + 1.0 + mag * cos(dir)));
 			oy = int(round(3.0 * center.y + 1.0 + mag * sin(dir)));
 
