@@ -1318,6 +1318,10 @@ msgstr ""
 msgid "Select a picker shape."
 msgstr ""
 
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
+msgstr ""
+
 msgid "Left tool"
 msgstr ""
 

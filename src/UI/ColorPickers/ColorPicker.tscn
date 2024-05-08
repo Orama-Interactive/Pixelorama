@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3vcvhh4d8hd7"]
+[gd_scene load_steps=12 format=3 uid="uid://c3vcvhh4d8hd7"]
 
 [ext_resource type="Script" path="res://src/UI/ColorPickers/ColorPicker.gd" id="1_r8ot0"]
 [ext_resource type="Texture2D" uid="uid://d0v821l01w7go" path="res://assets/graphics/misc/color_switch.png" id="2_ojj3i"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="3_vjkb0"]
 [ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="4_oxnnt"]
-[ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="6_b86m2"]
-[ext_resource type="Texture2D" uid="uid://bhkmiijflfqxx" path="res://assets/graphics/misc/value_arrow_up.svg" id="7_p4te3"]
+[ext_resource type="Texture2D" uid="uid://cefhafnbc8upf" path="res://assets/graphics/misc/value_arrow_right.svg" id="5_hhe4d"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_02x7w"]
 
@@ -196,13 +195,14 @@ offset_right = 13.0
 offset_bottom = 13.0
 mouse_filter = 2
 
-[node name="ExpandButton" type="TextureButton" parent="ScrollContainer/VerticalContainer" groups=["UIButtons"]]
+[node name="ExpandButton" type="Button" parent="ScrollContainer/VerticalContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource("6_b86m2")
-texture_pressed = ExtResource("7_p4te3")
+text = "Color options"
+icon = ExtResource("5_hhe4d")
+flat = true
+alignment = 0
 
 [connection signal="color_changed" from="ScrollContainer/VerticalContainer/ColorPicker" to="." method="_on_color_picker_color_changed"]
 [connection signal="toggled" from="ScrollContainer/VerticalContainer/ColorButtons/LeftColorButton" to="." method="_on_left_color_button_toggled"]

@@ -1,5 +1,8 @@
 extends Container
 
+const VALUE_ARROW := preload("res://assets/graphics/misc/value_arrow_right.svg")
+const VALUE_ARROW_EXPANDED := preload("res://assets/graphics/misc/value_arrow.svg")
+
 ## The swatches button of the [ColorPicker] node. Used to ensure that swatches are always invisible
 var swatches_button: Button
 @onready var color_picker := %ColorPicker as ColorPicker
@@ -7,7 +10,7 @@ var swatches_button: Button
 @onready var left_color_rect := %LeftColorRect as ColorRect
 @onready var right_color_rect := %RightColorRect as ColorRect
 @onready var average_color := %AverageColor as ColorRect
-@onready var expand_button: TextureButton = $ScrollContainer/VerticalContainer/ExpandButton
+@onready var expand_button: Button = $ScrollContainer/VerticalContainer/ExpandButton
 
 
 func _ready() -> void:
@@ -65,6 +68,10 @@ func _ready() -> void:
 	# increases the size of the color buttons.
 	var presets_container := picker_vbox_container.get_child(6, true) as GridContainer
 	presets_container.add_theme_constant_override("h_separation", 5)
+	# Move the expand button above the RGB, HSV etc buttons
+	expand_button.get_parent().remove_child(expand_button)
+	picker_vbox_container.add_child(expand_button)
+	picker_vbox_container.move_child(expand_button, 2)
 
 
 func _on_color_picker_color_changed(color: Color) -> void:
@@ -106,6 +113,10 @@ func _on_ColorDefaults_pressed() -> void:
 
 
 func _on_expand_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		expand_button.icon = VALUE_ARROW_EXPANDED
+	else:
+		expand_button.icon = VALUE_ARROW
 	color_picker.color_modes_visible = toggled_on
 	color_picker.sliders_visible = toggled_on
 	color_picker.presets_visible = toggled_on
