@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-05-07 22:49\n"
+"PO-Revision-Date: 2024-05-08 14:28\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1337,6 +1337,10 @@ msgstr ""
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
+msgstr ""
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
 msgstr ""
 
 msgid "Left tool"
