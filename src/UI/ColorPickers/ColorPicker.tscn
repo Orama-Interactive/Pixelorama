@@ -197,6 +197,7 @@ mouse_filter = 2
 
 [node name="ExpandButton" type="Button" parent="ScrollContainer/VerticalContainer"]
 layout_mode = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 text = "Color options"
