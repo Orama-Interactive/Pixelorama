@@ -38,4 +38,30 @@ mouse_default_cursor_shape = 2
 text = "Idle"
 flat = true
 
+[node name="ResizeFrom" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 32.0
+mouse_default_cursor_shape = 10
+keep_pressed_outside = true
+flat = true
+
+[node name="ResizeTo" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 32.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 10
+keep_pressed_outside = true
+flat = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="gui_input" from="ResizeFrom" to="." method="_on_resize_from_gui_input"]
+[connection signal="gui_input" from="ResizeTo" to="." method="_on_resize_to_gui_input"]

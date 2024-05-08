@@ -47,9 +47,7 @@ func _on_confirmed() -> void:
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
 	for tag in Global.current_project.animation_tags:
-		var new_tag := AnimationTag.new(tag.name, tag.color, tag.from, tag.to)
-		new_tag.user_data = tag.user_data
-		new_animation_tags.append(new_tag)
+		new_animation_tags.append(tag.duplicate())
 
 	if current_tag_id == Global.current_project.animation_tags.size():
 		var new_tag := AnimationTag.new(tag_name, tag_color, tag_from, tag_to)

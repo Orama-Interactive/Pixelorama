@@ -67,6 +67,12 @@ func serialize() -> Dictionary:
 	return dict
 
 
+func duplicate() -> AnimationTag:
+	var new_tag := AnimationTag.new(name, color, from, to)
+	new_tag.user_data = user_data
+	return new_tag
+
+
 func get_size() -> int:
 	return to - from + 1
 
