@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-05-07 22:49\n"
+"PO-Revision-Date: 2024-05-08 09:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1849,7 +1849,7 @@ msgid "Jump to the last frame\n"
 msgstr "Перейти на последний кадр\n"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Настройка таймлана"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Включить/выключить шлейф кадров"
@@ -1911,7 +1911,7 @@ msgstr "Если этот параметр включён, при анимаци
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Размер ячейки:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
