@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-05-07 22:49\n"
+"PO-Revision-Date: 2024-05-08 06:26\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1850,7 +1850,7 @@ msgid "Jump to the last frame\n"
 msgstr "Son kareye atla\n"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Zaman çizelgesi ayarları"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Onion Skinning aktif/pasif et"
@@ -1912,7 +1912,7 @@ msgstr "Eğer seçili ise animasyon sadece aynı etikete sahip karelerde oynatı
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Hücre boyutu:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
