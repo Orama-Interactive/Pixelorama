@@ -275,15 +275,14 @@ void fragment() {
 	vec2 size = 1.0/TEXTURE_PIXEL_SIZE+0.0001; //fix for some sort of rounding error
 	// Pixelorama edit
 	vec4 original = texture(TEXTURE, UV);
-	vec2 pivot = pivot_pixel / size; // Normalize pivot position
 	float ratio = size.x / size.y; // Resolution ratio
 	vec2 pixelated_uv = floor(UV * size) / (size - 1.0); // Pixelate UV to fit resolutio
 	vec2 rotated_uv;
 	if (preview) {
-		rotated_uv = rotate(pixelated_uv, pivot, ratio);
+		rotated_uv = rotate(pixelated_uv, ratio);
 	}
 	else {
-		rotated_uv = rotate(UV, pivot, ratio);
+		rotated_uv = rotate(UV, ratio);
 	}
 	vec2 px = rotated_uv * size;
 	vec2 local = fract(px);

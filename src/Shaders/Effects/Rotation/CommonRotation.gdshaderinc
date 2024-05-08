@@ -1,22 +1,14 @@
 uniform sampler2D selection_tex : filter_nearest;
-uniform vec2 pivot_pixel;
-uniform float angle;
+uniform vec2 pivot;
+uniform mat2 transformation_matrix;
 
-vec2 rotate(vec2 uv, vec2 pivot, float ratio) {
+vec2 rotate(vec2 uv, float ratio) {
 	// Scale and center image
-	uv.x -= pivot.x;
-	uv.x *= ratio;
-	uv.x += pivot.x;
+	uv.x = (uv.x - pivot.x) * ratio + pivot.x;
+	uv -= pivot;
 
 	// Rotate image
-	uv -= pivot;
-	mat3 transformation = mat3(
-		vec3(cos(angle), -sin(angle), 0.0),
-		vec3(sin(angle), cos(angle), 0.0),
-		vec3(0.0, 0.0, 1.0)
-	);
-
-	uv = (transformation * vec3(uv, 1.0)).xy;
+	uv *= transformation_matrix;
 	uv.x /= ratio;
 	uv += pivot;
 

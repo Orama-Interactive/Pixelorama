@@ -6,7 +6,7 @@ uniform sampler2D selection_tex : filter_nearest;
 uniform float initial_angle = 0.0;
 uniform float ending_angle = 0.0;
 uniform float tolerance : hint_range(0.0, 255.0) = 100.0;
-uniform vec2 origin = vec2(0.0, 0.0);
+uniform vec2 pivot = vec2(0.0, 0.0);
 uniform vec2 position = vec2(0.0, 0.0);
 
 bool similarColors(vec4 c1, vec4 c2) {
@@ -16,7 +16,7 @@ bool similarColors(vec4 c1, vec4 c2) {
 
 vec4 rotate(sampler2D tex, vec2 uv, vec2 tex_pixel_size) {
 	vec4 color = vec4(0.0);
-	vec2 center = origin / tex_pixel_size;
+	vec2 center = pivot / tex_pixel_size;
 	vec2 size = 1.0 / tex_pixel_size;
 	vec2 coord = uv / tex_pixel_size + position;
 	int dx = 3 * (int(coord.x) - int(center.x));
@@ -113,7 +113,7 @@ vec4 rotate(sampler2D tex, vec2 uv, vec2 tex_pixel_size) {
 // The exact same as rotate, but had to be re-defined due to https://github.com/godotengine/godot/issues/75935
 vec4 rotate_uniform(sampler2D tex, vec2 uv, vec2 tex_pixel_size) {
 	vec4 color = vec4(0.0);
-	vec2 center = origin / tex_pixel_size;
+	vec2 center = pivot / tex_pixel_size;
 	vec2 size = 1.0 / tex_pixel_size;
 	vec2 coord = uv / tex_pixel_size + position;
 	int dx = 3 * (int(coord.x) - int(center.x));

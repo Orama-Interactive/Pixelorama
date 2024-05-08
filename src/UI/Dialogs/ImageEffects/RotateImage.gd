@@ -99,17 +99,16 @@ func commit_action(cel: Image, _project := Global.current_project) -> void:
 	if _type_is_shader():
 		var shader := rotxel_shader
 		var params := {
-			"angle": angle, "selection_tex": selection_tex, "pivot_pixel": pivot, "preview": true
+			"transformation_matrix": Transform2D(angle, Vector2.ZERO),
+			"selection_tex": selection_tex,
+			"pivot": pivot / Vector2(cel.get_size()),
+			"preview": true
 		}
 		match type_option_button.get_selected_id():
 			ROTXEL_SMEAR:
-				params = {
-					"initial_angle": init_angle,
-					"ending_angle": angle,
-					"tolerance": tolerance_slider.value,
-					"selection_tex": selection_tex,
-					"origin": pivot / Vector2(cel.get_size()),
-				}
+				params["ending_angle"] = angle
+				params["initial_angle"] = init_angle
+				params["tolerance"] = tolerance_slider.value
 			CLEANEDGE:
 				shader = DrawingAlgos.clean_edge_shader
 			OMNISCALE:
