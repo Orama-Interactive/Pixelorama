@@ -77,25 +77,26 @@ func _calculate_pivot() -> void:
 	_on_Pivot_value_changed(pivot)
 
 
-func commit_action(cel: Image, _project := Global.current_project) -> void:
+func commit_action(cel: Image, project := Global.current_project) -> void:
 	var angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
 	var init_angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.INIT_ANGLE))
 
 	var selection_tex: ImageTexture
 	var image := Image.new()
 	image.copy_from(cel)
-	if _project.has_selection and selection_checkbox.button_pressed:
-		var selection := _project.selection_map.return_cropped_copy(_project.size)
+	if project.has_selection and selection_checkbox.button_pressed:
+		var selection := project.selection_map.return_cropped_copy(project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
 
 		if !_type_is_shader():
-			for x in _project.size.x:
-				for y in _project.size.y:
-					var pos := Vector2i(x, y)
-					if !_project.can_pixel_get_drawn(pos):
-						image.set_pixelv(pos, Color(0, 0, 0, 0))
-					else:
-						cel.set_pixelv(pos, Color(0, 0, 0, 0))
+			var blank := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			cel.blit_rect_mask(
+				blank, selection, Rect2i(Vector2i.ZERO, cel.get_size()), Vector2i.ZERO
+			)
+			selection.invert()
+			image.blit_rect_mask(
+				blank, selection, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO
+			)
 	if _type_is_shader():
 		var shader := rotxel_shader
 		var params := {
@@ -121,7 +122,7 @@ func commit_action(cel: Image, _project := Global.current_project) -> void:
 		else:
 			params["preview"] = false
 			var gen := ShaderImageEffect.new()
-			gen.generate_image(cel, shader, params, _project.size)
+			gen.generate_image(cel, shader, params, project.size)
 	else:
 		match type_option_button.get_selected_id():
 			ROTXEL:
@@ -131,7 +132,7 @@ func commit_action(cel: Image, _project := Global.current_project) -> void:
 			URD:
 				DrawingAlgos.fake_rotsprite(image, angle, pivot)
 
-		if _project.has_selection and selection_checkbox.button_pressed:
+		if project.has_selection and selection_checkbox.button_pressed:
 			cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 		else:
 			cel.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
