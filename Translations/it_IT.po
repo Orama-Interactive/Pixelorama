@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-05-08 14:28\n"
+"PO-Revision-Date: 2024-05-10 19:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1384,7 +1384,7 @@ msgstr "Selezionare una forma di selezione."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Opzioni di colore"
 
 msgid "Left tool"
 msgstr "Strumento sinistra"
