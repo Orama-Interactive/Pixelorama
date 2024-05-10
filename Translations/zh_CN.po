@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-05-08 14:28\n"
+"PO-Revision-Date: 2024-05-10 02:11\n"
 
 msgid "OK"
 msgstr "确定"
@@ -776,7 +776,7 @@ msgstr "显示比例："
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "字体大小："
 
 msgid "Dim interface on dialog popup"
 msgstr "对话框弹出时变暗界面"
@@ -1384,7 +1384,7 @@ msgstr "选择一个选择器形状。"
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "颜色选项"
 
 msgid "Left tool"
 msgstr "左键工具"
@@ -1855,7 +1855,7 @@ msgid "Jump to the last frame\n"
 msgstr "跳转到最后一帧\n"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "时间轴设置"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "启用/禁用洋葱皮"
@@ -1917,7 +1917,7 @@ msgstr "如果选中，动画仅在具有相同标签的帧上播放。\n"
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "像素大小："
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -1978,11 +1978,11 @@ msgid "Cel properties"
 msgstr "单元格属性"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "标签属性"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "新建标签"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1999,7 +1999,7 @@ msgstr "图层"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr ""
+msgstr "剪切蒙版"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
