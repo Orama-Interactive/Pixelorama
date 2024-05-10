@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-05-08 14:27\n"
+"PO-Revision-Date: 2024-05-10 09:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1382,7 +1382,7 @@ msgstr "Selectează o formă pentru selector."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Opțiuni de culoare"
 
 msgid "Left tool"
 msgstr "Instrument stânga"
