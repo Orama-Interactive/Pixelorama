@@ -16,16 +16,11 @@ extends RefCounted
 ## Here is an example of how a new tag may be created ([b]with[/b] undo-redo functionality)
 ## [codeblock]
 ##func create_tag(tag_name: StringName, color: Color, from: int, to: int):
-##    var new_animation_tags := Global.current_project.animation_tags.duplicate()
+##    var new_animation_tags: Array[AnimationTag] = []
 ##    # Loop through the tags to create new classes for them, so that they won't be the same
 ##    # as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
-##    for i in new_animation_tags.size():
-##        new_animation_tags[i] = AnimationTag.new(
-##            new_animation_tags[i].name,
-##            new_animation_tags[i].color,
-##            new_animation_tags[i].from,
-##            new_animation_tags[i].to
-##        )
+##    for tag in Global.current_project.animation_tags:
+##        new_animation_tags.append(tag.duplicate())
 ##
 ##    new_animation_tags.append(AnimationTag.new(tag_name, color, from, to))
 ##
