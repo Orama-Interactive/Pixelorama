@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-05-08 14:28\n"
+"PO-Revision-Date: 2024-05-12 14:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1382,7 +1382,7 @@ msgstr "Выбрать форму пикера."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Настройки цвета"
 
 msgid "Left tool"
 msgstr "Левый инструмент"
