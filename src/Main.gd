@@ -574,4 +574,4 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "show_rulers", Global.show_rulers)
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
-	Global.config_cache.save("user://cache.ini")
+	Global.config_cache.save(Global.CONFIG_PATH)

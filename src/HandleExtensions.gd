@@ -220,7 +220,7 @@ func enable_extension(extension: Extension, save_to_config := true) -> void:
 
 	if save_to_config:
 		Global.config_cache.set_value("extensions", extension.file_name, extension.enabled)
-		Global.config_cache.save("user://cache.ini")
+		Global.config_cache.save(Global.CONFIG_PATH)
 
 
 func uninstall_extension(file_name := "", remove_mode := UninstallMode.REMOVE_PERMANENT) -> void:

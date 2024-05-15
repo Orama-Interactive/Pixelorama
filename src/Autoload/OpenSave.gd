@@ -263,7 +263,7 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 		# Set last opened project path and save
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
-		Global.config_cache.save("user://cache.ini")
+		Global.config_cache.save(Global.CONFIG_PATH)
 		new_project.file_name = path.get_file().trim_suffix(".pxo")
 		new_project.was_exported = false
 		Global.top_menu_container.file_menu.set_item_text(
@@ -425,7 +425,7 @@ func save_pxo_file(
 		# Set last opened project path and save
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
-		Global.config_cache.save("user://cache.ini")
+		Global.config_cache.save(Global.CONFIG_PATH)
 		if !project.was_exported:
 			project.file_name = path.get_file().trim_suffix(".pxo")
 			project.export_directory_path = path.get_base_dir()

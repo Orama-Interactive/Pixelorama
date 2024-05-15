@@ -106,6 +106,8 @@ const LANGUAGES_DICT := {
 	"uk_UA": ["Українська", "Ukrainian"],
 }
 
+## The file path used for the [member config_cache] file.
+const CONFIG_PATH := "user://config.ini"
 ## The file used to save preferences that use [code]ProjectSettings.save_custom()[/code].
 const OVERRIDE_FILE := "override.cfg"
 ## The name of folder containing Pixelorama preferences.
@@ -655,7 +657,7 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 func _init() -> void:
 	# Load settings from the config file
-	config_cache.load("user://cache.ini")
+	config_cache.load(CONFIG_PATH)
 	loaded_locales.sort()  # Make sure locales are always sorted
 	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()

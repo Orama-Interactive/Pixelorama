@@ -52,7 +52,7 @@ func change_theme(id: int) -> void:
 	change_clear_color()
 	change_icon_colors()
 	Global.config_cache.set_value("preferences", "theme", id)
-	Global.config_cache.save("user://cache.ini")
+	Global.config_cache.save(Global.CONFIG_PATH)
 	theme_switched.emit()
 
 

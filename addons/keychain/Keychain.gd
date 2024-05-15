@@ -22,7 +22,7 @@ var ignore_ui_actions := true
 ## and the fourth for [InputEventJoypadMotion]s.
 var changeable_types: PackedByteArray = [true, true, true, true]
 ## The file path of the [code]config_file[/code].
-var config_path := "user://cache.ini"
+var config_path := "user://config.ini"
 ## Used to store the settings to the filesystem.
 var config_file: ConfigFile
 
@@ -58,11 +58,11 @@ func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(PROFILES_PATH)
 	var profile_dir := DirAccess.open(PROFILES_PATH)
 	profile_dir.list_dir_begin()
-	var file_name = profile_dir.get_next()
+	var file_name := profile_dir.get_next()
 	while file_name != "":
 		if !profile_dir.current_is_dir():
 			if file_name.get_extension() == "tres":
-				var file = load(PROFILES_PATH.path_join(file_name))
+				var file := load(PROFILES_PATH.path_join(file_name))
 				if file is ShortcutProfile:
 					profiles.append(file)
 		file_name = profile_dir.get_next()

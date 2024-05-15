@@ -373,7 +373,7 @@ func _on_PreferencesDialog_visibility_changed() -> void:
 	if not visible:
 		list.clear()
 		Global.dialog_open(false)
-		Global.config_cache.save("user://cache.ini")
+		Global.config_cache.save(Global.CONFIG_PATH)
 
 
 func _on_List_item_selected(index: int) -> void:
@@ -407,7 +407,7 @@ func _on_language_pressed(index: int) -> void:
 		locale = Global.loaded_locales[index - 2]
 	Global.set_locale(locale)
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
-	Global.config_cache.save("user://cache.ini")
+	Global.config_cache.save(Global.CONFIG_PATH)
 
 	# Update some UI elements with the new translations
 	Tools.update_hint_tooltips()
