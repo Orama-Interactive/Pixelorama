@@ -1,6 +1,6 @@
 extends "res://src/Tools/BaseDraw.gd"
 
-enum Points {START, END, MIDDLE_A, MIDDLE_B, READY}
+enum Points { START, END, MIDDLE_A, MIDDLE_B, READY }
 var _start := Vector2i.ZERO
 var _dest := Vector2i.ZERO
 var _mid_a := Vector2i.ZERO
