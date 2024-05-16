@@ -178,11 +178,11 @@ func _draw_shape() -> void:
 func _bezier(detail: float = 50) -> Array[Vector2i]:
 	var res: Array[Vector2i] = []
 	for i in range(0, detail + 1):
-		var t = i/detail
+		var t = i / detail
 		var point: Vector2i = (
-			(pow(1-t, 3) * _start)
-			+ (3 * pow(1-t, 2) * t * _mid_a)
-			+ (3 * (1-t) * pow(t, 2) * _mid_b)
+			(pow(1 - t, 3) * _start)
+			+ (3 * pow(1 - t, 2) * t * _mid_a)
+			+ (3 * (1 - t) * pow(t, 2) * _mid_b)
 			+ (pow(t, 3) * _dest)
 		)
 		if !point in res:
