@@ -151,6 +151,21 @@ Hold %s to displace the shape's origin""",
 			["shape_perfect", "shape_center", "shape_displace"]
 		)
 	),
+	"CurveTool":
+	(
+		Tool
+		. new(
+			"CurveTool",
+			"Curve Tool",
+			"curvetool",
+			"res://src/Tools/DesignTools/CurveTool.tscn",
+			[Global.LayerTypes.PIXEL],
+			"""Hold %s to snap the angle of the line
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin""",
+			["shape_perfect", "shape_center", "shape_displace"]
+		)
+	),
 	"RectangleTool":
 	(
 		Tool

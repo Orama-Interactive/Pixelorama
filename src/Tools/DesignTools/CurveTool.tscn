@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckfvd8gf3oy4r"]
+
+[ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1_rvuea"]
+[ext_resource type="Script" path="res://src/Tools/DesignTools/CurveTool.gd" id="2_tjnp6"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3_g0nav"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ko8wf"]
+resource_name = "rotate"
+allow_unpress = true
+
+[node name="ToolOptions" instance=ExtResource("1_rvuea")]
+script = ExtResource("2_tjnp6")
+
+[node name="ThicknessSlider" parent="." index="2" instance=ExtResource("3_g0nav")]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+prefix = "Size:"
+suffix = "px"
+global_increment_action = "brush_size_increment"
+global_decrement_action = "brush_size_decrement"
+
+[node name="DetailSlider" parent="." index="3" instance=ExtResource("3_g0nav")]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+allow_greater = true
+prefix = "Detail:"
+
+[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_ko8wf")
+
+[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_ko8wf")
+
+[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_ko8wf")
+
+[node name="Brush" parent="." index="5"]
+visible = false
+
+[node name="DoubleClickTimer" type="Timer" parent="." index="7"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
+[connection signal="value_changed" from="DetailSlider" to="." method="_on_detail_value_changed"]
