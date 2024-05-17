@@ -77,6 +77,11 @@ func _input(event: InputEvent) -> void:
 			if event.double_click and event.button_index == tool_slot.button:
 				$DoubleClickTimer.start()
 				_draw_shape()
+		else:
+			if event.is_action_pressed("change_tool_mode"):
+				if control_points.size() > 3:  ## atleast one curve should be present
+					control_points.resize(control_points.size() - 3)
+					control_points[-1] = control_points[-2]  ## reset the last bezier point
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -105,7 +110,8 @@ func draw_move(pos: Vector2i) -> void:
 	if _drawing:
 		_editing_bezier = true
 		control_points[-1] = pos
-		control_points[-2] = pos
+		## The two bezier points should be equal unless one is changed by next added curve
+		control_points[-2] = control_points[-1]
 		if control_points.size() > 3:
 			var offset: Vector2i = (
 				Vector2(control_points[-3] - control_points[-2]).rotated(deg_to_rad(180)).floor()

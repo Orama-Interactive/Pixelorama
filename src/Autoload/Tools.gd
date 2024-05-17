@@ -160,10 +160,11 @@ Hold %s to displace the shape's origin""",
 			"curvetool",
 			"res://src/Tools/DesignTools/CurveTool.tscn",
 			[Global.LayerTypes.PIXEL],
-			"""Hold %s to snap the angle of the line
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin""",
-			["shape_perfect", "shape_center", "shape_displace"]
+			"""Draws bezier curves
+Press %s/%s to add new points
+Press and Drag to curve them
+Hold %s remove the last added point""",
+			["activate_left_tool", "activate_right_tool", "change_tool_mode"]
 		)
 	),
 	"RectangleTool":
