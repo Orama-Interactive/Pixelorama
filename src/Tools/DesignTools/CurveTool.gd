@@ -2,11 +2,13 @@ extends "res://src/Tools/BaseDraw.gd"
 
 var control_points := []
 var _drawing := false
+var _editing_bezier := false
 var _thickness := 1
 var _detail := 1000
 
 
 func _init() -> void:
+	Global.project_about_to_switch.connect(_draw_shape)  # To prevent tool from remaining active
 	_drawer.color_op = Drawer.ColorOp.new()
 	update_indicator()
 
@@ -81,7 +83,6 @@ func _input(event: InputEvent) -> void:
 				and event.button_index == tool_slot.button
 			):
 				$DoubleClickTimer.start()
-				_drawing = false
 				_draw_shape()
 
 
@@ -112,14 +113,19 @@ func draw_move(pos: Vector2i) -> void:
 			_pick_color(pos)
 		return
 	if _drawing:
+		_editing_bezier = true
 		control_points[-1] = pos
 		control_points[-2] = pos
 		if control_points.size() > 3:
-			var offset = (
-				Vector2(control_points[-2]).direction_to(control_points[-3])
-				* Vector2(control_points[-2]).distance_to(control_points[-3])
-			)
-			control_points[-4] = Vector2i(offset)
+			var offset: Vector2i = Vector2(
+				control_points[-3] - control_points[-2]
+			).rotated(deg_to_rad(180)).floor()
+			control_points[-4] = control_points[-3] - offset
+
+
+func draw_end(pos: Vector2i) -> void:
+	_editing_bezier = false
+	super.draw_end(pos)
 
 
 func draw_preview() -> void:
@@ -140,6 +146,20 @@ func draw_preview() -> void:
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
+		if _editing_bezier:
+			var start = control_points[0]  # well.. i have to start the line somewhere
+			var end = control_points[-2]
+			if control_points.size() > 3:
+				start = control_points[-4]
+			canvas.draw_line(start, end, Color.BLACK)
+			var circle_radius := Vector2.ONE * (5 / Global.camera.zoom.x)
+			draw_empty_circle(
+				canvas, start, circle_radius, Color.BLACK
+			)
+			draw_empty_circle(
+				canvas, end, circle_radius, Color.BLACK
+			)
+
 
 func _draw_shape() -> void:
 	var points := _bezier(_detail)
@@ -149,6 +169,8 @@ func _draw_shape() -> void:
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
 		draw_tool(point)
+	control_points.clear()
+	_drawing = false
 
 	commit_undo()
 
@@ -223,3 +245,23 @@ func _fill_bitmap_with_points(points: Array[Vector2i], bitmap_size: Vector2i) ->
 		bitmap.set_bitv(point, 1)
 
 	return bitmap
+
+
+# Thanks to
+# https://www.reddit.com/r/godot/comments/3ktq39/drawing_empty_circles_and_curves/cv0f4eo/
+func draw_empty_circle(
+	canvas: CanvasItem, circle_center: Vector2, circle_radius: Vector2, color: Color
+) -> void:
+	var draw_counter := 1
+	var line_origin := Vector2()
+	var line_end := Vector2()
+	line_origin = circle_radius + circle_center
+
+	while draw_counter <= 360:
+		line_end = circle_radius.rotated(deg_to_rad(draw_counter)) + circle_center
+		canvas.draw_line(line_origin, line_end, color)
+		draw_counter += 1
+		line_origin = line_end
+
+	line_end = circle_radius.rotated(deg_to_rad(360)) + circle_center
+	canvas.draw_line(line_origin, line_end, color)
