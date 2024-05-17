@@ -1,14 +1,9 @@
 extends "res://src/Tools/BaseDraw.gd"
 
-enum Points { START, END, MIDDLE_A, MIDDLE_B, READY }
-var _start := Vector2i.ZERO
-var _dest := Vector2i.ZERO
-var _mid_a := Vector2i.ZERO
-var _mid_b := Vector2i.ZERO
+var control_points := []
 var _drawing := false
 var _thickness := 1
 var _detail := 1000
-var current_point = Points.START
 
 
 func _init() -> void:
@@ -79,37 +74,15 @@ func _input(event: InputEvent) -> void:
 				if Global.mirror_view:
 					# mirroring position is ONLY required by "Preview"
 					pos.x = Global.current_project.size.x - pos.x - 1
-				set_current_point(pos)
+				#set_current_point(pos)
 		elif event is InputEventMouseButton:
 			if (
 				event.double_click
 				and event.button_index == tool_slot.button
-				and current_point >= Points.END
 			):
 				$DoubleClickTimer.start()
 				_drawing = false
 				_draw_shape()
-
-
-func set_current_point(pos: Vector2i, increment := false):
-	match current_point:
-		Points.START:
-			_start = pos
-			_dest = pos
-			_mid_a = pos
-			_mid_b = pos
-		Points.END:
-			_dest = pos
-			_mid_a = pos
-			_mid_b = pos
-		Points.MIDDLE_A:
-			_mid_a = pos
-			_mid_b = pos
-		Points.MIDDLE_B:
-			_mid_b = pos
-	if increment:
-		@warning_ignore("int_as_enum_without_cast")
-		current_point += 1
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -127,12 +100,8 @@ func draw_start(pos: Vector2i) -> void:
 		# mirroring position is ONLY required by "Preview"
 		pos.x = Global.current_project.size.x - pos.x - 1
 	if !_drawing:
-		current_point = Points.START
 		_drawing = true
-	set_current_point(pos, true)
-	if current_point == Points.READY:
-		_drawing = false
-		_draw_shape()
+	control_points.append_array([pos, pos, pos])  # Append first start point and 2 bezier points
 
 
 func draw_move(pos: Vector2i) -> void:
@@ -142,6 +111,15 @@ func draw_move(pos: Vector2i) -> void:
 		if Input.is_action_pressed("shape_displace"):
 			_pick_color(pos)
 		return
+	if _drawing:
+		control_points[-1] = pos
+		control_points[-2] = pos
+		if control_points.size() > 3:
+			var offset = (
+				Vector2(control_points[-2]).direction_to(control_points[-3])
+				* Vector2(control_points[-2]).distance_to(control_points[-3])
+			)
+			control_points[-4] = Vector2i(offset)
 
 
 func draw_preview() -> void:
@@ -177,19 +155,25 @@ func _draw_shape() -> void:
 
 func _bezier(detail: float = 50) -> Array[Vector2i]:
 	var res: Array[Vector2i] = []
-	for i in range(0, detail + 1):
-		var t = i / detail
-		var point: Vector2i = (
-			(pow(1 - t, 3) * _start)
-			+ (3 * pow(1 - t, 2) * t * _mid_a)
-			+ (3 * (1 - t) * pow(t, 2) * _mid_b)
-			+ (pow(t, 3) * _dest)
-		)
-		if !point in res:
-			if res.is_empty():
-				res.append(point)
-			else:
-				res.append_array(_fill_gap(res[-1], point))
+	for i in range(0, control_points.size(), 3):
+		var points = control_points.slice(i, i + 4)
+		if points.size() < 4:
+			for _missing in range(points.size(), 4):
+				points.append(Global.canvas.current_pixel)
+
+		for d in range(0, detail + 1):
+			var t = d / detail
+			var point: Vector2i = (
+				(pow(1 - t, 3) * points[0])
+				+ (3 * pow(1 - t, 2) * t * points[1])
+				+ (3 * (1 - t) * pow(t, 2) * points[2])
+				+ (pow(t, 3) * points[3])
+			)
+			if !point in res:
+				if res.is_empty():
+					res.append(point)
+				else:
+					res.append_array(_fill_gap(res[-1], point))
 	return res
 
 
