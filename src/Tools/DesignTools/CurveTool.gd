@@ -1,9 +1,11 @@
 extends "res://src/Tools/BaseDraw.gd"
 
-var perma_points := []  # Optimization approach
+## The points in this arrat follow the pattern [ point 1, bezier 1, bezier 2, point 2, ... ]
+## points are actual points on the lines, while bezier is a point that determines
+## the shape of the curve.
 var control_points := []
 var _drawing := false
-var _editing_bezier := false
+var _editing_bezier := false  ## needed to determine when to show gizmo
 var _thickness := 1
 var _detail := 1000
 
@@ -71,14 +73,7 @@ func _get_shape_points_filled(_size: Vector2i) -> Array[Vector2i]:
 
 func _input(event: InputEvent) -> void:
 	if _drawing:
-		if event is InputEventMouseMotion:
-			var pos: Vector2i = snap_position(Global.canvas.current_pixel.floor())
-			if _drawing:
-				if Global.mirror_view:
-					# mirroring position is ONLY required by "Preview"
-					pos.x = Global.current_project.size.x - pos.x - 1
-				#set_current_point(pos)
-		elif event is InputEventMouseButton:
+		if event is InputEventMouseButton:
 			if event.double_click and event.button_index == tool_slot.button:
 				$DoubleClickTimer.start()
 				_draw_shape()
@@ -95,9 +90,6 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
-	if Global.mirror_view:
-		# mirroring position is ONLY required by "Preview"
-		pos.x = Global.current_project.size.x - pos.x - 1
 	if !_drawing:
 		_drawing = true
 	control_points.append_array([pos, pos, pos])  # Append first start point and 2 bezier points
@@ -132,6 +124,7 @@ func draw_preview() -> void:
 		var pos := canvas.position
 		var canvas_scale := canvas.scale
 		if Global.mirror_view:
+			# This fixes the "Preview" in mirror mode
 			pos.x = pos.x + Global.current_project.size.x
 			canvas_scale.x = -1
 
@@ -149,6 +142,11 @@ func draw_preview() -> void:
 			var end = control_points[-2]
 			if control_points.size() > 3:
 				start = control_points[-4]
+			if Global.mirror_view:
+				# This does mirror fixes to the gizmo
+				start.x = Global.current_project.size.x - start.x - 1
+				end.x = Global.current_project.size.x - end.x - 1
+
 			canvas.draw_line(start, end, Color.BLACK)
 			var circle_radius := Vector2.ONE * (5 / Global.camera.zoom.x)
 			draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
@@ -169,27 +167,29 @@ func _draw_shape() -> void:
 	commit_undo()
 
 
-func _bezier(detail: float = 50) -> Array[Vector2i]:
+func _bezier(detail: int = 50) -> Array[Vector2i]:
 	var res: Array[Vector2i] = []
 	for i in range(0, control_points.size(), 3):
 		var points = control_points.slice(i, i + 4)
 		if points.size() < 4:
 			for _missing in range(points.size(), 4):
-				points.append(Global.canvas.current_pixel)
-
+				var last_pixel = Global.canvas.current_pixel
+				if Global.mirror_view:
+					# This fixes mirroring of the last point of the curve
+					last_pixel.x = (Global.current_project.size.x - 1) - last_pixel.x
+				points.append(last_pixel)
 		for d in range(0, detail + 1):
-			var t = d / detail
+			var t = d / float(detail)
 			var point: Vector2i = (
 				(pow(1 - t, 3) * points[0])
 				+ (3 * pow(1 - t, 2) * t * points[1])
 				+ (3 * (1 - t) * pow(t, 2) * points[2])
 				+ (pow(t, 3) * points[3])
 			)
-			if !point in res:
-				if res.is_empty():
-					res.append(point)
-				else:
-					res.append_array(_fill_gap(res[-1], point))
+			if res.is_empty():
+				res.append(point)
+			else:
+				res.append_array(_fill_gap(res[-1], point))
 	return res
 
 

@@ -40,7 +40,7 @@ button_group = SubResource("ButtonGroup_ko8wf")
 visible = false
 
 [node name="DoubleClickTimer" type="Timer" parent="." index="7"]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
