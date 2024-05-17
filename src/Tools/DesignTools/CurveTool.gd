@@ -1,5 +1,6 @@
 extends "res://src/Tools/BaseDraw.gd"
 
+var perma_points := []  # Optimization approach
 var control_points := []
 var _drawing := false
 var _editing_bezier := false
@@ -78,10 +79,7 @@ func _input(event: InputEvent) -> void:
 					pos.x = Global.current_project.size.x - pos.x - 1
 				#set_current_point(pos)
 		elif event is InputEventMouseButton:
-			if (
-				event.double_click
-				and event.button_index == tool_slot.button
-			):
+			if event.double_click and event.button_index == tool_slot.button:
 				$DoubleClickTimer.start()
 				_draw_shape()
 
@@ -117,9 +115,9 @@ func draw_move(pos: Vector2i) -> void:
 		control_points[-1] = pos
 		control_points[-2] = pos
 		if control_points.size() > 3:
-			var offset: Vector2i = Vector2(
-				control_points[-3] - control_points[-2]
-			).rotated(deg_to_rad(180)).floor()
+			var offset: Vector2i = (
+				Vector2(control_points[-3] - control_points[-2]).rotated(deg_to_rad(180)).floor()
+			)
 			control_points[-4] = control_points[-3] - offset
 
 
@@ -153,12 +151,8 @@ func draw_preview() -> void:
 				start = control_points[-4]
 			canvas.draw_line(start, end, Color.BLACK)
 			var circle_radius := Vector2.ONE * (5 / Global.camera.zoom.x)
-			draw_empty_circle(
-				canvas, start, circle_radius, Color.BLACK
-			)
-			draw_empty_circle(
-				canvas, end, circle_radius, Color.BLACK
-			)
+			draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
+			draw_empty_circle(canvas, end, circle_radius, Color.BLACK)
 
 
 func _draw_shape() -> void:
