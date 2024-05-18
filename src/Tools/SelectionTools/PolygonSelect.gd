@@ -74,7 +74,7 @@ func draw_preview() -> void:
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
-		var circle_radius := Global.camera.zoom * 10
+		var circle_radius := Global.camera.zoom / 10.0
 		circle_radius.x = clampf(circle_radius.x, 2, circle_radius.x)
 		circle_radius.y = clampf(circle_radius.y, 2, circle_radius.y)
 
