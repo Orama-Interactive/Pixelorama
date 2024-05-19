@@ -26,6 +26,8 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	if name.is_empty():
+		name = "CollapsibleContainer"
 	_button.flat = flat
 	_button.toggle_mode = true
 	_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
