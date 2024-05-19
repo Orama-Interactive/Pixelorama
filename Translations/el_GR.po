@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-05-08 14:28\n"
+"PO-Revision-Date: 2024-05-19 13:20\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -776,7 +776,7 @@ msgstr "Κλίμακα εμφάνισης:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Μέγεθος γραμματοσειράς:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Σκοτείνιασμα περιβάλλοντος όταν εμφανίζεται αναδυόμενο παράθυρο"
@@ -1384,7 +1384,7 @@ msgstr "Επιλέξτε ένα σχήμα επιλογέα."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Επιλογές χρώματος"
 
 msgid "Left tool"
 msgstr "Αριστερό εργαλείο"
@@ -1855,7 +1855,7 @@ msgid "Jump to the last frame\n"
 msgstr "Μετάβαση στο τελευταίο καρέ\n"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Ρυθμίσεις χρονοδιαγράμματος"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Ενεργοποίηση/απενεργοποίηση Onion Skinning"
@@ -1917,7 +1917,7 @@ msgstr "Αν είναι επιλεγμένο, η κίνηση παίζει μό�
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Μέγεθος cel:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -1978,11 +1978,11 @@ msgid "Cel properties"
 msgstr "Ιδιότητες cel"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "Ιδιότητες ετικέτας"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "Νέα ετικέτα"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1999,7 +1999,7 @@ msgstr "Στρώσεις"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr ""
+msgstr "Μάσκα αποκοπής"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
