@@ -5,6 +5,7 @@ var _drawing := false  ## Set to true when a curve is being drawn.
 var _fill := false  ## When true, the inside area of the curve gets filled.
 var _editing_bezier := false  ## Needed to determine when to show the control points preview line.
 var _thickness := 1  ## The thickness of the curve.
+var _last_mouse_position := Vector2.INF  ## The last position of the mouse
 
 
 func _init() -> void:
@@ -56,7 +57,11 @@ func update_config() -> void:
 
 func _input(event: InputEvent) -> void:
 	if _drawing:
-		if event is InputEventMouseButton:
+		if event is InputEventMouseMotion:
+			_last_mouse_position = Global.canvas.current_pixel.floor()
+			if Global.mirror_view:
+				_last_mouse_position.x = Global.current_project.size.x - 1 - _last_mouse_position.x
+		elif event is InputEventMouseButton:
 			if event.double_click and event.button_index == tool_slot.button:
 				$DoubleClickTimer.start()
 				_draw_shape()
@@ -98,6 +103,8 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	_editing_bezier = false
+	if _is_hovering_first_position(pos):
+		_draw_shape()
 	super.draw_end(pos)
 
 
@@ -120,6 +127,10 @@ func draw_preview() -> void:
 
 	canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
+	var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
+	if _is_hovering_first_position(_last_mouse_position):
+		var circle_center := _curve.get_point_position(0) + Vector2.ONE * 0.5
+		draw_empty_circle(canvas, circle_center, circle_radius * 2.0, Color.BLACK)
 	if _editing_bezier:
 		var start := _curve.get_point_position(0)
 		if _curve.point_count > 1:
@@ -136,7 +147,6 @@ func draw_preview() -> void:
 			end.x = Global.current_project.size.x - end.x - 1
 
 		canvas.draw_line(start, end, Color.BLACK)
-		var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
 		draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
 		draw_empty_circle(canvas, end, circle_radius, Color.BLACK)
 
@@ -228,6 +238,10 @@ func _fill_bitmap_with_points(points: Array[Vector2i], bitmap_size: Vector2i) ->
 		bitmap.set_bitv(point, 1)
 
 	return bitmap
+
+
+func _is_hovering_first_position(pos: Vector2) -> bool:
+	return _curve.point_count > 0 and _curve.get_point_position(0) == pos
 
 
 # Thanks to
