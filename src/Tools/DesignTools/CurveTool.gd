@@ -2,6 +2,7 @@ extends "res://src/Tools/BaseDraw.gd"
 
 var _curve := Curve2D.new()  ## The [Curve2D] responsible for the shape of the curve being drawn.
 var _drawing := false  ## Set to true when a curve is being drawn.
+var _fill := false  ## When true, the inside area of the curve gets filled.
 var _editing_bezier := false  ## Needed to determine when to show the control points preview line.
 var _thickness := 1  ## The thickness of the curve.
 
@@ -16,9 +17,15 @@ func update_brush() -> void:
 	pass
 
 
-func _on_Thickness_value_changed(value: int) -> void:
+func _on_thickness_value_changed(value: int) -> void:
 	_thickness = value
 	update_indicator()
+	update_config()
+	save_config()
+
+
+func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
+	_fill = toggled_on
 	update_config()
 	save_config()
 
@@ -142,6 +149,15 @@ func _draw_shape() -> void:
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
 		draw_tool(point)
+	if _fill:
+		var v := Vector2i()
+		var image_size := Global.current_project.size
+		for x in image_size.x:
+			v.x = x
+			for y in image_size.y:
+				v.y = y
+				if Geometry2D.is_point_in_polygon(v, points):
+					draw_tool(v)
 	_curve.clear_points()
 	_drawing = false
 	commit_undo()
