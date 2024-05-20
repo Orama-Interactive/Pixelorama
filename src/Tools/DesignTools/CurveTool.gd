@@ -1,13 +1,9 @@
 extends "res://src/Tools/BaseDraw.gd"
 
-## The points in this arrat follow the pattern [ point 1, bezier 1, bezier 2, point 2, ... ]
-## points are actual points on the lines, while bezier is a point that determines
-## the shape of the curve.
-var control_points := []
-var _drawing := false
-var _editing_bezier := false  ## needed to determine when to show gizmo
-var _thickness := 1
-var _detail := 1000
+var _curve := Curve2D.new()  ## The [Curve2D] responsible for the shape of the curve being drawn.
+var _drawing := false  ## Set to true when a curve is being drawn.
+var _editing_bezier := false  ## Needed to determine when to show the control points preview line.
+var _thickness := 1  ## The thickness of the curve.
 
 
 func _init() -> void:
@@ -22,15 +18,6 @@ func update_brush() -> void:
 
 func _on_Thickness_value_changed(value: int) -> void:
 	_thickness = value
-
-	update_indicator()
-	update_config()
-	save_config()
-
-
-func _on_detail_value_changed(value: float) -> void:
-	_detail = value
-
 	update_indicator()
 	update_config()
 	save_config()
@@ -47,28 +34,17 @@ func update_indicator() -> void:
 func get_config() -> Dictionary:
 	var config := super.get_config()
 	config["thickness"] = _thickness
-	config["detail"] = _detail
 	return config
 
 
 func set_config(config: Dictionary) -> void:
 	super.set_config(config)
 	_thickness = config.get("thickness", _thickness)
-	_detail = config.get("detail", _detail)
 
 
 func update_config() -> void:
 	super.update_config()
 	$ThicknessSlider.value = _thickness
-	$DetailSlider.value = _detail
-
-
-func _get_shape_points(_size: Vector2i) -> Array[Vector2i]:
-	return []
-
-
-func _get_shape_points_filled(_size: Vector2i) -> Array[Vector2i]:
-	return []
 
 
 func _input(event: InputEvent) -> void:
@@ -78,10 +54,9 @@ func _input(event: InputEvent) -> void:
 				$DoubleClickTimer.start()
 				_draw_shape()
 		else:
-			if event.is_action_pressed("change_tool_mode"):
-				if control_points.size() > 3:  ## atleast one curve should be present
-					control_points.resize(control_points.size() - 3)
-					control_points[-1] = control_points[-2]  ## reset the last bezier point
+			if event.is_action_pressed("change_tool_mode"):  # Control removes the last added point
+				if _curve.point_count > 1:
+					_curve.remove_point(_curve.point_count - 1)
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -97,7 +72,7 @@ func draw_start(pos: Vector2i) -> void:
 	update_mask()
 	if !_drawing:
 		_drawing = true
-	control_points.append_array([pos, pos, pos])  # Append first start point and 2 bezier points
+	_curve.add_point(pos)
 
 
 func draw_move(pos: Vector2i) -> void:
@@ -109,14 +84,9 @@ func draw_move(pos: Vector2i) -> void:
 		return
 	if _drawing:
 		_editing_bezier = true
-		control_points[-1] = pos
-		## The two bezier points should be equal unless one is changed by next added curve
-		control_points[-2] = control_points[-1]
-		if control_points.size() > 3:
-			var offset: Vector2i = (
-				Vector2(control_points[-3] - control_points[-2]).rotated(deg_to_rad(180)).floor()
-			)
-			control_points[-4] = control_points[-3] - offset
+		var current_position := _curve.get_point_position(_curve.point_count - 1) - Vector2(pos)
+		_curve.set_point_in(_curve.point_count - 1, current_position)
+		_curve.set_point_out(_curve.point_count - 1, -current_position)
 
 
 func draw_end(pos: Vector2i) -> void:
@@ -125,80 +95,77 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func draw_preview() -> void:
-	if _drawing:
-		var canvas: Node2D = Global.canvas.previews
-		var pos := canvas.position
-		var canvas_scale := canvas.scale
-		if Global.mirror_view:
-			# This fixes the "Preview" in mirror mode
-			pos.x = pos.x + Global.current_project.size.x
-			canvas_scale.x = -1
+	if not _drawing:
+		return
+	var canvas: Node2D = Global.canvas.previews
+	var pos := canvas.position
+	var canvas_scale := canvas.scale
+	if Global.mirror_view:  # This fixes previewing in mirror mode
+		pos.x = pos.x + Global.current_project.size.x
+		canvas_scale.x = -1
 
-		var points := _bezier(_detail)
-		canvas.draw_set_transform(pos, canvas.rotation, canvas_scale)
-		var indicator := _fill_bitmap_with_points(points, Global.current_project.size)
+	var points := _bezier()
+	canvas.draw_set_transform(pos, canvas.rotation, canvas_scale)
+	var indicator := _fill_bitmap_with_points(points, Global.current_project.size)
 
-		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
+	for line in _create_polylines(indicator):
+		canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
-		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
+	canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
-		if _editing_bezier:
-			var start = control_points[0]  # well.. i have to start the line somewhere
-			var end = control_points[-2]
-			if control_points.size() > 3:
-				start = control_points[-4]
-			if Global.mirror_view:
-				# This does mirror fixes to the gizmo
-				start.x = Global.current_project.size.x - start.x - 1
-				end.x = Global.current_project.size.x - end.x - 1
+	if _editing_bezier:
+		var start := _curve.get_point_position(0)
+		if _curve.point_count > 1:
+			start = (
+				_curve.get_point_position(_curve.point_count - 1)
+				+ _curve.get_point_in(_curve.point_count - 1)
+			)
+		var end := (
+			_curve.get_point_position(_curve.point_count - 1)
+			+ _curve.get_point_out(_curve.point_count - 1)
+		)
+		if Global.mirror_view:  # This fixes previewing in mirror mode
+			start.x = Global.current_project.size.x - start.x - 1
+			end.x = Global.current_project.size.x - end.x - 1
 
-			canvas.draw_line(start, end, Color.BLACK)
-			var circle_radius := Vector2.ONE * (5 / Global.camera.zoom.x)
-			draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
-			draw_empty_circle(canvas, end, circle_radius, Color.BLACK)
+		canvas.draw_line(start, end, Color.BLACK)
+		var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
+		draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
+		draw_empty_circle(canvas, end, circle_radius, Color.BLACK)
 
 
 func _draw_shape() -> void:
-	var points := _bezier(_detail)
+	var points := _bezier()
 	prepare_undo("Draw Shape")
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
 		draw_tool(point)
-	control_points.clear()
+	_curve.clear_points()
 	_drawing = false
-
 	commit_undo()
 
 
-func _bezier(detail: int = 50) -> Array[Vector2i]:
-	var res: Array[Vector2i] = []
-	for i in range(0, control_points.size(), 3):
-		var points = control_points.slice(i, i + 4)
-		if points.size() < 4:
-			for _missing in range(points.size(), 4):
-				var last_pixel = Global.canvas.current_pixel
-				if Global.mirror_view:
-					# This fixes mirroring of the last point of the curve
-					last_pixel.x = (Global.current_project.size.x - 1) - last_pixel.x
-				points.append(last_pixel)
-		for d in range(0, detail + 1):
-			var t = d / float(detail)
-			var point: Vector2i = (
-				(pow(1 - t, 3) * points[0])
-				+ (3 * pow(1 - t, 2) * t * points[1])
-				+ (3 * (1 - t) * pow(t, 2) * points[2])
-				+ (pow(t, 3) * points[3])
-			)
-			if res.is_empty():
-				res.append(point)
-			else:
-				res.append_array(_fill_gap(res[-1], point))
-	return res
+## Get the [member _curve]'s baked points, and draw lines between them using [method _fill_gap].
+func _bezier() -> Array[Vector2i]:
+	var last_pixel := Global.canvas.current_pixel
+	if Global.mirror_view:
+		# Mirror the last point of the curve
+		last_pixel.x = (Global.current_project.size.x - 1) - last_pixel.x
+	_curve.add_point(last_pixel)
+	var points := _curve.get_baked_points()
+	_curve.remove_point(_curve.point_count - 1)
+	var final_points: Array[Vector2i] = []
+	for i in points.size() - 1:
+		var point1 := points[i]
+		var point2 := points[i + 1]
+		final_points.append_array(_fill_gap(point1, point2))
+	return final_points
 
 
+## Fills the gap between [param point_a] and [param point_b] using Bresenham's line algorithm.
+## Takes the [member _thickness] into account.
 func _fill_gap(point_a: Vector2i, point_b: Vector2i) -> Array[Vector2i]:
 	var array: Array[Vector2i] = []
 	var dx := absi(point_b.x - point_a.x)
@@ -263,5 +230,5 @@ func draw_empty_circle(
 		draw_counter += 1
 		line_origin = line_end
 
-	line_end = circle_radius.rotated(deg_to_rad(360)) + circle_center
+	line_end = circle_radius.rotated(TAU) + circle_center
 	canvas.draw_line(line_origin, line_end, color)
