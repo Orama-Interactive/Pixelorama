@@ -151,6 +151,22 @@ Hold %s to displace the shape's origin""",
 			["shape_perfect", "shape_center", "shape_displace"]
 		)
 	),
+	"CurveTool":
+	(
+		Tool
+		. new(
+			"CurveTool",
+			"Curve Tool",
+			"curvetool",
+			"res://src/Tools/DesignTools/CurveTool.tscn",
+			[Global.LayerTypes.PIXEL],
+			"""Draws bezier curves
+Press %s/%s to add new points
+Press and drag to control the curvature
+Press %s to remove the last added point""",
+			["activate_left_tool", "activate_right_tool", "change_tool_mode"]
+		)
+	),
 	"RectangleTool":
 	(
 		Tool
