@@ -4,6 +4,7 @@ var _curve := Curve2D.new()  ## The [Curve2D] responsible for the shape of the c
 var _drawing := false  ## Set to true when a curve is being drawn.
 var _fill := false  ## When true, the inside area of the curve gets filled.
 var _editing_bezier := false  ## Needed to determine when to show the control points preview line.
+var _editing_out_control_point := false  ## True when controlling the out control point only.
 var _thickness := 1  ## The thickness of the curve.
 var _last_mouse_position := Vector2.INF  ## The last position of the mouse
 
@@ -66,6 +67,10 @@ func _input(event: InputEvent) -> void:
 				$DoubleClickTimer.start()
 				_draw_shape()
 		else:
+			if event.is_action_pressed("shape_perfect"):
+				_editing_out_control_point = true
+			elif event.is_action_released("shape_perfect"):
+				_editing_out_control_point = false
 			if event.is_action_pressed("change_tool_mode"):  # Control removes the last added point
 				if _curve.point_count > 1:
 					_curve.remove_point(_curve.point_count - 1)
@@ -97,7 +102,8 @@ func draw_move(pos: Vector2i) -> void:
 	if _drawing:
 		_editing_bezier = true
 		var current_position := _curve.get_point_position(_curve.point_count - 1) - Vector2(pos)
-		_curve.set_point_in(_curve.point_count - 1, current_position)
+		if not _editing_out_control_point:
+			_curve.set_point_in(_curve.point_count - 1, current_position)
 		_curve.set_point_out(_curve.point_count - 1, -current_position)
 
 
@@ -129,24 +135,24 @@ func draw_preview() -> void:
 
 	var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
 	if _is_hovering_first_position(_last_mouse_position):
-		var circle_center := _curve.get_point_position(0) + Vector2.ONE * 0.5
+		var circle_center := _curve.get_point_position(0)
+		if Global.mirror_view:  # This fixes previewing in mirror mode
+			circle_center.x = Global.current_project.size.x - circle_center.x - 1
+		circle_center += Vector2.ONE * 0.5
 		draw_empty_circle(canvas, circle_center, circle_radius * 2.0, Color.BLACK)
 	if _editing_bezier:
-		var start := _curve.get_point_position(0)
+		var current_position := _curve.get_point_position(_curve.point_count - 1)
+		var start := current_position
 		if _curve.point_count > 1:
-			start = (
-				_curve.get_point_position(_curve.point_count - 1)
-				+ _curve.get_point_in(_curve.point_count - 1)
-			)
-		var end := (
-			_curve.get_point_position(_curve.point_count - 1)
-			+ _curve.get_point_out(_curve.point_count - 1)
-		)
+			start = current_position + _curve.get_point_in(_curve.point_count - 1)
+		var end := current_position + _curve.get_point_out(_curve.point_count - 1)
 		if Global.mirror_view:  # This fixes previewing in mirror mode
+			current_position.x = Global.current_project.size.x - current_position.x - 1
 			start.x = Global.current_project.size.x - start.x - 1
 			end.x = Global.current_project.size.x - end.x - 1
 
-		canvas.draw_line(start, end, Color.BLACK)
+		canvas.draw_line(start, current_position, Color.BLACK)
+		canvas.draw_line(current_position, end, Color.BLACK)
 		draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
 		draw_empty_circle(canvas, end, circle_radius, Color.BLACK)
 
@@ -170,6 +176,7 @@ func _draw_shape() -> void:
 					draw_tool(v)
 	_curve.clear_points()
 	_drawing = false
+	_editing_out_control_point = false
 	commit_undo()
 
 
