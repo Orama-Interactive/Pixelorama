@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-05-20 00:52\n"
+"PO-Revision-Date: 2024-05-21 16:43\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2420,7 +2420,7 @@ msgid "Line Tool"
 msgstr "Εργαλείο γραμμής"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "Εργαλείο καμπύλης"
 
 msgid "Rectangle Tool"
 msgstr "Ορθογώνιο εργαλείο"
