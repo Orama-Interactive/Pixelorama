@@ -74,10 +74,7 @@ func draw_preview() -> void:
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
-		var circle_radius := Global.camera.zoom / 10.0
-		circle_radius.x = clampf(circle_radius.x, 2, circle_radius.x)
-		circle_radius.y = clampf(circle_radius.y, 2, circle_radius.y)
-
+		var circle_radius := Vector2.ONE * (10.0 / Global.camera.zoom.x)
 		if _last_position == _draw_points[0] and _draw_points.size() > 1:
 			draw_empty_circle(
 				canvas, Vector2(_draw_points[0]) + Vector2.ONE * 0.5, circle_radius, Color.BLACK
@@ -230,5 +227,5 @@ func draw_empty_circle(
 		draw_counter += 1
 		line_origin = line_end
 
-	line_end = circle_radius.rotated(deg_to_rad(360)) + circle_center
+	line_end = circle_radius.rotated(TAU) + circle_center
 	canvas.draw_line(line_origin, line_end, color)
