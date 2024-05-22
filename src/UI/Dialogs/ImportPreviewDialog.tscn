@@ -9,7 +9,7 @@
 [node name="ImportPreviewDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 36)
-size = Vector2i(316, 446)
+size = Vector2i(316, 451)
 script = ExtResource("1_r16hn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -62,6 +62,7 @@ layout_mode = 2
 [node name="ApplyAll" type="CheckBox" parent="VBoxContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Apply to all"
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
@@ -80,7 +81,7 @@ text = "Frame size: 64×64"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ImportAsLabel" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Import as:"
@@ -88,6 +89,7 @@ text = "Import as:"
 [node name="ImportOption" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 

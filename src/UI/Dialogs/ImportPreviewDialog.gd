@@ -30,33 +30,34 @@ var hiding := false
 
 ## keeps track of which custom export to show when it's import option is selected
 ## Contains ids as keys and custion import option scenes as values
-var custom_importers = {}
+var custom_importers := {}
 
 ## A [TextureRect] containing the preview image
-@onready var texture_rect: TextureRect = %TextureRect
+@onready var texture_rect := %TextureRect as TextureRect
+@onready var aspect_ratio_container := texture_rect.get_parent() as AspectRatioContainer
 ## The [OptionButton] containing import options
-@onready var import_option_button: OptionButton = %ImportOption
+@onready var import_option_button := %ImportOption as OptionButton
 ## A [CheckBox] for enabling apply all system.
-@onready var apply_all: CheckBox = $VBoxContainer/VBoxContainer/ApplyAll
+@onready var apply_all := $VBoxContainer/VBoxContainer/ApplyAll as CheckBox
 
 ## Label showing size of original image.
-@onready var image_size_label: Label = $VBoxContainer/VBoxContainer/SizeContainer/ImageSizeLabel
+@onready var image_size_label := $VBoxContainer/VBoxContainer/SizeContainer/ImageSizeLabel as Label
 ## Label for showing size of image after import.
-@onready var frame_size_label: Label = $VBoxContainer/VBoxContainer/SizeContainer/FrameSizeLabel
+@onready var frame_size_label := $VBoxContainer/VBoxContainer/SizeContainer/FrameSizeLabel as Label
 ## Container for all types of advanced settings like [member spritesheet_options],
 ## [member new_brush_options] etc...
-@onready var import_options: VBoxContainer = %ImportOptions
+@onready var import_options := %ImportOptions as VBoxContainer
 
 # Below are some common settings grouped into categories and are made visible/invisible
 # depending on what your import option requires.
 ## container of spritesheet related import options
-@onready var spritesheet_options = %ImportOptions/SpritesheetOptions
+@onready var spritesheet_options := %ImportOptions/SpritesheetOptions as VBoxContainer
 ## container of frame related import options
-@onready var at_frame_option = %ImportOptions/AtFrame
+@onready var at_frame_option := %ImportOptions/AtFrame as HBoxContainer
 ## container of layer related import options
-@onready var at_layer_option = %ImportOptions/AtLayer
+@onready var at_layer_option := %ImportOptions/AtLayer as GridContainer
 ## container of brush related import options
-@onready var new_brush_options = %ImportOptions/NewBrushOptions
+@onready var new_brush_options := %ImportOptions/NewBrushOptions as HBoxContainer
 
 
 func _on_ImportPreviewDialog_about_to_show() -> void:
@@ -88,11 +89,12 @@ func _on_ImportPreviewDialog_about_to_show() -> void:
 
 	var img_texture := ImageTexture.create_from_image(image)
 	texture_rect.texture = img_texture
+	aspect_ratio_container.ratio = float(image.get_width()) / image.get_height()
 	# set max values of spritesheet options
-	var h_frames = spritesheet_options.find_child("HorizontalFrames")
-	var v_frames = spritesheet_options.find_child("VerticalFrames")
-	h_frames.max_value = min(h_frames.max_value, image.get_size().x)
-	v_frames.max_value = min(v_frames.max_value, image.get_size().y)
+	var h_frames := spritesheet_options.find_child("HorizontalFrames") as SpinBox
+	var v_frames := spritesheet_options.find_child("VerticalFrames") as SpinBox
+	h_frames.max_value = mini(h_frames.max_value, image.get_size().x)
+	v_frames.max_value = mini(v_frames.max_value, image.get_size().y)
 	# set labels
 	image_size_label.text = (
 		tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
@@ -110,7 +112,7 @@ func _on_visibility_changed() -> void:
 	if hiding:  # if the popup is hiding because of main
 		return
 	elif is_main:  # if the main dialog is closed then close others too
-		for child in Global.control.get_children():
+		for child in get_parent().get_children():
 			if child is ImportPreviewDialog:
 				OpenSave.preview_dialogs.erase(child)
 				child.queue_free()
@@ -127,7 +129,7 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 	if is_main:  # if the main dialog is confirmed then confirm others too
 		is_main = false
 		synchronize()
-		for child in Global.control.get_children():
+		for child in get_parent().get_children():
 			if child is ImportPreviewDialog:
 				child.confirmed.emit()
 	else:
@@ -220,7 +222,7 @@ func _on_ApplyAll_toggled(pressed: bool) -> void:
 	visibility_changed.disconnect(_on_visibility_changed)
 	hide()
 	visibility_changed.connect(_on_visibility_changed)
-	for child in Global.control.get_children():
+	for child in get_parent().get_children():
 		if child != self and child is ImportPreviewDialog:
 			child.hiding = pressed
 			if pressed:
@@ -232,55 +234,53 @@ func _on_ApplyAll_toggled(pressed: bool) -> void:
 
 
 func synchronize() -> void:
-	for child in Global.control.get_children():
-		if child != self and child is ImportPreviewDialog:
-			var dialog := child as ImportPreviewDialog
-			#sync modes
-			var id := current_import_option
-			dialog.import_option_button.select(id)
-			dialog.import_option_button.item_selected.emit(id)
+	var at_frame_spinbox := at_frame_option.get_node("AtFrameSpinbox") as SpinBox
+	var at_layer_option_button := at_layer_option.get_node("AtLayerOption") as OptionButton
+	for child in get_parent().get_children():
+		if child == self or not child is ImportPreviewDialog:
+			continue
+		var dialog := child as ImportPreviewDialog
+		# Sync modes
+		var id := current_import_option
+		dialog.import_option_button.select(id)
+		dialog.import_option_button.item_selected.emit(id)
+		# Nodes
+		var d_at_frame_spinbox := dialog.at_frame_option.get_node("AtFrameSpinbox") as SpinBox
+		var d_at_layer_option_button := (
+			dialog.at_layer_option.get_node("AtLayerOption") as OptionButton
+		)
+		# Sync properties (if any)
+		if id == ImageImportOptions.SPRITESHEET_TAB or id == ImageImportOptions.SPRITESHEET_LAYER:
+			var h_frames := spritesheet_options.find_child("HorizontalFrames") as SpinBox
+			var v_frames := spritesheet_options.find_child("VerticalFrames") as SpinBox
+			var d_h_frames := dialog.spritesheet_options.find_child("HorizontalFrames") as SpinBox
+			var d_v_frames := dialog.spritesheet_options.find_child("VerticalFrames") as SpinBox
+			d_h_frames.value = mini(h_frames.value, image.get_size().x)
+			d_v_frames.value = mini(v_frames.value, image.get_size().y)
+			if id == ImageImportOptions.SPRITESHEET_LAYER:
+				d_at_frame_spinbox.value = at_frame_spinbox.value
 
-			#sync properties (if any)
-			if (
-				id == ImageImportOptions.SPRITESHEET_TAB
-				or id == ImageImportOptions.SPRITESHEET_LAYER
-			):
-				var h_frames = spritesheet_options.find_child("HorizontalFrames")
-				var v_frames = spritesheet_options.find_child("VerticalFrames")
-				var d_h_frames = dialog.spritesheet_options.find_child("HorizontalFrames")
-				var d_v_frames = dialog.spritesheet_options.find_child("VerticalFrames")
-				d_h_frames.value = min(h_frames.value, image.get_size().x)
-				d_v_frames.value = min(v_frames.value, image.get_size().y)
-				if id == ImageImportOptions.SPRITESHEET_LAYER:
-					dialog.at_frame_option.get_node("AtFrameSpinbox").value = (
-						at_frame_option.get_node("AtFrameSpinbox").value
-					)
+		elif id == ImageImportOptions.NEW_FRAME:
+			d_at_layer_option_button.selected = at_layer_option_button.selected
 
-			elif id == ImageImportOptions.NEW_FRAME:
-				dialog.at_layer_option.get_node("AtLayerOption").selected = (
-					at_layer_option.get_node("AtLayerOption").selected
-				)
+		elif id == ImageImportOptions.REPLACE_CEL:
+			d_at_layer_option_button.selected = at_layer_option_button.selected
+			d_at_frame_spinbox.value = at_frame_spinbox.value
 
-			elif id == ImageImportOptions.REPLACE_CEL:
-				dialog.at_layer_option.get_node("AtLayerOption").selected = (
-					at_layer_option.get_node("AtLayerOption").selected
-				)
-				dialog.at_frame_option.get_node("AtFrameSpinbox").value = (
-					at_frame_option.get_node("AtFrameSpinbox").value
-				)
+		elif id == ImageImportOptions.NEW_LAYER:
+			d_at_frame_spinbox.value = at_frame_spinbox.value
 
-			elif id == ImageImportOptions.NEW_LAYER:
-				dialog.at_frame_option.get_node("AtFrameSpinbox").value = (
-					at_frame_option.get_node("AtFrameSpinbox").value
-				)
-
-			elif id == ImageImportOptions.BRUSH:
-				var type = new_brush_options.get_node("BrushTypeOption").selected
-				dialog.new_brush_options.get_node("BrushTypeOption").select(type)
-				dialog.new_brush_options.get_node("BrushTypeOption").item_selected.emit(type)
+		elif id == ImageImportOptions.BRUSH:
+			var brush_type_option := new_brush_options.get_node("BrushTypeOption") as OptionButton
+			var d_brush_type_option := (
+				dialog.new_brush_options.get_node("BrushTypeOption") as OptionButton
+			)
+			var type := brush_type_option.selected
+			d_brush_type_option.select(type)
+			d_brush_type_option.item_selected.emit(type)
 
 
-func _hide_all_options():
+func _hide_all_options() -> void:
 	# reset some options
 	smart_slice = false
 	apply_all.disabled = false
@@ -442,9 +442,9 @@ func _on_BrushTypeOption_item_selected(index: BrushTypes) -> void:
 func add_brush() -> void:
 	image.convert(Image.FORMAT_RGBA8)
 	if brush_type == BrushTypes.FILE:
-		var file_name_ext: String = path.get_file()
+		var file_name_ext := path.get_file()
 		file_name_ext = file_name_replace(file_name_ext, "Brushes")
-		var file_name: String = file_name_ext.get_basename()
+		var file_name := file_name_ext.get_basename()
 
 		Brushes.add_file_brush([image], file_name)
 
@@ -454,12 +454,13 @@ func add_brush() -> void:
 		dir.copy(path, Global.home_data_directory.path_join(location))
 
 	elif brush_type == BrushTypes.PROJECT:
-		var file_name: String = path.get_file().get_basename()
+		var file_name := path.get_file().get_basename()
 		Global.current_project.brushes.append(image)
 		Brushes.add_project_brush(image, file_name)
 
 	elif brush_type == BrushTypes.RANDOM:
-		var brush_name = new_brush_options.get_node("BrushName/BrushNameLineEdit").text.to_lower()
+		var brush_name_edit := new_brush_options.get_node("BrushName/BrushNameLineEdit") as LineEdit
+		var brush_name := brush_name_edit.text.to_lower()
 		if !brush_name.is_valid_filename():
 			return
 		var dir := DirAccess.open(Global.home_data_directory.path_join("Brushes"))
@@ -478,7 +479,7 @@ func add_brush() -> void:
 
 		var file_ext := path.get_file().get_extension()
 		var index := random_brushes.size() + 1
-		var file_name = "~" + brush_name + str(index) + "." + file_ext
+		var file_name := "~" + brush_name + str(index) + "." + file_ext
 		var location := "Brushes".path_join(brush_name).path_join(file_name)
 		dir.copy(path, Global.home_data_directory.path_join(location))
 
