@@ -30,4 +30,4 @@ jobs:
         with:
           skip: ./addons,*.po
           exclude_file: src/UI/Dialogs/AboutDialog.gd
-          ignore_words_list: chello,doubleclick,Manuel
+          ignore_words_list: chello,doubleclick,Manuel, SectionIn

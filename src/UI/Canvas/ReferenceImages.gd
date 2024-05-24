@@ -116,7 +116,7 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseMotion:
 		# We check if the LMB is pressed and if we're not dragging then we force the
-		# draggin state.
+		# dragging state.
 		# We dont use timers because it makes more sense to wait for the users mouse to move
 		# and that's what defines dragging. It would be smart to add a "deadzone" to determine
 		# if the mouse had moved enough.
