@@ -109,7 +109,7 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	_editing_bezier = false
-	if _is_hovering_first_position(pos):
+	if _is_hovering_first_position(pos) and _curve.point_count > 1:
 		_draw_shape()
 	super.draw_end(pos)
 
