@@ -7,6 +7,8 @@ var redone := false
 var is_quitting_on_save := false
 var changed_projects_on_quit: Array[Project]
 var cursor_image := preload("res://assets/graphics/cursor.png")
+## Used to download an image when dragged and dropped directly from a browser into Pixelorama
+var url_to_download := ""
 var splash_dialog: AcceptDialog:
 	get:
 		if not is_instance_valid(splash_dialog):
@@ -19,8 +21,10 @@ var splash_dialog: AcceptDialog:
 @onready var save_sprite_html5: ConfirmationDialog = $Dialogs/SaveSpriteHTML5
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 @onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
+@onready var download_confirmation := $Dialogs/DownloadImageConfirmationDialog as ConfirmationDialog
 @onready var left_cursor: Sprite2D = $LeftCursor
 @onready var right_cursor: Sprite2D = $RightCursor
+@onready var image_request := $ImageRequest as HTTPRequest
 
 
 class CLI:
@@ -385,7 +389,14 @@ func _notification(what: int) -> void:
 func _on_files_dropped(files: PackedStringArray) -> void:
 	for file in files:
 		if not FileAccess.file_exists(file):
-			$ImageRequest.request(file)
+			# If the file doesn't exist, it could be a URL. This can occur when dragging
+			# and dropping an image directly from the browser into Pixelorama.
+			# For security reasons, ask the user if they want to confirm the image download.
+			download_confirmation.dialog_text = (
+				tr("Do you want to download the image from %s?") % file
+			)
+			download_confirmation.popup_centered()
+			url_to_download = file
 		OpenSave.handle_loading_file(file)
 	if splash_dialog.visible:
 		splash_dialog.hide()
@@ -577,6 +588,10 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
 	Global.config_cache.save(Global.CONFIG_PATH)
+
+
+func _on_download_image_confirmation_dialog_confirmed() -> void:
+	image_request.request(url_to_download)
 
 
 func _on_image_request_request_completed(

@@ -92,6 +92,11 @@ dialog_autowrap = true
 
 [node name="TileModeOffsetsDialog" parent="Dialogs" instance=ExtResource("14")]
 
+[node name="DownloadImageConfirmationDialog" type="ConfirmationDialog" parent="Dialogs"]
+size = Vector2i(400, 200)
+dialog_text = "Do you want to download the image from %s?"
+dialog_autowrap = true
+
 [node name="Extensions" type="Control" parent="."]
 anchors_preset = 0
 script = ExtResource("15_v0k2h")
@@ -119,4 +124,5 @@ visible = false
 [connection signal="visibility_changed" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/BackupConfirmation" to="." method="_on_backup_confirmation_visibility_changed"]
+[connection signal="confirmed" from="Dialogs/DownloadImageConfirmationDialog" to="." method="_on_download_image_confirmation_dialog_confirmed"]
 [connection signal="request_completed" from="ImageRequest" to="." method="_on_image_request_request_completed"]
