@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-05-25 13:31\n"
+"PO-Revision-Date: 2024-05-25 21:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -775,7 +775,7 @@ msgstr "Bildschirmmaße:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Schriftgröße:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Oberfläche abdunkeln wenn ein Popup sich öffnet"
@@ -1335,7 +1335,13 @@ msgid "Curve Tool\n\n"
 "Press %s/%s to add new points\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Kurvenwerkzeug\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"Zeichnet Bézierkurven\n"
+"Drücken Sie %s/%s, um neue Punkte hinzuzufügen\n"
+"Durch das Drücken und Ziehen wird die Krümmung gesteuert\n"
+"Drücken Sie %s, um den zuletzt hinzugefügten Punkt zu entfernen"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1392,7 +1398,7 @@ msgstr "Wähle eine Picker-Form."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Farboptionen"
 
 msgid "Left tool"
 msgstr "Linkes Werkzeug"
@@ -1863,7 +1869,7 @@ msgid "Jump to the last frame\n"
 msgstr "Springe zum letzten Frame\n"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Timeline-Einstellungen"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Aktiviere/Deaktiviere Onion Skinning"
@@ -1925,7 +1931,7 @@ msgstr "Wenn diese Option ausgewählt ist, wird die Animation nur auf den Frames
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Cel-Größe:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -1986,11 +1992,11 @@ msgid "Cel properties"
 msgstr "Cel-Eigenschaften"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "Tag-Eigenschaften"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "Neuer Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2007,7 +2013,7 @@ msgstr "Ebenen"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr ""
+msgstr "Clipping-Maske"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2419,7 +2425,7 @@ msgid "Line Tool"
 msgstr "Linien-Werkzeug"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "Kurvenwerkzeug"
 
 msgid "Rectangle Tool"
 msgstr "Rechteck-Werkzeug"
@@ -3023,5 +3029,5 @@ msgstr "Effekt hinzufügen"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr ""
+msgstr "Möchten Sie das Bild von %s herunterladen?"
 
