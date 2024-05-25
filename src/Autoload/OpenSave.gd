@@ -53,7 +53,8 @@ func handle_loading_file(file: String) -> void:
 		var apng_res := AImgIOAPNGImporter.load_from_file(file)
 		if apng_res[0] == null:
 			# No error - this is an APNG!
-			handle_loading_aimg(file, apng_res[1])
+			if typeof(apng_res[1]) == TYPE_ARRAY:
+				handle_loading_aimg(file, apng_res[1])
 			return
 		# Attempt to load as a regular image.
 		var image := Image.load_from_file(file)
@@ -89,6 +90,22 @@ func add_import_option(import_name: StringName, import_scene: PackedScene) -> in
 	custom_import_names.merge({import_name: id})
 	custom_importer_scenes.merge({id: import_scene})
 	return id
+
+
+## Mostly used for downloading images from the Internet. Tries multiple file extensions
+## in case the extension of the file is wrong, which is common for images on the Internet.
+func load_image_from_buffer(buffer: PackedByteArray) -> Image:
+	var image := Image.new()
+	var err := image.load_png_from_buffer(buffer)
+	if err != OK:
+		err = image.load_jpg_from_buffer(buffer)
+		if err != OK:
+			err = image.load_webp_from_buffer(buffer)
+			if err != OK:
+				err = image.load_tga_from_buffer(buffer)
+				if err != OK:
+					image.load_bmp_from_buffer(buffer)
+	return image
 
 
 func handle_loading_image(file: String, image: Image) -> void:

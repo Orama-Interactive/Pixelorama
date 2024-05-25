@@ -384,6 +384,8 @@ func _notification(what: int) -> void:
 
 func _on_files_dropped(files: PackedStringArray) -> void:
 	for file in files:
+		if not FileAccess.file_exists(file):
+			$ImageRequest.request(file)
 		OpenSave.handle_loading_file(file)
 	if splash_dialog.visible:
 		splash_dialog.hide()
@@ -575,3 +577,12 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
 	Global.config_cache.save(Global.CONFIG_PATH)
+
+
+func _on_image_request_request_completed(
+	_result: int, _response_code: int, _headers: PackedStringArray, body: PackedByteArray
+) -> void:
+	var image := OpenSave.load_image_from_buffer(body)
+	if image.is_empty():
+		return
+	OpenSave.handle_loading_image(OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP), image)

@@ -56,18 +56,9 @@ func _on_ImageRequest_request_completed(
 ) -> void:
 	# Update the received image
 	thumbnail_request.queue_free()
-	var image := Image.new()
-	# for images on internet there is a hagh chance that extension is wrong
-	# so check all of them even if they give error
-	var err := image.load_png_from_buffer(body)
-	if err != OK:
-		var err_a := image.load_jpg_from_buffer(body)
-		if err_a != OK:
-			var err_b := image.load_webp_from_buffer(body)
-			if err_b != OK:
-				var err_c := image.load_tga_from_buffer(body)
-				if err_c != OK:
-					image.load_bmp_from_buffer(body)
+	var image := OpenSave.load_image_from_buffer(body)
+	if image.is_empty():
+		return
 	var texture := ImageTexture.create_from_image(image)
 	small_picture.texture_normal = texture
 	small_picture.pressed.connect(enlarge_thumbnail.bind(texture))

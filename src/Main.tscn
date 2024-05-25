@@ -102,6 +102,8 @@ visible = false
 [node name="RightCursor" type="Sprite2D" parent="."]
 visible = false
 
+[node name="ImageRequest" type="HTTPRequest" parent="."]
+
 [connection signal="files_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_files_selected"]
 [connection signal="visibility_changed" from="Dialogs/OpenSprite" to="." method="_on_open_sprite_visibility_changed"]
 [connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]
@@ -117,3 +119,4 @@ visible = false
 [connection signal="visibility_changed" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/BackupConfirmation" to="." method="_on_backup_confirmation_visibility_changed"]
+[connection signal="request_completed" from="ImageRequest" to="." method="_on_image_request_request_completed"]
