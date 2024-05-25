@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-05-22 11:45\n"
+"PO-Revision-Date: 2024-05-25 13:31\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -3028,4 +3028,8 @@ msgstr "Efek lapisan"
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
 msgstr "Tambah efek"
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
+msgstr ""
 
