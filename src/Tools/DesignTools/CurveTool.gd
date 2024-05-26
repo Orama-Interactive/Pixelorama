@@ -134,7 +134,7 @@ func draw_preview() -> void:
 	canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 	var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
-	if _is_hovering_first_position(_last_mouse_position):
+	if _is_hovering_first_position(_last_mouse_position) and _curve.point_count > 1:
 		var circle_center := _curve.get_point_position(0)
 		if Global.mirror_view:  # This fixes previewing in mirror mode
 			circle_center.x = Global.current_project.size.x - circle_center.x - 1
