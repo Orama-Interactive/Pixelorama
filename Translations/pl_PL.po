@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-05-25 13:31\n"
+"PO-Revision-Date: 2024-05-26 10:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3029,5 +3029,5 @@ msgstr "Dodaj efekt"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr ""
+msgstr "Czy chcesz pobrać obraz z %s?"
 
