@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-05-25 13:31\n"
+"PO-Revision-Date: 2024-05-26 03:50\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -2531,8 +2531,8 @@ msgstr "Buang Semua"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr "Ditemukan proyek yang disimpan otomatis dari sesi kena mogok.\n"
-"Apakah datanya ingin dipulihkan?"
+msgstr "Ditemukan proyek disimpan otomatis dari sesi kena mogok.\n"
+"Apakah ingin pulihkan datanya?"
 
 msgid "Backup reloaded"
 msgstr "Cadangan dimuat ulang"
@@ -3031,5 +3031,5 @@ msgstr "Tambah efek"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr ""
+msgstr "Apakah ingin unduh gambarnya dari %s?"
 
