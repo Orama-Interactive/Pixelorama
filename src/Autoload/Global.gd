@@ -850,6 +850,7 @@ func _initialize_keychain() -> void:
 		"View menu": Keychain.InputGroup.new("Menu"),
 		"Select menu": Keychain.InputGroup.new("Menu"),
 		"Image menu": Keychain.InputGroup.new("Menu"),
+		"Effects menu": Keychain.InputGroup.new("Menu"),
 		"Window menu": Keychain.InputGroup.new("Menu"),
 		"Help menu": Keychain.InputGroup.new("Menu"),
 		"Tool modifiers": Keychain.InputGroup.new(),
