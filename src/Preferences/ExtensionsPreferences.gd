@@ -7,7 +7,8 @@ extends VBoxContainer
 @onready var extension_list := $InstalledExtensions as ItemList
 @onready var enable_button := $HBoxContainer/EnableButton as Button
 @onready var uninstall_button := $HBoxContainer/UninstallButton as Button
-@onready var delete_confirmation := %DeleteConfirmation as ConfirmationDialog
+@onready var enable_confirmation := %EnableExtensionConfirmation as ConfirmationDialog
+@onready var delete_confirmation := %DeleteExtensionConfirmation as ConfirmationDialog
 
 
 func _ready() -> void:
@@ -70,17 +71,25 @@ func _on_AddExtensionButton_pressed() -> void:
 func _on_EnableButton_pressed() -> void:
 	var file_name: String = extension_list.get_item_metadata(extensions.extension_selected)
 	var extension: Extensions.Extension = extensions.extensions[file_name]
-	extension.enabled = !extension.enabled
 	# Don't allow disabling internal extensions through this button.
 	if extension.internal and extension.enabled_once:
 		preferences_dialog.preference_update(true)
 	else:
-		extensions.enable_extension(extension)
-
-	if extension.enabled:
-		enable_button.text = "Disable"
-	else:
-		enable_button.text = "Enable"
+		if extension.enabled:  # If enabled, disable
+			extension.enabled = false
+			extensions.enable_extension(extension)
+			enable_button.text = "Enable"
+		else:  # If disabled, ask for user confirmation to enable
+			if enable_confirmation.confirmed.is_connected(
+				_on_enable_extension_confirmation_confirmed
+			):
+				enable_confirmation.confirmed.disconnect(
+					_on_enable_extension_confirmation_confirmed
+				)
+			enable_confirmation.confirmed.connect(
+				_on_enable_extension_confirmation_confirmed.bind(extension)
+			)
+			enable_confirmation.popup_centered()
 
 
 func _on_UninstallButton_pressed() -> void:
@@ -101,6 +110,13 @@ func _on_delete_confirmation_custom_action(action: StringName) -> void:
 		var extension_name: String = extension_list.get_item_metadata(extensions.extension_selected)
 		extensions.uninstall_extension(extension_name, Extensions.UninstallMode.FILE_TO_BIN)
 	delete_confirmation.hide()
+
+
+func _on_enable_extension_confirmation_confirmed(extension: Extensions.Extension) -> void:
+	extension.enabled = true
+	extensions.enable_extension(extension)
+	enable_button.text = "Disable"
+	enable_confirmation.confirmed.disconnect(_on_enable_extension_confirmation_confirmed)
 
 
 func _on_delete_confirmation_confirmed() -> void:

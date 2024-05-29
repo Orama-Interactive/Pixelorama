@@ -1366,22 +1366,20 @@ show_hidden_files = true
 [node name="Store" parent="." instance=ExtResource("8_jmnx8")]
 transient = true
 
-[node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
+[node name="EnableExtensionConfirmation" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+dialog_text = "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+dialog_autowrap = true
+
+[node name="DeleteExtensionConfirmation" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
 position = Vector2i(0, 36)
-size = Vector2i(500, 100)
+size = Vector2i(400, 100)
 exclusive = false
 popup_window = true
 ok_button_text = "Delete Permanently"
-
-[node name="Label" type="Label" parent="DeleteConfirmation"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 492.0
-offset_bottom = 51.0
-text = "Delete Extension?"
-horizontal_alignment = 1
-vertical_alignment = 1
+dialog_text = "Are you sure you want to delete this extension?"
+dialog_autowrap = true
 
 [connection signal="about_to_popup" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="visibility_changed" from="." to="." method="_on_PreferencesDialog_visibility_changed"]
@@ -1397,5 +1395,5 @@ vertical_alignment = 1
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/UninstallButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_UninstallButton_pressed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/OpenFolderButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_OpenFolderButton_pressed"]
 [connection signal="files_selected" from="AddExtensionFileDialog" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_AddExtensionFileDialog_files_selected"]
-[connection signal="confirmed" from="DeleteConfirmation" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_delete_confirmation_confirmed"]
-[connection signal="custom_action" from="DeleteConfirmation" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_delete_confirmation_custom_action"]
+[connection signal="confirmed" from="DeleteExtensionConfirmation" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_delete_confirmation_confirmed"]
+[connection signal="custom_action" from="DeleteExtensionConfirmation" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_delete_confirmation_custom_action"]
