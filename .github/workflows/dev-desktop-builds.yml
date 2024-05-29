@@ -94,7 +94,7 @@ jobs:
           name: ${{env.EXPORT_NAME}}-Linux-64bit
           path: ./build/${{env.EXPORT_NAME}}-Linux-64bit.tar.gz
           retention-days: 14
-    - name: Upload Linux ARM64 Artifact 🚀
+      - name: Upload Linux ARM64 Artifact 🚀
         uses: actions/upload-artifact@v4
         with:
           name: ${{env.EXPORT_NAME}}-Linux-ARM64
