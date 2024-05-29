@@ -23,7 +23,7 @@ boot_splash/use_filter=false
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/Version="v1.0-dev"
+config/Version="v1.0-beta1"
 config/ExtensionsAPI_Version=4
 config/Pxo_Version=3
 
