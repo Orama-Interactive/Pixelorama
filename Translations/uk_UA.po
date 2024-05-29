@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-05-25 13:31\n"
+"PO-Revision-Date: 2024-05-29 00:29\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1604,6 +1604,7 @@ msgstr "Драйвер планшету:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "В Windows вказує, який використовується драйвер планшета. Якщо увімкнено Windows Ink, оберіть winink."
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Додати розширення"
 
@@ -1618,6 +1619,18 @@ msgstr "Видалити"
 
 msgid "Open Folder"
 msgstr "Відкрити директорію"
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
+msgstr ""
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
