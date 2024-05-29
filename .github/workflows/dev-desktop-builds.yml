@@ -68,27 +68,37 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/${EXPORT_NAME}-Linux-64bit ~/.local/share/godot/export_templates
+          mkdir -v -p build/${EXPORT_NAME}-Linux-64bit build/${EXPORT_NAME}-Linux-ARM64 ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Linux Build 🔧
         run: |
           godot --headless -v --export-release "Linux/X11 64-bit" ./build/${EXPORT_NAME}-Linux-64bit/$EXPORT_NAME.x86_64
+          godot --headless -v --export-release "Linux/X11 ARM64" ./build/${EXPORT_NAME}-Linux-ARM64/${EXPORT_NAME}.arm64
       - name: Give execute permission ☑️
         run: |
           chmod +x ./build/${EXPORT_NAME}-Linux-64bit/$EXPORT_NAME.x86_64
+          chmod +x ./build/${EXPORT_NAME}-Linux-ARM64/${EXPORT_NAME}.arm64
       - name: Copy pixelorama_data folder 📁
         run: |
           rm ./pixelorama_data/.gdignore
           cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Linux-64bit
+          cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Linux-ARM64
       - name: Create tar.gz archive 🗜️
         run: |
           cd build
           tar zcvf ${EXPORT_NAME}-Linux-64bit.tar.gz ${EXPORT_NAME}-Linux-64bit
-      - name: Upload Artifact 🚀
+          tar zcvf ${EXPORT_NAME}-Linux-ARM64.tar.gz ${EXPORT_NAME}-Linux-ARM64
+      - name: Upload Linux x86_64 Artifact 🚀
         uses: actions/upload-artifact@v4
         with:
           name: ${{env.EXPORT_NAME}}-Linux-64bit
           path: ./build/${{env.EXPORT_NAME}}-Linux-64bit.tar.gz
+          retention-days: 14
+    - name: Upload Linux ARM64 Artifact 🚀
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{env.EXPORT_NAME}}-Linux-ARM64
+          path: ./build/${{env.EXPORT_NAME}}-Linux-ARM64.tar.gz
           retention-days: 14
 
   export-mac:
