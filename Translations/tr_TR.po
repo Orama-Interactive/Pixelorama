@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-04-09 23:29\n"
+"PO-Revision-Date: 2024-05-29 09:45\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -773,6 +773,10 @@ msgstr "Sistem Dili"
 msgid "Display scale:"
 msgstr "Ekran ölçeği:"
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr "Yazı tipi boyutu:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Diyalog penceresinde arayüzü karart"
 
@@ -1324,6 +1328,21 @@ msgstr "Çizgi Aracı\n\n"
 "Şekli tıklama orijininde ortalamak için %s tuşunu basılı tutun\n"
 "Şeklin orijinini değiştirmek için %s tuşunu basılı tutun"
 
+msgid "Curve Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws bezier curves\n"
+"Press %s/%s to add new points\n"
+"Press and drag to control the curvature\n"
+"Press %s to remove the last added point"
+msgstr "Eğri Aracı\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
+"Bezier eğrileri çizer\n"
+"Yeni nokta eklemek için %s/%s basın\n"
+"Eğriliği denetlemek için basın ve sürükleyin\n"
+"Son eklenen noktayı kaldırmak için %s basın"
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -1376,6 +1395,10 @@ msgstr "Ekrandan renk seç."
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
 msgstr "Seçici şekli seç."
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
+msgstr "Renk seçenekleri"
 
 msgid "Left tool"
 msgstr "Sol araç"
@@ -1588,6 +1611,7 @@ msgstr "Table sürücüsü:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Windows'ta kullanılan tablet sürücüsünü belirtir. Windows Ink'i etkinleştirdiyseniz, winnk'i seçin."
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Uzantı Ekle"
 
@@ -1602,6 +1626,18 @@ msgstr "Kaldır"
 
 msgid "Open Folder"
 msgstr "Klasörü Aç"
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr "Çevrimiçi Keşfet"
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr "Bu uzantıyı etkinleştirmek istediğinize emin misiniz? Yalnızca güvendiğiniz kaynaklardan gelen eklentileri etkinleştirin."
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
+msgstr "Bu uzantıyı silmek istediğinize emin misiniz?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1845,8 +1881,8 @@ msgstr "Sonraki kareye git\n"
 msgid "Jump to the last frame\n"
 msgstr "Son kareye atla\n"
 
-msgid "Onion Skinning settings"
-msgstr "Onion Skinning özellikleri"
+msgid "Timeline settings"
+msgstr "Zaman çizelgesi ayarları"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Onion Skinning aktif/pasif et"
@@ -1906,7 +1942,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Eğer seçili ise animasyon sadece aynı etikete sahip karelerde oynatılır.\n"
 "Seçili değil ise animasyon bütün karelerde oynatılır."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr "Hücre boyutu:"
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Renk kipi"
 
@@ -1964,6 +2004,13 @@ msgstr "Katman Özellikleri"
 msgid "Cel properties"
 msgstr "Hücre özellikleri"
 
+msgid "Tag properties"
+msgstr "Etiket özellikleri"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr "Yeni etiket"
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
 msgstr "Kareleri Ters Çevir"
@@ -1976,6 +2023,10 @@ msgstr "Grup"
 
 msgid "Layers"
 msgstr "Katmanlar"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr "Kırpma maskesi"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2385,6 +2436,9 @@ msgstr "Gölgeleme Aracı"
 
 msgid "Line Tool"
 msgstr "Çizgi Aracı"
+
+msgid "Curve Tool"
+msgstr "Eğri Aracı"
 
 msgid "Rectangle Tool"
 msgstr "Dikdörtgen Araç"
@@ -2986,4 +3040,8 @@ msgstr "Katman efektleri"
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
 msgstr "Efekt ekle"
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
+msgstr "Görüntü %s kaynağından indirilsin mi?"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2024-04-09 23:28\n"
+"PO-Revision-Date: 2024-05-29 00:28\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -770,6 +770,10 @@ msgstr "Rendszer nyelv"
 msgid "Display scale:"
 msgstr ""
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr ""
+
 msgid "Dim interface on dialog popup"
 msgstr ""
 
@@ -1293,6 +1297,15 @@ msgid "Line Tool\n\n"
 "Hold %s to displace the shape's origin"
 msgstr ""
 
+msgid "Curve Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws bezier curves\n"
+"Press %s/%s to add new points\n"
+"Press and drag to control the curvature\n"
+"Press %s to remove the last added point"
+msgstr ""
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -1334,6 +1347,10 @@ msgstr ""
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
+msgstr ""
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
 msgstr ""
 
 msgid "Left tool"
@@ -1547,6 +1564,7 @@ msgstr ""
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr ""
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr ""
 
@@ -1560,6 +1578,18 @@ msgid "Uninstall"
 msgstr ""
 
 msgid "Open Folder"
+msgstr ""
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
 msgstr ""
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
@@ -1803,8 +1833,8 @@ msgstr ""
 msgid "Jump to the last frame\n"
 msgstr ""
 
-msgid "Onion Skinning settings"
-msgstr "Hagymabőr beállítások"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Hagymabőr be/ki kapcsolása"
@@ -1864,7 +1894,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Ha ez ki van választva, akkor az animáció csak az azonos címkével ellátott képkockákat játssza le.\n"
 "Ha nem, az animáció minden képkockát lejátszódik, figyelmen kívül hagyva a címkéket."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr ""
 
@@ -1922,6 +1956,13 @@ msgstr ""
 msgid "Cel properties"
 msgstr ""
 
+msgid "Tag properties"
+msgstr ""
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr ""
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
 msgstr ""
@@ -1934,6 +1975,10 @@ msgstr ""
 
 msgid "Layers"
 msgstr "Rétegek"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2341,6 +2386,9 @@ msgid "Shading Tool"
 msgstr ""
 
 msgid "Line Tool"
+msgstr ""
+
+msgid "Curve Tool"
 msgstr ""
 
 msgid "Rectangle Tool"
@@ -2938,5 +2986,9 @@ msgstr ""
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
+msgstr ""
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
 msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-04-09 23:29\n"
+"PO-Revision-Date: 2024-05-29 05:44\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -774,6 +774,10 @@ msgstr "Bahasa Sistem"
 msgid "Display scale:"
 msgstr "Skala tampilan:"
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr "Ukuran font:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Redupkan antarmuka pada sembulan dialog"
 
@@ -997,11 +1001,11 @@ msgstr "Langkah:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
 msgid "Palettize"
-msgstr ""
+msgstr "Paletkan"
 
 #. An image effect. It makes the input image pixelated.
 msgid "Pixelize"
-msgstr ""
+msgstr "Pikselkan"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
@@ -1325,6 +1329,21 @@ msgstr "Alat Garis\n\n"
 "Tahan %s untuk membuat bentuk di tengah klik\n"
 "Tahan %s untuk menggeser bentuk saat ini"
 
+msgid "Curve Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws bezier curves\n"
+"Press %s/%s to add new points\n"
+"Press and drag to control the curvature\n"
+"Press %s to remove the last added point"
+msgstr "Garis Lengkung\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Menggaris lengkung Bezier\n"
+"Tekan %s/%s untuk menambah titik\n"
+"Tekan dan seret untuk melengkungkan\n"
+"Tekan %s untuk melepas titik tadi"
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -1377,6 +1396,10 @@ msgstr "Ambil warna dari layar."
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
 msgstr "Pilih bentuk pemilih."
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
+msgstr "Opsi warna"
 
 msgid "Left tool"
 msgstr "Alat di kiri"
@@ -1589,6 +1612,7 @@ msgstr "Pengandar tablet:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Menentukan pengandar tablet yang dipakai pada Windows. Jika Windows Ink sudah diaktifkan, pilih winink."
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Tambah Ekstensi"
 
@@ -1603,6 +1627,18 @@ msgstr "Copot"
 
 msgid "Open Folder"
 msgstr "Buka Folder"
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr "Cari di Daring"
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr "Apakah yakin ingin ekstensi ini aktif? Pastikan ekstensi diaktifkan hanya dari sumber tepercaya."
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
+msgstr "Apakah yakin ingin menghapus ekstensi ini?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1846,8 +1882,8 @@ msgstr "Ke bingkai selanjutnya\n"
 msgid "Jump to the last frame\n"
 msgstr "Lompat ke bingkai terakhir\n"
 
-msgid "Onion Skinning settings"
-msgstr "Pengaturan Onion Skinning"
+msgid "Timeline settings"
+msgstr "Pengaturan garis waktu"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Aktif/nonaktifkan Onion Skinning"
@@ -1907,7 +1943,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
 "Jika tidak, maka animasi akan diputar untuk semua bingkai."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr "Ukuran cel:"
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Mode warna"
 
@@ -1954,7 +1994,7 @@ msgid "Properties"
 msgstr "Properti"
 
 msgid "Project Properties"
-msgstr ""
+msgstr "Properti Proyek"
 
 msgid "Frame properties"
 msgstr "Properti bingkai"
@@ -1964,6 +2004,13 @@ msgstr "Properti bingkai"
 
 msgid "Cel properties"
 msgstr "Properti Cel"
+
+msgid "Tag properties"
+msgstr "Properti Tag"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr "Tag Baru"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1977,6 +2024,10 @@ msgstr "Kelompok"
 
 msgid "Layers"
 msgstr "Lapisan"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr "Cuplikkan mask"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2387,6 +2438,9 @@ msgstr "Alat Pembayang"
 msgid "Line Tool"
 msgstr "Alat Garis"
 
+msgid "Curve Tool"
+msgstr "Garis Lengkung"
+
 msgid "Rectangle Tool"
 msgstr "Alat Persegi Panjang"
 
@@ -2456,7 +2510,7 @@ msgstr "menit"
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "Ekspor data JSON"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
@@ -2490,8 +2544,8 @@ msgstr "Buang Semua"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr "Ditemukan proyek yang disimpan otomatis dari sesi kena mogok.\n"
-"Apakah datanya ingin dipulihkan?"
+msgstr "Ditemukan proyek disimpan otomatis dari sesi kena mogok.\n"
+"Apakah ingin pulihkan datanya?"
 
 msgid "Backup reloaded"
 msgstr "Cadangan dimuat ulang"
@@ -2987,4 +3041,8 @@ msgstr "Efek lapisan"
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
 msgstr "Tambah efek"
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
+msgstr "Apakah ingin unduh gambarnya dari %s?"
 

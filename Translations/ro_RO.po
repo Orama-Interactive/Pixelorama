@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-04-10 11:13\n"
+"PO-Revision-Date: 2024-05-29 11:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -772,6 +772,10 @@ msgstr "Limba sistemului"
 msgid "Display scale:"
 msgstr "Scară de afișare:"
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr "Dimensiunea fontului:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Întunecă interfața la apariția ferestrei de dialog"
 
@@ -1323,6 +1327,21 @@ msgstr "Instrument Linie\n\n"
 "Ține apăsată tasta %s pentru a centra forma pe originea clicului\n"
 "Ține apăsată tasta %s pentru a deplasa originea formei"
 
+msgid "Curve Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws bezier curves\n"
+"Press %s/%s to add new points\n"
+"Press and drag to control the curvature\n"
+"Press %s to remove the last added point"
+msgstr "Instrument Curbă\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Desenează curbe Bézier\n"
+"Apasă %s/%s pentru a adăuga puncte noi\n"
+"Apasă și glisează pentru a controla curbura\n"
+"Apasă %s pentru a elimina ultimul punct adăugat"
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -1375,6 +1394,10 @@ msgstr "Alege o culoare de pe ecran."
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
 msgstr "Selectează o formă pentru selector."
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
+msgstr "Opțiuni de culoare"
 
 msgid "Left tool"
 msgstr "Instrument stânga"
@@ -1587,6 +1610,7 @@ msgstr "Driver tabletă:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Specifică driverul tabletei utilizat pe Windows. Dacă ai Windows Ink activat, selectează winink."
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Adăugare extensie"
 
@@ -1601,6 +1625,18 @@ msgstr "Dezinstalare"
 
 msgid "Open Folder"
 msgstr "Deschidere dosar"
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr "Explorează pe internet"
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr "Sigur vrei să activezi această extensie? Asigură-te că activezi doar extensii din surse în care ai încredere."
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
+msgstr "Sigur vrei să ștergi această extensie?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1844,8 +1880,8 @@ msgstr "Mergi la cadrul următor\n"
 msgid "Jump to the last frame\n"
 msgstr "Sari la ultimul cadru\n"
 
-msgid "Onion Skinning settings"
-msgstr "Setări pentru cadre multiple simultane"
+msgid "Timeline settings"
+msgstr "Setări cronologie"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Activează/dezactivează cadrele multiple simultane"
@@ -1905,7 +1941,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Dacă opțiunea este selectată, animația va rula doar pe cadrele cu aceeași etichetă.\n"
 "În caz contrar, animația va rula pentru toate cadrele, ignorând etichetele."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr "Dimensiune celuri:"
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Mod culoare"
 
@@ -1963,6 +2003,13 @@ msgstr ""
 msgid "Cel properties"
 msgstr "Proprietăți cel"
 
+msgid "Tag properties"
+msgstr "Proprietăți etichetă"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr "Etichetă nouă"
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
 msgstr "Inversare cadre"
@@ -1975,6 +2022,10 @@ msgstr "Grup"
 
 msgid "Layers"
 msgstr "Straturi"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr "Mască de tăiere"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2384,6 +2435,9 @@ msgstr "Instrument de umbrire"
 
 msgid "Line Tool"
 msgstr "Instrument Linie"
+
+msgid "Curve Tool"
+msgstr "Instrument Curbă"
 
 msgid "Rectangle Tool"
 msgstr "Instrument Dreptunghi"
@@ -2985,4 +3039,8 @@ msgstr "Efecte strat"
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
 msgstr "Adăugare efect"
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
+msgstr "Vrei să descarci imaginea din %s?"
 

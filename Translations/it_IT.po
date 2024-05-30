@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-04-10 01:12\n"
+"PO-Revision-Date: 2024-05-30 17:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -774,6 +774,10 @@ msgstr "Lingua di sistema"
 msgid "Display scale:"
 msgstr "Scala di visualizzazione:"
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr "Dimensione carattere:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Oscura l'interfaccia nella finestra di dialogo"
 
@@ -1325,6 +1329,21 @@ msgstr "Strumento linea\n\n"
 "Tieni premuto %s per centrare la forma sull'origine del clic\n"
 "Tieni premuto %s per spostare l'origine della forma"
 
+msgid "Curve Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws bezier curves\n"
+"Press %s/%s to add new points\n"
+"Press and drag to control the curvature\n"
+"Press %s to remove the last added point"
+msgstr "Strumento curva\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse\n\n"
+"Disegna curve bezier\n"
+"Premi e trascina per controllare la curvatura\n"
+"Premi e trascina per curvare\n"
+"Premi %s per rimuovere l'ultimo punto aggiunto"
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -1377,6 +1396,10 @@ msgstr "Scegli un colore dallo schermo."
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
 msgstr "Selezionare una forma di selezione."
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
+msgstr "Opzioni di colore"
 
 msgid "Left tool"
 msgstr "Strumento sinistra"
@@ -1589,6 +1612,7 @@ msgstr "Driver tablet:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Specifica il driver del tablet utilizzato su Windows. Se è abilitato Windows Ink, selezionare winink."
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Aggiungi estensione"
 
@@ -1603,6 +1627,18 @@ msgstr "Disinstalla"
 
 msgid "Open Folder"
 msgstr "Apri Cartella"
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr "Esplora Online"
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr "Sei sicuro di voler abilitare questa estensione? Assicurati di abilitare solo le estensioni da fonti di cui ti fidi."
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
+msgstr "Sei sicuro di voler eliminare questa estensione?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1846,8 +1882,8 @@ msgstr "Vai al prossimo fotogramma\n"
 msgid "Jump to the last frame\n"
 msgstr "Vai all'ultimo fotogramma\n"
 
-msgid "Onion Skinning settings"
-msgstr "Impostazioni Onion Skinning"
+msgid "Timeline settings"
+msgstr "Impostazioni della timeline"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Abilita/Disabilita Onion Skinning"
@@ -1907,7 +1943,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Se è selezionato, l'animazione viene eseguita solo sui fotogrammi che hanno lo stesso tag.\n"
 "Se non lo è, l'animazione verrà riprodotta per tutti i fotogrammi, ignorando i tag."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr "Dimensione della cella:"
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Modalità colore"
 
@@ -1965,6 +2005,13 @@ msgstr "Proprietà del livello"
 msgid "Cel properties"
 msgstr "Proprietà cel"
 
+msgid "Tag properties"
+msgstr "Proprietà tag"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr "Nuova tag"
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
 msgstr "Inverti i quadri"
@@ -1977,6 +2024,10 @@ msgstr "Gruppo"
 
 msgid "Layers"
 msgstr "Livelli"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr "Maschera di ritaglio"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2386,6 +2437,9 @@ msgstr "Strumento Ombreggiatura"
 
 msgid "Line Tool"
 msgstr "Strumento Linea"
+
+msgid "Curve Tool"
+msgstr "Strumento Curva"
 
 msgid "Rectangle Tool"
 msgstr "Rettangolo"
@@ -2986,4 +3040,8 @@ msgstr "Effetti di livello"
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
 msgstr "Aggiungi effetto"
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
+msgstr "Vuoi scaricare l'immagine da %s?"
 

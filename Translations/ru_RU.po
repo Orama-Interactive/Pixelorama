@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-04-11 09:14\n"
+"PO-Revision-Date: 2024-05-29 00:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -773,6 +773,10 @@ msgstr "Системный язык"
 msgid "Display scale:"
 msgstr "Масштаб интерфейса:"
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr "Размер шрифта:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Затемнять интерфейс при появлении диалога"
 
@@ -1323,6 +1327,20 @@ msgstr "Прямая\n\n"
 "Зажать %s для размещения центра в месте начала нажатия\n"
 "Зажать %s для изменения исходной точки фигуры"
 
+msgid "Curve Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws bezier curves\n"
+"Press %s/%s to add new points\n"
+"Press and drag to control the curvature\n"
+"Press %s to remove the last added point"
+msgstr "%s - левая кнопка мыши\n"
+"%s - правая кнопка мыши\n\n"
+"Рисует кривые Безье\n"
+"Нажмите %s/%s для добавления новых точек\n"
+"Нажмите и перетащите для управления кривой\n"
+"Нажмите %s для удаления последней добавленной точки"
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -1375,6 +1393,10 @@ msgstr "Выберите цвет на экране."
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
 msgstr "Выбрать форму пикера."
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
+msgstr "Настройки цвета"
 
 msgid "Left tool"
 msgstr "Левый инструмент"
@@ -1587,6 +1609,7 @@ msgstr "Драйвер планшета:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Укажите драйвер планшета, используемый в Windows. Если у вас включена функция Windows Ink, выберите winink."
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Добавить расширение"
 
@@ -1601,6 +1624,18 @@ msgstr "Удалить"
 
 msgid "Open Folder"
 msgstr "Открыть папку"
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
+msgstr ""
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1844,8 +1879,8 @@ msgstr "На следующий кадр\n"
 msgid "Jump to the last frame\n"
 msgstr "Перейти на последний кадр\n"
 
-msgid "Onion Skinning settings"
-msgstr "Настройки шлейфа соседних кадров"
+msgid "Timeline settings"
+msgstr "Настройка таймлана"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Включить/выключить шлейф кадров"
@@ -1905,7 +1940,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Если этот параметр включён, при анимации будут проигрываться только кадры с той же меткой.\n"
 "Если выключен, анимация будет включать все кадры, независимо от меток."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr "Размер ячейки:"
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Режим цвета"
 
@@ -1963,6 +2002,13 @@ msgstr "Параметры слоя"
 msgid "Cel properties"
 msgstr "Свойства клетки"
 
+msgid "Tag properties"
+msgstr "Параметры тега"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr "Новый тег"
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
 msgstr "Реверсировать кадры"
@@ -1975,6 +2021,10 @@ msgstr "Группа"
 
 msgid "Layers"
 msgstr "Слои"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr "Обтравочная маска"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2384,6 +2434,9 @@ msgstr "Затенение"
 
 msgid "Line Tool"
 msgstr "Рисование линий"
+
+msgid "Curve Tool"
+msgstr "Инструмент кривой"
 
 msgid "Rectangle Tool"
 msgstr "Рисование прямоугольников"
@@ -2984,4 +3037,8 @@ msgstr "Эффекты слоя"
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
 msgstr "Добавить эффект"
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
+msgstr "Хотите загрузить изображение из %s?"
 

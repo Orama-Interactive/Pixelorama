@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-04-10 18:28\n"
+"PO-Revision-Date: 2024-05-29 00:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -773,6 +773,10 @@ msgstr "Langue système"
 msgid "Display scale:"
 msgstr "Taille d'Affichage:"
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr "Taille de police :"
+
 msgid "Dim interface on dialog popup"
 msgstr "Assombrir l'arrière-plan derrière une boite de dialogue"
 
@@ -1324,6 +1328,15 @@ msgstr "Outil de ligne\n\n"
 "Maintenir %s pour centrer le trait sur l'origine du clic\n"
 "Maintenir %s pour déplacer le début du trait"
 
+msgid "Curve Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws bezier curves\n"
+"Press %s/%s to add new points\n"
+"Press and drag to control the curvature\n"
+"Press %s to remove the last added point"
+msgstr ""
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -1376,6 +1389,10 @@ msgstr "Récupérer une couleur sur l'écran."
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
 msgstr "Sélectionner une forme de Pipette."
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
+msgstr ""
 
 msgid "Left tool"
 msgstr "Outil gauche"
@@ -1588,6 +1605,7 @@ msgstr "Pilote de tablette :"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Spécifie le pilote de tablette utilisé sur Windows. Si Windows Ink est activée, sélectionnez winink."
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Ajouter l’extension"
 
@@ -1602,6 +1620,18 @@ msgstr "Désinstaller"
 
 msgid "Open Folder"
 msgstr "Ouvrir le dossier"
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
+msgstr ""
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1845,8 +1875,8 @@ msgstr "Aller à la frame suivante\n"
 msgid "Jump to the last frame\n"
 msgstr "Aller à la dernière frame\n"
 
-msgid "Onion Skinning settings"
-msgstr "Paramètres de la peau d'oignon"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Activer/désactiver la peau d'oignon"
@@ -1906,7 +1936,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le même tag.\n"
 "Si ce n'est pas le cas, l'animation sera jouée sur toutes les frames, ignorant les tags."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Mode couleur"
 
@@ -1964,6 +1998,13 @@ msgstr "Propriétés du calque"
 msgid "Cel properties"
 msgstr "Propriétés du Cellulo"
 
+msgid "Tag properties"
+msgstr "Propriétés du tag"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr "Nouveau tag"
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
 msgstr "Inverser les frames"
@@ -1976,6 +2017,10 @@ msgstr "Groupe"
 
 msgid "Layers"
 msgstr "Calques"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2385,6 +2430,9 @@ msgstr "Outil d'ombrage"
 
 msgid "Line Tool"
 msgstr "Outil ligne"
+
+msgid "Curve Tool"
+msgstr ""
 
 msgid "Rectangle Tool"
 msgstr "Outil rectangle"
@@ -2986,4 +3034,8 @@ msgstr "Calque d'effets"
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
 msgstr "Ajouter effet"
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
+msgstr "Voulez-vous télécharger l'image depuis %s ?"
 

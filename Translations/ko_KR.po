@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-04-09 23:29\n"
+"PO-Revision-Date: 2024-05-29 00:28\n"
 
 msgid "OK"
 msgstr "예"
@@ -771,6 +771,10 @@ msgstr "시스템 언어"
 msgid "Display scale:"
 msgstr ""
 
+#. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
+msgid "Font size:"
+msgstr ""
+
 msgid "Dim interface on dialog popup"
 msgstr "대화 상자 팝업에 인터페이스를 희미하"
 
@@ -1319,6 +1323,15 @@ msgstr "선 툴\n\n"
 "%s 를 눌러 도형의 클릭 원점 중앙에 놓음\n"
 "%s 를 눌러 원점을 바꿈"
 
+msgid "Curve Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws bezier curves\n"
+"Press %s/%s to add new points\n"
+"Press and drag to control the curvature\n"
+"Press %s to remove the last added point"
+msgstr ""
+
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
@@ -1370,6 +1383,10 @@ msgstr ""
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
+msgstr ""
+
+#. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
+msgid "Color options"
 msgstr ""
 
 msgid "Left tool"
@@ -1583,6 +1600,7 @@ msgstr ""
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr ""
 
+#. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "확장 추가"
 
@@ -1597,6 +1615,18 @@ msgstr "삭제"
 
 msgid "Open Folder"
 msgstr "폴더 열기"
+
+#. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+msgid "Explore Online"
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
+msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
+msgstr ""
+
+#. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
+msgid "Are you sure you want to delete this extension?"
+msgstr ""
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1840,8 +1870,8 @@ msgstr ""
 msgid "Jump to the last frame\n"
 msgstr ""
 
-msgid "Onion Skinning settings"
-msgstr "어니언 스키닝 설정"
+msgid "Timeline settings"
+msgstr ""
 
 msgid "Enable/disable Onion Skinning"
 msgstr "어니언 스키닝 활성화/비활성화"
@@ -1901,7 +1931,11 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "선택 되었다면, 같은 태그의 프레임만 애니메이션이 재생 됩니다.\n"
 "그렇지 않다면, 태그를 무시하고 모든 프레임의 애니메이션이 재생 됩니다."
 
-#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+#. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
+msgid "Cel size:"
+msgstr ""
+
+#. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "색상 모드"
 
@@ -1959,6 +1993,13 @@ msgstr ""
 msgid "Cel properties"
 msgstr ""
 
+msgid "Tag properties"
+msgstr ""
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
+msgid "New Tag"
+msgstr ""
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
 msgstr ""
@@ -1971,6 +2012,10 @@ msgstr ""
 
 msgid "Layers"
 msgstr "레이어"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
+msgid "Clipping mask"
+msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2379,6 +2424,9 @@ msgstr "셰이딩 툴"
 
 msgid "Line Tool"
 msgstr "선 툴"
+
+msgid "Curve Tool"
+msgstr ""
 
 msgid "Rectangle Tool"
 msgstr "사각형 툴"
@@ -2975,5 +3023,9 @@ msgstr ""
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
+msgstr ""
+
+#. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
+msgid "Do you want to download the image from %s?"
 msgstr ""
 
