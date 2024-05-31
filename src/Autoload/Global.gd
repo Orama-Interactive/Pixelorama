@@ -574,7 +574,7 @@ var onion_skinning_future_rate := 1
 var onion_skinning_blue_red := false  ## If [code]true[/code], then blue-red mode is enabled.
 
 ## The current version of pixelorama
-var current_version: String = ProjectSettings.get_setting("application/config/Version")
+var current_version: String = ProjectSettings.get_setting("application/config/version")
 
 # Nodes
 ## The [PackedScene] of the button used by layers in the timeline.

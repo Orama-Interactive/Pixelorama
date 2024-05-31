@@ -125,7 +125,7 @@ func get_main_nodes(extension_name: StringName) -> Array[Node]:
 class GeneralAPI:
 	## Returns the current version of pixelorama.
 	func get_pixelorama_version() -> String:
-		return ProjectSettings.get_setting("application/config/Version")
+		return ProjectSettings.get_setting("application/config/version")
 
 	## Returns the [ConfigFile] contains all the settings (Brushes, sizes, preferences, etc...).
 	func get_config_file() -> ConfigFile:

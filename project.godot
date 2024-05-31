@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Pixelorama"
 config/description="A free & open-source 2D sprite editor"
+config/version="v1.0-beta1"
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="pixelorama"
@@ -23,7 +24,6 @@ boot_splash/use_filter=false
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/Version="v1.0-beta1"
 config/ExtensionsAPI_Version=4
 config/Pxo_Version=3
 
