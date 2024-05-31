@@ -23,7 +23,7 @@ action = &"vertical_mirror"
 events = [SubResource("InputEventAction_24etr")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_ebgk6"]
-action = &"pixel_perfect"
+action = &"alpha_lock"
 
 [sub_resource type="Shortcut" id="Shortcut_vcyug"]
 events = [SubResource("InputEventAction_ebgk6")]

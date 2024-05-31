@@ -786,6 +786,7 @@ func _initialize_keychain() -> void:
 		"horizontal_mirror": Keychain.InputAction.new("", "Buttons"),
 		"vertical_mirror": Keychain.InputAction.new("", "Buttons"),
 		"pixel_perfect": Keychain.InputAction.new("", "Buttons"),
+		"alpha_lock": Keychain.InputAction.new("", "Buttons"),
 		"new_layer": Keychain.InputAction.new("", "Buttons"),
 		"remove_layer": Keychain.InputAction.new("", "Buttons"),
 		"move_layer_up": Keychain.InputAction.new("", "Buttons"),
