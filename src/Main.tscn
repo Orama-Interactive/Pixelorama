@@ -113,6 +113,7 @@ visible = false
 [connection signal="visibility_changed" from="Dialogs/OpenSprite" to="." method="_on_open_sprite_visibility_changed"]
 [connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="visibility_changed" from="Dialogs/SaveSprite" to="." method="_can_draw_true"]
+[connection signal="visibility_changed" from="Dialogs/SaveSprite" to="." method="_on_save_sprite_visibility_changed"]
 [connection signal="confirmed" from="Dialogs/SaveSpriteHTML5" to="." method="save_project" binds= [""]]
 [connection signal="visibility_changed" from="Dialogs/SaveSpriteHTML5" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/ExportDialog" to="." method="_can_draw_true"]

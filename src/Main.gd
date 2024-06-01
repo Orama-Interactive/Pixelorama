@@ -18,6 +18,7 @@ var splash_dialog: AcceptDialog:
 
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 @onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
+@onready var save_sprite_dialog := $Dialogs/SaveSprite as FileDialog
 @onready var save_sprite_html5: ConfirmationDialog = $Dialogs/SaveSpriteHTML5
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 @onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
@@ -178,7 +179,7 @@ func _ready() -> void:
 	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
-	Global.save_sprites_dialog.current_dir = Global.config_cache.get_value(
+	save_sprite_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
 	var include_blended := CheckBox.new()
@@ -190,7 +191,7 @@ This makes the pxo file larger and is useful for importing by third-party softwa
 or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.
 """
 	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	Global.save_sprites_dialog.get_vbox().add_child(include_blended)
+	save_sprite_dialog.get_vbox().add_child(include_blended)
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
@@ -426,7 +427,7 @@ func load_recent_project_file(path: String) -> void:
 func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 	for path in paths:
 		OpenSave.handle_loading_file(path)
-	Global.save_sprites_dialog.current_dir = paths[0].get_base_dir()
+	save_sprite_dialog.current_dir = paths[0].get_base_dir()
 
 
 func show_save_dialog(project := Global.current_project) -> void:
@@ -436,12 +437,17 @@ func show_save_dialog(project := Global.current_project) -> void:
 		save_sprite_html5.popup_centered()
 		save_filename.text = project.name
 	else:
-		Global.save_sprites_dialog.popup_centered()
-		Global.save_sprites_dialog.get_line_edit().text = project.name
+		save_sprite_dialog.popup_centered()
+		save_sprite_dialog.get_line_edit().text = project.name
 
 
 func _on_SaveSprite_file_selected(path: String) -> void:
 	save_project(path)
+
+
+func _on_save_sprite_visibility_changed() -> void:
+	if not save_sprite_dialog.visible:
+		is_quitting_on_save = false
 
 
 func save_project(path: String) -> void:
@@ -455,16 +461,13 @@ func save_project(path: String) -> void:
 		path = "user://".path_join(file_name)
 		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
 	else:
-		include_blended = (
-			Global.save_sprites_dialog.get_vbox().get_node("IncludeBlended").button_pressed
-		)
+		include_blended = save_sprite_dialog.get_vbox().get_node("IncludeBlended").button_pressed
 	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
 	if is_quitting_on_save:
 		changed_projects_on_quit.pop_front()
 		_save_on_quit_confirmation()
-		is_quitting_on_save = false
 
 
 func _on_open_sprite_visibility_changed() -> void:
