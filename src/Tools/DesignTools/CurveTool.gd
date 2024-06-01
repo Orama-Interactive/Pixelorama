@@ -10,7 +10,8 @@ var _last_mouse_position := Vector2.INF  ## The last position of the mouse
 
 
 func _init() -> void:
-	Global.project_about_to_switch.connect(_clear)  # To prevent tool from remaining active
+	# To prevent tool from remaining active when switching projects
+	Global.project_about_to_switch.connect(_clear)
 	_drawer.color_op = Drawer.ColorOp.new()
 	update_indicator()
 
@@ -182,6 +183,7 @@ func _clear() -> void:
 	_curve.clear_points()
 	_drawing = false
 	_editing_out_control_point = false
+	Global.canvas.previews.queue_redraw()
 
 
 ## Get the [member _curve]'s baked points, and draw lines between them using [method _fill_gap].

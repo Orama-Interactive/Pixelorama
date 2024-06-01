@@ -5,6 +5,11 @@ var _draw_points: Array[Vector2i] = []
 var _ready_to_apply := false
 
 
+func _init() -> void:
+	# To prevent tool from remaining active when switching projects
+	Global.project_about_to_switch.connect(_clear)
+
+
 func _input(event: InputEvent) -> void:
 	if _move:
 		return
@@ -20,10 +25,7 @@ func _input(event: InputEvent) -> void:
 			apply_selection(Vector2i.ZERO)  # Argument doesn't matter
 	else:
 		if event.is_action_pressed("transformation_cancel") and _ongoing_selection:
-			_ongoing_selection = false
-			_draw_points.clear()
-			_ready_to_apply = false
-			Global.canvas.previews.queue_redraw()
+			_clear()
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -139,6 +141,10 @@ func apply_selection(pos: Vector2i) -> void:
 			Global.canvas.selection.clear_selection()
 
 	Global.canvas.selection.commit_undo("Select", undo_data)
+	_clear()
+
+
+func _clear() -> void:
 	_ongoing_selection = false
 	_draw_points.clear()
 	_ready_to_apply = false
