@@ -1020,12 +1020,29 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 func set_locale(locale: String) -> void:
 	if TranslationServer.get_locale() == locale:
 		return
+	locale = find_nearest_locale(locale)
 	if not locale in TranslationServer.get_loaded_locales():
 		var translation := load("res://Translations/%s.po" % locale)
 		if is_instance_valid(translation) and translation is Translation:
 			TranslationServer.add_translation(translation)
+		else:
+			printerr("Translation %s for locale %s failed to load." % [translation, locale])
+			return
 		Keychain.load_translation(locale)
 	TranslationServer.set_locale(locale)
+
+
+func find_nearest_locale(locale: String) -> String:
+	if locale in loaded_locales:
+		return locale
+	var max_similarity_score := 0
+	var closest_locale := "en_US"
+	for loaded_locale in loaded_locales:
+		var compared := TranslationServer.compare_locales(locale, loaded_locale)
+		if compared > max_similarity_score:
+			max_similarity_score = compared
+			closest_locale = loaded_locale
+	return closest_locale
 
 
 ## Used by undo/redo operations to store compressed images in memory.
