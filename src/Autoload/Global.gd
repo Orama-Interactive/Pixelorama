@@ -506,9 +506,8 @@ var tablet_driver := 0:
 		if value == tablet_driver:
 			return
 		tablet_driver = value
-		var tablet_driver_name := DisplayServer.tablet_get_current_driver()
-		ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
-		ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
+		var tablet_driver_name := DisplayServer.tablet_get_driver_name(tablet_driver)
+		DisplayServer.tablet_set_current_driver(tablet_driver_name)
 
 # Tools & options
 ## Found in Preferences. If [code]true[/code], the cursor's left tool icon is visible.

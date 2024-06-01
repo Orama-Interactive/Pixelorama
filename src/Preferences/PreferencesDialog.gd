@@ -185,7 +185,7 @@ var preferences: Array[Preference] = [
 	#	Preference.new(
 	#		"renderer", "Drivers/DriversContainer/Renderer", "selected", OS.VIDEO_DRIVER_GLES2, true
 	#	),
-	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0, true)
+	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0)
 ]
 
 var content_list := PackedStringArray([])
