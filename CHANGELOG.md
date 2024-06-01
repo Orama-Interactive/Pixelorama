@@ -6,12 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.0] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt), [RorotoSic](https://github.com/RorotoSic)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt), [RorotoSic](https://github.com/RorotoSic), [Kiisu_Master](https://github.com/Kiisu-Master)
 
 Built using Godot 4.2.2
 
 ### Added
-- Multiple layer blend modes are finally here! Note that right now group blending is not supported. [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
+- Multiple layer blend modes are finally here! Note that group blending is not currently supported. [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
 - Non-destructive layer effects have been implemented. [#940](https://github.com/Orama-Interactive/Pixelorama/pull/940)
 - A new curve tool has been implemented. It contains a "fill shape" tool option, allowing it to be used as a polygon tool as well. [#1019](https://github.com/Orama-Interactive/Pixelorama/pull/1019)
 - An extension explorer has been integrated into Pixelorama, allowing for easy extension downloading from the internet. [#910](https://github.com/Orama-Interactive/Pixelorama/pull/910)
@@ -21,6 +21,7 @@ Built using Godot 4.2.2
 - Alpha lock has been added as a global tool option. When enabled, users can only draw on non-transparent pixels.
 - Export to webp and jpeg file formats. Webp is currently only for static images and does not support animations.
 - A basic Command Line Interface has been implemented, to help with automating mass project file exporting. [#579](https://github.com/Orama-Interactive/Pixelorama/discussions/579)
+- A 64-bit ARM build is now also available along with the 32-bit ARM build.
 - Dragging and dropping multiple frames or layers to re-arrange them is now (finally!) supported, instead of only moving the last layer/frame selected.
 - Users can now create new tags from the frame right-click menu, by clicking on "New Tag".
 - It is now possible to edit a tag's properties by clicking on its name from the timeline, and to move and resize it by dragging its edges.
@@ -42,6 +43,7 @@ Built using Godot 4.2.2
 - Added support for inverted tablet pens. [#966](https://github.com/Orama-Interactive/Pixelorama/pull/966)
 - Added new dialogs for cel, layer and project properties. Cel and layer which can be accessed by right-clicking cel and the layer buttons in the timeline respectively, while project properties can be found under the Image menu.
 - A new z-index property has been added to the cel properties, allowing for independent, per-frame layer ordering.
+- Dragging and dropping images directly from a Web browser into Pixelorama is now possible! Note that this may not work with all browsers.
 - Pasting tags from other projects is now possible. [#946](https://github.com/Orama-Interactive/Pixelorama/pull/946)
 - A new "Pixelorama" palette has been added to the default palettes.
 - <kbd>Control + Shift + T</kbd> has been added as a default shortcut that opens the last project.
@@ -56,7 +58,7 @@ Built using Godot 4.2.2
 - Similarly, the file format of Pixelorama's palette files has been changed from .tres back to .json as they used to be in the past. This change had to happen due to [security concerns regarding Godot's resource files](https://github.com/godotengine/godot-proposals/issues/4925). [#967](https://github.com/Orama-Interactive/Pixelorama/pull/967)
 - Changes made to the User Interface layouts are now automatically being saved. To restore a default layout, users can go to Window > Manage Layouts > Add and select from one of the default layouts.
 - Pixelorama's icon has changed.
-- The config file has been renamed from "cache.ini" to "config.ini".
+- The config file has been renamed from "cache.ini" to "config.ini". This effectively means that preferences edited in v0.x will not be automatically be carried over to v1.0.
 - The colors of the themes has been limited and grouped to allow for easier theming, using this [new stand-alone tool](https://github.com/Orama-Interactive/PixeloramaThemeCreator).
 - The color picker is now always visible in the user interface as its own panel, instead of being a popup. The previous color buttons have been re-purposed to allow for setting whether the color being selected is for the left or the right tool.
 - The color pickers has been vastly improved, thanks to the update to Godot 4. Users can now use the OKHSL color mode, and choose between four different picker shapes: HSV Rectangle (default), HSV Wheel, VHS Circle and OKHSL Circle.
@@ -73,17 +75,21 @@ Built using Godot 4.2.2
 - Cel buttons now hide their transparent background when their corresponding cels are empty, instead of just dimming them.
 - Every shader-based image effect is automatically working without the need to change renderers, and they all work now on the Web version. This comes at the cost of less compatibility, as the desktop version now requires OpenGL 3.3 minimum instead of 2.1, and the Web version requires WebGL 2 instead of WebGL 1. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - The dynamics popup only show the relevant properties to which dynamics are currently toggled on.
+- When attempting to enable an extension, a confirmation dialog appears, as an extra security step.
 - The aspect ratio button in the Scale Image dialog is toggled on by default.
 - Negative values in shading tool options are now allowed. [#1015](https://github.com/Orama-Interactive/Pixelorama/issues/1015)
 - When deleting an extension, a confirmation window now appears that lets users either to delete the palette permanently, move it to trash, or cancel. [#919](https://github.com/Orama-Interactive/Pixelorama/pull/919)
 - "Developers" and "Contributors" have been merged into "Authors" in the About dialog. "Donate" has also been removed from there, and a new "Support Pixelorama's Development" option has been added to the Help menu.
 
 ### Fixed
+- There should be less crashes overall. 0.x versions crashed randomly on some devices, probably due to how Godot 3 handled memory management for images, but 1.0 no longer seems to cause these crashes.
 - Performance when drawing and doing operations such as bucket area fill should be better now. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Selections now scale properly when they are not transforming any image content. [#774](https://github.com/Orama-Interactive/Pixelorama/issues/774)
 - The aspect ratio is now being kept correctly in image effect dialog previews.
 - Dividing by zero in value sliders and spinboxes no longer crashes the program.
 - Default palettes are now available for clean installs on macOS. [#1008](https://github.com/Orama-Interactive/Pixelorama/pull/1008)
+- Pixelorama no longer quits when saving from the File menu, if the user attempted to save on exit before and cancelled the save file dialog.
+- The text of the rulers is now being properly clipped. [#1023](https://github.com/Orama-Interactive/Pixelorama/pull/1023)
 
 ### Removed
 - BubbleGum16, Complementary, Monochromatic, Shades and Triad palettes have been removed from the default palettes.
@@ -459,7 +465,7 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 
 ### Added
 - Pixelorama is now available on the [Open Store](https://open-store.io/app/pixelorama.orama-interactive) for Ubuntu Touch. [#517](https://github.com/Orama-Interactive/Pixelorama/pull/517)
-- A new ARM build for the Raspberry Pi 4 is now available! [#598](https://github.com/Orama-Interactive/Pixelorama/pull/598)
+- A new ARM32 build for the Raspberry Pi 4 is now available! [#598](https://github.com/Orama-Interactive/Pixelorama/pull/598)
 - It is now possible to hold <kbd>Control</kbd> to quickly change a tool's mode. [#429](https://github.com/Orama-Interactive/Pixelorama/discussions/429)
 - Holding <kbd>Alt</kbd> while having a draw tool selected now works as a color picker. [#125](https://github.com/Orama-Interactive/Pixelorama/issues/125)
 - Added an opacity option in the Eraser's tool options, which lets the user change the strength of the tool.
