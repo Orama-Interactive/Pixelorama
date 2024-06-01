@@ -646,8 +646,10 @@ class ExportAPI:
 	## [param exporter_generator] is a node with a script containing the method
 	## [method override_export] which takes 1 argument of type Dictionary which is automatically
 	## passed to [method override_export] at time of export and contains
-	## keys: [code]processed_images[/code], [code]durations[/code], [code]export_dialog[/code],
+	## keys: [code]processed_images[/code], [code]export_dialog[/code],
 	## [code]export_paths[/code], [code]project[/code][br]
+	## (Note: [code]processed_images[/code] is an array of ProcessedImage resource which further
+	## has parameters [param image] and [param duration])[br]
 	## If the value of [param tab] is not in [constant ExportTab] then the format will be added to
 	## both tabs. Returns the index of exporter, which can be used to remove exporter later.
 	func add_export_option(
