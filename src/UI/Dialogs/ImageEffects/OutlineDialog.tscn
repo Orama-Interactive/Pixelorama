@@ -61,9 +61,9 @@ item_count = 3
 selected = 0
 popup/item_0/text = "Diamond"
 popup/item_0/id = 0
-popup/item_1/text = "Square"
+popup/item_1/text = "Circle"
 popup/item_1/id = 1
-popup/item_2/text = "Circle"
+popup/item_2/text = "Square"
 popup/item_2/id = 2
 
 [node name="InsideImageLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="6"]
