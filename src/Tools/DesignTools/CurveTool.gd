@@ -10,7 +10,7 @@ var _last_mouse_position := Vector2.INF  ## The last position of the mouse
 
 
 func _init() -> void:
-	Global.project_about_to_switch.connect(_draw_shape)  # To prevent tool from remaining active
+	Global.project_about_to_switch.connect(_clear)  # To prevent tool from remaining active
 	_drawer.color_op = Drawer.ColorOp.new()
 	update_indicator()
 
@@ -174,10 +174,14 @@ func _draw_shape() -> void:
 				v.y = y
 				if Geometry2D.is_point_in_polygon(v, points):
 					draw_tool(v)
+	_clear()
+	commit_undo()
+
+
+func _clear() -> void:
 	_curve.clear_points()
 	_drawing = false
 	_editing_out_control_point = false
-	commit_undo()
 
 
 ## Get the [member _curve]'s baked points, and draw lines between them using [method _fill_gap].
