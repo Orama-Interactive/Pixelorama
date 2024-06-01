@@ -378,6 +378,7 @@ stretch_mode = 3
 [node name="LayerFX" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 
