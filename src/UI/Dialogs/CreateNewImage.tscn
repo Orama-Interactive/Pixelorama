@@ -9,6 +9,7 @@
 
 [node name="CreateNewImage" type="ConfirmationDialog"]
 title = "New..."
+size = Vector2i(384, 330)
 exclusive = false
 popup_window = true
 script = ExtResource("1")
@@ -20,7 +21,7 @@ anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = -36.0
+offset_bottom = -49.0
 size_flags_horizontal = 0
 
 [node name="ProjectName" type="HBoxContainer" parent="VBoxContainer"]
@@ -160,7 +161,7 @@ layout_mode = 2
 
 [node name="PortraitButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Portrait"
 focus_mode = 0
@@ -181,7 +182,7 @@ texture = ExtResource("2")
 
 [node name="LandscapeButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Landscape"
 focus_mode = 0
