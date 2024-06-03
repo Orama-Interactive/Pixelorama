@@ -795,7 +795,6 @@ func _initialize_keychain() -> void:
 		"add_frame": Keychain.InputAction.new("", "Buttons"),
 		"remove_frame": Keychain.InputAction.new("", "Buttons"),
 		"clone_frame": Keychain.InputAction.new("", "Buttons"),
-		"manage_frame_tags": Keychain.InputAction.new("", "Buttons"),
 		"move_frame_left": Keychain.InputAction.new("", "Buttons"),
 		"move_frame_right": Keychain.InputAction.new("", "Buttons"),
 		"go_to_first_frame": Keychain.InputAction.new("", "Buttons"),

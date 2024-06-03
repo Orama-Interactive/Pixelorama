@@ -775,10 +775,6 @@ clone_frame={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":true,"pressed":false,"keycode":4194311,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
-manage_frame_tags={
-"deadzone": 0.5,
-"events": []
-}
 move_frame_left={
 "deadzone": 0.5,
 "events": []
