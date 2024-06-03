@@ -186,6 +186,11 @@ func _on_lock_button_pressed() -> void:
 	if Global.select_layer_on_button_click:
 		_select_current_layer()
 	_update_buttons_all_layers()
+	var child_count := layer.get_child_count(true)
+	Global.disable_button(
+		Global.animation_timeline.remove_layer,
+		layer.is_locked_in_hierarchy() or Global.current_project.layers.size() == child_count + 1
+	)
 
 
 func _on_link_button_pressed() -> void:
