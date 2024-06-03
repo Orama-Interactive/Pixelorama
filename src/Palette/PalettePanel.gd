@@ -56,7 +56,6 @@ func _ready() -> void:
 	Palettes.palette_selected.connect(select_palette)
 	Palettes.new_palette_created.connect(_new_palette_created)
 	Palettes.new_palette_imported.connect(setup_palettes_selector)
-	Tools.color_changed.connect(_color_changed)
 	sort_button_popup.id_pressed.connect(sort_pressed)
 
 	setup_palettes_selector()
@@ -267,20 +266,6 @@ func _on_edit_palette_dialog_deleted(permanent: bool) -> void:
 func _new_palette_created() -> void:
 	setup_palettes_selector()
 	redraw_current_palette()
-
-
-func _color_changed(_color: Color, button: int) -> void:
-	if not hidden_color_picker.get_popup().visible and is_instance_valid(Palettes.current_palette):
-		# Unselect swatches when tools color is changed
-		var swatch_to_unselect := -1
-		if button == MOUSE_BUTTON_LEFT:
-			swatch_to_unselect = Palettes.left_selected_color
-			Palettes.left_selected_color = -1
-		elif button == MOUSE_BUTTON_RIGHT:
-			swatch_to_unselect = Palettes.right_selected_color
-			Palettes.right_selected_color = -1
-
-		palette_grid.unselect_swatch(button, swatch_to_unselect)
 
 
 func _on_edit_palette_dialog_exported(path := "") -> void:
