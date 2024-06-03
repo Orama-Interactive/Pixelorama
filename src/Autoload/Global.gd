@@ -1018,8 +1018,6 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 
 
 func set_locale(locale: String) -> void:
-	if TranslationServer.get_locale() == locale:
-		return
 	locale = find_nearest_locale(locale)
 	if not locale in TranslationServer.get_loaded_locales():
 		var translation := load("res://Translations/%s.po" % locale)
