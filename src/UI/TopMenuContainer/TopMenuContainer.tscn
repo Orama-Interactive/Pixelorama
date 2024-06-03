@@ -72,7 +72,7 @@ snap_step = 45.0
 
 [node name="ZoomSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(70, 20)
+custom_minimum_size = Vector2(90, 20)
 layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 2
