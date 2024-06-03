@@ -32,8 +32,7 @@ func set_palette(new_palette: Palette) -> void:
 
 
 func setup_swatches() -> void:
-	# Columns cannot be 0
-	columns = 1 if grid_size.x == 0 else grid_size.x
+	columns = maxi(1, grid_size.x)  # Columns cannot be 0
 	if grid_size.x * grid_size.y > swatches.size():
 		for i in range(swatches.size(), grid_size.x * grid_size.y):
 			var swatch := PALETTE_SWATCH_SCENE.instantiate() as PaletteSwatch
@@ -88,32 +87,30 @@ func scroll_palette(origin: Vector2i) -> void:
 ## Called when the color changes, either the left or the right, determined by [param mouse_button].
 ## If current palette has [param target_color] as a [Color], then select it.
 func find_and_select_color(target_color: Color, mouse_button: int) -> void:
-	var found_color := false
 	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	for color_ind in swatches.size():
 		if (
 			target_color.is_equal_approx(swatches[color_ind].color)
 			or target_color.to_html() == swatches[color_ind].color.to_html()
 		):
-			select_swatch(mouse_button, color_ind, old_index)
+			var index := convert_grid_index_to_palette_index(color_ind)
+			select_swatch(mouse_button, index, old_index)
 			match mouse_button:
 				MOUSE_BUTTON_LEFT:
-					Palettes.left_selected_color = color_ind
+					Palettes.left_selected_color = index
 				MOUSE_BUTTON_RIGHT:
-					Palettes.right_selected_color = color_ind
-			found_color = true
-			break
-	if not found_color:
-		# Unselect swatches when tools color is changed
-		var swatch_to_unselect := -1
-		if mouse_button == MOUSE_BUTTON_LEFT:
-			swatch_to_unselect = Palettes.left_selected_color
-			Palettes.left_selected_color = -1
-		elif mouse_button == MOUSE_BUTTON_RIGHT:
-			swatch_to_unselect = Palettes.right_selected_color
-			Palettes.right_selected_color = -1
+					Palettes.right_selected_color = index
+			return
+	# Unselect swatches when tools color is changed
+	var swatch_to_unselect := -1
+	if mouse_button == MOUSE_BUTTON_LEFT:
+		swatch_to_unselect = Palettes.left_selected_color
+		Palettes.left_selected_color = -1
+	elif mouse_button == MOUSE_BUTTON_RIGHT:
+		swatch_to_unselect = Palettes.right_selected_color
+		Palettes.right_selected_color = -1
 
-		unselect_swatch(mouse_button, swatch_to_unselect)
+	unselect_swatch(mouse_button, swatch_to_unselect)
 
 
 ## Displays a left/right highlight over a swatch
@@ -150,15 +147,15 @@ func get_swatch_color(palette_index: int) -> Color:
 ## Grid index adds grid window origin
 func convert_grid_index_to_palette_index(index: int) -> int:
 	return (
-		int(index / grid_size.x + grid_window_origin.y) * current_palette.width
-		+ (index % int(grid_size.x) + grid_window_origin.x)
+		(index / grid_size.x + grid_window_origin.y) * current_palette.width
+		+ (index % grid_size.x + grid_window_origin.x)
 	)
 
 
 func convert_palette_index_to_grid_index(palette_index: int) -> int:
 	var x := palette_index % current_palette.width
 	var y := palette_index / current_palette.width
-	return int((x - grid_window_origin.x) + (y - grid_window_origin.y) * grid_size.x)
+	return (x - grid_window_origin.x) + (y - grid_window_origin.y) * grid_size.x
 
 
 func resize_grid(new_rect_size: Vector2) -> void:
