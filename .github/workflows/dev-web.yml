@@ -27,6 +27,9 @@ jobs:
         run: |
           mkdir -v -p build/web ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Import resources once 📦
+        continue-on-error: true
+        run: godot --headless -v --import
       - name: Web Build 🔧
         run: godot --headless -v --export-release "Web" ./build/web/index.html
       - name: Install rsync 📚

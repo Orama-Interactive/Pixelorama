@@ -35,6 +35,9 @@ jobs:
         run: |
           mkdir -v -p build/${EXPORT_NAME}-Windows-64bit build/${EXPORT_NAME}-Windows-32bit ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Import resources once 📦
+        continue-on-error: true
+        run: godot --headless -v --import
       - name: Windows Build 🔧
         run: |
           godot --headless -v --export-release "Windows Desktop 64-bit" ./build/${EXPORT_NAME}-Windows-64bit/${EXPORT_NAME}.exe
@@ -84,6 +87,9 @@ jobs:
         run: |
           mkdir -v -p build/${EXPORT_NAME}-Linux-64bit build/${EXPORT_NAME}-Linux-32bit build/${EXPORT_NAME}-Linux-ARM64 build/${EXPORT_NAME}-Linux-ARM32 ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Import resources once 📦
+        continue-on-error: true
+        run: godot --headless -v --import
       - name: Linux Build 🔧
         run: |
           godot --headless -v --export-release "Linux/X11 64-bit" ./build/${EXPORT_NAME}-Linux-64bit/${EXPORT_NAME}.x86_64
@@ -149,6 +155,9 @@ jobs:
           unzip -a Godot_v${GODOT_VERSION}-stable_macos.universal.zip
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
+      - name: Import resources once 📦
+        continue-on-error: true
+        run: ./Godot.app/Contents/MacOS/Godot --headless -v --import
       - name: Mac Build 🔧
         run: |
           chown runner ./Godot.app/Contents/MacOS/Godot
@@ -197,6 +206,9 @@ jobs:
         run: |
           mkdir -v -p build/web ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Import resources once 📦
+        continue-on-error: true
+        run: godot --headless -v --import
       - name: Web Build 🔧
         run: godot --headless -v --export-release "Web" ./build/web/index.html
       - name: Install rsync 📚
