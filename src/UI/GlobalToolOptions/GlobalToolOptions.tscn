@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene load_steps=23 format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
@@ -21,6 +21,12 @@ action = &"vertical_mirror"
 
 [sub_resource type="Shortcut" id="Shortcut_ai7qc"]
 events = [SubResource("InputEventAction_24etr")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_eokfu"]
+action = &"pixel_perfect"
+
+[sub_resource type="Shortcut" id="Shortcut_7kmom"]
+events = [SubResource("InputEventAction_eokfu")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_ebgk6"]
 action = &"alpha_lock"
@@ -112,7 +118,7 @@ tooltip_text = "Pixel Perfect
 Makes lines smooth by removing the extra pixels on the edges"
 mouse_default_cursor_shape = 2
 toggle_mode = true
-shortcut = SubResource("Shortcut_vcyug")
+shortcut = SubResource("Shortcut_7kmom")
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/PixelPerfect"]
 layout_mode = 0
