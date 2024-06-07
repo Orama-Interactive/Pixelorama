@@ -6,6 +6,7 @@ const CURSOR_SPEED_RATE := 6.0
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  ## For optimization purposes
 var update_all_layers := false
+var project_changed := false
 var move_preview_location := Vector2i.ZERO
 var layer_texture_array := Texture2DArray.new()
 var layer_metadata_image := Image.new()
@@ -31,7 +32,7 @@ var layer_metadata_texture := ImageTexture.new()
 func _ready() -> void:
 	material.set_shader_parameter("layers", layer_texture_array)
 	material.set_shader_parameter("metadata", layer_metadata_texture)
-	Global.project_switched.connect(queue_redraw)
+	Global.project_switched.connect(func(): project_changed = true ; queue_redraw())
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE
@@ -53,13 +54,13 @@ func _draw() -> void:
 	# Placeholder so we can have a material here
 	if is_instance_valid(cel_to_draw):
 		draw_texture(cel_to_draw.image_texture, Vector2.ZERO)
-	draw_layers()
+	draw_layers(project_changed)
+	project_changed = false
 	if Global.onion_skinning:
 		refresh_onion()
 	currently_visible_frame.size = Global.current_project.size
 	current_frame_drawer.queue_redraw()
-	if Global.current_project.tiles.mode != Tiles.MODE.NONE:
-		tile_mode.queue_redraw()
+	tile_mode.queue_redraw()
 	draw_set_transform(position, rotation, scale)
 
 
@@ -137,13 +138,14 @@ func update_selected_cels_textures(project := Global.current_project) -> void:
 			current_cel.update_texture()
 
 
-func draw_layers() -> void:
+func draw_layers(force_recreate := false) -> void:
 	var project := Global.current_project
 	var current_cels := project.frames[project.current_frame].cels
 	var recreate_texture_array := (
 		layer_texture_array.get_layers() != project.layers.size()
 		or layer_texture_array.get_width() != project.size.x
 		or layer_texture_array.get_height() != project.size.y
+		or force_recreate
 	)
 	if recreate_texture_array:
 		var textures: Array[Image] = []
