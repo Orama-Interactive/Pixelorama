@@ -77,6 +77,7 @@ popup_window = true
 dialog_text = "This is an error message!"
 
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
+size = Vector2i(320, 200)
 popup_window = true
 dialog_text = "Autosaved project(s) from a crashed session were found.
 Do you want to recover the data?"
@@ -112,8 +113,8 @@ visible = false
 [connection signal="files_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_files_selected"]
 [connection signal="visibility_changed" from="Dialogs/OpenSprite" to="." method="_on_open_sprite_visibility_changed"]
 [connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]
-[connection signal="visibility_changed" from="Dialogs/SaveSprite" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/SaveSprite" to="." method="_on_save_sprite_visibility_changed"]
+[connection signal="visibility_changed" from="Dialogs/SaveSprite" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="Dialogs/SaveSpriteHTML5" to="." method="save_project" binds= [""]]
 [connection signal="visibility_changed" from="Dialogs/SaveSpriteHTML5" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/ExportDialog" to="." method="_can_draw_true"]
