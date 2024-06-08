@@ -447,6 +447,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 	var line_number := 0
 	var palette_name := path.get_basename().get_file()
 	var comments := ""
+	var columns := 0
 	var colors := PackedColorArray()
 
 	for line in lines:
@@ -464,8 +465,11 @@ func _import_gpl(path: String, text: String) -> Palette:
 		elif line.begins_with("Name: "):
 			palette_name = line.replace("Name: ", "")
 		elif line.begins_with("Columns: "):
-			# Number of colors in this palette. Unnecessary and often wrong
-			continue
+			# The width of the palette.
+			line = line.trim_prefix("Columns: ")
+			if !line.is_valid_int():
+				continue
+			columns = line.to_int()
 		elif line_number > 0 && line.length() >= 9:
 			line = line.replace("\t", " ")
 			var color_data: PackedStringArray = line.split(" ", false, 4)
@@ -481,7 +485,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 		line_number += 1
 
 	if line_number > 0:
-		return _fill_imported_palette_with_colors(palette_name, colors, comments)
+		return _fill_imported_palette_with_colors(palette_name, colors, comments, columns)
 	return result
 
 
@@ -521,14 +525,23 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 
 	return _fill_imported_palette_with_colors(path.get_basename().get_file(), colors)
 
+## Maximum allowed width of imported palettes.
+const MAX_IMPORT_PAL_WIDTH = 1 << 14
 
-## Fills a new [Palette] with colors. Used when importing files.
-## TODO: Somehow let the users choose the fixed height or width, instead of hardcoding 8.
+## Fills a new [Palette] with colors. Used when importing files. Dimensions are
+## determined by taking colors as a one-dimensional array that is wrapped by
+## width.
 func _fill_imported_palette_with_colors(
-	palette_name: String, colors: PackedColorArray, comment := ""
+	palette_name: String,
+	colors: PackedColorArray,
+	comment := "",
+	width := Palette.DEFAULT_WIDTH,
 ) -> Palette:
-	var height := ceili(colors.size() / 8.0)
-	var result := Palette.new(palette_name, 8, height, comment)
+	if width <= 0:
+		width = Palette.DEFAULT_WIDTH
+	width = clampi(width, 1, MAX_IMPORT_PAL_WIDTH)
+	var height := ceili(colors.size() / float(width))
+	var result := Palette.new(palette_name, width, height, comment)
 	for color in colors:
 		result.add_color(color)
 
