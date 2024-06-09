@@ -468,7 +468,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 			palette_name = line.replace("Name: ", "")
 		elif line.begins_with("Columns: "):
 			# The width of the palette.
-			line = line.trim_prefix("Columns: ")
+			line = line.trim_prefix("Columns: ").strip_edges()
 			if !line.is_valid_int():
 				continue
 			columns = line.to_int()
