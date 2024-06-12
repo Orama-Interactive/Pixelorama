@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-05-29 00:28\n"
+"PO-Revision-Date: 2024-05-31 09:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1627,15 +1627,15 @@ msgstr "Открыть папку"
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
 msgid "Explore Online"
-msgstr ""
+msgstr "Посмотреть онлайн"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
-msgstr ""
+msgstr "Вы уверены, что хотите включить это расширение? Убедитесь, что включаете только те расширения, которым доверяете."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
 msgid "Are you sure you want to delete this extension?"
-msgstr ""
+msgstr "Вы уверены что хотите удалить это расширение?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
