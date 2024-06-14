@@ -182,9 +182,6 @@ var preferences: Array[Preference] = [
 		false,
 		true
 	),
-	#	Preference.new(
-	#		"renderer", "Drivers/DriversContainer/Renderer", "selected", OS.VIDEO_DRIVER_GLES2, true
-	#	),
 	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0)
 ]
 
@@ -243,17 +240,21 @@ func _ready() -> void:
 		child.confirmed.connect(Tools.update_hint_tooltips)
 
 	if OS.get_name() == "Web":
-		var startup := right_side.get_node("Startup")
+		var startup := right_side.get_node(^"Startup")
 		right_side.remove_child(startup)
 		startup.queue_free()
-		right_side.get_node("Language").visible = true
+		right_side.get_node(^"Language").visible = true
 		Global.open_last_project = false
-	elif OS.get_name() == "Windows":
+	if OS.get_name() == "Windows":
 		tablet_driver_label.visible = true
 		tablet_driver.visible = true
 		for driver in DisplayServer.tablet_get_driver_count():
 			var driver_name := DisplayServer.tablet_get_driver_name(driver)
 			tablet_driver.add_item(driver_name, driver)
+	else:
+		var drivers := right_side.get_node(^"Drivers")
+		right_side.remove_child(drivers)
+		drivers.queue_free()
 	if not OS.has_feature("pc"):
 		get_tree().call_group(&"DesktopOnly", &"queue_free")
 

@@ -497,9 +497,6 @@ var enable_autosave := true:
 			return
 		enable_autosave = value
 		OpenSave.update_autosave()
-## Found in Preferences. The index of graphics renderer used by Pixelorama.
-var renderer := 0:
-	set = _renderer_changed
 ## Found in Preferences. The index of tablet driver used by Pixelorama.
 var tablet_driver := 0:
 	set(value):
@@ -945,21 +942,6 @@ func undo_or_redo(
 		if project == current_project:
 			main_window.title = main_window.title + "(*)"
 	project.has_changed = true
-
-
-func _renderer_changed(value: int) -> void:
-	renderer = value
-
-
-#	if OS.has_feature("editor"):
-#		return
-#
-#	# Sets GLES2 as the default value in `override.cfg`.
-#	# Without this, switching to GLES3 does not work, because it will default to GLES2.
-#	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
-#	var renderer_name := OS.get_video_driver_name(renderer)
-#	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
-#	ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
 
 
 ## Use this to prepare Pixelorama before opening a dialog.

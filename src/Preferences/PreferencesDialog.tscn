@@ -1091,25 +1091,6 @@ size_flags_horizontal = 3
 layout_mode = 2
 columns = 3
 
-[node name="RendererLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers/DriversContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 0
-text = "Renderer:"
-
-[node name="Renderer" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers/DriversContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-mouse_default_cursor_shape = 2
-disabled = true
-item_count = 2
-selected = 0
-popup/item_0/text = "OpenGL"
-popup/item_0/id = 0
-popup/item_1/text = "Vulkan"
-popup/item_1/id = 1
-
 [node name="TabletDriverLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers/DriversContainer"]
 unique_name_in_owner = true
 visible = false
