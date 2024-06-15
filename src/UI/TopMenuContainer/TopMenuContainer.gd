@@ -221,32 +221,55 @@ func _setup_view_menu() -> void:
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.id_pressed.connect(view_menu_id_pressed)
 
+	# Load settings from the config file
 	var draw_grid: bool = Global.config_cache.get_value("view_menu", "draw_grid", Global.draw_grid)
-	if draw_grid != Global.draw_grid:
-		_toggle_show_grid()
-
 	var draw_pixel_grid: bool = Global.config_cache.get_value(
 		"view_menu", "draw_pixel_grid", Global.draw_pixel_grid
 	)
-	if draw_pixel_grid != Global.draw_pixel_grid:
-		_toggle_show_pixel_grid()
-
 	var show_rulers: bool = Global.config_cache.get_value(
 		"view_menu", "show_rulers", Global.show_rulers
 	)
-	if show_rulers != Global.show_rulers:
-		_toggle_show_rulers()
-
 	var show_guides: bool = Global.config_cache.get_value(
 		"view_menu", "show_guides", Global.show_guides
 	)
 	var show_mouse_guides: bool = Global.config_cache.get_value(
 		"view_menu", "show_mouse_guides", Global.show_mouse_guides
 	)
+	var display_layer_effects: bool = Global.config_cache.get_value(
+		"view_menu", "display_layer_effects", Global.display_layer_effects
+	)
+	var snap_to_rectangular_grid_boundary: bool = Global.config_cache.get_value(
+		"view_menu", "snap_to_rectangular_grid_boundary", Global.snap_to_rectangular_grid_boundary
+	)
+	var snap_to_rectangular_grid_center: bool = Global.config_cache.get_value(
+		"view_menu", "snap_to_rectangular_grid_center", Global.snap_to_rectangular_grid_center
+	)
+	var snap_to_guides: bool = Global.config_cache.get_value(
+		"view_menu", "snap_to_guides", Global.snap_to_guides
+	)
+	var snap_to_perspective_guides: bool = Global.config_cache.get_value(
+		"view_menu", "snap_to_perspective_guides", Global.snap_to_perspective_guides
+	)
+	if draw_grid != Global.draw_grid:
+		_toggle_show_grid()
+	if draw_pixel_grid != Global.draw_pixel_grid:
+		_toggle_show_pixel_grid()
+	if show_rulers != Global.show_rulers:
+		_toggle_show_rulers()
 	if show_guides != Global.show_guides:
 		_toggle_show_guides()
 	if show_mouse_guides != Global.show_mouse_guides:
 		_toggle_show_mouse_guides()
+	if display_layer_effects != Global.display_layer_effects:
+		Global.display_layer_effects = display_layer_effects
+	if snap_to_rectangular_grid_boundary != Global.snap_to_rectangular_grid_boundary:
+		_snap_to_submenu_id_pressed(0)
+	if snap_to_rectangular_grid_center != Global.snap_to_rectangular_grid_center:
+		_snap_to_submenu_id_pressed(1)
+	if snap_to_guides != Global.snap_to_guides:
+		_snap_to_submenu_id_pressed(2)
+	if snap_to_perspective_guides != Global.snap_to_perspective_guides:
+		_snap_to_submenu_id_pressed(3)
 
 
 func _setup_tile_mode_submenu(item: String) -> void:

@@ -590,6 +590,19 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "show_rulers", Global.show_rulers)
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
+	Global.config_cache.set_value(
+		"view_menu", "display_layer_effects", Global.display_layer_effects
+	)
+	Global.config_cache.set_value(
+		"view_menu", "snap_to_rectangular_grid_boundary", Global.snap_to_rectangular_grid_boundary
+	)
+	Global.config_cache.set_value(
+		"view_menu", "snap_to_rectangular_grid_center", Global.snap_to_rectangular_grid_center
+	)
+	Global.config_cache.set_value("view_menu", "snap_to_guides", Global.snap_to_guides)
+	Global.config_cache.set_value(
+		"view_menu", "snap_to_perspective_guides", Global.snap_to_perspective_guides
+	)
 	Global.config_cache.save(Global.CONFIG_PATH)
 
 
