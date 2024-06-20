@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-05-29 05:44\n"
+"PO-Revision-Date: 2024-06-20 17:31\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -234,10 +234,10 @@ msgid "Preferences"
 msgstr "Preferensi"
 
 msgid "Tile Mode"
-msgstr "Mode Ubin"
+msgstr "Mode Petak"
 
 msgid "Tile Mode Offsets"
-msgstr "Offset Mode Ubin"
+msgstr "Offset Mode Petak"
 
 msgid "X-basis x:"
 msgstr "X berdasar-x:"
@@ -252,7 +252,7 @@ msgid "Y-basis y:"
 msgstr "Y berdasar-y:"
 
 msgid "Tile Mask"
-msgstr "Mask Ubin"
+msgstr "Mask Petak"
 
 msgid "Reset"
 msgstr "Atur ulang"
@@ -1493,7 +1493,7 @@ msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr "Menetapkan offset kisi dari kanvas aslinya (di pojok kiri atas gambar)"
 
 msgid "Draw over Tile Mode:"
-msgstr "Gambar di atas Mode Ubin:"
+msgstr "Gambar di atas Mode Petak:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr "Jika dinonaktifkan, kisi hanya akan ditaruh di atas gambar aslinya"
@@ -2148,7 +2148,7 @@ msgid "Opacity:"
 msgstr "Kelegapan:"
 
 msgid "Tile mode opacity:"
-msgstr "Kelegapan mode ubin:"
+msgstr "Kelegapan mode petak:"
 
 msgid "Toggle layer's visibility"
 msgstr "Cetik keterlihatan lapisan"
@@ -2583,13 +2583,13 @@ msgid "Duration"
 msgstr "Durasi"
 
 msgid "Tiled In Both Axis"
-msgstr "Diubinkan Di Kedua Sumbu"
+msgstr "Berpetak di Kedua Sumbu"
 
 msgid "Tiled In X Axis"
-msgstr "Diubinkan Di Sumbu X"
+msgstr "Berpetak di Sumbu X"
 
 msgid "Tiled In Y Axis"
-msgstr "Diubinkan Di Sumbu Y"
+msgstr "Berpetak di Sumbu Y"
 
 msgid "Create a new palette"
 msgstr "Buat palet baru"
