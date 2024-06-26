@@ -50,6 +50,11 @@ func update_config() -> void:
 	$ThicknessSlider.value = _thickness
 
 
+## This tool has no brush, so just return the indicator as it is.
+func _create_brush_indicator() -> BitMap:
+	return _indicator
+
+
 func _get_shape_points(_size: Vector2i) -> Array[Vector2i]:
 	return []
 
