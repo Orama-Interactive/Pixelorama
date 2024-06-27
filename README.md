@@ -36,7 +36,7 @@
     </a>
 </p>
  
-[![Pixelorama's UI](https://img.itch.zone/aW1hZ2UvNDcwMzY3LzcwMTE1NzUucG5n/original/7Ykr%2Fj.png)](https://youtu.be/sM1v5uaBSrM)
+[![Pixelorama's UI](https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2779170/ss_54395040c25b243cb82a3bd68778e19e04b43ade.1920x1080.jpg?t=1719424898)](https://youtu.be/--ZcztkvWUQ)
 
 Join our Discord community server where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
 
