@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bnpb1aip3wdvw"]
+[gd_scene load_steps=13 format=3 uid="uid://bnpb1aip3wdvw"]
 
 [ext_resource type="Script" path="res://src/UI/Dialogs/SplashDialog.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://b5adjms3vxj13" path="res://assets/graphics/splash_screen/artworks/wishdream.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://dywk5yd41twch" path="res://assets/graphics/splash_screen/version.png" id="5"]
@@ -46,7 +45,6 @@ theme_override_constants/separation = 8
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 5
 
@@ -128,7 +126,7 @@ custom_minimum_size = Vector2(84, 12)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("5")
-expand_mode = 1
+stretch_mode = 4
 
 [node name="ArtBy" type="HBoxContainer" parent="Contents"]
 layout_mode = 2
@@ -252,6 +250,7 @@ theme_override_constants/separation = 0
 alignment = 2
 
 [node name="ShowOnStartup" type="CheckBox" parent="Contents/CopyrightLabel/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2

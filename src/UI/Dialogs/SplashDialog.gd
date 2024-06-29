@@ -1,81 +1,98 @@
 extends AcceptDialog
 
-var artworks := [
-	[  # Licensed under CC-BY-NC-ND, https://creativecommons.org/licenses/by-nc-nd/4.0/
-		"Roroto Sic",
+var artworks: Array[Artwork] = [
+	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/roroto.png"),
+		"Roroto Sic",
 		"https://linktr.ee/Roroto_Sic",
-		Color.WHITE
-	],
-	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
-		"Exuvita",
+		Color.WHITE,
+		"Licensed under CC-BY-NC-ND, https://creativecommons.org/licenses/by-nc-nd/4.0/"
+	),
+	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/exuvita.png"),
+		"Exuvita",
 		"",
-		Color.BLACK
-	],
-	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
-		"Uch",
+		Color.BLACK,
+		"Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
+	),
+	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/uch.png"),
+		"Uch",
 		"https://www.instagram.com/vs.pxl/",
-		Color.BLACK
-	],
-	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
-		"Wishdream",
+		Color.BLACK,
+		"Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
+	),
+	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/wishdream.png"),
+		"Wishdream",
 		"https://twitter.com/WishdreamStar",
-		Color.BLACK
-	],
+		Color.BLACK,
+		"Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
+	),
 ]
 
 var chosen_artwork: int
 @onready var art_by_label := %ArtistName as Button
 @onready var splash_art_texturerect := %SplashArt as TextureRect
 @onready var version_text := %VersionText as TextureRect
+@onready var show_on_startup := %ShowOnStartup as CheckBox
+
+
+class Artwork:
+	var artwork: Texture2D
+	var artist_name := ""
+	var artist_link := ""
+	var text_modulation: Color
+	var license_information := ""
+
+	func _init(
+		_artwork: Texture2D,
+		_artist_name := "",
+		_artist_link := "",
+		_text_modulation := Color.WHITE,
+		_license_information := ""
+	) -> void:
+		artwork = _artwork
+		artist_name = _artist_name
+		artist_link = _artist_link
+		text_modulation = _text_modulation
+		license_information = _license_information
 
 
 func _ready() -> void:
 	get_ok_button().visible = false
-
-
-func _on_SplashDialog_about_to_show() -> void:
-	var show_on_startup_button: CheckBox = find_child("ShowOnStartup")
-	if Global.config_cache.has_section_key("preferences", "startup"):
-		show_on_startup_button.button_pressed = !Global.config_cache.get_value(
-			"preferences", "startup"
-		)
-	title = "Pixelorama" + " " + Global.current_version
-
-	chosen_artwork = randi() % artworks.size()
-	change_artwork(0)
-
 	if OS.get_name() == "Web":
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
 
 
-func change_artwork(direction: int) -> void:
-	if chosen_artwork + direction > artworks.size() - 1 or chosen_artwork + direction < 0:
-		chosen_artwork = 0 if direction == 1 else artworks.size() - 1
+func _on_SplashDialog_about_to_show() -> void:
+	if Global.config_cache.has_section_key("preferences", "startup"):
+		show_on_startup.button_pressed = not Global.config_cache.get_value("preferences", "startup")
+	title = "Pixelorama" + " " + Global.current_version
+
+	if not artworks.is_empty():
+		chosen_artwork = randi() % artworks.size()
+		change_artwork(0)
 	else:
-		chosen_artwork = chosen_artwork + direction
+		$Contents/SplashArt/ChangeArtBtnLeft.visible = false
+		$Contents/SplashArt/ChangeArtBtnRight.visible = false
 
-	splash_art_texturerect.texture = artworks[chosen_artwork][1]
 
-	art_by_label.text = tr("Art by: %s") % artworks[chosen_artwork][0]
-	art_by_label.tooltip_text = artworks[chosen_artwork][2]
-
-	version_text.modulate = artworks[chosen_artwork][3]
+func change_artwork(direction: int) -> void:
+	chosen_artwork = wrapi(chosen_artwork + direction, 0, artworks.size())
+	splash_art_texturerect.texture = artworks[chosen_artwork].artwork
+	art_by_label.text = tr("Art by: %s") % artworks[chosen_artwork].artist_name
+	art_by_label.tooltip_text = artworks[chosen_artwork].artist_link
+	version_text.modulate = artworks[chosen_artwork].text_modulation
 
 
 func _on_ArtCredits_pressed() -> void:
-	if artworks[chosen_artwork][2]:
-		OS.shell_open(artworks[chosen_artwork][2])
+	if not artworks[chosen_artwork].artist_link.is_empty():
+		OS.shell_open(artworks[chosen_artwork].artist_link)
 
 
 func _on_ShowOnStartup_toggled(pressed: bool) -> void:
-	if pressed:
-		Global.config_cache.set_value("preferences", "startup", false)
-	else:
-		Global.config_cache.set_value("preferences", "startup", true)
+	Global.config_cache.set_value("preferences", "startup", not pressed)
 	Global.config_cache.save(Global.CONFIG_PATH)
 
 
