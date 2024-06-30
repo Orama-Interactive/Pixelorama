@@ -180,11 +180,11 @@ func draw_end(pos: Vector2i) -> void:
 
 func fill_in_color(pos: Vector2i) -> void:
 	var project := Global.current_project
+	var color := project.get_current_cel().get_image().get_pixelv(pos)
 	var images := _get_selected_draw_images()
 	for image in images:
 		if Tools.check_alpha_lock(image, pos):
 			continue
-		var color: Color = image.get_pixelv(pos)
 		var pattern_image: Image
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			if tool_slot.color.is_equal_approx(color):
