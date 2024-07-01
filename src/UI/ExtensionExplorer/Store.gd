@@ -86,7 +86,7 @@ func _on_StoreInformation_request_completed(
 		# Hide the progress bar because it's no longer required
 		close_progress()
 	else:
-		printerr("Unable to get info from remote repository...")
+		printerr("Unable to get info from remote repository.")
 		error_getting_info(result)
 
 

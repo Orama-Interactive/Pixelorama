@@ -19,7 +19,8 @@
 
 // For further help see the entries below for reference of how it's done
 ## Entries:
-[["name", "Voxelorama"], ["version", 1.0], ["description", "An extension for Pixelorama that generates 3D voxel art out of 2D pixel art. ."], ["tags", "Tool", "3D"], ["thumbnail", https://user-images.githubusercontent.com/35376950/185218214-c8356f86-00ed-4f39-b0f8-458a29d0061b.png"], ["download_link", "https://github.com/Orama-Interactive/VoxeloramaExtension/releases/download/1.0/Voxelorama.pck"]]
+
+[["name", "Voxelorama"], ["version", 1.0], ["description", "An extension for Pixelorama that generates 3D voxel art out of 2D pixel art."], ["tags", "Tool", "3D"], ["thumbnail", "https://user-images.githubusercontent.com/35376950/185218214-c8356f86-00ed-4f39-b0f8-458a29d0061b.png"], ["download_link", "https://github.com/Orama-Interactive/VoxeloramaExtension/releases/download/1.0/Voxelorama.pck"]]
 
 [["name", "LospecPaletteImporter"], ["version", 1.1], ["description", "A Pixelorama extension for downloading and importing palettes directly from Lospec."], ["tags", "Palettes"], ["thumbnail", "https://github.com/Variable-ind/Lospec-Palette-Importer/assets/77773850/7ac86623-c428-4409-8f81-c7406527126f"], ["download_link", "https://github.com/OverloadedOrama/Lospec-Palette-Importer/releases/download/v1.1/LospecPaletteImporter.pck"]]
 
