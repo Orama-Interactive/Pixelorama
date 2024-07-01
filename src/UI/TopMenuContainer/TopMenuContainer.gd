@@ -774,6 +774,8 @@ func image_menu_id_pressed(id: int) -> void:
 			DrawingAlgos.crop_to_content()
 		Global.ImageMenu.RESIZE_CANVAS:
 			resize_canvas_dialog.popup()
+		_:
+			_handle_metadata(id, image_menu)
 
 
 func effects_menu_id_pressed(id: int) -> void:

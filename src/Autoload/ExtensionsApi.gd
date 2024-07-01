@@ -162,6 +162,9 @@ class GeneralAPI:
 	func get_canvas() -> Canvas:
 		return Global.canvas
 
+	func create_value_slider() -> ValueSlider:
+		return ValueSlider.new()
+
 
 ## Gives ability to add/remove items from menus in the top bar.
 class MenuAPI:
