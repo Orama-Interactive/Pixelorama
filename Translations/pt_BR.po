@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-07-02 01:50\n"
+"PO-Revision-Date: 2024-07-02 03:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -782,19 +782,19 @@ msgstr "Escurecer a interface em um pop-up de diálogo"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Usar janela de seleção de arquivos nativa"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Quando essa configuração está ativada, a janela de seleção de arquivos própria do sistema operacional é utilizada ao invés da do Pixelorama."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Modo de janela única"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Quando essa configuração está ativada, as subjanelas do Pixelorama ficam embutidas na janela principal, caso contrário cada caixa de diálogo fica em sua própria janela separada."
 
 msgid "Dark"
 msgstr "Escuro"
@@ -816,7 +816,7 @@ msgstr "Roxo"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Rosa"
 
 msgid "Theme"
 msgstr "Tema"
@@ -1000,11 +1000,11 @@ msgstr "Etapas:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
 msgid "Palettize"
-msgstr ""
+msgstr "Paletizar"
 
 #. An image effect. It makes the input image pixelated.
 msgid "Pixelize"
-msgstr ""
+msgstr "Pixelizar"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
@@ -1038,7 +1038,7 @@ msgstr "Sobre Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Apoie o desenvolvimento do Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - Pixelate os seus sonhos!"
@@ -1054,7 +1054,7 @@ msgstr "Site"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Código-fonte"
 
 msgid "Donate"
 msgstr "Doar"
@@ -1166,7 +1166,7 @@ msgstr "Bielorrusso"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Desenvolvedor Líder"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1174,7 +1174,7 @@ msgstr "Designer de UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Autores"
 
 msgid "Art by: %s"
 msgstr "Arte Feita Por: %s"
