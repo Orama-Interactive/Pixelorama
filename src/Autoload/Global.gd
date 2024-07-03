@@ -704,6 +704,8 @@ func _ready() -> void:
 			continue
 		var value = config_cache.get_value("preferences", pref)
 		set(pref, value)
+	if OS.is_sandboxed():
+		Global.use_native_file_dialogs = true
 	await get_tree().process_frame
 	project_switched.emit()
 

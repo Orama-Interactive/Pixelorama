@@ -255,8 +255,10 @@ func _ready() -> void:
 		var drivers := right_side.get_node(^"Drivers")
 		right_side.remove_child(drivers)
 		drivers.queue_free()
+	if OS.is_sandboxed():
+		get_tree().call_group(&"NoSandbox", &"free")
 	if not OS.has_feature("pc"):
-		get_tree().call_group(&"DesktopOnly", &"queue_free")
+		get_tree().call_group(&"DesktopOnly", &"free")
 
 	for child in right_side.get_children():
 		content_list.append(child.name)
