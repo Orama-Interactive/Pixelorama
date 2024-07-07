@@ -1,6 +1,7 @@
 class_name ExtensionEntry
 extends Panel
 
+var sha256 := ""
 var thumbnail := ""
 var download_link := ""
 var download_path := ""
@@ -30,6 +31,8 @@ func set_info(info: Dictionary, extension_path: String) -> void:
 		# Setting path extension will be "temporarily" downloaded to before install
 		DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
 		download_path = str(extension_path, "Download/", info["name"], ".pck")
+	if "sha256" in info.keys():
+		sha256 = info["sha256"]
 	if "description" in info.keys():
 		ext_discription.text = info["description"]
 		ext_discription.tooltip_text = ext_discription.text
@@ -76,13 +79,16 @@ func _on_DownloadRequest_request_completed(
 	result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray
 ) -> void:
 	if result == HTTPRequest.RESULT_SUCCESS:
-		# Add extension
-		extensions.install_extension(download_path)
-		if is_update:
-			is_update = false
-		announce_done(true)
+		if FileAccess.get_sha256(download_path) == sha256:
+			# Add extension
+			extensions.install_extension(download_path)
+			if is_update:
+				is_update = false
+			announce_done(true)
+		else:
+			_show_error_message("Unable to download extension.\nSHA256 mismatch")
 	else:
-		alert_dialog.get_node("Text").text = (
+		_show_error_message(
 			str(
 				"Unable to download extension.\nHttp Code: ",
 				result,
@@ -90,11 +96,14 @@ func _on_DownloadRequest_request_completed(
 				error_string(result),
 				")"
 			)
-			. c_unescape()
 		)
-		alert_dialog.popup_centered()
-		announce_done(false)
 	DirAccess.remove_absolute(download_path)
+
+
+func _show_error_message(message: String) -> void:
+	alert_dialog.get_node("Text").text = message.c_unescape()
+	alert_dialog.popup_centered()
+	announce_done(false)
 
 
 ## Updates the entry node's UI

@@ -69,20 +69,18 @@ func fetch_info(link: String) -> void:
 			error_getting_info(error)
 
 
-## When downloading is finished
+## Gets called when the extension repository information has finished downloading.
 func _on_StoreInformation_request_completed(
 	result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray
 ) -> void:
 	if result == HTTPRequest.RESULT_SUCCESS:
+		var file_path := extension_path.path_join(STORE_INFORMATION_FILE)
 		# process the info contained in the file
-		var file := FileAccess.open(
-			extension_path.path_join(STORE_INFORMATION_FILE), FileAccess.READ
-		)
+		var file := FileAccess.open(file_path, FileAccess.READ)
 		while not file.eof_reached():
 			process_line(file.get_line())
 		file.close()
-
-		DirAccess.remove_absolute(extension_path.path_join(STORE_INFORMATION_FILE))
+		DirAccess.remove_absolute(file_path)
 		# Hide the progress bar because it's no longer required
 		close_progress()
 	else:
@@ -199,6 +197,8 @@ func parse_extension_data(raw_data: Array) -> Dictionary:
 						result["name"] = item[0]
 					"version":
 						result["version"] = item[0]
+					"sha256":
+						result["sha256"] = item[0]
 					"description":
 						result["description"] = item[0]
 					"thumbnail":
