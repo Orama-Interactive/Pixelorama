@@ -280,17 +280,15 @@ func synchronize() -> void:
 			d_brush_type_option.item_selected.emit(type)
 
 
+## Reset some options
 func _hide_all_options() -> void:
-	# reset some options
 	smart_slice = false
 	apply_all.disabled = false
 	spritesheet_options.get_node("SmartSliceToggle").button_pressed = false
 	at_frame_option.get_node("AtFrameSpinbox").allow_greater = false
-	setup_smart_slice(false)
-	# hide items
 	texture_rect.get_child(0).visible = false
 	texture_rect.get_child(1).visible = false
-	for child: Node in import_options.get_children():
+	for child in import_options.get_children():
 		child.visible = false
 
 
