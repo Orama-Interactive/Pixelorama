@@ -369,6 +369,8 @@ func _handle_cmdline_arguments() -> void:
 
 
 func _notification(what: int) -> void:
+	if not is_inside_tree():
+		return
 	match what:
 		NOTIFICATION_WM_CLOSE_REQUEST:
 			show_quit_dialog()
