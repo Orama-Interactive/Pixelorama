@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-07-11 06:49\n"
+"PO-Revision-Date: 2024-07-11 09:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1623,15 +1623,15 @@ msgstr "Abrir Pasta"
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
 msgid "Explore Online"
-msgstr ""
+msgstr "Explorar Online"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
-msgstr ""
+msgstr "Tem certeza de que deseja habilitar essa extensão? Certifique-se de habilitar apenas extensões de fontes em que você confia."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
 msgid "Are you sure you want to delete this extension?"
-msgstr ""
+msgstr "Tem certeza de que deseja deletar essa extensão?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1710,7 +1710,7 @@ msgstr "Pixel Perfect\n"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Bloquear alfa"
 
 msgid "Fill inside"
 msgstr "Preenchimento interno"
@@ -1993,7 +1993,7 @@ msgid "Frame properties"
 msgstr "Propriedades do quadro"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Propriedades da camada"
 
 msgid "Cel properties"
 msgstr "Propriedades da Cel"
@@ -2003,7 +2003,7 @@ msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "Nova Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2432,7 +2432,7 @@ msgid "Line Tool"
 msgstr "Ferramenta Linha"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "Ferramenta de Curva"
 
 msgid "Rectangle Tool"
 msgstr "Ferramenta Retângulo"
@@ -2992,7 +2992,7 @@ msgstr "Movimento súbido para o fim"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Monocromático"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
