@@ -156,6 +156,3 @@ func _draw() -> void:
 		# if we put width <= -1, then the arc line will automatically adjust itself to remain thin
 		# in 0.x this behavior was achieved at  width <= 1
 		draw_arc(point, CIRCLE_RAD * 2 / Global.camera.zoom.x, 0, 360, 360, default_color)
-
-	if is_hidden:  # Hidden line
-		return
