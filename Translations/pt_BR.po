@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-07-02 03:22\n"
+"PO-Revision-Date: 2024-07-11 06:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1392,7 +1392,7 @@ msgstr "Selecione uma forma de seleção."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Opções de cor"
 
 msgid "Left tool"
 msgstr "Ferramenta da esquerda"
@@ -1583,11 +1583,11 @@ msgstr "Se isto for ativado, quando a janela do aplicativo perder o foco, ele é
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Ativar transparência de janela"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Se essa opção estiver ativada, a janela do aplicativo pode ficar transparente. Isso afeta o desempenho, então deixe-a desativada se não precisar dela."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
