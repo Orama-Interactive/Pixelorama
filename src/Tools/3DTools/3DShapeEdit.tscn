@@ -266,6 +266,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 value = Vector3(100, 100, 100)
+max_value = Vector3(500, 500, 500)
 step = 0.01
 allow_greater = true
 allow_lesser = true

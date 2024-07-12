@@ -71,17 +71,23 @@ func _sync_ui() -> void:
 			$"%PosSizeContainer".show()
 			$"%DimensionsLabel".hide()
 
-	$"%Top".max_value = Global.current_project.size.y - 1
-	$"%Bottom".max_value = Global.current_project.size.y
-	$"%Left".max_value = Global.current_project.size.x - 1
-	$"%Right".max_value = Global.current_project.size.x
+	$"%Top".max_value = (Global.current_project.size.y * 2) - 1
+	$"%Bottom".max_value = Global.current_project.size.y * 2
+	$"%Left".max_value = (Global.current_project.size.x * 2) - 1
+	$"%Right".max_value = Global.current_project.size.x * 2
+	$"%Top".min_value = -Global.current_project.size.y + 1
+	$"%Bottom".min_value = -Global.current_project.size.y
+	$"%Left".min_value = -Global.current_project.size.x + 1
+	$"%Right".min_value = -Global.current_project.size.x
 	$"%Top".value = _crop.rect.position.y
 	$"%Bottom".value = _crop.rect.end.y
 	$"%Left".value = _crop.rect.position.x
 	$"%Right".value = _crop.rect.end.x
 
-	$"%Position".max_value = Global.current_project.size - Vector2i.ONE
-	$"%Size".max_value = Global.current_project.size
+	$"%Position".max_value = (Global.current_project.size * 2) - Vector2i.ONE
+	$"%Size".max_value = Global.current_project.size * 2
+	$"%Position".min_value = -Global.current_project.size + Vector2i.ONE
+	$"%Size".min_value = -Global.current_project.size
 	$"%Position".value = _crop.rect.position
 	$"%Size".value = _crop.rect.size
 
