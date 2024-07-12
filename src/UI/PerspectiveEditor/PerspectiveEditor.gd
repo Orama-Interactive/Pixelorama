@@ -1,4 +1,4 @@
-extends Control
+extends PanelContainer
 
 var axes: Node2D
 var do_pool := []  ## A pool that stores data of points removed by undo
