@@ -1222,7 +1222,9 @@ func create_ui_for_shader_uniforms(
 					gradient_edit.set_gradient_texture(params[u_name])
 				else:
 					params[u_name] = gradient_edit.texture
-				value_changed.call(gradient_edit.get_node("TextureRect").texture, u_name)
+				# This needs to be call_deferred because GradientTexture2D gets updated next frame.
+				# Without this, the texture is purple.
+				value_changed.call_deferred(gradient_edit.texture, u_name)
 				gradient_edit.updated.connect(
 					func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
 				)

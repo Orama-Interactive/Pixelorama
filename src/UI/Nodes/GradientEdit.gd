@@ -8,11 +8,11 @@ signal updated(gradient: Gradient, cc: bool)
 
 var continuous_change := true
 var active_cursor: GradientCursor  ## Showing a color picker popup to change a cursor's color
+var texture := GradientTexture2D.new()
+var gradient := Gradient.new()
 
 @onready var x_offset: float = size.x - GradientCursor.WIDTH
-@onready var texture_rect: TextureRect = $TextureRect as TextureRect
-@onready var texture := texture_rect.texture as GradientTexture2D
-@onready var gradient := texture.gradient
+@onready var texture_rect := $TextureRect as TextureRect
 @onready var color_picker := $Popup.get_node("ColorPicker") as ColorPicker
 @onready var divide_dialog := $DivideConfirmationDialog as ConfirmationDialog
 @onready var number_of_parts_spin_box := $"%NumberOfPartsSpinBox" as SpinBox
@@ -98,7 +98,12 @@ class GradientCursor:
 		set_color(data)
 
 
+func _init() -> void:
+	texture.gradient = gradient
+
+
 func _ready() -> void:
+	texture_rect.texture = texture
 	_create_cursors()
 	%InterpolationOptionButton.select(gradient.interpolation_mode)
 	%ColorSpaceOptionButton.select(gradient.interpolation_color_space)

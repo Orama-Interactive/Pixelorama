@@ -1,13 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn4aw27dj7pwi"]
+[gd_scene load_steps=2 format=3 uid="uid://bn4aw27dj7pwi"]
 
 [ext_resource type="Script" path="res://src/UI/Nodes/GradientEdit.gd" id="1"]
-
-[sub_resource type="Gradient" id="Gradient_1k8kj"]
-resource_local_to_scene = true
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_fau1l"]
-resource_local_to_scene = true
-gradient = SubResource("Gradient_1k8kj")
 
 [node name="GradientEdit" type="VBoxContainer"]
 anchors_preset = 15
@@ -19,7 +12,6 @@ script = ExtResource("1")
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 3
-texture = SubResource("GradientTexture2D_fau1l")
 expand_mode = 1
 
 [node name="Value" type="Label" parent="TextureRect"]
@@ -38,8 +30,8 @@ offset_bottom = 7.0
 [node name="ColorPicker" type="ColorPicker" parent="Popup"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 294.0
-offset_bottom = 572.0
+offset_right = 302.0
+offset_bottom = 580.0
 
 [node name="InterpolationContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
