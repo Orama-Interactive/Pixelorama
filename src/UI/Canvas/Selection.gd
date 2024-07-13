@@ -218,7 +218,8 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 			move.x = 0
 		if is_zero_approx(absf(move.y)):
 			move.y = 0
-		move_content(move * step)
+		var final_direction := (move * step).round()
+		move_content(final_direction)
 
 
 ## Check if an event is a ui_up/down/left/right event pressed
