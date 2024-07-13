@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.0] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt), [RorotoSic](https://github.com/RorotoSic), [Kiisu_Master](https://github.com/Kiisu-Master)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt), [RorotoSic](https://github.com/RorotoSic), Ivan Kruger ([haythamnikolaidis](https://github.com/haythamnikolaidis)), [Kiisu_Master](https://github.com/Kiisu-Master), [Anaminus](https://github.com/Anaminus)
 
 Built using Godot 4.2.2
 
@@ -33,6 +33,7 @@ Built using Godot 4.2.2
 - Palette colors can now be sorted.
 - Added new Pixelize and Palettize effects. Pixelize makes the image pixelated, and Palettize maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. Can also act as a workaround for the current lack of a proper indexed mode.
 - Exporting each layer as a different file is now possible.
+- The bucket tool now supports filling while the mouse is moving and the button is still being held.
 - A new boot splash image is being shown when Pixelorama is loading, instead of a gray color.
 - The brush increment/decrement shortcuts can now be changed. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
 - Changing layers is now possible with keyboard shortcuts (Control + Up/Down arrow keys by default).
@@ -47,6 +48,8 @@ Built using Godot 4.2.2
 - Pasting tags from other projects is now possible. [#946](https://github.com/Orama-Interactive/Pixelorama/pull/946)
 - A new "Pixelorama" palette has been added to the default palettes.
 - <kbd>Control + Shift + T</kbd> has been added as a default shortcut that opens the last project.
+- Imported `.gpl` palettes now take into account their "Columns" field. [#1025](https://github.com/Orama-Interactive/Pixelorama/pull/1025)
+- "Snap to" settings from the View menu are now being remembered between sessions.
 - The step of the zoom and rotation canvas sliders can now be snapped, to 100 and 45 respectively.
 - It is now possible to change the color space of gradients from sRGB, which is the default, to Linear sRGB and Oklab.
 - 3D layers now support torus shapes. [#900](https://github.com/Orama-Interactive/Pixelorama/pull/900)
@@ -63,6 +66,7 @@ Built using Godot 4.2.2
 - The color picker is now always visible in the user interface as its own panel, instead of being a popup. The previous color buttons have been re-purposed to allow for setting whether the color being selected is for the left or the right tool.
 - The color pickers has been vastly improved, thanks to the update to Godot 4. Users can now use the OKHSL color mode, and choose between four different picker shapes: HSV Rectangle (default), HSV Wheel, VHS Circle and OKHSL Circle.
 - The opacity slider in the timeline now affects layer opacity and not cel opacity. Cel opacity has been moved to the cel properties dialog.
+- Bucket tool's "similar colors" mode now changes the same color in all selected cels, acting as a color replace for multiple cels.
 - The timeline's UI has been changed to better indicate which cels are selected and improves on how child layers of groups are being shown.
 - The onion skinning settings has been changed into general timeline settings.
 - Cel-specific effects have been moved from the Image menu into the new Effects menu.
@@ -88,12 +92,17 @@ Built using Godot 4.2.2
 - The aspect ratio is now being kept correctly in image effect dialog previews.
 - Dividing by zero in value sliders and spinboxes no longer crashes the program.
 - Default palettes are now available for clean installs on macOS. [#1008](https://github.com/Orama-Interactive/Pixelorama/pull/1008)
+- When drawing, the focus of other GUI elements of the application now gets released. This prevents behaviors such as switching the focus of GUI elements with, for example, the arrow keys while moving the canvas or an active selection with the arrow keys.
+- The canvas no longer remains in the drag state when the mouse it outside of it. Meaning, if the middle mouse button or space is being pressed to drag the canvas, and the mouse gets out of the canvas while the button is still pressed and then it is released, when the mouse re-enters the canvas, it is no longer being dragged.
 - Pixelorama no longer quits when saving from the File menu, if the user attempted to save on exit before and cancelled the save file dialog.
+- The delete layer button is now immediately disabled when locking a layer, thus preventing the user from being able to delete a locked layer.
+- Fixed a bug where the exported files had the wrong tag name, if "Include frame tags in the file name" was enabled.
 - The text of the rulers is now being properly clipped. [#1023](https://github.com/Orama-Interactive/Pixelorama/pull/1023)
 
 ### Removed
 - BubbleGum16, Complementary, Monochromatic, Shades and Triad palettes have been removed from the default palettes.
 - The frame tag button has been removed from the timeline.
+- It is no longer possible to change the renderer from the Preferences, as GLES3 is now the only option.
 
 ## [v0.11.4] - 2024-04-17
 This update has been brought to you by the contributions of:
