@@ -6,6 +6,7 @@ enum FillWith { COLOR, PATTERN }
 const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.gdshader")
 const PATTERN_FILL_SHADER := preload("res://src/Shaders/PatternFill.gdshader")
 
+var _undo_data := {}
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
 var _similarity := 100
@@ -153,13 +154,26 @@ func draw_start(pos: Vector2i) -> void:
 	if Input.is_action_pressed("draw_color_picker"):
 		_pick_color(pos)
 		return
+	_undo_data = _get_undo_data()
+	fill(pos)
 
+
+func draw_move(pos: Vector2i) -> void:
+	super.draw_move(pos)
 	Global.canvas.selection.transform_content_confirm()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	if not Global.current_project.can_pixel_get_drawn(pos):
 		return
-	var undo_data := _get_undo_data()
+	fill(pos)
+
+
+func draw_end(pos: Vector2i) -> void:
+	super.draw_end(pos)
+	commit_undo()
+
+
+func fill(pos: Vector2i) -> void:
 	match _fill_area:
 		FillArea.AREA:
 			fill_in_area(pos)
@@ -167,15 +181,7 @@ func draw_start(pos: Vector2i) -> void:
 			fill_in_color(pos)
 		FillArea.SELECTION:
 			fill_in_selection()
-	commit_undo("Draw", undo_data)
-
-
-func draw_move(pos: Vector2i) -> void:
-	super.draw_move(pos)
-
-
-func draw_end(pos: Vector2i) -> void:
-	super.draw_end(pos)
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func fill_in_color(pos: Vector2i) -> void:
@@ -461,7 +467,7 @@ func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2i) ->
 	image.set_pixel(x, y, pc)
 
 
-func commit_undo(action: String, undo_data: Dictionary) -> void:
+func commit_undo() -> void:
 	var redo_data := _get_undo_data()
 	var project := Global.current_project
 	var frame := -1
@@ -471,18 +477,27 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 		layer = project.current_layer
 
 	project.undos += 1
-	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.undo_redo.create_action("Draw")
+	Global.undo_redo_compress_images(redo_data, _undo_data, project)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
+	_undo_data.clear()
 
 
 func _get_undo_data() -> Dictionary:
 	var data := {}
-	var images := _get_selected_draw_images()
-	for image in images:
-		data[image] = image.data
+	if Global.animation_timer.is_stopped():
+		var images := _get_selected_draw_images()
+		for image in images:
+			data[image] = image.data
+	else:
+		for frame in Global.current_project.frames:
+			var cel := frame.cels[Global.current_project.current_layer]
+			if not cel is PixelCel:
+				continue
+			var image := cel.get_image()
+			data[image] = image.data
 	return data
 
 
