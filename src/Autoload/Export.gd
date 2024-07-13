@@ -76,10 +76,12 @@ var export_progress := 0.0
 
 class ProcessedImage:
 	var image: Image
+	var frame_index: int
 	var duration: float
 
-	func _init(_image: Image, _duration := 1.0) -> void:
+	func _init(_image: Image, _frame_index: int, _duration := 1.0) -> void:
 		image = _image
+		frame_index = _frame_index
 		duration = _duration
 
 
@@ -250,7 +252,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 				tag_origins[0] += 1
 		_blend_layers(whole_image, frame, origin)
 
-	processed_images.append(ProcessedImage.new(whole_image))
+	processed_images.append(ProcessedImage.new(whole_image, 0))
 
 
 func process_animation(project := Global.current_project) -> void:
@@ -262,12 +264,14 @@ func process_animation(project := Global.current_project) -> void:
 				var image := Image.new()
 				image.copy_from(cel.get_image())
 				var duration := frame.duration * (1.0 / project.fps)
-				processed_images.append(ProcessedImage.new(image, duration))
+				processed_images.append(
+					ProcessedImage.new(image, project.frames.find(frame), duration)
+				)
 		else:
 			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			_blend_layers(image, frame)
 			var duration := frame.duration * (1.0 / project.fps)
-			processed_images.append(ProcessedImage.new(image, duration))
+			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
 
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
@@ -317,14 +321,17 @@ func export_processed_images(
 	# Check export paths
 	var export_paths: PackedStringArray = []
 	var paths_of_existing_files := ""
-	for i in range(processed_images.size()):
+	for i in processed_images.size():
 		stop_export = false
 		var frame_index := i + 1
 		var layer_index := -1
+		var actual_frame_index := processed_images[i].frame_index
 		if split_layers:
 			frame_index = i / project.layers.size() + 1
 			layer_index = posmod(i, project.layers.size())
-		var export_path := _create_export_path(multiple_files, project, frame_index, layer_index)
+		var export_path := _create_export_path(
+			multiple_files, project, frame_index, layer_index, actual_frame_index
+		)
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
@@ -594,7 +601,9 @@ func is_ffmpeg_installed() -> bool:
 	return false
 
 
-func _create_export_path(multifile: bool, project: Project, frame := 0, layer := -1) -> String:
+func _create_export_path(
+	multifile: bool, project: Project, frame := 0, layer := -1, actual_frame_index := 0
+) -> String:
 	var path := project.file_name
 	if path.contains("{name}"):
 		path = path.replace("{name}", project.name)
@@ -605,8 +614,8 @@ func _create_export_path(multifile: bool, project: Project, frame := 0, layer :=
 			var layer_name := project.layers[layer].name
 			path_extras += "(%s) " % layer_name
 		path_extras += separator_character + str(frame).pad_zeros(number_of_digits)
-		var frame_tag_and_start_id := _get_proccessed_image_animation_tag_and_start_id(
-			project, frame - 1
+		var frame_tag_and_start_id := _get_processed_image_tag_name_and_start_id(
+			project, actual_frame_index
 		)
 		# Check if exported frame is in frame tag
 		if not frame_tag_and_start_id.is_empty():
@@ -617,8 +626,10 @@ func _create_export_path(multifile: bool, project: Project, frame := 0, layer :=
 			regex.compile("[^a-zA-Z0-9_]+")
 			var frame_tag_dir := regex.sub(frame_tag, "", true)
 			if include_tag_in_filename:
-				# (frame - start_id + 1) makes frames id to start from 1
-				var tag_frame_number := str(frame - start_id + 1).pad_zeros(number_of_digits)
+				# (actual_frame_index - start_id + 2) makes frames id to start from 1
+				var tag_frame_number := str(actual_frame_index - start_id + 2).pad_zeros(
+					number_of_digits
+				)
 				path_extras = (
 					separator_character + frame_tag_dir + separator_character + tag_frame_number
 				)
@@ -632,9 +643,7 @@ func _create_export_path(multifile: bool, project: Project, frame := 0, layer :=
 	return project.export_directory_path.path_join(path + file_format_string(project.file_format))
 
 
-func _get_proccessed_image_animation_tag_and_start_id(
-	project: Project, processed_image_id: int
-) -> Array:
+func _get_processed_image_tag_name_and_start_id(project: Project, processed_image_id: int) -> Array:
 	var result_animation_tag_and_start_id := []
 	for animation_tag in project.animation_tags:
 		# Check if processed image is in frame tag and assign frame tag and start id if yes
