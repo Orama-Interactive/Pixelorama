@@ -186,6 +186,9 @@ func add_line(loaded_line_data := {}, is_tracker := false) -> void:
 	if is_tracker:  # Settings for Tracker mode
 		line.track_mouse = true
 		tracker_line = line
+		# The tracker line is initially always hidden when a new point is added because
+		# mouse is outside of canvas during that time.
+		# This is not related to the disable tracker toggle in perspective editor
 		tracker_line.hide_perspective_line()
 	else:  # Settings for Normal mode
 		var line_button := preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instantiate()

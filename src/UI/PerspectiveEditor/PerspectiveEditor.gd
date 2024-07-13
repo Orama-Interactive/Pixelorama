@@ -1,15 +1,18 @@
-extends Control
+extends PanelContainer
 
 var axes: Node2D
 var do_pool := []  ## A pool that stores data of points removed by undo
 var delete_pool := []  ## A pool that containing deleted data and their index
+## The vanishing point UI resource
 var vanishing_point_res := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn")
+## Option to show/hide tracker guides. (guides whose end points follow the mouse)
 var tracker_disabled := false
 @onready var vanishing_point_container = $"%VanishingPointContainer"
 
 
 func _ready() -> void:
 	Global.project_switched.connect(_update_points)
+	$VBoxContainer/TrackerLines.button_pressed = !tracker_disabled
 
 
 func _on_AddPoint_pressed() -> void:
@@ -23,8 +26,7 @@ func _on_AddPoint_pressed() -> void:
 
 
 func _on_TrackerLines_toggled(button_pressed: bool) -> void:
-	for point in vanishing_point_container.get_children():
-		tracker_disabled = !button_pressed
+	tracker_disabled = !button_pressed
 
 
 func add_vanishing_point(is_redo := false) -> void:
