@@ -6,6 +6,7 @@ const AUTHORS: PackedStringArray = [
 	"AbhinavKDev (abhinav3967)",
 	"Álex Román Núñez (EIREXE)",
 	"AlphinAlbukhari",
+	"Anaminus",
 	"Andreev Andrei",
 	"Arron Washington (radicaled)",
 	"ArthyChaux",
@@ -32,6 +33,7 @@ const AUTHORS: PackedStringArray = [
 	"JumpJetAvocado",
 	"Kawan Weege (Dwahgon)",
 	"kevinms",
+	"Kiisu-Master",
 	"Kinwailo",
 	"kleonc",
 	"Laurenz Reinthaler (Schweini07)",
@@ -97,13 +99,15 @@ const TRANSLATORS_DICTIONARY := {
 	"Luciano Salomoni (LucianoSalomoni)": ["Brazilian Portuguese"],
 	"Carlos A. G. Silva (CarloSilva)": ["Brazilian Portuguese"],
 	"Vitor Gabriel (Ranbut)": ["Brazilian Portuguese"],
-	"Geraldo PMJ (geraldopmj) ": ["Brazilian Portuguese"],
+	"Geraldo PMJ (geraldopmj)": ["Brazilian Portuguese"],
+	"snorring_parrot": ["Brazilian Portuguese"],
 	"Andreev Andrei": ["Russian"],
 	"ax trifonov (ax34)": ["Russian"],
 	"Artem (blinovartem)": ["Russian"],
 	"Иван Соколов (SokoL1337)": ["Russian"],
 	"Daniil Belyakov (ermegil)": ["Russian"],
 	"pincetgore": ["Russian"],
+	"Elijah Fronzak (pincetgore)": ["Russian"],
 	"stomleny_cmok": ["Russian", "Ukrainian"],
 	"Bohdan Matviiv (BodaMat)": ["Ukrainian"],
 	"Ruslan Hryschuk (kifflow)": ["Ukrainian"],
@@ -138,6 +142,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Aleklons16 (Aleklons)": ["Spanish"],
 	"linux_user_mx": ["Spanish"],
 	"Quetzalcoutl (QuetzalcoutlDev)": ["Spanish"],
+	"Santiago (Zhamty)": ["Spanish"],
 	"Seifer23": ["Catalan"],
 	"Joel García Cascalló (jocsencat)": ["Catalan"],
 	"Agnis Aldiņš (NeZvers)": ["Latvian"],
@@ -197,6 +202,7 @@ const DONORS: PackedStringArray = [
 	"ShikadiGum",
 	"Tassos Kyriakopoulos",
 	"Πολιτισμός Τύπου 1",
+	"Ormanus"
 ]
 
 @export_multiline var licenses: PackedStringArray
