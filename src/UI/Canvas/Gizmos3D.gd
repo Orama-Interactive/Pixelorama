@@ -219,7 +219,7 @@ func _draw() -> void:
 			draw_circle(proj_back_local_scale, SCALE_CIRCLE_RADIUS, Color.BLUE)
 
 			# Draw X, Y, Z characters on top of the scale circles
-			var font: Font = Global.control.theme.default_font
+			var font := Themes.get_font()
 			var font_height := font.get_height()
 			var char_position := Vector2(-font_height, font_height) * CHAR_SCALE / 4 * draw_scale
 			draw_set_transform(gizmos_origin + char_position, 0, draw_scale * CHAR_SCALE)

@@ -210,7 +210,7 @@ func _set_type(value: Type) -> void:
 		Type.TEXT:
 			node3d_type = MeshInstance3D.new()
 			var mesh := TextMesh.new()
-			mesh.font = Global.control.theme.default_font
+			mesh.font = Themes.get_font()
 			mesh.text = "Sample"
 			node3d_type.mesh = mesh
 		Type.DIR_LIGHT:

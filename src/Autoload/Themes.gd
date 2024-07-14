@@ -88,3 +88,9 @@ func change_icon_colors() -> void:
 				texture.modulate = Global.modulate_icon_color
 				if node.disabled:
 					texture.modulate.a = 0.5
+
+
+func get_font() -> Font:
+	if Global.control.theme.has_default_font():
+		return Global.control.theme.default_font
+	return ThemeDB.fallback_font

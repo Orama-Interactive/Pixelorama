@@ -10,7 +10,7 @@ var rect_bounds: Rect2i
 
 
 func _ready() -> void:
-	font = Global.control.theme.default_font
+	font = Themes.get_font()
 
 
 func update_measurement(mode_idx := Global.MeasurementMode.NONE) -> void:
