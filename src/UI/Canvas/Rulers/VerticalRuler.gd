@@ -14,6 +14,9 @@ func _ready() -> void:
 	Global.camera.zoom_changed.connect(queue_redraw)
 	Global.camera.rotation_changed.connect(queue_redraw)
 	Global.camera.offset_changed.connect(queue_redraw)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	queue_redraw()
 
 
 func _gui_input(event: InputEvent) -> void:
