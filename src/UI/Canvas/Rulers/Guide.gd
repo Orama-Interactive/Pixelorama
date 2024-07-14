@@ -124,7 +124,7 @@ func _draw() -> void:
 				string,
 				HORIZONTAL_ALIGNMENT_LEFT,
 				-1,
-				16,
+				Themes.get_font_size(),
 				color
 			)
 		else:
@@ -134,7 +134,7 @@ func _draw() -> void:
 				string,
 				HORIZONTAL_ALIGNMENT_LEFT,
 				-1,
-				16,
+				Themes.get_font_size(),
 				color
 			)
 		return
@@ -149,7 +149,13 @@ func _draw() -> void:
 			< intersection.distance_squared_to(viewport_poly[0])
 		):
 			draw_string(
-				font, Vector2(x_offset, y_offset), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color
+				font,
+				Vector2(x_offset, y_offset),
+				string,
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				Themes.get_font_size(),
+				color
 			)
 		else:
 			draw_string(
@@ -158,7 +164,7 @@ func _draw() -> void:
 				string,
 				HORIZONTAL_ALIGNMENT_LEFT,
 				-1,
-				16,
+				Themes.get_font_size(),
 				color
 			)
 		return
@@ -179,7 +185,7 @@ func _draw() -> void:
 				string,
 				HORIZONTAL_ALIGNMENT_LEFT,
 				-1,
-				16,
+				Themes.get_font_size(),
 				color
 			)
 		else:
@@ -189,7 +195,7 @@ func _draw() -> void:
 				string,
 				HORIZONTAL_ALIGNMENT_LEFT,
 				-1,
-				16,
+				Themes.get_font_size(),
 				color
 			)
 		return
@@ -197,7 +203,13 @@ func _draw() -> void:
 	# If there's no intersection with a viewport edge, show string in top left corner
 	draw_set_transform(viewport_poly[0], Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
 	draw_string(
-		font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color
+		font,
+		Vector2(x_offset, font_height),
+		string,
+		HORIZONTAL_ALIGNMENT_LEFT,
+		-1,
+		Themes.get_font_size(),
+		color
 	)
 
 

@@ -94,3 +94,9 @@ func get_font() -> Font:
 	if Global.control.theme.has_default_font():
 		return Global.control.theme.default_font
 	return ThemeDB.fallback_font
+
+
+func get_font_size() -> int:
+	if Global.control.theme.has_default_font_size():
+		return Global.control.theme.default_font_size
+	return ThemeDB.fallback_font_size
