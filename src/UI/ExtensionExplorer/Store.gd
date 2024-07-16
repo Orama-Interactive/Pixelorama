@@ -6,7 +6,7 @@ extends Window
 
 const STORE_NAME := "Extension Explorer"
 # gdlint: ignore=max-line-length
-const STORE_LINK := "https://raw.githubusercontent.com/Orama-Interactive/Pixelorama/master/src/UI/ExtensionExplorer/extension_repository.md"
+const STORE_LINK := "https://raw.githubusercontent.com/Orama-Interactive/PixeloramaExtensionRepository/main/extension_repository.md"
 ## File that will contain information about extensions available for download
 const STORE_INFORMATION_FILE := STORE_NAME + ".md"
 const EXTENSION_ENTRY_TSCN := preload("res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.tscn")
