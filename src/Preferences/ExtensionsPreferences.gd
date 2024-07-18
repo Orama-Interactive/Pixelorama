@@ -26,12 +26,15 @@ func _ready() -> void:
 func _extension_loaded(extension: Extensions.Extension, extension_name: String) -> void:
 	extension_list.add_item(extension.display_name)
 	var item_count := extension_list.get_item_count() - 1
-	var tooltip = """
+	var tooltip = (
+		"""
 Version: %s
 Author: %s
 Description: %s
 License: %s
-""" % [str(extension.version), extension.author, extension.description, extension.license]
+"""
+		% [str(extension.version), extension.author, extension.description, extension.license]
+	)
 	extension_list.set_item_tooltip(item_count, tooltip)
 	extension_list.set_item_metadata(item_count, extension_name)
 
