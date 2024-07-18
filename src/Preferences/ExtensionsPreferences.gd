@@ -26,7 +26,13 @@ func _ready() -> void:
 func _extension_loaded(extension: Extensions.Extension, extension_name: String) -> void:
 	extension_list.add_item(extension.display_name)
 	var item_count := extension_list.get_item_count() - 1
-	extension_list.set_item_tooltip(item_count, extension.description)
+	var tooltip = """
+Version: %s
+Author: %s
+Description: %s
+License: %s
+""" % [str(extension.version), extension.author, extension.description, extension.license]
+	extension_list.set_item_tooltip(item_count, tooltip)
 	extension_list.set_item_metadata(item_count, extension_name)
 
 
@@ -60,6 +66,7 @@ func _on_InstalledExtensions_item_selected(index: int) -> void:
 
 
 func _on_InstalledExtensions_empty_clicked(_position: Vector2, _button_index: int) -> void:
+	extension_list.deselect_all()  # Clicking empty wont deselect by default, so doing it manually.
 	enable_button.disabled = true
 	uninstall_button.disabled = true
 
