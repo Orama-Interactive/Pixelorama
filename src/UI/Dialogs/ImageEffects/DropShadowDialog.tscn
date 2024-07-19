@@ -6,15 +6,17 @@
 
 [node name="DropShadowDialog" instance=ExtResource("1")]
 title = "Drop Shadow"
-size = Vector2i(360, 413)
+size = Vector2i(362, 413)
 script = ExtResource("2")
 
 [node name="VBoxContainer" parent="." index="3"]
 offset_bottom = 364.0
 
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" index="0"]
-anchor_right = 0.0
-anchor_bottom = 0.0
+layout_mode = 1
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ShadowOptions" type="GridContainer" parent="VBoxContainer" index="2"]
 layout_mode = 2
