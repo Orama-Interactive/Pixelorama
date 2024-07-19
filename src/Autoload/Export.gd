@@ -303,7 +303,7 @@ func export_processed_images(
 ) -> bool:
 	# Stop export if directory path or file name are not valid
 	var dir := DirAccess.open(project.export_directory_path)
-	var dir_exists := dir.dir_exists(project.export_directory_path)
+	var dir_exists := DirAccess.dir_exists_absolute(project.export_directory_path)
 	var is_valid_filename := project.file_name.is_valid_filename()
 	if not dir_exists:
 		if is_valid_filename:  # Directory path not valid, file name is valid
@@ -336,7 +336,7 @@ func export_processed_images(
 		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
 			var frame_tag_directory := DirAccess.open(export_path.get_base_dir())
-			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
+			if not DirAccess.dir_exists_absolute(export_path.get_base_dir()):
 				frame_tag_directory = DirAccess.open(project.export_directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 
@@ -607,38 +607,38 @@ func _create_export_path(
 	var path := project.file_name
 	if path.contains("{name}"):
 		path = path.replace("{name}", project.name)
+	var path_extras := ""
 	# Only append frame number when there are multiple files exported
 	if multifile:
-		var path_extras := ""
 		if layer > -1:
 			var layer_name := project.layers[layer].name
 			path_extras += "(%s) " % layer_name
 		path_extras += separator_character + str(frame).pad_zeros(number_of_digits)
-		var frame_tag_and_start_id := _get_processed_image_tag_name_and_start_id(
-			project, actual_frame_index
-		)
-		# Check if exported frame is in frame tag
-		if not frame_tag_and_start_id.is_empty():
-			var frame_tag: String = frame_tag_and_start_id[0]
-			var start_id: int = frame_tag_and_start_id[1]
-			# Remove unallowed characters in frame tag directory
-			var regex := RegEx.new()
-			regex.compile("[^a-zA-Z0-9_]+")
-			var frame_tag_dir := regex.sub(frame_tag, "", true)
-			if include_tag_in_filename:
-				# (actual_frame_index - start_id + 2) makes frames id to start from 1
-				var tag_frame_number := str(actual_frame_index - start_id + 2).pad_zeros(
-					number_of_digits
-				)
-				path_extras = (
-					separator_character + frame_tag_dir + separator_character + tag_frame_number
-				)
-			if new_dir_for_each_frame_tag:
-				path += path_extras
-				return project.export_directory_path.path_join(frame_tag_dir).path_join(
-					path + file_format_string(project.file_format)
-				)
-		path += path_extras
+	var frame_tag_and_start_id := _get_processed_image_tag_name_and_start_id(
+		project, actual_frame_index
+	)
+	# Check if exported frame is in frame tag
+	if not frame_tag_and_start_id.is_empty():
+		var frame_tag: String = frame_tag_and_start_id[0]
+		var start_id: int = frame_tag_and_start_id[1]
+		# Remove unallowed characters in frame tag directory
+		var regex := RegEx.new()
+		regex.compile("[^a-zA-Z0-9_]+")
+		var frame_tag_dir := regex.sub(frame_tag, "", true)
+		if include_tag_in_filename:
+			# (actual_frame_index - start_id + 2) makes frames id to start from 1
+			var tag_frame_number := str(actual_frame_index - start_id + 2).pad_zeros(
+				number_of_digits
+			)
+			path_extras = (
+				separator_character + frame_tag_dir + separator_character + tag_frame_number
+			)
+		if new_dir_for_each_frame_tag:
+			path += path_extras
+			return project.export_directory_path.path_join(frame_tag_dir).path_join(
+				path + file_format_string(project.file_format)
+			)
+	path += path_extras
 
 	return project.export_directory_path.path_join(path + file_format_string(project.file_format))
 
