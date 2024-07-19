@@ -426,7 +426,7 @@ func _setup_help_menu() -> void:
 		"View Splash Screen": "view_splash_screen",
 		"Online Docs": "open_docs",
 		"Issue Tracker": "issue_tracker",
-		"Open Logs Folder": "open_logs_folder",
+		"Open Editor Data Folder": "open_editor_data_folder",
 		"Changelog": "changelog",
 		"About Pixelorama": "about_pixelorama",
 		"Support Pixelorama's Development": &"",
@@ -836,10 +836,9 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(DOCS_URL)
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open(ISSUES_URL)
-		Global.HelpMenu.OPEN_LOGS_FOLDER:
-			var dir := DirAccess.open("user://logs")
-			dir.make_dir_recursive("user://logs")  # In case someone deleted it
-			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
+		Global.HelpMenu.OPEN_EDITOR_DATA_FOLDER:
+			var dir := DirAccess.open("user://")
+			OS.shell_open(ProjectSettings.globalize_path("user://"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(CHANGELOG_URL)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
