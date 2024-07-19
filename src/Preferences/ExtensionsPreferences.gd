@@ -69,7 +69,7 @@ func _on_InstalledExtensions_item_selected(index: int) -> void:
 
 
 func _on_InstalledExtensions_empty_clicked(_position: Vector2, _button_index: int) -> void:
-	extension_list.deselect_all()  # Clicking empty wont deselect by default, so doing it manually.
+	extension_list.deselect_all()  # Clicking empty won't deselect by default, so doing it manually.
 	enable_button.disabled = true
 	uninstall_button.disabled = true
 
