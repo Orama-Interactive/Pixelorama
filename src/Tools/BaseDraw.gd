@@ -39,7 +39,7 @@ var _circle_tool_shortcut: Array[Vector2i]
 
 func _ready() -> void:
 	super._ready()
-	Global.global_tool_options.dynamics_changed.connect(_reset_dynamics)
+	Global.global_tool_options.dynamics_panel.dynamics_changed.connect(_reset_dynamics)
 	Tools.color_changed.connect(_on_Color_changed)
 	Global.brushes_popup.brush_removed.connect(_on_Brush_removed)
 

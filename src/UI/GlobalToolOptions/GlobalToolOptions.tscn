@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene load_steps=24 format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://j8eywwy082a4" path="res://assets/graphics/misc/alpha_lock_off.png" id="5_jv20x"]
 [ext_resource type="Texture2D" uid="uid://dg3dumyfj1682" path="res://assets/graphics/misc/dynamics.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://di8au2u87jgv5" path="res://assets/graphics/misc/uncheck.png" id="7"]
+[ext_resource type="Script" path="res://src/UI/GlobalToolOptions/DynamicsPanel.gd" id="7_iqcw1"]
 [ext_resource type="PackedScene" uid="uid://bmsc0s03pwji4" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_4k08w"]
@@ -174,6 +175,7 @@ texture = ExtResource("6")
 [node name="DynamicsPanel" type="PopupPanel" parent="."]
 canvas_item_default_texture_filter = 0
 size = Vector2i(300, 334)
+script = ExtResource("7_iqcw1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DynamicsPanel"]
 offset_left = 4.0
@@ -480,14 +482,14 @@ offset_bottom = 23.0
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/PixelPerfect" to="." method="_on_PixelPerfect_toggled"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/AlphaLock" to="." method="_on_alpha_lock_toggled"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Dynamics" to="." method="_on_Dynamics_pressed"]
-[connection signal="toggled" from="DynamicsPanel/VBoxContainer/StabilizerContainer/EnableStabilizer" to="." method="_on_enable_stabilizer_toggled"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/StabilizerContainer/StabilizerValue" to="." method="_on_stabilizer_value_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMin" to="." method="_on_AlphaMin_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMax" to="." method="_on_AlphaMax_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMin" to="." method="_on_SizeMin_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMax" to="." method="_on_SizeMax_value_changed"]
-[connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" to="." method="_on_ThresholdPressure_updated"]
-[connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" to="." method="_on_ThresholdVelocity_updated"]
+[connection signal="toggled" from="DynamicsPanel/VBoxContainer/StabilizerContainer/EnableStabilizer" to="DynamicsPanel" method="_on_enable_stabilizer_toggled"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/StabilizerContainer/StabilizerValue" to="DynamicsPanel" method="_on_stabilizer_value_value_changed"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMin" to="DynamicsPanel" method="_on_alpha_min_value_changed"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMax" to="DynamicsPanel" method="_on_alpha_max_value_changed"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMin" to="DynamicsPanel" method="_on_size_min_value_changed"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMax" to="DynamicsPanel" method="_on_size_max_value_changed"]
+[connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" to="DynamicsPanel" method="_on_threshold_pressure_updated"]
+[connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" to="DynamicsPanel" method="_on_threshold_velocity_updated"]
 
 [editable path="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure"]
 [editable path="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity"]
