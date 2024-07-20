@@ -1011,7 +1011,8 @@ msgstr ""
 msgid "Issue Tracker"
 msgstr ""
 
-msgid "Open Logs Folder"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
 msgstr ""
 
 msgid "Changelog"
