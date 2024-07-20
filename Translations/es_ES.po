@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-05-29 00:28\n"
+"PO-Revision-Date: 2024-07-20 22:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1025,8 +1025,9 @@ msgstr "Documentación en línea"
 msgid "Issue Tracker"
 msgstr "Gestor de Problemas"
 
-msgid "Open Logs Folder"
-msgstr "Abrir Carpeta de Registros"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Registro de cambios"
