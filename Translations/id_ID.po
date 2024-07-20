@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-06-20 17:31\n"
+"PO-Revision-Date: 2024-07-20 22:12\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1028,8 +1028,9 @@ msgstr "Dokumen Daring"
 msgid "Issue Tracker"
 msgstr "Pelacak Isu"
 
-msgid "Open Logs Folder"
-msgstr "Buka Folder \"Logs\""
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Catatan ubah"
