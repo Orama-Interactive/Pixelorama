@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-05-29 00:28\n"
+"PO-Revision-Date: 2024-07-20 22:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1023,8 +1023,9 @@ msgstr "Online dokumentace"
 msgid "Issue Tracker"
 msgstr "Nahlásit potíže"
 
-msgid "Open Logs Folder"
-msgstr "Otevřít složku s logy"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Seznam změn"
