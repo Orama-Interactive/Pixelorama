@@ -28,9 +28,11 @@ func set_info(info: Dictionary, extension_path: String) -> void:
 		ext_name.text = str(info["name"], "-v", info["version"])
 		# check for updates
 		change_button_if_updatable(info["name"], info["version"])
-		# Setting path extension will be "temporarily" downloaded to before install
-		DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
-		download_path = str(extension_path, "Download/", info["name"], ".pck")
+		# Setting a path extension will be "temporarily" downloaded to before install
+		var temp_dir = extension_path.path_join("Download")
+		if not DirAccess.dir_exists_absolute(temp_dir):
+			DirAccess.make_dir_recursive_absolute(temp_dir)
+		download_path = temp_dir.path_join(info["name"] + ".pck")
 	if "sha256" in info.keys():
 		sha256 = info["sha256"]
 	if "description" in info.keys():

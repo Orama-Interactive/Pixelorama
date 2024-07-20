@@ -701,7 +701,7 @@ issue_tracker={
 "deadzone": 0.5,
 "events": []
 }
-open_logs_folder={
+open_editor_data_folder={
 "deadzone": 0.5,
 "events": []
 }

@@ -184,7 +184,6 @@ func process_line(line: String) -> void:
 
 
 func parse_extension_data(raw_data: Array) -> Dictionary:
-	DirAccess.make_dir_recursive_absolute(str(extension_path, "Download/"))
 	var result := {}
 	# Check for non-compulsory things if they exist
 	for item in raw_data:
