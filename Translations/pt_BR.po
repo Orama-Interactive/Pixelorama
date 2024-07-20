@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-07-11 09:21\n"
+"PO-Revision-Date: 2024-07-20 22:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1027,8 +1027,9 @@ msgstr "Documentação Online"
 msgid "Issue Tracker"
 msgstr "Rastreador de problemas"
 
-msgid "Open Logs Folder"
-msgstr "Abrir Pasta de Logs"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Mudanças"
