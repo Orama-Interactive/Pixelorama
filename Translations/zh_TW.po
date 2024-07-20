@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-05-29 00:29\n"
+"PO-Revision-Date: 2024-07-20 22:12\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1022,7 +1022,8 @@ msgstr "線上文件"
 msgid "Issue Tracker"
 msgstr "回報問題"
 
-msgid "Open Logs Folder"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
 msgstr ""
 
 msgid "Changelog"
