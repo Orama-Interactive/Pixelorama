@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-07-20 22:11\n"
+"PO-Revision-Date: 2024-07-21 13:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1028,7 +1028,7 @@ msgstr "Monitor de probleme"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Deschide dosarul cu datele editorului"
 
 msgid "Changelog"
 msgstr "Jurnal de modificări"
