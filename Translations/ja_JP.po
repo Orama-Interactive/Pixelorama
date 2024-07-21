@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-07-20 22:12\n"
+"PO-Revision-Date: 2024-07-21 03:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1029,7 +1029,7 @@ msgstr "課題管理"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "エディターのデータフォルダを開く"
 
 msgid "Changelog"
 msgstr "更新履歴"
