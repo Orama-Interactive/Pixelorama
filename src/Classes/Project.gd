@@ -198,9 +198,9 @@ func change_project() -> void:
 		Brushes.add_project_brush(brush)
 	Global.transparent_checker.update_rect()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
-	Global.main_window.title = "%s - Pixelorama %s" % [name, Global.current_version]
+	Global.get_window().title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
-		Global.main_window.title = Global.main_window.title + "(*)"
+		Global.get_window().title = Global.get_window().title + "(*)"
 	if export_directory_path != "":
 		Global.open_sprites_dialog.current_path = export_directory_path
 		Global.save_sprites_dialog.current_path = export_directory_path

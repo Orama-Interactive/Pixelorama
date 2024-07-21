@@ -578,7 +578,6 @@ var layer_button_node := preload("res://src/UI/Timeline/LayerButton.tscn")
 ## The [PackedScene] of the button used by cels in the timeline.
 var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
-@onready var main_window := get_window()  ## The main Pixelorama [Window].
 ## The control node (aka Main node). It has the [param Main.gd] script attached.
 @onready var control := get_tree().current_scene as Control
 
@@ -942,7 +941,7 @@ func undo_or_redo(
 	canvas_preview_container.canvas_preview.queue_redraw()
 	if !project.has_changed:
 		if project == current_project:
-			main_window.title = main_window.title + "(*)"
+			get_window().title = get_window().title + "(*)"
 	project.has_changed = true
 
 

@@ -165,7 +165,7 @@ func _init() -> void:
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 
-	Global.main_window.title = tr("untitled") + " - Pixelorama " + Global.current_version
+	get_window().title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers.append(PixelLayer.new(Global.current_project))
 	Global.current_project.frames.append(Global.current_project.new_empty_frame())

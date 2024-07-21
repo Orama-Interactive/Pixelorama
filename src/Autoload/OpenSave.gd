@@ -275,7 +275,7 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 	else:
 		# Loading a backup should not change window title and save path
 		new_project.save_path = path
-		Global.main_window.title = new_project.name + " - Pixelorama " + Global.current_version
+		get_window().title = new_project.name + " - Pixelorama " + Global.current_version
 		Global.save_sprites_dialog.current_path = path
 		# Set last opened project path and save
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
@@ -437,7 +437,7 @@ func save_pxo_file(
 			project.has_changed = false
 		Global.current_project.remove_backup_file()
 		Global.notification_label("File saved")
-		Global.main_window.title = project.name + " - Pixelorama " + Global.current_version
+		get_window().title = project.name + " - Pixelorama " + Global.current_version
 
 		# Set last opened project path and save
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
@@ -798,11 +798,11 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	var prev_project_empty := Global.current_project.is_empty()
 	var prev_project_pos := Global.current_project_index
 
-	Global.main_window.title = (
+	get_window().title = (
 		path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
 	)
 	if project.has_changed:
-		Global.main_window.title = Global.main_window.title + "(*)"
+		get_window().title = get_window().title + "(*)"
 	var file_name := path.get_basename().get_file()
 	project.export_directory_path = path.get_base_dir()
 	project.file_name = file_name
