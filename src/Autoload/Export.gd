@@ -302,7 +302,6 @@ func export_processed_images(
 	ignore_overwrites: bool, export_dialog: ConfirmationDialog, project := Global.current_project
 ) -> bool:
 	# Stop export if directory path or file name are not valid
-	var dir := DirAccess.open(project.export_directory_path)
 	var dir_exists := DirAccess.dir_exists_absolute(project.export_directory_path)
 	var is_valid_filename := project.file_name.is_valid_filename()
 	if not dir_exists:

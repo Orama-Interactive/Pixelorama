@@ -837,7 +837,6 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open(ISSUES_URL)
 		Global.HelpMenu.OPEN_EDITOR_DATA_FOLDER:
-			var dir := DirAccess.open("user://")
 			OS.shell_open(ProjectSettings.globalize_path("user://"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(CHANGELOG_URL)
