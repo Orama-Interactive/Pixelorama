@@ -2,32 +2,39 @@ extends AcceptDialog
 
 var artworks: Array[Artwork] = [
 	Artwork.new(
-		preload("res://assets/graphics/splash_screen/artworks/roroto.png"),
+		preload("res://assets/graphics/splash_screen/artworks/roroto.tres"),
 		"Roroto Sic",
 		"https://linktr.ee/Roroto_Sic",
 		Color.WHITE,
 		"Licensed under CC-BY-NC-ND, https://creativecommons.org/licenses/by-nc-nd/4.0/"
 	),
 	Artwork.new(
-		preload("res://assets/graphics/splash_screen/artworks/exuvita.png"),
-		"Exuvita",
-		"",
-		Color.BLACK,
-		"Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
-	),
-	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/uch.png"),
 		"Uch",
 		"https://www.instagram.com/vs.pxl/",
-		Color.BLACK,
+		Color.WHITE,
 		"Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
 	),
 	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/wishdream.png"),
 		"Wishdream",
-		"https://twitter.com/WishdreamStar",
+		"https://x.com/WishdreamStar",
 		Color.BLACK,
 		"Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
+	),
+	Artwork.new(
+		preload("res://assets/graphics/splash_screen/artworks/nighters.png"),
+		"Nighters",
+		"https://linktr.ee/_artei",
+		Color.WHITE,
+		"Licensed under CC BY 3.0, https://creativecommons.org/licenses/by/3.0/"
+	),
+	Artwork.new(
+		preload("res://assets/graphics/splash_screen/artworks/kalpar.png"),
+		"Kalpar",
+		"https://linktr.ee/kalpar",
+		Color.BLACK,
+		"Licensed under CC BY 3.0, https://creativecommons.org/licenses/by/3.0/"
 	),
 ]
 
@@ -65,6 +72,10 @@ func _ready() -> void:
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
 
 
+func _process(_delta: float) -> void:
+	splash_art_texturerect.queue_redraw()
+
+
 func _on_SplashDialog_about_to_show() -> void:
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup.button_pressed = not Global.config_cache.get_value("preferences", "startup")
@@ -81,6 +92,7 @@ func _on_SplashDialog_about_to_show() -> void:
 func change_artwork(direction: int) -> void:
 	chosen_artwork = wrapi(chosen_artwork + direction, 0, artworks.size())
 	splash_art_texturerect.texture = artworks[chosen_artwork].artwork
+	set_process(artworks[chosen_artwork].artwork is AnimatedTexture)
 	art_by_label.text = tr("Art by: %s") % artworks[chosen_artwork].artist_name
 	art_by_label.tooltip_text = artworks[chosen_artwork].artist_link
 	version_text.modulate = artworks[chosen_artwork].text_modulation
@@ -132,4 +144,6 @@ func _on_ChangeArtBtnRight_pressed() -> void:
 
 
 func _on_visibility_changed() -> void:
-	Global.dialog_open(false)
+	if not visible:
+		Global.dialog_open(false)
+		set_process(false)

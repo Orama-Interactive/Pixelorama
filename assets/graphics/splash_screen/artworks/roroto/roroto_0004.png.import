@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ttgefsksr61"
-path="res://.godot/imported/exuvita.png-d93ba4b30822e9ce8c3e5db3899b8346.ctex"
+uid="uid://ch85dk5y2t5t8"
+path="res://.godot/imported/roroto_0004.png-5f45831ad25882dd93600c8fb9df4261.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/splash_screen/artworks/exuvita.png"
-dest_files=["res://.godot/imported/exuvita.png-d93ba4b30822e9ce8c3e5db3899b8346.ctex"]
+source_file="res://assets/graphics/splash_screen/artworks/roroto/roroto_0004.png"
+dest_files=["res://.godot/imported/roroto_0004.png-5f45831ad25882dd93600c8fb9df4261.ctex"]
 
 [params]
 

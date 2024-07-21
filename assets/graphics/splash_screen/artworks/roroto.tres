@@ -1,0 +1,44 @@
+[gd_resource type="AnimatedTexture" load_steps=14 format=3 uid="uid://be7cf23v1by2v"]
+
+[ext_resource type="Texture2D" uid="uid://b87f4o0r2jgci" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0001.png" id="1_fpsdj"]
+[ext_resource type="Texture2D" uid="uid://bawxfr6mpsuo" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0002.png" id="2_dpfka"]
+[ext_resource type="Texture2D" uid="uid://4av7gf0gxhxk" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0011.png" id="3_h3d65"]
+[ext_resource type="Texture2D" uid="uid://boq57unoci0sb" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0012.png" id="4_x76ya"]
+[ext_resource type="Texture2D" uid="uid://dx7us83tyb7ai" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0013.png" id="5_hp220"]
+[ext_resource type="Texture2D" uid="uid://ba75xt8a0ox8b" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0003.png" id="6_0gg37"]
+[ext_resource type="Texture2D" uid="uid://ch85dk5y2t5t8" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0004.png" id="7_dtiec"]
+[ext_resource type="Texture2D" uid="uid://d0mjfv7fpmw5t" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0005.png" id="8_averv"]
+[ext_resource type="Texture2D" uid="uid://bw8kvetdqwvhi" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0006.png" id="9_ur8sa"]
+[ext_resource type="Texture2D" uid="uid://dk5tebpw56q7n" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0007.png" id="10_lyxm4"]
+[ext_resource type="Texture2D" uid="uid://oxobgxmc8hrw" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0008.png" id="11_e3puq"]
+[ext_resource type="Texture2D" uid="uid://dndtrha7nyg5w" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0009.png" id="12_uqphc"]
+[ext_resource type="Texture2D" uid="uid://b034qqg3fhv0n" path="res://assets/graphics/splash_screen/artworks/roroto/roroto_0010.png" id="13_dsy74"]
+
+[resource]
+frames = 13
+speed_scale = 6.0
+frame_0/texture = ExtResource("1_fpsdj")
+frame_1/texture = ExtResource("2_dpfka")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("6_0gg37")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("7_dtiec")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("8_averv")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("9_ur8sa")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("10_lyxm4")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("11_e3puq")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("12_uqphc")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("13_dsy74")
+frame_9/duration = 1.0
+frame_10/texture = ExtResource("3_h3d65")
+frame_10/duration = 1.0
+frame_11/texture = ExtResource("4_x76ya")
+frame_11/duration = 1.0
+frame_12/texture = ExtResource("5_hp220")
+frame_12/duration = 1.0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpyrg1b61ap1f"
-path="res://.godot/imported/roroto.png-5bb796ce1a0c5bb768b883a88b3da539.ctex"
+uid="uid://bw8kvetdqwvhi"
+path="res://.godot/imported/roroto_0006.png-5388df1cc286abfe2d2d6c72ed2d903b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/splash_screen/artworks/roroto.png"
-dest_files=["res://.godot/imported/roroto.png-5bb796ce1a0c5bb768b883a88b3da539.ctex"]
+source_file="res://assets/graphics/splash_screen/artworks/roroto/roroto_0006.png"
+dest_files=["res://.godot/imported/roroto_0006.png-5388df1cc286abfe2d2d6c72ed2d903b.ctex"]
 
 [params]
 
