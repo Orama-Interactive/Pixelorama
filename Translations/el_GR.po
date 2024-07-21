@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-07-20 22:12\n"
+"PO-Revision-Date: 2024-07-21 01:19\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1030,7 +1030,7 @@ msgstr "Καταγραφές προβλημάτων"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Άνοιγμα φακέλου δεδομένων προγράμματος"
 
 msgid "Changelog"
 msgstr "Καταγραφές αλλαγών"
