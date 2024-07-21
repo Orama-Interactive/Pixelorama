@@ -25,7 +25,7 @@ var artworks: Array[Artwork] = [
 	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/nighters.png"),
 		"Nighters",
-		"https://linktr.ee/_artei",
+		"https://www.instagram.com/_artei",
 		Color.WHITE,
 		"Licensed under CC BY 3.0, https://creativecommons.org/licenses/by/3.0/"
 	),
