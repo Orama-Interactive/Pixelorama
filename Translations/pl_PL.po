@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-07-20 22:11\n"
+"PO-Revision-Date: 2024-07-21 04:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1029,7 +1029,7 @@ msgstr "Zgłaszanie problemów"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Otwórz folder danych edytora"
 
 msgid "Changelog"
 msgstr "Lista zmian"
