@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-07-20 22:12\n"
+"PO-Revision-Date: 2024-07-22 17:17\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1029,7 +1029,7 @@ msgstr "Sorun İzleyici"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Düzenleyici Veri Klasörünü Aç"
 
 msgid "Changelog"
 msgstr "Değişiklikler"
