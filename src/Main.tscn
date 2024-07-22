@@ -94,15 +94,16 @@ size = Vector2i(224, 146)
 
 [node name="TagProperties" parent="Dialogs" instance=ExtResource("14_fw6cf")]
 
+[node name="ImportTagDialog" parent="Dialogs" instance=ExtResource("16_ohhks")]
+size = Vector2i(270, 335)
+popup_window = true
+
 [node name="TileModeOffsetsDialog" parent="Dialogs" instance=ExtResource("14")]
 
 [node name="DownloadImageConfirmationDialog" type="ConfirmationDialog" parent="Dialogs"]
 size = Vector2i(400, 200)
 dialog_text = "Do you want to download the image from %s?"
 dialog_autowrap = true
-
-[node name="ImportTagDialog" parent="Dialogs" instance=ExtResource("16_ohhks")]
-size = Vector2i(270, 335)
 
 [node name="Extensions" type="Control" parent="."]
 anchors_preset = 0
