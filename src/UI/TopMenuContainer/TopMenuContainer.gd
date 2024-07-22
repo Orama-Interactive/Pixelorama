@@ -834,6 +834,7 @@ func help_menu_id_pressed(id: int) -> void:
 			_popup_dialog(Global.control.splash_dialog)
 		Global.HelpMenu.ONLINE_DOCS:
 			OS.shell_open(DOCS_URL)
+			SteamManager.set_achievement("ACH_ONLINE_DOCS")
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open(ISSUES_URL)
 		Global.HelpMenu.OPEN_EDITOR_DATA_FOLDER:
@@ -844,5 +845,6 @@ func help_menu_id_pressed(id: int) -> void:
 			about_dialog.popup()
 		Global.HelpMenu.SUPPORT_PIXELORAMA:
 			OS.shell_open(SUPPORT_URL)
+			SteamManager.set_achievement("ACH_SUPPORT_DEVELOPMENT")
 		_:
 			_handle_metadata(id, help_menu)

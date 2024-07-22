@@ -328,6 +328,7 @@ func _ready() -> void:
 		if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
 			is_default = value.is_equal_approx(pref.default_value)
 		disable_restore_default_button(restore_default_button, is_default)
+	SteamManager.set_achievement("ACH_PREFERENCES")
 
 
 func _on_Preference_value_changed(value, pref: Preference, button: RestoreDefaultButton) -> void:

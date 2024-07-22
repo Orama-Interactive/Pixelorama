@@ -24,3 +24,5 @@ mono_crash.*.json
 
 # Android ignores
 android/
+
+addons/godotsteam

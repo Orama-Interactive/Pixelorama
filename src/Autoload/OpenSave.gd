@@ -354,14 +354,14 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 func save_pxo_file(
 	path: String, autosave: bool, include_blended := false, project := Global.current_project
 ) -> bool:
-	if !autosave:
+	if not autosave:
 		project.name = path.get_file().trim_suffix(".pxo")
 	var serialized_data := project.serialize()
-	if !serialized_data:
+	if not serialized_data:
 		Global.popup_error(tr("File failed to save. Converting project data to dictionary failed."))
 		return false
 	var to_save := JSON.stringify(serialized_data)
-	if !to_save:
+	if not to_save:
 		Global.popup_error(tr("File failed to save. Converting dictionary to JSON failed."))
 		return false
 
@@ -450,6 +450,7 @@ func save_pxo_file(
 			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
 		)
 		project_saved.emit()
+		SteamManager.set_achievement("ACH_SAVE")
 
 	save_project_to_recent_list(path)
 	return true
