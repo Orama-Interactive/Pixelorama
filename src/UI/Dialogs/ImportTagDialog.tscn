@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImportTagDialog.gd" id="1_5fb6k"]
 
-[node name="ImportTagDialog" type="AcceptDialog"]
+[node name="ImportTagDialog" type="ConfirmationDialog"]
 title = "Import Tag"
-position = Vector2i(0, 24)
-size = Vector2i(266, 335)
+size = Vector2i(270, 300)
 exclusive = false
 min_size = Vector2i(250, 0)
-ok_button_text = "Cancel"
+ok_button_text = "Import"
 script = ExtResource("1_5fb6k")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -54,10 +53,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
+fixed_icon_size = Vector2i(32, 32)
 
-[node name="StartFrame" type="Label" parent="PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 23)
-layout_mode = 2
-horizontal_alignment = 1
-autowrap_mode = 3
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
