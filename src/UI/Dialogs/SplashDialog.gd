@@ -96,6 +96,18 @@ func change_artwork(direction: int) -> void:
 	art_by_label.text = tr("Art by: %s") % artworks[chosen_artwork].artist_name
 	art_by_label.tooltip_text = artworks[chosen_artwork].artist_link
 	version_text.modulate = artworks[chosen_artwork].text_modulation
+	# Set an ambient
+	var ambient = GradientTexture2D.new()
+	ambient.gradient = Gradient.new()
+	ambient.width = 100
+	ambient.height = 100
+	var col_a = splash_art_texturerect.texture.get_image().get_pixel(0, 0)
+	var col_b = Color(col_a.r, col_a.g, col_a.b, 0.5)
+	ambient.gradient.set_color(0, col_a)
+	ambient.gradient.set_color(1, col_b)
+	ambient.fill_from = Vector2(0.5, 0.5)
+	ambient.fill = GradientTexture2D.FILL_RADIAL
+	%Ambient.texture = ambient
 
 
 func _on_ArtCredits_pressed() -> void:
