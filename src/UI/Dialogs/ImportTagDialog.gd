@@ -23,7 +23,9 @@ func refresh_list() -> void:
 	get_ok_button().disabled = true
 	for tag: AnimationTag in from_project.animation_tags:
 		var img = Image.create(from_project.size.x, from_project.size.y, true, Image.FORMAT_RGBA8)
-		DrawingAlgos.blend_layers(img, from_project.frames[tag.from - 1], Vector2i.ZERO, from_project)
+		DrawingAlgos.blend_layers(
+			img, from_project.frames[tag.from - 1], Vector2i.ZERO, from_project
+		)
 		var tex := ImageTexture.create_from_image(img)
 		var tag_title := tag.name
 		if tag_title == "":
