@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2024-05-29 00:28\n"
+"PO-Revision-Date: 2024-07-20 22:12\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -1022,7 +1022,8 @@ msgstr ""
 msgid "Issue Tracker"
 msgstr ""
 
-msgid "Open Logs Folder"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
 msgstr ""
 
 msgid "Changelog"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-05-29 13:39\n"
+"PO-Revision-Date: 2024-07-21 04:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1027,8 +1027,9 @@ msgstr "Dokumentacja Online"
 msgid "Issue Tracker"
 msgstr "Zgłaszanie problemów"
 
-msgid "Open Logs Folder"
-msgstr "Otwórz folder logów"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
+msgstr "Otwórz folder danych edytora"
 
 msgid "Changelog"
 msgstr "Lista zmian"
@@ -1881,7 +1882,7 @@ msgid "Jump to the last frame\n"
 msgstr "Skocz do ostatniej klatki\n"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Ustawienia osi czasu"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Włącz/wyłącz Onion Skinning"
@@ -1943,7 +1944,7 @@ msgstr "Jeśli jest zaznaczone, animacja odtwarza się tylko na klatkach z tym s
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Rozmiar komórki:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -1998,7 +1999,7 @@ msgid "Frame properties"
 msgstr "Właściwości klatki"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Właściwości warstwy"
 
 msgid "Cel properties"
 msgstr "Właściwości komórki"
@@ -2437,7 +2438,7 @@ msgid "Line Tool"
 msgstr "Linia"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "Narzędzie Krzywej"
 
 msgid "Rectangle Tool"
 msgstr "Prostokąt"

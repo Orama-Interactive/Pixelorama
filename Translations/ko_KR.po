@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-05-29 00:28\n"
+"PO-Revision-Date: 2024-07-20 22:12\n"
 
 msgid "OK"
 msgstr "예"
@@ -1024,8 +1024,9 @@ msgstr "온라인 문서"
 msgid "Issue Tracker"
 msgstr "이슈 트래커"
 
-msgid "Open Logs Folder"
-msgstr "로그 폴더 열기"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "변경 사항"

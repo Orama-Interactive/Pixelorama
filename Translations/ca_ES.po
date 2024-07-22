@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2024-05-29 00:28\n"
+"PO-Revision-Date: 2024-07-20 22:12\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1024,8 +1024,9 @@ msgstr "Documentació en línia"
 msgid "Issue Tracker"
 msgstr "Rastrejador d'incidències"
 
-msgid "Open Logs Folder"
-msgstr "Obre la carpeta dels registres"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Registre de canvis"
