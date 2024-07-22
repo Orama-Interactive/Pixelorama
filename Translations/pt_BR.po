@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-07-22 20:01\n"
+"PO-Revision-Date: 2024-07-22 21:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -352,11 +352,11 @@ msgstr "Exibir Efeitos da Camada"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr "Delimitar em"
+msgstr "Encaixar (snap) em"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr "Encaixar no Limite de Grade Retangular"
+msgstr "Encaixar no Limite da Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
@@ -364,11 +364,11 @@ msgstr "Encaixar no Centro da Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr "Delimitar às guias"
+msgstr "Encaixar nas Guias"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr "Delimitar às Guias de Perspectiva"
+msgstr "Encaixar nas Guias de Perspectiva"
 
 msgid "Show Animation Timeline"
 msgstr "Mostrar linha do tempo de animação"
@@ -1322,10 +1322,10 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Ferramenta Linha\n\n"
-"%s para botão esquerdo do mouse\n"
-"%s para botão direito do mouse\n\n"
-"Segure %s para snap no ângulo da linha\n"
+msgstr "Ferramenta de Linha\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito do mouse\n\n"
+"Segure %s para encaixar no ângulo da linha\n"
 "Segure %s para centralizar a forma no clique de origem\n"
 "Segure %s para deslocar a origem da forma"
 
@@ -1336,7 +1336,7 @@ msgid "Curve Tool\n\n"
 "Press %s/%s to add new points\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr "Ferramenta Curva\n\n"
+msgstr "Ferramenta de Curva\n\n"
 "%s para o botão esquerdo do mouse\n"
 "%s para o botão direito do mouse\n\n"
 "Desenha curvas de Bézier\n"
@@ -1350,9 +1350,9 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Ferramenta Retângulo\n\n"
-"%s para botão esquerdo do mouse\n"
-"%s para botão direito do mouse\n\n"
+msgstr "Ferramenta de Retângulo\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito do mouse\n\n"
 "Segure %s para criar formas 1:1\n"
 "Segure %s para centralizar a forma no clique de origem\n"
 "Segure %s para deslocar a origem da forma"
@@ -1363,9 +1363,9 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Ferramenta Elipse\n\n"
-"%s para botão esquerdo do mouse\n"
-"%s para botão direito do mouse\n\n"
+msgstr "Ferramenta de Elipse\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito do mouse\n\n"
 "Segure %s para criar formas 1:1\n"
 "Segure %s para centralizar a forma no clique de origem\n"
 "Segure %s para deslocar a origem da forma"
@@ -1395,7 +1395,7 @@ msgstr "Escolha uma cor da tela."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr "Selecione uma forma de seleção."
+msgstr "Selecione uma forma de seletor."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
@@ -1408,34 +1408,34 @@ msgid "Right tool"
 msgstr "Ferramenta da direita"
 
 msgid "Left pixel indicator"
-msgstr "Pixel indicador esquerdo"
+msgstr "Indicador pixel do botão esquerdo"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr "Mostrar o indicador pixel do mouse esquerdo ou o pincel na tela quando desenhando"
+msgstr "Mostrar o indicador pixel do botão esquerdo do mouse ou o pincel na tela quando desenhando"
 
 msgid "Right pixel indicator"
-msgstr "Pixel indicador direito"
+msgstr "Indicador pixel do botão direito"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr "Mostrar o indicador pixel do mouse direito ou o pincel na tela quando desenhando"
+msgstr "Mostrar o indicador pixel do botão direito do mouse ou o pincel na tela quando desenhando"
 
 msgid "Show left tool icon"
 msgstr "Mostrar ícone da ferramenta da esquerda"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr "Exibe um ícone da ferramenta da esquerda selecionada ao lado do cursor na tela"
+msgstr "Exibe um ícone da ferramenta selecionada da esquerda ao lado do cursor na tela"
 
 msgid "Show right tool icon"
 msgstr "Mostrar ícone da ferramenta da direita"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr "Exibe um ícone da ferramenta da direita selecionada ao lado do cursor na tela"
+msgstr "Exibe um ícone da ferramenta selecionada da direita ao lado do cursor na tela"
 
 msgid "Use native mouse cursors"
-msgstr "Use cursores nativos do mouse"
+msgstr "Usar cursores nativos do mouse"
 
 msgid "Use cross cursor for the canvas"
-msgstr "Use o cursor de cruz para a tela"
+msgstr "Usar o cursor de cruz para a tela"
 
 msgid "Guides"
 msgstr "Guias"
@@ -1452,11 +1452,11 @@ msgstr "Encaixe (snap)"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr "Distância do snap:"
+msgstr "Distância de encaixe:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr "Esta é a distância em pixels, onde a guia e o snap de aderência são ativados."
+msgstr "Essa é a distância em pixels onde o encaixe de guia e de grade é ativado."
 
 msgid "Grid"
 msgstr "Grade"
@@ -2295,7 +2295,7 @@ msgid "Import Palette"
 msgstr "Importar Paleta"
 
 msgid "Create Palette From Current Sprite"
-msgstr "Criar paleta a partir do Sprite Atual"
+msgstr "Criar paleta a partir do sprite atual"
 
 msgid "Palette Name:"
 msgstr "Nome da Paleta:"
@@ -2322,7 +2322,7 @@ msgid "Edit Palette"
 msgstr "Editar Paleta"
 
 msgid "Create colors with alpha component"
-msgstr "Crie cores com o componente alpha"
+msgstr "Crie cores com o componente alfa"
 
 msgid "Get colors only from selection"
 msgstr "Obter cores somente da seleção"
@@ -2530,7 +2530,7 @@ msgstr "Cria vários arquivos, mas cada arquivo é armazenado em um diretório d
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr "Usar caracter(es) de separação:"
+msgstr "Usar caractere(s) de separação:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
@@ -2544,7 +2544,7 @@ msgstr "Descartar Todos"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr "Projeto(s) salvos automaticamente antes de um encerramento inesperado foram encontrados.\n"
+msgstr "Projeto(s) salvo(s) automaticamente antes de um encerramento inesperado foi(foram) encontrado(s).\n"
 "Você deseja recuperar os dados?"
 
 msgid "Backup reloaded"
@@ -2560,13 +2560,13 @@ msgid "You can't remove more palettes!"
 msgstr "Você não pode remover mais paletas!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr "Não foi possível remover a paleta porque não existe!"
+msgstr "Não foi possível remover a paleta porque ela não existe!"
 
 msgid "and"
 msgstr "e"
 
 msgid "Move the selected frame to the left."
-msgstr "Mova o frame selecionado para a esquerda."
+msgstr "Mover o quadro selecionado para a esquerda."
 
 msgid "Move the selected frame to the right."
 msgstr "Mover o quadro selecionado para a direita."
@@ -2738,8 +2738,8 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Tamanho bloqueado\n\n"
-"Quando habilitado usando a ferramenta na tela só irá mover o retângulo de corte.\n\n"
-"Quando desativado usando a ferramenta da tela irá desenhar o retângulo."
+"Quando ativado, usar a ferramenta na tela só irá mover o retângulo de corte.\n\n"
+"Quando desativado, usar a ferramenta da tela irá desenhar o retângulo."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
@@ -2836,7 +2836,7 @@ msgstr "Cor ambiente:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr "Cor do ambiente:"
+msgstr "Energia da cor do ambiente:"
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
@@ -2852,7 +2852,7 @@ msgstr "Malha"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr "Esquerda para a Direita:"
+msgstr "Esquerda para a direita:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
@@ -2935,23 +2935,23 @@ msgstr "Valor final:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
-msgstr "Tipo do \"easing\":"
+msgstr "Tipo de \"easing\":"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr "Começa devagar e acelera em direção ao final"
+msgstr "Começa devagar e acelera no final"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr "Começa rapidamente e desacelera para o final"
+msgstr "Começa rápido e desacelera no final"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr "Mais lento em ambas as extremidades, rápido no meio"
+msgstr "Lento nas extremidades, rápido no meio"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr "Rápido aos dois extremidades, lento ao meio"
+msgstr "Rápido nas extremidades, lento no meio"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
@@ -2963,11 +2963,11 @@ msgstr "Cúbico (potência de 3)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr "Quadrático (potência de 4)"
+msgstr "Quártico (potência de 4)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr "Quintica (potência de 5)"
+msgstr "Quíntico (potência de 5)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
@@ -2995,7 +2995,7 @@ msgstr "Recuando nos finais"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr "Movimento súbido para o fim"
+msgstr "Movimento súbito no fim"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -3035,11 +3035,11 @@ msgstr "Ativado"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr "Efeitos de Camada"
+msgstr "Efeitos de camada"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr "Adicionar Efeito"
+msgstr "Adicionar efeito"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
