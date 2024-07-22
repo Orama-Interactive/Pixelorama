@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-07-20 22:11\n"
+"PO-Revision-Date: 2024-07-22 19:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -103,7 +103,7 @@ msgid "If enabled, the final blended images are also being stored in the pxo, fo
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
 msgstr "Se ativado, as imagens finais combinadas também serão armazenadas no .pxo, para cada quadro.\n"
 "Isto aumenta o arquivo .pxo e é útil para importação por software de terceiros\n"
-"ou pela exportação CLI. Carregando arquivos .pxo no Pixelorama não precisa ativar esta opção.\n"
+"ou pela exportação CLI. Para carregar arquivos .pxo no Pixelorama, essa opção não é necessária.\n"
 
 msgid "Import"
 msgstr "Importar"
@@ -167,7 +167,7 @@ msgid "Pixels"
 msgstr "Pixels"
 
 msgid "Percentage"
-msgstr "Percentagem"
+msgstr "Porcentagem"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -237,7 +237,7 @@ msgid "Tile Mode"
 msgstr "Modo de Tile"
 
 msgid "Tile Mode Offsets"
-msgstr "Deslocamentos do Modo Ladrilho"
+msgstr "Deslocamentos do Modo de Tile"
 
 msgid "X-basis x:"
 msgstr "X-base x:"
@@ -252,7 +252,7 @@ msgid "Y-basis y:"
 msgstr "Y-base y:"
 
 msgid "Tile Mask"
-msgstr "Máscara de Ladrilho"
+msgstr "Máscara de Tile"
 
 msgid "Reset"
 msgstr "Redefinir"
@@ -261,7 +261,7 @@ msgid "Use Current Frame"
 msgstr "Usar o Quadro Atual"
 
 msgid "Reset Mask"
-msgstr "Reiniciar máscara"
+msgstr "Redefinir máscara"
 
 msgid "Window Opacity"
 msgstr "Opacidade da Janela"
@@ -413,11 +413,11 @@ msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nova camada)"
 
 msgid "New frame"
-msgstr "Novo Quadro"
+msgstr "Novo quadro"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
-msgstr "Substituir o cel"
+msgstr "Substituir a cel"
 
 msgid "New layer"
 msgstr "Nova camada"
@@ -471,7 +471,7 @@ msgid "End frame:"
 msgstr "Quadro final:"
 
 msgid "At frame:"
-msgstr "Na moldura:"
+msgstr "No quadro:"
 
 msgid "At layer:"
 msgstr "Na camada:"
@@ -858,16 +858,16 @@ msgid "Only affect selection"
 msgstr "Apenas afetar a seleção"
 
 msgid "Selected cels"
-msgstr "Células selecionadas"
+msgstr "Cels selecionadas"
 
 msgid "Current cel"
-msgstr "Parte Atual"
+msgstr "Cel atual"
 
 msgid "Current frame"
-msgstr "Moldura atual"
+msgstr "Quadro atual"
 
 msgid "All frames"
-msgstr "Todas as molduras"
+msgstr "Todos os quadros"
 
 msgid "All projects"
 msgstr "Todos Projetos"
@@ -1029,7 +1029,7 @@ msgstr "Rastreador de problemas"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Abrir pasta de dados do editor"
 
 msgid "Changelog"
 msgstr "Mudanças"
@@ -1336,7 +1336,13 @@ msgid "Curve Tool\n\n"
 "Press %s/%s to add new points\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Ferramenta Curva\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito do mouse\n\n"
+"Desenha curvas de Bézier\n"
+"Pressione %s/%s para adicionar novos pontos\n"
+"Pressione e arraste para controlar a curvatura\n"
+"Pressione %s para remover o último ponto adicionado"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1487,7 +1493,7 @@ msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr "Define o deslocamento da grade em relação à origem da tela(canto superior esquerdo da imagem)"
 
 msgid "Draw over Tile Mode:"
-msgstr "Desenhar sobre o Modo de Ladrilho:"
+msgstr "Desenhar sobre o Modo de Tile:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr "Se desativado, a grade será desenhada somente sobre a imagem original"
@@ -1574,7 +1580,7 @@ msgid "Set application FPS limit:"
 msgstr "Definir o limite de FPS do aplicativo:"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr "Define o limite dos quadros do aplicativo por segundo. Quanto menor o número, menor o uso da CPU, mas o aplicativo fica mais lento, com qualidade ruim e sem resposta. 0 significa que não há limite."
+msgstr "Define o limite de FPS (quadros por segundo) do aplicativo. Quanto menor o número, menor o uso da CPU, mas o aplicativo fica mais lento, com qualidade ruim e sem resposta. 0 significa que não há limite."
 
 msgid "Pause application when it loses focus"
 msgstr "Pausar aplicativo quando perder o foco"
@@ -1813,7 +1819,7 @@ msgid "Options:"
 msgstr "Opções:"
 
 msgid "Fit to frame"
-msgstr "Ajustar à moldura"
+msgstr "Ajustar ao quadro"
 
 msgid "100% Zoom"
 msgstr "Zoom 100%"
@@ -1877,14 +1883,14 @@ msgid "Jump to the last frame\n"
 msgstr "Ir para o último quadro\n"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Configurações da linha do tempo"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Ativar/desativar Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Quantos quadros por segundo a animação deverá tocar?\n"
+msgstr "A quantos quadros por segundo a animação deverá tocar?\n"
 "Quanto mais FPS (quadros por segundo), mais rápido a animação tocará."
 
 msgid "No loop"
@@ -1897,13 +1903,13 @@ msgid "Ping-pong loop"
 msgstr "Loop vai-e-vem"
 
 msgid "Onion Skinning:"
-msgstr "Papel Vegetal:"
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr "Quadros Anteriores"
 
 msgid "Future Frames"
-msgstr "Quadro Sucessores"
+msgstr "Quadros Sucessores"
 
 msgid "Manage frame tags"
 msgstr "Gerenciar tags de quadro"
@@ -1939,17 +1945,17 @@ msgstr "Se selecionado, a animação é reproduzida apenas nos quadros que possu
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Tamanho da cel:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
 msgstr "Modo de cor"
 
 msgid "Show past frames:"
-msgstr "Mostrar frames anteriores:"
+msgstr "Mostrar quadros anteriores:"
 
 msgid "Show future frames:"
-msgstr "Mostrar frames futuros:"
+msgstr "Mostrar quadros sucessores:"
 
 msgid "Above canvas"
 msgstr "Acima da tela de desenho"
@@ -1982,13 +1988,13 @@ msgid "Link Cels to"
 msgstr "Vincular Células a"
 
 msgid "Unlink Cels"
-msgstr "Desvincular Células"
+msgstr "Desvincular Cels"
 
 msgid "Properties"
 msgstr "Propriedades"
 
 msgid "Project Properties"
-msgstr ""
+msgstr "Propriedades do Projeto"
 
 msgid "Frame properties"
 msgstr "Propriedades do quadro"
@@ -2000,7 +2006,7 @@ msgid "Cel properties"
 msgstr "Propriedades da Cel"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "Propriedades da Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
@@ -2021,7 +2027,7 @@ msgstr "Camadas"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr ""
+msgstr "Máscara de recorte"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2142,7 +2148,7 @@ msgid "Opacity:"
 msgstr "Opacidade:"
 
 msgid "Tile mode opacity:"
-msgstr "Opacidade do modo ladrilho:"
+msgstr "Opacidade do modo de tile:"
 
 msgid "Toggle layer's visibility"
 msgstr "Mudar visibilidade da camada"
@@ -2151,12 +2157,12 @@ msgid "Lock/unlock layer"
 msgstr "Bloquear/desbloquear camada"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Frame: %s, Camada: %s"
+msgstr "Quadro: %s, Camada: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr "Ativar/desativar vinculação automática de novas células quando criar novos quadros\n\n"
-"Células vinculadas compartilham o conteúdo entre vários quadros"
+msgstr "Ativar/desativar a vinculação automática de novas cels ao criar novos quadros\n\n"
+"Cels vinculadas compartilham o conteúdo entre vários quadros"
 
 msgid "Expand/collapse group"
 msgstr "Expandir/recolher grupo"
@@ -2258,7 +2264,7 @@ msgid "Undo: Change frame duration"
 msgstr "Desfazer: Alterar a duração do quadro"
 
 msgid "Redo: Change frame duration"
-msgstr "Refazer: Mudar Ordem dos Frames"
+msgstr "Refazer: Mudar a duração do quadro"
 
 msgid "Move Guide"
 msgstr "Mover Guia"
@@ -2277,7 +2283,7 @@ msgstr "Arquivo falhou ao salvar. Código de erro %s"
 
 #. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
 msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
-msgstr ""
+msgstr "O vídeo falhou na exportação. Certifique-se de que o FFMPEG está instalado corretamente."
 
 msgid "File(s) exported"
 msgstr "Arquivo(s) exportado(s)"
@@ -2491,7 +2497,7 @@ msgstr "Confirmação de saída"
 
 #. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
 msgid "FFMPEG path"
-msgstr ""
+msgstr "Caminho do FFMPEG"
 
 msgid "Enable autosave"
 msgstr "Habilitar salvamento automático"
@@ -2504,11 +2510,11 @@ msgstr "minuto(s)"
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "Exportar dados JSON"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
-msgstr ""
+msgstr "Separar camadas"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
@@ -2563,27 +2569,27 @@ msgid "Move the selected frame to the left."
 msgstr "Mova o frame selecionado para a esquerda."
 
 msgid "Move the selected frame to the right."
-msgstr "Mova o frame selecionado para a direita."
+msgstr "Mover o quadro selecionado para a direita."
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr ""
+msgstr "Duração do quadro:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Dados do usuário:"
 
 msgid "Duration"
 msgstr "Duração"
 
 msgid "Tiled In Both Axis"
-msgstr "Ladrilho em Ambos os Eixos"
+msgstr "Tiles em ambos os eixos"
 
 msgid "Tiled In X Axis"
-msgstr "Ladrilho no Eixo X"
+msgstr "Tiles no eixo X"
 
 msgid "Tiled In Y Axis"
-msgstr "Ladrilho no Eixo Y"
+msgstr "Tiles no eixo Y"
 
 msgid "Create a new palette"
 msgstr "Criar uma nova paleta"
@@ -2611,39 +2617,39 @@ msgstr "Remover uma cor selecionada"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "Ordenar paleta"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "Inverter cores"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Ordenar por matiz"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Ordenar por saturação"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Ordenar por valor"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Ordenar pelo vermelho"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Ordenar pelo verde"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Ordenar pelo azul"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Ordenar pelo alfa"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Já existe uma paleta com o mesmo nome e caminho!"
@@ -2997,31 +3003,31 @@ msgstr "Monocromático"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove"
-msgstr ""
+msgstr "Segure Shift enquanto pressiona para remover instantaneamente"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Mover a imagem de referência selecionada para a direita"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Mover a imagem de referência selecionada para a esquerda"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Seleciona uma imagem de referência na tela"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Mover a imagem de referência selecionada"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Girar a imagem de referência selecionada"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Redimensionar a imagem de referência selecionada"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
@@ -3037,5 +3043,5 @@ msgstr "Adicionar Efeito"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr ""
+msgstr "Você deseja baixar a imagem de %s?"
 
