@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://clsp16gq4sng3"]
+
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImportTagDialog.gd" id="1_5fb6k"]
+
+[node name="ImportTagDialog" type="AcceptDialog"]
+title = "Import Tag"
+position = Vector2i(0, 24)
+size = Vector2i(266, 335)
+exclusive = false
+min_size = Vector2i(250, 0)
+ok_button_text = "Cancel"
+script = ExtResource("1_5fb6k")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "From: "
+
+[node name="ProjectList" type="OptionButton" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="CreateTags" type="CheckButton" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create new tags"
+
+[node name="Instructions" type="Label" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 23)
+layout_mode = 2
+text = "Available tags:"
+autowrap_mode = 3
+
+[node name="TagList" type="ItemList" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartFrame" type="Label" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 23)
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3

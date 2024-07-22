@@ -1,7 +1,8 @@
-extends Popup
+extends AcceptDialog
 
 var from_project: Project
 var create_new_tags := false
+var frame: int
 
 @onready var from_project_list: OptionButton = %ProjectList
 @onready var create_tags: CheckButton = %CreateTags
@@ -10,9 +11,7 @@ var create_new_tags := false
 
 
 func _ready() -> void:
-	var tag_container: Control = Global.animation_timeline.find_child("TagContainer")
 	# connect signals
-	tag_container.connect("gui_input", _on_TagContainer_gui_input)
 	from_project_list.connect("item_selected", _on_FromProject_changed)
 	animation_tags_list.connect("item_selected", _on_TagList_id_pressed)
 	create_tags.connect("toggled", _on_CreateTags_toggled)
@@ -34,23 +33,20 @@ func _on_CreateTags_toggled(pressed: bool) -> void:
 	create_new_tags = pressed
 
 
-func _on_TagContainer_gui_input(event: InputEvent) -> void:
-	if !event is InputEventMouseButton:
-		return
-	if Input.is_action_just_released("right_mouse"):
-		# Reset UI
-		from_project_list.clear()
-		if Global.projects.find(from_project) < 0:
-			from_project = Global.current_project
-		# Populate project list
-		for project in Global.projects:
-			from_project_list.add_item(project.name)
-		from_project_list.select(Global.projects.find(from_project))
-		# Populate tag list
-		refresh_list()
-		var frame_idx := Global.current_project.current_frame + 2
-		start_frame.text = str("The pasted frames will start at (Frame ", frame_idx, ")")
-		popup(Rect2i(Global.control.get_global_mouse_position(), Vector2i.ONE))
+func prepare_and_show(frame_no: int) -> void:
+	# Reset UI
+	frame = frame_no
+	from_project_list.clear()
+	if Global.projects.find(from_project) < 0:
+		from_project = Global.current_project
+	# Populate project list
+	for project in Global.projects:
+		from_project_list.add_item(project.name)
+	from_project_list.select(Global.projects.find(from_project))
+	# Populate tag list
+	refresh_list()
+	start_frame.text = str("The animation will append at (Frame ", frame + 2, ")")
+	popup_centered()
 
 
 func _on_FromProject_changed(id: int) -> void:
@@ -64,9 +60,9 @@ func _on_TagList_id_pressed(id: int) -> void:
 	for i in range(tag.from - 1, tag.to):
 		frames.append(i)
 	if create_new_tags:
-		add_animation(frames, Global.current_project.current_frame, tag)
+		add_animation(frames, frame, tag)
 	else:
-		add_animation(frames, Global.current_project.current_frame)
+		add_animation(frames, frame)
 	hide()
 
 
