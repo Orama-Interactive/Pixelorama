@@ -106,7 +106,7 @@ func change_artwork(direction: int) -> void:
 	ambient.gradient.set_color(0, col_a)
 	ambient.gradient.set_color(1, col_b)
 	ambient.fill_from = Vector2(0.5, 0.5)
-	ambient.fill = GradientTexture2D.FILL_SQUARE
+	ambient.fill = GradientTexture2D.FILL_RADIAL
 	%Ambient.texture = ambient
 
 
