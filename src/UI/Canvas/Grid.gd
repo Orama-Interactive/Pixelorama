@@ -13,7 +13,7 @@ func _draw() -> void:
 	if Global.grid_draw_over_tile_mode:
 		target_rect = Global.current_project.tiles.get_bounding_rect()
 	else:
-		target_rect = Rect2i(Vector2.ZERO, Global.current_project.size)
+		target_rect = Rect2i(Vector2i.ZERO, Global.current_project.size)
 	if not target_rect.has_area():
 		return
 
