@@ -48,6 +48,11 @@ class InputGroup:
 		folded = _folded
 
 
+func _init() -> void:
+	for locale in TranslationServer.get_loaded_locales():
+		load_translation(locale)
+
+
 func _ready() -> void:
 	if !config_file:
 		config_file = ConfigFile.new()
