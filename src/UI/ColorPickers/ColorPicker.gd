@@ -5,6 +5,7 @@ const VALUE_ARROW_EXPANDED := preload("res://assets/graphics/misc/value_arrow.sv
 
 ## The swatches button of the [ColorPicker] node. Used to ensure that swatches are always invisible
 var swatches_button: Button
+var color_sliders_vbox: VBoxContainer
 @onready var color_picker := %ColorPicker as ColorPicker
 @onready var color_buttons := %ColorButtons as HBoxContainer
 @onready var left_color_rect := %LeftColorRect as ColorRect
@@ -60,6 +61,11 @@ func _ready() -> void:
 	color_buttons.get_parent().remove_child(color_buttons)
 	sampler_cont.add_child(color_buttons)
 	sampler_cont.move_child(color_buttons, 0)
+
+	var empty_vbox_container := picker_vbox_container.get_child(3, true) as VBoxContainer
+	empty_vbox_container.visible = false
+	color_sliders_vbox = picker_vbox_container.get_child(4, true) as VBoxContainer
+	color_sliders_vbox.visible = false
 	swatches_button = picker_vbox_container.get_child(5, true) as Button
 	swatches_button.visible = false
 	# The GridContainer that contains the swatch buttons. These are not visible in our case
@@ -122,6 +128,8 @@ func _on_expand_button_toggled(toggled_on: bool) -> void:
 	color_picker.presets_visible = toggled_on
 	if is_instance_valid(swatches_button):
 		swatches_button.visible = false
+	if is_instance_valid(color_sliders_vbox):
+		color_sliders_vbox.visible = toggled_on
 	Global.config_cache.set_value("color_picker", "is_expanded", toggled_on)
 
 
