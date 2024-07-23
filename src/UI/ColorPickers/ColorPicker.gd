@@ -3,8 +3,14 @@ extends Container
 const VALUE_ARROW := preload("res://assets/graphics/misc/value_arrow_right.svg")
 const VALUE_ARROW_EXPANDED := preload("res://assets/graphics/misc/value_arrow.svg")
 
-## The swatches button of the [ColorPicker] node. Used to ensure that swatches are always invisible
+## The internal control node of the HSV Rectangle of the [ColorPicker] node.
+var hsv_rectangle_control: Control
+## The internal aspect ratio container node of other color shapes of the [ColorPicker] node.
+var shape_aspect_ratio: AspectRatioContainer
+## The internal swatches button of the [ColorPicker] node.
+## Used to ensure that swatches are always invisible.
 var swatches_button: Button
+## The internal container for the color sliders of the [ColorPicker] node.
 var color_sliders_vbox: VBoxContainer
 @onready var color_picker := %ColorPicker as ColorPicker
 @onready var color_buttons := %ColorButtons as HBoxContainer
@@ -37,10 +43,10 @@ func _ready() -> void:
 	var shapes_container := picker_vbox_container.get_child(0, true) as HBoxContainer
 	shapes_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	# The Control of the HSV Rectangle picker shape
-	var hsv_rectangle_control := shapes_container.get_child(0, true) as Control
+	hsv_rectangle_control = shapes_container.get_child(0, true) as Control
 	hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
 	# The AspectRatioContainer that holds the rest of the picker shapes
-	var shape_aspect_ratio := shapes_container.get_child(1, true) as AspectRatioContainer
+	shape_aspect_ratio = shapes_container.get_child(1, true) as AspectRatioContainer
 	shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
 	# The HBoxContainer of the screen color picker, the color preview rectangle and the
 	# button that lets users change the picker shape. It is visible because
@@ -78,6 +84,14 @@ func _ready() -> void:
 	expand_button.get_parent().remove_child(expand_button)
 	picker_vbox_container.add_child(expand_button)
 	picker_vbox_container.move_child(expand_button, 2)
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_THEME_CHANGED and is_instance_valid(hsv_rectangle_control):
+		# If there's a theme change, reset the custom minimum sizes of the color shapes
+		await get_tree().process_frame
+		hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
+		shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
 
 
 func _on_color_picker_color_changed(color: Color) -> void:
