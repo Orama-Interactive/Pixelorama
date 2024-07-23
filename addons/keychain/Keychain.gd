@@ -107,7 +107,10 @@ func action_erase_events(action: StringName) -> void:
 
 
 func load_translation(locale: String) -> void:
-	var translation = load("res://addons/keychain/translations".path_join(locale + ".po"))
+	var translation_file_path := "res://addons/keychain/translations".path_join(locale + ".po")
+	if not ResourceLoader.exists(translation_file_path, "Translation"):
+		return
+	var translation := load(translation_file_path)
 	if is_instance_valid(translation) and translation is Translation:
 		TranslationServer.add_translation(translation)
 
