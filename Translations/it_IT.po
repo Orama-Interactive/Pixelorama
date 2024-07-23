@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-07-20 22:12\n"
+"PO-Revision-Date: 2024-07-23 03:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1030,7 +1030,7 @@ msgstr "Tracker dei Problemi"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Apri Cartella Dati Dell'Editor"
 
 msgid "Changelog"
 msgstr "Novità"
