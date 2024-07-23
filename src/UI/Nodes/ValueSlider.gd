@@ -6,7 +6,15 @@ extends TextureProgressBar
 
 enum { NORMAL, HELD, SLIDING, TYPING }
 
-@export var editable := true
+@export var editable := true:
+	set(v):
+		editable = v
+		var line_edit_color := get_theme_color("font_color", "LineEdit")
+		var line_edit_disabled_col := get_theme_color("font_uneditable_color", "LineEdit")
+		if editable:
+			_line_edit.add_theme_color_override("font_uneditable_color", line_edit_color)
+		else:
+			_line_edit.add_theme_color_override("font_uneditable_color", line_edit_disabled_col)
 @export var prefix: String:
 	set(v):
 		prefix = v
@@ -253,12 +261,7 @@ func _reset_display(theme_has_changed := false) -> void:
 		_value_down_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
 		_value_down_button.texture_hover = get_theme_icon("arrow_hover", "ValueSlider")
 
-		var line_edit_color := get_theme_color("font_color", "LineEdit")
-		var line_edit_disabled_col: Color = get_theme_color("read_only", "LineEdit")
-		if editable:
-			_line_edit.add_theme_color_override("font_uneditable_color", line_edit_color)
-		else:
-			_line_edit.add_theme_color_override("font_uneditable_color", line_edit_disabled_col)
+		editable = editable  # Call the setter
 		tint_under = get_theme_color("under_color", "ValueSlider")
 		if show_progress:
 			tint_progress = get_theme_color("progress_color", "ValueSlider")
