@@ -929,6 +929,7 @@ ValueSlider/icons/texture_over = null
 ValueSlider/icons/texture_progress = ExtResource("6_4k37l")
 ValueSlider/icons/texture_under = ExtResource("6_4k37l")
 Window/colors/title_color = Color(0.286275, 0.443137, 0.6, 1)
+Window/constants/resize_margin = 16
 Window/constants/title_height = 24
 Window/styles/embedded_border = SubResource("StyleBoxFlat_pgljm")
 Window/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_wmfk1")
