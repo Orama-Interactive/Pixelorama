@@ -805,9 +805,9 @@ func add_layer(type := 0) -> void:
 		new_layer_idx = project.current_layer
 		if !current_layer.expanded:
 			current_layer.expanded = true
-			for layer_button in Global.layer_vbox.get_children():
+			for layer_button: LayerButton in Global.layer_vbox.get_children():
 				layer_button.update_buttons()
-				var expanded = project.layers[layer_button.layer].is_expanded_in_hierarchy()
+				var expanded := project.layers[layer_button.layer_index].is_expanded_in_hierarchy()
 				layer_button.visible = expanded
 				Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
 		# make layer child of group
