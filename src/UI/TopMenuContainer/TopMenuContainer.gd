@@ -94,9 +94,22 @@ func _ready() -> void:
 	_setup_help_menu()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and Global.current_project != null:
+		_update_file_menu_buttons(Global.current_project)
+
+
 func _project_switched() -> void:
 	var project := Global.current_project
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
+	_update_file_menu_buttons(project)
+	for j in Tiles.MODE.values():
+		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
+
+	_update_current_frame_mark()
+
+
+func _update_file_menu_buttons(project: Project) -> void:
 	if project.export_directory_path.is_empty():
 		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
 	else:
@@ -109,10 +122,6 @@ func _project_switched() -> void:
 			file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export") + f_name)
 	else:
 		file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
-	for j in Tiles.MODE.values():
-		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
-
-	_update_current_frame_mark()
 
 
 func _update_current_frame_mark() -> void:

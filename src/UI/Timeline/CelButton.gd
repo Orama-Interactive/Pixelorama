@@ -29,6 +29,13 @@ func _ready() -> void:
 		transparent_checker.visible = false
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		tooltip_text = (
+			tr("Frame: %s, Layer: %s") % [frame + 1, Global.current_project.layers[layer].name]
+		)
+
+
 func cel_switched(force_stylebox_change := false) -> void:
 	z_index = 1 if button_pressed else 0
 	var current_theme := Global.control.theme
