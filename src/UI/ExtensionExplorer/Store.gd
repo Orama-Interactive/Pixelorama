@@ -200,6 +200,8 @@ func parse_extension_data(raw_data: Array) -> Dictionary:
 						result["sha256"] = item[0]
 					"description":
 						result["description"] = item[0]
+					"readme":
+						result["readme"] = item[0]
 					"thumbnail":
 						result["thumbnail"] = item[0]
 					"download_link":
