@@ -47,7 +47,7 @@ func check_sanity(extension_name: String) -> void:
 				extension_history,
 				" which are not removed properly"
 			)
-			printerr(error_msg)
+			push_warning(error_msg)
 
 
 ## [code]This function is used internally and not meant to be used by extensions.[/code]
@@ -165,6 +165,12 @@ class GeneralAPI:
 	func create_value_slider() -> ValueSlider:
 		return ValueSlider.new()
 
+	func create_value_slider_v2() -> ValueSliderV2:
+		return ValueSliderV2.new()
+
+	func create_value_slider_v3() -> ValueSliderV3:
+		return ValueSliderV3.new()
+
 
 ## Gives ability to add/remove items from menus in the top bar.
 class MenuAPI:
@@ -200,6 +206,7 @@ class MenuAPI:
 	func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := -1) -> int:
 		var popup_menu := _get_popup_menu(menu_type)
 		if not popup_menu:
+			push_error("Menu of type: ", menu_type, " does not exist.")
 			return -1
 		popup_menu.add_item(item_name, item_id)
 		var idx := item_id
@@ -214,6 +221,7 @@ class MenuAPI:
 	func remove_menu_item(menu_type: int, item_idx: int) -> void:
 		var popup_menu := _get_popup_menu(menu_type)
 		if not popup_menu:
+			push_error("Menu of type: ", menu_type, " does not exist.")
 			return
 		popup_menu.remove_item(item_idx)
 		ExtensionsApi.remove_action("MenuAPI", "add_menu")
@@ -258,7 +266,7 @@ class PanelAPI:
 			dockable.add_child(node)
 			tabs[0].insert_node(0, node)  # Insert at the beginning
 		else:
-			push_error("No tabs found!")
+			push_error("No suitable tab found for node placement.")
 			return
 		top_menu_container.ui_elements.append(node)
 		# refreshing Panels submenu
@@ -321,6 +329,7 @@ class PanelAPI:
 			var idx := tab.find_name(node_name)
 			if idx != -1:
 				return tab
+		push_error("Tab containing node: %s not found" % node_name)
 		return null
 
 	func _get_tabs_in_root(parent_resource: DockableLayoutNode) -> Array[DockableLayoutPanel]:
@@ -389,6 +398,7 @@ class ThemeAPI:
 			Themes.change_theme(idx)
 			return true
 		else:
+			push_error("No theme found at index: ", idx)
 			return false
 
 	## Remove the [param theme] from preferences.
@@ -601,7 +611,7 @@ class ProjectAPI:
 		if get_cel_at(current_project, frame, layer).get_class_name() == "PixelCel":
 			OpenSave.open_image_at_cel(image, layer, frame)
 		else:
-			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
+			push_error("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
 
 	## Adds a new frame in the current project after frame [param after_frame].
 	func add_new_frame(after_frame: int) -> void:
@@ -612,7 +622,7 @@ class ProjectAPI:
 			Global.animation_timeline.add_frame()
 			project.current_frame = old_current
 		else:
-			print("invalid (after_frame)")
+			push_error("invalid (after_frame): ", after_frame)
 
 	## Adds a new Layer of name [param name] in the current project above layer [param above_layer]
 	## ([param above_layer] = 0 is the bottom-most layer and so on).
@@ -632,9 +642,9 @@ class ProjectAPI:
 					Global.layer_vbox.get_child(l_idx).label.text = name
 				project.current_layer = old_current
 			else:
-				print("invalid (type)")
+				push_error("invalid (type): ", type)
 		else:
-			print("invalid (above_layer)")
+			push_error("invalid (above_layer) ", above_layer)
 
 
 ## Gives access to adding custom exporters.
@@ -722,6 +732,27 @@ class ImportAPI:
 class PaletteAPI:
 	## Creates and adds a new [Palette] with name [param palette_name] with [param data]
 	## in the form of a [Dictionary].
+	## An example of [code]data[/code] dictionary will be:[codeblock]
+	## {
+	## "colors": [
+	##  {
+	##   "color": "(0, 0, 0, 1)",
+	##   "index": 0
+	##  },
+	##  {
+	##   "color": "(0.1294, 0.1216, 0.2039, 1)",
+	##   "index": 1
+	##  },
+	##  {
+	##   "color": "(0.2667, 0.1569, 0.2314, 1)",
+	##   "index": 2
+	##  }
+	## ],
+	## "comment": "Place comment here",
+	## "height": 4,
+	## "width": 8
+	## }
+	## [/codeblock]
 	func create_palette_from_data(palette_name: String, data: Dictionary) -> void:
 		var palette := Palette.new(palette_name)
 		palette.deserialize_from_dictionary(data)
