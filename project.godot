@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Pixelorama"
 config/description="A free & open-source 2D sprite editor"
-config/version="v1.0-rc1"
+config/version="v1.0-rc2"
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="pixelorama"
