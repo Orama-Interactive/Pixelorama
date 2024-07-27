@@ -795,6 +795,7 @@ func add_layer(type := 0) -> void:
 			l = GroupLayer.new(project)
 		Global.LayerTypes.THREE_D:
 			l = Layer3D.new(project)
+			SteamManager.set_achievement("ACH_3D_LAYER")
 
 	var cels := []
 	for f in project.frames:
