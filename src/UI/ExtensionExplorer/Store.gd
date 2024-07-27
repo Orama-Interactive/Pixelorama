@@ -179,7 +179,7 @@ func process_line(line: String) -> void:
 			TYPE_STRING:
 				# it's most probably a store link
 				var link: String = raw_data.strip_edges()
-				if !link in redirects:
+				if !link in redirects and link.begins_with("http"):
 					redirects.append(link)
 
 

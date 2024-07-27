@@ -29,6 +29,8 @@ func set_info(info: Dictionary, extension_path: String) -> void:
 	if "name" in info.keys() and "version" in info.keys():
 		ext_name.text = str(info["name"], "-v", info["version"])
 		# check for updates
+		if typeof(info["version"]) == TYPE_STRING:
+			info["version"] = str_to_var(info["version"])
 		change_button_if_updatable(info["name"], info["version"])
 		# Setting a path extension will be "temporarily" downloaded to before install
 		var temp_dir = extension_path.path_join("Download")
