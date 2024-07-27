@@ -3,7 +3,7 @@ extends RefCounted
 # THIS CLASS TAKES INSPIRATION FROM PIXELORAMA'S FLOOD FILL
 # AND HAS BEEN MODIFIED FOR OPTIMIZATION
 
-enum {DETECT_VERTICAL_EMPTY_LINES, DETECT_HORIZONTAL_EMPTY_LINES}
+enum { DETECT_VERTICAL_EMPTY_LINES, DETECT_HORIZONTAL_EMPTY_LINES }
 
 var slice_thread := Thread.new()
 
@@ -45,7 +45,9 @@ func _init(threshold: int, merge_dist: int) -> void:
 	_merge_dist = merge_dist
 
 
-func get_used_rects(image: Image, lazy_check := false, scan_dir := DETECT_VERTICAL_EMPTY_LINES) -> RectData:
+func get_used_rects(
+	image: Image, lazy_check := false, scan_dir := DETECT_VERTICAL_EMPTY_LINES
+) -> RectData:
 	if ProjectSettings.get_setting("rendering/driver/threads/thread_model") != 2:
 		# Single-threaded mode
 		return get_rects(image, lazy_check, scan_dir)
@@ -59,7 +61,9 @@ func get_used_rects(image: Image, lazy_check := false, scan_dir := DETECT_VERTIC
 			return get_rects(image, lazy_check, scan_dir)
 
 
-func get_rects(image: Image, lazy_check := false, scan_dir := DETECT_VERTICAL_EMPTY_LINES) -> RectData:
+func get_rects(
+	image: Image, lazy_check := false, scan_dir := DETECT_VERTICAL_EMPTY_LINES
+) -> RectData:
 	var skip_amount = 0
 	# Make a smaller image to make the loop shorter
 	var used_rect := image.get_used_rect()
