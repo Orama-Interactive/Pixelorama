@@ -165,22 +165,21 @@ func process_line(line: String) -> void:
 	# If the line isn't a comment, we will check data type
 	var raw_data
 	line = line.strip_edges()
-	if !line.begins_with("#") and !line.begins_with("//") and line != "":
-		# attempting to convert to a variable other than a string
-		raw_data = str_to_var(line)
-		if !raw_data:  # attempt failed, using it as string
-			raw_data = line
+	# attempting to convert to a variable other than a string
+	raw_data = str_to_var(line)
+	if !raw_data:  # attempt failed, using it as string
+		raw_data = line
 
-		# Determine action based on data type
-		match typeof(raw_data):
-			TYPE_ARRAY:
-				var extension_data: Dictionary = parse_extension_data(raw_data)
-				add_entry(extension_data)
-			TYPE_STRING:
-				# it's most probably a store link
-				var link: String = raw_data.strip_edges()
-				if !link in redirects:
-					redirects.append(link)
+	# Determine action based on data type
+	match typeof(raw_data):
+		TYPE_ARRAY:
+			var extension_data: Dictionary = parse_extension_data(raw_data)
+			add_entry(extension_data)
+		TYPE_STRING:
+			# it's most probably a store link
+			var link: String = raw_data.strip_edges()
+			if !link in redirects and link.begins_with("http") and "://" in link:
+				redirects.append(link)
 
 
 func parse_extension_data(raw_data: Array) -> Dictionary:

@@ -105,6 +105,7 @@ offset_bottom = -49.0
 horizontal_alignment = 1
 
 [node name="EnlardedThumbnail" type="Window" parent="."]
+title = "Image"
 position = Vector2i(0, 36)
 size = Vector2i(440, 360)
 visible = false
@@ -118,6 +119,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 stretch_mode = 5
 
 [connection signal="timeout" from="MarginContainer/HBoxContainer/VBoxContainer/Done/DoneDelay" to="." method="_on_DoneDelay_timeout"]
