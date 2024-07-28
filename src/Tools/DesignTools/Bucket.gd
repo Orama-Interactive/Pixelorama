@@ -155,6 +155,10 @@ func draw_start(pos: Vector2i) -> void:
 		_pick_color(pos)
 		return
 	_undo_data = _get_undo_data()
+	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		return
+	if not Global.current_project.can_pixel_get_drawn(pos):
+		return
 	fill(pos)
 
 
