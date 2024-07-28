@@ -330,7 +330,7 @@ max_value = 180.0
 
 [node name="ColorLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
 layout_mode = 2
-text = "Color Options"
+text = "Color options"
 
 [node name="Spacer2" type="Control" parent="ScrollContainer/Container/ReferenceEdit/Options"]
 layout_mode = 2
