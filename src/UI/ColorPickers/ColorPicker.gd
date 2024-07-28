@@ -92,6 +92,8 @@ func _notification(what: int) -> void:
 		await get_tree().process_frame
 		hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
 		shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
+	elif what == NOTIFICATION_TRANSLATION_CHANGED:
+		_average(left_color_rect.color, right_color_rect.color)
 
 
 func _on_color_picker_color_changed(color: Color) -> void:
@@ -150,7 +152,7 @@ func _on_expand_button_toggled(toggled_on: bool) -> void:
 func _average(color_1: Color, color_2: Color) -> void:
 	var average := (color_1 + color_2) / 2.0
 	var copy_button := average_color.get_parent() as Control
-	copy_button.tooltip_text = str("Average Color:\n#", average.to_html())
+	copy_button.tooltip_text = str(tr("Average Color:"), "\n#", average.to_html())
 	average_color.color = average
 
 
