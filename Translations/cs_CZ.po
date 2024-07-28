@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-07-28 20:18\n"
+"PO-Revision-Date: 2024-07-28 21:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -596,7 +596,7 @@ msgstr ""
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D vrstva:"
 
 msgid "Direction:"
 msgstr "Směr:"
@@ -696,7 +696,7 @@ msgstr "Plátno"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Časová osa"
 
 msgid "Selection"
 msgstr "Výběr"
@@ -712,20 +712,20 @@ msgstr "Výkon"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Ovladače"
 
 msgid "Extensions"
 msgstr "Rozšíření"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Kurzory"
 
 msgid "Indicators"
 msgstr "Indikátory"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama musí být restartována, aby se mohly projevit změny."
 
 msgid "On"
 msgstr "Zapnuto"
@@ -743,11 +743,11 @@ msgstr "Hladší přechod při přiblížení nebo přiblížení"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Celočíselné přiblížení/oddálení"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Omezí hodnoty na celočíselný násobek 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Citlivost tlaku na tabletu:"
@@ -828,19 +828,19 @@ msgid "Icon color:"
 msgstr "Barva ikon:"
 
 msgid "Background"
-msgstr ""
+msgstr "Pozadí"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Barva pozadí z:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Barva pozadí:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Barva levého nástroje:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Barva pravého nástroje:"
 
 msgid "Tool button size:"
 msgstr "Velkost tlačítek nástrojů:"
@@ -1302,7 +1302,7 @@ msgstr "Kbelík\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Stínovací nástroj\n\n"
+msgstr "Stínování\n\n"
 "%s pro levé tlačítko myši\n"
 "%s pro pravé tlačítko myši"
 
@@ -1326,7 +1326,14 @@ msgid "Curve Tool\n\n"
 "Press %s/%s to add new points\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Křivka\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Kreslí bézierovu křivku\n"
+"Stiskni %s/%s pro přidání nových bodů\n"
+"Podrž a táhni k ovládání křivky\n"
+"Stiskni %s k odstranění posledního přidaného bodu\n"
+"Dvojtý klik pro potvrzení křivky"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1416,10 +1423,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Zobrazí ikonu vybraného pravého nástroje vedle kurzoru na plátně"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Použít nativní kurzory myši"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Použít v plátnu kurzor kříže"
 
 msgid "Guides"
 msgstr "Vodítka"
@@ -1432,15 +1439,15 @@ msgstr "Barva vodítkových čar zobrazených přes plátno"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Přichytávání"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Vzdálenost přichytávání:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Vzdálenost v pixelech obrazovky, kdy je aktivována funkce přichytávání k vodítkům, nebo mřížce."
 
 msgid "Grid"
 msgstr "Mřížka"
@@ -1462,15 +1469,15 @@ msgstr "Vše"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Velikost obdélníkové mřížky:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Velikost isometrické mřížky:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Odsazení mřížky:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
@@ -1538,15 +1545,15 @@ msgstr "Průhledná šachovnice následuje úroveň přiblížení plátna"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Vybrat vrstvu, pokud je kliknuto na některé z jejích tlačítek:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Onion skinning předchozí barva:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Onion skinning následující barva:"
 
 msgid "Animated selection borders"
 msgstr "Animovat okraje rámečku"
@@ -1575,11 +1582,11 @@ msgstr "Pokud je tato možnost vybrána, tak je aplikace pozastavena, když je o
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Povolit průhlednost hlavního okna"
 
 #. Found in the preferences, tooltip of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Pokud povoleno, tak se může aplikační okno stát průhledným. Ovlivňuje výkon, takže ponechte vypnuto, pokud funkci nepotřebujete."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1591,11 +1598,11 @@ msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Ovladač tabletu:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Specifikuje ovladač tabletu používaného ve Windows. Pokud máte povolen Windows Ink, vyberte winink."
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2422,7 +2429,7 @@ msgid "Line Tool"
 msgstr "Čára"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "Křivka"
 
 msgid "Rectangle Tool"
 msgstr "Obdélník"
@@ -2560,7 +2567,7 @@ msgstr ""
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Uživatelská data:"
 
 msgid "Duration"
 msgstr ""
@@ -2791,11 +2798,11 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Perspektivní"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "Ortogonální"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
@@ -2809,7 +2816,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Prostředí"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
