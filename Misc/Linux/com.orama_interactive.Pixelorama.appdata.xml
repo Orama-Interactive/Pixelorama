@@ -22,20 +22,29 @@
   <url type="contribute">https://www.oramainteractive.com/Pixelorama-Docs/development_and_contributing</url>
   <screenshots>
     <screenshot type="default" width="1920" height="1080">
-      <image type="source">https://img.itch.zone/aW1hZ2UvNDcwMzY3LzcwMTE1NzEucG5n/original/CyAplX.png</image>
-      <caption>Art by Erevos</caption>
+      <image type="source">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2779170/ss_354ea5cfde19549cd19fbfe3d68fc1d66b67763e.1920x1080.jpg</image>
+      <caption>A screenshot of Pixelorama's User Interface</caption>
     </screenshot>
     <screenshot type="default" width="1920" height="1080">
-      <image type="source">https://img.itch.zone/aW1hZ2UvNDcwMzY3LzcwMTE1NzQucG5n/original/xNGUSf.png</image>
-      <caption>Art by Erevos</caption>
+      <image type="source">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2779170/ss_16d45d0b76064a8a7dee7ad2af8a584408040e09.1920x1080.jpg</image>
+      <caption>A screenshot of Pixelorama's User Interface</caption>
     </screenshot>
-	  <screenshot type="default" width="1920" height="1080">
-      <image type="source">https://img.itch.zone/aW1hZ2UvNDcwMzY3LzcwMTE1NzUucG5n/original/7Ykr%2Fj.png</image>
-      <caption>Art by Erevos</caption>
+    <screenshot type="default" width="1920" height="1080">
+      <image type="source">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2779170/ss_54395040c25b243cb82a3bd68778e19e04b43ade.1920x1080.jpg</image>
+      <caption>A screenshot of Pixelorama's User Interface</caption>
+    </screenshot>
+    <screenshot type="default" width="1920" height="1080">
+      <image type="source">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2779170/ss_f8a47ca28701813feff16da54982e2e1e7a435bb.1920x1080.jpg</image>
+      <caption>A screenshot of Pixelorama's User Interface</caption>
+    </screenshot>
+    <screenshot type="default" width="1920" height="1080">
+      <image type="source">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2779170/ss_082edd5ebe50d8d68018905b1cd00dbefae812bb.1920x1080.jpg</image>
+      <caption>A screenshot of Pixelorama's User Interface</caption>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
+	<release version="1.0" date="2024-07-29"/>
 	<release version="0.11.4" date="2024-04-17"/>
 	<release version="0.11.3" date="2023-10-30"/>
 	<release version="0.11.2" date="2023-08-31"/>

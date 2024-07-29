@@ -46,7 +46,7 @@ If you like, consider helping us by sponsoring this project! It would enable us 
 
 ## Download
 Stable versions:
-- [Steam (available soon on Windows & Linux)](https://store.steampowered.com/app/2779170?utm_source=github)
+- [Steam (Windows & Linux)](https://store.steampowered.com/app/2779170?utm_source=github)
 - [Itch.io (Windows, Linux, Mac & Web)](https://orama-interactive.itch.io/pixelorama)
 - [GitHub Releases (Windows, Linux & Mac)](https://github.com/Orama-Interactive/Pixelorama/releases)
 - [GitHub Pages (Web)](https://orama-interactive.github.io/Pixelorama/)
@@ -69,14 +69,20 @@ As of right now, most of the code is written using GDScript, so the mono version
 - A variety of different tools to help you create, with the ability to dynamically map each one on the left and the right mouse buttons with a single click.
 - Animation support with a timeline composed of layers and frames, with onion skinning, frame tags and the ability to draw while the animation is playing.
 - Pixel perfect mode for perfect pixel lines.
+- Clipping masks.
 - Pre-made palettes as well as many palette importing options.
 - Multiple image manipulation effects.
+- Non-destructive and fully customizable layer effects, such as outline, gradient map, drop shadow and palettize.
 - A powerful drawing canvas with guides, a rectangular and an isometric grid, and tile mode for easier seamless pattern creation.
 - Autosave support, with data recovery in case of a software crash.
 - Comprehensive user interface with many customizability options.
-- Export to PNG, as well as spritesheets, GIFs and animated PNGs.
-- Import spritesheets and multiple images as separate frames.
+- Export to PNG and other image and video formats, as well as spritesheets, GIFs, animated PNGs etc.
+- Import spritesheets, multiple images as separate frames, as well as GIFs and videos.
 - Various rotation and scaling algorithms tailored for pixel art, such as [cleanEdge](http://torcado.com/cleanEdge/), OmniScale and rotxel.
+- 3D layers that allow you to bring 3D shapes and models into your 2D canvas.
+- A command line interface for automated file exporting.
+- Custom user data for projects, layers, frames, frame tags and cels, allowing you to attach metadata for game development.
+- Various free community-made extensions, such as tools that automatically convert your 2D pixels into 3D voxels.
 - Fully open source with free updates, forever!
 - Multi-language localization support! See our [Crowdin page](https://crowdin.com/project/pixelorama) for more details.
 
