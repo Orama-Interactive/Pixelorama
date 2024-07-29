@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-07-29 13:50\n"
+"PO-Revision-Date: 2024-07-29 15:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3179,7 +3179,7 @@ msgstr "Opacitate"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Limitarea valorilor de culoare"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
