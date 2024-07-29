@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-07-23 07:35\n"
+"PO-Revision-Date: 2024-07-28 23:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -100,9 +100,8 @@ msgstr "Включать смешанные изображения"
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
-"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr "Если эта функция включена, смешанные изображения также сохраняются в .pxo для каждого кадра. Это увеличивает размер файла .pxo и полезно для импорта сторонними программами\n"
-"или экспорта через CLI. Для загрузки файлов .pxo в Pixelorama, включение этой опции не требуется.\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
+msgstr ""
 
 msgid "Import"
 msgstr "Импортировать"
@@ -637,8 +636,26 @@ msgstr "Теги по строкам"
 msgid "Export dimensions:"
 msgstr "Размер для экспорта:"
 
+msgid "Save a File"
+msgstr ""
+
+msgid "Go to previous folder."
+msgstr ""
+
+msgid "Go to next folder."
+msgstr ""
+
+msgid "Go to parent folder."
+msgstr ""
+
 msgid "Path:"
 msgstr "Путь:"
+
+msgid "Refresh files."
+msgstr ""
+
+msgid "Toggle the visibility of hidden files."
+msgstr ""
 
 msgid "Directories & Files:"
 msgstr "Папки и файлы:"
@@ -648,6 +665,54 @@ msgstr "Создать папку"
 
 msgid "File:"
 msgstr "Файл:"
+
+#. Found in "Open" and "Save" file dialogs. Searches all file types.
+msgid "All Files"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
+msgid "All Recognized"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
+msgid "Pixelorama Project"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
+msgid "PNG Image"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
+msgid "BMP Image"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
+msgid "Radiance HDR Image"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
+msgid "JPEG Image"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
+msgid "SVG Image"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
+msgid "TGA Image"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
+msgid "WebP Image"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
+msgid "Pixelorama palette"
+msgstr ""
+
+#. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
+msgid "GIMP palette"
+msgstr ""
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -1253,6 +1318,11 @@ msgstr "Лассо / свободное выделение\n\n"
 "%s левой кнопкой мыши\n"
 "%s для правой кнопки мыши"
 
+msgid "Select by Drawing\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1282,6 +1352,10 @@ msgstr "Пипетка\n\n"
 "%s для левой кнопки мыши\n"
 "%s для правой кнопки мыши\n\n"
 "Получает цвет из выбранного пикселя"
+
+msgid "Crop\n\n"
+"Resize the canvas"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1384,12 +1458,20 @@ msgstr "Выбор цвета для правого инструмента"
 msgid "Switch left and right colors."
 msgstr "Поменять левый и правый цвета местами."
 
+#. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
+msgid "Average Color:"
+msgstr ""
+
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Сбросить цвета по умолчанию (слева черный, справа белый)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
 msgstr "Выберите цвет на экране."
+
+#. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
+msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
+msgstr ""
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1398,6 +1480,22 @@ msgstr "Выбрать форму пикера."
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
 msgstr "Настройки цвета"
+
+#. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
+msgid "Select a picker mode."
+msgstr ""
+
+#. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
+msgid "Colorized Sliders"
+msgstr ""
+
+#. Shows saved colors in certain color picker menus.
+msgid "Swatches"
+msgstr ""
+
+#. Found under color options in the color picker panel.
+msgid "Recent Colors"
+msgstr ""
 
 msgid "Left tool"
 msgstr "Левый инструмент"
@@ -1862,23 +1960,23 @@ msgstr "Режим анимации:"
 msgid "Current frame as spritesheet"
 msgstr "Текущий кадр как спрайт лист"
 
-msgid "Jump to the first frame\n"
-msgstr "Перейти к первому кадру\n"
+msgid "Jump to the first frame"
+msgstr ""
 
-msgid "Go to the previous frame\n"
-msgstr "На предыдущий кадр\n"
+msgid "Go to the previous frame"
+msgstr ""
 
-msgid "Play the animation backwards (from end to beginning)\n"
-msgstr "Проиграть анимацию задом наперед (с конца в начало)\n"
+msgid "Play the animation backwards (from end to beginning)"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)\n"
-msgstr "Проиграть анимацию по умолчанию (с начала)\n"
+msgid "Play the animation forward (from beginning to end)"
+msgstr ""
 
-msgid "Go to the next frame\n"
-msgstr "На следующий кадр\n"
+msgid "Go to the next frame"
+msgstr ""
 
-msgid "Jump to the last frame\n"
-msgstr "Перейти на последний кадр\n"
+msgid "Jump to the last frame"
+msgstr ""
 
 msgid "Timeline settings"
 msgstr "Настройка таймлана"
@@ -2999,9 +3097,26 @@ msgstr "Пружинная анимация в конце"
 msgid "Monochrome"
 msgstr "Монохром"
 
+#. Found in the Reference Images panel when no reference image has been imported.
+msgid "When opening an image, it may be imported as a reference."
+msgstr ""
+
+#. Found in the Reference Images panel after a reference image has been imported.
+msgid "Select an image below to change its properties.\n"
+"Note that you cannot draw while a reference image is selected."
+msgstr ""
+
+#. Removes the selected reference image.
+msgid "Remove"
+msgstr ""
+
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
-msgid "Hold Shift while pressing to instantly remove"
-msgstr "Удерживайте Shift, чтобы мгновенно удалить"
+msgid "Hold Shift while pressing to instantly remove."
+msgstr ""
+
+#. Shown in the confirmation dialog for removing a reference image.
+msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3026,6 +3141,38 @@ msgstr "Повернуть выбранное референсное изобр�
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Масштабировать выбранное референсное изображение"
+
+#. Button to select no reference images in the Reference Images panel.
+msgid "none"
+msgstr ""
+
+#. Resets the Transform of the selected reference image on the canvas.
+msgid "Reset Transform"
+msgstr ""
+
+#. Position of the selected reference image on the canvas.
+msgid "Position"
+msgstr ""
+
+#. Scale of the selected reference image on the canvas.
+msgid "Scale"
+msgstr ""
+
+#. Rotation of the selected reference image on the canvas.
+msgid "Rotation"
+msgstr ""
+
+#. Toggle filter of the selected reference image on the canvas.
+msgid "Filter"
+msgstr ""
+
+#. Opacity of the selected reference image on the canvas.
+msgid "Opacity"
+msgstr ""
+
+#. Color clamping of the selected reference image on the canvas.
+msgid "Color Clamping"
+msgstr ""
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"

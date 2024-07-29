@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-07-21 03:55\n"
+"PO-Revision-Date: 2024-07-29 08:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -100,9 +100,10 @@ msgstr "ブレンドした画像を含む"
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
-"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
-msgstr "有効にすると、最終的にブレンドされたイメージもフレームごとに PXO に保存されます。\n"
-"これにより、pxo ファイルが大きくなり、サードパーティ ソフトウェアまたは CLI エクスポートによるインポートに役立ちます。 Pixelorama に pxo ファイルをロードする場合、このオプションを有効にする必要はありません。"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
+msgstr "有効にすると、最終的なブレンド画像も各フレームの pxo に保存されます。\n"
+"これにより、pxo ファイルが大きくなり、サードパーティ製のソフトウェア\n"
+"や CLI のエクスポートでインポートする場合に便利です。 PixeloramaでPxoファイルをロードするには、このオプションを有効にする必要はありません。"
 
 msgid "Import"
 msgstr "インポート"
@@ -637,8 +638,26 @@ msgstr "行ごとのタグ"
 msgid "Export dimensions:"
 msgstr "寸法をエクスポート:"
 
+msgid "Save a File"
+msgstr "ファイルを保存"
+
+msgid "Go to previous folder."
+msgstr "前のフォルダへ移動します。"
+
+msgid "Go to next folder."
+msgstr "次のフォルダへ移動します。"
+
+msgid "Go to parent folder."
+msgstr "親フォルダへ移動します。"
+
 msgid "Path:"
 msgstr "パス:"
+
+msgid "Refresh files."
+msgstr "ファイルを更新する。"
+
+msgid "Toggle the visibility of hidden files."
+msgstr "非表示ファイルの表示を切り替える。"
 
 msgid "Directories & Files:"
 msgstr "ディレクトリとファイル:"
@@ -648,6 +667,54 @@ msgstr "フォルダーを作成"
 
 msgid "File:"
 msgstr "ファイル:"
+
+#. Found in "Open" and "Save" file dialogs. Searches all file types.
+msgid "All Files"
+msgstr "全てのファイル"
+
+#. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
+msgid "All Recognized"
+msgstr "すべて認識済み"
+
+#. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
+msgid "Pixelorama Project"
+msgstr "Pixelorama プロジェクト"
+
+#. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
+msgid "PNG Image"
+msgstr "PNG画像"
+
+#. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
+msgid "BMP Image"
+msgstr "BMP画像"
+
+#. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
+msgid "Radiance HDR Image"
+msgstr "輝度HDR画像"
+
+#. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
+msgid "JPEG Image"
+msgstr "JPEG画像"
+
+#. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
+msgid "SVG Image"
+msgstr "SVG画像"
+
+#. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
+msgid "TGA Image"
+msgstr "TGA画像"
+
+#. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
+msgid "WebP Image"
+msgstr "WebP画像"
+
+#. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
+msgid "Pixelorama palette"
+msgstr "Pixeloramaパレット"
+
+#. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
+msgid "GIMP palette"
+msgstr "GIMPパレット"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -1254,6 +1321,13 @@ msgstr "なげなわ/自由選択\n\n"
 "%sでマウスの左ボタンを なげなわ/自由選択 に変更\n"
 "%sでマウスの右ボタンを なげなわ/自由選択 に変更"
 
+msgid "Select by Drawing\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "図形選択\n\n"
+"%sでマウスの左ボタンを 図形選択 に変更\n"
+"%sでマウスの右ボタンを 図形選択 に変更"
+
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1283,6 +1357,11 @@ msgstr "色選択\n\n\n"
 "%sでマウスの左ボタンを 色選択 に変更\n"
 "%sでマウスの右ボタンを 色選択 に変更\n\n"
 "画像のピクセルから色を選択します"
+
+msgid "Crop\n\n"
+"Resize the canvas"
+msgstr "クロップ\n\n"
+"キャンバスのサイズを変更"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1380,12 +1459,20 @@ msgstr "右のツールの色を選択してください"
 msgid "Switch left and right colors."
 msgstr "左右の色を切り替えます。"
 
+#. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
+msgid "Average Color:"
+msgstr "平均色:"
+
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "色を既定の状態にリセットします (左は黒、右は白)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
 msgstr "画面から色を選択します。"
+
+#. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
+msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
+msgstr "16進コード(\"#ff0000\") または名前付きカラー(\"赤\") を入力してください。"
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1394,6 +1481,22 @@ msgstr "ピッカー形状を選択します。"
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
 msgstr "色設定"
+
+#. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
+msgid "Select a picker mode."
+msgstr "ピッカーモードを選択"
+
+#. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
+msgid "Colorized Sliders"
+msgstr "色付きスライダー"
+
+#. Shows saved colors in certain color picker menus.
+msgid "Swatches"
+msgstr "スウォッチ"
+
+#. Found under color options in the color picker panel.
+msgid "Recent Colors"
+msgstr "最近の色"
 
 msgid "Left tool"
 msgstr "左のツール"
@@ -1858,23 +1961,23 @@ msgstr "アニメーションモード:"
 msgid "Current frame as spritesheet"
 msgstr "スプライトシートとしての現在のフレーム"
 
-msgid "Jump to the first frame\n"
-msgstr "最初のフレームにジャンプ\n"
+msgid "Jump to the first frame"
+msgstr "最初のフレームにジャンプ"
 
-msgid "Go to the previous frame\n"
-msgstr "前のフレームに移動\n"
+msgid "Go to the previous frame"
+msgstr "前のフレームへ移動"
 
-msgid "Play the animation backwards (from end to beginning)\n"
-msgstr "アニメーションを逆方向に再生 (終了から開始まで)\n"
+msgid "Play the animation backwards (from end to beginning)"
+msgstr "アニメーションを逆方向に再生 (終了から開始まで)"
 
-msgid "Play the animation forward (from beginning to end)\n"
-msgstr "アニメーションを前方に再生する (開始から終了まで)\n"
+msgid "Play the animation forward (from beginning to end)"
+msgstr "アニメーションを順方向に再生する (開始から終了まで)"
 
-msgid "Go to the next frame\n"
-msgstr "次のフレームに移動\n"
+msgid "Go to the next frame"
+msgstr "次のフレームへ移動"
 
-msgid "Jump to the last frame\n"
-msgstr "最後のフレームにジャンプ\n"
+msgid "Jump to the last frame"
+msgstr "最後のフレームにジャンプ"
 
 msgid "Timeline settings"
 msgstr "タイムライン設定"
@@ -2996,9 +3099,27 @@ msgstr "終了へ向かって跳ぶ"
 msgid "Monochrome"
 msgstr "モノクローム"
 
+#. Found in the Reference Images panel when no reference image has been imported.
+msgid "When opening an image, it may be imported as a reference."
+msgstr "画像を開くとき、参照としてインポートすることができます。"
+
+#. Found in the Reference Images panel after a reference image has been imported.
+msgid "Select an image below to change its properties.\n"
+"Note that you cannot draw while a reference image is selected."
+msgstr "プロパティを変更するには、以下の画像を選択してください。\n"
+"参照画像が選択されている間は描画できません。"
+
+#. Removes the selected reference image.
+msgid "Remove"
+msgstr "削除"
+
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
-msgid "Hold Shift while pressing to instantly remove"
-msgstr "Shiftキーを押しながら押すと即座に削除します"
+msgid "Hold Shift while pressing to instantly remove."
+msgstr "Shiftキーを押したまま押すと即座に削除されます。"
+
+#. Shown in the confirmation dialog for removing a reference image.
+msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
+msgstr "この参照画像を削除してもよろしいですか？ファイルシステムからは削除されません。"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3023,6 +3144,38 @@ msgstr "選択した参照画像を回転"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "選択した参照画像を拡大縮小"
+
+#. Button to select no reference images in the Reference Images panel.
+msgid "none"
+msgstr "なし"
+
+#. Resets the Transform of the selected reference image on the canvas.
+msgid "Reset Transform"
+msgstr "変換をリセット"
+
+#. Position of the selected reference image on the canvas.
+msgid "Position"
+msgstr "位置"
+
+#. Scale of the selected reference image on the canvas.
+msgid "Scale"
+msgstr "スケール"
+
+#. Rotation of the selected reference image on the canvas.
+msgid "Rotation"
+msgstr "回転"
+
+#. Toggle filter of the selected reference image on the canvas.
+msgid "Filter"
+msgstr "フィルター"
+
+#. Opacity of the selected reference image on the canvas.
+msgid "Opacity"
+msgstr "不透明度"
+
+#. Color clamping of the selected reference image on the canvas.
+msgid "Color Clamping"
+msgstr "カラークランプ中"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
