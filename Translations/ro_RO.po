@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-07-28 23:27\n"
+"PO-Revision-Date: 2024-07-29 13:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,7 @@ msgstr "Include imaginile amestecate"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Dacă opțiunea este activată, imaginile amestecate finale sunt, de asemenea, stocate în pxo pentru fiecare cadru. Acest lucru face fișierul pxo mai mare și este util pentru importul de programe informatice terțe sau exportul în CLI. Nu este obligatorie ca această opțiune să fie activată pentru încărcarea fișierelor pxo în Pixelorama."
 
 msgid "Import"
 msgstr "Importare"
@@ -637,25 +637,25 @@ msgid "Export dimensions:"
 msgstr "Dimensiuni de export:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Salvează un fișier"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Deplasează-te la dosarul anterior."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Deplasează-te la dosarul următor."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Deplasează-te la dosarul părinte."
 
 msgid "Path:"
 msgstr "Cale:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Reîmprospătează fișierele."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Comută vizibilitatea fișierelor ascunse."
 
 msgid "Directories & Files:"
 msgstr "Directoare și fișiere:"
@@ -668,51 +668,51 @@ msgstr "Fișier:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Toate fișierele"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Toate recunoscute"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Proiect Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Imagine PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Imagine BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Imagine Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Imagine JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Imagine SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Imagine TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Imagine WebP"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Paletă Pixelorama"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "Paletă GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -1322,7 +1322,9 @@ msgstr "Lasou/instrument de selectare liberă\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selectare după desen\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1356,7 +1358,8 @@ msgstr "Selector de culoare\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Decupare\n\n"
+"Redimensionare pânză"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1462,7 +1465,7 @@ msgstr "Comută culorile din stânga și dreapta."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Culoare medie:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetează culorile la starea lor implicită (negru pentru stânga, alb pentru dreapta)"
@@ -1473,7 +1476,7 @@ msgstr "Alege o culoare de pe ecran."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Introdu un cod hexazecimal („#ff0000”) sau numele culorii în engleză („red”)."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1485,19 +1488,19 @@ msgstr "Opțiuni de culoare"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Selectează un mod selector."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Glisoare colorate"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Eșantioane"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Culori recente"
 
 msgid "Left tool"
 msgstr "Instrument stânga"
@@ -1963,22 +1966,22 @@ msgid "Current frame as spritesheet"
 msgstr "Cadrul curent ca foaie cu grafice bidimensionale"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Sari la primul cadru"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Deplasează-te la cadrul anterior"
 
 msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgstr "Redă animația înapoi (de la sfârșit până la început)"
 
 msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgstr "Redă animația înainte (de la început până la sfârșit)"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Deplasează-te la cadrul următor"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Sari la ultimul cadru"
 
 msgid "Timeline settings"
 msgstr "Setări cronologie"
@@ -3102,24 +3105,25 @@ msgstr "Monocrom"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "La deschiderea unei imagini, aceasta poate fi importată ca referință."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr ""
+msgstr "Selectează o imagine de mai jos pentru a-i schimba proprietățile.\n"
+"Reține că nu poți desena cât timp este selectată o imagine de referință."
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr ""
+msgstr "Elimină"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Ține apăsat Shift în timp ce apeși pentru a elimina instant."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Sigur vrei să ștergi această imagine de referință? Nu va fi ștearsă din sistemul de fișiere."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3147,31 +3151,31 @@ msgstr "Scalează imaginea de referință selectată"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "niciuna"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Resetează transformarea"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
-msgstr ""
+msgstr "Poziție"
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
-msgstr ""
+msgstr "Scală"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Rotație"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Filtru"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Opacitate"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
