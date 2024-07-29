@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-07-28 23:27\n"
+"PO-Revision-Date: 2024-07-29 18:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,9 @@ msgstr "Dołącz mieszane obrazy"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Jeśli ta opcja jest włączona, ostateczne połączone obrazy są również przechowywane w pliku pxo dla każdej klatki.\n"
+" Sprawia to iż plik pxo jest większy i jest przydatny w przypadku importowania za pomocą oprogramowania innych firm\n"
+" lub eksportu CLI. Obsługa plików pxo w Pixeloramie nie wymaga włączenia tej opcji."
 
 msgid "Import"
 msgstr "Importuj"
@@ -636,22 +638,22 @@ msgid "Export dimensions:"
 msgstr "Wymiary Exportu:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Zapisz plik"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Przejdź do poprzedniego folderu."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Przejdź do następnego folderu."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Przejdź do folderu nadrzędnego."
 
 msgid "Path:"
 msgstr "Ścieżka:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Odśwież pliki."
 
 msgid "Toggle the visibility of hidden files."
 msgstr ""
