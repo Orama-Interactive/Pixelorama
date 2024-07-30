@@ -5,6 +5,7 @@ https://godotshaders.com/shader/pixelate-2/
 This shader is under MIT license
 */
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform uvec2 pixel_size = uvec2(4);
 uniform sampler2D selection : filter_nearest;

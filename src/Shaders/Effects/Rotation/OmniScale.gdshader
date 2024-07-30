@@ -1,6 +1,7 @@
 // No AA version from https://github.com/deakcor/godot-omniscale/blob/5dfee6e89cd955dd01dccfe70c9979f9b55bb1bf/OmniScale.shader
 // Edited slightly by Overloaded to add rotation support for Pixelorama
 shader_type canvas_item;
+render_mode unshaded;
 
 //#version 130
 

@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform sampler2D selection : filter_nearest;
 uniform vec2 offset = vec2(0.0); // In pixels

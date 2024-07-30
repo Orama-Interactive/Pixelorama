@@ -25,6 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 
 shader_type canvas_item;
+render_mode unshaded;
 #include "res://src/Shaders/Effects/Rotation/CommonRotation.gdshaderinc"
 //enables 2:1 slopes. otherwise only uses 45 degree slopes
 #define SLOPE
