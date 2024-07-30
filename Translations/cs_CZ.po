@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-07-29 10:40\n"
+"PO-Revision-Date: 2024-07-30 18:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -196,19 +196,19 @@ msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Osa X:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Osa Y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Nastavení rozmazání:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolerance:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Počáteční úhel:"
 
 msgid "Clear"
 msgstr "Zrušit"
@@ -220,7 +220,7 @@ msgid "Grayscale View"
 msgstr "Pohled s odstíny šedi"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Překlopit obrázek"
 
 msgid "Flip Horizontal"
 msgstr "Převrátit vodorovně"
@@ -235,31 +235,31 @@ msgid "Tile Mode"
 msgstr "Dlaždicový režim"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Odsazení dlaždicového režimu"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X na bázi X:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "Y na bázi X:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "X na bázi Y:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y na bázi Y:"
 
 msgid "Tile Mask"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "Obnovit"
 
 msgid "Use Current Frame"
 msgstr ""
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Obnovit masku"
 
 msgid "Window Opacity"
 msgstr "Průhlednost okna"
@@ -274,13 +274,13 @@ msgid "Panels"
 msgstr "Panely"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Rozložení"
 
 msgid "Moveable Panels"
 msgstr "Přesunutelné panely"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Správa rozložení"
 
 #. Noun, a preview of something
 msgid "Preview"
@@ -288,14 +288,14 @@ msgstr ""
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Pouze náhled, úpravy nezmění rozložení"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Dvojklikem nastavíte nové rozložení při spuštění"
 
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
 msgid "Add Layout"
 msgstr "Přidat rozložení"
@@ -326,7 +326,7 @@ msgid "Tallscreen"
 msgstr "Vysoká obrazovka"
 
 msgid "Mirror View"
-msgstr "Převrátit plátno"
+msgstr "Zrcadlové zobrazení"
 
 msgid "Show Grid"
 msgstr "Zobrazit mřížku"
@@ -732,15 +732,15 @@ msgid "Trilinear"
 msgstr "Trilineární"
 
 msgid "Constant"
-msgstr ""
+msgstr "Konstantní"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "Barevný prostor:"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Lineární sRGB"
 
 msgid "General"
 msgstr "Obecné"
@@ -957,7 +957,7 @@ msgid "Outline"
 msgstr "Obrys"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Vrhnout stín"
 
 msgid "Offset X:"
 msgstr ""
@@ -966,7 +966,7 @@ msgid "Offset Y:"
 msgstr ""
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Barva stínu:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Upravit odstín/sytost/hodnotu"
@@ -975,10 +975,10 @@ msgid "Gradient"
 msgstr "Gradient"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Gradientová mapa"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Rozdělit na stejné díly"
 
 msgid "Parts:"
 msgstr ""
@@ -994,7 +994,7 @@ msgid "Shape:"
 msgstr ""
 
 msgid "Linear"
-msgstr ""
+msgstr "Lineární"
 
 msgid "Radial"
 msgstr ""
@@ -1062,23 +1062,23 @@ msgstr "Kroky:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
 msgid "Palettize"
-msgstr ""
+msgstr "Paletizovat"
 
 #. An image effect. It makes the input image pixelated.
 msgid "Pixelize"
-msgstr ""
+msgstr "Pixelizace"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Posterizace"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Úroveň posterizace:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Intenzita ditheringu:"
 
 msgid "View Splash Screen"
 msgstr "Zobrazit úvodní okno"
@@ -1916,19 +1916,19 @@ msgstr "100% přiblížení"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Nahradit výběr"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Přidat k výběru"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Odebrat z výběru"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Průnik výběrů"
 
 msgid "Mirroring"
 msgstr "Zrcadlení"
@@ -2629,7 +2629,7 @@ msgid "Close"
 msgstr "Zavřít"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Zahodit vše"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
@@ -2970,7 +2970,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr ""
+msgstr "Velikost pixelu:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
@@ -3014,7 +3014,7 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
-msgstr ""
+msgstr "Počáteční hodnota:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
