@@ -75,7 +75,7 @@ func _on_TagList_id_pressed(id: int) -> void:
 	tag_id = id
 
 
-func _on_TagList_empty_clicked() -> void:
+func _on_TagList_empty_clicked(_at_position: Vector2, _mouse_button_index: int) -> void:
 	animation_tags_list.deselect_all()
 	get_ok_button().disabled = true
 
