@@ -475,12 +475,10 @@ var fps_limit := 0:
 ## Found in Preferences. Affects the per_pixel_transparency project setting.
 ## If [code]true[/code], it allows for the window to be transparent.
 ## This affects performance, so keep it [code]false[/code] if you don't need it.
-var low_processor_usage := true:
+var update_continuously := true:
 	set(value):
-		if value == low_processor_usage:
-			return
-		low_processor_usage = value
-		OS.low_processor_usage_mode = value
+		update_continuously = value
+		OS.low_processor_usage_mode = !value
 var window_transparency := false:
 	set(value):
 		if value == window_transparency:
@@ -686,7 +684,6 @@ func _init() -> void:
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
 	single_window_mode = ProjectSettings.get_setting("display/window/subwindows/embed_subwindows")
-	low_processor_usage = ProjectSettings.get_setting("application/run/low_processor_mode")
 	window_transparency = ProjectSettings.get_setting(
 		"display/window/per_pixel_transparency/allowed"
 	)

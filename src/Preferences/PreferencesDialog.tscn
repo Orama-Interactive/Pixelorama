@@ -1058,15 +1058,15 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
-[node name="LowProcessorUsageLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+[node name="UpdateContinuouslyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
 layout_mode = 2
-tooltip_text = "If this is toggled on, the application will slow down when not used. This helps lower CPU usage when idle."
+tooltip_text = "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
 mouse_filter = 0
-text = "Lower processing speed when not in use"
+text = "Update Continuously"
 
-[node name="LowProcessorUsage" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+[node name="UpdateContinuously" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
 layout_mode = 2
-tooltip_text = "If this is toggled on, the application will slow down when not used. This helps lower CPU usage when idle."
+tooltip_text = "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
 mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
