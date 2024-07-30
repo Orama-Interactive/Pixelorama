@@ -10,25 +10,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Finnish\n"
 "Language: fi_FI\n"
-"PO-Revision-Date: 2024-07-28 23:27\n"
+"PO-Revision-Date: 2024-07-30 07:47\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 msgid "Open"
-msgstr ""
+msgstr "Avaa"
 
 msgid "Save"
-msgstr ""
+msgstr "Tallenna"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Vahvista..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Tiedoston nimi:"
 
 msgid "Project Name:"
 msgstr ""
