@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-07-28 23:27\n"
+"PO-Revision-Date: 2024-07-30 01:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,9 @@ msgstr "Includi immagini miscelate"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Se abilitata, anche le immagini sfumate finali vengono memorizzate nel pxo, per ogni fotogramma.\n"
+"Questo rende il file pxo più grande ed è utile per l'importazione da software di terze parti\n"
+"o per l'esportazione CLI. Caricamento dei file pxo in Pixelorama non ha bisogno di questa opzione per essere abilitato."
 
 msgid "Import"
 msgstr "Importa"
@@ -637,25 +639,25 @@ msgid "Export dimensions:"
 msgstr "Dimensioni dell’esportazione:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Salva un file"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Vai alla cartella precedente."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Va alla cartella successiva."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Vai alla cartella di origine."
 
 msgid "Path:"
 msgstr "Percorso:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Aggiorna i file."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Attiva/disattiva la visibilità dei file nascosti."
 
 msgid "Directories & Files:"
 msgstr "Cartelle & File:"
@@ -668,51 +670,51 @@ msgstr "File:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Tutti i File"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Tutti Riconosciuti"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Progetto Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Immagine PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Immagine BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Immagine HDR Radiance"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Immagine JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Immagine SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Immagine TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Immagine WebP"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Palette Pixelorama"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "Palette GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -1322,7 +1324,9 @@ msgstr "Lasso / Strumento di selezione gratuita\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Seleziona per disegno\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il tasto destro del mouse"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1356,7 +1360,8 @@ msgstr "Selettore colore\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Ritaglia\n\n"
+"Ridimensiona la superficie"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1462,7 +1467,7 @@ msgstr "Cambia i colori destro e sinistro."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Colore Medio:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Resetta i colori al loro stato originale (nero per sinistra, bianco per destra)"
@@ -1473,7 +1478,7 @@ msgstr "Scegli un colore dallo schermo."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Inserisci un codice esadecimale (\"#ff0000\") o un colore chiamato (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1485,19 +1490,19 @@ msgstr "Opzioni di colore"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Selezionare una modalità selettore."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Cursori Colorati"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Campioni"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Colori Recenti"
 
 msgid "Left tool"
 msgstr "Strumento sinistra"
@@ -1963,10 +1968,10 @@ msgid "Current frame as spritesheet"
 msgstr "Telaio corrente come foglio sprite"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Vai al primo fotogramma"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Vai al fotogramma precedente"
 
 msgid "Play the animation backwards (from end to beginning)"
 msgstr ""
