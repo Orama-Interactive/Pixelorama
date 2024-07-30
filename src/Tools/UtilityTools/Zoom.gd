@@ -1,8 +1,10 @@
 extends BaseTool
 
+enum ZoomMode { ZOOM_OUT, ZOOM_IN }
+
 var _relative: Vector2
-var _prev_mode := 0
-var _zoom_mode := 0
+var _prev_mode := ZoomMode.ZOOM_OUT
+var _zoom_mode := ZoomMode.ZOOM_OUT
 
 
 func _input(event: InputEvent) -> void:
@@ -19,7 +21,7 @@ func _input(event: InputEvent) -> void:
 		_zoom_mode = $ModeOptions.selected
 
 
-func _on_ModeOptions_item_selected(id: int) -> void:
+func _on_ModeOptions_item_selected(id: ZoomMode) -> void:
 	_zoom_mode = id
 	update_config()
 	save_config()
@@ -34,9 +36,7 @@ func _on_100_pressed() -> void:
 
 
 func get_config() -> Dictionary:
-	return {
-		"zoom_mode": _zoom_mode,
-	}
+	return {"zoom_mode": _zoom_mode}
 
 
 func set_config(config: Dictionary) -> void:
