@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Finnish\n"
 "Language: fi_FI\n"
-"PO-Revision-Date: 2024-07-30 07:47\n"
+"PO-Revision-Date: 2024-07-30 08:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,71 +31,71 @@ msgid "File Name:"
 msgstr "Tiedoston nimi:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Projektin nimi:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Kuvan koko"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Piirtoalueen Koko"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Kehyksen koko"
 
 msgid "Size:"
-msgstr ""
+msgstr "Koko:"
 
 msgid "Width:"
-msgstr ""
+msgstr "Leveys:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Korkeus:"
 
 msgid "Center"
-msgstr ""
+msgstr "Keskitetty"
 
 msgid "File"
-msgstr ""
+msgstr "Tiedosto"
 
 msgid "Edit"
-msgstr ""
+msgstr "Muokkaa"
 
 msgid "Select"
-msgstr ""
+msgstr "Valitse"
 
 msgid "View"
-msgstr ""
+msgstr "Näytä"
 
 msgid "Window"
-msgstr ""
+msgstr "Ikkuna"
 
 msgid "Image"
-msgstr ""
+msgstr "Kuva"
 
 msgid "Effects"
-msgstr ""
+msgstr "Tehosteet"
 
 msgid "Help"
-msgstr ""
+msgstr "Ohje"
 
 msgid "New"
-msgstr ""
+msgstr "Uusi"
 
 msgid "New..."
-msgstr ""
+msgstr "Uusi..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Avaa..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Tallenna..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Tallenna nimellä..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Sisällytä yhdistetyt kuvat"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
@@ -104,68 +104,68 @@ msgid "If enabled, the final blended images are also being stored in the pxo, fo
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "Tuo"
 
 msgid "Export"
-msgstr ""
+msgstr "Vie"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Ylikirjoita"
 
 msgid "Export..."
-msgstr ""
+msgstr "Vie..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Vie nimellä..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Vie PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Vie PNG nimellä..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Poistu"
 
 msgid "Undo"
-msgstr ""
+msgstr "Kumoa"
 
 msgid "Redo"
-msgstr ""
+msgstr "Palauta"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopioi"
 
 msgid "Cut"
-msgstr ""
+msgstr "Leikkaa"
 
 msgid "Paste"
-msgstr ""
+msgstr "Liitä"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Liitä paikalleen"
 
 msgid "Delete"
-msgstr ""
+msgstr "Poista"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Poista pysyvästi"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Siirrä roskakoriin"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Uusi Sivellin"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Skaalaa Kuva"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pikselit"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Prosentti"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -323,46 +323,46 @@ msgid "Widescreen"
 msgstr ""
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Pystynäyttö"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Peilinäkymä"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Näytä ruudukko"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Näytä Pikseliruudukko"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Näytä Viivaimet"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Näytä Ohjeet"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Näytä Hiiren Ohjeet"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Näytä Tason Tehosteet"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Kiinnitä Kohteeseen"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Kiinnitä suorakulmainen ruudukon raja"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Kiinnitä suorakulmaisen ruudukon keskustaan"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Tarraa ohjeisiin"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
