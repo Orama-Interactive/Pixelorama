@@ -172,10 +172,18 @@ void fragment() {
 		if (!origin_y_positive) {
 			current_origin.y = -current_origin.y;
 		}
+		// get origin of previous layer (used for clipping masks to work correctly)
+		vec2 prev_origin = texture(metadata, vec2(float(i - 1), 2.0 / metadata_size_float.y)).rg;
+		if (!origin_x_positive) {
+		  prev_origin.x = -prev_origin.x;
+		}
+		if (!origin_y_positive) {
+		  prev_origin.y = -prev_origin.y;
+		}
 		float current_opacity = texture(metadata, vec2(layer_index, 1.0 / metadata_size_float.y)).r;
 		vec2 uv = UV - current_origin;
 		vec4 layer_color = texture(layers, vec3(uv, float(i)));
-		vec4 prev_layer_color = texture(layers, vec3(uv, float(i - 1)));
+		vec4 prev_layer_color = texture(layers, vec3(UV - prev_origin, float(i - 1)));
 		float clipping_mask = texture(metadata, vec2(layer_index, 3.0 / metadata_size_float.y)).r;
 		layer_color.a *= prev_layer_color.a * step(0.5, clipping_mask) + 1.0 * step(clipping_mask, 0.5);
 		layer_color.a = border_trim(layer_color, uv);
