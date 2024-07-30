@@ -475,7 +475,7 @@ var fps_limit := 0:
 ## Found in Preferences. Affects the per_pixel_transparency project setting.
 ## If [code]true[/code], it allows for the window to be transparent.
 ## This affects performance, so keep it [code]false[/code] if you don't need it.
-var update_continuously := true:
+var update_continuously := false:
 	set(value):
 		update_continuously = value
 		OS.low_processor_usage_mode = !value
