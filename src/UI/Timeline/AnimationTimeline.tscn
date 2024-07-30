@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=73 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://dt6cysvv1w77u" path="res://assets/graphics/layers/fx.png" id="9_yphnd"]
 [ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="10"]
 [ext_resource type="Script" path="res://src/UI/Timeline/FrameScrollContainer.gd" id="11"]
-[ext_resource type="Script" path="res://src/UI/Timeline/PasteTagPopup.gd" id="12"]
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="19"]
 [ext_resource type="Texture2D" uid="uid://bt72662c3gp2f" path="res://assets/graphics/timeline/remove_frame.png" id="20"]
 [ext_resource type="Texture2D" uid="uid://bujrukk5ii3bi" path="res://assets/graphics/timeline/go_to_first_frame.png" id="21"]
@@ -1010,64 +1009,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 color = Color(0, 0.741176, 1, 0.501961)
-
-[node name="PasteTagPopup" type="Popup" parent="."]
-size = Vector2i(250, 335)
-min_size = Vector2i(250, 0)
-script = ExtResource("12")
-
-[node name="PanelContainer" type="PanelContainer" parent="PasteTagPopup"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PasteTagPopup/PanelContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"HeaderSmall"
-text = "Import Tags"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "From: "
-
-[node name="ProjectList" type="OptionButton" parent="PasteTagPopup/PanelContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="CreateTags" type="CheckButton" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Create new tags"
-
-[node name="Instructions" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(250, 23)
-layout_mode = 2
-text = "Available tags:"
-autowrap_mode = 3
-
-[node name="TagList" type="ItemList" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="StartFrame" type="Label" parent="PasteTagPopup/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 23)
-layout_mode = 2
-horizontal_alignment = 1
-autowrap_mode = 3
 
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/AddLayer" to="." method="add_layer"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]

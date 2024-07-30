@@ -1,12 +1,13 @@
 extends Button
 
-enum { PROPERTIES, REMOVE, CLONE, MOVE_LEFT, MOVE_RIGHT, NEW_TAG, REVERSE, CENTER }
+enum { PROPERTIES, REMOVE, CLONE, MOVE_LEFT, MOVE_RIGHT, NEW_TAG, IMPORT_TAG, REVERSE, CENTER }
 
 var frame := 0
 
 @onready var popup_menu: PopupMenu = $PopupMenu
 @onready var frame_properties := Global.control.find_child("FrameProperties") as ConfirmationDialog
 @onready var tag_properties := Global.control.find_child("TagProperties") as ConfirmationDialog
+@onready var append_tag_dialog := Global.control.find_child("ImportTagDialog") as AcceptDialog
 
 
 func _ready() -> void:
@@ -95,6 +96,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 		NEW_TAG:
 			var current_tag_id := Global.current_project.animation_tags.size()
 			tag_properties.show_dialog(Rect2i(), current_tag_id, false, indices)
+		IMPORT_TAG:
+			append_tag_dialog.prepare_and_show(frame)
 		REVERSE:
 			Global.animation_timeline.reverse_frames(indices)
 		CENTER:

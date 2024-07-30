@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dbylw5k04ulp8"]
+[gd_scene load_steps=19 format=3 uid="uid://dbylw5k04ulp8"]
 
 [ext_resource type="Theme" uid="uid://bkb4syj8110el" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c0nuukjakmai2" path="res://src/UI/Dialogs/TileModeOffsetsDialog.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://c6fyrnyt3663o" path="res://src/UI/Timeline/TagProperties.tscn" id="14_fw6cf"]
 [ext_resource type="Script" path="res://src/HandleExtensions.gd" id="15_v0k2h"]
+[ext_resource type="PackedScene" uid="uid://clsp16gq4sng3" path="res://src/UI/Dialogs/ImportTagDialog.tscn" id="16_ohhks"]
 [ext_resource type="Script" path="res://src/Classes/SteamManager.gd" id="17_k1xhp"]
 [ext_resource type="PackedScene" uid="uid://clbjfkdupw52l" path="res://src/UI/Timeline/CelProperties.tscn" id="17_ucs64"]
 [ext_resource type="PackedScene" uid="uid://clgu8wb5o6oup" path="res://src/UI/Dialogs/ExportDialog.tscn" id="39"]
@@ -87,10 +88,14 @@ dialog_autowrap = true
 [node name="CelProperties" parent="Dialogs" instance=ExtResource("17_ucs64")]
 
 [node name="FrameProperties" parent="Dialogs" instance=ExtResource("9")]
+size = Vector2i(224, 146)
 
 [node name="LayerProperties" parent="Dialogs" instance=ExtResource("13_4dhva")]
 
 [node name="TagProperties" parent="Dialogs" instance=ExtResource("14_fw6cf")]
+
+[node name="ImportTagDialog" parent="Dialogs" instance=ExtResource("16_ohhks")]
+popup_window = true
 
 [node name="TileModeOffsetsDialog" parent="Dialogs" instance=ExtResource("14")]
 

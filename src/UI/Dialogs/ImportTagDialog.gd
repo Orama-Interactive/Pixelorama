@@ -1,56 +1,57 @@
-extends Popup
+extends AcceptDialog
 
 var from_project: Project
 var create_new_tags := false
+var frame: int
+var tag_id: int
 
 @onready var from_project_list: OptionButton = %ProjectList
 @onready var create_tags: CheckButton = %CreateTags
 @onready var animation_tags_list: ItemList = %TagList
-@onready var start_frame: Label = %StartFrame
 
 
 func _ready() -> void:
-	var tag_container: Control = Global.animation_timeline.find_child("TagContainer")
 	# connect signals
-	tag_container.connect("gui_input", _on_TagContainer_gui_input)
-	from_project_list.connect("item_selected", _on_FromProject_changed)
-	animation_tags_list.connect("item_selected", _on_TagList_id_pressed)
-	create_tags.connect("toggled", _on_CreateTags_toggled)
+	from_project_list.item_selected.connect(_on_FromProject_changed)
+	animation_tags_list.item_selected.connect(_on_TagList_id_pressed)
+	animation_tags_list.empty_clicked.connect(_on_TagList_empty_clicked)
+	create_tags.toggled.connect(_on_CreateTags_toggled)
 
 
 func refresh_list() -> void:
 	animation_tags_list.clear()
-	for tag in from_project.animation_tags:
-		var img := Image.create(5, 5, true, Image.FORMAT_RGBA8)
-		img.fill(tag.color)
+	get_ok_button().disabled = true
+	for tag: AnimationTag in from_project.animation_tags:
+		var img = Image.create(from_project.size.x, from_project.size.y, true, Image.FORMAT_RGBA8)
+		DrawingAlgos.blend_layers(
+			img, from_project.frames[tag.from - 1], Vector2i.ZERO, from_project
+		)
 		var tex := ImageTexture.create_from_image(img)
 		var tag_title := tag.name
 		if tag_title == "":
 			tag_title = "(Untitled)"
-		animation_tags_list.add_item(tag_title, tex)
+		var idx = animation_tags_list.add_item(tag_title, tex)
+		animation_tags_list.set_item_custom_fg_color(idx, tag.color)
 
 
 func _on_CreateTags_toggled(pressed: bool) -> void:
 	create_new_tags = pressed
 
 
-func _on_TagContainer_gui_input(event: InputEvent) -> void:
-	if !event is InputEventMouseButton:
-		return
-	if Input.is_action_just_released("right_mouse"):
-		# Reset UI
-		from_project_list.clear()
-		if Global.projects.find(from_project) < 0:
-			from_project = Global.current_project
-		# Populate project list
-		for project in Global.projects:
-			from_project_list.add_item(project.name)
-		from_project_list.select(Global.projects.find(from_project))
-		# Populate tag list
-		refresh_list()
-		var frame_idx := Global.current_project.current_frame + 2
-		start_frame.text = str("The pasted frames will start at (Frame ", frame_idx, ")")
-		popup(Rect2i(Global.control.get_global_mouse_position(), Vector2i.ONE))
+func prepare_and_show(frame_no: int) -> void:
+	# Reset UI
+	frame = frame_no
+	from_project_list.clear()
+	if Global.projects.find(from_project) < 0:
+		from_project = Global.current_project
+	# Populate project list
+	for project in Global.projects:
+		from_project_list.add_item(project.name)
+	from_project_list.select(Global.projects.find(from_project))
+	# Populate tag list
+	refresh_list()
+	title = str("Import Tag (After Frame ", frame + 1, ")")
+	popup_centered()
 
 
 func _on_FromProject_changed(id: int) -> void:
@@ -58,16 +59,25 @@ func _on_FromProject_changed(id: int) -> void:
 	refresh_list()
 
 
-func _on_TagList_id_pressed(id: int) -> void:
-	var tag: AnimationTag = from_project.animation_tags[id]
+func _on_confirmed() -> void:
+	var tag: AnimationTag = from_project.animation_tags[tag_id]
 	var frames := []
 	for i in range(tag.from - 1, tag.to):
 		frames.append(i)
 	if create_new_tags:
-		add_animation(frames, Global.current_project.current_frame, tag)
+		add_animation(frames, frame, tag)
 	else:
-		add_animation(frames, Global.current_project.current_frame)
-	hide()
+		add_animation(frames, frame)
+
+
+func _on_TagList_id_pressed(id: int) -> void:
+	get_ok_button().disabled = false
+	tag_id = id
+
+
+func _on_TagList_empty_clicked() -> void:
+	animation_tags_list.deselect_all()
+	get_ok_button().disabled = true
 
 
 ## Gets frame indices of [member from_project] and dumps it in the current project.
@@ -236,3 +246,7 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
+
+
+func _on_close_requested() -> void:
+	hide()
