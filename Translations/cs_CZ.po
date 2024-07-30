@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-07-30 18:25\n"
+"PO-Revision-Date: 2024-07-30 19:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -284,7 +284,7 @@ msgstr "Správa rozložení"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Náhled"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
@@ -404,7 +404,7 @@ msgstr ""
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (nový projekt)"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
@@ -460,7 +460,7 @@ msgstr ""
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "Obnovit"
 
 msgid "Start frame:"
 msgstr "První snímek:"
@@ -960,10 +960,10 @@ msgid "Drop Shadow"
 msgstr "Vrhnout stín"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Odsazení X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Odsazení Y:"
 
 msgid "Shadow color:"
 msgstr "Barva stínu:"
@@ -1838,26 +1838,26 @@ msgstr "0: Barva ze štětce, 100: aktuálně vybraná barva"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Vyplnit oblast:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Podobná oblast"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Podobná barva"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Celý výběr"
 
 msgid "Fill with:"
 msgstr "Vyplnit pomocí:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Vybraná barva"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
@@ -1949,10 +1949,10 @@ msgid "Current frame:"
 msgstr "Aktuální snímek:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Režim animace:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Aktuální snímek jako spritesheet"
 
 msgid "Jump to the first frame"
 msgstr ""
