@@ -1046,7 +1046,7 @@ func _on_MergeDownLayer_pressed() -> void:
 	bottom_layer.visible = true
 
 
-func _on_OpacitySlider_value_changed(value: float) -> void:
+func _on_opacity_slider_value_changed(value: float) -> void:
 	var new_opacity := value / 100.0
 	for idx_pair in Global.current_project.selected_cels:
 		var layer := Global.current_project.layers[idx_pair[1]]
@@ -1068,13 +1068,16 @@ func _on_timeline_settings_visibility_changed() -> void:
 func _cel_switched() -> void:
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
+	# Temporarily disconnect it in order to prevent layer opacity changing
+	# in the rest of the selected layers, if there are any.
+	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
 	_update_layer_ui()
+	opacity_slider.value_changed.connect(_on_opacity_slider_value_changed)
 
 
 func _update_layer_ui() -> void:
 	var project := Global.current_project
-	var layer_opacity := project.layers[project.current_layer].opacity
-	opacity_slider.value = layer_opacity * 100
+	opacity_slider.value = project.layers[project.current_layer].opacity * 100
 	var blend_mode_index := blend_modes_button.get_item_index(
 		project.layers[project.current_layer].blend_mode
 	)
