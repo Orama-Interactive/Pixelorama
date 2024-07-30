@@ -176,6 +176,12 @@ var preferences: Array[Preference] = [
 		true
 	),
 	Preference.new(
+		"update_continuously",
+		"Performance/PerformanceContainer/UpdateContinuously",
+		"button_pressed",
+		false
+	),
+	Preference.new(
 		"window_transparency",
 		"Performance/PerformanceContainer/WindowTransparency",
 		"button_pressed",

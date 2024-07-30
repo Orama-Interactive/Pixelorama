@@ -9,7 +9,7 @@
 ## Keychain
 
 - Upstream: https://github.com/Orama-Interactive/Keychain
-- Version: [8860f66e880ff2fe876d45e681751fd6c6946558](https://github.com/Orama-Interactive/Keychain/commit/8860f66e880ff2fe876d45e681751fd6c6946558)
+- Version: [0e675303915543eb04e9c91116974e73337640fc](https://github.com/Orama-Interactive/Keychain/commit/0e675303915543eb04e9c91116974e73337640fc)
 - License: [MIT](https://github.com/Orama-Interactive/Keychain/blob/main/LICENSE)
 
 ## gdgifexporter
@@ -30,7 +30,7 @@ Files extracted from source:
 ## SmartSlicer
 
 - Upstream: https://github.com/Variable-Interactive/SmartSlicer
-- Version: Based on git commit 5d65d2ff556fed878099c96546ceb307aa3bc030 with a modification on SmartSlicePreview.gd (lines 31-32). Only the contents of addons folder are used and the script SmartSlicePreview.gd is moved to res://src/UI/Dialogs/HelperScripts/ for better organization
+- Version: Based on git commit fd2b423497a377937dbc988e309cc95afd1436ca with a modification on SmartSlicePreview.gd (lines 31-32). Only the contents of addons folder are used and the script SmartSlicePreview.gd is moved to res://src/UI/Dialogs/HelperScripts/ for better organization
 - License: [MIT](https://github.com/Variable-Interactive/SmartSlicer/blob/main/LICENSE)
 
 

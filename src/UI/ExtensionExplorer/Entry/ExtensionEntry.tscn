@@ -1,23 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnjpemuehkxsn"]
+[gd_scene load_steps=4 format=3 uid="uid://dnjpemuehkxsn"]
 
 [ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.gd" id="1_3no3v"]
 [ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2_qhsve"]
+[ext_resource type="Texture2D" uid="uid://3v78ojo0pkfg" path="res://assets/graphics/misc/external_link.svg" id="3_ujt8o"]
 
-[node name="ExtensionEntry" type="Panel"]
+[node name="ExtensionEntry" type="PanelContainer"]
 self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
 custom_minimum_size = Vector2(300, 150)
-offset_right = 284.0
+offset_right = 310.0
 offset_bottom = 150.0
 size_flags_horizontal = 3
 script = ExtResource("1_3no3v")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -67,10 +63,21 @@ layout_mode = 2
 [node name="ProgressTimer" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar"]
 wait_time = 0.1
 
-[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Download"
+
+[node name="ReadmeButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "README"
+icon = ExtResource("3_ujt8o")
 
 [node name="RequestDelay" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -98,6 +105,7 @@ offset_bottom = -49.0
 horizontal_alignment = 1
 
 [node name="EnlardedThumbnail" type="Window" parent="."]
+title = "Image"
 position = Vector2i(0, 36)
 size = Vector2i(440, 360)
 visible = false
@@ -111,11 +119,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 stretch_mode = 5
 
 [connection signal="timeout" from="MarginContainer/HBoxContainer/VBoxContainer/Done/DoneDelay" to="." method="_on_DoneDelay_timeout"]
 [connection signal="timeout" from="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar/ProgressTimer" to="." method="_on_ProgressTimer_timeout"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/DownloadButton" to="." method="_on_Download_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/DownloadButton" to="." method="_on_Download_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/ReadmeButton" to="." method="_on_readme_button_pressed"]
 [connection signal="timeout" from="RequestDelay" to="." method="_on_RequestDelay_timeout"]
 [connection signal="request_completed" from="ImageRequest" to="." method="_on_ImageRequest_request_completed"]
 [connection signal="request_completed" from="DownloadRequest" to="." method="_on_DownloadRequest_request_completed"]

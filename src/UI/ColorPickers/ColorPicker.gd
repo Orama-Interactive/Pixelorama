@@ -3,8 +3,15 @@ extends Container
 const VALUE_ARROW := preload("res://assets/graphics/misc/value_arrow_right.svg")
 const VALUE_ARROW_EXPANDED := preload("res://assets/graphics/misc/value_arrow.svg")
 
-## The swatches button of the [ColorPicker] node. Used to ensure that swatches are always invisible
+## The internal control node of the HSV Rectangle of the [ColorPicker] node.
+var hsv_rectangle_control: Control
+## The internal aspect ratio container node of other color shapes of the [ColorPicker] node.
+var shape_aspect_ratio: AspectRatioContainer
+## The internal swatches button of the [ColorPicker] node.
+## Used to ensure that swatches are always invisible.
 var swatches_button: Button
+## The internal container for the color sliders of the [ColorPicker] node.
+var color_sliders_vbox: VBoxContainer
 @onready var color_picker := %ColorPicker as ColorPicker
 @onready var color_buttons := %ColorButtons as HBoxContainer
 @onready var left_color_rect := %LeftColorRect as ColorRect
@@ -36,10 +43,10 @@ func _ready() -> void:
 	var shapes_container := picker_vbox_container.get_child(0, true) as HBoxContainer
 	shapes_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	# The Control of the HSV Rectangle picker shape
-	var hsv_rectangle_control := shapes_container.get_child(0, true) as Control
+	hsv_rectangle_control = shapes_container.get_child(0, true) as Control
 	hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
 	# The AspectRatioContainer that holds the rest of the picker shapes
-	var shape_aspect_ratio := shapes_container.get_child(1, true) as AspectRatioContainer
+	shape_aspect_ratio = shapes_container.get_child(1, true) as AspectRatioContainer
 	shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
 	# The HBoxContainer of the screen color picker, the color preview rectangle and the
 	# button that lets users change the picker shape. It is visible because
@@ -60,6 +67,11 @@ func _ready() -> void:
 	color_buttons.get_parent().remove_child(color_buttons)
 	sampler_cont.add_child(color_buttons)
 	sampler_cont.move_child(color_buttons, 0)
+
+	var empty_vbox_container := picker_vbox_container.get_child(3, true) as VBoxContainer
+	empty_vbox_container.visible = false
+	color_sliders_vbox = picker_vbox_container.get_child(4, true) as VBoxContainer
+	color_sliders_vbox.visible = false
 	swatches_button = picker_vbox_container.get_child(5, true) as Button
 	swatches_button.visible = false
 	# The GridContainer that contains the swatch buttons. These are not visible in our case
@@ -72,6 +84,16 @@ func _ready() -> void:
 	expand_button.get_parent().remove_child(expand_button)
 	picker_vbox_container.add_child(expand_button)
 	picker_vbox_container.move_child(expand_button, 2)
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_THEME_CHANGED and is_instance_valid(hsv_rectangle_control):
+		# If there's a theme change, reset the custom minimum sizes of the color shapes
+		await get_tree().process_frame
+		hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
+		shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
+	elif what == NOTIFICATION_TRANSLATION_CHANGED:
+		_average(left_color_rect.color, right_color_rect.color)
 
 
 func _on_color_picker_color_changed(color: Color) -> void:
@@ -122,13 +144,15 @@ func _on_expand_button_toggled(toggled_on: bool) -> void:
 	color_picker.presets_visible = toggled_on
 	if is_instance_valid(swatches_button):
 		swatches_button.visible = false
+	if is_instance_valid(color_sliders_vbox):
+		color_sliders_vbox.visible = toggled_on
 	Global.config_cache.set_value("color_picker", "is_expanded", toggled_on)
 
 
 func _average(color_1: Color, color_2: Color) -> void:
 	var average := (color_1 + color_2) / 2.0
 	var copy_button := average_color.get_parent() as Control
-	copy_button.tooltip_text = str("Average Color:\n#", average.to_html())
+	copy_button.tooltip_text = str(tr("Average Color:"), "\n#", average.to_html())
 	average_color.color = average
 
 

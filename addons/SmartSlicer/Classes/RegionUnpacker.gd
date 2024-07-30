@@ -1,8 +1,9 @@
 class_name RegionUnpacker
 extends RefCounted
-
 # THIS CLASS TAKES INSPIRATION FROM PIXELORAMA'S FLOOD FILL
 # AND HAS BEEN MODIFIED FOR OPTIMIZATION
+
+enum { DETECT_VERTICAL_EMPTY_LINES, DETECT_HORIZONTAL_EMPTY_LINES }
 
 var slice_thread := Thread.new()
 
@@ -44,10 +45,12 @@ func _init(threshold: int, merge_dist: int) -> void:
 	_merge_dist = merge_dist
 
 
-func get_used_rects(image: Image) -> RectData:
+func get_used_rects(
+	image: Image, lazy_check := false, scan_dir := DETECT_VERTICAL_EMPTY_LINES
+) -> RectData:
 	if ProjectSettings.get_setting("rendering/driver/threads/thread_model") != 2:
 		# Single-threaded mode
-		return get_rects(image)
+		return get_rects(image, lazy_check, scan_dir)
 	else:  # Multi-threaded mode
 		if slice_thread.is_started():
 			slice_thread.wait_to_finish()
@@ -55,30 +58,74 @@ func get_used_rects(image: Image) -> RectData:
 		if error == OK:
 			return slice_thread.wait_to_finish()
 		else:
-			return get_rects(image)
+			return get_rects(image, lazy_check, scan_dir)
 
 
-func get_rects(image: Image) -> RectData:
+func get_rects(
+	image: Image, lazy_check := false, scan_dir := DETECT_VERTICAL_EMPTY_LINES
+) -> RectData:
+	var skip_amount = 0
 	# Make a smaller image to make the loop shorter
 	var used_rect := image.get_used_rect()
 	if used_rect.size == Vector2i.ZERO:
 		return clean_rects([])
 	var test_image := image.get_region(used_rect)
 	# Prepare a bitmap to keep track of previous places
-	var scanned_area := BitMap.new()
-	scanned_area.create(test_image.get_size())
+	var scanned_area := Image.create(
+		test_image.get_size().x, test_image.get_size().y, false, Image.FORMAT_LA8
+	)
 	# Scan the image
 	var rects: Array[Rect2i] = []
 	var frame_size := Vector2i.ZERO
-	for y in test_image.get_size().y:
-		for x in test_image.get_size().x:
-			var position := Vector2i(x, y)
+
+	var found_pixels_this_line := false
+	var has_jumped_last_line := false
+	var scanned_lines := PackedInt32Array()
+	var side_a: int
+	var side_b: int
+	match scan_dir:
+		DETECT_VERTICAL_EMPTY_LINES:
+			side_a = test_image.get_size().x
+			side_b = test_image.get_size().y
+		DETECT_HORIZONTAL_EMPTY_LINES:
+			side_a = test_image.get_size().y
+			side_b = test_image.get_size().x
+	var line := 0
+	while line < side_a:
+		for element: int in side_b:
+			var position := Vector2i(line, element)
+			if scan_dir == DETECT_HORIZONTAL_EMPTY_LINES:
+				position = Vector2i(element, line)
 			if test_image.get_pixelv(position).a > 0:  # used portion of image detected
-				if !scanned_area.get_bitv(position):
+				found_pixels_this_line = true
+				if scanned_area.get_pixelv(position).a == 0:
 					var rect := _estimate_rect(test_image, position)
-					scanned_area.set_bit_rect(rect, true)
+					scanned_area.fill_rect(rect, Color.WHITE)
 					rect.position += used_rect.position
 					rects.append(rect)
+		if lazy_check:
+			if !line in scanned_lines:
+				scanned_lines.append(line)
+
+			if found_pixels_this_line and not has_jumped_last_line:
+				found_pixels_this_line = false
+				line += 1
+				if line in scanned_lines:  ## We have scanned all skipped lines, re calculate current index
+					scanned_lines.sort()
+					line = scanned_lines[-1] + 1
+			elif not found_pixels_this_line:
+				## we haven't found any pixels in this line and are assuming next line is empty as well
+				skip_amount += 1
+				has_jumped_last_line = true
+				line += 1 + skip_amount
+			elif found_pixels_this_line and has_jumped_last_line:
+				found_pixels_this_line = false
+				has_jumped_last_line = false
+				## if we skipped a line then go back and make sure it was really empty or not
+				line -= skip_amount
+				skip_amount = 0
+		else:
+			line += 1
 	var rects_info := clean_rects(rects)
 	rects_info.rects.sort_custom(sort_rects)
 	return rects_info
@@ -86,7 +133,7 @@ func get_rects(image: Image) -> RectData:
 
 func clean_rects(rects: Array[Rect2i]) -> RectData:
 	var frame_size := Vector2i.ZERO
-	for i in rects.size():
+	for i: int in rects.size():
 		var target: Rect2i = rects.pop_front()
 		var test_rect := target
 		if (
@@ -96,7 +143,7 @@ func clean_rects(rects: Array[Rect2i]) -> RectData:
 			test_rect.size += Vector2i(_merge_dist, _merge_dist)
 			test_rect.position -= Vector2i(_merge_dist, _merge_dist) / 2
 		var merged := false
-		for rect_i in rects.size():
+		for rect_i: int in rects.size():
 			if test_rect.intersects(rects[rect_i]):
 				rects[rect_i] = target.merge(rects[rect_i])
 				merged = true
@@ -215,18 +262,12 @@ func _flood_fill(position: Vector2i, image: Image) -> Rect2i:
 	_compute_segments_for_image(position, image)
 	# now actually color the image: since we have already checked a few things for the points
 	# we'll process here, we're going to skip a bunch of safety checks to speed things up.
-
-	var final_image := Image.new()
-	final_image.copy_from(image)
-	final_image.fill(Color.TRANSPARENT)
-	_select_segments(final_image)
-
-	return final_image.get_used_rect()
+	return _select_segments()
 
 
 func _compute_segments_for_image(position: Vector2i, image: Image) -> void:
 	# initially allocate at least 1 segment per line of image
-	for j in image.get_height():
+	for j: int in image.get_height():
 		_add_new_segment(j)
 	# start flood algorithm
 	_flood_line_around_point(position, image)
@@ -235,7 +276,7 @@ func _compute_segments_for_image(position: Vector2i, image: Image) -> void:
 	while not done:
 		done = true
 		var max_index := _allegro_flood_segments.size()
-		for c in max_index:
+		for c: int in max_index:
 			var p := _allegro_flood_segments[c]
 			if p.todo_below:  # check below the segment?
 				p.todo_below = false
@@ -247,11 +288,16 @@ func _compute_segments_for_image(position: Vector2i, image: Image) -> void:
 					done = false
 
 
-func _select_segments(map: Image) -> void:
+func _select_segments() -> Rect2i:
 	# short circuit for flat colors
-	for c in _allegro_image_segments.size():
+	var used_rect := Rect2i()
+	for c: int in _allegro_image_segments.size():
 		var p := _allegro_image_segments[c]
 		var rect := Rect2i()
 		rect.position = Vector2i(p.left_position, p.y)
 		rect.end = Vector2i(p.right_position + 1, p.y + 1)
-		map.fill_rect(rect, Color.WHITE)
+		if used_rect.size == Vector2i.ZERO:
+			used_rect = rect
+		else:
+			used_rect = used_rect.merge(rect)
+	return used_rect

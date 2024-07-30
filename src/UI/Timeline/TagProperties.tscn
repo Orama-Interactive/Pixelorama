@@ -77,3 +77,4 @@ scroll_fit_content_height = true
 
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_custom_action"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

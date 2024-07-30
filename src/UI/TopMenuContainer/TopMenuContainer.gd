@@ -4,7 +4,7 @@ const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v011---2023-06-13"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v10---2024-07-29"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -94,9 +94,22 @@ func _ready() -> void:
 	_setup_help_menu()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and Global.current_project != null:
+		_update_file_menu_buttons(Global.current_project)
+
+
 func _project_switched() -> void:
 	var project := Global.current_project
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
+	_update_file_menu_buttons(project)
+	for j in Tiles.MODE.values():
+		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
+
+	_update_current_frame_mark()
+
+
+func _update_file_menu_buttons(project: Project) -> void:
 	if project.export_directory_path.is_empty():
 		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
 	else:
@@ -109,10 +122,6 @@ func _project_switched() -> void:
 			file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export") + f_name)
 	else:
 		file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
-	for j in Tiles.MODE.values():
-		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
-
-	_update_current_frame_mark()
 
 
 func _update_current_frame_mark() -> void:

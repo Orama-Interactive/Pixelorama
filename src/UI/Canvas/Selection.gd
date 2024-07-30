@@ -821,7 +821,7 @@ func new_brush() -> void:
 func select_all() -> void:
 	var undo_data_tmp := get_undo_data(false)
 	clear_selection()
-	var full_rect := Rect2i(Vector2.ZERO, Global.current_project.size)
+	var full_rect := Rect2i(Vector2i.ZERO, Global.current_project.size)
 	select_rect(full_rect)
 	commit_undo("Select", undo_data_tmp)
 

@@ -48,7 +48,8 @@ text = "Reference Images"
 [node name="Tip" type="Label" parent="ScrollContainer/Container"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-text = "Select an image below to change its properties."
+text = "Select an image below to change its properties.
+Note that you cannot draw while a reference image is selected."
 autowrap_mode = 2
 
 [node name="Tools" type="HBoxContainer" parent="ScrollContainer/Container"]
@@ -329,7 +330,7 @@ max_value = 180.0
 
 [node name="ColorLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
 layout_mode = 2
-text = "Color Options"
+text = "Color options"
 
 [node name="Spacer2" type="Control" parent="ScrollContainer/Container/ReferenceEdit/Options"]
 layout_mode = 2

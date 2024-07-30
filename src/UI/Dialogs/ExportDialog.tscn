@@ -151,7 +151,7 @@ popup/item_0/text = "Forward"
 popup/item_0/id = 0
 popup/item_1/text = "Backwards"
 popup/item_1/id = 1
-popup/item_2/text = "Ping-pong"
+popup/item_2/text = "Ping-Pong"
 popup/item_2/id = 2
 
 [node name="ResizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]

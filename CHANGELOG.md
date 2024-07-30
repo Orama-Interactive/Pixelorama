@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.0] - Unreleased
+## [v1.0] - 2024-07-29
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt), [RorotoSic](https://github.com/RorotoSic), Ivan Kruger ([haythamnikolaidis](https://github.com/haythamnikolaidis)), [Kiisu_Master](https://github.com/Kiisu-Master), [Anaminus](https://github.com/Anaminus)
 
@@ -14,6 +14,7 @@ Built using Godot 4.2.2
 - Multiple layer blend modes are finally here! Note that group blending is not currently supported. [#911](https://github.com/Orama-Interactive/Pixelorama/pull/911)
 - Non-destructive layer effects have been implemented. [#940](https://github.com/Orama-Interactive/Pixelorama/pull/940)
 - A new curve tool has been implemented. It contains a "fill shape" tool option, allowing it to be used as a polygon tool as well. [#1019](https://github.com/Orama-Interactive/Pixelorama/pull/1019)
+- [Pixelorama is now available on Steam!](https://store.steampowered.com/app/2779170). Consider purchasing on Steam as a way to support the development of the project, and getting benefits such as automatic updates and even Steam Achievements!
 - An extension explorer has been integrated into Pixelorama, allowing for easy extension downloading from the internet. [#910](https://github.com/Orama-Interactive/Pixelorama/pull/910)
 - Export to video formats. FFMPEG is required to be installed in the device in order for video exporting to work. [#980](https://github.com/Orama-Interactive/Pixelorama/pull/980)
 - Importing video formats and gif files is also possible, but FFMPEG is again required for this.
@@ -82,6 +83,7 @@ Built using Godot 4.2.2
 - When attempting to enable an extension, a confirmation dialog appears, as an extra security step.
 - The aspect ratio button in the Scale Image dialog is toggled on by default.
 - Negative values in shading tool options are now allowed. [#1015](https://github.com/Orama-Interactive/Pixelorama/issues/1015)
+- If "Include frame tags in the file name" is enabled in the export window, the tag name is included even when exporting a single file.
 - When deleting an extension, a confirmation window now appears that lets users either to delete the palette permanently, move it to trash, or cancel. [#919](https://github.com/Orama-Interactive/Pixelorama/pull/919)
 - "Developers" and "Contributors" have been merged into "Authors" in the About dialog. "Donate" has also been removed from there, and a new "Support Pixelorama's Development" option has been added to the Help menu.
 

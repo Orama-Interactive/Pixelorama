@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-05-29 17:33\n"
+"PO-Revision-Date: 2024-07-29 00:29\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -100,10 +100,10 @@ msgstr "Συμπερίληψη αναμεμειγμένων εικόνων"
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
-"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.\n"
+"or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
 msgstr "Αν είναι ενεργοποιημένο, οι τελικές αναμεμειγμένες εικόνες αποθηκεύονται επίσης στο pxo, για κάθε καρέ.\n"
 "Αυτό κάνει το αρχείο pxo μεγαλύτερο και είναι χρήσιμο για την εισαγωγή από λογισμικό τρίτων\n"
-"ή για την εξαγωγή μέσω CLI. Η φόρτωση αρχείων pxo στο Pixelorama δεν χρειάζεται αυτή την επιλογή να είναι ενεργοποιημένη.\n"
+"ή για την εξαγωγή μέσω CLI. Η φόρτωση αρχείων pxo στο Pixelorama δεν χρειάζεται αυτή την επιλογή να είναι ενεργοποιημένη."
 
 msgid "Import"
 msgstr "Εισαγωγή"
@@ -638,8 +638,26 @@ msgstr "Ετικέτες ανά γραμμή"
 msgid "Export dimensions:"
 msgstr "Διαστάσεις εξαγωγής:"
 
+msgid "Save a File"
+msgstr "Αποθήκευση αρχείου"
+
+msgid "Go to previous folder."
+msgstr "Μετάβαση στον προηγούμενο φάκελο."
+
+msgid "Go to next folder."
+msgstr "Μετάβαση στον επόμενο φάκελο."
+
+msgid "Go to parent folder."
+msgstr "Μετάβαση στον γονικό φάκελο."
+
 msgid "Path:"
 msgstr "Διαδρομή:"
+
+msgid "Refresh files."
+msgstr "Ανανέωση αρχείων."
+
+msgid "Toggle the visibility of hidden files."
+msgstr "Εναλλαγή ορατότητας των κρυφών αρχείων."
 
 msgid "Directories & Files:"
 msgstr "Φάκελοι & Αρχεία:"
@@ -649,6 +667,54 @@ msgstr "Δημιουργία Φακέλου"
 
 msgid "File:"
 msgstr "Αρχείο:"
+
+#. Found in "Open" and "Save" file dialogs. Searches all file types.
+msgid "All Files"
+msgstr "Όλα τα αρχεία"
+
+#. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
+msgid "All Recognized"
+msgstr "Όλα τα αναγνωρισμένα"
+
+#. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
+msgid "Pixelorama Project"
+msgstr "Έργο Pixelorama"
+
+#. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
+msgid "PNG Image"
+msgstr "Εικόνα PNG"
+
+#. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
+msgid "BMP Image"
+msgstr "Εικόνα BMP"
+
+#. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
+msgid "Radiance HDR Image"
+msgstr "Εικόνα Radiance HDR"
+
+#. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
+msgid "JPEG Image"
+msgstr "Εικόνα JPEG"
+
+#. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
+msgid "SVG Image"
+msgstr "Εικόνα SVG"
+
+#. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
+msgid "TGA Image"
+msgstr "Εικόνα TGA"
+
+#. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
+msgid "WebP Image"
+msgstr "Εικόνα WebP"
+
+#. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
+msgid "Pixelorama palette"
+msgstr "Παλέτα Pixelorama"
+
+#. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
+msgid "GIMP palette"
+msgstr "Παλέτα GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -1028,8 +1094,9 @@ msgstr "Ηλεκτρονική τεκμηρίωση"
 msgid "Issue Tracker"
 msgstr "Καταγραφές προβλημάτων"
 
-msgid "Open Logs Folder"
-msgstr "Άνοιγμα φακέλου αρχείων καταγραφής"
+#. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
+msgid "Open Editor Data Folder"
+msgstr "Άνοιγμα φακέλου δεδομένων προγράμματος"
 
 msgid "Changelog"
 msgstr "Καταγραφές αλλαγών"
@@ -1254,6 +1321,13 @@ msgstr "Ελεύθερη επιλογή\n\n"
 "%s για το αριστερό κουμπί ποντικιού\n"
 "%s για το δεξί κουμπί ποντικιού"
 
+msgid "Select by Drawing\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Επιλογή κατά χρώμα\n\n"
+"%s για το αριστερό κουμπί ποντικιού\n"
+"%s για το δεξί κουμπί ποντικιού"
+
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1283,6 +1357,11 @@ msgstr "Επιλογέας χρωμάτων\n\n"
 "%s για αριστερό πλήκτρο του ποντικιού\n"
 "%s για δεξί πλήκτρο του ποντικιού\n\n"
 "Επιλέξτε ένα χρώμα από ένα εικονοστοιχείο του αντικειμένου"
+
+msgid "Crop\n\n"
+"Resize the canvas"
+msgstr "Περικοπή\n\n"
+"Αλλαγή μεγέθους του καμβά"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1386,12 +1465,20 @@ msgstr "Επιλέξτε ένα χρώμα για το δεξί εργαλείο
 msgid "Switch left and right colors."
 msgstr "Εναλλαγή μεταξύ αριστερού και δεξιού χρώματος."
 
+#. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
+msgid "Average Color:"
+msgstr "Μέσος όρος χρώματος:"
+
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Επαναφορά των χρωμάτων στην αρχική τους κατάσταση (μαύρο για το αριστερό, άσπρο για το δεξί)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
 msgstr "Επιλέξτε ένα χρώμα από την οθόνη."
+
+#. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
+msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
+msgstr "Εισάγετε έναν δεκαεξαδικό κωδικό (\"#ff0000\") ή χρώμα με όνομα (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1400,6 +1487,22 @@ msgstr "Επιλέξτε ένα σχήμα επιλογέα."
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
 msgstr "Επιλογές χρώματος"
+
+#. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
+msgid "Select a picker mode."
+msgstr "Επιλέξτε μια λειτουργία επιλογής."
+
+#. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
+msgid "Colorized Sliders"
+msgstr "Χρωματιστά sliders"
+
+#. Shows saved colors in certain color picker menus.
+msgid "Swatches"
+msgstr "Swatches"
+
+#. Found under color options in the color picker panel.
+msgid "Recent Colors"
+msgstr "Πρόσφατα χρώματα"
 
 msgid "Left tool"
 msgstr "Αριστερό εργαλείο"
@@ -1864,23 +1967,23 @@ msgstr "Λειτουργία κίνησης:"
 msgid "Current frame as spritesheet"
 msgstr "Τρέχον πλαίσιο ως φύλλο καρέ"
 
-msgid "Jump to the first frame\n"
-msgstr "Μετάβαση στο πρώτο καρέ\n"
+msgid "Jump to the first frame"
+msgstr "Μετάβαση στο πρώτο καρέ"
 
-msgid "Go to the previous frame\n"
-msgstr "Μετάβαση στο προηγούμενο καρέ\n"
+msgid "Go to the previous frame"
+msgstr "Μετάβαση στο προηγούμενο καρέ"
 
-msgid "Play the animation backwards (from end to beginning)\n"
-msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n"
+msgid "Play the animation backwards (from end to beginning)"
+msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)"
 
-msgid "Play the animation forward (from beginning to end)\n"
-msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n"
+msgid "Play the animation forward (from beginning to end)"
+msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)"
 
-msgid "Go to the next frame\n"
-msgstr "Μετάβαση στο επόμενο καρέ\n"
+msgid "Go to the next frame"
+msgstr "Μετάβαση στο επόμενο καρέ"
 
-msgid "Jump to the last frame\n"
-msgstr "Μετάβαση στο τελευταίο καρέ\n"
+msgid "Jump to the last frame"
+msgstr "Μετάβαση στο τελευταίο καρέ"
 
 msgid "Timeline settings"
 msgstr "Ρυθμίσεις χρονοδιαγράμματος"
@@ -3001,9 +3104,27 @@ msgstr "Αναπήδηση προς το τέλος"
 msgid "Monochrome"
 msgstr "Μονόχρωμο"
 
+#. Found in the Reference Images panel when no reference image has been imported.
+msgid "When opening an image, it may be imported as a reference."
+msgstr "Όταν ανοίγει μια εικόνα, μπορεί να εισαχθεί ως αναφορά."
+
+#. Found in the Reference Images panel after a reference image has been imported.
+msgid "Select an image below to change its properties.\n"
+"Note that you cannot draw while a reference image is selected."
+msgstr "Επιλέξτε μια εικόνα παρακάτω για να αλλάξετε τις ιδιότητές της.\n"
+"Σημειώστε ότι δεν μπορείτε να σχεδιάσετε ενώ έχει επιλεγεί μια εικόνα αναφοράς."
+
+#. Removes the selected reference image.
+msgid "Remove"
+msgstr "Αφαίρεση"
+
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
-msgid "Hold Shift while pressing to instantly remove"
-msgstr "Κρατήστε πατημένο το Shift για άμεση αφαίρεση"
+msgid "Hold Shift while pressing to instantly remove."
+msgstr "Κρατήστε πατημένο το Shift για άμεση αφαίρεση."
+
+#. Shown in the confirmation dialog for removing a reference image.
+msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
+msgstr "Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτή την εικόνα αναφοράς? Δεν θα διαγραφεί από το σύστημα αρχείων σας."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3028,6 +3149,38 @@ msgstr "Περιστροφή της επιλεγμένης εικόνας ανα
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Κλιμάκωση της επιλεγμένης εικόνας αναφοράς"
+
+#. Button to select no reference images in the Reference Images panel.
+msgid "none"
+msgstr "κανένα"
+
+#. Resets the Transform of the selected reference image on the canvas.
+msgid "Reset Transform"
+msgstr "Επαναφορά μετατροπής"
+
+#. Position of the selected reference image on the canvas.
+msgid "Position"
+msgstr "Τοποθεσία"
+
+#. Scale of the selected reference image on the canvas.
+msgid "Scale"
+msgstr "Κλιμάκωση"
+
+#. Rotation of the selected reference image on the canvas.
+msgid "Rotation"
+msgstr "Περιστροφή"
+
+#. Toggle filter of the selected reference image on the canvas.
+msgid "Filter"
+msgstr "Φίλτρο"
+
+#. Opacity of the selected reference image on the canvas.
+msgid "Opacity"
+msgstr "Αδιαφάνεια"
+
+#. Color clamping of the selected reference image on the canvas.
+msgid "Color Clamping"
+msgstr "Περιορισμός χρωμάτων"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"

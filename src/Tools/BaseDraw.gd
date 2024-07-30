@@ -222,7 +222,7 @@ func update_mask(can_skip := true) -> void:
 	_mask = PackedFloat32Array(nulled_array)
 
 
-func update_line_polylines(start: Vector2, end: Vector2) -> void:
+func update_line_polylines(start: Vector2i, end: Vector2i) -> void:
 	var indicator := _create_line_indicator(_indicator, start, end)
 	_line_polylines = _create_polylines(indicator)
 
@@ -652,7 +652,7 @@ func _create_line_indicator(indicator: BitMap, start: Vector2i, end: Vector2i) -
 
 
 func _blit_indicator(dst: BitMap, indicator: BitMap, pos: Vector2i) -> void:
-	var rect := Rect2i(Vector2.ZERO, dst.get_size())
+	var rect := Rect2i(Vector2i.ZERO, dst.get_size())
 	var brush_size := indicator.get_size()
 	pos -= brush_size / 2
 	for y in brush_size.y:

@@ -1058,6 +1058,19 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
+[node name="UpdateContinuouslyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+layout_mode = 2
+tooltip_text = "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+mouse_filter = 0
+text = "Update Continuously"
+
+[node name="UpdateContinuously" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+layout_mode = 2
+tooltip_text = "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
 [node name="WindowTransparencyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
 layout_mode = 2
 tooltip_text = "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."

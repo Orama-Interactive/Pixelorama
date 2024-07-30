@@ -17,7 +17,7 @@ func _ready() -> void:
 		_extension_loaded(extension, extension_name)
 	extensions.extension_loaded.connect(_extension_loaded)
 	extensions.extension_uninstalled.connect(_extension_uninstalled)
-	delete_confirmation.add_button(tr("Move to Trash"), false, Extensions.BIN_ACTION)
+	delete_confirmation.add_button("Move to Trash", false, Extensions.BIN_ACTION)
 	if OS.get_name() == "Web":
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false

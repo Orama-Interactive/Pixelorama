@@ -1,6 +1,7 @@
 // Maps the color of the input to the nearest color in the selected palette.
 // Similar to Krita's Palettize filter
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform sampler2D palette_texture : filter_nearest;
 uniform sampler2D selection : filter_nearest;

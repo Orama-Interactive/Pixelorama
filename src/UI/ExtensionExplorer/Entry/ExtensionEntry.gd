@@ -1,9 +1,10 @@
 class_name ExtensionEntry
-extends Panel
+extends PanelContainer
 
 var sha256 := ""
 var thumbnail := ""
 var download_link := ""
+var readme_link := ""
 var download_path := ""
 var tags := PackedStringArray()
 var is_update := false  ## An update instead of download
@@ -18,6 +19,7 @@ var is_update := false  ## An update instead of download
 @onready var thumbnail_request := %ImageRequest as HTTPRequest
 @onready var extension_downloader := %DownloadRequest as HTTPRequest
 @onready var down_button := %DownloadButton as Button
+@onready var readme_button := %ReadmeButton as Button
 @onready var progress_bar := %ProgressBar as ProgressBar
 @onready var done_label := %Done as Label
 @onready var alert_dialog := %Alert as AcceptDialog
@@ -27,6 +29,8 @@ func set_info(info: Dictionary, extension_path: String) -> void:
 	if "name" in info.keys() and "version" in info.keys():
 		ext_name.text = str(info["name"], "-v", info["version"])
 		# check for updates
+		if typeof(info["version"]) == TYPE_STRING:
+			info["version"] = str_to_var(info["version"])
 		change_button_if_updatable(info["name"], info["version"])
 		# Setting a path extension will be "temporarily" downloaded to before install
 		var temp_dir = extension_path.path_join("Download")
@@ -38,6 +42,12 @@ func set_info(info: Dictionary, extension_path: String) -> void:
 	if "description" in info.keys():
 		ext_discription.text = info["description"]
 		ext_discription.tooltip_text = ext_discription.text
+	if "readme" in info.keys():
+		readme_link = info["readme"]
+		readme_link = readme_link.strip_edges()
+		if readme_link != "":
+			readme_button.visible = true
+			readme_button.tooltip_text = readme_link
 	if "thumbnail" in info.keys():
 		thumbnail = info["thumbnail"]
 	if "download_link" in info.keys():
@@ -67,6 +77,10 @@ func _on_ImageRequest_request_completed(
 	var texture := ImageTexture.create_from_image(image)
 	small_picture.texture_normal = texture
 	small_picture.pressed.connect(enlarge_thumbnail.bind(texture))
+
+
+func _on_readme_button_pressed() -> void:
+	OS.shell_open(readme_link)
 
 
 func _on_Download_pressed() -> void:

@@ -93,3 +93,7 @@ func _on_custom_action(action: StringName) -> void:
 	Global.current_project.undo_redo.commit_action()
 
 	hide()
+
+
+func _on_visibility_changed() -> void:
+	Global.dialog_open(visible)

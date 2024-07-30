@@ -92,6 +92,6 @@ func _flip_selection(project := Global.current_project) -> void:
 	project.selection_map.fill(Color(0, 0, 0, 0))
 	project.selection_map.blend_rect(
 		smaller_bitmap_image,
-		Rect2i(Vector2.ZERO, smaller_bitmap_image.get_size()),
+		Rect2i(Vector2i.ZERO, smaller_bitmap_image.get_size()),
 		selection_rect.position
 	)

@@ -475,6 +475,10 @@ var fps_limit := 0:
 ## Found in Preferences. Affects the per_pixel_transparency project setting.
 ## If [code]true[/code], it allows for the window to be transparent.
 ## This affects performance, so keep it [code]false[/code] if you don't need it.
+var update_continuously := false:
+	set(value):
+		update_continuously = value
+		OS.low_processor_usage_mode = !value
 var window_transparency := false:
 	set(value):
 		if value == window_transparency:
@@ -654,6 +658,11 @@ func _init() -> void:
 	# Load settings from the config file
 	config_cache.load(CONFIG_PATH)
 	loaded_locales.sort()  # Make sure locales are always sorted
+	var saved_locale := OS.get_locale()
+	# Load language
+	if config_cache.has_section_key("preferences", "locale"):
+		saved_locale = config_cache.get_value("preferences", "locale")
+	set_locale(saved_locale, false)  # If no language is saved, OS' locale is used
 	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	if OS.get_name() == "macOS":
@@ -682,11 +691,6 @@ func _init() -> void:
 
 func _ready() -> void:
 	_initialize_keychain()
-	var saved_locale := OS.get_locale()
-	# Load language
-	if config_cache.has_section_key("preferences", "locale"):
-		saved_locale = config_cache.get_value("preferences", "locale")
-	set_locale(saved_locale)  # If no language is saved, OS' locale is used
 	default_width = config_cache.get_value("preferences", "default_width", default_width)
 	default_height = config_cache.get_value("preferences", "default_height", default_height)
 	default_fill_color = config_cache.get_value(
@@ -999,7 +1003,7 @@ func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStr
 	return res
 
 
-func set_locale(locale: String) -> void:
+func set_locale(locale: String, load_keychain := true) -> void:
 	locale = find_nearest_locale(locale)
 	if not locale in TranslationServer.get_loaded_locales():
 		var translation := load("res://Translations/%s.po" % locale)
@@ -1008,7 +1012,8 @@ func set_locale(locale: String) -> void:
 		else:
 			printerr("Translation %s for locale %s failed to load." % [translation, locale])
 			return
-		Keychain.load_translation(locale)
+		if load_keychain:
+			Keychain.load_translation(locale)
 	TranslationServer.set_locale(locale)
 
 
