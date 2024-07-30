@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-07-30 01:22\n"
+"PO-Revision-Date: 2024-07-30 02:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1974,16 +1974,16 @@ msgid "Go to the previous frame"
 msgstr "Vai al fotogramma precedente"
 
 msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgstr "Riproduci l'animazione al contrario (da fine a inizio)"
 
 msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgstr "Riproduce l'animazione in avanti (dall'inizio alla fine)"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Vai al prossimo fotogramma"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Vai all'ultimo fotogramma"
 
 msgid "Timeline settings"
 msgstr "Impostazioni della timeline"
@@ -3106,24 +3106,25 @@ msgstr "Monocromatico"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "Quando si apre un'immagine, può essere importata come riferimento."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr ""
+msgstr "Seleziona un'immagine qui sotto per cambiarne le proprietà.\n"
+"Nota che non puoi disegnare mentre è selezionata un'immagine di riferimento."
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr ""
+msgstr "Rimuovi"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Tieni premuto Shift mentre per rimuovere istantaneamente."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Sei sicuro di voler rimuovere questa immagine di riferimento? Non verrà eliminata dal file system."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3151,35 +3152,35 @@ msgstr "Scala l'immagine di riferimento selezionata"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "nessuno"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Ripristina Trasformazione"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
-msgstr ""
+msgstr "Posizione"
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
-msgstr ""
+msgstr "Scala"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Rotazione"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Opacità"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Bloccaggio Colore"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
