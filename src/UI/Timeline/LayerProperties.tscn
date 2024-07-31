@@ -5,8 +5,6 @@
 
 [node name="LayerProperties" type="AcceptDialog"]
 title = "Layer properties"
-exclusive = false
-popup_window = true
 script = ExtResource("1_54q1t")
 
 [node name="GridContainer" type="GridContainer" parent="."]

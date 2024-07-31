@@ -6,8 +6,6 @@
 [node name="ResizeCanvas" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
 title = "Resize Canvas"
-exclusive = false
-popup_window = true
 script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

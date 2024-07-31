@@ -5,7 +5,6 @@
 [node name="ImportTagDialog" type="ConfirmationDialog"]
 title = "Import Tag"
 size = Vector2i(270, 300)
-exclusive = false
 min_size = Vector2i(250, 0)
 ok_button_text = "Import"
 script = ExtResource("1_5fb6k")

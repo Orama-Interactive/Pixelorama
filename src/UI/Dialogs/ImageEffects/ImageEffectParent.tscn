@@ -10,8 +10,6 @@
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 36)
 size = Vector2i(362, 379)
-exclusive = false
-popup_window = true
 script = ExtResource("3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -94,7 +92,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 item_count = 4
-selected = 0
 popup/item_0/text = "Selected cels"
 popup/item_0/id = 0
 popup/item_1/text = "Current frame"

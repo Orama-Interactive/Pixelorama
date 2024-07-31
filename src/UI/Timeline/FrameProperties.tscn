@@ -5,8 +5,6 @@
 [node name="FrameProperties" type="ConfirmationDialog"]
 title = "Frame properties"
 size = Vector2i(224, 115)
-exclusive = false
-popup_window = true
 script = ExtResource("1")
 
 [node name="GridContainer" type="GridContainer" parent="."]

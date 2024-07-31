@@ -6,8 +6,6 @@
 [node name="CelProperties" type="AcceptDialog"]
 title = "Cel properties"
 size = Vector2i(300, 188)
-exclusive = false
-popup_window = true
 script = ExtResource("1_lyy7i")
 
 [node name="GridContainer" type="GridContainer" parent="."]

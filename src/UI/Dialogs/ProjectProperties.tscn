@@ -5,8 +5,6 @@
 [node name="ProjectProperties" type="AcceptDialog"]
 title = "Project Properties"
 size = Vector2i(197, 235)
-exclusive = false
-popup_window = true
 script = ExtResource("1_0n4uc")
 
 [node name="GridContainer" type="GridContainer" parent="."]

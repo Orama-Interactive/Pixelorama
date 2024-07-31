@@ -27,8 +27,6 @@ font_size = 12
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 36)
 size = Vector2i(602, 650)
-exclusive = false
-popup_window = true
 script = ExtResource("1")
 
 [node name="Contents" type="VBoxContainer" parent="."]

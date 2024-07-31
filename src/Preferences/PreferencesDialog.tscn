@@ -14,8 +14,6 @@
 title = "Preferences"
 position = Vector2i(0, 36)
 size = Vector2i(800, 500)
-exclusive = false
-popup_window = true
 script = ExtResource("1")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
@@ -1349,8 +1347,6 @@ text = "Pixelorama must be restarted for changes to take effect."
 mode = 1
 title = "Open File(s)"
 size = Vector2i(560, 400)
-exclusive = false
-popup_window = true
 ok_button_text = "Open"
 file_mode = 1
 access = 2
@@ -1369,8 +1365,6 @@ dialog_autowrap = true
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(400, 100)
-exclusive = false
-popup_window = true
 ok_button_text = "Delete Permanently"
 dialog_text = "Are you sure you want to delete this extension?"
 dialog_autowrap = true

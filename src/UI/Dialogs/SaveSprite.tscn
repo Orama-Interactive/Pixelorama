@@ -2,8 +2,6 @@
 
 [node name="SaveSprite" type="FileDialog" groups=["FileDialogs"]]
 size = Vector2i(675, 400)
-exclusive = false
-popup_window = true
 ok_button_text = "Save"
 access = 2
 filters = PackedStringArray("*.pxo ; Pixelorama Project")
