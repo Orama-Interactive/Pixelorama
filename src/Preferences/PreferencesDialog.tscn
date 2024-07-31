@@ -1060,7 +1060,7 @@ text = "On"
 layout_mode = 2
 tooltip_text = "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
 mouse_filter = 0
-text = "Update Continuously"
+text = "Update continuously"
 
 [node name="UpdateContinuously" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
 layout_mode = 2
