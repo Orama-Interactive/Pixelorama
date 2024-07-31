@@ -174,14 +174,16 @@ func draw_preview() -> void:
 
 
 func _draw_shape() -> void:
-#	var rect := _get_result_rect(origin, dest)
 	var points := _get_points()
 	prepare_undo("Draw Shape")
+	var images := _get_selected_draw_images()
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
-		draw_tool(point)
+		if Global.current_project.can_pixel_get_drawn(point):
+			for image in images:
+				_drawer.set_pixel(image, point, tool_slot.color)
 
 	commit_undo()
 

@@ -166,11 +166,12 @@ func draw_preview() -> void:
 func _draw_shape() -> void:
 	var points := _bezier()
 	prepare_undo("Draw Shape")
+	var images := _get_selected_draw_images()
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
-		draw_tool(point)
+		_draw_pixel(point, images)
 	if _fill:
 		var v := Vector2i()
 		var image_size := Global.current_project.size
@@ -179,9 +180,15 @@ func _draw_shape() -> void:
 			for y in image_size.y:
 				v.y = y
 				if Geometry2D.is_point_in_polygon(v, points):
-					draw_tool(v)
+					_draw_pixel(v, images)
 	_clear()
 	commit_undo()
+
+
+func _draw_pixel(point: Vector2i, images: Array[Image]) -> void:
+	if Global.current_project.can_pixel_get_drawn(point):
+		for image in images:
+			_drawer.set_pixel(image, point, tool_slot.color)
 
 
 func _clear() -> void:
