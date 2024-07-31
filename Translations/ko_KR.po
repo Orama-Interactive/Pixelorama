@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-07-28 23:27\n"
+"PO-Revision-Date: 2024-07-31 21:45\n"
 
 msgid "OK"
 msgstr "예"
@@ -1670,17 +1670,27 @@ msgstr "창 FPS 제한 설정"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "프로그램의 FPS를 제한합니다. 숫자가 낮을수록, CPU 사용량은 낮아지지만 프로그램의 속도가 느려지고, 거칠어지고 응답하지 않습니다. 0은 제한이 없음을 의미합니다"
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "관심 없는 창 정지"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "이 옵션을 켜면 프로그램 창의 관심이 없을때 정지하게 됩니다. 이 옵션은 프로그램을 안 쓰고 있을때 CPU 사용량을 줄일 수 있습니다. 마우스가 프로그램의 창에 들어갈때 정지를 해제 합니다"
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr ""
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr ""
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr ""
 
