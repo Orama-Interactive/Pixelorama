@@ -147,30 +147,19 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func draw_preview() -> void:
+	var canvas := Global.canvas.previews_sprite
 	if _drawing:
-		var canvas: CanvasItem = Global.canvas.previews
-		var indicator := BitMap.new()
-		var start := _start
-		if _start.x > _dest.x:
-			start.x = _dest.x
-		if _start.y > _dest.y:
-			start.y = _dest.y
-
 		var points := _get_points()
-		var t_offset := _thickness - 1
-		var t_offsetv := Vector2i(t_offset, t_offset)
-		indicator.create((_dest - _start).abs() + t_offsetv * 2 + Vector2i.ONE)
-
+		var image := Image.create(
+			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
+		)
 		for point in points:
-			var p := point - start + t_offsetv
-			indicator.set_bitv(p, 1)
-
-		canvas.draw_set_transform(start - t_offsetv, canvas.rotation, canvas.scale)
-
-		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
-
-		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+				image.set_pixelv(point, Color.WHITE)
+		var texture := ImageTexture.create_from_image(image)
+		canvas.texture = texture
+	else:
+		canvas.texture = null
 
 
 func _draw_shape() -> void:

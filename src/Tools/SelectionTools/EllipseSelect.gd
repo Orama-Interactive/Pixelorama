@@ -48,24 +48,24 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func draw_preview() -> void:
+	var canvas := Global.canvas.previews_sprite
 	if !_move && _rect.has_area():
-		var canvas: Node2D = Global.canvas.previews
-		var pos := canvas.position
-		var canvas_scale := canvas.scale
 		var temp_rect := _rect
-		if Global.mirror_view:
-			pos.x = pos.x + Global.current_project.size.x
-			temp_rect.position.x = Global.current_project.size.x - temp_rect.position.x
-			canvas_scale.x = -1
 
-		var border := DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, temp_rect.size)
-		var indicator := _fill_bitmap_with_points(border, temp_rect.size)
-
-		canvas.draw_set_transform(temp_rect.position, canvas.rotation, canvas_scale)
-		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
-
-		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
+		var points := DrawingAlgos.get_ellipse_points(Vector2.ZERO, temp_rect.size)
+		var image := Image.create(
+			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
+		)
+		for point in points:
+			var draw_point := point + temp_rect.position
+			if Global.mirror_view:  # This fixes previewing in mirror mode
+				draw_point.x = image.get_width() - draw_point.x - 1
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
+				image.set_pixelv(draw_point, Color.WHITE)
+		var texture := ImageTexture.create_from_image(image)
+		canvas.texture = texture
+	else:
+		canvas.texture = null
 
 
 func apply_selection(_position: Vector2i) -> void:

@@ -121,24 +121,24 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func draw_preview() -> void:
+	var previews := Global.canvas.previews_sprite
 	if not _drawing:
+		previews.texture = null
 		return
-	var canvas: Node2D = Global.canvas.previews
-	var pos := canvas.position
-	var canvas_scale := canvas.scale
-	if Global.mirror_view:  # This fixes previewing in mirror mode
-		pos.x = pos.x + Global.current_project.size.x
-		canvas_scale.x = -1
-
 	var points := _bezier()
-	canvas.draw_set_transform(pos, canvas.rotation, canvas_scale)
-	var indicator := _fill_bitmap_with_points(points, Global.current_project.size)
+	var image := Image.create(
+		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
+	)
+	for point in points:
+		var draw_point := point
+		if Global.mirror_view:  # This fixes previewing in mirror mode
+			draw_point.x = image.get_width() - point.x - 1
+		if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
+			image.set_pixelv(draw_point, Color.WHITE)
+	var texture := ImageTexture.create_from_image(image)
+	previews.texture = texture
 
-	for line in _create_polylines(indicator):
-		canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
-
-	canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
-
+	var canvas := Global.canvas.previews
 	var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
 	if _is_hovering_first_position(_last_mouse_position) and _curve.point_count > 1:
 		var circle_center := _curve.get_point_position(0)

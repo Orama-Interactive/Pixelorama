@@ -23,6 +23,7 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var crop_rect := $CropRect as CropRect
 @onready var indicators := $Indicators as Node2D
 @onready var previews := $Previews as Node2D
+@onready var previews_sprite := $PreviewsSprite as Sprite2D
 @onready var mouse_guide_container := $MouseGuideContainer as Node2D
 @onready var gizmos_3d := $Gizmos3D as Node2D
 @onready var measurements := $Measurements as Node2D
