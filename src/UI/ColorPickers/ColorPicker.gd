@@ -92,7 +92,7 @@ func _notification(what: int) -> void:
 		await get_tree().process_frame
 		hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
 		shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
-	elif what == NOTIFICATION_TRANSLATION_CHANGED:
+	elif what == NOTIFICATION_TRANSLATION_CHANGED and is_instance_valid(left_color_rect):
 		_average(left_color_rect.color, right_color_rect.color)
 
 
