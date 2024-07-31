@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Pixelorama"
 config/description="Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features."
-config/version="v1.0-stable"
+config/version="v1.0.1-dev"
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="pixelorama"
