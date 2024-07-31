@@ -9,6 +9,15 @@ const APP_ID := 2779170
 ## We are using a variable instead of the `Steam` singleton directly,
 ## because it is not available in non-Steam builds.
 static var steam_class
+static var achievements := {
+	"ACH_FIRST_PIXEL": false,
+	"ACH_ERASE_PIXEL": false,
+	"ACH_SAVE": false,
+	"ACH_PREFERENCES": false,
+	"ACH_ONLINE_DOCS": false,
+	"ACH_SUPPORT_DEVELOPMENT": false,
+	"ACH_3D_LAYER": false,
+}
 
 
 func _init() -> void:
@@ -34,12 +43,16 @@ func _ready() -> void:
 
 ## Unlocks an achievement on Steam based on its [param achievement_name].
 static func set_achievement(achievement_name: String) -> void:
+	if achievements[achievement_name]:  # Return early if the achievement has already been achieved
+		return
 	if not is_instance_valid(steam_class):
 		return
 	if not steam_class.isSteamRunning():
 		return
 	var status: Dictionary = steam_class.getAchievement(achievement_name)
 	if status["achieved"]:
+		achievements[achievement_name] = true
 		return
 	steam_class.setAchievement(achievement_name)
 	steam_class.storeStats()
+	achievements[achievement_name] = true
