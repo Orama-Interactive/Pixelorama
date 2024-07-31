@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-07-30 19:32\n"
+"PO-Revision-Date: 2024-07-31 21:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Uložit"
 
 msgid "Please Confirm..."
-msgstr "Prosím, potvrďte..."
+msgstr "Potvrďte prosím..."
 
 msgid "File Name:"
 msgstr "Název souboru:"
@@ -400,7 +400,7 @@ msgid "Recent projects"
 msgstr "Nedávné projekty"
 
 msgid "New project"
-msgstr ""
+msgstr "Nový projekt"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
@@ -415,13 +415,13 @@ msgstr "Nový snímek"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
-msgstr ""
+msgstr "Nahradit buňku"
 
 msgid "New layer"
 msgstr "Nová vrstva"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Nový referenční obrázek"
 
 msgid "New palette"
 msgstr "Nová paleta"
@@ -1461,7 +1461,7 @@ msgstr "Obnovit výchozí barvy (černá vlevo, bílá vpravo)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Výběr barvy z obrazovky."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1469,19 +1469,19 @@ msgstr ""
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Volba tvaru výběru barvy."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Možnosti barev"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Výběr módu výběru barvy."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Barevné posuvníky"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
@@ -1489,7 +1489,7 @@ msgstr ""
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Nedávné barvy"
 
 msgid "Left tool"
 msgstr "Levý nástroj"
@@ -1673,17 +1673,27 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "Nastaví limit snímků za vteřinu aplikace. Čím nižší číslo, tím menší bude zatížení procesoru,\n"
 "ale může dojít ke snížení odezvy a zasekávání aplikace. 0 značí žádný limit."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Pozastavit aplikaci, když je okno v pozadí"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Pokud je tato možnost vybrána, tak je aplikace pozastavena, když je okno aplikace v pozadí. Dojde tak ke snížení využití procesoru při nečinnosti. Aplikace se automaticky obnoví, když kurzor myši vstoupí zpět do okna aplikace."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr ""
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Povolit průhlednost hlavního okna"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Pokud povoleno, tak se může aplikační okno stát průhledným. Ovlivňuje výkon, takže ponechte vypnuto, pokud funkci nepotřebujete."
 
@@ -1814,15 +1824,15 @@ msgstr "Vyplnit uvnitř"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Rozestup"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Mezera X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Mezera Y:"
 
 msgid "Fill Shape"
 msgstr "Vyplnit tvar"
@@ -2714,31 +2724,31 @@ msgstr ""
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Seřadit podle odstínu"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Seřadit podle saturace"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Seřadit podle hodnoty"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Seřadit podle červené"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Seřadit podle zelené"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Seřadit podle modré"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Seřadit podle alfa kanálu"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Paleta s totožným jménem již existuje!"
@@ -2784,7 +2794,7 @@ msgid "Reference Images"
 msgstr "Referenční obrázky"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Perspektivní vodítka"
 
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
@@ -3090,12 +3100,13 @@ msgstr ""
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "Když je do aplikace vložen obrázek, je možné ho importovat jako referenční obrázek."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr ""
+msgstr "Vyberte níže referenční obrázek pro změnu jeho vlastností.\n"
+"Dokud je obrázek označen, tak není možné kreslit."
 
 #. Removes the selected reference image.
 msgid "Remove"
@@ -3111,31 +3122,31 @@ msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Přesunout vybraný referenční obrázek doprava"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Přesunout vybraný referenční obrázek doleva"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Výběr referenčního obrázku na plátně"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Přesun referenčního obrázku na plátně"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Otočení referenčního obrázku na plátně"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Škálování referenčního obrázku na plátně"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "Žádný"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
