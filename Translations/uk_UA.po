@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-07-31 21:45\n"
+"PO-Revision-Date: 2024-07-31 22:42\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1687,7 +1687,7 @@ msgid "Update continuously"
 msgstr ""
 
 #. Found in the preferences, hint of the "Update continuously" option.
-msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
 msgstr ""
 
 #. An option found in the preferences, under the Performance section.
