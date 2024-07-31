@@ -173,22 +173,6 @@ func append_gap(start: Vector2i, end: Vector2i) -> void:
 		_draw_points.append_array(draw_tool(Vector2i(x, y)))
 
 
-func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
-	var new_array: Array[Vector2i] = []
-	var project := Global.current_project
-	for point in array:
-		if h and v:
-			new_array.append(
-				Vector2i(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
-			)
-		elif h:
-			new_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
-		elif v:
-			new_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))
-
-	return new_array
-
-
 func draw_tool(pos: Vector2i) -> Array[Vector2i]:
 	_prepare_tool()
 	return _draw_tool(pos)

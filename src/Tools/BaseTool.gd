@@ -202,6 +202,22 @@ func snap_position(pos: Vector2) -> Vector2:
 	return pos
 
 
+func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
+	var new_array: Array[Vector2i] = []
+	var project := Global.current_project
+	for point in array:
+		if h and v:
+			new_array.append(
+				Vector2i(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
+			)
+		elif h:
+			new_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
+		elif v:
+			new_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))
+
+	return new_array
+
+
 func _get_closest_point_to_grid(pos: Vector2, distance: float, grid_pos: Vector2) -> Vector2:
 	# If the cursor is close to the start/origin of a grid cell, snap to that
 	var snap_distance := distance * Vector2.ONE

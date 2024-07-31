@@ -201,22 +201,6 @@ func append_gap(start: Vector2i, end: Vector2i, array: Array[Vector2i]) -> void:
 		array.append(Vector2i(x, y))
 
 
-func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
-	var new_array: Array[Vector2i] = []
-	var project := Global.current_project
-	for point in array:
-		if h and v:
-			new_array.append(
-				Vector2i(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
-			)
-		elif h:
-			new_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
-		elif v:
-			new_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))
-
-	return new_array
-
-
 # Thanks to
 # https://www.reddit.com/r/godot/comments/3ktq39/drawing_empty_circles_and_curves/cv0f4eo/
 func draw_empty_circle(
