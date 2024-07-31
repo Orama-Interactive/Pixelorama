@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-07-29 15:26\n"
+"PO-Revision-Date: 2024-07-31 21:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1683,17 +1683,27 @@ msgstr "Setare limită de cadre pe secundă pentru aplicație:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Întrerupe aplicația atunci când pierde focalizarea"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Dacă această opțiune este activată, în momentul în care fereastra aplicației pierde focalizarea, aceasta este întreruptă. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Aplicația își reia activitatea atunci când mausul intră în fereastra aplicației."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr ""
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Activează transparența ferestrei"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Dacă opțiunea este activată, fereastra aplicației poate deveni transparentă. Aceasta afectează performanța, așa că este recomandată dezactivarea opțiunii dacă nu este necesară."
 
