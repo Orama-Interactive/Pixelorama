@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-07-30 07:47\n"
+"PO-Revision-Date: 2024-07-31 21:45\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1684,17 +1684,27 @@ msgstr "设置应用程序 FPS 限制："
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越低，但应用程序变慢，限制且反应不灵。0 表示没有限制。"
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "失去焦点时暂停应用程序"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "如果打开此选项，当应用程序的窗口失去焦点时，它会暂停。 这有助于在空闲时降低 CPU 使用率。 当鼠标进入应用程序的窗口时，应用程序被取消暂停。"
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr ""
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "启用窗口透明度"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "如果启用，应用程序窗口可以变得透明。 这会影响性能，因此如果不需要，请将其关闭。"
 
