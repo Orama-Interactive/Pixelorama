@@ -69,7 +69,10 @@ func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring 
 	var project := Global.current_project
 	if not Tools.check_alpha_lock(image, position):
 		drawers[0].set_pixel(image, position, color, color_op)
+	SteamManager.set_achievement("ACH_FIRST_PIXEL")
 	if ignore_mirroring:
+		return
+	if not Tools.horizontal_mirror and not Tools.vertical_mirror:
 		return
 	# Handle mirroring
 	var mirrored_positions := Tools.get_mirrored_positions(position, project)
@@ -77,4 +80,3 @@ func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring 
 		var mirror_pos := mirrored_positions[i]
 		if project.can_pixel_get_drawn(mirror_pos) && not Tools.check_alpha_lock(image, mirror_pos):
 			drawers[i + 1].set_pixel(image, mirror_pos, color, color_op)
-	SteamManager.set_achievement("ACH_FIRST_PIXEL")

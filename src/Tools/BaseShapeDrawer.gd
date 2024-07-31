@@ -179,11 +179,16 @@ func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 	var rect := _get_result_rect(origin, dest)
 	var points := _get_points(rect.size)
 	prepare_undo("Draw Shape")
+	var images := _get_selected_draw_images()
+	var thickness_vector := rect.position - Vector2i((Vector2(0.5, 0.5) * (_thickness - 1)).ceil())
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
-		draw_tool(rect.position + point - Vector2i((Vector2(0.5, 0.5) * (_thickness - 1)).ceil()))
+		var draw_pos := point + thickness_vector
+		if Global.current_project.can_pixel_get_drawn(draw_pos):
+			for image in images:
+				_drawer.set_pixel(image, draw_pos, tool_slot.color)
 
 	commit_undo()
 
