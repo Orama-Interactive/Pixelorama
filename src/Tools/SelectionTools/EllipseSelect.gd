@@ -58,33 +58,23 @@ func draw_preview() -> void:
 		)
 		for i in points.size():
 			points[i] += temp_rect.position
-			var draw_point := points[i]
 			if Global.mirror_view:  # This fixes previewing in mirror mode
-				draw_point.x = image.get_width() - draw_point.x - 1
-			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-				image.set_pixelv(draw_point, Color.WHITE)
+				points[i].x = image.get_width() - points[i].x - 1
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(points[i]):
+				image.set_pixelv(points[i], Color.WHITE)
 		# Handle mirroring
 		if Tools.horizontal_mirror:
 			for point in mirror_array(points, true, false):
-				var draw_point := point
-				if Global.mirror_view:  # This fixes previewing in mirror mode
-					draw_point.x = image.get_width() - draw_point.x - 1
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-					image.set_pixelv(draw_point, Color.WHITE)
+				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+					image.set_pixelv(point, Color.WHITE)
 			if Tools.vertical_mirror:
 				for point in mirror_array(points, true, true):
-					var draw_point := point
-					if Global.mirror_view:  # This fixes previewing in mirror mode
-						draw_point.x = image.get_width() - draw_point.x - 1
-					if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-						image.set_pixelv(draw_point, Color.WHITE)
+					if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+						image.set_pixelv(point, Color.WHITE)
 		if Tools.vertical_mirror:
 			for point in mirror_array(points, false, true):
-				var draw_point := point
-				if Global.mirror_view:  # This fixes previewing in mirror mode
-					draw_point.x = image.get_width() - draw_point.x - 1
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-					image.set_pixelv(draw_point, Color.WHITE)
+				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+					image.set_pixelv(point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		canvas.texture = texture
 	else:
