@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-07-29 05:14\n"
+"PO-Revision-Date: 2024-07-31 03:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -502,7 +502,8 @@ msgstr "Arquivo Já Existe, Substituir?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr "Os seguintes arquivos já existem. Você deseja substituí-los"
+msgstr "Os seguintes arquivos já existem. Você deseja substituí-los?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Caminho de pasta inválido!"
