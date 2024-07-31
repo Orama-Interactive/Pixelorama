@@ -59,13 +59,9 @@ mouse_filter = 2
 
 [node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs"]
 title = "Unsaved Image"
-exclusive = false
-popup_window = true
 dialog_text = "You have unsaved changes. If you proceed, the progress you have made will be lost."
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="Dialogs"]
-exclusive = false
-popup_window = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs"]
@@ -74,8 +70,6 @@ ok_button_text = "Save & Exit"
 dialog_text = "Project %s has unsaved progress. How do you wish to proceed?"
 
 [node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
-exclusive = false
-popup_window = true
 dialog_text = "This is an error message!"
 
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
