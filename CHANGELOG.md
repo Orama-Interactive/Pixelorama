@@ -4,9 +4,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.0.1] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [Kiisu_Master](https://github.com/Kiisu-Master).
+
+Built using Godot 4.2.2
+
+### Added
+- It is now possible to toggle low processor usage mode in the Preferences (called "Update continuously"). [#1056](https://github.com/Orama-Interactive/Pixelorama/pull/1056)
+
+### Changed
+- It is no longer possible to click outside of a dialog to close it.
+- Animation tag importing can now open from the frame button right-click menu. [#1041](https://github.com/Orama-Interactive/Pixelorama/pull/1041)
+- The previews of the elliptical selection and the shape tools are now being mirrored, if a mirroring mode is enabled. This makes them consistent with the rectangle, lasso, paint and polygon selection tools.
+
+### Fixed
+- The previews of the shape and selection tools no longer make Pixelorama to be so slow.
+- The performance of the shape tool drawing has been improved.
+- Dialogs no longer close when Pixelorama's main window loses focus and regains it.
+- The zoom tool modes now actually reflect their behavior.
+- Fixed a bug where the opacity of multiple selected layers got automatically changed to be the same as the last selected layer's opacity.
+- Fixed an issue with some Windows versions where the dialogs could not be re-opened. [#1061](https://github.com/Orama-Interactive/Pixelorama/issues/1061)
+- The performance of the spritesheet smart slice has been improved. [#1046](https://github.com/Orama-Interactive/Pixelorama/pull/1046)
+- Fixed issue with image effects changing the color of non-opaque pixels unintentionally.
+- The clipping mask preview when using the move tool and the offset image effect now works correctly. [#1057](https://github.com/Orama-Interactive/Pixelorama/pull/1057)
+- Fixed a crash that sometimes happened when selecting an imported model in a 3D cel.
+
 ## [v1.0] - 2024-07-29
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt), [RorotoSic](https://github.com/RorotoSic), Ivan Kruger ([haythamnikolaidis](https://github.com/haythamnikolaidis)), [Kiisu_Master](https://github.com/Kiisu-Master), [Anaminus](https://github.com/Anaminus)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Clara Hobbs ([Ratfink](https://github.com/Ratfink)), [TheLsbt](https://github.com/TheLsbt), [RorotoSic](https://github.com/RorotoSic), Ivan Kruger ([haythamnikolaidis](https://github.com/haythamnikolaidis)), [Kiisu_Master](https://github.com/Kiisu-Master), [Anaminus](https://github.com/Anaminus).
 
 Built using Godot 4.2.2
 
