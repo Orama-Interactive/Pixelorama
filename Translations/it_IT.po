@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-07-30 02:27\n"
+"PO-Revision-Date: 2024-07-31 21:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1685,17 +1685,27 @@ msgstr "Imposta limite FPS dell'applicazione:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Imposta il limite dei quadri dell'applicazione al secondo. Più basso è il numero, minore è l'uso della CPU, ma l'applicazione diventa più lenta, choppier e non reattiva. 0 significa che non c'è limite."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Pausa applicazione quando perde il fuoco"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Se questa opzione viene attivata, quando la finestra dell'applicazione perde il fuoco, viene messa in pausa Questo aiuta a ridurre l'utilizzo della CPU quando è inattivo. L'applicazione viene rimossa quando il mouse entra nella finestra dell'applicazione."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr ""
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Abilita trasparenza finestra"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Se abilitata, la finestra dell'applicazione può diventare trasparente. Ciò influisce sulle prestazioni, quindi tenerla spenta se non ne hai bisogno."
 
