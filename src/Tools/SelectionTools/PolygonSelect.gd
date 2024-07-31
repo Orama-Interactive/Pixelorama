@@ -59,53 +59,53 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func draw_preview() -> void:
+	var previews := Global.canvas.previews_sprite
 	if _ongoing_selection and !_move:
-		var canvas: Node2D = Global.canvas.previews
-		var pos := canvas.position
-		var canvas_scale := canvas.scale
-		if Global.mirror_view:
-			pos.x = pos.x + Global.current_project.size.x
-			canvas_scale.x = -1
-
-		var preview_draw_points := _draw_points.duplicate()
+		var preview_draw_points := _draw_points.duplicate() as Array[Vector2i]
 		append_gap(_draw_points[-1], _last_position, preview_draw_points)
-
-		canvas.draw_set_transform(pos, canvas.rotation, canvas_scale)
-		var indicator := _fill_bitmap_with_points(preview_draw_points, Global.current_project.size)
-
-		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
+		var image := Image.create(
+			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
+		)
+		for point in preview_draw_points:
+			var draw_point := point
+			if Global.mirror_view:  # This fixes previewing in mirror mode
+				draw_point.x = image.get_width() - draw_point.x - 1
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
+				image.set_pixelv(draw_point, Color.WHITE)
 
 		var circle_radius := Vector2.ONE * (10.0 / Global.camera.zoom.x)
 		if _last_position == _draw_points[0] and _draw_points.size() > 1:
+			var canvas := Global.canvas.previews
 			draw_empty_circle(
 				canvas, Vector2(_draw_points[0]) + Vector2.ONE * 0.5, circle_radius, Color.BLACK
 			)
 
 		# Handle mirroring
 		if Tools.horizontal_mirror:
-			for line in _create_polylines(
-				_fill_bitmap_with_points(
-					mirror_array(preview_draw_points, true, false), Global.current_project.size
-				)
-			):
-				canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
+			for point in mirror_array(preview_draw_points, true, false):
+				var draw_point := point
+				if Global.mirror_view:  # This fixes previewing in mirror mode
+					draw_point.x = image.get_width() - draw_point.x - 1
+				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
+					image.set_pixelv(draw_point, Color.WHITE)
 			if Tools.vertical_mirror:
-				for line in _create_polylines(
-					_fill_bitmap_with_points(
-						mirror_array(preview_draw_points, true, true), Global.current_project.size
-					)
-				):
-					canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
+				for point in mirror_array(preview_draw_points, true, true):
+					var draw_point := point
+					if Global.mirror_view:  # This fixes previewing in mirror mode
+						draw_point.x = image.get_width() - draw_point.x - 1
+					if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
+						image.set_pixelv(draw_point, Color.WHITE)
 		if Tools.vertical_mirror:
-			for line in _create_polylines(
-				_fill_bitmap_with_points(
-					mirror_array(preview_draw_points, false, true), Global.current_project.size
-				)
-			):
-				canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
-
-		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
+			for point in mirror_array(preview_draw_points, false, true):
+				var draw_point := point
+				if Global.mirror_view:  # This fixes previewing in mirror mode
+					draw_point.x = image.get_width() - draw_point.x - 1
+				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
+					image.set_pixelv(draw_point, Color.WHITE)
+		var texture := ImageTexture.create_from_image(image)
+		previews.texture = texture
+	else:
+		previews.texture = null
 
 
 func apply_selection(pos: Vector2i) -> void:
