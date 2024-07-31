@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-07-31 21:45\n"
+"PO-Revision-Date: 2024-07-31 22:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1686,7 +1686,7 @@ msgid "Update continuously"
 msgstr ""
 
 #. Found in the preferences, hint of the "Update continuously" option.
-msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
 msgstr ""
 
 #. An option found in the preferences, under the Performance section.
@@ -1743,43 +1743,43 @@ msgstr "Jste si jisti, že chcete odstranit toto rozšíření?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "Dynamika vstupu"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "Stabilizátor"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "Tlak"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "Rychlost"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "Velikost"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "Limity hodnot"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "Prahové hodnoty"
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "Začátek"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "Konec"
 
 msgid "Brush:"
 msgstr "Štětec:"
@@ -1817,7 +1817,7 @@ msgstr ""
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Zamknout alfa kanál"
 
 msgid "Fill inside"
 msgstr "Vyplnit uvnitř"
@@ -2045,11 +2045,11 @@ msgstr "Pokud je vybráno, animace se přehrává pouze na snímcích, které ma
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Velikost buňky:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Barevný režim"
 
 msgid "Show past frames:"
 msgstr "Zobrazit předchozí snímky:"
@@ -2135,15 +2135,15 @@ msgstr "Vytvořit novou vrstvu"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Přidat pixelovou vrstvu"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Přidat skupinovou vrstvu"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Přidat 3D vrstvu"
 
 msgid "Remove current layer"
 msgstr "Odstranit aktuální vrstvu"
@@ -3158,11 +3158,11 @@ msgstr ""
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
-msgstr ""
+msgstr "Škála"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Otočení"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
@@ -3178,7 +3178,7 @@ msgstr ""
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Povoleno"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
@@ -3186,7 +3186,7 @@ msgstr ""
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "Přidat efekt"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
