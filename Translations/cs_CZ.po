@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-08-01 18:36\n"
+"PO-Revision-Date: 2024-08-01 22:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2160,6 +2160,10 @@ msgstr "Vlastnosti štítku"
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
 msgstr "Nový štítek"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
