@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-07-31 22:41\n"
+"PO-Revision-Date: 2024-08-01 18:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -971,9 +971,6 @@ msgstr "Przesunięcie Y:"
 msgid "Shadow color:"
 msgstr "Kolor cienia:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Dostosuj Odcień/Nasycenie/Wartość"
-
 msgid "Gradient"
 msgstr "Gradient"
 
@@ -1028,23 +1025,63 @@ msgstr "Środek:"
 msgid "Dithering pattern:"
 msgstr "Wzór ditheringu:"
 
-msgid "Adjust HSV"
-msgstr "Dostosuj HSV"
-
 msgid "Type:"
 msgstr "Typ:"
 
 msgid "Angle:"
 msgstr "Kąt:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Dostosuj Odcień/Nasycenie/Wartość"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Dostosuj HSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Odcień:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Nasycenie:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Wartość:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr ""
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr ""
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr ""
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr ""
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr ""
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr ""
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr ""
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Zastosuj"
