@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-08-01 00:13\n"
+"PO-Revision-Date: 2024-08-01 11:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -503,13 +503,13 @@ msgid "The following files already exist. Do you wish to overwrite them?\n"
 msgstr ""
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Cesta ke složce není platná!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Název souboru není platný!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Cesta ke složce a název souboru nejsou platné!"
 
 msgid "Exporting in progress..."
 msgstr "Probíhá export..."
@@ -592,7 +592,7 @@ msgstr "Pixelová vrstva:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Skupinová vrstva:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
@@ -635,7 +635,7 @@ msgid "Export dimensions:"
 msgstr "Rozměry exportu:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Uložit soubor"
 
 msgid "Go to previous folder."
 msgstr ""
@@ -674,35 +674,35 @@ msgstr ""
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Pixelorama projekt"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "PNG obrázek"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "BMP obrázek"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Radiance HDR obrázek"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "JPEG obrázek"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "SVG obrázek"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "TGA obrázek"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "WebP obrázek"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -1117,7 +1117,7 @@ msgstr "Webové stránky"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Zdrojový kód"
 
 msgid "Donate"
 msgstr "Podpořit"
@@ -1229,7 +1229,7 @@ msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Hlavní vývojář"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1237,7 +1237,7 @@ msgstr "Návrhář UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Autoři"
 
 msgid "Art by: %s"
 msgstr "Obrázek od: %s"
@@ -1699,7 +1699,7 @@ msgstr "Pokud povoleno, tak se může aplikační okno stát průhledným. Ovliv
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Renderer:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
@@ -1813,7 +1813,8 @@ msgstr "Pixel perfekt"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pixel perfekt\n"
+"Vyhlazuje čáry odstraněním nadbytečných pixelů na okrajích"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
@@ -1913,7 +1914,7 @@ msgid "Zoom out"
 msgstr "Oddálit"
 
 msgid "Options"
-msgstr ""
+msgstr "Možnosti"
 
 msgid "Options:"
 msgstr "Možnosti:"
@@ -1965,25 +1966,25 @@ msgid "Current frame as spritesheet"
 msgstr "Aktuální snímek jako spritesheet"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Přeskočit na první snímek"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Přejít na předchozí snímek"
 
 msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgstr "Přehrát animaci pozpátku (od konce do začátku)"
 
 msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgstr "Přehrát animaci vpřed (od začátku do konce)"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Přejít na další snímek"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Přeskočit na poslední snímek"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Nastavení časové osy"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Povolit/zakázat onion skinning"
@@ -2085,10 +2086,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Propojit buňky s"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Rozpojit buňky"
 
 msgid "Properties"
 msgstr "Nastavení"
@@ -2100,17 +2101,17 @@ msgid "Frame properties"
 msgstr "Vlastnosti snímku"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Vlastnosti vrstvy"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Vlastnosti buňky"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "Vlastnosti štítku"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "Nový štítek"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2120,7 +2121,7 @@ msgid "Layer"
 msgstr "Vrstva"
 
 msgid "Group"
-msgstr ""
+msgstr "Skupina"
 
 msgid "Layers"
 msgstr "Vrstvy"
@@ -2264,7 +2265,7 @@ msgid "Enable/disable automatic linking of new cels when creating new frames\n\n
 msgstr ""
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Rozbalit/sbalit skupinu"
 
 msgid "Palette"
 msgstr "Paleta"
@@ -2945,11 +2946,11 @@ msgstr "Transformace"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Mesh"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "Zleva doprava:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
@@ -3036,19 +3037,19 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr ""
+msgstr "Začíná pomalu a zrychluje ke konci"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr ""
+msgstr "Začíná rychle a zpomaluje ke konci"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr ""
+msgstr "Nejpomalejší na obou koncích, nejrychlejší uprostřed"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr ""
+msgstr "Nejrychlejší na obou koncích, nejpomalejší uprostřed"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
@@ -3068,31 +3069,31 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr ""
+msgstr "Exponenciální (mocnina X)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Druhá odmocnina"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
-msgstr ""
+msgstr "Sinusioda"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr ""
+msgstr "Vrtění se kolem konců"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr ""
+msgstr "Odrazení na konci"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "Vycouvání na koncích"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "Odpružení ke konci"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
