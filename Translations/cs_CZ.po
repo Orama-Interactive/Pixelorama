@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-08-01 11:23\n"
+"PO-Revision-Date: 2024-08-01 13:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -500,7 +500,8 @@ msgstr "Soubor existuje, přepsat?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Následující soubory již existují. Přejete si je přepsat?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Cesta ke složce není platná!"
@@ -515,7 +516,7 @@ msgid "Exporting in progress..."
 msgstr "Probíhá export..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Nelze načíst soubor '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -524,7 +525,8 @@ msgstr "Nelze načíst soubor '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Nelze načíst soubor '%s'.\n"
+"Nejedná se o platný soubor palety."
 
 msgid "Frame"
 msgstr "Snímek"
@@ -624,11 +626,11 @@ msgstr "Řádky:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Štítky podle sloupce"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "Štítky podle řádku"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -638,13 +640,13 @@ msgid "Save a File"
 msgstr "Uložit soubor"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Přejít na předchozí složku."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Přejít na následující složku."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Přejít na nadřazenou složku."
 
 msgid "Path:"
 msgstr "Cesta:"
@@ -653,7 +655,7 @@ msgid "Refresh files."
 msgstr ""
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Přepnout viditelnost skrytých souborů."
 
 msgid "Directories & Files:"
 msgstr "Složky a soubory:"
@@ -666,11 +668,11 @@ msgstr "Soubor:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Všechny soubory"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Všechny podporované"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
@@ -2717,11 +2719,11 @@ msgstr "Odstranit vybranou barvu"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "Seřadit paletu"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "Převrátit barvy"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
@@ -2759,7 +2761,8 @@ msgstr "Název palety je povinný!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Snížení velikosti palety vyresetuje pozice barev.\n"
+"Barvy, které se nevejdou do nové velikosti, budou ztraceny!"
 
 msgid "Position:"
 msgstr "Pozice:"
@@ -2808,31 +2811,31 @@ msgid "Resize the canvas"
 msgstr ""
 
 msgid "Margins"
-msgstr ""
+msgstr "Okraje"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Pozice a velikost"
 
 msgid "Locked Aspect Ratio"
 msgstr ""
 
 msgid "Margins:"
-msgstr ""
+msgstr "Okraje:"
 
 msgid "Aspect Ratio:"
 msgstr ""
 
 msgid "Top:"
-msgstr ""
+msgstr "Nahoře:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Dole:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Vlevo:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Vpravo:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
@@ -2849,46 +2852,46 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Koule"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Kapsle"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Válec"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Hranol"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Torus"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Rovina"
 
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Směrové světlo"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Bodový reflektor"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Bodové světlo"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "Vlastní model"
 
 msgid "Selected object:"
 msgstr "Vybraný objekt:"
@@ -3053,19 +3056,19 @@ msgstr "Nejrychlejší na obou koncích, nejpomalejší uprostřed"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
-msgstr ""
+msgstr "Kvadratický (mocnina 2)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Cubic (power of 3)"
-msgstr ""
+msgstr "Kubický (mocnina 3)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr ""
+msgstr "Kvartický (mocnina 4)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr ""
+msgstr "Kvintický (mocnina 5)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
