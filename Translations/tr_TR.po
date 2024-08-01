@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-07-31 22:42\n"
+"PO-Revision-Date: 2024-08-01 18:37\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -972,9 +972,6 @@ msgstr "Uzaklık Y:"
 msgid "Shadow color:"
 msgstr "Gölge rengi:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Renk Tonu/Doygunluk/Değer Ayarla"
-
 msgid "Gradient"
 msgstr "Gradyan"
 
@@ -1029,23 +1026,63 @@ msgstr "Ortala:"
 msgid "Dithering pattern:"
 msgstr "Titreme kalıbı:"
 
-msgid "Adjust HSV"
-msgstr "HSV Ayarla"
-
 msgid "Type:"
 msgstr "Tür:"
 
 msgid "Angle:"
 msgstr "Açı:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Renk Tonu/Doygunluk/Değer Ayarla"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "HSV Ayarla"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Renk Tonu:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Doygunluk:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Değer:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr ""
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr ""
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr ""
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr ""
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr ""
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr ""
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr ""
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Uygula"
