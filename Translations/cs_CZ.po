@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-07-31 22:42\n"
+"PO-Revision-Date: 2024-08-01 00:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -573,7 +573,7 @@ msgstr "Pozadí:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Vybrané snímky"
 
 msgid "Layers:"
 msgstr "Vrstvy:"
@@ -588,7 +588,7 @@ msgstr "Vybrané vrstvy"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Pixelová vrstva:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
@@ -632,7 +632,7 @@ msgstr ""
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Rozměry exportu:"
 
 msgid "Save a File"
 msgstr ""
@@ -714,7 +714,7 @@ msgstr "GIMP paleta"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Pokročilé možnosti"
 
 msgid "Interpolation:"
 msgstr "Interpolace:"
@@ -2073,7 +2073,7 @@ msgid "Remove Frame"
 msgstr "Odebrat snímek"
 
 msgid "Clone Frame"
-msgstr "Klonovat snímek"
+msgstr "Naklonovat snímek"
 
 msgid "Move Left"
 msgstr "Přesunout doleva"
@@ -2194,7 +2194,7 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Překrytí"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
@@ -2592,7 +2592,7 @@ msgid "Opens last opened project on startup"
 msgstr "Otevřít po spuštění naposledy otevřený projekt"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Potvrzení ukončení"
 
 #. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
 msgid "FFMPEG path"
@@ -2609,11 +2609,11 @@ msgstr "minuta(y)"
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "Exportovat JSON data"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
-msgstr ""
+msgstr "Rozdělit vrstvy"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
@@ -2621,7 +2621,7 @@ msgstr ""
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Vytvořit novou složku pro každý snímkový štítek"
 
 #. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
@@ -2629,7 +2629,7 @@ msgstr ""
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Oddělovací znak(y):"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
@@ -2890,20 +2890,20 @@ msgid "Custom model"
 msgstr ""
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Vybraný objekt:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Přidat nový objekt"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Odstranit objekt"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Projekce:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
@@ -2915,10 +2915,10 @@ msgstr "Ortogonální"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Frustum"
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Otočení:"
 
 msgid "Scale:"
 msgstr ""
@@ -2929,19 +2929,19 @@ msgstr "Prostředí"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "Barva okolního prostředí:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "Energie barvy okolního prostředí:"
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr ""
+msgstr "Zobrazeno:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Transformace"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
@@ -2953,15 +2953,15 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Poloměr:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Vertikální segmenty:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "Horizontální segmenty:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
@@ -2997,14 +2997,14 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "Energie:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
-msgstr ""
+msgstr "Negativ:"
 
 msgid "Shadow:"
-msgstr ""
+msgstr "Stín:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
@@ -3096,7 +3096,7 @@ msgstr ""
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Černobíle"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
@@ -3110,15 +3110,15 @@ msgstr "Vyberte níže referenční obrázek pro změnu jeho vlastností.\n"
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr ""
+msgstr "Odebrat"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Podržením klávesy Shift a klikem okamžite odstraníte."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Jste si jisti, že chcete odebrat referenční obrázek? Nebude smazán ze souborového systému."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3150,11 +3150,11 @@ msgstr "Žádný"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Obnovit transformaci"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
-msgstr ""
+msgstr "Pozice"
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
@@ -3166,15 +3166,15 @@ msgstr "Otočení"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Filtr"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Neprůhlednost"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Limitování barvy"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
@@ -3182,7 +3182,7 @@ msgstr "Povoleno"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr ""
+msgstr "Efekty vrstvy"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
@@ -3190,5 +3190,5 @@ msgstr "Přidat efekt"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr ""
+msgstr "Chcete stáhnout obrázek z %s?"
 
