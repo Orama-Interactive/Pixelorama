@@ -11,6 +11,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [Kiisu_Master](
 Built using Godot 4.2.2
 
 ### Added
+- Added an image effect that lets you adjust color properties of the image, such as brightness and contrast.
 - It is now possible to toggle low processor usage mode in the Preferences (called "Update continuously"). [#1056](https://github.com/Orama-Interactive/Pixelorama/pull/1056)
 
 ### Changed
@@ -124,6 +125,7 @@ Built using Godot 4.2.2
 - The canvas no longer remains in the drag state when the mouse it outside of it. Meaning, if the middle mouse button or space is being pressed to drag the canvas, and the mouse gets out of the canvas while the button is still pressed and then it is released, when the mouse re-enters the canvas, it is no longer being dragged.
 - Pixelorama no longer quits when saving from the File menu, if the user attempted to save on exit before and cancelled the save file dialog.
 - The delete layer button is now immediately disabled when locking a layer, thus preventing the user from being able to delete a locked layer.
+- Button shortcuts, such as <kbd>X</kbd> for switch colors, no longer get activated when they shouldn't, like when pressing <kbd>Control + X</kbd>. [#1014](https://github.com/Orama-Interactive/Pixelorama/issues/1014)
 - Fixed a bug where the exported files had the wrong tag name, if "Include frame tags in the file name" was enabled.
 - The text of the rulers is now being properly clipped. [#1023](https://github.com/Orama-Interactive/Pixelorama/pull/1023)
 
