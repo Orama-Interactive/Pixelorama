@@ -351,7 +351,7 @@ func _ready() -> void:
 	pixel_perfect = Global.config_cache.get_value("tools", "pixel_perfect", false)
 	alpha_locked = Global.config_cache.get_value("tools", "alpha_locked", false)
 
-	# Yield is necessary for the color picker nodes to update their color values
+	# Await is necessary for the color picker nodes to update their color values
 	await get_tree().process_frame
 	var color_value: Color = Global.config_cache.get_value(
 		_slots[MOUSE_BUTTON_LEFT].kname, "color", Color.BLACK
@@ -365,7 +365,7 @@ func _ready() -> void:
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
 
-	# Yield is necessary to hide irrelevant tools added by extensions
+	# Await is necessary to hide irrelevant tools added by extensions
 	await get_tree().process_frame
 	_show_relevant_tools(layer_type)
 
@@ -380,7 +380,7 @@ func add_tool_button(t: Tool, insert_pos := -1) -> void:
 	t.button_node = tool_button
 	_tool_buttons.add_child(tool_button)
 	if insert_pos > -1:
-		insert_pos = min(insert_pos, _tool_buttons.get_child_count() - 1)
+		insert_pos = mini(insert_pos, _tool_buttons.get_child_count() - 1)
 		_tool_buttons.move_child(tool_button, insert_pos)
 	tool_button.pressed.connect(_tool_buttons._on_Tool_pressed.bind(tool_button))
 

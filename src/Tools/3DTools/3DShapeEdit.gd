@@ -233,7 +233,7 @@ func _cel_switched() -> void:
 	_fill_object_option_button()
 	sprite_changed_this_frame()
 
-	# two yields are required
+	# Two awaits are required
 	await get_tree().process_frame
 	await get_tree().process_frame
 	_cel.selected = selected

@@ -170,7 +170,7 @@ func _frame_scroll_changed(_value: float) -> void:
 
 func _on_LayerVBox_resized() -> void:
 	frame_scroll_bar.offset_left = frame_scroll_container.position.x
-	# it doesn't update properly without yields (for the first time after pixelorama starts)
+	# It doesn't update properly without awaits (for the first time after Pixelorama starts)
 	await get_tree().process_frame
 	await get_tree().process_frame
 	adjust_scroll_container()
@@ -284,7 +284,7 @@ func add_frame() -> void:
 	project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame + 1))
 	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.commit_action()
-	# it doesn't update properly without yields
+	# It doesn't update properly without awaits
 	await get_tree().process_frame
 	await get_tree().process_frame
 	adjust_scroll_container()
@@ -354,7 +354,7 @@ func delete_frames(indices: PackedInt32Array = []) -> void:
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
-	# it doesn't update properly without yields
+	# It doesn't update properly without awaits
 	await get_tree().process_frame
 	await get_tree().process_frame
 	adjust_scroll_container()
