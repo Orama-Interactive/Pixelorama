@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-08-01 13:59\n"
+"PO-Revision-Date: 2024-08-01 15:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1292,7 +1292,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Polygonální výběr\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Dvojklik připojí poslední vložený bod k počátečnímu bodu"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1318,7 +1321,9 @@ msgstr "Laso/volný výběr\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Výběr kreslením\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1345,11 +1350,15 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Výběr barvy\n\n"
+"%s pro levé tlačítko myši\n"
+"%s pro pravé tlačítko myši\n\n"
+"Vyberte barvu z pixelu obrázku"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Oříznout\n\n"
+"Změna velikosti plátna"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -2165,35 +2174,35 @@ msgstr "Sloučit aktuální vrstvu s vrstvou níže"
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "Režim prolnutí:"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "Normální"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "Násobit"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr ""
+msgstr "Barevné projasnění"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
-msgstr ""
+msgstr "Lineární projasnění"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "Obrazovka"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
-msgstr ""
+msgstr "Zastření barev"
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Kontrast"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
@@ -2201,51 +2210,51 @@ msgstr "Překrytí"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Měkké světlo"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Tvrdé světlo"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Inverze"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Rozdíl"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Vyloučení"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Odečíst"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Dělení"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Komponent"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Odstín"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Sytost"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Barva"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Světelnost"
 
 msgid "Opacity:"
 msgstr "Průhlednost:"
@@ -2264,7 +2273,8 @@ msgstr "Snímek: %s, Vrstva: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Povolit/zakázat automatické propojení nových buněk při vytváření nových snímků\n\n"
+"Propojené buňky sdílejí obsah přes vícero snímků"
 
 msgid "Expand/collapse group"
 msgstr "Rozbalit/sbalit skupinu"
@@ -2805,7 +2815,7 @@ msgid "Recorder"
 msgstr ""
 
 msgid "Crop"
-msgstr ""
+msgstr "Oříznutí"
 
 msgid "Resize the canvas"
 msgstr ""
@@ -2840,7 +2850,9 @@ msgstr "Vpravo:"
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Uzamčená velikost\n\n"
+"Pokud je povoleno, použití nástroje na plátně přesune ořezávací obdélník.\n\n"
+"Pokud je zakázáno, použití nástroje na plátně, nakreslí obdélník."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
@@ -2848,7 +2860,7 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Krychle"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
@@ -2925,7 +2937,7 @@ msgid "Rotation:"
 msgstr "Otočení:"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Škála:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
@@ -2973,11 +2985,11 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "Horní poloměr:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "Dolní poloměr:"
 
 msgid "Text:"
 msgstr ""
@@ -2988,16 +3000,16 @@ msgstr "Velikost pixelu:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "Krok křivky:"
 
 msgid "Horizontal alignment:"
-msgstr ""
+msgstr "Vodorovné zarovnání:"
 
 msgid "Left"
-msgstr ""
+msgstr "Vlevo"
 
 msgid "Right"
-msgstr ""
+msgstr "Vpravo"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
@@ -3012,7 +3024,7 @@ msgstr "Stín:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Dosah:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
