@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-07-31 22:42\n"
+"PO-Revision-Date: 2024-08-01 15:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1699,7 +1699,7 @@ msgstr ""
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Se questa opzione viene attivata, l'applicazione ridisegnerà lo schermo in modo continuo, anche se non viene utilizzata. Disattivando questa opzione si riduce l'utilizzo della CPU e della GPU quando è inattivo."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
