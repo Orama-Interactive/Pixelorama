@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-07-31 22:42\n"
+"PO-Revision-Date: 2024-08-01 18:37\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -970,9 +970,6 @@ msgstr "Зсув за Y:"
 msgid "Shadow color:"
 msgstr "Колір тіні:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Змінити Відтінки/Насиченість/Яскравість"
-
 msgid "Gradient"
 msgstr "Градієнт"
 
@@ -1027,23 +1024,63 @@ msgstr "Центр:"
 msgid "Dithering pattern:"
 msgstr "Шаблон точок:"
 
-msgid "Adjust HSV"
-msgstr "Налаштування HSV"
-
 msgid "Type:"
 msgstr "Тип:"
 
 msgid "Angle:"
 msgstr "Кут:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Змінити Відтінки/Насиченість/Яскравість"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Налаштування HSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Відтінок:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Насиченість:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Яскравість:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr ""
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr ""
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr ""
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr ""
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr ""
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr ""
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr ""
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Застосувати"
