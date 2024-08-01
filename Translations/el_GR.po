@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-08-01 19:45\n"
+"PO-Revision-Date: 2024-08-01 22:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -192,7 +192,7 @@ msgstr "Αναδίπλωση:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr "Κεντράρισμα Καρέ"
+msgstr "Κεντράρισμα καρέ"
 
 msgid "Rotate Image"
 msgstr "Περιστροφή εικόνας"
@@ -2120,16 +2120,16 @@ msgid "Add a new frame"
 msgstr "Προσθήκη νέου καρέ"
 
 msgid "Remove Frame"
-msgstr "Διαγραφή Καρέ"
+msgstr "Διαγραφή καρέ"
 
 msgid "Clone Frame"
-msgstr "Κλωνοποίηση Καρέ"
+msgstr "Κλωνοποίηση καρέ"
 
 msgid "Move Left"
-msgstr "Μετακίνηση Αριστερά"
+msgstr "Μετακίνηση αριστερά"
 
 msgid "Move Right"
-msgstr "Μετακίνηση Δεξιά"
+msgstr "Μετακίνηση δεξιά"
 
 msgid "Add Frame Tag"
 msgstr "Προσθήκη Ετικέτας Καρέ"
@@ -2162,9 +2162,13 @@ msgstr "Ιδιότητες ετικέτας"
 msgid "New Tag"
 msgstr "Νέα ετικέτα"
 
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr "Εισαγωγή ετικέτας"
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr "Αντιστροφή Καρέ"
+msgstr "Αντιστροφή καρέ"
 
 msgid "Layer"
 msgstr "Στρώση"
