@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-07-31 22:42\n"
+"PO-Revision-Date: 2024-08-01 18:37\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -970,9 +970,6 @@ msgstr "Offset Y:"
 msgid "Shadow color:"
 msgstr "Warna bayangan:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Sesuaikan Rona/Saturasi/Nilai"
-
 msgid "Gradient"
 msgstr "Gradien"
 
@@ -1027,23 +1024,63 @@ msgstr "Tengah:"
 msgid "Dithering pattern:"
 msgstr "Pola bauran galat:"
 
-msgid "Adjust HSV"
-msgstr "Sesuaikan HSV"
-
 msgid "Type:"
 msgstr "Tipe:"
 
 msgid "Angle:"
 msgstr "Sudut:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Sesuaikan Rona/Saturasi/Nilai"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Sesuaikan HSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Rona:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Saturasi:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Nilai:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr ""
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr ""
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr ""
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr ""
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr ""
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr ""
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr ""
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Terapkan"
