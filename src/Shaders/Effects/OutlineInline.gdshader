@@ -8,6 +8,9 @@ uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
 uniform bool inside = false;
 uniform sampler2D selection : filter_nearest;
 
+bool is_zero_approx(float num) {
+	return num < 0.0001;
+}
 
 bool has_contrary_neighbour(vec2 uv, vec2 texture_pixel_size, sampler2D tex) {
 	for (float i = -ceil(width); i <= ceil(width); i++) {
@@ -24,7 +27,7 @@ bool has_contrary_neighbour(vec2 uv, vec2 texture_pixel_size, sampler2D tex) {
 		for (float j = -ceil(offset); j <= ceil(offset); j++) {
 			vec2 xy = uv + texture_pixel_size * vec2(i, j);
 
-			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(tex, xy).a == 0.0) == inside) {
+			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || is_zero_approx(texture(tex, xy).a)) == inside) {
 				return true;
 			}
 		}

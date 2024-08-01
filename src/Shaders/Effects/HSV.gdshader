@@ -6,6 +6,10 @@ uniform float saturation : hint_range(-1, 1);
 uniform float value : hint_range(-1, 1);
 uniform sampler2D selection : filter_nearest;
 
+bool is_equal_approx(float a, float b) {
+	return abs(a - b) <= 0.0001;
+}
+
 vec3 rgb2hsb(vec3 c){
 	vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
 	vec4 p = mix(vec4(c.bg, K.wz),
@@ -38,7 +42,7 @@ void fragment() {
 	vec3 col = original_color.rgb;
 	vec3 hsb = rgb2hsb(col);
 	// If not greyscale
-	if(col[0] != col[1] || col[1] != col[2]) {
+	if(!is_equal_approx(col[0], col[1]) || !is_equal_approx(col[1], col[2])) {
 		// Shift the color by shift_amount, but rolling over the value goes over 1
 		hsb.x = mod(hsb.x + hue, 1.0);
 	}

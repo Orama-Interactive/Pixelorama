@@ -31,4 +31,3 @@ void fragment() {
 	vec4 color = swap_color(original_color);
 	COLOR = mix(original_color.rgba, color, selection_color.a);
 }
-
