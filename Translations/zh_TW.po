@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-08-01 18:37\n"
+"PO-Revision-Date: 2024-08-01 22:07\n"
 
 msgid "OK"
 msgstr "確定"
@@ -2106,6 +2106,10 @@ msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
+msgstr ""
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
 msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
