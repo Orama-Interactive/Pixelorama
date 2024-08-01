@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ba24iuv55m4l3"]
+[gd_scene load_steps=22 format=3 uid="uid://ba24iuv55m4l3"]
 
 [ext_resource type="Script" path="res://src/UI/Canvas/Canvas.gd" id="1"]
 [ext_resource type="Shader" path="res://src/Shaders/BlendLayers.gdshader" id="1_253dh"]
@@ -36,9 +36,6 @@ shader_parameter/frequency = 200.0
 shader_parameter/stripe_direction = 0.5
 
 [sub_resource type="ShaderMaterial" id="3"]
-shader = ExtResource("17_lowhf")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tb70k"]
 shader = ExtResource("17_lowhf")
 
 [node name="Canvas" type="Node2D"]
@@ -85,7 +82,7 @@ material = SubResource("3")
 script = ExtResource("7")
 
 [node name="PreviewsSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_tb70k")
+material = SubResource("3")
 centered = false
 
 [node name="OnionPast" type="Node2D" parent="."]
