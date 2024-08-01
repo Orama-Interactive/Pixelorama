@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-07-31 22:42\n"
+"PO-Revision-Date: 2024-08-01 04:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1415,7 +1415,13 @@ msgid "Curve Tool\n\n"
 "Press %s/%s to add new points\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "カーブツール\n\n"
+"%s 左マウスボタン\n"
+"%s 右マウスボタン\n\n"
+"ベジェ曲線を描画\n"
+"%s/%sを押して点を追加します\n"
+"押してドラッグして曲率を制御します\n"
+"%sを押して最後に追加した点を削除します"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1689,11 +1695,11 @@ msgstr "これをオンにすると、アプリケーションのウィンドウ
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "継続的に更新"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "これがオンに切り替えられている場合、アプリケーションは使用されていない間にも、画面を継続的に再描画します。 これをオフにすると、アイドル時のCPUとGPU使用率を低下させることができる。"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
