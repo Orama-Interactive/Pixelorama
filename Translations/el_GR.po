@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-08-01 00:13\n"
+"PO-Revision-Date: 2024-08-01 18:36\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -972,9 +972,6 @@ msgstr "Μετατόπιση Y:"
 msgid "Shadow color:"
 msgstr "Χρώμα σκιάς:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
-
 msgid "Gradient"
 msgstr "Διαβάθμιση"
 
@@ -1029,23 +1026,63 @@ msgstr "Κέντρο:"
 msgid "Dithering pattern:"
 msgstr "Μοτίβο χρωματικής αντιπαράθεσης:"
 
-msgid "Adjust HSV"
-msgstr "Ρύθμιση HSV"
-
 msgid "Type:"
 msgstr "Είδος:"
 
 msgid "Angle:"
 msgstr "Γωνία:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Ρύθμιση HSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Απόχρωση:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Κορεσμός:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Τιμή:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr ""
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr ""
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr ""
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr ""
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr ""
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr ""
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr ""
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Εφαρμογή"
