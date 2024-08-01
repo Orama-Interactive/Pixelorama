@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-07-31 22:41\n"
+"PO-Revision-Date: 2024-08-01 06:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1693,7 +1693,7 @@ msgstr "Dacă această opțiune este activată, în momentul în care fereastra 
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Actualizare continuă"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
