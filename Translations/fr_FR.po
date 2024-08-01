@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-08-01 18:36\n"
+"PO-Revision-Date: 2024-08-01 19:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1056,11 +1056,11 @@ msgstr ""
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Luminosité :"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Contraste :"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
