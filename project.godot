@@ -677,6 +677,10 @@ adjust_hsv={
 "deadzone": 0.5,
 "events": []
 }
+adjust_brightness_saturation={
+"deadzone": 0.5,
+"events": []
+}
 gradient={
 "deadzone": 0.5,
 "events": []

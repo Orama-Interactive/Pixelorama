@@ -1,0 +1,143 @@
+[gd_scene load_steps=4 format=3 uid="uid://7hslmewq0w4a"]
+
+[ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_5wfra"]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/BrightnessContrastDialog.gd" id="2_msv0o"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_2epr4"]
+
+[node name="BrightnessContrastDialog" instance=ExtResource("1_5wfra")]
+title = "Adjust Brightness/Contrast"
+size = Vector2i(362, 540)
+visible = true
+script = ExtResource("2_msv0o")
+
+[node name="VBoxContainer" parent="." index="3"]
+offset_bottom = 491.0
+
+[node name="BrightnessSlider" type="TextureProgressBar" parent="VBoxContainer" index="2"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_2epr4")
+prefix = "Brightness:"
+
+[node name="ContrastSlider" type="TextureProgressBar" parent="VBoxContainer" index="3"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 300.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_2epr4")
+prefix = "Contrast:"
+
+[node name="SaturationSlider" type="TextureProgressBar" parent="VBoxContainer" index="4"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 300.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_2epr4")
+prefix = "Saturation:"
+
+[node name="RedSlider" type="TextureProgressBar" parent="VBoxContainer" index="5"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_2epr4")
+prefix = "Red value:"
+
+[node name="GreenSlider" type="TextureProgressBar" parent="VBoxContainer" index="6"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_2epr4")
+prefix = "Green value:"
+
+[node name="BlueSlider" type="TextureProgressBar" parent="VBoxContainer" index="7"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_2epr4")
+prefix = "Blue value:"
+
+[node name="TintColorContainer" type="HBoxContainer" parent="VBoxContainer" index="8"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/TintColorContainer" index="0"]
+layout_mode = 2
+text = "Tint color:"
+
+[node name="TintColor" type="ColorPickerButton" parent="VBoxContainer/TintColorContainer" index="1"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 1, 1, 1)
+
+[node name="TintSlider" type="TextureProgressBar" parent="VBoxContainer" index="9"]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_2epr4")
+prefix = "Tint effect factor:"
+
+[connection signal="value_changed" from="VBoxContainer/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ContrastSlider" to="." method="_on_contrast_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SaturationSlider" to="." method="_on_saturation_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/RedSlider" to="." method="_on_red_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GreenSlider" to="." method="_on_green_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/BlueSlider" to="." method="_on_blue_slider_value_changed"]
+[connection signal="color_changed" from="VBoxContainer/TintColorContainer/TintColor" to="." method="_on_tint_color_color_changed"]
+[connection signal="value_changed" from="VBoxContainer/TintSlider" to="." method="_on_tint_slider_value_changed"]

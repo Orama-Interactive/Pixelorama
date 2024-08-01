@@ -27,6 +27,9 @@ var desaturate_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Desaturat
 var outline_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OutlineDialog.tscn")
 var drop_shadow_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/DropShadowDialog.tscn")
 var hsv_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn")
+var adjust_brightness_saturation_dialog := Dialog.new(
+	"res://src/UI/Dialogs/ImageEffects/BrightnessContrastDialog.tscn"
+)
 var gradient_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn")
 var gradient_map_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientMapDialog.tscn")
 var palettize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PalettizeDialog.tscn")
@@ -398,6 +401,7 @@ func _setup_effects_menu() -> void:
 		"Invert Colors": "invert_colors",
 		"Desaturation": "desaturation",
 		"Adjust Hue/Saturation/Value": "adjust_hsv",
+		"Adjust Brightness/Saturation": "adjust_brightness_saturation",
 		"Palettize": "palettize",
 		"Pixelize": "pixelize",
 		"Posterize": "posterize",
@@ -805,6 +809,8 @@ func effects_menu_id_pressed(id: int) -> void:
 			drop_shadow_dialog.popup()
 		Global.EffectsMenu.HSV:
 			hsv_dialog.popup()
+		Global.EffectsMenu.BRIGHTNESS_SATURATION:
+			adjust_brightness_saturation_dialog.popup()
 		Global.EffectsMenu.GRADIENT:
 			gradient_dialog.popup()
 		Global.EffectsMenu.GRADIENT_MAP:

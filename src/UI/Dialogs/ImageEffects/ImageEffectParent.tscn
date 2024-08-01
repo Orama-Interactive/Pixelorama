@@ -92,6 +92,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 item_count = 4
+selected = 0
 popup/item_0/text = "Selected cels"
 popup/item_0/id = 0
 popup/item_1/text = "Current frame"
