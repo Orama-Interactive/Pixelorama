@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-07-31 22:42\n"
+"PO-Revision-Date: 2024-08-01 18:36\n"
 
 msgid "OK"
 msgstr "예"
@@ -969,9 +969,6 @@ msgstr "Y 오프셋:"
 msgid "Shadow color:"
 msgstr "그림자 색상:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "색상/채도/명도 수정"
-
 msgid "Gradient"
 msgstr "그레디언트"
 
@@ -1025,23 +1022,63 @@ msgstr "중심:"
 msgid "Dithering pattern:"
 msgstr "디더링 패턴"
 
-msgid "Adjust HSV"
-msgstr "HSV 수정"
-
 msgid "Type:"
 msgstr "타입:"
 
 msgid "Angle:"
 msgstr "각도:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "색상/채도/명도 수정"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "HSV 수정"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "색조:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "채도:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "명도:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr ""
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr ""
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr ""
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr ""
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr ""
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr ""
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr ""
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr ""
 
 msgid "Apply"
 msgstr "적용"
