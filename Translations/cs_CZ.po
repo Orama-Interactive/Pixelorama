@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-08-01 22:06\n"
+"PO-Revision-Date: 2024-08-02 11:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -95,7 +95,7 @@ msgstr "Uložit jako..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Zahrnout prolnuté obrázky"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
@@ -847,11 +847,11 @@ msgstr "Ztmavit rozhraní při vyskakovacím okně"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Použít systémový dialog pro výběr souboru"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Pokud je toto nastavení povoleno, je použit systémový dialog pro výběr souboru, namísto interního dialogu Pixeloramy."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
@@ -990,7 +990,7 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr ""
 
 msgid "Shape:"
-msgstr ""
+msgstr "Tvar:"
 
 msgid "Linear"
 msgstr "Lineární"
@@ -1000,19 +1000,19 @@ msgstr ""
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Opakovat:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Opakovat"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Zrcadlit"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Zkrátit"
 
 msgid "Transition size:"
 msgstr ""
@@ -1021,7 +1021,7 @@ msgid "Center:"
 msgstr ""
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Ditheringová šablona:"
 
 msgid "Type:"
 msgstr "Typ:"
@@ -1031,11 +1031,11 @@ msgstr "Úhel:"
 
 #. An image effect. Adjusts the hue, saturation and value of the colors of an image.
 msgid "Adjust Hue/Saturation/Value"
-msgstr "Upravit odstín/sytost/hodnotu"
+msgstr "Upravit odstín, sytost a hodnotu"
 
 #. HSV stands for Hue, Saturation & Value.
 msgid "Adjust HSV"
-msgstr "Upravit odstín/sytost/hodnotu"
+msgstr "Upravit odstín, sytost a hodnotu"
 
 #. Refers to the hue of the colors of an image.
 msgid "Hue:"
@@ -1051,35 +1051,35 @@ msgstr "Hodnota:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Upravit jas a kontrast"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Jas:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Kontrast:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Hodnota červené:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Hodnota zelené:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Hodnota modré:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Barva tónu:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Faktor tónového efektu:"
 
 msgid "Apply"
 msgstr "Použít"
@@ -1731,11 +1731,11 @@ msgstr "Pokud je tato možnost vybrána, tak je aplikace pozastavena, když je o
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Neustálé obnovování okna"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Pokud je tato možnost zapnuta, bude okno aplikace neustále překreslováno, i pokud není používána. Vypnutí pomůže snížit využití procesoru a grafické karty při nečinnosti."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -2853,7 +2853,7 @@ msgstr "Perspektivní vodítka"
 
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
-msgstr ""
+msgstr "Nahrávání"
 
 msgid "Crop"
 msgstr "Oříznutí"
@@ -2897,7 +2897,7 @@ msgstr "Uzamčená velikost\n\n"
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Úprava 3D tvarů"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
@@ -3022,7 +3022,7 @@ msgstr "Horizontální segmenty:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "Je polokoule:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
@@ -3033,7 +3033,7 @@ msgid "Bottom radius:"
 msgstr "Dolní poloměr:"
 
 msgid "Text:"
-msgstr ""
+msgstr "Text:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
