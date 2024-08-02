@@ -22,6 +22,7 @@ Built using Godot 4.2.2
 ### Fixed
 - The previews of the shape and selection tools no longer make Pixelorama to be so slow.
 - The performance of the shape tool drawing has been improved.
+- Fixed an issue where if you increased a palette's width but also decreased its height, some colors would be lost, and re-ordering colors immediately after resizing would result in even more data loss.
 - Dialogs no longer close when Pixelorama's main window loses focus and regains it.
 - The zoom tool modes now actually reflect their behavior.
 - Fixed a bug where the opacity of multiple selected layers got automatically changed to be the same as the last selected layer's opacity.
