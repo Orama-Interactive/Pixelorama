@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-08-02 11:14\n"
+"PO-Revision-Date: 2024-08-02 13:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -463,10 +463,10 @@ msgid "Refresh"
 msgstr "Obnovit"
 
 msgid "Start frame:"
-msgstr "První snímek:"
+msgstr "Počáteční snímek:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Koncový snímek:"
 
 msgid "At frame:"
 msgstr "Na snímku:"
@@ -652,7 +652,7 @@ msgid "Path:"
 msgstr "Cesta:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Obnovit soubory."
 
 msgid "Toggle the visibility of hidden files."
 msgstr "Přepnout viditelnost skrytých souborů."
@@ -1264,7 +1264,7 @@ msgid "Dutch"
 msgstr "Nizozemština"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Běloruština"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -1303,7 +1303,7 @@ msgid "Save before exiting?"
 msgstr "Uložit před ukončením?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Projekt %s obsahuje neuložené změny. Jak si přejete pokračovat?"
 
 msgid "Save & Exit"
 msgstr "Uložit a ukončit"
@@ -1498,11 +1498,11 @@ msgstr "Vyberte barvu pro pravý nástroj"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Prohodit levou a pravou barvu."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Průměrná barva:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Obnovit výchozí barvy (černá vlevo, bílá vpravo)"
@@ -1513,7 +1513,7 @@ msgstr "Výběr barvy z obrazovky."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Vložte hex kód (\"#ff0000\") nebo název barvy (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1533,7 +1533,7 @@ msgstr "Barevné posuvníky"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Vzorky"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
@@ -2163,11 +2163,11 @@ msgstr "Nový štítek"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Importovat štítek"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "Převrátit snímky"
 
 msgid "Layer"
 msgstr "Vrstva"
@@ -2436,10 +2436,10 @@ msgstr "Soubor se nepodařilo uložit. Kód chyby %s"
 
 #. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
 msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
-msgstr ""
+msgstr "Export videa selhal. Ujistěte se, že je FFMPEG správně nainstalován."
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Soubor(y) exportován(y)"
 
 msgid "New Empty Palette"
 msgstr "Nová prázdná paleta"
@@ -2671,7 +2671,7 @@ msgstr "Rozdělit vrstvy"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Zahrnout snímkové štítky do názvu souboru"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2733,7 +2733,7 @@ msgid "User data:"
 msgstr "Uživatelská data:"
 
 msgid "Duration"
-msgstr ""
+msgstr "Trvání"
 
 msgid "Tiled In Both Axis"
 msgstr "Obě osy"
@@ -2874,7 +2874,7 @@ msgid "Margins:"
 msgstr "Okraje:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Poměr stran:"
 
 msgid "Top:"
 msgstr "Nahoře:"
@@ -3073,7 +3073,7 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
-msgstr ""
+msgstr "Náhled snímku:"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
