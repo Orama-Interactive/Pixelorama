@@ -769,7 +769,7 @@ class PaletteAPI:
 class SignalsAPI:
 	# system to auto-adjust texture_changed to the "current cel"
 	## This signal is not meant to be used directly.
-	## Use [method connect_current_cel_texture_changed] instead
+	## Use [method signal_current_cel_texture_changed] instead
 	signal texture_changed
 	var _last_cel: BaseCel
 
