@@ -56,6 +56,7 @@ func _init(
 
 func edit(new_name: String, new_width: int, new_height: int, new_comment: String) -> void:
 	var old_width := width
+	var old_height := height
 	width = new_width
 	height = new_height
 	name = new_name
@@ -68,7 +69,7 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 		# If size was reduced colors must be reindexed to fit into new smaller size
 		reindex_colors_on_size_reduce(true)
 
-	if old_width < new_width and colors_max > old_colors_max:
+	if old_width < new_width and height >= old_height:
 		# If width increases colors have to be reindexed so they keep same grid positions
 		# unless the height has become smaller and we have to re-position the colors
 		# so that they won't get erased
@@ -158,12 +159,13 @@ func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
 ## Adds difference of old and new width to color indexes
 ## so they remain on the same position as before resize
 func reindex_colors_on_width_increase(old_width: int) -> void:
-	var sorted_colors_indexes := colors.keys()
-	sorted_colors_indexes.sort()
+	var sorted_colors_indices := colors.keys()
+	sorted_colors_indices.sort()
 	var new_colors := {}
-	for old_index: int in sorted_colors_indexes:
+	for old_index: int in sorted_colors_indices:
 		var new_index := old_index + (width - old_width) * (old_index / old_width)
 		new_colors[new_index] = colors[old_index]
+		new_colors[new_index].index = new_index
 
 	colors = new_colors
 
