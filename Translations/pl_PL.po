@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-08-01 22:06\n"
+"PO-Revision-Date: 2024-08-02 18:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1053,35 +1053,35 @@ msgstr "Wartość:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Dostosuj jasność/kontrast"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Jasność:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Kontrast:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Czerwona wartości:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Zielona wartość:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Wartość niebieska:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Odcień koloru:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Współczynnik efektu odcienia:"
 
 msgid "Apply"
 msgstr "Zastosuj"
@@ -1731,7 +1731,7 @@ msgstr ""
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Jeśli ta opcja jest włączona, aplikacja będzie ciągle odświeżać ekran, nawet gdy nie jest używana. Wyłączenie tej opcji pomaga obniżyć użycie procesora i procesora graficznego w stanie bezczynności."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -2159,7 +2159,7 @@ msgstr "Nowy tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Import tagów"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
