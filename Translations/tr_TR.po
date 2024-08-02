@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-08-01 22:07\n"
+"PO-Revision-Date: 2024-08-02 13:34\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1054,35 +1054,35 @@ msgstr "Değer:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Parlaklığı/Karşıtlığı Ayarla"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Parlaklık:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Karşıtlık:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Kırmızı değeri:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Yeşil değeri:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Mavi değeri:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Renk tonu rengi:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Renk tonu efekti katsayısı:"
 
 msgid "Apply"
 msgstr "Uygula"
@@ -1732,11 +1732,11 @@ msgstr "Bu açılırsa, uygulamanın penceresi odağı kaybettiğinde duraklatı
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Sürekli güncelle"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Etkinse, uygulama kullanılmasa bile ekranı sürekli olarak yeniden çizer. Bunu kapatmak, boştayken işlemci ve ekran kartı kullanımını azaltmaya yardımcı olur."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -2164,7 +2164,7 @@ msgstr "Yeni etiket"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Etiketi İçe Aktar"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
