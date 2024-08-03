@@ -271,7 +271,7 @@ func _on_shortcut_tree_button_clicked(item: TreeItem, _column: int, id: int, _mb
 			rect.position.y += 42 - tree.get_scroll().y
 			rect.position += global_position
 			rect.size = Vector2(110, 23 * shortcut_type_menu.get_item_count())
-			shortcut_type_menu.popup(rect)
+			shortcut_type_menu.popup_on_parent(rect)
 		elif id == 1:  # Delete
 			Keychain.action_erase_events(action)
 			Keychain.selected_profile.change_action(action)
