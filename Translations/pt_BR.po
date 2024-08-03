@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-08-01 22:06\n"
+"PO-Revision-Date: 2024-08-03 01:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -52,7 +52,7 @@ msgid "Height:"
 msgstr "Altura:"
 
 msgid "Center"
-msgstr "Centralizado"
+msgstr "Centro"
 
 msgid "File"
 msgstr "Arquivo"
@@ -112,7 +112,7 @@ msgid "Export"
 msgstr "Exportar"
 
 msgid "Overwrite"
-msgstr "Sobrescrever"
+msgstr "Substituir"
 
 msgid "Export..."
 msgstr "Exportar..."
@@ -1054,35 +1054,35 @@ msgstr "Valor:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Ajustar Brilho/Contraste"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Brilho:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Contraste:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Valor do vermelho:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Valor do verde:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Valor do Azul:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Cor de matiz:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Fator de efeito de matiz:"
 
 msgid "Apply"
 msgstr "Aplique"
@@ -1732,11 +1732,11 @@ msgstr "Se isto for ativado, quando a janela do aplicativo perder o foco, ele é
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Atualização contínua"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Se esta opção estiver habilitada, o aplicativo irá redesenhar a tela continuamente, mesmo enquanto não estiver em uso. Desligar isso ajuda a reduzir o uso de CPU e GPU quando estiver inativo."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -2164,7 +2164,7 @@ msgstr "Nova Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Importar Marcação"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
