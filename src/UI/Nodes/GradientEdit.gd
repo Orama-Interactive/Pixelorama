@@ -151,8 +151,7 @@ func select_color(cursor: GradientCursor, pos: Vector2) -> void:
 		pos.x = global_position.x + size.x
 	else:
 		pos.x = global_position.x - $Popup.size.x
-	$Popup.position = pos
-	$Popup.popup()
+	$Popup.popup_on_parent(Rect2i(pos, Vector2.ONE))
 
 
 func get_sorted_cursors() -> Array:

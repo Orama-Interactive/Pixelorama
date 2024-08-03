@@ -272,7 +272,7 @@ func _on_BrushType_pressed() -> void:
 	for child in categories.get_children():
 		if child is GridContainer:
 			child.columns = columns
-	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
+	Global.brushes_popup.popup_on_parent(Rect2(pop_position, Vector2(size_x, size_y)))
 
 
 func _on_Brush_selected(brush: Brushes.Brush) -> void:

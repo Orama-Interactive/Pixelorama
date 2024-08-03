@@ -213,8 +213,8 @@ func _on_PaletteGrid_swatch_double_clicked(_mb: int, index: int, click_position:
 
 	# Open color picker popup with its right bottom corner next to swatch
 	var popup := hidden_color_picker.get_popup()
-	popup.position = click_position - Vector2(popup.size)
-	popup.popup()
+	var popup_position := click_position - Vector2(popup.size)
+	popup.popup_on_parent(Rect2i(popup_position, Vector2i.ONE))
 
 
 func _on_PaletteGrid_swatch_dropped(source_index: int, target_index: int) -> void:

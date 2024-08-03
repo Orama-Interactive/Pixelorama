@@ -49,8 +49,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("reference_quick_menu"):
 		var list: Array[ReferenceImage] = Global.current_project.reference_images
 		populate_reference_menu(list, true)
-		reference_menu.position = Global.control.get_global_mouse_position()
-		reference_menu.popup()
+		var popup_position := Global.control.get_global_mouse_position()
+		reference_menu.popup_on_parent(Rect2i(popup_position, Vector2i.ONE))
 
 	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 
@@ -104,8 +104,8 @@ func _input(event: InputEvent) -> void:
 					# 2. There are more than 1 Reference Images
 					elif overlapping.size() > 1:
 						populate_reference_menu(overlapping, true)
-						reference_menu.position = Global.control.get_global_mouse_position()
-						reference_menu.popup()
+						var popup_position := Global.control.get_global_mouse_position()
+						reference_menu.popup_on_parent(Rect2i(popup_position, Vector2i.ONE))
 					# 3. There are no Reference Images
 					else:
 						Global.current_project.set_reference_image_index(-1)

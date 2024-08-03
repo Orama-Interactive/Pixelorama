@@ -79,4 +79,4 @@ func _on_alpha_lock_toggled(toggled_on: bool) -> void:
 
 func _on_Dynamics_pressed() -> void:
 	var pos := dynamics.global_position + Vector2(0, 32)
-	dynamics_panel.popup(Rect2(pos, dynamics_panel.size))
+	dynamics_panel.popup_on_parent(Rect2(pos, dynamics_panel.size))

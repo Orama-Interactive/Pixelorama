@@ -69,7 +69,7 @@ func _button_pressed() -> void:
 				popup_menu.set_item_disabled(MOVE_LEFT, false)
 			if frame < Global.current_project.frames.size() - 1:
 				popup_menu.set_item_disabled(MOVE_RIGHT, false)
-		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
+		popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
 		button_pressed = !button_pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		button_pressed = !button_pressed

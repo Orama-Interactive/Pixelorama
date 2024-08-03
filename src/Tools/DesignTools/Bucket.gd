@@ -79,7 +79,7 @@ func _on_PatternType_pressed() -> void:
 	var popup: Popup = Global.patterns_popup
 	if !popup.pattern_selected.is_connected(_on_Pattern_selected):
 		popup.pattern_selected.connect(_on_Pattern_selected.bind(), CONNECT_ONE_SHOT)
-	popup.popup(Rect2i($FillPattern/Type.global_position, Vector2i(226, 72)))
+	popup.popup_on_parent(Rect2i($FillPattern/Type.global_position, Vector2i(226, 72)))
 
 
 func _on_Pattern_selected(pattern: Patterns.Pattern) -> void:

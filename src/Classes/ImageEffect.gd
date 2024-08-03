@@ -148,7 +148,7 @@ func set_nodes() -> void:
 	live_checkbox.button_pressed = live_preview
 
 
-func display_animate_dialog():
+func display_animate_dialog() -> void:
 	var animate_dialog: Popup = animate_panel.get_parent()
 	var pos := Vector2(position.x + size.x, position.y)
 	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.size.x, size.y))

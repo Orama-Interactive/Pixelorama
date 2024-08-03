@@ -141,8 +141,8 @@ func _on_Remove_pressed() -> void:
 			references_container.remove_reference_image(index)
 			references_panel._on_references_changed()
 		else:
-			confirm_remove_dialog.position = Global.control.get_global_mouse_position()
-			confirm_remove_dialog.popup()
+			var popup_position := Global.control.get_global_mouse_position()
+			confirm_remove_dialog.popup_on_parent(Rect2i(popup_position, Vector2i.ONE))
 			Global.dialog_open(true)
 
 

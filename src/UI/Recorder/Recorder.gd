@@ -163,7 +163,7 @@ func _on_Start_toggled(button_pressed: bool) -> void:
 
 
 func _on_Settings_pressed() -> void:
-	options_dialog.popup(Rect2(position, options_dialog.size))
+	options_dialog.popup_on_parent(Rect2(position, options_dialog.size))
 
 
 func _on_SkipAmount_value_changed(value: float) -> void:
