@@ -380,7 +380,10 @@ func _notification(what: int) -> void:
 			if Global.pause_when_unfocused:
 				get_tree().paused = true
 		NOTIFICATION_WM_MOUSE_EXIT:
-			if !get_window().has_focus() and Global.pause_when_unfocused:
+			# Do not pause the application if the mouse leaves the main window
+			# but there are child subwindows opened, because that makes them unresponsive.
+			var window_count := DisplayServer.get_window_list().size()
+			if not get_window().has_focus() and window_count == 1 and Global.pause_when_unfocused:
 				get_tree().paused = true
 		# Unpause it when the mouse enters the window or when it gains focus
 		NOTIFICATION_WM_MOUSE_ENTER:
