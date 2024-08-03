@@ -22,8 +22,10 @@ Built using Godot 4.2.2
 ### Fixed
 - The previews of the shape and selection tools no longer make Pixelorama to be so slow.
 - The performance of the shape tool drawing has been improved.
-- Fixed an issue where if you increased a palette's width but also decreased its height, some colors would be lost, and re-ordering colors immediately after resizing would result in even more data loss.
+- Fixed an issue where if you increased a palette's width but also decreased its height, some colors would be lost, and re-ordering colors immediately after resizing would result in even more data loss. [#684](https://github.com/Orama-Interactive/Pixelorama/issues/684)
 - Dialogs no longer close when Pixelorama's main window loses focus and regains it.
+- When single window mode is disabled, popup dialogs are no longer unclickable. [#1054](https://github.com/Orama-Interactive/Pixelorama/issues/1054)
+- Popups no longer appear in places outside the main window, if single window mode is disabled.
 - The zoom tool modes now actually reflect their behavior.
 - Fixed a bug where the opacity of multiple selected layers got automatically changed to be the same as the last selected layer's opacity.
 - Fixed an issue with some Windows versions where the dialogs could not be re-opened. [#1061](https://github.com/Orama-Interactive/Pixelorama/issues/1061)
@@ -127,6 +129,7 @@ Built using Godot 4.2.2
 - Pixelorama no longer quits when saving from the File menu, if the user attempted to save on exit before and cancelled the save file dialog.
 - The delete layer button is now immediately disabled when locking a layer, thus preventing the user from being able to delete a locked layer.
 - Button shortcuts, such as <kbd>X</kbd> for switch colors, no longer get activated when they shouldn't, like when pressing <kbd>Control + X</kbd>. [#1014](https://github.com/Orama-Interactive/Pixelorama/issues/1014)
+- System language should now pick locales more reliably. [#372](https://github.com/Orama-Interactive/Pixelorama/issues/372)
 - Fixed a bug where the exported files had the wrong tag name, if "Include frame tags in the file name" was enabled.
 - The text of the rulers is now being properly clipped. [#1023](https://github.com/Orama-Interactive/Pixelorama/pull/1023)
 
