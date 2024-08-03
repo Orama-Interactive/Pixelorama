@@ -109,7 +109,7 @@ const LANGUAGES_DICT := {
 
 ## The file path used for the [member config_cache] file.
 const CONFIG_PATH := "user://config.ini"
-## The file used to save preferences that use [code]ProjectSettings.save_custom()[/code].
+## The file used to save preferences that use [method _save_to_override_file].
 const OVERRIDE_FILE := "override.cfg"
 ## The name of folder containing Pixelorama preferences.
 const HOME_SUBDIR_NAME := "pixelorama"
@@ -217,8 +217,7 @@ var single_window_mode := true:
 		if value == single_window_mode:
 			return
 		single_window_mode = value
-		ProjectSettings.set_setting("display/window/subwindows/embed_subwindows", value)
-		ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
+		_save_to_override_file()
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
 ## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
@@ -485,8 +484,7 @@ var window_transparency := false:
 		if value == window_transparency:
 			return
 		window_transparency = value
-		ProjectSettings.set_setting("display/window/per_pixel_transparency/allowed", value)
-		ProjectSettings.save_custom(root_directory.path_join(OVERRIDE_FILE))
+		_save_to_override_file()
 
 ## Found in Preferences. The time (in minutes) after which backup is created (if enabled).
 var autosave_interval := 1.0:
@@ -1067,6 +1065,20 @@ func undo_redo_draw_op(
 ) -> void:
 	var decompressed := compressed_image_data.decompress(buffer_size)
 	image.set_data(new_size.x, new_size.y, image.has_mipmaps(), image.get_format(), decompressed)
+
+
+## This method is used to write project setting overrides to the override.cfg file, located
+## in the same directory as the executable.
+## We use this method instead of [method ProjectSettings.save_custom] because that copies
+## the entire project.godot file into override.cfg, which causes issues
+## because software updates will not be able to make changes to the project settings for
+## users who have already saved an override.cfg file, leading into confusion.
+## To avoid this issue, we just write the lines we want to the override.cfg file.
+func _save_to_override_file() -> void:
+	var file := FileAccess.open(OVERRIDE_FILE, FileAccess.WRITE)
+	file.store_line("[display]\n")
+	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
+	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)
 
 
 func create_ui_for_shader_uniforms(
