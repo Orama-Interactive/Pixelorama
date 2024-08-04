@@ -28,15 +28,17 @@ blend_mode = 4
 
 [sub_resource type="ShaderMaterial" id="2"]
 shader = ExtResource("9")
+shader_parameter/width = 0.05
 shader_parameter/first_color = Color(1, 1, 1, 1)
 shader_parameter/second_color = Color(0, 0, 0, 1)
 shader_parameter/animated = true
-shader_parameter/width = 0.05
 shader_parameter/frequency = 200.0
 shader_parameter/stripe_direction = 0.5
 
 [sub_resource type="ShaderMaterial" id="3"]
 shader = ExtResource("17_lowhf")
+shader_parameter/width = 0.05
+shader_parameter/hollow_shapes = true
 
 [node name="Canvas" type="Node2D"]
 material = SubResource("ShaderMaterial_6b0ox")
