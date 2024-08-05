@@ -44,6 +44,7 @@
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
+	<release version="1.0.1" date="2024-08-05"/>
 	<release version="1.0" date="2024-07-29"/>
 	<release version="0.11.4" date="2024-04-17"/>
 	<release version="0.11.3" date="2023-10-30"/>
