@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-07-29 08:46\n"
+"PO-Revision-Date: 2024-08-02 00:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -972,9 +972,6 @@ msgstr "オフセット Y:"
 msgid "Shadow color:"
 msgstr "影の色:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "色相/彩度/値を調整"
-
 msgid "Gradient"
 msgstr "グラディエーション"
 
@@ -1029,23 +1026,63 @@ msgstr "中心:"
 msgid "Dithering pattern:"
 msgstr "ディザリングパターン:"
 
-msgid "Adjust HSV"
-msgstr "HSVを調整"
-
 msgid "Type:"
 msgstr "タイプ:"
 
 msgid "Angle:"
 msgstr "角度:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "色相/彩度/値を調整"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "HSVを調整"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "色相:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "彩度:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "値:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr "明るさ/コントラストを調整"
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr "明るさ:"
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr "コントラスト:"
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr "赤値:"
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr "緑値:"
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr "青値:"
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr "色合い:"
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr "色合い係数:"
 
 msgid "Apply"
 msgstr "適用"
@@ -1415,7 +1452,13 @@ msgid "Curve Tool\n\n"
 "Press %s/%s to add new points\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "カーブツール\n\n"
+"%s 左マウスボタン\n"
+"%s 右マウスボタン\n\n"
+"ベジェ曲線を描画\n"
+"%s/%sを押して点を追加します\n"
+"押してドラッグして曲率を制御します\n"
+"%sを押して最後に追加した点を削除します"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1679,17 +1722,27 @@ msgstr "アプリのFPS上限を設定:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "アプリケーションのフレーム/秒の制限を設定します。 数値が低いほどCPU使用率が低くなりますが、アプリケーションが遅く、粗く、応答がなくなります。0は制限がないことを意味します。"
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "フォーカスを失ったときにアプリケーションを一時停止する"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失ったときに一時停止します。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったとき、アプリケーションは一時停止を解除します。"
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr "継続的に更新"
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+msgstr "これがオンに切り替えられている場合、アプリケーションは使用されていない間にも、画面を継続的に再描画します。 これをオフにすると、アイドル時のCPUとGPU使用率を低下させることができる。"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "ウィンドウの透明度を有効化"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "有効にすると、アプリケーションウィンドウは透明になります。これはパフォーマンスに影響しますので、必要がない場合はオフにしておいてください。"
 
@@ -2108,6 +2161,10 @@ msgstr "タグプロパティ"
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
 msgstr "新規タグ"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr "タグをインポート"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"

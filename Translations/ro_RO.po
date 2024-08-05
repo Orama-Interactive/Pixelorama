@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-07-29 13:50\n"
+"PO-Revision-Date: 2024-08-05 08:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -301,13 +301,13 @@ msgid "Add Layout"
 msgstr "Adăugare dispunere"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Copiere din"
 
 msgid "Rename"
-msgstr ""
+msgstr "Redenumire"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Redenumire dispunere"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
@@ -970,9 +970,6 @@ msgstr "Decalaj Y:"
 msgid "Shadow color:"
 msgstr "Culoarea umbrei:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Ajustare nuanță/saturație/valoare"
-
 msgid "Gradient"
 msgstr "Degrade"
 
@@ -1027,23 +1024,63 @@ msgstr "Centru:"
 msgid "Dithering pattern:"
 msgstr "Model de intercalare a nuanțelor:"
 
-msgid "Adjust HSV"
-msgstr "Ajustare NSV"
-
 msgid "Type:"
 msgstr "Tip:"
 
 msgid "Angle:"
 msgstr "Unghi:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Ajustare nuanță/saturație/valoare"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Ajustare NSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Nuanță:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Saturație:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Valoare:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr "Ajustare luminozitate/contrast"
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr "Luminozitate:"
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr "Contrast:"
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr "Valoare roșie:"
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr "Valoare verde:"
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr "Valoare albastră:"
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr "Culoare de nuanță:"
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr "Factor de efect de nuanță:"
 
 msgid "Apply"
 msgstr "Aplicare"
@@ -1683,17 +1720,27 @@ msgstr "Setare limită de cadre pe secundă pentru aplicație:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Întrerupe aplicația atunci când pierde focalizarea"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Dacă această opțiune este activată, în momentul în care fereastra aplicației pierde focalizarea, aceasta este întreruptă. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Aplicația își reia activitatea atunci când mausul intră în fereastra aplicației."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr "Actualizare continuă"
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+msgstr "Dacă această opțiune este activată, aplicația va redesena ecranul continuu, chiar dacă nu este folosit. Dezactivarea acestei opțiuni ajută la reducerea gradului de utilizare a unității centrale de procesare și a unității de procesare grafică în perioadele de inactivitate."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Activează transparența ferestrei"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Dacă opțiunea este activată, fereastra aplicației poate deveni transparentă. Aceasta afectează performanța, așa că este recomandată dezactivarea opțiunii dacă nu este necesară."
 
@@ -2101,7 +2148,7 @@ msgid "Frame properties"
 msgstr "Proprietățile cadrului"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Proprietățile stratului"
 
 msgid "Cel properties"
 msgstr "Proprietăți cel"
@@ -2112,6 +2159,10 @@ msgstr "Proprietăți etichetă"
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
 msgstr "Etichetă nouă"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr "Importare etichetă"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2128,7 +2179,7 @@ msgstr "Straturi"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr "Mască de tăiere"
+msgstr "Mască de decupare"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -3179,7 +3230,7 @@ msgstr "Opacitate"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Limitarea valorilor de culoare"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"

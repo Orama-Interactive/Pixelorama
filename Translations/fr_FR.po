@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-07-29 10:39\n"
+"PO-Revision-Date: 2024-08-01 22:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -970,9 +970,6 @@ msgstr "Décalage Y :"
 msgid "Shadow color:"
 msgstr "Couleur d'ombre :"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Ajuster la Teinte/Saturation/Valeur"
-
 msgid "Gradient"
 msgstr "Dégradé"
 
@@ -1027,23 +1024,63 @@ msgstr "Centre :"
 msgid "Dithering pattern:"
 msgstr "Motif de Tramage:"
 
-msgid "Adjust HSV"
-msgstr "Ajuster TSV"
-
 msgid "Type:"
 msgstr "Type:"
 
 msgid "Angle:"
 msgstr "Angle :"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Ajuster la Teinte/Saturation/Valeur"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Ajuster TSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Teinte :"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Saturation :"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Valeur :"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr ""
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr "Luminosité :"
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr "Contraste :"
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr ""
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr ""
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr ""
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr ""
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Appliquer"
@@ -1674,17 +1711,27 @@ msgstr "Définir la limite FPS de l'application :"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Met l'application en pause quand elle perd le focus"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Si activé, l'application est mise en pause quand le focus est perdu. Cela aide à réduire l'usage du processeur en période d'inactivité. L'application sort de pause quand la souris entre à nouveau dans sa fenêtre."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr ""
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Activer la transparence de fenêtre"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Si cette option est activée, la fenêtre d'application peut devenir transparente. Cela affecte les performances, donc désactivez-la si vous n'en avez pas besoin."
 
@@ -2103,6 +2150,10 @@ msgstr "Propriétés du tag"
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
 msgstr "Nouveau tag"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"

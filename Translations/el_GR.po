@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-07-29 00:29\n"
+"PO-Revision-Date: 2024-08-01 22:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -192,7 +192,7 @@ msgstr "Αναδίπλωση:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr "Κεντράρισμα Καρέ"
+msgstr "Κεντράρισμα καρέ"
 
 msgid "Rotate Image"
 msgstr "Περιστροφή εικόνας"
@@ -972,9 +972,6 @@ msgstr "Μετατόπιση Y:"
 msgid "Shadow color:"
 msgstr "Χρώμα σκιάς:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
-
 msgid "Gradient"
 msgstr "Διαβάθμιση"
 
@@ -1029,23 +1026,63 @@ msgstr "Κέντρο:"
 msgid "Dithering pattern:"
 msgstr "Μοτίβο χρωματικής αντιπαράθεσης:"
 
-msgid "Adjust HSV"
-msgstr "Ρύθμιση HSV"
-
 msgid "Type:"
 msgstr "Είδος:"
 
 msgid "Angle:"
 msgstr "Γωνία:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Ρύθμιση HSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Απόχρωση:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Κορεσμός:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Τιμή:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr "Ρύθμιση φωτεινότητας/αντίθεσης"
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr "Φωτεινότητα:"
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr "Αντίθεση:"
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr "Κόκκινη τιμή:"
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr "Πράσινη τιμή:"
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr "Μπλε τιμή:"
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr "Απόχρωση:"
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr "Παράγοντας απόχρωσης:"
 
 msgid "Apply"
 msgstr "Εφαρμογή"
@@ -1685,17 +1722,27 @@ msgstr "Ορισμός ορίου FPS εφαρμογής:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Ορίζει το όριο των καρέ της εφαρμογής ανά δευτερόλεπτο. Όσο μικρότερος είναι ο αριθμός, τόσο χαμηλότερη είναι η χρήση της CPU, αλλά η εφαρμογή γίνεται πιο αργή, ασταθής και λιγότερο ανταποκρινόμενη. 0 σημαίνει ότι δεν υπάρχει όριο."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Παύση εφαρμογής όταν χάνει την εστίαση"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, γίνεται παύση της εφαρμογής. Αυτό βοηθά στη μείωση της χρήσης του επεξεργαστή (CPU) όταν βρίσκεται σε αδράνεια. Η εφαρμογή συνεχίζεται όταν το ποντίκι εισέρχεται στο παράθυρο της."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr "Συνεχής ανανέωση"
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+msgstr "Αν είναι ενεργοποιημένο, η εφαρμογή θα ανανεώνει την οθόνη συνεχώς, ακόμα και αν δε χρησιμοποιείται. Η απενεργοποίηση αυτής της λειτουργίας βοηθά στη μείωση της χρήσης CPU και GPU όταν είναι αδρανείς."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Ενεργοποίηση διαφάνειας παραθύρου"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Αν ενεργοποιηθεί, το παράθυρο της εφαρμογής μπορεί να γίνει διαφανές. Αυτό επηρεάζει τις επιδόσεις, οπότε κρατήστε το απενεργοποιημένο αν δεν το χρειάζεστε."
 
@@ -2073,16 +2120,16 @@ msgid "Add a new frame"
 msgstr "Προσθήκη νέου καρέ"
 
 msgid "Remove Frame"
-msgstr "Διαγραφή Καρέ"
+msgstr "Διαγραφή καρέ"
 
 msgid "Clone Frame"
-msgstr "Κλωνοποίηση Καρέ"
+msgstr "Κλωνοποίηση καρέ"
 
 msgid "Move Left"
-msgstr "Μετακίνηση Αριστερά"
+msgstr "Μετακίνηση αριστερά"
 
 msgid "Move Right"
-msgstr "Μετακίνηση Δεξιά"
+msgstr "Μετακίνηση δεξιά"
 
 msgid "Add Frame Tag"
 msgstr "Προσθήκη Ετικέτας Καρέ"
@@ -2115,9 +2162,13 @@ msgstr "Ιδιότητες ετικέτας"
 msgid "New Tag"
 msgstr "Νέα ετικέτα"
 
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr "Εισαγωγή ετικέτας"
+
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr "Αντιστροφή Καρέ"
+msgstr "Αντιστροφή καρέ"
 
 msgid "Layer"
 msgstr "Στρώση"

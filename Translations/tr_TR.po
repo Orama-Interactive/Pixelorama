@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-07-28 23:27\n"
+"PO-Revision-Date: 2024-08-02 13:34\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -101,7 +101,9 @@ msgstr "Harmanlanmış görüntüleri dahil et"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Etkinleştirilirse, son harmanlanmış görüntüler de her kare için pxo'da saklanır. Bu, pxo dosyasını \n"
+"daha büyük hale getirir ve üçüncü taraf yazılımlar tarafından içe ya da CLI dışa aktarma için kullanışlıdır. \n"
+"Pixelorama'da pxo dosyalarını yüklemek için bu seçeneğin etkinleştirilmesine gerek yoktur."
 
 msgid "Import"
 msgstr "İçe aktar"
@@ -637,25 +639,25 @@ msgid "Export dimensions:"
 msgstr "Dışa aktarma boyutları:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Dosya Kaydet"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Önceki klasöre git."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Sonraki klasöre git."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Üst klasöre git."
 
 msgid "Path:"
 msgstr "Yol:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Dosyaları yenile."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Gizli dosyaların görünürlüğünü değiştir."
 
 msgid "Directories & Files:"
 msgstr "Dizinler ve Dosyalar:"
@@ -668,51 +670,51 @@ msgstr "Dosya:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Tüm Dosyalar"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Tüm Tanınanlar"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Pixelorama Projesi"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "PNG Görüntüsü"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "BMP Görüntüsü"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Radiance HDR Görüntüsü"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "JPEG Görüntüsü"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "SVG Görüntüsü"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "TGA Görüntüsü"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "WebP Görüntüsü"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Pixelorama paleti"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "GIMP paleti"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -970,9 +972,6 @@ msgstr "Uzaklık Y:"
 msgid "Shadow color:"
 msgstr "Gölge rengi:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Renk Tonu/Doygunluk/Değer Ayarla"
-
 msgid "Gradient"
 msgstr "Gradyan"
 
@@ -1027,23 +1026,63 @@ msgstr "Ortala:"
 msgid "Dithering pattern:"
 msgstr "Titreme kalıbı:"
 
-msgid "Adjust HSV"
-msgstr "HSV Ayarla"
-
 msgid "Type:"
 msgstr "Tür:"
 
 msgid "Angle:"
 msgstr "Açı:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Renk Tonu/Doygunluk/Değer Ayarla"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "HSV Ayarla"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Renk Tonu:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Doygunluk:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Değer:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr "Parlaklığı/Karşıtlığı Ayarla"
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr "Parlaklık:"
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr "Karşıtlık:"
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr "Kırmızı değeri:"
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr "Yeşil değeri:"
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr "Mavi değeri:"
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr "Renk tonu rengi:"
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr "Renk tonu efekti katsayısı:"
 
 msgid "Apply"
 msgstr "Uygula"
@@ -1322,7 +1361,9 @@ msgstr "Kement / Serbest Seçim Aracı\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Çizime Göre Seç\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1356,7 +1397,8 @@ msgstr "Renk Seçici\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Kırp\n\n"
+"Tuvali yeniden boyutlandır"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1462,7 +1504,7 @@ msgstr "Sağ ve sol renklerini yer değiştir."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Ortalama Renk:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Renkleri varsayılan durumuna sıfırla (sol için siyah, sağ için beyaz)"
@@ -1473,7 +1515,7 @@ msgstr "Ekrandan renk seç."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "On altılık renk kodu (\"#ff0000\") ya da renk adı (\"red\") giriniz."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1485,19 +1527,19 @@ msgstr "Renk seçenekleri"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Seçici kipi seç."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Renkli Kaydırıcılar"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Renk Örnekleri"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Son Renkler"
 
 msgid "Left tool"
 msgstr "Sol araç"
@@ -1680,17 +1722,27 @@ msgstr "Uygulama FPS sınırını ayarla:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Uygulamanın saniyedeki kare sınırını ayarlar. Rakam ne kadar düşük olursa CPU kullanımı o kadar düşük olur, ancak uygulama daha yavaş, kesikli ve tepkisiz hale gelir. 0, sınır olmadığı anlamına gelir."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Odağı kaybettiğinde uygulamayı duraklat"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Bu açılırsa, uygulamanın penceresi odağı kaybettiğinde duraklatılır. Bu, boştayken CPU kullanımını düşürmeye yardımcı olur. Fare uygulamanın penceresine girdiğinde uygulamanın duraklatılması kaldırılır."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr "Sürekli güncelle"
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+msgstr "Etkinse, uygulama kullanılmasa bile ekranı sürekli olarak yeniden çizer. Bunu kapatmak, boştayken işlemci ve ekran kartı kullanımını azaltmaya yardımcı olur."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Pencere saydamlığını etkinleştir"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Etkinleştirilirse uygulama penceresi saydam olur. Başarımı etkilediği için ihtiyacınız yoksa kapatınız."
 
@@ -1963,22 +2015,22 @@ msgid "Current frame as spritesheet"
 msgstr "Model sayfası olarak geçerli kare"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "İlk kareye atla"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Önceki kareye git"
 
 msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgstr "Animasyonu tersten oynat (sondan başa)"
 
 msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgstr "Animasyonu ileri oynat (baştan sonra)"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Sonraki kareye git"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Son kareye atla"
 
 msgid "Timeline settings"
 msgstr "Zaman çizelgesi ayarları"
@@ -2109,6 +2161,10 @@ msgstr "Etiket özellikleri"
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
 msgstr "Yeni etiket"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr "Etiketi İçe Aktar"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -3102,24 +3158,25 @@ msgstr "Tek Renk"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "Görüntü açılırken, referans olarak içe aktarılabilir."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr ""
+msgstr "Özelliklerini değiştirmek için aşağıdan görüntü seçin.\n"
+"Referans görüntü seçiliyken çizim yapamayacağınızı unutmayın."
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr ""
+msgstr "Kaldır"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Anında kaldırmak için Shift tuşunu basılı tutun."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Bu referans görüntüyü kaldırmak istediğinizden emin misiniz? Dosya sisteminizden silinmeyecek."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3147,35 +3204,35 @@ msgstr "Seçilen referans görüntüyü ölçekle"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "hiç biri"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Dönüşmeyi Sıfırla"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
-msgstr ""
+msgstr "Konum"
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
-msgstr ""
+msgstr "Ölçek"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Döndürme"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Süz"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Matlık"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Renk Yakalama"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"

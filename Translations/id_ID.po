@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-07-28 23:27\n"
+"PO-Revision-Date: 2024-08-05 03:40\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -101,7 +101,9 @@ msgstr "Sertakan gambar tercampur"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Jika diaktifkan, bentuk akhir gambar tercampur akan disimpan jadi pxo, ke tiap bingkai.\n"
+"Berkas pxo akan lebih besar dan mampu diimpor dengan peranti lunak pihak ketiga\n"
+"atau diekspor CLI. Memuat pxo di Pixelorama tidak perlu mengaktifkan opsi ini."
 
 msgid "Import"
 msgstr "Impor"
@@ -637,25 +639,25 @@ msgid "Export dimensions:"
 msgstr "Ukuran saat ekspor:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Simpan Berkas"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Ke folder sebelumnya."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Ke folder berikutnya."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Ke direktori utama."
 
 msgid "Path:"
 msgstr "Jalur:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Segarkan berkas."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Cetik ketampakan berkas sembunyi."
 
 msgid "Directories & Files:"
 msgstr "Direktori & Berkas:"
@@ -668,51 +670,51 @@ msgstr "Berkas:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Semua Berkas"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Semua Ekstensi"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Proyek Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Gambar PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Gambar BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Gambar HDR Radiansi"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Gambar JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Gambar SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Gambar TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Gambar WebP"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Palet Pixelorama"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "Palet GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -959,7 +961,7 @@ msgid "Outline"
 msgstr "Garis luar"
 
 msgid "Drop Shadow"
-msgstr "Drop Shadow"
+msgstr "Bayangan Jatuh"
 
 msgid "Offset X:"
 msgstr "Offset X:"
@@ -969,9 +971,6 @@ msgstr "Offset Y:"
 
 msgid "Shadow color:"
 msgstr "Warna bayangan:"
-
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Sesuaikan Rona/Saturasi/Nilai"
 
 msgid "Gradient"
 msgstr "Gradien"
@@ -1027,23 +1026,63 @@ msgstr "Tengah:"
 msgid "Dithering pattern:"
 msgstr "Pola bauran galat:"
 
-msgid "Adjust HSV"
-msgstr "Sesuaikan HSV"
-
 msgid "Type:"
 msgstr "Tipe:"
 
 msgid "Angle:"
 msgstr "Sudut:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Sesuaikan Rona/Saturasi/Nilai"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Sesuaikan HSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Rona:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Saturasi:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Nilai:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr "Sesuaikan Kecerahan/Kontras"
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr "Kecerahan:"
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr "Kontras:"
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr "Nilai merah:"
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr "Nilai hijau:"
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr "Nilai biru:"
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr "Semburat:"
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr "Faktor semburat:"
 
 msgid "Apply"
 msgstr "Terapkan"
@@ -1322,7 +1361,9 @@ msgstr "Lasso / Alat Pemangkas\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Pilih sesuai M'gambar\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1356,7 +1397,8 @@ msgstr "Pemilih Warna\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Pangkas\n\n"
+"Ubah besar kanvas"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1462,7 +1504,7 @@ msgstr "Tukar warna kiri dan kanan."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Warna Rata-rata:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Kembalikan ke warna bawaan (hitam di kiri, putih di kanan)"
@@ -1473,7 +1515,7 @@ msgstr "Ambil warna dari layar."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Ketik kode heks (\"#ff0000\") atau nama warna (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1485,19 +1527,19 @@ msgstr "Opsi warna"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Pilih mode pemilih."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Penggeser Berwarna"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Contoh Warna"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Warna saat ini"
 
 msgid "Left tool"
 msgstr "Alat di kiri"
@@ -1680,17 +1722,27 @@ msgstr "Batas FPS aplikasi:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Jedakan aplikasi saat hilang fokus"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Jika dinyalakan, saat jendela aplikasi hilang fokus, nanti akan dijeda. Ini membantu mengurangi penggunaan CPU saat terbiar. Aplikasi akan tidak dijeda saat tetikus ada pada jendela aplikasi."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr "Terus perbarui"
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+msgstr "Jika opsi ini dicetik, aplikasi akan terus menyegarkan layar bahkan saat tidak. Menonaktifkan ini membantu mengurangi penggunaan CPU saat terbiar."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Aktifkan transparansi jendela"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Jika diaktifkan, jendela aplikasi akan tampil transparan. Ini juga menguras kinerja, nonaktifkan saja jika tidak perlu."
 
@@ -1963,22 +2015,22 @@ msgid "Current frame as spritesheet"
 msgstr "Jadikan bingkai ini lembar sprite"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Lompat ke bingkai pertama"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Ke bingkai sebelumnya"
 
 msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgstr "Putar animasi secara mundur (dari akhir sampai awal)"
 
 msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgstr "Putar animasi secara normal (dari awal sampai akhir)"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Ke bingkai selanjutnya"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Lompat ke bingkai terakhir"
 
 msgid "Timeline settings"
 msgstr "Pengaturan garis waktu"
@@ -2109,6 +2161,10 @@ msgstr "Properti Tag"
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
 msgstr "Tag Baru"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr "Impor Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2249,7 +2305,7 @@ msgid "Tile mode opacity:"
 msgstr "Kelegapan mode petak:"
 
 msgid "Toggle layer's visibility"
-msgstr "Cetik keterlihatan lapisan"
+msgstr "Cetik ketampakan lapisan"
 
 msgid "Lock/unlock layer"
 msgstr "Kuncikan/buka lapisan"
@@ -2293,10 +2349,10 @@ msgid "Redo: Select"
 msgstr "Ulangi: Pilih"
 
 msgid "Undo: Scale"
-msgstr "Urungkan: Ubah besar"
+msgstr "Urungkan: Skalakan"
 
 msgid "Redo: Scale"
-msgstr "Ulangi: Ubah besar"
+msgstr "Ulangi: Skalakan"
 
 msgid "Undo: Add Layer"
 msgstr "Urungkan: Tambah Lapisan"
@@ -2552,7 +2608,7 @@ msgid "Set the shortcut"
 msgstr "Atur pintasan"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr "Tekan tombol atau gabungan tombol untuk dijadikan pintasan"
+msgstr "Tekan tombol atau kombo tombol untuk dijadikan pintas"
 
 msgid "Already assigned"
 msgstr "Pernah ditetapkan"
@@ -2939,7 +2995,7 @@ msgstr "Tenaga warna ambien:"
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr "Terlihat:"
+msgstr "Tampak:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
@@ -3102,24 +3158,25 @@ msgstr "Ekawarna"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "Saat membuka gambar, bisa jadi diimpor sebagai rujukan."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr ""
+msgstr "Pilih gambar di bawah untuk mengubah propertinya.\n"
+"Tidak akan bisa menggambar saat memilih gambar rujukan."
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr ""
+msgstr "Hapus"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Tahan Shift saat menekan untuk langsung hapus."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Apakah yakin ingin menghapus gambar rujukan ini? Tidak akan dihapus dari berkas sistem."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3147,35 +3204,35 @@ msgstr "Skalakan gambar rujukan terpilih"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "tak ada"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Atur Ulang Ubah Bentuk"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
-msgstr ""
+msgstr "Posisi"
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
-msgstr ""
+msgstr "Skala"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Putaran"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Saring"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Kelegapan"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Batasi Nilai Warna"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"

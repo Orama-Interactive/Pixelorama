@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-07-28 23:27\n"
+"PO-Revision-Date: 2024-08-02 18:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,9 @@ msgstr "Dołącz mieszane obrazy"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Jeśli ta opcja jest włączona, ostateczne połączone obrazy są również przechowywane w pliku pxo dla każdej klatki.\n"
+" Sprawia to iż plik pxo jest większy i jest przydatny w przypadku importowania za pomocą oprogramowania innych firm\n"
+" lub eksportu CLI. Obsługa plików pxo w Pixeloramie nie wymaga włączenia tej opcji."
 
 msgid "Import"
 msgstr "Importuj"
@@ -636,22 +638,22 @@ msgid "Export dimensions:"
 msgstr "Wymiary Exportu:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Zapisz plik"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Przejdź do poprzedniego folderu."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Przejdź do następnego folderu."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Przejdź do folderu nadrzędnego."
 
 msgid "Path:"
 msgstr "Ścieżka:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Odśwież pliki."
 
 msgid "Toggle the visibility of hidden files."
 msgstr ""
@@ -969,9 +971,6 @@ msgstr "Przesunięcie Y:"
 msgid "Shadow color:"
 msgstr "Kolor cienia:"
 
-msgid "Adjust Hue/Saturation/Value"
-msgstr "Dostosuj Odcień/Nasycenie/Wartość"
-
 msgid "Gradient"
 msgstr "Gradient"
 
@@ -1026,23 +1025,63 @@ msgstr "Środek:"
 msgid "Dithering pattern:"
 msgstr "Wzór ditheringu:"
 
-msgid "Adjust HSV"
-msgstr "Dostosuj HSV"
-
 msgid "Type:"
 msgstr "Typ:"
 
 msgid "Angle:"
 msgstr "Kąt:"
 
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+msgid "Adjust Hue/Saturation/Value"
+msgstr "Dostosuj Odcień/Nasycenie/Wartość"
+
+#. HSV stands for Hue, Saturation & Value.
+msgid "Adjust HSV"
+msgstr "Dostosuj HSV"
+
+#. Refers to the hue of the colors of an image.
 msgid "Hue:"
 msgstr "Odcień:"
 
+#. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
 msgstr "Nasycenie:"
 
+#. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
 msgstr "Wartość:"
+
+#. An image effect. Adjusts the brightness and contrast of the colors of an image.
+msgid "Adjust Brightness/Contrast"
+msgstr "Dostosuj jasność/kontrast"
+
+#. Refers to the brightness of the colors of an image.
+msgid "Brightness:"
+msgstr "Jasność:"
+
+#. Refers to the contrast of the colors of an image.
+msgid "Contrast:"
+msgstr "Kontrast:"
+
+#. Refers to the red value of the colors of an image.
+msgid "Red value:"
+msgstr "Czerwona wartości:"
+
+#. Refers to the green value of the colors of an image.
+msgid "Green value:"
+msgstr "Zielona wartość:"
+
+#. Refers to the blue value of the colors of an image.
+msgid "Blue value:"
+msgstr "Wartość niebieska:"
+
+#. Refers to a color that tints an image.
+msgid "Tint color:"
+msgstr "Odcień koloru:"
+
+#. Refers to the factor (how much) a color tints an image.
+msgid "Tint effect factor:"
+msgstr "Współczynnik efektu odcienia:"
 
 msgid "Apply"
 msgstr "Zastosuj"
@@ -1678,17 +1717,27 @@ msgstr "Ustaw limit FPS dla aplikacji:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Ustawia limit klatek aplikacji na sekundę. Im niższa liczba, tym niższe zużycie procesora, ale aplikacja staje się wolniejsza. 0 oznacza, że nie ma limitu."
 
+#. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Zapauzuj aplikację, gdy straci skupienie"
 
+#. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Jeśli ta opcja jest włączona i okno aplikacji traci skupienie, to program zostanie zapauzowany. To pomaga zmniejszyć użycie procesora, kiedy aplikacja działa w tle. Aplikacja zostaje odpauzowana, kiedy myszka pojawi się na oknie aplikacji."
+
+#. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
+msgid "Update continuously"
+msgstr ""
+
+#. Found in the preferences, hint of the "Update continuously" option.
+msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
+msgstr "Jeśli ta opcja jest włączona, aplikacja będzie ciągle odświeżać ekran, nawet gdy nie jest używana. Wyłączenie tej opcji pomaga obniżyć użycie procesora i procesora graficznego w stanie bezczynności."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
 msgstr "Włącz przezroczystość okna"
 
-#. Found in the preferences, tooltip of the "Enable window transparency" option.
+#. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Jeśli ta opcja jest włączona, okno aplikacji może stać się przezroczyste. Ma to na wpływ wydajność, więc wyłącz tę opcję, jeśli jej nie potrzebujesz."
 
@@ -2107,6 +2156,10 @@ msgstr "Właściwości tagu"
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
 msgstr "Nowy tag"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
+msgid "Import Tag"
+msgstr "Import tagów"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
