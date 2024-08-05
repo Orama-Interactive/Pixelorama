@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-08-05 06:22\n"
+"PO-Revision-Date: 2024-08-05 08:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -301,13 +301,13 @@ msgid "Add Layout"
 msgstr "Adăugare dispunere"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Copiere din"
 
 msgid "Rename"
-msgstr ""
+msgstr "Redenumire"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Redenumire dispunere"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
@@ -1734,7 +1734,7 @@ msgstr "Actualizare continuă"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Dacă această opțiune este activată, aplicația va redesena ecranul continuu, chiar dacă nu este folosit. Dezactivarea acestei opțiuni ajută la reducerea gradului de utilizare a unității centrale de procesare și a unității de procesare grafică în perioadele de inactivitate."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -2148,7 +2148,7 @@ msgid "Frame properties"
 msgstr "Proprietățile cadrului"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Proprietățile stratului"
 
 msgid "Cel properties"
 msgstr "Proprietăți cel"
@@ -2162,7 +2162,7 @@ msgstr "Etichetă nouă"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Importare etichetă"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2179,7 +2179,7 @@ msgstr "Straturi"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr "Mască de tăiere"
+msgstr "Mască de decupare"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
