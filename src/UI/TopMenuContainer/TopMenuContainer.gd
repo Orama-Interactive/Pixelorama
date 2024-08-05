@@ -401,7 +401,7 @@ func _setup_effects_menu() -> void:
 		"Invert Colors": "invert_colors",
 		"Desaturation": "desaturation",
 		"Adjust Hue/Saturation/Value": "adjust_hsv",
-		"Adjust Brightness/Saturation": "adjust_brightness_saturation",
+		"Adjust Brightness/Contrast": "adjust_brightness_contrast",
 		"Palettize": "palettize",
 		"Pixelize": "pixelize",
 		"Posterize": "posterize",

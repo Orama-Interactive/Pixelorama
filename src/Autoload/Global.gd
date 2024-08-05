@@ -745,7 +745,7 @@ func _initialize_keychain() -> void:
 		&"outline": Keychain.InputAction.new("", "Effects menu", true),
 		&"drop_shadow": Keychain.InputAction.new("", "Effects menu", true),
 		&"adjust_hsv": Keychain.InputAction.new("", "Effects menu", true),
-		&"adjust_brightness_saturation": Keychain.InputAction.new("", "Effects menu", true),
+		&"adjust_brightness_contrast": Keychain.InputAction.new("", "Effects menu", true),
 		&"gradient": Keychain.InputAction.new("", "Effects menu", true),
 		&"gradient_map": Keychain.InputAction.new("", "Effects menu", true),
 		&"palettize": Keychain.InputAction.new("", "Effects menu", true),
