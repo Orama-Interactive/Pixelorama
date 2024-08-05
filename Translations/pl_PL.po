@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-08-05 21:52\n"
+"PO-Revision-Date: 2024-08-05 22:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -957,7 +957,7 @@ msgid "Desaturation"
 msgstr "Desaturacja (zmniejsz nasycenie)"
 
 msgid "Outline"
-msgstr "Krawędź"
+msgstr "Obrys"
 
 msgid "Drop Shadow"
 msgstr "Cień"
@@ -2093,7 +2093,7 @@ msgstr "Jeśli jest zaznaczone, animacja odtwarza się tylko na klatkach z tym s
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr "Rozmiar komórki:"
+msgstr "Rozmiar kalki:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -2151,7 +2151,7 @@ msgid "Layer properties"
 msgstr "Właściwości warstwy"
 
 msgid "Cel properties"
-msgstr "Właściwości komórki"
+msgstr "Właściwości kalki"
 
 msgid "Tag properties"
 msgstr "Właściwości tagu"
