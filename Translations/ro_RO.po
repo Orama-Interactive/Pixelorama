@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-08-01 22:06\n"
+"PO-Revision-Date: 2024-08-05 06:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1052,35 +1052,35 @@ msgstr "Valoare:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Ajustare luminozitate/contrast"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Luminozitate:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Contrast:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Valoare roșie:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Valoare verde:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Valoare albastră:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Culoare de nuanță:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Factor de efect de nuanță:"
 
 msgid "Apply"
 msgstr "Aplicare"
