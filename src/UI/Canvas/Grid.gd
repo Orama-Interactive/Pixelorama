@@ -53,20 +53,22 @@ func _draw_cartesian_grid(target_rect: Rect2i) -> void:
 func _draw_isometric_grid(target_rect: Rect2i) -> void:
 	var grid_multiline_points := PackedVector2Array()
 
-	var cell_size := Global.isometric_grid_size
-	var max_cell_count := target_rect.size / cell_size
-	var origin_offset := Vector2(Global.grid_offset - target_rect.position).posmodv(cell_size)
+	var cell_size: Vector2 = Global.isometric_grid_size
+	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
+	var origin_offset: Vector2 = Vector2(Global.grid_offset - target_rect.position).posmodv(
+		cell_size
+	)
 
 	# lines ↗↗↗ (from bottom-left to top-right)
-	var per_cell_offset := cell_size * Vector2i(1, -1)
+	var per_cell_offset: Vector2 = cell_size * Vector2(1, -1)
 
 	#  lines ↗↗↗ starting from the rect's left side (top to bottom):
 	var y: float = fposmod(
 		origin_offset.y + cell_size.y * (0.5 + origin_offset.x / cell_size.x), cell_size.y
 	)
 	while y < target_rect.size.y:
-		var start: Vector2 = target_rect.position + Vector2i(0, y)
-		var cells_to_rect_bounds := minf(max_cell_count.x, y / cell_size.y)
+		var start: Vector2 = Vector2(target_rect.position) + Vector2(0, y)
+		var cells_to_rect_bounds: float = minf(max_cell_count.x, y / cell_size.y)
 		var end := start + cells_to_rect_bounds * per_cell_offset
 		grid_multiline_points.push_back(start)
 		grid_multiline_points.push_back(end)
@@ -75,8 +77,8 @@ func _draw_isometric_grid(target_rect: Rect2i) -> void:
 	#  lines ↗↗↗ starting from the rect's bottom side (left to right):
 	var x: float = (y - target_rect.size.y) / cell_size.y * cell_size.x
 	while x < target_rect.size.x:
-		var start: Vector2 = target_rect.position + Vector2i(x, target_rect.size.y)
-		var cells_to_rect_bounds := minf(max_cell_count.y, max_cell_count.x - x / cell_size.x)
+		var start: Vector2 = Vector2(target_rect.position) + Vector2(x, target_rect.size.y)
+		var cells_to_rect_bounds: float = minf(max_cell_count.y, max_cell_count.x - x / cell_size.x)
 		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
 		grid_multiline_points.push_back(start)
 		grid_multiline_points.push_back(end)
@@ -88,8 +90,8 @@ func _draw_isometric_grid(target_rect: Rect2i) -> void:
 	#  lines ↘↘↘ starting from the rect's left side (top to bottom):
 	y = fposmod(origin_offset.y - cell_size.y * (0.5 + origin_offset.x / cell_size.x), cell_size.y)
 	while y < target_rect.size.y:
-		var start: Vector2 = target_rect.position + Vector2i(0, y)
-		var cells_to_rect_bounds := minf(max_cell_count.x, max_cell_count.y - y / cell_size.y)
+		var start: Vector2 = Vector2(target_rect.position) + Vector2(0, y)
+		var cells_to_rect_bounds: float = minf(max_cell_count.x, max_cell_count.y - y / cell_size.y)
 		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
 		grid_multiline_points.push_back(start)
 		grid_multiline_points.push_back(end)
@@ -98,8 +100,8 @@ func _draw_isometric_grid(target_rect: Rect2i) -> void:
 	#  lines ↘↘↘ starting from the rect's top side (left to right):
 	x = fposmod(origin_offset.x - cell_size.x * (0.5 + origin_offset.y / cell_size.y), cell_size.x)
 	while x < target_rect.size.x:
-		var start: Vector2 = target_rect.position + Vector2i(x, 0)
-		var cells_to_rect_bounds := minf(max_cell_count.y, max_cell_count.x - x / cell_size.x)
+		var start: Vector2 = Vector2(target_rect.position) + Vector2(x, 0)
+		var cells_to_rect_bounds: float = minf(max_cell_count.y, max_cell_count.x - x / cell_size.x)
 		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
 		grid_multiline_points.push_back(start)
 		grid_multiline_points.push_back(end)
