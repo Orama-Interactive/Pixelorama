@@ -22,15 +22,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
 			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
 		else:
 			var cel := frame.cels[layer.index]
-			var cel_image := Image.new()
-			cel_image.copy_from(cel.get_image())
-			if cel.get_final_opacity(layer) < 1.0:  # If we have cel transparency
-				for xx in cel_image.get_size().x:
-					for yy in cel_image.get_size().y:
-						var pixel_color := cel_image.get_pixel(xx, yy)
-						pixel_color.a *= cel.opacity
-						cel_image.set_pixel(xx, yy, pixel_color)
-			image.blend_rect(cel_image, blend_rect, origin)
+			DrawingAlgos.blend_layers_headless(image, project, layer, cel, origin)
 	return image
 
 

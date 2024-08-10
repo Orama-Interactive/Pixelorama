@@ -51,18 +51,7 @@ func blend_layers(
 				include = false
 		var cel := frame.cels[ordered_index]
 		if DisplayServer.get_name() == "headless":
-			var opacity := cel.get_final_opacity(layer)
-			var cel_image := Image.new()
-			cel_image.copy_from(cel.get_image())
-			if opacity < 1.0:  # If we have cel or layer transparency
-				for xx in cel_image.get_size().x:
-					for yy in cel_image.get_size().y:
-						var pixel_color := cel_image.get_pixel(xx, yy)
-						var alpha := pixel_color.a * opacity
-						cel_image.set_pixel(
-							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-						)
-			image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
+			blend_layers_headless(image, project, layer, cel, origin)
 		else:
 			var cel_image := layer.display_effects(cel)
 			textures.append(cel_image)
@@ -98,6 +87,21 @@ func set_layer_metadata_image(
 		image.set_pixel(index, 3, Color.WHITE)
 	else:
 		image.set_pixel(index, 3, Color.BLACK)
+
+
+func blend_layers_headless(
+	image: Image, project: Project, layer: BaseLayer, cel: BaseCel, origin: Vector2i
+) -> void:
+	var opacity := cel.get_final_opacity(layer)
+	var cel_image := Image.new()
+	cel_image.copy_from(cel.get_image())
+	if opacity < 1.0:  # If we have cel or layer transparency
+		for xx in cel_image.get_size().x:
+			for yy in cel_image.get_size().y:
+				var pixel_color := cel_image.get_pixel(xx, yy)
+				pixel_color.a *= opacity
+				cel_image.set_pixel(xx, yy, pixel_color)
+	image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html
