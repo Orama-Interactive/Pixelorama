@@ -196,7 +196,7 @@ func get_ellipse_points_filled(pos: Vector2i, size: Vector2i, thickness := 1) ->
 	return border + filling
 
 
-func scale_3x(sprite: Image, tol := 50.0) -> Image:
+func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 	var scaled := Image.create(
 		sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8
 	)
@@ -475,11 +475,15 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 				sprite.set_pixel(x, y, Color(0, 0, 0, 0))
 
 
-func similar_colors(c1: Color, c2: Color, tol := 100.0) -> bool:
-	var v1 := Vector4(c1.r, c1.g, c1.b, c1.a)
-	var v2 := Vector4(c2.r, c2.g, c2.b, c2.a)
-	var dist := v2.distance_to(v1)
-	return dist <= (tol / 255.0)
+## Compares two colors, and returns [code]true[/code] if the difference of these colors is
+## less or equal to the tolerance [param tol]. [param tol] is in the range of 0-1.
+func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
+	return (
+		absf(c1.r - c2.r) <= tol
+		&& absf(c1.g - c2.g) <= tol
+		&& absf(c1.b - c2.b) <= tol
+		&& absf(c1.a - c2.a) <= tol
+	)
 
 
 # Image effects

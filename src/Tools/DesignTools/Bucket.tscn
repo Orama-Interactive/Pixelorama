@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbvvkrrjyxugo"]
+[gd_scene load_steps=7 format=3 uid="uid://bbvvkrrjyxugo"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/Bucket.gd" id="3"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4_1pngp"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(1, 1, 1, 1)
@@ -46,11 +47,20 @@ popup/item_1/id = 1
 popup/item_2/text = "Whole selection"
 popup/item_2/id = 2
 
-[node name="SimilaritySlider" parent="." index="4" instance=ExtResource("1")]
-visible = false
+[node name="ToleranceSlider" type="TextureProgressBar" parent="." index="4"]
+custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-value = 100.0
-prefix = "Similarity:"
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 255.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("4_1pngp")
+prefix = "Tolerance:"
 
 [node name="FillWith" type="Label" parent="." index="5"]
 layout_mode = 2
@@ -101,7 +111,7 @@ layout_mode = 2
 prefix = "Offset Y:"
 
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
-[connection signal="value_changed" from="SimilaritySlider" to="." method="_on_SimilaritySlider_value_changed"]
+[connection signal="value_changed" from="ToleranceSlider" to="." method="_on_tolerance_slider_value_changed"]
 [connection signal="item_selected" from="FillWithOptions" to="." method="_on_FillWithOptions_item_selected"]
 [connection signal="pressed" from="FillPattern/Type" to="." method="_on_PatternType_pressed"]
 [connection signal="value_changed" from="FillPattern/OffsetX" to="." method="_on_PatternOffsetX_value_changed"]

@@ -9,7 +9,7 @@ const PATTERN_FILL_SHADER := preload("res://src/Shaders/PatternFill.gdshader")
 var _undo_data := {}
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
-var _similarity := 100
+var _tolerance := 0.003
 var _fill_area: int = FillArea.AREA
 var _fill_with: int = FillWith.COLOR
 var _offset_x := 0
@@ -60,7 +60,7 @@ func _on_FillAreaOptions_item_selected(index: int) -> void:
 
 func _select_fill_area_optionbutton() -> void:
 	$FillAreaOptions.selected = _fill_area
-	$SimilaritySlider.visible = (_fill_area == FillArea.COLORS)
+	$ToleranceSlider.visible = (_fill_area != FillArea.SELECTION)
 
 
 func _on_FillWithOptions_item_selected(index: int) -> void:
@@ -69,8 +69,8 @@ func _on_FillWithOptions_item_selected(index: int) -> void:
 	save_config()
 
 
-func _on_SimilaritySlider_value_changed(value: float) -> void:
-	_similarity = value
+func _on_tolerance_slider_value_changed(value: float) -> void:
+	_tolerance = value / 255.0
 	update_config()
 	save_config()
 
@@ -102,12 +102,12 @@ func _on_PatternOffsetY_value_changed(value: float) -> void:
 
 func get_config() -> Dictionary:
 	if !_pattern:
-		return {"fill_area": _fill_area, "fill_with": _fill_with, "similarity": _similarity}
+		return {"fill_area": _fill_area, "fill_with": _fill_with, "tolerance": _tolerance}
 	return {
 		"pattern_index": _pattern.index,
 		"fill_area": _fill_area,
 		"fill_with": _fill_with,
-		"similarity": _similarity,
+		"tolerance": _tolerance,
 		"offset_x": _offset_x,
 		"offset_y": _offset_y,
 	}
@@ -119,7 +119,7 @@ func set_config(config: Dictionary) -> void:
 		_pattern = Global.patterns_popup.get_pattern(index)
 	_fill_area = config.get("fill_area", _fill_area)
 	_fill_with = config.get("fill_with", _fill_with)
-	_similarity = config.get("similarity", _similarity)
+	_tolerance = config.get("tolerance", _tolerance)
 	_offset_x = config.get("offset_x", _offset_x)
 	_offset_y = config.get("offset_y", _offset_y)
 	update_pattern()
@@ -128,7 +128,7 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	_select_fill_area_optionbutton()
 	$FillWithOptions.selected = _fill_with
-	$SimilaritySlider.value = _similarity
+	$ToleranceSlider.value = _tolerance * 255.0
 	$FillPattern.visible = _fill_with == FillWith.PATTERN
 	$FillPattern/OffsetX.value = _offset_x
 	$FillPattern/OffsetY.value = _offset_y
@@ -224,7 +224,7 @@ func fill_in_color(pos: Vector2i) -> void:
 			"size": project.size,
 			"old_color": color,
 			"new_color": tool_slot.color,
-			"similarity_percent": _similarity,
+			"tolerance": _tolerance,
 			"selection": selection_tex,
 			"pattern": pattern_tex,
 			"has_pattern": true if _fill_with == FillWith.PATTERN else false
@@ -313,23 +313,31 @@ func _add_new_segment(y := 0) -> void:
 func _flood_line_around_point(
 	pos: Vector2i, project: Project, image: Image, src_color: Color
 ) -> int:
-	if not image.get_pixelv(pos).is_equal_approx(src_color):
+	if not DrawingAlgos.similar_colors(image.get_pixelv(pos), src_color, _tolerance):
 		return pos.x + 1
 	var west := pos
 	var east := pos
 	if project.has_selection:
 		while (
-			project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(src_color)
+			project.can_pixel_get_drawn(west)
+			&& DrawingAlgos.similar_colors(image.get_pixelv(west), src_color, _tolerance)
 		):
 			west += Vector2i.LEFT
 		while (
-			project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(src_color)
+			project.can_pixel_get_drawn(east)
+			&& DrawingAlgos.similar_colors(image.get_pixelv(east), src_color, _tolerance)
 		):
 			east += Vector2i.RIGHT
 	else:
-		while west.x >= 0 && image.get_pixelv(west).is_equal_approx(src_color):
+		while (
+			west.x >= 0
+			&& DrawingAlgos.similar_colors(image.get_pixelv(west), src_color, _tolerance)
+		):
 			west += Vector2i.LEFT
-		while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(src_color):
+		while (
+			east.x < project.size.x
+			&& DrawingAlgos.similar_colors(image.get_pixelv(east), src_color, _tolerance)
+		):
 			east += Vector2i.RIGHT
 	# Make a note of the stuff we processed
 	var c := pos.y
