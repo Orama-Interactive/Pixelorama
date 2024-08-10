@@ -699,7 +699,7 @@ func _blend_layers(
 		if layer is GroupLayer:
 			layer_image.copy_from(layer.blend_children(frame, Vector2i.ZERO))
 		else:
-			layer_image.copy_from(frame.cels[export_layers - 2].get_image())
+			layer_image.copy_from(layer.display_effects(frame.cels[export_layers - 2]))
 		image.blend_rect(layer_image, Rect2i(Vector2i.ZERO, project.size), origin)
 
 

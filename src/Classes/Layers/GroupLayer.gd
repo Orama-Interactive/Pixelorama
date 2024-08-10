@@ -23,18 +23,19 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
 		var layer := children[i]
 		if not layer.is_visible_in_hierarchy():
 			continue
+		var cel := frame.cels[layer.index]
 		if layer is GroupLayer:
 			var blended_children: Image = layer.blend_children(frame, origin)
 			if DisplayServer.get_name() == "headless":
 				image.blend_rect(blended_children, blend_rect, origin)
 			else:
 				textures.append(blended_children)
+				DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
 		else:
-			var cel := frame.cels[layer.index]
 			if DisplayServer.get_name() == "headless":
 				DrawingAlgos.blend_layers_headless(image, project, layer, cel, origin)
 			else:
-				textures.append(display_effects(cel))
+				textures.append(layer.display_effects(cel))
 				DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
 
 	if DisplayServer.get_name() != "headless":
