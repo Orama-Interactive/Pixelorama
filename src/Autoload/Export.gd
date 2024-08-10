@@ -275,10 +275,13 @@ func process_animation(project := Global.current_project) -> void:
 
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
+	var tag_index := frame_current_tag - ExportFrames.size()
+	if tag_index >= project.animation_tags.size():
+		frame_current_tag = ExportFrames.ALL_FRAMES
 	var frames: Array[Frame] = []
 	if frame_current_tag >= ExportFrames.size():  # Export a specific tag
-		var frame_start: int = project.animation_tags[frame_current_tag - ExportFrames.size()].from
-		var frame_end: int = project.animation_tags[frame_current_tag - ExportFrames.size()].to
+		var frame_start: int = project.animation_tags[tag_index].from
+		var frame_end: int = project.animation_tags[tag_index].to
 		frames = project.frames.slice(frame_start - 1, frame_end, 1, true)
 	elif frame_current_tag == ExportFrames.SELECTED_FRAMES:
 		for cel in project.selected_cels:
@@ -656,6 +659,8 @@ func _get_processed_image_tag_name_and_start_id(project: Project, processed_imag
 func _blend_layers(
 	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
+	if export_layers - 2 >= project.layers.size():
+		export_layers = VISIBLE_LAYERS
 	if export_layers == VISIBLE_LAYERS:
 		var load_result_from_pxo := not project.save_path.is_empty() and not project.has_changed
 		if load_result_from_pxo:
