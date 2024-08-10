@@ -21,11 +21,11 @@ enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 enum MeasurementMode { NONE, MOVE }
 
-##  Enumeration of items present in the File Menu.
+## Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
-##  Enumeration of items present in the Edit Menu.
+## Enumeration of items present in the Edit Menu.
 enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
-##  Enumeration of items present in the View Menu.
+## Enumeration of items present in the View Menu.
 enum ViewMenu {
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
@@ -39,9 +39,9 @@ enum ViewMenu {
 	DISPLAY_LAYER_EFFECTS,
 	SNAP_TO,
 }
-##  Enumeration of items present in the Window Menu.
+## Enumeration of items present in the Window Menu.
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
-##  Enumeration of items present in the Image Menu.
+## Enumeration of items present in the Image Menu.
 enum ImageMenu {
 	PROJECT_PROPERTIES,
 	RESIZE_CANVAS,
@@ -67,9 +67,9 @@ enum EffectsMenu {
 	GRADIENT_MAP,
 	SHADER
 }
-##  Enumeration of items present in the Select Menu.
+## Enumeration of items present in the Select Menu.
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
-##  Enumeration of items present in the Help Menu.
+## Enumeration of items present in the Help Menu.
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN,
 	ONLINE_DOCS,
@@ -642,7 +642,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 ## The patterns popup dialog used to display patterns
 ## It has the [param PatternsPopup.gd] script attached.
 @onready var patterns_popup: Popup = control.find_child("PatternsPopup")
-@onready var tile_mode_offset_dialog: AcceptDialog = control.find_child("TileModeOffsetsDialog")
 ## Dialog used to navigate and open images and projects.
 @onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
 ## Dialog used to save (.pxo) projects.

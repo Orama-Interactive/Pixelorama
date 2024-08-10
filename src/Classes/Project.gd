@@ -5,6 +5,7 @@ extends RefCounted
 
 signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
+signal resized
 signal timeline_updated
 
 var name := "":
@@ -422,9 +423,9 @@ func _size_changed(value: Vector2i) -> void:
 	else:
 		tiles.y_basis = Vector2i(0, value.y)
 	tiles.tile_size = value
-	Global.tile_mode_offset_dialog.change_mask()
 	size = value
 	Global.canvas.crop_rect.reset()
+	resized.emit()
 
 
 func change_cel(new_frame: int, new_layer := -1) -> void:

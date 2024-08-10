@@ -592,7 +592,7 @@ func edit_menu_id_pressed(id: int) -> void:
 func view_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.ViewMenu.TILE_MODE_OFFSETS:
-			_popup_dialog(Global.tile_mode_offset_dialog)
+			_popup_dialog(get_tree().current_scene.tile_mode_offsets_dialog)
 		Global.ViewMenu.GREYSCALE_VIEW:
 			_toggle_greyscale_view()
 		Global.ViewMenu.MIRROR_VIEW:
@@ -638,7 +638,7 @@ func _tile_mode_submenu_id_pressed(id: Tiles.MODE) -> void:
 	Global.canvas.tile_mode.queue_redraw()
 	Global.canvas.pixel_grid.queue_redraw()
 	Global.canvas.grid.queue_redraw()
-	Global.tile_mode_offset_dialog.change_mask()
+	get_tree().current_scene.tile_mode_offsets_dialog.change_mask()
 
 
 func _snap_to_submenu_id_pressed(id: int) -> void:
@@ -846,7 +846,7 @@ func select_menu_id_pressed(id: int) -> void:
 func help_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.HelpMenu.VIEW_SPLASH_SCREEN:
-			_popup_dialog(Global.control.splash_dialog)
+			_popup_dialog(get_tree().current_scene.splash_dialog)
 		Global.HelpMenu.ONLINE_DOCS:
 			OS.shell_open(DOCS_URL)
 			SteamManager.set_achievement("ACH_ONLINE_DOCS")

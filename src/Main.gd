@@ -20,6 +20,7 @@ var splash_dialog: AcceptDialog:
 @onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 @onready var save_sprite_dialog := $Dialogs/SaveSprite as FileDialog
 @onready var save_sprite_html5: ConfirmationDialog = $Dialogs/SaveSpriteHTML5
+@onready var tile_mode_offsets_dialog: ConfirmationDialog = $Dialogs/TileModeOffsetsDialog
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 @onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
 @onready var download_confirmation := $Dialogs/DownloadImageConfirmationDialog as ConfirmationDialog

@@ -9,10 +9,20 @@ extends ConfirmationDialog
 
 
 func _ready() -> void:
+	Global.project_about_to_switch.connect(_project_about_to_switch)
+	Global.project_switched.connect(_project_switched)
 	Global.project_switched.connect(change_mask)
 	Global.cel_switched.connect(change_mask)
 	await get_tree().process_frame
 	change_mask()
+
+
+func _project_about_to_switch() -> void:
+	Global.current_project.resized.disconnect(change_mask)
+
+
+func _project_switched() -> void:
+	Global.current_project.resized.connect(change_mask)
 
 
 func _on_TileModeOffsetsDialog_about_to_show() -> void:
