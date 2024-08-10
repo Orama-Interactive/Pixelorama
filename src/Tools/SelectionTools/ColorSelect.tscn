@@ -2,16 +2,24 @@
 
 [ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/BaseSelectionTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/SelectionTools/ColorSelect.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_44rxy"]
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="SimilaritySlider" parent="." index="9" instance=ExtResource("3")]
+[node name="ToleranceSlider" type="TextureProgressBar" parent="." index="8"]
+custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
+mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
-value = 100.0
-prefix = "Similarity:"
+max_value = 255.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_44rxy")
+prefix = "Tolerance:"
 
-[connection signal="value_changed" from="SimilaritySlider" to="." method="_on_Similarity_value_changed"]
+[connection signal="value_changed" from="ToleranceSlider" to="." method="_on_tolerance_slider_value_changed"]

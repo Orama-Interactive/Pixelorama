@@ -4,6 +4,7 @@ extends BaseSelectionTool
 var _allegro_flood_segments: Array[Segment]
 ## Results array per image while flooding
 var _allegro_image_segments: Array[Segment]
+var _tolerance := 0.003
 
 
 class Segment:
@@ -42,6 +43,22 @@ func apply_selection(pos: Vector2i) -> void:
 	Global.canvas.selection.commit_undo("Select", undo_data)
 
 
+func get_config() -> Dictionary:
+	var config := super.get_config()
+	config["tolerance"] = _tolerance
+	return config
+
+
+func set_config(config: Dictionary) -> void:
+	super.set_config(config)
+	_tolerance = config.get("tolerance", _tolerance)
+
+
+func update_config() -> void:
+	super.update_config()
+	$ToleranceSlider.value = _tolerance * 255.0
+
+
 # Add a new segment to the array
 func _add_new_segment(y := 0) -> void:
 	_allegro_flood_segments.append(Segment.new(y))
@@ -55,13 +72,16 @@ func _flood_line_around_point(
 ) -> int:
 	# this method is called by `_flood_fill` after the required data structures
 	# have been initialized
-	if not image.get_pixelv(pos).is_equal_approx(src_color):
+	if not DrawingAlgos.similar_colors(image.get_pixelv(pos), src_color, _tolerance):
 		return pos.x + 1
 	var west := pos
 	var east := pos
-	while west.x >= 0 && image.get_pixelv(west).is_equal_approx(src_color):
+	while west.x >= 0 && DrawingAlgos.similar_colors(image.get_pixelv(west), src_color, _tolerance):
 		west += Vector2i.LEFT
-	while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(src_color):
+	while (
+		east.x < project.size.x
+		&& DrawingAlgos.similar_colors(image.get_pixelv(east), src_color, _tolerance)
+	):
 		east += Vector2i.RIGHT
 	# Make a note of the stuff we processed
 	var c := pos.y
@@ -179,3 +199,9 @@ func _set_bit(p: Vector2i, selection_map: SelectionMap, prev_selection_map: Sele
 		selection_map.select_pixel(p, prev_selection_map.is_pixel_selected(p))
 	else:
 		selection_map.select_pixel(p, !_subtract)
+
+
+func _on_tolerance_slider_value_changed(value: float) -> void:
+	_tolerance = value / 255.0
+	update_config()
+	save_config()

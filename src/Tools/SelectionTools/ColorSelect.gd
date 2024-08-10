@@ -1,25 +1,25 @@
 extends BaseSelectionTool
 
 var shader := preload("res://src/Shaders/ColorSelect.gdshader")
-var _similarity := 100
+var _tolerance := 0.003
 
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
-	config["similarity"] = _similarity
+	config["tolerance"] = _tolerance
 	return config
 
 
 func set_config(config: Dictionary) -> void:
-	_similarity = config.get("similarity", _similarity)
+	_tolerance = config.get("tolerance", _tolerance)
 
 
 func update_config() -> void:
-	$SimilaritySlider.value = _similarity
+	$ToleranceSlider.value = _tolerance * 255.0
 
 
-func _on_Similarity_value_changed(value: float) -> void:
-	_similarity = value
+func _on_tolerance_slider_value_changed(value: float) -> void:
+	_tolerance = value / 255.0
 	update_config()
 	save_config()
 
@@ -41,7 +41,7 @@ func apply_selection(pos: Vector2i) -> void:
 	elif _intersect:
 		operation = 2
 
-	var params := {"color": color, "similarity_percent": _similarity, "operation": operation}
+	var params := {"color": color, "tolerance": _tolerance, "operation": operation}
 	if _add or _subtract or _intersect:
 		var selection_tex := ImageTexture.create_from_image(project.selection_map)
 		params["selection"] = selection_tex
