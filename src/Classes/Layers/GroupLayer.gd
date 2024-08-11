@@ -11,7 +11,7 @@ func _init(_project: Project, _name := "") -> void:
 
 
 ## Blends all of the images of children layer of the group layer into a single image.
-func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
+func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
 	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	var children := get_children(false)
 	if children.size() <= 0:
@@ -35,10 +35,15 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
 			if DisplayServer.get_name() == "headless":
 				DrawingAlgos.blend_layers_headless(image, project, layer, cel, origin)
 			else:
-				textures.append(layer.display_effects(cel))
+				var cel_image: Image
+				if apply_effects:
+					cel_image = layer.display_effects(cel)
+				else:
+					cel_image = cel.get_image()
+				textures.append(cel_image)
 				DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
 
-	if DisplayServer.get_name() != "headless":
+	if DisplayServer.get_name() != "headless" and textures.size() > 0:
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
 		var params := {
@@ -46,7 +51,8 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
 		}
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, DrawingAlgos.blend_layers_shader, params, project.size)
-		image = display_effects(frame.cels[index], image)
+		if apply_effects:
+			image = display_effects(frame.cels[index], image)
 	return image
 
 

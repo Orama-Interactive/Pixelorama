@@ -549,15 +549,6 @@ func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
 	return result
 
 
-func get_top_layers() -> Array[BaseLayer]:
-	var top_layers: Array[BaseLayer] = []
-	for i in layers.size():
-		var layer := layers[i]
-		if layer.get_hierarchy_depth() == 0:
-			top_layers.append(layer)
-	return top_layers
-
-
 ## Re-order layers to take each cel's z-index into account. If all z-indexes are 0,
 ## then the order of drawing is the same as the order of the layers itself.
 func order_layers(frame_index := current_frame) -> void:

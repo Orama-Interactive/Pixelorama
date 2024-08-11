@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 class_name BaseLayer
 extends RefCounted
 ## Base class for layer properties. Different layer types extend from this class.
@@ -139,6 +140,15 @@ func get_hierarchy_depth() -> int:
 	if is_instance_valid(parent):
 		return parent.get_hierarchy_depth() + 1
 	return 0
+
+
+## Returns the layer's top most parent,
+## meaning the layer's ancestor that has no ancestors of its own.
+## If the layer has no ancestors, it returns self.
+func get_top_most_parent() -> BaseLayer:
+	if is_instance_valid(parent):
+		return parent.get_top_most_parent()
+	return self
 
 
 ## Returns the path of the layer in the timeline as a [String].
