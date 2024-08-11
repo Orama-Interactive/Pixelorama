@@ -489,8 +489,7 @@ func file_name_replace(file_name: String, folder: String) -> String:
 	var i := 1
 	var file_ext := file_name.get_extension()
 	var temp_name := file_name
-	var dir := DirAccess.open(Global.home_data_directory.path_join(folder))
-	while dir.file_exists(temp_name):
+	while FileAccess.file_exists(Global.home_data_directory.path_join(folder).path_join(temp_name)):
 		i += 1
 		temp_name = file_name.get_basename() + " (%s)" % i
 		temp_name += "." + file_ext
