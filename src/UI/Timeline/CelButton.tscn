@@ -72,15 +72,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
-item_count = 4
+item_count = 1
 item_0/text = "Properties"
 item_0/id = 0
-item_1/text = "Delete"
-item_1/id = 1
-item_2/text = "Link Cels to"
-item_2/id = 2
-item_3/text = "Unlink Cels"
-item_3/id = 3
 
 [connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
