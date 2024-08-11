@@ -18,11 +18,13 @@ func _ready() -> void:
 
 
 func _project_about_to_switch() -> void:
-	Global.current_project.resized.disconnect(change_mask)
+	if Global.current_project.resized.is_connected(change_mask):
+		Global.current_project.resized.disconnect(change_mask)
 
 
 func _project_switched() -> void:
-	Global.current_project.resized.connect(change_mask)
+	if not Global.current_project.resized.is_connected(change_mask):
+		Global.current_project.resized.connect(change_mask)
 
 
 func _on_TileModeOffsetsDialog_about_to_show() -> void:
