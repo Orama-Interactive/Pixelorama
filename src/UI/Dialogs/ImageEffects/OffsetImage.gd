@@ -66,7 +66,7 @@ func recalculate_preview(params: Dictionary) -> void:
 
 
 ## Altered version of blend_layers() located in DrawingAlgos.gd
-## This function is REQUIRED in order for offset effect to work correctly with cliping masks
+## This function is REQUIRED in order for offset effect to work correctly with clipping masks
 func blend_layers(
 	image: Image,
 	frame: Frame,
@@ -101,8 +101,14 @@ func blend_layers(
 			if not layer_is_selected:
 				include = false
 		var cel := frame.cels[ordered_index]
-		var cel_image := layer.display_effects(cel)
-		if include:  ## apply offset effect to it
+		var cel_image: Image
+		if cel is GroupCel:
+			cel_image = (layer as GroupLayer).blend_children(frame)
+		else:
+			cel_image = layer.display_effects(cel)
+		if layer.get_hierarchy_depth() > 0 and not only_selected_cels and not only_selected_layers:
+			include = false
+		if include:  # Apply offset effect to it
 			gen.generate_image(cel_image, shader, effect_params, project.size)
 		textures.append(cel_image)
 		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
