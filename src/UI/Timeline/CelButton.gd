@@ -25,7 +25,11 @@ func _ready() -> void:
 	for selected in Global.current_project.selected_cels:
 		if selected[1] == layer and selected[0] == frame:
 			button_pressed = true
-	if cel is GroupCel:
+	if cel is PixelCel:
+		popup_menu.add_item("Delete")
+		popup_menu.add_item("Link Cels to")
+		popup_menu.add_item("Unlink Cels")
+	elif cel is GroupCel:
 		transparent_checker.visible = false
 
 
@@ -110,8 +114,7 @@ func _on_CelButton_pressed() -> void:
 			release_focus()
 
 	elif Input.is_action_just_released("right_mouse"):
-		if cel is PixelCel:
-			popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
+		popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
 		button_pressed = !button_pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		button_pressed = !button_pressed
