@@ -221,6 +221,7 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 		layer.clipping_mask = not layer.clipping_mask
 		popup_menu.set_item_checked(id, layer.clipping_mask)
 		clipping_mask_icon.visible = layer.clipping_mask
+		Global.canvas.update_all_layers = true
 		Global.canvas.draw_layers()
 
 

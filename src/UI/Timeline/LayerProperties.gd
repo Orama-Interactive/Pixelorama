@@ -63,12 +63,14 @@ func _on_opacity_slider_value_changed(value: float) -> void:
 		var layer := Global.current_project.layers[layer_index]
 		layer.opacity = value / 100.0
 	_emit_layer_property_signal()
+	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 
 
 func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> void:
 	if layer_indices.size() == 0:
 		return
+	Global.canvas.update_all_layers = true
 	var project := Global.current_project
 	project.undo_redo.create_action("Set Blend Mode")
 	for layer_index in layer_indices:
@@ -83,6 +85,7 @@ func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> 
 	project.undo_redo.add_undo_method(Global.canvas.draw_layers)
 	project.undo_redo.add_undo_method(_emit_layer_property_signal)
 	project.undo_redo.commit_action()
+
 
 
 func _on_user_data_text_edit_text_changed() -> void:
