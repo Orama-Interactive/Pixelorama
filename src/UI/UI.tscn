@@ -420,7 +420,3 @@ layout_mode = 2
 [connection signal="mouse_entered" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
 [connection signal="pressed" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
 [connection signal="pressed" from="DockableContainer/Main Canvas/ViewportandVerticalRuler/VerticalRuler" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
-[connection signal="mouse_entered" from="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" method="_on_ViewportContainer_mouse_exited"]
-[connection signal="mouse_entered" from="DockableContainer/Second Canvas" to="DockableContainer/Second Canvas" method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="DockableContainer/Second Canvas" to="DockableContainer/Second Canvas" method="_on_ViewportContainer_mouse_exited"]
