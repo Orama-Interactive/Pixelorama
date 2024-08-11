@@ -83,14 +83,17 @@ func _draw_layers() -> void:
 	# Draw current frame layers
 	for i in project.ordered_layers:
 		var cel := current_cels[i]
-		if current_cels[i] is GroupCel:
-			continue
 		var layer := project.layers[i]
 		var cel_image: Image
-		if Global.display_layer_effects:
-			cel_image = layer.display_effects(cel)
+		if layer is GroupLayer:
+			cel_image = layer.blend_children(
+				current_frame, Vector2i.ZERO, Global.display_layer_effects
+			)
 		else:
-			cel_image = cel.get_image()
+			if Global.display_layer_effects:
+				cel_image = layer.display_effects(cel)
+			else:
+				cel_image = cel.get_image()
 		textures.append(cel_image)
 		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
 	var texture_array := Texture2DArray.new()
