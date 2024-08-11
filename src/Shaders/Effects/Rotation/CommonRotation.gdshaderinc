@@ -1,6 +1,6 @@
 uniform sampler2D selection_tex : filter_nearest;
 uniform vec2 pivot;
-uniform mat2 transformation_matrix;
+uniform mat2 transformation_matrix = mat2(vec2(1.0, 0.0), vec2(0.0, 1.0));
 
 vec2 rotate(vec2 uv, float ratio) {
 	// Scale and center image
