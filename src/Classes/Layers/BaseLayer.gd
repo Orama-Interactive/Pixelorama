@@ -189,9 +189,12 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 ## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
-func display_effects(cel: BaseCel) -> Image:
+func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	var image := Image.new()
-	image.copy_from(cel.get_image())
+	if is_instance_valid(image_override):
+		image.copy_from(image_override)
+	else:
+		image.copy_from(cel.get_image())
 	if not effects_enabled:
 		return image
 	var image_size := image.get_size()
@@ -200,15 +203,6 @@ func display_effects(cel: BaseCel) -> Image:
 			continue
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
-	# Inherit effects from the parents
-	for ancestor in get_ancestors():
-		if not ancestor.effects_enabled:
-			continue
-		for effect in ancestor.effects:
-			if not effect.enabled:
-				continue
-			var shader_image_effect := ShaderImageEffect.new()
-			shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
 	return image
 
 

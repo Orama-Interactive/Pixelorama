@@ -46,6 +46,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
 		}
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, DrawingAlgos.blend_layers_shader, params, project.size)
+		image = display_effects(frame.cels[index], image)
 	return image
 
 
