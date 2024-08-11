@@ -213,7 +213,9 @@ func _update_texture_array_layer(
 	if layer is GroupLayer:
 		cel_image.copy_from(
 			layer.blend_children(
-				project.frames[project.current_frame], Vector2i.ZERO, Global.display_layer_effects
+				project.frames[project.current_frame],
+				move_preview_location,
+				Global.display_layer_effects
 			)
 		)
 	else:

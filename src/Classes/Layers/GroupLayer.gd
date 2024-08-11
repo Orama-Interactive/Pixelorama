@@ -18,7 +18,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 		return image
 	var blend_rect := Rect2i(Vector2i.ZERO, project.size)
 	var textures: Array[Image] = []
-	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_R8)
+	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RG8)
 	for i in children.size():
 		var layer := children[i]
 		if not layer.is_visible_in_hierarchy():
@@ -42,12 +42,23 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 					cel_image = cel.get_image()
 				textures.append(cel_image)
 				DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
+				if origin != Vector2i.ZERO:
+					# Only used as a preview for the move tool, when used on a group's children
+					var test_array := [project.frames.find(frame), project.layers.find(layer)]
+					if test_array in project.selected_cels:
+						var origin_fixed := Vector2(origin).abs() / Vector2(cel_image.get_size())
+						metadata_image.set_pixel(
+							i, 2, Color(origin_fixed.x, origin_fixed.y, 0.0, 0.0)
+						)
 
 	if DisplayServer.get_name() != "headless" and textures.size() > 0:
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
 		var params := {
-			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
+			"layers": texture_array,
+			"metadata": ImageTexture.create_from_image(metadata_image),
+			"origin_x_positive": origin.x > 0,
+			"origin_y_positive": origin.y > 0,
 		}
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, DrawingAlgos.blend_layers_shader, params, project.size)
