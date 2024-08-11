@@ -146,8 +146,7 @@ func _on_main_button_gui_input(event: InputEvent) -> void:
 
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		var layer := Global.current_project.layers[layer_index]
-		if not layer is GroupLayer:
-			popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
+		popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
 
 
 func _on_layer_name_line_edit_focus_exited() -> void:
