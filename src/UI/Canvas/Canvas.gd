@@ -221,8 +221,8 @@ func _update_texture_array_layer(
 			cel_image.copy_from(layer.display_effects(cel))
 		else:
 			cel_image.copy_from(cel.get_image())
-		if layer.get_hierarchy_depth() > 0:
-			include = false
+	if layer.get_hierarchy_depth() > 0:
+		include = false
 	if update_layer:
 		layer_texture_array.update_layer(cel_image, ordered_index)
 	DrawingAlgos.set_layer_metadata_image(layer, cel, layer_metadata_image, ordered_index, include)

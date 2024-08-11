@@ -144,6 +144,20 @@ float border_trim(vec4 color, vec2 uv) {
 }
 
 
+int find_previous_opaque_layer(int index, vec2 metadata_size_float) {
+	for (int i = index - 1; i > 0; i--) {
+		float layer_index = float(i) / metadata_size_float.x;
+		float clipping_mask = texture(metadata, vec2(layer_index, 3.0 / metadata_size_float.y)).r;
+		// If the red value is ~0.2, it means that it should be skipped.
+		// Otherwise, return the index.
+		if (clipping_mask > 0.25 || clipping_mask < 0.15) {
+			return i;
+		}
+	}
+	return 0;
+}
+
+
 void fragment() {
 	ivec2 metadata_size = textureSize(metadata, 0) - 1;
 	vec2 metadata_size_float = vec2(metadata_size);
@@ -173,17 +187,18 @@ void fragment() {
 			current_origin.y = -current_origin.y;
 		}
 		// get origin of previous layer (used for clipping masks to work correctly)
-		vec2 prev_origin = texture(metadata, vec2(float(i - 1), 2.0 / metadata_size_float.y)).rg;
+		float clipping_mask_index = float(find_previous_opaque_layer(i, metadata_size_float));
+		vec2 prev_origin = texture(metadata, vec2(clipping_mask_index, 2.0 / metadata_size_float.y)).rg;
 		if (!origin_x_positive) {
-		  prev_origin.x = -prev_origin.x;
+			prev_origin.x = -prev_origin.x;
 		}
 		if (!origin_y_positive) {
-		  prev_origin.y = -prev_origin.y;
+			prev_origin.y = -prev_origin.y;
 		}
 		float current_opacity = texture(metadata, vec2(layer_index, 1.0 / metadata_size_float.y)).r;
 		vec2 uv = UV - current_origin;
 		vec4 layer_color = texture(layers, vec3(uv, float(i)));
-		vec4 prev_layer_color = texture(layers, vec3(UV - prev_origin, float(i - 1)));
+		vec4 prev_layer_color = texture(layers, vec3(UV - prev_origin, clipping_mask_index));
 		float clipping_mask = texture(metadata, vec2(layer_index, 3.0 / metadata_size_float.y)).r;
 		layer_color.a *= prev_layer_color.a * step(0.5, clipping_mask) + 1.0 * step(clipping_mask, 0.5);
 		layer_color.a = border_trim(layer_color, uv);
