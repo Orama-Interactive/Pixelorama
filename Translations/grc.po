@@ -10,22 +10,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ancient Greek\n"
 "Language: grc\n"
-"PO-Revision-Date: 2024-08-03 01:18\n"
+"PO-Revision-Date: 2024-08-12 00:48\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Ἐντάξει"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Ἀκύρωσον"
 
 msgid "Open"
-msgstr ""
+msgstr "Ἀνοῖξον"
 
 msgid "Save"
 msgstr ""
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Παρακαλῶ ἐπιβεβαίωσον..."
 
 msgid "File Name:"
 msgstr ""
