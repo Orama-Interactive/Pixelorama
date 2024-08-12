@@ -54,7 +54,7 @@ var layer_effect_settings: AcceptDialog:
 
 
 func _ready() -> void:
-	Global.control.find_child("LayerProperties").visibility_changed.connect(_update_layer_ui)
+	Global.control.find_child("LayerProperties").layer_property_changed.connect(_update_layer_ui)
 	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
 	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 	cel_size = min_cel_size
@@ -221,21 +221,21 @@ func _cel_size_changed(value: int) -> void:
 
 
 func _on_blend_modes_item_selected(index: int) -> void:
-	var current_layer := Global.current_project.layers[Global.current_project.current_layer]
-	var previous_mode := current_layer.blend_mode
-	var previous_index := blend_modes_button.get_item_index(previous_mode)
+	var project := Global.current_project
 	var current_mode := blend_modes_button.get_item_id(index)
-
-	Global.current_project.undo_redo.create_action("Set Blend Mode")
-	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	Global.current_project.undo_redo.add_do_property(current_layer, "blend_mode", current_mode)
-	Global.current_project.undo_redo.add_do_method(blend_modes_button.select.bind(index))
-	Global.current_project.undo_redo.add_do_method(Global.canvas.draw_layers)
-	Global.current_project.undo_redo.add_undo_property(current_layer, "blend_mode", previous_mode)
-	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	Global.current_project.undo_redo.add_undo_method(blend_modes_button.select.bind(previous_index))
-	Global.current_project.undo_redo.add_undo_method(Global.canvas.draw_layers)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.create_action("Set Blend Mode")
+	for idx_pair in project.selected_cels:
+		var layer := project.layers[idx_pair[1]]
+		var previous_mode := layer.blend_mode
+		project.undo_redo.add_do_property(layer, "blend_mode", current_mode)
+		project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(_update_layer_ui)
+	project.undo_redo.add_do_method(Global.canvas.draw_layers)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(_update_layer_ui)
+	project.undo_redo.add_undo_method(Global.canvas.draw_layers)
+	project.undo_redo.commit_action()
 
 
 func add_frame() -> void:

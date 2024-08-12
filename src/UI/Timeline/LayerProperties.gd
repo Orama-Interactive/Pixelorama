@@ -1,5 +1,7 @@
 extends AcceptDialog
 
+signal layer_property_changed
+
 var layer_indices: PackedInt32Array
 
 @onready var name_line_edit := $GridContainer/NameLineEdit as LineEdit
@@ -60,19 +62,34 @@ func _on_opacity_slider_value_changed(value: float) -> void:
 	for layer_index in layer_indices:
 		var layer := Global.current_project.layers[layer_index]
 		layer.opacity = value / 100.0
+	_emit_layer_property_signal()
 	Global.canvas.queue_redraw()
 
 
 func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> void:
 	if layer_indices.size() == 0:
 		return
+	var project := Global.current_project
+	project.undo_redo.create_action("Set Blend Mode")
 	for layer_index in layer_indices:
-		var layer := Global.current_project.layers[layer_index]
-		layer.blend_mode = index
-	Global.canvas.queue_redraw()
+		var layer := project.layers[layer_index]
+		var previous_mode := layer.blend_mode
+		project.undo_redo.add_do_property(layer, "blend_mode", index)
+		project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(Global.canvas.draw_layers)
+	project.undo_redo.add_do_method(_emit_layer_property_signal)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(Global.canvas.draw_layers)
+	project.undo_redo.add_undo_method(_emit_layer_property_signal)
+	project.undo_redo.commit_action()
 
 
 func _on_user_data_text_edit_text_changed() -> void:
 	for layer_index in layer_indices:
 		var layer := Global.current_project.layers[layer_index]
 		layer.user_data = user_data_text_edit.text
+
+
+func _emit_layer_property_signal() -> void:
+	layer_property_changed.emit()
