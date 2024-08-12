@@ -454,7 +454,10 @@ func _compute_segments_for_image(
 
 func _color_segments(image: Image) -> void:
 	if _fill_with == FillWith.COLOR or _pattern == null:
-		var color: Color = tool_slot.color
+		# This is needed to ensure that the color used to fill is not wrong, due to float
+		# rounding issues.
+		var color_str: String = tool_slot.color.to_html()
+		var color := Color(color_str)
 		# short circuit for flat colors
 		for c in _allegro_image_segments.size():
 			var p := _allegro_image_segments[c]
