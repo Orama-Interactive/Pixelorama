@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.0.2] - Unreleased
+This update has been brought to you by the contributions of:
+[kleonc](https://github.com/kleonc), [Hamster5295](https://github.com/Hamster5295)
+
+Built using Godot 4.2.2
+
+### Added
+- Added tolerance to the bucket tool's "similar area" mode and to the magic wand tool.
+- Cel properties of group and 3D cels can now be edited.
+
+### Changed
+- Renamed the "similarity" slider of the select by color tool and the bucket tool's "similar colors" mode to "tolerance", and made it work the inverse way to make it consistent with other art software.
+
+### Fixed
+- Scaling with cleanEdge and OmniScale is now working again. [#1074](https://github.com/Orama-Interactive/Pixelorama/issues/1074)
+- Layer effects are now being applied when exporting single layers.
+- Exporting group layers now takes blending modes and layer effects into account.
+- Fixed crashes when attempting to export specific layers or tags that have been deleted.
+- Fixed crashes when importing brushes and palettes.
+- Fixed an issue with the bucket tool filling with the wrong color.
+- Fixed issue with the cursor blinking at the edge of the canvas on some devices. [#1075](https://github.com/Orama-Interactive/Pixelorama/pull/1075)
+- Fixed wrong rendering of the isometric grid. [#1069](https://github.com/Orama-Interactive/Pixelorama/pull/1069)
+
+
 ## [v1.0.1] - 2024-08-05
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [Kiisu_Master](https://github.com/Kiisu-Master).
