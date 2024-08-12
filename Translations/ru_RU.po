@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-08-01 22:06\n"
+"PO-Revision-Date: 2024-08-12 13:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3207,7 +3207,7 @@ msgstr ""
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
-msgstr ""
+msgstr "Масштаб"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
@@ -3219,7 +3219,7 @@ msgstr ""
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Непрозрачность"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
