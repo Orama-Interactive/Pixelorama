@@ -751,19 +751,34 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 	_update_layer_ui()
 
 
-func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
+## Moves multiple cels between different frames, but on the same layer.
+## TODO: Perhaps figure out a way to optimize this. Right now it copies all of the cels of
+## a layer into a temporary array, sorts it and then copies it into each frame's `cels` array
+## on that layer. This was done in order to replicate the code from [method move_frames].
+## TODO: Make a method like this, but for moving cels between different layers, on the same frame.
+func move_cels_same_layer(
+	from_indices: PackedInt32Array, to_indices: PackedInt32Array, layer: int
+) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	var cel: BaseCel = frames[from_frame].cels[layer]
-	if from_frame < to_frame:
-		for f in range(from_frame, to_frame):  # Forward range
-			frames[f].cels[layer] = frames[f + 1].cels[layer]  # Move left
-	else:
-		for f in range(from_frame, to_frame, -1):  # Backward range
-			frames[f].cels[layer] = frames[f - 1].cels[layer]  # Move right
-	frames[to_frame].cels[layer] = cel
-	Global.animation_timeline.project_cel_removed(from_frame, layer)
-	Global.animation_timeline.project_cel_added(to_frame, layer)
+	var cels: Array[BaseCel] = []
+	for frame in frames:
+		cels.append(frame.cels[layer])
+	var removed_cels: Array[BaseCel] = []
+	for i in from_indices.size():
+		# With each removed index, future indices need to be lowered, so subtract by i
+		removed_cels.append(cels.pop_at(from_indices[i] - i))
+	for i in to_indices.size():
+		cels.insert(to_indices[i], removed_cels[i])
+	for i in frames.size():
+		var new_cel := cels[i]
+		frames[i].cels[layer] = new_cel
+
+	for i in from_indices.size():
+		# With each removed index, future indices need to be lowered, so subtract by i
+		Global.animation_timeline.project_cel_removed(from_indices[i] - i, layer)
+	for i in to_indices.size():
+		Global.animation_timeline.project_cel_added(to_indices[i], layer)
 
 	# Update the cel buttons for this layer:
 	var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - layer)
