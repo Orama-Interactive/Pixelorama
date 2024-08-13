@@ -376,6 +376,7 @@ func add_tool_button(t: Tool, insert_pos := -1) -> void:
 	tool_button.get_node("BackgroundLeft").modulate = Global.left_tool_color
 	tool_button.get_node("BackgroundRight").modulate = Global.right_tool_color
 	tool_button.get_node("ToolIcon").texture = t.icon
+	tool_button.get_node("ToolIcon").modulate = Global.modulate_icon_color
 	tool_button.tooltip_text = t.generate_hint_tooltip()
 	t.button_node = tool_button
 	_tool_buttons.add_child(tool_button)

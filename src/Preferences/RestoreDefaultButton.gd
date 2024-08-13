@@ -10,6 +10,7 @@ var node: Node
 
 func _ready() -> void:
 	disabled = true
+	add_to_group(&"UIButtons")
 	modulate = Global.modulate_icon_color
 	texture_normal = preload("res://assets/graphics/misc/icon_reload.png")
 	texture_disabled = ImageTexture.new()

@@ -42,7 +42,7 @@ func _ready() -> void:
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name
 	line_edit.text = layer.name
-	for child in get_children():
+	for child in $HBoxContainer.get_children():
 		if not child is Button:
 			continue
 		var texture := child.get_child(0)
