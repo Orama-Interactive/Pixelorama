@@ -2132,7 +2132,7 @@ msgid "Link Cels to"
 msgstr "Cels verknüpfen mit"
 
 msgid "Unlink Cels"
-msgstr "Cels entfernen"
+msgstr "Cels Verknüpfung entfernen"
 
 msgid "Properties"
 msgstr "Eigenschaften"
