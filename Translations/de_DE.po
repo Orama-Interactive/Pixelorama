@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-08-01 22:06\n"
+"PO-Revision-Date: 2024-08-13 14:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2132,7 +2132,7 @@ msgid "Link Cels to"
 msgstr "Cels verknüpfen mit"
 
 msgid "Unlink Cels"
-msgstr "Cels entfernen"
+msgstr "Cels Verknüpfung entfernen"
 
 msgid "Properties"
 msgstr "Eigenschaften"
