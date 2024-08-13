@@ -59,7 +59,11 @@ func blend_layers(
 			else:
 				var cel_image := layer.display_effects(cel)
 				textures.append(cel_image)
-			if layer.is_blended_by_parent() and not only_selected_cels and not only_selected_layers:
+			if (
+				layer.is_blended_by_ancestor()
+				and not only_selected_cels
+				and not only_selected_layers
+			):
 				include = false
 			set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
 	if DisplayServer.get_name() != "headless":

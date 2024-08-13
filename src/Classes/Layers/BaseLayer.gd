@@ -128,7 +128,7 @@ func is_locked_in_hierarchy() -> bool:
 
 ## Returns [code]true[/code] if the layer has at least one ancestor
 ## that does not have its blend mode set to pass through.
-func is_blended_by_parent() -> bool:
+func is_blended_by_ancestor() -> bool:
 	var is_blended := false
 	for ancestor in get_ancestors():
 		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
@@ -154,13 +154,18 @@ func get_hierarchy_depth() -> int:
 	return 0
 
 
-## Returns the layer's top most parent,
-## meaning the layer's ancestor that has no ancestors of its own.
-## If the layer has no ancestors, it returns self.
-func get_top_most_parent() -> BaseLayer:
-	if is_instance_valid(parent):
-		return parent.get_top_most_parent()
-	return self
+## Returns the layer's top most parent that is responsible for its blending.
+## For example, if a layer belongs in a group with its blend mode set to anything but pass through,
+## and that group has no parents of its own, then that group gets returned.
+## If that group is a child of another non-pass through group,
+## then the grandparent group is returned, and so on.
+## If the layer has no ancestors, or if they are set to pass through mode, it returns self.
+func get_blender_ancestor() -> BaseLayer:
+	var blender := self
+	for ancestor in get_ancestors():
+		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
+			blender = ancestor
+	return blender
 
 
 ## Returns the path of the layer in the timeline as a [String].

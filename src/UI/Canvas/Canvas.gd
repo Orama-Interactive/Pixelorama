@@ -117,7 +117,7 @@ func update_texture(layer_i: int, frame_i := -1, project := Global.current_proje
 		if frame_i != project.current_frame:
 			# Don't update if the cel is on a different frame (can happen with undo/redo)
 			return
-		var layer := project.layers[layer_i].get_top_most_parent()
+		var layer := project.layers[layer_i].get_blender_ancestor()
 		var cel_image: Image
 		if layer is GroupLayer:
 			cel_image = layer.blend_children(
@@ -188,7 +188,7 @@ func draw_layers(force_recreate := false) -> void:
 				var ordered_index := project.ordered_layers[layer.index]
 				var cel_image := Image.new()
 				_update_texture_array_layer(project, layer, cel_image, true)
-				var parent_layer := layer.get_top_most_parent()
+				var parent_layer := layer.get_blender_ancestor()
 				if layer != parent_layer:
 					# True when the layer has parents. In that case, update its top-most parent.
 					_update_texture_array_layer(project, parent_layer, Image.new(), true)
@@ -223,7 +223,7 @@ func _update_texture_array_layer(
 			cel_image.copy_from(layer.display_effects(cel))
 		else:
 			cel_image.copy_from(cel.get_image())
-	if layer.is_blended_by_parent():
+	if layer.is_blended_by_ancestor():
 		include = false
 	if update_layer:
 		layer_texture_array.update_layer(cel_image, ordered_index)
