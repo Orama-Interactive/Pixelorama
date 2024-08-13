@@ -210,7 +210,7 @@ func _update_texture_array_layer(
 	var ordered_index := project.ordered_layers[layer.index]
 	var cel := project.frames[project.current_frame].cels[layer.index]
 	var include := true
-	if layer is GroupLayer:
+	if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
 		cel_image.copy_from(
 			layer.blend_children(
 				project.frames[project.current_frame],
@@ -223,7 +223,7 @@ func _update_texture_array_layer(
 			cel_image.copy_from(layer.display_effects(cel))
 		else:
 			cel_image.copy_from(cel.get_image())
-	if layer.get_hierarchy_depth() > 0:
+	if layer.is_blended_by_parent():
 		include = false
 	if update_layer:
 		layer_texture_array.update_layer(cel_image, ordered_index)

@@ -85,7 +85,7 @@ func _draw_layers() -> void:
 		var cel := current_cels[i]
 		var layer := project.layers[i]
 		var cel_image: Image
-		if layer is GroupLayer:
+		if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
 			cel_image = layer.blend_children(
 				current_frame, Vector2i.ZERO, Global.display_layer_effects
 			)

@@ -10,8 +10,34 @@ var layer_indices: PackedInt32Array
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
 
 
-func _ready() -> void:
-	# Fill the blend modes OptionButton with items
+func _on_visibility_changed() -> void:
+	if layer_indices.size() == 0:
+		return
+	Global.dialog_open(visible)
+	var first_layer := Global.current_project.layers[layer_indices[0]]
+	if visible:
+		_fill_blend_modes_option_button()
+		name_line_edit.text = first_layer.name
+		opacity_slider.value = first_layer.opacity * 100.0
+		var blend_mode_index := blend_modes_button.get_item_index(first_layer.blend_mode)
+		blend_modes_button.selected = blend_mode_index
+		user_data_text_edit.text = first_layer.user_data
+	else:
+		layer_indices = []
+
+
+## Fill the blend modes OptionButton with items
+func _fill_blend_modes_option_button() -> void:
+	blend_modes_button.clear()
+	var selected_layers_are_groups := true
+	for layer_index in layer_indices:
+		var layer := Global.current_project.layers[layer_index]
+		if not layer is GroupLayer:
+			selected_layers_are_groups = false
+			break
+	if selected_layers_are_groups:
+		# Special blend mode that appears only when group layers are selected
+		blend_modes_button.add_item("Pass through", BaseLayer.BlendModes.PASS_THROUGH)
 	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
 	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
 	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
@@ -32,20 +58,6 @@ func _ready() -> void:
 	blend_modes_button.add_item("Saturation", BaseLayer.BlendModes.SATURATION)
 	blend_modes_button.add_item("Color", BaseLayer.BlendModes.COLOR)
 	blend_modes_button.add_item("Luminosity", BaseLayer.BlendModes.LUMINOSITY)
-
-
-func _on_visibility_changed() -> void:
-	if layer_indices.size() == 0:
-		return
-	Global.dialog_open(visible)
-	var first_layer := Global.current_project.layers[layer_indices[0]]
-	if visible:
-		name_line_edit.text = first_layer.name
-		opacity_slider.value = first_layer.opacity * 100.0
-		blend_modes_button.selected = first_layer.blend_mode
-		user_data_text_edit.text = first_layer.user_data
-	else:
-		layer_indices = []
 
 
 func _on_name_line_edit_text_changed(new_text: String) -> void:
@@ -72,11 +84,12 @@ func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> 
 		return
 	Global.canvas.update_all_layers = true
 	var project := Global.current_project
+	var current_mode := blend_modes_button.get_item_id(index)
 	project.undo_redo.create_action("Set Blend Mode")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
 		var previous_mode := layer.blend_mode
-		project.undo_redo.add_do_property(layer, "blend_mode", index)
+		project.undo_redo.add_do_property(layer, "blend_mode", current_mode)
 		project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(Global.canvas.draw_layers)
@@ -85,7 +98,6 @@ func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> 
 	project.undo_redo.add_undo_method(Global.canvas.draw_layers)
 	project.undo_redo.add_undo_method(_emit_layer_property_signal)
 	project.undo_redo.commit_action()
-
 
 
 func _on_user_data_text_edit_text_changed() -> void:

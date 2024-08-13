@@ -102,11 +102,11 @@ func blend_layers(
 				include = false
 		var cel := frame.cels[ordered_index]
 		var cel_image: Image
-		if cel is GroupCel:
+		if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
 			cel_image = (layer as GroupLayer).blend_children(frame)
 		else:
 			cel_image = layer.display_effects(cel)
-		if layer.get_hierarchy_depth() > 0 and not only_selected_cels and not only_selected_layers:
+		if layer.is_blended_by_parent() and not only_selected_cels and not only_selected_layers:
 			include = false
 		if include:  # Apply offset effect to it
 			gen.generate_image(cel_image, shader, effect_params, project.size)

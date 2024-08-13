@@ -53,17 +53,13 @@ func blend_layers(
 		if DisplayServer.get_name() == "headless":
 			blend_layers_headless(image, project, layer, cel, origin)
 		else:
-			if cel is GroupCel:
+			if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
 				var cel_image := (layer as GroupLayer).blend_children(frame)
 				textures.append(cel_image)
 			else:
 				var cel_image := layer.display_effects(cel)
 				textures.append(cel_image)
-			if (
-				layer.get_hierarchy_depth() > 0
-				and not only_selected_cels
-				and not only_selected_layers
-			):
+			if layer.is_blended_by_parent() and not only_selected_cels and not only_selected_layers:
 				include = false
 			set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
 	if DisplayServer.get_name() != "headless":
