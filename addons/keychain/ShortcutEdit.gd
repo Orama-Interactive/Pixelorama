@@ -10,8 +10,8 @@ const MOUSE_BUTTON_NAMES: PackedStringArray = [
 	"Wheel Down Button",
 	"Wheel Left Button",
 	"Wheel Right Button",
-	"X Button 1",
-	"X Button 2",
+	"Mouse Thumb Button 1",
+	"Mouse Thumb Button 2",
 ]
 
 const JOY_BUTTON_NAMES: PackedStringArray = [
