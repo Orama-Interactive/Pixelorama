@@ -10,12 +10,17 @@ const APP_ID := 2779170
 ## because it is not available in non-Steam builds.
 static var steam_class
 static var achievements := {
+	"ACH_ART_LOVER": false,
 	"ACH_FIRST_PIXEL": false,
 	"ACH_ERASE_PIXEL": false,
+	"ACH_TIME_TRAVELLER": false,
 	"ACH_SAVE": false,
+	"ACH_ALMOST_FORGOT": false,
 	"ACH_PREFERENCES": false,
 	"ACH_ONLINE_DOCS": false,
 	"ACH_SUPPORT_DEVELOPMENT": false,
+	"ACH_BLEND_IN": false,
+	"ACH_STRONGER_TOGETHER": false,
 	"ACH_3D_LAYER": false,
 }
 

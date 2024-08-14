@@ -90,6 +90,8 @@ func _on_SplashDialog_about_to_show() -> void:
 
 
 func change_artwork(direction: int) -> void:
+	if direction != 0:
+		SteamManager.set_achievement("ACH_ART_LOVER")
 	chosen_artwork = wrapi(chosen_artwork + direction, 0, artworks.size())
 	splash_art_texturerect.texture = artworks[chosen_artwork].artwork
 	set_process(artworks[chosen_artwork].artwork is AnimatedTexture)

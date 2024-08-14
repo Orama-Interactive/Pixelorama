@@ -532,6 +532,7 @@ func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
 func _on_QuitAndSaveDialog_confirmed() -> void:
 	is_quitting_on_save = true
 	show_save_dialog(changed_projects_on_quit[0])
+	SteamManager.set_achievement("ACH_ALMOST_FORGOT")
 
 
 func _quit() -> void:
