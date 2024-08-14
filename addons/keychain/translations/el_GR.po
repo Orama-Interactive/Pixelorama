@@ -109,11 +109,11 @@ msgstr "Τρόχος αριστερά"
 msgid "Wheel Right Button"
 msgstr "Τρόχος δεξιά"
 
-msgid "X Button 1"
-msgstr "Κουμπί X 1"
+msgid "Mouse Thumb Button 1"
+msgstr "Κουμπί αντίχειρα ποντικού 1"
 
-msgid "X Button 2"
-msgstr "Κουμπί X 2"
+msgid "Mouse Thumb Button 2"
+msgstr "Κουμπί αντίχειρα ποντικιού 2"
 
 msgid "DualShock Cross, Xbox A, Nintendo B"
 msgstr "DualShock Σταυρός, Xbox A, Nintendo B"

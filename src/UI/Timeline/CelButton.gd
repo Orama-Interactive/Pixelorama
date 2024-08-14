@@ -260,53 +260,92 @@ func _get_drag_data(_position: Vector2) -> Variant:
 	texture_rect.texture = cel_texture.texture
 	button.add_child(texture_rect)
 	set_drag_preview(button)
-
-	return ["Cel", frame, layer]
+	return ["Cel", _get_cel_indices()]
 
 
 func _can_drop_data(_pos: Vector2, data) -> bool:
 	var project := Global.current_project
-	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
-		var drag_frame = data[1]
-		var drag_layer = data[2]
-		if project.layers[drag_layer].get_script() == project.layers[layer].get_script():
-			if (  # If both cels are on the same layer, or both are not linked
-				drag_layer == layer
-				or (
-					project.frames[frame].cels[layer].link_set == null
-					and project.frames[drag_frame].cels[drag_layer].link_set == null
-				)
-			):
-				if not (drag_frame == frame and drag_layer == layer):
-					var region: Rect2
-					if Input.is_action_pressed("ctrl") or layer != drag_layer:  # Swap cels
-						region = get_global_rect()
-					else:  # Move cels
-						if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
-							region = _get_region_rect(-0.125, 0.125)
-							region.position.x -= 2  # Container spacing
-						else:  # Right
-							region = _get_region_rect(0.875, 1.125)
-							region.position.x += 2  # Container spacing
-					Global.animation_timeline.drag_highlight.global_position = region.position
-					Global.animation_timeline.drag_highlight.size = region.size
-					Global.animation_timeline.drag_highlight.visible = true
-					return true
+	if typeof(data) != TYPE_ARRAY:
+		Global.animation_timeline.drag_highlight.visible = false
+		return false
+	if data[0] != "Cel":
+		Global.animation_timeline.drag_highlight.visible = false
+		return false
+	var drop_cels: Array = data[1]
+	drop_cels.sort_custom(_sort_cel_indices_by_frame)
+	var drop_frames: PackedInt32Array = []
+	var drop_layers: PackedInt32Array = []
+	for cel_idx in drop_cels:
+		drop_frames.append(cel_idx[0])
+		drop_layers.append(cel_idx[1])
+	# Can't move to the same cel
+	for drop_frame in drop_frames:
+		if drop_frame == frame and drop_layers[-1] == layer:
+			Global.animation_timeline.drag_highlight.visible = false
+			return false
+	# Can't move different types of layers between them
+	for drop_layer in drop_layers:
+		if project.layers[drop_layer].get_script() != project.layers[layer].get_script():
+			Global.animation_timeline.drag_highlight.visible = false
+			return false
+
+	var drop_layer := drop_layers[0]
+	# Check if all dropped cels are on the same layer
+	var different_layers := false
+	for l in drop_layers:
+		if l != layer:
+			different_layers = true
+	# Check if any of the dropped cels are linked
+	var are_dropped_cels_linked := false
+	for f in drop_frames:
+		if project.frames[f].cels[drop_layer].link_set != null:
+			are_dropped_cels_linked = true
+
+	if (  # If both cels are on the same layer, or both are not linked
+		drop_layer == layer
+		or (project.frames[frame].cels[layer].link_set == null and not are_dropped_cels_linked)
+	):
+		var region: Rect2
+		if Input.is_action_pressed("ctrl") or different_layers:  # Swap cels
+			region = get_global_rect()
+		else:  # Move cels
+			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
+				region = _get_region_rect(-0.125, 0.125)
+				region.position.x -= 2  # Container spacing
+			else:  # Right
+				region = _get_region_rect(0.875, 1.125)
+				region.position.x += 2  # Container spacing
+		Global.animation_timeline.drag_highlight.global_position = region.position
+		Global.animation_timeline.drag_highlight.size = region.size
+		Global.animation_timeline.drag_highlight.visible = true
+		return true
 
 	Global.animation_timeline.drag_highlight.visible = false
 	return false
 
 
 func _drop_data(_pos: Vector2, data) -> void:
-	var drop_frame: int = data[1]
-	var drop_layer: int = data[2]
-	var project := Global.current_project
+	var drop_cels: Array = data[1]
+	drop_cels.sort_custom(_sort_cel_indices_by_frame)
+	var drop_frames: PackedInt32Array = []
+	var drop_layers: PackedInt32Array = []
+	for cel_idx in drop_cels:
+		drop_frames.append(cel_idx[0])
+		drop_layers.append(cel_idx[1])
+	var drop_layer := drop_layers[0]
+	var different_layers := false
+	for l in drop_layers:
+		if l != layer:
+			different_layers = true
 
+	var project := Global.current_project
 	project.undo_redo.create_action("Move Cels")
-	if Input.is_action_pressed("ctrl") or layer != drop_layer:  # Swap cels
-		project.undo_redo.add_do_method(project.swap_cel.bind(frame, layer, drop_frame, drop_layer))
+	if Input.is_action_pressed("ctrl") or different_layers:  # Swap cels
+		project.undo_redo.add_do_method(
+			project.swap_cel.bind(frame, layer, drop_frames[0], drop_layer)
+		)
 		project.undo_redo.add_undo_method(
-			project.swap_cel.bind(frame, layer, drop_frame, drop_layer)
+			project.swap_cel.bind(frame, layer, drop_frames[0], drop_layer)
 		)
 	else:  # Move cels
 		var to_frame: int
@@ -314,10 +353,16 @@ func _drop_data(_pos: Vector2, data) -> void:
 			to_frame = frame
 		else:  # Right
 			to_frame = frame + 1
-		if drop_frame < frame:
-			to_frame -= 1
-		project.undo_redo.add_do_method(project.move_cel.bind(drop_frame, to_frame, layer))
-		project.undo_redo.add_undo_method(project.move_cel.bind(to_frame, drop_frame, layer))
+		for drop_frame in drop_frames:
+			if drop_frame < frame:
+				to_frame -= 1
+		var to_frames := range(to_frame, to_frame + drop_frames.size())
+		project.undo_redo.add_do_method(
+			project.move_cels_same_layer.bind(drop_frames, to_frames, layer)
+		)
+		project.undo_redo.add_undo_method(
+			project.move_cels_same_layer.bind(to_frames, drop_frames, layer)
+		)
 
 	project.undo_redo.add_do_method(project.change_cel.bind(frame, layer))
 	project.undo_redo.add_undo_method(
@@ -343,3 +388,11 @@ func _get_cel_indices(add_current_cel := false) -> Array:
 		else:
 			indices = [[frame, layer]]
 	return indices
+
+
+func _sort_cel_indices_by_frame(a: Array, b: Array) -> bool:
+	var frame_a: int = a[0]
+	var frame_b: int = b[0]
+	if frame_a < frame_b:
+		return true
+	return false

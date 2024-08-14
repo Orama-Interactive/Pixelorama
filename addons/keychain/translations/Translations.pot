@@ -103,10 +103,10 @@ msgstr ""
 msgid "Wheel Right Button"
 msgstr ""
 
-msgid "X Button 1"
+msgid "Mouse Thumb Button 1"
 msgstr ""
 
-msgid "X Button 2"
+msgid "Mouse Thumb Button 2"
 msgstr ""
 
 msgid "DualShock Cross, Xbox A, Nintendo B"

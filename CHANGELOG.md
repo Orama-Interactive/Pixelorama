@@ -12,10 +12,12 @@ Built using Godot 4.2.2
 
 ### Added
 - Added tolerance to the bucket tool's "similar area" mode and to the magic wand tool.
+- It is now possible to move all selected cels between different frames, but they all have to be on the same layer.
 - Cel properties of group and 3D cels can now be edited.
 
 ### Changed
 - Renamed the "similarity" slider of the select by color tool and the bucket tool's "similar colors" mode to "tolerance", and made it work the inverse way to make it consistent with other art software.
+- It is now possible to change the blend modes of multiple selected layers from the timeline's option button.
 
 ### Fixed
 - Scaling with cleanEdge and OmniScale is now working again. [#1074](https://github.com/Orama-Interactive/Pixelorama/issues/1074)
@@ -24,6 +26,7 @@ Built using Godot 4.2.2
 - Fixed crashes when attempting to export specific layers or tags that have been deleted.
 - Fixed crashes when importing brushes and palettes.
 - Fixed an issue with the bucket tool filling with the wrong color.
+- Fixed bug where some buttons on the interface were not affected by the custom icon color on startup.
 - Fixed issue with the cursor blinking at the edge of the canvas on some devices. [#1075](https://github.com/Orama-Interactive/Pixelorama/pull/1075)
 - Fixed wrong rendering of the isometric grid. [#1069](https://github.com/Orama-Interactive/Pixelorama/pull/1069)
 
