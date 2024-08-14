@@ -13,7 +13,7 @@ static var achievements := {
 	"ACH_ART_LOVER": false,
 	"ACH_FIRST_PIXEL": false,
 	"ACH_ERASE_PIXEL": false,
-	"ACH_TIME_TRAVELLER": false,
+	"ACH_TIME_TRAVELER": false,
 	"ACH_SAVE": false,
 	"ACH_ALMOST_FORGOT": false,
 	"ACH_PREFERENCES": false,

@@ -150,8 +150,8 @@ func commit_undo() -> void:
 	if Global.canvas.selection.is_moving_content:
 		Global.canvas.selection.transform_content_cancel()
 	else:
-		SteamManager.set_achievement("ACH_TIME_TRAVELLER")
 		undo_redo.undo()
+	SteamManager.set_achievement("ACH_TIME_TRAVELER")
 
 
 func commit_redo() -> void:
