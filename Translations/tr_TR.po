@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-08-15 14:14\n"
+"PO-Revision-Date: 2024-08-15 17:51\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -2220,7 +2220,7 @@ msgstr "Harmanlama kipi:"
 
 #. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
 msgid "Pass through"
-msgstr ""
+msgstr "Doğrudan geçiş"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
