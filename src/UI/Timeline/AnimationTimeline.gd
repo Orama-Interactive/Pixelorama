@@ -65,34 +65,7 @@ func _ready() -> void:
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
-
-	# Fill the blend modes OptionButton with items
-	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
-	blend_modes_button.add_separator("Darken")
-	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
-	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
-	blend_modes_button.add_item("Color burn", BaseLayer.BlendModes.COLOR_BURN)
-	blend_modes_button.add_item("Linear burn", BaseLayer.BlendModes.LINEAR_BURN)
-	blend_modes_button.add_separator("Lighten")
-	blend_modes_button.add_item("Lighten", BaseLayer.BlendModes.LIGHTEN)
-	blend_modes_button.add_item("Screen", BaseLayer.BlendModes.SCREEN)
-	blend_modes_button.add_item("Color dodge", BaseLayer.BlendModes.COLOR_DODGE)
-	blend_modes_button.add_item("Add", BaseLayer.BlendModes.ADD)
-	blend_modes_button.add_separator("Contrast")
-	blend_modes_button.add_item("Overlay", BaseLayer.BlendModes.OVERLAY)
-	blend_modes_button.add_item("Soft light", BaseLayer.BlendModes.SOFT_LIGHT)
-	blend_modes_button.add_item("Hard light", BaseLayer.BlendModes.HARD_LIGHT)
-	blend_modes_button.add_separator("Inversion")
-	blend_modes_button.add_item("Difference", BaseLayer.BlendModes.DIFFERENCE)
-	blend_modes_button.add_item("Exclusion", BaseLayer.BlendModes.EXCLUSION)
-	blend_modes_button.add_item("Subtract", BaseLayer.BlendModes.SUBTRACT)
-	blend_modes_button.add_item("Divide", BaseLayer.BlendModes.DIVIDE)
-	blend_modes_button.add_separator("Component")
-	blend_modes_button.add_item("Hue", BaseLayer.BlendModes.HUE)
-	blend_modes_button.add_item("Saturation", BaseLayer.BlendModes.SATURATION)
-	blend_modes_button.add_item("Color", BaseLayer.BlendModes.COLOR)
-	blend_modes_button.add_item("Luminosity", BaseLayer.BlendModes.LUMINOSITY)
-
+	_fill_blend_modes_option_button()
 	# Config loading
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
 	cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
@@ -220,6 +193,48 @@ func _cel_size_changed(value: int) -> void:
 		tag_c.update_position_and_size()
 
 
+## Fill the blend modes OptionButton with items
+func _fill_blend_modes_option_button() -> void:
+	blend_modes_button.clear()
+	var selected_layers_are_groups := true
+	if Global.current_project.layers.size() == 0:
+		selected_layers_are_groups = false
+	else:
+		for idx_pair in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[idx_pair[1]]
+			if not layer is GroupLayer:
+				selected_layers_are_groups = false
+				break
+	if selected_layers_are_groups:
+		# Special blend mode that appears only when group layers are selected
+		blend_modes_button.add_item("Pass through", BaseLayer.BlendModes.PASS_THROUGH)
+	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
+	blend_modes_button.add_separator("Darken")
+	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
+	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
+	blend_modes_button.add_item("Color burn", BaseLayer.BlendModes.COLOR_BURN)
+	blend_modes_button.add_item("Linear burn", BaseLayer.BlendModes.LINEAR_BURN)
+	blend_modes_button.add_separator("Lighten")
+	blend_modes_button.add_item("Lighten", BaseLayer.BlendModes.LIGHTEN)
+	blend_modes_button.add_item("Screen", BaseLayer.BlendModes.SCREEN)
+	blend_modes_button.add_item("Color dodge", BaseLayer.BlendModes.COLOR_DODGE)
+	blend_modes_button.add_item("Add", BaseLayer.BlendModes.ADD)
+	blend_modes_button.add_separator("Contrast")
+	blend_modes_button.add_item("Overlay", BaseLayer.BlendModes.OVERLAY)
+	blend_modes_button.add_item("Soft light", BaseLayer.BlendModes.SOFT_LIGHT)
+	blend_modes_button.add_item("Hard light", BaseLayer.BlendModes.HARD_LIGHT)
+	blend_modes_button.add_separator("Inversion")
+	blend_modes_button.add_item("Difference", BaseLayer.BlendModes.DIFFERENCE)
+	blend_modes_button.add_item("Exclusion", BaseLayer.BlendModes.EXCLUSION)
+	blend_modes_button.add_item("Subtract", BaseLayer.BlendModes.SUBTRACT)
+	blend_modes_button.add_item("Divide", BaseLayer.BlendModes.DIVIDE)
+	blend_modes_button.add_separator("Component")
+	blend_modes_button.add_item("Hue", BaseLayer.BlendModes.HUE)
+	blend_modes_button.add_item("Saturation", BaseLayer.BlendModes.SATURATION)
+	blend_modes_button.add_item("Color", BaseLayer.BlendModes.COLOR)
+	blend_modes_button.add_item("Luminosity", BaseLayer.BlendModes.LUMINOSITY)
+
+
 func _on_blend_modes_item_selected(index: int) -> void:
 	var project := Global.current_project
 	var current_mode := blend_modes_button.get_item_id(index)
@@ -231,11 +246,16 @@ func _on_blend_modes_item_selected(index: int) -> void:
 		project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(_update_layer_ui)
-	project.undo_redo.add_do_method(Global.canvas.draw_layers)
+	project.undo_redo.add_do_method(_update_layers)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_undo_method(_update_layer_ui)
-	project.undo_redo.add_undo_method(Global.canvas.draw_layers)
+	project.undo_redo.add_undo_method(_update_layers)
 	project.undo_redo.commit_action()
+
+
+func _update_layers() -> void:
+	Global.canvas.update_all_layers = true
+	Global.canvas.draw_layers()
 
 
 func add_frame() -> void:
@@ -1068,6 +1088,7 @@ func _on_timeline_settings_visibility_changed() -> void:
 func _cel_switched() -> void:
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
+	_fill_blend_modes_option_button()
 	# Temporarily disconnect it in order to prevent layer opacity changing
 	# in the rest of the selected layers, if there are any.
 	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
@@ -1077,10 +1098,9 @@ func _cel_switched() -> void:
 
 func _update_layer_ui() -> void:
 	var project := Global.current_project
-	opacity_slider.value = project.layers[project.current_layer].opacity * 100
-	var blend_mode_index := blend_modes_button.get_item_index(
-		project.layers[project.current_layer].blend_mode
-	)
+	var layer := project.layers[project.current_layer]
+	opacity_slider.value = layer.opacity * 100
+	var blend_mode_index := blend_modes_button.get_item_index(layer.blend_mode)
 	blend_modes_button.selected = blend_mode_index
 
 

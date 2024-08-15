@@ -2143,6 +2143,10 @@ msgstr ""
 msgid "Blend mode:"
 msgstr ""
 
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr ""
+
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
 msgstr ""

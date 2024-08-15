@@ -117,17 +117,22 @@ func update_texture(layer_i: int, frame_i := -1, project := Global.current_proje
 		if frame_i != project.current_frame:
 			# Don't update if the cel is on a different frame (can happen with undo/redo)
 			return
-		var layer := project.layers[layer_i]
+		var layer := project.layers[layer_i].get_blender_ancestor()
 		var cel_image: Image
-		if Global.display_layer_effects:
-			cel_image = layer.display_effects(current_cel)
+		if layer is GroupLayer:
+			cel_image = layer.blend_children(
+				project.frames[project.current_frame], Vector2i.ZERO, Global.display_layer_effects
+			)
 		else:
-			cel_image = current_cel.get_image()
+			if Global.display_layer_effects:
+				cel_image = layer.display_effects(current_cel)
+			else:
+				cel_image = current_cel.get_image()
 		if (
 			cel_image.get_size()
 			== Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
 		):
-			layer_texture_array.update_layer(cel_image, project.ordered_layers[layer_i])
+			layer_texture_array.update_layer(cel_image, project.ordered_layers[layer.index])
 
 
 func update_selected_cels_textures(project := Global.current_project) -> void:
@@ -141,7 +146,6 @@ func update_selected_cels_textures(project := Global.current_project) -> void:
 
 func draw_layers(force_recreate := false) -> void:
 	var project := Global.current_project
-	var current_cels := project.frames[project.current_frame].cels
 	var recreate_texture_array := (
 		layer_texture_array.get_layers() != project.layers.size()
 		or layer_texture_array.get_width() != project.size.x
@@ -157,16 +161,11 @@ func draw_layers(force_recreate := false) -> void:
 		layer_metadata_image = Image.create(project.layers.size(), 4, false, Image.FORMAT_RG8)
 		# Draw current frame layers
 		for i in project.layers.size():
-			var ordered_index := project.ordered_layers[i]
 			var layer := project.layers[i]
-			var cel := current_cels[i]
-			var cel_image: Image
-			if Global.display_layer_effects:
-				cel_image = layer.display_effects(cel)
-			else:
-				cel_image = cel.get_image()
+			var ordered_index := project.ordered_layers[layer.index]
+			var cel_image := Image.new()
+			_update_texture_array_layer(project, layer, cel_image, false)
 			textures[ordered_index] = cel_image
-			DrawingAlgos.set_layer_metadata_image(layer, cel, layer_metadata_image, ordered_index)
 			# Store the origin
 			if [project.current_frame, i] in project.selected_cels:
 				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
@@ -185,18 +184,14 @@ func draw_layers(force_recreate := false) -> void:
 					var test_array := [project.current_frame, i]
 					if not test_array in project.selected_cels:
 						continue
-				var ordered_index := project.ordered_layers[i]
 				var layer := project.layers[i]
-				var cel := current_cels[i]
-				var cel_image: Image
-				if Global.display_layer_effects:
-					cel_image = layer.display_effects(cel)
-				else:
-					cel_image = cel.get_image()
-				layer_texture_array.update_layer(cel_image, ordered_index)
-				DrawingAlgos.set_layer_metadata_image(
-					layer, cel, layer_metadata_image, ordered_index
-				)
+				var ordered_index := project.ordered_layers[layer.index]
+				var cel_image := Image.new()
+				_update_texture_array_layer(project, layer, cel_image, true)
+				var parent_layer := layer.get_blender_ancestor()
+				if layer != parent_layer:
+					# True when the layer has parents. In that case, update its top-most parent.
+					_update_texture_array_layer(project, parent_layer, Image.new(), true)
 				# Update the origin
 				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
 				layer_metadata_image.set_pixel(
@@ -207,6 +202,32 @@ func draw_layers(force_recreate := false) -> void:
 	material.set_shader_parameter("origin_x_positive", move_preview_location.x > 0)
 	material.set_shader_parameter("origin_y_positive", move_preview_location.y > 0)
 	update_all_layers = false
+
+
+func _update_texture_array_layer(
+	project: Project, layer: BaseLayer, cel_image: Image, update_layer: bool
+) -> void:
+	var ordered_index := project.ordered_layers[layer.index]
+	var cel := project.frames[project.current_frame].cels[layer.index]
+	var include := true
+	if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
+		cel_image.copy_from(
+			layer.blend_children(
+				project.frames[project.current_frame],
+				move_preview_location,
+				Global.display_layer_effects
+			)
+		)
+	else:
+		if Global.display_layer_effects:
+			cel_image.copy_from(layer.display_effects(cel))
+		else:
+			cel_image.copy_from(cel.get_image())
+	if layer.is_blended_by_ancestor():
+		include = false
+	if update_layer:
+		layer_texture_array.update_layer(cel_image, ordered_index)
+	DrawingAlgos.set_layer_metadata_image(layer, cel, layer_metadata_image, ordered_index, include)
 
 
 func refresh_onion() -> void:
