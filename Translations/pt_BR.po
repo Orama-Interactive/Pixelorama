@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-08-15 14:13\n"
+"PO-Revision-Date: 2024-08-15 22:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2220,7 +2220,7 @@ msgstr "Modo de mesclagem:"
 
 #. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
 msgid "Pass through"
-msgstr ""
+msgstr "Passar através"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
