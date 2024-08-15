@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-08-15 14:14\n"
+"PO-Revision-Date: 2024-08-15 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -637,7 +637,7 @@ msgid "Export dimensions:"
 msgstr "Размер для экспорта:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Сохранить файл"
 
 msgid "Go to previous folder."
 msgstr ""
@@ -668,7 +668,7 @@ msgstr "Файл:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Все файлы"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
@@ -3215,7 +3215,7 @@ msgstr "Масштаб"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Поворот"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
