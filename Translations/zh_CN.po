@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-08-06 06:39\n"
+"PO-Revision-Date: 2024-08-15 14:14\n"
 
 msgid "OK"
 msgstr "确定"
@@ -2216,6 +2216,10 @@ msgstr "当前图层与下面图层合并"
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
 msgstr "混合模式："
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr ""
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
