@@ -94,7 +94,7 @@ func draw_start(pos: Vector2i) -> void:
 	_old_spacing_mode = _spacing_mode
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if Input.is_action_pressed("draw_color_picker"):
+	if Input.is_action_pressed(&"draw_color_picker", true):
 		_picking_color = true
 		_pick_color(pos)
 		return
@@ -136,7 +136,7 @@ func draw_move(pos_i: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed(&"draw_color_picker"):
+		if Input.is_action_pressed(&"draw_color_picker", true):
 			_pick_color(pos)
 		return
 

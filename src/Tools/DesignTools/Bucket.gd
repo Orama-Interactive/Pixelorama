@@ -151,7 +151,7 @@ func update_pattern() -> void:
 
 func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
-	if Input.is_action_pressed("draw_color_picker"):
+	if Input.is_action_pressed(&"draw_color_picker", true):
 		_pick_color(pos)
 		return
 	_undo_data = _get_undo_data()
