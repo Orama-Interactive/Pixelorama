@@ -96,6 +96,7 @@ static func clear_project_brush() -> void:
 		"Background/Brushes/Categories/ProjectBrushContainer"
 	)
 	for child in container.get_children():
+		container.remove_child(child)
 		child.queue_free()
 		Global.brushes_popup.brush_removed.emit(child.brush)
 
