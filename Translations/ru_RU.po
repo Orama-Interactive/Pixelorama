@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-08-12 13:24\n"
+"PO-Revision-Date: 2024-08-15 14:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2210,6 +2210,10 @@ msgstr "Объединить слой ниже с текущим"
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
 msgstr "Режим смешивания:"
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr ""
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
