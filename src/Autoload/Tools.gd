@@ -524,26 +524,34 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	var draw_pos := position
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
+	if event.is_action(&"activate_left_tool") or event.is_action(&"activate_right_tool"):
+		if Input.is_action_pressed(&"change_layer_automatically", true):
+			change_layer_automatically(draw_pos)
+			return
 
-	if event.is_action_pressed("activate_left_tool") and _active_button == -1 and not pen_inverted:
+	if event.is_action_pressed(&"activate_left_tool") and _active_button == -1 and not pen_inverted:
 		_active_button = MOUSE_BUTTON_LEFT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
-	elif event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_LEFT:
+	elif event.is_action_released(&"activate_left_tool") and _active_button == MOUSE_BUTTON_LEFT:
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
 	elif (
 		(
-			event.is_action_pressed("activate_right_tool")
+			event.is_action_pressed(&"activate_right_tool")
 			and _active_button == -1
 			and not pen_inverted
 		)
-		or (event.is_action_pressed("activate_left_tool") and _active_button == -1 and pen_inverted)
+		or (
+			event.is_action_pressed(&"activate_left_tool") and _active_button == -1 and pen_inverted
+		)
 	):
 		_active_button = MOUSE_BUTTON_RIGHT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
 	elif (
-		(event.is_action_released("activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT)
-		or (event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_RIGHT)
+		(event.is_action_released(&"activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT)
+		or (
+			event.is_action_released(&"activate_left_tool") and _active_button == MOUSE_BUTTON_RIGHT
+		)
 	):
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
@@ -632,3 +640,31 @@ func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 
 func _is_tool_available(layer_type: int, t: Tool) -> bool:
 	return t.layer_types.is_empty() or layer_type in t.layer_types
+
+
+func change_layer_automatically(pos: Vector2i) -> void:
+	var project := Global.current_project
+	pos = project.tiles.get_canon_position(pos)
+	if pos.x < 0 or pos.y < 0:
+		return
+	var image := Image.new()
+	image.copy_from(project.get_current_cel().get_image())
+	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
+		return
+
+	var color := Color(0, 0, 0, 0)
+	var curr_frame := project.frames[project.current_frame]
+	for layer in project.layers.size():
+		var layer_index := (project.layers.size() - 1) - layer
+		if project.layers[layer_index].is_visible_in_hierarchy():
+			image = curr_frame.cels[layer_index].get_image()
+			color = image.get_pixelv(pos)
+			if not is_zero_approx(color.a):
+				# Change layer.
+				project.selected_cels.clear()
+				var frame_layer := [project.current_frame, layer_index]
+				if !project.selected_cels.has(frame_layer):
+					project.selected_cels.append(frame_layer)
+
+				project.change_cel(-1, layer_index)
+				break
