@@ -23,9 +23,6 @@ var color_sliders_vbox: VBoxContainer
 func _ready() -> void:
 	Tools.color_changed.connect(update_color)
 	_average(left_color_rect.color, right_color_rect.color)
-	expand_button.button_pressed = Global.config_cache.get_value(
-		"color_picker", "is_expanded", false
-	)
 	color_picker.color_mode = Global.config_cache.get_value(
 		"color_picker", "color_mode", ColorPicker.MODE_RGB
 	)
@@ -84,6 +81,10 @@ func _ready() -> void:
 	expand_button.get_parent().remove_child(expand_button)
 	picker_vbox_container.add_child(expand_button)
 	picker_vbox_container.move_child(expand_button, 2)
+
+	expand_button.button_pressed = Global.config_cache.get_value(
+		"color_picker", "is_expanded", false
+	)
 
 
 func _notification(what: int) -> void:
