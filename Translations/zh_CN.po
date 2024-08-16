@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-08-15 14:14\n"
+"PO-Revision-Date: 2024-08-16 13:18\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1720,6 +1720,10 @@ msgstr "设置应用程序 FPS 限制："
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越低，但应用程序变慢，限制且反应不灵。0 表示没有限制。"
+
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
