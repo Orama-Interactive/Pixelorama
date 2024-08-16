@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-08-15 16:15\n"
+"PO-Revision-Date: 2024-08-16 13:18\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1721,6 +1721,10 @@ msgstr "Ορισμός ορίου FPS εφαρμογής:"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Ορίζει το όριο των καρέ της εφαρμογής ανά δευτερόλεπτο. Όσο μικρότερος είναι ο αριθμός, τόσο χαμηλότερη είναι η χρήση της CPU, αλλά η εφαρμογή γίνεται πιο αργή, ασταθής και λιγότερο ανταποκρινόμενη. 0 σημαίνει ότι δεν υπάρχει όριο."
+
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
