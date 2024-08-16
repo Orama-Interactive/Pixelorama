@@ -118,6 +118,7 @@ const CONFIG_SUBDIR_NAME := "pixelorama_data"
 ## The path of the directory where the UI layouts are being stored.
 const LAYOUT_DIR := "user://layouts"
 const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/ValueSliderV2.tscn")
+const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/BasisSliders.tscn")
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 
 ## It is path to the executable's base drectory.
@@ -1214,6 +1215,25 @@ func create_ui_for_shader_uniforms(
 				hbox.add_child(label)
 				hbox.add_child(color_button)
 				parent_node.add_child(hbox)
+		elif u_type == "mat3":
+			var label := Label.new()
+			label.text = humanized_u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var basis := _mat3str_to_basis(u_value)
+			var sliders := BASIS_SLIDERS_TSCN.instantiate() as BasisSliders
+			sliders.allow_greater = true
+			sliders.allow_lesser = true
+			sliders.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			sliders.value = basis
+			if params.has(u_name):
+				sliders.value = params[u_name]
+			else:
+				params[u_name] = sliders.value
+			sliders.value_changed.connect(value_changed.bind(u_name))
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(sliders)
+			parent_node.add_child(hbox)
 		elif u_type == "sampler2D":
 			if u_name == "selection":
 				continue
@@ -1299,6 +1319,24 @@ func _vec2str_to_vector2(vec2: String) -> Vector2:
 	return vector2
 
 
+func _vec3str_to_vector3(vec3: String) -> Vector3:
+	vec3 = vec3.replace("uvec3", "vec3")
+	vec3 = vec3.replace("ivec3", "vec3")
+	vec3 = vec3.replace("vec3(", "")
+	vec3 = vec3.replace(")", "")
+	var vec_values := vec3.split(",")
+	if vec_values.size() == 0:
+		return Vector3.ZERO
+	var y := float(vec_values[0])
+	var z := float(vec_values[0])
+	if vec_values.size() >= 2:
+		y = float(vec_values[1])
+	if vec_values.size() == 3:
+		z = float(vec_values[2])
+	var vector3 := Vector3(float(vec_values[0]), y, z)
+	return vector3
+
+
 func _vec4str_to_color(vec4: String) -> Color:
 	vec4 = vec4.replace("vec4(", "")
 	vec4 = vec4.replace(")", "")
@@ -1318,6 +1356,24 @@ func _vec4str_to_color(vec4: String) -> Color:
 		alpha = float(rgba_values[3])
 	var color := Color(red, green, blue, alpha)
 	return color
+
+
+func _mat3str_to_basis(mat3: String) -> Basis:
+	mat3 = mat3.replace("mat3(", "")
+	mat3 = mat3.replace("))", ")")
+	mat3 = mat3.replace("), ", ")")
+	var vec3_values := mat3.split("vec3", false)
+	var vec3_x := _vec3str_to_vector3(vec3_values[0])
+
+	var vec3_y := _vec3str_to_vector3(vec3_values[0])
+	if vec3_values.size() >= 2:
+		vec3_y = _vec3str_to_vector3(vec3_values[1])
+
+	var vec3_z := _vec3str_to_vector3(vec3_values[0])
+	if vec3_values.size() == 3:
+		vec3_z = _vec3str_to_vector3(vec3_values[2])
+	var basis := Basis(vec3_x, vec3_y, vec3_z)
+	return basis
 
 
 func _shader_change_palette(value_changed: Callable, parameter_name: String) -> void:

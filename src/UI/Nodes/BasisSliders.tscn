@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0d66oh6bw3kt"]
+
+[ext_resource type="Script" path="res://src/UI/Nodes/BasisSliders.gd" id="1_sbf5t"]
+[ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/ValueSliderV3.tscn" id="2_7swri"]
+
+[node name="BasisSliders" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_sbf5t")
+
+[node name="XSlider" parent="." instance=ExtResource("2_7swri")]
+layout_mode = 2
+size_flags_horizontal = 3
+value = Vector3(1, 0, 0)
+slider_min_size = Vector2(64, 24)
+prefix_x = "XX:"
+prefix_y = "YX:"
+prefix_z = "ZX:"
+
+[node name="YSlider" parent="." instance=ExtResource("2_7swri")]
+layout_mode = 2
+size_flags_horizontal = 3
+value = Vector3(0, 1, 0)
+slider_min_size = Vector2(64, 24)
+prefix_x = "XY:"
+prefix_y = "YY:"
+prefix_z = "ZY:"
+
+[node name="ZSlider" parent="." instance=ExtResource("2_7swri")]
+layout_mode = 2
+size_flags_horizontal = 3
+value = Vector3(0, 0, 1)
+slider_min_size = Vector2(64, 24)
+prefix_x = "XZ:"
+prefix_y = "YZ:"
+prefix_z = "ZZ:"
+
+[connection signal="value_changed" from="XSlider" to="." method="_on_x_slider_value_changed"]
+[connection signal="value_changed" from="YSlider" to="." method="_on_y_slider_value_changed"]
+[connection signal="value_changed" from="ZSlider" to="." method="_on_z_slider_value_changed"]
