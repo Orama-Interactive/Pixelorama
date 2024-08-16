@@ -183,16 +183,6 @@ func _ready() -> void:
 	save_sprite_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
-	var include_blended := CheckBox.new()
-	include_blended.name = "IncludeBlended"
-	include_blended.text = "Include blended images"
-	include_blended.tooltip_text = """
-If enabled, the final blended images are also being stored in the pxo, for each frame.
-This makes the pxo file larger and is useful for importing by third-party software
-or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.
-"""
-	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	save_sprite_dialog.get_vbox().add_child(include_blended)
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
@@ -467,7 +457,10 @@ func save_project(path: String) -> void:
 		path = "user://".path_join(file_name)
 		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
 	else:
-		include_blended = save_sprite_dialog.get_vbox().get_node("IncludeBlended").button_pressed
+		if save_sprite_dialog.get_selected_options().size() > 0:
+			include_blended = save_sprite_dialog.get_selected_options()[
+				save_sprite_dialog.get_option_name(0)
+			]
 	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
 	if success:
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
