@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-08-15 14:14\n"
+"PO-Revision-Date: 2024-08-16 13:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1721,6 +1721,10 @@ msgstr "アプリのFPS上限を設定:"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "アプリケーションのフレーム/秒の制限を設定します。 数値が低いほどCPU使用率が低くなりますが、アプリケーションが遅く、粗く、応答がなくなります。0は制限がないことを意味します。"
+
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr "元に戻すの最大ステップ数:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
