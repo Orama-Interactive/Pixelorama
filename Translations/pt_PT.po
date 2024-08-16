@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2024-08-15 14:14\n"
+"PO-Revision-Date: 2024-08-16 13:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1701,6 +1701,10 @@ msgstr "Define o limite de FPS da aplicação:"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Define o limite de fotogramas por segundo da aplicação. Quanto mais baixo, mais baixo o uso do processador, no entanto, a aplicação fica mais lenta, com cortes, e pouco responsiva. 0 significa que não tem limite."
+
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr ""
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
