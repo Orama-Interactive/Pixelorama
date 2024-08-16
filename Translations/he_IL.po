@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2024-08-15 14:14\n"
+"PO-Revision-Date: 2024-08-16 13:18\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -1663,6 +1663,10 @@ msgid "Set application FPS limit:"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
 msgstr ""
 
 #. An option found in the preferences, under the Performance section.
