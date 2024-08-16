@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-08-16 13:18\n"
+"PO-Revision-Date: 2024-08-16 17:44\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1100,7 +1100,7 @@ msgid "Colors:"
 msgstr "Warna:"
 
 msgid "Steps:"
-msgstr "Langkah:"
+msgstr "Step:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
 msgid "Palettize"
@@ -1724,7 +1724,7 @@ msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah a
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Maks. urung step:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
@@ -3050,7 +3050,7 @@ msgstr "Ukuran piksel:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr "Curve step:"
+msgstr "Step lengkung:"
 
 msgid "Horizontal alignment:"
 msgstr "Penjajaran mendatar:"
