@@ -466,13 +466,21 @@ var selection_border_color_2 := Color.BLACK:
 
 ## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save cpu usage.
 var pause_when_unfocused := true
-## Found in Preferences. The max fps, Pixelorama is allowed to use (does not limit fps if it is 0).
+## Found in Preferences. The maximum FPS value Pixelorama can reach. 0 means no limit.
 var fps_limit := 0:
 	set(value):
 		if value == fps_limit:
 			return
 		fps_limit = value
 		Engine.max_fps = fps_limit
+## Found in Preferences. The maximum amount of undo steps projects can use. 0 means no limit.
+var max_undo_steps := 0:
+	set(value):
+		if value == max_undo_steps:
+			return
+		max_undo_steps = value
+		for project in projects:
+			project.undo_redo.max_steps = max_undo_steps
 ## Found in Preferences. Affects the per_pixel_transparency project setting.
 ## If [code]true[/code], it allows for the window to be transparent.
 ## This affects performance, so keep it [code]false[/code] if you don't need it.

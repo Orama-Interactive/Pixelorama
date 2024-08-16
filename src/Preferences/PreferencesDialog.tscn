@@ -295,10 +295,9 @@ text = "Tool button size:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Small"
-popup/item_0/id = 0
 popup/item_1/text = "Big"
 popup/item_1/id = 1
 
@@ -309,10 +308,9 @@ text = "Icon color from:"
 [node name="IconColorOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Theme"
-popup/item_0/id = 0
 popup/item_1/text = "Custom"
 popup/item_1/id = 1
 
@@ -508,10 +506,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the type of the grid between rectangular, isometric or both"
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Rectangular"
-popup/item_0/id = 0
 popup/item_1/text = "Isometric"
 popup/item_1/id = 1
 popup/item_2/text = "All"
@@ -803,10 +800,9 @@ text = "Background color from:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Theme"
-popup/item_0/id = 0
 popup/item_1/text = "Custom"
 popup/item_1/id = 1
 
@@ -1042,6 +1038,20 @@ size_flags_horizontal = 3
 tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_default_cursor_shape = 2
 max_value = 144.0
+
+[node name="MaxUndoStepsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+text = "Max undo steps:"
+
+[node name="MaxUndoSteps" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 1000.0
+allow_greater = true
 
 [node name="PauseAppFocusLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
 layout_mode = 2

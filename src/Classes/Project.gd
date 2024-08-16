@@ -93,6 +93,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	tiles = Tiles.new(size)
 	selection_map.copy_from(Image.create(size.x, size.y, false, Image.FORMAT_LA8))
 	Global.tabs.add_tab(name)
+	undo_redo.max_steps = Global.max_undo_steps
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1

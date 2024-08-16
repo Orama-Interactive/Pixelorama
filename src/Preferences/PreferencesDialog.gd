@@ -169,6 +169,7 @@ var preferences: Array[Preference] = [
 		"selection_border_color_2", "Selection/SelectionOptions/BorderColor2", "color", Color.BLACK
 	),
 	Preference.new("fps_limit", "Performance/PerformanceContainer/SetFPSLimit", "value", 0),
+	Preference.new("max_undo_steps", "Performance/PerformanceContainer/MaxUndoSteps", "value", 0),
 	Preference.new(
 		"pause_when_unfocused",
 		"Performance/PerformanceContainer/PauseAppFocus",
