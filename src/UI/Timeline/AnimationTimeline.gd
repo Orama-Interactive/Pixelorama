@@ -1023,6 +1023,7 @@ func _on_MergeDownLayer_pressed() -> void:
 		textures.append(top_image)
 		var metadata_image := Image.create(2, 4, false, Image.FORMAT_R8)
 		DrawingAlgos.set_layer_metadata_image(bottom_layer, bottom_cel, metadata_image, 0)
+		metadata_image.set_pixel(0, 1, Color(1.0, 0.0, 0.0, 0.0))
 		DrawingAlgos.set_layer_metadata_image(top_layer, top_cel, metadata_image, 1)
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
