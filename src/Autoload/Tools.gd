@@ -652,13 +652,12 @@ func change_layer_automatically(pos: Vector2i) -> void:
 	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
 		return
 
-	var color := Color(0, 0, 0, 0)
 	var curr_frame := project.frames[project.current_frame]
 	for layer in project.layers.size():
 		var layer_index := (project.layers.size() - 1) - layer
 		if project.layers[layer_index].is_visible_in_hierarchy():
 			image = curr_frame.cels[layer_index].get_image()
-			color = image.get_pixelv(pos)
+			var color := image.get_pixelv(pos)
 			if not is_zero_approx(color.a):
 				# Change layer.
 				project.selected_cels.clear()
