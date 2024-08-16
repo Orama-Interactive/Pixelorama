@@ -51,7 +51,7 @@ func change_shader(shader_tmp: Shader, shader_name: String) -> void:
 	for child in shader_params.get_children():
 		child.queue_free()
 
-	Global.create_ui_for_shader_uniforms(
+	ShaderLoader.create_ui_for_shader_uniforms(
 		shader_tmp, params, shader_params, _set_shader_parameter, _load_texture
 	)
 

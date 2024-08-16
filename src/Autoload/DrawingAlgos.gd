@@ -100,7 +100,7 @@ func set_layer_metadata_image(
 	if not include:
 		# Store a small red value as a way to indicate that this layer should be skipped
 		# Used for layers such as child layers of a group, so that the group layer itself can
-		# sucessfully be used as a clipping mask with the layer below it.
+		# successfully be used as a clipping mask with the layer below it.
 		image.set_pixel(index, 3, Color(0.2, 0.0, 0.0, 0.0))
 
 

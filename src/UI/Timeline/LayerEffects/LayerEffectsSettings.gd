@@ -98,7 +98,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 		hbox.add_child(apply_button)
 	hbox.add_child(delete_button)
 	var parameter_vbox := CollapsibleContainer.new()
-	Global.create_ui_for_shader_uniforms(
+	ShaderLoader.create_ui_for_shader_uniforms(
 		effect.shader,
 		effect.params,
 		parameter_vbox,
