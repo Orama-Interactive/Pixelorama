@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 [kleonc](https://github.com/kleonc), [Hamster5295](https://github.com/Hamster5295)
 
-Built using Godot 4.2.2
+Built using Godot 4.3
 
 ### Added
 - Added tolerance to the bucket tool's "similar area" mode and to the magic wand tool.

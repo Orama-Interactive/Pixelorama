@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/Roboto-Italic.ttf-1459ab7510a4240cd642ef0fe9c
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
