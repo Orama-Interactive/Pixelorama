@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-08-16 13:18\n"
+"PO-Revision-Date: 2024-08-16 16:44\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1724,7 +1724,7 @@ msgstr "Ορίζει το όριο των καρέ της εφαρμογής α�
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Μέγιστα βήματα αναίρεσης:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
