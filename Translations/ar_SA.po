@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2024-08-16 13:18\n"
+"PO-Revision-Date: 2024-08-17 20:10\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -186,7 +186,7 @@ msgstr ""
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "لف حول:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
@@ -274,13 +274,13 @@ msgid "Panels"
 msgstr ""
 
 msgid "Layouts"
-msgstr ""
+msgstr "المخططات"
 
 msgid "Moveable Panels"
 msgstr ""
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "إدارة المخططات"
 
 #. Noun, a preview of something
 msgid "Preview"
@@ -667,7 +667,7 @@ msgstr "الملف:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "جميع الملفات"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
@@ -679,7 +679,7 @@ msgstr ""
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "صورة PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
@@ -766,7 +766,7 @@ msgid "Timeline"
 msgstr "الجدول الزمني"
 
 msgid "Selection"
-msgstr ""
+msgstr "تحديد"
 
 msgid "Shortcuts"
 msgstr "اختصارات"
@@ -839,7 +839,7 @@ msgstr "مقياس العرض:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "حجم الخط:"
 
 msgid "Dim interface on dialog popup"
 msgstr ""
@@ -992,7 +992,7 @@ msgid "Shape:"
 msgstr "الشكل:"
 
 msgid "Linear"
-msgstr ""
+msgstr "خطي"
 
 msgid "Radial"
 msgstr ""
@@ -1042,7 +1042,7 @@ msgstr ""
 
 #. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
-msgstr ""
+msgstr "التشبع:"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
@@ -1050,27 +1050,27 @@ msgstr "القيمة:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "ضبط السطوع/التباين"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "السطوع:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "التباين:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "قيمة الأحمر:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "قيمة الأخضر:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "قيمة الأزرق:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
@@ -1477,7 +1477,7 @@ msgstr ""
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "إعدادات الألوان"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
