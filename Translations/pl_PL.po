@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-08-16 13:17\n"
+"PO-Revision-Date: 2024-08-17 07:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1722,7 +1722,7 @@ msgstr "Ustawia limit klatek aplikacji na sekundę. Im niższa liczba, tym niżs
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Maksymalna liczba cofnięć zmian:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
