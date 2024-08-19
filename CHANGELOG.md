@@ -11,8 +11,13 @@ This update has been brought to you by the contributions of:
 Built using Godot 4.3
 
 ### Added
+- Group layer blending is now supported. To prevent a layer group from blending, you can set its blend mode to "Pass through". [#1077](https://github.com/Orama-Interactive/Pixelorama/pull/1077)
+- Added <kbd>Control+Shift+Alt</kbd> as a shortcut that automatically selects a layer directly from the canvas when using tools.
 - Added tolerance to the bucket tool's "similar area" mode and to the magic wand tool.
 - It is now possible to move all selected cels between different frames, but they all have to be on the same layer.
+- Added a convolution matrix layer effect, still work in progress.
+- Native file dialogs now have a checkbox that lets you save blended images inside .pxo files.
+- It is now possible to change the maximum undo steps from the Preferences.
 - Cel properties of group and 3D cels can now be edited.
 
 ### Changed
@@ -26,8 +31,10 @@ Built using Godot 4.3
 - Fixed crashes when attempting to export specific layers or tags that have been deleted.
 - Fixed crashes when importing brushes and palettes.
 - Fixed an issue with the bucket tool filling with the wrong color.
+- Fixed an issue when merging two layers, where if the bottom layer had layer/cel transparency, the transparency would be applied in the content destructively.
+- Fixed an issue where color sliders wouldn't be visible during startup, if the color options button was expanded.
 - Fixed bug where some buttons on the interface were not affected by the custom icon color on startup.
-- Fixed issue with the cursor blinking at the edge of the canvas on some devices. [#1075](https://github.com/Orama-Interactive/Pixelorama/pull/1075)
+- Fixed an issue when loading a project, selecting a project brush and then switching tools. [#1078](https://github.com/Orama-Interactive/Pixelorama/pull/1078)
 - Fixed wrong rendering of the isometric grid. [#1069](https://github.com/Orama-Interactive/Pixelorama/pull/1069)
 
 
