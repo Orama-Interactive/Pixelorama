@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-08-01 22:06\n"
+"PO-Revision-Date: 2024-08-16 13:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,13 +25,13 @@ msgid "Save"
 msgstr "Guardar"
 
 msgid "Please Confirm..."
-msgstr "Confirme, por favor..."
+msgstr "Confirma por favor..."
 
 msgid "File Name:"
 msgstr "Nombre del archivo:"
 
 msgid "Project Name:"
-msgstr "Nombre de proyecto:"
+msgstr "Nombre del proyecto:"
 
 msgid "Image Size"
 msgstr "Tamaño de la imagen"
@@ -40,7 +40,7 @@ msgid "Canvas Size"
 msgstr "Tamaño del lienzo"
 
 msgid "Frame Size"
-msgstr "Tamaño de los Fotogramas"
+msgstr "Tamaño de los fotogramas"
 
 msgid "Size:"
 msgstr "Tamaño:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "Select"
-msgstr "Selecciona"
+msgstr "Seleccionar"
 
 msgid "View"
 msgstr "Ver"
@@ -95,13 +95,13 @@ msgstr "Guardar como..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Incluir imágenes mezcladas"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Si está habilitado, las imágenes mezcladas finales también se almacenarán en el pxo, por cada fotograma. Esto hace que el archivo pxo sea más grande, y es útil para la importación mediante software de terceros o la exportación CLI. No es necesario que esta opción esté habilitada para cargar archivos pxo en Pixelorama."
 
 msgid "Import"
 msgstr "Importar"
@@ -149,14 +149,14 @@ msgid "Delete"
 msgstr "Borrar"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Eliminar permanentemente"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
 msgstr "Mover a la papelera"
 
 msgid "New Brush"
-msgstr "Nuevo Pincel"
+msgstr "Nuevo pincel"
 
 msgid "Scale Image"
 msgstr "Escalar imagen"
@@ -186,7 +186,7 @@ msgstr "Desplazamiento:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr "Enrollar:"
+msgstr "Envolver alrededor:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
@@ -196,10 +196,10 @@ msgid "Rotate Image"
 msgstr "Rotar Imagen"
 
 msgid "Pivot x:"
-msgstr "Eje X:"
+msgstr "Pivote x:"
 
 msgid "Pivot y:"
-msgstr "Eje Y:"
+msgstr "Pivote y:"
 
 msgid "Smear options:"
 msgstr "Opciones de Smear:"
@@ -217,58 +217,58 @@ msgid "Invert"
 msgstr "Invertir"
 
 msgid "Grayscale View"
-msgstr "Ver en Escala de Grises"
+msgstr "Ver en escala de grises"
 
 msgid "Mirror Image"
 msgstr "Voltear Imagen"
 
 msgid "Flip Horizontal"
-msgstr "Voltear Horizontalmente"
+msgstr "Voltear horizontalmente"
 
 msgid "Flip Vertical"
-msgstr "Voltear Verticalmente"
+msgstr "Voltear verticalmente"
 
 msgid "Preferences"
 msgstr "Preferencias"
 
 msgid "Tile Mode"
-msgstr "Modo Mosaico"
+msgstr "Modo mosaico"
 
 msgid "Tile Mode Offsets"
-msgstr "Desplazamiento del Modo Casilla"
+msgstr "Desplazamiento del modo mosaico"
 
 msgid "X-basis x:"
-msgstr "X base x:"
+msgstr "X de la base X:"
 
 msgid "X-basis y:"
-msgstr "x base y:"
+msgstr "Y de la base X:"
 
 msgid "Y-basis x:"
-msgstr "Y base y:"
+msgstr "X de la base Y:"
 
 msgid "Y-basis y:"
-msgstr "Y base y:"
+msgstr "Y de la base Y:"
 
 msgid "Tile Mask"
-msgstr "Máscara de Casillas"
+msgstr "Máscara de mosaicos"
 
 msgid "Reset"
 msgstr "Reiniciar"
 
 msgid "Use Current Frame"
-msgstr "Utilizar Fotograma actual"
+msgstr "Utilizar fotograma actual"
 
 msgid "Reset Mask"
 msgstr "Restablecer máscara"
 
 msgid "Window Opacity"
-msgstr "Opacidad de Ventana"
+msgstr "Opacidad de ventana"
 
 msgid "Window opacity does not work on fullscreen mode."
 msgstr "La opacidad de la ventana no funciona en el modo pantalla completa."
 
 msgid "Panel Layout"
-msgstr "Diseño del Panel"
+msgstr "Diseño del panel"
 
 msgid "Panels"
 msgstr "Paneles"
@@ -277,10 +277,10 @@ msgid "Layouts"
 msgstr "Diseños"
 
 msgid "Moveable Panels"
-msgstr "Paneles Móviles"
+msgstr "Paneles móviles"
 
 msgid "Manage Layouts"
-msgstr "Gestionar Diseños"
+msgstr "Gestionar diseños"
 
 #. Noun, a preview of something
 msgid "Preview"
@@ -288,17 +288,17 @@ msgstr "Vista previa"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr "Esto es una vista previa, cambiar esto no cambiará la apariencia"
+msgstr "Esto es una vista previa, cambiar esto no cambiará el diseño"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr "Doble clic para establecer como nueva apariencia de inicio"
+msgstr "Doble clic para establecer como el nuevo diseño de inicio"
 
 msgid "Add"
 msgstr "Añadir"
 
 msgid "Add Layout"
-msgstr "Añadir Vista"
+msgstr "Añadir diseño"
 
 msgid "Copy from"
 msgstr "Copiar desde"
@@ -307,23 +307,23 @@ msgid "Rename"
 msgstr "Renombrar"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Renombrar diseño"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr ""
+msgstr "Diseño actual"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr "¿Seguro que quieres eliminar esta vista?"
+msgstr "¿Estás seguro de que quieres eliminar este diseño?"
 
 msgid "Auto"
-msgstr "Auto"
+msgstr "Automático"
 
 msgid "Widescreen"
-msgstr "Widescreen"
+msgstr "Pantalla ancha"
 
 msgid "Tallscreen"
-msgstr "Tallscreen"
+msgstr "Pantalla alta"
 
 msgid "Mirror View"
 msgstr "Vista de espejo"
@@ -335,7 +335,7 @@ msgid "Show Pixel Grid"
 msgstr "Mostrar cuadrícula de píxeles"
 
 msgid "Show Rulers"
-msgstr "Mostrar Reglas"
+msgstr "Mostrar reglas"
 
 msgid "Show Guides"
 msgstr "Mostrar guías"
@@ -346,7 +346,7 @@ msgstr "Mostrar guías de ratón"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Mostrar efectos de capa"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -354,11 +354,11 @@ msgstr "Ajustar a"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Ajustar a límite de cuadrícula rectangular"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Ajustar a centro de cuadrícula rectangular"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -369,7 +369,7 @@ msgid "Snap to Perspective Guides"
 msgstr "Ajustar a las guías de perspectiva"
 
 msgid "Show Animation Timeline"
-msgstr "Mostrar timeline de animación"
+msgstr "Mostrar línea de tiempo de animación"
 
 msgid "Zen Mode"
 msgstr "Modo zen"
@@ -404,7 +404,7 @@ msgstr "Nuevo proyecto"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
-msgstr "Hoja de Sprites (Nuevo Proyecto)"
+msgstr "Hoja de sprites (nuevo proyecto)"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
@@ -440,27 +440,27 @@ msgstr "Fotogramas verticales:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Rebanado inteligente"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Umbral:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "Las imágenes que tienen un lado menor que este valor superarán el umbral"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Distancia de fusión:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "Las imágenes que hayan cruzado el umbral se fusionarán en una imagen más grande, si se encuentran dentro de esta distancia"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "Actualizar"
 
 msgid "Start frame:"
 msgstr "Fotograma inicial:"
@@ -481,32 +481,32 @@ msgid "File brush"
 msgstr "Guardar como pincel"
 
 msgid "Project brush"
-msgstr "Proyecto pincel"
+msgstr "Pincel del proyecto"
 
 msgid "Random brush"
 msgstr "Pincel al azar"
 
 msgid "Save Sprite as .pxo"
-msgstr "Guardar Sprite como .pxo"
+msgstr "Guardar sprite como .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "Exportar Sprite como .png"
+msgstr "Exportar sprite como .png"
 
 msgid "Export Sprite"
 msgstr "Exportar Sprite"
 
 msgid "File Exists, Overwrite?"
-msgstr "Archivo existente, ¿Sobrescribir?"
+msgstr "Si el archivo existe, ¿sobreescribirlo?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
 msgstr "Los siguientes archivos ya existen. ¿Deseas sobreescribirlos? %s"
 
 msgid "Directory path is not valid!"
-msgstr "¡Ruta de directorio no válida!"
+msgstr "¡La ruta del directorio no es válida!"
 
 msgid "File name is not valid!"
-msgstr "¡Nombre de archivo no válido!"
+msgstr "¡El nombre del archivo no es válido!"
 
 msgid "Directory path and file name are not valid!"
 msgstr "¡La ruta del directorio y el nombre de archivo no son válidos!"
@@ -625,93 +625,93 @@ msgstr "Filas:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Etiquetas por columna"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "Etiquetas por fila"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
 msgstr "Exportar dimensiones:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Guardar un archivo"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Ir a la carpeta anterior."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Ir a la carpeta siguiente."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Ir a la carpeta superior."
 
 msgid "Path:"
 msgstr "Ruta:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Actualizar archivos."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Alterna la visibilidad de los archivos ocultos."
 
 msgid "Directories & Files:"
-msgstr "Directorios y Archivos:"
+msgstr "Directorios y archivos:"
 
 msgid "Create Folder"
-msgstr "Crear Carpeta"
+msgstr "Crear carpeta"
 
 msgid "File:"
 msgstr "Archivo:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Todos los archivos"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Todos los reconocidos"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Proyecto de Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Imagen PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Imagen BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Imagen Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Imagen JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Imagen SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Imagen TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Imagen WebP"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Paleta de Pixelorama"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "Paleta de GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -737,11 +737,11 @@ msgstr "Constante"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space:"
-msgstr ""
+msgstr "Espacio de color:"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "SRGB lineal"
 
 msgid "General"
 msgstr "General"
@@ -810,11 +810,11 @@ msgstr "Añade una transición más suave cuando se acerca o aleja"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Zoom en enteros"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Restringe el valor para que sea un múltiplo entero de 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilidad de la presión de la tableta:"
@@ -839,26 +839,26 @@ msgstr "Escala de la interfaz:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Tamaño de la fuente:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Atenuar interface al abrir ventana emergente"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Utilizar diálogos de archivos nativos"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Cuando esta opción está activada, se utilizan los diálogos de archivos nativos del sistema operativo, en lugar de los personalizados de Pixelorama."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Modo de ventana única"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Cuando esta opción está activada, las subventanas de Pixelorama serán embebidas en la ventana principal, de lo contrario cada diálogo será su propia ventana separada."
 
 msgid "Dark"
 msgstr "Oscuro"
@@ -870,7 +870,7 @@ msgid "Blue"
 msgstr "Azul"
 
 msgid "Caramel"
-msgstr "Caramel"
+msgstr "Caramelo"
 
 msgid "Light"
 msgstr "Claro"
@@ -880,7 +880,7 @@ msgstr "Morado"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Rosa"
 
 msgid "Theme"
 msgstr "Tema"
@@ -937,19 +937,19 @@ msgid "All projects"
 msgstr "Todos los proyectos"
 
 msgid "Invert Colors"
-msgstr "Invertir Colores"
+msgstr "Invertir colores"
 
 msgid "Modify Red Channel"
-msgstr "Modificar Canal Rojo"
+msgstr "Modificar canal rojo"
 
 msgid "Modify Green Channel"
-msgstr "Modificar Canal Verde"
+msgstr "Modificar canal verde"
 
 msgid "Modify Blue Channel"
-msgstr "Modificar Canal Azul"
+msgstr "Modificar canal azul"
 
 msgid "Modify Alpha Channel"
-msgstr "Modificar Canal Alfa"
+msgstr "Modificar canal alfa"
 
 msgid "Desaturation"
 msgstr "Desaturación"
@@ -958,19 +958,19 @@ msgid "Outline"
 msgstr "Silueta"
 
 msgid "Drop Shadow"
-msgstr "Sombra Paralela"
+msgstr "Sombra paralela"
 
 msgid "Offset X:"
-msgstr "Desplazamiento X:"
+msgstr "Desplazamiento en X:"
 
 msgid "Offset Y:"
-msgstr "Desplazamiento Y:"
+msgstr "Desplazamiento en Y:"
 
 msgid "Shadow color:"
 msgstr "Color de la sombra:"
 
 msgid "Gradient"
-msgstr "Gradiente"
+msgstr "Degradado"
 
 msgid "Gradient Map"
 msgstr "Mapa de degradado"
@@ -986,8 +986,8 @@ msgstr "Añadir punto al final"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr "Si está activado, el último punto se añade al final del gradiente.\n"
-"Desactiva esto si deseas convertir el gradiente para tener interpolación constante, para que el último color sea tomado en cuenta."
+msgstr "Si está activado, el último punto se añade al final del degradado.\n"
+"Desactiva esto si deseas convertir el degradado para que tenga interpolación constante, de forma que el último color sea tomado en cuenta."
 
 msgid "Shape:"
 msgstr "Forma:"
@@ -1021,7 +1021,7 @@ msgid "Center:"
 msgstr "Centro:"
 
 msgid "Dithering pattern:"
-msgstr "Patrón del degradado:"
+msgstr "Patrón del tramado:"
 
 msgid "Type:"
 msgstr "Tipo:"
@@ -1051,35 +1051,35 @@ msgstr "Valor:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Ajustar brillo/contraste"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Brillo:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Contraste:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Valor rojo:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Valor verde:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Valor azul:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Color de tinte:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Factor de efecto de tinte:"
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -1101,11 +1101,11 @@ msgstr "Pasos:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
 msgid "Palettize"
-msgstr ""
+msgstr "Paletizar"
 
 #. An image effect. It makes the input image pixelated.
 msgid "Pixelize"
-msgstr ""
+msgstr "Pixelizar"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
@@ -1130,7 +1130,7 @@ msgstr "Gestor de Problemas"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Abrir carpeta de datos del editor"
 
 msgid "Changelog"
 msgstr "Registro de cambios"
@@ -1140,7 +1140,7 @@ msgstr "Acerca de Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Apoya el desarrollo de Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - ¡Pixela tus sueños!"
@@ -1156,7 +1156,7 @@ msgstr "Sitio Web"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Código fuente"
 
 msgid "Donate"
 msgstr "Donar"
@@ -1268,7 +1268,7 @@ msgstr "Bielorruso"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Desarrollador principal"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1276,7 +1276,7 @@ msgstr "Diseñador de IU"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Autores"
 
 msgid "Art by: %s"
 msgstr "Arte por: %s"
@@ -1303,7 +1303,7 @@ msgid "Save before exiting?"
 msgstr "¿Guardar antes de salir?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "El proyecto %s tiene progreso sin guardar. ¿Cómo deseas proceder?"
 
 msgid "Save & Exit"
 msgstr "Guardar y salir"
@@ -1314,16 +1314,16 @@ msgstr "Salir sin guardar"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Cubo de pintura\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+msgstr "Selección rectangular\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Cubo de pintura\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+msgstr "Selección elíptica\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
@@ -1332,54 +1332,56 @@ msgid "Polygonal Selection\n\n"
 msgstr "Selección poligonal\n\n"
 "%s para el botón izquierdo del ratón\n"
 "%s para el botón derecho del ratón\n\n"
-"Haga doble clic para conectar el último punto al punto inicial"
+"Haz doble clic para conectar el último punto al punto inicial"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Seleccionar Por Color\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+msgstr "Seleccionar por color\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Varita mágica\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Lazo / Herramienta de Selección Libre\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Seleccionar por dibujo\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Mover\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Zoom\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Vista\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Color Picker\n\n"
 "%s for left mouse button\n"
@@ -1392,15 +1394,15 @@ msgstr "Selector de Color\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Recortar y redimensionar el lienzo"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Lápiz\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
 "Mantén pulsado %s para crear una línea"
 
 msgid "Eraser\n\n"
@@ -1408,23 +1410,23 @@ msgid "Eraser\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Borrador\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
 "Mantén pulsado %s para crear una línea"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Cubo de pintura\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s para botón izquierdo del ratón\n"
+"%s para botón derecho del ratón"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Herramienta de Sombreado\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -1433,9 +1435,9 @@ msgid "Line Tool\n\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
 msgstr "Herramienta de Línea\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse\n\n"
-"Mantén %s para ajustar el ángulo de la línea\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
+"Mantenga %s para ajustar el ángulo de la línea\n"
 "Mantén %s para centrar la forma en el origen del clic\n"
 "Mantén %s para desplazar el origen de la forma"
 
@@ -1446,7 +1448,13 @@ msgid "Curve Tool\n\n"
 "Press %s/%s to add new points\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Herramienta de Curva\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
+"Dibuja curvas de bezier\n"
+"Presiona %s/%s para añadir nuevos puntos\n"
+"Presiona y arrastra para controlar la curvatura\n"
+"Presiona %s para eliminar el último punto añadido"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1455,8 +1463,8 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
 msgstr "Herramienta Rectángulo\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
 "Mantén %s para crear una forma 1:1\n"
 "Mantén %s para centrar la forma en el origen del clic\n"
 "Mantén %s para desplazar el origen de la forma"
@@ -1468,8 +1476,8 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
 msgstr "Herramienta Elipse\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
 "Mantén %s para crear una forma 1:1\n"
 "Mantén %s para centrar la forma en el origen del clic\n"
 "Mantén %s para desplazar el origen de la forma"
@@ -1488,46 +1496,46 @@ msgstr "Elegir un color para la herramienta derecha"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Cambia los colores izquierdo y derecho."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Color promedio:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Restablecer los colores a su estado predeterminado (negro a la izquierda, blanco a la derecha)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the screen."
-msgstr ""
+msgstr "Elige un color de la pantalla."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Introduce un código hexadecimal (\"#ff0000\") o nombre de color en inglés (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Selecciona una forma de selector."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Opciones de color"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Selecciona un modo de selector."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Controles deslizantes colorizados"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Muestras"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Colores recientes"
 
 msgid "Left tool"
 msgstr "Herramienta izquierda"
@@ -1576,15 +1584,15 @@ msgstr "Un color de las guías de reglas que se muestran en el lienzo"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr "Ajustar"
+msgstr "Ajuste"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr "Ajustar distancia:"
+msgstr "Distancia de ajuste:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Esta es la distancia en píxeles de la pantalla en la que se activa el ajuste de guía y cuadrícula."
 
 msgid "Grid"
 msgstr "Cuadrícula"
@@ -1710,6 +1718,10 @@ msgstr "Establecer el límite de FPS de la aplicación:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto menor sea el número, menor será el uso de la CPU, pero la aplicación se vuelve más lenta, entrecortada y sin respuesta. 0 significa que no hay límite."
 
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr ""
+
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Pausar la aplicación cuando pierde el enfoque"
@@ -1720,19 +1732,19 @@ msgstr "Si se activa esta opción, cuando la ventana de la aplicación pierde el
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Actualizar continuamente"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Si se activa esta opción, la aplicación volverá a dibujar la pantalla continuamente, aunque no se utilice. Apagar esto ayuda a reducir el uso de CPU y GPU cuando está inactiva."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Habilitar transparencia de ventana"
 
 #. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Si está activado, la ventana de la aplicación puede ser transparente. Esto afecta al rendimiento, así que mantenlo apagado si no lo necesitas."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1768,15 +1780,15 @@ msgstr "Abrir Carpeta"
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
 msgid "Explore Online"
-msgstr ""
+msgstr "Explorar en línea"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
-msgstr ""
+msgstr "¿Estás seguro de que deseas activar esta extensión? Asegúrate de activar sólo las extensiones de las fuentes en las que confíes."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
 msgid "Are you sure you want to delete this extension?"
-msgstr ""
+msgstr "¿Estás seguro de que deseas eliminar esta extensión?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1784,7 +1796,7 @@ msgstr "Dinámicas"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "Estabilizador"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1854,7 +1866,7 @@ msgstr "Pixel Perfect hace que las líneas sean suaves eliminando los píxeles s
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Bloquear alfa"
 
 msgid "Fill inside"
 msgstr "Rellenar el interior"
@@ -1950,7 +1962,7 @@ msgid "Zoom out"
 msgstr "Alejar"
 
 msgid "Options"
-msgstr ""
+msgstr "Opciones"
 
 msgid "Options:"
 msgstr "Opciones:"
@@ -2002,25 +2014,25 @@ msgid "Current frame as spritesheet"
 msgstr "Fotograma actual como hoja de sprites"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Saltar al primer fotograma"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Ir al fotograma anterior"
 
 msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgstr "Reproduce la animación hacia atrás (desde el final hasta el principio)"
 
 msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgstr "Reproducir la animación hacia adelante (de principio a fin)"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Ir al fotograma siguiente"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Saltar al último fotograma"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Configuración de la línea de tiempo"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Activar/desactivar Piel de Cebolla"
@@ -2077,12 +2089,12 @@ msgstr "Etiqueta %s (Fotogramas %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Si se selecciona, la animación se reproduce sólo en los marcos que tienen la misma etiqueta.\n"
-"Si no es así, la animación se reproducirá para todos los marcos, ignorando etiquetas."
+msgstr "Si se selecciona, la animación se reproduce sólo en los fotogramas que tienen la misma etiqueta.\n"
+"Si no es así, la animación se reproducirá para todos los fotogramas, ignorando las etiquetas."
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Tamaño de celda:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -2128,30 +2140,30 @@ msgid "Unlink Cels"
 msgstr "Desvincular celdas"
 
 msgid "Properties"
-msgstr ""
+msgstr "Propiedades"
 
 msgid "Project Properties"
-msgstr ""
+msgstr "Propiedades del proyecto"
 
 msgid "Frame properties"
 msgstr "Propiedades de los fotogramas"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Propiedades de la capa"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Propiedades de la celda"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "Propiedades de etiqueta"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "Nueva etiqueta"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Importar etiqueta"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2168,7 +2180,7 @@ msgstr "Capas"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr ""
+msgstr "Máscara de recorte"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2203,87 +2215,91 @@ msgstr "Combinar la capa actual con la de abajo"
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "Modo de fusión:"
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr "Pasar a través"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "Multiplicar"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr ""
+msgstr "Subexposición de color"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
-msgstr ""
+msgstr "Subexposición lineal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "Pantalla"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
-msgstr ""
+msgstr "Sobreexposición de color"
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Contraste"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Superposición"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Luz suave"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Luz dura"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Inversión"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Diferencia"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Exclusión"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Sustraer"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Dividir"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Componente"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Matiz"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Saturación"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Color"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Luminosidad"
 
 msgid "Opacity:"
 msgstr "Opacidad:"
@@ -2424,7 +2440,7 @@ msgstr "No se pudo guardar el archivo. Código de error %s"
 
 #. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
 msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
-msgstr ""
+msgstr "No se pudo exportar el vídeo. Asegúrate de que FFMPEG está instalado correctamente."
 
 msgid "File(s) exported"
 msgstr "Archivo(s) exportado(s)"
@@ -2580,7 +2596,7 @@ msgid "Line Tool"
 msgstr "Herramienta de Línea"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "Herramienta de curva"
 
 msgid "Rectangle Tool"
 msgstr "Herramienta de Rectángulo"
@@ -2638,7 +2654,7 @@ msgstr "Confirmación de salida"
 
 #. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
 msgid "FFMPEG path"
-msgstr ""
+msgstr "Ruta de FFMPEG"
 
 msgid "Enable autosave"
 msgstr "Activar guardado automático"
@@ -2651,11 +2667,11 @@ msgstr "minuto(s)"
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "Exportar datos JSON"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
-msgstr ""
+msgstr "Dividir capas"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
@@ -2707,18 +2723,18 @@ msgid "and"
 msgstr "y"
 
 msgid "Move the selected frame to the left."
-msgstr "Mueve el marco seleccionado hacia la izquierda."
+msgstr "Mueve el fotograma seleccionado hacia la izquierda."
 
 msgid "Move the selected frame to the right."
-msgstr "Mueve el marco seleccionado hacia la derecha."
+msgstr "Mueve el fotograma seleccionado hacia la derecha."
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr ""
+msgstr "Duración de los fotogramas:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Datos del usuario:"
 
 msgid "Duration"
 msgstr "Duración"
@@ -2758,39 +2774,39 @@ msgstr "Eliminar un color seleccionado"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "Ordenar paleta"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "Invertir colores"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Ordenar por matiz"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Ordenar por saturación"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Ordenar por valor"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Ordenar por rojo"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Ordenar por verde"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Ordenar por azul"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Ordenar por alfa"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "¡Ya existe una paleta con el mismo nombre y ruta!"
@@ -2800,7 +2816,8 @@ msgstr "¡El nombre de la paleta es requerido!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Reducir el tamaño de la paleta restablecerá las posiciones de los colores. \n"
+"¡Los colores que no quepan en el tamaño de la nueva paleta se perderán!"
 
 msgid "Position:"
 msgstr "Posición:"
@@ -3136,102 +3153,103 @@ msgstr "Sincronizar al final"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "Movimiento súbito en el final"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
-msgstr ""
+msgstr "Monocromático"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "Al abrir una imagen, se puede importar como una referencia."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr ""
+msgstr "Selecciona una imagen a continuación para cambiar sus propiedades.\n"
+"Ten en cuenta que no puedes dibujar mientras una imagen de referencia está seleccionada."
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr ""
+msgstr "Eliminar"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Mantén pulsado Shift mientras presionas para eliminar al instante."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "¿Estás seguro de que deseas eliminar esta imagen de referencia? No será eliminada de tu sistema de archivos."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
-msgstr ""
+msgstr "Mover la imagen de referencia seleccionada a la derecha"
 
 #. Moves the reference image down in the list
 msgid "Move the selected reference image to the left"
-msgstr ""
+msgstr "Mover la imagen de referencia seleccionada a la izquierda"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr ""
+msgstr "Selecciona una imagen de referencia en el lienzo"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
-msgstr ""
+msgstr "Mover la imagen de referencia seleccionada"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr ""
+msgstr "Rotar la imagen de referencia seleccionada"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
+msgstr "Escalar la imagen de referencia seleccionada"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "ninguna"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Reestablecer transformación"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
-msgstr ""
+msgstr "Posición"
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
-msgstr ""
+msgstr "Escala"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Rotación"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Opacidad"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Compresión de colores"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Habilitado"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
-msgstr ""
+msgstr "Efectos de la capa"
 
 #. A button that, when pressed, shows a list of effects to add. Found in the the layer effects dialog.
 msgid "Add effect"
-msgstr ""
+msgstr "Añadir efecto"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr ""
+msgstr "¿Deseas descargar la imagen desde %s?"
 
