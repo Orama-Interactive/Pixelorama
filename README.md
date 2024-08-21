@@ -6,34 +6,25 @@
 </p>
 <p align="center">
     <a href="https://github.com/Orama-Interactive/Pixelorama/actions">
-        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/dev-desktop-builds/badge.svg" alt="Build Passing" />
-    </a>
+        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/dev-desktop-builds/badge.svg" alt="Build Passing" /></a>
     <a href="https://orama-interactive.github.io/Pixelorama/early_access/">
-        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/dev-web/badge.svg" alt="Build Passing" />
-    </a>
+        <img src="https://github.com/Orama-Interactive/Pixelorama/workflows/dev-web/badge.svg" alt="Build Passing" /></a>
     <a href="https://github.com/Orama-Interactive/Pixelorama">
-        <img src="https://img.shields.io/github/languages/code-size/Orama-Interactive/Pixelorama.svg" alt="Code Size" />
-    </a>
+        <img src="https://img.shields.io/github/languages/code-size/Orama-Interactive/Pixelorama.svg" alt="Code Size" /></a>
     <a href="https://github.com/Orama-Interactive/Pixelorama">
-        <img src="https://img.shields.io/github/repo-size/Orama-Interactive/Pixelorama.svg" alt="Repository size" />
-    </a>
+        <img src="https://img.shields.io/github/repo-size/Orama-Interactive/Pixelorama.svg" alt="Repository size" /></a>
     <a href="https://github.com/Orama-Interactive/Pixelorama/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/Orama-Interactive/Pixelorama.svg" alt="License" />
-    </a>
+        <img src="https://img.shields.io/github/license/Orama-Interactive/Pixelorama.svg" alt="License" /></a>
 </p>
 <p align="center">
     <a href="https://github.com/Orama-Interactive/Pixelorama/releases">
-        <img src="https://img.shields.io/github/downloads/Orama-Interactive/Pixelorama/total?color=lightgreen" alt="Downloads" />
-    </a>
+        <img src="https://img.shields.io/github/downloads/Orama-Interactive/Pixelorama/total?color=lightgreen" alt="Downloads" /></a>
     <a href="https://discord.gg/GTMtr8s">
-        <img src="https://discord.com/api/guilds/645793202393186339/embed.png" alt="Discord Chat" />
-    </a>
+        <img src="https://discord.com/api/guilds/645793202393186339/embed.png" alt="Discord Chat" /></a>
     <a href="https://crowdin.com/project/pixelorama">
-        <img src="https://badges.crowdin.net/pixelorama/localized.svg" alt="Crowdin Localized %" />
-    </a>
+        <img src="https://badges.crowdin.net/pixelorama/localized.svg" alt="Crowdin Localized %" /></a>
     <a href="https://github.com/godotengine/awesome-godot">
-        <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Godot" />
-    </a>
+        <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Godot" /></a>
 </p>
  
 [![Pixelorama's UI](https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2779170/ss_54395040c25b243cb82a3bd68778e19e04b43ade.1920x1080.jpg?t=1719424898)](https://youtu.be/--ZcztkvWUQ)
