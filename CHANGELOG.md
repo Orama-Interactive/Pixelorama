@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.0.2] - Unreleased
 This update has been brought to you by the contributions of:
-[kleonc](https://github.com/kleonc), [Hamster5295](https://github.com/Hamster5295)
+[kleonc](https://github.com/kleonc), [Hamster5295](https://github.com/Hamster5295), [alikin12](https://github.com/alikin12)
 
 Built using Godot 4.3
 
@@ -25,6 +25,7 @@ Built using Godot 4.3
 - It is now possible to change the blend modes of multiple selected layers from the timeline's option button.
 
 ### Fixed
+- The Web version no longer requires SharedArrayBuffer, so compatibility with certain browsers should be better now.
 - Scaling with cleanEdge and OmniScale is now working again. [#1074](https://github.com/Orama-Interactive/Pixelorama/issues/1074)
 - Layer effects are now being applied when exporting single layers.
 - Exporting group layers now takes blending modes and layer effects into account.
