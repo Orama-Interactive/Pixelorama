@@ -25,6 +25,12 @@ jobs:
     container:
       image: docker://barichello/godot-ci:4.3
     steps:
+      - name: Setup WINE and rcedit 🍷
+        run: |
+          chown root:root -R ~
+          godot --headless --quit
+          echo 'export/windows/wine = "/usr/bin/wine64-stable"' >> ~/.config/godot/editor_settings-4.3.tres
+          echo 'export/windows/rcedit = "/opt/rcedit.exe"' >> ~/.config/godot/editor_settings-4.3.tres
       - name: Checkout 🛎️
         uses: actions/checkout@v4
         with:
