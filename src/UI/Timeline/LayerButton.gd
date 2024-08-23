@@ -99,6 +99,7 @@ func _update_buttons_all_layers() -> void:
 		var expanded := layer.is_expanded_in_hierarchy()
 		layer_button.visible = expanded
 		Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
+	Global.animation_timeline.update_global_layer_buttons()
 
 
 func _input(event: InputEvent) -> void:
