@@ -1,0 +1,112 @@
+[gd_scene load_steps=8 format=3 uid="uid://byc4c6d5tpomq"]
+
+[ext_resource type="Texture2D" uid="uid://csl0e2px0cwc1" path="res://addons/discord-rpc-gd/Logo_V2_No_Bg.png" id="1_0svbg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1t7mm"]
+
+[sub_resource type="Theme" id="Theme_swwco"]
+Button/styles/focus = SubResource("StyleBoxEmpty_1t7mm")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5vqdt"]
+
+[sub_resource type="Image" id="Image_m1lb3"]
+data = {
+"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 227, 227, 227, 36, 224, 224, 224, 168, 224, 224, 224, 233, 224, 224, 224, 236, 224, 224, 224, 170, 231, 231, 231, 31, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 227, 227, 227, 36, 224, 224, 224, 234, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 239, 230, 230, 230, 30, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 168, 224, 224, 224, 255, 224, 224, 224, 186, 224, 224, 224, 32, 224, 224, 224, 33, 224, 224, 224, 187, 224, 224, 224, 255, 225, 225, 225, 167, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 237, 224, 224, 224, 255, 224, 224, 224, 33, 255, 255, 255, 0, 255, 255, 255, 0, 227, 227, 227, 36, 224, 224, 224, 255, 224, 224, 224, 234, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 237, 224, 224, 224, 255, 224, 224, 224, 33, 255, 255, 255, 0, 255, 255, 255, 0, 229, 229, 229, 38, 224, 224, 224, 255, 224, 224, 224, 229, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 164, 224, 224, 224, 255, 224, 224, 224, 187, 225, 225, 225, 34, 227, 227, 227, 36, 224, 224, 224, 192, 224, 224, 224, 255, 224, 224, 224, 162, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 24, 225, 225, 225, 215, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 229, 224, 224, 224, 32, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 24, 224, 224, 224, 216, 224, 224, 224, 255, 224, 224, 224, 210, 224, 224, 224, 161, 224, 224, 224, 232, 224, 224, 224, 231, 225, 225, 225, 159, 230, 230, 230, 30, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 107, 224, 224, 224, 255, 224, 224, 224, 210, 230, 230, 230, 20, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 105, 230, 230, 230, 20, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 221, 224, 224, 224, 130, 255, 255, 255, 1, 255, 255, 255, 1, 225, 225, 225, 134, 224, 224, 224, 224, 225, 225, 225, 223, 224, 224, 224, 132, 255, 255, 255, 1, 255, 255, 255, 6, 224, 224, 224, 137, 224, 224, 224, 231, 224, 224, 224, 255, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 130, 225, 225, 225, 133, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 129, 224, 224, 224, 137, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 65, 224, 224, 224, 255, 224, 224, 224, 220, 225, 225, 225, 223, 224, 224, 224, 255, 226, 226, 226, 61, 224, 224, 224, 65, 224, 224, 224, 255, 224, 224, 224, 222, 224, 224, 224, 231, 224, 224, 224, 255, 227, 227, 227, 62, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 225, 225, 225, 67, 224, 224, 224, 255, 224, 224, 224, 219, 224, 224, 224, 222, 224, 224, 224, 255, 227, 227, 227, 63, 225, 225, 225, 67, 224, 224, 224, 255, 224, 224, 224, 219, 224, 224, 224, 230, 224, 224, 224, 255, 227, 227, 227, 63, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 225, 225, 225, 127, 224, 224, 224, 129, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 225, 225, 225, 126, 225, 225, 225, 135, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 221, 225, 225, 225, 127, 255, 255, 255, 0, 255, 255, 255, 1, 224, 224, 224, 128, 224, 224, 224, 220, 224, 224, 224, 219, 225, 225, 225, 127, 255, 255, 255, 0, 255, 255, 255, 5, 225, 225, 225, 134, 224, 224, 224, 229, 224, 224, 224, 255, 255, 255, 255, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_gdtpn"]
+image = SubResource("Image_m1lb3")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7v0rg"]
+
+[node name="RestartWindow" type="ConfirmationDialog"]
+title = "Restart required"
+initial_position = 2
+size = Vector2i(430, 500)
+visible = true
+transient = false
+unresizable = true
+theme = SubResource("Theme_swwco")
+ok_button_text = "Restart"
+cancel_button_text = "Save and restart"
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -207.0
+offset_top = 8.0
+offset_right = 207.0
+offset_bottom = 451.0
+grow_horizontal = 2
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 389.0
+grow_horizontal = 2
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_5vqdt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="DocsIcon" type="TextureRect" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("ImageTexture_gdtpn")
+stretch_mode = 2
+
+[node name="LinkButton" type="LinkButton" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_default_cursor_shape = 16
+theme_override_font_sizes/font_size = 20
+text = "HOW TO USE"
+uri = "https://vaporvee.com/docs/discord-rpc-godot#quick-start"
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("1_0svbg")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7v0rg")
+bbcode_enabled = true
+text = "[center]Thanks for enabling the 
+[rainbow]Discord Game SDK Plugin[/rainbow]
+made by vaporvee. ❤️
+
+
+You need to [wave]restart[/wave] the editor to fully enable this plugin! 
+Do you want to [wave]save[/wave] your project before restarting?
+
+Error messages after the first two restarts are normal. Please ignore them!"

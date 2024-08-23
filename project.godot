@@ -44,6 +44,7 @@ Palettes="*res://src/Autoload/Palettes.gd"
 Keychain="*res://addons/keychain/Keychain.gd"
 ExtensionsApi="*res://src/Autoload/ExtensionsApi.gd"
 Themes="*res://src/Autoload/Themes.gd"
+DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
 
 [debug]
 
@@ -57,9 +58,13 @@ window/size/viewport_height=720
 window/per_pixel_transparency/allowed.android=false
 window/per_pixel_transparency/allowed.web=false
 
+[dotnet]
+
+project/assembly_name="Pixelorama"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg")
+enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/keychain/plugin.cfg")
 
 [importer_defaults]
 

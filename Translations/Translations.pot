@@ -3179,3 +3179,7 @@ msgstr ""
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
 msgstr ""
+
+#. Default state details (Discord RPC).
+msgid "Just using Pixelorama"
+msgstr ""

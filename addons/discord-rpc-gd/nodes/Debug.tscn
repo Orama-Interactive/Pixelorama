@@ -1,0 +1,267 @@
+[gd_scene load_steps=9 format=3 uid="uid://c1slhdnlsv2qt"]
+
+[ext_resource type="Texture2D" uid="uid://dnfq6kug4x6o2" path="res://addons/discord-rpc-gd/nodes/assets/Checked.svg" id="2_q6tao"]
+[ext_resource type="Texture2D" uid="uid://compmm3kviqqe" path="res://addons/discord-rpc-gd/nodes/assets/Unchecked.svg" id="3_5cyem"]
+[ext_resource type="Texture2D" uid="uid://dtc6ckladq0td" path="res://addons/discord-rpc-gd/nodes/assets/circle.svg" id="3_goflf"]
+
+[sub_resource type="GDScript" id="GDScript_ak1tp"]
+resource_name = "Debug"
+script/source = "extends Node
+
+func _ready():
+	DiscordRPC.connect(\"activity_join_request\",_on_activity_join_request)
+
+func _process(_delta):
+	if(DiscordRPC.get_is_discord_working()):
+		$Panel/TextureRect.self_modulate = Color(\"#3eff8d\")
+		$Panel/TextureRect/AnimationPlayer.play(\"pulsate\")
+		debug_text_update()
+	else:
+		$Panel/TextureRect.self_modulate = Color(\"#797979\")
+		$Panel/TextureRect/AnimationPlayer.stop()
+		debug_text_update()
+		
+
+func debug_text_update():
+	$Panel/Info.text = \"Application ID : {id}
+Details: {details}
+State: {state}
+
+Large image key: {lkey}
+Large image text: {ltext}
+Small image key: {skey}
+Small image text: {stext}
+
+Start timestamp: {stimestamp}
+End timestamp: {etimestamp}
+
+Party ID: {partyid}
+Current party size: {cpartysize}
+Max party size: {mpartysize}
+Match secret: {msecret}
+Join secret: {jsecret}
+Spectate secret: {ssecret}
+Is party public: {ppublic} (needs to be activated in Discord client settings)
+
+Is instanced: {instanced}
+\"
+	$Panel/Info.text = $Panel/Info.text.replace(\"{ppublic}\",str(DiscordRPC.is_public_party)).replace(\"{instanced}\",str(DiscordRPC.instanced)).replace(\"{ssecret}\",DiscordRPC.spectate_secret).replace(\"{jsecret}\",DiscordRPC.join_secret).replace(\"{msecret}\",DiscordRPC.match_secret).replace(\"{mpartysize}\",str(DiscordRPC.max_party_size)).replace(\"{cpartysize}\",str(DiscordRPC.current_party_size)).replace(\"{partyid}\",DiscordRPC.party_id).replace(\"{id}\",str(DiscordRPC.app_id)).replace(\"{details}\",DiscordRPC.details).replace(\"{state}\",DiscordRPC.state).replace(\"{lkey}\",DiscordRPC.large_image).replace(\"{ltext}\",DiscordRPC.large_image_text).replace(\"{skey}\",DiscordRPC.small_image).replace(\"{stext}\",DiscordRPC.small_image_text).replace(\"{stimestamp}\",str(DiscordRPC.start_timestamp)).replace(\"{etimestamp}\",str(DiscordRPC.end_timestamp))
+
+var user_request = {};
+
+func _on_activity_join_request(user_requesting):
+	print(user_requesting)
+	user_request = user_requesting
+
+func _on_accept_join_request_pressed():
+	if(!user_request.is_empty()):
+		DiscordRPC.accept_join_request(user_request.id)
+
+func _on_invite_with_user_id_text_submitted(new_text):
+	DiscordRPC.send_invite(int(new_text),true,\"this is a test invite sent from godot\")
+
+func _on_accept_with_user_id_text_submitted(new_text):
+	DiscordRPC.accept_invite(int(new_text))
+
+func _on_print_current_user_on_console_pressed():
+	print(DiscordRPC.get_current_user())
+
+func _on_toggle_sdk_toggled(button_pressed):
+	if(button_pressed):
+		DiscordRPC.unclear()
+	else:
+		DiscordRPC.clear(false)
+
+func _on_print_friends_pressed():
+	print(DiscordRPC.get_all_relationships())
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8abo6"]
+
+[sub_resource type="Animation" id="Animation_mmtmn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_5u02v"]
+resource_name = "pulsate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.8, 0.8), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a7ofc"]
+_data = {
+"RESET": SubResource("Animation_mmtmn"),
+"pulsate": SubResource("Animation_5u02v")
+}
+
+[node name="DebugNodeGroup" type="Node"]
+editor_description = "This is a Debug Node wich will show (only if the project runs) some usefull info and buttons/input"
+script = SubResource("GDScript_ak1tp")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_right = 0.373
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_right = 0.303955
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Info" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 429.0
+offset_bottom = 461.0
+theme_override_font_sizes/normal_font_size = 14
+text = "Application ID : {id}
+Details: {details}
+State: {state}
+
+Large image key: {lkey}
+Large image text: {ltext}
+Small image key: {skey}
+Small image text: {stext}
+
+Start timestamp: {stimestamp}
+End timestamp: {etimestamp}
+
+Party ID: {partyid}
+Current party size: {cpartysize}
+Max party size: {mpartysize}
+Match secret: {msecret}
+Join secret: {jsecret}
+Spectate secret: {ssecret}
+Is party public: {ppublic} (needs to be activated in Discord client settings)
+
+Is instanced: {instanced}
+"
+fit_content = true
+
+[node name="PrintCurrentUserOnConsole" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 138.375
+offset_right = 245.0
+offset_bottom = 171.375
+grow_vertical = 2
+text = "Print current user on console"
+
+[node name="PrintFriends" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 176.5
+offset_right = 204.0
+offset_bottom = 207.5
+grow_vertical = 2
+text = "Print friends on console"
+
+[node name="AcceptJoinRequest" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 212.875
+offset_right = 154.0
+offset_bottom = 243.875
+grow_vertical = 2
+text = "ACCEPT REQUEST"
+
+[node name="InviteWithUserID" type="LineEdit" parent="Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = 250.375
+offset_right = 210.0
+offset_bottom = 281.375
+grow_vertical = 2
+size_flags_horizontal = 0
+placeholder_text = "Invite with user_id here"
+
+[node name="AcceptWithUserID" type="LineEdit" parent="Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = 286.875
+offset_right = 260.0
+offset_bottom = 317.875
+grow_vertical = 2
+placeholder_text = "Accept Invite with user_id here"
+
+[node name="ToggleSDK" type="CheckButton" parent="Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 298.0
+offset_top = 157.375
+offset_right = 1144.0
+offset_bottom = 665.375
+grow_vertical = 2
+scale = Vector2(0.05, 0.05)
+theme_override_icons/checked = ExtResource("2_q6tao")
+theme_override_icons/unchecked = ExtResource("3_5cyem")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8abo6")
+button_pressed = true
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+self_modulate = Color(0.47451, 0.47451, 0.47451, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.88
+anchor_top = 0.762
+anchor_right = 0.88
+anchor_bottom = 0.762
+offset_left = -28.8
+offset_top = -28.776
+offset_right = 28.0841
+offset_bottom = 28.1082
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(29.0693, 29.0693)
+texture = ExtResource("3_goflf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/TextureRect"]
+libraries = {
+"": SubResource("AnimationLibrary_a7ofc")
+}
+
+[connection signal="pressed" from="Panel/PrintCurrentUserOnConsole" to="." method="_on_print_current_user_on_console_pressed"]
+[connection signal="pressed" from="Panel/PrintFriends" to="." method="_on_print_friends_pressed"]
+[connection signal="pressed" from="Panel/AcceptJoinRequest" to="." method="_on_accept_join_request_pressed"]
+[connection signal="text_submitted" from="Panel/InviteWithUserID" to="." method="_on_invite_with_user_id_text_submitted"]
+[connection signal="text_submitted" from="Panel/AcceptWithUserID" to="." method="_on_accept_with_user_id_text_submitted"]
+[connection signal="toggled" from="Panel/ToggleSDK" to="." method="_on_toggle_sdk_toggled"]

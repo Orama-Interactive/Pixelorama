@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://dbylw5k04ulp8"]
+[gd_scene load_steps=20 format=3 uid="uid://dbylw5k04ulp8"]
 
 [ext_resource type="Theme" uid="uid://bkb4syj8110el" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bsgwar3l6qtgv" path="res://src/UI/TopMenuContainer/TopMenuContainer.tscn" id="3"]
+[ext_resource type="Script" path="res://src/Classes/DiscordRPC.gd" id="3_s01ue"]
 [ext_resource type="PackedScene" uid="uid://c8dsi6ggkqa7a" path="res://src/UI/UI.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://d1jyt8wleg8ft" path="res://src/UI/Buttons/PatternsPopup.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://c5x85ysdouh4t" path="res://src/UI/Buttons/BrushesPopup.tscn" id="6"]
@@ -112,6 +113,9 @@ visible = false
 
 [node name="SteamManager" type="Node" parent="."]
 script = ExtResource("17_k1xhp")
+
+[node name="DiscordRPC" type="Node" parent="."]
+script = ExtResource("3_s01ue")
 
 [connection signal="files_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_files_selected"]
 [connection signal="visibility_changed" from="Dialogs/OpenSprite" to="." method="_on_open_sprite_visibility_changed"]

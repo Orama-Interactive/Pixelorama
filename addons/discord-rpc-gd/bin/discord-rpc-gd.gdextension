@@ -1,0 +1,29 @@
+[configuration]
+
+entry_symbol = "discordrpcgd_library_init"
+compatibility_minimum = 4.1
+
+[libraries]
+
+macos.debug = "macos/libdiscord_game_sdk_binding_debug.dylib"
+macos.release = "macos/libdiscord_game_sdk_binding.dylib"
+windows.debug.x86_64 = "windows/discord_game_sdk_binding_debug.dll"
+windows.release.x86_64 = "windows/discord_game_sdk_binding.dll"
+linux.debug.x86_64 = "linux/libdiscord_game_sdk_binding_debug.so"
+linux.release.x86_64 = "linux/libdiscord_game_sdk_binding.so"
+linux.debug.arm64 = "linux/libdiscord_game_sdk_binding_debug.so"
+linux.release.arm64 = "linux/libdiscord_game_sdk_binding.so"
+linux.debug.rv64 = "linux/libdiscord_game_sdk_binding_debug.so"
+linux.release.rv64 = "linux/libdiscord_game_sdk_binding.so"
+
+[dependencies]
+
+macos = { "macos/libdiscord_game_sdk.dylib": "" }
+windows.debug.x86_64 = { "windows/discord_game_sdk.dll": "" }
+windows.release.x86_64 = { "windows/discord_game_sdk.dll": "" }
+linux.debug.x86_64 = { "linux/libdiscord_game_sdk.so": "" }
+linux.release.x86_64 = { "linux/libdiscord_game_sdk.so": "" }
+linux.debug.arm64 = { "linux/libdiscord_game_sdk.so": "" }
+linux.release.arm64 = { "linux/libdiscord_game_sdk.so": "" }
+linux.debug.rv64 = { "linux/libdiscord_game_sdk.so": "" }
+linux.release.rv64 = { "linux/libdiscord_game_sdk.so": "" }
