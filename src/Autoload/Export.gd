@@ -48,6 +48,7 @@ var current_tab := ExportTab.IMAGE
 var processed_images: Array[ProcessedImage] = []
 var export_json := false
 var split_layers := false
+var trim_sprite := false
 
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -270,6 +271,8 @@ func process_animation(project := Global.current_project) -> void:
 		else:
 			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			_blend_layers(image, frame)
+			if trim_sprite:
+				image = image.get_region(image.get_used_rect())
 			var duration := frame.duration * (1.0 / project.fps)
 			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
 

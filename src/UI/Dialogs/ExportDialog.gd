@@ -448,6 +448,11 @@ func _on_MultipleAnimationsDirectories_toggled(button_pressed: bool) -> void:
 	Export.new_dir_for_each_frame_tag = button_pressed
 
 
+func _on_TrimSprite_toggled(toggled_on: bool) -> void:
+	Export.trim_sprite = toggled_on
+	Export.process_data()
+	set_preview()
+
 func _on_Frames_item_selected(id: int) -> void:
 	Export.frame_current_tag = id
 	Export.process_data()
