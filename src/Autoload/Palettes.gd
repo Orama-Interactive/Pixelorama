@@ -463,9 +463,9 @@ func _import_gpl(path: String, text: String) -> Palette:
 			comments += line.trim_prefix("#") + "\n"
 			# Some programs output palette name in a comment for old format
 			if line.begins_with("#Palette Name: "):
-				palette_name = line.replace("#Palette Name: ", "")
+				palette_name = line.replace("#Palette Name: ", "").strip_edges()
 		elif line.begins_with("Name: "):
-			palette_name = line.replace("Name: ", "")
+			palette_name = line.replace("Name: ", "").strip_edges()
 		elif line.begins_with("Columns: "):
 			# The width of the palette.
 			line = line.trim_prefix("Columns: ").strip_edges()
