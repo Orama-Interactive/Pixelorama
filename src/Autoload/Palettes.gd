@@ -69,7 +69,7 @@ func save_palette(palette: Palette = current_palette) -> void:
 	palette.path = save_path
 	var err := palette.save_to_file()
 	if err != OK:
-		Global.notification_label("Failed to save palette")
+		Global.popup_error("Failed to save palette. Error code %s (%s)" % [err, error_string(err)])
 
 
 func copy_palette() -> void:
