@@ -15,9 +15,28 @@ static func create_ui_for_shader_uniforms(
 ) -> void:
 	var code := shader.code.split("\n")
 	var uniforms: PackedStringArray = []
+	var description: String = ""
+	var descriprion_began := false
 	for line in code:
+		## Management of "end" tags
+		if line.begins_with("// end DESCRIPTION:"):
+			descriprion_began = false
+		if descriprion_began:
+			description += "\n" + line.strip_edges()
+
+		## Detection of uniforms
 		if line.begins_with("uniform"):
 			uniforms.append(line)
+
+		## Management of "begin" tags
+		elif line.begins_with("// begin DESCRIPTION:"):
+			descriprion_began = true
+	## Validation of begin/end tags
+	if descriprion_began == true:  ## Description started but never ended. treat it as an error
+		print("Shader description started but never finished. Assuming empty description")
+		description = ""
+	if description:
+		parent_node.tooltip_text = str("Description:\n", description.replace("//", "").strip_edges())
 
 	for uniform in uniforms:
 		# Example uniform:

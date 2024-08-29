@@ -23,6 +23,7 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader")),
 	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader")),
 	LayerEffect.new("Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader")),
+	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader")),
 ]
 
 @onready var enabled_button: CheckButton = $VBoxContainer/HBoxContainer/EnabledButton
