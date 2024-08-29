@@ -35,8 +35,10 @@ static func create_ui_for_shader_uniforms(
 	if descriprion_began == true:  ## Description started but never ended. treat it as an error
 		print("Shader description started but never finished. Assuming empty description")
 		description = ""
-	if description:
-		parent_node.tooltip_text = str("Description:\n", description.replace("//", "").strip_edges())
+	if not description.is_empty():
+		parent_node.tooltip_text = str(
+			"Description:\n", description.replace("//", "").strip_edges()
+		)
 
 	for uniform in uniforms:
 		# Example uniform:
