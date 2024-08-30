@@ -87,10 +87,10 @@ script = ExtResource("7")
 material = SubResource("3")
 centered = false
 
-[node name="OnionPast" type="Node2D" parent="."]
+[node name="OnionPast" type="Node2D" parent="." groups=["canvas_onion_skinning"]]
 script = ExtResource("12")
 
-[node name="OnionFuture" type="Node2D" parent="."]
+[node name="OnionFuture" type="Node2D" parent="." groups=["canvas_onion_skinning"]]
 script = ExtResource("12")
 
 [node name="MouseGuideContainer" parent="." instance=ExtResource("11")]

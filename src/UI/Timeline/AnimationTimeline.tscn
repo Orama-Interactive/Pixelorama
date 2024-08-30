@@ -1066,6 +1066,15 @@ popup/item_0/text = "Above canvas"
 popup/item_1/text = "Below canvas"
 popup/item_1/id = 1
 
+[node name="OnionSkinningOpacityLabel" type="Label" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer"]
+layout_mode = 2
+text = "Opacity"
+
+[node name="OnionSkinningOpacity" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer" instance=ExtResource("9")]
+unique_name_in_owner = true
+layout_mode = 2
+suffix = "%"
+
 [node name="BlueRedMode" type="CheckBox" parent="TimelineSettings/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -1120,4 +1129,5 @@ color = Color(0, 0.741176, 1, 0.501961)
 [connection signal="value_changed" from="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="item_selected" from="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer/PastPlacement" to="." method="_on_PastPlacement_item_selected"]
 [connection signal="item_selected" from="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer/FuturePlacement" to="." method="_on_FuturePlacement_item_selected"]
+[connection signal="value_changed" from="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer/OnionSkinningOpacity" to="." method="_on_onion_skinning_opacity_value_changed"]
 [connection signal="toggled" from="TimelineSettings/MarginContainer/VBoxContainer/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]

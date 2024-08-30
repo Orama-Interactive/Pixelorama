@@ -98,6 +98,8 @@ func _ready() -> void:
 	Global.cel_switched.connect(_cel_switched)
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.emit_signal.call_deferred("resized")
+	# Set the default opacity for the onion skinning
+	get_node("%OnionSkinningOpacity").value = 60
 
 
 func _notification(what: int) -> void:
@@ -1264,6 +1266,12 @@ func _on_layer_fx_pressed() -> void:
 
 func _on_cel_size_slider_value_changed(value: float) -> void:
 	cel_size = value
+
+
+func _on_onion_skinning_opacity_value_changed(value: float) -> void:
+	for onion_skinning_node: Node2D in get_tree().get_nodes_in_group("canvas_onion_skinning"):
+		onion_skinning_node.opacity = value / 100
+		onion_skinning_node.queue_redraw()
 
 
 func _on_global_visibility_button_pressed() -> void:
