@@ -7,7 +7,9 @@ const DEFAULT_WIDTH := 8
 const DEFAULT_HEIGHT := 8
 
 # Metadata
-var name := "Custom Palette"
+var name := "Custom Palette":
+	set(value):
+		name = value.strip_edges()
 var comment := ""
 var path := ""
 

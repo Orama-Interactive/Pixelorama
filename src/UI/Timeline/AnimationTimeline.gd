@@ -24,6 +24,9 @@ var layer_effect_settings: AcceptDialog:
 			layer_effect_settings = load(LAYER_FX_SCENE_PATH).instantiate()
 			add_child(layer_effect_settings)
 		return layer_effect_settings
+var global_layer_visibility := true
+var global_layer_lock := false
+var global_layer_expand := true
 
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
 @onready var tag_spacer := %TagSpacer as Control
@@ -1231,12 +1234,14 @@ func project_layer_added(layer: int) -> void:
 	Global.layer_vbox.move_child(layer_button, count - 1 - layer)
 	Global.cel_vbox.add_child(cel_hbox)
 	Global.cel_vbox.move_child(cel_hbox, count - 1 - layer)
+	update_global_layer_buttons()
 
 
 func project_layer_removed(layer: int) -> void:
 	var count := Global.layer_vbox.get_child_count()
 	Global.layer_vbox.get_child(count - 1 - layer).free()
 	Global.cel_vbox.get_child(count - 1 - layer).free()
+	update_global_layer_buttons()
 
 
 func project_cel_added(frame: int, layer: int) -> void:
@@ -1267,3 +1272,57 @@ func _on_onion_skinning_opacity_value_changed(value: float) -> void:
 	for onion_skinning_node: Node2D in get_tree().get_nodes_in_group("canvas_onion_skinning"):
 		onion_skinning_node.opacity = value / 100
 		onion_skinning_node.queue_redraw()
+
+
+func _on_global_visibility_button_pressed() -> void:
+	var visible = !global_layer_visibility
+	for layer_button: LayerButton in Global.layer_vbox.get_children():
+		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+		if layer.parent == null and layer.visible != visible:
+			layer_button.visibility_button.pressed.emit()
+
+
+func _on_global_lock_button_pressed() -> void:
+	var locked = !global_layer_lock
+	for layer_button: LayerButton in Global.layer_vbox.get_children():
+		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+		if layer.parent == null and layer.locked != locked:
+			layer_button.lock_button.pressed.emit()
+
+
+func _on_global_expand_button_pressed() -> void:
+	var expand = !global_layer_expand
+	for layer_button: LayerButton in Global.layer_vbox.get_children():
+		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+		if layer.parent == null and layer is GroupLayer and layer.expanded != expand:
+			layer_button.expand_button.pressed.emit()
+
+
+func update_global_layer_buttons() -> void:
+	global_layer_visibility = false
+	global_layer_lock = true
+	global_layer_expand = true
+	for layer: BaseLayer in Global.current_project.layers:
+		if layer.parent == null:
+			if layer.visible:
+				global_layer_visibility = true
+			if not layer.locked:
+				global_layer_lock = false
+			if layer is GroupLayer and not layer.expanded:
+				global_layer_expand = false
+			if global_layer_visibility and not global_layer_lock and not global_layer_expand:
+				break
+	if global_layer_visibility:
+		Global.change_button_texturerect(%GlobalVisibilityButton.get_child(0), "layer_visible.png")
+	else:
+		Global.change_button_texturerect(
+			%GlobalVisibilityButton.get_child(0), "layer_invisible.png"
+		)
+	if global_layer_lock:
+		Global.change_button_texturerect(%GlobalLockButton.get_child(0), "lock.png")
+	else:
+		Global.change_button_texturerect(%GlobalLockButton.get_child(0), "unlock.png")
+	if global_layer_expand:
+		Global.change_button_texturerect(%GlobalExpandButton.get_child(0), "group_expanded.png")
+	else:
+		Global.change_button_texturerect(%GlobalExpandButton.get_child(0), "group_collapsed.png")

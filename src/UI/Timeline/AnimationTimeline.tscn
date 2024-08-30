@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=76 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -18,10 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://c7smxwfa8826j" path="res://assets/graphics/timeline/play.png" id="22"]
 [ext_resource type="Texture2D" uid="uid://cw7nn7360atot" path="res://assets/graphics/timeline/previous_frame.png" id="23"]
 [ext_resource type="Texture2D" uid="uid://esistdjfbrc4" path="res://assets/graphics/timeline/play_backwards.png" id="24"]
+[ext_resource type="Texture2D" uid="uid://c2b3htff5yox8" path="res://assets/graphics/layers/layer_visible.png" id="24_6ikqj"]
 [ext_resource type="Texture2D" uid="uid://l4jj86y1hukm" path="res://assets/graphics/timeline/go_to_last_frame.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://dhc0pnnqojd2m" path="res://assets/graphics/layers/unlock.png" id="25_7x5su"]
 [ext_resource type="Texture2D" uid="uid://b2ndrc0cvy1m5" path="res://assets/graphics/timeline/next_frame.png" id="26"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="26_tfw1u"]
 [ext_resource type="Texture2D" uid="uid://cerkv5yx4cqeh" path="res://assets/graphics/timeline/copy_frame.png" id="27"]
+[ext_resource type="Texture2D" uid="uid://dndlglvqc7v6a" path="res://assets/graphics/layers/group_expanded.png" id="27_lrc8y"]
 [ext_resource type="Texture2D" uid="uid://dukip7mvotxsp" path="res://assets/graphics/timeline/onion_skinning_off.png" id="29"]
 [ext_resource type="Texture2D" uid="uid://dinubfua8gqhw" path="res://assets/graphics/timeline/expandable.png" id="30"]
 [ext_resource type="Texture2D" uid="uid://fbwld5ofmocm" path="res://assets/graphics/timeline/loop.png" id="31"]
@@ -238,7 +241,6 @@ offset_bottom = 10.0
 mouse_default_cursor_shape = 2
 item_count = 3
 popup/item_0/text = "Add Pixel Layer"
-popup/item_0/id = 0
 popup/item_1/text = "Add Group Layer"
 popup/item_1/id = 1
 popup/item_2/text = "Add 3D Layer"
@@ -808,14 +810,86 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer"]
+custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="GlobalVisibilityButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 22)
+layout_mode = 2
+tooltip_text = "Toggle layer's visibility"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalVisibilityButton"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("24_6ikqj")
+
+[node name="GlobalLockButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 22)
+layout_mode = 2
+tooltip_text = "Lock/unlock layer"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalLockButton"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("25_7x5su")
+
+[node name="GlobalExpandButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 22)
+layout_mode = 2
+tooltip_text = "Expand/collapse group"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalExpandButton"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("27_lrc8y")
+
+[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 0
 
-[node name="OpacitySlider" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/MarginContainer" instance=ExtResource("9")]
+[node name="OpacitySlider" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/MarginContainer" instance=ExtResource("9")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
@@ -976,7 +1050,6 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "Above canvas"
-popup/item_0/id = 0
 popup/item_1/text = "Below canvas"
 popup/item_1/id = 1
 
@@ -990,7 +1063,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "Above canvas"
-popup/item_0/id = 0
 popup/item_1/text = "Below canvas"
 popup/item_1/id = 1
 
@@ -1043,7 +1115,10 @@ color = Color(0, 0.741176, 1, 0.501961)
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
 [connection signal="gui_input" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit" to="." method="_on_LayerFrameSplitContainer_gui_input"]
-[connection signal="value_changed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/MarginContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
+[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalVisibilityButton" to="." method="_on_global_visibility_button_pressed"]
+[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalLockButton" to="." method="_on_global_lock_button_pressed"]
+[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalExpandButton" to="." method="_on_global_expand_button_pressed"]
+[connection signal="value_changed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/MarginContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
 [connection signal="resized" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/LayerVBox" to="." method="_on_LayerVBox_resized"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 [connection signal="close_requested" from="TimelineSettings" to="." method="_on_timeline_settings_close_requested"]
