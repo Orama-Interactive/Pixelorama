@@ -4,11 +4,11 @@ render_mode unshaded;
 
 uniform sampler2D map_texture : filter_nearest;  // The map texture
 
-// begin DESCRIPTION:
-// Apply this shader to the base texture.
-// The Red and Green values (0-255) of tool colors will be considered as indices instead of
-// colors. These indices will then be used to recieve Colors from the "Map Texture" and displayed.
-// end DESCRIPTION:
+// (begin DESCRIPTION)
+// The Red and Green values (0-255) of tool color will be treated as an x and y position
+// respectively instead of color components.
+// When you draw, color will be taken from the x-y position in the "Map Texture".
+// (end DESCRIPTION)
 void fragment(){
 	vec4 col = texture(TEXTURE, UV);
 	vec2 map_size = vec2(textureSize(map_texture, 0));

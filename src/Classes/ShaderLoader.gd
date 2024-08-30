@@ -19,7 +19,7 @@ static func create_ui_for_shader_uniforms(
 	var descriprion_began := false
 	for line in code:
 		## Management of "end" tags
-		if line.begins_with("// end DESCRIPTION:"):
+		if line.begins_with("// (end DESCRIPTION)"):
 			descriprion_began = false
 		if descriprion_began:
 			description += "\n" + line.strip_edges()
@@ -29,7 +29,7 @@ static func create_ui_for_shader_uniforms(
 			uniforms.append(line)
 
 		## Management of "begin" tags
-		elif line.begins_with("// begin DESCRIPTION:"):
+		elif line.begins_with("// (begin DESCRIPTION)"):
 			descriprion_began = true
 	## Validation of begin/end tags
 	if descriprion_began == true:  ## Description started but never ended. treat it as an error
