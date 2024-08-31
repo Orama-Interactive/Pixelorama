@@ -344,6 +344,10 @@ func _on_Resize_value_changed(value: float) -> void:
 	update_dimensions_label()
 
 
+func _on_quality_value_changed(value: float) -> void:
+	Export.save_quality = value / 100.0
+
+
 func _on_Interpolation_item_selected(id: Image.Interpolation) -> void:
 	Export.interpolation = id
 
@@ -392,6 +396,10 @@ func _on_FileFormat_item_selected(idx: int) -> void:
 	else:
 		get_tree().set_group("ExportMultipleFilesOptions", "disabled", true)
 		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", false)
+
+	var show_quality := id == Export.FileFormat.JPEG
+	%QualityLabel.visible = show_quality
+	%Quality.visible = show_quality
 	set_preview()
 
 

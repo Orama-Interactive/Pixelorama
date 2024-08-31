@@ -544,6 +544,10 @@ msgstr ""
 msgid "Resize:"
 msgstr ""
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
+
 msgid "Cancel Export"
 msgstr ""
 
