@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-08-29 21:34\n"
+"PO-Revision-Date: 2024-08-31 23:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -559,6 +559,10 @@ msgstr "Localizar"
 
 msgid "Resize:"
 msgstr "Redimensionar:"
+
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
 
 msgid "Cancel Export"
 msgstr "Cancelar exportação"
