@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-08-16 13:18\n"
+"PO-Revision-Date: 2024-08-31 23:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -558,6 +558,10 @@ msgstr "Procházet"
 msgid "Resize:"
 msgstr "Změnit velikost:"
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
+
 msgid "Cancel Export"
 msgstr "Zrušit export"
 
@@ -952,12 +956,15 @@ msgstr "Upravit modrý kanál"
 msgid "Modify Alpha Channel"
 msgstr "Upravit alfa kanál"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Odstíny šedi"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Obrys"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Vrhnout stín"
 
@@ -1029,7 +1036,7 @@ msgstr "Typ:"
 msgid "Angle:"
 msgstr "Úhel:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Upravit odstín, sytost a hodnotu"
 
@@ -1099,11 +1106,11 @@ msgstr "Barvy:"
 msgid "Steps:"
 msgstr "Kroky:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Paletizovat"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Pixelizace"
 
