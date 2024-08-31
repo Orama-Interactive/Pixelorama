@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-08-22 01:25\n"
+"PO-Revision-Date: 2024-08-31 23:57\n"
 
 msgid "OK"
 msgstr "确定"
@@ -559,6 +559,10 @@ msgstr "浏览"
 
 msgid "Resize:"
 msgstr "调整大小："
+
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
 
 msgid "Cancel Export"
 msgstr "取消导出"
