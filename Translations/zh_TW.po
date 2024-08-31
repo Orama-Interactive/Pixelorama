@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-08-16 13:18\n"
+"PO-Revision-Date: 2024-08-31 23:57\n"
 
 msgid "OK"
 msgstr "確定"
@@ -555,6 +555,10 @@ msgstr "瀏覽"
 msgid "Resize:"
 msgstr "調整大小："
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
+
 msgid "Cancel Export"
 msgstr "取消輸出"
 
@@ -949,12 +953,15 @@ msgstr "修改藍色色版"
 msgid "Modify Alpha Channel"
 msgstr "修改透明色版"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "去飽和"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "描邊"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr ""
 
@@ -1026,7 +1033,7 @@ msgstr "類型："
 msgid "Angle:"
 msgstr "角度："
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "調整色相、飽和度、亮度"
 
@@ -1096,11 +1103,11 @@ msgstr "顏色："
 msgid "Steps:"
 msgstr "色階數："
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr ""
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr ""
 
