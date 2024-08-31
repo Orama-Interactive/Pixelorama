@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-08-16 13:18\n"
+"PO-Revision-Date: 2024-08-31 19:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -952,12 +952,15 @@ msgstr "Изменять синий канал"
 msgid "Modify Alpha Channel"
 msgstr "Изменять альфа-канал"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Обесцвечивание"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Обводка"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Отбросить тень"
 
@@ -1029,7 +1032,7 @@ msgstr "Тип:"
 msgid "Angle:"
 msgstr "Угол:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Изменить Оттенок/Насыщенность/Яркость"
 
@@ -1099,11 +1102,11 @@ msgstr "Цвета:"
 msgid "Steps:"
 msgstr "Шаги:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Паллетизация"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Пикселизация"
 
@@ -2531,7 +2534,7 @@ msgid "Portrait"
 msgstr "Портретная"
 
 msgid "Landscape"
-msgstr "Горизонтальное"
+msgstr "Горизонтальная"
 
 msgid "Templates:"
 msgstr "Шаблоны:"
