@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-08-31 20:57\n"
+"PO-Revision-Date: 2024-08-31 23:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -557,6 +557,10 @@ msgstr "Обзор"
 
 msgid "Resize:"
 msgstr "Изменить размер:"
+
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
 
 msgid "Cancel Export"
 msgstr "Отменить экспорт"
