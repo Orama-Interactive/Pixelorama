@@ -132,7 +132,18 @@ var config_cache := ConfigFile.new()
 var loaded_locales: PackedStringArray = LANGUAGES_DICT.keys()
 
 var projects: Array[Project] = []  ## Array of currently open projects.
-var current_project: Project  ## The project that currently in focus.
+var current_project: Project:  ## The project that currently in focus.
+	set(value):
+		current_project = value
+		if top_menu_container.file_menu:
+			if current_project is ResourceProject:
+				top_menu_container.file_menu.set_item_disabled(FileMenu.SAVE_AS, true)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT, true)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT_AS, true)
+			else:
+				top_menu_container.file_menu.set_item_disabled(FileMenu.SAVE_AS, false)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT, false)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT_AS, false)
 ## The index of project that is currently in focus.
 var current_project_index := 0:
 	set(value):
@@ -691,6 +702,15 @@ func _init() -> void:
 	window_transparency = ProjectSettings.get_setting(
 		"display/window/per_pixel_transparency/allowed"
 	)
+
+
+func modify_texture_resource(image: Image, resource_name: StringName, update_callable: Callable):
+	var resource_proj = ResourceProject.new([], resource_name, image.get_size())
+	resource_proj.layers.append(PixelLayer.new(resource_proj))
+	resource_proj.frames.append(resource_proj.new_empty_frame())
+	resource_proj.frames[0].cels[0].set_content(image)
+	resource_proj.resource_updated.connect(update_callable)
+	Global.projects.append(resource_proj)
 
 
 func _ready() -> void:

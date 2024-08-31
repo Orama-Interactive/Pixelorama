@@ -545,6 +545,8 @@ func _on_open_last_project_file_menu_option_pressed() -> void:
 
 
 func _save_project_file() -> void:
+	if Global.current_project is ResourceProject:
+		Global.current_project.resource_updated.emit(Global.current_project)
 	var path: String = Global.current_project.save_path
 	if path == "":
 		Global.control.show_save_dialog()
