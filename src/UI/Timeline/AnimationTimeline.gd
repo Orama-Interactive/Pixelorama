@@ -32,6 +32,7 @@ var global_layer_expand := true
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
+@onready var layer_header_container := %LayerHeaderContainer as HBoxContainer
 @onready var add_layer_list := %AddLayerList as MenuButton
 @onready var remove_layer := %RemoveLayer as Button
 @onready var move_up_layer := %MoveUpLayer as Button
@@ -43,6 +44,7 @@ var global_layer_expand := true
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
+@onready var layer_frame_header_h_split := %LayerFrameHeaderHSplit as HSplitContainer
 @onready var delete_frame := %DeleteFrame as Button
 @onready var move_frame_left := %MoveFrameLeft as Button
 @onready var move_frame_right := %MoveFrameRight as Button
@@ -60,6 +62,7 @@ func _ready() -> void:
 	Global.control.find_child("LayerProperties").layer_property_changed.connect(_update_layer_ui)
 	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
 	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
+	layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
 	cel_size = min_cel_size
 	cel_size_slider.min_value = min_cel_size
 	cel_size_slider.max_value = max_cel_size
@@ -71,6 +74,7 @@ func _ready() -> void:
 	_fill_blend_modes_option_button()
 	# Config loading
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
+	layer_frame_header_h_split.split_offset = layer_frame_h_split.split_offset
 	cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
 	var past_rate = Global.config_cache.get_value(
 		"timeline", "past_rate", Global.onion_skinning_past_rate
@@ -109,6 +113,7 @@ func _notification(what: int) -> void:
 		await get_tree().process_frame
 		if is_instance_valid(layer_settings_container):
 			layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
+			layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
 
 
 func _input(event: InputEvent) -> void:
@@ -1326,3 +1331,10 @@ func update_global_layer_buttons() -> void:
 		Global.change_button_texturerect(%GlobalExpandButton.get_child(0), "group_expanded.png")
 	else:
 		Global.change_button_texturerect(%GlobalExpandButton.get_child(0), "group_collapsed.png")
+
+
+func _on_layer_frame_h_split_dragged(offset: int) -> void:
+	if layer_frame_header_h_split.split_offset != offset:
+		layer_frame_header_h_split.split_offset = offset
+	if layer_frame_h_split.split_offset != offset:
+		layer_frame_h_split.split_offset = offset
