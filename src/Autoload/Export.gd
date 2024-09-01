@@ -60,6 +60,7 @@ var export_layers := 0
 var number_of_frames := 1
 var direction := AnimationDirection.FORWARD
 var resize := 100
+var save_quality := 0.75  ## Used when saving jpg and webp images. Goes from 0 to 1.
 var interpolation := Image.INTERPOLATE_NEAREST
 var include_tag_in_filename := false
 var new_dir_for_each_frame_tag := false  ## We don't need to store this after export
@@ -441,7 +442,7 @@ func export_processed_images(
 					)
 				elif project.file_format == FileFormat.JPEG:
 					JavaScriptBridge.download_buffer(
-						processed_images[i].image.save_jpg_to_buffer(),
+						processed_images[i].image.save_jpg_to_buffer(save_quality),
 						export_paths[i].get_file(),
 						"image/jpeg"
 					)
@@ -453,7 +454,7 @@ func export_processed_images(
 				elif project.file_format == FileFormat.WEBP:
 					err = processed_images[i].image.save_webp(export_paths[i])
 				elif project.file_format == FileFormat.JPEG:
-					err = processed_images[i].image.save_jpg(export_paths[i])
+					err = processed_images[i].image.save_jpg(export_paths[i], save_quality)
 				if err != OK:
 					Global.popup_error(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
