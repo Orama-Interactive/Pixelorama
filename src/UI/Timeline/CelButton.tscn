@@ -59,7 +59,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="TransparentChecker" parent="CelTexture" instance=ExtResource("2_mi8wp")]
 show_behind_parent = true
