@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-08-31 23:57\n"
+"PO-Revision-Date: 2024-09-01 09:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -560,7 +560,7 @@ msgstr "Redimensionare:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Calitate:"
 
 msgid "Cancel Export"
 msgstr "Anulare exportare"
