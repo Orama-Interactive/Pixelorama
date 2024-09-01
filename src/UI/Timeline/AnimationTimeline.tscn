@@ -786,36 +786,32 @@ mouse_filter = 1
 [node name="MainBodyVBoxContainer" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 0
 
-[node name="TimelineScroll" type="ScrollContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll"]
+[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/margin_bottom = 0
 
-[node name="LayerFrameHSplit" type="HSplitContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer"]
+[node name="LayerFrameHeaderHSplit" type="HSplitContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 0
+theme_override_constants/separation = 6
 theme_override_constants/minimum_grab_thickness = 12
 theme_override_icons/grabber = SubResource("ImageTexture_ku1qg")
 
-[node name="LayerContainer" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit"]
+[node name="LayerHeaderContainer" type="HBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit"]
 unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer"]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/separation = 0
 
-[node name="GlobalVisibilityButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer" groups=["UIButtons"]]
+[node name="GlobalVisibilityButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 22)
 layout_mode = 2
@@ -823,7 +819,7 @@ tooltip_text = "Toggle layer's visibility"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalVisibilityButton"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer/GlobalVisibilityButton"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -837,7 +833,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("24_6ikqj")
 
-[node name="GlobalLockButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer" groups=["UIButtons"]]
+[node name="GlobalLockButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 22)
 layout_mode = 2
@@ -845,7 +841,7 @@ tooltip_text = "Lock/unlock layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalLockButton"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer/GlobalLockButton"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -859,7 +855,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("25_7x5su")
 
-[node name="GlobalExpandButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer" groups=["UIButtons"]]
+[node name="GlobalExpandButton" type="Button" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 22)
 layout_mode = 2
@@ -867,7 +863,7 @@ tooltip_text = "Expand/collapse group"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalExpandButton"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer/GlobalExpandButton"]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -881,7 +877,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("27_lrc8y")
 
-[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 0
@@ -889,13 +885,63 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 0
 
-[node name="OpacitySlider" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/MarginContainer" instance=ExtResource("9")]
+[node name="OpacitySlider" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer/MarginContainer" instance=ExtResource("9")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 size_flags_vertical = 0
 value = 100.0
 prefix = "Opacity:"
+
+[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit"]
+layout_mode = 2
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="FrameScrollHeaderContainer" type="Container" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/MarginContainer" node_paths=PackedStringArray("h_scroll_bar")]
+clip_contents = true
+layout_mode = 2
+script = ExtResource("11")
+h_scroll_bar = NodePath("../../../../FrameScrollBar")
+
+[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/MarginContainer/FrameScrollHeaderContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/MarginContainer/FrameScrollHeaderContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TimelineScroll" type="ScrollContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 0
+
+[node name="LayerFrameHSplit" type="HSplitContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+theme_override_constants/minimum_grab_thickness = 12
+theme_override_icons/grabber = SubResource("ImageTexture_ku1qg")
+
+[node name="LayerContainer" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 1
 
 [node name="LayerVBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer"]
 layout_mode = 2
@@ -905,7 +951,7 @@ theme_override_constants/separation = 0
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit"]
 layout_mode = 2
 theme_override_constants/margin_left = -2
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_top = -2
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
@@ -914,7 +960,7 @@ unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 script = ExtResource("11")
-h_scroll_bar = NodePath("../../../../../BreakFreeFromContainer/FrameScrollBar")
+h_scroll_bar = NodePath("../../../../../FrameScrollBar")
 
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer"]
 layout_mode = 2
@@ -923,28 +969,14 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="FrameAndCelBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer/MarginContainer"]
+[node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer/MarginContainer/FrameAndCelBox"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer/MarginContainer/FrameAndCelBox"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="BreakFreeFromContainer" type="Control" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer"]
-layout_mode = 2
-
-[node name="FrameScrollBar" type="HScrollBar" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/BreakFreeFromContainer"]
+[node name="FrameScrollBar" type="HScrollBar" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 0
-anchor_right = 1.0
-offset_left = 41.0
-offset_top = -12.0
+z_index = 2
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="AnimationTimer" type="Timer" parent="."]
@@ -1114,11 +1146,14 @@ color = Color(0, 0.741176, 1, 0.501961)
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="dragged" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit" to="." method="_on_layer_frame_h_split_dragged"]
+[connection signal="gui_input" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit" to="." method="_on_LayerFrameSplitContainer_gui_input"]
+[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer/GlobalVisibilityButton" to="." method="_on_global_visibility_button_pressed"]
+[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer/GlobalLockButton" to="." method="_on_global_lock_button_pressed"]
+[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer/GlobalExpandButton" to="." method="_on_global_expand_button_pressed"]
+[connection signal="value_changed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/LayerHeaderContainer/MarginContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
+[connection signal="dragged" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit" to="." method="_on_layer_frame_h_split_dragged"]
 [connection signal="gui_input" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit" to="." method="_on_LayerFrameSplitContainer_gui_input"]
-[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalVisibilityButton" to="." method="_on_global_visibility_button_pressed"]
-[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalLockButton" to="." method="_on_global_lock_button_pressed"]
-[connection signal="pressed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/GlobalExpandButton" to="." method="_on_global_expand_button_pressed"]
-[connection signal="value_changed" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/HBoxContainer/MarginContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
 [connection signal="resized" from="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer/LayerVBox" to="." method="_on_LayerVBox_resized"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 [connection signal="close_requested" from="TimelineSettings" to="." method="_on_timeline_settings_close_requested"]

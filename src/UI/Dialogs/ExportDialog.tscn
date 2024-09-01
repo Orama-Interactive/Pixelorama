@@ -79,12 +79,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "Columns"
 popup/item_0/id = 1
 popup/item_1/text = "Rows"
-popup/item_1/id = 0
 popup/item_2/text = "Tags by column"
 popup/item_2/id = 2
 popup/item_3/text = "Tags by row"
@@ -116,7 +115,6 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "All frames"
-popup/item_0/id = 0
 popup/item_1/text = "Selected frames"
 popup/item_1/id = 1
 
@@ -130,7 +128,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "Visible layers"
-popup/item_0/id = 0
 popup/item_1/text = "Selected layers"
 popup/item_1/id = 1
 
@@ -143,10 +140,9 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Forward"
-popup/item_0/id = 0
 popup/item_1/text = "Backwards"
 popup/item_1/id = 1
 popup/item_2/text = "Ping-Pong"
@@ -175,6 +171,28 @@ stretch_margin_bottom = 3
 script = ExtResource("4")
 suffix = "%"
 snap_step = 100.0
+
+[node name="QualityLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "Quality:"
+
+[node name="Quality" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+value = 75.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("4")
 
 [node name="DimensionLabelText" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -255,10 +273,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 5
 selected = 0
+item_count = 5
 popup/item_0/text = "Nearest"
-popup/item_0/id = 0
 popup/item_1/text = "Bilinear"
 popup/item_1/id = 1
 popup/item_2/text = "Cubic"
@@ -350,6 +367,7 @@ size_flags_horizontal = 3
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Layers" to="." method="_on_Layers_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Direction" to="." method="_on_Direction_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Resize" to="." method="_on_Resize_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Quality" to="." method="_on_quality_value_changed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathLineEdit" to="." method="_on_PathLineEdit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_PathButton_pressed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileLineEdit" to="." method="_on_FileLineEdit_text_changed"]
