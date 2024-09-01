@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-08-31 23:57\n"
+"PO-Revision-Date: 2024-09-01 00:57\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -562,7 +562,7 @@ msgstr "Ubah ukuran:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Mutu:"
 
 msgid "Cancel Export"
 msgstr "Batalkan Ekspor"
