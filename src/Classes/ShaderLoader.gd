@@ -359,9 +359,17 @@ static func _get_loaded_texture(params: Dictionary, parameter_name: String) -> I
 static func _shader_update_texture(
 	resource_proj: ResourceProject, value_changed: Callable, parameter_name: String
 ) -> void:
+	var warnings = ""
+	if resource_proj.frames.size() > 1:
+		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
+	if resource_proj.layers.size() > 1:
+		warnings += "\nThis resource is intended to have 1 layer only. layers will be blended."
+
 	var updated_image = Image.create_empty(
 		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
 	)
 	var frame = resource_proj.frames[0]
 	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
 	value_changed.call(ImageTexture.create_from_image(updated_image), parameter_name)
+	if not warnings.is_empty():
+		Global.popup_error(warnings)
