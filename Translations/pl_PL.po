@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-08-31 23:57\n"
+"PO-Revision-Date: 2024-09-01 08:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -561,7 +561,7 @@ msgstr "Zmień rozmiar:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Jakość:"
 
 msgid "Cancel Export"
 msgstr "Anuluj eksportowanie"
