@@ -1,7 +1,6 @@
 class_name ResourceProject
 extends Project
 
-
 signal resource_updated
 
 

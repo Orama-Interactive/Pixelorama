@@ -348,9 +348,7 @@ static func _shader_update_palette_texture(
 	value_changed.call(ImageTexture.create_from_image(palette.convert_to_image()), parameter_name)
 
 
-static func _get_loaded_texture(
-	params: Dictionary, parameter_name: String
-) -> Image:
+static func _get_loaded_texture(params: Dictionary, parameter_name: String) -> Image:
 	if parameter_name in params:
 		if params[parameter_name] is ImageTexture:
 			return params[parameter_name].get_image()
@@ -361,5 +359,9 @@ static func _get_loaded_texture(
 static func _shader_update_texture(
 	resource_proj: ResourceProject, value_changed: Callable, parameter_name: String
 ) -> void:
-	var image = resource_proj.frames[0].cels[0].get_content()
-	value_changed.call(ImageTexture.create_from_image(image), parameter_name)
+	var updated_image = Image.create_empty(
+		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
+	)
+	var frame = resource_proj.frames[0]
+	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
+	value_changed.call(ImageTexture.create_from_image(updated_image), parameter_name)
