@@ -704,17 +704,6 @@ func _init() -> void:
 	)
 
 
-func modify_texture_resource(image: Image, resource_name: StringName, update_callable: Callable):
-	var resource_proj = ResourceProject.new([], resource_name, image.get_size())
-	resource_proj.layers.append(PixelLayer.new(resource_proj))
-	resource_proj.frames.append(resource_proj.new_empty_frame())
-	resource_proj.frames[0].cels[0].set_content(image)
-	resource_proj.resource_updated.connect(update_callable)
-	Global.projects.append(resource_proj)
-	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
-
-
 func _ready() -> void:
 	_initialize_keychain()
 	default_width = config_cache.get_value("preferences", "default_width", default_width)

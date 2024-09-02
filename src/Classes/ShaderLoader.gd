@@ -227,7 +227,7 @@ static func create_ui_for_shader_uniforms(
 				var mod_button := Button.new()
 				mod_button.text = "Modify"
 				mod_button.pressed.connect(
-					func(): Global.modify_texture_resource(
+					func(): _modify_texture_resource(
 						_get_loaded_texture(params, u_name),
 						u_name,
 						_shader_update_texture.bind(value_changed, u_name)
@@ -373,3 +373,14 @@ static func _shader_update_texture(
 	value_changed.call(ImageTexture.create_from_image(updated_image), parameter_name)
 	if not warnings.is_empty():
 		Global.popup_error(warnings)
+
+
+static func _modify_texture_resource(image: Image, resource_name: StringName, update_callable: Callable):
+	var resource_proj = ResourceProject.new([], resource_name, image.get_size())
+	resource_proj.layers.append(PixelLayer.new(resource_proj))
+	resource_proj.frames.append(resource_proj.new_empty_frame())
+	resource_proj.frames[0].cels[0].set_content(image)
+	resource_proj.resource_updated.connect(update_callable)
+	Global.projects.append(resource_proj)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
