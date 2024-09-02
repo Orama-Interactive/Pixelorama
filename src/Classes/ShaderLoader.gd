@@ -375,7 +375,9 @@ static func _shader_update_texture(
 		Global.popup_error(warnings)
 
 
-static func _modify_texture_resource(image: Image, resource_name: StringName, update_callable: Callable):
+static func _modify_texture_resource(
+	image: Image, resource_name: StringName, update_callable: Callable
+):
 	var resource_proj = ResourceProject.new([], resource_name, image.get_size())
 	resource_proj.layers.append(PixelLayer.new(resource_proj))
 	resource_proj.frames.append(resource_proj.new_empty_frame())
