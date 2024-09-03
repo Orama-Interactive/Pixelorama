@@ -212,7 +212,7 @@ static func create_ui_for_shader_uniforms(
 					func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
 				)
 				hbox.add_child(gradient_edit)
-			else:
+			else:  ## Simple texture
 				var file_dialog := FileDialog.new()
 				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 				file_dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -224,7 +224,19 @@ static func create_ui_for_shader_uniforms(
 				button.pressed.connect(file_dialog.popup_centered)
 				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				var mod_button := Button.new()
+				mod_button.text = "Modify"
+				mod_button.pressed.connect(
+					func(): _modify_texture_resource(
+						_get_loaded_texture(params, u_name),
+						u_name,
+						_shader_update_texture.bind(value_changed, u_name)
+					)
+				)
+				mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				mod_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				hbox.add_child(button)
+				hbox.add_child(mod_button)
 				parent_node.add_child(file_dialog)
 			parent_node.add_child(hbox)
 
@@ -334,3 +346,43 @@ static func _shader_update_palette_texture(
 	palette: Palette, value_changed: Callable, parameter_name: String
 ) -> void:
 	value_changed.call(ImageTexture.create_from_image(palette.convert_to_image()), parameter_name)
+
+
+static func _get_loaded_texture(params: Dictionary, parameter_name: String) -> Image:
+	if parameter_name in params:
+		if params[parameter_name] is ImageTexture:
+			return params[parameter_name].get_image()
+	var image = Image.create_empty(64, 64, false, Image.FORMAT_RGBA8)
+	return image
+
+
+static func _shader_update_texture(
+	resource_proj: ResourceProject, value_changed: Callable, parameter_name: String
+) -> void:
+	var warnings = ""
+	if resource_proj.frames.size() > 1:
+		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
+	if resource_proj.layers.size() > 1:
+		warnings += "\nThis resource is intended to have 1 layer only. layers will be blended."
+
+	var updated_image = Image.create_empty(
+		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
+	)
+	var frame = resource_proj.frames[0]
+	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
+	value_changed.call(ImageTexture.create_from_image(updated_image), parameter_name)
+	if not warnings.is_empty():
+		Global.popup_error(warnings)
+
+
+static func _modify_texture_resource(
+	image: Image, resource_name: StringName, update_callable: Callable
+) -> void:
+	var resource_proj = ResourceProject.new([], resource_name, image.get_size())
+	resource_proj.layers.append(PixelLayer.new(resource_proj))
+	resource_proj.frames.append(resource_proj.new_empty_frame())
+	resource_proj.frames[0].cels[0].set_content(image)
+	resource_proj.resource_updated.connect(update_callable)
+	Global.projects.append(resource_proj)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()

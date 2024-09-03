@@ -132,7 +132,18 @@ var config_cache := ConfigFile.new()
 var loaded_locales: PackedStringArray = LANGUAGES_DICT.keys()
 
 var projects: Array[Project] = []  ## Array of currently open projects.
-var current_project: Project  ## The project that currently in focus.
+var current_project: Project:  ## The project that currently in focus.
+	set(value):
+		current_project = value
+		if top_menu_container.file_menu:
+			if current_project is ResourceProject:
+				top_menu_container.file_menu.set_item_disabled(FileMenu.SAVE_AS, true)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT, true)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT_AS, true)
+			else:
+				top_menu_container.file_menu.set_item_disabled(FileMenu.SAVE_AS, false)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT, false)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT_AS, false)
 ## The index of project that is currently in focus.
 var current_project_index := 0:
 	set(value):
