@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://clgu8wb5o6oup"]
+[gd_scene load_steps=6 format=3 uid="uid://clgu8wb5o6oup"]
 
 [ext_resource type="Script" path="res://src/UI/Dialogs/ExportDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3_u6gtq"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4"]
 
 [node name="ExportDialog" type="ConfirmationDialog"]
@@ -84,6 +85,7 @@ item_count = 4
 popup/item_0/text = "Columns"
 popup/item_0/id = 1
 popup/item_1/text = "Rows"
+popup/item_1/id = 1
 popup/item_2/text = "Tags by column"
 popup/item_2/id = 2
 popup/item_3/text = "Tags by row"
@@ -94,11 +96,12 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Columns:"
 
-[node name="LinesCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
+[node name="LinesCount" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"] instance=ExtResource("3_u6gtq")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
+focus_mode = 0
+theme_type_variation = &""
 min_value = 1.0
 max_value = 1000.0
 value = 1.0
@@ -358,6 +361,11 @@ size_flags_horizontal = 3
 
 [node name="FrameTimer" type="Timer" parent="."]
 
+[node name="SpritesheetUpdateTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
 [connection signal="about_to_popup" from="." to="." method="_on_ExportDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
 [connection signal="tab_clicked" from="VBoxContainer/TabBar" to="." method="_on_Tabs_tab_clicked"]
@@ -384,3 +392,4 @@ size_flags_horizontal = 3
 [connection signal="confirmed" from="FileExistsAlert" to="." method="_on_FileExistsAlert_confirmed"]
 [connection signal="custom_action" from="FileExistsAlert" to="." method="_on_FileExistsAlert_custom_action"]
 [connection signal="timeout" from="FrameTimer" to="." method="_on_FrameTimer_timeout"]
+[connection signal="timeout" from="SpritesheetUpdateTimer" to="." method="_on_spritesheet_update_timer_timeout"]

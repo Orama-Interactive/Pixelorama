@@ -149,7 +149,14 @@ func process_data(project := Global.current_project) -> void:
 			process_spritesheet(project)
 
 
-func process_spritesheet(project := Global.current_project) -> void:
+func process_spritesheet(project := Global.current_project, info_cache: Dictionary = {}) -> void:
+	## info_cache stores the position of frame in the spritesheet and recycles the last created
+	## spritesheet to construct a new one (only if info_cache is provided).
+	## This causes significant performance boost for higher row or column values
+	## (no significant increase in lower values).
+	var old_spritesheet: Image
+	if not info_cache.is_empty():
+		old_spritesheet = processed_images[0].image
 	processed_images.clear()
 	# Range of frames determined by tags
 	var frames := _calculate_frames(project)
@@ -192,6 +199,11 @@ func process_spritesheet(project := Global.current_project) -> void:
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
 	var whole_image := Image.create(width, height, false, Image.FORMAT_RGBA8)
+	if not info_cache.is_empty() and old_spritesheet:
+		whole_image.blend_rect(
+			old_spritesheet, Rect2i(Vector2i.ZERO, old_spritesheet.get_size()), Vector2i.ZERO
+		)
+	var old_origins = info_cache.values()
 	var origin := Vector2i.ZERO
 	var hh := 0
 	var vv := 0
@@ -252,8 +264,17 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.y = project.size.y * tag_origins[0]
 				origin.x = 0
 				tag_origins[0] += 1
+		old_origins.erase(origin)
+		if frame in info_cache:
+			if info_cache[frame] == origin:
+				continue
+			else:
+				whole_image.fill_rect(Rect2i(origin, project.size), Color.TRANSPARENT)
+		info_cache[frame] = origin
 		_blend_layers(whole_image, frame, origin)
-
+	## remove redundant origins from image
+	for useless in old_origins:
+		whole_image.fill_rect(Rect2i(useless, project.size), Color.TRANSPARENT)
 	processed_images.append(ProcessedImage.new(whole_image, 0))
 
 
@@ -671,7 +692,7 @@ func _blend_layers(
 			# Attempt to read the image data directly from the pxo file, without having to blend
 			# This is mostly useful for when running Pixelorama in headless mode
 			# To handle exporting from a CLI
-			var zip_reader := ZIPReader.new()
+			var zip_reader: ZIPReader = ZIPReader.new()
 			var err := zip_reader.open(project.save_path)
 			if err == OK:
 				var frame_index := project.frames.find(frame) + 1
@@ -679,8 +700,8 @@ func _blend_layers(
 				if zip_reader.file_exists(image_path):
 					# "Include blended" must be toggled on when saving the pxo file
 					# in order for this to work.
-					var image_data := zip_reader.read_file(image_path)
-					var loaded_image := Image.create_from_data(
+					var image_data: PackedByteArray = zip_reader.read_file(image_path)
+					var loaded_image: Image = Image.create_from_data(
 						project.size.x,
 						project.size.y,
 						image.has_mipmaps(),
@@ -698,8 +719,8 @@ func _blend_layers(
 	elif export_layers == SELECTED_LAYERS:
 		DrawingAlgos.blend_layers(image, frame, origin, project, false, true)
 	else:
-		var layer := project.layers[export_layers - 2]
-		var layer_image := Image.new()
+		var layer: BaseLayer = project.layers[export_layers - 2]
+		var layer_image: Image = Image.new()
 		if layer is GroupLayer:
 			layer_image.copy_from(layer.blend_children(frame, Vector2i.ZERO))
 		else:

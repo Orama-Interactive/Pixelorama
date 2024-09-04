@@ -6,7 +6,7 @@ signal about_to_preview(dict: Dictionary)
 
 var preview_current_frame := 0
 var preview_frames: Array[Texture2D] = []
-
+var spritesheet_info_cache = {}
 # Allow custom exporters to be added
 var image_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.PNG,
@@ -31,7 +31,7 @@ var _preview_images: Array[Export.ProcessedImage]
 @onready var previews: GridContainer = $"%Previews"
 
 @onready var spritesheet_orientation: OptionButton = $"%Orientation"
-@onready var spritesheet_lines_count: SpinBox = $"%LinesCount"
+@onready var spritesheet_lines_count: ValueSlider = $"%LinesCount"
 @onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
 
 @onready var frames_option_button: OptionButton = $"%Frames"
@@ -51,6 +51,7 @@ var _preview_images: Array[Export.ProcessedImage]
 @onready var export_progress_popup: Window = $ExportProgressBar
 @onready var export_progress_bar := %ProgressBar as ProgressBar
 @onready var frame_timer: Timer = $FrameTimer
+@onready var spritesheet_update_timer: Timer = %SpritesheetUpdateTimer
 
 
 func _ready() -> void:
@@ -84,7 +85,8 @@ func show_tab() -> void:
 			)
 		Export.ExportTab.SPRITESHEET:
 			frame_timer.stop()
-			Export.process_spritesheet()
+			spritesheet_info_cache.clear()
+			Export.process_spritesheet(Global.current_project, spritesheet_info_cache)
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
@@ -121,6 +123,7 @@ func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 	var container := create_preview_container()
 	var preview := create_preview_rect()
 	preview.texture = ImageTexture.create_from_image(image)
+	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	container.add_child(preview)
 
 	if canvas_number != -1:
@@ -145,6 +148,7 @@ func add_animated_preview() -> void:
 	var preview := create_preview_rect()
 	preview.name = "Preview"
 	preview.texture = preview_frames[preview_current_frame]
+	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	container.add_child(preview)
 
 	previews.add_child(container)
@@ -305,9 +309,8 @@ func _on_Orientation_item_selected(id: Export.Orientation) -> void:
 	Export.orientation = id
 	_handle_orientation_ui()
 	spritesheet_lines_count.value = Export.frames_divided_by_spritesheet_lines()
-	Export.process_spritesheet()
-	update_dimensions_label()
-	set_preview()
+	## Due to the above line, we don't have to process the spritesheet again
+	## the value_changed signal will do this for us.
 
 
 func _handle_orientation_ui() -> void:
@@ -326,9 +329,8 @@ func _handle_orientation_ui() -> void:
 
 func _on_LinesCount_value_changed(value: float) -> void:
 	Export.lines_count = value
-	Export.process_spritesheet()
-	update_dimensions_label()
-	set_preview()
+	## Check if spritesheet needs to be updated (This is required when orientation gets changed)
+	spritesheet_update_timer.start()
 
 
 func _on_Direction_item_selected(id: Export.AnimationDirection) -> void:
@@ -478,3 +480,9 @@ func _on_Layers_item_selected(id: int) -> void:
 
 func _on_SeparatorCharacter_text_changed(new_text: String) -> void:
 	Export.separator_character = new_text
+
+
+func _on_spritesheet_update_timer_timeout() -> void:
+	Export.process_spritesheet(Global.current_project, spritesheet_info_cache)
+	update_dimensions_label()
+	set_preview()

@@ -25,39 +25,39 @@ func blend_layers(
 	only_selected_cels := false,
 	only_selected_layers := false,
 ) -> void:
-	var frame_index := project.frames.find(frame)
+	var frame_index: int = project.frames.find(frame)
 	var previous_ordered_layers: Array[int] = project.ordered_layers
 	project.order_layers(frame_index)
 	var textures: Array[Image] = []
 	# Nx4 texture, where N is the number of layers and the first row are the blend modes,
 	# the second are the opacities, the third are the origins and the fourth are the
 	# clipping mask booleans.
-	var metadata_image := Image.create(project.layers.size(), 4, false, Image.FORMAT_R8)
+	var metadata_image: Image = Image.create(project.layers.size(), 4, false, Image.FORMAT_R8)
 	for i in project.layers.size():
-		var ordered_index := project.ordered_layers[i]
-		var layer := project.layers[ordered_index]
-		var include := true if layer.is_visible_in_hierarchy() else false
+		var ordered_index: int = project.ordered_layers[i]
+		var layer: BaseLayer = project.layers[ordered_index]
+		var include: bool = true if layer.is_visible_in_hierarchy() else false
 		if only_selected_cels and include:
 			var test_array := [frame_index, i]
 			if not test_array in project.selected_cels:
 				include = false
 		if only_selected_layers and include:
-			var layer_is_selected := false
+			var layer_is_selected: bool = false
 			for selected_cel in project.selected_cels:
 				if i == selected_cel[1]:
 					layer_is_selected = true
 					break
 			if not layer_is_selected:
 				include = false
-		var cel := frame.cels[ordered_index]
+		var cel: BaseCel = frame.cels[ordered_index]
 		if DisplayServer.get_name() == "headless":
 			blend_layers_headless(image, project, layer, cel, origin)
 		else:
 			if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
-				var cel_image := (layer as GroupLayer).blend_children(frame)
+				var cel_image: Image = (layer as GroupLayer).blend_children(frame)
 				textures.append(cel_image)
 			else:
-				var cel_image := layer.display_effects(cel)
+				var cel_image: Image = layer.display_effects(cel)
 				textures.append(cel_image)
 			if (
 				layer.is_blended_by_ancestor()
@@ -67,13 +67,13 @@ func blend_layers(
 				include = false
 			set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
 	if DisplayServer.get_name() != "headless":
-		var texture_array := Texture2DArray.new()
+		var texture_array: Texture2DArray = Texture2DArray.new()
 		texture_array.create_from_images(textures)
 		var params := {
 			"layers": texture_array,
 			"metadata": ImageTexture.create_from_image(metadata_image),
 		}
-		var blended := Image.create(project.size.x, project.size.y, false, image.get_format())
+		var blended: Image = Image.create(project.size.x, project.size.y, false, image.get_format())
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(blended, blend_layers_shader, params, project.size)
 		image.blend_rect(blended, Rect2i(Vector2i.ZERO, project.size), origin)
