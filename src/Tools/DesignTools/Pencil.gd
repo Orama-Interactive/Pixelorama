@@ -5,6 +5,7 @@ var _last_position := Vector2i(Vector2.INF)
 var _changed := false
 var _overwrite := false
 var _fill_inside := false
+var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _draw_points := PackedVector2Array()
 var _old_spacing_mode := false  ## Needed to reset spacing mode in case we change it
 
@@ -125,6 +126,7 @@ func draw_start(pos: Vector2i) -> void:
 	else:
 		if _fill_inside:
 			_draw_points.append(pos)
+			_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
 		draw_tool(pos)
 		_last_position = pos
 		Global.canvas.sprite_changed_this_frame = true
@@ -156,6 +158,7 @@ func draw_move(pos_i: Vector2i) -> void:
 		Global.canvas.sprite_changed_this_frame = true
 		if _fill_inside:
 			_draw_points.append(pos)
+			_fill_inside_rect = _fill_inside_rect.expand(pos)
 
 
 func draw_end(pos: Vector2i) -> void:
@@ -178,11 +181,10 @@ func draw_end(pos: Vector2i) -> void:
 			_draw_points.append(pos)
 			if _draw_points.size() > 3:
 				var v := Vector2i()
-				var image_size := Global.current_project.size
-				for x in image_size.x:
-					v.x = x
-					for y in image_size.y:
-						v.y = y
+				for x in _fill_inside_rect.size.x:
+					v.x = x + _fill_inside_rect.position.x
+					for y in _fill_inside_rect.size.y:
+						v.y = y + _fill_inside_rect.position.y
 						if Geometry2D.is_point_in_polygon(v, _draw_points):
 							if _spacing_mode:
 								# use of get_spacing_position() in Pencil.gd is a rare case
@@ -190,6 +192,7 @@ func draw_end(pos: Vector2i) -> void:
 								v = get_spacing_position(v)
 							draw_tool(v)
 
+	_fill_inside_rect = Rect2i()
 	commit_undo()
 	cursor_text = ""
 	update_random_image()
