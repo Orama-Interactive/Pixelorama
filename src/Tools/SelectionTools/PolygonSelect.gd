@@ -154,11 +154,12 @@ func _clear() -> void:
 func lasso_selection(
 	selection_map: SelectionMap, previous_selection_map: SelectionMap, points: Array[Vector2i]
 ) -> void:
-	var project := Global.current_project
 	var selection_size := selection_map.get_size()
+	var bounding_rect := Rect2i(points[0], Vector2i.ZERO)
 	for point in points:
 		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:
 			continue
+		bounding_rect = bounding_rect.expand(point)
 		if _intersect:
 			if previous_selection_map.is_pixel_selected(point):
 				selection_map.select_pixel(point, true)
@@ -166,11 +167,10 @@ func lasso_selection(
 			selection_map.select_pixel(point, !_subtract)
 
 	var v := Vector2i()
-	var image_size := project.size
-	for x in image_size.x:
-		v.x = x
-		for y in image_size.y:
-			v.y = y
+	for x in bounding_rect.size.x:
+		v.x = x + bounding_rect.position.x
+		for y in bounding_rect.size.y:
+			v.y = y + bounding_rect.position.y
 			if Geometry2D.is_point_in_polygon(v, points):
 				if _intersect:
 					if previous_selection_map.is_pixel_selected(v):
