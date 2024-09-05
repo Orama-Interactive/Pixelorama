@@ -46,6 +46,9 @@ var custom_exporter_generators := {}
 var current_tab := ExportTab.IMAGE
 ## All frames and their layers processed/blended into images
 var processed_images: Array[ProcessedImage] = []
+## Dictionary of [Frame] and [Image] that contains all of the blended frames.
+## Changes when [method cache_blended_frames] is called.
+var blended_frames := {}
 var export_json := false
 var split_layers := false
 var trim_sprite := false
@@ -137,6 +140,7 @@ func remove_custom_file_format(id: int) -> void:
 
 
 func external_export(project := Global.current_project) -> void:
+	cache_blended_frames(project)
 	process_data(project)
 	export_processed_images(true, Global.export_dialog, project)
 
@@ -147,6 +151,15 @@ func process_data(project := Global.current_project) -> void:
 			process_animation(project)
 		ExportTab.SPRITESHEET:
 			process_spritesheet(project)
+
+
+func cache_blended_frames(project := Global.current_project) -> void:
+	blended_frames.clear()
+	var frames := _calculate_frames(project)
+	for frame in frames:
+		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		_blend_layers(image, frame)
+		blended_frames[frame] = image
 
 
 func process_spritesheet(project := Global.current_project) -> void:
@@ -252,7 +265,8 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.y = project.size.y * tag_origins[0]
 				origin.x = 0
 				tag_origins[0] += 1
-		_blend_layers(whole_image, frame, origin)
+		whole_image.blend_rect(blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin)
+		#_blend_layers(whole_image, frame, origin)
 
 	processed_images.append(ProcessedImage.new(whole_image, 0))
 
@@ -271,7 +285,7 @@ func process_animation(project := Global.current_project) -> void:
 				)
 		else:
 			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			_blend_layers(image, frame)
+			image.copy_from(blended_frames[frame])
 			if trim_sprite:
 				image = image.get_region(image.get_used_rect())
 			var duration := frame.duration * (1.0 / project.fps)

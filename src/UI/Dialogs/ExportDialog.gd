@@ -290,6 +290,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	path_dialog_popup.current_dir = project.export_directory_path
 	file_line_edit.text = project.file_name
 	file_format_options.selected = project.file_format
+	Export.cache_blended_frames()
 	show_tab()
 
 	# Set the size of the preview checker
@@ -472,6 +473,7 @@ func _on_Frames_item_selected(id: int) -> void:
 
 func _on_Layers_item_selected(id: int) -> void:
 	Export.export_layers = id
+	Export.cache_blended_frames()
 	Export.process_data()
 	set_preview()
 
