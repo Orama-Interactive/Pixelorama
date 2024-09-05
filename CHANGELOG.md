@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.0.3] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [alikin12](https://github.com/alikin12), Vaibhav Kubre ([@kubre](https://github.com/kubre)), Donte ([@donte5405](https://github.com/donte5405))
+
+Built using Godot 4.3
+
+### Added
+- Added new global layer buttons that change visibility, lock or expand all layers on the first level. [#1085](https://github.com/Orama-Interactive/Pixelorama/pull/1085)
+- A new Index Map layer effect has been added. [#1093](https://github.com/Orama-Interactive/Pixelorama/pull/1093)
+- Is it now possible to adjust the opacity of onion skinning. [#1091](https://github.com/Orama-Interactive/Pixelorama/pull/1091)
+- Added option to trim sprites empty area while exporting. [#1088](https://github.com/Orama-Interactive/Pixelorama/pull/1088)
+- A quality slider has been added to the export dialog, when exporting jpg files.
+
+### Changed
+- The layer opacity and frame buttons are now fixed on top, always visible regardless of the vertical scroll position. [#1095](https://github.com/Orama-Interactive/Pixelorama/pull/1095)
+
+### Fixed
+- Fixed an issue where the '\n` escape character got inserted inside the palette name, causing the palette to fail to be saved.
+- The export dialog has been optimized by caching all of the blended frames. Changing export options, besides the layers, no longer cause slowness by re-blending all of the frames.
+- Optimized the lasso and polygon select tools, as well as the fill options of the pencil and curve tools. The time they take to complete now depends on the size of the selection, rather than checking all of the pixels of the entire canvas.
+- Fixed wrong stretch mode in the cel button previews. [#1097](https://github.com/Orama-Interactive/Pixelorama/pull/1097)
+
 ## [v1.0.2] - 2024-08-21
 This update has been brought to you by the contributions of:
 [kleonc](https://github.com/kleonc), [Hamster5295](https://github.com/Hamster5295), [alikin12](https://github.com/alikin12)
@@ -37,7 +59,6 @@ Built using Godot 4.3
 - Fixed bug where some buttons on the interface were not affected by the custom icon color on startup.
 - Fixed an issue when loading a project, selecting a project brush and then switching tools. [#1078](https://github.com/Orama-Interactive/Pixelorama/pull/1078)
 - Fixed wrong rendering of the isometric grid. [#1069](https://github.com/Orama-Interactive/Pixelorama/pull/1069)
-
 
 ## [v1.0.1] - 2024-08-05
 This update has been brought to you by the contributions of:
