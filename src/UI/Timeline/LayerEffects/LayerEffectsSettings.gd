@@ -7,6 +7,7 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new(
 		"Convolution Matrix", preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader")
 	),
+	LayerEffect.new("Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader")),
 	LayerEffect.new("Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new("Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader")),
 	LayerEffect.new("Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader")),
