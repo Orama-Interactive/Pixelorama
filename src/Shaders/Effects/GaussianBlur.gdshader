@@ -7,6 +7,7 @@ uniform int blur_type : hint_range(0, 3, 1) = 0;
 uniform int blur_amount = 16;
 uniform float blur_radius = 1.0;
 uniform vec2 blur_direction = vec2(1, 1);
+uniform sampler2D selection : filter_nearest;
 
 // Xor's gaussian blur function 
 // Link: https://xorshaders.weebly.com/tutorials/blur-shaders-5-part-2
@@ -93,6 +94,7 @@ vec4 texture_nodevgaussian_singlepass(sampler2D tex, vec2 uv, vec2 pixel_size, f
 	blurred_tex *= norm;
 	return blurred_tex;
 }
+
 vec4 texture_nodevgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, float blurriness, vec2 direction) {
 	float n = 0.0015;
 	vec4 blurred_tex = vec4(0);
@@ -112,23 +114,28 @@ vec4 texture_nodevgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, fl
 }
 
 void fragment() {
+	vec4 original_color = texture(TEXTURE, UV);
+	vec4 selection_color = texture(selection, UV);
+	vec4 col = original_color;
 	if (blur_type == 0) {
 		vec4 xorgaussian = texture_xorgaussian(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), 16, 4);
-		COLOR = xorgaussian;
+		col = xorgaussian;
 	} 
 	else if (blur_type == 1) {
 		vec4 monksgaussian_multipass = texture_monksgaussian_multipass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, blur_amount, blur_direction);
-		COLOR = monksgaussian_multipass;
+		col = monksgaussian_multipass;
 	} 
 	else if (blur_type == 2) {
 		vec4 nodevgaussian_singlepass = texture_nodevgaussian_singlepass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), blur_radius);
-		COLOR = nodevgaussian_singlepass;
+		col = nodevgaussian_singlepass;
 	} 
 	else if (blur_type == 3) {
 		vec4 nodevgaussian_multipass = texture_nodevgaussian_multipass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), blur_direction);
-		COLOR = nodevgaussian_multipass;
+		col = nodevgaussian_multipass;
 	} 
 	else {
-		COLOR = texture(TEXTURE, UV);
+		col = texture(TEXTURE, UV);
 	}
+	vec4 output = mix(original_color.rgba, col, selection_color.a);
+	COLOR = output;
 }
