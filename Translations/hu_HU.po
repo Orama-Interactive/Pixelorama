@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2024-08-31 23:57\n"
+"PO-Revision-Date: 2024-09-08 00:34\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -973,6 +973,26 @@ msgid "Offset Y:"
 msgstr ""
 
 msgid "Shadow color:"
+msgstr ""
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr ""
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr ""
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr ""
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr ""
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
 msgstr ""
 
 msgid "Gradient"
