@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-09-08 00:34\n"
+"PO-Revision-Date: 2024-09-08 22:15\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -562,7 +562,7 @@ msgstr "Αλλαγή μεγέθους:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Ποιότητα:"
 
 msgid "Cancel Export"
 msgstr "Ακύρωση Εξαγωγής"
@@ -981,23 +981,23 @@ msgstr "Χρώμα σκιάς:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Θόλωση Gauss"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Τύπος θόλωσης:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Ποσότητα θόλωσης:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Ακτίνα θόλωσης:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Κατεύθυνση θόλωσης:"
 
 msgid "Gradient"
 msgstr "Διαβάθμιση"
