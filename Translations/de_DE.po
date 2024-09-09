@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-09-08 00:34\n"
+"PO-Revision-Date: 2024-09-09 16:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,9 @@ msgstr "Gemischte Bilder einbeziehen"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Wenn aktiviert, werden die letzten überlagerten Bilder für jeden Frame auch in der pxo gespeichert.\n"
+"Dies macht die pxo-Datei größer und ist nützlich für den Import durch Software von Drittanbietern\n"
+"oder den CLI-Export. Beim Laden von pxo-Dateien in Pixelorama muss diese Option nicht aktiviert sein."
 
 msgid "Import"
 msgstr "Importieren"
@@ -559,7 +561,7 @@ msgstr "Größe verändern"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Qualität:"
 
 msgid "Cancel Export"
 msgstr "Export abbrechen"
@@ -640,25 +642,25 @@ msgid "Export dimensions:"
 msgstr "Export-Größen:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Datei speichern"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Gehe zum vorherigen Ordner."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Gehe zum nächsten Ordner."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Gehe zum übergeordneten Ordner."
 
 msgid "Path:"
 msgstr "Pfad:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Dateien aktualisieren."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Schalten Sie die Sichtbarkeit von versteckten Dateien um."
 
 msgid "Directories & Files:"
 msgstr "Verzeichnisse & Dateien:"
@@ -671,51 +673,51 @@ msgstr "Datei:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Alle Dateien"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Alle erkannt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Pixelorama-Projekt"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "PNG-Bild"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "BMP-Bild"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Radiance HDR-Bild"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "JPEG Bild"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "SVG-Bild"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "TGA-Bild"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "WebP Bild"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Pixelorama-Palette"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "GIMP palette"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -978,23 +980,23 @@ msgstr "Schattenfarbe:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Gaußsche Unschärfe"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Unschärfe-Typ:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Unschärfebetrag:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Unschärferadius:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Unschärfe-Richtung:"
 
 msgid "Gradient"
 msgstr "Gradient"
@@ -1078,19 +1080,19 @@ msgstr "Wert:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Helligkeit/Kontrast anpassen"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Helligkeit:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Kontrast:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Rot-Wert:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
@@ -3195,15 +3197,15 @@ msgstr ""
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr ""
+msgstr "Entfernen"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Halten Sie Shift während des Benutzens gedrückt für sofortige Entfernung."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Sind Sie sicher, dass Sie dieses Referenzbild entfernen möchten? Es wird nicht aus Ihrem Dateisystem gelöscht."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3231,35 +3233,35 @@ msgstr "Ausgewähltes Referenzbild skalieren"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "keine"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Transformation zurücksetzen"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
-msgstr ""
+msgstr "Skalierung"
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Rotation"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Transparenz"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Farbklampen"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
