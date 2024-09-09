@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-09-09 16:53\n"
+"PO-Revision-Date: 2024-09-09 18:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1096,19 +1096,19 @@ msgstr "Rot-Wert:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Grün-Wert:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Blau-Wert:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Farbton:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Farbeffekt-Faktor:"
 
 msgid "Apply"
 msgstr "Übernehmen"
@@ -1387,7 +1387,9 @@ msgstr "Lasso- / Freies Auswahl-Werkzeug\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Auswählen durchs Zeichnen\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1421,7 +1423,8 @@ msgstr "Farbauswahl\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Zuschneiden\n\n"
+"Größe der Leinwand"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1527,7 +1530,7 @@ msgstr "Wechsle die linke und rechte Farben."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Mittelwerts-Farbe:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Setzt die Farben auf den Standardzustand zurück (schwarz für links, weiß für rechts)"
@@ -1538,7 +1541,7 @@ msgstr "Wähle eine Farbe des Bildschirms aus."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Geben Sie einen Hex-Code (\"#ff0000\") oder eine Farbe mit Namen (\"red\") ein."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1550,19 +1553,19 @@ msgstr "Farboptionen"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Wählen Sie einen Picker-Modus."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Farbige Schieberegler"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Swatches"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Letzte Farben"
 
 msgid "Left tool"
 msgstr "Linkes Werkzeug"
@@ -1747,7 +1750,7 @@ msgstr "Legt die Grenze der Frames pro Sekunde fest. Je niedriger die Anzahl, de
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Max. Rückgängig-Schritte:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
@@ -1759,11 +1762,11 @@ msgstr "Wenn dies eingeschaltet ist und das Fenster der Anwendung den Fokus verl
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Kontinuierlich aktualisieren"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Wenn dies eingeschaltet ist, wird die Anwendung den Bildschirm kontinuierlich neu zeichnen, auch wenn er nicht verwendet wird. Das Ausschalten hilft, die CPU- und GPU-Nutzung zu senken, wenn die Applikation im Moment nicht verwendet wird."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -2042,22 +2045,22 @@ msgid "Current frame as spritesheet"
 msgstr "Aktueller Frame als Spritesheet"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Zum ersten Frame springen"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Zum vorherigen Frame gehen"
 
 msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgstr "Spiele die Animation rückwärts ab (vom Ende bis zum Anfang)"
 
 msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgstr "Spiele die Animation vorwärts ab (vom Anfang bis zum Ende)"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Gehe zum nächsten Frame"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Springe zum letzten Frame"
 
 msgid "Timeline settings"
 msgstr "Timeline-Einstellungen"
@@ -2191,7 +2194,7 @@ msgstr "Neuer Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Tag importieren"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2247,7 +2250,7 @@ msgstr "Mischmodus:"
 
 #. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
 msgid "Pass through"
-msgstr ""
+msgstr "Pass-through"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -3188,12 +3191,13 @@ msgstr "Monochrom"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "Beim Öffnen eines Bildes kann es als Referenz importiert werden."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr ""
+msgstr "Wählen Sie ein Bild unten, um seine Eigenschaften zu ändern.\n"
+"Beachten Sie, dass Sie nicht zeichnen können, während ein Referenzbild ausgewählt ist."
 
 #. Removes the selected reference image.
 msgid "Remove"
