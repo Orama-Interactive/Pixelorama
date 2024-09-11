@@ -269,7 +269,7 @@ func set_export_progress_bar(value: float) -> void:
 	export_progress_bar.value = value
 
 
-func _on_ExportDialog_about_to_show() -> void:
+func _on_about_to_popup() -> void:
 	get_ok_button().text = "Export"
 	Global.canvas.selection.transform_content_confirm()
 	var project := Global.current_project
@@ -297,12 +297,12 @@ func _on_ExportDialog_about_to_show() -> void:
 	checker.size = checker.get_parent().size
 
 
-func _on_Tabs_tab_clicked(tab: Export.ExportTab) -> void:
+func _on_tab_bar_tab_clicked(tab: Export.ExportTab) -> void:
 	Export.current_tab = tab
 	show_tab()
 
 
-func _on_Orientation_item_selected(id: Export.Orientation) -> void:
+func _on_orientation_item_selected(id: Export.Orientation) -> void:
 	Export.orientation = id
 	_handle_orientation_ui()
 	spritesheet_lines_count.value = Export.frames_divided_by_spritesheet_lines()
@@ -325,14 +325,14 @@ func _handle_orientation_ui() -> void:
 		spritesheet_lines_count.visible = false
 
 
-func _on_LinesCount_value_changed(value: float) -> void:
+func _on_lines_count_value_changed(value: float) -> void:
 	Export.lines_count = value
 	Export.process_spritesheet()
 	update_dimensions_label()
 	set_preview()
 
 
-func _on_Direction_item_selected(id: Export.AnimationDirection) -> void:
+func _on_direction_item_selected(id: Export.AnimationDirection) -> void:
 	Export.direction = id
 	preview_current_frame = 0
 	Export.process_data()
@@ -340,7 +340,7 @@ func _on_Direction_item_selected(id: Export.AnimationDirection) -> void:
 	update_dimensions_label()
 
 
-func _on_Resize_value_changed(value: float) -> void:
+func _on_resize_value_changed(value: float) -> void:
 	Export.resize = value
 	update_dimensions_label()
 
@@ -349,25 +349,25 @@ func _on_quality_value_changed(value: float) -> void:
 	Export.save_quality = value / 100.0
 
 
-func _on_Interpolation_item_selected(id: Image.Interpolation) -> void:
+func _on_interpolation_item_selected(id: Image.Interpolation) -> void:
 	Export.interpolation = id
 
 
-func _on_ExportDialog_confirmed() -> void:
+func _on_confirmed() -> void:
 	Global.current_project.export_overwrite = false
 	if await Export.export_processed_images(false, self, Global.current_project):
 		hide()
 
 
-func _on_PathButton_pressed() -> void:
+func _on_path_button_pressed() -> void:
 	path_dialog_popup.popup_centered()
 
 
-func _on_PathLineEdit_text_changed(new_text: String) -> void:
+func _on_path_line_edit_text_changed(new_text: String) -> void:
 	Global.current_project.export_directory_path = new_text
 
 
-func _on_FileLineEdit_text_changed(new_text: String) -> void:
+func _on_file_line_edit_text_changed(new_text: String) -> void:
 	Global.current_project.file_name = new_text
 
 
@@ -387,7 +387,7 @@ func _on_path_dialog_canceled() -> void:
 		show()
 
 
-func _on_FileFormat_item_selected(idx: int) -> void:
+func _on_file_format_item_selected(idx: int) -> void:
 	var id := file_format_options.get_item_id(idx) as Export.FileFormat
 	Global.current_project.file_format = id
 	if not Export.is_single_file_format():
@@ -405,14 +405,14 @@ func _on_FileFormat_item_selected(idx: int) -> void:
 
 
 ## Overwrite existing file
-func _on_FileExistsAlert_confirmed() -> void:
+func _on_file_exists_alert_confirmed() -> void:
 	file_exists_alert_popup.dialog_text = Export.file_exists_alert
 	Export.stop_export = false
 	resume_export_function.emit()
 
 
-func _on_FileExistsAlert_custom_action(action: String) -> void:
-	if action == "cancel":
+func _on_file_exists_alert_custom_action(action: StringName) -> void:
+	if action == &"cancel":
 		# Cancel export
 		file_exists_alert_popup.dialog_text = Export.file_exists_alert
 		Export.stop_export = true
@@ -420,7 +420,7 @@ func _on_FileExistsAlert_custom_action(action: String) -> void:
 		file_exists_alert_popup.hide()
 
 
-func _on_FrameTimer_timeout() -> void:
+func _on_frame_timer_timeout() -> void:
 	var preview_texture_rect: TextureRect = previews.get_node("PreviewContainer/Preview")
 	if not preview_texture_rect:
 		return
@@ -449,11 +449,11 @@ func _on_split_layers_toggled(toggled_on: bool) -> void:
 	set_preview()
 
 
-func _on_IncludeTagsInFilename_toggled(button_pressed: bool) -> void:
+func _on_include_tags_in_filename_toggled(button_pressed: bool) -> void:
 	Export.include_tag_in_filename = button_pressed
 
 
-func _on_MultipleAnimationsDirectories_toggled(button_pressed: bool) -> void:
+func _on_multiple_animations_directories_toggled(button_pressed: bool) -> void:
 	Export.new_dir_for_each_frame_tag = button_pressed
 
 
@@ -463,7 +463,7 @@ func _on_trim_images_toggled(toggled_on: bool) -> void:
 	set_preview()
 
 
-func _on_Frames_item_selected(id: int) -> void:
+func _on_frames_item_selected(id: int) -> void:
 	Export.frame_current_tag = id
 	Export.process_data()
 	set_preview()
@@ -471,12 +471,12 @@ func _on_Frames_item_selected(id: int) -> void:
 	spritesheet_lines_count.value = Export.lines_count
 
 
-func _on_Layers_item_selected(id: int) -> void:
+func _on_layers_item_selected(id: int) -> void:
 	Export.export_layers = id
 	Export.cache_blended_frames()
 	Export.process_data()
 	set_preview()
 
 
-func _on_SeparatorCharacter_text_changed(new_text: String) -> void:
+func _on_separator_character_text_changed(new_text: String) -> void:
 	Export.separator_character = new_text
