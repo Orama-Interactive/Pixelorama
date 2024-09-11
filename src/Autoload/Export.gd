@@ -51,7 +51,7 @@ var processed_images: Array[ProcessedImage] = []
 var blended_frames := {}
 var export_json := false
 var split_layers := false
-var trim_sprite := false
+var trim_images := false
 
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -266,7 +266,6 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.x = 0
 				tag_origins[0] += 1
 		whole_image.blend_rect(blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin)
-		#_blend_layers(whole_image, frame, origin)
 
 	processed_images.append(ProcessedImage.new(whole_image, 0))
 
@@ -286,7 +285,7 @@ func process_animation(project := Global.current_project) -> void:
 		else:
 			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			image.copy_from(blended_frames[frame])
-			if trim_sprite:
+			if trim_images:
 				image = image.get_region(image.get_used_rect())
 			var duration := frame.duration * (1.0 / project.fps)
 			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
