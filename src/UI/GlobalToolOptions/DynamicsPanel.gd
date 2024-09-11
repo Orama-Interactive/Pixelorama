@@ -29,6 +29,13 @@ func _ready() -> void:
 	size_velocity_button.toggled.connect(
 		_on_dynamics_toggled.bind(size_velocity_button, SIZE, Tools.Dynamics.VELOCITY)
 	)
+	for child: Control in $VBoxContainer.get_children():
+		## Resets the y-size to an appropriate value
+		child.visibility_changed.connect(func ():
+			await get_tree().process_frame
+			size.y = 0
+			size.y += 10
+		)
 
 
 func _input(event: InputEvent) -> void:
