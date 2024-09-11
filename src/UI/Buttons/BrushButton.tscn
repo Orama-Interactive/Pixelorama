@@ -21,7 +21,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 pivot_offset = Vector2(16, 16)
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="TransparentChecker" parent="BrushTexture" instance=ExtResource("1")]
 show_behind_parent = true
