@@ -8,7 +8,6 @@
 [node name="GaussianBlur" instance=ExtResource("1_cuu40")]
 title = "Gaussian Blur"
 size = Vector2i(427, 437)
-visible = true
 script = ExtResource("2_37xhl")
 
 [node name="VBoxContainer" parent="." index="3"]
