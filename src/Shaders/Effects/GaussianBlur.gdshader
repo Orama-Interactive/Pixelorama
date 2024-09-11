@@ -9,7 +9,7 @@ uniform float blur_radius = 1.0;
 uniform vec2 blur_direction = vec2(1, 1);
 uniform sampler2D selection : filter_nearest;
 
-// Xor's gaussian blur function 
+// Xor's gaussian blur function
 // Link: https://xorshaders.weebly.com/tutorials/blur-shaders-5-part-2
 // Defaults from: https://www.shadertoy.com/view/Xltfzj
 //
@@ -18,12 +18,12 @@ uniform sampler2D selection : filter_nearest;
 // BLUR QUALITY (Default 4.0 - More is better but slower)
 //
 // Desc.: Don't have the best performance but will run on almost
-// anything, although, if developing for mobile, is better to use 
+// anything, although, if developing for mobile, is better to use
 // 'texture_nodevgaussian(...) instead'.
 vec4 texture_xorgaussian(sampler2D tex, vec2 uv, vec2 pixel_size, float blurriness, int iterations, int quality) {
 	vec2 radius = blurriness / (1.0 / pixel_size).xy;
 	vec4 blurred_tex = texture(tex, uv);
-	
+
 	for(float d = 0.0; d < TAU; d += TAU / float(iterations)) {
 		for(float i = 1.0 / float(quality); i <= 1.0; i += 1.0 / float(quality)) {
 			vec2 directions = uv + vec2(cos(d), sin(d)) * radius * i;
@@ -31,7 +31,7 @@ vec4 texture_xorgaussian(sampler2D tex, vec2 uv, vec2 pixel_size, float blurrine
 		}
 	}
 	blurred_tex /= float(quality) * float(iterations) + 1.0;
-	
+
 	return blurred_tex;
 }
 
@@ -42,14 +42,14 @@ vec4 texture_xorgaussian(sampler2D tex, vec2 uv, vec2 pixel_size, float blurrine
 // BLUR DIRECTION (Direction in which the blur is applied, use vec2(1, 0) for first pass and vec2(0, 1) for second pass)
 //
 // Desc.: ACTUALLY PRETTY SLOW but still pretty good for custom cinematic
-// bloom effects, since this needs render 2 passes 
+// bloom effects, since this needs render 2 passes
 vec4 texture_monksgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, int iterations, vec2 direction) {
 	vec4 blurred_tex = vec4(0.0);
 	vec2 resolution = 1.0 / pixel_size;
-	
+
 	for (int i = 0; i < iterations; i++ ) {
 		float size = float(iterations - i);
-		
+
 		vec2 off1 = vec2(1.3846153846) * (direction * size);
 		vec2 off2 = vec2(3.2307692308) * (direction * size);
 
@@ -59,9 +59,9 @@ vec4 texture_monksgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, in
 		blurred_tex += texture(tex, uv + (off2 / resolution)) * 0.0702702703;
 		blurred_tex += texture(tex, uv - (off2 / resolution)) * 0.0702702703;
 	}
-	
+
 	blurred_tex /= float(iterations) + 1.0;
-	
+
 	return blurred_tex;
 }
 
@@ -89,7 +89,7 @@ vec4 texture_nodevgaussian_singlepass(sampler2D tex, vec2 uv, vec2 pixel_size, f
 		if (i > 0.0) {n -= 0.0015; }
 		weight += n;
 	}
-	
+
 	float norm = 1.0 / weight;
 	blurred_tex *= norm;
 	return blurred_tex;
@@ -99,7 +99,7 @@ vec4 texture_nodevgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, fl
 	float n = 0.0015;
 	vec4 blurred_tex = vec4(0);
 	float weight;
-	
+
 	for (float i = -blurriness; i <= blurriness; i++) {
 		vec2 directions = uv + pixel_size * (direction * i);
 		blurred_tex += texture(tex, directions) * n;
@@ -107,7 +107,7 @@ vec4 texture_nodevgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, fl
 		if (i > 0.0) {n -= 0.0015; }
 		weight += n;
 	}
-	
+
 	float norm = 1.0 / weight;
 	blurred_tex *= norm;
 	return blurred_tex;
@@ -120,19 +120,19 @@ void fragment() {
 	if (blur_type == 0) {
 		vec4 xorgaussian = texture_xorgaussian(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), 16, 4);
 		col = xorgaussian;
-	} 
+	}
 	else if (blur_type == 1) {
 		vec4 monksgaussian_multipass = texture_monksgaussian_multipass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, blur_amount, blur_direction);
 		col = monksgaussian_multipass;
-	} 
+	}
 	else if (blur_type == 2) {
 		vec4 nodevgaussian_singlepass = texture_nodevgaussian_singlepass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), blur_radius);
 		col = nodevgaussian_singlepass;
-	} 
+	}
 	else if (blur_type == 3) {
 		vec4 nodevgaussian_multipass = texture_nodevgaussian_multipass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), blur_direction);
 		col = nodevgaussian_multipass;
-	} 
+	}
 	else {
 		col = texture(TEXTURE, UV);
 	}
