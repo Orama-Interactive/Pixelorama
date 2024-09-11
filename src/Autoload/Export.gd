@@ -146,6 +146,9 @@ func external_export(project := Global.current_project) -> void:
 
 
 func process_data(project := Global.current_project) -> void:
+	var frames := _calculate_frames(project)
+	if frames.size() > blended_frames.size():
+		cache_blended_frames(project)
 	match current_tab:
 		ExportTab.IMAGE:
 			process_animation(project)
