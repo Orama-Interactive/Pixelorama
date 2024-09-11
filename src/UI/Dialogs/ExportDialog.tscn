@@ -318,11 +318,11 @@ tooltip_text = "Creates multiple files but every file is stored in different fol
 mouse_default_cursor_shape = 2
 text = "Create new folder for each frame tag"
 
-[node name="TrimSprite" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+[node name="TrimImages" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
 layout_mode = 2
-tooltip_text = "Trims sprite to visible portion of the spirte, considering each pixel with a non-zero alpha channel as visible."
+tooltip_text = "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 mouse_default_cursor_shape = 2
-text = "Trim Sprite"
+text = "Trim images"
 
 [node name="PathDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
 mode = 2
@@ -378,7 +378,7 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SplitLayers" to="." method="_on_split_layers_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/IncludeTagsInFilename" to="." method="_on_IncludeTagsInFilename_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
-[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/TrimSprite" to="." method="_on_TrimSprite_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/TrimImages" to="." method="_on_trim_images_toggled"]
 [connection signal="canceled" from="PathDialog" to="." method="_on_path_dialog_canceled"]
 [connection signal="dir_selected" from="PathDialog" to="." method="_on_path_dialog_dir_selected"]
 [connection signal="confirmed" from="FileExistsAlert" to="." method="_on_FileExistsAlert_confirmed"]

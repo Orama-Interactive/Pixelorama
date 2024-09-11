@@ -2649,6 +2649,14 @@ msgstr ""
 msgid "The character(s) that separate the file name and the frame number"
 msgstr ""
 
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr ""
+
 msgid "Close"
 msgstr ""
 

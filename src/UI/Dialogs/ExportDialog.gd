@@ -457,8 +457,8 @@ func _on_MultipleAnimationsDirectories_toggled(button_pressed: bool) -> void:
 	Export.new_dir_for_each_frame_tag = button_pressed
 
 
-func _on_TrimSprite_toggled(toggled_on: bool) -> void:
-	Export.trim_sprite = toggled_on
+func _on_trim_images_toggled(toggled_on: bool) -> void:
+	Export.trim_images = toggled_on
 	Export.process_data()
 	set_preview()
 
