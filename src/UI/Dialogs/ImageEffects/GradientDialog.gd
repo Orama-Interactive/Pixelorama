@@ -76,6 +76,8 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		var c := offsets[i]
 		offsets_image.set_pixel(i, 0, Color(c, c, c, c))
 		var actual_index := gradient.offsets.find(offsets[i])
+		if actual_index == -1:
+			actual_index = i
 		gradient_image.set_pixel(i, 0, gradient.colors[actual_index])
 	var offsets_tex := ImageTexture.create_from_image(offsets_image)
 	var gradient_tex: Texture2D
