@@ -12,18 +12,22 @@ Built using Godot 4.3
 
 ### Added
 - Added new global layer buttons that change visibility, lock or expand all layers on the first level. [#1085](https://github.com/Orama-Interactive/Pixelorama/pull/1085)
+- Added a new Gaussian blur image and layer effect.
 - A new Index Map layer effect has been added. [#1093](https://github.com/Orama-Interactive/Pixelorama/pull/1093)
 - Is it now possible to adjust the opacity of onion skinning. [#1091](https://github.com/Orama-Interactive/Pixelorama/pull/1091)
-- Added option to trim sprites empty area while exporting. [#1088](https://github.com/Orama-Interactive/Pixelorama/pull/1088)
+- Added option to trim the empty area of the exported images. [#1088](https://github.com/Orama-Interactive/Pixelorama/pull/1088)
 - A quality slider has been added to the export dialog, when exporting jpg files.
 
 ### Changed
 - The layer opacity and frame buttons are now fixed on top, always visible regardless of the vertical scroll position. [#1095](https://github.com/Orama-Interactive/Pixelorama/pull/1095)
+- The default blend mode of layer groups is now pass-through.
+- The color picker popup when editing gradients is now moveable.
 
 ### Fixed
 - Fixed an issue where the '\n` escape character got inserted inside the palette name, causing the palette to fail to be saved.
 - The export dialog has been optimized by caching all of the blended frames. Changing export options, besides the layers, no longer cause slowness by re-blending all of the frames.
 - Optimized the lasso and polygon select tools, as well as the fill options of the pencil and curve tools. The time they take to complete now depends on the size of the selection, rather than checking all of the pixels of the entire canvas.
+- Fixed a crash when re-arranging palette swatches while holding <kbd>Shift</kbd>.
 - Fixed wrong stretch mode in the cel button previews. [#1097](https://github.com/Orama-Interactive/Pixelorama/pull/1097)
 
 ## [v1.0.2] - 2024-08-21
