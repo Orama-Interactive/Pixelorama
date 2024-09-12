@@ -28,6 +28,8 @@ Built using Godot 4.3
 - The export dialog has been optimized by caching all of the blended frames. Changing export options, besides the layers, no longer cause slowness by re-blending all of the frames.
 - Optimized the lasso and polygon select tools, as well as the fill options of the pencil and curve tools. The time they take to complete now depends on the size of the selection, rather than checking all of the pixels of the entire canvas.
 - Fixed a crash when re-arranging palette swatches while holding <kbd>Shift</kbd>.
+- Fixed a crash when using the move tool snapped to the grid.
+- Fixed a visual bug with the preview of the resize canvas dialog.
 - Fixed wrong stretch mode in the cel button previews. [#1097](https://github.com/Orama-Interactive/Pixelorama/pull/1097)
 
 ## [v1.0.2] - 2024-08-21
