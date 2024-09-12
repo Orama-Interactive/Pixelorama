@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-09-12 03:49\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -101,9 +101,9 @@ msgstr "Sertakan gambar tercampur"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr "Jika diaktifkan, bentuk akhir gambar tercampur akan disimpan jadi pxo, ke tiap bingkai.\n"
+msgstr "Jika diaktifkan, bentuk akhir gambar tercampur disimpan menjadi pxo, ke tiap bingkai.\n"
 "Berkas pxo akan lebih besar dan mampu diimpor dengan peranti lunak pihak ketiga\n"
-"atau diekspor CLI. Memuat pxo di Pixelorama tidak perlu mengaktifkan opsi ini."
+"atau diekspor CLI. Membuka pxo di Pixelorama tidak perlu mengaktifkan opsi ini."
 
 msgid "Import"
 msgstr "Impor"
@@ -171,11 +171,11 @@ msgstr "Persentase"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr "Pangkas ke Seleksi"
+msgstr "Potong ke Seleksi"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr "Pangkas ke Isi"
+msgstr "Potong ke Isi"
 
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
@@ -294,7 +294,7 @@ msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr "Klik dua kali agar jadi tata letak baru di awal buka"
+msgstr "Klik 2x agar menjadi tata letak baru di awal buka"
 
 msgid "Add"
 msgstr "Tambah"
@@ -458,7 +458,7 @@ msgstr "Jarak peleburan:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr "Gambar yang melewati ambang batas akan dileburkan jadi gambar lebih besar, jika masih dalam jarak ini"
+msgstr "Gambar yang melewati ambang batas akan dileburkan menjadi gambar lebih besar, jika masih sejarak ini"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
@@ -821,7 +821,7 @@ msgstr "Keker Integer"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr "Membatasi nilai jadi kelipatan bilangan bulat 100%"
+msgstr "Membatasi nilai ke kelipatan bilangan bulat 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Kepekaan tekanan tablet:"
@@ -981,23 +981,23 @@ msgstr "Warna bayangan:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Buram Gauss"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Tipe buram:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Jumlah buram:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Jari-jari buram:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Arah buram:"
 
 msgid "Gradient"
 msgstr "Gradien"
@@ -1006,7 +1006,7 @@ msgid "Gradient Map"
 msgstr "Peta Gradien"
 
 msgid "Divide into equal parts"
-msgstr "Bagi jadi sama rata"
+msgstr "Bagi menjadi sama rata"
 
 msgid "Parts:"
 msgstr "Bagian:"
@@ -1362,7 +1362,7 @@ msgid "Polygonal Selection\n\n"
 msgstr "Seleksi Poligon\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
-"Pencet dua kali untuk menghubungkan titik akhir ke titik awal"
+"Klik dua kali untuk menghubungkan titik akhir ke titik awal"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1424,7 +1424,7 @@ msgstr "Pemilih Warna\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr "Pangkas\n\n"
+msgstr "Potong\n\n"
 "Ubah besar kanvas"
 
 msgid "Pencil\n\n"
@@ -2727,11 +2727,11 @@ msgstr "Huruf-huruf untuk memisahkan nama berkas dan nomor bingkai"
 
 #. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
 msgid "Trim images"
-msgstr ""
+msgstr "Pangkas gambar"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
-msgstr ""
+msgstr "Memangkas gambar terekspor ke bagian terlihat, piksel apa pun bersaluran alfa bukan nol akan dianggap terlihat."
 
 msgid "Close"
 msgstr "Tutup"
@@ -2822,31 +2822,31 @@ msgstr "Terbalikkan warna"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr "Urut ikut rona"
+msgstr "Urut sesuai rona"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr "Urut ikut saturasi"
+msgstr "Urut sesuai saturasi"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr "Urut ikut nilai"
+msgstr "Urut sesuai nilai"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr "Urut ikut merah"
+msgstr "Urut sesuai merah"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr "Urut ikut hijau"
+msgstr "Urut sesuai hijau"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr "Urut ikut biru"
+msgstr "Urut sesuai biru"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr "Urut ikut alfa"
+msgstr "Urut sesuai alfa"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Palet dengan nama dan jalur yang sama sudah ada!"
@@ -2900,7 +2900,7 @@ msgid "Recorder"
 msgstr "Perekam"
 
 msgid "Crop"
-msgstr "Pangkas"
+msgstr "Potong"
 
 msgid "Resize the canvas"
 msgstr "Ubah ukuran kanvas"
@@ -2936,7 +2936,7 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Ukuran terkunci\n\n"
-"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi berpangkas.\n\n"
+"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi terpotong.\n\n"
 "Saat dinonaktifkan dengan alat di kanvas hanya akan membuat persegi."
 
 #. A tool used in 3D layers, that edits 3D objects.
@@ -3231,7 +3231,7 @@ msgstr "Pindahkan gambar rujukan terpilih ke kiri"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr "Memilih yang jadi gambar rujukan di kanvas"
+msgstr "Memilih gambar rujukan untuk di kanvas"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
