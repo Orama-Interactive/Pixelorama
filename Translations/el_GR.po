@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-08-16 16:44\n"
+"PO-Revision-Date: 2024-09-12 14:53\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -560,6 +560,10 @@ msgstr "Περιήγηση"
 msgid "Resize:"
 msgstr "Αλλαγή μεγέθους:"
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr "Ποιότητα:"
+
 msgid "Cancel Export"
 msgstr "Ακύρωση Εξαγωγής"
 
@@ -954,12 +958,15 @@ msgstr "Τροποποίηση Μπλε Καναλιού"
 msgid "Modify Alpha Channel"
 msgstr "Τροποποίηση Καναλιού Διαφάνειας"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Αποκορεσμός"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Περίγραμμα"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Πίπτουσα σκιά"
 
@@ -971,6 +978,26 @@ msgstr "Μετατόπιση Y:"
 
 msgid "Shadow color:"
 msgstr "Χρώμα σκιάς:"
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr "Θόλωση Gauss"
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr "Τύπος θόλωσης:"
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr "Ποσότητα θόλωσης:"
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr "Ακτίνα θόλωσης:"
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr "Κατεύθυνση θόλωσης:"
 
 msgid "Gradient"
 msgstr "Διαβάθμιση"
@@ -1032,7 +1059,7 @@ msgstr "Είδος:"
 msgid "Angle:"
 msgstr "Γωνία:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
 
@@ -1102,11 +1129,11 @@ msgstr "Χρώματα:"
 msgid "Steps:"
 msgstr "Βαθμίδες:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Παλετοποίηση"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Δημιουργία εικονοστοιχείων"
 
@@ -2697,6 +2724,14 @@ msgstr "Διαχωριστικοί χαρακτήρες:"
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Οι χαρακτήρες που διαχωρίζουν το όνομα του αρχείου και τον αριθμό του καρέ"
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr "Περικοπή εικόνων"
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr "Περικοπή των εξαγόμενων εικόνων στο ορατό τμήμα τους, θεωρώντας κάθε pixel με ένα μη μηδενικό alpha κανάλι ως ορατό."
 
 msgid "Close"
 msgstr "Κλείσιμο"
