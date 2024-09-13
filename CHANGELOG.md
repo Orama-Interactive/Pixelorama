@@ -29,6 +29,7 @@ Built using Godot 4.3
 - Optimized the lasso and polygon select tools, as well as the fill options of the pencil and curve tools. The time they take to complete now depends on the size of the selection, rather than checking all of the pixels of the entire canvas.
 - Fixed a crash when re-arranging palette swatches while holding <kbd>Shift</kbd>.
 - Fixed a crash when using the move tool snapped to the grid.
+- Fixed wrong preview in the gradient dialog when editing the gradient and dithering is enabled.
 - Fixed a visual bug with the preview of the resize canvas dialog.
 - Fixed wrong stretch mode in the cel button previews. [#1097](https://github.com/Orama-Interactive/Pixelorama/pull/1097)
 
