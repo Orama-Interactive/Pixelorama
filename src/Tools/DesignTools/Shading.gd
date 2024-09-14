@@ -121,6 +121,8 @@ class LightenDarkenOp:
 func _init() -> void:
 	_drawer.color_op = LightenDarkenOp.new()
 	Tools.color_changed.connect(_check_palette_color)
+	Palettes.palette_selected.connect(_check_palette_color)
+	Palettes.palette_selected.connect(palette_changed)
 
 
 func _input(event: InputEvent) -> void:
@@ -219,7 +221,7 @@ func update_config() -> void:
 	$AmountSlider.visible = _shading_mode == ShadingMode.SIMPLE
 	$HueShiftingOptions.visible = _shading_mode == ShadingMode.HUE_SHIFTING
 	$ColorReplaceOptions.visible = _shading_mode == ShadingMode.COLOR_REPLACE
-	_check_palette_color(Color.TRANSPARENT, tool_slot.button)
+	_check_palette_color()
 	update_strength()
 
 
@@ -321,7 +323,8 @@ func update_brush() -> void:
 	$ColorInterpolation.visible = false
 
 
-func _check_palette_color(_color, mouse_button) -> void:
+## this function is also used by a signal, this is why there is _color = Color.TRANSPARENT in here.
+func _check_palette_color(_color = Color.TRANSPARENT, mouse_button := tool_slot.button) -> void:
 	if mouse_button != tool_slot.button:
 		return
 	if _shading_mode == ShadingMode.COLOR_REPLACE:
@@ -357,3 +360,8 @@ func construct_preview() -> void:
 			color_rect.color = color
 			color_rect.custom_minimum_size = Vector2(20, 20)
 			colors_container.add_child(color_rect)
+
+
+func palette_changed(_palette_name):
+	Palettes.current_palette.data_changed.connect(_check_palette_color)
+	_check_palette_color()
