@@ -321,10 +321,12 @@ func update_brush() -> void:
 	$ColorInterpolation.visible = false
 
 
-func _check_palette_color(_color, mouse_button):
+func _check_palette_color(_color, mouse_button) -> void:
+	if mouse_button != tool_slot.button:
+		return
 	if _shading_mode == ShadingMode.COLOR_REPLACE:
 		await get_tree().process_frame
-		var index = Palettes.current_palette_get_selected_color_index(tool_slot.button)
+		var index = Palettes.current_palette_get_selected_color_index(mouse_button)
 		if index > -1:
 			$ColorReplaceOptions/Settings.visible = true
 			$ColorReplaceOptions/Label.visible = false

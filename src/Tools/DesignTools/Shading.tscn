@@ -86,7 +86,7 @@ prefix = "Colors Right"
 
 [node name="Label" type="Label" parent="ColorReplaceOptions/Settings" index="1"]
 layout_mode = 2
-text = "(Darken -> Lighten)"
+text = "(Darken <--> Lighten)"
 
 [node name="Colors" type="HFlowContainer" parent="ColorReplaceOptions/Settings" index="2"]
 layout_mode = 2
