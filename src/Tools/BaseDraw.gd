@@ -130,11 +130,11 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$ColorInterpolation.value = _brush_interpolate
-	%FlipX.button_pressed = _brush_flip_x
-	%FlipY.button_pressed = _brush_flip_y
-	%Rotate90.button_pressed = _brush_rotate_90
-	%Rotate180.button_pressed = _brush_rotate_180
-	%Rotate270.button_pressed = _brush_rotate_270
+	$RotationOptions/Flip/FlipX.button_pressed = _brush_flip_x
+	$RotationOptions/Flip/FlipY.button_pressed = _brush_flip_y
+	$RotationOptions/Rotate/Rotate90.button_pressed = _brush_rotate_90
+	$RotationOptions/Rotate/Rotate180.button_pressed = _brush_rotate_180
+	$RotationOptions/Rotate/Rotate270.button_pressed = _brush_rotate_270
 	update_brush()
 
 
