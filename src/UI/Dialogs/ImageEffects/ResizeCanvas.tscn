@@ -99,14 +99,11 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("1")]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer" instance=ExtResource("1")]
 show_behind_parent = true
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_ResizeCanvas_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]
