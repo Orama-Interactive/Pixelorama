@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-09-14 15:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,8 @@ msgstr "Inclure les images fusionnées"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Si activée, les rendus finals mélangés sont aussi stockés dans le pxo, pour chaque Frame.\n"
+"Cela rend le fichier pxo plus volumineux et est utile pour les importations par un logiciel tiers ou les exportations en ligne de commande. Le chargement de fichiers pxo dans Pixelorama ne nécessite pas que cette option soit activée."
 
 msgid "Import"
 msgstr "Importer"
@@ -560,7 +561,7 @@ msgstr "Redimensionner :"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Qualité :"
 
 msgid "Cancel Export"
 msgstr "Annuler l'exportation"
@@ -641,25 +642,25 @@ msgid "Export dimensions:"
 msgstr "Dimensions d'export :"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Enregistrer un fichier"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Aller au dossier précédent."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Aller au dossier suivant."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Aller au dossier parent."
 
 msgid "Path:"
 msgstr "Chemin :"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Rafraîchir les fichiers."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Activer/désactiver la visibilité des fichiers cachés."
 
 msgid "Directories & Files:"
 msgstr "Répertoires et fichiers :"
@@ -979,23 +980,23 @@ msgstr "Couleur d'ombre :"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Flou gaussien"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Type de flou :"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Taux de flou :"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Rayon du flou :"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Direction du flou :"
 
 msgid "Gradient"
 msgstr "Dégradé"
@@ -1079,7 +1080,7 @@ msgstr "Valeur :"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Ajuster la luminosité / le contraste"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
@@ -1091,23 +1092,23 @@ msgstr "Contraste :"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Valeur rouge :"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Valeur verte :"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Valeur bleue :"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Couleur de teinte :"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Facteur d'effet de teinte :"
 
 msgid "Apply"
 msgstr "Appliquer"
@@ -1158,7 +1159,7 @@ msgstr "Suivi des problèmes"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Ouvrir le dossier des données de l'éditeur"
 
 msgid "Changelog"
 msgstr "Journal des modifications"
@@ -1520,7 +1521,7 @@ msgstr "Inverser les couleurs de gauche et droite."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Couleur moyenne :"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
@@ -1539,11 +1540,11 @@ msgstr "Sélectionner une forme de Pipette."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Options de couleur"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Sélectionnez un mode de pipette."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
@@ -1555,7 +1556,7 @@ msgstr ""
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Couleurs récentes"
 
 msgid "Left tool"
 msgstr "Outil gauche"
@@ -1740,7 +1741,7 @@ msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Étapes max d'annulation :"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
@@ -1752,7 +1753,7 @@ msgstr "Si activé, l'application est mise en pause quand le focus est perdu. Ce
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Mettre à jour en continu"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
@@ -1800,7 +1801,7 @@ msgstr "Ouvrir le dossier"
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
 msgid "Explore Online"
-msgstr ""
+msgstr "Explorer en ligne"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -1887,7 +1888,7 @@ msgstr "Pixel Perfect\n"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Verrouiller l'alpha"
 
 msgid "Fill inside"
 msgstr "Remplir à l’intérieur"
@@ -2035,19 +2036,19 @@ msgid "Current frame as spritesheet"
 msgstr "Frame actuelle en spritesheet"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Aller à la première image"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Aller à l'image précédente"
 
 msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgstr "Jouer l'animation à l'envers (de la fin vers le début)"
 
 msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgstr "Jouer l'animation (du début vers la fin)"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Aller à l'image suivante"
 
 msgid "Jump to the last frame"
 msgstr ""
