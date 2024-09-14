@@ -9,7 +9,7 @@
 resource_name = "rotate"
 allow_unpress = true
 
-[sub_resource type="StyleBoxFlat" id="2"]
+[sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(1, 1, 1, 1)
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 5
@@ -18,7 +18,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="1"]
+[sub_resource type="StyleBoxFlat" id="2"]
 bg_color = Color(1, 1, 1, 1)
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 5
@@ -38,70 +38,44 @@ script = ExtResource("3_76bek")
 text = "Rotation options"
 flat = true
 
-[node name="GridContainer" type="GridContainer" parent="RotationOptions" index="1"]
+[node name="Flip" type="HBoxContainer" parent="RotationOptions" index="1"]
 visible = false
 layout_mode = 2
-columns = 3
 
-[node name="FlipLabel" type="Label" parent="RotationOptions/GridContainer" index="0"]
-layout_mode = 2
-text = "Flip"
-
-[node name="Colon" type="Label" parent="RotationOptions/GridContainer" index="1"]
-layout_mode = 2
-text = ":"
-
-[node name="Flip" type="HBoxContainer" parent="RotationOptions/GridContainer" index="2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FlipX" type="CheckBox" parent="RotationOptions/GridContainer/Flip" index="0"]
-unique_name_in_owner = true
+[node name="FlipX" type="CheckBox" parent="RotationOptions/Flip" index="0"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "X"
+text = "Flip X"
 
-[node name="FlipY" type="CheckBox" parent="RotationOptions/GridContainer/Flip" index="1"]
-unique_name_in_owner = true
+[node name="FlipY" type="CheckBox" parent="RotationOptions/Flip" index="1"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Y"
+text = "Flip Y"
 
-[node name="RotateLabel" type="Label" parent="RotationOptions/GridContainer" index="3"]
+[node name="Rotate" type="HBoxContainer" parent="RotationOptions" index="2"]
+visible = false
 layout_mode = 2
-text = "Rotate"
 
-[node name="Colon2" type="Label" parent="RotationOptions/GridContainer" index="4"]
-layout_mode = 2
-text = ":"
-
-[node name="Rotate" type="HBoxContainer" parent="RotationOptions/GridContainer" index="5"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Rotate90" type="CheckBox" parent="RotationOptions/GridContainer/Rotate" index="0"]
-unique_name_in_owner = true
+[node name="Rotate90" type="CheckBox" parent="RotationOptions/Rotate" index="0"]
 layout_mode = 2
 tooltip_text = "rotate the brush 90 degrees"
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
-text = "90°"
+text = "R 90"
 
-[node name="Rotate180" type="CheckBox" parent="RotationOptions/GridContainer/Rotate" index="1"]
-unique_name_in_owner = true
+[node name="Rotate180" type="CheckBox" parent="RotationOptions/Rotate" index="1"]
 layout_mode = 2
 tooltip_text = "rotate the brush 180 degrees"
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
-text = "180°"
+text = "R 180"
 
-[node name="Rotate270" type="CheckBox" parent="RotationOptions/GridContainer/Rotate" index="2"]
-unique_name_in_owner = true
+[node name="Rotate270" type="CheckBox" parent="RotationOptions/Rotate" index="2"]
 layout_mode = 2
 tooltip_text = "rotate the brush 270 degrees"
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_7u3x0")
-text = "270°"
+text = "R 270"
 
 [node name="Brush" type="HBoxContainer" parent="." index="3"]
 layout_mode = 2
@@ -113,11 +87,11 @@ layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Select a brush"
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("2")
-theme_override_styles/disabled = SubResource("2")
+theme_override_styles/normal = SubResource("1")
 theme_override_styles/hover = SubResource("1")
 theme_override_styles/pressed = SubResource("1")
-theme_override_styles/normal = SubResource("1")
+theme_override_styles/disabled = SubResource("2")
+theme_override_styles/focus = SubResource("2")
 
 [node name="Texture" type="TextureRect" parent="Brush/Type" index="0"]
 layout_mode = 0
@@ -143,11 +117,11 @@ layout_mode = 2
 tooltip_text = "0: Color from the brush itself, 100: the currently selected color"
 prefix = "Brush color from:"
 
-[connection signal="toggled" from="RotationOptions/GridContainer/Flip/FlipX" to="." method="_on_flip_x_toggled"]
-[connection signal="toggled" from="RotationOptions/GridContainer/Flip/FlipY" to="." method="_on_flip_y_toggled"]
-[connection signal="toggled" from="RotationOptions/GridContainer/Rotate/Rotate90" to="." method="_on_rotate_90_toggled"]
-[connection signal="toggled" from="RotationOptions/GridContainer/Rotate/Rotate180" to="." method="_on_rotate_180_toggled"]
-[connection signal="toggled" from="RotationOptions/GridContainer/Rotate/Rotate270" to="." method="_on_rotate_270_toggled"]
+[connection signal="toggled" from="RotationOptions/Flip/FlipX" to="." method="_on_flip_x_toggled"]
+[connection signal="toggled" from="RotationOptions/Flip/FlipY" to="." method="_on_flip_y_toggled"]
+[connection signal="toggled" from="RotationOptions/Rotate/Rotate90" to="." method="_on_rotate_90_toggled"]
+[connection signal="toggled" from="RotationOptions/Rotate/Rotate180" to="." method="_on_rotate_180_toggled"]
+[connection signal="toggled" from="RotationOptions/Rotate/Rotate270" to="." method="_on_rotate_270_toggled"]
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]
 [connection signal="value_changed" from="ColorInterpolation" to="." method="_on_InterpolateFactor_value_changed"]
