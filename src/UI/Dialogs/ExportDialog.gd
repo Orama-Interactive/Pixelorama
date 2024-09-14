@@ -163,6 +163,7 @@ func create_preview_container() -> VBoxContainer:
 
 func create_preview_rect() -> TextureRect:
 	var preview := TextureRect.new()
+	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	preview.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
