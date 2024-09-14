@@ -58,7 +58,7 @@ offset_right = 10.0
 offset_bottom = 10.5
 texture = ExtResource("1")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="Settings" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
@@ -79,7 +79,7 @@ offset_top = -10.5
 offset_right = 10.0
 offset_bottom = 10.5
 texture = ExtResource("3")
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="OpenFolder" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
 custom_minimum_size = Vector2(32, 32)
@@ -97,7 +97,7 @@ offset_top = 3.0
 offset_right = -3.0
 offset_bottom = -3.0
 texture = ExtResource("4")
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="OptionsDialog" type="AcceptDialog" parent="."]
 position = Vector2i(0, 36)

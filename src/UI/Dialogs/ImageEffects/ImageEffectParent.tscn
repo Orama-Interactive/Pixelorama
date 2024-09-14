@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 layout_mode = 2
