@@ -216,7 +216,7 @@ func insert_color(index: int, new_color: Color) -> void:
 	var c := PaletteColor.new(new_color, index)
 	# If insert happens on non empty swatch recursively move the original color
 	# and every other color to its right one swatch to right
-	if colors[index] != null:
+	if colors.has(index):
 		_move_right(index)
 	colors[index] = c
 	data_changed.emit()
@@ -231,7 +231,7 @@ func _move_right(index: int) -> void:
 		colors_max = width * height
 
 	# If swatch to right to this color is not empty move that color right too
-	if colors[index + 1] != null:
+	if colors.has(index + 1):
 		_move_right(index + 1)
 
 	colors[index + 1] = colors[index]

@@ -32,10 +32,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Linear"
-popup/item_0/id = 0
 popup/item_1/text = "Radial"
 popup/item_1/id = 1
 
@@ -47,10 +46,9 @@ text = "Dithering pattern:"
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
-item_count = 1
 selected = 0
+item_count = 1
 popup/item_0/text = "None"
-popup/item_0/id = 0
 
 [node name="RepeatLabel" type="Label" parent="VBoxContainer/GradientOptions" index="4" groups=["gradient_common"]]
 layout_mode = 2
@@ -60,10 +58,9 @@ text = "Repeat:"
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "None"
-popup/item_0/id = 0
 popup/item_1/text = "Repeat"
 popup/item_1/id = 1
 popup/item_2/text = "Mirror"

@@ -15,24 +15,27 @@ static func create_ui_for_shader_uniforms(
 ) -> void:
 	var code := shader.code.split("\n")
 	var uniforms: PackedStringArray = []
+	var uniform_data: PackedStringArray = []
 	var description: String = ""
-	var descriprion_began := false
+	var description_began := false
 	for line in code:
-		## Management of "end" tags
+		# Management of "end" tags
 		if line.begins_with("// (end DESCRIPTION)"):
-			descriprion_began = false
-		if descriprion_began:
+			description_began = false
+		if description_began:
 			description += "\n" + line.strip_edges()
 
-		## Detection of uniforms
+		# Detection of uniforms
 		if line.begins_with("uniform"):
 			uniforms.append(line)
+		if line.begins_with("// uniform_data"):
+			uniform_data.append(line)
 
-		## Management of "begin" tags
+		# Management of "begin" tags
 		elif line.begins_with("// (begin DESCRIPTION)"):
-			descriprion_began = true
-	## Validation of begin/end tags
-	if descriprion_began == true:  ## Description started but never ended. treat it as an error
+			description_began = true
+	# Validation of begin/end tags
+	if description_began == true:  # Description started but never ended. treat it as an error
 		print("Shader description started but never finished. Assuming empty description")
 		description = ""
 	if not description.is_empty():
@@ -59,65 +62,102 @@ static func create_ui_for_shader_uniforms(
 		var u_init := u_left_side[0].split(" ")
 		var u_type := u_init[1]
 		var u_name := u_init[2]
+		# Find custom data of the uniform, if any exists
+		# Right now it only checks if a uniform should have another type of node
+		# Such as integers having OptionButtons
+		# But in the future it could be expanded to include custom names or descriptions.
+		var custom_data: PackedStringArray = []
+		var type_override := ""
+		for data in uniform_data:
+			if u_name in data:
+				var line_to_examine := data.split(" ")
+				if line_to_examine[3] == "type::":
+					var temp_splitter := data.split("::")
+					if temp_splitter.size() > 1:
+						type_override = temp_splitter[1].strip_edges()
+
+				custom_data.append(data)
 		var humanized_u_name := Keychain.humanize_snake_case(u_name) + ":"
 
 		if u_type == "float" or u_type == "int":
+			var hbox := HBoxContainer.new()
 			var label := Label.new()
 			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var slider := ValueSlider.new()
-			slider.allow_greater = true
-			slider.allow_lesser = true
-			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var min_value := 0.0
-			var max_value := 255.0
-			var step := 1.0
-			var range_values_array: PackedStringArray
-			if "hint_range" in u_hint:
-				var range_values: String = u_hint.replace("hint_range(", "")
-				range_values = range_values.replace(")", "").strip_edges()
-				range_values_array = range_values.split(",")
-
-			if u_type == "float":
-				if range_values_array.size() >= 1:
-					min_value = float(range_values_array[0])
-				else:
-					min_value = 0.01
-
-				if range_values_array.size() >= 2:
-					max_value = float(range_values_array[1])
-
-				if range_values_array.size() >= 3:
-					step = float(range_values_array[2])
-				else:
-					step = 0.01
-
-				if u_value != "":
-					slider.value = float(u_value)
-			else:
-				if range_values_array.size() >= 1:
-					min_value = int(range_values_array[0])
-
-				if range_values_array.size() >= 2:
-					max_value = int(range_values_array[1])
-
-				if range_values_array.size() >= 3:
-					step = int(range_values_array[2])
-
-				if u_value != "":
-					slider.value = int(u_value)
-			if params.has(u_name):
-				slider.value = params[u_name]
-			else:
-				params[u_name] = slider.value
-			slider.min_value = min_value
-			slider.max_value = max_value
-			slider.step = step
-			slider.value_changed.connect(value_changed.bind(u_name))
-			slider.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
-			hbox.add_child(slider)
+			if type_override.begins_with("OptionButton"):
+				var option_button := OptionButton.new()
+				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				option_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				option_button.item_selected.connect(value_changed.bind(u_name))
+				var items := (
+					type_override
+					. replace("OptionButton ", "")
+					. replace("[", "")
+					. replace("]", "")
+					. split("||")
+				)
+				for item in items:
+					option_button.add_item(item)
+				if u_value != "":
+					option_button.select(int(u_value))
+				if params.has(u_name):
+					option_button.select(params[u_name])
+				else:
+					params[u_name] = option_button.selected
+				hbox.add_child(option_button)
+			else:
+				var slider := ValueSlider.new()
+				slider.allow_greater = true
+				slider.allow_lesser = true
+				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				var min_value := 0.0
+				var max_value := 255.0
+				var step := 1.0
+				var range_values_array: PackedStringArray
+				if "hint_range" in u_hint:
+					var range_values: String = u_hint.replace("hint_range(", "")
+					range_values = range_values.replace(")", "").strip_edges()
+					range_values_array = range_values.split(",")
+
+				if u_type == "float":
+					if range_values_array.size() >= 1:
+						min_value = float(range_values_array[0])
+					else:
+						min_value = 0.01
+
+					if range_values_array.size() >= 2:
+						max_value = float(range_values_array[1])
+
+					if range_values_array.size() >= 3:
+						step = float(range_values_array[2])
+					else:
+						step = 0.01
+
+					if u_value != "":
+						slider.value = float(u_value)
+				else:
+					if range_values_array.size() >= 1:
+						min_value = int(range_values_array[0])
+
+					if range_values_array.size() >= 2:
+						max_value = int(range_values_array[1])
+
+					if range_values_array.size() >= 3:
+						step = int(range_values_array[2])
+
+					if u_value != "":
+						slider.value = int(u_value)
+				if params.has(u_name):
+					slider.value = params[u_name]
+				else:
+					params[u_name] = slider.value
+				slider.min_value = min_value
+				slider.max_value = max_value
+				slider.step = step
+				slider.value_changed.connect(value_changed.bind(u_name))
+				slider.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				hbox.add_child(slider)
 			parent_node.add_child(hbox)
 		elif u_type == "vec2" or u_type == "ivec2" or u_type == "uvec2":
 			var label := Label.new()
@@ -352,23 +392,23 @@ static func _get_loaded_texture(params: Dictionary, parameter_name: String) -> I
 	if parameter_name in params:
 		if params[parameter_name] is ImageTexture:
 			return params[parameter_name].get_image()
-	var image = Image.create_empty(64, 64, false, Image.FORMAT_RGBA8)
+	var image := Image.create_empty(64, 64, false, Image.FORMAT_RGBA8)
 	return image
 
 
 static func _shader_update_texture(
 	resource_proj: ResourceProject, value_changed: Callable, parameter_name: String
 ) -> void:
-	var warnings = ""
+	var warnings := ""
 	if resource_proj.frames.size() > 1:
 		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
 	if resource_proj.layers.size() > 1:
 		warnings += "\nThis resource is intended to have 1 layer only. layers will be blended."
 
-	var updated_image = Image.create_empty(
+	var updated_image := Image.create_empty(
 		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
 	)
-	var frame = resource_proj.frames[0]
+	var frame := resource_proj.frames[0]
 	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
 	value_changed.call(ImageTexture.create_from_image(updated_image), parameter_name)
 	if not warnings.is_empty():
@@ -378,7 +418,7 @@ static func _shader_update_texture(
 static func _modify_texture_resource(
 	image: Image, resource_name: StringName, update_callable: Callable
 ) -> void:
-	var resource_proj = ResourceProject.new([], resource_name, image.get_size())
+	var resource_proj := ResourceProject.new([], resource_name, image.get_size())
 	resource_proj.layers.append(PixelLayer.new(resource_proj))
 	resource_proj.frames.append(resource_proj.new_empty_frame())
 	resource_proj.frames[0].cels[0].set_content(image)

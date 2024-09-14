@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-08-16 13:18\n"
+"PO-Revision-Date: 2024-09-11 15:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -329,16 +329,16 @@ msgid "Mirror View"
 msgstr "Зеркальный вид"
 
 msgid "Show Grid"
-msgstr "Показывать сетку"
+msgstr "Показать сетку"
 
 msgid "Show Pixel Grid"
 msgstr "Показать пиксельную сетку"
 
 msgid "Show Rulers"
-msgstr "Показывать линейки"
+msgstr "Показать линейки"
 
 msgid "Show Guides"
-msgstr "Показывать направляющие"
+msgstr "Показать направляющие"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
@@ -558,6 +558,10 @@ msgstr "Обзор"
 msgid "Resize:"
 msgstr "Изменить размер:"
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
+
 msgid "Cancel Export"
 msgstr "Отменить экспорт"
 
@@ -640,22 +644,22 @@ msgid "Save a File"
 msgstr "Сохранить файл"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Перейти к предыдущей папке."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Перейти к следующей папке."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Перейти в родительскую папку."
 
 msgid "Path:"
 msgstr "Путь:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Обновить файлы."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Переключение видимости скрытых файлов."
 
 msgid "Directories & Files:"
 msgstr "Папки и файлы:"
@@ -672,19 +676,19 @@ msgstr "Все файлы"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Все распознано"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Проект Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Изображение PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Изображение BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
@@ -692,27 +696,27 @@ msgstr ""
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Изображение JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Изображение SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Изображение TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Изображение WebP"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Палитра Pixelorama"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "Палитра GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -952,12 +956,15 @@ msgstr "Изменять синий канал"
 msgid "Modify Alpha Channel"
 msgstr "Изменять альфа-канал"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Обесцвечивание"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Обводка"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Отбросить тень"
 
@@ -969,6 +976,26 @@ msgstr "Смещение по Y:"
 
 msgid "Shadow color:"
 msgstr "Цвет тени:"
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr ""
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr ""
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr ""
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr ""
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr ""
 
 msgid "Gradient"
 msgstr "Градиент"
@@ -1029,7 +1056,7 @@ msgstr "Тип:"
 msgid "Angle:"
 msgstr "Угол:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Изменить Оттенок/Насыщенность/Яркость"
 
@@ -1051,31 +1078,31 @@ msgstr "Яркость:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Регулировка яркости/контрастности"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Яркость:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Контраст:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Значение красного:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Значение зеленого:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Значение синего:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Цвет плитки:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
@@ -1099,11 +1126,11 @@ msgstr "Цвета:"
 msgid "Steps:"
 msgstr "Шаги:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Паллетизация"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Пикселизация"
 
@@ -1358,7 +1385,9 @@ msgstr "Лассо / свободное выделение\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Выбор по рисунку\n\n"
+"%s левой кнопкой мыши\n"
+"%s для правой кнопки мыши"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1497,7 +1526,7 @@ msgstr "Поменять левый и правый цвета местами."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Средний цвет:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Сбросить цвета по умолчанию (слева черный, справа белый)"
@@ -1532,7 +1561,7 @@ msgstr ""
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Недавние цвета"
 
 msgid "Left tool"
 msgstr "Левый инструмент"
@@ -1607,7 +1636,7 @@ msgid "Isometric"
 msgstr "Изометрическая"
 
 msgid "All"
-msgstr "Обе"
+msgstr "Все"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
@@ -1717,7 +1746,7 @@ msgstr "Устанавливает лимит на количество кадр
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Максимум шагов отмены:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
@@ -1729,7 +1758,7 @@ msgstr "Если этот параметр включен, то, когда ок
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Постоянно обновлять"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
@@ -2012,10 +2041,10 @@ msgid "Current frame as spritesheet"
 msgstr "Текущий кадр как спрайт лист"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Перейти к первому кадру"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "На предыдущий кадр"
 
 msgid "Play the animation backwards (from end to beginning)"
 msgstr ""
@@ -2024,10 +2053,10 @@ msgid "Play the animation forward (from beginning to end)"
 msgstr ""
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "На следующий кадр"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Перейти на последний кадр"
 
 msgid "Timeline settings"
 msgstr "Настройка таймлана"
@@ -2161,7 +2190,7 @@ msgstr "Новый тег"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Импорт метки"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2217,7 +2246,7 @@ msgstr "Режим смешивания:"
 
 #. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
 msgid "Pass through"
-msgstr ""
+msgstr "Пропуск"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -2531,7 +2560,7 @@ msgid "Portrait"
 msgstr "Портретная"
 
 msgid "Landscape"
-msgstr "Горизонтальное"
+msgstr "Горизонтальная"
 
 msgid "Templates:"
 msgstr "Шаблоны:"
@@ -2690,6 +2719,14 @@ msgstr "Разделитель символов:"
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Символы, разделяющие имя файла и номер кадра"
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr ""
 
 msgid "Close"
 msgstr "Закрыть"
@@ -3167,11 +3204,11 @@ msgstr ""
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr ""
+msgstr "Удалить"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Удерживайте Shift, чтобы мгновенно удалить."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
@@ -3203,15 +3240,15 @@ msgstr "Масштабировать выбранное референсное �
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "нет"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Сбросить трансформацию"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
-msgstr ""
+msgstr "Положение"
 
 #. Scale of the selected reference image on the canvas.
 msgid "Scale"
@@ -3223,7 +3260,7 @@ msgstr "Поворот"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Фильтр"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"

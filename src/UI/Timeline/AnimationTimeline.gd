@@ -91,6 +91,10 @@ func _ready() -> void:
 	var future_above = Global.config_cache.get_value(
 		"timeline", "future_above_canvas", future_above_canvas
 	)
+	var onion_skinning_opacity = Global.config_cache.get_value(
+		"timeline", "onion_skinning_opacity", 0.6
+	)
+	get_node("%OnionSkinningOpacity").value = onion_skinning_opacity * 100.0
 	%PastOnionSkinning.value = past_rate
 	%FutureOnionSkinning.value = future_rate
 	%BlueRedMode.button_pressed = blue_red
@@ -102,8 +106,6 @@ func _ready() -> void:
 	Global.cel_switched.connect(_cel_switched)
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.emit_signal.call_deferred("resized")
-	# Set the default opacity for the onion skinning
-	get_node("%OnionSkinningOpacity").value = 60
 
 
 func _notification(what: int) -> void:
@@ -1274,21 +1276,23 @@ func _on_cel_size_slider_value_changed(value: float) -> void:
 
 
 func _on_onion_skinning_opacity_value_changed(value: float) -> void:
+	var onion_skinning_opacity := value / 100.0
+	Global.config_cache.set_value("timeline", "onion_skinning_opacity", onion_skinning_opacity)
 	for onion_skinning_node: Node2D in get_tree().get_nodes_in_group("canvas_onion_skinning"):
-		onion_skinning_node.opacity = value / 100
+		onion_skinning_node.opacity = onion_skinning_opacity
 		onion_skinning_node.queue_redraw()
 
 
 func _on_global_visibility_button_pressed() -> void:
-	var visible = !global_layer_visibility
+	var layer_visible := !global_layer_visibility
 	for layer_button: LayerButton in Global.layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
-		if layer.parent == null and layer.visible != visible:
+		if layer.parent == null and layer.visible != layer_visible:
 			layer_button.visibility_button.pressed.emit()
 
 
 func _on_global_lock_button_pressed() -> void:
-	var locked = !global_layer_lock
+	var locked := !global_layer_lock
 	for layer_button: LayerButton in Global.layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer.locked != locked:
@@ -1296,7 +1300,7 @@ func _on_global_lock_button_pressed() -> void:
 
 
 func _on_global_expand_button_pressed() -> void:
-	var expand = !global_layer_expand
+	var expand := !global_layer_expand
 	for layer_button: LayerButton in Global.layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer is GroupLayer and layer.expanded != expand:

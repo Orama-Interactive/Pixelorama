@@ -10,7 +10,7 @@ uniform bool alpha = false;
 // respectively instead of color components.
 // When you draw, color will be taken from the x-y position in the "Map Texture".
 // (end DESCRIPTION)
-void fragment(){
+void fragment() {
 	vec4 col = texture(TEXTURE, UV);
 	vec2 map_size = vec2(textureSize(map_texture, 0));
 	vec2 lookup_uv = vec2(round(col.x * 255.0)/(map_size.x), round(col.y * 255.0)/(map_size.y));

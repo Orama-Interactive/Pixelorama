@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-08-16 15:20\n"
+"PO-Revision-Date: 2024-09-12 16:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -560,6 +560,10 @@ msgstr "Esplora"
 msgid "Resize:"
 msgstr "Ridimensiona:"
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr "Qualità:"
+
 msgid "Cancel Export"
 msgstr "Annulla esportazione"
 
@@ -954,12 +958,15 @@ msgstr "Modifica Canale Blu"
 msgid "Modify Alpha Channel"
 msgstr "Modifica Canale Alfa"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Desaturazione"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Contorno"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Rilascia Ombra"
 
@@ -971,6 +978,26 @@ msgstr "Spostamento Y:"
 
 msgid "Shadow color:"
 msgstr "Colore ombra:"
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr "Sfocatura Gaussiana"
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr "Tipo di sfocatura:"
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr "Quantità sfocatura:"
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr "Raggio Sfocatura:"
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr "Direzione sfocatura:"
 
 msgid "Gradient"
 msgstr "Gradiente"
@@ -1032,7 +1059,7 @@ msgstr "Tipo:"
 msgid "Angle:"
 msgstr "Angolo:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Regola Tonalità/Saturazione/Valore"
 
@@ -1102,11 +1129,11 @@ msgstr "Colori:"
 msgid "Steps:"
 msgstr "Passaggi:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Pallettizza"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Pixellizza"
 
@@ -1736,7 +1763,7 @@ msgstr "Se questa opzione viene attivata, quando la finestra dell'applicazione p
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Aggiorna continuamente"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
@@ -2697,6 +2724,14 @@ msgstr "Carattere(i) separatore(i):"
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "I caratteri che separano il nome del file e il numero di fotogramma"
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr "Ritaglia immagini"
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr "Ritaglia le immagini esportate nella loro porzione visibile, considerando ogni pixel con un canale alfa diverso da zero come visibile."
 
 msgid "Close"
 msgstr "Chiudi"

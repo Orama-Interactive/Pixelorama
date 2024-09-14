@@ -4,7 +4,7 @@ const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v102---2024-08-21"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v103---2024-09-13"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -30,6 +30,7 @@ var hsv_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn")
 var adjust_brightness_saturation_dialog := Dialog.new(
 	"res://src/UI/Dialogs/ImageEffects/BrightnessContrastDialog.tscn"
 )
+var gaussian_blur_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GaussianBlur.tscn")
 var gradient_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn")
 var gradient_map_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientMapDialog.tscn")
 var palettize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PalettizeDialog.tscn")
@@ -405,6 +406,7 @@ func _setup_effects_menu() -> void:
 		"Palettize": "palettize",
 		"Pixelize": "pixelize",
 		"Posterize": "posterize",
+		"Gaussian Blur": "gaussian_blur",
 		"Gradient": "gradient",
 		"Gradient Map": "gradient_map",
 		# "Shader": ""
@@ -817,6 +819,8 @@ func effects_menu_id_pressed(id: int) -> void:
 			hsv_dialog.popup()
 		Global.EffectsMenu.BRIGHTNESS_SATURATION:
 			adjust_brightness_saturation_dialog.popup()
+		Global.EffectsMenu.GAUSSIAN_BLUR:
+			gaussian_blur_dialog.popup()
 		Global.EffectsMenu.GRADIENT:
 			gradient_dialog.popup()
 		Global.EffectsMenu.GRADIENT_MAP:

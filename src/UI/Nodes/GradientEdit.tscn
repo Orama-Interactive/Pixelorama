@@ -26,6 +26,8 @@ offset_right = 20.0
 offset_bottom = 7.0
 
 [node name="Popup" type="PopupPanel" parent="."]
+unresizable = false
+borderless = false
 
 [node name="ColorPicker" type="ColorPicker" parent="Popup"]
 offset_left = 4.0
@@ -46,10 +48,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Linear"
-popup/item_0/id = 0
 popup/item_1/text = "Constant"
 popup/item_1/id = 1
 popup/item_2/text = "Cubic"
@@ -68,10 +69,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "sRGB"
-popup/item_0/id = 0
 popup/item_1/text = "Linear sRGB"
 popup/item_1/id = 1
 popup/item_2/text = "Oklab"

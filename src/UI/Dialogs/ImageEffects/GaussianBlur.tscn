@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://beile55gp1bc"]
+
+[ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_cuu40"]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/GaussianBlur.gd" id="2_37xhl"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_237k2"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="4_yprgi"]
+
+[node name="GaussianBlur" instance=ExtResource("1_cuu40")]
+title = "Gaussian Blur"
+size = Vector2i(427, 437)
+script = ExtResource("2_37xhl")
+
+[node name="VBoxContainer" parent="." index="3"]
+offset_right = 419.0
+offset_bottom = 388.0
+
+[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+visible = false
+
+[node name="BlurOptions" type="GridContainer" parent="VBoxContainer" index="2"]
+layout_mode = 2
+columns = 2
+
+[node name="BlurTypeLabel" type="Label" parent="VBoxContainer/BlurOptions" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blur type:"
+
+[node name="BlurType" type="OptionButton" parent="VBoxContainer/BlurOptions" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 4
+popup/item_0/text = "Xor's Gaussian Blur"
+popup/item_1/text = "Monk's Multi-Pass Gaussian Blur"
+popup/item_1/id = 1
+popup/item_2/text = "NoDev's Single-Pass Gaussian Blur"
+popup/item_2/id = 2
+popup/item_3/text = "NoDev's Multi-Pass Gaussian Blur"
+popup/item_3/id = 3
+
+[node name="BlurAmountLabel" type="Label" parent="VBoxContainer/BlurOptions" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blur amount:"
+
+[node name="BlurAmount" type="TextureProgressBar" parent="VBoxContainer/BlurOptions" index="3"]
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+value = 16.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_237k2")
+
+[node name="BlurRadiusLabel" type="Label" parent="VBoxContainer/BlurOptions" index="4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blur radius:"
+
+[node name="BlurRadius" type="TextureProgressBar" parent="VBoxContainer/BlurOptions" index="5"]
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+value = 1.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_237k2")
+
+[node name="BlurDirectionLabel" type="Label" parent="VBoxContainer/BlurOptions" index="6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blur direction:"
+
+[node name="BlurDirection" parent="VBoxContainer/BlurOptions" index="7" instance=ExtResource("4_yprgi")]
+layout_mode = 2
+value = Vector2(1, 1)
+
+[connection signal="item_selected" from="VBoxContainer/BlurOptions/BlurType" to="." method="_on_blur_type_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/BlurOptions/BlurAmount" to="." method="_on_blur_amount_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/BlurOptions/BlurRadius" to="." method="_on_blur_radius_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/BlurOptions/BlurDirection" to="." method="_on_blur_direction_value_changed"]

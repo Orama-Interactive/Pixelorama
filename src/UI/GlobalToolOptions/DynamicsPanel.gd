@@ -33,8 +33,8 @@ func _ready() -> void:
 		## Resets the y-size to an appropriate value
 		child.visibility_changed.connect(func ():
 			await get_tree().process_frame
-			size.y = 0
-			size.y += 10
+			set_size(Vector2i(size.x, 0))
+			set_size(Vector2i(size.x, size.y + 10))
 		)
 
 

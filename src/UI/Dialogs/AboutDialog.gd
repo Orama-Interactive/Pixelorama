@@ -20,6 +20,7 @@ const AUTHORS: PackedStringArray = [
 	"Darshan Phaldesai (luiq54)",
 	"dasimonde",
 	"Dávid Gábor BODOR (dragonfi)",
+	"donte5405",
 	"Fayez Akhtar (Variable)",
 	"Gamespleasure",
 	"GrantMoyer",
@@ -58,6 +59,7 @@ const AUTHORS: PackedStringArray = [
 	"Subhang Nanduri (SbNanduri)",
 	"TheLsbt",
 	"THWLF",
+	"Vaibhav Kubre (kubre)",
 	"Vriska Weaver (henlo-birb)",
 ]
 
@@ -134,6 +136,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Marco Galli (Gaarco)": ["Italian"],
 	"StarFang208": ["Italian"],
 	"Damiano Guida (damiano.guida22)": ["Italian"],
+	"albano battistella (albanobattistella)": ["Italian"],
 	"Azagaya VJ (azagaya.games)": ["Spanish"],
 	"Lilly And (KatieAnd)": ["Spanish"],
 	"UncleFangs": ["Spanish"],
