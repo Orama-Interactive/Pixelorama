@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-09-14 15:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -562,7 +562,7 @@ msgstr "Redimensionar:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Qualidade:"
 
 msgid "Cancel Export"
 msgstr "Cancelar exportação"
@@ -981,15 +981,15 @@ msgstr "Cor da sombra:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Desfoque gaussiano"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Tipo de desfoque:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Quantidade de desfoque:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
