@@ -8,6 +8,7 @@ var expanded := true
 func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
+	blend_mode = BlendModes.PASS_THROUGH
 
 
 ## Blends all of the images of children layer of the group layer into a single image.

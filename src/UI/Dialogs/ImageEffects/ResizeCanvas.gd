@@ -17,25 +17,9 @@ var image := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 func _on_ResizeCanvas_about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	image.resize(Global.current_project.size.x, Global.current_project.size.y)
-
-	var layer_i := 0
-	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-		var layer := Global.current_project.layers[layer_i]
-		if cel is PixelCel and layer.is_visible_in_hierarchy():
-			var cel_image := Image.new()
-			cel_image.copy_from(cel.get_image())
-			var opacity := cel.get_final_opacity(layer)
-			if opacity < 1.0:  # If we have cel transparency
-				for xx in cel_image.get_size().x:
-					for yy in cel_image.get_size().y:
-						var pixel_color := cel_image.get_pixel(xx, yy)
-						pixel_color.a *= cel.opacity
-						cel_image.set_pixel(xx, yy, pixel_color)
-			image.blend_rect(
-				cel_image, Rect2i(Vector2i.ZERO, Global.current_project.size), Vector2i.ZERO
-			)
-		layer_i += 1
-
+	image.fill(Color(0.0, 0.0, 0.0, 0.0))
+	var frame := Global.current_project.frames[Global.current_project.current_frame]
+	DrawingAlgos.blend_layers(image, frame)
 	width_spinbox.value = Global.current_project.size.x
 	height_spinbox.value = Global.current_project.size.y
 	update_preview()

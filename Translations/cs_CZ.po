@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-08-16 13:18\n"
+"PO-Revision-Date: 2024-09-11 15:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -558,6 +558,10 @@ msgstr "Procházet"
 msgid "Resize:"
 msgstr "Změnit velikost:"
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
+
 msgid "Cancel Export"
 msgstr "Zrušit export"
 
@@ -952,12 +956,15 @@ msgstr "Upravit modrý kanál"
 msgid "Modify Alpha Channel"
 msgstr "Upravit alfa kanál"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Odstíny šedi"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Obrys"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Vrhnout stín"
 
@@ -969,6 +976,26 @@ msgstr "Odsazení Y:"
 
 msgid "Shadow color:"
 msgstr "Barva stínu:"
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr ""
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr ""
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr ""
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr ""
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr ""
 
 msgid "Gradient"
 msgstr "Gradient"
@@ -1029,7 +1056,7 @@ msgstr "Typ:"
 msgid "Angle:"
 msgstr "Úhel:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Upravit odstín, sytost a hodnotu"
 
@@ -1099,11 +1126,11 @@ msgstr "Barvy:"
 msgid "Steps:"
 msgstr "Kroky:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Paletizovat"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Pixelizace"
 
@@ -2695,6 +2722,14 @@ msgstr "Oddělovací znak(y):"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
+msgstr ""
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr ""
 
 msgid "Close"

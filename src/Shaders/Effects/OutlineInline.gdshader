@@ -4,7 +4,8 @@ render_mode unshaded;
 
 uniform vec4 color : source_color = vec4(1.0);
 uniform float width : hint_range(0, 10, 1) = 1.0;
-uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
+// uniform_data pattern type:: OptionButton [Diamond||Circle||Square]
+uniform int pattern : hint_range(0, 2) = 0;
 uniform bool inside = false;
 uniform sampler2D selection : filter_nearest;
 
