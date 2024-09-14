@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-09-14 12:29\n"
 
 msgid "OK"
 msgstr "确定"
@@ -562,7 +562,7 @@ msgstr "调整大小："
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "质量："
 
 msgid "Cancel Export"
 msgstr "取消导出"
@@ -981,23 +981,23 @@ msgstr "阴影颜色："
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "高斯模糊"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "模糊类型："
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "模糊数量："
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "模糊半径："
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "模糊方向："
 
 msgid "Gradient"
 msgstr "渐变"
@@ -2726,11 +2726,11 @@ msgstr "分隔文件名称和帧编号的字符(秒)"
 
 #. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
 msgid "Trim images"
-msgstr ""
+msgstr "裁剪图像"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
-msgstr ""
+msgstr "将导出的图像变为可见部分，考虑到非零透明通道的每个像素。"
 
 msgid "Close"
 msgstr "关闭"
