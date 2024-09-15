@@ -13,6 +13,7 @@ var _hue_amount := 10
 var _sat_amount := 10
 var _value_amount := 10
 var _colors_right := 10
+var _old_palette: Palette
 
 
 class LightenDarkenOp:
@@ -33,7 +34,7 @@ class LightenDarkenOp:
 
 	func process(_src: Color, dst: Color) -> Color:
 		changed = true
-		if dst.a == 0:
+		if dst.a == 0 and shading_mode != ShadingMode.COLOR_REPLACE:
 			return dst
 		if shading_mode == ShadingMode.SIMPLE:
 			if lighten_or_darken == LightenDarken.LIGHTEN:
@@ -120,8 +121,7 @@ class LightenDarkenOp:
 
 func _init() -> void:
 	_drawer.color_op = LightenDarkenOp.new()
-	Tools.color_changed.connect(_check_palette_color)
-	Palettes.palette_selected.connect(_check_palette_color)
+	Tools.color_changed.connect(_refresh_colors_array)
 	Palettes.palette_selected.connect(palette_changed)
 
 
@@ -221,7 +221,7 @@ func update_config() -> void:
 	$AmountSlider.visible = _shading_mode == ShadingMode.SIMPLE
 	$HueShiftingOptions.visible = _shading_mode == ShadingMode.HUE_SHIFTING
 	$ColorReplaceOptions.visible = _shading_mode == ShadingMode.COLOR_REPLACE
-	_check_palette_color()
+	_refresh_colors_array()
 	update_strength()
 
 
@@ -324,7 +324,7 @@ func update_brush() -> void:
 
 
 ## this function is also used by a signal, this is why there is _color = Color.TRANSPARENT in here.
-func _check_palette_color(_color = Color.TRANSPARENT, mouse_button := tool_slot.button) -> void:
+func _refresh_colors_array(_color = Color.TRANSPARENT, mouse_button := tool_slot.button) -> void:
 	if mouse_button != tool_slot.button:
 		return
 	if _shading_mode == ShadingMode.COLOR_REPLACE:
@@ -359,9 +359,16 @@ func construct_preview() -> void:
 			var color_rect := ColorRect.new()
 			color_rect.color = color
 			color_rect.custom_minimum_size = Vector2(20, 20)
+			var checker = preload("res://src/UI/Nodes/TransparentChecker.tscn").instantiate()
+			checker.show_behind_parent = true
+			checker.set_anchors_preset(Control.PRESET_FULL_RECT)
+			color_rect.add_child(checker)
 			colors_container.add_child(color_rect)
 
 
 func palette_changed(_palette_name):
-	Palettes.current_palette.data_changed.connect(_check_palette_color)
-	_check_palette_color()
+	if _old_palette:
+		_old_palette.data_changed.disconnect(_refresh_colors_array)
+	Palettes.current_palette.data_changed.connect(_refresh_colors_array)
+	_old_palette = Palettes.current_palette
+	_refresh_colors_array()

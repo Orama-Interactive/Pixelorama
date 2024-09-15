@@ -72,6 +72,7 @@ value = 10.0
 prefix = "Value:"
 
 [node name="ColorReplaceOptions" type="VBoxContainer" parent="." index="9"]
+visible = false
 layout_mode = 2
 
 [node name="Settings" type="VBoxContainer" parent="ColorReplaceOptions" index="0"]
@@ -84,9 +85,21 @@ max_value = 10.0
 allow_greater = true
 prefix = "Colors Right"
 
-[node name="Label" type="Label" parent="ColorReplaceOptions/Settings" index="1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorReplaceOptions/Settings" index="1"]
 layout_mode = 2
-text = "(Darken <--> Lighten)"
+
+[node name="DarkenLabel" type="Label" parent="ColorReplaceOptions/Settings/HBoxContainer" index="0"]
+layout_mode = 2
+text = "Darken"
+
+[node name="HSeparator" type="HSeparator" parent="ColorReplaceOptions/Settings/HBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LightenLabel" type="Label" parent="ColorReplaceOptions/Settings/HBoxContainer" index="2"]
+layout_mode = 2
+text = "Lighten"
+horizontal_alignment = 2
 
 [node name="Colors" type="HFlowContainer" parent="ColorReplaceOptions/Settings" index="2"]
 layout_mode = 2
