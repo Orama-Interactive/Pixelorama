@@ -98,11 +98,11 @@ func _notification(what: int) -> void:
 
 
 func _on_color_picker_color_changed(color: Color) -> void:
-	## due to the decimal nature of the color values, some values get rounded off
-	## unintentionally before entering this method.
-	## I've noticed that even tho the decimal values change, the HTML remains same after the change.
-	## So i'm using this trick to convert the values back to how they are shown in
-	## the color picker's UI.
+	# Due to the decimal nature of the color values, some values get rounded off
+	# unintentionally before entering this method.
+	# Even though the decimal values change, the HTML code remains the same after the change.
+	# So we're using this trick to convert the values back to how they are shown in
+	# the color picker's UI.
 	color = Color(color.to_html())
 	if Tools.picking_color_for == MOUSE_BUTTON_RIGHT:
 		right_color_rect.color = color
