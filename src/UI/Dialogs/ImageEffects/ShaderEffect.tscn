@@ -30,7 +30,7 @@ material = SubResource("1")
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 4
 
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("2")]
 show_behind_parent = true
