@@ -18,7 +18,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 	if children.size() <= 0:
 		return image
 	var textures: Array[Image] = []
-	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RG8)
+	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RGF)
 	var current_child_index := 0
 	for i in children.size():
 		var layer := children[i]

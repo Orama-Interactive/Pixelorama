@@ -158,7 +158,7 @@ func draw_layers(force_recreate := false) -> void:
 		# Nx4 texture, where N is the number of layers and the first row are the blend modes,
 		# the second are the opacities, the third are the origins and the fourth are the
 		# clipping mask booleans.
-		layer_metadata_image = Image.create(project.layers.size(), 4, false, Image.FORMAT_RG8)
+		layer_metadata_image = Image.create(project.layers.size(), 4, false, Image.FORMAT_RGF)
 		# Draw current frame layers
 		for i in project.layers.size():
 			var layer := project.layers[i]
