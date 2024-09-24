@@ -14,18 +14,21 @@ const CAMERA_SPEED_RATE := 15.0
 var zoom := Vector2.ONE:
 	set(value):
 		zoom = value
+		Global.current_project.cameras_zoom[index] = zoom
 		zoom_changed.emit()
 		_update_viewport_transform()
 var camera_angle := 0.0:
 	set(value):
 		camera_angle = wrapf(value, -PI, PI)
 		camera_angle_degrees = rad_to_deg(camera_angle)
+		Global.current_project.cameras_rotation[index] = camera_angle
 		rotation_changed.emit()
 		_update_viewport_transform()
 var camera_angle_degrees := 0.0
 var offset := Vector2.ZERO:
 	set(value):
 		offset = value
+		Global.current_project.cameras_offset[index] = offset
 		offset_changed.emit()
 		_update_viewport_transform()
 var camera_screen_center := Vector2.ZERO
@@ -89,9 +92,7 @@ func _input(event: InputEvent) -> void:
 	else:
 		var dir := Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down")
 		if dir != Vector2.ZERO and !_has_selection_tool():
-			offset += (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
-
-	save_values_to_project()
+			offset = offset + (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
 
 
 func zoom_camera(dir: int) -> void:
@@ -181,12 +182,6 @@ func fit_to_frame(size: Vector2) -> void:
 		Global.integer_zoom = !Global.integer_zoom
 
 
-func save_values_to_project() -> void:
-	Global.current_project.cameras_rotation[index] = camera_angle
-	Global.current_project.cameras_zoom[index] = zoom
-	Global.current_project.cameras_offset[index] = offset
-
-
 func update_transparent_checker_offset() -> void:
 	var o := get_global_transform_with_canvas().get_origin()
 	var s := get_global_transform_with_canvas().get_scale()
@@ -256,9 +251,9 @@ func _has_selection_tool() -> bool:
 
 
 func _project_switched() -> void:
+	offset = Global.current_project.cameras_offset[index]
 	camera_angle = Global.current_project.cameras_rotation[index]
 	zoom = Global.current_project.cameras_zoom[index]
-	offset = Global.current_project.cameras_offset[index]
 
 
 func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:

@@ -100,7 +100,6 @@ func _input(event: InputEvent) -> void:
 func camera_zoom() -> void:
 	for camera in Global.cameras:
 		camera.fit_to_frame(Global.current_project.size)
-		camera.save_values_to_project()
 
 	Global.transparent_checker.update_rect()
 
