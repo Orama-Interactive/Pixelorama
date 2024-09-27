@@ -290,12 +290,12 @@ func process_animation(project := Global.current_project) -> void:
 			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			image.copy_from(blended_frames[frame])
 			if erase_unselected_area and project.has_selection:
+				var clipper = ShaderImageEffect.new()
+				var ClipShader := preload("res://src/Shaders/SelectionClip.gdshader")
 				var selection_image = project.selection_map.return_cropped_copy(project.size)
 				var selection_tex = ImageTexture.create_from_image(selection_image)
-				var clipper = ShaderImageEffect.new()
-				var clip_shader = preload("res://src/Shaders/SelectionClip.gdshader")
 				clipper.generate_image(
-					image, clip_shader, {"selection": selection_tex}, project.size
+					image, ClipShader, {"selection": selection_tex}, project.size
 				)
 			if trim_images:
 				image = image.get_region(image.get_used_rect())
