@@ -4,7 +4,7 @@ extends TabBar
 var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_child("UnsavedCanvasDialog")
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# NOTE: This feature has an unavoidable bug which sometimes causes the undoredo
 	# system to fail, because user is trying to draw while switching project simultaneously.
 	# This is because the current project has changed and the system tries to commit to the
