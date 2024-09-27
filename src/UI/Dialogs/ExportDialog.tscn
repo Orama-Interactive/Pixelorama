@@ -324,6 +324,12 @@ tooltip_text = "Trims the exported images to their visible portion, considering 
 mouse_default_cursor_shape = 2
 text = "Trim images"
 
+[node name="ClipSelection" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
+layout_mode = 2
+tooltip_text = "Only shows content that is within the bounds of a selected area."
+mouse_default_cursor_shape = 2
+text = "Clip image content to selection"
+
 [node name="PathDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
 mode = 2
 title = "Open a Directory"
@@ -379,6 +385,7 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/IncludeTagsInFilename" to="." method="_on_include_tags_in_filename_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/MultipleAnimationsDirectories" to="." method="_on_multiple_animations_directories_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/TrimImages" to="." method="_on_trim_images_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ClipSelection" to="." method="_on_clip_images_selection_toggled"]
 [connection signal="canceled" from="PathDialog" to="." method="_on_path_dialog_canceled"]
 [connection signal="dir_selected" from="PathDialog" to="." method="_on_path_dialog_dir_selected"]
 [connection signal="confirmed" from="FileExistsAlert" to="." method="_on_file_exists_alert_confirmed"]

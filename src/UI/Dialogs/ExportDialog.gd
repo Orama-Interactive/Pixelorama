@@ -464,6 +464,12 @@ func _on_trim_images_toggled(toggled_on: bool) -> void:
 	set_preview()
 
 
+func _on_clip_images_selection_toggled(toggled_on: bool) -> void:
+	Export.erase_unselected_area = toggled_on
+	Export.process_data()
+	set_preview()
+
+
 func _on_frames_item_selected(id: int) -> void:
 	Export.frame_current_tag = id
 	Export.process_data()
