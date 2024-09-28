@@ -787,6 +787,8 @@ func _initialize_keychain() -> void:
 		&"open_editor_data_folder": Keychain.InputAction.new("", "Help menu", true),
 		&"changelog": Keychain.InputAction.new("", "Help menu", true),
 		&"about_pixelorama": Keychain.InputAction.new("", "Help menu", true),
+		&"previous_project": Keychain.InputAction.new("", "Canvas"),
+		&"next_project": Keychain.InputAction.new("", "Canvas"),
 		&"zoom_in": Keychain.InputAction.new("", "Canvas"),
 		&"zoom_out": Keychain.InputAction.new("", "Canvas"),
 		&"camera_left": Keychain.InputAction.new("", "Canvas"),
