@@ -452,8 +452,7 @@ func save_project(path: String) -> void:
 		project_to_save = changed_projects_on_quit[0]
 	var include_blended := false
 	if OS.get_name() == "Web":
-		var file_name: String = save_sprite_html5.get_node("%FileNameLineEdit").text
-		file_name += ".pxo"
+		var file_name := project_to_save.name + ".pxo"
 		path = "user://".path_join(file_name)
 		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
 	else:
