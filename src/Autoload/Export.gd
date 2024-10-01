@@ -52,6 +52,7 @@ var blended_frames := {}
 var export_json := false
 var split_layers := false
 var trim_images := false
+var erase_unselected_area := false
 
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -288,6 +289,13 @@ func process_animation(project := Global.current_project) -> void:
 		else:
 			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			image.copy_from(blended_frames[frame])
+			if erase_unselected_area and project.has_selection:
+				var crop := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+				var selection_image = project.selection_map.return_cropped_copy(project.size)
+				crop.blit_rect_mask(
+					image, selection_image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO
+				)
+				image.copy_from(crop)
 			if trim_images:
 				image = image.get_region(image.get_used_rect())
 			var duration := frame.duration * (1.0 / project.fps)
