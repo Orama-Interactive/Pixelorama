@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.0.4] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.3
+
+### Added
+- Clipping to selecting during export is now possible. [#1113](https://github.com/Orama-Interactive/Pixelorama/pull/1113)
+- Added hotkeys to switch between tabs. [#1109](https://github.com/Orama-Interactive/Pixelorama/pull/1109)
+
+### Fixed
+- The move tool preview is now properly aligned to the pixel grid.
+- Camera zoom is now being preserved when switching between projects.
+- Projects are no longer being saved with the wrong name in the Web version.
+- The dynamics dialog is now set to its correct size when something is made visible or invisible. [#1104](https://github.com/Orama-Interactive/Pixelorama/pull/1104)
+- The color picker values no longer change when using RAW mode. [#1108](https://github.com/Orama-Interactive/Pixelorama/pull/1108)
+- Fixed some icon strect and expand modes in the UI. [#1103](https://github.com/Orama-Interactive/Pixelorama/pull/1103)
+
 ## [v1.0.3] - 2024-09-13
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [alikin12](https://github.com/alikin12), Vaibhav Kubre ([@kubre](https://github.com/kubre)), Donte ([@donte5405](https://github.com/donte5405))
