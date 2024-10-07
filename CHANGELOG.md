@@ -20,7 +20,7 @@ Built using Godot 4.3
 - Projects are no longer being saved with the wrong name in the Web version.
 - The dynamics dialog is now set to its correct size when something is made visible or invisible. [#1104](https://github.com/Orama-Interactive/Pixelorama/pull/1104)
 - The color picker values no longer change when using RAW mode. [#1108](https://github.com/Orama-Interactive/Pixelorama/pull/1108)
-- Fixed some icon strect and expand modes in the UI. [#1103](https://github.com/Orama-Interactive/Pixelorama/pull/1103)
+- Fixed some icon stretch and expand modes in the UI. [#1103](https://github.com/Orama-Interactive/Pixelorama/pull/1103)
 
 ## [v1.0.3] - 2024-09-13
 This update has been brought to you by the contributions of:
