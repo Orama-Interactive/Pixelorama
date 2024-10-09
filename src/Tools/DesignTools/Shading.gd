@@ -1,6 +1,6 @@
 extends "res://src/Tools/BaseDraw.gd"
 
-enum ShadingMode { SIMPLE, HUE_SHIFTING }
+enum ShadingMode { SIMPLE, HUE_SHIFTING, COLOR_REPLACE }
 enum LightenDarken { LIGHTEN, DARKEN }
 
 var _prev_mode := 0
@@ -12,6 +12,8 @@ var _amount := 10
 var _hue_amount := 10
 var _sat_amount := 10
 var _value_amount := 10
+var _colors_right := 10
+var _old_palette: Palette
 
 
 class LightenDarkenOp:
@@ -28,17 +30,18 @@ class LightenDarkenOp:
 
 	var sat_lighten_limit := 10.0 / 100.0
 	var value_darken_limit := 10.0 / 100.0
+	var color_array := PackedStringArray()
 
 	func process(_src: Color, dst: Color) -> Color:
 		changed = true
-		if dst.a == 0:
+		if dst.a == 0 and shading_mode != ShadingMode.COLOR_REPLACE:
 			return dst
 		if shading_mode == ShadingMode.SIMPLE:
 			if lighten_or_darken == LightenDarken.LIGHTEN:
 				dst = dst.lightened(strength)
 			else:
 				dst = dst.darkened(strength)
-		else:
+		elif shading_mode == ShadingMode.HUE_SHIFTING:
 			var hue_shift := hue_amount / 360.0
 			var sat_shift := sat_amount / 100.0
 			var value_shift := value_amount / 100.0
@@ -61,6 +64,18 @@ class LightenDarkenOp:
 				dst.s += sat_shift
 				if dst.v > value_darken_limit:
 					dst.v = maxf(dst.v - minf(value_shift, dst.v), value_darken_limit)
+		else:
+			if not color_array.is_empty():
+				var index = color_array.find(dst.to_html())
+				if index != -1:
+					if lighten_or_darken == LightenDarken.LIGHTEN:
+						## Moving to Right
+						if index < color_array.size() - 1:
+							dst = Color(color_array[index + 1])
+					else:
+						## Moving to Left
+						if index > 0:
+							dst = Color(color_array[index - 1])
 
 		return dst
 
@@ -106,6 +121,8 @@ class LightenDarkenOp:
 
 func _init() -> void:
 	_drawer.color_op = LightenDarkenOp.new()
+	Tools.color_changed.connect(_refresh_colors_array)
+	Palettes.palette_selected.connect(palette_changed)
 
 
 func _input(event: InputEvent) -> void:
@@ -161,6 +178,12 @@ func _on_LightenDarken_value_value_changed(value: float) -> void:
 	save_config()
 
 
+func _on_LightenDarken_colors_right_changed(value: float) -> void:
+	_colors_right = int(value)
+	update_config()
+	save_config()
+
+
 func get_config() -> Dictionary:
 	var config := super.get_config()
 	config["shading_mode"] = _shading_mode
@@ -169,6 +192,7 @@ func get_config() -> Dictionary:
 	config["hue_amount"] = _hue_amount
 	config["sat_amount"] = _sat_amount
 	config["value_amount"] = _value_amount
+	config["colors_right"] = _colors_right
 	return config
 
 
@@ -182,6 +206,7 @@ func set_config(config: Dictionary) -> void:
 	_hue_amount = config.get("hue_amount", _hue_amount)
 	_sat_amount = config.get("sat_amount", _sat_amount)
 	_value_amount = config.get("value_amount", _value_amount)
+	_colors_right = config.get("colors_right", _colors_right)
 
 
 func update_config() -> void:
@@ -192,8 +217,11 @@ func update_config() -> void:
 	$HueShiftingOptions/HueSlider.value = _hue_amount
 	$HueShiftingOptions/SatSlider.value = _sat_amount
 	$HueShiftingOptions/ValueSlider.value = _value_amount
+	$ColorReplaceOptions/Settings/ColorsRight.value = _colors_right
 	$AmountSlider.visible = _shading_mode == ShadingMode.SIMPLE
 	$HueShiftingOptions.visible = _shading_mode == ShadingMode.HUE_SHIFTING
+	$ColorReplaceOptions.visible = _shading_mode == ShadingMode.COLOR_REPLACE
+	_refresh_colors_array()
 	update_strength()
 
 
@@ -293,3 +321,54 @@ func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
 func update_brush() -> void:
 	super.update_brush()
 	$ColorInterpolation.visible = false
+
+
+## this function is also used by a signal, this is why there is _color = Color.TRANSPARENT in here.
+func _refresh_colors_array(_color = Color.TRANSPARENT, mouse_button := tool_slot.button) -> void:
+	if mouse_button != tool_slot.button:
+		return
+	if _shading_mode == ShadingMode.COLOR_REPLACE:
+		await get_tree().process_frame
+		var index = Palettes.current_palette_get_selected_color_index(mouse_button)
+		if index > -1:
+			$ColorReplaceOptions/Settings.visible = true
+			$ColorReplaceOptions/Label.visible = false
+			var color_array := PackedStringArray()
+			for i in _colors_right + 1:
+				var next_color = Palettes.current_palette.get_color(index + i)
+				if next_color != null:
+					color_array.append(next_color.to_html())
+			_drawer.color_op.color_array = color_array
+			construct_preview()
+		else:
+			$ColorReplaceOptions/Settings.visible = false
+			$ColorReplaceOptions/Label.visible = true
+			_drawer.color_op.color_array.clear()
+
+
+func construct_preview() -> void:
+	var colors_container: HFlowContainer = $ColorReplaceOptions/Settings/Colors
+	for i in colors_container.get_child_count():
+		if i >= _drawer.color_op.color_array.size():
+			colors_container.get_child(i).queue_free()
+	for i in _drawer.color_op.color_array.size():
+		var color = _drawer.color_op.color_array[i]
+		if i < colors_container.get_child_count():
+			colors_container.get_child(i).color = color
+		else:
+			var color_rect := ColorRect.new()
+			color_rect.color = color
+			color_rect.custom_minimum_size = Vector2(20, 20)
+			var checker = preload("res://src/UI/Nodes/TransparentChecker.tscn").instantiate()
+			checker.show_behind_parent = true
+			checker.set_anchors_preset(Control.PRESET_FULL_RECT)
+			color_rect.add_child(checker)
+			colors_container.add_child(color_rect)
+
+
+func palette_changed(_palette_name):
+	if _old_palette:
+		_old_palette.data_changed.disconnect(_refresh_colors_array)
+	Palettes.current_palette.data_changed.connect(_refresh_colors_array)
+	_old_palette = Palettes.current_palette
+	_refresh_colors_array()
