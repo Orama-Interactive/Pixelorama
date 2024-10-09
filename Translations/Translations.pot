@@ -2498,6 +2498,10 @@ msgstr ""
 msgid "Remove all extensions"
 msgstr ""
 
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
+
 msgid "Lock aspect ratio"
 msgstr ""
 

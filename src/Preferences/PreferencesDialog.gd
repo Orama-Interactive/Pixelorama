@@ -253,6 +253,7 @@ func _ready() -> void:
 		startup.queue_free()
 		right_side.get_node(^"Language").visible = true
 		Global.open_last_project = false
+		%ClearRecentFiles.hide()
 	if OS.get_name() == "Windows":
 		tablet_driver_label.visible = true
 		tablet_driver.visible = true
@@ -465,5 +466,10 @@ func _on_reset_options_confirmation_confirmed() -> void:
 		for extension in extensions_list:
 			extensions_node.uninstall_extension(extension)
 		Global.config_cache.erase_section("extensions")
+	# Clear recent files list
+	if %ClearRecentFiles.button_pressed:
+		Global.config_cache.erase_section_key("data", "last_project_path")
+		Global.config_cache.erase_section_key("data", "recent_projects")
+		Global.top_menu_container.recent_projects_submenu.clear()
 
 	Global.config_cache.save(Global.CONFIG_PATH)

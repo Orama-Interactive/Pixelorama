@@ -1386,6 +1386,12 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Remove all extensions"
 
+[node name="ClearRecentFiles" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Clear the recently opened file list"
+
 [node name="ResetButton" type="Button" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
