@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-09-14 16:18\n"
+"PO-Revision-Date: 2024-10-09 21:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2557,6 +2557,26 @@ msgstr "Cor de preenchimento padrão:"
 
 msgid "A default background color of a new image"
 msgstr "Cor de fundo padrão de uma nova imagem"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
 
 msgid "Lock aspect ratio"
 msgstr "Fixar proporção"
