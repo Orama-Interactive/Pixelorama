@@ -7,7 +7,7 @@ const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 
 var is_animation_running := false
-var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
+var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop.
 var animation_forward := true
 var first_frame := 0
 var last_frame := 0
@@ -28,7 +28,7 @@ var global_layer_visibility := true
 var global_layer_lock := false
 var global_layer_expand := true
 
-@onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
+@onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer.
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
@@ -72,7 +72,7 @@ func _ready() -> void:
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 	_fill_blend_modes_option_button()
-	# Config loading
+	# Config loading.
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
 	layer_frame_header_h_split.split_offset = layer_frame_h_split.split_offset
 	cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
@@ -94,13 +94,13 @@ func _ready() -> void:
 	var onion_skinning_opacity = Global.config_cache.get_value(
 		"timeline", "onion_skinning_opacity", 0.6
 	)
-	get_node("%OnionSkinningOpacity").value = onion_skinning_opacity * 100.0
+	%OnionSkinningOpacity.value = onion_skinning_opacity * 100.0
 	%PastOnionSkinning.value = past_rate
 	%FutureOnionSkinning.value = future_rate
 	%BlueRedMode.button_pressed = blue_red
 	%PastPlacement.select(0 if past_above else 1)
 	%FuturePlacement.select(0 if future_above else 1)
-	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
+	# Emit signals that were supposed to be emitted.
 	%PastPlacement.item_selected.emit(0 if past_above else 1)
 	%FuturePlacement.item_selected.emit(0 if future_above else 1)
 	Global.cel_switched.connect(_cel_switched)
@@ -138,6 +138,21 @@ func _input(event: InputEvent) -> void:
 	if timeline_rect.has_point(mouse_pos):
 		if Input.is_key_pressed(KEY_CTRL):
 			cel_size += (2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out")))
+
+
+func reset_settings() -> void:
+	cel_size = 36
+	%OnionSkinningOpacity.value = 60.0
+	%PastOnionSkinning.value = 1
+	%FutureOnionSkinning.value = 1
+	%BlueRedMode.button_pressed = false
+	%PastPlacement.select(0)
+	%FuturePlacement.select(0)
+	%PastPlacement.item_selected.emit(0)
+	%FuturePlacement.item_selected.emit(0)
+	for onion_skinning_node: Node2D in get_tree().get_nodes_in_group("canvas_onion_skinning"):
+		onion_skinning_node.opacity = 0.6
+		onion_skinning_node.queue_redraw()
 
 
 func _get_minimum_size() -> Vector2:

@@ -21,6 +21,7 @@ var color_sliders_vbox: VBoxContainer
 
 
 func _ready() -> void:
+	Tools.options_reset.connect(reset_options)
 	Tools.color_changed.connect(update_color)
 	_average(left_color_rect.color, right_color_rect.color)
 	color_picker.color_mode = Global.config_cache.get_value(
@@ -119,6 +120,12 @@ func _on_left_color_button_toggled(toggled_on: bool) -> void:
 		Tools.picking_color_for = MOUSE_BUTTON_RIGHT
 		color_picker.color = right_color_rect.color
 	_average(left_color_rect.color, right_color_rect.color)
+
+
+func reset_options() -> void:
+	color_picker.color_mode = ColorPicker.MODE_RGB
+	color_picker.picker_shape = ColorPicker.SHAPE_HSV_RECTANGLE
+	expand_button.button_pressed = false
 
 
 func update_color(color: Color, button: int) -> void:

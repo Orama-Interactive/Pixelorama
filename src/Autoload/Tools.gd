@@ -1,7 +1,9 @@
+# gdlint: ignore=max-public-methods
 extends Node
 
 signal color_changed(color: Color, button: int)
 signal flip_rotated(flip_x, flip_y, rotate_90, rotate_180, rotate_270)
+signal options_reset
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 
@@ -315,6 +317,7 @@ class Slot:
 
 
 func _ready() -> void:
+	options_reset.connect(reset_options)
 	Global.cel_switched.connect(_cel_switched)
 	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
@@ -370,6 +373,12 @@ func _ready() -> void:
 	_show_relevant_tools(layer_type)
 
 
+func reset_options() -> void:
+	default_color()
+	assign_tool(get_tool(MOUSE_BUTTON_LEFT).tool_node.name, MOUSE_BUTTON_LEFT, true)
+	assign_tool(get_tool(MOUSE_BUTTON_RIGHT).tool_node.name, MOUSE_BUTTON_RIGHT, true)
+
+
 func add_tool_button(t: Tool, insert_pos := -1) -> void:
 	var tool_button: BaseButton = _tool_button_scene.instantiate()
 	tool_button.name = t.name
@@ -414,12 +423,16 @@ func set_tool(tool_name: String, button: int) -> void:
 		_right_tools_per_layer_type[_curr_layer_type] = tool_name
 
 
-func assign_tool(tool_name: String, button: int) -> void:
+func get_tool(button: int) -> Slot:
+	return _slots[button]
+
+
+func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
 
 	if slot.tool_node != null:
-		if slot.tool_node.name == tool_name:
+		if slot.tool_node.name == tool_name and not allow_refresh:
 			return
 		panel.remove_child(slot.tool_node)
 		slot.tool_node.queue_free()

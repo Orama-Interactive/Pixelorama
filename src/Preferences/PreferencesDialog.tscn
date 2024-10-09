@@ -1344,6 +1344,53 @@ tooltip_text = "A default background color of a new image"
 mouse_default_cursor_shape = 2
 color = Color(0, 0, 0, 0)
 
+[node name="Reset" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
+visible = false
+layout_mode = 2
+
+[node name="ResetHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset/ResetHeader"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Reset"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset/ResetHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResetPreferences" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "Reset all options available in the Preferences"
+
+[node name="ResetTimelineOptions" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Reset timeline options"
+
+[node name="ResetAllToolOptions" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Reset all tool options"
+
+[node name="RemoveAllExtensions" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Remove all extensions"
+
+[node name="ResetButton" type="Button" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Reset"
+
 [node name="MustRestart" type="HBoxContainer" parent="HSplitContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
@@ -1379,6 +1426,9 @@ ok_button_text = "Delete Permanently"
 dialog_text = "Are you sure you want to delete this extension?"
 dialog_autowrap = true
 
+[node name="ResetOptionsConfirmation" type="ConfirmationDialog" parent="."]
+dialog_text = "Are you sure you want to reset the selected options? There will be no way to undo this."
+
 [connection signal="about_to_popup" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="visibility_changed" from="." to="." method="_on_PreferencesDialog_visibility_changed"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]
@@ -1392,6 +1442,8 @@ dialog_autowrap = true
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/EnableButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_EnableButton_pressed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/UninstallButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_UninstallButton_pressed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/OpenFolderButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_OpenFolderButton_pressed"]
+[connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="files_selected" from="AddExtensionFileDialog" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_AddExtensionFileDialog_files_selected"]
 [connection signal="confirmed" from="DeleteExtensionConfirmation" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_delete_confirmation_confirmed"]
 [connection signal="custom_action" from="DeleteExtensionConfirmation" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_delete_confirmation_custom_action"]
+[connection signal="confirmed" from="ResetOptionsConfirmation" to="." method="_on_reset_options_confirmation_confirmed"]

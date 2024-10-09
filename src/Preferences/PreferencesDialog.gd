@@ -198,6 +198,7 @@ var selected_item := 0
 @onready var list: ItemList = $HSplitContainer/List
 @onready var right_side: VBoxContainer = $"%RightSide"
 @onready var language: VBoxContainer = %Language
+@onready var system_language := language.get_node(^"System Language") as CheckBox
 @onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 @onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 @onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
@@ -271,7 +272,6 @@ func _ready() -> void:
 		content_list.append(child.name)
 
 	# Create buttons for each language
-	var system_language := language.get_node(^"System Language") as Button
 	var button_group: ButtonGroup = system_language.button_group
 	for locale in Global.loaded_locales:  # Create radiobuttons for each language
 		var button := CheckBox.new()
@@ -424,3 +424,46 @@ func _on_language_pressed(index: int) -> void:
 	Tools.update_hint_tooltips()
 	list.clear()
 	add_tabs(true)
+
+
+func _on_reset_button_pressed() -> void:
+	$ResetOptionsConfirmation.popup_centered()
+
+
+func _on_reset_options_confirmation_confirmed() -> void:
+	# Clear preferences
+	if %ResetPreferences.button_pressed:
+		system_language.button_pressed = true
+		_on_language_pressed(0)
+		themes.buttons_container.get_child(0).button_pressed = true
+		Themes.change_theme(0)
+		for pref in preferences:
+			var property_name := pref.prop_name
+			var default_value = pref.default_value
+			var node := right_side.get_node(pref.node_path)
+			if is_instance_valid(node):
+				node.set(pref.value_type, default_value)
+			Global.set(property_name, default_value)
+		_on_shrink_apply_button_pressed()
+		_on_font_size_apply_button_pressed()
+		Global.config_cache.erase_section("preferences")
+	# Clear timeline options
+	if %ResetTimelineOptions.button_pressed:
+		Global.animation_timeline.reset_settings()
+		Global.config_cache.erase_section("timeline")
+	# Clear tool options
+	if %ResetAllToolOptions.button_pressed:
+		Global.config_cache.erase_section("color_picker")
+		Global.config_cache.erase_section("tools")
+		Global.config_cache.erase_section("left_tool")
+		Global.config_cache.erase_section("right_tool")
+		Tools.options_reset.emit()
+	# Remove all extensions
+	if %RemoveAllExtensions.button_pressed:
+		var extensions_node := Global.control.get_node("Extensions") as Extensions
+		var extensions_list := extensions_node.extensions.duplicate()
+		for extension in extensions_list:
+			extensions_node.uninstall_extension(extension)
+		Global.config_cache.erase_section("extensions")
+
+	Global.config_cache.save(Global.CONFIG_PATH)

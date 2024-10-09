@@ -10,11 +10,20 @@ extends PanelContainer
 
 
 func _ready() -> void:
+	Tools.options_reset.connect(reset_options)
 	# Resize tools panel when window gets resized
 	get_tree().get_root().size_changed.connect(_on_resized)
 	horizontal_mirror.button_pressed = Tools.horizontal_mirror
 	vertical_mirror.button_pressed = Tools.vertical_mirror
 	pixel_perfect.button_pressed = Tools.pixel_perfect
+	alpha_lock.button_pressed = Tools.alpha_locked
+
+
+func reset_options() -> void:
+	horizontal_mirror.button_pressed = false
+	vertical_mirror.button_pressed = false
+	pixel_perfect.button_pressed = false
+	alpha_lock.button_pressed = false
 
 
 func _on_resized() -> void:
