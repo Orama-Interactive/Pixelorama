@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-09-12 14:53\n"
+"PO-Revision-Date: 2024-10-09 21:55\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2557,6 +2557,26 @@ msgstr "Προεπιλεγμένο γέμισμα με χρώμα:"
 
 msgid "A default background color of a new image"
 msgstr "Το προεπιλεγμένο χρώμα των καινούριων εικόνων"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
 
 msgid "Lock aspect ratio"
 msgstr "Κλείδωμα αναλογίας διαστάσεων"
