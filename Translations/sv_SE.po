@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2024-10-09 21:55\n"
+"PO-Revision-Date: 2024-10-10 13:03\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -1967,11 +1967,19 @@ msgstr "Horisontell"
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
 
+msgid "Vertical"
+msgstr "Vertikal"
+
 msgid "Enable vertical mirrored drawing"
 msgstr ""
 
-msgid "Vertical"
-msgstr "Vertikal"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr ""
