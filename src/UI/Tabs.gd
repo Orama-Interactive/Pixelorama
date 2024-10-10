@@ -9,9 +9,8 @@ func _input(_event: InputEvent) -> void:
 	# system to fail, because user is trying to draw while switching project simultaneously.
 	# This is because the current project has changed and the system tries to commit to the
 	# wrong undoredo.
-	var tab_idx = current_tab
 	# If a project is currently worked upon, then don't switch it.
-	# This doesn't stop the bug completely but significantly reduces it's chances
+	# This doesn't stop the bug completely but significantly reduces its chances
 	# of appearing.
 	if (
 		Input.is_action_pressed("activate_left_tool")
@@ -20,15 +19,16 @@ func _input(_event: InputEvent) -> void:
 		return
 	# Due to the bug mentioned above, we will use is_action_just_released
 	# instead of is_action_just_pressed. This won't remove the bug completely
-	# but will significantly reduce it's chancce of appearing.
+	# but it will significantly reduce its chance of appearing.
+	var tab_idx := current_tab
 	if Input.is_action_just_released(&"next_project", true):
 		tab_idx += 1
 		if tab_idx >= tab_count:
 			tab_idx = 0
 	elif Input.is_action_just_released(&"previous_project", true):
-		tab_idx = current_tab - 1
+		tab_idx -= 1
 		if tab_idx < 0:
-			tab_idx -= 1
+			tab_idx = tab_count - 1
 	if tab_idx != current_tab:
 		current_tab = tab_idx
 
