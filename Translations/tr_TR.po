@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-10-10 14:41\n"
+"PO-Revision-Date: 2024-10-10 20:52\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -2568,23 +2568,23 @@ msgstr "Yeni resmin varsayılan arkaplan rengi"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Tercihler'deki tüm seçenekleri sıfırla"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Zaman çizelgesi seçeneklerini sıfırla"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Tüm araç seçeneklerini sıfırla"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Tüm uzantıları kaldır"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Geçerli seçilmiş dosya listesini temizle"
 
 msgid "Lock aspect ratio"
 msgstr "En boy oranını kilitle"
