@@ -736,9 +736,9 @@ func paste(in_place := false) -> void:
 
 	var clip_map := SelectionMap.new()
 	clip_map.data = clipboard.selection_map
-	var max_size := Vector2(
-		max(clip_map.get_size().x, project.selection_map.get_size().x),
-		max(clip_map.get_size().y, project.selection_map.get_size().y)
+	var max_size := Vector2i(
+		maxi(clip_map.get_size().x, project.selection_map.get_size().x),
+		maxi(clip_map.get_size().y, project.selection_map.get_size().y)
 	)
 
 	project.selection_map.copy_from(clip_map)
