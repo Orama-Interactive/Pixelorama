@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Klingon\n"
 "Language: tlh_AA\n"
-"PO-Revision-Date: 2024-10-10 13:03\n"
+"PO-Revision-Date: 2024-10-10 14:42\n"
 
 msgid "OK"
 msgstr ""
@@ -1996,10 +1996,10 @@ msgstr ""
 msgid "Go to the previous frame"
 msgstr ""
 
-msgid "Play the animation backwards (from end to beginning)"
+msgid "Play the animation backwards"
 msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
+msgid "Play the animation forward"
 msgstr ""
 
 msgid "Go to the next frame"
