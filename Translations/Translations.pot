@@ -1957,10 +1957,18 @@ msgstr ""
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
 
+msgid "Vertical"
+msgstr ""
+
 msgid "Enable vertical mirrored drawing"
 msgstr ""
 
-msgid "Vertical"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
 msgstr ""
 
 msgid "Current frame:"
