@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-10-10 13:02\n"
+"PO-Revision-Date: 2024-10-10 14:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2038,11 +2038,11 @@ msgstr "上下対称描画を有効化"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "キャンバスの中央に移動"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "ビューの中心に移動"
 
 msgid "Current frame:"
 msgstr "現在のフレーム:"
@@ -2059,11 +2059,11 @@ msgstr "最初のフレームにジャンプ"
 msgid "Go to the previous frame"
 msgstr "前のフレームへ移動"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "アニメーションを逆方向に再生 (終了から開始まで)"
+msgid "Play the animation backwards"
+msgstr "アニメーションを逆再生"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "アニメーションを順方向に再生する (開始から終了まで)"
+msgid "Play the animation forward"
+msgstr "アニメーションを再生"
 
 msgid "Go to the next frame"
 msgstr "次のフレームへ移動"
