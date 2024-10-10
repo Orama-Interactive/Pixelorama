@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-10-09 21:55\n"
+"PO-Revision-Date: 2024-10-10 01:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2560,23 +2560,23 @@ msgstr "新しい画像の既定の背景色"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "設定で利用可能なすべてのオプションをリセット"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "タイムラインオプションをリセット"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "すべてのツールオプションをリセット"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "すべての拡張機能を削除"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "最近開いたファイルリストをクリア"
 
 msgid "Lock aspect ratio"
 msgstr "アスペクト比をロック"
