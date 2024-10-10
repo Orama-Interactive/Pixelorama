@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-10-09 21:55\n"
+"PO-Revision-Date: 2024-10-10 13:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2028,11 +2028,19 @@ msgstr "Poziome"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Włącza lustrzane odbicie w poziomie podczas rysowania"
 
+msgid "Vertical"
+msgstr "Pionowe"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Włącza lustrzane odbicie w pionie podczas rysowania"
 
-msgid "Vertical"
-msgstr "Pionowe"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Obecna klatka:"
