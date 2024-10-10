@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2024-10-09 21:56\n"
+"PO-Revision-Date: 2024-10-10 13:03\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1976,11 +1976,19 @@ msgstr "Horizontāli"
 msgid "Enable horizontal mirrored drawing"
 msgstr "IIeslēgt horizontālo spoguļskata zīmēšanu"
 
+msgid "Vertical"
+msgstr "Vertikāls"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Ieslēgt vertikālo spoguļskata zīmēšanu"
 
-msgid "Vertical"
-msgstr "Vertikāls"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Patreizējais kadrs:"
