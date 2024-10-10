@@ -78,13 +78,14 @@ func _input(event: InputEvent) -> void:
 		zoom_camera(-1)
 
 	elif event is InputEventMagnifyGesture:  # Zoom gesture on touchscreens
-		if event.factor >= 1:  # Zoom in
-			zoom_camera(1)
+		#zoom_camera(event.factor)
+		if event.factor >= 1.0:  # Zoom in
+			zoom_camera(event.factor * 0.3)
 		else:  # Zoom out
-			zoom_camera(-1)
+			zoom_camera((event.factor * 0.7) - 1.0)
 	elif event is InputEventPanGesture:
 		# Pan gesture on touchscreens
-		offset = offset + event.delta.rotated(camera_angle) * 7.0 / zoom
+		offset = offset + event.delta.rotated(camera_angle) * 2.0 / zoom
 	elif event is InputEventMouseMotion:
 		if drag:
 			offset = offset - event.relative.rotated(camera_angle) / zoom
@@ -95,7 +96,7 @@ func _input(event: InputEvent) -> void:
 			offset = offset + (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
 
 
-func zoom_camera(dir: int) -> void:
+func zoom_camera(dir: float) -> void:
 	var viewport_size := viewport_container.size
 	if Global.smooth_zoom:
 		var zoom_margin := zoom * dir / 5
