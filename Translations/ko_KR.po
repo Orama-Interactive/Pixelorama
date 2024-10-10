@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-10-09 21:55\n"
+"PO-Revision-Date: 2024-10-10 13:02\n"
 
 msgid "OK"
 msgstr "예"
@@ -2015,11 +2015,19 @@ msgstr "수평"
 msgid "Enable horizontal mirrored drawing"
 msgstr "수평 대칭 그리기 활성화"
 
+msgid "Vertical"
+msgstr "수직"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "수직 대칭 그리기 활성화"
 
-msgid "Vertical"
-msgstr "수직"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "현재 프레임:"
