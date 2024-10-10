@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-10-09 21:55\n"
+"PO-Revision-Date: 2024-10-10 09:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2558,23 +2558,23 @@ msgstr "Culoarea implicită de fundal a unei imagini noi"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Resetează toate opțiunile disponibile în Preferințe"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Resetează opțiunile de cronologie"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Resetați toate opțiunile de instrumente"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Elimină toate extensiile"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Șterge lista de fișiere recent deschisă"
 
 msgid "Lock aspect ratio"
 msgstr "Blocare raport aspect"
