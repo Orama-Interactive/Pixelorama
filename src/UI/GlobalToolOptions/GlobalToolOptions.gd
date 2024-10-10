@@ -11,7 +11,9 @@ extends PanelContainer
 
 func _ready() -> void:
 	Tools.options_reset.connect(reset_options)
-	%HorizontalMirrorOptions.get_popup().id_pressed.connect(_on_horizontal_mirror_options_id_pressed)
+	%HorizontalMirrorOptions.get_popup().id_pressed.connect(
+		_on_horizontal_mirror_options_id_pressed
+	)
 	%VerticalMirrorOptions.get_popup().id_pressed.connect(_on_vertical_mirror_options_id_pressed)
 	# Resize tools panel when window gets resized
 	get_tree().get_root().size_changed.connect(_on_resized)
