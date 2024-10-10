@@ -21,11 +21,11 @@ func _input(_event: InputEvent) -> void:
 	super._input(_event)
 	if type == Types.HORIZONTAL:
 		project.y_symmetry_point = points[0].y * 2 - 1
-		points[0].y = clampf(points[0].y, 0, Global.current_project.size.y)
-		points[1].y = clampf(points[1].y, 0, Global.current_project.size.y)
+		points[0].y = clampf(points[0].y, 0, project.size.y)
+		points[1].y = clampf(points[1].y, 0, project.size.y)
 	elif type == Types.VERTICAL:
-		points[0].x = clampf(points[0].x, 0, Global.current_project.size.x)
-		points[1].x = clampf(points[1].x, 0, Global.current_project.size.x)
+		points[0].x = clampf(points[0].x, 0, project.size.x)
+		points[1].x = clampf(points[1].x, 0, project.size.x)
 		project.x_symmetry_point = points[0].x * 2 - 1
 
 
