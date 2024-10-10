@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-10-10 13:03\n"
+"PO-Revision-Date: 2024-10-10 14:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2054,10 +2054,10 @@ msgstr "Перейти к первому кадру"
 msgid "Go to the previous frame"
 msgstr "На предыдущий кадр"
 
-msgid "Play the animation backwards (from end to beginning)"
+msgid "Play the animation backwards"
 msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
+msgid "Play the animation forward"
 msgstr ""
 
 msgid "Go to the next frame"
