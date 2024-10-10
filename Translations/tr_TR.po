@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-10-10 20:52\n"
+"PO-Revision-Date: 2024-10-10 22:48\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -2038,11 +2038,11 @@ msgstr "Çizim için dikey aynamalamayı etkinleştir"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "Tuval merkezine taşı"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "Görünüm merkezine taşı"
 
 msgid "Current frame:"
 msgstr "Geçerli kare:"
@@ -2060,10 +2060,10 @@ msgid "Go to the previous frame"
 msgstr "Önceki kareye git"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Canlandırmayı geri oynat"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Canlandırmayı ileri oynat"
 
 msgid "Go to the next frame"
 msgstr "Sonraki kareye git"
