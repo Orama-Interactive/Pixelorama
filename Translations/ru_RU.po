@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-10-10 14:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2025,11 +2025,19 @@ msgstr "Горизонально"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Режим рисования с горизонтальным зеркалированием"
 
+msgid "Vertical"
+msgstr "Вертикально"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Режим рисования с вертикальным зеркалированием"
 
-msgid "Vertical"
-msgstr "Вертикально"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Текущий кадр:"
@@ -2046,10 +2054,10 @@ msgstr "Перейти к первому кадру"
 msgid "Go to the previous frame"
 msgstr "На предыдущий кадр"
 
-msgid "Play the animation backwards (from end to beginning)"
+msgid "Play the animation backwards"
 msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
+msgid "Play the animation forward"
 msgstr ""
 
 msgid "Go to the next frame"
@@ -2552,6 +2560,26 @@ msgstr "Цвет заливки по умолчанию:"
 
 msgid "A default background color of a new image"
 msgstr "Цвет фона по умолчанию для нового изображения"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
 
 msgid "Lock aspect ratio"
 msgstr "Заблокировать соотношение сторон"

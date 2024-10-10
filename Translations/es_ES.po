@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-10-10 14:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -559,7 +559,7 @@ msgstr "Redimensionar:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Calidad:"
 
 msgid "Cancel Export"
 msgstr "Cancelar exportación"
@@ -978,23 +978,23 @@ msgstr "Color de la sombra:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Desenfoque gaussiano"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Tipo de desenfoque:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Nivel de desenfoque:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Radio de desenfoque:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Dirección de desenfoque:"
 
 msgid "Gradient"
 msgstr "Degradado"
@@ -2025,11 +2025,19 @@ msgstr "Horizontal"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Activar dibujo de espejo horizontal"
 
+msgid "Vertical"
+msgstr "Vertical"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Activar dibujo de espejo vertical"
 
-msgid "Vertical"
-msgstr "Vertical"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Fotograma actual:"
@@ -2046,11 +2054,11 @@ msgstr "Saltar al primer fotograma"
 msgid "Go to the previous frame"
 msgstr "Ir al fotograma anterior"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Reproduce la animación hacia atrás (desde el final hasta el principio)"
+msgid "Play the animation backwards"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Reproducir la animación hacia adelante (de principio a fin)"
+msgid "Play the animation forward"
+msgstr ""
 
 msgid "Go to the next frame"
 msgstr "Ir al fotograma siguiente"
@@ -2553,6 +2561,26 @@ msgstr "Color de relleno predeterminado:"
 msgid "A default background color of a new image"
 msgstr "Un color de fondo predeterminado de una nueva imagen"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
+
 msgid "Lock aspect ratio"
 msgstr "Bloquear relación de aspecto"
 
@@ -2722,11 +2750,11 @@ msgstr "El(los) carácter(es) que separan Él nombre del archivo y Él número d
 
 #. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
 msgid "Trim images"
-msgstr ""
+msgstr "Recortar imágenes"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
-msgstr ""
+msgstr "Recorta las imágenes exportadas a su porción visible, considerando cada píxel con un canal de alfa diferente a cero como visible."
 
 msgid "Close"
 msgstr "Cerrar"

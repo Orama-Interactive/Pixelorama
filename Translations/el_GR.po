@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-09-12 14:53\n"
+"PO-Revision-Date: 2024-10-10 14:41\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2030,11 +2030,19 @@ msgstr "Οριζόντια"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό"
 
+msgid "Vertical"
+msgstr "Κάθετα"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό"
 
-msgid "Vertical"
-msgstr "Κάθετα"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Μετακίνηση στο κέντρο του καμβά"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "Μετακίνηση στο κέντρο της προβολής"
 
 msgid "Current frame:"
 msgstr "Τρέχον καρέ:"
@@ -2051,11 +2059,11 @@ msgstr "Μετάβαση στο πρώτο καρέ"
 msgid "Go to the previous frame"
 msgstr "Μετάβαση στο προηγούμενο καρέ"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)"
+msgid "Play the animation backwards"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)"
+msgid "Play the animation forward"
+msgstr ""
 
 msgid "Go to the next frame"
 msgstr "Μετάβαση στο επόμενο καρέ"
@@ -2557,6 +2565,26 @@ msgstr "Προεπιλεγμένο γέμισμα με χρώμα:"
 
 msgid "A default background color of a new image"
 msgstr "Το προεπιλεγμένο χρώμα των καινούριων εικόνων"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Επαναφορά όλων των επιλογών που βρίσκονται στις προτιμήσεις"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Επαναφορά επιλογών χρονοδιαγράμματος"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Επαναφορά όλων των επιλογών εργαλείων"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Διαγραφή όλων των επεκτάσεων"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Εκκαθάριση της λίστας αρχείων που ανοίχθηκαν πρόσφατα"
 
 msgid "Lock aspect ratio"
 msgstr "Κλείδωμα αναλογίας διαστάσεων"

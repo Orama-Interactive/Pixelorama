@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-10-10 14:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2028,11 +2028,19 @@ msgstr "Poziome"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Włącza lustrzane odbicie w poziomie podczas rysowania"
 
+msgid "Vertical"
+msgstr "Pionowe"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Włącza lustrzane odbicie w pionie podczas rysowania"
 
-msgid "Vertical"
-msgstr "Pionowe"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Obecna klatka:"
@@ -2049,11 +2057,11 @@ msgstr "Skocz do pierwszej klatki"
 msgid "Go to the previous frame"
 msgstr "Idć do poprzedniej klatki"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Odtwórz animację wstecz"
+msgid "Play the animation backwards"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Odtwórz animację do przodu"
+msgid "Play the animation forward"
+msgstr ""
 
 msgid "Go to the next frame"
 msgstr "Idź do następnej klatki"
@@ -2555,6 +2563,26 @@ msgstr "Domyślny kolor wypełnienia:"
 
 msgid "A default background color of a new image"
 msgstr "Domyślny kolor tła dla nowego obrazu"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
 
 msgid "Lock aspect ratio"
 msgstr "Wymuś współczynnik proporcji"

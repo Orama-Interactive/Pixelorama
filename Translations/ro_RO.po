@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-09-11 18:44\n"
+"PO-Revision-Date: 2024-10-10 14:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2028,11 +2028,19 @@ msgstr "Orizontal"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Activează desenul oglindit orizontal"
 
+msgid "Vertical"
+msgstr "Vertical"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Activează desenul oglindit vertical"
 
-msgid "Vertical"
-msgstr "Vertical"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Cadrul actual:"
@@ -2049,11 +2057,11 @@ msgstr "Sari la primul cadru"
 msgid "Go to the previous frame"
 msgstr "Deplasează-te la cadrul anterior"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Redă animația înapoi (de la sfârșit până la început)"
+msgid "Play the animation backwards"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Redă animația înainte (de la început până la sfârșit)"
+msgid "Play the animation forward"
+msgstr ""
 
 msgid "Go to the next frame"
 msgstr "Deplasează-te la cadrul următor"
@@ -2555,6 +2563,26 @@ msgstr "Culoare implicită de umplere:"
 
 msgid "A default background color of a new image"
 msgstr "Culoarea implicită de fundal a unei imagini noi"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Resetează toate opțiunile disponibile în Preferințe"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Resetează opțiunile de cronologie"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Resetați toate opțiunile de instrumente"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Elimină toate extensiile"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Șterge lista de fișiere recent deschisă"
 
 msgid "Lock aspect ratio"
 msgstr "Blocare raport aspect"
