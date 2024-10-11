@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-10-10 14:41\n"
+"PO-Revision-Date: 2024-10-11 00:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2038,11 +2038,11 @@ msgstr "Abilita disegno verticale a specchio"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "Sposta nel centro della superficie"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "Sposta nel centro della vista"
 
 msgid "Current frame:"
 msgstr "Frame corrente:"
@@ -2060,10 +2060,10 @@ msgid "Go to the previous frame"
 msgstr "Vai al fotogramma precedente"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Riproduce l'animazione all'indietro"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Riproduce l'animazione in avanti"
 
 msgid "Go to the next frame"
 msgstr "Vai al prossimo fotogramma"
@@ -2568,23 +2568,23 @@ msgstr "Un colore di sfondo predefinito di una nuova immagine"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Reimposta tutte le opzioni disponibili nelle Preferenze"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Reimposta opzioni timeline"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Reimposta tutte le opzioni dello strumento"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Rimuovi tutte le estensioni"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Pulisce l'elenco dei file aperti di recente"
 
 msgid "Lock aspect ratio"
 msgstr "Blocca proporzioni"
