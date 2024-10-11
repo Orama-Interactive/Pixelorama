@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-10-11 19:30\n"
+"PO-Revision-Date: 2024-10-11 20:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2571,7 +2571,7 @@ msgstr "Reestablecer opciones de línea de tiempo"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Reestablecer todas las opciones de herramienta"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
