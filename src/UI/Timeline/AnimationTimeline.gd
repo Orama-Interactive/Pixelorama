@@ -3,11 +3,13 @@ extends Panel
 signal animation_started(forward: bool)
 signal animation_finished
 
+enum LoopType {NO, CYCLE, PINGPONG}
+
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 
 var is_animation_running := false
-var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop.
+var animation_loop := LoopType.CYCLE
 var animation_forward := true
 var first_frame := 0
 var last_frame := 0
@@ -617,16 +619,16 @@ func _on_timeline_settings_button_pressed() -> void:
 func _on_LoopAnim_pressed() -> void:
 	var texture_button: TextureRect = loop_animation_button.get_child(0)
 	match animation_loop:
-		0:  # Make it loop
-			animation_loop = 1
+		LoopType.NO:
+			animation_loop = LoopType.CYCLE
 			Global.change_button_texturerect(texture_button, "loop.png")
 			loop_animation_button.tooltip_text = "Cycle loop"
-		1:  # Make it ping-pong
-			animation_loop = 2
+		LoopType.CYCLE:
+			animation_loop = LoopType.PINGPONG
 			Global.change_button_texturerect(texture_button, "loop_pingpong.png")
 			loop_animation_button.tooltip_text = "Ping-pong loop"
-		2:  # Make it stop
-			animation_loop = 0
+		LoopType.PINGPONG:
+			animation_loop = LoopType.NO
 			Global.change_button_texturerect(texture_button, "loop_none.png")
 			loop_animation_button.tooltip_text = "No loop"
 
@@ -666,20 +668,20 @@ func _on_AnimationTimer_timeout() -> void:
 			animation_timer.start()  # Change the frame, change the wait time and start a cycle
 		else:
 			match animation_loop:
-				0:  # No loop
+				LoopType.NO:
 					play_forward.button_pressed = false
 					play_backwards.button_pressed = false
 					animation_timer.stop()
 					animation_finished.emit()
 					is_animation_running = false
-				1:  # Cycle loop
+				LoopType.CYCLE:
 					project.selected_cels.clear()
 					project.change_cel(first_frame, -1)
 					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
 					animation_timer.start()
-				2:  # Ping pong loop
+				LoopType.PINGPONG:
 					animation_forward = false
 					_on_AnimationTimer_timeout()
 
@@ -691,20 +693,20 @@ func _on_AnimationTimer_timeout() -> void:
 			animation_timer.start()
 		else:
 			match animation_loop:
-				0:  # No loop
+				LoopType.NO:
 					play_backwards.button_pressed = false
 					play_forward.button_pressed = false
 					animation_timer.stop()
 					animation_finished.emit()
 					is_animation_running = false
-				1:  # Cycle loop
+				LoopType.CYCLE:
 					project.selected_cels.clear()
 					project.change_cel(last_frame, -1)
 					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
 					animation_timer.start()
-				2:  # Ping pong loop
+				LoopType.PINGPONG:
 					animation_forward = true
 					_on_AnimationTimer_timeout()
 	frame_scroll_container.ensure_control_visible(
