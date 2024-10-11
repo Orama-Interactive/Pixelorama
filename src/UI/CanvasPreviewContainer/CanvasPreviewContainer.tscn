@@ -74,7 +74,7 @@ render_target_update_mode = 4
 material = SubResource("1")
 anchors_preset = 0
 
-[node name="CanvasPreview" parent="VBox/HBox/PreviewViewportContainer/SubViewport" instance=ExtResource("5")]
+[node name="CanvasPreview" parent="VBox/HBox/PreviewViewportContainer/SubViewport" groups=["CanvasPreviews"] instance=ExtResource("5")]
 unique_name_in_owner = true
 
 [node name="CameraPreview" type="Node2D" parent="VBox/HBox/PreviewViewportContainer/SubViewport" groups=["CanvasCameras"]]

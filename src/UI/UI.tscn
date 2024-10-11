@@ -359,7 +359,7 @@ render_target_update_mode = 0
 material = SubResource("3")
 anchors_preset = 0
 
-[node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("2")]
+[node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" groups=["CanvasPreviews"] instance=ExtResource("2")]
 
 [node name="Camera2D2" type="Node2D" parent="DockableContainer/Second Canvas/SubViewport" groups=["CanvasCameras"]]
 script = ExtResource("7")

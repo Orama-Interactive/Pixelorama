@@ -608,18 +608,8 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
 ## The main canvas node. It has the [param Canvas.gd] script attached.
 @onready var canvas: Canvas = main_viewport.find_child("Canvas")
-## Contains viewport of the second canvas preview.
-## It has the [param ViewportContainer.gd] script attached.
-@onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
-## The panel container of the canvas preview.
-## It has the [param CanvasPreviewContainer.gd] script attached.
-@onready var canvas_preview_container: Container = control.find_child("Canvas Preview")
 ## The global tool options. It has the [param GlobalToolOptions.gd] script attached.
 @onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
-## Contains viewport of the canvas preview.
-@onready var small_preview_viewport: SubViewportContainer = canvas_preview_container.find_child(
-	"PreviewViewportContainer"
-)
 ## Camera of the main canvas.
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
 ## Horizontal ruler of the main canvas. It has the [param HorizontalRuler.gd] script attached.
@@ -956,8 +946,8 @@ func undo_or_redo(
 
 	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()
-	second_viewport.get_child(0).get_node("CanvasPreview").queue_redraw()
-	canvas_preview_container.canvas_preview.queue_redraw()
+	for canvas_preview in get_tree().get_nodes_in_group("CanvasPreviews"):
+		canvas_preview.queue_redraw()
 	if !project.has_changed:
 		if project == current_project:
 			get_window().title = get_window().title + "(*)"

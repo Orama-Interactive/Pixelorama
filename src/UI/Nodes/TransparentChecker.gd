@@ -11,8 +11,8 @@ func update_rect() -> void:
 		set_bounds(Global.current_project.size)
 	if self == Global.transparent_checker:
 		fit_rect(Global.current_project.tiles.get_bounding_rect())
-		Global.second_viewport.get_node("SubViewport/TransparentChecker").update_rect()
-		Global.small_preview_viewport.get_node("SubViewport/TransparentChecker").update_rect()
+		for canvas_preview in get_tree().get_nodes_in_group("CanvasPreviews"):
+			canvas_preview.get_viewport().get_node("TransparentChecker").update_rect()
 	material.set_shader_parameter("size", Global.checker_size)
 	material.set_shader_parameter("color1", Global.checker_color_1)
 	material.set_shader_parameter("color2", Global.checker_color_2)
