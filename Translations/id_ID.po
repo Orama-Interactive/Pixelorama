@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-10-11 11:20\n"
+"PO-Revision-Date: 2024-10-11 15:12\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -213,7 +213,7 @@ msgid "Initial angle:"
 msgstr "Sudut inisial:"
 
 msgid "Clear"
-msgstr "Lepas"
+msgstr "Kosongkan"
 
 msgid "Invert"
 msgstr "Terbalikkan"
@@ -2038,11 +2038,11 @@ msgstr "Aktifkan gambar dicerminkan menegak"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "Ke tengah kanvas"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "Ke tengah tampilan"
 
 msgid "Current frame:"
 msgstr "Bingkai saat ini:"
@@ -2060,10 +2060,10 @@ msgid "Go to the previous frame"
 msgstr "Ke bingkai sebelumnya"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Putar mundur animasi"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Putar maju animasi"
 
 msgid "Go to the next frame"
 msgstr "Ke bingkai selanjutnya"
@@ -2159,7 +2159,7 @@ msgid "Add a new frame"
 msgstr "Tambah bingkai baru"
 
 msgid "Remove Frame"
-msgstr "Hapus Bingkai"
+msgstr "Hilangkan Bingkai"
 
 msgid "Clone Frame"
 msgstr "Duplikatkan Bingkai"
@@ -2220,7 +2220,7 @@ msgstr "Lapisan"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr "Cuplikkan mask"
+msgstr "Cuplik mask"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2239,7 +2239,7 @@ msgid "Add 3D Layer"
 msgstr "Tambah Lapisan 3D"
 
 msgid "Remove current layer"
-msgstr "Hapus lapisan ini"
+msgstr "Hilangkan lapisan ini"
 
 msgid "Move up the current layer"
 msgstr "Geser lapisan ini ke atas"
@@ -2404,7 +2404,7 @@ msgid "Redo: Add Layer"
 msgstr "Ulangi: Tambah Lapisan"
 
 msgid "Undo: Remove Layer"
-msgstr "Urungkan: Hapus lapisan"
+msgstr "Urungkan: Hilangkan lapisan"
 
 msgid "Redo: Remove Layer"
 msgstr "Ulangi: Hapus lapisan"
@@ -2584,7 +2584,7 @@ msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Kosongkan daftar berkas yang dibuka"
 
 msgid "Lock aspect ratio"
 msgstr "Kuncikan nisbah aspek"
@@ -2763,11 +2763,11 @@ msgstr "Memangkas gambar terekspor ke bagian terlihat, piksel apa pun bersaluran
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Cuplik isi gambar ke seleksi"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Hanya mengekspor isi area yang diseleksi."
 
 msgid "Close"
 msgstr "Tutup"
@@ -2846,7 +2846,7 @@ msgid "Add a new color"
 msgstr "Tambah warna baru"
 
 msgid "Remove a selected color"
-msgstr "Hapus warna yang dipilih"
+msgstr "Hilangkan warna terpilih"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
@@ -3247,7 +3247,7 @@ msgstr "Pilih gambar di bawah untuk mengubah propertinya.\n"
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr "Hapus"
+msgstr "Hilangkan"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
