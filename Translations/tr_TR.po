@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-10-10 22:48\n"
+"PO-Revision-Date: 2024-10-11 11:20\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -2760,6 +2760,14 @@ msgstr "Görüntüleri kırp"
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Dışa aktarılan görüntüleri görünür kısımlarına kırpar, sıfır olmayan alfa kanalına sahip her piksel görünür kabul edilir."
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr ""
 
 msgid "Close"
 msgstr "Kapat"
