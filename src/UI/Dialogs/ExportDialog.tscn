@@ -326,7 +326,7 @@ text = "Trim images"
 
 [node name="ClipSelection" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
 layout_mode = 2
-tooltip_text = "Only shows content that is within the bounds of a selected area."
+tooltip_text = "Only export content that is within the bounds of a selected area."
 mouse_default_cursor_shape = 2
 text = "Clip image content to selection"
 
