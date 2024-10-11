@@ -275,7 +275,7 @@ tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource("3")
 
-[node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas"]
+[node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas" groups=["CanvasRulers"]]
 clip_contents = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -291,7 +291,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
+[node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler" groups=["CanvasRulers"]]
 clip_contents = true
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2

@@ -561,7 +561,10 @@ var draw_grid := false
 ## If [code]true[/code], the pixel grid is visible.
 var draw_pixel_grid := false
 ## If [code]true[/code], the rulers are visible.
-var show_rulers := true
+var show_rulers := true:
+	set(value):
+		show_rulers = value
+		get_tree().set_group(&"CanvasRulers", "visible", value)
 ## If [code]true[/code], the guides are visible.
 var show_guides := true
 ## If [code]true[/code], the mouse guides are visible.
@@ -612,10 +615,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
 ## Camera of the main canvas.
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
-## Horizontal ruler of the main canvas. It has the [param HorizontalRuler.gd] script attached.
-@onready var horizontal_ruler: BaseButton = control.find_child("HorizontalRuler")
-## Vertical ruler of the main canvas. It has the [param VerticalRuler.gd] script attached.
-@onready var vertical_ruler: BaseButton = control.find_child("VerticalRuler")
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
 
