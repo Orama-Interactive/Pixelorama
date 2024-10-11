@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="4"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="5"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="6"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV3.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/ValueSliderV3.tscn" id="7"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_8sqgw"]
 action = &"delete"
@@ -31,10 +31,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 1
 selected = 0
+item_count = 1
 popup/item_0/text = "None"
-popup/item_0/id = 0
 
 [node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="2"]
 unique_name_in_owner = true
@@ -80,10 +79,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Perspective"
-popup/item_0/id = 0
 popup/item_1/text = "Orthogonal"
 popup/item_1/id = 1
 popup/item_2/text = "Frustum"
@@ -552,7 +550,7 @@ focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0
-max_value = 10.0
+max_value = 128.0
 value = 1.0
 allow_greater = true
 nine_patch_stretch = true
@@ -561,6 +559,7 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
+snap_step = 2.0
 
 [node name="MeshOffsetLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
 layout_mode = 2
@@ -614,10 +613,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Left"
-popup/item_0/id = 0
 popup/item_1/text = "Center"
 popup/item_1/id = 1
 popup/item_2/text = "Right"
@@ -634,10 +632,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Top"
-popup/item_0/id = 0
 popup/item_1/text = "Center"
 popup/item_1/id = 1
 popup/item_2/text = "Bottom"

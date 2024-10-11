@@ -359,7 +359,7 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 		if property_path.ends_with("v2"):
 			property_path = property_path.replace("v2", "")
 		var value = to_edit.get_indexed(property_path)
-		if not is_instance_valid(value):
+		if value == null:
 			continue
 		if "scale" in prop:
 			value *= 100
