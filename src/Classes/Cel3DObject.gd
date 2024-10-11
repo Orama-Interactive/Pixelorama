@@ -96,6 +96,7 @@ func serialize() -> Dictionary:
 				dict["mesh_text"] = mesh.text
 				dict["mesh_pixel_size"] = mesh.pixel_size
 				dict["mesh_font_size"] = mesh.font_size
+				dict["mesh_depth"] = mesh.depth
 				dict["mesh_offset"] = mesh.offset
 				dict["mesh_curve_step"] = mesh.curve_step
 				dict["mesh_horizontal_alignment"] = mesh.horizontal_alignment
@@ -157,6 +158,7 @@ func deserialize(dict: Dictionary) -> void:
 				mesh.text = dict["mesh_text"]
 				mesh.pixel_size = dict["mesh_pixel_size"]
 				mesh.font_size = dict["mesh_font_size"]
+				mesh.depth = dict["mesh_depth"]
 				mesh.offset = dict["mesh_offset"]
 				mesh.curve_step = dict["mesh_curve_step"]
 				mesh.horizontal_alignment = dict["mesh_horizontal_alignment"]
