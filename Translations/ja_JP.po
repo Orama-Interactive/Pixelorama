@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-10-11 11:20\n"
+"PO-Revision-Date: 2024-10-11 12:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2763,11 +2763,11 @@ msgstr "エクスポートされた画像を可視部分にトリミングしま
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "選択範囲に画像コンテンツをクリップ"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "選択領域の範囲内にあるコンテンツのみエクスポートします。"
 
 msgid "Close"
 msgstr "閉じる"
