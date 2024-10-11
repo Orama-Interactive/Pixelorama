@@ -31,6 +31,8 @@ resource_name = "Layout"
 script = ExtResource("2")
 root = SubResource("Resource_hl8y1")
 hidden_tabs = {}
+windows = {}
+save_on_change = false
 
 [sub_resource type="Resource" id="Resource_ntwfj"]
 resource_name = "Tabs"
@@ -71,6 +73,8 @@ resource_name = "Layout"
 script = ExtResource("2")
 root = SubResource("Resource_jhibs")
 hidden_tabs = {}
+windows = {}
+save_on_change = false
 
 [node name="SampleScene" type="VBoxContainer"]
 anchors_preset = 15

@@ -175,4 +175,5 @@ hidden_tabs = {
 "Recorder": true,
 "Second Canvas": true
 }
+windows = {}
 save_on_change = false
