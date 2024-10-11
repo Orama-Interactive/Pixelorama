@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-10-11 16:15\n"
+"PO-Revision-Date: 2024-10-11 22:50\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -3115,6 +3115,10 @@ msgstr "Jari-jari bawah:"
 msgid "Text:"
 msgstr "Teks:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Ukuran piksel:"
@@ -3125,6 +3129,9 @@ msgstr "Step lengkung:"
 
 msgid "Horizontal alignment:"
 msgstr "Penjajaran mendatar:"
+
+msgid "Vertical alignment:"
+msgstr ""
 
 msgid "Left"
 msgstr "Kiri"
