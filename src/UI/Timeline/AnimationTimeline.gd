@@ -28,6 +28,7 @@ var global_layer_visibility := true
 var global_layer_lock := false
 var global_layer_expand := true
 
+@onready var animation_timer := $AnimationTimer as Timer
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer.
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
@@ -69,7 +70,7 @@ func _ready() -> void:
 	cel_size_slider.value = cel_size
 	add_layer_list.get_popup().id_pressed.connect(add_layer)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
-	Global.animation_timer.wait_time = 1 / Global.current_project.fps
+	animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 	_fill_blend_modes_option_button()
 	# Config loading.
@@ -651,7 +652,7 @@ func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
 		play_forward.button_pressed = false
 		play_backwards.button_pressed = false
-		Global.animation_timer.stop()
+		animation_timer.stop()
 		return
 
 	Global.canvas.selection.transform_content_confirm()
@@ -661,25 +662,23 @@ func _on_AnimationTimer_timeout() -> void:
 		if project.current_frame < last_frame:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame + 1, -1)
-			Global.animation_timer.wait_time = (
-				project.frames[project.current_frame].duration * (1 / fps)
-			)
-			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle
+			animation_timer.wait_time = project.frames[project.current_frame].duration * (1.0 / fps)
+			animation_timer.start()  # Change the frame, change the wait time and start a cycle
 		else:
 			match animation_loop:
 				0:  # No loop
 					play_forward.button_pressed = false
 					play_backwards.button_pressed = false
-					Global.animation_timer.stop()
+					animation_timer.stop()
 					animation_finished.emit()
 					is_animation_running = false
 				1:  # Cycle loop
 					project.selected_cels.clear()
 					project.change_cel(first_frame, -1)
-					Global.animation_timer.wait_time = (
+					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
-					Global.animation_timer.start()
+					animation_timer.start()
 				2:  # Ping pong loop
 					animation_forward = false
 					_on_AnimationTimer_timeout()
@@ -688,25 +687,23 @@ func _on_AnimationTimer_timeout() -> void:
 		if project.current_frame > first_frame:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame - 1, -1)
-			Global.animation_timer.wait_time = (
-				project.frames[project.current_frame].duration * (1 / fps)
-			)
-			Global.animation_timer.start()
+			animation_timer.wait_time = project.frames[project.current_frame].duration * (1.0 / fps)
+			animation_timer.start()
 		else:
 			match animation_loop:
 				0:  # No loop
 					play_backwards.button_pressed = false
 					play_forward.button_pressed = false
-					Global.animation_timer.stop()
+					animation_timer.stop()
 					animation_finished.emit()
 					is_animation_running = false
 				1:  # Cycle loop
 					project.selected_cels.clear()
 					project.change_cel(last_frame, -1)
-					Global.animation_timer.wait_time = (
+					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
-					Global.animation_timer.start()
+					animation_timer.start()
 				2:  # Ping pong loop
 					animation_forward = true
 					_on_AnimationTimer_timeout()
@@ -746,16 +743,16 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 		play_forward.toggled.connect(_on_PlayForward_toggled)
 
 	if play:
-		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
+		animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
 		var duration: float = (
 			Global.current_project.frames[Global.current_project.current_frame].duration
 		)
-		Global.animation_timer.wait_time = duration * (1 / Global.current_project.fps)
-		Global.animation_timer.start()
+		animation_timer.wait_time = duration * (1 / Global.current_project.fps)
+		animation_timer.start()
 		animation_forward = forward_dir
 		animation_started.emit(forward_dir)
 	else:
-		Global.animation_timer.stop()
+		animation_timer.stop()
 		animation_finished.emit()
 
 	is_animation_running = play
@@ -791,7 +788,7 @@ func _on_FirstFrame_pressed() -> void:
 
 func _on_FPSValue_value_changed(value: float) -> void:
 	Global.current_project.fps = value
-	Global.animation_timer.wait_time = 1 / Global.current_project.fps
+	animation_timer.wait_time = 1 / Global.current_project.fps
 
 
 func _on_PastOnionSkinning_value_changed(value: float) -> void:
