@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-10-11 11:19\n"
+"PO-Revision-Date: 2024-10-11 22:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3105,6 +3105,10 @@ msgstr "Rayon inférieur :"
 msgid "Text:"
 msgstr "Texte :"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Taille des Pixels:"
@@ -3115,6 +3119,9 @@ msgstr "Étape de Courbe:"
 
 msgid "Horizontal alignment:"
 msgstr "Alignement horizontal :"
+
+msgid "Vertical alignment:"
+msgstr ""
 
 msgid "Left"
 msgstr "Gauche"
