@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-10-11 11:20\n"
+"PO-Revision-Date: 2024-10-11 12:40\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2060,10 +2060,10 @@ msgid "Go to the previous frame"
 msgstr "Μετάβαση στο προηγούμενο καρέ"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Αναπαραγωγή της κίνησης προς τα πίσω"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Αναπαραγωγή της κίνησης προς τα εμπρός"
 
 msgid "Go to the next frame"
 msgstr "Μετάβαση στο επόμενο καρέ"
@@ -2763,11 +2763,11 @@ msgstr "Περικοπή των εξαγόμενων εικόνων στο ορ�
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Αποκοπή περιεχομένου εικόνας στην επιλογή"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Εξαγωγή μόνο περιεχομένου που βρίσκεται εντός των ορίων μιας επιλεγμένης περιοχής."
 
 msgid "Close"
 msgstr "Κλείσιμο"
