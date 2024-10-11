@@ -28,11 +28,13 @@ func _on_ModeOptions_item_selected(id: ZoomMode) -> void:
 
 
 func _on_FitToFrame_pressed() -> void:
-	Global.camera.fit_to_frame(Global.current_project.size)
+	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
+		camera.fit_to_frame(Global.current_project.size)
 
 
 func _on_100_pressed() -> void:
-	Global.camera.zoom_100()
+	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
+		camera.zoom_100()
 
 
 func get_config() -> Dictionary:
@@ -50,20 +52,21 @@ func update_config() -> void:
 func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
 	var mouse_pos := get_global_mouse_position()
-	var viewport_rect := Rect2(Global.main_viewport.global_position, Global.main_viewport.size)
-	var viewport_rect_2 := Rect2(
-		Global.second_viewport.global_position, Global.second_viewport.size
-	)
-
-	if viewport_rect.has_point(mouse_pos):
-		Global.camera.zoom_camera(_zoom_mode * 2 - 1)
-	elif viewport_rect_2.has_point(mouse_pos):
-		Global.camera2.zoom_camera(_zoom_mode * 2 - 1)
+	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
+		var viewport_container := camera.get_viewport().get_parent() as SubViewportContainer
+		var viewport_rect := Rect2(viewport_container.global_position, viewport_container.size)
+		if viewport_rect.has_point(mouse_pos):
+			camera.zoom_camera(_zoom_mode * 2 - 1)
 
 
 func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
-	Global.camera.zoom_camera(-_relative.x / 3)
+	var mouse_pos := get_global_mouse_position()
+	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
+		var viewport_container := camera.get_viewport().get_parent() as SubViewportContainer
+		var viewport_rect := Rect2(viewport_container.global_position, viewport_container.size)
+		if viewport_rect.has_point(mouse_pos):
+			camera.zoom_camera(-_relative.x / 3)
 
 
 func draw_end(pos: Vector2i) -> void:

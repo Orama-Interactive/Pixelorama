@@ -325,7 +325,7 @@ anchors_preset = 0
 
 [node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("19")]
 
-[node name="Camera2D" type="Node2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport"]
+[node name="Camera2D" type="Node2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" groups=["CanvasCameras"]]
 script = ExtResource("7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport"]
@@ -361,7 +361,7 @@ anchors_preset = 0
 
 [node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("2")]
 
-[node name="Camera2D2" type="Node2D" parent="DockableContainer/Second Canvas/SubViewport"]
+[node name="Camera2D2" type="Node2D" parent="DockableContainer/Second Canvas/SubViewport" groups=["CanvasCameras"]]
 script = ExtResource("7")
 index = 1
 

@@ -622,12 +622,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 )
 ## Camera of the main canvas.
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
-## Camera of the second canvas preview.
-@onready var camera2: CanvasCamera = second_viewport.find_child("Camera2D2")
-## Camera of the canvas preview.
-@onready var camera_preview: CanvasCamera = control.find_child("CameraPreview")
-## Array of cameras used in Pixelorama.
-@onready var cameras := [camera, camera2, camera_preview]
 ## Horizontal ruler of the main canvas. It has the [param HorizontalRuler.gd] script attached.
 @onready var horizontal_ruler: BaseButton = control.find_child("HorizontalRuler")
 ## Vertical ruler of the main canvas. It has the [param VerticalRuler.gd] script attached.

@@ -142,7 +142,13 @@ func zoom_100() -> void:
 
 
 func fit_to_frame(size: Vector2) -> void:
-	# temporarily disable integer zoom
+	viewport_container = get_viewport().get_parent()
+	var h_ratio := viewport_container.size.x / size.x
+	var v_ratio := viewport_container.size.y / size.y
+	var ratio := minf(h_ratio, v_ratio)
+	if ratio == 0 or !viewport_container.visible:
+		return
+	# Temporarily disable integer zoom.
 	var reset_integer_zoom := Global.integer_zoom
 	if reset_integer_zoom:
 		Global.integer_zoom = !Global.integer_zoom
@@ -150,32 +156,15 @@ func fit_to_frame(size: Vector2) -> void:
 
 	# Adjust to the rotated size:
 	if camera_angle != 0.0:
-		# Calculating the rotated corners of the frame to find its rotated size
+		# Calculating the rotated corners of the frame to find its rotated size.
 		var a := Vector2.ZERO  # Top left
-		var b := Vector2(size.x, 0).rotated(camera_angle)  # Top right
-		var c := Vector2(0, size.y).rotated(camera_angle)  # Bottom left
-		var d := Vector2(size.x, size.y).rotated(camera_angle)  # Bottom right
+		var b := Vector2(size.x, 0).rotated(camera_angle)  # Top right.
+		var c := Vector2(0, size.y).rotated(camera_angle)  # Bottom left.
+		var d := Vector2(size.x, size.y).rotated(camera_angle)  # Bottom right.
 
-		# Find how far apart each opposite point is on each axis, and take the longer one
+		# Find how far apart each opposite point is on each axis, and take the longer one.
 		size.x = maxf(absf(a.x - d.x), absf(b.x - c.x))
 		size.y = maxf(absf(a.y - d.y), absf(b.y - c.y))
-
-	viewport_container = get_viewport().get_parent()
-	var h_ratio := viewport_container.size.x / size.x
-	var v_ratio := viewport_container.size.y / size.y
-	var ratio := minf(h_ratio, v_ratio)
-	if ratio == 0 or !viewport_container.visible:
-		ratio = 0.1  # Set it to a non-zero value just in case
-		# If the ratio is 0, it means that the viewport container is hidden
-		# in that case, use the other viewport to get the ratio
-		if index == Cameras.MAIN:
-			h_ratio = Global.second_viewport.size.x / size.x
-			v_ratio = Global.second_viewport.size.y / size.y
-			ratio = minf(h_ratio, v_ratio)
-		elif index == Cameras.SECOND:
-			h_ratio = Global.main_viewport.size.x / size.x
-			v_ratio = Global.main_viewport.size.y / size.y
-			ratio = minf(h_ratio, v_ratio)
 
 	ratio = clampf(ratio, 0.1, ratio)
 	zoom = Vector2(ratio, ratio)

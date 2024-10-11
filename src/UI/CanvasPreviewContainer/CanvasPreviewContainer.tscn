@@ -77,7 +77,7 @@ anchors_preset = 0
 [node name="CanvasPreview" parent="VBox/HBox/PreviewViewportContainer/SubViewport" instance=ExtResource("5")]
 unique_name_in_owner = true
 
-[node name="CameraPreview" type="Node2D" parent="VBox/HBox/PreviewViewportContainer/SubViewport"]
+[node name="CameraPreview" type="Node2D" parent="VBox/HBox/PreviewViewportContainer/SubViewport" groups=["CanvasCameras"]]
 unique_name_in_owner = true
 script = ExtResource("5_ge2km")
 index = 2
@@ -122,10 +122,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 clip_text = true
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "All frames"
-popup/item_0/id = 0
 popup/item_1/text = "Current frame as spritesheet"
 popup/item_1/id = 1
 
