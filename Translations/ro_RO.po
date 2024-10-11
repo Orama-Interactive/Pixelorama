@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-10-11 11:19\n"
+"PO-Revision-Date: 2024-10-11 12:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2761,11 +2761,11 @@ msgstr "Trunchiază imaginile exportate până la porțiunea lor vizibilă, cons
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Decupează conținutul imaginii la selecție"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Exportă doar conținut care se află în limitele unei zone selectate."
 
 msgid "Close"
 msgstr "Închide"
