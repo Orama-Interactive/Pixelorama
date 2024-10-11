@@ -1,9 +1,9 @@
 extends AcceptDialog
 
+var main_canvas := Global.control.find_child("Main Canvas", true, false)
+
 @onready var slider := $VBoxContainer/ValueSlider as ValueSlider
 @onready var fullscreen_warning := $VBoxContainer/FullscreenWarning as Label
-
-var main_canvas := Global.control.find_child("Main Canvas", true, false)
 
 
 func _ready() -> void:
