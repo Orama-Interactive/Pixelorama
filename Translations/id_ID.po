@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-10-11 15:12\n"
+"PO-Revision-Date: 2024-10-11 16:15\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1485,7 +1485,7 @@ msgstr "Garis Lengkung\n\n"
 "Menggaris lengkung Bezier\n"
 "Tekan %s/%s untuk menambah titik\n"
 "Tekan dan seret untuk melengkungkan\n"
-"Tekan %s untuk melepas titik tadi"
+"Tekan %s untuk menghapus titik tadi"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -2159,7 +2159,7 @@ msgid "Add a new frame"
 msgstr "Tambah bingkai baru"
 
 msgid "Remove Frame"
-msgstr "Hilangkan Bingkai"
+msgstr "Hapus Bingkai"
 
 msgid "Clone Frame"
 msgstr "Duplikatkan Bingkai"
@@ -2239,7 +2239,7 @@ msgid "Add 3D Layer"
 msgstr "Tambah Lapisan 3D"
 
 msgid "Remove current layer"
-msgstr "Hilangkan lapisan ini"
+msgstr "Hapus lapisan ini"
 
 msgid "Move up the current layer"
 msgstr "Geser lapisan ini ke atas"
@@ -2404,7 +2404,7 @@ msgid "Redo: Add Layer"
 msgstr "Ulangi: Tambah Lapisan"
 
 msgid "Undo: Remove Layer"
-msgstr "Urungkan: Hilangkan lapisan"
+msgstr "Urungkan: Hapus lapisan"
 
 msgid "Redo: Remove Layer"
 msgstr "Ulangi: Hapus lapisan"
@@ -2568,19 +2568,19 @@ msgstr "Warna latar belakang bawaan pada gambar baru"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Atur ulang semua opsi yang di Preferensi"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Atur ulang opsi garis waktu"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Atur ulang opsi alat-alat"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Hapus semua ekstensi"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -2846,7 +2846,7 @@ msgid "Add a new color"
 msgstr "Tambah warna baru"
 
 msgid "Remove a selected color"
-msgstr "Hilangkan warna terpilih"
+msgstr "Hapus warna yang dipilih"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
@@ -3033,7 +3033,7 @@ msgid "Add new object"
 msgstr "Tambah objek baru"
 
 msgid "Remove object"
-msgstr "Hilangkan Objek"
+msgstr "Hapus objek"
 
 msgid "Camera"
 msgstr "Kamera"
@@ -3247,7 +3247,7 @@ msgstr "Pilih gambar di bawah untuk mengubah propertinya.\n"
 
 #. Removes the selected reference image.
 msgid "Remove"
-msgstr "Hilangkan"
+msgstr "Hapus"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
