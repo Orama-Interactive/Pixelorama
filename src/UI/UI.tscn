@@ -205,6 +205,7 @@ hidden_tabs = {
 "Reference Images": true,
 "Second Canvas": true
 }
+windows = {}
 save_on_change = false
 
 [sub_resource type="ShaderMaterial" id="2"]

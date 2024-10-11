@@ -57,8 +57,8 @@ func _ready() -> void:
 		zoom_slider.value_changed.connect(_zoom_slider_value_changed)
 	zoom_changed.connect(_zoom_changed)
 	rotation_changed.connect(_rotation_changed)
-	viewport_container = get_parent().get_parent()
-	transparent_checker = get_parent().get_node("TransparentChecker")
+	viewport_container = get_viewport().get_parent()
+	transparent_checker = get_viewport().get_node("TransparentChecker")
 	update_transparent_checker_offset()
 
 
@@ -160,7 +160,7 @@ func fit_to_frame(size: Vector2) -> void:
 		size.x = maxf(absf(a.x - d.x), absf(b.x - c.x))
 		size.y = maxf(absf(a.y - d.y), absf(b.y - c.y))
 
-	viewport_container = get_parent().get_parent()
+	viewport_container = get_viewport().get_parent()
 	var h_ratio := viewport_container.size.x / size.x
 	var v_ratio := viewport_container.size.y / size.y
 	var ratio := minf(h_ratio, v_ratio)

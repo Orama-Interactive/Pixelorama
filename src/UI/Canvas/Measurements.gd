@@ -8,6 +8,8 @@ var mode := Global.MeasurementMode.NONE
 var apparent_width: float = WIDTH
 var rect_bounds: Rect2i
 
+@onready var canvas := get_parent() as Canvas
+
 
 func _ready() -> void:
 	font = Themes.get_font()
@@ -34,10 +36,10 @@ func _input(_event: InputEvent) -> void:
 func _prepare_movement_rect() -> void:
 	var project := Global.current_project
 	if project.has_selection:
-		rect_bounds = Global.canvas.selection.preview_image.get_used_rect()
-		rect_bounds.position += Vector2i(Global.canvas.selection.big_bounding_rectangle.position)
+		rect_bounds = canvas.selection.preview_image.get_used_rect()
+		rect_bounds.position += Vector2i(canvas.selection.big_bounding_rectangle.position)
 		if !rect_bounds.has_area():
-			rect_bounds = Global.canvas.selection.big_bounding_rectangle
+			rect_bounds = canvas.selection.big_bounding_rectangle
 		return
 	if rect_bounds.has_area():
 		return
@@ -65,7 +67,7 @@ func _prepare_movement_rect() -> void:
 		else:
 			rect_bounds = rect_bounds.merge(used_rect)
 	if not rect_bounds.has_area():
-		rect_bounds = Rect2(Vector2.ZERO, project.size)
+		rect_bounds = Rect2i(Vector2i.ZERO, project.size)
 
 
 func _draw_move_measurement() -> void:
@@ -74,7 +76,7 @@ func _draw_move_measurement() -> void:
 	dashed_color.a = 0.5
 	# Draw boundary
 	var boundary := Rect2i(rect_bounds)
-	boundary.position += Global.canvas.move_preview_location
+	boundary.position += canvas.move_preview_location
 	draw_rect(boundary, line_color, false, apparent_width)
 	# calculate lines
 	var top := Vector2(boundary.get_center().x, boundary.position.y)

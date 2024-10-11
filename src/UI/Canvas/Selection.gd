@@ -43,7 +43,7 @@ var content_pivot := Vector2.ZERO
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var resize_keep_ratio := false
 
-@onready var canvas: Canvas = get_parent()
+@onready var canvas := get_parent() as Canvas
 @onready var marching_ants_outline: Sprite2D = $MarchingAntsOutline
 
 
@@ -393,7 +393,7 @@ func resize_selection() -> void:
 	)
 	Global.current_project.selection_map_changed()
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func _gizmo_rotate() -> void:
@@ -461,7 +461,7 @@ func move_borders_end() -> void:
 	else:
 		Global.current_project.selection_map_changed()
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func transform_content_start() -> void:
@@ -478,7 +478,7 @@ func transform_content_start() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = Global.current_project.selection_offset
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func move_content(move: Vector2) -> void:
@@ -522,7 +522,7 @@ func transform_content_confirm() -> void:
 	angle = 0.0
 	content_pivot = Vector2.ZERO
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func transform_content_cancel() -> void:
@@ -555,7 +555,7 @@ func transform_content_cancel() -> void:
 	angle = 0.0
 	content_pivot = Vector2.ZERO
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
