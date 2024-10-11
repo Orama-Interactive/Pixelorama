@@ -535,7 +535,7 @@ func _open_project_file() -> void:
 	if OS.get_name() == "Web":
 		Html5FileExchange.load_image()
 	else:
-		_popup_dialog(Global.open_sprites_dialog)
+		_popup_dialog(Global.control.open_sprite_dialog)
 		Global.control.opensprite_file_selected = false
 
 

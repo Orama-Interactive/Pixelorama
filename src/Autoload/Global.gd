@@ -641,10 +641,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 ## The patterns popup dialog used to display patterns
 ## It has the [param PatternsPopup.gd] script attached.
 @onready var patterns_popup: Popup = control.find_child("PatternsPopup")
-## Dialog used to navigate and open images and projects.
-@onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
-## Dialog used to save (.pxo) projects.
-@onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
 ## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
 ## An error dialog to show errors.

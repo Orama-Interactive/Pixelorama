@@ -3,7 +3,7 @@ extends Panel
 signal animation_started(forward: bool)
 signal animation_finished
 
-enum LoopType {NO, CYCLE, PINGPONG}
+enum LoopType { NO, CYCLE, PINGPONG }
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"

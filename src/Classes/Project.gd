@@ -203,9 +203,6 @@ func change_project() -> void:
 	Global.get_window().title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.get_window().title = Global.get_window().title + "(*)"
-	if export_directory_path != "":
-		Global.open_sprites_dialog.current_path = export_directory_path
-		Global.save_sprites_dialog.current_path = export_directory_path
 	selection_map_changed()
 
 
