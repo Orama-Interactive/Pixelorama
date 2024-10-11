@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-10-11 11:20\n"
+"PO-Revision-Date: 2024-10-11 12:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2763,11 +2763,11 @@ msgstr "Ritaglia le immagini esportate nella loro porzione visibile, considerand
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Ritaglia il contenuto dell'immagine alla selezione"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Esporta solo contenuti che rientrano nei limiti di un'area selezionata."
 
 msgid "Close"
 msgstr "Chiudi"
