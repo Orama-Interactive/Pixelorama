@@ -27,6 +27,7 @@ func _ready() -> void:
 		change_theme(theme_id)
 	else:
 		change_clear_color()
+		change_icon_colors()
 
 
 func add_theme(theme: Theme) -> void:
