@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-10-11 11:19\n"
+"PO-Revision-Date: 2024-10-11 19:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2033,11 +2033,11 @@ msgstr "Activar dibujo de espejo vertical"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "Mover al centro del lienzo"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "Mover al centro de la vista"
 
 msgid "Current frame:"
 msgstr "Fotograma actual:"
@@ -2055,10 +2055,10 @@ msgid "Go to the previous frame"
 msgstr "Ir al fotograma anterior"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Reproducir la animación hacia atrás"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Reproducir la animación hacia adelante"
 
 msgid "Go to the next frame"
 msgstr "Ir al fotograma siguiente"
@@ -2563,11 +2563,11 @@ msgstr "Un color de fondo predeterminado de una nueva imagen"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Reestablecer todas las opciones disponibles en Preferencias"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Reestablecer opciones de línea de tiempo"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
@@ -2575,11 +2575,11 @@ msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Eliminar todas las extensiones"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Limpiar la lista de archivos abiertos recientemente"
 
 msgid "Lock aspect ratio"
 msgstr "Bloquear relación de aspecto"
@@ -2758,11 +2758,11 @@ msgstr "Recorta las imágenes exportadas a su porción visible, considerando cad
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Recortar contenido de la imagen a la selección"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Solo exportar contenido que está dentro de los los límites de un área seleccionada."
 
 msgid "Close"
 msgstr "Cerrar"
