@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-10-11 12:40\n"
+"PO-Revision-Date: 2024-10-11 22:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -3114,6 +3114,10 @@ msgstr "Κάτω ακτίνα:"
 msgid "Text:"
 msgstr "Κείμενο:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Μέγεθος εικονοστοιχείου:"
@@ -3124,6 +3128,9 @@ msgstr "Βήμα καμπυλότητας:"
 
 msgid "Horizontal alignment:"
 msgstr "Οριζόντια στοίχιση:"
+
+msgid "Vertical alignment:"
+msgstr ""
 
 msgid "Left"
 msgstr "Αριστερά"
