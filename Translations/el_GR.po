@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-10-11 22:50\n"
+"PO-Revision-Date: 2024-10-12 13:32\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -843,6 +843,10 @@ msgstr "Γλώσσα Συστήματος"
 
 msgid "Display scale:"
 msgstr "Κλίμακα εμφάνισης:"
+
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -3137,6 +3141,10 @@ msgstr "Αριστερά"
 
 msgid "Right"
 msgstr "Δεξιά"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
