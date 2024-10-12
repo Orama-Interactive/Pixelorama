@@ -65,6 +65,7 @@ var _object_names := {
 	"node3d_type:mesh:curve_step": $"%MeshCurveStep",
 	"node3d_type:mesh:horizontal_alignment": $"%MeshHorizontalAlignment",
 	"node3d_type:mesh:vertical_alignment": $"%MeshVerticalAlignment",
+	"node3d_type:mesh:line_spacing": $"%MeshLineSpacing",
 	"node3d_type:light_color": $"%LightColor",
 	"node3d_type:light_energy": $"%LightEnergy",
 	"node3d_type:light_negative": $"%LightNegative",
@@ -75,7 +76,7 @@ var _object_names := {
 }
 
 
-func sprite_changed_this_frame():
+func sprite_changed_this_frame() -> void:
 	_checker_update_qued = true
 	_old_cel_image = _cel.get_image()
 	Global.canvas.sprite_changed_this_frame = true

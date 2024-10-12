@@ -3059,6 +3059,10 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
 msgstr ""

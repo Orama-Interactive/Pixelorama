@@ -101,6 +101,7 @@ func serialize() -> Dictionary:
 				dict["mesh_curve_step"] = mesh.curve_step
 				dict["mesh_horizontal_alignment"] = mesh.horizontal_alignment
 				dict["mesh_vertical_alignment"] = mesh.vertical_alignment
+				dict["mesh_line_spacing"] = mesh.line_spacing
 	else:
 		dict["light_color"] = node3d_type.light_color
 		dict["light_energy"] = node3d_type.light_energy
@@ -163,6 +164,7 @@ func deserialize(dict: Dictionary) -> void:
 				mesh.curve_step = dict["mesh_curve_step"]
 				mesh.horizontal_alignment = dict["mesh_horizontal_alignment"]
 				mesh.vertical_alignment = dict["mesh_vertical_alignment"]
+				mesh.line_spacing = dict["mesh_line_spacing"]
 	else:
 		node3d_type.light_color = dict["light_color"]
 		node3d_type.light_energy = dict["light_energy"]
