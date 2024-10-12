@@ -1,68 +1,50 @@
 extends "res://src/Tools/BaseTool.gd"
 
-var loaded_fonts: Array[Font] = [preload("res://assets/fonts/Roboto-Regular.ttf")]
-var loaded_fonts_paths := PackedStringArray()
 var text_edit: TextToolEdit
-
-var font_data_index := 0
+var font_name := "":
+	set(value):
+		font_name = value
+		font.base_font = Global.find_font_from_name(font_name)
 var text_size := 16
 var outline_color := Color.WHITE
 var outline_size := 0
 
-@onready var font := FontFile.new()
-@onready var font_optionbutton: OptionButton = $FontOptionButton
+@onready var font := FontVariation.new()
+@onready var font_option_button: OptionButton = $FontOptionButton
 @onready var font_filedialog: FileDialog = $FontFileDialog
 
 
 func get_config() -> Dictionary:
 	return {
-		"font_data_index": font_data_index,
+		"font_name": font_name,
 		"text_size": text_size,
 		"outline_color": outline_color,
 		"outline_size": outline_size,
-		"loaded_fonts_paths": loaded_fonts_paths
 	}
 
 
 func set_config(config: Dictionary) -> void:
 	await get_tree().process_frame
-	# Handle loaded fonts.
-	loaded_fonts_paths = config.get("loaded_fonts_paths", loaded_fonts_paths)
+	var font_names := Global.get_available_font_names()
+	for font_name in font_names:
+		font_option_button.add_item(font_name)
 
-	var failed_paths := PackedStringArray()  # For invalid font paths.
-	for path in loaded_fonts_paths:
-		if !FileAccess.file_exists(path):
-			print("Failed to load ", path)
-			failed_paths.append(path)
-			continue
-		var file := FontFile.new()
-		file = load(path)
-		loaded_fonts.append(file)
-		var file_name := path.get_file().get_basename()
-		font_optionbutton.add_item(file_name)
-		print("Loaded ", path, " succesfully")
-
-	if failed_paths:
-		print(failed_paths)
-		for path in failed_paths:
-			loaded_fonts_paths.remove_at(loaded_fonts_paths.find(path))
-		save_config()
-
-	font_data_index = config.get("font_data_index", font_data_index)
-	if font_data_index >= loaded_fonts.size():
-		font_data_index = 0
+	font_name = config.get("font_name", "Roboto")
+	if font_name not in font_names:
+		font_name = "Roboto"
 	text_size = config.get("text_size", text_size)
 	outline_color = config.get("outline_color", outline_color)
 	outline_size = config.get("outline_size", outline_size)
-
-	font.data = loaded_fonts[font_data_index].data
 	#font.outline_color = outline_color
 	#font.outline_size = outline_size
 
 
 func update_config() -> void:
 	await get_tree().process_frame
-	#font_optionbutton.selected = loaded_fonts.find(font)
+	for i in font_option_button.item_count:
+		var item_name: String = font_option_button.get_item_text(i)
+		if font_name == item_name:
+			font_option_button.selected = i
 	$TextSizeSlider.value = text_size
 	#$OutlineContainer/OutlineColorPickerButton.color = outline_color
 	#$OutlineContainer/OutlineSlider.value = outline_size
@@ -171,7 +153,7 @@ func _get_undo_data() -> Dictionary:
 func _textedit_text_changed() -> void:
 	if !text_edit:
 		return
-	text_edit._on_TextToolEdit_text_changed()
+	text_edit._on_text_changed()
 
 
 func _on_text_size_slider_value_changed(value: float) -> void:
@@ -181,10 +163,7 @@ func _on_text_size_slider_value_changed(value: float) -> void:
 
 
 func _on_font_option_button_item_selected(index: int) -> void:
-	if index >= loaded_fonts.size():
-		return
-	font_data_index = index
-	font.data = loaded_fonts[index].data
+	font_name = font_option_button.get_item_text(index)
 	_textedit_text_changed()
 	save_config()
 
@@ -201,11 +180,9 @@ func _on_font_file_dialog_files_selected(paths: PackedStringArray) -> void:
 			continue
 		var file := FontFile.new()
 		file = load(path)
-		loaded_fonts.append(file)
 		var file_name = path.get_file().get_basename()
-		font_optionbutton.add_item(file_name)
+		font_option_button.add_item(file_name)
 		print("Loaded ", path, " succesfully")
-		loaded_fonts_paths.append(path)
 	save_config()
 
 

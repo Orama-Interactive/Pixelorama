@@ -24,4 +24,9 @@ script = ExtResource("3_tidsq")
 prefix = "Size:"
 suffix = "px"
 
+[node name="FontOptionButton" type="OptionButton" parent="." index="3"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
 [connection signal="value_changed" from="TextSizeSlider" to="." method="_on_text_size_slider_value_changed"]
+[connection signal="item_selected" from="FontOptionButton" to="." method="_on_font_option_button_item_selected"]
