@@ -828,6 +828,10 @@ msgstr ""
 msgid "Display scale:"
 msgstr ""
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr ""

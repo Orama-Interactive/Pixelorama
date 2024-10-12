@@ -163,6 +163,9 @@ var default_layouts: Array[DockableLayout] = [
 	preload("res://assets/layouts/Tallscreen.tres"),
 ]
 var layouts: Array[DockableLayout] = []
+var loaded_fonts: Array[Font] = [
+	ThemeDB.fallback_font, preload("res://assets/fonts/Roboto-Regular.ttf")
+]
 
 # Canvas related stuff
 ## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
@@ -604,7 +607,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 ## The control node (aka Main node). It has the [param Main.gd] script attached.
 @onready var control := get_tree().current_scene as Control
-
 ## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
 ## Contains viewport of the main canvas. It has the [param ViewportContainer.gd] script attached.
@@ -617,7 +619,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
-
 ## The perspective editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
@@ -634,7 +635,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-
 ## The brushes popup dialog used to display brushes.
 ## It has the [param BrushesPopup.gd] script attached.
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")
@@ -1026,6 +1026,32 @@ func find_nearest_locale(locale: String) -> String:
 			max_similarity_score = compared
 			closest_locale = loaded_locale
 	return closest_locale
+
+
+func get_available_font_names() -> PackedStringArray:
+	var font_names := PackedStringArray()
+	for font in loaded_fonts:
+		var font_name := font.get_font_name()
+		if font_name in font_names:
+			continue
+		font_names.append(font_name)
+	for system_font_name in OS.get_system_fonts():
+		if system_font_name in font_names:
+			continue
+		font_names.append(system_font_name)
+	return font_names
+
+
+func find_font_from_name(font_name: String) -> Font:
+	for font in loaded_fonts:
+		if font.get_font_name() == font_name:
+			return font
+	for system_font_name in OS.get_system_fonts():
+		if system_font_name == font_name:
+			var system_font := SystemFont.new()
+			system_font.font_names = [font_name]
+			return system_font
+	return ThemeDB.fallback_font
 
 
 ## Used by undo/redo operations to store compressed images in memory.

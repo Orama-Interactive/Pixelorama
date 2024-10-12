@@ -510,13 +510,26 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
+[node name="MeshFontLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Font:"
+clip_text = true
+
+[node name="MeshFont" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+
+[node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pixel size:"
 clip_text = true
 
-[node name="MeshPixelSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
+[node name="MeshPixelSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -536,13 +549,13 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 snap_step = 0.01
 
-[node name="MeshFontSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
+[node name="MeshFontSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Font size:"
 clip_text = true
 
-[node name="MeshFontSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
+[node name="MeshFontSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -561,13 +574,13 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 snap_step = 2.0
 
-[node name="MeshDepthLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
+[node name="MeshDepthLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Depth:"
 clip_text = true
 
-[node name="MeshDepth" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
+[node name="MeshDepth" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="29"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -585,13 +598,13 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 snap_step = 2.0
 
-[node name="MeshOffsetLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
+[node name="MeshOffsetLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="30"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Offset:"
 clip_text = true
 
-[node name="MeshOffsetV2" parent="ObjectOptions/MeshOptions/GridContainer" index="29" instance=ExtResource("3")]
+[node name="MeshOffsetV2" parent="ObjectOptions/MeshOptions/GridContainer" index="31" instance=ExtResource("3")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -601,13 +614,13 @@ allow_lesser = true
 show_ratio = true
 snap_step = 0.01
 
-[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="30"]
+[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="32"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Curve step:"
 clip_text = true
 
-[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="31"]
+[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="33"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -626,13 +639,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="32"]
+[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="34"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Horizontal alignment:"
 clip_text = true
 
-[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="33"]
+[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="35"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -647,13 +660,13 @@ popup/item_2/id = 2
 popup/item_3/text = "Fill"
 popup/item_3/id = 3
 
-[node name="MeshVerticalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="34"]
+[node name="MeshVerticalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="36"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Vertical alignment:"
 clip_text = true
 
-[node name="MeshVerticalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="35"]
+[node name="MeshVerticalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="37"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -666,13 +679,13 @@ popup/item_1/id = 1
 popup/item_2/text = "Bottom"
 popup/item_2/id = 2
 
-[node name="MeshLineSpacingLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="36"]
+[node name="MeshLineSpacingLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="38"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Line spacing:"
 clip_text = true
 
-[node name="MeshLineSpacing" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="37"]
+[node name="MeshLineSpacing" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="39"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

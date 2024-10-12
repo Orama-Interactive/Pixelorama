@@ -93,6 +93,7 @@ func serialize() -> Dictionary:
 				dict["mesh_ring_segments"] = mesh.ring_segments
 				dict["mesh_rings"] = mesh.rings
 			Type.TEXT:
+				dict["mesh_font_name"] = mesh.font.get_font_name()
 				dict["mesh_text"] = mesh.text
 				dict["mesh_pixel_size"] = mesh.pixel_size
 				dict["mesh_font_size"] = mesh.font_size
@@ -156,6 +157,7 @@ func deserialize(dict: Dictionary) -> void:
 				mesh.ring_segments = dict["mesh_ring_segments"]
 				mesh.rings = dict["mesh_rings"]
 			Type.TEXT:
+				mesh.font = Global.find_font_from_name(dict["mesh_font_name"])
 				mesh.text = dict["mesh_text"]
 				mesh.pixel_size = dict["mesh_pixel_size"]
 				mesh.font_size = dict["mesh_font_size"]
