@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-10-12 13:32\n"
+"PO-Revision-Date: 2024-10-12 16:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -843,7 +843,7 @@ msgstr "Escala de la interfaz:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Fuente:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -3116,7 +3116,7 @@ msgstr "Texto:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Profundidad:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3130,7 +3130,7 @@ msgid "Horizontal alignment:"
 msgstr "Alineación horizontal:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Alineación vertical:"
 
 msgid "Left"
 msgstr "Izquierda"
@@ -3140,7 +3140,7 @@ msgstr "Derecha"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Interlineado:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
