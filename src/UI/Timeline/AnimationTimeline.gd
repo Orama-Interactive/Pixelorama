@@ -236,6 +236,7 @@ func _fill_blend_modes_option_button() -> void:
 		# Special blend mode that appears only when group layers are selected
 		blend_modes_button.add_item("Pass through", BaseLayer.BlendModes.PASS_THROUGH)
 	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
+	blend_modes_button.add_item("Erase", BaseLayer.BlendModes.ERASE)
 	blend_modes_button.add_separator("Darken")
 	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
 	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
@@ -253,8 +254,7 @@ func _fill_blend_modes_option_button() -> void:
 	blend_modes_button.add_separator("Inversion")
 	blend_modes_button.add_item("Difference", BaseLayer.BlendModes.DIFFERENCE)
 	blend_modes_button.add_item("Exclusion", BaseLayer.BlendModes.EXCLUSION)
-	blend_modes_button.add_item("Subtract (RGB)", BaseLayer.BlendModes.SUBTRACT_RGB)
-	blend_modes_button.add_item("Subtract (Alpha)", BaseLayer.BlendModes.SUBTRACT_ALPHA)
+	blend_modes_button.add_item("Subtract", BaseLayer.BlendModes.SUBTRACT)
 	blend_modes_button.add_item("Divide", BaseLayer.BlendModes.DIVIDE)
 	blend_modes_button.add_separator("Component")
 	blend_modes_button.add_item("Hue", BaseLayer.BlendModes.HUE)

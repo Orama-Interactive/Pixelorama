@@ -63,52 +63,52 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 	vec4 result;
 	bool should_blend_alpha = true;
 	switch(blend_type) {
-		case 1: // Darken
-			result.rgb = min(prev_color.rgb, current_color.rgb);
-			break;
-		case 2: // Multiply
-			result.rgb = prev_color.rgb * current_color.rgb;
-			break;
-		case 3: // Color burn
-			result.rgb = 1.0 - (1.0 - prev_color.rgb) / current_color.rgb;
-			break;
-		case 4: // Linear burn
-			result.rgb = prev_color.rgb + current_color.rgb - 1.0;
-			break;
-		case 5: // Lighten
-			result.rgb = max(prev_color.rgb, current_color.rgb);
-			break;
-		case 6: // Screen
-			result.rgb = 1.0 - (1.0 - prev_color.rgb) * (1.0 - current_color.rgb);
-			break;
-		case 7: // Color dodge
-			result.rgb = prev_color.rgb / (1.0 - current_color.rgb);
-			break;
-		case 8: // Add (linear dodge)
-			result.rgb = prev_color.rgb + current_color.rgb;
-			break;
-		case 9: // Overlay
-			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb, 1.0 - 2.0 * (1.0 - current_color.rgb) * (1.0 - prev_color.rgb), round(prev_color.rgb));
-			break;
-		case 10: // Soft light
-			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb + prev_color.rgb * prev_color.rgb * (1.0 - 2.0 * current_color.rgb), sqrt(prev_color.rgb) * (2.0 * current_color.rgb - 1.0) + (2.0 * prev_color.rgb) * (1.0 - current_color.rgb), round(prev_color.rgb));
-			break;
-		case 11: // Hard light
-			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb, 1.0 - 2.0 * (1.0 - current_color.rgb) * (1.0 - prev_color.rgb), round(current_color.rgb));
-			break;
-		case 12: // Difference
-			result.rgb = abs(prev_color.rgb - current_color.rgb);
-			break;
-		case 13: // Exclusion
-			result.rgb = prev_color.rgb + current_color.rgb - 2.0 * prev_color.rgb * current_color.rgb;
-			break;
-		case 14: // Subtract (RGB)
-			result.rgb = prev_color.rgb - current_color.rgb;
-			break;
-		case 15: // Subtract (Alpha)
+		case 1: // Erase
 			result = prev_color;
 			result.a -= current_color.a;  // clamping will be done at the end so not doing it here.
 			should_blend_alpha = false;
+			break;
+		case 2: // Darken
+			result.rgb = min(prev_color.rgb, current_color.rgb);
+			break;
+		case 3: // Multiply
+			result.rgb = prev_color.rgb * current_color.rgb;
+			break;
+		case 4: // Color burn
+			result.rgb = 1.0 - (1.0 - prev_color.rgb) / current_color.rgb;
+			break;
+		case 5: // Linear burn
+			result.rgb = prev_color.rgb + current_color.rgb - 1.0;
+			break;
+		case 6: // Lighten
+			result.rgb = max(prev_color.rgb, current_color.rgb);
+			break;
+		case 7: // Screen
+			result.rgb = 1.0 - (1.0 - prev_color.rgb) * (1.0 - current_color.rgb);
+			break;
+		case 8: // Color dodge
+			result.rgb = prev_color.rgb / (1.0 - current_color.rgb);
+			break;
+		case 9: // Add (linear dodge)
+			result.rgb = prev_color.rgb + current_color.rgb;
+			break;
+		case 10: // Overlay
+			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb, 1.0 - 2.0 * (1.0 - current_color.rgb) * (1.0 - prev_color.rgb), round(prev_color.rgb));
+			break;
+		case 11: // Soft light
+			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb + prev_color.rgb * prev_color.rgb * (1.0 - 2.0 * current_color.rgb), sqrt(prev_color.rgb) * (2.0 * current_color.rgb - 1.0) + (2.0 * prev_color.rgb) * (1.0 - current_color.rgb), round(prev_color.rgb));
+			break;
+		case 12: // Hard light
+			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb, 1.0 - 2.0 * (1.0 - current_color.rgb) * (1.0 - prev_color.rgb), round(current_color.rgb));
+			break;
+		case 13: // Difference
+			result.rgb = abs(prev_color.rgb - current_color.rgb);
+			break;
+		case 14: // Exclusion
+			result.rgb = prev_color.rgb + current_color.rgb - 2.0 * prev_color.rgb * current_color.rgb;
+			break;
+		case 15: // Subtract
+			result.rgb = prev_color.rgb - current_color.rgb;
 			break;
 		case 16: // Divide
 			result.rgb = prev_color.rgb / current_color.rgb;
