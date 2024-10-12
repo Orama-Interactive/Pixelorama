@@ -39,6 +39,7 @@ func _fill_blend_modes_option_button() -> void:
 		# Special blend mode that appears only when group layers are selected
 		blend_modes_button.add_item("Pass through", BaseLayer.BlendModes.PASS_THROUGH)
 	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
+	blend_modes_button.add_item("Erase", BaseLayer.BlendModes.ERASE)
 	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
 	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
 	blend_modes_button.add_item("Color burn", BaseLayer.BlendModes.COLOR_BURN)
