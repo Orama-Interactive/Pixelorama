@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-10-11 22:50\n"
+"PO-Revision-Date: 2024-10-12 13:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -841,6 +841,10 @@ msgstr "Limba sistemului"
 
 msgid "Display scale:"
 msgstr "Scară de afișare:"
+
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -3115,7 +3119,7 @@ msgstr "Text:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Adâncime:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3129,13 +3133,17 @@ msgid "Horizontal alignment:"
 msgstr "Aliniere orizontală:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Aliniere verticală:"
 
 msgid "Left"
 msgstr "Stânga"
 
 msgid "Right"
 msgstr "Dreapta"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
