@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-10-12 13:32\n"
+"PO-Revision-Date: 2024-10-12 14:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -846,7 +846,7 @@ msgstr "表示スケール:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "フォント:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -3145,7 +3145,7 @@ msgstr "右"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "行間隔:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
