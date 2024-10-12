@@ -61,6 +61,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 		return prev_color;
 	}
 	vec4 result;
+	bool should_blend_alpha = true;
 	switch(blend_type) {
 		case 1: // Darken
 			result.rgb = min(prev_color.rgb, current_color.rgb);
@@ -101,28 +102,33 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 		case 13: // Exclusion
 			result.rgb = prev_color.rgb + current_color.rgb - 2.0 * prev_color.rgb * current_color.rgb;
 			break;
-		case 14: // Subtract
+		case 14: // Subtract (RGB)
 			result.rgb = prev_color.rgb - current_color.rgb;
 			break;
-		case 15: // Divide
+		case 15: // Subtract (Alpha)
+			result = prev_color;
+			result.a -= current_color.a;  // clamping will be done at the end so not doing it here.
+			should_blend_alpha = false;
+			break;
+		case 16: // Divide
 			result.rgb = prev_color.rgb / current_color.rgb;
 			break;
-		case 16: // Hue
+		case 17: // Hue
 			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
 			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
 			result.rgb = hsl_to_rgb(vec3(current_hsl.r, prev_hsl.g, prev_hsl.b));
 			break;
-		case 17: // Saturation
+		case 18: // Saturation
 			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
 			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
 			result.rgb = hsl_to_rgb(vec3(prev_hsl.r, current_hsl.g, prev_hsl.b));
 			break;
-		case 18: // Color
+		case 19: // Color
 			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
 			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
 			result.rgb = hsl_to_rgb(vec3(current_hsl.r, current_hsl.g, prev_hsl.b));
 			break;
-		case 19: // Luminosity
+		case 20: // Luminosity
 			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
 			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
 			result.rgb = hsl_to_rgb(vec3(prev_hsl.r, prev_hsl.g, current_hsl.b));
@@ -132,7 +138,9 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			break;
 	}
 	result.rgb = mix(prev_color.rgb, result.rgb, current_color.a);
-	result.a = prev_color.a * (1.0 - current_color.a) + current_color.a;
+	if (should_blend_alpha){
+		result.a = prev_color.a * (1.0 - current_color.a) + current_color.a;
+	}
 	result = clamp(result, 0.0, 1.0);
 	return mix(current_color, result, prev_color.a);
 }

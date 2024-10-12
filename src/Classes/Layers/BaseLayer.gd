@@ -25,7 +25,8 @@ enum BlendModes {
 	HARD_LIGHT,  ## Like Screen mode in bright blending colors and Multiply mode in darker colors.
 	DIFFERENCE,  ## Subtracts the blend color from the base or vice versa, depending on the brightness.
 	EXCLUSION,  ## Similar to Difference mode, but with less contrast between the colors.
-	SUBTRACT,  ## Darkens by subtracting the numerical values of the blend colors from the base.
+	SUBTRACT_RGB,  ## Darkens by subtracting the numerical values of the blend colors from the base.
+	SUBTRACT_ALPHA,  ## Subtracts the numerical value of alpha from the base alpha.
 	DIVIDE,  ## Divides the numerical values of the base colors by the blend.
 	HUE,  ## Uses the blend hue while preserving the base saturation and luminosity.
 	SATURATION,  ## Uses the blend saturation while preserving the base hue and luminosity.
