@@ -11,8 +11,6 @@ var antialiasing := TextServer.FONT_ANTIALIASING_NONE:
 	set(value):
 		antialiasing = value
 		font.base_font.antialiasing = antialiasing
-var outline_color := Color.WHITE
-var outline_size := 0
 
 @onready var font := FontVariation.new()
 @onready var font_option_button: OptionButton = $GridContainer/FontOptionButton
@@ -31,8 +29,6 @@ func get_config() -> Dictionary:
 	return {
 		"font_name": font_name,
 		"text_size": text_size,
-		"outline_color": outline_color,
-		"outline_size": outline_size,
 	}
 
 
@@ -41,10 +37,6 @@ func set_config(config: Dictionary) -> void:
 	if font_name not in Global.get_available_font_names():
 		font_name = "Roboto"
 	text_size = config.get("text_size", text_size)
-	outline_color = config.get("outline_color", outline_color)
-	outline_size = config.get("outline_size", outline_size)
-	#font.outline_color = outline_color
-	#font.outline_size = outline_size
 
 
 func update_config() -> void:
@@ -53,8 +45,6 @@ func update_config() -> void:
 		if font_name == item_name:
 			font_option_button.selected = i
 	$TextSizeSlider.value = text_size
-	#$OutlineContainer/OutlineColorPickerButton.color = outline_color
-	#$OutlineContainer/OutlineSlider.value = outline_size
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -109,8 +99,7 @@ func text_to_pixels() -> void:
 	var texts := text_edit.text.split("\n")
 	var pos := text_edit.position + Vector2(1, font.get_ascent())
 	for text in texts:
-		font.draw_string(ci_rid, pos, text, 0, -1, text_size, tool_slot.color)
-		#font.draw_string_outline(ci_rid, pos, text, 0, -1, text_size, 6, tool_slot.color)
+		font.draw_string(ci_rid, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, text_size, tool_slot.color)
 		pos.y += font.get_height()
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
@@ -184,18 +173,6 @@ func _on_font_option_button_item_selected(index: int) -> void:
 
 func _on_antialiasing_option_button_item_selected(index: TextServer.FontAntialiasing) -> void:
 	antialiasing = index
-
-
-func _on_outline_color_picker_button_color_changed(color: Color) -> void:
-	outline_color = color
-	font.outline_color = color
-	save_config()
-
-
-func _on_outline_slider_value_changed(value: float) -> void:
-	outline_size = value
-	font.outline_size = value
-	save_config()
 
 
 func _exit_tree() -> void:
