@@ -9,7 +9,7 @@ func _ready() -> void:
 	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		pen_inverted = event.pen_inverted
 		return
