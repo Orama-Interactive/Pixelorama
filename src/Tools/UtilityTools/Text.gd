@@ -5,13 +5,26 @@ var font_name := "":
 	set(value):
 		font_name = value
 		font.base_font = Global.find_font_from_name(font_name)
+		font.base_font.antialiasing = antialiasing
 var text_size := 16
+var antialiasing := TextServer.FONT_ANTIALIASING_NONE:
+	set(value):
+		antialiasing = value
+		font.base_font.antialiasing = antialiasing
 var outline_color := Color.WHITE
 var outline_size := 0
 
 @onready var font := FontVariation.new()
-@onready var font_option_button: OptionButton = $FontOptionButton
-@onready var font_filedialog: FileDialog = $FontFileDialog
+@onready var font_option_button: OptionButton = $GridContainer/FontOptionButton
+
+
+func _ready() -> void:
+	var font_names := Global.get_available_font_names()
+	for f_name in font_names:
+		font_option_button.add_item(f_name)
+	Tools.color_changed.connect(_on_color_changed)
+	super._ready()
+
 
 
 func get_config() -> Dictionary:
@@ -24,13 +37,8 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	await get_tree().process_frame
-	var font_names := Global.get_available_font_names()
-	for font_name in font_names:
-		font_option_button.add_item(font_name)
-
 	font_name = config.get("font_name", "Roboto")
-	if font_name not in font_names:
+	if font_name not in Global.get_available_font_names():
 		font_name = "Roboto"
 	text_size = config.get("text_size", text_size)
 	outline_color = config.get("outline_color", outline_color)
@@ -40,7 +48,6 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	await get_tree().process_frame
 	for i in font_option_button.item_count:
 		var item_name: String = font_option_button.get_item_text(i)
 		if font_name == item_name:
@@ -151,9 +158,16 @@ func _get_undo_data() -> Dictionary:
 
 
 func _textedit_text_changed() -> void:
-	if !text_edit:
+	if not is_instance_valid(text_edit):
 		return
+	if text_edit.font != font:
+		text_edit.font = font
 	text_edit._on_text_changed()
+
+
+func _on_color_changed(_color: Color, _button: int) -> void:
+	if is_instance_valid(text_edit):
+		text_edit.add_theme_color_override("font_color", tool_slot.color)
 
 
 func _on_text_size_slider_value_changed(value: float) -> void:
@@ -168,26 +182,8 @@ func _on_font_option_button_item_selected(index: int) -> void:
 	save_config()
 
 
-func _on_load_font_button_pressed() -> void:
-	font_filedialog.popup_centered()
-	Global.dialog_open(true)
-
-
-func _on_font_file_dialog_files_selected(paths: PackedStringArray) -> void:
-	for path in paths:
-		if !FileAccess.file_exists(path):
-			print("Failed to load ", path)
-			continue
-		var file := FontFile.new()
-		file = load(path)
-		var file_name = path.get_file().get_basename()
-		font_option_button.add_item(file_name)
-		print("Loaded ", path, " succesfully")
-	save_config()
-
-
-func _on_font_file_dialog_popup_hide() -> void:
-	Global.dialog_open(false)
+func _on_antialiasing_option_button_item_selected(index: TextServer.FontAntialiasing) -> void:
+	antialiasing = index
 
 
 func _on_outline_color_picker_button_color_changed(color: Color) -> void:

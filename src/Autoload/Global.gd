@@ -1071,7 +1071,7 @@ func get_available_font_names() -> PackedStringArray:
 func find_font_from_name(font_name: String) -> Font:
 	for font in loaded_fonts:
 		if font.get_font_name() == font_name:
-			return font
+			return font.duplicate()
 	for system_font_name in OS.get_system_fonts():
 		if system_font_name == font_name:
 			var system_font := SystemFont.new()

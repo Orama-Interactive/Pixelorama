@@ -24,9 +24,35 @@ script = ExtResource("3_tidsq")
 prefix = "Size:"
 suffix = "px"
 
-[node name="FontOptionButton" type="OptionButton" parent="." index="3"]
+[node name="GridContainer" type="GridContainer" parent="." index="3"]
 layout_mode = 2
+columns = 2
+
+[node name="FontLabel" type="Label" parent="GridContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Font:"
+
+[node name="FontOptionButton" type="OptionButton" parent="GridContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
+[node name="AntialiasingLabel" type="Label" parent="GridContainer" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Antialiasing:"
+
+[node name="AntialiasingOptionButton" type="OptionButton" parent="GridContainer" index="3"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "None"
+popup/item_1/text = "Grayscale"
+popup/item_1/id = 1
+popup/item_2/text = "LCD"
+popup/item_2/id = 2
+
 [connection signal="value_changed" from="TextSizeSlider" to="." method="_on_text_size_slider_value_changed"]
-[connection signal="item_selected" from="FontOptionButton" to="." method="_on_font_option_button_item_selected"]
+[connection signal="item_selected" from="GridContainer/FontOptionButton" to="." method="_on_font_option_button_item_selected"]
+[connection signal="item_selected" from="GridContainer/AntialiasingOptionButton" to="." method="_on_antialiasing_option_button_item_selected"]
