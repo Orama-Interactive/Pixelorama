@@ -25,7 +25,6 @@ func _ready() -> void:
 	super._ready()
 
 
-
 func get_config() -> Dictionary:
 	return {
 		"font_name": font_name,
@@ -100,7 +99,9 @@ func text_to_pixels() -> void:
 	RenderingServer.viewport_set_canvas_transform(vp, canvas, Transform2D())
 	RenderingServer.canvas_item_set_parent(ci_rid, canvas)
 	var texture := RenderingServer.texture_2d_create(image)
-	RenderingServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2(0, 0), project.size), texture)
+	RenderingServer.canvas_item_add_texture_rect(
+		ci_rid, Rect2(Vector2(0, 0), project.size), texture
+	)
 
 	var texts := text_edit.text.split("\n")
 	var pos := Vector2(1, font.get_ascent() + text_edit.get_theme_constant(&"line_spacing"))
