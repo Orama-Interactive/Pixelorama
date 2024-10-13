@@ -92,7 +92,7 @@ func get_rects(
 			side_b = test_image.get_size().x
 	var line := 0
 	while line < side_a:
-		for element: int in side_b:
+		for element in range(side_b):
 			var position := Vector2i(line, element)
 			if scan_dir == DETECT_HORIZONTAL_EMPTY_LINES:
 				position = Vector2i(element, line)
