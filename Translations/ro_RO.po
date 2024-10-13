@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-10-12 13:32\n"
+"PO-Revision-Date: 2024-10-13 13:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -844,7 +844,7 @@ msgstr "Scară de afișare:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Font:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -3143,7 +3143,7 @@ msgstr "Dreapta"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Spațiere între linii:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
