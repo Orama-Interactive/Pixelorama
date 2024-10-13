@@ -1,12 +1,13 @@
-extends "res://src/Tools/BaseTool.gd"
+extends BaseTool
 
 var text_edit: TextToolEdit
+var text_size := 16
 var font_name := "":
 	set(value):
 		font_name = value
 		font.base_font = Global.find_font_from_name(font_name)
 		font.base_font.antialiasing = antialiasing
-var text_size := 16
+var horizontal_alignment := HORIZONTAL_ALIGNMENT_LEFT
 var antialiasing := TextServer.FONT_ANTIALIASING_NONE:
 	set(value):
 		antialiasing = value
@@ -29,6 +30,8 @@ func get_config() -> Dictionary:
 	return {
 		"font_name": font_name,
 		"text_size": text_size,
+		"horizontal_alignment": horizontal_alignment,
+		"antialiasing": antialiasing
 	}
 
 
@@ -37,6 +40,8 @@ func set_config(config: Dictionary) -> void:
 	if font_name not in Global.get_available_font_names():
 		font_name = "Roboto"
 	text_size = config.get("text_size", text_size)
+	horizontal_alignment = config.get("horizontal_alignment", horizontal_alignment)
+	antialiasing = config.get("antialiasing", antialiasing)
 
 
 func update_config() -> void:
@@ -57,7 +62,8 @@ func draw_start(pos: Vector2i) -> void:
 	text_edit = TextToolEdit.new()
 	text_edit.text = ""
 	text_edit.font = font
-	text_edit.add_theme_color_override("font_color", tool_slot.color)
+	text_edit.add_theme_color_override(&"font_color", tool_slot.color)
+	text_edit.add_theme_font_size_override(&"font_size", text_size)
 	Global.canvas.add_child(text_edit)
 	text_edit.position = pos - Vector2i(0, text_edit.custom_minimum_size.y / 2)
 
@@ -99,7 +105,7 @@ func text_to_pixels() -> void:
 	var texts := text_edit.text.split("\n")
 	var pos := text_edit.position + Vector2(1, font.get_ascent())
 	for text in texts:
-		font.draw_string(ci_rid, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, text_size, tool_slot.color)
+		font.draw_string(ci_rid, pos, text, horizontal_alignment, -1, text_size, tool_slot.color)
 		pos.y += font.get_height()
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
@@ -151,12 +157,13 @@ func _textedit_text_changed() -> void:
 		return
 	if text_edit.font != font:
 		text_edit.font = font
+	text_edit.add_theme_font_size_override(&"font_size", text_size)
 	text_edit._on_text_changed()
 
 
 func _on_color_changed(_color: Color, _button: int) -> void:
 	if is_instance_valid(text_edit):
-		text_edit.add_theme_color_override("font_color", tool_slot.color)
+		text_edit.add_theme_color_override(&"font_color", tool_slot.color)
 
 
 func _on_text_size_slider_value_changed(value: float) -> void:
@@ -169,6 +176,10 @@ func _on_font_option_button_item_selected(index: int) -> void:
 	font_name = font_option_button.get_item_text(index)
 	_textedit_text_changed()
 	save_config()
+
+
+func _on_horizontal_alignment_option_button_item_selected(index: int) -> void:
+	horizontal_alignment = index
 
 
 func _on_antialiasing_option_button_item_selected(index: TextServer.FontAntialiasing) -> void:

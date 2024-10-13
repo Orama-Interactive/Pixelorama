@@ -8,7 +8,7 @@ const VALUE_ARROW_PRESS := preload("res://assets/graphics/misc/value_arrow_press
 var font: Font:
 	set(value):
 		font = value
-		add_theme_font_override("font", font)
+		add_theme_font_override(&"font", font)
 var drag := false
 
 
@@ -56,8 +56,8 @@ func _on_drag_gui_input(event: InputEvent) -> void:
 func _on_text_changed() -> void:
 	if not font:
 		return
-	size.x = 16 + font.get_string_size(get_line(_get_max_line())).x
-	size.y = get_line_count() * font.get_height() + 16
+	size.x = get_theme_font_size(&"font_size") + font.get_string_size(get_line(_get_max_line())).x
+	size.y = get_line_count() * font.get_height() + get_theme_font_size(&"font_size")
 
 
 func _on_drag_button_down() -> void:
