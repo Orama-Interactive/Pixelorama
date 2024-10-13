@@ -39,6 +39,7 @@ text = "Font:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+fit_to_longest_item = false
 
 [node name="HorizontalAlignmentLabel" type="Label" parent="GridContainer" index="2"]
 layout_mode = 2

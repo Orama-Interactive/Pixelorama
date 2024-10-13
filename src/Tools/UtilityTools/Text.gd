@@ -103,7 +103,8 @@ func text_to_pixels() -> void:
 	RenderingServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2(0, 0), project.size), texture)
 
 	var texts := text_edit.text.split("\n")
-	var pos := text_edit.position + Vector2(1, font.get_ascent())
+	var pos := Vector2(1, font.get_ascent() + text_edit.get_theme_constant(&"line_spacing"))
+	pos += text_edit.position
 	for text in texts:
 		font.draw_string(ci_rid, pos, text, horizontal_alignment, -1, text_size, tool_slot.color)
 		pos.y += font.get_height()

@@ -13,6 +13,15 @@ var drag := false
 
 
 func _ready() -> void:
+	var stylebox := StyleBoxFlat.new()
+	stylebox.draw_center = false
+	stylebox.border_width_left = 1
+	stylebox.border_width_top = 1
+	stylebox.border_width_right = 1
+	stylebox.border_width_bottom = 1
+	add_theme_stylebox_override(&"normal", stylebox)
+	add_theme_stylebox_override(&"focus", stylebox)
+	add_theme_constant_override(&"line_spacing", 0)
 	var drag_button := TextureButton.new()
 	drag_button.anchor_left = 0.5
 	drag_button.anchor_right = 0.5
