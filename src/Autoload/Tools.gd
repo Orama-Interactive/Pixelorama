@@ -435,7 +435,8 @@ func remove_tool(t: Tool) -> void:
 
 func set_tool(tool_name: String, button: int) -> void:
 	## To prevent any unintentional syncing, we will temporarily disconnect the signal
-	Tools.config_changed.disconnect(attempt_config_share)
+	if Tools.config_changed.is_connected(attempt_config_share):
+		Tools.config_changed.disconnect(attempt_config_share)
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
 	var node: Node = tools[tool_name].instantiate_scene()
@@ -460,7 +461,8 @@ func set_tool(tool_name: String, button: int) -> void:
 
 	# Wait for config to get loaded, then re-connect and sync
 	await get_tree().process_frame
-	Tools.config_changed.connect(attempt_config_share)
+	if not Tools.config_changed.is_connected(attempt_config_share):
+		Tools.config_changed.connect(attempt_config_share)
 	attempt_config_share(config_slot)  # Sync it with the other tool
 
 
