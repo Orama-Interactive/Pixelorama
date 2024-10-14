@@ -71,7 +71,7 @@ size_flags_vertical = 3
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-columns = 5
+columns = 6
 
 [node name="Horizontal" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(44, 32)
@@ -105,6 +105,8 @@ anchor_bottom = 0.5
 offset_left = -22.0
 offset_top = -10.0
 offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "Move to canvas center"
@@ -234,6 +236,25 @@ offset_top = -10.0
 offset_right = 11.0
 offset_bottom = 10.0
 texture = ExtResource("6")
+
+[node name="ShareConfig" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Lock alpha"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut = SubResource("Shortcut_vcyug")
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/ShareConfig"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 11.0
+offset_bottom = 10.0
 
 [node name="DynamicsPanel" type="PopupPanel" parent="."]
 canvas_item_default_texture_filter = 0
@@ -545,6 +566,7 @@ offset_bottom = 23.0
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/PixelPerfect" to="." method="_on_PixelPerfect_toggled"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/AlphaLock" to="." method="_on_alpha_lock_toggled"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Dynamics" to="." method="_on_Dynamics_pressed"]
+[connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/ShareConfig" to="." method="_on_share_config_toggled"]
 [connection signal="toggled" from="DynamicsPanel/VBoxContainer/StabilizerContainer/EnableStabilizer" to="DynamicsPanel" method="_on_enable_stabilizer_toggled"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/StabilizerContainer/StabilizerValue" to="DynamicsPanel" method="_on_stabilizer_value_value_changed"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMin" to="DynamicsPanel" method="_on_alpha_min_value_changed"]

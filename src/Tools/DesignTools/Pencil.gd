@@ -50,6 +50,7 @@ func _on_SpacingMode_toggled(button_pressed: bool) -> void:
 
 func _on_Spacing_value_changed(value: Vector2) -> void:
 	_spacing = value
+	save_config()
 
 
 func _input(event: InputEvent) -> void:

@@ -113,6 +113,11 @@ func get_config() -> Dictionary:
 		"brush_index": _brush.index,
 		"brush_size": _brush_size,
 		"brush_interpolate": _brush_interpolate,
+		"brush_flip_x": _brush_flip_x,
+		"brush_flip_y": _brush_flip_y,
+		"brush_rotate_90": _brush_rotate_90,
+		"brush_rotate_180": _brush_rotate_180,
+		"brush_rotate_270": _brush_rotate_270,
 	}
 
 
@@ -125,6 +130,11 @@ func set_config(config: Dictionary) -> void:
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
 	_brush_interpolate = config.get("brush_interpolate", _brush_interpolate)
+	_brush_flip_x = config.get("brush_flip_x", _brush_flip_x)
+	_brush_flip_y = config.get("brush_flip_y", _brush_flip_y)
+	_brush_rotate_90 = config.get("brush_rotate_90", _brush_rotate_90)
+	_brush_rotate_180 = config.get("brush_rotate_180", _brush_rotate_180)
+	_brush_rotate_270 = config.get("brush_rotate_270", _brush_rotate_270)
 
 
 func update_config() -> void:
@@ -743,23 +753,28 @@ func _pick_color(pos: Vector2i) -> void:
 func _on_flip_x_toggled(button_pressed: bool) -> void:
 	_brush_flip_x = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_flip_y_toggled(button_pressed: bool) -> void:
 	_brush_flip_y = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_90_toggled(button_pressed: bool) -> void:
 	_brush_rotate_90 = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_180_toggled(button_pressed: bool) -> void:
 	_brush_rotate_180 = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_270_toggled(button_pressed: bool) -> void:
 	_brush_rotate_270 = button_pressed
 	update_brush()
+	save_config()

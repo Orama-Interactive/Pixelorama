@@ -1,7 +1,10 @@
 class_name BaseTool
 extends VBoxContainer
 
+signal config_changed(config: Dictionary)
+
 var is_moving := false
+var is_syncing := false
 var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""
@@ -34,6 +37,8 @@ func _ready() -> void:
 func save_config() -> void:
 	var config := get_config()
 	Global.config_cache.set_value(tool_slot.kname, kname, config)
+	if not is_syncing:  # If the tool isn't buzy syncing with another tool
+		Tools.config_changed.emit(tool_slot.button, config)
 
 
 func load_config() -> void:
