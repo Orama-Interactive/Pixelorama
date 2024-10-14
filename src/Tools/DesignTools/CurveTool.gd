@@ -44,17 +44,20 @@ func update_indicator() -> void:
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
+	config["fill"] = _fill
 	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
 	super.set_config(config)
+	_fill = config.get("fill", _fill)
 	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
 	super.update_config()
+	$FillCheckbox.button_pressed = _fill
 	$ThicknessSlider.value = _thickness
 
 

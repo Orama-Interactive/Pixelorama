@@ -391,7 +391,6 @@ func attempt_config_share(from_idx: int, config: Dictionary = {}):
 				var from_tool = from_slot.tool_node
 				if from_tool.has_method("get_config"):
 					config = from_tool.get_config()
-		#print(config)
 		var target_slot: Slot = _slots.get(MOUSE_BUTTON_LEFT, null)
 		if from_idx == MOUSE_BUTTON_LEFT:
 			target_slot = _slots.get(MOUSE_BUTTON_RIGHT, null)
