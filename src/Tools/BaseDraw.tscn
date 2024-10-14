@@ -41,17 +41,13 @@ flat = true
 [node name="GridContainer" type="GridContainer" parent="RotationOptions" index="1"]
 visible = false
 layout_mode = 2
-columns = 3
+columns = 2
 
 [node name="FlipLabel" type="Label" parent="RotationOptions/GridContainer" index="0"]
 layout_mode = 2
-text = "Flip"
+text = "Flip:"
 
-[node name="Colon" type="Label" parent="RotationOptions/GridContainer" index="1"]
-layout_mode = 2
-text = ":"
-
-[node name="Flip" type="HBoxContainer" parent="RotationOptions/GridContainer" index="2"]
+[node name="Flip" type="HBoxContainer" parent="RotationOptions/GridContainer" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -67,15 +63,12 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Y"
 
-[node name="RotateLabel" type="Label" parent="RotationOptions/GridContainer" index="3"]
+[node name="RotateLabel" type="Label" parent="RotationOptions/GridContainer" index="2"]
 layout_mode = 2
-text = "Rotate"
+size_flags_vertical = 0
+text = "Rotate:"
 
-[node name="Colon2" type="Label" parent="RotationOptions/GridContainer" index="4"]
-layout_mode = 2
-text = ":"
-
-[node name="Rotate" type="HBoxContainer" parent="RotationOptions/GridContainer" index="5"]
+[node name="Rotate" type="HFlowContainer" parent="RotationOptions/GridContainer" index="3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
