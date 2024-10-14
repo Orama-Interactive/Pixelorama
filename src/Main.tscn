@@ -74,7 +74,6 @@ dialog_text = "This is an error message!"
 
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
 size = Vector2i(320, 200)
-popup_window = true
 dialog_text = "Autosaved project(s) from a crashed session were found.
 Do you want to recover the data?"
 dialog_autowrap = true
