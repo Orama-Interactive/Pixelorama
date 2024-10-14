@@ -11,13 +11,23 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 Built using Godot 4.3
 
 ### Added
+- It is now possible to make panels into floating windows. This allows for any panel in the user interface to be its own window, and if single window mode is disabled, you can move these windows anywhere you want. This is especially useful for multi-monitor setups.
+- Added a new "color replace" mode to the Shading tool, that uses the colors of the palette to apply shading. [#1107](https://github.com/Orama-Interactive/Pixelorama/pull/1107)
+- Added a new Erase blend mode. [#1117](https://github.com/Orama-Interactive/Pixelorama/pull/1117)
+- It is now possible to change the font, depth and line spacing of 3D text.
 - Clipping to selecting during export is now possible. [#1113](https://github.com/Orama-Interactive/Pixelorama/pull/1113)
-- Added hotkeys to switch between tabs. [#1109](https://github.com/Orama-Interactive/Pixelorama/pull/1109)
+- Added hotkeys to switch between tabs. <kbd>Control+Tab</kbd> to go to the next project tab, and <kbd>Control+Shift+Tab</kbd> to go to the previous. [#1109](https://github.com/Orama-Interactive/Pixelorama/pull/1109)
+- Added menus next to each of the two mirroring buttons in the Global Tool Options, that allow users to automatically move the symmetry guides to the center of the canvas, or the view center.
+- A new Reset category has been added to the Preferences that lets users easily restore certain options.
 
 ### Fixed
 - The move tool preview is now properly aligned to the pixel grid.
 - Camera zoom is now being preserved when switching between projects.
 - Projects are no longer being saved with the wrong name in the Web version.
+- Fixed 3D Shape Edit tool option values not updating when switching between 3D objects.
+- Tool previews are now being properly cleared when switching to other tools before finishing the action being performed by the previous tool.
+- Fixed icons not being set to the correct color when launching Pixelorama with the dark theme.
+- Fixed some text in the About dialog not having the text color of the theme.
 - The dynamics dialog is now set to its correct size when something is made visible or invisible. [#1104](https://github.com/Orama-Interactive/Pixelorama/pull/1104)
 - The color picker values no longer change when using RAW mode. [#1108](https://github.com/Orama-Interactive/Pixelorama/pull/1108)
 - Fixed some icon stretch and expand modes in the UI. [#1103](https://github.com/Orama-Interactive/Pixelorama/pull/1103)
