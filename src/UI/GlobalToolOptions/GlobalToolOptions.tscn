@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene load_steps=26 format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://di8au2u87jgv5" path="res://assets/graphics/misc/uncheck.png" id="7"]
 [ext_resource type="Script" path="res://src/UI/GlobalToolOptions/DynamicsPanel.gd" id="7_iqcw1"]
 [ext_resource type="PackedScene" uid="uid://bmsc0s03pwji4" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
+[ext_resource type="Texture2D" uid="uid://ce4xwgq2ewig8" path="res://assets/graphics/misc/share_config_off.png" id="8_7jpan"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_4k08w"]
 action = &"horizontal_mirror"
@@ -240,7 +241,7 @@ texture = ExtResource("6")
 [node name="ShareConfig" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-tooltip_text = "Lock alpha"
+tooltip_text = "Share config between tools."
 mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_vcyug")
@@ -255,6 +256,7 @@ offset_left = -11.0
 offset_top = -10.0
 offset_right = 11.0
 offset_bottom = 10.0
+texture = ExtResource("8_7jpan")
 
 [node name="DynamicsPanel" type="PopupPanel" parent="."]
 canvas_item_default_texture_filter = 0

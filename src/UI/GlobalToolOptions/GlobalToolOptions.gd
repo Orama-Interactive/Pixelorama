@@ -120,7 +120,7 @@ func _on_share_config_toggled(toggled_on: bool) -> void:
 	Tools.share_config = toggled_on
 	Global.config_cache.set_value("tools", "share_config", toggled_on)
 	var texture_button: TextureRect = share_config.get_node("TextureRect")
-	#var file_name := "share_config_on.png"
-	#if not toggled_on:
-		#file_name = "share_config_off.png"
-	#Global.change_button_texturerect(texture_button, file_name)
+	var file_name := "share_config_on.png"
+	if not toggled_on:
+		file_name = "share_config_off.png"
+	Global.change_button_texturerect(texture_button, file_name)
