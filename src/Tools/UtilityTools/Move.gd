@@ -16,17 +16,17 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("transform_snap_grid"):
 		_snap_to_grid = true
-		_offset = _offset.snapped(Global.grid_size)
+		_offset = _offset.snapped(Global.grids[0].grid_size)
 		if Global.current_project.has_selection and selection_node.is_moving_content:
 			var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
 			selection_node.big_bounding_rectangle.position = Vector2i(
-				prev_pos.snapped(Global.grid_size)
+				prev_pos.snapped(Global.grids[0].grid_size)
 			)
 			# The first time transform_snap_grid is enabled then _snap_position() is not called
 			# and the selection had wrong offset, so do selection offsetting here
 			var grid_offset := Vector2i(
-				fmod(Global.grid_offset.x, Global.grid_size.x),
-				fmod(Global.grid_offset.y, Global.grid_size.y)
+				fmod(Global.grids[0].grid_offset.x, Global.grids[0].grid_size.x),
+				fmod(Global.grids[0].grid_offset.y, Global.grids[0].grid_size.y)
 			)
 			selection_node.big_bounding_rectangle.position += grid_offset
 			selection_node.marching_ants_outline.offset += Vector2(
@@ -107,16 +107,16 @@ func _snap_position(pos: Vector2) -> Vector2:
 		else:
 			pos.x = _start_pos.x
 	if _snap_to_grid:  # Snap to grid
-		pos = pos.snapped(Global.grid_size)
+		pos = pos.snapped(Global.grids[0].grid_size)
 		# The part below only corrects the offset for situations when there is no selection
 		# Offsets when there is selection is controlled in _input() function
 		if !Global.current_project.has_selection:
 			var move_offset := Vector2.ZERO
 			move_offset.x = (
-				_start_pos.x - (_start_pos.x / Global.grid_size.x) * Global.grid_size.x
+				_start_pos.x - (_start_pos.x / Global.grids[0].grid_size.x) * Global.grids[0].grid_size.x
 			)
 			move_offset.y = (
-				_start_pos.y - (_start_pos.y / Global.grid_size.y) * Global.grid_size.y
+				_start_pos.y - (_start_pos.y / Global.grids[0].grid_size.y) * Global.grids[0].grid_size.y
 			)
 			pos += move_offset
 

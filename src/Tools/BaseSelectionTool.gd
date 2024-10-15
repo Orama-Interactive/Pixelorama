@@ -152,16 +152,17 @@ func draw_move(pos: Vector2i) -> void:
 		else:
 			pos.x = _start_pos.x
 	if Input.is_action_pressed("transform_snap_grid"):
-		_offset = _offset.snapped(Global.grid_size)
+		_offset = _offset.snapped(Global.grids[0].grid_size)
 		var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
-		selection_node.big_bounding_rectangle.position = prev_pos.snapped(Global.grid_size)
+		selection_node.big_bounding_rectangle.position = prev_pos.snapped(Global.grids[0].grid_size)
 		selection_node.marching_ants_outline.offset += Vector2(
 			selection_node.big_bounding_rectangle.position - prev_pos
 		)
-		pos = pos.snapped(Global.grid_size)
-		var grid_offset := Global.grid_offset
+		pos = pos.snapped(Global.grids[0].grid_size)
+		var grid_offset: Vector2i = Global.grids[0].grid_offset
 		grid_offset = Vector2i(
-			fmod(grid_offset.x, Global.grid_size.x), fmod(grid_offset.y, Global.grid_size.y)
+			fmod(grid_offset.x, Global.grids[0].grid_size.x),
+			fmod(grid_offset.y, Global.grids[0].grid_size.y)
 		)
 		pos += grid_offset
 
