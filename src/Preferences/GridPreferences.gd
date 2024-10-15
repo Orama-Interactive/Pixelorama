@@ -130,7 +130,7 @@ func _on_grids_count_value_changed(value: float) -> void:
 	if grid_idx >= grids_select_container.get_child_count():
 		for key in range(grids_select_container.get_child_count(), grid_idx + 1):
 			if not grids.has(key):
-				grids[grid_idx] = create_default_properties()
+				grids[key] = create_default_properties()
 			add_remove_select_button(key)
 	else:
 		for key: int in range(grid_idx + 1, grids.size()):
