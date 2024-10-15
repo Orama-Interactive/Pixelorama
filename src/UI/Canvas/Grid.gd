@@ -40,7 +40,6 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 		+ fposmod(grid.grid_offset.x - target_rect.position.x, grid.grid_size.x)
 	)
 	while x <= target_rect.end.x:
-		# Check if the exact line has been added before
 		if not Vector2(x, target_rect.position.y) in unique_rect_lines:
 			grid_multiline_points.push_back(Vector2(x, target_rect.position.y))
 			grid_multiline_points.push_back(Vector2(x, target_rect.end.y))
@@ -51,7 +50,6 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 		+ fposmod(grid.grid_offset.y - target_rect.position.y, grid.grid_size.y)
 	)
 	while y <= target_rect.end.y:
-		# Check if the exact line has been added before
 		if not Vector2(target_rect.position.x, y) in unique_rect_lines:
 			grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
 			grid_multiline_points.push_back(Vector2(target_rect.end.x, y))

@@ -159,7 +159,7 @@ func draw_move(pos: Vector2i) -> void:
 			selection_node.big_bounding_rectangle.position - prev_pos
 		)
 		pos = pos.snapped(Global.grids[0].grid_size)
-		var grid_offset: Vector2i = Global.grids[0].grid_offset
+		var grid_offset := Global.grids[0].grid_offset
 		grid_offset = Vector2i(
 			fmod(grid_offset.x, Global.grids[0].grid_size.x),
 			fmod(grid_offset.y, Global.grids[0].grid_size.y)
