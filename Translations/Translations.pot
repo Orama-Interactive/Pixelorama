@@ -894,6 +894,10 @@ msgstr ""
 msgid "Background color:"
 msgstr ""
 
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
 msgid "Left tool color:"
 msgstr ""
 

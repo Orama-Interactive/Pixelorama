@@ -71,7 +71,7 @@ size_flags_vertical = 3
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-columns = 6
+columns = 5
 
 [node name="Horizontal" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(44, 32)
