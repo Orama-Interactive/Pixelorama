@@ -324,26 +324,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 color = Color(0.75, 0.75, 0.75, 1)
 
-[node name="Label4" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions"]
-layout_mode = 2
-text = "Left tool color:"
-
-[node name="LeftToolColorButton" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions"]
-custom_minimum_size = Vector2(64, 20)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-color = Color(0, 0.52549, 0.811765, 1)
-
-[node name="Label5" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions"]
-layout_mode = 2
-text = "Right tool color:"
-
-[node name="RightToolColorButton" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions"]
-custom_minimum_size = Vector2(64, 20)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-color = Color(0.992157, 0.427451, 0.0784314, 1)
-
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
 visible = false
 layout_mode = 2
@@ -874,6 +854,49 @@ custom_minimum_size = Vector2(64, 20)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 color = Color(0, 0, 1, 1)
+
+[node name="Tools" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
+visible = false
+layout_mode = 2
+
+[node name="ToolOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools"]
+layout_mode = 2
+columns = 3
+
+[node name="ShareOptionsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Share options between the left and the right tools"
+
+[node name="ShareOptionsCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="LeftToolColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left tool color:"
+
+[node name="LeftToolColorButton" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+custom_minimum_size = Vector2(64, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+color = Color(0, 0.52549, 0.811765, 1)
+
+[node name="RightToolColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right tool color:"
+
+[node name="RightToolColorButton" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+custom_minimum_size = Vector2(64, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+color = Color(0.992157, 0.427451, 0.0784314, 1)
 
 [node name="Selection" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
 visible = false

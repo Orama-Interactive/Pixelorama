@@ -273,6 +273,10 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+var share_options_between_tools := false:
+	set(value):
+		share_options_between_tools = value
+		Tools.attempt_config_share(MOUSE_BUTTON_LEFT)
 ## Found in Preferences. The left tool color.
 var left_tool_color := Color("0086cf"):
 	set(value):

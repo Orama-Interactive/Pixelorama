@@ -71,14 +71,13 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 
 
 func _on_BrushSize_value_changed(value: float) -> void:
-	if _brush_size != int(value):
-		_brush_size = int(value)
-		_brush_size_dynamics = _brush_size
-		if Tools.dynamics_size != Tools.Dynamics.NONE:
-			_brush_size_dynamics = Tools.brush_size_min
-		_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
-		update_config()
-		save_config()
+	_brush_size = int(value)
+	_brush_size_dynamics = _brush_size
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
+		_brush_size_dynamics = Tools.brush_size_min
+	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
+	update_config()
+	save_config()
 
 
 func _reset_dynamics() -> void:

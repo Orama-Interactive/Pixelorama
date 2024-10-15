@@ -6,7 +6,6 @@ extends PanelContainer
 @onready var pixel_perfect: BaseButton = grid_container.get_node("PixelPerfect")
 @onready var alpha_lock: BaseButton = grid_container.get_node("AlphaLock")
 @onready var dynamics: Button = $"%Dynamics"
-@onready var share_config: BaseButton = grid_container.get_node("ShareConfig")
 @onready var dynamics_panel: PopupPanel = $DynamicsPanel
 
 
@@ -114,13 +113,3 @@ func _on_vertical_mirror_options_id_pressed(id: int) -> void:
 		project.y_symmetry_point = Global.camera.camera_screen_center.y * 2
 	project.x_symmetry_axis.points[0].y = project.y_symmetry_point / 2 + 0.5
 	project.x_symmetry_axis.points[1].y = project.y_symmetry_point / 2 + 0.5
-
-
-func _on_share_config_toggled(toggled_on: bool) -> void:
-	Tools.share_config = toggled_on
-	Global.config_cache.set_value("tools", "share_config", toggled_on)
-	var texture_button: TextureRect = share_config.get_node("TextureRect")
-	var file_name := "share_config_on.png"
-	if not toggled_on:
-		file_name = "share_config_off.png"
-	Global.change_button_texturerect(texture_button, file_name)
