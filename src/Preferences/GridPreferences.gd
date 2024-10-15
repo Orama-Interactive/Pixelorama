@@ -1,20 +1,11 @@
 extends GridContainer
 
 var grid_preferences: Array[GridPreference] = [
-	GridPreference.new(
-		"grid_type", "GridType", "selected", Global.GridTypes.CARTESIAN
-	),
+	GridPreference.new("grid_type", "GridType", "selected", Global.GridTypes.CARTESIAN),
 	GridPreference.new("grid_size", "GridSizeValue", "value", Vector2i(2, 2)),
-	GridPreference.new(
-		"isometric_grid_size", "IsometricGridSizeValue", "value", Vector2i(16, 8)
-	),
+	GridPreference.new("isometric_grid_size", "IsometricGridSizeValue", "value", Vector2i(16, 8)),
 	GridPreference.new("grid_offset", "GridOffsetValue", "value", Vector2i.ZERO),
-	GridPreference.new(
-		"grid_draw_over_tile_mode",
-		"GridDrawOverTileMode",
-		"button_pressed",
-		false
-	),
+	GridPreference.new("grid_draw_over_tile_mode", "GridDrawOverTileMode", "button_pressed", false),
 	GridPreference.new("grid_color", "GridColor", "color", Color.BLACK),
 ]
 
@@ -67,9 +58,7 @@ func _ready() -> void:
 		var node := get_node(pref.node_path)
 		var restore_default_button := RestoreDefaultButton.new()
 		restore_default_button.pressed.connect(
-			_on_Grid_Pref_value_changed.bind(
-				pref.default_value, pref, restore_default_button
-			)
+			_on_Grid_Pref_value_changed.bind(pref.default_value, pref, restore_default_button)
 		)
 		restore_default_button.setting_name = pref.prop_name
 		restore_default_button.value_type = pref.value_type
@@ -82,9 +71,7 @@ func _ready() -> void:
 
 		match pref.value_type:
 			"button_pressed":
-				node.toggled.connect(
-					_on_Grid_Pref_value_changed.bind(pref, restore_default_button)
-				)
+				node.toggled.connect(_on_Grid_Pref_value_changed.bind(pref, restore_default_button))
 			"value":
 				node.value_changed.connect(
 					_on_Grid_Pref_value_changed.bind(pref, restore_default_button)
@@ -99,7 +86,6 @@ func _ready() -> void:
 					_on_Grid_Pref_value_changed.bind(pref, restore_default_button)
 				)
 	grid_selected = 0
-
 
 
 func _on_Grid_Pref_value_changed(value, pref: GridPreference, button: RestoreDefaultButton) -> void:
@@ -117,9 +103,7 @@ func _on_Grid_Pref_value_changed(value, pref: GridPreference, button: RestoreDef
 		if typeof(value) == TYPE_COLOR:
 			disable = value.is_equal_approx(default_value)
 		disable_restore_default_button(button, disable)
-	Global.config_cache.set_value(
-		"preferences", "grids", grids
-	)
+	Global.config_cache.set_value("preferences", "grids", grids)
 
 
 func _on_grids_count_value_changed(value: float) -> void:
@@ -162,7 +146,7 @@ func add_remove_select_button(grid_idx: int, remove := false):
 		var select_button = Button.new()
 		select_button.text = str(grid_idx)
 		grids_select_container.add_child(select_button)
-		select_button.pressed.connect(func() : grid_selected = grid_idx)
+		select_button.pressed.connect(func(): grid_selected = grid_idx)
 	else:
 		if grid_idx < grids_select_container.get_child_count():
 			grids_select_container.get_child(grid_idx).queue_free()

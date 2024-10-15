@@ -3,6 +3,7 @@ extends Node2D
 var unique_rect_lines := PackedVector2Array()
 var unique_iso_lines := PackedVector2Array()
 
+
 func _ready() -> void:
 	Global.project_switched.connect(queue_redraw)
 
@@ -67,9 +68,7 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 
 	var cell_size: Vector2 = grid.isometric_grid_size
 	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
-	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(
-		cell_size
-	)
+	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(cell_size)
 
 	# lines ↗↗↗ (from bottom-left to top-right)
 	var per_cell_offset: Vector2 = cell_size * Vector2(1, -1)

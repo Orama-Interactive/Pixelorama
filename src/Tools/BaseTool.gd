@@ -149,7 +149,9 @@ func snap_position(pos: Vector2) -> Vector2:
 			pos = grid_point.floor()
 
 	if Global.snap_to_rectangular_grid_center:
-		var grid_center := pos.snapped(Global.grids[0].grid_size) + Vector2(Global.grids[0].grid_size / 2)
+		var grid_center := (
+			pos.snapped(Global.grids[0].grid_size) + Vector2(Global.grids[0].grid_size / 2)
+		)
 		grid_center += Vector2(Global.grids[0].grid_offset)
 		# keeping grid_center as is would have been fine but this adds extra accuracy as to
 		# which snap point (from the list below) is closest to mouse and occupy THAT point

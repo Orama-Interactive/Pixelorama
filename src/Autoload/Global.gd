@@ -749,6 +749,7 @@ func update_grids(grids_data: Dictionary):
 	for grid_idx in grids_data.size():
 		Grid.new(grids_data[grid_idx])  # gets auto added to grids array
 
+
 func _initialize_keychain() -> void:
 	Keychain.config_file = config_cache
 	Keychain.actions = {
