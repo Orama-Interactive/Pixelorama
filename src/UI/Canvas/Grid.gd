@@ -1,5 +1,7 @@
 extends Node2D
 
+var unique_rect_lines := PackedVector2Array()
+var unique_iso_lines := PackedVector2Array()
 
 func _ready() -> void:
 	Global.project_switched.connect(queue_redraw)
@@ -10,7 +12,9 @@ func _draw() -> void:
 		return
 
 	var target_rect: Rect2i
-	for grid_idx in Global.grids.size():
+	unique_rect_lines.clear()
+	unique_iso_lines.clear()
+	for grid_idx in range(Global.grids.size() - 1, -1, -1):
 		if Global.grids[grid_idx].grid_draw_over_tile_mode:
 			target_rect = Global.current_project.tiles.get_bounding_rect()
 		else:
@@ -35,8 +39,10 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 		+ fposmod(grid.grid_offset.x - target_rect.position.x, grid.grid_size.x)
 	)
 	while x <= target_rect.end.x:
-		grid_multiline_points.push_back(Vector2(x, target_rect.position.y))
-		grid_multiline_points.push_back(Vector2(x, target_rect.end.y))
+		# Check if the exact line has been added before
+		if not Vector2(x, target_rect.position.y) in unique_rect_lines:
+			grid_multiline_points.push_back(Vector2(x, target_rect.position.y))
+			grid_multiline_points.push_back(Vector2(x, target_rect.end.y))
 		x += grid.grid_size.x
 
 	var y: float = (
@@ -44,10 +50,13 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 		+ fposmod(grid.grid_offset.y - target_rect.position.y, grid.grid_size.y)
 	)
 	while y <= target_rect.end.y:
-		grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
-		grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
+		# Check if the exact line has been added before
+		if not Vector2(target_rect.position.x, y) in unique_rect_lines:
+			grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
+			grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
 		y += grid.grid_size.y
 
+	unique_rect_lines.append_array(grid_multiline_points)
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, grid.grid_color)
 
@@ -73,8 +82,9 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		var start: Vector2 = Vector2(target_rect.position) + Vector2(0, y)
 		var cells_to_rect_bounds: float = minf(max_cell_count.x, y / cell_size.y)
 		var end := start + cells_to_rect_bounds * per_cell_offset
-		grid_multiline_points.push_back(start)
-		grid_multiline_points.push_back(end)
+		if not start in unique_iso_lines:
+			grid_multiline_points.push_back(start)
+			grid_multiline_points.push_back(end)
 		y += cell_size.y
 
 	#  lines ↗↗↗ starting from the rect's bottom side (left to right):
@@ -83,8 +93,9 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		var start: Vector2 = Vector2(target_rect.position) + Vector2(x, target_rect.size.y)
 		var cells_to_rect_bounds: float = minf(max_cell_count.y, max_cell_count.x - x / cell_size.x)
 		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
-		grid_multiline_points.push_back(start)
-		grid_multiline_points.push_back(end)
+		if not start in unique_iso_lines:
+			grid_multiline_points.push_back(start)
+			grid_multiline_points.push_back(end)
 		x += cell_size.x
 
 	# lines ↘↘↘ (from top-left to bottom-right)
@@ -96,8 +107,9 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		var start: Vector2 = Vector2(target_rect.position) + Vector2(0, y)
 		var cells_to_rect_bounds: float = minf(max_cell_count.x, max_cell_count.y - y / cell_size.y)
 		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
-		grid_multiline_points.push_back(start)
-		grid_multiline_points.push_back(end)
+		if not start in unique_iso_lines:
+			grid_multiline_points.push_back(start)
+			grid_multiline_points.push_back(end)
 		y += cell_size.y
 
 	#  lines ↘↘↘ starting from the rect's top side (left to right):
@@ -106,9 +118,11 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		var start: Vector2 = Vector2(target_rect.position) + Vector2(x, 0)
 		var cells_to_rect_bounds: float = minf(max_cell_count.y, max_cell_count.x - x / cell_size.x)
 		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
-		grid_multiline_points.push_back(start)
-		grid_multiline_points.push_back(end)
+		if not start in unique_iso_lines:
+			grid_multiline_points.push_back(start)
+			grid_multiline_points.push_back(end)
 		x += cell_size.x
+	grid_multiline_points.append_array(grid_multiline_points)
 
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, grid.grid_color)

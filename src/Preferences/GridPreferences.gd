@@ -53,16 +53,24 @@ class GridPreference:
 		value_type = _value_type
 		if _default_value != null:
 			default_value = _default_value
-		else:
-			default_value = Global.get(prop_name)
 
 
 func _ready() -> void:
+	var grids = Global.config_cache.get_value(
+		"preferences", "grids", {0: create_default_properties()}
+	)
+	Global.config_cache.set_value("preferences", "grids", grids)
+	$GridsCount.value = grids.size()
 	for pref in grid_preferences:
 		if not has_node(pref.node_path):
 			continue
 		var node := get_node(pref.node_path)
 		var restore_default_button := RestoreDefaultButton.new()
+		restore_default_button.pressed.connect(
+			_on_Grid_Pref_value_changed.bind(
+				pref.default_value, pref, restore_default_button
+			)
+		)
 		restore_default_button.setting_name = pref.prop_name
 		restore_default_button.value_type = pref.value_type
 		restore_default_button.default_value = pref.default_value
@@ -71,11 +79,6 @@ func _ready() -> void:
 		var node_position := node.get_index()
 		node.get_parent().add_child(restore_default_button)
 		node.get_parent().move_child(restore_default_button, node_position)
-		var grids = Global.config_cache.get_value(
-			"preferences", "grids", {0: create_default_properties()}
-		)
-		Global.config_cache.set_value("preferences", "grids", grids)
-		$GridsCount.value = grids.size()
 
 		match pref.value_type:
 			"button_pressed":
@@ -108,12 +111,12 @@ func _on_Grid_Pref_value_changed(value, pref: GridPreference, button: RestoreDef
 		var prop := pref.prop_name
 		grid_info[prop] = value
 		grids[grid_selected] = grid_info
+		Global.update_grids(grids)
 		var default_value = pref.default_value
-		var disable: bool = Global.get(prop) == default_value
+		var disable: bool = Global.grids[grid_selected].get(prop) == default_value
 		if typeof(value) == TYPE_COLOR:
 			disable = value.is_equal_approx(default_value)
 		disable_restore_default_button(button, disable)
-	Global.update_grids(grids)
 	Global.config_cache.set_value(
 		"preferences", "grids", grids
 	)
@@ -133,6 +136,7 @@ func _on_grids_count_value_changed(value: float) -> void:
 		for key: int in range(grid_idx + 1, grids.size()):
 			grids.erase(key)
 			add_remove_select_button(key, true)
+	Global.update_grids(grids)
 	Global.config_cache.set_value("preferences", "grids", grids)
 
 
