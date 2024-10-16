@@ -276,7 +276,6 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 		# Loading a backup should not change window title and save path
 		new_project.save_path = path
 		get_window().title = new_project.name + " - Pixelorama " + Global.current_version
-		Global.save_sprites_dialog.current_path = path
 		# Set last opened project path and save
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)

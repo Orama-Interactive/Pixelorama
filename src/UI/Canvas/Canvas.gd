@@ -98,7 +98,7 @@ func _input(event: InputEvent) -> void:
 
 
 func camera_zoom() -> void:
-	for camera in Global.cameras:
+	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
 		camera.fit_to_frame(Global.current_project.size)
 
 	Global.transparent_checker.update_rect()

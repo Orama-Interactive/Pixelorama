@@ -224,15 +224,20 @@ const DONORS: PackedStringArray = [
 @onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
 @onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
 @onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
-
 @onready var authors := $AboutUI/Credits/Authors/AuthorTree as Tree
 @onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
 @onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
 @onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as TabBar
 @onready var license_text := $AboutUI/Credits/Licenses/LicenseText as TextEdit
+@onready var pixelorama_slogan := (
+	$AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan as Label
+)
+@onready var copyright_label := $AboutUI/Copyright as Label
 
 
 func _ready() -> void:
+	pixelorama_slogan.label_settings.font_color = get_theme_color(&"font_color", &"Label")
+	copyright_label.label_settings.font_color = get_theme_color(&"font_color", &"Label")
 	create_donors()
 	license_tabs.add_tab("Pixelorama")
 	license_tabs.add_tab("Godot")
@@ -247,6 +252,14 @@ func _ready() -> void:
 	license_tabs.add_tab("OmniScale")
 	license_tabs.add_tab("gd-obj")
 	license_text.text = licenses[0]
+
+
+func _notification(what: int) -> void:
+	if not is_instance_valid(pixelorama_slogan):
+		return
+	if what == NOTIFICATION_THEME_CHANGED:
+		pixelorama_slogan.label_settings.font_color = get_theme_color(&"font_color", &"Label")
+		copyright_label.label_settings.font_color = get_theme_color(&"font_color", &"Label")
 
 
 func _on_AboutDialog_about_to_show() -> void:

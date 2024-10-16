@@ -374,3 +374,4 @@ func _add_polylines_segment(lines: Array, start: Vector2i, end: Vector2i) -> voi
 func _exit_tree() -> void:
 	if is_moving:
 		draw_end(Global.canvas.current_pixel.floor())
+	Global.canvas.previews_sprite.texture = null

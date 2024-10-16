@@ -7,6 +7,8 @@ var opacity := 0.6
 var blue_red_color := Color.BLUE
 var rate := Global.onion_skinning_past_rate
 
+@onready var canvas := get_parent() as Canvas
+
 
 func _draw() -> void:
 	var project := Global.current_project
@@ -36,9 +38,7 @@ func _draw() -> void:
 					if not (layer.name.to_lower().ends_with("_io")):
 						color.a = opacity / i
 						if [change, layer_i] in project.selected_cels:
-							draw_texture(
-								cel.image_texture, Global.canvas.move_preview_location, color
-							)
+							draw_texture(cel.image_texture, canvas.move_preview_location, color)
 						else:
 							draw_texture(cel.image_texture, Vector2.ZERO, color)
 				layer_i += 1

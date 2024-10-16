@@ -61,6 +61,11 @@ window/per_pixel_transparency/allowed.web=false
 
 enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg")
 
+[global_group]
+
+CanvasCameras=""
+CanvasPreviews=""
+
 [importer_defaults]
 
 texture={

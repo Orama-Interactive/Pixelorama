@@ -487,7 +487,7 @@ func commit_undo() -> void:
 	var project := Global.current_project
 	var frame := -1
 	var layer := -1
-	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
+	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
 		frame = project.current_frame
 		layer = project.current_layer
 
@@ -502,7 +502,7 @@ func commit_undo() -> void:
 
 func _get_undo_data() -> Dictionary:
 	var data := {}
-	if Global.animation_timer.is_stopped():
+	if Global.animation_timeline.animation_timer.is_stopped():
 		var images := _get_selected_draw_images()
 		for image in images:
 			data[image] = image.data

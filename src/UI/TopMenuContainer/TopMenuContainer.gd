@@ -538,7 +538,7 @@ func _open_project_file() -> void:
 	if OS.get_name() == "Web":
 		Html5FileExchange.load_image()
 	else:
-		_popup_dialog(Global.open_sprites_dialog)
+		_popup_dialog(Global.control.open_sprite_dialog)
 		Global.control.opensprite_file_selected = false
 
 
@@ -740,8 +740,6 @@ func _toggle_show_pixel_grid() -> void:
 func _toggle_show_rulers() -> void:
 	Global.show_rulers = !Global.show_rulers
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, Global.show_rulers)
-	Global.horizontal_ruler.visible = Global.show_rulers
-	Global.vertical_ruler.visible = Global.show_rulers
 
 
 func _toggle_show_guides() -> void:

@@ -12,6 +12,7 @@ signal visibility_changed  ## Emits when [member visible] is changed.
 enum BlendModes {
 	PASS_THROUGH = -2,  ## Only for group layers. Ignores group blending, like it doesn't exist.
 	NORMAL = 0,  ## The blend layer colors are simply placed on top of the base colors.
+	ERASE,  ## Subtracts the numerical value of alpha from the base alpha.
 	DARKEN,  ## Keeps the darker colors between the blend and the base layers.
 	MULTIPLY,  ## Multiplies the numerical values of the two colors, giving a darker result.
 	COLOR_BURN,  ## Darkens by increasing the contrast between the blend and base colors.

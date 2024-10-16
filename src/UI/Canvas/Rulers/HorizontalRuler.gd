@@ -8,6 +8,8 @@ var minor_subdivision := 4
 var first: Vector2
 var last: Vector2
 
+@onready var vertical_ruler := $"../ViewportandVerticalRuler/VerticalRuler" as Button
+
 
 func _ready() -> void:
 	Global.project_switched.connect(queue_redraw)
@@ -120,7 +122,7 @@ func create_guide() -> void:
 		return
 	var mouse_pos := get_local_mouse_position()
 	if mouse_pos.x < RULER_WIDTH:  # For double guides
-		Global.vertical_ruler.create_guide()
+		vertical_ruler.create_guide()
 	var guide := Guide.new()
 	if absf(Global.camera.rotation_degrees) < 45 or absf(Global.camera.rotation_degrees) > 135:
 		guide.type = guide.Types.HORIZONTAL

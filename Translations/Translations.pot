@@ -828,6 +828,10 @@ msgstr ""
 msgid "Display scale:"
 msgstr ""
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr ""
@@ -3035,6 +3039,10 @@ msgstr ""
 msgid "Text:"
 msgstr ""
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr ""
@@ -3046,10 +3054,17 @@ msgstr ""
 msgid "Horizontal alignment:"
 msgstr ""
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr ""
 
 msgid "Right"
+msgstr ""
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
 msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.

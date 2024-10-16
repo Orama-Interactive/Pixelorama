@@ -18,6 +18,9 @@ var splash_dialog: AcceptDialog:
 
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 @onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
+## Dialog used to open images and project (.pxo) files.
+@onready var open_sprite_dialog := $Dialogs/OpenSprite as FileDialog
+## Dialog used to save project (.pxo) files.
 @onready var save_sprite_dialog := $Dialogs/SaveSprite as FileDialog
 @onready var save_sprite_html5: ConfirmationDialog = $Dialogs/SaveSpriteHTML5
 @onready var tile_mode_offsets_dialog: ConfirmationDialog = $Dialogs/TileModeOffsetsDialog
@@ -157,6 +160,7 @@ some useful [SYSTEM OPTIONS] are:
 
 
 func _init() -> void:
+	Global.project_switched.connect(_project_switched)
 	if not DirAccess.dir_exists_absolute("user://backups"):
 		DirAccess.make_dir_recursive_absolute("user://backups")
 	Global.shrink = _get_auto_display_scale()
@@ -177,7 +181,7 @@ func _ready() -> void:
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
 
-	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
+	open_sprite_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
 	save_sprite_dialog.current_dir = Global.config_cache.get_value(
@@ -201,6 +205,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER):
 		if get_viewport().gui_get_focus_owner() is LineEdit:
 			get_viewport().gui_get_focus_owner().release_focus()
+
+
+func _project_switched() -> void:
+	if Global.current_project.export_directory_path != "":
+		open_sprite_dialog.current_path = Global.current_project.export_directory_path
+		save_sprite_dialog.current_path = Global.current_project.export_directory_path
 
 
 # Taken from https://github.com/godotengine/godot/blob/3.x/editor/editor_settings.cpp#L1474
@@ -462,7 +472,7 @@ func save_project(path: String) -> void:
 			]
 	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
 	if success:
-		Global.open_sprites_dialog.current_dir = path.get_base_dir()
+		open_sprite_dialog.current_dir = path.get_base_dir()
 	if is_quitting_on_save:
 		changed_projects_on_quit.pop_front()
 		_save_on_quit_confirmation()
