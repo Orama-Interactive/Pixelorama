@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-10-12 13:32\n"
+"PO-Revision-Date: 2024-10-16 13:05\n"
 
 msgid "OK"
 msgstr "예"
@@ -910,6 +910,10 @@ msgstr ""
 
 msgid "Background color:"
 msgstr "배경 색상:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "왼쪽 도구 색상"
