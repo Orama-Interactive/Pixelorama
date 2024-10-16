@@ -27,6 +27,7 @@ enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXP
 enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
 ## Enumeration of items present in the View Menu.
 enum ViewMenu {
+	CENTRE_CANVAS,
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
 	GREYSCALE_VIEW,
@@ -769,6 +770,7 @@ func _initialize_keychain() -> void:
 		&"palettize": Keychain.InputAction.new("", "Effects menu", true),
 		&"pixelize": Keychain.InputAction.new("", "Effects menu", true),
 		&"posterize": Keychain.InputAction.new("", "Effects menu", true),
+		&"centre_canvas": Keychain.InputAction.new("", "View menu", true),
 		&"mirror_view": Keychain.InputAction.new("", "View menu", true),
 		&"show_grid": Keychain.InputAction.new("", "View menu", true),
 		&"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),

@@ -24,7 +24,3 @@ func _on_ViewportContainer_mouse_exited() -> void:
 	Global.control.left_cursor.visible = false
 	Global.control.right_cursor.visible = false
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-
-
-func _on_centre_frame_pressed() -> void:
-	camera.offset = Global.current_project.size / 2
