@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c8dsi6ggkqa7a"]
+[gd_scene load_steps=55 format=3 uid="uid://c8dsi6ggkqa7a"]
 
 [ext_resource type="PackedScene" uid="uid://byu3rtoipuvoc" path="res://src/UI/ToolsPanel/Tools.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/UI/Canvas/CanvasCamera.gd" id="7"]
 [ext_resource type="Shader" path="res://src/Shaders/Greyscale.gdshader" id="8"]
 [ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
+[ext_resource type="Texture2D" uid="uid://4m3ylj448fjt" path="res://assets/graphics/centre_view.png" id="9_beuqw"]
 [ext_resource type="PackedScene" uid="uid://wo0hqxkst808" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://cxhs8qy5ilufv" path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://cap1bhavhi33g" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.tscn" id="12"]
@@ -205,6 +206,7 @@ hidden_tabs = {
 "Reference Images": true,
 "Second Canvas": true
 }
+windows = {}
 save_on_change = false
 
 [sub_resource type="ShaderMaterial" id="2"]
@@ -283,6 +285,18 @@ mouse_default_cursor_shape = 14
 theme_type_variation = &"RulerButton"
 action_mode = 0
 script = ExtResource("6")
+
+[node name="CentreFrame" type="TextureButton" parent="DockableContainer/Main Canvas/HorizontalRuler" groups=["UIButtons"]]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 16.0
+offset_bottom = -1.0
+grow_vertical = 2
+texture_normal = ExtResource("9_beuqw")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas"]
 layout_mode = 2
@@ -419,6 +433,7 @@ layout_mode = 2
 [connection signal="tab_close_pressed" from="DockableContainer/Main Canvas/TabsContainer/TabBar" to="DockableContainer/Main Canvas/TabsContainer/TabBar" method="_on_tab_close_pressed"]
 [connection signal="mouse_entered" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
 [connection signal="pressed" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
+[connection signal="pressed" from="DockableContainer/Main Canvas/HorizontalRuler/CentreFrame" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" method="_on_centre_frame_pressed"]
 [connection signal="pressed" from="DockableContainer/Main Canvas/ViewportandVerticalRuler/VerticalRuler" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
 [connection signal="mouse_entered" from="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" method="_on_ViewportContainer_mouse_exited"]
