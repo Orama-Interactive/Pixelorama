@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-10-12 16:58\n"
+"PO-Revision-Date: 2024-10-16 13:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -910,6 +910,10 @@ msgstr "Color del fondo:"
 
 msgid "Background color:"
 msgstr "Color de fondo:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Color de la herramienta izquierda:"
