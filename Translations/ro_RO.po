@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-10-13 13:11\n"
+"PO-Revision-Date: 2024-10-16 13:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -911,6 +911,10 @@ msgstr "Culoare de fundal din:"
 
 msgid "Background color:"
 msgstr "Culoare de fundal:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Culoarea instrumentului din stânga:"
