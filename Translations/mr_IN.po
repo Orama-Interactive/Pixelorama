@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Marathi\n"
 "Language: mr_IN\n"
-"PO-Revision-Date: 2024-10-12 13:33\n"
+"PO-Revision-Date: 2024-10-16 13:05\n"
 
 msgid "OK"
 msgstr ""
@@ -907,6 +907,10 @@ msgid "Background color from:"
 msgstr ""
 
 msgid "Background color:"
+msgstr ""
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
 msgstr ""
 
 msgid "Left tool color:"
