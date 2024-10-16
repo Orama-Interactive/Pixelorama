@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2024-10-12 13:32\n"
+"PO-Revision-Date: 2024-10-16 13:05\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -909,6 +909,10 @@ msgstr "צבע רקע מ:"
 
 msgid "Background color:"
 msgstr "צבע רקע:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "צבע כלי שמאלי:"
