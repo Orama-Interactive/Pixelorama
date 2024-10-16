@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-10-12 13:32\n"
+"PO-Revision-Date: 2024-10-16 13:05\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -913,6 +913,10 @@ msgstr "Колір фону з:"
 
 msgid "Background color:"
 msgstr "Колір фону:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Колір лівого інструменту:"
