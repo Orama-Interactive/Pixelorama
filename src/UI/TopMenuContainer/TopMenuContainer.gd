@@ -207,7 +207,7 @@ func _setup_view_menu() -> void:
 	# Order as in Global.ViewMenu enum
 	var view_menu_items := {
 		"Centre Canvas": "centre_canvas",
-		"Tile Mode":  "",
+		"Tile Mode": "",
 		"Tile Mode Offsets": "",
 		"Grayscale View": "",
 		"Mirror View": "mirror_view",
