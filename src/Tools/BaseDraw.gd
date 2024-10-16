@@ -720,35 +720,6 @@ func _get_undo_data() -> Dictionary:
 	return data
 
 
-func _pick_color(pos: Vector2i) -> void:
-	var project := Global.current_project
-	pos = project.tiles.get_canon_position(pos)
-
-	if pos.x < 0 or pos.y < 0:
-		return
-
-	var image := Image.new()
-	image.copy_from(_get_draw_image())
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
-		return
-
-	var color := Color(0, 0, 0, 0)
-	var curr_frame: Frame = project.frames[project.current_frame]
-	for layer in project.layers.size():
-		var idx := (project.layers.size() - 1) - layer
-		if project.layers[idx].is_visible_in_hierarchy():
-			image = curr_frame.cels[idx].get_image()
-			color = image.get_pixelv(pos)
-			if not is_zero_approx(color.a):
-				break
-	var button := (
-		MOUSE_BUTTON_LEFT
-		if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self
-		else MOUSE_BUTTON_RIGHT
-	)
-	Tools.assign_color(color, button, false)
-
-
 func _on_flip_x_toggled(button_pressed: bool) -> void:
 	_brush_flip_x = button_pressed
 	update_brush()

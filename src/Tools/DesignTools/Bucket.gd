@@ -7,6 +7,7 @@ const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.gdshader")
 const PATTERN_FILL_SHADER := preload("res://src/Shaders/PatternFill.gdshader")
 
 var _undo_data := {}
+var _picking_color := false
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
 var _tolerance := 0.003
@@ -152,8 +153,10 @@ func update_pattern() -> void:
 func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
 	if Input.is_action_pressed(&"draw_color_picker", true):
+		_picking_color = true
 		_pick_color(pos)
 		return
+	_picking_color = false
 	_undo_data = _get_undo_data()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
@@ -164,6 +167,10 @@ func draw_start(pos: Vector2i) -> void:
 
 func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
+	if _picking_color:  # Still return even if we released Alt
+		if Input.is_action_pressed(&"draw_color_picker", true):
+			_pick_color(pos)
+		return
 	Global.canvas.selection.transform_content_confirm()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
@@ -174,6 +181,8 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
+	if _picking_color:
+		return
 	commit_undo()
 
 
@@ -514,24 +523,3 @@ func _get_undo_data() -> Dictionary:
 			var image := cel.get_image()
 			data[image] = image.data
 	return data
-
-
-func _pick_color(pos: Vector2i) -> void:
-	var project := Global.current_project
-	pos = project.tiles.get_canon_position(pos)
-
-	if pos.x < 0 or pos.y < 0:
-		return
-
-	var image := Image.new()
-	image.copy_from(_get_draw_image())
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
-		return
-
-	var color := image.get_pixelv(pos)
-	var button := (
-		MOUSE_BUTTON_LEFT
-		if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self
-		else MOUSE_BUTTON_RIGHT
-	)
-	Tools.assign_color(color, button, false)
