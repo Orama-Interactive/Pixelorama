@@ -2,7 +2,7 @@ extends "res://src/Tools/BaseDraw.gd"
 
 var _curve := Curve2D.new()  ## The [Curve2D] responsible for the shape of the curve being drawn.
 var _drawing := false  ## Set to true when a curve is being drawn.
-var _fill := false  ## When true, the inside area of the curve gets filled.
+var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _editing_bezier := false  ## Needed to determine when to show the control points preview line.
 var _editing_out_control_point := false  ## True when controlling the out control point only.
@@ -29,7 +29,7 @@ func _on_thickness_value_changed(value: int) -> void:
 
 
 func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
-	_fill = toggled_on
+	_fill_inside = toggled_on
 	update_config()
 	save_config()
 
@@ -44,17 +44,20 @@ func update_indicator() -> void:
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
+	config["fill_inside"] = _fill_inside
 	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
 	super.set_config(config)
+	_fill_inside = config.get("fill_inside", _fill_inside)
 	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
 	super.update_config()
+	$FillCheckbox.button_pressed = _fill_inside
 	$ThicknessSlider.value = _thickness
 
 
@@ -188,7 +191,7 @@ func _draw_shape() -> void:
 		_fill_inside_rect = _fill_inside_rect.expand(point)
 		# Draw each point offsetted based on the shape's thickness
 		_draw_pixel(point, images)
-	if _fill:
+	if _fill_inside:
 		var v := Vector2i()
 		for x in _fill_inside_rect.size.x:
 			v.x = x + _fill_inside_rect.position.x

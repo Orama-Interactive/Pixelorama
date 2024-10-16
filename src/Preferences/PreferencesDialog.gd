@@ -36,10 +36,16 @@ var preferences: Array[Preference] = [
 		"custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color", Color.GRAY
 	),
 	Preference.new(
-		"left_tool_color", "Interface/ButtonOptions/LeftToolColorButton", "color", Color("0086cf")
+		"share_options_between_tools",
+		"Tools/ToolOptions/ShareOptionsCheckBox",
+		"button_pressed",
+		false
 	),
 	Preference.new(
-		"right_tool_color", "Interface/ButtonOptions/RightToolColorButton", "color", Color("fd6d14")
+		"left_tool_color", "Tools/ToolOptions/LeftToolColorButton", "color", Color("0086cf")
+	),
+	Preference.new(
+		"right_tool_color", "Tools/ToolOptions/RightToolColorButton", "color", Color("fd6d14")
 	),
 	Preference.new(
 		"tool_button_size",
