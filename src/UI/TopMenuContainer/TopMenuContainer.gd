@@ -206,6 +206,7 @@ func _setup_edit_menu() -> void:
 func _setup_view_menu() -> void:
 	# Order as in Global.ViewMenu enum
 	var view_menu_items := {
+		"Centre Canvas": "centre_canvas",
 		"Tile Mode": "",
 		"Tile Mode Offsets": "",
 		"Grayscale View": "",
@@ -226,6 +227,8 @@ func _setup_view_menu() -> void:
 			_setup_snap_to_submenu(item)
 		elif item == "Tile Mode Offsets":
 			view_menu.add_item(item, i)
+		elif item == "Centre Canvas":
+			_set_menu_shortcut(view_menu_items[item], view_menu, i, item)
 		else:
 			_set_menu_shortcut(view_menu_items[item], view_menu, i, item, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
@@ -599,6 +602,8 @@ func edit_menu_id_pressed(id: int) -> void:
 
 func view_menu_id_pressed(id: int) -> void:
 	match id:
+		Global.ViewMenu.CENTRE_CANVAS:
+			Global.camera.offset = Global.current_project.size / 2
 		Global.ViewMenu.TILE_MODE_OFFSETS:
 			_popup_dialog(get_tree().current_scene.tile_mode_offsets_dialog)
 		Global.ViewMenu.GREYSCALE_VIEW:
