@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-10-12 13:32\n"
+"PO-Revision-Date: 2024-10-16 13:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -911,6 +911,10 @@ msgstr "Barva pozadí z:"
 
 msgid "Background color:"
 msgstr "Barva pozadí:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Barva levého nástroje:"
