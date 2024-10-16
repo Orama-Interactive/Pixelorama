@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-10-16 13:05\n"
+"PO-Revision-Date: 2024-10-16 22:30\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -916,7 +916,7 @@ msgstr "Warna latar belakang:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Berbagi opsi antara alat di kiri dan di kanan"
 
 msgid "Left tool color:"
 msgstr "Warna alat di kiri:"
