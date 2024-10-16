@@ -397,8 +397,10 @@ func attempt_config_share(from_idx: int, config: Dictionary = {}) -> void:
 			target_slot.tool_node.has_method("set_config")
 			and target_slot.tool_node.has_method("update_config")
 		):
+			target_slot.tool_node.set("is_syncing", true)
 			target_slot.tool_node.set_config(config)
 			target_slot.tool_node.update_config()
+			target_slot.tool_node.set("is_syncing", false)
 
 
 func reset_options() -> void:
