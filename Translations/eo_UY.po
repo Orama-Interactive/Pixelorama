@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2024-10-12 13:33\n"
+"PO-Revision-Date: 2024-10-16 13:06\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -910,6 +910,10 @@ msgstr "Koloro de la fono el:"
 
 msgid "Background color:"
 msgstr "Koloro de la fono:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Koloro de la maldekstra ilo:"
