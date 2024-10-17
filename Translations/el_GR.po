@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-10-17 14:10\n"
+"PO-Revision-Date: 2024-10-17 17:12\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -235,7 +235,7 @@ msgstr "Προτιμήσεις"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Κεντράρισμα Καμβά"
 
 msgid "Tile Mode"
 msgstr "Λειτουργία μοτίβου"
@@ -850,7 +850,7 @@ msgstr "Κλίμακα εμφάνισης:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Γραμματοσειρά:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -920,12 +920,13 @@ msgstr "Χρώμα υποβάθρου:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Κοινή χρήση επιλογών μεταξύ αριστερών και δεξιών εργαλείων"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Αν αυτό είναι ενεργοποιημένο, οι επιλογές θα συγχρονίζονται μεταξύ του αριστερού και του δεξιού εργαλείου.\n"
+"Για παράδειγμα, και τα δύο εργαλεία θα μοιράζονται το ίδιο μέγεθος βούρτσας, και η αλλαγή του σε ένα εργαλείο θα αλλάξει αμέσως και το άλλο."
 
 msgid "Left tool color:"
 msgstr "Χρώμα αριστερού εργαλείου:"
@@ -3133,7 +3134,7 @@ msgstr "Κείμενο:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Βάθος:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3147,7 +3148,7 @@ msgid "Horizontal alignment:"
 msgstr "Οριζόντια στοίχιση:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Κάθετη στοίχιση:"
 
 msgid "Left"
 msgstr "Αριστερά"
@@ -3157,7 +3158,7 @@ msgstr "Δεξιά"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Διάστιχο γραμμών:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
