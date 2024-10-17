@@ -409,6 +409,29 @@ class ThemeAPI:
 		Themes.remove_theme(theme)
 		ExtensionsApi.remove_action("ThemeAPI", "add_theme")
 
+	## Adds a new font.
+	func add_font(font: Font) -> void:
+		Global.loaded_fonts.append(font)
+		Global.font_loaded.emit()
+
+	## Removes a loaded font.
+	## If that font is the current one of the interface, set it back to Roboto.
+	func remove_font(font: Font) -> void:
+		var font_index := Global.loaded_fonts.find(font)
+		if font_index == -1:
+			return
+		if Global.theme_font_index == font_index:
+			Global.theme_font_index = 1
+		Global.loaded_fonts.remove_at(font_index)
+		Global.font_loaded.emit()
+
+	## Sets a font as the current one for the interface. The font must have been
+	## added beforehand by [method add_font].
+	func set_font(font: Font) -> void:
+		var font_index := Global.loaded_fonts.find(font)
+		if font_index > -1:
+			Global.theme_font_index = font_index
+
 
 ## Gives ability to add/remove tools.
 class ToolAPI:
