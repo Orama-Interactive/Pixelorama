@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-10-17 14:10\n"
+"PO-Revision-Date: 2024-10-17 15:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -235,7 +235,7 @@ msgstr "Preferenze"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Centra tela"
 
 msgid "Tile Mode"
 msgstr "Modalità Tile"
