@@ -866,11 +866,16 @@ columns = 3
 [node name="ShareOptionsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If this is enabled, options will be synced between the left and the right tool.
+For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+mouse_filter = 1
 text = "Share options between the left and the right tools"
 
 [node name="ShareOptionsCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If this is enabled, options will be synced between the left and the right tool.
+For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
 mouse_default_cursor_shape = 2
 text = "On"
 
