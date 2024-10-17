@@ -220,6 +220,10 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
+
 msgid "Tile Mode"
 msgstr ""
 
