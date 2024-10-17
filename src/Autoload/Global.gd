@@ -210,6 +210,20 @@ var integer_zoom := false:
 
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
+var theme_font := loaded_fonts[theme_font_index]:
+	set(value):
+		theme_font = value
+		if is_instance_valid(control) and is_instance_valid(control.theme):
+			control.theme.default_font = theme_font
+## Found in Preferences. The index of the font used by the interface.
+var theme_font_index := 1:
+	set(value):
+		theme_font_index = value
+		if theme_font_index < loaded_fonts.size():
+			theme_font = loaded_fonts[theme_font_index]
+		else:
+			var font_name := get_available_font_names()[theme_font_index]
+			theme_font = find_font_from_name(font_name)
 ## Found in Preferences. The font size used by the interface.
 var font_size := 16
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
@@ -277,6 +291,7 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences.
 var share_options_between_tools := false:
 	set(value):
 		share_options_between_tools = value

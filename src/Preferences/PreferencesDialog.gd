@@ -9,6 +9,7 @@ var preferences: Array[Preference] = [
 	),
 	Preference.new("ffmpeg_path", "Startup/StartupContainer/FFMPEGPath", "text", ""),
 	Preference.new("shrink", "%ShrinkSlider", "value", 1.0),
+	Preference.new("theme_font_index", "%FontOptionButton", "selected", 1),
 	Preference.new("font_size", "%FontSizeSlider", "value", 16),
 	Preference.new(
 		"dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed", true
@@ -291,6 +292,10 @@ func _ready() -> void:
 			button.button_pressed = true
 		language.add_child(button)
 		button.pressed.connect(_on_language_pressed.bind(button.get_index()))
+
+	# Add fonts to the font option button
+	for font_name in Global.get_available_font_names():
+		%FontOptionButton.add_item(font_name)
 
 	for pref in preferences:
 		if not right_side.has_node(pref.node_path):
