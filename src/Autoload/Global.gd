@@ -223,8 +223,12 @@ var theme_font_index := 1:
 		if theme_font_index < loaded_fonts.size():
 			theme_font = loaded_fonts[theme_font_index]
 		else:
-			var font_name := get_available_font_names()[theme_font_index]
-			theme_font = find_font_from_name(font_name)
+			var available_font_names := get_available_font_names()
+			if theme_font_index < available_font_names.size():
+				var font_name := available_font_names[theme_font_index]
+				theme_font = find_font_from_name(font_name)
+			else:
+				theme_font = loaded_fonts[1]  # Fall back to Roboto if out of bounds
 ## Found in Preferences. The font size used by the interface.
 var font_size := 16
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
