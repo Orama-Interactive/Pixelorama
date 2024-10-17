@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2024-10-17 10:19\n"
+"PO-Revision-Date: 2024-10-17 14:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -230,6 +230,10 @@ msgstr "Адлюстраваць па вертыкалі"
 
 msgid "Preferences"
 msgstr "Налады"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
 
 msgid "Tile Mode"
 msgstr "Бясшоўны рэжым"
