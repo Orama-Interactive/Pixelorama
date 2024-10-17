@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-10-17 10:19\n"
+"PO-Revision-Date: 2024-10-17 14:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -232,6 +232,10 @@ msgstr "Rifletti verticalmente"
 
 msgid "Preferences"
 msgstr "Preferenze"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
 
 msgid "Tile Mode"
 msgstr "Modalità Tile"
@@ -916,12 +920,13 @@ msgstr "Colore dello sfondo:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Condividi le opzioni tra gli strumenti sinistro e destro"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Se abilitata, le opzioni saranno sincronizzate tra sinistra e destra.\n"
+"Ad esempio, entrambi gli strumenti condivideranno la stessa dimensione del pennello e cambieranno istantaneamente su uno strumento l'altro."
 
 msgid "Left tool color:"
 msgstr "Colore strumento sinistra:"
