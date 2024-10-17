@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2024-10-17 10:19\n"
+"PO-Revision-Date: 2024-10-17 14:11\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -230,6 +230,10 @@ msgstr "Обрни вертикално"
 
 msgid "Preferences"
 msgstr "Подешавања"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
 
 msgid "Tile Mode"
 msgstr "Бешавни режим"
