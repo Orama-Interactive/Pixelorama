@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-10-16 22:30\n"
+"PO-Revision-Date: 2024-10-17 10:20\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -917,6 +917,11 @@ msgstr "Warna latar belakang:"
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
 msgstr "Berbagi opsi antara alat di kiri dan di kanan"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Warna alat di kiri:"
