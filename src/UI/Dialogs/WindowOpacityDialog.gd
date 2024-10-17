@@ -1,18 +1,22 @@
 extends AcceptDialog
 
+var main_canvas := Global.control.find_child("Main Canvas", true, false)
+
 @onready var slider := $VBoxContainer/ValueSlider as ValueSlider
 @onready var fullscreen_warning := $VBoxContainer/FullscreenWarning as Label
-@onready var main_canvas := Global.control.find_child("Main Canvas") as Control
 
 
 func _ready() -> void:
+	if main_canvas is FloatingWindow:  ## If it's shifted to a window then get the content
+		main_canvas = main_canvas.window_content
 	await get_tree().process_frame
 	Global.control.main_ui.sort_children.connect(_recalculate_opacity)
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:
-	get_tree().root.transparent = true
-	get_tree().root.transparent_bg = true
+	var canvas_window = main_canvas.get_window()
+	canvas_window.transparent = true
+	canvas_window.transparent_bg = true
 	slider.editable = not is_fullscreen()
 	fullscreen_warning.visible = not slider.editable
 
@@ -31,7 +35,11 @@ func set_window_opacity(value: float) -> void:
 		if container is TabContainer:
 			var center := container.get_rect().get_center()
 			if main_canvas.get_rect().has_point(center):
-				container.self_modulate.a = value
+				if main_canvas.get_window() != get_tree().root:
+					## In case we converted to window while trransparency was active
+					container.self_modulate.a = 1.0
+				else:
+					container.self_modulate.a = value
 	Global.transparent_checker.update_transparency(value)
 
 
