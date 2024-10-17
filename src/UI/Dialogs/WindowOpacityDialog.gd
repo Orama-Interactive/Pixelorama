@@ -7,7 +7,7 @@ var main_canvas := Global.control.find_child("Main Canvas", true, false)
 
 
 func _ready() -> void:
-	if main_canvas is FloatingWindow:  ## If it's shifted to a window then get the content
+	if main_canvas is FloatingWindow:  # If it's shifted to a window then get the content.
 		main_canvas = main_canvas.window_content
 	await get_tree().process_frame
 	Global.control.main_ui.sort_children.connect(_recalculate_opacity)
@@ -30,13 +30,13 @@ func set_window_opacity(value: float) -> void:
 		value = 100.0
 		slider.value = value
 	value = value / 100.0
-	# Find the TabContainer that has the Main Canvas panel
+	# Find the TabContainer that has the Main Canvas panel.
 	for container: Control in Global.control.main_ui._panel_container.get_children():
 		if container is TabContainer:
 			var center := container.get_rect().get_center()
 			if main_canvas.get_rect().has_point(center):
 				if main_canvas.get_window() != get_tree().root:
-					## In case we converted to window while trransparency was active
+					# In case we converted to window while trransparency was active.
 					container.self_modulate.a = 1.0
 				else:
 					container.self_modulate.a = value
