@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-10-17 14:10\n"
+"PO-Revision-Date: 2024-10-17 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -235,7 +235,7 @@ msgstr "設定"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "キャンバスを中央へ"
 
 msgid "Tile Mode"
 msgstr "タイルモード"
