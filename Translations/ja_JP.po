@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-10-17 10:19\n"
+"PO-Revision-Date: 2024-10-17 12:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -921,7 +921,8 @@ msgstr "左と右のツール間でオプションを共有"
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "これを有効にすると、オプションは左側と右側のツール間で同期されます。\n"
+"例えば、両方のツールが同じブラシサイズを共有し、一方のツールでそれを変更すると、他のツールで即座に変更されます。"
 
 msgid "Left tool color:"
 msgstr "左ツールの色:"
