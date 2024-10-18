@@ -95,21 +95,6 @@ var preferences: Array[Preference] = [
 	Preference.new("integer_zoom", "Canvas/ZoomOptions/IntegerZoom", "button_pressed", false),
 	Preference.new("snapping_distance", "Canvas/SnappingOptions/DistanceValue", "value", 32.0),
 	Preference.new(
-		"grid_type", "Canvas/GridOptions/GridType", "selected", Global.GridTypes.CARTESIAN
-	),
-	Preference.new("grid_size", "Canvas/GridOptions/GridSizeValue", "value", Vector2i(2, 2)),
-	Preference.new(
-		"isometric_grid_size", "Canvas/GridOptions/IsometricGridSizeValue", "value", Vector2i(16, 8)
-	),
-	Preference.new("grid_offset", "Canvas/GridOptions/GridOffsetValue", "value", Vector2i.ZERO),
-	Preference.new(
-		"grid_draw_over_tile_mode",
-		"Canvas/GridOptions/GridDrawOverTileMode",
-		"button_pressed",
-		false
-	),
-	Preference.new("grid_color", "Canvas/GridOptions/GridColor", "color", Color.BLACK),
-	Preference.new(
 		"pixel_grid_show_at_zoom", "Canvas/PixelGridOptions/ShowAtZoom", "value", 1500.0
 	),
 	Preference.new(
