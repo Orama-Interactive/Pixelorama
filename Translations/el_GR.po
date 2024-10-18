@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-09-12 14:53\n"
+"PO-Revision-Date: 2024-10-17 17:12\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -232,6 +232,10 @@ msgstr "Κάθετη αναστροφή"
 
 msgid "Preferences"
 msgstr "Προτιμήσεις"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr "Κεντράρισμα Καμβά"
 
 msgid "Tile Mode"
 msgstr "Λειτουργία μοτίβου"
@@ -844,6 +848,10 @@ msgstr "Γλώσσα Συστήματος"
 msgid "Display scale:"
 msgstr "Κλίμακα εμφάνισης:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr "Γραμματοσειρά:"
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Μέγεθος γραμματοσειράς:"
@@ -909,6 +917,16 @@ msgstr "Χρώμα υποβάθρου από:"
 
 msgid "Background color:"
 msgstr "Χρώμα υποβάθρου:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr "Κοινή χρήση επιλογών μεταξύ αριστερών και δεξιών εργαλείων"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr "Αν αυτό είναι ενεργοποιημένο, οι επιλογές θα συγχρονίζονται μεταξύ του αριστερού και του δεξιού εργαλείου.\n"
+"Για παράδειγμα, και τα δύο εργαλεία θα μοιράζονται το ίδιο μέγεθος βούρτσας, και η αλλαγή του σε ένα εργαλείο θα αλλάξει αμέσως και το άλλο."
 
 msgid "Left tool color:"
 msgstr "Χρώμα αριστερού εργαλείου:"
@@ -2030,11 +2048,19 @@ msgstr "Οριζόντια"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό"
 
+msgid "Vertical"
+msgstr "Κάθετα"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό"
 
-msgid "Vertical"
-msgstr "Κάθετα"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Μετακίνηση στο κέντρο του καμβά"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "Μετακίνηση στο κέντρο της προβολής"
 
 msgid "Current frame:"
 msgstr "Τρέχον καρέ:"
@@ -2051,11 +2077,11 @@ msgstr "Μετάβαση στο πρώτο καρέ"
 msgid "Go to the previous frame"
 msgstr "Μετάβαση στο προηγούμενο καρέ"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)"
+msgid "Play the animation backwards"
+msgstr "Αναπαραγωγή της κίνησης προς τα πίσω"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)"
+msgid "Play the animation forward"
+msgstr "Αναπαραγωγή της κίνησης προς τα εμπρός"
 
 msgid "Go to the next frame"
 msgstr "Μετάβαση στο επόμενο καρέ"
@@ -2558,6 +2584,26 @@ msgstr "Προεπιλεγμένο γέμισμα με χρώμα:"
 msgid "A default background color of a new image"
 msgstr "Το προεπιλεγμένο χρώμα των καινούριων εικόνων"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Επαναφορά όλων των επιλογών που βρίσκονται στις προτιμήσεις"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Επαναφορά επιλογών χρονοδιαγράμματος"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Επαναφορά όλων των επιλογών εργαλείων"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Διαγραφή όλων των επεκτάσεων"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Εκκαθάριση της λίστας αρχείων που ανοίχθηκαν πρόσφατα"
+
 msgid "Lock aspect ratio"
 msgstr "Κλείδωμα αναλογίας διαστάσεων"
 
@@ -2732,6 +2778,14 @@ msgstr "Περικοπή εικόνων"
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Περικοπή των εξαγόμενων εικόνων στο ορατό τμήμα τους, θεωρώντας κάθε pixel με ένα μη μηδενικό alpha κανάλι ως ορατό."
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr "Αποκοπή περιεχομένου εικόνας στην επιλογή"
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr "Εξαγωγή μόνο περιεχομένου που βρίσκεται εντός των ορίων μιας επιλεγμένης περιοχής."
 
 msgid "Close"
 msgstr "Κλείσιμο"
@@ -3078,6 +3132,10 @@ msgstr "Κάτω ακτίνα:"
 msgid "Text:"
 msgstr "Κείμενο:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr "Βάθος:"
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Μέγεθος εικονοστοιχείου:"
@@ -3089,11 +3147,18 @@ msgstr "Βήμα καμπυλότητας:"
 msgid "Horizontal alignment:"
 msgstr "Οριζόντια στοίχιση:"
 
+msgid "Vertical alignment:"
+msgstr "Κάθετη στοίχιση:"
+
 msgid "Left"
 msgstr "Αριστερά"
 
 msgid "Right"
 msgstr "Δεξιά"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr "Διάστιχο γραμμών:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-09-12 03:49\n"
+"PO-Revision-Date: 2024-10-18 20:11\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -213,7 +213,7 @@ msgid "Initial angle:"
 msgstr "Sudut inisial:"
 
 msgid "Clear"
-msgstr "Lepas"
+msgstr "Kosongkan"
 
 msgid "Invert"
 msgstr "Terbalikkan"
@@ -232,6 +232,10 @@ msgstr "Dibalik Menegak"
 
 msgid "Preferences"
 msgstr "Preferensi"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr "Tengahkan Kanvas"
 
 msgid "Tile Mode"
 msgstr "Mode Petak"
@@ -844,6 +848,10 @@ msgstr "Bahasa Sistem"
 msgid "Display scale:"
 msgstr "Skala tampilan:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr "Font:"
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Ukuran font:"
@@ -909,6 +917,16 @@ msgstr "Warna latar belakang dari:"
 
 msgid "Background color:"
 msgstr "Warna latar belakang:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr "Berbagi opsi antara alat di kiri dan di kanan"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr "Jika ini diaktifkan, opsi alat di kiri dan di kanan akan disinkronkan.\n"
+"Contoh, ada dua alat berbagi ukuran kuas, jika mengubah opsi di salah satu alat maka yang satunya juga berubah."
 
 msgid "Left tool color:"
 msgstr "Warna alat di kiri:"
@@ -1485,7 +1503,7 @@ msgstr "Garis Lengkung\n\n"
 "Menggaris lengkung Bezier\n"
 "Tekan %s/%s untuk menambah titik\n"
 "Tekan dan seret untuk melengkungkan\n"
-"Tekan %s untuk melepas titik tadi"
+"Tekan %s untuk menghapus titik tadi"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -2030,11 +2048,19 @@ msgstr "Mendatar"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Aktifkan gambar dicerminkan mendatar"
 
+msgid "Vertical"
+msgstr "Menegak"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Aktifkan gambar dicerminkan menegak"
 
-msgid "Vertical"
-msgstr "Menegak"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Ke tengah kanvas"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "Ke tengah tampilan"
 
 msgid "Current frame:"
 msgstr "Bingkai saat ini:"
@@ -2051,11 +2077,11 @@ msgstr "Lompat ke bingkai pertama"
 msgid "Go to the previous frame"
 msgstr "Ke bingkai sebelumnya"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Putar animasi secara mundur (dari akhir sampai awal)"
+msgid "Play the animation backwards"
+msgstr "Putar mundur animasi"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Putar animasi secara normal (dari awal sampai akhir)"
+msgid "Play the animation forward"
+msgstr "Putar maju animasi"
 
 msgid "Go to the next frame"
 msgstr "Ke bingkai selanjutnya"
@@ -2212,7 +2238,7 @@ msgstr "Lapisan"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr "Cuplikkan mask"
+msgstr "Cuplik mask"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2558,6 +2584,26 @@ msgstr "Warna isi bawaan:"
 msgid "A default background color of a new image"
 msgstr "Warna latar belakang bawaan pada gambar baru"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Atur ulang semua opsi yang di Preferensi"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Atur ulang opsi garis waktu"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Atur ulang opsi alat-alat"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Hapus semua ekstensi"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Kosongkan daftar berkas yang dibuka"
+
 msgid "Lock aspect ratio"
 msgstr "Kuncikan nisbah aspek"
 
@@ -2732,6 +2778,14 @@ msgstr "Pangkas gambar"
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Memangkas gambar terekspor ke bagian terlihat, piksel apa pun bersaluran alfa bukan nol akan dianggap terlihat."
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr "Cuplik isi gambar ke seleksi"
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr "Hanya mengekspor isi area yang diseleksi."
 
 msgid "Close"
 msgstr "Tutup"
@@ -2997,7 +3051,7 @@ msgid "Add new object"
 msgstr "Tambah objek baru"
 
 msgid "Remove object"
-msgstr "Hilangkan Objek"
+msgstr "Hapus objek"
 
 msgid "Camera"
 msgstr "Kamera"
@@ -3079,6 +3133,10 @@ msgstr "Jari-jari bawah:"
 msgid "Text:"
 msgstr "Teks:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr "Kedalaman:"
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Ukuran piksel:"
@@ -3090,11 +3148,18 @@ msgstr "Step lengkung:"
 msgid "Horizontal alignment:"
 msgstr "Penjajaran mendatar:"
 
+msgid "Vertical alignment:"
+msgstr "Penjajaran menegak:"
+
 msgid "Left"
 msgstr "Kiri"
 
 msgid "Right"
 msgstr "Kanan"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr "Jarak baris:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
