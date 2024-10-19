@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-10-17 14:10\n"
+"PO-Revision-Date: 2024-10-19 18:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -233,7 +233,7 @@ msgstr "Preferencias"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Centrar el lienzo"
 
 msgid "Tile Mode"
 msgstr "Modo mosaico"
@@ -917,12 +917,13 @@ msgstr "Color de fondo:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Sincronizar opciones entre las herramientas izquierda y derecha"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Si está activado, se sincronizarán las opciones entre las herramientas izquierda y derecha.\n"
+"Por ejemplo, ambas herramientas compartirán el mismo tamaño de pincel, y cambiarlo en una herramienta lo cambiará instantáneamente en la otra."
 
 msgid "Left tool color:"
 msgstr "Color de la herramienta izquierda:"
