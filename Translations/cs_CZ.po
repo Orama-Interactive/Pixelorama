@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-10-17 14:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -230,6 +230,10 @@ msgstr "Převrátit svisle"
 
 msgid "Preferences"
 msgstr "Nastavení"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
 
 msgid "Tile Mode"
 msgstr "Dlaždicový režim"
@@ -842,6 +846,10 @@ msgstr "Systémový jazyk"
 msgid "Display scale:"
 msgstr "Škála zobrazení:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Velikost písma:"
@@ -907,6 +915,15 @@ msgstr "Barva pozadí z:"
 
 msgid "Background color:"
 msgstr "Barva pozadí:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Barva levého nástroje:"
@@ -2029,11 +2046,19 @@ msgstr "Vodorovně"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Povolit kreslení ve vodorovném zrcadlení"
 
+msgid "Vertical"
+msgstr "Svisle"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Povolit kreslení ve svislém zrcadlení"
 
-msgid "Vertical"
-msgstr "Svisle"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Aktuální snímek:"
@@ -2050,11 +2075,11 @@ msgstr "Přeskočit na první snímek"
 msgid "Go to the previous frame"
 msgstr "Přejít na předchozí snímek"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Přehrát animaci pozpátku (od konce do začátku)"
+msgid "Play the animation backwards"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Přehrát animaci vpřed (od začátku do konce)"
+msgid "Play the animation forward"
+msgstr ""
 
 msgid "Go to the next frame"
 msgstr "Přejít na další snímek"
@@ -2557,6 +2582,26 @@ msgstr "Výchozí barva výplně:"
 msgid "A default background color of a new image"
 msgstr "Výchozí barva pozadí nového obrázku"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
+
 msgid "Lock aspect ratio"
 msgstr "Uzamknout poměr stran"
 
@@ -2730,6 +2775,14 @@ msgstr ""
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr ""
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
 msgstr ""
 
 msgid "Close"
@@ -3078,6 +3131,10 @@ msgstr "Dolní poloměr:"
 msgid "Text:"
 msgstr "Text:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Velikost pixelu:"
@@ -3089,11 +3146,18 @@ msgstr "Krok křivky:"
 msgid "Horizontal alignment:"
 msgstr "Vodorovné zarovnání:"
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr "Vlevo"
 
 msgid "Right"
 msgstr "Vpravo"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

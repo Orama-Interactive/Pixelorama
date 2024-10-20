@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-10-17 14:11\n"
 
 msgid "OK"
 msgstr "确定"
@@ -232,6 +232,10 @@ msgstr "垂直翻转"
 
 msgid "Preferences"
 msgstr "首选项"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
 
 msgid "Tile Mode"
 msgstr "平铺模式"
@@ -562,7 +566,7 @@ msgstr "调整大小："
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "质量："
 
 msgid "Cancel Export"
 msgstr "取消导出"
@@ -844,6 +848,10 @@ msgstr "系统语言"
 msgid "Display scale:"
 msgstr "显示比例："
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "字体大小："
@@ -909,6 +917,15 @@ msgstr "背景颜色从："
 
 msgid "Background color:"
 msgstr "背景颜色："
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "左侧工具颜色："
@@ -981,23 +998,23 @@ msgstr "阴影颜色："
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "高斯模糊"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "模糊类型："
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "模糊数量："
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "模糊半径："
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "模糊方向："
 
 msgid "Gradient"
 msgstr "渐变"
@@ -2029,11 +2046,19 @@ msgstr "水平"
 msgid "Enable horizontal mirrored drawing"
 msgstr "启用水平镜像绘图"
 
+msgid "Vertical"
+msgstr "垂直"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "启用垂直镜像绘图"
 
-msgid "Vertical"
-msgstr "垂直"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "当前帧："
@@ -2050,11 +2075,11 @@ msgstr "跳转到第一帧"
 msgid "Go to the previous frame"
 msgstr "转到上一帧"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "向后播放动画（从结尾到开头）"
+msgid "Play the animation backwards"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "向前播放动画（从头到尾）"
+msgid "Play the animation forward"
+msgstr ""
 
 msgid "Go to the next frame"
 msgstr "转到下一帧"
@@ -2557,6 +2582,26 @@ msgstr "默认填充颜色："
 msgid "A default background color of a new image"
 msgstr "设置新建图像的背景颜色"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
+
 msgid "Lock aspect ratio"
 msgstr "锁定长宽比"
 
@@ -2726,10 +2771,18 @@ msgstr "分隔文件名称和帧编号的字符(秒)"
 
 #. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
 msgid "Trim images"
-msgstr ""
+msgstr "裁剪图像"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr "将导出的图像变为可见部分，考虑到非零透明通道的每个像素。"
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
 msgstr ""
 
 msgid "Close"
@@ -3077,6 +3130,10 @@ msgstr "下半径："
 msgid "Text:"
 msgstr "文本："
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "像素大小："
@@ -3088,11 +3145,18 @@ msgstr "曲线步骤："
 msgid "Horizontal alignment:"
 msgstr "水平对齐"
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr "左"
 
 msgid "Right"
 msgstr "右"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

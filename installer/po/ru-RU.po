@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-05-21 17:41\n"
+"PO-Revision-Date: 2024-10-20 12:52\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -65,5 +65,5 @@ msgstr "Удаляет ${APPNAME} ${APPVERSION} и удаляет все ярл�
 #. DESC_un.SecConfig
 #: ..\pixelorama.nsi:204
 msgid "Removes configuration files for ${APPNAME}."
-msgstr "Удаляет файлы конфигурации для ${APPNAME}."
+msgstr "Удаление файлов конфигурации для ${APPNAME}."
 
