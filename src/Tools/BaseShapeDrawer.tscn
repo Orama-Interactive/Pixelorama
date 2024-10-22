@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_mvrqm"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_7w1wt"]
 resource_name = "rotate"
 allow_unpress = true
 
@@ -26,14 +26,14 @@ tooltip_text = "Fills the drawn shape with color, instead of drawing a hollow sh
 mouse_default_cursor_shape = 2
 text = "Fill Shape"
 
-[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
-button_group = SubResource("ButtonGroup_mvrqm")
+[node name="Rotate90" parent="RotationOptions/GridContainer/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_7w1wt")
 
-[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
-button_group = SubResource("ButtonGroup_mvrqm")
+[node name="Rotate180" parent="RotationOptions/GridContainer/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_7w1wt")
 
-[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
-button_group = SubResource("ButtonGroup_mvrqm")
+[node name="Rotate270" parent="RotationOptions/GridContainer/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_7w1wt")
 
 [node name="Brush" parent="." index="5"]
 visible = false
