@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-10-17 14:10\n"
+"PO-Revision-Date: 2024-10-22 10:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -233,7 +233,7 @@ msgstr "Preferințe"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Centrare pânză"
 
 msgid "Tile Mode"
 msgstr "Mod mozaic"
