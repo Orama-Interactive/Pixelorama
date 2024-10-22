@@ -33,7 +33,11 @@ var layer_metadata_texture := ImageTexture.new()
 func _ready() -> void:
 	material.set_shader_parameter("layers", layer_texture_array)
 	material.set_shader_parameter("metadata", layer_metadata_texture)
-	Global.project_switched.connect(func(): project_changed = true ; queue_redraw())
+	Global.project_switched.connect(
+		func():
+			project_changed = true
+			queue_redraw()
+	)
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE

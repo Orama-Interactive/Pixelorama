@@ -267,11 +267,12 @@ static func create_ui_for_shader_uniforms(
 				var mod_button := Button.new()
 				mod_button.text = "Modify"
 				mod_button.pressed.connect(
-					func(): _modify_texture_resource(
-						_get_loaded_texture(params, u_name),
-						u_name,
-						_shader_update_texture.bind(value_changed, u_name)
-					)
+					func():
+						_modify_texture_resource(
+							_get_loaded_texture(params, u_name),
+							u_name,
+							_shader_update_texture.bind(value_changed, u_name)
+						)
 				)
 				mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				mod_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND

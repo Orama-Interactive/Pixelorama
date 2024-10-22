@@ -2,6 +2,5 @@ disable:
   - no-elif-return
   - no-else-return
   - max-returns
-  - private-method-call
   
 max-file-lines: 2000
