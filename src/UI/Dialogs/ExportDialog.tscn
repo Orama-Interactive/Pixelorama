@@ -163,6 +163,7 @@ min_value = 50.0
 max_value = 1000.0
 step = 50.0
 value = 100.0
+allow_greater = true
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
