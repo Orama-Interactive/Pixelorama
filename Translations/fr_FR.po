@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-10-17 14:10\n"
+"PO-Revision-Date: 2024-10-24 17:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2141,7 +2141,7 @@ msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le m
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Taille de la cellule :"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
