@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-10-24 17:12\n"
+"PO-Revision-Date: 2024-10-24 18:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -180,7 +180,7 @@ msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Décalage de l'image"
 
 msgid "Offset:"
 msgstr "Décalage :"
@@ -234,7 +234,7 @@ msgstr "Préférences"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Centrer le Canevas"
 
 msgid "Tile Mode"
 msgstr "Mode tuile"
@@ -457,7 +457,7 @@ msgstr ""
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Distance de fusion :"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
@@ -849,7 +849,7 @@ msgstr "Taille d'Affichage:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Police:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -1438,7 +1438,8 @@ msgstr "Pipette\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Rogner\n\n"
+"Redimensionner le canevas"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1549,7 +1550,7 @@ msgstr "Récupérer une couleur sur l'écran."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Entrer le code hexadécimal (\"#ff0000\") ou le nom de la couleur (\"rouge\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1774,7 +1775,7 @@ msgstr "Mettre à jour en continu"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Si cette option est activée, l'application redessine l'écran en permanence, même si elle n'est pas utilisée. Désactiver cette option permet de réduire l'utilisation du processeur et du GPU en cas d'inactivité."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -2045,7 +2046,7 @@ msgstr "Dessine avec un miroir vertical"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "Déplacer vers le centre du canevas"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
@@ -2067,16 +2068,16 @@ msgid "Go to the previous frame"
 msgstr "Aller à l'image précédente"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Jouer l'animation à l'envers"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Jouer l'animation à l'endroit"
 
 msgid "Go to the next frame"
 msgstr "Aller à l'image suivante"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Aller à la dernière frame"
 
 msgid "Timeline settings"
 msgstr ""
@@ -2266,7 +2267,7 @@ msgstr "Mode de fusion :"
 
 #. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
 msgid "Pass through"
-msgstr ""
+msgstr "Passer à travers"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -2587,7 +2588,7 @@ msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Enlever toutes les extensions"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3124,7 +3125,7 @@ msgstr "Texte :"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Profondeur:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3138,7 +3139,7 @@ msgid "Horizontal alignment:"
 msgstr "Alignement horizontal :"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Alignement vertical:"
 
 msgid "Left"
 msgstr "Gauche"
@@ -3148,7 +3149,7 @@ msgstr "Droite"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Interligne:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
@@ -3268,11 +3269,11 @@ msgstr "Supprimer"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Maintenez Maj enfoncé tout en appuyant pour supprimer instantanément."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette image de référence ? Elle ne sera pas supprimée de vos fichiers locaux."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3300,7 +3301,7 @@ msgstr "Redimensionner l'image de référence sélectionnée"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "aucun"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
