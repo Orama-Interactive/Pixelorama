@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-10-17 14:11\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -232,6 +232,10 @@ msgstr "Віддзеркалити по вертикалі"
 
 msgid "Preferences"
 msgstr "Налаштування"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
 
 msgid "Tile Mode"
 msgstr "Безшовний режим"
@@ -844,6 +848,10 @@ msgstr "Мова системи"
 msgid "Display scale:"
 msgstr "Масштаб екрану:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr ""
@@ -909,6 +917,15 @@ msgstr "Колір фону з:"
 
 msgid "Background color:"
 msgstr "Колір фону:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Колір лівого інструменту:"
@@ -2021,11 +2038,19 @@ msgstr "Горизонтально"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Увімкнути горизонтальне віддзеркалення для малювання"
 
+msgid "Vertical"
+msgstr "Вертикально"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Увімкнути вертикальне віддзеркалення для малювання"
 
-msgid "Vertical"
-msgstr "Вертикально"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Поточний кадр:"
@@ -2042,10 +2067,10 @@ msgstr ""
 msgid "Go to the previous frame"
 msgstr ""
 
-msgid "Play the animation backwards (from end to beginning)"
+msgid "Play the animation backwards"
 msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
+msgid "Play the animation forward"
 msgstr ""
 
 msgid "Go to the next frame"
@@ -2549,6 +2574,26 @@ msgstr "Стандартний колір заливки:"
 msgid "A default background color of a new image"
 msgstr "Стандартний фоновий колір нового зображення"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
+
 msgid "Lock aspect ratio"
 msgstr "Зафіксувати співвідношення сторін"
 
@@ -2722,6 +2767,14 @@ msgstr ""
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr ""
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
 msgstr ""
 
 msgid "Close"
@@ -3069,6 +3122,10 @@ msgstr "Нижній радіус:"
 msgid "Text:"
 msgstr "Текст:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Розмір пікселя:"
@@ -3080,11 +3137,18 @@ msgstr "Крок кривої:"
 msgid "Horizontal alignment:"
 msgstr "Горизонтальне вирівнювання:"
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr "Вліво"
 
 msgid "Right"
 msgstr "Вправо"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

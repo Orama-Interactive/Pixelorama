@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-10-24 18:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,8 @@ msgstr "Inclure les images fusionnées"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Si activée, les rendus finals mélangés sont aussi stockés dans le pxo, pour chaque Frame.\n"
+"Cela rend le fichier pxo plus volumineux et est utile pour les importations par un logiciel tiers ou les exportations en ligne de commande. Le chargement de fichiers pxo dans Pixelorama ne nécessite pas que cette option soit activée."
 
 msgid "Import"
 msgstr "Importer"
@@ -179,7 +180,7 @@ msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Décalage de l'image"
 
 msgid "Offset:"
 msgstr "Décalage :"
@@ -230,6 +231,10 @@ msgstr "Miroir vertical"
 
 msgid "Preferences"
 msgstr "Préférences"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr "Centrer le Canevas"
 
 msgid "Tile Mode"
 msgstr "Mode tuile"
@@ -452,7 +457,7 @@ msgstr ""
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Distance de fusion :"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
@@ -560,7 +565,7 @@ msgstr "Redimensionner :"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Qualité :"
 
 msgid "Cancel Export"
 msgstr "Annuler l'exportation"
@@ -641,25 +646,25 @@ msgid "Export dimensions:"
 msgstr "Dimensions d'export :"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Enregistrer un fichier"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Aller au dossier précédent."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Aller au dossier suivant."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Aller au dossier parent."
 
 msgid "Path:"
 msgstr "Chemin :"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Rafraîchir les fichiers."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Activer/désactiver la visibilité des fichiers cachés."
 
 msgid "Directories & Files:"
 msgstr "Répertoires et fichiers :"
@@ -842,6 +847,10 @@ msgstr "Langue système"
 msgid "Display scale:"
 msgstr "Taille d'Affichage:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr "Police:"
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Taille de police :"
@@ -907,6 +916,15 @@ msgstr "Couleur d'arrière-plan à partir de :"
 
 msgid "Background color:"
 msgstr "Couleur d'arrière-plan :"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Couleur de l'outil gauche:"
@@ -979,23 +997,23 @@ msgstr "Couleur d'ombre :"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Flou gaussien"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Type de flou :"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Taux de flou :"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Rayon du flou :"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Direction du flou :"
 
 msgid "Gradient"
 msgstr "Dégradé"
@@ -1079,7 +1097,7 @@ msgstr "Valeur :"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Ajuster la luminosité / le contraste"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
@@ -1091,23 +1109,23 @@ msgstr "Contraste :"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Valeur rouge :"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Valeur verte :"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Valeur bleue :"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Couleur de teinte :"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Facteur d'effet de teinte :"
 
 msgid "Apply"
 msgstr "Appliquer"
@@ -1158,7 +1176,7 @@ msgstr "Suivi des problèmes"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Ouvrir le dossier des données de l'éditeur"
 
 msgid "Changelog"
 msgstr "Journal des modifications"
@@ -1420,7 +1438,8 @@ msgstr "Pipette\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Rogner\n\n"
+"Redimensionner le canevas"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1520,7 +1539,7 @@ msgstr "Inverser les couleurs de gauche et droite."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
-msgstr ""
+msgstr "Couleur moyenne :"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
 msgstr "Réinitialise les couleurs à leur état initial (noir pour l'outil gauche, blanc pour l'outil droit)"
@@ -1531,7 +1550,7 @@ msgstr "Récupérer une couleur sur l'écran."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Entrer le code hexadécimal (\"#ff0000\") ou le nom de la couleur (\"rouge\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1539,11 +1558,11 @@ msgstr "Sélectionner une forme de Pipette."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Options de couleur"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Sélectionnez un mode de pipette."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
@@ -1555,7 +1574,7 @@ msgstr ""
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Couleurs récentes"
 
 msgid "Left tool"
 msgstr "Outil gauche"
@@ -1740,7 +1759,7 @@ msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Étapes max d'annulation :"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
@@ -1752,11 +1771,11 @@ msgstr "Si activé, l'application est mise en pause quand le focus est perdu. Ce
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Mettre à jour en continu"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Si cette option est activée, l'application redessine l'écran en permanence, même si elle n'est pas utilisée. Désactiver cette option permet de réduire l'utilisation du processeur et du GPU en cas d'inactivité."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -1800,7 +1819,7 @@ msgstr "Ouvrir le dossier"
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
 msgid "Explore Online"
-msgstr ""
+msgstr "Explorer en ligne"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -1887,7 +1906,7 @@ msgstr "Pixel Perfect\n"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Verrouiller l'alpha"
 
 msgid "Fill inside"
 msgstr "Remplir à l’intérieur"
@@ -2019,11 +2038,19 @@ msgstr "Horizontal"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Dessine avec un miroir horizontal"
 
+msgid "Vertical"
+msgstr "Vertical"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Dessine avec un miroir vertical"
 
-msgid "Vertical"
-msgstr "Vertical"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Déplacer vers le centre du canevas"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "Frame actuelle :"
@@ -2035,22 +2062,22 @@ msgid "Current frame as spritesheet"
 msgstr "Frame actuelle en spritesheet"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Aller à la première image"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Aller à l'image précédente"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr ""
+msgid "Play the animation backwards"
+msgstr "Jouer l'animation à l'envers"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr ""
+msgid "Play the animation forward"
+msgstr "Jouer l'animation à l'endroit"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Aller à l'image suivante"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Aller à la dernière frame"
 
 msgid "Timeline settings"
 msgstr ""
@@ -2115,7 +2142,7 @@ msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le m
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Taille de la cellule :"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -2240,7 +2267,7 @@ msgstr "Mode de fusion :"
 
 #. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
 msgid "Pass through"
-msgstr ""
+msgstr "Passer à travers"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -2547,6 +2574,26 @@ msgstr "Couleur de remplissage par défaut:"
 msgid "A default background color of a new image"
 msgstr "Une couleur de fond par défaut d'une nouvelle image"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Enlever toutes les extensions"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
+
 msgid "Lock aspect ratio"
 msgstr "Verrouiller les proportions"
 
@@ -2720,6 +2767,14 @@ msgstr ""
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr ""
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
 msgstr ""
 
 msgid "Close"
@@ -3068,6 +3123,10 @@ msgstr "Rayon inférieur :"
 msgid "Text:"
 msgstr "Texte :"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr "Profondeur:"
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Taille des Pixels:"
@@ -3079,11 +3138,18 @@ msgstr "Étape de Courbe:"
 msgid "Horizontal alignment:"
 msgstr "Alignement horizontal :"
 
+msgid "Vertical alignment:"
+msgstr "Alignement vertical:"
+
 msgid "Left"
 msgstr "Gauche"
 
 msgid "Right"
 msgstr "Droite"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr "Interligne:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
@@ -3203,11 +3269,11 @@ msgstr "Supprimer"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr ""
+msgstr "Maintenez Maj enfoncé tout en appuyant pour supprimer instantanément."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette image de référence ? Elle ne sera pas supprimée de vos fichiers locaux."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3235,7 +3301,7 @@ msgstr "Redimensionner l'image de référence sélectionnée"
 
 #. Button to select no reference images in the Reference Images panel.
 msgid "none"
-msgstr ""
+msgstr "aucun"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
