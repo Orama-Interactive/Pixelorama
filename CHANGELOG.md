@@ -25,6 +25,8 @@ Built using Godot 4.3
 
 ### Changed
 - Bumped extensions API version to 5.
+- The screen no longer remains on when idle, avoiding unnecessary power consumption. [#1125](https://github.com/Orama-Interactive/Pixelorama/pull/1125)
+- The export dialog's resize slider now allows for values greater than 1000.
 - Made some UI improvements to the rotate/flip image brush options. [#1105](https://github.com/Orama-Interactive/Pixelorama/pull/1105)
 - The bucket tool now picks colors from the top-most layer, like the rest of the drawing tools.
 
