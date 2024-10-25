@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-10-17 14:11\n"
+"PO-Revision-Date: 2024-10-25 20:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -235,7 +235,7 @@ msgstr "Preferências"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Centralizar Tela"
 
 msgid "Tile Mode"
 msgstr "Modo de Tile"
@@ -850,7 +850,7 @@ msgstr "Mostrar escala:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Fonte:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
