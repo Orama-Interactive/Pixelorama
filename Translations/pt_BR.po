@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-10-25 21:21\n"
+"PO-Revision-Date: 2024-10-25 22:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2056,11 +2056,11 @@ msgstr "Ativar desenho com espelhamento vertical"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "Mover para o centro da imagem"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "Mover para o centro da visão"
 
 msgid "Current frame:"
 msgstr "Quadro atual:"
@@ -2590,19 +2590,19 @@ msgstr "Redefinir todas as opções disponíveis nas Preferências"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Redefinir opções da linha do tempo"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Redefinir todas as opções de ferramenta"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Remover todas as extensões"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Limpar a lista de arquivos abertos recentemente"
 
 msgid "Lock aspect ratio"
 msgstr "Fixar proporção"
@@ -2781,11 +2781,11 @@ msgstr "Corta as imagens exportadas para sua parte visível, considerando cada p
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Cortar conteúdo da imagem para a seleção"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Exportar apenas o conteúdo que está dentro dos limites da área selecionada."
 
 msgid "Close"
 msgstr "Fechar"
@@ -3134,7 +3134,7 @@ msgstr "Texto:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Profundidade:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3148,7 +3148,7 @@ msgid "Horizontal alignment:"
 msgstr "Alinhamento horizontal:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Alinhamento vertical:"
 
 msgid "Left"
 msgstr "Esquerda"
@@ -3158,7 +3158,7 @@ msgstr "Direita"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Espaçamento entre linhas:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
