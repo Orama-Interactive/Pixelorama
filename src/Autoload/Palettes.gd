@@ -4,7 +4,7 @@ signal palette_selected(palette_name: String)
 signal new_palette_created
 signal new_palette_imported
 
-enum SortOptions { NEW_PALETTE, REVERSE, HUE, SATURATION, VALUE, RED, GREEN, BLUE, ALPHA }
+enum SortOptions { NEW_PALETTE, REVERSE, HUE, SATURATION, VALUE, LIGHTNESS, RED, GREEN, BLUE, ALPHA }
 ## Presets for creating a new palette
 enum NewPalettePresetType {EMPTY, FROM_CURRENT_PALETTE, FROM_CURRENT_SPRITE, FROM_CURRENT_SELECTION}
 ## Color options when user creates a new palette from current sprite or selection

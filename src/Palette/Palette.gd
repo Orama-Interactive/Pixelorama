@@ -287,6 +287,13 @@ func sort(option: Palettes.SortOptions) -> void:
 			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.s < b.color.s
 		Palettes.SortOptions.VALUE:
 			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.v < b.color.v
+		Palettes.SortOptions.LIGHTNESS:
+			sort_method = func(a: PaletteColor, b: PaletteColor):
+				var rgb_a: Array[float] = [a.color.r, a.color.g, a.color.b]
+				var rgb_b: Array[float] = [b.color.r, b.color.g, b.color.b]
+				var luminance_a = (rgb_a.max() + rgb_a.min()) / 2.0
+				var luminance_b = (rgb_b.max() + rgb_b.min()) / 2.0
+				return luminance_a < luminance_b
 		Palettes.SortOptions.RED:
 			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.r < b.color.r
 		Palettes.SortOptions.GREEN:
