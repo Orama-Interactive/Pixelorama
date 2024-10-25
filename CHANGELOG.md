@@ -15,10 +15,10 @@ Built using Godot 4.3
 - Added a new "color replace" mode to the Shading tool, that uses the colors of the palette to apply shading. [#1107](https://github.com/Orama-Interactive/Pixelorama/pull/1107)
 - Added a new Erase blend mode. [#1117](https://github.com/Orama-Interactive/Pixelorama/pull/1117)
 - It is now possible to change the font, depth and line spacing of 3D text.
-- Implemented the ability to change the font of the interface from the properties.
+- Implemented the ability to change the font of the interface from the preferences.
 - Clipping to selection during export is now possible. [#1113](https://github.com/Orama-Interactive/Pixelorama/pull/1113)
 - Added a preference to share options between tools. [#1120](https://github.com/Orama-Interactive/Pixelorama/pull/1120)
-- Added an option to quickly center the canvas in the View menu. Mapped to <kbd>Control + C</kbd> by default. [#1123](https://github.com/Orama-Interactive/Pixelorama/pull/1123)
+- Added an option to quickly center the canvas in the View menu. Mapped to <kbd>Shift + C</kbd> by default. [#1123](https://github.com/Orama-Interactive/Pixelorama/pull/1123)
 - Added hotkeys to switch between tabs. <kbd>Control+Tab</kbd> to go to the next project tab, and <kbd>Control+Shift+Tab</kbd> to go to the previous. [#1109](https://github.com/Orama-Interactive/Pixelorama/pull/1109)
 - Added menus next to each of the two mirroring buttons in the Global Tool Options, that allow users to automatically move the symmetry guides to the center of the canvas, or the view center.
 - A new Reset category has been added to the Preferences that lets users easily restore certain options.
