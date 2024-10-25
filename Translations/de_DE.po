@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-10-25 17:17\n"
+"PO-Revision-Date: 2024-10-25 18:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -235,7 +235,7 @@ msgstr "Einstellungen"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Canvas zentrieren"
 
 msgid "Tile Mode"
 msgstr "Kachelmodus"
@@ -849,7 +849,7 @@ msgstr "Bildschirmmaße:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Schriftart:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -919,12 +919,13 @@ msgstr "Hintergrundfarbe:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Optionen zwischen dem linken und dem rechten Werkzeug teilen"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Wenn diese Option aktiviert ist, werden die Optionen zwischen dem linken und dem rechten Werkzeug synchronisiert.\n"
+"Zum Beispiel teilen daraufhin beide Werkzeuge die gleiche Pinselgröße, und sobald diese bei einem Werkzeug geändert wird, ändert sie sich auch bei dem anderem."
 
 msgid "Left tool color:"
 msgstr "Farbe des linken Werkzeugs:"
