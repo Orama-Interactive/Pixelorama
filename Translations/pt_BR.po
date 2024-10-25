@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2024-10-25 20:12\n"
+"PO-Revision-Date: 2024-10-25 21:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -920,12 +920,13 @@ msgstr "Cor de fundo:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Compartilhar opções entre as ferramentas esquerda e direita"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Se estiver ativado, as opções vão se manter sincronizadas entre as ferramentas esquerda e direita.\n"
+"Por exemplo, ambas as ferramentas terão o mesmo tamanho de pincel, e alterá-lo em uma delas também irá mudá-lo na outra."
 
 msgid "Left tool color:"
 msgstr "Cor da ferramenta esquerda:"
@@ -2077,10 +2078,10 @@ msgid "Go to the previous frame"
 msgstr "Ir para o quadro anterior"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Reproduzir animação de trás para frente"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Reproduzir animação"
 
 msgid "Go to the next frame"
 msgstr "Ir para o próximo quadro"
@@ -2585,7 +2586,7 @@ msgstr "Cor de fundo padrão de uma nova imagem"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Redefinir todas as opções disponíveis nas Preferências"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
