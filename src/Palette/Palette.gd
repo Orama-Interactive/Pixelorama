@@ -297,9 +297,9 @@ func sort(option: Palettes.SortOptions) -> void:
 					var l = 0.4122214708 * (c.r) + 0.5363325363 * (c.g) + 0.0514459929 * (c.b)
 					var m = 0.2119034982 * (c.r) + 0.6806995451 * (c.g) + 0.1073969566 * (c.b)
 					var s = 0.0883024619 * (c.r) + 0.2817188376 * (c.g) + 0.6299787005 * (c.b)
-					var l_ = pow(l, 1/3.0)
-					var m_ = pow(m, 1/3.0)
-					var s_ = pow(s, 1/3.0)
+					var l_ = pow(l, 1 / 3.0)
+					var m_ = pow(m, 1 / 3.0)
+					var s_ = pow(s, 1 / 3.0)
 					var oklab_l = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
 					# calculating toe
 					var k_1 = 0.206
@@ -312,11 +312,12 @@ func sort(option: Palettes.SortOptions) -> void:
 							- k_1
 							+ sqrt(
 								(
-									k_3 * oklab_l - k_1) * (k_3 * oklab_l - k_1)
+									(k_3 * oklab_l - k_1) * (k_3 * oklab_l - k_1)
 									+ 4 * k_2 * k_3 * oklab_l
 								)
 							)
 						)
+					)
 				return lum.call(a.color.srgb_to_linear()) < lum.call(b.color.srgb_to_linear())
 		Palettes.SortOptions.RED:
 			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.r < b.color.r
