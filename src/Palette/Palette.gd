@@ -297,10 +297,10 @@ func sort(option: Palettes.SortOptions) -> void:
 					var l = 0.4122214708 * (c.r) + 0.5363325363 * (c.g) + 0.0514459929 * (c.b)
 					var m = 0.2119034982 * (c.r) + 0.6806995451 * (c.g) + 0.1073969566 * (c.b)
 					var s = 0.0883024619 * (c.r) + 0.2817188376 * (c.g) + 0.6299787005 * (c.b)
-					var l_ = pow(l, 1 / 3.0)
-					var m_ = pow(m, 1 / 3.0)
-					var s_ = pow(s, 1 / 3.0)
-					var oklab_l = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+					var l_cr = pow(l, 1 / 3.0)
+					var m_cr = pow(m, 1 / 3.0)
+					var s_cr = pow(s, 1 / 3.0)
+					var oklab_l = 0.2104542553 * l_cr + 0.7936177850 * m_cr - 0.0040720468 * s_cr
 					# calculating toe
 					var k_1 = 0.206
 					var k_2 = 0.03
