@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.0.4] - Unreleased
+## [v1.0.4] - 2024-10-25
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Mariano Semelman ([@msemelman](https://github.com/msemelman))
 
 Built using Godot 4.3
 
@@ -18,7 +18,7 @@ Built using Godot 4.3
 - Implemented the ability to change the font of the interface from the properties.
 - Clipping to selection during export is now possible. [#1113](https://github.com/Orama-Interactive/Pixelorama/pull/1113)
 - Added a preference to share options between tools. [#1120](https://github.com/Orama-Interactive/Pixelorama/pull/1120)
-- Added an option to quickly center the canvas in the View menu. [#1123](https://github.com/Orama-Interactive/Pixelorama/pull/1123)
+- Added an option to quickly center the canvas in the View menu. Mapped to <kbd>Control + C</kbd> by default. [#1123](https://github.com/Orama-Interactive/Pixelorama/pull/1123)
 - Added hotkeys to switch between tabs. <kbd>Control+Tab</kbd> to go to the next project tab, and <kbd>Control+Shift+Tab</kbd> to go to the previous. [#1109](https://github.com/Orama-Interactive/Pixelorama/pull/1109)
 - Added menus next to each of the two mirroring buttons in the Global Tool Options, that allow users to automatically move the symmetry guides to the center of the canvas, or the view center.
 - A new Reset category has been added to the Preferences that lets users easily restore certain options.
