@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-09-12 16:19\n"
+"PO-Revision-Date: 2024-10-17 15:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -232,6 +232,10 @@ msgstr "Rifletti verticalmente"
 
 msgid "Preferences"
 msgstr "Preferenze"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr "Centra tela"
 
 msgid "Tile Mode"
 msgstr "Modalità Tile"
@@ -844,6 +848,10 @@ msgstr "Lingua di sistema"
 msgid "Display scale:"
 msgstr "Scala di visualizzazione:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr "Font:"
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Dimensione carattere:"
@@ -909,6 +917,16 @@ msgstr "Colore di sfondo da:"
 
 msgid "Background color:"
 msgstr "Colore dello sfondo:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr "Condividi le opzioni tra gli strumenti sinistro e destro"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr "Se abilitata, le opzioni saranno sincronizzate tra sinistra e destra.\n"
+"Ad esempio, entrambi gli strumenti condivideranno la stessa dimensione del pennello e cambieranno istantaneamente su uno strumento l'altro."
 
 msgid "Left tool color:"
 msgstr "Colore strumento sinistra:"
@@ -2030,11 +2048,19 @@ msgstr "Orizzontale"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Abilita disegno orizzontale a specchio"
 
+msgid "Vertical"
+msgstr "Verticale"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Abilita disegno verticale a specchio"
 
-msgid "Vertical"
-msgstr "Verticale"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Sposta nel centro della superficie"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "Sposta nel centro della vista"
 
 msgid "Current frame:"
 msgstr "Frame corrente:"
@@ -2051,11 +2077,11 @@ msgstr "Vai al primo fotogramma"
 msgid "Go to the previous frame"
 msgstr "Vai al fotogramma precedente"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Riproduci l'animazione al contrario (da fine a inizio)"
+msgid "Play the animation backwards"
+msgstr "Riproduce l'animazione all'indietro"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Riproduce l'animazione in avanti (dall'inizio alla fine)"
+msgid "Play the animation forward"
+msgstr "Riproduce l'animazione in avanti"
 
 msgid "Go to the next frame"
 msgstr "Vai al prossimo fotogramma"
@@ -2558,6 +2584,26 @@ msgstr "Colore di riempimento predefinito:"
 msgid "A default background color of a new image"
 msgstr "Un colore di sfondo predefinito di una nuova immagine"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Reimposta tutte le opzioni disponibili nelle Preferenze"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Reimposta opzioni timeline"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Reimposta tutte le opzioni dello strumento"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Rimuovi tutte le estensioni"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Pulisce l'elenco dei file aperti di recente"
+
 msgid "Lock aspect ratio"
 msgstr "Blocca proporzioni"
 
@@ -2732,6 +2778,14 @@ msgstr "Ritaglia immagini"
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Ritaglia le immagini esportate nella loro porzione visibile, considerando ogni pixel con un canale alfa diverso da zero come visibile."
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr "Ritaglia il contenuto dell'immagine alla selezione"
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr "Esporta solo contenuti che rientrano nei limiti di un'area selezionata."
 
 msgid "Close"
 msgstr "Chiudi"
@@ -3078,6 +3132,10 @@ msgstr "Raggio inferiore:"
 msgid "Text:"
 msgstr "Testo:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr "Profondità:"
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Dimensione pixel:"
@@ -3089,11 +3147,18 @@ msgstr "Passaggio curva:"
 msgid "Horizontal alignment:"
 msgstr "Allineamento orizzontale:"
 
+msgid "Vertical alignment:"
+msgstr "Allineamento verticale:"
+
 msgid "Left"
 msgstr "Sinistra"
 
 msgid "Right"
 msgstr "Destra"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr "Spaziatura linea:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

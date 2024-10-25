@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-09-11 15:44\n"
+"PO-Revision-Date: 2024-10-19 18:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -230,6 +230,10 @@ msgstr "Voltear verticalmente"
 
 msgid "Preferences"
 msgstr "Preferencias"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr "Centrar el lienzo"
 
 msgid "Tile Mode"
 msgstr "Modo mosaico"
@@ -559,7 +563,7 @@ msgstr "Redimensionar:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Calidad:"
 
 msgid "Cancel Export"
 msgstr "Cancelar exportación"
@@ -841,6 +845,10 @@ msgstr "Idioma del sistema"
 msgid "Display scale:"
 msgstr "Escala de la interfaz:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr "Fuente:"
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Tamaño de la fuente:"
@@ -906,6 +914,16 @@ msgstr "Color del fondo:"
 
 msgid "Background color:"
 msgstr "Color de fondo:"
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr "Sincronizar opciones entre las herramientas izquierda y derecha"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr "Si está activado, se sincronizarán las opciones entre las herramientas izquierda y derecha.\n"
+"Por ejemplo, ambas herramientas compartirán el mismo tamaño de pincel, y cambiarlo en una herramienta lo cambiará instantáneamente en la otra."
 
 msgid "Left tool color:"
 msgstr "Color de la herramienta izquierda:"
@@ -978,23 +996,23 @@ msgstr "Color de la sombra:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Desenfoque gaussiano"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Tipo de desenfoque:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Nivel de desenfoque:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Radio de desenfoque:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Dirección de desenfoque:"
 
 msgid "Gradient"
 msgstr "Degradado"
@@ -2025,11 +2043,19 @@ msgstr "Horizontal"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Activar dibujo de espejo horizontal"
 
+msgid "Vertical"
+msgstr "Vertical"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Activar dibujo de espejo vertical"
 
-msgid "Vertical"
-msgstr "Vertical"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Mover al centro del lienzo"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "Mover al centro de la vista"
 
 msgid "Current frame:"
 msgstr "Fotograma actual:"
@@ -2046,11 +2072,11 @@ msgstr "Saltar al primer fotograma"
 msgid "Go to the previous frame"
 msgstr "Ir al fotograma anterior"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Reproduce la animación hacia atrás (desde el final hasta el principio)"
+msgid "Play the animation backwards"
+msgstr "Reproducir la animación hacia atrás"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Reproducir la animación hacia adelante (de principio a fin)"
+msgid "Play the animation forward"
+msgstr "Reproducir la animación hacia adelante"
 
 msgid "Go to the next frame"
 msgstr "Ir al fotograma siguiente"
@@ -2553,6 +2579,26 @@ msgstr "Color de relleno predeterminado:"
 msgid "A default background color of a new image"
 msgstr "Un color de fondo predeterminado de una nueva imagen"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Reestablecer todas las opciones disponibles en Preferencias"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Reestablecer opciones de línea de tiempo"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Reestablecer todas las opciones de herramienta"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Eliminar todas las extensiones"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Limpiar la lista de archivos abiertos recientemente"
+
 msgid "Lock aspect ratio"
 msgstr "Bloquear relación de aspecto"
 
@@ -2722,11 +2768,19 @@ msgstr "El(los) carácter(es) que separan Él nombre del archivo y Él número d
 
 #. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
 msgid "Trim images"
-msgstr ""
+msgstr "Recortar imágenes"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
-msgstr ""
+msgstr "Recorta las imágenes exportadas a su porción visible, considerando cada píxel con un canal de alfa diferente a cero como visible."
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr "Recortar contenido de la imagen a la selección"
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr "Solo exportar contenido que está dentro de los los límites de un área seleccionada."
 
 msgid "Close"
 msgstr "Cerrar"
@@ -3074,6 +3128,10 @@ msgstr "Radio inferior:"
 msgid "Text:"
 msgstr "Texto:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr "Profundidad:"
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Tamaño del píxel:"
@@ -3085,11 +3143,18 @@ msgstr "Nivel de curva:"
 msgid "Horizontal alignment:"
 msgstr "Alineación horizontal:"
 
+msgid "Vertical alignment:"
+msgstr "Alineación vertical:"
+
 msgid "Left"
 msgstr "Izquierda"
 
 msgid "Right"
 msgstr "Derecha"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr "Interlineado:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
