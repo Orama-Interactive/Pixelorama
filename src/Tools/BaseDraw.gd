@@ -71,14 +71,13 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 
 
 func _on_BrushSize_value_changed(value: float) -> void:
-	if _brush_size != int(value):
-		_brush_size = int(value)
-		_brush_size_dynamics = _brush_size
-		if Tools.dynamics_size != Tools.Dynamics.NONE:
-			_brush_size_dynamics = Tools.brush_size_min
-		_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
-		update_config()
-		save_config()
+	_brush_size = int(value)
+	_brush_size_dynamics = _brush_size
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
+		_brush_size_dynamics = Tools.brush_size_min
+	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
+	update_config()
+	save_config()
 
 
 func _reset_dynamics() -> void:
@@ -113,6 +112,11 @@ func get_config() -> Dictionary:
 		"brush_index": _brush.index,
 		"brush_size": _brush_size,
 		"brush_interpolate": _brush_interpolate,
+		"brush_flip_x": _brush_flip_x,
+		"brush_flip_y": _brush_flip_y,
+		"brush_rotate_90": _brush_rotate_90,
+		"brush_rotate_180": _brush_rotate_180,
+		"brush_rotate_270": _brush_rotate_270,
 	}
 
 
@@ -125,16 +129,21 @@ func set_config(config: Dictionary) -> void:
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
 	_brush_interpolate = config.get("brush_interpolate", _brush_interpolate)
+	_brush_flip_x = config.get("brush_flip_x", _brush_flip_x)
+	_brush_flip_y = config.get("brush_flip_y", _brush_flip_y)
+	_brush_rotate_90 = config.get("brush_rotate_90", _brush_rotate_90)
+	_brush_rotate_180 = config.get("brush_rotate_180", _brush_rotate_180)
+	_brush_rotate_270 = config.get("brush_rotate_270", _brush_rotate_270)
 
 
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$ColorInterpolation.value = _brush_interpolate
-	$RotationOptions/Flip/FlipX.button_pressed = _brush_flip_x
-	$RotationOptions/Flip/FlipY.button_pressed = _brush_flip_y
-	$RotationOptions/Rotate/Rotate90.button_pressed = _brush_rotate_90
-	$RotationOptions/Rotate/Rotate180.button_pressed = _brush_rotate_180
-	$RotationOptions/Rotate/Rotate270.button_pressed = _brush_rotate_270
+	%FlipX.button_pressed = _brush_flip_x
+	%FlipY.button_pressed = _brush_flip_y
+	%Rotate90.button_pressed = _brush_rotate_90
+	%Rotate180.button_pressed = _brush_rotate_180
+	%Rotate270.button_pressed = _brush_rotate_270
 	update_brush()
 
 
@@ -238,7 +247,7 @@ func commit_undo() -> void:
 	var project := Global.current_project
 	var frame := -1
 	var layer := -1
-	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
+	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
 		frame = project.current_frame
 		layer = project.current_layer
 
@@ -694,7 +703,7 @@ func _get_undo_data() -> Dictionary:
 	var data := {}
 	var project := Global.current_project
 	var cels: Array[BaseCel] = []
-	if Global.animation_timer.is_stopped():
+	if Global.animation_timeline.animation_timer.is_stopped():
 		for cel_index in project.selected_cels:
 			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])
 	else:
@@ -711,55 +720,31 @@ func _get_undo_data() -> Dictionary:
 	return data
 
 
-func _pick_color(pos: Vector2i) -> void:
-	var project := Global.current_project
-	pos = project.tiles.get_canon_position(pos)
-
-	if pos.x < 0 or pos.y < 0:
-		return
-
-	var image := Image.new()
-	image.copy_from(_get_draw_image())
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
-		return
-
-	var color := Color(0, 0, 0, 0)
-	var curr_frame: Frame = project.frames[project.current_frame]
-	for layer in project.layers.size():
-		var idx := (project.layers.size() - 1) - layer
-		if project.layers[idx].is_visible_in_hierarchy():
-			image = curr_frame.cels[idx].get_image()
-			color = image.get_pixelv(pos)
-			if not is_zero_approx(color.a):
-				break
-	var button := (
-		MOUSE_BUTTON_LEFT
-		if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self
-		else MOUSE_BUTTON_RIGHT
-	)
-	Tools.assign_color(color, button, false)
-
-
 func _on_flip_x_toggled(button_pressed: bool) -> void:
 	_brush_flip_x = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_flip_y_toggled(button_pressed: bool) -> void:
 	_brush_flip_y = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_90_toggled(button_pressed: bool) -> void:
 	_brush_rotate_90 = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_180_toggled(button_pressed: bool) -> void:
 	_brush_rotate_180 = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_270_toggled(button_pressed: bool) -> void:
 	_brush_rotate_270 = button_pressed
 	update_brush()
+	save_config()

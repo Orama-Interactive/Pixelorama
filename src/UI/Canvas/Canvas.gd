@@ -33,7 +33,11 @@ var layer_metadata_texture := ImageTexture.new()
 func _ready() -> void:
 	material.set_shader_parameter("layers", layer_texture_array)
 	material.set_shader_parameter("metadata", layer_metadata_texture)
-	Global.project_switched.connect(func(): project_changed = true ; queue_redraw())
+	Global.project_switched.connect(
+		func():
+			project_changed = true
+			queue_redraw()
+	)
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE
@@ -98,7 +102,7 @@ func _input(event: InputEvent) -> void:
 
 
 func camera_zoom() -> void:
-	for camera in Global.cameras:
+	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
 		camera.fit_to_frame(Global.current_project.size)
 
 	Global.transparent_checker.update_rect()

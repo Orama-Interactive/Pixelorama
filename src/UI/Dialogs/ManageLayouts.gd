@@ -97,9 +97,8 @@ func _on_LayoutSettings_confirmed() -> void:
 		Global.control.main_ui.layout = layout
 		layout_list.add_item(layout_name.text)
 	Global.layouts.sort_custom(
-		func(a: DockableLayout, b: DockableLayout): return (
-			a.resource_path.get_file() < b.resource_path.get_file()
-		)
+		func(a: DockableLayout, b: DockableLayout):
+			return a.resource_path.get_file() < b.resource_path.get_file()
 	)
 	var layout_index := Global.layouts.find(layout)
 	Global.top_menu_container.populate_layouts_submenu()

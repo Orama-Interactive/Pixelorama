@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/Tools/DesignTools/LineTool.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_ko8wf"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_o5212"]
 resource_name = "rotate"
 allow_unpress = true
 
@@ -20,14 +20,14 @@ suffix = "px"
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
-button_group = SubResource("ButtonGroup_ko8wf")
+[node name="Rotate90" parent="RotationOptions/GridContainer/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_o5212")
 
-[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
-button_group = SubResource("ButtonGroup_ko8wf")
+[node name="Rotate180" parent="RotationOptions/GridContainer/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_o5212")
 
-[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
-button_group = SubResource("ButtonGroup_ko8wf")
+[node name="Rotate270" parent="RotationOptions/GridContainer/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_o5212")
 
 [node name="Brush" parent="." index="4"]
 visible = false

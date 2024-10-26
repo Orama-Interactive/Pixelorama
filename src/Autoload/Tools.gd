@@ -2,6 +2,8 @@
 extends Node
 
 signal color_changed(color: Color, button: int)
+signal config_changed(slot_idx: int, config: Dictionary)
+@warning_ignore("unused_signal")
 signal flip_rotated(flip_x, flip_y, rotate_90, rotate_180, rotate_270)
 signal options_reset
 
@@ -373,6 +375,34 @@ func _ready() -> void:
 	_show_relevant_tools(layer_type)
 
 
+## Syncs the other tool using the config of tool located at [param from_idx].[br]
+## NOTE: For optimization, if there is already a ready made config available, then we will use that
+## instead of re-calculating the config, else we have no choice but to re-generate it
+func attempt_config_share(from_idx: int, config: Dictionary = {}) -> void:
+	if not Global.share_options_between_tools:
+		return
+	if _slots.is_empty():
+		return
+	if config.is_empty() and _slots[from_idx]:
+		var from_slot: Slot = _slots.get(from_idx, null)
+		if from_slot:
+			var from_tool = from_slot.tool_node
+			if from_tool.has_method("get_config"):
+				config = from_tool.get_config()
+	var target_slot: Slot = _slots.get(MOUSE_BUTTON_LEFT, null)
+	if from_idx == MOUSE_BUTTON_LEFT:
+		target_slot = _slots.get(MOUSE_BUTTON_RIGHT, null)
+	if is_instance_valid(target_slot):
+		if (
+			target_slot.tool_node.has_method("set_config")
+			and target_slot.tool_node.has_method("update_config")
+		):
+			target_slot.tool_node.set("is_syncing", true)
+			target_slot.tool_node.set_config(config)
+			target_slot.tool_node.update_config()
+			target_slot.tool_node.set("is_syncing", false)
+
+
 func reset_options() -> void:
 	default_color()
 	assign_tool(get_tool(MOUSE_BUTTON_LEFT).tool_node.name, MOUSE_BUTTON_LEFT, true)
@@ -401,9 +431,13 @@ func remove_tool(t: Tool) -> void:
 
 
 func set_tool(tool_name: String, button: int) -> void:
+	# To prevent any unintentional syncing, we will temporarily disconnect the signal
+	if config_changed.is_connected(attempt_config_share):
+		config_changed.disconnect(attempt_config_share)
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
 	var node: Node = tools[tool_name].instantiate_scene()
+	var config_slot := MOUSE_BUTTON_LEFT if button == MOUSE_BUTTON_RIGHT else MOUSE_BUTTON_RIGHT
 	if button == MOUSE_BUTTON_LEFT:  # As guides are only moved with left mouse
 		if tool_name == "Pan":  # tool you want to give more access at guides
 			Global.move_guides_on_canvas = true
@@ -421,6 +455,12 @@ func set_tool(tool_name: String, button: int) -> void:
 		_left_tools_per_layer_type[_curr_layer_type] = tool_name
 	elif button == MOUSE_BUTTON_RIGHT:
 		_right_tools_per_layer_type[_curr_layer_type] = tool_name
+
+	# Wait for config to get loaded, then re-connect and sync
+	await get_tree().process_frame
+	if not config_changed.is_connected(attempt_config_share):
+		config_changed.connect(attempt_config_share)
+	attempt_config_share(config_slot)  # Sync it with the other tool
 
 
 func get_tool(button: int) -> Slot:

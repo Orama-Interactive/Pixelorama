@@ -4,21 +4,21 @@
 [ext_resource type="Script" path="res://src/Tools/DesignTools/Shading.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_se02m"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_lvcwb"]
 resource_name = "rotate"
 allow_unpress = true
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
-button_group = SubResource("ButtonGroup_se02m")
+[node name="Rotate90" parent="RotationOptions/GridContainer/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_lvcwb")
 
-[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
-button_group = SubResource("ButtonGroup_se02m")
+[node name="Rotate180" parent="RotationOptions/GridContainer/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_lvcwb")
 
-[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
-button_group = SubResource("ButtonGroup_se02m")
+[node name="Rotate270" parent="RotationOptions/GridContainer/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_lvcwb")
 
 [node name="LightenDarken" type="OptionButton" parent="." index="5"]
 custom_minimum_size = Vector2(92, 0)
@@ -83,7 +83,7 @@ layout_mode = 2
 layout_mode = 2
 max_value = 10.0
 allow_greater = true
-prefix = "Colors Right"
+prefix = "Colors right"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorReplaceOptions/Settings" index="1"]
 layout_mode = 2
@@ -107,7 +107,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="ColorReplaceOptions" index="1"]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-text = "Please Select a color from the palette."
+text = "Please select a color from the palette."
 horizontal_alignment = 1
 autowrap_mode = 3
 

@@ -3,11 +3,13 @@ extends Panel
 signal animation_started(forward: bool)
 signal animation_finished
 
+enum LoopType { NO, CYCLE, PINGPONG }
+
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 
 var is_animation_running := false
-var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop.
+var animation_loop := LoopType.CYCLE
 var animation_forward := true
 var first_frame := 0
 var last_frame := 0
@@ -28,6 +30,7 @@ var global_layer_visibility := true
 var global_layer_lock := false
 var global_layer_expand := true
 
+@onready var animation_timer := $AnimationTimer as Timer
 @onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer.
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
@@ -69,7 +72,7 @@ func _ready() -> void:
 	cel_size_slider.value = cel_size
 	add_layer_list.get_popup().id_pressed.connect(add_layer)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
-	Global.animation_timer.wait_time = 1 / Global.current_project.fps
+	animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 	_fill_blend_modes_option_button()
 	# Config loading.
@@ -236,6 +239,7 @@ func _fill_blend_modes_option_button() -> void:
 		# Special blend mode that appears only when group layers are selected
 		blend_modes_button.add_item("Pass through", BaseLayer.BlendModes.PASS_THROUGH)
 	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
+	blend_modes_button.add_item("Erase", BaseLayer.BlendModes.ERASE)
 	blend_modes_button.add_separator("Darken")
 	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
 	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
@@ -616,16 +620,16 @@ func _on_timeline_settings_button_pressed() -> void:
 func _on_LoopAnim_pressed() -> void:
 	var texture_button: TextureRect = loop_animation_button.get_child(0)
 	match animation_loop:
-		0:  # Make it loop
-			animation_loop = 1
+		LoopType.NO:
+			animation_loop = LoopType.CYCLE
 			Global.change_button_texturerect(texture_button, "loop.png")
 			loop_animation_button.tooltip_text = "Cycle loop"
-		1:  # Make it ping-pong
-			animation_loop = 2
+		LoopType.CYCLE:
+			animation_loop = LoopType.PINGPONG
 			Global.change_button_texturerect(texture_button, "loop_pingpong.png")
 			loop_animation_button.tooltip_text = "Ping-pong loop"
-		2:  # Make it stop
-			animation_loop = 0
+		LoopType.PINGPONG:
+			animation_loop = LoopType.NO
 			Global.change_button_texturerect(texture_button, "loop_none.png")
 			loop_animation_button.tooltip_text = "No loop"
 
@@ -651,7 +655,7 @@ func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
 		play_forward.button_pressed = false
 		play_backwards.button_pressed = false
-		Global.animation_timer.stop()
+		animation_timer.stop()
 		return
 
 	Global.canvas.selection.transform_content_confirm()
@@ -661,26 +665,24 @@ func _on_AnimationTimer_timeout() -> void:
 		if project.current_frame < last_frame:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame + 1, -1)
-			Global.animation_timer.wait_time = (
-				project.frames[project.current_frame].duration * (1 / fps)
-			)
-			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle
+			animation_timer.wait_time = project.frames[project.current_frame].duration * (1.0 / fps)
+			animation_timer.start()  # Change the frame, change the wait time and start a cycle
 		else:
 			match animation_loop:
-				0:  # No loop
+				LoopType.NO:
 					play_forward.button_pressed = false
 					play_backwards.button_pressed = false
-					Global.animation_timer.stop()
+					animation_timer.stop()
 					animation_finished.emit()
 					is_animation_running = false
-				1:  # Cycle loop
+				LoopType.CYCLE:
 					project.selected_cels.clear()
 					project.change_cel(first_frame, -1)
-					Global.animation_timer.wait_time = (
+					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
-					Global.animation_timer.start()
-				2:  # Ping pong loop
+					animation_timer.start()
+				LoopType.PINGPONG:
 					animation_forward = false
 					_on_AnimationTimer_timeout()
 
@@ -688,26 +690,24 @@ func _on_AnimationTimer_timeout() -> void:
 		if project.current_frame > first_frame:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame - 1, -1)
-			Global.animation_timer.wait_time = (
-				project.frames[project.current_frame].duration * (1 / fps)
-			)
-			Global.animation_timer.start()
+			animation_timer.wait_time = project.frames[project.current_frame].duration * (1.0 / fps)
+			animation_timer.start()
 		else:
 			match animation_loop:
-				0:  # No loop
+				LoopType.NO:
 					play_backwards.button_pressed = false
 					play_forward.button_pressed = false
-					Global.animation_timer.stop()
+					animation_timer.stop()
 					animation_finished.emit()
 					is_animation_running = false
-				1:  # Cycle loop
+				LoopType.CYCLE:
 					project.selected_cels.clear()
 					project.change_cel(last_frame, -1)
-					Global.animation_timer.wait_time = (
+					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
-					Global.animation_timer.start()
-				2:  # Ping pong loop
+					animation_timer.start()
+				LoopType.PINGPONG:
 					animation_forward = true
 					_on_AnimationTimer_timeout()
 	frame_scroll_container.ensure_control_visible(
@@ -746,16 +746,16 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 		play_forward.toggled.connect(_on_PlayForward_toggled)
 
 	if play:
-		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
+		animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
 		var duration: float = (
 			Global.current_project.frames[Global.current_project.current_frame].duration
 		)
-		Global.animation_timer.wait_time = duration * (1 / Global.current_project.fps)
-		Global.animation_timer.start()
+		animation_timer.wait_time = duration * (1 / Global.current_project.fps)
+		animation_timer.start()
 		animation_forward = forward_dir
 		animation_started.emit(forward_dir)
 	else:
-		Global.animation_timer.stop()
+		animation_timer.stop()
 		animation_finished.emit()
 
 	is_animation_running = play
@@ -791,7 +791,7 @@ func _on_FirstFrame_pressed() -> void:
 
 func _on_FPSValue_value_changed(value: float) -> void:
 	Global.current_project.fps = value
-	Global.animation_timer.wait_time = 1 / Global.current_project.fps
+	animation_timer.wait_time = 1 / Global.current_project.fps
 
 
 func _on_PastOnionSkinning_value_changed(value: float) -> void:

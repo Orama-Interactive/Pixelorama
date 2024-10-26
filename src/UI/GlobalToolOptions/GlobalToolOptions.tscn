@@ -74,7 +74,7 @@ size_flags_vertical = 0
 columns = 5
 
 [node name="Horizontal" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
-custom_minimum_size = Vector2(44, 32)
+custom_minimum_size = Vector2(46, 32)
 layout_mode = 2
 tooltip_text = "Enable horizontal mirrored drawing"
 mouse_default_cursor_shape = 2
@@ -95,16 +95,18 @@ texture = ExtResource("1")
 
 [node name="HorizontalMirrorOptions" type="MenuButton" parent="ScrollContainer/CenterContainer/GridContainer/Horizontal"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(22, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -22.0
+offset_left = -20.0
 offset_top = -10.0
 offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "Move to canvas center"
@@ -112,7 +114,8 @@ popup/item_1/text = "Move to view center"
 popup/item_1/id = 1
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Horizontal/HorizontalMirrorOptions"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -121,10 +124,13 @@ offset_left = -6.0
 offset_top = -6.0
 offset_right = 6.0
 offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_faalk")
+stretch_mode = 3
 
 [node name="Vertical" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
-custom_minimum_size = Vector2(44, 32)
+custom_minimum_size = Vector2(46, 32)
 layout_mode = 2
 tooltip_text = "Enable vertical mirrored drawing"
 mouse_default_cursor_shape = 2
@@ -145,14 +151,14 @@ texture = ExtResource("2")
 
 [node name="VerticalMirrorOptions" type="MenuButton" parent="ScrollContainer/CenterContainer/GridContainer/Vertical"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(22, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -22.0
+offset_left = -20.0
 offset_top = -10.0
 offset_bottom = 10.0
 grow_horizontal = 0
@@ -164,16 +170,14 @@ popup/item_1/text = "Move to view center"
 popup/item_1/id = 1
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Vertical/VerticalMirrorOptions"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -6.0
-offset_top = -6.0
-offset_right = 6.0
-offset_bottom = 6.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_faalk")
+stretch_mode = 3
 
 [node name="PixelPerfect" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(32, 32)

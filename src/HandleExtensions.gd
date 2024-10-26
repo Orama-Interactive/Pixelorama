@@ -159,6 +159,12 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 		var supported_api_versions = extension_json["supported_api_versions"]
 		if typeof(supported_api_versions) == TYPE_ARRAY:
 			supported_api_versions = PackedInt32Array(supported_api_versions)
+			# Extensions that support API version 4 are backwards compatible with version 5.
+			# Version 5 only adds new methods and does not break compatibility.
+			# TODO: Find a better way to determine which API versions
+			# have backwards compatibility with each other.
+			if 4 in supported_api_versions and not 5 in supported_api_versions:
+				supported_api_versions.append(5)
 			if not ExtensionsApi.get_api_version() in supported_api_versions:
 				var err_text := (
 					"The extension %s will not work on this version of Pixelorama \n"

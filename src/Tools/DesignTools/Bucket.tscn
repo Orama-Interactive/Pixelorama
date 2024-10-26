@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/Tools/DesignTools/Bucket.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4_1pngp"]
 
-[sub_resource type="StyleBoxFlat" id="1"]
+[sub_resource type="StyleBoxFlat" id="2"]
 bg_color = Color(1, 1, 1, 1)
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 5
@@ -14,7 +14,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="2"]
+[sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(1, 1, 1, 1)
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 5
@@ -38,10 +38,9 @@ text = "Fill area:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Similar area"
-popup/item_0/id = 0
 popup/item_1/text = "Similar colors"
 popup/item_1/id = 1
 popup/item_2/text = "Whole selection"
@@ -71,10 +70,9 @@ text = "Fill with:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Selected color"
-popup/item_0/id = 0
 popup/item_1/text = "Pattern"
 popup/item_1/id = 1
 
@@ -89,11 +87,11 @@ layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Select a brush"
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("1")
+theme_override_styles/focus = SubResource("2")
+theme_override_styles/disabled = SubResource("2")
 theme_override_styles/hover = SubResource("1")
 theme_override_styles/pressed = SubResource("1")
-theme_override_styles/disabled = SubResource("2")
-theme_override_styles/focus = SubResource("2")
+theme_override_styles/normal = SubResource("1")
 
 [node name="Texture2D" type="TextureRect" parent="FillPattern/Type" index="0"]
 layout_mode = 0

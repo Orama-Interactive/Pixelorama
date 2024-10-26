@@ -220,6 +220,10 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
+
 msgid "Tile Mode"
 msgstr ""
 
@@ -828,6 +832,10 @@ msgstr ""
 msgid "Display scale:"
 msgstr ""
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr ""
@@ -892,6 +900,15 @@ msgid "Background color from:"
 msgstr ""
 
 msgid "Background color:"
+msgstr ""
+
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
 msgstr ""
 
 msgid "Left tool color:"
@@ -3035,6 +3052,10 @@ msgstr ""
 msgid "Text:"
 msgstr ""
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr ""
@@ -3046,10 +3067,17 @@ msgstr ""
 msgid "Horizontal alignment:"
 msgstr ""
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr ""
 
 msgid "Right"
+msgstr ""
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
 msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.

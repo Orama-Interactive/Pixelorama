@@ -4,21 +4,21 @@
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/Pencil.gd" id="3"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_clato"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_e3rs3"]
 resource_name = "rotate"
 allow_unpress = true
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("3")
 
-[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
-button_group = SubResource("ButtonGroup_clato")
+[node name="Rotate90" parent="RotationOptions/GridContainer/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_e3rs3")
 
-[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
-button_group = SubResource("ButtonGroup_clato")
+[node name="Rotate180" parent="RotationOptions/GridContainer/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_e3rs3")
 
-[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
-button_group = SubResource("ButtonGroup_clato")
+[node name="Rotate270" parent="RotationOptions/GridContainer/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_e3rs3")
 
 [node name="Overwrite" type="CheckBox" parent="." index="5"]
 layout_mode = 2

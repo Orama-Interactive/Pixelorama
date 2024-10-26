@@ -50,6 +50,7 @@ func _on_SpacingMode_toggled(button_pressed: bool) -> void:
 
 func _on_Spacing_value_changed(value: Vector2) -> void:
 	_spacing = value
+	save_config()
 
 
 func _input(event: InputEvent) -> void:
@@ -58,10 +59,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("change_tool_mode"):
 		_prev_mode = overwrite_button.button_pressed
 	if event.is_action("change_tool_mode"):
-		overwrite_button.button_pressed = !_prev_mode
+		overwrite_button.set_pressed_no_signal(!_prev_mode)
 		_overwrite = overwrite_button.button_pressed
 	if event.is_action_released("change_tool_mode"):
-		overwrite_button.button_pressed = _prev_mode
+		overwrite_button.set_pressed_no_signal(_prev_mode)
 		_overwrite = overwrite_button.button_pressed
 
 

@@ -4,7 +4,7 @@ const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v103---2024-09-13"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v104---2024-10-25"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -206,6 +206,7 @@ func _setup_edit_menu() -> void:
 func _setup_view_menu() -> void:
 	# Order as in Global.ViewMenu enum
 	var view_menu_items := {
+		"Center Canvas": "center_canvas",
 		"Tile Mode": "",
 		"Tile Mode Offsets": "",
 		"Grayscale View": "",
@@ -226,6 +227,8 @@ func _setup_view_menu() -> void:
 			_setup_snap_to_submenu(item)
 		elif item == "Tile Mode Offsets":
 			view_menu.add_item(item, i)
+		elif item == "Center Canvas":
+			_set_menu_shortcut(view_menu_items[item], view_menu, i, item)
 		else:
 			_set_menu_shortcut(view_menu_items[item], view_menu, i, item, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
@@ -535,7 +538,7 @@ func _open_project_file() -> void:
 	if OS.get_name() == "Web":
 		Html5FileExchange.load_image()
 	else:
-		_popup_dialog(Global.open_sprites_dialog)
+		_popup_dialog(Global.control.open_sprite_dialog)
 		Global.control.opensprite_file_selected = false
 
 
@@ -599,6 +602,8 @@ func edit_menu_id_pressed(id: int) -> void:
 
 func view_menu_id_pressed(id: int) -> void:
 	match id:
+		Global.ViewMenu.CENTER_CANVAS:
+			Global.camera.offset = Global.current_project.size / 2
 		Global.ViewMenu.TILE_MODE_OFFSETS:
 			_popup_dialog(get_tree().current_scene.tile_mode_offsets_dialog)
 		Global.ViewMenu.GREYSCALE_VIEW:
@@ -735,8 +740,6 @@ func _toggle_show_pixel_grid() -> void:
 func _toggle_show_rulers() -> void:
 	Global.show_rulers = !Global.show_rulers
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, Global.show_rulers)
-	Global.horizontal_ruler.visible = Global.show_rulers
-	Global.vertical_ruler.visible = Global.show_rulers
 
 
 func _toggle_show_guides() -> void:

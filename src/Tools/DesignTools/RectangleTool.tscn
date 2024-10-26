@@ -3,18 +3,18 @@
 [ext_resource type="PackedScene" uid="uid://n40lhf8hm7o1" path="res://src/Tools/BaseShapeDrawer.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/RectangleTool.gd" id="2"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_cyxrj"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_vkkkg"]
 resource_name = "rotate"
 allow_unpress = true
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="Rotate90" parent="RotationOptions/Rotate" index="0"]
-button_group = SubResource("ButtonGroup_cyxrj")
+[node name="Rotate90" parent="RotationOptions/GridContainer/Rotate" index="0"]
+button_group = SubResource("ButtonGroup_vkkkg")
 
-[node name="Rotate180" parent="RotationOptions/Rotate" index="1"]
-button_group = SubResource("ButtonGroup_cyxrj")
+[node name="Rotate180" parent="RotationOptions/GridContainer/Rotate" index="1"]
+button_group = SubResource("ButtonGroup_vkkkg")
 
-[node name="Rotate270" parent="RotationOptions/Rotate" index="2"]
-button_group = SubResource("ButtonGroup_cyxrj")
+[node name="Rotate270" parent="RotationOptions/GridContainer/Rotate" index="2"]
+button_group = SubResource("ButtonGroup_vkkkg")

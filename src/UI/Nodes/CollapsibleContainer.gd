@@ -33,12 +33,9 @@ func _ready() -> void:
 	_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	_button.toggled.connect(set_visible_children)
 	add_child(_button, false, Node.INTERNAL_MODE_FRONT)
-	_texture_rect.anchor_top = 0.5
-	_texture_rect.anchor_bottom = 0.5
-	_texture_rect.offset_left = 2
-	_texture_rect.offset_top = -6
-	_texture_rect.offset_right = 14
-	_texture_rect.offset_bottom = 6
+	_texture_rect.set_anchors_and_offsets_preset(
+		Control.PRESET_CENTER_LEFT, Control.PRESET_MODE_MINSIZE
+	)
 	_texture_rect.rotation_degrees = -90
 	_texture_rect.pivot_offset = Vector2(6, 6)
 	_texture_rect.add_to_group("UIButtons")

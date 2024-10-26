@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Pixelorama"
 config/description="Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features."
-config/version="v1.0.4-dev"
+config/version="v1.0.4-stable"
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="pixelorama"
@@ -24,8 +24,8 @@ boot_splash/use_filter=false
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/ExtensionsAPI_Version=4
-config/Pxo_Version=3
+config/ExtensionsAPI_Version=5
+config/Pxo_Version=4
 
 [audio]
 
@@ -54,12 +54,18 @@ gdscript/warnings/narrowing_conversion=false
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/energy_saving/keep_screen_on=false
 window/per_pixel_transparency/allowed.android=false
 window/per_pixel_transparency/allowed.web=false
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg")
+
+[global_group]
+
+CanvasCameras=""
+CanvasPreviews=""
 
 [importer_defaults]
 
@@ -896,6 +902,11 @@ next_project={
 previous_project={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+center_canvas={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":67,"physical_keycode":0,"key_label":0,"unicode":67,"location":0,"echo":false,"script":null)
 ]
 }
 

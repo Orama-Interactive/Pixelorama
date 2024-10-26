@@ -58,12 +58,15 @@ var _object_names := {
 	"node3d_type:mesh:top_radius": $"%MeshTopRadius",
 	"node3d_type:mesh:bottom_radius": $"%MeshBottomRadius",
 	"node3d_type:mesh:text": $"%MeshText",
-	"node3d_type:mesh:offset": $"%MeshOffsetV2",
+	"node3d_type:mesh:font": $"%MeshFont",
 	"node3d_type:mesh:pixel_size": $"%MeshPixelSize",
 	"node3d_type:mesh:font_size": $"%MeshFontSize",
+	"node3d_type:mesh:offset": $"%MeshOffsetV2",
+	"node3d_type:mesh:depth": $"%MeshDepth",
 	"node3d_type:mesh:curve_step": $"%MeshCurveStep",
 	"node3d_type:mesh:horizontal_alignment": $"%MeshHorizontalAlignment",
 	"node3d_type:mesh:vertical_alignment": $"%MeshVerticalAlignment",
+	"node3d_type:mesh:line_spacing": $"%MeshLineSpacing",
 	"node3d_type:light_color": $"%LightColor",
 	"node3d_type:light_energy": $"%LightEnergy",
 	"node3d_type:light_negative": $"%LightNegative",
@@ -74,7 +77,7 @@ var _object_names := {
 }
 
 
-func sprite_changed_this_frame():
+func sprite_changed_this_frame() -> void:
 	_checker_update_qued = true
 	_old_cel_image = _cel.get_image()
 	Global.canvas.sprite_changed_this_frame = true
@@ -96,6 +99,10 @@ func _ready() -> void:
 	for object in _object_names:
 		new_object_popup.add_item(_object_names[object], object)
 	new_object_popup.id_pressed.connect(_new_object_popup_id_pressed)
+	# Load font names
+	for font_name in Global.get_available_font_names():
+		$"%MeshFont".add_item(font_name)
+	# Connect the signals of the cel property nodes
 	for prop in cel_properties:
 		var node: Control = cel_properties[prop]
 		if node is ValueSliderV3:
@@ -106,6 +113,7 @@ func _ready() -> void:
 			node.item_selected.connect(_cel_property_item_selected.bind(prop))
 		elif node is ColorPickerButton:
 			node.color_changed.connect(_cel_property_color_changed.bind(prop))
+	# Connect the signals of the object property nodes
 	for prop in object_properties:
 		var node: Control = object_properties[prop]
 		if node is ValueSliderV3:
@@ -359,10 +367,17 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 		if property_path.ends_with("v2"):
 			property_path = property_path.replace("v2", "")
 		var value = to_edit.get_indexed(property_path)
-		if not is_instance_valid(value):
+		if value == null:
 			continue
 		if "scale" in prop:
 			value *= 100
+		if value is Font:
+			var font_name: String = value.get_font_name()
+			value = 0
+			for i in %MeshFont.item_count:
+				var item_name: String = %MeshFont.get_item_text(i)
+				if font_name == item_name:
+					value = i
 		var node: Control = properties[prop]
 		if node is Range or node is ValueSliderV3 or node is ValueSliderV2:
 			if typeof(node.value) != typeof(value) and typeof(value) != TYPE_INT:
@@ -391,6 +406,8 @@ func _set_value_from_node(to_edit: Object, value, prop: String) -> void:
 		to_edit = to_edit.node3d_type.mesh
 	if "scale" in prop:
 		value /= 100
+	if "font" in prop and not "font_" in prop:
+		value = Global.find_font_from_name(%MeshFont.get_item_text(value))
 	to_edit.set_indexed(prop, value)
 
 

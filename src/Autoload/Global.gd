@@ -12,6 +12,7 @@ signal project_about_to_switch  ## Emitted before a project is about to be switc
 signal project_switched  ## Emitted whenever you switch to some other project tab.
 signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
+signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
@@ -27,6 +28,7 @@ enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXP
 enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
 ## Enumeration of items present in the View Menu.
 enum ViewMenu {
+	CENTER_CANVAS,
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
 	GREYSCALE_VIEW,
@@ -163,6 +165,9 @@ var default_layouts: Array[DockableLayout] = [
 	preload("res://assets/layouts/Tallscreen.tres"),
 ]
 var layouts: Array[DockableLayout] = []
+var loaded_fonts: Array[Font] = [
+	ThemeDB.fallback_font, preload("res://assets/fonts/Roboto-Regular.ttf")
+]
 
 # Canvas related stuff
 ## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
@@ -206,6 +211,24 @@ var integer_zoom := false:
 
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
+var theme_font := loaded_fonts[theme_font_index]:
+	set(value):
+		theme_font = value
+		if is_instance_valid(control) and is_instance_valid(control.theme):
+			control.theme.default_font = theme_font
+## Found in Preferences. The index of the font used by the interface.
+var theme_font_index := 1:
+	set(value):
+		theme_font_index = value
+		if theme_font_index < loaded_fonts.size():
+			theme_font = loaded_fonts[theme_font_index]
+		else:
+			var available_font_names := get_available_font_names()
+			if theme_font_index < available_font_names.size():
+				var font_name := available_font_names[theme_font_index]
+				theme_font = find_font_from_name(font_name)
+			else:
+				theme_font = loaded_fonts[1]  # Fall back to Roboto if out of bounds
 ## Found in Preferences. The font size used by the interface.
 var font_size := 16
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
@@ -273,6 +296,11 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences.
+var share_options_between_tools := false:
+	set(value):
+		share_options_between_tools = value
+		Tools.attempt_config_share(MOUSE_BUTTON_LEFT)
 ## Found in Preferences. The left tool color.
 var left_tool_color := Color("0086cf"):
 	set(value):
@@ -514,7 +542,10 @@ var draw_grid := false
 ## If [code]true[/code], the pixel grid is visible.
 var draw_pixel_grid := false
 ## If [code]true[/code], the rulers are visible.
-var show_rulers := true
+var show_rulers := true:
+	set(value):
+		show_rulers = value
+		get_tree().set_group(&"CanvasRulers", "visible", value)
 ## If [code]true[/code], the guides are visible.
 var show_guides := true
 ## If [code]true[/code], the mouse guides are visible.
@@ -554,40 +585,18 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 ## The control node (aka Main node). It has the [param Main.gd] script attached.
 @onready var control := get_tree().current_scene as Control
-
 ## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
 ## Contains viewport of the main canvas. It has the [param ViewportContainer.gd] script attached.
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
 ## The main canvas node. It has the [param Canvas.gd] script attached.
 @onready var canvas: Canvas = main_viewport.find_child("Canvas")
-## Contains viewport of the second canvas preview.
-## It has the [param ViewportContainer.gd] script attached.
-@onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
-## The panel container of the canvas preview.
-## It has the [param CanvasPreviewContainer.gd] script attached.
-@onready var canvas_preview_container: Container = control.find_child("Canvas Preview")
 ## The global tool options. It has the [param GlobalToolOptions.gd] script attached.
 @onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
-## Contains viewport of the canvas preview.
-@onready var small_preview_viewport: SubViewportContainer = canvas_preview_container.find_child(
-	"PreviewViewportContainer"
-)
 ## Camera of the main canvas.
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
-## Camera of the second canvas preview.
-@onready var camera2: CanvasCamera = second_viewport.find_child("Camera2D2")
-## Camera of the canvas preview.
-@onready var camera_preview: CanvasCamera = control.find_child("CameraPreview")
-## Array of cameras used in Pixelorama.
-@onready var cameras := [camera, camera2, camera_preview]
-## Horizontal ruler of the main canvas. It has the [param HorizontalRuler.gd] script attached.
-@onready var horizontal_ruler: BaseButton = control.find_child("HorizontalRuler")
-## Vertical ruler of the main canvas. It has the [param VerticalRuler.gd] script attached.
-@onready var vertical_ruler: BaseButton = control.find_child("VerticalRuler")
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
-
 ## The perspective editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
@@ -596,8 +605,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
-## The timer used by the animation timeline.
-@onready var animation_timer: Timer = animation_timeline.find_child("AnimationTimer")
 ## The container of frame buttons
 @onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
 ## The container of layer buttons
@@ -606,17 +613,12 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-
 ## The brushes popup dialog used to display brushes.
 ## It has the [param BrushesPopup.gd] script attached.
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")
 ## The patterns popup dialog used to display patterns
 ## It has the [param PatternsPopup.gd] script attached.
 @onready var patterns_popup: Popup = control.find_child("PatternsPopup")
-## Dialog used to navigate and open images and projects.
-@onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
-## Dialog used to save (.pxo) projects.
-@onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
 ## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
 ## An error dialog to show errors.
@@ -790,6 +792,7 @@ func _initialize_keychain() -> void:
 		&"palettize": Keychain.InputAction.new("", "Effects menu", true),
 		&"pixelize": Keychain.InputAction.new("", "Effects menu", true),
 		&"posterize": Keychain.InputAction.new("", "Effects menu", true),
+		&"center_canvas": Keychain.InputAction.new("", "View menu", true),
 		&"mirror_view": Keychain.InputAction.new("", "View menu", true),
 		&"show_grid": Keychain.InputAction.new("", "View menu", true),
 		&"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),
@@ -983,8 +986,8 @@ func undo_or_redo(
 
 	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()
-	second_viewport.get_child(0).get_node("CanvasPreview").queue_redraw()
-	canvas_preview_container.canvas_preview.queue_redraw()
+	for canvas_preview in get_tree().get_nodes_in_group("CanvasPreviews"):
+		canvas_preview.queue_redraw()
 	if !project.has_changed:
 		if project == current_project:
 			get_window().title = get_window().title + "(*)"
@@ -1070,6 +1073,32 @@ func find_nearest_locale(locale: String) -> String:
 			max_similarity_score = compared
 			closest_locale = loaded_locale
 	return closest_locale
+
+
+func get_available_font_names() -> PackedStringArray:
+	var font_names := PackedStringArray()
+	for font in loaded_fonts:
+		var font_name := font.get_font_name()
+		if font_name in font_names:
+			continue
+		font_names.append(font_name)
+	for system_font_name in OS.get_system_fonts():
+		if system_font_name in font_names:
+			continue
+		font_names.append(system_font_name)
+	return font_names
+
+
+func find_font_from_name(font_name: String) -> Font:
+	for font in loaded_fonts:
+		if font.get_font_name() == font_name:
+			return font
+	for system_font_name in OS.get_system_fonts():
+		if system_font_name == font_name:
+			var system_font := SystemFont.new()
+			system_font.font_names = [font_name]
+			return system_font
+	return ThemeDB.fallback_font
 
 
 ## Used by undo/redo operations to store compressed images in memory.
