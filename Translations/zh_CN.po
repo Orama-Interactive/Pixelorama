@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-10-17 14:11\n"
+"PO-Revision-Date: 2024-10-26 04:58\n"
 
 msgid "OK"
 msgstr "确定"
@@ -235,7 +235,7 @@ msgstr "首选项"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "居中画布"
 
 msgid "Tile Mode"
 msgstr "平铺模式"
@@ -850,7 +850,7 @@ msgstr "显示比例："
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "字体："
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -920,12 +920,13 @@ msgstr "背景颜色："
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "在左侧和右侧工具之间共享选项"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "如果启用此功能，左侧和右侧工具之间的选项将同步。\n"
+"例如，两个工具将共享相同的画笔大小，并且在一个工具上更改它会立即在另一个工具上更改。"
 
 msgid "Left tool color:"
 msgstr "左侧工具颜色："
@@ -2054,11 +2055,11 @@ msgstr "启用垂直镜像绘图"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "移动到画布中心"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "移动到视图中心"
 
 msgid "Current frame:"
 msgstr "当前帧："
@@ -2076,10 +2077,10 @@ msgid "Go to the previous frame"
 msgstr "转到上一帧"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "向后播放动画"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "向前播放动画"
 
 msgid "Go to the next frame"
 msgstr "转到下一帧"
@@ -2584,23 +2585,23 @@ msgstr "设置新建图像的背景颜色"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "重置首选项中的所有可用选项"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "重置时间轴选项"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "重置所有工具选项"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "移除所有扩展"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "清除最近打开的文件列表"
 
 msgid "Lock aspect ratio"
 msgstr "锁定长宽比"
@@ -2779,11 +2780,11 @@ msgstr "将导出的图像变为可见部分，考虑到非零透明通道的每
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "剪辑图像内容到选择"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "仅导出在选定区域界限内的内容。"
 
 msgid "Close"
 msgstr "关闭"
@@ -3132,7 +3133,7 @@ msgstr "文本："
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "深度："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3146,7 +3147,7 @@ msgid "Horizontal alignment:"
 msgstr "水平对齐"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "垂直对齐："
 
 msgid "Left"
 msgstr "左"
@@ -3156,7 +3157,7 @@ msgstr "右"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "行间距："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
