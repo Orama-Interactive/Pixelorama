@@ -52,13 +52,15 @@ func _ready() -> void:
 	)
 	Global.config_cache.set_value("preferences", "grids", grids)
 	$GridsCount.value = grids.size()
+	if grids.size() == 1:
+		add_remove_select_button(0)
 	for pref in grid_preferences:
 		if not has_node(pref.node_path):
 			continue
 		var node := get_node(pref.node_path)
 		var restore_default_button := RestoreDefaultButton.new()
 		restore_default_button.pressed.connect(
-			_on_Grid_Pref_value_changed.bind(pref.default_value, pref, restore_default_button)
+			_on_grid_pref_value_changed.bind(pref.default_value, pref, restore_default_button)
 		)
 		restore_default_button.setting_name = pref.prop_name
 		restore_default_button.value_type = pref.value_type
@@ -71,24 +73,24 @@ func _ready() -> void:
 
 		match pref.value_type:
 			"button_pressed":
-				node.toggled.connect(_on_Grid_Pref_value_changed.bind(pref, restore_default_button))
+				node.toggled.connect(_on_grid_pref_value_changed.bind(pref, restore_default_button))
 			"value":
 				node.value_changed.connect(
-					_on_Grid_Pref_value_changed.bind(pref, restore_default_button)
+					_on_grid_pref_value_changed.bind(pref, restore_default_button)
 				)
 			"color":
 				node.get_picker().presets_visible = false
 				node.color_changed.connect(
-					_on_Grid_Pref_value_changed.bind(pref, restore_default_button)
+					_on_grid_pref_value_changed.bind(pref, restore_default_button)
 				)
 			"selected":
 				node.item_selected.connect(
-					_on_Grid_Pref_value_changed.bind(pref, restore_default_button)
+					_on_grid_pref_value_changed.bind(pref, restore_default_button)
 				)
 	grid_selected = 0
 
 
-func _on_Grid_Pref_value_changed(value, pref: GridPreference, button: RestoreDefaultButton) -> void:
+func _on_grid_pref_value_changed(value, pref: GridPreference, button: RestoreDefaultButton) -> void:
 	var grids: Dictionary = Global.config_cache.get_value(
 		"preferences", "grids", {0: create_default_properties()}
 	)
