@@ -133,8 +133,9 @@ func snap_position(pos: Vector2) -> Vector2:
 		grid_pos += Vector2(Global.grids[0].grid_offset)
 		# keeping grid_pos as is would have been fine but this adds extra accuracy as to
 		# which snap point (from the list below) is closest to mouse and occupy THAT point
+		# t_l is for "top left" and so on
 		var t_l := grid_pos + Vector2(-Global.grids[0].grid_size.x, -Global.grids[0].grid_size.y)
-		var t_c := grid_pos + Vector2(0, -Global.grids[0].grid_size.y)  # t_c is for "top centre" and so on
+		var t_c := grid_pos + Vector2(0, -Global.grids[0].grid_size.y)
 		var t_r := grid_pos + Vector2(Global.grids[0].grid_size.x, -Global.grids[0].grid_size.y)
 		var m_l := grid_pos + Vector2(-Global.grids[0].grid_size.x, 0)
 		var m_c := grid_pos
@@ -158,8 +159,9 @@ func snap_position(pos: Vector2) -> Vector2:
 		grid_center += Vector2(Global.grids[0].grid_offset)
 		# keeping grid_center as is would have been fine but this adds extra accuracy as to
 		# which snap point (from the list below) is closest to mouse and occupy THAT point
+		# t_l is for "top left" and so on
 		var t_l := grid_center + Vector2(-Global.grids[0].grid_size.x, -Global.grids[0].grid_size.y)
-		var t_c := grid_center + Vector2(0, -Global.grids[0].grid_size.y)  # t_c is for "top centre" and so on
+		var t_c := grid_center + Vector2(0, -Global.grids[0].grid_size.y)
 		var t_r := grid_center + Vector2(Global.grids[0].grid_size.x, -Global.grids[0].grid_size.y)
 		var m_l := grid_center + Vector2(-Global.grids[0].grid_size.x, 0)
 		var m_c := grid_center
