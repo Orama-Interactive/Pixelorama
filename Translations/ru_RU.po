@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-10-17 14:11\n"
+"PO-Revision-Date: 2024-10-29 13:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -233,7 +233,7 @@ msgstr "Настройки"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Центрировать холст"
 
 msgid "Tile Mode"
 msgstr "Режим тайла"
@@ -564,7 +564,7 @@ msgstr "Изменить размер:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Качество:"
 
 msgid "Cancel Export"
 msgstr "Отменить экспорт"
@@ -848,7 +848,7 @@ msgstr "Масштаб интерфейса:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Шрифт:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -996,23 +996,23 @@ msgstr "Цвет тени:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Размытие по Гауссу"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Тип размытия:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Количество размытия:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Радиус размытия:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Направление размытия:"
 
 msgid "Gradient"
 msgstr "Градиент"
@@ -1574,7 +1574,7 @@ msgstr ""
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Образцы"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
@@ -3128,7 +3128,7 @@ msgstr "Текст:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Глубина:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3142,7 +3142,7 @@ msgid "Horizontal alignment:"
 msgstr "Горизонтальное выравнивание:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Вертикальное выравнивание:"
 
 msgid "Left"
 msgstr "Слева"
