@@ -13,6 +13,7 @@ var font_name := "":
 		font_name = value
 		font.base_font = Global.find_font_from_name(font_name)
 		font.base_font.antialiasing = antialiasing
+		_textedit_text_changed()
 var text_style := TextStyle.REGULAR:
 	set(value):
 		text_style = value
@@ -30,6 +31,7 @@ var text_style := TextStyle.REGULAR:
 				font.variation_embolden = EMBOLDEN_AMOUNT
 				font.variation_transform = ITALIC_TRANSFORM
 		save_config()
+		_textedit_text_changed()
 
 var horizontal_alignment := HORIZONTAL_ALIGNMENT_LEFT
 var antialiasing := TextServer.FONT_ANTIALIASING_NONE:
@@ -183,6 +185,7 @@ func _get_undo_data() -> Dictionary:
 func _textedit_text_changed() -> void:
 	if not is_instance_valid(text_edit):
 		return
+	text_edit.add_theme_font_size_override(&"font_size", 1)  # Needed to update font and text style
 	text_edit.add_theme_font_size_override(&"font_size", text_size)
 	text_edit._on_text_changed()
 
