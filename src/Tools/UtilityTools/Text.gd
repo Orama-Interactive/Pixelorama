@@ -1,5 +1,11 @@
 extends BaseTool
 
+enum TextStyle { REGULAR, BOLD, ITALIC, BOLD_ITALIC }
+
+const EMBOLDEN_AMOUNT := 0.6
+const ITALIC_AMOUNT := 0.2
+const ITALIC_TRANSFORM := Transform2D(Vector2(1.0, ITALIC_AMOUNT), Vector2(0.0, 1.0), Vector2.ZERO)
+
 var text_edit: TextToolEdit
 var text_size := 16
 var font_name := "":
@@ -7,6 +13,24 @@ var font_name := "":
 		font_name = value
 		font.base_font = Global.find_font_from_name(font_name)
 		font.base_font.antialiasing = antialiasing
+var text_style := TextStyle.REGULAR:
+	set(value):
+		text_style = value
+		match text_style:
+			TextStyle.REGULAR:
+				font.variation_embolden = 0
+				font.variation_transform = Transform2D()
+			TextStyle.BOLD:
+				font.variation_embolden = EMBOLDEN_AMOUNT
+				font.variation_transform = Transform2D()
+			TextStyle.ITALIC:
+				font.variation_embolden = 0
+				font.variation_transform = ITALIC_TRANSFORM
+			TextStyle.BOLD_ITALIC:
+				font.variation_embolden = EMBOLDEN_AMOUNT
+				font.variation_transform = ITALIC_TRANSFORM
+		save_config()
+
 var horizontal_alignment := HORIZONTAL_ALIGNMENT_LEFT
 var antialiasing := TextServer.FONT_ANTIALIASING_NONE:
 	set(value):
@@ -29,6 +53,7 @@ func get_config() -> Dictionary:
 	return {
 		"font_name": font_name,
 		"text_size": text_size,
+		"text_style": text_style,
 		"horizontal_alignment": horizontal_alignment,
 		"antialiasing": antialiasing
 	}
@@ -39,6 +64,7 @@ func set_config(config: Dictionary) -> void:
 	if font_name not in Global.get_available_font_names():
 		font_name = "Roboto"
 	text_size = config.get("text_size", text_size)
+	text_style = config.get("text_style", text_style)
 	horizontal_alignment = config.get("horizontal_alignment", horizontal_alignment)
 	antialiasing = config.get("antialiasing", antialiasing)
 
@@ -157,8 +183,6 @@ func _get_undo_data() -> Dictionary:
 func _textedit_text_changed() -> void:
 	if not is_instance_valid(text_edit):
 		return
-	if text_edit.font != font:
-		text_edit.font = font
 	text_edit.add_theme_font_size_override(&"font_size", text_size)
 	text_edit._on_text_changed()
 
@@ -176,11 +200,14 @@ func _on_text_size_slider_value_changed(value: float) -> void:
 
 func _on_font_option_button_item_selected(index: int) -> void:
 	font_name = font_option_button.get_item_text(index)
-	_textedit_text_changed()
 	save_config()
 
 
-func _on_horizontal_alignment_option_button_item_selected(index: int) -> void:
+func _on_style_option_button_item_selected(index: TextStyle) -> void:
+	text_style = index
+
+
+func _on_horizontal_alignment_option_button_item_selected(index: HorizontalAlignment) -> void:
 	horizontal_alignment = index
 
 

@@ -41,12 +41,31 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 fit_to_longest_item = false
 
-[node name="HorizontalAlignmentLabel" type="Label" parent="GridContainer" index="2"]
+[node name="StyleLabel" type="Label" parent="GridContainer" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Style:"
+
+[node name="StyleOptionButton" type="OptionButton" parent="GridContainer" index="3"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Regular"
+popup/item_1/text = "Bold"
+popup/item_1/id = 1
+popup/item_2/text = "Italic"
+popup/item_2/id = 2
+popup/item_3/text = "Bold Italic"
+popup/item_3/id = 3
+
+[node name="HorizontalAlignmentLabel" type="Label" parent="GridContainer" index="4"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Horizontal alignment:"
 
-[node name="HorizontalAlignmentOptionButton" type="OptionButton" parent="GridContainer" index="3"]
+[node name="HorizontalAlignmentOptionButton" type="OptionButton" parent="GridContainer" index="5"]
 layout_mode = 2
 selected = 0
 item_count = 4
@@ -58,12 +77,12 @@ popup/item_2/id = 2
 popup/item_3/text = "Fill"
 popup/item_3/id = 3
 
-[node name="AntialiasingLabel" type="Label" parent="GridContainer" index="4"]
+[node name="AntialiasingLabel" type="Label" parent="GridContainer" index="6"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Antialiasing:"
 
-[node name="AntialiasingOptionButton" type="OptionButton" parent="GridContainer" index="5"]
+[node name="AntialiasingOptionButton" type="OptionButton" parent="GridContainer" index="7"]
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -75,5 +94,6 @@ popup/item_2/id = 2
 
 [connection signal="value_changed" from="TextSizeSlider" to="." method="_on_text_size_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/FontOptionButton" to="." method="_on_font_option_button_item_selected"]
+[connection signal="item_selected" from="GridContainer/StyleOptionButton" to="." method="_on_style_option_button_item_selected"]
 [connection signal="item_selected" from="GridContainer/HorizontalAlignmentOptionButton" to="." method="_on_horizontal_alignment_option_button_item_selected"]
 [connection signal="item_selected" from="GridContainer/AntialiasingOptionButton" to="." method="_on_antialiasing_option_button_item_selected"]
