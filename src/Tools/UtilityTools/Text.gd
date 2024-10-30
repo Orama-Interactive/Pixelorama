@@ -131,12 +131,11 @@ func text_to_pixels() -> void:
 		ci_rid, Rect2(Vector2(0, 0), project.size), texture
 	)
 
-	var texts := text_edit.text.split("\n")
+	var text := text_edit.text
+	var color := tool_slot.color
 	var pos := Vector2(1, font.get_ascent() + text_edit.get_theme_constant(&"line_spacing"))
 	pos += text_edit.position
-	for text in texts:
-		font.draw_string(ci_rid, pos, text, horizontal_alignment, -1, text_size, tool_slot.color)
-		pos.y += font.get_height()
+	font.draw_multiline_string(ci_rid, pos, text, horizontal_alignment, -1, text_size, -1, color)
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
 	RenderingServer.force_draw(false)
@@ -149,7 +148,7 @@ func text_to_pixels() -> void:
 
 	text_edit.queue_free()
 	text_edit = null
-	if !viewport_texture.is_empty():
+	if not viewport_texture.is_empty():
 		image.copy_from(viewport_texture)
 		commit_undo("Draw", undo_data)
 
