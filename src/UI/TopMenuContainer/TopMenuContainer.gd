@@ -98,6 +98,18 @@ func _ready() -> void:
 	_setup_help_menu()
 
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		file_menu.activate_item_by_event(event)
+		edit_menu.activate_item_by_event(event)
+		select_menu.activate_item_by_event(event)
+		image_menu.activate_item_by_event(event)
+		effects_menu.activate_item_by_event(event)
+		view_menu.activate_item_by_event(event)
+		window_menu.activate_item_by_event(event)
+		help_menu.activate_item_by_event(event)
+
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and Global.current_project != null:
 		_update_file_menu_buttons(Global.current_project)
