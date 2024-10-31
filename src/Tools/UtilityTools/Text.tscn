@@ -1,13 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://ct4o5i1jeul3k"]
+[gd_scene load_steps=6 format=3 uid="uid://ct4o5i1jeul3k"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1_1q6ub"]
 [ext_resource type="Script" path="res://src/Tools/UtilityTools/Text.gd" id="2_ql5g6"]
+[ext_resource type="Texture2D" uid="uid://d267xalp3p7ru" path="res://assets/graphics/misc/check_plain.png" id="3_novww"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_tidsq"]
+[ext_resource type="Texture2D" uid="uid://bnc78807k1xjv" path="res://assets/graphics/misc/close.png" id="4_nhcnn"]
 
 [node name="ToolOptions" instance=ExtResource("1_1q6ub")]
 script = ExtResource("2_ql5g6")
 
-[node name="TextSizeSlider" type="TextureProgressBar" parent="." index="2"]
+[node name="ConfirmButtons" type="HBoxContainer" parent="." index="2"]
+visible = false
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="ConfirmButtons" index="0" groups=["UIButtons"]]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/ConfirmButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_novww")
+stretch_mode = 3
+
+[node name="CancelButton" type="Button" parent="ConfirmButtons" index="1" groups=["UIButtons"]]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/CancelButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_nhcnn")
+stretch_mode = 3
+
+[node name="TextSizeSlider" type="TextureProgressBar" parent="." index="3"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2
@@ -26,7 +64,7 @@ script = ExtResource("3_tidsq")
 prefix = "Size:"
 suffix = "px"
 
-[node name="GridContainer" type="GridContainer" parent="." index="3"]
+[node name="GridContainer" type="GridContainer" parent="." index="4"]
 layout_mode = 2
 columns = 2
 
@@ -92,6 +130,8 @@ popup/item_1/id = 1
 popup/item_2/text = "LCD"
 popup/item_2/id = 2
 
+[connection signal="pressed" from="ConfirmButtons/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="ConfirmButtons/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="value_changed" from="TextSizeSlider" to="." method="_on_text_size_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/FontOptionButton" to="." method="_on_font_option_button_item_selected"]
 [connection signal="item_selected" from="GridContainer/StyleOptionButton" to="." method="_on_style_option_button_item_selected"]

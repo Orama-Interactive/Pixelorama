@@ -6,8 +6,12 @@ const EMBOLDEN_AMOUNT := 0.6
 const ITALIC_AMOUNT := 0.2
 const ITALIC_TRANSFORM := Transform2D(Vector2(1.0, ITALIC_AMOUNT), Vector2(0.0, 1.0), Vector2.ZERO)
 
-var text_edit: TextToolEdit
+var text_edit: TextToolEdit:
+	set(value):
+		text_edit = value
+		confirm_buttons.visible = is_instance_valid(text_edit)
 var text_size := 16
+var font := FontVariation.new()
 var font_name := "":
 	set(value):
 		font_name = value
@@ -39,7 +43,9 @@ var antialiasing := TextServer.FONT_ANTIALIASING_NONE:
 		antialiasing = value
 		font.base_font.antialiasing = antialiasing
 
-@onready var font := FontVariation.new()
+var _offset := Vector2i.ZERO
+
+@onready var confirm_buttons: HBoxContainer = $ConfirmButtons
 @onready var font_option_button: OptionButton = $GridContainer/FontOptionButton
 
 
@@ -80,23 +86,21 @@ func update_config() -> void:
 
 
 func draw_start(pos: Vector2i) -> void:
-	if is_instance_valid(text_edit):
-		var text_edit_rect := Rect2i(text_edit.position, text_edit.size)
-		if text_edit_rect.has_point(pos):
-			return
-		text_to_pixels()
-
-	text_edit = TextToolEdit.new()
-	text_edit.text = ""
-	text_edit.font = font
-	text_edit.add_theme_color_override(&"font_color", tool_slot.color)
-	text_edit.add_theme_font_size_override(&"font_size", text_size)
-	Global.canvas.add_child(text_edit)
-	text_edit.position = pos - Vector2i(0, text_edit.custom_minimum_size.y / 2)
+	if not is_instance_valid(text_edit):
+		text_edit = TextToolEdit.new()
+		text_edit.text = ""
+		text_edit.font = font
+		text_edit.add_theme_color_override(&"font_color", tool_slot.color)
+		text_edit.add_theme_font_size_override(&"font_size", text_size)
+		Global.canvas.add_child(text_edit)
+		text_edit.position = pos - Vector2i(0, text_edit.custom_minimum_size.y / 2)
+	_offset = pos
 
 
-func draw_move(_position: Vector2i) -> void:
-	pass
+func draw_move(pos: Vector2i) -> void:
+	if is_instance_valid(text_edit) and not text_edit.get_global_rect().has_point(pos):
+		text_edit.position += Vector2(pos - _offset)
+	_offset = pos
 
 
 func draw_end(_position: Vector2i) -> void:
@@ -179,6 +183,17 @@ func _get_undo_data() -> Dictionary:
 	for image in images:
 		data[image] = image.data
 	return data
+
+
+func _on_confirm_button_pressed() -> void:
+	if is_instance_valid(text_edit):
+		text_to_pixels()
+
+
+func _on_cancel_button_pressed() -> void:
+	if is_instance_valid(text_edit):
+		text_edit.queue_free()
+		text_edit = null
 
 
 func _textedit_text_changed() -> void:
