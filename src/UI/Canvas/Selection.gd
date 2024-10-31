@@ -1,4 +1,7 @@
+class_name SelectionNode
 extends Node2D
+
+signal is_moving_content_changed
 
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
 const KEY_MOVE_ACTION_NAMES: PackedStringArray = [&"ui_up", &"ui_down", &"ui_left", &"ui_right"]
@@ -7,7 +10,10 @@ const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 # flags (additional properties of selection that can be toggled)
 var flag_tilemode := false
 
-var is_moving_content := false
+var is_moving_content := false:
+	set(value):
+		is_moving_content = value
+		is_moving_content_changed.emit()
 var arrow_key_move := false
 var is_pasting := false
 var big_bounding_rectangle := Rect2i():
@@ -100,12 +106,6 @@ func _input(event: InputEvent) -> void:
 	image_current_pixel = canvas.current_pixel
 	if Global.mirror_view:
 		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
-	if is_moving_content:
-		if Input.is_action_just_pressed("transformation_confirm"):
-			transform_content_confirm()
-		elif Input.is_action_just_pressed("transformation_cancel"):
-			transform_content_cancel()
-
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if event is InputEventKey:
