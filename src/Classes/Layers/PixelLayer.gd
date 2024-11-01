@@ -28,7 +28,10 @@ func get_layer_type() -> int:
 
 
 func new_empty_cel() -> BaseCel:
-	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	#var image := Image.create_empty(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var image := PixeloramaImage.create_custom(
+		project.size.x, project.size.y, false, Image.FORMAT_RGBA8
+	)
 	return PixelCel.new(image)
 
 
