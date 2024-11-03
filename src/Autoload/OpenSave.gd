@@ -457,12 +457,13 @@ func save_pxo_file(
 
 func open_image_as_new_tab(path: String, image: Image) -> void:
 	var project := Project.new([], path.get_file(), image.get_size())
-	project.layers.append(PixelLayer.new(project))
+	var layer := PixelLayer.new(project)
+	project.layers.append(layer)
 	Global.projects.append(project)
 
 	var frame := Frame.new()
 	image.convert(Image.FORMAT_RGBA8)
-	frame.cels.append(PixelCel.new(image, 1))
+	frame.cels.append(layer.new_cel_from_image(image))
 
 	project.frames.append(frame)
 	set_new_imported_tab(project, path)
@@ -475,7 +476,8 @@ func open_image_as_spritesheet_tab_smart(
 		frame_size = image.get_size()
 		sliced_rects.append(Rect2i(Vector2i.ZERO, frame_size))
 	var project := Project.new([], path.get_file(), frame_size)
-	project.layers.append(PixelLayer.new(project))
+	var layer := PixelLayer.new(project)
+	project.layers.append(layer)
 	Global.projects.append(project)
 	for rect in sliced_rects:
 		var offset: Vector2 = (0.5 * (frame_size - rect.size)).floor()
@@ -483,7 +485,7 @@ func open_image_as_spritesheet_tab_smart(
 		var cropped_image := Image.create(frame_size.x, frame_size.y, false, Image.FORMAT_RGBA8)
 		image.convert(Image.FORMAT_RGBA8)
 		cropped_image.blit_rect(image, rect, offset)
-		frame.cels.append(PixelCel.new(cropped_image, 1))
+		frame.cels.append(layer.new_cel_from_image(cropped_image))
 		project.frames.append(frame)
 	set_new_imported_tab(project, path)
 
@@ -494,7 +496,8 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
 	var project := Project.new([], path.get_file(), Vector2(frame_width, frame_height))
-	project.layers.append(PixelLayer.new(project))
+	var layer := PixelLayer.new(project)
+	project.layers.append(layer)
 	Global.projects.append(project)
 	for yy in range(vert):
 		for xx in range(horiz):
@@ -504,7 +507,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 			)
 			project.size = cropped_image.get_size()
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			frame.cels.append(PixelCel.new(cropped_image, 1))
+			frame.cels.append(layer.new_cel_from_image(cropped_image))
 			project.frames.append(frame)
 	set_new_imported_tab(project, path)
 
@@ -567,7 +570,7 @@ func open_image_as_spritesheet_layer_smart(
 				project_width, project_height, false, Image.FORMAT_RGBA8
 			)
 			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
-			cels.append(PixelCel.new(cropped_image))
+			cels.append(layer.new_cel_from_image(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
 
@@ -653,7 +656,7 @@ func open_image_as_spritesheet_layer(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height),
 				Vector2i.ZERO
 			)
-			cels.append(PixelCel.new(cropped_image))
+			cels.append(layer.new_cel_from_image(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
 
@@ -688,8 +691,10 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	if not cel is PixelCel:
 		return
 	image.convert(Image.FORMAT_RGBA8)
-	var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+	var cel_image := PixeloramaImage.create_custom(
+		project_width, project_height, false, Image.FORMAT_RGBA8
+	)
+	cel_image.blit_rect_custom(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 	Global.undo_redo_compress_images(
 		{cel.image: cel_image.data}, {cel.image: cel.image.data}, project
 	)
@@ -716,11 +721,12 @@ func open_image_as_new_frame(
 
 	var frame := Frame.new()
 	for i in project.layers.size():
-		if i == layer_index:
+		var layer := project.layers[i]
+		if i == layer_index and layer is PixelLayer:
 			image.convert(Image.FORMAT_RGBA8)
 			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
 			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-			frame.cels.append(PixelCel.new(cel_image, 1))
+			frame.cels.append(layer.new_cel_from_image(cel_image))
 		else:
 			frame.cels.append(project.layers[i].new_empty_cel())
 	if not undo:
@@ -756,7 +762,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 			image.convert(Image.FORMAT_RGBA8)
 			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
 			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-			cels.append(PixelCel.new(cel_image, 1))
+			cels.append(layer.new_cel_from_image(cel_image))
 		else:
 			cels.append(layer.new_empty_cel())
 

@@ -35,5 +35,11 @@ func new_empty_cel() -> BaseCel:
 	return PixelCel.new(image)
 
 
+func new_cel_from_image(image: Image) -> PixelCel:
+	var pixelorama_image := PixeloramaImage.new()
+	pixelorama_image.copy_from_custom(image)
+	return PixelCel.new(pixelorama_image)
+
+
 func can_layer_get_drawn() -> bool:
 	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()

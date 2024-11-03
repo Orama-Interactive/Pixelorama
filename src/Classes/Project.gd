@@ -324,7 +324,9 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 							image = Image.create_from_data(
 								size.x, size.y, false, Image.FORMAT_RGBA8, buffer
 							)
-						cels.append(PixelCel.new(image))
+						var pixelorama_image := PixeloramaImage.new()
+						pixelorama_image.copy_from_custom(image)
+						cels.append(PixelCel.new(pixelorama_image))
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
