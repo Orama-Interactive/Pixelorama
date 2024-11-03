@@ -92,8 +92,8 @@ func draw_move(pos_i: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_end(pos)
 	if _picking_color:
+		super.draw_end(pos)
 		return
 
 	if _draw_line:
@@ -105,6 +105,7 @@ func draw_end(pos: Vector2i) -> void:
 		draw_fill_gap(_line_start, _line_end)
 		_draw_line = false
 
+	super.draw_end(pos)
 	commit_undo()
 	SteamManager.set_achievement("ACH_ERASE_PIXEL")
 	cursor_text = ""

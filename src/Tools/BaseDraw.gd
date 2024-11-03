@@ -273,6 +273,8 @@ func draw_tool(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
+	_stroke_project = null
+	_stroke_images = []
 	_brush_size_dynamics = _brush_size
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min

@@ -164,8 +164,8 @@ func draw_move(pos_i: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_end(pos)
 	if _picking_color:
+		super.draw_end(pos)
 		return
 
 	if _draw_line:
@@ -194,6 +194,7 @@ func draw_end(pos: Vector2i) -> void:
 							draw_tool(v)
 
 	_fill_inside_rect = Rect2i()
+	super.draw_end(pos)
 	commit_undo()
 	cursor_text = ""
 	update_random_image()
