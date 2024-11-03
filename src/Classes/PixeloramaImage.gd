@@ -2,15 +2,18 @@ class_name PixeloramaImage
 extends Image
 
 const TRANSPARENT := Color(0)
+const SET_INDICES := preload("res://src/Shaders/SetIndices.gdshader")
+const INDEXED_TO_RGB := preload("res://src/Shaders/IndexedToRGB.gdshader")
 
 var current_palette := Palettes.current_palette
-var indices := PackedInt32Array()
+var indices_image := Image.create_empty(1, 1, false, Image.FORMAT_R8)
 var palette := PackedColorArray()
 
 
 func _init() -> void:
-	resize_indices()
-	select_palette("")
+	indices_image.fill(TRANSPARENT)
+	#resize_indices()
+	#select_palette("")
 	Palettes.palette_selected.connect(select_palette)
 
 
@@ -55,31 +58,29 @@ func update_palette() -> void:
 
 
 func convert_indexed_to_rgb() -> void:
-	for x in get_width():
-		for y in get_height():
-			var index := indices[(x * get_height()) + y]
-			if index > -1:
-				if index >= palette.size():
-					set_pixel(x, y, TRANSPARENT)
-				else:
-					set_pixel(x, y, palette[index])
-			else:
-				set_pixel(x, y, TRANSPARENT)
+	var palette_image := Palettes.current_palette.convert_to_image()
+	var palette_texture := ImageTexture.create_from_image(palette_image)
+	var shader_image_effect := ShaderImageEffect.new()
+	var indices_texture := ImageTexture.create_from_image(indices_image)
+	var params := {"palette_texture": palette_texture, "indices_texture": indices_texture}
+	shader_image_effect.generate_image(self, INDEXED_TO_RGB, params, get_size())
 	Global.canvas.queue_redraw()
 
 
 func convert_rgb_to_indexed() -> void:
-	for x in get_width():
-		for y in get_height():
-			var color := get_pixel(x, y)
-			set_pixel_custom(x, y, color)
+	var palette_image := Palettes.current_palette.convert_to_image()
+	var palette_texture := ImageTexture.create_from_image(palette_image)
+	var params := {
+		"palette_texture": palette_texture, "rgb_texture": ImageTexture.create_from_image(self)
+	}
+	var shader_image_effect := ShaderImageEffect.new()
+	shader_image_effect.generate_image(indices_image, SET_INDICES, params, indices_image.get_size())
+	convert_indexed_to_rgb()
 
 
 func resize_indices() -> void:
 	print(get_width(), " ", get_height(), " ", get_width() * get_height())
-	indices.resize(get_width() * get_height())
-	for i in indices.size():
-		indices[i] = -1
+	indices_image.crop(get_width(), get_height())
 
 
 func set_pixel_custom(x: int, y: int, color: Color) -> void:
@@ -88,13 +89,13 @@ func set_pixel_custom(x: int, y: int, color: Color) -> void:
 
 func set_pixelv_custom(point: Vector2i, color: Color) -> void:
 	var color_to_fill := TRANSPARENT
-	var color_index := -1
+	var color_index := 0
 	if not color.is_equal_approx(TRANSPARENT):
 		if palette.has(color):
 			color_index = palette.find(color)
 		else:  # Find the most similar color
-			if not is_zero_approx(palette[0].a):
-				color_index = 0
+			#if not is_zero_approx(palette[0].a):
+			#color_index = 0
 			var smaller_distance := color_distance(color, palette[0])
 			for i in palette.size():
 				var swatch := palette[i]
@@ -104,10 +105,12 @@ func set_pixelv_custom(point: Vector2i, color: Color) -> void:
 				if dist < smaller_distance:
 					smaller_distance = dist
 					color_index = i
-	indices[(point.x * get_height()) + point.y] = color_index
-	if color_index > -1:
+		indices_image.set_pixelv(point, Color((color_index + 1) / 255.0, 0, 0, 0))
 		color_to_fill = palette[color_index]
-	set_pixelv(point, color_to_fill)
+		set_pixelv(point, color_to_fill)
+	else:
+		indices_image.set_pixelv(point, TRANSPARENT)
+		set_pixelv(point, TRANSPARENT)
 
 
 func color_distance(c1: Color, c2: Color) -> float:

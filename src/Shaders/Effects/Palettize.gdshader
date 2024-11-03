@@ -3,6 +3,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
+#include "res://src/Shaders/FindPaletteColorIndex.gdshaderinc"
 uniform sampler2D palette_texture : filter_nearest;
 uniform sampler2D selection : filter_nearest;
 
@@ -10,18 +11,9 @@ vec4 swap_color(vec4 color) {
 	if (color.a <= 0.01) {
 		return color;
 	}
-	int color_index = 0;
+
 	int n_of_colors = textureSize(palette_texture, 0).x;
-	float smaller_distance = distance(color, texture(palette_texture, vec2(0.0)));
-	for (int i = 0; i <= n_of_colors; i++) {
-		vec2 uv = vec2(float(i) / float(n_of_colors), 0.0);
-		vec4 palette_color = texture(palette_texture, uv);
-		float dist = distance(color, palette_color);
-		if (dist < smaller_distance) {
-			smaller_distance = dist;
-			color_index = i;
-		}
-	}
+	int color_index = find_index(color, n_of_colors, palette_texture);
 	return texture(palette_texture, vec2(float(color_index) / float(n_of_colors), 0.0));
 }
 
