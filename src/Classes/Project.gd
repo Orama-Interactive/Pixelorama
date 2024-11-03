@@ -3,6 +3,7 @@ class_name Project
 extends RefCounted
 ## A class for project properties.
 
+signal removed
 signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
@@ -137,6 +138,7 @@ func remove() -> void:
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
 	layers.clear()
 	Global.projects.erase(self)
+	removed.emit()
 
 
 func remove_backup_file() -> void:

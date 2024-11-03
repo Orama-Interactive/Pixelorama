@@ -31,13 +31,6 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="TargetProjectOption" type="OptionButton" parent="ScrollContainer/CenterContainer/GridContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-tooltip_text = "Choose project"
-clip_text = true
-
 [node name="Start" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
@@ -143,6 +136,8 @@ text = "Capture frame every"
 [node name="SkipAmount" type="SpinBox" parent="OptionsDialog/PanelContainer/OptionsContainer/ActionGap"]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
 suffix = "actions"
 
 [node name="ModeHeader" type="HBoxContainer" parent="OptionsDialog/PanelContainer/OptionsContainer" groups=["visible during recording"]]
@@ -223,10 +218,6 @@ editable = false
 layout_mode = 2
 text = "Choose"
 
-[node name="Timer" type="Timer" parent="."]
-
-[connection signal="item_selected" from="ScrollContainer/CenterContainer/GridContainer/TargetProjectOption" to="." method="_on_TargetProjectOption_item_selected"]
-[connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/TargetProjectOption" to="." method="_on_TargetProjectOption_pressed"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Start" to="." method="_on_Start_toggled"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/OpenFolder" to="." method="_on_open_folder_pressed"]
@@ -234,4 +225,3 @@ text = "Choose"
 [connection signal="toggled" from="OptionsDialog/PanelContainer/OptionsContainer/ModeType/Mode" to="." method="_on_Mode_toggled"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/OutputScale/Resize" to="." method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="OptionsDialog/PanelContainer/OptionsContainer/PathContainer/Choose" to="." method="_on_Choose_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
