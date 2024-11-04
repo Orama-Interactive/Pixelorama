@@ -99,6 +99,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# Workaround for https://github.com/Orama-Interactive/Pixelorama/issues/1070
 	if event is InputEventMouseButton and event.pressed:
 		file_menu.activate_item_by_event(event)
 		edit_menu.activate_item_by_event(event)

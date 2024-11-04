@@ -250,16 +250,10 @@ func _handle_layout_files() -> void:
 func _setup_application_window_size() -> void:
 	if DisplayServer.get_name() == "headless":
 		return
-	var root := get_tree().root
-	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
-	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
-	# Set a minimum window size to prevent UI elements from collapsing on each other.
-	root.min_size = Vector2(1024, 576)
-	root.content_scale_factor = Global.shrink
+	set_display_scale()
 	if Global.font_size != theme.default_font_size:
 		theme.default_font_size = Global.font_size
 		theme.set_font_size("font_size", "HeaderSmall", Global.font_size + 2)
-	set_custom_cursor()
 
 	if OS.get_name() == "Web":
 		return
@@ -278,6 +272,16 @@ func _setup_application_window_size() -> void:
 			get_window().position = Global.config_cache.get_value("window", "position")
 		if Global.config_cache.has_section_key("window", "size"):
 			get_window().size = Global.config_cache.get_value("window", "size")
+
+
+func set_display_scale() -> void:
+	var root := get_window()
+	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	# Set a minimum window size to prevent UI elements from collapsing on each other.
+	root.min_size = Vector2(1024, 576)
+	root.content_scale_factor = Global.shrink
+	set_custom_cursor()
 
 
 func set_custom_cursor() -> void:

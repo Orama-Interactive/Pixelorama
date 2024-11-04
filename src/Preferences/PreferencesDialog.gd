@@ -413,12 +413,7 @@ func _on_List_item_selected(index: int) -> void:
 
 
 func _on_shrink_apply_button_pressed() -> void:
-	var root := get_tree().root
-	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
-	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
-	root.min_size = Vector2(1024, 576)
-	root.content_scale_factor = Global.shrink
-	Global.control.set_custom_cursor()
+	Global.control.set_display_scale()
 	hide()
 	popup_centered(Vector2(600, 400))
 	Global.dialog_open(true)
