@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-10-17 14:11\n"
+"PO-Revision-Date: 2024-11-04 10:57\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -566,7 +566,7 @@ msgstr "Змінити розмір:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Якість:"
 
 msgid "Cancel Export"
 msgstr "Скасувати експорт"
@@ -850,11 +850,11 @@ msgstr "Масштаб екрану:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Шрифт:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Розмір шрифту:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Затемнити інтерфейс під діалоговими вікнами"
@@ -1002,7 +1002,7 @@ msgstr ""
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Тип розмиття:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
@@ -1010,11 +1010,11 @@ msgstr ""
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Радіус розмиття:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Напрямок розмиття:"
 
 msgid "Gradient"
 msgstr "Градієнт"
@@ -1102,23 +1102,23 @@ msgstr ""
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Яскравість:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Контраст:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Значення червоного:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Значення зеленого:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Значення синього:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
@@ -1187,7 +1187,7 @@ msgstr "Про Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Підтримка розробки Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - пікселізуйте свої мрії!"
@@ -1315,7 +1315,7 @@ msgstr "Білоруська"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Головний розробник"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1323,7 +1323,7 @@ msgstr "UI дизайнер"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Автори"
 
 msgid "Art by: %s"
 msgstr "Художник: %s"
