@@ -5,6 +5,7 @@ const TRANSPARENT := Color(0)
 const SET_INDICES := preload("res://src/Shaders/SetIndices.gdshader")
 const INDEXED_TO_RGB := preload("res://src/Shaders/IndexedToRGB.gdshader")
 
+var is_indexed := false
 var current_palette := Palettes.current_palette
 var indices_image := Image.create_empty(1, 1, false, Image.FORMAT_R8)
 var palette := PackedColorArray()
@@ -12,35 +13,36 @@ var palette := PackedColorArray()
 
 func _init() -> void:
 	indices_image.fill(TRANSPARENT)
-	#resize_indices()
-	#select_palette("")
 	Palettes.palette_selected.connect(select_palette)
 
 
 static func create_custom(
-	width: int, height: int, mipmaps: bool, format: Image.Format
+	width: int, height: int, mipmaps: bool, format: Image.Format, _is_indexed := false
 ) -> PixeloramaImage:
 	var new_image := PixeloramaImage.new()
 	new_image.crop(width, height)
-	new_image.fill(TRANSPARENT)
 	if mipmaps:
 		new_image.generate_mipmaps()
 	new_image.convert(format)
-	new_image.resize_indices()
-	new_image.select_palette("")
+	new_image.fill(TRANSPARENT)
+	new_image.is_indexed = _is_indexed
+	if new_image.is_indexed:
+		new_image.resize_indices()
+		new_image.select_palette("")
 	return new_image
 
 
 func copy_from_custom(image: Image) -> void:
 	copy_from(image)
-	update_palette()
-	resize_indices()
-	convert_rgb_to_indexed()
+	if is_indexed:
+		update_palette()
+		resize_indices()
+		convert_rgb_to_indexed()
 
 
 func select_palette(_name: String) -> void:
 	current_palette = Palettes.current_palette
-	if not is_instance_valid(current_palette):
+	if not is_instance_valid(current_palette) or not is_indexed:
 		return
 	update_palette()
 	convert_indexed_to_rgb()
@@ -88,6 +90,9 @@ func set_pixel_custom(x: int, y: int, color: Color) -> void:
 
 
 func set_pixelv_custom(point: Vector2i, color: Color) -> void:
+	if not is_indexed:
+		set_pixelv(point, color)
+		return
 	var color_to_fill := TRANSPARENT
 	var color_index := 0
 	if not color.is_equal_approx(TRANSPARENT):
@@ -121,4 +126,5 @@ func color_distance(c1: Color, c2: Color) -> float:
 
 func blit_rect_custom(src: Image, src_rect: Rect2i, origin: Vector2i) -> void:
 	blit_rect(src, src_rect, origin)
-	convert_rgb_to_indexed()
+	if is_indexed:
+		convert_rgb_to_indexed()
