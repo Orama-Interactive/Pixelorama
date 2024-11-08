@@ -382,7 +382,7 @@ class PanelAPI:
 ## Gives access to theme related functions.
 class ThemeAPI:
 	## Returns the Themes autoload. Allows interacting with themes on a more deeper level.
-	func get_autoload() -> Themes:
+	func autoload() -> Themes:
 		return Themes
 
 	## Adds the [param theme] to [code]Edit -> Preferences -> Interface -> Themes[/code].
@@ -443,7 +443,7 @@ class ToolAPI:
 	const LayerTypes := Global.LayerTypes
 
 	## Returns the Tools autoload. Allows interacting with tools on a more deeper level.
-	func get_autoload() -> Tools:
+	func autoload() -> Tools:
 		return Tools
 
 	## Adds a tool to pixelorama with name [param tool_name] (without spaces),
@@ -688,7 +688,7 @@ class ExportAPI:
 
 	## Returns the Export autoload.
 	## Allows interacting with the export workflow on a more deeper level.
-	func get_autoload() -> Export:
+	func autoload() -> Export:
 		return Export
 
 	## [param format_info] has keys: [code]extension[/code] and [code]description[/code]
@@ -745,8 +745,11 @@ class ExportAPI:
 class ImportAPI:
 	## Returns the OpenSave autoload. Contains code to handle file loading.
 	## It also contains code to handle project saving (.pxo)
-	func get_autoload() -> OpenSave:
+	func open_save_autoload() -> OpenSave:
 		return OpenSave
+
+	func import_autoload() -> Import:
+		return Import
 
 	## [param import_scene] is a scene preload that will be instanced and added to "import options"
 	## section of pixelorama's import dialogs and will appear whenever [param import_name] is
@@ -776,7 +779,7 @@ class ImportAPI:
 ## Gives access to palette related stuff.
 class PaletteAPI:
 	## Returns the Palettes autoload. Allows interacting with palettes on a more deeper level.
-	func get_autoload() -> Palettes:
+	func autoload() -> Palettes:
 		return Palettes
 
 	## Creates and adds a new [Palette] with name [param palette_name] containing [param data].
