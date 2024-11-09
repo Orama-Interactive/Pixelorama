@@ -5,7 +5,9 @@ extends RefCounted
 signal done
 
 
-func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector2i) -> void:
+func generate_image(
+	img: Image, shader: Shader, params: Dictionary, size: Vector2i, respect_indexed := true
+) -> void:
 	# duplicate shader before modifying code to avoid affecting original resource
 	var resized_width := false
 	var resized_height := false
@@ -60,4 +62,6 @@ func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector
 		img.crop(img.get_width() - 1, img.get_height())
 	if resized_height:
 		img.crop(img.get_width(), img.get_height() - 1)
+	if img is PixeloramaImage and img.is_indexed and respect_indexed:
+		img.convert_rgb_to_indexed()
 	done.emit()

@@ -65,7 +65,7 @@ func convert_indexed_to_rgb() -> void:
 	var shader_image_effect := ShaderImageEffect.new()
 	var indices_texture := ImageTexture.create_from_image(indices_image)
 	var params := {"palette_texture": palette_texture, "indices_texture": indices_texture}
-	shader_image_effect.generate_image(self, INDEXED_TO_RGB, params, get_size())
+	shader_image_effect.generate_image(self, INDEXED_TO_RGB, params, get_size(), false)
 	Global.canvas.queue_redraw()
 
 
@@ -76,7 +76,9 @@ func convert_rgb_to_indexed() -> void:
 		"palette_texture": palette_texture, "rgb_texture": ImageTexture.create_from_image(self)
 	}
 	var shader_image_effect := ShaderImageEffect.new()
-	shader_image_effect.generate_image(indices_image, SET_INDICES, params, indices_image.get_size())
+	shader_image_effect.generate_image(
+		indices_image, SET_INDICES, params, indices_image.get_size(), false
+	)
 	convert_indexed_to_rgb()
 
 

@@ -80,10 +80,7 @@ func _confirmed() -> void:
 			if not cel is PixelCel:
 				continue
 			commit_idx = cel_index[0]  # frame is cel_index[0] in this mode
-			var image := (cel as PixelCel).get_image()
-			commit_action(image)
-			if image.is_indexed:
-				image.convert_rgb_to_indexed()
+			commit_action(cel.image)
 		_commit_undo("Draw", undo_data, project)
 
 	elif affect == FRAME:
@@ -96,10 +93,7 @@ func _confirmed() -> void:
 				i += 1
 				continue
 			if project.layers[i].can_layer_get_drawn():
-				var image := (cel as PixelCel).get_image()
-				commit_action(image)
-				if image.is_indexed:
-					image.convert_rgb_to_indexed()
+				commit_action(cel.image)
 			i += 1
 		_commit_undo("Draw", undo_data, project)
 
@@ -114,10 +108,7 @@ func _confirmed() -> void:
 					i += 1
 					continue
 				if project.layers[i].can_layer_get_drawn():
-					var image := (cel as PixelCel).get_image()
-					commit_action(image)
-					if image.is_indexed:
-						image.convert_rgb_to_indexed()
+					commit_action(cel.image)
 				i += 1
 		_commit_undo("Draw", undo_data, project)
 
@@ -135,10 +126,7 @@ func _confirmed() -> void:
 						i += 1
 						continue
 					if _project.layers[i].can_layer_get_drawn():
-						var image := (cel as PixelCel).get_image()
-						commit_action(image, _project)
-						if image.is_indexed:
-							image.convert_rgb_to_indexed()
+						commit_action(cel.image, _project)
 					i += 1
 			_commit_undo("Draw", undo_data, _project)
 
