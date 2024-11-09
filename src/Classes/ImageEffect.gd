@@ -80,7 +80,10 @@ func _confirmed() -> void:
 			if not cel is PixelCel:
 				continue
 			commit_idx = cel_index[0]  # frame is cel_index[0] in this mode
-			commit_action(cel.image)
+			var image := (cel as PixelCel).get_image()
+			commit_action(image)
+			if image.is_indexed:
+				image.convert_rgb_to_indexed()
 		_commit_undo("Draw", undo_data, project)
 
 	elif affect == FRAME:
@@ -93,7 +96,10 @@ func _confirmed() -> void:
 				i += 1
 				continue
 			if project.layers[i].can_layer_get_drawn():
-				commit_action(cel.image)
+				var image := (cel as PixelCel).get_image()
+				commit_action(image)
+				if image.is_indexed:
+					image.convert_rgb_to_indexed()
 			i += 1
 		_commit_undo("Draw", undo_data, project)
 
@@ -108,7 +114,10 @@ func _confirmed() -> void:
 					i += 1
 					continue
 				if project.layers[i].can_layer_get_drawn():
-					commit_action(cel.image)
+					var image := (cel as PixelCel).get_image()
+					commit_action(image)
+					if image.is_indexed:
+						image.convert_rgb_to_indexed()
 				i += 1
 		_commit_undo("Draw", undo_data, project)
 
@@ -126,7 +135,10 @@ func _confirmed() -> void:
 						i += 1
 						continue
 					if _project.layers[i].can_layer_get_drawn():
-						commit_action(cel.image, _project)
+						var image := (cel as PixelCel).get_image()
+						commit_action(image, _project)
+						if image.is_indexed:
+							image.convert_rgb_to_indexed()
 					i += 1
 			_commit_undo("Draw", undo_data, _project)
 
@@ -170,12 +182,12 @@ func _get_undo_data(project: Project) -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images(project)
 	for image in images:
-		data[image] = image.data
+		image.add_data_to_dictionary(data)
 	return data
 
 
-func _get_selected_draw_images(project: Project) -> Array[Image]:
-	var images: Array[Image] = []
+func _get_selected_draw_images(project: Project) -> Array[PixeloramaImage]:
+	var images: Array[PixeloramaImage] = []
 	if affect == SELECTED_CELS:
 		for cel_index in project.selected_cels:
 			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
