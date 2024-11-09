@@ -694,7 +694,8 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	var cel_image := PixeloramaImage.create_custom(
 		project_width, project_height, false, Image.FORMAT_RGBA8
 	)
-	cel_image.blit_rect_custom(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+	cel_image.convert_rgb_to_indexed()
 	Global.undo_redo_compress_images(
 		{cel.image: cel_image.data}, {cel.image: cel.image.data}, project
 	)

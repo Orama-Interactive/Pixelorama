@@ -516,8 +516,7 @@ func transform_content_confirm() -> void:
 			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 			big_bounding_rectangle.position
 		)
-		if cel_image.is_indexed:
-			cel_image.convert_rgb_to_indexed()
+		cel_image.convert_rgb_to_indexed()
 	project.selection_map.move_bitmap_values(project)
 	commit_undo("Move Selection", undo_data)
 

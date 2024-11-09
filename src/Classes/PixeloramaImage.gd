@@ -70,6 +70,8 @@ func convert_indexed_to_rgb() -> void:
 
 
 func convert_rgb_to_indexed() -> void:
+	if not is_indexed:
+		return
 	var palette_image := Palettes.current_palette.convert_to_image()
 	var palette_texture := ImageTexture.create_from_image(palette_image)
 	var params := {
@@ -124,12 +126,6 @@ func color_distance(c1: Color, c2: Color) -> float:
 	var v1 := Vector4(c1.r, c1.g, c1.b, c1.a)
 	var v2 := Vector4(c2.r, c2.g, c2.b, c2.a)
 	return v2.distance_to(v1)
-
-
-func blit_rect_custom(src: Image, src_rect: Rect2i, origin: Vector2i) -> void:
-	blit_rect(src, src_rect, origin)
-	if is_indexed:
-		convert_rgb_to_indexed()
 
 
 ## Adds image data to a [param dict] [Dictionary]. Used for undo/redo.
