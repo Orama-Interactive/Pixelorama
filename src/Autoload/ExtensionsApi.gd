@@ -748,6 +748,7 @@ class ImportAPI:
 	func open_save_autoload() -> OpenSave:
 		return OpenSave
 
+	## Returns the Import autoload. Manages import of brushes and patterns.
 	func import_autoload() -> Import:
 		return Import
 
