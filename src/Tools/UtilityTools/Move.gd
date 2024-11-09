@@ -8,7 +8,7 @@ var _content_transformation_check := false
 var _snap_to_grid := false  ## Mouse Click + Ctrl
 var _undo_data := {}
 
-@onready var selection_node: Node2D = Global.canvas.selection
+@onready var selection_node := Global.canvas.selection
 
 
 func _input(event: InputEvent) -> void:
@@ -78,25 +78,28 @@ func draw_end(pos: Vector2i) -> void:
 		and _content_transformation_check == selection_node.is_moving_content
 	):
 		pos = _snap_position(pos)
-		var project := Global.current_project
-
-		if project.has_selection:
+		if Global.current_project.has_selection:
 			selection_node.move_borders_end()
 		else:
 			var pixel_diff := pos - _start_pos
 			Global.canvas.move_preview_location = Vector2i.ZERO
 			var images := _get_selected_draw_images()
 			for image in images:
-				var image_copy := Image.new()
-				image_copy.copy_from(image)
-				image.fill(Color(0, 0, 0, 0))
-				image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, project.size), pixel_diff)
+				_move_image(image, pixel_diff)
+				_move_image(image.indices_image, pixel_diff)
 			_commit_undo("Draw")
 
 	_start_pos = Vector2.INF
 	_snap_to_grid = false
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.NONE)
+
+
+func _move_image(image: Image, pixel_diff: Vector2i) -> void:
+	var image_copy := Image.new()
+	image_copy.copy_from(image)
+	image.fill(Color(0, 0, 0, 0))
+	image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, image.get_size()), pixel_diff)
 
 
 func _snap_position(pos: Vector2) -> Vector2:
@@ -155,6 +158,6 @@ func _get_undo_data() -> Dictionary:
 	for cel in cels:
 		if not cel is PixelCel:
 			continue
-		var image: Image = cel.image
-		data[image] = image.data
+		var image := (cel as PixelCel).get_image()
+		image.add_data_to_dictionary(data)
 	return data

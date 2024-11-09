@@ -203,7 +203,7 @@ func _draw_shape() -> void:
 	commit_undo()
 
 
-func _draw_pixel(point: Vector2i, images: Array[Image]) -> void:
+func _draw_pixel(point: Vector2i, images: Array[PixeloramaImage]) -> void:
 	if Global.current_project.can_pixel_get_drawn(point):
 		for image in images:
 			_drawer.set_pixel(image, point, tool_slot.color)

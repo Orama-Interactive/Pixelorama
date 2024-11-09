@@ -516,6 +516,8 @@ func transform_content_confirm() -> void:
 			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 			big_bounding_rectangle.position
 		)
+		if cel_image.is_indexed:
+			cel_image.convert_rgb_to_indexed()
 	project.selection_map.move_bitmap_values(project)
 	commit_undo("Move Selection", undo_data)
 
@@ -605,13 +607,13 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	if undo_image:
 		var images := _get_selected_draw_images()
 		for image in images:
-			data[image] = image.data
+			image.add_data_to_dictionary(data)
 
 	return data
 
 
-func _get_selected_draw_cels() -> Array[BaseCel]:
-	var cels: Array[BaseCel] = []
+func _get_selected_draw_cels() -> Array[PixelCel]:
+	var cels: Array[PixelCel] = []
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
@@ -622,8 +624,8 @@ func _get_selected_draw_cels() -> Array[BaseCel]:
 	return cels
 
 
-func _get_selected_draw_images() -> Array[Image]:
-	var images: Array[Image] = []
+func _get_selected_draw_images() -> Array[PixeloramaImage]:
+	var images: Array[PixeloramaImage] = []
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
@@ -794,7 +796,7 @@ func delete(selected_cels := true) -> void:
 		return
 
 	var undo_data_tmp := get_undo_data(true)
-	var images: Array[Image]
+	var images: Array[PixeloramaImage]
 	if selected_cels:
 		images = _get_selected_draw_images()
 	else:
@@ -896,7 +898,7 @@ func _get_preview_image() -> void:
 		Image.FORMAT_RGBA8
 	)
 	for cel in _get_selected_draw_cels():
-		var cel_image: Image = cel.get_image()
+		var cel_image := cel.get_image()
 		cel.transformed_content = _get_selected_image(cel_image)
 		cel_image.blit_rect_mask(
 			clear_image,

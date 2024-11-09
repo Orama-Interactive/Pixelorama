@@ -35,7 +35,7 @@ var _line_polylines := []
 
 # Memorize some stuff when doing brush strokes
 var _stroke_project: Project
-var _stroke_images: Array[Image] = []
+var _stroke_images: Array[PixeloramaImage] = []
 var _is_mask_size_zero := true
 var _circle_tool_shortcut: Array[Vector2i]
 
