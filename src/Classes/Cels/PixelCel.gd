@@ -48,7 +48,7 @@ func copy_content():
 	return copy_image
 
 
-func get_image() -> Image:
+func get_image() -> PixeloramaImage:
 	return image
 
 

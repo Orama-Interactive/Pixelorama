@@ -730,8 +730,8 @@ func _get_undo_data() -> Dictionary:
 	for cel in cels:
 		if not cel is PixelCel:
 			continue
-		var image := cel.get_image()
-		data[image] = image.data
+		var image := (cel as PixelCel).get_image()
+		image.add_data_to_dictionary(data)
 	return data
 
 

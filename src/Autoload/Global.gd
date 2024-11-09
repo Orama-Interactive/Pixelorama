@@ -1113,8 +1113,15 @@ func undo_redo_compress_images(
 func undo_redo_draw_op(
 	image: Image, new_size: Vector2i, compressed_image_data: PackedByteArray, buffer_size: int
 ) -> void:
-	var decompressed := compressed_image_data.decompress(buffer_size)
-	image.set_data(new_size.x, new_size.y, image.has_mipmaps(), image.get_format(), decompressed)
+	if image is PixeloramaImage and image.is_indexed:
+		# If using indexed mode,
+		# just convert the indices to RGB instead of setting the image data directly.
+		image.convert_indexed_to_rgb()
+	else:
+		var decompressed := compressed_image_data.decompress(buffer_size)
+		image.set_data(
+			new_size.x, new_size.y, image.has_mipmaps(), image.get_format(), decompressed
+		)
 
 
 ## This method is used to write project setting overrides to the override.cfg file, located

@@ -128,3 +128,10 @@ func blit_rect_custom(src: Image, src_rect: Rect2i, origin: Vector2i) -> void:
 	blit_rect(src, src_rect, origin)
 	if is_indexed:
 		convert_rgb_to_indexed()
+
+
+## Adds image data to a [param dict] [Dictionary]. Used for undo/redo.
+func add_data_to_dictionary(dict: Dictionary) -> void:
+	# The order matters! Setting self's data first would make undo/redo appear to work incorrectly.
+	dict[indices_image] = indices_image.data
+	dict[self] = data
