@@ -46,6 +46,7 @@ enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FUL
 ## Enumeration of items present in the Image Menu.
 enum ImageMenu {
 	PROJECT_PROPERTIES,
+	COLOR_MODE,
 	RESIZE_CANVAS,
 	SCALE_IMAGE,
 	CROP_TO_SELECTION,

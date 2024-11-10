@@ -23,7 +23,17 @@ var undo_redo := UndoRedo.new()
 var tiles: Tiles
 var undos := 0  ## The number of times we added undo properties
 var can_undo := true
-var color_mode := Image.FORMAT_RGBA8
+var color_mode: int = Image.FORMAT_RGBA8:
+	set(value):
+		if color_mode != value:
+			color_mode = value
+			for cel in get_all_pixel_cels():
+				var image := cel.get_image()
+				image.is_indexed = is_indexed()
+				if image.is_indexed:
+					image.resize_indices()
+					image.select_palette("", false)
+					image.convert_rgb_to_indexed()
 var fill_color := Color(0)
 var has_changed := false:
 	set(value):
@@ -179,6 +189,7 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
+## Returns a new [Image] of size [member size] and format [method get_image_format].
 func new_empty_image() -> Image:
 	return Image.create(size.x, size.y, false, get_image_format())
 
@@ -576,6 +587,16 @@ func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
 	if not cel is GroupCel:
 		result = cel
 	return result
+
+
+## Returns an [Array] of type [PixelCel] containing all of the pixel cels of the project.
+func get_all_pixel_cels() -> Array[PixelCel]:
+	var cels: Array[PixelCel]
+	for frame in frames:
+		for cel in frame.cels:
+			if cel is PixelCel:
+				cels.append(cel)
+	return cels
 
 
 ## Re-order layers to take each cel's z-index into account. If all z-indexes are 0,

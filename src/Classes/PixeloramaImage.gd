@@ -40,16 +40,17 @@ func copy_from_custom(image: Image) -> void:
 		convert_rgb_to_indexed()
 
 
-func select_palette(_name: String) -> void:
+func select_palette(_name: String, convert_to_rgb := true) -> void:
 	current_palette = Palettes.current_palette
 	if not is_instance_valid(current_palette) or not is_indexed:
 		return
 	update_palette()
-	convert_indexed_to_rgb()
 	if not current_palette.data_changed.is_connected(update_palette):
 		current_palette.data_changed.connect(update_palette)
 	if not current_palette.data_changed.is_connected(convert_indexed_to_rgb):
 		current_palette.data_changed.connect(convert_indexed_to_rgb)
+	if convert_to_rgb:
+		convert_indexed_to_rgb()
 
 
 func update_palette() -> void:
@@ -60,6 +61,8 @@ func update_palette() -> void:
 
 
 func convert_indexed_to_rgb() -> void:
+	if not is_indexed:
+		return
 	var palette_image := Palettes.current_palette.convert_to_image()
 	var palette_texture := ImageTexture.create_from_image(palette_image)
 	var shader_image_effect := ShaderImageEffect.new()
