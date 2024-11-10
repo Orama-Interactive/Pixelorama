@@ -38,6 +38,7 @@ func new_empty_cel() -> BaseCel:
 
 func new_cel_from_image(image: Image) -> PixelCel:
 	var pixelorama_image := PixeloramaImage.new()
+	pixelorama_image.is_indexed = project.is_indexed()
 	pixelorama_image.copy_from_custom(image)
 	return PixelCel.new(pixelorama_image)
 
