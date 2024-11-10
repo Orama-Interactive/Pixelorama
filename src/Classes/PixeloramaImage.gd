@@ -28,15 +28,15 @@ static func create_custom(
 	new_image.is_indexed = _is_indexed
 	if new_image.is_indexed:
 		new_image.resize_indices()
-		new_image.select_palette("")
+		new_image.select_palette("", false)
 	return new_image
 
 
 func copy_from_custom(image: Image) -> void:
 	copy_from(image)
 	if is_indexed:
-		update_palette()
 		resize_indices()
+		select_palette("", false)
 		convert_rgb_to_indexed()
 
 

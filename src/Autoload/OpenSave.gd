@@ -693,14 +693,18 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	if not cel is PixelCel:
 		return
 	image.convert(project.get_image_format())
-	var cel_image := PixeloramaImage.create_custom(
-		project_width, project_height, false, project.get_image_format()
+	var cel_image := (cel as PixelCel).get_image()
+	var new_cel_image := PixeloramaImage.create_custom(
+		project_width, project_height, false, project.get_image_format(), cel_image.is_indexed
 	)
-	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-	cel_image.convert_rgb_to_indexed()
-	Global.undo_redo_compress_images(
-		{cel.image: cel_image.data}, {cel.image: cel.image.data}, project
-	)
+	new_cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+	new_cel_image.convert_rgb_to_indexed()
+	var redo_data := {
+		cel_image.indices_image: new_cel_image.indices_image.data, cel_image: new_cel_image.data
+	}
+	var undo_data := {}
+	cel_image.add_data_to_dictionary(undo_data)
+	Global.undo_redo_compress_images(redo_data, undo_data, project)
 
 	project.undo_redo.add_do_property(project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.change_cel.bind(frame_index, layer_index))
