@@ -396,10 +396,15 @@ func save_pxo_file(
 			zip_packer.close_file()
 		var cel_index := 1
 		for cel in frame.cels:
-			var cel_image := cel.get_image()
+			var cel_image := cel.get_image() as PixeloramaImage
 			if is_instance_valid(cel_image) and cel is PixelCel:
 				zip_packer.start_file("image_data/frames/%s/layer_%s" % [frame_index, cel_index])
 				zip_packer.write_file(cel_image.get_data())
+				zip_packer.close_file()
+				zip_packer.start_file(
+					"image_data/frames/%s/indices_layer_%s" % [frame_index, cel_index]
+				)
+				zip_packer.write_file(cel_image.indices_image.get_data())
 				zip_packer.close_file()
 			cel_index += 1
 		frame_index += 1
