@@ -220,9 +220,7 @@ func fill_in_color(pos: Vector2i) -> void:
 		if project.has_selection:
 			selection = project.selection_map.return_cropped_copy(project.size)
 		else:
-			selection = Image.create(
-				project.size.x, project.size.y, false, project.get_image_format()
-			)
+			selection = project.new_empty_image()
 			selection.fill(Color(1, 1, 1, 1))
 
 		selection_tex = ImageTexture.create_from_image(selection)
@@ -265,9 +263,7 @@ func fill_in_selection() -> void:
 	var images := _get_selected_draw_images()
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		if project.has_selection:
-			var filler := Image.create(
-				project.size.x, project.size.y, false, project.get_image_format()
-			)
+			var filler := project.new_empty_image()
 			filler.fill(tool_slot.color)
 			var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
 			var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
@@ -288,9 +284,7 @@ func fill_in_selection() -> void:
 		if project.has_selection:
 			selection = project.selection_map.return_cropped_copy(project.size)
 		else:
-			selection = Image.create(
-				project.size.x, project.size.y, false, project.get_image_format()
-			)
+			selection = project.new_empty_image()
 			selection.fill(Color(1, 1, 1, 1))
 
 		selection_tex = ImageTexture.create_from_image(selection)

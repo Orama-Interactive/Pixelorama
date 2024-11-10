@@ -389,9 +389,7 @@ func save_pxo_file(
 	var frame_index := 1
 	for frame in project.frames:
 		if not autosave and include_blended:
-			var blended := Image.create(
-				project.size.x, project.size.y, false, project.get_image_format()
-			)
+			var blended := project.new_empty_image()
 			DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
 			zip_packer.start_file("image_data/final_images/%s" % frame_index)
 			zip_packer.write_file(blended.get_data())

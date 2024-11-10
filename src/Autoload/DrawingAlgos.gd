@@ -528,9 +528,7 @@ func center(indices: Array) -> void:
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			var sprite := Image.create(
-				project.size.x, project.size.y, false, project.get_image_format()
-			)
+			var sprite := project.new_empty_image()
 			sprite.blend_rect(cel.image, used_rect, offset)
 			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))

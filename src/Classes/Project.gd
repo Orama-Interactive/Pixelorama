@@ -179,6 +179,10 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
+func new_empty_image() -> Image:
+	return Image.create(size.x, size.y, false, get_image_format())
+
+
 ## Returns the currently selected [BaseCel].
 func get_current_cel() -> BaseCel:
 	return frames[current_frame].cels[current_layer]

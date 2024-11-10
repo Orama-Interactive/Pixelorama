@@ -802,7 +802,7 @@ func delete(selected_cels := true) -> void:
 		images = [project.get_current_cel().get_image()]
 
 	if project.has_selection:
-		var blank := Image.create(project.size.x, project.size.y, false, project.get_image_format())
+		var blank := project.new_empty_image()
 		var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 		for image in images:
 			image.blit_rect_mask(
@@ -871,9 +871,7 @@ func _project_switched() -> void:
 
 func _get_preview_image() -> void:
 	var project := Global.current_project
-	var blended_image := Image.create(
-		project.size.x, project.size.y, false, project.get_image_format()
-	)
+	var blended_image := project.new_empty_image()
 	DrawingAlgos.blend_layers(
 		blended_image, project.frames[project.current_frame], Vector2i.ZERO, project, true
 	)

@@ -70,7 +70,7 @@ class Recorder:
 			image = recorder_panel.get_window().get_texture().get_image()
 		else:
 			var frame := project.frames[project.current_frame]
-			image = Image.create(project.size.x, project.size.y, false, project.get_image_format())
+			image = project.new_empty_image()
 			DrawingAlgos.blend_layers(image, frame, Vector2i.ZERO, project)
 
 			if recorder_panel.resize_percent != 100:
