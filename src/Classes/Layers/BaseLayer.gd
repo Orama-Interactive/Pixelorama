@@ -218,11 +218,16 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
 func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
-	var image := Image.new()
+	var image := PixeloramaImage.new()
 	if is_instance_valid(image_override):
-		image.copy_from(image_override)
+		if image_override is PixeloramaImage:
+			image.is_indexed = image_override.is_indexed
+		image.copy_from_custom(image_override)
 	else:
-		image.copy_from(cel.get_image())
+		var cel_image := cel.get_image()
+		if cel_image is PixeloramaImage:
+			image.is_indexed = cel_image.is_indexed
+		image.copy_from_custom(cel_image)
 	if not effects_enabled:
 		return image
 	var image_size := image.get_size()

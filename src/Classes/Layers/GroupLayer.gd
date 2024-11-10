@@ -13,7 +13,9 @@ func _init(_project: Project, _name := "") -> void:
 
 ## Blends all of the images of children layer of the group layer into a single image.
 func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
-	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var image := PixeloramaImage.create_custom(
+		project.size.x, project.size.y, false, project.get_image_format(), project.is_indexed()
+	)
 	var children := get_children(false)
 	if children.size() <= 0:
 		return image
@@ -66,7 +68,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 
 
 func _include_child_in_blending(
-	image: Image,
+	image: PixeloramaImage,
 	layer: BaseLayer,
 	frame: Frame,
 	textures: Array[Image],
@@ -100,7 +102,7 @@ func _include_child_in_blending(
 ## Gets called recursively if the child group has children groups of its own,
 ## and they are also set to pass through mode.
 func _blend_child_group(
-	image: Image,
+	image: PixeloramaImage,
 	layer: BaseLayer,
 	frame: Frame,
 	textures: Array[Image],
