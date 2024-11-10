@@ -534,6 +534,10 @@ class SelectionAPI:
 			Global.canvas.selection.move_borders_start()
 		else:
 			Global.canvas.selection.transform_content_start()
+
+		if Global.canvas.selection.original_bitmap.is_empty():  # To avoid copying twice.
+			Global.canvas.selection.original_bitmap.copy_from(Global.current_project.selection_map)
+
 		Global.canvas.selection.big_bounding_rectangle.size = new_size
 		Global.canvas.selection.resize_selection()
 		Global.canvas.selection.move_borders_end()
