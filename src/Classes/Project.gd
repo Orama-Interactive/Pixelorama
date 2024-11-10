@@ -9,6 +9,8 @@ signal about_to_deserialize(dict: Dictionary)
 signal resized
 signal timeline_updated
 
+const INDEXED_MODE := Image.FORMAT_MAX + 1
+
 var name := "":
 	set(value):
 		name = value
@@ -21,6 +23,7 @@ var undo_redo := UndoRedo.new()
 var tiles: Tiles
 var undos := 0  ## The number of times we added undo properties
 var can_undo := true
+var color_mode := Image.FORMAT_RGBA8
 var fill_color := Color(0)
 var has_changed := false:
 	set(value):
@@ -181,6 +184,16 @@ func get_current_cel() -> BaseCel:
 	return frames[current_frame].cels[current_layer]
 
 
+func get_image_format() -> Image.Format:
+	if color_mode == INDEXED_MODE:
+		return Image.FORMAT_RGBA8
+	return color_mode
+
+
+func is_indexed() -> bool:
+	return color_mode == INDEXED_MODE
+
+
 func selection_map_changed() -> void:
 	var image_texture: ImageTexture
 	has_selection = !selection_map.is_invisible()
@@ -317,12 +330,12 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 								"image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
 							)
 							image = Image.create_from_data(
-								size.x, size.y, false, Image.FORMAT_RGBA8, image_data
+								size.x, size.y, false, get_image_format(), image_data
 							)
 						elif is_instance_valid(file):  # For pxo files saved in 0.x
 							var buffer := file.get_buffer(size.x * size.y * 4)
 							image = Image.create_from_data(
-								size.x, size.y, false, Image.FORMAT_RGBA8, buffer
+								size.x, size.y, false, get_image_format(), buffer
 							)
 						var pixelorama_image := PixeloramaImage.new()
 						pixelorama_image.copy_from_custom(image)

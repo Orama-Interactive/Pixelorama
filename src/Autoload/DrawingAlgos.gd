@@ -217,7 +217,7 @@ func get_ellipse_points_filled(pos: Vector2i, size: Vector2i, thickness := 1) ->
 
 func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 	var scaled := Image.create(
-		sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8
+		sprite.get_width() * 3, sprite.get_height() * 3, false, sprite.get_format()
 	)
 	var width_minus_one := sprite.get_width() - 1
 	var height_minus_one := sprite.get_height() - 1
@@ -528,7 +528,9 @@ func center(indices: Array) -> void:
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			var sprite := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			var sprite := Image.create(
+				project.size.x, project.size.y, false, project.get_image_format()
+			)
 			sprite.blend_rect(cel.image, used_rect, offset)
 			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
@@ -633,7 +635,9 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 		for cel in f.cels:
 			if not cel is PixelCel:
 				continue
-			var sprite := Image.create(width, height, false, Image.FORMAT_RGBA8)
+			var sprite := Image.create(
+				width, height, false, Global.current_project.get_image_format()
+			)
 			sprite.blend_rect(
 				cel.get_image(),
 				Rect2i(Vector2i.ZERO, Global.current_project.size),

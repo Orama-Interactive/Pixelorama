@@ -89,7 +89,9 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		selection_tex = ImageTexture.create_from_image(selection)
 
 		if !_type_is_shader():
-			var blank := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			var blank := Image.create(
+				project.size.x, project.size.y, false, project.get_image_format()
+			)
 			cel.blit_rect_mask(
 				blank, selection, Rect2i(Vector2i.ZERO, cel.get_size()), Vector2i.ZERO
 			)
