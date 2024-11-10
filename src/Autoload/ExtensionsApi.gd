@@ -527,7 +527,7 @@ class SelectionAPI:
 		else:
 			Global.canvas.selection.transform_content_start()
 
-		if Global.canvas.selection.original_bitmap.is_empty():  # To aviod copying twice
+		if Global.canvas.selection.original_bitmap.is_empty():  # To avoid copying twice.
 			Global.canvas.selection.original_bitmap.copy_from(Global.current_project.selection_map)
 
 		Global.canvas.selection.big_bounding_rectangle.size = new_size
