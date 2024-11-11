@@ -90,3 +90,4 @@ func _on_PaletteScroll_gui_input(event: InputEvent) -> void:
 			return
 		resize_grid()
 		set_sliders(palette_grid.current_palette, palette_grid.grid_window_origin + scroll_vector)
+		get_window().set_input_as_handled()
