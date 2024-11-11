@@ -704,9 +704,8 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	)
 	new_cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 	new_cel_image.convert_rgb_to_indexed()
-	var redo_data := {
-		cel_image.indices_image: new_cel_image.indices_image.data, cel_image: new_cel_image.data
-	}
+	var redo_data := {}
+	new_cel_image.add_data_to_dictionary(redo_data, cel_image)
 	var undo_data := {}
 	cel_image.add_data_to_dictionary(undo_data)
 	Global.undo_redo_compress_images(redo_data, undo_data, project)

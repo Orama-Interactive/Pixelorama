@@ -87,6 +87,12 @@ func convert_rgb_to_indexed() -> void:
 	convert_indexed_to_rgb()
 
 
+func on_size_changed() -> void:
+	if is_indexed:
+		resize_indices()
+		convert_rgb_to_indexed()
+
+
 func resize_indices() -> void:
 	print(get_width(), " ", get_height(), " ", get_width() * get_height())
 	indices_image.crop(get_width(), get_height())
@@ -132,7 +138,11 @@ func color_distance(c1: Color, c2: Color) -> float:
 
 
 ## Adds image data to a [param dict] [Dictionary]. Used for undo/redo.
-func add_data_to_dictionary(dict: Dictionary) -> void:
+func add_data_to_dictionary(dict: Dictionary, other_image: PixeloramaImage = null) -> void:
 	# The order matters! Setting self's data first would make undo/redo appear to work incorrectly.
-	dict[indices_image] = indices_image.data
-	dict[self] = data
+	if is_instance_valid(other_image):
+		dict[other_image.indices_image] = indices_image.data
+		dict[other_image] = data
+	else:
+		dict[indices_image] = indices_image.data
+		dict[self] = data

@@ -1083,11 +1083,9 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_do_property(bottom_cel, "image", new_bottom_image)
 			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			var redo_data := {
-				bottom_image.indices_image: new_bottom_image.indices_image.data,
-				bottom_image: new_bottom_image.data
-			}
+			var redo_data := {}
 			var undo_data := {}
+			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
 			bottom_image.add_data_to_dictionary(undo_data)
 			Global.undo_redo_compress_images(redo_data, undo_data, project)
 
