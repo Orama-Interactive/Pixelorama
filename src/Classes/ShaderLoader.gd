@@ -148,13 +148,13 @@ static func create_ui_for_shader_uniforms(
 
 					if u_value != "":
 						slider.value = int(u_value)
+				slider.min_value = min_value
+				slider.max_value = max_value
+				slider.step = step
 				if params.has(u_name):
 					slider.value = params[u_name]
 				else:
 					params[u_name] = slider.value
-				slider.min_value = min_value
-				slider.max_value = max_value
-				slider.step = step
 				slider.value_changed.connect(value_changed.bind(u_name))
 				slider.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				hbox.add_child(slider)
