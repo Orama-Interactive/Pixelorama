@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.0.5] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.3
+
+### Added
+- Mouse buttons can now be used as menu shortcuts. [#1070](https://github.com/Orama-Interactive/Pixelorama/issues/1070)
+- Added confirm and cancel buttons in the selection tool options to confirm/cancel an active transformation.
+- OKHSL Lightness sorting in palettes has been implemented. [#1126](https://github.com/Orama-Interactive/Pixelorama/pull/1126)
+
+### Changed
+- The brush size no longer changes by <kbd>Control</kbd> + Mouse Wheel when resizing the timeline cels or the palette swatches.
+- The Recorder panel now automatically records for the current project. This also allows for multiple projects to be recorded at the same time.
+
+### Fixed
+- Fixed layer effect slider values being rounded to the nearest integer.
+- Fixed memory leak where the project remained referenced by a drawing tool, even when its tab was closed.
+- Fixed memory leak where the first project remained forever references in memory by the Recorder panel.
+
 ## [v1.0.4] - 2024-10-25
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Mariano Semelman ([@msemelman](https://github.com/msemelman))
