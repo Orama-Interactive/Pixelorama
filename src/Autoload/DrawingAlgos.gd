@@ -217,7 +217,7 @@ func get_ellipse_points_filled(pos: Vector2i, size: Vector2i, thickness := 1) ->
 
 func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 	var scaled := Image.create(
-		sprite.get_width() * 3, sprite.get_height() * 3, false, sprite.get_format()
+		sprite.get_width() * 3, sprite.get_height() * 3, sprite.has_mipmaps(), sprite.get_format()
 	)
 	var width_minus_one := sprite.get_width() - 1
 	var height_minus_one := sprite.get_height() - 1
