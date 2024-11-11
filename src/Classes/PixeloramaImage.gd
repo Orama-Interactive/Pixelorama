@@ -32,7 +32,8 @@ static func create_custom(
 	return new_image
 
 
-func copy_from_custom(image: Image) -> void:
+func copy_from_custom(image: Image, indexed := is_indexed) -> void:
+	is_indexed = indexed
 	copy_from(image)
 	if is_indexed:
 		resize_indices()

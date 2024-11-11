@@ -509,6 +509,8 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 func center(indices: Array) -> void:
 	var project := Global.current_project
 	Global.canvas.selection.transform_content_confirm()
+	var redo_data := {}
+	var undo_data := {}
 	project.undos += 1
 	project.undo_redo.create_action("Center Frames")
 	for frame in indices:
@@ -528,9 +530,14 @@ func center(indices: Array) -> void:
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			var sprite := project.new_empty_image()
-			sprite.blend_rect(cel.image, used_rect, offset)
-			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
+			var cel_image := (cel as PixelCel).get_image()
+			var tmp_centered := project.new_empty_image()
+			tmp_centered.blend_rect(cel.image, used_rect, offset)
+			var centered := PixeloramaImage.new()
+			centered.copy_from_custom(tmp_centered, cel_image.is_indexed)
+			centered.add_data_to_dictionary(redo_data, cel_image)
+			cel_image.add_data_to_dictionary(undo_data)
+	Global.undo_redo_compress_images(redo_data, undo_data)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
@@ -594,13 +601,13 @@ func crop_to_selection() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
 	# Loop through all the cels to crop them
-	for f in Global.current_project.frames:
-		for cel in f.cels:
-			if not cel is PixelCel:
-				continue
-			var sprite := cel.get_image().get_region(rect)
-			redo_data[cel.image] = sprite.data
-			undo_data[cel.image] = cel.image.data
+	for cel in Global.current_project.get_all_pixel_cels():
+		var cel_image := cel.get_image()
+		var tmp_cropped := cel_image.get_region(rect)
+		var cropped := PixeloramaImage.new()
+		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
+		cropped.add_data_to_dictionary(redo_data, cel_image)
+		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(rect.size.x, rect.size.y, redo_data, undo_data)
 
@@ -632,13 +639,13 @@ func crop_to_content() -> void:
 	var redo_data := {}
 	var undo_data := {}
 	# Loop through all the cels to trim them
-	for f in Global.current_project.frames:
-		for cel in f.cels:
-			if not cel is PixelCel:
-				continue
-			var sprite := cel.get_image().get_region(used_rect)
-			redo_data[cel.image] = sprite.data
-			undo_data[cel.image] = cel.image.data
+	for cel in Global.current_project.get_all_pixel_cels():
+		var cel_image := cel.get_image()
+		var tmp_cropped := cel_image.get_region(used_rect)
+		var cropped := PixeloramaImage.new()
+		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
+		cropped.add_data_to_dictionary(redo_data, cel_image)
+		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
@@ -646,20 +653,17 @@ func crop_to_content() -> void:
 func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
-	for f in Global.current_project.frames:
-		for cel in f.cels:
-			if not cel is PixelCel:
-				continue
-			var sprite := Image.create(
-				width, height, false, Global.current_project.get_image_format()
-			)
-			sprite.blend_rect(
-				cel.get_image(),
-				Rect2i(Vector2i.ZERO, Global.current_project.size),
-				Vector2i(offset_x, offset_y)
-			)
-			redo_data[cel.image] = sprite.data
-			undo_data[cel.image] = cel.image.data
+	for cel in Global.current_project.get_all_pixel_cels():
+		var cel_image := cel.get_image()
+		var resized := PixeloramaImage.create_custom(
+			width, height, cel_image.has_mipmaps(), cel_image.get_format(), cel_image.is_indexed
+		)
+		resized.blend_rect(
+			cel_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i(offset_x, offset_y)
+		)
+		resized.convert_rgb_to_indexed()
+		resized.add_data_to_dictionary(redo_data, cel_image)
+		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
