@@ -1117,6 +1117,8 @@ func undo_redo_draw_op(
 	if image is PixeloramaImage and image.is_indexed:
 		# If using indexed mode,
 		# just convert the indices to RGB instead of setting the image data directly.
+		if image.get_size() != new_size:
+			image.crop(new_size.x, new_size.y)
 		image.convert_indexed_to_rgb()
 	else:
 		var decompressed := compressed_image_data.decompress(buffer_size)

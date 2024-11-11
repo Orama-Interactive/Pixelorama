@@ -34,7 +34,7 @@ func _on_ScaleImage_confirmed() -> void:
 	var width: int = width_value.value
 	var height: int = height_value.value
 	var interpolation: int = interpolation_type.selected
-	DrawingAlgos.scale_image(width, height, interpolation)
+	DrawingAlgos.scale_project(width, height, interpolation)
 
 
 func _on_visibility_changed() -> void:

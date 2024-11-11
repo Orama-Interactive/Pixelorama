@@ -536,7 +536,7 @@ func center(indices: Array) -> void:
 	project.undo_redo.commit_action()
 
 
-func scale_image(width: int, height: int, interpolation: int) -> void:
+func scale_project(width: int, height: int, interpolation: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
 	for f in Global.current_project.frames:
@@ -544,28 +544,45 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 			var cel := f.cels[i]
 			if not cel is PixelCel:
 				continue
-			var sprite := Image.new()
-			sprite.copy_from(cel.get_image())
-			if interpolation == Interpolation.SCALE3X:
-				var times := Vector2i(
-					ceili(width / (3.0 * sprite.get_width())),
-					ceili(height / (3.0 * sprite.get_height()))
-				)
-				for _j in range(maxi(times.x, times.y)):
-					sprite.copy_from(scale_3x(sprite))
-				sprite.resize(width, height, Image.INTERPOLATE_NEAREST)
-			elif interpolation == Interpolation.CLEANEDGE:
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, clean_edge_shader, {}, Vector2i(width, height))
-			elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, omniscale_shader, {}, Vector2i(width, height))
-			else:
-				sprite.resize(width, height, interpolation)
-			redo_data[cel.image] = sprite.data
-			undo_data[cel.image] = cel.image.data
+			var cel_image := (cel as PixelCel).get_image()
+			var sprite := _resize_image(cel_image, width, height, interpolation) as PixeloramaImage
+			sprite.add_data_to_dictionary(redo_data, cel_image)
+			cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
+
+
+func _resize_image(
+	image: Image, width: int, height: int, interpolation: Image.Interpolation
+) -> Image:
+	var new_image: Image
+	if image is PixeloramaImage:
+		new_image = PixeloramaImage.new()
+		new_image.is_indexed = image.is_indexed
+		new_image.copy_from(image)
+		new_image.select_palette("", false)
+	else:
+		new_image = Image.new()
+		new_image.copy_from(image)
+	if interpolation == Interpolation.SCALE3X:
+		var times := Vector2i(
+			ceili(width / (3.0 * new_image.get_width())),
+			ceili(height / (3.0 * new_image.get_height()))
+		)
+		for _j in range(maxi(times.x, times.y)):
+			new_image.copy_from(scale_3x(new_image))
+		new_image.resize(width, height, Image.INTERPOLATE_NEAREST)
+	elif interpolation == Interpolation.CLEANEDGE:
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(new_image, clean_edge_shader, {}, Vector2i(width, height), false)
+	elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(new_image, omniscale_shader, {}, Vector2i(width, height), false)
+	else:
+		new_image.resize(width, height, interpolation)
+	if new_image is PixeloramaImage:
+		new_image.on_size_changed()
+	return new_image
 
 
 ## Sets the size of the project to be the same as the size of the active selection.
