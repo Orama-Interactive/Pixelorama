@@ -85,6 +85,9 @@ class Recorder:
 
 
 func _ready() -> void:
+	if OS.get_name() == "Web":
+		ExtensionsApi.panel.remove_node_from_tab.call_deferred(self)
+		return
 	Global.project_switched.connect(_on_project_switched)
 	# Make a recordings folder if there isn't one
 	chosen_dir = Global.home_data_directory.path_join("Recordings")
