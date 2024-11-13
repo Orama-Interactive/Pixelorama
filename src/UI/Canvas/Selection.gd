@@ -106,6 +106,11 @@ func _input(event: InputEvent) -> void:
 	image_current_pixel = canvas.current_pixel
 	if Global.mirror_view:
 		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
+	if is_moving_content:
+		if Input.is_action_just_pressed(&"transformation_confirm"):
+			transform_content_confirm()
+		elif Input.is_action_just_pressed(&"transformation_cancel"):
+			transform_content_cancel()
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if event is InputEventKey:
