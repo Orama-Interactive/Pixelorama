@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-10-22 10:34\n"
+"PO-Revision-Date: 2024-11-13 23:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1936,6 +1936,10 @@ msgstr "Umplere formă"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr "În locul desenării unei forme goale, forma desenată este umplută cu culoare"
+
+#. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
+msgid "Density:"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "Culoarea pensulei de la"
