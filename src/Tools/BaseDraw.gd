@@ -177,6 +177,7 @@ func update_brush() -> void:
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
+	_circle_tool_shortcut = []
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
@@ -275,6 +276,7 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	_stroke_project = null
 	_stroke_images = []
+	_circle_tool_shortcut = []
 	_brush_size_dynamics = _brush_size
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
@@ -313,10 +315,6 @@ func _prepare_tool() -> void:
 	# This may prevent a few tests when setting pixels
 	_is_mask_size_zero = _mask.size() == 0
 	match _brush.type:
-		Brushes.CIRCLE:
-			_prepare_circle_tool(false)
-		Brushes.FILLED_CIRCLE:
-			_prepare_circle_tool(true)
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			# save _brush_image for safe keeping
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
@@ -324,19 +322,6 @@ func _prepare_tool() -> void:
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
-
-
-func _prepare_circle_tool(fill: bool) -> void:
-	var circle_tool_map := _create_circle_indicator(_brush_size_dynamics, fill)
-	# Go through that BitMap and build an Array of the "displacement" from the center of the bits
-	# that are true.
-	var diameter := _brush_size_dynamics * 2 + 1
-	for n in range(0, diameter):
-		for m in range(0, diameter):
-			if circle_tool_map.get_bitv(Vector2i(m, n)):
-				_circle_tool_shortcut.append(
-					Vector2i(m - _brush_size_dynamics, n - _brush_size_dynamics)
-				)
 
 
 ## Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
@@ -621,10 +606,24 @@ func _create_pixel_indicator(brush_size: int) -> BitMap:
 
 
 func _create_circle_indicator(brush_size: int, fill := false) -> BitMap:
-	_circle_tool_shortcut = []
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
+		_circle_tool_shortcut = []
 	var brush_size_v2 := Vector2i(brush_size, brush_size)
-	var diameter := brush_size_v2 * 2 + Vector2i.ONE
-	return _fill_bitmap_with_points(_compute_draw_tool_circle(brush_size_v2, fill), diameter)
+	var diameter_v2 := brush_size_v2 * 2 + Vector2i.ONE
+	var circle_tool_map := _fill_bitmap_with_points(
+		_compute_draw_tool_circle(brush_size_v2, fill), diameter_v2
+	)
+	if _circle_tool_shortcut.is_empty():
+		# Go through that BitMap and build an Array of the "displacement"
+		# from the center of the bits that are true.
+		var diameter := _brush_size_dynamics * 2 + 1
+		for n in range(0, diameter):
+			for m in range(0, diameter):
+				if circle_tool_map.get_bitv(Vector2i(m, n)):
+					_circle_tool_shortcut.append(
+						Vector2i(m - _brush_size_dynamics, n - _brush_size_dynamics)
+					)
+	return circle_tool_map
 
 
 func _create_line_indicator(indicator: BitMap, start: Vector2i, end: Vector2i) -> BitMap:
