@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ubyatap3sylf"]
+[gd_scene load_steps=9 format=3 uid="uid://ubyatap3sylf"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/BaseDraw.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3_76bek"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="5_kdxku"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_7u3x0"]
 resource_name = "rotate"
@@ -130,7 +131,24 @@ suffix = "px"
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="ColorInterpolation" parent="." index="4" instance=ExtResource("1")]
+[node name="DensityValueSlider" type="TextureProgressBar" parent="." index="4"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("5_kdxku")
+prefix = "Density:"
+suffix = "%"
+
+[node name="ColorInterpolation" parent="." index="5" instance=ExtResource("1")]
 visible = false
 layout_mode = 2
 tooltip_text = "0: Color from the brush itself, 100: the currently selected color"
@@ -143,4 +161,5 @@ prefix = "Brush color from:"
 [connection signal="toggled" from="RotationOptions/GridContainer/Rotate/Rotate270" to="." method="_on_rotate_270_toggled"]
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]
+[connection signal="value_changed" from="DensityValueSlider" to="." method="_on_density_value_slider_value_changed"]
 [connection signal="value_changed" from="ColorInterpolation" to="." method="_on_InterpolateFactor_value_changed"]

@@ -1,8 +1,11 @@
 extends BaseTool
 
+const IMAGE_BRUSHES := [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+
 var _brush := Brushes.get_default_brush()
 var _brush_size := 1
 var _brush_size_dynamics := 1
+var _brush_density := 100
 var _brush_flip_x := false
 var _brush_flip_y := false
 var _brush_rotate_90 := false
@@ -89,6 +92,12 @@ func _reset_dynamics() -> void:
 	save_config()
 
 
+func _on_density_value_slider_value_changed(value: int) -> void:
+	_brush_density = value
+	update_config()
+	save_config()
+
+
 func _on_InterpolateFactor_value_changed(value: float) -> void:
 	_brush_interpolate = int(value)
 	update_config()
@@ -111,6 +120,7 @@ func get_config() -> Dictionary:
 		"brush_type": _brush.type,
 		"brush_index": _brush.index,
 		"brush_size": _brush_size,
+		"brush_density": _brush_density,
 		"brush_interpolate": _brush_interpolate,
 		"brush_flip_x": _brush_flip_x,
 		"brush_flip_y": _brush_flip_y,
@@ -128,6 +138,7 @@ func set_config(config: Dictionary) -> void:
 	_brush_size_dynamics = _brush_size
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
+	_brush_density = config.get("brush_density", _brush_density)
 	_brush_interpolate = config.get("brush_interpolate", _brush_interpolate)
 	_brush_flip_x = config.get("brush_flip_x", _brush_flip_x)
 	_brush_flip_y = config.get("brush_flip_y", _brush_flip_y)
@@ -181,8 +192,9 @@ func update_brush() -> void:
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
-	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
-	$RotationOptions.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+	$DensityValueSlider.visible = _brush.type not in IMAGE_BRUSHES
+	$ColorInterpolation.visible = _brush.type in IMAGE_BRUSHES
+	$RotationOptions.visible = _brush.type in IMAGE_BRUSHES
 
 
 func update_random_image() -> void:
@@ -492,7 +504,7 @@ func draw_indicator(left: bool) -> void:
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas: Node2D = Global.canvas.indicators
-	if _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM] and not _draw_line:
+	if _brush.type in IMAGE_BRUSHES and not _draw_line:
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
 		canvas.draw_texture(_brush_texture, pos)
@@ -522,6 +534,8 @@ func _set_pixel(pos: Vector2i, ignore_mirroring := false) -> void:
 
 
 func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
+	if randi() % 100 >= _brush_density:
+		return
 	pos = _stroke_project.tiles.get_canon_position(pos)
 	if Global.current_project.has_selection:
 		pos = Global.current_project.selection_map.get_canon_position(pos)

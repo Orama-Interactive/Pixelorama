@@ -1865,6 +1865,10 @@ msgstr ""
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
 
+#. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
+msgid "Density:"
+msgstr ""
+
 msgid "Brush color from"
 msgstr ""
 
