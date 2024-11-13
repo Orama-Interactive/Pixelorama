@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-10-26 04:58\n"
+"PO-Revision-Date: 2024-11-13 23:12\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1937,6 +1937,10 @@ msgstr "填充形状"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr "用颜色填充绘制的形状，而不是绘制空心形状"
+
+#. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
+msgid "Density:"
+msgstr ""
 
 msgid "Brush color from"
 msgstr "画笔颜色从"
