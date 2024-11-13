@@ -114,11 +114,13 @@ func _gui_input(event: InputEvent) -> void:
 					value += step if event.ctrl_pressed else snap_step
 				else:
 					value += snap_step if event.ctrl_pressed else step
+				get_viewport().set_input_as_handled()
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				if snap_by_default:
 					value -= step if event.ctrl_pressed else snap_step
 				else:
 					value -= snap_step if event.ctrl_pressed else step
+				get_viewport().set_input_as_handled()
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):
 			state = TYPING
