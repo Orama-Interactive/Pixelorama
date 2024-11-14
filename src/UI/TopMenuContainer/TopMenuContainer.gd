@@ -17,6 +17,7 @@ var zen_mode := false
 var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
 var project_properties_dialog := Dialog.new("res://src/UI/Dialogs/ProjectProperties.tscn")
 var preferences_dialog := Dialog.new("res://src/Preferences/PreferencesDialog.tscn")
+var modify_selection := Dialog.new("res://src/UI/Dialogs/ModifySelection.tscn")
 var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetImage.tscn")
 var scale_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn")
 var resize_canvas_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn")
@@ -54,6 +55,7 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
 @onready var tile_mode_submenu := PopupMenu.new()
+@onready var selection_modify_submenu := PopupMenu.new()
 @onready var snap_to_submenu := PopupMenu.new()
 @onready var panels_submenu := PopupMenu.new()
 @onready var layouts_submenu := PopupMenu.new()
@@ -440,15 +442,27 @@ func _setup_select_menu() -> void:
 		"All": "select_all",
 		"Clear": "clear_selection",
 		"Invert": "invert_selection",
-		"Tile Mode": ""
+		"Tile Mode": "",
+		"Modify": ""
 	}
 	for i in select_menu_items.size():
 		var item: String = select_menu_items.keys()[i]
 		if item == "Tile Mode":
 			select_menu.add_check_item(item, i)
+		elif item == "Modify":
+			_setup_selection_modify_submenu(item)
 		else:
 			_set_menu_shortcut(select_menu_items[item], select_menu, i, item)
 	select_menu.id_pressed.connect(select_menu_id_pressed)
+
+
+func _setup_selection_modify_submenu(item: String) -> void:
+	selection_modify_submenu.set_name("selection_modify_submenu")
+	selection_modify_submenu.add_item("Expand")
+	selection_modify_submenu.add_item("Shrink")
+	selection_modify_submenu.id_pressed.connect(_selection_modify_submenu_id_pressed)
+	select_menu.add_child(selection_modify_submenu)
+	select_menu.add_submenu_item(item, selection_modify_submenu.get_name())
 
 
 func _setup_help_menu() -> void:
@@ -665,6 +679,11 @@ func _tile_mode_submenu_id_pressed(id: Tiles.MODE) -> void:
 	Global.canvas.pixel_grid.queue_redraw()
 	Global.canvas.grid.queue_redraw()
 	get_tree().current_scene.tile_mode_offsets_dialog.change_mask()
+
+
+func _selection_modify_submenu_id_pressed(id: int) -> void:
+	modify_selection.popup()
+	modify_selection.node.type = id
 
 
 func _snap_to_submenu_id_pressed(id: int) -> void:

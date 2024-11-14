@@ -71,7 +71,7 @@ enum EffectsMenu {
 	SHADER
 }
 ## Enumeration of items present in the Select Menu.
-enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
+enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE, MODIFY }
 ## Enumeration of items present in the Help Menu.
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN,

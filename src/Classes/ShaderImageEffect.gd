@@ -54,7 +54,7 @@ func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector
 	RenderingServer.free_rid(ci_rid)
 	RenderingServer.free_rid(mat_rid)
 	RenderingServer.free_rid(texture)
-	viewport_texture.convert(Image.FORMAT_RGBA8)
+	viewport_texture.convert(img.get_format())
 	img.copy_from(viewport_texture)
 	if resized_width:
 		img.crop(img.get_width() - 1, img.get_height())

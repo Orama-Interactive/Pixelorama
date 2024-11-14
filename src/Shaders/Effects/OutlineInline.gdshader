@@ -44,7 +44,12 @@ void fragment() {
 
 	if ((output.a > 0.0) == inside && has_contrary_neighbour(UV, TEXTURE_PIXEL_SIZE, TEXTURE)) {
 		output.rgb = inside ? mix(output.rgb, color.rgb, color.a) : color.rgb;
-		output.a += (1.0 - output.a) * color.a;
+		if (is_zero_approx(color.a)) {
+			output.a = color.a;
+		}
+		else {
+			output.a += (1.0 - output.a) * color.a;
+		}
 	}
 
 	COLOR = mix(original_color, output, selection_color.a);
