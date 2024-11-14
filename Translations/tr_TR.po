@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-11-13 23:12\n"
+"PO-Revision-Date: 2024-11-14 11:36\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -235,7 +235,7 @@ msgstr "Tercihler"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Tuvale Ortala"
 
 msgid "Tile Mode"
 msgstr "Döşeme Kipi"
@@ -850,7 +850,7 @@ msgstr "Ekran ölçeği:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Yazı Tipi:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -920,12 +920,13 @@ msgstr "Arkaplan rengi:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Sol ve sağ araçlar arasında seçenekleri paylaş"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Etkinleştirilirse, seçenekler sol ve sağ araç arasında eşzamanlanır.\n"
+"Örneğin, her iki araç da aynı fırça boyutunu paylaşır ve bir araçta değiştirildiğinde anında diğerinde de değişir."
 
 msgid "Left tool color:"
 msgstr "Sol araç rengi:"
@@ -1940,7 +1941,7 @@ msgstr "İçi boş bir şekil çizmek yerine çizilen şekli renkle doldurur"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "Yoğunluk:"
 
 msgid "Brush color from"
 msgstr "Fırça rengini buradan"
@@ -2784,11 +2785,11 @@ msgstr "Dışa aktarılan görüntüleri görünür kısımlarına kırpar, sıf
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Görüntü içeriğini seçime tuttur"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Yalnızca seçilen alanın sınırları içindeki içeriği dışa aktar."
 
 msgid "Close"
 msgstr "Kapat"
@@ -3138,7 +3139,7 @@ msgstr "Metin:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Derinlik:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3152,7 +3153,7 @@ msgid "Horizontal alignment:"
 msgstr "Yatay hizalama:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Dikey hizalama:"
 
 msgid "Left"
 msgstr "Sol"
@@ -3162,7 +3163,7 @@ msgstr "Sağ"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Satır aralığı:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
