@@ -460,6 +460,7 @@ func _setup_selection_modify_submenu(item: String) -> void:
 	selection_modify_submenu.set_name("selection_modify_submenu")
 	selection_modify_submenu.add_item("Expand")
 	selection_modify_submenu.add_item("Shrink")
+	selection_modify_submenu.add_item("Border")
 	selection_modify_submenu.id_pressed.connect(_selection_modify_submenu_id_pressed)
 	select_menu.add_child(selection_modify_submenu)
 	select_menu.add_submenu_item(item, selection_modify_submenu.get_name())

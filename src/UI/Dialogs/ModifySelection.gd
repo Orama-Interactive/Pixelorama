@@ -1,14 +1,16 @@
 extends ConfirmationDialog
 
-enum Types { EXPAND, SHRINK }
+enum Types { EXPAND, SHRINK, BORDER }
 
 @export var type := Types.EXPAND:
 	set(value):
 		type = value
 		if type == Types.EXPAND:
 			title = "Expand Selection"
-		else:
+		elif type == Types.SHRINK:
 			title = "Shrink Selection"
+		else:
+			title = "Border Selection"
 
 @onready var width_slider: ValueSlider = $GridContainer/WidthSlider
 @onready var brush_option_button: OptionButton = $GridContainer/BrushOptionButton
@@ -31,8 +33,10 @@ func _on_confirmed() -> void:
 	project.selection_map.crop(project.size.x, project.size.y)
 	if type == Types.EXPAND:
 		project.selection_map.expand(width, brush)
-	else:
+	elif type == Types.SHRINK:
 		project.selection_map.shrink(width, brush)
+	else:
+		project.selection_map.border(width, brush)
 	selection_node.big_bounding_rectangle = project.selection_map.get_used_rect()
 	project.selection_offset = Vector2.ZERO
 	selection_node.commit_undo("Modify Selection", undo_data_tmp)

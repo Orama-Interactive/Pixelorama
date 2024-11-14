@@ -51,16 +51,15 @@ size_flags_horizontal = 3
 [node name="PatternLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="4"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Pattern:"
+text = "Brush:"
 
 [node name="PatternOptionButton" type="OptionButton" parent="VBoxContainer/OutlineOptions" index="5"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Diamond"
-popup/item_0/id = 0
 popup/item_1/text = "Circle"
 popup/item_1/id = 1
 popup/item_2/text = "Square"

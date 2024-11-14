@@ -185,22 +185,34 @@ func resize_bitmap_values(
 	blit_rect(smaller_image, Rect2i(Vector2i.ZERO, new_bitmap_size), dst)
 
 
-func expand(width: int, pattern: int) -> void:
+func expand(width: int, brush: int) -> void:
 	var params := {
 		"color": Color(1, 1, 1, 1),
 		"width": width,
-		"pattern": pattern,
+		"brush": brush,
 	}
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
 
 
-func shrink(width: int, pattern: int) -> void:
+func shrink(width: int, brush: int) -> void:
 	var params := {
 		"color": Color(0),
-		"inside": true,
 		"width": width,
-		"pattern": pattern,
+		"brush": brush,
+		"inside": true,
+	}
+	var gen := ShaderImageEffect.new()
+	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
+
+
+func border(width: int, brush: int) -> void:
+	var params := {
+		"color": Color(1, 1, 1, 1),
+		"width": width,
+		"brush": brush,
+		"inside": true,
+		"keep_border_only": true,
 	}
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
