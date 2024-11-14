@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-11-13 23:12\n"
+"PO-Revision-Date: 2024-11-14 15:36\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1941,7 +1941,7 @@ msgstr "Mewarnai isi bentuk yang digambar dan tidak menggambar bentuk berongga"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "Kerapatan:"
 
 msgid "Brush color from"
 msgstr "Warna kuas dari"
