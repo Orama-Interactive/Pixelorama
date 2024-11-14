@@ -132,6 +132,7 @@ global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
 [node name="DensityValueSlider" type="TextureProgressBar" parent="." index="4"]
+visible = false
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2
