@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2024-11-14 23:53\n"
+"PO-Revision-Date: 2024-11-15 00:55\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -2857,6 +2857,10 @@ msgstr ""
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
+msgstr ""
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
+msgid "Sort by lightness"
 msgstr ""
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
