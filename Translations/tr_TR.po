@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-11-15 00:56\n"
+"PO-Revision-Date: 2024-11-15 15:21\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -219,41 +219,41 @@ msgid "Invert"
 msgstr "Ters Çevir"
 
 msgid "Modify"
-msgstr ""
+msgstr "Değiştir"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "Genişlet"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "Seçimi Genişlet"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Küçült"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "Seçimi Daralt"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "Kenarlık"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "Kenarlık Seçimi"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Karo"
 
 msgid "Circle"
-msgstr ""
+msgstr "Daire"
 
 msgid "Square"
-msgstr ""
+msgstr "Kare"
 
 msgid "Grayscale View"
 msgstr "Gri Tonlamalı Görünüm"
@@ -2929,7 +2929,7 @@ msgstr "Değere göre sırala"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "Aydınlığa göre sırala"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
