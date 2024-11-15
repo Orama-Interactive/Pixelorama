@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-11-15 00:55\n"
+"PO-Revision-Date: 2024-11-15 10:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -219,41 +219,41 @@ msgid "Invert"
 msgstr "Inverti"
 
 msgid "Modify"
-msgstr ""
+msgstr "Modifica"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "Espandi"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "Espandi Selezione"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Riduci"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "Riduci La Selezione"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "Corníce"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "Selezione Bordo"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Diamante"
 
 msgid "Circle"
-msgstr ""
+msgstr "Cerchio"
 
 msgid "Square"
-msgstr ""
+msgstr "Quadrato"
 
 msgid "Grayscale View"
 msgstr "Visualizzazione Scala Di Grigio"
@@ -2929,7 +2929,7 @@ msgstr "Ordina per valore"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "Ordina per luminosità"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
