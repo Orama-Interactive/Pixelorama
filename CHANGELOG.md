@@ -11,6 +11,8 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 Built using Godot 4.3
 
 ### Added
+- Add density to the square & circle brushes. 100% density means that the brush gets completely drawn. Anything less leaves gaps inside the brush, acting like a spray tool.
+- Selection expanding, shrinking and borders have been added as options in the Select menu.
 - Mouse buttons can now be used as menu shortcuts. [#1070](https://github.com/Orama-Interactive/Pixelorama/issues/1070)
 - Added confirm and cancel buttons in the selection tool options to confirm/cancel an active transformation.
 - OKHSL Lightness sorting in palettes has been implemented. [#1126](https://github.com/Orama-Interactive/Pixelorama/pull/1126)
@@ -20,9 +22,14 @@ Built using Godot 4.3
 - The Recorder panel now automatically records for the current project. This also allows for multiple projects to be recorded at the same time.
 
 ### Fixed
+- Panels no longer get scrolled when using the mouse wheel over a slider.
 - Fixed layer effect slider values being rounded to the nearest integer.
 - Fixed memory leak where the project remained referenced by a drawing tool, even when its tab was closed.
 - Fixed memory leak where the first project remained forever references in memory by the Recorder panel.
+- Slightly optimize circle brushes by only calling the ellipse algorithms once while drawing
+
+### Removed
+- The Recorder panel has been removed from the Web version. It wasn't functional anyway in a way that was useful, and it's unsure if we can find a way to make it work.
 
 ## [v1.0.4] - 2024-10-25
 This update has been brought to you by the contributions of:
