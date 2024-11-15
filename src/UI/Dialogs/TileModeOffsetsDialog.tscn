@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0nuukjakmai2"]
+[gd_scene load_steps=6 format=3 uid="uid://c0nuukjakmai2"]
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
 [ext_resource type="Script" path="res://src/UI/Canvas/TileMode.gd" id="2"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="2_ul2eq"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/TileModeOffsetsDialog.gd" id="3"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
@@ -10,83 +11,72 @@ blend_mode = 4
 [node name="TileModeOffsetsDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
 title = "Tile Mode Offsets"
+position = Vector2i(0, 36)
+size = Vector2i(298, 536)
 script = ExtResource("3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 293.0
-offset_bottom = 386.0
+offset_right = 290.0
+offset_bottom = 487.0
 
 [node name="TileModeOffsets" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Tile Mode Offsets"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 4
 columns = 2
 
-[node name="XBasisXLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
+[node name="XBasisLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2
-text = "X-basis x:"
+size_flags_horizontal = 3
+text = "X-basis:"
 
-[node name="XBasisX" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
+[node name="XBasis" parent="VBoxContainer/OptionsContainer" instance=ExtResource("2_ul2eq")]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-min_value = -16384.0
-max_value = 16384.0
-suffix = "px"
+size_flags_horizontal = 3
+allow_greater = true
+allow_lesser = true
+suffix_x = "px"
+suffix_y = "px"
 
-[node name="XBasisYLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
+[node name="YBasisLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2
-text = "X-basis y:"
+size_flags_horizontal = 3
+text = "Y-basis:"
 
-[node name="XBasisY" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
+[node name="YBasis" parent="VBoxContainer/OptionsContainer" instance=ExtResource("2_ul2eq")]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-min_value = -16384.0
-max_value = 16384.0
-suffix = "px"
+size_flags_horizontal = 3
+allow_greater = true
+allow_lesser = true
+suffix_x = "px"
+suffix_y = "px"
 
-[node name="YBasisXLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
+[node name="MaskingLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2
-text = "Y-basis x:"
+text = "Masking:"
 
-[node name="YBasisX" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
+[node name="Masking" type="CheckButton" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-min_value = -16384.0
-max_value = 16384.0
-suffix = "px"
-
-[node name="YBasisYLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-layout_mode = 2
-text = "Y-basis y:"
-
-[node name="YBasisY" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-min_value = -16384.0
-max_value = 16384.0
-suffix = "px"
-
-[node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Reset"
-
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Masking" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Masking"
+
+[node name="Reset" type="Button" parent="VBoxContainer/OptionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Default"
+
+[node name="Isometric" type="Button" parent="VBoxContainer/OptionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Isometric"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -111,9 +101,8 @@ anchor_bottom = 1.0
 [connection signal="confirmed" from="." to="." method="_on_TileModeOffsetsDialog_confirmed"]
 [connection signal="size_changed" from="." to="." method="_on_TileModeOffsetsDialog_size_changed"]
 [connection signal="visibility_changed" from="." to="." method="_on_TileModeOffsetsDialog_visibility_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/XBasisX" to="." method="_on_XBasisX_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/XBasisY" to="." method="_on_XBasisY_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/YBasisX" to="." method="_on_YBasisX_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/YBasisY" to="." method="_on_YBasisY_value_changed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/OptionsContainer/Reset" to="." method="_on_Reset_pressed"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/Masking" to="." method="_on_Masking_toggled"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/XBasis" to="." method="_on_x_basis_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/YBasis" to="." method="_on_y_basis_value_changed"]
+[connection signal="toggled" from="VBoxContainer/OptionsContainer/Masking" to="." method="_on_Masking_toggled"]
+[connection signal="pressed" from="VBoxContainer/OptionsContainer/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsContainer/Isometric" to="." method="_on_isometric_pressed"]
