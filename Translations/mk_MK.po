@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Macedonian\n"
 "Language: mk_MK\n"
-"PO-Revision-Date: 2024-11-15 00:55\n"
+"PO-Revision-Date: 2024-11-15 17:31\n"
 
 msgid "OK"
 msgstr ""
@@ -278,19 +278,16 @@ msgstr ""
 msgid "Tile Mode Offsets"
 msgstr ""
 
-msgid "X-basis x:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "X-basis:"
 msgstr ""
 
-msgid "X-basis y:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "Y-basis:"
 msgstr ""
 
-msgid "Y-basis x:"
-msgstr ""
-
-msgid "Y-basis y:"
-msgstr ""
-
-msgid "Tile Mask"
+#. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
+msgid "Masking:"
 msgstr ""
 
 msgid "Reset"
