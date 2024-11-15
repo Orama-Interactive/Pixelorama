@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-11-15 00:55\n"
+"PO-Revision-Date: 2024-11-15 13:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -249,10 +249,10 @@ msgid "Diamond"
 msgstr ""
 
 msgid "Circle"
-msgstr ""
+msgstr "Круг"
 
 msgid "Square"
-msgstr ""
+msgstr "Квадрат"
 
 msgid "Grayscale View"
 msgstr "Вид в оттенках серого"
