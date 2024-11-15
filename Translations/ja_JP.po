@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-11-15 00:55\n"
+"PO-Revision-Date: 2024-11-15 02:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -219,41 +219,41 @@ msgid "Invert"
 msgstr "反転"
 
 msgid "Modify"
-msgstr ""
+msgstr "修正"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "拡張"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "選択範囲を拡張"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "縮小"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "選択範囲を縮小"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "境界線"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "境界線の選択"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "ひし形"
 
 msgid "Circle"
-msgstr ""
+msgstr "円"
 
 msgid "Square"
-msgstr ""
+msgstr "正方形"
 
 msgid "Grayscale View"
 msgstr "グレースケール表示"
@@ -2929,7 +2929,7 @@ msgstr "値でソート"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "軽さで並び替え"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
@@ -3180,7 +3180,7 @@ msgstr "テキスト:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "深さ:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3194,7 +3194,7 @@ msgid "Horizontal alignment:"
 msgstr "水平方向:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "垂直揃え:"
 
 msgid "Left"
 msgstr "左"
