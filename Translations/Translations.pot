@@ -2849,6 +2849,10 @@ msgstr ""
 msgid "Sort by value"
 msgstr ""
 
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
+msgid "Sort by lightness"
+msgstr ""
+
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
 msgstr ""
