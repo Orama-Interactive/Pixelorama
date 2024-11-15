@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-11-15 17:30\n"
+"PO-Revision-Date: 2024-11-15 18:59\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -247,7 +247,7 @@ msgstr "Περίγραμμα επιλογής"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr "Διαμάντι"
+msgstr "Ρόμβος"
 
 msgid "Circle"
 msgstr "Κύκλος"
