@@ -3,7 +3,7 @@ extends Node2D
 var tiles: Tiles
 var draw_center := false
 
-@onready var canvas := get_parent() as Canvas
+@onready var canvas := Global.canvas
 
 
 func _draw() -> void:
