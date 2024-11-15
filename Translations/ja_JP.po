@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-11-15 02:05\n"
+"PO-Revision-Date: 2024-11-15 17:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -280,20 +280,17 @@ msgstr "タイルモード"
 msgid "Tile Mode Offsets"
 msgstr "タイルモードのオフセット"
 
-msgid "X-basis x:"
-msgstr "X基底 x:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "X-basis:"
+msgstr "X基底:"
 
-msgid "X-basis y:"
-msgstr "X基底 y:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "Y-basis:"
+msgstr "Y基底:"
 
-msgid "Y-basis x:"
-msgstr "Y基底 x:"
-
-msgid "Y-basis y:"
-msgstr "Y基底 y:"
-
-msgid "Tile Mask"
-msgstr "タイルマスク"
+#. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
+msgid "Masking:"
+msgstr "マスキング:"
 
 msgid "Reset"
 msgstr "初期化"
