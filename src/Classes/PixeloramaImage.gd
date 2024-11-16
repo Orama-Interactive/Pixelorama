@@ -104,32 +104,30 @@ func set_pixel_custom(x: int, y: int, color: Color) -> void:
 
 
 func set_pixelv_custom(point: Vector2i, color: Color) -> void:
-	if not is_indexed:
-		set_pixelv(point, color)
-		return
-	var color_to_fill := TRANSPARENT
-	var color_index := 0
-	if not color.is_equal_approx(TRANSPARENT):
-		if palette.has(color):
-			color_index = palette.find(color)
-		else:  # Find the most similar color
-			#if not is_zero_approx(palette[0].a):
-			#color_index = 0
-			var smaller_distance := color_distance(color, palette[0])
-			for i in palette.size():
-				var swatch := palette[i]
-				if is_zero_approx(swatch.a):  # Skip transparent colors
-					continue
-				var dist := color_distance(color, swatch)
-				if dist < smaller_distance:
-					smaller_distance = dist
-					color_index = i
-		indices_image.set_pixelv(point, Color((color_index + 1) / 255.0, 0, 0, 0))
-		color_to_fill = palette[color_index]
-		set_pixelv(point, color_to_fill)
-	else:
-		indices_image.set_pixelv(point, TRANSPARENT)
-		set_pixelv(point, TRANSPARENT)
+	var new_color := color
+	if is_indexed:
+		var color_to_fill := TRANSPARENT
+		var color_index := 0
+		if not color.is_equal_approx(TRANSPARENT):
+			if palette.has(color):
+				color_index = palette.find(color)
+			else:  # Find the most similar color
+				var smaller_distance := color_distance(color, palette[0])
+				for i in palette.size():
+					var swatch := palette[i]
+					if is_zero_approx(swatch.a):  # Skip transparent colors
+						continue
+					var dist := color_distance(color, swatch)
+					if dist < smaller_distance:
+						smaller_distance = dist
+						color_index = i
+			indices_image.set_pixelv(point, Color((color_index + 1) / 255.0, 0, 0, 0))
+			color_to_fill = palette[color_index]
+			new_color = color_to_fill
+		else:
+			indices_image.set_pixelv(point, TRANSPARENT)
+			new_color = TRANSPARENT
+	set_pixelv(point, new_color)
 
 
 func color_distance(c1: Color, c2: Color) -> float:
