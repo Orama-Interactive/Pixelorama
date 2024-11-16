@@ -19,9 +19,11 @@ Built using Godot 4.3
 
 ### Changed
 - The brush size no longer changes by <kbd>Control</kbd> + Mouse Wheel when resizing the timeline cels or the palette swatches.
+- Improved the UI of the Tile Mode Offsets dialog and added an "Isometric" preset button.
 - The Recorder panel now automatically records for the current project. This also allows for multiple projects to be recorded at the same time.
 
 ### Fixed
+- Opening the Tile Mode Offsets dialog no longer crashes the application.
 - Panels no longer get scrolled when using the mouse wheel over a slider.
 - Fixed layer effect slider values being rounded to the nearest integer.
 - Fixed memory leak where the project remained referenced by a drawing tool, even when its tab was closed.
