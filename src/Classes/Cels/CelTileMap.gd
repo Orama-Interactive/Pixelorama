@@ -20,22 +20,48 @@ func _init(_tileset: TileSetCustom, _image := Image.new(), _opacity := 1.0) -> v
 
 func update_texture() -> void:
 	super.update_texture()
+	if tile_editing_mode == TileEditingMode.AUTO:
+		var tiles_to_delete := PackedInt32Array()
+		for j in range(1, tileset.tiles.size()):
+			var tile := tileset.tiles[j]
+			var tile_used := false
+			for i in indices.size():
+				var x_coord := float(tileset.tile_size.x) * (i % indices_x)
+				var y_coord := float(tileset.tile_size.y) * (i / indices_x)
+				var rect := Rect2i(Vector2i(x_coord, y_coord), tileset.tile_size)
+				var image_portion := image.get_region(rect)
+				if image_portion.is_invisible():
+					continue
+				if image_portion.get_data() == tile.get_data():
+					tile_used = true
+					break
+			if not tile_used:
+				tiles_to_delete.append(j)
+		for j in tiles_to_delete:
+			tileset.tiles.remove_at(j)
 	for i in indices.size():
 		var x_coord := float(tileset.tile_size.x) * (i % indices_x)
 		var y_coord := float(tileset.tile_size.y) * (i / indices_x)
 		var rect := Rect2i(Vector2i(x_coord, y_coord), tileset.tile_size)
 		var image_portion := image.get_region(rect)
+		if image_portion.is_invisible():
+			continue
 		var index := indices[i]
 		if tile_editing_mode == TileEditingMode.MANUAL:
-			if index == 0:
+			if index == 0 or tileset.tiles.size() <= index:
 				continue
 			if image_portion.get_data() != tileset.tiles[index].get_data():
 				tileset.tiles[index].copy_from(image_portion)
-		elif tile_editing_mode == TileEditingMode.AUTO:
-			if index == 0:
-				continue
+				# TODO: Update the rest of the tilemap
 		else:
-			if not image_portion.is_invisible():
+			var found_tile := false
+			for j in range(1, tileset.tiles.size()):
+				var tile := tileset.tiles[j]
+				if image_portion.get_data() == tile.get_data():
+					indices[i] = j
+					found_tile = true
+					break
+			if not found_tile:
 				tileset.tiles.append(image_portion)
 				indices[i] = tileset.tiles.size()
 
