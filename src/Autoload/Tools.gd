@@ -88,7 +88,11 @@ var tools := {
 	),
 	"Move":
 	Tool.new(
-		"Move", "Move", "move", "res://src/Tools/UtilityTools/Move.tscn", [Global.LayerTypes.PIXEL]
+		"Move",
+		"Move",
+		"move",
+		"res://src/Tools/UtilityTools/Move.tscn",
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
 	),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/UtilityTools/Zoom.tscn"),
 	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/UtilityTools/Pan.tscn"),
@@ -116,7 +120,7 @@ var tools := {
 		"Pencil",
 		"pencil",
 		"res://src/Tools/DesignTools/Pencil.tscn",
-		[Global.LayerTypes.PIXEL],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
@@ -126,7 +130,7 @@ var tools := {
 		"Eraser",
 		"eraser",
 		"res://src/Tools/DesignTools/Eraser.tscn",
-		[Global.LayerTypes.PIXEL],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
@@ -136,7 +140,7 @@ var tools := {
 		"Bucket",
 		"fill",
 		"res://src/Tools/DesignTools/Bucket.tscn",
-		[Global.LayerTypes.PIXEL]
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
 	),
 	"Shading":
 	Tool.new(
@@ -144,7 +148,7 @@ var tools := {
 		"Shading Tool",
 		"shading",
 		"res://src/Tools/DesignTools/Shading.tscn",
-		[Global.LayerTypes.PIXEL]
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
 	),
 	"LineTool":
 	(
@@ -154,7 +158,7 @@ var tools := {
 			"Line Tool",
 			"linetool",
 			"res://src/Tools/DesignTools/LineTool.tscn",
-			[Global.LayerTypes.PIXEL],
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -169,7 +173,7 @@ Hold %s to displace the shape's origin""",
 			"Curve Tool",
 			"curvetool",
 			"res://src/Tools/DesignTools/CurveTool.tscn",
-			[Global.LayerTypes.PIXEL],
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws bezier curves
 Press %s/%s to add new points
 Press and drag to control the curvature
@@ -185,7 +189,7 @@ Press %s to remove the last added point""",
 			"Rectangle Tool",
 			"rectangletool",
 			"res://src/Tools/DesignTools/RectangleTool.tscn",
-			[Global.LayerTypes.PIXEL],
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -200,7 +204,7 @@ Hold %s to displace the shape's origin""",
 			"Ellipse Tool",
 			"ellipsetool",
 			"res://src/Tools/DesignTools/EllipseTool.tscn",
-			[Global.LayerTypes.PIXEL],
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -232,10 +236,12 @@ var _panels := {}
 var _curr_layer_type := Global.LayerTypes.PIXEL
 var _left_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Pencil",
+	Global.LayerTypes.TILEMAP: "Pencil",
 	Global.LayerTypes.THREE_D: "3DShapeEdit",
 }
 var _right_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Eraser",
+	Global.LayerTypes.TILEMAP: "Eraser",
 	Global.LayerTypes.THREE_D: "Pan",
 }
 var _tool_buttons: Node

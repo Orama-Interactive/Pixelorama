@@ -85,6 +85,7 @@ var selection_offset := Vector2i.ZERO:
 		selection_offset = value
 		Global.canvas.selection.marching_ants_outline.offset = selection_offset
 var has_selection := false
+var tilesets: Array[TileSetCustom]
 
 ## For every camera (currently there are 3)
 var cameras_rotation: PackedFloat32Array = [0.0, 0.0, 0.0]
@@ -931,3 +932,7 @@ func reorder_reference_image(from: int, to: int) -> void:
 	var ri: ReferenceImage = reference_images.pop_at(from)
 	reference_images.insert(to, ri)
 	Global.canvas.reference_image_container.move_child(ri, to)
+
+
+func add_tileset(tileset: TileSetCustom) -> void:
+	tilesets.append(tileset)

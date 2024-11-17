@@ -239,12 +239,14 @@ offset_left = -22.0
 offset_top = -10.0
 offset_bottom = 10.0
 mouse_default_cursor_shape = 2
-item_count = 3
+item_count = 4
 popup/item_0/text = "Add Pixel Layer"
 popup/item_1/text = "Add Group Layer"
 popup/item_1/id = 1
 popup/item_2/text = "Add 3D Layer"
 popup/item_2/id = 2
+popup/item_3/text = "Add Tilemap Layer"
+popup/item_3/id = 3
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/AddLayer/AddLayerList"]
 layout_mode = 0
