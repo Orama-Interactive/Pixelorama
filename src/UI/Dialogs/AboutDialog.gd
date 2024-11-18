@@ -124,6 +124,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Bohdan Matviiv (BodaMat)": ["Ukrainian"],
 	"Ruslan Hryschuk (kifflow)": ["Ukrainian"],
 	"Dmitry D (homecraft)": ["Ukrainian"],
+	"Misha Dyshlenko (lony_official)": ["Ukrainian"],
 	"Kinwailo": ["Chinese Traditional"],
 	"曹恩逢 (SiderealArt)": ["Chinese Traditional"],
 	"Aden Pun (adenpun2000)": ["Chinese Traditional"],
