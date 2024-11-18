@@ -359,7 +359,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 							image = Image.create_from_data(
 								size.x, size.y, false, get_image_format(), buffer
 							)
-						var pixelorama_image := PixeloramaImage.new()
+						var pixelorama_image := ImageExtended.new()
 						pixelorama_image.is_indexed = is_indexed()
 						if not indices_data.is_empty() and is_indexed():
 							pixelorama_image.indices_image = Image.create_from_data(

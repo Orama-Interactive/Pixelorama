@@ -623,8 +623,8 @@ func _get_selected_draw_cels() -> Array[PixelCel]:
 	return cels
 
 
-func _get_selected_draw_images() -> Array[PixeloramaImage]:
-	var images: Array[PixeloramaImage] = []
+func _get_selected_draw_images() -> Array[ImageExtended]:
+	var images: Array[ImageExtended] = []
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
@@ -795,7 +795,7 @@ func delete(selected_cels := true) -> void:
 		return
 
 	var undo_data_tmp := get_undo_data(true)
-	var images: Array[PixeloramaImage]
+	var images: Array[ImageExtended]
 	if selected_cels:
 		images = _get_selected_draw_images()
 	else:

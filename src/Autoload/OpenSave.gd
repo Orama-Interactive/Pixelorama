@@ -396,7 +396,7 @@ func save_pxo_file(
 			zip_packer.close_file()
 		var cel_index := 1
 		for cel in frame.cels:
-			var cel_image := cel.get_image() as PixeloramaImage
+			var cel_image := cel.get_image() as ImageExtended
 			if is_instance_valid(cel_image) and cel is PixelCel:
 				zip_packer.start_file("image_data/frames/%s/layer_%s" % [frame_index, cel_index])
 				zip_packer.write_file(cel_image.get_data())
@@ -699,7 +699,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 		return
 	image.convert(project.get_image_format())
 	var cel_image := (cel as PixelCel).get_image()
-	var new_cel_image := PixeloramaImage.create_custom(
+	var new_cel_image := ImageExtended.create_custom(
 		project_width, project_height, false, project.get_image_format(), cel_image.is_indexed
 	)
 	new_cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)

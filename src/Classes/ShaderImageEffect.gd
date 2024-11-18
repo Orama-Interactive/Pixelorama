@@ -62,6 +62,6 @@ func generate_image(
 		img.crop(img.get_width() - 1, img.get_height())
 	if resized_height:
 		img.crop(img.get_width(), img.get_height() - 1)
-	if img is PixeloramaImage and respect_indexed:
+	if img is ImageExtended and respect_indexed:
 		img.convert_rgb_to_indexed()
 	done.emit()

@@ -533,7 +533,7 @@ func center(indices: Array) -> void:
 			var cel_image := (cel as PixelCel).get_image()
 			var tmp_centered := project.new_empty_image()
 			tmp_centered.blend_rect(cel.image, used_rect, offset)
-			var centered := PixeloramaImage.new()
+			var centered := ImageExtended.new()
 			centered.copy_from_custom(tmp_centered, cel_image.is_indexed)
 			centered.add_data_to_dictionary(redo_data, cel_image)
 			cel_image.add_data_to_dictionary(undo_data)
@@ -552,7 +552,7 @@ func scale_project(width: int, height: int, interpolation: int) -> void:
 			if not cel is PixelCel:
 				continue
 			var cel_image := (cel as PixelCel).get_image()
-			var sprite := _resize_image(cel_image, width, height, interpolation) as PixeloramaImage
+			var sprite := _resize_image(cel_image, width, height, interpolation) as ImageExtended
 			sprite.add_data_to_dictionary(redo_data, cel_image)
 			cel_image.add_data_to_dictionary(undo_data)
 
@@ -563,8 +563,8 @@ func _resize_image(
 	image: Image, width: int, height: int, interpolation: Image.Interpolation
 ) -> Image:
 	var new_image: Image
-	if image is PixeloramaImage:
-		new_image = PixeloramaImage.new()
+	if image is ImageExtended:
+		new_image = ImageExtended.new()
 		new_image.is_indexed = image.is_indexed
 		new_image.copy_from(image)
 		new_image.select_palette("", false)
@@ -587,7 +587,7 @@ func _resize_image(
 		gen.generate_image(new_image, omniscale_shader, {}, Vector2i(width, height), false)
 	else:
 		new_image.resize(width, height, interpolation)
-	if new_image is PixeloramaImage:
+	if new_image is ImageExtended:
 		new_image.on_size_changed()
 	return new_image
 
@@ -604,7 +604,7 @@ func crop_to_selection() -> void:
 	for cel in Global.current_project.get_all_pixel_cels():
 		var cel_image := cel.get_image()
 		var tmp_cropped := cel_image.get_region(rect)
-		var cropped := PixeloramaImage.new()
+		var cropped := ImageExtended.new()
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
@@ -642,7 +642,7 @@ func crop_to_content() -> void:
 	for cel in Global.current_project.get_all_pixel_cels():
 		var cel_image := cel.get_image()
 		var tmp_cropped := cel_image.get_region(used_rect)
-		var cropped := PixeloramaImage.new()
+		var cropped := ImageExtended.new()
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
@@ -655,7 +655,7 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 	var undo_data := {}
 	for cel in Global.current_project.get_all_pixel_cels():
 		var cel_image := cel.get_image()
-		var resized := PixeloramaImage.create_custom(
+		var resized := ImageExtended.create_custom(
 			width, height, cel_image.has_mipmaps(), cel_image.get_format(), cel_image.is_indexed
 		)
 		resized.blend_rect(

@@ -1114,7 +1114,7 @@ func undo_redo_compress_images(
 func undo_redo_draw_op(
 	image: Image, new_size: Vector2i, compressed_image_data: PackedByteArray, buffer_size: int
 ) -> void:
-	if image is PixeloramaImage and image.is_indexed:
+	if image is ImageExtended and image.is_indexed:
 		# If using indexed mode,
 		# just convert the indices to RGB instead of setting the image data directly.
 		if image.get_size() != new_size:

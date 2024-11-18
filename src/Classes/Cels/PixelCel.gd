@@ -4,17 +4,17 @@ extends BaseCel
 ## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
 ## This variable is where the image data of the cel are.
-var image: PixeloramaImage:
+var image: ImageExtended:
 	set = image_changed
 
 
-func _init(_image: PixeloramaImage, _opacity := 1.0) -> void:
+func _init(_image: ImageExtended, _opacity := 1.0) -> void:
 	image_texture = ImageTexture.new()
 	image = _image  # Set image and call setter
 	opacity = _opacity
 
 
-func image_changed(value: PixeloramaImage) -> void:
+func image_changed(value: ImageExtended) -> void:
 	image = value
 	if not image.is_empty() and is_instance_valid(image_texture):
 		image_texture.set_image(image)
@@ -48,7 +48,7 @@ func copy_content():
 	return copy_image
 
 
-func get_image() -> PixeloramaImage:
+func get_image() -> ImageExtended:
 	return image
 
 

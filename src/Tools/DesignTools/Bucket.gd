@@ -461,7 +461,7 @@ func _compute_segments_for_image(
 					done = false
 
 
-func _color_segments(image: PixeloramaImage) -> void:
+func _color_segments(image: ImageExtended) -> void:
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		# This is needed to ensure that the color used to fill is not wrong, due to float
 		# rounding issues.
@@ -484,7 +484,7 @@ func _color_segments(image: PixeloramaImage) -> void:
 				_set_pixel_pattern(image, px, p.y, pattern_size)
 
 
-func _set_pixel_pattern(image: PixeloramaImage, x: int, y: int, pattern_size: Vector2i) -> void:
+func _set_pixel_pattern(image: ImageExtended, x: int, y: int, pattern_size: Vector2i) -> void:
 	var px := (x + _offset_x) % pattern_size.x
 	var py := (y + _offset_y) % pattern_size.y
 	var pc := _pattern.image.get_pixel(px, py)

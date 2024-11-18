@@ -154,15 +154,15 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	var undo_data := {}
 	for frame in Global.current_project.frames:
 		var cel := frame.cels[layer.index]
-		var new_image := PixeloramaImage.new()
+		var new_image := ImageExtended.new()
 		var cel_image := cel.get_image()
-		if cel_image is PixeloramaImage:
+		if cel_image is ImageExtended:
 			new_image.is_indexed = cel_image.is_indexed
 		new_image.copy_from_custom(cel_image)
 		var image_size := new_image.get_size()
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(new_image, effect.shader, effect.params, image_size)
-		if cel_image is PixeloramaImage:
+		if cel_image is ImageExtended:
 			redo_data[cel_image.indices_image] = new_image.indices_image.data
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data
 		redo_data[cel_image] = new_image.data

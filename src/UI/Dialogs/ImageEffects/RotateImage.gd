@@ -136,7 +136,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 			cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 		else:
 			cel.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-		if cel is PixeloramaImage:
+		if cel is ImageExtended:
 			cel.convert_rgb_to_indexed()
 
 

@@ -1059,7 +1059,7 @@ func _on_MergeDownLayer_pressed() -> void:
 		var params := {
 			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
 		}
-		var new_bottom_image := PixeloramaImage.create_custom(
+		var new_bottom_image := ImageExtended.create_custom(
 			top_image.get_width(),
 			top_image.get_height(),
 			top_image.has_mipmaps(),

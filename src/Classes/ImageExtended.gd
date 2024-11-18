@@ -1,4 +1,4 @@
-class_name PixeloramaImage
+class_name ImageExtended
 extends Image
 
 const TRANSPARENT := Color(0)
@@ -18,8 +18,8 @@ func _init() -> void:
 
 static func create_custom(
 	width: int, height: int, mipmaps: bool, format: Image.Format, _is_indexed := false
-) -> PixeloramaImage:
-	var new_image := PixeloramaImage.new()
+) -> ImageExtended:
+	var new_image := ImageExtended.new()
 	new_image.crop(width, height)
 	if mipmaps:
 		new_image.generate_mipmaps()
@@ -136,7 +136,7 @@ func color_distance(c1: Color, c2: Color) -> float:
 
 
 ## Adds image data to a [param dict] [Dictionary]. Used for undo/redo.
-func add_data_to_dictionary(dict: Dictionary, other_image: PixeloramaImage = null) -> void:
+func add_data_to_dictionary(dict: Dictionary, other_image: ImageExtended = null) -> void:
 	# The order matters! Setting self's data first would make undo/redo appear to work incorrectly.
 	if is_instance_valid(other_image):
 		dict[other_image.indices_image] = indices_image.data

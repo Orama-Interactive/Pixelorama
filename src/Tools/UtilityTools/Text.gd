@@ -155,7 +155,7 @@ func text_to_pixels() -> void:
 	text_edit = null
 	if not viewport_texture.is_empty():
 		image.copy_from(viewport_texture)
-		if image is PixeloramaImage:
+		if image is ImageExtended:
 			image.convert_rgb_to_indexed()
 		commit_undo("Draw", undo_data)
 

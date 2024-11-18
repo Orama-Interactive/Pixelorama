@@ -27,7 +27,7 @@ class ColorOp:
 
 
 class SimpleDrawer:
-	func set_pixel(image: PixeloramaImage, position: Vector2i, color: Color, op: ColorOp) -> void:
+	func set_pixel(image: ImageExtended, position: Vector2i, color: Color, op: ColorOp) -> void:
 		var color_old := image.get_pixelv(position)
 		var color_str := color.to_html()
 		var color_new := op.process(Color(color_str), color_old)
@@ -43,7 +43,7 @@ class PixelPerfectDrawer:
 	func reset() -> void:
 		last_pixels = [null, null]
 
-	func set_pixel(image: PixeloramaImage, position: Vector2i, color: Color, op: ColorOp) -> void:
+	func set_pixel(image: ImageExtended, position: Vector2i, color: Color, op: ColorOp) -> void:
 		var color_old := image.get_pixelv(position)
 		var color_str := color.to_html()
 		last_pixels.push_back([position, color_old])
