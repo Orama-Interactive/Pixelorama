@@ -149,12 +149,14 @@ func text_to_pixels() -> void:
 	RenderingServer.free_rid(canvas)
 	RenderingServer.free_rid(ci_rid)
 	RenderingServer.free_rid(texture)
-	viewport_texture.convert(Image.FORMAT_RGBA8)
+	viewport_texture.convert(image.get_format())
 
 	text_edit.queue_free()
 	text_edit = null
 	if not viewport_texture.is_empty():
 		image.copy_from(viewport_texture)
+		if image is PixeloramaImage:
+			image.convert_rgb_to_indexed()
 		commit_undo("Draw", undo_data)
 
 
@@ -179,7 +181,7 @@ func _get_undo_data() -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images()
 	for image in images:
-		data[image] = image.data
+		image.add_data_to_dictionary(data)
 	return data
 
 
