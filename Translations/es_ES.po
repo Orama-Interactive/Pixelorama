@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-10-19 18:46\n"
+"PO-Revision-Date: 2024-11-18 03:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -216,6 +216,43 @@ msgstr "Limpiar"
 msgid "Invert"
 msgstr "Invertir"
 
+msgid "Modify"
+msgstr "Modificar"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
+msgid "Expand"
+msgstr "Expandir"
+
+#. Title of a window that lets users expand the active selection.
+msgid "Expand Selection"
+msgstr "Expandir selección"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
+msgid "Shrink"
+msgstr "Encoger"
+
+#. Title of a window that lets users shrink the active selection.
+msgid "Shrink Selection"
+msgstr "Encoger selección"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
+msgid "Border"
+msgstr "Borde"
+
+#. Title of a window that lets users create a border of the active selection.
+msgid "Border Selection"
+msgstr "Selección de borde"
+
+#. Refers to a diamond-like shape.
+msgid "Diamond"
+msgstr "Diamante"
+
+msgid "Circle"
+msgstr "Círculo"
+
+msgid "Square"
+msgstr "Cuadrado"
+
 msgid "Grayscale View"
 msgstr "Ver en escala de grises"
 
@@ -241,20 +278,17 @@ msgstr "Modo mosaico"
 msgid "Tile Mode Offsets"
 msgstr "Desplazamiento del modo mosaico"
 
-msgid "X-basis x:"
-msgstr "X de la base X:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "X-basis:"
+msgstr "Base X:"
 
-msgid "X-basis y:"
-msgstr "Y de la base X:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "Y-basis:"
+msgstr "Base Y:"
 
-msgid "Y-basis x:"
-msgstr "X de la base Y:"
-
-msgid "Y-basis y:"
-msgstr "Y de la base Y:"
-
-msgid "Tile Mask"
-msgstr "Máscara de mosaicos"
+#. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
+msgid "Masking:"
+msgstr "Máscara:"
 
 msgid "Reset"
 msgstr "Reiniciar"
@@ -1934,6 +1968,10 @@ msgstr "Rellena forma"
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr "Rellena de color la forma dibujada, en lugar de dibujar una forma hueca"
 
+#. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
+msgid "Density:"
+msgstr "Densidad:"
+
 msgid "Brush color from"
 msgstr "Color de pincel de"
 
@@ -2880,6 +2918,10 @@ msgstr "Ordenar por saturación"
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
 msgstr "Ordenar por valor"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
+msgid "Sort by lightness"
+msgstr "Ordenar por luminosidad"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"

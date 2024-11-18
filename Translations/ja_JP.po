@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-10-17 16:15\n"
+"PO-Revision-Date: 2024-11-15 17:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -218,6 +218,43 @@ msgstr "削除"
 msgid "Invert"
 msgstr "反転"
 
+msgid "Modify"
+msgstr "修正"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
+msgid "Expand"
+msgstr "拡張"
+
+#. Title of a window that lets users expand the active selection.
+msgid "Expand Selection"
+msgstr "選択範囲を拡張"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
+msgid "Shrink"
+msgstr "縮小"
+
+#. Title of a window that lets users shrink the active selection.
+msgid "Shrink Selection"
+msgstr "選択範囲を縮小"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
+msgid "Border"
+msgstr "境界線"
+
+#. Title of a window that lets users create a border of the active selection.
+msgid "Border Selection"
+msgstr "境界線の選択"
+
+#. Refers to a diamond-like shape.
+msgid "Diamond"
+msgstr "ひし形"
+
+msgid "Circle"
+msgstr "円"
+
+msgid "Square"
+msgstr "正方形"
+
 msgid "Grayscale View"
 msgstr "グレースケール表示"
 
@@ -243,20 +280,17 @@ msgstr "タイルモード"
 msgid "Tile Mode Offsets"
 msgstr "タイルモードのオフセット"
 
-msgid "X-basis x:"
-msgstr "X基底 x:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "X-basis:"
+msgstr "X基底:"
 
-msgid "X-basis y:"
-msgstr "X基底 y:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "Y-basis:"
+msgstr "Y基底:"
 
-msgid "Y-basis x:"
-msgstr "Y基底 x:"
-
-msgid "Y-basis y:"
-msgstr "Y基底 y:"
-
-msgid "Tile Mask"
-msgstr "タイルマスク"
+#. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
+msgid "Masking:"
+msgstr "マスキング:"
 
 msgid "Reset"
 msgstr "初期化"
@@ -1939,6 +1973,10 @@ msgstr "図形の塗りつぶし"
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr "中が空の図形を描くのではなく、描画した図形を色で塗りつぶします"
 
+#. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
+msgid "Density:"
+msgstr "密度:"
+
 msgid "Brush color from"
 msgstr "ブラシの色"
 
@@ -2886,6 +2924,10 @@ msgstr "彩度でソート"
 msgid "Sort by value"
 msgstr "値でソート"
 
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
+msgid "Sort by lightness"
+msgstr "軽さで並び替え"
+
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
 msgstr "赤でソート"
@@ -3135,7 +3177,7 @@ msgstr "テキスト:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "深さ:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3149,7 +3191,7 @@ msgid "Horizontal alignment:"
 msgstr "水平方向:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "垂直揃え:"
 
 msgid "Left"
 msgstr "左"

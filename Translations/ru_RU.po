@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2024-10-17 14:11\n"
+"PO-Revision-Date: 2024-11-16 20:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,7 +101,8 @@ msgstr "Включать смешанные изображения"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Если эта функция включена, смешанные изображения также сохраняются в .pxo для каждого кадра. Это увеличивает размер файла .pxo и полезно для импорта сторонними программами\n"
+"или экспорта через CLI. Для загрузки файлов .pxo в Pixelorama, включение этой опции не требуется."
 
 msgid "Import"
 msgstr "Импортировать"
@@ -216,6 +217,43 @@ msgstr "Очистить"
 msgid "Invert"
 msgstr "Инвертировать"
 
+msgid "Modify"
+msgstr "Изменить"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
+msgid "Expand"
+msgstr "Раскрыть"
+
+#. Title of a window that lets users expand the active selection.
+msgid "Expand Selection"
+msgstr "Раскрыть выбранное"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
+msgid "Shrink"
+msgstr "Сжать"
+
+#. Title of a window that lets users shrink the active selection.
+msgid "Shrink Selection"
+msgstr "Сжать выделенное"
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
+msgid "Border"
+msgstr "Граница"
+
+#. Title of a window that lets users create a border of the active selection.
+msgid "Border Selection"
+msgstr "Выбор границы"
+
+#. Refers to a diamond-like shape.
+msgid "Diamond"
+msgstr "Ромб"
+
+msgid "Circle"
+msgstr "Круг"
+
+msgid "Square"
+msgstr "Квадрат"
+
 msgid "Grayscale View"
 msgstr "Вид в оттенках серого"
 
@@ -233,7 +271,7 @@ msgstr "Настройки"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Центрировать холст"
 
 msgid "Tile Mode"
 msgstr "Режим тайла"
@@ -241,20 +279,17 @@ msgstr "Режим тайла"
 msgid "Tile Mode Offsets"
 msgstr "Сдвиг в бесшовном режиме"
 
-msgid "X-basis x:"
-msgstr "X для X-базиса:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "X-basis:"
+msgstr "Ось Х:"
 
-msgid "X-basis y:"
-msgstr "Y для X-базиса:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "Y-basis:"
+msgstr "Ось Y:"
 
-msgid "Y-basis x:"
-msgstr "X для Y-базиса:"
-
-msgid "Y-basis y:"
-msgstr "Y для Y-базиса:"
-
-msgid "Tile Mask"
-msgstr "Тайловая маска"
+#. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
+msgid "Masking:"
+msgstr "Маскирование:"
 
 msgid "Reset"
 msgstr "Сброс"
@@ -266,7 +301,7 @@ msgid "Reset Mask"
 msgstr "Сбросить маску"
 
 msgid "Window Opacity"
-msgstr "Непрозрачность окна"
+msgstr "Прозрачность окна"
 
 msgid "Window opacity does not work on fullscreen mode."
 msgstr "Прозрачность окна не работает в полноэкранном режиме."
@@ -346,7 +381,7 @@ msgstr "Показать направляющие"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr "Показывать направляющие курсора"
+msgstr "Показать направляющие курсора"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -564,7 +599,7 @@ msgstr "Изменить размер:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Качество:"
 
 msgid "Cancel Export"
 msgstr "Отменить экспорт"
@@ -696,7 +731,7 @@ msgstr "Изображение BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Изображение HDR Radiance"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
@@ -848,7 +883,7 @@ msgstr "Масштаб интерфейса:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Шрифт:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -918,12 +953,13 @@ msgstr "Цвет фона:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Разделяет параметры между левыми и правыми инструментами"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Если эта опция включена, параметры будут синхронизированы между левым и правым инструментом.\n"
+"Например, оба инструмента будут использовать один и тот же размер кисти, и его изменение в одном инструменте мгновенно отразится на другом."
 
 msgid "Left tool color:"
 msgstr "Цвет левого инструмента:"
@@ -996,23 +1032,23 @@ msgstr "Цвет тени:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Размытие по Гауссу"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Тип размытия:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Количество размытия:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Радиус размытия:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Направление размытия:"
 
 msgid "Gradient"
 msgstr "Градиент"
@@ -1075,7 +1111,7 @@ msgstr "Угол:"
 
 #. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
-msgstr "Изменить Оттенок/Насыщенность/Яркость"
+msgstr "Изменить оттенок/насыщенность/яркость"
 
 #. HSV stands for Hue, Saturation & Value.
 msgid "Adjust HSV"
@@ -1123,7 +1159,7 @@ msgstr "Цвет плитки:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Параметр эффекта тонировки:"
 
 msgid "Apply"
 msgstr "Применить"
@@ -1554,7 +1590,7 @@ msgstr "Выберите цвет на экране."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Введите шестнадцатеричный код (\"#ff0000\") или название цвета (\"красный\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -1566,15 +1602,15 @@ msgstr "Настройки цвета"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Выбрать режим пикера."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Цветные ползунки"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Образцы"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
@@ -1779,7 +1815,7 @@ msgstr "Постоянно обновлять"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Если включено, приложение будет перерисовывать экран постоянно, даже если он не используется. Отключение этого режима поможет снизить нагрузку на процессор и GPU."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -1933,6 +1969,10 @@ msgstr "Заполнить фигуру"
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr "Заполняет нарисованную фигуру цветом, вместо того, чтобы нарисовать пустую фигуру"
 
+#. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
+msgid "Density:"
+msgstr "Плотность:"
+
 msgid "Brush color from"
 msgstr "Цвет кисти из"
 
@@ -2050,11 +2090,11 @@ msgstr "Режим рисования с вертикальным зеркали
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "Переместить в центр холста"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "Переместить в центр"
 
 msgid "Current frame:"
 msgstr "Текущий кадр:"
@@ -2072,10 +2112,10 @@ msgid "Go to the previous frame"
 msgstr "На предыдущий кадр"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Воспроизвести анимацию назад"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Воспроизвести анимацию вперед"
 
 msgid "Go to the next frame"
 msgstr "На следующий кадр"
@@ -2354,7 +2394,7 @@ msgid "Luminosity"
 msgstr "Яркость"
 
 msgid "Opacity:"
-msgstr "Непрозрачность:"
+msgstr "Прозрачность:"
 
 msgid "Tile mode opacity:"
 msgstr "Режим прозрачности тайла:"
@@ -2580,23 +2620,23 @@ msgstr "Цвет фона по умолчанию для нового изобр
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Сбросить все параметры, доступные в настройках"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Сброс настроек шкалы времени"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Сбросить параметры всех инструментов"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Удалить все расширения"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Очистить список недавно открытых файлов"
 
 msgid "Lock aspect ratio"
 msgstr "Заблокировать соотношение сторон"
@@ -2767,19 +2807,19 @@ msgstr "Символы, разделяющие имя файла и номер �
 
 #. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
 msgid "Trim images"
-msgstr ""
+msgstr "Обрезать изображения"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
-msgstr ""
+msgstr "Обрезает экспортированные изображения по видимой части, принимая во внимание каждый пиксел с каналом альфа ненуля как видимый."
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Выбор содержимого изображения"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Экспортировать только содержимое, находящееся в пределах выбранной области."
 
 msgid "Close"
 msgstr "Закрыть"
@@ -2879,6 +2919,10 @@ msgstr "Отсортировать по насыщенности"
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
 msgstr "Отсортировать по значению"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
+msgid "Sort by lightness"
+msgstr "Сортировать по светлости"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
@@ -3128,7 +3172,7 @@ msgstr "Текст:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Глубина:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3142,7 +3186,7 @@ msgid "Horizontal alignment:"
 msgstr "Горизонтальное выравнивание:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Вертикальное выравнивание:"
 
 msgid "Left"
 msgstr "Слева"
@@ -3152,7 +3196,7 @@ msgstr "Справа"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Интервал линии:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
@@ -3259,12 +3303,13 @@ msgstr "Монохром"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "При открытии изображения он может быть импортирован в качестве референса."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr ""
+msgstr "Выберите изображение ниже, чтобы изменить его свойства.\n"
+"Обратите внимание, что нельзя рисовать, пока выбрано референсное изображение."
 
 #. Removes the selected reference image.
 msgid "Remove"
@@ -3276,7 +3321,7 @@ msgstr "Удерживайте Shift, чтобы мгновенно удалит
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr ""
+msgstr "Вы уверены, что хотите удалить референсное изображение? Оно не будет удалено из вашей файловой системы."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3328,11 +3373,11 @@ msgstr "Фильтр"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr "Непрозрачность"
+msgstr "Прозрачность"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Цветовая гамма"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"

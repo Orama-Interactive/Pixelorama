@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-10-17 14:10\n"
+"PO-Revision-Date: 2024-11-15 17:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -218,6 +218,43 @@ msgstr "Leeren"
 msgid "Invert"
 msgstr "Invertieren"
 
+msgid "Modify"
+msgstr ""
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
+msgid "Expand"
+msgstr ""
+
+#. Title of a window that lets users expand the active selection.
+msgid "Expand Selection"
+msgstr ""
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
+msgid "Shrink"
+msgstr ""
+
+#. Title of a window that lets users shrink the active selection.
+msgid "Shrink Selection"
+msgstr ""
+
+#. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
+msgid "Border"
+msgstr ""
+
+#. Title of a window that lets users create a border of the active selection.
+msgid "Border Selection"
+msgstr ""
+
+#. Refers to a diamond-like shape.
+msgid "Diamond"
+msgstr ""
+
+msgid "Circle"
+msgstr ""
+
+msgid "Square"
+msgstr ""
+
 msgid "Grayscale View"
 msgstr "Graustufen-Ansicht"
 
@@ -235,7 +272,7 @@ msgstr "Einstellungen"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Canvas zentrieren"
 
 msgid "Tile Mode"
 msgstr "Kachelmodus"
@@ -243,20 +280,17 @@ msgstr "Kachelmodus"
 msgid "Tile Mode Offsets"
 msgstr "Tile-Modus Offsets"
 
-msgid "X-basis x:"
-msgstr "X-Basis x:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "X-basis:"
+msgstr ""
 
-msgid "X-basis y:"
-msgstr "X-Basis y:"
+#. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
+msgid "Y-basis:"
+msgstr ""
 
-msgid "Y-basis x:"
-msgstr "Y-Basis x:"
-
-msgid "Y-basis y:"
-msgstr "Y-Basis y:"
-
-msgid "Tile Mask"
-msgstr "Tile-Maske"
+#. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
+msgid "Masking:"
+msgstr ""
 
 msgid "Reset"
 msgstr "Zurücksetzen"
@@ -849,7 +883,7 @@ msgstr "Bildschirmmaße:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Schriftart:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -919,12 +953,13 @@ msgstr "Hintergrundfarbe:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Optionen zwischen dem linken und dem rechten Werkzeug teilen"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Wenn diese Option aktiviert ist, werden die Optionen zwischen dem linken und dem rechten Werkzeug synchronisiert.\n"
+"Zum Beispiel teilen daraufhin beide Werkzeuge die gleiche Pinselgröße, und sobald diese bei einem Werkzeug geändert wird, ändert sie sich auch bei dem anderem."
 
 msgid "Left tool color:"
 msgstr "Farbe des linken Werkzeugs:"
@@ -1937,6 +1972,10 @@ msgstr "Füllform"
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr "Füllt die gezeichnete Form mit Farbe, anstatt eine hohle Form zu zeichnen"
 
+#. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
+msgid "Density:"
+msgstr ""
+
 msgid "Brush color from"
 msgstr "Pinselfarbe von"
 
@@ -2054,11 +2093,11 @@ msgstr "Aktiviere vertikal gespiegelte Zeichnung"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "In Canvas-Mitte verschieben"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "In die Mitte verschieben"
 
 msgid "Current frame:"
 msgstr "Aktueller Frame"
@@ -2076,10 +2115,10 @@ msgid "Go to the previous frame"
 msgstr "Zum vorherigen Frame gehen"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Animation rückwärts abspielen"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Animation vorwärts abspielen"
 
 msgid "Go to the next frame"
 msgstr "Gehe zum nächsten Frame"
@@ -2584,23 +2623,23 @@ msgstr "Eine Standard-Hintergrundfarbe eines neuen Bildes"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Alle in den Einstellungen verfügbaren Optionen zurücksetzen"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Timeline-Optionen zurücksetzen"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Alle Werkzeugoptionen zurücksetzen"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Alle Erweiterungen entfernen"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Löschen der zuletzt geöffneten Dateiliste"
 
 msgid "Lock aspect ratio"
 msgstr "Seitenverhältnis sperren"
@@ -2771,19 +2810,19 @@ msgstr "Die Zeichen, die den Dateinamen und die Frame-Nummer trennen"
 
 #. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
 msgid "Trim images"
-msgstr ""
+msgstr "Bilder zuschneiden"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
-msgstr ""
+msgstr "Schneiden Sie die exportierten Bilder in ihre sichtbaren Teile, unter Betrachtung jedes Pixel mit einem nicht-null Alphakanal als sichtbar."
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Bildinhalt auf Auswahl zuschneiden"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Nur Inhalte exportieren, die innerhalb der Grenzen eines ausgewählten Bereichs liegen."
 
 msgid "Close"
 msgstr "Schließen"
@@ -2882,6 +2921,10 @@ msgstr "Nach Sättigung sortieren"
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
 msgstr "Nach Wert sortieren"
+
+#. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
+msgid "Sort by lightness"
+msgstr ""
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
@@ -3132,7 +3175,7 @@ msgstr "Text:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Tiefe:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -3146,7 +3189,7 @@ msgid "Horizontal alignment:"
 msgstr "Horizontale Ausrichtung:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Vertikale Ausrichtung:"
 
 msgid "Left"
 msgstr "Links"
@@ -3156,7 +3199,7 @@ msgstr "Rechts"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Zeilenabstand:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
