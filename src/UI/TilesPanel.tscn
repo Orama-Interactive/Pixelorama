@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfbragmmdwfbl"]
+
+[ext_resource type="Script" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
+
+[node name="Tiles" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d2oc5")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer"]
+layout_mode = 2

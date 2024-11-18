@@ -4,7 +4,7 @@ extends PixelCel
 enum TileEditingMode { MANUAL, AUTO, STACK }
 
 var tileset: TileSetCustom
-var tile_editing_mode := TileEditingMode.MANUAL
+var tile_editing_mode := TileEditingMode.STACK
 var indices := PackedInt32Array()
 var indices_x: int
 var indices_y: int
@@ -38,7 +38,7 @@ func update_texture() -> void:
 			if not tile_used:
 				tiles_to_delete.append(j)
 		for j in tiles_to_delete:
-			tileset.tiles.remove_at(j)
+			tileset.remove_tile_at_index(j)
 	for i in indices.size():
 		var x_coord := float(tileset.tile_size.x) * (i % indices_x)
 		var y_coord := float(tileset.tile_size.y) * (i / indices_x)
@@ -51,7 +51,7 @@ func update_texture() -> void:
 			if index == 0 or tileset.tiles.size() <= index:
 				continue
 			if image_portion.get_data() != tileset.tiles[index].get_data():
-				tileset.tiles[index].copy_from(image_portion)
+				tileset.replace_tile_at(image_portion, index)
 				# TODO: Update the rest of the tilemap
 		else:
 			var found_tile := false
@@ -62,7 +62,7 @@ func update_texture() -> void:
 					found_tile = true
 					break
 			if not found_tile:
-				tileset.tiles.append(image_portion)
+				tileset.add_tile(image_portion)
 				indices[i] = tileset.tiles.size()
 
 
