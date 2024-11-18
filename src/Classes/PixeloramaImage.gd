@@ -95,7 +95,6 @@ func on_size_changed() -> void:
 
 
 func resize_indices() -> void:
-	print(get_width(), " ", get_height(), " ", get_width() * get_height())
 	indices_image.crop(get_width(), get_height())
 
 
