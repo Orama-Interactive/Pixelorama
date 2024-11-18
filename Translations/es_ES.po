@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-11-15 17:30\n"
+"PO-Revision-Date: 2024-11-18 02:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -217,27 +217,27 @@ msgid "Invert"
 msgstr "Invertir"
 
 msgid "Modify"
-msgstr ""
+msgstr "Modificar"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "Expandir selección"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Encoger"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "Encoger selección"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "Borde"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
@@ -248,10 +248,10 @@ msgid "Diamond"
 msgstr ""
 
 msgid "Circle"
-msgstr ""
+msgstr "Círculo"
 
 msgid "Square"
-msgstr ""
+msgstr "Cuadrado"
 
 msgid "Grayscale View"
 msgstr "Ver en escala de grises"
@@ -1970,7 +1970,7 @@ msgstr "Rellena de color la forma dibujada, en lugar de dibujar una forma hueca"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "Densidad:"
 
 msgid "Brush color from"
 msgstr "Color de pincel de"
