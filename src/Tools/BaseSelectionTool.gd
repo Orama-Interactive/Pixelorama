@@ -22,7 +22,8 @@ var _intersect := false  ## Shift + Ctrl + Mouse Click
 var _content_transformation_check := false
 var _skip_slider_logic := false
 
-@onready var selection_node: Node2D = Global.canvas.selection
+@onready var selection_node := Global.canvas.selection
+@onready var confirm_buttons := $ConfirmButtons as HBoxContainer
 @onready var position_sliders := $Position as ValueSliderV2
 @onready var size_sliders := $Size as ValueSliderV2
 @onready var timer := $Timer as Timer
@@ -30,11 +31,17 @@ var _skip_slider_logic := false
 
 func _ready() -> void:
 	super._ready()
+	set_confirm_buttons_visibility()
 	set_spinbox_values()
 	refresh_options()
+	selection_node.is_moving_content_changed.connect(set_confirm_buttons_visibility)
 
 
-## Ensure all items are added when we are selecting an option (bad things will happen otherwise)
+func set_confirm_buttons_visibility() -> void:
+	confirm_buttons.visible = selection_node.is_moving_content
+
+
+## Ensure all items are added when we are selecting an option.
 func refresh_options() -> void:
 	$Modes.clear()
 	$Modes.add_item("Replace selection")
@@ -201,6 +208,16 @@ func apply_selection(_position: Vector2i) -> void:
 		Mode.INTERSECT:
 			if !_add && !_subtract:
 				_intersect = true
+
+
+func _on_confirm_button_pressed() -> void:
+	if selection_node.is_moving_content:
+		selection_node.transform_content_confirm()
+
+
+func _on_cancel_button_pressed() -> void:
+	if selection_node.is_moving_content:
+		selection_node.transform_content_cancel()
 
 
 func _on_Modes_item_selected(index: int) -> void:

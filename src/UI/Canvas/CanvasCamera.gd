@@ -14,18 +14,21 @@ const CAMERA_SPEED_RATE := 15.0
 var zoom := Vector2.ONE:
 	set(value):
 		zoom = value
+		Global.current_project.cameras_zoom[index] = zoom
 		zoom_changed.emit()
 		_update_viewport_transform()
 var camera_angle := 0.0:
 	set(value):
 		camera_angle = wrapf(value, -PI, PI)
 		camera_angle_degrees = rad_to_deg(camera_angle)
+		Global.current_project.cameras_rotation[index] = camera_angle
 		rotation_changed.emit()
 		_update_viewport_transform()
 var camera_angle_degrees := 0.0
 var offset := Vector2.ZERO:
 	set(value):
 		offset = value
+		Global.current_project.cameras_offset[index] = offset
 		offset_changed.emit()
 		_update_viewport_transform()
 var camera_screen_center := Vector2.ZERO
@@ -54,8 +57,8 @@ func _ready() -> void:
 		zoom_slider.value_changed.connect(_zoom_slider_value_changed)
 	zoom_changed.connect(_zoom_changed)
 	rotation_changed.connect(_rotation_changed)
-	viewport_container = get_parent().get_parent()
-	transparent_checker = get_parent().get_node("TransparentChecker")
+	viewport_container = get_viewport().get_parent()
+	transparent_checker = get_viewport().get_node("TransparentChecker")
 	update_transparent_checker_offset()
 
 
@@ -75,13 +78,14 @@ func _input(event: InputEvent) -> void:
 		zoom_camera(-1)
 
 	elif event is InputEventMagnifyGesture:  # Zoom gesture on touchscreens
-		if event.factor >= 1:  # Zoom in
-			zoom_camera(1)
+		#zoom_camera(event.factor)
+		if event.factor >= 1.0:  # Zoom in
+			zoom_camera(event.factor * 0.3)
 		else:  # Zoom out
-			zoom_camera(-1)
+			zoom_camera((event.factor * 0.7) - 1.0)
 	elif event is InputEventPanGesture:
 		# Pan gesture on touchscreens
-		offset = offset + event.delta.rotated(camera_angle) * 7.0 / zoom
+		offset = offset + event.delta.rotated(camera_angle) * 2.0 / zoom
 	elif event is InputEventMouseMotion:
 		if drag:
 			offset = offset - event.relative.rotated(camera_angle) / zoom
@@ -89,12 +93,10 @@ func _input(event: InputEvent) -> void:
 	else:
 		var dir := Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down")
 		if dir != Vector2.ZERO and !_has_selection_tool():
-			offset += (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
-
-	save_values_to_project()
+			offset = offset + (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
 
 
-func zoom_camera(dir: int) -> void:
+func zoom_camera(dir: float) -> void:
 	var viewport_size := viewport_container.size
 	if Global.smooth_zoom:
 		var zoom_margin := zoom * dir / 5
@@ -140,7 +142,13 @@ func zoom_100() -> void:
 
 
 func fit_to_frame(size: Vector2) -> void:
-	# temporarily disable integer zoom
+	viewport_container = get_viewport().get_parent()
+	var h_ratio := viewport_container.size.x / size.x
+	var v_ratio := viewport_container.size.y / size.y
+	var ratio := minf(h_ratio, v_ratio)
+	if ratio == 0 or !viewport_container.visible:
+		return
+	# Temporarily disable integer zoom.
 	var reset_integer_zoom := Global.integer_zoom
 	if reset_integer_zoom:
 		Global.integer_zoom = !Global.integer_zoom
@@ -148,43 +156,20 @@ func fit_to_frame(size: Vector2) -> void:
 
 	# Adjust to the rotated size:
 	if camera_angle != 0.0:
-		# Calculating the rotated corners of the frame to find its rotated size
+		# Calculating the rotated corners of the frame to find its rotated size.
 		var a := Vector2.ZERO  # Top left
-		var b := Vector2(size.x, 0).rotated(camera_angle)  # Top right
-		var c := Vector2(0, size.y).rotated(camera_angle)  # Bottom left
-		var d := Vector2(size.x, size.y).rotated(camera_angle)  # Bottom right
+		var b := Vector2(size.x, 0).rotated(camera_angle)  # Top right.
+		var c := Vector2(0, size.y).rotated(camera_angle)  # Bottom left.
+		var d := Vector2(size.x, size.y).rotated(camera_angle)  # Bottom right.
 
-		# Find how far apart each opposite point is on each axis, and take the longer one
+		# Find how far apart each opposite point is on each axis, and take the longer one.
 		size.x = maxf(absf(a.x - d.x), absf(b.x - c.x))
 		size.y = maxf(absf(a.y - d.y), absf(b.y - c.y))
-
-	viewport_container = get_parent().get_parent()
-	var h_ratio := viewport_container.size.x / size.x
-	var v_ratio := viewport_container.size.y / size.y
-	var ratio := minf(h_ratio, v_ratio)
-	if ratio == 0 or !viewport_container.visible:
-		ratio = 0.1  # Set it to a non-zero value just in case
-		# If the ratio is 0, it means that the viewport container is hidden
-		# in that case, use the other viewport to get the ratio
-		if index == Cameras.MAIN:
-			h_ratio = Global.second_viewport.size.x / size.x
-			v_ratio = Global.second_viewport.size.y / size.y
-			ratio = minf(h_ratio, v_ratio)
-		elif index == Cameras.SECOND:
-			h_ratio = Global.main_viewport.size.x / size.x
-			v_ratio = Global.main_viewport.size.y / size.y
-			ratio = minf(h_ratio, v_ratio)
 
 	ratio = clampf(ratio, 0.1, ratio)
 	zoom = Vector2(ratio, ratio)
 	if reset_integer_zoom:
 		Global.integer_zoom = !Global.integer_zoom
-
-
-func save_values_to_project() -> void:
-	Global.current_project.cameras_rotation[index] = camera_angle
-	Global.current_project.cameras_zoom[index] = zoom
-	Global.current_project.cameras_offset[index] = offset
 
 
 func update_transparent_checker_offset() -> void:
@@ -256,9 +241,9 @@ func _has_selection_tool() -> bool:
 
 
 func _project_switched() -> void:
+	offset = Global.current_project.cameras_offset[index]
 	camera_angle = Global.current_project.cameras_rotation[index]
 	zoom = Global.current_project.cameras_zoom[index]
-	offset = Global.current_project.cameras_offset[index]
 
 
 func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:

@@ -37,6 +37,7 @@ func _on_opacity_slider_value_changed(value: float) -> void:
 	for cel_index in cel_indices:
 		var cel := Global.current_project.frames[cel_index[0]].cels[cel_index[1]]
 		cel.opacity = value / 100.0
+	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 
 

@@ -40,6 +40,8 @@ func _exit_tree() -> void:
 	active_tab_rearranged.disconnect(_on_tab_changed)
 	tab_selected.disconnect(_on_tab_selected)
 	tab_changed.disconnect(_on_tab_changed)
+	if is_instance_valid(get_popup()):
+		get_popup().queue_free()
 
 
 func track_nodes(nodes: Array[Control], new_leaf: DockableLayoutPanel) -> void:

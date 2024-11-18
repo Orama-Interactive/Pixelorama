@@ -99,6 +99,7 @@ func _update_buttons_all_layers() -> void:
 		var expanded := layer.is_expanded_in_hierarchy()
 		layer_button.visible = expanded
 		Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
+	Global.animation_timeline.update_global_layer_buttons()
 
 
 func _input(event: InputEvent) -> void:
@@ -145,9 +146,7 @@ func _on_main_button_gui_input(event: InputEvent) -> void:
 			line_edit.grab_focus()
 
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		var layer := Global.current_project.layers[layer_index]
-		if not layer is GroupLayer:
-			popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
+		popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
 
 
 func _on_layer_name_line_edit_focus_exited() -> void:
@@ -222,6 +221,7 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 		layer.clipping_mask = not layer.clipping_mask
 		popup_menu.set_item_checked(id, layer.clipping_mask)
 		clipping_mask_icon.visible = layer.clipping_mask
+		Global.canvas.update_all_layers = true
 		Global.canvas.draw_layers()
 
 

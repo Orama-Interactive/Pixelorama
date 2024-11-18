@@ -18,6 +18,9 @@ var splash_dialog: AcceptDialog:
 
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 @onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
+## Dialog used to open images and project (.pxo) files.
+@onready var open_sprite_dialog := $Dialogs/OpenSprite as FileDialog
+## Dialog used to save project (.pxo) files.
 @onready var save_sprite_dialog := $Dialogs/SaveSprite as FileDialog
 @onready var save_sprite_html5: ConfirmationDialog = $Dialogs/SaveSpriteHTML5
 @onready var tile_mode_offsets_dialog: ConfirmationDialog = $Dialogs/TileModeOffsetsDialog
@@ -157,6 +160,7 @@ some useful [SYSTEM OPTIONS] are:
 
 
 func _init() -> void:
+	Global.project_switched.connect(_project_switched)
 	if not DirAccess.dir_exists_absolute("user://backups"):
 		DirAccess.make_dir_recursive_absolute("user://backups")
 	Global.shrink = _get_auto_display_scale()
@@ -177,22 +181,12 @@ func _ready() -> void:
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
 
-	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
+	open_sprite_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
 	save_sprite_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	)
-	var include_blended := CheckBox.new()
-	include_blended.name = "IncludeBlended"
-	include_blended.text = "Include blended images"
-	include_blended.tooltip_text = """
-If enabled, the final blended images are also being stored in the pxo, for each frame.
-This makes the pxo file larger and is useful for importing by third-party software
-or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled.
-"""
-	include_blended.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	save_sprite_dialog.get_vbox().add_child(include_blended)
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
@@ -211,6 +205,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER):
 		if get_viewport().gui_get_focus_owner() is LineEdit:
 			get_viewport().gui_get_focus_owner().release_focus()
+
+
+func _project_switched() -> void:
+	if Global.current_project.export_directory_path != "":
+		open_sprite_dialog.current_path = Global.current_project.export_directory_path
+		save_sprite_dialog.current_path = Global.current_project.export_directory_path
 
 
 # Taken from https://github.com/godotengine/godot/blob/3.x/editor/editor_settings.cpp#L1474
@@ -250,16 +250,10 @@ func _handle_layout_files() -> void:
 func _setup_application_window_size() -> void:
 	if DisplayServer.get_name() == "headless":
 		return
-	var root := get_tree().root
-	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
-	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
-	# Set a minimum window size to prevent UI elements from collapsing on each other.
-	root.min_size = Vector2(1024, 576)
-	root.content_scale_factor = Global.shrink
+	set_display_scale()
 	if Global.font_size != theme.default_font_size:
 		theme.default_font_size = Global.font_size
 		theme.set_font_size("font_size", "HeaderSmall", Global.font_size + 2)
-	set_custom_cursor()
 
 	if OS.get_name() == "Web":
 		return
@@ -278,6 +272,16 @@ func _setup_application_window_size() -> void:
 			get_window().position = Global.config_cache.get_value("window", "position")
 		if Global.config_cache.has_section_key("window", "size"):
 			get_window().size = Global.config_cache.get_value("window", "size")
+
+
+func set_display_scale() -> void:
+	var root := get_window()
+	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	# Set a minimum window size to prevent UI elements from collapsing on each other.
+	root.min_size = Vector2(1024, 576)
+	root.content_scale_factor = Global.shrink
+	set_custom_cursor()
 
 
 func set_custom_cursor() -> void:
@@ -462,15 +466,17 @@ func save_project(path: String) -> void:
 		project_to_save = changed_projects_on_quit[0]
 	var include_blended := false
 	if OS.get_name() == "Web":
-		var file_name: String = save_sprite_html5.get_node("%FileNameLineEdit").text
-		file_name += ".pxo"
+		var file_name := project_to_save.name + ".pxo"
 		path = "user://".path_join(file_name)
 		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
 	else:
-		include_blended = save_sprite_dialog.get_vbox().get_node("IncludeBlended").button_pressed
+		if save_sprite_dialog.get_selected_options().size() > 0:
+			include_blended = save_sprite_dialog.get_selected_options()[
+				save_sprite_dialog.get_option_name(0)
+			]
 	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
 	if success:
-		Global.open_sprites_dialog.current_dir = path.get_base_dir()
+		open_sprite_dialog.current_dir = path.get_base_dir()
 	if is_quitting_on_save:
 		changed_projects_on_quit.pop_front()
 		_save_on_quit_confirmation()

@@ -2,7 +2,7 @@ extends PanelContainer
 
 var axes: Node2D
 var do_pool := []  ## A pool that stores data of points removed by undo
-var delete_pool := []  ## A pool that containing deleted data and their index
+var delete_pool := []  ## A pool that contains deleted data and their index
 ## The vanishing point UI resource
 var vanishing_point_res := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn")
 ## Option to show/hide tracker guides. (guides whose end points follow the mouse)
@@ -73,7 +73,7 @@ func _update_points() -> void:
 	# Delete old vanishing points
 	for c in vanishing_point_container.get_children():
 		c.queue_free()
-	# Add the "updated" vanising points from the current_project
+	# Add the "updated" vanishing points from the current_project
 	for idx in Global.current_project.vanishing_points.size():
 		# Create the point
 		var vanishing_point := vanishing_point_res.instantiate()

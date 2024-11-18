@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://wcbpnsm7gptu"]
+
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="1_3jelw"]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ModifySelection.gd" id="1_w6rs7"]
+
+[node name="ModifySelection" type="ConfirmationDialog"]
+title = "Expand selection"
+position = Vector2i(0, 36)
+size = Vector2i(260, 130)
+script = ExtResource("1_w6rs7")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 252.0
+offset_bottom = 81.0
+columns = 2
+
+[node name="WidthLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Width:"
+
+[node name="WidthSlider" type="TextureProgressBar" parent="GridContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+max_value = 25.0
+value = 1.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_3jelw")
+
+[node name="BrushLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Brush:"
+
+[node name="BrushOptionButton" type="OptionButton" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Diamond"
+popup/item_1/text = "Circle"
+popup/item_1/id = 1
+popup/item_2/text = "Square"
+popup/item_2/id = 2
+
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

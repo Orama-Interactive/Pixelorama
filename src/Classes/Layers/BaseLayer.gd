@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 class_name BaseLayer
 extends RefCounted
 ## Base class for layer properties. Different layer types extend from this class.
@@ -9,7 +10,9 @@ signal visibility_changed  ## Emits when [member visible] is changed.
 ## is the blend layer, and the bottom layer is the base layer.
 ## For more information, refer to: [url]https://en.wikipedia.org/wiki/Blend_modes[/url]
 enum BlendModes {
-	NORMAL,  ## The blend layer colors are simply placed on top of the base colors.
+	PASS_THROUGH = -2,  ## Only for group layers. Ignores group blending, like it doesn't exist.
+	NORMAL = 0,  ## The blend layer colors are simply placed on top of the base colors.
+	ERASE,  ## Subtracts the numerical value of alpha from the base alpha.
 	DARKEN,  ## Keeps the darker colors between the blend and the base layers.
 	MULTIPLY,  ## Multiplies the numerical values of the two colors, giving a darker result.
 	COLOR_BURN,  ## Darkens by increasing the contrast between the blend and base colors.
@@ -124,6 +127,17 @@ func is_locked_in_hierarchy() -> bool:
 	return locked
 
 
+## Returns [code]true[/code] if the layer has at least one ancestor
+## that does not have its blend mode set to pass through.
+func is_blended_by_ancestor() -> bool:
+	var is_blended := false
+	for ancestor in get_ancestors():
+		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
+			is_blended = true
+			break
+	return is_blended
+
+
 ## Returns an [Array] of [BaseLayer]s that are ancestors of this layer.
 ## If there are no ancestors, returns an empty array.
 func get_ancestors() -> Array[BaseLayer]:
@@ -139,6 +153,20 @@ func get_hierarchy_depth() -> int:
 	if is_instance_valid(parent):
 		return parent.get_hierarchy_depth() + 1
 	return 0
+
+
+## Returns the layer's top most parent that is responsible for its blending.
+## For example, if a layer belongs in a group with its blend mode set to anything but pass through,
+## and that group has no parents of its own, then that group gets returned.
+## If that group is a child of another non-pass through group,
+## then the grandparent group is returned, and so on.
+## If the layer has no ancestors, or if they are set to pass through mode, it returns self.
+func get_blender_ancestor() -> BaseLayer:
+	var blender := self
+	for ancestor in get_ancestors():
+		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
+			blender = ancestor
+	return blender
 
 
 ## Returns the path of the layer in the timeline as a [String].
@@ -189,9 +217,12 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 ## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
-func display_effects(cel: BaseCel) -> Image:
+func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	var image := Image.new()
-	image.copy_from(cel.get_image())
+	if is_instance_valid(image_override):
+		image.copy_from(image_override)
+	else:
+		image.copy_from(cel.get_image())
 	if not effects_enabled:
 		return image
 	var image_size := image.get_size()
@@ -200,8 +231,10 @@ func display_effects(cel: BaseCel) -> Image:
 			continue
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
-	# Inherit effects from the parents
+	# Inherit effects from the parents, if their blend mode is set to pass through
 	for ancestor in get_ancestors():
+		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
+			break
 		if not ancestor.effects_enabled:
 			continue
 		for effect in ancestor.effects:

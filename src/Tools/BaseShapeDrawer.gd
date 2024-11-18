@@ -3,7 +3,7 @@ extends "res://src/Tools/BaseDraw.gd"
 var _start := Vector2i.ZERO
 var _offset := Vector2i.ZERO
 var _dest := Vector2i.ZERO
-var _fill := false
+var _fill_inside := false
 var _drawing := false
 var _displace_origin := false
 var _thickness := 1
@@ -41,27 +41,27 @@ func update_indicator() -> void:
 
 
 func _on_FillCheckbox_toggled(button_pressed: bool) -> void:
-	_fill = button_pressed
+	_fill_inside = button_pressed
 	update_config()
 	save_config()
 
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
-	config["fill"] = _fill
+	config["fill_inside"] = _fill_inside
 	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
 	super.set_config(config)
-	_fill = config.get("fill", _fill)
+	_fill_inside = config.get("fill_inside", _fill_inside)
 	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
 	super.update_config()
-	$FillCheckbox.button_pressed = _fill
+	$FillCheckbox.button_pressed = _fill_inside
 	$ThicknessSlider.value = _thickness
 
 
@@ -89,7 +89,7 @@ func _input(event: InputEvent) -> void:
 func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if Input.is_action_pressed("draw_color_picker"):
+	if Input.is_action_pressed(&"draw_color_picker", true):
 		_picking_color = true
 		_pick_color(pos)
 		return
@@ -111,7 +111,7 @@ func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released draw_color_picker (Alt)
-		if Input.is_action_pressed("draw_color_picker"):
+		if Input.is_action_pressed(&"draw_color_picker", true):
 			_pick_color(pos)
 		return
 
@@ -237,7 +237,7 @@ func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 
 
 func _get_points(shape_size: Vector2i) -> Array[Vector2i]:
-	return _get_shape_points_filled(shape_size) if _fill else _get_shape_points(shape_size)
+	return _get_shape_points_filled(shape_size) if _fill_inside else _get_shape_points(shape_size)
 
 
 func _set_cursor_text(rect: Rect2i) -> void:

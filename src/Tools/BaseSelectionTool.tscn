@@ -1,34 +1,85 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd62qfjn380wf"]
+[gd_scene load_steps=10 format=3 uid="uid://bd62qfjn380wf"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/BaseSelectionTool.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://d267xalp3p7ru" path="res://assets/graphics/misc/check_plain.png" id="3_mtv71"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://bnc78807k1xjv" path="res://assets/graphics/misc/close.png" id="4_ad04n"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_gfv4x"]
+action = &"transformation_confirm"
+
+[sub_resource type="Shortcut" id="Shortcut_5gq73"]
+events = [SubResource("InputEventAction_gfv4x")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_nadbx"]
+action = &"transformation_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_04tjd"]
+events = [SubResource("InputEventAction_nadbx")]
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="ModeLabel" type="Label" parent="." index="2"]
+[node name="ConfirmButtons" type="HBoxContainer" parent="." index="2"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="ConfirmButtons" index="0"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_5gq73")
+
+[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/ConfirmButton" index="0" groups=["UIButtons"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mtv71")
+stretch_mode = 3
+
+[node name="CancelButton" type="Button" parent="ConfirmButtons" index="1"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_04tjd")
+
+[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/CancelButton" index="0" groups=["UIButtons"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ad04n")
+stretch_mode = 3
+
+[node name="ModeLabel" type="Label" parent="." index="3"]
 layout_mode = 2
 text = "Mode:"
 
-[node name="Modes" type="OptionButton" parent="." index="3"]
+[node name="Modes" type="OptionButton" parent="." index="4"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="PositionLabel" type="Label" parent="." index="4"]
+[node name="PositionLabel" type="Label" parent="." index="5"]
 layout_mode = 2
 text = "Position:"
 
-[node name="Position" parent="." index="5" instance=ExtResource("4")]
+[node name="Position" parent="." index="6" instance=ExtResource("4")]
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
-[node name="SizeLabel" type="Label" parent="." index="6"]
+[node name="SizeLabel" type="Label" parent="." index="7"]
 layout_mode = 2
 text = "Size:"
 
-[node name="Size" parent="." index="7" instance=ExtResource("4")]
+[node name="Size" parent="." index="8" instance=ExtResource("4")]
 layout_mode = 2
 value = Vector2(1, 1)
 min_value = Vector2(1, 1)
@@ -37,10 +88,12 @@ show_ratio = true
 prefix_x = "Width:"
 prefix_y = "Height:"
 
-[node name="Timer" type="Timer" parent="." index="8"]
+[node name="Timer" type="Timer" parent="." index="9"]
 wait_time = 0.2
 one_shot = true
 
+[connection signal="pressed" from="ConfirmButtons/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="ConfirmButtons/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="item_selected" from="Modes" to="." method="_on_Modes_item_selected"]
 [connection signal="value_changed" from="Position" to="." method="_on_Position_value_changed"]
 [connection signal="ratio_toggled" from="Size" to="." method="_on_Size_ratio_toggled"]

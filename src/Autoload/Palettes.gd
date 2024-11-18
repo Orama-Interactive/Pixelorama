@@ -4,7 +4,7 @@ signal palette_selected(palette_name: String)
 signal new_palette_created
 signal new_palette_imported
 
-enum SortOptions { NEW_PALETTE, REVERSE, HUE, SATURATION, VALUE, RED, GREEN, BLUE, ALPHA }
+enum SortOptions {NEW_PALETTE, REVERSE, HUE, SATURATION, VALUE, LIGHTNESS, RED, GREEN, BLUE, ALPHA}
 ## Presets for creating a new palette
 enum NewPalettePresetType {EMPTY, FROM_CURRENT_PALETTE, FROM_CURRENT_SPRITE, FROM_CURRENT_SELECTION}
 ## Color options when user creates a new palette from current sprite or selection
@@ -69,7 +69,7 @@ func save_palette(palette: Palette = current_palette) -> void:
 	palette.path = save_path
 	var err := palette.save_to_file()
 	if err != OK:
-		Global.notification_label("Failed to save palette")
+		Global.popup_error("Failed to save palette. Error code %s (%s)" % [err, error_string(err)])
 
 
 func copy_palette() -> void:
@@ -463,9 +463,9 @@ func _import_gpl(path: String, text: String) -> Palette:
 			comments += line.trim_prefix("#") + "\n"
 			# Some programs output palette name in a comment for old format
 			if line.begins_with("#Palette Name: "):
-				palette_name = line.replace("#Palette Name: ", "")
+				palette_name = line.replace("#Palette Name: ", "").strip_edges()
 		elif line.begins_with("Name: "):
-			palette_name = line.replace("Name: ", "")
+			palette_name = line.replace("Name: ", "").strip_edges()
 		elif line.begins_with("Columns: "):
 			# The width of the palette.
 			line = line.trim_prefix("Columns: ").strip_edges()

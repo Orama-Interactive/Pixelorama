@@ -49,6 +49,8 @@ func _ready() -> void:
 	sort_button_popup.add_item("Sort by saturation", Palettes.SortOptions.SATURATION)
 	sort_button_popup.add_item("Sort by value", Palettes.SortOptions.VALUE)
 	sort_button_popup.add_separator()
+	sort_button_popup.add_item("Sort by lightness", Palettes.SortOptions.LIGHTNESS)
+	sort_button_popup.add_separator()
 	sort_button_popup.add_item("Sort by red", Palettes.SortOptions.RED)
 	sort_button_popup.add_item("Sort by green", Palettes.SortOptions.GREEN)
 	sort_button_popup.add_item("Sort by blue", Palettes.SortOptions.BLUE)

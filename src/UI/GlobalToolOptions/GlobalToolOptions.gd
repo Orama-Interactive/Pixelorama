@@ -10,11 +10,24 @@ extends PanelContainer
 
 
 func _ready() -> void:
+	Tools.options_reset.connect(reset_options)
+	%HorizontalMirrorOptions.get_popup().id_pressed.connect(
+		_on_horizontal_mirror_options_id_pressed
+	)
+	%VerticalMirrorOptions.get_popup().id_pressed.connect(_on_vertical_mirror_options_id_pressed)
 	# Resize tools panel when window gets resized
 	get_tree().get_root().size_changed.connect(_on_resized)
 	horizontal_mirror.button_pressed = Tools.horizontal_mirror
 	vertical_mirror.button_pressed = Tools.vertical_mirror
 	pixel_perfect.button_pressed = Tools.pixel_perfect
+	alpha_lock.button_pressed = Tools.alpha_locked
+
+
+func reset_options() -> void:
+	horizontal_mirror.button_pressed = false
+	vertical_mirror.button_pressed = false
+	pixel_perfect.button_pressed = false
+	alpha_lock.button_pressed = false
 
 
 func _on_resized() -> void:
@@ -80,3 +93,23 @@ func _on_alpha_lock_toggled(toggled_on: bool) -> void:
 func _on_Dynamics_pressed() -> void:
 	var pos := dynamics.global_position + Vector2(0, 32)
 	dynamics_panel.popup_on_parent(Rect2(pos, dynamics_panel.size))
+
+
+func _on_horizontal_mirror_options_id_pressed(id: int) -> void:
+	var project := Global.current_project
+	if id == 0:
+		project.x_symmetry_point = project.size.x - 1
+	elif id == 1:
+		project.x_symmetry_point = Global.camera.camera_screen_center.x * 2
+	project.y_symmetry_axis.points[0].x = project.x_symmetry_point / 2 + 0.5
+	project.y_symmetry_axis.points[1].x = project.x_symmetry_point / 2 + 0.5
+
+
+func _on_vertical_mirror_options_id_pressed(id: int) -> void:
+	var project := Global.current_project
+	if id == 0:
+		project.y_symmetry_point = project.size.y - 1
+	elif id == 1:
+		project.y_symmetry_point = Global.camera.camera_screen_center.y * 2
+	project.x_symmetry_axis.points[0].y = project.y_symmetry_point / 2 + 0.5
+	project.x_symmetry_axis.points[1].y = project.y_symmetry_point / 2 + 0.5

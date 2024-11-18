@@ -12,6 +12,7 @@ signal project_about_to_switch  ## Emitted before a project is about to be switc
 signal project_switched  ## Emitted whenever you switch to some other project tab.
 signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
+signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
@@ -27,6 +28,7 @@ enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXP
 enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
 ## Enumeration of items present in the View Menu.
 enum ViewMenu {
+	CENTER_CANVAS,
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
 	GREYSCALE_VIEW,
@@ -63,12 +65,13 @@ enum EffectsMenu {
 	PALETTIZE,
 	PIXELIZE,
 	POSTERIZE,
+	GAUSSIAN_BLUR,
 	GRADIENT,
 	GRADIENT_MAP,
 	SHADER
 }
 ## Enumeration of items present in the Select Menu.
-enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
+enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE, MODIFY }
 ## Enumeration of items present in the Help Menu.
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN,
@@ -117,8 +120,6 @@ const HOME_SUBDIR_NAME := "pixelorama"
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
 ## The path of the directory where the UI layouts are being stored.
 const LAYOUT_DIR := "user://layouts"
-const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/ValueSliderV2.tscn")
-const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 
 ## It is path to the executable's base drectory.
 var root_directory := "."
@@ -134,7 +135,18 @@ var config_cache := ConfigFile.new()
 var loaded_locales: PackedStringArray = LANGUAGES_DICT.keys()
 
 var projects: Array[Project] = []  ## Array of currently open projects.
-var current_project: Project  ## The project that currently in focus.
+var current_project: Project:  ## The project that currently in focus.
+	set(value):
+		current_project = value
+		if top_menu_container.file_menu:
+			if current_project is ResourceProject:
+				top_menu_container.file_menu.set_item_disabled(FileMenu.SAVE_AS, true)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT, true)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT_AS, true)
+			else:
+				top_menu_container.file_menu.set_item_disabled(FileMenu.SAVE_AS, false)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT, false)
+				top_menu_container.file_menu.set_item_disabled(FileMenu.EXPORT_AS, false)
 ## The index of project that is currently in focus.
 var current_project_index := 0:
 	set(value):
@@ -153,6 +165,9 @@ var default_layouts: Array[DockableLayout] = [
 	preload("res://assets/layouts/Tallscreen.tres"),
 ]
 var layouts: Array[DockableLayout] = []
+var loaded_fonts: Array[Font] = [
+	ThemeDB.fallback_font, preload("res://assets/fonts/Roboto-Regular.ttf")
+]
 
 # Canvas related stuff
 ## Tells if the user allowed to draw on the canvas. Usually it is temporarily set to
@@ -196,6 +211,24 @@ var integer_zoom := false:
 
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
+var theme_font := loaded_fonts[theme_font_index]:
+	set(value):
+		theme_font = value
+		if is_instance_valid(control) and is_instance_valid(control.theme):
+			control.theme.default_font = theme_font
+## Found in Preferences. The index of the font used by the interface.
+var theme_font_index := 1:
+	set(value):
+		theme_font_index = value
+		if theme_font_index < loaded_fonts.size():
+			theme_font = loaded_fonts[theme_font_index]
+		else:
+			var available_font_names := get_available_font_names()
+			if theme_font_index < available_font_names.size():
+				var font_name := available_font_names[theme_font_index]
+				theme_font = find_font_from_name(font_name)
+			else:
+				theme_font = loaded_fonts[1]  # Fall back to Roboto if out of bounds
 ## Found in Preferences. The font size used by the interface.
 var font_size := 16
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
@@ -263,6 +296,11 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences.
+var share_options_between_tools := false:
+	set(value):
+		share_options_between_tools = value
+		Tools.attempt_config_share(MOUSE_BUTTON_LEFT)
 ## Found in Preferences. The left tool color.
 var left_tool_color := Color("0086cf"):
 	set(value):
@@ -465,13 +503,21 @@ var selection_border_color_2 := Color.BLACK:
 
 ## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save cpu usage.
 var pause_when_unfocused := true
-## Found in Preferences. The max fps, Pixelorama is allowed to use (does not limit fps if it is 0).
+## Found in Preferences. The maximum FPS value Pixelorama can reach. 0 means no limit.
 var fps_limit := 0:
 	set(value):
 		if value == fps_limit:
 			return
 		fps_limit = value
 		Engine.max_fps = fps_limit
+## Found in Preferences. The maximum amount of undo steps projects can use. 0 means no limit.
+var max_undo_steps := 0:
+	set(value):
+		if value == max_undo_steps:
+			return
+		max_undo_steps = value
+		for project in projects:
+			project.undo_redo.max_steps = max_undo_steps
 ## Found in Preferences. Affects the per_pixel_transparency project setting.
 ## If [code]true[/code], it allows for the window to be transparent.
 ## This affects performance, so keep it [code]false[/code] if you don't need it.
@@ -543,7 +589,10 @@ var draw_grid := false
 ## If [code]true[/code], the pixel grid is visible.
 var draw_pixel_grid := false
 ## If [code]true[/code], the rulers are visible.
-var show_rulers := true
+var show_rulers := true:
+	set(value):
+		show_rulers = value
+		get_tree().set_group(&"CanvasRulers", "visible", value)
 ## If [code]true[/code], the guides are visible.
 var show_guides := true
 ## If [code]true[/code], the mouse guides are visible.
@@ -583,40 +632,18 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 
 ## The control node (aka Main node). It has the [param Main.gd] script attached.
 @onready var control := get_tree().current_scene as Control
-
 ## The project tabs bar. It has the [param Tabs.gd] script attached.
 @onready var tabs: TabBar = control.find_child("TabBar")
 ## Contains viewport of the main canvas. It has the [param ViewportContainer.gd] script attached.
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
 ## The main canvas node. It has the [param Canvas.gd] script attached.
 @onready var canvas: Canvas = main_viewport.find_child("Canvas")
-## Contains viewport of the second canvas preview.
-## It has the [param ViewportContainer.gd] script attached.
-@onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
-## The panel container of the canvas preview.
-## It has the [param CanvasPreviewContainer.gd] script attached.
-@onready var canvas_preview_container: Container = control.find_child("Canvas Preview")
 ## The global tool options. It has the [param GlobalToolOptions.gd] script attached.
 @onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
-## Contains viewport of the canvas preview.
-@onready var small_preview_viewport: SubViewportContainer = canvas_preview_container.find_child(
-	"PreviewViewportContainer"
-)
 ## Camera of the main canvas.
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
-## Camera of the second canvas preview.
-@onready var camera2: CanvasCamera = second_viewport.find_child("Camera2D2")
-## Camera of the canvas preview.
-@onready var camera_preview: CanvasCamera = control.find_child("CameraPreview")
-## Array of cameras used in Pixelorama.
-@onready var cameras := [camera, camera2, camera_preview]
-## Horizontal ruler of the main canvas. It has the [param HorizontalRuler.gd] script attached.
-@onready var horizontal_ruler: BaseButton = control.find_child("HorizontalRuler")
-## Vertical ruler of the main canvas. It has the [param VerticalRuler.gd] script attached.
-@onready var vertical_ruler: BaseButton = control.find_child("VerticalRuler")
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
-
 ## The perspective editor. It has the [param PerspectiveEditor.gd] script attached.
 @onready var perspective_editor := control.find_child("Perspective Editor")
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
@@ -625,8 +652,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
-## The timer used by the animation timeline.
-@onready var animation_timer: Timer = animation_timeline.find_child("AnimationTimer")
 ## The container of frame buttons
 @onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
 ## The container of layer buttons
@@ -635,17 +660,12 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.
 @onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-
 ## The brushes popup dialog used to display brushes.
 ## It has the [param BrushesPopup.gd] script attached.
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")
 ## The patterns popup dialog used to display patterns
 ## It has the [param PatternsPopup.gd] script attached.
 @onready var patterns_popup: Popup = control.find_child("PatternsPopup")
-## Dialog used to navigate and open images and projects.
-@onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
-## Dialog used to save (.pxo) projects.
-@onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
 ## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
 ## An error dialog to show errors.
@@ -745,11 +765,13 @@ func _initialize_keychain() -> void:
 		&"drop_shadow": Keychain.InputAction.new("", "Effects menu", true),
 		&"adjust_hsv": Keychain.InputAction.new("", "Effects menu", true),
 		&"adjust_brightness_contrast": Keychain.InputAction.new("", "Effects menu", true),
+		&"gaussian_blur": Keychain.InputAction.new("", "Effects menu", true),
 		&"gradient": Keychain.InputAction.new("", "Effects menu", true),
 		&"gradient_map": Keychain.InputAction.new("", "Effects menu", true),
 		&"palettize": Keychain.InputAction.new("", "Effects menu", true),
 		&"pixelize": Keychain.InputAction.new("", "Effects menu", true),
 		&"posterize": Keychain.InputAction.new("", "Effects menu", true),
+		&"center_canvas": Keychain.InputAction.new("", "View menu", true),
 		&"mirror_view": Keychain.InputAction.new("", "View menu", true),
 		&"show_grid": Keychain.InputAction.new("", "View menu", true),
 		&"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),
@@ -765,9 +787,11 @@ func _initialize_keychain() -> void:
 		&"view_splash_screen": Keychain.InputAction.new("", "Help menu", true),
 		&"open_docs": Keychain.InputAction.new("", "Help menu", true),
 		&"issue_tracker": Keychain.InputAction.new("", "Help menu", true),
-		&"open_logs_folder": Keychain.InputAction.new("", "Help menu", true),
+		&"open_editor_data_folder": Keychain.InputAction.new("", "Help menu", true),
 		&"changelog": Keychain.InputAction.new("", "Help menu", true),
 		&"about_pixelorama": Keychain.InputAction.new("", "Help menu", true),
+		&"previous_project": Keychain.InputAction.new("", "Canvas"),
+		&"next_project": Keychain.InputAction.new("", "Canvas"),
 		&"zoom_in": Keychain.InputAction.new("", "Canvas"),
 		&"zoom_out": Keychain.InputAction.new("", "Canvas"),
 		&"camera_left": Keychain.InputAction.new("", "Canvas"),
@@ -817,6 +841,7 @@ func _initialize_keychain() -> void:
 		&"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_color_picker": Keychain.InputAction.new("Quick color picker", "Draw tools", false),
+		&"change_layer_automatically": Keychain.InputAction.new("", "Tools", false),
 		&"shape_perfect": Keychain.InputAction.new("", "Shape tools", false),
 		&"shape_center": Keychain.InputAction.new("", "Shape tools", false),
 		&"shape_displace": Keychain.InputAction.new("", "Shape tools", false),
@@ -940,8 +965,8 @@ func undo_or_redo(
 
 	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()
-	second_viewport.get_child(0).get_node("CanvasPreview").queue_redraw()
-	canvas_preview_container.canvas_preview.queue_redraw()
+	for canvas_preview in get_tree().get_nodes_in_group("CanvasPreviews"):
+		canvas_preview.queue_redraw()
 	if !project.has_changed:
 		if project == current_project:
 			get_window().title = get_window().title + "(*)"
@@ -1029,6 +1054,32 @@ func find_nearest_locale(locale: String) -> String:
 	return closest_locale
 
 
+func get_available_font_names() -> PackedStringArray:
+	var font_names := PackedStringArray()
+	for font in loaded_fonts:
+		var font_name := font.get_font_name()
+		if font_name in font_names:
+			continue
+		font_names.append(font_name)
+	for system_font_name in OS.get_system_fonts():
+		if system_font_name in font_names:
+			continue
+		font_names.append(system_font_name)
+	return font_names
+
+
+func find_font_from_name(font_name: String) -> Font:
+	for font in loaded_fonts:
+		if font.get_font_name() == font_name:
+			return font
+	for system_font_name in OS.get_system_fonts():
+		if system_font_name == font_name:
+			var system_font := SystemFont.new()
+			system_font.font_names = [font_name]
+			return system_font
+	return ThemeDB.fallback_font
+
+
 ## Used by undo/redo operations to store compressed images in memory.
 ## [param redo_data] and [param undo_data] are Dictionaries,
 ## with keys of type [Image] and [Dictionary] values, coming from [member Image.data].
@@ -1078,257 +1129,3 @@ func _save_to_override_file() -> void:
 	file.store_line("[display]\n")
 	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
 	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)
-
-
-func create_ui_for_shader_uniforms(
-	shader: Shader,
-	params: Dictionary,
-	parent_node: Control,
-	value_changed: Callable,
-	file_selected: Callable
-) -> void:
-	var code := shader.code.split("\n")
-	var uniforms: PackedStringArray = []
-	for line in code:
-		if line.begins_with("uniform"):
-			uniforms.append(line)
-
-	for uniform in uniforms:
-		# Example uniform:
-		# uniform float parameter_name : hint_range(0, 255) = 100.0;
-		var uniform_split := uniform.split("=")
-		var u_value := ""
-		if uniform_split.size() > 1:
-			u_value = uniform_split[1].replace(";", "").strip_edges()
-		else:
-			uniform_split[0] = uniform_split[0].replace(";", "").strip_edges()
-
-		var u_left_side := uniform_split[0].split(":")
-		var u_hint := ""
-		if u_left_side.size() > 1:
-			u_hint = u_left_side[1].strip_edges()
-			u_hint = u_hint.replace(";", "")
-
-		var u_init := u_left_side[0].split(" ")
-		var u_type := u_init[1]
-		var u_name := u_init[2]
-		var humanized_u_name := Keychain.humanize_snake_case(u_name) + ":"
-
-		if u_type == "float" or u_type == "int":
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var slider := ValueSlider.new()
-			slider.allow_greater = true
-			slider.allow_lesser = true
-			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var min_value := 0.0
-			var max_value := 255.0
-			var step := 1.0
-			var range_values_array: PackedStringArray
-			if "hint_range" in u_hint:
-				var range_values: String = u_hint.replace("hint_range(", "")
-				range_values = range_values.replace(")", "").strip_edges()
-				range_values_array = range_values.split(",")
-
-			if u_type == "float":
-				if range_values_array.size() >= 1:
-					min_value = float(range_values_array[0])
-				else:
-					min_value = 0.01
-
-				if range_values_array.size() >= 2:
-					max_value = float(range_values_array[1])
-
-				if range_values_array.size() >= 3:
-					step = float(range_values_array[2])
-				else:
-					step = 0.01
-
-				if u_value != "":
-					slider.value = float(u_value)
-			else:
-				if range_values_array.size() >= 1:
-					min_value = int(range_values_array[0])
-
-				if range_values_array.size() >= 2:
-					max_value = int(range_values_array[1])
-
-				if range_values_array.size() >= 3:
-					step = int(range_values_array[2])
-
-				if u_value != "":
-					slider.value = int(u_value)
-			if params.has(u_name):
-				slider.value = params[u_name]
-			else:
-				params[u_name] = slider.value
-			slider.min_value = min_value
-			slider.max_value = max_value
-			slider.step = step
-			slider.value_changed.connect(value_changed.bind(u_name))
-			slider.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(slider)
-			parent_node.add_child(hbox)
-		elif u_type == "vec2" or u_type == "ivec2" or u_type == "uvec2":
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var vector2 := _vec2str_to_vector2(u_value)
-			var slider := VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
-			slider.show_ratio = true
-			slider.allow_greater = true
-			if u_type != "uvec2":
-				slider.allow_lesser = true
-			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			slider.value = vector2
-			if params.has(u_name):
-				slider.value = params[u_name]
-			else:
-				params[u_name] = slider.value
-			slider.value_changed.connect(value_changed.bind(u_name))
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(slider)
-			parent_node.add_child(hbox)
-		elif u_type == "vec4":
-			if "source_color" in u_hint:
-				var label := Label.new()
-				label.text = humanized_u_name
-				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				var color := _vec4str_to_color(u_value)
-				var color_button := ColorPickerButton.new()
-				color_button.custom_minimum_size = Vector2(20, 20)
-				color_button.color = color
-				if params.has(u_name):
-					color_button.color = params[u_name]
-				else:
-					params[u_name] = color_button.color
-				color_button.color_changed.connect(value_changed.bind(u_name))
-				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				color_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				var hbox := HBoxContainer.new()
-				hbox.add_child(label)
-				hbox.add_child(color_button)
-				parent_node.add_child(hbox)
-		elif u_type == "sampler2D":
-			if u_name == "selection":
-				continue
-			if u_name == "palette_texture":
-				var palette := Palettes.current_palette
-				var palette_texture := ImageTexture.create_from_image(palette.convert_to_image())
-				value_changed.call(palette_texture, u_name)
-				Palettes.palette_selected.connect(
-					func(_name): _shader_change_palette(value_changed, u_name)
-				)
-				palette.data_changed.connect(
-					func(): _shader_update_palette_texture(palette, value_changed, u_name)
-				)
-				continue
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			if u_name.begins_with("gradient_"):
-				var gradient_edit := GRADIENT_EDIT_TSCN.instantiate() as GradientEditNode
-				gradient_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				if params.has(u_name) and params[u_name] is GradientTexture2D:
-					gradient_edit.set_gradient_texture(params[u_name])
-				else:
-					params[u_name] = gradient_edit.texture
-				# This needs to be call_deferred because GradientTexture2D gets updated next frame.
-				# Without this, the texture is purple.
-				value_changed.call_deferred(gradient_edit.texture, u_name)
-				gradient_edit.updated.connect(
-					func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
-				)
-				hbox.add_child(gradient_edit)
-			else:
-				var file_dialog := FileDialog.new()
-				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-				file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-				file_dialog.size = Vector2(384, 281)
-				file_dialog.file_selected.connect(file_selected.bind(u_name))
-				file_dialog.use_native_dialog = use_native_file_dialogs
-				var button := Button.new()
-				button.text = "Load texture"
-				button.pressed.connect(file_dialog.popup_centered)
-				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				hbox.add_child(button)
-				parent_node.add_child(file_dialog)
-			parent_node.add_child(hbox)
-
-		elif u_type == "bool":
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var checkbox := CheckBox.new()
-			checkbox.text = "On"
-			if u_value == "true":
-				checkbox.button_pressed = true
-			if params.has(u_name):
-				checkbox.button_pressed = params[u_name]
-			else:
-				params[u_name] = checkbox.button_pressed
-			checkbox.toggled.connect(value_changed.bind(u_name))
-			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(checkbox)
-			parent_node.add_child(hbox)
-
-
-func _vec2str_to_vector2(vec2: String) -> Vector2:
-	vec2 = vec2.replace("uvec2", "vec2")
-	vec2 = vec2.replace("ivec2", "vec2")
-	vec2 = vec2.replace("vec2(", "")
-	vec2 = vec2.replace(")", "")
-	var vec_values := vec2.split(",")
-	if vec_values.size() == 0:
-		return Vector2.ZERO
-	var y := float(vec_values[0])
-	if vec_values.size() == 2:
-		y = float(vec_values[1])
-	var vector2 := Vector2(float(vec_values[0]), y)
-	return vector2
-
-
-func _vec4str_to_color(vec4: String) -> Color:
-	vec4 = vec4.replace("vec4(", "")
-	vec4 = vec4.replace(")", "")
-	var rgba_values := vec4.split(",")
-	var red := float(rgba_values[0])
-
-	var green := float(rgba_values[0])
-	if rgba_values.size() >= 2:
-		green = float(rgba_values[1])
-
-	var blue := float(rgba_values[0])
-	if rgba_values.size() >= 3:
-		blue = float(rgba_values[2])
-
-	var alpha := float(rgba_values[0])
-	if rgba_values.size() == 4:
-		alpha = float(rgba_values[3])
-	var color := Color(red, green, blue, alpha)
-	return color
-
-
-func _shader_change_palette(value_changed: Callable, parameter_name: String) -> void:
-	var palette := Palettes.current_palette
-	_shader_update_palette_texture(palette, value_changed, parameter_name)
-	#if not palette.data_changed.is_connected(_shader_update_palette_texture):
-	palette.data_changed.connect(
-		func(): _shader_update_palette_texture(palette, value_changed, parameter_name)
-	)
-
-
-func _shader_update_palette_texture(
-	palette: Palette, value_changed: Callable, parameter_name: String
-) -> void:
-	value_changed.call(ImageTexture.create_from_image(palette.convert_to_image()), parameter_name)

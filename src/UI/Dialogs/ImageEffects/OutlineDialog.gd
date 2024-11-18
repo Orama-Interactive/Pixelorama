@@ -31,7 +31,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	var params := {
 		"color": color,
 		"width": anim_thickness,
-		"pattern": pattern,
+		"brush": pattern,
 		"inside": inside_image,
 		"selection": selection_tex
 	}

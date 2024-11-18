@@ -4,7 +4,7 @@ const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v101---2024-08-05"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v104---2024-10-25"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -17,6 +17,7 @@ var zen_mode := false
 var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
 var project_properties_dialog := Dialog.new("res://src/UI/Dialogs/ProjectProperties.tscn")
 var preferences_dialog := Dialog.new("res://src/Preferences/PreferencesDialog.tscn")
+var modify_selection := Dialog.new("res://src/UI/Dialogs/ModifySelection.tscn")
 var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetImage.tscn")
 var scale_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn")
 var resize_canvas_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn")
@@ -30,6 +31,7 @@ var hsv_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn")
 var adjust_brightness_saturation_dialog := Dialog.new(
 	"res://src/UI/Dialogs/ImageEffects/BrightnessContrastDialog.tscn"
 )
+var gaussian_blur_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GaussianBlur.tscn")
 var gradient_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn")
 var gradient_map_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientMapDialog.tscn")
 var palettize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PalettizeDialog.tscn")
@@ -53,6 +55,7 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
 @onready var tile_mode_submenu := PopupMenu.new()
+@onready var selection_modify_submenu := PopupMenu.new()
 @onready var snap_to_submenu := PopupMenu.new()
 @onready var panels_submenu := PopupMenu.new()
 @onready var layouts_submenu := PopupMenu.new()
@@ -95,6 +98,19 @@ func _ready() -> void:
 	_setup_effects_menu()
 	_setup_select_menu()
 	_setup_help_menu()
+
+
+func _input(event: InputEvent) -> void:
+	# Workaround for https://github.com/Orama-Interactive/Pixelorama/issues/1070
+	if event is InputEventMouseButton and event.pressed:
+		file_menu.activate_item_by_event(event)
+		edit_menu.activate_item_by_event(event)
+		select_menu.activate_item_by_event(event)
+		image_menu.activate_item_by_event(event)
+		effects_menu.activate_item_by_event(event)
+		view_menu.activate_item_by_event(event)
+		window_menu.activate_item_by_event(event)
+		help_menu.activate_item_by_event(event)
 
 
 func _notification(what: int) -> void:
@@ -205,6 +221,7 @@ func _setup_edit_menu() -> void:
 func _setup_view_menu() -> void:
 	# Order as in Global.ViewMenu enum
 	var view_menu_items := {
+		"Center Canvas": "center_canvas",
 		"Tile Mode": "",
 		"Tile Mode Offsets": "",
 		"Grayscale View": "",
@@ -225,6 +242,8 @@ func _setup_view_menu() -> void:
 			_setup_snap_to_submenu(item)
 		elif item == "Tile Mode Offsets":
 			view_menu.add_item(item, i)
+		elif item == "Center Canvas":
+			_set_menu_shortcut(view_menu_items[item], view_menu, i, item)
 		else:
 			_set_menu_shortcut(view_menu_items[item], view_menu, i, item, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
@@ -405,6 +424,7 @@ func _setup_effects_menu() -> void:
 		"Palettize": "palettize",
 		"Pixelize": "pixelize",
 		"Posterize": "posterize",
+		"Gaussian Blur": "gaussian_blur",
 		"Gradient": "gradient",
 		"Gradient Map": "gradient_map",
 		# "Shader": ""
@@ -422,15 +442,28 @@ func _setup_select_menu() -> void:
 		"All": "select_all",
 		"Clear": "clear_selection",
 		"Invert": "invert_selection",
-		"Tile Mode": ""
+		"Tile Mode": "",
+		"Modify": ""
 	}
 	for i in select_menu_items.size():
 		var item: String = select_menu_items.keys()[i]
 		if item == "Tile Mode":
 			select_menu.add_check_item(item, i)
+		elif item == "Modify":
+			_setup_selection_modify_submenu(item)
 		else:
 			_set_menu_shortcut(select_menu_items[item], select_menu, i, item)
 	select_menu.id_pressed.connect(select_menu_id_pressed)
+
+
+func _setup_selection_modify_submenu(item: String) -> void:
+	selection_modify_submenu.set_name("selection_modify_submenu")
+	selection_modify_submenu.add_item("Expand")
+	selection_modify_submenu.add_item("Shrink")
+	selection_modify_submenu.add_item("Border")
+	selection_modify_submenu.id_pressed.connect(_selection_modify_submenu_id_pressed)
+	select_menu.add_child(selection_modify_submenu)
+	select_menu.add_submenu_item(item, selection_modify_submenu.get_name())
 
 
 func _setup_help_menu() -> void:
@@ -533,7 +566,7 @@ func _open_project_file() -> void:
 	if OS.get_name() == "Web":
 		Html5FileExchange.load_image()
 	else:
-		_popup_dialog(Global.open_sprites_dialog)
+		_popup_dialog(Global.control.open_sprite_dialog)
 		Global.control.opensprite_file_selected = false
 
 
@@ -545,6 +578,12 @@ func _on_open_last_project_file_menu_option_pressed() -> void:
 
 
 func _save_project_file() -> void:
+	if Global.current_project is ResourceProject:
+		Global.current_project.resource_updated.emit(Global.current_project)
+		if Global.current_project.has_changed:
+			Global.current_project.has_changed = false
+		Global.notification_label("Resource Updated")
+		return
 	var path: String = Global.current_project.save_path
 	if path == "":
 		Global.control.show_save_dialog()
@@ -591,6 +630,8 @@ func edit_menu_id_pressed(id: int) -> void:
 
 func view_menu_id_pressed(id: int) -> void:
 	match id:
+		Global.ViewMenu.CENTER_CANVAS:
+			Global.camera.offset = Global.current_project.size / 2
 		Global.ViewMenu.TILE_MODE_OFFSETS:
 			_popup_dialog(get_tree().current_scene.tile_mode_offsets_dialog)
 		Global.ViewMenu.GREYSCALE_VIEW:
@@ -639,6 +680,11 @@ func _tile_mode_submenu_id_pressed(id: Tiles.MODE) -> void:
 	Global.canvas.pixel_grid.queue_redraw()
 	Global.canvas.grid.queue_redraw()
 	get_tree().current_scene.tile_mode_offsets_dialog.change_mask()
+
+
+func _selection_modify_submenu_id_pressed(id: int) -> void:
+	modify_selection.popup()
+	modify_selection.node.type = id
 
 
 func _snap_to_submenu_id_pressed(id: int) -> void:
@@ -727,8 +773,6 @@ func _toggle_show_pixel_grid() -> void:
 func _toggle_show_rulers() -> void:
 	Global.show_rulers = !Global.show_rulers
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, Global.show_rulers)
-	Global.horizontal_ruler.visible = Global.show_rulers
-	Global.vertical_ruler.visible = Global.show_rulers
 
 
 func _toggle_show_guides() -> void:
@@ -811,6 +855,8 @@ func effects_menu_id_pressed(id: int) -> void:
 			hsv_dialog.popup()
 		Global.EffectsMenu.BRIGHTNESS_SATURATION:
 			adjust_brightness_saturation_dialog.popup()
+		Global.EffectsMenu.GAUSSIAN_BLUR:
+			gaussian_blur_dialog.popup()
 		Global.EffectsMenu.GRADIENT:
 			gradient_dialog.popup()
 		Global.EffectsMenu.GRADIENT_MAP:

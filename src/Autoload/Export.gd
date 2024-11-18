@@ -46,8 +46,13 @@ var custom_exporter_generators := {}
 var current_tab := ExportTab.IMAGE
 ## All frames and their layers processed/blended into images
 var processed_images: Array[ProcessedImage] = []
+## Dictionary of [Frame] and [Image] that contains all of the blended frames.
+## Changes when [method cache_blended_frames] is called.
+var blended_frames := {}
 var export_json := false
 var split_layers := false
+var trim_images := false
+var erase_unselected_area := false
 
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -59,6 +64,7 @@ var export_layers := 0
 var number_of_frames := 1
 var direction := AnimationDirection.FORWARD
 var resize := 100
+var save_quality := 0.75  ## Used when saving jpg and webp images. Goes from 0 to 1.
 var interpolation := Image.INTERPOLATE_NEAREST
 var include_tag_in_filename := false
 var new_dir_for_each_frame_tag := false  ## We don't need to store this after export
@@ -135,16 +141,29 @@ func remove_custom_file_format(id: int) -> void:
 
 
 func external_export(project := Global.current_project) -> void:
+	cache_blended_frames(project)
 	process_data(project)
 	export_processed_images(true, Global.export_dialog, project)
 
 
 func process_data(project := Global.current_project) -> void:
+	var frames := _calculate_frames(project)
+	if frames.size() > blended_frames.size():
+		cache_blended_frames(project)
 	match current_tab:
 		ExportTab.IMAGE:
 			process_animation(project)
 		ExportTab.SPRITESHEET:
 			process_spritesheet(project)
+
+
+func cache_blended_frames(project := Global.current_project) -> void:
+	blended_frames.clear()
+	var frames := _calculate_frames(project)
+	for frame in frames:
+		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		_blend_layers(image, frame)
+		blended_frames[frame] = image
 
 
 func process_spritesheet(project := Global.current_project) -> void:
@@ -250,7 +269,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.y = project.size.y * tag_origins[0]
 				origin.x = 0
 				tag_origins[0] += 1
-		_blend_layers(whole_image, frame, origin)
+		whole_image.blend_rect(blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin)
 
 	processed_images.append(ProcessedImage.new(whole_image, 0))
 
@@ -269,7 +288,16 @@ func process_animation(project := Global.current_project) -> void:
 				)
 		else:
 			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			_blend_layers(image, frame)
+			image.copy_from(blended_frames[frame])
+			if erase_unselected_area and project.has_selection:
+				var crop := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+				var selection_image = project.selection_map.return_cropped_copy(project.size)
+				crop.blit_rect_mask(
+					image, selection_image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO
+				)
+				image.copy_from(crop)
+			if trim_images:
+				image = image.get_region(image.get_used_rect())
 			var duration := frame.duration * (1.0 / project.fps)
 			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
 
@@ -438,7 +466,7 @@ func export_processed_images(
 					)
 				elif project.file_format == FileFormat.JPEG:
 					JavaScriptBridge.download_buffer(
-						processed_images[i].image.save_jpg_to_buffer(),
+						processed_images[i].image.save_jpg_to_buffer(save_quality),
 						export_paths[i].get_file(),
 						"image/jpeg"
 					)
@@ -450,7 +478,7 @@ func export_processed_images(
 				elif project.file_format == FileFormat.WEBP:
 					err = processed_images[i].image.save_webp(export_paths[i])
 				elif project.file_format == FileFormat.JPEG:
-					err = processed_images[i].image.save_jpg(export_paths[i])
+					err = processed_images[i].image.save_jpg(export_paths[i], save_quality)
 				if err != OK:
 					Global.popup_error(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]

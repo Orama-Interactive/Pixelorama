@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Welsh\n"
 "Language: cy_GB\n"
-"PO-Revision-Date: 2024-08-03 00:15\n"
+"PO-Revision-Date: 2024-10-17 14:11\n"
 
 msgid "OK"
 msgstr ""
@@ -229,6 +229,10 @@ msgid "Flip Vertical"
 msgstr ""
 
 msgid "Preferences"
+msgstr ""
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
 msgstr ""
 
 msgid "Tile Mode"
@@ -555,6 +559,10 @@ msgstr ""
 msgid "Resize:"
 msgstr ""
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr ""
+
 msgid "Cancel Export"
 msgstr ""
 
@@ -835,6 +843,10 @@ msgstr ""
 msgid "Display scale:"
 msgstr ""
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr ""
@@ -901,6 +913,15 @@ msgstr ""
 msgid "Background color:"
 msgstr ""
 
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr ""
+
 msgid "Left tool color:"
 msgstr ""
 
@@ -949,12 +970,15 @@ msgstr ""
 msgid "Modify Alpha Channel"
 msgstr ""
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr ""
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr ""
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr ""
 
@@ -965,6 +989,26 @@ msgid "Offset Y:"
 msgstr ""
 
 msgid "Shadow color:"
+msgstr ""
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr ""
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr ""
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr ""
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr ""
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
 msgstr ""
 
 msgid "Gradient"
@@ -1026,7 +1070,7 @@ msgstr ""
 msgid "Angle:"
 msgstr ""
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
@@ -1096,11 +1140,11 @@ msgstr ""
 msgid "Steps:"
 msgstr ""
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr ""
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr ""
 
@@ -1660,6 +1704,10 @@ msgstr ""
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
 
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr ""
+
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr ""
@@ -1936,10 +1984,18 @@ msgstr ""
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
 
+msgid "Vertical"
+msgstr ""
+
 msgid "Enable vertical mirrored drawing"
 msgstr ""
 
-msgid "Vertical"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
 msgstr ""
 
 msgid "Current frame:"
@@ -1957,10 +2013,10 @@ msgstr ""
 msgid "Go to the previous frame"
 msgstr ""
 
-msgid "Play the animation backwards (from end to beginning)"
+msgid "Play the animation backwards"
 msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
+msgid "Play the animation forward"
 msgstr ""
 
 msgid "Go to the next frame"
@@ -2151,6 +2207,10 @@ msgstr ""
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
 msgstr ""
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
@@ -2457,6 +2517,26 @@ msgstr ""
 msgid "A default background color of a new image"
 msgstr ""
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
+
 msgid "Lock aspect ratio"
 msgstr ""
 
@@ -2622,6 +2702,22 @@ msgstr ""
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
+msgstr ""
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr ""
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
 msgstr ""
 
 msgid "Close"
@@ -2966,6 +3062,10 @@ msgstr ""
 msgid "Text:"
 msgstr ""
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr ""
@@ -2977,10 +3077,17 @@ msgstr ""
 msgid "Horizontal alignment:"
 msgstr ""
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr ""
 
 msgid "Right"
+msgstr ""
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
 msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.

@@ -3,11 +3,13 @@ extends Panel
 signal animation_started(forward: bool)
 signal animation_finished
 
+enum LoopType { NO, CYCLE, PINGPONG }
+
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 
 var is_animation_running := false
-var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
+var animation_loop := LoopType.CYCLE
 var animation_forward := true
 var first_frame := 0
 var last_frame := 0
@@ -24,11 +26,16 @@ var layer_effect_settings: AcceptDialog:
 			layer_effect_settings = load(LAYER_FX_SCENE_PATH).instantiate()
 			add_child(layer_effect_settings)
 		return layer_effect_settings
+var global_layer_visibility := true
+var global_layer_lock := false
+var global_layer_expand := true
 
-@onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
+@onready var animation_timer := $AnimationTimer as Timer
+@onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer.
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
+@onready var layer_header_container := %LayerHeaderContainer as HBoxContainer
 @onready var add_layer_list := %AddLayerList as MenuButton
 @onready var remove_layer := %RemoveLayer as Button
 @onready var move_up_layer := %MoveUpLayer as Button
@@ -40,6 +47,7 @@ var layer_effect_settings: AcceptDialog:
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
+@onready var layer_frame_header_h_split := %LayerFrameHeaderHSplit as HSplitContainer
 @onready var delete_frame := %DeleteFrame as Button
 @onready var move_frame_left := %MoveFrameLeft as Button
 @onready var move_frame_right := %MoveFrameRight as Button
@@ -57,44 +65,19 @@ func _ready() -> void:
 	Global.control.find_child("LayerProperties").layer_property_changed.connect(_update_layer_ui)
 	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
 	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
+	layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
 	cel_size = min_cel_size
 	cel_size_slider.min_value = min_cel_size
 	cel_size_slider.max_value = max_cel_size
 	cel_size_slider.value = cel_size
 	add_layer_list.get_popup().id_pressed.connect(add_layer)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
-	Global.animation_timer.wait_time = 1 / Global.current_project.fps
+	animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
-
-	# Fill the blend modes OptionButton with items
-	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
-	blend_modes_button.add_separator("Darken")
-	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
-	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
-	blend_modes_button.add_item("Color burn", BaseLayer.BlendModes.COLOR_BURN)
-	blend_modes_button.add_item("Linear burn", BaseLayer.BlendModes.LINEAR_BURN)
-	blend_modes_button.add_separator("Lighten")
-	blend_modes_button.add_item("Lighten", BaseLayer.BlendModes.LIGHTEN)
-	blend_modes_button.add_item("Screen", BaseLayer.BlendModes.SCREEN)
-	blend_modes_button.add_item("Color dodge", BaseLayer.BlendModes.COLOR_DODGE)
-	blend_modes_button.add_item("Add", BaseLayer.BlendModes.ADD)
-	blend_modes_button.add_separator("Contrast")
-	blend_modes_button.add_item("Overlay", BaseLayer.BlendModes.OVERLAY)
-	blend_modes_button.add_item("Soft light", BaseLayer.BlendModes.SOFT_LIGHT)
-	blend_modes_button.add_item("Hard light", BaseLayer.BlendModes.HARD_LIGHT)
-	blend_modes_button.add_separator("Inversion")
-	blend_modes_button.add_item("Difference", BaseLayer.BlendModes.DIFFERENCE)
-	blend_modes_button.add_item("Exclusion", BaseLayer.BlendModes.EXCLUSION)
-	blend_modes_button.add_item("Subtract", BaseLayer.BlendModes.SUBTRACT)
-	blend_modes_button.add_item("Divide", BaseLayer.BlendModes.DIVIDE)
-	blend_modes_button.add_separator("Component")
-	blend_modes_button.add_item("Hue", BaseLayer.BlendModes.HUE)
-	blend_modes_button.add_item("Saturation", BaseLayer.BlendModes.SATURATION)
-	blend_modes_button.add_item("Color", BaseLayer.BlendModes.COLOR)
-	blend_modes_button.add_item("Luminosity", BaseLayer.BlendModes.LUMINOSITY)
-
-	# Config loading
+	_fill_blend_modes_option_button()
+	# Config loading.
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
+	layer_frame_header_h_split.split_offset = layer_frame_h_split.split_offset
 	cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
 	var past_rate = Global.config_cache.get_value(
 		"timeline", "past_rate", Global.onion_skinning_past_rate
@@ -111,12 +94,16 @@ func _ready() -> void:
 	var future_above = Global.config_cache.get_value(
 		"timeline", "future_above_canvas", future_above_canvas
 	)
+	var onion_skinning_opacity = Global.config_cache.get_value(
+		"timeline", "onion_skinning_opacity", 0.6
+	)
+	%OnionSkinningOpacity.value = onion_skinning_opacity * 100.0
 	%PastOnionSkinning.value = past_rate
 	%FutureOnionSkinning.value = future_rate
 	%BlueRedMode.button_pressed = blue_red
 	%PastPlacement.select(0 if past_above else 1)
 	%FuturePlacement.select(0 if future_above else 1)
-	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
+	# Emit signals that were supposed to be emitted.
 	%PastPlacement.item_selected.emit(0 if past_above else 1)
 	%FuturePlacement.item_selected.emit(0 if future_above else 1)
 	Global.cel_switched.connect(_cel_switched)
@@ -131,6 +118,7 @@ func _notification(what: int) -> void:
 		await get_tree().process_frame
 		if is_instance_valid(layer_settings_container):
 			layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
+			layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
 
 
 func _input(event: InputEvent) -> void:
@@ -153,6 +141,22 @@ func _input(event: InputEvent) -> void:
 	if timeline_rect.has_point(mouse_pos):
 		if Input.is_key_pressed(KEY_CTRL):
 			cel_size += (2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out")))
+			get_viewport().set_input_as_handled()
+
+
+func reset_settings() -> void:
+	cel_size = 36
+	%OnionSkinningOpacity.value = 60.0
+	%PastOnionSkinning.value = 1
+	%FutureOnionSkinning.value = 1
+	%BlueRedMode.button_pressed = false
+	%PastPlacement.select(0)
+	%FuturePlacement.select(0)
+	%PastPlacement.item_selected.emit(0)
+	%FuturePlacement.item_selected.emit(0)
+	for onion_skinning_node: Node2D in get_tree().get_nodes_in_group("canvas_onion_skinning"):
+		onion_skinning_node.opacity = 0.6
+		onion_skinning_node.queue_redraw()
 
 
 func _get_minimum_size() -> Vector2:
@@ -220,6 +224,49 @@ func _cel_size_changed(value: int) -> void:
 		tag_c.update_position_and_size()
 
 
+## Fill the blend modes OptionButton with items
+func _fill_blend_modes_option_button() -> void:
+	blend_modes_button.clear()
+	var selected_layers_are_groups := true
+	if Global.current_project.layers.size() == 0:
+		selected_layers_are_groups = false
+	else:
+		for idx_pair in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[idx_pair[1]]
+			if not layer is GroupLayer:
+				selected_layers_are_groups = false
+				break
+	if selected_layers_are_groups:
+		# Special blend mode that appears only when group layers are selected
+		blend_modes_button.add_item("Pass through", BaseLayer.BlendModes.PASS_THROUGH)
+	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
+	blend_modes_button.add_item("Erase", BaseLayer.BlendModes.ERASE)
+	blend_modes_button.add_separator("Darken")
+	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
+	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
+	blend_modes_button.add_item("Color burn", BaseLayer.BlendModes.COLOR_BURN)
+	blend_modes_button.add_item("Linear burn", BaseLayer.BlendModes.LINEAR_BURN)
+	blend_modes_button.add_separator("Lighten")
+	blend_modes_button.add_item("Lighten", BaseLayer.BlendModes.LIGHTEN)
+	blend_modes_button.add_item("Screen", BaseLayer.BlendModes.SCREEN)
+	blend_modes_button.add_item("Color dodge", BaseLayer.BlendModes.COLOR_DODGE)
+	blend_modes_button.add_item("Add", BaseLayer.BlendModes.ADD)
+	blend_modes_button.add_separator("Contrast")
+	blend_modes_button.add_item("Overlay", BaseLayer.BlendModes.OVERLAY)
+	blend_modes_button.add_item("Soft light", BaseLayer.BlendModes.SOFT_LIGHT)
+	blend_modes_button.add_item("Hard light", BaseLayer.BlendModes.HARD_LIGHT)
+	blend_modes_button.add_separator("Inversion")
+	blend_modes_button.add_item("Difference", BaseLayer.BlendModes.DIFFERENCE)
+	blend_modes_button.add_item("Exclusion", BaseLayer.BlendModes.EXCLUSION)
+	blend_modes_button.add_item("Subtract", BaseLayer.BlendModes.SUBTRACT)
+	blend_modes_button.add_item("Divide", BaseLayer.BlendModes.DIVIDE)
+	blend_modes_button.add_separator("Component")
+	blend_modes_button.add_item("Hue", BaseLayer.BlendModes.HUE)
+	blend_modes_button.add_item("Saturation", BaseLayer.BlendModes.SATURATION)
+	blend_modes_button.add_item("Color", BaseLayer.BlendModes.COLOR)
+	blend_modes_button.add_item("Luminosity", BaseLayer.BlendModes.LUMINOSITY)
+
+
 func _on_blend_modes_item_selected(index: int) -> void:
 	var project := Global.current_project
 	var current_mode := blend_modes_button.get_item_id(index)
@@ -231,12 +278,17 @@ func _on_blend_modes_item_selected(index: int) -> void:
 		project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(_update_layer_ui)
-	project.undo_redo.add_do_method(Global.canvas.draw_layers)
+	project.undo_redo.add_do_method(_update_layers)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_undo_method(_update_layer_ui)
-	project.undo_redo.add_undo_method(Global.canvas.draw_layers)
+	project.undo_redo.add_undo_method(_update_layers)
 	project.undo_redo.commit_action()
 	SteamManager.set_achievement("ACH_BLEND_IN")
+
+
+func _update_layers() -> void:
+	Global.canvas.update_all_layers = true
+	Global.canvas.draw_layers()
 
 
 func add_frame() -> void:
@@ -570,16 +622,16 @@ func _on_timeline_settings_button_pressed() -> void:
 func _on_LoopAnim_pressed() -> void:
 	var texture_button: TextureRect = loop_animation_button.get_child(0)
 	match animation_loop:
-		0:  # Make it loop
-			animation_loop = 1
+		LoopType.NO:
+			animation_loop = LoopType.CYCLE
 			Global.change_button_texturerect(texture_button, "loop.png")
 			loop_animation_button.tooltip_text = "Cycle loop"
-		1:  # Make it ping-pong
-			animation_loop = 2
+		LoopType.CYCLE:
+			animation_loop = LoopType.PINGPONG
 			Global.change_button_texturerect(texture_button, "loop_pingpong.png")
 			loop_animation_button.tooltip_text = "Ping-pong loop"
-		2:  # Make it stop
-			animation_loop = 0
+		LoopType.PINGPONG:
+			animation_loop = LoopType.NO
 			Global.change_button_texturerect(texture_button, "loop_none.png")
 			loop_animation_button.tooltip_text = "No loop"
 
@@ -605,7 +657,7 @@ func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
 		play_forward.button_pressed = false
 		play_backwards.button_pressed = false
-		Global.animation_timer.stop()
+		animation_timer.stop()
 		return
 
 	Global.canvas.selection.transform_content_confirm()
@@ -615,26 +667,24 @@ func _on_AnimationTimer_timeout() -> void:
 		if project.current_frame < last_frame:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame + 1, -1)
-			Global.animation_timer.wait_time = (
-				project.frames[project.current_frame].duration * (1 / fps)
-			)
-			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle
+			animation_timer.wait_time = project.frames[project.current_frame].duration * (1.0 / fps)
+			animation_timer.start()  # Change the frame, change the wait time and start a cycle
 		else:
 			match animation_loop:
-				0:  # No loop
+				LoopType.NO:
 					play_forward.button_pressed = false
 					play_backwards.button_pressed = false
-					Global.animation_timer.stop()
+					animation_timer.stop()
 					animation_finished.emit()
 					is_animation_running = false
-				1:  # Cycle loop
+				LoopType.CYCLE:
 					project.selected_cels.clear()
 					project.change_cel(first_frame, -1)
-					Global.animation_timer.wait_time = (
+					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
-					Global.animation_timer.start()
-				2:  # Ping pong loop
+					animation_timer.start()
+				LoopType.PINGPONG:
 					animation_forward = false
 					_on_AnimationTimer_timeout()
 
@@ -642,26 +692,24 @@ func _on_AnimationTimer_timeout() -> void:
 		if project.current_frame > first_frame:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame - 1, -1)
-			Global.animation_timer.wait_time = (
-				project.frames[project.current_frame].duration * (1 / fps)
-			)
-			Global.animation_timer.start()
+			animation_timer.wait_time = project.frames[project.current_frame].duration * (1.0 / fps)
+			animation_timer.start()
 		else:
 			match animation_loop:
-				0:  # No loop
+				LoopType.NO:
 					play_backwards.button_pressed = false
 					play_forward.button_pressed = false
-					Global.animation_timer.stop()
+					animation_timer.stop()
 					animation_finished.emit()
 					is_animation_running = false
-				1:  # Cycle loop
+				LoopType.CYCLE:
 					project.selected_cels.clear()
 					project.change_cel(last_frame, -1)
-					Global.animation_timer.wait_time = (
+					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
-					Global.animation_timer.start()
-				2:  # Ping pong loop
+					animation_timer.start()
+				LoopType.PINGPONG:
 					animation_forward = true
 					_on_AnimationTimer_timeout()
 	frame_scroll_container.ensure_control_visible(
@@ -700,16 +748,16 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 		play_forward.toggled.connect(_on_PlayForward_toggled)
 
 	if play:
-		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
+		animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
 		var duration: float = (
 			Global.current_project.frames[Global.current_project.current_frame].duration
 		)
-		Global.animation_timer.wait_time = duration * (1 / Global.current_project.fps)
-		Global.animation_timer.start()
+		animation_timer.wait_time = duration * (1 / Global.current_project.fps)
+		animation_timer.start()
 		animation_forward = forward_dir
 		animation_started.emit(forward_dir)
 	else:
-		Global.animation_timer.stop()
+		animation_timer.stop()
 		animation_finished.emit()
 
 	is_animation_running = play
@@ -745,7 +793,7 @@ func _on_FirstFrame_pressed() -> void:
 
 func _on_FPSValue_value_changed(value: float) -> void:
 	Global.current_project.fps = value
-	Global.animation_timer.wait_time = 1 / Global.current_project.fps
+	animation_timer.wait_time = 1 / Global.current_project.fps
 
 
 func _on_PastOnionSkinning_value_changed(value: float) -> void:
@@ -1005,6 +1053,7 @@ func _on_MergeDownLayer_pressed() -> void:
 		textures.append(top_image)
 		var metadata_image := Image.create(2, 4, false, Image.FORMAT_R8)
 		DrawingAlgos.set_layer_metadata_image(bottom_layer, bottom_cel, metadata_image, 0)
+		metadata_image.set_pixel(0, 1, Color(1.0, 0.0, 0.0, 0.0))
 		DrawingAlgos.set_layer_metadata_image(top_layer, top_cel, metadata_image, 1)
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
@@ -1070,6 +1119,7 @@ func _on_timeline_settings_visibility_changed() -> void:
 func _cel_switched() -> void:
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
+	_fill_blend_modes_option_button()
 	# Temporarily disconnect it in order to prevent layer opacity changing
 	# in the rest of the selected layers, if there are any.
 	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
@@ -1079,10 +1129,9 @@ func _cel_switched() -> void:
 
 func _update_layer_ui() -> void:
 	var project := Global.current_project
-	opacity_slider.value = project.layers[project.current_layer].opacity * 100
-	var blend_mode_index := blend_modes_button.get_item_index(
-		project.layers[project.current_layer].blend_mode
-	)
+	var layer := project.layers[project.current_layer]
+	opacity_slider.value = layer.opacity * 100
+	var blend_mode_index := blend_modes_button.get_item_index(layer.blend_mode)
 	blend_modes_button.selected = blend_mode_index
 
 
@@ -1210,12 +1259,14 @@ func project_layer_added(layer: int) -> void:
 	Global.layer_vbox.move_child(layer_button, count - 1 - layer)
 	Global.cel_vbox.add_child(cel_hbox)
 	Global.cel_vbox.move_child(cel_hbox, count - 1 - layer)
+	update_global_layer_buttons()
 
 
 func project_layer_removed(layer: int) -> void:
 	var count := Global.layer_vbox.get_child_count()
 	Global.layer_vbox.get_child(count - 1 - layer).free()
 	Global.cel_vbox.get_child(count - 1 - layer).free()
+	update_global_layer_buttons()
 
 
 func project_cel_added(frame: int, layer: int) -> void:
@@ -1240,3 +1291,72 @@ func _on_layer_fx_pressed() -> void:
 
 func _on_cel_size_slider_value_changed(value: float) -> void:
 	cel_size = value
+
+
+func _on_onion_skinning_opacity_value_changed(value: float) -> void:
+	var onion_skinning_opacity := value / 100.0
+	Global.config_cache.set_value("timeline", "onion_skinning_opacity", onion_skinning_opacity)
+	for onion_skinning_node: Node2D in get_tree().get_nodes_in_group("canvas_onion_skinning"):
+		onion_skinning_node.opacity = onion_skinning_opacity
+		onion_skinning_node.queue_redraw()
+
+
+func _on_global_visibility_button_pressed() -> void:
+	var layer_visible := !global_layer_visibility
+	for layer_button: LayerButton in Global.layer_vbox.get_children():
+		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+		if layer.parent == null and layer.visible != layer_visible:
+			layer_button.visibility_button.pressed.emit()
+
+
+func _on_global_lock_button_pressed() -> void:
+	var locked := !global_layer_lock
+	for layer_button: LayerButton in Global.layer_vbox.get_children():
+		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+		if layer.parent == null and layer.locked != locked:
+			layer_button.lock_button.pressed.emit()
+
+
+func _on_global_expand_button_pressed() -> void:
+	var expand := !global_layer_expand
+	for layer_button: LayerButton in Global.layer_vbox.get_children():
+		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+		if layer.parent == null and layer is GroupLayer and layer.expanded != expand:
+			layer_button.expand_button.pressed.emit()
+
+
+func update_global_layer_buttons() -> void:
+	global_layer_visibility = false
+	global_layer_lock = true
+	global_layer_expand = true
+	for layer: BaseLayer in Global.current_project.layers:
+		if layer.parent == null:
+			if layer.visible:
+				global_layer_visibility = true
+			if not layer.locked:
+				global_layer_lock = false
+			if layer is GroupLayer and not layer.expanded:
+				global_layer_expand = false
+			if global_layer_visibility and not global_layer_lock and not global_layer_expand:
+				break
+	if global_layer_visibility:
+		Global.change_button_texturerect(%GlobalVisibilityButton.get_child(0), "layer_visible.png")
+	else:
+		Global.change_button_texturerect(
+			%GlobalVisibilityButton.get_child(0), "layer_invisible.png"
+		)
+	if global_layer_lock:
+		Global.change_button_texturerect(%GlobalLockButton.get_child(0), "lock.png")
+	else:
+		Global.change_button_texturerect(%GlobalLockButton.get_child(0), "unlock.png")
+	if global_layer_expand:
+		Global.change_button_texturerect(%GlobalExpandButton.get_child(0), "group_expanded.png")
+	else:
+		Global.change_button_texturerect(%GlobalExpandButton.get_child(0), "group_collapsed.png")
+
+
+func _on_layer_frame_h_split_dragged(offset: int) -> void:
+	if layer_frame_header_h_split.split_offset != offset:
+		layer_frame_header_h_split.split_offset = offset
+	if layer_frame_h_split.split_offset != offset:
+		layer_frame_h_split.split_offset = offset

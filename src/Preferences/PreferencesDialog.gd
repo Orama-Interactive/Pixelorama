@@ -9,6 +9,7 @@ var preferences: Array[Preference] = [
 	),
 	Preference.new("ffmpeg_path", "Startup/StartupContainer/FFMPEGPath", "text", ""),
 	Preference.new("shrink", "%ShrinkSlider", "value", 1.0),
+	Preference.new("theme_font_index", "%FontOptionButton", "selected", 1),
 	Preference.new("font_size", "%FontSizeSlider", "value", 16),
 	Preference.new(
 		"dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed", true
@@ -36,10 +37,16 @@ var preferences: Array[Preference] = [
 		"custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color", Color.GRAY
 	),
 	Preference.new(
-		"left_tool_color", "Interface/ButtonOptions/LeftToolColorButton", "color", Color("0086cf")
+		"share_options_between_tools",
+		"Tools/ToolOptions/ShareOptionsCheckBox",
+		"button_pressed",
+		false
 	),
 	Preference.new(
-		"right_tool_color", "Interface/ButtonOptions/RightToolColorButton", "color", Color("fd6d14")
+		"left_tool_color", "Tools/ToolOptions/LeftToolColorButton", "color", Color("0086cf")
+	),
+	Preference.new(
+		"right_tool_color", "Tools/ToolOptions/RightToolColorButton", "color", Color("fd6d14")
 	),
 	Preference.new(
 		"tool_button_size",
@@ -169,6 +176,7 @@ var preferences: Array[Preference] = [
 		"selection_border_color_2", "Selection/SelectionOptions/BorderColor2", "color", Color.BLACK
 	),
 	Preference.new("fps_limit", "Performance/PerformanceContainer/SetFPSLimit", "value", 0),
+	Preference.new("max_undo_steps", "Performance/PerformanceContainer/MaxUndoSteps", "value", 0),
 	Preference.new(
 		"pause_when_unfocused",
 		"Performance/PerformanceContainer/PauseAppFocus",
@@ -197,6 +205,7 @@ var selected_item := 0
 @onready var list: ItemList = $HSplitContainer/List
 @onready var right_side: VBoxContainer = $"%RightSide"
 @onready var language: VBoxContainer = %Language
+@onready var system_language := language.get_node(^"System Language") as CheckBox
 @onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 @onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 @onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
@@ -232,6 +241,7 @@ class Preference:
 
 
 func _ready() -> void:
+	Global.font_loaded.connect(_add_fonts)
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok_button().text = "Close"
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -251,6 +261,7 @@ func _ready() -> void:
 		startup.queue_free()
 		right_side.get_node(^"Language").visible = true
 		Global.open_last_project = false
+		%ClearRecentFiles.hide()
 	if OS.get_name() == "Windows":
 		tablet_driver_label.visible = true
 		tablet_driver.visible = true
@@ -270,7 +281,6 @@ func _ready() -> void:
 		content_list.append(child.name)
 
 	# Create buttons for each language
-	var system_language := language.get_node(^"System Language") as Button
 	var button_group: ButtonGroup = system_language.button_group
 	for locale in Global.loaded_locales:  # Create radiobuttons for each language
 		var button := CheckBox.new()
@@ -283,6 +293,8 @@ func _ready() -> void:
 			button.button_pressed = true
 		language.add_child(button)
 		button.pressed.connect(_on_language_pressed.bind(button.get_index()))
+
+	_add_fonts()
 
 	for pref in preferences:
 		if not right_side.has_node(pref.node_path):
@@ -350,6 +362,14 @@ func _on_Preference_value_changed(value, pref: Preference, button: RestoreDefaul
 	disable_restore_default_button(button, disable)
 
 
+## Add fonts to the font option button.
+func _add_fonts() -> void:
+	%FontOptionButton.clear()
+	for font_name in Global.get_available_font_names():
+		%FontOptionButton.add_item(font_name)
+	%FontOptionButton.select(Global.theme_font_index)
+
+
 func preference_update(require_restart := false) -> void:
 	if require_restart:
 		must_restart.visible = true
@@ -393,12 +413,7 @@ func _on_List_item_selected(index: int) -> void:
 
 
 func _on_shrink_apply_button_pressed() -> void:
-	var root := get_tree().root
-	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
-	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
-	root.min_size = Vector2(1024, 576)
-	root.content_scale_factor = Global.shrink
-	Global.control.set_custom_cursor()
+	Global.control.set_display_scale()
 	hide()
 	popup_centered(Vector2(600, 400))
 	Global.dialog_open(true)
@@ -423,3 +438,51 @@ func _on_language_pressed(index: int) -> void:
 	Tools.update_hint_tooltips()
 	list.clear()
 	add_tabs(true)
+
+
+func _on_reset_button_pressed() -> void:
+	$ResetOptionsConfirmation.popup_centered()
+
+
+func _on_reset_options_confirmation_confirmed() -> void:
+	# Clear preferences
+	if %ResetPreferences.button_pressed:
+		system_language.button_pressed = true
+		_on_language_pressed(0)
+		themes.buttons_container.get_child(0).button_pressed = true
+		Themes.change_theme(0)
+		for pref in preferences:
+			var property_name := pref.prop_name
+			var default_value = pref.default_value
+			var node := right_side.get_node(pref.node_path)
+			if is_instance_valid(node):
+				node.set(pref.value_type, default_value)
+			Global.set(property_name, default_value)
+		_on_shrink_apply_button_pressed()
+		_on_font_size_apply_button_pressed()
+		Global.config_cache.erase_section("preferences")
+	# Clear timeline options
+	if %ResetTimelineOptions.button_pressed:
+		Global.animation_timeline.reset_settings()
+		Global.config_cache.erase_section("timeline")
+	# Clear tool options
+	if %ResetAllToolOptions.button_pressed:
+		Global.config_cache.erase_section("color_picker")
+		Global.config_cache.erase_section("tools")
+		Global.config_cache.erase_section("left_tool")
+		Global.config_cache.erase_section("right_tool")
+		Tools.options_reset.emit()
+	# Remove all extensions
+	if %RemoveAllExtensions.button_pressed:
+		var extensions_node := Global.control.get_node("Extensions") as Extensions
+		var extensions_list := extensions_node.extensions.duplicate()
+		for extension in extensions_list:
+			extensions_node.uninstall_extension(extension)
+		Global.config_cache.erase_section("extensions")
+	# Clear recent files list
+	if %ClearRecentFiles.button_pressed:
+		Global.config_cache.erase_section_key("data", "last_project_path")
+		Global.config_cache.erase_section_key("data", "recent_projects")
+		Global.top_menu_container.recent_projects_submenu.clear()
+
+	Global.config_cache.save(Global.CONFIG_PATH)

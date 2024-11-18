@@ -1,7 +1,8 @@
 class_name SelectionMap
 extends Image
 
-var invert_shader := preload("res://src/Shaders/Effects/Invert.gdshader")
+const INVERT_SHADER := preload("res://src/Shaders/Effects/Invert.gdshader")
+const OUTLINE_INLINE_SHADER := preload("res://src/Shaders/Effects/OutlineInline.gdshader")
 
 
 func is_pixel_selected(pixel: Vector2i, calculate_offset := true) -> bool:
@@ -87,8 +88,7 @@ func clear() -> void:
 func invert() -> void:
 	var params := {"red": true, "green": true, "blue": true, "alpha": true}
 	var gen := ShaderImageEffect.new()
-	gen.generate_image(self, invert_shader, params, get_size())
-	self.convert(Image.FORMAT_LA8)
+	gen.generate_image(self, INVERT_SHADER, params, get_size())
 
 
 ## Returns a copy of itself that is cropped to [param size].
@@ -183,3 +183,36 @@ func resize_bitmap_values(
 	if new_bitmap_size != size:
 		crop(new_bitmap_size.x, new_bitmap_size.y)
 	blit_rect(smaller_image, Rect2i(Vector2i.ZERO, new_bitmap_size), dst)
+
+
+func expand(width: int, brush: int) -> void:
+	var params := {
+		"color": Color(1, 1, 1, 1),
+		"width": width,
+		"brush": brush,
+	}
+	var gen := ShaderImageEffect.new()
+	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
+
+
+func shrink(width: int, brush: int) -> void:
+	var params := {
+		"color": Color(0),
+		"width": width,
+		"brush": brush,
+		"inside": true,
+	}
+	var gen := ShaderImageEffect.new()
+	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
+
+
+func border(width: int, brush: int) -> void:
+	var params := {
+		"color": Color(1, 1, 1, 1),
+		"width": width,
+		"brush": brush,
+		"inside": true,
+		"keep_border_only": true,
+	}
+	var gen := ShaderImageEffect.new()
+	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())

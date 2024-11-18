@@ -80,15 +80,21 @@ func _notification(what: int) -> void:
 		_reset_display(false)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not editable or not is_visible_in_tree():
 		return
-	if event.is_action_pressed(global_increment_action, true):
+	if (
+		not global_increment_action.is_empty()
+		and event.is_action_pressed(global_increment_action, true)
+	):
 		if snap_by_default:
 			value += step if event.ctrl_pressed else snap_step
 		else:
 			value += snap_step if event.ctrl_pressed else step
-	elif event.is_action_pressed(global_decrement_action, true):
+	elif (
+		not global_decrement_action.is_empty()
+		and event.is_action_pressed(global_decrement_action, true)
+	):
 		if snap_by_default:
 			value -= step if event.ctrl_pressed else snap_step
 		else:
@@ -108,11 +114,13 @@ func _gui_input(event: InputEvent) -> void:
 					value += step if event.ctrl_pressed else snap_step
 				else:
 					value += snap_step if event.ctrl_pressed else step
+				get_viewport().set_input_as_handled()
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				if snap_by_default:
 					value -= step if event.ctrl_pressed else snap_step
 				else:
 					value -= snap_step if event.ctrl_pressed else step
+				get_viewport().set_input_as_handled()
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):
 			state = TYPING

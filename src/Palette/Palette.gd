@@ -7,7 +7,9 @@ const DEFAULT_WIDTH := 8
 const DEFAULT_HEIGHT := 8
 
 # Metadata
-var name := "Custom Palette"
+var name := "Custom Palette":
+	set(value):
+		name = value.strip_edges()
 var comment := ""
 var path := ""
 
@@ -214,7 +216,7 @@ func insert_color(index: int, new_color: Color) -> void:
 	var c := PaletteColor.new(new_color, index)
 	# If insert happens on non empty swatch recursively move the original color
 	# and every other color to its right one swatch to right
-	if colors[index] != null:
+	if colors.has(index):
 		_move_right(index)
 	colors[index] = c
 	data_changed.emit()
@@ -229,7 +231,7 @@ func _move_right(index: int) -> void:
 		colors_max = width * height
 
 	# If swatch to right to this color is not empty move that color right too
-	if colors[index + 1] != null:
+	if colors.has(index + 1):
 		_move_right(index + 1)
 
 	colors[index + 1] = colors[index]
@@ -285,6 +287,38 @@ func sort(option: Palettes.SortOptions) -> void:
 			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.s < b.color.s
 		Palettes.SortOptions.VALUE:
 			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.v < b.color.v
+		Palettes.SortOptions.LIGHTNESS:
+			# Code inspired from:
+			# gdlint: ignore=max-line-length
+			# https://github.com/bottosson/bottosson.github.io/blob/master/misc/colorpicker/colorconversion.js#L519
+			sort_method = func(a: PaletteColor, b: PaletteColor):
+				# function that returns OKHSL lightness
+				var lum: Callable = func(c: Color):
+					var l = 0.4122214708 * (c.r) + 0.5363325363 * (c.g) + 0.0514459929 * (c.b)
+					var m = 0.2119034982 * (c.r) + 0.6806995451 * (c.g) + 0.1073969566 * (c.b)
+					var s = 0.0883024619 * (c.r) + 0.2817188376 * (c.g) + 0.6299787005 * (c.b)
+					var l_cr = pow(l, 1 / 3.0)
+					var m_cr = pow(m, 1 / 3.0)
+					var s_cr = pow(s, 1 / 3.0)
+					var oklab_l = 0.2104542553 * l_cr + 0.7936177850 * m_cr - 0.0040720468 * s_cr
+					# calculating toe
+					var k_1 = 0.206
+					var k_2 = 0.03
+					var k_3 = (1 + k_1) / (1 + k_2)
+					return (
+						0.5
+						* (
+							k_3 * oklab_l
+							- k_1
+							+ sqrt(
+								(
+									(k_3 * oklab_l - k_1) * (k_3 * oklab_l - k_1)
+									+ 4 * k_2 * k_3 * oklab_l
+								)
+							)
+						)
+					)
+				return lum.call(a.color.srgb_to_linear()) < lum.call(b.color.srgb_to_linear())
 		Palettes.SortOptions.RED:
 			sort_method = func(a: PaletteColor, b: PaletteColor): return a.color.r < b.color.r
 		Palettes.SortOptions.GREEN:

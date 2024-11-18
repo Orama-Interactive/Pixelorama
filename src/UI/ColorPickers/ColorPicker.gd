@@ -21,11 +21,9 @@ var color_sliders_vbox: VBoxContainer
 
 
 func _ready() -> void:
+	Tools.options_reset.connect(reset_options)
 	Tools.color_changed.connect(update_color)
 	_average(left_color_rect.color, right_color_rect.color)
-	expand_button.button_pressed = Global.config_cache.get_value(
-		"color_picker", "is_expanded", false
-	)
 	color_picker.color_mode = Global.config_cache.get_value(
 		"color_picker", "color_mode", ColorPicker.MODE_RGB
 	)
@@ -85,6 +83,10 @@ func _ready() -> void:
 	picker_vbox_container.add_child(expand_button)
 	picker_vbox_container.move_child(expand_button, 2)
 
+	expand_button.button_pressed = Global.config_cache.get_value(
+		"color_picker", "is_expanded", false
+	)
+
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED and is_instance_valid(hsv_rectangle_control):
@@ -97,6 +99,12 @@ func _notification(what: int) -> void:
 
 
 func _on_color_picker_color_changed(color: Color) -> void:
+	# Due to the decimal nature of the color values, some values get rounded off
+	# unintentionally before entering this method.
+	# Even though the decimal values change, the HTML code remains the same after the change.
+	# So we're using this trick to convert the values back to how they are shown in
+	# the color picker's UI.
+	color = Color(color.to_html())
 	if Tools.picking_color_for == MOUSE_BUTTON_RIGHT:
 		right_color_rect.color = color
 	else:
@@ -112,6 +120,12 @@ func _on_left_color_button_toggled(toggled_on: bool) -> void:
 		Tools.picking_color_for = MOUSE_BUTTON_RIGHT
 		color_picker.color = right_color_rect.color
 	_average(left_color_rect.color, right_color_rect.color)
+
+
+func reset_options() -> void:
+	color_picker.color_mode = ColorPicker.MODE_RGB
+	color_picker.picker_shape = ColorPicker.SHAPE_HSV_RECTANGLE
+	expand_button.button_pressed = false
 
 
 func update_color(color: Color, button: int) -> void:

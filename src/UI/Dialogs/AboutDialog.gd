@@ -5,6 +5,7 @@ const AUTHORS: PackedStringArray = [
 	"Aaron Franke (aaronfranke)",
 	"AbhinavKDev (abhinav3967)",
 	"Álex Román Núñez (EIREXE)",
+	"alikin12",
 	"AlphinAlbukhari",
 	"Anaminus",
 	"Andreev Andrei",
@@ -19,10 +20,12 @@ const AUTHORS: PackedStringArray = [
 	"Darshan Phaldesai (luiq54)",
 	"dasimonde",
 	"Dávid Gábor BODOR (dragonfi)",
+	"donte5405",
 	"Fayez Akhtar (Variable)",
 	"Gamespleasure",
 	"GrantMoyer",
 	"gschwind",
+	"Hamster5295",
 	"Haoyu Qiu (timothyqiu)",
 	"Hugo Locurcio (Calinou)",
 	"huskee",
@@ -38,6 +41,7 @@ const AUTHORS: PackedStringArray = [
 	"kleonc",
 	"Laurenz Reinthaler (Schweini07)",
 	"Marco Galli (Gaarco)",
+	"Mariano Semelman (msemelman)",
 	"Marquis Kurt (alicerunsonfedora)",
 	"Martin Novák (novhack)",
 	"Martin Zabinski (Martin1991zab)",
@@ -56,6 +60,7 @@ const AUTHORS: PackedStringArray = [
 	"Subhang Nanduri (SbNanduri)",
 	"TheLsbt",
 	"THWLF",
+	"Vaibhav Kubre (kubre)",
 	"Vriska Weaver (henlo-birb)",
 ]
 
@@ -76,10 +81,13 @@ const TRANSLATORS_DICTIONARY := {
 	"Nicolas.C (nico57c)": ["French"],
 	"EGuillemot": ["French"],
 	"Roroto Sic (Roroto_Sic)": ["French"],
+	"ninjdai": ["French"],
+	"celeste tollec (celeste73-t)": ["French"],
 	"Schweini07": ["German"],
 	"Martin Zabinski (Martin1991zab)": ["German"],
 	"Manuel (DrMoebyus)": ["German"],
 	"Dominik K. (mezotv)": ["German"],
+	"alikin12": ["German"],
 	"Dawid Niedźwiedzki (tiritto)": ["Polish"],
 	"Serhiy Dmytryshyn (dies)": ["Polish"],
 	"Igor Santarek (jegor377)": ["Polish"],
@@ -104,13 +112,14 @@ const TRANSLATORS_DICTIONARY := {
 	"Geraldo PMJ (geraldopmj)": ["Brazilian Portuguese"],
 	"snorring_parrot": ["Brazilian Portuguese"],
 	"iLeonardito (iLeoww)": ["Brazilian Portuguese"],
+	"Heliana Moreira (helimoreira)": ["Brazilian Portuguese"],
 	"Andreev Andrei": ["Russian"],
 	"ax trifonov (ax34)": ["Russian"],
 	"Artem (blinovartem)": ["Russian"],
 	"Иван Соколов (SokoL1337)": ["Russian"],
 	"Daniil Belyakov (ermegil)": ["Russian"],
-	"pincetgore": ["Russian"],
 	"Elijah Fronzak (pincetgore)": ["Russian"],
+	"toxidcheckery": ["Russian"],
 	"stomleny_cmok": ["Russian", "Ukrainian"],
 	"Bohdan Matviiv (BodaMat)": ["Ukrainian"],
 	"Ruslan Hryschuk (kifflow)": ["Ukrainian"],
@@ -131,6 +140,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Marco Galli (Gaarco)": ["Italian"],
 	"StarFang208": ["Italian"],
 	"Damiano Guida (damiano.guida22)": ["Italian"],
+	"albano battistella (albanobattistella)": ["Italian"],
 	"Azagaya VJ (azagaya.games)": ["Spanish"],
 	"Lilly And (KatieAnd)": ["Spanish"],
 	"UncleFangs": ["Spanish"],
@@ -147,6 +157,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Quetzalcoutl (QuetzalcoutlDev)": ["Spanish"],
 	"Santiago (Zhamty)": ["Spanish"],
 	"Jesus Lavado (jess_lav)": ["Spanish"],
+	"Alejandro Moctezuma (AlejandroMoc)": ["Spanish"],
 	"Seifer23": ["Catalan"],
 	"Joel García Cascalló (jocsencat)": ["Catalan"],
 	"Agnis Aldiņš (NeZvers)": ["Latvian"],
@@ -217,15 +228,20 @@ const DONORS: PackedStringArray = [
 @onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
 @onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
 @onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
-
 @onready var authors := $AboutUI/Credits/Authors/AuthorTree as Tree
 @onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
 @onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
 @onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as TabBar
 @onready var license_text := $AboutUI/Credits/Licenses/LicenseText as TextEdit
+@onready var pixelorama_slogan := (
+	$AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan as Label
+)
+@onready var copyright_label := $AboutUI/Copyright as Label
 
 
 func _ready() -> void:
+	pixelorama_slogan.label_settings.font_color = get_theme_color(&"font_color", &"Label")
+	copyright_label.label_settings.font_color = get_theme_color(&"font_color", &"Label")
 	create_donors()
 	license_tabs.add_tab("Pixelorama")
 	license_tabs.add_tab("Godot")
@@ -240,6 +256,14 @@ func _ready() -> void:
 	license_tabs.add_tab("OmniScale")
 	license_tabs.add_tab("gd-obj")
 	license_text.text = licenses[0]
+
+
+func _notification(what: int) -> void:
+	if not is_instance_valid(pixelorama_slogan):
+		return
+	if what == NOTIFICATION_THEME_CHANGED:
+		pixelorama_slogan.label_settings.font_color = get_theme_color(&"font_color", &"Label")
+		copyright_label.label_settings.font_color = get_theme_color(&"font_color", &"Label")
 
 
 func _on_AboutDialog_about_to_show() -> void:

@@ -46,7 +46,7 @@ layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="BrushSize" parent="Brush" index="1" instance=ExtResource("3")]
 layout_mode = 2

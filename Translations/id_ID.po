@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-08-05 03:40\n"
+"PO-Revision-Date: 2024-10-18 20:11\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -101,9 +101,9 @@ msgstr "Sertakan gambar tercampur"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr "Jika diaktifkan, bentuk akhir gambar tercampur akan disimpan jadi pxo, ke tiap bingkai.\n"
+msgstr "Jika diaktifkan, bentuk akhir gambar tercampur disimpan menjadi pxo, ke tiap bingkai.\n"
 "Berkas pxo akan lebih besar dan mampu diimpor dengan peranti lunak pihak ketiga\n"
-"atau diekspor CLI. Memuat pxo di Pixelorama tidak perlu mengaktifkan opsi ini."
+"atau diekspor CLI. Membuka pxo di Pixelorama tidak perlu mengaktifkan opsi ini."
 
 msgid "Import"
 msgstr "Impor"
@@ -171,11 +171,11 @@ msgstr "Persentase"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr "Pangkas ke Seleksi"
+msgstr "Potong ke Seleksi"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr "Pangkas ke Isi"
+msgstr "Potong ke Isi"
 
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
@@ -213,7 +213,7 @@ msgid "Initial angle:"
 msgstr "Sudut inisial:"
 
 msgid "Clear"
-msgstr "Lepas"
+msgstr "Kosongkan"
 
 msgid "Invert"
 msgstr "Terbalikkan"
@@ -232,6 +232,10 @@ msgstr "Dibalik Menegak"
 
 msgid "Preferences"
 msgstr "Preferensi"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr "Tengahkan Kanvas"
 
 msgid "Tile Mode"
 msgstr "Mode Petak"
@@ -294,7 +298,7 @@ msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr "Klik dua kali agar jadi tata letak baru di awal buka"
+msgstr "Klik 2x agar menjadi tata letak baru di awal buka"
 
 msgid "Add"
 msgstr "Tambah"
@@ -458,7 +462,7 @@ msgstr "Jarak peleburan:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr "Gambar yang melewati ambang batas akan dileburkan jadi gambar lebih besar, jika masih dalam jarak ini"
+msgstr "Gambar yang melewati ambang batas akan dileburkan menjadi gambar lebih besar, jika masih sejarak ini"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
@@ -559,6 +563,10 @@ msgstr "Telusur"
 
 msgid "Resize:"
 msgstr "Ubah ukuran:"
+
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr "Mutu:"
 
 msgid "Cancel Export"
 msgstr "Batalkan Ekspor"
@@ -817,7 +825,7 @@ msgstr "Keker Integer"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr "Membatasi nilai jadi kelipatan bilangan bulat 100%"
+msgstr "Membatasi nilai ke kelipatan bilangan bulat 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Kepekaan tekanan tablet:"
@@ -839,6 +847,10 @@ msgstr "Bahasa Sistem"
 
 msgid "Display scale:"
 msgstr "Skala tampilan:"
+
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr "Font:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
@@ -906,6 +918,16 @@ msgstr "Warna latar belakang dari:"
 msgid "Background color:"
 msgstr "Warna latar belakang:"
 
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr "Berbagi opsi antara alat di kiri dan di kanan"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr "Jika ini diaktifkan, opsi alat di kiri dan di kanan akan disinkronkan.\n"
+"Contoh, ada dua alat berbagi ukuran kuas, jika mengubah opsi di salah satu alat maka yang satunya juga berubah."
+
 msgid "Left tool color:"
 msgstr "Warna alat di kiri:"
 
@@ -954,12 +976,15 @@ msgstr "Ubah Saluran Biru"
 msgid "Modify Alpha Channel"
 msgstr "Ubah Saluran Alfa"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Desaturasi"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Garis luar"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Bayangan Jatuh"
 
@@ -972,6 +997,26 @@ msgstr "Offset Y:"
 msgid "Shadow color:"
 msgstr "Warna bayangan:"
 
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr "Buram Gauss"
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr "Tipe buram:"
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr "Jumlah buram:"
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr "Jari-jari buram:"
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr "Arah buram:"
+
 msgid "Gradient"
 msgstr "Gradien"
 
@@ -979,7 +1024,7 @@ msgid "Gradient Map"
 msgstr "Peta Gradien"
 
 msgid "Divide into equal parts"
-msgstr "Bagi jadi sama rata"
+msgstr "Bagi menjadi sama rata"
 
 msgid "Parts:"
 msgstr "Bagian:"
@@ -1032,7 +1077,7 @@ msgstr "Tipe:"
 msgid "Angle:"
 msgstr "Sudut:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Sesuaikan Rona/Saturasi/Nilai"
 
@@ -1100,13 +1145,13 @@ msgid "Colors:"
 msgstr "Warna:"
 
 msgid "Steps:"
-msgstr "Langkah:"
+msgstr "Step:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Paletkan"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Pikselkan"
 
@@ -1335,7 +1380,7 @@ msgid "Polygonal Selection\n\n"
 msgstr "Seleksi Poligon\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
-"Pencet dua kali untuk menghubungkan titik akhir ke titik awal"
+"Klik dua kali untuk menghubungkan titik akhir ke titik awal"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1397,7 +1442,7 @@ msgstr "Pemilih Warna\n\n"
 
 msgid "Crop\n\n"
 "Resize the canvas"
-msgstr "Pangkas\n\n"
+msgstr "Potong\n\n"
 "Ubah besar kanvas"
 
 msgid "Pencil\n\n"
@@ -1458,7 +1503,7 @@ msgstr "Garis Lengkung\n\n"
 "Menggaris lengkung Bezier\n"
 "Tekan %s/%s untuk menambah titik\n"
 "Tekan dan seret untuk melengkungkan\n"
-"Tekan %s untuk melepas titik tadi"
+"Tekan %s untuk menghapus titik tadi"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1721,6 +1766,10 @@ msgstr "Batas FPS aplikasi:"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
+
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr "Maks. urung step:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
@@ -1999,11 +2048,19 @@ msgstr "Mendatar"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Aktifkan gambar dicerminkan mendatar"
 
+msgid "Vertical"
+msgstr "Menegak"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Aktifkan gambar dicerminkan menegak"
 
-msgid "Vertical"
-msgstr "Menegak"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Ke tengah kanvas"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "Ke tengah tampilan"
 
 msgid "Current frame:"
 msgstr "Bingkai saat ini:"
@@ -2020,11 +2077,11 @@ msgstr "Lompat ke bingkai pertama"
 msgid "Go to the previous frame"
 msgstr "Ke bingkai sebelumnya"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Putar animasi secara mundur (dari akhir sampai awal)"
+msgid "Play the animation backwards"
+msgstr "Putar mundur animasi"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Putar animasi secara normal (dari awal sampai akhir)"
+msgid "Play the animation forward"
+msgstr "Putar maju animasi"
 
 msgid "Go to the next frame"
 msgstr "Ke bingkai selanjutnya"
@@ -2181,7 +2238,7 @@ msgstr "Lapisan"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr "Cuplikkan mask"
+msgstr "Cuplik mask"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
@@ -2217,6 +2274,10 @@ msgstr "Leburkan lapisan ini dengan yang di bawah"
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
 msgstr "Mode campuran:"
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr "Pass through"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -2523,6 +2584,26 @@ msgstr "Warna isi bawaan:"
 msgid "A default background color of a new image"
 msgstr "Warna latar belakang bawaan pada gambar baru"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Atur ulang semua opsi yang di Preferensi"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Atur ulang opsi garis waktu"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Atur ulang opsi alat-alat"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Hapus semua ekstensi"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Kosongkan daftar berkas yang dibuka"
+
 msgid "Lock aspect ratio"
 msgstr "Kuncikan nisbah aspek"
 
@@ -2690,6 +2771,22 @@ msgstr "Huruf pemisah:"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Huruf-huruf untuk memisahkan nama berkas dan nomor bingkai"
 
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr "Pangkas gambar"
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr "Memangkas gambar terekspor ke bagian terlihat, piksel apa pun bersaluran alfa bukan nol akan dianggap terlihat."
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr "Cuplik isi gambar ke seleksi"
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr "Hanya mengekspor isi area yang diseleksi."
+
 msgid "Close"
 msgstr "Tutup"
 
@@ -2779,31 +2876,31 @@ msgstr "Terbalikkan warna"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr "Urut ikut rona"
+msgstr "Urut sesuai rona"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr "Urut ikut saturasi"
+msgstr "Urut sesuai saturasi"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr "Urut ikut nilai"
+msgstr "Urut sesuai nilai"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr "Urut ikut merah"
+msgstr "Urut sesuai merah"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr "Urut ikut hijau"
+msgstr "Urut sesuai hijau"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr "Urut ikut biru"
+msgstr "Urut sesuai biru"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr "Urut ikut alfa"
+msgstr "Urut sesuai alfa"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Palet dengan nama dan jalur yang sama sudah ada!"
@@ -2857,7 +2954,7 @@ msgid "Recorder"
 msgstr "Perekam"
 
 msgid "Crop"
-msgstr "Pangkas"
+msgstr "Potong"
 
 msgid "Resize the canvas"
 msgstr "Ubah ukuran kanvas"
@@ -2893,7 +2990,7 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Ukuran terkunci\n\n"
-"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi berpangkas.\n\n"
+"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi terpotong.\n\n"
 "Saat dinonaktifkan dengan alat di kanvas hanya akan membuat persegi."
 
 #. A tool used in 3D layers, that edits 3D objects.
@@ -2954,7 +3051,7 @@ msgid "Add new object"
 msgstr "Tambah objek baru"
 
 msgid "Remove object"
-msgstr "Hilangkan Objek"
+msgstr "Hapus objek"
 
 msgid "Camera"
 msgstr "Kamera"
@@ -3036,22 +3133,33 @@ msgstr "Jari-jari bawah:"
 msgid "Text:"
 msgstr "Teks:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr "Kedalaman:"
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Ukuran piksel:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr "Curve step:"
+msgstr "Step lengkung:"
 
 msgid "Horizontal alignment:"
 msgstr "Penjajaran mendatar:"
+
+msgid "Vertical alignment:"
+msgstr "Penjajaran menegak:"
 
 msgid "Left"
 msgstr "Kiri"
 
 msgid "Right"
 msgstr "Kanan"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr "Jarak baris:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
@@ -3188,7 +3296,7 @@ msgstr "Pindahkan gambar rujukan terpilih ke kiri"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr "Memilih yang jadi gambar rujukan di kanvas"
+msgstr "Memilih gambar rujukan untuk di kanvas"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"

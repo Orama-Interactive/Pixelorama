@@ -54,6 +54,7 @@ const DragNDropPanel := preload("drag_n_drop_panel.gd")
 
 var _layout := DockableLayout.new()
 var _panel_container := Container.new()
+var _windows_container := Container.new()
 var _split_container := Container.new()
 var _drag_n_drop_panel := DragNDropPanel.new()
 var _drag_panel: DockablePanel
@@ -80,6 +81,8 @@ func _ready() -> void:
 	_split_container.name = "_split_container"
 	_split_container.mouse_filter = MOUSE_FILTER_PASS
 	_panel_container.add_child(_split_container)
+	_windows_container.name = "_windows_container"
+	get_parent().call_deferred("add_child", _windows_container)
 
 	_drag_n_drop_panel.name = "_drag_n_drop_panel"
 	_drag_n_drop_panel.mouse_filter = MOUSE_FILTER_PASS
@@ -161,6 +164,61 @@ func _drop_data(_position: Vector2, data) -> void:
 	queue_sort()
 
 
+func _add_floating_options(tab_container: DockablePanel) -> void:
+	var options := PopupMenu.new()
+	options.add_item("Make Floating")
+	options.id_pressed.connect(_toggle_floating.bind(tab_container))
+	options.size.y = 0
+	_windows_container.add_child(options)
+	tab_container.set_popup(options)
+
+
+## Required when converting a window back to panel.
+func _refresh_tabs_visible() -> void:
+	if tabs_visible:
+		tabs_visible = false
+		await get_tree().process_frame
+		await get_tree().process_frame
+		tabs_visible = true
+
+
+func _toggle_floating(_id: int, tab_container: DockablePanel) -> void:
+	var node_name := tab_container.get_tab_title(tab_container.current_tab)
+	var node := get_node(node_name)
+	if is_instance_valid(node):
+		var tab_position := maxi(tab_container.leaf.find_child(node), 0)
+		_convert_to_window(node, {"tab_position": tab_position, "tab_container": tab_container})
+	else:
+		print("Node ", node_name, " not found!")
+
+
+## Converts a panel to floating window.
+func _convert_to_window(content: Control, previous_data := {}) -> void:
+	var old_owner := content.owner
+	var data := {}
+	if content.name in layout.windows:
+		data = layout.windows[content.name]
+	var window := FloatingWindow.new(content, data)
+	_windows_container.add_child(window)
+	window.show()
+	_refresh_tabs_visible()
+	window.close_requested.connect(_convert_to_panel.bind(window, old_owner, previous_data))
+	window.data_changed.connect(layout.save_window_properties)
+
+
+## Converts a floating window into a panel.
+func _convert_to_panel(window: FloatingWindow, old_owner: Node, previous_data := {}) -> void:
+	var content := window.window_content
+	window.remove_child(content)
+	window.destroy()
+	add_child(content)
+	content.owner = old_owner
+	if previous_data.has("tab_container") and is_instance_valid(previous_data["tab_container"]):
+		var tab_position := previous_data.get("tab_position", 0) as int
+		previous_data["tab_container"].leaf.insert_node(tab_position, content)
+	_refresh_tabs_visible()
+
+
 func set_control_as_current_tab(control: Control) -> void:
 	assert(
 		control.get_parent_control() == self,
@@ -195,6 +253,16 @@ func set_layout(value: DockableLayout) -> void:
 		_layout.changed.disconnect(queue_sort)
 	_layout = value
 	_layout.changed.connect(queue_sort)
+	for window in _windows_container.get_children():
+		if not window.name in _layout.windows and window is FloatingWindow:
+			window.prevent_data_erasure = true  # We don't want to delete data.
+			window.close_requested.emit()  # Removes the window.
+			continue
+	for window: String in _layout.windows.keys():
+		var panel := find_child(window, false)
+		# Only those windows get created which were not previously created.
+		if panel:
+			_convert_to_window(panel)
 	_layout_dirty = true
 	queue_sort()
 
@@ -202,7 +270,7 @@ func set_layout(value: DockableLayout) -> void:
 func set_use_hidden_tabs_for_min_size(value: bool) -> void:
 	_use_hidden_tabs_for_min_size = value
 	for i in range(1, _panel_container.get_child_count()):
-		var panel = _panel_container.get_child(i)
+		var panel := _panel_container.get_child(i) as DockablePanel
 		panel.use_hidden_tabs_for_min_size = value
 
 
@@ -401,6 +469,7 @@ func _get_panel(idx: int) -> DockablePanel:
 	panel.hide_single_tab = _hide_single_tab
 	panel.use_hidden_tabs_for_min_size = _use_hidden_tabs_for_min_size
 	panel.set_tabs_rearrange_group(maxi(0, rearrange_group))
+	_add_floating_options(panel)
 	_panel_container.add_child(panel)
 	panel.tab_layout_changed.connect(_on_panel_tab_layout_changed.bind(panel))
 	return panel

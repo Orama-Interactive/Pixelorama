@@ -3,6 +3,7 @@ class_name Project
 extends RefCounted
 ## A class for project properties.
 
+signal removed
 signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
@@ -93,6 +94,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	tiles = Tiles.new(size)
 	selection_map.copy_from(Image.create(size.x, size.y, false, Image.FORMAT_LA8))
 	Global.tabs.add_tab(name)
+	undo_redo.max_steps = Global.max_undo_steps
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1
@@ -136,6 +138,7 @@ func remove() -> void:
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
 	layers.clear()
 	Global.projects.erase(self)
+	removed.emit()
 
 
 func remove_backup_file() -> void:
@@ -203,9 +206,6 @@ func change_project() -> void:
 	Global.get_window().title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.get_window().title = Global.get_window().title + "(*)"
-	if export_directory_path != "":
-		Global.open_sprites_dialog.current_path = export_directory_path
-		Global.save_sprites_dialog.current_path = export_directory_path
 	selection_map_changed()
 
 
@@ -281,6 +281,9 @@ func serialize() -> Dictionary:
 
 func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAccess = null) -> void:
 	about_to_deserialize.emit(dict)
+	var pxo_version = dict.get(
+		"pxo_version", ProjectSettings.get_setting("application/config/Pxo_Version")
+	)
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
@@ -330,8 +333,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 							# Don't do anything with it, just read it so that the file can move on
 							file.get_buffer(size.x * size.y * 4)
 						cels.append(Cel3D.new(size, true))
-				if dict.has("pxo_version"):
-					cel["pxo_version"] = dict["pxo_version"]
+				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
@@ -351,7 +353,15 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		# a layer, so loop again after creating them:
 		for layer_i in dict.layers.size():
 			layers[layer_i].index = layer_i
-			layers[layer_i].deserialize(dict.layers[layer_i])
+			var layer_dict: Dictionary = dict.layers[layer_i]
+			# Ensure that loaded pxo files from v1.0-v1.0.3 have the correct
+			# blend mode, after the addition of the Erase mode in v1.0.4.
+			if pxo_version < 4 and layer_dict.has("blend_mode"):
+				var blend_mode: int = layer_dict.get("blend_mode")
+				if blend_mode >= BaseLayer.BlendModes.ERASE:
+					blend_mode += 1
+				layer_dict["blend_mode"] = blend_mode
+			layers[layer_i].deserialize(layer_dict)
 			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:

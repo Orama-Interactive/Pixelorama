@@ -4,6 +4,10 @@ const LAYER_EFFECT_BUTTON = preload("res://src/UI/Timeline/LayerEffects/LayerEff
 const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
+	LayerEffect.new(
+		"Convolution Matrix", preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader")
+	),
+	LayerEffect.new("Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader")),
 	LayerEffect.new("Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new("Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader")),
 	LayerEffect.new("Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader")),
@@ -20,6 +24,7 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader")),
 	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader")),
 	LayerEffect.new("Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader")),
+	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader")),
 ]
 
 @onready var enabled_button: CheckButton = $VBoxContainer/HBoxContainer/EnabledButton
@@ -95,7 +100,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 		hbox.add_child(apply_button)
 	hbox.add_child(delete_button)
 	var parameter_vbox := CollapsibleContainer.new()
-	Global.create_ui_for_shader_uniforms(
+	ShaderLoader.create_ui_for_shader_uniforms(
 		effect.shader,
 		effect.params,
 		parameter_vbox,

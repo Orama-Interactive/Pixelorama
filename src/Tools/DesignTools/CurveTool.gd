@@ -2,7 +2,8 @@ extends "res://src/Tools/BaseDraw.gd"
 
 var _curve := Curve2D.new()  ## The [Curve2D] responsible for the shape of the curve being drawn.
 var _drawing := false  ## Set to true when a curve is being drawn.
-var _fill := false  ## When true, the inside area of the curve gets filled.
+var _fill_inside := false  ## When true, the inside area of the curve gets filled.
+var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _editing_bezier := false  ## Needed to determine when to show the control points preview line.
 var _editing_out_control_point := false  ## True when controlling the out control point only.
 var _thickness := 1  ## The thickness of the curve.
@@ -28,7 +29,7 @@ func _on_thickness_value_changed(value: int) -> void:
 
 
 func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
-	_fill = toggled_on
+	_fill_inside = toggled_on
 	update_config()
 	save_config()
 
@@ -43,17 +44,20 @@ func update_indicator() -> void:
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
+	config["fill_inside"] = _fill_inside
 	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
 	super.set_config(config)
+	_fill_inside = config.get("fill_inside", _fill_inside)
 	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
 	super.update_config()
+	$FillCheckbox.button_pressed = _fill_inside
 	$ThicknessSlider.value = _thickness
 
 
@@ -96,6 +100,7 @@ func draw_start(pos: Vector2i) -> void:
 	if !_drawing:
 		_drawing = true
 	_curve.add_point(pos)
+	_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
 
 
 func draw_move(pos: Vector2i) -> void:
@@ -183,15 +188,15 @@ func _draw_shape() -> void:
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
+		_fill_inside_rect = _fill_inside_rect.expand(point)
 		# Draw each point offsetted based on the shape's thickness
 		_draw_pixel(point, images)
-	if _fill:
+	if _fill_inside:
 		var v := Vector2i()
-		var image_size := Global.current_project.size
-		for x in image_size.x:
-			v.x = x
-			for y in image_size.y:
-				v.y = y
+		for x in _fill_inside_rect.size.x:
+			v.x = x + _fill_inside_rect.position.x
+			for y in _fill_inside_rect.size.y:
+				v.y = y + _fill_inside_rect.position.y
 				if Geometry2D.is_point_in_polygon(v, points):
 					_draw_pixel(v, images)
 	_clear()
@@ -206,6 +211,7 @@ func _draw_pixel(point: Vector2i, images: Array[Image]) -> void:
 
 func _clear() -> void:
 	_curve.clear_points()
+	_fill_inside_rect = Rect2i()
 	_drawing = false
 	_editing_out_control_point = false
 	Global.canvas.previews.queue_redraw()

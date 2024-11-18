@@ -1,4 +1,7 @@
+class_name SelectionNode
 extends Node2D
+
+signal is_moving_content_changed
 
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
 const KEY_MOVE_ACTION_NAMES: PackedStringArray = [&"ui_up", &"ui_down", &"ui_left", &"ui_right"]
@@ -7,7 +10,10 @@ const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 # flags (additional properties of selection that can be toggled)
 var flag_tilemode := false
 
-var is_moving_content := false
+var is_moving_content := false:
+	set(value):
+		is_moving_content = value
+		is_moving_content_changed.emit()
 var arrow_key_move := false
 var is_pasting := false
 var big_bounding_rectangle := Rect2i():
@@ -43,7 +49,7 @@ var content_pivot := Vector2.ZERO
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var resize_keep_ratio := false
 
-@onready var canvas: Canvas = get_parent()
+@onready var canvas := get_parent() as Canvas
 @onready var marching_ants_outline: Sprite2D = $MarchingAntsOutline
 
 
@@ -101,11 +107,10 @@ func _input(event: InputEvent) -> void:
 	if Global.mirror_view:
 		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
 	if is_moving_content:
-		if Input.is_action_just_pressed("transformation_confirm"):
+		if Input.is_action_just_pressed(&"transformation_confirm"):
 			transform_content_confirm()
-		elif Input.is_action_just_pressed("transformation_cancel"):
+		elif Input.is_action_just_pressed(&"transformation_cancel"):
 			transform_content_cancel()
-
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if event is InputEventKey:
@@ -393,7 +398,7 @@ func resize_selection() -> void:
 	)
 	Global.current_project.selection_map_changed()
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func _gizmo_rotate() -> void:
@@ -461,7 +466,7 @@ func move_borders_end() -> void:
 	else:
 		Global.current_project.selection_map_changed()
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func transform_content_start() -> void:
@@ -478,7 +483,7 @@ func transform_content_start() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = Global.current_project.selection_offset
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func move_content(move: Vector2) -> void:
@@ -522,7 +527,7 @@ func transform_content_confirm() -> void:
 	angle = 0.0
 	content_pivot = Vector2.ZERO
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func transform_content_cancel() -> void:
@@ -555,7 +560,7 @@ func transform_content_cancel() -> void:
 	angle = 0.0
 	content_pivot = Vector2.ZERO
 	queue_redraw()
-	Global.canvas.queue_redraw()
+	canvas.queue_redraw()
 
 
 func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
@@ -736,9 +741,9 @@ func paste(in_place := false) -> void:
 
 	var clip_map := SelectionMap.new()
 	clip_map.data = clipboard.selection_map
-	var max_size := Vector2(
-		max(clip_map.get_size().x, project.selection_map.get_size().x),
-		max(clip_map.get_size().y, project.selection_map.get_size().y)
+	var max_size := Vector2i(
+		maxi(clip_map.get_size().x, project.selection_map.get_size().x),
+		maxi(clip_map.get_size().y, project.selection_map.get_size().y)
 	)
 
 	project.selection_map.copy_from(clip_map)

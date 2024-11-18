@@ -5,6 +5,7 @@ var _last_position := Vector2i(Vector2.INF)
 var _changed := false
 var _overwrite := false
 var _fill_inside := false
+var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _draw_points := PackedVector2Array()
 var _old_spacing_mode := false  ## Needed to reset spacing mode in case we change it
 
@@ -49,6 +50,7 @@ func _on_SpacingMode_toggled(button_pressed: bool) -> void:
 
 func _on_Spacing_value_changed(value: Vector2) -> void:
 	_spacing = value
+	save_config()
 
 
 func _input(event: InputEvent) -> void:
@@ -57,10 +59,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("change_tool_mode"):
 		_prev_mode = overwrite_button.button_pressed
 	if event.is_action("change_tool_mode"):
-		overwrite_button.button_pressed = !_prev_mode
+		overwrite_button.set_pressed_no_signal(!_prev_mode)
 		_overwrite = overwrite_button.button_pressed
 	if event.is_action_released("change_tool_mode"):
-		overwrite_button.button_pressed = _prev_mode
+		overwrite_button.set_pressed_no_signal(_prev_mode)
 		_overwrite = overwrite_button.button_pressed
 
 
@@ -94,7 +96,7 @@ func draw_start(pos: Vector2i) -> void:
 	_old_spacing_mode = _spacing_mode
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if Input.is_action_pressed("draw_color_picker"):
+	if Input.is_action_pressed(&"draw_color_picker", true):
 		_picking_color = true
 		_pick_color(pos)
 		return
@@ -125,6 +127,7 @@ func draw_start(pos: Vector2i) -> void:
 	else:
 		if _fill_inside:
 			_draw_points.append(pos)
+			_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
 		draw_tool(pos)
 		_last_position = pos
 		Global.canvas.sprite_changed_this_frame = true
@@ -136,7 +139,7 @@ func draw_move(pos_i: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed(&"draw_color_picker"):
+		if Input.is_action_pressed(&"draw_color_picker", true):
 			_pick_color(pos)
 		return
 
@@ -156,12 +159,13 @@ func draw_move(pos_i: Vector2i) -> void:
 		Global.canvas.sprite_changed_this_frame = true
 		if _fill_inside:
 			_draw_points.append(pos)
+			_fill_inside_rect = _fill_inside_rect.expand(pos)
 
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_end(pos)
 	if _picking_color:
+		super.draw_end(pos)
 		return
 
 	if _draw_line:
@@ -178,11 +182,10 @@ func draw_end(pos: Vector2i) -> void:
 			_draw_points.append(pos)
 			if _draw_points.size() > 3:
 				var v := Vector2i()
-				var image_size := Global.current_project.size
-				for x in image_size.x:
-					v.x = x
-					for y in image_size.y:
-						v.y = y
+				for x in _fill_inside_rect.size.x:
+					v.x = x + _fill_inside_rect.position.x
+					for y in _fill_inside_rect.size.y:
+						v.y = y + _fill_inside_rect.position.y
 						if Geometry2D.is_point_in_polygon(v, _draw_points):
 							if _spacing_mode:
 								# use of get_spacing_position() in Pencil.gd is a rare case
@@ -190,6 +193,8 @@ func draw_end(pos: Vector2i) -> void:
 								v = get_spacing_position(v)
 							draw_tool(v)
 
+	_fill_inside_rect = Rect2i()
+	super.draw_end(pos)
 	commit_undo()
 	cursor_text = ""
 	update_random_image()

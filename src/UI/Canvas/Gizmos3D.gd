@@ -30,6 +30,8 @@ var gizmo_rot_x := PackedVector2Array()
 var gizmo_rot_y := PackedVector2Array()
 var gizmo_rot_z := PackedVector2Array()
 
+@onready var canvas := get_parent() as Canvas
+
 
 func _ready() -> void:
 	set_process_input(false)
@@ -188,13 +190,13 @@ func _draw() -> void:
 			# Draw bounding box outline
 			draw_multiline(points, selected_color, 0.5)
 			if object.applying_gizmos == Cel3DObject.Gizmos.X_ROT:
-				draw_line(gizmos_origin, Global.canvas.current_pixel, Color.RED)
+				draw_line(gizmos_origin, canvas.current_pixel, Color.RED)
 				continue
 			elif object.applying_gizmos == Cel3DObject.Gizmos.Y_ROT:
-				draw_line(gizmos_origin, Global.canvas.current_pixel, Color.GREEN)
+				draw_line(gizmos_origin, canvas.current_pixel, Color.GREEN)
 				continue
 			elif object.applying_gizmos == Cel3DObject.Gizmos.Z_ROT:
-				draw_line(gizmos_origin, Global.canvas.current_pixel, Color.BLUE)
+				draw_line(gizmos_origin, canvas.current_pixel, Color.BLUE)
 				continue
 			draw_set_transform(gizmos_origin, 0, draw_scale)
 			# Draw position arrows

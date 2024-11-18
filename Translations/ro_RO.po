@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-08-05 08:51\n"
+"PO-Revision-Date: 2024-10-22 10:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -230,6 +230,10 @@ msgstr "Răsturnare verticală"
 
 msgid "Preferences"
 msgstr "Preferințe"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr "Centrare pânză"
 
 msgid "Tile Mode"
 msgstr "Mod mozaic"
@@ -558,6 +562,10 @@ msgstr "Răsfoire"
 msgid "Resize:"
 msgstr "Redimensionare:"
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr "Calitate:"
+
 msgid "Cancel Export"
 msgstr "Anulare exportare"
 
@@ -838,6 +846,10 @@ msgstr "Limba sistemului"
 msgid "Display scale:"
 msgstr "Scară de afișare:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr "Font:"
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Dimensiunea fontului:"
@@ -904,6 +916,16 @@ msgstr "Culoare de fundal din:"
 msgid "Background color:"
 msgstr "Culoare de fundal:"
 
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr "Sincronizează opțiunile între instrumentele din stânga și cele din dreapta"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr "Dacă această setare este activată, opțiunile vor fi sincronizate între instrumentul din stânga și cel din dreapta.\n"
+"De exemplu, ambele instrumente vor folosi o pensulă de aceeași mărime, iar modificarea setării pentru un instrument se va aplica instantaneu și pentru cealaltă."
+
 msgid "Left tool color:"
 msgstr "Culoarea instrumentului din stânga:"
 
@@ -952,12 +974,15 @@ msgstr "Modificare canal albastru"
 msgid "Modify Alpha Channel"
 msgstr "Modificare canal alfa"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Desaturație"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Contur"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Umbră"
 
@@ -969,6 +994,26 @@ msgstr "Decalaj Y:"
 
 msgid "Shadow color:"
 msgstr "Culoarea umbrei:"
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr "Estompare gaussiană"
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr "Tip de estompare:"
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr "Cantitate de estompare:"
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr "Rază de estompare:"
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr "Direcția de estompare:"
 
 msgid "Gradient"
 msgstr "Degrade"
@@ -1030,7 +1075,7 @@ msgstr "Tip:"
 msgid "Angle:"
 msgstr "Unghi:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustare nuanță/saturație/valoare"
 
@@ -1100,11 +1145,11 @@ msgstr "Culori:"
 msgid "Steps:"
 msgstr "Pași:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Paletizare"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Pixelizare"
 
@@ -1720,6 +1765,10 @@ msgstr "Setare limită de cadre pe secundă pentru aplicație:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
 
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr "Pași max. de anulare:"
+
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Întrerupe aplicația atunci când pierde focalizarea"
@@ -1997,11 +2046,19 @@ msgstr "Orizontal"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Activează desenul oglindit orizontal"
 
+msgid "Vertical"
+msgstr "Vertical"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Activează desenul oglindit vertical"
 
-msgid "Vertical"
-msgstr "Vertical"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Mutare în centrul pânzei"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "Mutare în centrul de vizualizare"
 
 msgid "Current frame:"
 msgstr "Cadrul actual:"
@@ -2018,11 +2075,11 @@ msgstr "Sari la primul cadru"
 msgid "Go to the previous frame"
 msgstr "Deplasează-te la cadrul anterior"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Redă animația înapoi (de la sfârșit până la început)"
+msgid "Play the animation backwards"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Redă animația înainte (de la început până la sfârșit)"
+msgid "Play the animation forward"
+msgstr ""
 
 msgid "Go to the next frame"
 msgstr "Deplasează-te la cadrul următor"
@@ -2215,6 +2272,10 @@ msgstr "Îmbină stratul actual cu cel de mai jos"
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
 msgstr "Mod amestecare:"
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr "Trecere"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -2521,6 +2582,26 @@ msgstr "Culoare implicită de umplere:"
 msgid "A default background color of a new image"
 msgstr "Culoarea implicită de fundal a unei imagini noi"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Resetează toate opțiunile disponibile în Preferințe"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Resetează opțiunile de cronologie"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Resetați toate opțiunile de instrumente"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Elimină toate extensiile"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Șterge lista de fișiere recent deschisă"
+
 msgid "Lock aspect ratio"
 msgstr "Blocare raport aspect"
 
@@ -2687,6 +2768,22 @@ msgstr "Caractere separatoare:"
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Caracterele care separă numele fișierului și numărul cadrului"
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr "Trunchiere imagini"
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr "Trunchiază imaginile exportate până la porțiunea lor vizibilă, considerând fiecare pixel cu un canal alfa non-zero ca fiind vizibil."
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr "Decupează conținutul imaginii la selecție"
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr "Exportă doar conținut care se află în limitele unei zone selectate."
 
 msgid "Close"
 msgstr "Închide"
@@ -3034,6 +3131,10 @@ msgstr "Rază inferioară:"
 msgid "Text:"
 msgstr "Text:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr "Adâncime:"
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Dimensiune pixeli:"
@@ -3045,11 +3146,18 @@ msgstr "Pasul curbei:"
 msgid "Horizontal alignment:"
 msgstr "Aliniere orizontală:"
 
+msgid "Vertical alignment:"
+msgstr "Aliniere verticală:"
+
 msgid "Left"
 msgstr "Stânga"
 
 msgid "Right"
 msgstr "Dreapta"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr "Spațiere între linii:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

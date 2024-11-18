@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-08-02 00:18\n"
+"PO-Revision-Date: 2024-10-17 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -232,6 +232,10 @@ msgstr "垂直方向に反転"
 
 msgid "Preferences"
 msgstr "設定"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr "キャンバスを中央へ"
 
 msgid "Tile Mode"
 msgstr "タイルモード"
@@ -560,6 +564,10 @@ msgstr "参照"
 msgid "Resize:"
 msgstr "サイズを変更"
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr "品質:"
+
 msgid "Cancel Export"
 msgstr "エクスポートをキャンセル"
 
@@ -840,6 +848,10 @@ msgstr "システム言語"
 msgid "Display scale:"
 msgstr "表示スケール:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr "フォント:"
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "フォントサイズ:"
@@ -906,6 +918,16 @@ msgstr "背景色の参照元:"
 msgid "Background color:"
 msgstr "背景色:"
 
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr "左と右のツール間でオプションを共有"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr "これを有効にすると、オプションは左側と右側のツール間で同期されます。\n"
+"例えば、両方のツールが同じブラシサイズを共有し、一方のツールでそれを変更すると、他のツールで即座に変更されます。"
+
 msgid "Left tool color:"
 msgstr "左ツールの色:"
 
@@ -954,12 +976,15 @@ msgstr "青チャンネルを変更"
 msgid "Modify Alpha Channel"
 msgstr "アルファチャンネルを変更"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "彩度を下げる"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "アウトライン"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "ドロップシャドウ"
 
@@ -971,6 +996,26 @@ msgstr "オフセット Y:"
 
 msgid "Shadow color:"
 msgstr "影の色:"
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr "ガウスぼかし"
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr "ぼかしタイプ:"
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr "ぼかしの量:"
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr "ぼかし半径:"
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr "ぼかし方向:"
 
 msgid "Gradient"
 msgstr "グラディエーション"
@@ -1032,7 +1077,7 @@ msgstr "タイプ:"
 msgid "Angle:"
 msgstr "角度:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "色相/彩度/値を調整"
 
@@ -1102,11 +1147,11 @@ msgstr "色:"
 msgid "Steps:"
 msgstr "手順:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "パレット化"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "ピクセル化"
 
@@ -1722,6 +1767,10 @@ msgstr "アプリのFPS上限を設定:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "アプリケーションのフレーム/秒の制限を設定します。 数値が低いほどCPU使用率が低くなりますが、アプリケーションが遅く、粗く、応答がなくなります。0は制限がないことを意味します。"
 
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr "元に戻すの最大ステップ数:"
+
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "フォーカスを失ったときにアプリケーションを一時停止する"
@@ -1999,11 +2048,19 @@ msgstr "水平"
 msgid "Enable horizontal mirrored drawing"
 msgstr "左右対称描画を有効化"
 
+msgid "Vertical"
+msgstr "垂直方向"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "上下対称描画を有効化"
 
-msgid "Vertical"
-msgstr "垂直方向"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "キャンバスの中央に移動"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "ビューの中心に移動"
 
 msgid "Current frame:"
 msgstr "現在のフレーム:"
@@ -2020,11 +2077,11 @@ msgstr "最初のフレームにジャンプ"
 msgid "Go to the previous frame"
 msgstr "前のフレームへ移動"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "アニメーションを逆方向に再生 (終了から開始まで)"
+msgid "Play the animation backwards"
+msgstr "アニメーションを逆再生"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "アニメーションを順方向に再生する (開始から終了まで)"
+msgid "Play the animation forward"
+msgstr "アニメーションを再生"
 
 msgid "Go to the next frame"
 msgstr "次のフレームへ移動"
@@ -2217,6 +2274,10 @@ msgstr "現在のレイヤーと下のレイヤーを結合"
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
 msgstr "ブレンドモード:"
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr "パススルー"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -2523,6 +2584,26 @@ msgstr "既定の塗りつぶしの色:"
 msgid "A default background color of a new image"
 msgstr "新しい画像の既定の背景色"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "設定で利用可能なすべてのオプションをリセット"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "タイムラインオプションをリセット"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "すべてのツールオプションをリセット"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "すべての拡張機能を削除"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "最近開いたファイルリストをクリア"
+
 msgid "Lock aspect ratio"
 msgstr "アスペクト比をロック"
 
@@ -2689,6 +2770,22 @@ msgstr "区切り文字:"
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "ファイル名とフレーム番号を区切る文字"
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr "画像をトリム"
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr "エクスポートされた画像を可視部分にトリミングします。各ピクセルをゼロではないアルファチャンネルを可視とします。"
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr "選択範囲に画像コンテンツをクリップ"
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr "選択領域の範囲内にあるコンテンツのみエクスポートします。"
 
 msgid "Close"
 msgstr "閉じる"
@@ -3036,6 +3133,10 @@ msgstr "下部半径:"
 msgid "Text:"
 msgstr "テキスト:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "ピクセルサイズ:"
@@ -3047,11 +3148,18 @@ msgstr "カーブステップ:"
 msgid "Horizontal alignment:"
 msgstr "水平方向:"
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr "左"
 
 msgid "Right"
 msgstr "右"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr "行間隔:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

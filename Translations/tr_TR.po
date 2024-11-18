@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-08-02 13:34\n"
+"PO-Revision-Date: 2024-10-17 14:11\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -232,6 +232,10 @@ msgstr "Dikey Döndür"
 
 msgid "Preferences"
 msgstr "Tercihler"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
 
 msgid "Tile Mode"
 msgstr "Döşeme Kipi"
@@ -560,6 +564,10 @@ msgstr "Gözat"
 msgid "Resize:"
 msgstr "Boyutlandır:"
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr "Kalite:"
+
 msgid "Cancel Export"
 msgstr "Dışarı Aktarmayı İptal Et"
 
@@ -840,6 +848,10 @@ msgstr "Sistem Dili"
 msgid "Display scale:"
 msgstr "Ekran ölçeği:"
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Yazı tipi boyutu:"
@@ -906,6 +918,15 @@ msgstr "Şuradan arkaplan rengi:"
 msgid "Background color:"
 msgstr "Arkaplan rengi:"
 
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr ""
+
 msgid "Left tool color:"
 msgstr "Sol araç rengi:"
 
@@ -954,12 +975,15 @@ msgstr "Mavi Kanalı Düzenle"
 msgid "Modify Alpha Channel"
 msgstr "Alfa Kanalını Düzenle"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "Doygunluğu azalt"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "Anahat"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "Gölge"
 
@@ -971,6 +995,26 @@ msgstr "Uzaklık Y:"
 
 msgid "Shadow color:"
 msgstr "Gölge rengi:"
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr "Gauss Bulanıklığı"
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr "Bulanıklık türü:"
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr "Bulanıklık miktarı:"
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr "Bulanıklık yarıçapı:"
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr "Bulanıklık yönü:"
 
 msgid "Gradient"
 msgstr "Gradyan"
@@ -1032,7 +1076,7 @@ msgstr "Tür:"
 msgid "Angle:"
 msgstr "Açı:"
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Renk Tonu/Doygunluk/Değer Ayarla"
 
@@ -1102,11 +1146,11 @@ msgstr "Renkler:"
 msgid "Steps:"
 msgstr "Adımlar:"
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "Paletleştir"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "Pikselleştir"
 
@@ -1722,6 +1766,10 @@ msgstr "Uygulama FPS sınırını ayarla:"
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Uygulamanın saniyedeki kare sınırını ayarlar. Rakam ne kadar düşük olursa CPU kullanımı o kadar düşük olur, ancak uygulama daha yavaş, kesikli ve tepkisiz hale gelir. 0, sınır olmadığı anlamına gelir."
 
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr "Azami geri alma adımı:"
+
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "Odağı kaybettiğinde uygulamayı duraklat"
@@ -1999,11 +2047,19 @@ msgstr "Yatay"
 msgid "Enable horizontal mirrored drawing"
 msgstr "Çizim için yatay aynamalamayı etkinleştir"
 
+msgid "Vertical"
+msgstr "Dikey"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "Çizim için dikey aynamalamayı etkinleştir"
 
-msgid "Vertical"
-msgstr "Dikey"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr "Tuval merkezine taşı"
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr "Görünüm merkezine taşı"
 
 msgid "Current frame:"
 msgstr "Geçerli kare:"
@@ -2020,11 +2076,11 @@ msgstr "İlk kareye atla"
 msgid "Go to the previous frame"
 msgstr "Önceki kareye git"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "Animasyonu tersten oynat (sondan başa)"
+msgid "Play the animation backwards"
+msgstr "Canlandırmayı geri oynat"
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "Animasyonu ileri oynat (baştan sonra)"
+msgid "Play the animation forward"
+msgstr "Canlandırmayı ileri oynat"
 
 msgid "Go to the next frame"
 msgstr "Sonraki kareye git"
@@ -2217,6 +2273,10 @@ msgstr "Aktif katmanı alttaki katmanla birleştir"
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
 msgstr "Harmanlama kipi:"
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr "Doğrudan geçiş"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -2523,6 +2583,26 @@ msgstr "Varsayılan dolgu rengi:"
 msgid "A default background color of a new image"
 msgstr "Yeni resmin varsayılan arkaplan rengi"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr "Tercihler'deki tüm seçenekleri sıfırla"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr "Zaman çizelgesi seçeneklerini sıfırla"
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr "Tüm araç seçeneklerini sıfırla"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr "Tüm uzantıları kaldır"
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr "Geçerli seçilmiş dosya listesini temizle"
+
 msgid "Lock aspect ratio"
 msgstr "En boy oranını kilitle"
 
@@ -2689,6 +2769,22 @@ msgstr "Ayırcı karakter(ler):"
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Dosya adını ve kare numarasını ayıran karakter(ler)"
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr "Görüntüleri kırp"
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr "Dışa aktarılan görüntüleri görünür kısımlarına kırpar, sıfır olmayan alfa kanalına sahip her piksel görünür kabul edilir."
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr ""
 
 msgid "Close"
 msgstr "Kapat"
@@ -3036,6 +3132,10 @@ msgstr "Alt yarıçap:"
 msgid "Text:"
 msgstr "Metin:"
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "Piksel boyutu:"
@@ -3047,11 +3147,18 @@ msgstr "Eğri adımı:"
 msgid "Horizontal alignment:"
 msgstr "Yatay hizalama:"
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr "Sol"
 
 msgid "Right"
 msgstr "Sağ"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

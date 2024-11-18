@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 4.2.2
+  GODOT_VERSION: 4.3
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -23,18 +23,14 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.2.2
+      image: docker://barichello/godot-ci:4.3
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
-          dpkg --add-architecture i386 && apt-get update && apt-get install -y wine-stable && apt-get install -y wine32
           chown root:root -R ~
-          wget https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe
-          mkdir -v -p ~/.local/share/rcedit
-          mv rcedit-x64.exe ~/.local/share/rcedit
           godot --headless --quit
-          echo 'export/windows/wine = "/usr/bin/wine"' >> ~/.config/godot/editor_settings-4.tres
-          echo 'export/windows/rcedit = "/github/home/.local/share/rcedit/rcedit-x64.exe"' >> ~/.config/godot/editor_settings-4.tres
+          echo 'export/windows/wine = "/usr/bin/wine64-stable"' >> ~/.config/godot/editor_settings-4.3.tres
+          echo 'export/windows/rcedit = "/opt/rcedit.exe"' >> ~/.config/godot/editor_settings-4.3.tres
       - name: Checkout 🛎️
         uses: actions/checkout@v4
         with:
@@ -63,7 +59,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.2.2
+      image: docker://barichello/godot-ci:4.3
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -78,8 +74,8 @@ jobs:
         run: godot --headless -v --import
       - name: Linux Build 🔧
         run: |
-          godot --headless -v --export-release "Linux/X11 64-bit" ./build/${EXPORT_NAME}-Linux-64bit/$EXPORT_NAME.x86_64
-          godot --headless -v --export-release "Linux/X11 ARM64" ./build/${EXPORT_NAME}-Linux-ARM64/${EXPORT_NAME}.arm64
+          godot --headless -v --export-release "Linux 64-bit" ./build/${EXPORT_NAME}-Linux-64bit/$EXPORT_NAME.x86_64
+          godot --headless -v --export-release "Linux ARM64" ./build/${EXPORT_NAME}-Linux-ARM64/${EXPORT_NAME}.arm64
       - name: Give execute permission ☑️
         run: |
           chmod +x ./build/${EXPORT_NAME}-Linux-64bit/$EXPORT_NAME.x86_64

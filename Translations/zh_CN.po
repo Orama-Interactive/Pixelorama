@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-08-01 22:07\n"
+"PO-Revision-Date: 2024-10-17 14:11\n"
 
 msgid "OK"
 msgstr "确定"
@@ -232,6 +232,10 @@ msgstr "垂直翻转"
 
 msgid "Preferences"
 msgstr "首选项"
+
+#. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
+msgid "Center Canvas"
+msgstr ""
 
 msgid "Tile Mode"
 msgstr "平铺模式"
@@ -560,6 +564,10 @@ msgstr "浏览"
 msgid "Resize:"
 msgstr "调整大小："
 
+#. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
+msgid "Quality:"
+msgstr "质量："
+
 msgid "Cancel Export"
 msgstr "取消导出"
 
@@ -840,6 +848,10 @@ msgstr "系统语言"
 msgid "Display scale:"
 msgstr "显示比例："
 
+#. Refers to the font of a text.
+msgid "Font:"
+msgstr ""
+
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "字体大小："
@@ -906,6 +918,15 @@ msgstr "背景颜色从："
 msgid "Background color:"
 msgstr "背景颜色："
 
+#. Found in the preferences, under the Tools category.
+msgid "Share options between the left and the right tools"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
+msgid "If this is enabled, options will be synced between the left and the right tool.\n"
+"For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+msgstr ""
+
 msgid "Left tool color:"
 msgstr "左侧工具颜色："
 
@@ -954,12 +975,15 @@ msgstr "修改蓝色通道"
 msgid "Modify Alpha Channel"
 msgstr "修改 Alpha 通道"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
 msgstr "去饱和"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
 msgstr "轮廓"
 
+#. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
 msgstr "阴影"
 
@@ -971,6 +995,26 @@ msgstr "偏移 Y："
 
 msgid "Shadow color:"
 msgstr "阴影颜色："
+
+#. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
+msgid "Gaussian Blur"
+msgstr "高斯模糊"
+
+#. The type of the Gaussian blur, an image effect.
+msgid "Blur type:"
+msgstr "模糊类型："
+
+#. The applied amount of Gaussian blur, an image effect.
+msgid "Blur amount:"
+msgstr "模糊数量："
+
+#. The applied radius of Gaussian blur, an image effect.
+msgid "Blur radius:"
+msgstr "模糊半径："
+
+#. The applied direction of Gaussian blur, an image effect.
+msgid "Blur direction:"
+msgstr "模糊方向："
 
 msgid "Gradient"
 msgstr "渐变"
@@ -1032,7 +1076,7 @@ msgstr "类型："
 msgid "Angle:"
 msgstr "角度："
 
-#. An image effect. Adjusts the hue, saturation and value of the colors of an image.
+#. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
 msgstr "调整色相/饱和度/值"
 
@@ -1054,35 +1098,35 @@ msgstr "值："
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "调整亮度/对比度"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "亮度："
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "对比度："
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "红色值："
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "绿色值："
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "蓝色值："
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "色调颜色："
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "色调影响因素："
 
 msgid "Apply"
 msgstr "应用"
@@ -1102,11 +1146,11 @@ msgstr "颜色："
 msgid "Steps:"
 msgstr "步骤："
 
-#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects.
+#. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
 msgstr "调色板"
 
-#. An image effect. It makes the input image pixelated.
+#. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
 msgstr "像素化"
 
@@ -1721,6 +1765,10 @@ msgstr "设置应用程序 FPS 限制："
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越低，但应用程序变慢，限制且反应不灵。0 表示没有限制。"
 
+#. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
+msgid "Max undo steps:"
+msgstr "最大撤消步骤："
+
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
 msgstr "失去焦点时暂停应用程序"
@@ -1731,11 +1779,11 @@ msgstr "如果打开此选项，当应用程序的窗口失去焦点时，它会
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "持续更新"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "如果启用此功能，应用程序将不断重绘屏幕，即使不使用屏幕也是如此。关闭此功能有助于降低空闲时的 CPU 和 GPU 使用率。"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -1998,11 +2046,19 @@ msgstr "水平"
 msgid "Enable horizontal mirrored drawing"
 msgstr "启用水平镜像绘图"
 
+msgid "Vertical"
+msgstr "垂直"
+
 msgid "Enable vertical mirrored drawing"
 msgstr "启用垂直镜像绘图"
 
-msgid "Vertical"
-msgstr "垂直"
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to canvas center"
+msgstr ""
+
+#. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
+msgid "Move to view center"
+msgstr ""
 
 msgid "Current frame:"
 msgstr "当前帧："
@@ -2019,11 +2075,11 @@ msgstr "跳转到第一帧"
 msgid "Go to the previous frame"
 msgstr "转到上一帧"
 
-msgid "Play the animation backwards (from end to beginning)"
-msgstr "向后播放动画（从结尾到开头）"
+msgid "Play the animation backwards"
+msgstr ""
 
-msgid "Play the animation forward (from beginning to end)"
-msgstr "向前播放动画（从头到尾）"
+msgid "Play the animation forward"
+msgstr ""
 
 msgid "Go to the next frame"
 msgstr "转到下一帧"
@@ -2163,7 +2219,7 @@ msgstr "新建标签"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "导入标签"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2216,6 +2272,10 @@ msgstr "当前图层与下面图层合并"
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
 msgstr "混合模式："
+
+#. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
+msgid "Pass through"
+msgstr "通过"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
@@ -2522,6 +2582,26 @@ msgstr "默认填充颜色："
 msgid "A default background color of a new image"
 msgstr "设置新建图像的背景颜色"
 
+#. Found in the preferences, under the Reset category.
+msgid "Reset all options available in the Preferences"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset timeline options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Reset all tool options"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Clear the recently opened file list"
+msgstr ""
+
 msgid "Lock aspect ratio"
 msgstr "锁定长宽比"
 
@@ -2688,6 +2768,22 @@ msgstr "分隔符:"
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "分隔文件名称和帧编号的字符(秒)"
+
+#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
+msgid "Trim images"
+msgstr "裁剪图像"
+
+#. Found in the export dialog. Tooltip of the "trim images" option.
+msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
+msgstr "将导出的图像变为可见部分，考虑到非零透明通道的每个像素。"
+
+#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
+msgid "Clip image content to selection"
+msgstr ""
+
+#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
+msgid "Only export content that is within the bounds of a selected area."
+msgstr ""
 
 msgid "Close"
 msgstr "关闭"
@@ -3034,6 +3130,10 @@ msgstr "下半径："
 msgid "Text:"
 msgstr "文本："
 
+#. Refers to the depth of something, such as the depth of a 3D object.
+msgid "Depth:"
+msgstr ""
+
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
 msgstr "像素大小："
@@ -3045,11 +3145,18 @@ msgstr "曲线步骤："
 msgid "Horizontal alignment:"
 msgstr "水平对齐"
 
+msgid "Vertical alignment:"
+msgstr ""
+
 msgid "Left"
 msgstr "左"
 
 msgid "Right"
 msgstr "右"
+
+#. Refers to the vertical space between lines in a text.
+msgid "Line spacing:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"

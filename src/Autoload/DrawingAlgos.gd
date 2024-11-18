@@ -53,8 +53,18 @@ func blend_layers(
 		if DisplayServer.get_name() == "headless":
 			blend_layers_headless(image, project, layer, cel, origin)
 		else:
-			var cel_image := layer.display_effects(cel)
-			textures.append(cel_image)
+			if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
+				var cel_image := (layer as GroupLayer).blend_children(frame)
+				textures.append(cel_image)
+			else:
+				var cel_image := layer.display_effects(cel)
+				textures.append(cel_image)
+			if (
+				layer.is_blended_by_ancestor()
+				and not only_selected_cels
+				and not only_selected_layers
+			):
+				include = false
 			set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
 	if DisplayServer.get_name() != "headless":
 		var texture_array := Texture2DArray.new()
@@ -84,9 +94,14 @@ func set_layer_metadata_image(
 		image.set_pixel(index, 1, Color())
 	# Store the clipping mask boolean
 	if layer.clipping_mask:
-		image.set_pixel(index, 3, Color.WHITE)
+		image.set_pixel(index, 3, Color.RED)
 	else:
 		image.set_pixel(index, 3, Color.BLACK)
+	if not include:
+		# Store a small red value as a way to indicate that this layer should be skipped
+		# Used for layers such as child layers of a group, so that the group layer itself can
+		# successfully be used as a clipping mask with the layer below it.
+		image.set_pixel(index, 3, Color(0.2, 0.0, 0.0, 0.0))
 
 
 func blend_layers_headless(

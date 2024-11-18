@@ -2,6 +2,7 @@ class_name BaseTool
 extends VBoxContainer
 
 var is_moving := false
+var is_syncing := false
 var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""
@@ -34,6 +35,8 @@ func _ready() -> void:
 func save_config() -> void:
 	var config := get_config()
 	Global.config_cache.set_value(tool_slot.kname, kname, config)
+	if not is_syncing:  # If the tool isn't busy syncing with another tool.
+		Tools.config_changed.emit(tool_slot.button, config)
 
 
 func load_config() -> void:
@@ -312,6 +315,30 @@ func _get_selected_draw_images() -> Array[Image]:
 	return images
 
 
+func _pick_color(pos: Vector2i) -> void:
+	var project := Global.current_project
+	pos = project.tiles.get_canon_position(pos)
+
+	if pos.x < 0 or pos.y < 0:
+		return
+
+	var image := Image.new()
+	image.copy_from(_get_draw_image())
+	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
+		return
+
+	var color := Color(0, 0, 0, 0)
+	var curr_frame: Frame = project.frames[project.current_frame]
+	for layer in project.layers.size():
+		var idx := (project.layers.size() - 1) - layer
+		if project.layers[idx].is_visible_in_hierarchy():
+			image = curr_frame.cels[idx].get_image()
+			color = image.get_pixelv(pos)
+			if not is_zero_approx(color.a):
+				break
+	Tools.assign_color(color, tool_slot.button, false)
+
+
 func _flip_rect(rect: Rect2, rect_size: Vector2, horiz: bool, vert: bool) -> Rect2:
 	var result := rect
 	if horiz:
@@ -374,3 +401,4 @@ func _add_polylines_segment(lines: Array, start: Vector2i, end: Vector2i) -> voi
 func _exit_tree() -> void:
 	if is_moving:
 		draw_end(Global.canvas.current_pixel.floor())
+	Global.canvas.previews_sprite.texture = null

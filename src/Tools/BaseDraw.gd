@@ -1,8 +1,11 @@
 extends BaseTool
 
+const IMAGE_BRUSHES := [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+
 var _brush := Brushes.get_default_brush()
 var _brush_size := 1
 var _brush_size_dynamics := 1
+var _brush_density := 100
 var _brush_flip_x := false
 var _brush_flip_y := false
 var _brush_rotate_90 := false
@@ -71,14 +74,13 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 
 
 func _on_BrushSize_value_changed(value: float) -> void:
-	if _brush_size != int(value):
-		_brush_size = int(value)
-		_brush_size_dynamics = _brush_size
-		if Tools.dynamics_size != Tools.Dynamics.NONE:
-			_brush_size_dynamics = Tools.brush_size_min
-		_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
-		update_config()
-		save_config()
+	_brush_size = int(value)
+	_brush_size_dynamics = _brush_size
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
+		_brush_size_dynamics = Tools.brush_size_min
+	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
+	update_config()
+	save_config()
 
 
 func _reset_dynamics() -> void:
@@ -86,6 +88,12 @@ func _reset_dynamics() -> void:
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
 	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
+	update_config()
+	save_config()
+
+
+func _on_density_value_slider_value_changed(value: int) -> void:
+	_brush_density = value
 	update_config()
 	save_config()
 
@@ -112,7 +120,13 @@ func get_config() -> Dictionary:
 		"brush_type": _brush.type,
 		"brush_index": _brush.index,
 		"brush_size": _brush_size,
+		"brush_density": _brush_density,
 		"brush_interpolate": _brush_interpolate,
+		"brush_flip_x": _brush_flip_x,
+		"brush_flip_y": _brush_flip_y,
+		"brush_rotate_90": _brush_rotate_90,
+		"brush_rotate_180": _brush_rotate_180,
+		"brush_rotate_270": _brush_rotate_270,
 	}
 
 
@@ -124,17 +138,23 @@ func set_config(config: Dictionary) -> void:
 	_brush_size_dynamics = _brush_size
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
+	_brush_density = config.get("brush_density", _brush_density)
 	_brush_interpolate = config.get("brush_interpolate", _brush_interpolate)
+	_brush_flip_x = config.get("brush_flip_x", _brush_flip_x)
+	_brush_flip_y = config.get("brush_flip_y", _brush_flip_y)
+	_brush_rotate_90 = config.get("brush_rotate_90", _brush_rotate_90)
+	_brush_rotate_180 = config.get("brush_rotate_180", _brush_rotate_180)
+	_brush_rotate_270 = config.get("brush_rotate_270", _brush_rotate_270)
 
 
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$ColorInterpolation.value = _brush_interpolate
-	$RotationOptions/Flip/FlipX.button_pressed = _brush_flip_x
-	$RotationOptions/Flip/FlipY.button_pressed = _brush_flip_y
-	$RotationOptions/Rotate/Rotate90.button_pressed = _brush_rotate_90
-	$RotationOptions/Rotate/Rotate180.button_pressed = _brush_rotate_180
-	$RotationOptions/Rotate/Rotate270.button_pressed = _brush_rotate_270
+	%FlipX.button_pressed = _brush_flip_x
+	%FlipY.button_pressed = _brush_flip_y
+	%Rotate90.button_pressed = _brush_rotate_90
+	%Rotate180.button_pressed = _brush_rotate_180
+	%Rotate270.button_pressed = _brush_rotate_270
 	update_brush()
 
 
@@ -168,11 +188,13 @@ func update_brush() -> void:
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
+	_circle_tool_shortcut = []
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
-	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
-	$RotationOptions.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+	$DensityValueSlider.visible = _brush.type not in IMAGE_BRUSHES
+	$ColorInterpolation.visible = _brush.type in IMAGE_BRUSHES
+	$RotationOptions.visible = _brush.type in IMAGE_BRUSHES
 
 
 func update_random_image() -> void:
@@ -238,7 +260,7 @@ func commit_undo() -> void:
 	var project := Global.current_project
 	var frame := -1
 	var layer := -1
-	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
+	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
 		frame = project.current_frame
 		layer = project.current_layer
 
@@ -264,6 +286,9 @@ func draw_tool(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
+	_stroke_project = null
+	_stroke_images = []
+	_circle_tool_shortcut = []
 	_brush_size_dynamics = _brush_size
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
@@ -302,10 +327,6 @@ func _prepare_tool() -> void:
 	# This may prevent a few tests when setting pixels
 	_is_mask_size_zero = _mask.size() == 0
 	match _brush.type:
-		Brushes.CIRCLE:
-			_prepare_circle_tool(false)
-		Brushes.FILLED_CIRCLE:
-			_prepare_circle_tool(true)
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			# save _brush_image for safe keeping
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
@@ -313,19 +334,6 @@ func _prepare_tool() -> void:
 			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
-
-
-func _prepare_circle_tool(fill: bool) -> void:
-	var circle_tool_map := _create_circle_indicator(_brush_size_dynamics, fill)
-	# Go through that BitMap and build an Array of the "displacement" from the center of the bits
-	# that are true.
-	var diameter := _brush_size_dynamics * 2 + 1
-	for n in range(0, diameter):
-		for m in range(0, diameter):
-			if circle_tool_map.get_bitv(Vector2i(m, n)):
-				_circle_tool_shortcut.append(
-					Vector2i(m - _brush_size_dynamics, n - _brush_size_dynamics)
-				)
 
 
 ## Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
@@ -496,7 +504,7 @@ func draw_indicator(left: bool) -> void:
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas: Node2D = Global.canvas.indicators
-	if _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM] and not _draw_line:
+	if _brush.type in IMAGE_BRUSHES and not _draw_line:
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
 		canvas.draw_texture(_brush_texture, pos)
@@ -526,6 +534,8 @@ func _set_pixel(pos: Vector2i, ignore_mirroring := false) -> void:
 
 
 func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
+	if randi() % 100 >= _brush_density:
+		return
 	pos = _stroke_project.tiles.get_canon_position(pos)
 	if Global.current_project.has_selection:
 		pos = Global.current_project.selection_map.get_canon_position(pos)
@@ -610,10 +620,24 @@ func _create_pixel_indicator(brush_size: int) -> BitMap:
 
 
 func _create_circle_indicator(brush_size: int, fill := false) -> BitMap:
-	_circle_tool_shortcut = []
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
+		_circle_tool_shortcut = []
 	var brush_size_v2 := Vector2i(brush_size, brush_size)
-	var diameter := brush_size_v2 * 2 + Vector2i.ONE
-	return _fill_bitmap_with_points(_compute_draw_tool_circle(brush_size_v2, fill), diameter)
+	var diameter_v2 := brush_size_v2 * 2 + Vector2i.ONE
+	var circle_tool_map := _fill_bitmap_with_points(
+		_compute_draw_tool_circle(brush_size_v2, fill), diameter_v2
+	)
+	if _circle_tool_shortcut.is_empty():
+		# Go through that BitMap and build an Array of the "displacement"
+		# from the center of the bits that are true.
+		var diameter := _brush_size_dynamics * 2 + 1
+		for n in range(0, diameter):
+			for m in range(0, diameter):
+				if circle_tool_map.get_bitv(Vector2i(m, n)):
+					_circle_tool_shortcut.append(
+						Vector2i(m - _brush_size_dynamics, n - _brush_size_dynamics)
+					)
+	return circle_tool_map
 
 
 func _create_line_indicator(indicator: BitMap, start: Vector2i, end: Vector2i) -> BitMap:
@@ -694,7 +718,7 @@ func _get_undo_data() -> Dictionary:
 	var data := {}
 	var project := Global.current_project
 	var cels: Array[BaseCel] = []
-	if Global.animation_timer.is_stopped():
+	if Global.animation_timeline.animation_timer.is_stopped():
 		for cel_index in project.selected_cels:
 			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])
 	else:
@@ -711,55 +735,31 @@ func _get_undo_data() -> Dictionary:
 	return data
 
 
-func _pick_color(pos: Vector2i) -> void:
-	var project := Global.current_project
-	pos = project.tiles.get_canon_position(pos)
-
-	if pos.x < 0 or pos.y < 0:
-		return
-
-	var image := Image.new()
-	image.copy_from(_get_draw_image())
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
-		return
-
-	var color := Color(0, 0, 0, 0)
-	var curr_frame: Frame = project.frames[project.current_frame]
-	for layer in project.layers.size():
-		var idx := (project.layers.size() - 1) - layer
-		if project.layers[idx].is_visible_in_hierarchy():
-			image = curr_frame.cels[idx].get_image()
-			color = image.get_pixelv(pos)
-			if not is_zero_approx(color.a):
-				break
-	var button := (
-		MOUSE_BUTTON_LEFT
-		if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self
-		else MOUSE_BUTTON_RIGHT
-	)
-	Tools.assign_color(color, button, false)
-
-
 func _on_flip_x_toggled(button_pressed: bool) -> void:
 	_brush_flip_x = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_flip_y_toggled(button_pressed: bool) -> void:
 	_brush_flip_y = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_90_toggled(button_pressed: bool) -> void:
 	_brush_rotate_90 = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_180_toggled(button_pressed: bool) -> void:
 	_brush_rotate_180 = button_pressed
 	update_brush()
+	save_config()
 
 
 func _on_rotate_270_toggled(button_pressed: bool) -> void:
 	_brush_rotate_270 = button_pressed
 	update_brush()
+	save_config()

@@ -19,8 +19,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install gdtoolkit
-        run: pip3 install "gdtoolkit==4.*"
+      - uses: Scony/godot-gdscript-toolkit@master
       - name: Formatting checks
         run: gdformat --diff .
       - name: Linting checks

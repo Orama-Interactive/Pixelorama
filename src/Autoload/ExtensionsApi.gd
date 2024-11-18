@@ -162,14 +162,17 @@ class GeneralAPI:
 	func get_canvas() -> Canvas:
 		return Global.canvas
 
+	## Returns a new ValueSlider. Useful for editing floating values
 	func create_value_slider() -> ValueSlider:
 		return ValueSlider.new()
 
+	## Returns a new ValueSliderV2. Useful for editing 2D vectors.
 	func create_value_slider_v2() -> ValueSliderV2:
-		return ValueSliderV2.new()
+		return preload("res://src/UI/Nodes/ValueSliderV2.tscn").instantiate()
 
+	## Returns a new ValueSliderV3. Useful for editing 3D vectors.
 	func create_value_slider_v3() -> ValueSliderV3:
-		return ValueSliderV3.new()
+		return preload("res://src/UI/Nodes/ValueSliderV3.tscn").instantiate()
 
 
 ## Gives ability to add/remove items from menus in the top bar.
@@ -238,7 +241,7 @@ class DialogAPI:
 	func get_dialogs_parent_node() -> Node:
 		return Global.control.get_node("Dialogs")
 
-	## Tells pixelorama that some dialog is about to open or close.
+	## Informs Pixelorama that some dialog is about to open or close.
 	func dialog_open(open: bool) -> void:
 		Global.dialog_open(open)
 
@@ -255,7 +258,7 @@ class PanelAPI:
 			return dockable.tabs_visible
 
 	## Adds the [param node] as a tab. Initially it's placed on the same panel as the tools tab,
-	## but can be changed through adding custom layouts.
+	## but it's position can be changed through editing a layout.
 	func add_node_as_tab(node: Node) -> void:
 		var dockable := _get_dockable_container_ui()
 		var top_menu_container := Global.top_menu_container
@@ -378,6 +381,10 @@ class PanelAPI:
 
 ## Gives access to theme related functions.
 class ThemeAPI:
+	## Returns the Themes autoload. Allows interacting with themes on a more deeper level.
+	func autoload() -> Themes:
+		return Themes
+
 	## Adds the [param theme] to [code]Edit -> Preferences -> Interface -> Themes[/code].
 	func add_theme(theme: Theme) -> void:
 		Themes.add_theme(theme)
@@ -401,10 +408,33 @@ class ThemeAPI:
 			push_error("No theme found at index: ", idx)
 			return false
 
-	## Remove the [param theme] from preferences.
+	## Removes the [param theme] from preferences.
 	func remove_theme(theme: Theme) -> void:
 		Themes.remove_theme(theme)
 		ExtensionsApi.remove_action("ThemeAPI", "add_theme")
+
+	## Adds a new font.
+	func add_font(font: Font) -> void:
+		Global.loaded_fonts.append(font)
+		Global.font_loaded.emit()
+
+	## Removes a loaded font.
+	## If that font is the current one of the interface, set it back to Roboto.
+	func remove_font(font: Font) -> void:
+		var font_index := Global.loaded_fonts.find(font)
+		if font_index == -1:
+			return
+		if Global.theme_font_index == font_index:
+			Global.theme_font_index = 1
+		Global.loaded_fonts.remove_at(font_index)
+		Global.font_loaded.emit()
+
+	## Sets a font as the current one for the interface. The font must have been
+	## added beforehand by [method add_font].
+	func set_font(font: Font) -> void:
+		var font_index := Global.loaded_fonts.find(font)
+		if font_index > -1:
+			Global.theme_font_index = font_index
 
 
 ## Gives ability to add/remove tools.
@@ -412,14 +442,18 @@ class ToolAPI:
 	# gdlint: ignore=constant-name
 	const LayerTypes := Global.LayerTypes
 
+	## Returns the Tools autoload. Allows interacting with tools on a more deeper level.
+	func autoload() -> Tools:
+		return Tools
+
 	## Adds a tool to pixelorama with name [param tool_name] (without spaces),
 	## display name [param display_name], tool scene [param scene], layers that the tool works
 	## on [param layer_types] defined by [constant LayerTypes],
 	## [param extra_hint] (text that appears when mouse havers tool icon), primary shortcut
 	## name [param shortcut] and any extra shortcuts [param extra_shortcuts].
-	## [br][br]At the moment extensions can't make their own shortcuts so you can ignore
-	## [param shortcut] and [param extra_shortcuts].
-	## [br] to determine the position of tool in tool list, use [param insert_point]
+	## [br][br]At the moment extensions can't make their own shortcuts so you can leave
+	## [param shortcut] and [param extra_shortcuts] as [code][][/code].
+	## [br] To determine the position of tool in tool list, use [param insert_point]
 	## (if you leave it empty then the added tool will be placed at bottom)
 	func add_tool(
 		tool_name: String,
@@ -472,7 +506,7 @@ class SelectionAPI:
 	## Moves a selection to [param destination],
 	## with content if [param with_content] is [code]true[/code].
 	## If [param transform_standby] is [code]true[/code] then the transformation will not be
-	## applied immediatelyunless [kbd]Enter[/kbd] is pressed.
+	## applied immediately unless [kbd]Enter[/kbd] is pressed.
 	func move_selection(
 		destination: Vector2i, with_content := true, transform_standby := false
 	) -> void:
@@ -500,6 +534,10 @@ class SelectionAPI:
 			Global.canvas.selection.move_borders_start()
 		else:
 			Global.canvas.selection.transform_content_start()
+
+		if Global.canvas.selection.original_bitmap.is_empty():  # To avoid copying twice.
+			Global.canvas.selection.original_bitmap.copy_from(Global.current_project.selection_map)
+
 		Global.canvas.selection.big_bounding_rectangle.size = new_size
 		Global.canvas.selection.resize_selection()
 		Global.canvas.selection.move_borders_end()
@@ -527,14 +565,14 @@ class SelectionAPI:
 	func paste(in_place := false) -> void:
 		Global.canvas.selection.paste(in_place)
 
-	## Deletes the drawing on current cel enclosed within the selection's area.
+	## Erases the drawing on current cel enclosed within the selection's area.
 	func delete_content(selected_cels := true) -> void:
 		Global.canvas.selection.delete(selected_cels)
 
 
 ## Gives access to basic project manipulation functions.
 class ProjectAPI:
-	## The project currently in focus
+	## The project currently in focus.
 	var current_project: Project:
 		set(value):
 			Global.tabs.current_tab = Global.projects.find(value)
@@ -575,9 +613,9 @@ class ProjectAPI:
 	func get_project_info(project: Project) -> Dictionary:
 		return project.serialize()
 
-	## Selects the cels and makes the last entry of [param selected_array] as the current cel
-	## [param selected_array] is an [Array] of [Arrays] of 2 integers (frame & layer).[br]
-	## Frames are counted from left to right, layers are counted from bottom to top.
+	## Selects the cels and makes the last entry of [param selected_array] as the current cel.
+	## [param selected_array] is an [Array] of [Arrays] of 2 integers (frame & layer respectively).
+	## [br]Frames are counted from left to right, layers are counted from bottom to top.
 	## Frames/layers start at "0" and end at [param project.frames.size() - 1] and
 	## [param project.layers.size() - 1] respectively.
 	func select_cels(selected_array := [[0, 0]]) -> void:
@@ -652,6 +690,11 @@ class ExportAPI:
 	# gdlint: ignore=constant-name
 	const ExportTab := Export.ExportTab
 
+	## Returns the Export autoload.
+	## Allows interacting with the export workflow on a more deeper level.
+	func autoload() -> Export:
+		return Export
+
 	## [param format_info] has keys: [code]extension[/code] and [code]description[/code]
 	## whose values are of type [String] e.g:[codeblock]
 	## format_info = {"extension": ".gif", "description": "GIF Image"}
@@ -664,7 +707,8 @@ class ExportAPI:
 	## (Note: [code]processed_images[/code] is an array of ProcessedImage resource which further
 	## has parameters [param image] and [param duration])[br]
 	## If the value of [param tab] is not in [constant ExportTab] then the format will be added to
-	## both tabs. Returns the index of exporter, which can be used to remove exporter later.
+	## both tabs.
+	## [br]Returns the index of exporter, which can be used to remove exporter later.
 	func add_export_option(
 		format_info: Dictionary,
 		exporter_generator: Object,
@@ -703,18 +747,27 @@ class ExportAPI:
 
 ## Gives access to adding custom import options.
 class ImportAPI:
+	## Returns the OpenSave autoload. Contains code to handle file loading.
+	## It also contains code to handle project saving (.pxo)
+	func open_save_autoload() -> OpenSave:
+		return OpenSave
+
+	## Returns the Import autoload. Manages import of brushes and patterns.
+	func import_autoload() -> Import:
+		return Import
+
 	## [param import_scene] is a scene preload that will be instanced and added to "import options"
-	## section of pixelorama's import dialogs and will appears whenever [param import_name] is
+	## section of pixelorama's import dialogs and will appear whenever [param import_name] is
 	## chosen from import menu.
 	## [br]
-	## [param import_scene] must have a a script containing:[br]
+	## [param import_scene] must have a script containing:[br]
 	## 1. An optional variable named [code]import_preview_dialog[/code] of type [ConfirmationDialog],
 	## If present, it will automatically be assigned a reference to the relevant import dialog's
 	## [code]ImportPreviewDialog[/code] class so that you can easily access variables and
 	## methods of that class. (This variable is meant to be read-only)[br]
-	## 2. The method [method initiate_import] which takes 2 arguments: [code]path[/code],
-	## [code]image[/code], which are automatically passed to [method initiate_import] at
-	## time of import.
+	## 2. The method [method initiate_import], which takes 2 arguments: [code]path[/code],
+	## [code]image[/code]. Values will automatically be passed to these arguments at the
+	## time of import.[br]Returns the id of the importer.
 	func add_import_option(import_name: StringName, import_scene_preload: PackedScene) -> int:
 		var id := OpenSave.add_import_option(import_name, import_scene_preload)
 		ExtensionsApi.add_action("ImportAPI", "add_import_option")
@@ -728,11 +781,15 @@ class ImportAPI:
 		ExtensionsApi.remove_action("ImportAPI", "add_import_option")
 
 
-## Gives access to palettes.
+## Gives access to palette related stuff.
 class PaletteAPI:
-	## Creates and adds a new [Palette] with name [param palette_name] with [param data]
-	## in the form of a [Dictionary].
-	## An example of [code]data[/code] dictionary will be:[codeblock]
+	## Returns the Palettes autoload. Allows interacting with palettes on a more deeper level.
+	func autoload() -> Palettes:
+		return Palettes
+
+	## Creates and adds a new [Palette] with name [param palette_name] containing [param data].
+	## [param data] is a [Dictionary] containing the palette information.
+	## An example of [code]data[/code] will be:[codeblock]
 	## {
 	## "colors": [
 	##  {
@@ -811,7 +868,8 @@ class SignalsAPI:
 	# PROJECT RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever a new project is created.[br]
-	## [b]Binds: [/b]It has one bind of type [code]Project[/code] which is the newly created project
+	## [b]Binds: [/b]It has one bind of type [code]Project[/code] which is the newly
+	## created project.
 	func signal_project_created(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.project_created, callable, is_disconnecting)
 
@@ -867,7 +925,7 @@ class SignalsAPI:
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever preview is about to be drawn.[br]
 	## [b]Binds: [/b]It has one bind of type [Dictionary] with keys: [code]exporter_id[/code],
-	## [code]export_tab[/code], [code]preview_images[/code], [code]durations[/code]
-	## [br] Use this if you plan on changing preview of export
+	## [code]export_tab[/code], [code]preview_images[/code], [code]durations[/code].[br]
+	## Use this if you plan on changing preview of export.
 	func signal_export_about_to_preview(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.export_dialog.about_to_preview, callable, is_disconnecting)

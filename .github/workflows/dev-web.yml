@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 4.2.2
+  GODOT_VERSION: 4.3
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.2.2
+      image: docker://barichello/godot-ci:4.3
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -35,14 +35,6 @@ jobs:
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
-      # Workaround for SharedArrayBuffer support on GitHub Pages
-      # See: https://github.com/godotengine/godot-docs/issues/7084
-      - name: Enable SharedArrayBuffer for GitHub Pages
-        run: |
-          cd ./build/web
-          apt-get install -y curl
-          curl -fsSL https://github.com/gzuidhof/coi-serviceworker/raw/master/coi-serviceworker.js > coi-serviceworker.js
-          sed -i 's#\(		<script src="index.js"></script>\)#		<script src="coi-serviceworker.js"></script>\n\1#g' index.html
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

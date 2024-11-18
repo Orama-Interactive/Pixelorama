@@ -1,12 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://w1v6plnv6ppt"]
+[gd_scene load_steps=8 format=3 uid="uid://w1v6plnv6ppt"]
 
 [ext_resource type="Script" path="res://src/UI/Dialogs/AboutDialog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2"]
-[ext_resource type="FontFile" uid="uid://cy5lkye8vdr5t" path="res://assets/fonts/Roboto-Italic.ttf" id="3_jqhhb"]
+[ext_resource type="FontFile" uid="uid://cvc4lelf6hl7x" path="res://assets/fonts/Roboto-Regular.ttf" id="3_fj1id"]
 [ext_resource type="Texture2D" uid="uid://s25pa611bpvj" path="res://assets/graphics/splash_screen/orama_64x64.png" id="4"]
 
+[sub_resource type="FontVariation" id="FontVariation_dy14o"]
+base_font = ExtResource("3_fj1id")
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+spacing_space = -1
+
 [sub_resource type="LabelSettings" id="LabelSettings_bkh2e"]
-font = ExtResource("3_jqhhb")
+font = SubResource("FontVariation_dy14o")
 
 [sub_resource type="LabelSettings" id="LabelSettings_aewb6"]
 font_size = 12
