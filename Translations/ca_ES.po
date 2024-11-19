@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2024-11-19 00:32\n"
+"PO-Revision-Date: 2024-11-19 14:05\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1553,7 +1553,7 @@ msgstr "Eina d'el·lipsi\n\n"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button\n\n"
+"%s for right mouse button"
 msgstr ""
 
 msgid "Rectangle"
