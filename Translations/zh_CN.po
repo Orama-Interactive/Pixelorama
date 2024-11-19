@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-11-19 00:33\n"
+"PO-Revision-Date: 2024-11-19 01:56\n"
 
 msgid "OK"
 msgstr "确定"
@@ -219,41 +219,41 @@ msgid "Invert"
 msgstr "反向"
 
 msgid "Modify"
-msgstr ""
+msgstr "修改"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "展开"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "展开所选"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "收缩"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "收缩选择"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "边框"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "边框选择"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "菱形"
 
 msgid "Circle"
-msgstr ""
+msgstr "圆形"
 
 msgid "Square"
-msgstr ""
+msgstr "正方形"
 
 msgid "Grayscale View"
 msgstr "灰度视图"
@@ -282,15 +282,15 @@ msgstr "平铺模式偏移"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
-msgstr ""
+msgstr "X-基准："
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "Y-basis:"
-msgstr ""
+msgstr "Y-基准："
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "蒙板："
 
 msgid "Reset"
 msgstr "重置"
@@ -1567,7 +1567,9 @@ msgstr "椭圆工具\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
-msgstr ""
+msgstr "文本\n\n"
+"%s 表示鼠标左键\n"
+"%s 表示鼠标右键"
 
 msgid "Rectangle"
 msgstr "矩形工具"
@@ -1979,7 +1981,7 @@ msgstr "用颜色填充绘制的形状，而不是绘制空心形状"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "密度："
 
 msgid "Brush color from"
 msgstr "画笔颜色从"
@@ -2083,30 +2085,30 @@ msgstr "交叉选区"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "样式："
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "常规"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "粗体"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "斜体"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "粗斜体"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "抗锯齿"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "灰度"
 
 msgid "Mirroring"
 msgstr "镜像"
@@ -2957,7 +2959,7 @@ msgstr "按值排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "按亮度排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
