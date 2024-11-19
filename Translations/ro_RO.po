@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-11-19 00:32\n"
+"PO-Revision-Date: 2024-11-19 09:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1566,7 +1566,9 @@ msgstr "Instrument Elipsă\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
-msgstr ""
+msgstr "Text\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Rectangle"
 msgstr "Dreptunghi"
@@ -2082,30 +2084,30 @@ msgstr "Intersecția selecțiilor"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Stil:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Obișnuit"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Aldin"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Cursiv"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Aldin Cursiv"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Anticrenelaj"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Tonuri de gri"
 
 msgid "Mirroring"
 msgstr "Oglindire"
