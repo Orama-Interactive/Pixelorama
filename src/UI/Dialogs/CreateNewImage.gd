@@ -52,7 +52,9 @@ var templates: Array[Template] = [
 @onready var height_value := %HeightValue as SpinBox
 @onready var portrait_button := %PortraitButton as Button
 @onready var landscape_button := %LandscapeButton as Button
+@onready var name_input := $VBoxContainer/FillColorContainer/NameInput as LineEdit
 @onready var fill_color_node := %FillColor as ColorPickerButton
+@onready var color_mode := $VBoxContainer/FillColorContainer/ColorMode as OptionButton
 @onready var recent_templates_list := %RecentTemplates as ItemList
 
 
@@ -123,13 +125,14 @@ func _on_CreateNewImage_confirmed() -> void:
 	if recent_sizes.size() > 10:
 		recent_sizes.resize(10)
 	Global.config_cache.set_value("templates", "recent_sizes", recent_sizes)
-	var fill_color: Color = fill_color_node.color
-
-	var proj_name: String = $VBoxContainer/ProjectName/NameInput.text
+	var fill_color := fill_color_node.color
+	var proj_name := name_input.text
 	if !proj_name.is_valid_filename():
 		proj_name = tr("untitled")
 
 	var new_project := Project.new([], proj_name, image_size)
+	if color_mode.selected == 1:
+		new_project.color_mode = Project.INDEXED_MODE
 	new_project.layers.append(PixelLayer.new(new_project))
 	new_project.fill_color = fill_color
 	new_project.frames.append(new_project.new_empty_frame())
