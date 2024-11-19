@@ -1,13 +1,26 @@
 class_name ImageExtended
 extends Image
 
+## A custom [Image] class that implements support for indexed mode.
+## Before implementing indexed mode, we just used the [Image] class.
+## In indexed mode, each pixel is assigned to a number that references a palette color.
+## This essentially means that the colors of the image are restricted to a specific palette,
+## and they will automatically get updated when you make changes to that palette, or when
+## you switch to a different one.
+
 const TRANSPARENT := Color(0)
 const SET_INDICES := preload("res://src/Shaders/SetIndices.gdshader")
 const INDEXED_TO_RGB := preload("res://src/Shaders/IndexedToRGB.gdshader")
 
+## If [code]true[/code], the image uses indexed mode.
 var is_indexed := false
+## The [Palette] the image is currently using for indexed mode.
 var current_palette := Palettes.current_palette
+## An [Image] that contains the index of each pixel of the main image for indexed mode.
+## The indices are stored in the red channel of this image, by diving each index by 255.
+## This means that there can be a maximum index size of 255. 0 means that the pixel is transparent.
 var indices_image := Image.create_empty(1, 1, false, Image.FORMAT_R8)
+## A [PackedColorArray] containing all of the colors of the [member current_palette].
 var palette := PackedColorArray()
 
 
@@ -16,6 +29,8 @@ func _init() -> void:
 	Palettes.palette_selected.connect(select_palette)
 
 
+## Equivalent of [method Image.create_empty], but returns [ImageExtended] instead.
+## If [param _is_indexed] is [code]true[/code], the image that is being returned uses indexed mode.
 static func create_custom(
 	width: int, height: int, mipmaps: bool, format: Image.Format, _is_indexed := false
 ) -> ImageExtended:
@@ -32,6 +47,8 @@ static func create_custom(
 	return new_image
 
 
+## Equivalent of [method Image.copy_from], but also handles the logic necessary for indexed mode.
+## If [param _is_indexed] is [code]true[/code], the image is set to be using indexed mode.
 func copy_from_custom(image: Image, indexed := is_indexed) -> void:
 	is_indexed = indexed
 	copy_from(image)
@@ -41,6 +58,7 @@ func copy_from_custom(image: Image, indexed := is_indexed) -> void:
 		convert_rgb_to_indexed()
 
 
+## Selects a new palette to use in indexed mode.
 func select_palette(_name: String, convert_to_rgb := true) -> void:
 	current_palette = Palettes.current_palette
 	if not is_instance_valid(current_palette) or not is_indexed:
@@ -54,6 +72,7 @@ func select_palette(_name: String, convert_to_rgb := true) -> void:
 		convert_indexed_to_rgb()
 
 
+## Updates [member palette] to contain the colors of [member current_palette].
 func update_palette() -> void:
 	if palette.size() != current_palette.colors.size():
 		palette.resize(current_palette.colors.size())
@@ -61,6 +80,7 @@ func update_palette() -> void:
 		palette[i] = current_palette.colors[i].color
 
 
+## Displays the actual RGBA values of each pixel in the image from indexed mode.
 func convert_indexed_to_rgb() -> void:
 	if not is_indexed:
 		return
@@ -73,6 +93,8 @@ func convert_indexed_to_rgb() -> void:
 	Global.canvas.queue_redraw()
 
 
+## Automatically maps each color of the image's pixel to the closest color of the palette,
+## by finding the palette color's index and storing it in [member indices_image].
 func convert_rgb_to_indexed() -> void:
 	if not is_indexed:
 		return
@@ -88,20 +110,27 @@ func convert_rgb_to_indexed() -> void:
 	convert_indexed_to_rgb()
 
 
+## Resizes indices and calls [method convert_rgb_to_indexed] when the image's size changes
+## and indexed mode is enabled.
 func on_size_changed() -> void:
 	if is_indexed:
 		resize_indices()
 		convert_rgb_to_indexed()
 
 
+## Resizes [indices_image] to the image's size.
 func resize_indices() -> void:
 	indices_image.crop(get_width(), get_height())
 
 
+## Equivalent of [method Image.set_pixel_custom],
+## but also handles the logic necessary for indexed mode.
 func set_pixel_custom(x: int, y: int, color: Color) -> void:
 	set_pixelv_custom(Vector2i(x, y), color)
 
 
+## Equivalent of [method Image.set_pixelv_custom],
+## but also handles the logic necessary for indexed mode.
 func set_pixelv_custom(point: Vector2i, color: Color) -> void:
 	var new_color := color
 	if is_indexed:
@@ -129,6 +158,7 @@ func set_pixelv_custom(point: Vector2i, color: Color) -> void:
 	set_pixelv(point, new_color)
 
 
+## Finds the distance between colors [param c1] and [param c2].
 func color_distance(c1: Color, c2: Color) -> float:
 	var v1 := Vector4(c1.r, c1.g, c1.b, c1.a)
 	var v2 := Vector4(c2.r, c2.g, c2.b, c2.a)
