@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-11-15 18:59\n"
+"PO-Revision-Date: 2024-11-19 00:32\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1565,6 +1565,11 @@ msgstr "Εργαλείο έλλειψης\n\n"
 "Κρατήστε το %s για να κεντράρετε το σχήμα στην αρχή του κλικ\n"
 "Κρατήστε το %s για να μετακινήσετε την προέλευση του σχήματος"
 
+msgid "Text\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+msgstr ""
+
 msgid "Rectangle"
 msgstr "Ορθογώνιο"
 
@@ -2076,6 +2081,33 @@ msgstr "Αφαίρεση από την επιλογή"
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
 msgstr "Διασύνδεση των επιλογών"
+
+#. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
+msgid "Style:"
+msgstr ""
+
+#. Refers to the text. Regular means that the text is not bold or italic.
+msgid "Regular"
+msgstr ""
+
+#. Refers to text that is bold.
+msgid "Bold"
+msgstr ""
+
+#. Refers to text that is italic.
+msgid "Italic"
+msgstr ""
+
+#. Refers to text that is bold and italic.
+msgid "Bold Italic"
+msgstr ""
+
+#. https://en.wikipedia.org/wiki/Anti-aliasing
+msgid "Antialiasing"
+msgstr ""
+
+msgid "Grayscale"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
