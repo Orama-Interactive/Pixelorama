@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-11-17 13:41\n"
+"PO-Revision-Date: 2024-11-19 00:33\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1565,6 +1565,11 @@ msgstr "Alat Elips\n\n"
 "Tahan %s untuk membuat bentuk di tengah klik\n"
 "Tahan %s untuk menggeser bentuk saat ini"
 
+msgid "Text\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+msgstr ""
+
 msgid "Rectangle"
 msgstr "Persegi Panjang"
 
@@ -2076,6 +2081,33 @@ msgstr "Kurangi dari seleksi"
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
 msgstr "Persimpangan seleksi"
+
+#. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
+msgid "Style:"
+msgstr ""
+
+#. Refers to the text. Regular means that the text is not bold or italic.
+msgid "Regular"
+msgstr ""
+
+#. Refers to text that is bold.
+msgid "Bold"
+msgstr ""
+
+#. Refers to text that is italic.
+msgid "Italic"
+msgstr ""
+
+#. Refers to text that is bold and italic.
+msgid "Bold Italic"
+msgstr ""
+
+#. https://en.wikipedia.org/wiki/Anti-aliasing
+msgid "Antialiasing"
+msgstr ""
+
+msgid "Grayscale"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Pencerminan"
