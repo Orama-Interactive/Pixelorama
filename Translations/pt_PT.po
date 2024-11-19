@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2024-11-15 17:31\n"
+"PO-Revision-Date: 2024-11-19 00:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1544,6 +1544,11 @@ msgstr "Ferramenta de Elipse%s para botão de lado esquerdo do rato%s para botã
 "Pressione %s para centrar a forma na origem\n"
 "Pressione %s para deslocar a origem da forma"
 
+msgid "Text\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+msgstr ""
+
 msgid "Rectangle"
 msgstr "Retangulo"
 
@@ -2053,6 +2058,33 @@ msgstr ""
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
+msgstr ""
+
+#. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
+msgid "Style:"
+msgstr ""
+
+#. Refers to the text. Regular means that the text is not bold or italic.
+msgid "Regular"
+msgstr ""
+
+#. Refers to text that is bold.
+msgid "Bold"
+msgstr ""
+
+#. Refers to text that is italic.
+msgid "Italic"
+msgstr ""
+
+#. Refers to text that is bold and italic.
+msgid "Bold Italic"
+msgstr ""
+
+#. https://en.wikipedia.org/wiki/Anti-aliasing
+msgid "Antialiasing"
+msgstr ""
+
+msgid "Grayscale"
 msgstr ""
 
 msgid "Mirroring"
