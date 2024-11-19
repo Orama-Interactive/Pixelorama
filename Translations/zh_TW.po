@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2024-11-19 00:33\n"
+"PO-Revision-Date: 2024-11-19 14:06\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1514,7 +1514,7 @@ msgstr ""
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button\n\n"
+"%s for right mouse button"
 msgstr ""
 
 msgid "Rectangle"
