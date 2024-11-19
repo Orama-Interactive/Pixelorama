@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-11-19 00:32\n"
+"PO-Revision-Date: 2024-11-19 12:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1568,7 +1568,9 @@ msgstr "Strumento Ellisse\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
-msgstr ""
+msgstr "Testo\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse\n\n"
 
 msgid "Rectangle"
 msgstr "Rettangolo"
@@ -2084,30 +2086,30 @@ msgstr "Intersezione delle selezioni"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Stile:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Regolare"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Grassetto"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Corsivo"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Grassetto corsivo"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Antialiasing"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Scala di grigi"
 
 msgid "Mirroring"
 msgstr "Specchiatura"
