@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2024-11-19 00:33\n"
+"PO-Revision-Date: 2024-11-19 14:06\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1506,7 +1506,7 @@ msgstr ""
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button\n\n"
+"%s for right mouse button"
 msgstr ""
 
 msgid "Rectangle"
