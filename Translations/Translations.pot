@@ -1494,7 +1494,7 @@ msgstr ""
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button\n\n"
+"%s for right mouse button"
 msgstr ""
 
 msgid "Rectangle"
