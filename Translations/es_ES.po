@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-11-19 00:32\n"
+"PO-Revision-Date: 2024-11-19 14:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1563,7 +1563,7 @@ msgstr "Herramienta Elipse\n\n"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button\n\n"
+"%s for right mouse button"
 msgstr ""
 
 msgid "Rectangle"
