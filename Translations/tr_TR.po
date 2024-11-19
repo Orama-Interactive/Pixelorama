@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-11-19 14:06\n"
+"PO-Revision-Date: 2024-11-19 15:27\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1568,7 +1568,9 @@ msgstr "Elips Aracı\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Metin\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Rectangle"
 msgstr "Dikdörtgen"
@@ -2084,30 +2086,30 @@ msgstr "Seçimlerin kesişimi"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Biçem:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Normal"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Kalın"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Eğik"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Kalın eğik"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Kenar yumuşatma"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Gri tonlama"
 
 msgid "Mirroring"
 msgstr "Yansıtma"
