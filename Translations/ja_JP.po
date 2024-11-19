@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-11-19 00:33\n"
+"PO-Revision-Date: 2024-11-19 13:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1568,7 +1568,9 @@ msgstr "楕円形ツール\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
-msgstr ""
+msgstr "テキスト\n\n"
+"%sでマウスの左ボタンを テキスト に変更\n"
+"%sでマウスの右ボタンを テキスト に変更\n\n"
 
 msgid "Rectangle"
 msgstr "矩形"
@@ -2084,30 +2086,30 @@ msgstr "選択範囲の交差"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "スタイル:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "通常"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "太字"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "斜体"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "太字斜体"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "アンチエイリアシング"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "グレースケール"
 
 msgid "Mirroring"
 msgstr "ミラーリング"
