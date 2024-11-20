@@ -156,6 +156,10 @@ msgstr ""
 msgid "Percentage"
 msgstr ""
 
+#. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
+msgid "Color mode:"
+msgstr ""
+
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
 msgstr ""
