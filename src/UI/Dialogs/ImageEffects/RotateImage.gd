@@ -89,7 +89,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		selection_tex = ImageTexture.create_from_image(selection)
 
 		if !_type_is_shader():
-			var blank := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			var blank := project.new_empty_image()
 			cel.blit_rect_mask(
 				blank, selection, Rect2i(Vector2i.ZERO, cel.get_size()), Vector2i.ZERO
 			)
@@ -136,6 +136,8 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 			cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 		else:
 			cel.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+		if cel is ImageExtended:
+			cel.convert_rgb_to_indexed()
 
 
 func _type_is_shader() -> bool:

@@ -22,7 +22,7 @@ func refresh_list() -> void:
 	animation_tags_list.clear()
 	get_ok_button().disabled = true
 	for tag: AnimationTag in from_project.animation_tags:
-		var img = Image.create(from_project.size.x, from_project.size.y, true, Image.FORMAT_RGBA8)
+		var img := from_project.new_empty_image()
 		DrawingAlgos.blend_layers(
 			img, from_project.frames[tag.from - 1], Vector2i.ZERO, from_project
 		)
@@ -186,9 +186,7 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 					# add more types here if they have a copy_content() method
 					if src_cel is PixelCel:
 						var src_img = src_cel.copy_content()
-						var copy := Image.create(
-							project.size.x, project.size.y, false, Image.FORMAT_RGBA8
-						)
+						var copy := project.new_empty_image()
 						copy.blit_rect(
 							src_img, Rect2(Vector2.ZERO, src_img.get_size()), Vector2.ZERO
 						)

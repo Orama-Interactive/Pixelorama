@@ -516,6 +516,7 @@ func transform_content_confirm() -> void:
 			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 			big_bounding_rectangle.position
 		)
+		cel_image.convert_rgb_to_indexed()
 	project.selection_map.move_bitmap_values(project)
 	commit_undo("Move Selection", undo_data)
 
@@ -605,13 +606,13 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	if undo_image:
 		var images := _get_selected_draw_images()
 		for image in images:
-			data[image] = image.data
+			image.add_data_to_dictionary(data)
 
 	return data
 
 
-func _get_selected_draw_cels() -> Array[BaseCel]:
-	var cels: Array[BaseCel] = []
+func _get_selected_draw_cels() -> Array[PixelCel]:
+	var cels: Array[PixelCel] = []
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
@@ -622,8 +623,8 @@ func _get_selected_draw_cels() -> Array[BaseCel]:
 	return cels
 
 
-func _get_selected_draw_images() -> Array[Image]:
-	var images: Array[Image] = []
+func _get_selected_draw_images() -> Array[ImageExtended]:
+	var images: Array[ImageExtended] = []
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
@@ -794,14 +795,14 @@ func delete(selected_cels := true) -> void:
 		return
 
 	var undo_data_tmp := get_undo_data(true)
-	var images: Array[Image]
+	var images: Array[ImageExtended]
 	if selected_cels:
 		images = _get_selected_draw_images()
 	else:
 		images = [project.get_current_cel().get_image()]
 
 	if project.has_selection:
-		var blank := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		var blank := project.new_empty_image()
 		var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 		for image in images:
 			image.blit_rect_mask(
@@ -870,13 +871,16 @@ func _project_switched() -> void:
 
 func _get_preview_image() -> void:
 	var project := Global.current_project
-	var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var blended_image := project.new_empty_image()
 	DrawingAlgos.blend_layers(
 		blended_image, project.frames[project.current_frame], Vector2i.ZERO, project, true
 	)
 	if original_preview_image.is_empty():
 		original_preview_image = Image.create(
-			big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
+			big_bounding_rectangle.size.x,
+			big_bounding_rectangle.size.y,
+			false,
+			project.get_image_format()
 		)
 		var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 		original_preview_image.blit_rect_mask(
@@ -892,11 +896,11 @@ func _get_preview_image() -> void:
 	var clear_image := Image.create(
 		original_preview_image.get_width(),
 		original_preview_image.get_height(),
-		false,
-		Image.FORMAT_RGBA8
+		original_preview_image.has_mipmaps(),
+		original_preview_image.get_format()
 	)
 	for cel in _get_selected_draw_cels():
-		var cel_image: Image = cel.get_image()
+		var cel_image := cel.get_image()
 		cel.transformed_content = _get_selected_image(cel_image)
 		cel_image.blit_rect_mask(
 			clear_image,
@@ -911,7 +915,10 @@ func _get_preview_image() -> void:
 func _get_selected_image(cel_image: Image) -> Image:
 	var project := Global.current_project
 	var image := Image.create(
-		big_bounding_rectangle.size.x, big_bounding_rectangle.size.y, false, Image.FORMAT_RGBA8
+		big_bounding_rectangle.size.x,
+		big_bounding_rectangle.size.y,
+		false,
+		project.get_image_format()
 	)
 	var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 	image.blit_rect_mask(cel_image, selection_map_copy, big_bounding_rectangle, Vector2i.ZERO)

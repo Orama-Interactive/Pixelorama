@@ -217,7 +217,7 @@ func get_ellipse_points_filled(pos: Vector2i, size: Vector2i, thickness := 1) ->
 
 func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 	var scaled := Image.create(
-		sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8
+		sprite.get_width() * 3, sprite.get_height() * 3, sprite.has_mipmaps(), sprite.get_format()
 	)
 	var width_minus_one := sprite.get_width() - 1
 	var height_minus_one := sprite.get_height() - 1
@@ -509,6 +509,8 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 func center(indices: Array) -> void:
 	var project := Global.current_project
 	Global.canvas.selection.transform_content_confirm()
+	var redo_data := {}
+	var undo_data := {}
 	project.undos += 1
 	project.undo_redo.create_action("Center Frames")
 	for frame in indices:
@@ -528,15 +530,20 @@ func center(indices: Array) -> void:
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			var sprite := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			sprite.blend_rect(cel.image, used_rect, offset)
-			Global.undo_redo_compress_images({cel.image: sprite.data}, {cel.image: cel.image.data})
+			var cel_image := (cel as PixelCel).get_image()
+			var tmp_centered := project.new_empty_image()
+			tmp_centered.blend_rect(cel.image, used_rect, offset)
+			var centered := ImageExtended.new()
+			centered.copy_from_custom(tmp_centered, cel_image.is_indexed)
+			centered.add_data_to_dictionary(redo_data, cel_image)
+			cel_image.add_data_to_dictionary(undo_data)
+	Global.undo_redo_compress_images(redo_data, undo_data)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
-func scale_image(width: int, height: int, interpolation: int) -> void:
+func scale_project(width: int, height: int, interpolation: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
 	for f in Global.current_project.frames:
@@ -544,28 +551,45 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 			var cel := f.cels[i]
 			if not cel is PixelCel:
 				continue
-			var sprite := Image.new()
-			sprite.copy_from(cel.get_image())
-			if interpolation == Interpolation.SCALE3X:
-				var times := Vector2i(
-					ceili(width / (3.0 * sprite.get_width())),
-					ceili(height / (3.0 * sprite.get_height()))
-				)
-				for _j in range(maxi(times.x, times.y)):
-					sprite.copy_from(scale_3x(sprite))
-				sprite.resize(width, height, Image.INTERPOLATE_NEAREST)
-			elif interpolation == Interpolation.CLEANEDGE:
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, clean_edge_shader, {}, Vector2i(width, height))
-			elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, omniscale_shader, {}, Vector2i(width, height))
-			else:
-				sprite.resize(width, height, interpolation)
-			redo_data[cel.image] = sprite.data
-			undo_data[cel.image] = cel.image.data
+			var cel_image := (cel as PixelCel).get_image()
+			var sprite := _resize_image(cel_image, width, height, interpolation) as ImageExtended
+			sprite.add_data_to_dictionary(redo_data, cel_image)
+			cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
+
+
+func _resize_image(
+	image: Image, width: int, height: int, interpolation: Image.Interpolation
+) -> Image:
+	var new_image: Image
+	if image is ImageExtended:
+		new_image = ImageExtended.new()
+		new_image.is_indexed = image.is_indexed
+		new_image.copy_from(image)
+		new_image.select_palette("", false)
+	else:
+		new_image = Image.new()
+		new_image.copy_from(image)
+	if interpolation == Interpolation.SCALE3X:
+		var times := Vector2i(
+			ceili(width / (3.0 * new_image.get_width())),
+			ceili(height / (3.0 * new_image.get_height()))
+		)
+		for _j in range(maxi(times.x, times.y)):
+			new_image.copy_from(scale_3x(new_image))
+		new_image.resize(width, height, Image.INTERPOLATE_NEAREST)
+	elif interpolation == Interpolation.CLEANEDGE:
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(new_image, clean_edge_shader, {}, Vector2i(width, height), false)
+	elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(new_image, omniscale_shader, {}, Vector2i(width, height), false)
+	else:
+		new_image.resize(width, height, interpolation)
+	if new_image is ImageExtended:
+		new_image.on_size_changed()
+	return new_image
 
 
 ## Sets the size of the project to be the same as the size of the active selection.
@@ -577,13 +601,13 @@ func crop_to_selection() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
 	# Loop through all the cels to crop them
-	for f in Global.current_project.frames:
-		for cel in f.cels:
-			if not cel is PixelCel:
-				continue
-			var sprite := cel.get_image().get_region(rect)
-			redo_data[cel.image] = sprite.data
-			undo_data[cel.image] = cel.image.data
+	for cel in Global.current_project.get_all_pixel_cels():
+		var cel_image := cel.get_image()
+		var tmp_cropped := cel_image.get_region(rect)
+		var cropped := ImageExtended.new()
+		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
+		cropped.add_data_to_dictionary(redo_data, cel_image)
+		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(rect.size.x, rect.size.y, redo_data, undo_data)
 
@@ -615,13 +639,13 @@ func crop_to_content() -> void:
 	var redo_data := {}
 	var undo_data := {}
 	# Loop through all the cels to trim them
-	for f in Global.current_project.frames:
-		for cel in f.cels:
-			if not cel is PixelCel:
-				continue
-			var sprite := cel.get_image().get_region(used_rect)
-			redo_data[cel.image] = sprite.data
-			undo_data[cel.image] = cel.image.data
+	for cel in Global.current_project.get_all_pixel_cels():
+		var cel_image := cel.get_image()
+		var tmp_cropped := cel_image.get_region(used_rect)
+		var cropped := ImageExtended.new()
+		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
+		cropped.add_data_to_dictionary(redo_data, cel_image)
+		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
@@ -629,18 +653,17 @@ func crop_to_content() -> void:
 func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
-	for f in Global.current_project.frames:
-		for cel in f.cels:
-			if not cel is PixelCel:
-				continue
-			var sprite := Image.create(width, height, false, Image.FORMAT_RGBA8)
-			sprite.blend_rect(
-				cel.get_image(),
-				Rect2i(Vector2i.ZERO, Global.current_project.size),
-				Vector2i(offset_x, offset_y)
-			)
-			redo_data[cel.image] = sprite.data
-			undo_data[cel.image] = cel.image.data
+	for cel in Global.current_project.get_all_pixel_cels():
+		var cel_image := cel.get_image()
+		var resized := ImageExtended.create_custom(
+			width, height, cel_image.has_mipmaps(), cel_image.get_format(), cel_image.is_indexed
+		)
+		resized.blend_rect(
+			cel_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i(offset_x, offset_y)
+		)
+		resized.convert_rgb_to_indexed()
+		resized.add_data_to_dictionary(redo_data, cel_image)
+		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 

@@ -9,6 +9,8 @@ signal about_to_deserialize(dict: Dictionary)
 signal resized
 signal timeline_updated
 
+const INDEXED_MODE := Image.FORMAT_MAX + 1
+
 var name := "":
 	set(value):
 		name = value
@@ -21,6 +23,17 @@ var undo_redo := UndoRedo.new()
 var tiles: Tiles
 var undos := 0  ## The number of times we added undo properties
 var can_undo := true
+var color_mode: int = Image.FORMAT_RGBA8:
+	set(value):
+		if color_mode != value:
+			color_mode = value
+			for cel in get_all_pixel_cels():
+				var image := cel.get_image()
+				image.is_indexed = is_indexed()
+				if image.is_indexed:
+					image.resize_indices()
+					image.select_palette("", false)
+					image.convert_rgb_to_indexed()
 var fill_color := Color(0)
 var has_changed := false:
 	set(value):
@@ -176,9 +189,24 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
+## Returns a new [Image] of size [member size] and format [method get_image_format].
+func new_empty_image() -> Image:
+	return Image.create(size.x, size.y, false, get_image_format())
+
+
 ## Returns the currently selected [BaseCel].
 func get_current_cel() -> BaseCel:
 	return frames[current_frame].cels[current_layer]
+
+
+func get_image_format() -> Image.Format:
+	if color_mode == INDEXED_MODE:
+		return Image.FORMAT_RGBA8
+	return color_mode
+
+
+func is_indexed() -> bool:
+	return color_mode == INDEXED_MODE
 
 
 func selection_map_changed() -> void:
@@ -255,6 +283,7 @@ func serialize() -> Dictionary:
 		"pxo_version": ProjectSettings.get_setting("application/config/Pxo_Version"),
 		"size_x": size.x,
 		"size_y": size.y,
+		"color_mode": color_mode,
 		"tile_mode_x_basis_x": tiles.x_basis.x,
 		"tile_mode_x_basis_y": tiles.x_basis.y,
 		"tile_mode_y_basis_x": tiles.y_basis.x,
@@ -288,6 +317,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		size.y = dict.size_y
 		tiles.tile_size = size
 		selection_map.crop(size.x, size.y)
+	color_mode = dict.get("color_mode", color_mode)
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
@@ -311,20 +341,33 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			for cel in frame.cels:
 				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
 					Global.LayerTypes.PIXEL:
-						var image := Image.new()
+						var image: Image
+						var indices_data := PackedByteArray()
 						if is_instance_valid(zip_reader):  # For pxo files saved in 1.0+
-							var image_data := zip_reader.read_file(
-								"image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
-							)
+							var path := "image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
+							var image_data := zip_reader.read_file(path)
 							image = Image.create_from_data(
-								size.x, size.y, false, Image.FORMAT_RGBA8, image_data
+								size.x, size.y, false, get_image_format(), image_data
 							)
+							var indices_path := (
+								"image_data/frames/%s/indices_layer_%s" % [frame_i + 1, cel_i + 1]
+							)
+							if zip_reader.file_exists(indices_path):
+								indices_data = zip_reader.read_file(indices_path)
 						elif is_instance_valid(file):  # For pxo files saved in 0.x
 							var buffer := file.get_buffer(size.x * size.y * 4)
 							image = Image.create_from_data(
-								size.x, size.y, false, Image.FORMAT_RGBA8, buffer
+								size.x, size.y, false, get_image_format(), buffer
 							)
-						cels.append(PixelCel.new(image))
+						var pixelorama_image := ImageExtended.new()
+						pixelorama_image.is_indexed = is_indexed()
+						if not indices_data.is_empty() and is_indexed():
+							pixelorama_image.indices_image = Image.create_from_data(
+								size.x, size.y, false, Image.FORMAT_R8, indices_data
+							)
+						pixelorama_image.copy_from(image)
+						pixelorama_image.select_palette("", true)
+						cels.append(PixelCel.new(pixelorama_image))
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
@@ -557,6 +600,16 @@ func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
 	if not cel is GroupCel:
 		result = cel
 	return result
+
+
+## Returns an [Array] of type [PixelCel] containing all of the pixel cels of the project.
+func get_all_pixel_cels() -> Array[PixelCel]:
+	var cels: Array[PixelCel]
+	for frame in frames:
+		for cel in frame.cels:
+			if cel is PixelCel:
+				cels.append(cel)
+	return cels
 
 
 ## Re-order layers to take each cel's z-index into account. If all z-indexes are 0,

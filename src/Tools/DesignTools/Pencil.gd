@@ -211,6 +211,7 @@ func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> v
 				draw_image.blit_rect_mask(brush_image, mask, src_rect, dst)
 			else:
 				draw_image.blit_rect(brush_image, src_rect, dst)
+			draw_image.convert_rgb_to_indexed()
 	else:
 		for draw_image in images:
 			if Tools.alpha_locked:
@@ -218,3 +219,4 @@ func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> v
 				draw_image.blend_rect_mask(brush_image, mask, src_rect, dst)
 			else:
 				draw_image.blend_rect(brush_image, src_rect, dst)
+			draw_image.convert_rgb_to_indexed()

@@ -35,7 +35,7 @@ var _line_polylines := []
 
 # Memorize some stuff when doing brush strokes
 var _stroke_project: Project
-var _stroke_images: Array[Image] = []
+var _stroke_images: Array[ImageExtended] = []
 var _is_mask_size_zero := true
 var _circle_tool_shortcut: Array[Vector2i]
 
@@ -730,8 +730,8 @@ func _get_undo_data() -> Dictionary:
 	for cel in cels:
 		if not cel is PixelCel:
 			continue
-		var image := cel.get_image()
-		data[image] = image.data
+		var image := (cel as PixelCel).get_image()
+		image.add_data_to_dictionary(data)
 	return data
 
 

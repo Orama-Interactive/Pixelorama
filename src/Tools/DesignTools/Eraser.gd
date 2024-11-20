@@ -122,6 +122,7 @@ func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
 		var images := _get_selected_draw_images()
 		for draw_image in images:
 			draw_image.blit_rect_mask(_clear_image, image, src_rect, dst)
+			draw_image.convert_rgb_to_indexed()
 	else:
 		for xx in image.get_size().x:
 			for yy in image.get_size().y:

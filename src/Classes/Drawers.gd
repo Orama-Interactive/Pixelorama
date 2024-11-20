@@ -27,12 +27,12 @@ class ColorOp:
 
 
 class SimpleDrawer:
-	func set_pixel(image: Image, position: Vector2i, color: Color, op: ColorOp) -> void:
+	func set_pixel(image: ImageExtended, position: Vector2i, color: Color, op: ColorOp) -> void:
 		var color_old := image.get_pixelv(position)
 		var color_str := color.to_html()
 		var color_new := op.process(Color(color_str), color_old)
 		if not color_new.is_equal_approx(color_old):
-			image.set_pixelv(position, color_new)
+			image.set_pixelv_custom(position, color_new)
 
 
 class PixelPerfectDrawer:
@@ -43,11 +43,11 @@ class PixelPerfectDrawer:
 	func reset() -> void:
 		last_pixels = [null, null]
 
-	func set_pixel(image: Image, position: Vector2i, color: Color, op: ColorOp) -> void:
+	func set_pixel(image: ImageExtended, position: Vector2i, color: Color, op: ColorOp) -> void:
 		var color_old := image.get_pixelv(position)
 		var color_str := color.to_html()
 		last_pixels.push_back([position, color_old])
-		image.set_pixelv(position, op.process(Color(color_str), color_old))
+		image.set_pixelv_custom(position, op.process(Color(color_str), color_old))
 
 		var corner = last_pixels.pop_front()
 		var neighbour = last_pixels[0]
@@ -56,7 +56,7 @@ class PixelPerfectDrawer:
 			return
 
 		if position - corner[0] in CORNERS and position - neighbour[0] in NEIGHBOURS:
-			image.set_pixel(neighbour[0].x, neighbour[0].y, neighbour[1])
+			image.set_pixel_custom(neighbour[0].x, neighbour[0].y, neighbour[1])
 			last_pixels[0] = corner
 
 

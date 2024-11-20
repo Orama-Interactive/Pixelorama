@@ -220,7 +220,7 @@ func fill_in_color(pos: Vector2i) -> void:
 		if project.has_selection:
 			selection = project.selection_map.return_cropped_copy(project.size)
 		else:
-			selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			selection = project.new_empty_image()
 			selection.fill(Color(1, 1, 1, 1))
 
 		selection_tex = ImageTexture.create_from_image(selection)
@@ -263,7 +263,7 @@ func fill_in_selection() -> void:
 	var images := _get_selected_draw_images()
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		if project.has_selection:
-			var filler := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			var filler := project.new_empty_image()
 			filler.fill(tool_slot.color)
 			var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
 			var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
@@ -284,7 +284,7 @@ func fill_in_selection() -> void:
 		if project.has_selection:
 			selection = project.selection_map.return_cropped_copy(project.size)
 		else:
-			selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			selection = project.new_empty_image()
 			selection.fill(Color(1, 1, 1, 1))
 
 		selection_tex = ImageTexture.create_from_image(selection)
@@ -461,7 +461,7 @@ func _compute_segments_for_image(
 					done = false
 
 
-func _color_segments(image: Image) -> void:
+func _color_segments(image: ImageExtended) -> void:
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		# This is needed to ensure that the color used to fill is not wrong, due to float
 		# rounding issues.
@@ -472,7 +472,7 @@ func _color_segments(image: Image) -> void:
 			var p := _allegro_image_segments[c]
 			for px in range(p.left_position, p.right_position + 1):
 				# We don't have to check again whether the point being processed is within the bounds
-				image.set_pixel(px, p.y, color)
+				image.set_pixel_custom(px, p.y, color)
 	else:
 		# shortcircuit tests for patternfills
 		var pattern_size := _pattern.image.get_size()
@@ -484,11 +484,11 @@ func _color_segments(image: Image) -> void:
 				_set_pixel_pattern(image, px, p.y, pattern_size)
 
 
-func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2i) -> void:
+func _set_pixel_pattern(image: ImageExtended, x: int, y: int, pattern_size: Vector2i) -> void:
 	var px := (x + _offset_x) % pattern_size.x
 	var py := (y + _offset_y) % pattern_size.y
 	var pc := _pattern.image.get_pixel(px, py)
-	image.set_pixel(x, y, pc)
+	image.set_pixel_custom(x, y, pc)
 
 
 func commit_undo() -> void:
@@ -514,12 +514,12 @@ func _get_undo_data() -> Dictionary:
 	if Global.animation_timeline.animation_timer.is_stopped():
 		var images := _get_selected_draw_images()
 		for image in images:
-			data[image] = image.data
+			image.add_data_to_dictionary(data)
 	else:
 		for frame in Global.current_project.frames:
 			var cel := frame.cels[Global.current_project.current_layer]
 			if not cel is PixelCel:
 				continue
-			var image := cel.get_image()
-			data[image] = image.data
+			var image := (cel as PixelCel).get_image()
+			image.add_data_to_dictionary(data)
 	return data

@@ -161,7 +161,7 @@ func cache_blended_frames(project := Global.current_project) -> void:
 	blended_frames.clear()
 	var frames := _calculate_frames(project)
 	for frame in frames:
-		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		var image := project.new_empty_image()
 		_blend_layers(image, frame)
 		blended_frames[frame] = image
 
@@ -208,7 +208,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 			spritesheet_columns = temp
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
-	var whole_image := Image.create(width, height, false, Image.FORMAT_RGBA8)
+	var whole_image := Image.create(width, height, false, project.get_image_format())
 	var origin := Vector2i.ZERO
 	var hh := 0
 	var vv := 0
@@ -287,10 +287,10 @@ func process_animation(project := Global.current_project) -> void:
 					ProcessedImage.new(image, project.frames.find(frame), duration)
 				)
 		else:
-			var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			var image := project.new_empty_image()
 			image.copy_from(blended_frames[frame])
 			if erase_unselected_area and project.has_selection:
-				var crop := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+				var crop := project.new_empty_image()
 				var selection_image = project.selection_map.return_cropped_copy(project.size)
 				crop.blit_rect_mask(
 					image, selection_image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO

@@ -24,6 +24,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "64x64"
 
+[node name="ColorModeLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Color mode:"
+
+[node name="ColorModeValueLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RGBA8"
+
 [node name="FramesLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -32,7 +42,7 @@ text = "Frames:"
 [node name="FramesValueLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "64x64"
+text = "1"
 
 [node name="LayersLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
@@ -42,7 +52,7 @@ text = "Layers:"
 [node name="LayersValueLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "64x64"
+text = "1"
 
 [node name="NameLabel" type="Label" parent="GridContainer"]
 layout_mode = 2

@@ -1,5 +1,7 @@
 extends Panel
 
+enum ColorModes { RGBA, INDEXED }
+
 const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
@@ -56,6 +58,7 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
 @onready var tile_mode_submenu := PopupMenu.new()
 @onready var selection_modify_submenu := PopupMenu.new()
+@onready var color_mode_submenu := PopupMenu.new()
 @onready var snap_to_submenu := PopupMenu.new()
 @onready var panels_submenu := PopupMenu.new()
 @onready var layouts_submenu := PopupMenu.new()
@@ -124,6 +127,7 @@ func _project_switched() -> void:
 	_update_file_menu_buttons(project)
 	for j in Tiles.MODE.values():
 		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
+	_check_color_mode_submenu_item(project)
 
 	_update_current_frame_mark()
 
@@ -396,17 +400,32 @@ func _setup_image_menu() -> void:
 	# Order as in Global.ImageMenu enum
 	var image_menu_items := {
 		"Project Properties": "project_properties",
+		"Color Mode": "",
 		"Resize Canvas": "resize_canvas",
 		"Scale Image": "scale_image",
 		"Crop to Selection": "crop_to_selection",
 		"Crop to Content": "crop_to_content",
 	}
-	var i := 0
-	for item in image_menu_items:
-		_set_menu_shortcut(image_menu_items[item], image_menu, i, item)
-		i += 1
+	for i in image_menu_items.size():
+		var item: String = image_menu_items.keys()[i]
+		if item == "Color Mode":
+			_setup_color_mode_submenu(item)
+		else:
+			_set_menu_shortcut(image_menu_items[item], image_menu, i, item)
 	image_menu.set_item_disabled(Global.ImageMenu.CROP_TO_SELECTION, true)
 	image_menu.id_pressed.connect(image_menu_id_pressed)
+
+
+func _setup_color_mode_submenu(item: String) -> void:
+	color_mode_submenu.set_name("color_mode_submenu")
+	color_mode_submenu.add_radio_check_item("RGBA", ColorModes.RGBA)
+	color_mode_submenu.set_item_checked(ColorModes.RGBA, true)
+	color_mode_submenu.add_radio_check_item("Indexed", ColorModes.INDEXED)
+	color_mode_submenu.hide_on_checkable_item_selection = false
+
+	color_mode_submenu.id_pressed.connect(_color_mode_submenu_id_pressed)
+	image_menu.add_child(color_mode_submenu)
+	image_menu.add_submenu_item(item, color_mode_submenu.get_name())
 
 
 func _setup_effects_menu() -> void:
@@ -685,6 +704,38 @@ func _tile_mode_submenu_id_pressed(id: Tiles.MODE) -> void:
 func _selection_modify_submenu_id_pressed(id: int) -> void:
 	modify_selection.popup()
 	modify_selection.node.type = id
+
+
+func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
+	var project := Global.current_project
+	var old_color_mode := project.color_mode
+	var redo_data := {}
+	var undo_data := {}
+	for cel in project.get_all_pixel_cels():
+		cel.get_image().add_data_to_dictionary(undo_data)
+	# Change the color mode directly before undo/redo in order to affect the images,
+	# so we can store them as redo data.
+	if id == ColorModes.RGBA:
+		project.color_mode = Image.FORMAT_RGBA8
+	else:
+		project.color_mode = Project.INDEXED_MODE
+	for cel in project.get_all_pixel_cels():
+		cel.get_image().add_data_to_dictionary(redo_data)
+	project.undo_redo.create_action("Change color mode")
+	project.undos += 1
+	project.undo_redo.add_do_property(project, "color_mode", project.color_mode)
+	project.undo_redo.add_undo_property(project, "color_mode", old_color_mode)
+	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.undo_redo.add_do_method(_check_color_mode_submenu_item.bind(project))
+	project.undo_redo.add_undo_method(_check_color_mode_submenu_item.bind(project))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
+
+
+func _check_color_mode_submenu_item(project: Project) -> void:
+	color_mode_submenu.set_item_checked(ColorModes.RGBA, project.color_mode == Image.FORMAT_RGBA8)
+	color_mode_submenu.set_item_checked(ColorModes.INDEXED, project.is_indexed())
 
 
 func _snap_to_submenu_id_pressed(id: int) -> void:

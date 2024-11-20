@@ -1045,9 +1045,10 @@ func _on_MergeDownLayer_pressed() -> void:
 		top_cels.append(top_cel)  # Store for undo purposes
 
 		var top_image := top_layer.display_effects(top_cel)
-		var bottom_cel := frame.cels[bottom_layer.index]
+		var bottom_cel := frame.cels[bottom_layer.index] as PixelCel
+		var bottom_image := bottom_cel.get_image()
 		var textures: Array[Image] = []
-		textures.append(bottom_cel.get_image())
+		textures.append(bottom_image)
 		textures.append(top_image)
 		var metadata_image := Image.create(2, 4, false, Image.FORMAT_R8)
 		DrawingAlgos.set_layer_metadata_image(bottom_layer, bottom_cel, metadata_image, 0)
@@ -1058,12 +1059,17 @@ func _on_MergeDownLayer_pressed() -> void:
 		var params := {
 			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
 		}
-		var bottom_image := Image.create(
-			top_image.get_width(), top_image.get_height(), false, top_image.get_format()
+		var new_bottom_image := ImageExtended.create_custom(
+			top_image.get_width(),
+			top_image.get_height(),
+			top_image.has_mipmaps(),
+			top_image.get_format(),
+			project.is_indexed()
 		)
+		# Merge the image itself.
 		var gen := ShaderImageEffect.new()
-		gen.generate_image(bottom_image, DrawingAlgos.blend_layers_shader, params, project.size)
-
+		gen.generate_image(new_bottom_image, DrawingAlgos.blend_layers_shader, params, project.size)
+		new_bottom_image.convert_rgb_to_indexed()
 		if (
 			bottom_cel.link_set != null
 			and bottom_cel.link_set.size() > 1
@@ -1074,14 +1080,14 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_undo_method(
 				bottom_layer.link_cel.bind(bottom_cel, bottom_cel.link_set)
 			)
-			project.undo_redo.add_do_property(bottom_cel, "image", bottom_image)
+			project.undo_redo.add_do_property(bottom_cel, "image", new_bottom_image)
 			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			Global.undo_redo_compress_images(
-				{bottom_cel.image: bottom_image.data},
-				{bottom_cel.image: bottom_cel.image.data},
-				project
-			)
+			var redo_data := {}
+			var undo_data := {}
+			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
+			bottom_image.add_data_to_dictionary(undo_data)
+			Global.undo_redo_compress_images(redo_data, undo_data, project)
 
 	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
 	project.undo_redo.add_undo_method(
