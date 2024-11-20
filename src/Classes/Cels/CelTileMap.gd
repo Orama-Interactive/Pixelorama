@@ -10,7 +10,7 @@ var indices_x: int
 var indices_y: int
 
 
-func _init(_tileset: TileSetCustom, _image := Image.new(), _opacity := 1.0) -> void:
+func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> void:
 	super._init(_image, _opacity)
 	tileset = _tileset
 	indices_x = ceili(float(get_image().get_width()) / tileset.tile_size.x)

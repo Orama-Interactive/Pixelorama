@@ -217,7 +217,7 @@ Hold %s to displace the shape's origin""",
 		"Text",
 		"text",
 		"res://src/Tools/UtilityTools/Text.tscn",
-		[Global.LayerTypes.PIXEL],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 		""
 	),
 	"3DShapeEdit":
