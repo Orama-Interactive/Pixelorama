@@ -23,6 +23,11 @@ func add_tile(tile: Image) -> void:
 	updated.emit()
 
 
+func insert_tile(tile: Image, position: int) -> void:
+	tiles.insert(position, tile)
+	updated.emit()
+
+
 func remove_tile_at_index(index: int) -> void:
 	tiles.remove_at(index)
 	updated.emit()

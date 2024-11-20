@@ -4,7 +4,7 @@ extends PixelCel
 enum TileEditingMode { MANUAL, AUTO, STACK }
 
 var tileset: TileSetCustom
-var tile_editing_mode := TileEditingMode.STACK
+var tile_editing_mode := TileEditingMode.AUTO
 var indices := PackedInt32Array()
 var indices_x: int
 var indices_y: int
@@ -18,11 +18,10 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 	indices.resize(indices_x * indices_y)
 
 
-func update_texture() -> void:
-	super.update_texture()
+func update_tileset() -> void:
+	var removed_tile_indices: Array[int] = []
 	if tile_editing_mode == TileEditingMode.AUTO:
-		var tiles_to_delete := PackedInt32Array()
-		for j in range(1, tileset.tiles.size()):
+		for j in range(tileset.tiles.size() - 1, 0, -1):
 			var tile := tileset.tiles[j]
 			var tile_used := false
 			for i in indices.size():
@@ -36,9 +35,8 @@ func update_texture() -> void:
 					tile_used = true
 					break
 			if not tile_used:
-				tiles_to_delete.append(j)
-		for j in tiles_to_delete:
-			tileset.remove_tile_at_index(j)
+				removed_tile_indices.append(j)
+				tileset.remove_tile_at_index(j)
 	for i in indices.size():
 		var x_coord := float(tileset.tile_size.x) * (i % indices_x)
 		var y_coord := float(tileset.tile_size.y) * (i / indices_x)
@@ -62,8 +60,13 @@ func update_texture() -> void:
 					found_tile = true
 					break
 			if not found_tile:
-				tileset.add_tile(image_portion)
-				indices[i] = tileset.tiles.size()
+				if removed_tile_indices.is_empty():
+					tileset.add_tile(image_portion)
+					indices[i] = tileset.tiles.size()
+				else:
+					var index_position := removed_tile_indices.pop_back() as int
+					tileset.insert_tile(image_portion, index_position)
+					indices[i] = index_position
 
 
 func get_class_name() -> String:
