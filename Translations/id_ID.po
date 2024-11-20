@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-11-20 12:59\n"
+"PO-Revision-Date: 2024-11-20 14:24\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -171,15 +171,15 @@ msgstr "Persentase"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Mode warna:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Mode Warna"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Terindeks"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
