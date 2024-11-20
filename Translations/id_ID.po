@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-11-19 14:06\n"
+"PO-Revision-Date: 2024-11-20 03:03\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1568,7 +1568,9 @@ msgstr "Alat Elips\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Teks\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Rectangle"
 msgstr "Persegi Panjang"
@@ -2084,30 +2086,30 @@ msgstr "Persimpangan seleksi"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Gaya:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Biasa"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Tebal"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Miring"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Tebal Miring"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Anti-buram"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Skala kelabu"
 
 msgid "Mirroring"
 msgstr "Pencerminan"
