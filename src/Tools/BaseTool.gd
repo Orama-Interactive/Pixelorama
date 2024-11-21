@@ -205,18 +205,36 @@ func snap_position(pos: Vector2) -> Vector2:
 	return pos
 
 
-func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
+## Returns an array that mirrors each point of the [param array], based on [param h] and [param v].
+## An optional [param callable] can be passed, which gets called for each type of symmetry.
+func mirror_array(
+	array: Array[Vector2i], h: bool, v: bool, callable := func(_array): pass
+) -> Array[Vector2i]:
 	var new_array: Array[Vector2i] = []
 	var project := Global.current_project
-	for point in array:
-		if h and v:
-			new_array.append(
+	if h and v:
+		var hv_array: Array[Vector2i] = []
+		for point in array:
+			hv_array.append(
 				Vector2i(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
 			)
-		elif h:
-			new_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
-		elif v:
-			new_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))
+		if callable.is_valid():
+			callable.call(hv_array)
+		new_array += hv_array
+	if h:
+		var h_array: Array[Vector2i] = []
+		for point in array:
+			h_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
+		if callable.is_valid():
+			callable.call(h_array)
+		new_array += h_array
+	if v:
+		var v_array: Array[Vector2i] = []
+		for point in array:
+			v_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))
+		if callable.is_valid():
+			callable.call(v_array)
+		new_array += v_array
 
 	return new_array
 

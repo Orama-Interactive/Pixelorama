@@ -46,27 +46,12 @@ func draw_preview() -> void:
 				image.set_pixelv(draw_point, Color.WHITE)
 
 		# Handle mirroring
-		if Tools.horizontal_mirror:
-			for point in mirror_array(_draw_points, true, false):
-				var draw_point := point
-				if Global.mirror_view:  # This fixes previewing in mirror mode
-					draw_point.x = image.get_width() - draw_point.x - 1
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-					image.set_pixelv(draw_point, Color.WHITE)
-			if Tools.vertical_mirror:
-				for point in mirror_array(_draw_points, true, true):
-					var draw_point := point
-					if Global.mirror_view:  # This fixes previewing in mirror mode
-						draw_point.x = image.get_width() - draw_point.x - 1
-					if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-						image.set_pixelv(draw_point, Color.WHITE)
-		if Tools.vertical_mirror:
-			for point in mirror_array(_draw_points, false, true):
-				var draw_point := point
-				if Global.mirror_view:  # This fixes previewing in mirror mode
-					draw_point.x = image.get_width() - draw_point.x - 1
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-					image.set_pixelv(draw_point, Color.WHITE)
+		for point in mirror_array(_draw_points, Tools.horizontal_mirror, Tools.vertical_mirror):
+			var draw_point := point
+			if Global.mirror_view:  # This fixes previewing in mirror mode
+				draw_point.x = image.get_width() - draw_point.x - 1
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
+				image.set_pixelv(draw_point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		canvas.texture = texture
 	else:
@@ -85,19 +70,10 @@ func apply_selection(_position) -> void:
 	if _draw_points.size() > 3:
 		if _intersect:
 			project.selection_map.clear()
-		lasso_selection(project.selection_map, previous_selection_map, _draw_points)
-
+		lasso_selection(_draw_points, project.selection_map, previous_selection_map)
 		# Handle mirroring
-		if Tools.horizontal_mirror:
-			var mirror_x := mirror_array(_draw_points, true, false)
-			lasso_selection(project.selection_map, previous_selection_map, mirror_x)
-			if Tools.vertical_mirror:
-				var mirror_xy := mirror_array(_draw_points, true, true)
-				lasso_selection(project.selection_map, previous_selection_map, mirror_xy)
-		if Tools.vertical_mirror:
-			var mirror_y := mirror_array(_draw_points, false, true)
-			lasso_selection(project.selection_map, previous_selection_map, mirror_y)
-
+		var callable := lasso_selection.bind(project.selection_map, previous_selection_map)
+		mirror_array(_draw_points, Tools.horizontal_mirror, Tools.vertical_mirror, callable)
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:
@@ -109,7 +85,7 @@ func apply_selection(_position) -> void:
 
 
 func lasso_selection(
-	selection_map: SelectionMap, previous_selection_map: SelectionMap, points: Array[Vector2i]
+	points: Array[Vector2i], selection_map: SelectionMap, previous_selection_map: SelectionMap
 ) -> void:
 	var selection_size := selection_map.get_size()
 	var bounding_rect := Rect2i(points[0], Vector2i.ZERO)
