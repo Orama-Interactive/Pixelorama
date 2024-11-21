@@ -69,6 +69,8 @@ var user_data := ""  ## User defined data, set in the project properties.
 
 var x_symmetry_point: float
 var y_symmetry_point: float
+var xy_symmetry_point: Vector2
+var x_minus_y_symmetry_point: Vector2
 var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
 var diagonal_xy_symmetry_axis := SymmetryGuide.new()
@@ -113,6 +115,8 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1
+	xy_symmetry_point = Vector2i(size.y, size.x) - Vector2i.ONE
+	x_minus_y_symmetry_point = Vector2(maxi(size.x - size.y, 0), maxi(size.y - size.x, 0))
 	x_symmetry_axis.type = Guide.Types.HORIZONTAL
 	x_symmetry_axis.project = self
 	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point / 2 + 0.5))
@@ -128,13 +132,13 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	diagonal_xy_symmetry_axis.type = Guide.Types.XY
 	diagonal_xy_symmetry_axis.project = self
 	diagonal_xy_symmetry_axis.add_point(Vector2(19999, -19999))
-	diagonal_xy_symmetry_axis.add_point(Vector2i(-19999, 19999) + size)
+	diagonal_xy_symmetry_axis.add_point(Vector2(-19999, 19999) + xy_symmetry_point + Vector2.ONE)
 	Global.canvas.add_child(diagonal_xy_symmetry_axis)
 
 	diagonal_x_minus_y_symmetry_axis.type = Guide.Types.X_MINUS_Y
 	diagonal_x_minus_y_symmetry_axis.project = self
 	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(-19999, -19999))
-	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(19999, 19999))
+	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(19999, 19999) + x_minus_y_symmetry_point)
 	Global.canvas.add_child(diagonal_x_minus_y_symmetry_axis)
 
 	if OS.get_name() == "Web":

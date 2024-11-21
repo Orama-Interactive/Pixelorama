@@ -15,8 +15,8 @@ const X_MINUS_Y_LINE := Vector2(0.707107, 0.707107)
 var picking_color_for := MOUSE_BUTTON_LEFT
 var horizontal_mirror := false
 var vertical_mirror := false
-var diagonal_mirror := false
-var diagonal_opposite_mirror := false
+var diagonal_xy_mirror := false
+var diagonal_x_minus_y_mirror := false
 var pixel_perfect := false
 var alpha_locked := false
 
@@ -534,23 +534,23 @@ func get_mirrored_positions(
 		if vertical_mirror:
 			positions.append(calculate_mirror_vertical(mirror_x, project, offset))
 		else:
-			if diagonal_mirror:
+			if diagonal_xy_mirror:
 				positions.append(calculate_mirror_xy(mirror_x, project))
-			if diagonal_opposite_mirror:
+			if diagonal_x_minus_y_mirror:
 				positions.append(calculate_mirror_x_minus_y(mirror_x, project))
 	if vertical_mirror:
 		var mirror_y := calculate_mirror_vertical(pos, project, offset)
 		positions.append(mirror_y)
-		if diagonal_mirror:
+		if diagonal_xy_mirror:
 			positions.append(calculate_mirror_xy(mirror_y, project))
-		if diagonal_opposite_mirror:
+		if diagonal_x_minus_y_mirror:
 			positions.append(calculate_mirror_x_minus_y(mirror_y, project))
-	if diagonal_mirror:
+	if diagonal_xy_mirror:
 		var mirror_diagonal := calculate_mirror_xy(pos, project)
 		positions.append(mirror_diagonal)
-		if not horizontal_mirror and not vertical_mirror:
+		if not horizontal_mirror and not vertical_mirror and diagonal_x_minus_y_mirror:
 			positions.append(calculate_mirror_x_minus_y(mirror_diagonal, project))
-	if diagonal_opposite_mirror:
+	if diagonal_x_minus_y_mirror:
 		positions.append(calculate_mirror_x_minus_y(pos, project))
 	return positions
 
@@ -564,11 +564,14 @@ func calculate_mirror_vertical(pos: Vector2i, project: Project, offset := 0) -> 
 
 
 func calculate_mirror_xy(pos: Vector2i, project: Project) -> Vector2i:
-	return Vector2i(Vector2(pos).reflect(XY_LINE).round()) + project.size - Vector2i.ONE
+	return Vector2i(Vector2(pos).reflect(XY_LINE).round()) + Vector2i(project.xy_symmetry_point)
 
 
-func calculate_mirror_x_minus_y(pos: Vector2i, _project: Project) -> Vector2i:
-	return Vector2i(Vector2(pos).reflect(X_MINUS_Y_LINE).round())
+func calculate_mirror_x_minus_y(pos: Vector2i, project: Project) -> Vector2i:
+	return (
+		Vector2i(Vector2(pos).reflect(X_MINUS_Y_LINE).round())
+		+ Vector2i(project.x_minus_y_symmetry_point)
+	)
 
 
 func set_button_size(button_size: int) -> void:

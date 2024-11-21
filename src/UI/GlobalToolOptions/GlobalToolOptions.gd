@@ -3,6 +3,8 @@ extends PanelContainer
 @onready var grid_container: GridContainer = find_child("GridContainer")
 @onready var horizontal_mirror: BaseButton = grid_container.get_node("Horizontal")
 @onready var vertical_mirror: BaseButton = grid_container.get_node("Vertical")
+@onready var diagonal_xy_mirror: BaseButton = grid_container.get_node("DiagonalXY")
+@onready var diagonal_x_minus_y_mirror: BaseButton = grid_container.get_node("DiagonalXMinusY")
 @onready var pixel_perfect: BaseButton = grid_container.get_node("PixelPerfect")
 @onready var alpha_lock: BaseButton = grid_container.get_node("AlphaLock")
 @onready var dynamics: Button = $"%Dynamics"
@@ -39,25 +41,25 @@ func _on_resized() -> void:
 	grid_container.columns = column_n
 
 
-func _on_Horizontal_toggled(button_pressed: bool) -> void:
-	Tools.horizontal_mirror = button_pressed
-	Global.config_cache.set_value("tools", "horizontal_mirror", button_pressed)
-	Global.show_y_symmetry_axis = button_pressed
+func _on_Horizontal_toggled(toggled_on: bool) -> void:
+	Tools.horizontal_mirror = toggled_on
+	Global.config_cache.set_value("tools", "horizontal_mirror", toggled_on)
+	Global.show_y_symmetry_axis = toggled_on
 	Global.current_project.y_symmetry_axis.visible = (
 		Global.show_y_symmetry_axis and Global.show_guides
 	)
 
 	var texture_button: TextureRect = horizontal_mirror.get_node("TextureRect")
 	var file_name := "horizontal_mirror_on.png"
-	if !button_pressed:
+	if not toggled_on:
 		file_name = "horizontal_mirror_off.png"
 	Global.change_button_texturerect(texture_button, file_name)
 
 
-func _on_Vertical_toggled(button_pressed: bool) -> void:
-	Tools.vertical_mirror = button_pressed
-	Global.config_cache.set_value("tools", "vertical_mirror", button_pressed)
-	Global.show_x_symmetry_axis = button_pressed
+func _on_Vertical_toggled(toggled_on: bool) -> void:
+	Tools.vertical_mirror = toggled_on
+	Global.config_cache.set_value("tools", "vertical_mirror", toggled_on)
+	Global.show_x_symmetry_axis = toggled_on
 	# If the button is not pressed but another button is, keep the symmetry guide visible
 	Global.current_project.x_symmetry_axis.visible = (
 		Global.show_x_symmetry_axis and Global.show_guides
@@ -65,8 +67,40 @@ func _on_Vertical_toggled(button_pressed: bool) -> void:
 
 	var texture_button: TextureRect = vertical_mirror.get_node("TextureRect")
 	var file_name := "vertical_mirror_on.png"
-	if !button_pressed:
+	if not toggled_on:
 		file_name = "vertical_mirror_off.png"
+	Global.change_button_texturerect(texture_button, file_name)
+
+
+func _on_diagonal_xy_toggled(toggled_on: bool) -> void:
+	Tools.diagonal_xy_mirror = toggled_on
+	Global.config_cache.set_value("tools", "diagonal_xy_mirror", toggled_on)
+	Global.show_xy_symmetry_axis = toggled_on
+	# If the button is not pressed but another button is, keep the symmetry guide visible
+	Global.current_project.diagonal_xy_symmetry_axis.visible = (
+		Global.show_xy_symmetry_axis and Global.show_guides
+	)
+
+	var texture_button: TextureRect = diagonal_xy_mirror.get_node("TextureRect")
+	var file_name := "xy_mirror_on.png"
+	if not toggled_on:
+		file_name = "xy_mirror_off.png"
+	Global.change_button_texturerect(texture_button, file_name)
+
+
+func _on_diagonal_x_minus_y_toggled(toggled_on: bool) -> void:
+	Tools.diagonal_x_minus_y_mirror = toggled_on
+	Global.config_cache.set_value("tools", "diagonal_x_minus_y_mirror", toggled_on)
+	Global.show_x_minus_y_symmetry_axis = toggled_on
+	# If the button is not pressed but another button is, keep the symmetry guide visible
+	Global.current_project.diagonal_x_minus_y_symmetry_axis.visible = (
+		Global.show_x_minus_y_symmetry_axis and Global.show_guides
+	)
+
+	var texture_button: TextureRect = diagonal_x_minus_y_mirror.get_node("TextureRect")
+	var file_name := "x_minus_y_mirror_on.png"
+	if not toggled_on:
+		file_name = "x_minus_y_mirror_off.png"
 	Global.change_button_texturerect(texture_button, file_name)
 
 
