@@ -1,6 +1,12 @@
-extends ScrollContainer
+class_name TileSetPanel
+extends PanelContainer
 
-@onready var h_flow_container: HFlowContainer = $PanelContainer/HFlowContainer
+enum TileEditingMode { MANUAL, AUTO, STACK }
+
+var current_tileset: TileSetCustom
+static var tile_editing_mode := TileEditingMode.AUTO
+
+@onready var h_flow_container: HFlowContainer = $VBoxContainer/ScrollContainer/HFlowContainer
 
 
 func _ready() -> void:
@@ -34,3 +40,18 @@ func _update_tileset() -> void:
 		texture_rect.custom_minimum_size = Vector2i(32, 32)
 		texture_rect.texture_normal = ImageTexture.create_from_image(tile)
 		h_flow_container.add_child(texture_rect)
+
+
+func _on_manual_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		tile_editing_mode = TileEditingMode.MANUAL
+
+
+func _on_auto_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		tile_editing_mode = TileEditingMode.AUTO
+
+
+func _on_stack_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		tile_editing_mode = TileEditingMode.STACK

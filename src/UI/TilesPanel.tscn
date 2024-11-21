@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfbragmmdwfbl"]
+[gd_scene load_steps=3 format=3 uid="uid://bfbragmmdwfbl"]
 
 [ext_resource type="Script" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
 
-[node name="Tiles" type="ScrollContainer"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_uxnt0"]
+
+[node name="Tiles" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,9 +12,40 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d2oc5")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Manual" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+button_group = SubResource("ButtonGroup_uxnt0")
+text = "Manual"
+
+[node name="Auto" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_uxnt0")
+text = "Auto"
+
+[node name="Stack" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+button_group = SubResource("ButtonGroup_uxnt0")
+text = "Stack"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer"]
-layout_mode = 2
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/Manual" to="." method="_on_manual_toggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/Auto" to="." method="_on_auto_toggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/Stack" to="." method="_on_stack_toggled"]

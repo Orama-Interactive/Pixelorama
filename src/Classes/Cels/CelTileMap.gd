@@ -1,10 +1,7 @@
 class_name CelTileMap
 extends PixelCel
 
-enum TileEditingMode { MANUAL, AUTO, STACK }
-
 var tileset: TileSetCustom
-var tile_editing_mode := TileEditingMode.AUTO
 var indices := PackedInt32Array()
 var indices_x: int
 var indices_y: int
@@ -20,7 +17,7 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 
 func update_tileset() -> void:
 	var removed_tile_indices: Array[int] = []
-	if tile_editing_mode == TileEditingMode.AUTO:
+	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
 		for j in range(tileset.tiles.size() - 1, 0, -1):
 			var tile := tileset.tiles[j]
 			var tile_used := false
@@ -45,7 +42,7 @@ func update_tileset() -> void:
 		if image_portion.is_invisible():
 			continue
 		var index := indices[i]
-		if tile_editing_mode == TileEditingMode.MANUAL:
+		if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 			if index == 0 or tileset.tiles.size() <= index:
 				if tileset.tiles.size() <= 1:
 					tileset.add_tile(image_portion)
