@@ -1,22 +1,19 @@
 class_name Drawer
 
+const NUMBER_OF_DRAWERS := 8
+
 var pixel_perfect := false:
 	set(value):
 		pixel_perfect = value
 		if pixel_perfect:
 			drawers = pixel_perfect_drawers.duplicate()
 		else:
-			drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
+			_create_simple_drawers()
 var color_op := ColorOp.new()
 
 var simple_drawer := SimpleDrawer.new()
-var pixel_perfect_drawers: Array[PixelPerfectDrawer] = [
-	PixelPerfectDrawer.new(),
-	PixelPerfectDrawer.new(),
-	PixelPerfectDrawer.new(),
-	PixelPerfectDrawer.new()
-]
-var drawers := [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
+var pixel_perfect_drawers: Array[PixelPerfectDrawer] = []
+var drawers := []
 
 
 class ColorOp:
@@ -60,6 +57,21 @@ class PixelPerfectDrawer:
 			last_pixels[0] = corner
 
 
+func _init() -> void:
+	drawers.resize(NUMBER_OF_DRAWERS)
+	pixel_perfect_drawers.resize(NUMBER_OF_DRAWERS)
+	for i in NUMBER_OF_DRAWERS:
+		drawers[i] = simple_drawer
+		pixel_perfect_drawers[i] = PixelPerfectDrawer.new()
+
+
+func _create_simple_drawers() -> void:
+	drawers = []
+	drawers.resize(NUMBER_OF_DRAWERS)
+	for i in NUMBER_OF_DRAWERS:
+		drawers[i] = simple_drawer
+
+
 func reset() -> void:
 	for drawer in pixel_perfect_drawers:
 		drawer.reset()
@@ -72,7 +84,12 @@ func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring 
 	SteamManager.set_achievement("ACH_FIRST_PIXEL")
 	if ignore_mirroring:
 		return
-	if not Tools.horizontal_mirror and not Tools.vertical_mirror:
+	if (
+		not Tools.horizontal_mirror
+		and not Tools.vertical_mirror
+		and not Tools.diagonal_mirror
+		and not Tools.diagonal_opposite_mirror
+	):
 		return
 	# Handle mirroring
 	var mirrored_positions := Tools.get_mirrored_positions(position, project)

@@ -9,9 +9,14 @@ signal options_reset
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 
+const XY_LINE := Vector2(-0.707107, 0.707107)
+const X_MINUS_Y_LINE := Vector2(0.707107, 0.707107)
+
 var picking_color_for := MOUSE_BUTTON_LEFT
 var horizontal_mirror := false
 var vertical_mirror := false
+var diagonal_mirror := false
+var diagonal_opposite_mirror := false
 var pixel_perfect := false
 var alpha_locked := false
 
@@ -524,18 +529,46 @@ func get_mirrored_positions(
 ) -> Array[Vector2i]:
 	var positions: Array[Vector2i] = []
 	if horizontal_mirror:
-		var mirror_x := pos
-		mirror_x.x = project.x_symmetry_point - pos.x + offset
+		var mirror_x := calculate_mirror_horizontal(pos, project, offset)
 		positions.append(mirror_x)
 		if vertical_mirror:
-			var mirror_xy := mirror_x
-			mirror_xy.y = project.y_symmetry_point - pos.y + offset
-			positions.append(mirror_xy)
+			positions.append(calculate_mirror_vertical(mirror_x, project, offset))
+		else:
+			if diagonal_mirror:
+				positions.append(calculate_mirror_xy(mirror_x, project))
+			if diagonal_opposite_mirror:
+				positions.append(calculate_mirror_x_minus_y(mirror_x, project))
 	if vertical_mirror:
-		var mirror_y := pos
-		mirror_y.y = project.y_symmetry_point - pos.y + offset
+		var mirror_y := calculate_mirror_vertical(pos, project, offset)
 		positions.append(mirror_y)
+		if diagonal_mirror:
+			positions.append(calculate_mirror_xy(mirror_y, project))
+		if diagonal_opposite_mirror:
+			positions.append(calculate_mirror_x_minus_y(mirror_y, project))
+	if diagonal_mirror:
+		var mirror_diagonal := calculate_mirror_xy(pos, project)
+		positions.append(mirror_diagonal)
+		if not horizontal_mirror and not vertical_mirror:
+			positions.append(calculate_mirror_x_minus_y(mirror_diagonal, project))
+	if diagonal_opposite_mirror:
+		positions.append(calculate_mirror_x_minus_y(pos, project))
 	return positions
+
+
+func calculate_mirror_horizontal(pos: Vector2i, project: Project, offset := 0) -> Vector2i:
+	return Vector2i(project.x_symmetry_point - pos.x + offset, pos.y)
+
+
+func calculate_mirror_vertical(pos: Vector2i, project: Project, offset := 0) -> Vector2i:
+	return Vector2i(pos.x, project.y_symmetry_point - pos.y + offset)
+
+
+func calculate_mirror_xy(pos: Vector2i, project: Project) -> Vector2i:
+	return Vector2i(Vector2(pos).reflect(XY_LINE).round()) + project.size - Vector2i.ONE
+
+
+func calculate_mirror_x_minus_y(pos: Vector2i, _project: Project) -> Vector2i:
+	return Vector2i(Vector2(pos).reflect(X_MINUS_Y_LINE).round())
 
 
 func set_button_size(button_size: int) -> void:

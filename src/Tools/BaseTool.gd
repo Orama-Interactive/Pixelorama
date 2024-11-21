@@ -213,23 +213,22 @@ func mirror_array(array: Array[Vector2i], callable := func(_array): pass) -> Arr
 	if Tools.horizontal_mirror and Tools.vertical_mirror:
 		var hv_array: Array[Vector2i] = []
 		for point in array:
-			hv_array.append(
-				Vector2i(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
-			)
+			var mirror_x := Tools.calculate_mirror_horizontal(point, project)
+			hv_array.append(Tools.calculate_mirror_vertical(mirror_x, project))
 		if callable.is_valid():
 			callable.call(hv_array)
 		new_array += hv_array
 	if Tools.horizontal_mirror:
 		var h_array: Array[Vector2i] = []
 		for point in array:
-			h_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
+			h_array.append(Tools.calculate_mirror_horizontal(point, project))
 		if callable.is_valid():
 			callable.call(h_array)
 		new_array += h_array
 	if Tools.vertical_mirror:
 		var v_array: Array[Vector2i] = []
 		for point in array:
-			v_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))
+			v_array.append(Tools.calculate_mirror_vertical(point, project))
 		if callable.is_valid():
 			callable.call(v_array)
 		new_array += v_array
