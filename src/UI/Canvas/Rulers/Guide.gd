@@ -31,12 +31,13 @@ func _input(_event: InputEvent) -> void:
 	if type == Types.HORIZONTAL:
 		point0.y -= width * INPUT_WIDTH
 		point1.y += width * INPUT_WIDTH
-	else:
+	elif type == Types.VERTICAL:
 		point0.x -= width * INPUT_WIDTH
 		point1.x += width * INPUT_WIDTH
 	var rect := Rect2()
 	rect.position = point0
 	rect.end = point1
+	rect = rect.abs()
 	if (
 		Input.is_action_just_pressed(&"left_mouse")
 		and Global.can_draw
@@ -55,7 +56,7 @@ func _input(_event: InputEvent) -> void:
 				var yy := snappedf(mouse_pos.y, 0.5)
 				points[0].y = yy
 				points[1].y = yy
-			else:
+			elif type == Types.VERTICAL:
 				var xx := snappedf(mouse_pos.x, 0.5)
 				points[0].x = xx
 				points[1].x = xx
