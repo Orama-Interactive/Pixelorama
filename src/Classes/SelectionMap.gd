@@ -199,6 +199,13 @@ func resize_bitmap_values(
 				x_min[y] = xmin
 			if x_max[y] != null && x_max[y] < xmax:
 				x_max[y] = xmax
+	# too small to be rectangular selection
+	if x_min[0] == 0 && x_max[0] == w-1:
+		is_ellipse_select = false
+	# if ellipse is too small, ellipse_select doesn't quite cover the true elliptical selection
+	for y in range(h):
+		if x_min[y] == null:
+			is_ellipse_select = false
 	# Determine whether the selection is an ellipse selection
 	for y in range(h):
 		if !is_ellipse_select:
