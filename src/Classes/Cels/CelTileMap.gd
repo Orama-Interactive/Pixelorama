@@ -47,6 +47,9 @@ func update_tileset() -> void:
 		var index := indices[i]
 		if tile_editing_mode == TileEditingMode.MANUAL:
 			if index == 0 or tileset.tiles.size() <= index:
+				if tileset.tiles.size() <= 1:
+					tileset.add_tile(image_portion)
+					indices[i] = tileset.tiles.size() - 1
 				continue
 			if image_portion.get_data() != tileset.tiles[index].get_data():
 				tileset.replace_tile_at(image_portion, index)
@@ -62,7 +65,7 @@ func update_tileset() -> void:
 			if not found_tile:
 				if removed_tile_indices.is_empty():
 					tileset.add_tile(image_portion)
-					indices[i] = tileset.tiles.size()
+					indices[i] = tileset.tiles.size() - 1
 				else:
 					var index_position := removed_tile_indices.pop_back() as int
 					tileset.insert_tile(image_portion, index_position)
