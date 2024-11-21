@@ -184,7 +184,7 @@ var show_x_symmetry_axis := false
 ## If true, the y symmetry guide ( | ) is visible.
 var show_y_symmetry_axis := false
 ## If true, the x=y symmetry guide ( / ) is visible.
-var show_x_y_symmetry_axis := false
+var show_xy_symmetry_axis := false
 ## If true, the x==y symmetry guide ( \ ) is visible.
 var show_x_minus_y_symmetry_axis := false
 

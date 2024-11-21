@@ -234,7 +234,7 @@ func _project_switched() -> void:
 			elif type == Types.VERTICAL:
 				visible = Global.show_y_symmetry_axis and Global.show_guides
 			elif type == Types.XY:
-				visible = Global.show_x_y_symmetry_axis and Global.show_guides
+				visible = Global.show_xy_symmetry_axis and Global.show_guides
 			elif type == Types.X_MINUS_Y:
 				visible = Global.show_x_minus_y_symmetry_axis and Global.show_guides
 	else:

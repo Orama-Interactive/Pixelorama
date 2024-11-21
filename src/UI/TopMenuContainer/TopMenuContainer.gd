@@ -838,7 +838,7 @@ func _toggle_show_guides() -> void:
 				elif guide.type == Guide.Types.VERTICAL:
 					guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 				elif guide.type == Guide.Types.XY:
-					guide.visible = Global.show_x_y_symmetry_axis and Global.show_guides
+					guide.visible = Global.show_xy_symmetry_axis and Global.show_guides
 				elif guide.type == Guide.Types.X_MINUS_Y:
 					guide.visible = Global.show_x_minus_y_symmetry_axis and Global.show_guides
 

@@ -87,8 +87,8 @@ func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring 
 	if (
 		not Tools.horizontal_mirror
 		and not Tools.vertical_mirror
-		and not Tools.diagonal_mirror
-		and not Tools.diagonal_opposite_mirror
+		and not Tools.diagonal_xy_mirror
+		and not Tools.diagonal_x_minus_y_mirror
 	):
 		return
 	# Handle mirroring

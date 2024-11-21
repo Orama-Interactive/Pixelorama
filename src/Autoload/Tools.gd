@@ -15,8 +15,8 @@ const X_MINUS_Y_LINE := Vector2(0.707107, 0.707107)
 var picking_color_for := MOUSE_BUTTON_LEFT
 var horizontal_mirror := false
 var vertical_mirror := false
-var diagonal_mirror := false
-var diagonal_opposite_mirror := false
+var diagonal_xy_mirror := false
+var diagonal_x_minus_y_mirror := false
 var pixel_perfect := false
 var alpha_locked := false
 
@@ -534,23 +534,23 @@ func get_mirrored_positions(
 		if vertical_mirror:
 			positions.append(calculate_mirror_vertical(mirror_x, project, offset))
 		else:
-			if diagonal_mirror:
+			if diagonal_xy_mirror:
 				positions.append(calculate_mirror_xy(mirror_x, project))
-			if diagonal_opposite_mirror:
+			if diagonal_x_minus_y_mirror:
 				positions.append(calculate_mirror_x_minus_y(mirror_x, project))
 	if vertical_mirror:
 		var mirror_y := calculate_mirror_vertical(pos, project, offset)
 		positions.append(mirror_y)
-		if diagonal_mirror:
+		if diagonal_xy_mirror:
 			positions.append(calculate_mirror_xy(mirror_y, project))
-		if diagonal_opposite_mirror:
+		if diagonal_x_minus_y_mirror:
 			positions.append(calculate_mirror_x_minus_y(mirror_y, project))
-	if diagonal_mirror:
+	if diagonal_xy_mirror:
 		var mirror_diagonal := calculate_mirror_xy(pos, project)
 		positions.append(mirror_diagonal)
 		if not horizontal_mirror and not vertical_mirror:
 			positions.append(calculate_mirror_x_minus_y(mirror_diagonal, project))
-	if diagonal_opposite_mirror:
+	if diagonal_x_minus_y_mirror:
 		positions.append(calculate_mirror_x_minus_y(pos, project))
 	return positions
 
