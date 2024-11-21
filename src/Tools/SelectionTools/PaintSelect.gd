@@ -74,7 +74,7 @@ func draw_preview() -> void:
 				image.set_pixelv(draw_point, Color.WHITE)
 
 		# Handle mirroring
-		for point in mirror_array(_draw_points, Tools.horizontal_mirror, Tools.vertical_mirror):
+		for point in mirror_array(_draw_points):
 			var draw_point := point
 			if Global.mirror_view:  # This fixes previewing in mirror mode
 				draw_point.x = image.get_width() - draw_point.x - 1
@@ -101,7 +101,7 @@ func apply_selection(pos: Vector2i) -> void:
 			project.selection_map.clear()
 		paint_selection(project.selection_map, previous_selection_map, _draw_points)
 		# Handle mirroring
-		var mirror := mirror_array(_draw_points, Tools.horizontal_mirror, Tools.vertical_mirror)
+		var mirror := mirror_array(_draw_points)
 		paint_selection(project.selection_map, previous_selection_map, mirror)
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:

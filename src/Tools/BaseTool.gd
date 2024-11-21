@@ -205,14 +205,12 @@ func snap_position(pos: Vector2) -> Vector2:
 	return pos
 
 
-## Returns an array that mirrors each point of the [param array], based on [param h] and [param v].
+## Returns an array that mirrors each point of the [param array].
 ## An optional [param callable] can be passed, which gets called for each type of symmetry.
-func mirror_array(
-	array: Array[Vector2i], h: bool, v: bool, callable := func(_array): pass
-) -> Array[Vector2i]:
+func mirror_array(array: Array[Vector2i], callable := func(_array): pass) -> Array[Vector2i]:
 	var new_array: Array[Vector2i] = []
 	var project := Global.current_project
-	if h and v:
+	if Tools.horizontal_mirror and Tools.vertical_mirror:
 		var hv_array: Array[Vector2i] = []
 		for point in array:
 			hv_array.append(
@@ -221,14 +219,14 @@ func mirror_array(
 		if callable.is_valid():
 			callable.call(hv_array)
 		new_array += hv_array
-	if h:
+	if Tools.horizontal_mirror:
 		var h_array: Array[Vector2i] = []
 		for point in array:
 			h_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
 		if callable.is_valid():
 			callable.call(h_array)
 		new_array += h_array
-	if v:
+	if Tools.vertical_mirror:
 		var v_array: Array[Vector2i] = []
 		for point in array:
 			v_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))

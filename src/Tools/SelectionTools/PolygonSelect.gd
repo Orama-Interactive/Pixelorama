@@ -81,9 +81,7 @@ func draw_preview() -> void:
 			)
 
 		# Handle mirroring
-		for point in mirror_array(
-			preview_draw_points, Tools.horizontal_mirror, Tools.vertical_mirror
-		):
+		for point in mirror_array(preview_draw_points):
 			var draw_point := point
 			if Global.mirror_view:  # This fixes previewing in mirror mode
 				draw_point.x = image.get_width() - draw_point.x - 1
@@ -112,7 +110,7 @@ func apply_selection(pos: Vector2i) -> void:
 		lasso_selection(_draw_points, project.selection_map, previous_selection_map)
 		# Handle mirroring
 		var callable := lasso_selection.bind(project.selection_map, previous_selection_map)
-		mirror_array(_draw_points, Tools.horizontal_mirror, Tools.vertical_mirror, callable)
+		mirror_array(_draw_points, callable)
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:

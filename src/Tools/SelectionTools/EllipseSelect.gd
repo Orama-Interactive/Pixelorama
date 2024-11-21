@@ -63,7 +63,7 @@ func draw_preview() -> void:
 			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(points[i]):
 				image.set_pixelv(points[i], Color.WHITE)
 		# Handle mirroring
-		for point in mirror_array(points, Tools.horizontal_mirror, Tools.vertical_mirror):
+		for point in mirror_array(points):
 			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
 				image.set_pixelv(point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
