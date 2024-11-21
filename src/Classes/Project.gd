@@ -71,6 +71,8 @@ var x_symmetry_point: float
 var y_symmetry_point: float
 var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
+var diagonal_xy_symmetry_axis := SymmetryGuide.new()
+var diagonal_x_minus_y_symmetry_axis := SymmetryGuide.new()
 
 var selection_map := SelectionMap.new()
 ## This is useful for when the selection is outside of the canvas boundaries,
@@ -111,16 +113,29 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1
-	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
+	x_symmetry_axis.type = Guide.Types.HORIZONTAL
 	x_symmetry_axis.project = self
 	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point / 2 + 0.5))
 	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point / 2 + 0.5))
 	Global.canvas.add_child(x_symmetry_axis)
-	y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
+
+	y_symmetry_axis.type = Guide.Types.VERTICAL
 	y_symmetry_axis.project = self
 	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, -19999))
 	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, 19999))
 	Global.canvas.add_child(y_symmetry_axis)
+
+	diagonal_xy_symmetry_axis.type = Guide.Types.XY
+	diagonal_xy_symmetry_axis.project = self
+	diagonal_xy_symmetry_axis.add_point(Vector2(19999, -19999))
+	diagonal_xy_symmetry_axis.add_point(Vector2i(-19999, 19999) + size)
+	Global.canvas.add_child(diagonal_xy_symmetry_axis)
+
+	diagonal_x_minus_y_symmetry_axis.type = Guide.Types.X_MINUS_Y
+	diagonal_x_minus_y_symmetry_axis.project = self
+	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(-19999, -19999))
+	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(19999, 19999))
+	Global.canvas.add_child(diagonal_x_minus_y_symmetry_axis)
 
 	if OS.get_name() == "Web":
 		export_directory_path = "user://"

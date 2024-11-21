@@ -1,7 +1,7 @@
 class_name Guide
 extends Line2D
 
-enum Types { HORIZONTAL, VERTICAL }
+enum Types { HORIZONTAL, VERTICAL, XY, X_MINUS_Y }
 
 const INPUT_WIDTH := 4
 
@@ -221,14 +221,22 @@ func set_color(color: Color) -> void:
 	default_color = color
 
 
+func get_direction() -> Vector2:
+	return points[0].direction_to(points[1])
+
+
 func _project_switched() -> void:
 	if self in Global.current_project.guides:
 		visible = Global.show_guides
 		if self is SymmetryGuide:
 			if type == Types.HORIZONTAL:
 				visible = Global.show_x_symmetry_axis and Global.show_guides
-			else:
+			elif type == Types.VERTICAL:
 				visible = Global.show_y_symmetry_axis and Global.show_guides
+			elif type == Types.XY:
+				visible = Global.show_x_y_symmetry_axis and Global.show_guides
+			elif type == Types.X_MINUS_Y:
+				visible = Global.show_x_minus_y_symmetry_axis and Global.show_guides
 	else:
 		visible = false
 

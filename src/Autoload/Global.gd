@@ -179,10 +179,14 @@ var can_draw := true
 var move_guides_on_canvas := true
 
 var play_only_tags := true  ## If [code]true[/code], animation plays only on frames of the same tag.
-## (Intended to be used as getter only) Tells if the x-symmetry guide ( -- ) is visible.
+## If true, the x symmetry guide ( -- ) is visible.
 var show_x_symmetry_axis := false
-## (Intended to be used as getter only) Tells if the y-symmetry guide ( | ) is visible.
+## If true, the y symmetry guide ( | ) is visible.
 var show_y_symmetry_axis := false
+## If true, the x=y symmetry guide ( / ) is visible.
+var show_x_y_symmetry_axis := false
+## If true, the x==y symmetry guide ( \ ) is visible.
+var show_x_minus_y_symmetry_axis := false
 
 # Preferences
 ## Found in Preferences. If [code]true[/code], the last saved project will open on startup.
