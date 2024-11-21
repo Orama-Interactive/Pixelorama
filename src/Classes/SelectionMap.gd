@@ -175,22 +175,30 @@ func resize_bitmap_values(
 	else:
 		project.selection_offset.y = 0
 	clear()
-	
+
 	var is_ellipse_select := true
 	var w := smaller_image.get_width()
 	var h := smaller_image.get_height()
-	var ellipse_select := DrawingAlgos.get_ellipse_points(Vector2.ZERO, Vector2i(w,h))
+	var ellipse_select := DrawingAlgos.get_ellipse_points(Vector2.ZERO, Vector2i(w, h))
 	var x_min := []
 	var x_max := []
 	x_min.resize(h)
 	x_max.resize(h)
 	# Determine x_min and x_max of y
-	for i in ellipse_select.size()/2:
-		i*=2
+	for i in ellipse_select.size() / 2:
+		i *= 2
 		var y := ellipse_select[i].y
-		var xmin := ellipse_select[i].x if ellipse_select[i].x < ellipse_select[i+1].x else ellipse_select[i+1].x
-		var xmax := ellipse_select[i].x if ellipse_select[i].x >= ellipse_select[i+1].x else ellipse_select[i+1].x
-		
+		var xmin := (
+			ellipse_select[i].x
+			if ellipse_select[i].x < ellipse_select[i + 1].x
+			else ellipse_select[i + 1].x
+		)
+		var xmax := (
+			ellipse_select[i].x
+			if ellipse_select[i].x >= ellipse_select[i + 1].x
+			else ellipse_select[i + 1].x
+		)
+
 		if x_min[y] == null && x_max[y] == null: 
 			x_min[y] = xmin
 			x_max[y] = xmax
@@ -200,7 +208,7 @@ func resize_bitmap_values(
 			if x_max[y] != null && x_max[y] < xmax:
 				x_max[y] = xmax
 	# too small to be rectangular selection
-	if x_min[0] == 0 && x_max[0] == w-1:
+	if x_min[0] == 0 && x_max[0] == w - 1:
 		is_ellipse_select = false
 	# if ellipse is too small, ellipse_select doesn't quite cover the true elliptical selection
 	for y in range(h):
@@ -211,7 +219,7 @@ func resize_bitmap_values(
 		if !is_ellipse_select:
 			break
 		for x in range(w):
-			if smaller_image.get_pixel(x,y) == Color(1,1,1,1) && (x < x_min[y] || x > x_max[y]):
+			if smaller_image.get_pixel(x, y) == Color(1, 1, 1, 1) && (x < x_min[y] || x > x_max[y]):
 				is_ellipse_select = false
 				break
 	# if selection is an ellipse selection, resized as standard ellipse
@@ -219,11 +227,13 @@ func resize_bitmap_values(
 		smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_BILINEAR)
 	else:
 		var resized_img := Image.create(new_size.x, new_size.y, false, smaller_image.get_format())
-		var new_ellipse_select := DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, Vector2i(new_size.x,new_size.y))
+		var new_ellipse_select := DrawingAlgos.get_ellipse_points_filled(
+			Vector2.ZERO, Vector2i(new_size.x, new_size.y)
+		)
 		for p in new_ellipse_select:
 			resized_img.set_pixel(p.x, p.y, Color(1, 1, 1, 1))
-		smaller_image = resized_img	
-	
+		smaller_image = resized_img
+
 	if flip_hor:
 		smaller_image.flip_x()
 	if flip_ver:
