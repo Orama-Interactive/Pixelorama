@@ -199,7 +199,7 @@ func resize_bitmap_values(
 			else ellipse_select[i + 1].x
 		)
 
-		if x_min[y] == null && x_max[y] == null: 
+		if x_min[y] == null && x_max[y] == null:
 			x_min[y] = xmin
 			x_max[y] = xmax
 		else:
