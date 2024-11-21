@@ -20,6 +20,9 @@ func update_tileset() -> void:
 	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
 		for j in range(tileset.tiles.size() - 1, 0, -1):
 			var tile := tileset.tiles[j]
+			if tile.mode_added == TileSetPanel.TileEditingMode.STACK:
+				# Don't delete tiles that have been added using the stack mode.
+				continue
 			var tile_used := false
 			for i in indices.size():
 				var x_coord := float(tileset.tile_size.x) * (i % indices_x)
@@ -28,7 +31,7 @@ func update_tileset() -> void:
 				var image_portion := image.get_region(rect)
 				if image_portion.is_invisible():
 					continue
-				if image_portion.get_data() == tile.get_data():
+				if image_portion.get_data() == tile.image.get_data():
 					tile_used = true
 					break
 			if not tile_used:
@@ -45,27 +48,29 @@ func update_tileset() -> void:
 		if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 			if index == 0 or tileset.tiles.size() <= index:
 				if tileset.tiles.size() <= 1:
-					tileset.add_tile(image_portion)
+					tileset.add_tile(image_portion, TileSetPanel.tile_editing_mode)
 					indices[i] = tileset.tiles.size() - 1
 				continue
-			if image_portion.get_data() != tileset.tiles[index].get_data():
+			if image_portion.get_data() != tileset.tiles[index].image.get_data():
 				tileset.replace_tile_at(image_portion, index)
 				# TODO: Update the rest of the tilemap
-		else:
+		else:  # Auto or stack
 			var found_tile := false
 			for j in range(1, tileset.tiles.size()):
 				var tile := tileset.tiles[j]
-				if image_portion.get_data() == tile.get_data():
+				if image_portion.get_data() == tile.image.get_data():
 					indices[i] = j
 					found_tile = true
 					break
 			if not found_tile:
 				if removed_tile_indices.is_empty():
-					tileset.add_tile(image_portion)
+					tileset.add_tile(image_portion, TileSetPanel.tile_editing_mode)
 					indices[i] = tileset.tiles.size() - 1
 				else:
 					var index_position := removed_tile_indices.pop_back() as int
-					tileset.insert_tile(image_portion, index_position)
+					tileset.insert_tile(
+						image_portion, index_position, TileSetPanel.tile_editing_mode
+					)
 					indices[i] = index_position
 
 

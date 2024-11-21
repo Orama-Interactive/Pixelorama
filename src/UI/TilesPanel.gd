@@ -38,7 +38,7 @@ func _update_tileset() -> void:
 	for tile in tileset.tiles:
 		var texture_rect := TextureButton.new()
 		texture_rect.custom_minimum_size = Vector2i(32, 32)
-		texture_rect.texture_normal = ImageTexture.create_from_image(tile)
+		texture_rect.texture_normal = ImageTexture.create_from_image(tile.image)
 		h_flow_container.add_child(texture_rect)
 
 
