@@ -74,8 +74,9 @@ func select_palette(_name: String, convert_to_rgb := true) -> void:
 
 ## Updates [member palette] to contain the colors of [member current_palette].
 func update_palette() -> void:
-	if palette.size() != current_palette.colors.size():
-		palette.resize(current_palette.colors.size())
+	if palette.size() != current_palette.colors_max:
+		palette.resize(current_palette.colors_max)
+		palette.fill(TRANSPARENT)
 	for i in current_palette.colors:
 		palette[i] = current_palette.colors[i].color
 
