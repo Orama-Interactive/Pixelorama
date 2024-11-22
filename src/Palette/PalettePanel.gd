@@ -252,6 +252,7 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 			== Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
 		):
 			Tools.assign_color(color, MOUSE_BUTTON_RIGHT)
+		Palettes.current_palette_set_color(edited_swatch_index, edited_swatch_color)
 
 
 ## Saves edited swatch to palette file when color selection dialog is closed
