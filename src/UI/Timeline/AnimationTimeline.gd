@@ -140,8 +140,10 @@ func _input(event: InputEvent) -> void:
 	var timeline_rect := Rect2(global_position, size)
 	if timeline_rect.has_point(mouse_pos):
 		if Input.is_key_pressed(KEY_CTRL):
-			cel_size += (2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out")))
-			get_viewport().set_input_as_handled()
+			var zoom := 2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out"))
+			cel_size += zoom
+			if zoom != 0:
+				get_viewport().set_input_as_handled()
 
 
 func reset_settings() -> void:
