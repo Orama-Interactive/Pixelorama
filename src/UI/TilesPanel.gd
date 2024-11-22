@@ -3,8 +3,8 @@ extends PanelContainer
 
 enum TileEditingMode { MANUAL, AUTO, STACK }
 
-var current_tileset: TileSetCustom
 static var tile_editing_mode := TileEditingMode.AUTO
+var current_tileset: TileSetCustom
 
 @onready var h_flow_container: HFlowContainer = $VBoxContainer/ScrollContainer/HFlowContainer
 
