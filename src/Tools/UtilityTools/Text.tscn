@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct4o5i1jeul3k"]
+[gd_scene load_steps=6 format=3 uid="uid://bdregpkflev7u"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1_1q6ub"]
 [ext_resource type="Script" path="res://src/Tools/UtilityTools/Text.gd" id="2_ql5g6"]
@@ -63,6 +63,8 @@ stretch_margin_bottom = 3
 script = ExtResource("3_tidsq")
 prefix = "Size:"
 suffix = "px"
+global_increment_action = "brush_size_increment"
+global_decrement_action = "brush_size_decrement"
 
 [node name="GridContainer" type="GridContainer" parent="." index="4"]
 layout_mode = 2
