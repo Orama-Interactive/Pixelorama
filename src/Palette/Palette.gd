@@ -25,7 +25,7 @@ var colors_max := 0
 
 
 class PaletteColor:
-	var color := Color.TRANSPARENT
+	var color := Color(0, 0, 0, 0)
 	var index := -1
 
 	func _init(init_color := Color.BLACK, init_index := -1) -> void:
@@ -358,9 +358,11 @@ static func strip_unvalid_characters(string_to_strip: String) -> String:
 	return regex.sub(string_to_strip, "", true)
 
 
-func convert_to_image() -> Image:
+func convert_to_image(crop_image := true) -> Image:
 	var image := Image.create(colors_max, 1, false, Image.FORMAT_RGBA8)
 	for i in colors_max:
 		if colors.has(i):
 			image.set_pixel(i, 0, Color(colors[i].color.to_html()))
+	if crop_image:
+		image.copy_from(image.get_region(image.get_used_rect()))
 	return image

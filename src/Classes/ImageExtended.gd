@@ -84,7 +84,7 @@ func update_palette() -> void:
 func convert_indexed_to_rgb() -> void:
 	if not is_indexed:
 		return
-	var palette_image := Palettes.current_palette.convert_to_image()
+	var palette_image := Palettes.current_palette.convert_to_image(false)
 	var palette_texture := ImageTexture.create_from_image(palette_image)
 	var shader_image_effect := ShaderImageEffect.new()
 	var indices_texture := ImageTexture.create_from_image(indices_image)
@@ -98,7 +98,7 @@ func convert_indexed_to_rgb() -> void:
 func convert_rgb_to_indexed() -> void:
 	if not is_indexed:
 		return
-	var palette_image := Palettes.current_palette.convert_to_image()
+	var palette_image := Palettes.current_palette.convert_to_image(false)
 	var palette_texture := ImageTexture.create_from_image(palette_image)
 	var params := {
 		"palette_texture": palette_texture, "rgb_texture": ImageTexture.create_from_image(self)
