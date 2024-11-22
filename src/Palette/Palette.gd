@@ -362,5 +362,5 @@ func convert_to_image() -> Image:
 	var image := Image.create(colors_max, 1, false, Image.FORMAT_RGBA8)
 	for i in colors_max:
 		if colors.has(i):
-			image.set_pixel(i, 0, colors[i].color)
+			image.set_pixel(i, 0, Color(colors[i].color.to_html()))
 	return image
