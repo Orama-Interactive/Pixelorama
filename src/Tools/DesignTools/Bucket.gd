@@ -269,9 +269,11 @@ func fill_in_selection() -> void:
 			var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
 			for image in images:
 				image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
+				image.convert_rgb_to_indexed()
 		else:
 			for image in images:
 				image.fill(tool_slot.color)
+				image.convert_rgb_to_indexed()
 	else:
 		# End early if we are filling with an empty pattern
 		var pattern_image: Image = _pattern.image

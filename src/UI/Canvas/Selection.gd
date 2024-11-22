@@ -808,9 +808,11 @@ func delete(selected_cels := true) -> void:
 			image.blit_rect_mask(
 				blank, selection_map_copy, big_bounding_rectangle, big_bounding_rectangle.position
 			)
+			image.convert_rgb_to_indexed()
 	else:
 		for image in images:
 			image.fill(0)
+			image.convert_rgb_to_indexed()
 	commit_undo("Draw", undo_data_tmp)
 
 
