@@ -8,7 +8,7 @@ uniform sampler2D palette_texture : filter_nearest;
 
 void fragment() {
 	vec4 color = texture(rgb_texture, UV);
-	if (color.a <= 0.01) {
+	if (color.a <= 0.0001) {
 		COLOR.r = 0.0;
 	}
 	else {

@@ -14,7 +14,7 @@ vec4 swap_color(vec4 color) {
 
 	int n_of_colors = textureSize(palette_texture, 0).x;
 	int color_index = find_index(color, n_of_colors, palette_texture);
-	return texture(palette_texture, vec2(float(color_index) / float(n_of_colors), 0.0));
+	return texelFetch(palette_texture, ivec2(color_index, 0), 0);
 }
 
 void fragment() {

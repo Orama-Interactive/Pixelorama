@@ -7,16 +7,16 @@ uniform sampler2D palette_texture : filter_nearest;
 uniform sampler2D indices_texture : filter_nearest;
 
 void fragment() {
-	float index = texture(indices_texture, UV).r;
+	float index = texture(indices_texture, UV).r * 255.0;
 	if (index <= EPSILON) { // If index is zero, make it transparent
 		COLOR = vec4(0.0);
 	}
 	else {
 		float n_of_colors = float(textureSize(palette_texture, 0).x);
-		index -= 1.0 / 255.0;
-		float index_normalized = ((index * 255.0)) / n_of_colors;
-		if (index_normalized + EPSILON < 1.0) {
-			COLOR = texture(palette_texture, vec2(index_normalized + EPSILON, 0.0));
+		index -= 1.0;
+		float index_normalized = index / n_of_colors;
+		if (index < n_of_colors) {
+			COLOR = texelFetch(palette_texture, ivec2(int(index), 0), 0);
 		}
 		else {
 			// If index is bigger than the size of the palette, make it transparent.
