@@ -421,7 +421,6 @@ func _setup_color_mode_submenu(item: String) -> void:
 	color_mode_submenu.add_radio_check_item("RGBA", ColorModes.RGBA)
 	color_mode_submenu.set_item_checked(ColorModes.RGBA, true)
 	color_mode_submenu.add_radio_check_item("Indexed", ColorModes.INDEXED)
-	color_mode_submenu.hide_on_checkable_item_selection = false
 
 	color_mode_submenu.id_pressed.connect(_color_mode_submenu_id_pressed)
 	image_menu.add_child(color_mode_submenu)
