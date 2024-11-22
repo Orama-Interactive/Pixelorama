@@ -8,7 +8,7 @@ var image: ImageExtended:
 	set = image_changed
 
 
-func _init(_image: ImageExtended, _opacity := 1.0) -> void:
+func _init(_image := ImageExtended.new(), _opacity := 1.0) -> void:
 	image_texture = ImageTexture.new()
 	image = _image  # Set image and call setter
 	opacity = _opacity
@@ -20,7 +20,7 @@ func image_changed(value: ImageExtended) -> void:
 		image_texture.set_image(image)
 
 
-func get_content():
+func get_content() -> ImageExtended:
 	return image
 
 
@@ -34,17 +34,19 @@ func set_content(content, texture: ImageTexture = null) -> void:
 		image_texture.update(image)
 
 
-func create_empty_content():
-	var empty_image := Image.create(
-		image.get_size().x, image.get_size().y, false, Image.FORMAT_RGBA8
-	)
-	return empty_image
+func create_empty_content() -> ImageExtended:
+	var empty := Image.create(image.get_width(), image.get_height(), false, image.get_format())
+	var new_image := ImageExtended.new()
+	new_image.copy_from_custom(empty, image.is_indexed)
+	return new_image
 
 
-func copy_content():
-	var copy_image := Image.create_from_data(
-		image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8, image.get_data()
+func copy_content() -> ImageExtended:
+	var tmp_image := Image.create_from_data(
+		image.get_width(), image.get_height(), false, image.get_format(), image.get_data()
 	)
+	var copy_image := ImageExtended.new()
+	copy_image.copy_from_custom(tmp_image, image.is_indexed)
 	return copy_image
 
 
