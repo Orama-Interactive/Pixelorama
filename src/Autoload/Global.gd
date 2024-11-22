@@ -1066,7 +1066,9 @@ func get_available_font_names() -> PackedStringArray:
 		if font_name in font_names:
 			continue
 		font_names.append(font_name)
-	for system_font_name in OS.get_system_fonts():
+	var system_fonts := OS.get_system_fonts()
+	system_fonts.sort()
+	for system_font_name in system_fonts:
 		if system_font_name in font_names:
 			continue
 		font_names.append(system_font_name)
