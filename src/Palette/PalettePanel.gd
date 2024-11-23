@@ -89,16 +89,16 @@ func select_palette(palette_name: String) -> void:
 	var palette_id = palettes_path_id.get(palette_name)
 	if palette_id != null:
 		palette_select.selected = palette_id
-		palette_grid.set_palette(Palettes.current_palette)
-		palette_scroll.resize_grid()
-		palette_scroll.set_sliders(Palettes.current_palette, palette_grid.grid_window_origin)
+	palette_grid.set_palette(Palettes.current_palette)
+	palette_scroll.resize_grid()
+	palette_scroll.set_sliders(Palettes.current_palette, palette_grid.grid_window_origin)
 
-		var left_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
-		var right_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
-		palette_grid.select_swatch(MOUSE_BUTTON_LEFT, left_selected, left_selected)
-		palette_grid.select_swatch(MOUSE_BUTTON_RIGHT, right_selected, right_selected)
+	var left_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
+	var right_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
+	palette_grid.select_swatch(MOUSE_BUTTON_LEFT, left_selected, left_selected)
+	palette_grid.select_swatch(MOUSE_BUTTON_RIGHT, right_selected, right_selected)
 
-		toggle_add_delete_buttons()
+	toggle_add_delete_buttons()
 
 
 ## Select and display current palette
@@ -115,6 +115,8 @@ func redraw_current_palette() -> void:
 
 
 func toggle_add_delete_buttons() -> void:
+	if not is_instance_valid(Palettes.current_palette):
+		return
 	add_color_button.disabled = Palettes.current_palette.is_full()
 	if add_color_button.disabled:
 		add_color_button.mouse_default_cursor_shape = CURSOR_FORBIDDEN

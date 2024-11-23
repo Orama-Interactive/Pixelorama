@@ -23,10 +23,6 @@ func _ready() -> void:
 
 
 func set_palette(new_palette: Palette) -> void:
-	# Only display valid palette objects
-	if not new_palette:
-		return
-
 	current_palette = new_palette
 	grid_window_origin = Vector2.ZERO
 
@@ -117,6 +113,8 @@ func find_and_select_color(target_color: Color, mouse_button: int) -> void:
 
 ## Displays a left/right highlight over a swatch
 func select_swatch(mouse_button: int, palette_index: int, old_palette_index: int) -> void:
+	if not is_instance_valid(current_palette):
+		return
 	var index := convert_palette_index_to_grid_index(palette_index)
 	var old_index := convert_palette_index_to_grid_index(old_palette_index)
 	if index >= 0 and index < swatches.size():
@@ -161,16 +159,17 @@ func convert_palette_index_to_grid_index(palette_index: int) -> int:
 
 
 func resize_grid(new_rect_size: Vector2) -> void:
-	if not is_instance_valid(current_palette):
-		return
 	var grid_x: int = (
 		new_rect_size.x / (swatch_size.x + get("theme_override_constants/h_separation"))
 	)
 	var grid_y: int = (
 		new_rect_size.y / (swatch_size.y + get("theme_override_constants/v_separation"))
 	)
-	grid_size.x = mini(grid_x, current_palette.width)
-	grid_size.y = mini(grid_y, current_palette.height)
+	if is_instance_valid(current_palette):
+		grid_size.x = mini(grid_x, current_palette.width)
+		grid_size.y = mini(grid_y, current_palette.height)
+	else:
+		grid_size = Vector2i.ZERO
 	setup_swatches()
 	draw_palette()
 

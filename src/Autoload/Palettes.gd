@@ -36,9 +36,10 @@ func does_palette_exist(palette_name: String) -> bool:
 
 
 func select_palette(palette_name: String) -> void:
-	current_palette = palettes.get(palette_name)
+	current_palette = palettes.get(palette_name, null)
 	_clear_selected_colors()
-	Global.config_cache.set_value("data", "last_palette", current_palette.name)
+	if is_instance_valid(current_palette):
+		Global.config_cache.set_value("data", "last_palette", current_palette.name)
 	palette_selected.emit(palette_name)
 
 
@@ -224,6 +225,7 @@ func current_palete_delete(permanent := true) -> void:
 		select_palette(palettes.keys()[0])
 	else:
 		current_palette = null
+		select_palette("")
 
 
 func current_palette_add_color(mouse_button: int, start_index := 0) -> void:
