@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-11-20 12:58\n"
+"PO-Revision-Date: 2024-11-23 17:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,15 +169,15 @@ msgstr "Porcentaje"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Modo de color:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Modo de color"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Indexado"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -1576,7 +1576,9 @@ msgstr "Herramienta Elipse\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Texto\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón"
 
 msgid "Rectangle"
 msgstr "Rectángulo"
@@ -2091,30 +2093,30 @@ msgstr "Intersección de las selecciones"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Estilo:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Normal"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Negrita"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Cursiva"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Negrita cursiva"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Antialiasing"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Escala de grises"
 
 msgid "Mirroring"
 msgstr "Espejar"
