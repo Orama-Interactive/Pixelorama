@@ -74,6 +74,8 @@ func select_palette(_name: String, convert_to_rgb := true) -> void:
 
 ## Updates [member palette] to contain the colors of [member current_palette].
 func update_palette() -> void:
+	if not is_instance_valid(current_palette):
+		return
 	if palette.size() != current_palette.colors_max:
 		palette.resize(current_palette.colors_max)
 		palette.fill(TRANSPARENT)
@@ -83,9 +85,9 @@ func update_palette() -> void:
 
 ## Displays the actual RGBA values of each pixel in the image from indexed mode.
 func convert_indexed_to_rgb() -> void:
-	if not is_indexed:
+	if not is_indexed or not is_instance_valid(current_palette):
 		return
-	var palette_image := Palettes.current_palette.convert_to_image(false)
+	var palette_image := current_palette.convert_to_image(false)
 	var palette_texture := ImageTexture.create_from_image(palette_image)
 	var shader_image_effect := ShaderImageEffect.new()
 	var indices_texture := ImageTexture.create_from_image(indices_image)
@@ -97,9 +99,9 @@ func convert_indexed_to_rgb() -> void:
 ## Automatically maps each color of the image's pixel to the closest color of the palette,
 ## by finding the palette color's index and storing it in [member indices_image].
 func convert_rgb_to_indexed() -> void:
-	if not is_indexed:
+	if not is_indexed or not is_instance_valid(current_palette):
 		return
-	var palette_image := Palettes.current_palette.convert_to_image(false)
+	var palette_image := current_palette.convert_to_image(false)
 	var palette_texture := ImageTexture.create_from_image(palette_image)
 	var params := {
 		"palette_texture": palette_texture, "rgb_texture": ImageTexture.create_from_image(self)
