@@ -55,6 +55,7 @@ class Recorder:
 		dir.make_dir_recursive(save_directory)
 		project.removed.connect(recorder_panel.finalize_recording.bind(project))
 		project.undo_redo.version_changed.connect(capture_frame)
+		recorder_panel.captured_label.text = ""
 
 	func _notification(what: int) -> void:
 		if what == NOTIFICATION_PREDELETE:
@@ -100,6 +101,9 @@ func _on_project_switched() -> void:
 		initialize_recording()
 		start_button.set_pressed_no_signal(true)
 		Global.change_button_texturerect(start_button.get_child(0), "stop.png")
+		captured_label.text = str(
+			"Saved: ", recorded_projects[Global.current_project].frames_captured
+		)
 	else:
 		finalize_recording()
 		start_button.set_pressed_no_signal(false)

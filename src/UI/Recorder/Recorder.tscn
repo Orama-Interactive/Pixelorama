@@ -40,15 +40,18 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Start"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.5
-offset_right = 10.0
-offset_bottom = 10.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1")
 expand_mode = 1
 stretch_mode = 5
@@ -74,7 +77,7 @@ offset_bottom = 10.5
 texture = ExtResource("3")
 stretch_mode = 5
 
-[node name="OpenFolder" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
+[node name="OpenFolder" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Open Folder"
