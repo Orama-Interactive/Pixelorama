@@ -15,6 +15,14 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 	indices.resize(indices_x * indices_y)
 
 
+func set_index(tile_position: int, index: int) -> void:
+	index = clampi(index, 0, tileset.tiles.size() - 1)
+	tileset.tiles[index].times_used += 1
+	indices[tile_position] = index
+	update_cel_portion(tile_position)
+	Global.canvas.queue_redraw()
+
+
 func update_texture() -> void:
 	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		for i in indices.size():
@@ -173,22 +181,32 @@ func re_index_tiles_after_index(index: int) -> void:
 			indices[i] -= 1
 
 
+func update_cel_portion(tile_position: int) -> void:
+	var coords := get_tile_coords(tile_position)
+	var rect := Rect2i(coords, tileset.tile_size)
+	var image_portion := image.get_region(rect)
+	var index := indices[tile_position]
+	var current_tile := tileset.tiles[index]
+	if image_portion.get_data() != current_tile.image.get_data():
+		var tile_size := current_tile.image.get_size()
+		image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+
+
 func update_cel_portions() -> void:
 	for i in indices.size():
-		var coords := get_tile_coords(i)
-		var rect := Rect2i(coords, tileset.tile_size)
-		var image_portion := image.get_region(rect)
-		var index := indices[i]
-		var current_tile := tileset.tiles[index]
-		if image_portion.get_data() != current_tile.image.get_data():
-			var tile_size := current_tile.image.get_size()
-			image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+		update_cel_portion(i)
 
 
-func get_tile_coords(portion_index: int) -> Vector2i:
-	var x_coord := float(tileset.tile_size.x) * (portion_index % indices_x)
-	var y_coord := float(tileset.tile_size.y) * (portion_index / indices_x)
+func get_tile_coords(portion_position: int) -> Vector2i:
+	var x_coord := float(tileset.tile_size.x) * (portion_position % indices_x)
+	var y_coord := float(tileset.tile_size.y) * (portion_position / indices_x)
 	return Vector2i(x_coord, y_coord)
+
+
+func get_tile_position(coords: Vector2i) -> int:
+	var x := floori(coords.x / tileset.tile_size.x)
+	var y := floori(coords.y / tileset.tile_size.y) * indices_x
+	return x + y
 
 
 ## Unused, should delete.

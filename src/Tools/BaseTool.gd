@@ -86,6 +86,19 @@ func update_cels(project := Global.current_project) -> void:
 		cel.tool_finished_drawing()
 
 
+func is_placing_tiles() -> bool:
+	return Global.current_project.get_current_cel() is CelTileMap and TileSetPanel.placing_tiles
+
+
+func get_tile_position(pos: Vector2i) -> int:
+	var tile_pos := 0
+	if Global.current_project.get_current_cel() is not CelTileMap:
+		return tile_pos
+	var cel := Global.current_project.get_current_cel() as CelTileMap
+	tile_pos = cel.get_tile_position(pos)
+	return tile_pos
+
+
 func cursor_move(pos: Vector2i) -> void:
 	_cursor = pos
 	if _spacing_mode and is_moving:

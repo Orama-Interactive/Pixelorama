@@ -96,6 +96,9 @@ func draw_start(pos: Vector2i) -> void:
 	_old_spacing_mode = _spacing_mode
 	pos = snap_position(pos)
 	super.draw_start(pos)
+	if is_placing_tiles():
+		draw_tile(pos, TileSetPanel.selected_tile_index)
+		return
 	if Input.is_action_pressed(&"draw_color_picker", true):
 		_picking_color = true
 		_pick_color(pos)
@@ -138,6 +141,9 @@ func draw_move(pos_i: Vector2i) -> void:
 	var pos := _get_stabilized_position(pos_i)
 	pos = snap_position(pos)
 	super.draw_move(pos)
+	if is_placing_tiles():
+		draw_tile(pos, TileSetPanel.selected_tile_index)
+		return
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed(&"draw_color_picker", true):
 			_pick_color(pos)
@@ -164,6 +170,10 @@ func draw_move(pos_i: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
+	if is_placing_tiles():
+		super.draw_end(pos)
+		draw_tile(pos, TileSetPanel.selected_tile_index)
+		return
 	if _picking_color:
 		super.draw_end(pos)
 		return

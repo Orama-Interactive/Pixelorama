@@ -303,6 +303,14 @@ func draw_end(pos: Vector2i) -> void:
 	_polylines = _create_polylines(_indicator)
 
 
+func draw_tile(pos: Vector2i, tile_index: int) -> void:
+	if Global.current_project.get_current_cel() is not CelTileMap:
+		return
+	var tile_position := get_tile_position(pos)
+	var cel := Global.current_project.get_current_cel() as CelTileMap
+	cel.set_index(tile_position, tile_index)
+
+
 func _prepare_tool() -> void:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
