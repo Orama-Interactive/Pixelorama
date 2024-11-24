@@ -15,6 +15,20 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 	indices.resize(indices_x * indices_y)
 
 
+func update_texture() -> void:
+	super.update_texture()
+	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		for i in indices.size():
+			var index := indices[i]
+			# Prevent from drawing on empty image portions.
+			if index == 0 and tileset.tiles.size() > 1:
+				var coords := get_tile_coords(i)
+				var rect := Rect2i(coords, tileset.tile_size)
+				var current_tile := tileset.tiles[index]
+				var tile_size := current_tile.image.get_size()
+				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+
+
 func update_tileset() -> void:
 	for i in indices.size():
 		var coords := get_tile_coords(i)
@@ -25,7 +39,7 @@ func update_tileset() -> void:
 		if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 			if image_portion.is_invisible():
 				continue
-			if index == 0 or tileset.tiles.size() <= index:
+			if index == 0:
 				# If the tileset is empty, only then add a new tile.
 				if tileset.tiles.size() <= 1:
 					tileset.add_tile(image_portion, TileSetPanel.tile_editing_mode)
