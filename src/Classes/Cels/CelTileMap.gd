@@ -29,6 +29,10 @@ func update_texture() -> void:
 	super.update_texture()
 
 
+func tool_finished_drawing() -> void:
+	update_tileset()
+
+
 func update_tileset() -> void:
 	for i in indices.size():
 		var coords := get_tile_coords(i)

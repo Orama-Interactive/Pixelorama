@@ -70,8 +70,8 @@ func draw_move(pos: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
-	super.draw_end(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		super.draw_end(pos)
 		return
 	if (
 		_start_pos != Vector2i(Vector2.INF)
@@ -93,6 +93,7 @@ func draw_end(pos: Vector2i) -> void:
 	_snap_to_grid = false
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.NONE)
+	super.draw_end(pos)
 
 
 func _move_image(image: Image, pixel_diff: Vector2i) -> void:

@@ -77,6 +77,10 @@ func update_texture() -> void:
 				cel.texture_changed.emit()
 
 
+func tool_finished_drawing() -> void:
+	pass
+
+
 ## Returns a curated [Dictionary] containing the cel data.
 func serialize() -> Dictionary:
 	var dict := {"opacity": opacity, "z_index": z_index}

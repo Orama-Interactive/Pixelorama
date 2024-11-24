@@ -104,8 +104,8 @@ func draw_move(pos: Vector2i) -> void:
 	_offset = pos
 
 
-func draw_end(_position: Vector2i) -> void:
-	pass
+func draw_end(pos: Vector2i) -> void:
+	super.draw_end(pos)
 
 
 func text_to_pixels() -> void:
@@ -159,6 +159,7 @@ func text_to_pixels() -> void:
 		if image is ImageExtended:
 			image.convert_rgb_to_indexed()
 		commit_undo("Draw", undo_data)
+	update_cels(project)
 
 
 func commit_undo(action: String, undo_data: Dictionary) -> void:

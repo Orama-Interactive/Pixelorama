@@ -128,8 +128,8 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_end(pos)
 	if _picking_color:
+		super.draw_end(pos)
 		return
 
 	if _drawing:
@@ -150,6 +150,7 @@ func draw_end(pos: Vector2i) -> void:
 		_drawing = false
 		_displace_origin = false
 		cursor_text = ""
+	super.draw_end(pos)
 
 
 func draw_preview() -> void:

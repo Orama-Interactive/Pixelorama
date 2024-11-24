@@ -76,11 +76,14 @@ func draw_end(_pos: Vector2i) -> void:
 	is_moving = false
 	_draw_cache = []
 	var project := Global.current_project
-	for cel_index in project.selected_cels:
-		var cel := project.frames[cel_index[0]].cels[cel_index[1]]
-		if cel is CelTileMap:
-			cel.update_tileset()
+	update_cels(project)
 	project.can_undo = true
+
+
+func update_cels(project := Global.current_project) -> void:
+	for cel_index in project.selected_cels:
+		var cel := project.frames[cel_index[0]].cels[cel_index[1]] as BaseCel
+		cel.tool_finished_drawing()
 
 
 func cursor_move(pos: Vector2i) -> void:
