@@ -36,11 +36,11 @@ func update_texture() -> void:
 	super.update_texture()
 
 
-func tool_finished_drawing() -> void:
-	update_tileset()
+func on_undo_redo(undo: bool) -> void:
+	update_tileset(undo)
 
 
-func update_tileset() -> void:
+func update_tileset(undo: bool) -> void:
 	for i in indices.size():
 		var coords := get_tile_coords(i)
 		var rect := Rect2i(coords, tileset.tile_size)
@@ -74,6 +74,10 @@ func update_tileset() -> void:
 			if not found_tile:
 				tileset.add_tile(image_portion, TileSetPanel.tile_editing_mode)
 				indices[i] = tileset.tiles.size() - 1
+	if undo:
+		var tile_removed := tileset.remove_unused_tiles()
+		if tile_removed:
+			re_index_tiles()
 
 
 ## Cases:[br]
@@ -209,7 +213,6 @@ func get_tile_position(coords: Vector2i) -> int:
 	return x + y
 
 
-## Unused, should delete.
 func re_index_tiles() -> void:
 	for i in indices.size():
 		var x_coord := float(tileset.tile_size.x) * (i % indices_x)

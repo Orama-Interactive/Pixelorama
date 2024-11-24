@@ -517,7 +517,6 @@ func transform_content_confirm() -> void:
 			big_bounding_rectangle.position
 		)
 		cel_image.convert_rgb_to_indexed()
-		cel.tool_finished_drawing()
 	project.selection_map.move_bitmap_values(project)
 	commit_undo("Move Selection", undo_data)
 
@@ -553,7 +552,6 @@ func transform_content_cancel() -> void:
 				big_bounding_rectangle.position
 			)
 			cel.transformed_content = null
-		cel.tool_finished_drawing()
 	for cel_index in project.selected_cels:
 		canvas.update_texture(cel_index[1])
 	original_preview_image = Image.new()

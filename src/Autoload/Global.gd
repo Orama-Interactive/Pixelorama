@@ -954,7 +954,7 @@ func general_redo(project := current_project) -> void:
 ## Performs actions done after an undo or redo is done. this takes [member general_undo] and
 ## [member general_redo] a step further. Does further work if the current action requires it
 ## like refreshing textures, redraw UI elements etc...[br]
-## [param frame_index] and [param layer_index] are there for optimizzation. if the undo or redo
+## [param frame_index] and [param layer_index] are there for optimization. if the undo or redo
 ## happens only in one cel then the cel's frame and layer should be passed to [param frame_index]
 ## and [param layer_index] respectively, otherwise the entire timeline will be refreshed.
 func undo_or_redo(
@@ -981,10 +981,14 @@ func undo_or_redo(
 	):
 		if layer_index > -1 and frame_index > -1:
 			canvas.update_texture(layer_index, frame_index, project)
+			var cel := project.frames[frame_index].cels[layer_index]
+			cel.on_undo_redo(undo)
 		else:
 			for i in project.frames.size():
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
+					var cel := project.frames[i].cels[j]
+					cel.on_undo_redo(undo)
 
 		canvas.selection.queue_redraw()
 		if action_name == "Scale":

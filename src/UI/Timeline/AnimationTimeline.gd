@@ -847,7 +847,7 @@ func add_layer(type := 0) -> void:
 			l = Layer3D.new(project)
 			SteamManager.set_achievement("ACH_3D_LAYER")
 		Global.LayerTypes.TILEMAP:
-			l = LayerTileMap.new(project, TileSetCustom.new(Vector2i(16, 16)))
+			l = LayerTileMap.new(project, TileSetCustom.new(Vector2i(16, 16), project))
 
 	var cels := []
 	for f in project.frames:

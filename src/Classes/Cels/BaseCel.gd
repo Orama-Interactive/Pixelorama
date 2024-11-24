@@ -77,7 +77,7 @@ func update_texture() -> void:
 				cel.texture_changed.emit()
 
 
-func tool_finished_drawing() -> void:
+func on_undo_redo(undo: bool) -> void:
 	pass
 
 

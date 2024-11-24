@@ -3,6 +3,7 @@ extends RefCounted
 
 signal updated
 
+var project: Project
 var name := ""
 var tile_size: Vector2i
 var tiles: Array[Tile] = []
@@ -12,40 +13,44 @@ class Tile:
 	var image: Image
 	var mode_added: TileSetPanel.TileEditingMode
 	var times_used := 1
+	var undo_step_added := 0
 
-	func _init(_image: Image, _mode_added: TileSetPanel.TileEditingMode) -> void:
+	func _init(
+		_image: Image, _mode_added: TileSetPanel.TileEditingMode, _undo_step_added := 0
+	) -> void:
 		image = _image
 		mode_added = _mode_added
+		undo_step_added = _undo_step_added
 
-	func can_be_removed() -> bool:
+	func can_be_removed(project: Project) -> bool:
+		if project.undos < undo_step_added:
+			return true
 		return mode_added != TileSetPanel.TileEditingMode.STACK and times_used <= 0
 
 
-func _init(_tile_size: Vector2i, _name := "") -> void:
+func _init(_tile_size: Vector2i, _project: Project, _name := "") -> void:
 	tile_size = _tile_size
+	project = _project
 	name = _name
-	#var indices_x := ceili(float(_project_size.x) / tile_size.x)
-	#var indices_y := ceili(float(_project_size.y) / tile_size.y)
-	#tiles.resize(indices_x * indices_y + 1)
 	var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
 	tiles.append(Tile.new(empty_image, TileSetPanel.tile_editing_mode))
 
 
 func add_tile(image: Image, edit_mode: TileSetPanel.TileEditingMode) -> void:
-	var tile := Tile.new(image, edit_mode)
+	var tile := Tile.new(image, edit_mode, project.undos)
 	tiles.append(tile)
 	updated.emit()
 
 
 func insert_tile(image: Image, position: int, edit_mode: TileSetPanel.TileEditingMode) -> void:
-	var tile := Tile.new(image, edit_mode)
+	var tile := Tile.new(image, edit_mode, project.undos)
 	tiles.insert(position, tile)
 	updated.emit()
 
 
 func unuse_tile_at_index(index: int) -> bool:
 	tiles[index].times_used -= 1
-	if tiles[index].can_be_removed():
+	if tiles[index].can_be_removed(project):
 		remove_tile_at_index(index)
 		return true
 	return false
@@ -69,12 +74,11 @@ func find_tile(image: Image) -> int:
 	return -1
 
 
-## Unused, should delete.
 func remove_unused_tiles() -> bool:
 	var tile_removed := false
 	for i in range(tiles.size() - 1, 0, -1):
 		var tile := tiles[i]
-		if tile.can_be_removed():
-			tile_removed = true
+		if tile.can_be_removed(project):
 			remove_tile_at_index(i)
+			tile_removed = true
 	return tile_removed

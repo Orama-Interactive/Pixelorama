@@ -159,7 +159,6 @@ func text_to_pixels() -> void:
 		if image is ImageExtended:
 			image.convert_rgb_to_indexed()
 		commit_undo("Draw", undo_data)
-	update_cels(project)
 
 
 func commit_undo(action: String, undo_data: Dictionary) -> void:
