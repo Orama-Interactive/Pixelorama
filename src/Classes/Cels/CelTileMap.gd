@@ -22,7 +22,6 @@ func update_texture() -> void:
 			# Prevent from drawing on empty image portions.
 			if index == 0 and tileset.tiles.size() > 1:
 				var coords := get_tile_coords(i)
-				var rect := Rect2i(coords, tileset.tile_size)
 				var current_tile := tileset.tiles[index]
 				var tile_size := current_tile.image.get_size()
 				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)

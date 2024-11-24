@@ -15,6 +15,11 @@ script = ExtResource("1_d2oc5")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
+[node name="PlaceTiles" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Place tiles"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -46,6 +51,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[connection signal="toggled" from="VBoxContainer/PlaceTiles" to="." method="_on_place_tiles_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/Manual" to="." method="_on_manual_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/Auto" to="." method="_on_auto_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/Stack" to="." method="_on_stack_toggled"]
