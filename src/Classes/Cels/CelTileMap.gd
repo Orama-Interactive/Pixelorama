@@ -81,7 +81,7 @@ func update_tileset(undo: bool) -> void:
 	if undo:
 		var tile_removed := tileset.remove_unused_tiles()
 		if tile_removed:
-			re_index_tiles()
+			re_index_all_tiles()
 
 
 ## Cases:[br]
@@ -207,21 +207,26 @@ func update_cel_portions() -> void:
 
 func get_tile_coords(portion_position: int) -> Vector2i:
 	var x_coord := float(tileset.tile_size.x) * (portion_position % indices_x)
+	@warning_ignore("integer_division")
 	var y_coord := float(tileset.tile_size.y) * (portion_position / indices_x)
 	return Vector2i(x_coord, y_coord)
 
 
 func get_tile_position(coords: Vector2i) -> int:
-	var x := floori(coords.x / tileset.tile_size.x)
-	var y := floori(coords.y / tileset.tile_size.y) * indices_x
+	@warning_ignore("integer_division")
+	var x := coords.x / tileset.tile_size.x
+	x = clampi(x, 0, indices_x - 1)
+	@warning_ignore("integer_division")
+	var y := coords.y / tileset.tile_size.y
+	y = clampi(y, 0, indices_y - 1)
+	y *= indices_x
 	return x + y
 
 
-func re_index_tiles() -> void:
+func re_index_all_tiles() -> void:
 	for i in indices.size():
-		var x_coord := float(tileset.tile_size.x) * (i % indices_x)
-		var y_coord := float(tileset.tile_size.y) * (i / indices_x)
-		var rect := Rect2i(Vector2i(x_coord, y_coord), tileset.tile_size)
+		var coords := get_tile_coords(i)
+		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		if image_portion.is_invisible():
 			indices[i] = 0

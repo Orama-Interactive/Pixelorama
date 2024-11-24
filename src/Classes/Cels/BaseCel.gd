@@ -77,7 +77,7 @@ func update_texture() -> void:
 				cel.texture_changed.emit()
 
 
-func on_undo_redo(undo: bool) -> void:
+func on_undo_redo(_undo: bool) -> void:
 	pass
 
 
