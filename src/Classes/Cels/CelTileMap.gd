@@ -16,7 +16,6 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 
 
 func update_texture() -> void:
-	super.update_texture()
 	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		for i in indices.size():
 			var index := indices[i]
@@ -27,6 +26,7 @@ func update_texture() -> void:
 				var current_tile := tileset.tiles[index]
 				var tile_size := current_tile.image.get_size()
 				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+	super.update_texture()
 
 
 func update_tileset() -> void:

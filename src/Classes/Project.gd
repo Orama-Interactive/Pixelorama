@@ -8,7 +8,6 @@ signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
 signal timeline_updated
-signal tilesets_updated
 
 const INDEXED_MODE := Image.FORMAT_MAX + 1
 
@@ -937,4 +936,3 @@ func reorder_reference_image(from: int, to: int) -> void:
 
 func add_tileset(tileset: TileSetCustom) -> void:
 	tilesets.append(tileset)
-	tilesets_updated.emit()
