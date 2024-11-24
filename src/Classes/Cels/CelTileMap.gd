@@ -17,24 +17,28 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 
 func update_tileset() -> void:
 	for i in indices.size():
-		var x_coord := float(tileset.tile_size.x) * (i % indices_x)
-		var y_coord := float(tileset.tile_size.y) * (i / indices_x)
-		var rect := Rect2i(Vector2i(x_coord, y_coord), tileset.tile_size)
+		var coords := get_tile_coords(i)
+		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		var index := indices[i]
 		var current_tile := tileset.tiles[index]
 		if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+			if image_portion.is_invisible():
+				continue
 			if index == 0 or tileset.tiles.size() <= index:
+				# If the tileset is empty, only then add a new tile.
 				if tileset.tiles.size() <= 1:
 					tileset.add_tile(image_portion, TileSetPanel.tile_editing_mode)
 					indices[i] = tileset.tiles.size() - 1
 				continue
-			if image_portion.get_data() != tileset.tiles[index].image.get_data():
+			if image_portion.get_data() != current_tile.image.get_data():
 				tileset.replace_tile_at(image_portion, index)
-				# TODO: Update the rest of the tilemap
+				update_cel_portions()
 		elif TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
 			handle_auto_editing_mode(i, image_portion)
 		else:  # Stack
+			if image_portion.is_invisible():
+				continue
 			var found_tile := false
 			for j in range(1, tileset.tiles.size()):
 				var tile := tileset.tiles[j]
@@ -113,7 +117,6 @@ func handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 			# Case 3: The portion is mapped and it did not change.
 			# Do nothing and move on to the next portion.
 			return
-		var previous_tile_index_in_tileset := tileset.find_tile(current_tile.image)
 		if index_in_tileset > -1:  # If the portion exists in the tileset as a tile.
 			if current_tile.times_used > 1:
 				# Case 4: The portion is mapped and it exists in the tileset as a tile,
@@ -151,6 +154,24 @@ func re_index_tiles_after_index(index: int) -> void:
 		var tmp_index := indices[i]
 		if tmp_index >= index:
 			indices[i] -= 1
+
+
+func update_cel_portions() -> void:
+	for i in indices.size():
+		var coords := get_tile_coords(i)
+		var rect := Rect2i(coords, tileset.tile_size)
+		var image_portion := image.get_region(rect)
+		var index := indices[i]
+		var current_tile := tileset.tiles[index]
+		if image_portion.get_data() != current_tile.image.get_data():
+			var tile_size := current_tile.image.get_size()
+			image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+
+
+func get_tile_coords(portion_index: int) -> Vector2i:
+	var x_coord := float(tileset.tile_size.x) * (portion_index % indices_x)
+	var y_coord := float(tileset.tile_size.y) * (portion_index / indices_x)
+	return Vector2i(x_coord, y_coord)
 
 
 ## Unused, should delete.
