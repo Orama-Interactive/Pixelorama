@@ -258,6 +258,18 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 				new_project.tiles.tile_mask = image
 			else:
 				new_project.tiles.reset_mask()
+		if result.has("tilesets"):
+			for i in result.tilesets.size():
+				var tileset_dict: Dictionary = result.tilesets[i]
+				var tileset := new_project.tilesets[i]
+				var tile_size := tileset.tile_size
+				var tile_amount: int = tileset_dict.tile_amount
+				for j in tile_amount:
+					var image_data := zip_reader.read_file("tilesets/%s/%s" % [i, j])
+					var image := Image.create_from_data(
+						tile_size.x, tile_size.y, false, new_project.get_image_format(), image_data
+					)
+					tileset.add_tile(image, 2)
 		zip_reader.close()
 	new_project.export_directory_path = path.get_base_dir()
 
@@ -418,6 +430,14 @@ func save_pxo_file(
 		zip_packer.start_file("image_data/tile_map")
 		zip_packer.write_file(project.tiles.tile_mask.get_data())
 		zip_packer.close_file()
+	for i in project.tilesets.size():
+		var tileset := project.tilesets[i]
+		var tileset_path := "tilesets/%s" % i
+		for j in tileset.tiles.size():
+			var tile := tileset.tiles[j]
+			zip_packer.start_file(tileset_path.path_join(str(j)))
+			zip_packer.write_file(tile.image.get_data())
+			zip_packer.close_file()
 	zip_packer.close()
 
 	if temp_path != path:

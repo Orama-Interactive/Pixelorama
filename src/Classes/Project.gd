@@ -296,6 +296,9 @@ func serialize() -> Dictionary:
 	var reference_image_data := []
 	for reference_image in reference_images:
 		reference_image_data.append(reference_image.serialize())
+	var tileset_data := []
+	for tileset in tilesets:
+		tileset_data.append(tileset.serialize())
 
 	var metadata := _serialize_metadata(self)
 
@@ -316,6 +319,7 @@ func serialize() -> Dictionary:
 		"frames": frame_data,
 		"brushes": brush_data,
 		"reference_images": reference_image_data,
+		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
@@ -345,6 +349,12 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if dict.has("tile_mode_y_basis_x") and dict.has("tile_mode_y_basis_y"):
 		tiles.y_basis.x = dict.tile_mode_y_basis_x
 		tiles.y_basis.y = dict.tile_mode_y_basis_y
+	if dict.has("tilesets"):
+		for saved_tileset in dict["tilesets"]:
+			var tile_size = str_to_var("Vector2i" + saved_tileset.get("tile_size"))
+			var tileset := TileSetCustom.new(tile_size, self)
+			tileset.deserialize(saved_tileset)
+			tilesets.append(tileset)
 	if dict.has("frames") and dict.has("layers"):
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
@@ -354,63 +364,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 					layers.append(GroupLayer.new(self))
 				Global.LayerTypes.THREE_D:
 					layers.append(Layer3D.new(self))
-
-		var frame_i := 0
-		for frame in dict.frames:
-			var cels: Array[BaseCel] = []
-			var cel_i := 0
-			for cel in frame.cels:
-				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
-					Global.LayerTypes.PIXEL:
-						var image: Image
-						var indices_data := PackedByteArray()
-						if is_instance_valid(zip_reader):  # For pxo files saved in 1.0+
-							var path := "image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
-							var image_data := zip_reader.read_file(path)
-							image = Image.create_from_data(
-								size.x, size.y, false, get_image_format(), image_data
-							)
-							var indices_path := (
-								"image_data/frames/%s/indices_layer_%s" % [frame_i + 1, cel_i + 1]
-							)
-							if zip_reader.file_exists(indices_path):
-								indices_data = zip_reader.read_file(indices_path)
-						elif is_instance_valid(file):  # For pxo files saved in 0.x
-							var buffer := file.get_buffer(size.x * size.y * 4)
-							image = Image.create_from_data(
-								size.x, size.y, false, get_image_format(), buffer
-							)
-						var pixelorama_image := ImageExtended.new()
-						pixelorama_image.is_indexed = is_indexed()
-						if not indices_data.is_empty() and is_indexed():
-							pixelorama_image.indices_image = Image.create_from_data(
-								size.x, size.y, false, Image.FORMAT_R8, indices_data
-							)
-						pixelorama_image.copy_from(image)
-						pixelorama_image.select_palette("", true)
-						cels.append(PixelCel.new(pixelorama_image))
-					Global.LayerTypes.GROUP:
-						cels.append(GroupCel.new())
-					Global.LayerTypes.THREE_D:
-						if is_instance_valid(file):  # For pxo files saved in 0.x
-							# Don't do anything with it, just read it so that the file can move on
-							file.get_buffer(size.x * size.y * 4)
-						cels.append(Cel3D.new(size, true))
-				cel["pxo_version"] = pxo_version
-				cels[cel_i].deserialize(cel)
-				_deserialize_metadata(cels[cel_i], cel)
-				cel_i += 1
-			var duration := 1.0
-			if frame.has("duration"):
-				duration = frame.duration
-			elif dict.has("frame_duration"):
-				duration = dict.frame_duration[frame_i]
-
-			var frame_class := Frame.new(cels, duration)
-			frame_class.user_data = frame.get("user_data", "")
-			_deserialize_metadata(frame_class, frame)
-			frames.append(frame_class)
-			frame_i += 1
+				Global.LayerTypes.TILEMAP:
+					layers.append(LayerTileMap.new(self, null))
 
 		# Parent references to other layers are created when deserializing
 		# a layer, so loop again after creating them:
@@ -426,6 +381,43 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				layer_dict["blend_mode"] = blend_mode
 			layers[layer_i].deserialize(layer_dict)
 			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
+
+		var frame_i := 0
+		for frame in dict.frames:
+			var cels: Array[BaseCel] = []
+			var cel_i := 0
+			for cel in frame.cels:
+				var layer := layers[cel_i]
+				match layer.get_layer_type():
+					Global.LayerTypes.PIXEL:
+						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
+						cels.append(PixelCel.new(image))
+					Global.LayerTypes.GROUP:
+						cels.append(GroupCel.new())
+					Global.LayerTypes.THREE_D:
+						if is_instance_valid(file):  # For pxo files saved in 0.x
+							# Don't do anything with it, just read it so that the file can move on
+							file.get_buffer(size.x * size.y * 4)
+						cels.append(Cel3D.new(size, true))
+					Global.LayerTypes.TILEMAP:
+						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
+						var new_cel := (layer as LayerTileMap).new_cel_from_image(image)
+						cels.append(new_cel)
+				cel["pxo_version"] = pxo_version
+				cels[cel_i].deserialize(cel)
+				_deserialize_metadata(cels[cel_i], cel)
+				cel_i += 1
+			var duration := 1.0
+			if frame.has("duration"):
+				duration = frame.duration
+			elif dict.has("frame_duration"):
+				duration = dict.frame_duration[frame_i]
+
+			var frame_class := Frame.new(cels, duration)
+			frame_class.user_data = frame.get("user_data", "")
+			_deserialize_metadata(frame_class, frame)
+			frames.append(frame_class)
+			frame_i += 1
 	if dict.has("tags"):
 		for tag in dict.tags:
 			var new_tag := AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to)
@@ -482,6 +474,32 @@ func _deserialize_metadata(object: Object, dict: Dictionary) -> void:
 	var metadata: Dictionary = dict["metadata"]
 	for meta in metadata.keys():
 		object.set_meta(meta, metadata[meta])
+
+
+func _load_image_from_pxo(
+	frame_i: int, cel_i: int, zip_reader: ZIPReader, file: FileAccess
+) -> ImageExtended:
+	var image: Image
+	var indices_data := PackedByteArray()
+	if is_instance_valid(zip_reader):  # For pxo files saved in 1.0+
+		var path := "image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
+		var image_data := zip_reader.read_file(path)
+		image = Image.create_from_data(size.x, size.y, false, get_image_format(), image_data)
+		var indices_path := "image_data/frames/%s/indices_layer_%s" % [frame_i + 1, cel_i + 1]
+		if zip_reader.file_exists(indices_path):
+			indices_data = zip_reader.read_file(indices_path)
+	elif is_instance_valid(file):  # For pxo files saved in 0.x
+		var buffer := file.get_buffer(size.x * size.y * 4)
+		image = Image.create_from_data(size.x, size.y, false, get_image_format(), buffer)
+	var pixelorama_image := ImageExtended.new()
+	pixelorama_image.is_indexed = is_indexed()
+	if not indices_data.is_empty() and is_indexed():
+		pixelorama_image.indices_image = Image.create_from_data(
+			size.x, size.y, false, Image.FORMAT_R8, indices_data
+		)
+	pixelorama_image.copy_from(image)
+	pixelorama_image.select_palette("", true)
+	return pixelorama_image
 
 
 func _size_changed(value: Vector2i) -> void:

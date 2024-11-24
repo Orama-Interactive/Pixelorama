@@ -82,3 +82,12 @@ func remove_unused_tiles() -> bool:
 			remove_tile_at_index(i)
 			tile_removed = true
 	return tile_removed
+
+
+func serialize() -> Dictionary:
+	return {"name": name, "tile_size": tile_size, "tile_amount": tiles.size()}
+
+
+func deserialize(dict: Dictionary) -> void:
+	name = dict.get("name", name)
+	tile_size = str_to_var("Vector2i" + dict.get("tile_size"))

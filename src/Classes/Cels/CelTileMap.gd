@@ -1,7 +1,13 @@
 class_name CelTileMap
 extends PixelCel
 
-var tileset: TileSetCustom
+var tileset: TileSetCustom:
+	set(value):
+		tileset = value
+		if is_instance_valid(tileset):
+			indices_x = ceili(float(get_image().get_width()) / tileset.tile_size.x)
+			indices_y = ceili(float(get_image().get_height()) / tileset.tile_size.y)
+			indices.resize(indices_x * indices_y)
 var indices := PackedInt32Array()
 var indices_x: int
 var indices_y: int
@@ -10,9 +16,6 @@ var indices_y: int
 func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> void:
 	super._init(_image, _opacity)
 	tileset = _tileset
-	indices_x = ceili(float(get_image().get_width()) / tileset.tile_size.x)
-	indices_y = ceili(float(get_image().get_height()) / tileset.tile_size.y)
-	indices.resize(indices_x * indices_y)
 
 
 func set_index(tile_position: int, index: int) -> void:
@@ -21,23 +24,6 @@ func set_index(tile_position: int, index: int) -> void:
 	indices[tile_position] = index
 	update_cel_portion(tile_position)
 	Global.canvas.queue_redraw()
-
-
-func update_texture() -> void:
-	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
-		for i in indices.size():
-			var index := indices[i]
-			# Prevent from drawing on empty image portions.
-			if index == 0 and tileset.tiles.size() > 1:
-				var coords := get_tile_coords(i)
-				var current_tile := tileset.tiles[index]
-				var tile_size := current_tile.image.get_size()
-				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
-	super.update_texture()
-
-
-func on_undo_redo(undo: bool) -> void:
-	update_tileset(undo)
 
 
 func update_tileset(undo: bool) -> void:
@@ -236,6 +222,35 @@ func re_index_all_tiles() -> void:
 			if image_portion.get_data() == tile.image.get_data():
 				indices[i] = j
 				break
+
+
+# Overridden Methods:
+func update_texture() -> void:
+	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		for i in indices.size():
+			var index := indices[i]
+			# Prevent from drawing on empty image portions.
+			if index == 0 and tileset.tiles.size() > 1:
+				var coords := get_tile_coords(i)
+				var current_tile := tileset.tiles[index]
+				var tile_size := current_tile.image.get_size()
+				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+	super.update_texture()
+
+
+func on_undo_redo(undo: bool) -> void:
+	update_tileset(undo)
+
+
+func serialize() -> Dictionary:
+	var dict := super.serialize()
+	dict["tile_indices"] = indices
+	return dict
+
+
+func deserialize(dict: Dictionary) -> void:
+	super.deserialize(dict)
+	indices = dict.get("tile_indices")
 
 
 func get_class_name() -> String:

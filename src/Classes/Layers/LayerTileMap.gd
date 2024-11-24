@@ -12,6 +12,19 @@ func _init(_project: Project, _tileset: TileSetCustom, _name := "") -> void:
 
 
 # Overridden Methods:
+func serialize() -> Dictionary:
+	var dict := super.serialize()
+	dict["tileset_index"] = project.tilesets.find(tileset)
+	return dict
+
+
+func deserialize(dict: Dictionary) -> void:
+	super.deserialize(dict)
+	new_cels_linked = dict.new_cels_linked
+	var tileset_index = dict.get("tileset_index")
+	tileset = project.tilesets[tileset_index]
+
+
 func get_layer_type() -> int:
 	return Global.LayerTypes.TILEMAP
 
@@ -23,3 +36,9 @@ func new_empty_cel() -> BaseCel:
 		project.size.x, project.size.y, false, format, is_indexed
 	)
 	return CelTileMap.new(tileset, image)
+
+
+func new_cel_from_image(image: Image) -> PixelCel:
+	var image_extended := ImageExtended.new()
+	image_extended.copy_from_custom(image, project.is_indexed())
+	return CelTileMap.new(tileset, image_extended)
