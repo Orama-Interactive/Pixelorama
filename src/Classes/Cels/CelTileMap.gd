@@ -46,6 +46,10 @@ func update_tileset(undo: bool) -> void:
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		var index := indices[i]
+		if index >= tileset.tiles.size():
+			print(i, " is out of bounds")
+			index = 0
+			indices[i] = 0
 		var current_tile := tileset.tiles[index]
 		if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 			if image_portion.is_invisible():

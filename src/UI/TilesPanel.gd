@@ -10,10 +10,11 @@ static var tile_editing_mode := TileEditingMode.AUTO
 static var selected_tile_index := 0
 var current_tileset: TileSetCustom
 
-@onready var h_flow_container: HFlowContainer = $VBoxContainer/ScrollContainer/HFlowContainer
+@onready var tile_button_container: HFlowContainer = %TileButtonContainer
 
 
 func _ready() -> void:
+	Tools.selected_tile_index_changed.connect(select_tile)
 	Global.cel_switched.connect(_on_cel_switched)
 	Global.project_switched.connect(_on_cel_switched)
 
@@ -45,7 +46,7 @@ func _update_tileset(cel: BaseCel) -> void:
 		var button := _create_tile_button(texture, i, button_group)
 		if i == selected_tile_index:
 			button.button_pressed = true
-		h_flow_container.add_child(button)
+		tile_button_container.add_child(button)
 
 
 func _create_tile_button(texture: Texture2D, index: int, button_group: ButtonGroup) -> Button:
@@ -74,13 +75,17 @@ func _create_tile_button(texture: Texture2D, index: int, button_group: ButtonGro
 	return button
 
 
+func select_tile(tile_index: int) -> void:
+	tile_button_container.get_child(tile_index).button_pressed = true
+
+
 func _on_tile_button_toggled(toggled_on: bool, index: int) -> void:
 	if toggled_on:
 		selected_tile_index = index
 
 
 func _clear_tile_buttons() -> void:
-	for child in h_flow_container.get_children():
+	for child in tile_button_container.get_children():
 		child.queue_free()
 
 

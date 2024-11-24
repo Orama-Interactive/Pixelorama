@@ -42,13 +42,14 @@ func draw_start(pos: Vector2i) -> void:
 		_pick_color(pos)
 		return
 	_picking_color = false
-
 	Global.canvas.selection.transform_content_confirm()
+	prepare_undo("Draw")
+	if is_placing_tiles():
+		draw_tile(pos, 0)
+		return
 	update_mask(_strength == 1)
 	_changed = false
 	_drawer.color_op.changed = false
-
-	prepare_undo("Draw")
 	_drawer.reset()
 
 	_draw_line = Input.is_action_pressed("draw_create_line")
@@ -74,6 +75,9 @@ func draw_move(pos_i: Vector2i) -> void:
 		if Input.is_action_pressed(&"draw_color_picker", true):
 			_pick_color(pos)
 		return
+	if is_placing_tiles():
+		draw_tile(pos, 0)
+		return
 
 	if _draw_line:
 		if Global.mirror_view:
@@ -94,6 +98,11 @@ func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	if _picking_color:
 		super.draw_end(pos)
+		return
+	if is_placing_tiles():
+		super.draw_end(pos)
+		draw_tile(pos, 0)
+		commit_undo()
 		return
 
 	if _draw_line:
