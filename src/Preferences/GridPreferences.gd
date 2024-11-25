@@ -132,7 +132,7 @@ func _on_grids_count_value_changed(value: float) -> void:
 		for key in range(grids_select_container.get_child_count(), value):
 			if not new_grids.has(key):
 				var new_grid := create_default_properties()
-				if new_grids.has(key - 1): # failsafe
+				if new_grids.has(key - 1):  # Failsafe
 					var last_grid = new_grids[key - 1]
 					# This small bit of code is there to make ui look a little neater
 					# Reasons:
