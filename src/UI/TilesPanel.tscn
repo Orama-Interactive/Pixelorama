@@ -20,23 +20,23 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Place tiles"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ModeButtonsContainer" type="HFlowContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Manual" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+[node name="Manual" type="CheckBox" parent="VBoxContainer/ModeButtonsContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_uxnt0")
 text = "Manual"
 
-[node name="Auto" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+[node name="Auto" type="CheckBox" parent="VBoxContainer/ModeButtonsContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_pressed = true
 button_group = SubResource("ButtonGroup_uxnt0")
 text = "Auto"
 
-[node name="Stack" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+[node name="Stack" type="CheckBox" parent="VBoxContainer/ModeButtonsContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_uxnt0")
@@ -53,6 +53,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="toggled" from="VBoxContainer/PlaceTiles" to="." method="_on_place_tiles_toggled"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/Manual" to="." method="_on_manual_toggled"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/Auto" to="." method="_on_auto_toggled"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/Stack" to="." method="_on_stack_toggled"]
+[connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Manual" to="." method="_on_manual_toggled"]
+[connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Auto" to="." method="_on_auto_toggled"]
+[connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Stack" to="." method="_on_stack_toggled"]

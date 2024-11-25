@@ -372,9 +372,13 @@ func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.set_name("panels_submenu")
 	panels_submenu.hide_on_checkable_item_selection = false
 	for element in ui_elements:
-		panels_submenu.add_check_item(element.name)
+		if element.name == "Tiles":
+			continue
+		var id := ui_elements.find(element)
+		panels_submenu.add_check_item(element.name, id)
 		var is_hidden: bool = main_ui.is_control_hidden(element)
-		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
+		var index := panels_submenu.get_item_index(id)
+		panels_submenu.set_item_checked(index, !is_hidden)
 
 	panels_submenu.id_pressed.connect(_panels_submenu_id_pressed)
 	window_menu.add_child(panels_submenu)
@@ -763,9 +767,10 @@ func _snap_to_submenu_id_pressed(id: int) -> void:
 func _panels_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
-	var element_visible := panels_submenu.is_item_checked(id)
+	var index := panels_submenu.get_item_index(id)
+	var element_visible := panels_submenu.is_item_checked(index)
 	main_ui.set_control_hidden(ui_elements[id], element_visible)
-	panels_submenu.set_item_checked(id, !element_visible)
+	panels_submenu.set_item_checked(index, !element_visible)
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
@@ -787,8 +792,9 @@ func set_layout(id: int) -> void:
 		layouts_submenu.set_item_checked(offset, offset == (id + 1))
 
 	for i in ui_elements.size():
+		var index := panels_submenu.get_item_index(i)
 		var is_hidden := main_ui.is_control_hidden(ui_elements[i])
-		panels_submenu.set_item_checked(i, !is_hidden)
+		panels_submenu.set_item_checked(index, !is_hidden)
 
 	if zen_mode:  # Turn zen mode off
 		Global.control.find_child("TabsContainer").visible = true
@@ -866,9 +872,11 @@ func _toggle_show_mouse_guides() -> void:
 
 func _toggle_zen_mode() -> void:
 	for i in ui_elements.size():
-		if ui_elements[i].name == "Main Canvas":
+		var index := panels_submenu.get_item_index(i)
+		var name := ui_elements[i].name
+		if name == "Main Canvas" or name == "Tiles":
 			continue
-		if !panels_submenu.is_item_checked(i):
+		if !panels_submenu.is_item_checked(index):
 			continue
 		main_ui.set_control_hidden(ui_elements[i], !zen_mode)
 	Global.control.find_child("TabsContainer").visible = zen_mode
