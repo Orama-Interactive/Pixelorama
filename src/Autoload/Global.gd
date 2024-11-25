@@ -337,55 +337,8 @@ var default_height := 64  ## Found in Preferences. The default height of startup
 var default_fill_color := Color(0, 0, 0, 0)
 ## Found in Preferences. The distance to the guide or grig below which cursor snapping activates.
 var snapping_distance := 32.0
-## Found in Preferences. The grid type defined by [enum GridTypes] enum.
-var grid_type := GridTypes.CARTESIAN:
-	set(value):
-		if value == grid_type:
-			return
-		grid_type = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. The size of rectangular grid.
-var grid_size := Vector2i(2, 2):
-	set(value):
-		if value == grid_size:
-			return
-		grid_size = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. The size of isometric grid.
-var isometric_grid_size := Vector2i(16, 8):
-	set(value):
-		if value == isometric_grid_size:
-			return
-		isometric_grid_size = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. The grid offset from top-left corner of the canvas.
-var grid_offset := Vector2i.ZERO:
-	set(value):
-		if value == grid_offset:
-			return
-		grid_offset = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. If [code]true[/code], The grid draws over the area extended by
-## tile-mode as well.
-var grid_draw_over_tile_mode := false:
-	set(value):
-		if value == grid_draw_over_tile_mode:
-			return
-		grid_draw_over_tile_mode = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. The color of grid.
-var grid_color := Color.BLACK:
-	set(value):
-		if value == grid_color:
-			return
-		grid_color = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
+## Contains dictionaries of individual grids.
+var grids: Array[Grid] = []
 ## Found in Preferences. The minimum zoom after which pixel grid gets drawn if enabled.
 var pixel_grid_show_at_zoom := 1500.0:  # percentage
 	set(value):
@@ -677,6 +630,62 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var error_dialog: AcceptDialog = control.find_child("ErrorDialog")
 
 
+class Grid:
+	var grid_type := GridTypes.CARTESIAN:
+		set(value):
+			if value == grid_type:
+				return
+			grid_type = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. The size of rectangular grid.
+	var grid_size := Vector2i(2, 2):
+		set(value):
+			if value == grid_size:
+				return
+			grid_size = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. The size of isometric grid.
+	var isometric_grid_size := Vector2i(16, 8):
+		set(value):
+			if value == isometric_grid_size:
+				return
+			isometric_grid_size = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. The grid offset from top-left corner of the canvas.
+	var grid_offset := Vector2i.ZERO:
+		set(value):
+			if value == grid_offset:
+				return
+			grid_offset = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. If [code]true[/code], The grid draws over the area extended by
+	## tile-mode as well.
+	var grid_draw_over_tile_mode := false:
+		set(value):
+			if value == grid_draw_over_tile_mode:
+				return
+			grid_draw_over_tile_mode = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. The color of grid.
+	var grid_color := Color.BLACK:
+		set(value):
+			if value == grid_color:
+				return
+			grid_color = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+
+	func _init(properties := {}) -> void:
+		Global.grids.append(self)
+		for prop in properties.keys():
+			set(prop, properties[prop])
+
+
 func _init() -> void:
 	# Load settings from the config file
 	config_cache.load(CONFIG_PATH)
@@ -713,6 +722,8 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	# Initialize Grid
+	Grid.new()  # gets auto added to grids array
 	_initialize_keychain()
 	default_width = config_cache.get_value("preferences", "default_width", default_width)
 	default_height = config_cache.get_value("preferences", "default_height", default_height)
@@ -729,11 +740,21 @@ func _ready() -> void:
 		if get(pref) == null:
 			continue
 		var value = config_cache.get_value("preferences", pref)
-		set(pref, value)
+		if pref == "grids":
+			if value:
+				update_grids(value)
+		else:
+			set(pref, value)
 	if OS.is_sandboxed():
 		Global.use_native_file_dialogs = true
 	await get_tree().process_frame
 	project_switched.emit()
+
+
+func update_grids(grids_data: Dictionary):
+	grids.clear()
+	for grid_idx in grids_data.size():
+		Grid.new(grids_data[grid_idx])  # gets auto added to grids array
 
 
 func _initialize_keychain() -> void:
