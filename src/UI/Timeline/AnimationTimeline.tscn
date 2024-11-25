@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=77 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://cerkv5yx4cqeh" path="res://assets/graphics/timeline/copy_frame.png" id="27"]
 [ext_resource type="Texture2D" uid="uid://dndlglvqc7v6a" path="res://assets/graphics/layers/group_expanded.png" id="27_lrc8y"]
 [ext_resource type="Texture2D" uid="uid://dukip7mvotxsp" path="res://assets/graphics/timeline/onion_skinning_off.png" id="29"]
+[ext_resource type="PackedScene" uid="uid://hbgwxlin4jun" path="res://src/UI/Timeline/NewTileMapLayerDialog.tscn" id="29_t0mtf"]
 [ext_resource type="Texture2D" uid="uid://dinubfua8gqhw" path="res://assets/graphics/timeline/expandable.png" id="30"]
 [ext_resource type="Texture2D" uid="uid://fbwld5ofmocm" path="res://assets/graphics/timeline/loop.png" id="31"]
 
@@ -1116,6 +1117,8 @@ size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
 text = "Color mode"
 
+[node name="NewTileMapLayerDialog" parent="." instance=ExtResource("29_t0mtf")]
+
 [node name="DragHighlight" type="ColorRect" parent="."]
 visible = false
 z_index = 2
@@ -1125,7 +1128,7 @@ offset_bottom = 40.0
 mouse_filter = 2
 color = Color(0, 0.741176, 1, 0.501961)
 
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/AddLayer" to="." method="add_layer"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/AddLayer" to="." method="_on_add_layer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [true]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [false]]

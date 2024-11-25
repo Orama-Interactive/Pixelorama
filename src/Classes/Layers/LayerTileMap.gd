@@ -42,3 +42,7 @@ func new_cel_from_image(image: Image) -> PixelCel:
 	var image_extended := ImageExtended.new()
 	image_extended.copy_from_custom(image, project.is_indexed())
 	return CelTileMap.new(tileset, image_extended)
+
+
+func set_name_to_default(number: int) -> void:
+	name = tr("Tilemap") + " %s" % number
