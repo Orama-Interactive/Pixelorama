@@ -1,3 +1,4 @@
+class_name BaseDrawTool
 extends BaseTool
 
 const IMAGE_BRUSHES := [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
@@ -42,6 +43,7 @@ var _circle_tool_shortcut: Array[Vector2i]
 
 func _ready() -> void:
 	super._ready()
+	Global.cel_switched.connect(update_brush)
 	Global.global_tool_options.dynamics_panel.dynamics_changed.connect(_reset_dynamics)
 	Tools.color_changed.connect(_on_Color_changed)
 	Global.brushes_popup.brush_removed.connect(_on_Brush_removed)
@@ -160,34 +162,40 @@ func update_config() -> void:
 
 func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
-	match _brush.type:
-		Brushes.PIXEL:
-			_brush_texture = ImageTexture.create_from_image(
-				load("res://assets/graphics/pixel_image.png")
-			)
-			_stroke_dimensions = Vector2.ONE * _brush_size
-		Brushes.CIRCLE:
-			_brush_texture = ImageTexture.create_from_image(
-				load("res://assets/graphics/circle_9x9.png")
-			)
-			_stroke_dimensions = Vector2.ONE * _brush_size
-		Brushes.FILLED_CIRCLE:
-			_brush_texture = ImageTexture.create_from_image(
-				load("res://assets/graphics/circle_filled_9x9.png")
-			)
-			_stroke_dimensions = Vector2.ONE * _brush_size
-		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
-			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
-			if _brush.random.size() <= 1:
-				_orignal_brush_image = _brush.image
-			else:
-				var random := randi() % _brush.random.size()
-				_orignal_brush_image = _brush.random[random]
-			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			update_brush_image_flip_and_rotate()
-			_brush_texture = ImageTexture.create_from_image(_brush_image)
-			update_mirror_brush()
-			_stroke_dimensions = _brush_image.get_size()
+	if is_placing_tiles():
+		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+		var tile_index := clampi(TileSetPanel.selected_tile_index, 0, tileset.tiles.size() - 1)
+		_brush_image.copy_from(tileset.tiles[tile_index].image)
+		_brush_texture = ImageTexture.create_from_image(_brush_image)
+	else:
+		match _brush.type:
+			Brushes.PIXEL:
+				_brush_texture = ImageTexture.create_from_image(
+					load("res://assets/graphics/pixel_image.png")
+				)
+				_stroke_dimensions = Vector2.ONE * _brush_size
+			Brushes.CIRCLE:
+				_brush_texture = ImageTexture.create_from_image(
+					load("res://assets/graphics/circle_9x9.png")
+				)
+				_stroke_dimensions = Vector2.ONE * _brush_size
+			Brushes.FILLED_CIRCLE:
+				_brush_texture = ImageTexture.create_from_image(
+					load("res://assets/graphics/circle_filled_9x9.png")
+				)
+				_stroke_dimensions = Vector2.ONE * _brush_size
+			Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
+				$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
+				if _brush.random.size() <= 1:
+					_orignal_brush_image = _brush.image
+				else:
+					var random := randi() % _brush.random.size()
+					_orignal_brush_image = _brush.random[random]
+				_brush_image = _create_blended_brush_image(_orignal_brush_image)
+				update_brush_image_flip_and_rotate()
+				_brush_texture = ImageTexture.create_from_image(_brush_image)
+				update_mirror_brush()
+				_stroke_dimensions = _brush_image.get_size()
 	_circle_tool_shortcut = []
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
@@ -491,7 +499,12 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2i) -> Image:
 
 func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
-	draw_indicator_at(snap_position(_cursor), Vector2i.ZERO, color)
+	var snapped_position := snap_position(_cursor)
+	if is_placing_tiles():
+		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+		var grid_size := tileset.tile_size
+		snapped_position = _snap_to_grid_center(snapped_position, grid_size, -1)
+	draw_indicator_at(snapped_position, Vector2i.ZERO, color)
 	if (
 		Global.current_project.has_selection
 		and Global.current_project.tiles.mode == Tiles.MODE.NONE
@@ -500,7 +513,7 @@ func draw_indicator(left: bool) -> void:
 		var nearest_pos := Global.current_project.selection_map.get_nearest_position(pos)
 		if nearest_pos != Vector2i.ZERO:
 			var offset := nearest_pos
-			draw_indicator_at(snap_position(_cursor), offset, Color.GREEN)
+			draw_indicator_at(snapped_position, offset, Color.GREEN)
 			return
 
 	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
@@ -508,12 +521,12 @@ func draw_indicator(left: bool) -> void:
 		var nearest_tile := Global.current_project.tiles.get_nearest_tile(pos)
 		if nearest_tile.position != Vector2i.ZERO:
 			var offset := nearest_tile.position
-			draw_indicator_at(snap_position(_cursor), offset, Color.GREEN)
+			draw_indicator_at(snapped_position, offset, Color.GREEN)
 
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas: Node2D = Global.canvas.indicators
-	if _brush.type in IMAGE_BRUSHES and not _draw_line:
+	if _brush.type in IMAGE_BRUSHES and not _draw_line or is_placing_tiles():
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
 		canvas.draw_texture(_brush_texture, pos)

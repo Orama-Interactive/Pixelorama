@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 var _prev_mode := false
 var _last_position := Vector2i(Vector2.INF)

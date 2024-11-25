@@ -7,9 +7,15 @@ const TRANSPARENT_CHECKER := preload("res://src/UI/Nodes/TransparentChecker.tscn
 const MIN_BUTTON_SIZE := 36
 const MAX_BUTTON_SIZE := 144
 
-static var placing_tiles := false
+static var placing_tiles := false:
+	set(value):
+		placing_tiles = value
+		_call_update_brushes()
 static var tile_editing_mode := TileEditingMode.AUTO
-static var selected_tile_index := 0
+static var selected_tile_index := 0:
+	set(value):
+		selected_tile_index = value
+		_call_update_brushes()
 var current_tileset: TileSetCustom
 var button_size := 36:
 	set(value):
@@ -29,7 +35,7 @@ var button_size := 36:
 func _ready() -> void:
 	Tools.selected_tile_index_changed.connect(select_tile)
 	Global.cel_switched.connect(_on_cel_switched)
-	Global.project_switched.connect(_on_cel_switched)
+	#Global.project_switched.connect(_on_cel_switched)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -109,6 +115,12 @@ func _create_tile_button(texture: Texture2D, index: int, button_group: ButtonGro
 
 func select_tile(tile_index: int) -> void:
 	tile_button_container.get_child(tile_index).button_pressed = true
+
+
+static func _call_update_brushes() -> void:
+	for slot in Tools._slots.values():
+		if slot.tool_node is BaseDrawTool:
+			slot.tool_node.update_brush()
 
 
 func _on_tile_button_toggled(toggled_on: bool, index: int) -> void:

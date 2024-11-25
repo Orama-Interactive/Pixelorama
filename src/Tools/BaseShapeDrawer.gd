@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 var _start := Vector2i.ZERO
 var _offset := Vector2i.ZERO
