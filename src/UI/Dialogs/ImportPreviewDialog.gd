@@ -11,7 +11,8 @@ enum ImageImportOptions {
 	NEW_REFERENCE_IMAGE,
 	PALETTE,
 	BRUSH,
-	PATTERN
+	PATTERN,
+	TILESET
 }
 enum BrushTypes { FILE, PROJECT, RANDOM }
 
@@ -75,6 +76,7 @@ func _on_ImportPreviewDialog_about_to_show() -> void:
 	import_option_button.add_item("New palette")
 	import_option_button.add_item("New brush")
 	import_option_button.add_item("New pattern")
+	import_option_button.add_item("Tileset")
 
 	# adding custom importers
 	for id in custom_importers.keys():
@@ -207,6 +209,10 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 			var location := "Patterns".path_join(file_name_ext)
 			var dir := DirAccess.open(path.get_base_dir())
 			dir.copy(path, Global.home_data_directory.path_join(location))
+		elif current_import_option == ImageImportOptions.TILESET:
+			OpenSave.open_image_as_tileset(
+				path, image, spritesheet_horizontal, spritesheet_vertical
+			)
 
 		else:
 			if current_import_option in custom_importers.keys():
@@ -250,7 +256,11 @@ func synchronize() -> void:
 			dialog.at_layer_option.get_node("AtLayerOption") as OptionButton
 		)
 		# Sync properties (if any)
-		if id == ImageImportOptions.SPRITESHEET_TAB or id == ImageImportOptions.SPRITESHEET_LAYER:
+		if (
+			id == ImageImportOptions.SPRITESHEET_TAB
+			or id == ImageImportOptions.SPRITESHEET_LAYER
+			or id == ImageImportOptions.TILESET
+		):
 			var h_frames := spritesheet_options.find_child("HorizontalFrames") as SpinBox
 			var v_frames := spritesheet_options.find_child("VerticalFrames") as SpinBox
 			var d_h_frames := dialog.spritesheet_options.find_child("HorizontalFrames") as SpinBox
@@ -298,7 +308,7 @@ func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 	_hide_all_options()
 	import_options.get_parent().visible = true
 
-	if id == ImageImportOptions.SPRITESHEET_TAB:
+	if id == ImageImportOptions.SPRITESHEET_TAB or id == ImageImportOptions.TILESET:
 		frame_size_label.visible = true
 		spritesheet_options.visible = true
 		texture_rect.get_child(0).visible = true
@@ -505,6 +515,7 @@ func _call_queue_redraw() -> void:
 	if (
 		current_import_option == ImageImportOptions.SPRITESHEET_TAB
 		or current_import_option == ImageImportOptions.SPRITESHEET_LAYER
+		or current_import_option == ImageImportOptions.TILESET
 	):
 		if smart_slice:
 			if is_instance_valid(sliced_rects) and not sliced_rects.rects.is_empty():

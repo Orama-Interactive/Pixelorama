@@ -835,6 +835,25 @@ func import_reference_image_from_image(image: Image) -> void:
 	reference_image_imported.emit()
 
 
+func open_image_as_tileset(
+	path: String, image: Image, horiz: int, vert: int, project := Global.current_project
+) -> void:
+	horiz = mini(horiz, image.get_size().x)
+	vert = mini(vert, image.get_size().y)
+	var frame_width := image.get_size().x / horiz
+	var frame_height := image.get_size().y / vert
+	var tile_size := Vector2i(frame_width, frame_height)
+	var tileset := TileSetCustom.new(tile_size, project, path.get_file())
+	for yy in range(vert):
+		for xx in range(horiz):
+			var cropped_image := image.get_region(
+				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
+			)
+			cropped_image.convert(project.get_image_format())
+			tileset.add_tile(cropped_image, null, 2)
+	project.tilesets.append(tileset)
+
+
 func set_new_imported_tab(project: Project, path: String) -> void:
 	var prev_project_empty := Global.current_project.is_empty()
 	var prev_project_pos := Global.current_project_index

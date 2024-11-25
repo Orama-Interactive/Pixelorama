@@ -41,5 +41,9 @@ func _on_about_to_popup() -> void:
 
 
 func _on_tileset_option_button_item_selected(index: int) -> void:
+	if index > 0:
+		var tileset := Global.current_project.tilesets[index - 1]
+		tileset_name_line_edit.text = tileset.name
+		tile_size_slider.value = tileset.tile_size
 	tileset_name_line_edit.editable = index == 0
 	tile_size_slider.editable = tileset_name_line_edit.editable
