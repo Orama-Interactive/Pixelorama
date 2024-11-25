@@ -4,11 +4,23 @@ extends PanelContainer
 enum TileEditingMode { MANUAL, AUTO, STACK }
 
 const TRANSPARENT_CHECKER := preload("res://src/UI/Nodes/TransparentChecker.tscn")
+const MIN_BUTTON_SIZE := 36
+const MAX_BUTTON_SIZE := 144
 
 static var placing_tiles := false
 static var tile_editing_mode := TileEditingMode.AUTO
 static var selected_tile_index := 0
 var current_tileset: TileSetCustom
+var button_size := 36:
+	set(value):
+		if button_size == value:
+			return
+		button_size = clampi(value, MIN_BUTTON_SIZE, MAX_BUTTON_SIZE)
+		update_minimum_size()
+		Global.config_cache.set_value("tileset_panel", "button_size", button_size)
+		for button: Control in tile_button_container.get_children():
+			button.custom_minimum_size = Vector2(button_size, button_size)
+			button.size = Vector2(button_size, button_size)
 
 @onready var place_tiles: CheckBox = $VBoxContainer/PlaceTiles
 @onready var tile_button_container: HFlowContainer = %TileButtonContainer
@@ -18,6 +30,14 @@ func _ready() -> void:
 	Tools.selected_tile_index_changed.connect(select_tile)
 	Global.cel_switched.connect(_on_cel_switched)
 	Global.project_switched.connect(_on_cel_switched)
+
+
+func _gui_input(event: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_CTRL):
+		var zoom := 2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out"))
+		button_size += zoom
+		if zoom != 0:
+			get_viewport().set_input_as_handled()
 
 
 func _on_cel_switched() -> void:
@@ -54,7 +74,7 @@ func _create_tile_button(texture: Texture2D, index: int, button_group: ButtonGro
 	var button := Button.new()
 	button.button_group = button_group
 	button.toggle_mode = true
-	button.custom_minimum_size = Vector2i(36, 36)
+	button.custom_minimum_size = Vector2(button_size, button_size)
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	var texture_rect := TextureRect.new()
 	texture_rect.texture = texture
