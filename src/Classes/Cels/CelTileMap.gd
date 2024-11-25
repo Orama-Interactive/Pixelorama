@@ -238,6 +238,13 @@ func update_texture() -> void:
 	super.update_texture()
 
 
+func size_changed(new_size: Vector2i) -> void:
+	indices_x = ceili(float(new_size.x) / tileset.tile_size.x)
+	indices_y = ceili(float(new_size.y) / tileset.tile_size.y)
+	indices.resize(indices_x * indices_y)
+	re_index_all_tiles()
+
+
 func on_undo_redo(undo: bool) -> void:
 	update_tileset(undo)
 

@@ -980,14 +980,18 @@ func undo_or_redo(
 		]
 	):
 		if layer_index > -1 and frame_index > -1:
-			canvas.update_texture(layer_index, frame_index, project)
 			var cel := project.frames[frame_index].cels[layer_index]
+			if action_name == "Scale":
+				cel.size_changed(project.size)
+			canvas.update_texture(layer_index, frame_index, project)
 			cel.on_undo_redo(undo)
 		else:
 			for i in project.frames.size():
 				for j in project.layers.size():
-					canvas.update_texture(j, i, project)
 					var cel := project.frames[i].cels[j]
+					if action_name == "Scale":
+						cel.size_changed(project.size)
+					canvas.update_texture(j, i, project)
 					cel.on_undo_redo(undo)
 
 		canvas.selection.queue_redraw()
@@ -995,9 +999,7 @@ func undo_or_redo(
 			for i in project.frames.size():
 				for j in project.layers.size():
 					var current_cel := project.frames[i].cels[j]
-					if current_cel is Cel3D:
-						current_cel.size_changed(project.size)
-					else:
+					if current_cel is not Cel3D:
 						current_cel.image_texture.set_image(current_cel.get_image())
 			canvas.camera_zoom()
 			canvas.grid.queue_redraw()

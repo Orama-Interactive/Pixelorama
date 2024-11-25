@@ -96,6 +96,10 @@ func deserialize(dict: Dictionary) -> void:
 	user_data = dict.get("user_data", user_data)
 
 
+func size_changed(_new_size: Vector2i) -> void:
+	pass
+
+
 ## Used to perform cleanup after a cel is removed.
 func on_remove() -> void:
 	pass
