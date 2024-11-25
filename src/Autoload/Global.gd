@@ -983,7 +983,7 @@ func undo_or_redo(
 			var cel := project.frames[frame_index].cels[layer_index]
 			if action_name == "Scale":
 				cel.size_changed(project.size)
-			canvas.update_texture(layer_index, frame_index, project)
+			canvas.update_texture(layer_index, frame_index, project, undo)
 			cel.on_undo_redo(undo)
 		else:
 			for i in project.frames.size():
@@ -991,7 +991,7 @@ func undo_or_redo(
 					var cel := project.frames[i].cels[j]
 					if action_name == "Scale":
 						cel.size_changed(project.size)
-					canvas.update_texture(j, i, project)
+					canvas.update_texture(j, i, project, undo)
 					cel.on_undo_redo(undo)
 
 		canvas.selection.queue_redraw()

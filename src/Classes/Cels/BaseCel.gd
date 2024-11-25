@@ -67,7 +67,7 @@ func get_image() -> Image:
 
 
 ## Used to update the texture of the cel.
-func update_texture() -> void:
+func update_texture(_undo := false) -> void:
 	texture_changed.emit()
 	if link_set != null:
 		var frame := Global.current_project.current_frame

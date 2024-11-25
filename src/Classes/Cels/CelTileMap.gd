@@ -14,6 +14,12 @@ var indices_y: int
 ## Dictionary of [int] and an [Array] of [bool] ([member TileSetPanel.placing_tiles])
 ## and [enum TileSetPanel.TileEditingMode].
 var undo_redo_modes := {}
+## Dictionary of [int] and [Array].
+## The key is the index of the tile in the tileset,
+## and the value is the index of the tilemap tile that changed first, along with
+## its image that is being changed when manual mode is enabled.
+## Gets reset on [method update_tileset].
+var editing_images := {}
 
 
 func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> void:
@@ -30,6 +36,7 @@ func set_index(tile_position: int, index: int) -> void:
 
 
 func update_tileset(undo: bool) -> void:
+	editing_images.clear()
 	var undos := tileset.project.undos
 	if not undo and not _is_redo():
 		undo_redo_modes[undos] = [TileSetPanel.placing_tiles, TileSetPanel.tile_editing_mode]
@@ -42,7 +49,7 @@ func update_tileset(undo: bool) -> void:
 		var image_portion := image.get_region(rect)
 		var index := indices[i]
 		if index >= tileset.tiles.size():
-			print(i, " is out of bounds")
+			printerr("Tile at position ", i, ", mapped to ", index, " is out of bounds!")
 			index = 0
 			indices[i] = 0
 		var current_tile := tileset.tiles[index]
@@ -57,7 +64,6 @@ func update_tileset(undo: bool) -> void:
 				continue
 			if image_portion.get_data() != current_tile.image.get_data():
 				tileset.replace_tile_at(image_portion, index)
-				update_cel_portions()
 		elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
 			handle_auto_editing_mode(i, image_portion)
 		else:  # Stack
@@ -195,6 +201,7 @@ func update_cel_portion(tile_position: int) -> void:
 		image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
 
 
+## Unused, should delete.
 func update_cel_portions() -> void:
 	for i in indices.size():
 		update_cel_portion(i)
@@ -247,21 +254,35 @@ func _get_tile_editing_mode(undos: int) -> TileSetPanel.TileEditingMode:
 
 
 # Overridden Methods:
-func update_texture() -> void:
-	var undos := tileset.project.undos
-	#if undo:
-	#undos += 1
-	var tile_editing_mode := _get_tile_editing_mode(undos)
-	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
-		for i in indices.size():
-			var index := indices[i]
+func update_texture(undo := false) -> void:
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if undo or _is_redo() or tile_editing_mode != TileSetPanel.TileEditingMode.MANUAL:
+		super.update_texture(undo)
+		return
+
+	for i in indices.size():
+		var index := indices[i]
+		var coords := get_tile_coords(i)
+		var rect := Rect2i(coords, tileset.tile_size)
+		var image_portion := image.get_region(rect)
+		var current_tile := tileset.tiles[index]
+		if index == 0 and tileset.tiles.size() > 1:
 			# Prevent from drawing on empty image portions.
-			if index == 0 and tileset.tiles.size() > 1:
-				var coords := get_tile_coords(i)
-				var current_tile := tileset.tiles[index]
-				var tile_size := current_tile.image.get_size()
-				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
-	super.update_texture()
+			var tile_size := current_tile.image.get_size()
+			image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+			continue
+		if editing_images.has(index):
+			var editing_portion := editing_images[index][0] as int
+			if i == editing_portion:
+				editing_images[index] = [i, image_portion]
+			var editing_image := editing_images[index][1] as Image
+			if editing_image.get_data() != image_portion.get_data():
+				var tile_size := image_portion.get_size()
+				image.blit_rect(editing_image, Rect2i(Vector2i.ZERO, tile_size), coords)
+		else:
+			if image_portion.get_data() != current_tile.image.get_data():
+				editing_images[index] = [i, image_portion]
+	super.update_texture(undo)
 
 
 func size_changed(new_size: Vector2i) -> void:
