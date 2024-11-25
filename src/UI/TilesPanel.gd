@@ -40,13 +40,26 @@ func _gui_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 
+func set_tileset(tileset: TileSetCustom, cel: BaseCel) -> void:
+	if tileset == current_tileset:
+		return
+	if is_instance_valid(current_tileset) and current_tileset.updated.is_connected(_update_tileset):
+		current_tileset.updated.disconnect(_update_tileset)
+	current_tileset = tileset
+	if (
+		is_instance_valid(current_tileset)
+		and not current_tileset.updated.is_connected(_update_tileset)
+	):
+		current_tileset.updated.connect(_update_tileset.bind(cel))
+
+
 func _on_cel_switched() -> void:
 	if Global.current_project.get_current_cel() is not CelTileMap:
+		set_tileset(null, null)
 		_clear_tile_buttons()
 		return
 	var cel := Global.current_project.get_current_cel() as CelTileMap
-	if not cel.tileset.updated.is_connected(_update_tileset):
-		cel.tileset.updated.connect(_update_tileset.bind(cel))
+	set_tileset(cel.tileset, cel)
 	_update_tileset(cel)
 
 
@@ -55,8 +68,6 @@ func _update_tileset(cel: BaseCel) -> void:
 	if cel is not CelTileMap:
 		return
 	var tilemap_cel := cel as CelTileMap
-	if tilemap_cel != Global.current_project.get_current_cel():
-		tilemap_cel.tileset.updated.disconnect(_update_tileset)
 	var tileset := tilemap_cel.tileset
 	var button_group := ButtonGroup.new()
 	if selected_tile_index >= tileset.tiles.size():
