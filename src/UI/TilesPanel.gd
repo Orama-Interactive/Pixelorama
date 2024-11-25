@@ -10,6 +10,7 @@ static var tile_editing_mode := TileEditingMode.AUTO
 static var selected_tile_index := 0
 var current_tileset: TileSetCustom
 
+@onready var place_tiles: CheckBox = $VBoxContainer/PlaceTiles
 @onready var tile_button_container: HFlowContainer = %TileButtonContainer
 
 
@@ -45,7 +46,7 @@ func _update_tileset(cel: BaseCel) -> void:
 		var texture := ImageTexture.create_from_image(tile.image)
 		var button := _create_tile_button(texture, i, button_group)
 		if i == selected_tile_index:
-			button.button_pressed = true
+			button.set_pressed_no_signal(true)
 		tile_button_container.add_child(button)
 
 
@@ -82,6 +83,7 @@ func select_tile(tile_index: int) -> void:
 func _on_tile_button_toggled(toggled_on: bool, index: int) -> void:
 	if toggled_on:
 		selected_tile_index = index
+		place_tiles.button_pressed = true
 
 
 func _clear_tile_buttons() -> void:
