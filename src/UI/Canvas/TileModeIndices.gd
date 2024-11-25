@@ -11,7 +11,7 @@ func _draw() -> void:
 	if current_cel is CelTileMap and Input.is_action_pressed("ctrl"):
 		var tilemap_cel := current_cel as CelTileMap
 		for i in tilemap_cel.indices.size():
-			var x := float(tilemap_cel.tileset.tile_size.x) * (i % tilemap_cel.indices_x)
-			var y := float(tilemap_cel.tileset.tile_size.y) * (i / tilemap_cel.indices_x)
-			var pos := Vector2i(x, y + tilemap_cel.tileset.tile_size.y)
-			draw_string(Themes.get_font(), pos, str(tilemap_cel.indices[i]), 0, -1, 12)
+			var pos := tilemap_cel.get_tile_coords(i)
+			pos.y += tilemap_cel.tileset.tile_size.y
+			var text := str(tilemap_cel.indices[i])
+			draw_string(Themes.get_font(), pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10)
