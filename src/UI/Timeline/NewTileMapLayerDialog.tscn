@@ -67,3 +67,4 @@ suffix_y = "px"
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="item_selected" from="GridContainer/TilesetOptionButton" to="." method="_on_tileset_option_button_item_selected"]

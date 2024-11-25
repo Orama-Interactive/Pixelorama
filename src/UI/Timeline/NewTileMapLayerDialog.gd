@@ -37,3 +37,9 @@ func _on_about_to_popup() -> void:
 		if not tileset.name.is_empty():
 			item_string += ": " + tileset.name
 		tileset_option_button.add_item(tr("Tileset" + item_string))
+	_on_tileset_option_button_item_selected(tileset_option_button.selected)
+
+
+func _on_tileset_option_button_item_selected(index: int) -> void:
+	tileset_name_line_edit.editable = index == 0
+	tile_size_slider.editable = tileset_name_line_edit.editable
