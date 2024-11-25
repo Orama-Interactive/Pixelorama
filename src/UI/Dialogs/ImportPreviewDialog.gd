@@ -210,9 +210,16 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 			var dir := DirAccess.open(path.get_base_dir())
 			dir.copy(path, Global.home_data_directory.path_join(location))
 		elif current_import_option == ImageImportOptions.TILESET:
-			OpenSave.open_image_as_tileset(
-				path, image, spritesheet_horizontal, spritesheet_vertical
-			)
+			if smart_slice:
+				if !recycle_last_slice_result:
+					obtain_sliced_data()
+				OpenSave.open_image_as_tileset_smart(
+					path, image, sliced_rects.rects, sliced_rects.frame_size
+				)
+			else:
+				OpenSave.open_image_as_tileset(
+					path, image, spritesheet_horizontal, spritesheet_vertical
+				)
 
 		else:
 			if current_import_option in custom_importers.keys():
