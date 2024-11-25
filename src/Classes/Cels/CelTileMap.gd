@@ -3,11 +3,16 @@ extends PixelCel
 
 var tileset: TileSetCustom:
 	set(value):
+		if is_instance_valid(tileset):
+			if tileset.updated.is_connected(_on_tileset_updated):
+				tileset.updated.disconnect(_on_tileset_updated)
 		tileset = value
 		if is_instance_valid(tileset):
 			indices_x = ceili(float(get_image().get_width()) / tileset.tile_size.x)
 			indices_y = ceili(float(get_image().get_height()) / tileset.tile_size.y)
 			indices.resize(indices_x * indices_y)
+			if not tileset.updated.is_connected(_on_tileset_updated):
+				tileset.updated.connect(_on_tileset_updated)
 var indices := PackedInt32Array()
 var indices_x: int
 var indices_y: int
@@ -59,11 +64,11 @@ func update_tileset(undo: bool) -> void:
 			if index == 0:
 				# If the tileset is empty, only then add a new tile.
 				if tileset.tiles.size() <= 1:
-					tileset.add_tile(image_portion, tile_editing_mode)
+					tileset.add_tile(image_portion, self, tile_editing_mode)
 					indices[i] = tileset.tiles.size() - 1
 				continue
 			if image_portion.get_data() != current_tile.image.get_data():
-				tileset.replace_tile_at(image_portion, index)
+				tileset.replace_tile_at(image_portion, index, self)
 		elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
 			handle_auto_editing_mode(i, image_portion)
 		else:  # Stack
@@ -77,10 +82,10 @@ func update_tileset(undo: bool) -> void:
 					found_tile = true
 					break
 			if not found_tile:
-				tileset.add_tile(image_portion, tile_editing_mode)
+				tileset.add_tile(image_portion, self, tile_editing_mode)
 				indices[i] = tileset.tiles.size() - 1
 	if undo:
-		var tile_removed := tileset.remove_unused_tiles()
+		var tile_removed := tileset.remove_unused_tiles(self)
 		if tile_removed:
 			re_index_all_tiles()
 
@@ -129,7 +134,7 @@ func handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 		indices[i] = 0
 		if index > 0:
 			# Case 0.5: The portion is transparent and mapped to a tile.
-			var is_removed := tileset.unuse_tile_at_index(index)
+			var is_removed := tileset.unuse_tile_at_index(index, self)
 			if is_removed:
 				# Re-index all indices that are after the deleted one.
 				re_index_tiles_after_index(index)
@@ -144,7 +149,7 @@ func handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 		else:
 			# Case 2: The portion is not mapped already,
 			# and it does not exist in the tileset.
-			tileset.add_tile(image_portion, TileSetPanel.TileEditingMode.AUTO)
+			tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
 			indices[i] = tileset.tiles.size() - 1
 	else:  # If the portion is already mapped.
 		if image_portion.get_data() == current_tile.image.get_data():
@@ -157,13 +162,13 @@ func handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 				# and the currently mapped tile still exists in the tileset.
 				tileset.tiles[index_in_tileset].times_used += 1
 				indices[i] = index_in_tileset
-				tileset.unuse_tile_at_index(index)
+				tileset.unuse_tile_at_index(index, self)
 			else:
 				# Case 5: The portion is mapped and it exists in the tileset as a tile,
 				# and the currently mapped tile no longer exists in the tileset.
 				tileset.tiles[index_in_tileset].times_used += 1
 				indices[i] = index_in_tileset
-				tileset.remove_tile_at_index(index)
+				tileset.remove_tile_at_index(index, self)
 				# Re-index all indices that are after the deleted one.
 				re_index_tiles_after_index(index)
 		else:  # If the portion does not exist in the tileset as a tile.
@@ -171,14 +176,14 @@ func handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 				# Case 6: The portion is mapped and it does not
 				# exist in the tileset as a tile,
 				# and the currently mapped tile still exists in the tileset.
-				tileset.unuse_tile_at_index(index)
-				tileset.add_tile(image_portion, TileSetPanel.TileEditingMode.AUTO)
+				tileset.unuse_tile_at_index(index, self)
+				tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
 				indices[i] = tileset.tiles.size() - 1
 			else:
 				# Case 7: The portion is mapped and it does not
 				# exist in the tileset as a tile,
 				# and the currently mapped tile no longer exists in the tileset.
-				tileset.replace_tile_at(image_portion, index)
+				tileset.replace_tile_at(image_portion, index, self)
 
 
 ## Re-indexes all [member indices] that are larger or equal to [param index],
@@ -201,7 +206,6 @@ func update_cel_portion(tile_position: int) -> void:
 		image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
 
 
-## Unused, should delete.
 func update_cel_portions() -> void:
 	for i in indices.size():
 		update_cel_portion(i)
@@ -251,6 +255,15 @@ func _get_tile_editing_mode(undos: int) -> TileSetPanel.TileEditingMode:
 	else:
 		tile_editing_mode = TileSetPanel.tile_editing_mode
 	return tile_editing_mode
+
+
+## If the tileset has been modified by another tile, make sure to also update it here.
+func _on_tileset_updated(cel: CelTileMap) -> void:
+	if cel == self or not is_instance_valid(cel):
+		return
+	update_cel_portions()
+	Global.canvas.update_all_layers = true
+	Global.canvas.queue_redraw()
 
 
 # Overridden Methods:

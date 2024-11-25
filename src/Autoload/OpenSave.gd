@@ -269,7 +269,7 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 					var image := Image.create_from_data(
 						tile_size.x, tile_size.y, false, new_project.get_image_format(), image_data
 					)
-					tileset.add_tile(image, 2)
+					tileset.add_tile(image, null, 2)
 		zip_reader.close()
 	new_project.export_directory_path = path.get_base_dir()
 

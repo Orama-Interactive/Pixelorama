@@ -1,7 +1,7 @@
 class_name TileSetCustom
 extends RefCounted
 
-signal updated
+signal updated(cel: CelTileMap)
 
 var project: Project
 var name := ""
@@ -36,34 +36,36 @@ func _init(_tile_size: Vector2i, _project: Project, _name := "") -> void:
 	tiles.append(Tile.new(empty_image, TileSetPanel.tile_editing_mode))
 
 
-func add_tile(image: Image, edit_mode: TileSetPanel.TileEditingMode) -> void:
+func add_tile(image: Image, cel: CelTileMap, edit_mode: TileSetPanel.TileEditingMode) -> void:
 	var tile := Tile.new(image, edit_mode, project.undos)
 	tiles.append(tile)
-	updated.emit()
+	updated.emit(cel)
 
 
-func insert_tile(image: Image, position: int, edit_mode: TileSetPanel.TileEditingMode) -> void:
+func insert_tile(
+	image: Image, position: int, cel: CelTileMap, edit_mode: TileSetPanel.TileEditingMode
+) -> void:
 	var tile := Tile.new(image, edit_mode, project.undos)
 	tiles.insert(position, tile)
-	updated.emit()
+	updated.emit(cel)
 
 
-func unuse_tile_at_index(index: int) -> bool:
+func unuse_tile_at_index(index: int, cel: CelTileMap) -> bool:
 	tiles[index].times_used -= 1
 	if tiles[index].can_be_removed(project):
-		remove_tile_at_index(index)
+		remove_tile_at_index(index, cel)
 		return true
 	return false
 
 
-func remove_tile_at_index(index: int) -> void:
+func remove_tile_at_index(index: int, cel: CelTileMap) -> void:
 	tiles.remove_at(index)
-	updated.emit()
+	updated.emit(cel)
 
 
-func replace_tile_at(new_tile: Image, index: int) -> void:
+func replace_tile_at(new_tile: Image, index: int, cel: CelTileMap) -> void:
 	tiles[index].image.copy_from(new_tile)
-	updated.emit()
+	updated.emit(cel)
 
 
 func find_tile(image: Image) -> int:
@@ -74,12 +76,12 @@ func find_tile(image: Image) -> int:
 	return -1
 
 
-func remove_unused_tiles() -> bool:
+func remove_unused_tiles(cel: CelTileMap) -> bool:
 	var tile_removed := false
 	for i in range(tiles.size() - 1, 0, -1):
 		var tile := tiles[i]
 		if tile.can_be_removed(project):
-			remove_tile_at_index(i)
+			remove_tile_at_index(i, cel)
 			tile_removed = true
 	return tile_removed
 
