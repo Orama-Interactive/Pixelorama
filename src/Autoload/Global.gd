@@ -752,7 +752,11 @@ func _ready() -> void:
 
 
 func update_grids(grids_data: Dictionary):
+	# Remove old grids
 	grids.clear()
+	if is_instance_valid(Global.canvas.grid):
+		Global.canvas.grid.queue_redraw()
+	# ADD new ones
 	for grid_idx in grids_data.size():
 		Grid.new(grids_data[grid_idx])  # gets auto added to grids array
 
