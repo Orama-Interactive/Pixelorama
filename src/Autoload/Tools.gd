@@ -639,17 +639,13 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 			and active_button == -1
 			and not pen_inverted
 		)
-		or (
-			event.is_action_pressed(&"activate_left_tool") and active_button == -1 and pen_inverted
-		)
+		or event.is_action_pressed(&"activate_left_tool") and active_button == -1 and pen_inverted
 	):
 		active_button = MOUSE_BUTTON_RIGHT
 		_slots[active_button].tool_node.draw_start(draw_pos)
 	elif (
 		(event.is_action_released(&"activate_right_tool") and active_button == MOUSE_BUTTON_RIGHT)
-		or (
-			event.is_action_released(&"activate_left_tool") and active_button == MOUSE_BUTTON_RIGHT
-		)
+		or event.is_action_released(&"activate_left_tool") and active_button == MOUSE_BUTTON_RIGHT
 	):
 		_slots[active_button].tool_node.draw_end(draw_pos)
 		active_button = -1
