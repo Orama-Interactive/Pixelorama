@@ -147,13 +147,13 @@ func set_pixelv_custom(point: Vector2i, color: Color) -> void:
 		if not color.is_equal_approx(TRANSPARENT):
 			if palette.has(color):
 				color_index = palette.find(color)
-				## If the color selected in the palette is the same then it should take prioity.
-				#var selected_index = Palettes.current_palette_get_selected_color_index(
-					#Tools.active_button
-				#)
-				#if selected_index != -1:
-					#if Palettes.current_palette_get_color(selected_index) == color:
-						#color_index = selected_index
+				# If the color selected in the palette is the same then it should take prioity.
+				var selected_index = Palettes.current_palette_get_selected_color_index(
+					Tools.active_button
+				)
+				if selected_index != -1:
+					if palette[selected_index].is_equal_approx(color):
+						color_index = selected_index
 			else:  # Find the most similar color
 				var smaller_distance := color_distance(color, palette[0])
 				for i in palette.size():
