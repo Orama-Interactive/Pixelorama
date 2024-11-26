@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ba24iuv55m4l3"]
+[gd_scene load_steps=24 format=3 uid="uid://ba24iuv55m4l3"]
 
 [ext_resource type="Script" path="res://src/UI/Canvas/Canvas.gd" id="1"]
 [ext_resource type="Shader" path="res://src/Shaders/BlendLayers.gdshader" id="1_253dh"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://src/UI/Canvas/Measurements.gd" id="16_nxilb"]
 [ext_resource type="Shader" path="res://src/Shaders/AutoInvertColors.gdshader" id="17_lowhf"]
 [ext_resource type="Script" path="res://src/UI/Canvas/ReferenceImages.gd" id="17_qfjb4"]
+[ext_resource type="Script" path="res://src/UI/Canvas/color_index.gd" id="18_o3xx2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6b0ox"]
 shader = ExtResource("1_253dh")
@@ -25,6 +26,11 @@ shader_parameter/origin_y_positive = true
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ascg6"]
+shader = ExtResource("17_lowhf")
+shader_parameter/width = 0.05
+shader_parameter/hollow_shapes = false
 
 [sub_resource type="ShaderMaterial" id="2"]
 shader = ExtResource("9")
@@ -58,6 +64,10 @@ script = ExtResource("5")
 show_behind_parent = true
 material = SubResource("1")
 script = ExtResource("4")
+
+[node name="ColorIndex" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_ascg6")
+script = ExtResource("18_o3xx2")
 
 [node name="PixelGrid" type="Node2D" parent="."]
 script = ExtResource("6")

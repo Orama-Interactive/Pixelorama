@@ -235,6 +235,7 @@ func _setup_view_menu() -> void:
 		"Show Rulers": "show_rulers",
 		"Show Guides": "show_guides",
 		"Show Mouse Guides": "",
+		"Show Color Indices": "show_color_indices",
 		"Display Layer Effects": &"display_layer_effects",
 		"Snap To": "",
 	}
@@ -270,6 +271,9 @@ func _setup_view_menu() -> void:
 	var show_mouse_guides: bool = Global.config_cache.get_value(
 		"view_menu", "show_mouse_guides", Global.show_mouse_guides
 	)
+	var show_color_indices: bool = Global.config_cache.get_value(
+		"view_menu", "show_color_indices", Global.show_color_indices
+	)
 	var display_layer_effects: bool = Global.config_cache.get_value(
 		"view_menu", "display_layer_effects", Global.display_layer_effects
 	)
@@ -295,6 +299,8 @@ func _setup_view_menu() -> void:
 		_toggle_show_guides()
 	if show_mouse_guides != Global.show_mouse_guides:
 		_toggle_show_mouse_guides()
+	if show_color_indices != Global.show_color_indices:
+		_toggle_show_color_indices()
 	if display_layer_effects != Global.display_layer_effects:
 		Global.display_layer_effects = display_layer_effects
 	if snap_to_rectangular_grid_boundary != Global.snap_to_rectangular_grid_boundary:
@@ -666,6 +672,8 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_guides()
 		Global.ViewMenu.SHOW_MOUSE_GUIDES:
 			_toggle_show_mouse_guides()
+		Global.ViewMenu.SHOW_COLOR_INDICES:
+			_toggle_show_color_indices()
 		Global.ViewMenu.DISPLAY_LAYER_EFFECTS:
 			Global.display_layer_effects = not Global.display_layer_effects
 		_:
@@ -849,6 +857,11 @@ func _toggle_show_mouse_guides() -> void:
 		if Global.canvas.mouse_guide_container:
 			Global.canvas.mouse_guide_container.get_child(0).queue_redraw()
 			Global.canvas.mouse_guide_container.get_child(1).queue_redraw()
+
+
+func _toggle_show_color_indices() -> void:
+	Global.show_color_indices = !Global.show_color_indices
+	view_menu.set_item_checked(Global.ViewMenu.SHOW_COLOR_INDICES, Global.show_color_indices)
 
 
 func _toggle_zen_mode() -> void:

@@ -38,6 +38,7 @@ enum ViewMenu {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 	SHOW_MOUSE_GUIDES,
+	SHOW_COLOR_INDICES,
 	DISPLAY_LAYER_EFFECTS,
 	SNAP_TO,
 }
@@ -555,6 +556,12 @@ var show_rulers := true:
 var show_guides := true
 ## If [code]true[/code], the mouse guides are visible.
 var show_mouse_guides := false
+## If [code]true[/code], the indices of color are shown.
+var show_color_indices := false:
+	set(value):
+		show_color_indices = value
+		if is_instance_valid(canvas.color_index):
+			canvas.color_index.enabled = value
 var display_layer_effects := true:
 	set(value):
 		if value == display_layer_effects:
@@ -749,6 +756,7 @@ func _ready() -> void:
 		Global.use_native_file_dialogs = true
 	await get_tree().process_frame
 	project_switched.emit()
+	canvas.color_index.enabled = show_color_indices # Initialize color index preview
 
 
 func update_grids(grids_data: Dictionary):
