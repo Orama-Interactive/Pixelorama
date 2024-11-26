@@ -13,5 +13,6 @@ func _draw() -> void:
 		for i in tilemap_cel.indices.size():
 			var pos := tilemap_cel.get_tile_coords(i)
 			pos.y += tilemap_cel.tileset.tile_size.y
-			var text := str(tilemap_cel.indices[i].index)
-			draw_string(Themes.get_font(), pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10)
+			var tile_data := tilemap_cel.indices[i]
+			var text := tile_data.to_string()
+			draw_multiline_string(Themes.get_font(), pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10)

@@ -16,6 +16,18 @@ static var selected_tile_index := 0:
 	set(value):
 		selected_tile_index = value
 		_call_update_brushes()
+static var is_flipped_h := false:
+	set(value):
+		is_flipped_h = value
+		_call_update_brushes()
+static var is_flipped_v := false:
+	set(value):
+		is_flipped_v = value
+		_call_update_brushes()
+static var is_transposed := false:
+	set(value):
+		is_transposed = value
+		_call_update_brushes()
 var current_tileset: TileSetCustom
 var button_size := 36:
 	set(value):
@@ -35,7 +47,6 @@ var button_size := 36:
 func _ready() -> void:
 	Tools.selected_tile_index_changed.connect(select_tile)
 	Global.cel_switched.connect(_on_cel_switched)
-	#Global.project_switched.connect(_on_cel_switched)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -151,3 +162,15 @@ func _on_auto_toggled(toggled_on: bool) -> void:
 func _on_stack_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		tile_editing_mode = TileEditingMode.STACK
+
+
+func _on_flip_horizontal_button_toggled(toggled_on: bool) -> void:
+	is_flipped_h = toggled_on
+
+
+func _on_flip_vertical_button_toggled(toggled_on: bool) -> void:
+	is_flipped_v = toggled_on
+
+
+func _on_transpose_button_toggled(toggled_on: bool) -> void:
+	is_transposed = toggled_on

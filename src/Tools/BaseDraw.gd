@@ -163,9 +163,17 @@ func update_config() -> void:
 func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
 	if is_placing_tiles():
-		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
+		var tileset := tilemap_cel.tileset
 		var tile_index := clampi(TileSetPanel.selected_tile_index, 0, tileset.tiles.size() - 1)
-		_brush_image.copy_from(tileset.tiles[tile_index].image)
+		var tile_image := tileset.tiles[tile_index].image
+		tile_image = tilemap_cel.transform_tile(
+			tile_image,
+			TileSetPanel.is_flipped_h,
+			TileSetPanel.is_flipped_v,
+			TileSetPanel.is_transposed
+		)
+		_brush_image.copy_from(tile_image)
 		_brush_texture = ImageTexture.create_from_image(_brush_image)
 	else:
 		match _brush.type:

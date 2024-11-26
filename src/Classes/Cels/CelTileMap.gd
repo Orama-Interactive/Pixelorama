@@ -33,6 +33,16 @@ class Tile:
 	## and then flipped vertically.
 	var transpose := false
 
+	func _to_string() -> String:
+		var text := str(index)
+		if flip_h:
+			text += "H"
+		if flip_v:
+			text += "V"
+		if transpose:
+			text += "T"
+		return text
+
 	func serialize() -> Dictionary:
 		return {"index": index, "flip_h": flip_h, "flip_v": flip_v, "transpose": transpose}
 
@@ -52,6 +62,9 @@ func set_index(tile_position: int, index: int) -> void:
 	index = clampi(index, 0, tileset.tiles.size() - 1)
 	tileset.tiles[index].times_used += 1
 	indices[tile_position].index = index
+	indices[tile_position].flip_h = TileSetPanel.is_flipped_h
+	indices[tile_position].flip_v = TileSetPanel.is_flipped_v
+	indices[tile_position].transpose = TileSetPanel.is_transposed
 	update_cel_portion(tile_position)
 	Global.canvas.queue_redraw()
 
@@ -215,11 +228,15 @@ func update_cel_portion(tile_position: int) -> void:
 	var coords := get_tile_coords(tile_position)
 	var rect := Rect2i(coords, tileset.tile_size)
 	var image_portion := image.get_region(rect)
-	var index := indices[tile_position].index
-	var current_tile := tileset.tiles[index]
-	if not tiles_equal(tile_position, image_portion, current_tile.image):
-		var tile_size := current_tile.image.get_size()
-		image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+	var tile_data := indices[tile_position]
+	var index := tile_data.index
+	var current_tile := tileset.tiles[index].image
+	var transformed_tile := transform_tile(
+		current_tile, tile_data.flip_h, tile_data.flip_v, tile_data.transpose
+	)
+	if not tiles_equal(tile_position, image_portion, transformed_tile):
+		var tile_size := transformed_tile.get_size()
+		image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
 
 
 func update_cel_portions() -> void:
@@ -247,20 +264,33 @@ func get_tile_position(coords: Vector2i) -> int:
 
 func tiles_equal(portion_index: int, image_portion: Image, tile_image: Image) -> bool:
 	var tile_data := indices[portion_index]
-	var final_image_portion := Image.new()
-	final_image_portion.copy_from(image_portion)
-	if tile_data.flip_h:
-		final_image_portion.flip_x()
-	if tile_data.flip_v:
-		final_image_portion.flip_y()
-	if tile_data.transpose:
+	var final_image_portion := transform_tile(
+		tile_image, tile_data.flip_h, tile_data.flip_v, tile_data.transpose
+	)
+	return image_portion.get_data() == final_image_portion.get_data()
+
+
+func transform_tile(
+	tile_image: Image, flip_h: bool, flip_v: bool, transpose: bool, reverse := false
+) -> Image:
+	var transformed_tile := Image.new()
+	transformed_tile.copy_from(tile_image)
+	if flip_h:
+		transformed_tile.flip_x()
+	if flip_v:
+		transformed_tile.flip_y()
+	if transpose:
 		var tmp_image := Image.new()
-		tmp_image.copy_from(final_image_portion)
-		tmp_image.rotate_90(COUNTERCLOCKWISE)
-		final_image_portion.blit_rect(
+		tmp_image.copy_from(transformed_tile)
+		if reverse:
+			tmp_image.rotate_90(CLOCKWISE)
+		else:
+			tmp_image.rotate_90(COUNTERCLOCKWISE)
+		transformed_tile.blit_rect(
 			tmp_image, Rect2i(Vector2i.ZERO, tmp_image.get_size()), Vector2i.ZERO
 		)
-	return final_image_portion.get_data() == tile_image.get_data()
+		transformed_tile.flip_y()
+	return transformed_tile
 
 
 func re_index_all_tiles() -> void:
@@ -316,7 +346,8 @@ func update_texture(undo := false) -> void:
 		return
 
 	for i in indices.size():
-		var index := indices[i].index
+		var tile_data := indices[i]
+		var index := tile_data.index
 		var coords := get_tile_coords(i)
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
@@ -329,14 +360,23 @@ func update_texture(undo := false) -> void:
 		if editing_images.has(index):
 			var editing_portion := editing_images[index][0] as int
 			if i == editing_portion:
-				editing_images[index] = [i, image_portion]
+				var transformed_image := transform_tile(
+					image_portion, tile_data.flip_h, tile_data.flip_v, tile_data.transpose, true
+				)
+				editing_images[index] = [i, transformed_image]
 			var editing_image := editing_images[index][1] as Image
-			if not tiles_equal(i, image_portion, editing_image):
+			var transformed_editing_image := transform_tile(
+				editing_image, tile_data.flip_h, tile_data.flip_v, tile_data.transpose
+			)
+			if not image_portion.get_data() == transformed_editing_image.get_data():
 				var tile_size := image_portion.get_size()
-				image.blit_rect(editing_image, Rect2i(Vector2i.ZERO, tile_size), coords)
+				image.blit_rect(transformed_editing_image, Rect2i(Vector2i.ZERO, tile_size), coords)
 		else:
 			if not tiles_equal(i, image_portion, current_tile.image):
-				editing_images[index] = [i, image_portion]
+				var transformed_image := transform_tile(
+					image_portion, tile_data.flip_h, tile_data.flip_v, tile_data.transpose, true
+				)
+				editing_images[index] = [i, transformed_image]
 	super.update_texture(undo)
 
 

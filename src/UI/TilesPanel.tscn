@@ -20,6 +20,27 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Place tiles"
 
+[node name="TransformButtonsContainer" type="HFlowContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="FlipHorizontalButton" type="Button" parent="VBoxContainer/TransformButtonsContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "H"
+
+[node name="FlipVerticalButton" type="Button" parent="VBoxContainer/TransformButtonsContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "V"
+
+[node name="TransposeButton" type="Button" parent="VBoxContainer/TransformButtonsContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "T"
+
 [node name="ModeButtonsContainer" type="HFlowContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -53,6 +74,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="toggled" from="VBoxContainer/PlaceTiles" to="." method="_on_place_tiles_toggled"]
+[connection signal="toggled" from="VBoxContainer/TransformButtonsContainer/FlipHorizontalButton" to="." method="_on_flip_horizontal_button_toggled"]
+[connection signal="toggled" from="VBoxContainer/TransformButtonsContainer/FlipVerticalButton" to="." method="_on_flip_vertical_button_toggled"]
+[connection signal="toggled" from="VBoxContainer/TransformButtonsContainer/TransposeButton" to="." method="_on_transpose_button_toggled"]
 [connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Manual" to="." method="_on_manual_toggled"]
 [connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Auto" to="." method="_on_auto_toggled"]
 [connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Stack" to="." method="_on_stack_toggled"]
