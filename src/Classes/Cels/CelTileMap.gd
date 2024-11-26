@@ -352,10 +352,11 @@ func update_texture(undo := false) -> void:
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		var current_tile := tileset.tiles[index]
-		if index == 0 and tileset.tiles.size() > 1:
-			# Prevent from drawing on empty image portions.
-			var tile_size := current_tile.image.get_size()
-			image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+		if index == 0:
+			if tileset.tiles.size() > 1:
+				# Prevent from drawing on empty image portions.
+				var tile_size := current_tile.image.get_size()
+				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
 			continue
 		if editing_images.has(index):
 			var editing_portion := editing_images[index][0] as int
