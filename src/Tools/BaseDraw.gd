@@ -282,6 +282,12 @@ func commit_undo() -> void:
 
 	project.undos += 1
 	Global.undo_redo_compress_images(redo_data, _undo_data, project)
+	for cel in redo_data:
+		if cel is CelTileMap:
+			(cel as CelTileMap).deserialize_undo_data(redo_data[cel], project.undo_redo, false)
+	for cel in _undo_data:
+		if cel is CelTileMap:
+			(cel as CelTileMap).deserialize_undo_data(_undo_data[cel], project.undo_redo, true)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
@@ -762,6 +768,8 @@ func _get_undo_data() -> Dictionary:
 			continue
 		var image := (cel as PixelCel).get_image()
 		image.add_data_to_dictionary(data)
+		if cel is CelTileMap:
+			data[cel] = (cel as CelTileMap).serialize_undo_data()
 	return data
 
 

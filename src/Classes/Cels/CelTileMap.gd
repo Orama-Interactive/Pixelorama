@@ -398,6 +398,26 @@ func on_undo_redo(undo: bool) -> void:
 	update_tileset(undo)
 
 
+func serialize_undo_data() -> Dictionary:
+	var dict := {}
+	var indices_serialized := []
+	indices_serialized.resize(indices.size())
+	for i in indices.size():
+		indices_serialized[i] = indices[i].serialize()
+	dict["tiles_data"] = indices_serialized
+	return dict
+
+
+func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
+	var tiles_data = dict["tiles_data"]
+	for i in tiles_data.size():
+		var tile_data: Dictionary = tiles_data[i]
+		if undo:
+			undo_redo.add_undo_method(indices[i].deserialize.bind(tile_data))
+		else:
+			undo_redo.add_do_method(indices[i].deserialize.bind(tile_data))
+
+
 func serialize() -> Dictionary:
 	var dict := super.serialize()
 	var tile_indices := []
