@@ -29,6 +29,8 @@ class Tile:
 	var index := 0
 	var flip_h := false
 	var flip_v := false
+	## If [code]true[/code], the tile is rotated 90 degrees counter-clockwise,
+	## and then flipped vertically.
 	var transpose := false
 
 	func serialize() -> Dictionary:
@@ -81,7 +83,7 @@ func update_tileset(undo: bool) -> void:
 					tileset.add_tile(image_portion, self, tile_editing_mode)
 					indices[i].index = tileset.tiles.size() - 1
 				continue
-			if image_portion.get_data() != current_tile.image.get_data():
+			if not tiles_equal(i, image_portion, current_tile.image):
 				tileset.replace_tile_at(image_portion, index, self)
 		elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
 			handle_auto_editing_mode(i, image_portion)
@@ -91,7 +93,7 @@ func update_tileset(undo: bool) -> void:
 			var found_tile := false
 			for j in range(1, tileset.tiles.size()):
 				var tile := tileset.tiles[j]
-				if image_portion.get_data() == tile.image.get_data():
+				if tiles_equal(i, image_portion, tile.image):
 					indices[i].index = j
 					found_tile = true
 					break
@@ -166,7 +168,7 @@ func handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 			tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
 			indices[i].index = tileset.tiles.size() - 1
 	else:  # If the portion is already mapped.
-		if image_portion.get_data() == current_tile.image.get_data():
+		if tiles_equal(i, image_portion, current_tile.image):
 			# Case 3: The portion is mapped and it did not change.
 			# Do nothing and move on to the next portion.
 			return
@@ -215,7 +217,7 @@ func update_cel_portion(tile_position: int) -> void:
 	var image_portion := image.get_region(rect)
 	var index := indices[tile_position].index
 	var current_tile := tileset.tiles[index]
-	if image_portion.get_data() != current_tile.image.get_data():
+	if not tiles_equal(tile_position, image_portion, current_tile.image):
 		var tile_size := current_tile.image.get_size()
 		image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
 
@@ -243,6 +245,24 @@ func get_tile_position(coords: Vector2i) -> int:
 	return x + y
 
 
+func tiles_equal(portion_index: int, image_portion: Image, tile_image: Image) -> bool:
+	var tile_data := indices[portion_index]
+	var final_image_portion := Image.new()
+	final_image_portion.copy_from(image_portion)
+	if tile_data.flip_h:
+		final_image_portion.flip_x()
+	if tile_data.flip_v:
+		final_image_portion.flip_y()
+	if tile_data.transpose:
+		var tmp_image := Image.new()
+		tmp_image.copy_from(final_image_portion)
+		tmp_image.rotate_90(COUNTERCLOCKWISE)
+		final_image_portion.blit_rect(
+			tmp_image, Rect2i(Vector2i.ZERO, tmp_image.get_size()), Vector2i.ZERO
+		)
+	return final_image_portion.get_data() == tile_image.get_data()
+
+
 func re_index_all_tiles() -> void:
 	for i in indices.size():
 		var coords := get_tile_coords(i)
@@ -253,7 +273,7 @@ func re_index_all_tiles() -> void:
 			continue
 		for j in range(1, tileset.tiles.size()):
 			var tile := tileset.tiles[j]
-			if image_portion.get_data() == tile.image.get_data():
+			if tiles_equal(i, image_portion, tile.image):
 				indices[i].index = j
 				break
 
@@ -311,11 +331,11 @@ func update_texture(undo := false) -> void:
 			if i == editing_portion:
 				editing_images[index] = [i, image_portion]
 			var editing_image := editing_images[index][1] as Image
-			if editing_image.get_data() != image_portion.get_data():
+			if not tiles_equal(i, image_portion, editing_image):
 				var tile_size := image_portion.get_size()
 				image.blit_rect(editing_image, Rect2i(Vector2i.ZERO, tile_size), coords)
 		else:
-			if image_portion.get_data() != current_tile.image.get_data():
+			if not tiles_equal(i, image_portion, current_tile.image):
 				editing_images[index] = [i, image_portion]
 	super.update_texture(undo)
 
