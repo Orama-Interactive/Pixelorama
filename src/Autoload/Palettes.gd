@@ -305,7 +305,6 @@ func current_palette_select_color(mouse_button: int, index: int) -> void:
 			Tools.assign_color(color, mouse_button)
 
 
-
 func _select_color(mouse_button: int, index: int) -> void:
 	match mouse_button:
 		MOUSE_BUTTON_LEFT:
