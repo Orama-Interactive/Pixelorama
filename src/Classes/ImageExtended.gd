@@ -78,7 +78,7 @@ func update_palette() -> void:
 		return
 	if palette.size() != current_palette.colors_max:
 		palette.resize(current_palette.colors_max)
-		palette.fill(TRANSPARENT)
+	palette.fill(TRANSPARENT)
 	for i in current_palette.colors:
 		palette[i] = current_palette.colors[i].color
 
