@@ -756,7 +756,7 @@ func _ready() -> void:
 		Global.use_native_file_dialogs = true
 	await get_tree().process_frame
 	project_switched.emit()
-	canvas.color_index.enabled = show_pixel_indices # Initialize color index preview
+	canvas.color_index.enabled = show_pixel_indices  # Initialize color index preview
 
 
 func update_grids(grids_data: Dictionary):
