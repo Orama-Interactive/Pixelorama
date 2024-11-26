@@ -9,8 +9,18 @@ var enabled: bool = false:
 		queue_redraw()
 
 
+func _ready() -> void:
+	Global.camera.zoom_changed.connect(queue_redraw)
+
+
 func _draw() -> void:
 	if not enabled:
+		return
+	# when we zoom out there is a visual issue that inverts the text
+	# (kind of how you look through a magnifying glass)
+	# so we should restrict the rendering distance of this preview.
+	var zoom_percentage := 100.0 * Global.camera.zoom.x
+	if zoom_percentage < Global.pixel_grid_show_at_zoom:
 		return
 	var project = ExtensionsApi.project.current_project
 	var size: Vector2i = project.size
@@ -18,7 +28,7 @@ func _draw() -> void:
 	if not cel is PixelCel:
 		return
 	var index_image: Image = cel.image.indices_image
-	if index_image.get_size() != size:
+	if index_image.get_size() != size or not cel.image.is_indexed:
 		return
 
 	var font: Font = ExtensionsApi.theme.get_theme().default_font
