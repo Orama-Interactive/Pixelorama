@@ -80,7 +80,12 @@ func update_palette() -> void:
 		palette.resize(current_palette.colors_max)
 	palette.fill(TRANSPARENT)
 	for i in current_palette.colors:
-		palette[i] = current_palette.colors[i].color
+		# Due to the decimal nature of the color values, some values get rounded off
+		# unintentionally.
+		# Even though the decimal values change, the HTML code remains the same after the change.
+		# So we're using this trick to convert the values back to how they are shown in
+		# the palette.
+		palette[i] = Color(current_palette.colors[i].color.to_html())
 
 
 ## Displays the actual RGBA values of each pixel in the image from indexed mode.
