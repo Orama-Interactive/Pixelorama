@@ -1,6 +1,15 @@
 class_name CelTileMap
 extends PixelCel
 
+## A cel type for 2D tile-based maps.
+## A Tilemap cel uses a [TileSetCustom], which it inherits from its [LayerTileMap].
+## Extending from [PixelCel], it contains an internal [Image], which is divided in
+## grid cells, the size of which comes from [member TileSetCustom.tile_size].
+## Each cell contains an index, which is an integer used to map that portion of the
+## internal [member PixelCel.image] to a tile in [member tileset], as well as
+## information that specifies if that cell has a transformation applied to it,
+## such as horizontal flipping, vertical flipping, or if it's transposed.
+
 var tileset: TileSetCustom:
 	set(value):
 		if is_instance_valid(tileset):
@@ -124,8 +133,8 @@ func update_tileset(undo: bool) -> void:
 ## [br]
 ## 0.5) Portion is transparent and mapped.
 ## Set its index to 0 and unuse the mapped tile.
-## If the mapped tile is removed, educe the index of all portions that have indices greater or equal
-## than the existing tile's index.
+## If the mapped tile is removed, reduce the index of all portions that have
+## indices greater or equal than the existing tile's index.
 ## [br]
 ## 1) Portion not mapped, exists in the tileset.
 ## Map the portion to the existing tile and increase its times_used by one.

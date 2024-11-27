@@ -1,6 +1,14 @@
 class_name LayerTileMap
 extends PixelLayer
 
+## A layer type for 2D tile-based maps.
+## A LayerTileMap uses a [TileSetCustom], which is then by all of its [CelTileMap]s.
+## This class doesn't hold any actual tilemap data, as they are different in each cel.
+## For this reason, that data is being handled by the [CelTileMap] class.
+
+## The [TileSetCustom] that this layer uses.
+## Internally, this class doesn't make much use of this.
+## It's mostly only used to be passed down to the layer's [CelTileMap]s.
 var tileset: TileSetCustom
 
 
