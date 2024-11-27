@@ -10,6 +10,7 @@ extends PixelCel
 ## information that specifies if that cell has a transformation applied to it,
 ## such as horizontal flipping, vertical flipping, or if it's transposed.
 
+## The [TileSetCustom] that this cel uses, passed down from the cel's [LayerTileMap].
 var tileset: TileSetCustom:
 	set(value):
 		if is_instance_valid(tileset):
@@ -17,12 +18,12 @@ var tileset: TileSetCustom:
 				tileset.updated.disconnect(_on_tileset_updated)
 		tileset = value
 		if is_instance_valid(tileset):
-			_resize_indices(get_image().get_size())
+			_resize_cells(get_image().get_size())
 			if not tileset.updated.is_connected(_on_tileset_updated):
 				tileset.updated.connect(_on_tileset_updated)
-var indices: Array[Tile]
-var indices_x: int
-var indices_y: int
+var cells: Array[Cell]
+var horizontal_cells: int
+var vertical_cells: int
 ## Dictionary of [int] and an [Array] of [bool] ([member TileSetPanel.placing_tiles])
 ## and [enum TileSetPanel.TileEditingMode].
 var undo_redo_modes := {}
@@ -34,7 +35,7 @@ var undo_redo_modes := {}
 var editing_images := {}
 
 
-class Tile:
+class Cell:
 	var index := 0
 	var flip_h := false
 	var flip_v := false
@@ -67,214 +68,39 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 	tileset = _tileset
 
 
-func set_index(tile_position: int, index: int) -> void:
+func set_index(cell_position: int, index: int) -> void:
 	index = clampi(index, 0, tileset.tiles.size() - 1)
 	tileset.tiles[index].times_used += 1
-	indices[tile_position].index = index
-	indices[tile_position].flip_h = TileSetPanel.is_flipped_h
-	indices[tile_position].flip_v = TileSetPanel.is_flipped_v
-	indices[tile_position].transpose = TileSetPanel.is_transposed
-	update_cel_portion(tile_position)
+	cells[cell_position].index = index
+	cells[cell_position].flip_h = TileSetPanel.is_flipped_h
+	cells[cell_position].flip_v = TileSetPanel.is_flipped_v
+	cells[cell_position].transpose = TileSetPanel.is_transposed
+	_update_cell(cell_position)
 	Global.canvas.queue_redraw()
 
 
-func update_tileset(undo: bool) -> void:
-	editing_images.clear()
-	var undos := tileset.project.undos
-	if not undo and not _is_redo():
-		undo_redo_modes[undos] = [TileSetPanel.placing_tiles, TileSetPanel.tile_editing_mode]
-	if undo:
-		undos += 1
-	var tile_editing_mode := _get_tile_editing_mode(undos)
-	for i in indices.size():
-		var coords := get_tile_coords(i)
-		var rect := Rect2i(coords, tileset.tile_size)
-		var image_portion := image.get_region(rect)
-		var index := indices[i].index
-		if index >= tileset.tiles.size():
-			printerr("Tile at position ", i, ", mapped to ", index, " is out of bounds!")
-			index = 0
-			indices[i].index = 0
-		var current_tile := tileset.tiles[index]
-		if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
-			if image_portion.is_invisible():
-				continue
-			if index == 0:
-				# If the tileset is empty, only then add a new tile.
-				if tileset.tiles.size() <= 1:
-					tileset.add_tile(image_portion, self, tile_editing_mode)
-					indices[i].index = tileset.tiles.size() - 1
-				continue
-			if not tiles_equal(i, image_portion, current_tile.image):
-				tileset.replace_tile_at(image_portion, index, self)
-		elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
-			handle_auto_editing_mode(i, image_portion)
-		else:  # Stack
-			if image_portion.is_invisible():
-				continue
-			var found_tile := false
-			for j in range(1, tileset.tiles.size()):
-				var tile := tileset.tiles[j]
-				if tiles_equal(i, image_portion, tile.image):
-					indices[i].index = j
-					found_tile = true
-					break
-			if not found_tile:
-				tileset.add_tile(image_portion, self, tile_editing_mode)
-				indices[i].index = tileset.tiles.size() - 1
-	if undo:
-		var tile_removed := tileset.remove_unused_tiles(self)
-		if tile_removed:
-			re_index_all_tiles()
-
-
-## Cases:[br]
-## 0) Portion is transparent. Set its index to 0.
-## [br]
-## 0.5) Portion is transparent and mapped.
-## Set its index to 0 and unuse the mapped tile.
-## If the mapped tile is removed, reduce the index of all portions that have
-## indices greater or equal than the existing tile's index.
-## [br]
-## 1) Portion not mapped, exists in the tileset.
-## Map the portion to the existing tile and increase its times_used by one.
-## [br]
-## 2) Portion not mapped, does not exist in the tileset.
-## Add the portion as a tile in the tileset, set its index to be the tileset's tile size - 1.
-## [br]
-## 3) Portion mapped, tile did not change. Do nothing.
-## [br]
-## 4) Portion mapped, exists in the tileset.
-## The mapped tile still exists in the tileset.
-## Map the portion to the existing tile, increase its times_used by one,
-## and reduce the previously mapped tile's times_used by 1.
-## [br]
-## 5) Portion mapped, exists in the tileset.
-## The mapped tile does not exist in the tileset anymore.
-## Map the portion to the existing tile and increase its times_used by one.
-## Remove the previously mapped tile,
-## and reduce the index of all portions that have indices greater or equal
-## than the existing tile's index.
-## [br]
-## 6) Portion mapped, does not exist in the tileset.
-## The mapped tile still exists in the tileset.
-## Add the portion as a tile in the tileset, set its index to be the tileset's tile size - 1.
-## Reduce the previously mapped tile's times_used by 1.
-## [br]
-## 7) Portion mapped, does not exist in the tileset.
-## The mapped tile does not exist in the tileset anymore.
-## Simply replace the old tile with the new one, do not change its index.
-func handle_auto_editing_mode(i: int, image_portion: Image) -> void:
-	var index := indices[i].index
-	var current_tile := tileset.tiles[index]
-	if image_portion.is_invisible():
-		# Case 0: The portion is transparent.
-		indices[i].index = 0
-		if index > 0:
-			# Case 0.5: The portion is transparent and mapped to a tile.
-			var is_removed := tileset.unuse_tile_at_index(index, self)
-			if is_removed:
-				# Re-index all indices that are after the deleted one.
-				re_index_tiles_after_index(index)
-		return
-	var index_in_tileset := tileset.find_tile(image_portion)
-	if index == 0:  # If the portion is not mapped to a tile.
-		if index_in_tileset > -1:
-			# Case 1: The portion is not mapped already,
-			# and it exists in the tileset as a tile.
-			tileset.tiles[index_in_tileset].times_used += 1
-			indices[i].index = index_in_tileset
-		else:
-			# Case 2: The portion is not mapped already,
-			# and it does not exist in the tileset.
-			tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
-			indices[i].index = tileset.tiles.size() - 1
-	else:  # If the portion is already mapped.
-		if tiles_equal(i, image_portion, current_tile.image):
-			# Case 3: The portion is mapped and it did not change.
-			# Do nothing and move on to the next portion.
-			return
-		if index_in_tileset > -1:  # If the portion exists in the tileset as a tile.
-			if current_tile.times_used > 1:
-				# Case 4: The portion is mapped and it exists in the tileset as a tile,
-				# and the currently mapped tile still exists in the tileset.
-				tileset.tiles[index_in_tileset].times_used += 1
-				indices[i].index = index_in_tileset
-				tileset.unuse_tile_at_index(index, self)
-			else:
-				# Case 5: The portion is mapped and it exists in the tileset as a tile,
-				# and the currently mapped tile no longer exists in the tileset.
-				tileset.tiles[index_in_tileset].times_used += 1
-				indices[i].index = index_in_tileset
-				tileset.remove_tile_at_index(index, self)
-				# Re-index all indices that are after the deleted one.
-				re_index_tiles_after_index(index)
-		else:  # If the portion does not exist in the tileset as a tile.
-			if current_tile.times_used > 1:
-				# Case 6: The portion is mapped and it does not
-				# exist in the tileset as a tile,
-				# and the currently mapped tile still exists in the tileset.
-				tileset.unuse_tile_at_index(index, self)
-				tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
-				indices[i].index = tileset.tiles.size() - 1
-			else:
-				# Case 7: The portion is mapped and it does not
-				# exist in the tileset as a tile,
-				# and the currently mapped tile no longer exists in the tileset.
-				tileset.replace_tile_at(image_portion, index, self)
-
-
-## Re-indexes all [member indices] that are larger or equal to [param index],
-## by reducing their value by one.
-func re_index_tiles_after_index(index: int) -> void:
-	for i in indices.size():
-		var tmp_index := indices[i].index
-		if tmp_index >= index:
-			indices[i].index -= 1
-
-
-func update_cel_portion(tile_position: int) -> void:
-	var coords := get_tile_coords(tile_position)
-	var rect := Rect2i(coords, tileset.tile_size)
-	var image_portion := image.get_region(rect)
-	var tile_data := indices[tile_position]
-	var index := tile_data.index
-	var current_tile := tileset.tiles[index].image
-	var transformed_tile := transform_tile(
-		current_tile, tile_data.flip_h, tile_data.flip_v, tile_data.transpose
-	)
-	if not tiles_equal(tile_position, image_portion, transformed_tile):
-		var tile_size := transformed_tile.get_size()
-		image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
-
-
-func update_cel_portions() -> void:
-	for i in indices.size():
-		update_cel_portion(i)
-
-
-func get_tile_coords(portion_position: int) -> Vector2i:
-	var x_coord := float(tileset.tile_size.x) * (portion_position % indices_x)
+func get_cell_coords_in_image(cell_position: int) -> Vector2i:
+	var x_coord := float(tileset.tile_size.x) * (cell_position % horizontal_cells)
 	@warning_ignore("integer_division")
-	var y_coord := float(tileset.tile_size.y) * (portion_position / indices_x)
+	var y_coord := float(tileset.tile_size.y) * (cell_position / horizontal_cells)
 	return Vector2i(x_coord, y_coord)
 
 
-func get_tile_position(coords: Vector2i) -> int:
+func get_cell_position(coords: Vector2i) -> int:
 	@warning_ignore("integer_division")
 	var x := coords.x / tileset.tile_size.x
-	x = clampi(x, 0, indices_x - 1)
+	x = clampi(x, 0, horizontal_cells - 1)
 	@warning_ignore("integer_division")
 	var y := coords.y / tileset.tile_size.y
-	y = clampi(y, 0, indices_y - 1)
-	y *= indices_x
+	y = clampi(y, 0, vertical_cells - 1)
+	y *= horizontal_cells
 	return x + y
 
 
-func tiles_equal(portion_index: int, image_portion: Image, tile_image: Image) -> bool:
-	var tile_data := indices[portion_index]
+func tiles_equal(cell_position: int, image_portion: Image, tile_image: Image) -> bool:
+	var cell_data := cells[cell_position]
 	var final_image_portion := transform_tile(
-		tile_image, tile_data.flip_h, tile_data.flip_v, tile_data.transpose
+		tile_image, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
 	)
 	return image_portion.get_data() == final_image_portion.get_data()
 
@@ -302,27 +128,202 @@ func transform_tile(
 	return transformed_tile
 
 
-func re_index_all_tiles() -> void:
-	for i in indices.size():
-		var coords := get_tile_coords(i)
+func update_tileset(undo: bool) -> void:
+	editing_images.clear()
+	var undos := tileset.project.undos
+	if not undo and not _is_redo():
+		undo_redo_modes[undos] = [TileSetPanel.placing_tiles, TileSetPanel.tile_editing_mode]
+	if undo:
+		undos += 1
+	var tile_editing_mode := _get_tile_editing_mode(undos)
+	for i in cells.size():
+		var coords := get_cell_coords_in_image(i)
+		var rect := Rect2i(coords, tileset.tile_size)
+		var image_portion := image.get_region(rect)
+		var index := cells[i].index
+		if index >= tileset.tiles.size():
+			printerr("Cell at position ", i + 1, ", mapped to ", index, " is out of bounds!")
+			index = 0
+			cells[i].index = 0
+		var current_tile := tileset.tiles[index]
+		if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+			if image_portion.is_invisible():
+				continue
+			if index == 0:
+				# If the tileset is empty, only then add a new tile.
+				if tileset.tiles.size() <= 1:
+					tileset.add_tile(image_portion, self, tile_editing_mode)
+					cells[i].index = tileset.tiles.size() - 1
+				continue
+			if not tiles_equal(i, image_portion, current_tile.image):
+				tileset.replace_tile_at(image_portion, index, self)
+		elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
+			_handle_auto_editing_mode(i, image_portion)
+		else:  # Stack
+			if image_portion.is_invisible():
+				continue
+			var found_tile := false
+			for j in range(1, tileset.tiles.size()):
+				var tile := tileset.tiles[j]
+				if tiles_equal(i, image_portion, tile.image):
+					cells[i].index = j
+					found_tile = true
+					break
+			if not found_tile:
+				tileset.add_tile(image_portion, self, tile_editing_mode)
+				cells[i].index = tileset.tiles.size() - 1
+	if undo:
+		var tile_removed := tileset.remove_unused_tiles(self)
+		if tile_removed:
+			_re_index_all_cells()
+
+
+## Cases:[br]
+## 0) Cell is transparent. Set its index to 0.
+## [br]
+## 0.5) Cell is transparent and mapped.
+## Set its index to 0 and unuse the mapped tile.
+## If the mapped tile is removed, reduce the index of all cells that have
+## indices greater or equal than the existing tile's index.
+## [br]
+## 1) Cell not mapped, exists in the tileset.
+## Map the cell to the existing tile and increase its times_used by one.
+## [br]
+## 2) Cell not mapped, does not exist in the tileset.
+## Add the cell as a tile in the tileset, set its index to be the tileset's tile size - 1.
+## [br]
+## 3) Cell mapped, tile did not change. Do nothing.
+## [br]
+## 4) Cell mapped, exists in the tileset.
+## The mapped tile still exists in the tileset.
+## Map the cell to the existing tile, increase its times_used by one,
+## and reduce the previously mapped tile's times_used by 1.
+## [br]
+## 5) Cell mapped, exists in the tileset.
+## The mapped tile does not exist in the tileset anymore.
+## Map the cell to the existing tile and increase its times_used by one.
+## Remove the previously mapped tile,
+## and reduce the index of all cells that have indices greater or equal
+## than the existing tile's index.
+## [br]
+## 6) Cell mapped, does not exist in the tileset.
+## The mapped tile still exists in the tileset.
+## Add the cell as a tile in the tileset, set its index to be the tileset's tile size - 1.
+## Reduce the previously mapped tile's times_used by 1.
+## [br]
+## 7) Cell mapped, does not exist in the tileset.
+## The mapped tile does not exist in the tileset anymore.
+## Simply replace the old tile with the new one, do not change its index.
+func _handle_auto_editing_mode(i: int, image_portion: Image) -> void:
+	var index := cells[i].index
+	var current_tile := tileset.tiles[index]
+	if image_portion.is_invisible():
+		# Case 0: The cell is transparent.
+		cells[i].index = 0
+		if index > 0:
+			# Case 0.5: The cell is transparent and mapped to a tile.
+			var is_removed := tileset.unuse_tile_at_index(index, self)
+			if is_removed:
+				# Re-index all indices that are after the deleted one.
+				_re_index_cells_after_index(index)
+		return
+	var index_in_tileset := tileset.find_tile(image_portion)
+	if index == 0:  # If the cell is not mapped to a tile.
+		if index_in_tileset > -1:
+			# Case 1: The cell is not mapped already,
+			# and it exists in the tileset as a tile.
+			tileset.tiles[index_in_tileset].times_used += 1
+			cells[i].index = index_in_tileset
+		else:
+			# Case 2: The cell is not mapped already,
+			# and it does not exist in the tileset.
+			tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
+			cells[i].index = tileset.tiles.size() - 1
+	else:  # If the cell is already mapped.
+		if tiles_equal(i, image_portion, current_tile.image):
+			# Case 3: The cell is mapped and it did not change.
+			# Do nothing and move on to the next cell.
+			return
+		if index_in_tileset > -1:  # If the cell exists in the tileset as a tile.
+			if current_tile.times_used > 1:
+				# Case 4: The cell is mapped and it exists in the tileset as a tile,
+				# and the currently mapped tile still exists in the tileset.
+				tileset.tiles[index_in_tileset].times_used += 1
+				cells[i].index = index_in_tileset
+				tileset.unuse_tile_at_index(index, self)
+			else:
+				# Case 5: The cell is mapped and it exists in the tileset as a tile,
+				# and the currently mapped tile no longer exists in the tileset.
+				tileset.tiles[index_in_tileset].times_used += 1
+				cells[i].index = index_in_tileset
+				tileset.remove_tile_at_index(index, self)
+				# Re-index all indices that are after the deleted one.
+				_re_index_cells_after_index(index)
+		else:  # If the cell does not exist in the tileset as a tile.
+			if current_tile.times_used > 1:
+				# Case 6: The cell is mapped and it does not
+				# exist in the tileset as a tile,
+				# and the currently mapped tile still exists in the tileset.
+				tileset.unuse_tile_at_index(index, self)
+				tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
+				cells[i].index = tileset.tiles.size() - 1
+			else:
+				# Case 7: The cell is mapped and it does not
+				# exist in the tileset as a tile,
+				# and the currently mapped tile no longer exists in the tileset.
+				tileset.replace_tile_at(image_portion, index, self)
+
+
+## Re-indexes all [member cells] that are larger or equal to [param index],
+## by reducing their value by one.
+func _re_index_cells_after_index(index: int) -> void:
+	for i in cells.size():
+		var tmp_index := cells[i].index
+		if tmp_index >= index:
+			cells[i].index -= 1
+
+
+func _update_cell(cell_position: int) -> void:
+	var coords := get_cell_coords_in_image(cell_position)
+	var rect := Rect2i(coords, tileset.tile_size)
+	var image_portion := image.get_region(rect)
+	var cell_data := cells[cell_position]
+	var index := cell_data.index
+	var current_tile := tileset.tiles[index].image
+	var transformed_tile := transform_tile(
+		current_tile, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
+	)
+	if not tiles_equal(cell_position, image_portion, transformed_tile):
+		var tile_size := transformed_tile.get_size()
+		image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
+
+
+func _update_cel_portions() -> void:
+	for i in cells.size():
+		_update_cell(i)
+
+
+func _re_index_all_cells() -> void:
+	for i in cells.size():
+		var coords := get_cell_coords_in_image(i)
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		if image_portion.is_invisible():
-			indices[i].index = 0
+			cells[i].index = 0
 			continue
 		for j in range(1, tileset.tiles.size()):
 			var tile := tileset.tiles[j]
 			if tiles_equal(i, image_portion, tile.image):
-				indices[i].index = j
+				cells[i].index = j
 				break
 
 
-func _resize_indices(new_size: Vector2i) -> void:
-	indices_x = ceili(float(new_size.x) / tileset.tile_size.x)
-	indices_y = ceili(float(new_size.y) / tileset.tile_size.y)
-	indices.resize(indices_x * indices_y)
-	for i in indices.size():
-		indices[i] = Tile.new()
+func _resize_cells(new_size: Vector2i) -> void:
+	horizontal_cells = ceili(float(new_size.x) / tileset.tile_size.x)
+	vertical_cells = ceili(float(new_size.y) / tileset.tile_size.y)
+	cells.resize(horizontal_cells * vertical_cells)
+	for i in cells.size():
+		cells[i] = Cell.new()
 
 
 func _is_redo() -> bool:
@@ -342,7 +343,7 @@ func _get_tile_editing_mode(undos: int) -> TileSetPanel.TileEditingMode:
 func _on_tileset_updated(cel: CelTileMap) -> void:
 	if cel == self or not is_instance_valid(cel):
 		return
-	update_cel_portions()
+	_update_cel_portions()
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 
@@ -354,10 +355,10 @@ func update_texture(undo := false) -> void:
 		super.update_texture(undo)
 		return
 
-	for i in indices.size():
-		var tile_data := indices[i]
-		var index := tile_data.index
-		var coords := get_tile_coords(i)
+	for i in cells.size():
+		var cell_data := cells[i]
+		var index := cell_data.index
+		var coords := get_cell_coords_in_image(i)
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		var current_tile := tileset.tiles[index]
@@ -371,12 +372,12 @@ func update_texture(undo := false) -> void:
 			var editing_portion := editing_images[index][0] as int
 			if i == editing_portion:
 				var transformed_image := transform_tile(
-					image_portion, tile_data.flip_h, tile_data.flip_v, tile_data.transpose, true
+					image_portion, cell_data.flip_h, cell_data.flip_v, cell_data.transpose, true
 				)
 				editing_images[index] = [i, transformed_image]
 			var editing_image := editing_images[index][1] as Image
 			var transformed_editing_image := transform_tile(
-				editing_image, tile_data.flip_h, tile_data.flip_v, tile_data.transpose
+				editing_image, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
 			)
 			if not image_portion.get_data() == transformed_editing_image.get_data():
 				var tile_size := image_portion.get_size()
@@ -384,15 +385,15 @@ func update_texture(undo := false) -> void:
 		else:
 			if not tiles_equal(i, image_portion, current_tile.image):
 				var transformed_image := transform_tile(
-					image_portion, tile_data.flip_h, tile_data.flip_v, tile_data.transpose, true
+					image_portion, cell_data.flip_h, cell_data.flip_v, cell_data.transpose, true
 				)
 				editing_images[index] = [i, transformed_image]
 	super.update_texture(undo)
 
 
 func size_changed(new_size: Vector2i) -> void:
-	_resize_indices(new_size)
-	re_index_all_tiles()
+	_resize_cells(new_size)
+	_re_index_all_cells()
 
 
 func on_undo_redo(undo: bool) -> void:
@@ -402,46 +403,46 @@ func on_undo_redo(undo: bool) -> void:
 	if (undo or _is_redo()) and undo_redo_modes.has(undos):
 		var placing_tiles: bool = undo_redo_modes[undos][0]
 		if placing_tiles:
-			re_index_all_tiles()
+			_re_index_all_cells()
 			return
 	update_tileset(undo)
 
 
 func serialize_undo_data() -> Dictionary:
 	var dict := {}
-	var indices_serialized := []
-	indices_serialized.resize(indices.size())
-	for i in indices.size():
-		indices_serialized[i] = indices[i].serialize()
-	dict["tiles_data"] = indices_serialized
+	var cells_serialized := []
+	cells_serialized.resize(cells.size())
+	for i in cells.size():
+		cells_serialized[i] = cells[i].serialize()
+	dict["cells_data"] = cells_serialized
 	return dict
 
 
 func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
-	var tiles_data = dict["tiles_data"]
-	for i in tiles_data.size():
-		var tile_data: Dictionary = tiles_data[i]
+	var cells_data = dict["cells_data"]
+	for i in cells_data.size():
+		var cell_data: Dictionary = cells_data[i]
 		if undo:
-			undo_redo.add_undo_method(indices[i].deserialize.bind(tile_data))
+			undo_redo.add_undo_method(cells[i].deserialize.bind(cell_data))
 		else:
-			undo_redo.add_do_method(indices[i].deserialize.bind(tile_data))
+			undo_redo.add_do_method(cells[i].deserialize.bind(cell_data))
 
 
 func serialize() -> Dictionary:
 	var dict := super.serialize()
-	var tile_indices := []
-	tile_indices.resize(indices.size())
-	for i in tile_indices.size():
-		tile_indices[i] = indices[i].serialize()
-	dict["tile_indices"] = tile_indices
+	var cell_indices := []
+	cell_indices.resize(cells.size())
+	for i in cell_indices.size():
+		cell_indices[i] = cells[i].serialize()
+	dict["cell_indices"] = cell_indices
 	return dict
 
 
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
-	var tile_indices = dict.get("tile_indices")
-	for i in tile_indices.size():
-		indices[i].deserialize(tile_indices[i])
+	var cell_indices = dict.get("cell_indices")
+	for i in cell_indices.size():
+		cells[i].deserialize(cell_indices[i])
 
 
 func get_class_name() -> String:

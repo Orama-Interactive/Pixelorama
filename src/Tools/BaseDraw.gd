@@ -329,7 +329,7 @@ func draw_tile(pos: Vector2i, tile_index: int) -> void:
 	if Global.current_project.get_current_cel() is not CelTileMap:
 		return
 	pos = Global.current_project.tiles.get_canon_position(pos)
-	var tile_position := get_tile_position(pos)
+	var tile_position := get_cell_position(pos)
 	var cel := Global.current_project.get_current_cel() as CelTileMap
 	cel.set_index(tile_position, tile_index)
 

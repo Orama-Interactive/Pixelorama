@@ -66,9 +66,9 @@ func _pick_color(pos: Vector2i) -> void:
 	if pos.x < 0 or pos.y < 0:
 		return
 	if is_placing_tiles():
-		var tile_position := get_tile_position(pos)
+		var tile_position := get_cell_position(pos)
 		var cel := Global.current_project.get_current_cel() as CelTileMap
-		Tools.selected_tile_index_changed.emit(cel.indices[tile_position].index)
+		Tools.selected_tile_index_changed.emit(cel.cells[tile_position].index)
 		return
 	var image := Image.new()
 	image.copy_from(_get_draw_image())

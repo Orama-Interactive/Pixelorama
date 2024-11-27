@@ -5,6 +5,7 @@ extends PixelLayer
 ## A LayerTileMap uses a [TileSetCustom], which is then by all of its [CelTileMap]s.
 ## This class doesn't hold any actual tilemap data, as they are different in each cel.
 ## For this reason, that data is being handled by the [CelTileMap] class.
+## Not to be confused with [TileMapLayer], which is a Godot node.
 
 ## The [TileSetCustom] that this layer uses.
 ## Internally, this class doesn't make much use of this.

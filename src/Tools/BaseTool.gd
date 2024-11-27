@@ -85,12 +85,12 @@ func is_placing_tiles() -> bool:
 	return Global.current_project.get_current_cel() is CelTileMap and TileSetPanel.placing_tiles
 
 
-func get_tile_position(pos: Vector2i) -> int:
+func get_cell_position(pos: Vector2i) -> int:
 	var tile_pos := 0
 	if Global.current_project.get_current_cel() is not CelTileMap:
 		return tile_pos
 	var cel := Global.current_project.get_current_cel() as CelTileMap
-	tile_pos = cel.get_tile_position(pos)
+	tile_pos = cel.get_cell_position(pos)
 	return tile_pos
 
 
@@ -363,9 +363,9 @@ func _pick_color(pos: Vector2i) -> void:
 	if pos.x < 0 or pos.y < 0:
 		return
 	if is_placing_tiles():
-		var tile_position := get_tile_position(pos)
+		var tile_position := get_cell_position(pos)
 		var cel := Global.current_project.get_current_cel() as CelTileMap
-		Tools.selected_tile_index_changed.emit(cel.indices[tile_position].index)
+		Tools.selected_tile_index_changed.emit(cel.cells[tile_position].index)
 		return
 	var image := Image.new()
 	image.copy_from(_get_draw_image())
