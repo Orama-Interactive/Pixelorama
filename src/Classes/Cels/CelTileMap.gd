@@ -21,8 +21,13 @@ var tileset: TileSetCustom:
 			_resize_cells(get_image().get_size())
 			if not tileset.updated.is_connected(_on_tileset_updated):
 				tileset.updated.connect(_on_tileset_updated)
+
+## The [Array] of type [CelTileMap.Cell] that contains data for each cell of the tilemap.
+## The array's size is equal to [member horizontal_cells] * [member vertical_cells].
 var cells: Array[Cell]
+## The amount of horizontal cells.
 var horizontal_cells: int
+## The amount of vertical cells.
 var vertical_cells: int
 ## Dictionary of [int] and an [Array] of [bool] ([member TileSetPanel.placing_tiles])
 ## and [enum TileSetPanel.TileEditingMode].
@@ -35,12 +40,16 @@ var undo_redo_modes := {}
 var editing_images := {}
 
 
+## An internal class of [CelTIleMap], which contains data used by individual cells of the tilemap.
 class Cell:
+	## The index of the [TileSetCustom] tile that the cell is mapped to.
 	var index := 0
+	## If [code]true[/code], the tile is flipped horizontally in this cell.
 	var flip_h := false
+	## If [code]true[/code], the tile is flipped vertically in this cell.
 	var flip_v := false
 	## If [code]true[/code], the tile is rotated 90 degrees counter-clockwise,
-	## and then flipped vertically.
+	## and then flipped vertically in this cell.
 	var transpose := false
 
 	func _to_string() -> String:
@@ -68,6 +77,8 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 	tileset = _tileset
 
 
+## Maps the cell at position [param cell_position] to
+## the [member tileset]'s tile of index [param index].
 func set_index(cell_position: int, index: int) -> void:
 	index = clampi(index, 0, tileset.tiles.size() - 1)
 	tileset.tiles[index].times_used += 1
@@ -79,6 +90,9 @@ func set_index(cell_position: int, index: int) -> void:
 	Global.canvas.queue_redraw()
 
 
+## Returns the pixel coordinates of the tilemap's cell
+## at position [cell_position] in the cel's image.
+## The reverse of [method get_cell_position].
 func get_cell_coords_in_image(cell_position: int) -> Vector2i:
 	var x_coord := float(tileset.tile_size.x) * (cell_position % horizontal_cells)
 	@warning_ignore("integer_division")
@@ -86,6 +100,9 @@ func get_cell_coords_in_image(cell_position: int) -> Vector2i:
 	return Vector2i(x_coord, y_coord)
 
 
+## Returns the position of a cell in the tilemap
+## at pixel coordinates [param coords] in the cel's image.
+## The reverse of [method get_cell_coords_in_image].
 func get_cell_position(coords: Vector2i) -> int:
 	@warning_ignore("integer_division")
 	var x := coords.x / tileset.tile_size.x
@@ -97,6 +114,8 @@ func get_cell_position(coords: Vector2i) -> int:
 	return x + y
 
 
+## Returns [code]true[/code] if the tile at cell position [param cell_position]
+## with image [param image_portion] is equal to [param tile_image].
 func tiles_equal(cell_position: int, image_portion: Image, tile_image: Image) -> bool:
 	var cell_data := cells[cell_position]
 	var final_image_portion := transform_tile(
