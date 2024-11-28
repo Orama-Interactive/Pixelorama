@@ -321,12 +321,12 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func draw_tile(pos: Vector2i, tile_index: int) -> void:
-	if Global.current_project.get_current_cel() is not CelTileMap:
-		return
-	pos = Global.current_project.tiles.get_canon_position(pos)
-	var tile_position := get_cell_position(pos)
-	var cel := Global.current_project.get_current_cel() as CelTileMap
-	cel.set_index(tile_position, tile_index)
+	for cel in _get_selected_draw_cels():
+		if cel is not CelTileMap:
+			return
+		pos = Global.current_project.tiles.get_canon_position(pos)
+		var tile_position := get_cell_position(pos)
+		(cel as CelTileMap).set_index(tile_position, tile_index)
 
 
 func _prepare_tool() -> void:
