@@ -272,6 +272,9 @@ func prepare_undo(action: String) -> void:
 
 
 func commit_undo() -> void:
+	for cel in _undo_data:
+		if cel is CelTileMap:
+			(cel as CelTileMap).update_tileset()
 	var redo_data := _get_undo_data()
 	var project := Global.current_project
 	var frame := -1

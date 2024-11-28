@@ -269,7 +269,7 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 					var image := Image.create_from_data(
 						tile_size.x, tile_size.y, false, new_project.get_image_format(), image_data
 					)
-					tileset.add_tile(image, null, 2)
+					tileset.add_tile(image, null)
 		zip_reader.close()
 	new_project.export_directory_path = path.get_base_dir()
 
@@ -844,14 +844,14 @@ func open_image_as_tileset(
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
 	var tile_size := Vector2i(frame_width, frame_height)
-	var tileset := TileSetCustom.new(tile_size, project, path.get_basename().get_file())
+	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file())
 	for yy in range(vert):
 		for xx in range(horiz):
 			var cropped_image := image.get_region(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
 			@warning_ignore("int_as_enum_without_cast")
-			tileset.add_tile(cropped_image, null, 2)
+			tileset.add_tile(cropped_image, null)
 	project.tilesets.append(tileset)
 
 
@@ -866,7 +866,7 @@ func open_image_as_tileset_smart(
 	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
 		tile_size = image.get_size()
 		sliced_rects.append(Rect2i(Vector2i.ZERO, tile_size))
-	var tileset := TileSetCustom.new(tile_size, project, path.get_basename().get_file())
+	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file())
 	for rect in sliced_rects:
 		var offset: Vector2 = (0.5 * (tile_size - rect.size)).floor()
 		var cropped_image := Image.create(
@@ -874,7 +874,7 @@ func open_image_as_tileset_smart(
 		)
 		cropped_image.blit_rect(image, rect, offset)
 		@warning_ignore("int_as_enum_without_cast")
-		tileset.add_tile(cropped_image, null, 2)
+		tileset.add_tile(cropped_image, null)
 	project.tilesets.append(tileset)
 
 

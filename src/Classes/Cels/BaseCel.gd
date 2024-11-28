@@ -77,10 +77,6 @@ func update_texture(_undo := false) -> void:
 				cel.texture_changed.emit()
 
 
-func on_undo_redo(_undo: bool) -> void:
-	pass
-
-
 ## Returns a curated [Dictionary] containing the cel data.
 func serialize() -> Dictionary:
 	var dict := {"opacity": opacity, "z_index": z_index}

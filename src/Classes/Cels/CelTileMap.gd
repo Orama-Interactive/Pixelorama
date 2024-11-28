@@ -29,9 +29,6 @@ var cells: Array[Cell]
 var horizontal_cells: int
 ## The amount of vertical cells.
 var vertical_cells: int
-## Dictionary of [int] and an [Array] of [bool] ([member TileSetPanel.placing_tiles])
-## and [enum TileSetPanel.TileEditingMode].
-var undo_redo_modes := {}
 ## Dictionary of [int] and [Array].
 ## The key is the index of the tile in the tileset,
 ## and the value is the index of the tilemap tile that changed first, along with
@@ -147,14 +144,9 @@ func transform_tile(
 	return transformed_tile
 
 
-func update_tileset(undo: bool) -> void:
+func update_tileset() -> void:
 	editing_images.clear()
-	var undos := tileset.project.undos
-	if not undo and not _is_redo():
-		undo_redo_modes[undos] = [TileSetPanel.placing_tiles, TileSetPanel.tile_editing_mode]
-	if undo:
-		undos += 1
-	var tile_editing_mode := _get_tile_editing_mode(undos)
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	for i in cells.size():
 		var coords := get_cell_coords_in_image(i)
 		var rect := Rect2i(coords, tileset.tile_size)
@@ -171,7 +163,7 @@ func update_tileset(undo: bool) -> void:
 			if index == 0:
 				# If the tileset is empty, only then add a new tile.
 				if tileset.tiles.size() <= 1:
-					tileset.add_tile(image_portion, self, tile_editing_mode)
+					tileset.add_tile(image_portion, self)
 					cells[i].index = tileset.tiles.size() - 1
 				continue
 			if not tiles_equal(i, image_portion, current_tile.image):
@@ -189,12 +181,8 @@ func update_tileset(undo: bool) -> void:
 					found_tile = true
 					break
 			if not found_tile:
-				tileset.add_tile(image_portion, self, tile_editing_mode)
+				tileset.add_tile(image_portion, self)
 				cells[i].index = tileset.tiles.size() - 1
-	if undo:
-		var tile_removed := tileset.remove_unused_tiles(self)
-		if tile_removed:
-			_re_index_all_cells()
 
 
 ## Cases:[br]
@@ -256,7 +244,7 @@ func _handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 		else:
 			# Case 2: The cell is not mapped already,
 			# and it does not exist in the tileset.
-			tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
+			tileset.add_tile(image_portion, self)
 			cells[i].index = tileset.tiles.size() - 1
 	else:  # If the cell is already mapped.
 		if tiles_equal(i, image_portion, current_tile.image):
@@ -284,7 +272,7 @@ func _handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 				# exist in the tileset as a tile,
 				# and the currently mapped tile still exists in the tileset.
 				tileset.unuse_tile_at_index(index, self)
-				tileset.add_tile(image_portion, self, TileSetPanel.TileEditingMode.AUTO)
+				tileset.add_tile(image_portion, self)
 				cells[i].index = tileset.tiles.size() - 1
 			else:
 				# Case 7: The cell is mapped and it does not
@@ -349,15 +337,6 @@ func _is_redo() -> bool:
 	return Global.control.redone
 
 
-func _get_tile_editing_mode(undos: int) -> TileSetPanel.TileEditingMode:
-	var tile_editing_mode: TileSetPanel.TileEditingMode
-	if undo_redo_modes.has(undos):
-		tile_editing_mode = undo_redo_modes[undos][1]
-	else:
-		tile_editing_mode = TileSetPanel.tile_editing_mode
-	return tile_editing_mode
-
-
 ## If the tileset has been modified by another tile, make sure to also update it here.
 func _on_tileset_updated(cel: CelTileMap) -> void:
 	if cel == self or not is_instance_valid(cel):
@@ -415,36 +394,29 @@ func size_changed(new_size: Vector2i) -> void:
 	_re_index_all_cells()
 
 
-func on_undo_redo(undo: bool) -> void:
-	var undos := tileset.project.undos
-	if undo:
-		undos += 1
-	if (undo or _is_redo()) and undo_redo_modes.has(undos):
-		var placing_tiles: bool = undo_redo_modes[undos][0]
-		if placing_tiles:
-			_re_index_all_cells()
-			return
-	update_tileset(undo)
-
-
 func serialize_undo_data() -> Dictionary:
 	var dict := {}
-	var cells_serialized := []
-	cells_serialized.resize(cells.size())
-	for i in cells.size():
-		cells_serialized[i] = cells[i].serialize()
-	dict["cells_data"] = cells_serialized
+	var cell_indices := []
+	cell_indices.resize(cells.size())
+	for i in cell_indices.size():
+		cell_indices[i] = cells[i].serialize()
+	dict["cell_indices"] = cell_indices
+	dict["tileset"] = tileset.serialize_undo_data()
 	return dict
 
 
 func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
-	var cells_data = dict["cells_data"]
-	for i in cells_data.size():
-		var cell_data: Dictionary = cells_data[i]
-		if undo:
+	var cell_indices = dict["cell_indices"]
+	if undo:
+		for i in cell_indices.size():
+			var cell_data: Dictionary = cell_indices[i]
 			undo_redo.add_undo_method(cells[i].deserialize.bind(cell_data))
-		else:
+		undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.get("tileset"), self))
+	else:
+		for i in cell_indices.size():
+			var cell_data: Dictionary = cell_indices[i]
 			undo_redo.add_do_method(cells[i].deserialize.bind(cell_data))
+		undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.get("tileset"), self))
 
 
 func serialize() -> Dictionary:

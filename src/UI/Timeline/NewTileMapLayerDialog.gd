@@ -14,7 +14,7 @@ func _on_confirmed() -> void:
 	var tile_size := tile_size_slider.value
 	var tileset: TileSetCustom
 	if tileset_option_button.selected == 0:
-		tileset = TileSetCustom.new(tile_size, project, tileset_name)
+		tileset = TileSetCustom.new(tile_size, tileset_name)
 	else:
 		tileset = project.tilesets[tileset_option_button.selected - 1]
 	var layer := LayerTileMap.new(project, tileset, layer_name)

@@ -10,8 +10,6 @@ extends RefCounted
 ## The [CelTileMap] that the changes are coming from is referenced in the [param cel] parameter.
 signal updated(cel: CelTileMap)
 
-## The [Project] the tileset is being used by.
-var project: Project
 ## The tileset's name.
 var name := ""
 ## The size of each individual tile.
@@ -24,45 +22,30 @@ var tiles: Array[Tile] = []
 class Tile:
 	## The [Image] tile itself.
 	var image: Image
-	## The mode that was used when this tile was added to the tileset.
-	var mode_added: TileSetPanel.TileEditingMode
 	## The amount of tiles this tile is being used in tilemaps.
 	var times_used := 1
-	## The step number of undo/redo when this tile was added to the tileset.
-	var undo_step_added := 0
 
-	func _init(
-		_image: Image, _mode_added: TileSetPanel.TileEditingMode, _undo_step_added := 0
-	) -> void:
+	func _init(_image: Image) -> void:
 		image = _image
-		mode_added = _mode_added
-		undo_step_added = _undo_step_added
 
 	## A method that checks if the tile should be removed from the tileset.
-	## Returns [code]true[/code] if the current undo step is less than [member undo_step_added],
-	## which essentially means that the tile always gets removed if the user undos to the point
-	## the tile was added to the tileset.
-	## Otherwise, it returns [code]true[/code] if [member mode_added] is not equal to
-	## [enum TileSetPanel.TileEditingMode.STACK] and the amount of [member times_used] is 0.
-	func can_be_removed(project: Project) -> bool:
-		if project.undos < undo_step_added:
-			return true
-		return mode_added != TileSetPanel.TileEditingMode.STACK and times_used <= 0
+	## Returns [code]true[/code] if the amount of [member times_used] is 0.
+	func can_be_removed() -> bool:
+		return times_used <= 0
 
 
-func _init(_tile_size: Vector2i, _project: Project, _name := "") -> void:
+func _init(_tile_size: Vector2i, _name := "") -> void:
 	tile_size = _tile_size
-	project = _project
 	name = _name
 	var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
-	tiles.append(Tile.new(empty_image, TileSetPanel.tile_editing_mode))
+	tiles.append(Tile.new(empty_image))
 
 
 ## Adds a new [param image] as a tile to the tileset.
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from,
 ## and the [param edit_mode] parameter contains the tile editing mode at the time of this change.
-func add_tile(image: Image, cel: CelTileMap, edit_mode: TileSetPanel.TileEditingMode) -> void:
-	var tile := Tile.new(image, edit_mode, project.undos)
+func add_tile(image: Image, cel: CelTileMap) -> void:
+	var tile := Tile.new(image)
 	tiles.append(tile)
 	updated.emit(cel)
 
@@ -70,10 +53,8 @@ func add_tile(image: Image, cel: CelTileMap, edit_mode: TileSetPanel.TileEditing
 ## Adds a new [param image] as a tile in a given [param position] in the tileset.
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from,
 ## and the [param edit_mode] parameter contains the tile editing mode at the time of this change.
-func insert_tile(
-	image: Image, position: int, cel: CelTileMap, edit_mode: TileSetPanel.TileEditingMode
-) -> void:
-	var tile := Tile.new(image, edit_mode, project.undos)
+func insert_tile(image: Image, position: int, cel: CelTileMap) -> void:
+	var tile := Tile.new(image)
 	tiles.insert(position, tile)
 	updated.emit(cel)
 
@@ -86,7 +67,7 @@ func insert_tile(
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from.
 func unuse_tile_at_index(index: int, cel: CelTileMap) -> bool:
 	tiles[index].times_used -= 1
-	if tiles[index].can_be_removed(project):
+	if tiles[index].can_be_removed():
 		remove_tile_at_index(index, cel)
 		return true
 	return false
@@ -122,7 +103,7 @@ func remove_unused_tiles(cel: CelTileMap) -> bool:
 	var tile_removed := false
 	for i in range(tiles.size() - 1, 0, -1):
 		var tile := tiles[i]
-		if tile.can_be_removed(project):
+		if tile.can_be_removed():
 			remove_tile_at_index(i, cel)
 			tile_removed = true
 	return tile_removed
@@ -139,3 +120,25 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	name = dict.get("name", name)
 	tile_size = str_to_var("Vector2i" + dict.get("tile_size"))
+
+
+func serialize_undo_data() -> Dictionary:
+	var dict := {}
+	for tile in tiles:
+		var image_data := tile.image.get_data()
+		dict[tile.image] = [image_data.compress(), image_data.size(), tile.times_used]
+	return dict
+
+
+func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
+	tiles.resize(dict.size())
+	var i := 0
+	for image: Image in dict:
+		var tile_data = dict[image]
+		var buffer_size := tile_data[1] as int
+		var image_data := (tile_data[0] as PackedByteArray).decompress(buffer_size)
+		image.set_data(tile_size.x, tile_size.y, false, image.get_format(), image_data)
+		tiles[i] = Tile.new(image)
+		tiles[i].times_used = tile_data[2]
+		i += 1
+	updated.emit(cel)
