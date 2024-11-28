@@ -873,8 +873,8 @@ func _toggle_show_mouse_guides() -> void:
 func _toggle_zen_mode() -> void:
 	for i in ui_elements.size():
 		var index := panels_submenu.get_item_index(i)
-		var name := ui_elements[i].name
-		if name == "Main Canvas" or name == "Tiles":
+		var panel_name := ui_elements[i].name
+		if panel_name == "Main Canvas" or panel_name == "Tiles":
 			continue
 		if !panels_submenu.is_item_checked(index):
 			continue
