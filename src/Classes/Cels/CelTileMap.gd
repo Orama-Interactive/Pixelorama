@@ -131,10 +131,6 @@ func transform_tile(
 ) -> Image:
 	var transformed_tile := Image.new()
 	transformed_tile.copy_from(tile_image)
-	if flip_h:
-		transformed_tile.flip_x()
-	if flip_v:
-		transformed_tile.flip_y()
 	if transpose:
 		var tmp_image := Image.new()
 		tmp_image.copy_from(transformed_tile)
@@ -143,8 +139,15 @@ func transform_tile(
 		else:
 			tmp_image.rotate_90(COUNTERCLOCKWISE)
 		transformed_tile.blit_rect(
-			tmp_image, Rect2i(Vector2i.ZERO, tmp_image.get_size()), Vector2i.ZERO
+			tmp_image, Rect2i(Vector2i.ZERO, transformed_tile.get_size()), Vector2i.ZERO
 		)
+		if reverse and not (flip_h != flip_v):
+			transformed_tile.flip_x()
+		else:
+			transformed_tile.flip_y()
+	if flip_h:
+		transformed_tile.flip_x()
+	if flip_v:
 		transformed_tile.flip_y()
 	return transformed_tile
 
@@ -361,6 +364,7 @@ func update_texture(undo := false) -> void:
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if undo or _is_redo() or tile_editing_mode != TileSetPanel.TileEditingMode.MANUAL:
 		super.update_texture(undo)
+		editing_images.clear()
 		return
 
 	for i in cells.size():
