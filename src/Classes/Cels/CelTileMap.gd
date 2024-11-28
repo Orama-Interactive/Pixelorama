@@ -59,6 +59,11 @@ class Cell:
 			text += "T"
 		return text
 
+	func remove_transformations() -> void:
+		flip_h = false
+		flip_v = false
+		transpose = false
+
 	func serialize() -> Dictionary:
 		return {"index": index, "flip_h": flip_h, "flip_v": flip_v, "transpose": transpose}
 
@@ -177,12 +182,15 @@ func update_tileset() -> void:
 			for j in range(1, tileset.tiles.size()):
 				var tile := tileset.tiles[j]
 				if tiles_equal(i, image_portion, tile.image):
-					cells[i].index = j
+					if cells[i].index != j:
+						cells[i].index = j
+						cells[i].remove_transformations()
 					found_tile = true
 					break
 			if not found_tile:
 				tileset.add_tile(image_portion, self)
 				cells[i].index = tileset.tiles.size() - 1
+				cells[i].remove_transformations()
 
 
 ## Cases:[br]
@@ -227,6 +235,7 @@ func _handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 	if image_portion.is_invisible():
 		# Case 0: The cell is transparent.
 		cells[i].index = 0
+		cells[i].remove_transformations()
 		if index > 0:
 			# Case 0.5: The cell is transparent and mapped to a tile.
 			var is_removed := tileset.unuse_tile_at_index(index, self)
@@ -279,6 +288,7 @@ func _handle_auto_editing_mode(i: int, image_portion: Image) -> void:
 				# exist in the tileset as a tile,
 				# and the currently mapped tile no longer exists in the tileset.
 				tileset.replace_tile_at(image_portion, index, self)
+	cells[i].remove_transformations()
 
 
 ## Re-indexes all [member cells] that are larger or equal to [param index],
