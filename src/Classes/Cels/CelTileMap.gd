@@ -359,7 +359,7 @@ func _is_redo() -> bool:
 
 ## If the tileset has been modified by another tile, make sure to also update it here.
 func _on_tileset_updated(cel: CelTileMap) -> void:
-	if cel == self or not is_instance_valid(cel):
+	if cel == self or not is_instance_valid(cel) or cel in link_set["cels"]:
 		return
 	_update_cel_portions()
 	Global.canvas.update_all_layers = true
@@ -432,12 +432,14 @@ func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) ->
 		for i in cell_indices.size():
 			var cell_data: Dictionary = cell_indices[i]
 			undo_redo.add_undo_method(cells[i].deserialize.bind(cell_data))
-		undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.get("tileset"), self))
+		if dict.has("tileset"):
+			undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
 	else:
 		for i in cell_indices.size():
 			var cell_data: Dictionary = cell_indices[i]
 			undo_redo.add_do_method(cells[i].deserialize.bind(cell_data))
-		undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.get("tileset"), self))
+		if dict.has("tileset"):
+			undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
 
 
 func serialize() -> Dictionary:
