@@ -20,5 +20,7 @@ func _draw() -> void:
 			var pos := tilemap_cel.get_cell_coords_in_image(i)
 			pos.y += tilemap_cel.tileset.tile_size.y
 			var text := tile_data.to_string()
-			draw_multiline_string(Themes.get_font(), pos * 2, text, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE)
+			draw_multiline_string(
+				Themes.get_font(), pos * 2, text, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE
+			)
 	draw_set_transform(position, rotation, scale)
