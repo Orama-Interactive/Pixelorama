@@ -158,6 +158,8 @@ func transform_tile(
 
 func update_tileset() -> void:
 	editing_images.clear()
+	if TileSetPanel.placing_tiles:
+		return
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	for i in cells.size():
 		var coords := get_cell_coords_in_image(i)
