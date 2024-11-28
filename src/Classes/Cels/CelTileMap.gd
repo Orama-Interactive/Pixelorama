@@ -83,8 +83,12 @@ func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> v
 ## the [member tileset]'s tile of index [param index].
 func set_index(cell_position: int, index: int) -> void:
 	index = clampi(index, 0, tileset.tiles.size() - 1)
-	tileset.tiles[index].times_used += 1
-	cells[cell_position].index = index
+	var previous_index := cells[cell_position].index
+	if previous_index != index:
+		if previous_index > 0:
+			tileset.tiles[previous_index].times_used -= 1
+		tileset.tiles[index].times_used += 1
+		cells[cell_position].index = index
 	cells[cell_position].flip_h = TileSetPanel.is_flipped_h
 	cells[cell_position].flip_v = TileSetPanel.is_flipped_v
 	cells[cell_position].transpose = TileSetPanel.is_transposed
@@ -313,7 +317,7 @@ func _update_cell(cell_position: int) -> void:
 	var transformed_tile := transform_tile(
 		current_tile, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
 	)
-	if not tiles_equal(cell_position, image_portion, transformed_tile):
+	if image_portion.get_data() != transformed_tile.get_data():
 		var tile_size := transformed_tile.get_size()
 		image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
 		image.convert_rgb_to_indexed()
