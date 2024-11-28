@@ -316,6 +316,7 @@ func _update_cell(cell_position: int) -> void:
 	if not tiles_equal(cell_position, image_portion, transformed_tile):
 		var tile_size := transformed_tile.get_size()
 		image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
+		image.convert_rgb_to_indexed()
 
 
 func _update_cel_portions() -> void:
