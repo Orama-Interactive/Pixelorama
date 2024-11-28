@@ -568,12 +568,12 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	if !undo_data_tmp:
 		print("No undo data found!")
 		return
-	var redo_data := get_undo_data(undo_data_tmp["undo_image"])
 	var project := Global.current_project
-
+	project.update_tilesets(undo_data_tmp)
+	var redo_data := get_undo_data(undo_data_tmp["undo_image"])
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, undo_data_tmp, project)
+	project.deserialize_cel_undo_data(redo_data, undo_data_tmp)
 	project.undo_redo.add_do_property(
 		self, "big_bounding_rectangle", redo_data["big_bounding_rectangle"]
 	)
@@ -604,15 +604,14 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	data["undo_image"] = undo_image
 
 	if undo_image:
-		var images := _get_selected_draw_images()
-		for image in images:
-			image.add_data_to_dictionary(data)
-
+		Global.current_project.serialize_cel_undo_data(_get_selected_draw_cels(), data)
 	return data
 
 
-func _get_selected_draw_cels() -> Array[PixelCel]:
-	var cels: Array[PixelCel] = []
+# TODO: Change BaseCel to PixelCel if Godot ever fixes issues
+# with typed arrays being cast into other types.
+func _get_selected_draw_cels() -> Array[BaseCel]:
+	var cels: Array[BaseCel] = []
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]

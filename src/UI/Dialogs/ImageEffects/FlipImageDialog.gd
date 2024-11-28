@@ -47,11 +47,11 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
 	_flip_selection(project)
-
+	project.update_tilesets(undo_data)
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	if redo_data.has("outline_offset"):
 		project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
 		project.undo_redo.add_undo_property(
@@ -66,14 +66,10 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 
 func _get_undo_data(project: Project) -> Dictionary:
 	var affect_selection := selection_checkbox.button_pressed and project.has_selection
-	var data := {}
+	var data := super._get_undo_data(project)
 	if affect_selection:
 		data[project.selection_map] = project.selection_map.data
 		data["outline_offset"] = project.selection_offset
-
-	var images := _get_selected_draw_images(project)
-	for image in images:
-		data[image] = image.data
 	return data
 
 

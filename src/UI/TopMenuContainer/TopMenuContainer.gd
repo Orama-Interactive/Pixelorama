@@ -722,21 +722,25 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 	var old_color_mode := project.color_mode
 	var redo_data := {}
 	var undo_data := {}
+	var pixel_cels: Array[BaseCel]
+	# We need to do it this way because Godot
+	# doesn't like casting typed arrays into other types.
 	for cel in project.get_all_pixel_cels():
-		cel.get_image().add_data_to_dictionary(undo_data)
+		pixel_cels.append(cel)
+	project.serialize_cel_undo_data(pixel_cels, undo_data)
 	# Change the color mode directly before undo/redo in order to affect the images,
 	# so we can store them as redo data.
 	if id == ColorModes.RGBA:
 		project.color_mode = Image.FORMAT_RGBA8
 	else:
 		project.color_mode = Project.INDEXED_MODE
-	for cel in project.get_all_pixel_cels():
-		cel.get_image().add_data_to_dictionary(redo_data)
+	project.update_tilesets(undo_data)
+	project.serialize_cel_undo_data(pixel_cels, redo_data)
 	project.undo_redo.create_action("Change color mode")
 	project.undos += 1
 	project.undo_redo.add_do_property(project, "color_mode", project.color_mode)
 	project.undo_redo.add_undo_property(project, "color_mode", old_color_mode)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_undo_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))

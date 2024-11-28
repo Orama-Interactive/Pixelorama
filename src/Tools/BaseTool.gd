@@ -344,6 +344,17 @@ func _get_draw_image() -> ImageExtended:
 	return Global.current_project.get_current_cel().get_image()
 
 
+func _get_selected_draw_cels() -> Array[BaseCel]:
+	var cels: Array[BaseCel]
+	var project := Global.current_project
+	for cel_index in project.selected_cels:
+		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		if not cel is PixelCel:
+			continue
+		cels.append(cel)
+	return cels
+
+
 func _get_selected_draw_images() -> Array[ImageExtended]:
 	var images: Array[ImageExtended] = []
 	var project := Global.current_project

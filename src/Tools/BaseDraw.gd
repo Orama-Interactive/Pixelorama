@@ -272,11 +272,9 @@ func prepare_undo(action: String) -> void:
 
 
 func commit_undo() -> void:
-	for cel in _undo_data:
-		if cel is CelTileMap:
-			(cel as CelTileMap).update_tileset()
-	var redo_data := _get_undo_data()
 	var project := Global.current_project
+	project.update_tilesets(_undo_data)
+	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
 	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -284,13 +282,7 @@ func commit_undo() -> void:
 		layer = project.current_layer
 
 	project.undos += 1
-	Global.undo_redo_compress_images(redo_data, _undo_data, project)
-	for cel in redo_data:
-		if cel is CelTileMap:
-			(cel as CelTileMap).deserialize_undo_data(redo_data[cel], project.undo_redo, false)
-	for cel in _undo_data:
-		if cel is CelTileMap:
-			(cel as CelTileMap).deserialize_undo_data(_undo_data[cel], project.undo_redo, true)
+	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
@@ -766,13 +758,7 @@ func _get_undo_data() -> Dictionary:
 			if not cel is PixelCel:
 				continue
 			cels.append(cel)
-	for cel in cels:
-		if not cel is PixelCel:
-			continue
-		var image := (cel as PixelCel).get_image()
-		image.add_data_to_dictionary(data)
-		if cel is CelTileMap:
-			data[cel] = (cel as CelTileMap).serialize_undo_data()
+	project.serialize_cel_undo_data(cels, data)
 	return data
 
 

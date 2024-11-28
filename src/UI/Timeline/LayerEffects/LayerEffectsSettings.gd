@@ -149,34 +149,37 @@ func _delete_effect(effect: LayerEffect) -> void:
 
 
 func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
+	var project := Global.current_project
 	var index := layer.effects.find(effect)
 	var redo_data := {}
 	var undo_data := {}
-	for frame in Global.current_project.frames:
+	for frame in project.frames:
 		var cel := frame.cels[layer.index]
-		var new_image := ImageExtended.new()
 		var cel_image := cel.get_image()
+		if cel is CelTileMap:
+			undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 		if cel_image is ImageExtended:
-			new_image.is_indexed = cel_image.is_indexed
-		new_image.copy_from_custom(cel_image)
-		var image_size := new_image.get_size()
-		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(new_image, effect.shader, effect.params, image_size)
-		if cel_image is ImageExtended:
-			redo_data[cel_image.indices_image] = new_image.indices_image.data
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data
-		redo_data[cel_image] = new_image.data
 		undo_data[cel_image] = cel_image.data
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Apply layer effect")
-	Global.undo_redo_compress_images(redo_data, undo_data)
-	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
-	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
-	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
-	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
-	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	Global.current_project.undo_redo.commit_action()
+		var image_size := cel_image.get_size()
+		var shader_image_effect := ShaderImageEffect.new()
+		shader_image_effect.generate_image(cel_image, effect.shader, effect.params, image_size)
+		if cel is CelTileMap:
+			(cel as CelTileMap).update_tileset()
+			redo_data[cel] = (cel as CelTileMap).serialize_undo_data()
+		if cel_image is ImageExtended:
+			redo_data[cel_image.indices_image] = cel_image.indices_image.data
+		redo_data[cel_image] = cel_image.data
+	project.undos += 1
+	project.undo_redo.create_action("Apply layer effect")
+	project.deserialize_cel_undo_data(redo_data, undo_data)
+	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
+	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
+	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
 	effect_container.get_child(index).queue_free()
 
 

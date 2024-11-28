@@ -651,6 +651,26 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 	return cels
 
 
+func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
+	for cel in cels:
+		if not cel is PixelCel:
+			continue
+		var image := (cel as PixelCel).get_image()
+		image.add_data_to_dictionary(data)
+		if cel is CelTileMap:
+			data[cel] = (cel as CelTileMap).serialize_undo_data()
+
+
+func deserialize_cel_undo_data(redo_data: Dictionary, undo_data: Dictionary) -> void:
+	Global.undo_redo_compress_images(redo_data, undo_data, self)
+	for cel in redo_data:
+		if cel is CelTileMap:
+			(cel as CelTileMap).deserialize_undo_data(redo_data[cel], undo_redo, false)
+	for cel in undo_data:
+		if cel is CelTileMap:
+			(cel as CelTileMap).deserialize_undo_data(undo_data[cel], undo_redo, true)
+
+
 ## Re-order layers to take each cel's z-index into account. If all z-indexes are 0,
 ## then the order of drawing is the same as the order of the layers itself.
 func order_layers(frame_index := current_frame) -> void:
@@ -954,3 +974,9 @@ func reorder_reference_image(from: int, to: int) -> void:
 
 func add_tileset(tileset: TileSetCustom) -> void:
 	tilesets.append(tileset)
+
+
+func update_tilesets(cel_dictionary: Dictionary) -> void:
+	for cel in cel_dictionary:
+		if cel is CelTileMap:
+			(cel as CelTileMap).update_tileset()
