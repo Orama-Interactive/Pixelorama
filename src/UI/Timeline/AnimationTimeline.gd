@@ -476,6 +476,8 @@ func copy_frames(
 				)
 				if src_cel.selected != null:
 					selected_id = src_cel.selected.id
+			elif src_cel is CelTileMap:
+				new_cel = CelTileMap.new(src_cel.tileset)
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -897,7 +899,11 @@ func _on_CloneLayer_pressed() -> void:
 	var clones: Array[BaseLayer] = []
 	var cels := []  # 2D Array of Cels
 	for src_layer in source_layers:
-		var cl_layer: BaseLayer = src_layer.get_script().new(project)
+		var cl_layer: BaseLayer
+		if src_layer is LayerTileMap:
+			cl_layer = LayerTileMap.new(project, src_layer.tileset)
+		else:
+			cl_layer = src_layer.get_script().new(project)
 		cl_layer.project = project
 		cl_layer.index = src_layer.index
 		var src_layer_data: Dictionary = src_layer.serialize()
@@ -915,6 +921,8 @@ func _on_CloneLayer_pressed() -> void:
 				new_cel = Cel3D.new(
 					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
+			elif src_cel is CelTileMap:
+				new_cel = CelTileMap.new(src_cel.tileset)
 			else:
 				new_cel = src_cel.get_script().new()
 

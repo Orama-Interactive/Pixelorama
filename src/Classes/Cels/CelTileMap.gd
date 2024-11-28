@@ -74,7 +74,7 @@ class Cell:
 		transpose = dict.get("transpose", transpose)
 
 
-func _init(_tileset: TileSetCustom, _image: ImageExtended, _opacity := 1.0) -> void:
+func _init(_tileset: TileSetCustom, _image := ImageExtended.new(), _opacity := 1.0) -> void:
 	super._init(_image, _opacity)
 	tileset = _tileset
 
@@ -359,7 +359,9 @@ func _is_redo() -> bool:
 
 ## If the tileset has been modified by another tile, make sure to also update it here.
 func _on_tileset_updated(cel: CelTileMap) -> void:
-	if cel == self or not is_instance_valid(cel) or cel in link_set["cels"]:
+	if cel == self or not is_instance_valid(cel):
+		return
+	if link_set != null and cel in link_set["cels"]:
 		return
 	_update_cel_portions()
 	Global.canvas.update_all_layers = true
@@ -367,6 +369,12 @@ func _on_tileset_updated(cel: CelTileMap) -> void:
 
 
 # Overridden Methods:
+func set_content(content, texture: ImageTexture = null) -> void:
+	super.set_content(content, texture)
+	_resize_cells(image.get_size())
+	_re_index_all_cells()
+
+
 func update_texture(undo := false) -> void:
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if undo or _is_redo() or tile_editing_mode != TileSetPanel.TileEditingMode.MANUAL:
