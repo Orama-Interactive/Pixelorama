@@ -232,6 +232,7 @@ func _setup_view_menu() -> void:
 		"Mirror View": "mirror_view",
 		"Show Grid": "show_grid",
 		"Show Pixel Grid": "show_pixel_grid",
+		"Show Pixel Indices": "show_pixel_indices",
 		"Show Rulers": "show_rulers",
 		"Show Guides": "show_guides",
 		"Show Mouse Guides": "",
@@ -260,6 +261,9 @@ func _setup_view_menu() -> void:
 	var draw_grid: bool = Global.config_cache.get_value("view_menu", "draw_grid", Global.draw_grid)
 	var draw_pixel_grid: bool = Global.config_cache.get_value(
 		"view_menu", "draw_pixel_grid", Global.draw_pixel_grid
+	)
+	var show_pixel_indices: bool = Global.config_cache.get_value(
+		"view_menu", "show_pixel_indices", Global.show_pixel_indices
 	)
 	var show_rulers: bool = Global.config_cache.get_value(
 		"view_menu", "show_rulers", Global.show_rulers
@@ -295,6 +299,8 @@ func _setup_view_menu() -> void:
 		_toggle_show_guides()
 	if show_mouse_guides != Global.show_mouse_guides:
 		_toggle_show_mouse_guides()
+	if show_pixel_indices != Global.show_pixel_indices:
+		_toggle_show_pixel_indices()
 	if display_layer_effects != Global.display_layer_effects:
 		Global.display_layer_effects = display_layer_effects
 	if snap_to_rectangular_grid_boundary != Global.snap_to_rectangular_grid_boundary:
@@ -666,6 +672,8 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_guides()
 		Global.ViewMenu.SHOW_MOUSE_GUIDES:
 			_toggle_show_mouse_guides()
+		Global.ViewMenu.SHOW_PIXEL_INDICES:
+			_toggle_show_pixel_indices()
 		Global.ViewMenu.DISPLAY_LAYER_EFFECTS:
 			Global.display_layer_effects = not Global.display_layer_effects
 		_:
@@ -818,6 +826,11 @@ func _toggle_show_grid() -> void:
 func _toggle_show_pixel_grid() -> void:
 	Global.draw_pixel_grid = !Global.draw_pixel_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_PIXEL_GRID, Global.draw_pixel_grid)
+
+
+func _toggle_show_pixel_indices() -> void:
+	Global.show_pixel_indices = !Global.show_pixel_indices
+	view_menu.set_item_checked(Global.ViewMenu.SHOW_PIXEL_INDICES, Global.show_pixel_indices)
 
 
 func _toggle_show_rulers() -> void:

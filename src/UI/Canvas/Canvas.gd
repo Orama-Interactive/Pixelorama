@@ -15,6 +15,7 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var currently_visible_frame := $CurrentlyVisibleFrame as SubViewport
 @onready var current_frame_drawer := $CurrentlyVisibleFrame/CurrentFrameDrawer as Node2D
 @onready var tile_mode := $TileMode as Node2D
+@onready var color_index := $ColorIndex as Node2D
 @onready var pixel_grid := $PixelGrid as Node2D
 @onready var grid := $Grid as Node2D
 @onready var selection := $Selection as SelectionNode
@@ -67,6 +68,7 @@ func _draw() -> void:
 	current_frame_drawer.queue_redraw()
 	tile_mode.queue_redraw()
 	draw_set_transform(position, rotation, scale)
+	color_index.queue_redraw()
 
 
 func _input(event: InputEvent) -> void:

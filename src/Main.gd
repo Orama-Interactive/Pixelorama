@@ -601,6 +601,7 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("window", "size", get_window().size)
 	Global.config_cache.set_value("view_menu", "draw_grid", Global.draw_grid)
 	Global.config_cache.set_value("view_menu", "draw_pixel_grid", Global.draw_pixel_grid)
+	Global.config_cache.set_value("view_menu", "show_pixel_indices", Global.show_pixel_indices)
 	Global.config_cache.set_value("view_menu", "show_rulers", Global.show_rulers)
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)

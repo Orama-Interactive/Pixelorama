@@ -12,6 +12,7 @@ enum Dynamics { NONE, PRESSURE, VELOCITY }
 const XY_LINE := Vector2(-0.707107, 0.707107)
 const X_MINUS_Y_LINE := Vector2(0.707107, 0.707107)
 
+var active_button := -1
 var picking_color_for := MOUSE_BUTTON_LEFT
 var horizontal_mirror := false
 var vertical_mirror := false
@@ -238,7 +239,6 @@ var _right_tools_per_layer_type := {
 	Global.LayerTypes.THREE_D: "Pan",
 }
 var _tool_buttons: Node
-var _active_button := -1
 var _last_position := Vector2i(Vector2.INF)
 
 
@@ -627,32 +627,28 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 			change_layer_automatically(draw_pos)
 			return
 
-	if event.is_action_pressed(&"activate_left_tool") and _active_button == -1 and not pen_inverted:
-		_active_button = MOUSE_BUTTON_LEFT
-		_slots[_active_button].tool_node.draw_start(draw_pos)
-	elif event.is_action_released(&"activate_left_tool") and _active_button == MOUSE_BUTTON_LEFT:
-		_slots[_active_button].tool_node.draw_end(draw_pos)
-		_active_button = -1
+	if event.is_action_pressed(&"activate_left_tool") and active_button == -1 and not pen_inverted:
+		active_button = MOUSE_BUTTON_LEFT
+		_slots[active_button].tool_node.draw_start(draw_pos)
+	elif event.is_action_released(&"activate_left_tool") and active_button == MOUSE_BUTTON_LEFT:
+		_slots[active_button].tool_node.draw_end(draw_pos)
+		active_button = -1
 	elif (
 		(
 			event.is_action_pressed(&"activate_right_tool")
-			and _active_button == -1
+			and active_button == -1
 			and not pen_inverted
 		)
-		or (
-			event.is_action_pressed(&"activate_left_tool") and _active_button == -1 and pen_inverted
-		)
+		or event.is_action_pressed(&"activate_left_tool") and active_button == -1 and pen_inverted
 	):
-		_active_button = MOUSE_BUTTON_RIGHT
-		_slots[_active_button].tool_node.draw_start(draw_pos)
+		active_button = MOUSE_BUTTON_RIGHT
+		_slots[active_button].tool_node.draw_start(draw_pos)
 	elif (
-		(event.is_action_released(&"activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT)
-		or (
-			event.is_action_released(&"activate_left_tool") and _active_button == MOUSE_BUTTON_RIGHT
-		)
+		(event.is_action_released(&"activate_right_tool") and active_button == MOUSE_BUTTON_RIGHT)
+		or event.is_action_released(&"activate_left_tool") and active_button == MOUSE_BUTTON_RIGHT
 	):
-		_slots[_active_button].tool_node.draw_end(draw_pos)
-		_active_button = -1
+		_slots[active_button].tool_node.draw_end(draw_pos)
+		active_button = -1
 
 	if event is InputEventMouseMotion:
 		pen_pressure = event.pressure
@@ -683,8 +679,8 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 			_last_position = position
 			_slots[MOUSE_BUTTON_LEFT].tool_node.cursor_move(position)
 			_slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_move(position)
-			if _active_button != -1:
-				_slots[_active_button].tool_node.draw_move(draw_pos)
+			if active_button != -1:
+				_slots[active_button].tool_node.draw_move(draw_pos)
 
 	var project := Global.current_project
 	var text := "[%s×%s]" % [project.size.x, project.size.y]

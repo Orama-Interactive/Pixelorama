@@ -82,17 +82,20 @@ func scroll_palette(origin: Vector2i) -> void:
 
 ## Called when the color changes, either the left or the right, determined by [param mouse_button].
 ## If current palette has [param target_color] as a [Color], then select it.
+## This is helpful when we select color indirectly (e.g through colorpicker)
 func find_and_select_color(target_color: Color, mouse_button: int) -> void:
 	if not is_instance_valid(current_palette):
 		return
-	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
+	var selected_index := Palettes.current_palette_get_selected_color_index(mouse_button)
+	if get_swatch_color(selected_index) == target_color:  # Color already selected
+		return
 	for color_ind in swatches.size():
 		if (
 			target_color.is_equal_approx(swatches[color_ind].color)
 			or target_color.to_html() == swatches[color_ind].color.to_html()
 		):
 			var index := convert_grid_index_to_palette_index(color_ind)
-			select_swatch(mouse_button, index, old_index)
+			select_swatch(mouse_button, index, selected_index)
 			match mouse_button:
 				MOUSE_BUTTON_LEFT:
 					Palettes.left_selected_color = index

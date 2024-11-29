@@ -78,9 +78,14 @@ func update_palette() -> void:
 		return
 	if palette.size() != current_palette.colors_max:
 		palette.resize(current_palette.colors_max)
-		palette.fill(TRANSPARENT)
+	palette.fill(TRANSPARENT)
 	for i in current_palette.colors:
-		palette[i] = current_palette.colors[i].color
+		# Due to the decimal nature of the color values, some values get rounded off
+		# unintentionally.
+		# Even though the decimal values change, the HTML code remains the same after the change.
+		# So we're using this trick to convert the values back to how they are shown in
+		# the palette.
+		palette[i] = Color(current_palette.colors[i].color.to_html())
 
 
 ## Displays the actual RGBA values of each pixel in the image from indexed mode.
@@ -142,6 +147,13 @@ func set_pixelv_custom(point: Vector2i, color: Color) -> void:
 		if not color.is_equal_approx(TRANSPARENT):
 			if palette.has(color):
 				color_index = palette.find(color)
+				# If the color selected in the palette is the same then it should take prioity.
+				var selected_index = Palettes.current_palette_get_selected_color_index(
+					Tools.active_button
+				)
+				if selected_index != -1:
+					if palette[selected_index].is_equal_approx(color):
+						color_index = selected_index
 			else:  # Find the most similar color
 				var smaller_distance := color_distance(color, palette[0])
 				for i in palette.size():
