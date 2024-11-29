@@ -8,7 +8,7 @@ extends RefCounted
 
 ## Emitted every time the tileset changes, such as when a tile is added, removed or replaced.
 ## The [CelTileMap] that the changes are coming from is referenced in the [param cel] parameter.
-signal updated(cel: CelTileMap)
+signal updated(cel: CelTileMap, replace_index: int)
 
 ## The tileset's name.
 var name := ""
@@ -52,7 +52,7 @@ func _init(_tile_size: Vector2i, _name := "") -> void:
 func add_tile(image: Image, cel: CelTileMap) -> void:
 	var tile := Tile.new(image)
 	tiles.append(tile)
-	updated.emit(cel)
+	updated.emit(cel, -1)
 
 
 ## Adds a new [param image] as a tile in a given [param position] in the tileset.
@@ -61,7 +61,7 @@ func add_tile(image: Image, cel: CelTileMap) -> void:
 func insert_tile(image: Image, position: int, cel: CelTileMap) -> void:
 	var tile := Tile.new(image)
 	tiles.insert(position, tile)
-	updated.emit(cel)
+	updated.emit(cel, -1)
 
 
 ## Reduces a tile's [member TileSetCustom.Tile.times_used] by one,
@@ -82,14 +82,14 @@ func unuse_tile_at_index(index: int, cel: CelTileMap) -> bool:
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from.
 func remove_tile_at_index(index: int, cel: CelTileMap) -> void:
 	tiles.remove_at(index)
-	updated.emit(cel)
+	updated.emit(cel, -1)
 
 
 ## Replaces a tile in a given [param index] in the tileset with a [param new_tile].
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from.
 func replace_tile_at(new_tile: Image, index: int, cel: CelTileMap) -> void:
 	tiles[index].image.copy_from(new_tile)
-	updated.emit(cel)
+	updated.emit(cel, index)
 
 
 ## Finds and returns the position of a tile [param image] inside the tileset.
@@ -122,7 +122,7 @@ func clear_tileset(cel: CelTileMap) -> void:
 	tiles.clear()
 	var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
 	tiles.append(Tile.new(empty_image))
-	updated.emit(cel)
+	updated.emit(cel, -1)
 	_tileset_has_been_cleared = true
 	set_deferred("_tileset_has_been_cleared", false)
 
@@ -159,4 +159,4 @@ func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
 		tiles[i] = Tile.new(image)
 		tiles[i].times_used = tile_data[2]
 		i += 1
-	updated.emit(cel)
+	updated.emit(cel, -1)

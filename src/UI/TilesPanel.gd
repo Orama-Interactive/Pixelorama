@@ -77,10 +77,10 @@ func _on_cel_switched() -> void:
 		return
 	var cel := Global.current_project.get_current_cel() as CelTileMap
 	set_tileset(cel.tileset)
-	_update_tileset(cel)
+	_update_tileset(cel, -1)
 
 
-func _update_tileset(cel: BaseCel) -> void:
+func _update_tileset(cel: BaseCel, _replace_index: int) -> void:
 	_clear_tile_buttons()
 	if cel is not CelTileMap:
 		return

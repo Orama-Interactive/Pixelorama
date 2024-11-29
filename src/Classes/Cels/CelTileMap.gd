@@ -314,6 +314,11 @@ func _update_cell(cell_position: int) -> void:
 	var image_portion := image.get_region(rect)
 	var cell_data := cells[cell_position]
 	var index := cell_data.index
+	if index >= tileset.tiles.size():
+		printerr(
+			"Cell at position ", cell_position + 1, ", mapped to ", index, " is out of bounds!"
+		)
+		return
 	var current_tile := tileset.tiles[index].image
 	var transformed_tile := transform_tile(
 		current_tile, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
@@ -357,12 +362,15 @@ func _is_redo() -> bool:
 
 
 ## If the tileset has been modified by another tile, make sure to also update it here.
-func _on_tileset_updated(cel: CelTileMap) -> void:
+func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 	if cel == self or not is_instance_valid(cel):
 		return
 	if link_set != null and cel in link_set["cels"]:
 		return
-	_update_cel_portions()
+	if replace_index > -1:  # Manual mode
+		_update_cel_portions()
+	else:
+		_re_index_all_cells()
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 
