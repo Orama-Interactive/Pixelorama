@@ -719,17 +719,18 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 		return
 	image.convert(project.get_image_format())
 	var cel_image := (cel as PixelCel).get_image()
-	var new_cel_image := ImageExtended.create_custom(
-		project_width, project_height, false, project.get_image_format(), cel_image.is_indexed
-	)
-	new_cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-	new_cel_image.convert_rgb_to_indexed()
-	var redo_data := {}
-	new_cel_image.add_data_to_dictionary(redo_data, cel_image)
 	var undo_data := {}
+	if cel is CelTileMap:
+		undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 	cel_image.add_data_to_dictionary(undo_data)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
-
+	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+	cel_image.convert_rgb_to_indexed()
+	var redo_data := {}
+	if cel is CelTileMap:
+		(cel as CelTileMap).update_tileset()
+		redo_data[cel] = (cel as CelTileMap).serialize_undo_data()
+	cel_image.add_data_to_dictionary(redo_data)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_property(project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.change_cel.bind(frame_index, layer_index))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
