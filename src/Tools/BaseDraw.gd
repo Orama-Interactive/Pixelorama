@@ -104,7 +104,7 @@ func _on_InterpolateFactor_value_changed(value: float) -> void:
 	save_config()
 
 
-func _on_Color_changed(_color: Color, _button: int) -> void:
+func _on_Color_changed(_color_info: Dictionary, _button: int) -> void:
 	update_brush()
 
 

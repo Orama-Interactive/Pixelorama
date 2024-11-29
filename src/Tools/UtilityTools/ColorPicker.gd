@@ -67,22 +67,33 @@ func _pick_color(pos: Vector2i) -> void:
 	if pos.x < 0 or pos.y < 0:
 		return
 
-	var color := Color(0, 0, 0, 0)
 	var image := Image.new()
 	image.copy_from(_get_draw_image())
 	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
 		return
+
+	var color := Color(0, 0, 0, 0)
+	var palette_index = -1
 	match _mode:
 		TOP_COLOR:
 			var curr_frame := project.frames[project.current_frame]
 			for layer in project.layers.size():
 				var idx := (project.layers.size() - 1) - layer
 				if project.layers[idx].is_visible_in_hierarchy():
-					image = curr_frame.cels[idx].get_image()
+					var cel := curr_frame.cels[idx]
+					image = cel.get_image()
 					color = image.get_pixelv(pos)
+					# If image is indexed then get index as well
+					if cel is PixelCel:
+						if cel.image.is_indexed:
+							palette_index = cel.image.indices_image.get_pixel(pos.x, pos.y).r8 - 1
 					if not is_zero_approx(color.a):
 						break
 		CURRENT_LAYER:
 			color = image.get_pixelv(pos)
+			var current_cel = Global.current_project.get_current_cel()
+			if current_cel is PixelCel:
+				if current_cel.image.is_indexed:
+					palette_index = current_cel.image.index_image.get_pixel(pos.x, pos.y).r8 - 1
 	var button := MOUSE_BUTTON_LEFT if _color_slot == 0 else MOUSE_BUTTON_RIGHT
-	Tools.assign_color(color, button, false)
+	Tools.assign_color(color, button, false, palette_index)

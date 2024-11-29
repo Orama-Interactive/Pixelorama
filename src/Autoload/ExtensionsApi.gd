@@ -896,7 +896,7 @@ class SignalsAPI:
 	# TOOL RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever a tool changes color.[br]
-	## [b]Binds: [/b] It has two bind of type [Color] (indicating new color)
+	## [b]Binds: [/b] It has two bind of type [Color] (a dictionary with keys "color" and "index")
 	## and [int] (Indicating button that tool is assigned to, see [enum @GlobalScope.MouseButton])
 	func signal_tool_color_changed(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Tools.color_changed, callable, is_disconnecting)

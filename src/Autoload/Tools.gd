@@ -1,7 +1,7 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
-signal color_changed(color: Color, button: int)
+signal color_changed(color_info: Dictionary, button: int)
 signal config_changed(slot_idx: int, config: Dictionary)
 @warning_ignore("unused_signal")
 signal flip_rotated(flip_x, flip_y, rotate_90, rotate_180, rotate_270)
@@ -509,7 +509,7 @@ func swap_color() -> void:
 	assign_color(left, MOUSE_BUTTON_RIGHT, false)
 
 
-func assign_color(color: Color, button: int, change_alpha := true) -> void:
+func assign_color(color: Color, button: int, change_alpha := true, index: int = 0) -> void:
 	var c: Color = _slots[button].color
 	# This was requested by Issue #54 on GitHub
 	if color.a == 0 and change_alpha:
@@ -517,7 +517,8 @@ func assign_color(color: Color, button: int, change_alpha := true) -> void:
 			color.a = 1
 	_slots[button].color = color
 	Global.config_cache.set_value(_slots[button].kname, "color", color)
-	color_changed.emit(color, button)
+	var color_info := {"color": color, "index": index}
+	color_changed.emit(color_info, button)
 
 
 func get_assigned_color(button: int) -> Color:
