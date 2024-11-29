@@ -1104,11 +1104,15 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_do_property(bottom_cel, "image", new_bottom_image)
 			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			var redo_data := {}
 			var undo_data := {}
+			var redo_data := {}
+			if bottom_cel is CelTileMap:
+				undo_data[bottom_cel] = (bottom_cel as CelTileMap).serialize_undo_data()
+				(bottom_cel as CelTileMap).update_tileset(new_bottom_image)
+				redo_data[bottom_cel] = (bottom_cel as CelTileMap).serialize_undo_data()
 			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
 			bottom_image.add_data_to_dictionary(undo_data)
-			Global.undo_redo_compress_images(redo_data, undo_data, project)
+			project.deserialize_cel_undo_data(redo_data, undo_data)
 
 	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
 	project.undo_redo.add_undo_method(
