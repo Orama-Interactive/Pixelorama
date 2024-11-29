@@ -1107,9 +1107,9 @@ func _on_MergeDownLayer_pressed() -> void:
 			var undo_data := {}
 			var redo_data := {}
 			if bottom_cel is CelTileMap:
-				undo_data[bottom_cel] = (bottom_cel as CelTileMap).serialize_undo_data()
-				(bottom_cel as CelTileMap).update_tileset(new_bottom_image)
-				redo_data[bottom_cel] = (bottom_cel as CelTileMap).serialize_undo_data()
+				(bottom_cel as CelTileMap).serialize_undo_data_source_image(
+					new_bottom_image, redo_data, undo_data
+				)
 			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
 			bottom_image.add_data_to_dictionary(undo_data)
 			project.deserialize_cel_undo_data(redo_data, undo_data)

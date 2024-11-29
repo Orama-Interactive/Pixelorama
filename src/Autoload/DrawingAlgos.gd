@@ -535,9 +535,11 @@ func center(indices: Array) -> void:
 			tmp_centered.blend_rect(cel.image, used_rect, offset)
 			var centered := ImageExtended.new()
 			centered.copy_from_custom(tmp_centered, cel_image.is_indexed)
+			if cel is CelTileMap:
+				(cel as CelTileMap).serialize_undo_data_source_image(centered, redo_data, undo_data)
 			centered.add_data_to_dictionary(redo_data, cel_image)
 			cel_image.add_data_to_dictionary(undo_data)
-	Global.undo_redo_compress_images(redo_data, undo_data)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
@@ -546,15 +548,15 @@ func center(indices: Array) -> void:
 func scale_project(width: int, height: int, interpolation: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
-	for f in Global.current_project.frames:
-		for i in range(f.cels.size() - 1, -1, -1):
-			var cel := f.cels[i]
-			if not cel is PixelCel:
-				continue
-			var cel_image := (cel as PixelCel).get_image()
-			var sprite := _resize_image(cel_image, width, height, interpolation) as ImageExtended
-			sprite.add_data_to_dictionary(redo_data, cel_image)
-			cel_image.add_data_to_dictionary(undo_data)
+	for cel in Global.current_project.get_all_pixel_cels():
+		if not cel is PixelCel:
+			continue
+		var cel_image := (cel as PixelCel).get_image()
+		var sprite := _resize_image(cel_image, width, height, interpolation) as ImageExtended
+		if cel is CelTileMap:
+			(cel as CelTileMap).serialize_undo_data_source_image(sprite, redo_data, undo_data)
+		sprite.add_data_to_dictionary(redo_data, cel_image)
+		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
@@ -596,9 +598,9 @@ func _resize_image(
 func crop_to_selection() -> void:
 	if not Global.current_project.has_selection:
 		return
+	Global.canvas.selection.transform_content_confirm()
 	var redo_data := {}
 	var undo_data := {}
-	Global.canvas.selection.transform_content_confirm()
 	var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
 	# Loop through all the cels to crop them
 	for cel in Global.current_project.get_all_pixel_cels():
@@ -606,6 +608,8 @@ func crop_to_selection() -> void:
 		var tmp_cropped := cel_image.get_region(rect)
 		var cropped := ImageExtended.new()
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
+		if cel is CelTileMap:
+			(cel as CelTileMap).serialize_undo_data_source_image(cropped, redo_data, undo_data)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -617,18 +621,17 @@ func crop_to_selection() -> void:
 func crop_to_content() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var used_rect := Rect2i()
-	for f in Global.current_project.frames:
-		for cel in f.cels:
-			if not cel is PixelCel:
-				continue
-			var cel_used_rect := cel.get_image().get_used_rect()
-			if cel_used_rect == Rect2i(0, 0, 0, 0):  # If the cel has no content
-				continue
+	for cel in Global.current_project.get_all_pixel_cels():
+		if not cel is PixelCel:
+			continue
+		var cel_used_rect := cel.get_image().get_used_rect()
+		if cel_used_rect == Rect2i(0, 0, 0, 0):  # If the cel has no content
+			continue
 
-			if used_rect == Rect2i(0, 0, 0, 0):  # If we still haven't found the first cel with content
-				used_rect = cel_used_rect
-			else:
-				used_rect = used_rect.merge(cel_used_rect)
+		if used_rect == Rect2i(0, 0, 0, 0):  # If we still haven't found the first cel with content
+			used_rect = cel_used_rect
+		else:
+			used_rect = used_rect.merge(cel_used_rect)
 
 	# If no layer has any content, just return
 	if used_rect == Rect2i(0, 0, 0, 0):
@@ -644,6 +647,8 @@ func crop_to_content() -> void:
 		var tmp_cropped := cel_image.get_region(used_rect)
 		var cropped := ImageExtended.new()
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
+		if cel is CelTileMap:
+			(cel as CelTileMap).serialize_undo_data_source_image(cropped, redo_data, undo_data)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -662,6 +667,8 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 			cel_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i(offset_x, offset_y)
 		)
 		resized.convert_rgb_to_indexed()
+		if cel is CelTileMap:
+			(cel as CelTileMap).serialize_undo_data_source_image(resized, redo_data, undo_data)
 		resized.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -698,7 +705,7 @@ func general_do_and_undo_scale(
 	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
 	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
 	project.undo_redo.add_do_property(project.y_symmetry_axis, "points", new_y_symmetry_axis_points)
-	Global.undo_redo_compress_images(redo_data, undo_data)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_undo_property(project, "size", project.size)
 	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
 	project.undo_redo.add_undo_property(project, "y_symmetry_point", project.y_symmetry_point)

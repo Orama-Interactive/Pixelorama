@@ -156,13 +156,14 @@ func transform_tile(
 	return transformed_tile
 
 
-func update_tileset() -> void:
+func update_tileset(
+	tile_editing_mode := TileSetPanel.tile_editing_mode, source_image := image
+) -> void:
 	editing_images.clear()
-	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	for i in cells.size():
 		var coords := get_cell_coords_in_image(i)
 		var rect := Rect2i(coords, tileset.tile_size)
-		var image_portion := image.get_region(rect)
+		var image_portion := source_image.get_region(rect)
 		var index := cells[i].index
 		if index >= tileset.tiles.size():
 			printerr("Cell at position ", i + 1, ", mapped to ", index, " is out of bounds!")
@@ -416,11 +417,6 @@ func update_texture(undo := false) -> void:
 	super.update_texture(undo)
 
 
-func size_changed(new_size: Vector2i) -> void:
-	_resize_cells(new_size)
-	_re_index_all_cells()
-
-
 func serialize_undo_data() -> Dictionary:
 	var dict := {}
 	var cell_indices := []
@@ -432,20 +428,37 @@ func serialize_undo_data() -> Dictionary:
 	return dict
 
 
+func serialize_undo_data_source_image(
+	source_image: ImageExtended, redo_data: Dictionary, undo_data: Dictionary
+) -> void:
+	undo_data[self] = serialize_undo_data()
+	if source_image.get_size() != image.get_size():
+		_resize_cells(source_image.get_size())
+		tileset.clear_tileset(self)
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
+	update_tileset(tile_editing_mode, source_image)
+	redo_data[self] = serialize_undo_data()
+
+
 func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
 	var cell_indices = dict["cell_indices"]
 	if undo:
-		for i in cell_indices.size():
-			var cell_data: Dictionary = cell_indices[i]
-			undo_redo.add_undo_method(cells[i].deserialize.bind(cell_data))
+		undo_redo.add_undo_method(deserialize_cell_data.bind(cell_indices))
 		if dict.has("tileset"):
 			undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
 	else:
-		for i in cell_indices.size():
-			var cell_data: Dictionary = cell_indices[i]
-			undo_redo.add_do_method(cells[i].deserialize.bind(cell_data))
+		undo_redo.add_do_method(deserialize_cell_data.bind(cell_indices))
 		if dict.has("tileset"):
 			undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
+
+
+func deserialize_cell_data(cell_indices: Array) -> void:
+	_resize_cells(image.get_size())
+	for i in cell_indices.size():
+		var cell_data: Dictionary = cell_indices[i]
+		cells[i].deserialize(cell_data)
 
 
 func serialize() -> Dictionary:
