@@ -509,7 +509,7 @@ func swap_color() -> void:
 	assign_color(left, MOUSE_BUTTON_RIGHT, false)
 
 
-func assign_color(color: Color, button: int, change_alpha := true, index: int = 0) -> void:
+func assign_color(color: Color, button: int, change_alpha := true, index: int = -1) -> void:
 	var c: Color = _slots[button].color
 	# This was requested by Issue #54 on GitHub
 	if color.a == 0 and change_alpha:

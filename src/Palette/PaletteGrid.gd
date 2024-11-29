@@ -85,7 +85,7 @@ func scroll_palette(origin: Vector2i) -> void:
 ## This is helpful when we select color indirectly (e.g through colorpicker)
 func find_and_select_color(color_info: Dictionary, mouse_button: int) -> void:
 	var target_color: Color = color_info.get("color", Color(0, 0, 0, 0))
-	var palette_color_index: int = color_info.get("index", 0)
+	var palette_color_index: int = color_info.get("index", -1)
 	if not is_instance_valid(current_palette):
 		return
 	var selected_index := Palettes.current_palette_get_selected_color_index(mouse_button)
