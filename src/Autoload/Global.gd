@@ -897,12 +897,17 @@ func _initialize_keychain() -> void:
 		&"reference_rotate": Keychain.InputAction.new("", "Reference images", false),
 		&"reference_scale": Keychain.InputAction.new("", "Reference images", false),
 		&"reference_quick_menu": Keychain.InputAction.new("", "Reference images", false),
-		&"cancel_reference_transform": Keychain.InputAction.new("", "Reference images", false)
+		&"cancel_reference_transform": Keychain.InputAction.new("", "Reference images", false),
+		&"tile_rotate_left": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_rotate_right": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_flip_horizontal": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false)
 	}
 
 	Keychain.groups = {
 		"Canvas": Keychain.InputGroup.new("", false),
 		"Cursor movement": Keychain.InputGroup.new("Canvas"),
+		"Reference images": Keychain.InputGroup.new("Canvas"),
 		"Buttons": Keychain.InputGroup.new(),
 		"Tools": Keychain.InputGroup.new(),
 		"Left": Keychain.InputGroup.new("Tools"),
@@ -921,7 +926,7 @@ func _initialize_keychain() -> void:
 		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
-		"Reference images": Keychain.InputGroup.new("Canvas")
+		"Tileset panel": Keychain.InputGroup.new()
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 

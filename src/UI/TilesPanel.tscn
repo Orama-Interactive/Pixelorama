@@ -1,6 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfbragmmdwfbl"]
+[gd_scene load_steps=14 format=3 uid="uid://bfbragmmdwfbl"]
 
 [ext_resource type="Script" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
+[ext_resource type="Texture2D" uid="uid://bv7ldl8obhawm" path="res://assets/graphics/misc/icon_reload.png" id="2_r1kie"]
+[ext_resource type="Texture2D" uid="uid://bpsfilx47bw3r" path="res://assets/graphics/misc/mirror_x.svg" id="3_5o62r"]
+[ext_resource type="Texture2D" uid="uid://bk6iaxiyl74ih" path="res://assets/graphics/misc/mirror_y.svg" id="4_2xhnr"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_yr0lx"]
+action = &"tile_rotate_left"
+
+[sub_resource type="Shortcut" id="Shortcut_yas23"]
+events = [SubResource("InputEventAction_yr0lx")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_g6d5p"]
+action = &"tile_rotate_right"
+
+[sub_resource type="Shortcut" id="Shortcut_cmy2w"]
+events = [SubResource("InputEventAction_g6d5p")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_yh67l"]
+action = &"tile_flip_horizontal"
+
+[sub_resource type="Shortcut" id="Shortcut_ouoxo"]
+events = [SubResource("InputEventAction_yh67l")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_18g3a"]
+action = &"tile_flip_vertical"
+
+[sub_resource type="Shortcut" id="Shortcut_jj4yy"]
+events = [SubResource("InputEventAction_18g3a")]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_uxnt0"]
 
@@ -18,28 +45,79 @@ layout_mode = 2
 [node name="PlaceTiles" type="CheckBox" parent="VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Place tiles"
+text = "Draw tiles"
 
 [node name="TransformButtonsContainer" type="HFlowContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="FlipHorizontalButton" type="Button" parent="VBoxContainer/TransformButtonsContainer"]
+[node name="RotateLeftButton" type="Button" parent="VBoxContainer/TransformButtonsContainer" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+tooltip_text = "Rotate tile left (counterclockwise)"
 mouse_default_cursor_shape = 2
-toggle_mode = true
-text = "H"
+shortcut = SubResource("Shortcut_yas23")
 
-[node name="FlipVerticalButton" type="Button" parent="VBoxContainer/TransformButtonsContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-toggle_mode = true
-text = "V"
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TransformButtonsContainer/RotateLeftButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r1kie")
+stretch_mode = 3
 
-[node name="TransposeButton" type="Button" parent="VBoxContainer/TransformButtonsContainer"]
+[node name="RotateRightButton" type="Button" parent="VBoxContainer/TransformButtonsContainer" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+tooltip_text = "Rotate tile right (clockwise)"
 mouse_default_cursor_shape = 2
-toggle_mode = true
-text = "T"
+shortcut = SubResource("Shortcut_cmy2w")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TransformButtonsContainer/RotateRightButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r1kie")
+stretch_mode = 3
+flip_h = true
+
+[node name="FlipHorizontalButton" type="Button" parent="VBoxContainer/TransformButtonsContainer" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Flip tile horizontally"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_ouoxo")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TransformButtonsContainer/FlipHorizontalButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_5o62r")
+stretch_mode = 3
+
+[node name="FlipVerticalButton" type="Button" parent="VBoxContainer/TransformButtonsContainer" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Flip tile vertically"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_jj4yy")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TransformButtonsContainer/FlipVerticalButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_2xhnr")
+stretch_mode = 3
 
 [node name="ModeButtonsContainer" type="HFlowContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -74,9 +152,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="toggled" from="VBoxContainer/PlaceTiles" to="." method="_on_place_tiles_toggled"]
-[connection signal="toggled" from="VBoxContainer/TransformButtonsContainer/FlipHorizontalButton" to="." method="_on_flip_horizontal_button_toggled"]
-[connection signal="toggled" from="VBoxContainer/TransformButtonsContainer/FlipVerticalButton" to="." method="_on_flip_vertical_button_toggled"]
-[connection signal="toggled" from="VBoxContainer/TransformButtonsContainer/TransposeButton" to="." method="_on_transpose_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
+[connection signal="pressed" from="VBoxContainer/TransformButtonsContainer/RotateRightButton" to="." method="_on_rotate_pressed" binds= [true]]
+[connection signal="pressed" from="VBoxContainer/TransformButtonsContainer/FlipHorizontalButton" to="." method="_on_flip_horizontal_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TransformButtonsContainer/FlipVerticalButton" to="." method="_on_flip_vertical_button_pressed"]
 [connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Manual" to="." method="_on_manual_toggled"]
 [connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Auto" to="." method="_on_auto_toggled"]
 [connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Stack" to="." method="_on_stack_toggled"]

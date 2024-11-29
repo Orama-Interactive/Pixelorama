@@ -3401,3 +3401,23 @@ msgstr ""
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tile size:"
 msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Draw tiles"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile left (counterclockwise)"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile right (clockwise)"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile horizontally"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile vertically"
+msgstr ""

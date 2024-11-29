@@ -6,6 +6,13 @@ enum TileEditingMode { MANUAL, AUTO, STACK }
 const TRANSPARENT_CHECKER := preload("res://src/UI/Nodes/TransparentChecker.tscn")
 const MIN_BUTTON_SIZE := 36
 const MAX_BUTTON_SIZE := 144
+## A matrix with every possible flip/transpose combination,
+## sorted by what comes next when you rotate.
+## Taken from Godot's rotation matrix found in:
+## https://github.com/godotengine/godot/blob/master/editor/plugins/tiles/tile_map_layer_editor.cpp
+const ROTATION_MATRIX: Array[bool] = [
+	0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1
+]
 
 static var placing_tiles := false:
 	set(value):
@@ -41,12 +48,15 @@ var button_size := 36:
 			button.size = Vector2(button_size, button_size)
 
 @onready var place_tiles: CheckBox = $VBoxContainer/PlaceTiles
+@onready var transform_buttons_container: HFlowContainer = $VBoxContainer/TransformButtonsContainer
 @onready var tile_button_container: HFlowContainer = %TileButtonContainer
 
 
 func _ready() -> void:
 	Tools.selected_tile_index_changed.connect(select_tile)
 	Global.cel_switched.connect(_on_cel_switched)
+	for child: Button in transform_buttons_container.get_children():
+		Global.disable_button(child, true)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -147,6 +157,8 @@ func _clear_tile_buttons() -> void:
 
 func _on_place_tiles_toggled(toggled_on: bool) -> void:
 	placing_tiles = toggled_on
+	for child: Button in transform_buttons_container.get_children():
+		Global.disable_button(child, not toggled_on)
 
 
 func _on_manual_toggled(toggled_on: bool) -> void:
@@ -164,13 +176,29 @@ func _on_stack_toggled(toggled_on: bool) -> void:
 		tile_editing_mode = TileEditingMode.STACK
 
 
-func _on_flip_horizontal_button_toggled(toggled_on: bool) -> void:
-	is_flipped_h = toggled_on
+func _on_flip_horizontal_button_pressed() -> void:
+	is_flipped_h = not is_flipped_h
 
 
-func _on_flip_vertical_button_toggled(toggled_on: bool) -> void:
-	is_flipped_v = toggled_on
+func _on_flip_vertical_button_pressed() -> void:
+	is_flipped_v = not is_flipped_v
 
 
-func _on_transpose_button_toggled(toggled_on: bool) -> void:
-	is_transposed = toggled_on
+func _on_rotate_pressed(clockwise: bool) -> void:
+	for i in ROTATION_MATRIX.size():
+		var final_i := i
+		if (
+			is_flipped_h == ROTATION_MATRIX[i * 3]
+			&& is_flipped_v == ROTATION_MATRIX[i * 3 + 1]
+			&& is_transposed == ROTATION_MATRIX[i * 3 + 2]
+		):
+			if clockwise:
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + posmod(i - 1, 4)
+			else:
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + (i + 1) % 4
+			is_flipped_h = ROTATION_MATRIX[final_i * 3]
+			is_flipped_v = ROTATION_MATRIX[final_i * 3 + 1]
+			is_transposed = ROTATION_MATRIX[final_i * 3 + 2]
+			break
