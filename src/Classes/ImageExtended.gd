@@ -131,13 +131,13 @@ func resize_indices() -> void:
 	indices_image.crop(get_width(), get_height())
 
 
-## Equivalent of [method Image.set_pixel_custom],
+## Equivalent of [method Image.set_pixel],
 ## but also handles the logic necessary for indexed mode.
 func set_pixel_custom(x: int, y: int, color: Color) -> void:
 	set_pixelv_custom(Vector2i(x, y), color)
 
 
-## Equivalent of [method Image.set_pixelv_custom],
+## Equivalent of [method Image.set_pixelv],
 ## but also handles the logic necessary for indexed mode.
 func set_pixelv_custom(point: Vector2i, color: Color) -> void:
 	var new_color := color
