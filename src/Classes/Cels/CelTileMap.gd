@@ -33,7 +33,7 @@ var vertical_cells: int
 ## The key is the index of the tile in the tileset,
 ## and the value is the index of the tilemap tile that changed first, along with
 ## its image that is being changed when manual mode is enabled.
-## Gets reset on [method update_tileset].
+## Gets reset on [method update_tilemap].
 var editing_images := {}
 
 
@@ -130,6 +130,9 @@ func tiles_equal(cell_position: int, image_portion: Image, tile_image: Image) ->
 	return image_portion.get_data() == final_image_portion.get_data()
 
 
+## Applies transformations to [param tile_image] based on [param flip_h],
+## [param flip_v] and [param transpose], and returns the transformed image.
+## If [param reverse] is [code]true[/code], the transposition is applied the reverse way.
 func transform_tile(
 	tile_image: Image, flip_h: bool, flip_v: bool, transpose: bool, reverse := false
 ) -> Image:
@@ -156,7 +159,59 @@ func transform_tile(
 	return transformed_tile
 
 
-func update_tileset(
+## Appends data to a [Dictionary] to be used for undo/redo.
+func serialize_undo_data() -> Dictionary:
+	var dict := {}
+	var cell_indices := []
+	cell_indices.resize(cells.size())
+	for i in cell_indices.size():
+		cell_indices[i] = cells[i].serialize()
+	dict["cell_indices"] = cell_indices
+	dict["tileset"] = tileset.serialize_undo_data()
+	dict["resize"] = false
+	return dict
+
+
+## Same purpose as [method serialize_undo_data], but for when the image resource
+## ([param source_image]) we want to store to the undo/redo stack
+## is not the same as [member image]. This method also handles the resizing logic for undo/redo.
+func serialize_undo_data_source_image(
+	source_image: ImageExtended, redo_data: Dictionary, undo_data: Dictionary
+) -> void:
+	undo_data[self] = serialize_undo_data()
+	if source_image.get_size() != image.get_size():
+		undo_data[self]["resize"] = true
+		_resize_cells(source_image.get_size())
+		tileset.clear_tileset(self)
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
+	update_tilemap(tile_editing_mode, source_image)
+	redo_data[self] = serialize_undo_data()
+	redo_data[self]["resize"] = undo_data[self]["resize"]
+
+
+## Reads data from a [param dict] [Dictionary], and uses them to add methods to [param undo_redo].
+func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
+	var cell_indices = dict.cell_indices
+	if undo:
+		undo_redo.add_undo_method(_deserialize_cell_data.bind(cell_indices, dict.resize))
+		if dict.has("tileset"):
+			undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
+	else:
+		undo_redo.add_do_method(_deserialize_cell_data.bind(cell_indices, dict.resize))
+		if dict.has("tileset"):
+			undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
+
+
+## Gets called every time a change is being applied to the [param image],
+## such as when finishing drawing with a draw tool, or when applying an image effect.
+## This method responsible for updating the indices of the [member cells], as well as
+## updating the [member tileset] with the incoming changes.
+## The updating behavior depends on the current tile editing mode
+## by [member TileSetPanel.tile_editing_mode].
+## If a [param source_image] is provided, that image is being used instead of [member image].
+func update_tilemap(
 	tile_editing_mode := TileSetPanel.tile_editing_mode, source_image := image
 ) -> void:
 	editing_images.clear()
@@ -201,6 +256,8 @@ func update_tileset(
 				cells[i].remove_transformations()
 
 
+## Gets called by [method update_tilemap]. This method is responsible for handling
+## the tilemap updating behavior for the auto tile editing mode.[br]
 ## Cases:[br]
 ## 0) Cell is transparent. Set its index to 0.
 ## [br]
@@ -308,6 +365,8 @@ func _re_index_cells_after_index(index: int) -> void:
 			cells[i].index -= 1
 
 
+## Updates the [member image] data of the cell of the tilemap in [param cell_position],
+## to ensure that it is the same as its mapped tile in the [member tileset].
 func _update_cell(cell_position: int) -> void:
 	var coords := get_cell_coords_in_image(cell_position)
 	var rect := Rect2i(coords, tileset.tile_size)
@@ -329,11 +388,14 @@ func _update_cell(cell_position: int) -> void:
 		image.convert_rgb_to_indexed()
 
 
+## Calls [method _update_cell] for all [member cells].
 func _update_cel_portions() -> void:
 	for i in cells.size():
 		_update_cell(i)
 
 
+## Loops through all [member cells] of the tilemap and updates their indices,
+## so they can remain mapped to the [member tileset]'s tiles.
 func _re_index_all_cells() -> void:
 	for i in cells.size():
 		var coords := get_cell_coords_in_image(i)
@@ -349,6 +411,7 @@ func _re_index_all_cells() -> void:
 				break
 
 
+## Resizes the [member cells] array based on [param new_size].
 func _resize_cells(new_size: Vector2i) -> void:
 	horizontal_cells = ceili(float(new_size.x) / tileset.tile_size.x)
 	vertical_cells = ceili(float(new_size.y) / tileset.tile_size.y)
@@ -357,11 +420,17 @@ func _resize_cells(new_size: Vector2i) -> void:
 		cells[i] = Cell.new()
 
 
+## Returns [code]true[/code] if the user just did a Redo.
 func _is_redo() -> bool:
 	return Global.control.redone
 
 
-## If the tileset has been modified by another tile, make sure to also update it here.
+## If the tileset has been modified by another [param cel],
+## make sure to also update it here.
+## If [param replace_index] is larger than -1, it means that manual mode
+## has been used to replace a tile in the tileset in another cel,
+## so call [method _update_cel_portions] to update it in this cel as well.
+## Otherwise, call [method _re_index_all_cells] to ensure that the cells have correct indices.
 func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 	if cel == self or not is_instance_valid(cel):
 		return
@@ -373,6 +442,14 @@ func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 		_re_index_all_cells()
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
+
+
+func _deserialize_cell_data(cell_indices: Array, resize: bool) -> void:
+	if resize:
+		_resize_cells(image.get_size())
+	for i in cell_indices.size():
+		var cell_data: Dictionary = cell_indices[i]
+		cells[i].deserialize(cell_data)
 
 
 # Overridden Methods:
@@ -423,54 +500,6 @@ func update_texture(undo := false) -> void:
 				)
 				editing_images[index] = [i, transformed_image]
 	super.update_texture(undo)
-
-
-func serialize_undo_data() -> Dictionary:
-	var dict := {}
-	var cell_indices := []
-	cell_indices.resize(cells.size())
-	for i in cell_indices.size():
-		cell_indices[i] = cells[i].serialize()
-	dict["cell_indices"] = cell_indices
-	dict["tileset"] = tileset.serialize_undo_data()
-	dict["resize"] = false
-	return dict
-
-
-func serialize_undo_data_source_image(
-	source_image: ImageExtended, redo_data: Dictionary, undo_data: Dictionary
-) -> void:
-	undo_data[self] = serialize_undo_data()
-	if source_image.get_size() != image.get_size():
-		undo_data[self]["resize"] = true
-		_resize_cells(source_image.get_size())
-		tileset.clear_tileset(self)
-	var tile_editing_mode := TileSetPanel.tile_editing_mode
-	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
-		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
-	update_tileset(tile_editing_mode, source_image)
-	redo_data[self] = serialize_undo_data()
-	redo_data[self]["resize"] = undo_data[self]["resize"]
-
-
-func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
-	var cell_indices = dict.cell_indices
-	if undo:
-		undo_redo.add_undo_method(deserialize_cell_data.bind(cell_indices, dict.resize))
-		if dict.has("tileset"):
-			undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
-	else:
-		undo_redo.add_do_method(deserialize_cell_data.bind(cell_indices, dict.resize))
-		if dict.has("tileset"):
-			undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
-
-
-func deserialize_cell_data(cell_indices: Array, resize: bool) -> void:
-	if resize:
-		_resize_cells(image.get_size())
-	for i in cell_indices.size():
-		var cell_data: Dictionary = cell_indices[i]
-		cells[i].deserialize(cell_data)
 
 
 func serialize() -> Dictionary:

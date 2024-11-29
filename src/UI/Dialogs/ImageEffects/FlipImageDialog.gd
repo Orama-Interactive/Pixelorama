@@ -47,7 +47,7 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
 	_flip_selection(project)
-	project.update_tilesets(undo_data)
+	project.update_tilemaps(undo_data)
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)

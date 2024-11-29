@@ -163,7 +163,7 @@ func text_to_pixels() -> void:
 
 func commit_undo(action: String, undo_data: Dictionary) -> void:
 	var project := Global.current_project
-	project.update_tilesets(undo_data)
+	project.update_tilemaps(undo_data)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1

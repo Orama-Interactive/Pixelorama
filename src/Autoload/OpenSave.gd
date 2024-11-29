@@ -727,7 +727,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	cel_image.convert_rgb_to_indexed()
 	var redo_data := {}
 	if cel is CelTileMap:
-		(cel as CelTileMap).update_tileset()
+		(cel as CelTileMap).update_tilemap()
 		redo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 	cel_image.add_data_to_dictionary(redo_data)
 	project.deserialize_cel_undo_data(redo_data, undo_data)

@@ -1017,8 +1017,8 @@ func add_tileset(tileset: TileSetCustom) -> void:
 
 
 ## Loops through all cels in [param cel_dictionary], and for [CelTileMap]s,
-## it calls [method CelTileMap.update_tileset].
-func update_tilesets(cel_dictionary: Dictionary) -> void:
+## it calls [method CelTileMap.update_tilemap].
+func update_tilemaps(cel_dictionary: Dictionary) -> void:
 	for cel in cel_dictionary:
 		if cel is CelTileMap:
-			(cel as CelTileMap).update_tileset()
+			(cel as CelTileMap).update_tilemap()

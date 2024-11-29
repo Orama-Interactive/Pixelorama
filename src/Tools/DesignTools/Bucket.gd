@@ -495,7 +495,7 @@ func _set_pixel_pattern(image: ImageExtended, x: int, y: int, pattern_size: Vect
 
 func commit_undo() -> void:
 	var project := Global.current_project
-	project.update_tilesets(_undo_data)
+	project.update_tilemaps(_undo_data)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1

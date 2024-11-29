@@ -165,7 +165,7 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(cel_image, effect.shader, effect.params, image_size)
 
-	project.update_tilesets(undo_data)
+	project.update_tilemaps(undo_data)
 	for frame in project.frames:
 		var cel := frame.cels[layer.index]
 		var cel_image := cel.get_image()

@@ -131,7 +131,7 @@ func _snap_position(pos: Vector2) -> Vector2:
 
 func _commit_undo(action: String) -> void:
 	var project := Global.current_project
-	project.update_tilesets(_undo_data)
+	project.update_tilemaps(_undo_data)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1

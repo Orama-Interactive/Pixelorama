@@ -569,7 +569,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 		print("No undo data found!")
 		return
 	var project := Global.current_project
-	project.update_tilesets(undo_data_tmp)
+	project.update_tilemaps(undo_data_tmp)
 	var redo_data := get_undo_data(undo_data_tmp["undo_image"])
 	project.undos += 1
 	project.undo_redo.create_action(action)

@@ -734,7 +734,7 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 		project.color_mode = Image.FORMAT_RGBA8
 	else:
 		project.color_mode = Project.INDEXED_MODE
-	project.update_tilesets(undo_data)
+	project.update_tilemaps(undo_data)
 	project.serialize_cel_undo_data(pixel_cels, redo_data)
 	project.undo_redo.create_action("Change color mode")
 	project.undos += 1
