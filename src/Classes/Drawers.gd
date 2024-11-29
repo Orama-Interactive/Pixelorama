@@ -30,6 +30,8 @@ class SimpleDrawer:
 		var color_new := op.process(Color(color_str), color_old)
 		if not color_new.is_equal_approx(color_old):
 			image.set_pixelv_custom(position, color_new)
+		else:
+			image.set_pixelv_custom(position, color_new, image.is_indexed)
 
 
 class PixelPerfectDrawer:
