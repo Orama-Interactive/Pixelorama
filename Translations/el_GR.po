@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-11-20 12:58\n"
+"PO-Revision-Date: 2024-11-29 19:14\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -171,15 +171,15 @@ msgstr "Ποσοστό"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Λειτουργία χρώματος:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Λειτουργία χρώματος"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Ευρετήριο"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
