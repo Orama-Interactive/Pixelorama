@@ -164,8 +164,12 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 		var image_size := cel_image.get_size()
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(cel_image, effect.shader, effect.params, image_size)
+
+	project.update_tilesets(undo_data)
+	for frame in project.frames:
+		var cel := frame.cels[layer.index]
+		var cel_image := cel.get_image()
 		if cel is CelTileMap:
-			(cel as CelTileMap).update_tileset()
 			redo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 		if cel_image is ImageExtended:
 			redo_data[cel_image.indices_image] = cel_image.indices_image.data
