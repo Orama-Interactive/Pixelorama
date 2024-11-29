@@ -164,7 +164,8 @@ func set_pixelv_custom(point: Vector2i, color: Color, index_image_only := false)
 					if dist < smaller_distance:
 						smaller_distance = dist
 						color_index = i
-			indices_image.set_pixelv(point, Color((color_index + 1) / 255.0, 0, 0, 0))
+			if not indices_image.get_pixelv(point).r8 == color_index + 1:
+				indices_image.set_pixelv(point, Color((color_index + 1) / 255.0, 0, 0, 0))
 			color_to_fill = palette[color_index]
 			new_color = color_to_fill
 		else:
