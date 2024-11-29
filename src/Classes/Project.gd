@@ -476,6 +476,11 @@ func _deserialize_metadata(object: Object, dict: Dictionary) -> void:
 		object.set_meta(meta, metadata[meta])
 
 
+## Called by [method deserialize], this method loads an image at
+## a given [param frame_i] frame index and a [param cel_i] cel index from a pxo file,
+## and returns it as an [ImageExtended].
+## If the pxo file is saved with Pixelorama version 1.0 and on,
+## the [param zip_reader] is used to load the image. Otherwise, [param file] is used.
 func _load_image_from_pxo(
 	frame_i: int, cel_i: int, zip_reader: ZIPReader, file: FileAccess
 ) -> ImageExtended:
@@ -651,9 +656,16 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 	return cels
 
 
+## Reads data from [param cels] and appends them to [param data],
+## to be used for the undo/redo system.
+## It adds data such as the images of [PixelCel]s,
+## and calls [method CelTileMap.serialize_undo_data] for [CelTileMap]s.
 func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
 	var cels_to_serialize := cels
-	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+	if (
+		TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
+		and not TileSetPanel.placing_tiles
+	):
 		cels_to_serialize = find_same_tileset_tilemap_cels(cels)
 	for cel in cels_to_serialize:
 		if not cel is PixelCel:
@@ -664,6 +676,10 @@ func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
 			data[cel] = (cel as CelTileMap).serialize_undo_data()
 
 
+## Loads data from [param redo_data] and param [undo_data],
+## to be used for the undo/redo system.
+## It calls [method Global.undo_redo_compress_images], and
+## [method CelTileMap.deserialize_undo_data] for [CelTileMap]s.
 func deserialize_cel_undo_data(redo_data: Dictionary, undo_data: Dictionary) -> void:
 	Global.undo_redo_compress_images(redo_data, undo_data, self)
 	for cel in redo_data:
@@ -674,6 +690,9 @@ func deserialize_cel_undo_data(redo_data: Dictionary, undo_data: Dictionary) -> 
 			(cel as CelTileMap).deserialize_undo_data(undo_data[cel], undo_redo, true)
 
 
+## Returns all [BaseCel]s in [param cels], and for every [CelTileMap],
+## this methods finds all other [CelTileMap]s that share the same [TileSetCustom],
+## and appends them in the array that is being returned by this method.
 func find_same_tileset_tilemap_cels(cels: Array[BaseCel]) -> Array[BaseCel]:
 	var tilemap_cels: Array[BaseCel]
 	var current_tilesets: Array[TileSetCustom]
@@ -992,10 +1011,13 @@ func reorder_reference_image(from: int, to: int) -> void:
 	Global.canvas.reference_image_container.move_child(ri, to)
 
 
+## Adds a new [param tileset] to [member tilesets].
 func add_tileset(tileset: TileSetCustom) -> void:
 	tilesets.append(tileset)
 
 
+## Loops through all cels in [param cel_dictionary], and for [CelTileMap]s,
+## it calls [method CelTileMap.update_tileset].
 func update_tilesets(cel_dictionary: Dictionary) -> void:
 	for cel in cel_dictionary:
 		if cel is CelTileMap:

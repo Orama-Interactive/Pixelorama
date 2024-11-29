@@ -140,6 +140,8 @@ func deserialize(dict: Dictionary) -> void:
 	tile_size = str_to_var("Vector2i" + dict.get("tile_size"))
 
 
+## Serializes the data of each tile in [member tiles] into the form of a [Dictionary],
+## which is used by the undo/redo system.
 func serialize_undo_data() -> Dictionary:
 	var dict := {}
 	for tile in tiles:
@@ -148,6 +150,7 @@ func serialize_undo_data() -> Dictionary:
 	return dict
 
 
+## Deserializes the data of each tile in [param dict], which is used by the undo/redo system.
 func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
 	tiles.resize(dict.size())
 	var i := 0
