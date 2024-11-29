@@ -652,7 +652,10 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 
 
 func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
-	for cel in cels:
+	var cels_to_serialize := cels
+	if TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		cels_to_serialize = find_same_tileset_tilemap_cels(cels)
+	for cel in cels_to_serialize:
 		if not cel is PixelCel:
 			continue
 		var image := (cel as PixelCel).get_image()
@@ -669,6 +672,23 @@ func deserialize_cel_undo_data(redo_data: Dictionary, undo_data: Dictionary) -> 
 	for cel in undo_data:
 		if cel is CelTileMap:
 			(cel as CelTileMap).deserialize_undo_data(undo_data[cel], undo_redo, true)
+
+
+func find_same_tileset_tilemap_cels(cels: Array[BaseCel]) -> Array[BaseCel]:
+	var tilemap_cels: Array[BaseCel]
+	var current_tilesets: Array[TileSetCustom]
+	for cel in cels:
+		tilemap_cels.append(cel)
+		if cel is not CelTileMap:
+			continue
+		current_tilesets.append((cel as CelTileMap).tileset)
+	for cel in get_all_pixel_cels():
+		if cel is not CelTileMap:
+			continue
+		if (cel as CelTileMap).tileset in current_tilesets:
+			if cel not in cels:
+				tilemap_cels.append(cel)
+	return tilemap_cels
 
 
 ## Re-order layers to take each cel's z-index into account. If all z-indexes are 0,
