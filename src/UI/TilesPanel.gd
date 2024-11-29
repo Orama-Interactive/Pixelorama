@@ -162,16 +162,19 @@ func _on_place_tiles_toggled(toggled_on: bool) -> void:
 
 
 func _on_manual_toggled(toggled_on: bool) -> void:
+	place_tiles.button_pressed = false
 	if toggled_on:
 		tile_editing_mode = TileEditingMode.MANUAL
 
 
 func _on_auto_toggled(toggled_on: bool) -> void:
+	place_tiles.button_pressed = false
 	if toggled_on:
 		tile_editing_mode = TileEditingMode.AUTO
 
 
 func _on_stack_toggled(toggled_on: bool) -> void:
+	place_tiles.button_pressed = false
 	if toggled_on:
 		tile_editing_mode = TileEditingMode.STACK
 
