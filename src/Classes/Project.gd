@@ -662,10 +662,7 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 ## and calls [method CelTileMap.serialize_undo_data] for [CelTileMap]s.
 func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
 	var cels_to_serialize := cels
-	if (
-		TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
-		and not TileSetPanel.placing_tiles
-	):
+	if not TileSetPanel.placing_tiles:
 		cels_to_serialize = find_same_tileset_tilemap_cels(cels)
 	for cel in cels_to_serialize:
 		if not cel is PixelCel:

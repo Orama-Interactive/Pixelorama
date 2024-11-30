@@ -11,16 +11,7 @@ extends PixelCel
 ## such as horizontal flipping, vertical flipping, or if it's transposed.
 
 ## The [TileSetCustom] that this cel uses, passed down from the cel's [LayerTileMap].
-var tileset: TileSetCustom:
-	set(value):
-		if is_instance_valid(tileset):
-			if tileset.updated.is_connected(_on_tileset_updated):
-				tileset.updated.disconnect(_on_tileset_updated)
-		tileset = value
-		if is_instance_valid(tileset):
-			_resize_cells(get_image().get_size())
-			if not tileset.updated.is_connected(_on_tileset_updated):
-				tileset.updated.connect(_on_tileset_updated)
+var tileset: TileSetCustom
 
 ## The [Array] of type [CelTileMap.Cell] that contains data for each cell of the tilemap.
 ## The array's size is equal to [member horizontal_cells] * [member vertical_cells].
@@ -76,7 +67,20 @@ class Cell:
 
 func _init(_tileset: TileSetCustom, _image := ImageExtended.new(), _opacity := 1.0) -> void:
 	super._init(_image, _opacity)
-	tileset = _tileset
+	set_tileset(_tileset)
+
+
+func set_tileset(new_tileset: TileSetCustom, reset_indices := true) -> void:
+	if tileset == new_tileset:
+		return
+	if is_instance_valid(tileset):
+		if tileset.updated.is_connected(_on_tileset_updated):
+			tileset.updated.disconnect(_on_tileset_updated)
+	tileset = new_tileset
+	if is_instance_valid(tileset):
+		_resize_cells(get_image().get_size(), reset_indices)
+		if not tileset.updated.is_connected(_on_tileset_updated):
+			tileset.updated.connect(_on_tileset_updated)
 
 
 ## Maps the cell at position [param cell_position] to
@@ -84,8 +88,9 @@ func _init(_tileset: TileSetCustom, _image := ImageExtended.new(), _opacity := 1
 func set_index(cell_position: int, index: int) -> void:
 	index = clampi(index, 0, tileset.tiles.size() - 1)
 	var previous_index := cells[cell_position].index
+
 	if previous_index != index:
-		if previous_index > 0:
+		if previous_index > 0 and previous_index < tileset.tiles.size():
 			tileset.tiles[previous_index].times_used -= 1
 		tileset.tiles[index].times_used += 1
 		cells[cell_position].index = index
@@ -215,15 +220,14 @@ func update_tilemap(
 	tile_editing_mode := TileSetPanel.tile_editing_mode, source_image := image
 ) -> void:
 	editing_images.clear()
+	var tileset_size_before_update := tileset.tiles.size()
 	for i in cells.size():
 		var coords := get_cell_coords_in_image(i)
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := source_image.get_region(rect)
 		var index := cells[i].index
 		if index >= tileset.tiles.size():
-			printerr("Cell at position ", i + 1, ", mapped to ", index, " is out of bounds!")
 			index = 0
-			cells[i].index = 0
 		var current_tile := tileset.tiles[index]
 		if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 			if image_portion.is_invisible():
@@ -237,7 +241,7 @@ func update_tilemap(
 			if not tiles_equal(i, image_portion, current_tile.image):
 				tileset.replace_tile_at(image_portion, index, self)
 		elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
-			_handle_auto_editing_mode(i, image_portion)
+			_handle_auto_editing_mode(i, image_portion, tileset_size_before_update)
 		else:  # Stack
 			if image_portion.is_invisible():
 				continue
@@ -254,6 +258,23 @@ func update_tilemap(
 				tileset.add_tile(image_portion, self)
 				cells[i].index = tileset.tiles.size() - 1
 				cells[i].remove_transformations()
+	# Updates transparent cells that have indices higher than 0.
+	# This can happen when switching to another tileset which has less tiles
+	# than the previous one.
+	for i in cells.size():
+		var coords := get_cell_coords_in_image(i)
+		var rect := Rect2i(coords, tileset.tile_size)
+		var image_portion := source_image.get_region(rect)
+		if not image_portion.is_invisible():
+			continue
+		var index := cells[i].index
+		if index == 0:
+			continue
+		if index >= tileset.tiles.size():
+			index = 0
+		var current_tile := tileset.tiles[index]
+		if not tiles_equal(i, image_portion, current_tile.image):
+			set_index(i, cells[i].index)
 
 
 ## Gets called by [method update_tilemap]. This method is responsible for handling
@@ -294,11 +315,17 @@ func update_tilemap(
 ## 7) Cell mapped, does not exist in the tileset.
 ## The mapped tile does not exist in the tileset anymore.
 ## Simply replace the old tile with the new one, do not change its index.
-func _handle_auto_editing_mode(i: int, image_portion: Image) -> void:
+func _handle_auto_editing_mode(
+	i: int, image_portion: Image, tileset_size_before_update: int
+) -> void:
 	var index := cells[i].index
+	if index >= tileset.tiles.size():
+		index = 0
 	var current_tile := tileset.tiles[index]
 	if image_portion.is_invisible():
 		# Case 0: The cell is transparent.
+		if cells[i].index >= tileset_size_before_update:
+			return
 		cells[i].index = 0
 		cells[i].remove_transformations()
 		if index > 0:
@@ -374,10 +401,7 @@ func _update_cell(cell_position: int) -> void:
 	var cell_data := cells[cell_position]
 	var index := cell_data.index
 	if index >= tileset.tiles.size():
-		printerr(
-			"Cell at position ", cell_position + 1, ", mapped to ", index, " is out of bounds!"
-		)
-		return
+		index = 0
 	var current_tile := tileset.tiles[index].image
 	var transformed_tile := transform_tile(
 		current_tile, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
@@ -389,7 +413,7 @@ func _update_cell(cell_position: int) -> void:
 
 
 ## Calls [method _update_cell] for all [member cells].
-func _update_cel_portions() -> void:
+func update_cel_portions() -> void:
 	for i in cells.size():
 		_update_cell(i)
 
@@ -402,7 +426,11 @@ func _re_index_all_cells() -> void:
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		if image_portion.is_invisible():
-			cells[i].index = 0
+			var index := cells[i].index
+			if index > 0 and index < tileset.tiles.size():
+				var current_tile := tileset.tiles[index]
+				if not tiles_equal(i, image_portion, current_tile.image):
+					set_index(i, cells[i].index)
 			continue
 		for j in range(1, tileset.tiles.size()):
 			var tile := tileset.tiles[j]
@@ -412,12 +440,16 @@ func _re_index_all_cells() -> void:
 
 
 ## Resizes the [member cells] array based on [param new_size].
-func _resize_cells(new_size: Vector2i) -> void:
+func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 	horizontal_cells = ceili(float(new_size.x) / tileset.tile_size.x)
 	vertical_cells = ceili(float(new_size.y) / tileset.tile_size.y)
 	cells.resize(horizontal_cells * vertical_cells)
 	for i in cells.size():
-		cells[i] = Cell.new()
+		if reset_indices:
+			cells[i] = Cell.new()
+		else:
+			if not is_instance_valid(cells[i]):
+				cells[i] = Cell.new()
 
 
 ## Returns [code]true[/code] if the user just did a Redo.
@@ -429,7 +461,7 @@ func _is_redo() -> bool:
 ## make sure to also update it here.
 ## If [param replace_index] is larger than -1, it means that manual mode
 ## has been used to replace a tile in the tileset in another cel,
-## so call [method _update_cel_portions] to update it in this cel as well.
+## so call [method update_cel_portions] to update it in this cel as well.
 ## Otherwise, call [method _re_index_all_cells] to ensure that the cells have correct indices.
 func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 	if cel == self or not is_instance_valid(cel):
@@ -437,7 +469,7 @@ func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 	if link_set != null and cel in link_set["cels"]:
 		return
 	if replace_index > -1:  # Manual mode
-		_update_cel_portions()
+		update_cel_portions()
 	else:
 		_re_index_all_cells()
 	Global.canvas.update_all_layers = true
@@ -469,6 +501,8 @@ func update_texture(undo := false) -> void:
 	for i in cells.size():
 		var cell_data := cells[i]
 		var index := cell_data.index
+		if index >= tileset.tiles.size():
+			index = 0
 		var coords := get_cell_coords_in_image(i)
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
