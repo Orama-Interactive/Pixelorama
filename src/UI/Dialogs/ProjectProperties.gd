@@ -1,6 +1,7 @@
 extends AcceptDialog
 
-const CLOSE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
+const DUPLICATE_TEXTURE := preload("res://assets/graphics/timeline/copy_frame.png")
+const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
 
 @onready var size_value_label := $VBoxContainer/GridContainer/SizeValueLabel as Label
 @onready var color_mode_value_label := $VBoxContainer/GridContainer/ColorModeValueLabel as Label
@@ -29,21 +30,26 @@ func _on_visibility_changed() -> void:
 	tilesets_list.clear()
 	var root_item := tilesets_list.create_item()
 	for i in Global.current_project.tilesets.size():
-		var tileset := Global.current_project.tilesets[i]
-		var tree_item := tilesets_list.create_item(root_item)
-		var item_text := tileset.get_text_info(i)
-		var using_layers := tileset.find_using_layers(Global.current_project)
-		for j in using_layers.size():
-			if j == 0:
-				item_text += " ("
-			item_text += using_layers[j].name
-			if j == using_layers.size() - 1:
-				item_text += ")"
-			else:
-				item_text += ", "
-		tree_item.set_text(0, item_text)
-		tree_item.set_metadata(0, i)
-		tree_item.add_button(0, CLOSE_TEXTURE, -1, using_layers.size() > 0)
+		_create_tileset_tree_item(i, root_item)
+
+
+func _create_tileset_tree_item(i: int, root_item: TreeItem) -> void:
+	var tileset := Global.current_project.tilesets[i]
+	var tree_item := tilesets_list.create_item(root_item)
+	var item_text := tileset.get_text_info(i)
+	var using_layers := tileset.find_using_layers(Global.current_project)
+	for j in using_layers.size():
+		if j == 0:
+			item_text += " ("
+		item_text += using_layers[j].name
+		if j == using_layers.size() - 1:
+			item_text += ")"
+		else:
+			item_text += ", "
+	tree_item.set_text(0, item_text)
+	tree_item.set_metadata(0, i)
+	tree_item.add_button(0, DUPLICATE_TEXTURE, -1, false, "Duplicate")
+	tree_item.add_button(0, REMOVE_TEXTURE, -1, using_layers.size() > 0, "Delete")
 
 
 func _on_name_line_edit_text_changed(new_text: String) -> void:
@@ -58,7 +64,22 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 	var tileset_index: int = item.get_metadata(column)
 	var project := Global.current_project
 	var tileset := project.tilesets[tileset_index]
-	if id == 0:  # Delete
+	if id == 0:  # Duplicate
+		var new_tileset := TileSetCustom.new(tileset.tile_size, tileset.name)
+		for i in range(1, tileset.tiles.size()):
+			var tile := tileset.tiles[i]
+			var new_image := Image.new()
+			new_image.copy_from(tile.image)
+			new_tileset.add_tile(new_image, null)
+		project.undos += 1
+		project.undo_redo.create_action("Duplicate tileset")
+		project.undo_redo.add_do_method(func(): project.tilesets.append(new_tileset))
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(func(): project.tilesets.erase(new_tileset))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.commit_action()
+		_create_tileset_tree_item(item.get_parent().get_child_count(), item.get_parent())
+	if id == 1:  # Delete
 		if tileset.find_using_layers(project).size() > 0:
 			return
 		project.undos += 1
