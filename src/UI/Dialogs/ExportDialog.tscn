@@ -44,7 +44,6 @@ size_flags_vertical = 3
 [node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 0
-anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -335,19 +334,23 @@ text = "Clip image content to selection"
 mode = 2
 title = "Open a Directory"
 size = Vector2i(675, 500)
+always_on_top = true
 ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="."]
+always_on_top = true
 dialog_text = "DirAccess path and file name are not valid!"
 
 [node name="FileExistsAlert" type="AcceptDialog" parent="."]
+always_on_top = true
 dialog_text = "File %s already exists. Overwrite?"
 
 [node name="ExportProgressBar" type="Window" parent="."]
 visible = false
 exclusive = true
+always_on_top = true
 
 [node name="MarginContainer" type="MarginContainer" parent="ExportProgressBar"]
 anchors_preset = 15
