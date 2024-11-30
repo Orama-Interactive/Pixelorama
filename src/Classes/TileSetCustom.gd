@@ -136,6 +136,17 @@ func get_text_info(tile_index: int) -> String:
 	return tr("Tileset") + item_string
 
 
+## Finds and returns all of the [LayerTileMap]s that use this tileset.
+func find_using_layers(project: Project) -> Array[LayerTileMap]:
+	var tilemaps: Array[LayerTileMap]
+	for layer in project.layers:
+		if layer is not LayerTileMap:
+			continue
+		if layer.tileset == self:
+			tilemaps.append(layer)
+	return tilemaps
+
+
 ## Serializes the data of this class into the form of a [Dictionary],
 ## which is used so the data can be stored in pxo files.
 func serialize() -> Dictionary:

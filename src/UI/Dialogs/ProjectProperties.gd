@@ -1,11 +1,15 @@
 extends AcceptDialog
 
-@onready var size_value_label := $GridContainer/SizeValueLabel as Label
-@onready var color_mode_value_label := $GridContainer/ColorModeValueLabel as Label
-@onready var frames_value_label := $GridContainer/FramesValueLabel as Label
-@onready var layers_value_label := $GridContainer/LayersValueLabel as Label
-@onready var name_line_edit := $GridContainer/NameLineEdit as LineEdit
-@onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
+const CLOSE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
+
+@onready var size_value_label := $VBoxContainer/GridContainer/SizeValueLabel as Label
+@onready var color_mode_value_label := $VBoxContainer/GridContainer/ColorModeValueLabel as Label
+@onready var frames_value_label := $VBoxContainer/GridContainer/FramesValueLabel as Label
+@onready var layers_value_label := $VBoxContainer/GridContainer/LayersValueLabel as Label
+@onready var name_line_edit := $VBoxContainer/GridContainer/NameLineEdit as LineEdit
+@onready var user_data_text_edit := $VBoxContainer/GridContainer/UserDataTextEdit as TextEdit
+@onready var tilesets_container := $VBoxContainer/TilesetsContainer as VBoxContainer
+@onready var tilesets_list := $VBoxContainer/TilesetsContainer/TilesetsList as Tree
 
 
 func _on_visibility_changed() -> void:
@@ -21,6 +25,25 @@ func _on_visibility_changed() -> void:
 	layers_value_label.text = str(Global.current_project.layers.size())
 	name_line_edit.text = Global.current_project.name
 	user_data_text_edit.text = Global.current_project.user_data
+	tilesets_container.visible = Global.current_project.tilesets.size() > 0
+	tilesets_list.clear()
+	var root_item := tilesets_list.create_item()
+	for i in Global.current_project.tilesets.size():
+		var tileset := Global.current_project.tilesets[i]
+		var tree_item := tilesets_list.create_item(root_item)
+		var item_text := tileset.get_text_info(i)
+		var using_layers := tileset.find_using_layers(Global.current_project)
+		for j in using_layers.size():
+			if j == 0:
+				item_text += " ("
+			item_text += using_layers[j].name
+			if j == using_layers.size() - 1:
+				item_text += ")"
+			else:
+				item_text += ", "
+		tree_item.set_text(0, item_text)
+		tree_item.set_metadata(0, i)
+		tree_item.add_button(0, CLOSE_TEXTURE, -1, using_layers.size() > 0)
 
 
 func _on_name_line_edit_text_changed(new_text: String) -> void:
@@ -29,3 +52,20 @@ func _on_name_line_edit_text_changed(new_text: String) -> void:
 
 func _on_user_data_text_edit_text_changed() -> void:
 	Global.current_project.user_data = user_data_text_edit.text
+
+
+func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi: int) -> void:
+	var tileset_index: int = item.get_metadata(column)
+	var project := Global.current_project
+	var tileset := project.tilesets[tileset_index]
+	if id == 0:  # Delete
+		if tileset.find_using_layers(project).size() > 0:
+			return
+		project.undos += 1
+		project.undo_redo.create_action("Delete tileset")
+		project.undo_redo.add_do_method(func(): project.tilesets.erase(tileset))
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(func(): project.tilesets.insert(tileset_index, tileset))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.commit_action()
+		item.free()

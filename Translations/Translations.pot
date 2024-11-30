@@ -3395,6 +3395,11 @@ msgstr ""
 msgid "Tileset:"
 msgstr ""
 
+#. A tileset is a collection of tiles.
+#: src/UI/Dialogs/ProjectProperties.tscn
+msgid "Tilesets"
+msgstr ""
+
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "New tileset"
 msgstr ""
