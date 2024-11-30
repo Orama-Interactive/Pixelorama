@@ -104,7 +104,10 @@ some useful [SYSTEM OPTIONS] are:
 
 	static func set_output(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
-			project.file_name = next_arg.get_basename()
+			project.file_name = next_arg.get_file().get_basename()
+			var directory_path = next_arg.get_base_dir()
+			if directory_path != ".":
+				project.export_directory_path = directory_path
 			var extension := next_arg.get_extension()
 			project.file_format = Export.get_file_format_from_extension(extension)
 
