@@ -127,6 +127,15 @@ func clear_tileset(cel: CelTileMap) -> void:
 	set_deferred("_tileset_has_been_cleared", false)
 
 
+## Returns the tilemap's info, such as its name and tile size and with a given
+## [param tile_index], in the form of text.
+func get_text_info(tile_index: int) -> String:
+	var item_string := " %s (%s×%s)" % [tile_index, tile_size.x, tile_size.y]
+	if not name.is_empty():
+		item_string += ": " + name
+	return tr("Tileset") + item_string
+
+
 ## Serializes the data of this class into the form of a [Dictionary],
 ## which is used so the data can be stored in pxo files.
 func serialize() -> Dictionary:

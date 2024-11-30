@@ -33,10 +33,7 @@ func _on_about_to_popup() -> void:
 	tileset_option_button.add_item("New tileset")
 	for i in project.tilesets.size():
 		var tileset := project.tilesets[i]
-		var item_string := " %s (%s×%s)" % [i, tileset.tile_size.x, tileset.tile_size.y]
-		if not tileset.name.is_empty():
-			item_string += ": " + tileset.name
-		tileset_option_button.add_item(tr("Tileset" + item_string))
+		tileset_option_button.add_item(tileset.get_text_info(i))
 	_on_tileset_option_button_item_selected(tileset_option_button.selected)
 
 

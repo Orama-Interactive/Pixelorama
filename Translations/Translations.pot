@@ -2239,6 +2239,10 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
+#. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
+msgid "Tilemap"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
@@ -3381,6 +3385,7 @@ msgid "Do you want to download the image from %s?"
 msgstr ""
 
 #. A tileset is a collection of tiles.
+#: src/Classes/TileSetCustom.gd
 #: src/UI/Dialogs/ImportPreviewDialog.gd
 msgid "Tileset"
 msgstr ""
