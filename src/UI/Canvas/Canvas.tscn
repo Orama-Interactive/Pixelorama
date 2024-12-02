@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ba24iuv55m4l3"]
+[gd_scene load_steps=25 format=3 uid="uid://ba24iuv55m4l3"]
 
 [ext_resource type="Script" path="res://src/UI/Canvas/Canvas.gd" id="1"]
 [ext_resource type="Shader" path="res://src/Shaders/BlendLayers.gdshader" id="1_253dh"]
@@ -116,4 +116,5 @@ script = ExtResource("16_nxilb")
 script = ExtResource("17_qfjb4")
 
 [node name="TileModeIndices" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_ascg6")
 script = ExtResource("19_7a6wb")
