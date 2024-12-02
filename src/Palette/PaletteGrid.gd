@@ -83,25 +83,38 @@ func scroll_palette(origin: Vector2i) -> void:
 ## Called when the color changes, either the left or the right, determined by [param mouse_button].
 ## If current palette has [param target_color] as a [Color], then select it.
 ## This is helpful when we select color indirectly (e.g through colorpicker)
-func find_and_select_color(target_color: Color, mouse_button: int) -> void:
+func find_and_select_color(color_info: Dictionary, mouse_button: int) -> void:
+	var target_color: Color = color_info.get("color", Color(0, 0, 0, 0))
+	var palette_color_index: int = color_info.get("index", -1)
 	if not is_instance_valid(current_palette):
 		return
 	var selected_index := Palettes.current_palette_get_selected_color_index(mouse_button)
-	if get_swatch_color(selected_index) == target_color:  # Color already selected
-		return
-	for color_ind in swatches.size():
-		if (
-			target_color.is_equal_approx(swatches[color_ind].color)
-			or target_color.to_html() == swatches[color_ind].color.to_html()
-		):
-			var index := convert_grid_index_to_palette_index(color_ind)
-			select_swatch(mouse_button, index, selected_index)
-			match mouse_button:
-				MOUSE_BUTTON_LEFT:
-					Palettes.left_selected_color = index
-				MOUSE_BUTTON_RIGHT:
-					Palettes.right_selected_color = index
+	if palette_color_index != -1:  # If color has a defined index in palette then priortize index
+		if selected_index == palette_color_index:  # Index already selected
 			return
+		select_swatch(mouse_button, palette_color_index, selected_index)
+		match mouse_button:
+			MOUSE_BUTTON_LEFT:
+				Palettes.left_selected_color = palette_color_index
+			MOUSE_BUTTON_RIGHT:
+				Palettes.right_selected_color = palette_color_index
+		return
+	else:  # If it doesn't then select the first match in the palette
+		if get_swatch_color(selected_index) == target_color:  # Color already selected
+			return
+		for color_ind in swatches.size():
+			if (
+				target_color.is_equal_approx(swatches[color_ind].color)
+				or target_color.to_html() == swatches[color_ind].color.to_html()
+			):
+				var index := convert_grid_index_to_palette_index(color_ind)
+				select_swatch(mouse_button, index, selected_index)
+				match mouse_button:
+					MOUSE_BUTTON_LEFT:
+						Palettes.left_selected_color = index
+					MOUSE_BUTTON_RIGHT:
+						Palettes.right_selected_color = index
+				return
 	# Unselect swatches when tools color is changed
 	var swatch_to_unselect := -1
 	if mouse_button == MOUSE_BUTTON_LEFT:

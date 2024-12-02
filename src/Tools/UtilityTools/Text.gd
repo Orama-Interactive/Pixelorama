@@ -204,7 +204,7 @@ func _textedit_text_changed() -> void:
 	text_edit._on_text_changed()
 
 
-func _on_color_changed(_color: Color, _button: int) -> void:
+func _on_color_changed(_color_info: Dictionary, _button: int) -> void:
 	if is_instance_valid(text_edit):
 		text_edit.add_theme_color_override(&"font_color", tool_slot.color)
 

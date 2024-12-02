@@ -139,7 +139,7 @@ func set_pixel_custom(x: int, y: int, color: Color) -> void:
 
 ## Equivalent of [method Image.set_pixelv],
 ## but also handles the logic necessary for indexed mode.
-func set_pixelv_custom(point: Vector2i, color: Color) -> void:
+func set_pixelv_custom(point: Vector2i, color: Color, index_image_only := false) -> void:
 	var new_color := color
 	if is_indexed:
 		var color_to_fill := TRANSPARENT
@@ -164,13 +164,15 @@ func set_pixelv_custom(point: Vector2i, color: Color) -> void:
 					if dist < smaller_distance:
 						smaller_distance = dist
 						color_index = i
-			indices_image.set_pixelv(point, Color((color_index + 1) / 255.0, 0, 0, 0))
+			if not indices_image.get_pixelv(point).r8 == color_index + 1:
+				indices_image.set_pixelv(point, Color((color_index + 1) / 255.0, 0, 0, 0))
 			color_to_fill = palette[color_index]
 			new_color = color_to_fill
 		else:
 			indices_image.set_pixelv(point, TRANSPARENT)
 			new_color = TRANSPARENT
-	set_pixelv(point, new_color)
+	if not index_image_only:
+		set_pixelv(point, new_color)
 
 
 ## Finds the distance between colors [param c1] and [param c2].

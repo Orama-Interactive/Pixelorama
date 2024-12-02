@@ -347,15 +347,21 @@ func _pick_color(pos: Vector2i) -> void:
 		return
 
 	var color := Color(0, 0, 0, 0)
+	var palette_index = -1
 	var curr_frame: Frame = project.frames[project.current_frame]
 	for layer in project.layers.size():
 		var idx := (project.layers.size() - 1) - layer
 		if project.layers[idx].is_visible_in_hierarchy():
-			image = curr_frame.cels[idx].get_image()
+			var cel := curr_frame.cels[idx]
+			image = cel.get_image()
 			color = image.get_pixelv(pos)
-			if not is_zero_approx(color.a):
+			# If image is indexed then get index as well
+			if cel is PixelCel:
+				if cel.image.is_indexed:
+					palette_index = cel.image.indices_image.get_pixel(pos.x, pos.y).r8 - 1
+			if not is_zero_approx(color.a) or palette_index > -1:
 				break
-	Tools.assign_color(color, tool_slot.button, false)
+	Tools.assign_color(color, tool_slot.button, false, palette_index)
 
 
 func _flip_rect(rect: Rect2, rect_size: Vector2, horiz: bool, vert: bool) -> Rect2:

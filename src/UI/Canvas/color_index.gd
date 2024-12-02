@@ -23,23 +23,18 @@ func _draw() -> void:
 	if zoom_percentage < Global.pixel_grid_show_at_zoom:
 		return
 	var project = ExtensionsApi.project.current_project
+	var size: Vector2i = project.size
 	var cel: BaseCel = project.frames[project.current_frame].cels[project.current_layer]
 	if not cel is PixelCel:
 		return
 	var index_image: Image = cel.image.indices_image
-	if index_image.get_size() != project.size or not cel.image.is_indexed:
+	if index_image.get_size() != size or not cel.image.is_indexed:
 		return
 
-	var used_rect: Rect2i = cel.image.get_used_rect()
-	if used_rect.size != Vector2i.ZERO:
-		# use smaller image for optimization
-		index_image = index_image.get_region(used_rect)
-
 	var font: Font = ExtensionsApi.theme.get_theme().default_font
-	var offset = position + Vector2(used_rect.position)
-	draw_set_transform(offset, rotation, Vector2(0.05, 0.05))
-	for x in range(index_image.get_size().x):
-		for y in range(index_image.get_size().y):
+	draw_set_transform(position, rotation, Vector2(0.05, 0.05))
+	for x in range(size.x):
+		for y in range(size.y):
 			var index := index_image.get_pixel(x, y).r8
 			if index == 0:
 				continue

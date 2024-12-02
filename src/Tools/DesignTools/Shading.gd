@@ -324,8 +324,8 @@ func update_brush() -> void:
 	$ColorInterpolation.visible = false
 
 
-## this function is also used by a signal, this is why there is _color = Color.TRANSPARENT in here.
-func _refresh_colors_array(_color = Color.TRANSPARENT, mouse_button := tool_slot.button) -> void:
+## this function is also used by a signal, this is why there is _color_info = {} in here.
+func _refresh_colors_array(_color_info = {}, mouse_button := tool_slot.button) -> void:
 	if mouse_button != tool_slot.button:
 		return
 	if _shading_mode == ShadingMode.COLOR_REPLACE:

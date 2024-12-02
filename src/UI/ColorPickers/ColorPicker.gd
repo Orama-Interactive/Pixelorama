@@ -128,7 +128,8 @@ func reset_options() -> void:
 	expand_button.button_pressed = false
 
 
-func update_color(color: Color, button: int) -> void:
+func update_color(color_info: Dictionary, button: int) -> void:
+	var color = color_info.get("color", Color.WHITE)
 	if Tools.picking_color_for == button:
 		color_picker.color = color
 	if button == MOUSE_BUTTON_RIGHT:
