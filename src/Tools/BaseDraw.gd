@@ -322,12 +322,19 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func draw_tile(pos: Vector2i) -> void:
-	var tile_position := get_cell_position(pos)
 	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
+	var mirrored_positions := Tools.get_mirrored_positions(pos, Global.current_project)
+	var tile_positions := PackedInt32Array()
+	tile_positions.resize(mirrored_positions.size() + 1)
+	tile_positions[0] = get_cell_position(pos)
+	for i in mirrored_positions.size():
+		var mirrored_position := mirrored_positions[i]
+		tile_positions[i + 1] = get_cell_position(mirrored_position)
 	for cel in _get_selected_draw_cels():
 		if cel is not CelTileMap:
 			return
-		(cel as CelTileMap).set_index(tile_position, tile_index)
+		for tile_position in tile_positions:
+			(cel as CelTileMap).set_index(tile_position, tile_index)
 
 
 func _prepare_tool() -> void:
