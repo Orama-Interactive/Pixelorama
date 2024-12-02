@@ -174,10 +174,13 @@ func _draw_shape() -> void:
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
-		# Draw each point offsetted based on the shape's thickness
-		if Global.current_project.can_pixel_get_drawn(point):
-			for image in images:
-				_drawer.set_pixel(image, point, tool_slot.color)
+		if is_placing_tiles():
+			draw_tile(point)
+		else:
+			# Draw each point offsetted based on the shape's thickness
+			if Global.current_project.can_pixel_get_drawn(point):
+				for image in images:
+					_drawer.set_pixel(image, point, tool_slot.color)
 
 	commit_undo()
 

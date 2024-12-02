@@ -104,9 +104,6 @@ func draw_start(pos: Vector2i) -> void:
 
 	Global.canvas.selection.transform_content_confirm()
 	prepare_undo("Draw")
-	if is_placing_tiles():
-		draw_tile(pos, TileSetPanel.selected_tile_index)
-		return
 	var can_skip_mask := true
 	if tool_slot.color.a < 1 and !_overwrite:
 		can_skip_mask = false
@@ -145,9 +142,6 @@ func draw_move(pos_i: Vector2i) -> void:
 		if Input.is_action_pressed(&"draw_color_picker", true):
 			_pick_color(pos)
 		return
-	if is_placing_tiles():
-		draw_tile(pos, TileSetPanel.selected_tile_index)
-		return
 
 	if _draw_line:
 		_spacing_mode = false  # spacing mode is disabled during line mode
@@ -172,11 +166,6 @@ func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	if _picking_color:
 		super.draw_end(pos)
-		return
-	if is_placing_tiles():
-		super.draw_end(pos)
-		draw_tile(pos, TileSetPanel.selected_tile_index)
-		commit_undo()
 		return
 
 	if _draw_line:

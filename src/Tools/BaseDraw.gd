@@ -18,6 +18,7 @@ var _brush_image := Image.new()
 var _orignal_brush_image := Image.new()  ## Contains the original _brush_image, without resizing
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
+var _is_eraser := false
 @warning_ignore("unused_private_class_variable")
 var _picking_color := false
 
@@ -320,12 +321,12 @@ func draw_end(pos: Vector2i) -> void:
 	_polylines = _create_polylines(_indicator)
 
 
-func draw_tile(pos: Vector2i, tile_index: int) -> void:
+func draw_tile(pos: Vector2i) -> void:
+	var tile_position := get_cell_position(pos)
+	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
 	for cel in _get_selected_draw_cels():
 		if cel is not CelTileMap:
 			return
-		pos = Global.current_project.tiles.get_canon_position(pos)
-		var tile_position := get_cell_position(pos)
 		(cel as CelTileMap).set_index(tile_position, tile_index)
 
 
@@ -570,6 +571,9 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 	pos = _stroke_project.tiles.get_canon_position(pos)
 	if Global.current_project.has_selection:
 		pos = Global.current_project.selection_map.get_canon_position(pos)
+	if is_placing_tiles():
+		draw_tile(pos)
+		return
 	if !_stroke_project.can_pixel_get_drawn(pos):
 		return
 
