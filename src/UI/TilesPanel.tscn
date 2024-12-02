@@ -1,9 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfbragmmdwfbl"]
+[gd_scene load_steps=22 format=3 uid="uid://bfbragmmdwfbl"]
 
 [ext_resource type="Script" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
 [ext_resource type="Texture2D" uid="uid://bv7ldl8obhawm" path="res://assets/graphics/misc/icon_reload.png" id="2_r1kie"]
 [ext_resource type="Texture2D" uid="uid://bpsfilx47bw3r" path="res://assets/graphics/misc/mirror_x.svg" id="3_5o62r"]
 [ext_resource type="Texture2D" uid="uid://bk6iaxiyl74ih" path="res://assets/graphics/misc/mirror_y.svg" id="4_2xhnr"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_klv67"]
+action = &"toggle_draw_tiles_mode"
+
+[sub_resource type="Shortcut" id="Shortcut_6ebuw"]
+events = [SubResource("InputEventAction_klv67")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_yr0lx"]
 action = &"tile_rotate_left"
@@ -31,6 +37,24 @@ events = [SubResource("InputEventAction_18g3a")]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_uxnt0"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_mhgo3"]
+action = &"tile_edit_mode_manual"
+
+[sub_resource type="Shortcut" id="Shortcut_pgg48"]
+events = [SubResource("InputEventAction_mhgo3")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_h1wos"]
+action = &"tile_edit_mode_auto"
+
+[sub_resource type="Shortcut" id="Shortcut_a0fx5"]
+events = [SubResource("InputEventAction_h1wos")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_i4ufh"]
+action = &"tile_edit_mode_stack"
+
+[sub_resource type="Shortcut" id="Shortcut_ysxej"]
+events = [SubResource("InputEventAction_i4ufh")]
+
 [node name="Tiles" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,6 +69,7 @@ layout_mode = 2
 [node name="PlaceTiles" type="CheckBox" parent="VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_6ebuw")
 text = "Draw tiles"
 
 [node name="TransformButtonsContainer" type="HFlowContainer" parent="VBoxContainer"]
@@ -126,6 +151,7 @@ layout_mode = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_uxnt0")
+shortcut = SubResource("Shortcut_pgg48")
 text = "Manual"
 
 [node name="Auto" type="CheckBox" parent="VBoxContainer/ModeButtonsContainer"]
@@ -133,12 +159,14 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 button_pressed = true
 button_group = SubResource("ButtonGroup_uxnt0")
+shortcut = SubResource("Shortcut_a0fx5")
 text = "Auto"
 
 [node name="Stack" type="CheckBox" parent="VBoxContainer/ModeButtonsContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_uxnt0")
+shortcut = SubResource("Shortcut_ysxej")
 text = "Stack"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
