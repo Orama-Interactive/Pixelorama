@@ -5,6 +5,7 @@ const SPLASH_DIALOG_SCENE_PATH := "res://src/UI/Dialogs/SplashDialog.tscn"
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
+var is_writing_text := false
 var changed_projects_on_quit: Array[Project]
 var cursor_image := preload("res://assets/graphics/cursor.png")
 ## Used to download an image when dragged and dropped directly from a browser into Pixelorama
@@ -202,7 +203,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and is_instance_valid(Global.main_viewport):
+	if is_writing_text and event is InputEventKey and is_instance_valid(Global.main_viewport):
 		Global.main_viewport.get_child(0).push_input(event)
 	left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
