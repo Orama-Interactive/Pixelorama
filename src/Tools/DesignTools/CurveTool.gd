@@ -195,7 +195,7 @@ func _draw_shape() -> void:
 
 
 func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
-	if is_placing_tiles():
+	if Tools.is_placing_tiles():
 		draw_tile(point)
 	else:
 		if Global.current_project.can_pixel_get_drawn(point):

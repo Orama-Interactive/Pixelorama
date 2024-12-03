@@ -189,7 +189,7 @@ func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
 		var draw_pos := point + thickness_vector
-		if is_placing_tiles():
+		if Tools.is_placing_tiles():
 			draw_tile(draw_pos)
 		else:
 			if Global.current_project.can_pixel_get_drawn(draw_pos):

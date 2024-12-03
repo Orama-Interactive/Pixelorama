@@ -163,7 +163,7 @@ func update_config() -> void:
 
 func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
-	if is_placing_tiles():
+	if Tools.is_placing_tiles():
 		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 		var tileset := tilemap_cel.tileset
 		var tile_index := clampi(TileSetPanel.selected_tile_index, 0, tileset.tiles.size() - 1)
@@ -517,7 +517,7 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2i) -> Image:
 func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
 	var snapped_position := snap_position(_cursor)
-	if is_placing_tiles():
+	if Tools.is_placing_tiles():
 		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
 		var grid_size := tileset.tile_size
 		snapped_position = _snap_to_rectangular_grid_center(
@@ -545,7 +545,7 @@ func draw_indicator(left: bool) -> void:
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas: Node2D = Global.canvas.indicators
-	if _brush.type in IMAGE_BRUSHES and not _draw_line or is_placing_tiles():
+	if _brush.type in IMAGE_BRUSHES and not _draw_line or Tools.is_placing_tiles():
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
 		canvas.draw_texture(_brush_texture, pos)
@@ -580,7 +580,7 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 	pos = _stroke_project.tiles.get_canon_position(pos)
 	if Global.current_project.has_selection:
 		pos = Global.current_project.selection_map.get_canon_position(pos)
-	if is_placing_tiles():
+	if Tools.is_placing_tiles():
 		draw_tile(pos)
 		return
 	if !_stroke_project.can_pixel_get_drawn(pos):

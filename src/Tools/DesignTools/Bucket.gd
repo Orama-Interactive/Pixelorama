@@ -204,7 +204,7 @@ func fill(pos: Vector2i) -> void:
 
 func fill_in_color(pos: Vector2i) -> void:
 	var project := Global.current_project
-	if is_placing_tiles():
+	if Tools.is_placing_tiles():
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
@@ -331,7 +331,7 @@ func _flood_fill(pos: Vector2i) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
 	var project := Global.current_project
-	if is_placing_tiles():
+	if Tools.is_placing_tiles():
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue

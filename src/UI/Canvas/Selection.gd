@@ -224,6 +224,10 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 		if is_zero_approx(absf(move.y)):
 			move.y = 0
 		var final_direction := (move * step).round()
+		if Tools.is_placing_tiles():
+			var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+			var grid_size := tileset.tile_size
+			final_direction *= Vector2(grid_size)
 		move_content(final_direction)
 
 
@@ -313,6 +317,8 @@ func _update_on_zoom() -> void:
 
 
 func _gizmo_resize() -> void:
+	if Tools.is_placing_tiles():
+		return
 	var dir := dragged_gizmo.direction
 	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
@@ -379,10 +385,11 @@ func resize_selection() -> void:
 	else:
 		Global.current_project.selection_map.copy_from(original_bitmap)
 	if is_moving_content:
-		content_pivot = original_big_bounding_rectangle.size / 2.0
 		preview_image.copy_from(original_preview_image)
-		DrawingAlgos.nn_rotate(preview_image, angle, content_pivot)
-		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+		if not Tools.is_placing_tiles():
+			content_pivot = original_big_bounding_rectangle.size / 2.0
+			DrawingAlgos.nn_rotate(preview_image, angle, content_pivot)
+			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 		if temp_rect.size.x < 0:
 			preview_image.flip_x()
 		if temp_rect.size.y < 0:
@@ -456,6 +463,15 @@ func move_borders(move: Vector2i) -> void:
 		return
 	marching_ants_outline.offset += Vector2(move)
 	big_bounding_rectangle.position += move
+	if Tools.is_placing_tiles():
+		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+		var grid_size := tileset.tile_size
+		marching_ants_outline.offset = Tools.snap_to_rectangular_grid_boundary(
+			marching_ants_outline.offset, grid_size
+		)
+		big_bounding_rectangle.position = Vector2i(
+			Tools.snap_to_rectangular_grid_boundary(big_bounding_rectangle.position, grid_size)
+		)
 	queue_redraw()
 
 

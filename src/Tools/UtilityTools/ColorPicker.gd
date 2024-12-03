@@ -65,7 +65,7 @@ func _pick_color(pos: Vector2i) -> void:
 	pos = project.tiles.get_canon_position(pos)
 	if pos.x < 0 or pos.y < 0:
 		return
-	if is_placing_tiles():
+	if Tools.is_placing_tiles():
 		var cel := Global.current_project.get_current_cel() as CelTileMap
 		Tools.selected_tile_index_changed.emit(cel.get_cell_index_at_coords(pos))
 		return
