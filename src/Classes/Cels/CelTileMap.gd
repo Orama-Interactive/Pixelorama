@@ -125,6 +125,29 @@ func get_cell_position(coords: Vector2i) -> int:
 	return x + y
 
 
+## Returns the position of a cell in the tilemap
+## at tilemap coordinates [param coords] in the cel's image.
+func get_cell_position_in_tilemap_space(coords: Vector2i) -> int:
+	var x := coords.x
+	x = clampi(x, 0, horizontal_cells - 1)
+	var y := coords.y
+	y = clampi(y, 0, vertical_cells - 1)
+	y *= horizontal_cells
+	return x + y
+
+
+## Returns the index of a cell in the tilemap
+## at pixel coordinates [param coords] in the cel's image.
+func get_cell_index_at_coords(coords: Vector2i) -> int:
+	return cells[get_cell_position(coords)].index
+
+
+## Returns the index of a cell in the tilemap
+## at tilemap coordinates [param coords] in the cel's image.
+func get_cell_index_at_coords_in_tilemap_space(coords: Vector2i) -> int:
+	return cells[get_cell_position_in_tilemap_space(coords)].index
+
+
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]
 ## with image [param image_portion] is equal to [param tile_image].
 func tiles_equal(cell_position: int, image_portion: Image, tile_image: Image) -> bool:
