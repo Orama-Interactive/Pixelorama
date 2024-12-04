@@ -99,10 +99,10 @@ func apply_selection(pos: Vector2i) -> void:
 	if _draw_points.size() >= 1:
 		if _intersect:
 			project.selection_map.clear()
-		paint_selection(project.selection_map, previous_selection_map, _draw_points)
+		paint_selection(project, previous_selection_map, _draw_points)
 		# Handle mirroring
 		var mirror := mirror_array(_draw_points)
-		paint_selection(project.selection_map, previous_selection_map, mirror)
+		paint_selection(project, previous_selection_map, mirror)
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:
@@ -114,17 +114,26 @@ func apply_selection(pos: Vector2i) -> void:
 
 
 func paint_selection(
-	selection_map: SelectionMap, previous_selection_map: SelectionMap, points: Array[Vector2i]
+	project: Project, previous_selection_map: SelectionMap, points: Array[Vector2i]
 ) -> void:
+	var selection_map := project.selection_map
 	var selection_size := selection_map.get_size()
 	for point in points:
 		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:
 			continue
 		if _intersect:
 			if previous_selection_map.is_pixel_selected(point):
-				selection_map.select_pixel(point, true)
+				select_pixel(point, project, true)
 		else:
-			selection_map.select_pixel(point, !_subtract)
+			select_pixel(point, project, !_subtract)
+
+
+func select_pixel(point: Vector2i, project: Project, select: bool) -> void:
+	if Tools.is_placing_tiles():
+		var tilemap := project.get_current_cel() as CelTileMap
+		var cell_position := tilemap.get_cell_position(point)
+		select_tilemap_cell(tilemap, cell_position, project.selection_map, select)
+	project.selection_map.select_pixel(point, select)
 
 
 # Bresenham's Algorithm
