@@ -215,6 +215,13 @@ func apply_selection(_position: Vector2i) -> void:
 				_intersect = true
 
 
+func select_tilemap_cell(
+	cel: CelTileMap, cell_position: int, selection: SelectionMap, select: bool
+) -> void:
+	var rect := Rect2i(cel.get_cell_coords_in_image(cell_position), cel.tileset.tile_size)
+	selection.select_rect(rect, select)
+
+
 func _on_confirm_button_pressed() -> void:
 	if selection_node.is_moving_content:
 		selection_node.transform_content_confirm()
