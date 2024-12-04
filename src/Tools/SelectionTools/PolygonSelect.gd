@@ -107,9 +107,9 @@ func apply_selection(pos: Vector2i) -> void:
 	if _draw_points.size() > 3:
 		if _intersect:
 			project.selection_map.clear()
-		lasso_selection(_draw_points, project.selection_map, previous_selection_map)
+		lasso_selection(_draw_points, project, previous_selection_map)
 		# Handle mirroring
-		var callable := lasso_selection.bind(project.selection_map, previous_selection_map)
+		var callable := lasso_selection.bind(project, previous_selection_map)
 		mirror_array(_draw_points, callable)
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
@@ -128,8 +128,9 @@ func _clear() -> void:
 
 
 func lasso_selection(
-	points: Array[Vector2i], selection_map: SelectionMap, previous_selection_map: SelectionMap
+	points: Array[Vector2i], project: Project, previous_selection_map: SelectionMap
 ) -> void:
+	var selection_map := project.selection_map
 	var selection_size := selection_map.get_size()
 	var bounding_rect := Rect2i(points[0], Vector2i.ZERO)
 	for point in points:
@@ -138,9 +139,9 @@ func lasso_selection(
 		bounding_rect = bounding_rect.expand(point)
 		if _intersect:
 			if previous_selection_map.is_pixel_selected(point):
-				selection_map.select_pixel(point, true)
+				select_pixel(point, project, true)
 		else:
-			selection_map.select_pixel(point, !_subtract)
+			select_pixel(point, project, !_subtract)
 
 	var v := Vector2i()
 	for x in bounding_rect.size.x:
@@ -150,9 +151,17 @@ func lasso_selection(
 			if Geometry2D.is_point_in_polygon(v, points):
 				if _intersect:
 					if previous_selection_map.is_pixel_selected(v):
-						selection_map.select_pixel(v, true)
+						select_pixel(v, project, true)
 				else:
-					selection_map.select_pixel(v, !_subtract)
+					select_pixel(v, project, !_subtract)
+
+
+func select_pixel(point: Vector2i, project: Project, select: bool) -> void:
+	if Tools.is_placing_tiles():
+		var tilemap := project.get_current_cel() as CelTileMap
+		var cell_position := tilemap.get_cell_position(point)
+		select_tilemap_cell(tilemap, cell_position, project.selection_map, select)
+	project.selection_map.select_pixel(point, select)
 
 
 # Bresenham's Algorithm
