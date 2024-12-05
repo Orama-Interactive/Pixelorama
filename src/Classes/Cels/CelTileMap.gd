@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 class_name CelTileMap
 extends PixelCel
 
@@ -150,7 +151,7 @@ func get_cell_index_at_coords_in_tilemap_space(coords: Vector2i) -> int:
 
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]
 ## with image [param image_portion] is equal to [param tile_image].
-func tiles_equal(cell_position: int, image_portion: Image, tile_image: Image) -> bool:
+func _tiles_equal(cell_position: int, image_portion: Image, tile_image: Image) -> bool:
 	var cell_data := cells[cell_position]
 	var final_image_portion := transform_tile(
 		tile_image, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
@@ -380,7 +381,7 @@ func update_tilemap(
 					tileset.add_tile(image_portion, self)
 					cells[i].index = tileset.tiles.size() - 1
 				continue
-			if not tiles_equal(i, image_portion, current_tile.image):
+			if not _tiles_equal(i, image_portion, current_tile.image):
 				tileset.replace_tile_at(image_portion, index, self)
 		elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
 			_handle_auto_editing_mode(i, image_portion, tileset_size_before_update)
@@ -390,7 +391,7 @@ func update_tilemap(
 			var found_tile := false
 			for j in range(1, tileset.tiles.size()):
 				var tile := tileset.tiles[j]
-				if tiles_equal(i, image_portion, tile.image):
+				if _tiles_equal(i, image_portion, tile.image):
 					if cells[i].index != j:
 						cells[i].index = j
 						cells[i].remove_transformations()
@@ -415,7 +416,7 @@ func update_tilemap(
 		if index >= tileset.tiles.size():
 			index = 0
 		var current_tile := tileset.tiles[index]
-		if not tiles_equal(i, image_portion, current_tile.image):
+		if not _tiles_equal(i, image_portion, current_tile.image):
 			set_index(i, cells[i].index)
 
 
@@ -490,7 +491,7 @@ func _handle_auto_editing_mode(
 			tileset.add_tile(image_portion, self)
 			cells[i].index = tileset.tiles.size() - 1
 	else:  # If the cell is already mapped.
-		if tiles_equal(i, image_portion, current_tile.image):
+		if _tiles_equal(i, image_portion, current_tile.image):
 			# Case 3: The cell is mapped and it did not change.
 			# Do nothing and move on to the next cell.
 			return
@@ -571,12 +572,12 @@ func _re_index_all_cells() -> void:
 			var index := cells[i].index
 			if index > 0 and index < tileset.tiles.size():
 				var current_tile := tileset.tiles[index]
-				if not tiles_equal(i, image_portion, current_tile.image):
+				if not _tiles_equal(i, image_portion, current_tile.image):
 					set_index(i, cells[i].index)
 			continue
 		for j in range(1, tileset.tiles.size()):
 			var tile := tileset.tiles[j]
-			if tiles_equal(i, image_portion, tile.image):
+			if _tiles_equal(i, image_portion, tile.image):
 				cells[i].index = j
 				break
 
@@ -670,7 +671,7 @@ func update_texture(undo := false) -> void:
 				var tile_size := image_portion.get_size()
 				image.blit_rect(transformed_editing_image, Rect2i(Vector2i.ZERO, tile_size), coords)
 		else:
-			if not tiles_equal(i, image_portion, current_tile.image):
+			if not _tiles_equal(i, image_portion, current_tile.image):
 				var transformed_image := transform_tile(
 					image_portion, cell_data.flip_h, cell_data.flip_v, cell_data.transpose, true
 				)
