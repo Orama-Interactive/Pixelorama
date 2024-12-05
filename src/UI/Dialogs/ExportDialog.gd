@@ -231,6 +231,8 @@ func create_layer_list() -> void:
 			layer_name = tr("Group layer:")
 		elif layer is Layer3D:
 			layer_name = tr("3D layer:")
+		elif layer is LayerTileMap:
+			layer_name = tr("Tilemap layer:")
 		layer_name += " %s" % layer.get_layer_path()
 		layers_option_button.add_item(layer_name)
 

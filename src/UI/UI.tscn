@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c8dsi6ggkqa7a"]
+[gd_scene load_steps=55 format=3 uid="uid://c8dsi6ggkqa7a"]
 
 [ext_resource type="PackedScene" uid="uid://byu3rtoipuvoc" path="res://src/UI/ToolsPanel/Tools.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://ba24iuv55m4l3" path="res://src/UI/Canvas/Canvas.tscn" id="19"]
 [ext_resource type="PackedScene" uid="uid://wplk62pbgih4" path="res://src/Palette/PalettePanel.tscn" id="20"]
 [ext_resource type="Script" path="res://src/UI/ViewportContainer.gd" id="23"]
+[ext_resource type="PackedScene" uid="uid://bfbragmmdwfbl" path="res://src/UI/TilesPanel.tscn" id="23_wyr78"]
 [ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="27"]
 [ext_resource type="Script" path="res://addons/dockable_container/dockable_container.gd" id="35"]
 [ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="36"]
@@ -36,7 +37,7 @@ shader_parameter/size = Vector2(100, 100)
 [sub_resource type="Resource" id="Resource_xnnnd"]
 resource_name = "Tabs"
 script = ExtResource("36")
-names = PackedStringArray("Tools", "Reference Images")
+names = PackedStringArray("Tools", "Reference Images", "Tiles")
 current_tab = 0
 
 [sub_resource type="Resource" id="Resource_34hle"]
@@ -399,6 +400,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Palettes" parent="DockableContainer" instance=ExtResource("20")]
+layout_mode = 2
+
+[node name="Tiles" parent="DockableContainer" instance=ExtResource("23_wyr78")]
+visible = false
 layout_mode = 2
 
 [node name="Reference Images" parent="DockableContainer" instance=ExtResource("11")]

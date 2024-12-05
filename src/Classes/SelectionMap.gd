@@ -77,6 +77,13 @@ func select_pixel(pixel: Vector2i, select := true) -> void:
 		set_pixelv(pixel, Color(0))
 
 
+func select_rect(rect: Rect2i, select := true) -> void:
+	if select:
+		fill_rect(rect, Color(1, 1, 1, 1))
+	else:
+		fill_rect(rect, Color(0))
+
+
 func select_all() -> void:
 	fill(Color(1, 1, 1, 1))
 

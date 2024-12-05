@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 var _curve := Curve2D.new()  ## The [Curve2D] responsible for the shape of the curve being drawn.
 var _drawing := false  ## Set to true when a curve is being drawn.
@@ -195,9 +195,12 @@ func _draw_shape() -> void:
 
 
 func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
-	if Global.current_project.can_pixel_get_drawn(point):
-		for image in images:
-			_drawer.set_pixel(image, point, tool_slot.color)
+	if Tools.is_placing_tiles():
+		draw_tile(point)
+	else:
+		if Global.current_project.can_pixel_get_drawn(point):
+			for image in images:
+				_drawer.set_pixel(image, point, tool_slot.color)
 
 
 func _clear() -> void:

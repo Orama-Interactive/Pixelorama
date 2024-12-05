@@ -14,7 +14,7 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 
-enum LayerTypes { PIXEL, GROUP, THREE_D }
+enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 ## ## Used to tell whether a color is being taken from the current theme,
 ## or if it is a custom color.
@@ -897,12 +897,17 @@ func _initialize_keychain() -> void:
 		&"reference_rotate": Keychain.InputAction.new("", "Reference images", false),
 		&"reference_scale": Keychain.InputAction.new("", "Reference images", false),
 		&"reference_quick_menu": Keychain.InputAction.new("", "Reference images", false),
-		&"cancel_reference_transform": Keychain.InputAction.new("", "Reference images", false)
+		&"cancel_reference_transform": Keychain.InputAction.new("", "Reference images", false),
+		&"tile_rotate_left": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_rotate_right": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_flip_horizontal": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false)
 	}
 
 	Keychain.groups = {
 		"Canvas": Keychain.InputGroup.new("", false),
 		"Cursor movement": Keychain.InputGroup.new("Canvas"),
+		"Reference images": Keychain.InputGroup.new("Canvas"),
 		"Buttons": Keychain.InputGroup.new(),
 		"Tools": Keychain.InputGroup.new(),
 		"Left": Keychain.InputGroup.new("Tools"),
@@ -921,7 +926,7 @@ func _initialize_keychain() -> void:
 		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
-		"Reference images": Keychain.InputGroup.new("Canvas")
+		"Tileset panel": Keychain.InputGroup.new()
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 
@@ -954,7 +959,7 @@ func general_redo(project := current_project) -> void:
 ## Performs actions done after an undo or redo is done. this takes [member general_undo] and
 ## [member general_redo] a step further. Does further work if the current action requires it
 ## like refreshing textures, redraw UI elements etc...[br]
-## [param frame_index] and [param layer_index] are there for optimizzation. if the undo or redo
+## [param frame_index] and [param layer_index] are there for optimization. if the undo or redo
 ## happens only in one cel then the cel's frame and layer should be passed to [param frame_index]
 ## and [param layer_index] respectively, otherwise the entire timeline will be refreshed.
 func undo_or_redo(
@@ -980,20 +985,24 @@ func undo_or_redo(
 		]
 	):
 		if layer_index > -1 and frame_index > -1:
-			canvas.update_texture(layer_index, frame_index, project)
+			var cel := project.frames[frame_index].cels[layer_index]
+			if action_name == "Scale":
+				cel.size_changed(project.size)
+			canvas.update_texture(layer_index, frame_index, project, undo)
 		else:
 			for i in project.frames.size():
 				for j in project.layers.size():
-					canvas.update_texture(j, i, project)
+					var cel := project.frames[i].cels[j]
+					if action_name == "Scale":
+						cel.size_changed(project.size)
+					canvas.update_texture(j, i, project, undo)
 
 		canvas.selection.queue_redraw()
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
 					var current_cel := project.frames[i].cels[j]
-					if current_cel is Cel3D:
-						current_cel.size_changed(project.size)
-					else:
+					if current_cel is not Cel3D:
 						current_cel.image_texture.set_image(current_cel.get_image())
 			canvas.camera_zoom()
 			canvas.grid.queue_redraw()

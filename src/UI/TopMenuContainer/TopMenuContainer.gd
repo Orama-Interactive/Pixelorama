@@ -372,9 +372,13 @@ func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.set_name("panels_submenu")
 	panels_submenu.hide_on_checkable_item_selection = false
 	for element in ui_elements:
-		panels_submenu.add_check_item(element.name)
+		if element.name == "Tiles":
+			continue
+		var id := ui_elements.find(element)
+		panels_submenu.add_check_item(element.name, id)
 		var is_hidden: bool = main_ui.is_control_hidden(element)
-		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
+		var index := panels_submenu.get_item_index(id)
+		panels_submenu.set_item_checked(index, !is_hidden)
 
 	panels_submenu.id_pressed.connect(_panels_submenu_id_pressed)
 	window_menu.add_child(panels_submenu)
@@ -718,21 +722,25 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 	var old_color_mode := project.color_mode
 	var redo_data := {}
 	var undo_data := {}
+	var pixel_cels: Array[BaseCel]
+	# We need to do it this way because Godot
+	# doesn't like casting typed arrays into other types.
 	for cel in project.get_all_pixel_cels():
-		cel.get_image().add_data_to_dictionary(undo_data)
+		pixel_cels.append(cel)
+	project.serialize_cel_undo_data(pixel_cels, undo_data)
 	# Change the color mode directly before undo/redo in order to affect the images,
 	# so we can store them as redo data.
 	if id == ColorModes.RGBA:
 		project.color_mode = Image.FORMAT_RGBA8
 	else:
 		project.color_mode = Project.INDEXED_MODE
-	for cel in project.get_all_pixel_cels():
-		cel.get_image().add_data_to_dictionary(redo_data)
+	project.update_tilemaps(undo_data)
+	project.serialize_cel_undo_data(pixel_cels, redo_data)
 	project.undo_redo.create_action("Change color mode")
 	project.undos += 1
 	project.undo_redo.add_do_property(project, "color_mode", project.color_mode)
 	project.undo_redo.add_undo_property(project, "color_mode", old_color_mode)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_undo_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -763,9 +771,10 @@ func _snap_to_submenu_id_pressed(id: int) -> void:
 func _panels_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
-	var element_visible := panels_submenu.is_item_checked(id)
+	var index := panels_submenu.get_item_index(id)
+	var element_visible := panels_submenu.is_item_checked(index)
 	main_ui.set_control_hidden(ui_elements[id], element_visible)
-	panels_submenu.set_item_checked(id, !element_visible)
+	panels_submenu.set_item_checked(index, !element_visible)
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
@@ -787,8 +796,9 @@ func set_layout(id: int) -> void:
 		layouts_submenu.set_item_checked(offset, offset == (id + 1))
 
 	for i in ui_elements.size():
+		var index := panels_submenu.get_item_index(i)
 		var is_hidden := main_ui.is_control_hidden(ui_elements[i])
-		panels_submenu.set_item_checked(i, !is_hidden)
+		panels_submenu.set_item_checked(index, !is_hidden)
 
 	if zen_mode:  # Turn zen mode off
 		Global.control.find_child("TabsContainer").visible = true
@@ -866,9 +876,11 @@ func _toggle_show_mouse_guides() -> void:
 
 func _toggle_zen_mode() -> void:
 	for i in ui_elements.size():
-		if ui_elements[i].name == "Main Canvas":
+		var index := panels_submenu.get_item_index(i)
+		var panel_name := ui_elements[i].name
+		if panel_name == "Main Canvas" or panel_name == "Tiles":
 			continue
-		if !panels_submenu.is_item_checked(i):
+		if !panels_submenu.is_item_checked(index):
 			continue
 		main_ui.set_control_hidden(ui_elements[i], !zen_mode)
 	Global.control.find_child("TabsContainer").visible = zen_mode

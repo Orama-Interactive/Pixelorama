@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 enum ShadingMode { SIMPLE, HUE_SHIFTING, COLOR_REPLACE }
 enum LightenDarken { LIGHTEN, DARKEN }

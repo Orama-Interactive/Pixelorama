@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://hbgwxlin4jun"]
+
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="1_uvdem"]
+[ext_resource type="Script" path="res://src/UI/Timeline/NewTileMapLayerDialog.gd" id="1_y2r5h"]
+
+[node name="NewTileMapLayerDialog" type="ConfirmationDialog"]
+title = "New layer"
+position = Vector2i(0, 36)
+size = Vector2i(300, 230)
+script = ExtResource("1_y2r5h")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 181.0
+columns = 2
+
+[node name="NameLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name:"
+
+[node name="NameLineEdit" type="LineEdit" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tilemap 1"
+
+[node name="TilesetLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tileset:"
+
+[node name="TilesetOptionButton" type="OptionButton" parent="GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "New tileset"
+
+[node name="TilesetNameLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tileset name:"
+
+[node name="TilesetNameLineEdit" type="LineEdit" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TileSizeLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile size:"
+
+[node name="TileSizeSlider" parent="GridContainer" instance=ExtResource("1_uvdem")]
+layout_mode = 2
+value = Vector2(16, 16)
+min_value = Vector2(1, 1)
+max_value = Vector2(128, 128)
+allow_greater = true
+show_ratio = true
+prefix_x = "Width:"
+prefix_y = "Height:"
+suffix_x = "px"
+suffix_y = "px"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="item_selected" from="GridContainer/TilesetOptionButton" to="." method="_on_tileset_option_button_item_selected"]

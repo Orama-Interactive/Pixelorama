@@ -223,10 +223,9 @@ text = "Brush type:"
 [node name="BrushTypeOption" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "File brush"
-popup/item_0/id = 0
 popup/item_1/text = "Project brush"
 popup/item_1/id = 1
 popup/item_2/text = "Random brush"

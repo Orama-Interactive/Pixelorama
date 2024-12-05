@@ -5,11 +5,14 @@
 
 [node name="LayerProperties" type="AcceptDialog"]
 title = "Layer properties"
+size = Vector2i(300, 208)
 script = ExtResource("1_54q1t")
 
 [node name="GridContainer" type="GridContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 159.0
 columns = 2
 
 [node name="NameLabel" type="Label" parent="GridContainer"]
@@ -60,8 +63,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true
 
+[node name="TilesetLabel" type="Label" parent="GridContainer" groups=["TilemapLayers"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Tileset:"
+
+[node name="TilesetOptionButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayers"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/BlendModeOptionButton" to="." method="_on_blend_mode_option_button_item_selected"]
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
+[connection signal="item_selected" from="GridContainer/TilesetOptionButton" to="." method="_on_tileset_option_button_item_selected"]

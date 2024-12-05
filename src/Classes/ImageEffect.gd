@@ -157,10 +157,11 @@ func display_animate_dialog() -> void:
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
+	project.update_tilemaps(undo_data)
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, -1, -1, project))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, -1, -1, project))
 	project.undo_redo.commit_action()
@@ -168,24 +169,22 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 
 func _get_undo_data(project: Project) -> Dictionary:
 	var data := {}
-	var images := _get_selected_draw_images(project)
-	for image in images:
-		image.add_data_to_dictionary(data)
+	project.serialize_cel_undo_data(_get_selected_draw_cels(project), data)
 	return data
 
 
-func _get_selected_draw_images(project: Project) -> Array[ImageExtended]:
-	var images: Array[ImageExtended] = []
+func _get_selected_draw_cels(project: Project) -> Array[BaseCel]:
+	var images: Array[BaseCel] = []
 	if affect == SELECTED_CELS:
 		for cel_index in project.selected_cels:
 			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 			if cel is PixelCel:
-				images.append(cel.get_image())
+				images.append(cel)
 	else:
 		for frame in project.frames:
 			for cel in frame.cels:
 				if cel is PixelCel:
-					images.append(cel.get_image())
+					images.append(cel)
 	return images
 
 

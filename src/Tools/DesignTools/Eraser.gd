@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 var _last_position := Vector2.INF
 var _clear_image: Image
@@ -19,6 +19,7 @@ class EraseOp:
 
 func _init() -> void:
 	_drawer.color_op = EraseOp.new()
+	_is_eraser = true
 	_clear_image = Image.create(1, 1, false, Image.FORMAT_RGBA8)
 	_clear_image.fill(Color(0, 0, 0, 0))
 
@@ -42,13 +43,11 @@ func draw_start(pos: Vector2i) -> void:
 		_pick_color(pos)
 		return
 	_picking_color = false
-
 	Global.canvas.selection.transform_content_confirm()
+	prepare_undo("Draw")
 	update_mask(_strength == 1)
 	_changed = false
 	_drawer.color_op.changed = false
-
-	prepare_undo("Draw")
 	_drawer.reset()
 
 	_draw_line = Input.is_action_pressed("draw_create_line")

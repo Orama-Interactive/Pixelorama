@@ -6,6 +6,7 @@ var unique_iso_lines := PackedVector2Array()
 
 func _ready() -> void:
 	Global.project_switched.connect(queue_redraw)
+	Global.cel_switched.connect(queue_redraw)
 
 
 func _draw() -> void:
@@ -32,28 +33,32 @@ func _draw() -> void:
 
 
 func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
-	var grid = Global.grids[grid_index]
+	var grid := Global.grids[grid_index]
+	var grid_size := grid.grid_size
+	var grid_offset := grid.grid_offset
+	var cel := Global.current_project.get_current_cel()
+	if cel is CelTileMap and grid_index == 0:
+		grid_size = (cel as CelTileMap).tileset.tile_size
+		grid_offset = Vector2i.ZERO
 	var grid_multiline_points := PackedVector2Array()
 
 	var x: float = (
-		target_rect.position.x
-		+ fposmod(grid.grid_offset.x - target_rect.position.x, grid.grid_size.x)
+		target_rect.position.x + fposmod(grid_offset.x - target_rect.position.x, grid_size.x)
 	)
 	while x <= target_rect.end.x:
 		if not Vector2(x, target_rect.position.y) in unique_rect_lines:
 			grid_multiline_points.push_back(Vector2(x, target_rect.position.y))
 			grid_multiline_points.push_back(Vector2(x, target_rect.end.y))
-		x += grid.grid_size.x
+		x += grid_size.x
 
 	var y: float = (
-		target_rect.position.y
-		+ fposmod(grid.grid_offset.y - target_rect.position.y, grid.grid_size.y)
+		target_rect.position.y + fposmod(grid_offset.y - target_rect.position.y, grid_size.y)
 	)
 	while y <= target_rect.end.y:
 		if not Vector2(target_rect.position.x, y) in unique_rect_lines:
 			grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
 			grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
-		y += grid.grid_size.y
+		y += grid_size.y
 
 	unique_rect_lines.append_array(grid_multiline_points)
 	if not grid_multiline_points.is_empty():
@@ -61,7 +66,7 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 
 
 func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
-	var grid = Global.grids[grid_index]
+	var grid := Global.grids[grid_index]
 	var grid_multiline_points := PackedVector2Array()
 
 	var cell_size: Vector2 = grid.isometric_grid_size

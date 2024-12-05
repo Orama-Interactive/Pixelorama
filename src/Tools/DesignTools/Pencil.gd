@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 var _prev_mode := false
 var _last_position := Vector2i(Vector2.INF)
@@ -103,6 +103,7 @@ func draw_start(pos: Vector2i) -> void:
 	_picking_color = false
 
 	Global.canvas.selection.transform_content_confirm()
+	prepare_undo("Draw")
 	var can_skip_mask := true
 	if tool_slot.color.a < 1 and !_overwrite:
 		can_skip_mask = false
@@ -112,7 +113,6 @@ func draw_start(pos: Vector2i) -> void:
 	_drawer.color_op.overwrite = _overwrite
 	_draw_points = []
 
-	prepare_undo("Draw")
 	_drawer.reset()
 
 	_draw_line = Input.is_action_pressed("draw_create_line")

@@ -8,13 +8,15 @@ var layer_indices: PackedInt32Array
 @onready var opacity_slider := $GridContainer/OpacitySlider as ValueSlider
 @onready var blend_modes_button := $GridContainer/BlendModeOptionButton as OptionButton
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
+@onready var tileset_option_button := $GridContainer/TilesetOptionButton as OptionButton
 
 
 func _on_visibility_changed() -> void:
 	if layer_indices.size() == 0:
 		return
 	Global.dialog_open(visible)
-	var first_layer := Global.current_project.layers[layer_indices[0]]
+	var project := Global.current_project
+	var first_layer := project.layers[layer_indices[0]]
 	if visible:
 		_fill_blend_modes_option_button()
 		name_line_edit.text = first_layer.name
@@ -22,6 +24,14 @@ func _on_visibility_changed() -> void:
 		var blend_mode_index := blend_modes_button.get_item_index(first_layer.blend_mode)
 		blend_modes_button.selected = blend_mode_index
 		user_data_text_edit.text = first_layer.user_data
+		get_tree().set_group(&"TilemapLayers", "visible", first_layer is LayerTileMap)
+		tileset_option_button.clear()
+		if first_layer is LayerTileMap:
+			for i in project.tilesets.size():
+				var tileset := project.tilesets[i]
+				tileset_option_button.add_item(tileset.get_text_info(i))
+				if tileset == first_layer.tileset:
+					tileset_option_button.select(i)
 	else:
 		layer_indices = []
 
@@ -86,6 +96,7 @@ func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> 
 	Global.canvas.update_all_layers = true
 	var project := Global.current_project
 	var current_mode := blend_modes_button.get_item_id(index)
+	project.undos += 1
 	project.undo_redo.create_action("Set Blend Mode")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
@@ -109,3 +120,32 @@ func _on_user_data_text_edit_text_changed() -> void:
 
 func _emit_layer_property_signal() -> void:
 	layer_property_changed.emit()
+
+
+func _on_tileset_option_button_item_selected(index: int) -> void:
+	var project := Global.current_project
+	var new_tileset := project.tilesets[index]
+	project.undos += 1
+	project.undo_redo.create_action("Set Tileset")
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		var previous_tileset := (layer as LayerTileMap).tileset
+		project.undo_redo.add_do_property(layer, "tileset", new_tileset)
+		project.undo_redo.add_undo_property(layer, "tileset", previous_tileset)
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					project.undo_redo.add_do_method(cel.set_tileset.bind(new_tileset, false))
+					project.undo_redo.add_do_method(cel.update_cel_portions)
+					project.undo_redo.add_undo_method(cel.set_tileset.bind(previous_tileset, false))
+					project.undo_redo.add_undo_method(cel.update_cel_portions)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(Global.canvas.draw_layers)
+	project.undo_redo.add_do_method(func(): Global.cel_switched.emit())
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(Global.canvas.draw_layers)
+	project.undo_redo.add_undo_method(func(): Global.cel_switched.emit())
+	project.undo_redo.commit_action()

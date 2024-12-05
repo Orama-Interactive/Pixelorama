@@ -75,7 +75,17 @@ func draw_move(pos: Vector2i) -> void:
 func draw_end(_pos: Vector2i) -> void:
 	is_moving = false
 	_draw_cache = []
-	Global.current_project.can_undo = true
+	var project := Global.current_project
+	project.can_undo = true
+
+
+func get_cell_position(pos: Vector2i) -> int:
+	var tile_pos := 0
+	if Global.current_project.get_current_cel() is not CelTileMap:
+		return tile_pos
+	var cel := Global.current_project.get_current_cel() as CelTileMap
+	tile_pos = cel.get_cell_position(pos)
+	return tile_pos
 
 
 func cursor_move(pos: Vector2i) -> void:
@@ -129,52 +139,14 @@ func draw_preview() -> void:
 func snap_position(pos: Vector2) -> Vector2:
 	var snapping_distance := Global.snapping_distance / Global.camera.zoom.x
 	if Global.snap_to_rectangular_grid_boundary:
-		var grid_pos := pos.snapped(Global.grids[0].grid_size)
-		grid_pos += Vector2(Global.grids[0].grid_offset)
-		# keeping grid_pos as is would have been fine but this adds extra accuracy as to
-		# which snap point (from the list below) is closest to mouse and occupy THAT point
-		# t_l is for "top left" and so on
-		var t_l := grid_pos + Vector2(-Global.grids[0].grid_size.x, -Global.grids[0].grid_size.y)
-		var t_c := grid_pos + Vector2(0, -Global.grids[0].grid_size.y)
-		var t_r := grid_pos + Vector2(Global.grids[0].grid_size.x, -Global.grids[0].grid_size.y)
-		var m_l := grid_pos + Vector2(-Global.grids[0].grid_size.x, 0)
-		var m_c := grid_pos
-		var m_r := grid_pos + Vector2(Global.grids[0].grid_size.x, 0)
-		var b_l := grid_pos + Vector2(-Global.grids[0].grid_size.x, Global.grids[0].grid_size.y)
-		var b_c := grid_pos + Vector2(0, Global.grids[0].grid_size.y)
-		var b_r := grid_pos + Vector2(Global.grids[0].grid_size)
-		var vec_arr: PackedVector2Array = [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
-		for vec in vec_arr:
-			if vec.distance_to(pos) < grid_pos.distance_to(pos):
-				grid_pos = vec
-
-		var grid_point := _get_closest_point_to_grid(pos, snapping_distance, grid_pos)
-		if grid_point != Vector2.INF:
-			pos = grid_point.floor()
+		pos = Tools.snap_to_rectangular_grid_boundary(
+			pos, Global.grids[0].grid_size, Global.grids[0].grid_offset, snapping_distance
+		)
 
 	if Global.snap_to_rectangular_grid_center:
-		var grid_center := (
-			pos.snapped(Global.grids[0].grid_size) + Vector2(Global.grids[0].grid_size / 2)
+		pos = _snap_to_rectangular_grid_center(
+			pos, Global.grids[0].grid_size, Global.grids[0].grid_offset, snapping_distance
 		)
-		grid_center += Vector2(Global.grids[0].grid_offset)
-		# keeping grid_center as is would have been fine but this adds extra accuracy as to
-		# which snap point (from the list below) is closest to mouse and occupy THAT point
-		# t_l is for "top left" and so on
-		var t_l := grid_center + Vector2(-Global.grids[0].grid_size.x, -Global.grids[0].grid_size.y)
-		var t_c := grid_center + Vector2(0, -Global.grids[0].grid_size.y)
-		var t_r := grid_center + Vector2(Global.grids[0].grid_size.x, -Global.grids[0].grid_size.y)
-		var m_l := grid_center + Vector2(-Global.grids[0].grid_size.x, 0)
-		var m_c := grid_center
-		var m_r := grid_center + Vector2(Global.grids[0].grid_size.x, 0)
-		var b_l := grid_center + Vector2(-Global.grids[0].grid_size.x, Global.grids[0].grid_size.y)
-		var b_c := grid_center + Vector2(0, Global.grids[0].grid_size.y)
-		var b_r := grid_center + Vector2(Global.grids[0].grid_size)
-		var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
-		for vec in vec_arr:
-			if vec.distance_to(pos) < grid_center.distance_to(pos):
-				grid_center = vec
-		if grid_center.distance_to(pos) <= snapping_distance:
-			pos = grid_center.floor()
 
 	var snap_to := Vector2.INF
 	if Global.snap_to_guides:
@@ -240,57 +212,39 @@ func mirror_array(array: Array[Vector2i], callable := func(_array): pass) -> Arr
 	return new_array
 
 
-func _get_closest_point_to_grid(pos: Vector2, distance: float, grid_pos: Vector2) -> Vector2:
-	# If the cursor is close to the start/origin of a grid cell, snap to that
-	var snap_distance := distance * Vector2.ONE
-	var closest_point := Vector2.INF
-	var rect := Rect2()
-	rect.position = pos - (snap_distance / 4.0)
-	rect.end = pos + (snap_distance / 4.0)
-	if rect.has_point(grid_pos):
-		closest_point = grid_pos
-		return closest_point
-	# If the cursor is far from the grid cell origin but still close to a grid line
-	# Look for a point close to a horizontal grid line
-	var grid_start_hor := Vector2(0, grid_pos.y)
-	var grid_end_hor := Vector2(Global.current_project.size.x, grid_pos.y)
-	var closest_point_hor := _get_closest_point_to_segment(
-		pos, distance, grid_start_hor, grid_end_hor
-	)
-	# Look for a point close to a vertical grid line
-	var grid_start_ver := Vector2(grid_pos.x, 0)
-	var grid_end_ver := Vector2(grid_pos.x, Global.current_project.size.y)
-	var closest_point_ver := _get_closest_point_to_segment(
-		pos, distance, grid_start_ver, grid_end_ver
-	)
-	# Snap to the closest point to the closest grid line
-	var horizontal_distance := (closest_point_hor - pos).length()
-	var vertical_distance := (closest_point_ver - pos).length()
-	if horizontal_distance < vertical_distance:
-		closest_point = closest_point_hor
-	elif horizontal_distance > vertical_distance:
-		closest_point = closest_point_ver
-	elif horizontal_distance == vertical_distance and closest_point_hor != Vector2.INF:
-		closest_point = grid_pos
-	return closest_point
-
-
-func _get_closest_point_to_segment(
-	pos: Vector2, distance: float, s1: Vector2, s2: Vector2
+func _snap_to_rectangular_grid_center(
+	pos: Vector2, grid_size: Vector2i, grid_offset: Vector2i, snapping_distance: float
 ) -> Vector2:
-	var test_line := (s2 - s1).rotated(deg_to_rad(90)).normalized()
-	var from_a := pos - test_line * distance
-	var from_b := pos + test_line * distance
-	var closest_point := Vector2.INF
-	if Geometry2D.segment_intersects_segment(from_a, from_b, s1, s2):
-		closest_point = Geometry2D.get_closest_point_to_segment(pos, s1, s2)
-	return closest_point
+	var grid_center := pos.snapped(grid_size) + Vector2(grid_size / 2)
+	grid_center += Vector2(grid_offset)
+	# keeping grid_center as is would have been fine but this adds extra accuracy as to
+	# which snap point (from the list below) is closest to mouse and occupy THAT point
+	# t_l is for "top left" and so on
+	var t_l := grid_center + Vector2(-grid_size.x, -grid_size.y)
+	var t_c := grid_center + Vector2(0, -grid_size.y)
+	var t_r := grid_center + Vector2(grid_size.x, -grid_size.y)
+	var m_l := grid_center + Vector2(-grid_size.x, 0)
+	var m_c := grid_center
+	var m_r := grid_center + Vector2(grid_size.x, 0)
+	var b_l := grid_center + Vector2(-grid_size.x, grid_size.y)
+	var b_c := grid_center + Vector2(0, grid_size.y)
+	var b_r := grid_center + Vector2(grid_size)
+	var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
+	for vec in vec_arr:
+		if vec.distance_to(pos) < grid_center.distance_to(pos):
+			grid_center = vec
+	if snapping_distance < 0:
+		pos = grid_center.floor()
+	else:
+		if grid_center.distance_to(pos) <= snapping_distance:
+			pos = grid_center.floor()
+	return pos
 
 
 func _snap_to_guide(
 	snap_to: Vector2, pos: Vector2, distance: float, s1: Vector2, s2: Vector2
 ) -> Vector2:
-	var closest_point := _get_closest_point_to_segment(pos, distance, s1, s2)
+	var closest_point := Tools.get_closest_point_to_segment(pos, distance, s1, s2)
 	if closest_point == Vector2.INF:  # Is not close to a guide
 		return Vector2.INF
 	# Snap to the closest guide
@@ -322,6 +276,17 @@ func _get_draw_image() -> ImageExtended:
 	return Global.current_project.get_current_cel().get_image()
 
 
+func _get_selected_draw_cels() -> Array[BaseCel]:
+	var cels: Array[BaseCel]
+	var project := Global.current_project
+	for cel_index in project.selected_cels:
+		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		if not cel is PixelCel:
+			continue
+		cels.append(cel)
+	return cels
+
+
 func _get_selected_draw_images() -> Array[ImageExtended]:
 	var images: Array[ImageExtended] = []
 	var project := Global.current_project
@@ -340,7 +305,10 @@ func _pick_color(pos: Vector2i) -> void:
 
 	if pos.x < 0 or pos.y < 0:
 		return
-
+	if Tools.is_placing_tiles():
+		var cel := Global.current_project.get_current_cel() as CelTileMap
+		Tools.selected_tile_index_changed.emit(cel.get_cell_index_at_coords(pos))
+		return
 	var image := Image.new()
 	image.copy_from(_get_draw_image())
 	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:

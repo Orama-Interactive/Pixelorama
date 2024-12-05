@@ -55,9 +55,10 @@ var global_layer_expand := true
 @onready var play_forward := %PlayForward as Button
 @onready var fps_spinbox := %FPSValue as ValueSlider
 @onready var onion_skinning_button := %OnionSkinning as BaseButton
-@onready var timeline_settings := $TimelineSettings as Popup
 @onready var cel_size_slider := %CelSizeSlider as ValueSlider
 @onready var loop_animation_button := %LoopAnim as BaseButton
+@onready var timeline_settings := $TimelineSettings as Popup
+@onready var new_tile_map_layer_dialog := $NewTileMapLayerDialog as ConfirmationDialog
 @onready var drag_highlight := $DragHighlight as ColorRect
 
 
@@ -70,7 +71,7 @@ func _ready() -> void:
 	cel_size_slider.min_value = min_cel_size
 	cel_size_slider.max_value = max_cel_size
 	cel_size_slider.value = cel_size
-	add_layer_list.get_popup().id_pressed.connect(add_layer)
+	add_layer_list.get_popup().id_pressed.connect(_on_add_layer_list_id_pressed)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
 	animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
@@ -475,6 +476,8 @@ func copy_frames(
 				)
 				if src_cel.selected != null:
 					selected_id = src_cel.selected.id
+			elif src_cel is CelTileMap:
+				new_cel = CelTileMap.new(src_cel.tileset)
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -832,24 +835,34 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 
 # Layer buttons
-
-
-func add_layer(type := 0) -> void:
+func _on_add_layer_pressed() -> void:
 	var project := Global.current_project
-	var current_layer := project.layers[project.current_layer]
-	var l: BaseLayer
-	match type:
-		Global.LayerTypes.PIXEL:
-			l = PixelLayer.new(project)
-		Global.LayerTypes.GROUP:
-			l = GroupLayer.new(project)
-		Global.LayerTypes.THREE_D:
-			l = Layer3D.new(project)
-			SteamManager.set_achievement("ACH_3D_LAYER")
+	var layer := PixelLayer.new(project)
+	add_layer(layer, project)
 
+
+func _on_add_layer_list_id_pressed(id: int) -> void:
+	if id == Global.LayerTypes.TILEMAP:
+		new_tile_map_layer_dialog.popup_centered()
+	else:
+		var project := Global.current_project
+		var layer: BaseLayer
+		match id:
+			Global.LayerTypes.PIXEL:
+				layer = PixelLayer.new(project)
+			Global.LayerTypes.GROUP:
+				layer = GroupLayer.new(project)
+			Global.LayerTypes.THREE_D:
+				layer = Layer3D.new(project)
+				SteamManager.set_achievement("ACH_3D_LAYER")
+		add_layer(layer, project)
+
+
+func add_layer(layer: BaseLayer, project: Project) -> void:
+	var current_layer := project.layers[project.current_layer]
 	var cels := []
 	for f in project.frames:
-		cels.append(l.new_empty_cel())
+		cels.append(layer.new_empty_cel())
 
 	var new_layer_idx := project.current_layer + 1
 	if current_layer is GroupLayer:
@@ -862,14 +875,14 @@ func add_layer(type := 0) -> void:
 				layer_button.visible = expanded
 				Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
 		# make layer child of group
-		l.parent = Global.current_project.layers[project.current_layer]
+		layer.parent = Global.current_project.layers[project.current_layer]
 	else:
 		# set the parent of layer to be the same as the layer below it
-		l.parent = Global.current_project.layers[project.current_layer].parent
+		layer.parent = Global.current_project.layers[project.current_layer].parent
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_method(project.add_layers.bind([l], [new_layer_idx], [cels]))
+	project.undo_redo.add_do_method(project.add_layers.bind([layer], [new_layer_idx], [cels]))
 	project.undo_redo.add_undo_method(project.remove_layers.bind([new_layer_idx]))
 	project.undo_redo.add_do_method(project.change_cel.bind(-1, new_layer_idx))
 	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
@@ -886,7 +899,11 @@ func _on_CloneLayer_pressed() -> void:
 	var clones: Array[BaseLayer] = []
 	var cels := []  # 2D Array of Cels
 	for src_layer in source_layers:
-		var cl_layer: BaseLayer = src_layer.get_script().new(project)
+		var cl_layer: BaseLayer
+		if src_layer is LayerTileMap:
+			cl_layer = LayerTileMap.new(project, src_layer.tileset)
+		else:
+			cl_layer = src_layer.get_script().new(project)
 		cl_layer.project = project
 		cl_layer.index = src_layer.index
 		var src_layer_data: Dictionary = src_layer.serialize()
@@ -904,6 +921,8 @@ func _on_CloneLayer_pressed() -> void:
 				new_cel = Cel3D.new(
 					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
+			elif src_cel is CelTileMap:
+				new_cel = CelTileMap.new(src_cel.tileset)
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -1085,11 +1104,15 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_do_property(bottom_cel, "image", new_bottom_image)
 			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			var redo_data := {}
 			var undo_data := {}
+			var redo_data := {}
+			if bottom_cel is CelTileMap:
+				(bottom_cel as CelTileMap).serialize_undo_data_source_image(
+					new_bottom_image, redo_data, undo_data
+				)
 			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
 			bottom_image.add_data_to_dictionary(undo_data)
-			Global.undo_redo_compress_images(redo_data, undo_data, project)
+			project.deserialize_cel_undo_data(redo_data, undo_data)
 
 	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
 	project.undo_redo.add_undo_method(

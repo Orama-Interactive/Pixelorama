@@ -258,6 +258,18 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 				new_project.tiles.tile_mask = image
 			else:
 				new_project.tiles.reset_mask()
+		if result.has("tilesets"):
+			for i in result.tilesets.size():
+				var tileset_dict: Dictionary = result.tilesets[i]
+				var tileset := new_project.tilesets[i]
+				var tile_size := tileset.tile_size
+				var tile_amount: int = tileset_dict.tile_amount
+				for j in tile_amount:
+					var image_data := zip_reader.read_file("tilesets/%s/%s" % [i, j])
+					var image := Image.create_from_data(
+						tile_size.x, tile_size.y, false, new_project.get_image_format(), image_data
+					)
+					tileset.add_tile(image, null)
 		zip_reader.close()
 	new_project.export_directory_path = path.get_base_dir()
 
@@ -418,6 +430,14 @@ func save_pxo_file(
 		zip_packer.start_file("image_data/tile_map")
 		zip_packer.write_file(project.tiles.tile_mask.get_data())
 		zip_packer.close_file()
+	for i in project.tilesets.size():
+		var tileset := project.tilesets[i]
+		var tileset_path := "tilesets/%s" % i
+		for j in tileset.tiles.size():
+			var tile := tileset.tiles[j]
+			zip_packer.start_file(tileset_path.path_join(str(j)))
+			zip_packer.write_file(tile.image.get_data())
+			zip_packer.close_file()
 	zip_packer.close()
 
 	if temp_path != path:
@@ -699,17 +719,18 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 		return
 	image.convert(project.get_image_format())
 	var cel_image := (cel as PixelCel).get_image()
-	var new_cel_image := ImageExtended.create_custom(
-		project_width, project_height, false, project.get_image_format(), cel_image.is_indexed
-	)
-	new_cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-	new_cel_image.convert_rgb_to_indexed()
-	var redo_data := {}
-	new_cel_image.add_data_to_dictionary(redo_data, cel_image)
 	var undo_data := {}
+	if cel is CelTileMap:
+		undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 	cel_image.add_data_to_dictionary(undo_data)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
-
+	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+	cel_image.convert_rgb_to_indexed()
+	var redo_data := {}
+	if cel is CelTileMap:
+		(cel as CelTileMap).update_tilemap()
+		redo_data[cel] = (cel as CelTileMap).serialize_undo_data()
+	cel_image.add_data_to_dictionary(redo_data)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_property(project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.change_cel.bind(frame_index, layer_index))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -813,6 +834,49 @@ func import_reference_image_from_image(image: Image) -> void:
 	ri.create_from_image(image)
 	Global.canvas.reference_image_container.add_child(ri)
 	reference_image_imported.emit()
+
+
+func open_image_as_tileset(
+	path: String, image: Image, horiz: int, vert: int, project := Global.current_project
+) -> void:
+	image.convert(project.get_image_format())
+	horiz = mini(horiz, image.get_size().x)
+	vert = mini(vert, image.get_size().y)
+	var frame_width := image.get_size().x / horiz
+	var frame_height := image.get_size().y / vert
+	var tile_size := Vector2i(frame_width, frame_height)
+	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file())
+	for yy in range(vert):
+		for xx in range(horiz):
+			var cropped_image := image.get_region(
+				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
+			)
+			@warning_ignore("int_as_enum_without_cast")
+			tileset.add_tile(cropped_image, null)
+	project.tilesets.append(tileset)
+
+
+func open_image_as_tileset_smart(
+	path: String,
+	image: Image,
+	sliced_rects: Array[Rect2i],
+	tile_size: Vector2i,
+	project := Global.current_project
+) -> void:
+	image.convert(project.get_image_format())
+	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
+		tile_size = image.get_size()
+		sliced_rects.append(Rect2i(Vector2i.ZERO, tile_size))
+	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file())
+	for rect in sliced_rects:
+		var offset: Vector2 = (0.5 * (tile_size - rect.size)).floor()
+		var cropped_image := Image.create(
+			tile_size.x, tile_size.y, false, project.get_image_format()
+		)
+		cropped_image.blit_rect(image, rect, offset)
+		@warning_ignore("int_as_enum_without_cast")
+		tileset.add_tile(cropped_image, null)
+	project.tilesets.append(tileset)
 
 
 func set_new_imported_tab(project: Project, path: String) -> void:

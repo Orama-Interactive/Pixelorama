@@ -54,9 +54,9 @@ func get_image() -> ImageExtended:
 	return image
 
 
-func update_texture() -> void:
+func update_texture(undo := false) -> void:
 	image_texture.set_image(image)
-	super.update_texture()
+	super.update_texture(undo)
 
 
 func get_class_name() -> String:

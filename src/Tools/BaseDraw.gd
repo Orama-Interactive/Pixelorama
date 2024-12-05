@@ -1,3 +1,4 @@
+class_name BaseDrawTool
 extends BaseTool
 
 const IMAGE_BRUSHES := [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
@@ -17,6 +18,7 @@ var _brush_image := Image.new()
 var _orignal_brush_image := Image.new()  ## Contains the original _brush_image, without resizing
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
+var _is_eraser := false
 @warning_ignore("unused_private_class_variable")
 var _picking_color := false
 
@@ -42,6 +44,7 @@ var _circle_tool_shortcut: Array[Vector2i]
 
 func _ready() -> void:
 	super._ready()
+	Global.cel_switched.connect(update_brush)
 	Global.global_tool_options.dynamics_panel.dynamics_changed.connect(_reset_dynamics)
 	Tools.color_changed.connect(_on_Color_changed)
 	Global.brushes_popup.brush_removed.connect(_on_Brush_removed)
@@ -160,34 +163,48 @@ func update_config() -> void:
 
 func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
-	match _brush.type:
-		Brushes.PIXEL:
-			_brush_texture = ImageTexture.create_from_image(
-				load("res://assets/graphics/pixel_image.png")
-			)
-			_stroke_dimensions = Vector2.ONE * _brush_size
-		Brushes.CIRCLE:
-			_brush_texture = ImageTexture.create_from_image(
-				load("res://assets/graphics/circle_9x9.png")
-			)
-			_stroke_dimensions = Vector2.ONE * _brush_size
-		Brushes.FILLED_CIRCLE:
-			_brush_texture = ImageTexture.create_from_image(
-				load("res://assets/graphics/circle_filled_9x9.png")
-			)
-			_stroke_dimensions = Vector2.ONE * _brush_size
-		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
-			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
-			if _brush.random.size() <= 1:
-				_orignal_brush_image = _brush.image
-			else:
-				var random := randi() % _brush.random.size()
-				_orignal_brush_image = _brush.random[random]
-			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			update_brush_image_flip_and_rotate()
-			_brush_texture = ImageTexture.create_from_image(_brush_image)
-			update_mirror_brush()
-			_stroke_dimensions = _brush_image.get_size()
+	if Tools.is_placing_tiles():
+		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
+		var tileset := tilemap_cel.tileset
+		var tile_index := clampi(TileSetPanel.selected_tile_index, 0, tileset.tiles.size() - 1)
+		var tile_image := tileset.tiles[tile_index].image
+		tile_image = tilemap_cel.transform_tile(
+			tile_image,
+			TileSetPanel.is_flipped_h,
+			TileSetPanel.is_flipped_v,
+			TileSetPanel.is_transposed
+		)
+		_brush_image.copy_from(tile_image)
+		_brush_texture = ImageTexture.create_from_image(_brush_image)
+	else:
+		match _brush.type:
+			Brushes.PIXEL:
+				_brush_texture = ImageTexture.create_from_image(
+					load("res://assets/graphics/pixel_image.png")
+				)
+				_stroke_dimensions = Vector2.ONE * _brush_size
+			Brushes.CIRCLE:
+				_brush_texture = ImageTexture.create_from_image(
+					load("res://assets/graphics/circle_9x9.png")
+				)
+				_stroke_dimensions = Vector2.ONE * _brush_size
+			Brushes.FILLED_CIRCLE:
+				_brush_texture = ImageTexture.create_from_image(
+					load("res://assets/graphics/circle_filled_9x9.png")
+				)
+				_stroke_dimensions = Vector2.ONE * _brush_size
+			Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
+				$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
+				if _brush.random.size() <= 1:
+					_orignal_brush_image = _brush.image
+				else:
+					var random := randi() % _brush.random.size()
+					_orignal_brush_image = _brush.random[random]
+				_brush_image = _create_blended_brush_image(_orignal_brush_image)
+				update_brush_image_flip_and_rotate()
+				_brush_texture = ImageTexture.create_from_image(_brush_image)
+				update_mirror_brush()
+				_stroke_dimensions = _brush_image.get_size()
 	_circle_tool_shortcut = []
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
@@ -256,8 +273,9 @@ func prepare_undo(action: String) -> void:
 
 
 func commit_undo() -> void:
-	var redo_data := _get_undo_data()
 	var project := Global.current_project
+	project.update_tilemaps(_undo_data)
+	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
 	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -265,7 +283,7 @@ func commit_undo() -> void:
 		layer = project.current_layer
 
 	project.undos += 1
-	Global.undo_redo_compress_images(redo_data, _undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
@@ -301,6 +319,22 @@ func draw_end(pos: Vector2i) -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
+
+
+func draw_tile(pos: Vector2i) -> void:
+	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
+	var mirrored_positions := Tools.get_mirrored_positions(pos, Global.current_project)
+	var tile_positions := PackedInt32Array()
+	tile_positions.resize(mirrored_positions.size() + 1)
+	tile_positions[0] = get_cell_position(pos)
+	for i in mirrored_positions.size():
+		var mirrored_position := mirrored_positions[i]
+		tile_positions[i + 1] = get_cell_position(mirrored_position)
+	for cel in _get_selected_draw_cels():
+		if cel is not CelTileMap:
+			return
+		for tile_position in tile_positions:
+			(cel as CelTileMap).set_index(tile_position, tile_index)
 
 
 func _prepare_tool() -> void:
@@ -482,7 +516,14 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2i) -> Image:
 
 func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
-	draw_indicator_at(snap_position(_cursor), Vector2i.ZERO, color)
+	var snapped_position := snap_position(_cursor)
+	if Tools.is_placing_tiles():
+		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+		var grid_size := tileset.tile_size
+		snapped_position = _snap_to_rectangular_grid_center(
+			snapped_position, grid_size, Vector2i.ZERO, -1
+		)
+	draw_indicator_at(snapped_position, Vector2i.ZERO, color)
 	if (
 		Global.current_project.has_selection
 		and Global.current_project.tiles.mode == Tiles.MODE.NONE
@@ -491,7 +532,7 @@ func draw_indicator(left: bool) -> void:
 		var nearest_pos := Global.current_project.selection_map.get_nearest_position(pos)
 		if nearest_pos != Vector2i.ZERO:
 			var offset := nearest_pos
-			draw_indicator_at(snap_position(_cursor), offset, Color.GREEN)
+			draw_indicator_at(snapped_position, offset, Color.GREEN)
 			return
 
 	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
@@ -499,12 +540,12 @@ func draw_indicator(left: bool) -> void:
 		var nearest_tile := Global.current_project.tiles.get_nearest_tile(pos)
 		if nearest_tile.position != Vector2i.ZERO:
 			var offset := nearest_tile.position
-			draw_indicator_at(snap_position(_cursor), offset, Color.GREEN)
+			draw_indicator_at(snapped_position, offset, Color.GREEN)
 
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas: Node2D = Global.canvas.indicators
-	if _brush.type in IMAGE_BRUSHES and not _draw_line:
+	if _brush.type in IMAGE_BRUSHES and not _draw_line or Tools.is_placing_tiles():
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
 		canvas.draw_texture(_brush_texture, pos)
@@ -539,6 +580,9 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 	pos = _stroke_project.tiles.get_canon_position(pos)
 	if Global.current_project.has_selection:
 		pos = Global.current_project.selection_map.get_canon_position(pos)
+	if Tools.is_placing_tiles():
+		draw_tile(pos)
+		return
 	if !_stroke_project.can_pixel_get_drawn(pos):
 		return
 
@@ -727,11 +771,7 @@ func _get_undo_data() -> Dictionary:
 			if not cel is PixelCel:
 				continue
 			cels.append(cel)
-	for cel in cels:
-		if not cel is PixelCel:
-			continue
-		var image := (cel as PixelCel).get_image()
-		image.add_data_to_dictionary(data)
+	project.serialize_cel_undo_data(cels, data)
 	return data
 
 

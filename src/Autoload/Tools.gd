@@ -2,6 +2,8 @@
 extends Node
 
 signal color_changed(color_info: Dictionary, button: int)
+@warning_ignore("unused_signal")
+signal selected_tile_index_changed(tile_index: int)
 signal config_changed(slot_idx: int, config: Dictionary)
 @warning_ignore("unused_signal")
 signal flip_rotated(flip_x, flip_y, rotate_90, rotate_180, rotate_270)
@@ -88,7 +90,11 @@ var tools := {
 	),
 	"Move":
 	Tool.new(
-		"Move", "Move", "move", "res://src/Tools/UtilityTools/Move.tscn", [Global.LayerTypes.PIXEL]
+		"Move",
+		"Move",
+		"move",
+		"res://src/Tools/UtilityTools/Move.tscn",
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
 	),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/UtilityTools/Zoom.tscn"),
 	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/UtilityTools/Pan.tscn"),
@@ -116,7 +122,7 @@ var tools := {
 		"Pencil",
 		"pencil",
 		"res://src/Tools/DesignTools/Pencil.tscn",
-		[Global.LayerTypes.PIXEL],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
@@ -126,7 +132,7 @@ var tools := {
 		"Eraser",
 		"eraser",
 		"res://src/Tools/DesignTools/Eraser.tscn",
-		[Global.LayerTypes.PIXEL],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
@@ -136,7 +142,7 @@ var tools := {
 		"Bucket",
 		"fill",
 		"res://src/Tools/DesignTools/Bucket.tscn",
-		[Global.LayerTypes.PIXEL]
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
 	),
 	"Shading":
 	Tool.new(
@@ -144,7 +150,7 @@ var tools := {
 		"Shading Tool",
 		"shading",
 		"res://src/Tools/DesignTools/Shading.tscn",
-		[Global.LayerTypes.PIXEL]
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
 	),
 	"LineTool":
 	(
@@ -154,7 +160,7 @@ var tools := {
 			"Line Tool",
 			"linetool",
 			"res://src/Tools/DesignTools/LineTool.tscn",
-			[Global.LayerTypes.PIXEL],
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -169,7 +175,7 @@ Hold %s to displace the shape's origin""",
 			"Curve Tool",
 			"curvetool",
 			"res://src/Tools/DesignTools/CurveTool.tscn",
-			[Global.LayerTypes.PIXEL],
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws bezier curves
 Press %s/%s to add new points
 Press and drag to control the curvature
@@ -185,7 +191,7 @@ Press %s to remove the last added point""",
 			"Rectangle Tool",
 			"rectangletool",
 			"res://src/Tools/DesignTools/RectangleTool.tscn",
-			[Global.LayerTypes.PIXEL],
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -200,7 +206,7 @@ Hold %s to displace the shape's origin""",
 			"Ellipse Tool",
 			"ellipsetool",
 			"res://src/Tools/DesignTools/EllipseTool.tscn",
-			[Global.LayerTypes.PIXEL],
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -213,7 +219,7 @@ Hold %s to displace the shape's origin""",
 		"Text",
 		"text",
 		"res://src/Tools/UtilityTools/Text.tscn",
-		[Global.LayerTypes.PIXEL],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 		""
 	),
 	"3DShapeEdit":
@@ -232,10 +238,12 @@ var _panels := {}
 var _curr_layer_type := Global.LayerTypes.PIXEL
 var _left_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Pencil",
+	Global.LayerTypes.TILEMAP: "Pencil",
 	Global.LayerTypes.THREE_D: "3DShapeEdit",
 }
 var _right_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Eraser",
+	Global.LayerTypes.TILEMAP: "Eraser",
 	Global.LayerTypes.THREE_D: "Pan",
 }
 var _tool_buttons: Node
@@ -573,6 +581,87 @@ func calculate_mirror_x_minus_y(pos: Vector2i, project: Project) -> Vector2i:
 		Vector2i(Vector2(pos).reflect(X_MINUS_Y_LINE).round())
 		+ Vector2i(project.x_minus_y_symmetry_point)
 	)
+
+
+func is_placing_tiles() -> bool:
+	if Global.current_project.frames.size() == 0 or Global.current_project.layers.size() == 0:
+		return false
+	return Global.current_project.get_current_cel() is CelTileMap and TileSetPanel.placing_tiles
+
+
+func _get_closest_point_to_grid(pos: Vector2, distance: float, grid_pos: Vector2) -> Vector2:
+	# If the cursor is close to the start/origin of a grid cell, snap to that
+	var snap_distance := distance * Vector2.ONE
+	var closest_point := Vector2.INF
+	var rect := Rect2()
+	rect.position = pos - (snap_distance / 4.0)
+	rect.end = pos + (snap_distance / 4.0)
+	if rect.has_point(grid_pos):
+		closest_point = grid_pos
+		return closest_point
+	# If the cursor is far from the grid cell origin but still close to a grid line
+	# Look for a point close to a horizontal grid line
+	var grid_start_hor := Vector2(0, grid_pos.y)
+	var grid_end_hor := Vector2(Global.current_project.size.x, grid_pos.y)
+	var closest_point_hor := get_closest_point_to_segment(
+		pos, distance, grid_start_hor, grid_end_hor
+	)
+	# Look for a point close to a vertical grid line
+	var grid_start_ver := Vector2(grid_pos.x, 0)
+	var grid_end_ver := Vector2(grid_pos.x, Global.current_project.size.y)
+	var closest_point_ver := get_closest_point_to_segment(
+		pos, distance, grid_start_ver, grid_end_ver
+	)
+	# Snap to the closest point to the closest grid line
+	var horizontal_distance := (closest_point_hor - pos).length()
+	var vertical_distance := (closest_point_ver - pos).length()
+	if horizontal_distance < vertical_distance:
+		closest_point = closest_point_hor
+	elif horizontal_distance > vertical_distance:
+		closest_point = closest_point_ver
+	elif horizontal_distance == vertical_distance and closest_point_hor != Vector2.INF:
+		closest_point = grid_pos
+	return closest_point
+
+
+func get_closest_point_to_segment(
+	pos: Vector2, distance: float, s1: Vector2, s2: Vector2
+) -> Vector2:
+	var test_line := (s2 - s1).rotated(deg_to_rad(90)).normalized()
+	var from_a := pos - test_line * distance
+	var from_b := pos + test_line * distance
+	var closest_point := Vector2.INF
+	if Geometry2D.segment_intersects_segment(from_a, from_b, s1, s2):
+		closest_point = Geometry2D.get_closest_point_to_segment(pos, s1, s2)
+	return closest_point
+
+
+func snap_to_rectangular_grid_boundary(
+	pos: Vector2, grid_size: Vector2i, grid_offset := Vector2i.ZERO, snapping_distance := 9999.0
+) -> Vector2:
+	var grid_pos := pos.snapped(grid_size)
+	grid_pos += Vector2(grid_offset)
+	# keeping grid_pos as is would have been fine but this adds extra accuracy as to
+	# which snap point (from the list below) is closest to mouse and occupy THAT point
+	# t_l is for "top left" and so on
+	var t_l := grid_pos + Vector2(-grid_size.x, -grid_size.y)
+	var t_c := grid_pos + Vector2(0, -grid_size.y)
+	var t_r := grid_pos + Vector2(grid_size.x, -grid_size.y)
+	var m_l := grid_pos + Vector2(-grid_size.x, 0)
+	var m_c := grid_pos
+	var m_r := grid_pos + Vector2(grid_size.x, 0)
+	var b_l := grid_pos + Vector2(-grid_size.x, grid_size.y)
+	var b_c := grid_pos + Vector2(0, grid_size.y)
+	var b_r := grid_pos + Vector2(grid_size)
+	var vec_arr: PackedVector2Array = [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
+	for vec in vec_arr:
+		if vec.distance_to(pos) < grid_pos.distance_to(pos):
+			grid_pos = vec
+
+	var grid_point := _get_closest_point_to_grid(pos, snapping_distance, grid_pos)
+	if grid_point != Vector2.INF:
+		pos = grid_point.floor()
+	return pos
 
 
 func set_button_size(button_size: int) -> void:

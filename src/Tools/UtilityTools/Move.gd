@@ -70,8 +70,8 @@ func draw_move(pos: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
-	super.draw_end(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		super.draw_end(pos)
 		return
 	if (
 		_start_pos != Vector2i(Vector2.INF)
@@ -93,6 +93,7 @@ func draw_end(pos: Vector2i) -> void:
 	_snap_to_grid = false
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.NONE)
+	super.draw_end(pos)
 
 
 func _move_image(image: Image, pixel_diff: Vector2i) -> void:
@@ -129,8 +130,9 @@ func _snap_position(pos: Vector2) -> Vector2:
 
 
 func _commit_undo(action: String) -> void:
-	var redo_data := _get_undo_data()
 	var project := Global.current_project
+	project.update_tilemaps(_undo_data)
+	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
 	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -139,7 +141,7 @@ func _commit_undo(action: String) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, _undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
@@ -157,9 +159,5 @@ func _get_undo_data() -> Dictionary:
 		for frame in project.frames:
 			var cel := frame.cels[project.current_layer]
 			cels.append(cel)
-	for cel in cels:
-		if not cel is PixelCel:
-			continue
-		var image := (cel as PixelCel).get_image()
-		image.add_data_to_dictionary(data)
+	project.serialize_cel_undo_data(cels, data)
 	return data

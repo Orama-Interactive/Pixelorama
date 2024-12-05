@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 var _start := Vector2i.ZERO
 var _offset := Vector2i.ZERO
@@ -128,8 +128,8 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_end(pos)
 	if _picking_color:
+		super.draw_end(pos)
 		return
 
 	if _drawing:
@@ -150,6 +150,7 @@ func draw_end(pos: Vector2i) -> void:
 		_drawing = false
 		_displace_origin = false
 		cursor_text = ""
+	super.draw_end(pos)
 
 
 func draw_preview() -> void:
@@ -188,9 +189,12 @@ func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
 		var draw_pos := point + thickness_vector
-		if Global.current_project.can_pixel_get_drawn(draw_pos):
-			for image in images:
-				_drawer.set_pixel(image, draw_pos, tool_slot.color)
+		if Tools.is_placing_tiles():
+			draw_tile(draw_pos)
+		else:
+			if Global.current_project.can_pixel_get_drawn(draw_pos):
+				for image in images:
+					_drawer.set_pixel(image, draw_pos, tool_slot.color)
 
 	commit_undo()
 

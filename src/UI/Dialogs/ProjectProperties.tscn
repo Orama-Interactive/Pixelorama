@@ -4,75 +4,103 @@
 
 [node name="ProjectProperties" type="AcceptDialog"]
 title = "Project Properties"
-size = Vector2i(197, 235)
+position = Vector2i(0, 36)
+size = Vector2i(300, 288)
 script = ExtResource("1_0n4uc")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 189.0
-offset_bottom = 186.0
+offset_right = 292.0
+offset_bottom = 239.0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
 columns = 2
 
-[node name="SizeLabel" type="Label" parent="GridContainer"]
+[node name="SizeLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Size:"
 
-[node name="SizeValueLabel" type="Label" parent="GridContainer"]
+[node name="SizeValueLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "64x64"
 
-[node name="ColorModeLabel" type="Label" parent="GridContainer"]
+[node name="ColorModeLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Color mode:"
 
-[node name="ColorModeValueLabel" type="Label" parent="GridContainer"]
+[node name="ColorModeValueLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "RGBA8"
 
-[node name="FramesLabel" type="Label" parent="GridContainer"]
+[node name="FramesLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Frames:"
 
-[node name="FramesValueLabel" type="Label" parent="GridContainer"]
+[node name="FramesValueLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1"
 
-[node name="LayersLabel" type="Label" parent="GridContainer"]
+[node name="LayersLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Layers:"
 
-[node name="LayersValueLabel" type="Label" parent="GridContainer"]
+[node name="LayersValueLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1"
 
-[node name="NameLabel" type="Label" parent="GridContainer"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Name:"
 
-[node name="NameLineEdit" type="LineEdit" parent="GridContainer"]
+[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="UserDataLabel" type="Label" parent="GridContainer"]
+[node name="UserDataLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "User data:"
 
-[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+[node name="UserDataTextEdit" type="TextEdit" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true
 
+[node name="TilesetsContainer" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TilesetsHeader" type="HBoxContainer" parent="VBoxContainer/TilesetsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/TilesetsContainer/TilesetsHeader"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Tilesets"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TilesetsContainer/TilesetsHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TilesetsList" type="Tree" parent="VBoxContainer/TilesetsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+hide_root = true
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
-[connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
+[connection signal="button_clicked" from="VBoxContainer/TilesetsContainer/TilesetsList" to="." method="_on_tilesets_list_button_clicked"]

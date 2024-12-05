@@ -104,8 +104,8 @@ func draw_move(pos: Vector2i) -> void:
 	_offset = pos
 
 
-func draw_end(_position: Vector2i) -> void:
-	pass
+func draw_end(pos: Vector2i) -> void:
+	super.draw_end(pos)
 
 
 func text_to_pixels() -> void:
@@ -162,8 +162,9 @@ func text_to_pixels() -> void:
 
 
 func commit_undo(action: String, undo_data: Dictionary) -> void:
-	var redo_data := _get_undo_data()
 	var project := Global.current_project
+	project.update_tilemaps(undo_data)
+	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
 	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -172,7 +173,7 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
@@ -180,9 +181,7 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 
 func _get_undo_data() -> Dictionary:
 	var data := {}
-	var images := _get_selected_draw_images()
-	for image in images:
-		image.add_data_to_dictionary(data)
+	Global.current_project.serialize_cel_undo_data(_get_selected_draw_cels(), data)
 	return data
 
 
