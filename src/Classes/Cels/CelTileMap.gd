@@ -187,6 +187,125 @@ func transform_tile(
 	return transformed_tile
 
 
+## Given a [param selection_map] and a [param selection_rect],
+## the method finds the cells that are currently selected and returns them
+## in the form of a 2D array that contains the serialiazed data
+##of the selected cells in the form of [Dictionary].
+func get_selected_cells(selection_map: SelectionMap, selection_rect: Rect2i) -> Array[Array]:
+	var selected_cells: Array[Array] = []
+	for x in range(0, selection_rect.size.x, tileset.tile_size.x):
+		selected_cells.append([])
+		for y in range(0, selection_rect.size.y, tileset.tile_size.y):
+			var pos := Vector2i(x, y) + selection_rect.position
+			var x_index := x / tileset.tile_size.x
+			if selection_map.is_pixel_selected(pos):
+				var cell_pos := get_cell_position(pos)
+				selected_cells[x_index].append(cells[cell_pos].serialize())
+			else:
+				# If it's not selected, append the transparent tile 0.
+				selected_cells[x_index].append(
+					{"index": 0, "flip_h": false, "flip_v": false, "transpose": false}
+				)
+	return selected_cells
+
+
+## Resizes [param selected_indices], which is an array of arrays of [Dictionary],
+## to [param horizontal_size] and [param vertical_size].
+## This method is used when resizing a selection and draw tiles mode is enabled.
+func resize_selection(
+	selected_cells: Array[Array], horizontal_size: int, vertical_size: int
+) -> Array[Array]:
+	var resized_cells: Array[Array] = []
+	var current_columns := selected_cells.size()
+	if current_columns == 0:
+		return resized_cells
+	var current_rows := selected_cells[0].size()
+	if current_rows == 0:
+		return resized_cells
+	resized_cells.resize(horizontal_size)
+	for x in horizontal_size:
+		resized_cells[x] = []
+		resized_cells[x].resize(vertical_size)
+	var column_middles := current_columns - 2
+	if current_columns == 1:
+		for x in horizontal_size:
+			_resize_rows(selected_cells[0], resized_cells[x], current_rows, vertical_size)
+	else:
+		for x in horizontal_size:
+			if x == 0:
+				_resize_rows(selected_cells[0], resized_cells[x], current_rows, vertical_size)
+			elif x == horizontal_size - 1:
+				_resize_rows(selected_cells[-1], resized_cells[x], current_rows, vertical_size)
+			else:
+				if x < current_columns - 1:
+					_resize_rows(selected_cells[x], resized_cells[x], current_rows, vertical_size)
+				else:
+					if column_middles == 0:
+						_resize_rows(
+							selected_cells[-1], resized_cells[x], current_rows, vertical_size
+						)
+					else:
+						var x_index := x - (column_middles * ((x - 1) / column_middles))
+						_resize_rows(
+							selected_cells[x_index], resized_cells[x], current_rows, vertical_size
+						)
+	return resized_cells
+
+
+## Helper method of [method resize_selection].
+func _resize_rows(
+	selected_cells: Array, resized_cells: Array, current_rows: int, vertical_size: int
+) -> void:
+	var row_middles := current_rows - 2
+	if current_rows == 1:
+		for y in vertical_size:
+			resized_cells[y] = selected_cells[0]
+	else:
+		for y in vertical_size:
+			if y == 0:
+				resized_cells[y] = selected_cells[0]
+			elif y == vertical_size - 1:
+				resized_cells[y] = selected_cells[-1]
+			else:
+				if y < current_rows - 1:
+					resized_cells[y] = selected_cells[y]
+				else:
+					if row_middles == 0:
+						resized_cells[y] = selected_cells[-1]
+					else:
+						var y_index := y - (row_middles * ((y - 1) / row_middles))
+						resized_cells[y] = selected_cells[y_index]
+
+
+## Applies the [param selected_cells] data to [param target_image] data,
+## offset by [param selection_rect]. The target image needs to be resized first.
+## This method is used when resizing a selection and draw tiles mode is enabled.
+func apply_resizing_to_image(
+	target_image: Image, selected_cells: Array[Array], selection_rect: Rect2i
+) -> void:
+	for x in selected_cells.size():
+		for y in selected_cells[x].size():
+			var pos := Vector2i(x, y) * tileset.tile_size + selection_rect.position
+			var cell_pos := get_cell_position(pos)
+			var coords := get_cell_coords_in_image(cell_pos) - selection_rect.position
+			var rect := Rect2i(coords, tileset.tile_size)
+			var image_portion := target_image.get_region(rect)
+			var cell_data := Cell.new()
+			cell_data.deserialize(selected_cells[x][y])
+			var index := cell_data.index
+			if index >= tileset.tiles.size():
+				index = 0
+			var current_tile := tileset.tiles[index].image
+			var transformed_tile := transform_tile(
+				current_tile, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
+			)
+			if image_portion.get_data() != transformed_tile.get_data():
+				var tile_size := transformed_tile.get_size()
+				target_image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
+				if target_image is ImageExtended:
+					target_image.convert_rgb_to_indexed()
+
+
 ## Appends data to a [Dictionary] to be used for undo/redo.
 func serialize_undo_data() -> Dictionary:
 	var dict := {}

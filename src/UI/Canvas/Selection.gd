@@ -28,7 +28,7 @@ var big_bounding_rectangle := Rect2i():
 			if slot.tool_node is BaseSelectionTool:
 				slot.tool_node.set_spinbox_values()
 		_update_gizmos()
-var image_current_pixel := Vector2.ZERO  ## The ACTUAL pixel coordinate of image
+var image_current_pixel := Vector2.ZERO  ## The pixel coordinates of the cursor
 
 var temp_rect := Rect2()
 var rect_aspect_ratio := 0.0
@@ -38,6 +38,7 @@ var original_big_bounding_rectangle := Rect2i()
 var original_preview_image := Image.new()
 var original_bitmap := SelectionMap.new()
 var original_offset := Vector2.ZERO
+var original_selected_tilemap_cells: Array[Array]
 
 var preview_image := Image.new()
 var preview_image_texture := ImageTexture.new()
@@ -317,20 +318,22 @@ func _update_on_zoom() -> void:
 
 
 func _gizmo_resize() -> void:
-	if Tools.is_placing_tiles():
-		return
 	var dir := dragged_gizmo.direction
+	var mouse_pos := image_current_pixel
+	if Tools.is_placing_tiles():
+		var tilemap := Global.current_project.get_current_cel() as CelTileMap
+		mouse_pos = mouse_pos.snapped(tilemap.tileset.tile_size)
 	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
 		if dir.x != 0 and dir.y != 0:  # Border gizmos
-			temp_rect.size = ((image_current_pixel - temp_rect_pivot) * 2.0 * Vector2(dir))
+			temp_rect.size = ((mouse_pos - temp_rect_pivot) * 2.0 * Vector2(dir))
 		elif dir.y == 0:  # Center left and right gizmos
-			temp_rect.size.x = (image_current_pixel.x - temp_rect_pivot.x) * 2.0 * dir.x
+			temp_rect.size.x = (mouse_pos.x - temp_rect_pivot.x) * 2.0 * dir.x
 		elif dir.x == 0:  # Center top and bottom gizmos
-			temp_rect.size.y = (image_current_pixel.y - temp_rect_pivot.y) * 2.0 * dir.y
+			temp_rect.size.y = (mouse_pos.y - temp_rect_pivot.y) * 2.0 * dir.y
 		temp_rect = Rect2(-1.0 * temp_rect.size / 2 + temp_rect_pivot, temp_rect.size)
 	else:
-		_resize_rect(image_current_pixel, dir)
+		_resize_rect(mouse_pos, dir)
 
 	if Input.is_action_pressed("shape_perfect") or resize_keep_ratio:  # Maintain aspect ratio
 		var end_y := temp_rect.end.y
@@ -386,14 +389,28 @@ func resize_selection() -> void:
 		Global.current_project.selection_map.copy_from(original_bitmap)
 	if is_moving_content:
 		preview_image.copy_from(original_preview_image)
-		if not Tools.is_placing_tiles():
+		if Tools.is_placing_tiles():
+			for cel in _get_selected_draw_cels():
+				if cel is not CelTileMap:
+					continue
+				var tilemap := cel as CelTileMap
+				var horizontal_size := size.x / tilemap.tileset.tile_size.x
+				var vertical_size := size.y / tilemap.tileset.tile_size.y
+				var selected_cells := tilemap.resize_selection(
+					original_selected_tilemap_cells, horizontal_size, vertical_size
+				)
+				preview_image.crop(size.x, size.y)
+				tilemap.apply_resizing_to_image(
+					preview_image, selected_cells, big_bounding_rectangle
+				)
+		else:
 			content_pivot = original_big_bounding_rectangle.size / 2.0
 			DrawingAlgos.nn_rotate(preview_image, angle, content_pivot)
 			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-		if temp_rect.size.x < 0:
-			preview_image.flip_x()
-		if temp_rect.size.y < 0:
-			preview_image.flip_y()
+			if temp_rect.size.x < 0:
+				preview_image.flip_x()
+			if temp_rect.size.y < 0:
+				preview_image.flip_y()
 		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
 	Global.current_project.selection_map.copy_from(original_bitmap)
@@ -495,9 +512,15 @@ func transform_content_start() -> void:
 		undo_data = get_undo_data(false)
 		return
 	is_moving_content = true
-	original_bitmap.copy_from(Global.current_project.selection_map)
+	var project := Global.current_project
+	original_bitmap.copy_from(project.selection_map)
 	original_big_bounding_rectangle = big_bounding_rectangle
-	original_offset = Global.current_project.selection_offset
+	original_offset = project.selection_offset
+	var current_cel := project.get_current_cel()
+	if current_cel is CelTileMap:
+		original_selected_tilemap_cells = (current_cel as CelTileMap).get_selected_cells(
+			project.selection_map, big_bounding_rectangle
+		)
 	queue_redraw()
 	canvas.queue_redraw()
 
@@ -517,21 +540,40 @@ func transform_content_confirm() -> void:
 		if not is_pasting:
 			src.copy_from(cel.transformed_content)
 			cel.transformed_content = null
-			DrawingAlgos.nn_rotate(src, angle, content_pivot)
-			src.resize(
-				preview_image.get_width(), preview_image.get_height(), Image.INTERPOLATE_NEAREST
-			)
-			if temp_rect.size.x < 0:
-				src.flip_x()
-			if temp_rect.size.y < 0:
-				src.flip_y()
+			if Tools.is_placing_tiles():
+				if cel is not CelTileMap:
+					continue
+				var tilemap := cel as CelTileMap
+				var horizontal_size := preview_image.get_width() / tilemap.tileset.tile_size.x
+				var vertical_size := preview_image.get_height() / tilemap.tileset.tile_size.y
+				var selected_cells := tilemap.resize_selection(
+					original_selected_tilemap_cells, horizontal_size, vertical_size
+				)
+				src.crop(preview_image.get_width(), preview_image.get_height())
+				tilemap.apply_resizing_to_image(src, selected_cells, big_bounding_rectangle)
+			else:
+				DrawingAlgos.nn_rotate(src, angle, content_pivot)
+				src.resize(
+					preview_image.get_width(), preview_image.get_height(), Image.INTERPOLATE_NEAREST
+				)
+				if temp_rect.size.x < 0:
+					src.flip_x()
+				if temp_rect.size.y < 0:
+					src.flip_y()
 
-		cel_image.blit_rect_mask(
-			src,
-			src,
-			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-			big_bounding_rectangle.position
-		)
+		if Tools.is_placing_tiles():
+			cel_image.blit_rect(
+				src,
+				Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
+				big_bounding_rectangle.position
+			)
+		else:
+			cel_image.blit_rect_mask(
+				src,
+				src,
+				Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
+				big_bounding_rectangle.position
+			)
 		cel_image.convert_rgb_to_indexed()
 	project.selection_map.move_bitmap_values(project)
 	commit_undo("Move Selection", undo_data)
@@ -539,6 +581,7 @@ func transform_content_confirm() -> void:
 	original_preview_image = Image.new()
 	preview_image = Image.new()
 	original_bitmap = SelectionMap.new()
+	original_selected_tilemap_cells.clear()
 	is_moving_content = false
 	is_pasting = false
 	angle = 0.0
@@ -573,6 +616,7 @@ func transform_content_cancel() -> void:
 	original_preview_image = Image.new()
 	preview_image = Image.new()
 	original_bitmap = SelectionMap.new()
+	original_selected_tilemap_cells.clear()
 	is_pasting = false
 	angle = 0.0
 	content_pivot = Vector2.ZERO
