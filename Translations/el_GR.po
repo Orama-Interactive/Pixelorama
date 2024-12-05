@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-12-05 02:11\n"
+"PO-Revision-Date: 2024-12-05 16:02\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2319,7 +2319,7 @@ msgstr "Ομάδα"
 
 #. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
 msgid "Tilemap"
-msgstr ""
+msgstr "Χάρτης πλακιδίων"
 
 msgid "Layers"
 msgstr "Στρώσεις"
@@ -2351,7 +2351,7 @@ msgstr "Προσθήκη τρισδιάστατης στρώσης"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
-msgstr ""
+msgstr "Προσθήκη στρώσης χάρτη πλακιδίων"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -3060,7 +3060,7 @@ msgstr "Καταγραφή"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
-msgstr ""
+msgstr "Πλακίδια"
 
 msgid "Crop"
 msgstr "Περικοπή"
@@ -3471,47 +3471,47 @@ msgstr "Θέλετε να κάνετε λήψη της εικόνας από %s;
 #: src/Classes/TileSetCustom.gd
 #: src/UI/Dialogs/ImportPreviewDialog.gd
 msgid "Tileset"
-msgstr ""
+msgstr "Συλλογή πλακιδίων"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset:"
-msgstr ""
+msgstr "Συλλογή πλακιδίων:"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Dialogs/ProjectProperties.tscn
 msgid "Tilesets"
-msgstr ""
+msgstr "Συλλογές πλακιδίων"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "New tileset"
-msgstr ""
+msgstr "Νέα συλλογή πλακιδίων"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset name:"
-msgstr ""
+msgstr "Όνομα συλλογής πλακιδίων:"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tile size:"
-msgstr ""
+msgstr "Μέγεθος πλακιδίου:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr ""
+msgstr "Σχεδίαση πλακιδίων"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr ""
+msgstr "Περιστροφή πλακιδίου αριστερά"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr ""
+msgstr "Περιστροφή πλακιδίου δεξιά"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr ""
+msgstr "Οριζόντια αναστροφή πλακιδίου"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr ""
+msgstr "Κατακόρυφη αναστροφή πλακιδίου"
 
