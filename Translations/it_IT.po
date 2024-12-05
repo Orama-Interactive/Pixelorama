@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-12-05 20:48\n"
+"PO-Revision-Date: 2024-12-05 21:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3501,17 +3501,17 @@ msgstr "Disegna caselle"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr ""
+msgstr "Ruota la casella a sinistra (in senso antiorario)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr ""
+msgstr "Ruota la casella a destra (in senso orario)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr ""
+msgstr "Capovolgi la casella orizzontalmente"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr ""
+msgstr "Capovolgi la casella verticalmente"
 
