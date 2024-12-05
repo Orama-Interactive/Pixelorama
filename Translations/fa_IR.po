@@ -10,162 +10,164 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Persian\n"
 "Language: fa_IR\n"
-"PO-Revision-Date: 2024-12-05 12:44\n"
+"PO-Revision-Date: 2024-12-05 14:52\n"
 
 msgid "OK"
-msgstr ""
+msgstr "باشه"
 
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 msgid "Open"
-msgstr ""
+msgstr "گشودن"
 
 msgid "Save"
-msgstr ""
+msgstr "ذخیره‌سازی"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "خواهشمندیم تایید کنید..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "نام پرونده:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "نام پروژه:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "اندازهٔ تصویر"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "اندازهٔ بوم"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "اندازهٔ فریم"
 
 msgid "Size:"
-msgstr ""
+msgstr "اندازه:"
 
 msgid "Width:"
-msgstr ""
+msgstr "پهنا:"
 
 msgid "Height:"
-msgstr ""
+msgstr "بلندا:"
 
 msgid "Center"
-msgstr ""
+msgstr "کانون"
 
 msgid "File"
-msgstr ""
+msgstr "پرونده"
 
 msgid "Edit"
-msgstr ""
+msgstr "ویرایش"
 
 msgid "Select"
-msgstr ""
+msgstr "گزینش"
 
 msgid "View"
-msgstr ""
+msgstr "نما"
 
 msgid "Window"
-msgstr ""
+msgstr "پنجره"
 
 msgid "Image"
-msgstr ""
+msgstr "تصویر"
 
 msgid "Effects"
-msgstr ""
+msgstr "جلوه‌ها"
 
 msgid "Help"
-msgstr ""
+msgstr "کمک"
 
 msgid "New"
-msgstr ""
+msgstr "نو"
 
 msgid "New..."
-msgstr ""
+msgstr "نو..."
 
 msgid "Open..."
-msgstr ""
+msgstr "گشودن..."
 
 msgid "Save..."
-msgstr ""
+msgstr "ذخیره‌سازی..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "ذخیره‌سازی با نام..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "دربرگرفتن تصویرهای درآمیخته"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "اگر به‌کارافتاده باشد، تصویرهای درآمیخهٔ پایانی برای هر فریم در PXO نیز انبار می‌شوند.\n"
+"این کار پروندهٔ PXO را بزرگتر کرده و برای درون‌برد نرم‌افزارهای شخص ثالث کاربردی‌ست.\n"
+"یا برون‌برد CLI. بار کردن پرونده‌های PXO در پیکسِلوراما نیازمند به‌کارافتاده بودن این گزینه نیست."
 
 msgid "Import"
-msgstr ""
+msgstr "درون‌برد"
 
 msgid "Export"
-msgstr ""
+msgstr "برون‌برد"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "بازنویسی"
 
 msgid "Export..."
-msgstr ""
+msgstr "برون‌برد..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "برون‌برد با نام..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "برون‌برد PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "برون‌برد PNG با نام..."
 
 msgid "Quit"
-msgstr ""
+msgstr "برونرفت"
 
 msgid "Undo"
-msgstr ""
+msgstr "بازگردانی"
 
 msgid "Redo"
-msgstr ""
+msgstr "بازانجامیدن"
 
 msgid "Copy"
-msgstr ""
+msgstr "روگرفت"
 
 msgid "Cut"
-msgstr ""
+msgstr "برش"
 
 msgid "Paste"
-msgstr ""
+msgstr "چسباندن"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "چسباندن در جا"
 
 msgid "Delete"
-msgstr ""
+msgstr "زدایش"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "زدایش همیشگی"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "فرستادن به زباله‌دان"
 
 msgid "New Brush"
-msgstr ""
+msgstr "قلم‌موی نو"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "دگرش اندازهٔ تصویر"
 
 msgid "Pixels"
-msgstr ""
+msgstr "پیکسل‌ها"
 
 msgid "Percentage"
-msgstr ""
+msgstr "درصد"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
