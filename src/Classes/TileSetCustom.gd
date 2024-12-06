@@ -39,11 +39,12 @@ class Tile:
 		return times_used <= 0
 
 
-func _init(_tile_size: Vector2i, _name := "") -> void:
+func _init(_tile_size: Vector2i, _name := "", add_empty_tile := true) -> void:
 	tile_size = _tile_size
 	name = _name
-	var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
-	tiles.append(Tile.new(empty_image))
+	if add_empty_tile:
+		var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
+		tiles.append(Tile.new(empty_image))
 
 
 ## Adds a new [param image] as a tile to the tileset.
