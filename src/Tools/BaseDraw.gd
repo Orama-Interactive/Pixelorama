@@ -276,6 +276,7 @@ func prepare_undo(action: String) -> void:
 
 func commit_undo() -> void:
 	var project := Global.current_project
+	Global.canvas.update_selected_cels_textures(project)
 	project.update_tilemaps(_undo_data)
 	var redo_data := _get_undo_data()
 	var frame := -1
