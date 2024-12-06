@@ -16,7 +16,7 @@ var tileset: TileSetCustom
 func _init(_project: Project, _tileset: TileSetCustom, _name := "") -> void:
 	super._init(_project, _name)
 	tileset = _tileset
-	if not project.tilesets.has(tileset):
+	if not project.tilesets.has(tileset) and is_instance_valid(tileset):
 		project.add_tileset(tileset)
 
 
