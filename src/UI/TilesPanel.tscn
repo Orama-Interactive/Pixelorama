@@ -169,11 +169,15 @@ button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_ysxej")
 text = "Stack"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+self_modulate = Color(0.866085, 0.866085, 0.866085, 1)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TileButtonContainer" type="HFlowContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TileButtonContainer" type="HFlowContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
