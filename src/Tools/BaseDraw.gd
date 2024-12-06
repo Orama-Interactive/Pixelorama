@@ -212,6 +212,8 @@ func update_brush() -> void:
 	$DensityValueSlider.visible = _brush.type not in IMAGE_BRUSHES
 	$ColorInterpolation.visible = _brush.type in IMAGE_BRUSHES
 	$RotationOptions.visible = _brush.type in IMAGE_BRUSHES
+	var canvas_indicators := Global.canvas.indicators
+	canvas_indicators.queue_redraw()
 
 
 func update_random_image() -> void:
