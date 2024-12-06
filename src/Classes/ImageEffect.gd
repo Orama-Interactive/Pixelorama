@@ -157,7 +157,10 @@ func display_animate_dialog() -> void:
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
-	project.update_tilemaps(undo_data)
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
+	project.update_tilemaps(undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)

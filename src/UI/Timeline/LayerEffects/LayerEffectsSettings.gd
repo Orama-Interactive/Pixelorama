@@ -165,7 +165,10 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(cel_image, effect.shader, effect.params, image_size)
 
-	project.update_tilemaps(undo_data)
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
+	project.update_tilemaps(undo_data, tile_editing_mode)
 	for frame in project.frames:
 		var cel := frame.cels[layer.index]
 		var cel_image := cel.get_image()
