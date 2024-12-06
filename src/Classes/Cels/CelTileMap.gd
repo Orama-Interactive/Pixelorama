@@ -656,6 +656,21 @@ func update_texture(undo := false) -> void:
 				var tile_size := current_tile.image.get_size()
 				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
 			continue
+		if not editing_images.has(index):
+			if not _tiles_equal(i, image_portion, current_tile.image):
+				var transformed_image := transform_tile(
+					image_portion, cell_data.flip_h, cell_data.flip_v, cell_data.transpose, true
+				)
+				editing_images[index] = [i, transformed_image]
+
+	for i in cells.size():
+		var cell_data := cells[i]
+		var index := cell_data.index
+		if index >= tileset.tiles.size():
+			index = 0
+		var coords := get_cell_coords_in_image(i)
+		var rect := Rect2i(coords, tileset.tile_size)
+		var image_portion := image.get_region(rect)
 		if editing_images.has(index):
 			var editing_portion := editing_images[index][0] as int
 			if i == editing_portion:
@@ -670,12 +685,6 @@ func update_texture(undo := false) -> void:
 			if not image_portion.get_data() == transformed_editing_image.get_data():
 				var tile_size := image_portion.get_size()
 				image.blit_rect(transformed_editing_image, Rect2i(Vector2i.ZERO, tile_size), coords)
-		else:
-			if not _tiles_equal(i, image_portion, current_tile.image):
-				var transformed_image := transform_tile(
-					image_portion, cell_data.flip_h, cell_data.flip_v, cell_data.transpose, true
-				)
-				editing_images[index] = [i, transformed_image]
 	super.update_texture(undo)
 
 
