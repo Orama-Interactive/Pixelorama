@@ -43,6 +43,7 @@ func _ready() -> void:
 	elif layer is AudioLayer:
 		audio_player = AudioStreamPlayer.new()
 		audio_player.stream = layer.audio
+		layer.audio_changed.connect(func(): audio_player.stream = layer.audio)
 		add_child(audio_player)
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name

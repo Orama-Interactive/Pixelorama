@@ -45,6 +45,8 @@ func handle_loading_file(file: String) -> void:
 			return
 		var file_name: String = file.get_file().get_basename()
 		Global.control.find_child("ShaderEffect").change_shader(shader, file_name)
+	elif file_ext == "ogg":  # Audio file
+		open_audio_file(file)
 
 	else:  # Image files
 		# Attempt to load as APNG.
@@ -900,6 +902,20 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 
 	if prev_project_empty:
 		Global.tabs.delete_tab(prev_project_pos)
+
+
+func open_audio_file(path: String) -> void:
+	var audio_stream := AudioStreamOggVorbis.load_from_file(path)
+	if not is_instance_valid(audio_stream):
+		return
+	var project := Global.current_project
+	for layer in project.layers:
+		if layer is AudioLayer and not is_instance_valid(layer.audio):
+			layer.audio = audio_stream
+			return
+	var new_layer := AudioLayer.new(project)
+	new_layer.audio = audio_stream
+	Global.animation_timeline.add_layer(new_layer, project)
 
 
 func update_autosave() -> void:
