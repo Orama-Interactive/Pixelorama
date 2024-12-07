@@ -640,10 +640,10 @@ func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
 	var result: BaseCel
 	var cel := frame.cels[0]
 	var i := 0
-	while cel is GroupCel and i < layers.size():
+	while (cel is GroupCel or cel is AudioCel) and i < layers.size():
 		cel = frame.cels[i]
 		i += 1
-	if not cel is GroupCel:
+	if cel is not GroupCel and cel is not AudioCel:
 		result = cel
 	return result
 

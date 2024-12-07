@@ -631,7 +631,7 @@ class ProjectAPI:
 
 	## Returns the current cel.
 	## Cel type can be checked using function [method get_class_name] inside the cel
-	## type can be GroupCel, PixelCel, Cel3D, or BaseCel.
+	## type can be GroupCel, PixelCel, Cel3D, CelTileMap, AudioCel or BaseCel.
 	func get_current_cel() -> BaseCel:
 		return current_project.get_current_cel()
 

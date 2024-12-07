@@ -15,6 +15,7 @@ var button_pressed := false:
 	get:
 		return main_button.button_pressed
 
+var audio_player: AudioStreamPlayer
 @onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
 @onready var main_button := %LayerMainButton as Button
 @onready var expand_button := %ExpandButton as BaseButton
@@ -31,7 +32,7 @@ var button_pressed := false:
 func _ready() -> void:
 	main_button.layer_index = layer_index
 	main_button.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
-	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
+	Global.cel_switched.connect(_on_cel_switched)
 	var layer := Global.current_project.layers[layer_index]
 	layer.name_changed.connect(func(): label.text = layer.name)
 	layer.visibility_changed.connect(update_buttons)
@@ -39,6 +40,10 @@ func _ready() -> void:
 		linked_button.visible = true
 	elif layer is GroupLayer:
 		expand_button.visible = true
+	elif layer is AudioLayer:
+		audio_player = AudioStreamPlayer.new()
+		audio_player.stream = layer.audio
+		add_child(audio_player)
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name
 	line_edit.text = layer.name
@@ -54,6 +59,12 @@ func _ready() -> void:
 	var hierarchy_depth := layer.get_hierarchy_depth()
 	hierarchy_spacer.custom_minimum_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 	update_buttons()
+
+
+func _on_cel_switched() -> void:
+	z_index = 1 if button_pressed else 0
+	if is_instance_valid(audio_player):
+		audio_player.play(Global.current_project.current_frame / Global.current_project.fps)
 
 
 func update_buttons() -> void:
