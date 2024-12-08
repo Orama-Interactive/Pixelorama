@@ -86,9 +86,11 @@ func _play_audio() -> void:
 	if not is_instance_valid(audio_player):
 		return
 	var audio_length := audio_player.stream.get_length()
-	var normalized_pos := Global.current_project.current_frame / Global.current_project.fps
-	if normalized_pos < 1:
-		audio_player.play(normalized_pos * audio_length)
+	var final_frame := audio_length * Global.current_project.fps
+	if Global.current_project.current_frame < final_frame:
+		var inverse_fps := 1.0 / Global.current_project.fps
+		var playback_position := Global.current_project.current_frame * inverse_fps
+		audio_player.play(playback_position)
 	else:
 		audio_player.stop()
 
