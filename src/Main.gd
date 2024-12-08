@@ -427,6 +427,7 @@ func load_last_project() -> void:
 		# Check if file still exists on disk
 		var file_path = Global.config_cache.get_value("data", "last_project_path")
 		load_recent_project_file(file_path)
+		(func(): Global.cel_switched.emit()).call_deferred()
 
 
 func load_recent_project_file(path: String) -> void:
