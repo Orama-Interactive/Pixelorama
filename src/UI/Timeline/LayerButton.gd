@@ -65,7 +65,12 @@ func _ready() -> void:
 func _on_cel_switched() -> void:
 	z_index = 1 if button_pressed else 0
 	if is_instance_valid(audio_player):
-		audio_player.play(Global.current_project.current_frame / Global.current_project.fps)
+		var audio_length := audio_player.stream.get_length()
+		var normalized_pos := Global.current_project.current_frame / Global.current_project.fps
+		if normalized_pos < 1:
+			audio_player.play(normalized_pos * audio_length)
+		else:
+			audio_player.stop()
 
 
 func update_buttons() -> void:
