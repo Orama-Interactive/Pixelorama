@@ -920,7 +920,7 @@ func open_audio_file(path: String) -> void:
 		if layer is AudioLayer and not is_instance_valid(layer.audio):
 			layer.audio = audio_stream
 			return
-	var new_layer := AudioLayer.new(project)
+	var new_layer := AudioLayer.new(project, path.get_basename().get_file())
 	new_layer.audio = audio_stream
 	Global.animation_timeline.add_layer(new_layer, project)
 
