@@ -823,8 +823,23 @@ func paste(in_place := false) -> void:
 		else:
 			camera_center.y = 0
 		big_bounding_rectangle.position = Vector2i(camera_center.floor())
+		if Tools.is_placing_tiles():
+			var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+			var grid_size := tileset.tile_size
+			big_bounding_rectangle.position = Vector2i(
+				Tools.snap_to_rectangular_grid_boundary(big_bounding_rectangle.position, grid_size)
+			)
 		project.selection_map.move_bitmap_values(Global.current_project, false)
-
+	else:
+		if Tools.is_placing_tiles():
+			var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+			var grid_size := tileset.tile_size
+			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
+				project.selection_offset, grid_size
+			)
+			big_bounding_rectangle.position = Vector2i(
+				Tools.snap_to_rectangular_grid_boundary(big_bounding_rectangle.position, grid_size)
+			)
 	big_bounding_rectangle = big_bounding_rectangle
 	temp_rect = big_bounding_rectangle
 	is_moving_content = true
