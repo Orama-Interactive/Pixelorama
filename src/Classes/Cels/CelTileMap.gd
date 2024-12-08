@@ -394,6 +394,7 @@ func update_tilemap(
 				if _tiles_equal(i, image_portion, tile.image):
 					if cells[i].index != j:
 						cells[i].index = j
+						tileset.tiles[j].times_used += 1
 						cells[i].remove_transformations()
 					found_tile = true
 					break
