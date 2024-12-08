@@ -85,6 +85,9 @@ func _on_animation_finished() -> void:
 func _play_audio() -> void:
 	if not is_instance_valid(audio_player):
 		return
+	var layer := Global.current_project.layers[layer_index]
+	if not layer.visible:
+		return
 	var audio_length := audio_player.stream.get_length()
 	var final_frame := audio_length * Global.current_project.fps
 	if Global.current_project.current_frame < final_frame:
