@@ -14,6 +14,7 @@ var button_pressed := false:
 		main_button.button_pressed = value
 	get:
 		return main_button.button_pressed
+var animation_running := false
 
 var audio_player: AudioStreamPlayer
 @onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
@@ -45,6 +46,8 @@ func _ready() -> void:
 		audio_player.stream = layer.audio
 		layer.audio_changed.connect(func(): audio_player.stream = layer.audio)
 		add_child(audio_player)
+		Global.animation_timeline.animation_started.connect(_on_animation_started)
+		Global.animation_timeline.animation_finished.connect(_on_animation_finished)
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name
 	line_edit.text = layer.name
@@ -64,13 +67,30 @@ func _ready() -> void:
 
 func _on_cel_switched() -> void:
 	z_index = 1 if button_pressed else 0
+	if not animation_running or Global.current_project.current_frame == 0:
+		_play_audio()
+
+
+func _on_animation_started(_dir: bool) -> void:
+	animation_running = true
+	_play_audio()
+
+
+func _on_animation_finished() -> void:
+	animation_running = false
 	if is_instance_valid(audio_player):
-		var audio_length := audio_player.stream.get_length()
-		var normalized_pos := Global.current_project.current_frame / Global.current_project.fps
-		if normalized_pos < 1:
-			audio_player.play(normalized_pos * audio_length)
-		else:
-			audio_player.stop()
+		audio_player.stop()
+
+
+func _play_audio() -> void:
+	if not is_instance_valid(audio_player):
+		return
+	var audio_length := audio_player.stream.get_length()
+	var normalized_pos := Global.current_project.current_frame / Global.current_project.fps
+	if normalized_pos < 1:
+		audio_player.play(normalized_pos * audio_length)
+	else:
+		audio_player.stop()
 
 
 func update_buttons() -> void:
