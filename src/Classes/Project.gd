@@ -8,6 +8,7 @@ signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
 signal timeline_updated
+signal fps_changed
 
 const INDEXED_MODE := Image.FORMAT_MAX + 1
 
@@ -65,7 +66,10 @@ var brushes: Array[Image] = []
 var reference_images: Array[ReferenceImage] = []
 var reference_index: int = -1  # The currently selected index ReferenceImage
 var vanishing_points := []  ## Array of Vanishing Points
-var fps := 6.0
+var fps := 6.0:
+	set(value):
+		fps = value
+		fps_changed.emit()
 var user_data := ""  ## User defined data, set in the project properties.
 
 var x_symmetry_point: float

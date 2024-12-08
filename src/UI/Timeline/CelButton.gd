@@ -31,6 +31,9 @@ func _ready() -> void:
 		popup_menu.add_item("Unlink Cels")
 	elif cel is GroupCel:
 		transparent_checker.visible = false
+	elif cel is AudioCel:
+		_is_playing_audio()
+		Global.current_project.fps_changed.connect(_is_playing_audio)
 
 
 func _notification(what: int) -> void:
@@ -66,7 +69,8 @@ func button_setup() -> void:
 
 	var base_layer := Global.current_project.layers[layer]
 	tooltip_text = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
-	cel_texture.texture = cel.image_texture
+	if cel is not AudioCel:
+		cel_texture.texture = cel.image_texture
 	if is_instance_valid(linked):
 		linked.visible = cel.link_set != null
 		if cel.link_set != null:
@@ -396,3 +400,13 @@ func _sort_cel_indices_by_frame(a: Array, b: Array) -> bool:
 	if frame_a < frame_b:
 		return true
 	return false
+
+
+func _is_playing_audio() -> void:
+	var layer := Global.current_project.layers[layer] as AudioLayer
+	var audio_length := layer.audio.get_length()
+	var final_frame := audio_length * Global.current_project.fps
+	if frame < final_frame:
+		cel_texture.texture = preload("res://assets/graphics/icons/icon.png")
+	else:
+		cel_texture.texture = null

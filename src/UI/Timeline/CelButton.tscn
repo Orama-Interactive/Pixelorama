@@ -74,7 +74,6 @@ grow_vertical = 2
 [node name="PopupMenu" type="PopupMenu" parent="."]
 item_count = 1
 item_0/text = "Properties"
-item_0/id = 0
 
 [connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
