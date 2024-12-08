@@ -47,9 +47,10 @@ var button_size := 36:
 			button.custom_minimum_size = Vector2(button_size, button_size)
 			button.size = Vector2(button_size, button_size)
 
-@onready var place_tiles: CheckBox = $VBoxContainer/PlaceTiles
-@onready var transform_buttons_container: HFlowContainer = $VBoxContainer/TransformButtonsContainer
+@onready var place_tiles: Button = %PlaceTiles
+@onready var transform_buttons_container: HFlowContainer = %TransformButtonsContainer
 @onready var tile_button_container: HFlowContainer = %TileButtonContainer
+@onready var mode_buttons_container: HFlowContainer = %ModeButtonsContainer
 
 
 func _ready() -> void:
@@ -57,6 +58,7 @@ func _ready() -> void:
 	Global.cel_switched.connect(_on_cel_switched)
 	for child: Button in transform_buttons_container.get_children():
 		Global.disable_button(child, true)
+	update_tip()
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -78,6 +80,15 @@ func set_tileset(tileset: TileSetCustom) -> void:
 		and not current_tileset.updated.is_connected(_update_tileset)
 	):
 		current_tileset.updated.connect(_update_tileset)
+
+
+func update_tip():
+	var tip = %Tip
+	tip.get_parent().visible = true
+	if placing_tiles:
+		tip.text = "Select a tile to place it on the canvas."
+	else:
+		tip.text = "Modify tiles on the canvas."
 
 
 func _on_cel_switched() -> void:
@@ -157,8 +168,15 @@ func _clear_tile_buttons() -> void:
 
 func _on_place_tiles_toggled(toggled_on: bool) -> void:
 	placing_tiles = toggled_on
+	transform_buttons_container.visible = placing_tiles
+	mode_buttons_container.visible = !placing_tiles
 	for child: Button in transform_buttons_container.get_children():
 		Global.disable_button(child, not toggled_on)
+	if toggled_on:
+		Global.change_button_texturerect(place_tiles.get_child(0), "place_tiles_enabled.png")
+	else:
+		Global.change_button_texturerect(place_tiles.get_child(0), "place_tiles_disabled.png")
+	update_tip()
 
 
 func _on_manual_toggled(toggled_on: bool) -> void:
