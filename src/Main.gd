@@ -184,13 +184,6 @@ func _ready() -> void:
 	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
-
-	open_sprite_dialog.current_dir = Global.config_cache.get_value(
-		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
-	)
-	save_sprite_dialog.current_dir = Global.config_cache.get_value(
-		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
-	)
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
@@ -215,8 +208,8 @@ func _input(event: InputEvent) -> void:
 
 func _project_switched() -> void:
 	if Global.current_project.export_directory_path != "":
-		open_sprite_dialog.current_path = Global.current_project.export_directory_path
-		save_sprite_dialog.current_path = Global.current_project.export_directory_path
+		open_sprite_dialog.current_dir = Global.current_project.export_directory_path
+		save_sprite_dialog.current_dir = Global.current_project.export_directory_path
 
 
 # Taken from https://github.com/godotengine/godot/blob/3.x/editor/editor_settings.cpp#L1474
