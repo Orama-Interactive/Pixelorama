@@ -45,7 +45,7 @@ func handle_loading_file(file: String) -> void:
 			return
 		var file_name: String = file.get_file().get_basename()
 		Global.control.find_child("ShaderEffect").change_shader(shader, file_name)
-	elif file_ext == "ogg":  # Audio file
+	elif file_ext == "ogg" or file_ext == "mp3":  # Audio file
 		open_audio_file(file)
 
 	else:  # Image files
@@ -905,7 +905,14 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 
 
 func open_audio_file(path: String) -> void:
-	var audio_stream := AudioStreamOggVorbis.load_from_file(path)
+	var audio_stream: AudioStream
+	var file_ext := path.get_extension().to_lower()
+	if file_ext == "ogg":
+		audio_stream = AudioStreamOggVorbis.load_from_file(path)
+	elif file_ext == "mp3":
+		var file := FileAccess.open(path, FileAccess.READ)
+		audio_stream = AudioStreamMP3.new()
+		audio_stream.data = file.get_buffer(file.get_length())
 	if not is_instance_valid(audio_stream):
 		return
 	var project := Global.current_project
