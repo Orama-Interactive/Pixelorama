@@ -325,6 +325,8 @@ func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 		var inverted_frames := frames.duplicate()
 		inverted_frames.reverse()
 		inverted_frames.remove_at(0)
+		if inverted_frames.size() > 0:
+			inverted_frames.remove_at(inverted_frames.size() - 1)
 		frames.append_array(inverted_frames)
 	return frames
 
