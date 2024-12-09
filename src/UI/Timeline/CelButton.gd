@@ -404,10 +404,10 @@ func _sort_cel_indices_by_frame(a: Array, b: Array) -> bool:
 
 
 func _is_playing_audio() -> void:
-	var layer := Global.current_project.layers[layer] as AudioLayer
-	var audio_length := layer.audio.get_length()
-	var final_frame := audio_length * Global.current_project.fps
-	if frame < final_frame:
-		cel_texture.texture = preload("res://assets/graphics/icons/icon.png")
+	var frame_class := Global.current_project.frames[frame]
+	var layer_class := Global.current_project.layers[layer] as AudioLayer
+	var audio_length := layer_class.audio.get_length()
+	if frame_class.position_in_seconds(Global.current_project) < audio_length:
+		cel_texture.texture = preload("res://assets/graphics/misc/musical_note.png")
 	else:
 		cel_texture.texture = null

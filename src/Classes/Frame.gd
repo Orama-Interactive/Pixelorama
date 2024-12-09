@@ -11,3 +11,17 @@ var user_data := ""  ## User defined data, set in the frame properties.
 func _init(_cels: Array[BaseCel] = [], _duration := 1.0) -> void:
 	cels = _cels
 	duration = _duration
+
+
+func get_duration_in_seconds(fps: float) -> float:
+	return duration * (1.0 / fps)
+
+
+func position_in_seconds(project: Project, start_from := 0) -> float:
+	var pos := 0.0
+	for i in range(start_from, project.frames.size()):
+		var frame := project.frames[i]
+		if frame == self:
+			break
+		pos += frame.get_duration_in_seconds(project.fps)
+	return pos

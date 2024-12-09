@@ -282,7 +282,7 @@ func process_animation(project := Global.current_project) -> void:
 			for cel in frame.cels:
 				var image := Image.new()
 				image.copy_from(cel.get_image())
-				var duration := frame.duration * (1.0 / project.fps)
+				var duration := frame.get_duration_in_seconds(project.fps)
 				processed_images.append(
 					ProcessedImage.new(image, project.frames.find(frame), duration)
 				)
@@ -298,7 +298,7 @@ func process_animation(project := Global.current_project) -> void:
 				image.copy_from(crop)
 			if trim_images:
 				image = image.get_region(image.get_used_rect())
-			var duration := frame.duration * (1.0 / project.fps)
+			var duration := frame.get_duration_in_seconds(project.fps)
 			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
 
 
