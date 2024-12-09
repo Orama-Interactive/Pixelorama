@@ -33,6 +33,7 @@ func _ready() -> void:
 		transparent_checker.visible = false
 	elif cel is AudioCel:
 		_is_playing_audio()
+		Global.cel_switched.connect(_is_playing_audio)
 		Global.current_project.fps_changed.connect(_is_playing_audio)
 
 
