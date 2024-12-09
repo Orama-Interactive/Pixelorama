@@ -15,21 +15,21 @@ offset_right = 292.0
 offset_bottom = 186.0
 columns = 2
 
-[node name="NameLabel" type="Label" parent="GridContainer" groups=["AllLayers"]]
+[node name="NameLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Name:"
 
-[node name="NameLineEdit" type="LineEdit" parent="GridContainer" groups=["AllLayers"]]
+[node name="NameLineEdit" type="LineEdit" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OpacityLabel" type="Label" parent="GridContainer"]
+[node name="OpacityLabel" type="Label" parent="GridContainer" groups=["VisualLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Opacity:"
 
-[node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer"]
+[node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer" groups=["VisualLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -42,12 +42,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("2_bwpwc")
 
-[node name="BlendModeLabel" type="Label" parent="GridContainer"]
+[node name="BlendModeLabel" type="Label" parent="GridContainer" groups=["VisualLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Blend mode:"
 
-[node name="BlendModeOptionButton" type="OptionButton" parent="GridContainer"]
+[node name="BlendModeOptionButton" type="OptionButton" parent="GridContainer" groups=["VisualLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -71,13 +71,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("2_bwpwc")
 
-[node name="UserDataLabel" type="Label" parent="GridContainer" groups=["AllLayers"]]
+[node name="UserDataLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "User data:"
 
-[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer" groups=["AllLayers"]]
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true

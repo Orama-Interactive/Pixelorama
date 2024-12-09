@@ -29,9 +29,7 @@ func _on_visibility_changed() -> void:
 			play_at_frame_slider.value = first_layer.playback_frame + 1
 		play_at_frame_slider.max_value = project.frames.size()
 		user_data_text_edit.text = first_layer.user_data
-		for child in grid_container.get_children():
-			if not child.is_in_group(&"AllLayers"):
-				child.visible = first_layer is not AudioLayer
+		get_tree().set_group(&"VisualLayers", "visible", first_layer is not AudioLayer)
 		get_tree().set_group(&"TilemapLayers", "visible", first_layer is LayerTileMap)
 		get_tree().set_group(&"AudioLayers", "visible", first_layer is AudioLayer)
 		tileset_option_button.clear()
