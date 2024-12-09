@@ -90,7 +90,7 @@ func _play_audio() -> void:
 	var layer := Global.current_project.layers[layer_index] as AudioLayer
 	if not layer.visible:
 		return
-	var audio_length := audio_player.stream.get_length()
+	var audio_length := layer.get_audio_length()
 	var frame := Global.current_project.frames[Global.current_project.current_frame]
 	var frame_pos := frame.position_in_seconds(Global.current_project, layer.playback_frame)
 	if frame_pos >= 0 and frame_pos < audio_length:

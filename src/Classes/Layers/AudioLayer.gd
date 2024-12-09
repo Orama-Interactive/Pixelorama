@@ -19,6 +19,13 @@ func _init(_project: Project, _name := "") -> void:
 	name = _name
 
 
+func get_audio_length() -> float:
+	if is_instance_valid(audio):
+		return audio.get_length()
+	else:
+		return -1.0
+
+
 # Overridden Methods:
 func serialize() -> Dictionary:
 	var data := {"name": name, "type": get_layer_type()}

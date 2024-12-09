@@ -406,7 +406,7 @@ func _sort_cel_indices_by_frame(a: Array, b: Array) -> bool:
 func _is_playing_audio() -> void:
 	var frame_class := Global.current_project.frames[frame]
 	var layer_class := Global.current_project.layers[layer] as AudioLayer
-	var audio_length := layer_class.audio.get_length()
+	var audio_length := layer_class.get_audio_length()
 	var frame_pos := frame_class.position_in_seconds(
 		Global.current_project, layer_class.playback_frame
 	)

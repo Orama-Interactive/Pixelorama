@@ -537,7 +537,7 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 	var max_audio_duration := 0
 	var adelay_string := ""
 	for layer in project.layers:
-		if layer is AudioLayer and layer.audio is AudioStreamMP3:
+		if layer is AudioLayer and is_instance_valid(layer.audio) and layer.audio is AudioStreamMP3:
 			var temp_file_name := str(audio_layer_count + 1).pad_zeros(number_of_digits) + ".mp3"
 			var temp_file_path := temp_path_real.path_join(temp_file_name)
 			var temp_audio_file := FileAccess.open(temp_file_path, FileAccess.WRITE)
@@ -550,8 +550,8 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 				"[%s]adelay=%s:all=1[%sa];" % [audio_layer_count, delay, audio_layer_count]
 			)
 			audio_layer_count += 1
-			if layer.audio.get_length() >= max_audio_duration:
-				max_audio_duration = layer.audio.get_length()
+			if layer.get_audio_length() >= max_audio_duration:
+				max_audio_duration = layer.get_audio_length()
 	if audio_layer_count > 0:
 		# If we have audio layers, merge them all into one file.
 		for i in audio_layer_count:
