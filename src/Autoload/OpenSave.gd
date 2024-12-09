@@ -187,8 +187,8 @@ func handle_loading_video(file: String) -> bool:
 			project_size.x = temp_image.get_width()
 		if temp_image.get_height() > project_size.y:
 			project_size.y = temp_image.get_height()
-	DirAccess.remove_absolute(Export.TEMP_PATH)
 	if images_to_import.size() == 0 or project_size == Vector2i.ZERO:
+		DirAccess.remove_absolute(Export.TEMP_PATH)
 		return false  # We didn't find any images, return
 	# If we found images, create a new project out of them
 	var new_project := Project.new([], file.get_basename().get_file(), project_size)
@@ -198,6 +198,14 @@ func handle_loading_video(file: String) -> bool:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
+	var output_audio_file := temp_path_real.path_join("audio.ogg")
+	# ffmpeg -y -i input_file -vn audio.ogg
+	var ffmpeg_execute_audio: PackedStringArray = ["-y", "-i", file, "-vn", output_audio_file]
+	var success_audio := OS.execute(Global.ffmpeg_path, ffmpeg_execute_audio, [], true)
+	if FileAccess.file_exists(output_audio_file):
+		open_audio_file(output_audio_file)
+		temp_dir.remove("audio.ogg")
+	DirAccess.remove_absolute(Export.TEMP_PATH)
 	return true
 
 
