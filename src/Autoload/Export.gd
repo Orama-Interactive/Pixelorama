@@ -547,6 +547,7 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 			if layer.audio.get_length() >= max_audio_duration:
 				max_audio_duration = layer.audio.get_length()
 	if audio_layer_count > 0:
+		# If we have audio layers, merge them all into one file.
 		var amix_inputs_string := "amix=inputs=%s" % audio_layer_count
 		var audio_file_path := temp_path_real.path_join("audio.mp3")
 		ffmpeg_combine_audio.append_array(
@@ -554,6 +555,8 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 		)
 		OS.execute(Global.ffmpeg_path, ffmpeg_combine_audio, [], true)
 		var copied_video := temp_path_real.path_join("video." + export_paths[0].get_extension())
+
+		# Then mix the audio file with the video.
 		DirAccess.copy_absolute(export_paths[0], copied_video)
 		# ffmpeg -y -i video_file -i input_audio -c:v copy -map 0:v:0 -map 1:a:0 video_file
 		var ffmpeg_final_video: PackedStringArray = [
