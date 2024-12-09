@@ -5,22 +5,22 @@
 
 [node name="LayerProperties" type="AcceptDialog"]
 title = "Layer properties"
-size = Vector2i(300, 208)
+size = Vector2i(300, 235)
 script = ExtResource("1_54q1t")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
-offset_bottom = 159.0
+offset_bottom = 186.0
 columns = 2
 
-[node name="NameLabel" type="Label" parent="GridContainer"]
+[node name="NameLabel" type="Label" parent="GridContainer" groups=["AllLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Name:"
 
-[node name="NameLineEdit" type="LineEdit" parent="GridContainer"]
+[node name="NameLineEdit" type="LineEdit" parent="GridContainer" groups=["AllLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -52,13 +52,32 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="UserDataLabel" type="Label" parent="GridContainer"]
+[node name="PlayAtFrameLabel" type="Label" parent="GridContainer" groups=["AudioLayers"]]
+layout_mode = 2
+text = "Play at frame:"
+
+[node name="PlayAtFrameSlider" type="TextureProgressBar" parent="GridContainer" groups=["AudioLayers"]]
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+value = 1.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("2_bwpwc")
+
+[node name="UserDataLabel" type="Label" parent="GridContainer" groups=["AllLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "User data:"
 
-[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer" groups=["AllLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true
@@ -77,5 +96,6 @@ mouse_default_cursor_shape = 2
 [connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/BlendModeOptionButton" to="." method="_on_blend_mode_option_button_item_selected"]
+[connection signal="value_changed" from="GridContainer/PlayAtFrameSlider" to="." method="_on_play_at_frame_slider_value_changed"]
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="item_selected" from="GridContainer/TilesetOptionButton" to="." method="_on_tileset_option_button_item_selected"]

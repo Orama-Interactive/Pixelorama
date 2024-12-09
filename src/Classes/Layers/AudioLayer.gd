@@ -7,7 +7,11 @@ var audio: AudioStream:
 	set(value):
 		audio = value
 		audio_changed.emit()
-var playback_position := 0.0  ## Measured in seconds.
+var playback_position := 0.0:  ## Measured in seconds.
+	get():
+		var frame := project.frames[playback_frame]
+		return frame.position_in_seconds(project)
+var playback_frame := 0
 
 
 func _init(_project: Project, _name := "") -> void:

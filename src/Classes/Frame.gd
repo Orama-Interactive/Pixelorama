@@ -19,9 +19,15 @@ func get_duration_in_seconds(fps: float) -> float:
 
 func position_in_seconds(project: Project, start_from := 0) -> float:
 	var pos := 0.0
-	for i in range(start_from, project.frames.size()):
-		var frame := project.frames[i]
-		if frame == self:
-			break
-		pos += frame.get_duration_in_seconds(project.fps)
+	var index := project.frames.find(self)
+	if index > start_from:
+		for i in range(start_from, index):
+			var frame := project.frames[i]
+			pos += frame.get_duration_in_seconds(project.fps)
+	else:
+		if start_from >= project.frames.size():
+			return -1.0
+		for i in range(start_from, index, -1):
+			var frame := project.frames[i]
+			pos -= frame.get_duration_in_seconds(project.fps)
 	return pos

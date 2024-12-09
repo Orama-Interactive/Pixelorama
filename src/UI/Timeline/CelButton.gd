@@ -407,7 +407,10 @@ func _is_playing_audio() -> void:
 	var frame_class := Global.current_project.frames[frame]
 	var layer_class := Global.current_project.layers[layer] as AudioLayer
 	var audio_length := layer_class.audio.get_length()
-	if frame_class.position_in_seconds(Global.current_project) < audio_length:
+	var frame_pos := frame_class.position_in_seconds(
+		Global.current_project, layer_class.playback_frame
+	)
+	if frame_pos >= 0 and frame_pos < audio_length:
 		cel_texture.texture = preload("res://assets/graphics/misc/musical_note.png")
 	else:
 		cel_texture.texture = null
