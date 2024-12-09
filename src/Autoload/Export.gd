@@ -531,43 +531,55 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 		Global.popup_error(tr(fail_text))
 		_clear_temp_folder()
 		return false
-	# ffmpeg -i input1 -i input2 ... -i inputn -filter_complex amix=inputs=n output_path
+	# Find audio layers
 	var ffmpeg_combine_audio: PackedStringArray = ["-y"]
 	var audio_layer_count := 0
 	var max_audio_duration := 0
+	var adelay_string := ""
 	for layer in project.layers:
 		if layer is AudioLayer and layer.audio is AudioStreamMP3:
 			var temp_file_name := str(audio_layer_count + 1).pad_zeros(number_of_digits) + ".mp3"
 			var temp_file_path := temp_path_real.path_join(temp_file_name)
 			var temp_audio_file := FileAccess.open(temp_file_path, FileAccess.WRITE)
 			temp_audio_file.store_buffer(layer.audio.data)
-			audio_layer_count += 1
 			ffmpeg_combine_audio.append("-i")
 			ffmpeg_combine_audio.append(temp_file_path)
+			var delay: int = layer.playback_position * 1000
+			# [n]adelay=delay_in_ms:all=1[na]
+			adelay_string += (
+				"[%s]adelay=%s:all=1[%sa];" % [audio_layer_count, delay, audio_layer_count]
+			)
+			audio_layer_count += 1
 			if layer.audio.get_length() >= max_audio_duration:
 				max_audio_duration = layer.audio.get_length()
 	if audio_layer_count > 0:
 		# If we have audio layers, merge them all into one file.
-		var amix_inputs_string := "amix=inputs=%s" % audio_layer_count
+		for i in audio_layer_count:
+			adelay_string += "[%sa]" % i
+		var amix_inputs_string := "amix=inputs=%s[a]" % audio_layer_count
+		var final_filter_string := adelay_string + amix_inputs_string
 		var audio_file_path := temp_path_real.path_join("audio.mp3")
 		ffmpeg_combine_audio.append_array(
-			PackedStringArray(["-filter_complex", amix_inputs_string, audio_file_path])
+			PackedStringArray(
+				["-filter_complex", final_filter_string, "-map", '"[a]"', audio_file_path]
+			)
 		)
-		OS.execute(Global.ffmpeg_path, ffmpeg_combine_audio, [], true)
-		var copied_video := temp_path_real.path_join("video." + export_paths[0].get_extension())
-
-		# Then mix the audio file with the video.
-		DirAccess.copy_absolute(export_paths[0], copied_video)
-		# ffmpeg -y -i video_file -i input_audio -c:v copy -map 0:v:0 -map 1:a:0 video_file
-		var ffmpeg_final_video: PackedStringArray = [
-			"-y", "-i", copied_video, "-i", audio_file_path
-		]
-		if max_audio_duration > video_duration:
-			ffmpeg_final_video.append("-shortest")
-		ffmpeg_final_video.append_array(
-			["-c:v", "copy", "-map", "0:v:0", "-map", "1:a:0", export_paths[0]]
-		)
-		OS.execute(Global.ffmpeg_path, ffmpeg_final_video, [], true)
+		# ffmpeg -i input1 -i input2 ... -i inputn -filter_complex amix=inputs=n output_path
+		var combined_audio_success := OS.execute(Global.ffmpeg_path, ffmpeg_combine_audio, [], true)
+		if combined_audio_success == 0 or combined_audio_success == 1:
+			var copied_video := temp_path_real.path_join("video." + export_paths[0].get_extension())
+			# Then mix the audio file with the video.
+			DirAccess.copy_absolute(export_paths[0], copied_video)
+			# ffmpeg -y -i video_file -i input_audio -c:v copy -map 0:v:0 -map 1:a:0 video_file
+			var ffmpeg_final_video: PackedStringArray = [
+				"-y", "-i", copied_video, "-i", audio_file_path
+			]
+			if max_audio_duration > video_duration:
+				ffmpeg_final_video.append("-shortest")
+			ffmpeg_final_video.append_array(
+				["-c:v", "copy", "-map", "0:v:0", "-map", "1:a:0", export_paths[0]]
+			)
+			OS.execute(Global.ffmpeg_path, ffmpeg_final_video, [], true)
 	_clear_temp_folder()
 	return true
 

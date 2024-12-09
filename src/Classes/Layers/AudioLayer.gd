@@ -7,6 +7,7 @@ var audio: AudioStream:
 	set(value):
 		audio = value
 		audio_changed.emit()
+var playback_position := 0.0  ## Measured in seconds.
 
 
 func _init(_project: Project, _name := "") -> void:
