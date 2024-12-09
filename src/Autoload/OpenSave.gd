@@ -45,7 +45,7 @@ func handle_loading_file(file: String) -> void:
 			return
 		var file_name: String = file.get_file().get_basename()
 		Global.control.find_child("ShaderEffect").change_shader(shader, file_name)
-	elif file_ext == "ogg" or file_ext == "mp3":  # Audio file
+	elif file_ext == "mp3":  # Audio file
 		open_audio_file(file)
 
 	else:  # Image files
@@ -198,13 +198,13 @@ func handle_loading_video(file: String) -> bool:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
-	var output_audio_file := temp_path_real.path_join("audio.ogg")
-	# ffmpeg -y -i input_file -vn audio.ogg
+	var output_audio_file := temp_path_real.path_join("audio.mp3")
+	# ffmpeg -y -i input_file -vn audio.mp3
 	var ffmpeg_execute_audio: PackedStringArray = ["-y", "-i", file, "-vn", output_audio_file]
 	var success_audio := OS.execute(Global.ffmpeg_path, ffmpeg_execute_audio, [], true)
 	if FileAccess.file_exists(output_audio_file):
 		open_audio_file(output_audio_file)
-		temp_dir.remove("audio.ogg")
+		temp_dir.remove("audio.mp3")
 	DirAccess.remove_absolute(Export.TEMP_PATH)
 	return true
 
@@ -915,12 +915,9 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 func open_audio_file(path: String) -> void:
 	var audio_stream: AudioStream
 	var file_ext := path.get_extension().to_lower()
-	if file_ext == "ogg":
-		audio_stream = AudioStreamOggVorbis.load_from_file(path)
-	elif file_ext == "mp3":
-		var file := FileAccess.open(path, FileAccess.READ)
-		audio_stream = AudioStreamMP3.new()
-		audio_stream.data = file.get_buffer(file.get_length())
+	var file := FileAccess.open(path, FileAccess.READ)
+	audio_stream = AudioStreamMP3.new()
+	audio_stream.data = file.get_buffer(file.get_length())
 	if not is_instance_valid(audio_stream):
 		return
 	var project := Global.current_project
