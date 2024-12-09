@@ -395,3 +395,4 @@ func _exit_tree() -> void:
 	if is_moving:
 		draw_end(Global.canvas.current_pixel.floor())
 	Global.canvas.previews_sprite.texture = null
+	Global.canvas.indicators.queue_redraw()
