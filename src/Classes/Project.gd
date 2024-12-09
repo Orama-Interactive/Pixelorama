@@ -367,21 +367,6 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				Global.LayerTypes.TILEMAP:
 					layers.append(LayerTileMap.new(self, null))
 
-		# Parent references to other layers are created when deserializing
-		# a layer, so loop again after creating them:
-		for layer_i in dict.layers.size():
-			layers[layer_i].index = layer_i
-			var layer_dict: Dictionary = dict.layers[layer_i]
-			# Ensure that loaded pxo files from v1.0-v1.0.3 have the correct
-			# blend mode, after the addition of the Erase mode in v1.0.4.
-			if pxo_version < 4 and layer_dict.has("blend_mode"):
-				var blend_mode: int = layer_dict.get("blend_mode")
-				if blend_mode >= BaseLayer.BlendModes.ERASE:
-					blend_mode += 1
-				layer_dict["blend_mode"] = blend_mode
-			layers[layer_i].deserialize(layer_dict)
-			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
-
 		var frame_i := 0
 		for frame in dict.frames:
 			var cels: Array[BaseCel] = []
@@ -401,7 +386,9 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						cels.append(Cel3D.new(size, true))
 					Global.LayerTypes.TILEMAP:
 						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
-						var new_cel := (layer as LayerTileMap).new_cel_from_image(image)
+						var tileset_index = dict.layers[cel_i].tileset_index
+						var tileset := tilesets[tileset_index]
+						var new_cel := CelTileMap.new(tileset, image)
 						cels.append(new_cel)
 				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
@@ -418,6 +405,21 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			_deserialize_metadata(frame_class, frame)
 			frames.append(frame_class)
 			frame_i += 1
+
+		# Parent references to other layers are created when deserializing
+		# a layer, so loop again after creating them:
+		for layer_i in dict.layers.size():
+			layers[layer_i].index = layer_i
+			var layer_dict: Dictionary = dict.layers[layer_i]
+			# Ensure that loaded pxo files from v1.0-v1.0.3 have the correct
+			# blend mode, after the addition of the Erase mode in v1.0.4.
+			if pxo_version < 4 and layer_dict.has("blend_mode"):
+				var blend_mode: int = layer_dict.get("blend_mode")
+				if blend_mode >= BaseLayer.BlendModes.ERASE:
+					blend_mode += 1
+				layer_dict["blend_mode"] = blend_mode
+			layers[layer_i].deserialize(layer_dict)
+			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			var new_tag := AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to)
