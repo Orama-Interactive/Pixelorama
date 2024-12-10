@@ -11,6 +11,11 @@ var layer_indices: PackedInt32Array
 @onready var play_at_frame_slider := $GridContainer/PlayAtFrameSlider as ValueSlider
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
 @onready var tileset_option_button := $GridContainer/TilesetOptionButton as OptionButton
+@onready var audio_file_dialog := $AudioFileDialog as FileDialog
+
+
+func _ready() -> void:
+	audio_file_dialog.use_native_dialog = Global.use_native_file_dialogs
 
 
 func _on_visibility_changed() -> void:
@@ -158,6 +163,10 @@ func _on_tileset_option_button_item_selected(index: int) -> void:
 	project.undo_redo.commit_action()
 
 
+func _on_audio_file_button_pressed() -> void:
+	audio_file_dialog.popup_centered()
+
+
 func _on_play_at_frame_slider_value_changed(value: float) -> void:
 	if layer_indices.size() == 0:
 		return
@@ -165,3 +174,15 @@ func _on_play_at_frame_slider_value_changed(value: float) -> void:
 		var layer := Global.current_project.layers[layer_index]
 		if layer is AudioLayer:
 			layer.playback_frame = value - 1
+
+
+func _on_audio_file_dialog_file_selected(path: String) -> void:
+	var audio_stream: AudioStream
+	if path.get_extension() == "mp3":
+		var file := FileAccess.open(path, FileAccess.READ)
+		audio_stream = AudioStreamMP3.new()
+		audio_stream.data = file.get_buffer(file.get_length())
+	for layer_index in layer_indices:
+		var layer := Global.current_project.layers[layer_index]
+		if layer is AudioLayer:
+			layer.audio = audio_stream

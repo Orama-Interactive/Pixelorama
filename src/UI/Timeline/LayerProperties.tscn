@@ -5,14 +5,15 @@
 
 [node name="LayerProperties" type="AcceptDialog"]
 title = "Layer properties"
-size = Vector2i(300, 235)
+position = Vector2i(0, 36)
+size = Vector2i(300, 270)
 script = ExtResource("1_54q1t")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
-offset_bottom = 186.0
+offset_bottom = 221.0
 columns = 2
 
 [node name="NameLabel" type="Label" parent="GridContainer"]
@@ -51,6 +52,15 @@ text = "Blend mode:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+
+[node name="AudioFileLabel" type="Label" parent="GridContainer" groups=["AudioLayers"]]
+layout_mode = 2
+text = "Audio file:"
+
+[node name="AudioFileButton" type="Button" parent="GridContainer" groups=["AudioLayers"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Load file"
 
 [node name="PlayAtFrameLabel" type="Label" parent="GridContainer" groups=["AudioLayers"]]
 layout_mode = 2
@@ -92,10 +102,21 @@ text = "Tileset:"
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
+[node name="AudioFileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(870, 400)
+always_on_top = true
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.mp3 ; MP3 Audio")
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/BlendModeOptionButton" to="." method="_on_blend_mode_option_button_item_selected"]
+[connection signal="pressed" from="GridContainer/AudioFileButton" to="." method="_on_audio_file_button_pressed"]
 [connection signal="value_changed" from="GridContainer/PlayAtFrameSlider" to="." method="_on_play_at_frame_slider_value_changed"]
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="item_selected" from="GridContainer/TilesetOptionButton" to="." method="_on_tileset_option_button_item_selected"]
+[connection signal="file_selected" from="AudioFileDialog" to="." method="_on_audio_file_dialog_file_selected"]
