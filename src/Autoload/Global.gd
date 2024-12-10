@@ -1193,6 +1193,6 @@ func _save_to_override_file() -> void:
 	file.store_line("[display]\n")
 	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
 	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)
-	file.store_line("[audio]\n")
 	if dummy_audio_driver:
+		file.store_line("[audio]\n")
 		file.store_line('driver/driver="Dummy"')

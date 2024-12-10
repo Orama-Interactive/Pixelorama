@@ -2251,6 +2251,9 @@ msgstr ""
 msgid "Tilemap"
 msgstr ""
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
