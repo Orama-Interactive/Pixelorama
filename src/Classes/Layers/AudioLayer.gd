@@ -26,14 +26,26 @@ func get_audio_length() -> float:
 		return -1.0
 
 
+func get_audio_type() -> String:
+	if not is_instance_valid(audio):
+		return ""
+	return audio.get_class()
+
+
 # Overridden Methods:
 func serialize() -> Dictionary:
-	var data := {"name": name, "type": get_layer_type()}
+	var data := {
+		"name": name,
+		"type": get_layer_type(),
+		"playback_frame": playback_frame,
+		"audio_type": get_audio_type()
+	}
 	return data
 
 
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
+	playback_frame = dict.get("playback_frame", playback_frame)
 
 
 func get_layer_type() -> int:

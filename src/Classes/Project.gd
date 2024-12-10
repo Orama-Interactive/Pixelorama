@@ -360,6 +360,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			tileset.deserialize(saved_tileset)
 			tilesets.append(tileset)
 	if dict.has("frames") and dict.has("layers"):
+		var audio_layers := 0
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
 				Global.LayerTypes.PIXEL:
@@ -370,6 +371,18 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 					layers.append(Layer3D.new(self))
 				Global.LayerTypes.TILEMAP:
 					layers.append(LayerTileMap.new(self, null))
+				Global.LayerTypes.AUDIO:
+					var layer := AudioLayer.new(self)
+					var audio_path := "audio/%s" % audio_layers
+					if zip_reader.file_exists(audio_path):
+						var audio_data := zip_reader.read_file(audio_path)
+						var stream: AudioStream
+						if saved_layer.get("audio_type", "") == "AudioStreamMP3":
+							stream = AudioStreamMP3.new()
+							stream.data = audio_data
+						layer.audio = stream
+					layers.append(layer)
+					audio_layers += 1
 
 		var frame_i := 0
 		for frame in dict.frames:
@@ -394,6 +407,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						var tileset := tilesets[tileset_index]
 						var new_cel := CelTileMap.new(tileset, image)
 						cels.append(new_cel)
+					Global.LayerTypes.AUDIO:
+						cels.append(AudioCel.new())
 				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
@@ -660,6 +675,18 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 			if cel is PixelCel:
 				cels.append(cel)
 	return cels
+
+
+func get_all_audio_layers(only_valid_streams := true) -> Array[AudioLayer]:
+	var audio_layers: Array[AudioLayer]
+	for layer in layers:
+		if layer is AudioLayer:
+			if only_valid_streams:
+				if is_instance_valid(layer.audio):
+					audio_layers.append(layer)
+			else:
+				audio_layers.append(layer)
+	return audio_layers
 
 
 ## Reads data from [param cels] and appends them to [param data],
