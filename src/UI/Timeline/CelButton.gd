@@ -32,9 +32,11 @@ func _ready() -> void:
 	elif cel is GroupCel:
 		transparent_checker.visible = false
 	elif cel is AudioCel:
+		popup_menu.add_item("Play audio here")
 		_is_playing_audio()
 		Global.cel_switched.connect(_is_playing_audio)
 		Global.current_project.fps_changed.connect(_is_playing_audio)
+		Global.current_project.layers[layer].playback_frame_changed.connect(_is_playing_audio)
 
 
 func _notification(what: int) -> void:
@@ -134,7 +136,11 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			properties.cel_indices = _get_cel_indices()
 			properties.popup_centered()
 		MenuOptions.DELETE:
-			_delete_cel_content()
+			var layer_class := Global.current_project.layers[layer]
+			if layer_class is AudioLayer:
+				layer_class.playback_frame = frame
+			else:
+				_delete_cel_content()
 
 		MenuOptions.LINK, MenuOptions.UNLINK:
 			var project := Global.current_project

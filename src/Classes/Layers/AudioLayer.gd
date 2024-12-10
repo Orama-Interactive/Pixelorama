@@ -2,6 +2,7 @@ class_name AudioLayer
 extends BaseLayer
 
 signal audio_changed
+signal playback_frame_changed
 
 var audio: AudioStream:
 	set(value):
@@ -11,7 +12,10 @@ var playback_position := 0.0:  ## Measured in seconds.
 	get():
 		var frame := project.frames[playback_frame]
 		return frame.position_in_seconds(project)
-var playback_frame := 0
+var playback_frame := 0:
+	set(value):
+		playback_frame = value
+		playback_frame_changed.emit()
 
 
 func _init(_project: Project, _name := "") -> void:
