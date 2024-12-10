@@ -490,6 +490,11 @@ var window_transparency := false:
 			return
 		window_transparency = value
 		_save_to_override_file()
+var dummy_audio_driver := false:
+	set(value):
+		if value != dummy_audio_driver:
+			dummy_audio_driver = value
+			_save_to_override_file()
 
 ## Found in Preferences. The time (in minutes) after which backup is created (if enabled).
 var autosave_interval := 1.0:
@@ -726,6 +731,7 @@ func _init() -> void:
 	window_transparency = ProjectSettings.get_setting(
 		"display/window/per_pixel_transparency/allowed"
 	)
+	dummy_audio_driver = ProjectSettings.get_setting("audio/driver/driver") == "Dummy"
 
 
 func _ready() -> void:
@@ -1187,3 +1193,6 @@ func _save_to_override_file() -> void:
 	file.store_line("[display]\n")
 	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
 	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)
+	file.store_line("[audio]\n")
+	if dummy_audio_driver:
+		file.store_line('driver/driver="Dummy"')

@@ -1142,13 +1142,25 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
-[node name="WindowTransparencyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+[node name="WindowTransparencyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
 layout_mode = 2
 tooltip_text = "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 mouse_filter = 0
 text = "Enable window transparency"
 
-[node name="WindowTransparency" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+[node name="WindowTransparency" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
+layout_mode = 2
+tooltip_text = "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="DummyAudioDriverLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
+layout_mode = 2
+tooltip_text = "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+mouse_filter = 0
+text = "Use dummy audio driver"
+
+[node name="DummyAudioDriver" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
 layout_mode = 2
 tooltip_text = "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 mouse_default_cursor_shape = 2
