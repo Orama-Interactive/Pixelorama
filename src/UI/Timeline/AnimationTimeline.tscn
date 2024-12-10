@@ -382,6 +382,7 @@ texture = ExtResource("5")
 stretch_mode = 3
 
 [node name="LayerFX" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons" groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3

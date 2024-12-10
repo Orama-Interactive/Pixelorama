@@ -41,6 +41,7 @@ var global_layer_expand := true
 @onready var move_up_layer := %MoveUpLayer as Button
 @onready var move_down_layer := %MoveDownLayer as Button
 @onready var merge_down_layer := %MergeDownLayer as Button
+@onready var layer_fx := %LayerFX as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
@@ -906,6 +907,8 @@ func _on_CloneLayer_pressed() -> void:
 			cl_layer = LayerTileMap.new(project, src_layer.tileset)
 		else:
 			cl_layer = src_layer.get_script().new(project)
+			if src_layer is AudioLayer:
+				cl_layer.audio = src_layer.audio
 		cl_layer.project = project
 		cl_layer.index = src_layer.index
 		var src_layer_data: Dictionary = src_layer.serialize()
@@ -1193,10 +1196,13 @@ func _toggle_layer_buttons() -> void:
 		(
 			project.current_layer == child_count
 			or layer is GroupLayer
+			or layer is AudioLayer
 			or project.layers[project.current_layer - 1] is GroupLayer
 			or project.layers[project.current_layer - 1] is Layer3D
+			or project.layers[project.current_layer - 1] is AudioLayer
 		)
 	)
+	Global.disable_button(layer_fx, layer is AudioLayer)
 
 
 func project_changed() -> void:
