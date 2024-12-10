@@ -1473,6 +1473,7 @@ text = "Pixelorama must be restarted for changes to take effect."
 mode = 1
 title = "Open File(s)"
 size = Vector2i(560, 400)
+always_on_top = true
 ok_button_text = "Open"
 file_mode = 1
 access = 2
@@ -1484,6 +1485,7 @@ transient = true
 
 [node name="EnableExtensionConfirmation" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
+always_on_top = true
 dialog_text = "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
 dialog_autowrap = true
 
@@ -1491,11 +1493,13 @@ dialog_autowrap = true
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(400, 100)
+always_on_top = true
 ok_button_text = "Delete Permanently"
 dialog_text = "Are you sure you want to delete this extension?"
 dialog_autowrap = true
 
 [node name="ResetOptionsConfirmation" type="ConfirmationDialog" parent="."]
+always_on_top = true
 dialog_text = "Are you sure you want to reset the selected options? There will be no way to undo this."
 
 [connection signal="about_to_popup" from="." to="." method="_on_PreferencesDialog_about_to_show"]

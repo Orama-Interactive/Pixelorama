@@ -12,6 +12,7 @@ size = Vector2i(760, 470)
 visible = false
 wrap_controls = true
 exclusive = true
+always_on_top = true
 script = ExtResource("1_pwcwi")
 
 [node name="TabContainer" type="TabContainer" parent="."]
@@ -24,9 +25,11 @@ offset_left = 7.0
 offset_top = 8.0
 offset_right = -7.0
 offset_bottom = -8.0
+current_tab = 0
 
 [node name="Store" type="MarginContainer" parent="TabContainer"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="StoreMainContainer" type="HSplitContainer" parent="TabContainer/Store"]
 layout_mode = 2
@@ -68,6 +71,7 @@ size_flags_horizontal = 3
 [node name="Options" type="MarginContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Options"]
 layout_mode = 2
@@ -153,6 +157,7 @@ unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(511, 326)
 unresizable = true
+always_on_top = true
 popup_window = true
 
 [node name="Content" type="VBoxContainer" parent="Error"]
@@ -200,6 +205,7 @@ autowrap_mode = 3
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(357, 110)
+always_on_top = true
 popup_window = true
 
 [node name="Content" type="VBoxContainer" parent="ErrorCustom"]
