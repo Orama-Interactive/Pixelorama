@@ -27,10 +27,6 @@ config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/ExtensionsAPI_Version=5
 config/Pxo_Version=4
 
-[audio]
-
-driver/driver="Dummy"
-
 [autoload]
 
 Global="*res://src/Autoload/Global.gd"

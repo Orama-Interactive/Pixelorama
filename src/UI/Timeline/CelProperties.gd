@@ -15,18 +15,18 @@ func _on_visibility_changed() -> void:
 	Global.dialog_open(visible)
 	var first_cel := Global.current_project.frames[cel_indices[0][0]].cels[cel_indices[0][1]]
 	if visible:
+		var first_layer := Global.current_project.layers[cel_indices[0][1]]
 		if cel_indices.size() == 1:
-			var layer := Global.current_project.layers[cel_indices[0][1]]
 			frame_num.text = str(cel_indices[0][0] + 1)
-			layer_num.text = layer.name
+			layer_num.text = first_layer.name
 		else:
-			var first_layer := Global.current_project.layers[cel_indices[0][1]]
 			var last_layer := Global.current_project.layers[cel_indices[-1][1]]
 			frame_num.text = "[%s...%s]" % [cel_indices[0][0] + 1, cel_indices[-1][0] + 1]
 			layer_num.text = "[%s...%s]" % [first_layer.name, last_layer.name]
 		opacity_slider.value = first_cel.opacity * 100.0
 		z_index_slider.value = first_cel.z_index
 		user_data_text_edit.text = first_cel.user_data
+		get_tree().set_group(&"VisualCels", "visible", first_layer is not AudioLayer)
 	else:
 		cel_indices = []
 

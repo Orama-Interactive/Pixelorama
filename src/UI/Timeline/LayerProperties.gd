@@ -4,11 +4,18 @@ signal layer_property_changed
 
 var layer_indices: PackedInt32Array
 
+@onready var grid_container: GridContainer = $GridContainer
 @onready var name_line_edit := $GridContainer/NameLineEdit as LineEdit
 @onready var opacity_slider := $GridContainer/OpacitySlider as ValueSlider
 @onready var blend_modes_button := $GridContainer/BlendModeOptionButton as OptionButton
+@onready var play_at_frame_slider := $GridContainer/PlayAtFrameSlider as ValueSlider
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
 @onready var tileset_option_button := $GridContainer/TilesetOptionButton as OptionButton
+@onready var audio_file_dialog := $AudioFileDialog as FileDialog
+
+
+func _ready() -> void:
+	audio_file_dialog.use_native_dialog = Global.use_native_file_dialogs
 
 
 func _on_visibility_changed() -> void:
@@ -23,8 +30,13 @@ func _on_visibility_changed() -> void:
 		opacity_slider.value = first_layer.opacity * 100.0
 		var blend_mode_index := blend_modes_button.get_item_index(first_layer.blend_mode)
 		blend_modes_button.selected = blend_mode_index
+		if first_layer is AudioLayer:
+			play_at_frame_slider.value = first_layer.playback_frame + 1
+		play_at_frame_slider.max_value = project.frames.size()
 		user_data_text_edit.text = first_layer.user_data
+		get_tree().set_group(&"VisualLayers", "visible", first_layer is not AudioLayer)
 		get_tree().set_group(&"TilemapLayers", "visible", first_layer is LayerTileMap)
+		get_tree().set_group(&"AudioLayers", "visible", first_layer is AudioLayer)
 		tileset_option_button.clear()
 		if first_layer is LayerTileMap:
 			for i in project.tilesets.size():
@@ -149,3 +161,28 @@ func _on_tileset_option_button_item_selected(index: int) -> void:
 	project.undo_redo.add_undo_method(Global.canvas.draw_layers)
 	project.undo_redo.add_undo_method(func(): Global.cel_switched.emit())
 	project.undo_redo.commit_action()
+
+
+func _on_audio_file_button_pressed() -> void:
+	audio_file_dialog.popup_centered()
+
+
+func _on_play_at_frame_slider_value_changed(value: float) -> void:
+	if layer_indices.size() == 0:
+		return
+	for layer_index in layer_indices:
+		var layer := Global.current_project.layers[layer_index]
+		if layer is AudioLayer:
+			layer.playback_frame = value - 1
+
+
+func _on_audio_file_dialog_file_selected(path: String) -> void:
+	var audio_stream: AudioStream
+	if path.get_extension() == "mp3":
+		var file := FileAccess.open(path, FileAccess.READ)
+		audio_stream = AudioStreamMP3.new()
+		audio_stream.data = file.get_buffer(file.get_length())
+	for layer_index in layer_indices:
+		var layer := Global.current_project.layers[layer_index]
+		if layer is AudioLayer:
+			layer.audio = audio_stream

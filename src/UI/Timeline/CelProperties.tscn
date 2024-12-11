@@ -33,12 +33,12 @@ layout_mode = 2
 text = "1"
 horizontal_alignment = 1
 
-[node name="OpacityLabel" type="Label" parent="GridContainer"]
+[node name="OpacityLabel" type="Label" parent="GridContainer" groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Opacity:"
 
-[node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer"]
+[node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer" groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -52,12 +52,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("1_85pb7")
 
-[node name="ZIndexLabel" type="Label" parent="GridContainer"]
+[node name="ZIndexLabel" type="Label" parent="GridContainer" groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Z-Index:"
 
-[node name="ZIndexSlider" type="TextureProgressBar" parent="GridContainer"]
+[node name="ZIndexSlider" type="TextureProgressBar" parent="GridContainer" groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -76,11 +76,13 @@ script = ExtResource("1_85pb7")
 
 [node name="UserDataLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "User data:"
 
 [node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 scroll_fit_content_height = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

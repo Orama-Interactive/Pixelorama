@@ -169,7 +169,6 @@ caret_blink_interval = 0.5
 disable_3d = true
 item_count = 2
 item_0/text = "Properties"
-item_0/id = 0
 item_1/text = "Clipping mask"
 item_1/checkable = 1
 item_1/id = 1

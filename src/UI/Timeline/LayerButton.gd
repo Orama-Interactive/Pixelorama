@@ -14,7 +14,9 @@ var button_pressed := false:
 		main_button.button_pressed = value
 	get:
 		return main_button.button_pressed
+var animation_running := false
 
+var audio_player: AudioStreamPlayer
 @onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
 @onready var main_button := %LayerMainButton as Button
 @onready var expand_button := %ExpandButton as BaseButton
@@ -31,7 +33,7 @@ var button_pressed := false:
 func _ready() -> void:
 	main_button.layer_index = layer_index
 	main_button.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
-	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
+	Global.cel_switched.connect(_on_cel_switched)
 	var layer := Global.current_project.layers[layer_index]
 	layer.name_changed.connect(func(): label.text = layer.name)
 	layer.visibility_changed.connect(update_buttons)
@@ -39,6 +41,13 @@ func _ready() -> void:
 		linked_button.visible = true
 	elif layer is GroupLayer:
 		expand_button.visible = true
+	elif layer is AudioLayer:
+		audio_player = AudioStreamPlayer.new()
+		audio_player.stream = layer.audio
+		layer.audio_changed.connect(func(): audio_player.stream = layer.audio)
+		add_child(audio_player)
+		Global.animation_timeline.animation_started.connect(_on_animation_started)
+		Global.animation_timeline.animation_finished.connect(_on_animation_finished)
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name
 	line_edit.text = layer.name
@@ -54,6 +63,40 @@ func _ready() -> void:
 	var hierarchy_depth := layer.get_hierarchy_depth()
 	hierarchy_spacer.custom_minimum_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 	update_buttons()
+
+
+func _on_cel_switched() -> void:
+	z_index = 1 if button_pressed else 0
+	var layer := Global.current_project.layers[layer_index]
+	if layer is AudioLayer:
+		if not animation_running or Global.current_project.current_frame == layer.playback_frame:
+			_play_audio()
+
+
+func _on_animation_started(_dir: bool) -> void:
+	animation_running = true
+	_play_audio()
+
+
+func _on_animation_finished() -> void:
+	animation_running = false
+	if is_instance_valid(audio_player):
+		audio_player.stop()
+
+
+func _play_audio() -> void:
+	if not is_instance_valid(audio_player):
+		return
+	var layer := Global.current_project.layers[layer_index] as AudioLayer
+	if not layer.visible:
+		return
+	var audio_length := layer.get_audio_length()
+	var frame := Global.current_project.frames[Global.current_project.current_frame]
+	var frame_pos := frame.position_in_seconds(Global.current_project, layer.playback_frame)
+	if frame_pos >= 0 and frame_pos < audio_length:
+		audio_player.play(frame_pos)
+	else:
+		audio_player.stop()
 
 
 func update_buttons() -> void:
