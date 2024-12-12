@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-12-12 13:28\n"
+"PO-Revision-Date: 2024-12-12 15:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1578,7 +1578,9 @@ msgstr "Instrument Elipsă\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Text\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Rectangle"
 msgstr "Dreptunghi"
@@ -1682,11 +1684,11 @@ msgstr "Culoarea ghidajelor de riglă afișate pe pânză"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Ancorare"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Distanță de ancorare:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
@@ -2158,10 +2160,10 @@ msgid "Go to the previous frame"
 msgstr "Deplasează-te la cadrul anterior"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Redă animația înapoi"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Redă animația înainte"
 
 msgid "Go to the next frame"
 msgstr "Deplasează-te la cadrul următor"
@@ -2986,7 +2988,7 @@ msgstr "Sortează după valoare"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "Sortează după luminozitate"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
