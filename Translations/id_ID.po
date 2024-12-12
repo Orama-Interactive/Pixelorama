@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-12-05 17:23\n"
+"PO-Revision-Date: 2024-12-12 23:05\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -711,7 +711,7 @@ msgid "Refresh files."
 msgstr "Segarkan berkas."
 
 msgid "Toggle the visibility of hidden files."
-msgstr "Cetik ketampakan berkas sembunyi."
+msgstr "Menampil/hilangkan berkas sembunyi."
 
 msgid "Directories & Files:"
 msgstr "Direktori & Berkas:"
@@ -744,7 +744,7 @@ msgstr "Gambar BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr "Gambar HDR Radiansi"
+msgstr "Gambar Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
@@ -990,7 +990,7 @@ msgid "Big"
 msgstr "Besar"
 
 msgid "Only affect selection"
-msgstr "Hanya memengaruhi seleksi"
+msgstr "Pengaruhi seleksi saja"
 
 msgid "Selected cels"
 msgstr "Cel yang dipilih"
@@ -2468,7 +2468,7 @@ msgid "Tile mode opacity:"
 msgstr "Kelegapan mode petak:"
 
 msgid "Toggle layer's visibility"
-msgstr "Cetik ketampakan lapisan"
+msgstr "Tampil/hilangkan lapisan"
 
 msgid "Lock/unlock layer"
 msgstr "Kuncikan/buka lapisan"
