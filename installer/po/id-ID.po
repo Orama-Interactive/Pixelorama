@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2022-03-30 19:08\n"
+"PO-Revision-Date: 2024-12-12 23:05\n"
 "Last-Translator: \n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
@@ -25,7 +25,7 @@ msgstr "Pasang ${APPNAME}"
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr "Buat pintasan Menu Awal (opsional)"
+msgstr "Buat pintasan Menu Mulai (opsional)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
@@ -50,7 +50,7 @@ msgstr "Pasang ${APPNAME}${APPVERSION}."
 #. DESC_SecStartmenu
 #: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr "Buat pintasan Menu Awal untuk ${APPNAME}."
+msgstr "Buat pintasan Menu Mulai untuk ${APPNAME}."
 
 #. DESC_SecDesktop
 #: ..\pixelorama.nsi:202
