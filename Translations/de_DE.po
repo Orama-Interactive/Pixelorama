@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-12-05 02:11\n"
+"PO-Revision-Date: 2024-12-12 18:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2316,7 +2316,7 @@ msgstr "Gruppe"
 
 #. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
 msgid "Tilemap"
-msgstr ""
+msgstr "Tilemap"
 
 msgid "Layers"
 msgstr "Ebenen"
@@ -2348,7 +2348,7 @@ msgstr "3D-Ebene hinzufügen"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
-msgstr ""
+msgstr "Tilemap-Ebene hinzufügen"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -3057,7 +3057,7 @@ msgstr "Zeichnungsaufnahme"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
-msgstr ""
+msgstr "Tiles"
 
 msgid "Crop"
 msgstr "Zuschneiden"
@@ -3468,47 +3468,47 @@ msgstr "Möchten Sie das Bild von %s herunterladen?"
 #: src/Classes/TileSetCustom.gd
 #: src/UI/Dialogs/ImportPreviewDialog.gd
 msgid "Tileset"
-msgstr ""
+msgstr "Tileset"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset:"
-msgstr ""
+msgstr "Tileset:"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Dialogs/ProjectProperties.tscn
 msgid "Tilesets"
-msgstr ""
+msgstr "Tilesets"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "New tileset"
-msgstr ""
+msgstr "Neues Tileset"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset name:"
-msgstr ""
+msgstr "Tileset Name:"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tile size:"
-msgstr ""
+msgstr "Tileset Größe:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr ""
+msgstr "Tiles zeichnen"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr ""
+msgstr "Tile nach links drehen (gegen den Uhrzeigersinn)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr ""
+msgstr "Tile nach Rechts drehen (mit dem Uhrzeigersinn)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr ""
+msgstr "Tile horizontal spiegeln"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr ""
+msgstr "Tile vertikal spiegeln"
 
