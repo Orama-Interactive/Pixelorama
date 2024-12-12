@@ -5,15 +5,18 @@ var font: Font:
 	set(value):
 		font = value
 		add_theme_font_override(&"font", font)
+var _border_node := Control.new()
 
 
 func _ready() -> void:
+	Global.camera.zoom_changed.connect(func(): _border_node.queue_redraw())
+	_border_node.draw.connect(_on_border_redraw)
+	_border_node.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_border_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_border_node)
+	caret_blink = true
 	var stylebox := StyleBoxFlat.new()
 	stylebox.draw_center = false
-	stylebox.border_width_left = 1
-	stylebox.border_width_top = 1
-	stylebox.border_width_right = 1
-	stylebox.border_width_bottom = 1
 	add_theme_stylebox_override(&"normal", stylebox)
 	add_theme_stylebox_override(&"focus", stylebox)
 	add_theme_constant_override(&"line_spacing", 0)
@@ -44,3 +47,9 @@ func _on_text_changed() -> void:
 	var string_size := font.get_string_size(max_line, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	size.x = font_size + string_size.x
 	size.y = (get_line_count() + 1) * font.get_height(font_size)
+	_border_node.queue_redraw()
+
+
+func _on_border_redraw() -> void:
+	var border_width := (1.0 / Global.camera.zoom.x) * 2.0 + 1.0
+	_border_node.draw_rect(_border_node.get_rect(), Color.WHITE, false, border_width)

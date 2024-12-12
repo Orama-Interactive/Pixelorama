@@ -139,7 +139,7 @@ func text_to_pixels() -> void:
 	var text := text_edit.text
 	var color := tool_slot.color
 	var font_ascent := font.get_ascent(text_size)
-	var pos := Vector2(1, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
+	var pos := Vector2(0, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
 	pos += text_edit.position
 	font.draw_multiline_string(ci_rid, pos, text, horizontal_alignment, -1, text_size, -1, color)
 
