@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-12-10 15:24\n"
+"PO-Revision-Date: 2024-12-13 22:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1844,6 +1844,10 @@ msgstr "Habilitar transparencia de ventana"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Si está activado, la ventana de la aplicación puede ser transparente. Esto afecta al rendimiento, así que mantenlo apagado si no lo necesitas."
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "Procesador:"
@@ -2276,6 +2280,10 @@ msgstr "Enlazar celdas a"
 msgid "Unlink Cels"
 msgstr "Desvincular celdas"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "Propiedades"
 
@@ -2316,6 +2324,9 @@ msgstr "Agrupar"
 msgid "Tilemap"
 msgstr "Tilemap"
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "Capas"
 
@@ -2347,6 +2358,11 @@ msgstr "Agregar nueva capa 3D"
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
 msgstr "Añadir capa de Tilemap"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2478,6 +2494,17 @@ msgstr "Activar/desactivar el enlace automático de nuevas celdas al crear nuevo
 
 msgid "Expand/collapse group"
 msgstr "Expandir/contraer grupo"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paleta"
