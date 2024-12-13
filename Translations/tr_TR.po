@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2024-12-05 20:48\n"
+"PO-Revision-Date: 2024-12-13 22:44\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1848,6 +1848,10 @@ msgstr "Pencere saydamlığını etkinleştir"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Etkinleştirilirse uygulama penceresi saydam olur. Başarımı etkilediği için ihtiyacınız yoksa kapatınız."
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "İşleyici:"
@@ -2281,6 +2285,10 @@ msgstr "Hücreleri şuraya bağla"
 msgid "Unlink Cels"
 msgstr "Hücre bağlantısını kaldır"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "Özellikler"
 
@@ -2321,6 +2329,9 @@ msgstr "Grup"
 msgid "Tilemap"
 msgstr "Döşeme eşlemi"
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "Katmanlar"
 
@@ -2352,6 +2363,11 @@ msgstr "3B Katmanı Ekle"
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
 msgstr "Döşeme Eşlemi Katmanı Ekle"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2483,6 +2499,17 @@ msgstr "Yeni kare oluştururken yeni hücrelerin otomatik olarak bağlanmasını
 
 msgid "Expand/collapse group"
 msgstr "Grubu genişlet/daralt"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palet"
