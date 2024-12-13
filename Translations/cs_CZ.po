@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2024-12-05 02:11\n"
+"PO-Revision-Date: 2024-12-13 22:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1844,6 +1844,10 @@ msgstr "Povolit průhlednost hlavního okna"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Pokud povoleno, tak se může aplikační okno stát průhledným. Ovlivňuje výkon, takže ponechte vypnuto, pokud funkci nepotřebujete."
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "Renderer:"
@@ -2277,6 +2281,10 @@ msgstr "Propojit buňky s"
 msgid "Unlink Cels"
 msgstr "Rozpojit buňky"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "Nastavení"
 
@@ -2317,6 +2325,9 @@ msgstr "Skupina"
 msgid "Tilemap"
 msgstr ""
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "Vrstvy"
 
@@ -2347,6 +2358,11 @@ msgstr "Přidat 3D vrstvu"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
+msgstr ""
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
 msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2479,6 +2495,17 @@ msgstr "Povolit/zakázat automatické propojení nových buněk při vytvářen�
 
 msgid "Expand/collapse group"
 msgstr "Rozbalit/sbalit skupinu"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paleta"
