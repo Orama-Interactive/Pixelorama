@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-12-12 15:19\n"
+"PO-Revision-Date: 2024-12-13 22:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1846,6 +1846,10 @@ msgstr "Activează transparența ferestrei"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Dacă opțiunea este activată, fereastra aplicației poate deveni transparentă. Aceasta afectează performanța, așa că este recomandată dezactivarea opțiunii dacă nu este necesară."
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "Randator:"
@@ -2279,6 +2283,10 @@ msgstr "Conectare celuri la"
 msgid "Unlink Cels"
 msgstr "Deconectare celuri"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "Proprietăți"
 
@@ -2319,6 +2327,9 @@ msgstr "Grup"
 msgid "Tilemap"
 msgstr "Hartă de dale"
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "Straturi"
 
@@ -2350,6 +2361,11 @@ msgstr "Adăugare strat 3D"
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
 msgstr "Adăugare strat cu hartă de dale"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2481,6 +2497,17 @@ msgstr "Activează/dezactivează automat conectarea de celuri noi la crearea de 
 
 msgid "Expand/collapse group"
 msgstr "Extindere/restrânge grup"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paletă"
