@@ -36,6 +36,7 @@ func _ready() -> void:
 		_is_playing_audio()
 		Global.cel_switched.connect(_is_playing_audio)
 		Global.current_project.fps_changed.connect(_is_playing_audio)
+		Global.current_project.layers[layer].audio_changed.connect(_is_playing_audio)
 		Global.current_project.layers[layer].playback_frame_changed.connect(_is_playing_audio)
 
 
