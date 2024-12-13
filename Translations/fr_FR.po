@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-12-05 02:11\n"
+"PO-Revision-Date: 2024-12-13 22:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1836,6 +1836,10 @@ msgstr "Activer la transparence de fenêtre"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Si cette option est activée, la fenêtre d'application peut devenir transparente. Cela affecte les performances, donc désactivez-la si vous n'en avez pas besoin."
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "Moteur de rendu :"
@@ -2269,6 +2273,10 @@ msgstr "Lier le Cellulo à"
 msgid "Unlink Cels"
 msgstr "Délier le Cellulo"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "Propriétés"
 
@@ -2309,6 +2317,9 @@ msgstr "Groupe"
 msgid "Tilemap"
 msgstr ""
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "Calques"
 
@@ -2339,6 +2350,11 @@ msgstr "Ajouter un Calque 3D"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
+msgstr ""
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
 msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2471,6 +2487,17 @@ msgstr "Activer/désactiver la liaison automatique des nouveaux Cellulos lors de
 
 msgid "Expand/collapse group"
 msgstr "Développer / réduire le groupe"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palette"
