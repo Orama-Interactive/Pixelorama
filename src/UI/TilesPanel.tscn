@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://bfbragmmdwfbl"]
+[gd_scene load_steps=23 format=3 uid="uid://bfbragmmdwfbl"]
 
 [ext_resource type="Script" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
+[ext_resource type="Texture2D" uid="uid://bqr3n3tm8b6w2" path="res://assets/graphics/tileset/place_tiles_disabled.png" id="2_pv2cd"]
 [ext_resource type="Texture2D" uid="uid://bv7ldl8obhawm" path="res://assets/graphics/misc/icon_reload.png" id="2_r1kie"]
 [ext_resource type="Texture2D" uid="uid://bpsfilx47bw3r" path="res://assets/graphics/misc/mirror_x.svg" id="3_5o62r"]
 [ext_resource type="Texture2D" uid="uid://bk6iaxiyl74ih" path="res://assets/graphics/misc/mirror_y.svg" id="4_2xhnr"]
@@ -66,23 +67,52 @@ script = ExtResource("1_d2oc5")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="PlaceTiles" type="CheckBox" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlaceTiles" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_vertical = 0
 mouse_default_cursor_shape = 2
+toggle_mode = true
 shortcut = SubResource("Shortcut_6ebuw")
-text = "Draw tiles"
 
-[node name="TransformButtonsContainer" type="HFlowContainer" parent="VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/PlaceTiles"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pv2cd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="RotateLeftButton" type="Button" parent="VBoxContainer/TransformButtonsContainer" groups=["UIButtons"]]
+[node name="TransformButtonsContainer" type="HFlowContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RotateLeftButton" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Rotate tile left (counterclockwise)"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_yas23")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TransformButtonsContainer/RotateLeftButton"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateLeftButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,14 +122,14 @@ grow_vertical = 2
 texture = ExtResource("2_r1kie")
 stretch_mode = 3
 
-[node name="RotateRightButton" type="Button" parent="VBoxContainer/TransformButtonsContainer" groups=["UIButtons"]]
+[node name="RotateRightButton" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Rotate tile right (clockwise)"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_cmy2w")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TransformButtonsContainer/RotateRightButton"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateRightButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,14 +140,14 @@ texture = ExtResource("2_r1kie")
 stretch_mode = 3
 flip_h = true
 
-[node name="FlipHorizontalButton" type="Button" parent="VBoxContainer/TransformButtonsContainer" groups=["UIButtons"]]
+[node name="FlipHorizontalButton" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Flip tile horizontally"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_ouoxo")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TransformButtonsContainer/FlipHorizontalButton"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/FlipHorizontalButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,14 +157,14 @@ grow_vertical = 2
 texture = ExtResource("3_5o62r")
 stretch_mode = 3
 
-[node name="FlipVerticalButton" type="Button" parent="VBoxContainer/TransformButtonsContainer" groups=["UIButtons"]]
+[node name="FlipVerticalButton" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Flip tile vertically"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_jj4yy")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TransformButtonsContainer/FlipVerticalButton"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/FlipVerticalButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -144,17 +174,19 @@ grow_vertical = 2
 texture = ExtResource("4_2xhnr")
 stretch_mode = 3
 
-[node name="ModeButtonsContainer" type="HFlowContainer" parent="VBoxContainer"]
+[node name="ModeButtonsContainer" type="HFlowContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Manual" type="CheckBox" parent="VBoxContainer/ModeButtonsContainer"]
+[node name="Manual" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_pgg48")
 text = "Manual"
 
-[node name="Auto" type="CheckBox" parent="VBoxContainer/ModeButtonsContainer"]
+[node name="Auto" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_pressed = true
@@ -162,28 +194,43 @@ button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_a0fx5")
 text = "Auto"
 
-[node name="Stack" type="CheckBox" parent="VBoxContainer/ModeButtonsContainer"]
+[node name="Stack" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_ysxej")
 text = "Stack"
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Tip" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TileButtonContainer" type="HFlowContainer" parent="VBoxContainer/ScrollContainer"]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="toggled" from="VBoxContainer/PlaceTiles" to="." method="_on_place_tiles_toggled"]
-[connection signal="pressed" from="VBoxContainer/TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
-[connection signal="pressed" from="VBoxContainer/TransformButtonsContainer/RotateRightButton" to="." method="_on_rotate_pressed" binds= [true]]
-[connection signal="pressed" from="VBoxContainer/TransformButtonsContainer/FlipHorizontalButton" to="." method="_on_flip_horizontal_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/TransformButtonsContainer/FlipVerticalButton" to="." method="_on_flip_vertical_button_pressed"]
-[connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Manual" to="." method="_on_manual_toggled"]
-[connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Auto" to="." method="_on_auto_toggled"]
-[connection signal="toggled" from="VBoxContainer/ModeButtonsContainer/Stack" to="." method="_on_stack_toggled"]
+[node name="TileButtonContainer" type="HFlowContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/PlaceTiles" to="." method="_on_place_tiles_toggled"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateRightButton" to="." method="_on_rotate_pressed" binds= [true]]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/FlipHorizontalButton" to="." method="_on_flip_horizontal_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/FlipVerticalButton" to="." method="_on_flip_vertical_button_pressed"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Manual" to="." method="_on_manual_toggled"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Auto" to="." method="_on_auto_toggled"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Stack" to="." method="_on_stack_toggled"]
