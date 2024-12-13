@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-12-12 23:05\n"
+"PO-Revision-Date: 2024-12-13 22:44\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1848,6 +1848,10 @@ msgstr "Aktifkan transparansi jendela"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Jika diaktifkan, jendela aplikasi akan tampil transparan. Ini juga menguras kinerja, nonaktifkan saja jika tidak perlu."
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "Renderer:"
@@ -2281,6 +2285,10 @@ msgstr "Tautkan Cel ke"
 msgid "Unlink Cels"
 msgstr "Putuskan Cel"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "Properti"
 
@@ -2321,6 +2329,9 @@ msgstr "Kelompok"
 msgid "Tilemap"
 msgstr "Peta petak"
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "Lapisan"
 
@@ -2352,6 +2363,11 @@ msgstr "Tambah Lapisan 3D"
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
 msgstr "Tambah Lapisan Petak"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2483,6 +2499,17 @@ msgstr "Aktif/nonaktifkan penautan otomatis cel baru saat membuat bingkai baru\n
 
 msgid "Expand/collapse group"
 msgstr "Bentang/ciutkan kelompok"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palet"
