@@ -47,6 +47,7 @@ func _ready() -> void:
 		layer.audio_changed.connect(func(): audio_player.stream = layer.audio)
 		add_child(audio_player)
 		Global.animation_timeline.animation_started.connect(_on_animation_started)
+		Global.animation_timeline.animation_looped.connect(_on_animation_looped)
 		Global.animation_timeline.animation_finished.connect(_on_animation_finished)
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name
@@ -76,6 +77,14 @@ func _on_cel_switched() -> void:
 func _on_animation_started(_dir: bool) -> void:
 	animation_running = true
 	_play_audio()
+
+
+func _on_animation_looped() -> void:
+	var layer := Global.current_project.layers[layer_index]
+	if layer is AudioLayer:
+		if layer.playback_frame != 0:
+			if is_instance_valid(audio_player):
+				audio_player.stop()
 
 
 func _on_animation_finished() -> void:

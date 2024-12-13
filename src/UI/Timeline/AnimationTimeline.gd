@@ -1,7 +1,14 @@
 extends Panel
 
+## Emitted when the animation starts playing.
 signal animation_started(forward: bool)
+## Emitted when the animation reaches the final frame and is not looping,
+## or if the animation is manually paused.
+## Note: This signal is not emitted if the animation is looping.
 signal animation_finished
+## Emitted when the animation loops, meaning when it reaches the final frame
+## and the animation keeps playing.
+signal animation_looped
 
 enum LoopType { NO, CYCLE, PINGPONG }
 
@@ -688,9 +695,11 @@ func _on_AnimationTimer_timeout() -> void:
 					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
+					animation_looped.emit()
 					animation_timer.start()
 				LoopType.PINGPONG:
 					animation_forward = false
+					animation_looped.emit()
 					_on_AnimationTimer_timeout()
 
 	else:
@@ -713,9 +722,11 @@ func _on_AnimationTimer_timeout() -> void:
 					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
+					animation_looped.emit()
 					animation_timer.start()
 				LoopType.PINGPONG:
 					animation_forward = true
+					animation_looped.emit()
 					_on_AnimationTimer_timeout()
 	frame_scroll_container.ensure_control_visible(
 		Global.frame_hbox.get_child(project.current_frame)
