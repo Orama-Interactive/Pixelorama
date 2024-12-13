@@ -70,16 +70,21 @@ func _on_cel_switched() -> void:
 	z_index = 1 if button_pressed else 0
 	var layer := Global.current_project.layers[layer_index]
 	if layer is AudioLayer:
+		if not is_instance_valid(audio_player):
+			return
 		if not layer.is_visible_in_hierarchy():
-			if is_instance_valid(audio_player):
-				audio_player.stop()
-		elif not animation_running or Global.current_project.current_frame == layer.playback_frame:
-			_play_audio()
+			audio_player.stop()
+			return
+		if animation_running:
+			if Global.current_project.current_frame == layer.playback_frame:
+				_play_audio(false)
+		else:
+			_play_audio(true)
 
 
 func _on_animation_started(_dir: bool) -> void:
 	animation_running = true
-	_play_audio()
+	_play_audio(false)
 
 
 func _on_animation_looped() -> void:
@@ -96,17 +101,21 @@ func _on_animation_finished() -> void:
 		audio_player.stop()
 
 
-func _play_audio() -> void:
+func _play_audio(single_frame: bool) -> void:
 	if not is_instance_valid(audio_player):
 		return
-	var layer := Global.current_project.layers[layer_index] as AudioLayer
+	var project := Global.current_project
+	var layer := project.layers[layer_index] as AudioLayer
 	if not layer.is_visible_in_hierarchy():
 		return
 	var audio_length := layer.get_audio_length()
-	var frame := Global.current_project.frames[Global.current_project.current_frame]
-	var frame_pos := frame.position_in_seconds(Global.current_project, layer.playback_frame)
+	var frame := project.frames[project.current_frame]
+	var frame_pos := frame.position_in_seconds(project, layer.playback_frame)
 	if frame_pos >= 0 and frame_pos < audio_length:
 		audio_player.play(frame_pos)
+		if single_frame:
+			var timer := get_tree().create_timer(frame.get_duration_in_seconds(project.fps))
+			timer.timeout.connect(func(): audio_player.stop())
 	else:
 		audio_player.stop()
 
