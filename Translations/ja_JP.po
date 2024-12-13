@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-12-05 05:54\n"
+"PO-Revision-Date: 2024-12-13 22:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1848,6 +1848,10 @@ msgstr "ウィンドウの透明度を有効化"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "有効にすると、アプリケーションウィンドウは透明になります。これはパフォーマンスに影響しますので、必要がない場合はオフにしておいてください。"
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "レンダラー:"
@@ -2281,6 +2285,10 @@ msgstr "セルをリンクする"
 msgid "Unlink Cels"
 msgstr "セルのリンクを解除"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "プロパティ"
 
@@ -2321,6 +2329,9 @@ msgstr "グループ"
 msgid "Tilemap"
 msgstr "タイルマップ"
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "レイヤー"
 
@@ -2352,6 +2363,11 @@ msgstr "3Dレイヤーを追加"
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
 msgstr "タイルマップレイヤーを追加"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2483,6 +2499,17 @@ msgstr "新しいフレームを作成するときに、新しいセルの自動
 
 msgid "Expand/collapse group"
 msgstr "グループを展開/閉じる"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "パレット"
