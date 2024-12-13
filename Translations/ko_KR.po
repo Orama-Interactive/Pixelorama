@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2024-12-05 02:12\n"
+"PO-Revision-Date: 2024-12-13 22:43\n"
 
 msgid "OK"
 msgstr "예"
@@ -1830,6 +1830,10 @@ msgstr ""
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr ""
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr ""
@@ -2263,6 +2267,10 @@ msgstr ""
 msgid "Unlink Cels"
 msgstr ""
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr ""
 
@@ -2303,6 +2311,9 @@ msgstr ""
 msgid "Tilemap"
 msgstr ""
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "레이어"
 
@@ -2333,6 +2344,11 @@ msgstr ""
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
+msgstr ""
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
 msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2463,6 +2479,17 @@ msgid "Enable/disable automatic linking of new cels when creating new frames\n\n
 msgstr ""
 
 msgid "Expand/collapse group"
+msgstr ""
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
 msgstr ""
 
 msgid "Palette"
