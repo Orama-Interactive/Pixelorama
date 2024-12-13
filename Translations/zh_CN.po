@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-12-05 02:11\n"
+"PO-Revision-Date: 2024-12-13 22:43\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1847,6 +1847,10 @@ msgstr "启用窗口透明度"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "如果启用，应用程序窗口可以变得透明。 这会影响性能，因此如果不需要，请将其关闭。"
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "渲染器："
@@ -2280,6 +2284,10 @@ msgstr "链接单元格到"
 msgid "Unlink Cels"
 msgstr "取消链接单元格"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "属性"
 
@@ -2320,6 +2328,9 @@ msgstr "组"
 msgid "Tilemap"
 msgstr ""
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "图层"
 
@@ -2350,6 +2361,11 @@ msgstr "添加 3D 图层"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
+msgstr ""
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
 msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2482,6 +2498,17 @@ msgstr "在创建新的帧时，启用/禁用自动链接新的帧\n\n"
 
 msgid "Expand/collapse group"
 msgstr "展开/折叠组"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "调色板"
