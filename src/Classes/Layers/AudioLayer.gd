@@ -13,8 +13,13 @@ var audio: AudioStream:  ## The audio stream of the layer.
 		audio_changed.emit()
 var playback_position := 0.0:  ## The time in seconds where the audio stream starts playing.
 	get():
-		var frame := project.frames[playback_frame]
-		return frame.position_in_seconds(project)
+		if playback_frame >= 0:
+			var frame := project.frames[playback_frame]
+			return frame.position_in_seconds(project)
+		var pos := 0.0
+		for i in absi(playback_frame):
+			pos -= 1.0 / project.fps
+		return pos
 var playback_frame := 0:  ## The frame where the audio stream starts playing.
 	set(value):
 		playback_frame = value

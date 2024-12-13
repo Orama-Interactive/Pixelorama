@@ -76,7 +76,11 @@ func _on_cel_switched() -> void:
 			audio_player.stop()
 			return
 		if animation_running:
-			if Global.current_project.current_frame == layer.playback_frame:
+			var current_frame := Global.current_project.current_frame
+			if (
+				current_frame == layer.playback_frame
+				or (current_frame == 0 and layer.playback_frame < 0)
+			):
 				_play_audio(false)
 		else:
 			_play_audio(true)
@@ -90,7 +94,7 @@ func _on_animation_started(_dir: bool) -> void:
 func _on_animation_looped() -> void:
 	var layer := Global.current_project.layers[layer_index]
 	if layer is AudioLayer:
-		if layer.playback_frame != 0 or not layer.is_visible_in_hierarchy():
+		if layer.playback_frame > 0 or not layer.is_visible_in_hierarchy():
 			if is_instance_valid(audio_player):
 				audio_player.stop()
 
