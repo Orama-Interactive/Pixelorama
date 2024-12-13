@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2024-12-05 02:12\n"
+"PO-Revision-Date: 2024-12-13 22:44\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1836,6 +1836,10 @@ msgstr ""
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr ""
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "Рендерер:"
@@ -2269,6 +2273,10 @@ msgstr "Пов'язати клітинки з"
 msgid "Unlink Cels"
 msgstr "Відв'язати клітинки"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr ""
 
@@ -2309,6 +2317,9 @@ msgstr "Група"
 msgid "Tilemap"
 msgstr ""
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "Шари"
 
@@ -2339,6 +2350,11 @@ msgstr "Додати 3D-шар"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
+msgstr ""
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
 msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2471,6 +2487,17 @@ msgstr "Увімкнути/вимкнути автоматичне зв'язан
 
 msgid "Expand/collapse group"
 msgstr "Розгорнути/згорнути групу"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "Палітра"
