@@ -282,7 +282,7 @@ func process_animation(project := Global.current_project) -> void:
 			for cel in frame.cels:
 				var image := Image.new()
 				image.copy_from(cel.get_image())
-				var duration := frame.duration * (1.0 / project.fps)
+				var duration := frame.get_duration_in_seconds(project.fps)
 				processed_images.append(
 					ProcessedImage.new(image, project.frames.find(frame), duration)
 				)
@@ -298,7 +298,7 @@ func process_animation(project := Global.current_project) -> void:
 				image.copy_from(crop)
 			if trim_images:
 				image = image.get_region(image.get_used_rect())
-			var duration := frame.duration * (1.0 / project.fps)
+			var duration := frame.get_duration_in_seconds(project.fps)
 			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
 
 
@@ -427,7 +427,7 @@ func export_processed_images(
 
 	if is_single_file_format(project):
 		if is_using_ffmpeg(project.file_format):
-			var video_exported := export_video(export_paths)
+			var video_exported := export_video(export_paths, project)
 			if not video_exported:
 				Global.popup_error(
 					tr("Video failed to export. Ensure that FFMPEG is installed correctly.")
@@ -505,8 +505,9 @@ func export_processed_images(
 
 
 ## Uses FFMPEG to export a video
-func export_video(export_paths: PackedStringArray) -> bool:
+func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 	DirAccess.make_dir_absolute(TEMP_PATH)
+	var video_duration := 0
 	var temp_path_real := ProjectSettings.globalize_path(TEMP_PATH)
 	var input_file_path := temp_path_real.path_join("input.txt")
 	var input_file := FileAccess.open(input_file_path, FileAccess.WRITE)
@@ -516,23 +517,78 @@ func export_video(export_paths: PackedStringArray) -> bool:
 		processed_images[i].image.save_png(temp_file_path)
 		input_file.store_line("file '" + temp_file_name + "'")
 		input_file.store_line("duration %s" % processed_images[i].duration)
+		video_duration += processed_images[i].duration
 	input_file.close()
+
+	# ffmpeg -y -f concat -i input.txt output_path
 	var ffmpeg_execute: PackedStringArray = [
 		"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
 	]
-	var output := []
-	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, output, true)
-	print(output)
-	var temp_dir := DirAccess.open(TEMP_PATH)
-	for file in temp_dir.get_files():
-		temp_dir.remove(file)
-	DirAccess.remove_absolute(TEMP_PATH)
+	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
 	if success < 0 or success > 1:
 		var fail_text := """Video failed to export. Make sure you have FFMPEG installed
 			and have set the correct path in the preferences."""
 		Global.popup_error(tr(fail_text))
+		_clear_temp_folder()
 		return false
+	# Find audio layers
+	var ffmpeg_combine_audio: PackedStringArray = ["-y"]
+	var audio_layer_count := 0
+	var max_audio_duration := 0
+	var adelay_string := ""
+	for layer in project.get_all_audio_layers():
+		if layer.audio is AudioStreamMP3:
+			var temp_file_name := str(audio_layer_count + 1).pad_zeros(number_of_digits) + ".mp3"
+			var temp_file_path := temp_path_real.path_join(temp_file_name)
+			var temp_audio_file := FileAccess.open(temp_file_path, FileAccess.WRITE)
+			temp_audio_file.store_buffer(layer.audio.data)
+			ffmpeg_combine_audio.append("-i")
+			ffmpeg_combine_audio.append(temp_file_path)
+			var delay := floori(layer.playback_position * 1000)
+			# [n]adelay=delay_in_ms:all=1[na]
+			adelay_string += (
+				"[%s]adelay=%s:all=1[%sa];" % [audio_layer_count, delay, audio_layer_count]
+			)
+			audio_layer_count += 1
+			if layer.get_audio_length() >= max_audio_duration:
+				max_audio_duration = layer.get_audio_length()
+	if audio_layer_count > 0:
+		# If we have audio layers, merge them all into one file.
+		for i in audio_layer_count:
+			adelay_string += "[%sa]" % i
+		var amix_inputs_string := "amix=inputs=%s[a]" % audio_layer_count
+		var final_filter_string := adelay_string + amix_inputs_string
+		var audio_file_path := temp_path_real.path_join("audio.mp3")
+		ffmpeg_combine_audio.append_array(
+			PackedStringArray(
+				["-filter_complex", final_filter_string, "-map", '"[a]"', audio_file_path]
+			)
+		)
+		# ffmpeg -i input1 -i input2 ... -i inputn -filter_complex amix=inputs=n output_path
+		var combined_audio_success := OS.execute(Global.ffmpeg_path, ffmpeg_combine_audio, [], true)
+		if combined_audio_success == 0 or combined_audio_success == 1:
+			var copied_video := temp_path_real.path_join("video." + export_paths[0].get_extension())
+			# Then mix the audio file with the video.
+			DirAccess.copy_absolute(export_paths[0], copied_video)
+			# ffmpeg -y -i video_file -i input_audio -c:v copy -map 0:v:0 -map 1:a:0 video_file
+			var ffmpeg_final_video: PackedStringArray = [
+				"-y", "-i", copied_video, "-i", audio_file_path
+			]
+			if max_audio_duration > video_duration:
+				ffmpeg_final_video.append("-shortest")
+			ffmpeg_final_video.append_array(
+				["-c:v", "copy", "-map", "0:v:0", "-map", "1:a:0", export_paths[0]]
+			)
+			OS.execute(Global.ffmpeg_path, ffmpeg_final_video, [], true)
+	_clear_temp_folder()
 	return true
+
+
+func _clear_temp_folder() -> void:
+	var temp_dir := DirAccess.open(TEMP_PATH)
+	for file in temp_dir.get_files():
+		temp_dir.remove(file)
+	DirAccess.remove_absolute(TEMP_PATH)
 
 
 func export_animated(args: Dictionary) -> void:

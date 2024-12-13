@@ -45,6 +45,8 @@ func handle_loading_file(file: String) -> void:
 			return
 		var file_name: String = file.get_file().get_basename()
 		Global.control.find_child("ShaderEffect").change_shader(shader, file_name)
+	elif file_ext == "mp3":  # Audio file
+		open_audio_file(file)
 
 	else:  # Image files
 		# Attempt to load as APNG.
@@ -185,8 +187,8 @@ func handle_loading_video(file: String) -> bool:
 			project_size.x = temp_image.get_width()
 		if temp_image.get_height() > project_size.y:
 			project_size.y = temp_image.get_height()
-	DirAccess.remove_absolute(Export.TEMP_PATH)
 	if images_to_import.size() == 0 or project_size == Vector2i.ZERO:
+		DirAccess.remove_absolute(Export.TEMP_PATH)
 		return false  # We didn't find any images, return
 	# If we found images, create a new project out of them
 	var new_project := Project.new([], file.get_basename().get_file(), project_size)
@@ -196,6 +198,14 @@ func handle_loading_video(file: String) -> bool:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
+	var output_audio_file := temp_path_real.path_join("audio.mp3")
+	# ffmpeg -y -i input_file -vn audio.mp3
+	var ffmpeg_execute_audio: PackedStringArray = ["-y", "-i", file, "-vn", output_audio_file]
+	OS.execute(Global.ffmpeg_path, ffmpeg_execute_audio, [], true)
+	if FileAccess.file_exists(output_audio_file):
+		open_audio_file(output_audio_file)
+		temp_dir.remove("audio.mp3")
+	DirAccess.remove_absolute(Export.TEMP_PATH)
 	return true
 
 
@@ -437,6 +447,14 @@ func save_pxo_file(
 			var tile := tileset.tiles[j]
 			zip_packer.start_file(tileset_path.path_join(str(j)))
 			zip_packer.write_file(tile.image.get_data())
+			zip_packer.close_file()
+	var audio_layers := project.get_all_audio_layers()
+	for i in audio_layers.size():
+		var layer := audio_layers[i]
+		var audio_path := "audio/%s" % i
+		if layer.audio is AudioStreamMP3:
+			zip_packer.start_file(audio_path)
+			zip_packer.write_file(layer.audio.data)
 			zip_packer.close_file()
 	zip_packer.close()
 
@@ -900,6 +918,23 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 
 	if prev_project_empty:
 		Global.tabs.delete_tab(prev_project_pos)
+
+
+func open_audio_file(path: String) -> void:
+	var audio_stream: AudioStream
+	var file := FileAccess.open(path, FileAccess.READ)
+	audio_stream = AudioStreamMP3.new()
+	audio_stream.data = file.get_buffer(file.get_length())
+	if not is_instance_valid(audio_stream):
+		return
+	var project := Global.current_project
+	for layer in project.layers:
+		if layer is AudioLayer and not is_instance_valid(layer.audio):
+			layer.audio = audio_stream
+			return
+	var new_layer := AudioLayer.new(project, path.get_basename().get_file())
+	new_layer.audio = audio_stream
+	Global.animation_timeline.add_layer(new_layer, project)
 
 
 func update_autosave() -> void:

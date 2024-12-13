@@ -1,7 +1,14 @@
 extends Panel
 
+## Emitted when the animation starts playing.
 signal animation_started(forward: bool)
+## Emitted when the animation reaches the final frame and is not looping,
+## or if the animation is manually paused.
+## Note: This signal is not emitted if the animation is looping.
 signal animation_finished
+## Emitted when the animation loops, meaning when it reaches the final frame
+## and the animation keeps playing.
+signal animation_looped
 
 enum LoopType { NO, CYCLE, PINGPONG }
 
@@ -41,6 +48,7 @@ var global_layer_expand := true
 @onready var move_up_layer := %MoveUpLayer as Button
 @onready var move_down_layer := %MoveDownLayer as Button
 @onready var merge_down_layer := %MergeDownLayer as Button
+@onready var layer_fx := %LayerFX as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
@@ -687,9 +695,11 @@ func _on_AnimationTimer_timeout() -> void:
 					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
+					animation_looped.emit()
 					animation_timer.start()
 				LoopType.PINGPONG:
 					animation_forward = false
+					animation_looped.emit()
 					_on_AnimationTimer_timeout()
 
 	else:
@@ -712,9 +722,11 @@ func _on_AnimationTimer_timeout() -> void:
 					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
+					animation_looped.emit()
 					animation_timer.start()
 				LoopType.PINGPONG:
 					animation_forward = true
+					animation_looped.emit()
 					_on_AnimationTimer_timeout()
 	frame_scroll_container.ensure_control_visible(
 		Global.frame_hbox.get_child(project.current_frame)
@@ -855,6 +867,8 @@ func _on_add_layer_list_id_pressed(id: int) -> void:
 			Global.LayerTypes.THREE_D:
 				layer = Layer3D.new(project)
 				SteamManager.set_achievement("ACH_3D_LAYER")
+			Global.LayerTypes.AUDIO:
+				layer = AudioLayer.new(project)
 		add_layer(layer, project)
 
 
@@ -904,6 +918,8 @@ func _on_CloneLayer_pressed() -> void:
 			cl_layer = LayerTileMap.new(project, src_layer.tileset)
 		else:
 			cl_layer = src_layer.get_script().new(project)
+			if src_layer is AudioLayer:
+				cl_layer.audio = src_layer.audio
 		cl_layer.project = project
 		cl_layer.index = src_layer.index
 		var src_layer_data: Dictionary = src_layer.serialize()
@@ -1191,10 +1207,13 @@ func _toggle_layer_buttons() -> void:
 		(
 			project.current_layer == child_count
 			or layer is GroupLayer
+			or layer is AudioLayer
 			or project.layers[project.current_layer - 1] is GroupLayer
 			or project.layers[project.current_layer - 1] is Layer3D
+			or project.layers[project.current_layer - 1] is AudioLayer
 		)
 	)
+	Global.disable_button(layer_fx, layer is AudioLayer)
 
 
 func project_changed() -> void:

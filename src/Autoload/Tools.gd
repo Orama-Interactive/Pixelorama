@@ -800,7 +800,10 @@ func _cel_switched() -> void:
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
 	# Do not make any changes when its the same type of layer, or a group layer
-	if layer_type == _curr_layer_type or layer_type == Global.LayerTypes.GROUP:
+	if (
+		layer_type == _curr_layer_type
+		or layer_type in [Global.LayerTypes.GROUP, Global.LayerTypes.AUDIO]
+	):
 		return
 	_show_relevant_tools(layer_type)
 

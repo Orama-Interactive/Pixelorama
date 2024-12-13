@@ -31,6 +31,13 @@ func _ready() -> void:
 		popup_menu.add_item("Unlink Cels")
 	elif cel is GroupCel:
 		transparent_checker.visible = false
+	elif cel is AudioCel:
+		popup_menu.add_item("Play audio here")
+		_is_playing_audio()
+		Global.cel_switched.connect(_is_playing_audio)
+		Global.current_project.fps_changed.connect(_is_playing_audio)
+		Global.current_project.layers[layer].audio_changed.connect(_is_playing_audio)
+		Global.current_project.layers[layer].playback_frame_changed.connect(_is_playing_audio)
 
 
 func _notification(what: int) -> void:
@@ -66,7 +73,8 @@ func button_setup() -> void:
 
 	var base_layer := Global.current_project.layers[layer]
 	tooltip_text = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
-	cel_texture.texture = cel.image_texture
+	if cel is not AudioCel:
+		cel_texture.texture = cel.image_texture
 	if is_instance_valid(linked):
 		linked.visible = cel.link_set != null
 		if cel.link_set != null:
@@ -129,7 +137,11 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			properties.cel_indices = _get_cel_indices()
 			properties.popup_centered()
 		MenuOptions.DELETE:
-			_delete_cel_content()
+			var layer_class := Global.current_project.layers[layer]
+			if layer_class is AudioLayer:
+				layer_class.playback_frame = frame
+			else:
+				_delete_cel_content()
 
 		MenuOptions.LINK, MenuOptions.UNLINK:
 			var project := Global.current_project
@@ -396,3 +408,16 @@ func _sort_cel_indices_by_frame(a: Array, b: Array) -> bool:
 	if frame_a < frame_b:
 		return true
 	return false
+
+
+func _is_playing_audio() -> void:
+	var frame_class := Global.current_project.frames[frame]
+	var layer_class := Global.current_project.layers[layer] as AudioLayer
+	var audio_length := layer_class.get_audio_length()
+	var frame_pos := frame_class.position_in_seconds(
+		Global.current_project, layer_class.playback_frame
+	)
+	if frame_pos >= 0 and frame_pos < audio_length:
+		cel_texture.texture = preload("res://assets/graphics/misc/musical_note.png")
+	else:
+		cel_texture.texture = null

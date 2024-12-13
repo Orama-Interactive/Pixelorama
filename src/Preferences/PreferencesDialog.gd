@@ -181,6 +181,13 @@ var preferences: Array[Preference] = [
 		false,
 		true
 	),
+	Preference.new(
+		"dummy_audio_driver",
+		"Performance/PerformanceContainer/DummyAudioDriver",
+		"button_pressed",
+		false,
+		true
+	),
 	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0)
 ]
 
