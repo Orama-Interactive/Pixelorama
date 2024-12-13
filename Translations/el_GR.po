@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-12-05 16:02\n"
+"PO-Revision-Date: 2024-12-13 22:43\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1848,6 +1848,10 @@ msgstr "Ενεργοποίηση διαφάνειας παραθύρου"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Αν ενεργοποιηθεί, το παράθυρο της εφαρμογής μπορεί να γίνει διαφανές. Αυτό επηρεάζει τις επιδόσεις, οπότε κρατήστε το απενεργοποιημένο αν δεν το χρειάζεστε."
 
+#. An option found in the preferences, under the Performance section.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "Οδηγός βίντεο:"
@@ -2281,6 +2285,10 @@ msgstr "Σύνδεση cels με"
 msgid "Unlink Cels"
 msgstr "Αποσύνδεση cels"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "Ιδιότητες"
 
@@ -2321,6 +2329,9 @@ msgstr "Ομάδα"
 msgid "Tilemap"
 msgstr "Χάρτης πλακιδίων"
 
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "Στρώσεις"
 
@@ -2352,6 +2363,11 @@ msgstr "Προσθήκη τρισδιάστατης στρώσης"
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
 msgstr "Προσθήκη στρώσης χάρτη πλακιδίων"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr ""
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2483,6 +2499,17 @@ msgstr "Ενεργοποίηση/απενεργοποίηση αυτόματης
 
 msgid "Expand/collapse group"
 msgstr "Ανάπτυξη/σύμπτυξη ομάδας"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "Παλέτα"
