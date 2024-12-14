@@ -15,6 +15,7 @@ var button_pressed := false:
 	get:
 		return main_button.button_pressed
 var animation_running := false
+var audio_playing_at_frame := 0
 
 var audio_player: AudioStreamPlayer
 @onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
@@ -68,7 +69,8 @@ func _ready() -> void:
 
 func _on_cel_switched() -> void:
 	z_index = 1 if button_pressed else 0
-	var layer := Global.current_project.layers[layer_index]
+	var project := Global.current_project
+	var layer := project.layers[layer_index]
 	if layer is AudioLayer:
 		if not is_instance_valid(audio_player):
 			return
@@ -76,12 +78,15 @@ func _on_cel_switched() -> void:
 			audio_player.stop()
 			return
 		if animation_running:
-			var current_frame := Global.current_project.current_frame
+			var current_frame := project.current_frame
 			if (
 				current_frame == layer.playback_frame
 				or (current_frame == 0 and layer.playback_frame < 0)
+				## True when switching cels while the animation is running
+				or current_frame != audio_playing_at_frame + 1
 			):
 				_play_audio(false)
+			audio_playing_at_frame = current_frame
 		else:
 			_play_audio(true)
 
@@ -124,6 +129,7 @@ func _play_audio(single_frame: bool) -> void:
 	var frame_pos := frame.position_in_seconds(project, layer.playback_frame)
 	if frame_pos >= 0 and frame_pos < audio_length:
 		audio_player.play(frame_pos)
+		audio_playing_at_frame = project.current_frame
 		if single_frame:
 			var timer := get_tree().create_timer(frame.get_duration_in_seconds(project.fps))
 			timer.timeout.connect(func(): audio_player.stop())
