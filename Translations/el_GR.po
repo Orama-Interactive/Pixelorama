@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-12-13 22:43\n"
+"PO-Revision-Date: 2024-12-14 13:32\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1850,7 +1850,7 @@ msgstr "Αν ενεργοποιηθεί, το παράθυρο της εφαρμ
 
 #. An option found in the preferences, under the Performance section.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Χρήση εικονικού οδηγού ήχου"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -2287,7 +2287,7 @@ msgstr "Αποσύνδεση cels"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Αναπαραγωγή ήχου εδώ"
 
 msgid "Properties"
 msgstr "Ιδιότητες"
@@ -2330,7 +2330,7 @@ msgid "Tilemap"
 msgstr "Χάρτης πλακιδίων"
 
 msgid "Audio"
-msgstr ""
+msgstr "Ήχος"
 
 msgid "Layers"
 msgstr "Στρώσεις"
@@ -2502,14 +2502,14 @@ msgstr "Ανάπτυξη/σύμπτυξη ομάδας"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Αρχείο ήχου:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Φόρτωση αρχείου"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Αναπαραγωγή στο καρέ:"
 
 msgid "Palette"
 msgstr "Παλέτα"
