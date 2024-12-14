@@ -36,7 +36,7 @@ func _ready() -> void:
 	Global.cel_switched.connect(_on_cel_switched)
 	var layer := Global.current_project.layers[layer_index]
 	layer.name_changed.connect(func(): label.text = layer.name)
-	layer.visibility_changed.connect(update_buttons)
+	layer.visibility_changed.connect(_on_layer_visibility_changed)
 	if layer is PixelLayer:
 		linked_button.visible = true
 	elif layer is GroupLayer:
@@ -84,6 +84,13 @@ func _on_cel_switched() -> void:
 				_play_audio(false)
 		else:
 			_play_audio(true)
+
+
+func _on_layer_visibility_changed() -> void:
+	update_buttons()
+	var layer := Global.current_project.layers[layer_index]
+	if layer is AudioLayer:
+		_play_audio(not animation_running)
 
 
 func _on_animation_started(_dir: bool) -> void:
