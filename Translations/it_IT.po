@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-12-13 22:43\n"
+"PO-Revision-Date: 2024-12-14 18:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1850,7 +1850,7 @@ msgstr "Se abilitata, la finestra dell'applicazione può diventare trasparente. 
 
 #. An option found in the preferences, under the Performance section.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Usa driver audio fittizio"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -2287,7 +2287,7 @@ msgstr "Scollega celle"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Riproduci audio qui"
 
 msgid "Properties"
 msgstr "Proprietà"
@@ -2330,7 +2330,7 @@ msgid "Tilemap"
 msgstr "Mappa caselle"
 
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 msgid "Layers"
 msgstr "Livelli"
@@ -2367,7 +2367,7 @@ msgstr "Aggiungi Livello Mappa caselle"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Audio Layer"
-msgstr ""
+msgstr "Aggiungi Livello Audio"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2502,14 +2502,14 @@ msgstr "Espandere/comprimere gruppo"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "File audio:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Carica file"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Riproduci al fotogramma:"
 
 msgid "Palette"
 msgstr "Palette"
