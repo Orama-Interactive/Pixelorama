@@ -64,6 +64,7 @@ func draw_palette() -> void:
 			var grid_index := i + grid_size.x * j
 			var index := convert_grid_index_to_palette_index(grid_index)
 			var swatch := swatches[grid_index]
+			swatch.color_index = index
 			swatch.show_left_highlight = Palettes.left_selected_color == index
 			swatch.show_right_highlight = Palettes.right_selected_color == index
 			var color = current_palette.get_color(index)
