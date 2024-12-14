@@ -93,6 +93,7 @@ unique_name_in_owner = true
 [node name="Alert" type="AcceptDialog" parent="."]
 unique_name_in_owner = true
 size = Vector2i(421, 106)
+always_on_top = true
 
 [node name="Text" type="Label" parent="Alert"]
 anchors_preset = 15
@@ -104,15 +105,16 @@ offset_right = -8.0
 offset_bottom = -49.0
 horizontal_alignment = 1
 
-[node name="EnlardedThumbnail" type="Window" parent="."]
+[node name="EnlargedThumbnail" type="Window" parent="."]
 title = "Image"
 position = Vector2i(0, 36)
 size = Vector2i(440, 360)
 visible = false
 transient = true
 exclusive = true
+always_on_top = true
 
-[node name="Enlarged" type="TextureRect" parent="EnlardedThumbnail"]
+[node name="Enlarged" type="TextureRect" parent="EnlargedThumbnail"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,5 +133,5 @@ stretch_mode = 5
 [connection signal="request_completed" from="DownloadRequest" to="." method="_on_DownloadRequest_request_completed"]
 [connection signal="close_requested" from="Alert" to="." method="_manage_alert_close"]
 [connection signal="focus_exited" from="Alert" to="." method="_manage_alert_close"]
-[connection signal="close_requested" from="EnlardedThumbnail" to="." method="_manage_enlarded_thumbnail_close"]
-[connection signal="focus_exited" from="EnlardedThumbnail" to="." method="_manage_enlarded_thumbnail_close"]
+[connection signal="close_requested" from="EnlargedThumbnail" to="." method="_manage_enlarged_thumbnail_close"]
+[connection signal="focus_exited" from="EnlargedThumbnail" to="." method="_manage_enlarged_thumbnail_close"]
