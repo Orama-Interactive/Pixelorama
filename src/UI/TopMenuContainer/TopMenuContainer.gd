@@ -470,12 +470,12 @@ func _setup_select_menu() -> void:
 		"All": "select_all",
 		"Clear": "clear_selection",
 		"Invert": "invert_selection",
-		"Tile Mode": "",
+		"Wrap Strokes": "",
 		"Modify": ""
 	}
 	for i in select_menu_items.size():
 		var item: String = select_menu_items.keys()[i]
-		if item == "Tile Mode":
+		if item == "Wrap Strokes":
 			select_menu.add_check_item(item, i)
 		elif item == "Modify":
 			_setup_selection_modify_submenu(item)
@@ -960,7 +960,7 @@ func select_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.clear_selection(true)
 		Global.SelectMenu.INVERT:
 			Global.canvas.selection.invert()
-		Global.SelectMenu.TILE_MODE:
+		Global.SelectMenu.WRAP_STROKES:
 			var state = select_menu.is_item_checked(id)
 			Global.canvas.selection.flag_tilemode = !state
 			select_menu.set_item_checked(id, !state)
