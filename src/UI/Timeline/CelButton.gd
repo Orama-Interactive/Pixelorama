@@ -9,7 +9,7 @@ var cel: BaseCel
 var _is_guide_stylebox := false
 
 @onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
-@onready var linked: ColorRect = $Linked
+@onready var linked_rect: ColorRect = $Linked
 @onready var cel_texture: TextureRect = $CelTexture
 @onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
 @onready var properties: AcceptDialog = Global.control.find_child("CelProperties")
@@ -35,6 +35,7 @@ func _ready() -> void:
 		popup_menu.add_item("Play audio here")
 		_is_playing_audio()
 		Global.cel_switched.connect(_is_playing_audio)
+		Themes.theme_switched.connect(_is_playing_audio)
 		Global.current_project.fps_changed.connect(_is_playing_audio)
 		Global.current_project.layers[layer].audio_changed.connect(_is_playing_audio)
 		Global.current_project.layers[layer].playback_frame_changed.connect(_is_playing_audio)
@@ -75,10 +76,10 @@ func button_setup() -> void:
 	tooltip_text = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
 	if cel is not AudioCel:
 		cel_texture.texture = cel.image_texture
-	if is_instance_valid(linked):
-		linked.visible = cel.link_set != null
+	if is_instance_valid(linked_rect):
+		linked_rect.visible = cel.link_set != null
 		if cel.link_set != null:
-			linked.color.h = cel.link_set["hue"]
+			linked_rect.color.h = cel.link_set["hue"]
 
 
 func _on_CelButton_pressed() -> void:
@@ -411,13 +412,26 @@ func _sort_cel_indices_by_frame(a: Array, b: Array) -> bool:
 
 
 func _is_playing_audio() -> void:
-	var frame_class := Global.current_project.frames[frame]
-	var layer_class := Global.current_project.layers[layer] as AudioLayer
+	var project := Global.current_project
+	var frame_class := project.frames[frame]
+	var layer_class := project.layers[layer] as AudioLayer
 	var audio_length := layer_class.get_audio_length()
-	var frame_pos := frame_class.position_in_seconds(
-		Global.current_project, layer_class.playback_frame
-	)
-	if frame_pos >= 0 and frame_pos < audio_length:
+	var frame_pos := frame_class.position_in_seconds(project, layer_class.playback_frame)
+	var audio_color := Color.LIGHT_GRAY
+	var pressed_stylebox := Global.control.theme.get_stylebox(&"pressed", &"CelButton")
+	if pressed_stylebox is StyleBoxFlat:
+		audio_color = pressed_stylebox.border_color
+	var is_last_frame := frame + 1 >= project.frames.size()
+	if not is_last_frame:
+		is_last_frame = (
+			project.frames[frame + 1].position_in_seconds(project, layer_class.playback_frame)
+			>= audio_length
+		)
+	if frame_pos == 0 or (is_last_frame and frame_pos < audio_length):
 		cel_texture.texture = preload("res://assets/graphics/misc/musical_note.png")
+		cel_texture.self_modulate = audio_color
+		linked_rect.visible = false
 	else:
+		linked_rect.visible = frame_pos < audio_length and frame_pos > 0
+		linked_rect.color = audio_color
 		cel_texture.texture = null
