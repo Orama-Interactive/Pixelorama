@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-12-13 23:38\n"
+"PO-Revision-Date: 2024-12-14 05:35\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -2509,7 +2509,7 @@ msgstr "Muat berkas"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr "Putar di bingkai:"
+msgstr "Putar di bingkai ke:"
 
 msgid "Palette"
 msgstr "Palet"
