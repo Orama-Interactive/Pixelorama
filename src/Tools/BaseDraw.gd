@@ -212,8 +212,7 @@ func update_brush() -> void:
 	$DensityValueSlider.visible = _brush.type not in IMAGE_BRUSHES
 	$ColorInterpolation.visible = _brush.type in IMAGE_BRUSHES
 	$RotationOptions.visible = _brush.type in IMAGE_BRUSHES
-	var canvas_indicators := Global.canvas.indicators
-	canvas_indicators.queue_redraw()
+	Global.canvas.indicators.queue_redraw()
 
 
 func update_random_image() -> void:
@@ -378,6 +377,8 @@ func _prepare_tool() -> void:
 func _draw_tool(pos: Vector2) -> PackedVector2Array:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return PackedVector2Array()  # empty fallback
+	if Tools.is_placing_tiles():
+		return _compute_draw_tool_pixel(pos)
 	match _brush.type:
 		Brushes.PIXEL:
 			return _compute_draw_tool_pixel(pos)
@@ -428,9 +429,12 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 
 ## Compute the array of coordinates that should be drawn
 func _compute_draw_tool_pixel(pos: Vector2) -> PackedVector2Array:
+	var brush_size := _brush_size_dynamics
+	if Tools.is_placing_tiles():
+		brush_size = 1
 	var result := PackedVector2Array()
-	var start := pos - Vector2.ONE * (_brush_size_dynamics >> 1)
-	var end := start + Vector2.ONE * _brush_size_dynamics
+	var start := pos - Vector2.ONE * (brush_size >> 1)
+	var end := start + Vector2.ONE * brush_size
 	for y in range(start.y, end.y):
 		for x in range(start.x, end.x):
 			result.append(Vector2(x, y))
