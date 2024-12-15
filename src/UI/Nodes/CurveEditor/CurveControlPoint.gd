@@ -22,12 +22,10 @@ var right_slope: CurveEditTangentPoint
 
 
 func _ready() -> void:
+	gui_input.connect(_on_gui_input)
 	custom_minimum_size = Vector2(8, 8)
 	left_slope = CurveEditTangentPoint.new()
 	right_slope = CurveEditTangentPoint.new()
-	gui_input.connect(_on_gui_input)
-	left_slope.gui_input.connect(_on_gui_input)
-	right_slope.gui_input.connect(_on_gui_input)
 	add_child(left_slope)
 	add_child(right_slope)
 

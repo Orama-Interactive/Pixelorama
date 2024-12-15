@@ -6,7 +6,7 @@ extends Control
 
 const OFFSET := -Vector2(0, 0)
 
-@export var distance: float
+@export var distance := 30
 
 var moving = false
 @onready var parent := get_parent() as CurveEditControlPoint
@@ -14,7 +14,10 @@ var moving = false
 
 
 func _ready() -> void:
+	gui_input.connect(_on_gui_input)
 	custom_minimum_size = Vector2(8, 8)
+	if get_index() == 0:
+		distance = -distance
 
 
 func _draw() -> void:
@@ -26,7 +29,7 @@ func _draw() -> void:
 	draw_circle(Vector2(3.0, 3.0), 3.0, color)
 
 
-func _on_ControlPoint_gui_input(event: InputEvent) -> void:
+func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
