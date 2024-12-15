@@ -25,7 +25,13 @@ func get_content() -> ImageExtended:
 
 
 func set_content(content, texture: ImageTexture = null) -> void:
-	image = content
+	var proper_content: ImageExtended
+	if content is not ImageExtended:
+		proper_content = ImageExtended.new()
+		proper_content.copy_from_custom(content, image.is_indexed)
+	else:
+		proper_content = content
+	image = proper_content
 	if is_instance_valid(texture) and is_instance_valid(texture.get_image()):
 		image_texture = texture
 		if image_texture.get_image().get_size() != image.get_size():
