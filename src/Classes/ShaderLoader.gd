@@ -252,6 +252,17 @@ static func create_ui_for_shader_uniforms(
 					func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
 				)
 				hbox.add_child(gradient_edit)
+			elif u_name.begins_with("curve_"):
+				var curve_edit := CurveEdit.new()
+				curve_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				if params.has(u_name) and params[u_name] is CurveTexture:
+					curve_edit.curve = params[u_name].curve
+				else:
+					curve_edit.set_default_curve()
+				curve_edit.value_changed.connect(
+					func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), u_name)
+				)
+				hbox.add_child(curve_edit)
 			else:  ## Simple texture
 				var file_dialog := FileDialog.new()
 				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE

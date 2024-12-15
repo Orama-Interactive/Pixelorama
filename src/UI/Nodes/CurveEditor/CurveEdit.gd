@@ -154,6 +154,12 @@ static func to_texture(from_curve: Curve, width := 256) -> CurveTexture:
 	return texture
 
 
+func set_default_curve() -> void:
+	if not is_instance_valid(curve):
+		curve = Curve.new()
+	_on_presets_item_selected(0)
+
+
 func available_size() -> Vector2:
 	if curve_editor.size.is_zero_approx():
 		return Vector2.ONE

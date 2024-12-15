@@ -20,6 +20,7 @@ var effects: Array[LayerEffect] = [
 		"Adjust Brightness/Contrast",
 		preload("res://src/Shaders/Effects/BrightnessContrast.gdshader")
 	),
+	LayerEffect.new("Color Curves", preload("res://src/Shaders/Effects/ColorCurves.gdshader")),
 	LayerEffect.new("Palettize", preload("res://src/Shaders/Effects/Palettize.gdshader")),
 	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader")),
 	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader")),
