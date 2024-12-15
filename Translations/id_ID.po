@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-12-15 20:15\n"
+"PO-Revision-Date: 2024-12-15 21:25\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1177,24 +1177,24 @@ msgstr "Faktor semburat:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Lengkung Warna"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Saluran RGB:"
 
 msgid "Red"
-msgstr ""
+msgstr "Merah"
 
 msgid "Green"
-msgstr ""
+msgstr "Hijau"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 msgid "Presets"
-msgstr ""
+msgstr "Praatur"
 
 msgid "Apply"
 msgstr "Terapkan"
@@ -1682,13 +1682,13 @@ msgid "Show left tool icon"
 msgstr "Tampilkan ikon alat di kiri"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr "Menampilkan ikon alat di kiri yang dipakai di sebelah kursor di kanvas"
+msgstr "Menampilkan ikon alat kiri saat ini di sebelah kursor pada kanvas"
 
 msgid "Show right tool icon"
 msgstr "Tampilkan ikon alat di kanan"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr "Menampilkan ikon alat di kanan yang dipakai di sebelah kursor di kanvas"
+msgstr "Menampilkan ikon alat kanan saat ini di sebelah kursor pada kanvas"
 
 msgid "Use native mouse cursors"
 msgstr "Gunakan kursor tetikus biasa"
@@ -1879,7 +1879,7 @@ msgstr "Renderer:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr "Menentukan renderer/pengandar video yang dipakai. GLES2 lebih bagus untuk perangkat lawas atau kelas bawah, tapi GLES3 punya lebih banyak fitur."
+msgstr "Menentukan pengandar video untuk render. GLES2 lebih bagus untuk perangkat lawas kelas bawah, tapi GLES3 punya fitur lebih."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
@@ -1887,7 +1887,7 @@ msgstr "Pengandar tablet:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr "Menentukan pengandar tablet yang dipakai pada Windows. Jika Windows Ink sudah diaktifkan, pilih winink."
+msgstr "Menentukan pengandar tablet pada Windows. Jika Windows Ink sudah aktif, pilih winink."
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
