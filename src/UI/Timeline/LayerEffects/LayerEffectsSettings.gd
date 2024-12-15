@@ -37,6 +37,11 @@ var effects: Array[LayerEffect] = [
 func _ready() -> void:
 	for effect in effects:
 		effect_list.get_popup().add_item(effect.name)
+	if not DirAccess.dir_exists_absolute(OpenSave.SHADERS_DIRECTORY):
+		DirAccess.make_dir_recursive_absolute(OpenSave.SHADERS_DIRECTORY)
+	for file_name in DirAccess.get_files_at(OpenSave.SHADERS_DIRECTORY):
+		_load_shader_file(OpenSave.SHADERS_DIRECTORY.path_join(file_name))
+	OpenSave.shader_copied.connect(_load_shader_file)
 	effect_list.get_popup().id_pressed.connect(_on_effect_list_id_pressed)
 
 
@@ -49,7 +54,8 @@ func _on_about_to_popup() -> void:
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	enabled_button.button_pressed = layer.effects_enabled
 	for effect in layer.effects:
-		_create_effect_ui(layer, effect)
+		if is_instance_valid(effect.shader):
+			_create_effect_ui(layer, effect)
 
 
 func _on_visibility_changed() -> void:
@@ -57,6 +63,14 @@ func _on_visibility_changed() -> void:
 		Global.dialog_open(false)
 		for child in effect_container.get_children():
 			child.queue_free()
+
+
+func _load_shader_file(file_path: String) -> void:
+	var file := load(file_path)
+	if file is Shader:
+		var effect_name := file_path.get_file().get_basename()
+		effects.append(LayerEffect.new(effect_name, file))
+		effect_list.get_popup().add_item(effect_name)
 
 
 func _on_effect_list_id_pressed(index: int) -> void:

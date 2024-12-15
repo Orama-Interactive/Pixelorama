@@ -144,8 +144,10 @@ func set_nodes() -> void:
 	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 	animate_panel = $"%AnimatePanel"
-	animate_panel.image_effect_node = self
-	live_checkbox.button_pressed = live_preview
+	if is_instance_valid(animate_panel):
+		animate_panel.image_effect_node = self
+	if is_instance_valid(live_checkbox):
+		live_checkbox.button_pressed = live_preview
 
 
 func display_animate_dialog() -> void:

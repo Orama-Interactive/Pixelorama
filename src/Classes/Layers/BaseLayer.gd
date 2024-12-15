@@ -232,7 +232,7 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 		return image
 	var image_size := image.get_size()
 	for effect in effects:
-		if not effect.enabled:
+		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)

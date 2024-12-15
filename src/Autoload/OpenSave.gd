@@ -3,6 +3,9 @@ extends Node
 
 signal project_saved
 signal reference_image_imported
+signal shader_copied(file_path: String)
+
+const SHADERS_DIRECTORY := "user://shaders"
 
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
 var preview_dialogs := []  ## Array of preview dialogs
@@ -39,12 +42,13 @@ func handle_loading_file(file: String) -> void:
 	elif file_ext in ["pck", "zip"]:  # Godot resource pack file
 		Global.control.get_node("Extensions").install_extension(file)
 
-	elif file_ext == "shader" or file_ext == "gdshader":  # Godot shader file
+	elif file_ext == "gdshader":  # Godot shader file
 		var shader := load(file)
 		if not shader is Shader:
 			return
-		var file_name: String = file.get_file().get_basename()
-		Global.control.find_child("ShaderEffect").change_shader(shader, file_name)
+		var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
+		DirAccess.copy_absolute(file, new_path)
+		shader_copied.emit(new_path)
 	elif file_ext == "mp3":  # Audio file
 		open_audio_file(file)
 

@@ -71,7 +71,7 @@ enum EffectsMenu {
 	GAUSSIAN_BLUR,
 	GRADIENT,
 	GRADIENT_MAP,
-	SHADER
+	LOADED_EFFECTS
 }
 ## Enumeration of items present in the Select Menu.
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE, MODIFY }

@@ -14,6 +14,7 @@ const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
 var recent_projects := []
 var selected_layout := 0
 var zen_mode := false
+var loaded_effects_submenu: PopupMenu
 
 # Dialogs
 var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
@@ -40,7 +41,7 @@ var gradient_map_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Gradien
 var palettize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PalettizeDialog.tscn")
 var pixelize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PixelizeDialog.tscn")
 var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.tscn")
-var shader_effect_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn")
+var loaded_effect_dialogs: Array[Dialog] = []
 var manage_layouts_dialog := Dialog.new("res://src/UI/Dialogs/ManageLayouts.tscn")
 var window_opacity_dialog := Dialog.new("res://src/UI/Dialogs/WindowOpacityDialog.tscn")
 var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
@@ -79,21 +80,24 @@ class Dialog:
 
 	func popup(dialog_size := Vector2i.ZERO) -> void:
 		if not is_instance_valid(node):
-			var scene := load(scene_path)
-			if not scene is PackedScene:
-				return
-			node = scene.instantiate()
-			if not is_instance_valid(node):
-				return
-			Global.control.get_node("Dialogs").add_child(node)
+			instantiate_scene()
 		node.popup_centered(dialog_size)
 		var is_file_dialog := node is FileDialog
 		Global.dialog_open(true, is_file_dialog)
+
+	func instantiate_scene() -> void:
+		var scene := load(scene_path)
+		if not scene is PackedScene:
+			return
+		node = scene.instantiate()
+		if is_instance_valid(node):
+			Global.control.get_node("Dialogs").add_child(node)
 
 
 func _ready() -> void:
 	Global.project_switched.connect(_project_switched)
 	Global.cel_switched.connect(_update_current_frame_mark)
+	OpenSave.shader_copied.connect(_load_shader_file)
 	_setup_file_menu()
 	_setup_edit_menu()
 	_setup_view_menu()
@@ -457,13 +461,43 @@ func _setup_effects_menu() -> void:
 		"Gaussian Blur": "gaussian_blur",
 		"Gradient": "gradient",
 		"Gradient Map": "gradient_map",
-		# "Shader": ""
+		"Loaded": ""
 	}
 	var i := 0
 	for item in menu_items:
-		_set_menu_shortcut(menu_items[item], effects_menu, i, item)
+		if item == "Loaded":
+			_setup_loaded_effects_submenu()
+		else:
+			_set_menu_shortcut(menu_items[item], effects_menu, i, item)
 		i += 1
 	effects_menu.id_pressed.connect(effects_menu_id_pressed)
+
+
+func _setup_loaded_effects_submenu() -> void:
+	if not DirAccess.dir_exists_absolute(OpenSave.SHADERS_DIRECTORY):
+		DirAccess.make_dir_recursive_absolute(OpenSave.SHADERS_DIRECTORY)
+	var shader_files := DirAccess.get_files_at(OpenSave.SHADERS_DIRECTORY)
+	if shader_files.size() == 0:
+		return
+	for shader_file in shader_files:
+		_load_shader_file(OpenSave.SHADERS_DIRECTORY.path_join(shader_file))
+
+
+func _load_shader_file(file_path: String) -> void:
+	var file := load(file_path)
+	if file is not Shader:
+		return
+	var effect_name := file_path.get_file().get_basename()
+	if not is_instance_valid(loaded_effects_submenu):
+		loaded_effects_submenu = PopupMenu.new()
+		loaded_effects_submenu.set_name("loaded_effects_submenu")
+		loaded_effects_submenu.id_pressed.connect(_loaded_effects_submenu_id_pressed)
+		effects_menu.add_child(loaded_effects_submenu)
+		effects_menu.add_submenu_item("Loaded", loaded_effects_submenu.get_name())
+	loaded_effects_submenu.add_item(effect_name)
+	var effect_index := loaded_effects_submenu.item_count - 1
+	loaded_effects_submenu.set_item_metadata(effect_index, file)
+	loaded_effect_dialogs.append(Dialog.new("res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn"))
 
 
 func _setup_select_menu() -> void:
@@ -770,6 +804,17 @@ func _snap_to_submenu_id_pressed(id: int) -> void:
 		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
 
 
+func _loaded_effects_submenu_id_pressed(id: int) -> void:
+	var dialog := loaded_effect_dialogs[id]
+	if is_instance_valid(dialog.node):
+		dialog.popup()
+	else:
+		dialog.instantiate_scene()
+		var shader := loaded_effects_submenu.get_item_metadata(id) as Shader
+		dialog.node.change_shader(shader, loaded_effects_submenu.get_item_text(id))
+		dialog.popup()
+
+
 func _panels_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
@@ -950,8 +995,6 @@ func effects_menu_id_pressed(id: int) -> void:
 			pixelize_dialog.popup()
 		Global.EffectsMenu.POSTERIZE:
 			posterize_dialog.popup()
-		#Global.EffectsMenu.SHADER:
-		#shader_effect_dialog.popup()
 		_:
 			_handle_metadata(id, effects_menu)
 
