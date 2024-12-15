@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-12-15 20:14\n"
+"PO-Revision-Date: 2024-12-15 21:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1175,24 +1175,24 @@ msgstr "Factor de efect de nuanță:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Curbe de culoare"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Canal:"
 
 msgid "Red"
-msgstr ""
+msgstr "Roșu"
 
 msgid "Green"
-msgstr ""
+msgstr "Verde"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Valoare"
 
 msgid "Presets"
-msgstr ""
+msgstr "Valori prestabilite"
 
 msgid "Apply"
 msgstr "Aplicare"
@@ -2306,7 +2306,7 @@ msgstr "Deconectare celuri"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Redare audio aici"
 
 msgid "Properties"
 msgstr "Proprietăți"
@@ -2349,7 +2349,7 @@ msgid "Tilemap"
 msgstr "Hartă de dale"
 
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 msgid "Layers"
 msgstr "Straturi"
@@ -2386,7 +2386,7 @@ msgstr "Adăugare strat cu hartă de dale"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Audio Layer"
-msgstr ""
+msgstr "Adăugare strat audio"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2521,14 +2521,14 @@ msgstr "Extindere/restrânge grup"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Fișier audio:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Încărcare fișier"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Redare la cadrul:"
 
 msgid "Palette"
 msgstr "Paletă"
