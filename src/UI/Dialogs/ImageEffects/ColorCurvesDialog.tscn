@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://cthknpr74lawl"]
+
+[ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_4g7xo"]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/ColorCurvesDialog.gd" id="2_xkivc"]
+[ext_resource type="Script" path="res://src/UI/Nodes/CurveEditor/CurveEdit.gd" id="3_fp0lm"]
+
+[sub_resource type="Curve" id="Curve_p6hdh"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[node name="ColorCurvesDialog" instance=ExtResource("1_4g7xo")]
+title = "Color Curves"
+size = Vector2i(362, 440)
+script = ExtResource("2_xkivc")
+
+[node name="VBoxContainer" parent="." index="3"]
+offset_bottom = 391.0
+
+[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+visible = false
+
+[node name="ColorOptions" type="GridContainer" parent="VBoxContainer" index="3"]
+layout_mode = 2
+columns = 2
+
+[node name="ChannelLabel" type="Label" parent="VBoxContainer/ColorOptions" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Channel:"
+
+[node name="ChannelOptionButton" type="OptionButton" parent="VBoxContainer/ColorOptions" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 8
+popup/item_0/text = "RGB"
+popup/item_1/text = "Red"
+popup/item_1/id = 1
+popup/item_2/text = "Green"
+popup/item_2/id = 2
+popup/item_3/text = "Blue"
+popup/item_3/id = 3
+popup/item_4/text = "Alpha"
+popup/item_4/id = 4
+popup/item_5/text = "Hue"
+popup/item_5/id = 5
+popup/item_6/text = "Saturation"
+popup/item_6/id = 6
+popup/item_7/text = "Value"
+popup/item_7/id = 7
+
+[node name="CurveEdit" type="Control" parent="VBoxContainer" index="4"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_fp0lm")
+curve = SubResource("Curve_p6hdh")
+
+[connection signal="item_selected" from="VBoxContainer/ColorOptions/ChannelOptionButton" to="." method="_on_channel_option_button_item_selected"]

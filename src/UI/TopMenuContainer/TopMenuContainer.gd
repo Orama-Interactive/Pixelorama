@@ -33,6 +33,7 @@ var hsv_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn")
 var adjust_brightness_saturation_dialog := Dialog.new(
 	"res://src/UI/Dialogs/ImageEffects/BrightnessContrastDialog.tscn"
 )
+var color_curves_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ColorCurvesDialog.tscn")
 var gaussian_blur_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GaussianBlur.tscn")
 var gradient_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn")
 var gradient_map_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/GradientMapDialog.tscn")
@@ -449,6 +450,7 @@ func _setup_effects_menu() -> void:
 		"Desaturation": "desaturation",
 		"Adjust Hue/Saturation/Value": "adjust_hsv",
 		"Adjust Brightness/Contrast": "adjust_brightness_contrast",
+		"Color Curves": "color_curves",
 		"Palettize": "palettize",
 		"Pixelize": "pixelize",
 		"Posterize": "posterize",
@@ -934,6 +936,8 @@ func effects_menu_id_pressed(id: int) -> void:
 			hsv_dialog.popup()
 		Global.EffectsMenu.BRIGHTNESS_SATURATION:
 			adjust_brightness_saturation_dialog.popup()
+		Global.EffectsMenu.COLOR_CURVES:
+			color_curves_dialog.popup()
 		Global.EffectsMenu.GAUSSIAN_BLUR:
 			gaussian_blur_dialog.popup()
 		Global.EffectsMenu.GRADIENT:

@@ -685,6 +685,10 @@ adjust_brightness_contrast={
 "deadzone": 0.5,
 "events": []
 }
+color_curves={
+"deadzone": 0.5,
+"events": []
+}
 gradient={
 "deadzone": 0.5,
 "events": []
