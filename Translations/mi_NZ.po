@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Maori\n"
 "Language: mi_NZ\n"
-"PO-Revision-Date: 2024-12-13 22:44\n"
+"PO-Revision-Date: 2024-12-15 20:15\n"
 
 msgid "OK"
 msgstr ""
@@ -1166,6 +1166,27 @@ msgstr ""
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
+msgstr ""
+
+#. An image effect that adjusts the colors of the image by using curves.
+msgid "Color Curves"
+msgstr ""
+
+#. Refers to a color channel, such as the red, green, blue or alpha channels.
+msgid "Channel:"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
+msgid "Green"
+msgstr ""
+
+#. Refers to the value (as in HSV) of the colors of an image.
+msgid "Value"
+msgstr ""
+
+msgid "Presets"
 msgstr ""
 
 msgid "Apply"
