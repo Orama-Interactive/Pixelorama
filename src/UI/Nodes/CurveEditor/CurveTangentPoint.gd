@@ -4,7 +4,7 @@
 class_name CurveEditTangentPoint
 extends Control
 
-const OFFSET := -Vector2(0, 0)
+const OFFSET := Vector2(0, 0)
 
 @export var distance := 30
 

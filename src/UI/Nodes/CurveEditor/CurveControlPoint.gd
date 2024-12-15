@@ -18,7 +18,8 @@ var max_y: float
 var left_slope: CurveEditTangentPoint
 var right_slope: CurveEditTangentPoint
 
-@onready var parent := get_parent() as CurveEdit
+@onready var parent := get_parent() as Control
+@onready var grandparent := parent.get_parent() as CurveEdit
 
 
 func _ready() -> void:
@@ -45,7 +46,7 @@ func _draw() -> void:
 func initialize(curve: Curve, index: int) -> void:
 	if not is_instance_valid(parent):
 		await ready
-	position = parent.transform_point(curve.get_point_position(index)) - OFFSET
+	position = grandparent.transform_point(curve.get_point_position(index)) - OFFSET
 	var left_tangent := curve.get_point_left_tangent(index)
 	var right_tangent := curve.get_point_right_tangent(index)
 	if left_tangent != INF:
@@ -81,7 +82,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				moving = true
 			else:
 				moving = false
-				parent.update_controls()
+				grandparent.update_controls()
 		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			removed.emit(get_index())
 	elif moving and event is InputEventMouseMotion:

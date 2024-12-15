@@ -2,19 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_4g7xo"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/ColorCurvesDialog.gd" id="2_xkivc"]
-[ext_resource type="Script" path="res://src/UI/Nodes/CurveEditor/CurveEdit.gd" id="3_fp0lm"]
+[ext_resource type="Script" path="res://src/UI/Nodes/CurveEditor/CurveEdit.gd" id="3_3yyhs"]
 
-[sub_resource type="Curve" id="Curve_p6hdh"]
+[sub_resource type="Curve" id="Curve_gvi51"]
 _data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
 point_count = 2
 
 [node name="ColorCurvesDialog" instance=ExtResource("1_4g7xo")]
 title = "Color Curves"
-size = Vector2i(362, 440)
+size = Vector2i(362, 481)
 script = ExtResource("2_xkivc")
 
 [node name="VBoxContainer" parent="." index="3"]
-offset_bottom = 391.0
+offset_bottom = 432.0
 
 [node name="ShowAnimate" parent="VBoxContainer" index="0"]
 visible = false
@@ -51,10 +51,11 @@ popup/item_6/id = 6
 popup/item_7/text = "Value"
 popup/item_7/id = 7
 
-[node name="CurveEdit" type="Control" parent="VBoxContainer" index="4"]
+[node name="CurveEdit" type="VBoxContainer" parent="VBoxContainer" index="4"]
+custom_minimum_size = Vector2(32, 150)
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("3_fp0lm")
-curve = SubResource("Curve_p6hdh")
+script = ExtResource("3_3yyhs")
+curve = SubResource("Curve_gvi51")
 
 [connection signal="item_selected" from="VBoxContainer/ColorOptions/ChannelOptionButton" to="." method="_on_channel_option_button_item_selected"]
