@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.1] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Spencer Beckwith ([@spencerjbeckwith](https://github.com/spencerjbeckwith))
 
 Built using Godot 4.3
 
@@ -58,7 +58,7 @@ Built using Godot 4.3
 - Fixed layer effect slider values being rounded to the nearest integer.
 - Fixed memory leak where the project remained referenced by a drawing tool, even when its tab was closed.
 - Fixed memory leak where the first project remained forever references in memory by the Recorder panel.
-- Slightly optimize circle brushes by only calling the ellipse algorithms once while drawing
+- Slightly optimize circle brushes by only calling the ellipse algorithms once while drawing.
 
 ### Removed
 - The Recorder panel has been removed from the Web version. It wasn't functional anyway in a way that was useful, and it's unsure if we can find a way to make it work.
