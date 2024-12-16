@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-12-15 21:25\n"
+"PO-Revision-Date: 2024-12-16 23:11\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -223,6 +223,10 @@ msgstr "Toleransi:"
 
 msgid "Initial angle:"
 msgstr "Sudut inisial:"
+
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
+msgstr ""
 
 msgid "Clear"
 msgstr "Kosongkan"
@@ -1869,7 +1873,7 @@ msgstr "Aktifkan transparansi jendela"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Jika diaktifkan, jendela aplikasi akan tampil transparan. Ini juga menguras kinerja, nonaktifkan saja jika tidak perlu."
 
-#. An option found in the preferences, under the Performance section.
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
 msgstr "Gunakan kandar audio bonekaan"
 
