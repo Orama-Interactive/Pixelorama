@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-12-15 20:15\n"
+"PO-Revision-Date: 2024-12-16 05:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1177,24 +1177,24 @@ msgstr "色合い係数:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "色曲線"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "チャンネル:"
 
 msgid "Red"
-msgstr ""
+msgstr "赤"
 
 msgid "Green"
-msgstr ""
+msgstr "緑"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "値"
 
 msgid "Presets"
-msgstr ""
+msgstr "プリセット"
 
 msgid "Apply"
 msgstr "適用"
