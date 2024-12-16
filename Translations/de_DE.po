@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2024-12-15 20:15\n"
+"PO-Revision-Date: 2024-12-16 18:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1176,24 +1176,24 @@ msgstr "Farbeffekt-Faktor:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Farbkurven"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Kanal:"
 
 msgid "Red"
-msgstr ""
+msgstr "Rot"
 
 msgid "Green"
-msgstr ""
+msgstr "Grün"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Wert"
 
 msgid "Presets"
-msgstr ""
+msgstr "Voreinstellungen"
 
 msgid "Apply"
 msgstr "Übernehmen"
@@ -1868,7 +1868,7 @@ msgstr "Fenster-Transparenz aktivieren"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Wenn aktiviert, kann das Anwendungsfenster transparent werden. Dies wirkt sich jedoch negative auf die Leistung aus, schalten Sie die Option deshalb aus, solange Sie sie nicht benötigen."
 
-#. An option found in the preferences, under the Performance section.
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
 msgstr "Dummy-Audio-Treiber verwenden"
 
