@@ -127,7 +127,7 @@ func get_ellipse_points(pos: Vector2i, size: Vector2i) -> Array[Vector2i]:
 	var y0 := pos.y
 	var y1 := pos.y + (size.y - 1)
 	var a := absi(x1 - x0)
-	var b := absi(y1 - x0)
+	var b := absi(y1 - y0)
 	var b1 := b & 1
 	var dx := 4 * (1 - a) * b * b
 	var dy := 4 * (b1 + 1) * a * a
