@@ -15,6 +15,10 @@ https://github.com/Orama-Interactive/Pixelorama/issues?q=is%3Aissue
 <!-- Specify commit hash if using a non-official build. -->
 
 
+**Where did you download Pixelorama from?**
+<!-- Specify where you downloaded Pixelorama from. GitHub Releases, itch.io, Steam, Flatpak, self-built, somewhere else? -->
+
+
 **OS/device including version:**
 <!-- Specify GPU model and drivers if graphics-related. -->
 
