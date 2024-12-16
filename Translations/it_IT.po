@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2024-12-16 01:01\n"
+"PO-Revision-Date: 2024-12-16 23:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -223,6 +223,10 @@ msgstr "Tolleranza:"
 
 msgid "Initial angle:"
 msgstr "Angolo iniziale:"
+
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
+msgstr ""
 
 msgid "Clear"
 msgstr "Cancella"
@@ -1869,7 +1873,7 @@ msgstr "Abilita trasparenza finestra"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Se abilitata, la finestra dell'applicazione può diventare trasparente. Ciò influisce sulle prestazioni, quindi tenerla spenta se non ne hai bisogno."
 
-#. An option found in the preferences, under the Performance section.
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
 msgstr "Usa driver audio fittizio"
 
