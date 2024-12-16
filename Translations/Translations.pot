@@ -1794,7 +1794,7 @@ msgstr ""
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr ""
 
-#. An option found in the preferences, under the Performance section.
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
 msgstr ""
 
