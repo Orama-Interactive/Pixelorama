@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0d66oh6bw3kt"]
 
-[ext_resource type="Script" path="res://src/UI/Nodes/BasisSliders.gd" id="1_sbf5t"]
-[ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/ValueSliderV3.tscn" id="2_7swri"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/BasisSliders.gd" id="1_sbf5t"]
+[ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/Sliders/ValueSliderV3.tscn" id="2_7swri"]
 
 [node name="BasisSliders" type="HBoxContainer"]
 offset_right = 40.0

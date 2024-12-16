@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://clbjfkdupw52l"]
 
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="1_85pb7"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1_85pb7"]
 [ext_resource type="Script" path="res://src/UI/Timeline/CelProperties.gd" id="1_lyy7i"]
 
 [node name="CelProperties" type="AcceptDialog"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_eiotn"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/PixelizeDialog.gd" id="2_x5pd6"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="3_s7ey1"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_s7ey1"]
 
 [node name="PixelizeDialog" instance=ExtResource("1_eiotn")]
 title = "Pixelize"

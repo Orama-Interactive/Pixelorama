@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1_1q6ub"]
 [ext_resource type="Script" path="res://src/Tools/UtilityTools/Text.gd" id="2_ql5g6"]
 [ext_resource type="Texture2D" uid="uid://d267xalp3p7ru" path="res://assets/graphics/misc/check_plain.png" id="3_novww"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_tidsq"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_tidsq"]
 [ext_resource type="Texture2D" uid="uid://bnc78807k1xjv" path="res://assets/graphics/misc/close.png" id="4_nhcnn"]
 
 [node name="ToolOptions" instance=ExtResource("1_1q6ub")]

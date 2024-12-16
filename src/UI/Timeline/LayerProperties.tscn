@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3dt1gdlf7hox"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/LayerProperties.gd" id="1_54q1t"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="2_bwpwc"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_bwpwc"]
 
 [node name="LayerProperties" type="AcceptDialog"]
 title = "Layer properties"

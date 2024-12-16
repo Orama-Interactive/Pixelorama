@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmlgx1jgau8a5"]
 
 [ext_resource type="Script" path="res://src/UI/Nodes/AnimatePanel.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="2"]
 
 [node name="AnimatePanel" type="PanelContainer"]
 offset_right = 360.0

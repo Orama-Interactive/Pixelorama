@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://collailpx6ft5"]
 
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="1"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3"]
 
 [node name="LineButton" type="VBoxContainer"]

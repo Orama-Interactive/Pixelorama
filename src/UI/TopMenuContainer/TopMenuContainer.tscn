@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsgwar3l6qtgv"]
 
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="1"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1"]
 [ext_resource type="Script" path="res://src/UI/TopMenuContainer/TopMenuContainer.gd" id="2"]
 
 [node name="TopMenuContainer" type="Panel"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
 [ext_resource type="Script" path="res://src/UI/Canvas/TileMode.gd" id="2"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="2_ul2eq"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="2_ul2eq"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/TileModeOffsetsDialog.gd" id="3"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]

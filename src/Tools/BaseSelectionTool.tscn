@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/BaseSelectionTool.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://d267xalp3p7ru" path="res://assets/graphics/misc/check_plain.png" id="3_mtv71"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://bnc78807k1xjv" path="res://assets/graphics/misc/close.png" id="4_ad04n"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_gfv4x"]

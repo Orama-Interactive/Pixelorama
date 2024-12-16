@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_5wfra"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/BrightnessContrastDialog.gd" id="2_msv0o"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_2epr4"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_2epr4"]
 
 [node name="BrightnessContrastDialog" instance=ExtResource("1_5wfra")]
 title = "Adjust Brightness/Contrast"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://wcbpnsm7gptu"]
 
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="1_3jelw"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1_3jelw"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/ModifySelection.gd" id="1_w6rs7"]
 
 [node name="ModifySelection" type="ConfirmationDialog"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/Eraser.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_7k1sb"]
 resource_name = "rotate"

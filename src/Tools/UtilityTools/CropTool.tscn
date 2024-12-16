@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://c35n21ii7onhe"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/UtilityTools/CropTool.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://bgrq56ndc4ydj" path="res://assets/graphics/misc/unlocked_size.png" id="4"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="5"]
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("3")

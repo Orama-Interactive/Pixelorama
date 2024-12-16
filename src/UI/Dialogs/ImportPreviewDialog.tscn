@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" id="2_yokw4"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/HelperScripts/SmartSlicePreview.gd" id="3_aeccv"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_7dy5o"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4_nmo33"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4_nmo33"]
 
 [node name="ImportPreviewDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0

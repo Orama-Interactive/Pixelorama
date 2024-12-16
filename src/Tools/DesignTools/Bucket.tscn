@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bbvvkrrjyxugo"]
 
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/Bucket.gd" id="3"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4_1pngp"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4_1pngp"]
 
 [sub_resource type="StyleBoxFlat" id="2"]
 bg_color = Color(1, 1, 1, 1)

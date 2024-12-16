@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/BaseSelectionTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/SelectionTools/PaintSelect.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(1, 1, 1, 1)

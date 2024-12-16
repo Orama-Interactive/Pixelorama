@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1_rvuea"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/CurveTool.gd" id="2_tjnp6"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3_g0nav"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3_g0nav"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_drx24"]
 resource_name = "rotate"

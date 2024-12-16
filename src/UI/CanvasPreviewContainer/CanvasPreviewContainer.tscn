@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://src/UI/Canvas/CanvasCamera.gd" id="5_ge2km"]
 [ext_resource type="Texture2D" uid="uid://c7smxwfa8826j" path="res://assets/graphics/timeline/play.png" id="6"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="7_o7sn3"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="8"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="8"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("2")

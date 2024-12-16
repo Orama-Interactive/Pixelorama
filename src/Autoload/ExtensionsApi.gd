@@ -168,11 +168,11 @@ class GeneralAPI:
 
 	## Returns a new ValueSliderV2. Useful for editing 2D vectors.
 	func create_value_slider_v2() -> ValueSliderV2:
-		return preload("res://src/UI/Nodes/ValueSliderV2.tscn").instantiate()
+		return preload("res://src/UI/Nodes/Sliders/ValueSliderV2.tscn").instantiate()
 
 	## Returns a new ValueSliderV3. Useful for editing 3D vectors.
 	func create_value_slider_v3() -> ValueSliderV3:
-		return preload("res://src/UI/Nodes/ValueSliderV3.tscn").instantiate()
+		return preload("res://src/UI/Nodes/Sliders/ValueSliderV3.tscn").instantiate()
 
 
 ## Gives ability to add/remove items from menus in the top bar.

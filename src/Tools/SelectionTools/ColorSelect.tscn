@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/BaseSelectionTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/SelectionTools/ColorSelect.gd" id="2"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_44rxy"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_44rxy"]
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")

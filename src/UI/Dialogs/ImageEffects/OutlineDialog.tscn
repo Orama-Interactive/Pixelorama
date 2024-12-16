@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ci2qpf6t3dyyr"]
 
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.gd" id="1"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="2"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="3"]
 
 [node name="OutlineDialog" instance=ExtResource("3")]

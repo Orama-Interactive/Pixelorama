@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://cxhs8qy5ilufv"]
 
 [ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferencesPanel.gd" id="1"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="2_1qu4x"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_1qu4x"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="2_uqbp6"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3_1w6gu"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3_1w6gu"]
 [ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferenceEdit.gd" id="3_skjtb"]
 [ext_resource type="Texture2D" uid="uid://d2m7enib3dplc" path="res://assets/graphics/reference_images/select.png" id="3_us8st"]
 [ext_resource type="Texture2D" uid="uid://cedsyi8gf2n2i" path="res://assets/graphics/reference_images/move.png" id="4_8mlcg"]

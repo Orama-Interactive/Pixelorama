@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/UI/Dialogs/ExportDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4"]
 
 [node name="ExportDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0

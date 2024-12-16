@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Classes/ImageEffect.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://blrd4x0ma7b3h" path="res://assets/graphics/misc/animate.png" id="4"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="4_whox6"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4_whox6"]
 
 [node name="ImageEffectParent" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0

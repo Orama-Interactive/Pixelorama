@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="3_faalk"]
 [ext_resource type="Texture2D" uid="uid://22h12g8p3jtd" path="res://assets/graphics/misc/pixel_perfect_off.png" id="4"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="5"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://dlxhm0ronna25" path="res://assets/graphics/misc/xy_mirror_off.png" id="5_hcmgx"]
 [ext_resource type="Texture2D" uid="uid://j8eywwy082a4" path="res://assets/graphics/misc/alpha_lock_off.png" id="5_jv20x"]
 [ext_resource type="Texture2D" uid="uid://dg3dumyfj1682" path="res://assets/graphics/misc/dynamics.png" id="6"]

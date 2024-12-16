@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_cuu40"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/GaussianBlur.gd" id="2_37xhl"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_237k2"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="4_yprgi"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_237k2"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4_yprgi"]
 
 [node name="GaussianBlur" instance=ExtResource("1_cuu40")]
 title = "Gaussian Blur"
