@@ -211,6 +211,10 @@ msgstr ""
 msgid "Initial angle:"
 msgstr ""
 
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
+msgstr ""
+
 msgid "Clear"
 msgstr ""
 
