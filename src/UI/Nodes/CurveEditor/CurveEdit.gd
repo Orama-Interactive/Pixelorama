@@ -213,7 +213,8 @@ func _draw() -> void:
 			var y := p1.y * omt3 + yac * omt2 * t * 3.0 + ybc * omt * t2 * 3.0 + p2.y * t3
 			p = transform_point(Vector2(x, y))
 			points.push_back(p)
-	draw_polyline(points, curve_color)
+	if points.size() > 1:
+		draw_polyline(points, curve_color)
 
 
 func _on_control_point_moved(index: int) -> void:
@@ -245,6 +246,7 @@ func _on_gui_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
 			var new_point_position := reverse_transform_point(get_local_mouse_position())
 			curve.add_point(new_point_position, 0.0, 0.0)
+			queue_redraw()
 			update_controls()
 
 
