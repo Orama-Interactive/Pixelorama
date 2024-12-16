@@ -26,7 +26,7 @@ Built using Godot 4.3
 - Fixed crash when Pixelorama starts without a palette.
 - Undo/redo now works again when the cursor is hovering over the timeline.
 - The first frame is no longer exported twice when using ping-pong loop.
-- Fixed pencil/eraser/shading previews turning white for a brief moment when changing image brushes, and when switchin between tools.
+- Fixed pencil/eraser/shading previews turning white for a brief moment when changing image brushes, and when switching between tools.
 - Dialogs that are children of other dialogs now always appear on top, to avoid issues where they could hide behind their parents and causing confusion that made Pixelorama seem unresponsive.
 - Palette swatches now get deleted when the user removes all palettes.
 - The CLI's output option now works with filepaths instead of just filenames. [#1145](https://github.com/Orama-Interactive/Pixelorama/pull/1145)
