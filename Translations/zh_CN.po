@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-12-15 20:14\n"
+"PO-Revision-Date: 2024-12-16 23:11\n"
 
 msgid "OK"
 msgstr "确定"
@@ -223,6 +223,10 @@ msgstr "容差："
 
 msgid "Initial angle:"
 msgstr "初始角度："
+
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
+msgstr ""
 
 msgid "Clear"
 msgstr "取消选中"
@@ -1868,7 +1872,7 @@ msgstr "启用窗口透明度"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "如果启用，应用程序窗口可以变得透明。 这会影响性能，因此如果不需要，请将其关闭。"
 
-#. An option found in the preferences, under the Performance section.
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
 msgstr ""
 
