@@ -24,6 +24,13 @@ func get_final_opacity(layer: BaseLayer) -> float:
 	return layer.opacity * opacity
 
 
+func get_frame(project: Project) -> Frame:
+	for frame in project.frames:
+		if frame.cels.has(self):
+			return frame
+	return null
+
+
 # Methods to Override:
 
 

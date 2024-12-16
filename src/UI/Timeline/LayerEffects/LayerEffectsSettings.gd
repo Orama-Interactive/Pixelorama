@@ -177,8 +177,10 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data
 		undo_data[cel_image] = cel_image.data
 		var image_size := cel_image.get_size()
+		var params := effect.params
+		params["PXO_time"] = frame.position_in_seconds(project)
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(cel_image, effect.shader, effect.params, image_size)
+		shader_image_effect.generate_image(cel_image, effect.shader, params, image_size)
 
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:

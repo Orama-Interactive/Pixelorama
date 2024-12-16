@@ -234,8 +234,10 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	for effect in effects:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
+		var params := effect.params
+		params["PXO_time"] = cel.get_frame(project).position_in_seconds(project)
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
+		shader_image_effect.generate_image(image, effect.shader, params, image_size)
 	# Inherit effects from the parents, if their blend mode is set to pass through
 	for ancestor in get_ancestors():
 		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
