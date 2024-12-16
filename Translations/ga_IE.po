@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Irish\n"
 "Language: ga_IE\n"
-"PO-Revision-Date: 2024-12-15 20:15\n"
+"PO-Revision-Date: 2024-12-16 23:11\n"
 
 msgid "OK"
 msgstr ""
@@ -220,6 +220,10 @@ msgid "Tolerance:"
 msgstr ""
 
 msgid "Initial angle:"
+msgstr ""
+
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
 msgstr ""
 
 msgid "Clear"
@@ -1804,7 +1808,7 @@ msgstr ""
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr ""
 
-#. An option found in the preferences, under the Performance section.
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
 msgstr ""
 
