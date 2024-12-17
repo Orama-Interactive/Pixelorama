@@ -54,8 +54,8 @@ signal ratio_toggled(button_pressed: bool)
 		$Ratio.visible = val
 @export var grid_columns := 1:
 	set(val):
-		show_ratio = val
-		$Ratio.visible = val
+		grid_columns = val
+		$GridContainer.columns = val
 @export var slider_min_size := Vector2(32, 24):
 	set(val):
 		slider_min_size = val
