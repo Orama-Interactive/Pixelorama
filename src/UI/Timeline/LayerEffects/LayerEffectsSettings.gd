@@ -168,7 +168,8 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	var index := layer.effects.find(effect)
 	var redo_data := {}
 	var undo_data := {}
-	for frame in project.frames:
+	for i in project.frames.size():
+		var frame := project.frames[i]
 		var cel := frame.cels[layer.index]
 		var cel_image := cel.get_image()
 		if cel is CelTileMap:
@@ -179,6 +180,8 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 		var image_size := cel_image.get_size()
 		var params := effect.params
 		params["PXO_time"] = frame.position_in_seconds(project)
+		params["PXO_frame"] = i
+		params["PXO_layer"] = layer.index
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(cel_image, effect.shader, params, image_size)
 
