@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-12-17 00:52\n"
+"PO-Revision-Date: 2024-12-17 20:35\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -101,7 +101,7 @@ msgstr "Sertakan gambar tercampur"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr "Jika diaktifkan, bentuk akhir gambar tercampur disimpan menjadi pxo, ke tiap bingkai.\n"
+msgstr "Jika diaktifkan, bentuk akhir gambar tercampur disimpan menjadi pxo, pada tiap bingkai.\n"
 "Berkas pxo akan lebih besar dan mampu diimpor dengan peranti lunak pihak ketiga\n"
 "atau diekspor CLI. Membuka pxo di Pixelorama tidak perlu mengaktifkan opsi ini."
 
@@ -496,7 +496,7 @@ msgstr "Bingkai menegak:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr "Iris Rapi"
+msgstr "Iris Rapih"
 
 #. A value that is a threshold
 msgid "Threshold:"
@@ -516,7 +516,7 @@ msgstr "Gambar yang melewati ambang batas akan dileburkan menjadi gambar lebih b
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr "Segarkan"
+msgstr "Muat Ulang"
 
 msgid "Start frame:"
 msgstr "Bingkai awal:"
@@ -907,7 +907,7 @@ msgid "Font size:"
 msgstr "Ukuran font:"
 
 msgid "Dim interface on dialog popup"
-msgstr "Redupkan antarmuka pada sembulan dialog"
+msgstr "Redupkan antarmuka pada sembulan"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -1084,8 +1084,8 @@ msgstr "Tambah titik di akhir"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr "Jika diaktifkan, titik yang terakhir akan ditambah ke ujung gradien.\n"
-"Nonaktifkan jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
+msgstr "Jika ini diaktifkan, titik yang terakhir akan ditambah ke ujung gradien.\n"
+"Nonaktifkan jika ingin interpolasi gradiennya tetap konstan, sehingga warna yang terakhir juga akan disertakan."
 
 msgid "Shape:"
 msgstr "Bentuk:"
@@ -3364,11 +3364,11 @@ msgstr "Tipe \"ease\":"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr "Awalnya lambat lalu cepat saat ke ujung"
+msgstr "Awalnya lambat lalu mencepat ke ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr "Awalnya cepat lalu lambat saat ke ujung"
+msgstr "Awalnya cepat lalu melambat ke ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
@@ -3428,7 +3428,7 @@ msgstr "Ekawarna"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr "Saat membuka gambar, bisa jadi diimpor sebagai rujukan."
+msgstr "Saat membuka gambar, itu bisa diimpor sebagai rujukan."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
@@ -3446,7 +3446,7 @@ msgstr "Tahan Shift saat menekan untuk langsung hapus."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Apakah yakin ingin menghapus gambar rujukan ini? Tidak akan dihapus dari berkas sistem."
+msgstr "Apakah yakin ingin menghapus gambar rujukan ini? Tidak akan dihapus dari direktori."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3506,7 +3506,7 @@ msgstr "Batasi Nilai Warna"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr "Diaktifkan"
+msgstr "Aktif"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
