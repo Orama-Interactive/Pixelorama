@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-12-17 01:58\n"
+"PO-Revision-Date: 2024-12-17 18:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -224,7 +224,7 @@ msgstr "Ángulo inicial:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Envolver pinceladas"
 
 msgid "Clear"
 msgstr "Limpiar"
