@@ -1,0 +1,505 @@
+[gd_scene load_steps=7 format=3 uid="uid://be14ffwmcp5xy"]
+
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="1_evt0j"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1_pm12o"]
+[ext_resource type="Script" path="res://src/UI/Nodes/NoiseGenerator.gd" id="1_uxdt4"]
+[ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="2_nxkb0"]
+[ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/Sliders/ValueSliderV3.tscn" id="3_ffklk"]
+[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_r1f12"]
+
+[node name="NoiseGenerator" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uxdt4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Preview" type="TextureRect" parent="VBoxContainer/VSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="SizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Size:"
+
+[node name="SizeSlider" parent="VBoxContainer/VSplitContainer/GridContainer" instance=ExtResource("1_evt0j")]
+layout_mode = 2
+value = Vector2(512, 512)
+min_value = Vector2(1, 1)
+max_value = Vector2(1024, 1024)
+allow_greater = true
+show_ratio = true
+grid_columns = 2
+suffix_x = "px"
+suffix_y = "px"
+
+[node name="InvertLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Invert:"
+
+[node name="InvertCheckBox" type="CheckBox" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="In3DSpaceLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "In 3D space:"
+
+[node name="In3DSpaceCheckBox" type="CheckBox" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="SeamlessLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seamless:"
+
+[node name="SeamlessCheckBox" type="CheckBox" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="NormalMapLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Normal map:"
+
+[node name="NormalMapCheckBox" type="CheckBox" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="NormalizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Normalize:"
+
+[node name="NormalizeCheckBox" type="CheckBox" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
+[node name="ColorRampLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Color ramp:"
+
+[node name="GradientEdit" parent="VBoxContainer/VSplitContainer/GridContainer" instance=ExtResource("2_nxkb0")]
+layout_mode = 2
+
+[node name="NoiseTypeLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Noise type:"
+
+[node name="NoiseTypeOptionButton" type="OptionButton" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 1
+item_count = 6
+popup/item_0/text = "Simplex"
+popup/item_1/text = "Simplex Smooth"
+popup/item_1/id = 1
+popup/item_2/text = "Cellural"
+popup/item_2/id = 2
+popup/item_3/text = "Perlin"
+popup/item_3/id = 3
+popup/item_4/text = "Value Cubic"
+popup/item_4/id = 4
+popup/item_5/text = "Value"
+popup/item_5/id = 5
+
+[node name="SeedLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seed:"
+
+[node name="SeedSlider" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 1024.0
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+
+[node name="FrequencyLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Frequency:"
+
+[node name="FrequencySlider" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 0.001
+max_value = 1.0
+step = 0.001
+value = 0.001
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+snap_step = 0.1
+
+[node name="OffsetLabel" type="Label" parent="VBoxContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Offset:"
+
+[node name="OffsetSlider" parent="VBoxContainer/VSplitContainer/GridContainer" instance=ExtResource("3_ffklk")]
+layout_mode = 2
+min_value = Vector3(-1000, -1000, -1000)
+max_value = Vector3(1000, 1000, 1000)
+grid_columns = 3
+
+[node name="FractalOptions" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"CollapsibleContainer"
+script = ExtResource("4_r1f12")
+text = "Fractal"
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/FractalOptions"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="FractalTypeLabel" type="Label" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Type:"
+
+[node name="FractalTypeOptionButton" type="OptionButton" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "None"
+popup/item_1/text = "FBM"
+popup/item_1/id = 1
+popup/item_2/text = "Ridged"
+popup/item_2/id = 2
+popup/item_3/text = "Ping-Pong"
+popup/item_3/id = 3
+
+[node name="FractalOctavesLabel" type="Label" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Octaves:"
+
+[node name="FractalOctavesSlider" type="TextureProgressBar" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+
+[node name="FractalLacunarityLabel" type="Label" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lacunarity:"
+
+[node name="FractalLacunaritySlider" type="TextureProgressBar" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -50.0
+max_value = 50.0
+value = 2.0
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+
+[node name="FractalGainLabel" type="Label" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gain:"
+
+[node name="FractalGainSlider" type="TextureProgressBar" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -20.0
+max_value = 20.0
+step = 0.001
+value = 0.5
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+snap_step = 0.01
+
+[node name="FractalWeightedStrengthLabel" type="Label" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Weighted Strength:"
+
+[node name="FractalWeightedStrengthSlider" type="TextureProgressBar" parent="VBoxContainer/FractalOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 1.0
+step = 0.01
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+snap_step = 0.1
+
+[node name="DomainWarpOptions" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"CollapsibleContainer"
+script = ExtResource("4_r1f12")
+text = "Domain Warp"
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/DomainWarpOptions"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="DomainWarpEnabledLabel" type="Label" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enabled:"
+
+[node name="DomainWarpEnabledCheckBox" type="CheckBox" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="DomainWarpTypeLabel" type="Label" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Type:"
+
+[node name="DomainWarpTypeOptionButton" type="OptionButton" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Simplex"
+popup/item_1/text = "Simplex Reduced"
+popup/item_1/id = 1
+popup/item_2/text = "Basic Grid"
+popup/item_2/id = 2
+
+[node name="DomainWarpAmplitudeLabel" type="Label" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Amplitude:"
+
+[node name="DomainWarpAmplitudeSlider" type="TextureProgressBar" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+value = 30.0
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+
+[node name="DomainWarpFrequencyLabel" type="Label" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Frequency:"
+
+[node name="DomainWarpFrequencySlider" type="TextureProgressBar" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -20.0
+max_value = 20.0
+step = 0.001
+value = 0.05
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+snap_step = 0.01
+
+[node name="DomainWarpFractalTypeLabel" type="Label" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fractal type:"
+
+[node name="DomainWarpFractalTypeOptionButton" type="OptionButton" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "None"
+popup/item_1/text = "Progressive"
+popup/item_1/id = 1
+popup/item_2/text = "Independent"
+popup/item_2/id = 2
+
+[node name="DomainWarpFractalOctavesLabel" type="Label" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fractal octaves:"
+
+[node name="DomainWarpFractalOctavesSlider" type="TextureProgressBar" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+
+[node name="DomainWarpFractalLacunarityLabel" type="Label" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fractal lacunarity:"
+
+[node name="DomainWarpFractalLacunaritySlider" type="TextureProgressBar" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -50.0
+max_value = 50.0
+value = 6.0
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+
+[node name="DomainWarpFractalGainLabel" type="Label" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fractal gain:"
+
+[node name="DomainWarpFractalGainSlider" type="TextureProgressBar" parent="VBoxContainer/DomainWarpOptions/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -20.0
+max_value = 20.0
+step = 0.001
+value = 0.5
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("1_pm12o")
+snap_step = 0.01
+
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/GridContainer/SizeSlider" to="." method="_on_size_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/GridContainer/InvertCheckBox" to="." method="_on_invert_check_box_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/GridContainer/In3DSpaceCheckBox" to="." method="_on_in_3d_space_check_box_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/GridContainer/SeamlessCheckBox" to="." method="_on_seamless_check_box_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/GridContainer/NormalMapCheckBox" to="." method="_on_normal_map_check_box_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/GridContainer/NormalizeCheckBox" to="." method="_on_normalize_check_box_toggled"]
+[connection signal="updated" from="VBoxContainer/VSplitContainer/GridContainer/GradientEdit" to="." method="_on_gradient_edit_updated"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/GridContainer/NoiseTypeOptionButton" to="." method="_on_noise_type_option_button_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/GridContainer/SeedSlider" to="." method="_on_seed_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/GridContainer/FrequencySlider" to="." method="_on_frequency_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/GridContainer/OffsetSlider" to="." method="_on_offset_slider_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/FractalOptions/GridContainer/FractalTypeOptionButton" to="." method="_on_fractal_type_option_button_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/FractalOptions/GridContainer/FractalOctavesSlider" to="." method="_on_fractal_octaves_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/FractalOptions/GridContainer/FractalLacunaritySlider" to="." method="_on_fractal_lacunarity_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/FractalOptions/GridContainer/FractalGainSlider" to="." method="_on_fractal_gain_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/FractalOptions/GridContainer/FractalWeightedStrengthSlider" to="." method="_on_fractal_weighted_strength_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/DomainWarpOptions/GridContainer/DomainWarpEnabledCheckBox" to="." method="_on_domain_warp_enabled_check_box_toggled"]
+[connection signal="item_selected" from="VBoxContainer/DomainWarpOptions/GridContainer/DomainWarpTypeOptionButton" to="." method="_on_domain_warp_type_option_button_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/DomainWarpOptions/GridContainer/DomainWarpAmplitudeSlider" to="." method="_on_domain_warp_amplitude_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/DomainWarpOptions/GridContainer/DomainWarpFrequencySlider" to="." method="_on_domain_warp_frequency_slider_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/DomainWarpOptions/GridContainer/DomainWarpFractalTypeOptionButton" to="." method="_on_domain_warp_fractal_type_option_button_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/DomainWarpOptions/GridContainer/DomainWarpFractalOctavesSlider" to="." method="_on_domain_warp_fractal_octaves_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/DomainWarpOptions/GridContainer/DomainWarpFractalLacunaritySlider" to="." method="_on_domain_warp_fractal_lacunarity_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/DomainWarpOptions/GridContainer/DomainWarpFractalGainSlider" to="." method="_on_domain_warp_fractal_gain_slider_value_changed"]

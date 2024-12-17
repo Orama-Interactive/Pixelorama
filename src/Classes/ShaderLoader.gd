@@ -4,6 +4,7 @@ extends RefCounted
 const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV2.tscn")
 const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/Sliders/BasisSliders.tscn")
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
+const NOISE_GENERATOR := preload("res://src/UI/Nodes/NoiseGeneratorDialog.tscn")
 
 
 static func create_ui_for_shader_uniforms(
@@ -261,12 +262,32 @@ static func create_ui_for_shader_uniforms(
 					curve_edit.curve = params[u_name].curve
 				else:
 					curve_edit.set_default_curve()
+					params[u_name] = CurveEdit.to_texture(curve_edit.curve)
 				curve_edit.value_changed.connect(
 					func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), u_name)
 				)
 				hbox.add_child(curve_edit)
+			elif u_name.begins_with("noise_"):
+				var noise_generator_dialog := NOISE_GENERATOR.instantiate() as AcceptDialog
+				noise_generator_dialog.always_on_top = true
+				var noise_generator := noise_generator_dialog.get_child(0) as NoiseGenerator
+				if params.has(u_name) and params[u_name] is NoiseTexture2D:
+					noise_generator.noise_texture = params[u_name]
+				else:
+					params[u_name] = noise_generator.noise_texture
+				noise_generator.value_changed.connect(
+					func(noise_texture: NoiseTexture2D): value_changed.call(noise_texture, u_name)
+				)
+				parent_node.add_child(noise_generator_dialog)
+				var button := Button.new()
+				button.text = "Generate noise"
+				button.pressed.connect(noise_generator_dialog.popup_centered)
+				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				hbox.add_child(button)
 			else:  ## Simple texture
 				var file_dialog := FileDialog.new()
+				file_dialog.always_on_top = true
 				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 				file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 				file_dialog.size = Vector2(384, 281)

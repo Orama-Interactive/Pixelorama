@@ -27,12 +27,14 @@ signal ratio_toggled(button_pressed: bool)
 		$GridContainer/X.min_value = val.x
 		$GridContainer/Y.min_value = val.y
 		$GridContainer/Z.min_value = val.z
+		value = value  # Call value setter
 @export var max_value := Vector3(100.0, 100.0, 100.0):
 	set(val):
 		max_value = val
 		$GridContainer/X.max_value = val.x
 		$GridContainer/Y.max_value = val.y
 		$GridContainer/Z.max_value = val.z
+		value = value  # Call value setter
 @export var step := 1.0:
 	set(val):
 		step = val
