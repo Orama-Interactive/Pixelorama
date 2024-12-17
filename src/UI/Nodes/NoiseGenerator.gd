@@ -11,131 +11,113 @@ var noise_texture: NoiseTexture2D:
 		if not is_instance_valid(preview):
 			await ready
 		preview.texture = noise_texture
+		_set_node_values()
+
 @onready var preview := %Preview as TextureRect
+@onready var size_slider := %SizeSlider as ValueSliderV2
+@onready var properties := {
+	"invert": %InvertCheckBox,
+	"in_3d_space": %In3DSpaceCheckBox,
+	"seamless": %SeamlessCheckBox,
+	"as_normal_map": %NormalMapCheckBox,
+	"normalize": %NormalizeCheckBox,
+	"color_ramp": %ColorRampEdit,
+	"noise:noise_type": %NoiseTypeOptionButton,
+	"noise:seed": %SeedSlider,
+	"noise:frequency": %FrequencySlider,
+	"noise:offset": %OffsetSlider,
+	"noise:fractal_type": %FractalTypeOptionButton,
+	"noise:fractal_octaves": %FractalOctavesSlider,
+	"noise:fractal_lacunarity": %FractalLacunaritySlider,
+	"noise:fractal_gain": %FractalGainSlider,
+	"noise:fractal_weighted_strength": %FractalWeightedStrengthSlider,
+	"noise:domain_warp_enabled": %DomainWarpEnabledCheckBox,
+	"noise:domain_warp_type": %DomainWarpTypeOptionButton,
+	"noise:domain_warp_amplitude": %DomainWarpAmplitudeSlider,
+	"noise:domain_warp_frequency": %DomainWarpFrequencySlider,
+	"noise:domain_warp_fractal_type": %DomainWarpFractalTypeOptionButton,
+	"noise:domain_warp_fractal_octaves": %DomainWarpFractalOctavesSlider,
+	"noise:domain_warp_fractal_lacunarity": %DomainWarpFractalLacunaritySlider,
+	"noise:domain_warp_fractal_gain": %DomainWarpFractalGainSlider
+}
 
 
 func _init() -> void:
 	noise_texture = NoiseTexture2D.new()
 
 
+func _ready() -> void:
+	# Connect the signals of the object property nodes
+	for prop in properties:
+		var node: Control = properties[prop]
+		if node is ValueSliderV3:
+			node.value_changed.connect(_property_vector3_changed.bind(prop))
+		elif node is ValueSliderV2:
+			var property_path: String = prop
+			node.value_changed.connect(_property_vector2_changed.bind(property_path))
+		elif node is Range:
+			node.value_changed.connect(_property_value_changed.bind(prop))
+		elif node is OptionButton:
+			node.item_selected.connect(_property_item_selected.bind(prop))
+		elif node is CheckBox:
+			node.toggled.connect(_property_toggled.bind(prop))
+		elif node is GradientEditNode:
+			node.updated.connect(_property_gradient_changed.bind(prop))
+
+
+func _set_node_values() -> void:
+	size_slider.value.x = noise_texture.width
+	size_slider.value.y = noise_texture.height
+	for prop in properties:
+		var property_path: String = prop
+		var value = noise_texture.get_indexed(property_path)
+		if value == null:
+			continue
+		var node: Control = properties[prop]
+		if node is Range or node is ValueSliderV3 or node is ValueSliderV2:
+			if typeof(node.value) != typeof(value) and typeof(value) != TYPE_INT:
+				continue
+			node.value = value
+		elif node is OptionButton:
+			node.selected = value
+		elif node is CheckBox:
+			node.button_pressed = value
+		elif node is GradientEditNode:
+			node.gradient = value
+
+
+func _set_value_from_node(value, prop: String) -> void:
+	noise_texture.set_indexed(prop, value)
+	await noise_texture.changed
+	value_changed.emit(noise_texture)
+
+
+func _property_vector3_changed(value: Vector3, prop: String) -> void:
+	_set_value_from_node(value, prop)
+
+
+func _property_vector2_changed(value: Vector2, prop: String) -> void:
+	_set_value_from_node(value, prop)
+
+
+func _property_value_changed(value: float, prop: String) -> void:
+	_set_value_from_node(value, prop)
+
+
+func _property_item_selected(value: int, prop: String) -> void:
+	_set_value_from_node(value, prop)
+
+
+func _property_gradient_changed(value: Gradient, _cc: bool, prop: String) -> void:
+	_set_value_from_node(value, prop)
+
+
+func _property_toggled(value: bool, prop: String) -> void:
+	_set_value_from_node(value, prop)
+
+
 func _on_size_slider_value_changed(value: Vector2) -> void:
 	noise_texture.width = value.x
 	noise_texture.height = value.y
-	value_changed.emit(noise_texture)
-
-
-func _on_invert_check_box_toggled(toggled_on: bool) -> void:
-	noise_texture.invert = toggled_on
-	value_changed.emit(noise_texture)
-
-
-func _on_in_3d_space_check_box_toggled(toggled_on: bool) -> void:
-	noise_texture.in_3d_space = toggled_on
-	value_changed.emit(noise_texture)
-
-
-func _on_seamless_check_box_toggled(toggled_on: bool) -> void:
-	noise_texture.seamless = toggled_on
-	value_changed.emit(noise_texture)
-
-
-func _on_normal_map_check_box_toggled(toggled_on: bool) -> void:
-	noise_texture.as_normal_map = toggled_on
-	value_changed.emit(noise_texture)
-
-
-func _on_normalize_check_box_toggled(toggled_on: bool) -> void:
-	noise_texture.normalize = toggled_on
-	value_changed.emit(noise_texture)
-
-
-func _on_gradient_edit_updated(gradient: Gradient, _cc: bool) -> void:
-	noise_texture.color_ramp = gradient
-	value_changed.emit(noise_texture)
-
-
-func _on_noise_type_option_button_item_selected(index: FastNoiseLite.NoiseType) -> void:
-	(noise_texture.noise as FastNoiseLite).noise_type = index
-	value_changed.emit(noise_texture)
-
-
-func _on_seed_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).seed = value
-	value_changed.emit(noise_texture)
-
-
-func _on_frequency_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).frequency = value
-	value_changed.emit(noise_texture)
-
-
-func _on_offset_slider_value_changed(value: Vector3) -> void:
-	(noise_texture.noise as FastNoiseLite).offset = value
-	value_changed.emit(noise_texture)
-
-
-func _on_fractal_type_option_button_item_selected(index: FastNoiseLite.FractalType) -> void:
-	(noise_texture.noise as FastNoiseLite).fractal_type = index
-	value_changed.emit(noise_texture)
-
-
-func _on_fractal_octaves_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).fractal_octaves = value
-	value_changed.emit(noise_texture)
-
-
-func _on_fractal_lacunarity_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).fractal_lacunarity = value
-	value_changed.emit(noise_texture)
-
-
-func _on_fractal_gain_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).fractal_gain = value
-	value_changed.emit(noise_texture)
-
-
-func _on_fractal_weighted_strength_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).fractal_weighted_strength = value
-	value_changed.emit(noise_texture)
-
-
-func _on_domain_warp_enabled_check_box_toggled(toggled_on: bool) -> void:
-	(noise_texture.noise as FastNoiseLite).domain_warp_enabled = toggled_on
-	value_changed.emit(noise_texture)
-
-
-func _on_domain_warp_type_option_button_item_selected(index: FastNoiseLite.DomainWarpType) -> void:
-	(noise_texture.noise as FastNoiseLite).domain_warp_type = index
-	value_changed.emit(noise_texture)
-
-
-func _on_domain_warp_amplitude_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).domain_warp_amplitude = value
-	value_changed.emit(noise_texture)
-
-
-func _on_domain_warp_frequency_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).domain_warp_frequency = value
-	value_changed.emit(noise_texture)
-
-
-func _on_domain_warp_fractal_type_option_button_item_selected(
-	index: FastNoiseLite.DomainWarpFractalType
-) -> void:
-	(noise_texture.noise as FastNoiseLite).domain_warp_fractal_type = index
-	value_changed.emit(noise_texture)
-
-
-func _on_domain_warp_fractal_octaves_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).domain_warp_fractal_octaves = value
-	value_changed.emit(noise_texture)
-
-
-func _on_domain_warp_fractal_lacunarity_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).domain_warp_fractal_lacunarity = value
-	value_changed.emit(noise_texture)
-
-
-func _on_domain_warp_fractal_gain_slider_value_changed(value: float) -> void:
-	(noise_texture.noise as FastNoiseLite).domain_warp_fractal_gain = value
+	await noise_texture.changed
 	value_changed.emit(noise_texture)

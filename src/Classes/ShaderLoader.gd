@@ -269,7 +269,6 @@ static func create_ui_for_shader_uniforms(
 				hbox.add_child(curve_edit)
 			elif u_name.begins_with("noise_"):
 				var noise_generator_dialog := NOISE_GENERATOR.instantiate() as AcceptDialog
-				noise_generator_dialog.always_on_top = true
 				var noise_generator := noise_generator_dialog.get_child(0) as NoiseGenerator
 				if params.has(u_name) and params[u_name] is NoiseTexture2D:
 					noise_generator.noise_texture = params[u_name]
