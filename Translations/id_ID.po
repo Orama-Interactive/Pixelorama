@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-12-16 23:11\n"
+"PO-Revision-Date: 2024-12-17 00:52\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -226,7 +226,7 @@ msgstr "Sudut inisial:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Balut Guratan"
 
 msgid "Clear"
 msgstr "Kosongkan"
