@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-12-16 23:11\n"
+"PO-Revision-Date: 2024-12-17 11:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -226,7 +226,7 @@ msgstr "初期角度:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "ラップストローク"
 
 msgid "Clear"
 msgstr "削除"
