@@ -32,7 +32,11 @@ func handle_loading_file(file: String) -> void:
 		open_pxo_file(file)
 
 	elif file_ext == "tres":  # Godot resource file
-		return
+		var resource := load(file)
+		if resource is VisualShader:
+			var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
+			DirAccess.copy_absolute(file, new_path)
+			shader_copied.emit(new_path)
 	elif file_ext == "tscn":  # Godot scene file
 		return
 

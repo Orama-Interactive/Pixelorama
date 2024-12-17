@@ -241,77 +241,34 @@ static func create_ui_for_shader_uniforms(
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
-			if u_name.begins_with("gradient_"):
-				var gradient_edit := GRADIENT_EDIT_TSCN.instantiate() as GradientEditNode
-				gradient_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				if params.has(u_name) and params[u_name] is GradientTexture2D:
-					gradient_edit.set_gradient_texture(params[u_name])
-				else:
-					params[u_name] = gradient_edit.texture
-				# This needs to be call_deferred because GradientTexture2D gets updated next frame.
-				# Without this, the texture is purple.
-				value_changed.call_deferred(gradient_edit.texture, u_name)
-				gradient_edit.updated.connect(
-					func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
+			if shader is VisualShader and u_name.begins_with("tex_frg_"):
+				var node_id := int(u_name.replace("tex_frg_", ""))
+				var shader_node := (shader as VisualShader).get_node(
+					VisualShader.TYPE_FRAGMENT, node_id
 				)
-				hbox.add_child(gradient_edit)
-			elif u_name.begins_with("curve_"):
-				var curve_edit := CurveEdit.new()
-				curve_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				if params.has(u_name) and params[u_name] is CurveTexture:
-					curve_edit.curve = params[u_name].curve
-				else:
-					curve_edit.set_default_curve()
-					params[u_name] = CurveEdit.to_texture(curve_edit.curve)
-				curve_edit.value_changed.connect(
-					func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), u_name)
-				)
-				hbox.add_child(curve_edit)
-			elif u_name.begins_with("noise_"):
-				var noise_generator_dialog := NOISE_GENERATOR.instantiate() as AcceptDialog
-				var noise_generator := noise_generator_dialog.get_child(0) as NoiseGenerator
-				if params.has(u_name) and params[u_name] is NoiseTexture2D:
-					noise_generator.noise_texture = params[u_name]
-				else:
-					params[u_name] = noise_generator.noise_texture
-				noise_generator.value_changed.connect(
-					func(noise_texture: NoiseTexture2D): value_changed.call(noise_texture, u_name)
-				)
-				parent_node.add_child(noise_generator_dialog)
-				var button := Button.new()
-				button.text = "Generate noise"
-				button.pressed.connect(noise_generator_dialog.popup_centered)
-				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				hbox.add_child(button)
-			else:  ## Simple texture
-				var file_dialog := FileDialog.new()
-				file_dialog.always_on_top = true
-				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-				file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-				file_dialog.size = Vector2(384, 281)
-				file_dialog.file_selected.connect(file_selected.bind(u_name))
-				file_dialog.use_native_dialog = Global.use_native_file_dialogs
-				var button := Button.new()
-				button.text = "Load texture"
-				button.pressed.connect(file_dialog.popup_centered)
-				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				var mod_button := Button.new()
-				mod_button.text = "Modify"
-				mod_button.pressed.connect(
-					func():
-						_modify_texture_resource(
-							_get_loaded_texture(params, u_name),
-							u_name,
-							_shader_update_texture.bind(value_changed, u_name)
+				if shader_node is VisualShaderNodeTexture:
+					var texture := (shader_node as VisualShaderNodeTexture).texture
+					params[u_name] = texture
+					if texture is GradientTexture1D or texture is GradientTexture2D:
+						_create_gradient_texture_ui(params, u_name, hbox, value_changed)
+					elif texture is CurveTexture:
+						_create_curve_texture_ui(params, u_name, hbox, value_changed)
+					elif texture is NoiseTexture2D:
+						_create_noise_texture_ui(params, u_name, hbox, value_changed, parent_node)
+					else:  # Simple texture
+						_create_simple_texture_ui(
+							params, u_name, hbox, value_changed, parent_node, file_selected
 						)
+			elif u_name.begins_with("gradient_"):
+				_create_gradient_texture_ui(params, u_name, hbox, value_changed)
+			elif u_name.begins_with("curve_"):
+				_create_curve_texture_ui(params, u_name, hbox, value_changed)
+			elif u_name.begins_with("noise_"):
+				_create_noise_texture_ui(params, u_name, hbox, value_changed, parent_node)
+			else:  # Simple texture
+				_create_simple_texture_ui(
+					params, u_name, hbox, value_changed, parent_node, file_selected
 				)
-				mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				mod_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				hbox.add_child(button)
-				hbox.add_child(mod_button)
-				parent_node.add_child(file_dialog)
 			parent_node.add_child(hbox)
 
 		elif u_type == "bool":
@@ -405,6 +362,106 @@ static func _mat3str_to_basis(mat3: String) -> Basis:
 		vec3_z = _vec3str_to_vector3(vec3_values[2])
 	var basis := Basis(vec3_x, vec3_y, vec3_z)
 	return basis
+
+
+static func _create_simple_texture_ui(
+	params: Dictionary,
+	u_name: String,
+	hbox: BoxContainer,
+	value_changed: Callable,
+	parent_node: Control,
+	file_selected: Callable
+) -> void:
+	var file_dialog := FileDialog.new()
+	file_dialog.always_on_top = true
+	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	file_dialog.size = Vector2(384, 281)
+	file_dialog.file_selected.connect(file_selected.bind(u_name))
+	file_dialog.use_native_dialog = Global.use_native_file_dialogs
+	var button := Button.new()
+	button.text = "Load texture"
+	button.pressed.connect(file_dialog.popup_centered)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	var mod_button := Button.new()
+	mod_button.text = "Modify"
+	mod_button.pressed.connect(
+		func():
+			_modify_texture_resource(
+				_get_loaded_texture(params, u_name),
+				u_name,
+				_shader_update_texture.bind(value_changed, u_name)
+			)
+	)
+	mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	mod_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	hbox.add_child(button)
+	hbox.add_child(mod_button)
+	parent_node.add_child(file_dialog)
+
+
+static func _create_gradient_texture_ui(
+	params: Dictionary, u_name: String, hbox: BoxContainer, value_changed: Callable
+) -> void:
+	var gradient_edit := GRADIENT_EDIT_TSCN.instantiate() as GradientEditNode
+	gradient_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if params.has(u_name):
+		var texture = params[u_name]
+		if texture is GradientTexture2D:
+			gradient_edit.set_gradient_texture(texture)
+		elif texture is GradientTexture1D:
+			gradient_edit.set_gradient_texture_1d(texture)
+	else:
+		params[u_name] = gradient_edit.texture
+	# This needs to be call_deferred because GradientTexture2D gets updated next frame.
+	# Without this, the texture is purple.
+	value_changed.call_deferred(gradient_edit.texture, u_name)
+	gradient_edit.updated.connect(
+		func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
+	)
+	hbox.add_child(gradient_edit)
+
+
+static func _create_curve_texture_ui(
+	params: Dictionary, u_name: String, hbox: BoxContainer, value_changed: Callable
+) -> void:
+	var curve_edit := CurveEdit.new()
+	curve_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if params.has(u_name) and params[u_name] is CurveTexture:
+		curve_edit.curve = params[u_name].curve
+	else:
+		curve_edit.set_default_curve()
+		params[u_name] = CurveEdit.to_texture(curve_edit.curve)
+	curve_edit.value_changed.connect(
+		func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), u_name)
+	)
+	hbox.add_child(curve_edit)
+
+
+static func _create_noise_texture_ui(
+	params: Dictionary,
+	u_name: String,
+	hbox: BoxContainer,
+	value_changed: Callable,
+	parent_node: Control
+) -> void:
+	var noise_generator_dialog := NOISE_GENERATOR.instantiate() as AcceptDialog
+	var noise_generator := noise_generator_dialog.get_child(0) as NoiseGenerator
+	if params.has(u_name) and params[u_name] is NoiseTexture2D:
+		noise_generator.noise_texture = params[u_name]
+	else:
+		params[u_name] = noise_generator.noise_texture
+	noise_generator.value_changed.connect(
+		func(noise_texture: NoiseTexture2D): value_changed.call(noise_texture, u_name)
+	)
+	parent_node.add_child(noise_generator_dialog)
+	var button := Button.new()
+	button.text = "Generate noise"
+	button.pressed.connect(noise_generator_dialog.popup_centered)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	hbox.add_child(button)
 
 
 static func _shader_change_palette(value_changed: Callable, parameter_name: String) -> void:

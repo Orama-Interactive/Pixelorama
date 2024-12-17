@@ -169,6 +169,13 @@ func get_gradient_color(x: float) -> Color:
 	return gradient.sample(x / x_offset)
 
 
+func set_gradient_texture_1d(new_texture: GradientTexture1D) -> void:
+	texture = GradientTexture2D.new()
+	texture.gradient = new_texture.gradient
+	$TextureRect.texture = texture
+	gradient = texture.gradient
+
+
 func set_gradient_texture(new_texture: GradientTexture2D) -> void:
 	$TextureRect.texture = new_texture
 	texture = new_texture
