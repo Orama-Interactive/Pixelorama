@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2024-12-16 23:11\n"
+"PO-Revision-Date: 2024-12-17 01:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1178,24 +1178,24 @@ msgstr "Factor de efecto de tinte:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Curvas de color"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Canal:"
 
 msgid "Red"
-msgstr ""
+msgstr "Rojo"
 
 msgid "Green"
-msgstr ""
+msgstr "Verde"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Presets"
-msgstr ""
+msgstr "Ajustes por defecto"
 
 msgid "Apply"
 msgstr "Aplicar"
