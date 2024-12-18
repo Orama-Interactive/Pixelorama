@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-12-16 23:11\n"
+"PO-Revision-Date: 2024-12-18 10:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -224,7 +224,7 @@ msgstr "Unghi inițial:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Încapsulare urme de pensulă"
 
 msgid "Clear"
 msgstr "Ștergere"
@@ -1873,7 +1873,7 @@ msgstr "Dacă opțiunea este activată, fereastra aplicației poate deveni trans
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Folosire driver audio fictiv"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
