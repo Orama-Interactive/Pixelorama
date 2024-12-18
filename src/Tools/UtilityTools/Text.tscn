@@ -101,11 +101,13 @@ popup/item_3/text = "Bold Italic"
 popup/item_3/id = 3
 
 [node name="HorizontalAlignmentLabel" type="Label" parent="GridContainer" index="4"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Horizontal alignment:"
 
 [node name="HorizontalAlignmentOptionButton" type="OptionButton" parent="GridContainer" index="5"]
+visible = false
 layout_mode = 2
 selected = 0
 item_count = 4
