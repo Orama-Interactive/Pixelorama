@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2024-11-15 17:31\n"
+"PO-Revision-Date: 2024-12-17 11:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,6 +169,18 @@ msgstr "ピクセル"
 msgid "Percentage"
 msgstr "割合"
 
+#. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
+msgid "Color mode:"
+msgstr "カラーモード:"
+
+#. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
+msgid "Color Mode"
+msgstr "カラーモード"
+
+#. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
+msgid "Indexed"
+msgstr "インデックス付き"
+
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
 msgstr "選択範囲に合わせてトリミング"
@@ -211,6 +223,10 @@ msgstr "許容範囲:"
 
 msgid "Initial angle:"
 msgstr "初期角度:"
+
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
+msgstr "ラップストローク"
 
 msgid "Clear"
 msgstr "削除"
@@ -1163,6 +1179,27 @@ msgstr "色合い:"
 msgid "Tint effect factor:"
 msgstr "色合い係数:"
 
+#. An image effect that adjusts the colors of the image by using curves.
+msgid "Color Curves"
+msgstr "色曲線"
+
+#. Refers to a color channel, such as the red, green, blue or alpha channels.
+msgid "Channel:"
+msgstr "チャンネル:"
+
+msgid "Red"
+msgstr "赤"
+
+msgid "Green"
+msgstr "緑"
+
+#. Refers to the value (as in HSV) of the colors of an image.
+msgid "Value"
+msgstr "値"
+
+msgid "Presets"
+msgstr "プリセット"
+
 msgid "Apply"
 msgstr "適用"
 
@@ -1565,6 +1602,13 @@ msgstr "楕円形ツール\n\n"
 "%s を長押ししてクリックした原点を図形の中心に配置\n"
 "%sを長押しして図形の原点を変更"
 
+msgid "Text\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "テキスト\n\n"
+"%sでマウスの左ボタンを テキスト に変更\n"
+"%sでマウスの右ボタンを テキスト に変更"
+
 msgid "Rectangle"
 msgstr "矩形"
 
@@ -1829,6 +1873,10 @@ msgstr "ウィンドウの透明度を有効化"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "有効にすると、アプリケーションウィンドウは透明になります。これはパフォーマンスに影響しますので、必要がない場合はオフにしておいてください。"
 
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
+msgid "Use dummy audio driver"
+msgstr ""
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "レンダラー:"
@@ -2077,6 +2125,33 @@ msgstr "選択範囲から減算"
 msgid "Intersection of selections"
 msgstr "選択範囲の交差"
 
+#. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
+msgid "Style:"
+msgstr "スタイル:"
+
+#. Refers to the text. Regular means that the text is not bold or italic.
+msgid "Regular"
+msgstr "通常"
+
+#. Refers to text that is bold.
+msgid "Bold"
+msgstr "太字"
+
+#. Refers to text that is italic.
+msgid "Italic"
+msgstr "斜体"
+
+#. Refers to text that is bold and italic.
+msgid "Bold Italic"
+msgstr "太字斜体"
+
+#. https://en.wikipedia.org/wiki/Anti-aliasing
+msgid "Antialiasing"
+msgstr "アンチエイリアシング"
+
+msgid "Grayscale"
+msgstr "グレースケール"
+
 msgid "Mirroring"
 msgstr "ミラーリング"
 
@@ -2235,6 +2310,10 @@ msgstr "セルをリンクする"
 msgid "Unlink Cels"
 msgstr "セルのリンクを解除"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr ""
+
 msgid "Properties"
 msgstr "プロパティ"
 
@@ -2271,6 +2350,13 @@ msgstr "レイヤー"
 msgid "Group"
 msgstr "グループ"
 
+#. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
+msgid "Tilemap"
+msgstr "タイルマップ"
+
+msgid "Audio"
+msgstr ""
+
 msgid "Layers"
 msgstr "レイヤー"
 
@@ -2279,33 +2365,52 @@ msgid "Clipping mask"
 msgstr "クリッピングマスク"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Create a new layer"
 msgstr "新しいレイヤーを作成"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Pixel Layer"
 msgstr "ピクセルレイヤーを追加"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Group Layer"
 msgstr "グループレイヤーを追加"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add 3D Layer"
 msgstr "3Dレイヤーを追加"
 
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Tilemap Layer"
+msgstr "タイルマップレイヤーを追加"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr ""
+
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
 msgstr "現在のレイヤーを削除"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Move up the current layer"
 msgstr "現在のレイヤーを上に移動"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Move down the current layer"
 msgstr "現在のレイヤーを下に移動"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Clone current layer"
 msgstr "現在のレイヤーを複製"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Merge current layer with the one below"
 msgstr "現在のレイヤーと下のレイヤーを結合"
 
@@ -2419,6 +2524,17 @@ msgstr "新しいフレームを作成するときに、新しいセルの自動
 
 msgid "Expand/collapse group"
 msgstr "グループを展開/閉じる"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr ""
+
+msgid "Load file"
+msgstr ""
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr ""
 
 msgid "Palette"
 msgstr "パレット"
@@ -2995,6 +3111,10 @@ msgstr "透視投影エディター"
 msgid "Recorder"
 msgstr "レコーダー"
 
+#. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
+msgid "Tiles"
+msgstr "タイル"
+
 msgid "Crop"
 msgstr "切り取り"
 
@@ -3399,4 +3519,52 @@ msgstr "エフェクトを追加"
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
 msgstr "%s から画像をダウンロードしますか？"
+
+#. A tileset is a collection of tiles.
+#: src/Classes/TileSetCustom.gd
+#: src/UI/Dialogs/ImportPreviewDialog.gd
+msgid "Tileset"
+msgstr "タイルセット"
+
+#. A tileset is a collection of tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tileset:"
+msgstr "タイルセット:"
+
+#. A tileset is a collection of tiles.
+#: src/UI/Dialogs/ProjectProperties.tscn
+msgid "Tilesets"
+msgstr "タイルセット"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "New tileset"
+msgstr "新しいタイルセット"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tileset name:"
+msgstr "タイルセット名:"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tile size:"
+msgstr "タイルサイズ："
+
+#: src/UI/TilesPanel.tscn
+msgid "Draw tiles"
+msgstr "タイルを描画"
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile left (counterclockwise)"
+msgstr "タイルを左に回転 (反時計回り)"
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile right (clockwise)"
+msgstr "タイルを右に回転 (時計回り)"
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile horizontally"
+msgstr "タイルを水平方向に反転"
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile vertically"
+msgstr "タイルを垂直方向に反転"
 
