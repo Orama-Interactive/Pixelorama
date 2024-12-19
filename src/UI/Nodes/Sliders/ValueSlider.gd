@@ -166,6 +166,7 @@ func _gui_input(event: InputEvent) -> void:
 			else:
 				if event.ctrl_pressed:
 					value = roundf(value / snap_step) * snap_step
+			get_viewport().set_input_as_handled()
 
 
 func _setup_nodes() -> void:  ## Only called once on _ready()
