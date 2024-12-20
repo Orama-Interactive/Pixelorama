@@ -83,7 +83,9 @@ func _set_node_values() -> void:
 		elif node is CheckBox:
 			node.button_pressed = value
 		elif node is GradientEditNode:
-			node.gradient = value
+			var gradient_tex := GradientTexture2D.new()
+			gradient_tex.gradient = value
+			node.set_gradient_texture(gradient_tex)
 
 
 func _set_value_from_node(value, prop: String) -> void:
