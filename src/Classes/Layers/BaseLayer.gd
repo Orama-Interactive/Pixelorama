@@ -236,8 +236,8 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 			continue
 		var params := effect.params
 		params["PXO_time"] = cel.get_frame(project).position_in_seconds(project)
-		params["PXO_frame"] = project.frames.find(cel.get_frame(project))
-		params["PXO_layer"] = index
+		params["PXO_frame_index"] = project.frames.find(cel.get_frame(project))
+		params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, params, image_size)
 	# Inherit effects from the parents, if their blend mode is set to pass through

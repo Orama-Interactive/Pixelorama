@@ -63,7 +63,7 @@ static func create_ui_for_shader_uniforms(
 		var u_init := u_left_side[0].split(" ")
 		var u_type := u_init[1]
 		var u_name := u_init[2]
-		if u_name in ["PXO_time", "PXO_frame", "PXO_layer"]:
+		if u_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
 			continue
 		# Find custom data of the uniform, if any exists
 		# Right now it only checks if a uniform should have another type of node
