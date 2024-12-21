@@ -128,7 +128,6 @@ func draw_end(pos: Vector2i) -> void:
 func draw_preview() -> void:
 	var previews := Global.canvas.previews_sprite
 	if not _drawing:
-		previews.texture = null
 		return
 	var points := _bezier()
 	var image := Image.create(
@@ -207,6 +206,7 @@ func _clear() -> void:
 	_curve.clear_points()
 	_fill_inside_rect = Rect2i()
 	_drawing = false
+	Global.canvas.previews_sprite.texture = null
 	_editing_out_control_point = false
 	Global.canvas.previews.queue_redraw()
 

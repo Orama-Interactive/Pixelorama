@@ -89,8 +89,6 @@ func draw_preview() -> void:
 				image.set_pixelv(draw_point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		previews.texture = texture
-	else:
-		previews.texture = null
 
 
 func apply_selection(pos: Vector2i) -> void:
@@ -122,6 +120,7 @@ func apply_selection(pos: Vector2i) -> void:
 
 func _clear() -> void:
 	_ongoing_selection = false
+	Global.canvas.previews_sprite.texture = null
 	_draw_points.clear()
 	_ready_to_apply = false
 	Global.canvas.previews.queue_redraw()
