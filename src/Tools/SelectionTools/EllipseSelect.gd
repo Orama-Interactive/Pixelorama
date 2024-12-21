@@ -68,8 +68,6 @@ func draw_preview() -> void:
 				image.set_pixelv(point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		canvas.texture = texture
-	else:
-		canvas.texture = null
 
 
 func apply_selection(_position: Vector2i) -> void:
@@ -111,6 +109,7 @@ func apply_selection(_position: Vector2i) -> void:
 
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 		Global.canvas.selection.commit_undo("Select", undo_data)
+	Global.canvas.previews_sprite.texture = null
 
 
 func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:

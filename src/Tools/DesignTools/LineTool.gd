@@ -142,6 +142,7 @@ func draw_end(pos: Vector2i) -> void:
 		_start = Vector2.ZERO
 		_dest = Vector2.ZERO
 		_drawing = false
+		Global.canvas.previews_sprite.texture = null
 		_displace_origin = false
 		cursor_text = ""
 	super.draw_end(pos)
@@ -163,8 +164,6 @@ func draw_preview() -> void:
 				image.set_pixelv(point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		canvas.texture = texture
-	else:
-		canvas.texture = null
 
 
 func _draw_shape() -> void:
