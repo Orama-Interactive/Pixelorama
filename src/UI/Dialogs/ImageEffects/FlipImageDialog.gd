@@ -43,6 +43,8 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 		if flip_v.button_pressed:
 			selected.flip_y()
 		cel.blend_rect(selected, Rect2i(Vector2i.ZERO, selected.get_size()), rectangle.position)
+	if cel is ImageExtended:
+		cel.convert_rgb_to_indexed()
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
