@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Persian\n"
 "Language: fa_IR\n"
-"PO-Revision-Date: 2024-12-16 23:12\n"
+"PO-Revision-Date: 2024-12-26 18:29\n"
 
 msgid "OK"
 msgstr "باشه"
@@ -171,172 +171,172 @@ msgstr "درصد"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "حالت رنگ:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "حالت رنگ"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "اندیس‌شده"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "برش دادن تا برگزیده"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "برش دادن تا محتوا"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "دگرش اندازهٔ بوم"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "بازه از مبدا تصویر"
 
 msgid "Offset:"
-msgstr ""
+msgstr "بازه از مبدا:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "پیچاندن پیرامون:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "فریم‌های کانونی"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "چرخش تصویر"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "لولای x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "لولای y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "گزینه‌های مالش:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "تاب‌آوری:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "زاویهٔ آغازین:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "کوبه‌های پیچاندن"
 
 msgid "Clear"
-msgstr ""
+msgstr "پاک کردن"
 
 msgid "Invert"
-msgstr ""
+msgstr "واروندن"
 
 msgid "Modify"
-msgstr ""
+msgstr "پیرایش"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "گسترش"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "گسترش برگزیده"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "کوچک کردن"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "کوچک کردن برگزیده"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "مرز"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "مرزدار کردن برگزیده"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "الماس"
 
 msgid "Circle"
-msgstr ""
+msgstr "دایره"
 
 msgid "Square"
-msgstr ""
+msgstr "مربع"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "نمای درجه‌خاکستری"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "آیینه‌سازی تصویر"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "واژگون کردن افقی"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "واژگون کردن عمودی"
 
 msgid "Preferences"
-msgstr ""
+msgstr "گرایش‌ها"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "بوم کانونی"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "حالت کاشی"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "بازه از مبداها حالت کاشی"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
-msgstr ""
+msgstr "پایهٔ x:"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "Y-basis:"
-msgstr ""
+msgstr "پایهٔ y:"
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "ماسک زدن:"
 
 msgid "Reset"
-msgstr ""
+msgstr "بازنشاندن"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "به‌کارگیری فریم کنونی"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "بازنشاندن ماسک"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "کدری پنجره"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "کدری پنجره در حالت تمام‌صفحه کار نمی‌کند."
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "چیدمان پهنه"
 
 msgid "Panels"
-msgstr ""
+msgstr "پهنه‌ها"
 
 msgid "Layouts"
-msgstr ""
+msgstr "چیدمان‌ها"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "پهنه‌های جابه‌جایی‌پذیر"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "مدیریت چیدمان‌ها"
 
 #. Noun, a preview of something
 msgid "Preview"
