@@ -330,7 +330,7 @@ func serialize_undo_data_source_image(
 	if source_image.get_size() != image.get_size():
 		undo_data[self]["resize"] = true
 		_resize_cells(source_image.get_size())
-		tileset.clear_tileset(self)
+		tileset.handle_project_resize(self)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
@@ -350,6 +350,13 @@ func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) ->
 		undo_redo.add_do_method(_deserialize_cell_data.bind(cell_indices, dict.resize))
 		if dict.has("tileset"):
 			undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
+
+
+## Called when loading a new project. Loops through all [member cells]
+## and finds the amount of times each tile from the [member tileset] is being used.
+func find_times_used_of_tiles() -> void:
+	for cell in cells:
+		tileset.tiles[cell.index].times_used += 1
 
 
 ## Gets called every time a change is being applied to the [param image],

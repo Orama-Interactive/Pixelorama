@@ -16,9 +16,9 @@ var name := ""
 var tile_size: Vector2i
 ## The collection of tiles in the form of an [Array] of type [TileSetCustom.Tile].
 var tiles: Array[Tile] = []
-## If [code]true[/code], the code in [method clear_tileset] does not execute.
+## If [code]true[/code], the code in [method handle_project_resize] does not execute.
 ## This variable is used to prevent multiple cels from clearing the tileset at the same time.
-## In [method clear_tileset], the variable is set to [code]true[/code], and then
+## In [method handle_project_resize], the variable is set to [code]true[/code], and then
 ## immediately set to [code]false[/code] in the next frame using [method Object.set_deferred].
 var _tileset_has_been_cleared := false
 
@@ -50,8 +50,9 @@ func _init(_tile_size: Vector2i, _name := "", add_empty_tile := true) -> void:
 ## Adds a new [param image] as a tile to the tileset.
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from,
 ## and the [param edit_mode] parameter contains the tile editing mode at the time of this change.
-func add_tile(image: Image, cel: CelTileMap) -> void:
+func add_tile(image: Image, cel: CelTileMap, times_used := 1) -> void:
 	var tile := Tile.new(image)
+	tile.times_used = times_used
 	tiles.append(tile)
 	updated.emit(cel, -1)
 
@@ -115,14 +116,15 @@ func remove_unused_tiles(cel: CelTileMap) -> bool:
 	return tile_removed
 
 
-## Clears the tileset. Usually called when the project gets resized,
+## Clears the used tiles of tileset. Called when the project gets resized,
 ## and tilemap cels are updating their size and clearing the tileset to re-create it.
-func clear_tileset(cel: CelTileMap) -> void:
+func handle_project_resize(cel: CelTileMap) -> void:
 	if _tileset_has_been_cleared:
 		return
-	tiles.clear()
-	var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
-	tiles.append(Tile.new(empty_image))
+	for i in range(tiles.size() - 1, 0, -1):
+		var tile := tiles[i]
+		if tile.times_used > 0:
+			tiles.erase(tile)
 	updated.emit(cel, -1)
 	_tileset_has_been_cleared = true
 	set_deferred("_tileset_has_been_cleared", false)

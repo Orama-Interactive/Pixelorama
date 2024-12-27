@@ -287,7 +287,10 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 					var image := Image.create_from_data(
 						tile_size.x, tile_size.y, false, new_project.get_image_format(), image_data
 					)
-					tileset.add_tile(image, null)
+					tileset.add_tile(image, null, 0)
+			for cel in new_project.get_all_pixel_cels():
+				if cel is CelTileMap:
+					cel.find_times_used_of_tiles()
 		zip_reader.close()
 	new_project.export_directory_path = path.get_base_dir()
 
@@ -878,7 +881,7 @@ func open_image_as_tileset(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
 			@warning_ignore("int_as_enum_without_cast")
-			tileset.add_tile(cropped_image, null)
+			tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
 
 
@@ -901,7 +904,7 @@ func open_image_as_tileset_smart(
 		)
 		cropped_image.blit_rect(image, rect, offset)
 		@warning_ignore("int_as_enum_without_cast")
-		tileset.add_tile(cropped_image, null)
+		tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
 
 
