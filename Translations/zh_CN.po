@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-12-16 23:11\n"
+"PO-Revision-Date: 2024-12-27 07:28\n"
 
 msgid "OK"
 msgstr "确定"
@@ -226,7 +226,7 @@ msgstr "初始角度："
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "环绕描边"
 
 msgid "Clear"
 msgstr "取消选中"
@@ -1181,24 +1181,24 @@ msgstr "色调影响因素："
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "颜色曲线"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "通道："
 
 msgid "Red"
-msgstr ""
+msgstr "红色"
 
 msgid "Green"
-msgstr ""
+msgstr "绿色"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "值"
 
 msgid "Presets"
-msgstr ""
+msgstr "预设"
 
 msgid "Apply"
 msgstr "应用"
@@ -1268,7 +1268,7 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "© 版权所有 2019~2024 - Orama Interactive 和贡献者"
+msgstr "© 版权所有 2019~2025 - Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -1874,7 +1874,7 @@ msgstr "如果启用，应用程序窗口可以变得透明。 这会影响性�
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "使用虚拟音频驱动程序"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -2311,7 +2311,7 @@ msgstr "取消链接单元格"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "在此处播放音频"
 
 msgid "Properties"
 msgstr "属性"
@@ -2351,10 +2351,10 @@ msgstr "组"
 
 #. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
 msgid "Tilemap"
-msgstr ""
+msgstr "图块"
 
 msgid "Audio"
-msgstr ""
+msgstr "音频"
 
 msgid "Layers"
 msgstr "图层"
@@ -2386,12 +2386,12 @@ msgstr "添加 3D 图层"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
-msgstr ""
+msgstr "添加图块图层"
 
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Audio Layer"
-msgstr ""
+msgstr "添加音频图层"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2526,14 +2526,14 @@ msgstr "展开/折叠组"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "音频文件："
 
 msgid "Load file"
-msgstr ""
+msgstr "加载文件"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "在帧中播放："
 
 msgid "Palette"
 msgstr "调色板"
@@ -3111,7 +3111,7 @@ msgstr "录制器"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
-msgstr ""
+msgstr "平铺"
 
 msgid "Crop"
 msgstr "裁剪"
@@ -3522,47 +3522,47 @@ msgstr "您想从 %s 下载图像吗？"
 #: src/Classes/TileSetCustom.gd
 #: src/UI/Dialogs/ImportPreviewDialog.gd
 msgid "Tileset"
-msgstr ""
+msgstr "图块集"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset:"
-msgstr ""
+msgstr "图块集："
 
 #. A tileset is a collection of tiles.
 #: src/UI/Dialogs/ProjectProperties.tscn
 msgid "Tilesets"
-msgstr ""
+msgstr "图块集"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "New tileset"
-msgstr ""
+msgstr "新建图块集"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset name:"
-msgstr ""
+msgstr "图块集名称："
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tile size:"
-msgstr ""
+msgstr "图块大小："
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr ""
+msgstr "绘制图块"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr ""
+msgstr "向左旋转图块（逆时针）"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr ""
+msgstr "向右旋转图块（顺时针）"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr ""
+msgstr "水平翻转图块"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr ""
+msgstr "垂直翻转图块"
 
