@@ -21,12 +21,14 @@ Built using Godot 4.3
 
 ### Changed
 - System font names are now sorted by alphabetical order.
+- "Tile Mode" under the Selection menu has been renamed to "Wrap Strokes". This does not affect the "Tile Mode" option in the View menu. [#1150](https://github.com/Orama-Interactive/Pixelorama/pull/1150)
 
 ### Fixed
 - Fixed crash when Pixelorama starts without a palette.
 - Undo/redo now works again when the cursor is hovering over the timeline.
 - The first frame is no longer exported twice when using ping-pong loop.
 - Fixed pencil/eraser/shading previews turning white for a brief moment when changing image brushes, and when switching between tools.
+- Fixed the preview on the left tool not being visible, if the right tool had a preview.  [#1157](https://github.com/Orama-Interactive/Pixelorama/issues/1157)
 - Dialogs that are children of other dialogs now always appear on top, to avoid issues where they could hide behind their parents and causing confusion that made Pixelorama seem unresponsive.
 - Palette swatches now get deleted when the user removes all palettes.
 - The CLI's output option now works with filepaths instead of just filenames. [#1145](https://github.com/Orama-Interactive/Pixelorama/pull/1145)
