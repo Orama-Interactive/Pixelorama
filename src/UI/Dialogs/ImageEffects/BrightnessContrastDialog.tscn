@@ -7,7 +7,6 @@
 [node name="BrightnessContrastDialog" instance=ExtResource("1_5wfra")]
 title = "Adjust Brightness/Contrast"
 size = Vector2i(362, 540)
-visible = true
 script = ExtResource("2_msv0o")
 
 [node name="VBoxContainer" parent="." index="3"]
