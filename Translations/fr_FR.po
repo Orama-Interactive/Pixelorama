@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2024-12-16 23:11\n"
+"PO-Revision-Date: 2025-01-01 18:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -238,19 +238,19 @@ msgstr ""
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "Agrandir"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "Agrandir la sélection"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Rétrécir"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "Rétrécir la sélection"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
@@ -1564,7 +1564,13 @@ msgid "Curve Tool\n\n"
 "Press %s/%s to add new points\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Outil Courbe\n\n"
+"%s pour le bouton gauche de la souris\n"
+"%s pour le bouton droit de la souris\n\n"
+"Dessine les courbes\n"
+"Appuyez sur %s/%s pour ajouter de nouveaux points\n"
+"Appuyez et faites glisser pour contrôler la courbure\n"
+"Appuyez sur %s pour supprimer le dernier point ajouté"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1595,7 +1601,9 @@ msgstr "Outil ellipse\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Texte\n\n"
+"%s pour le bouton gauche de la souris\n"
+"%s pour le bouton droit de la souris"
 
 msgid "Rectangle"
 msgstr "Rectangle"
@@ -2011,7 +2019,7 @@ msgstr "Remplit la forme avec de la couleur au lieu de ne dessiner que le contou
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "Densité :"
 
 msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
@@ -2115,30 +2123,30 @@ msgstr "Intersection des sélections"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Style :"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Normal"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Gras"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Italique"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Gras Italique"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Anticrénelage"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Niveau de gris"
 
 msgid "Mirroring"
 msgstr "Miroir"
@@ -2161,7 +2169,7 @@ msgstr "Déplacer vers le centre du canevas"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "Déplacer au centre de la vue"
 
 msgid "Current frame:"
 msgstr "Frame actuelle :"
