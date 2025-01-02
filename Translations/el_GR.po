@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2024-12-16 23:11\n"
+"PO-Revision-Date: 2025-01-02 21:12\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -226,7 +226,7 @@ msgstr "Αρχική γωνία:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Τύλιγμα γραμμών"
 
 msgid "Clear"
 msgstr "Εκκαθάριση"
