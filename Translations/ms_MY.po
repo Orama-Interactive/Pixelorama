@@ -10,40 +10,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2024-12-16 23:12\n"
+"PO-Revision-Date: 2025-01-03 18:16\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Baik"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
 msgid "Open"
-msgstr ""
+msgstr "Buka"
 
 msgid "Save"
-msgstr ""
+msgstr "Simpan"
 
 msgid "Please Confirm..."
 msgstr ""
 
 msgid "File Name:"
-msgstr ""
+msgstr "Nama Fail:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nama Projek:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Saiz Gambar"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Saiz Kanvas"
 
 msgid "Frame Size"
 msgstr ""
 
 msgid "Size:"
-msgstr ""
+msgstr "Saiz:"
 
 msgid "Width:"
 msgstr ""
@@ -55,10 +55,10 @@ msgid "Center"
 msgstr ""
 
 msgid "File"
-msgstr ""
+msgstr "Fail"
 
 msgid "Edit"
-msgstr ""
+msgstr "Sunting"
 
 msgid "Select"
 msgstr ""
@@ -67,31 +67,31 @@ msgid "View"
 msgstr ""
 
 msgid "Window"
-msgstr ""
+msgstr "Tingkap"
 
 msgid "Image"
-msgstr ""
+msgstr "Gambar"
 
 msgid "Effects"
-msgstr ""
+msgstr "Kesan"
 
 msgid "Help"
-msgstr ""
+msgstr "Bantuan"
 
 msgid "New"
-msgstr ""
+msgstr "Baharu"
 
 msgid "New..."
-msgstr ""
+msgstr "Baharu..."
 
 msgid "Open..."
-msgstr ""
+msgstr "Buka..."
 
 msgid "Save..."
-msgstr ""
+msgstr "Simpan..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Simpan sebagai..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
@@ -110,7 +110,7 @@ msgid "Export"
 msgstr ""
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Tulis ganti"
 
 msgid "Export..."
 msgstr ""
@@ -146,26 +146,26 @@ msgid "Paste in Place"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "Padam"
 
 msgid "Delete Permanently"
 msgstr ""
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Ke Tong Sampah"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Berus Baharu"
 
 msgid "Scale Image"
 msgstr ""
 
 msgid "Pixels"
-msgstr ""
+msgstr "Piksel"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Peratusan"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
@@ -261,19 +261,19 @@ msgstr ""
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Berlian"
 
 msgid "Circle"
-msgstr ""
+msgstr "Bulatan"
 
 msgid "Square"
-msgstr ""
+msgstr "Petak"
 
 msgid "Grayscale View"
 msgstr ""
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Cerminkan Gambar"
 
 msgid "Flip Horizontal"
 msgstr ""
@@ -325,20 +325,20 @@ msgid "Panel Layout"
 msgstr ""
 
 msgid "Panels"
-msgstr ""
+msgstr "Panel"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Susun atur"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Panel Boleh Pindah"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Urus Susun Atur"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Pratonton"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
@@ -355,17 +355,17 @@ msgid "Add Layout"
 msgstr ""
 
 msgid "Copy from"
-msgstr ""
+msgstr "Salin daripada"
 
 msgid "Rename"
-msgstr ""
+msgstr "Ubah nama"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Ubah Nama Susun Atur"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr ""
+msgstr "Susun atur semasa"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr ""
@@ -374,10 +374,10 @@ msgid "Auto"
 msgstr ""
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Skrin lebar"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Skrin tinggi"
 
 msgid "Mirror View"
 msgstr ""
