@@ -13,6 +13,8 @@ const BIN_ACTION := "trash"
 var extensions := {}  ## Extension name: Extension class
 var extension_selected := -1
 var damaged_extension: String
+## Extensions built using the versions in this array are considered compatible with the current Api
+var legacy_api_versions = [5, 4]
 
 
 class Extension:
@@ -157,14 +159,17 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 
 	if extension_json.has("supported_api_versions"):
 		var supported_api_versions = extension_json["supported_api_versions"]
+		var current_api_version = ExtensionsApi.get_api_version()
 		if typeof(supported_api_versions) == TYPE_ARRAY:
 			supported_api_versions = PackedInt32Array(supported_api_versions)
 			# Extensions that support API version 4 are backwards compatible with version 5.
 			# Version 5 only adds new methods and does not break compatibility.
 			# TODO: Find a better way to determine which API versions
 			# have backwards compatibility with each other.
-			if 4 in supported_api_versions and not 5 in supported_api_versions:
-				supported_api_versions.append(5)
+			if not current_api_version in supported_api_versions:
+				for legacy_version: int in legacy_api_versions:
+					if legacy_version in supported_api_versions:
+						supported_api_versions.append(current_api_version)
 			if not ExtensionsApi.get_api_version() in supported_api_versions:
 				var err_text := (
 					"The extension %s will not work on this version of Pixelorama \n"
@@ -173,7 +178,7 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 				var required_text := str(
 					"Extension works on API versions: %s" % str(supported_api_versions),
 					"\n",
-					"But Pixelorama's API version is: %s" % ExtensionsApi.get_api_version()
+					"But Pixelorama's API version is: %s" % current_api_version
 				)
 				Global.popup_error(str(err_text, required_text))
 				print("Incompatible API")
