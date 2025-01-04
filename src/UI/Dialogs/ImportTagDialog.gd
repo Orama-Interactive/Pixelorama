@@ -141,6 +141,8 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 						l = GroupLayer.new(project)
 					Global.LayerTypes.THREE_D:
 						l = Layer3D.new(project)
+				if l == null:  # Ignore copying this layer if it isn't supported
+					continue
 				var cels := []
 				for f in project.frames:
 					cels.append(l.new_empty_cel())
@@ -185,8 +187,8 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 
 					# add more types here if they have a copy_content() method
 					if src_cel is PixelCel:
-						var src_img = src_cel.copy_content()
-						var copy := project.new_empty_image()
+						var src_img: ImageExtended = src_cel.copy_content()
+						var copy: ImageExtended = new_cel.create_empty_content()
 						copy.blit_rect(
 							src_img, Rect2(Vector2.ZERO, src_img.get_size()), Vector2.ZERO
 						)
