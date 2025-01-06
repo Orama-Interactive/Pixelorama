@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2025-01-03 19:19\n"
+"PO-Revision-Date: 2025-01-06 21:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -355,17 +355,17 @@ msgid "Add Layout"
 msgstr "Tilføj Layout"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Kopiér fra"
 
 msgid "Rename"
-msgstr ""
+msgstr "Omdøb"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Omdøb layout"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr ""
+msgstr "Nuværende layout"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Er du sikker på, at du vil slette dette layout?"
@@ -613,7 +613,7 @@ msgstr "Tilpas størrelse:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Kvalitet:"
 
 msgid "Cancel Export"
 msgstr "Annullér Eksport"
@@ -694,13 +694,13 @@ msgid "Export dimensions:"
 msgstr ""
 
 msgid "Save a File"
-msgstr ""
+msgstr "Gem en fil"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Gå til forrige mappe."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Gå til næste mappe."
 
 msgid "Go to parent folder."
 msgstr ""
@@ -897,11 +897,11 @@ msgstr ""
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Skrifttype:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Skriftstørrelse:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Dæmp brugerflades lysstyrke ved popup-dialog"
@@ -1183,10 +1183,10 @@ msgid "Channel:"
 msgstr ""
 
 msgid "Red"
-msgstr ""
+msgstr "Rød"
 
 msgid "Green"
-msgstr ""
+msgstr "Grøn"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
@@ -1270,7 +1270,7 @@ msgstr "Hjemmeside"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Kildekode"
 
 msgid "Donate"
 msgstr "Donér"
@@ -1382,7 +1382,7 @@ msgstr "Belarussisk"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
-msgstr ""
+msgstr "Hovedudvikler"
 
 #. Found in the About dialog.
 msgid "UI Designer"
@@ -1390,7 +1390,7 @@ msgstr "UI-designer"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr ""
+msgstr "Udviklere"
 
 msgid "Art by: %s"
 msgstr "Kunst af: %s"
