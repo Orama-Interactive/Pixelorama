@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-01-08 02:54\n"
+"PO-Revision-Date: 2025-01-08 04:00\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -64,7 +64,7 @@ msgid "Select"
 msgstr ""
 
 msgid "View"
-msgstr ""
+msgstr "Paparan"
 
 msgid "Window"
 msgstr "Tingkap"
@@ -104,10 +104,10 @@ msgid "If enabled, the final blended images are also being stored in the pxo, fo
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "Import"
 
 msgid "Export"
-msgstr ""
+msgstr "Eksport"
 
 msgid "Overwrite"
 msgstr "Tulis ganti"
@@ -128,19 +128,19 @@ msgid "Quit"
 msgstr ""
 
 msgid "Undo"
-msgstr ""
+msgstr "Undurkan"
 
 msgid "Redo"
-msgstr ""
+msgstr "Ulangi"
 
 msgid "Copy"
-msgstr ""
+msgstr "Salin"
 
 msgid "Cut"
-msgstr ""
+msgstr "Potong"
 
 msgid "Paste"
-msgstr ""
+msgstr "Tampal"
 
 msgid "Paste in Place"
 msgstr ""
@@ -149,7 +149,7 @@ msgid "Delete"
 msgstr "Padam"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Padamkan Kekal"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
@@ -169,11 +169,11 @@ msgstr "Peratusan"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Mod warna:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Mod Warna"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
@@ -188,24 +188,24 @@ msgid "Crop to Content"
 msgstr ""
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Ubah Saiz Kanvas"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Pengimbang Gambar"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Pengimbang:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Lilit sekeliling:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
 msgstr ""
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Pusing Gambar"
 
 msgid "Pivot x:"
 msgstr ""
@@ -224,10 +224,10 @@ msgstr ""
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Lilit Guratan"
 
 msgid "Clear"
-msgstr ""
+msgstr "Kosongkan"
 
 msgid "Invert"
 msgstr ""
