@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-01-03 18:16\n"
+"PO-Revision-Date: 2025-01-08 02:54\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -40,19 +40,19 @@ msgid "Canvas Size"
 msgstr "Saiz Kanvas"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Saiz Bingkai"
 
 msgid "Size:"
 msgstr "Saiz:"
 
 msgid "Width:"
-msgstr ""
+msgstr "Lebar:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Tinggi:"
 
 msgid "Center"
-msgstr ""
+msgstr "Tengah"
 
 msgid "File"
 msgstr "Fail"
@@ -338,7 +338,7 @@ msgstr "Urus Susun Atur"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr "Pratonton"
+msgstr "Pralihat"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
