@@ -79,7 +79,7 @@ func _ready() -> void:
 	cel_size_slider.min_value = min_cel_size
 	cel_size_slider.max_value = max_cel_size
 	cel_size_slider.value = cel_size
-	add_layer_list.get_popup().id_pressed.connect(_on_add_layer_list_id_pressed)
+	add_layer_list.get_popup().id_pressed.connect(on_add_layer_list_id_pressed)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
 	animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
@@ -853,7 +853,7 @@ func _on_add_layer_pressed() -> void:
 	add_layer(layer, project)
 
 
-func _on_add_layer_list_id_pressed(id: int) -> void:
+func on_add_layer_list_id_pressed(id: int) -> void:
 	if id == Global.LayerTypes.TILEMAP:
 		new_tile_map_layer_dialog.popup_centered()
 	else:

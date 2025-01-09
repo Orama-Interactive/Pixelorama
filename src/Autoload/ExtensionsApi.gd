@@ -673,7 +673,7 @@ class ProjectAPI:
 			var old_current := project.current_layer
 			project.current_layer = above_layer  # temporary assignment
 			if type >= 0 and type < Global.LayerTypes.size():
-				Global.animation_timeline.add_layer(type)
+				Global.animation_timeline.on_add_layer_list_id_pressed(type)
 				if name != "":
 					project.layers[above_layer + 1].name = name
 					var l_idx := Global.layer_vbox.get_child_count() - (above_layer + 2)
