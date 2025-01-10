@@ -12,6 +12,7 @@ var shape_aspect_ratio: AspectRatioContainer
 var swatches_button: Button
 ## The internal container for the color sliders of the [ColorPicker] node.
 var color_sliders_vbox: VBoxContainer
+var _skip_color_picker_update := false
 @onready var color_picker := %ColorPicker as ColorPicker
 @onready var color_buttons := %ColorButtons as HBoxContainer
 @onready var left_color_rect := %LeftColorRect as ColorRect
@@ -105,10 +106,7 @@ func _on_color_picker_color_changed(color: Color) -> void:
 	# So we're using this trick to convert the values back to how they are shown in
 	# the color picker's UI.
 	color = Color(color.to_html())
-	if Tools.picking_color_for == MOUSE_BUTTON_RIGHT:
-		right_color_rect.color = color
-	else:
-		left_color_rect.color = color
+	_skip_color_picker_update = true
 	Tools.assign_color(color, Tools.picking_color_for)
 
 
@@ -130,7 +128,7 @@ func reset_options() -> void:
 
 func update_color(color_info: Dictionary, button: int) -> void:
 	var color = color_info.get("color", Color.WHITE)
-	if Tools.picking_color_for == button:
+	if Tools.picking_color_for == button and not _skip_color_picker_update:
 		color_picker.color = color
 	if button == MOUSE_BUTTON_RIGHT:
 		right_color_rect.color = color
@@ -139,6 +137,7 @@ func update_color(color_info: Dictionary, button: int) -> void:
 	_average(left_color_rect.color, right_color_rect.color)
 	Global.config_cache.set_value("color_picker", "color_mode", color_picker.color_mode)
 	Global.config_cache.set_value("color_picker", "picker_shape", color_picker.picker_shape)
+	_skip_color_picker_update = false
 
 
 func _on_ColorSwitch_pressed() -> void:
