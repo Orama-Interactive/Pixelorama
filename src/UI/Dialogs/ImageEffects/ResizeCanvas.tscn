@@ -6,13 +6,14 @@
 [node name="ResizeCanvas" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
 title = "Resize Canvas"
+size = Vector2i(216, 486)
 script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 208.0
-offset_bottom = 380.0
+offset_bottom = 437.0
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -61,24 +62,24 @@ text = "Offset"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="XLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="XOffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "X:"
 
-[node name="XSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="XOffsetSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 max_value = 0.0
 suffix = "px"
 
-[node name="YLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="YOffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Y:"
 
-[node name="YSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="YOffsetSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -105,11 +106,11 @@ stretch_mode = 5
 show_behind_parent = true
 layout_mode = 2
 
-[connection signal="about_to_popup" from="." to="." method="_on_ResizeCanvas_about_to_show"]
-[connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/WidthValue" to="." method="_on_WidthValue_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/HeightValue" to="." method="_on_HeightValue_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/YSpinBox" to="." method="_on_YSpinBox_value_changed"]
-[connection signal="pressed" from="VBoxContainer/OptionsContainer/CenterButton" to="." method="_on_CenterButton_pressed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/WidthValue" to="." method="_on_width_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/HeightValue" to="." method="_on_height_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/XOffsetSpinBox" to="." method="_on_x_offset_spin_box_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/YOffsetSpinBox" to="." method="_on_y_offset_spin_box_value_changed"]
+[connection signal="pressed" from="VBoxContainer/OptionsContainer/CenterButton" to="." method="_on_center_button_pressed"]
