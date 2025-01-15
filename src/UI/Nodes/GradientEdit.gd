@@ -107,6 +107,7 @@ func _ready() -> void:
 	_create_cursors()
 	%InterpolationOptionButton.select(gradient.interpolation_mode)
 	%ColorSpaceOptionButton.select(gradient.interpolation_color_space)
+	%ToolsMenuButton.get_popup().index_pressed.connect(_on_tools_menu_button_index_pressed)
 
 
 func _create_cursors() -> void:
@@ -203,8 +204,19 @@ func _on_color_space_option_button_item_selected(index: Gradient.ColorSpace) -> 
 	updated.emit(gradient, continuous_change)
 
 
-func _on_DivideButton_pressed() -> void:
-	divide_dialog.popup_centered()
+func _on_tools_menu_button_index_pressed(index: int) -> void:
+	if index == 0:  # Reverse
+		gradient.reverse()
+		_create_cursors()
+		updated.emit(gradient, continuous_change)
+	elif index == 1:  # Evenly distribute points
+		var point_count := gradient.get_point_count()
+		for i in range(point_count):
+			gradient.set_offset(i, 1.0 / (point_count - 1) * i)
+		_create_cursors()
+		updated.emit(gradient, continuous_change)
+	elif index == 2:  # Divide into equal parts
+		divide_dialog.popup_centered()
 
 
 func _on_DivideConfirmationDialog_confirmed() -> void:
