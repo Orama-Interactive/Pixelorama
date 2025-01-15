@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn4aw27dj7pwi"]
+[gd_scene load_steps=4 format=3 uid="uid://bn4aw27dj7pwi"]
 
 [ext_resource type="Script" path="res://src/UI/Nodes/GradientEdit.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cis71foi5jt31" path="res://assets/graphics/misc/settings.svg" id="2_2dyyb"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_y6708"]
 
 [node name="GradientEdit" type="VBoxContainer"]
 anchors_preset = 15
@@ -11,6 +12,24 @@ script = ExtResource("1")
 
 [node name="InterpolationContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="OffsetValueSlider" type="TextureProgressBar" parent="InterpolationContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 1.0
+step = 0.001
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("2_y6708")
+snap_step = 0.1
 
 [node name="InterpolationOptionButton" type="OptionButton" parent="InterpolationContainer"]
 unique_name_in_owner = true
@@ -61,17 +80,6 @@ layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 1
 
-[node name="Value" type="Label" parent="TextureRect"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -7.0
-offset_right = 20.0
-offset_bottom = 7.0
-
 [node name="Popup" type="PopupPanel" parent="."]
 unresizable = false
 borderless = false
@@ -118,6 +126,7 @@ mouse_default_cursor_shape = 2
 text = "Add point at the end"
 
 [connection signal="resized" from="." to="." method="_on_GradientEdit_resized"]
+[connection signal="value_changed" from="InterpolationContainer/OffsetValueSlider" to="." method="_on_offset_value_slider_value_changed"]
 [connection signal="item_selected" from="InterpolationContainer/InterpolationOptionButton" to="." method="_on_InterpolationOptionButton_item_selected"]
 [connection signal="item_selected" from="InterpolationContainer/ColorSpaceOptionButton" to="." method="_on_color_space_option_button_item_selected"]
 [connection signal="color_changed" from="Popup/ColorPicker" to="." method="_on_ColorPicker_color_changed"]

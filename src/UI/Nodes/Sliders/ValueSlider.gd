@@ -255,6 +255,11 @@ func _confirm_text(confirm := true) -> void:
 	_reset_display(true)
 
 
+func set_value_no_signal_update_display(new_value: float) -> void:
+	set_value_no_signal(new_value)
+	_reset_display()
+
+
 func _reset_display(theme_has_changed := false) -> void:
 	_line_edit.selecting_enabled = false  # Remove the selection
 	_line_edit.editable = false

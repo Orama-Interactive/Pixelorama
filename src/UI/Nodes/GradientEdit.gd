@@ -7,11 +7,21 @@ extends Control
 signal updated(gradient: Gradient, cc: bool)
 
 var continuous_change := true
-var active_cursor: GradientCursor  ## Showing a color picker popup to change a cursor's color
+var active_cursor: GradientCursor:  ## Showing a color picker popup to change a cursor's color
+	set(value):
+		active_cursor = value
+		if is_instance_valid(active_cursor):
+			await get_tree().process_frame
+			offset_value_slider.set_value_no_signal_update_display(
+				active_cursor.get_cursor_offset()
+			)
+		for i in texture_rect.get_children():
+			i.queue_redraw()
 var texture := GradientTexture2D.new()
 var gradient := Gradient.new()
 
 @onready var x_offset: float = size.x - GradientCursor.WIDTH
+@onready var offset_value_slider := %OffsetValueSlider as ValueSlider
 @onready var texture_rect := $TextureRect as TextureRect
 @onready var color_picker := $Popup.get_node("ColorPicker") as ColorPicker
 @onready var divide_dialog := $DivideConfirmationDialog as ConfirmationDialog
@@ -27,28 +37,39 @@ class GradientCursor:
 	var sliding := false
 
 	@onready var parent: TextureRect = get_parent()
-	@onready var grand_parent: Container = parent.get_parent()
-	@onready var label: Label = parent.get_node("Value")
+	@onready var grand_parent: GradientEditNode = parent.get_parent()
 
 	func _ready() -> void:
-		position = Vector2(0, 15)
-		size = Vector2(WIDTH, 15)
+		size = Vector2(WIDTH, get_parent().size.y)
 
 	func _draw() -> void:
 		var polygon := PackedVector2Array(
 			[
-				Vector2(0, 5),
-				Vector2(WIDTH / 2.0, 0),
-				Vector2(WIDTH, 5),
-				Vector2(WIDTH, 15),
-				Vector2(0, 15),
-				Vector2(0, 5)
+				Vector2(0, size.y * 0.75),
+				Vector2(WIDTH * 0.5, size.y * 0.5),
+				Vector2(WIDTH, size.y * 0.75),
+				Vector2(WIDTH, size.y),
+				Vector2(0, size.y),
+				Vector2(0, size.y * 0.75)
 			]
 		)
 		var c := color
 		c.a = 1.0
 		draw_colored_polygon(polygon, c)
-		draw_polyline(polygon, Color(0.0, 0.0, 0.0) if color.v > 0.5 else Color(1.0, 1.0, 1.0))
+		var outline_color := Color.BLACK if (color.get_luminance() > 0.5) else Color.WHITE
+		draw_polyline(polygon, outline_color)
+		draw_dashed_line(Vector2(WIDTH * 0.5, 0), Vector2(WIDTH * 0.5, size.y * 0.5), outline_color)
+		# Draw the TRIANGLE (house roof) shape
+		if grand_parent.active_cursor == self:
+			var active_polygon: PackedVector2Array = PackedVector2Array(
+				[
+					Vector2(0, size.y * 0.75),
+					Vector2(WIDTH * 0.5, size.y * 0.5),
+					Vector2(WIDTH, size.y * 0.75),
+					Vector2(0, size.y * 0.75)
+				]
+			)
+			draw_colored_polygon(active_polygon, outline_color)
 
 	func _gui_input(ev: InputEvent) -> void:
 		if ev is InputEventMouseButton:
@@ -56,35 +77,45 @@ class GradientCursor:
 				if ev.double_click:
 					grand_parent.select_color(self, ev.global_position)
 				elif ev.pressed:
+					grand_parent.active_cursor = self
 					grand_parent.continuous_change = false
 					sliding = true
-					label.visible = true
-					label.text = "%.03f" % get_caret_column()
 				else:
 					sliding = false
-					label.visible = false
 			elif (
 				ev.button_index == MOUSE_BUTTON_RIGHT
 				and grand_parent.get_sorted_cursors().size() > 2
 			):
+				var node_index := get_index()
 				parent.remove_child(self)
+				queue_free()
+				if grand_parent.active_cursor == self:
+					if node_index > 0:
+						node_index -= 1
+					grand_parent.active_cursor = parent.get_child(node_index)
 				grand_parent.continuous_change = false
 				grand_parent.update_from_value()
-				queue_free()
 		elif (
 			ev is InputEventMouseMotion
 			and (ev.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0
 			and sliding
 		):
-			position.x += get_local_mouse_position().x
-			if ev.ctrl_pressed:
-				position.x = (roundi(get_caret_column() * 20.0) * 0.05 * (parent.size.x - WIDTH))
-			position.x = mini(maxi(0, position.x), parent.size.x - size.x)
-			grand_parent.update_from_value()
-			label.text = "%.03f" % get_caret_column()
+			move_to(position.x + get_local_mouse_position().x, true, ev.ctrl_pressed)
 
-	func get_caret_column() -> float:
+	func move_to(pos: float, update_slider: bool, snap := false) -> void:
+		position.x = pos
+		if snap:
+			position.x = (roundi(get_cursor_offset() * 20.0) * 0.05 * (parent.size.x - WIDTH))
+		position.x = mini(maxi(0, position.x), parent.size.x - size.x)
+		grand_parent.update_from_value()
+		if update_slider:
+			grand_parent.offset_value_slider.value = get_cursor_offset()
+
+	func get_cursor_offset() -> float:
 		return position.x / (parent.size.x - WIDTH)
+
+	func get_cursor_position_from_offset(offset: float) -> float:
+		return offset * (parent.size.x - WIDTH)
 
 	func set_color(c: Color) -> void:
 		color = c
@@ -141,12 +172,12 @@ func update_from_value() -> void:
 func add_cursor(x: float, color: Color) -> void:
 	var cursor := GradientCursor.new()
 	texture_rect.add_child(cursor)
+	active_cursor = cursor
 	cursor.position.x = x
 	cursor.color = color
 
 
 func select_color(cursor: GradientCursor, pos: Vector2) -> void:
-	active_cursor = cursor
 	color_picker.color = cursor.color
 	if pos.x > global_position.x + (size.x / 2.0):
 		pos.x = global_position.x + size.x
@@ -192,6 +223,12 @@ func _on_GradientEdit_resized() -> void:
 		return
 	x_offset = size.x - GradientCursor.WIDTH
 	_create_cursors()
+
+
+func _on_offset_value_slider_value_changed(value: float) -> void:
+	var cursor_pos := active_cursor.get_cursor_position_from_offset(value)
+	if cursor_pos != active_cursor.get_cursor_offset():
+		active_cursor.move_to(cursor_pos, false)
 
 
 func _on_InterpolationOptionButton_item_selected(index: Gradient.InterpolationMode) -> void:
