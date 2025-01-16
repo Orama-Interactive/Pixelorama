@@ -15,6 +15,7 @@ layout_mode = 2
 
 [node name="OffsetValueSlider" type="TextureProgressBar" parent="InterpolationContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -38,6 +39,7 @@ size_flags_horizontal = 3
 tooltip_text = "Interpolation"
 mouse_default_cursor_shape = 2
 selected = 0
+fit_to_longest_item = false
 item_count = 3
 popup/item_0/text = "Linear"
 popup/item_1/text = "Constant"
@@ -52,6 +54,7 @@ size_flags_horizontal = 3
 tooltip_text = "Color space"
 mouse_default_cursor_shape = 2
 selected = 0
+fit_to_longest_item = false
 item_count = 3
 popup/item_0/text = "sRGB"
 popup/item_1/text = "Linear sRGB"
@@ -73,6 +76,14 @@ popup/item_1/text = "Evenly distribute points"
 popup/item_1/id = 1
 popup/item_2/text = "Divide into equal parts"
 popup/item_2/id = 2
+
+[node name="PresetsMenuButton" type="MenuButton" parent="InterpolationContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Presets"
+flat = false
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(0, 30)
@@ -129,5 +140,6 @@ text = "Add point at the end"
 [connection signal="value_changed" from="InterpolationContainer/OffsetValueSlider" to="." method="_on_offset_value_slider_value_changed"]
 [connection signal="item_selected" from="InterpolationContainer/InterpolationOptionButton" to="." method="_on_InterpolationOptionButton_item_selected"]
 [connection signal="item_selected" from="InterpolationContainer/ColorSpaceOptionButton" to="." method="_on_color_space_option_button_item_selected"]
+[connection signal="about_to_popup" from="InterpolationContainer/PresetsMenuButton" to="." method="_on_presets_menu_button_about_to_popup"]
 [connection signal="color_changed" from="Popup/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
 [connection signal="confirmed" from="DivideConfirmationDialog" to="." method="_on_DivideConfirmationDialog_confirmed"]

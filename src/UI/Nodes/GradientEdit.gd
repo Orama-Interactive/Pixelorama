@@ -19,9 +19,14 @@ var active_cursor: GradientCursor:  ## Showing a color picker popup to change a 
 			i.queue_redraw()
 var texture := GradientTexture2D.new()
 var gradient := Gradient.new()
+var presets: Array[Gradient] = []
 
 @onready var x_offset: float = size.x - GradientCursor.WIDTH
 @onready var offset_value_slider := %OffsetValueSlider as ValueSlider
+@onready var interpolation_option_button: OptionButton = %InterpolationOptionButton
+@onready var color_space_option_button: OptionButton = %ColorSpaceOptionButton
+@onready var tools_menu_button: MenuButton = %ToolsMenuButton
+@onready var presets_menu_button: MenuButton = %PresetsMenuButton
 @onready var texture_rect := $TextureRect as TextureRect
 @onready var color_picker := $Popup.get_node("ColorPicker") as ColorPicker
 @onready var divide_dialog := $DivideConfirmationDialog as ConfirmationDialog
@@ -131,14 +136,23 @@ class GradientCursor:
 
 func _init() -> void:
 	texture.gradient = gradient
+	presets.append(Gradient.new())  # Left to right
+	presets.append(Gradient.new())  # Left to transparent
+	presets.append(Gradient.new())  # Black to white
 
 
 func _ready() -> void:
 	texture_rect.texture = texture
 	_create_cursors()
-	%InterpolationOptionButton.select(gradient.interpolation_mode)
-	%ColorSpaceOptionButton.select(gradient.interpolation_color_space)
-	%ToolsMenuButton.get_popup().index_pressed.connect(_on_tools_menu_button_index_pressed)
+	interpolation_option_button.select(gradient.interpolation_mode)
+	color_space_option_button.select(gradient.interpolation_color_space)
+	tools_menu_button.get_popup().index_pressed.connect(_on_tools_menu_button_index_pressed)
+	presets_menu_button.get_popup().index_pressed.connect(_on_presets_menu_button_index_pressed)
+	for preset in presets:
+		var grad_texture := GradientTexture2D.new()
+		grad_texture.height = 32
+		grad_texture.gradient = preset
+		presets_menu_button.get_popup().add_icon_item(grad_texture, "")
 
 
 func _create_cursors() -> void:
@@ -254,6 +268,22 @@ func _on_tools_menu_button_index_pressed(index: int) -> void:
 		updated.emit(gradient, continuous_change)
 	elif index == 2:  # Divide into equal parts
 		divide_dialog.popup_centered()
+
+
+func _on_presets_menu_button_about_to_popup() -> void:
+	# Update left to right and left to transparent gradients
+	presets[0].set_color(0, Tools.get_assigned_color(MOUSE_BUTTON_LEFT))
+	presets[0].set_color(1, Tools.get_assigned_color(MOUSE_BUTTON_RIGHT))
+	presets[1].set_color(0, Tools.get_assigned_color(MOUSE_BUTTON_LEFT))
+	presets[1].set_color(1, Color(0, 0, 0, 0))
+
+
+func _on_presets_menu_button_index_pressed(index: int) -> void:
+	var item_icon := presets_menu_button.get_popup().get_item_icon(index) as GradientTexture2D
+	gradient = item_icon.gradient.duplicate()
+	texture.gradient = gradient
+	_create_cursors()
+	updated.emit(gradient, continuous_change)
 
 
 func _on_DivideConfirmationDialog_confirmed() -> void:
