@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/3DTools/3DShapeEdit.gd" id="2"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4"]
 [ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="5"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="6"]
@@ -521,7 +521,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-selected = 0
 
 [node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
 layout_mode = 2
