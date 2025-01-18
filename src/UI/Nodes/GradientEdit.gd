@@ -6,6 +6,8 @@ extends Control
 
 signal updated(gradient: Gradient, cc: bool)
 
+const GRADIENT_DIR := "user://gradients"
+
 var continuous_change := true
 var active_cursor: GradientCursor:  ## Showing a color picker popup to change a cursor's color
 	set(value):
@@ -139,6 +141,12 @@ func _init() -> void:
 	presets.append(Gradient.new())  # Left to right
 	presets.append(Gradient.new())  # Left to transparent
 	presets.append(Gradient.new())  # Black to white
+	for file_name in DirAccess.get_files_at(GRADIENT_DIR):
+		var file := FileAccess.open(GRADIENT_DIR.path_join(file_name), FileAccess.READ)
+		var json := file.get_as_text()
+		var dict = JSON.parse_string(json)
+		if typeof(dict) == TYPE_DICTIONARY:
+			presets.append(deserialize_gradient(dict))
 
 
 func _ready() -> void:
@@ -228,6 +236,29 @@ func set_gradient_texture(new_texture: GradientTexture2D) -> void:
 	gradient = texture.gradient
 
 
+func serialize_gradient(grad: Gradient) -> Dictionary:
+	var dict := {}
+	dict["offsets"] = grad.offsets
+	dict["colors"] = var_to_str(grad.colors)
+	dict["interpolation_mode"] = grad.interpolation_mode
+	dict["interpolation_color_space"] = grad.interpolation_color_space
+	return dict
+
+
+func deserialize_gradient(dict: Dictionary) -> Gradient:
+	var new_gradient := Gradient.new()
+	new_gradient.offsets = dict.get("offsets", new_gradient.offsets)
+	var colors = str_to_var(dict.get("colors"))
+	new_gradient.colors = colors
+	new_gradient.interpolation_mode = dict.get(
+		"interpolation_mode", new_gradient.interpolation_mode
+	)
+	new_gradient.interpolation_color_space = dict.get(
+		"interpolation_color_space", new_gradient.interpolation_color_space
+	)
+	return new_gradient
+
+
 func _on_ColorPicker_color_changed(color: Color) -> void:
 	active_cursor.set_color(color)
 
@@ -268,6 +299,20 @@ func _on_tools_menu_button_index_pressed(index: int) -> void:
 		updated.emit(gradient, continuous_change)
 	elif index == 2:  # Divide into equal parts
 		divide_dialog.popup_centered()
+
+
+func _on_save_to_presets_button_pressed() -> void:
+	presets.append(gradient)
+	var grad_texture := GradientTexture2D.new()
+	grad_texture.height = 32
+	grad_texture.gradient = gradient
+	presets_menu_button.get_popup().add_icon_item(grad_texture, "")
+	if not DirAccess.dir_exists_absolute(GRADIENT_DIR):
+		DirAccess.make_dir_absolute(GRADIENT_DIR)
+	var json := JSON.stringify(serialize_gradient(gradient))
+	var file_name := GRADIENT_DIR.path_join(str(floori(Time.get_unix_time_from_system())))
+	var file := FileAccess.open(file_name, FileAccess.WRITE)
+	file.store_string(json)
 
 
 func _on_presets_menu_button_about_to_popup() -> void:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn4aw27dj7pwi"]
+[gd_scene load_steps=5 format=3 uid="uid://bn4aw27dj7pwi"]
 
 [ext_resource type="Script" path="res://src/UI/Nodes/GradientEdit.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cis71foi5jt31" path="res://assets/graphics/misc/settings.svg" id="2_2dyyb"]
 [ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_y6708"]
+[ext_resource type="Texture2D" uid="uid://cvc120a27s57m" path="res://assets/graphics/misc/save.svg" id="4_b5s6b"]
 
 [node name="GradientEdit" type="VBoxContainer"]
 anchors_preset = 15
@@ -77,6 +78,12 @@ popup/item_1/id = 1
 popup/item_2/text = "Divide into equal parts"
 popup/item_2/id = 2
 
+[node name="SaveToPresetsButton" type="Button" parent="InterpolationContainer"]
+layout_mode = 2
+tooltip_text = "Save to presets"
+mouse_default_cursor_shape = 2
+icon = ExtResource("4_b5s6b")
+
 [node name="PresetsMenuButton" type="MenuButton" parent="InterpolationContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -140,6 +147,7 @@ text = "Add point at the end"
 [connection signal="value_changed" from="InterpolationContainer/OffsetValueSlider" to="." method="_on_offset_value_slider_value_changed"]
 [connection signal="item_selected" from="InterpolationContainer/InterpolationOptionButton" to="." method="_on_InterpolationOptionButton_item_selected"]
 [connection signal="item_selected" from="InterpolationContainer/ColorSpaceOptionButton" to="." method="_on_color_space_option_button_item_selected"]
+[connection signal="pressed" from="InterpolationContainer/SaveToPresetsButton" to="." method="_on_save_to_presets_button_pressed"]
 [connection signal="about_to_popup" from="InterpolationContainer/PresetsMenuButton" to="." method="_on_presets_menu_button_about_to_popup"]
 [connection signal="color_changed" from="Popup/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
 [connection signal="confirmed" from="DivideConfirmationDialog" to="." method="_on_DivideConfirmationDialog_confirmed"]
