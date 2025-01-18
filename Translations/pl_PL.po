@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-01-18 17:12\n"
+"PO-Revision-Date: 2025-01-18 18:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -797,7 +797,7 @@ msgstr "Stała"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Przestrzeń barw"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1072,15 +1072,15 @@ msgid "Gradient Map"
 msgstr "Mapa gradientu"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Interpolacja"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Odwróć"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "Równie rozdziel punkty"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
@@ -1099,7 +1099,7 @@ msgstr "Gdy włączone, ostatni punkt będzie dodawany na końcu gradientu.\n"
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Zapisz w ustawieniach predefiniowanych"
 
 msgid "Shape:"
 msgstr "Kształt:"
