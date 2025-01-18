@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2025-01-01 18:26\n"
+"PO-Revision-Date: 2025-01-18 17:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -796,8 +796,8 @@ msgid "Constant"
 msgstr "Constant"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
-msgid "Color space:"
-msgstr "Espace colorimétrique :"
+msgid "Color space"
+msgstr ""
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1071,6 +1071,18 @@ msgstr "Dégradé"
 msgid "Gradient Map"
 msgstr "Carte de dégradés"
 
+msgid "Interpolation"
+msgstr ""
+
+#. Verb, refers to the action of reversing something.
+msgid "Reverse"
+msgstr ""
+
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+msgid "Evenly distribute points"
+msgstr ""
+
+#. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
 msgstr "Diviser en parties égales"
 
@@ -1084,6 +1096,10 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr "Si cette option est activée, le dernier point est ajouté à la fin du dégradé.\n"
 "Désactivez-la si vous souhaitez convertir le dégradé pour avoir une interpolation constante, afin que la dernière couleur soit prise en compte."
+
+#. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
+msgid "Save to presets"
+msgstr ""
 
 msgid "Shape:"
 msgstr "Forme :"
