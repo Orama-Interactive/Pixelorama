@@ -80,7 +80,7 @@ func _calculate_pivot() -> void:
 func commit_action(cel: Image, project := Global.current_project) -> void:
 	var angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
 	var init_angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.INIT_ANGLE))
-
+	var rotation_algorithm := type_option_button.get_selected_id()
 	var selection_tex: ImageTexture
 	var image := Image.new()
 	image.copy_from(cel)
@@ -88,7 +88,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		var selection := project.selection_map.return_cropped_copy(project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
 
-		if !_type_is_shader():
+		if not DrawingAlgos.type_is_shader(rotation_algorithm):
 			var blank := project.new_empty_image()
 			cel.blit_rect_mask(
 				blank, selection, Rect2i(Vector2i.ZERO, cel.get_size()), Vector2i.ZERO
@@ -97,51 +97,32 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 			image.blit_rect_mask(
 				blank, selection, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO
 			)
-	if _type_is_shader():
-		var shader := rotxel_shader
-		var params := {
-			"transformation_matrix": Transform2D(angle, Vector2.ZERO),
-			"selection_tex": selection_tex,
-			"pivot": pivot / Vector2(cel.get_size()),
-			"preview": true
-		}
-		match type_option_button.get_selected_id():
-			ROTXEL_SMEAR:
-				params["ending_angle"] = angle
-				params["initial_angle"] = init_angle
-				params["tolerance"] = tolerance_slider.value
-			CLEANEDGE:
-				shader = DrawingAlgos.clean_edge_shader
-			OMNISCALE:
-				shader = DrawingAlgos.omniscale_shader
-			NNS:
-				shader = nn_shader
+	var transformation_matrix := Transform2D(angle, Vector2.ZERO)
+	var params := {
+		"transformation_matrix": transformation_matrix,
+		"pivot": pivot,
+		"selection_tex": selection_tex,
+		"initial_angle": init_angle,
+		"ending_angle": angle,
+		"tolerance": tolerance_slider.value,
+		"preview": true
+	}
+	if DrawingAlgos.type_is_shader(rotation_algorithm):
 		if !has_been_confirmed:
+			params["pivot"] /= Vector2(cel.get_size())
 			for param in params:
 				preview.material.set_shader_parameter(param, params[param])
 		else:
 			params["preview"] = false
-			var gen := ShaderImageEffect.new()
-			gen.generate_image(cel, shader, params, project.size)
+			DrawingAlgos.transform(cel, params, rotation_algorithm, project)
 	else:
-		match type_option_button.get_selected_id():
-			ROTXEL:
-				DrawingAlgos.rotxel(image, angle, pivot)
-			NN:
-				DrawingAlgos.nn_rotate(image, angle, pivot)
-			URD:
-				DrawingAlgos.fake_rotsprite(image, angle, pivot)
-
+		DrawingAlgos.transform(image, params, rotation_algorithm, project)
 		if project.has_selection and selection_checkbox.button_pressed:
 			cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 		else:
 			cel.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 		if cel is ImageExtended:
 			cel.convert_rgb_to_indexed()
-
-
-func _type_is_shader() -> bool:
-	return type_option_button.get_selected_id() <= NNS
 
 
 func _on_TypeOptionButton_item_selected(_id: int) -> void:

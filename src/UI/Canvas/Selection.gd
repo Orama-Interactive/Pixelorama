@@ -46,6 +46,7 @@ var undo_data: Dictionary
 var gizmos: Array[Gizmo] = []
 var dragged_gizmo: Gizmo = null
 var angle := 0.0
+var rotation_algorithm := DrawingAlgos.RotationAlgorithm.NN
 var content_pivot := Vector2.ZERO
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var resize_keep_ratio := false
@@ -405,7 +406,9 @@ func resize_selection() -> void:
 				)
 		else:
 			content_pivot = original_big_bounding_rectangle.size / 2.0
-			DrawingAlgos.nn_rotate(preview_image, angle, content_pivot)
+			var transformation_matrix := Transform2D(angle, Vector2.ZERO)
+			var params := {"transformation_matrix": transformation_matrix, "pivot": content_pivot}
+			DrawingAlgos.transform(preview_image, params, rotation_algorithm)
 			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 			if temp_rect.size.x < 0:
 				preview_image.flip_x()
@@ -416,7 +419,9 @@ func resize_selection() -> void:
 	Global.current_project.selection_map.copy_from(original_bitmap)
 
 	var bitmap_pivot := original_big_bounding_rectangle.get_center()
-	DrawingAlgos.nn_rotate(Global.current_project.selection_map, angle, bitmap_pivot)
+	var bitmap_matrix := Transform2D(angle, Vector2.ZERO)
+	var bitmap_params := {"transformation_matrix": bitmap_matrix, "pivot": bitmap_pivot}
+	DrawingAlgos.transform(Global.current_project.selection_map, bitmap_params, rotation_algorithm)
 	Global.current_project.selection_map.resize_bitmap_values(
 		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
 	)
@@ -552,7 +557,11 @@ func transform_content_confirm() -> void:
 				src.crop(preview_image.get_width(), preview_image.get_height())
 				tilemap.apply_resizing_to_image(src, selected_cells, big_bounding_rectangle)
 			else:
-				DrawingAlgos.nn_rotate(src, angle, content_pivot)
+				var transformation_matrix := Transform2D(angle, Vector2.ZERO)
+				var params := {
+					"transformation_matrix": transformation_matrix, "pivot": content_pivot
+				}
+				DrawingAlgos.transform(src, params, rotation_algorithm)
 				src.resize(
 					preview_image.get_width(), preview_image.get_height(), Image.INTERPOLATE_NEAREST
 				)

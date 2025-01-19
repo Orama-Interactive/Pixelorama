@@ -1,5 +1,6 @@
 extends Node
 
+enum RotationAlgorithm { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 ## Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
@@ -14,6 +15,8 @@ var omniscale_shader: Shader:
 		if omniscale_shader == null:
 			omniscale_shader = load("res://src/Shaders/Effects/Rotation/OmniScale.gdshader")
 		return omniscale_shader
+var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
+var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 
 
 ## Blends canvas layers into passed image starting from the origin position
@@ -268,6 +271,41 @@ func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 			scaled.set_pixel(xs + 1, ys + 1, f if (fh and !bf and !dh) else e)
 
 	return scaled
+
+
+func transform(
+	image: Image,
+	params: Dictionary,
+	algorithm: RotationAlgorithm,
+	project := Global.current_project
+) -> void:
+	var pivot: Vector2 = params.get("pivot", image.get_size() / 2)
+	if type_is_shader(algorithm):
+		params["pivot"] = pivot / Vector2(image.get_size())
+		var shader := rotxel_shader
+		match algorithm:
+			RotationAlgorithm.CLEANEDGE:
+				shader = clean_edge_shader
+			RotationAlgorithm.OMNISCALE:
+				shader = omniscale_shader
+			RotationAlgorithm.NNS:
+				shader = nn_shader
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(image, shader, params, project.size)
+	else:
+		var transformation_matrix: Transform2D = params.get("transformation_matrix", Transform2D())
+		var angle := transformation_matrix.get_rotation()
+		match algorithm:
+			RotationAlgorithm.ROTXEL:
+				rotxel(image, angle, pivot)
+			RotationAlgorithm.NN:
+				nn_rotate(image, angle, pivot)
+			RotationAlgorithm.URD:
+				fake_rotsprite(image, angle, pivot)
+
+
+func type_is_shader(algorithm: RotationAlgorithm) -> bool:
+	return algorithm <= RotationAlgorithm.NNS
 
 
 func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
