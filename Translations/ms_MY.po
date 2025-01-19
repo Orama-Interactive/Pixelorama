@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-01-18 17:12\n"
+"PO-Revision-Date: 2025-01-19 06:29\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -793,7 +793,7 @@ msgstr ""
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Ruang warna"
 
 #. A type of color space.
 msgid "Linear sRGB"
