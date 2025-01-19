@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-01-18 17:12\n"
+"PO-Revision-Date: 2025-01-19 19:12\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -226,7 +226,7 @@ msgstr "Başlangıç açısı:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Darbeleri Sar"
 
 msgid "Clear"
 msgstr "Temizle"
@@ -798,7 +798,7 @@ msgstr "Sabit"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Renk uzayı"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1074,15 +1074,15 @@ msgid "Gradient Map"
 msgstr "Gradyan Haritası"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Ara değerleme"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Ters"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "Noktaları eşit dağıt"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
@@ -1101,7 +1101,7 @@ msgstr "Bu etkinleştirilirse, son nokta gradnayın sonuna eklenir.\n"
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Önayarlara kaydet"
 
 msgid "Shape:"
 msgstr "Şekil:"
@@ -1197,24 +1197,24 @@ msgstr "Renk tonu efekti katsayısı:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Renk Eğrileri"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Kanal:"
 
 msgid "Red"
-msgstr ""
+msgstr "Kırmızı"
 
 msgid "Green"
-msgstr ""
+msgstr "Yeşil"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Değer"
 
 msgid "Presets"
-msgstr ""
+msgstr "Ön Ayarlar"
 
 msgid "Apply"
 msgstr "Uygula"
@@ -1891,7 +1891,7 @@ msgstr "Etkinleştirilirse uygulama penceresi saydam olur. Başarımı etkiledi�
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Sahte ses sürücüsü kullan"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -2328,7 +2328,7 @@ msgstr "Hücre bağlantısını kaldır"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Sesi burada oynat"
 
 msgid "Properties"
 msgstr "Özellikler"
@@ -2371,7 +2371,7 @@ msgid "Tilemap"
 msgstr "Döşeme eşlemi"
 
 msgid "Audio"
-msgstr ""
+msgstr "Ses"
 
 msgid "Layers"
 msgstr "Katmanlar"
@@ -2408,7 +2408,7 @@ msgstr "Döşeme Eşlemi Katmanı Ekle"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Audio Layer"
-msgstr ""
+msgstr "Ses Katmanı Ekle"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2543,14 +2543,14 @@ msgstr "Grubu genişlet/daralt"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Ses dosyası:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Dosya yükle"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Karede oynat:"
 
 msgid "Palette"
 msgstr "Palet"
