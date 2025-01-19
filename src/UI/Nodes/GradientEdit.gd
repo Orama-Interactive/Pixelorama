@@ -21,14 +21,15 @@ var active_cursor: GradientCursor:  ## Showing a color picker popup to change a 
 			i.queue_redraw()
 var texture := GradientTexture2D.new()
 var gradient := Gradient.new()
-var presets: Array[Gradient] = []
+var presets: Array[Preset] = []
 
 @onready var x_offset: float = size.x - GradientCursor.WIDTH
 @onready var offset_value_slider := %OffsetValueSlider as ValueSlider
 @onready var interpolation_option_button: OptionButton = %InterpolationOptionButton
 @onready var color_space_option_button: OptionButton = %ColorSpaceOptionButton
 @onready var tools_menu_button: MenuButton = %ToolsMenuButton
-@onready var presets_menu_button: MenuButton = %PresetsMenuButton
+@onready var preset_list_button: Button = %PresetListButton
+@onready var presets_container: VBoxContainer = %PresetsContainer
 @onready var texture_rect := $TextureRect as TextureRect
 @onready var color_picker := $Popup.get_node("ColorPicker") as ColorPicker
 @onready var divide_dialog := $DivideConfirmationDialog as ConfirmationDialog
@@ -136,17 +137,17 @@ class GradientCursor:
 		set_color(data)
 
 
+class Preset:
+	var gradient: Gradient
+	var file_name := ""
+
+	func _init(_gradient: Gradient, _file_name := "") -> void:
+		gradient = _gradient
+		file_name = _file_name
+
+
 func _init() -> void:
 	texture.gradient = gradient
-	presets.append(Gradient.new())  # Left to right
-	presets.append(Gradient.new())  # Left to transparent
-	presets.append(Gradient.new())  # Black to white
-	for file_name in DirAccess.get_files_at(GRADIENT_DIR):
-		var file := FileAccess.open(GRADIENT_DIR.path_join(file_name), FileAccess.READ)
-		var json := file.get_as_text()
-		var dict = JSON.parse_string(json)
-		if typeof(dict) == TYPE_DICTIONARY:
-			presets.append(deserialize_gradient(dict))
 
 
 func _ready() -> void:
@@ -155,12 +156,6 @@ func _ready() -> void:
 	interpolation_option_button.select(gradient.interpolation_mode)
 	color_space_option_button.select(gradient.interpolation_color_space)
 	tools_menu_button.get_popup().index_pressed.connect(_on_tools_menu_button_index_pressed)
-	presets_menu_button.get_popup().index_pressed.connect(_on_presets_menu_button_index_pressed)
-	for preset in presets:
-		var grad_texture := GradientTexture2D.new()
-		grad_texture.height = 32
-		grad_texture.gradient = preset
-		presets_menu_button.get_popup().add_icon_item(grad_texture, "")
 
 
 func _create_cursors() -> void:
@@ -301,12 +296,31 @@ func _on_tools_menu_button_index_pressed(index: int) -> void:
 		divide_dialog.popup_centered()
 
 
+func _initialize_presets() -> void:
+	presets.clear()
+	for child in presets_container.get_children():
+		child.queue_free()
+	presets.append(Preset.new(Gradient.new()))  # Left to right
+	presets.append(Preset.new(Gradient.new()))  # Left to transparent
+	presets.append(Preset.new(Gradient.new()))  # Black to white
+	# Update left to right and left to transparent gradients
+	presets[0].gradient.set_color(0, Tools.get_assigned_color(MOUSE_BUTTON_LEFT))
+	presets[0].gradient.set_color(1, Tools.get_assigned_color(MOUSE_BUTTON_RIGHT))
+	presets[1].gradient.set_color(0, Tools.get_assigned_color(MOUSE_BUTTON_LEFT))
+	presets[1].gradient.set_color(1, Color(0, 0, 0, 0))
+	for file_name in DirAccess.get_files_at(GRADIENT_DIR):
+		var full_file_name := GRADIENT_DIR.path_join(file_name)
+		var file := FileAccess.open(full_file_name, FileAccess.READ)
+		var json := file.get_as_text()
+		var dict = JSON.parse_string(json)
+		if typeof(dict) == TYPE_DICTIONARY:
+			var preset_gradient := deserialize_gradient(dict)
+			presets.append(Preset.new(preset_gradient, full_file_name))
+	for preset in presets:
+		_create_preset_button(preset)
+
+
 func _on_save_to_presets_button_pressed() -> void:
-	presets.append(gradient)
-	var grad_texture := GradientTexture2D.new()
-	grad_texture.height = 32
-	grad_texture.gradient = gradient
-	presets_menu_button.get_popup().add_icon_item(grad_texture, "")
 	if not DirAccess.dir_exists_absolute(GRADIENT_DIR):
 		DirAccess.make_dir_absolute(GRADIENT_DIR)
 	var json := JSON.stringify(serialize_gradient(gradient))
@@ -315,20 +329,44 @@ func _on_save_to_presets_button_pressed() -> void:
 	file.store_string(json)
 
 
-func _on_presets_menu_button_about_to_popup() -> void:
-	# Update left to right and left to transparent gradients
-	presets[0].set_color(0, Tools.get_assigned_color(MOUSE_BUTTON_LEFT))
-	presets[0].set_color(1, Tools.get_assigned_color(MOUSE_BUTTON_RIGHT))
-	presets[1].set_color(0, Tools.get_assigned_color(MOUSE_BUTTON_LEFT))
-	presets[1].set_color(1, Color(0, 0, 0, 0))
+func _on_preset_list_button_pressed() -> void:
+	_initialize_presets()
+	var popup_panel := preset_list_button.get_child(0) as PopupPanel
+	var popup_position := preset_list_button.get_screen_position()
+	popup_position.y += preset_list_button.size.y + 4
+	popup_panel.popup(Rect2i(popup_position, Vector2i.ONE))
 
 
-func _on_presets_menu_button_index_pressed(index: int) -> void:
-	var item_icon := presets_menu_button.get_popup().get_item_icon(index) as GradientTexture2D
-	gradient = item_icon.gradient.duplicate()
-	texture.gradient = gradient
-	_create_cursors()
-	updated.emit(gradient, continuous_change)
+func _create_preset_button(preset: Preset) -> void:
+	var grad_texture := GradientTexture2D.new()
+	grad_texture.height = 32
+	grad_texture.gradient = preset.gradient
+	var gradient_button := Button.new()
+	gradient_button.icon = grad_texture
+	gradient_button.gui_input.connect(_on_preset_button_gui_input.bind(preset))
+	presets_container.add_child(gradient_button)
+
+
+func _on_preset_button_gui_input(event: InputEvent, preset: Preset) -> void:
+	if event is not InputEventMouseButton:
+		return
+	if event.pressed:
+		return
+	if event.button_index == MOUSE_BUTTON_LEFT:  # Select preset
+		gradient = preset.gradient.duplicate()
+		texture.gradient = gradient
+		_create_cursors()
+		updated.emit(gradient, continuous_change)
+		var popup_panel := preset_list_button.get_child(0) as PopupPanel
+		popup_panel.hide()
+	elif event.button_index == MOUSE_BUTTON_RIGHT or event.button_index == MOUSE_BUTTON_MIDDLE:
+		# Remove preset
+		if preset.file_name.is_empty():
+			return
+		DirAccess.remove_absolute(preset.file_name)
+		presets.erase(preset)
+		var button := presets_container.get_child(presets.find(preset)) as Button
+		button.queue_free()
 
 
 func _on_DivideConfirmationDialog_confirmed() -> void:

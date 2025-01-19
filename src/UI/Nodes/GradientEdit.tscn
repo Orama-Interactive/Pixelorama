@@ -84,13 +84,25 @@ tooltip_text = "Save to presets"
 mouse_default_cursor_shape = 2
 icon = ExtResource("4_b5s6b")
 
-[node name="PresetsMenuButton" type="MenuButton" parent="InterpolationContainer"]
+[node name="PresetListButton" type="Button" parent="InterpolationContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Presets"
-flat = false
+
+[node name="PopupPanel" type="PopupPanel" parent="InterpolationContainer/PresetListButton"]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InterpolationContainer/PresetListButton/PopupPanel"]
+custom_minimum_size = Vector2(100, 150)
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 104.0
+offset_bottom = 154.0
+
+[node name="PresetsContainer" type="VBoxContainer" parent="InterpolationContainer/PresetListButton/PopupPanel/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(0, 30)
@@ -148,6 +160,6 @@ text = "Add point at the end"
 [connection signal="item_selected" from="InterpolationContainer/InterpolationOptionButton" to="." method="_on_InterpolationOptionButton_item_selected"]
 [connection signal="item_selected" from="InterpolationContainer/ColorSpaceOptionButton" to="." method="_on_color_space_option_button_item_selected"]
 [connection signal="pressed" from="InterpolationContainer/SaveToPresetsButton" to="." method="_on_save_to_presets_button_pressed"]
-[connection signal="about_to_popup" from="InterpolationContainer/PresetsMenuButton" to="." method="_on_presets_menu_button_about_to_popup"]
+[connection signal="pressed" from="InterpolationContainer/PresetListButton" to="." method="_on_preset_list_button_pressed"]
 [connection signal="color_changed" from="Popup/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
 [connection signal="confirmed" from="DivideConfirmationDialog" to="." method="_on_DivideConfirmationDialog_confirmed"]
