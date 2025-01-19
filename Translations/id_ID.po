@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-01-18 17:13\n"
+"PO-Revision-Date: 2025-01-19 06:29\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -798,7 +798,7 @@ msgstr "Tetapan"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Ruang warna"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1074,7 +1074,7 @@ msgid "Gradient Map"
 msgstr "Peta Gradien"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Interpolasi"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
