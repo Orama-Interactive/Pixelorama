@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-01-18 17:12\n"
+"PO-Revision-Date: 2025-01-20 11:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -170,15 +170,15 @@ msgstr "Процент"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Цветовой режим:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Цветовой режим"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Индексированный цвет"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -797,7 +797,7 @@ msgstr "Константа"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Цветовое пространство"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1073,15 +1073,15 @@ msgid "Gradient Map"
 msgstr "Карта градиента"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Интерполяция"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Обратный"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "Равномерно распределять точки"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
@@ -1099,7 +1099,7 @@ msgstr "Если включено, последняя точка добавля�
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Сохранить в пресеты"
 
 msgid "Shape:"
 msgstr "Форма:"
@@ -1195,24 +1195,24 @@ msgstr "Параметр эффекта тонировки:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Цветовые кривые"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Канал:"
 
 msgid "Red"
-msgstr ""
+msgstr "Красный"
 
 msgid "Green"
-msgstr ""
+msgstr "Зеленый"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Значение"
 
 msgid "Presets"
-msgstr ""
+msgstr "Пресеты"
 
 msgid "Apply"
 msgstr "Применить"
@@ -1617,7 +1617,9 @@ msgstr "Эллипс\n\n"
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Текст\n\n"
+"%s для левой кнопки мыши\n"
+"%s для правой кнопки мыши"
 
 msgid "Rectangle"
 msgstr "Прямоугольник"
@@ -1885,7 +1887,7 @@ msgstr "Если этот параметр включен, окно прилож
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Использовать пустой аудиодрайвер"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -2137,30 +2139,30 @@ msgstr "Пересечение выделений"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Стиль:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Стандартный"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Жирный"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Курсив"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Полужирный курсив"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Сглаживание"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Оттенки серого"
 
 msgid "Mirroring"
 msgstr "Зеркало"
@@ -2322,7 +2324,7 @@ msgstr "Отвязать ячейки"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Воспроизвести аудио здесь"
 
 msgid "Properties"
 msgstr "Свойства"
@@ -2365,7 +2367,7 @@ msgid "Tilemap"
 msgstr ""
 
 msgid "Audio"
-msgstr ""
+msgstr "Аудио"
 
 msgid "Layers"
 msgstr "Слои"
@@ -2402,7 +2404,7 @@ msgstr ""
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Audio Layer"
-msgstr ""
+msgstr "Добавить слой аудио"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2537,10 +2539,10 @@ msgstr "Развернуть/свернуть группу"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Аудиофайл:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Загрузить файл"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
