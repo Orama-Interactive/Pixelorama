@@ -114,9 +114,9 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 				preview.material.set_shader_parameter(param, params[param])
 		else:
 			params["preview"] = false
-			DrawingAlgos.transform(cel, params, rotation_algorithm, project)
+			DrawingAlgos.transform(cel, params, rotation_algorithm)
 	else:
-		DrawingAlgos.transform(image, params, rotation_algorithm, project)
+		DrawingAlgos.transform(image, params, rotation_algorithm)
 		if project.has_selection and selection_checkbox.button_pressed:
 			cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 		else:

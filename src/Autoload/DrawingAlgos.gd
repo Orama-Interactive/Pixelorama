@@ -274,12 +274,21 @@ func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 
 
 func transform(
-	image: Image,
-	params: Dictionary,
-	algorithm: RotationAlgorithm,
-	project := Global.current_project
+	image: Image, params: Dictionary, algorithm: RotationAlgorithm, expand := false
 ) -> void:
+	var transformation_matrix: Transform2D = params.get("transformation_matrix", Transform2D())
 	var pivot: Vector2 = params.get("pivot", image.get_size() / 2)
+	if expand:
+		var image_rect := Rect2(Vector2.ZERO, image.get_size())
+		var new_image_rect := image_rect * transformation_matrix as Rect2i
+		var new_image_size := new_image_rect.size
+		if image.get_size() != new_image_size:
+			pivot = new_image_size / 2 - (Vector2i(pivot) - image.get_size() / 2)
+			var tmp_image := Image.create_empty(
+				new_image_size.x, new_image_size.y, image.has_mipmaps(), image.get_format()
+			)
+			tmp_image.blit_rect(image, image_rect, (new_image_size - image.get_size()) / 2)
+			image.copy_from(tmp_image)
 	if type_is_shader(algorithm):
 		params["pivot"] = pivot / Vector2(image.get_size())
 		var shader := rotxel_shader
@@ -291,9 +300,8 @@ func transform(
 			RotationAlgorithm.NNS:
 				shader = nn_shader
 		var gen := ShaderImageEffect.new()
-		gen.generate_image(image, shader, params, project.size)
+		gen.generate_image(image, shader, params, image.get_size())
 	else:
-		var transformation_matrix: Transform2D = params.get("transformation_matrix", Transform2D())
 		var angle := transformation_matrix.get_rotation()
 		match algorithm:
 			RotationAlgorithm.ROTXEL:
