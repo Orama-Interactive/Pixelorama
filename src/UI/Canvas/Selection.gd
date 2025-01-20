@@ -431,7 +431,9 @@ func resize_selection() -> void:
 
 
 func _gizmo_rotate() -> void:
-	angle = image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
+	var pivot_in_world_coords := content_pivot + Vector2(big_bounding_rectangle.position)
+	angle = image_current_pixel.angle_to_point(pivot_in_world_coords) - PI / 2
+	angle = snappedf(angle, PI / 64)
 	resize_selection()
 
 
@@ -478,6 +480,7 @@ func select_rect(rect: Rect2i, operation := SelectionOperation.ADD) -> void:
 
 func move_borders_start() -> void:
 	undo_data = get_undo_data(false)
+	content_pivot = original_big_bounding_rectangle.size / 2.0
 
 
 func move_borders(move: Vector2i) -> void:
@@ -594,7 +597,6 @@ func transform_content_confirm() -> void:
 	is_moving_content = false
 	is_pasting = false
 	angle = 0.0
-	content_pivot = Vector2.ZERO
 	queue_redraw()
 	canvas.queue_redraw()
 
@@ -628,7 +630,6 @@ func transform_content_cancel() -> void:
 	original_selected_tilemap_cells.clear()
 	is_pasting = false
 	angle = 0.0
-	content_pivot = Vector2.ZERO
 	queue_redraw()
 	canvas.queue_redraw()
 
