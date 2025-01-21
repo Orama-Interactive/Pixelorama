@@ -316,6 +316,15 @@ func type_is_shader(algorithm: RotationAlgorithm) -> bool:
 	return algorithm <= RotationAlgorithm.NNS
 
 
+func transform_rectangle(rect: Rect2, matrix: Transform2D, pivot := rect.size / 2) -> Rect2:
+	var offset_rect := rect
+	var offset_pos := -pivot
+	offset_rect.position = offset_pos
+	offset_rect = offset_rect * matrix
+	offset_rect.position = rect.position + offset_rect.position - offset_pos
+	return offset_rect
+
+
 func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 	if is_zero_approx(angle) or is_equal_approx(angle, TAU):
 		return

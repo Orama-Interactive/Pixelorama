@@ -56,6 +56,9 @@ func generate_image(
 	RenderingServer.free_rid(ci_rid)
 	RenderingServer.free_rid(mat_rid)
 	RenderingServer.free_rid(texture)
+	if not is_instance_valid(viewport_texture):  # Very rare bug
+		done.emit()
+		return
 	viewport_texture.convert(img.get_format())
 	img.copy_from(viewport_texture)
 	if resized_width:
