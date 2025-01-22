@@ -79,9 +79,11 @@ func _on_effect_list_id_pressed(index: int) -> void:
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
+	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
 	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.erase(effect))
+	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
 	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()
@@ -154,9 +156,11 @@ func _delete_effect(effect: LayerEffect) -> void:
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Delete layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
+	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
 	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
+	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
 	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()

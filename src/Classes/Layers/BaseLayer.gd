@@ -5,6 +5,7 @@ extends RefCounted
 
 signal name_changed  ## Emits when [member name] is changed.
 signal visibility_changed  ## Emits when [member visible] is changed.
+signal effects_added_removed  ## Emits when an effect is added or removed to/from [member effects].
 
 ## All currently supported layer blend modes between two layers. The upper layer
 ## is the blend layer, and the bottom layer is the base layer.
@@ -252,6 +253,10 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 			var shader_image_effect := ShaderImageEffect.new()
 			shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
 	return image
+
+
+func emit_effects_added_removed() -> void:
+	effects_added_removed.emit()
 
 
 # Methods to Override:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bai814sqvk68f"]
+[gd_scene load_steps=10 format=3 uid="uid://bai814sqvk68f"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/LayerButton.gd" id="1_6hlpe"]
 [ext_resource type="Texture2D" uid="uid://c2b3htff5yox8" path="res://assets/graphics/layers/layer_visible.png" id="2_ef6fb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cofw1x6chh4i" path="res://assets/graphics/layers/unlinked_layer.png" id="4_058qm"]
 [ext_resource type="Texture2D" uid="uid://ieo8fsapcgsy" path="res://assets/graphics/layers/clipping_mask.png" id="6_73j5q"]
 [ext_resource type="Script" path="res://src/UI/Timeline/LayerMainButton.gd" id="6_n8q6b"]
+[ext_resource type="Texture2D" uid="uid://dv5y24sb8lxg2" path="res://assets/graphics/layers/layer_active_effect.png" id="8_7wf6f"]
 [ext_resource type="Texture2D" uid="uid://cjvk47bd56156" path="res://assets/graphics/layers/type_icons/layer_pixel.png" id="8_ce16y"]
 
 [node name="LayerButton" type="HBoxContainer"]
@@ -165,6 +166,14 @@ text = "Layer 0"
 editable = false
 caret_blink = true
 caret_blink_interval = 0.5
+
+[node name="LayerFXTextureRect" type="TextureRect" parent="LayerMainButton/LayerName" groups=["UIButtons"]]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("8_7wf6f")
+stretch_mode = 3
+flip_v = true
 
 [node name="LayerTypeTextureRect" type="TextureRect" parent="LayerMainButton/LayerName" groups=["UIButtons"]]
 unique_name_in_owner = true

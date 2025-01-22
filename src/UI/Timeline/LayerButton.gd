@@ -33,6 +33,7 @@ var audio_player: AudioStreamPlayer
 @onready var label := %LayerNameLabel as Label
 @onready var line_edit := %LayerNameLineEdit as LineEdit
 @onready var hierarchy_spacer := %HierarchySpacer as Control
+@onready var layer_fx_texture_rect := %LayerFXTextureRect as TextureRect
 @onready var layer_type_texture_rect := %LayerTypeTextureRect as TextureRect
 @onready var linked_button := %LinkButton as BaseButton
 @onready var clipping_mask_icon := %ClippingMask as TextureRect
@@ -61,7 +62,11 @@ func _ready() -> void:
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name
 	line_edit.text = layer.name
+	layer_fx_texture_rect.visible = layer.effects.size() > 0
 	layer_type_texture_rect.texture = ARRAY_TEXTURE_TYPES[layer.get_layer_type()]
+	layer.effects_added_removed.connect(
+		func(): layer_fx_texture_rect.visible = layer.effects.size() > 0
+	)
 	for child in $HBoxContainer.get_children():
 		if not child is Button:
 			continue
