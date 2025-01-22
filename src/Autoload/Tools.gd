@@ -88,6 +88,15 @@ var tools := {
 		"paint_selection",
 		"res://src/Tools/SelectionTools/PaintSelect.tscn"
 	),
+	"Crop":
+	Tool.new(
+		"Crop",
+		"Crop",
+		"crop",
+		"res://src/Tools/UtilityTools/CropTool.tscn",
+		[],
+		"Resize the canvas"
+	),
 	"Move":
 	Tool.new(
 		"Move",
@@ -98,6 +107,15 @@ var tools := {
 	),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/UtilityTools/Zoom.tscn"),
 	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/UtilityTools/Pan.tscn"),
+	"Text":
+	Tool.new(
+		"Text",
+		"Text",
+		"text",
+		"res://src/Tools/UtilityTools/Text.tscn",
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
+		""
+	),
 	"ColorPicker":
 	Tool.new(
 		"ColorPicker",
@@ -106,15 +124,6 @@ var tools := {
 		"res://src/Tools/UtilityTools/ColorPicker.tscn",
 		[],
 		"Select a color from a pixel of the sprite"
-	),
-	"Crop":
-	Tool.new(
-		"Crop",
-		"Crop",
-		"crop",
-		"res://src/Tools/UtilityTools/CropTool.tscn",
-		[],
-		"Resize the canvas"
 	),
 	"Pencil":
 	Tool.new(
@@ -212,15 +221,6 @@ Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
 			["shape_perfect", "shape_center", "shape_displace"]
 		)
-	),
-	"Text":
-	Tool.new(
-		"Text",
-		"Text",
-		"text",
-		"res://src/Tools/UtilityTools/Text.tscn",
-		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
-		""
 	),
 	"3DShapeEdit":
 	Tool.new(
