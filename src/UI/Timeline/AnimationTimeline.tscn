@@ -930,7 +930,6 @@ theme_override_constants/separation = 0
 [node name="TimelineScroll" type="ScrollContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-vertical_scroll_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll"]
 layout_mode = 2

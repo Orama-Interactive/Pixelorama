@@ -2,6 +2,13 @@ class_name LayerButton
 extends HBoxContainer
 
 const HIERARCHY_DEPTH_PIXEL_SHIFT := 16
+const ARRAY_TEXTURE_TYPES: Array[Texture2D] = [
+	preload("res://assets/graphics/layers/type_icons/layer_pixel.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_group.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_3d.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_tilemap.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_sound.png")
+]
 
 var layer_index := 0:
 	set(value):
@@ -26,6 +33,7 @@ var audio_player: AudioStreamPlayer
 @onready var label := %LayerNameLabel as Label
 @onready var line_edit := %LayerNameLineEdit as LineEdit
 @onready var hierarchy_spacer := %HierarchySpacer as Control
+@onready var layer_type_texture_rect := %LayerTypeTextureRect as TextureRect
 @onready var linked_button := %LinkButton as BaseButton
 @onready var clipping_mask_icon := %ClippingMask as TextureRect
 @onready var popup_menu := $PopupMenu as PopupMenu
@@ -53,6 +61,7 @@ func _ready() -> void:
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name
 	line_edit.text = layer.name
+	layer_type_texture_rect.texture = ARRAY_TEXTURE_TYPES[layer.get_layer_type()]
 	for child in $HBoxContainer.get_children():
 		if not child is Button:
 			continue
