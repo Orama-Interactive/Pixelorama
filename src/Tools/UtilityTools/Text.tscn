@@ -1,13 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdregpkflev7u"]
+[gd_scene load_steps=17 format=3 uid="uid://bdregpkflev7u"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1_1q6ub"]
 [ext_resource type="Script" path="res://src/Tools/UtilityTools/Text.gd" id="2_ql5g6"]
 [ext_resource type="Texture2D" uid="uid://d267xalp3p7ru" path="res://assets/graphics/misc/check_plain.png" id="3_novww"]
 [ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_tidsq"]
 [ext_resource type="Texture2D" uid="uid://bnc78807k1xjv" path="res://assets/graphics/misc/close.png" id="4_nhcnn"]
+[ext_resource type="Texture2D" uid="uid://dcs2c1qvc0a6c" path="res://assets/graphics/tools/text_options/bold.png" id="6_44cpf"]
+[ext_resource type="Texture2D" uid="uid://b4paoyuodyjet" path="res://assets/graphics/tools/text_options/italic.png" id="7_vnai6"]
+[ext_resource type="Texture2D" uid="uid://dvwgfoajkwkbt" path="res://assets/graphics/tools/text_options/allign_left.png" id="8_krqdj"]
+[ext_resource type="Texture2D" uid="uid://bw8cnv4x3bv76" path="res://assets/graphics/tools/text_options/allign_center.png" id="9_icae5"]
+[ext_resource type="Texture2D" uid="uid://crgq05c1i6p67" path="res://assets/graphics/tools/text_options/allign_right.png" id="10_s8jkt"]
+[ext_resource type="Texture2D" uid="uid://cb6op8ekb24jq" path="res://assets/graphics/tools/text_options/allign_fill.png" id="11_wdbj6"]
+[ext_resource type="Texture2D" uid="uid://bu0lr6u0f7iva" path="res://assets/graphics/tools/text_options/antialiasing_off.png" id="12_25fng"]
+[ext_resource type="Texture2D" uid="uid://dgkjy5utwxfs0" path="res://assets/graphics/tools/text_options/antialiasing_grayscale.png" id="13_y175e"]
+[ext_resource type="Texture2D" uid="uid://dux65bi78pmu8" path="res://assets/graphics/tools/text_options/antialiasing_lcd.png" id="14_s8hba"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ikyyu"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_jplns"]
 
 [node name="ToolOptions" instance=ExtResource("1_1q6ub")]
 script = ExtResource("2_ql5g6")
+metadata/_edit_vertical_guides_ = [-9.0]
 
 [node name="ConfirmButtons" type="HBoxContainer" parent="." index="2"]
 visible = false
@@ -81,63 +95,173 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 fit_to_longest_item = false
 
-[node name="StyleLabel" type="Label" parent="GridContainer" index="2"]
+[node name="StyleButtonContainer" type="HBoxContainer" parent="." index="5"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Style:"
 
-[node name="StyleOptionButton" type="OptionButton" parent="GridContainer" index="3"]
+[node name="BoldButton" type="Button" parent="StyleButtonContainer" index="0" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-selected = 0
-item_count = 4
-popup/item_0/text = "Regular"
-popup/item_1/text = "Bold"
-popup/item_1/id = 1
-popup/item_2/text = "Italic"
-popup/item_2/id = 2
-popup/item_3/text = "Bold Italic"
-popup/item_3/id = 3
+toggle_mode = true
 
-[node name="HorizontalAlignmentLabel" type="Label" parent="GridContainer" index="4"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Horizontal alignment:"
+[node name="TextureRect" type="TextureRect" parent="StyleButtonContainer/BoldButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_44cpf")
+stretch_mode = 3
 
-[node name="HorizontalAlignmentOptionButton" type="OptionButton" parent="GridContainer" index="5"]
-visible = false
+[node name="ItalicButton" type="Button" parent="StyleButtonContainer" index="1" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-selected = 0
-item_count = 4
-popup/item_0/text = "Left"
-popup/item_1/text = "Center"
-popup/item_1/id = 1
-popup/item_2/text = "Right"
-popup/item_2/id = 2
-popup/item_3/text = "Fill"
-popup/item_3/id = 3
+mouse_default_cursor_shape = 2
+toggle_mode = true
 
-[node name="AntialiasingLabel" type="Label" parent="GridContainer" index="6"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Antialiasing:"
+[node name="TextureRect" type="TextureRect" parent="StyleButtonContainer/ItalicButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_vnai6")
+stretch_mode = 3
 
-[node name="AntialiasingOptionButton" type="OptionButton" parent="GridContainer" index="7"]
+[node name="HorizontalAlignmentContainer" type="HBoxContainer" parent="." index="6"]
 layout_mode = 2
-selected = 0
-item_count = 3
-popup/item_0/text = "None"
-popup/item_1/text = "Grayscale"
-popup/item_1/id = 1
-popup/item_2/text = "LCD"
-popup/item_2/id = 2
+
+[node name="HorizontalAlignmentLeftButton" type="Button" parent="HorizontalAlignmentContainer" index="0" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_ikyyu")
+
+[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_krqdj")
+stretch_mode = 3
+
+[node name="HorizontalAlignmentLeftButton2" type="Button" parent="HorizontalAlignmentContainer" index="1" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ikyyu")
+
+[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton2" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_icae5")
+stretch_mode = 3
+
+[node name="HorizontalAlignmentLeftButton3" type="Button" parent="HorizontalAlignmentContainer" index="2" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ikyyu")
+
+[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton3" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_s8jkt")
+stretch_mode = 3
+
+[node name="HorizontalAlignmentLeftButton4" type="Button" parent="HorizontalAlignmentContainer" index="3" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ikyyu")
+
+[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton4" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_wdbj6")
+stretch_mode = 3
+
+[node name="AntiAliasingButtonContainer" type="HBoxContainer" parent="." index="7"]
+layout_mode = 2
+
+[node name="AAOffButton" type="Button" parent="AntiAliasingButtonContainer" index="0" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_jplns")
+
+[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AAOffButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_25fng")
+stretch_mode = 3
+
+[node name="AAGrayscaleButton" type="Button" parent="AntiAliasingButtonContainer" index="1" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_jplns")
+
+[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AAGrayscaleButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_y175e")
+stretch_mode = 3
+
+[node name="AALCDButton" type="Button" parent="AntiAliasingButtonContainer" index="2" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_jplns")
+
+[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AALCDButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_s8hba")
+stretch_mode = 3
 
 [connection signal="pressed" from="ConfirmButtons/ConfirmButton" to="." method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ConfirmButtons/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="value_changed" from="TextSizeSlider" to="." method="_on_text_size_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/FontOptionButton" to="." method="_on_font_option_button_item_selected"]
-[connection signal="item_selected" from="GridContainer/StyleOptionButton" to="." method="_on_style_option_button_item_selected"]
-[connection signal="item_selected" from="GridContainer/HorizontalAlignmentOptionButton" to="." method="_on_horizontal_alignment_option_button_item_selected"]
-[connection signal="item_selected" from="GridContainer/AntialiasingOptionButton" to="." method="_on_antialiasing_option_button_item_selected"]
+[connection signal="toggled" from="StyleButtonContainer/BoldButton" to="." method="_on_bold_button_toggled"]
+[connection signal="toggled" from="StyleButtonContainer/ItalicButton" to="." method="_on_italic_button_toggled"]

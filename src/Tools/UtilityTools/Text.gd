@@ -1,7 +1,7 @@
 extends BaseTool
 
-enum TextStyle { REGULAR, BOLD, ITALIC, BOLD_ITALIC }
-
+const BOLD_FLAG := 1
+const ITALIC_FLAG := 2
 const EMBOLDEN_AMOUNT := 0.6
 const ITALIC_AMOUNT := 0.2
 const ITALIC_TRANSFORM := Transform2D(Vector2(1.0, ITALIC_AMOUNT), Vector2(0.0, 1.0), Vector2.ZERO)
@@ -19,22 +19,11 @@ var font_name := "":
 		font.base_font = Global.find_font_from_name(font_name)
 		font.base_font.antialiasing = antialiasing
 		_textedit_text_changed()
-var text_style := TextStyle.REGULAR:
+var text_style := 0:
 	set(value):
 		text_style = value
-		match text_style:
-			TextStyle.REGULAR:
-				font.variation_embolden = 0
-				font.variation_transform = Transform2D()
-			TextStyle.BOLD:
-				font.variation_embolden = EMBOLDEN_AMOUNT
-				font.variation_transform = Transform2D()
-			TextStyle.ITALIC:
-				font.variation_embolden = 0
-				font.variation_transform = ITALIC_TRANSFORM
-			TextStyle.BOLD_ITALIC:
-				font.variation_embolden = EMBOLDEN_AMOUNT
-				font.variation_transform = ITALIC_TRANSFORM
+		font.variation_embolden = EMBOLDEN_AMOUNT if text_style & BOLD_FLAG else 0.0
+		font.variation_transform = ITALIC_TRANSFORM if text_style & ITALIC_FLAG else Transform2D()
 		save_config()
 		_textedit_text_changed()
 
@@ -48,6 +37,8 @@ var _offset := Vector2i.ZERO
 
 @onready var confirm_buttons: HBoxContainer = $ConfirmButtons
 @onready var font_option_button: OptionButton = $GridContainer/FontOptionButton
+@onready var horizontal_alignment_group: ButtonGroup = %HorizontalAlignmentLeftButton.button_group
+@onready var anti_aliasing_group: ButtonGroup = %AAOffButton.button_group
 
 
 func _ready() -> void:
@@ -55,6 +46,8 @@ func _ready() -> void:
 	for f_name in font_names:
 		font_option_button.add_item(f_name)
 	Tools.color_changed.connect(_on_color_changed)
+	horizontal_alignment_group.pressed.connect(_on_horizontal_alignment_button_pressed)
+	anti_aliasing_group.pressed.connect(_on_antialiasing_button_pressed)
 	super._ready()
 
 
@@ -141,7 +134,9 @@ func text_to_pixels() -> void:
 	var font_ascent := font.get_ascent(text_size)
 	var pos := Vector2(0, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
 	pos += text_edit.position
-	font.draw_multiline_string(ci_rid, pos, text, horizontal_alignment, -1, text_size, -1, color)
+	font.draw_multiline_string(
+		ci_rid, pos, text, horizontal_alignment, text_edit.size.x, text_size, -1, color
+	)
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
 	RenderingServer.force_draw(false)
@@ -221,16 +216,28 @@ func _on_font_option_button_item_selected(index: int) -> void:
 	save_config()
 
 
-func _on_style_option_button_item_selected(index: TextStyle) -> void:
-	text_style = index
+func _on_bold_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		text_style |= BOLD_FLAG
+	else:
+		text_style &= ~BOLD_FLAG
 
 
-func _on_horizontal_alignment_option_button_item_selected(index: HorizontalAlignment) -> void:
-	horizontal_alignment = index
+func _on_italic_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		text_style |= ITALIC_FLAG
+	else:
+		text_style &= ~ITALIC_FLAG
 
 
-func _on_antialiasing_option_button_item_selected(index: TextServer.FontAntialiasing) -> void:
-	antialiasing = index
+func _on_horizontal_alignment_button_pressed(button: BaseButton) -> void:
+	@warning_ignore("int_as_enum_without_cast")
+	horizontal_alignment = button.get_index()
+
+
+func _on_antialiasing_button_pressed(button: BaseButton) -> void:
+	@warning_ignore("int_as_enum_without_cast")
+	antialiasing = button.get_index()
 
 
 func _exit_tree() -> void:
