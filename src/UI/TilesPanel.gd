@@ -172,10 +172,6 @@ func _on_place_tiles_toggled(toggled_on: bool) -> void:
 	mode_buttons_container.visible = !placing_tiles
 	for child: Button in transform_buttons_container.get_children():
 		Global.disable_button(child, not toggled_on)
-	if toggled_on:
-		Global.change_button_texturerect(place_tiles.get_child(0), "place_tiles_enabled.png")
-	else:
-		Global.change_button_texturerect(place_tiles.get_child(0), "place_tiles_disabled.png")
 	update_tip()
 
 

@@ -1,10 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://bfbragmmdwfbl"]
+[gd_scene load_steps=26 format=3 uid="uid://bfbragmmdwfbl"]
 
 [ext_resource type="Script" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
-[ext_resource type="Texture2D" uid="uid://bqr3n3tm8b6w2" path="res://assets/graphics/tileset/place_tiles_disabled.png" id="2_pv2cd"]
+[ext_resource type="Texture2D" uid="uid://d4by47alul2qw" path="res://assets/graphics/tiles_panel/tiles_draw.png" id="2_h0p0x"]
 [ext_resource type="Texture2D" uid="uid://bv7ldl8obhawm" path="res://assets/graphics/misc/icon_reload.png" id="2_r1kie"]
 [ext_resource type="Texture2D" uid="uid://bpsfilx47bw3r" path="res://assets/graphics/misc/mirror_x.svg" id="3_5o62r"]
 [ext_resource type="Texture2D" uid="uid://bk6iaxiyl74ih" path="res://assets/graphics/misc/mirror_y.svg" id="4_2xhnr"]
+[ext_resource type="Texture2D" uid="uid://dfq0wpxsd51co" path="res://assets/graphics/tiles_panel/tiles_manual.png" id="6_gwj5u"]
+[ext_resource type="Texture2D" uid="uid://7m4hln3mo2e5" path="res://assets/graphics/tiles_panel/tiles_auto.png" id="7_afsgi"]
+[ext_resource type="Texture2D" uid="uid://uo1ikty26del" path="res://assets/graphics/tiles_panel/tiles_stack.png" id="8_yoaya"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_klv67"]
 action = &"toggle_draw_tiles_mode"
@@ -81,6 +84,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_vertical = 0
+tooltip_text = "Draw tiles mode"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_6ebuw")
@@ -92,9 +96,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_pv2cd")
+texture = ExtResource("2_h0p0x")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
@@ -179,27 +183,65 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Manual" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer"]
+[node name="Manual" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+tooltip_text = "Manual"
 mouse_default_cursor_shape = 2
+toggle_mode = true
 button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_pgg48")
-text = "Manual"
 
-[node name="Auto" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Manual"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_gwj5u")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Auto" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+tooltip_text = "Auto"
 mouse_default_cursor_shape = 2
-button_pressed = true
+toggle_mode = true
 button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_a0fx5")
-text = "Auto"
 
-[node name="Stack" type="CheckBox" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Auto"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_afsgi")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Stack" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+tooltip_text = "Stack"
 mouse_default_cursor_shape = 2
+toggle_mode = true
 button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_ysxej")
-text = "Stack"
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Stack"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_yoaya")
+expand_mode = 1
+stretch_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
