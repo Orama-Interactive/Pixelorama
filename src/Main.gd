@@ -186,6 +186,14 @@ func _ready() -> void:
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
+
+	# Procedurally set always_on_top roperty of sub dialogs
+	for file_dialog in get_tree().get_nodes_in_group("FileDialogs"):
+		for dialog_child in file_dialog.get_children(true):
+			if dialog_child is Window:
+				# Sub dialogs are usually open one at a time so it should be safe to set them all
+				# to be always on top
+				dialog_child.always_on_top = true
 	if OS.get_name() == "Android":
 		OS.request_permissions()
 	_handle_backup()
