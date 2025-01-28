@@ -41,16 +41,21 @@ var button_size := 36:
 		if button_size == value:
 			return
 		button_size = clampi(value, MIN_BUTTON_SIZE, MAX_BUTTON_SIZE)
+		tile_size_slider.value = button_size
 		update_minimum_size()
 		Global.config_cache.set_value("tileset_panel", "button_size", button_size)
 		for button: Control in tile_button_container.get_children():
 			button.custom_minimum_size = Vector2(button_size, button_size)
 			button.size = Vector2(button_size, button_size)
+var show_empty_tile := true
 
 @onready var place_tiles: Button = %PlaceTiles
 @onready var transform_buttons_container: HFlowContainer = %TransformButtonsContainer
 @onready var tile_button_container: HFlowContainer = %TileButtonContainer
 @onready var mode_buttons_container: HFlowContainer = %ModeButtonsContainer
+@onready var option_button: Button = %OptionButton
+@onready var options: Popup = $Options
+@onready var tile_size_slider: ValueSlider = %TileSizeSlider
 
 
 func _ready() -> void:
@@ -59,6 +64,9 @@ func _ready() -> void:
 	for child: Button in transform_buttons_container.get_children():
 		Global.disable_button(child, true)
 	update_tip()
+	tile_size_slider.min_value = MIN_BUTTON_SIZE
+	tile_size_slider.max_value = MAX_BUTTON_SIZE
+	tile_size_slider.value = button_size
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -82,13 +90,13 @@ func set_tileset(tileset: TileSetCustom) -> void:
 		current_tileset.updated.connect(_update_tileset)
 
 
-func update_tip():
-	var tip = %Tip
+func update_tip() -> void:
+	var tip := %Tip
 	tip.get_parent().visible = true
 	if placing_tiles:
-		tip.text = "Select a tile to place it on the canvas."
+		tip.text = tr("Select a tile to place it on the canvas.")
 	else:
-		tip.text = "Modify tiles on the canvas."
+		tip.text = tr("Modify tiles on the canvas.")
 
 
 func _on_cel_switched() -> void:
@@ -142,6 +150,8 @@ func _create_tile_button(texture: Texture2D, index: int, button_group: ButtonGro
 	button.add_child(texture_rect)
 	button.tooltip_text = str(index)
 	button.toggled.connect(_on_tile_button_toggled.bind(index))
+	if index == 0 and not show_empty_tile:
+		button.visible = false
 	return button
 
 
@@ -219,3 +229,18 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			is_flipped_v = ROTATION_MATRIX[final_i * 3 + 1]
 			is_transposed = ROTATION_MATRIX[final_i * 3 + 2]
 			break
+
+
+func _on_option_button_pressed() -> void:
+	var pos := Vector2i(option_button.global_position) - options.size
+	options.popup_on_parent(Rect2i(pos.x - 16, pos.y + 32, options.size.x, options.size.y))
+
+
+func _on_tile_size_slider_value_changed(value: float) -> void:
+	button_size = value
+
+
+func _on_show_empty_tile_toggled(toggled_on: bool) -> void:
+	show_empty_tile = toggled_on
+	if tile_button_container.get_child_count() > 0:
+		tile_button_container.get_child(0).visible = show_empty_tile
