@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-01-19 19:12\n"
+"PO-Revision-Date: 2025-01-28 18:07\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -146,6 +146,10 @@ msgstr "Yapıştır"
 
 msgid "Paste in Place"
 msgstr "Yerinde Yapıştır"
+
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr ""
 
 msgid "Delete"
 msgstr "Sil"
