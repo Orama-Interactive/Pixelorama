@@ -391,6 +391,10 @@ msgstr ""
 msgid "Show Mouse Guides"
 msgstr ""
 
+#. Found under the View menu.
+msgid "Show Reference Images"
+msgstr ""
+
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
 msgstr ""

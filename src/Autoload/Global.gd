@@ -50,6 +50,7 @@ enum ViewMenu {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 	SHOW_MOUSE_GUIDES,
+	SHOW_REFERENCE_IMAGES,
 	DISPLAY_LAYER_EFFECTS,
 	SNAP_TO,
 }
@@ -579,6 +580,11 @@ var show_pixel_indices := false:
 		show_pixel_indices = value
 		if is_instance_valid(canvas.color_index):
 			canvas.color_index.enabled = value
+var show_reference_images := true:
+	set(value):
+		show_reference_images = value
+		if is_instance_valid(canvas.reference_image_container):
+			canvas.reference_image_container.visible = show_reference_images
 var display_layer_effects := true:
 	set(value):
 		if value == display_layer_effects:
@@ -835,6 +841,7 @@ func _initialize_keychain() -> void:
 		&"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),
 		&"show_guides": Keychain.InputAction.new("", "View menu", true),
 		&"show_rulers": Keychain.InputAction.new("", "View menu", true),
+		&"show_reference_images": Keychain.InputAction.new("", "View menu", true),
 		&"display_layer_effects": Keychain.InputAction.new("", "View menu", true),
 		&"moveable_panels": Keychain.InputAction.new("", "Window menu", true),
 		&"zen_mode": Keychain.InputAction.new("", "Window menu", true),

@@ -242,6 +242,7 @@ func _setup_view_menu() -> void:
 		"Show Rulers": "show_rulers",
 		"Show Guides": "show_guides",
 		"Show Mouse Guides": "",
+		"Show Reference Images": "show_reference_images",
 		"Display Layer Effects": &"display_layer_effects",
 		"Snap To": "",
 	}
@@ -259,6 +260,7 @@ func _setup_view_menu() -> void:
 			_set_menu_shortcut(view_menu_items[item], view_menu, i, item, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
+	view_menu.set_item_checked(Global.ViewMenu.SHOW_REFERENCE_IMAGES, true)
 	view_menu.set_item_checked(Global.ViewMenu.DISPLAY_LAYER_EFFECTS, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.id_pressed.connect(view_menu_id_pressed)
@@ -715,6 +717,11 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_guides()
 		Global.ViewMenu.SHOW_MOUSE_GUIDES:
 			_toggle_show_mouse_guides()
+		Global.ViewMenu.SHOW_REFERENCE_IMAGES:
+			Global.show_reference_images = not Global.show_reference_images
+			view_menu.set_item_checked(
+				Global.ViewMenu.SHOW_REFERENCE_IMAGES, Global.show_reference_images
+			)
 		Global.ViewMenu.SHOW_PIXEL_INDICES:
 			_toggle_show_pixel_indices()
 		Global.ViewMenu.DISPLAY_LAYER_EFFECTS:
