@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2025-01-18 17:12\n"
+"PO-Revision-Date: 2025-01-28 18:07\n"
 
 msgid "OK"
 msgstr "確定"
@@ -144,6 +144,10 @@ msgstr "貼上"
 
 msgid "Paste in Place"
 msgstr "原位黏貼"
+
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr ""
 
 msgid "Delete"
 msgstr "刪除"
