@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-01-20 11:10\n"
+"PO-Revision-Date: 2025-01-28 18:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -145,6 +145,10 @@ msgstr "Вставить"
 
 msgid "Paste in Place"
 msgstr "Вставить на место"
+
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr ""
 
 msgid "Delete"
 msgstr "Удалить"
