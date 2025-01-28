@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-01-18 17:12\n"
+"PO-Revision-Date: 2025-01-28 18:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -144,6 +144,10 @@ msgstr "Vložit"
 
 msgid "Paste in Place"
 msgstr "Vložit na místě"
+
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr ""
 
 msgid "Delete"
 msgstr "Smazat"
