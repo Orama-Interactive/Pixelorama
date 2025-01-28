@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-01-18 17:12\n"
+"PO-Revision-Date: 2025-01-28 18:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -146,6 +146,10 @@ msgstr "Επικόλληση"
 
 msgid "Paste in Place"
 msgstr "Επιτόπια επικόλληση"
+
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr ""
 
 msgid "Delete"
 msgstr "Διαγραφή"
