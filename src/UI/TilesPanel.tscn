@@ -209,6 +209,7 @@ layout_mode = 2
 tooltip_text = "Auto"
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_pressed = true
 button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_a0fx5")
 
