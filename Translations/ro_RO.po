@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-01-28 22:08\n"
+"PO-Revision-Date: 2025-01-28 23:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -401,6 +401,10 @@ msgstr "Afișare ghidaje"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Afișare ghiduri maus"
+
+#. Found under the View menu.
+msgid "Show Reference Images"
+msgstr ""
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
