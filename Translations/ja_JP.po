@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-01-28 18:06\n"
+"PO-Revision-Date: 2025-01-28 22:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3568,6 +3568,14 @@ msgstr "タイルセット名:"
 msgid "Tile size:"
 msgstr "タイルサイズ："
 
+#: src/UI/TilesPanel.gd
+msgid "Select a tile to place it on the canvas."
+msgstr ""
+
+#: src/UI/TilesPanel.gd
+msgid "Modify tiles on the canvas."
+msgstr ""
+
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
 msgstr "タイルを描画"
@@ -3587,4 +3595,27 @@ msgstr "タイルを水平方向に反転"
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
 msgstr "タイルを垂直方向に反転"
+
+#. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Manual"
+msgstr ""
+
+#. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Auto"
+msgstr ""
+
+#. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Stack"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile button size:"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Show empty tile:"
+msgstr ""
 
