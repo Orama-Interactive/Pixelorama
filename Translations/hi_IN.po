@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2025-01-18 17:13\n"
+"PO-Revision-Date: 2025-01-28 18:07\n"
 
 msgid "OK"
 msgstr "ठीक है"
@@ -143,6 +143,10 @@ msgid "Paste"
 msgstr "चिपकाएँ"
 
 msgid "Paste in Place"
+msgstr ""
+
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
 msgstr ""
 
 msgid "Delete"
