@@ -134,6 +134,10 @@ msgstr ""
 msgid "Paste in Place"
 msgstr ""
 
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 

@@ -211,6 +211,7 @@ func _setup_edit_menu() -> void:
 		"Cut": "cut",
 		"Paste": "paste",
 		"Paste in Place": "paste_in_place",
+		"Paste from Clipboard": "paste_from_clipboard",
 		"Delete": "delete",
 		"New Brush": "new_brush",
 		"Preferences": "preferences"
@@ -682,6 +683,8 @@ func edit_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.paste()
 		Global.EditMenu.PASTE_IN_PLACE:
 			Global.canvas.selection.paste(true)
+		Global.EditMenu.PASTE_FROM_CLIPBOARD:
+			Global.canvas.selection.paste_from_clipboard()
 		Global.EditMenu.DELETE:
 			Global.canvas.selection.delete()
 		Global.EditMenu.NEW_BRUSH:

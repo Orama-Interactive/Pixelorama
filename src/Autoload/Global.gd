@@ -25,7 +25,18 @@ enum MeasurementMode { NONE, MOVE }
 ## Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
 ## Enumeration of items present in the Edit Menu.
-enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
+enum EditMenu {
+	UNDO,
+	REDO,
+	COPY,
+	CUT,
+	PASTE,
+	PASTE_IN_PLACE,
+	PASTE_FROM_CLIPBOARD,
+	DELETE,
+	NEW_BRUSH,
+	PREFERENCES
+}
 ## Enumeration of items present in the View Menu.
 enum ViewMenu {
 	CENTER_CANVAS,
@@ -793,6 +804,7 @@ func _initialize_keychain() -> void:
 		&"copy": Keychain.InputAction.new("", "Edit menu", true),
 		&"paste": Keychain.InputAction.new("", "Edit menu", true),
 		&"paste_in_place": Keychain.InputAction.new("", "Edit menu", true),
+		&"paste_from_clipboard": Keychain.InputAction.new("", "Edit menu", true),
 		&"delete": Keychain.InputAction.new("", "Edit menu", true),
 		&"new_brush": Keychain.InputAction.new("", "Edit menu", true),
 		&"preferences": Keychain.InputAction.new("", "Edit menu", true),
