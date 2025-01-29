@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-01-29 00:49\n"
+"PO-Revision-Date: 2025-01-29 02:33\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -149,7 +149,7 @@ msgstr "Tempel di Tempat"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Tempel isi papan klip"
 
 msgid "Delete"
 msgstr "Hapus"
@@ -406,7 +406,7 @@ msgstr "Tampilkan Panduan Tetikus"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Tampilkan Gambar Rujukan"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -3613,13 +3613,13 @@ msgstr "Otomatis"
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Tumpuk"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Ukuran tombol petak:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "Tampilkan petak kosong:"
 
