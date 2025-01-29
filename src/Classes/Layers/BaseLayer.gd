@@ -355,3 +355,10 @@ func accepts_child(_layer: BaseLayer) -> bool:
 ## Returns an instance of the layer button that will be added to the timeline.
 func instantiate_layer_button() -> Node:
 	return Global.layer_button_node.instantiate()
+
+
+## Returns [code]true[/code] if the layer is responsible for blending other layers.
+## Currently only returns [code]true[/code] with [GroupLayer]s, when their
+## blend mode is set to something else rather than [enum BlendModes.PASS_THROUGH].
+func is_blender() -> bool:
+	return false

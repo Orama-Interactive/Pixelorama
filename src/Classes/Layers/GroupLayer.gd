@@ -167,3 +167,7 @@ func set_name_to_default(number: int) -> void:
 
 func accepts_child(_layer: BaseLayer) -> bool:
 	return true
+
+
+func is_blender() -> bool:
+	return blend_mode != BlendModes.PASS_THROUGH

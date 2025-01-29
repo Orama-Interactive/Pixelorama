@@ -56,7 +56,7 @@ func blend_layers(
 		if DisplayServer.get_name() == "headless":
 			blend_layers_headless(image, project, layer, cel, origin)
 		else:
-			if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
+			if layer.is_blender():
 				var cel_image := (layer as GroupLayer).blend_children(frame)
 				textures.append(cel_image)
 			else:
