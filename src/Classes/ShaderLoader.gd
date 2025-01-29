@@ -19,6 +19,7 @@ static func create_ui_for_shader_uniforms(
 	var uniform_data: PackedStringArray = []
 	var description: String = ""
 	var description_began := false
+	var color_button_hbox: HBoxContainer = null  # Used for RGBA buttons, if they exist.
 	for line in code:
 		# Management of "end" tags
 		if line.begins_with("// (end DESCRIPTION)"):
@@ -270,26 +271,37 @@ static func create_ui_for_shader_uniforms(
 					params, u_name, hbox, value_changed, parent_node, file_selected
 				)
 			parent_node.add_child(hbox)
-
 		elif u_type == "bool":
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var checkbox := CheckBox.new()
-			checkbox.text = "On"
-			if u_value == "true":
-				checkbox.button_pressed = true
-			if params.has(u_name):
-				checkbox.button_pressed = params[u_name]
+			var button: BaseButton
+			if u_name in ["red", "green", "blue", "alpha"]:
+				button = Button.new()
+				button.text = u_name[0].to_upper()
+				button.toggle_mode = true
+				if is_instance_valid(color_button_hbox):
+					color_button_hbox.add_child(button)
+				else:
+					color_button_hbox = HBoxContainer.new()
+					color_button_hbox.add_child(button)
+					parent_node.add_child(color_button_hbox)
 			else:
-				params[u_name] = checkbox.button_pressed
-			checkbox.toggled.connect(value_changed.bind(u_name))
-			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(checkbox)
-			parent_node.add_child(hbox)
+				button = CheckBox.new()
+				var label := Label.new()
+				label.text = humanized_u_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				button.text = "On"
+				var hbox := HBoxContainer.new()
+				hbox.add_child(label)
+				hbox.add_child(button)
+				parent_node.add_child(hbox)
+			if u_value == "true":
+				button.button_pressed = true
+			if params.has(u_name):
+				button.button_pressed = params[u_name]
+			else:
+				params[u_name] = button.button_pressed
+			button.toggled.connect(value_changed.bind(u_name))
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
 static func _vec2str_to_vector2(vec2: String) -> Vector2:
