@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="3"]
 [ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="5"]
 
 [node name="GradientDialog" instance=ExtResource("2")]
 title = "Gradient"
