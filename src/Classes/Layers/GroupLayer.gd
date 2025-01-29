@@ -24,9 +24,6 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 	var current_child_index := 0
 	for i in children.size():
 		var layer := children[i]
-		if not layer.is_visible_in_hierarchy():
-			current_child_index += 1
-			continue
 		if layer is GroupLayer:
 			current_child_index = _blend_child_group(
 				image,
