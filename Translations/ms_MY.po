@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-01-28 23:32\n"
+"PO-Revision-Date: 2025-01-29 02:33\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -434,7 +434,7 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Mod Zen"
 
 msgid "Fullscreen Mode"
 msgstr ""
@@ -1696,19 +1696,19 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Semua"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Saiz kekisi persegi tepat:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Saiz kekisi isometrik:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Pengimbang kekisi:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
@@ -3031,16 +3031,16 @@ msgid "Tools"
 msgstr ""
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Kanvas Utama"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Kanvas Kedua"
 
 msgid "Animation Timeline"
 msgstr ""
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Pralihat kanvas"
 
 msgid "Color Pickers"
 msgstr ""
@@ -3428,7 +3428,7 @@ msgstr ""
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
-msgstr ""
+msgstr "Tetap Semula Bentuk"
 
 #. Position of the selected reference image on the canvas.
 msgid "Position"
@@ -3440,19 +3440,19 @@ msgstr ""
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Putaran"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Tapis"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr ""
+msgstr "Kelegapan"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr ""
+msgstr "Bataskan Warna"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
