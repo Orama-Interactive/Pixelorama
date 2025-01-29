@@ -342,6 +342,10 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
+[node name="TileButtonPopupMenu" type="PopupMenu" parent="."]
+item_count = 1
+item_0/text = "Delete"
+
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/PlaceTiles" to="." method="_on_place_tiles_toggled"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateRightButton" to="." method="_on_rotate_pressed" binds= [true]]
@@ -353,3 +357,4 @@ text = "On"
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="value_changed" from="Options/MarginContainer/ScrollContainer/GridContainer/TileSizeSlider" to="." method="_on_tile_size_slider_value_changed"]
 [connection signal="toggled" from="Options/MarginContainer/ScrollContainer/GridContainer/ShowEmptyTile" to="." method="_on_show_empty_tile_toggled"]
+[connection signal="index_pressed" from="TileButtonPopupMenu" to="." method="_on_tile_button_popup_menu_index_pressed"]

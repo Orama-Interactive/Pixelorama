@@ -48,6 +48,7 @@ var button_size := 36:
 			button.custom_minimum_size = Vector2(button_size, button_size)
 			button.size = Vector2(button_size, button_size)
 var show_empty_tile := true
+var tile_index_menu_popped := 0
 
 @onready var place_tiles: Button = %PlaceTiles
 @onready var transform_buttons_container: HFlowContainer = %TransformButtonsContainer
@@ -56,6 +57,7 @@ var show_empty_tile := true
 @onready var option_button: Button = %OptionButton
 @onready var options: Popup = $Options
 @onready var tile_size_slider: ValueSlider = %TileSizeSlider
+@onready var tile_button_popup_menu: PopupMenu = $TileButtonPopupMenu
 
 
 func _ready() -> void:
@@ -109,17 +111,13 @@ func _on_cel_switched() -> void:
 	_update_tileset(cel, -1)
 
 
-func _update_tileset(cel: BaseCel, _replace_index: int) -> void:
+func _update_tileset(_cel: BaseCel, _replace_index: int) -> void:
 	_clear_tile_buttons()
-	if cel is not CelTileMap:
-		return
-	var tilemap_cel := cel as CelTileMap
-	var tileset := tilemap_cel.tileset
 	var button_group := ButtonGroup.new()
-	if selected_tile_index >= tileset.tiles.size():
+	if selected_tile_index >= current_tileset.tiles.size():
 		selected_tile_index = 0
-	for i in tileset.tiles.size():
-		var tile := tileset.tiles[i]
+	for i in current_tileset.tiles.size():
+		var tile := current_tileset.tiles[i]
 		var texture := ImageTexture.create_from_image(tile.image)
 		var button := _create_tile_button(texture, i, button_group)
 		if i == selected_tile_index:
@@ -150,6 +148,7 @@ func _create_tile_button(texture: Texture2D, index: int, button_group: ButtonGro
 	button.add_child(texture_rect)
 	button.tooltip_text = str(index)
 	button.toggled.connect(_on_tile_button_toggled.bind(index))
+	button.gui_input.connect(_on_tile_button_gui_input.bind(index))
 	if index == 0 and not show_empty_tile:
 		button.visible = false
 	return button
@@ -169,6 +168,15 @@ func _on_tile_button_toggled(toggled_on: bool, index: int) -> void:
 	if toggled_on:
 		selected_tile_index = index
 		place_tiles.button_pressed = true
+
+
+func _on_tile_button_gui_input(event: InputEvent, index: int) -> void:
+	if event.is_action(&"right_mouse"):
+		tile_button_popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
+		tile_index_menu_popped = index
+		tile_button_popup_menu.set_item_disabled(
+			0, not current_tileset.tiles[index].can_be_removed()
+		)
 
 
 func _clear_tile_buttons() -> void:
@@ -244,3 +252,24 @@ func _on_show_empty_tile_toggled(toggled_on: bool) -> void:
 	show_empty_tile = toggled_on
 	if tile_button_container.get_child_count() > 0:
 		tile_button_container.get_child(0).visible = show_empty_tile
+
+
+func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
+	if tile_index_menu_popped == 0:
+		return
+	if index == 0:  # Delete
+		if current_tileset.tiles[tile_index_menu_popped].can_be_removed():
+			var undo_data := current_tileset.serialize_undo_data()
+			current_tileset.tiles.remove_at(tile_index_menu_popped)
+			var redo_data := current_tileset.serialize_undo_data()
+			var project := Global.current_project
+			project.undo_redo.create_action("Delete tile")
+			project.undo_redo.add_do_method(
+				current_tileset.deserialize_undo_data.bind(redo_data, null)
+			)
+			project.undo_redo.add_undo_method(
+				current_tileset.deserialize_undo_data.bind(undo_data, null)
+			)
+			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+			project.undo_redo.commit_action()

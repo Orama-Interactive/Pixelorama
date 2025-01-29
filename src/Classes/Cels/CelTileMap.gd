@@ -400,12 +400,15 @@ func update_tilemap(
 				var tile := tileset.tiles[j]
 				if _tiles_equal(i, image_portion, tile.image):
 					if cells[i].index != j:
+						tileset.tiles[cells[i].index].times_used -= 1
 						cells[i].index = j
 						tileset.tiles[j].times_used += 1
 						cells[i].remove_transformations()
 					found_tile = true
 					break
 			if not found_tile:
+				if cells[i].index > 0:
+					tileset.tiles[cells[i].index].times_used -= 1
 				tileset.add_tile(image_portion, self)
 				cells[i].index = tileset.tiles.size() - 1
 				cells[i].remove_transformations()
@@ -615,7 +618,7 @@ func _is_redo() -> bool:
 ## so call [method update_cel_portions] to update it in this cel as well.
 ## Otherwise, call [method _re_index_all_cells] to ensure that the cells have correct indices.
 func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
-	if cel == self or not is_instance_valid(cel):
+	if cel == self:
 		return
 	if link_set != null and cel in link_set["cels"]:
 		return
