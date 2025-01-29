@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-01-28 23:31\n"
+"PO-Revision-Date: 2025-01-29 09:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -404,7 +404,7 @@ msgstr "Afișare ghiduri maus"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Afișare imagini de referință"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -3572,11 +3572,11 @@ msgstr "Dimensiune dală:"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Selectează o dală pentru a o plasa pe pânză."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Modifică dalele de pe pânză."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3601,23 +3601,23 @@ msgstr "Răsturnare dală pe verticală"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Stivă"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Mărimea butonului dalei:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "Afișare dală goală:"
 
