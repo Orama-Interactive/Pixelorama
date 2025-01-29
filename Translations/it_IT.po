@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-01-28 23:31\n"
+"PO-Revision-Date: 2025-01-29 02:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -95,7 +95,7 @@ msgstr "Salva come..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr "Includi immagini miscelate"
+msgstr "Includi immagini mescolate"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
@@ -149,7 +149,7 @@ msgstr "Incolla nel luogo"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Incolla dagli Appunti"
 
 msgid "Delete"
 msgstr "Elimina"
@@ -406,7 +406,7 @@ msgstr "Mostra Guide Mouse"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Mostra Immagini Di Riferimento"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -806,7 +806,7 @@ msgstr "Costante"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Spazio colore"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1082,15 +1082,15 @@ msgid "Gradient Map"
 msgstr "Mappa Gradiente"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Interpolazione"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Inverti"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "Distribuisci punti equamente"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
@@ -1109,7 +1109,7 @@ msgstr "Se abilitata, l' ultimo punto viene aggiunto alla fine del gradiente\n"
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Salva su predefiniti"
 
 msgid "Shape:"
 msgstr "Forma:"
@@ -3573,11 +3573,11 @@ msgstr "Dimensione caselle:"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Seleziona una casella per posizionarla sulla tela."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Modifica le tessere sulla tela."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3602,23 +3602,23 @@ msgstr "Capovolgi la casella verticalmente"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Manuale"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Pila"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Dimensione bottone piastre:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "Mostra piatra vuota:"
 
