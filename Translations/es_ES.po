@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-01-28 23:31\n"
+"PO-Revision-Date: 2025-01-29 04:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -147,7 +147,7 @@ msgstr "Copiar en lugar"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Pegar desde el portapapeles"
 
 msgid "Delete"
 msgstr "Borrar"
@@ -404,7 +404,7 @@ msgstr "Mostrar guías de ratón"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Mostrar imágenes de referencia"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -1431,7 +1431,7 @@ msgid "copy"
 msgstr "copiar"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr "¿Estás seguro que quieres salir de Pixelorama?"
+msgstr "¿Estás seguro de que quieres salir de Pixelorama?"
 
 msgid "Unsaved Image"
 msgstr "Imagen sin guardad"
@@ -3569,11 +3569,11 @@ msgstr "Tamaño de mosaico:"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Selecciona un mosaico para colocarlo en el lienzo."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Modifica los mosaicos en el lienzo."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3598,23 +3598,23 @@ msgstr "Voltear mosaico verticalmente"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "Automático"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Pila"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Tamaño de botón de mosaico:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "Mostrar mosaico vacío:"
 
