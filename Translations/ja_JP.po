@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-01-28 23:31\n"
+"PO-Revision-Date: 2025-01-29 03:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -149,7 +149,7 @@ msgstr "現在の場所に貼り付け"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "クリップボードから貼り付け"
 
 msgid "Delete"
 msgstr "削除"
@@ -406,7 +406,7 @@ msgstr "マウスガイドを表示"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "参照画像を表示"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -1899,7 +1899,7 @@ msgstr "有効にすると、アプリケーションウィンドウは透明に
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "ダミーオーディオドライバーを使用"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -2336,7 +2336,7 @@ msgstr "セルのリンクを解除"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "ここで音声を再生"
 
 msgid "Properties"
 msgstr "プロパティ"
@@ -2379,7 +2379,7 @@ msgid "Tilemap"
 msgstr "タイルマップ"
 
 msgid "Audio"
-msgstr ""
+msgstr "音声"
 
 msgid "Layers"
 msgstr "レイヤー"
@@ -2416,7 +2416,7 @@ msgstr "タイルマップレイヤーを追加"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Audio Layer"
-msgstr ""
+msgstr "音声レイヤーを追加"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2551,14 +2551,14 @@ msgstr "グループを展開/閉じる"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "音声ファイル:"
 
 msgid "Load file"
-msgstr ""
+msgstr "ファイルを読み込み"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "フレームで再生:"
 
 msgid "Palette"
 msgstr "パレット"
@@ -3574,11 +3574,11 @@ msgstr "タイルサイズ："
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "キャンバスに配置するタイルを選択します。"
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "キャンバス上のタイルを変更"
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3603,23 +3603,23 @@ msgstr "タイルを垂直方向に反転"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "マニュアル"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "オート"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "スタック"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "タイルボタンのサイズ:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "空のタイルを表示:"
 
