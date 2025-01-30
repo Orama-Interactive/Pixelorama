@@ -10,13 +10,6 @@ extends VBoxContainer
 
 signal value_changed(value: Curve)
 
-@export var show_axes := true
-@export var curve: Curve:
-	set(value):
-		curve = value
-		queue_redraw()
-		update_controls()
-
 ## Array of dictionaries of key [String] and value [Array] of type [CurveEdit.CurvePoint].
 static var presets: Array[Dictionary] = [
 	{"Linear": [CurvePoint.new(0.0, 0.0, 0.0, 1.0), CurvePoint.new(1.0, 1.0, 1.0, 0.0)]},
@@ -71,6 +64,11 @@ static var presets: Array[Dictionary] = [
 		]
 	}
 ]
+@export var show_axes := true
+@export var curve: Curve:
+	set(value):
+		curve = value
+		_on_resize()
 var curve_editor := Control.new()
 var hbox := HBoxContainer.new()
 

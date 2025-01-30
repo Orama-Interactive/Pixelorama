@@ -245,8 +245,10 @@ static func create_ui_for_shader_uniforms(
 					func(): _shader_update_palette_texture(palette, value_changed, u_name)
 				)
 				continue
-			var hbox := HBoxContainer.new()
-			if not (u_name.begins_with("curve_") and not current_group.is_empty()):
+			var create_label := not (u_name.begins_with("curve_") and not current_group.is_empty())
+			var hbox: HBoxContainer
+			if create_label:
+				hbox = HBoxContainer.new()
 				var label := Label.new()
 				label.text = humanized_u_name
 				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -287,13 +289,19 @@ static func create_ui_for_shader_uniforms(
 							# Set linear preset to the new curve
 							CurveEdit.set_curve_preset(new_curve, 0)
 							params[u_name] = CurveEdit.to_texture(new_curve)
-						option_button.add_item(Keychain.humanize_snake_case(u_name.replace("curve_", "")))
+						option_button.add_item(
+							Keychain.humanize_snake_case(u_name.replace("curve_", ""))
+						)
 						option_button.set_item_metadata(option_button.item_count - 1, u_name)
 					else:  # Create a the group's CurveEdit and OptionButton.
 						var option_button := OptionButton.new()
 						parent_node.add_child(option_button)
-						var curve_edit := _create_curve_texture_ui(params, u_name, parent_node, value_changed)
-						option_button.add_item(Keychain.humanize_snake_case(u_name.replace("curve_", "")))
+						var curve_edit := _create_curve_texture_ui(
+							params, u_name, parent_node, value_changed
+						)
+						option_button.add_item(
+							Keychain.humanize_snake_case(u_name.replace("curve_", ""))
+						)
 						option_button.set_item_metadata(option_button.item_count - 1, u_name)
 						option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 						option_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -307,7 +315,10 @@ static func create_ui_for_shader_uniforms(
 									curve_edit.value_changed.disconnect(connection.callable)
 								curve_edit.curve = params[new_uniform_name].curve
 								curve_edit.value_changed.connect(
-									func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), new_uniform_name)
+									func(curve: Curve):
+										value_changed.call(
+											CurveEdit.to_texture(curve), new_uniform_name
+										)
 								)
 						)
 						group_nodes[group_option_button_str] = option_button
