@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
+uniform sampler2D selection : filter_nearest;
 // CurveTexture(s)
+group_uniforms channel;
 uniform sampler2D curve_rgb;
 uniform sampler2D curve_red;
 uniform sampler2D curve_green;
@@ -9,7 +11,6 @@ uniform sampler2D curve_alpha;
 uniform sampler2D curve_hue;
 uniform sampler2D curve_sat;
 uniform sampler2D curve_value;
-uniform sampler2D selection : filter_nearest;
 
 
 vec3 rgb2hsb(vec3 c) {
