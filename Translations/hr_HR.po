@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Croatian\n"
 "Language: hr_HR\n"
-"PO-Revision-Date: 2025-01-28 23:32\n"
+"PO-Revision-Date: 2025-01-30 22:37\n"
 
 msgid "OK"
 msgstr ""
@@ -286,6 +286,18 @@ msgid "Flip Vertical"
 msgstr ""
 
 msgid "Preferences"
+msgstr ""
+
+#. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
+msgid "Procedural"
+msgstr ""
+
+#. Refers to effects that blur the image.
+msgid "Blur"
+msgstr ""
+
+#. A submenu of the Effects menu. Contains effects that have been loaded by the user.
+msgid "Loader"
 msgstr ""
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
