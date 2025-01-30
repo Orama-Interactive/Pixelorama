@@ -5,28 +5,47 @@ const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
 	LayerEffect.new(
-		"Convolution Matrix", preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader")
+		"Convolution Matrix",
+		preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"),
+		"Color"
 	),
-	LayerEffect.new("Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader")),
-	LayerEffect.new("Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
-	LayerEffect.new("Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader")),
-	LayerEffect.new("Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader")),
-	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Effects/Invert.gdshader")),
-	LayerEffect.new("Desaturation", preload("res://src/Shaders/Effects/Desaturate.gdshader")),
 	LayerEffect.new(
-		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader")
+		"Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
+	),
+	LayerEffect.new(
+		"Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader"), "Transform"
+	),
+	LayerEffect.new(
+		"Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
+	),
+	LayerEffect.new(
+		"Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"
+	),
+	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Effects/Invert.gdshader"), "Color"),
+	LayerEffect.new(
+		"Desaturation", preload("res://src/Shaders/Effects/Desaturate.gdshader"), "Color"
+	),
+	LayerEffect.new(
+		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader"), "Color"
 	),
 	LayerEffect.new(
 		"Adjust Brightness/Contrast",
-		preload("res://src/Shaders/Effects/BrightnessContrast.gdshader")
+		preload("res://src/Shaders/Effects/BrightnessContrast.gdshader"),
+		"Color"
 	),
-	LayerEffect.new("Color Curves", preload("res://src/Shaders/Effects/ColorCurves.gdshader")),
-	LayerEffect.new("Palettize", preload("res://src/Shaders/Effects/Palettize.gdshader")),
-	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader")),
-	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader")),
-	LayerEffect.new("Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader")),
-	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader")),
+	LayerEffect.new(
+		"Color Curves", preload("res://src/Shaders/Effects/ColorCurves.gdshader"), "Color"
+	),
+	LayerEffect.new("Palettize", preload("res://src/Shaders/Effects/Palettize.gdshader"), "Color"),
+	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader"), "Blur"),
+	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader"), "Color"),
+	LayerEffect.new(
+		"Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader"), "Color"
+	),
+	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
 ]
+## Dictionary of [String] and [PopupMenu], mapping each category to a PopupMenu.
+var category_submenus := {}
 
 @onready var enabled_button: CheckButton = $VBoxContainer/HBoxContainer/EnabledButton
 @onready var effect_list: MenuButton = $VBoxContainer/HBoxContainer/EffectList
@@ -35,14 +54,15 @@ var effects: Array[LayerEffect] = [
 
 
 func _ready() -> void:
-	for effect in effects:
-		effect_list.get_popup().add_item(effect.name)
+	var effect_list_popup := effect_list.get_popup()
+	for i in effects.size():
+		_add_effect_to_list(i)
 	if not DirAccess.dir_exists_absolute(OpenSave.SHADERS_DIRECTORY):
 		DirAccess.make_dir_recursive_absolute(OpenSave.SHADERS_DIRECTORY)
 	for file_name in DirAccess.get_files_at(OpenSave.SHADERS_DIRECTORY):
 		_load_shader_file(OpenSave.SHADERS_DIRECTORY.path_join(file_name))
 	OpenSave.shader_copied.connect(_load_shader_file)
-	effect_list.get_popup().id_pressed.connect(_on_effect_list_id_pressed)
+	effect_list_popup.index_pressed.connect(_on_effect_list_pressed.bind(effect_list_popup))
 
 
 func _notification(what: int) -> void:
@@ -65,15 +85,38 @@ func _on_visibility_changed() -> void:
 			child.queue_free()
 
 
+func _add_effect_to_list(i: int) -> void:
+	var effect_list_popup := effect_list.get_popup()
+	var effect := effects[i]
+	if effect.category.is_empty():
+		effect_list_popup.add_item(effect.name)
+		effect_list_popup.set_item_metadata(effect_list_popup.item_count - 1, i)
+	else:
+		if category_submenus.has(effect.category):
+			var submenu := category_submenus[effect.category] as PopupMenu
+			submenu.add_item(effect.name)
+			submenu.set_item_metadata(submenu.item_count - 1, i)
+		else:
+			var submenu := PopupMenu.new()
+			effect_list_popup.add_submenu_node_item(effect.category, submenu)
+			submenu.add_item(effect.name)
+			submenu.set_item_metadata(submenu.item_count - 1, i)
+			submenu.index_pressed.connect(_on_effect_list_pressed.bind(submenu))
+			category_submenus[effect.category] = submenu
+
+
 func _load_shader_file(file_path: String) -> void:
 	var file := load(file_path)
 	if file is Shader:
 		var effect_name := file_path.get_file().get_basename()
-		effects.append(LayerEffect.new(effect_name, file))
-		effect_list.get_popup().add_item(effect_name)
+		var new_effect := LayerEffect.new(effect_name, file, "Loaded")
+		effects.append(new_effect)
+		_add_effect_to_list(effects.size() - 1)
+		#effect_list.get_popup().add_item(effect_name)
 
 
-func _on_effect_list_id_pressed(index: int) -> void:
+func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
+	var index: int = menu.get_item_metadata(menu_item_index)
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var effect := effects[index].duplicate()
 	Global.current_project.undos += 1

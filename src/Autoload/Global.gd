@@ -65,26 +65,6 @@ enum ImageMenu {
 	CROP_TO_SELECTION,
 	CROP_TO_CONTENT,
 }
-## Enumeration of items present in the Effects menu.
-enum EffectsMenu {
-	OFFSET_IMAGE,
-	FLIP,
-	ROTATE,
-	OUTLINE,
-	DROP_SHADOW,
-	INVERT_COLORS,
-	DESATURATION,
-	HSV,
-	BRIGHTNESS_SATURATION,
-	COLOR_CURVES,
-	PALETTIZE,
-	PIXELIZE,
-	POSTERIZE,
-	GAUSSIAN_BLUR,
-	GRADIENT,
-	GRADIENT_MAP,
-	LOADED_EFFECTS
-}
 ## Enumeration of items present in the Select Menu.
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, WRAP_STROKES, MODIFY }
 ## Enumeration of items present in the Help Menu.

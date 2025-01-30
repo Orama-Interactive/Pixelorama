@@ -3,18 +3,20 @@ extends RefCounted
 
 var name := ""
 var shader: Shader
+var category := ""
 var params := {}
 var enabled := true
 
 
-func _init(_name := "", _shader: Shader = null, _params := {}) -> void:
+func _init(_name := "", _shader: Shader = null, _category := "", _params := {}) -> void:
 	name = _name
 	shader = _shader
+	category = _category
 	params = _params
 
 
 func duplicate() -> LayerEffect:
-	return LayerEffect.new(name, shader, params.duplicate())
+	return LayerEffect.new(name, shader, category, params.duplicate())
 
 
 func serialize() -> Dictionary:
