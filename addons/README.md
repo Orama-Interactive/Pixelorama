@@ -24,7 +24,7 @@ Files extracted from source:
 ## godot-dockable-container
 
 - Upstream: https://github.com/gilzoide/godot-dockable-container
-- Version: Based on [e852cbeeb3f06f62c559898b4cf5756858367766](https://github.com/OverloadedOrama/godot-dockable-container/commit/e852cbeeb3f06f62c559898b4cf5756858367766), but with changes in layout.gd that add a `save_on_change` variable and a `save()` method.
+- Version: Based on [e852cbeeb3f06f62c559898b4cf5756858367766](https://github.com/OverloadedOrama/godot-dockable-container/commit/e852cbeeb3f06f62c559898b4cf5756858367766), but with changes in layout.gd that add a `save_on_change` and `layout_reset_path` variables, and a `save()`, `copy_from()` and `reset()` methods.
 - License: [CC0-1.0](https://github.com/gilzoide/godot-dockable-container/blob/main/LICENSE)
 
 ## SmartSlicer

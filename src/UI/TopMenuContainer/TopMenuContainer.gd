@@ -398,13 +398,12 @@ func _setup_panels_submenu(item: String) -> void:
 
 
 func _setup_layouts_submenu(item: String) -> void:
-	layouts_submenu.set_name("layouts_submenu")
 	layouts_submenu.hide_on_checkable_item_selection = false
 	populate_layouts_submenu()
 
 	layouts_submenu.id_pressed.connect(_layouts_submenu_id_pressed)
 	window_menu.add_child(layouts_submenu)
-	window_menu.add_submenu_item(item, layouts_submenu.get_name())
+	window_menu.add_submenu_node_item(item, layouts_submenu)
 
 	var saved_layout: int = Global.config_cache.get_value("window", "layout", 0)
 	set_layout(saved_layout)
@@ -412,10 +411,12 @@ func _setup_layouts_submenu(item: String) -> void:
 
 func populate_layouts_submenu() -> void:
 	layouts_submenu.clear()  # Does not do anything if it's called for the first time
-	layouts_submenu.add_item("Manage Layouts", 0)
 	for layout in Global.layouts:
 		var layout_name := layout.resource_path.get_basename().get_file()
 		layouts_submenu.add_radio_check_item(layout_name)
+	layouts_submenu.add_separator()
+	layouts_submenu.add_item("Manage Layouts")
+	layouts_submenu.add_item("Reset Default")
 
 
 func _setup_image_menu() -> void:
@@ -847,10 +848,13 @@ func _panels_submenu_id_pressed(id: int) -> void:
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
-	if id == 0:
+	var layout_count := Global.layouts.size()
+	if id < layout_count:
+		set_layout(id)
+	elif id == layout_count + 1:
 		manage_layouts_dialog.popup()
-	else:
-		set_layout(id - 1)
+	elif id == layout_count + 2:
+		Global.layouts[selected_layout].reset()
 
 
 func set_layout(id: int) -> void:
@@ -859,10 +863,15 @@ func set_layout(id: int) -> void:
 	if id >= Global.layouts.size():
 		id = 0
 	selected_layout = id
-	main_ui.layout = Global.layouts[id]
+	var layout := Global.layouts[id]
+	main_ui.layout = layout
+	var layout_name := layout.resource_path.get_basename().get_file()
+	layouts_submenu.set_item_text(layouts_submenu.item_count - 1, tr("Reset %s") % layout_name)
+	layouts_submenu.set_item_disabled(
+		layouts_submenu.item_count - 1, layout.layout_reset_path.is_empty()
+	)
 	for i in Global.layouts.size():
-		var offset := i + 1
-		layouts_submenu.set_item_checked(offset, offset == (id + 1))
+		layouts_submenu.set_item_checked(i, i == id)
 
 	for i in ui_elements.size():
 		var index := panels_submenu.get_item_index(i)

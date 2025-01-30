@@ -311,7 +311,12 @@ msgstr ""
 msgid "Masking:"
 msgstr ""
 
+#. Verb, resets something.
 msgid "Reset"
+msgstr ""
+
+#. Verb, resets something.
+msgid "Reset %s"
 msgstr ""
 
 msgid "Use Current Frame"

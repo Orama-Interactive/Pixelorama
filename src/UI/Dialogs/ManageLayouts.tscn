@@ -18,6 +18,7 @@ root = SubResource("1")
 hidden_tabs = {}
 windows = {}
 save_on_change = false
+layout_reset_path = ""
 
 [node name="ManageLayouts" type="AcceptDialog"]
 title = "Manage Layouts"
