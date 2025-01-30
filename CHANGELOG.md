@@ -15,7 +15,7 @@ Built using Godot 4.3
 - Indexed mode has finally been implemented! [#1136](https://github.com/Orama-Interactive/Pixelorama/pull/1136)
 - Audio layers have been added, allowing artists to easily synchronize their animations with audio. [#1149](https://github.com/Orama-Interactive/Pixelorama/pull/1149)
 - Added a new text tool. Destructive only for now, meaning that once the text is confirmed, it cannot be changed later. [#1134](https://github.com/Orama-Interactive/Pixelorama/pull/1134)
-- An "Paste from Clipboard" option has been added to the Edit menu, allowing images from the operating system's clipboard to be pasted into Pixelorama. Note that copying images from Pixelorama into the OS' clipboard has not been implemented at the moment.
+- A "Paste from Clipboard" option has been added to the Edit menu, allowing images from the operating system's clipboard to be pasted into Pixelorama. Note that copying images from Pixelorama into the OS' clipboard has not been implemented at the moment.
 - A color curves image and layer effect has been added.
 - It is now possible to load custom Godot shaders as image and layer effects.
 - Implemented support for multiple grids. [#1122](https://github.com/Orama-Interactive/Pixelorama/pull/1122)
