@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-01-31 00:40\n"
+"PO-Revision-Date: 2025-01-31 15:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -292,15 +292,15 @@ msgstr "Preferenze"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Procedurale"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Sfocato"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loader"
-msgstr ""
+msgstr "Loader"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -330,7 +330,7 @@ msgstr "Azzera"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Reimposta %s"
 
 msgid "Use Current Frame"
 msgstr "Usa il Fotogramma Attuale"
@@ -371,7 +371,7 @@ msgstr "Aggiungi Layout"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Cancella %s"
 
 msgid "Copy from"
 msgstr "Copia da"
