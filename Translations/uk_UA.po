@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2025-01-30 22:37\n"
+"PO-Revision-Date: 2025-01-31 00:40\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -324,8 +324,13 @@ msgstr ""
 msgid "Masking:"
 msgstr ""
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "Скинути"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr "З поточного кадра"
@@ -358,19 +363,15 @@ msgstr "Керування розміщеннями"
 msgid "Preview"
 msgstr "Перегляд"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "Це попередній перегляд, він не змінить розміщення"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "Двічі натисніть, щоб встановити розміщення як початкове"
-
 msgid "Add"
 msgstr "Додати"
 
 msgid "Add Layout"
 msgstr "Додати розміщення"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "Копіювати з"
