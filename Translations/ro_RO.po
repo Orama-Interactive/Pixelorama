@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-01-31 00:40\n"
+"PO-Revision-Date: 2025-01-31 08:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -290,15 +290,15 @@ msgstr "Preferințe"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Procedural"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Estompare"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loader"
-msgstr ""
+msgstr "Încărcător"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
