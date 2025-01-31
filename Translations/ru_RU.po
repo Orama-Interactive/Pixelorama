@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-01-30 22:37\n"
+"PO-Revision-Date: 2025-01-31 00:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -323,8 +323,13 @@ msgstr "Ось Y:"
 msgid "Masking:"
 msgstr "Маскирование:"
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "Сброс"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr "Использовать текущий кадр"
@@ -357,19 +362,15 @@ msgstr "Управление слоями"
 msgid "Preview"
 msgstr "Предпросмотр"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "Это предварительный просмотр, изменение не изменит макет"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "Щелкните дважды для установки нового начального макета"
-
 msgid "Add"
 msgstr "Добавить"
 
 msgid "Add Layout"
 msgstr "Добавить компоновку"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "Копировать из"
