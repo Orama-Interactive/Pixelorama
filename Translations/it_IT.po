@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-01-30 22:37\n"
+"PO-Revision-Date: 2025-01-31 00:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -324,8 +324,13 @@ msgstr "Base Y:"
 msgid "Masking:"
 msgstr "Maschera:"
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "Azzera"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr "Usa il Fotogramma Attuale"
@@ -358,19 +363,15 @@ msgstr "Gestione dei livelli"
 msgid "Preview"
 msgstr "Anteprima"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "Questa è un'anteprima, cambiando questo non cambierà la disposizione"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "Doppio clic per impostare come nuova disposizione di avvio"
-
 msgid "Add"
 msgstr "Aggiungi"
 
 msgid "Add Layout"
 msgstr "Aggiungi Layout"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "Copia da"
