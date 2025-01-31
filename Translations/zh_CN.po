@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-01-30 22:37\n"
+"PO-Revision-Date: 2025-01-31 00:40\n"
 
 msgid "OK"
 msgstr "确定"
@@ -324,8 +324,13 @@ msgstr "Y-基准："
 msgid "Masking:"
 msgstr "蒙板："
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "重置"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr "当前帧"
@@ -358,19 +363,15 @@ msgstr "管理布局"
 msgid "Preview"
 msgstr "预览"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "这是一个预览，更改此选项不会改变布局"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "双击设置为新的启动布局"
-
 msgid "Add"
 msgstr "添加"
 
 msgid "Add Layout"
 msgstr "添加布局"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "复制从"
