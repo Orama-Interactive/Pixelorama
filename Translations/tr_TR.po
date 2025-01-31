@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-01-30 22:37\n"
+"PO-Revision-Date: 2025-01-31 00:40\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -324,8 +324,13 @@ msgstr "Y-tabanlı:"
 msgid "Masking:"
 msgstr "Maskeleme:"
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "Sıfırla"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr "Geçerli Kareyi Kullan"
@@ -358,19 +363,15 @@ msgstr "Düzenleri Yönet"
 msgid "Preview"
 msgstr "Önizleme"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "Bu bir önizlemedir, bunu değiştirmek düzeni değiştirmez"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "Yeni başlangıç düzeni olarak ayarlamak için çift tıklayın"
-
 msgid "Add"
 msgstr "Ekle"
 
 msgid "Add Layout"
 msgstr "Düzen Ekle"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "Şuradan kopyala"
