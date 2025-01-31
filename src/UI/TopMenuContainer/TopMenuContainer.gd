@@ -53,7 +53,6 @@ var palettize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PalettizeD
 var pixelize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PixelizeDialog.tscn")
 var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.tscn")
 var loaded_effect_dialogs: Array[Dialog] = []
-var manage_layouts_dialog := Dialog.new("res://src/UI/Dialogs/ManageLayouts.tscn")
 var window_opacity_dialog := Dialog.new("res://src/UI/Dialogs/WindowOpacityDialog.tscn")
 var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 
@@ -67,6 +66,10 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var view_menu := $MarginContainer/HBoxContainer/MenuBar/View as PopupMenu
 @onready var window_menu := $MarginContainer/HBoxContainer/MenuBar/Window as PopupMenu
 @onready var help_menu := $MarginContainer/HBoxContainer/MenuBar/Help as PopupMenu
+@onready var add_layout_confirmation := $AddLayoutConfirmation as ConfirmationDialog
+@onready var delete_layout_confirmation := $DeleteLayoutConfirmation as ConfirmationDialog
+@onready var layout_name_line_edit := %LayoutName as LineEdit
+@onready var layout_from_option_button := %LayoutFrom as OptionButton
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
 @onready var current_frame_mark := %CurrentFrameMark as Label
@@ -110,6 +113,9 @@ func _ready() -> void:
 	_setup_effects_menu()
 	_setup_select_menu()
 	_setup_help_menu()
+	# Fill the copy layout from option button with the default layouts
+	for layout in Global.default_layouts:
+		layout_from_option_button.add_item(layout.resource_path.get_basename().get_file())
 
 
 func _input(event: InputEvent) -> void:
@@ -415,8 +421,9 @@ func populate_layouts_submenu() -> void:
 		var layout_name := layout.resource_path.get_basename().get_file()
 		layouts_submenu.add_radio_check_item(layout_name)
 	layouts_submenu.add_separator()
-	layouts_submenu.add_item("Manage Layouts")
-	layouts_submenu.add_item("Reset Default")
+	layouts_submenu.add_item("Add Layout")
+	layouts_submenu.add_item(tr("Delete %s") % "Default")
+	layouts_submenu.add_item(tr("Reset %s") % "Default")
 
 
 func _setup_image_menu() -> void:
@@ -852,8 +859,11 @@ func _layouts_submenu_id_pressed(id: int) -> void:
 	if id < layout_count:
 		set_layout(id)
 	elif id == layout_count + 1:
-		manage_layouts_dialog.popup()
+		layout_name_line_edit.text = "New layout"
+		add_layout_confirmation.popup_centered()
 	elif id == layout_count + 2:
+		delete_layout_confirmation.popup_centered()
+	elif id == layout_count + 3:
 		Global.layouts[selected_layout].reset()
 
 
@@ -866,6 +876,7 @@ func set_layout(id: int) -> void:
 	var layout := Global.layouts[id]
 	main_ui.layout = layout
 	var layout_name := layout.resource_path.get_basename().get_file()
+	layouts_submenu.set_item_text(layouts_submenu.item_count - 2, tr("Delete %s") % layout_name)
 	layouts_submenu.set_item_text(layouts_submenu.item_count - 1, tr("Reset %s") % layout_name)
 	layouts_submenu.set_item_disabled(
 		layouts_submenu.item_count - 1, layout.layout_reset_path.is_empty()
@@ -882,6 +893,59 @@ func set_layout(id: int) -> void:
 		Global.control.find_child("TabsContainer").visible = true
 		zen_mode = false
 		window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, false)
+
+
+func _on_add_layout_confirmation_confirmed() -> void:
+	var file_name := layout_name_line_edit.text + ".tres"
+	var path := Global.LAYOUT_DIR.path_join(file_name)
+	var layout: DockableLayout
+	if layout_from_option_button.selected == 0:
+		layout = Global.control.main_ui.layout.clone()
+		layout.layout_reset_path = ""
+	else:
+		layout = Global.default_layouts[layout_from_option_button.selected - 1].clone()
+	layout.resource_name = layout_name_line_edit.text
+	layout.resource_path = path
+	var err := ResourceSaver.save(layout, path)
+	if err != OK:
+		print(err)
+		return
+	Global.layouts.append(layout)
+	# Save the layout every time it changes
+	layout.save_on_change = true
+	Global.control.main_ui.layout = layout
+	Global.layouts.sort_custom(
+		func(a: DockableLayout, b: DockableLayout):
+			return a.resource_path.get_file() < b.resource_path.get_file()
+	)
+	var layout_index := Global.layouts.find(layout)
+	populate_layouts_submenu()
+	set_layout(layout_index)
+
+
+func _on_delete_layout_confirmation_confirmed() -> void:
+	if Global.layouts.size() <= 1:  # Don't delete any layout if we only have one left.
+		return
+	var layout_name := Global.layouts[selected_layout].resource_path.get_basename().get_file()
+	delete_layout_file(layout_name + ".tres")
+	Global.layouts.remove_at(selected_layout)
+	populate_layouts_submenu()
+	set_layout(0)
+
+
+func delete_layout_file(file_name: String) -> void:
+	var dir := DirAccess.open(Global.LAYOUT_DIR)
+	if not is_instance_valid(dir):
+		return
+	dir.remove(Global.LAYOUT_DIR.path_join(file_name))
+
+
+func _on_add_layout_confirmation_visibility_changed() -> void:
+	Global.dialog_open(add_layout_confirmation.visible)
+
+
+func _on_delete_layout_confirmation_visibility_changed() -> void:
+	Global.dialog_open(delete_layout_confirmation.visible)
 
 
 func _toggle_greyscale_view() -> void:

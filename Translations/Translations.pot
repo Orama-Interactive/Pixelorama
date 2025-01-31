@@ -350,18 +350,14 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr ""
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr ""
-
 msgid "Add"
 msgstr ""
 
 msgid "Add Layout"
+msgstr ""
+
+#. Verb, deletes something.
+msgid "Delete %s"
 msgstr ""
 
 msgid "Copy from"
