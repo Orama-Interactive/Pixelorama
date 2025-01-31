@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2025-01-30 22:37\n"
+"PO-Revision-Date: 2025-01-31 00:40\n"
 
 msgid "OK"
 msgstr "確定"
@@ -322,7 +322,12 @@ msgstr ""
 msgid "Masking:"
 msgstr ""
 
+#. Verb, resets something.
 msgid "Reset"
+msgstr ""
+
+#. Verb, resets something.
+msgid "Reset %s"
 msgstr ""
 
 msgid "Use Current Frame"
@@ -356,18 +361,14 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr ""
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr ""
-
 msgid "Add"
 msgstr "新增"
 
 msgid "Add Layout"
+msgstr ""
+
+#. Verb, deletes something.
+msgid "Delete %s"
 msgstr ""
 
 msgid "Copy from"
