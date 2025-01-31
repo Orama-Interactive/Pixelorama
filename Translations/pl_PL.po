@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-01-30 22:37\n"
+"PO-Revision-Date: 2025-01-31 00:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -324,8 +324,13 @@ msgstr ""
 msgid "Masking:"
 msgstr "Maskowanie:"
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "Zresetuj"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr "Użyj Aktualnej Klatki"
@@ -358,19 +363,15 @@ msgstr "Zarządzaj szablonami"
 msgid "Preview"
 msgstr "Podgląd"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "To jest podgląd, zmienianie go nie zmieni szablonu"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "Kliknij dwukrotnie, aby ustawić jako nowy szablon domyślny"
-
 msgid "Add"
 msgstr "Dodaj"
 
 msgid "Add Layout"
 msgstr "Dodaj Szablon"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "Skopiuj z"
