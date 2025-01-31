@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-01-31 00:40\n"
+"PO-Revision-Date: 2025-01-31 11:05\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -292,15 +292,15 @@ msgstr "Tercihler"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Aşamalı"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Bulanık"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loader"
-msgstr ""
+msgstr "Yükleyici"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -330,7 +330,7 @@ msgstr "Sıfırla"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "%s sıfırla"
 
 msgid "Use Current Frame"
 msgstr "Geçerli Kareyi Kullan"
@@ -371,7 +371,7 @@ msgstr "Düzen Ekle"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "%s sil"
 
 msgid "Copy from"
 msgstr "Şuradan kopyala"
