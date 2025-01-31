@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-01-30 22:36\n"
+"PO-Revision-Date: 2025-01-31 00:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -322,8 +322,13 @@ msgstr ""
 msgid "Masking:"
 msgstr ""
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "Obnovit"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr ""
@@ -356,19 +361,15 @@ msgstr "Správa rozložení"
 msgid "Preview"
 msgstr "Náhled"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "Pouze náhled, úpravy nezmění rozložení"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "Dvojklikem nastavíte nové rozložení při spuštění"
-
 msgid "Add"
 msgstr "Přidat"
 
 msgid "Add Layout"
 msgstr "Přidat rozložení"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "Kopírovat z"
