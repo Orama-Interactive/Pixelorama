@@ -22,6 +22,8 @@ var big_bounding_rectangle := Rect2i():
 		big_bounding_rectangle = value
 		if value.size == Vector2i(0, 0):
 			set_process_input(false)
+			_set_default_cursor()
+			dragged_gizmo = null
 			Global.can_draw = true
 		else:
 			set_process_input(true)
@@ -187,15 +189,20 @@ func _input(event: InputEvent) -> void:
 		if gizmo_hover:
 			Input.set_default_cursor_shape(gizmo_hover.get_cursor())
 		else:
-			var cursor := Input.CURSOR_ARROW
-			if Global.cross_cursor:
-				cursor = Input.CURSOR_CROSS
-			var layer: BaseLayer = project.layers[project.current_layer]
-			if not layer.can_layer_get_drawn():
-				cursor = Input.CURSOR_FORBIDDEN
+			_set_default_cursor()
 
-			if DisplayServer.cursor_get_shape() != cursor:
-				Input.set_default_cursor_shape(cursor)
+
+func _set_default_cursor() -> void:
+	var project := Global.current_project
+	var cursor := Input.CURSOR_ARROW
+	if Global.cross_cursor:
+		cursor = Input.CURSOR_CROSS
+	var layer: BaseLayer = project.layers[project.current_layer]
+	if not layer.can_layer_get_drawn():
+		cursor = Input.CURSOR_FORBIDDEN
+
+	if DisplayServer.cursor_get_shape() != cursor:
+		Input.set_default_cursor_shape(cursor)
 
 
 func _move_with_arrow_keys(event: InputEvent) -> void:
