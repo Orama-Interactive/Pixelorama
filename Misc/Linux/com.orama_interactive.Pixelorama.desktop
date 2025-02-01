@@ -16,6 +16,7 @@ Comment[uk]=Створюйте та редагуйте статичні та а�
 Comment[zh_CN]=创建并编辑 2D 精灵图片或动画
 Exec=pixelorama
 Icon=pixelorama
+StartupWMClass=Pixelorama
 Terminal=false
 Type=Application
 Categories=Graphics;2DGraphics;RasterGraphics;
