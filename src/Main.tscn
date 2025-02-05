@@ -49,9 +49,9 @@ mouse_filter = 2
 
 [node name="PatternsPopup" parent="Dialogs" instance=ExtResource("5")]
 
-[node name="OpenSprite" parent="Dialogs" groups=["FixInternalDialogs"] instance=ExtResource("12")]
+[node name="OpenSprite" parent="Dialogs" instance=ExtResource("12")]
 
-[node name="SaveSprite" parent="Dialogs" groups=["FixInternalDialogs"] instance=ExtResource("11")]
+[node name="SaveSprite" parent="Dialogs" instance=ExtResource("11")]
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource("8")]
 
