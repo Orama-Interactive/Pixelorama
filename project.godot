@@ -62,6 +62,7 @@ enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/docka
 
 CanvasCameras=""
 CanvasPreviews=""
+FixInternalDialogs="Nodes in this group contain internal windows whose always_on_top needs correction"
 
 [importer_defaults]
 

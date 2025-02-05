@@ -188,12 +188,13 @@ func _ready() -> void:
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 
 	# Procedurally set always_on_top roperty of sub dialogs
-	for file_dialog in get_tree().get_nodes_in_group("FileDialogs"):
+	for file_dialog in get_tree().get_nodes_in_group(&"FixInternalDialogs"):
 		for dialog_child in file_dialog.get_children(true):
 			if dialog_child is Window:
 				# Sub dialogs are usually open one at a time so it should be safe to set them all
 				# to be always on top
 				dialog_child.always_on_top = true
+		file_dialog.remove_from_group(&"FixInternalDialogs")
 	if OS.get_name() == "Android":
 		OS.request_permissions()
 	_handle_backup()
