@@ -44,7 +44,6 @@ size_flags_vertical = 3
 [node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 0
-anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -341,12 +340,10 @@ file_mode = 2
 access = 2
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="."]
-size = Vector2i(346, 100)
 always_on_top = true
 dialog_text = "DirAccess path and file name are not valid!"
 
 [node name="FileExistsAlert" type="AcceptDialog" parent="."]
-size = Vector2i(272, 100)
 always_on_top = true
 dialog_text = "File %s already exists. Overwrite?"
 
