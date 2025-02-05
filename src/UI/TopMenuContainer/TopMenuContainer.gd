@@ -99,21 +99,6 @@ class Dialog:
 		node = scene.instantiate()
 		if is_instance_valid(node):
 			Global.control.get_node("Dialogs").add_child(node)
-			fix_internal_dialogs()
-
-	static func fix_internal_dialogs() -> void:
-		# Procedurally set always_on_top roperty of sub items.
-		# (This could be an option button or window, etc...)
-		for item in Global.get_tree().get_nodes_in_group(&"FixInternalDialogs"):
-			# Sub dialogs are usually open one at a time so it should be safe to set them all
-			# to be always on top.
-			var parent_window: Window = item.get_window()
-			if item is Window:
-				parent_window = item
-			for dialog_child in item.get_children(true):
-				if dialog_child is Window:
-					dialog_child.always_on_top = parent_window.always_on_top
-			item.remove_from_group(&"FixInternalDialogs")
 
 
 func _ready() -> void:

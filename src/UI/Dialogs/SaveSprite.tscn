@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d4euwo633u33b"]
 
-[node name="SaveSprite" type="FileDialog" groups=["FileDialogs", "FixInternalDialogs"]]
+[node name="SaveSprite" type="FileDialog" groups=["FileDialogs"]]
 size = Vector2i(675, 400)
 ok_button_text = "Save"
 access = 2

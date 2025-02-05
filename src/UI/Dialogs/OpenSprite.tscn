@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b3aeqj2k58wdk"]
 
-[node name="OpenSprite" type="FileDialog" groups=["FileDialogs", "FixInternalDialogs"]]
+[node name="OpenSprite" type="FileDialog" groups=["FileDialogs"]]
 title = "Open File(s)"
 size = Vector2i(558, 400)
 ok_button_text = "Open"
