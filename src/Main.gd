@@ -186,7 +186,6 @@ func _ready() -> void:
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
-
 	if OS.get_name() == "Android":
 		OS.request_permissions()
 	_handle_backup()

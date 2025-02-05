@@ -44,7 +44,6 @@ size_flags_vertical = 3
 [node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 0
-anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
