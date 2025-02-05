@@ -187,6 +187,8 @@ func _ready() -> void:
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 
+	Global.top_menu_container.Dialog.fix_internal_dialogs()
+
 	if OS.get_name() == "Android":
 		OS.request_permissions()
 	_handle_backup()
