@@ -192,3 +192,4 @@ hidden_tabs = {
 }
 windows = {}
 save_on_change = false
+layout_reset_path = ""

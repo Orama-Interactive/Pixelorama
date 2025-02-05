@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bfbragmmdwfbl"]
+[gd_scene load_steps=28 format=3 uid="uid://bfbragmmdwfbl"]
 
 [ext_resource type="Script" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
 [ext_resource type="Texture2D" uid="uid://d4by47alul2qw" path="res://assets/graphics/tiles_panel/tiles_draw.png" id="2_h0p0x"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dfq0wpxsd51co" path="res://assets/graphics/tiles_panel/tiles_manual.png" id="6_gwj5u"]
 [ext_resource type="Texture2D" uid="uid://7m4hln3mo2e5" path="res://assets/graphics/tiles_panel/tiles_auto.png" id="7_afsgi"]
 [ext_resource type="Texture2D" uid="uid://uo1ikty26del" path="res://assets/graphics/tiles_panel/tiles_stack.png" id="8_yoaya"]
+[ext_resource type="Texture2D" uid="uid://dwoilatxfh1s7" path="res://assets/graphics/misc/options.png" id="9_macrc"]
+[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="10_wfr6s"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_klv67"]
 action = &"toggle_draw_tiles_mode"
@@ -84,7 +86,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_vertical = 0
-tooltip_text = "Draw tiles mode"
+tooltip_text = "Draw tiles"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_6ebuw")
@@ -209,6 +211,7 @@ layout_mode = 2
 tooltip_text = "Auto"
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_pressed = true
 button_group = SubResource("ButtonGroup_uxnt0")
 shortcut = SubResource("Shortcut_a0fx5")
 
@@ -243,6 +246,24 @@ texture = ExtResource("8_yoaya")
 expand_mode = 1
 stretch_mode = 3
 
+[node name="OptionButton" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons" groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/Buttons/OptionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_macrc")
+expand_mode = 1
+stretch_mode = 3
+
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -268,6 +289,63 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="Options" type="Popup" parent="."]
+position = Vector2i(0, 36)
+size = Vector2i(210, 100)
+unresizable = false
+borderless = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Options"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Options/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Options/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="TileSizeLabel" type="Label" parent="Options/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile button size:"
+
+[node name="TileSizeSlider" type="TextureProgressBar" parent="Options/MarginContainer/ScrollContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 36.0
+max_value = 144.0
+value = 36.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("10_wfr6s")
+
+[node name="ShowEmptyTileLabel" type="Label" parent="Options/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Show empty tile:"
+
+[node name="ShowEmptyTile" type="CheckBox" parent="Options/MarginContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
+[node name="TileButtonPopupMenu" type="PopupMenu" parent="."]
+item_count = 1
+item_0/text = "Delete"
+
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/PlaceTiles" to="." method="_on_place_tiles_toggled"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateRightButton" to="." method="_on_rotate_pressed" binds= [true]]
@@ -276,3 +354,7 @@ layout_mode = 2
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Manual" to="." method="_on_manual_toggled"]
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Auto" to="." method="_on_auto_toggled"]
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Stack" to="." method="_on_stack_toggled"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="value_changed" from="Options/MarginContainer/ScrollContainer/GridContainer/TileSizeSlider" to="." method="_on_tile_size_slider_value_changed"]
+[connection signal="toggled" from="Options/MarginContainer/ScrollContainer/GridContainer/ShowEmptyTile" to="." method="_on_show_empty_tile_toggled"]
+[connection signal="index_pressed" from="TileButtonPopupMenu" to="." method="_on_tile_button_popup_menu_index_pressed"]

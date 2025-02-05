@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cul5mpy17ebfl"]
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="2"]
 [ext_resource type="Script" path="res://src/Tools/DesignTools/Pencil.gd" id="3"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_e3rs3"]

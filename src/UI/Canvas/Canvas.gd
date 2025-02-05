@@ -126,7 +126,7 @@ func update_texture(
 			return
 		var layer := project.layers[layer_i].get_blender_ancestor()
 		var cel_image: Image
-		if layer is GroupLayer:
+		if layer.is_blender():
 			cel_image = layer.blend_children(
 				project.frames[project.current_frame], Vector2i.ZERO, Global.display_layer_effects
 			)
@@ -217,7 +217,7 @@ func _update_texture_array_layer(
 	var ordered_index := project.ordered_layers[layer.index]
 	var cel := project.frames[project.current_frame].cels[layer.index]
 	var include := true
-	if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
+	if layer.is_blender():
 		cel_image.copy_from(
 			layer.blend_children(
 				project.frames[project.current_frame],

@@ -22,6 +22,8 @@ var big_bounding_rectangle := Rect2i():
 		big_bounding_rectangle = value
 		if value.size == Vector2i(0, 0):
 			set_process_input(false)
+			_set_default_cursor()
+			dragged_gizmo = null
 			Global.can_draw = true
 		else:
 			set_process_input(true)
@@ -187,15 +189,20 @@ func _input(event: InputEvent) -> void:
 		if gizmo_hover:
 			Input.set_default_cursor_shape(gizmo_hover.get_cursor())
 		else:
-			var cursor := Input.CURSOR_ARROW
-			if Global.cross_cursor:
-				cursor = Input.CURSOR_CROSS
-			var layer: BaseLayer = project.layers[project.current_layer]
-			if not layer.can_layer_get_drawn():
-				cursor = Input.CURSOR_FORBIDDEN
+			_set_default_cursor()
 
-			if DisplayServer.cursor_get_shape() != cursor:
-				Input.set_default_cursor_shape(cursor)
+
+func _set_default_cursor() -> void:
+	var project := Global.current_project
+	var cursor := Input.CURSOR_ARROW
+	if Global.cross_cursor:
+		cursor = Input.CURSOR_CROSS
+	var layer: BaseLayer = project.layers[project.current_layer]
+	if not layer.can_layer_get_drawn():
+		cursor = Input.CURSOR_FORBIDDEN
+
+	if DisplayServer.cursor_get_shape() != cursor:
+		Input.set_default_cursor_shape(cursor)
 
 
 func _move_with_arrow_keys(event: InputEvent) -> void:
@@ -875,6 +882,48 @@ func paste(in_place := false) -> void:
 	is_moving_content = true
 	is_pasting = true
 	original_preview_image = clipboard.image
+	original_big_bounding_rectangle = big_bounding_rectangle
+	original_offset = project.selection_offset
+	original_bitmap.copy_from(project.selection_map)
+	preview_image.copy_from(original_preview_image)
+	preview_image_texture = ImageTexture.create_from_image(preview_image)
+	project.selection_map_changed()
+
+
+func paste_from_clipboard() -> void:
+	if not DisplayServer.clipboard_has_image():
+		return
+	var clipboard_image := DisplayServer.clipboard_get_image()
+	if clipboard_image.is_empty() or clipboard_image.is_invisible():
+		return
+	if is_moving_content:
+		transform_content_confirm()
+	undo_data = get_undo_data(true)
+	clear_selection()
+	var project := Global.current_project
+	var clip_map := SelectionMap.new()
+	clip_map.copy_from(
+		Image.create(
+			clipboard_image.get_width(),
+			clipboard_image.get_height(),
+			false,
+			project.selection_map.get_format()
+		)
+	)
+	clip_map.fill_rect(Rect2i(Vector2i.ZERO, clipboard_image.get_size()), Color(1, 1, 1, 1))
+	var max_size := Vector2i(
+		maxi(clip_map.get_size().x, project.selection_map.get_size().x),
+		maxi(clip_map.get_size().y, project.selection_map.get_size().y)
+	)
+
+	project.selection_map.copy_from(clip_map)
+	project.selection_map.crop(max_size.x, max_size.y)
+	big_bounding_rectangle = project.selection_map.get_used_rect()
+	temp_rect = big_bounding_rectangle
+	resized_rect = big_bounding_rectangle
+	is_moving_content = true
+	is_pasting = true
+	original_preview_image = clipboard_image
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = project.selection_offset
 	original_bitmap.copy_from(project.selection_map)

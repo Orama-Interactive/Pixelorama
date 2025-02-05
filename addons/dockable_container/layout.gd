@@ -41,6 +41,8 @@ enum { MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM, MARGIN_CENTER }
 			if changed.is_connected(save):
 				changed.disconnect(save)
 
+## A path to a layout that this layout can be reset to.
+@export var layout_reset_path := ""
 var _changed_signal_queued := false
 var _first_leaf: DockableLayoutPanel
 var _hidden_tabs: Dictionary
@@ -74,6 +76,20 @@ func get_root() -> DockableLayoutNode:
 
 func clone() -> DockableLayout:
 	return duplicate(true)
+
+
+func copy_from(other_layout: DockableLayout) -> void:
+	root = other_layout.root
+	hidden_tabs = other_layout.hidden_tabs
+	windows = other_layout.windows
+	changed.emit()
+
+
+func reset() -> void:
+	if not layout_reset_path.is_empty():
+		var layout_to_reset := load(layout_reset_path)
+		if is_instance_valid(layout_to_reset) and layout_to_reset is DockableLayout:
+			copy_from(layout_to_reset.clone())
 
 
 func get_names() -> PackedStringArray:

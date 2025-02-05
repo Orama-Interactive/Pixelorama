@@ -2,8 +2,8 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform bool red = true;
-uniform bool blue = true;
 uniform bool green = true;
+uniform bool blue = true;
 uniform bool alpha = false;
 uniform sampler2D selection : filter_nearest;
 
