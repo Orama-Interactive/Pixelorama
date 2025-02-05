@@ -14,7 +14,18 @@ const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
 var recent_projects := []
 var selected_layout := 0
 var zen_mode := false
-var loaded_effects_submenu: PopupMenu
+var tile_mode_submenu := PopupMenu.new()
+var selection_modify_submenu := PopupMenu.new()
+var color_mode_submenu := PopupMenu.new()
+var snap_to_submenu := PopupMenu.new()
+var panels_submenu := PopupMenu.new()
+var layouts_submenu := PopupMenu.new()
+var recent_projects_submenu := PopupMenu.new()
+var effects_transform_submenu := PopupMenu.new()
+var effects_color_submenu := PopupMenu.new()
+var effects_procedural_submenu := PopupMenu.new()
+var effects_blur_submenu := PopupMenu.new()
+var effects_loaded_submenu: PopupMenu
 
 # Dialogs
 var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
@@ -42,7 +53,6 @@ var palettize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PalettizeD
 var pixelize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PixelizeDialog.tscn")
 var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.tscn")
 var loaded_effect_dialogs: Array[Dialog] = []
-var manage_layouts_dialog := Dialog.new("res://src/UI/Dialogs/ManageLayouts.tscn")
 var window_opacity_dialog := Dialog.new("res://src/UI/Dialogs/WindowOpacityDialog.tscn")
 var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 
@@ -56,15 +66,12 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var view_menu := $MarginContainer/HBoxContainer/MenuBar/View as PopupMenu
 @onready var window_menu := $MarginContainer/HBoxContainer/MenuBar/Window as PopupMenu
 @onready var help_menu := $MarginContainer/HBoxContainer/MenuBar/Help as PopupMenu
+@onready var add_layout_confirmation := $AddLayoutConfirmation as ConfirmationDialog
+@onready var delete_layout_confirmation := $DeleteLayoutConfirmation as ConfirmationDialog
+@onready var layout_name_line_edit := %LayoutName as LineEdit
+@onready var layout_from_option_button := %LayoutFrom as OptionButton
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
-@onready var tile_mode_submenu := PopupMenu.new()
-@onready var selection_modify_submenu := PopupMenu.new()
-@onready var color_mode_submenu := PopupMenu.new()
-@onready var snap_to_submenu := PopupMenu.new()
-@onready var panels_submenu := PopupMenu.new()
-@onready var layouts_submenu := PopupMenu.new()
-@onready var recent_projects_submenu := PopupMenu.new()
 @onready var current_frame_mark := %CurrentFrameMark as Label
 
 
@@ -121,6 +128,9 @@ func _ready() -> void:
 	_setup_effects_menu()
 	_setup_select_menu()
 	_setup_help_menu()
+	# Fill the copy layout from option button with the default layouts
+	for layout in Global.default_layouts:
+		layout_from_option_button.add_item(layout.resource_path.get_basename().get_file())
 
 
 func _input(event: InputEvent) -> void:
@@ -226,6 +236,7 @@ func _setup_edit_menu() -> void:
 		"Cut": "cut",
 		"Paste": "paste",
 		"Paste in Place": "paste_in_place",
+		"Paste from Clipboard": "paste_from_clipboard",
 		"Delete": "delete",
 		"New Brush": "new_brush",
 		"Preferences": "preferences"
@@ -256,6 +267,7 @@ func _setup_view_menu() -> void:
 		"Show Rulers": "show_rulers",
 		"Show Guides": "show_guides",
 		"Show Mouse Guides": "",
+		"Show Reference Images": "show_reference_images",
 		"Display Layer Effects": &"display_layer_effects",
 		"Snap To": "",
 	}
@@ -273,6 +285,7 @@ func _setup_view_menu() -> void:
 			_set_menu_shortcut(view_menu_items[item], view_menu, i, item, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
+	view_menu.set_item_checked(Global.ViewMenu.SHOW_REFERENCE_IMAGES, true)
 	view_menu.set_item_checked(Global.ViewMenu.DISPLAY_LAYER_EFFECTS, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.id_pressed.connect(view_menu_id_pressed)
@@ -406,13 +419,12 @@ func _setup_panels_submenu(item: String) -> void:
 
 
 func _setup_layouts_submenu(item: String) -> void:
-	layouts_submenu.set_name("layouts_submenu")
 	layouts_submenu.hide_on_checkable_item_selection = false
 	populate_layouts_submenu()
 
 	layouts_submenu.id_pressed.connect(_layouts_submenu_id_pressed)
 	window_menu.add_child(layouts_submenu)
-	window_menu.add_submenu_item(item, layouts_submenu.get_name())
+	window_menu.add_submenu_node_item(item, layouts_submenu)
 
 	var saved_layout: int = Global.config_cache.get_value("window", "layout", 0)
 	set_layout(saved_layout)
@@ -420,10 +432,13 @@ func _setup_layouts_submenu(item: String) -> void:
 
 func populate_layouts_submenu() -> void:
 	layouts_submenu.clear()  # Does not do anything if it's called for the first time
-	layouts_submenu.add_item("Manage Layouts", 0)
 	for layout in Global.layouts:
 		var layout_name := layout.resource_path.get_basename().get_file()
 		layouts_submenu.add_radio_check_item(layout_name)
+	layouts_submenu.add_separator()
+	layouts_submenu.add_item("Add Layout")
+	layouts_submenu.add_item(tr("Delete %s") % "Default")
+	layouts_submenu.add_item(tr("Reset %s") % "Default")
 
 
 func _setup_image_menu() -> void:
@@ -458,37 +473,45 @@ func _setup_color_mode_submenu(item: String) -> void:
 
 
 func _setup_effects_menu() -> void:
-	# Order as in Global.EffectMenu enum
-	var menu_items := {
-		"Offset Image": "offset_image",
-		"Mirror Image": "mirror_image",
-		"Rotate Image": "rotate_image",
-		"Outline": "outline",
-		"Drop Shadow": "drop_shadow",
-		"Invert Colors": "invert_colors",
-		"Desaturation": "desaturation",
-		"Adjust Hue/Saturation/Value": "adjust_hsv",
-		"Adjust Brightness/Contrast": "adjust_brightness_contrast",
-		"Color Curves": "color_curves",
-		"Palettize": "palettize",
-		"Pixelize": "pixelize",
-		"Posterize": "posterize",
-		"Gaussian Blur": "gaussian_blur",
-		"Gradient": "gradient",
-		"Gradient Map": "gradient_map",
-		"Loaded": ""
-	}
-	var i := 0
-	for item in menu_items:
-		if item == "Loaded":
-			_setup_loaded_effects_submenu()
-		else:
-			_set_menu_shortcut(menu_items[item], effects_menu, i, item)
-		i += 1
+	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset Image")
+	_set_menu_shortcut(&"mirror_image", effects_transform_submenu, 1, "Mirror Image")
+	_set_menu_shortcut(&"rotate_image", effects_transform_submenu, 2, "Rotate Image")
+	effects_transform_submenu.id_pressed.connect(_on_effects_transform_submenu_id_pressed)
+	effects_menu.add_child(effects_transform_submenu)
+	effects_menu.add_submenu_node_item("Transform", effects_transform_submenu)
+
+	_set_menu_shortcut(&"invert_colors", effects_color_submenu, 0, "Invert Colors")
+	_set_menu_shortcut(&"desaturation", effects_color_submenu, 1, "Desaturation")
+	_set_menu_shortcut(&"adjust_hsv", effects_color_submenu, 2, "Adjust Hue/Saturation/Value")
+	_set_menu_shortcut(
+		&"adjust_brightness_contrast", effects_color_submenu, 3, "Adjust Brightness/Contrast"
+	)
+	_set_menu_shortcut(&"color_curves", effects_color_submenu, 4, "Color Curves")
+	_set_menu_shortcut(&"palettize", effects_color_submenu, 5, "Palettize")
+	_set_menu_shortcut(&"posterize", effects_color_submenu, 6, "Posterize")
+	_set_menu_shortcut(&"gradient_map", effects_color_submenu, 7, "Gradient Map")
+	effects_color_submenu.id_pressed.connect(_on_effects_color_submenu_id_pressed)
+	effects_menu.add_child(effects_color_submenu)
+	effects_menu.add_submenu_node_item("Color", effects_color_submenu)
+
+	_set_menu_shortcut(&"outline", effects_procedural_submenu, 0, "Outline")
+	_set_menu_shortcut(&"drop_shadow", effects_procedural_submenu, 1, "Drop Shadow")
+	_set_menu_shortcut(&"gradient", effects_procedural_submenu, 2, "Gradient")
+	effects_procedural_submenu.id_pressed.connect(_on_effects_procedural_submenu_id_pressed)
+	effects_menu.add_child(effects_procedural_submenu)
+	effects_menu.add_submenu_node_item("Procedural", effects_procedural_submenu)
+
+	_set_menu_shortcut(&"pixelize", effects_blur_submenu, 0, "Pixelize")
+	_set_menu_shortcut(&"gaussian_blur", effects_blur_submenu, 1, "Gaussian Blur")
+	effects_blur_submenu.id_pressed.connect(_on_effects_blur_submenu_id_pressed)
+	effects_menu.add_child(effects_blur_submenu)
+	effects_menu.add_submenu_node_item("Blur", effects_blur_submenu)
+
+	_setup_effects_loaded_submenu()
 	effects_menu.id_pressed.connect(effects_menu_id_pressed)
 
 
-func _setup_loaded_effects_submenu() -> void:
+func _setup_effects_loaded_submenu() -> void:
 	if not DirAccess.dir_exists_absolute(OpenSave.SHADERS_DIRECTORY):
 		DirAccess.make_dir_recursive_absolute(OpenSave.SHADERS_DIRECTORY)
 	var shader_files := DirAccess.get_files_at(OpenSave.SHADERS_DIRECTORY)
@@ -503,15 +526,15 @@ func _load_shader_file(file_path: String) -> void:
 	if file is not Shader:
 		return
 	var effect_name := file_path.get_file().get_basename()
-	if not is_instance_valid(loaded_effects_submenu):
-		loaded_effects_submenu = PopupMenu.new()
-		loaded_effects_submenu.set_name("loaded_effects_submenu")
-		loaded_effects_submenu.id_pressed.connect(_loaded_effects_submenu_id_pressed)
-		effects_menu.add_child(loaded_effects_submenu)
-		effects_menu.add_submenu_item("Loaded", loaded_effects_submenu.get_name())
-	loaded_effects_submenu.add_item(effect_name)
-	var effect_index := loaded_effects_submenu.item_count - 1
-	loaded_effects_submenu.set_item_metadata(effect_index, file)
+	if not is_instance_valid(effects_loaded_submenu):
+		effects_loaded_submenu = PopupMenu.new()
+		effects_loaded_submenu.set_name("effects_loaded_submenu")
+		effects_loaded_submenu.id_pressed.connect(_effects_loaded_submenu_id_pressed)
+		effects_menu.add_child(effects_loaded_submenu)
+		effects_menu.add_submenu_node_item("Loaded", effects_loaded_submenu)
+	effects_loaded_submenu.add_item(effect_name)
+	var effect_index := effects_loaded_submenu.item_count - 1
+	effects_loaded_submenu.set_item_metadata(effect_index, file)
 	loaded_effect_dialogs.append(Dialog.new("res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn"))
 
 
@@ -697,6 +720,8 @@ func edit_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.paste()
 		Global.EditMenu.PASTE_IN_PLACE:
 			Global.canvas.selection.paste(true)
+		Global.EditMenu.PASTE_FROM_CLIPBOARD:
+			Global.canvas.selection.paste_from_clipboard()
 		Global.EditMenu.DELETE:
 			Global.canvas.selection.delete()
 		Global.EditMenu.NEW_BRUSH:
@@ -727,6 +752,11 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_guides()
 		Global.ViewMenu.SHOW_MOUSE_GUIDES:
 			_toggle_show_mouse_guides()
+		Global.ViewMenu.SHOW_REFERENCE_IMAGES:
+			Global.show_reference_images = not Global.show_reference_images
+			view_menu.set_item_checked(
+				Global.ViewMenu.SHOW_REFERENCE_IMAGES, Global.show_reference_images
+			)
 		Global.ViewMenu.SHOW_PIXEL_INDICES:
 			_toggle_show_pixel_indices()
 		Global.ViewMenu.DISPLAY_LAYER_EFFECTS:
@@ -819,14 +849,14 @@ func _snap_to_submenu_id_pressed(id: int) -> void:
 		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
 
 
-func _loaded_effects_submenu_id_pressed(id: int) -> void:
+func _effects_loaded_submenu_id_pressed(id: int) -> void:
 	var dialog := loaded_effect_dialogs[id]
 	if is_instance_valid(dialog.node):
 		dialog.popup()
 	else:
 		dialog.instantiate_scene()
-		var shader := loaded_effects_submenu.get_item_metadata(id) as Shader
-		dialog.node.change_shader(shader, loaded_effects_submenu.get_item_text(id))
+		var shader := effects_loaded_submenu.get_item_metadata(id) as Shader
+		dialog.node.change_shader(shader, effects_loaded_submenu.get_item_text(id))
 		dialog.popup()
 
 
@@ -840,10 +870,16 @@ func _panels_submenu_id_pressed(id: int) -> void:
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
-	if id == 0:
-		manage_layouts_dialog.popup()
-	else:
-		set_layout(id - 1)
+	var layout_count := Global.layouts.size()
+	if id < layout_count:
+		set_layout(id)
+	elif id == layout_count + 1:
+		layout_name_line_edit.text = "New layout"
+		add_layout_confirmation.popup_centered()
+	elif id == layout_count + 2:
+		delete_layout_confirmation.popup_centered()
+	elif id == layout_count + 3:
+		Global.layouts[selected_layout].reset()
 
 
 func set_layout(id: int) -> void:
@@ -852,10 +888,16 @@ func set_layout(id: int) -> void:
 	if id >= Global.layouts.size():
 		id = 0
 	selected_layout = id
-	main_ui.layout = Global.layouts[id]
+	var layout := Global.layouts[id]
+	main_ui.layout = layout
+	var layout_name := layout.resource_path.get_basename().get_file()
+	layouts_submenu.set_item_text(layouts_submenu.item_count - 2, tr("Delete %s") % layout_name)
+	layouts_submenu.set_item_text(layouts_submenu.item_count - 1, tr("Reset %s") % layout_name)
+	layouts_submenu.set_item_disabled(
+		layouts_submenu.item_count - 1, layout.layout_reset_path.is_empty()
+	)
 	for i in Global.layouts.size():
-		var offset := i + 1
-		layouts_submenu.set_item_checked(offset, offset == (id + 1))
+		layouts_submenu.set_item_checked(i, i == id)
 
 	for i in ui_elements.size():
 		var index := panels_submenu.get_item_index(i)
@@ -866,6 +908,59 @@ func set_layout(id: int) -> void:
 		Global.control.find_child("TabsContainer").visible = true
 		zen_mode = false
 		window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, false)
+
+
+func _on_add_layout_confirmation_confirmed() -> void:
+	var file_name := layout_name_line_edit.text + ".tres"
+	var path := Global.LAYOUT_DIR.path_join(file_name)
+	var layout: DockableLayout
+	if layout_from_option_button.selected == 0:
+		layout = Global.control.main_ui.layout.clone()
+		layout.layout_reset_path = ""
+	else:
+		layout = Global.default_layouts[layout_from_option_button.selected - 1].clone()
+	layout.resource_name = layout_name_line_edit.text
+	layout.resource_path = path
+	var err := ResourceSaver.save(layout, path)
+	if err != OK:
+		print(err)
+		return
+	Global.layouts.append(layout)
+	# Save the layout every time it changes
+	layout.save_on_change = true
+	Global.control.main_ui.layout = layout
+	Global.layouts.sort_custom(
+		func(a: DockableLayout, b: DockableLayout):
+			return a.resource_path.get_file() < b.resource_path.get_file()
+	)
+	var layout_index := Global.layouts.find(layout)
+	populate_layouts_submenu()
+	set_layout(layout_index)
+
+
+func _on_delete_layout_confirmation_confirmed() -> void:
+	if Global.layouts.size() <= 1:  # Don't delete any layout if we only have one left.
+		return
+	var layout_name := Global.layouts[selected_layout].resource_path.get_basename().get_file()
+	delete_layout_file(layout_name + ".tres")
+	Global.layouts.remove_at(selected_layout)
+	populate_layouts_submenu()
+	set_layout(0)
+
+
+func delete_layout_file(file_name: String) -> void:
+	var dir := DirAccess.open(Global.LAYOUT_DIR)
+	if not is_instance_valid(dir):
+		return
+	dir.remove(Global.LAYOUT_DIR.path_join(file_name))
+
+
+func _on_add_layout_confirmation_visibility_changed() -> void:
+	Global.dialog_open(add_layout_confirmation.visible)
+
+
+func _on_delete_layout_confirmation_visibility_changed() -> void:
+	Global.dialog_open(delete_layout_confirmation.visible)
 
 
 func _toggle_greyscale_view() -> void:
@@ -977,41 +1072,55 @@ func image_menu_id_pressed(id: int) -> void:
 
 
 func effects_menu_id_pressed(id: int) -> void:
+	_handle_metadata(id, effects_menu)
+
+
+func _on_effects_transform_submenu_id_pressed(id: int) -> void:
 	match id:
-		Global.EffectsMenu.OFFSET_IMAGE:
+		0:
 			offset_image_dialog.popup()
-		Global.EffectsMenu.FLIP:
+		1:
 			mirror_image_dialog.popup()
-		Global.EffectsMenu.ROTATE:
+		2:
 			rotate_image_dialog.popup()
-		Global.EffectsMenu.INVERT_COLORS:
+
+
+func _on_effects_color_submenu_id_pressed(id: int) -> void:
+	match id:
+		0:
 			invert_colors_dialog.popup()
-		Global.EffectsMenu.DESATURATION:
+		1:
 			desaturate_dialog.popup()
-		Global.EffectsMenu.OUTLINE:
-			outline_dialog.popup()
-		Global.EffectsMenu.DROP_SHADOW:
-			drop_shadow_dialog.popup()
-		Global.EffectsMenu.HSV:
+		2:
 			hsv_dialog.popup()
-		Global.EffectsMenu.BRIGHTNESS_SATURATION:
+		3:
 			adjust_brightness_saturation_dialog.popup()
-		Global.EffectsMenu.COLOR_CURVES:
+		4:
 			color_curves_dialog.popup()
-		Global.EffectsMenu.GAUSSIAN_BLUR:
-			gaussian_blur_dialog.popup()
-		Global.EffectsMenu.GRADIENT:
-			gradient_dialog.popup()
-		Global.EffectsMenu.GRADIENT_MAP:
-			gradient_map_dialog.popup()
-		Global.EffectsMenu.PALETTIZE:
+		5:
 			palettize_dialog.popup()
-		Global.EffectsMenu.PIXELIZE:
-			pixelize_dialog.popup()
-		Global.EffectsMenu.POSTERIZE:
+		6:
 			posterize_dialog.popup()
-		_:
-			_handle_metadata(id, effects_menu)
+		7:
+			gradient_map_dialog.popup()
+
+
+func _on_effects_procedural_submenu_id_pressed(id: int) -> void:
+	match id:
+		0:
+			outline_dialog.popup()
+		1:
+			drop_shadow_dialog.popup()
+		2:
+			gradient_dialog.popup()
+
+
+func _on_effects_blur_submenu_id_pressed(id: int) -> void:
+	match id:
+		0:
+			pixelize_dialog.popup()
+		1:
+			gaussian_blur_dialog.popup()
 
 
 func select_menu_id_pressed(id: int) -> void:

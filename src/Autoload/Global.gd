@@ -25,7 +25,18 @@ enum MeasurementMode { NONE, MOVE }
 ## Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
 ## Enumeration of items present in the Edit Menu.
-enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
+enum EditMenu {
+	UNDO,
+	REDO,
+	COPY,
+	CUT,
+	PASTE,
+	PASTE_IN_PLACE,
+	PASTE_FROM_CLIPBOARD,
+	DELETE,
+	NEW_BRUSH,
+	PREFERENCES
+}
 ## Enumeration of items present in the View Menu.
 enum ViewMenu {
 	CENTER_CANVAS,
@@ -39,6 +50,7 @@ enum ViewMenu {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 	SHOW_MOUSE_GUIDES,
+	SHOW_REFERENCE_IMAGES,
 	DISPLAY_LAYER_EFFECTS,
 	SNAP_TO,
 }
@@ -52,26 +64,6 @@ enum ImageMenu {
 	SCALE_IMAGE,
 	CROP_TO_SELECTION,
 	CROP_TO_CONTENT,
-}
-## Enumeration of items present in the Effects menu.
-enum EffectsMenu {
-	OFFSET_IMAGE,
-	FLIP,
-	ROTATE,
-	OUTLINE,
-	DROP_SHADOW,
-	INVERT_COLORS,
-	DESATURATION,
-	HSV,
-	BRIGHTNESS_SATURATION,
-	COLOR_CURVES,
-	PALETTIZE,
-	PIXELIZE,
-	POSTERIZE,
-	GAUSSIAN_BLUR,
-	GRADIENT,
-	GRADIENT_MAP,
-	LOADED_EFFECTS
 }
 ## Enumeration of items present in the Select Menu.
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, WRAP_STROKES, MODIFY }
@@ -568,6 +560,11 @@ var show_pixel_indices := false:
 		show_pixel_indices = value
 		if is_instance_valid(canvas.color_index):
 			canvas.color_index.enabled = value
+var show_reference_images := true:
+	set(value):
+		show_reference_images = value
+		if is_instance_valid(canvas.reference_image_container):
+			canvas.reference_image_container.visible = show_reference_images
 var display_layer_effects := true:
 	set(value):
 		if value == display_layer_effects:
@@ -793,6 +790,7 @@ func _initialize_keychain() -> void:
 		&"copy": Keychain.InputAction.new("", "Edit menu", true),
 		&"paste": Keychain.InputAction.new("", "Edit menu", true),
 		&"paste_in_place": Keychain.InputAction.new("", "Edit menu", true),
+		&"paste_from_clipboard": Keychain.InputAction.new("", "Edit menu", true),
 		&"delete": Keychain.InputAction.new("", "Edit menu", true),
 		&"new_brush": Keychain.InputAction.new("", "Edit menu", true),
 		&"preferences": Keychain.InputAction.new("", "Edit menu", true),
@@ -823,6 +821,7 @@ func _initialize_keychain() -> void:
 		&"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),
 		&"show_guides": Keychain.InputAction.new("", "View menu", true),
 		&"show_rulers": Keychain.InputAction.new("", "View menu", true),
+		&"show_reference_images": Keychain.InputAction.new("", "View menu", true),
 		&"display_layer_effects": Keychain.InputAction.new("", "View menu", true),
 		&"moveable_panels": Keychain.InputAction.new("", "Window menu", true),
 		&"zen_mode": Keychain.InputAction.new("", "Window menu", true),

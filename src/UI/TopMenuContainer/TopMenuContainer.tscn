@@ -109,3 +109,46 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 text = "1/1"
+
+[node name="AddLayoutConfirmation" type="ConfirmationDialog" parent="."]
+auto_translate_mode = 1
+title = "Add Layout"
+size = Vector2i(246, 123)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AddLayoutConfirmation"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 238.0
+offset_bottom = 74.0
+
+[node name="LayoutName" type="LineEdit" parent="AddLayoutConfirmation/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Insert name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddLayoutConfirmation/VBoxContainer"]
+layout_mode = 2
+
+[node name="LayoutFromLabel" type="Label" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Copy from"
+
+[node name="LayoutFrom" type="OptionButton" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 1
+popup/item_0/text = "Current layout"
+
+[node name="DeleteLayoutConfirmation" type="ConfirmationDialog" parent="."]
+auto_translate_mode = 1
+title = "Delete Layout"
+dialog_text = "Are you sure you want to delete this layout?"
+
+[connection signal="confirmed" from="AddLayoutConfirmation" to="." method="_on_add_layout_confirmation_confirmed"]
+[connection signal="visibility_changed" from="AddLayoutConfirmation" to="." method="_on_add_layout_confirmation_visibility_changed"]
+[connection signal="confirmed" from="DeleteLayoutConfirmation" to="." method="_on_delete_layout_confirmation_confirmed"]
+[connection signal="visibility_changed" from="DeleteLayoutConfirmation" to="." method="_on_delete_layout_confirmation_visibility_changed"]

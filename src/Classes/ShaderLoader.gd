@@ -19,6 +19,10 @@ static func create_ui_for_shader_uniforms(
 	var uniform_data: PackedStringArray = []
 	var description: String = ""
 	var description_began := false
+	# A Dictionary of [String] and [Control], used to group together nodes
+	# under the same group_uniform. Currently only used for CurveTextures.
+	var group_nodes := {}
+	var color_button_hbox: HBoxContainer = null  # Used for RGBA buttons, if they exist.
 	for line in code:
 		# Management of "end" tags
 		if line.begins_with("// (end DESCRIPTION)"):
@@ -27,7 +31,7 @@ static func create_ui_for_shader_uniforms(
 			description += "\n" + line.strip_edges()
 
 		# Detection of uniforms
-		if line.begins_with("uniform"):
+		if line.begins_with("uniform") or line.begins_with("group_uniforms"):
 			uniforms.append(line)
 		if line.begins_with("// uniform_data"):
 			uniform_data.append(line)
@@ -44,6 +48,7 @@ static func create_ui_for_shader_uniforms(
 			"Description:\n", description.replace("//", "").strip_edges()
 		)
 
+	var current_group := ""
 	for uniform in uniforms:
 		# Example uniform:
 		# uniform float parameter_name : hint_range(0, 255) = 100.0;
@@ -61,6 +66,10 @@ static func create_ui_for_shader_uniforms(
 			u_hint = u_hint.replace(";", "")
 
 		var u_init := u_left_side[0].split(" ")
+		var uniform_string := u_init[0]
+		if uniform_string == "group_uniforms":
+			current_group = u_init[1]
+			continue
 		var u_type := u_init[1]
 		var u_name := u_init[2]
 		if u_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
@@ -236,11 +245,15 @@ static func create_ui_for_shader_uniforms(
 					func(): _shader_update_palette_texture(palette, value_changed, u_name)
 				)
 				continue
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
+			var create_label := not (u_name.begins_with("curve_") and not current_group.is_empty())
+			var hbox: HBoxContainer
+			if create_label:
+				hbox = HBoxContainer.new()
+				var label := Label.new()
+				label.text = humanized_u_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				hbox.add_child(label)
+				parent_node.add_child(hbox)
 			if shader is VisualShader and u_name.begins_with("tex_frg_"):
 				var node_id := int(u_name.replace("tex_frg_", ""))
 				var shader_node := (shader as VisualShader).get_node(
@@ -262,34 +275,90 @@ static func create_ui_for_shader_uniforms(
 			elif u_name.begins_with("gradient_"):
 				_create_gradient_texture_ui(params, u_name, hbox, value_changed)
 			elif u_name.begins_with("curve_"):
-				_create_curve_texture_ui(params, u_name, hbox, value_changed)
+				if current_group.is_empty():
+					_create_curve_texture_ui(params, u_name, hbox, value_changed)
+				else:
+					# If this curve uniform belongs in a group, group them into the same
+					# CurveEdit node and use an OptionButton to switch between the different curves.
+					var group_option_button_str := current_group + "_option_button"
+					if group_nodes.has(group_option_button_str):
+						# Add it to the current group CurveEdit and OptionButton.
+						var option_button := group_nodes[group_option_button_str] as OptionButton
+						if not params.has(u_name):
+							var new_curve := Curve.new()
+							# Set linear preset to the new curve
+							CurveEdit.set_curve_preset(new_curve, 0)
+							params[u_name] = CurveEdit.to_texture(new_curve)
+						option_button.add_item(
+							Keychain.humanize_snake_case(u_name.replace("curve_", ""))
+						)
+						option_button.set_item_metadata(option_button.item_count - 1, u_name)
+					else:  # Create a the group's CurveEdit and OptionButton.
+						var option_button := OptionButton.new()
+						parent_node.add_child(option_button)
+						var curve_edit := _create_curve_texture_ui(
+							params, u_name, parent_node, value_changed
+						)
+						option_button.add_item(
+							Keychain.humanize_snake_case(u_name.replace("curve_", ""))
+						)
+						option_button.set_item_metadata(option_button.item_count - 1, u_name)
+						option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+						option_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+						option_button.item_selected.connect(
+							# Disconnect all previous connections from the
+							# curve_edit's value_changed signal. Then change the curve, and then
+							# connect a new callable to the value_changed signal.
+							func(index: int):
+								var new_uniform_name = option_button.get_item_metadata(index)
+								for connection in curve_edit.value_changed.get_connections():
+									curve_edit.value_changed.disconnect(connection.callable)
+								curve_edit.curve = params[new_uniform_name].curve
+								curve_edit.value_changed.connect(
+									func(curve: Curve):
+										value_changed.call(
+											CurveEdit.to_texture(curve), new_uniform_name
+										)
+								)
+						)
+						group_nodes[group_option_button_str] = option_button
 			elif u_name.begins_with("noise_"):
 				_create_noise_texture_ui(params, u_name, hbox, value_changed, parent_node)
 			else:  # Simple texture
 				_create_simple_texture_ui(
 					params, u_name, hbox, value_changed, parent_node, file_selected
 				)
-			parent_node.add_child(hbox)
-
 		elif u_type == "bool":
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var checkbox := CheckBox.new()
-			checkbox.text = "On"
-			if u_value == "true":
-				checkbox.button_pressed = true
-			if params.has(u_name):
-				checkbox.button_pressed = params[u_name]
+			var button: BaseButton
+			if u_name in ["red", "green", "blue", "alpha"]:
+				button = Button.new()
+				button.text = u_name[0].to_upper()
+				button.toggle_mode = true
+				if is_instance_valid(color_button_hbox):
+					color_button_hbox.add_child(button)
+				else:
+					color_button_hbox = HBoxContainer.new()
+					color_button_hbox.add_child(button)
+					parent_node.add_child(color_button_hbox)
 			else:
-				params[u_name] = checkbox.button_pressed
-			checkbox.toggled.connect(value_changed.bind(u_name))
-			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(checkbox)
-			parent_node.add_child(hbox)
+				button = CheckBox.new()
+				var label := Label.new()
+				label.text = humanized_u_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				button.text = "On"
+				var hbox := HBoxContainer.new()
+				hbox.add_child(label)
+				hbox.add_child(button)
+				parent_node.add_child(hbox)
+			if u_value == "true":
+				button.button_pressed = true
+			if params.has(u_name):
+				button.button_pressed = params[u_name]
+			else:
+				params[u_name] = button.button_pressed
+			button.toggled.connect(value_changed.bind(u_name))
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
 static func _vec2str_to_vector2(vec2: String) -> Vector2:
@@ -424,8 +493,8 @@ static func _create_gradient_texture_ui(
 
 
 static func _create_curve_texture_ui(
-	params: Dictionary, u_name: String, hbox: BoxContainer, value_changed: Callable
-) -> void:
+	params: Dictionary, u_name: String, hbox: Control, value_changed: Callable
+) -> CurveEdit:
 	var curve_edit := CurveEdit.new()
 	curve_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if params.has(u_name) and params[u_name] is CurveTexture:
@@ -437,6 +506,7 @@ static func _create_curve_texture_ui(
 		func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), u_name)
 	)
 	hbox.add_child(curve_edit)
+	return curve_edit
 
 
 static func _create_noise_texture_ui(

@@ -10,15 +10,8 @@ extends VBoxContainer
 
 signal value_changed(value: Curve)
 
-@export var show_axes := true
-@export var curve: Curve:
-	set(value):
-		curve = value
-		queue_redraw()
-		update_controls()
-
 ## Array of dictionaries of key [String] and value [Array] of type [CurveEdit.CurvePoint].
-var presets: Array[Dictionary] = [
+static var presets: Array[Dictionary] = [
 	{"Linear": [CurvePoint.new(0.0, 0.0, 0.0, 1.0), CurvePoint.new(1.0, 1.0, 1.0, 0.0)]},
 	{
 		"Ease out":
@@ -71,6 +64,11 @@ var presets: Array[Dictionary] = [
 		]
 	}
 ]
+@export var show_axes := true
+@export var curve: Curve:
+	set(value):
+		curve = value
+		_on_resize()
 var curve_editor := Control.new()
 var hbox := HBoxContainer.new()
 
@@ -152,6 +150,13 @@ static func to_texture(from_curve: Curve, width := 256) -> CurveTexture:
 	texture.curve = from_curve
 	texture.width = width
 	return texture
+
+
+static func set_curve_preset(curve_to_edit: Curve, preset_index: int) -> void:
+	curve_to_edit.clear_points()
+	var preset_points: Array = presets[preset_index].values()[0]
+	for point: CurvePoint in preset_points:
+		curve_to_edit.add_point(point.pos, point.left_tangent, point.right_tangent)
 
 
 func set_default_curve() -> void:
@@ -256,10 +261,7 @@ func _on_resize() -> void:
 
 
 func _on_presets_item_selected(index: int) -> void:
-	curve.clear_points()
-	var preset_points: Array = presets[index].values()[0]
-	for point: CurvePoint in preset_points:
-		curve.add_point(point.pos, point.left_tangent, point.right_tangent)
+	set_curve_preset(curve, index)
 	curve = curve  # Call setter
 
 

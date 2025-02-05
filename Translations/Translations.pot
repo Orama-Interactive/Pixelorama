@@ -134,6 +134,10 @@ msgstr ""
 msgid "Paste in Place"
 msgstr ""
 
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 
@@ -273,6 +277,18 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
+#. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
+msgid "Procedural"
+msgstr ""
+
+#. Refers to effects that blur the image.
+msgid "Blur"
+msgstr ""
+
+#. A submenu of the Effects menu. Contains effects that have been loaded by the user.
+msgid "Loader"
+msgstr ""
+
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
 msgstr ""
@@ -295,7 +311,12 @@ msgstr ""
 msgid "Masking:"
 msgstr ""
 
+#. Verb, resets something.
 msgid "Reset"
+msgstr ""
+
+#. Verb, resets something.
+msgid "Reset %s"
 msgstr ""
 
 msgid "Use Current Frame"
@@ -329,18 +350,14 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr ""
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr ""
-
 msgid "Add"
 msgstr ""
 
 msgid "Add Layout"
+msgstr ""
+
+#. Verb, deletes something.
+msgid "Delete %s"
 msgstr ""
 
 msgid "Copy from"
@@ -385,6 +402,10 @@ msgstr ""
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Show Reference Images"
 msgstr ""
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
@@ -3480,6 +3501,14 @@ msgstr ""
 msgid "Tile size:"
 msgstr ""
 
+#: src/UI/TilesPanel.gd
+msgid "Select a tile to place it on the canvas."
+msgstr ""
+
+#: src/UI/TilesPanel.gd
+msgid "Modify tiles on the canvas."
+msgstr ""
+
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
 msgstr ""
@@ -3498,4 +3527,27 @@ msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
+msgstr ""
+
+#. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Manual"
+msgstr ""
+
+#. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Auto"
+msgstr ""
+
+#. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Stack"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile button size:"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Show empty tile:"
 msgstr ""
