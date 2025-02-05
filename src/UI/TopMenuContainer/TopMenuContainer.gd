@@ -412,7 +412,8 @@ func _setup_layouts_submenu(item: String) -> void:
 	window_menu.add_submenu_node_item(item, layouts_submenu)
 
 	var saved_layout: int = Global.config_cache.get_value("window", "layout", 0)
-	set_layout(saved_layout)
+	# Wait for pixelorama to fully load up, then change the layout.
+	Global.pixelorama_opened.connect(set_layout.bind(saved_layout))
 
 
 func populate_layouts_submenu() -> void:
