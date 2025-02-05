@@ -19,7 +19,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed(action):
 			return
 
-	if event.is_action_pressed("switch_tools"):
+	if event.is_action_pressed("swap_tools"):
 		Tools.swap_tools()
 
 	for tool_name in Tools.tools:  # Handle tool shortcuts
