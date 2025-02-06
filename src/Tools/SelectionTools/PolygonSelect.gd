@@ -133,9 +133,9 @@ func lasso_selection(
 	var selection_size := selection_map.get_size()
 	var bounding_rect := Rect2i(points[0], Vector2i.ZERO)
 	for point in points:
+		bounding_rect = bounding_rect.expand(point)
 		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:
 			continue
-		bounding_rect = bounding_rect.expand(point)
 		if _intersect:
 			if previous_selection_map.is_pixel_selected(point):
 				select_pixel(point, project, true)
