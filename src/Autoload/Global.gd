@@ -883,6 +883,7 @@ func _initialize_keychain() -> void:
 		&"brush_size_increment": Keychain.InputAction.new("", "Buttons"),
 		&"brush_size_decrement": Keychain.InputAction.new("", "Buttons"),
 		&"change_tool_mode": Keychain.InputAction.new("", "Tool modifiers", false),
+		&"swap_tools": Keychain.InputAction.new("", "Tool modifiers", false),
 		&"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_color_picker": Keychain.InputAction.new("Quick color picker", "Draw tools", false),

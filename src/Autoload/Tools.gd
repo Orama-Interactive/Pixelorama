@@ -517,6 +517,32 @@ func swap_color() -> void:
 	assign_color(left, MOUSE_BUTTON_RIGHT, false)
 
 
+func swap_tools() -> void:
+	if MOUSE_BUTTON_LEFT and MOUSE_BUTTON_RIGHT in _slots.keys():
+		var left_slot: Slot = _slots[MOUSE_BUTTON_LEFT]
+		var right_slot: Slot = _slots[MOUSE_BUTTON_RIGHT]
+		if left_slot.tool_node:
+			if (
+				left_slot.tool_node.has_method("get_config")
+				and right_slot.tool_node.has_method("get_config")
+				and left_slot.tool_node.has_method("set_config")
+				and right_slot.tool_node.has_method("set_config")
+				and left_slot.tool_node.has_method("update_config")
+				and right_slot.tool_node.has_method("update_config")
+			):
+				var left_name := left_slot.tool_node.name
+				var right_name := right_slot.tool_node.name
+				var left_config: Dictionary = left_slot.tool_node.get_config()
+				var right_config: Dictionary = right_slot.tool_node.get_config()
+				# Now interchange tools
+				assign_tool(left_name, MOUSE_BUTTON_RIGHT)
+				assign_tool(right_name, MOUSE_BUTTON_LEFT)
+				_slots[MOUSE_BUTTON_LEFT].tool_node.set_config(right_config)
+				_slots[MOUSE_BUTTON_RIGHT].tool_node.set_config(left_config)
+				_slots[MOUSE_BUTTON_LEFT].tool_node.update_config()
+				_slots[MOUSE_BUTTON_RIGHT].tool_node.update_config()
+
+
 func assign_color(color: Color, button: int, change_alpha := true, index: int = -1) -> void:
 	var c: Color = _slots[button].color
 	# This was requested by Issue #54 on GitHub
