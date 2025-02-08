@@ -13,6 +13,7 @@ func _ready() -> void:
 	transparency_material = material
 	main_canvas_container.property_list_changed.connect(_re_configure_shader)
 	update_transparent_shader()
+	await Global.pixelorama_opened
 	dockable_container.set_control_hidden.call_deferred(tiles, true)
 
 
