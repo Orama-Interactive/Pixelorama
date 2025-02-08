@@ -21,8 +21,11 @@ static var placing_tiles := false:
 static var tile_editing_mode := TileEditingMode.AUTO
 static var selected_tile_index := 0:
 	set(value):
-		selected_tile_index = value
+		selected_tiles = [value]
 		_call_update_brushes()
+	get:
+		return selected_tiles.pick_random()
+static var selected_tiles: Array[int] = [0]
 static var is_flipped_h := false:
 	set(value):
 		is_flipped_h = value
@@ -113,21 +116,22 @@ func _on_cel_switched() -> void:
 
 func _update_tileset(_cel: BaseCel, _replace_index: int) -> void:
 	_clear_tile_buttons()
-	var button_group := ButtonGroup.new()
-	if selected_tile_index >= current_tileset.tiles.size():
+	for tile_index in selected_tiles:
+		if tile_index >= current_tileset.tiles.size():
+			selected_tiles.erase(tile_index)
+	if selected_tiles.is_empty():
 		selected_tile_index = 0
 	for i in current_tileset.tiles.size():
 		var tile := current_tileset.tiles[i]
 		var texture := ImageTexture.create_from_image(tile.image)
-		var button := _create_tile_button(texture, i, button_group)
-		if i == selected_tile_index:
+		var button := _create_tile_button(texture, i)
+		if i in selected_tiles:
 			button.set_pressed_no_signal(true)
 		tile_button_container.add_child(button)
 
 
-func _create_tile_button(texture: Texture2D, index: int, button_group: ButtonGroup) -> Button:
+func _create_tile_button(texture: Texture2D, index: int) -> Button:
 	var button := Button.new()
-	button.button_group = button_group
 	button.toggle_mode = true
 	button.custom_minimum_size = Vector2(button_size, button_size)
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -164,10 +168,28 @@ static func _call_update_brushes() -> void:
 			slot.tool_node.update_brush()
 
 
-func _on_tile_button_toggled(toggled_on: bool, index: int) -> void:
-	if toggled_on:
+func _on_tile_button_toggled(_toggled_on: bool, index: int) -> void:
+	if Input.is_action_pressed("shift"):
+		selected_tiles.sort()
+		var diff_sign := signi(index - selected_tiles[-1])
+		if diff_sign == 0:
+			diff_sign = 1
+		for i in range(selected_tiles[-1], index + diff_sign, diff_sign):
+			if not selected_tiles.has(i):
+				selected_tiles.append(i)
+				tile_button_container.get_child(i).set_pressed_no_signal(true)
+	elif Input.is_action_pressed("ctrl"):
+		if selected_tiles.has(index):
+			if selected_tiles.size() > 1:
+				selected_tiles.erase(index)
+		else:
+			selected_tiles.append(index)
+	else:
 		selected_tile_index = index
-		place_tiles.button_pressed = true
+		for i in tile_button_container.get_child_count():
+			var child_button := tile_button_container.get_child(i) as BaseButton
+			child_button.set_pressed_no_signal(i == index)
+	place_tiles.button_pressed = true
 
 
 func _on_tile_button_gui_input(event: InputEvent, index: int) -> void:
