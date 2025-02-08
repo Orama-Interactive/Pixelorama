@@ -41,6 +41,7 @@ const DragNDropPanel := preload("drag_n_drop_panel.gd")
 		for i in range(1, _panel_container.get_child_count()):
 			var panel := _panel_container.get_child(i) as DockablePanel
 			panel.hide_single_tab = _hide_single_tab
+		queue_sort()
 @export var rearrange_group := 0
 @export var layout := DockableLayout.new():
 	get:
