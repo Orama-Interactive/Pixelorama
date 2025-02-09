@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
-"PO-Revision-Date: 2025-01-31 00:41\n"
+"PO-Revision-Date: 2025-02-09 01:52\n"
 
 msgid "OK"
 msgstr ""
@@ -3560,5 +3560,13 @@ msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
 msgstr ""
 
