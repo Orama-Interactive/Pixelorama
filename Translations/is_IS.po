@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Icelandic\n"
 "Language: is_IS\n"
-"PO-Revision-Date: 2025-02-09 01:52\n"
+"PO-Revision-Date: 2025-02-09 18:34\n"
 
 msgid "OK"
 msgstr ""
@@ -297,7 +297,7 @@ msgid "Blur"
 msgstr ""
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
-msgid "Loader"
+msgid "Loaded"
 msgstr ""
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
