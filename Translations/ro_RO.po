@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-01-31 08:18\n"
+"PO-Revision-Date: 2025-02-09 01:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3633,4 +3633,12 @@ msgstr "Mărimea butonului dalei:"
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
 msgstr "Afișare dală goală:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr ""
 
