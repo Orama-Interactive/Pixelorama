@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-02-09 18:34\n"
+"PO-Revision-Date: 2025-02-09 19:39\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -300,7 +300,7 @@ msgstr "Bulanık"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Yüklendi"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -3638,9 +3638,9 @@ msgstr "Boş döşemeyi göster:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Döşeme özellikleri"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "İhtimal:"
 
