@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-02-03 12:38\n"
+"PO-Revision-Date: 2025-02-09 01:52\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -3635,4 +3635,12 @@ msgstr "Ukuran tombol petak:"
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
 msgstr "Tampilkan petak kosong:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr ""
 
