@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-01-31 03:46\n"
+"PO-Revision-Date: 2025-02-09 01:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3635,4 +3635,12 @@ msgstr "タイルボタンのサイズ:"
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
 msgstr "空のタイルを表示:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr ""
 
