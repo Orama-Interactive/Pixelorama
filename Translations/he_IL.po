@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2025-01-31 00:40\n"
+"PO-Revision-Date: 2025-02-09 01:52\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -3566,5 +3566,13 @@ msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
 msgstr ""
 
