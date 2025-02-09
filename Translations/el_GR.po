@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-02-09 01:52\n"
+"PO-Revision-Date: 2025-02-09 18:33\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -149,7 +149,7 @@ msgstr "Επιτόπια επικόλληση"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Επικόλληση από το πρόχειρο"
 
 msgid "Delete"
 msgstr "Διαγραφή"
@@ -292,14 +292,14 @@ msgstr "Προτιμήσεις"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Διαδικαστικά"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Θόλωμα"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
-msgid "Loader"
+msgid "Loaded"
 msgstr ""
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
@@ -330,7 +330,7 @@ msgstr "Επαναφορά"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Επαναφορά %s"
 
 msgid "Use Current Frame"
 msgstr "Χρήση τρέχοντος καρέ"
@@ -371,7 +371,7 @@ msgstr "Προσθήκη διάταξης"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Διαγραφή %s"
 
 msgid "Copy from"
 msgstr "Αντιγραφή από"
@@ -419,7 +419,7 @@ msgstr "Εμφάνιση οδηγών ποντικιού"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Εμφάνιση εικόνων αναφοράς"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -819,7 +819,7 @@ msgstr "Σταθερή"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Χρωματικός χώρος"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1095,15 +1095,15 @@ msgid "Gradient Map"
 msgstr "Χάρτης διαβαθμίσεων"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Παρεμβολή"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Αντιστροφή"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "Ίση κατανομή σημείων"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
@@ -1122,7 +1122,7 @@ msgstr "Αν αυτό είναι ενεργοποιημένο, το τελευτ
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Αποθήκευση στις προεπιλογές"
 
 msgid "Shape:"
 msgstr "Σχήμα:"
@@ -3586,11 +3586,11 @@ msgstr "Μέγεθος πλακιδίου:"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Επιλέξτε ένα πλακίδιο για να το τοποθετήσετε στον καμβά."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Τροποποίηση πλακιδίων στον καμβά."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3615,31 +3615,31 @@ msgstr "Κατακόρυφη αναστροφή πλακιδίου"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Χειροκίνητο"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "Αυτόματο"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Στοίβα"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Μέγεθος κουμπιού πλακιδίων:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "Εμφάνιση κενού πλακιδίου:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Ιδιότητες πλακιδίου"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Πιθανότητα:"
 
