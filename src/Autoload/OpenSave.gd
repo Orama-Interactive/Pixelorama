@@ -287,7 +287,10 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 					var image := Image.create_from_data(
 						tile_size.x, tile_size.y, false, new_project.get_image_format(), image_data
 					)
-					tileset.add_tile(image, null, 0)
+					if j > tileset.tiles.size() - 1:
+						tileset.add_tile(image, null, 0)
+					else:
+						tileset.tiles[j].image = image
 			for cel in new_project.get_all_pixel_cels():
 				if cel is CelTileMap:
 					cel.find_times_used_of_tiles()

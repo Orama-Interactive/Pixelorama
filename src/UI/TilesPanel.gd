@@ -24,7 +24,9 @@ static var selected_tile_index := 0:
 		selected_tiles = [value]
 		_call_update_brushes()
 	get:
-		return selected_tiles.pick_random()
+		if is_instance_valid(current_tileset):
+			return current_tileset.pick_random_tile(selected_tiles)
+		return selected_tiles[0]
 static var selected_tiles: Array[int] = [0]
 static var is_flipped_h := false:
 	set(value):
@@ -38,7 +40,7 @@ static var is_transposed := false:
 	set(value):
 		is_transposed = value
 		_call_update_brushes()
-var current_tileset: TileSetCustom
+static var current_tileset: TileSetCustom
 var button_size := 36:
 	set(value):
 		if button_size == value:
@@ -61,6 +63,8 @@ var tile_index_menu_popped := 0
 @onready var options: Popup = $Options
 @onready var tile_size_slider: ValueSlider = %TileSizeSlider
 @onready var tile_button_popup_menu: PopupMenu = $TileButtonPopupMenu
+@onready var tile_properties: AcceptDialog = $TileProperties
+@onready var tile_probability_slider: ValueSlider = %TileProbabilitySlider
 
 
 func _ready() -> void:
@@ -197,7 +201,7 @@ func _on_tile_button_gui_input(event: InputEvent, index: int) -> void:
 		tile_button_popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
 		tile_index_menu_popped = index
 		tile_button_popup_menu.set_item_disabled(
-			0, not current_tileset.tiles[index].can_be_removed()
+			1, not current_tileset.tiles[index].can_be_removed()
 		)
 
 
@@ -277,9 +281,12 @@ func _on_show_empty_tile_toggled(toggled_on: bool) -> void:
 
 
 func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
-	if tile_index_menu_popped == 0:
-		return
-	if index == 0:  # Delete
+	if index == 0:  # Properties
+		tile_probability_slider.value = current_tileset.tiles[tile_index_menu_popped].probability
+		tile_properties.popup_centered()
+	elif index == 1:  # Delete
+		if tile_index_menu_popped == 0:
+			return
 		if current_tileset.tiles[tile_index_menu_popped].can_be_removed():
 			var undo_data := current_tileset.serialize_undo_data()
 			current_tileset.tiles.remove_at(tile_index_menu_popped)
@@ -295,3 +302,7 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 			project.undo_redo.commit_action()
+
+
+func _on_tile_probability_slider_value_changed(value: float) -> void:
+	current_tileset.tiles[tile_index_menu_popped].probability = value

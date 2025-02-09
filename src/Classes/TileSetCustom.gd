@@ -29,6 +29,8 @@ class Tile:
 	var image: Image
 	## The amount of tiles this tile is being used in tilemaps.
 	var times_used := 1
+	## The relative probability of this tile appearing when drawing random tiles.
+	var probability := 1.0
 
 	func _init(_image: Image) -> void:
 		image = _image
@@ -37,6 +39,14 @@ class Tile:
 	## Returns [code]true[/code] if the amount of [member times_used] is 0.
 	func can_be_removed() -> bool:
 		return times_used <= 0
+
+	func serialize() -> Dictionary:
+		return {"times_used": times_used, "probability": probability}
+
+	func deserialize(dict: Dictionary, skip_times_used := false) -> void:
+		if not skip_times_used:
+			times_used = dict.get("times_used", times_used)
+		probability = dict.get("probability", probability)
 
 
 func _init(_tile_size: Vector2i, _name := "", add_empty_tile := true) -> void:
@@ -150,10 +160,31 @@ func find_using_layers(project: Project) -> Array[LayerTileMap]:
 	return tilemaps
 
 
+func pick_random_tile(selected_tile_indices: Array[int]) -> int:
+	if selected_tile_indices.is_empty():
+		for i in tiles.size():
+			selected_tile_indices.append(i)
+	var sum := 0.0
+	for i in selected_tile_indices:
+		sum += tiles[i].probability
+	var rand := randf_range(0.0, sum)
+	var current := 0.0
+	for i in selected_tile_indices:
+		current += tiles[i].probability
+		if current >= rand:
+			return i
+	return selected_tile_indices[0]
+
+
 ## Serializes the data of this class into the form of a [Dictionary],
 ## which is used so the data can be stored in pxo files.
 func serialize() -> Dictionary:
-	return {"name": name, "tile_size": tile_size, "tile_amount": tiles.size()}
+	var dict := {"name": name, "tile_size": tile_size, "tile_amount": tiles.size()}
+	var tile_data := {}
+	for i in tiles.size():
+		tile_data[i] = tiles[i].serialize()
+	dict["tile_data"] = tile_data
+	return dict
 
 
 ## Deserializes the data of a given [member dict] [Dictionary] into class data,
@@ -161,6 +192,16 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	name = dict.get("name", name)
 	tile_size = str_to_var("Vector2i" + dict.get("tile_size"))
+	var tile_data := dict.get("tile_data", {}) as Dictionary
+	for i_str in tile_data:
+		var i := int(i_str)
+		var tile: Tile
+		if i > tiles.size() - 1:
+			tile = Tile.new(null)
+			tiles.append(tile)
+		else:
+			tile = tiles[i]
+		tile.deserialize(tile_data[i_str], true)
 
 
 ## Serializes the data of each tile in [member tiles] into the form of a [Dictionary],
@@ -169,7 +210,7 @@ func serialize_undo_data() -> Dictionary:
 	var dict := {}
 	for tile in tiles:
 		var image_data := tile.image.get_data()
-		dict[tile.image] = [image_data.compress(), image_data.size(), tile.times_used]
+		dict[tile.image] = [image_data.compress(), image_data.size(), tile.serialize()]
 	return dict
 
 
@@ -180,9 +221,10 @@ func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
 	for image: Image in dict:
 		var tile_data = dict[image]
 		var buffer_size := tile_data[1] as int
+		var tile_dictionary := tile_data[2] as Dictionary
 		var image_data := (tile_data[0] as PackedByteArray).decompress(buffer_size)
 		image.set_data(tile_size.x, tile_size.y, false, image.get_format(), image_data)
 		tiles[i] = Tile.new(image)
-		tiles[i].times_used = tile_data[2]
+		tiles[i].deserialize(tile_dictionary)
 		i += 1
 	updated.emit(cel, -1)

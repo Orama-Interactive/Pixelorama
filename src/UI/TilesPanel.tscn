@@ -343,8 +343,49 @@ button_pressed = true
 text = "On"
 
 [node name="TileButtonPopupMenu" type="PopupMenu" parent="."]
-item_count = 1
-item_0/text = "Delete"
+item_count = 2
+item_0/text = "Properties"
+item_1/text = "Delete"
+item_1/id = 1
+
+[node name="TileProperties" type="AcceptDialog" parent="."]
+title = "Tile properties"
+size = Vector2i(300, 200)
+
+[node name="GridContainer" type="GridContainer" parent="TileProperties"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="TileProbabilityLabel" type="Label" parent="TileProperties/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Probability:"
+
+[node name="TileProbabilitySlider" type="TextureProgressBar" parent="TileProperties/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 10.0
+step = 0.001
+value = 1.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("10_wfr6s")
 
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/PlaceTiles" to="." method="_on_place_tiles_toggled"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
@@ -358,3 +399,4 @@ item_0/text = "Delete"
 [connection signal="value_changed" from="Options/MarginContainer/ScrollContainer/GridContainer/TileSizeSlider" to="." method="_on_tile_size_slider_value_changed"]
 [connection signal="toggled" from="Options/MarginContainer/ScrollContainer/GridContainer/ShowEmptyTile" to="." method="_on_show_empty_tile_toggled"]
 [connection signal="index_pressed" from="TileButtonPopupMenu" to="." method="_on_tile_button_popup_menu_index_pressed"]
+[connection signal="value_changed" from="TileProperties/GridContainer/TileProbabilitySlider" to="." method="_on_tile_probability_slider_value_changed"]

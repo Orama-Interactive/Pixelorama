@@ -3551,3 +3551,11 @@ msgstr ""
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
 msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr ""
