@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-02-09 01:52\n"
+"PO-Revision-Date: 2025-02-09 07:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3635,9 +3635,9 @@ msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Właściwości kalki"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Prawdopodobieństwo:"
 
