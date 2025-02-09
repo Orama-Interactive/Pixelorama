@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-02-03 20:18\n"
+"PO-Revision-Date: 2025-02-09 01:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3633,4 +3633,12 @@ msgstr "Tiletastengröße:"
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
 msgstr "Leeren Tile anzeigen:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr ""
 
