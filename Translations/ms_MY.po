@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-03 12:38\n"
+"PO-Revision-Date: 2025-02-09 01:51\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -3560,5 +3560,13 @@ msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
 msgstr ""
 
