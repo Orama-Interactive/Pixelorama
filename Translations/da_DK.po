@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2025-01-31 00:40\n"
+"PO-Revision-Date: 2025-02-09 01:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3609,5 +3609,13 @@ msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
 msgstr ""
 
