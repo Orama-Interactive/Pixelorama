@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-02-09 18:33\n"
+"PO-Revision-Date: 2025-02-09 19:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -149,7 +149,7 @@ msgstr "An Ort einfügen"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Aus Zwischenablage einfügen"
 
 msgid "Delete"
 msgstr "Löschen"
@@ -292,15 +292,15 @@ msgstr "Einstellungen"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Prozedural"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Unschärfe"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Geladen"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -419,7 +419,7 @@ msgstr "Zeige Maus Guides"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Referenzbilder anzeigen"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -3636,9 +3636,9 @@ msgstr "Leeren Tile anzeigen:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Tile-Eigenschaften"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Wahrscheinlichkeit:"
 
