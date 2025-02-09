@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-02-07 02:29\n"
+"PO-Revision-Date: 2025-02-09 01:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3630,4 +3630,12 @@ msgstr "Tamaño de botón de mosaico:"
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
 msgstr "Mostrar mosaico vacío:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr ""
 
