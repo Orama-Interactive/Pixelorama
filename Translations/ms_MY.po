@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-10 11:01\n"
+"PO-Revision-Date: 2025-02-10 15:15\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -495,10 +495,10 @@ msgid "Replace cel"
 msgstr "Gantikan cel"
 
 msgid "New layer"
-msgstr ""
+msgstr "Lapisan baru"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Imej rujukan baru"
 
 msgid "New palette"
 msgstr ""
