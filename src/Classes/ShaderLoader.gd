@@ -298,6 +298,27 @@ static func create_ui_for_shader_uniforms(
 						)
 			elif u_name.begins_with("gradient_"):
 				_create_gradient_texture_ui(params, u_name, hbox, value_changed)
+			elif u_name.begins_with("dither_texture"):
+				var option_button := OptionButton.new()
+				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				option_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				option_button.item_selected.connect(
+					func(index: int):
+						var dither_tex := dither_matrices[index].texture
+						value_changed.call(dither_tex, u_name)
+				)
+				for matrix in dither_matrices:
+					option_button.add_item(matrix.name)
+				if params.has(u_name):
+					var matrix_index := 0
+					for i in dither_matrices.size():
+						if dither_matrices[i].texture == params[u_name]:
+							matrix_index = i
+							break
+					option_button.select(matrix_index)
+				else:
+					params[u_name] = dither_matrices[option_button.selected].texture
+				hbox.add_child(option_button)
 			elif u_name.begins_with("curve_"):
 				if current_group.is_empty():
 					_create_curve_texture_ui(params, u_name, hbox, value_changed)
