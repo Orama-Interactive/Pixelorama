@@ -11,7 +11,7 @@ extends DockableLayoutNode
 		emit_tree_changed()
 @export var current_tab: int:
 	get:
-		return int(clamp(_current_tab, 0, _names.size() - 1))
+		return clampi(_current_tab, 0, _names.size() - 1)
 	set(value):
 		if value != _current_tab:
 			_current_tab = value

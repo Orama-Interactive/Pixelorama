@@ -38,7 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 
 
-func _on_Tool_pressed(tool_pressed: BaseButton) -> void:
+func _on_tool_pressed(tool_pressed: BaseButton) -> void:
 	var button := -1
 	button = MOUSE_BUTTON_LEFT if Input.is_action_just_released("left_mouse") else button
 	button = (

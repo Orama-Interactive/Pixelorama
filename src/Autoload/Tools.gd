@@ -444,7 +444,7 @@ func add_tool_button(t: Tool, insert_pos := -1) -> void:
 	if insert_pos > -1:
 		insert_pos = mini(insert_pos, _tool_buttons.get_child_count() - 1)
 		_tool_buttons.move_child(tool_button, insert_pos)
-	tool_button.pressed.connect(_tool_buttons._on_Tool_pressed.bind(tool_button))
+	tool_button.pressed.connect(_tool_buttons._on_tool_pressed.bind(tool_button))
 
 
 func remove_tool(t: Tool) -> void:

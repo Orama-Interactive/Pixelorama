@@ -87,10 +87,9 @@ func _on_CelButton_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
 		Global.canvas.selection.transform_content_confirm()
 		var change_cel := true
-		var prev_curr_frame: int = project.current_frame
-		var prev_curr_layer: int = project.current_layer
-
 		if Input.is_action_pressed("shift"):
+			var prev_curr_frame := project.current_frame
+			var prev_curr_layer := project.current_layer
 			var frame_diff_sign := signi(frame - prev_curr_frame)
 			if frame_diff_sign == 0:
 				frame_diff_sign = 1
