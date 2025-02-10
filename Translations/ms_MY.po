@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-09 18:33\n"
+"PO-Revision-Date: 2025-02-10 09:23\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Simpan"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Tolong Sahkan..."
 
 msgid "File Name:"
 msgstr "Nama Fail:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Sunting"
 
 msgid "Select"
-msgstr ""
+msgstr "Pilih"
 
 msgid "View"
 msgstr "Paparan"
@@ -95,7 +95,7 @@ msgstr "Simpan sebagai..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Sertakan imej campuran"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
@@ -298,7 +298,7 @@ msgstr "Kabur"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Dimuatkan"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
