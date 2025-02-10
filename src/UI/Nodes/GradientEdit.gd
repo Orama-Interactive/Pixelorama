@@ -231,6 +231,34 @@ func set_gradient_texture(new_texture: GradientTexture2D) -> void:
 	gradient = texture.gradient
 
 
+## Construct an image that contains the selected colors of the gradient without interpolation.
+func get_gradient_texture_no_interpolation() -> ImageTexture:
+	var offsets := gradient.offsets
+	offsets.sort()
+	var n_of_colors := offsets.size()
+	var gradient_image := Image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
+	for i in n_of_colors:
+		var actual_index := gradient.offsets.find(offsets[i])
+		if actual_index == -1:
+			actual_index = i
+		gradient_image.set_pixel(i, 0, gradient.colors[actual_index])
+	return ImageTexture.create_from_image(gradient_image)
+
+
+## Pass the gradient offsets as an array to the shader,
+## but we can't provide arrays with variable sizes as uniforms, instead we construct
+## a Nx1 grayscale texture with each offset stored in each pixel, and pass it to the shader.
+func get_gradient_offsets_texture() -> ImageTexture:
+	var offsets := gradient.offsets
+	offsets.sort()
+	var n_of_colors := offsets.size()
+	var offsets_image := Image.create(n_of_colors, 1, false, Image.FORMAT_L8)
+	for i in n_of_colors:
+		var c := offsets[i]
+		offsets_image.set_pixel(i, 0, Color(c, c, c, c))
+	return ImageTexture.create_from_image(offsets_image)
+
+
 func serialize_gradient(grad: Gradient) -> Dictionary:
 	var dict := {}
 	dict["offsets"] = grad.offsets

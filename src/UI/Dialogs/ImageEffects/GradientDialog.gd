@@ -43,24 +43,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		var selection := project.selection_map.return_cropped_copy(project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
 
-	var dither_texture := selected_dither_matrix.texture
-	var gradient := gradient_edit.gradient
-	var offsets := gradient.offsets
-	offsets.sort()
-	var n_of_colors := offsets.size()
-	# Pass the gradient offsets as an array to the shader,
-	# but we can't provide arrays with variable sizes as uniforms, instead we construct
-	# a Nx1 grayscale texture with each offset stored in each pixel, and pass it to the shader.
-	var offsets_image := Image.create(n_of_colors, 1, false, Image.FORMAT_L8)
-	# Construct an image that contains the selected colors of the gradient without interpolation.
-	var gradient_image := Image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
-	for i in n_of_colors:
-		var c := offsets[i]
-		offsets_image.set_pixel(i, 0, Color(c, c, c, c))
-		var actual_index := gradient.offsets.find(offsets[i])
-		if actual_index == -1:
-			actual_index = i
-		gradient_image.set_pixel(i, 0, gradient.colors[actual_index])
 	var center := Vector2(
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_X),
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_Y)
@@ -71,8 +53,8 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	)
 	var params := {
 		"gradient_texture": gradient_edit.texture,
-		"gradient_texture_no_interpolation": ImageTexture.create_from_image(gradient_image),
-		"gradient_offset_texture": ImageTexture.create_from_image(offsets_image),
+		"gradient_texture_no_interpolation": gradient_edit.get_gradient_texture_no_interpolation(),
+		"gradient_offset_texture": gradient_edit.get_gradient_offsets_texture(),
 		"use_dithering": dithering_option_button.selected > 0,
 		"selection": selection_tex,
 		"repeat": repeat_option_button.selected,
@@ -81,7 +63,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		"angle": animate_panel.get_animated_value(commit_idx, Animate.ANGLE),
 		"center": center / 100.0,
 		"radius": radius,
-		"dither_texture": dither_texture,
+		"dither_texture": selected_dither_matrix.texture,
 		"shape": shape_option_button.selected,
 	}
 
