@@ -69,9 +69,9 @@ float dither(vec2 uv, float modified_uv, ivec2 image_size) {
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	//vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE;
-	//vec2 uv = floor(UV * tex_size) / (tex_size - 1.0);
-	float modified_uv = modify_uv(UV);
+	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE;
+	vec2 uv = floor(UV * tex_size) / (tex_size - 1.0);
+	float modified_uv = modify_uv(uv);
 	if (repeat == 1)
 		modified_uv = fract(modified_uv);
 	else if (repeat == 2)
@@ -92,7 +92,7 @@ void fragment() {
 				}
 				continue;
 			}
-			if (modified_uv > off) {
+			if (modified_uv >= off) {
 				if (i == n_of_colors) {
 					output = second;
 				}
