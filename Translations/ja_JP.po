@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-02-09 18:33\n"
+"PO-Revision-Date: 2025-02-10 03:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,7 +300,7 @@ msgstr "ブラー"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "読み込み済み"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
