@@ -3,10 +3,7 @@ extends ImageEffect
 enum { LINEAR, RADIAL, LINEAR_DITHERING, RADIAL_DITHERING }
 enum Animate { POSITION, SIZE, ANGLE, CENTER_X, CENTER_Y, RADIUS_X, RADIUS_Y }
 
-var shader_linear := preload("res://src/Shaders/Effects/Gradients/Linear.gdshader")
-var shader_linear_dither := preload("res://src/Shaders/Effects/Gradients/LinearDithering.gdshader")
-
-var shader := shader_linear
+var shader := preload("res://src/Shaders/Effects/Gradient.gdshader")
 var selected_dither_matrix := ShaderLoader.dither_matrices[0]
 
 @onready var options_cont: Container = $VBoxContainer/GradientOptions
@@ -51,11 +48,11 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	var offsets := gradient.offsets
 	offsets.sort()
 	var n_of_colors := offsets.size()
-	# Pass the gradient offsets as an array to the shader
-	# ...but we can't provide arrays with variable sizes as uniforms, instead we construct
-	# a nx1 grayscale texture with each offset stored in each pixel, and pass it to the shader
+	# Pass the gradient offsets as an array to the shader,
+	# but we can't provide arrays with variable sizes as uniforms, instead we construct
+	# a Nx1 grayscale texture with each offset stored in each pixel, and pass it to the shader.
 	var offsets_image := Image.create(n_of_colors, 1, false, Image.FORMAT_L8)
-	# Construct an image that contains the selected colors of the gradient without interpolation
+	# Construct an image that contains the selected colors of the gradient without interpolation.
 	var gradient_image := Image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
 	for i in n_of_colors:
 		var c := offsets[i]
@@ -64,12 +61,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		if actual_index == -1:
 			actual_index = i
 		gradient_image.set_pixel(i, 0, gradient.colors[actual_index])
-	var offsets_tex := ImageTexture.create_from_image(offsets_image)
-	var gradient_tex: Texture2D
-	if shader == shader_linear:
-		gradient_tex = gradient_edit.texture
-	else:
-		gradient_tex = ImageTexture.create_from_image(gradient_image)
 	var center := Vector2(
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_X),
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_Y)
@@ -79,8 +70,10 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		animate_panel.get_animated_value(commit_idx, Animate.RADIUS_Y)
 	)
 	var params := {
-		"gradient_texture": gradient_tex,
-		"offset_texture": offsets_tex,
+		"gradient_texture": gradient_edit.texture,
+		"gradient_texture_no_interpolation": ImageTexture.create_from_image(gradient_image),
+		"gradient_offset_texture": ImageTexture.create_from_image(offsets_image),
+		"use_dithering": dithering_option_button.selected > 0,
 		"selection": selection_tex,
 		"repeat": repeat_option_button.selected,
 		"position": (animate_panel.get_animated_value(commit_idx, Animate.POSITION) / 100.0) - 0.5,
@@ -124,10 +117,7 @@ func _value_v2_changed(_value: Vector2) -> void:
 
 func _on_DitheringOptionButton_item_selected(index: int) -> void:
 	if index > 0:
-		shader = shader_linear_dither
 		selected_dither_matrix = ShaderLoader.dither_matrices[index - 1]
-	else:
-		shader = shader_linear
 	update_preview()
 
 
