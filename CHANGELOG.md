@@ -17,10 +17,13 @@ Built using Godot 4.3
 - Added a new text tool. Destructive only for now, meaning that once the text is confirmed, it cannot be changed later. [#1134](https://github.com/Orama-Interactive/Pixelorama/pull/1134)
 - A "Paste from Clipboard" option has been added to the Edit menu, allowing images from the operating system's clipboard to be pasted into Pixelorama. Note that copying images from Pixelorama into the OS' clipboard has not been implemented at the moment.
 - A color curves image and layer effect has been added.
+- A gradient layer effect has been added, alongside its already existing image effect equivalent, allowing for non-destructive gradient generation.
 - It is now possible to load custom Godot shaders as image and layer effects.
+- Loading custom dithering patterns as images is now possible. This is not exposed somewhere in the UI yet, users have to go to Pixelorama's data folder (the same place where its settings, backups etc are kept), and create a "dither_matrices" folder and add the images there.
 - A new Reset layout option has been added to the Layouts submenu, that can be used to reset default layouts to their original state.
 - Implemented support for multiple grids. [#1122](https://github.com/Orama-Interactive/Pixelorama/pull/1122)
 - Overhauled the gradient edit widget's UI and added options such as reverse and evenly distribute points, and gradient presets.
+- Added a shortcut to swap tools, <kbd>Shift + X</kbd> by default. [#1173](https://github.com/Orama-Interactive/Pixelorama/pull/1173)
 - Added <kbd>V</kbd> as the default shortcut for the crop tool.
 - A "Show Reference Images" option has been added to the View menu, allowing quick and easy reference image toggling.
 
@@ -29,6 +32,7 @@ Built using Godot 4.3
 - The image and layer effects have been organized into subcategories.
 - Layer buttons in the timeline now have a small icon on their right side that denotes their type, such as pixel layers, group layers, 3D layers, tilemap layers and audio layers.
 - Layer buttons in the timeline also have an icon if the layers contain at least one layer effect.
+- The import dialog is always being opened when opening images from File > Open.
 - System font names are now sorted by alphabetical order.
 - The red, green, blue and alpha buttons in invert and desaturate layer effects have been made into "RGBA" buttons instead of checkboxes, just like they are in their image effect counterparts.
 - "Tile Mode" under the Selection menu has been renamed to "Wrap Strokes". This does not affect the "Tile Mode" option in the View menu. [#1150](https://github.com/Orama-Interactive/Pixelorama/pull/1150)
@@ -44,11 +48,15 @@ Built using Godot 4.3
 - The CLI's output option now works with filepaths instead of just filenames. [#1145](https://github.com/Orama-Interactive/Pixelorama/pull/1145)
 - Fixed a crash when importing a model in a 3D layer. [952498a](https://github.com/Orama-Interactive/Pixelorama/commit/952498a2b8a72f0c7cdca87e763fc18ea12d8b5f)
 - Loading obj files as custom models in 3D layers that are not paired with .mtl files now works. [#1165](https://github.com/Orama-Interactive/Pixelorama/issues/1165)
+- Fixed a UI bug where the minimum size of the panels was not calculated correctly. [a28b526](https://github.com/Orama-Interactive/Pixelorama/commit/a28b526645d2cc085b0d3eca9d0756aee8a6f978)
+- Dockable panels are now properly sorted when toggling movable panels. [d7ba7fe](https://github.com/Orama-Interactive/Pixelorama/commit/d7ba7fe6fc4f2efb587234634020bf567474dba9)
 - Fixed the resize canvas dialog's offset not resetting to zero on dialog popup. [f273918](https://github.com/Orama-Interactive/Pixelorama/commit/f273918368f568f860a8d08d28f5c9d9346461a4)
 - Fixed group layer blending when they contain invisible layers. [#1166](https://github.com/Orama-Interactive/Pixelorama/issues/1166)
 - Fixed color picker changing hue when modifying the saturation and value inside the color picker shape. [3f2245c](https://github.com/Orama-Interactive/Pixelorama/commit/3f2245cd9bc81b1a244ae394927aa074650a5d70)
 - Fixed the Palettize effect and palette exporting to images storing slightly wrong color values. [77f6bcf](https://github.com/Orama-Interactive/Pixelorama/commit/77f6bcf07bd80bc042e478bb883d05900cebe436)
 - Fixed some issues with the Palettize effect where the output would be different if the palette size changed and empty swatches were added, even if the colors themselves stayed the same. Initially fixed by [bd7d3b1](https://github.com/Orama-Interactive/Pixelorama/commit/bd7d3b19cc98804e9b99754153c4d553d2048ee3), but [1dcb696](https://github.com/Orama-Interactive/Pixelorama/commit/1dcb696c35121f8208bde699f87bb75deff99d13) is the proper fix.
+- The lasso and polygon select tools now select all expected pixels without gaps, when the selection goes out of the canvas bounds.
+- Fixed layouts overwriting the position info of panels, which were added by extensions. [#1172](https://github.com/Orama-Interactive/Pixelorama/pull/1172)
 - Fixed recorder label not updating when project is changed. [#1139](https://github.com/Orama-Interactive/Pixelorama/pull/1139)
 - The vertical scrollbar in the timeline is no longer visible when it's not needed.
 - Fixed a bug where the mouse cursor does not reset to default when hovering over a selection gizmo, and the selection gets cleared. [ead7593](https://github.com/Orama-Interactive/Pixelorama/commit/ead7593e7e4013238b9e935ee24d8cea0ad49b38)
