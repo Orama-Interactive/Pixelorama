@@ -6,6 +6,30 @@ const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/Sliders/BasisSliders.tsc
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 const NOISE_GENERATOR := preload("res://src/UI/Nodes/NoiseGeneratorDialog.tscn")
 
+static var dither_matrices: Array[DitherMatrix] = [
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png"), "Bayer 2x2"),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer4.png"), "Bayer 4x4"),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer8.png"), "Bayer 8x8"),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer16.png"), "Bayer 16x16"),
+]
+
+
+class DitherMatrix:
+	var texture: Texture2D
+	var name: String
+
+	func _init(_texture: Texture2D, _name: String) -> void:
+		texture = _texture
+		name = _name
+
+
+static func load_dither_matrix_from_file(file_path: String) -> void:
+	var dither_image := Image.load_from_file(file_path)
+	if is_instance_valid(dither_image):
+		var dither_tex := ImageTexture.create_from_image(dither_image)
+		var dither_matrix := DitherMatrix.new(dither_tex, file_path.get_file().get_basename())
+		dither_matrices.append(dither_matrix)
+
 
 static func create_ui_for_shader_uniforms(
 	shader: Shader,

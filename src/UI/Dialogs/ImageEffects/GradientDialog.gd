@@ -7,13 +7,7 @@ var shader_linear := preload("res://src/Shaders/Effects/Gradients/Linear.gdshade
 var shader_linear_dither := preload("res://src/Shaders/Effects/Gradients/LinearDithering.gdshader")
 
 var shader := shader_linear
-var dither_matrices: Array[DitherMatrix] = [
-	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png"), "Bayer 2x2"),
-	DitherMatrix.new(preload("res://assets/dither-matrices/bayer4.png"), "Bayer 4x4"),
-	DitherMatrix.new(preload("res://assets/dither-matrices/bayer8.png"), "Bayer 8x8"),
-	DitherMatrix.new(preload("res://assets/dither-matrices/bayer16.png"), "Bayer 16x16"),
-]
-var selected_dither_matrix := dither_matrices[0]
+var selected_dither_matrix := ShaderLoader.dither_matrices[0]
 
 @onready var options_cont: Container = $VBoxContainer/GradientOptions
 @onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
@@ -27,22 +21,13 @@ var selected_dither_matrix := dither_matrices[0]
 @onready var radius_slider := $"%RadiusSlider" as ValueSliderV2
 
 
-class DitherMatrix:
-	var texture: Texture2D
-	var name: String
-
-	func _init(_texture: Texture2D, _name: String) -> void:
-		texture = _texture
-		name = _name
-
-
 func _ready() -> void:
 	super._ready()
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
 
-	for matrix in dither_matrices:
+	for matrix in ShaderLoader.dither_matrices:
 		dithering_option_button.add_item(matrix.name)
 
 	# Set as in the Animate enum
@@ -140,7 +125,7 @@ func _value_v2_changed(_value: Vector2) -> void:
 func _on_DitheringOptionButton_item_selected(index: int) -> void:
 	if index > 0:
 		shader = shader_linear_dither
-		selected_dither_matrix = dither_matrices[index - 1]
+		selected_dither_matrix = ShaderLoader.dither_matrices[index - 1]
 	else:
 		shader = shader_linear
 	update_preview()

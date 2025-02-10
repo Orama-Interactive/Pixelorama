@@ -169,6 +169,12 @@ func _init() -> void:
 		DirAccess.make_dir_recursive_absolute("user://backups")
 	Global.shrink = _get_auto_display_scale()
 	_handle_layout_files()
+	# Load dither matrix images.
+	var dither_matrices_path := "user://dither_matrices"
+	if DirAccess.dir_exists_absolute(dither_matrices_path):
+		for file_name in DirAccess.get_files_at(dither_matrices_path):
+			var file_path := dither_matrices_path.path_join(file_name)
+			ShaderLoader.load_dither_matrix_from_file(file_path)
 
 
 func _ready() -> void:
