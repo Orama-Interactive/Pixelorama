@@ -16,6 +16,9 @@ var effects: Array[LayerEffect] = [
 		"Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader"), "Transform"
 	),
 	LayerEffect.new(
+		"Gradient", preload("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"
+	),
+	LayerEffect.new(
 		"Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
 	),
 	LayerEffect.new(
@@ -54,6 +57,7 @@ var category_submenus := {}
 
 
 func _ready() -> void:
+	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var effect_list_popup := effect_list.get_popup()
 	for i in effects.size():
 		_add_effect_to_list(i)

@@ -2,6 +2,7 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform sampler2D selection : filter_nearest;
+group_uniforms gradient_textures;
 // The gradient texture itself, with interpolation.
 uniform sampler2D gradient_texture : filter_nearest;
 // A Nx1 image, where N is the amount of the different colors of gradient_texture,
@@ -10,15 +11,19 @@ uniform sampler2D gradient_texture_no_interpolation : filter_nearest;
 // A Nx1 grayscale image, where N is the amount of the different colors of gradient_texture,
 // where each pixel contains the offset, ranging from 0-1 of each color. Used in dithering.
 uniform sampler2D gradient_offset_texture : filter_nearest;
+
+group_uniforms gradient_options;
+// uniform_data shape type:: OptionButton [Linear||Radial]
+uniform int shape = 0;
+// uniform_data repeat type:: OptionButton [None||Repeat||Mirrored||Truncate]
+uniform int repeat = 0;
+uniform bool use_dithering = false;
 uniform sampler2D dither_texture : filter_nearest, repeat_enable;
 uniform float position : hint_range(-0.5, 0.5) = 0.0;
 uniform float size : hint_range(0.01, 2.0) = 1.0;
 uniform float angle : hint_range(0.0, 360.0) = 0.0;
 uniform vec2 center = vec2(0.5);
 uniform vec2 radius = vec2(1.0);
-uniform bool use_dithering = false;
-uniform int shape = 0; // 0 = linear, 1 = radial
-uniform int repeat = 0; // 0 = none, 1 = repeat, 2 = mirrored, 3 = truncate
 
 
 float modify_uv(vec2 uv) {

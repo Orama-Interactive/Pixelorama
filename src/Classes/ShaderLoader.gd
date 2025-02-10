@@ -150,6 +150,7 @@ static func create_ui_for_shader_uniforms(
 				var min_value := 0.0
 				var max_value := 255.0
 				var step := 1.0
+				var value := 0.0
 				var range_values_array: PackedStringArray
 				if "hint_range" in u_hint:
 					var range_values: String = u_hint.replace("hint_range(", "")
@@ -171,7 +172,7 @@ static func create_ui_for_shader_uniforms(
 						step = 0.01
 
 					if u_value != "":
-						slider.value = float(u_value)
+						value = float(u_value)
 				else:
 					if range_values_array.size() >= 1:
 						min_value = int(range_values_array[0])
@@ -183,10 +184,11 @@ static func create_ui_for_shader_uniforms(
 						step = int(range_values_array[2])
 
 					if u_value != "":
-						slider.value = int(u_value)
+						value = int(u_value)
 				slider.min_value = min_value
 				slider.max_value = max_value
 				slider.step = step
+				slider.value = value
 				if params.has(u_name):
 					slider.value = params[u_name]
 				else:
@@ -205,6 +207,8 @@ static func create_ui_for_shader_uniforms(
 			slider.allow_greater = true
 			if u_type != "uvec2":
 				slider.allow_lesser = true
+				if u_type != "ivec2":
+					slider.step = 0.01
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = vector2
 			if params.has(u_name):
@@ -269,7 +273,14 @@ static func create_ui_for_shader_uniforms(
 					func(): _shader_update_palette_texture(palette, value_changed, u_name)
 				)
 				continue
-			var create_label := not (u_name.begins_with("curve_") and not current_group.is_empty())
+			var create_label := true
+			if not current_group.is_empty():
+				if u_name.begins_with("curve_"):
+					create_label = false
+				if u_name.begins_with("gradient_"):
+					var group_gradient_str := current_group + "_gradient"
+					if group_nodes.has(group_gradient_str):
+						create_label = false
 			var hbox: HBoxContainer
 			if create_label:
 				hbox = HBoxContainer.new()
@@ -297,7 +308,44 @@ static func create_ui_for_shader_uniforms(
 							params, u_name, hbox, value_changed, parent_node, file_selected
 						)
 			elif u_name.begins_with("gradient_"):
-				_create_gradient_texture_ui(params, u_name, hbox, value_changed)
+				if current_group.is_empty():
+					_create_gradient_texture_ui(params, u_name, hbox, value_changed)
+				else:
+					# If this curve uniform belongs in a group, group them into the same
+					# CurveEdit node and use an OptionButton to switch between the different curves.
+					var group_gradient_str := current_group + "_gradient"
+					if group_nodes.has(group_gradient_str):
+						var grad_edit := group_nodes[group_gradient_str] as GradientEditNode
+						if "no_interpolation" in u_name:
+							value_changed.call_deferred(
+								grad_edit.get_gradient_texture_no_interpolation(), u_name
+							)
+							grad_edit.updated.connect(
+								func(_gradient, _cc):
+									value_changed.call(
+										grad_edit.get_gradient_texture_no_interpolation(), u_name
+									)
+							)
+						elif "offset" in u_name:
+							value_changed.call_deferred(
+								grad_edit.get_gradient_offsets_texture(), u_name
+							)
+							grad_edit.updated.connect(
+								func(_gradient, _cc):
+									value_changed.call(
+										grad_edit.get_gradient_offsets_texture(), u_name
+									)
+							)
+						else:
+							value_changed.call_deferred(grad_edit.texture, u_name)
+							grad_edit.updated.connect(
+								func(_gradient, _cc): value_changed.call(grad_edit.texture, u_name)
+							)
+					else:
+						var grad_edit := _create_gradient_texture_ui(
+							params, u_name, hbox, value_changed
+						)
+						group_nodes[group_gradient_str] = grad_edit
 			elif u_name.begins_with("dither_texture"):
 				var option_button := OptionButton.new()
 				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -517,7 +565,7 @@ static func _create_simple_texture_ui(
 
 static func _create_gradient_texture_ui(
 	params: Dictionary, u_name: String, hbox: BoxContainer, value_changed: Callable
-) -> void:
+) -> GradientEditNode:
 	var gradient_edit := GRADIENT_EDIT_TSCN.instantiate() as GradientEditNode
 	gradient_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if params.has(u_name):
@@ -535,10 +583,11 @@ static func _create_gradient_texture_ui(
 		func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
 	)
 	hbox.add_child(gradient_edit)
+	return gradient_edit
 
 
 static func _create_curve_texture_ui(
-	params: Dictionary, u_name: String, hbox: Control, value_changed: Callable
+	params: Dictionary, u_name: String, parent: Control, value_changed: Callable
 ) -> CurveEdit:
 	var curve_edit := CurveEdit.new()
 	curve_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -550,7 +599,7 @@ static func _create_curve_texture_ui(
 	curve_edit.value_changed.connect(
 		func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), u_name)
 	)
-	hbox.add_child(curve_edit)
+	parent.add_child(curve_edit)
 	return curve_edit
 
 

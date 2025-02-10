@@ -4,13 +4,13 @@
 
 [node name="LayerEffectsSettings" type="AcceptDialog"]
 title = "Layer effects"
-size = Vector2i(400, 400)
+size = Vector2i(600, 400)
 script = ExtResource("1_h6h7b")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 392.0
+offset_right = 592.0
 offset_bottom = 351.0
 size_flags_horizontal = 3
 
@@ -39,6 +39,10 @@ size_flags_vertical = 3
 
 [node name="DragHighlight" type="ColorRect" parent="."]
 visible = false
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 592.0
+offset_bottom = 351.0
 mouse_filter = 2
 color = Color(0, 0.741176, 1, 0.501961)
 
