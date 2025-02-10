@@ -65,6 +65,7 @@ var tile_index_menu_popped := 0
 @onready var tile_button_popup_menu: PopupMenu = $TileButtonPopupMenu
 @onready var tile_properties: AcceptDialog = $TileProperties
 @onready var tile_probability_slider: ValueSlider = %TileProbabilitySlider
+@onready var tile_user_data_text_edit: TextEdit = %TileUserDataTextEdit
 
 
 func _ready() -> void:
@@ -281,13 +282,15 @@ func _on_show_empty_tile_toggled(toggled_on: bool) -> void:
 
 
 func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
+	var selected_tile := current_tileset.tiles[tile_index_menu_popped]
 	if index == 0:  # Properties
-		tile_probability_slider.value = current_tileset.tiles[tile_index_menu_popped].probability
+		tile_probability_slider.value = selected_tile.probability
+		tile_user_data_text_edit.text = selected_tile.user_data
 		tile_properties.popup_centered()
 	elif index == 1:  # Delete
 		if tile_index_menu_popped == 0:
 			return
-		if current_tileset.tiles[tile_index_menu_popped].can_be_removed():
+		if selected_tile.can_be_removed():
 			var undo_data := current_tileset.serialize_undo_data()
 			current_tileset.tiles.remove_at(tile_index_menu_popped)
 			var redo_data := current_tileset.serialize_undo_data()
@@ -306,3 +309,7 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 
 func _on_tile_probability_slider_value_changed(value: float) -> void:
 	current_tileset.tiles[tile_index_menu_popped].probability = value
+
+
+func _on_tile_user_data_text_edit_text_changed() -> void:
+	current_tileset.tiles[tile_index_menu_popped].user_data = tile_user_data_text_edit.text

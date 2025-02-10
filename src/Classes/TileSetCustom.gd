@@ -31,6 +31,8 @@ class Tile:
 	var times_used := 1
 	## The relative probability of this tile appearing when drawing random tiles.
 	var probability := 1.0
+	## User defined data for each individual tile.
+	var user_data := ""
 
 	func _init(_image: Image) -> void:
 		image = _image
@@ -41,12 +43,13 @@ class Tile:
 		return times_used <= 0
 
 	func serialize() -> Dictionary:
-		return {"times_used": times_used, "probability": probability}
+		return {"times_used": times_used, "probability": probability, "user_data": user_data}
 
 	func deserialize(dict: Dictionary, skip_times_used := false) -> void:
 		if not skip_times_used:
 			times_used = dict.get("times_used", times_used)
 		probability = dict.get("probability", probability)
+		user_data = dict.get("user_data", user_data)
 
 
 func _init(_tile_size: Vector2i, _name := "", add_empty_tile := true) -> void:

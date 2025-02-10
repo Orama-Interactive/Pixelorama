@@ -387,6 +387,16 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("10_wfr6s")
 
+[node name="TileUserDataLabel" type="Label" parent="TileProperties/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "User data:"
+
+[node name="TileUserDataTextEdit" type="TextEdit" parent="TileProperties/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+scroll_fit_content_height = true
+
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/PlaceTiles" to="." method="_on_place_tiles_toggled"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/TransformButtonsContainer/RotateRightButton" to="." method="_on_rotate_pressed" binds= [true]]
@@ -400,3 +410,4 @@ script = ExtResource("10_wfr6s")
 [connection signal="toggled" from="Options/MarginContainer/ScrollContainer/GridContainer/ShowEmptyTile" to="." method="_on_show_empty_tile_toggled"]
 [connection signal="index_pressed" from="TileButtonPopupMenu" to="." method="_on_tile_button_popup_menu_index_pressed"]
 [connection signal="value_changed" from="TileProperties/GridContainer/TileProbabilitySlider" to="." method="_on_tile_probability_slider_value_changed"]
+[connection signal="text_changed" from="TileProperties/GridContainer/TileUserDataTextEdit" to="." method="_on_tile_user_data_text_edit_text_changed"]
