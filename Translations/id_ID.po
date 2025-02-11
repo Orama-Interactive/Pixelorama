@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2024-11-17 13:41\n"
+"PO-Revision-Date: 2025-02-10 09:23\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -101,7 +101,7 @@ msgstr "Sertakan gambar tercampur"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr "Jika diaktifkan, bentuk akhir gambar tercampur disimpan menjadi pxo, ke tiap bingkai.\n"
+msgstr "Jika diaktifkan, bentuk akhir gambar tercampur disimpan menjadi pxo, pada tiap bingkai.\n"
 "Berkas pxo akan lebih besar dan mampu diimpor dengan peranti lunak pihak ketiga\n"
 "atau diekspor CLI. Membuka pxo di Pixelorama tidak perlu mengaktifkan opsi ini."
 
@@ -147,6 +147,10 @@ msgstr "Tempel"
 msgid "Paste in Place"
 msgstr "Tempel di Tempat"
 
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr "Tempel isi papan klip"
+
 msgid "Delete"
 msgstr "Hapus"
 
@@ -168,6 +172,18 @@ msgstr "Piksel"
 
 msgid "Percentage"
 msgstr "Persentase"
+
+#. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
+msgid "Color mode:"
+msgstr "Mode warna:"
+
+#. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
+msgid "Color Mode"
+msgstr "Mode Warna"
+
+#. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
+msgid "Indexed"
+msgstr "Terindeks"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -211,6 +227,10 @@ msgstr "Toleransi:"
 
 msgid "Initial angle:"
 msgstr "Sudut inisial:"
+
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
+msgstr "Balut Guratan"
 
 msgid "Clear"
 msgstr "Kosongkan"
@@ -270,6 +290,18 @@ msgstr "Dibalik Menegak"
 msgid "Preferences"
 msgstr "Preferensi"
 
+#. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
+msgid "Procedural"
+msgstr "Tata Cara"
+
+#. Refers to effects that blur the image.
+msgid "Blur"
+msgstr "Buram"
+
+#. A submenu of the Effects menu. Contains effects that have been loaded by the user.
+msgid "Loaded"
+msgstr "Dimuat"
+
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
 msgstr "Tengahkan Kanvas"
@@ -292,8 +324,13 @@ msgstr "Dasar-Y:"
 msgid "Masking:"
 msgstr "Masking:"
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "Atur ulang"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr "Atur ulang %s"
 
 msgid "Use Current Frame"
 msgstr "Gunakan Bingkai Ini"
@@ -326,19 +363,15 @@ msgstr "Atur Tata Letak"
 msgid "Preview"
 msgstr "Pratayang"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "Klik 2x agar menjadi tata letak baru di awal buka"
-
 msgid "Add"
 msgstr "Tambah"
 
 msgid "Add Layout"
 msgstr "Tambah Tata Letak"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr "Hapus %s"
 
 msgid "Copy from"
 msgstr "Salin dari"
@@ -383,6 +416,10 @@ msgstr "Tampilkan Panduan"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Tampilkan Panduan Tetikus"
+
+#. Found under the View menu.
+msgid "Show Reference Images"
+msgstr "Tampilkan Gambar Rujukan"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -480,7 +517,7 @@ msgstr "Bingkai menegak:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr "Iris Rapi"
+msgstr "Iris Rapih"
 
 #. A value that is a threshold
 msgid "Threshold:"
@@ -500,7 +537,7 @@ msgstr "Gambar yang melewati ambang batas akan dileburkan menjadi gambar lebih b
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr "Segarkan"
+msgstr "Muat Ulang"
 
 msgid "Start frame:"
 msgstr "Bingkai awal:"
@@ -699,7 +736,7 @@ msgid "Refresh files."
 msgstr "Segarkan berkas."
 
 msgid "Toggle the visibility of hidden files."
-msgstr "Cetik ketampakan berkas sembunyi."
+msgstr "Menampil/hilangkan berkas sembunyi."
 
 msgid "Directories & Files:"
 msgstr "Direktori & Berkas:"
@@ -732,7 +769,7 @@ msgstr "Gambar BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr "Gambar HDR Radiansi"
+msgstr "Gambar Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
@@ -781,8 +818,8 @@ msgid "Constant"
 msgstr "Tetapan"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
-msgid "Color space:"
-msgstr "Ruang warna:"
+msgid "Color space"
+msgstr "Ruang warna"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -891,7 +928,7 @@ msgid "Font size:"
 msgstr "Ukuran font:"
 
 msgid "Dim interface on dialog popup"
-msgstr "Redupkan antarmuka pada sembulan dialog"
+msgstr "Redupkan antarmuka pada sembulan"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -978,7 +1015,7 @@ msgid "Big"
 msgstr "Besar"
 
 msgid "Only affect selection"
-msgstr "Hanya memengaruhi seleksi"
+msgstr "Pengaruhi seleksi saja"
 
 msgid "Selected cels"
 msgstr "Cel yang dipilih"
@@ -1057,6 +1094,18 @@ msgstr "Gradien"
 msgid "Gradient Map"
 msgstr "Peta Gradien"
 
+msgid "Interpolation"
+msgstr "Interpolasi"
+
+#. Verb, refers to the action of reversing something.
+msgid "Reverse"
+msgstr "Terbalikkan"
+
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+msgid "Evenly distribute points"
+msgstr "Sebar ratakan titik"
+
+#. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
 msgstr "Bagi menjadi sama rata"
 
@@ -1068,8 +1117,12 @@ msgstr "Tambah titik di akhir"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr "Jika diaktifkan, titik yang terakhir akan ditambah ke ujung gradien.\n"
-"Nonaktifkan jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
+msgstr "Jika ini diaktifkan, titik yang terakhir akan ditambah ke ujung gradien.\n"
+"Nonaktifkan jika ingin interpolasi gradiennya tetap konstan, sehingga warna yang terakhir juga akan disertakan."
+
+#. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
+msgid "Save to presets"
+msgstr "Simpan ke praatur"
 
 msgid "Shape:"
 msgstr "Bentuk:"
@@ -1162,6 +1215,27 @@ msgstr "Semburat:"
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
 msgstr "Faktor semburat:"
+
+#. An image effect that adjusts the colors of the image by using curves.
+msgid "Color Curves"
+msgstr "Lengkung Warna"
+
+#. Refers to a color channel, such as the red, green, blue or alpha channels.
+msgid "Channel:"
+msgstr "Saluran RGB:"
+
+msgid "Red"
+msgstr "Merah"
+
+msgid "Green"
+msgstr "Hijau"
+
+#. Refers to the value (as in HSV) of the colors of an image.
+msgid "Value"
+msgstr "Nilai"
+
+msgid "Presets"
+msgstr "Praatur"
 
 msgid "Apply"
 msgstr "Terapkan"
@@ -1565,6 +1639,13 @@ msgstr "Alat Elips\n\n"
 "Tahan %s untuk membuat bentuk di tengah klik\n"
 "Tahan %s untuk menggeser bentuk saat ini"
 
+msgid "Text\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Teks\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
+
 msgid "Rectangle"
 msgstr "Persegi Panjang"
 
@@ -1642,13 +1723,13 @@ msgid "Show left tool icon"
 msgstr "Tampilkan ikon alat di kiri"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr "Menampilkan ikon alat di kiri yang dipakai di sebelah kursor di kanvas"
+msgstr "Menampilkan ikon alat kiri saat ini di sebelah kursor pada kanvas"
 
 msgid "Show right tool icon"
 msgstr "Tampilkan ikon alat di kanan"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr "Menampilkan ikon alat di kanan yang dipakai di sebelah kursor di kanvas"
+msgstr "Menampilkan ikon alat kanan saat ini di sebelah kursor pada kanvas"
 
 msgid "Use native mouse cursors"
 msgstr "Gunakan kursor tetikus biasa"
@@ -1829,13 +1910,17 @@ msgstr "Aktifkan transparansi jendela"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Jika diaktifkan, jendela aplikasi akan tampil transparan. Ini juga menguras kinerja, nonaktifkan saja jika tidak perlu."
 
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
+msgid "Use dummy audio driver"
+msgstr "Gunakan kandar audio bonekaan"
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "Renderer:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr "Menentukan renderer/pengandar video yang dipakai. GLES2 lebih bagus untuk perangkat lawas atau kelas bawah, tapi GLES3 punya lebih banyak fitur."
+msgstr "Menentukan pengandar video untuk render. GLES2 lebih bagus untuk perangkat lawas kelas bawah, tapi GLES3 punya fitur lebih."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
@@ -1843,7 +1928,7 @@ msgstr "Pengandar tablet:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr "Menentukan pengandar tablet yang dipakai pada Windows. Jika Windows Ink sudah diaktifkan, pilih winink."
+msgstr "Menentukan pengandar tablet pada Windows. Jika Windows Ink sudah aktif, pilih winink."
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2077,6 +2162,33 @@ msgstr "Kurangi dari seleksi"
 msgid "Intersection of selections"
 msgstr "Persimpangan seleksi"
 
+#. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
+msgid "Style:"
+msgstr "Gaya:"
+
+#. Refers to the text. Regular means that the text is not bold or italic.
+msgid "Regular"
+msgstr "Biasa"
+
+#. Refers to text that is bold.
+msgid "Bold"
+msgstr "Tebal"
+
+#. Refers to text that is italic.
+msgid "Italic"
+msgstr "Miring"
+
+#. Refers to text that is bold and italic.
+msgid "Bold Italic"
+msgstr "Tebal Miring"
+
+#. https://en.wikipedia.org/wiki/Anti-aliasing
+msgid "Antialiasing"
+msgstr "Anti-buram"
+
+msgid "Grayscale"
+msgstr "Skala kelabu"
+
 msgid "Mirroring"
 msgstr "Pencerminan"
 
@@ -2235,6 +2347,10 @@ msgstr "Tautkan Cel ke"
 msgid "Unlink Cels"
 msgstr "Putuskan Cel"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr "Putar audio di sini"
+
 msgid "Properties"
 msgstr "Properti"
 
@@ -2271,6 +2387,13 @@ msgstr "Lapisan"
 msgid "Group"
 msgstr "Kelompok"
 
+#. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
+msgid "Tilemap"
+msgstr "Peta petak"
+
+msgid "Audio"
+msgstr "Audio"
+
 msgid "Layers"
 msgstr "Lapisan"
 
@@ -2279,33 +2402,52 @@ msgid "Clipping mask"
 msgstr "Cuplik mask"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Create a new layer"
 msgstr "Tambah lapisan baru"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Pixel Layer"
 msgstr "Tambah Lapisan Piksel"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Group Layer"
 msgstr "Tambah Lapisan Kelompok"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add 3D Layer"
 msgstr "Tambah Lapisan 3D"
 
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Tilemap Layer"
+msgstr "Tambah Lapisan Petak"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr "Tambah Lapisan Audio"
+
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
 msgstr "Hapus lapisan ini"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Move up the current layer"
 msgstr "Geser lapisan ini ke atas"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Move down the current layer"
 msgstr "Geser lapisan ini ke bawah"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Clone current layer"
 msgstr "Duplikatkan lapisan ini"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Merge current layer with the one below"
 msgstr "Leburkan lapisan ini dengan yang di bawah"
 
@@ -2404,7 +2546,7 @@ msgid "Tile mode opacity:"
 msgstr "Kelegapan mode petak:"
 
 msgid "Toggle layer's visibility"
-msgstr "Cetik ketampakan lapisan"
+msgstr "Tampil/hilangkan lapisan"
 
 msgid "Lock/unlock layer"
 msgstr "Kuncikan/buka lapisan"
@@ -2419,6 +2561,17 @@ msgstr "Aktif/nonaktifkan penautan otomatis cel baru saat membuat bingkai baru\n
 
 msgid "Expand/collapse group"
 msgstr "Bentang/ciutkan kelompok"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr "Berkas audio:"
+
+msgid "Load file"
+msgstr "Muat berkas"
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr "Putar di bingkai ke:"
 
 msgid "Palette"
 msgstr "Palet"
@@ -2995,6 +3148,10 @@ msgstr "Penyunting Sudut Pandang"
 msgid "Recorder"
 msgstr "Perekam"
 
+#. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
+msgid "Tiles"
+msgstr "Petak"
+
 msgid "Crop"
 msgstr "Potong"
 
@@ -3244,11 +3401,11 @@ msgstr "Tipe \"ease\":"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr "Awalnya lambat lalu cepat saat ke ujung"
+msgstr "Awalnya lambat lalu mencepat ke ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr "Awalnya cepat lalu lambat saat ke ujung"
+msgstr "Awalnya cepat lalu melambat ke ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
@@ -3308,7 +3465,7 @@ msgstr "Ekawarna"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr "Saat membuka gambar, bisa jadi diimpor sebagai rujukan."
+msgstr "Saat membuka gambar, itu bisa diimpor sebagai rujukan."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
@@ -3326,7 +3483,7 @@ msgstr "Tahan Shift saat menekan untuk langsung hapus."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Apakah yakin ingin menghapus gambar rujukan ini? Tidak akan dihapus dari berkas sistem."
+msgstr "Apakah yakin ingin menghapus gambar rujukan ini? Tidak akan dihapus dari direktori."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3386,7 +3543,7 @@ msgstr "Batasi Nilai Warna"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr "Diaktifkan"
+msgstr "Aktif"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
@@ -3399,4 +3556,91 @@ msgstr "Tambah efek"
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
 msgstr "Apakah ingin unduh gambarnya dari %s?"
+
+#. A tileset is a collection of tiles.
+#: src/Classes/TileSetCustom.gd
+#: src/UI/Dialogs/ImportPreviewDialog.gd
+msgid "Tileset"
+msgstr "Kotak petak"
+
+#. A tileset is a collection of tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tileset:"
+msgstr "Kotak petak:"
+
+#. A tileset is a collection of tiles.
+#: src/UI/Dialogs/ProjectProperties.tscn
+msgid "Tilesets"
+msgstr "Kotak petak"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "New tileset"
+msgstr "Kotak petak baru"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tileset name:"
+msgstr "Nama kotak petak:"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tile size:"
+msgstr "Ukuran petak:"
+
+#: src/UI/TilesPanel.gd
+msgid "Select a tile to place it on the canvas."
+msgstr "Pilih petak untuk ditaruh pada kanvas."
+
+#: src/UI/TilesPanel.gd
+msgid "Modify tiles on the canvas."
+msgstr "Ubah petak pada kanvas."
+
+#: src/UI/TilesPanel.tscn
+msgid "Draw tiles"
+msgstr "Gambarkan petak"
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile left (counterclockwise)"
+msgstr "Putar petak ke kiri"
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile right (clockwise)"
+msgstr "Putar petak ke kanan"
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile horizontally"
+msgstr "Petak dibalik mendatar"
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile vertically"
+msgstr "Petak dibalik menegak"
+
+#. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Manual"
+msgstr "Urus Sendiri"
+
+#. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Auto"
+msgstr "Otomatis"
+
+#. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Stack"
+msgstr "Tumpuk"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile button size:"
+msgstr "Ukuran tombol petak:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Show empty tile:"
+msgstr "Tampilkan petak kosong:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr "Properti petak"
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr "Peluang:"
 

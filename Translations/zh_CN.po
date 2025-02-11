@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2024-11-15 17:31\n"
+"PO-Revision-Date: 2025-02-09 18:34\n"
 
 msgid "OK"
 msgstr "确定"
@@ -147,6 +147,10 @@ msgstr "粘贴"
 msgid "Paste in Place"
 msgstr "原位粘贴"
 
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr ""
+
 msgid "Delete"
 msgstr "删除"
 
@@ -168,6 +172,18 @@ msgstr "像素"
 
 msgid "Percentage"
 msgstr "百分比"
+
+#. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
+msgid "Color mode:"
+msgstr "颜色模式:"
+
+#. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
+msgid "Color Mode"
+msgstr "颜色模式"
+
+#. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
+msgid "Indexed"
+msgstr "已索引"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -212,6 +228,10 @@ msgstr "容差："
 msgid "Initial angle:"
 msgstr "初始角度："
 
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
+msgstr "环绕描边"
+
 msgid "Clear"
 msgstr "取消选中"
 
@@ -219,41 +239,41 @@ msgid "Invert"
 msgstr "反向"
 
 msgid "Modify"
-msgstr ""
+msgstr "修改"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "展开"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "展开所选"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "收缩"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "收缩选择"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "边框"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "边框选择"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "菱形"
 
 msgid "Circle"
-msgstr ""
+msgstr "圆形"
 
 msgid "Square"
-msgstr ""
+msgstr "正方形"
 
 msgid "Grayscale View"
 msgstr "灰度视图"
@@ -270,6 +290,18 @@ msgstr "垂直翻转"
 msgid "Preferences"
 msgstr "首选项"
 
+#. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
+msgid "Procedural"
+msgstr ""
+
+#. Refers to effects that blur the image.
+msgid "Blur"
+msgstr ""
+
+#. A submenu of the Effects menu. Contains effects that have been loaded by the user.
+msgid "Loaded"
+msgstr ""
+
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
 msgstr "居中画布"
@@ -282,18 +314,23 @@ msgstr "平铺模式偏移"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
-msgstr ""
+msgstr "X-基准："
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "Y-basis:"
-msgstr ""
+msgstr "Y-基准："
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "蒙板："
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "重置"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr "当前帧"
@@ -326,19 +363,15 @@ msgstr "管理布局"
 msgid "Preview"
 msgstr "预览"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "这是一个预览，更改此选项不会改变布局"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "双击设置为新的启动布局"
-
 msgid "Add"
 msgstr "添加"
 
 msgid "Add Layout"
 msgstr "添加布局"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "复制从"
@@ -383,6 +416,10 @@ msgstr "显示参考线"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "显示鼠标向导"
+
+#. Found under the View menu.
+msgid "Show Reference Images"
+msgstr ""
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -781,8 +818,8 @@ msgid "Constant"
 msgstr "常量"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
-msgid "Color space:"
-msgstr "色彩空间："
+msgid "Color space"
+msgstr "色彩空间"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1057,6 +1094,18 @@ msgstr "渐变"
 msgid "Gradient Map"
 msgstr "渐变贴图"
 
+msgid "Interpolation"
+msgstr "插补"
+
+#. Verb, refers to the action of reversing something.
+msgid "Reverse"
+msgstr "反向"
+
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+msgid "Evenly distribute points"
+msgstr "均匀分布点"
+
+#. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
 msgstr "分成等份"
 
@@ -1070,6 +1119,10 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr "如果启用此功能，则最后一个点将添加到渐变的末尾。\n"
 "如果您希望将渐变转换为具有恒定插值，请禁用此选项，以便将最后一种颜色考虑在内。"
+
+#. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
+msgid "Save to presets"
+msgstr "保存为预设"
 
 msgid "Shape:"
 msgstr "形状："
@@ -1163,6 +1216,27 @@ msgstr "色调颜色："
 msgid "Tint effect factor:"
 msgstr "色调影响因素："
 
+#. An image effect that adjusts the colors of the image by using curves.
+msgid "Color Curves"
+msgstr "颜色曲线"
+
+#. Refers to a color channel, such as the red, green, blue or alpha channels.
+msgid "Channel:"
+msgstr "通道："
+
+msgid "Red"
+msgstr "红色"
+
+msgid "Green"
+msgstr "绿色"
+
+#. Refers to the value (as in HSV) of the colors of an image.
+msgid "Value"
+msgstr "值"
+
+msgid "Presets"
+msgstr "预设"
+
 msgid "Apply"
 msgstr "应用"
 
@@ -1231,7 +1305,7 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "© 版权所有 2019~2024 - Orama Interactive 和贡献者"
+msgstr "© 版权所有 2019~2025 - Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -1564,6 +1638,13 @@ msgstr "椭圆工具\n\n"
 "按住 %s 使形状在单击原点居中\n"
 "按住 %s 移动形状的原点"
 
+msgid "Text\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "文本\n\n"
+"%s 表示鼠标左键\n"
+"%s 表示鼠标右键"
+
 msgid "Rectangle"
 msgstr "矩形工具"
 
@@ -1828,6 +1909,10 @@ msgstr "启用窗口透明度"
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "如果启用，应用程序窗口可以变得透明。 这会影响性能，因此如果不需要，请将其关闭。"
 
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
+msgid "Use dummy audio driver"
+msgstr "使用虚拟音频驱动程序"
+
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
 msgstr "渲染器："
@@ -1974,7 +2059,7 @@ msgstr "用颜色填充绘制的形状，而不是绘制空心形状"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "密度："
 
 msgid "Brush color from"
 msgstr "画笔颜色从"
@@ -2075,6 +2160,33 @@ msgstr "从当前选区减去"
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
 msgstr "交叉选区"
+
+#. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
+msgid "Style:"
+msgstr "样式："
+
+#. Refers to the text. Regular means that the text is not bold or italic.
+msgid "Regular"
+msgstr "常规"
+
+#. Refers to text that is bold.
+msgid "Bold"
+msgstr "粗体"
+
+#. Refers to text that is italic.
+msgid "Italic"
+msgstr "斜体"
+
+#. Refers to text that is bold and italic.
+msgid "Bold Italic"
+msgstr "粗斜体"
+
+#. https://en.wikipedia.org/wiki/Anti-aliasing
+msgid "Antialiasing"
+msgstr "抗锯齿"
+
+msgid "Grayscale"
+msgstr "灰度"
 
 msgid "Mirroring"
 msgstr "镜像"
@@ -2234,6 +2346,10 @@ msgstr "链接单元格到"
 msgid "Unlink Cels"
 msgstr "取消链接单元格"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr "在此处播放音频"
+
 msgid "Properties"
 msgstr "属性"
 
@@ -2270,6 +2386,13 @@ msgstr "图层"
 msgid "Group"
 msgstr "组"
 
+#. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
+msgid "Tilemap"
+msgstr "图块"
+
+msgid "Audio"
+msgstr "音频"
+
 msgid "Layers"
 msgstr "图层"
 
@@ -2278,33 +2401,52 @@ msgid "Clipping mask"
 msgstr "剪切蒙版"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Create a new layer"
 msgstr "创建一个新的图层"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Pixel Layer"
 msgstr "添加像素图层"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Group Layer"
 msgstr "添加图层组"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add 3D Layer"
 msgstr "添加 3D 图层"
 
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Tilemap Layer"
+msgstr "添加图块图层"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr "添加音频图层"
+
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
 msgstr "移除当前图层"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Move up the current layer"
 msgstr "向上移动当前图层"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Move down the current layer"
 msgstr "向下移动当前图层"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Clone current layer"
 msgstr "克隆当前图层"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Merge current layer with the one below"
 msgstr "当前图层与下面图层合并"
 
@@ -2418,6 +2560,17 @@ msgstr "在创建新的帧时，启用/禁用自动链接新的帧\n\n"
 
 msgid "Expand/collapse group"
 msgstr "展开/折叠组"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr "音频文件："
+
+msgid "Load file"
+msgstr "加载文件"
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr "在帧中播放："
 
 msgid "Palette"
 msgstr "调色板"
@@ -2925,7 +3078,7 @@ msgstr "按值排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "按亮度排序"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
@@ -2992,6 +3145,10 @@ msgstr "透视编辑器"
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr "录制器"
+
+#. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
+msgid "Tiles"
+msgstr "平铺"
 
 msgid "Crop"
 msgstr "裁剪"
@@ -3397,4 +3554,91 @@ msgstr "添加效果"
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
 msgstr "您想从 %s 下载图像吗？"
+
+#. A tileset is a collection of tiles.
+#: src/Classes/TileSetCustom.gd
+#: src/UI/Dialogs/ImportPreviewDialog.gd
+msgid "Tileset"
+msgstr "图块集"
+
+#. A tileset is a collection of tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tileset:"
+msgstr "图块集："
+
+#. A tileset is a collection of tiles.
+#: src/UI/Dialogs/ProjectProperties.tscn
+msgid "Tilesets"
+msgstr "图块集"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "New tileset"
+msgstr "新建图块集"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tileset name:"
+msgstr "图块集名称："
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tile size:"
+msgstr "图块大小："
+
+#: src/UI/TilesPanel.gd
+msgid "Select a tile to place it on the canvas."
+msgstr ""
+
+#: src/UI/TilesPanel.gd
+msgid "Modify tiles on the canvas."
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Draw tiles"
+msgstr "绘制图块"
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile left (counterclockwise)"
+msgstr "向左旋转图块（逆时针）"
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile right (clockwise)"
+msgstr "向右旋转图块（顺时针）"
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile horizontally"
+msgstr "水平翻转图块"
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile vertically"
+msgstr "垂直翻转图块"
+
+#. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Manual"
+msgstr ""
+
+#. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Auto"
+msgstr ""
+
+#. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Stack"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile button size:"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Show empty tile:"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr ""
 

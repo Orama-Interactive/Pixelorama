@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2024-11-15 17:30\n"
+"PO-Revision-Date: 2025-02-09 18:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -145,6 +145,10 @@ msgstr "Lipire"
 msgid "Paste in Place"
 msgstr "Lipire în loc"
 
+#. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
+msgid "Paste from Clipboard"
+msgstr "Lipire din memoria temporară"
+
 msgid "Delete"
 msgstr "Ștergere"
 
@@ -166,6 +170,18 @@ msgstr "Pixeli"
 
 msgid "Percentage"
 msgstr "Procentaj"
+
+#. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
+msgid "Color mode:"
+msgstr "Mod culoare:"
+
+#. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
+msgid "Color Mode"
+msgstr "Mod culoare"
+
+#. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
+msgid "Indexed"
+msgstr "Indexat"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -209,6 +225,10 @@ msgstr "Toleranță:"
 
 msgid "Initial angle:"
 msgstr "Unghi inițial:"
+
+#. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
+msgid "Wrap Strokes"
+msgstr "Încapsulare urme de pensulă"
 
 msgid "Clear"
 msgstr "Ștergere"
@@ -268,6 +288,18 @@ msgstr "Răsturnare verticală"
 msgid "Preferences"
 msgstr "Preferințe"
 
+#. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
+msgid "Procedural"
+msgstr "Procedural"
+
+#. Refers to effects that blur the image.
+msgid "Blur"
+msgstr "Estompare"
+
+#. A submenu of the Effects menu. Contains effects that have been loaded by the user.
+msgid "Loaded"
+msgstr ""
+
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
 msgstr "Centrare pânză"
@@ -290,8 +322,13 @@ msgstr "Bază Y:"
 msgid "Masking:"
 msgstr "Mascare:"
 
+#. Verb, resets something.
 msgid "Reset"
 msgstr "Resetare"
+
+#. Verb, resets something.
+msgid "Reset %s"
+msgstr ""
 
 msgid "Use Current Frame"
 msgstr "Utilizare cadru actual"
@@ -324,19 +361,15 @@ msgstr "Gestionare dispuneri"
 msgid "Preview"
 msgstr "Previzualizare"
 
-#. Found in the manage layouts dialog
-msgid "This is a preview, changing this won't change the layout"
-msgstr "Aceasta este o previzualizare, modificarea acestei opțiuni nu va schimba aspectul"
-
-#. Found in the manage layouts dialog
-msgid "Double click to set as new startup layout"
-msgstr "Dublu clic pentru a seta ca dispunere de pornire nouă"
-
 msgid "Add"
 msgstr "Adăugare"
 
 msgid "Add Layout"
 msgstr "Adăugare dispunere"
+
+#. Verb, deletes something.
+msgid "Delete %s"
+msgstr ""
 
 msgid "Copy from"
 msgstr "Copiere din"
@@ -381,6 +414,10 @@ msgstr "Afișare ghidaje"
 #. Found under the View menu.
 msgid "Show Mouse Guides"
 msgstr "Afișare ghiduri maus"
+
+#. Found under the View menu.
+msgid "Show Reference Images"
+msgstr "Afișare imagini de referință"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -779,8 +816,8 @@ msgid "Constant"
 msgstr "Constantă"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
-msgid "Color space:"
-msgstr "Spațiu de culori:"
+msgid "Color space"
+msgstr "Spațiu de culoare"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1055,6 +1092,18 @@ msgstr "Degrade"
 msgid "Gradient Map"
 msgstr "Hartă degrade"
 
+msgid "Interpolation"
+msgstr "Interpolare"
+
+#. Verb, refers to the action of reversing something.
+msgid "Reverse"
+msgstr "Inversare"
+
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+msgid "Evenly distribute points"
+msgstr "Distribuie echivalent punctele"
+
+#. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
 msgstr "Împărțire în părți egale"
 
@@ -1068,6 +1117,10 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr "Dacă această opțiune este activată, ultimul punct este adăugat la sfârșitul degradeului.\n"
 "Dezactivează opțiunea dacă dorești să convertești degradeul pentru a avea interpolare constantă, astfel încât să fie luată în considerare ultima culoare."
+
+#. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
+msgid "Save to presets"
+msgstr "Salvare la prestabilite"
 
 msgid "Shape:"
 msgstr "Formă:"
@@ -1160,6 +1213,27 @@ msgstr "Culoare de nuanță:"
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
 msgstr "Factor de efect de nuanță:"
+
+#. An image effect that adjusts the colors of the image by using curves.
+msgid "Color Curves"
+msgstr "Curbe de culoare"
+
+#. Refers to a color channel, such as the red, green, blue or alpha channels.
+msgid "Channel:"
+msgstr "Canal:"
+
+msgid "Red"
+msgstr "Roșu"
+
+msgid "Green"
+msgstr "Verde"
+
+#. Refers to the value (as in HSV) of the colors of an image.
+msgid "Value"
+msgstr "Valoare"
+
+msgid "Presets"
+msgstr "Valori prestabilite"
 
 msgid "Apply"
 msgstr "Aplicare"
@@ -1563,6 +1637,13 @@ msgstr "Instrument Elipsă\n\n"
 "Ține apăsată tasta %s pentru a centra forma pe originea clicului\n"
 "Ține apăsată tasta %s pentru a deplasa originea formei"
 
+msgid "Text\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "Text\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
+
 msgid "Rectangle"
 msgstr "Dreptunghi"
 
@@ -1669,7 +1750,7 @@ msgstr "Ancorare"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr "Distanța de ancorare:"
+msgstr "Distanță de ancorare:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
@@ -1826,6 +1907,10 @@ msgstr "Activează transparența ferestrei"
 #. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 msgstr "Dacă opțiunea este activată, fereastra aplicației poate deveni transparentă. Aceasta afectează performanța, așa că este recomandată dezactivarea opțiunii dacă nu este necesară."
+
+#. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
+msgid "Use dummy audio driver"
+msgstr "Folosire driver audio fictiv"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -2075,6 +2160,33 @@ msgstr "Scădere din selecție"
 msgid "Intersection of selections"
 msgstr "Intersecția selecțiilor"
 
+#. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
+msgid "Style:"
+msgstr "Stil:"
+
+#. Refers to the text. Regular means that the text is not bold or italic.
+msgid "Regular"
+msgstr "Obișnuit"
+
+#. Refers to text that is bold.
+msgid "Bold"
+msgstr "Aldin"
+
+#. Refers to text that is italic.
+msgid "Italic"
+msgstr "Cursiv"
+
+#. Refers to text that is bold and italic.
+msgid "Bold Italic"
+msgstr "Aldin Cursiv"
+
+#. https://en.wikipedia.org/wiki/Anti-aliasing
+msgid "Antialiasing"
+msgstr "Anticrenelaj"
+
+msgid "Grayscale"
+msgstr "Tonuri de gri"
+
 msgid "Mirroring"
 msgstr "Oglindire"
 
@@ -2114,10 +2226,10 @@ msgid "Go to the previous frame"
 msgstr "Deplasează-te la cadrul anterior"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Redă animația înapoi"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Redă animația înainte"
 
 msgid "Go to the next frame"
 msgstr "Deplasează-te la cadrul următor"
@@ -2233,6 +2345,10 @@ msgstr "Conectare celuri la"
 msgid "Unlink Cels"
 msgstr "Deconectare celuri"
 
+#. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
+msgid "Play audio here"
+msgstr "Redare audio aici"
+
 msgid "Properties"
 msgstr "Proprietăți"
 
@@ -2269,6 +2385,13 @@ msgstr "Strat"
 msgid "Group"
 msgstr "Grup"
 
+#. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
+msgid "Tilemap"
+msgstr "Hartă de dale"
+
+msgid "Audio"
+msgstr "Audio"
+
 msgid "Layers"
 msgstr "Straturi"
 
@@ -2277,33 +2400,52 @@ msgid "Clipping mask"
 msgstr "Mască de decupare"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Create a new layer"
 msgstr "Creează un strat nou"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Pixel Layer"
 msgstr "Adăugare strat pixel"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Group Layer"
 msgstr "Adăugare strat grup"
 
 #. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add 3D Layer"
 msgstr "Adăugare strat 3D"
 
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Tilemap Layer"
+msgstr "Adăugare strat cu hartă de dale"
+
+#. One of the options of the create new layer button.
+#: src/UI/Timeline/AnimationTimeline.tscn
+msgid "Add Audio Layer"
+msgstr "Adăugare strat audio"
+
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
 msgstr "Elimină stratul actual"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Move up the current layer"
 msgstr "Deplasează în sus stratul actual"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Move down the current layer"
 msgstr "Deplasează în jos stratul actual"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Clone current layer"
 msgstr "Clonează stratul actual"
 
+#: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Merge current layer with the one below"
 msgstr "Îmbină stratul actual cu cel de mai jos"
 
@@ -2417,6 +2559,17 @@ msgstr "Activează/dezactivează automat conectarea de celuri noi la crearea de 
 
 msgid "Expand/collapse group"
 msgstr "Extindere/restrânge grup"
+
+#. Refers to the audio file of an audio layer.
+msgid "Audio file:"
+msgstr "Fișier audio:"
+
+msgid "Load file"
+msgstr "Încărcare fișier"
+
+#. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
+msgid "Play at frame:"
+msgstr "Redare la cadrul:"
 
 msgid "Palette"
 msgstr "Paletă"
@@ -2924,7 +3077,7 @@ msgstr "Sortează după valoare"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "Sortează după luminozitate"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
@@ -2992,6 +3145,10 @@ msgstr "Editor perspectivă"
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr "Înregistrator"
+
+#. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
+msgid "Tiles"
+msgstr "Dale"
 
 msgid "Crop"
 msgstr "Trunchiere"
@@ -3397,4 +3554,91 @@ msgstr "Adăugare efect"
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
 msgstr "Vrei să descarci imaginea din %s?"
+
+#. A tileset is a collection of tiles.
+#: src/Classes/TileSetCustom.gd
+#: src/UI/Dialogs/ImportPreviewDialog.gd
+msgid "Tileset"
+msgstr "Set de dale"
+
+#. A tileset is a collection of tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tileset:"
+msgstr "Set de dale:"
+
+#. A tileset is a collection of tiles.
+#: src/UI/Dialogs/ProjectProperties.tscn
+msgid "Tilesets"
+msgstr "Seturi de dale"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "New tileset"
+msgstr "Set de dale nou"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tileset name:"
+msgstr "Denumire set de dale:"
+
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+msgid "Tile size:"
+msgstr "Dimensiune dală:"
+
+#: src/UI/TilesPanel.gd
+msgid "Select a tile to place it on the canvas."
+msgstr "Selectează o dală pentru a o plasa pe pânză."
+
+#: src/UI/TilesPanel.gd
+msgid "Modify tiles on the canvas."
+msgstr "Modifică dalele de pe pânză."
+
+#: src/UI/TilesPanel.tscn
+msgid "Draw tiles"
+msgstr "Desenare dale"
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile left (counterclockwise)"
+msgstr "Rotire dală la stânga (în sens invers acelor de ceasornic)"
+
+#: src/UI/TilesPanel.tscn
+msgid "Rotate tile right (clockwise)"
+msgstr "Rotire dală la dreapta (în sensul acelor de ceasornic)"
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile horizontally"
+msgstr "Răsturnare dală pe orizontală"
+
+#: src/UI/TilesPanel.tscn
+msgid "Flip tile vertically"
+msgstr "Răsturnare dală pe verticală"
+
+#. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Manual"
+msgstr "Manual"
+
+#. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Auto"
+msgstr "Auto"
+
+#. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
+#: src/UI/TilesPanel.tscn
+msgid "Stack"
+msgstr "Stivă"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile button size:"
+msgstr "Mărimea butonului dalei:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Show empty tile:"
+msgstr "Afișare dală goală:"
+
+#: src/UI/TilesPanel.tscn
+msgid "Tile properties"
+msgstr ""
+
+#: src/UI/TilesPanel.tscn
+msgid "Probability:"
+msgstr ""
 
