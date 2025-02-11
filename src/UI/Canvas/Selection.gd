@@ -109,7 +109,7 @@ func _ready() -> void:
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(0, 1)))  # Center bottom
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, 1)))  # Bottom left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, 0)))  # Center left
-	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE))  # Rotation gizmo (temp)
+	#gizmos.append(Gizmo.new(Gizmo.Type.ROTATE))  # Rotation gizmo (temp)
 
 
 func _input(event: InputEvent) -> void:
@@ -313,9 +313,9 @@ func _update_gizmos() -> void:
 	)
 
 	# Rotation gizmo (temp)
-	gizmos[8].rect = Rect2(
-		Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size
-	)
+	#gizmos[8].rect = Rect2(
+	#Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size
+	#)
 	queue_redraw()
 
 
