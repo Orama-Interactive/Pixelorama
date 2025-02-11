@@ -13,6 +13,7 @@ const AUTHORS: PackedStringArray = [
 	"ArthyChaux",
 	"azagaya",
 	"ballerburg9005",
+	"BrotherShort",
 	"CheetoHead (greusser)",
 	"Christos Tsoychlakis (ChrisTs8920)",
 	"Clara Hobbs (Ratfink)",
@@ -57,6 +58,7 @@ const AUTHORS: PackedStringArray = [
 	"RorotoSic",
 	"sapient_cogbag",
 	"Silent Orb (silentorb)",
+	"Spencer Beckwith (spencerjbeckwith)",
 	"Subhang Nanduri (SbNanduri)",
 	"TheLsbt",
 	"THWLF",
@@ -83,11 +85,13 @@ const TRANSLATORS_DICTIONARY := {
 	"Roroto Sic (Roroto_Sic)": ["French"],
 	"ninjdai": ["French"],
 	"celeste tollec (celeste73-t)": ["French"],
+	"Nino Keravel (riioze)": ["French"],
 	"Schweini07": ["German"],
 	"Martin Zabinski (Martin1991zab)": ["German"],
 	"Manuel (DrMoebyus)": ["German"],
 	"Dominik K. (mezotv)": ["German"],
 	"alikin12": ["German"],
+	"Poolitzer": ["German"],
 	"Dawid Niedźwiedzki (tiritto)": ["Polish"],
 	"Serhiy Dmytryshyn (dies)": ["Polish"],
 	"Igor Santarek (jegor377)": ["Polish"],
@@ -196,6 +200,7 @@ const TRANSLATORS_DICTIONARY := {
 	"CaelusV": ["Danish"],
 	"Jonas Vejlin (jonas.vejlin)": ["Danish"],
 	"Cat (cultcats)": ["Danish"],
+	"cat (catsnote)": ["Danish"],
 	"GGIEnrike":
 	[
 		"Romanian",
@@ -216,8 +221,6 @@ const DONORS: PackedStringArray = [
 	"Jonas Rudlang",
 	"Mike King",
 	"ShikadiGum",
-	"Tassos Kyriakopoulos",
-	"Πολιτισμός Τύπου 1",
 	"Ormanus"
 ]
 

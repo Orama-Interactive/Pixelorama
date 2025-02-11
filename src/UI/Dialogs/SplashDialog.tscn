@@ -8,14 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://bnhuqq1ucdlw2" path="res://assets/graphics/splash_screen/github_32px.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://c587jfnyu84ro" path="res://assets/graphics/splash_screen/patreon_mark_white.png" id="11"]
 
-[sub_resource type="StyleBoxFlat" id="2"]
-bg_color = Color(1, 1, 1, 0)
+[sub_resource type="StyleBoxFlat" id="5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="4"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="5"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -55,10 +55,10 @@ offset_top = -10.0
 offset_right = 30.0
 offset_bottom = 10.0
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("2")
+theme_override_styles/focus = SubResource("5")
 theme_override_styles/hover = SubResource("4")
 theme_override_styles/pressed = SubResource("5")
-theme_override_styles/focus = SubResource("5")
+theme_override_styles/normal = SubResource("2")
 
 [node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnLeft"]
 layout_mode = 0
@@ -85,10 +85,10 @@ offset_top = -10.0
 offset_right = -5.0
 offset_bottom = 10.0
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("3")
+theme_override_styles/focus = SubResource("5")
 theme_override_styles/hover = SubResource("5")
 theme_override_styles/pressed = SubResource("5")
-theme_override_styles/focus = SubResource("5")
+theme_override_styles/normal = SubResource("3")
 
 [node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnRight"]
 layout_mode = 0
@@ -205,8 +205,7 @@ custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_vertical = 8
 text = "ShikadiGum
-Hugo Locurcio
-Tassos Kyriakopoulos"
+Hugo Locurcio"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
 layout_mode = 2
