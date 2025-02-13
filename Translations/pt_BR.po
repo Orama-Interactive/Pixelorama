@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-02-13 22:03\n"
+"PO-Revision-Date: 2025-02-13 22:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -419,7 +419,7 @@ msgstr "Mostrar Guias do Mouse"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Mostrar Imagens de Referência"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -819,7 +819,7 @@ msgstr "Constante"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Espaço de cores"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1095,15 +1095,15 @@ msgid "Gradient Map"
 msgstr "Mapa de gradiente"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Interpolação"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Reverter"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "Distribuir pontos uniformemente"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
@@ -1122,7 +1122,7 @@ msgstr "Se isto estiver ativado, o último ponto é adicionado no final do gradi
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Salvar para predefinições"
 
 msgid "Shape:"
 msgstr "Forma:"
@@ -3586,11 +3586,11 @@ msgstr "Tamanho do tile:"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Selecione um tile para colocá-lo na tela."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Modificar tiles na tela."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3615,31 +3615,31 @@ msgstr "Inverter tile verticalmente"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Acumular"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Tamanho do botão de tile:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "Mostrar tile vazio:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Propriedades do Tile"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Probabilidade:"
 
