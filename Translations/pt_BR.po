@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-02-09 18:34\n"
+"PO-Revision-Date: 2025-02-13 22:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -149,7 +149,7 @@ msgstr "Colar no Local"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Colar da Área de Transferência"
 
 msgid "Delete"
 msgstr "Deletar"
@@ -292,15 +292,15 @@ msgstr "Preferências"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Procedural"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Desfoque"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Carregados"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -330,7 +330,7 @@ msgstr "Redefinir"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Redefinir %s"
 
 msgid "Use Current Frame"
 msgstr "Usar o Quadro Atual"
@@ -371,7 +371,7 @@ msgstr "Adicionar Layout"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Deletar %s"
 
 msgid "Copy from"
 msgstr "Copiar de"
