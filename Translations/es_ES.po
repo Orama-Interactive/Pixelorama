@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-02-09 18:33\n"
+"PO-Revision-Date: 2025-02-13 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -298,7 +298,7 @@ msgstr "Desenfoque"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Cargado"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
