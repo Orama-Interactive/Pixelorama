@@ -21,6 +21,11 @@ func _ready() -> void:
 	if OS.get_name() == "Web":
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false
+	else:
+		# TODO: Remove the loop when https://github.com/godotengine/godot/issues/92848 gets fixed.
+		for dialog_child in add_extension_file_dialog.find_children("", "Window", true, false):
+			if dialog_child is Window:
+				dialog_child.always_on_top = add_extension_file_dialog.always_on_top
 
 
 func _extension_loaded(extension: Extensions.Extension, extension_name: String) -> void:

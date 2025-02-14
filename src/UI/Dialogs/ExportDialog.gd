@@ -64,7 +64,7 @@ func _ready() -> void:
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
 
 	# TODO: Remove the loop when https://github.com/godotengine/godot/issues/92848 gets fixed.
-	for dialog_child in path_dialog_popup.get_children(true):
+	for dialog_child in path_dialog_popup.find_children("", "Window", true, false):
 		if dialog_child is Window:
 			dialog_child.always_on_top = path_dialog_popup.always_on_top
 
