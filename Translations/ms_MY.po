@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-14 22:51\n"
+"PO-Revision-Date: 2025-02-14 23:52\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -552,25 +552,25 @@ msgid "At layer:"
 msgstr "Di lapisan:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Jenis berus:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Berus fail"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Berus projek"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Berus rawak"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Simpan \"sprite\" kepada .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Eksport \"sprite\" kepada .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Eksport \"sprite\""
 
 msgid "File Exists, Overwrite?"
 msgstr ""
