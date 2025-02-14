@@ -83,7 +83,7 @@ layout_mode = 2
 layout_mode = 2
 max_value = 10.0
 allow_greater = true
-prefix = "Colors right"
+prefix = "Colors right:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorReplaceOptions/Settings" index="1"]
 layout_mode = 2
