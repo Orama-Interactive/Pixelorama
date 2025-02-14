@@ -12,7 +12,8 @@ const BIN_ACTION := "trash"
 
 var extensions := {}  ## Extension name: Extension class
 var extension_selected := -1
-var damaged_extension: String
+var damaged_extensions := PackedStringArray()
+var prev_damaged_extensions := PackedStringArray()
 ## Extensions built using the versions in this array are considered compatible with the current Api
 var legacy_api_versions = [5, 4]
 
@@ -51,6 +52,20 @@ class Extension:
 
 func _ready() -> void:
 	_add_internal_extensions()
+	prev_damaged_extensions = remove_damaged()
+	if !prev_damaged_extensions.is_empty():
+		if prev_damaged_extensions.size() == 1:
+			var error_text = (
+				"A Faulty extension was found in previous session:\n%s\nIt will be moved to:\n%s"
+			)
+			var extension_name = prev_damaged_extensions[0]
+			Global.popup_error(
+				error_text % [extension_name, ProjectSettings.globalize_path(BUG_EXTENSIONS_PATH)]
+			)
+		else:
+			Global.popup_error(
+				"Previous session crashed, extensions are automatically disabled as a precausion"
+			)
 
 	var file_names: PackedStringArray = []
 	var dir := DirAccess.open("user://")
@@ -90,34 +105,7 @@ func install_extension(path: String) -> void:
 
 
 func _add_extension(file_name: String) -> void:
-	var tester_file: FileAccess  # For testing and deleting damaged extensions
-	# Remove any extension that was proven guilty before this extension is loaded
-	if FileAccess.file_exists(EXTENSIONS_PATH.path_join("Faulty.txt")):
-		# This code will only run if pixelorama crashed
-		var faulty_path := EXTENSIONS_PATH.path_join("Faulty.txt")
-		tester_file = FileAccess.open(faulty_path, FileAccess.READ)
-		damaged_extension = tester_file.get_as_text()
-		tester_file.close()
-		# don't delete the extension permanently
-		# (so that it may be given to the developer in the bug report)
-		DirAccess.make_dir_recursive_absolute(BUG_EXTENSIONS_PATH)
-		DirAccess.rename_absolute(
-			EXTENSIONS_PATH.path_join(damaged_extension),
-			BUG_EXTENSIONS_PATH.path_join(damaged_extension)
-		)
-		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
-
-	# Don't load a deleted extension
-	if damaged_extension == file_name:
-		# This code will only run if pixelorama crashed
-		damaged_extension = ""
-		return
-
-	# The new (about to load) extension will be considered guilty till it's proven innocent
-	tester_file = FileAccess.open(EXTENSIONS_PATH.path_join("Faulty.txt"), FileAccess.WRITE)
-	tester_file.store_string(file_name)
-	tester_file.close()
-
+	add_suspicion(file_name)
 	if extensions.has(file_name):
 		uninstall_extension(file_name, UninstallMode.KEEP_FILE)
 		# Wait two frames so the previous nodes can get freed
@@ -131,8 +119,7 @@ func _add_extension(file_name: String) -> void:
 		# Context: pixelorama deletes v0.11.x extensions when you open v1.0, this will prevent it.
 		print("EXTENSION ERROR: Failed loading resource pack %s." % file_name)
 		print("There may be errors in extension code or extension is incompatible")
-		# Delete the faulty.txt, its fate has already been decided
-		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
+		clear_suspicion(file_name)
 		return
 	_load_extension(file_name)
 
@@ -184,7 +171,7 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 				print("Incompatible API")
 				if !internal:  # The file isn't created for internal extensions, no need for removal
 					# Don't put it in faulty, it's merely incompatible
-					DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
+					clear_suspicion(extension_file_or_folder_name)
 				return
 
 	var extension := Extension.new()
@@ -194,17 +181,33 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 	extension_loaded.emit(extension, extension_file_or_folder_name)
 	# Enable internal extensions if it is the first time they are being loaded
 	extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, internal)
+	# If this extension was enabled in previous session (which crashed) then disable it.
+	if extension_file_or_folder_name in prev_damaged_extensions:
+		Global.config_cache.set_value("extensions", extension.file_name, false)
+		extension.enabled = false
+
 	if extension.enabled:
 		enable_extension(extension)
 
-	# If an extension doesn't crash pixelorama then it is proven innocent
-	# And we should now delete its "Faulty.txt" file
-	if !internal:  # the file isn't created for internal extensions, so no need to remove it
-		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
+	# if extension is loaded and enabled successfully then update suspicion
+	if !internal:  # the file isn't created for internal extensions, so no need to remove it.
+		# At this point the extension has been enabled (and has added it's nodes) successfully
+		# If an extension misbehaves at this point, we are certain which on it is so we will
+		# quarantine it in the next session.
+		clear_suspicion(extension_file_or_folder_name)
 
 
 func enable_extension(extension: Extension, save_to_config := true) -> void:
 	var extension_path: String = "res://src/Extensions/%s/" % extension.file_name
+
+	# If an Extension has nodes, it may still crash pixelorama so it is still not cleared from
+	# suspicion, keep an eve on them (When we enable them)
+	if !extension.nodes.is_empty():
+		await get_tree().process_frame
+		# NOTE: await will make sure the below line of code will run AFTER all required extensions
+		# are enabled. (At this point we are no longer exactly sure which extension is faulty). so
+		# we shall disable All enabled extensions in next session if any of them misbehave.
+		add_suspicion(str(extension.file_name, ".pck"))
 
 	# A unique id for the extension (currently set to file_name). More parameters (version etc.)
 	# can be easily added using the str() function. for example
@@ -218,6 +221,10 @@ func enable_extension(extension: Extension, save_to_config := true) -> void:
 			var extension_scene: PackedScene = load(scene_path)
 			if extension_scene:
 				var extension_node: Node = extension_scene.instantiate()
+				# Keep an eye on extension nodes, so that they don't misbehave
+				extension_node.tree_exited.connect(
+					clear_suspicion.bind(str(extension.file_name, ".pck"))
+				)
 				add_child(extension_node)
 				extension_node.add_to_group(id)  # Keep track of what to remove later
 			else:
@@ -255,3 +262,55 @@ func uninstall_extension(file_name := "", remove_mode := UninstallMode.REMOVE_PE
 	extensions.erase(file_name)
 	extension_selected = -1
 	extension_uninstalled.emit(file_name)
+
+
+func remove_damaged() -> PackedStringArray:
+	var tester_file: FileAccess  # For testing and deleting damaged extensions
+	# Remove any extension that was proven guilty before this extension is loaded
+	if FileAccess.file_exists(EXTENSIONS_PATH.path_join("Faulty.txt")):
+		# This code will only run if pixelorama crashed
+		var faulty_path := EXTENSIONS_PATH.path_join("Faulty.txt")
+		tester_file = FileAccess.open(faulty_path, FileAccess.READ)
+		var damaged_extension_names = str_to_var(tester_file.get_as_text())
+		tester_file.close()
+		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
+		if typeof(damaged_extension_names) == TYPE_PACKED_STRING_ARRAY:
+			if damaged_extension_names.size() == 1:  # We are certain which extension crashed
+				# don't delete the extension permanently
+				# (so that it may be given to the developer in the bug report)
+				# NOTE: get_file() is used as a counermeasure towards possible malicius tampering
+				# with Faulty.txt file (to inject paths leading outside EXTENSIONS_PATH using "../")
+				var extension_name = damaged_extension_names[0].get_file()
+				DirAccess.make_dir_recursive_absolute(BUG_EXTENSIONS_PATH)
+				if FileAccess.file_exists(EXTENSIONS_PATH.path_join(extension_name)):
+					DirAccess.rename_absolute(
+						EXTENSIONS_PATH.path_join(extension_name),
+						BUG_EXTENSIONS_PATH.path_join(extension_name)
+					)
+			return damaged_extension_names
+	return PackedStringArray()
+
+
+func add_suspicion(extension_name: StringName):
+	# The new (about to load) extension will be considered guilty till it's proven innocent
+	if not extension_name in damaged_extensions:
+		var tester_file := FileAccess.open(
+			EXTENSIONS_PATH.path_join("Faulty.txt"), FileAccess.WRITE
+		)
+		damaged_extensions.append(extension_name)
+		tester_file.store_string(var_to_str(damaged_extensions))
+		tester_file.close()
+
+
+func clear_suspicion(extension_name: StringName):
+	if extension_name in damaged_extensions:
+		damaged_extensions.remove_at(damaged_extensions.find(extension_name))
+	# Delete the faulty.txt, if there are no more damaged extensions, else update it
+	if !damaged_extensions.is_empty():
+		var tester_file := FileAccess.open(
+			EXTENSIONS_PATH.path_join("Faulty.txt"), FileAccess.WRITE
+		)
+		tester_file.store_string(var_to_str(damaged_extensions))
+		tester_file.close()
+	else:
+		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Faulty.txt"))
