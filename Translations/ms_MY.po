@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-10 15:15\n"
+"PO-Revision-Date: 2025-02-14 22:51\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -521,7 +521,7 @@ msgstr "Hiris Pintar"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Ambangan:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
@@ -543,7 +543,7 @@ msgid "Start frame:"
 msgstr "Bingkai awal:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Bingkai akhir:"
 
 msgid "At frame:"
 msgstr "Di bingkai:"
