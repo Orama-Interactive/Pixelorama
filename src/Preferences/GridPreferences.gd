@@ -38,7 +38,6 @@ var grid_selected: int = 0:
 			update_pref_ui(grids[key])
 
 @onready var grids_select_container: HFlowContainer = $GridsSelectContainer
-@onready var grids_count: ValueSlider = %GridsCount
 
 
 class GridPreference:
