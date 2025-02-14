@@ -55,6 +55,7 @@ func _ready() -> void:
 	prev_damaged_extensions = remove_damaged()
 	if !prev_damaged_extensions.is_empty():
 		if prev_damaged_extensions.size() == 1:
+			# gdlint: ignore=max-line-length
 			var error_text = "A Faulty extension was found in previous session:\n%s\nIt will be moved to:\n%s"
 			var extension_name = prev_damaged_extensions[0]
 			Global.popup_error(
