@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-02-13 22:59\n"
+"PO-Revision-Date: 2025-02-14 19:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -464,7 +464,7 @@ msgid "Open File(s)"
 msgstr "Abrir Arquivo(s)..."
 
 msgid "Import Options"
-msgstr "Importar Opções"
+msgstr "Opções de Importação"
 
 msgid "Import as:"
 msgstr "Importar como:"
@@ -504,7 +504,7 @@ msgid "New palette"
 msgstr "Nova paleta"
 
 msgid "New brush"
-msgstr "Nova escova"
+msgstr "Novo pincel"
 
 msgid "New pattern"
 msgstr "Novo padrão"
@@ -555,7 +555,7 @@ msgid "Brush type:"
 msgstr "Tipo do pincel:"
 
 msgid "File brush"
-msgstr "Pincel de limpeza"
+msgstr "Pincel de arquivo"
 
 msgid "Project brush"
 msgstr "Pincel do projeto"
