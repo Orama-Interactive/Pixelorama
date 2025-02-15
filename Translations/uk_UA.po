@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2025-02-09 18:34\n"
+"PO-Revision-Date: 2025-02-15 14:13\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -355,6 +355,10 @@ msgstr "Розміщення"
 
 msgid "Moveable Panels"
 msgstr "Рухомі панелі"
+
+#. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
+msgid "Make Floating"
+msgstr ""
 
 msgid "Manage Layouts"
 msgstr "Керування розміщеннями"
@@ -1546,6 +1550,8 @@ msgstr "Піпетка\n\n"
 "Вибрати колір пікселя зі спрайта"
 
 msgid "Crop\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
 "Resize the canvas"
 msgstr ""
 
@@ -1658,7 +1664,7 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Скинути кольори до стандартних (зліва чорний, справа білий)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
-msgid "Pick a color from the screen."
+msgid "Pick a color from the application window."
 msgstr ""
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
@@ -1938,6 +1944,30 @@ msgstr "Відкрити директорію"
 msgid "Explore Online"
 msgstr ""
 
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
+msgid "Store"
+msgstr ""
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
+msgid "Search..."
+msgstr ""
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
+msgid "Tags:"
+msgstr ""
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
+msgid "Download"
+msgstr ""
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
+msgid "Store Links:"
+msgstr ""
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
+msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
+msgstr ""
+
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
 msgstr ""
@@ -1992,20 +2022,63 @@ msgstr "Пензель:"
 msgid "Select a brush"
 msgstr "Вибрати пензель"
 
+#. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
+msgid "Default Brushes"
+msgstr ""
+
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
 msgstr "Піксельний пензель"
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Circle brush"
 msgstr "Пензель-коло"
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Filled circle brush"
 msgstr "Пензель—заповнене коло"
+
+#. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
+msgid "Project Brushes"
+msgstr ""
+
+#. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
+msgid "File Brushes"
+msgstr ""
+
+#. Found when selecting a brush. One of the file brushes that come with Pixelorama.
+msgid "Snow"
+msgstr ""
+
+#. Found when selecting a brush. It's a section that shows file brushes that are randomized.
+msgid "Random File Brushes"
+msgstr ""
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Grass"
+msgstr ""
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Star"
+msgstr ""
 
 msgid "Custom brush"
 msgstr "Користувацький пензель"
 
 msgid "Brush size:"
 msgstr "Розмір пензля:"
+
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
+msgid "Rotation options"
+msgstr ""
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
+msgid "Flip:"
+msgstr ""
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
+msgid "Rotate:"
+msgstr ""
 
 msgid "Overwrite color"
 msgstr "Перезапис кольору"
@@ -2050,8 +2123,9 @@ msgstr "Заливає намальовану фігуру кольором за
 msgid "Density:"
 msgstr ""
 
-msgid "Brush color from"
-msgstr "Колір пензля з"
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
+msgid "Brush color from:"
+msgstr ""
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Колір з самого пензля, 100: поточний колір"
@@ -2104,6 +2178,17 @@ msgstr "Сила:"
 msgid "Lighten/Darken amount"
 msgstr "Сила освітлення/затемнення"
 
+#. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
+msgid "Color Replace"
+msgstr ""
+
+msgid "Please select a color from the palette."
+msgstr ""
+
+#. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
+msgid "Colors right:"
+msgstr ""
+
 msgid "Pick for:"
 msgstr "Вибрати для:"
 
@@ -2112,6 +2197,18 @@ msgstr "Лівий колір"
 
 msgid "Right Color"
 msgstr "Правий колір"
+
+#. Found in the color picker tool options. Specifies what mode should be used for picking a color.
+msgid "Pick mode:"
+msgstr ""
+
+#. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
+msgid "Top Color"
+msgstr ""
+
+#. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
+msgid "Current Layer"
+msgstr ""
 
 msgid "Mode:"
 msgstr "Режим:"
@@ -2449,6 +2546,10 @@ msgstr ""
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
+msgid "Erase"
 msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
@@ -2824,6 +2925,9 @@ msgstr "Чарівна паличка"
 
 msgid "Lasso / Free Select Tool"
 msgstr "Ласо / довільне виділення"
+
+msgid "Select by Drawing"
+msgstr ""
 
 msgid "Move"
 msgstr "Пересування"
