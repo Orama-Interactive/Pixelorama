@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-02-15 14:12\n"
+"PO-Revision-Date: 2025-02-15 23:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1958,15 +1958,15 @@ msgstr ""
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 msgid "Search..."
-msgstr ""
+msgstr "Buscar..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 msgid "Tags:"
-msgstr ""
+msgstr "Etiquetas:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
 msgid "Store Links:"
@@ -2056,7 +2056,7 @@ msgstr ""
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "Nieve"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
@@ -2068,7 +2068,7 @@ msgstr ""
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "Estrella"
 
 msgid "Custom brush"
 msgstr "Pincel Personalizado"
@@ -2082,11 +2082,11 @@ msgstr ""
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "Voltear:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "Rotar:"
 
 msgid "Overwrite color"
 msgstr "Sobrescribir color"
@@ -2187,10 +2187,10 @@ msgstr "Cantidad de iluminación/oscuridad"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "Reemplazo de color"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Por favor, seleccione un color de la paleta."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
@@ -2207,15 +2207,15 @@ msgstr "Color derecho"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Modo de selección:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Color superior"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Capa actual"
 
 msgid "Mode:"
 msgstr "Modo:"
@@ -2557,7 +2557,7 @@ msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Borrar"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2934,7 +2934,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Lazo / Herramienta de Selección Libre"
 
 msgid "Select by Drawing"
-msgstr ""
+msgstr "Seleccionar por dibujo"
 
 msgid "Move"
 msgstr "Mover"
