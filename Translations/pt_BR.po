@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-02-15 20:17\n"
+"PO-Revision-Date: 2025-02-15 23:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2218,7 +2218,7 @@ msgstr "Modo de seleção:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr "Cor no Topo"
+msgstr "Cor Superior"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
