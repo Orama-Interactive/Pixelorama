@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-02-15 17:16\n"
+"PO-Revision-Date: 2025-02-15 18:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2050,7 +2050,7 @@ msgstr "Wypełniony okrągły pędzel"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "Pędzle projektu"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
@@ -2058,7 +2058,7 @@ msgstr ""
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "Śnieg"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
@@ -2066,11 +2066,11 @@ msgstr ""
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "Trawa"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "Gwiazda"
 
 msgid "Custom brush"
 msgstr "Niestandardowy pędzel"
@@ -2080,7 +2080,7 @@ msgstr "Rozmiar pędzla:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "Opcje rotacji"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
@@ -2088,7 +2088,7 @@ msgstr ""
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "Obróć:"
 
 msgid "Overwrite color"
 msgstr "Nadpisz kolor"
@@ -2135,7 +2135,7 @@ msgstr "Gęstość:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
-msgstr ""
+msgstr "Kolor pędzla z:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowania"
@@ -2190,14 +2190,14 @@ msgstr "Siła rozjaśnienia/przyciemnienia"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "Zamień kolor"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Proszę wybrać kolor z palety."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Kolory po prawej:"
 
 msgid "Pick for:"
 msgstr "Wybierz dla:"
@@ -2214,11 +2214,11 @@ msgstr ""
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Główny kolor"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Obecna warstwa"
 
 msgid "Mode:"
 msgstr "Tryb:"
@@ -2560,7 +2560,7 @@ msgstr "Normalny"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Wyczyść"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2937,7 +2937,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Lasso / Narzędzie wolnego zaznacznia"
 
 msgid "Select by Drawing"
-msgstr ""
+msgstr "Wybierz poprzez rysowanie"
 
 msgid "Move"
 msgstr "Przenieś"
