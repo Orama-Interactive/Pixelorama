@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-02-15 14:13\n"
+"PO-Revision-Date: 2025-02-15 17:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1554,7 +1554,9 @@ msgid "Crop\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Przytnj\n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1673,7 +1675,7 @@ msgstr "Resetuje kolory do stanu domyślnego (czarny po lewej, biały po prawej)
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the application window."
-msgstr ""
+msgstr "Wybierz kolor w oknie aplikacji."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1954,27 +1956,27 @@ msgstr "Przeglądaj w Internecie"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
 msgid "Store"
-msgstr ""
+msgstr "Sklep"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 msgid "Search..."
-msgstr ""
+msgstr "Szukaj..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 msgid "Tags:"
-msgstr ""
+msgstr "Tagi:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 msgid "Download"
-msgstr ""
+msgstr "Pobierz"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
 msgid "Store Links:"
-msgstr ""
+msgstr "Linki do Sklepu:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr ""
+msgstr "Wklej link do sklepu podany przez właściciela sklepu (zostanie automatycznie usunięty, jeśli pozostanie pusty)"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2032,7 +2034,7 @@ msgstr "Wybierz pędzel"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "Domyślne pędzle"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
