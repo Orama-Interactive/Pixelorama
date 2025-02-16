@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-02-16 03:25\n"
+"PO-Revision-Date: 2025-02-16 04:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2135,7 +2135,7 @@ msgstr "Densidad:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
-msgstr ""
+msgstr "Color de pincel de:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Color del propio pincel, 100: el color seleccionado actualmente"
