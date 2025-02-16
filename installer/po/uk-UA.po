@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-05-21 17:41\n"
+"PO-Revision-Date: 2025-02-16 02:29\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
@@ -25,7 +25,7 @@ msgstr "Встановити ${APPNAME}"
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr "Створити ярлики меню Пуск (необов'язково)"
+msgstr "Створити ярлики в меню Пуск (необов'язково)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
@@ -50,7 +50,7 @@ msgstr "Встановлює ${APPNAME} ${APPVERSION}."
 #. DESC_SecStartmenu
 #: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr "Створює ярлики меню Пуск для ${APPNAME}."
+msgstr "Створює ярлики в меню Пуск для ${APPNAME}."
 
 #. DESC_SecDesktop
 #: ..\pixelorama.nsi:202
