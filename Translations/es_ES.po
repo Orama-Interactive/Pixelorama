@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-02-16 04:22\n"
+"PO-Revision-Date: 2025-02-16 15:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2197,7 +2197,7 @@ msgstr "Por favor, seleccione un color de la paleta."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Colores a la derecha:"
 
 msgid "Pick for:"
 msgstr "Elegir para:"
