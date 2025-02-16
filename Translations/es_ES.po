@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-02-15 23:38\n"
+"PO-Revision-Date: 2025-02-16 02:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2032,7 +2032,7 @@ msgstr "Seleccionar un pincel"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "Pinceles predeterminados"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
@@ -2048,11 +2048,11 @@ msgstr "Pincel de círculos con relleno"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "Pinceles del proyecto"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Pinceles del archivo"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
@@ -2060,11 +2060,11 @@ msgstr "Nieve"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Pinceles del archivo aleatorios"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "Césped"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
@@ -2078,7 +2078,7 @@ msgstr "Tamaño del pincel:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "Opciones de rotación"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
@@ -2854,16 +2854,16 @@ msgid "Image Options"
 msgstr "Opciones de imagen"
 
 msgid "Default width:"
-msgstr "Ancho por Defecto:"
+msgstr "Ancho predeterminado:"
 
 msgid "A default width of a new image"
 msgstr "Un ancho por defecto de una nueva imagen"
 
 msgid "Default height:"
-msgstr "Altura por Defecto:"
+msgstr "Altura predeterminada:"
 
 msgid "A default height of a new image"
-msgstr "Una altura por defecto de una nueva imagen"
+msgstr "Altura predeterminada de una nueva imagen"
 
 msgid "Default fill color:"
 msgstr "Color de relleno predeterminado:"
