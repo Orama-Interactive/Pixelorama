@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2025-02-16 01:17\n"
+"PO-Revision-Date: 2025-02-16 02:29\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -533,11 +533,11 @@ msgstr "Зображення, що мають будь-яку одну стор�
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Об'єднати відстань:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "Зображення, які перетнули цей поріг будуть об’єднуватися в більше зображення, якщо вони на цій відстані"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
@@ -823,7 +823,7 @@ msgstr "Константа"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Колірний простір"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -896,7 +896,7 @@ msgstr "Додає більш плавний перехід при масшта�
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Ціле масштабування"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
@@ -936,7 +936,7 @@ msgstr "Затемнити інтерфейс під діалоговими ві
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Використовувати нативні діалогові вікна"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
@@ -944,7 +944,7 @@ msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Режим одного вікна"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -995,7 +995,7 @@ msgstr "Колір фону:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Ділитися налаштуваннями між лівими та правими інструментами"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1125,7 +1125,7 @@ msgstr "Якщо увімкнено, останню точку буде дода
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Зберегти до шаблонів"
 
 msgid "Shape:"
 msgstr "Форма:"
@@ -1221,24 +1221,24 @@ msgstr "Фактор ефекту відтінку:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Криві Кольору"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Канал:"
 
 msgid "Red"
-msgstr ""
+msgstr "Червоний"
 
 msgid "Green"
-msgstr ""
+msgstr "Зелений"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Значення"
 
 msgid "Presets"
-msgstr ""
+msgstr "Шаблони"
 
 msgid "Apply"
 msgstr "Застосувати"
@@ -1264,7 +1264,7 @@ msgstr ""
 
 #. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
-msgstr ""
+msgstr "Пікселізація"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
@@ -1289,7 +1289,7 @@ msgstr "Трекер помилок"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Відкрити теку з даними редактора"
 
 msgid "Changelog"
 msgstr "Список змін"
@@ -1315,7 +1315,7 @@ msgstr "Веб-сайт"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Вихідний код"
 
 msgid "Donate"
 msgstr "Підтримати"
@@ -1669,23 +1669,23 @@ msgstr ""
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Введіть шістнадцятковий код (\"#ff0000\") або назву кольору (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Виберіть форму піпетки."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Налаштування кольору"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Перейдіть до режиму вибору."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Кольорові повзунки"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
