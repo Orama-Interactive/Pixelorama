@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-02-15 14:13\n"
+"PO-Revision-Date: 2025-02-17 06:55\n"
 
 msgid "OK"
 msgstr "确定"
@@ -149,7 +149,7 @@ msgstr "原位粘贴"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "从剪贴板粘贴"
 
 msgid "Delete"
 msgstr "删除"
@@ -292,15 +292,15 @@ msgstr "首选项"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "程序"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "模糊"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "已加载"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -330,7 +330,7 @@ msgstr "重置"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "重置 %s"
 
 msgid "Use Current Frame"
 msgstr "当前帧"
@@ -358,7 +358,7 @@ msgstr "可移动面板"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "制作浮动"
 
 msgid "Manage Layouts"
 msgstr "管理布局"
@@ -375,7 +375,7 @@ msgstr "添加布局"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "删除 %s"
 
 msgid "Copy from"
 msgstr "复制从"
@@ -423,7 +423,7 @@ msgstr "显示鼠标向导"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "显示参考图像"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -1556,7 +1556,10 @@ msgid "Crop\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "裁剪\n\n"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键\n\n"
+"调整画布大小"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1676,7 +1679,7 @@ msgstr "重置颜色为默认状态（黑色为左，白色为右）"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the application window."
-msgstr ""
+msgstr "从应用程序窗口中选择一种颜色。"
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1957,27 +1960,27 @@ msgstr "在线浏览"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
 msgid "Store"
-msgstr ""
+msgstr "商店"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 msgid "Search..."
-msgstr ""
+msgstr "搜索..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 msgid "Tags:"
-msgstr ""
+msgstr "标签："
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 msgid "Download"
-msgstr ""
+msgstr "下载"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
 msgid "Store Links:"
-msgstr ""
+msgstr "商店链接："
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr ""
+msgstr "粘贴商店链接，由商店所有者提供（如果留空，将自动删除）"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2035,7 +2038,7 @@ msgstr "选择一个画笔"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "默认笔刷"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
@@ -2051,27 +2054,27 @@ msgstr "填充圆形画笔"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "项目笔刷"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "文件笔刷"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "雪"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "随机文件笔刷"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "草地"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "星星"
 
 msgid "Custom brush"
 msgstr "自定义画笔"
@@ -2081,15 +2084,15 @@ msgstr "画笔大小："
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "旋转选项"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "翻转："
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "旋转："
 
 msgid "Overwrite color"
 msgstr "覆盖颜色"
@@ -2136,7 +2139,7 @@ msgstr "密度："
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
-msgstr ""
+msgstr "画笔颜色来自："
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0：画笔本身的颜色，100：当前选择的颜色"
@@ -2191,14 +2194,14 @@ msgstr "减淡/加深数量"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "颜色替换"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "请从调色板中选择一种颜色。"
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "右侧颜色："
 
 msgid "Pick for:"
 msgstr "拾取："
@@ -2211,15 +2214,15 @@ msgstr "右键颜色"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "选取模式："
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "顶部颜色"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "当前图层"
 
 msgid "Mode:"
 msgstr "模式："
@@ -2561,7 +2564,7 @@ msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "擦除"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2938,7 +2941,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "套索/自由选择工具"
 
 msgid "Select by Drawing"
-msgstr ""
+msgstr "按绘图选择"
 
 msgid "Move"
 msgstr "移动"
@@ -3689,11 +3692,11 @@ msgstr "图块大小："
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "选择一个图块并将其放置在画布上。"
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "修改画布上的图块。"
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3718,31 +3721,31 @@ msgstr "垂直翻转图块"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "手动"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "自动"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "堆叠"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "平铺按钮大小："
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "显示空白图块："
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "图块属性"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "可能性："
 
