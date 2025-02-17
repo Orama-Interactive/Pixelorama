@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-02-15 14:13\n"
+"PO-Revision-Date: 2025-02-17 17:24\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -358,7 +358,7 @@ msgstr "Panel Bisa Dipindah"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Pisah Panel"
 
 msgid "Manage Layouts"
 msgstr "Atur Tata Letak"
@@ -1556,7 +1556,10 @@ msgid "Crop\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Pangkas\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Mengubah ukuran kanvas"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1676,7 +1679,7 @@ msgstr "Kembalikan ke warna bawaan (hitam di kiri, putih di kanan)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the application window."
-msgstr ""
+msgstr "Memilih warna pada jendela aplikasi."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1957,23 +1960,23 @@ msgstr "Cari di Daring"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
 msgid "Store"
-msgstr ""
+msgstr "Toko"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 msgid "Search..."
-msgstr ""
+msgstr "Cari..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 msgid "Tags:"
-msgstr ""
+msgstr "Tag:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 msgid "Download"
-msgstr ""
+msgstr "Unduh"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
 msgid "Store Links:"
-msgstr ""
+msgstr "Tautan Toko:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
