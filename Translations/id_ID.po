@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-02-17 21:44\n"
+"PO-Revision-Date: 2025-02-17 22:59\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -2941,7 +2941,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Lasso / Alat Pemangkas"
 
 msgid "Select by Drawing"
-msgstr "Pilih sesuai Gambar"
+msgstr "Pilih dgn Menggambar"
 
 msgid "Move"
 msgstr "Pindah"
