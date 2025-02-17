@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-15 14:12\n"
+"PO-Revision-Date: 2025-02-17 17:24\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -358,7 +358,7 @@ msgstr "Panel Boleh Pindah"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Pisahkan Panel"
 
 msgid "Manage Layouts"
 msgstr "Urus Susun Atur"
