@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-02-17 17:24\n"
+"PO-Revision-Date: 2025-02-17 21:44\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1980,7 +1980,7 @@ msgstr "Tautan Toko:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr ""
+msgstr "Menempelkan tautan pemilik toko (kolom akan kosong otomatis jika tidak ada tautan)"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2038,7 +2038,7 @@ msgstr "Pilih kuas"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "Kuas Bawaan"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
@@ -2054,27 +2054,27 @@ msgstr "Kuas lingkaran berisi"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "Kuas Proyek"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Kuas Berkas"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "Salju"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Kuas Berkas Acak"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "Rumput"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "Bintang"
 
 msgid "Custom brush"
 msgstr "Kuas kustom"
@@ -2084,15 +2084,15 @@ msgstr "Ukuran kuas:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "Opsi putaran"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "Dibalik:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "Putar:"
 
 msgid "Overwrite color"
 msgstr "Timpa warna"
@@ -2139,7 +2139,7 @@ msgstr "Kerapatan:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
-msgstr ""
+msgstr "Warna kuas dari:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Warna dari kuasnya sendiri, 100: Warna yang dipilih saat ini"
@@ -2194,17 +2194,17 @@ msgstr "Jumlah Terang/Gelap"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "Ganti Warna"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Mohon pilih warna dari palet."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Warna ke kanan:"
 
 msgid "Pick for:"
-msgstr "Ambil untuk:"
+msgstr "Pilih untuk:"
 
 msgid "Left Color"
 msgstr "Warna Kiri"
@@ -2214,15 +2214,15 @@ msgstr "Warna Kanan"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Mode pilih:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Warna Atas"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Tata letak saat ini"
 
 msgid "Mode:"
 msgstr "Mode:"
@@ -2564,7 +2564,7 @@ msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Hapus"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2941,7 +2941,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Lasso / Alat Pemangkas"
 
 msgid "Select by Drawing"
-msgstr ""
+msgstr "Pilih sesuai Gambar"
 
 msgid "Move"
 msgstr "Pindah"
@@ -3378,7 +3378,7 @@ msgid "Frustum"
 msgstr "Frustum"
 
 msgid "Rotation:"
-msgstr "Perputaran:"
+msgstr "Putaran:"
 
 msgid "Scale:"
 msgstr "Skala:"
