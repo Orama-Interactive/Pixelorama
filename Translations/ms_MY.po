@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-17 21:44\n"
+"PO-Revision-Date: 2025-02-17 22:59\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -276,7 +276,7 @@ msgid "Square"
 msgstr "Petak"
 
 msgid "Grayscale View"
-msgstr "Pandang Skala Kelabu"
+msgstr "Paparan Skala Kelabu"
 
 msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
@@ -358,7 +358,7 @@ msgstr "Panel Boleh Pindah"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr "Pisahkan Panel"
+msgstr "Pisah Panel"
 
 msgid "Manage Layouts"
 msgstr "Urus Susun Atur"
@@ -607,10 +607,10 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Bingkai"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Bingkai:"
 
 msgid "All Frames"
 msgstr ""
@@ -2134,11 +2134,11 @@ msgid "Color Replace"
 msgstr "Ganti Warna"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Harap pilih warna daripada palet."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Warna ke kanan:"
 
 msgid "Pick for:"
 msgstr ""
@@ -2151,15 +2151,15 @@ msgstr ""
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Mod pilih:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Warna Atas"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Susun atur semasa"
 
 msgid "Mode:"
 msgstr ""
@@ -2500,7 +2500,7 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Padam"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2876,7 +2876,7 @@ msgid "Lasso / Free Select Tool"
 msgstr ""
 
 msgid "Select by Drawing"
-msgstr ""
+msgstr "Pilih dgn Menggambar"
 
 msgid "Move"
 msgstr ""
