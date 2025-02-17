@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-02-15 14:12\n"
+"PO-Revision-Date: 2025-02-17 15:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -356,7 +356,7 @@ msgstr "Panouri mobile"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Devenire flotant"
 
 msgid "Manage Layouts"
 msgstr "Gestionare dispuneri"
@@ -1554,7 +1554,9 @@ msgid "Crop\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Decupare\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1674,7 +1676,7 @@ msgstr "Resetează culorile la starea lor implicită (negru pentru stânga, alb 
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the application window."
-msgstr ""
+msgstr "Alege o culoare din fereastra aplicației."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1955,27 +1957,27 @@ msgstr "Explorează pe internet"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
 msgid "Store"
-msgstr ""
+msgstr "Magazin"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 msgid "Search..."
-msgstr ""
+msgstr "Căutare..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 msgid "Tags:"
-msgstr ""
+msgstr "Etichete:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 msgid "Download"
-msgstr ""
+msgstr "Descărcare"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
 msgid "Store Links:"
-msgstr ""
+msgstr "Linkuri magazin:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr ""
+msgstr "Lipește linkul magazinului, dat de proprietarul magazinului (va fi eliminat automat dacă este lăsat gol)"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2033,7 +2035,7 @@ msgstr "Selectează o pensulă"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "Pensule implicite"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
@@ -2049,27 +2051,27 @@ msgstr "Pensulă cu cerc umplut"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "Pensule de proiect"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Pensule de fișier"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "Zăpadă"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Pensule de fișier aleatorii"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "Iarbă"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "Stea"
 
 msgid "Custom brush"
 msgstr "Pensulă personalizată"
@@ -2079,15 +2081,15 @@ msgstr "Dimensiunea pensulei:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "Opțiuni de rotație"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "Răsturnare:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "Rotire:"
 
 msgid "Overwrite color"
 msgstr "Suprascriere culoare"
@@ -2134,7 +2136,7 @@ msgstr "Densitate:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
-msgstr ""
+msgstr "Culoarea pensulei de la:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: culoarea provenită din pensulă, 100: culoarea selectată în prezent"
@@ -2189,14 +2191,14 @@ msgstr "Cantitate luminare/întunecare"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "Înlocuire culoare"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Selectează o culoare din paletă."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Culori dreapta:"
 
 msgid "Pick for:"
 msgstr "Alege pentru:"
@@ -2209,7 +2211,7 @@ msgstr "Culoarea dreaptă"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Mod alegere:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
@@ -2217,7 +2219,7 @@ msgstr ""
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Strat actual"
 
 msgid "Mode:"
 msgstr "Mod:"
@@ -2559,7 +2561,7 @@ msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Ștergere"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2936,7 +2938,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Lasou/instrument de selectare liberă"
 
 msgid "Select by Drawing"
-msgstr ""
+msgstr "Selectare prin desenare"
 
 msgid "Move"
 msgstr "Deplasare"
