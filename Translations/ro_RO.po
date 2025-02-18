@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-02-17 15:58\n"
+"PO-Revision-Date: 2025-02-18 13:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -298,7 +298,7 @@ msgstr "Estompare"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Încărcate"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -328,7 +328,7 @@ msgstr "Resetare"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Resetare %s"
 
 msgid "Use Current Frame"
 msgstr "Utilizare cadru actual"
@@ -373,7 +373,7 @@ msgstr "Adăugare dispunere"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Ștergere %s"
 
 msgid "Copy from"
 msgstr "Copiere din"
@@ -2215,7 +2215,7 @@ msgstr "Mod alegere:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Culoarea de sus"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
@@ -3741,9 +3741,9 @@ msgstr "Afișare dală goală:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Proprietăți dală"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Probabilitate:"
 
