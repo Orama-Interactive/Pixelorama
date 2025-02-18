@@ -574,12 +574,15 @@ func update_cel_portions() -> void:
 
 ## Loops through all [member cells] of the tilemap and updates their indices,
 ## so they can remain mapped to the [member tileset]'s tiles.
-func _re_index_all_cells() -> void:
+func re_index_all_cells(set_invisible_to_zero := false) -> void:
 	for i in cells.size():
 		var coords := get_cell_coords_in_image(i)
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		if image_portion.is_invisible():
+			if set_invisible_to_zero:
+				cells[i].index = 0
+				continue
 			var index := cells[i].index
 			if index > 0 and index < tileset.tiles.size():
 				var current_tile := tileset.tiles[index]
@@ -616,7 +619,7 @@ func _is_redo() -> bool:
 ## If [param replace_index] is larger than -1, it means that manual mode
 ## has been used to replace a tile in the tileset in another cel,
 ## so call [method update_cel_portions] to update it in this cel as well.
-## Otherwise, call [method _re_index_all_cells] to ensure that the cells have correct indices.
+## Otherwise, call [method re_index_all_cells] to ensure that the cells have correct indices.
 func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 	if cel == self:
 		return
@@ -625,7 +628,7 @@ func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 	if replace_index > -1:  # Manual mode
 		update_cel_portions()
 	else:
-		_re_index_all_cells()
+		re_index_all_cells()
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 
@@ -642,7 +645,7 @@ func _deserialize_cell_data(cell_indices: Array, resize: bool) -> void:
 func set_content(content, texture: ImageTexture = null) -> void:
 	super.set_content(content, texture)
 	_resize_cells(image.get_size())
-	_re_index_all_cells()
+	re_index_all_cells()
 
 
 func update_texture(undo := false) -> void:
