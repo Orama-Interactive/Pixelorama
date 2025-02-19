@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-19 05:34\n"
+"PO-Revision-Date: 2025-02-19 06:39\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -1918,7 +1918,7 @@ msgstr "Pautan Kedai:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr "Tampalkan pautan pemilik kedai (medan teks akan auto kosong jika belum tampal)"
+msgstr "Tampalkan pautan pemilik kedai (medan teks akan auto hilang jika belum tampal)"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2141,13 +2141,13 @@ msgid "Colors right:"
 msgstr "Warna ke kanan:"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Mod pilih:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Warna Kiri"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Warna Kanan"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
@@ -2159,10 +2159,10 @@ msgstr "Warna Atas"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr "Susun atur semasa"
+msgstr "Lapisan Semasa"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mod:"
 
 msgid "Zoom in"
 msgstr ""
