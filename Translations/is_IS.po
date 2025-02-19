@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Icelandic\n"
 "Language: is_IS\n"
-"PO-Revision-Date: 2025-02-15 14:13\n"
+"PO-Revision-Date: 2025-02-19 16:38\n"
 
 msgid "OK"
 msgstr ""
@@ -1326,7 +1326,20 @@ msgstr ""
 msgid "Translators"
 msgstr ""
 
+#. Refers to software licenses. https://en.wikipedia.org/wiki/Software_license
 msgid "Licenses"
+msgstr ""
+
+#. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
+msgid "License"
+msgstr ""
+
+#. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
+msgid "Godot Licenses"
+msgstr ""
+
+#. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
+msgid "Third-party Licenses"
 msgstr ""
 
 msgid "English"
