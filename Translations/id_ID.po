@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-02-17 22:59\n"
+"PO-Revision-Date: 2025-02-19 06:39\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -388,7 +388,7 @@ msgstr "Ubah Nama Tata Letak"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr "Tata letak sekarang"
+msgstr "Tata letak ini"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Apakah yakin ingin menghapus tata letak ini?"
@@ -1679,7 +1679,7 @@ msgstr "Kembalikan ke warna bawaan (hitam di kiri, putih di kanan)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the application window."
-msgstr "Memilih warna pada jendela aplikasi."
+msgstr "Pilih warna pada jendela aplikasi."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1980,7 +1980,7 @@ msgstr "Tautan Toko:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr "Menempelkan tautan pemilik toko (kolom akan kosong otomatis jika tidak ada tautan)"
+msgstr "Tempelkan tautan pemilik toko (kolom akan hilang otomatis jika belum tempel)"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2101,19 +2101,19 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "Warnanya ditimpa dan tak dicampur. Opsi ini hanya relevan bagi warna yang tidak sepenuhnya legap (opaque)"
 
 msgid "Pixel Perfect"
-msgstr "Pas Piksel"
+msgstr "Piksel Sempurna"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Pas Sesuai Piksel\n"
-"Membuat garis terlihat mulus dengan menghapus piksel tambahan di tepinya"
+msgstr "Piksel Sempurna\n"
+"Memuluskan garis dengan menghapus piksel tambahan di tepinya"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
 msgstr "Kuncikan alfa"
 
 msgid "Fill inside"
-msgstr "Warnai dalamnya"
+msgstr "Warnai isinya"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
@@ -2175,7 +2175,7 @@ msgid "Offset"
 msgstr "Offset"
 
 msgid "Simple Shading"
-msgstr "Pembayangan Sederhana"
+msgstr "Pembayang Sederhana"
 
 msgid "Hue Shifting"
 msgstr "Pergeseran Rona"
@@ -2222,7 +2222,7 @@ msgstr "Warna Atas"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr "Tata letak saat ini"
+msgstr "Lapisan Saat Ini"
 
 msgid "Mode:"
 msgstr "Mode:"
@@ -2429,7 +2429,7 @@ msgid "Remove Frame"
 msgstr "Hapus Bingkai"
 
 msgid "Clone Frame"
-msgstr "Duplikatkan Bingkai"
+msgstr "Dobelkan Bingkai"
 
 msgid "Move Left"
 msgstr "Geser ke kiri"
@@ -2544,7 +2544,7 @@ msgstr "Geser lapisan ini ke bawah"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Clone current layer"
-msgstr "Duplikatkan lapisan ini"
+msgstr "Dobelkan lapisan ini"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Merge current layer with the one below"
@@ -2686,7 +2686,7 @@ msgid "Add a new palette"
 msgstr "Tambah palet baru"
 
 msgid "Edit currently selected palette"
-msgstr "Sunting palet yang sedang dipilih"
+msgstr "Sunting palet sedang dipilih"
 
 msgid "Choose a palette"
 msgstr "Pilih satu palet"
@@ -2804,7 +2804,7 @@ msgid "Import Palette"
 msgstr "Impor palet"
 
 msgid "Create Palette From Current Sprite"
-msgstr "Buat warna palet dari sprite saat ini"
+msgstr "Buat Palet dari Sprite Saat Ini"
 
 msgid "Palette Name:"
 msgstr "Nama palet:"
