@@ -217,6 +217,7 @@ const DONORS: PackedStringArray = [
 	"BasicIncomePlz",
 	"Benedikt",
 	"Hugo Locurcio",
+	"Jacob",
 	"Jérôme P.",
 	"Jonas Rudlang",
 	"Mike King",
