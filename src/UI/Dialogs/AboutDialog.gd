@@ -225,18 +225,23 @@ const DONORS: PackedStringArray = [
 ]
 
 @export_multiline var licenses: PackedStringArray
+var godot_licenses: PackedStringArray
 
 @onready var credits := $AboutUI/Credits as HSplitContainer
 @onready var groups := $AboutUI/Credits/Groups as Tree
 @onready var authors_container := $AboutUI/Credits/Authors as VBoxContainer
 @onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
 @onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
-@onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
+@onready var license_container := %PixeloramaLicense as VBoxContainer
+@onready var godot_licenses_container := %GodotLicenses as VBoxContainer
+@onready var third_party_licenses_container := %ThirdPartyLicenses as VBoxContainer
 @onready var authors := $AboutUI/Credits/Authors/AuthorTree as Tree
 @onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
 @onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
-@onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as TabBar
-@onready var license_text := $AboutUI/Credits/Licenses/LicenseText as TextEdit
+@onready var godot_license_tabs := %GodotLicenses/GodotLicenseTabs as TabBar
+@onready var godot_license_text := %GodotLicenses/GodotLicenseText as TextEdit
+@onready var third_party_license_tabs := %ThirdPartyLicenses/ThirdPartyLicenseTabs as TabBar
+@onready var third_party_license_text := %ThirdPartyLicenses/ThirdPartyLicenseText as TextEdit
 @onready var pixelorama_slogan := (
 	$AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan as Label
 )
@@ -247,19 +252,33 @@ func _ready() -> void:
 	pixelorama_slogan.label_settings.font_color = get_theme_color(&"font_color", &"Label")
 	copyright_label.label_settings.font_color = get_theme_color(&"font_color", &"Label")
 	create_donors()
-	license_tabs.add_tab("Pixelorama")
-	license_tabs.add_tab("Godot")
-	license_tabs.add_tab("FreeType")
-	license_tabs.add_tab("mbed TLS")
-	license_tabs.add_tab("Keychain")
-	license_tabs.add_tab("Roboto")
-	license_tabs.add_tab("Dockable Container")
-	license_tabs.add_tab("aimgio")
-	license_tabs.add_tab("godot-gdgifexporter")
-	license_tabs.add_tab("cleanEdge")
-	license_tabs.add_tab("OmniScale")
-	license_tabs.add_tab("gd-obj")
-	license_text.text = licenses[0]
+	for godot_license in Engine.get_copyright_info():
+		godot_license_tabs.add_tab(godot_license.name)
+		var license_text: String = godot_license.name + "\n\n"
+		for part in godot_license.parts:
+			license_text += "Files:\n"
+			for file in part.files:
+				license_text += "\t" + file + "\n"
+			for copyright in part.copyright:
+				license_text += "© " + copyright + "\n"
+			var license_name: String = part.get("license", "")
+			license_text += "License: " + license_name + "\n\n"
+			for license in Engine.get_license_info():
+				if license in license_name:
+					license_text += Engine.get_license_info()[license] + "\n\n"
+		godot_licenses.append(license_text)
+	godot_license_text.text = godot_licenses[0]
+
+	third_party_license_tabs.add_tab("Keychain")
+	third_party_license_tabs.add_tab("Roboto font")
+	third_party_license_tabs.add_tab("Dockable Container")
+	third_party_license_tabs.add_tab("aimgio")
+	third_party_license_tabs.add_tab("godot-gdgifexporter")
+	third_party_license_tabs.add_tab("cleanEdge")
+	third_party_license_tabs.add_tab("OmniScale")
+	third_party_license_tabs.add_tab("Material Maker")
+	third_party_license_tabs.add_tab("gd-obj")
+	third_party_license_text.text = licenses[0]
 
 
 func _notification(what: int) -> void:
@@ -270,7 +289,7 @@ func _notification(what: int) -> void:
 		copyright_label.label_settings.font_color = get_theme_color(&"font_color", &"Label")
 
 
-func _on_AboutDialog_about_to_show() -> void:
+func _on_about_to_popup() -> void:
 	title = tr("About Pixelorama") + " " + Global.current_version
 
 	var groups_root := groups.create_item()
@@ -278,7 +297,9 @@ func _on_AboutDialog_about_to_show() -> void:
 	var authors_button := groups.create_item(groups_root)
 	var donors_button := groups.create_item(groups_root)
 	var translators_button := groups.create_item(groups_root)
-	var licenses_button := groups.create_item(groups_root)
+	var license_button := groups.create_item(groups_root)
+	var godot_license_button := groups.create_item(groups_root)
+	var third_party_licenses_button := groups.create_item(groups_root)
 	authors_button.set_text(0, "  " + tr("Authors"))
 	# We use metadata to avoid being affected by translations
 	authors_button.set_metadata(0, "Authors")
@@ -287,8 +308,12 @@ func _on_AboutDialog_about_to_show() -> void:
 	donors_button.set_metadata(0, "Donors")
 	translators_button.set_text(0, "  " + tr("Translators"))
 	translators_button.set_metadata(0, "Translators")
-	licenses_button.set_text(0, "  " + tr("Licenses"))
-	licenses_button.set_metadata(0, "Licenses")
+	license_button.set_text(0, "  " + tr("License"))
+	license_button.set_metadata(0, "License")
+	godot_license_button.set_text(0, "  " + tr("Godot Licenses"))
+	godot_license_button.set_metadata(0, "Godot Licenses")
+	third_party_licenses_button.set_text(0, "  " + tr("Third-party Licenses"))
+	third_party_licenses_button.set_metadata(0, "Third-party Licenses")
 
 	create_authors()
 	create_translators()
@@ -303,7 +328,7 @@ func _on_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 
-func _on_Groups_item_selected() -> void:
+func _on_groups_item_selected() -> void:
 	for child in credits.get_children():
 		if child != groups:
 			child.visible = false
@@ -315,15 +340,19 @@ func _on_Groups_item_selected() -> void:
 		donors_container.visible = true
 	elif "Translators" in selected:
 		translators_container.visible = true
-	elif "Licenses" in selected:
-		licenses_container.visible = true
+	elif "Godot Licenses" in selected:
+		godot_licenses_container.visible = true
+	elif "Third-party Licenses" in selected:
+		third_party_licenses_container.visible = true
+	elif "License" in selected:
+		license_container.visible = true
 
 
-func _on_Website_pressed() -> void:
+func _on_website_pressed() -> void:
 	OS.shell_open("https://www.oramainteractive.com")
 
 
-func _on_GitHub_pressed() -> void:
+func _on_github_pressed() -> void:
 	OS.shell_open("https://github.com/Orama-Interactive/Pixelorama")
 
 
@@ -359,9 +388,15 @@ func create_translators() -> void:
 		translators.create_item(translators_root).set_text(0, text)
 
 
-func _on_LicenseTabs_tab_changed(tab: int) -> void:
-	license_text.text = licenses[tab]
-
-
 func _on_close_requested() -> void:
 	hide()
+
+
+func _on_godot_license_tabs_tab_changed(tab: int) -> void:
+	if tab >= godot_licenses.size():
+		return
+	godot_license_text.text = godot_licenses[tab]
+
+
+func _on_third_party_license_tabs_tab_changed(tab: int) -> void:
+	third_party_license_text.text = licenses[tab]
