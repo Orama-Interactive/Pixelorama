@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2025-02-19 16:38\n"
+"PO-Revision-Date: 2025-02-21 22:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -236,6 +236,10 @@ msgstr "Effacer"
 
 msgid "Invert"
 msgstr "Inverser"
+
+#. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
+msgid "Select cel area"
+msgstr ""
 
 msgid "Modify"
 msgstr ""
