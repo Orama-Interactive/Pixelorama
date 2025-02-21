@@ -6,14 +6,14 @@
 [node name="LayerProperties" type="AcceptDialog"]
 title = "Layer properties"
 position = Vector2i(0, 36)
-size = Vector2i(300, 270)
+size = Vector2i(425, 300)
 script = ExtResource("1_54q1t")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 292.0
-offset_bottom = 221.0
+offset_right = 417.0
+offset_bottom = 251.0
 columns = 2
 
 [node name="NameLabel" type="Label" parent="GridContainer"]
@@ -81,6 +81,16 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("2_bwpwc")
 
+[node name="TilesetLabel" type="Label" parent="GridContainer" groups=["TilemapLayers"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Tileset:"
+
+[node name="TilesetOptionButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayers"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
 [node name="UserDataLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -92,13 +102,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true
 
-[node name="TilesetLabel" type="Label" parent="GridContainer" groups=["TilemapLayers"]]
+[node name="UIColorLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Tileset:"
+text = "Color:"
 
-[node name="TilesetOptionButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayers"]]
+[node name="UIColorPickerButton" type="ColorPickerButton" parent="GridContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
@@ -117,6 +127,7 @@ filters = PackedStringArray("*.mp3 ; MP3 Audio")
 [connection signal="item_selected" from="GridContainer/BlendModeOptionButton" to="." method="_on_blend_mode_option_button_item_selected"]
 [connection signal="pressed" from="GridContainer/AudioFileButton" to="." method="_on_audio_file_button_pressed"]
 [connection signal="value_changed" from="GridContainer/PlayAtFrameSlider" to="." method="_on_play_at_frame_slider_value_changed"]
-[connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="item_selected" from="GridContainer/TilesetOptionButton" to="." method="_on_tileset_option_button_item_selected"]
+[connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
+[connection signal="color_changed" from="GridContainer/UIColorPickerButton" to="." method="_on_ui_color_picker_button_color_changed"]
 [connection signal="file_selected" from="AudioFileDialog" to="." method="_on_audio_file_dialog_file_selected"]

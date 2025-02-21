@@ -6,6 +6,7 @@ extends RefCounted
 signal name_changed  ## Emits when [member name] is changed.
 signal visibility_changed  ## Emits when [member visible] is changed.
 signal effects_added_removed  ## Emits when an effect is added or removed to/from [member effects].
+signal ui_color_changed  ## Emits when [member ui_color] is changed.
 
 ## All currently supported layer blend modes between two layers. The upper layer
 ## is the blend layer, and the bottom layer is the base layer.
@@ -13,7 +14,7 @@ signal effects_added_removed  ## Emits when an effect is added or removed to/fro
 enum BlendModes {
 	PASS_THROUGH = -2,  ## Only for group layers. Ignores group blending, like it doesn't exist.
 	NORMAL = 0,  ## The blend layer colors are simply placed on top of the base colors.
-	ERASE,  ## Subtracts the numerical value of alpha from the base alpha.
+	ERASE,  ## Erases the non-transparent areas of the upper layer from the lower layer's alpha.
 	DARKEN,  ## Keeps the darker colors between the blend and the base layers.
 	MULTIPLY,  ## Multiplies the numerical values of the two colors, giving a darker result.
 	COLOR_BURN,  ## Darkens by increasing the contrast between the blend and base colors.
@@ -55,6 +56,11 @@ var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's
 var effects: Array[LayerEffect]  ## An array for non-destructive effects of the layer.
 var effects_enabled := true  ## If [code]true[/code], the effects are being applied.
 var user_data := ""  ## User defined data, set in the layer properties.
+## The color of the layer's button in the timeline. By default, it's the theme button color.
+var ui_color := Color(0, 0, 0, 0):
+	set(value):
+		ui_color = value
+		ui_color_changed.emit()
 
 
 ## Returns true if this is a direct or indirect parent of layer
@@ -236,8 +242,9 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
 		var params := effect.params
-		params["PXO_time"] = cel.get_frame(project).position_in_seconds(project)
-		params["PXO_frame_index"] = project.frames.find(cel.get_frame(project))
+		var frame := cel.get_frame(project)
+		params["PXO_time"] = frame.position_in_seconds(project)
+		params["PXO_frame_index"] = project.frames.find(frame)
 		params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, params, image_size)
@@ -259,6 +266,17 @@ func emit_effects_added_removed() -> void:
 	effects_added_removed.emit()
 
 
+## Returns the final color of the layer button,
+## iterating through the layer's ancestors, if it has any.
+## If the layer has no UI color, it inherits from its parents, otherwise it overwrites it.
+func get_ui_color() -> Color:
+	if not is_zero_approx(ui_color.a):
+		return ui_color
+	for ancestor in get_ancestors():
+		return ancestor.get_ui_color()
+	return ui_color
+
+
 # Methods to Override:
 
 
@@ -275,6 +293,7 @@ func serialize() -> Dictionary:
 		"blend_mode": blend_mode,
 		"clipping_mask": clipping_mask,
 		"opacity": opacity,
+		"ui_color": ui_color,
 		"parent": parent.index if is_instance_valid(parent) else -1,
 		"effects": effect_data
 	}
@@ -301,6 +320,7 @@ func deserialize(dict: Dictionary) -> void:
 	clipping_mask = dict.get("clipping_mask", false)
 	opacity = dict.get("opacity", 1.0)
 	user_data = dict.get("user_data", user_data)
+	ui_color = str_to_var("Color" + dict.get("ui_color", "(0, 0, 0, 0)"))
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility

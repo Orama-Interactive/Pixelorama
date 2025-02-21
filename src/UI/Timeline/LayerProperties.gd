@@ -10,6 +10,7 @@ var layer_indices: PackedInt32Array
 @onready var blend_modes_button := $GridContainer/BlendModeOptionButton as OptionButton
 @onready var play_at_frame_slider := $GridContainer/PlayAtFrameSlider as ValueSlider
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
+@onready var ui_color_picker_button := $GridContainer/UIColorPickerButton as ColorPickerButton
 @onready var tileset_option_button := $GridContainer/TilesetOptionButton as OptionButton
 @onready var audio_file_dialog := $AudioFileDialog as FileDialog
 
@@ -34,6 +35,7 @@ func _on_visibility_changed() -> void:
 			play_at_frame_slider.value = first_layer.playback_frame + 1
 		play_at_frame_slider.max_value = project.frames.size()
 		user_data_text_edit.text = first_layer.user_data
+		ui_color_picker_button.color = first_layer.ui_color
 		get_tree().set_group(&"VisualLayers", "visible", first_layer is not AudioLayer)
 		get_tree().set_group(&"TilemapLayers", "visible", first_layer is LayerTileMap)
 		get_tree().set_group(&"AudioLayers", "visible", first_layer is AudioLayer)
@@ -128,6 +130,12 @@ func _on_user_data_text_edit_text_changed() -> void:
 	for layer_index in layer_indices:
 		var layer := Global.current_project.layers[layer_index]
 		layer.user_data = user_data_text_edit.text
+
+
+func _on_ui_color_picker_button_color_changed(color: Color) -> void:
+	for layer_index in layer_indices:
+		var layer := Global.current_project.layers[layer_index]
+		layer.ui_color = color
 
 
 func _emit_layer_property_signal() -> void:
