@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-10 15:15\n"
+"PO-Revision-Date: 2025-02-20 05:30\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -276,7 +276,7 @@ msgid "Square"
 msgstr "Petak"
 
 msgid "Grayscale View"
-msgstr "Pandang Skala Kelabu"
+msgstr "Paparan Skala Kelabu"
 
 msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
@@ -355,6 +355,10 @@ msgstr "Susun atur"
 
 msgid "Moveable Panels"
 msgstr "Panel Boleh Pindah"
+
+#. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
+msgid "Make Floating"
+msgstr "Pisah Panel"
 
 msgid "Manage Layouts"
 msgstr "Urus Susun Atur"
@@ -521,7 +525,7 @@ msgstr "Hiris Pintar"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Ambangan:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
@@ -543,7 +547,7 @@ msgid "Start frame:"
 msgstr "Bingkai awal:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Bingkai akhir:"
 
 msgid "At frame:"
 msgstr "Di bingkai:"
@@ -552,25 +556,25 @@ msgid "At layer:"
 msgstr "Di lapisan:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Jenis berus:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Berus fail"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Berus projek"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Berus rawak"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Simpan \"sprite\" kepada .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Eksport \"sprite\" kepada .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Eksport \"sprite\""
 
 msgid "File Exists, Overwrite?"
 msgstr ""
@@ -603,10 +607,10 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Bingkai"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Bingkai:"
 
 msgid "All Frames"
 msgstr ""
@@ -1324,7 +1328,20 @@ msgstr ""
 msgid "Translators"
 msgstr ""
 
+#. Refers to software licenses. https://en.wikipedia.org/wiki/Software_license
 msgid "Licenses"
+msgstr ""
+
+#. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
+msgid "License"
+msgstr "Lesen"
+
+#. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
+msgid "Godot Licenses"
+msgstr ""
+
+#. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
+msgid "Third-party Licenses"
 msgstr ""
 
 msgid "English"
@@ -1520,8 +1537,13 @@ msgid "Color Picker\n\n"
 msgstr ""
 
 msgid "Crop\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Pangkas\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Mengubah saiz kanvas"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1607,8 +1629,8 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr ""
 
 #. Tooltip of the screen color picker button found in the color picker panel.
-msgid "Pick a color from the screen."
-msgstr ""
+msgid "Pick a color from the application window."
+msgstr "Pilih warna daripada tetingkap aplikasi."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1887,6 +1909,30 @@ msgstr ""
 msgid "Explore Online"
 msgstr ""
 
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
+msgid "Store"
+msgstr "Kedai"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
+msgid "Search..."
+msgstr "Cari..."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
+msgid "Tags:"
+msgstr "Tag:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
+msgid "Download"
+msgstr "Muat turun"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
+msgid "Store Links:"
+msgstr "Pautan Kedai:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
+msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
+msgstr "Tampalkan pautan pemilik kedai (medan teks akan auto hilang jika belum tampal)"
+
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
 msgstr ""
@@ -1941,20 +1987,63 @@ msgstr ""
 msgid "Select a brush"
 msgstr ""
 
+#. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
+msgid "Default Brushes"
+msgstr "Berus Asali"
+
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
 msgstr ""
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Circle brush"
 msgstr ""
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Filled circle brush"
 msgstr ""
+
+#. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
+msgid "Project Brushes"
+msgstr "Berus Projek"
+
+#. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
+msgid "File Brushes"
+msgstr "Berus Fail"
+
+#. Found when selecting a brush. One of the file brushes that come with Pixelorama.
+msgid "Snow"
+msgstr "Salji"
+
+#. Found when selecting a brush. It's a section that shows file brushes that are randomized.
+msgid "Random File Brushes"
+msgstr "Berus Fail Rawak"
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Grass"
+msgstr "Rumput"
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Star"
+msgstr "Bintang"
 
 msgid "Custom brush"
 msgstr ""
 
 msgid "Brush size:"
 msgstr ""
+
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
+msgid "Rotation options"
+msgstr "Pilihan putaran"
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
+msgid "Flip:"
+msgstr "Selak:"
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
+msgid "Rotate:"
+msgstr "Putar:"
 
 msgid "Overwrite color"
 msgstr ""
@@ -1998,8 +2087,9 @@ msgstr ""
 msgid "Density:"
 msgstr ""
 
-msgid "Brush color from"
-msgstr ""
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
+msgid "Brush color from:"
+msgstr "Warna berus daripada:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
@@ -2052,17 +2142,40 @@ msgstr ""
 msgid "Lighten/Darken amount"
 msgstr ""
 
+#. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
+msgid "Color Replace"
+msgstr "Ganti Warna"
+
+msgid "Please select a color from the palette."
+msgstr "Harap pilih warna daripada palet."
+
+#. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
+msgid "Colors right:"
+msgstr "Warna ke kanan:"
+
 msgid "Pick for:"
-msgstr ""
+msgstr "Mod pilih:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Warna Kiri"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Warna Kanan"
+
+#. Found in the color picker tool options. Specifies what mode should be used for picking a color.
+msgid "Pick mode:"
+msgstr "Mod pilih:"
+
+#. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
+msgid "Top Color"
+msgstr "Warna Atas"
+
+#. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
+msgid "Current Layer"
+msgstr "Lapisan Semasa"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mod:"
 
 msgid "Zoom in"
 msgstr ""
@@ -2397,6 +2510,10 @@ msgstr ""
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
 msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
+msgid "Erase"
+msgstr "Padam"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2770,6 +2887,9 @@ msgstr ""
 
 msgid "Lasso / Free Select Tool"
 msgstr ""
+
+msgid "Select by Drawing"
+msgstr "Pilih dgn Menggambar"
 
 msgid "Move"
 msgstr ""
