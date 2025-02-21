@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Tamil\n"
 "Language: ta_IN\n"
-"PO-Revision-Date: 2025-02-19 16:38\n"
+"PO-Revision-Date: 2025-02-21 22:26\n"
 
 msgid "OK"
 msgstr ""
@@ -234,6 +234,10 @@ msgid "Clear"
 msgstr ""
 
 msgid "Invert"
+msgstr ""
+
+#. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
+msgid "Select cel area"
 msgstr ""
 
 msgid "Modify"
