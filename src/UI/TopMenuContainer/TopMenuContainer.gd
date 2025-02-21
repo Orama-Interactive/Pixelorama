@@ -6,7 +6,7 @@ const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v105---2024-11-18"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v11---unreleased"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -530,6 +530,7 @@ func _setup_select_menu() -> void:
 		"All": "select_all",
 		"Clear": "clear_selection",
 		"Invert": "invert_selection",
+		"Select cel area": "select_cel_area",
 		"Wrap Strokes": "",
 		"Modify": ""
 	}
@@ -1117,6 +1118,8 @@ func select_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.clear_selection(true)
 		Global.SelectMenu.INVERT:
 			Global.canvas.selection.invert()
+		Global.SelectMenu.SELECT_CEL_AREA:
+			Global.canvas.selection.select_cel_rect()
 		Global.SelectMenu.WRAP_STROKES:
 			var state = select_menu.is_item_checked(id)
 			Global.canvas.selection.flag_tilemode = !state

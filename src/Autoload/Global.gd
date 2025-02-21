@@ -66,7 +66,7 @@ enum ImageMenu {
 	CROP_TO_CONTENT,
 }
 ## Enumeration of items present in the Select Menu.
-enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, WRAP_STROKES, MODIFY }
+enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, SELECT_CEL_AREA, WRAP_STROKES, MODIFY }
 ## Enumeration of items present in the Help Menu.
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN,
@@ -829,6 +829,7 @@ func _initialize_keychain() -> void:
 		&"clear_selection": Keychain.InputAction.new("", "Select menu", true),
 		&"select_all": Keychain.InputAction.new("", "Select menu", true),
 		&"invert_selection": Keychain.InputAction.new("", "Select menu", true),
+		&"select_cel_area": Keychain.InputAction.new("", "Select menu", true),
 		&"view_splash_screen": Keychain.InputAction.new("", "Help menu", true),
 		&"open_docs": Keychain.InputAction.new("", "Help menu", true),
 		&"issue_tracker": Keychain.InputAction.new("", "Help menu", true),

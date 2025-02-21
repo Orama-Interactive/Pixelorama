@@ -1022,6 +1022,26 @@ func clear_selection(use_undo := false) -> void:
 		commit_undo("Clear Selection", undo_data_tmp)
 
 
+func select_cel_rect() -> void:
+	transform_content_confirm()
+	var project := Global.current_project
+	var undo_data_tmp := get_undo_data(false)
+	project.selection_map.crop(project.size.x, project.size.y)
+	project.selection_map.clear()
+	var current_cel := project.get_current_cel()
+	var cel_image: Image
+	if current_cel is GroupCel:
+		var group_layer := project.layers[project.current_layer] as GroupLayer
+		cel_image = group_layer.blend_children(project.frames[project.current_frame])
+	else:
+		cel_image = current_cel.get_image()
+	project.selection_map.select_rect(cel_image.get_used_rect())
+	project.selection_map_changed()
+	big_bounding_rectangle = project.selection_map.get_used_rect()
+	project.selection_offset = Vector2.ZERO
+	commit_undo("Select", undo_data_tmp)
+
+
 func _project_switched() -> void:
 	marching_ants_outline.offset = Global.current_project.selection_offset
 	big_bounding_rectangle = Global.current_project.selection_map.get_used_rect()

@@ -225,6 +225,10 @@ msgstr ""
 msgid "Invert"
 msgstr ""
 
+#. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
+msgid "Select cel area"
+msgstr ""
+
 msgid "Modify"
 msgstr ""
 
