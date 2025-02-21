@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-02-19 16:38\n"
+"PO-Revision-Date: 2025-02-21 22:26\n"
 
 msgid "OK"
 msgstr "确定"
@@ -237,6 +237,10 @@ msgstr "取消选中"
 
 msgid "Invert"
 msgstr "反向"
+
+#. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
+msgid "Select cel area"
+msgstr ""
 
 msgid "Modify"
 msgstr "修改"
