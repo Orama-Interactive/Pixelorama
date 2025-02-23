@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-21 22:25\n"
+"PO-Revision-Date: 2025-02-23 18:45\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -240,7 +240,7 @@ msgstr "Songsangkan"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Pilih kawasan cel"
 
 msgid "Modify"
 msgstr "Ubah suai"
@@ -521,7 +521,7 @@ msgid "Horizontal frames:"
 msgstr ""
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Bingkai menegak:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
@@ -581,7 +581,7 @@ msgid "Export Sprite"
 msgstr "Eksport \"sprite\""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fail wujud. Tulis ganti?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
@@ -591,7 +591,7 @@ msgid "Directory path is not valid!"
 msgstr ""
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Nama fail tidak sah!"
 
 msgid "Directory path and file name are not valid!"
 msgstr ""
@@ -608,7 +608,8 @@ msgstr ""
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Tak boleh memuat '%s'.\n"
+"Ini bukan fail palet yang sah."
 
 msgid "Frame"
 msgstr "Bingkai"
@@ -1342,11 +1343,11 @@ msgstr "Lesen"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
-msgstr ""
+msgstr "Lesen Godot"
 
 #. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
 msgid "Third-party Licenses"
-msgstr ""
+msgstr "Lesen pihak ketiga"
 
 msgid "English"
 msgstr ""
@@ -2050,10 +2051,10 @@ msgid "Rotate:"
 msgstr "Putar:"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Tulis ganti warna"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Menulis ganti warna dan tak diadun. Pilihan ini hanya berkaitan bagi warna yang tidak legap sepenuhnya"
 
 msgid "Pixel Perfect"
 msgstr ""
@@ -2774,10 +2775,10 @@ msgid "Error"
 msgstr ""
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Ralat: Gunakan nama palet yang sah."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Fail palet tidak sah!"
 
 msgid "Edit Palette"
 msgstr ""
