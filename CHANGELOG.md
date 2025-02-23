@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.1] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Spencer Beckwith ([@spencerjbeckwith](https://github.com/spencerjbeckwith))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Spencer Beckwith ([@spencerjbeckwith](https://github.com/spencerjbeckwith)), [@myyc](https://github.com/myyc)
 
 Built using Godot 4.3
 
@@ -23,19 +23,26 @@ Built using Godot 4.3
 - A new Reset layout option has been added to the Layouts submenu, that can be used to reset default layouts to their original state.
 - Implemented support for multiple grids. [#1122](https://github.com/Orama-Interactive/Pixelorama/pull/1122)
 - Overhauled the gradient edit widget's UI and added options such as reverse and evenly distribute points, and gradient presets.
+- Users can now color code their layers in the timeline.
+- A new "Select cel area" option has been added to the Selection menu that makes a rectangular selection around the content of the active cel, and it is mapped to <kbd>Control + T</kbd> by default.
 - Added a shortcut to swap tools, <kbd>Shift + X</kbd> by default. [#1173](https://github.com/Orama-Interactive/Pixelorama/pull/1173)
 - Added <kbd>V</kbd> as the default shortcut for the crop tool.
 - A "Show Reference Images" option has been added to the View menu, allowing quick and easy reference image toggling.
+- StartupWMClass has been added to Pixelorama's Linux .desktop file. [#1170](https://github.com/Orama-Interactive/Pixelorama/pull/1170)
 
 ### Changed
 - The Manage Layouts dialog has been replaced by new items in the Layouts submenu, that are responsible for adding and deleting layouts.
+- The default shortcuts of the Move tool and the Pan tool have been changed to <kbd>M</kbd> and <kbd>A</kbd> respectively.
+- Simplified the change layer automatically shortcut to just <kbd>Control + Alt</kbd>.
 - The image and layer effects have been organized into subcategories.
 - Layer buttons in the timeline now have a small icon on their right side that denotes their type, such as pixel layers, group layers, 3D layers, tilemap layers and audio layers.
 - Layer buttons in the timeline also have an icon if the layers contain at least one layer effect.
 - The import dialog is always being opened when opening images from File > Open.
+- The extension crash preventing system has been revised. [#1177](https://github.com/Orama-Interactive/Pixelorama/pull/1177)
 - System font names are now sorted by alphabetical order.
 - The red, green, blue and alpha buttons in invert and desaturate layer effects have been made into "RGBA" buttons instead of checkboxes, just like they are in their image effect counterparts.
 - "Tile Mode" under the Selection menu has been renamed to "Wrap Strokes". This does not affect the "Tile Mode" option in the View menu. [#1150](https://github.com/Orama-Interactive/Pixelorama/pull/1150)
+- Re-organized the licenses in the About dialog. There are now three license categories, the Pixelorama license, the Godot licenses and the third-party licenses.
 
 ### Fixed
 - Fixed crash when Pixelorama starts without a palette.
@@ -56,6 +63,7 @@ Built using Godot 4.3
 - Fixed the Palettize effect and palette exporting to images storing slightly wrong color values. [77f6bcf](https://github.com/Orama-Interactive/Pixelorama/commit/77f6bcf07bd80bc042e478bb883d05900cebe436)
 - Fixed some issues with the Palettize effect where the output would be different if the palette size changed and empty swatches were added, even if the colors themselves stayed the same. Initially fixed by [bd7d3b1](https://github.com/Orama-Interactive/Pixelorama/commit/bd7d3b19cc98804e9b99754153c4d553d2048ee3), but [1dcb696](https://github.com/Orama-Interactive/Pixelorama/commit/1dcb696c35121f8208bde699f87bb75deff99d13) is the proper fix.
 - The lasso and polygon select tools now select all expected pixels without gaps, when the selection goes out of the canvas bounds.
+- Fixed bug where the child windows of floating windows appear behind them.
 - Fixed layouts overwriting the position info of panels, which were added by extensions. [#1172](https://github.com/Orama-Interactive/Pixelorama/pull/1172)
 - Fixed recorder label not updating when project is changed. [#1139](https://github.com/Orama-Interactive/Pixelorama/pull/1139)
 - The vertical scrollbar in the timeline is no longer visible when it's not needed.
