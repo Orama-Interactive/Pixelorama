@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-02-22 10:30\n"
+"PO-Revision-Date: 2025-02-24 23:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2454,11 +2454,17 @@ msgstr "Deplasare la dreapta"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cels to"
-msgstr "Conectare celuri la"
+#. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
+msgid "Select pixels"
+msgstr ""
 
-msgid "Unlink Cels"
-msgstr "Deconectare celuri"
+#. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
+msgid "Link cels to"
+msgstr ""
+
+#. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
+msgid "Unlink cels"
+msgstr ""
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
