@@ -1,6 +1,6 @@
 extends Button
 
-enum MenuOptions { PROPERTIES, DELETE, LINK, UNLINK }
+enum MenuOptions { PROPERTIES, SELECT_PIXELS, DELETE, LINK, UNLINK }
 
 var frame := 0
 var layer := 0
@@ -25,13 +25,7 @@ func _ready() -> void:
 	for selected in Global.current_project.selected_cels:
 		if selected[1] == layer and selected[0] == frame:
 			button_pressed = true
-	if cel is PixelCel:
-		popup_menu.add_item("Delete")
-		popup_menu.add_item("Link Cels to")
-		popup_menu.add_item("Unlink Cels")
-	elif cel is GroupCel:
-		transparent_checker.visible = false
-	elif cel is AudioCel:
+	if cel is AudioCel:
 		popup_menu.add_item("Play audio here")
 		_is_playing_audio()
 		Global.cel_switched.connect(_is_playing_audio)
@@ -39,6 +33,14 @@ func _ready() -> void:
 		Global.current_project.fps_changed.connect(_is_playing_audio)
 		Global.current_project.layers[layer].audio_changed.connect(_is_playing_audio)
 		Global.current_project.layers[layer].playback_frame_changed.connect(_is_playing_audio)
+	else:
+		popup_menu.add_item("Select pixels")
+	if cel is PixelCel:
+		popup_menu.add_item("Delete")
+		popup_menu.add_item("Link cels to")
+		popup_menu.add_item("Unlink cels")
+	elif cel is GroupCel:
+		transparent_checker.visible = false
 
 
 func _notification(what: int) -> void:
@@ -132,19 +134,21 @@ func _on_CelButton_pressed() -> void:
 
 
 func _on_PopupMenu_id_pressed(id: int) -> void:
+	var project := Global.current_project
 	match id:
 		MenuOptions.PROPERTIES:
 			properties.cel_indices = _get_cel_indices()
 			properties.popup_centered()
-		MenuOptions.DELETE:
-			var layer_class := Global.current_project.layers[layer]
+		MenuOptions.SELECT_PIXELS:
+			var layer_class := project.layers[layer]
 			if layer_class is AudioLayer:
 				layer_class.playback_frame = frame
 			else:
-				_delete_cel_content()
+				Global.canvas.selection.select_cel_pixels(layer_class, project.frames[frame])
+		MenuOptions.DELETE:
+			_delete_cel_content()
 
 		MenuOptions.LINK, MenuOptions.UNLINK:
-			var project := Global.current_project
 			if id == MenuOptions.UNLINK:
 				project.undo_redo.create_action("Unlink Cel")
 				var selected_cels := _get_cel_indices(true)
