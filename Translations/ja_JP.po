@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-02-24 23:15\n"
+"PO-Revision-Date: 2025-02-25 03:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2459,15 +2459,15 @@ msgstr ""
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "ピクセルを選択"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "セルのリンク先"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr ""
+msgstr "セルのリンクを解除"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
