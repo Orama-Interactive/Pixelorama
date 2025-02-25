@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-02-24 23:14\n"
+"PO-Revision-Date: 2025-02-25 23:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2455,15 +2455,15 @@ msgstr ""
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "Seleccionar píxeles"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "Enlazar celdas a"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr ""
+msgstr "Desvincular celdas"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
