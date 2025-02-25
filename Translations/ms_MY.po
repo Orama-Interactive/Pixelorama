@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-24 23:14\n"
+"PO-Revision-Date: 2025-02-25 06:56\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -600,11 +600,12 @@ msgid "Exporting in progress..."
 msgstr ""
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Tak boleh memuat '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Tak boleh memuat '%s'.\n"
+"Kod ralat: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
@@ -1316,7 +1317,7 @@ msgstr ""
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Kod Sumber"
 
 msgid "Donate"
 msgstr ""
@@ -2396,15 +2397,15 @@ msgstr ""
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "Pilih piksel"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "Paut cel kepada"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr ""
+msgstr "Nyahpaut cel"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
@@ -2744,10 +2745,10 @@ msgid "File autosaved"
 msgstr ""
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Fail gagal dibuka. Kod ralat %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Fail gagal disimpan. Kod ralat %s"
 
 #. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
 msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
