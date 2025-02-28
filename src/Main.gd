@@ -269,8 +269,14 @@ func _setup_application_window_size() -> void:
 
 	if OS.get_name() == "Web":
 		return
+
+
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
+		# Restore the window configuration if the screen in cache is not available
+		if (DisplayServer.get_screen_count()
+			< (Global.config_cache.get_value("window", "screen") + 1)):
+			return
 		get_window().current_screen = Global.config_cache.get_value("window", "screen")
 	if Global.config_cache.has_section_key("window", "maximized"):
 		get_window().mode = (
