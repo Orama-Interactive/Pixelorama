@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-03-01 12:31\n"
+"PO-Revision-Date: 2025-03-01 16:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -240,7 +240,7 @@ msgstr "Odwróć zaznaczenie"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Wybierz obszar komórki"
 
 msgid "Modify"
 msgstr "Modyfikuj"
@@ -296,7 +296,7 @@ msgstr "Ustawienia"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Proceduralny"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
