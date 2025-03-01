@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-03-01 17:08\n"
+"PO-Revision-Date: 2025-03-01 18:30\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -716,7 +716,7 @@ msgstr "Tag sesuai kolom"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr "Tag sesuai barisan"
+msgstr "Tag sesuai baris"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -758,7 +758,7 @@ msgstr "Semua Berkas"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr "Semua Ekstensi"
+msgstr "Ekstensi Terkait"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
