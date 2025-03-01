@@ -677,7 +677,7 @@ func _save_project_file() -> void:
 	if path == "":
 		Global.control.show_save_dialog()
 	else:
-		Global.control.save_project(path)
+		Global.control.save_project(path, false)
 
 
 func _export_file() -> void:

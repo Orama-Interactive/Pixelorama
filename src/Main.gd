@@ -456,9 +456,9 @@ func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 func show_save_dialog(project := Global.current_project) -> void:
 	Global.dialog_open(true, true)
 	if OS.get_name() == "Web":
-		var save_filename := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_sprite_html5.popup_centered()
-		save_filename.text = project.name
+		var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
+		save_filename_line_edit.text = project.name
 	else:
 		save_sprite_dialog.popup_centered()
 		save_sprite_dialog.get_line_edit().text = project.name
@@ -473,12 +473,15 @@ func _on_save_sprite_visibility_changed() -> void:
 		is_quitting_on_save = false
 
 
-func save_project(path: String) -> void:
+func save_project(path: String, through_dialog := true) -> void:
 	var project_to_save := Global.current_project
 	if is_quitting_on_save:
 		project_to_save = changed_projects_on_quit[0]
 	var include_blended := false
 	if OS.get_name() == "Web":
+		if through_dialog:
+			var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
+			project_to_save.name = save_filename_line_edit.text
 		var file_name := project_to_save.name + ".pxo"
 		path = "user://".path_join(file_name)
 		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
