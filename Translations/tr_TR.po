@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-02-24 23:15\n"
+"PO-Revision-Date: 2025-03-01 12:32\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -396,9 +396,6 @@ msgstr "Geçerli yerleşim"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Bu düzeni silmek istediğinize emin misiniz?"
-
-msgid "Auto"
-msgstr "Otomatik"
 
 msgid "Widescreen"
 msgstr "Geniş ekran"
@@ -1625,15 +1622,10 @@ msgid "Curve Tool\n\n"
 "%s for right mouse button\n\n"
 "Draws bezier curves\n"
 "Press %s/%s to add new points\n"
+"Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr "Eğri Aracı\n\n"
-"Sol fare düğmesi için %s\n"
-"Sağ fare düğmesi için %s\n\n"
-"Bezier eğrileri çizer\n"
-"Yeni nokta eklemek için %s/%s basın\n"
-"Eğriliği denetlemek için basın ve sürükleyin\n"
-"Son eklenen noktayı kaldırmak için %s basın"
+msgstr ""
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -3747,7 +3739,7 @@ msgstr "Elle"
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr "Kendiliğinden"
+msgstr "Otomatik"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
