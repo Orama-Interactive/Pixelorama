@@ -213,7 +213,7 @@ func _clear() -> void:
 
 ## Get the [member _curve]'s baked points, and draw lines between them using [method _fill_gap].
 func _bezier() -> Array[Vector2i]:
-	var last_pixel := Global.canvas.current_pixel
+	var last_pixel := Global.canvas.current_pixel.floor()
 	if Global.mirror_view:
 		# Mirror the last point of the curve
 		last_pixel.x = (Global.current_project.size.x - 1) - last_pixel.x
