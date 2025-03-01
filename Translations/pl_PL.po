@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-03-01 16:06\n"
+"PO-Revision-Date: 2025-03-01 17:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,11 +300,11 @@ msgstr "Proceduralny"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Rozmycie"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Załadowany"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -334,7 +334,7 @@ msgstr "Zresetuj"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Zresetuj %s"
 
 msgid "Use Current Frame"
 msgstr "Użyj Aktualnej Klatki"
@@ -379,7 +379,7 @@ msgstr "Dodaj Szablon"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Usuń %s"
 
 msgid "Copy from"
 msgstr "Skopiuj z"
@@ -424,7 +424,7 @@ msgstr "Pokaż Prowadnice Myszki"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Pokaż obrazy referencyjne"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -1225,20 +1225,20 @@ msgstr ""
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Kanał:"
 
 msgid "Red"
-msgstr ""
+msgstr "Czerwony"
 
 msgid "Green"
-msgstr ""
+msgstr "Zielony"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Wartość"
 
 msgid "Presets"
-msgstr ""
+msgstr "Predefiniowane"
 
 msgid "Apply"
 msgstr "Zastosuj"
@@ -1625,7 +1625,13 @@ msgid "Curve Tool\n\n"
 "Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Narzędzie Krzywej \n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy\n"
+"Rysuje krzywe Beziera\n"
+"Naciśnij %s/%s, aby dodać nowe punkty\n"
+"Naciśnij i przeciągnij, aby kontrolować krzywiznę\n"
+"Naciśnij %s, aby usunąć ostatnio dodany punkt"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1926,7 +1932,7 @@ msgstr "Jeśli ta opcja jest włączona, okno aplikacji może stać się przezro
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Użyj fikcyjnego sterownika audio"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -2094,7 +2100,7 @@ msgstr "Opcje rotacji"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "Odwróć:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
@@ -2220,7 +2226,7 @@ msgstr "Prawy kolor"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Tryb wyboru:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
@@ -2448,7 +2454,7 @@ msgstr ""
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "Wybierz piksele"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
@@ -2460,7 +2466,7 @@ msgstr ""
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Odtwarzaj dźwięk tutaj"
 
 msgid "Properties"
 msgstr "Właściwości"
@@ -2503,7 +2509,7 @@ msgid "Tilemap"
 msgstr "Mapa kafelków (Tilemap)"
 
 msgid "Audio"
-msgstr ""
+msgstr "Dźwięki"
 
 msgid "Layers"
 msgstr "Warstwy"
@@ -2540,7 +2546,7 @@ msgstr "Dodaj warstwę kafelków"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Audio Layer"
-msgstr ""
+msgstr "Dodaj warstwę dźwiękową"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2679,10 +2685,10 @@ msgstr "Rozwiń/zwiń grupę"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Plik audio:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Wczytaj plik"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
@@ -3679,25 +3685,25 @@ msgstr "Czy chcesz pobrać obraz z %s?"
 #: src/Classes/TileSetCustom.gd
 #: src/UI/Dialogs/ImportPreviewDialog.gd
 msgid "Tileset"
-msgstr ""
+msgstr "Zestaw kafelek"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset:"
-msgstr ""
+msgstr "Zestaw kafelek:"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Dialogs/ProjectProperties.tscn
 msgid "Tilesets"
-msgstr ""
+msgstr "Zestaw kafelek"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "New tileset"
-msgstr ""
+msgstr "Nowy zestaw kafelków"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset name:"
-msgstr ""
+msgstr "Nazwa kafelków:"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tile size:"
@@ -3705,31 +3711,31 @@ msgstr ""
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Wybierz kafelek aby umieścić go na płótnie."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Modyfikuj kafelki na płótnie."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr ""
+msgstr "Rysuj kafelki"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr ""
+msgstr "Obróć kafelek w lewo (przeciwnie do ruchu wskazówek zegara)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr ""
+msgstr "Obróć kafelek w prawo (zgodnie z ruchem wskazówek zegara)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr ""
+msgstr "Odwróć kafelek poziomo"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr ""
+msgstr "Odwróć kafelek w pionie"
 
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
@@ -3748,11 +3754,11 @@ msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Rozmiar przycisku kafelka:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "Pokaż pusty kafelek:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
