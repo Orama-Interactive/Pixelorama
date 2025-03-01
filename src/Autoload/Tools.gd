@@ -187,6 +187,7 @@ Hold %s to displace the shape's origin""",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws bezier curves
 Press %s/%s to add new points
+Double-click to finish drawing the curve
 Press and drag to control the curvature
 Press %s to remove the last added point""",
 			["activate_left_tool", "activate_right_tool", "change_tool_mode"]
