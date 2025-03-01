@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-03-01 12:32\n"
+"PO-Revision-Date: 2025-03-01 17:08\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1310,7 +1310,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Dikembangkan oleh Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "©2019-dipersembahkan oleh Orama Interactive dan penyumbangsih"
+msgstr "©2019-kini; oleh Orama Interactive dan penyumbangsih"
 
 msgid "Website"
 msgstr "Situs web"
@@ -1532,7 +1532,7 @@ msgstr "Lasso / Alat Pemangkas\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Pilih Gambar\n\n"
+msgstr "Pilih Menggambar\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan"
 
@@ -1628,7 +1628,14 @@ msgid "Curve Tool\n\n"
 "Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Garis Lengkung\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Menggaris lengkung Bezier\n"
+"Tekan %s/%s untuk menambah titik\n"
+"Pencet dua kali untuk sudahi menggaris\n"
+"Tekan dan seret untuk melengkungkan\n"
+"Tekan %s untuk menghapus titik tadi"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1917,7 +1924,7 @@ msgstr "Terus perbarui"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr "Jika opsi ini dicetik, aplikasi akan terus menyegarkan layar bahkan saat tidak. Menonaktifkan ini membantu mengurangi penggunaan CPU saat terbiar."
+msgstr "Jika opsi ini dicetik, aplikasi akan terus memuat ulang layar bahkan saat tidak. Menonaktifkan ini membantu mengurangi penggunaan CPU saat terbiar."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -2956,7 +2963,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Lasso / Alat Pemangkas"
 
 msgid "Select by Drawing"
-msgstr "Pilih dgn Menggambar"
+msgstr "Pilih Menggambar"
 
 msgid "Move"
 msgstr "Pindah"
@@ -3716,7 +3723,7 @@ msgstr "Ubah petak pada kanvas."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr "Gambarkan petak"
+msgstr "Buatkan petak"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
