@@ -79,8 +79,8 @@ func draw_end(_pos: Vector2i) -> void:
 	project.can_undo = true
 
 
-func get_cell_position(pos: Vector2i) -> int:
-	var tile_pos := 0
+func get_cell_position(pos: Vector2i) -> Vector2i:
+	var tile_pos := Vector2i.ZERO
 	if Global.current_project.get_current_cel() is not CelTileMap:
 		return tile_pos
 	var cel := Global.current_project.get_current_cel() as CelTileMap
