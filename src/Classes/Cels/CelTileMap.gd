@@ -348,50 +348,48 @@ func update_tilemap(
 ) -> void:
 	editing_images.clear()
 	var tileset_size_before_update := tileset.tiles.size()
-	for x in horizontal_cells:
-		for y in vertical_cells:
-			var cell_coords := Vector2i(x, y)
-			var cell := get_cell_at(cell_coords)
-			var coords := cell_coords * tileset.tile_size
-			var rect := Rect2i(coords, tileset.tile_size)
-			var image_portion := source_image.get_region(rect)
-			var index := cell.index
-			if index >= tileset.tiles.size():
-				index = 0
-			var current_tile := tileset.tiles[index]
-			if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
-				if image_portion.is_invisible():
-					continue
-				if index == 0:
-					# If the tileset is empty, only then add a new tile.
-					if tileset.tiles.size() <= 1:
-						tileset.add_tile(image_portion, self)
-						cell.index = tileset.tiles.size() - 1
-					continue
-				if not _tiles_equal(cell, image_portion, current_tile.image):
-					tileset.replace_tile_at(image_portion, index, self)
-			elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
-				_handle_auto_editing_mode(cell, image_portion, tileset_size_before_update)
-			else:  # Stack
-				if image_portion.is_invisible():
-					continue
-				var found_tile := false
-				for j in range(1, tileset.tiles.size()):
-					var tile := tileset.tiles[j]
-					if _tiles_equal(cell, image_portion, tile.image):
-						if cell.index != j:
-							tileset.tiles[cell.index].times_used -= 1
-							cell.index = j
-							tileset.tiles[j].times_used += 1
-							cell.remove_transformations()
-						found_tile = true
-						break
-				if not found_tile:
-					if cell.index > 0:
-						tileset.tiles[cell.index].times_used -= 1
+	for cell_coords: Vector2i in cells_dict:
+		var cell := get_cell_at(cell_coords)
+		var coords := cell_coords * tileset.tile_size
+		var rect := Rect2i(coords, tileset.tile_size)
+		var image_portion := source_image.get_region(rect)
+		var index := cell.index
+		if index >= tileset.tiles.size():
+			index = 0
+		var current_tile := tileset.tiles[index]
+		if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+			if image_portion.is_invisible():
+				continue
+			if index == 0:
+				# If the tileset is empty, only then add a new tile.
+				if tileset.tiles.size() <= 1:
 					tileset.add_tile(image_portion, self)
 					cell.index = tileset.tiles.size() - 1
-					cell.remove_transformations()
+				continue
+			if not _tiles_equal(cell, image_portion, current_tile.image):
+				tileset.replace_tile_at(image_portion, index, self)
+		elif tile_editing_mode == TileSetPanel.TileEditingMode.AUTO:
+			_handle_auto_editing_mode(cell, image_portion, tileset_size_before_update)
+		else:  # Stack
+			if image_portion.is_invisible():
+				continue
+			var found_tile := false
+			for j in range(1, tileset.tiles.size()):
+				var tile := tileset.tiles[j]
+				if _tiles_equal(cell, image_portion, tile.image):
+					if cell.index != j:
+						tileset.tiles[cell.index].times_used -= 1
+						cell.index = j
+						tileset.tiles[j].times_used += 1
+						cell.remove_transformations()
+					found_tile = true
+					break
+			if not found_tile:
+				if cell.index > 0:
+					tileset.tiles[cell.index].times_used -= 1
+				tileset.add_tile(image_portion, self)
+				cell.index = tileset.tiles.size() - 1
+				cell.remove_transformations()
 	# Updates transparent cells that have indices higher than 0.
 	# This can happen when switching to another tileset which has less tiles
 	# than the previous one.
@@ -584,6 +582,11 @@ func re_index_all_cells(set_invisible_to_zero := false) -> void:
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 	horizontal_cells = ceili(float(new_size.x) / tileset.tile_size.x)
 	vertical_cells = ceili(float(new_size.y) / tileset.tile_size.y)
+	for x in horizontal_cells:
+		for y in vertical_cells:
+			var cell_coords := Vector2i(x, y)
+			if not cells_dict.has(cell_coords):
+				cells_dict[cell_coords] = Cell.new()
 	if not is_zero_approx(fposmod(offset.x, tileset.tile_size.x)):
 		horizontal_cells += 1
 	if not is_zero_approx(fposmod(offset.y, tileset.tile_size.y)):
@@ -625,7 +628,7 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 		_resize_cells(image.get_size())
 	for cell_coords in cell_data:
 		var cell_data_serialized: Dictionary = cell_data[cell_coords]
-		cells_dict[cell_coords].deserialize(cell_data_serialized)
+		get_cell_at(cell_coords).deserialize(cell_data_serialized)
 
 
 # Overridden Methods:
