@@ -50,16 +50,16 @@ func apply_selection(pos: Vector2i) -> void:
 				continue
 			var tilemap_cel := cel as CelTileMap
 			var tile_index := tilemap_cel.get_cell_index_at_coords(pos)
-			for i in tilemap_cel.cells.size():
-				var cell := tilemap_cel.cells[i]
+			for cell_coords: Vector2i in tilemap_cel.cells_dict:
+				var cell := tilemap_cel.get_cell_at(cell_coords)
+				var p := cell_coords * tilemap_cel.tileset.tile_size
 				if cell.index == tile_index:
 					if _intersect:
-						var p := (cel as CelTileMap).get_cell_coords_in_image(i)
 						select_tilemap_cell(
-							cel, i, project.selection_map, prev_selection_map.is_pixel_selected(p)
+							cel, p, project.selection_map, prev_selection_map.is_pixel_selected(p)
 						)
 					else:
-						select_tilemap_cell(cel, i, project.selection_map, !_subtract)
+						select_tilemap_cell(cel, p, project.selection_map, !_subtract)
 	else:
 		var cel_image := Image.new()
 		cel_image.copy_from(_get_draw_image())

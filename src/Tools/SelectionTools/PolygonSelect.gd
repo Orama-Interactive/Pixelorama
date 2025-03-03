@@ -158,8 +158,7 @@ func lasso_selection(
 func select_pixel(point: Vector2i, project: Project, select: bool) -> void:
 	if Tools.is_placing_tiles():
 		var tilemap := project.get_current_cel() as CelTileMap
-		var cell_position := tilemap.get_cell_position(point)
-		select_tilemap_cell(tilemap, cell_position, project.selection_map, select)
+		select_tilemap_cell(tilemap, point, project.selection_map, select)
 	project.selection_map.select_pixel(point, select)
 
 

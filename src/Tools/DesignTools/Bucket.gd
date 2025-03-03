@@ -188,7 +188,7 @@ func draw_end(pos: Vector2i) -> void:
 
 func draw_tile(pos: Vector2i, cel: CelTileMap) -> void:
 	var tile_position := get_cell_position(pos)
-	var cell := cel.cells_dict[tile_position] as CelTileMap.Cell
+	var cell := cel.get_cell_at(tile_position)
 	cel.set_index(cell, TileSetPanel.selected_tile_index)
 
 
@@ -211,8 +211,8 @@ func fill_in_color(pos: Vector2i) -> void:
 				continue
 			var tilemap_cel := cel as CelTileMap
 			var tile_index := tilemap_cel.get_cell_index_at_coords(pos)
-			for i in tilemap_cel.cells_dict.size():
-				var cell := tilemap_cel.cells[i]
+			for cell_coords: Vector2i in tilemap_cel.cells_dict:
+				var cell := tilemap_cel.get_cell_at(cell_coords)
 				if cell.index == tile_index:
 					tilemap_cel.set_index(cell, TileSetPanel.selected_tile_index)
 		return

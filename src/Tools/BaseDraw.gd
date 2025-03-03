@@ -336,7 +336,7 @@ func draw_tile(pos: Vector2i) -> void:
 		if cel is not CelTileMap:
 			return
 		for tile_position in tile_positions:
-			var cell := (cel as CelTileMap).cells_dict[tile_position] as CelTileMap.Cell
+			var cell := (cel as CelTileMap).get_cell_at(tile_position)
 			(cel as CelTileMap).set_index(cell, tile_index)
 
 

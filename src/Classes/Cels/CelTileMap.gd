@@ -101,52 +101,30 @@ func set_index(cell: Cell, index: int) -> void:
 	Global.canvas.queue_redraw()
 
 
-## Returns the pixel coordinates of the tilemap's cell
-## at position [cell_position] in the cel's image.
-## The reverse of [method get_cell_position].
-func get_cell_coords_in_image(cell_position: int) -> Vector2i:
-	var x_coord := float(tileset.tile_size.x) * (cell_position % horizontal_cells) - offset.x
-	@warning_ignore("integer_division")
-	var y_coord := float(tileset.tile_size.y) * (cell_position / horizontal_cells) - offset.y
-	return Vector2i(x_coord, y_coord)
+func get_cell_at(cell_coords: Vector2i) -> Cell:
+	var cell: Cell
+	if not cells_dict.has(cell_coords):
+		cells_dict[cell_coords] = Cell.new()
+	cell = cells_dict[cell_coords]
+	return cell
 
 
 ## Returns the position of a cell in the tilemap
 ## at pixel coordinates [param coords] in the cel's image.
-## The reverse of [method get_cell_coords_in_image].
 func get_cell_position(coords: Vector2i) -> Vector2i:
 	return coords / tileset.tile_size
-	#@warning_ignore("integer_division")
-	#var x := coords.x / tileset.tile_size.x
-	#x = clampi(x, 0, horizontal_cells - 1)
-	#@warning_ignore("integer_division")
-	#var y := coords.y / tileset.tile_size.y
-	#y = clampi(y, 0, vertical_cells - 1)
-	#y *= horizontal_cells
-	#return x + y
-
-
-## Returns the position of a cell in the tilemap
-## at tilemap coordinates [param coords] in the cel's image.
-func get_cell_position_in_tilemap_space(coords: Vector2i) -> int:
-	var x := coords.x
-	x = clampi(x, 0, horizontal_cells - 1)
-	var y := coords.y
-	y = clampi(y, 0, vertical_cells - 1)
-	y *= horizontal_cells
-	return x + y
 
 
 ## Returns the index of a cell in the tilemap
 ## at pixel coordinates [param coords] in the cel's image.
-#func get_cell_index_at_coords(coords: Vector2i) -> int:
-	#return cells[get_cell_position(coords)].index
-#
-#
+func get_cell_index_at_coords(coords: Vector2i) -> int:
+	return get_cell_at(get_cell_position(coords)).index
+
+
 ### Returns the index of a cell in the tilemap
 ### at tilemap coordinates [param coords] in the cel's image.
-#func get_cell_index_at_coords_in_tilemap_space(coords: Vector2i) -> int:
-	#return cells[get_cell_position_in_tilemap_space(coords)].index
+func get_cell_index_at_coords_in_tilemap_space(coords: Vector2i) -> int:
+	return get_cell_at(coords).index
 
 
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]
@@ -190,7 +168,7 @@ func transform_tile(
 ## Given a [param selection_map] and a [param selection_rect],
 ## the method finds the cells that are currently selected and returns them
 ## in the form of a 2D array that contains the serialiazed data
-##of the selected cells in the form of [Dictionary].
+## of the selected cells in the form of [Dictionary].
 func get_selected_cells(selection_map: SelectionMap, selection_rect: Rect2i) -> Array[Array]:
 	var selected_cells: Array[Array] = []
 	for x in range(0, selection_rect.size.x, tileset.tile_size.x):
@@ -286,8 +264,7 @@ func apply_resizing_to_image(
 	for x in selected_cells.size():
 		for y in selected_cells[x].size():
 			var pos := Vector2i(x, y) * tileset.tile_size + selection_rect.position
-			#var cell_pos := get_cell_position(pos)
-			var coords := get_cell_position(pos) - selection_rect.position
+			var coords := pos - selection_rect.position
 			var rect := Rect2i(coords, tileset.tile_size)
 			var image_portion := target_image.get_region(rect)
 			var cell_data := Cell.new()
@@ -309,11 +286,6 @@ func apply_resizing_to_image(
 ## Appends data to a [Dictionary] to be used for undo/redo.
 func serialize_undo_data() -> Dictionary:
 	var dict := {}
-	#var cell_indices := []
-	#cell_indices.resize(cells_dict.size())
-	#for i in cell_indices.size():
-		#cell_indices[i] = cells[i].serialize()
-	#dict["cell_indices"] = cell_indices
 	var cell_data := {}
 	for cell_coords: Vector2i in cells_dict:
 		var cell := cells_dict[cell_coords] as Cell
@@ -376,15 +348,11 @@ func update_tilemap(
 ) -> void:
 	editing_images.clear()
 	var tileset_size_before_update := tileset.tiles.size()
-	#for cell_coords: Vector2i in cells_dict:
 	for x in horizontal_cells:
 		for y in vertical_cells:
 			var cell_coords := Vector2i(x, y)
-			if not cells_dict.has(cell_coords):
-				cells_dict[cell_coords] = Cell.new()
-			var cell := cells_dict[cell_coords] as Cell
+			var cell := get_cell_at(cell_coords)
 			var coords := cell_coords * tileset.tile_size
-			#var coords := get_cell_coords_in_image(i)
 			var rect := Rect2i(coords, tileset.tile_size)
 			var image_portion := source_image.get_region(rect)
 			var index := cell.index
@@ -620,7 +588,6 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 		horizontal_cells += 1
 	if not is_zero_approx(fposmod(offset.y, tileset.tile_size.y)):
 		vertical_cells += 1
-	#cells.resize(horizontal_cells * vertical_cells)
 	for cell_coords: Vector2i in cells_dict:
 		if reset_indices:
 			cells_dict[cell_coords] = Cell.new()
@@ -729,11 +696,6 @@ func serialize() -> Dictionary:
 		var cell := cells_dict[cell_coords] as Cell
 		cell_data[cell_coords] = cell.serialize()
 	dict["cell_data"] = cell_data
-	#var cell_indices := []
-	#cell_indices.resize(cells.size())
-	#for i in cell_indices.size():
-		#cell_indices[i] = cells[i].serialize()
-	#dict["cell_indices"] = cell_indices
 	return dict
 
 
@@ -743,8 +705,6 @@ func deserialize(dict: Dictionary) -> void:
 	for cell_coords in cell_data:
 		var cell_data_serialized: Dictionary = cell_data[cell_coords]
 		cells_dict[cell_coords].deserialize(cell_data_serialized)
-	#for i in cell_indices.size():
-		#cells[i].deserialize(cell_indices[i])
 
 
 func get_class_name() -> String:
