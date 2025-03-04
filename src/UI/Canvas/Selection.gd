@@ -338,7 +338,8 @@ func _gizmo_resize() -> void:
 	var mouse_pos := image_current_pixel
 	if Tools.is_placing_tiles():
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
-		mouse_pos = mouse_pos.snapped(tilemap.tileset.tile_size)
+		var offset := tilemap.offset % tilemap.tileset.tile_size
+		mouse_pos = mouse_pos.snapped(tilemap.tileset.tile_size) + Vector2(offset)
 	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
 		if dir.x != 0 and dir.y != 0:  # Border gizmos
