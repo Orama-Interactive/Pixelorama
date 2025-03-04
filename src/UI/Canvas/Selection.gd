@@ -553,7 +553,7 @@ func transform_content_start() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = project.selection_offset
 	var current_cel := project.get_current_cel()
-	if current_cel is CelTileMap:
+	if current_cel is CelTileMap and Tools.is_placing_tiles():
 		original_selected_tilemap_cells = (current_cel as CelTileMap).get_selected_cells(
 			project.selection_map, big_bounding_rectangle
 		)

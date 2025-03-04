@@ -20,6 +20,7 @@ var horizontal_cells: int
 ## The amount of vertical cells.
 var vertical_cells: int
 var offset := Vector2i.ZERO
+var prev_offset := offset  ## Used for undo/redo purposes.
 ## Dictionary of [int] and [Array].
 ## The key is the index of the tile in the tileset,
 ## and the value is the coords of the tilemap tile that changed first, along with
@@ -99,6 +100,12 @@ func set_index(cell: Cell, index: int) -> void:
 	cell.transpose = TileSetPanel.is_transposed
 	_update_cell(cell)
 	Global.canvas.queue_redraw()
+
+
+func change_offset(new_offset: Vector2i) -> void:
+	offset = new_offset
+	_resize_cells(get_image().get_size(), false)
+	Global.canvas.grid.queue_redraw()
 
 
 func get_cell_at(cell_coords: Vector2i) -> Cell:
