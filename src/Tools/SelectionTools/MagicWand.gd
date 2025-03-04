@@ -252,15 +252,15 @@ func _compute_segments_for_tilemap(pos: Vector2i, cel: CelTileMap, src_index: in
 ## Τhis method is called by [method _flood_fill] after the required data structures
 ## have been initialized.
 func _flood_line_around_point_tilemap(pos: Vector2i, cel: CelTileMap, src_index: int) -> int:
-	if cel.get_cell_index_at_coords_in_tilemap_space(pos) != src_index:
+	if cel.get_cell_at(pos).index != src_index:
 		return pos.x + 1
 	var west := pos
 	var east := pos
-	while cel.cells_dict.has(west) && cel.get_cell_index_at_coords_in_tilemap_space(west) == src_index:
+	while cel.cells_dict.has(west) && cel.get_cell_at(west).index == src_index:
 		west += Vector2i.LEFT
 	while (
 		cel.cells_dict.has(east)
-		&& cel.get_cell_index_at_coords_in_tilemap_space(east) == src_index
+		&& cel.get_cell_at(east).index == src_index
 	):
 		east += Vector2i.RIGHT
 	# Make a note of the stuff we processed

@@ -128,12 +128,6 @@ func get_cell_index_at_coords(coords: Vector2i) -> int:
 	return get_cell_at(get_cell_position(coords)).index
 
 
-### Returns the index of a cell in the tilemap
-### at tilemap coordinates [param coords] in the cel's image.
-func get_cell_index_at_coords_in_tilemap_space(coords: Vector2i) -> int:
-	return get_cell_at(coords).index
-
-
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]
 ## with image [param image_portion] is equal to [param tile_image].
 func _tiles_equal(cell: Cell, image_portion: Image, tile_image: Image) -> bool:
