@@ -100,12 +100,14 @@ func set_index(cell: Cell, index: int) -> void:
 	Global.canvas.queue_redraw()
 
 
+## Changes the [member offset] of the tilemap. Automatically resizes the cells and redraws the grid.
 func change_offset(new_offset: Vector2i) -> void:
 	offset = new_offset
 	_resize_cells(get_image().get_size(), false)
 	Global.canvas.grid.queue_redraw()
 
 
+## Returns the [CelTileMap.Cell] at position [param cell_coords] in tilemap space.
 func get_cell_at(cell_coords: Vector2i) -> Cell:
 	if not cells.has(cell_coords):
 		cells[cell_coords] = Cell.new()
