@@ -134,10 +134,11 @@ func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
 # where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 	if Tools.is_placing_tiles():
-		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+		var cel := Global.current_project.get_current_cel() as CelTileMap
+		var tileset := cel.tileset
 		var grid_size := tileset.tile_size
-		origin = Tools.snap_to_rectangular_grid_boundary(origin, grid_size)
-		dest = Tools.snap_to_rectangular_grid_boundary(dest, grid_size)
+		origin = Tools.snap_to_rectangular_grid_boundary(origin, grid_size, cel.offset)
+		dest = Tools.snap_to_rectangular_grid_boundary(dest, grid_size, cel.offset)
 	var rect := Rect2i()
 	# Center the rect on the mouse
 	if _expand_from_center:

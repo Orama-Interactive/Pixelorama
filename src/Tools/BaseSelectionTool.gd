@@ -218,7 +218,7 @@ func apply_selection(_position: Vector2i) -> void:
 func select_tilemap_cell(
 	cel: CelTileMap, cell_position: Vector2i, selection: SelectionMap, select: bool
 ) -> void:
-	var rect := Rect2i(cell_position, cel.tileset.tile_size)
+	var rect := Rect2i(cell_position + cel.offset, cel.tileset.tile_size)
 	selection.select_rect(rect, select)
 
 

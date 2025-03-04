@@ -102,17 +102,15 @@ func set_index(cell: Cell, index: int) -> void:
 
 
 func get_cell_at(cell_coords: Vector2i) -> Cell:
-	var cell: Cell
 	if not cells_dict.has(cell_coords):
 		cells_dict[cell_coords] = Cell.new()
-	cell = cells_dict[cell_coords]
-	return cell
+	return cells_dict[cell_coords]
 
 
 ## Returns the position of a cell in the tilemap
 ## at pixel coordinates [param coords] in the cel's image.
 func get_cell_position(coords: Vector2i) -> Vector2i:
-	return coords / tileset.tile_size
+	return (coords - offset) / tileset.tile_size
 
 
 ## Returns the index of a cell in the tilemap
@@ -350,7 +348,7 @@ func update_tilemap(
 	var tileset_size_before_update := tileset.tiles.size()
 	for cell_coords: Vector2i in cells_dict:
 		var cell := get_cell_at(cell_coords)
-		var coords := cell_coords * tileset.tile_size
+		var coords := cell_coords * tileset.tile_size + offset
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := source_image.get_region(rect)
 		var index := cell.index
@@ -395,7 +393,7 @@ func update_tilemap(
 	# than the previous one.
 	for cell_coords: Vector2i in cells_dict:
 		var cell := cells_dict[cell_coords] as Cell
-		var coords := cell_coords * tileset.tile_size
+		var coords := cell_coords * tileset.tile_size + offset
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := source_image.get_region(rect)
 		if not image_portion.is_invisible():
@@ -530,7 +528,7 @@ func _re_index_cells_after_index(index: int) -> void:
 ## to ensure that it is the same as its mapped tile in the [member tileset].
 func _update_cell(cell: Cell) -> void:
 	var cell_coords := cells_dict.find_key(cell) as Vector2i
-	var coords := cell_coords * tileset.tile_size
+	var coords := cell_coords * tileset.tile_size + offset
 	var rect := Rect2i(coords, tileset.tile_size)
 	var image_portion := image.get_region(rect)
 	var index := cell.index
@@ -582,9 +580,15 @@ func re_index_all_cells(set_invisible_to_zero := false) -> void:
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 	horizontal_cells = ceili(float(new_size.x) / tileset.tile_size.x)
 	vertical_cells = ceili(float(new_size.y) / tileset.tile_size.y)
+	if offset.x % tileset.tile_size.x > 0:
+		horizontal_cells += 1
+	if offset.y % tileset.tile_size.y > 0:
+		vertical_cells += 1
+	var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(tileset.tile_size)).ceil())
+	print(offset_in_tiles)
 	for x in horizontal_cells:
 		for y in vertical_cells:
-			var cell_coords := Vector2i(x, y)
+			var cell_coords := Vector2i(x, y) - offset_in_tiles
 			if not cells_dict.has(cell_coords):
 				cells_dict[cell_coords] = Cell.new()
 	if not is_zero_approx(fposmod(offset.x, tileset.tile_size.x)):

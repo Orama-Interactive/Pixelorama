@@ -75,11 +75,12 @@ func _flood_fill(
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
-			var tile_index := (cel as CelTileMap).get_cell_index_at_coords(pos)
+			var cell_pos := (cel as CelTileMap).get_cell_position(pos)
+			var tile_index := (cel as CelTileMap).get_cell_at(cell_pos).index
 			# init flood data structures
 			_allegro_flood_segments = []
 			_allegro_image_segments = []
-			_compute_segments_for_tilemap(pos, cel, tile_index)
+			_compute_segments_for_tilemap(cell_pos, cel, tile_index)
 			_select_segments_tilemap(project, previous_selection_map)
 		return
 	var color := image.get_pixelv(pos)
@@ -222,7 +223,6 @@ func _compute_segments_for_tilemap(pos: Vector2i, cel: CelTileMap, src_index: in
 	# initially allocate at least 1 segment per line of the tilemap
 	for j in cel.vertical_cells:
 		_add_new_segment(j)
-	pos /= cel.tileset.tile_size
 	# start flood algorithm
 	_flood_line_around_point_tilemap(pos, cel, src_index)
 	# test all segments while also discovering more
@@ -256,10 +256,10 @@ func _flood_line_around_point_tilemap(pos: Vector2i, cel: CelTileMap, src_index:
 		return pos.x + 1
 	var west := pos
 	var east := pos
-	while west.x >= 0 && cel.get_cell_index_at_coords_in_tilemap_space(west) == src_index:
+	while cel.cells_dict.has(west) && cel.get_cell_index_at_coords_in_tilemap_space(west) == src_index:
 		west += Vector2i.LEFT
 	while (
-		east.x < cel.horizontal_cells
+		cel.cells_dict.has(east)
 		&& cel.get_cell_index_at_coords_in_tilemap_space(east) == src_index
 	):
 		east += Vector2i.RIGHT
@@ -332,9 +332,10 @@ func _select_segments_tilemap(project: Project, previous_selection_map: Selectio
 func _set_bit_rect(p: Vector2i, project: Project, prev_selection_map: SelectionMap) -> void:
 	var selection_map := project.selection_map
 	var tilemap := project.get_current_cel() as CelTileMap
+	var pixel_coords := p * tilemap.tileset.tile_size
 	if _intersect:
 		select_tilemap_cell(
-			tilemap, p, project.selection_map, prev_selection_map.is_pixel_selected(p)
+			tilemap, pixel_coords, project.selection_map, prev_selection_map.is_pixel_selected(p)
 		)
 	else:
-		select_tilemap_cell(tilemap, p, project.selection_map, !_subtract)
+		select_tilemap_cell(tilemap, pixel_coords, project.selection_map, !_subtract)
