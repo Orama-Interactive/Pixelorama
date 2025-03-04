@@ -529,9 +529,10 @@ func draw_indicator(left: bool) -> void:
 		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 		var tileset := tilemap_cel.tileset
 		var grid_size := tileset.tile_size
-		snapped_position = _snap_to_rectangular_grid_center(
-			snapped_position, grid_size, tilemap_cel.offset, -1
-		)
+		var offset := tilemap_cel.offset % grid_size
+		var offset_pos := snapped_position - Vector2(grid_size / 2) - Vector2(offset)
+		var grid_center := offset_pos.snapped(grid_size) + Vector2(grid_size / 2) + Vector2(offset)
+		snapped_position = grid_center.floor()
 	draw_indicator_at(snapped_position, Vector2i.ZERO, color)
 	if (
 		Global.current_project.has_selection

@@ -262,8 +262,7 @@ func apply_resizing_to_image(
 ) -> void:
 	for x in selected_cells.size():
 		for y in selected_cells[x].size():
-			var pos := Vector2i(x, y) * tileset.tile_size + selection_rect.position
-			var coords := pos - selection_rect.position
+			var coords := Vector2i(x, y) * tileset.tile_size
 			var rect := Rect2i(coords, tileset.tile_size)
 			var image_portion := target_image.get_region(rect)
 			var cell_data := Cell.new()
