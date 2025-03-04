@@ -210,7 +210,7 @@ func fill_in_color(pos: Vector2i) -> void:
 				continue
 			var tilemap_cel := cel as CelTileMap
 			var tile_index := tilemap_cel.get_cell_index_at_coords(pos)
-			for cell_coords: Vector2i in tilemap_cel.cells_dict:
+			for cell_coords: Vector2i in tilemap_cel.cells:
 				var cell := tilemap_cel.get_cell_at(cell_coords)
 				if cell.index == tile_index:
 					tilemap_cel.set_index(cell, TileSetPanel.selected_tile_index)
@@ -560,9 +560,9 @@ func _flood_line_around_point_tilemap(pos: Vector2i, cel: CelTileMap, src_index:
 		return pos.x + 1
 	var west := pos
 	var east := pos
-	while cel.cells_dict.has(west) && cel.get_cell_at(west).index == src_index:
+	while cel.cells.has(west) && cel.get_cell_at(west).index == src_index:
 		west += Vector2i.LEFT
-	while cel.cells_dict.has(east) && cel.get_cell_at(east).index == src_index:
+	while cel.cells.has(east) && cel.get_cell_at(east).index == src_index:
 		east += Vector2i.RIGHT
 	# Make a note of the stuff we processed
 	var c := pos.y

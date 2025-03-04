@@ -15,7 +15,7 @@ func _draw() -> void:
 		var tilemap_cel := current_cel as CelTileMap
 		var tile_size := tilemap_cel.tileset.tile_size
 		var font := Themes.get_font()
-		for cell_coords: Vector2i in tilemap_cel.cells_dict:
+		for cell_coords: Vector2i in tilemap_cel.cells:
 			var cell := tilemap_cel.get_cell_at(cell_coords)
 			if cell.index == 0:
 				continue

@@ -50,7 +50,7 @@ func apply_selection(pos: Vector2i) -> void:
 				continue
 			var tilemap_cel := cel as CelTileMap
 			var tile_index := tilemap_cel.get_cell_index_at_coords(pos)
-			for cell_coords: Vector2i in tilemap_cel.cells_dict:
+			for cell_coords: Vector2i in tilemap_cel.cells:
 				var cell := tilemap_cel.get_cell_at(cell_coords)
 				var p := cell_coords * tilemap_cel.tileset.tile_size
 				if cell.index == tile_index:
