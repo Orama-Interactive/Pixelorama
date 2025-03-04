@@ -562,10 +562,7 @@ func _flood_line_around_point_tilemap(pos: Vector2i, cel: CelTileMap, src_index:
 	var east := pos
 	while cel.cells_dict.has(west) && cel.get_cell_at(west).index == src_index:
 		west += Vector2i.LEFT
-	while (
-		cel.cells_dict.has(east)
-		&& cel.get_cell_at(east).index == src_index
-	):
+	while cel.cells_dict.has(east) && cel.get_cell_at(east).index == src_index:
 		east += Vector2i.RIGHT
 	# Make a note of the stuff we processed
 	var c := pos.y

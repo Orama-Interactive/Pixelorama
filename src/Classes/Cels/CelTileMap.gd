@@ -131,9 +131,7 @@ func get_cell_index_at_coords(coords: Vector2i) -> int:
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]
 ## with image [param image_portion] is equal to [param tile_image].
 func _tiles_equal(cell: Cell, image_portion: Image, tile_image: Image) -> bool:
-	var final_image_portion := transform_tile(
-		tile_image, cell.flip_h, cell.flip_v, cell.transpose
-	)
+	var final_image_portion := transform_tile(tile_image, cell.flip_h, cell.flip_v, cell.transpose)
 	return image_portion.get_data() == final_image_portion.get_data()
 
 
@@ -538,9 +536,7 @@ func _update_cell(cell: Cell) -> void:
 	if index >= tileset.tiles.size():
 		index = 0
 	var current_tile := tileset.tiles[index].image
-	var transformed_tile := transform_tile(
-		current_tile, cell.flip_h, cell.flip_v, cell.transpose
-	)
+	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
 	if image_portion.get_data() != transformed_tile.get_data():
 		var tile_size := transformed_tile.get_size()
 		image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)

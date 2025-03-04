@@ -526,7 +526,7 @@ func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
 	var snapped_position := snap_position(_cursor)
 	if Tools.is_placing_tiles():
-		var tilemap_cel := (Global.current_project.get_current_cel() as CelTileMap)
+		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 		var tileset := tilemap_cel.tileset
 		var grid_size := tileset.tile_size
 		snapped_position = _snap_to_rectangular_grid_center(
