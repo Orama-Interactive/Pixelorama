@@ -555,7 +555,7 @@ func update_cel_portions() -> void:
 func re_index_all_cells(set_invisible_to_zero := false) -> void:
 	for cell_coords: Vector2i in cells_dict:
 		var cell := cells_dict[cell_coords] as Cell
-		var coords := cell_coords * tileset.tile_size
+		var coords := cell_coords * tileset.tile_size + offset
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
 		if image_portion.is_invisible():
@@ -654,7 +654,7 @@ func update_texture(undo := false) -> void:
 
 	for cell_coords: Vector2i in cells_dict:
 		var cell := cells_dict[cell_coords] as Cell
-		var coords := cell_coords * tileset.tile_size
+		var coords := cell_coords * tileset.tile_size + offset
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
@@ -676,7 +676,7 @@ func update_texture(undo := false) -> void:
 
 	for cell_coords: Vector2i in cells_dict:
 		var cell := cells_dict[cell_coords] as Cell
-		var coords := cell_coords * tileset.tile_size
+		var coords := cell_coords * tileset.tile_size + offset
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
