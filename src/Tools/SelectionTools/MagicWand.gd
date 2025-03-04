@@ -221,7 +221,7 @@ func _set_bit(p: Vector2i, selection_map: SelectionMap, prev_selection_map: Sele
 
 func _compute_segments_for_tilemap(pos: Vector2i, cel: CelTileMap, src_index: int) -> void:
 	# initially allocate at least 1 segment per line of the tilemap
-	for j in cel.vertical_cells:
+	for j in range(cel.vertical_cell_min, cel.vertical_cell_max):
 		_add_new_segment(j)
 	# start flood algorithm
 	_flood_line_around_point_tilemap(pos, cel, src_index)
@@ -289,8 +289,8 @@ func _flood_line_around_point_tilemap(pos: Vector2i, cel: CelTileMap, src_index:
 	# test will be performed later anyway.
 	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
 	# there is no selection, so we don't need branching here.
-	segment.todo_above = pos.y > 0
-	segment.todo_below = pos.y < cel.vertical_cells - 1
+	segment.todo_above = pos.y > cel.vertical_cell_min
+	segment.todo_below = pos.y < cel.vertical_cell_max
 	# this is an actual segment we should be coloring, so we add it to the results for the
 	# current image
 	if segment.right_position >= segment.left_position:

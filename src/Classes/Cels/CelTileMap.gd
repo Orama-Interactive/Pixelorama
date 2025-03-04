@@ -15,11 +15,9 @@ extends PixelCel
 var tileset: TileSetCustom
 
 var cells_dict := {}  ## Dictionary of Vector2i and Cell.
-## The amount of horizontal cells.
-var horizontal_cells: int
-## The amount of vertical cells.
-var vertical_cells: int
-var offset := Vector2i.ZERO
+var vertical_cell_min := 0  ## The minimum vertical cell.
+var vertical_cell_max := 0  ## The maximum vertical cell.
+var offset := Vector2i.ZERO  ## The offset of the tilemap.
 var prev_offset := offset  ## Used for undo/redo purposes.
 ## Dictionary of [int] and [Array].
 ## The key is the index of the tile in the tileset,
@@ -589,19 +587,23 @@ func re_index_all_cells(set_invisible_to_zero := false) -> void:
 
 ## Resizes the [member cells] array based on [param new_size].
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
-	horizontal_cells = ceili(float(new_size.x) / tileset.tile_size.x)
-	vertical_cells = ceili(float(new_size.y) / tileset.tile_size.y)
+	var horizontal_cells := ceili(float(new_size.x) / tileset.tile_size.x)
+	var vertical_cells := ceili(float(new_size.y) / tileset.tile_size.y)
 	if offset.x % tileset.tile_size.x > 0:
 		horizontal_cells += 1
 	if offset.y % tileset.tile_size.y > 0:
 		vertical_cells += 1
 	var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(tileset.tile_size)).ceil())
-	print(offset_in_tiles)
 	for x in horizontal_cells:
 		for y in vertical_cells:
 			var cell_coords := Vector2i(x, y) - offset_in_tiles
 			if not cells_dict.has(cell_coords):
 				cells_dict[cell_coords] = Cell.new()
+	for cell_coords: Vector2i in cells_dict:
+		if cell_coords.y < vertical_cell_min:
+			vertical_cell_min = cell_coords.y
+		if cell_coords.y > vertical_cell_max:
+			vertical_cell_max = cell_coords.y
 	if not is_zero_approx(fposmod(offset.x, tileset.tile_size.x)):
 		horizontal_cells += 1
 	if not is_zero_approx(fposmod(offset.y, tileset.tile_size.y)):
