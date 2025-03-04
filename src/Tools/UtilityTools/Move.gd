@@ -43,14 +43,14 @@ func draw_start(pos: Vector2i) -> void:
 	_start_pos = pos
 	_offset = pos
 	_undo_data = _get_undo_data()
-	if Global.current_project.has_selection:
-		selection_node.transform_content_start()
+	if Tools.is_placing_tiles():
+		for cel in _get_selected_draw_cels():
+			if cel is not CelTileMap:
+				continue
+			(cel as CelTileMap).prev_offset = (cel as CelTileMap).offset
 	else:
-		if Tools.is_placing_tiles():
-			for cel in _get_selected_draw_cels():
-				if cel is not CelTileMap:
-					continue
-				(cel as CelTileMap).prev_offset = (cel as CelTileMap).offset
+		if Global.current_project.has_selection:
+			selection_node.transform_content_start()
 	_content_transformation_check = selection_node.is_moving_content
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
@@ -66,15 +66,17 @@ func draw_move(pos: Vector2i) -> void:
 		return
 	pos = _snap_position(pos)
 
-	if Global.current_project.has_selection:
-		selection_node.move_content(pos - _offset)
-	else:
+	if Tools.is_placing_tiles():
+		for cel in _get_selected_draw_cels():
+			if cel is not CelTileMap:
+				continue
+			(cel as CelTileMap).change_offset(cel.offset + pos - _offset)
 		Global.canvas.move_preview_location = pos - _start_pos
-		if Tools.is_placing_tiles():
-			for cel in _get_selected_draw_cels():
-				if cel is not CelTileMap:
-					continue
-				(cel as CelTileMap).change_offset(cel.offset + pos - _offset)
+	else:
+		if Global.current_project.has_selection:
+			selection_node.move_content(pos - _offset)
+		else:
+			Global.canvas.move_preview_location = pos - _start_pos
 	_offset = pos
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
@@ -89,7 +91,7 @@ func draw_end(pos: Vector2i) -> void:
 		and _content_transformation_check == selection_node.is_moving_content
 	):
 		pos = _snap_position(pos)
-		if Global.current_project.has_selection:
+		if Global.current_project.has_selection and not Tools.is_placing_tiles():
 			selection_node.move_borders_end()
 		else:
 			var pixel_diff := pos - _start_pos
