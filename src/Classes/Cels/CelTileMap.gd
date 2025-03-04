@@ -578,9 +578,9 @@ func re_index_all_cells(set_invisible_to_zero := false) -> void:
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 	var horizontal_cells := ceili(float(new_size.x) / tileset.tile_size.x)
 	var vertical_cells := ceili(float(new_size.y) / tileset.tile_size.y)
-	if offset.x % tileset.tile_size.x > 0:
+	if offset.x % tileset.tile_size.x != 0:
 		horizontal_cells += 1
-	if offset.y % tileset.tile_size.y > 0:
+	if offset.y % tileset.tile_size.y != 0:
 		vertical_cells += 1
 	var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(tileset.tile_size)).ceil())
 	for x in horizontal_cells:
