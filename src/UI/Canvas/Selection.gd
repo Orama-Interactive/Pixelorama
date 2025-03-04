@@ -419,9 +419,7 @@ func resize_selection() -> void:
 					original_selected_tilemap_cells, horizontal_size, vertical_size
 				)
 				preview_image.crop(size.x, size.y)
-				tilemap.apply_resizing_to_image(
-					preview_image, selected_cells, big_bounding_rectangle
-				)
+				tilemap.apply_resizing_to_image(preview_image, selected_cells)
 		else:
 			var params := {"transformation_matrix": transformation_matrix, "pivot": content_pivot}
 			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
@@ -586,7 +584,7 @@ func transform_content_confirm() -> void:
 					original_selected_tilemap_cells, horizontal_size, vertical_size
 				)
 				src.crop(preview_image.get_width(), preview_image.get_height())
-				tilemap.apply_resizing_to_image(src, selected_cells, big_bounding_rectangle)
+				tilemap.apply_resizing_to_image(src, selected_cells)
 			else:
 				var transformation_matrix := Transform2D(angle, Vector2.ZERO)
 				var params := {
