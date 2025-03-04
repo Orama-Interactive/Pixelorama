@@ -646,7 +646,12 @@ func set_content(content, texture: ImageTexture = null) -> void:
 
 func update_texture(undo := false) -> void:
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
-	if undo or _is_redo() or tile_editing_mode != TileSetPanel.TileEditingMode.MANUAL:
+	if (
+		undo
+		or _is_redo()
+		or tile_editing_mode != TileSetPanel.TileEditingMode.MANUAL
+		or Tools.is_placing_tiles()
+	):
 		super.update_texture(undo)
 		editing_images.clear()
 		return
