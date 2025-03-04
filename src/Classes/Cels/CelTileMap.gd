@@ -117,7 +117,11 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 ## Returns the position of a cell in the tilemap
 ## at pixel coordinates [param coords] in the cel's image.
 func get_cell_position(coords: Vector2i) -> Vector2i:
-	return (coords - offset) / tileset.tile_size
+	var offset_coords := coords - offset
+	var x_pos := float(offset_coords.x) / tileset.tile_size.x
+	var y_pos := float(offset_coords.y) / tileset.tile_size.y
+	var cell_position := Vector2i(floori(x_pos), floori(y_pos))
+	return cell_position
 
 
 ## Returns the index of a cell in the tilemap
