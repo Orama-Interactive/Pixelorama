@@ -105,8 +105,9 @@ func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 		var cel := Global.current_project.get_current_cel() as CelTileMap
 		var tileset := cel.tileset
 		var grid_size := tileset.tile_size
-		origin = Tools.snap_to_rectangular_grid_boundary(origin, grid_size, cel.offset)
-		dest = Tools.snap_to_rectangular_grid_boundary(dest, grid_size, cel.offset)
+		var offset := cel.offset % grid_size
+		origin = Tools.snap_to_rectangular_grid_boundary(origin, grid_size, offset)
+		dest = Tools.snap_to_rectangular_grid_boundary(dest, grid_size, offset)
 	var rect := Rect2i()
 
 	# Center the rect on the mouse

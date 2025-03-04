@@ -254,8 +254,8 @@ func _resize_rows(
 						resized_cells[y] = selected_cells[y_index]
 
 
-## Applies the [param selected_cells] data to [param target_image] data,
-## offset by [param selection_rect]. The target image needs to be resized first.
+## Applies the [param selected_cells] data to [param target_image] data.
+## The target image needs to be resized first.
 ## This method is used when resizing a selection and draw tiles mode is enabled.
 func apply_resizing_to_image(target_image: Image, selected_cells: Array[Array]) -> void:
 	for x in selected_cells.size():
