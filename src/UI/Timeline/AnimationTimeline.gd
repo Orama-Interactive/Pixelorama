@@ -486,6 +486,7 @@ func copy_frames(
 					selected_id = src_cel.selected.id
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
+				new_cel.offset = src_cel.offset
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -939,6 +940,7 @@ func _on_CloneLayer_pressed() -> void:
 				)
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
+				new_cel.offset = src_cel.offset
 			else:
 				new_cel = src_cel.get_script().new()
 
