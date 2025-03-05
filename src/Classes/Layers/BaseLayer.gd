@@ -320,7 +320,12 @@ func deserialize(dict: Dictionary) -> void:
 	clipping_mask = dict.get("clipping_mask", false)
 	opacity = dict.get("opacity", 1.0)
 	user_data = dict.get("user_data", user_data)
-	ui_color = str_to_var("Color" + dict.get("ui_color", "(0, 0, 0, 0)"))
+	if dict.has("ui_color"):
+		var tmp_ui_color = dict.ui_color
+		if typeof(tmp_ui_color) == TYPE_STRING:
+			ui_color = str_to_var("Color" + tmp_ui_color)
+		else:
+			ui_color = tmp_ui_color
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("linked_cels") and not dict["linked_cels"].is_empty():  # Backwards compatibility
