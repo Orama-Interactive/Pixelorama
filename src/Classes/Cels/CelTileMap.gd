@@ -326,8 +326,9 @@ func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) ->
 			undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
 
 
-## Called when loading a new project. Loops through all [member cells]
-## and finds the amount of times each tile from the [member tileset] is being used.
+## Called when loading a new project, or when [method set_content] is called.
+## Loops through all [member cells] and finds the amount of times
+## each tile from the [member tileset] is being used.
 func find_times_used_of_tiles() -> void:
 	for cell_coords in cells:
 		var cell := cells[cell_coords] as Cell
@@ -639,9 +640,14 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 
 # Overridden Methods:
 func set_content(content, texture: ImageTexture = null) -> void:
+	for cell_coords in cells:
+		var cell := cells[cell_coords] as Cell
+		if cell.index > 0:
+			tileset.tiles[cell.index].times_used -= 1
 	super.set_content(content, texture)
 	_resize_cells(image.get_size())
 	re_index_all_cells()
+	find_times_used_of_tiles()
 
 
 func update_texture(undo := false) -> void:
