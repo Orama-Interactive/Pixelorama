@@ -43,8 +43,14 @@ func draw_start(pos: Vector2i) -> void:
 	_start_pos = pos
 	_offset = pos
 	_undo_data = _get_undo_data()
-	if Global.current_project.has_selection:
-		selection_node.transform_content_start()
+	if Tools.is_placing_tiles():
+		for cel in _get_selected_draw_cels():
+			if cel is not CelTileMap:
+				continue
+			(cel as CelTileMap).prev_offset = (cel as CelTileMap).offset
+	else:
+		if Global.current_project.has_selection:
+			selection_node.transform_content_start()
 	_content_transformation_check = selection_node.is_moving_content
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
@@ -60,10 +66,17 @@ func draw_move(pos: Vector2i) -> void:
 		return
 	pos = _snap_position(pos)
 
-	if Global.current_project.has_selection:
-		selection_node.move_content(pos - _offset)
-	else:
+	if Tools.is_placing_tiles():
+		for cel in _get_selected_draw_cels():
+			if cel is not CelTileMap:
+				continue
+			(cel as CelTileMap).change_offset(cel.offset + pos - _offset)
 		Global.canvas.move_preview_location = pos - _start_pos
+	else:
+		if Global.current_project.has_selection:
+			selection_node.move_content(pos - _offset)
+		else:
+			Global.canvas.move_preview_location = pos - _start_pos
 	_offset = pos
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
@@ -78,7 +91,7 @@ func draw_end(pos: Vector2i) -> void:
 		and _content_transformation_check == selection_node.is_moving_content
 	):
 		pos = _snap_position(pos)
-		if Global.current_project.has_selection:
+		if Global.current_project.has_selection and not Tools.is_placing_tiles():
 			selection_node.move_borders_end()
 		else:
 			var pixel_diff := pos - _start_pos
@@ -141,6 +154,12 @@ func _commit_undo(action: String) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
+	if Tools.is_placing_tiles():
+		for cel in _get_selected_draw_cels():
+			if cel is not CelTileMap:
+				continue
+			project.undo_redo.add_do_method(cel.change_offset.bind(cel.offset))
+			project.undo_redo.add_undo_method(cel.change_offset.bind(cel.prev_offset))
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))

@@ -326,7 +326,7 @@ func draw_end(pos: Vector2i) -> void:
 func draw_tile(pos: Vector2i) -> void:
 	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
 	var mirrored_positions := Tools.get_mirrored_positions(pos, Global.current_project)
-	var tile_positions := PackedInt32Array()
+	var tile_positions: Array[Vector2i] = []
 	tile_positions.resize(mirrored_positions.size() + 1)
 	tile_positions[0] = get_cell_position(pos)
 	for i in mirrored_positions.size():
@@ -336,7 +336,8 @@ func draw_tile(pos: Vector2i) -> void:
 		if cel is not CelTileMap:
 			return
 		for tile_position in tile_positions:
-			(cel as CelTileMap).set_index(tile_position, tile_index)
+			var cell := (cel as CelTileMap).get_cell_at(tile_position)
+			(cel as CelTileMap).set_index(cell, tile_index)
 
 
 func _prepare_tool() -> void:
@@ -525,11 +526,13 @@ func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
 	var snapped_position := snap_position(_cursor)
 	if Tools.is_placing_tiles():
-		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
+		var tileset := tilemap_cel.tileset
 		var grid_size := tileset.tile_size
-		snapped_position = _snap_to_rectangular_grid_center(
-			snapped_position, grid_size, Vector2i.ZERO, -1
-		)
+		var offset := tilemap_cel.offset % grid_size
+		var offset_pos := snapped_position - Vector2(grid_size / 2) - Vector2(offset)
+		var grid_center := offset_pos.snapped(grid_size) + Vector2(grid_size / 2) + Vector2(offset)
+		snapped_position = grid_center.floor()
 	draw_indicator_at(snapped_position, Vector2i.ZERO, color)
 	if (
 		Global.current_project.has_selection

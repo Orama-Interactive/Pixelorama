@@ -39,7 +39,7 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 	var cel := Global.current_project.get_current_cel()
 	if cel is CelTileMap and grid_index == 0:
 		grid_size = (cel as CelTileMap).tileset.tile_size
-		grid_offset = Vector2i.ZERO
+		grid_offset = (cel as CelTileMap).offset
 	var grid_multiline_points := PackedVector2Array()
 
 	var x: float = (

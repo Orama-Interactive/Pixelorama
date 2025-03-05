@@ -75,11 +75,12 @@ func _flood_fill(
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
-			var tile_index := (cel as CelTileMap).get_cell_index_at_coords(pos)
+			var cell_pos := (cel as CelTileMap).get_cell_position(pos)
+			var tile_index := (cel as CelTileMap).get_cell_at(cell_pos).index
 			# init flood data structures
 			_allegro_flood_segments = []
 			_allegro_image_segments = []
-			_compute_segments_for_tilemap(pos, cel, tile_index)
+			_compute_segments_for_tilemap(cell_pos, cel, tile_index)
 			_select_segments_tilemap(project, previous_selection_map)
 		return
 	var color := image.get_pixelv(pos)
@@ -220,9 +221,8 @@ func _set_bit(p: Vector2i, selection_map: SelectionMap, prev_selection_map: Sele
 
 func _compute_segments_for_tilemap(pos: Vector2i, cel: CelTileMap, src_index: int) -> void:
 	# initially allocate at least 1 segment per line of the tilemap
-	for j in cel.vertical_cells:
+	for j in range(cel.vertical_cell_min, cel.vertical_cell_max):
 		_add_new_segment(j)
-	pos /= cel.tileset.tile_size
 	# start flood algorithm
 	_flood_line_around_point_tilemap(pos, cel, src_index)
 	# test all segments while also discovering more
@@ -252,16 +252,13 @@ func _compute_segments_for_tilemap(pos: Vector2i, cel: CelTileMap, src_index: in
 ## Τhis method is called by [method _flood_fill] after the required data structures
 ## have been initialized.
 func _flood_line_around_point_tilemap(pos: Vector2i, cel: CelTileMap, src_index: int) -> int:
-	if cel.get_cell_index_at_coords_in_tilemap_space(pos) != src_index:
+	if cel.get_cell_at(pos).index != src_index:
 		return pos.x + 1
 	var west := pos
 	var east := pos
-	while west.x >= 0 && cel.get_cell_index_at_coords_in_tilemap_space(west) == src_index:
+	while cel.cells.has(west) && cel.get_cell_at(west).index == src_index:
 		west += Vector2i.LEFT
-	while (
-		east.x < cel.horizontal_cells
-		&& cel.get_cell_index_at_coords_in_tilemap_space(east) == src_index
-	):
+	while cel.cells.has(east) && cel.get_cell_at(east).index == src_index:
 		east += Vector2i.RIGHT
 	# Make a note of the stuff we processed
 	var c := pos.y
@@ -289,8 +286,8 @@ func _flood_line_around_point_tilemap(pos: Vector2i, cel: CelTileMap, src_index:
 	# test will be performed later anyway.
 	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
 	# there is no selection, so we don't need branching here.
-	segment.todo_above = pos.y > 0
-	segment.todo_below = pos.y < cel.vertical_cells - 1
+	segment.todo_above = pos.y > cel.vertical_cell_min
+	segment.todo_below = pos.y < cel.vertical_cell_max
 	# this is an actual segment we should be coloring, so we add it to the results for the
 	# current image
 	if segment.right_position >= segment.left_position:
@@ -332,14 +329,10 @@ func _select_segments_tilemap(project: Project, previous_selection_map: Selectio
 func _set_bit_rect(p: Vector2i, project: Project, prev_selection_map: SelectionMap) -> void:
 	var selection_map := project.selection_map
 	var tilemap := project.get_current_cel() as CelTileMap
-	var cell_position := tilemap.get_cell_position_in_tilemap_space(p)
+	var pixel_coords := p * tilemap.tileset.tile_size
 	if _intersect:
-		var image_coords := tilemap.get_cell_coords_in_image(cell_position)
 		select_tilemap_cell(
-			tilemap,
-			cell_position,
-			project.selection_map,
-			prev_selection_map.is_pixel_selected(image_coords)
+			tilemap, pixel_coords, project.selection_map, prev_selection_map.is_pixel_selected(p)
 		)
 	else:
-		select_tilemap_cell(tilemap, cell_position, project.selection_map, !_subtract)
+		select_tilemap_cell(tilemap, pixel_coords, project.selection_map, !_subtract)

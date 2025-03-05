@@ -153,9 +153,11 @@ func draw_move(pos: Vector2i) -> void:
 		return
 
 	if Tools.is_placing_tiles():
-		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
+		var cel := Global.current_project.get_current_cel() as CelTileMap
+		var tileset := cel.tileset
 		var grid_size := tileset.tile_size
-		pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size)
+		var offset := cel.offset % grid_size
+		pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size, offset)
 	if Input.is_action_pressed("transform_snap_axis"):  # Snap to axis
 		var angle := Vector2(pos).angle_to_point(_start_pos)
 		if absf(angle) <= PI / 4 or absf(angle) >= 3 * PI / 4:
@@ -216,9 +218,9 @@ func apply_selection(_position: Vector2i) -> void:
 
 
 func select_tilemap_cell(
-	cel: CelTileMap, cell_position: int, selection: SelectionMap, select: bool
+	cel: CelTileMap, cell_position: Vector2i, selection: SelectionMap, select: bool
 ) -> void:
-	var rect := Rect2i(cel.get_cell_coords_in_image(cell_position), cel.tileset.tile_size)
+	var rect := Rect2i(cell_position + cel.offset, cel.tileset.tile_size)
 	selection.select_rect(rect, select)
 
 

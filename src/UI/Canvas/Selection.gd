@@ -338,7 +338,8 @@ func _gizmo_resize() -> void:
 	var mouse_pos := image_current_pixel
 	if Tools.is_placing_tiles():
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
-		mouse_pos = mouse_pos.snapped(tilemap.tileset.tile_size)
+		var offset := tilemap.offset % tilemap.tileset.tile_size
+		mouse_pos = mouse_pos.snapped(tilemap.tileset.tile_size) + Vector2(offset)
 	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
 		if dir.x != 0 and dir.y != 0:  # Border gizmos
@@ -419,9 +420,7 @@ func resize_selection() -> void:
 					original_selected_tilemap_cells, horizontal_size, vertical_size
 				)
 				preview_image.crop(size.x, size.y)
-				tilemap.apply_resizing_to_image(
-					preview_image, selected_cells, big_bounding_rectangle
-				)
+				tilemap.apply_resizing_to_image(preview_image, selected_cells)
 		else:
 			var params := {"transformation_matrix": transformation_matrix, "pivot": content_pivot}
 			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
@@ -553,7 +552,7 @@ func transform_content_start() -> void:
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = project.selection_offset
 	var current_cel := project.get_current_cel()
-	if current_cel is CelTileMap:
+	if current_cel is CelTileMap and Tools.is_placing_tiles():
 		original_selected_tilemap_cells = (current_cel as CelTileMap).get_selected_cells(
 			project.selection_map, big_bounding_rectangle
 		)
@@ -586,7 +585,7 @@ func transform_content_confirm() -> void:
 					original_selected_tilemap_cells, horizontal_size, vertical_size
 				)
 				src.crop(preview_image.get_width(), preview_image.get_height())
-				tilemap.apply_resizing_to_image(src, selected_cells, big_bounding_rectangle)
+				tilemap.apply_resizing_to_image(src, selected_cells)
 			else:
 				var transformation_matrix := Transform2D(angle, Vector2.ZERO)
 				var params := {
