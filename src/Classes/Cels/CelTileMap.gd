@@ -735,7 +735,7 @@ func deserialize(dict: Dictionary) -> void:
 		var cell_data_serialized: Dictionary = cell_data[cell_coords_str]
 		var cell_coords := str_to_var("Vector2i" + cell_coords_str) as Vector2i
 		get_cell_at(cell_coords).deserialize(cell_data_serialized)
-	var new_offset_str = dict.get("offset", "Vector2i(0, 0)")
+	var new_offset_str = dict.get("offset", "(0, 0)")
 	var new_offset := str_to_var("Vector2i" + new_offset_str) as Vector2i
 	if new_offset != offset:
 		change_offset(new_offset)
