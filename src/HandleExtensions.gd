@@ -285,7 +285,7 @@ func initialize_extension_monitor() -> PackedStringArray:
 		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Monitoring.ini"))
 		if typeof(damaged_extension_names) == TYPE_PACKED_STRING_ARRAY:
 			if damaged_extension_names.size() == 1:  # We are certain which extension crashed
-				# NOTE: get_file() is used as a counermeasure towards possible malicius tampering
+				# NOTE: get_file() is used as a countermeasure towards possible malicious tampering
 				# with Monitoring.ini file (to inject paths leading outside EXTENSIONS_PATH using "../")
 				var extension_name = damaged_extension_names[0].get_file()
 				DirAccess.make_dir_recursive_absolute(BUG_EXTENSIONS_PATH)
