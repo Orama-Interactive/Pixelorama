@@ -259,7 +259,12 @@ func _resize_rows(
 ## Applies the [param selected_cells] data to [param target_image] data.
 ## The target image needs to be resized first.
 ## This method is used when resizing a selection and draw tiles mode is enabled.
-func apply_resizing_to_image(target_image: Image, selected_cells: Array[Array]) -> void:
+func apply_resizing_to_image(
+	target_image: Image,
+	selected_cells: Array[Array],
+	selection_rect: Rect2i,
+	transform_confirmed: bool
+) -> void:
 	for x in selected_cells.size():
 		for y in selected_cells[x].size():
 			var coords := Vector2i(x, y) * tileset.tile_size
@@ -279,6 +284,9 @@ func apply_resizing_to_image(target_image: Image, selected_cells: Array[Array]) 
 				target_image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
 				if target_image is ImageExtended:
 					target_image.convert_rgb_to_indexed()
+			if transform_confirmed:
+				var cell_coords := Vector2i(x, y) + (selection_rect.position / tileset.tile_size)
+				get_cell_at(cell_coords).deserialize(cell_data.serialize())
 
 
 ## Appends data to a [Dictionary] to be used for undo/redo.
