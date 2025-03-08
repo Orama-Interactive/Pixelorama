@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1jyt8wleg8ft"]
 
-[ext_resource type="Script" path="res://src/UI/Buttons/PatternsPopup.gd" id="1"]
+[ext_resource type="Script" uid="uid://cfj3y81pxid3d" path="res://src/UI/Buttons/PatternsPopup.gd" id="1"]
 
 [node name="PatternsPopup" type="PopupPanel"]
 canvas_item_default_texture_filter = 0

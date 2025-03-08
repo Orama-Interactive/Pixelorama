@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://chy5d42l72crk"]
 
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Store.gd" id="1_pwcwi"]
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/CustomStoreLinks.gd" id="3_dk1xf"]
+[ext_resource type="Script" uid="uid://3gweeb1iyr4l" path="res://src/UI/ExtensionExplorer/Store.gd" id="1_pwcwi"]
+[ext_resource type="Script" uid="uid://bax7ba3s0gq6a" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
+[ext_resource type="Script" uid="uid://nu4gcburux0v" path="res://src/UI/ExtensionExplorer/Subscripts/CustomStoreLinks.gd" id="3_dk1xf"]
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="4_ntl7p"]
 
 [node name="Store" type="Window"]

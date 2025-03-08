@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://u0y5xogg636e"]
 
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/GradientDialog.gd" id="1"]
+[ext_resource type="Script" uid="uid://dy53ltwruqn1k" path="res://src/UI/Dialogs/ImageEffects/GradientDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="3"]
-[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="5"]
 
 [node name="GradientDialog" instance=ExtResource("2")]

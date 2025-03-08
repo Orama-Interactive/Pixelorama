@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://b3hkjj3s6pe4x"]
 
-[ext_resource type="Script" path="res://src/Preferences/PreferencesDialog.gd" id="1"]
+[ext_resource type="Script" uid="uid://dek2dqmbe5dt3" path="res://src/Preferences/PreferencesDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bq7ibhm0txl5p" path="res://addons/keychain/ShortcutEdit.tscn" id="3"]
-[ext_resource type="Script" path="res://src/Preferences/ThemesPreferences.gd" id="3_nvl8k"]
-[ext_resource type="Script" path="res://src/Preferences/GridPreferences.gd" id="4_76iff"]
+[ext_resource type="Script" uid="uid://dx8vbnfkoahh6" path="res://src/Preferences/ThemesPreferences.gd" id="3_nvl8k"]
+[ext_resource type="Script" uid="uid://cybud13k7nk1c" path="res://src/Preferences/GridPreferences.gd" id="4_76iff"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="5_rlmsh"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="7"]
-[ext_resource type="Script" path="res://src/Preferences/ExtensionsPreferences.gd" id="7_8ume5"]
-[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="7"]
+[ext_resource type="Script" uid="uid://dxjamv5np8av3" path="res://src/Preferences/ExtensionsPreferences.gd" id="7_8ume5"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="8"]
 [ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/Store.tscn" id="8_jmnx8"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
@@ -309,6 +309,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Small"
+popup/item_0/id = 0
 popup/item_1/text = "Big"
 popup/item_1/id = 1
 
@@ -322,6 +323,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Theme"
+popup/item_0/id = 0
 popup/item_1/text = "Custom"
 popup/item_1/id = 1
 
@@ -524,6 +526,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Rectangular"
+popup/item_0/id = 0
 popup/item_1/text = "Isometric"
 popup/item_1/id = 1
 popup/item_2/text = "All"
@@ -818,6 +821,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Theme"
+popup/item_0/id = 0
 popup/item_1/text = "Custom"
 popup/item_1/id = 1
 

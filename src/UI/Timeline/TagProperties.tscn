@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c6fyrnyt3663o"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/TagProperties.gd" id="1_wbmaq"]
+[ext_resource type="Script" uid="uid://da66yrocd1l3g" path="res://src/UI/Timeline/TagProperties.gd" id="1_wbmaq"]
 
 [node name="TagProperties" type="ConfirmationDialog"]
 title = "Tag properties"

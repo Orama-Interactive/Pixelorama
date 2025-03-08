@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dl6ook010q86o"]
 
 [ext_resource type="Texture2D" uid="uid://bgfqvkmstecr5" path="res://assets/graphics/recorder/start.png" id="1"]
-[ext_resource type="Script" path="res://src/UI/Recorder/Recorder.gd" id="2"]
+[ext_resource type="Script" uid="uid://h0nqlme6nopg" path="res://src/UI/Recorder/Recorder.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dinubfua8gqhw" path="res://assets/graphics/timeline/expandable.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://b0gbmkb8xwksb" path="res://addons/keychain/assets/folder.svg" id="4"]
 

@@ -162,7 +162,7 @@ func _on_grids_count_value_changed(value: float) -> void:
 
 
 func create_default_properties() -> Dictionary:
-	var grid_info = {}
+	var grid_info := {}
 	for pref in grid_preferences:
 		grid_info[pref.prop_name] = pref.default_value
 	return grid_info

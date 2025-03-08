@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://bfbragmmdwfbl"]
 
-[ext_resource type="Script" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
+[ext_resource type="Script" uid="uid://du80jly0inq1u" path="res://src/UI/TilesPanel.gd" id="1_d2oc5"]
 [ext_resource type="Texture2D" uid="uid://d4by47alul2qw" path="res://assets/graphics/tiles_panel/tiles_draw.png" id="2_h0p0x"]
 [ext_resource type="Texture2D" uid="uid://bv7ldl8obhawm" path="res://assets/graphics/misc/icon_reload.png" id="2_r1kie"]
 [ext_resource type="Texture2D" uid="uid://bpsfilx47bw3r" path="res://assets/graphics/misc/mirror_x.svg" id="3_5o62r"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://7m4hln3mo2e5" path="res://assets/graphics/tiles_panel/tiles_auto.png" id="7_afsgi"]
 [ext_resource type="Texture2D" uid="uid://uo1ikty26del" path="res://assets/graphics/tiles_panel/tiles_stack.png" id="8_yoaya"]
 [ext_resource type="Texture2D" uid="uid://dwoilatxfh1s7" path="res://assets/graphics/misc/options.png" id="9_macrc"]
-[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="10_wfr6s"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="10_wfr6s"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_klv67"]
 action = &"toggle_draw_tiles_mode"

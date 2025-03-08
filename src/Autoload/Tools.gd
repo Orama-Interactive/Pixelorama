@@ -42,7 +42,7 @@ var alpha_max := 1.0
 var brush_size_min := 1
 var brush_size_max := 4
 
-var tools := {
+var tools: Dictionary[String, Tool] = {
 	"RectSelect":
 	Tool.new(
 		"RectSelect",
@@ -234,8 +234,8 @@ Hold %s to displace the shape's origin""",
 }
 
 var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
-var _slots := {}
-var _panels := {}
+var _slots: Dictionary[MouseButton, Slot] = {}
+var _panels: Dictionary[MouseButton, Control] = {}
 var _curr_layer_type := Global.LayerTypes.PIXEL
 var _left_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Pencil",

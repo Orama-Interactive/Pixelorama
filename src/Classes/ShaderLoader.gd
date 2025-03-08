@@ -43,9 +43,9 @@ static func create_ui_for_shader_uniforms(
 	var uniform_data: PackedStringArray = []
 	var description: String = ""
 	var description_began := false
-	# A Dictionary of [String] and [Control], used to group together nodes
+	# A Dictionary used to group together nodes
 	# under the same group_uniform. Currently only used for CurveTextures.
-	var group_nodes := {}
+	var group_nodes: Dictionary[String, Control] = {}
 	var color_button_hbox: HBoxContainer = null  # Used for RGBA buttons, if they exist.
 	for line in code:
 		# Management of "end" tags

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dd1fkkc3vjh78"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.gd" id="1_h6h7b"]
+[ext_resource type="Script" uid="uid://52br5thwfwqp" path="res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.gd" id="1_h6h7b"]
 
 [node name="LayerEffectsSettings" type="AcceptDialog"]
 title = "Layer effects"

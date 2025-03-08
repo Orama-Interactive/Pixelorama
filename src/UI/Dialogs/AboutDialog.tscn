@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://w1v6plnv6ppt"]
 
-[ext_resource type="Script" path="res://src/UI/Dialogs/AboutDialog.gd" id="1"]
+[ext_resource type="Script" uid="uid://c7kfwvlkbvt2k" path="res://src/UI/Dialogs/AboutDialog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2"]
 [ext_resource type="FontFile" uid="uid://cvc4lelf6hl7x" path="res://assets/fonts/Roboto-Regular.ttf" id="3_fj1id"]
 [ext_resource type="Texture2D" uid="uid://s25pa611bpvj" path="res://assets/graphics/splash_screen/orama_64x64.png" id="4"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bmsc0s03pwji4"]
 
-[ext_resource type="Script" path="res://src/UI/Nodes/MaxMinEdit.gd" id="1"]
-[ext_resource type="Shader" path="res://src/Shaders/AutoInvertColors.gdshader" id="2"]
+[ext_resource type="Script" uid="uid://xxrmad3xuwn0" path="res://src/UI/Nodes/MaxMinEdit.gd" id="1"]
+[ext_resource type="Shader" uid="uid://jvo6i3t4snow" path="res://src/Shaders/AutoInvertColors.gdshader" id="2"]
 
 [sub_resource type="Gradient" id="3"]
 interpolation_mode = 1
@@ -13,6 +13,8 @@ gradient = SubResource("3")
 
 [sub_resource type="ShaderMaterial" id="5"]
 shader = ExtResource("2")
+shader_parameter/width = 0.05
+shader_parameter/hollow_shapes = true
 
 [node name="MaxMinEdit" type="VBoxContainer"]
 anchors_preset = 15

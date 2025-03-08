@@ -26,7 +26,7 @@ var ffmpeg_formats := [
 	FileFormat.MP4, FileFormat.AVI, FileFormat.OGV, FileFormat.MKV, FileFormat.WEBM
 ]
 ## A dictionary of [enum FileFormat] enums and their file extensions and short descriptions.
-var file_format_dictionary := {
+var file_format_dictionary: Dictionary[FileFormat, Array] = {
 	FileFormat.PNG: [".png", "PNG Image"],
 	FileFormat.WEBP: [".webp", "WebP Image"],
 	FileFormat.JPEG: [".jpg", "JPG Image"],
@@ -46,9 +46,9 @@ var custom_exporter_generators := {}
 var current_tab := ExportTab.IMAGE
 ## All frames and their layers processed/blended into images
 var processed_images: Array[ProcessedImage] = []
-## Dictionary of [Frame] and [Image] that contains all of the blended frames.
+## A dictionary that contains all of the blended frames.
 ## Changes when [method cache_blended_frames] is called.
-var blended_frames := {}
+var blended_frames: Dictionary[Frame, Image] = {}
 var export_json := false
 var split_layers := false
 var trim_images := false

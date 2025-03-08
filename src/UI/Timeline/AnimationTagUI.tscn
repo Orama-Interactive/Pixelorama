@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dxjxve3gmc8h4"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/AnimationTagUI.gd" id="1"]
+[ext_resource type="Script" uid="uid://bdanox8olumam" path="res://src/UI/Timeline/AnimationTagUI.gd" id="1"]
 
 [node name="AnimationTagUI" type="Control"]
 custom_minimum_size = Vector2(39, 32)

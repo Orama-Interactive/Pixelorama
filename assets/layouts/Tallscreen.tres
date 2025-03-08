@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="DockableLayout" load_steps=25 format=3 uid="uid://brcnmadkdaqok"]
 
-[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="1_t44r1"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="2_rngtv"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="3_v86xb"]
+[ext_resource type="Script" uid="uid://da67x3ua6ietw" path="res://addons/dockable_container/layout_panel.gd" id="1_t44r1"]
+[ext_resource type="Script" uid="uid://bvvbi3x82xnut" path="res://addons/dockable_container/layout_split.gd" id="2_rngtv"]
+[ext_resource type="Script" uid="uid://icucbtatip66" path="res://addons/dockable_container/layout.gd" id="3_v86xb"]
 
 [sub_resource type="Resource" id="Resource_kn4x4"]
 resource_name = "Tabs"

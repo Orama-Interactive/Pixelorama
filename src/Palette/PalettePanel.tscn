@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://b7ydn1tt37rcl" path="res://assets/graphics/palette/add.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://bt72662c3gp2f" path="res://assets/graphics/timeline/remove_frame.png" id="3_0e27e"]
 [ext_resource type="Texture2D" uid="uid://db4i3w3yencxg" path="res://assets/graphics/palette/sort.png" id="4_hcsuy"]
-[ext_resource type="Script" path="res://src/Palette/PaletteGrid.gd" id="5"]
-[ext_resource type="Script" path="res://src/Palette/PaletteScroll.gd" id="6"]
-[ext_resource type="Script" path="res://src/Palette/PalettePanel.gd" id="8"]
+[ext_resource type="Script" uid="uid://brrmadr5hbecl" path="res://src/Palette/PaletteGrid.gd" id="5"]
+[ext_resource type="Script" uid="uid://jp32o826b0j2" path="res://src/Palette/PaletteScroll.gd" id="6"]
+[ext_resource type="Script" uid="uid://bxugfciwcodjx" path="res://src/Palette/PalettePanel.gd" id="8"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_4n3yg"]
 action = &"edit_palette"

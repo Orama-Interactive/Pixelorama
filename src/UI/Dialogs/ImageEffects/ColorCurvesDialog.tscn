@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cthknpr74lawl"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_4g7xo"]
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/ColorCurvesDialog.gd" id="2_xkivc"]
-[ext_resource type="Script" path="res://src/UI/Nodes/CurveEditor/CurveEdit.gd" id="3_3yyhs"]
+[ext_resource type="Script" uid="uid://3trpt1yheuo1" path="res://src/UI/Dialogs/ImageEffects/ColorCurvesDialog.gd" id="2_xkivc"]
+[ext_resource type="Script" uid="uid://cd0klfo0jdjni" path="res://src/UI/Nodes/CurveEditor/CurveEdit.gd" id="3_3yyhs"]
 
 [sub_resource type="Curve" id="Curve_gvi51"]
 _data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]

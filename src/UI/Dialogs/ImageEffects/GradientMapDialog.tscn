@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="2"]
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/GradientMapDialog.gd" id="3"]
+[ext_resource type="Script" uid="uid://duasprybsl7b2" path="res://src/UI/Dialogs/ImageEffects/GradientMapDialog.gd" id="3"]
 
 [node name="GradientMapDialog" instance=ExtResource("1")]
 title = "Gradient Map"

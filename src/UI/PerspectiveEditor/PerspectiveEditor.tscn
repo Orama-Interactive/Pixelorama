@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cap1bhavhi33g"]
 
-[ext_resource type="Script" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.gd" id="1"]
+[ext_resource type="Script" uid="uid://okyo6k7lrdnn" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.gd" id="1"]
 
 [node name="PerspectiveEditor" type="PanelContainer"]
 custom_minimum_size = Vector2(270, 10)

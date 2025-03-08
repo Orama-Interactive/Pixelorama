@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://hbgwxlin4jun"]
 
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="1_uvdem"]
-[ext_resource type="Script" path="res://src/UI/Timeline/NewTileMapLayerDialog.gd" id="1_y2r5h"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="1_uvdem"]
+[ext_resource type="Script" uid="uid://dppsr4hf6f142" path="res://src/UI/Timeline/NewTileMapLayerDialog.gd" id="1_y2r5h"]
 
 [node name="NewTileMapLayerDialog" type="ConfirmationDialog"]
 title = "New layer"

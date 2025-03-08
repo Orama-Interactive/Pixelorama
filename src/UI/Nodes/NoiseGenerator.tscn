@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://be14ffwmcp5xy"]
 
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="1_evt0j"]
-[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1_pm12o"]
-[ext_resource type="Script" path="res://src/UI/Nodes/NoiseGenerator.gd" id="1_uxdt4"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1_pm12o"]
+[ext_resource type="Script" uid="uid://bt8qvbe6t6qjo" path="res://src/UI/Nodes/NoiseGenerator.gd" id="1_uxdt4"]
 [ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="2_nxkb0"]
 [ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/Sliders/ValueSliderV3.tscn" id="3_ffklk"]
-[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_r1f12"]
+[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_r1f12"]
 
 [node name="NoiseGenerator" type="ScrollContainer"]
 anchors_preset = 15

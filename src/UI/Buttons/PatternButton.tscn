@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bx6xntkb2tstx"]
 
-[ext_resource type="Script" path="res://src/UI/Buttons/PatternButton.gd" id="2"]
+[ext_resource type="Script" uid="uid://7q1rsxt0dt6q" path="res://src/UI/Buttons/PatternButton.gd" id="2"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(1, 1, 1, 1)

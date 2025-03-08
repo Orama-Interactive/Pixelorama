@@ -13,14 +13,13 @@ var name := "Custom Palette":
 var comment := ""
 var path := ""
 
-## The width of the grid
+## The width of the grid.
 var width := DEFAULT_WIDTH
-## The height of the grid
+## The height of the grid.
 var height := DEFAULT_HEIGHT
-## Sparse colors dictionary of [int] and [PaletteColor]
-## Actual color position in the palette is determined by its index
-var colors := {}
-## How many colors fit in palette grid
+## Sparse colors dictionary. Actual color position in the palette is determined by its index.
+var colors: Dictionary[int, PaletteColor] = {}
+## How many colors fit in palette grid.
 var colors_max := 0
 
 

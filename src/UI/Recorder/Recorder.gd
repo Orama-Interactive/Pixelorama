@@ -9,7 +9,7 @@ var chosen_dir := "":
 		chosen_dir = value
 		if chosen_dir.ends_with("/"):  # Remove end back-slashes if present
 			chosen_dir[-1] = ""
-var recorded_projects := {}  ## [Dictionary] of [Project] and [Recorder].
+var recorded_projects: Dictionary[Project, Recorder] = {}
 var save_dir := ""
 var skip_amount := 1  ## Number of "do" actions after which a frame can be captured.
 var resize_percent := 100

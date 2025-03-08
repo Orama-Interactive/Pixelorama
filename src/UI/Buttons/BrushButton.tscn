@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckg78y8l0rmf3"]
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
-[ext_resource type="Script" path="res://src/UI/Buttons/BrushButton.gd" id="2"]
+[ext_resource type="Script" uid="uid://c3u1fpvf6s5vp" path="res://src/UI/Buttons/BrushButton.gd" id="2"]
 
 [node name="BrushButton" type="Button"]
 custom_minimum_size = Vector2(36, 36)

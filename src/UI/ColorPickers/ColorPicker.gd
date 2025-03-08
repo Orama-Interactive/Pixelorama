@@ -9,9 +9,10 @@ var hsv_rectangle_control: Control
 var shape_aspect_ratio: AspectRatioContainer
 ## The internal swatches button of the [ColorPicker] node.
 ## Used to ensure that swatches are always invisible.
-var swatches_button: Button
+var swatches_button: HBoxContainer
 ## The internal container for the color sliders of the [ColorPicker] node.
-var color_sliders_vbox: VBoxContainer
+var color_slider_types_hbox: HBoxContainer
+var color_sliders_grid: GridContainer
 var _skip_color_picker_update := false
 @onready var color_picker := %ColorPicker as ColorPicker
 @onready var color_buttons := %ColorButtons as HBoxContainer
@@ -31,7 +32,6 @@ func _ready() -> void:
 	color_picker.picker_shape = Global.config_cache.get_value(
 		"color_picker", "picker_shape", ColorPicker.SHAPE_HSV_RECTANGLE
 	)
-
 	# Make changes to the UI of the color picker by modifying its internal children
 	await get_tree().process_frame
 	# The MarginContainer that contains all of the color picker nodes.
@@ -57,7 +57,7 @@ func _ready() -> void:
 	var color_texture_rect := sampler_cont.get_child(1, true) as TextureRect
 	color_texture_rect.visible = false
 	# The HBoxContainer where we get the hex LineEdit node from, and moving it to sampler_cont
-	var hex_cont := picker_vbox_container.get_child(4, true).get_child(1, true) as Container
+	var hex_cont := picker_vbox_container.get_child(4, true) as Container
 	var hex_edit := hex_cont.get_child(2, true)
 	hex_cont.remove_child(hex_edit)
 	sampler_cont.add_child(hex_edit)
@@ -67,17 +67,19 @@ func _ready() -> void:
 	sampler_cont.add_child(color_buttons)
 	sampler_cont.move_child(color_buttons, 0)
 
-	var empty_vbox_container := picker_vbox_container.get_child(3, true) as VBoxContainer
-	empty_vbox_container.visible = false
-	color_sliders_vbox = picker_vbox_container.get_child(4, true) as VBoxContainer
-	color_sliders_vbox.visible = false
-	swatches_button = picker_vbox_container.get_child(5, true) as Button
+	color_slider_types_hbox = picker_vbox_container.get_child(2, true) as HBoxContainer
+	color_slider_types_hbox.visible = false
+	color_sliders_grid = picker_vbox_container.get_child(3, true) as GridContainer
+	color_sliders_grid.visible = false
+	swatches_button = picker_vbox_container.get_child(5, true).get_child(0, true) as HBoxContainer
 	swatches_button.visible = false
 	# The GridContainer that contains the swatch buttons. These are not visible in our case
 	# but for some reason its h_separation needs to be set to a value larger than 4,
 	# otherwise a weird bug occurs with the Recent Colors where, adding new colors
 	# increases the size of the color buttons.
-	var presets_container := picker_vbox_container.get_child(6, true) as GridContainer
+	var presets_container := (
+		picker_vbox_container.get_child(5, true).get_child(2, true) as GridContainer
+	)
 	presets_container.add_theme_constant_override("h_separation", 5)
 	# Move the expand button above the RGB, HSV etc buttons
 	expand_button.get_parent().remove_child(expand_button)
@@ -158,8 +160,9 @@ func _on_expand_button_toggled(toggled_on: bool) -> void:
 	color_picker.presets_visible = toggled_on
 	if is_instance_valid(swatches_button):
 		swatches_button.visible = false
-	if is_instance_valid(color_sliders_vbox):
-		color_sliders_vbox.visible = toggled_on
+	if is_instance_valid(color_sliders_grid):
+		color_slider_types_hbox.visible = toggled_on
+		color_sliders_grid.visible = toggled_on
 	Global.config_cache.set_value("color_picker", "is_expanded", toggled_on)
 
 

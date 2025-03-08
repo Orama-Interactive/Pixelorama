@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://c3vcvhh4d8hd7"]
 
-[ext_resource type="Script" path="res://src/UI/ColorPickers/ColorPicker.gd" id="1_r8ot0"]
+[ext_resource type="Script" uid="uid://y2yilvjc63c" path="res://src/UI/ColorPickers/ColorPicker.gd" id="1_r8ot0"]
 [ext_resource type="Texture2D" uid="uid://d0v821l01w7go" path="res://assets/graphics/misc/color_switch.png" id="2_ojj3i"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="3_vjkb0"]
-[ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="4_oxnnt"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="4_oxnnt"]
 [ext_resource type="Texture2D" uid="uid://cefhafnbc8upf" path="res://assets/graphics/misc/value_arrow_right.svg" id="5_hhe4d"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_02x7w"]

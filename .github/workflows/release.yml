@@ -5,7 +5,7 @@ on:
     branches: [ release ]
 
 env:
-  GODOT_VERSION: 4.3
+  GODOT_VERSION: 4.4
   EXPORT_NAME: Pixelorama
   TAG: v1.0.5
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
@@ -15,14 +15,14 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.3
+      image: docker://barichello/godot-ci:4.4
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
           chown root:root -R ~
           godot --headless --quit
-          echo 'export/windows/wine = "/usr/bin/wine64-stable"' >> ~/.config/godot/editor_settings-4.3.tres
-          echo 'export/windows/rcedit = "/opt/rcedit.exe"' >> ~/.config/godot/editor_settings-4.3.tres
+          echo 'export/windows/wine = "/usr/bin/wine64-stable"' >> ~/.config/godot/editor_settings-4.4.tres
+          echo 'export/windows/rcedit = "/opt/rcedit.exe"' >> ~/.config/godot/editor_settings-4.4.tres
       - name: Checkout 🛎️
         uses: actions/checkout@v4
         with:
@@ -74,7 +74,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.3
+      image: docker://barichello/godot-ci:4.4
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -193,7 +193,7 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.3
+      image: docker://barichello/godot-ci:4.4
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://birggxam3fjnb"]
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.gd" id="2"]
+[ext_resource type="Script" uid="uid://dskbcqwcf40j2" path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.gd" id="2"]
 
 [node name="ResizeCanvas" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0

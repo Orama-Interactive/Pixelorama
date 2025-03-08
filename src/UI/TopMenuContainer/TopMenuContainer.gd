@@ -148,6 +148,8 @@ func _project_switched() -> void:
 
 
 func _update_file_menu_buttons(project: Project) -> void:
+	if not is_instance_valid(file_menu):
+		return
 	if project.export_directory_path.is_empty():
 		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
 	else:

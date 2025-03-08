@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bl1t33abu7kl8"]
 
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.gd" id="1"]
+[ext_resource type="Script" uid="uid://dc24ku5nqmwuv" path="res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="2"]
 
 [node name="InvertColorsDialog" instance=ExtResource("2")]

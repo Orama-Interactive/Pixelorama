@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bn4aw27dj7pwi"]
 
-[ext_resource type="Script" path="res://src/UI/Nodes/GradientEdit.gd" id="1"]
+[ext_resource type="Script" uid="uid://bqcro2iobw22n" path="res://src/UI/Nodes/GradientEdit.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cis71foi5jt31" path="res://assets/graphics/misc/settings.svg" id="2_2dyyb"]
-[ext_resource type="Script" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_y6708"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_y6708"]
 [ext_resource type="Texture2D" uid="uid://cvc120a27s57m" path="res://assets/graphics/misc/save.svg" id="4_b5s6b"]
 
 [node name="GradientEdit" type="VBoxContainer"]

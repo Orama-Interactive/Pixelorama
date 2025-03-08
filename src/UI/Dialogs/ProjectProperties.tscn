@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dnjcs2l1ri38n"]
 
-[ext_resource type="Script" path="res://src/UI/Dialogs/ProjectProperties.gd" id="1_0n4uc"]
+[ext_resource type="Script" uid="uid://dy4j3c4fws8m" path="res://src/UI/Dialogs/ProjectProperties.gd" id="1_0n4uc"]
 
 [node name="ProjectProperties" type="AcceptDialog"]
 title = "Project Properties"

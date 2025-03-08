@@ -10,8 +10,8 @@ const SCALE_CIRCLE_RADIUS := 1
 const CHAR_SCALE := 0.16
 const DISAPPEAR_THRESHOLD := 1  ## length of arrow below which system won't draw it (for cleaner UI)
 
-var always_visible := {}  ## Key = Cel3DObject, Value = Texture2D
-var points_per_object := {}  ## Key = Cel3DObject, Value = PackedVector2Array
+var always_visible: Dictionary[Cel3DObject, Texture2D] = {}
+var points_per_object: Dictionary[Cel3DObject, PackedVector2Array] = {}
 var selected_color := Color.WHITE
 var hovered_color := Color.GRAY
 

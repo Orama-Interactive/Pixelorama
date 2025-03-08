@@ -11,10 +11,10 @@ enum NewPalettePresetType {EMPTY, FROM_CURRENT_PALETTE, FROM_CURRENT_SPRITE, FRO
 enum GetColorsFrom { CURRENT_FRAME, CURRENT_CEL, ALL_FRAMES }
 const DEFAULT_PALETTE_NAME := "Default"
 ## Maximum allowed width of imported palettes.
-const MAX_IMPORT_PAL_WIDTH = 1 << 14
+const MAX_IMPORT_PAL_WIDTH := 1 << 14
 var palettes_write_path := Global.home_data_directory.path_join("Palettes")
 ## All available palettes
-var palettes := {}
+var palettes: Dictionary[String, Palette] = {}
 ## Currently displayed palette
 var current_palette: Palette = null
 

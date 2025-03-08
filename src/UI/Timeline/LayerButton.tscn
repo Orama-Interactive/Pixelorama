@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://bai814sqvk68f"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/LayerButton.gd" id="1_6hlpe"]
+[ext_resource type="Script" uid="uid://dvexfklwk4l53" path="res://src/UI/Timeline/LayerButton.gd" id="1_6hlpe"]
 [ext_resource type="Texture2D" uid="uid://c2b3htff5yox8" path="res://assets/graphics/layers/layer_visible.png" id="2_ef6fb"]
 [ext_resource type="Texture2D" uid="uid://dndlglvqc7v6a" path="res://assets/graphics/layers/group_expanded.png" id="2_enrtd"]
 [ext_resource type="Texture2D" uid="uid://dhc0pnnqojd2m" path="res://assets/graphics/layers/unlock.png" id="3_ah1my"]
 [ext_resource type="Texture2D" uid="uid://cofw1x6chh4i" path="res://assets/graphics/layers/unlinked_layer.png" id="4_058qm"]
 [ext_resource type="Texture2D" uid="uid://ieo8fsapcgsy" path="res://assets/graphics/layers/clipping_mask.png" id="6_73j5q"]
-[ext_resource type="Script" path="res://src/UI/Timeline/LayerMainButton.gd" id="6_n8q6b"]
+[ext_resource type="Script" uid="uid://bgvjodkehy0qn" path="res://src/UI/Timeline/LayerMainButton.gd" id="6_n8q6b"]
 [ext_resource type="Texture2D" uid="uid://dv5y24sb8lxg2" path="res://assets/graphics/layers/layer_active_effect.png" id="8_7wf6f"]
 [ext_resource type="Texture2D" uid="uid://cjvk47bd56156" path="res://assets/graphics/layers/type_icons/layer_pixel.png" id="8_ce16y"]
 

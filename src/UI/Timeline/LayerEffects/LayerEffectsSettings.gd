@@ -47,8 +47,8 @@ var effects: Array[LayerEffect] = [
 	),
 	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
 ]
-## Dictionary of [String] and [PopupMenu], mapping each category to a PopupMenu.
-var category_submenus := {}
+## A dictionary that maps each category to a [PopupMenu].
+var category_submenus: Dictionary[String, PopupMenu] = {}
 
 @onready var enabled_button: CheckButton = $VBoxContainer/HBoxContainer/EnabledButton
 @onready var effect_list: MenuButton = $VBoxContainer/HBoxContainer/EffectList
@@ -97,7 +97,7 @@ func _add_effect_to_list(i: int) -> void:
 		effect_list_popup.set_item_metadata(effect_list_popup.item_count - 1, i)
 	else:
 		if category_submenus.has(effect.category):
-			var submenu := category_submenus[effect.category] as PopupMenu
+			var submenu := category_submenus[effect.category]
 			submenu.add_item(effect.name)
 			submenu.set_item_metadata(submenu.item_count - 1, i)
 		else:

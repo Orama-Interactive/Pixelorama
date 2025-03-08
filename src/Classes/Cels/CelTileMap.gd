@@ -14,17 +14,16 @@ extends PixelCel
 ## The [TileSetCustom] that this cel uses, passed down from the cel's [LayerTileMap].
 var tileset: TileSetCustom
 
-var cells := {}  ## Dictionary of Vector2i and Cell.
+var cells: Dictionary[Vector2i, Cell] = {}  ## Dictionary that contains the data of each cell.
 var vertical_cell_min := 0  ## The minimum vertical cell.
 var vertical_cell_max := 0  ## The maximum vertical cell.
 var offset := Vector2i.ZERO  ## The offset of the tilemap.
 var prev_offset := offset  ## Used for undo/redo purposes.
-## Dictionary of [int] and [Array].
 ## The key is the index of the tile in the tileset,
 ## and the value is the coords of the tilemap tile that changed first, along with
 ## its image that is being changed when manual mode is enabled.
 ## Gets reset on [method update_tilemap].
-var editing_images := {}
+var editing_images: Dictionary[int, Array] = {}
 
 
 ## An internal class of [CelTIleMap], which contains data used by individual cells of the tilemap.
@@ -294,7 +293,7 @@ func serialize_undo_data() -> Dictionary:
 	var dict := {}
 	var cell_data := {}
 	for cell_coords: Vector2i in cells:
-		var cell := cells[cell_coords] as Cell
+		var cell := cells[cell_coords]
 		cell_data[cell_coords] = cell.serialize()
 	dict["cell_data"] = cell_data
 	dict["tileset"] = tileset.serialize_undo_data()
@@ -339,7 +338,7 @@ func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) ->
 ## each tile from the [member tileset] is being used.
 func find_times_used_of_tiles() -> void:
 	for cell_coords in cells:
-		var cell := cells[cell_coords] as Cell
+		var cell := cells[cell_coords]
 		tileset.tiles[cell.index].times_used += 1
 
 
@@ -355,7 +354,7 @@ func update_tilemap(
 ) -> void:
 	editing_images.clear()
 	var tileset_size_before_update := tileset.tiles.size()
-	for cell_coords: Vector2i in cells:
+	for cell_coords in cells:
 		var cell := get_cell_at(cell_coords)
 		var coords := cell_coords * tileset.tile_size + offset
 		var rect := Rect2i(coords, tileset.tile_size)
@@ -400,8 +399,8 @@ func update_tilemap(
 	# Updates transparent cells that have indices higher than 0.
 	# This can happen when switching to another tileset which has less tiles
 	# than the previous one.
-	for cell_coords: Vector2i in cells:
-		var cell := cells[cell_coords] as Cell
+	for cell_coords in cells:
+		var cell := cells[cell_coords]
 		var coords := cell_coords * tileset.tile_size + offset
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := source_image.get_region(rect)
@@ -526,8 +525,8 @@ func _handle_auto_editing_mode(
 ## Re-indexes all [member cells] that are larger or equal to [param index],
 ## by reducing their value by one.
 func _re_index_cells_after_index(index: int) -> void:
-	for cell_coords: Vector2i in cells:
-		var cell := cells[cell_coords] as Cell
+	for cell_coords in cells:
+		var cell := cells[cell_coords]
 		var tmp_index := cell.index
 		if tmp_index >= index:
 			cell.index -= 1
@@ -553,16 +552,16 @@ func _update_cell(cell: Cell) -> void:
 
 ## Calls [method _update_cell] for all [member cells].
 func update_cel_portions() -> void:
-	for cell_coords: Vector2i in cells:
-		var cell := cells[cell_coords] as Cell
+	for cell_coords in cells:
+		var cell := cells[cell_coords]
 		_update_cell(cell)
 
 
 ## Loops through all [member cells] of the tilemap and updates their indices,
 ## so they can remain mapped to the [member tileset]'s tiles.
 func re_index_all_cells(set_invisible_to_zero := false) -> void:
-	for cell_coords: Vector2i in cells:
-		var cell := cells[cell_coords] as Cell
+	for cell_coords in cells:
+		var cell := cells[cell_coords]
 		var coords := cell_coords * tileset.tile_size + offset
 		var rect := Rect2i(coords, tileset.tile_size)
 		var image_portion := image.get_region(rect)
@@ -597,7 +596,7 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 			var cell_coords := Vector2i(x, y) - offset_in_tiles
 			if not cells.has(cell_coords):
 				cells[cell_coords] = Cell.new()
-	for cell_coords: Vector2i in cells:
+	for cell_coords in cells:
 		if cell_coords.y < vertical_cell_min:
 			vertical_cell_min = cell_coords.y
 		if cell_coords.y > vertical_cell_max:
@@ -606,7 +605,7 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 		horizontal_cells += 1
 	if not is_zero_approx(fposmod(offset.y, tileset.tile_size.y)):
 		vertical_cells += 1
-	for cell_coords: Vector2i in cells:
+	for cell_coords in cells:
 		if reset_indices:
 			cells[cell_coords] = Cell.new()
 		else:
@@ -649,7 +648,7 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 # Overridden Methods:
 func set_content(content, texture: ImageTexture = null) -> void:
 	for cell_coords in cells:
-		var cell := cells[cell_coords] as Cell
+		var cell := cells[cell_coords]
 		if cell.index > 0:
 			tileset.tiles[cell.index].times_used -= 1
 	super.set_content(content, texture)
@@ -670,8 +669,8 @@ func update_texture(undo := false) -> void:
 		editing_images.clear()
 		return
 
-	for cell_coords: Vector2i in cells:
-		var cell := cells[cell_coords] as Cell
+	for cell_coords in cells:
+		var cell := cells[cell_coords]
 		var coords := cell_coords * tileset.tile_size + offset
 		var index := cell.index
 		if index >= tileset.tiles.size():
@@ -692,8 +691,8 @@ func update_texture(undo := false) -> void:
 				)
 				editing_images[index] = [cell_coords, transformed_image]
 
-	for cell_coords: Vector2i in cells:
-		var cell := cells[cell_coords] as Cell
+	for cell_coords in cells:
+		var cell := cells[cell_coords]
 		var coords := cell_coords * tileset.tile_size + offset
 		var index := cell.index
 		if index >= tileset.tiles.size():
@@ -720,8 +719,8 @@ func update_texture(undo := false) -> void:
 func serialize() -> Dictionary:
 	var dict := super.serialize()
 	var cell_data := {}
-	for cell_coords: Vector2i in cells:
-		var cell := cells[cell_coords] as Cell
+	for cell_coords in cells:
+		var cell := cells[cell_coords]
 		cell_data[cell_coords] = cell.serialize()
 	dict["cell_data"] = cell_data
 	dict["offset"] = offset
