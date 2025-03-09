@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2025-03-01 12:31\n"
+"PO-Revision-Date: 2025-03-09 00:18\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -71,6 +71,10 @@ msgstr "חלון"
 
 msgid "Image"
 msgstr "תמונה"
+
+#. Noun, refers to a Pixelorama project.
+msgid "Project"
+msgstr ""
 
 msgid "Effects"
 msgstr "אפקטים"
