@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Filipino\n"
 "Language: fil_PH\n"
-"PO-Revision-Date: 2025-03-01 12:32\n"
+"PO-Revision-Date: 2025-03-09 00:19\n"
 
 msgid "OK"
 msgstr ""
@@ -70,6 +70,10 @@ msgid "Window"
 msgstr ""
 
 msgid "Image"
+msgstr ""
+
+#. Noun, refers to a Pixelorama project.
+msgid "Project"
 msgstr ""
 
 msgid "Effects"
