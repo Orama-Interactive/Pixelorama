@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2025-03-01 12:32\n"
+"PO-Revision-Date: 2025-03-09 00:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -71,6 +71,10 @@ msgstr "Vindu"
 
 msgid "Image"
 msgstr "Bilde"
+
+#. Noun, refers to a Pixelorama project.
+msgid "Project"
+msgstr ""
 
 msgid "Effects"
 msgstr "Effekter"
