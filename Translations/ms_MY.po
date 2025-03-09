@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-03-09 10:24\n"
+"PO-Revision-Date: 2025-03-09 11:28\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -952,54 +952,54 @@ msgstr "Mod satu tetingkap"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Semasa ini didayakan, subtetingkap Pixelorama akan dibenamkan ke tetingkap utama, jika tidak, setiap dialog akan pisah tersendiri."
 
 msgid "Dark"
-msgstr ""
+msgstr "Gelap"
 
 msgid "Gray"
-msgstr ""
+msgstr "Kelabu"
 
 msgid "Blue"
-msgstr ""
+msgstr "Biru"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamel"
 
 msgid "Light"
-msgstr ""
+msgstr "Terang"
 
 msgid "Purple"
-msgstr ""
+msgstr "Ungu"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Mawar"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Butang"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Warna ikon daripada:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Warna ikon:"
 
 msgid "Background"
-msgstr ""
+msgstr "Latar belakang"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Warna latar belakang daripada:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Warna latar belakang:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Mengongsi pilihan antara alat kiri dan kanan"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1013,54 +1013,54 @@ msgid "Right tool color:"
 msgstr ""
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Saiz butang alat:"
 
 msgid "Small"
-msgstr ""
+msgstr "Kecil"
 
 msgid "Big"
-msgstr ""
+msgstr "Besar"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Jejaskan pemilihan saja"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Cel yang dipilih"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Cel semasa"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Bingkai semasa"
 
 msgid "All frames"
-msgstr ""
+msgstr "Semua bingkai"
 
 msgid "All projects"
-msgstr ""
+msgstr "Semua projek"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Songsangkan warna"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Ubah Saluran Merah"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Ubah Saluran Hijau"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Ubah Saluran Biru"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Ubah Saluran Lutsinar"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturasi"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
-msgstr ""
+msgstr "Garis luar"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
