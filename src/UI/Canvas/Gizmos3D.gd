@@ -7,7 +7,7 @@ const LIGHT_ARROW_LENGTH := 25
 const GIZMO_WIDTH := 0.4
 const SCALE_CIRCLE_LENGTH := 8
 const SCALE_CIRCLE_RADIUS := 1
-const CHAR_SCALE := 0.16
+const CHAR_SCALE := 0.10
 const DISAPPEAR_THRESHOLD := 1  ## length of arrow below which system won't draw it (for cleaner UI)
 
 var always_visible: Dictionary[Cel3DObject, Texture2D] = {}
@@ -19,6 +19,9 @@ var gizmos_origin: Vector2
 var proj_right_local: Vector2
 var proj_up_local: Vector2
 var proj_back_local: Vector2
+var right_axis_width: float = 1.0
+var up_axis_width: float = 1.0
+var back_axis_width: float = 1.0
 # Same vectors as `proj_x_local`, but with a smaller length, for the rotation & scale gizmos
 var proj_right_local_scale: Vector2
 var proj_up_local_scale: Vector2
@@ -104,12 +107,16 @@ func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
 	points_per_object[object3d] = points
 	if object3d.selected:
 		gizmos_origin = camera.unproject_position(object3d.position)
-		var right := object3d.position + object3d.transform.basis.x
-		var left := object3d.position - object3d.transform.basis.x
-		var up := object3d.position + object3d.transform.basis.y
-		var down := object3d.position - object3d.transform.basis.y
-		var back := object3d.position + object3d.transform.basis.z
-		var front := object3d.position - object3d.transform.basis.z
+		var right := object3d.position + object3d.transform.basis.x.normalized()
+		var left := object3d.position - object3d.transform.basis.x.normalized()
+		var up := object3d.position + object3d.transform.basis.y.normalized()
+		var down := object3d.position - object3d.transform.basis.y.normalized()
+		var back := object3d.position + object3d.transform.basis.z.normalized()
+		var front := object3d.position - object3d.transform.basis.z.normalized()
+
+		right_axis_width = lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - right).z) / 2.0)
+		up_axis_width = lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - up).z) / 2.0)
+		back_axis_width = lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - back).z) / 2.0)
 
 		var proj_right := object3d.camera.unproject_position(right)
 		var proj_up := object3d.camera.unproject_position(up)
@@ -171,7 +178,8 @@ func _draw() -> void:
 		draw_texture(texture, -center)
 		draw_set_transform(pos, 0, draw_scale / 2)
 		if object.type == Cel3DObject.Type.DIR_LIGHT:
-			draw_line(Vector2.ZERO, back_proj, Color.WHITE)
+			var line_width = lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - back).z) / 2.0)
+			draw_line(Vector2.ZERO, back_proj, Color.WHITE, line_width)
 			var arrow := _find_arrow(back_proj)
 			_draw_arrow(arrow, Color.WHITE)
 		draw_set_transform_matrix(Transform2D())
@@ -187,28 +195,32 @@ func _draw() -> void:
 		if points.is_empty():
 			continue
 		if object.selected:
+			var is_applying_gizmos = false
 			# Draw bounding box outline
 			draw_multiline(points, selected_color, 0.5)
 			if object.applying_gizmos == Cel3DObject.Gizmos.X_ROT:
 				draw_line(gizmos_origin, canvas.current_pixel, Color.RED)
-				continue
+				is_applying_gizmos = true
 			elif object.applying_gizmos == Cel3DObject.Gizmos.Y_ROT:
 				draw_line(gizmos_origin, canvas.current_pixel, Color.GREEN)
-				continue
+				is_applying_gizmos = true
 			elif object.applying_gizmos == Cel3DObject.Gizmos.Z_ROT:
 				draw_line(gizmos_origin, canvas.current_pixel, Color.BLUE)
-				continue
+				is_applying_gizmos = true
 			draw_set_transform(gizmos_origin, 0, draw_scale)
 			# Draw position arrows
 			if proj_right_local.length() > DISAPPEAR_THRESHOLD:
-				draw_line(Vector2.ZERO, proj_right_local, Color.RED)
+				draw_line(Vector2.ZERO, proj_right_local, Color.RED, right_axis_width)
 				_draw_arrow(gizmo_pos_x, Color.RED)
 			if proj_up_local.length() > DISAPPEAR_THRESHOLD:
-				draw_line(Vector2.ZERO, proj_up_local, Color.GREEN)
+				draw_line(Vector2.ZERO, proj_up_local, Color.GREEN, up_axis_width)
 				_draw_arrow(gizmo_pos_y, Color.GREEN)
 			if proj_back_local.length() > DISAPPEAR_THRESHOLD:
-				draw_line(Vector2.ZERO, proj_back_local, Color.BLUE)
+				draw_line(Vector2.ZERO, proj_back_local, Color.BLUE, back_axis_width)
 				_draw_arrow(gizmo_pos_z, Color.BLUE)
+			draw_circle(Vector2.ZERO, 0.4, Color.ORANGE)
+			if is_applying_gizmos:
+				continue
 
 			# Draw rotation curves
 			draw_polyline(gizmo_rot_x, Color.RED, GIZMO_WIDTH)
