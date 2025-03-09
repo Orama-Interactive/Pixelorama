@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2025-03-01 12:31\n"
+"PO-Revision-Date: 2025-03-09 00:18\n"
 
 msgid "OK"
 msgstr "예"
@@ -71,6 +71,10 @@ msgstr "창"
 
 msgid "Image"
 msgstr "이미지"
+
+#. Noun, refers to a Pixelorama project.
+msgid "Project"
+msgstr ""
 
 msgid "Effects"
 msgstr "효과"
