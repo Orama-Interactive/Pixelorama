@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-03-09 00:19\n"
+"PO-Revision-Date: 2025-03-09 10:24\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -74,7 +74,7 @@ msgstr "Gambar"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Proyek"
 
 msgid "Effects"
 msgstr "Efek"
@@ -599,7 +599,7 @@ msgid "Directory path and file name are not valid!"
 msgstr "Jalur direktori dan nama berkas tidak absah!"
 
 msgid "Exporting in progress..."
-msgstr "Ekspor sedang berlangsung..."
+msgstr "Sedang mengekspor..."
 
 msgid "Can't load file '%s'."
 msgstr "Tak bisa memuat '%s'."
