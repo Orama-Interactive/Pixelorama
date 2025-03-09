@@ -241,8 +241,8 @@ func selection_map_changed() -> void:
 		image_texture = ImageTexture.create_from_image(selection_map)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
 	Global.top_menu_container.edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
-	Global.top_menu_container.image_menu.set_item_disabled(
-		Global.ImageMenu.CROP_TO_SELECTION, !has_selection
+	Global.top_menu_container.project_menu.set_item_disabled(
+		Global.ProjectMenu.CROP_TO_SELECTION, !has_selection
 	)
 
 

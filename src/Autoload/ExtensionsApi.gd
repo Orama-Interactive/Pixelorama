@@ -177,7 +177,7 @@ class GeneralAPI:
 
 ## Gives ability to add/remove items from menus in the top bar.
 class MenuAPI:
-	enum { FILE, EDIT, SELECT, IMAGE, EFFECTS, VIEW, WINDOW, HELP }
+	enum { FILE, EDIT, SELECT, PROJECT, EFFECTS, VIEW, WINDOW, HELP }
 
 	# Menu methods
 	func _get_popup_menu(menu_type: int) -> PopupMenu:
@@ -188,8 +188,8 @@ class MenuAPI:
 				return Global.top_menu_container.edit_menu
 			SELECT:
 				return Global.top_menu_container.select_menu
-			IMAGE:
-				return Global.top_menu_container.image_menu
+			PROJECT:
+				return Global.top_menu_container.project_menu
 			EFFECTS:
 				return Global.top_menu_container.effects_menu
 			VIEW:

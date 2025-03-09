@@ -61,7 +61,7 @@ var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 @onready var file_menu := $MarginContainer/HBoxContainer/MenuBar/File as PopupMenu
 @onready var edit_menu := $MarginContainer/HBoxContainer/MenuBar/Edit as PopupMenu
 @onready var select_menu := $MarginContainer/HBoxContainer/MenuBar/Select as PopupMenu
-@onready var image_menu := $MarginContainer/HBoxContainer/MenuBar/Image as PopupMenu
+@onready var project_menu := $MarginContainer/HBoxContainer/MenuBar/Project as PopupMenu
 @onready var effects_menu := $MarginContainer/HBoxContainer/MenuBar/Effects as PopupMenu
 @onready var view_menu := $MarginContainer/HBoxContainer/MenuBar/View as PopupMenu
 @onready var window_menu := $MarginContainer/HBoxContainer/MenuBar/Window as PopupMenu
@@ -109,7 +109,7 @@ func _ready() -> void:
 	_setup_edit_menu()
 	_setup_view_menu()
 	_setup_window_menu()
-	_setup_image_menu()
+	_setup_project_menu()
 	_setup_effects_menu()
 	_setup_select_menu()
 	_setup_help_menu()
@@ -124,7 +124,7 @@ func _input(event: InputEvent) -> void:
 		file_menu.activate_item_by_event(event)
 		edit_menu.activate_item_by_event(event)
 		select_menu.activate_item_by_event(event)
-		image_menu.activate_item_by_event(event)
+		project_menu.activate_item_by_event(event)
 		effects_menu.activate_item_by_event(event)
 		view_menu.activate_item_by_event(event)
 		window_menu.activate_item_by_event(event)
@@ -429,9 +429,9 @@ func populate_layouts_submenu() -> void:
 	layouts_submenu.add_item(tr("Reset %s") % "Default")
 
 
-func _setup_image_menu() -> void:
-	# Order as in Global.ImageMenu enum
-	var image_menu_items := {
+func _setup_project_menu() -> void:
+	# Order as in Global.ProjectMenu enum
+	var project_menu_items := {
 		"Project Properties": "project_properties",
 		"Color Mode": "",
 		"Resize Canvas": "resize_canvas",
@@ -439,14 +439,14 @@ func _setup_image_menu() -> void:
 		"Crop to Selection": "crop_to_selection",
 		"Crop to Content": "crop_to_content",
 	}
-	for i in image_menu_items.size():
-		var item: String = image_menu_items.keys()[i]
+	for i in project_menu_items.size():
+		var item: String = project_menu_items.keys()[i]
 		if item == "Color Mode":
 			_setup_color_mode_submenu(item)
 		else:
-			_set_menu_shortcut(image_menu_items[item], image_menu, i, item)
-	image_menu.set_item_disabled(Global.ImageMenu.CROP_TO_SELECTION, true)
-	image_menu.id_pressed.connect(image_menu_id_pressed)
+			_set_menu_shortcut(project_menu_items[item], project_menu, i, item)
+	project_menu.set_item_disabled(Global.ProjectMenu.CROP_TO_SELECTION, true)
+	project_menu.id_pressed.connect(project_menu_id_pressed)
 
 
 func _setup_color_mode_submenu(item: String) -> void:
@@ -456,8 +456,8 @@ func _setup_color_mode_submenu(item: String) -> void:
 	color_mode_submenu.add_radio_check_item("Indexed", ColorModes.INDEXED)
 
 	color_mode_submenu.id_pressed.connect(_color_mode_submenu_id_pressed)
-	image_menu.add_child(color_mode_submenu)
-	image_menu.add_submenu_item(item, color_mode_submenu.get_name())
+	project_menu.add_child(color_mode_submenu)
+	project_menu.add_submenu_item(item, color_mode_submenu.get_name())
 
 
 func _setup_effects_menu() -> void:
@@ -1044,20 +1044,20 @@ func _toggle_fullscreen() -> void:
 	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, is_fullscreen)
 
 
-func image_menu_id_pressed(id: int) -> void:
+func project_menu_id_pressed(id: int) -> void:
 	match id:
-		Global.ImageMenu.PROJECT_PROPERTIES:
+		Global.ProjectMenu.PROJECT_PROPERTIES:
 			project_properties_dialog.popup()
-		Global.ImageMenu.SCALE_IMAGE:
+		Global.ProjectMenu.SCALE_IMAGE:
 			scale_image_dialog.popup()
-		Global.ImageMenu.CROP_TO_SELECTION:
+		Global.ProjectMenu.CROP_TO_SELECTION:
 			DrawingAlgos.crop_to_selection()
-		Global.ImageMenu.CROP_TO_CONTENT:
+		Global.ProjectMenu.CROP_TO_CONTENT:
 			DrawingAlgos.crop_to_content()
-		Global.ImageMenu.RESIZE_CANVAS:
+		Global.ProjectMenu.RESIZE_CANVAS:
 			resize_canvas_dialog.popup()
 		_:
-			_handle_metadata(id, image_menu)
+			_handle_metadata(id, project_menu)
 
 
 func effects_menu_id_pressed(id: int) -> void:

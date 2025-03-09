@@ -33,7 +33,7 @@ flat = true
 
 [node name="Select" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
 
-[node name="Image" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Project" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
 
 [node name="Effects" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
 
@@ -142,6 +142,7 @@ size_flags_horizontal = 3
 selected = 0
 item_count = 1
 popup/item_0/text = "Current layout"
+popup/item_0/id = 0
 
 [node name="DeleteLayoutConfirmation" type="ConfirmationDialog" parent="."]
 auto_translate_mode = 1

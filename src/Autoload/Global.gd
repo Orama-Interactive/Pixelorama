@@ -57,7 +57,7 @@ enum ViewMenu {
 ## Enumeration of items present in the Window Menu.
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
 ## Enumeration of items present in the Image Menu.
-enum ImageMenu {
+enum ProjectMenu {
 	PROJECT_PROPERTIES,
 	COLOR_MODE,
 	RESIZE_CANVAS,
