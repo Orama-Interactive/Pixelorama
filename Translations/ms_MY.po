@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-03-09 00:19\n"
+"PO-Revision-Date: 2025-03-09 10:24\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -74,7 +74,7 @@ msgstr "Gambar"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projek"
 
 msgid "Effects"
 msgstr "Kesan"
@@ -166,7 +166,7 @@ msgid "Move to Trash"
 msgstr "Ke Tong Sampah"
 
 msgid "New Brush"
-msgstr "Berus Baharu"
+msgstr "Berus Baru"
 
 msgid "Scale Image"
 msgstr "Skalakan imej"
@@ -510,16 +510,16 @@ msgid "New reference image"
 msgstr "Imej rujukan baru"
 
 msgid "New palette"
-msgstr ""
+msgstr "Palet baru"
 
 msgid "New brush"
-msgstr ""
+msgstr "Berus baru"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Corak baru"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Bingkai mendatar:"
 
 msgid "Vertical frames:"
 msgstr "Bingkai menegak:"
@@ -598,7 +598,7 @@ msgid "Directory path and file name are not valid!"
 msgstr ""
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Tengah mengeksport..."
 
 msgid "Can't load file '%s'."
 msgstr "Tak boleh memuat '%s'."
@@ -620,164 +620,164 @@ msgid "Frames:"
 msgstr "Bingkai:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Semua Bingkai"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Lembaran sprite"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animasi"
 
 msgid "Preview:"
 msgstr "Pralihat:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Bingkai:"
 
 msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr ""
+msgstr "Cari"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Ubah saiz:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Mutu:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Batalkan Eksport"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Makluman!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Pilih Folder Semasa"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Buka direktori"
 
 msgid "Background:"
-msgstr ""
+msgstr "Latar belakang:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Bingkai yang dipilih"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Lapisan:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Lapisan terlihat"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Lapisan yang dipilih"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Lapisan piksel:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Lapisan kumpulan:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Lapisan 3D:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Arah:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Ke depan"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Ke belakang"
 
 msgid "Ping-Pong"
 msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Lajur"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Lajur:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Baris"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Baris:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Teg mengikut lajur"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "Teg mengikut baris"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Saiz semasa eksport:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Simpan Fail"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Ke folder sebelumnya."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Ke folder seterusnya."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Ke direktori utama."
 
 msgid "Path:"
-msgstr ""
+msgstr "Laluan:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Muat semula fail."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Mentogolkan fail tersembunyi."
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Direktori & Fail:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Buat Folder"
 
 msgid "File:"
-msgstr ""
+msgstr "Fail:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Semua Fail"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Sambungan Berkaitan"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Projek Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Imej PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Imej BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Imej Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
@@ -919,28 +919,28 @@ msgid "Color:"
 msgstr ""
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Warna panduan:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Bahasa Sistem"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Skala paparan:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Font:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Saiz font:"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Malapkan antara muka pada popup"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Gunakan dialog fail biasa"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
@@ -948,7 +948,7 @@ msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Mod satu tetingkap"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
