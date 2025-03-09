@@ -5,6 +5,7 @@ const ITALIC_FLAG := 2
 const EMBOLDEN_AMOUNT := 0.6
 const ITALIC_AMOUNT := 0.2
 const ITALIC_TRANSFORM := Transform2D(Vector2(1.0, ITALIC_AMOUNT), Vector2(0.0, 1.0), Vector2.ZERO)
+const NEW_CANVAS_ITEM_MATERIAL := preload("res://assets/premult_alpha_canvas_item_mat.tres")
 
 var text_edit: TextToolEdit:
 	set(value):
@@ -98,6 +99,8 @@ func draw_move(pos: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
+	if is_instance_valid(text_edit):
+		text_edit.grab_focus()
 	super.draw_end(pos)
 
 
@@ -120,15 +123,16 @@ func text_to_pixels() -> void:
 	RenderingServer.viewport_set_disable_3d(vp, true)
 	RenderingServer.viewport_set_active(vp, true)
 	RenderingServer.viewport_set_transparent_background(vp, true)
+	RenderingServer.viewport_set_default_canvas_item_texture_filter(
+		vp, RenderingServer.CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+	)
 
 	var ci_rid := RenderingServer.canvas_item_create()
 	RenderingServer.viewport_set_canvas_transform(vp, canvas, Transform2D())
 	RenderingServer.canvas_item_set_parent(ci_rid, canvas)
 	var texture := RenderingServer.texture_2d_create(image)
-	RenderingServer.canvas_item_add_texture_rect(
-		ci_rid, Rect2(Vector2(0, 0), project.size), texture
-	)
-
+	RenderingServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2.ZERO, project.size), texture)
+	RenderingServer.canvas_item_set_material(ci_rid, NEW_CANVAS_ITEM_MATERIAL.get_rid())
 	var text := text_edit.text
 	var color := tool_slot.color
 	var font_ascent := font.get_ascent(text_size)

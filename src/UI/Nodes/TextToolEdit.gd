@@ -9,6 +9,7 @@ var _border_node := Control.new()
 
 
 func _ready() -> void:
+	grab_focus()
 	Global.camera.zoom_changed.connect(func(): _border_node.queue_redraw())
 	_border_node.draw.connect(_on_border_redraw)
 	_border_node.set_anchors_preset(Control.PRESET_FULL_RECT)
