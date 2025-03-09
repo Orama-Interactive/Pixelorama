@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-03-06 14:54\n"
+"PO-Revision-Date: 2025-03-09 00:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -71,6 +71,10 @@ msgstr "Fenster"
 
 msgid "Image"
 msgstr "Bild"
+
+#. Noun, refers to a Pixelorama project.
+msgid "Project"
+msgstr ""
 
 msgid "Effects"
 msgstr "Effekte"
