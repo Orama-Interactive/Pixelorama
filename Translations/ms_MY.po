@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-02-10 15:15\n"
+"PO-Revision-Date: 2025-03-09 11:28\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -71,6 +71,10 @@ msgstr "Tingkap"
 
 msgid "Image"
 msgstr "Gambar"
+
+#. Noun, refers to a Pixelorama project.
+msgid "Project"
+msgstr "Projek"
 
 msgid "Effects"
 msgstr "Kesan"
@@ -162,7 +166,7 @@ msgid "Move to Trash"
 msgstr "Ke Tong Sampah"
 
 msgid "New Brush"
-msgstr "Berus Baharu"
+msgstr "Berus Baru"
 
 msgid "Scale Image"
 msgstr "Skalakan imej"
@@ -238,6 +242,10 @@ msgstr "Kosongkan"
 msgid "Invert"
 msgstr "Songsangkan"
 
+#. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
+msgid "Select cel area"
+msgstr "Pilih kawasan cel"
+
 msgid "Modify"
 msgstr "Ubah suai"
 
@@ -276,7 +284,7 @@ msgid "Square"
 msgstr "Petak"
 
 msgid "Grayscale View"
-msgstr "Pandang Skala Kelabu"
+msgstr "Paparan Skala Kelabu"
 
 msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
@@ -356,6 +364,10 @@ msgstr "Susun atur"
 msgid "Moveable Panels"
 msgstr "Panel Boleh Pindah"
 
+#. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
+msgid "Make Floating"
+msgstr "Pisah Panel"
+
 msgid "Manage Layouts"
 msgstr "Urus Susun Atur"
 
@@ -388,9 +400,6 @@ msgstr "Susun atur semasa"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Adakah mahu memadamkan susun atur ini?"
-
-msgid "Auto"
-msgstr ""
 
 msgid "Widescreen"
 msgstr "Skrin lebar"
@@ -501,19 +510,19 @@ msgid "New reference image"
 msgstr "Imej rujukan baru"
 
 msgid "New palette"
-msgstr ""
+msgstr "Palet baru"
 
 msgid "New brush"
-msgstr ""
+msgstr "Berus baru"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Corak baru"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Bingkai mendatar:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Bingkai menegak:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
@@ -521,7 +530,7 @@ msgstr "Hiris Pintar"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Ambangan:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
@@ -543,7 +552,7 @@ msgid "Start frame:"
 msgstr "Bingkai awal:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Bingkai akhir:"
 
 msgid "At frame:"
 msgstr "Di bingkai:"
@@ -552,28 +561,28 @@ msgid "At layer:"
 msgstr "Di lapisan:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Jenis berus:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Berus fail"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Berus projek"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Berus rawak"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Simpan \"sprite\" kepada .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "Eksport \"sprite\" kepada .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "Eksport \"sprite\""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Fail wujud. Tulis ganti?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
@@ -583,190 +592,192 @@ msgid "Directory path is not valid!"
 msgstr ""
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Nama fail tidak sah!"
 
 msgid "Directory path and file name are not valid!"
 msgstr ""
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Tengah mengeksport..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Tak boleh memuat '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Tak boleh memuat '%s'.\n"
+"Kod ralat: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Tak boleh memuat '%s'.\n"
+"Ini bukan fail palet yang sah."
 
 msgid "Frame"
-msgstr ""
+msgstr "Bingkai"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Bingkai:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Semua Bingkai"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Lembaran sprite"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animasi"
 
 msgid "Preview:"
 msgstr "Pralihat:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Bingkai:"
 
 msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr ""
+msgstr "Cari"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Ubah saiz:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Mutu:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Batalkan Eksport"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Makluman!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Pilih Folder Semasa"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Buka direktori"
 
 msgid "Background:"
-msgstr ""
+msgstr "Latar belakang:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Bingkai yang dipilih"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Lapisan:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Lapisan terlihat"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Lapisan yang dipilih"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Lapisan piksel:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Lapisan kumpulan:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Lapisan 3D:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Arah:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Ke depan"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Ke belakang"
 
 msgid "Ping-Pong"
 msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Lajur"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Lajur:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Baris"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Baris:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Teg mengikut lajur"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "Teg mengikut baris"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Saiz semasa eksport:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Simpan Fail"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Ke folder sebelumnya."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Ke folder seterusnya."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Ke direktori utama."
 
 msgid "Path:"
-msgstr ""
+msgstr "Laluan:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Muat semula fail."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Mentogolkan fail tersembunyi."
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Direktori & Fail:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Buat Folder"
 
 msgid "File:"
-msgstr ""
+msgstr "Fail:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Semua Fail"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Sambungan Berkaitan"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Projek Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Imej PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Imej BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Imej Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
@@ -908,28 +919,28 @@ msgid "Color:"
 msgstr ""
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Warna panduan:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Bahasa Sistem"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Skala paparan:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Font:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Saiz font:"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Malapkan antara muka pada popup"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Gunakan dialog fail biasa"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
@@ -937,58 +948,58 @@ msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Mod satu tetingkap"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Semasa ini didayakan, subtetingkap Pixelorama akan dibenamkan ke tetingkap utama, jika tidak, setiap dialog akan pisah tersendiri."
 
 msgid "Dark"
-msgstr ""
+msgstr "Gelap"
 
 msgid "Gray"
-msgstr ""
+msgstr "Kelabu"
 
 msgid "Blue"
-msgstr ""
+msgstr "Biru"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamel"
 
 msgid "Light"
-msgstr ""
+msgstr "Terang"
 
 msgid "Purple"
-msgstr ""
+msgstr "Ungu"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Mawar"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Butang"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Warna ikon daripada:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Warna ikon:"
 
 msgid "Background"
-msgstr ""
+msgstr "Latar belakang"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Warna latar belakang daripada:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Warna latar belakang:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Mengongsi pilihan antara alat kiri dan kanan"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1002,54 +1013,54 @@ msgid "Right tool color:"
 msgstr ""
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Saiz butang alat:"
 
 msgid "Small"
-msgstr ""
+msgstr "Kecil"
 
 msgid "Big"
-msgstr ""
+msgstr "Besar"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Jejaskan pemilihan saja"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Cel yang dipilih"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Cel semasa"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Bingkai semasa"
 
 msgid "All frames"
-msgstr ""
+msgstr "Semua bingkai"
 
 msgid "All projects"
-msgstr ""
+msgstr "Semua projek"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Songsangkan warna"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Ubah Saluran Merah"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Ubah Saluran Hijau"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Ubah Saluran Biru"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Ubah Saluran Lutsinar"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturasi"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
-msgstr ""
+msgstr "Garis luar"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
@@ -1307,7 +1318,7 @@ msgstr ""
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Kod Sumber"
 
 msgid "Donate"
 msgstr ""
@@ -1324,8 +1335,21 @@ msgstr ""
 msgid "Translators"
 msgstr ""
 
+#. Refers to software licenses. https://en.wikipedia.org/wiki/Software_license
 msgid "Licenses"
 msgstr ""
+
+#. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
+msgid "License"
+msgstr "Lesen"
+
+#. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
+msgid "Godot Licenses"
+msgstr "Lesen Godot"
+
+#. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
+msgid "Third-party Licenses"
+msgstr "Lesen pihak ketiga"
 
 msgid "English"
 msgstr ""
@@ -1501,17 +1525,23 @@ msgstr ""
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Pindah\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zum\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Pendar\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Color Picker\n\n"
 "%s for left mouse button\n"
@@ -1520,8 +1550,13 @@ msgid "Color Picker\n\n"
 msgstr ""
 
 msgid "Crop\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Pangkas\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Mengubah saiz kanvas"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1538,7 +1573,9 @@ msgstr ""
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Timba\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
@@ -1558,9 +1595,17 @@ msgid "Curve Tool\n\n"
 "%s for right mouse button\n\n"
 "Draws bezier curves\n"
 "Press %s/%s to add new points\n"
+"Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Lukis Lengkung\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Melukis lengkung Bezier\n"
+"Tekan %s/%s untuk menambah titik\n"
+"Klik dua kali untuk selesaikan melukis\n"
+"Tekan dan seret untuk melengkungkan\n"
+"Tekan %s untuk alih keluar titik tambah terakhir"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1581,7 +1626,9 @@ msgstr ""
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Teks\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Rectangle"
 msgstr ""
@@ -1607,8 +1654,8 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr ""
 
 #. Tooltip of the screen color picker button found in the color picker panel.
-msgid "Pick a color from the screen."
-msgstr ""
+msgid "Pick a color from the application window."
+msgstr "Pilih warna daripada tetingkap aplikasi."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1887,6 +1934,30 @@ msgstr ""
 msgid "Explore Online"
 msgstr ""
 
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
+msgid "Store"
+msgstr "Kedai"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
+msgid "Search..."
+msgstr "Cari..."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
+msgid "Tags:"
+msgstr "Tag:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
+msgid "Download"
+msgstr "Muat turun"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
+msgid "Store Links:"
+msgstr "Pautan Kedai:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
+msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
+msgstr "Tampalkan pautan pemilik kedai (medan teks akan auto hilang jika belum tampal)"
+
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
 msgstr ""
@@ -1941,14 +2012,45 @@ msgstr ""
 msgid "Select a brush"
 msgstr ""
 
+#. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
+msgid "Default Brushes"
+msgstr "Berus Asali"
+
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
 msgstr ""
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Circle brush"
 msgstr ""
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Filled circle brush"
 msgstr ""
+
+#. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
+msgid "Project Brushes"
+msgstr "Berus Projek"
+
+#. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
+msgid "File Brushes"
+msgstr "Berus Fail"
+
+#. Found when selecting a brush. One of the file brushes that come with Pixelorama.
+msgid "Snow"
+msgstr "Salji"
+
+#. Found when selecting a brush. It's a section that shows file brushes that are randomized.
+msgid "Random File Brushes"
+msgstr "Berus Fail Rawak"
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Grass"
+msgstr "Rumput"
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Star"
+msgstr "Bintang"
 
 msgid "Custom brush"
 msgstr ""
@@ -1956,11 +2058,23 @@ msgstr ""
 msgid "Brush size:"
 msgstr ""
 
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
+msgid "Rotation options"
+msgstr "Pilihan putaran"
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
+msgid "Flip:"
+msgstr "Selak:"
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
+msgid "Rotate:"
+msgstr "Putar:"
+
 msgid "Overwrite color"
-msgstr ""
+msgstr "Tulis ganti warna"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Menulis ganti warna dan tak diadun. Pilihan ini hanya berkaitan bagi warna yang tidak legap sepenuhnya"
 
 msgid "Pixel Perfect"
 msgstr ""
@@ -1998,8 +2112,9 @@ msgstr ""
 msgid "Density:"
 msgstr ""
 
-msgid "Brush color from"
-msgstr ""
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
+msgid "Brush color from:"
+msgstr "Warna berus daripada:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
@@ -2052,17 +2167,40 @@ msgstr ""
 msgid "Lighten/Darken amount"
 msgstr ""
 
+#. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
+msgid "Color Replace"
+msgstr "Ganti Warna"
+
+msgid "Please select a color from the palette."
+msgstr "Harap pilih warna daripada palet."
+
+#. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
+msgid "Colors right:"
+msgstr "Warna ke kanan:"
+
 msgid "Pick for:"
-msgstr ""
+msgstr "Mod pilih:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Warna Kiri"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Warna Kanan"
+
+#. Found in the color picker tool options. Specifies what mode should be used for picking a color.
+msgid "Pick mode:"
+msgstr "Mod pilih:"
+
+#. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
+msgid "Top Color"
+msgstr "Warna Atas"
+
+#. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
+msgid "Current Layer"
+msgstr "Lapisan Semasa"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Mod:"
 
 msgid "Zoom in"
 msgstr ""
@@ -2276,11 +2414,17 @@ msgstr ""
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cels to"
-msgstr ""
+#. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
+msgid "Select pixels"
+msgstr "Pilih piksel"
 
-msgid "Unlink Cels"
-msgstr ""
+#. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
+msgid "Link cels to"
+msgstr "Paut cel kepada"
+
+#. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
+msgid "Unlink cels"
+msgstr "Nyahpaut cel"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
@@ -2397,6 +2541,10 @@ msgstr ""
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
 msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
+msgid "Erase"
+msgstr "Padam"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2616,10 +2764,10 @@ msgid "File autosaved"
 msgstr ""
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Fail gagal dibuka. Kod ralat %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Fail gagal disimpan. Kod ralat %s"
 
 #. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
 msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
@@ -2653,10 +2801,10 @@ msgid "Error"
 msgstr ""
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Ralat: Gunakan nama palet yang sah."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Fail palet tidak sah!"
 
 msgid "Edit Palette"
 msgstr ""
@@ -2771,6 +2919,9 @@ msgstr ""
 msgid "Lasso / Free Select Tool"
 msgstr ""
 
+msgid "Select by Drawing"
+msgstr "Pilih dgn Menggambar"
+
 msgid "Move"
 msgstr ""
 
@@ -2823,7 +2974,7 @@ msgid "Left Tool:"
 msgstr ""
 
 msgid "A tool assigned to the left mouse button"
-msgstr ""
+msgstr "Alat yang ditugaskan kepada butang kiri"
 
 msgid "Right Tool:"
 msgstr ""

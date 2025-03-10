@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-02-10 23:32\n"
+"PO-Revision-Date: 2025-03-10 10:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -71,6 +71,10 @@ msgstr "Finestra"
 
 msgid "Image"
 msgstr "Immagine"
+
+#. Noun, refers to a Pixelorama project.
+msgid "Project"
+msgstr "Progetto"
 
 msgid "Effects"
 msgstr "Effetti"
@@ -238,6 +242,10 @@ msgstr "Cancella"
 msgid "Invert"
 msgstr "Inverti"
 
+#. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
+msgid "Select cel area"
+msgstr "Selezione area della cella"
+
 msgid "Modify"
 msgstr "Modifica"
 
@@ -356,6 +364,10 @@ msgstr "Livelli"
 msgid "Moveable Panels"
 msgstr "Pannelli Movibili"
 
+#. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
+msgid "Make Floating"
+msgstr "Rendi Fluttuante"
+
 msgid "Manage Layouts"
 msgstr "Gestione dei livelli"
 
@@ -388,9 +400,6 @@ msgstr "Layout attuale"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Sei sicuro di voler eliminare questo layout?"
-
-msgid "Auto"
-msgstr "Auto"
 
 msgid "Widescreen"
 msgstr "Widescreen"
@@ -1329,8 +1338,21 @@ msgstr "Donatori"
 msgid "Translators"
 msgstr "Traduttori"
 
+#. Refers to software licenses. https://en.wikipedia.org/wiki/Software_license
 msgid "Licenses"
 msgstr "Licenze"
+
+#. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
+msgid "License"
+msgstr "Licenza"
+
+#. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
+msgid "Godot Licenses"
+msgstr "Licenze Godot"
+
+#. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
+msgid "Third-party Licenses"
+msgstr "Licenze Di Terze Parti"
 
 msgid "English"
 msgstr "Inglese"
@@ -1549,8 +1571,12 @@ msgstr "Selettore colore\n\n"
 "Seleziona un colore da un pixel dello sprite"
 
 msgid "Crop\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
 "Resize the canvas"
 msgstr "Ritaglia\n\n"
+"%s per il tasto sinistro del mouse\n"
+"%s per il pulsante destro del mouse\n\n"
 "Ridimensiona la superficie"
 
 msgid "Pencil\n\n"
@@ -1603,13 +1629,14 @@ msgid "Curve Tool\n\n"
 "%s for right mouse button\n\n"
 "Draws bezier curves\n"
 "Press %s/%s to add new points\n"
+"Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
 msgstr "Strumento curva\n\n"
 "%s per il pulsante sinistro del mouse\n"
 "%s per il pulsante destro del mouse\n\n"
 "Disegna curve bezier\n"
-"Premi e trascina per controllare la curvatura\n"
+"Premi %s %s e trascina per controllare la curvatura\n"
 "Premi e trascina per curvare\n"
 "Premi %s per rimuovere l'ultimo punto aggiunto"
 
@@ -1670,8 +1697,8 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Resetta i colori al loro stato originale (nero per sinistra, bianco per destra)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
-msgid "Pick a color from the screen."
-msgstr "Scegli un colore dallo schermo."
+msgid "Pick a color from the application window."
+msgstr "Scegli un colore dalla finestra dell' applicazione."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1950,6 +1977,30 @@ msgstr "Apri Cartella"
 msgid "Explore Online"
 msgstr "Esplora Online"
 
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
+msgid "Store"
+msgstr "Negozio"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
+msgid "Search..."
+msgstr "Cerca..."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
+msgid "Tags:"
+msgstr "Etichette:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
+msgid "Download"
+msgstr "Scarica"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
+msgid "Store Links:"
+msgstr "Link Negozio:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
+msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
+msgstr "Incolla il link del negozio, dato dal proprietario del negozio (verrà automaticamente rimosso se lasciato vuoto)"
+
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
 msgstr "Sei sicuro di voler abilitare questa estensione? Assicurati di abilitare solo le estensioni da fonti di cui ti fidi."
@@ -2004,20 +2055,63 @@ msgstr "Pennello:"
 msgid "Select a brush"
 msgstr "Seleziona un pennello"
 
+#. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
+msgid "Default Brushes"
+msgstr "Pennelli Predefiniti"
+
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
 msgstr "Pennello pixel"
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Circle brush"
 msgstr "Pennello cerchio"
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Filled circle brush"
 msgstr "Pennello di cerchio riempito"
+
+#. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
+msgid "Project Brushes"
+msgstr "Pennelli Progetto"
+
+#. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
+msgid "File Brushes"
+msgstr "File Pennelli"
+
+#. Found when selecting a brush. One of the file brushes that come with Pixelorama.
+msgid "Snow"
+msgstr "Neve"
+
+#. Found when selecting a brush. It's a section that shows file brushes that are randomized.
+msgid "Random File Brushes"
+msgstr "File Pennelli Casuali"
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Grass"
+msgstr "Erba"
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Star"
+msgstr "Stella"
 
 msgid "Custom brush"
 msgstr "Pennello personalizzato"
 
 msgid "Brush size:"
 msgstr "Dimensione del pennello:"
+
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
+msgid "Rotation options"
+msgstr "Opzioni rotazione"
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
+msgid "Flip:"
+msgstr "Capovolgi:"
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
+msgid "Rotate:"
+msgstr "Ruota:"
 
 msgid "Overwrite color"
 msgstr "Sovrascrivi colore"
@@ -2062,8 +2156,9 @@ msgstr "Riempie la forma disegnata con il colore, invece di disegnare una forma 
 msgid "Density:"
 msgstr "Densità:"
 
-msgid "Brush color from"
-msgstr "Colore del pennello da"
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
+msgid "Brush color from:"
+msgstr "Colore del pennello da:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Colore dal pennello stesso, 100: il colore attualmente selezionato"
@@ -2116,6 +2211,17 @@ msgstr "Quantità:"
 msgid "Lighten/Darken amount"
 msgstr "Quantità di Schiarimento/Scurimento"
 
+#. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
+msgid "Color Replace"
+msgstr "Sostituisci Colore"
+
+msgid "Please select a color from the palette."
+msgstr "Selezionare un colore dalla tavolozza."
+
+#. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
+msgid "Colors right:"
+msgstr "Colori a destra:"
+
 msgid "Pick for:"
 msgstr "Scegli per:"
 
@@ -2124,6 +2230,18 @@ msgstr "Colore sinistro"
 
 msgid "Right Color"
 msgstr "Colore destro"
+
+#. Found in the color picker tool options. Specifies what mode should be used for picking a color.
+msgid "Pick mode:"
+msgstr "Modalità di selezione:"
+
+#. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
+msgid "Top Color"
+msgstr "Colore in Alto"
+
+#. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
+msgid "Current Layer"
+msgstr "Livello Attuale"
 
 msgid "Mode:"
 msgstr "Modalità:"
@@ -2341,10 +2459,16 @@ msgstr "Muovi a destra"
 msgid "Add Frame Tag"
 msgstr "Aggiungi tag Frame"
 
-msgid "Link Cels to"
-msgstr "Collega le celle a"
+#. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
+msgid "Select pixels"
+msgstr "Seleziona pixel"
 
-msgid "Unlink Cels"
+#. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
+msgid "Link cels to"
+msgstr "Collega celle a"
+
+#. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
+msgid "Unlink cels"
 msgstr "Scollega celle"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
@@ -2462,6 +2586,10 @@ msgstr "Pass through"
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
 msgstr "Normale"
+
+#. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
+msgid "Erase"
+msgstr "Cancella"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2836,6 +2964,9 @@ msgstr "Bacchetta Magica"
 
 msgid "Lasso / Free Select Tool"
 msgstr "Lasso / Strumento di selezione libera"
+
+msgid "Select by Drawing"
+msgstr "Seleziona per Disegno"
 
 msgid "Move"
 msgstr "Muovi"
