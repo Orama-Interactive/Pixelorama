@@ -279,9 +279,11 @@ func process_animation(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
 	for frame in frames:
 		if split_layers:
-			for cel in frame.cels:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				var layer := project.layers[i]
 				var image := Image.new()
-				image.copy_from(cel.get_image())
+				image.copy_from(layer.display_effects(cel))
 				var duration := frame.get_duration_in_seconds(project.fps)
 				processed_images.append(
 					ProcessedImage.new(image, project.frames.find(frame), duration)
