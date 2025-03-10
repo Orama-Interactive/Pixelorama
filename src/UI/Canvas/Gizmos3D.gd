@@ -114,9 +114,10 @@ func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
 		var back := object3d.position + object3d.transform.basis.z.normalized()
 		var front := object3d.position - object3d.transform.basis.z.normalized()
 
-		right_axis_width = lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - right).z) / 2.0)
-		up_axis_width = lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - up).z) / 2.0)
-		back_axis_width = lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - back).z) / 2.0)
+		var camera_right = camera.transform.basis.x.normalized()
+		right_axis_width = lerpf(0.5, 0.1, (1 + (camera_right - right).z) / 2.0)
+		up_axis_width = lerpf(0.5, 0.1, (1 + (camera_right - up).z) / 2.0)
+		back_axis_width = lerpf(0.5, 0.1, (1 + (camera_right - back).z) / 2.0)
 
 		var proj_right := object3d.camera.unproject_position(right)
 		var proj_up := object3d.camera.unproject_position(up)
