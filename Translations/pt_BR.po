@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-03-09 00:19\n"
+"PO-Revision-Date: 2025-03-11 18:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,7 +74,7 @@ msgstr "Imagem"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projeto"
 
 msgid "Effects"
 msgstr "Efeitos"
@@ -244,7 +244,7 @@ msgstr "Inverter"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Selecionar área do cel"
 
 msgid "Modify"
 msgstr "Modificar"
@@ -1344,15 +1344,15 @@ msgstr "Licenças"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "Licença"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
-msgstr ""
+msgstr "Licenças da Godot"
 
 #. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
 msgid "Third-party Licenses"
-msgstr ""
+msgstr "Licenças de terceiros"
 
 msgid "English"
 msgstr "Inglês"
