@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-03-09 00:18\n"
+"PO-Revision-Date: 2025-03-11 00:31\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -74,7 +74,7 @@ msgstr "Εικόνα"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Έργο"
 
 msgid "Effects"
 msgstr "Εφέ"
@@ -244,7 +244,7 @@ msgstr "Αντιστροφή"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Επιλέξτε περιοχή cel"
 
 msgid "Modify"
 msgstr "Τροποποίηση"
@@ -1344,15 +1344,15 @@ msgstr "Άδειες"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "Άδεια"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
-msgstr ""
+msgstr "Άδειες Godot"
 
 #. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
 msgid "Third-party Licenses"
-msgstr ""
+msgstr "Άδειες τρίτων"
 
 msgid "English"
 msgstr "Αγγλικά"
@@ -1631,7 +1631,14 @@ msgid "Curve Tool\n\n"
 "Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Εργαλείο καμπύλης\n\n"
+"%s για το αριστερό πλήκτρο του ποντικιού\n"
+"%s για το δεξί πλήκτρο του ποντικιού\n\n"
+"Ζωγραφίζει καμπύλες μπεζιέ\n"
+"Πατήστε το %s/%s για να προσθέσετε νέα σημεία\n"
+"Διπλό κλικ για να ολοκληρωθεί ο σχεδιασμός της καμπύλης\n"
+"Πατήστε και σύρετε για να ελέγξετε την καμπυλότητα\n"
+"Πατήστε το %s για να διαγράψετε το τελευταίο σημείο"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -2454,15 +2461,15 @@ msgstr "Προσθήκη Ετικέτας Καρέ"
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "Επιλογή εικονοστοιχείων"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "Σύνδεση cels με"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr ""
+msgstr "Αποσύνδεση cels"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
