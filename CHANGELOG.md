@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.1] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Spencer Beckwith ([@spencerjbeckwith](https://github.com/spencerjbeckwith)), [@myyc](https://github.com/myyc)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Spencer Beckwith ([@spencerjbeckwith](https://github.com/spencerjbeckwith)), [@myyc](https://github.com/myyc),  João Vitor ([@ dev-joaovitor](https://github.com/dev-joaovitor))
 
-Built using Godot 4.3
+Built using Godot 4.4
 
 ### Added
 - Tilemap layers have arrived! Tilemap layers allow artists to create tiles, and easily preview and dynamically modify them within Pixelorama. [#1146](https://github.com/Orama-Interactive/Pixelorama/pull/1146)
@@ -25,6 +25,7 @@ Built using Godot 4.3
 - Overhauled the gradient edit widget's UI and added options such as reverse and evenly distribute points, and gradient presets.
 - Users can now color code their layers in the timeline.
 - A new "Select cel area" option has been added to the Selection menu that makes a rectangular selection around the content of the active cel, and it is mapped to <kbd>Control + T</kbd> by default.
+- Added a "Select pixels" option in the right click popup menu button of cel buttons
 - Added a shortcut to swap tools, <kbd>Shift + X</kbd> by default. [#1173](https://github.com/Orama-Interactive/Pixelorama/pull/1173)
 - Added <kbd>V</kbd> as the default shortcut for the crop tool.
 - A "Show Reference Images" option has been added to the View menu, allowing quick and easy reference image toggling.
@@ -33,6 +34,7 @@ Built using Godot 4.3
 ### Changed
 - The Manage Layouts dialog has been replaced by new items in the Layouts submenu, that are responsible for adding and deleting layouts.
 - The default shortcuts of the Move tool and the Pan tool have been changed to <kbd>M</kbd> and <kbd>A</kbd> respectively.
+- The "Image" menu has been renamed to "Project". This name should be more accurate, since this menu has options that affect the entire project.
 - Simplified the change layer automatically shortcut to just <kbd>Control + Alt</kbd>.
 - The image and layer effects have been organized into subcategories.
 - Layer buttons in the timeline now have a small icon on their right side that denotes their type, such as pixel layers, group layers, 3D layers, tilemap layers and audio layers.
@@ -42,9 +44,12 @@ Built using Godot 4.3
 - System font names are now sorted by alphabetical order.
 - The red, green, blue and alpha buttons in invert and desaturate layer effects have been made into "RGBA" buttons instead of checkboxes, just like they are in their image effect counterparts.
 - "Tile Mode" under the Selection menu has been renamed to "Wrap Strokes". This does not affect the "Tile Mode" option in the View menu. [#1150](https://github.com/Orama-Interactive/Pixelorama/pull/1150)
+- Improved the look of 3D object gizmos. [#1194](https://github.com/Orama-Interactive/Pixelorama/pull/1194)
 - Re-organized the licenses in the About dialog. There are now three license categories, the Pixelorama license, the Godot licenses and the third-party licenses.
 
 ### Fixed
+- The text is no longer blurry and hard to read of menus and dialog windows, if the display scale is set to anything but 100%. This was fixed due to the update to Godot 4.4. [#1065](https://github.com/Orama-Interactive/Pixelorama/issues/1065)
+- Saving pxo files should no longer freeze the application on GNOME, when using native file dialogs. This was fixed due to the update to Godot 4.4. [#1115](https://github.com/Orama-Interactive/Pixelorama/issues/1115)
 - Fixed crash when Pixelorama starts without a palette.
 - Undo/redo now works again when the cursor is hovering over the timeline.
 - The first frame is no longer exported twice when using ping-pong loop.
@@ -57,6 +62,8 @@ Built using Godot 4.3
 - Loading obj files as custom models in 3D layers that are not paired with .mtl files now works. [#1165](https://github.com/Orama-Interactive/Pixelorama/issues/1165)
 - Fixed a UI bug where the minimum size of the panels was not calculated correctly. [a28b526](https://github.com/Orama-Interactive/Pixelorama/commit/a28b526645d2cc085b0d3eca9d0756aee8a6f978)
 - Dockable panels are now properly sorted when toggling movable panels. [d7ba7fe](https://github.com/Orama-Interactive/Pixelorama/commit/d7ba7fe6fc4f2efb587234634020bf567474dba9)
+- Changing the name of pxo files when saving them in the Web version now works as intended. [faae464](https://github.com/Orama-Interactive/Pixelorama/commit/faae4648f0751b72cff0ff174c74cac2c499b994)
+- Pixelorama's window no longer spawns at the position of a monitor that has been disconnected. [#1189](https://github.com/Orama-Interactive/Pixelorama/pull/1189)
 - Fixed the resize canvas dialog's offset not resetting to zero on dialog popup. [f273918](https://github.com/Orama-Interactive/Pixelorama/commit/f273918368f568f860a8d08d28f5c9d9346461a4)
 - Fixed group layer blending when they contain invisible layers. [#1166](https://github.com/Orama-Interactive/Pixelorama/issues/1166)
 - Fixed color picker changing hue when modifying the saturation and value inside the color picker shape. [3f2245c](https://github.com/Orama-Interactive/Pixelorama/commit/3f2245cd9bc81b1a244ae394927aa074650a5d70)
@@ -65,9 +72,11 @@ Built using Godot 4.3
 - The lasso and polygon select tools now select all expected pixels without gaps, when the selection goes out of the canvas bounds.
 - Fixed bug where the child windows of floating windows appear behind them.
 - Fixed layouts overwriting the position info of panels, which were added by extensions. [#1172](https://github.com/Orama-Interactive/Pixelorama/pull/1172)
+- Image export with split layers no longer ignores layer effects. [#1193](https://github.com/Orama-Interactive/Pixelorama/issues/1193)
 - Fixed recorder label not updating when project is changed. [#1139](https://github.com/Orama-Interactive/Pixelorama/pull/1139)
 - The vertical scrollbar in the timeline is no longer visible when it's not needed.
 - Fixed a bug where the mouse cursor does not reset to default when hovering over a selection gizmo, and the selection gets cleared. [ead7593](https://github.com/Orama-Interactive/Pixelorama/commit/ead7593e7e4013238b9e935ee24d8cea0ad49b38)
+- Fixed a curve tool preview bug where the preview was changing when the cursor was moving, but the end point was staying the same. [d0fef33](https://github.com/Orama-Interactive/Pixelorama/commit/d0fef332315a856d3ef0384eddee89c6c61eb6e0)
 
 ## [v1.0.5] - 2024-11-18
 This update has been brought to you by the contributions of:
