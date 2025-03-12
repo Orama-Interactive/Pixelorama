@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-03-12 15:35\n"
+"PO-Revision-Date: 2025-03-12 17:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,7 +74,7 @@ msgstr "Изображение"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Проект"
 
 msgid "Effects"
 msgstr "Эффекты"
@@ -243,7 +243,7 @@ msgstr "Инвертировать"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Выберите область ячейки"
 
 msgid "Modify"
 msgstr "Изменить"
@@ -365,7 +365,7 @@ msgstr "Перемещаемые панели"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Сделать плавающим"
 
 msgid "Manage Layouts"
 msgstr "Управление слоями"
@@ -1346,11 +1346,11 @@ msgstr "Лицензия"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
-msgstr ""
+msgstr "Лицензии Godot"
 
 #. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
 msgid "Third-party Licenses"
-msgstr ""
+msgstr "Лицензии третьих сторон"
 
 msgid "English"
 msgstr "Английский"
@@ -1572,7 +1572,10 @@ msgid "Crop\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Обрезка\n\n"
+"%s для левой кнопки мыши\n"
+"%s для правой кнопки мыши\n\n"
+"Размер холста"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1627,7 +1630,12 @@ msgid "Curve Tool\n\n"
 "Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "%s - левая кнопка мыши\n"
+"%s - правая кнопка мыши\n\n"
+"Рисует кривые Безье\n"
+"Нажмите %s/%s для добавления новых точек\n"
+"Нажмите и перетащите для управления кривой\n"
+"Нажмите %s для удаления последней добавленной точки"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1687,7 +1695,7 @@ msgstr "Сбросить цвета по умолчанию (слева черн
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the application window."
-msgstr ""
+msgstr "Выберите цвет из окна приложения."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1968,27 +1976,27 @@ msgstr "Посмотреть онлайн"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
 msgid "Store"
-msgstr ""
+msgstr "Магазин"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 msgid "Search..."
-msgstr ""
+msgstr "Поиск..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 msgid "Tags:"
-msgstr ""
+msgstr "Теги:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 msgid "Download"
-msgstr ""
+msgstr "Скачать"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
 msgid "Store Links:"
-msgstr ""
+msgstr "Ссылки на Магазин:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr ""
+msgstr "Вставить ссылку на магазин, указанную владельцем магазина (будет автоматически удалено, если оставлено пустым)"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2046,7 +2054,7 @@ msgstr "Выбрать кисть"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "Кисти по умолчанию"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
@@ -2062,11 +2070,11 @@ msgstr "Заполненная круглая кисть"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "Кисти проекта"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Файлы кистей"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
@@ -2074,7 +2082,7 @@ msgstr "Снег"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Случайные файлы кистей"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
@@ -2092,15 +2100,15 @@ msgstr "Размер кисти:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "Настройки вращения"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "Отразить:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "Повернуть:"
 
 msgid "Overwrite color"
 msgstr "Заменить цвет"
@@ -2202,14 +2210,14 @@ msgstr "Интенсивность осветления/затемнения"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "Замена цвета"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Пожалуйста, выберите цвет из палитры."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Цвета справа:"
 
 msgid "Pick for:"
 msgstr "Выбрать для:"
@@ -2222,15 +2230,15 @@ msgstr "Цвет справа"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Режим выбора:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Верхний цвет"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Текущий слой"
 
 msgid "Mode:"
 msgstr "Режим:"
@@ -2450,7 +2458,7 @@ msgstr "Добавить тег кадра"
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "Выбрать пиксели"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
@@ -2578,7 +2586,7 @@ msgstr "Нормальный"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Стереть"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2955,7 +2963,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Лассо / произвольное выделение"
 
 msgid "Select by Drawing"
-msgstr ""
+msgstr "Выбрать по рисунку"
 
 msgid "Move"
 msgstr "Перемещение"
