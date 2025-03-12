@@ -723,7 +723,14 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 		)
 		resized.convert_rgb_to_indexed()
 		if cel is CelTileMap:
-			(cel as CelTileMap).serialize_undo_data_source_image(resized, redo_data, undo_data)
+			var tilemap_cel := cel as CelTileMap
+			var skip_tileset := (
+				offset_x % tilemap_cel.tileset.tile_size.x == 0
+				and offset_y % tilemap_cel.tileset.tile_size.y == 0
+			)
+			tilemap_cel.serialize_undo_data_source_image(
+				resized, redo_data, undo_data, skip_tileset
+			)
 		resized.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 

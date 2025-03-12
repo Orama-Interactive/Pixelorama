@@ -305,13 +305,17 @@ func serialize_undo_data() -> Dictionary:
 ## ([param source_image]) we want to store to the undo/redo stack
 ## is not the same as [member image]. This method also handles the resizing logic for undo/redo.
 func serialize_undo_data_source_image(
-	source_image: ImageExtended, redo_data: Dictionary, undo_data: Dictionary
+	source_image: ImageExtended,
+	redo_data: Dictionary,
+	undo_data: Dictionary,
+	skip_tileset_resize := false
 ) -> void:
 	undo_data[self] = serialize_undo_data()
 	if source_image.get_size() != image.get_size():
 		undo_data[self]["resize"] = true
 		_resize_cells(source_image.get_size())
-		tileset.handle_project_resize(self)
+		if not skip_tileset_resize:
+			tileset.handle_project_resize(self)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
