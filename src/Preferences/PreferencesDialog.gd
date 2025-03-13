@@ -15,6 +15,12 @@ var preferences: Array[Preference] = [
 		"dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed", true
 	),
 	Preference.new(
+		"show_notification_label",
+		"Interface/InterfaceOptions/ShowNotificationCheckBox",
+		"button_pressed",
+		true
+	),
+	Preference.new(
 		"use_native_file_dialogs",
 		"Interface/InterfaceOptions/NativeFileDialogs",
 		"button_pressed",

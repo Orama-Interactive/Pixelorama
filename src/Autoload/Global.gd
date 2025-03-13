@@ -232,6 +232,8 @@ var theme_font_index := 1:
 var font_size := 16
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
+## Found in Preferences. If [code]true[/code], notification labels appear.
+var show_notification_label := true
 ## Found in Preferences. If [code]true[/code], the native file dialogs of the
 ## operating system are being used, instead of Godot's FileDialog node.
 var use_native_file_dialogs := false:
@@ -947,6 +949,8 @@ func _initialize_keychain() -> void:
 
 ## Generates an animated notification label showing [param text].
 func notification_label(text: String) -> void:
+	if not show_notification_label:
+		return
 	var notif := NotificationLabel.new()
 	notif.text = tr(text)
 	notif.position = main_viewport.global_position

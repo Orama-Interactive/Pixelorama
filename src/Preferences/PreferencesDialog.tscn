@@ -228,6 +228,18 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
+[node name="ShowNotificationLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Show notification labels"
+
+[node name="ShowNotificationCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
 [node name="NativeFileDialogsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["DesktopOnly", "NoSandbox"]]
 layout_mode = 2
 size_flags_horizontal = 3
