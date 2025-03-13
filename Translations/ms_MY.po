@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-03-13 16:38\n"
+"PO-Revision-Date: 2025-03-13 21:13\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -940,7 +940,7 @@ msgstr "Malapkan antara muka pada popup"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
-msgstr ""
+msgstr "Paparkan label pemberitahuan"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -2766,7 +2766,7 @@ msgstr ""
 
 #. A notification label that appears when the backup of the currently opened project gets saved.
 msgid "Backup saved"
-msgstr ""
+msgstr "Sandaran disimpan"
 
 msgid "File failed to open. Error code %s"
 msgstr "Fail gagal dibuka. Kod ralat %s"
