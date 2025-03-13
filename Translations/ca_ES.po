@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2025-03-13 19:05\n"
+"PO-Revision-Date: 2025-03-13 20:06\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -179,32 +179,32 @@ msgstr "Percentatge"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Mode del color:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Mode de color"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Indexat"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Retalla per la selecció"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Retalla segons el contingut"
 
 msgid "Resize Canvas"
 msgstr "Redimensionar llenç"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Desplaçar imatge"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Desplaçament:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
@@ -383,7 +383,7 @@ msgstr "Afegeix disposició"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Eliminar %s"
 
 msgid "Copy from"
 msgstr ""
