@@ -496,7 +496,7 @@ func save_pxo_file(
 		DirAccess.remove_absolute(path)
 
 	if autosave:
-		Global.notification_label("File autosaved")
+		Global.notification_label("Backup saved")
 	else:
 		# First remove backup then set current save path
 		if project.has_changed:

@@ -2725,7 +2725,8 @@ msgstr ""
 msgid "File saved"
 msgstr ""
 
-msgid "File autosaved"
+#. A notification label that appears when the backup of the currently opened project gets saved.
+msgid "Backup saved"
 msgstr ""
 
 msgid "File failed to open. Error code %s"
