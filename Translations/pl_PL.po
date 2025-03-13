@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-03-13 16:37\n"
+"PO-Revision-Date: 2025-03-13 17:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -940,7 +940,7 @@ msgstr "Przyciemnij interfejs, kiedy pojawia się okno dialogowe"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
-msgstr ""
+msgstr "Wyświetlaj etykiety powiadomień"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -2809,7 +2809,7 @@ msgstr "Plik został zapisany"
 
 #. A notification label that appears when the backup of the currently opened project gets saved.
 msgid "Backup saved"
-msgstr ""
+msgstr "Kopia zapasowa zapisana"
 
 msgid "File failed to open. Error code %s"
 msgstr "Nie udało się otworzyć pliku. Kod błędu %s"
