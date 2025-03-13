@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2025-03-13 16:36\n"
+"PO-Revision-Date: 2025-03-13 19:05\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -74,7 +74,7 @@ msgstr "Imatge"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projecte"
 
 msgid "Effects"
 msgstr "Efectes"
@@ -99,13 +99,15 @@ msgstr "Desa com a..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Incloure imatges barrejades"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Si activa, la imatge final barrejada serà guardada també en el PXO, per a cada fotograma.\n"
+"Això fa la imatge més gran i és útil per importar a programari de tercers o exportar per terminal. \n"
+"Llegir fitxers PXO a Pixelorama no necessita aquesta opció activada."
 
 msgid "Import"
 msgstr "Importar"
@@ -147,21 +149,21 @@ msgid "Paste"
 msgstr "Enganxar"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Enganxar al lloc"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Enganxar des del porta-retalls"
 
 msgid "Delete"
 msgstr "Eliminar"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Eliminar permanentment"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Moure a la paperera"
 
 msgid "New Brush"
 msgstr "Nou pinzell"
