@@ -17,6 +17,9 @@ var layer_indices: PackedInt32Array
 
 func _ready() -> void:
 	audio_file_dialog.use_native_dialog = Global.use_native_file_dialogs
+	for dialog_child in audio_file_dialog.find_children("", "Window", true, false):
+		if dialog_child is Window:
+			dialog_child.always_on_top = audio_file_dialog.always_on_top
 
 
 func _on_visibility_changed() -> void:
