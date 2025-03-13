@@ -539,11 +539,18 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 	var max_audio_duration := 0
 	var adelay_string := ""
 	for layer in project.get_all_audio_layers():
-		if layer.audio is AudioStreamMP3:
-			var temp_file_name := str(audio_layer_count + 1).pad_zeros(number_of_digits) + ".mp3"
+		if layer.audio is AudioStreamMP3 or layer.audio is AudioStreamWAV:
+			var temp_file_name := str(audio_layer_count + 1).pad_zeros(number_of_digits)
+			if layer.audio is AudioStreamMP3:
+				temp_file_name += ".mp3"
+			elif layer.audio is AudioStreamWAV:
+				temp_file_name += ".wav"
 			var temp_file_path := temp_path_real.path_join(temp_file_name)
-			var temp_audio_file := FileAccess.open(temp_file_path, FileAccess.WRITE)
-			temp_audio_file.store_buffer(layer.audio.data)
+			if layer.audio is AudioStreamMP3:
+				var temp_audio_file := FileAccess.open(temp_file_path, FileAccess.WRITE)
+				temp_audio_file.store_buffer(layer.audio.data)
+			elif layer.audio is AudioStreamWAV:
+				layer.audio.save_to_wav(temp_file_path)
 			ffmpeg_combine_audio.append("-i")
 			ffmpeg_combine_audio.append(temp_file_path)
 			var delay := floori(layer.playback_position * 1000)

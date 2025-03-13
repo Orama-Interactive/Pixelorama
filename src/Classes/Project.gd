@@ -380,6 +380,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						if saved_layer.get("audio_type", "") == "AudioStreamMP3":
 							stream = AudioStreamMP3.new()
 							stream.data = audio_data
+						elif saved_layer.get("audio_type", "") == "AudioStreamWAV":
+							stream = AudioStreamWAV.load_from_buffer(audio_data)
 						layer.audio = stream
 					layers.append(layer)
 					audio_layers += 1

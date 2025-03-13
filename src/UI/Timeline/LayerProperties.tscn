@@ -119,7 +119,7 @@ always_on_top = true
 ok_button_text = "Open"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.mp3 ; MP3 Audio")
+filters = PackedStringArray("*.mp3 ; MP3 Audio", "*.wav; WAV Audio")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]

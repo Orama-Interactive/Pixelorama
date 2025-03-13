@@ -53,7 +53,7 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
 		DirAccess.copy_absolute(file, new_path)
 		shader_copied.emit(new_path)
-	elif file_ext == "mp3":  # Audio file
+	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
 
 	else:  # Image files
@@ -473,6 +473,12 @@ func save_pxo_file(
 		if layer.audio is AudioStreamMP3:
 			zip_packer.start_file(audio_path)
 			zip_packer.write_file(layer.audio.data)
+			zip_packer.close_file()
+		elif layer.audio is AudioStreamWAV:
+			var tmp_wav := FileAccess.create_temp(FileAccess.READ, "tmp", "wav")
+			layer.audio.save_to_wav(tmp_wav.get_path())
+			zip_packer.start_file(audio_path)
+			zip_packer.write_file(tmp_wav.get_buffer(tmp_wav.get_length()))
 			zip_packer.close_file()
 	zip_packer.close()
 
@@ -941,8 +947,11 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 func open_audio_file(path: String) -> void:
 	var audio_stream: AudioStream
 	var file := FileAccess.open(path, FileAccess.READ)
-	audio_stream = AudioStreamMP3.new()
-	audio_stream.data = file.get_buffer(file.get_length())
+	if path.get_extension().to_lower() == "mp3":
+		audio_stream = AudioStreamMP3.new()
+		audio_stream.data = file.get_buffer(file.get_length())
+	elif path.get_extension().to_lower() == "wav":
+		audio_stream = AudioStreamWAV.load_from_buffer(file.get_buffer(file.get_length()))
 	if not is_instance_valid(audio_stream):
 		return
 	var project := Global.current_project

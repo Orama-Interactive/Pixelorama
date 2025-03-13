@@ -186,10 +186,13 @@ func _on_play_at_frame_slider_value_changed(value: float) -> void:
 
 func _on_audio_file_dialog_file_selected(path: String) -> void:
 	var audio_stream: AudioStream
-	if path.get_extension() == "mp3":
+	if path.to_lower().get_extension() == "mp3":
 		var file := FileAccess.open(path, FileAccess.READ)
 		audio_stream = AudioStreamMP3.new()
 		audio_stream.data = file.get_buffer(file.get_length())
+	elif path.to_lower().get_extension() == "wav":
+		var file := FileAccess.open(path, FileAccess.READ)
+		audio_stream = AudioStreamWAV.load_from_buffer(file.get_buffer(file.get_length()))
 	for layer_index in layer_indices:
 		var layer := Global.current_project.layers[layer_index]
 		if layer is AudioLayer:
