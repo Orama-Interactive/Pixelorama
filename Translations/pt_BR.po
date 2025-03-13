@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-03-13 16:38\n"
+"PO-Revision-Date: 2025-03-13 17:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,10 +25,10 @@ msgid "Save"
 msgstr "Salvar"
 
 msgid "Please Confirm..."
-msgstr "Por Favor Confirme..."
+msgstr "Por favor, confirme..."
 
 msgid "File Name:"
-msgstr "Nome do Arquivo:"
+msgstr "Nome do arquivo:"
 
 msgid "Project Name:"
 msgstr "Nome do projeto:"
@@ -941,7 +941,7 @@ msgstr "Escurecer a interface em um pop-up de diálogo"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
-msgstr ""
+msgstr "Mostrar rótulos de notificação"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -2813,7 +2813,7 @@ msgstr "Arquivo salvo"
 
 #. A notification label that appears when the backup of the currently opened project gets saved.
 msgid "Backup saved"
-msgstr ""
+msgstr "Backup salvo"
 
 msgid "File failed to open. Error code %s"
 msgstr "Arquivo falhou ao abrir. Código do erro %s"
