@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2025-03-09 00:18\n"
+"PO-Revision-Date: 2025-03-13 16:36\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -935,6 +935,10 @@ msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Atenua la interfície amb finestres emergents"
+
+#. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
+msgid "Show notification labels"
+msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -2786,8 +2790,9 @@ msgstr ""
 msgid "File saved"
 msgstr "Fitxer desat"
 
-msgid "File autosaved"
-msgstr "Fitxer desat automaticament"
+#. A notification label that appears when the backup of the currently opened project gets saved.
+msgid "Backup saved"
+msgstr ""
 
 msgid "File failed to open. Error code %s"
 msgstr ""
