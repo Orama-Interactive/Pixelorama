@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-02-10 09:23\n"
+"PO-Revision-Date: 2025-03-09 10:24\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -71,6 +71,10 @@ msgstr "Jendela"
 
 msgid "Image"
 msgstr "Gambar"
+
+#. Noun, refers to a Pixelorama project.
+msgid "Project"
+msgstr "Proyek"
 
 msgid "Effects"
 msgstr "Efek"
@@ -238,6 +242,10 @@ msgstr "Kosongkan"
 msgid "Invert"
 msgstr "Terbalikkan"
 
+#. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
+msgid "Select cel area"
+msgstr "Pilih area cel"
+
 msgid "Modify"
 msgstr "Ubah"
 
@@ -356,6 +364,10 @@ msgstr "Tata letak"
 msgid "Moveable Panels"
 msgstr "Panel Bisa Dipindah"
 
+#. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
+msgid "Make Floating"
+msgstr "Pisah Panel"
+
 msgid "Manage Layouts"
 msgstr "Atur Tata Letak"
 
@@ -384,13 +396,10 @@ msgstr "Ubah Nama Tata Letak"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr "Tata letak sekarang"
+msgstr "Tata letak ini"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Apakah yakin ingin menghapus tata letak ini?"
-
-msgid "Auto"
-msgstr "Otomatis"
 
 msgid "Widescreen"
 msgstr "Layar lebar"
@@ -590,7 +599,7 @@ msgid "Directory path and file name are not valid!"
 msgstr "Jalur direktori dan nama berkas tidak absah!"
 
 msgid "Exporting in progress..."
-msgstr "Ekspor sedang berlangsung..."
+msgstr "Sedang mengekspor..."
 
 msgid "Can't load file '%s'."
 msgstr "Tak bisa memuat '%s'."
@@ -711,7 +720,7 @@ msgstr "Tag sesuai kolom"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr "Tag sesuai barisan"
+msgstr "Tag sesuai baris"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
@@ -753,7 +762,7 @@ msgstr "Semua Berkas"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr "Semua Ekstensi"
+msgstr "Ekstensi Terkait"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
@@ -1305,7 +1314,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Dikembangkan oleh Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "©2019-dipersembahkan oleh Orama Interactive dan penyumbangsih"
+msgstr "©2019-kini; oleh Orama Interactive dan penyumbangsih"
 
 msgid "Website"
 msgstr "Situs web"
@@ -1329,8 +1338,21 @@ msgstr "Penyumbang"
 msgid "Translators"
 msgstr "Penerjemah"
 
+#. Refers to software licenses. https://en.wikipedia.org/wiki/Software_license
 msgid "Licenses"
 msgstr "Lisensi"
+
+#. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
+msgid "License"
+msgstr "Lisensi"
+
+#. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
+msgid "Godot Licenses"
+msgstr "Lisensi Godot"
+
+#. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
+msgid "Third-party Licenses"
+msgstr "Lisensi pihak ketiga"
 
 msgid "English"
 msgstr "Bhs. Inggris"
@@ -1514,7 +1536,7 @@ msgstr "Lasso / Alat Pemangkas\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Pilih sesuai M'gambar\n\n"
+msgstr "Pilih Menggambar\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan"
 
@@ -1549,9 +1571,13 @@ msgstr "Pemilih Warna\n\n"
 "Pilih warna dari piksel gambar sprite"
 
 msgid "Crop\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr "Potong\n\n"
-"Ubah besar kanvas"
+msgstr "Pangkas\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Mengubah ukuran kanvas"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1603,6 +1629,7 @@ msgid "Curve Tool\n\n"
 "%s for right mouse button\n\n"
 "Draws bezier curves\n"
 "Press %s/%s to add new points\n"
+"Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
 msgstr "Garis Lengkung\n\n"
@@ -1610,6 +1637,7 @@ msgstr "Garis Lengkung\n\n"
 "%s untuk tetikus kanan\n\n"
 "Menggaris lengkung Bezier\n"
 "Tekan %s/%s untuk menambah titik\n"
+"Pencet dua kali untuk sudahi menggaris\n"
 "Tekan dan seret untuk melengkungkan\n"
 "Tekan %s untuk menghapus titik tadi"
 
@@ -1670,8 +1698,8 @@ msgid "Reset the colors to their default state (black for left, white for right)
 msgstr "Kembalikan ke warna bawaan (hitam di kiri, putih di kanan)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
-msgid "Pick a color from the screen."
-msgstr "Ambil warna dari layar."
+msgid "Pick a color from the application window."
+msgstr "Pilih warna pada jendela aplikasi."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1900,7 +1928,7 @@ msgstr "Terus perbarui"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr "Jika opsi ini dicetik, aplikasi akan terus menyegarkan layar bahkan saat tidak. Menonaktifkan ini membantu mengurangi penggunaan CPU saat terbiar."
+msgstr "Jika opsi ini dicetik, aplikasi akan terus memuat ulang layar bahkan saat tidak. Menonaktifkan ini membantu mengurangi penggunaan CPU saat terbiar."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
@@ -1949,6 +1977,30 @@ msgstr "Buka Folder"
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
 msgid "Explore Online"
 msgstr "Cari di Daring"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
+msgid "Store"
+msgstr "Toko"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
+msgid "Search..."
+msgstr "Cari..."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
+msgid "Tags:"
+msgstr "Tag:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
+msgid "Download"
+msgstr "Unduh"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
+msgid "Store Links:"
+msgstr "Tautan Toko:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
+msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
+msgstr "Tempelkan tautan pemilik toko (kolom akan hilang otomatis jika belum tempel)"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2004,20 +2056,63 @@ msgstr "Kuas:"
 msgid "Select a brush"
 msgstr "Pilih kuas"
 
+#. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
+msgid "Default Brushes"
+msgstr "Kuas Bawaan"
+
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
 msgstr "Kuas piksel"
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Circle brush"
 msgstr "Kuas lingkaran"
 
+#. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Filled circle brush"
 msgstr "Kuas lingkaran berisi"
+
+#. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
+msgid "Project Brushes"
+msgstr "Kuas Proyek"
+
+#. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
+msgid "File Brushes"
+msgstr "Kuas Berkas"
+
+#. Found when selecting a brush. One of the file brushes that come with Pixelorama.
+msgid "Snow"
+msgstr "Salju"
+
+#. Found when selecting a brush. It's a section that shows file brushes that are randomized.
+msgid "Random File Brushes"
+msgstr "Kuas Berkas Acak"
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Grass"
+msgstr "Rumput"
+
+#. Found when selecting a brush. One of the random brushes that come with Pixelorama.
+msgid "Star"
+msgstr "Bintang"
 
 msgid "Custom brush"
 msgstr "Kuas kustom"
 
 msgid "Brush size:"
 msgstr "Ukuran kuas:"
+
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
+msgid "Rotation options"
+msgstr "Opsi putaran"
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
+msgid "Flip:"
+msgstr "Dibalik:"
+
+#. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
+msgid "Rotate:"
+msgstr "Putar:"
 
 msgid "Overwrite color"
 msgstr "Timpa warna"
@@ -2026,19 +2121,19 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "Warnanya ditimpa dan tak dicampur. Opsi ini hanya relevan bagi warna yang tidak sepenuhnya legap (opaque)"
 
 msgid "Pixel Perfect"
-msgstr "Pas Piksel"
+msgstr "Piksel Sempurna"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Pas Sesuai Piksel\n"
-"Membuat garis terlihat mulus dengan menghapus piksel tambahan di tepinya"
+msgstr "Piksel Sempurna\n"
+"Memuluskan garis dengan menghapus piksel tambahan di tepinya"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
 msgstr "Kuncikan alfa"
 
 msgid "Fill inside"
-msgstr "Warnai dalamnya"
+msgstr "Warnai isinya"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
@@ -2062,8 +2157,9 @@ msgstr "Mewarnai isi bentuk yang digambar dan tidak menggambar bentuk berongga"
 msgid "Density:"
 msgstr "Kerapatan:"
 
-msgid "Brush color from"
-msgstr "Warna kuas dari"
+#. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
+msgid "Brush color from:"
+msgstr "Warna kuas dari:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Warna dari kuasnya sendiri, 100: Warna yang dipilih saat ini"
@@ -2099,7 +2195,7 @@ msgid "Offset"
 msgstr "Offset"
 
 msgid "Simple Shading"
-msgstr "Pembayangan Sederhana"
+msgstr "Pembayang Sederhana"
 
 msgid "Hue Shifting"
 msgstr "Pergeseran Rona"
@@ -2116,14 +2212,37 @@ msgstr "Jumlah:"
 msgid "Lighten/Darken amount"
 msgstr "Jumlah Terang/Gelap"
 
+#. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
+msgid "Color Replace"
+msgstr "Ganti Warna"
+
+msgid "Please select a color from the palette."
+msgstr "Mohon pilih warna dari palet."
+
+#. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
+msgid "Colors right:"
+msgstr "Warna ke kanan:"
+
 msgid "Pick for:"
-msgstr "Ambil untuk:"
+msgstr "Pilih untuk:"
 
 msgid "Left Color"
 msgstr "Warna Kiri"
 
 msgid "Right Color"
 msgstr "Warna Kanan"
+
+#. Found in the color picker tool options. Specifies what mode should be used for picking a color.
+msgid "Pick mode:"
+msgstr "Mode pilih:"
+
+#. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
+msgid "Top Color"
+msgstr "Warna Atas"
+
+#. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
+msgid "Current Layer"
+msgstr "Lapisan Saat Ini"
 
 msgid "Mode:"
 msgstr "Mode:"
@@ -2330,7 +2449,7 @@ msgid "Remove Frame"
 msgstr "Hapus Bingkai"
 
 msgid "Clone Frame"
-msgstr "Duplikatkan Bingkai"
+msgstr "Dobelkan Bingkai"
 
 msgid "Move Left"
 msgstr "Geser ke kiri"
@@ -2341,11 +2460,17 @@ msgstr "Geser ke kanan"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cels to"
-msgstr "Tautkan Cel ke"
+#. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
+msgid "Select pixels"
+msgstr "Pilih piksel"
 
-msgid "Unlink Cels"
-msgstr "Putuskan Cel"
+#. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
+msgid "Link cels to"
+msgstr "Tautkan cel ke"
+
+#. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
+msgid "Unlink cels"
+msgstr "Putuskan cel"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
@@ -2445,7 +2570,7 @@ msgstr "Geser lapisan ini ke bawah"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Clone current layer"
-msgstr "Duplikatkan lapisan ini"
+msgstr "Dobelkan lapisan ini"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Merge current layer with the one below"
@@ -2462,6 +2587,10 @@ msgstr "Pass through"
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
 msgstr "Normal"
+
+#. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
+msgid "Erase"
+msgstr "Hapus"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -2583,7 +2712,7 @@ msgid "Add a new palette"
 msgstr "Tambah palet baru"
 
 msgid "Edit currently selected palette"
-msgstr "Sunting palet yang sedang dipilih"
+msgstr "Sunting palet sedang dipilih"
 
 msgid "Choose a palette"
 msgstr "Pilih satu palet"
@@ -2701,7 +2830,7 @@ msgid "Import Palette"
 msgstr "Impor palet"
 
 msgid "Create Palette From Current Sprite"
-msgstr "Buat warna palet dari sprite saat ini"
+msgstr "Buat Palet dari Sprite Saat Ini"
 
 msgid "Palette Name:"
 msgstr "Nama palet:"
@@ -2836,6 +2965,9 @@ msgstr "Tongkat Ajaib"
 
 msgid "Lasso / Free Select Tool"
 msgstr "Lasso / Alat Pemangkas"
+
+msgid "Select by Drawing"
+msgstr "Pilih Menggambar"
 
 msgid "Move"
 msgstr "Pindah"
@@ -3272,7 +3404,7 @@ msgid "Frustum"
 msgstr "Frustum"
 
 msgid "Rotation:"
-msgstr "Perputaran:"
+msgstr "Putaran:"
 
 msgid "Scale:"
 msgstr "Skala:"
@@ -3595,7 +3727,7 @@ msgstr "Ubah petak pada kanvas."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr "Gambarkan petak"
+msgstr "Buatkan petak"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
