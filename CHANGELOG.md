@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.1] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Spencer Beckwith ([@spencerjbeckwith](https://github.com/spencerjbeckwith)), [@myyc](https://github.com/myyc),  João Vitor ([@ dev-joaovitor](https://github.com/dev-joaovitor))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Spencer Beckwith ([@spencerjbeckwith](https://github.com/spencerjbeckwith)), [@myyc](https://github.com/myyc), João Vitor ([@dev-joaovitor](https://github.com/dev-joaovitor))
 
 Built using Godot 4.4
 

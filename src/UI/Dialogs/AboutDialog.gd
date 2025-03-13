@@ -33,6 +33,7 @@ const AUTHORS: PackedStringArray = [
 	"Igor Santarek (jegor377)",
 	"Ivan Kruger (haythamnikolaidis)",
 	"Jeremy Behreandt (behreajj)",
+	"João Vitor (dev-joaovitor)",
 	"John Jerome Romero (Wishdream)",
 	"JumpJetAvocado",
 	"Kawan Weege (Dwahgon)",
