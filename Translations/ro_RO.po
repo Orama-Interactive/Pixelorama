@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-03-09 17:03\n"
+"PO-Revision-Date: 2025-03-14 11:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -936,6 +936,10 @@ msgstr "Dimensiunea fontului:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Întunecă interfața la apariția ferestrei de dialog"
+
+#. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
+msgid "Show notification labels"
+msgstr "Arată etichetele de notificare"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -2804,8 +2808,9 @@ msgstr "Deplasare ghidaj"
 msgid "File saved"
 msgstr "Fișier salvat"
 
-msgid "File autosaved"
-msgstr "Fișier autosalvat"
+#. A notification label that appears when the backup of the currently opened project gets saved.
+msgid "Backup saved"
+msgstr "Copie de rezervă salvată"
 
 msgid "File failed to open. Error code %s"
 msgstr "Fișierul nu a putut fi deschis. Cod de eroare %s"
