@@ -58,26 +58,24 @@ Pixelorama uses Godot 4.4, so you will need to have it in order to run the proje
 As of right now, most of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
 ## Features:
-- A variety of different tools to help you create, with the ability to dynamically map each one on the left and the right mouse buttons with a single click.
-- Animation support with a timeline composed of layers and frames, with onion skinning, frame tags and the ability to draw while the animation is playing.
-- Pixel perfect mode for perfect pixel lines.
-- Clipping masks.
-- Pre-made palettes as well as many palette importing options.
-- Multiple image manipulation effects.
-- Non-destructive and fully customizable layer effects, such as outline, gradient map, drop shadow and palettize.
-- A powerful drawing canvas with guides, a rectangular and an isometric grid, and tile mode for easier seamless pattern creation.
-- Autosave support, with data recovery in case of a software crash.
-- Comprehensive user interface with many customizability options.
-- Export to PNG and other image and video formats, as well as spritesheets, GIFs, animated PNGs etc.
-- Import spritesheets, multiple images as separate frames, as well as GIFs and videos.
-- Various rotation and scaling algorithms tailored for pixel art, such as [cleanEdge](http://torcado.com/cleanEdge/), OmniScale and rotxel.
-- 3D layers that allow you to bring 3D shapes and models into your 2D canvas.
-- A command line interface for automated file exporting.
-- Custom user data for projects, layers, frames, frame tags and cels, allowing you to attach metadata for game development.
-- Various free community-made extensions, such as tools that automatically convert your 2D pixels into 3D voxels.
-- Fully open source with free updates, forever!
-- Multi-language localization support! See our [Crowdin page](https://crowdin.com/project/pixelorama) for more details.
-
+- **Wide Range of Tools:** Customize your workflow by dynamically mapping tools to the left and right mouse buttons, making your creation process faster and more intuitive.
+- **Advanced Animation Support:** Create animations with a timeline composed of layers and frames, including features like onion skinning, audio synchronization, frame tags, and the ability to draw while the animation is playing.
+- **Pixel Art Optimized:** Perfect pixel lines, indexed mode, and algorithms like [cleanEdge](http://torcado.com/cleanEdge/), OmniScale, and rotxel for rotation and scaling tailored specifically to pixel art.
+- **Seamless Tilemap Creation:** Use Pixelorama's tilemap layers to create tiles for your games.
+- **Powerful Layer System:** Utilize clipping masks and non-destructive effects like outlines, gradient maps, drop shadows, and more. Perfect for experimenting with styles and compositions, as changes can be applied without altering your original artwork.
+- **Rich Palette Management:** Choose from pre-made palettes, import your own, or create custom palettes to suit your unique style.
+- **Comprehensive Image Manipulation:** Access multiple image manipulation effects for fine-tuning your artwork.
+- **Advanced Canvas Options:** Utilize guides, rectangular and isometric grids, and tile mode to ensure seamless pattern creation and precision.
+- **Automatic Backup:** Stay safe with auto-saved backups to recover your work in case of unexpected software crashes.
+- **Highly Customizable UI:** Tailor the interface to your needs for maximum efficiency and a smooth workflow.
+- **Versatile Export Options:** Export your creations in various formats such as PNG, GIF, animated PNG, and more. Export to spritesheets, images, and videos with ease.
+- **Powerful Import Options:** Import spritesheets, GIFs, videos, and multiple images as separate frames for easy editing.
+- **3D Layer Support:** Bring 3D models and shapes into your 2D canvas for additional creative possibilities.
+- **Command Line Automation:** Automate file exports using the command line interface for bulk exporting and streamlining workflows.
+- **Project Metadata:** Attach custom user data to layers, frames, and cels, making it easy to integrate with game development and other creative processes.
+- **Community-driven Extensions:** Benefit from free, community-made extensions, such as tools that convert 2D pixels into 3D voxels.
+- **Fully Open-Source & Free:** Pixelorama is open-source, free to use, and licensed under the MIT license—guaranteeing free updates forever.
+- **Multi-Language Support:** With localization support across various languages, Pixelorama is accessible to users around the world. See our [Crowdin page](https://crowdin.com/project/pixelorama) for more details.
 
 ## Special thanks to
 - All [Godot](https://github.com/godotengine/godot) contributors! Without Godot, Pixelorama would not exist.
