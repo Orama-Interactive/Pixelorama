@@ -60,21 +60,20 @@ As of right now, most of the code is written using GDScript, so the mono version
 ## Features:
 - **Wide Range of Tools:** Customize your workflow by dynamically mapping tools to the left and right mouse buttons, making your creation process faster and more intuitive.
 - **Advanced Animation Support:** Create animations with a timeline composed of layers and frames, including features like onion skinning, audio synchronization, frame tags, and the ability to draw while the animation is playing.
-- **Pixel Art Optimized:** Perfect pixel lines, indexed mode, and algorithms like [cleanEdge](http://torcado.com/cleanEdge/), OmniScale, and rotxel for rotation and scaling tailored specifically to pixel art.
+- **Pixel Art Focused:** Perfect pixel lines, indexed mode, and rotation and scaling algorithms tailored specifically to pixel art, like [cleanEdge](http://torcado.com/cleanEdge/), OmniScale, and rotxel.
 - **Seamless Tilemap Creation:** Use Pixelorama's tilemap layers to create tiles for your games.
-- **Powerful Layer System:** Utilize clipping masks and non-destructive effects like outlines, gradient maps, drop shadows, and more. Perfect for experimenting with styles and compositions, as changes can be applied without altering your original artwork.
-- **Rich Palette Management:** Choose from pre-made palettes, import your own, or create custom palettes to suit your unique style.
-- **Comprehensive Image Manipulation:** Access multiple image manipulation effects for fine-tuning your artwork.
-- **Advanced Canvas Options:** Utilize guides, rectangular and isometric grids, and tile mode to ensure seamless pattern creation and precision.
-- **Automatic Backup:** Stay safe with auto-saved backups to recover your work in case of unexpected software crashes.
+- **Powerful Layer System:** Utilize clipping masks and non-destructive visual effects like outlines, gradient maps, drop shadows, and more. Perfect for experimenting with styles and compositions, as changes can be applied without altering your original artwork.
+- **Palette Management:** Bring color into your canvas by choosing from pre-made palettes, importing your own, or creating custom ones inside the software to suit your unique style.
+- **Visual Effects:** Multiple image effects for fine-tuning your artwork.
+- **Advanced Canvas Options:** Utilize guides, rectangular and isometric grids, and tile mode to ensure seamless and precise pattern creation.
+- **Automatic Backups:** Stay safe with auto-saved backups to recover your work in case of unexpected software crashes.
 - **Highly Customizable UI:** Tailor the interface to your needs for maximum efficiency and a smooth workflow.
-- **Versatile Export Options:** Export your creations in various formats such as PNG, GIF, animated PNG, and more. Export to spritesheets, images, and videos with ease.
-- **Powerful Import Options:** Import spritesheets, GIFs, videos, and multiple images as separate frames for easy editing.
-- **3D Layer Support:** Bring 3D models and shapes into your 2D canvas for additional creative possibilities.
+- **Export & Import:** Support for various formats such as PNG, animated PNG, spritesheets, GIFs and even videos.
+- **3D Layer Support:** Break the barrier between dimensions by bringing 3D models and shapes into your 2D canvas for unlimited creative possibilities.
 - **Command Line Automation:** Automate file exports using the command line interface for bulk exporting and streamlining workflows.
 - **Project Metadata:** Attach custom user data to layers, frames, and cels, making it easy to integrate with game development and other creative processes.
-- **Community-driven Extensions:** Benefit from free, community-made extensions, such as tools that convert 2D pixels into 3D voxels.
-- **Fully Open-Source & Free:** Pixelorama is open-source, free to use, and licensed under the MIT license—guaranteeing free updates forever.
+- **Extension Support:** Benefit from free, community-made extensions, such as tools that convert your 2D pixels into 3D voxels.
+- **Fully Open-Source:** Pixelorama is open-source, licensed under the MIT license, guaranteeing free updates forever!
 - **Multi-Language Support:** With localization support across various languages, Pixelorama is accessible to users around the world. See our [Crowdin page](https://crowdin.com/project/pixelorama) for more details.
 
 ## Special thanks to
