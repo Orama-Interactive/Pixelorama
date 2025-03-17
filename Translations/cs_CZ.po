@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-03-17 00:34\n"
+"PO-Revision-Date: 2025-03-17 01:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,7 +74,7 @@ msgstr "Obrázek"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projekt"
 
 msgid "Effects"
 msgstr "Efekty"
@@ -279,7 +279,7 @@ msgid "Circle"
 msgstr "Kruh"
 
 msgid "Square"
-msgstr ""
+msgstr "Čtverec"
 
 msgid "Grayscale View"
 msgstr "Pohled s odstíny šedi"
@@ -478,7 +478,7 @@ msgstr "Importovat jako:"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
-msgstr ""
+msgstr "Aplikovat na vše"
 
 msgid "Recent projects"
 msgstr "Nedávné projekty"
@@ -644,7 +644,7 @@ msgstr "Změnit velikost:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Kvalita:"
 
 msgid "Cancel Export"
 msgstr "Zrušit export"
@@ -826,7 +826,7 @@ msgstr "Konstantní"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Barevný prostor"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -1080,11 +1080,11 @@ msgstr "Barva stínu:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Gaussovké rozmazání"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Druh rozmazání:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
@@ -1105,7 +1105,7 @@ msgid "Gradient Map"
 msgstr "Gradientová mapa"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Interpolace"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
@@ -1234,17 +1234,17 @@ msgid "Channel:"
 msgstr ""
 
 msgid "Red"
-msgstr ""
+msgstr "Červená"
 
 msgid "Green"
-msgstr ""
+msgstr "Zelená"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Hodnota"
 
 msgid "Presets"
-msgstr ""
+msgstr "Předvolby"
 
 msgid "Apply"
 msgstr "Použít"
@@ -1344,15 +1344,15 @@ msgstr "Licence"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "Licence"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
-msgstr ""
+msgstr "Godot licence"
 
 #. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
 msgid "Third-party Licenses"
-msgstr ""
+msgstr "Licence třetích stran"
 
 msgid "English"
 msgstr "Angličtina"
@@ -1929,7 +1929,7 @@ msgstr "Pokud povoleno, tak se může aplikační okno stát průhledným. Ovliv
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Použít atrapu zvukového ovladače"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1937,7 +1937,7 @@ msgstr "Renderer:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Specifikuje grafický ovladač pro vykreslení aplikace. GLES2 je vhodnější pro starší a pomalejší zařízení, ale neumožňuje použití některých funkcí dostupných pouze s GLES3."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
@@ -1973,15 +1973,15 @@ msgstr ""
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 msgid "Search..."
-msgstr ""
+msgstr "Hledat..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 msgid "Tags:"
-msgstr ""
+msgstr "Štítky:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 msgid "Download"
-msgstr ""
+msgstr "Stáhnout"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
 msgid "Store Links:"
@@ -2047,7 +2047,7 @@ msgstr "Vybrat štětec"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "Výchozí štětce"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
@@ -2063,27 +2063,27 @@ msgstr "Vyplněný kruhový štětec"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "Štětce z projektu"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Štětce ze souboru"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "Sníh"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Náhodné štětce ze souboru"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "Tráva"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "Hvězda"
 
 msgid "Custom brush"
 msgstr "Vlastní štětec"
@@ -2231,7 +2231,7 @@ msgstr ""
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Současná vrstva"
 
 msgid "Mode:"
 msgstr "Režim:"
@@ -2272,30 +2272,30 @@ msgstr "Průnik výběrů"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Styl:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Běžný"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Tučně"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Kurzíva"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Tučná kurzíva"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Vyhlazení"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Odstíny šedi"
 
 msgid "Mirroring"
 msgstr "Zrcadlení"
@@ -2336,10 +2336,10 @@ msgid "Go to the previous frame"
 msgstr "Přejít na předchozí snímek"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Přehrát animaci pozpátku"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Přehrát animaci vpřed"
 
 msgid "Go to the next frame"
 msgstr "Přejít na další snímek"
@@ -2451,7 +2451,7 @@ msgstr ""
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "Vybrat pixely"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
@@ -2506,7 +2506,7 @@ msgid "Tilemap"
 msgstr ""
 
 msgid "Audio"
-msgstr ""
+msgstr "Zvuk"
 
 msgid "Layers"
 msgstr "Vrstvy"
@@ -3456,7 +3456,7 @@ msgstr "Text:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Hloubka:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
