@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-03-13 16:36\n"
+"PO-Revision-Date: 2025-03-17 00:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -273,10 +273,10 @@ msgstr ""
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Diamant"
 
 msgid "Circle"
-msgstr ""
+msgstr "Kruh"
 
 msgid "Square"
 msgstr ""
@@ -381,7 +381,7 @@ msgstr "Přidat rozložení"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Smazat %s"
 
 msgid "Copy from"
 msgstr "Kopírovat z"
