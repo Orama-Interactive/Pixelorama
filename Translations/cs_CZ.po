@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-03-17 01:41\n"
+"PO-Revision-Date: 2025-03-19 22:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -151,7 +151,7 @@ msgstr "Vložit na místě"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Vložit ze schránky"
 
 msgid "Delete"
 msgstr "Smazat"
@@ -177,15 +177,15 @@ msgstr "Procenta"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Barevný režim:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Barevný režim"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Indexovaný"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -302,7 +302,7 @@ msgstr ""
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Rozmazání"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
@@ -364,7 +364,7 @@ msgstr "Přesunutelné panely"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Nastavit jako plovoucí"
 
 msgid "Manage Layouts"
 msgstr "Správa rozložení"
@@ -1088,15 +1088,15 @@ msgstr "Druh rozmazání:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Množství rozmazání:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Poloměr rozmazání:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Směr rozmazání:"
 
 msgid "Gradient"
 msgstr "Gradient"
@@ -2203,14 +2203,14 @@ msgstr "Intenzita zesvětlení/ztmavení"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "Nahrazení barev"
 
 msgid "Please select a color from the palette."
 msgstr ""
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Barvy vpravo:"
 
 msgid "Pick for:"
 msgstr "Vybrat pro:"
@@ -2223,11 +2223,11 @@ msgstr "Pravá barva"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Režim výběru:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Horní barva"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
@@ -2503,7 +2503,7 @@ msgstr "Skupina"
 
 #. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
 msgid "Tilemap"
-msgstr ""
+msgstr "Mapa dlaždic"
 
 msgid "Audio"
 msgstr "Zvuk"
@@ -3094,11 +3094,11 @@ msgstr ""
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Oříznout obsah obrázku na výběr"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Exportovat pouze obsah, který je v rámci označené oblasti."
 
 msgid "Close"
 msgstr "Zavřít"
@@ -3470,7 +3470,7 @@ msgid "Horizontal alignment:"
 msgstr "Vodorovné zarovnání:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Svislé zarovnání:"
 
 msgid "Left"
 msgstr "Vlevo"
@@ -3480,7 +3480,7 @@ msgstr "Vpravo"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Velikost odřádkování:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
@@ -3705,7 +3705,7 @@ msgstr ""
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tile size:"
-msgstr ""
+msgstr "Velikost dlaždice:"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
@@ -3717,28 +3717,28 @@ msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr ""
+msgstr "Kreslit dlaždice"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr ""
+msgstr "Otočit dlaždici doleva (proti směru hodinových ručiček)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr ""
+msgstr "Otočit dlaždici vpravo (ve směru hodinových ručiček)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr ""
+msgstr "Převrátit dlaždici vodorovně"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr ""
+msgstr "Převrátit dlaždici svisle"
 
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Ruční"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
@@ -3748,21 +3748,21 @@ msgstr "Automaticky"
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Vrstvit"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Velikost tlačítka dlaždice:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr ""
+msgstr "Zobrazit prázdnou dlaždici:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Nastavení dlaždice"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Pravděpodobnost:"
 
