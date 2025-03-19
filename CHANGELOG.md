@@ -29,6 +29,7 @@ Built using Godot 4.4
 - Added a shortcut to swap tools, <kbd>Shift + X</kbd> by default. [#1173](https://github.com/Orama-Interactive/Pixelorama/pull/1173)
 - Added <kbd>V</kbd> as the default shortcut for the crop tool.
 - A "Show Reference Images" option has been added to the View menu, allowing quick and easy reference image toggling.
+- Hiding the notification labels is now possible from the Preferences.
 - StartupWMClass has been added to Pixelorama's Linux .desktop file. [#1170](https://github.com/Orama-Interactive/Pixelorama/pull/1170)
 
 ### Changed
