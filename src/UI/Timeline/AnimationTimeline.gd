@@ -14,6 +14,7 @@ enum LoopType { NO, CYCLE, PINGPONG }
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
+const CEL_MIN_SIZE_OFFSET := 15
 
 var is_animation_running := false
 var animation_loop := LoopType.CYCLE
@@ -23,7 +24,11 @@ var last_frame := 0
 var is_mouse_hover := false
 var cel_size := 36:
 	set = _cel_size_changed
-var min_cel_size := 36
+var min_cel_size := 36:
+	set(value):
+		min_cel_size = value
+		if is_instance_valid(cel_size_slider):
+			cel_size_slider.min_value = min_cel_size
 var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
@@ -72,13 +77,12 @@ var global_layer_expand := true
 
 func _ready() -> void:
 	Global.control.find_child("LayerProperties").layer_property_changed.connect(_update_layer_ui)
-	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
 	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 	layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
-	cel_size = min_cel_size
-	cel_size_slider.min_value = min_cel_size
+	var loaded_cel_size: int = Global.config_cache.get_value("timeline", "cel_size", 40)
+	min_cel_size = get_tree().current_scene.theme.default_font_size + CEL_MIN_SIZE_OFFSET
 	cel_size_slider.max_value = max_cel_size
-	cel_size_slider.value = cel_size
+	cel_size = loaded_cel_size
 	add_layer_list.get_popup().id_pressed.connect(on_add_layer_list_id_pressed)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
 	animation_timer.wait_time = 1 / Global.current_project.fps
@@ -87,7 +91,6 @@ func _ready() -> void:
 	# Config loading.
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
 	layer_frame_header_h_split.split_offset = layer_frame_h_split.split_offset
-	cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
 	var past_rate = Global.config_cache.get_value(
 		"timeline", "past_rate", Global.onion_skinning_past_rate
 	)
@@ -125,6 +128,7 @@ func _notification(what: int) -> void:
 		drag_highlight.hide()
 	elif what == NOTIFICATION_THEME_CHANGED or what == NOTIFICATION_TRANSLATION_CHANGED:
 		await get_tree().process_frame
+		min_cel_size = get_tree().current_scene.theme.default_font_size + CEL_MIN_SIZE_OFFSET
 		if is_instance_valid(layer_settings_container):
 			layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 			layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
