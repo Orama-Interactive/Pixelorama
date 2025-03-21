@@ -1086,6 +1086,7 @@ func open_aseprite_file(path: String) -> void:
 					var layer_name_length := ase_file.get_16()
 					var layer_name_characters := ase_file.get_buffer(layer_name_length)
 					var layer_name := layer_name_characters.get_string_from_utf8()
+					print("Layer type: ", layer_type, " child level: ", layer_child_level)
 					var layer: BaseLayer
 					if layer_type == 0:
 						layer = PixelLayer.new(new_project, layer_name)
@@ -1096,8 +1097,8 @@ func open_aseprite_file(path: String) -> void:
 						#layer = LayerTileMap.new(new_project, layer_name)
 					layer.opacity = layer_opacity
 					layer.index = new_project.layers.size()
-					#print(layer.index)
 					new_project.layers.append(layer)
+					layer.set_meta(&"layer_child_level", layer_child_level)
 				0x2005: # Cel Chunk
 					var layer_index := ase_file.get_16()
 					var cel := new_project.layers[layer_index].new_empty_cel()
@@ -1145,6 +1146,11 @@ func open_aseprite_file(path: String) -> void:
 						for y in height:
 							for x in width:
 								pass # Parse tile data
+					while(layer_index > frame.cels.size()):
+						var group_layer := new_project.layers[frame.cels.size()]
+						print(group_layer.get_layer_type(), " ", group_layer)
+						var group_cel := group_layer.new_empty_cel()
+						frame.cels.append(group_cel)
 					frame.cels.append(cel)
 				0x2006: # Cel Extra Chunk
 					var flags := ase_file.get_32()
@@ -1181,8 +1187,32 @@ func open_aseprite_file(path: String) -> void:
 				0x2023: # Tileset Chunk
 					pass
 		new_project.frames.append(frame)
-	#for layer_i in new_project.layers.size():
-		#new_project.layers[layer_i].index = layer_i
+		# Add cels if any are missing. Happens when there are group layers with no children
+		# on the top of the layer order.
+		var n_of_cels := frame.cels.size()
+		if new_project.layers.size() != n_of_cels:
+			for j in range(n_of_cels, new_project.layers.size()):
+				var layer := new_project.layers[j]
+				var cel := layer.new_empty_cel()
+				frame.cels.append(cel)
+	for i in new_project.layers.size():
+		var layer := new_project.layers[i]
+		var layer_child_level: int = layer.get_meta(&"layer_child_level", 0)
+		if layer_child_level > 0:
+			var parent_layer: GroupLayer
+			var parent_i := 1
+			while parent_layer == null:
+				var prev_layer := new_project.layers[i - parent_i]
+				if prev_layer is GroupLayer:
+					if prev_layer.get_meta(&"layer_child_level", 0) == layer_child_level - 1:
+						parent_layer = prev_layer
+						break
+				parent_i += 1
+			new_project.move_layers([i], [i - parent_i], [parent_layer])
+	for i in new_project.layers.size():
+		var layer := new_project.layers[i]
+		layer.remove_meta(&"layer_child_level")
+		layer.index = i
 	new_project.order_layers()
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
