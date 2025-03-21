@@ -1027,6 +1027,11 @@ func open_aseprite_file(path: String) -> void:
 	var project_size := Vector2i(project_width, project_height)
 	var new_project := Project.new([], path.get_file().get_basename(), project_size)
 	var color_depth := ase_file.get_16()
+	var pixel_byte := 4
+	if color_depth == 16:
+		pixel_byte = 2
+	elif color_depth == 8:
+		pixel_byte = 1
 	var project_flags := ase_file.get_32()
 	var _project_speed := ase_file.get_16()  # Deprecated
 	ase_file.get_32()
@@ -1125,12 +1130,8 @@ func open_aseprite_file(path: String) -> void:
 						# 26 bytes are the non-image data of the cel chunk, so subtract that
 						# to find the size of the image data.
 						var color_bytes := ase_file.get_buffer(chunk_size - 26)
-						var pixel_byte := 4
-						if color_depth == 16:
-							pixel_byte = 2
-						elif color_depth == 8:
-							pixel_byte = 1
 						color_bytes = color_bytes.decompress(width * height * pixel_byte, FileAccess.COMPRESSION_DEFLATE)
+						# TODO: Handle grayscale & indexed mode
 						var ase_cel_image := Image.create_from_data(width, height, false, new_project.get_image_format(), color_bytes)
 						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
 					elif cel_type == 3:  # Compressed tilemap
@@ -1146,6 +1147,9 @@ func open_aseprite_file(path: String) -> void:
 						for y in height:
 							for x in width:
 								pass # Parse tile data
+					# Add in-between GroupCels, if there are any.
+					# This is needed because Aseprite's group cels do not store any data
+					# in Aseprite files, so we need to make our own.
 					while(layer_index > frame.cels.size()):
 						var group_layer := new_project.layers[frame.cels.size()]
 						print(group_layer.get_layer_type(), " ", group_layer)
@@ -1169,7 +1173,7 @@ func open_aseprite_file(path: String) -> void:
 					if type == 2: # ICC
 						var icc_profile_data_length := ase_file.get_32()
 						for k in icc_profile_data_length:
-							ase_file.get_8()
+							ase_file.get_8() # TODO
 				0x2008: # External Files Chunk
 					pass
 				0x2016: # Mask Chunk
@@ -1181,11 +1185,50 @@ func open_aseprite_file(path: String) -> void:
 				0x2019: # Palette Chunk
 					pass
 				0x2020: # User Data Chunk
-					pass
+					var flags := ase_file.get_32()
+					if flags & 1 == 1:
+						var text_length := ase_file.get_16()
+						var text_characters := ase_file.get_buffer(text_length)
+						var text := text_characters.get_string_from_utf8()
+						print(text)
+					if flags & 1 == 2:
+						var red := ase_file.get_8()
+						var green := ase_file.get_8()
+						var blue := ase_file.get_8()
+						var alpha := ase_file.get_8()
+					if flags & 1 == 4:
+						var property_size := ase_file.get_32()
+						var n_of_properties := ase_file.get_32()
 				0x2022: # Slice Chunk
 					pass
 				0x2023: # Tileset Chunk
-					pass
+					var tileset_id := ase_file.get_32()
+					var tileset_flags := ase_file.get_32()
+					var n_of_tiles := ase_file.get_32()
+					var tile_width := ase_file.get_16()
+					var tile_height := ase_file.get_16()
+					var base_index := ase_file.get_16()
+					ase_file.get_buffer(14)  # Reserved
+					var tileset_name_length := ase_file.get_16()
+					var tileset_name_characters := ase_file.get_buffer(tileset_name_length)
+					var tileset_name := tileset_name_characters.get_string_from_utf8()
+					var all_tiles_image_data: PackedByteArray
+					if tileset_flags & 1 == 1:
+						var external_id := ase_file.get_32()
+						var tileset_id_in_external := ase_file.get_32()
+					if tileset_flags & 2 == 2:
+						var data_compressed_length := ase_file.get_32()
+						var image_data_compressed := ase_file.get_buffer(data_compressed_length)
+						var data_length := tile_width * (tile_height * n_of_tiles) * pixel_byte
+						all_tiles_image_data = image_data_compressed.decompress(data_length, FileAccess.COMPRESSION_DEFLATE)
+					var tileset := TileSetCustom.new(Vector2i(tile_width, tile_height), tileset_name, false)
+					for k in n_of_tiles:
+						var n_of_pixels := tile_width * tile_height * pixel_byte
+						var pixel_start := k * n_of_pixels
+						var tile_image_data := all_tiles_image_data.slice(pixel_start, pixel_start + n_of_pixels)
+						var image := Image.create_from_data(tile_width, tile_height, false, new_project.get_image_format(), tile_image_data)
+						tileset.add_tile(image, null, 0)
+					new_project.tilesets.append(tileset)
 		new_project.frames.append(frame)
 		# Add cels if any are missing. Happens when there are group layers with no children
 		# on the top of the layer order.
