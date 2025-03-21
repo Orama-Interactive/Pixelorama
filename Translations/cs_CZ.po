@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-03-21 13:53\n"
+"PO-Revision-Date: 2025-03-21 15:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -524,11 +524,11 @@ msgstr "Svislé snímky:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Chytré rozřezání"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Práh:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
@@ -1120,7 +1120,7 @@ msgid "Divide into equal parts"
 msgstr "Rozdělit na stejné díly"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Části:"
 
 msgid "Add point at the end"
 msgstr ""
@@ -2093,15 +2093,15 @@ msgstr "Velikost štětce:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "Nastavení otočení"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "Převrátit:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "Otočit:"
 
 msgid "Overwrite color"
 msgstr "Přepsat barvu"
@@ -2682,10 +2682,10 @@ msgstr "Rozbalit/sbalit skupinu"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Zvukový soubor:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Načíst soubor"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
@@ -3201,7 +3201,7 @@ msgstr "Seřadit podle hodnoty"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "Řadit podle světlosti"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
@@ -3272,13 +3272,13 @@ msgstr "Nahrávání"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
-msgstr ""
+msgstr "Dlaždice"
 
 msgid "Crop"
 msgstr "Oříznutí"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Změnit velikost plátna"
 
 msgid "Margins"
 msgstr "Okraje"
@@ -3287,7 +3287,7 @@ msgid "Position + Size"
 msgstr "Pozice a velikost"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Uzamčený poměr stran"
 
 msgid "Margins:"
 msgstr "Okraje:"
@@ -3515,7 +3515,7 @@ msgstr "Počáteční hodnota:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
-msgstr ""
+msgstr "Konečná hodnota:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
