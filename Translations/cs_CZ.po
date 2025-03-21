@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-03-19 23:48\n"
+"PO-Revision-Date: 2025-03-21 13:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgstr "Y-báze:"
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "Maskování:"
 
 #. Verb, resets something.
 msgid "Reset"
@@ -336,7 +336,7 @@ msgstr "Obnovit"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Obnovit %s"
 
 msgid "Use Current Frame"
 msgstr ""
@@ -1109,7 +1109,7 @@ msgstr "Interpolace"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Obrátit"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
 msgid "Evenly distribute points"
@@ -1140,7 +1140,7 @@ msgid "Linear"
 msgstr "Lineární"
 
 msgid "Radial"
-msgstr ""
+msgstr "Kruhový"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
@@ -1162,7 +1162,7 @@ msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "Střed:"
 
 msgid "Dithering pattern:"
 msgstr "Ditheringová šablona:"
@@ -1227,11 +1227,11 @@ msgstr "Faktor tónového efektu:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Barevné křivky"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Kanál:"
 
 msgid "Red"
 msgstr "Červená"
@@ -3507,7 +3507,7 @@ msgstr "Náhled snímku:"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
-msgstr ""
+msgstr "Animovat"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
