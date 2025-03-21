@@ -55,7 +55,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		shader_copied.emit(new_path)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
-
+	elif file_ext == "ase" or file_ext == "aseprite":
+		open_aseprite_file(file)
 	else:  # Image files
 		# Attempt to load as APNG.
 		# Note that the APNG importer will *only* succeed for *animated* PNGs.
@@ -1010,3 +1011,215 @@ func save_project_to_recent_list(path: String) -> void:
 
 	top_menu_container.recent_projects_submenu.clear()
 	top_menu_container.update_recent_projects_submenu()
+
+
+func open_aseprite_file(path: String) -> void:
+	var ase_file := FileAccess.open(path, FileAccess.READ)
+	if FileAccess.get_open_error() != OK or ase_file == null:
+		return
+	var new_project := Project.new([], path.get_file().get_basename())
+	print(ase_file.get_32())
+	print(ase_file.get_16())
+	var frames := ase_file.get_16()
+	print(frames)
+	print(ase_file.get_16())
+	print(ase_file.get_16())
+	var color_depth := ase_file.get_16()
+	print(color_depth)
+	print(ase_file.get_32())
+	print(ase_file.get_16())
+	print(ase_file.get_32())
+	print(ase_file.get_32())
+	print(ase_file.get_8())
+	for i in 3:  # To ignore
+		ase_file.get_8()
+	print(ase_file.get_16())
+	print(ase_file.get_8())
+	print(ase_file.get_8())
+	print(ase_file.get_16())
+	print(ase_file.get_16())
+	print(ase_file.get_16())
+	print(ase_file.get_16())
+	for i in 84:  # For future
+		ase_file.get_8()
+
+	for i in frames:
+		var frame := Frame.new()
+		print("Frame bytes: ", ase_file.get_32())
+		print(ase_file.get_16())
+		var number_of_chunks := ase_file.get_16()
+		var frame_dur := ase_file.get_16()
+		print(ase_file.get_8())
+		print(ase_file.get_8())
+		var new_number_of_chunks := ase_file.get_32()
+		print("CHUNKS ", number_of_chunks, " ", new_number_of_chunks)
+		if new_number_of_chunks != 0:
+			number_of_chunks = new_number_of_chunks
+		for j in number_of_chunks:
+			var chunk_size := ase_file.get_32()
+			var chunk_type := ase_file.get_16()
+			print("Chunk type: %x" % chunk_type)
+			match chunk_type:
+				0x0004, 0x0011: # Old Palette Chunk
+					var n_of_packets := ase_file.get_16()
+					for packet in n_of_packets:
+						var n_entries_skip := ase_file.get_8()
+						var n_of_colors := ase_file.get_8()
+						for color in n_of_colors:
+							var red := ase_file.get_8()
+							var green := ase_file.get_8()
+							var blue := ase_file.get_8()
+				0x2004: # Layer Chunk
+					var layer_flags := ase_file.get_16()
+					var layer_type := ase_file.get_16()
+					var layer_child_level := ase_file.get_16()
+					var _layer_width := ase_file.get_16() # ignored
+					var _layer_height := ase_file.get_16() # ignored
+					var layer_blend_mode := ase_file.get_16()
+					var layer_opacity := ase_file.get_8()
+					for k in 3:
+						ase_file.get_8()  # For future
+					var layer_name_length := ase_file.get_16()
+					var layer_name_characters: PackedByteArray
+					for char in layer_name_length:
+						layer_name_characters.append(ase_file.get_8())
+					var layer_name := layer_name_characters.get_string_from_utf8()
+					var layer: BaseLayer
+					if layer_type == 0:
+						layer = PixelLayer.new(new_project, layer_name)
+					elif layer_type == 1:
+						layer = GroupLayer.new(new_project, layer_name)
+					elif layer_type == 2:
+						var tileset_index := ase_file.get_32()
+						#layer = LayerTileMap.new(new_project, layer_name)
+					layer.opacity = layer_opacity
+					new_project.layers.append(layer)
+				0x2005: # Cel Chunk
+					var layer_index := ase_file.get_16()
+					var cel := new_project.layers[layer_index].new_empty_cel()
+					var x_pos := ase_file.get_16()
+					var y_pos := ase_file.get_16()
+					var opacity := ase_file.get_8()
+					var cel_type := ase_file.get_16()
+					var z_index := ase_file.get_16()
+					for k in 5:
+						ase_file.get_8()  # For future
+					if cel_type == 0:  # Raw uncompressed image
+						var width := ase_file.get_16()
+						var height := ase_file.get_16()
+						var color_bytes: PackedByteArray
+						for y in height:
+							for x in width:
+								parse_aseprite_pixel(ase_file, color_depth, color_bytes)
+						cel.get_image().data["data"] = color_bytes
+						#for color_i in range(0, color_bytes.size(), 4):
+							#var color := Color(color_bytes[color_i], color_bytes[color_i + 1], color_bytes[color_i + 2], color_bytes[color_i + 3])
+							#cel.get_image().set_pixel(x, y, color)
+					elif cel_type == 1:  # Linked cel
+						var frame_position_to_link_with := ase_file.get_16()
+					elif cel_type == 2:  # Compressed image
+						var width := ase_file.get_16()
+						var height := ase_file.get_16()
+						var color_bytes: PackedByteArray
+						for y in height:
+							for x in width:
+								parse_aseprite_pixel(ase_file, color_depth, color_bytes)
+								#cel.get_image().set_pixel(x, y, color)
+						color_bytes = color_bytes.decompress(color_bytes.size(), FileAccess.COMPRESSION_DEFLATE)
+						#for y in range(height, cel_image.get_height()):
+							#for x in range(width, cel_image.get_width()):
+								#color_bytes.append(0)
+								#color_bytes.append(0)
+								#color_bytes.append(0)
+								#color_bytes.append(0)
+						#print(width, " ", height, " ", width * height * 4, " ", color_bytes.size())
+						var ase_cel_image := Image.create_from_data(width, height, false, new_project.get_image_format(), color_bytes)
+						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
+						#var cel_image := cel.get_image()
+						#cel_image.set_data(cel_image.get_width(), cel_image.get_height(), cel_image.has_mipmaps(), cel_image.get_format(),  color_bytes)
+						#print(cel.get_image().data["data"].size())
+					elif cel_type == 3:  # Compressed tilemap
+						var width := ase_file.get_16()
+						var height := ase_file.get_16()
+						var bits_per_tile := ase_file.get_16()
+						var tile_id_bitmask := ase_file.get_32()
+						var x_flip_bitmask := ase_file.get_32()
+						var y_flip_bitmask := ase_file.get_32()
+						var diagonal_flip_bitmask := ase_file.get_32()
+						for k in 10:
+							ase_file.get_8()  # Reserved
+						for y in height:
+							for x in width:
+								pass # Parse tile data
+					frame.cels.append(cel)
+				0x2006: # Cel Extra Chunk
+					var flags := ase_file.get_32()
+					var x_position := ase_file.get_float()
+					var y_position := ase_file.get_float()
+					var cel_width := ase_file.get_float()
+					var cel_height := ase_file.get_float()
+					for k in 16:
+						ase_file.get_8()  # For future
+				0x2007: # Color Profile Chunk
+					var type := ase_file.get_16()
+					var flags := ase_file.get_16()
+					var fixed_gamma := ase_file.get_float()
+					for k in 8:
+						ase_file.get_8()  # For future
+					if type == 2: # ICC
+						var icc_profile_data_length := ase_file.get_32()
+						for k in icc_profile_data_length:
+							ase_file.get_8()
+				0x2008: # External Files Chunk
+					pass
+				0x2016: # Mask Chunk
+					pass
+				0x2017: # Path Chunk
+					pass
+				0x2018: # Tags Chunk
+					pass
+				0x2019: # Palette Chunk
+					pass
+				0x2020: # User Data Chunk
+					pass
+				0x2022: # Slice Chunk
+					pass
+				0x2023: # Tileset Chunk
+					pass
+		new_project.frames.append(frame)
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+
+
+func parse_aseprite_pixel(ase_file: FileAccess, image_format: int, color_bytes: PackedByteArray) -> void:
+	#var color := Color()
+	if image_format == 32:
+		color_bytes.append(ase_file.get_8())
+		color_bytes.append(ase_file.get_8())
+		color_bytes.append(ase_file.get_8())
+		color_bytes.append(ase_file.get_8())
+		#var color_bytes := PackedByteArray([ase_file.get_8(), ase_file.get_8(), ase_file.get_8(), ase_file.get_8()])
+		#print(color_bytes)
+		#color_bytes = color_bytes.decompress(color_bytes.size(), FileAccess.COMPRESSION_DEFLATE)
+		#print(color_bytes)
+		#var red := color_bytes[0]
+		#var green := color_bytes[1]
+		#var blue := color_bytes[2]
+		#var alpha := color_bytes[3]
+		#var red := ase_file.get_8()
+		#var green := ase_file.get_8()
+		#var blue := ase_file.get_8()
+		#var alpha := ase_file.get_8()
+		#color = Color(red, green, blue, alpha)
+	elif image_format == 16:
+		color_bytes.append(ase_file.get_8())
+		color_bytes.append(ase_file.get_8())
+		#var value := ase_file.get_8()
+		#var alpha := ase_file.get_8()
+		#color.v = value
+		#color.a = alpha
+	elif image_format == 8:
+		color_bytes.append(ase_file.get_8())
+		#var index := ase_file.get_8()
+	#return color
