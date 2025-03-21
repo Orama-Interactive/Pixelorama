@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-03-09 00:19\n"
+"PO-Revision-Date: 2025-03-13 16:38\n"
 
 msgid "OK"
 msgstr "确定"
@@ -938,6 +938,10 @@ msgstr "字体大小："
 
 msgid "Dim interface on dialog popup"
 msgstr "对话框弹出时变暗界面"
+
+#. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
+msgid "Show notification labels"
+msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -2800,8 +2804,9 @@ msgstr "移除辅助线"
 msgid "File saved"
 msgstr "文件已保存"
 
-msgid "File autosaved"
-msgstr "文件已自动保存"
+#. A notification label that appears when the backup of the currently opened project gets saved.
+msgid "Backup saved"
+msgstr ""
 
 msgid "File failed to open. Error code %s"
 msgstr "打开文件失败。错误代码 %s"

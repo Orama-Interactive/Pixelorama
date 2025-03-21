@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-03-12 17:50\n"
+"PO-Revision-Date: 2025-03-20 17:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -937,6 +937,10 @@ msgstr "Размер шрифта:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Затемнять интерфейс при появлении диалога"
+
+#. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
+msgid "Show notification labels"
+msgstr "Показывать уведомления"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -2803,8 +2807,9 @@ msgstr "Сдвинуть направляющие"
 msgid "File saved"
 msgstr "Файл сохранен"
 
-msgid "File autosaved"
-msgstr "Выполнено автосохранение"
+#. A notification label that appears when the backup of the currently opened project gets saved.
+msgid "Backup saved"
+msgstr "Резервная копия сохранена"
 
 msgid "File failed to open. Error code %s"
 msgstr "Не удалось открыть файл. Код ошибки %s"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-05-21 17:41\n"
+"PO-Revision-Date: 2025-03-17 01:41\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -25,12 +25,12 @@ msgstr "Nainstalovat ${APPNAME}"
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr "Vytvořit zástupce v nabídce Start (volitelné)"
+msgstr "Vytvořit zástupce v nabídce Start (nepovinné)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
-msgstr "Vytvořit zástupce na ploše (volitelné)"
+msgstr "Vytvořit zástupce na ploše (nepovinné)"
 
 #. un.SecUninstall
 #: ..\pixelorama.nsi:87
@@ -40,7 +40,7 @@ msgstr "Odinstalovat ${APPNAME} ${APPVERSION}"
 #. un.SecConfig
 #: ..\pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
-msgstr "Odstranit konfigurační soubory (volitelné)"
+msgstr "Odstranit konfigurační soubory (nepovinné)"
 
 #. DESC_SecInstall
 #: ..\pixelorama.nsi:200

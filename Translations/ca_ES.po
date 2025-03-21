@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2025-03-09 00:18\n"
+"PO-Revision-Date: 2025-03-13 20:06\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -74,7 +74,7 @@ msgstr "Imatge"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projecte"
 
 msgid "Effects"
 msgstr "Efectes"
@@ -99,13 +99,15 @@ msgstr "Desa com a..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Incloure imatges barrejades"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Si activa, la imatge final barrejada serà guardada també en el PXO, per a cada fotograma.\n"
+"Això fa la imatge més gran i és útil per importar a programari de tercers o exportar per terminal. \n"
+"Llegir fitxers PXO a Pixelorama no necessita aquesta opció activada."
 
 msgid "Import"
 msgstr "Importar"
@@ -147,21 +149,21 @@ msgid "Paste"
 msgstr "Enganxar"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Enganxar al lloc"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Enganxar des del porta-retalls"
 
 msgid "Delete"
 msgstr "Eliminar"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Eliminar permanentment"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Moure a la paperera"
 
 msgid "New Brush"
 msgstr "Nou pinzell"
@@ -177,32 +179,32 @@ msgstr "Percentatge"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Mode del color:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Mode de color"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Indexat"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Retalla per la selecció"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Retalla segons el contingut"
 
 msgid "Resize Canvas"
 msgstr "Redimensionar llenç"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Desplaçar imatge"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Desplaçament:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
@@ -381,7 +383,7 @@ msgstr "Afegeix disposició"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Eliminar %s"
 
 msgid "Copy from"
 msgstr ""
@@ -935,6 +937,10 @@ msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Atenua la interfície amb finestres emergents"
+
+#. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
+msgid "Show notification labels"
+msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -2786,8 +2792,9 @@ msgstr ""
 msgid "File saved"
 msgstr "Fitxer desat"
 
-msgid "File autosaved"
-msgstr "Fitxer desat automaticament"
+#. A notification label that appears when the backup of the currently opened project gets saved.
+msgid "Backup saved"
+msgstr ""
 
 msgid "File failed to open. Error code %s"
 msgstr ""
