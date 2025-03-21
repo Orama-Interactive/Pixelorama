@@ -1099,7 +1099,8 @@ func open_aseprite_file(path: String) -> void:
 						layer = GroupLayer.new(new_project, layer_name)
 					elif layer_type == 2:
 						var tileset_index := ase_file.get_32()
-						#layer = LayerTileMap.new(new_project, layer_name)
+						var tileset := new_project.tilesets[tileset_index]
+						layer = LayerTileMap.new(new_project, tileset, layer_name)
 					layer.opacity = layer_opacity
 					layer.index = new_project.layers.size()
 					new_project.layers.append(layer)
@@ -1112,6 +1113,7 @@ func open_aseprite_file(path: String) -> void:
 					cel.opacity = ase_file.get_8() / 255.0
 					var cel_type := ase_file.get_16()
 					cel.z_index = ase_file.get_16()
+					var non_image_data_chunk_size := 22
 					for k in 5:
 						ase_file.get_8()  # For future
 					if cel_type == 0:  # Raw uncompressed image
@@ -1119,7 +1121,7 @@ func open_aseprite_file(path: String) -> void:
 						var height := ase_file.get_16()
 						# 26 bytes are the non-image data of the cel chunk, so subtract that
 						# to find the size of the image data.
-						var color_bytes := ase_file.get_buffer(chunk_size - 26)
+						var color_bytes := ase_file.get_buffer(chunk_size - non_image_data_chunk_size - 4)
 						var ase_cel_image := Image.create_from_data(width, height, false, new_project.get_image_format(), color_bytes)
 						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
 					elif cel_type == 1:  # Linked cel
@@ -1129,7 +1131,7 @@ func open_aseprite_file(path: String) -> void:
 						var height := ase_file.get_16()
 						# 26 bytes are the non-image data of the cel chunk, so subtract that
 						# to find the size of the image data.
-						var color_bytes := ase_file.get_buffer(chunk_size - 26)
+						var color_bytes := ase_file.get_buffer(chunk_size - (non_image_data_chunk_size + 4))
 						color_bytes = color_bytes.decompress(width * height * pixel_byte, FileAccess.COMPRESSION_DEFLATE)
 						# TODO: Handle grayscale & indexed mode
 						var ase_cel_image := Image.create_from_data(width, height, false, new_project.get_image_format(), color_bytes)
@@ -1139,14 +1141,33 @@ func open_aseprite_file(path: String) -> void:
 						var height := ase_file.get_16()
 						var bits_per_tile := ase_file.get_16()
 						var tile_id_bitmask := ase_file.get_32()
+						# TODO: Handle flips
 						var x_flip_bitmask := ase_file.get_32()
 						var y_flip_bitmask := ase_file.get_32()
 						var diagonal_flip_bitmask := ase_file.get_32()
 						for k in 10:
 							ase_file.get_8()  # Reserved
+						var tilemap_cel := cel as CelTileMap
+						var tileset := tilemap_cel.tileset
+						var bytes_per_tile := bits_per_tile / 8
+						var tile_data_compressed := ase_file.get_buffer(chunk_size - (non_image_data_chunk_size + 32))
+						var tile_data_size := width * height * tileset.tile_size.x * tileset.tile_size.y * pixel_byte
+						var tile_data := tile_data_compressed.decompress(tile_data_size, FileAccess.COMPRESSION_DEFLATE)
+						var start_pos_x := x_pos / tileset.tile_size.x
+						var start_pos_y := y_pos / tileset.tile_size.y
 						for y in height:
 							for x in width:
-								pass # Parse tile data
+								var cell_pos := x + (y * width)
+								var cell_index := 0
+								if bits_per_tile == 16:
+									cell_index = tile_data.decode_u16(cell_pos * 2)
+								elif bits_per_tile == 8:
+									cell_index = tile_data.decode_u8(cell_pos)
+								else:
+									cell_index = tile_data.decode_u32(cell_pos * 4)
+								var cell := tilemap_cel.get_cell_at(Vector2i(start_pos_x + x, start_pos_y + y))
+								tilemap_cel.set_index(cell, cell_index)
+
 					# Add in-between GroupCels, if there are any.
 					# This is needed because Aseprite's group cels do not store any data
 					# in Aseprite files, so we need to make our own.
@@ -1196,7 +1217,7 @@ func open_aseprite_file(path: String) -> void:
 						var green := ase_file.get_8()
 						var blue := ase_file.get_8()
 						var alpha := ase_file.get_8()
-					if flags & 1 == 4:
+					if flags & 1 == 4: # TODO
 						var property_size := ase_file.get_32()
 						var n_of_properties := ase_file.get_32()
 				0x2022: # Slice Chunk
