@@ -42,6 +42,7 @@ Built using Godot 4.4
 - Layer buttons in the timeline also have an icon if the layers contain at least one layer effect.
 - The import dialog is always being opened when opening images from File > Open.
 - The extension crash preventing system has been revised. [#1177](https://github.com/Orama-Interactive/Pixelorama/pull/1177)
+- The minimum cel size is now smaller, and it can get even smaller by decreasing the font size from the Preferences.
 - System font names are now sorted by alphabetical order.
 - The red, green, blue and alpha buttons in invert and desaturate layer effects have been made into "RGBA" buttons instead of checkboxes, just like they are in their image effect counterparts.
 - "Tile Mode" under the Selection menu has been renamed to "Wrap Strokes". This does not affect the "Tile Mode" option in the View menu. [#1150](https://github.com/Orama-Interactive/Pixelorama/pull/1150)
