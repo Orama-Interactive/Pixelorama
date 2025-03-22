@@ -83,7 +83,13 @@ func set_tileset(new_tileset: TileSetCustom, reset_indices := true) -> void:
 
 ## Maps the cell at position [param cell_position] to
 ## the [member tileset]'s tile of index [param index].
-func set_index(cell: Cell, index: int) -> void:
+func set_index(
+	cell: Cell,
+	index: int,
+	flip_h := TileSetPanel.is_flipped_h,
+	flip_v := TileSetPanel.is_flipped_v,
+	transpose := TileSetPanel.is_transposed
+) -> void:
 	index = clampi(index, 0, tileset.tiles.size() - 1)
 	var previous_index := cell.index
 
@@ -92,9 +98,9 @@ func set_index(cell: Cell, index: int) -> void:
 			tileset.tiles[previous_index].times_used -= 1
 		tileset.tiles[index].times_used += 1
 		cell.index = index
-	cell.flip_h = TileSetPanel.is_flipped_h
-	cell.flip_v = TileSetPanel.is_flipped_v
-	cell.transpose = TileSetPanel.is_transposed
+	cell.flip_h = flip_h
+	cell.flip_v = flip_v
+	cell.transpose = transpose
 	_update_cell(cell)
 	Global.canvas.queue_redraw()
 

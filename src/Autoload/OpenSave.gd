@@ -1158,15 +1158,16 @@ func open_aseprite_file(path: String) -> void:
 						for y in height:
 							for x in width:
 								var cell_pos := x + (y * width)
-								var cell_index := 0
-								if bits_per_tile == 16:
-									cell_index = tile_data.decode_u16(cell_pos * 2)
-								elif bits_per_tile == 8:
-									cell_index = tile_data.decode_u8(cell_pos)
-								else:
-									cell_index = tile_data.decode_u32(cell_pos * 4)
+								var cell_index := tile_data[cell_pos * bytes_per_tile]
+								var transformed_bit := 0
+								if bits_per_tile == 32:
+									transformed_bit = tile_data[cell_pos * bytes_per_tile + 3]
+								#print(cell_index, " ", transformed_bit, " ", String.num_int64(transformed_bit, 2))
 								var cell := tilemap_cel.get_cell_at(Vector2i(start_pos_x + x, start_pos_y + y))
-								tilemap_cel.set_index(cell, cell_index)
+								var flip_h := transformed_bit & 128 == 128
+								var flip_v := transformed_bit & 64 == 64
+								var transpose := transformed_bit & 32 == 32
+								tilemap_cel.set_index(cell, cell_index, flip_h, flip_v, transpose)
 
 					# Add in-between GroupCels, if there are any.
 					# This is needed because Aseprite's group cels do not store any data
