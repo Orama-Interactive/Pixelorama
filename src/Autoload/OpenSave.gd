@@ -1124,7 +1124,7 @@ func open_aseprite_file(path: String) -> void:
 						var color_bytes := ase_file.get_buffer(chunk_size - non_image_data_chunk_size - 4)
 						var ase_cel_image := Image.create_from_data(width, height, false, new_project.get_image_format(), color_bytes)
 						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
-					elif cel_type == 1:  # Linked cel
+					elif cel_type == 1:  # TODO: Linked cel
 						var frame_position_to_link_with := ase_file.get_16()
 					elif cel_type == 2:  # Compressed image
 						var width := ase_file.get_16()
@@ -1162,7 +1162,6 @@ func open_aseprite_file(path: String) -> void:
 								var transformed_bit := 0
 								if bits_per_tile == 32:
 									transformed_bit = tile_data[cell_pos * bytes_per_tile + 3]
-								#print(cell_index, " ", transformed_bit, " ", String.num_int64(transformed_bit, 2))
 								var cell := tilemap_cel.get_cell_at(Vector2i(start_pos_x + x, start_pos_y + y))
 								var flip_h := transformed_bit & 128 == 128
 								var flip_v := transformed_bit & 64 == 64
@@ -1203,22 +1202,36 @@ func open_aseprite_file(path: String) -> void:
 				0x2017: # Path Chunk
 					pass
 				0x2018: # Tags Chunk
-					pass
+					var n_of_tags := ase_file.get_16()
+					ase_file.get_buffer(8)  # For future
+					for k in n_of_tags:
+						var from_frame := ase_file.get_16()
+						var to_frame := ase_file.get_16()
+						var _animation_dir := ase_file.get_8()  # Currently not used in Pixelorama
+						var _repeat := ase_file.get_16()  # Currently not used in Pixelorama
+						ase_file.get_buffer(6)  # For future
+						ase_file.get_buffer(3)  # Deprecated RGB values
+						ase_file.get_8() # Extra byte (zero)
+						var text_length := ase_file.get_16()
+						var text_characters := ase_file.get_buffer(text_length)
+						var text := text_characters.get_string_from_utf8()
+						var tag := AnimationTag.new(text, Color.WHITE, from_frame + 1, to_frame + 1)
+						new_project.animation_tags.append(tag)
 				0x2019: # Palette Chunk
 					pass
-				0x2020: # User Data Chunk
+				0x2020: # User Data Chunk (TODO: Affect previous chunks)
 					var flags := ase_file.get_32()
 					if flags & 1 == 1:
 						var text_length := ase_file.get_16()
 						var text_characters := ase_file.get_buffer(text_length)
 						var text := text_characters.get_string_from_utf8()
 						print(text)
-					if flags & 1 == 2:
+					if flags & 2 == 2:
 						var red := ase_file.get_8()
 						var green := ase_file.get_8()
 						var blue := ase_file.get_8()
 						var alpha := ase_file.get_8()
-					if flags & 1 == 4: # TODO
+					if flags & 4 == 4: # TODO
 						var property_size := ase_file.get_32()
 						var n_of_properties := ase_file.get_32()
 				0x2022: # Slice Chunk
