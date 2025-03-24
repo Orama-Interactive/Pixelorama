@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-09-30 08:14\n"
+"PO-Revision-Date: 2025-03-13 19:05\n"
 "Last-Translator: \n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. SecInstall
 #: ..\pixelorama.nsi:84
 msgid "Install ${APPNAME}"
-msgstr "Instalar ${APPNAME}"
+msgstr "Instal·lar ${APPNAME}"
 
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
