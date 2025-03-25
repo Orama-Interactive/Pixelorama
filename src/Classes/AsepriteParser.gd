@@ -91,25 +91,33 @@ static func open_aseprite_file(path: String) -> void:
 					layer.set_meta(&"layer_child_level", layer_child_level)
 				0x2005: # Cel Chunk
 					var layer_index := ase_file.get_16()
-					var cel := new_project.layers[layer_index].new_empty_cel()
+					var layer := new_project.layers[layer_index]
+					var cel := layer.new_empty_cel()
 					var x_pos := ase_file.get_16()
 					var y_pos := ase_file.get_16()
 					cel.opacity = ase_file.get_8() / 255.0
 					var cel_type := ase_file.get_16()
 					cel.z_index = ase_file.get_16()
 					var non_image_data_chunk_size := 22
-					for k in 5:
-						ase_file.get_8()  # For future
+					ase_file.get_buffer(5)  # For future
 					if cel_type == 0:  # Raw uncompressed image
 						var width := ase_file.get_16()
 						var height := ase_file.get_16()
 						# 26 bytes are the non-image data of the cel chunk, so subtract that
 						# to find the size of the image data.
 						var color_bytes := ase_file.get_buffer(chunk_size - non_image_data_chunk_size - 4)
+						# TODO: Handle grayscale & indexed mode
 						var ase_cel_image := Image.create_from_data(width, height, false, new_project.get_image_format(), color_bytes)
 						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
-					elif cel_type == 1:  # TODO: Linked cel
+					elif cel_type == 1:  # Linked cel
 						var frame_position_to_link_with := ase_file.get_16()
+						var s_cel := new_project.frames[frame_position_to_link_with].cels[layer_index]
+						var link_set = s_cel.link_set
+						if link_set == null:
+							link_set = {}
+							layer.link_cel(s_cel, link_set)
+						layer.link_cel(cel, link_set)
+						cel.set_content(s_cel.get_content(), s_cel.image_texture)
 					elif cel_type == 2:  # Compressed image
 						var width := ase_file.get_16()
 						var height := ase_file.get_16()
