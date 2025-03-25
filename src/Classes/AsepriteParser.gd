@@ -64,17 +64,16 @@ static func open_aseprite_file(path: String) -> void:
 	ase_file.get_buffer(84) # For future
 
 	for i in frames:
-		print("Frame bytes: ", ase_file.get_32())
+		var _frame_bytes := ase_file.get_32()
 		var frame_magic_number := ase_file.get_16()
 		if frame_magic_number != 0xF1FA:
-			print("Error in frame %s" % i)
+			printerr("Error in frame %s" % i)
 			continue
 		var frame := Frame.new()
 		var number_of_chunks := ase_file.get_16()
-		var frame_dur := ase_file.get_16()
+		var frame_dur := ase_file.get_16() # TODO
 		ase_file.get_buffer(2) # For future
 		var new_number_of_chunks := ase_file.get_32()
-		print("CHUNKS ", number_of_chunks, " ", new_number_of_chunks)
 		if new_number_of_chunks != 0:
 			number_of_chunks = new_number_of_chunks
 		for j in number_of_chunks:
@@ -85,12 +84,12 @@ static func open_aseprite_file(path: String) -> void:
 				0x0004, 0x0011: # Old Palette Chunk
 					var n_of_packets := ase_file.get_16()
 					for packet in n_of_packets:
-						var n_entries_skip := ase_file.get_8()
-						var n_of_colors := ase_file.get_8()
+						var _n_entries_skip := ase_file.get_8()
+						var _n_of_colors := ase_file.get_8()
 						for color in number_of_colors:
-							var red := ase_file.get_8()
-							var green := ase_file.get_8()
-							var blue := ase_file.get_8()
+							var _red := ase_file.get_8()
+							var _green := ase_file.get_8()
+							var _blue := ase_file.get_8()
 				0x2004: # Layer Chunk
 					var layer_flags := ase_file.get_16()
 					var layer_type := ase_file.get_16()
@@ -99,21 +98,25 @@ static func open_aseprite_file(path: String) -> void:
 					var _layer_height := ase_file.get_16() # ignored
 					var layer_blend_mode := ase_file.get_16()
 					var layer_opacity := ase_file.get_8() / 255.0
-					for k in 3:
-						ase_file.get_8()  # For future
+					ase_file.get_buffer(3)  # For future
 					var layer_name := parse_aseprite_string(ase_file)
-					print("Layer type: ", layer_type, " child level: ", layer_child_level)
 					var layer: BaseLayer
 					if layer_type == 0:
 						layer = PixelLayer.new(new_project, layer_name)
+						layer.blend_mode = match_blend_modes(layer_blend_mode)
+						layer.opacity = layer_opacity
 					elif layer_type == 1:
 						layer = GroupLayer.new(new_project, layer_name)
+						layer.expanded = layer_flags & 32 != 32
 					elif layer_type == 2:
 						var tileset_index := ase_file.get_32()
 						var tileset := new_project.tilesets[tileset_index]
 						layer = LayerTileMap.new(new_project, tileset, layer_name)
-					layer.blend_mode = match_blend_modes(layer_blend_mode)
-					layer.opacity = layer_opacity
+						layer.blend_mode = match_blend_modes(layer_blend_mode)
+						layer.opacity = layer_opacity
+					layer.visible = layer_flags & 1 == 1
+					layer.locked = layer_flags & 2 != 2
+					layer.new_cels_linked = layer_flags & 16 == 16
 					layer.index = new_project.layers.size()
 					new_project.layers.append(layer)
 					layer.set_meta(&"layer_child_level", layer_child_level)
@@ -126,7 +129,6 @@ static func open_aseprite_file(path: String) -> void:
 					cel.opacity = ase_file.get_8() / 255.0
 					var cel_type := ase_file.get_16()
 					cel.z_index = ase_file.get_16()
-
 					ase_file.get_buffer(5)  # For future
 					if cel_type == 0:  # Raw uncompressed image
 						var width := ase_file.get_16()
