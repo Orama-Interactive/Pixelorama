@@ -55,7 +55,7 @@ static func open_aseprite_file(path: String) -> void:
 	var _project_speed := ase_file.get_16()  # Deprecated
 	ase_file.get_32()
 	ase_file.get_32()
-	var _palette_entry_index := ase_file.get_8()
+	var palette_entry_index := ase_file.get_8()  # Represents transparent color in indexed mode
 	ase_file.get_buffer(3)  # To ignore
 	var number_of_colors := ase_file.get_16()
 	var _pixel_width := ase_file.get_8()
@@ -146,9 +146,11 @@ static func open_aseprite_file(path: String) -> void:
 							var ase_cel_image := Image.create_from_data(width, height, false, image_format, color_bytes)
 							ase_cel_image.convert(new_project.get_image_format())
 							cel.get_image().blit_rect(ase_cel_image, image_rect, Vector2i(x_pos, y_pos))
-						else:
+						else:  # Indexed mode
 							for k in color_bytes.size():
 								color_bytes[k] += 1
+								if color_bytes[k] == palette_entry_index + 1:
+									color_bytes[k] = 0
 							var ase_cel_image := Image.create_from_data(width, height, false, Image.FORMAT_R8, color_bytes)
 							cel.get_image().indices_image.blit_rect(ase_cel_image, image_rect, Vector2i(x_pos, y_pos))
 							cel.get_image().convert_indexed_to_rgb()
@@ -210,14 +212,14 @@ static func open_aseprite_file(path: String) -> void:
 					var _cel_width := ase_file.get_float()
 					var _cel_height := ase_file.get_float()
 					ase_file.get_buffer(16)  # For future
-				0x2007: # Color Profile Chunk
+				0x2007: # Color Profile Chunk (TODO: Do we need this?)
 					var type := ase_file.get_16()
 					var _flags := ase_file.get_16()
 					var _fixed_gamma := ase_file.get_float()
 					ase_file.get_buffer(8)  # For future
 					if type == 2: # ICC
 						var icc_profile_data_length := ase_file.get_32()
-						ase_file.get_buffer(icc_profile_data_length) # TODO
+						ase_file.get_buffer(icc_profile_data_length)
 				0x2008: # External Files Chunk
 					var n_of_entries := ase_file.get_32()
 					ase_file.get_buffer(8) # Reserved
@@ -331,10 +333,22 @@ static func open_aseprite_file(path: String) -> void:
 						var n_of_pixels := tile_width * tile_height * pixel_byte
 						var pixel_start := k * n_of_pixels
 						var tile_image_data := all_tiles_image_data.slice(pixel_start, pixel_start + n_of_pixels)
-						# TODO: Handle indexed mode
-						var image := Image.create_from_data(tile_width, tile_height, false, image_format, tile_image_data)
-						image.convert(new_project.get_image_format())
-						tileset.add_tile(image, null, 0)
+						if color_depth > 8:
+							var image := Image.create_from_data(tile_width, tile_height, false, image_format, tile_image_data)
+							image.convert(new_project.get_image_format())
+							tileset.add_tile(image, null, 0)
+						else:  # Indexed mode
+							for l in tile_image_data.size():
+								tile_image_data[l] += 1
+								if tile_image_data[l] == palette_entry_index + 1:
+									tile_image_data[l] = 0
+							var indices_image := Image.create_from_data(tile_width, tile_height, false, Image.FORMAT_R8, tile_image_data)
+							var image := ImageExtended.create_custom(
+								tile_width, tile_height, false, new_project.get_image_format(), true
+							)
+							image.indices_image.copy_from(indices_image)
+							image.convert_indexed_to_rgb()
+							tileset.add_tile(image, null, 0)
 					new_project.tilesets.append(tileset)
 				_:
 					printerr("Unsupported chunk type.")
