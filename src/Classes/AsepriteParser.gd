@@ -50,6 +50,7 @@ static func open_aseprite_file(path: String) -> void:
 		pixel_byte = 2
 	elif color_depth == 8:
 		pixel_byte = 1
+		new_project.color_mode = Project.INDEXED_MODE
 	var project_flags := ase_file.get_32()
 	var _project_speed := ase_file.get_16()  # Deprecated
 	ase_file.get_32()
@@ -134,32 +135,32 @@ static func open_aseprite_file(path: String) -> void:
 					var cel_type := ase_file.get_16()
 					cel.z_index = ase_file.get_16()
 					ase_file.get_buffer(5)  # For future
-					if cel_type == 0:  # Raw uncompressed image
+					if cel_type == 0 or cel_type == 2:  # Raw uncompressed and compressed image
 						var width := ase_file.get_16()
 						var height := ase_file.get_16()
+						var image_rect := Rect2i(Vector2i.ZERO, Vector2i(width, height))
 						var color_bytes := ase_file.get_buffer(chunk_size - IMAGE_CEL_CHUNK_SIZE)
-						# TODO: Handle indexed mode
-						var ase_cel_image := Image.create_from_data(width, height, false, image_format, color_bytes)
-						ase_cel_image.convert(new_project.get_image_format())
-						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
+						if cel_type == 2: # Compressed image
+							color_bytes = color_bytes.decompress(width * height * pixel_byte, FileAccess.COMPRESSION_DEFLATE)
+						if color_depth > 8:
+							var ase_cel_image := Image.create_from_data(width, height, false, image_format, color_bytes)
+							ase_cel_image.convert(new_project.get_image_format())
+							cel.get_image().blit_rect(ase_cel_image, image_rect, Vector2i(x_pos, y_pos))
+						else:
+							for k in color_bytes.size():
+								color_bytes[k] += 1
+							var ase_cel_image := Image.create_from_data(width, height, false, Image.FORMAT_R8, color_bytes)
+							cel.get_image().indices_image.blit_rect(ase_cel_image, image_rect, Vector2i(x_pos, y_pos))
+							cel.get_image().convert_indexed_to_rgb()
 					elif cel_type == 1:  # Linked cel
 						var frame_position_to_link_with := ase_file.get_16()
-						var s_cel := new_project.frames[frame_position_to_link_with].cels[layer_index]
-						var link_set = s_cel.link_set
+						var cel_to_link := new_project.frames[frame_position_to_link_with].cels[layer_index]
+						var link_set = cel_to_link.link_set
 						if link_set == null:
 							link_set = {}
-							layer.link_cel(s_cel, link_set)
+							layer.link_cel(cel_to_link, link_set)
 						layer.link_cel(cel, link_set)
-						cel.set_content(s_cel.get_content(), s_cel.image_texture)
-					elif cel_type == 2:  # Compressed image
-						var width := ase_file.get_16()
-						var height := ase_file.get_16()
-						var color_bytes := ase_file.get_buffer(chunk_size - IMAGE_CEL_CHUNK_SIZE)
-						color_bytes = color_bytes.decompress(width * height * pixel_byte, FileAccess.COMPRESSION_DEFLATE)
-						# TODO: Handle indexed mode
-						var ase_cel_image := Image.create_from_data(width, height, false, image_format, color_bytes)
-						ase_cel_image.convert(new_project.get_image_format())
-						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
+						cel.set_content(cel_to_link.get_content(), cel_to_link.image_texture)
 					elif cel_type == 3:  # Compressed tilemap
 						var width := ase_file.get_16()
 						var height := ase_file.get_16()
