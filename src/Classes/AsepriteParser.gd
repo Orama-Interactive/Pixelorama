@@ -43,8 +43,10 @@ static func open_aseprite_file(path: String) -> void:
 	var project_size := Vector2i(project_width, project_height)
 	var new_project := Project.new([], path.get_file().get_basename(), project_size)
 	var color_depth := ase_file.get_16()
+	var image_format := Image.FORMAT_RGBA8
 	var pixel_byte := 4
 	if color_depth == 16:
+		image_format = Image.FORMAT_LA8
 		pixel_byte = 2
 	elif color_depth == 8:
 		pixel_byte = 1
@@ -134,8 +136,9 @@ static func open_aseprite_file(path: String) -> void:
 						var width := ase_file.get_16()
 						var height := ase_file.get_16()
 						var color_bytes := ase_file.get_buffer(chunk_size - IMAGE_CEL_CHUNK_SIZE)
-						# TODO: Handle grayscale & indexed mode
-						var ase_cel_image := Image.create_from_data(width, height, false, new_project.get_image_format(), color_bytes)
+						# TODO: Handle indexed mode
+						var ase_cel_image := Image.create_from_data(width, height, false, image_format, color_bytes)
+						ase_cel_image.convert(new_project.get_image_format())
 						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
 					elif cel_type == 1:  # Linked cel
 						var frame_position_to_link_with := ase_file.get_16()
@@ -151,8 +154,9 @@ static func open_aseprite_file(path: String) -> void:
 						var height := ase_file.get_16()
 						var color_bytes := ase_file.get_buffer(chunk_size - IMAGE_CEL_CHUNK_SIZE)
 						color_bytes = color_bytes.decompress(width * height * pixel_byte, FileAccess.COMPRESSION_DEFLATE)
-						# TODO: Handle grayscale & indexed mode
-						var ase_cel_image := Image.create_from_data(width, height, false, new_project.get_image_format(), color_bytes)
+						# TODO: Handle indexed mode
+						var ase_cel_image := Image.create_from_data(width, height, false, image_format, color_bytes)
+						ase_cel_image.convert(new_project.get_image_format())
 						cel.get_image().blit_rect(ase_cel_image, Rect2i(Vector2i.ZERO, Vector2i(width, height)), Vector2i(x_pos, y_pos))
 					elif cel_type == 3:  # Compressed tilemap
 						var width := ase_file.get_16()
@@ -321,7 +325,9 @@ static func open_aseprite_file(path: String) -> void:
 						var n_of_pixels := tile_width * tile_height * pixel_byte
 						var pixel_start := k * n_of_pixels
 						var tile_image_data := all_tiles_image_data.slice(pixel_start, pixel_start + n_of_pixels)
-						var image := Image.create_from_data(tile_width, tile_height, false, new_project.get_image_format(), tile_image_data)
+						# TODO: Handle indexed mode
+						var image := Image.create_from_data(tile_width, tile_height, false, image_format, tile_image_data)
+						image.convert(new_project.get_image_format())
 						tileset.add_tile(image, null, 0)
 					new_project.tilesets.append(tileset)
 				_:
