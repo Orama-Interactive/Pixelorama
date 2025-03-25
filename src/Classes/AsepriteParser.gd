@@ -1,6 +1,28 @@
 class_name AsepriteParser
 extends RefCounted
 
+enum AsepriteBlendMode {
+	NORMAL,
+	MULTIPLY,
+	SCREEN,
+	OVERLAY,
+	DARKEN,
+	LIGHTEN,
+	COLOR_DODGE,
+	COLOR_BURN,
+	HARD_LIGHT,
+	SOFT_LIGHT,
+	DIFFERENCE,
+	EXCLUSION,
+	HUE,
+	SATURATION,
+	COLOR,
+	LUMINOSITY,
+	ADD,
+	SUBTRACT,
+	DIVIDE
+}
+
 
 static func open_aseprite_file(path: String) -> void:
 	var ase_file := FileAccess.open(path, FileAccess.READ)
@@ -70,7 +92,7 @@ static func open_aseprite_file(path: String) -> void:
 					var layer_child_level := ase_file.get_16()
 					var _layer_width := ase_file.get_16() # ignored
 					var _layer_height := ase_file.get_16() # ignored
-					var layer_blend_mode := ase_file.get_16()  # TODO
+					var layer_blend_mode := ase_file.get_16()
 					var layer_opacity := ase_file.get_8() / 255.0
 					for k in 3:
 						ase_file.get_8()  # For future
@@ -85,6 +107,7 @@ static func open_aseprite_file(path: String) -> void:
 						var tileset_index := ase_file.get_32()
 						var tileset := new_project.tilesets[tileset_index]
 						layer = LayerTileMap.new(new_project, tileset, layer_name)
+					layer.blend_mode = match_blend_modes(layer_blend_mode)
 					layer.opacity = layer_opacity
 					layer.index = new_project.layers.size()
 					new_project.layers.append(layer)
@@ -337,6 +360,49 @@ static func parse_aseprite_string(ase_file: FileAccess) -> String:
 	var text_length := ase_file.get_16()
 	var text_characters := ase_file.get_buffer(text_length)
 	return text_characters.get_string_from_utf8()
+
+
+## Match Aseprite's blend modes to Pixelorama's
+static func match_blend_modes(blend_mode: AsepriteBlendMode) -> BaseLayer.BlendModes:
+	match blend_mode:
+		AsepriteBlendMode.MULTIPLY:
+			return BaseLayer.BlendModes.MULTIPLY
+		AsepriteBlendMode.SCREEN:
+			return BaseLayer.BlendModes.SCREEN
+		AsepriteBlendMode.OVERLAY:
+			return BaseLayer.BlendModes.OVERLAY
+		AsepriteBlendMode.DARKEN:
+			return BaseLayer.BlendModes.DARKEN
+		AsepriteBlendMode.LIGHTEN:
+			return BaseLayer.BlendModes.LIGHTEN
+		AsepriteBlendMode.COLOR_DODGE:
+			return BaseLayer.BlendModes.COLOR_DODGE
+		AsepriteBlendMode.COLOR_BURN:
+			return BaseLayer.BlendModes.COLOR_BURN
+		AsepriteBlendMode.HARD_LIGHT:
+			return BaseLayer.BlendModes.HARD_LIGHT
+		AsepriteBlendMode.SOFT_LIGHT:
+			return BaseLayer.BlendModes.SOFT_LIGHT
+		AsepriteBlendMode.DIFFERENCE:
+			return BaseLayer.BlendModes.DIFFERENCE
+		AsepriteBlendMode.EXCLUSION:
+			return BaseLayer.BlendModes.EXCLUSION
+		AsepriteBlendMode.HUE:
+			return BaseLayer.BlendModes.HUE
+		AsepriteBlendMode.SATURATION:
+			return BaseLayer.BlendModes.SATURATION
+		AsepriteBlendMode.COLOR:
+			return BaseLayer.BlendModes.COLOR
+		AsepriteBlendMode.LUMINOSITY:
+			return BaseLayer.BlendModes.LUMINOSITY
+		AsepriteBlendMode.ADD:
+			return BaseLayer.BlendModes.ADD
+		AsepriteBlendMode.SUBTRACT:
+			return BaseLayer.BlendModes.SUBTRACT
+		AsepriteBlendMode.DIVIDE:
+			return BaseLayer.BlendModes.DIVIDE
+		_:
+			return BaseLayer.BlendModes.NORMAL
 
 
 static func parse_aseprite_variant(ase_file: FileAccess, property_type: int) -> Variant:
