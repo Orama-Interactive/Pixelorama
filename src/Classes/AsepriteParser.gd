@@ -54,7 +54,7 @@ static func open_aseprite_file(path: String) -> void:
 	var _project_speed := ase_file.get_16()  # Deprecated
 	ase_file.get_32()
 	ase_file.get_32()
-	var palette_entry_index := ase_file.get_8()
+	var _palette_entry_index := ase_file.get_8()
 	ase_file.get_buffer(3)  # To ignore
 	var number_of_colors := ase_file.get_16()
 	var _pixel_width := ase_file.get_8()
@@ -73,7 +73,7 @@ static func open_aseprite_file(path: String) -> void:
 			continue
 		var frame := Frame.new()
 		var number_of_chunks := ase_file.get_16()
-		var frame_dur := ase_file.get_16() # TODO
+		var _frame_dur := ase_file.get_16() # TODO
 		ase_file.get_buffer(2) # For future
 		var new_number_of_chunks := ase_file.get_32()
 		if new_number_of_chunks != 0:
@@ -99,7 +99,9 @@ static func open_aseprite_file(path: String) -> void:
 					var _layer_width := ase_file.get_16() # ignored
 					var _layer_height := ase_file.get_16() # ignored
 					var layer_blend_mode := ase_file.get_16()
-					var layer_opacity := ase_file.get_8() / 255.0
+					var layer_opacity := 1.0
+					if project_flags & 1 == 1:
+						layer_opacity = ase_file.get_8() / 255.0
 					ase_file.get_buffer(3)  # For future
 					var layer_name := parse_aseprite_string(ase_file)
 					var layer: BaseLayer
@@ -162,19 +164,21 @@ static func open_aseprite_file(path: String) -> void:
 						var width := ase_file.get_16()
 						var height := ase_file.get_16()
 						var bits_per_tile := ase_file.get_16()
-						var tile_id_bitmask := ase_file.get_32()
-						# TODO: Handle flips
-						var x_flip_bitmask := ase_file.get_32()
-						var y_flip_bitmask := ase_file.get_32()
-						var diagonal_flip_bitmask := ase_file.get_32()
+						var _tile_id_bitmask := ase_file.get_32()
+						var _x_flip_bitmask := ase_file.get_32()
+						var _y_flip_bitmask := ase_file.get_32()
+						var _diagonal_flip_bitmask := ase_file.get_32()
 						ase_file.get_buffer(10)  # Reserved
 						var tilemap_cel := cel as CelTileMap
 						var tileset := tilemap_cel.tileset
+						@warning_ignore("integer_division")
 						var bytes_per_tile := bits_per_tile / 8
 						var tile_data_compressed := ase_file.get_buffer(chunk_size - TILEMAP_CEL_CHUNK_SIZE)
 						var tile_data_size := width * height * tileset.tile_size.x * tileset.tile_size.y * pixel_byte
 						var tile_data := tile_data_compressed.decompress(tile_data_size, FileAccess.COMPRESSION_DEFLATE)
+						@warning_ignore("integer_division")
 						var start_pos_x := x_pos / tileset.tile_size.x
+						@warning_ignore("integer_division")
 						var start_pos_y := y_pos / tileset.tile_size.y
 						for y in height:
 							for x in width:
@@ -199,29 +203,28 @@ static func open_aseprite_file(path: String) -> void:
 						frame.cels.append(group_cel)
 					frame.cels.append(cel)
 				0x2006: # Cel Extra Chunk
-					var flags := ase_file.get_32()
-					var x_position := ase_file.get_float()
-					var y_position := ase_file.get_float()
-					var cel_width := ase_file.get_float()
-					var cel_height := ase_file.get_float()
+					var _flags := ase_file.get_32()
+					var _x_position := ase_file.get_float()
+					var _y_position := ase_file.get_float()
+					var _cel_width := ase_file.get_float()
+					var _cel_height := ase_file.get_float()
 					ase_file.get_buffer(16)  # For future
 				0x2007: # Color Profile Chunk
 					var type := ase_file.get_16()
-					var flags := ase_file.get_16()
-					var fixed_gamma := ase_file.get_float()
+					var _flags := ase_file.get_16()
+					var _fixed_gamma := ase_file.get_float()
 					ase_file.get_buffer(8)  # For future
 					if type == 2: # ICC
 						var icc_profile_data_length := ase_file.get_32()
-						for k in icc_profile_data_length:
-							ase_file.get_8() # TODO
+						ase_file.get_buffer(icc_profile_data_length) # TODO
 				0x2008: # External Files Chunk
 					var n_of_entries := ase_file.get_32()
 					ase_file.get_buffer(8) # Reserved
 					for k in n_of_entries:
-						var entry_id := ase_file.get_32()
-						var entry_type := ase_file.get_8()
+						var _entry_id := ase_file.get_32()
+						var _entry_type := ase_file.get_8()
 						ase_file.get_buffer(7) # Reserved
-						var external_file_name := parse_aseprite_string(ase_file)
+						var _external_file_name := parse_aseprite_string(ase_file)
 				0x2016: # Mask Chunk (Deprecated)
 					var _position_x := ase_file.get_16()
 					var _position_y := ase_file.get_16()
@@ -230,6 +233,7 @@ static func open_aseprite_file(path: String) -> void:
 					ase_file.get_buffer(8) # For future
 					var _mask_name := parse_aseprite_string(ase_file)
 					# Read image data
+					@warning_ignore("integer_division")
 					var byte_data_size := mask_height * ((mask_width + 7) / 8)
 					for k in byte_data_size:
 						ase_file.get_8()
@@ -250,6 +254,7 @@ static func open_aseprite_file(path: String) -> void:
 						var tag := AnimationTag.new(text, Color.WHITE, from_frame + 1, to_frame + 1)
 						new_project.animation_tags.append(tag)
 				0x2019: # Palette Chunk
+					# TODO: Import palettes into Pixelorama once we support project palettes
 					var _palette_size := ase_file.get_32()
 					var first_index_to_change := ase_file.get_32()
 					var last_index_to_change := ase_file.get_32()
@@ -273,15 +278,15 @@ static func open_aseprite_file(path: String) -> void:
 						var blue := ase_file.get_8()
 						var alpha := ase_file.get_8()
 					if flags & 4 == 4:
-						var properties_map_size := ase_file.get_32()
+						var _properties_map_size := ase_file.get_32()
 						var n_of_properties_maps := ase_file.get_32()
 						for k in n_of_properties_maps:
-							var properties_maps_key := ase_file.get_32()
+							var _properties_maps_key := ase_file.get_32()
 							var n_of_properties := ase_file.get_32()
 							for l in n_of_properties:
-								var property_name := parse_aseprite_string(ase_file)
+								var _property_name := parse_aseprite_string(ase_file)
 								var property_type := ase_file.get_16()
-								var property = parse_aseprite_variant(ase_file, property_type)
+								var _property = parse_aseprite_variant(ase_file, property_type)
 				0x2022: # Slice Chunk
 					var slice_keys := ase_file.get_32()
 					var slice_flags := ase_file.get_32()
@@ -303,18 +308,18 @@ static func open_aseprite_file(path: String) -> void:
 							var _pivot_position_x := ase_file.get_32()
 							var _pivot_position_y := ase_file.get_32()
 				0x2023: # Tileset Chunk
-					var tileset_id := ase_file.get_32()
+					var _tileset_id := ase_file.get_32()
 					var tileset_flags := ase_file.get_32()
 					var n_of_tiles := ase_file.get_32()
 					var tile_width := ase_file.get_16()
 					var tile_height := ase_file.get_16()
-					var base_index := ase_file.get_16()
+					var _base_index := ase_file.get_16()
 					ase_file.get_buffer(14)  # Reserved
 					var tileset_name := parse_aseprite_string(ase_file)
 					var all_tiles_image_data: PackedByteArray
 					if tileset_flags & 1 == 1:
-						var external_id := ase_file.get_32()
-						var tileset_id_in_external := ase_file.get_32()
+						var _external_id := ase_file.get_32()
+						var _tileset_id_in_external := ase_file.get_32()
 					if tileset_flags & 2 == 2:
 						var data_compressed_length := ase_file.get_32()
 						var image_data_compressed := ase_file.get_buffer(data_compressed_length)
@@ -345,7 +350,7 @@ static func open_aseprite_file(path: String) -> void:
 		var layer := new_project.layers[i]
 		var layer_child_level: int = layer.get_meta(&"layer_child_level", 0)
 		if layer_child_level > 0:
-			var parent_layer: GroupLayer
+			var parent_layer: GroupLayer = null
 			var parent_i := 1
 			while parent_layer == null:
 				var prev_layer := new_project.layers[i - parent_i]
