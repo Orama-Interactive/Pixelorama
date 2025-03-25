@@ -50,22 +50,21 @@ func _draw() -> void:
 			Rect2(margin - Vector2.ONE, size - margin * 2 + Vector2(2, 2)), Color.WHITE, false, 1
 		)
 	if Global.show_pixel_indices:
+		var text := str(color_index + 1)
 		var font := Themes.get_font()
 		var str_pos := Vector2(size.x / 2, size.y - 2)
 		var text_color := Global.control.theme.get_color(&"font_color", &"Label")
 		draw_string_outline(
 			font,
 			str_pos,
-			str(color_index),
+			text,
 			HORIZONTAL_ALIGNMENT_RIGHT,
 			-1,
 			size.x / 2,
 			1,
 			text_color.inverted()
 		)
-		draw_string(
-			font, str_pos, str(color_index), HORIZONTAL_ALIGNMENT_RIGHT, -1, size.x / 2, text_color
-		)
+		draw_string(font, str_pos, text, HORIZONTAL_ALIGNMENT_RIGHT, -1, size.x / 2, text_color)
 
 
 ## Enables drawing of highlights which indicate selected swatches
