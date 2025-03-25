@@ -64,7 +64,7 @@ static func open_aseprite_file(path: String) -> void:
 	var _grid_position_y := ase_file.get_16()
 	var _grid_width := ase_file.get_16()
 	var _grid_height := ase_file.get_16()
-	ase_file.get_buffer(84) # For future
+	ase_file.get_buffer(84)  # For future
 
 	for i in frames:
 		var _frame_bytes := ase_file.get_32()
@@ -74,8 +74,8 @@ static func open_aseprite_file(path: String) -> void:
 			continue
 		var frame := Frame.new()
 		var number_of_chunks := ase_file.get_16()
-		var _frame_dur := ase_file.get_16() # TODO
-		ase_file.get_buffer(2) # For future
+		var _frame_dur := ase_file.get_16()  # TODO
+		ase_file.get_buffer(2)  # For future
 		var new_number_of_chunks := ase_file.get_32()
 		if new_number_of_chunks != 0:
 			number_of_chunks = new_number_of_chunks
@@ -84,7 +84,7 @@ static func open_aseprite_file(path: String) -> void:
 			var chunk_type := ase_file.get_16()
 			print("Chunk type: %x, chunk size: %s" % [chunk_type, chunk_size])
 			match chunk_type:
-				0x0004, 0x0011: # Old Palette Chunk
+				0x0004, 0x0011:  # Old Palette Chunk
 					var n_of_packets := ase_file.get_16()
 					for packet in n_of_packets:
 						var _n_entries_skip := ase_file.get_8()
@@ -93,12 +93,12 @@ static func open_aseprite_file(path: String) -> void:
 							var _red := ase_file.get_8()
 							var _green := ase_file.get_8()
 							var _blue := ase_file.get_8()
-				0x2004: # Layer Chunk
+				0x2004:  # Layer Chunk
 					var layer_flags := ase_file.get_16()
 					var layer_type := ase_file.get_16()
 					var layer_child_level := ase_file.get_16()
-					var _layer_width := ase_file.get_16() # ignored
-					var _layer_height := ase_file.get_16() # ignored
+					var _layer_width := ase_file.get_16()  # ignored
+					var _layer_height := ase_file.get_16()  # ignored
 					var layer_blend_mode := ase_file.get_16()
 					var layer_opacity := 1.0
 					if project_flags & 1 == 1:
@@ -125,7 +125,7 @@ static func open_aseprite_file(path: String) -> void:
 					layer.index = new_project.layers.size()
 					new_project.layers.append(layer)
 					layer.set_meta(&"layer_child_level", layer_child_level)
-				0x2005: # Cel Chunk
+				0x2005:  # Cel Chunk
 					var layer_index := ase_file.get_16()
 					var layer := new_project.layers[layer_index]
 					var cel := layer.new_empty_cel()
@@ -140,23 +140,35 @@ static func open_aseprite_file(path: String) -> void:
 						var height := ase_file.get_16()
 						var image_rect := Rect2i(Vector2i.ZERO, Vector2i(width, height))
 						var color_bytes := ase_file.get_buffer(chunk_size - IMAGE_CEL_CHUNK_SIZE)
-						if cel_type == 2: # Compressed image
-							color_bytes = color_bytes.decompress(width * height * pixel_byte, FileAccess.COMPRESSION_DEFLATE)
+						if cel_type == 2:  # Compressed image
+							color_bytes = color_bytes.decompress(
+								width * height * pixel_byte, FileAccess.COMPRESSION_DEFLATE
+							)
 						if color_depth > 8:
-							var ase_cel_image := Image.create_from_data(width, height, false, image_format, color_bytes)
+							var ase_cel_image := Image.create_from_data(
+								width, height, false, image_format, color_bytes
+							)
 							ase_cel_image.convert(new_project.get_image_format())
-							cel.get_image().blit_rect(ase_cel_image, image_rect, Vector2i(x_pos, y_pos))
+							cel.get_image().blit_rect(
+								ase_cel_image, image_rect, Vector2i(x_pos, y_pos)
+							)
 						else:  # Indexed mode
 							for k in color_bytes.size():
 								color_bytes[k] += 1
 								if color_bytes[k] == palette_entry_index + 1:
 									color_bytes[k] = 0
-							var ase_cel_image := Image.create_from_data(width, height, false, Image.FORMAT_R8, color_bytes)
-							cel.get_image().indices_image.blit_rect(ase_cel_image, image_rect, Vector2i(x_pos, y_pos))
+							var ase_cel_image := Image.create_from_data(
+								width, height, false, Image.FORMAT_R8, color_bytes
+							)
+							cel.get_image().indices_image.blit_rect(
+								ase_cel_image, image_rect, Vector2i(x_pos, y_pos)
+							)
 							cel.get_image().convert_indexed_to_rgb()
 					elif cel_type == 1:  # Linked cel
 						var frame_position_to_link_with := ase_file.get_16()
-						var cel_to_link := new_project.frames[frame_position_to_link_with].cels[layer_index]
+						var cel_to_link := (
+							new_project.frames[frame_position_to_link_with].cels[layer_index]
+						)
 						var link_set = cel_to_link.link_set
 						if link_set == null:
 							link_set = {}
@@ -176,9 +188,15 @@ static func open_aseprite_file(path: String) -> void:
 						var tileset := tilemap_cel.tileset
 						@warning_ignore("integer_division")
 						var bytes_per_tile := bits_per_tile / 8
-						var tile_data_compressed := ase_file.get_buffer(chunk_size - TILEMAP_CEL_CHUNK_SIZE)
-						var tile_data_size := width * height * tileset.tile_size.x * tileset.tile_size.y * pixel_byte
-						var tile_data := tile_data_compressed.decompress(tile_data_size, FileAccess.COMPRESSION_DEFLATE)
+						var tile_data_compressed := ase_file.get_buffer(
+							chunk_size - TILEMAP_CEL_CHUNK_SIZE
+						)
+						var tile_data_size := (
+							width * height * tileset.tile_size.x * tileset.tile_size.y * pixel_byte
+						)
+						var tile_data := tile_data_compressed.decompress(
+							tile_data_size, FileAccess.COMPRESSION_DEFLATE
+						)
 						@warning_ignore("integer_division")
 						var start_pos_x := x_pos / tileset.tile_size.x
 						@warning_ignore("integer_division")
@@ -190,7 +208,9 @@ static func open_aseprite_file(path: String) -> void:
 								var transformed_bit := 0
 								if bits_per_tile == 32:
 									transformed_bit = tile_data[cell_pos * bytes_per_tile + 3]
-								var cell := tilemap_cel.get_cell_at(Vector2i(start_pos_x + x, start_pos_y + y))
+								var cell := tilemap_cel.get_cell_at(
+									Vector2i(start_pos_x + x, start_pos_y + y)
+								)
 								var flip_h := transformed_bit & 128 == 128
 								var flip_v := transformed_bit & 64 == 64
 								var transpose := transformed_bit & 32 == 32
@@ -199,50 +219,50 @@ static func open_aseprite_file(path: String) -> void:
 					# Add in-between GroupCels, if there are any.
 					# This is needed because Aseprite's group cels do not store any data
 					# in Aseprite files, so we need to make our own.
-					while(layer_index > frame.cels.size()):
+					while layer_index > frame.cels.size():
 						var group_layer := new_project.layers[frame.cels.size()]
 						print(group_layer.get_layer_type(), " ", group_layer)
 						var group_cel := group_layer.new_empty_cel()
 						frame.cels.append(group_cel)
 					frame.cels.append(cel)
-				0x2006: # Cel Extra Chunk
+				0x2006:  # Cel Extra Chunk
 					var _flags := ase_file.get_32()
 					var _x_position := ase_file.get_float()
 					var _y_position := ase_file.get_float()
 					var _cel_width := ase_file.get_float()
 					var _cel_height := ase_file.get_float()
 					ase_file.get_buffer(16)  # For future
-				0x2007: # Color Profile Chunk (TODO: Do we need this?)
+				0x2007:  # Color Profile Chunk (TODO: Do we need this?)
 					var type := ase_file.get_16()
 					var _flags := ase_file.get_16()
 					var _fixed_gamma := ase_file.get_float()
 					ase_file.get_buffer(8)  # For future
-					if type == 2: # ICC
+					if type == 2:  # ICC
 						var icc_profile_data_length := ase_file.get_32()
 						ase_file.get_buffer(icc_profile_data_length)
-				0x2008: # External Files Chunk
+				0x2008:  # External Files Chunk
 					var n_of_entries := ase_file.get_32()
-					ase_file.get_buffer(8) # Reserved
+					ase_file.get_buffer(8)  # Reserved
 					for k in n_of_entries:
 						var _entry_id := ase_file.get_32()
 						var _entry_type := ase_file.get_8()
-						ase_file.get_buffer(7) # Reserved
+						ase_file.get_buffer(7)  # Reserved
 						var _external_file_name := parse_aseprite_string(ase_file)
-				0x2016: # Mask Chunk (Deprecated)
+				0x2016:  # Mask Chunk (Deprecated)
 					var _position_x := ase_file.get_16()
 					var _position_y := ase_file.get_16()
 					var mask_width := ase_file.get_16()
 					var mask_height := ase_file.get_16()
-					ase_file.get_buffer(8) # For future
+					ase_file.get_buffer(8)  # For future
 					var _mask_name := parse_aseprite_string(ase_file)
 					# Read image data
 					@warning_ignore("integer_division")
 					var byte_data_size := mask_height * ((mask_width + 7) / 8)
 					for k in byte_data_size:
 						ase_file.get_8()
-				0x2017: # Path Chunk (Never used)
+				0x2017:  # Path Chunk (Never used)
 					pass
-				0x2018: # Tags Chunk
+				0x2018:  # Tags Chunk
 					var n_of_tags := ase_file.get_16()
 					ase_file.get_buffer(8)  # For future
 					for k in n_of_tags:
@@ -252,11 +272,11 @@ static func open_aseprite_file(path: String) -> void:
 						var _repeat := ase_file.get_16()  # Currently not used in Pixelorama
 						ase_file.get_buffer(6)  # For future
 						ase_file.get_buffer(3)  # Deprecated RGB values
-						ase_file.get_8() # Extra byte (zero)
+						ase_file.get_8()  # Extra byte (zero)
 						var text := parse_aseprite_string(ase_file)
 						var tag := AnimationTag.new(text, Color.WHITE, from_frame + 1, to_frame + 1)
 						new_project.animation_tags.append(tag)
-				0x2019: # Palette Chunk
+				0x2019:  # Palette Chunk
 					# TODO: Import palettes into Pixelorama once we support project palettes
 					var _palette_size := ase_file.get_32()
 					var first_index_to_change := ase_file.get_32()
@@ -270,7 +290,7 @@ static func open_aseprite_file(path: String) -> void:
 						var _alpha := ase_file.get_8()
 						if flags & 1 == 1:
 							var _name := parse_aseprite_string(ase_file)
-				0x2020: # User Data Chunk (TODO: Affect previous chunks)
+				0x2020:  # User Data Chunk (TODO: Affect previous chunks)
 					var flags := ase_file.get_32()
 					if flags & 1 == 1:
 						var text := parse_aseprite_string(ase_file)
@@ -290,10 +310,10 @@ static func open_aseprite_file(path: String) -> void:
 								var _property_name := parse_aseprite_string(ase_file)
 								var property_type := ase_file.get_16()
 								var _property = parse_aseprite_variant(ase_file, property_type)
-				0x2022: # Slice Chunk
+				0x2022:  # Slice Chunk
 					var slice_keys := ase_file.get_32()
 					var slice_flags := ase_file.get_32()
-					ase_file.get_32() # Reserved
+					ase_file.get_32()  # Reserved
 					var _slice_name := parse_aseprite_string(ase_file)
 					for k in slice_keys:
 						# This slice is valid from this frame to the end of the animation
@@ -310,7 +330,7 @@ static func open_aseprite_file(path: String) -> void:
 						if slice_flags & 2 == 2:
 							var _pivot_position_x := ase_file.get_32()
 							var _pivot_position_y := ase_file.get_32()
-				0x2023: # Tileset Chunk
+				0x2023:  # Tileset Chunk
 					var _tileset_id := ase_file.get_32()
 					var tileset_flags := ase_file.get_32()
 					var n_of_tiles := ase_file.get_32()
@@ -327,14 +347,22 @@ static func open_aseprite_file(path: String) -> void:
 						var data_compressed_length := ase_file.get_32()
 						var image_data_compressed := ase_file.get_buffer(data_compressed_length)
 						var data_length := tile_width * (tile_height * n_of_tiles) * pixel_byte
-						all_tiles_image_data = image_data_compressed.decompress(data_length, FileAccess.COMPRESSION_DEFLATE)
-					var tileset := TileSetCustom.new(Vector2i(tile_width, tile_height), tileset_name, false)
+						all_tiles_image_data = image_data_compressed.decompress(
+							data_length, FileAccess.COMPRESSION_DEFLATE
+						)
+					var tileset := TileSetCustom.new(
+						Vector2i(tile_width, tile_height), tileset_name, false
+					)
 					for k in n_of_tiles:
 						var n_of_pixels := tile_width * tile_height * pixel_byte
 						var pixel_start := k * n_of_pixels
-						var tile_image_data := all_tiles_image_data.slice(pixel_start, pixel_start + n_of_pixels)
+						var tile_image_data := all_tiles_image_data.slice(
+							pixel_start, pixel_start + n_of_pixels
+						)
 						if color_depth > 8:
-							var image := Image.create_from_data(tile_width, tile_height, false, image_format, tile_image_data)
+							var image := Image.create_from_data(
+								tile_width, tile_height, false, image_format, tile_image_data
+							)
 							image.convert(new_project.get_image_format())
 							tileset.add_tile(image, null, 0)
 						else:  # Indexed mode
@@ -342,7 +370,9 @@ static func open_aseprite_file(path: String) -> void:
 								tile_image_data[l] += 1
 								if tile_image_data[l] == palette_entry_index + 1:
 									tile_image_data[l] = 0
-							var indices_image := Image.create_from_data(tile_width, tile_height, false, Image.FORMAT_R8, tile_image_data)
+							var indices_image := Image.create_from_data(
+								tile_width, tile_height, false, Image.FORMAT_R8, tile_image_data
+							)
 							var image := ImageExtended.create_custom(
 								tile_width, tile_height, false, new_project.get_image_format(), true
 							)
@@ -437,36 +467,36 @@ static func match_blend_modes(blend_mode: AsepriteBlendMode) -> BaseLayer.BlendM
 static func parse_aseprite_variant(ase_file: FileAccess, property_type: int) -> Variant:
 	var property: Variant
 	match property_type:
-		0x0001, 0x0002, 0x0003: # bool, int8, uint8
+		0x0001, 0x0002, 0x0003:  # bool, int8, uint8
 			property = ase_file.get_8()
-		0x0004, 0x0005: # int16, uint16
+		0x0004, 0x0005:  # int16, uint16
 			property = ase_file.get_16()
-		0x0006, 0x0007: # int32, uint32
+		0x0006, 0x0007:  # int32, uint32
 			property = ase_file.get_32()
-		0x0008, 0x0009: # int64, uint64
+		0x0008, 0x0009:  # int64, uint64
 			property = ase_file.get_64()
-		0x000A, 0x000B: # Fixed, float
+		0x000A, 0x000B:  # Fixed, float
 			property = ase_file.get_float()
-		0x000C: # Double
+		0x000C:  # Double
 			property = ase_file.get_double()
-		0x000D: # String
+		0x000D:  # String
 			property = parse_aseprite_string(ase_file)
-		0x000E, 0x000F: # Point, size
+		0x000E, 0x000F:  # Point, size
 			property = Vector2(ase_file.get_32(), ase_file.get_32())
-		0x0010: # Rect
+		0x0010:  # Rect
 			property = Rect2()
 			property.position = Vector2(ase_file.get_32(), ase_file.get_32())
 			property.size = Vector2(ase_file.get_32(), ase_file.get_32())
-		0x0011: # Vector
+		0x0011:  # Vector
 			var n_of_elements := ase_file.get_32()
 			var element_type := ase_file.get_16()
 			property = []
-			if element_type == 0: # All elements are not of the same type
+			if element_type == 0:  # All elements are not of the same type
 				for i in n_of_elements:
 					var subelement_type := ase_file.get_16()
 					var subelement = parse_aseprite_variant(ase_file, subelement_type)
 					property.append(subelement)
-			else: # All elements are of the same type
+			else:  # All elements are of the same type
 				for i in n_of_elements:
 					var subelement = parse_aseprite_variant(ase_file, element_type)
 					property.append(subelement)
@@ -477,6 +507,6 @@ static func parse_aseprite_variant(ase_file: FileAccess, property_type: int) -> 
 				var subproperty_name := parse_aseprite_string(ase_file)
 				var subproperty_type := ase_file.get_16()
 				property[subproperty_name] = parse_aseprite_variant(ase_file, subproperty_type)
-		0x0013: # UUID
+		0x0013:  # UUID
 			property = ase_file.get_buffer(16)
 	return property
