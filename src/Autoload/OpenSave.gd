@@ -1088,9 +1088,7 @@ func open_aseprite_file(path: String) -> void:
 					var layer_opacity := ase_file.get_8() / 255.0
 					for k in 3:
 						ase_file.get_8()  # For future
-					var layer_name_length := ase_file.get_16()
-					var layer_name_characters := ase_file.get_buffer(layer_name_length)
-					var layer_name := layer_name_characters.get_string_from_utf8()
+					var layer_name := parse_aseprite_string(ase_file)
 					print("Layer type: ", layer_type, " child level: ", layer_child_level)
 					var layer: BaseLayer
 					if layer_type == 0:
@@ -1212,9 +1210,7 @@ func open_aseprite_file(path: String) -> void:
 						ase_file.get_buffer(6)  # For future
 						ase_file.get_buffer(3)  # Deprecated RGB values
 						ase_file.get_8() # Extra byte (zero)
-						var text_length := ase_file.get_16()
-						var text_characters := ase_file.get_buffer(text_length)
-						var text := text_characters.get_string_from_utf8()
+						var text := parse_aseprite_string(ase_file)
 						var tag := AnimationTag.new(text, Color.WHITE, from_frame + 1, to_frame + 1)
 						new_project.animation_tags.append(tag)
 				0x2019: # Palette Chunk
@@ -1222,18 +1218,23 @@ func open_aseprite_file(path: String) -> void:
 				0x2020: # User Data Chunk (TODO: Affect previous chunks)
 					var flags := ase_file.get_32()
 					if flags & 1 == 1:
-						var text_length := ase_file.get_16()
-						var text_characters := ase_file.get_buffer(text_length)
-						var text := text_characters.get_string_from_utf8()
+						var text := parse_aseprite_string(ase_file)
 						print(text)
 					if flags & 2 == 2:
 						var red := ase_file.get_8()
 						var green := ase_file.get_8()
 						var blue := ase_file.get_8()
 						var alpha := ase_file.get_8()
-					if flags & 4 == 4: # TODO
-						var property_size := ase_file.get_32()
-						var n_of_properties := ase_file.get_32()
+					if flags & 4 == 4:
+						var properties_map_size := ase_file.get_32()
+						var n_of_properties_maps := ase_file.get_32()
+						for k in n_of_properties_maps:
+							var properties_maps_key := ase_file.get_32()
+							var n_of_properties := ase_file.get_32()
+							for l in n_of_properties:
+								var property_name := parse_aseprite_string(ase_file)
+								var property_type := ase_file.get_16()
+								var property = parse_aseprite_variant(ase_file, property_type)
 				0x2022: # Slice Chunk
 					pass
 				0x2023: # Tileset Chunk
@@ -1244,9 +1245,7 @@ func open_aseprite_file(path: String) -> void:
 					var tile_height := ase_file.get_16()
 					var base_index := ase_file.get_16()
 					ase_file.get_buffer(14)  # Reserved
-					var tileset_name_length := ase_file.get_16()
-					var tileset_name_characters := ase_file.get_buffer(tileset_name_length)
-					var tileset_name := tileset_name_characters.get_string_from_utf8()
+					var tileset_name := parse_aseprite_string(ase_file)
 					var all_tiles_image_data: PackedByteArray
 					if tileset_flags & 1 == 1:
 						var external_id := ase_file.get_32()
@@ -1295,3 +1294,57 @@ func open_aseprite_file(path: String) -> void:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
+
+
+func parse_aseprite_string(ase_file: FileAccess) -> String:
+	var text_length := ase_file.get_16()
+	var text_characters := ase_file.get_buffer(text_length)
+	return text_characters.get_string_from_utf8()
+
+
+func parse_aseprite_variant(ase_file: FileAccess, property_type: int) -> Variant:
+	var property: Variant
+	match property_type:
+		0x0001, 0x0002, 0x0003: # bool, int8, uint8
+			property = ase_file.get_8()
+		0x0004, 0x0005: # int16, uint16
+			property = ase_file.get_16()
+		0x0006, 0x0007: # int32, uint32
+			property = ase_file.get_32()
+		0x0008, 0x0009: # int64, uint64
+			property = ase_file.get_64()
+		0x000A, 0x000B: # Fixed, float
+			property = ase_file.get_float()
+		0x000C: # Double
+			property = ase_file.get_double()
+		0x000D: # String
+			property = parse_aseprite_string(ase_file)
+		0x000E, 0x000F: # Point, size
+			property = Vector2(ase_file.get_32(), ase_file.get_32())
+		0x0010: # Rect
+			property = Rect2()
+			property.position = Vector2(ase_file.get_32(), ase_file.get_32())
+			property.size = Vector2(ase_file.get_32(), ase_file.get_32())
+		0x0011: # Vector
+			var n_of_elements := ase_file.get_32()
+			var element_type := ase_file.get_16()
+			property = []
+			if element_type == 0: # All elements are not of the same type
+				for i in n_of_elements:
+					var subelement_type := ase_file.get_16()
+					var subelement = parse_aseprite_variant(ase_file, subelement_type)
+					property.append(subelement)
+			else: # All elements are of the same type
+				for i in n_of_elements:
+					var subelement = parse_aseprite_variant(ase_file, element_type)
+					property.append(subelement)
+		0x0012:  # Nested properties map
+			var n_of_properties := ase_file.get_32()
+			property = {}
+			for i in n_of_properties:
+				var subproperty_name := parse_aseprite_string(ase_file)
+				var subproperty_type := ase_file.get_16()
+				property[subproperty_name] = parse_aseprite_variant(ase_file, subproperty_type)
+		0x0013: # UUID
+			property = ase_file.get_buffer(16)
+	return property
