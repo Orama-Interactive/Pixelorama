@@ -1037,8 +1037,7 @@ func open_aseprite_file(path: String) -> void:
 	ase_file.get_32()
 	ase_file.get_32()
 	var palette_entry_index := ase_file.get_8()
-	for i in 3:  # To ignore
-		ase_file.get_8()
+	ase_file.get_buffer(3)  # To ignore
 	var number_of_colors := ase_file.get_16()
 	var _pixel_width := ase_file.get_8()
 	var _pixel_height := ase_file.get_8()
@@ -1046,20 +1045,18 @@ func open_aseprite_file(path: String) -> void:
 	var _grid_position_y := ase_file.get_16()
 	var _grid_width := ase_file.get_16()
 	var _grid_height := ase_file.get_16()
-	for i in 84:  # For future
-		ase_file.get_8()
+	ase_file.get_buffer(84) # For future
 
 	for i in frames:
 		print("Frame bytes: ", ase_file.get_32())
 		var frame_magic_number := ase_file.get_16()
 		if frame_magic_number != 0xF1FA:
 			print("Error in frame %s" % i)
-			#continue
+			continue
 		var frame := Frame.new()
 		var number_of_chunks := ase_file.get_16()
 		var frame_dur := ase_file.get_16()
-		for j in 2:  # For future
-			ase_file.get_8()
+		ase_file.get_buffer(2) # For future
 		var new_number_of_chunks := ase_file.get_32()
 		print("CHUNKS ", number_of_chunks, " ", new_number_of_chunks)
 		if new_number_of_chunks != 0:
@@ -1143,8 +1140,7 @@ func open_aseprite_file(path: String) -> void:
 						var x_flip_bitmask := ase_file.get_32()
 						var y_flip_bitmask := ase_file.get_32()
 						var diagonal_flip_bitmask := ase_file.get_32()
-						for k in 10:
-							ase_file.get_8()  # Reserved
+						ase_file.get_buffer(10)  # Reserved
 						var tilemap_cel := cel as CelTileMap
 						var tileset := tilemap_cel.tileset
 						var bytes_per_tile := bits_per_tile / 8
@@ -1181,23 +1177,36 @@ func open_aseprite_file(path: String) -> void:
 					var y_position := ase_file.get_float()
 					var cel_width := ase_file.get_float()
 					var cel_height := ase_file.get_float()
-					for k in 16:
-						ase_file.get_8()  # For future
+					ase_file.get_buffer(16)  # For future
 				0x2007: # Color Profile Chunk
 					var type := ase_file.get_16()
 					var flags := ase_file.get_16()
 					var fixed_gamma := ase_file.get_float()
-					for k in 8:
-						ase_file.get_8()  # For future
+					ase_file.get_buffer(8)  # For future
 					if type == 2: # ICC
 						var icc_profile_data_length := ase_file.get_32()
 						for k in icc_profile_data_length:
 							ase_file.get_8() # TODO
 				0x2008: # External Files Chunk
-					pass
-				0x2016: # Mask Chunk
-					pass
-				0x2017: # Path Chunk
+					var n_of_entries := ase_file.get_32()
+					ase_file.get_buffer(8) # Reserved
+					for k in n_of_entries:
+						var entry_id := ase_file.get_32()
+						var entry_type := ase_file.get_8()
+						ase_file.get_buffer(7) # Reserved
+						var external_file_name := parse_aseprite_string(ase_file)
+				0x2016: # Mask Chunk (Deprecated)
+					var _position_x := ase_file.get_16()
+					var _position_y := ase_file.get_16()
+					var mask_width := ase_file.get_16()
+					var mask_height := ase_file.get_16()
+					ase_file.get_buffer(8) # For future
+					var _mask_name := parse_aseprite_string(ase_file)
+					# Read image data
+					var byte_data_size := mask_height * ((mask_width + 7) / 8)
+					for k in byte_data_size:
+						ase_file.get_8()
+				0x2017: # Path Chunk (Never used)
 					pass
 				0x2018: # Tags Chunk
 					var n_of_tags := ase_file.get_16()
@@ -1214,7 +1223,18 @@ func open_aseprite_file(path: String) -> void:
 						var tag := AnimationTag.new(text, Color.WHITE, from_frame + 1, to_frame + 1)
 						new_project.animation_tags.append(tag)
 				0x2019: # Palette Chunk
-					pass
+					var _palette_size := ase_file.get_32()
+					var first_index_to_change := ase_file.get_32()
+					var last_index_to_change := ase_file.get_32()
+					ase_file.get_buffer(8)  # For future
+					for k in range(first_index_to_change, last_index_to_change + 1):
+						var flags := ase_file.get_16()
+						var _red := ase_file.get_8()
+						var _green := ase_file.get_8()
+						var _blue := ase_file.get_8()
+						var _alpha := ase_file.get_8()
+						if flags & 1 == 1:
+							var _name := parse_aseprite_string(ase_file)
 				0x2020: # User Data Chunk (TODO: Affect previous chunks)
 					var flags := ase_file.get_32()
 					if flags & 1 == 1:
@@ -1236,7 +1256,25 @@ func open_aseprite_file(path: String) -> void:
 								var property_type := ase_file.get_16()
 								var property = parse_aseprite_variant(ase_file, property_type)
 				0x2022: # Slice Chunk
-					pass
+					var slice_keys := ase_file.get_32()
+					var slice_flags := ase_file.get_32()
+					ase_file.get_32() # Reserved
+					var _slice_name := parse_aseprite_string(ase_file)
+					for k in slice_keys:
+						# This slice is valid from this frame to the end of the animation
+						var _frame_number := ase_file.get_32()
+						var _slice_origin_x := ase_file.get_32()
+						var _slice_origin_y := ase_file.get_32()
+						var _slice_width := ase_file.get_32()
+						var _slice_height := ase_file.get_32()
+						if slice_flags & 1 == 1:
+							var _center_position_x := ase_file.get_32()
+							var _center_position_y := ase_file.get_32()
+							var _center_width := ase_file.get_32()
+							var _center_height := ase_file.get_32()
+						if slice_flags & 2 == 2:
+							var _pivot_position_x := ase_file.get_32()
+							var _pivot_position_y := ase_file.get_32()
 				0x2023: # Tileset Chunk
 					var tileset_id := ase_file.get_32()
 					var tileset_flags := ase_file.get_32()
@@ -1263,6 +1301,8 @@ func open_aseprite_file(path: String) -> void:
 						var image := Image.create_from_data(tile_width, tile_height, false, new_project.get_image_format(), tile_image_data)
 						tileset.add_tile(image, null, 0)
 					new_project.tilesets.append(tileset)
+				_:
+					printerr("Unsupported chunk type.")
 		new_project.frames.append(frame)
 		# Add cels if any are missing. Happens when there are group layers with no children
 		# on the top of the layer order.
