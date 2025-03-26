@@ -106,7 +106,6 @@ static func open_aseprite_file(path: String) -> void:
 		for j in number_of_chunks:
 			var chunk_size := ase_file.get_32()
 			var chunk_type := ase_file.get_16()
-			print("Chunk type: %x, chunk size: %s" % [chunk_type, chunk_size])
 			if chunk_type != 0x2020:
 				previous_chunk_type = chunk_type
 			match chunk_type:
@@ -242,7 +241,6 @@ static func open_aseprite_file(path: String) -> void:
 					# in Aseprite files, so we need to make our own.
 					while layer_index > frame.cels.size():
 						var group_layer := new_project.layers[frame.cels.size()]
-						print(group_layer.get_layer_type(), " ", group_layer)
 						var group_cel := group_layer.new_empty_cel()
 						frame.cels.append(group_cel)
 					frame.cels.append(cel)
