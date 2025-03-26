@@ -896,13 +896,16 @@ func move_layers(
 		removed_cels.append([])
 		for frame in frames:
 			removed_cels[i].append(frame.cels.pop_at(from_indices[i] - i))
-		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
+		if Global.current_project == self:
+			Global.animation_timeline.project_layer_removed(from_indices[i] - i)
 	for i in to_indices.size():
 		layers.insert(to_indices[i], removed_layers[i])
 		for f in frames.size():
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
-		Global.animation_timeline.project_layer_added(to_indices[i])
-	_update_layer_ui()
+		if Global.current_project == self:
+			Global.animation_timeline.project_layer_added(to_indices[i])
+	if Global.current_project == self:
+		_update_layer_ui()
 
 
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.

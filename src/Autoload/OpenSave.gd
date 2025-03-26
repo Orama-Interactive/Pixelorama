@@ -55,7 +55,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		shader_copied.emit(new_path)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
-
+	elif file_ext == "ase" or file_ext == "aseprite":
+		AsepriteParser.open_aseprite_file(file)
 	else:  # Image files
 		# Attempt to load as APNG.
 		# Note that the APNG importer will *only* succeed for *animated* PNGs.
@@ -162,7 +163,7 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 		var aimg_frame: AImgIOFrame = v
 		var frame := Frame.new()
 		if not frames_agree:
-			frame.duration = aimg_frame.duration * project.fps
+			frame.set_duration_in_seconds(aimg_frame.duration, project.fps)
 		var content := aimg_frame.content
 		content.convert(project.get_image_format())
 		frame.cels.append(PixelCel.new(content, 1))

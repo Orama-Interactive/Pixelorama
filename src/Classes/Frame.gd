@@ -17,6 +17,10 @@ func get_duration_in_seconds(fps: float) -> float:
 	return duration * (1.0 / fps)
 
 
+func set_duration_in_seconds(seconds: float, fps: float) -> void:
+	duration = seconds * fps
+
+
 func position_in_seconds(project: Project, start_from := 0) -> float:
 	var pos := 0.0
 	var index := project.frames.find(self)
