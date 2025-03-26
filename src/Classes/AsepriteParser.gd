@@ -47,7 +47,7 @@ const BASE_CEL_CHUNK_SIZE := 22
 const IMAGE_CEL_CHUNK_SIZE := BASE_CEL_CHUNK_SIZE + 4
 const TILEMAP_CEL_CHUNK_SIZE := BASE_CEL_CHUNK_SIZE + 32
 
-
+# gdlint: disable=function-variable-name
 static func open_aseprite_file(path: String) -> void:
 	var ase_file := FileAccess.open(path, FileAccess.READ)
 	if FileAccess.get_open_error() != OK or ase_file == null:
@@ -220,10 +220,7 @@ static func open_aseprite_file(path: String) -> void:
 						var tile_data := tile_data_compressed.decompress(
 							tile_data_size, FileAccess.COMPRESSION_DEFLATE
 						)
-						@warning_ignore("integer_division")
-						var start_pos_x := x_pos / tileset.tile_size.x
-						@warning_ignore("integer_division")
-						var start_pos_y := y_pos / tileset.tile_size.y
+						tilemap_cel.offset = Vector2(x_pos, y_pos)
 						for y in height:
 							for x in width:
 								var cell_pos := x + (y * width)
@@ -231,9 +228,7 @@ static func open_aseprite_file(path: String) -> void:
 								var transformed_bit := 0
 								if bits_per_tile == 32:
 									transformed_bit = tile_data[cell_pos * bytes_per_tile + 3]
-								var cell := tilemap_cel.get_cell_at(
-									Vector2i(start_pos_x + x, start_pos_y + y)
-								)
+								var cell := tilemap_cel.get_cell_at(Vector2i(x, y))
 								var flip_h := transformed_bit & 128 == 128
 								var flip_v := transformed_bit & 64 == 64
 								var transpose := transformed_bit & 32 == 32
