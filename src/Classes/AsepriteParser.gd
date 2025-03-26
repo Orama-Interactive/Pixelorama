@@ -47,6 +47,7 @@ const BASE_CEL_CHUNK_SIZE := 22
 const IMAGE_CEL_CHUNK_SIZE := BASE_CEL_CHUNK_SIZE + 4
 const TILEMAP_CEL_CHUNK_SIZE := BASE_CEL_CHUNK_SIZE + 32
 
+
 # gdlint: disable=function-variable-name
 static func open_aseprite_file(path: String) -> void:
 	var ase_file := FileAccess.open(path, FileAccess.READ)
