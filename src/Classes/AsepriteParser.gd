@@ -62,6 +62,7 @@ static func open_aseprite_file(path: String) -> void:
 	var project_height := ase_file.get_16()
 	var project_size := Vector2i(project_width, project_height)
 	var new_project := Project.new([], path.get_file().get_basename(), project_size)
+	new_project.fps = 1.0
 	var color_depth := ase_file.get_16()
 	var image_format := Image.FORMAT_RGBA8
 	var pixel_byte := 4
@@ -94,7 +95,8 @@ static func open_aseprite_file(path: String) -> void:
 			continue
 		var frame := Frame.new()
 		var number_of_chunks := ase_file.get_16()
-		var _frame_dur := ase_file.get_16()  # TODO
+		var frame_dur := ase_file.get_16()
+		frame.set_duration_in_seconds(frame_dur * 0.001, new_project.fps)
 		ase_file.get_buffer(2)  # For future
 		var new_number_of_chunks := ase_file.get_32()
 		if new_number_of_chunks != 0:
