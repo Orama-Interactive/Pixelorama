@@ -11,7 +11,7 @@ var artworks: Array[Artwork] = [
 	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/bearsaidno.png"),
 		"BearSaidNo",
-		"",
+		"https://bearsaidno.neocities.org/",
 		Color.WHITE,
 		"Licensed under MIT"
 	),
