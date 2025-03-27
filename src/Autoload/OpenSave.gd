@@ -55,6 +55,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		shader_copied.emit(new_path)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
+	elif file_ext == "ora":
+		open_ora_file(file)
 	elif file_ext == "ase" or file_ext == "aseprite":
 		AsepriteParser.open_aseprite_file(file)
 	else:  # Image files
@@ -235,7 +237,7 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 	elif err != OK:
 		Global.popup_error(tr("File failed to open. Error code %s (%s)") % [err, error_string(err)])
 		return
-	else:
+	else:  # Parse the ZIP file
 		if empty_project:
 			new_project = Global.current_project
 			new_project.frames = []
@@ -963,6 +965,118 @@ func open_audio_file(path: String) -> void:
 	var new_layer := AudioLayer.new(project, path.get_basename().get_file())
 	new_layer.audio = audio_stream
 	Global.animation_timeline.add_layer(new_layer, project)
+
+
+# Based on https://www.openraster.org/
+func open_ora_file(path: String) -> void:
+	var zip_reader := ZIPReader.new()
+	var err := zip_reader.open(path)
+	if err != OK:
+		print("Error opening ora file: ", error_string(err))
+		return
+	var data_xml := zip_reader.read_file("stack.xml")
+	var parser := XMLParser.new()
+	err = parser.open_buffer(data_xml)
+	if err != OK:
+		print("Error parsing XML from ora file: ", error_string(err))
+		zip_reader.close()
+		return
+	var new_project := Project.new([Frame.new()], path.get_file().get_basename())
+	var selected_layer: BaseLayer
+	var stacks_found := 0
+	var current_stack: Array[GroupLayer] = []
+	while parser.read() != ERR_FILE_EOF:
+		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			var node_name := parser.get_node_name()
+			if node_name == "image":
+				var width := parser.get_named_attribute_value_safe("w")
+				if not width.is_empty():
+					new_project.size.x = str_to_var(width)
+				var height := parser.get_named_attribute_value_safe("h")
+				if not height.is_empty():
+					new_project.size.y = str_to_var(height)
+			elif node_name == "layer" or node_name == "stack":
+				for prev_layer in new_project.layers:
+					prev_layer.index += 1
+				var layer_name := parser.get_named_attribute_value_safe("name")
+				var layer: BaseLayer
+				if node_name == "stack":
+					stacks_found += 1
+					if stacks_found == 1:
+						continue
+					layer = GroupLayer.new(new_project, layer_name)
+					if current_stack.size() > 0:
+						layer.parent = current_stack[-1]
+					current_stack.append(layer)
+				else:
+					layer = PixelLayer.new(new_project, layer_name)
+					if current_stack.size() > 0:
+						layer.parent = current_stack[-1]
+				new_project.layers.insert(0, layer)
+				if new_project.layers.size() == 1:
+					selected_layer = layer
+				layer.index = 0
+				layer.opacity = float(parser.get_named_attribute_value_safe("opacity"))
+				if parser.get_named_attribute_value_safe("selected") == "true":
+					selected_layer = layer
+				layer.visible = parser.get_named_attribute_value_safe("visibility") != "hidden"
+				layer.locked = parser.get_named_attribute_value_safe("edit-locked") == "true"
+				var blend_mode := parser.get_named_attribute_value_safe("composite-op")
+				match blend_mode:
+					"svg:multiply":
+						layer.blend_mode = BaseLayer.BlendModes.MULTIPLY
+					"svg:screen":
+						layer.blend_mode = BaseLayer.BlendModes.SCREEN
+					"svg:overlay":
+						layer.blend_mode = BaseLayer.BlendModes.OVERLAY
+					"svg:darken":
+						layer.blend_mode = BaseLayer.BlendModes.DARKEN
+					"svg:lighten":
+						layer.blend_mode = BaseLayer.BlendModes.LIGHTEN
+					"svg:color-dodge":
+						layer.blend_mode = BaseLayer.BlendModes.COLOR_DODGE
+					"svg:hard-light":
+						layer.blend_mode = BaseLayer.BlendModes.HARD_LIGHT
+					"svg:soft-light":
+						layer.blend_mode = BaseLayer.BlendModes.SOFT_LIGHT
+					"svg:difference":
+						layer.blend_mode = BaseLayer.BlendModes.DIFFERENCE
+					"svg:color":
+						layer.blend_mode = BaseLayer.BlendModes.COLOR
+					"svg:luminosity":
+						layer.blend_mode = BaseLayer.BlendModes.LUMINOSITY
+					"svg:hue":
+						layer.blend_mode = BaseLayer.BlendModes.HUE
+					"svg:saturation":
+						layer.blend_mode = BaseLayer.BlendModes.SATURATION
+					"svg:dst-out":
+						layer.blend_mode = BaseLayer.BlendModes.ERASE
+					_:
+						if "divide" in blend_mode:  # For example, krita:divide
+							layer.blend_mode = BaseLayer.BlendModes.DIVIDE
+				# Create cel
+				var cel := layer.new_empty_cel()
+				if cel is PixelCel:
+					var image_path := parser.get_named_attribute_value_safe("src")
+					var image_data := zip_reader.read_file(image_path)
+					var image := Image.new()
+					image.load_png_from_buffer(image_data)
+					var image_rect := Rect2i(Vector2i.ZERO, image.get_size())
+					var image_x := int(parser.get_named_attribute_value("x"))
+					var image_y := int(parser.get_named_attribute_value("y"))
+					cel.get_image().blit_rect(image, image_rect, Vector2i(image_x, image_y))
+				new_project.frames[0].cels.insert(0, cel)
+		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
+			var node_name := parser.get_node_name()
+			if node_name == "stack":
+				current_stack.pop_back()
+	zip_reader.close()
+	new_project.order_layers()
+	new_project.selected_cels.clear()
+	new_project.change_cel(0, new_project.layers.find(selected_layer))
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
 
 
 func update_autosave() -> void:
