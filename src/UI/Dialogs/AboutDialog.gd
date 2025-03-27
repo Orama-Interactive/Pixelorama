@@ -166,6 +166,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Alejandro Moctezuma (AlejandroMoc)": ["Spanish"],
 	"Seifer23": ["Catalan"],
 	"Joel García Cascalló (jocsencat)": ["Catalan"],
+	"Dracks": ["Catalan"],
 	"Agnis Aldiņš (NeZvers)": ["Latvian"],
 	"Edgars Korns (Eddy11)": ["Latvian"],
 	"Teashrock": ["Esperanto"],
