@@ -19,6 +19,7 @@ Built using Godot 4.4
 - A color curves image and layer effect has been added.
 - A gradient layer effect has been added, alongside its already existing image effect equivalent, allowing for non-destructive gradient generation.
 - It is now possible to load custom Godot shaders as image and layer effects.
+- Importing OpenRaster (`.ora`) and Aseprite (`.ase`/`.aseprite`) files is now possible. Exporting to these file formats is not yet supported.
 - Loading custom dithering patterns as images is now possible. This is not exposed somewhere in the UI yet, users have to go to Pixelorama's data folder (the same place where its settings, backups etc are kept), and create a "dither_matrices" folder and add the images there.
 - A new Reset layout option has been added to the Layouts submenu, that can be used to reset default layouts to their original state.
 - Implemented support for multiple grids. [#1122](https://github.com/Orama-Interactive/Pixelorama/pull/1122)
