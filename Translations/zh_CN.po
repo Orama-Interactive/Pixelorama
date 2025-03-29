@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-03-13 16:38\n"
+"PO-Revision-Date: 2025-03-29 12:07\n"
 
 msgid "OK"
 msgstr "确定"
@@ -74,7 +74,7 @@ msgstr "图像"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "项目"
 
 msgid "Effects"
 msgstr "效果"
@@ -244,7 +244,7 @@ msgstr "反向"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "选择单元格区域"
 
 msgid "Modify"
 msgstr "修改"
@@ -941,7 +941,7 @@ msgstr "对话框弹出时变暗界面"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
-msgstr ""
+msgstr "显示通知标签"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -1348,15 +1348,15 @@ msgstr "许可证"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "许可证"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
-msgstr ""
+msgstr "Godot 许可证"
 
 #. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
 msgid "Third-party Licenses"
-msgstr ""
+msgstr "第三方许可证"
 
 msgid "English"
 msgstr "英语"
@@ -1636,7 +1636,14 @@ msgid "Curve Tool\n\n"
 "Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "曲线工具\n\n"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键\n\n"
+"绘制贝塞尔曲线\n"
+"按 %s/%s 添加新点\n"
+"双击完成绘制曲线\n"
+"按下并拖动以控制曲率\n"
+"按 %s 删除最后添加的点"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -2459,15 +2466,15 @@ msgstr "添加帧标签"
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "选择像素"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "链接单元格到"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr ""
+msgstr "取消链接单元格"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
@@ -2806,7 +2813,7 @@ msgstr "文件已保存"
 
 #. A notification label that appears when the backup of the currently opened project gets saved.
 msgid "Backup saved"
-msgstr ""
+msgstr "备份已保存"
 
 msgid "File failed to open. Error code %s"
 msgstr "打开文件失败。错误代码 %s"
