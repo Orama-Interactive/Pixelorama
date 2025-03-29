@@ -6,29 +6,29 @@ reloadable = true
 
 [libraries]
 
-macos.debug = "res://addons/gdextension/lib/bin/libpixelorama.macos.template_debug.framework"
-macos.release = "res://addons/gdextension/lib/bin/libpixelorama.macos.template_release.framework"
-ios.debug = "res://addons/gdextension/lib/bin/libpixelorama.ios.template_debug.xcframework"
-ios.release = "res://addons/gdextension/lib/bin/libpixelorama.ios.template_release.xcframework"
-windows.debug.x86_32 = "res://addons/gdextension/lib/bin/libpixelorama.windows.template_debug.x86_32.dll"
-windows.release.x86_32 = "res://addons/gdextension/lib/bin/libpixelorama.windows.template_release.x86_32.dll"
-windows.debug.x86_64 = "res://addons/gdextension/lib/bin/libpixelorama.windows.template_debug.x86_64.dll"
-windows.release.x86_64 = "res://addons/gdextension/lib/bin/libpixelorama.windows.template_release.x86_64.dll"
-linux.debug.x86_64 = "res://addons/gdextension/lib/bin/libpixelorama_lib.linux.template_debug.x86_64.so"
-linux.release.x86_64 = "res://addons/gdextension/lib/bin/libpixelorama.linux.template_release.x86_64.so"
-linux.debug.arm64 = "res://addons/gdextension/lib/bin/libpixelorama.linux.template_debug.arm64.so"
-linux.release.arm64 = "res://addons/gdextension/lib/bin/libpixelorama.linux.template_release.arm64.so"
-linux.debug.rv64 = "res://addons/gdextension/lib/bin/libpixelorama.linux.template_debug.rv64.so"
-linux.release.rv64 = "res://addons/gdextension/lib/bin/libpixelorama.linux.template_release.rv64.so"
-android.debug.x86_64 = "res://addons/gdextension/lib/bin/libpixelorama.android.template_debug.x86_64.so"
-android.release.x86_64 = "res://addons/gdextension/lib/bin/libpixelorama.android.template_release.x86_64.so"
-android.debug.arm64 = "res://addons/gdextension/lib/bin/libpixelorama.android.template_debug.arm64.so"
-android.release.arm64 = "res://addons/gdextension/lib/bin/libpixelorama.android.template_release.arm64.so"
+macos.debug = "res://gdextension/lib/bin/libpixelorama.macos.template_debug.framework"
+macos.release = "res://gdextension/lib/bin/libpixelorama.macos.template_release.framework"
+ios.debug = "res://gdextension/lib/bin/libpixelorama.ios.template_debug.xcframework"
+ios.release = "res://gdextension/lib/bin/libpixelorama.ios.template^_release.xcframework"
+windows.debug.x86_32 = "res://gdextension/lib/bin/libpixelorama.windows.template_debug.x86_32.dll"
+windows.release.x86_32 = "res://gdextension/lib/bin/libpixelorama.windows.template_release.x86_32.dll"
+windows.debug.x86_64 = "res://gdextension/lib/bin/libpixelorama.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "res://gdextension/lib/bin/libpixelorama.windows.template_release.x86_64.dll"
+linux.debug.x86_64 = "res://gdextension/lib/bin/libpixelorama_lib.linux.template_debug.x86_64.so"
+linux.release.x86_64 = "res://gdextension/lib/bin/libpixelorama.linux.template_release.x86_64.so"
+linux.debug.arm64 = "res://gdextension/lib/bin/libpixelorama.linux.template_debug.arm64.so"
+linux.release.arm64 = "res://gdextension/lib/bin/libpixelorama.linux.template_release.arm64.so"
+linux.debug.rv64 = "res://gdextension/lib/bin/libpixelorama.linux.template_debug.rv64.so"
+linux.release.rv64 = "res://gdextension/lib/bin/libpixelorama.linux.template_release.rv64.so"
+android.debug.x86_64 = "res://gdextension/lib/bin/libpixelorama.android.template_debug.x86_64.so"
+android.release.x86_64 = "res://gdextension/lib/bin/libpixelorama.android.template_release.x86_64.so"
+android.debug.arm64 = "res://gdextension/lib/bin/libpixelorama.android.template_debug.arm64.so"
+android.release.arm64 = "res://gdextension/lib/bin/libpixelorama.android.template_release.arm64.so"
 
 [dependencies]
 ios.debug = {
-    "res://addons/gdextension/lib/bin/libgodot-cpp.ios.template_debug.xcframework": ""
+    "res://gdextension/lib/bin/libgodot-cpp.ios.template_debug.xcframework": ""
 }
 ios.release = {
-    "res://addons/gdextension/lib/bin/libgodot-cpp.ios.template_release.xcframework": ""
+    "res://gdextension/lib/bin/libgodot-cpp.ios.template_release.xcframework": ""
 }
