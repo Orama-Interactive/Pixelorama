@@ -52,7 +52,10 @@ func draw_preview() -> void:
 	if !_move && _rect.has_area():
 		var temp_rect := _rect
 
-		var points := DrawingAlgos.get_ellipse_points(Vector2.ZERO, temp_rect.size)
+		var points_untyped := DrawingAlgosCppAutoload.algo.get_ellipse_points(Vector2.ZERO, temp_rect.size)
+		# necessary conversion from an untyped Array to a Vector2i Array as godot-cpp does not support that type
+		var points : Array[Vector2i]
+		points.assign(points_untyped)
 		var image := Image.create(
 			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 		)
