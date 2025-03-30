@@ -211,7 +211,8 @@ func _clear() -> void:
 	Global.canvas.previews.queue_redraw()
 
 
-## Get the [member _curve]'s baked points, and draw lines between them using [method _fill_gap].
+## Get the [member _curve]'s baked points, and draw lines between them
+## using [method Geometry2D.bresenham_line].
 func _bezier() -> Array[Vector2i]:
 	var last_pixel := Global.canvas.current_pixel.floor()
 	if Global.mirror_view:
@@ -224,46 +225,8 @@ func _bezier() -> Array[Vector2i]:
 	for i in points.size() - 1:
 		var point1 := points[i]
 		var point2 := points[i + 1]
-		final_points.append_array(_fill_gap(point1, point2))
+		final_points.append_array(bresenham_line_thickness(point1, point2, _thickness))
 	return final_points
-
-
-## Fills the gap between [param point_a] and [param point_b] using Bresenham's line algorithm.
-## Takes the [member _thickness] into account.
-func _fill_gap(point_a: Vector2i, point_b: Vector2i) -> Array[Vector2i]:
-	var array: Array[Vector2i] = []
-	var dx := absi(point_b.x - point_a.x)
-	var dy := -absi(point_b.y - point_a.y)
-	var err := dx + dy
-	var e2 := err << 1
-	var sx := 1 if point_a.x < point_b.x else -1
-	var sy := 1 if point_a.y < point_b.y else -1
-	var x := point_a.x
-	var y := point_a.y
-
-	var start := point_a - Vector2i.ONE * (_thickness >> 1)
-	var end := start + Vector2i.ONE * _thickness
-	for yy in range(start.y, end.y):
-		for xx in range(start.x, end.x):
-			array.append(Vector2i(xx, yy))
-
-	while !(x == point_b.x && y == point_b.y):
-		e2 = err << 1
-		if e2 >= dy:
-			err += dy
-			x += sx
-		if e2 <= dx:
-			err += dx
-			y += sy
-
-		var pos := Vector2i(x, y)
-		start = pos - Vector2i.ONE * (_thickness >> 1)
-		end = start + Vector2i.ONE * _thickness
-		for yy in range(start.y, end.y):
-			for xx in range(start.x, end.x):
-				array.append(Vector2i(xx, yy))
-
-	return array
 
 
 func _fill_bitmap_with_points(points: Array[Vector2i], bitmap_size: Vector2i) -> BitMap:

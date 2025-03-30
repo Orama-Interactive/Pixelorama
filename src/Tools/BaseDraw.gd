@@ -392,8 +392,6 @@ func _draw_tool(pos: Vector2) -> PackedVector2Array:
 	return PackedVector2Array()  # empty fallback
 
 
-# Bresenham's Algorithm
-# Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
 func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 	if Global.mirror_view:
 		# Even brushes are not perfectly centred and are offsetted by 1 px so we add it
@@ -401,25 +399,11 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 			start.x += 1
 			end.x += 1
 	_prepare_tool()
-	var dx := absi(end.x - start.x)
-	var dy := -absi(end.y - start.y)
-	var err := dx + dy
-	var e2 := err << 1
-	var sx := 1 if start.x < end.x else -1
-	var sy := 1 if start.y < end.y else -1
-	var x := start.x
-	var y := start.y
 	# This needs to be a dictionary to ensure duplicate coordinates are not being added
 	var coords_to_draw := {}
-	while !(x == end.x && y == end.y):
-		e2 = err << 1
-		if e2 >= dy:
-			err += dy
-			x += sx
-		if e2 <= dx:
-			err += dx
-			y += sy
-		var current_pixel_coord := Vector2(x, y)
+	var pixel_coords := Geometry2D.bresenham_line(start, end)
+	pixel_coords.pop_front()
+	for current_pixel_coord in pixel_coords:
 		if _spacing_mode:
 			current_pixel_coord = get_spacing_position(current_pixel_coord)
 		for coord in _draw_tool(current_pixel_coord):
@@ -428,7 +412,20 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 		_set_pixel_no_cache(c)
 
 
-## Compute the array of coordinates that should be drawn
+## Calls [method Geometry2D.bresenham_line] and takes [param thickness] into account.
+## Used by tools such as the line and the curve tool.
+func bresenham_line_thickness(from: Vector2i, to: Vector2i, thickness: int) -> Array[Vector2i]:
+	var array: Array[Vector2i] = []
+	for pixel in Geometry2D.bresenham_line(from, to):
+		var start := pixel - Vector2i.ONE * (thickness >> 1)
+		var end := start + Vector2i.ONE * thickness
+		for yy in range(start.y, end.y):
+			for xx in range(start.x, end.x):
+				array.append(Vector2i(xx, yy))
+	return array
+
+
+## Compute the array of coordinates that should be drawn.
 func _compute_draw_tool_pixel(pos: Vector2) -> PackedVector2Array:
 	var brush_size := _brush_size_dynamics
 	if Tools.is_placing_tiles():
@@ -708,24 +705,8 @@ func _create_line_indicator(indicator: BitMap, start: Vector2i, end: Vector2i) -
 	start += offset
 	end += offset
 
-	var dx := absi(end.x - start.x)
-	var dy := -absi(end.y - start.y)
-	var err := dx + dy
-	var e2 := err << 1
-	var sx := 1 if start.x < end.x else -1
-	var sy := 1 if start.y < end.y else -1
-	var x := start.x
-	var y := start.y
-	while !(x == end.x && y == end.y):
-		_blit_indicator(bitmap, indicator, Vector2i(x, y))
-		e2 = err << 1
-		if e2 >= dy:
-			err += dy
-			x += sx
-		if e2 <= dx:
-			err += dx
-			y += sy
-	_blit_indicator(bitmap, indicator, Vector2i(x, y))
+	for pixel in Geometry2D.bresenham_line(start, end):
+		_blit_indicator(bitmap, indicator, pixel)
 	return bitmap
 
 

@@ -47,7 +47,8 @@ func draw_move(pos_i: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if !_move:
-		append_gap(_last_position, pos)
+		for pixel in Geometry2D.bresenham_line(_last_position, pos):
+			_draw_points.append_array(draw_tool(pixel))
 		_last_position = pos
 		_draw_points.append_array(draw_tool(pos))
 		_offset = pos
@@ -133,28 +134,6 @@ func select_pixel(point: Vector2i, project: Project, select: bool) -> void:
 		var cell_position := tilemap.get_cell_position(point) * tilemap.tileset.tile_size
 		select_tilemap_cell(tilemap, cell_position, project.selection_map, select)
 	project.selection_map.select_pixel(point, select)
-
-
-# Bresenham's Algorithm
-# Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func append_gap(start: Vector2i, end: Vector2i) -> void:
-	var dx := absi(end.x - start.x)
-	var dy := -absi(end.y - start.y)
-	var err := dx + dy
-	var e2 := err << 1
-	var sx := 1 if start.x < end.x else -1
-	var sy := 1 if start.y < end.y else -1
-	var x := start.x
-	var y := start.y
-	while !(x == end.x && y == end.y):
-		e2 = err << 1
-		if e2 >= dy:
-			err += dy
-			x += sx
-		if e2 <= dx:
-			err += dx
-			y += sy
-		_draw_points.append_array(draw_tool(Vector2i(x, y)))
 
 
 func draw_tool(pos: Vector2i) -> Array[Vector2i]:

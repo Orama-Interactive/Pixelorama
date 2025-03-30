@@ -151,7 +151,7 @@ func draw_end(pos: Vector2i) -> void:
 func draw_preview() -> void:
 	var canvas := Global.canvas.previews_sprite
 	if _drawing:
-		var points := _get_points()
+		var points := bresenham_line_thickness(_start, _dest, _thickness)
 		var image := Image.create(
 			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 		)
@@ -167,7 +167,7 @@ func draw_preview() -> void:
 
 
 func _draw_shape() -> void:
-	var points := _get_points()
+	var points := bresenham_line_thickness(_start, _dest, _thickness)
 	prepare_undo("Draw Shape")
 	var images := _get_selected_draw_images()
 	for point in points:
@@ -182,42 +182,6 @@ func _draw_shape() -> void:
 					_drawer.set_pixel(image, point, tool_slot.color)
 
 	commit_undo()
-
-
-func _get_points() -> Array[Vector2i]:
-	var array: Array[Vector2i] = []
-	var dx := absi(_dest.x - _start.x)
-	var dy := -absi(_dest.y - _start.y)
-	var err := dx + dy
-	var e2 := err << 1
-	var sx := 1 if _start.x < _dest.x else -1
-	var sy := 1 if _start.y < _dest.y else -1
-	var x := _start.x
-	var y := _start.y
-
-	var start := _start - Vector2i.ONE * (_thickness >> 1)
-	var end := start + Vector2i.ONE * _thickness
-	for yy in range(start.y, end.y):
-		for xx in range(start.x, end.x):
-			array.append(Vector2i(xx, yy))
-
-	while !(x == _dest.x && y == _dest.y):
-		e2 = err << 1
-		if e2 >= dy:
-			err += dy
-			x += sx
-		if e2 <= dx:
-			err += dx
-			y += sy
-
-		var pos := Vector2i(x, y)
-		start = pos - Vector2i.ONE * (_thickness >> 1)
-		end = start + Vector2i.ONE * _thickness
-		for yy in range(start.y, end.y):
-			for xx in range(start.x, end.x):
-				array.append(Vector2i(xx, yy))
-
-	return array
 
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:

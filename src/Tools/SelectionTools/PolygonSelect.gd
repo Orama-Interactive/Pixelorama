@@ -20,7 +20,7 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		if event.double_click and event.button_index == tool_slot.button and _draw_points:
 			$DoubleClickTimer.start()
-			append_gap(_draw_points[-1], _draw_points[0], _draw_points)
+			_draw_points.append_array(Geometry2D.bresenham_line(_draw_points[-1], _draw_points[0]))
 			_ready_to_apply = true
 			apply_selection(Vector2i.ZERO)  # Argument doesn't matter
 	else:
@@ -51,7 +51,8 @@ func draw_end(pos: Vector2i) -> void:
 		return
 	pos = snap_position(pos)
 	if !_move and _draw_points:
-		append_gap(_draw_points[-1], pos, _draw_points)
+		if _draw_points.size() > 1 or _draw_points[-1] != pos:
+			_draw_points.append_array(Geometry2D.bresenham_line(_draw_points[-1], pos))
 		if pos == _draw_points[0] and _draw_points.size() > 1:
 			_ready_to_apply = true
 
@@ -62,7 +63,9 @@ func draw_preview() -> void:
 	var previews := Global.canvas.previews_sprite
 	if _ongoing_selection and !_move:
 		var preview_draw_points := _draw_points.duplicate() as Array[Vector2i]
-		append_gap(_draw_points[-1], _last_position, preview_draw_points)
+		preview_draw_points.append_array(
+			Geometry2D.bresenham_line(_draw_points[-1], _last_position)
+		)
 		var image := Image.create(
 			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 		)
@@ -161,28 +164,6 @@ func select_pixel(point: Vector2i, project: Project, select: bool) -> void:
 		var cell_position := tilemap.get_cell_position(point) * tilemap.tileset.tile_size
 		select_tilemap_cell(tilemap, cell_position, project.selection_map, select)
 	project.selection_map.select_pixel(point, select)
-
-
-# Bresenham's Algorithm
-# Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func append_gap(start: Vector2i, end: Vector2i, array: Array[Vector2i]) -> void:
-	var dx := absi(end.x - start.x)
-	var dy := -absi(end.y - start.y)
-	var err := dx + dy
-	var e2 := err << 1
-	var sx := 1 if start.x < end.x else -1
-	var sy := 1 if start.y < end.y else -1
-	var x := start.x
-	var y := start.y
-	while !(x == end.x && y == end.y):
-		e2 = err << 1
-		if e2 >= dy:
-			err += dy
-			x += sx
-		if e2 <= dx:
-			err += dx
-			y += sy
-		array.append(Vector2i(x, y))
 
 
 # Thanks to
