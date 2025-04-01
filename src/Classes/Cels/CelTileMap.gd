@@ -124,15 +124,20 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
 	var offset_coords := pixel_coords - offset
 	var cell_coords := Vector2i()
-	if tileset.tile_shape == TileSet.TILE_SHAPE_SQUARE:
+	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+		offset_coords -= tileset.tile_size / 2
+		var godot_tileset := TileSet.new()
+		godot_tileset.tile_size = tileset.tile_size
+		godot_tileset.tile_shape = tileset.tile_shape
+		#godot_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+		var godot_tilemap := TileMapLayer.new()
+		godot_tilemap.tile_set = godot_tileset
+		cell_coords = godot_tilemap.local_to_map(offset_coords)
+		godot_tilemap.queue_free()
+	else:
 		var x_pos := float(offset_coords.x) / tileset.tile_size.x
 		var y_pos := float(offset_coords.y) / tileset.tile_size.y
 		cell_coords = Vector2i(floori(x_pos), floori(y_pos))
-	elif tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
-		# Thanks to https://clintbellanger.net/articles/isometric_math/
-		var half_size := tileset.tile_size / 2
-		cell_coords.x = (pixel_coords.x / half_size.x + pixel_coords.y / half_size.y) / 2
-		cell_coords.y = (pixel_coords.y / half_size.y - (pixel_coords.x / half_size.x)) / 2
 	return cell_coords
 
 
@@ -144,11 +149,14 @@ func get_cell_index_at_coords(coords: Vector2i) -> int:
 
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
-		# Thanks to https://clintbellanger.net/articles/isometric_math/
-		var pixel_coords := Vector2i()
-		var half_size := tileset.tile_size / 2
-		pixel_coords.x = cell_coords.x * half_size.x - cell_coords.y * half_size.x
-		pixel_coords.y = cell_coords.x * half_size.y + cell_coords.y * half_size.y
+		var godot_tileset := TileSet.new()
+		godot_tileset.tile_size = tileset.tile_size
+		godot_tileset.tile_shape = tileset.tile_shape
+		#godot_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+		var godot_tilemap := TileMapLayer.new()
+		godot_tilemap.tile_set = godot_tileset
+		var pixel_coords := godot_tilemap.map_to_local(cell_coords) as Vector2i
+		godot_tilemap.queue_free()
 		return pixel_coords + offset
 	return cell_coords * tileset.tile_size + offset
 
@@ -586,7 +594,12 @@ func _update_cell(cell: Cell) -> void:
 	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
 	if image_portion.get_data() != transformed_tile.get_data():
 		var tile_size := transformed_tile.get_size()
-		image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
+		if index == 0 or tileset.tile_shape == TileSet.TILE_SHAPE_SQUARE:
+			image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
+			if tileset.tile_shape != TileSet.TILE_SHAPE_SQUARE:
+				update_cel_portions()
+		else:
+			image.blit_rect_mask(transformed_tile, transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
 		image.convert_rgb_to_indexed()
 
 
