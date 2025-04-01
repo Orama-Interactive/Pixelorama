@@ -121,12 +121,19 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 
 ## Returns the position of a cell in the tilemap
 ## at pixel coordinates [param coords] in the cel's image.
-func get_cell_position(coords: Vector2i) -> Vector2i:
-	var offset_coords := coords - offset
-	var x_pos := float(offset_coords.x) / tileset.tile_size.x
-	var y_pos := float(offset_coords.y) / tileset.tile_size.y
-	var cell_position := Vector2i(floori(x_pos), floori(y_pos))
-	return cell_position
+func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
+	var offset_coords := pixel_coords - offset
+	var cell_coords := Vector2i()
+	if tileset.tile_shape == TileSet.TILE_SHAPE_SQUARE:
+		var x_pos := float(offset_coords.x) / tileset.tile_size.x
+		var y_pos := float(offset_coords.y) / tileset.tile_size.y
+		cell_coords = Vector2i(floori(x_pos), floori(y_pos))
+	elif tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+		# Thanks to https://clintbellanger.net/articles/isometric_math/
+		var half_size := tileset.tile_size / 2
+		cell_coords.x = (pixel_coords.x / half_size.x + pixel_coords.y / half_size.y) / 2
+		cell_coords.y = (pixel_coords.y / half_size.y - (pixel_coords.x / half_size.x)) / 2
+	return cell_coords
 
 
 ## Returns the index of a cell in the tilemap
@@ -139,8 +146,9 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
 		# Thanks to https://clintbellanger.net/articles/isometric_math/
 		var pixel_coords := Vector2i()
-		pixel_coords.x = cell_coords.x * tileset.tile_size.x / 2 - cell_coords.y * tileset.tile_size.x / 2
-		pixel_coords.y = cell_coords.x * tileset.tile_size.y / 2 + cell_coords.y * tileset.tile_size.y / 2
+		var half_size := tileset.tile_size / 2
+		pixel_coords.x = cell_coords.x * half_size.x - cell_coords.y * half_size.x
+		pixel_coords.y = cell_coords.x * half_size.y + cell_coords.y * half_size.y
 		return pixel_coords + offset
 	return cell_coords * tileset.tile_size + offset
 
