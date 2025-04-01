@@ -570,10 +570,10 @@ func generate_isometric_rectangle(image: Image) -> void:
 		var left := Vector2i(image.get_size().x - 1 - right.x, right.y)
 		for j in range(right.x, left.x - 2, -1):
 			image.set_pixel(j, right.y, Color.WHITE)
-			var mirror_y := Vector2i(j, image.get_size().y - 2 - right.y)
+			var mirror_y := Vector2i(j, image.get_size().y - 1 - right.y)
 			for k in range(right.y, mirror_y.y + 1):
 				image.set_pixel(j, k, Color.WHITE)
-		var mirror_right := Vector2i(right.x, image.get_size().y - 2 - right.y)
+		var mirror_right := Vector2i(right.x, image.get_size().y - 1 - right.y)
 		image.set_pixelv(mirror_right, Color.WHITE)
 		image.set_pixelv(mirror_right + Vector2i.RIGHT, Color.WHITE)
 		right = up + Vector2i(i, i / 2)
