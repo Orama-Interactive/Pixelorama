@@ -327,6 +327,7 @@ text = "Rotation"
 layout_mode = 2
 min_value = -180.0
 max_value = 180.0
+step = 0.01
 
 [node name="ColorLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
 layout_mode = 2
