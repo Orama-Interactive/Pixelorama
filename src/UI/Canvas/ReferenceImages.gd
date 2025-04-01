@@ -1,7 +1,6 @@
 extends Node2D
 
 ## This node contains [ReferenceImage] nodes
-const rotation_snap = 0.01
 
 signal reference_image_changed(index: int)
 
@@ -24,6 +23,8 @@ var og_rotation: float
 var undo_data: Dictionary
 
 var reference_menu := PopupMenu.new()
+
+const rot_snap = 0.01
 
 
 func _ready() -> void:
@@ -139,9 +140,9 @@ func _input(event: InputEvent) -> void:
 					rotate_reference_image(local_mouse_pos, ri)
 					text = str(
 						"Rotating: ",
-						snappedf(rad_to_deg(og_rotation), rotation_snap),
+						snappedf(rad_to_deg(og_rotation), rot_snap),
 						"° -> ",
-						snappedf(rad_to_deg(ri.rotation), rotation_snap),
+						snappedf(rad_to_deg(ri.rotation), rot_snap),
 						"°"
 					)
 				else:
@@ -154,9 +155,9 @@ func _input(event: InputEvent) -> void:
 				rotate_reference_image(local_mouse_pos, ri)
 				text = str(
 					"Rotating: ",
-					snappedf(rad_to_deg(og_rotation), rotation_snap),
+					snappedf(rad_to_deg(og_rotation), rot_snap),
 					"° -> ",
-					snappedf(rad_to_deg(ri.rotation), rotation_snap),
+					snappedf(rad_to_deg(ri.rotation), rot_snap),
 					"°"
 				)
 			elif mode == Mode.SCALE:
@@ -186,7 +187,7 @@ func rotate_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
 	var starting_angle := og_rotation - og_pos.angle_to_point(drag_start_pos)
 	var new_angle := img.position.angle_to_point(mouse_pos)
 	var angle := starting_angle + new_angle
-	angle = deg_to_rad(snappedf(rad_to_deg(wrapf(angle, -PI, PI)), rotation_snap))
+	angle = deg_to_rad(snappedf(rad_to_deg(wrapf(angle, -PI, PI)), rot_snap))
 	img.rotation = angle
 
 
