@@ -184,7 +184,9 @@ func pick_random_tile(selected_tile_indices: Array[int]) -> int:
 ## Serializes the data of this class into the form of a [Dictionary],
 ## which is used so the data can be stored in pxo files.
 func serialize() -> Dictionary:
-	var dict := {"name": name, "tile_size": tile_size, "tile_amount": tiles.size(), "tile_shape": tile_shape}
+	var dict := {
+		"name": name, "tile_size": tile_size, "tile_amount": tiles.size(), "tile_shape": tile_shape
+	}
 	var tile_data := {}
 	for i in tiles.size():
 		tile_data[i] = tiles[i].serialize()

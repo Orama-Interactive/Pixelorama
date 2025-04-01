@@ -163,12 +163,18 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 
 func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
-		var mask := Image.create_empty(tileset.tile_size.x, tileset.tile_size.y, false, source_image.get_format())
+		var mask := Image.create_empty(
+			tileset.tile_size.x, tileset.tile_size.y, false, source_image.get_format()
+		)
 		mask.fill(Color(0, 0, 0, 0))
 		DrawingAlgos.generate_isometric_rectangle(mask)
-		var to_return := Image.create_empty(tileset.tile_size.x, tileset.tile_size.y, false, source_image.get_format())
+		var to_return := Image.create_empty(
+			tileset.tile_size.x, tileset.tile_size.y, false, source_image.get_format()
+		)
 		var portion := source_image.get_region(rect)
-		to_return.blit_rect_mask(portion, mask, Rect2i(Vector2i.ZERO, portion.get_size()), Vector2i.ZERO)
+		to_return.blit_rect_mask(
+			portion, mask, Rect2i(Vector2i.ZERO, portion.get_size()), Vector2i.ZERO
+		)
 		return to_return
 	return source_image.get_region(rect)
 
@@ -599,7 +605,9 @@ func _update_cell(cell: Cell) -> void:
 			if tileset.tile_shape != TileSet.TILE_SHAPE_SQUARE:
 				update_cel_portions()
 		else:
-			image.blit_rect_mask(transformed_tile, transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
+			image.blit_rect_mask(
+				transformed_tile, transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords
+			)
 		image.convert_rgb_to_indexed()
 
 
