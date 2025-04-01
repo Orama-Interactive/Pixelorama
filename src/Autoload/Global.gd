@@ -749,15 +749,16 @@ func _ready() -> void:
 	current_project.fill_color = default_fill_color
 
 	# Load preferences from the config file
-	for pref in config_cache.get_section_keys("preferences"):
-		if get(pref) == null:
-			continue
-		var value = config_cache.get_value("preferences", pref)
-		if pref == "grids":
-			if value:
-				update_grids(value)
-		else:
-			set(pref, value)
+	if config_cache.has_section("preferences"):
+		for pref in config_cache.get_section_keys("preferences"):
+			if get(pref) == null:
+				continue
+			var value = config_cache.get_value("preferences", pref)
+			if pref == "grids":
+				if value:
+					update_grids(value)
+			else:
+				set(pref, value)
 	if OS.is_sandboxed():
 		Global.use_native_file_dialogs = true
 	await get_tree().process_frame
