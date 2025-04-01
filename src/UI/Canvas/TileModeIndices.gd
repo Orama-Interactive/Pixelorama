@@ -17,10 +17,10 @@ func _draw() -> void:
 		var font := Themes.get_font()
 		for cell_coords: Vector2i in tilemap_cel.cells:
 			var cell := tilemap_cel.get_cell_at(cell_coords)
-			if cell.index == 0:
-				continue
+			#if cell.index == 0:
+				#continue
 			var text := cell.to_string()
-			var pos := cell_coords * tilemap_cel.tileset.tile_size + tilemap_cel.offset
+			var pos := tilemap_cel.get_pixel_coords(cell_coords)
 			pos.y += tile_size.y - font.get_ascent(FONT_SIZE * 0.5) * 0.5
 			draw_string(
 				font, pos * 2, text, HORIZONTAL_ALIGNMENT_CENTER, tile_size.x * 2, FONT_SIZE

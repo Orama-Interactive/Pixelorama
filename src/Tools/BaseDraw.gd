@@ -530,6 +530,10 @@ func draw_indicator(left: bool) -> void:
 		var offset := tilemap_cel.offset % grid_size
 		var offset_pos := snapped_position - Vector2(grid_size / 2) - Vector2(offset)
 		var grid_center := offset_pos.snapped(grid_size) + Vector2(grid_size / 2) + Vector2(offset)
+		if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+			offset_pos = tilemap_cel.get_cell_position(snapped_position)
+			grid_center.x = offset_pos.x * grid_size.x / 2 - offset_pos.y * grid_size.x / 2
+			grid_center.y = offset_pos.x * grid_size.y / 2 + offset_pos.y * grid_size.y / 2
 		snapped_position = grid_center.floor()
 	draw_indicator_at(snapped_position, Vector2i.ZERO, color)
 	if (

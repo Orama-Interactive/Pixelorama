@@ -40,7 +40,7 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 	var grid_size := grid.grid_size
 	var grid_offset := grid.grid_offset
 	var cel := Global.current_project.get_current_cel()
-	if cel is CelTileMap and grid_index == 0:
+	if cel is CelTileMap and grid_index == 0 and cel.tileset.tile_shape == TileSet.TILE_SHAPE_SQUARE:
 		grid_size = (cel as CelTileMap).tileset.tile_size
 		grid_offset = (cel as CelTileMap).offset
 	var grid_multiline_points := PackedVector2Array()
@@ -73,8 +73,12 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 	var grid_multiline_points := PackedVector2Array()
 
 	var cell_size: Vector2 = grid.grid_size
-	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
 	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(cell_size)
+	var cel := Global.current_project.get_current_cel()
+	if cel is CelTileMap and grid_index == 0 and cel.tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+		cell_size = (cel as CelTileMap).tileset.tile_size
+		origin_offset = (cel as CelTileMap).offset
+	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
 
 	# lines ↗↗↗ (from bottom-left to top-right)
 	var per_cell_offset: Vector2 = cell_size * Vector2(1, -1)

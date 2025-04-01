@@ -135,6 +135,28 @@ func get_cell_index_at_coords(coords: Vector2i) -> int:
 	return get_cell_at(get_cell_position(coords)).index
 
 
+func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
+	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+		# Thanks to https://clintbellanger.net/articles/isometric_math/
+		var pixel_coords := Vector2i()
+		pixel_coords.x = cell_coords.x * tileset.tile_size.x / 2 - cell_coords.y * tileset.tile_size.x / 2
+		pixel_coords.y = cell_coords.x * tileset.tile_size.y / 2 + cell_coords.y * tileset.tile_size.y / 2
+		return pixel_coords + offset
+	return cell_coords * tileset.tile_size + offset
+
+
+func get_image_portion(rect: Rect2i, source_image := image) -> Image:
+	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+		var mask := Image.create_empty(tileset.tile_size.x, tileset.tile_size.y, false, source_image.get_format())
+		mask.fill(Color(0, 0, 0, 0))
+		DrawingAlgos.generate_isometric_rectangle(mask)
+		var to_return := Image.create_empty(tileset.tile_size.x, tileset.tile_size.y, false, source_image.get_format())
+		var portion := source_image.get_region(rect)
+		to_return.blit_rect_mask(portion, mask, Rect2i(Vector2i.ZERO, portion.get_size()), Vector2i.ZERO)
+		return to_return
+	return source_image.get_region(rect)
+
+
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]
 ## with image [param image_portion] is equal to [param tile_image].
 func _tiles_equal(cell: Cell, image_portion: Image, tile_image: Image) -> bool:
@@ -274,7 +296,7 @@ func apply_resizing_to_image(
 		for y in selected_cells[x].size():
 			var coords := Vector2i(x, y) * tileset.tile_size
 			var rect := Rect2i(coords, tileset.tile_size)
-			var image_portion := target_image.get_region(rect)
+			var image_portion := get_image_portion(rect)
 			var cell_data := Cell.new()
 			cell_data.deserialize(selected_cells[x][y])
 			var index := cell_data.index
@@ -366,9 +388,9 @@ func update_tilemap(
 	var tileset_size_before_update := tileset.tiles.size()
 	for cell_coords in cells:
 		var cell := get_cell_at(cell_coords)
-		var coords := cell_coords * tileset.tile_size + offset
+		var coords := get_pixel_coords(cell_coords)
 		var rect := Rect2i(coords, tileset.tile_size)
-		var image_portion := source_image.get_region(rect)
+		var image_portion := get_image_portion(rect, source_image)
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
@@ -411,9 +433,9 @@ func update_tilemap(
 	# than the previous one.
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
-		var coords := cell_coords * tileset.tile_size + offset
+		var coords := get_pixel_coords(cell_coords)
 		var rect := Rect2i(coords, tileset.tile_size)
-		var image_portion := source_image.get_region(rect)
+		var image_portion := get_image_portion(rect)
 		if not image_portion.is_invisible():
 			continue
 		var index := cell.index
@@ -546,9 +568,9 @@ func _re_index_cells_after_index(index: int) -> void:
 ## to ensure that it is the same as its mapped tile in the [member tileset].
 func _update_cell(cell: Cell) -> void:
 	var cell_coords := cells.find_key(cell) as Vector2i
-	var coords := cell_coords * tileset.tile_size + offset
+	var coords := get_pixel_coords(cell_coords)
 	var rect := Rect2i(coords, tileset.tile_size)
-	var image_portion := image.get_region(rect)
+	var image_portion := get_image_portion(rect)
 	var index := cell.index
 	if index >= tileset.tiles.size():
 		index = 0
@@ -572,9 +594,9 @@ func update_cel_portions() -> void:
 func re_index_all_cells(set_invisible_to_zero := false) -> void:
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
-		var coords := cell_coords * tileset.tile_size + offset
+		var coords := get_pixel_coords(cell_coords)
 		var rect := Rect2i(coords, tileset.tile_size)
-		var image_portion := image.get_region(rect)
+		var image_portion := get_image_portion(rect)
 		if image_portion.is_invisible():
 			if set_invisible_to_zero:
 				cell.index = 0
@@ -681,12 +703,12 @@ func update_texture(undo := false) -> void:
 
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
-		var coords := cell_coords * tileset.tile_size + offset
+		var coords := get_pixel_coords(cell_coords)
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
 		var rect := Rect2i(coords, tileset.tile_size)
-		var image_portion := image.get_region(rect)
+		var image_portion := get_image_portion(rect)
 		var current_tile := tileset.tiles[index]
 		if index == 0:
 			if tileset.tiles.size() > 1:
@@ -703,12 +725,12 @@ func update_texture(undo := false) -> void:
 
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
-		var coords := cell_coords * tileset.tile_size + offset
+		var coords := get_pixel_coords(cell_coords)
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
 		var rect := Rect2i(coords, tileset.tile_size)
-		var image_portion := image.get_region(rect)
+		var image_portion := get_image_portion(rect)
 		if editing_images.has(index):
 			var editing_portion := editing_images[index][0] as Vector2i
 			if cell_coords == editing_portion:
