@@ -6,6 +6,8 @@ signal reference_image_changed(index: int)
 
 enum Mode { SELECT, MOVE, ROTATE, SCALE }
 
+const ROTATION_SNAP = 0.01
+
 var mode: Mode = Mode.SELECT
 
 var index: int:
@@ -57,7 +59,7 @@ func _input(event: InputEvent) -> void:
 	if !ri:
 		return
 
-	# Check if want to cancelthe reference transform
+	# Check if want to cancel the reference transform
 	if event.is_action_pressed("cancel_reference_transform") and dragging:
 		ri.position = og_pos
 		ri.scale = og_scale
@@ -138,9 +140,9 @@ func _input(event: InputEvent) -> void:
 					rotate_reference_image(local_mouse_pos, ri)
 					text = str(
 						"Rotating: ",
-						floorf(rad_to_deg(og_rotation)),
+						snappedf(rad_to_deg(og_rotation), ROTATION_SNAP),
 						"° -> ",
-						floorf(rad_to_deg(ri.rotation)),
+						snappedf(rad_to_deg(ri.rotation), ROTATION_SNAP),
 						"°"
 					)
 				else:
@@ -153,9 +155,9 @@ func _input(event: InputEvent) -> void:
 				rotate_reference_image(local_mouse_pos, ri)
 				text = str(
 					"Rotating: ",
-					floorf(rad_to_deg(og_rotation)),
+					snappedf(rad_to_deg(og_rotation), ROTATION_SNAP),
 					"° -> ",
-					floorf(rad_to_deg(ri.rotation)),
+					snappedf(rad_to_deg(ri.rotation), ROTATION_SNAP),
 					"°"
 				)
 			elif mode == Mode.SCALE:
@@ -185,7 +187,7 @@ func rotate_reference_image(mouse_pos: Vector2, img: ReferenceImage) -> void:
 	var starting_angle := og_rotation - og_pos.angle_to_point(drag_start_pos)
 	var new_angle := img.position.angle_to_point(mouse_pos)
 	var angle := starting_angle + new_angle
-	angle = deg_to_rad(floorf(rad_to_deg(wrapf(angle, -PI, PI))))
+	angle = deg_to_rad(snappedf(rad_to_deg(wrapf(angle, -PI, PI)), ROTATION_SNAP))
 	img.rotation = angle
 
 
