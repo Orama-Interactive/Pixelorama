@@ -344,8 +344,8 @@ func apply_resizing_to_image(
 				current_tile, cell_data.flip_h, cell_data.flip_v, cell_data.transpose
 			)
 			if image_portion.get_data() != transformed_tile.get_data():
-				var tile_size := transformed_tile.get_size()
-				target_image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
+				var transformed_tile_size := transformed_tile.get_size()
+				target_image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
 				if target_image is ImageExtended:
 					target_image.convert_rgb_to_indexed()
 			if transform_confirmed:
@@ -614,18 +614,18 @@ func _update_cell(cell: Cell) -> void:
 	var current_tile := tileset.tiles[index].image
 	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
 	if image_portion.get_data() != transformed_tile.get_data():
-		var tile_size := transformed_tile.get_size()
+		var transformed_tile_size := transformed_tile.get_size()
 		if index == 0 or get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
-			image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
-			if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+			image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
+			if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not locked:
 				update_cel_portions()
 		else:
 			var mask := Image.create_empty(
-				get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8
+				transformed_tile_size.x, transformed_tile_size.y, false, Image.FORMAT_LA8
 			)
 			mask.fill(Color(0, 0, 0, 0))
 			DrawingAlgos.generate_isometric_rectangle(mask)
-			image.blit_rect_mask(transformed_tile, mask, Rect2i(Vector2i.ZERO, tile_size), coords)
+			image.blit_rect_mask(transformed_tile, mask, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
 		image.convert_rgb_to_indexed()
 
 
@@ -770,8 +770,8 @@ func update_texture(undo := false) -> void:
 		if index == 0:
 			if tileset.tiles.size() > 1:
 				# Prevent from drawing on empty image portions.
-				var tile_size := current_tile.image.get_size()
-				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, tile_size), coords)
+				var current_tile_size := current_tile.image.get_size()
+				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, current_tile_size), coords)
 			continue
 		if not editing_images.has(index):
 			if not _tiles_equal(cell, image_portion, current_tile.image):
@@ -800,8 +800,8 @@ func update_texture(undo := false) -> void:
 				editing_image, cell.flip_h, cell.flip_v, cell.transpose
 			)
 			if not image_portion.get_data() == transformed_editing_image.get_data():
-				var tile_size := image_portion.get_size()
-				image.blit_rect(transformed_editing_image, Rect2i(Vector2i.ZERO, tile_size), coords)
+				var current_tile_size := image_portion.get_size()
+				image.blit_rect(transformed_editing_image, Rect2i(Vector2i.ZERO, current_tile_size), coords)
 	super.update_texture(undo)
 
 
