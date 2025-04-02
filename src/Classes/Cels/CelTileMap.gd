@@ -164,7 +164,7 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
 		var mask := Image.create_empty(
-			tileset.tile_size.x, tileset.tile_size.y, false, source_image.get_format()
+			tileset.tile_size.x, tileset.tile_size.y, false, Image.FORMAT_LA8
 		)
 		mask.fill(Color(0, 0, 0, 0))
 		DrawingAlgos.generate_isometric_rectangle(mask)
@@ -605,9 +605,12 @@ func _update_cell(cell: Cell) -> void:
 			if tileset.tile_shape != TileSet.TILE_SHAPE_SQUARE:
 				update_cel_portions()
 		else:
-			image.blit_rect_mask(
-				transformed_tile, transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords
+			var mask := Image.create_empty(
+				tileset.tile_size.x, tileset.tile_size.y, false, Image.FORMAT_LA8
 			)
+			mask.fill(Color(0, 0, 0, 0))
+			DrawingAlgos.generate_isometric_rectangle(mask)
+			image.blit_rect_mask(transformed_tile, mask, Rect2i(Vector2i.ZERO, tile_size), coords)
 		image.convert_rgb_to_indexed()
 
 
