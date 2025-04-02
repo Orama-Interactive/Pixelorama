@@ -704,9 +704,15 @@ func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 	if resize:
 		_resize_cells(image.get_size())
-	for cell_coords in cell_data:
-		var cell_data_serialized: Dictionary = cell_data[cell_coords]
-		get_cell_at(cell_coords).deserialize(cell_data_serialized)
+	for cell_coords in cells:
+		if cell_coords in cell_data:
+			var cell_data_serialized: Dictionary = cell_data[cell_coords]
+			get_cell_at(cell_coords).deserialize(cell_data_serialized)
+		else:
+			# For cells not found in the undo's cell data.
+			# Happens when placing tiles on cells that had not been created before.
+			var default_dict := {"index": 0, "flip_h": false, "flip_v": false, "transpose": false}
+			get_cell_at(cell_coords).deserialize(default_dict)
 
 
 # Overridden Methods:
