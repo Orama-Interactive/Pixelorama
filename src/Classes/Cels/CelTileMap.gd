@@ -422,6 +422,8 @@ func update_tilemap(
 	tile_editing_mode := TileSetPanel.tile_editing_mode, source_image := image
 ) -> void:
 	editing_images.clear()
+	if locked:
+		return
 	var tileset_size_before_update := tileset.tiles.size()
 	for cell_coords in cells:
 		var cell := get_cell_at(cell_coords)
@@ -620,12 +622,17 @@ func _update_cell(cell: Cell) -> void:
 			if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not locked:
 				update_cel_portions()
 		else:
-			var mask := Image.create_empty(
-				transformed_tile_size.x, transformed_tile_size.y, false, Image.FORMAT_LA8
-			)
-			mask.fill(Color(0, 0, 0, 0))
-			DrawingAlgos.generate_isometric_rectangle(mask)
-			image.blit_rect_mask(transformed_tile, mask, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
+			var mask: Image
+			if locked:
+				mask = transformed_tile
+			else:
+				mask = Image.create_empty(
+					transformed_tile_size.x, transformed_tile_size.y, false, Image.FORMAT_LA8
+				)
+				mask.fill(Color(0, 0, 0, 0))
+				DrawingAlgos.generate_isometric_rectangle(mask)
+			var tile_offset := (transformed_tile_size - get_tile_size()) / 2
+			image.blit_rect_mask(transformed_tile, mask, Rect2i(Vector2i.ZERO, transformed_tile_size), coords - tile_offset)
 		image.convert_rgb_to_indexed()
 
 
@@ -753,6 +760,7 @@ func update_texture(undo := false) -> void:
 		or _is_redo()
 		or tile_editing_mode != TileSetPanel.TileEditingMode.MANUAL
 		or Tools.is_placing_tiles()
+		or locked
 	):
 		super.update_texture(undo)
 		editing_images.clear()
