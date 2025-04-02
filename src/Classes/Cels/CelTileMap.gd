@@ -106,6 +106,17 @@ func set_index(
 	cell.flip_v = flip_v
 	cell.transpose = transpose
 	if locked:
+		if previous_index != index: # Remove previous tile to avoid overlapped pixels
+			var cell_coords := cells.find_key(cell) as Vector2i
+			var coords := get_pixel_coords(cell_coords)
+			var prev_tile := tileset.tiles[previous_index].image
+			var prev_tile_size := prev_tile.get_size()
+			var mask = prev_tile
+			var blank := Image.create_empty(
+				prev_tile_size.x, prev_tile_size.y, false, prev_tile.get_format()
+			)
+			var tile_offset := (prev_tile_size - get_tile_size()) / 2
+			image.blit_rect_mask(blank, mask, Rect2i(Vector2i.ZERO, prev_tile_size), coords - tile_offset)
 		queue_update_cel_portions(true)
 	else:
 		_update_cell(cell)
@@ -633,6 +644,7 @@ func _update_cell(cell: Cell) -> void:
 			if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not locked:
 				update_cel_portions()
 		else:
+			var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 			var mask: Image
 			if locked:
 				mask = transformed_tile
@@ -642,7 +654,6 @@ func _update_cell(cell: Cell) -> void:
 				)
 				mask.fill(Color(0, 0, 0, 0))
 				DrawingAlgos.generate_isometric_rectangle(mask)
-			var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 			image.blit_rect_mask(transformed_tile, mask, Rect2i(Vector2i.ZERO, transformed_tile_size), coords - tile_offset)
 		image.convert_rgb_to_indexed()
 
