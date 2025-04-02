@@ -650,17 +650,21 @@ func re_index_all_cells(set_invisible_to_zero := false) -> void:
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 	var horizontal_cells := ceili(float(new_size.x) / tileset.tile_size.x)
 	var vertical_cells := ceili(float(new_size.y) / tileset.tile_size.y)
+	var horiz_range := range(0, horizontal_cells)
+	var ver_range := range(0, vertical_cells)
 	if tileset.tile_shape != TileSet.TILE_SHAPE_SQUARE:
 		var n_of_cells := get_cell_position(new_size)
 		horizontal_cells = n_of_cells.x
-		vertical_cells = n_of_cells.y
+		vertical_cells = n_of_cells.y + 1
+		horiz_range = range(-1, horizontal_cells)
+		ver_range = range(-1, vertical_cells)
 	if offset.x % tileset.tile_size.x != 0:
 		horizontal_cells += 1
 	if offset.y % tileset.tile_size.y != 0:
 		vertical_cells += 1
 	var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(tileset.tile_size)).ceil())
-	for x in horizontal_cells:
-		for y in vertical_cells:
+	for x in horiz_range:
+		for y in ver_range:
 			var cell_coords := Vector2i(x, y) - offset_in_tiles
 			if not cells.has(cell_coords):
 				cells[cell_coords] = Cell.new()
@@ -669,10 +673,6 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 			vertical_cell_min = cell_coords.y
 		if cell_coords.y > vertical_cell_max:
 			vertical_cell_max = cell_coords.y
-	if not is_zero_approx(fposmod(offset.x, tileset.tile_size.x)):
-		horizontal_cells += 1
-	if not is_zero_approx(fposmod(offset.y, tileset.tile_size.y)):
-		vertical_cells += 1
 	for cell_coords in cells:
 		if reset_indices:
 			cells[cell_coords] = Cell.new()
