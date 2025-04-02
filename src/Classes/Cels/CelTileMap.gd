@@ -27,6 +27,7 @@ var prev_offset := offset  ## Used for undo/redo purposes.
 ## its image that is being changed when manual mode is enabled.
 ## Gets reset on [method update_tilemap].
 var editing_images: Dictionary[int, Array] = {}
+var pending_update := false
 
 
 ## An internal class of [CelTIleMap], which contains data used by individual cells of the tilemap.
@@ -104,8 +105,18 @@ func set_index(
 	cell.flip_h = flip_h
 	cell.flip_v = flip_v
 	cell.transpose = transpose
-	_update_cell(cell)
+	if locked:
+		queue_update_cel_portions(true)
+	else:
+		_update_cell(cell)
 	Global.canvas.queue_redraw()
+
+
+func queue_update_cel_portions(skip_zeroes := false) -> void:
+	if pending_update:
+		return
+	pending_update = true
+	update_cel_portions.call_deferred(skip_zeroes)
 
 
 ## Changes the [member offset] of the tilemap. Automatically resizes the cells and redraws the grid.
@@ -637,9 +648,14 @@ func _update_cell(cell: Cell) -> void:
 
 
 ## Calls [method _update_cell] for all [member cells].
-func update_cel_portions() -> void:
-	for cell_coords in cells:
+func update_cel_portions(skip_zeros := false) -> void:
+	pending_update = false
+	var cell_keys := cells.keys()
+	cell_keys.sort()
+	for cell_coords in cell_keys:
 		var cell := cells[cell_coords]
+		if cell.index == 0 and skip_zeros:
+			continue
 		_update_cell(cell)
 
 
