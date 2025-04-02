@@ -10,7 +10,8 @@ func _input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	var current_cel := Global.current_project.get_current_cel()
-	draw_set_transform(position, rotation, Vector2(0.5, 0.5))
+	var scale_factor := 0.25
+	draw_set_transform(position, rotation, Vector2(scale_factor, scale_factor))
 	if current_cel is CelTileMap and Input.is_action_pressed("ctrl"):
 		var tilemap_cel := current_cel as CelTileMap
 		var tile_size := tilemap_cel.tileset.tile_size
@@ -23,6 +24,11 @@ func _draw() -> void:
 			var pos := tilemap_cel.get_pixel_coords(cell_coords)
 			pos.y += tile_size.y - font.get_ascent(FONT_SIZE * 0.5) * 0.5
 			draw_string(
-				font, pos * 2, text, HORIZONTAL_ALIGNMENT_CENTER, tile_size.x * 2, FONT_SIZE
+				font,
+				pos / scale_factor,
+				text,
+				HORIZONTAL_ALIGNMENT_CENTER,
+				tile_size.x / scale_factor,
+				FONT_SIZE
 			)
 	draw_set_transform(position, rotation, scale)
