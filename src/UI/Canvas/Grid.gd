@@ -27,7 +27,7 @@ func _draw() -> void:
 		var grid_type := Global.grids[grid_idx].grid_type
 		var cel := Global.current_project.get_current_cel()
 		if cel is CelTileMap and grid_idx == 0:
-			if cel.tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+			if cel.get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
 				grid_type = Global.GridTypes.ISOMETRIC
 			else:
 				grid_type = Global.GridTypes.CARTESIAN
@@ -47,7 +47,7 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 	var grid_offset := grid.grid_offset
 	var cel := Global.current_project.get_current_cel()
 	if cel is CelTileMap and grid_index == 0:
-		grid_size = (cel as CelTileMap).tileset.tile_size
+		grid_size = (cel as CelTileMap).get_tile_size()
 		grid_offset = (cel as CelTileMap).offset
 	var grid_multiline_points := PackedVector2Array()
 
@@ -82,7 +82,7 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(cell_size)
 	var cel := Global.current_project.get_current_cel()
 	if cel is CelTileMap and grid_index == 0:
-		cell_size = (cel as CelTileMap).tileset.tile_size
+		cell_size = (cel as CelTileMap).get_tile_size()
 		origin_offset = (cel as CelTileMap).offset
 	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
 

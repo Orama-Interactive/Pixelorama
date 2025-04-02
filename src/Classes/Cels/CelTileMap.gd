@@ -15,6 +15,9 @@ extends PixelCel
 var tileset: TileSetCustom
 
 var cells: Dictionary[Vector2i, Cell] = {}  ## Dictionary that contains the data of each cell.
+var tile_size: Vector2i
+var tile_shape := TileSet.TILE_SHAPE_SQUARE
+var locked := false
 var vertical_cell_min := 0  ## The minimum vertical cell.
 var vertical_cell_max := 0  ## The maximum vertical cell.
 var offset := Vector2i.ZERO  ## The offset of the tilemap.
@@ -124,19 +127,19 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
 	var offset_coords := pixel_coords - offset
 	var cell_coords := Vector2i()
-	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
-		offset_coords -= tileset.tile_size / 2
+	if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+		offset_coords -= get_tile_size() / 2
 		var godot_tileset := TileSet.new()
-		godot_tileset.tile_size = tileset.tile_size
-		godot_tileset.tile_shape = tileset.tile_shape
+		godot_tileset.tile_size = get_tile_size()
+		godot_tileset.tile_shape = get_tile_shape()
 		#godot_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
 		var godot_tilemap := TileMapLayer.new()
 		godot_tilemap.tile_set = godot_tileset
 		cell_coords = godot_tilemap.local_to_map(offset_coords)
 		godot_tilemap.queue_free()
 	else:
-		var x_pos := float(offset_coords.x) / tileset.tile_size.x
-		var y_pos := float(offset_coords.y) / tileset.tile_size.y
+		var x_pos := float(offset_coords.x) / get_tile_size().x
+		var y_pos := float(offset_coords.y) / get_tile_size().y
 		cell_coords = Vector2i(floori(x_pos), floori(y_pos))
 	return cell_coords
 
@@ -148,28 +151,28 @@ func get_cell_index_at_coords(coords: Vector2i) -> int:
 
 
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
-	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+	if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
 		var godot_tileset := TileSet.new()
-		godot_tileset.tile_size = tileset.tile_size
-		godot_tileset.tile_shape = tileset.tile_shape
+		godot_tileset.tile_size = get_tile_size()
+		godot_tileset.tile_shape = get_tile_shape()
 		#godot_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
 		var godot_tilemap := TileMapLayer.new()
 		godot_tilemap.tile_set = godot_tileset
 		var pixel_coords := godot_tilemap.map_to_local(cell_coords) as Vector2i
 		godot_tilemap.queue_free()
 		return pixel_coords + offset
-	return cell_coords * tileset.tile_size + offset
+	return cell_coords * get_tile_size() + offset
 
 
 func get_image_portion(rect: Rect2i, source_image := image) -> Image:
-	if tileset.tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+	if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
 		var mask := Image.create_empty(
-			tileset.tile_size.x, tileset.tile_size.y, false, Image.FORMAT_LA8
+			get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8
 		)
 		mask.fill(Color(0, 0, 0, 0))
 		DrawingAlgos.generate_isometric_rectangle(mask)
 		var to_return := Image.create_empty(
-			tileset.tile_size.x, tileset.tile_size.y, false, source_image.get_format()
+			get_tile_size().x, get_tile_size().y, false, source_image.get_format()
 		)
 		var portion := source_image.get_region(rect)
 		to_return.blit_rect_mask(
@@ -177,6 +180,18 @@ func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 		)
 		return to_return
 	return source_image.get_region(rect)
+
+
+func get_tile_size() -> Vector2i:
+	if locked:
+		return tile_size
+	return tileset.tile_size
+
+
+func get_tile_shape() -> TileSet.TileShape:
+	if locked:
+		return tile_shape
+	return tileset.tile_shape
 
 
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]
@@ -221,11 +236,11 @@ func transform_tile(
 ## of the selected cells in the form of [Dictionary].
 func get_selected_cells(selection_map: SelectionMap, selection_rect: Rect2i) -> Array[Array]:
 	var selected_cells: Array[Array] = []
-	for x in range(0, selection_rect.size.x, tileset.tile_size.x):
+	for x in range(0, selection_rect.size.x, get_tile_size().x):
 		selected_cells.append([])
-		for y in range(0, selection_rect.size.y, tileset.tile_size.y):
+		for y in range(0, selection_rect.size.y, get_tile_size().y):
 			var pos := Vector2i(x, y) + selection_rect.position
-			var x_index := x / tileset.tile_size.x
+			var x_index := x / get_tile_size().x
 			if selection_map.is_pixel_selected(pos):
 				var cell_pos := get_cell_position(pos)
 				selected_cells[x_index].append(cells[cell_pos].serialize())
@@ -316,8 +331,8 @@ func apply_resizing_to_image(
 ) -> void:
 	for x in selected_cells.size():
 		for y in selected_cells[x].size():
-			var coords := Vector2i(x, y) * tileset.tile_size
-			var rect := Rect2i(coords, tileset.tile_size)
+			var coords := Vector2i(x, y) * get_tile_size()
+			var rect := Rect2i(coords, get_tile_size())
 			var image_portion := get_image_portion(rect)
 			var cell_data := Cell.new()
 			cell_data.deserialize(selected_cells[x][y])
@@ -334,7 +349,7 @@ func apply_resizing_to_image(
 				if target_image is ImageExtended:
 					target_image.convert_rgb_to_indexed()
 			if transform_confirmed:
-				var cell_coords := Vector2i(x, y) + (selection_rect.position / tileset.tile_size)
+				var cell_coords := Vector2i(x, y) + (selection_rect.position / get_tile_size())
 				get_cell_at(cell_coords).deserialize(cell_data.serialize())
 
 
@@ -411,7 +426,7 @@ func update_tilemap(
 	for cell_coords in cells:
 		var cell := get_cell_at(cell_coords)
 		var coords := get_pixel_coords(cell_coords)
-		var rect := Rect2i(coords, tileset.tile_size)
+		var rect := Rect2i(coords, get_tile_size())
 		var image_portion := get_image_portion(rect, source_image)
 		var index := cell.index
 		if index >= tileset.tiles.size():
@@ -456,7 +471,7 @@ func update_tilemap(
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
 		var coords := get_pixel_coords(cell_coords)
-		var rect := Rect2i(coords, tileset.tile_size)
+		var rect := Rect2i(coords, get_tile_size())
 		var image_portion := get_image_portion(rect)
 		if not image_portion.is_invisible():
 			continue
@@ -591,7 +606,7 @@ func _re_index_cells_after_index(index: int) -> void:
 func _update_cell(cell: Cell) -> void:
 	var cell_coords := cells.find_key(cell) as Vector2i
 	var coords := get_pixel_coords(cell_coords)
-	var rect := Rect2i(coords, tileset.tile_size)
+	var rect := Rect2i(coords, get_tile_size())
 	var image_portion := get_image_portion(rect)
 	var index := cell.index
 	if index >= tileset.tiles.size():
@@ -600,13 +615,13 @@ func _update_cell(cell: Cell) -> void:
 	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
 	if image_portion.get_data() != transformed_tile.get_data():
 		var tile_size := transformed_tile.get_size()
-		if index == 0 or tileset.tile_shape == TileSet.TILE_SHAPE_SQUARE:
+		if index == 0 or get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 			image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, tile_size), coords)
-			if tileset.tile_shape != TileSet.TILE_SHAPE_SQUARE:
+			if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 				update_cel_portions()
 		else:
 			var mask := Image.create_empty(
-				tileset.tile_size.x, tileset.tile_size.y, false, Image.FORMAT_LA8
+				get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8
 			)
 			mask.fill(Color(0, 0, 0, 0))
 			DrawingAlgos.generate_isometric_rectangle(mask)
@@ -627,7 +642,7 @@ func re_index_all_cells(set_invisible_to_zero := false) -> void:
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
 		var coords := get_pixel_coords(cell_coords)
-		var rect := Rect2i(coords, tileset.tile_size)
+		var rect := Rect2i(coords, get_tile_size())
 		var image_portion := get_image_portion(rect)
 		if image_portion.is_invisible():
 			if set_invisible_to_zero:
@@ -648,21 +663,21 @@ func re_index_all_cells(set_invisible_to_zero := false) -> void:
 
 ## Resizes the [member cells] array based on [param new_size].
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
-	var horizontal_cells := ceili(float(new_size.x) / tileset.tile_size.x)
-	var vertical_cells := ceili(float(new_size.y) / tileset.tile_size.y)
+	var horizontal_cells := ceili(float(new_size.x) / get_tile_size().x)
+	var vertical_cells := ceili(float(new_size.y) / get_tile_size().y)
 	var horiz_range := range(0, horizontal_cells)
 	var ver_range := range(0, vertical_cells)
-	if tileset.tile_shape != TileSet.TILE_SHAPE_SQUARE:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		var n_of_cells := get_cell_position(new_size)
 		horizontal_cells = n_of_cells.x
 		vertical_cells = n_of_cells.y + 1
 		horiz_range = range(-1, horizontal_cells)
 		ver_range = range(-1, vertical_cells)
-	if offset.x % tileset.tile_size.x != 0:
+	if offset.x % get_tile_size().x != 0:
 		horizontal_cells += 1
-	if offset.y % tileset.tile_size.y != 0:
+	if offset.y % get_tile_size().y != 0:
 		vertical_cells += 1
-	var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(tileset.tile_size)).ceil())
+	var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(get_tile_size())).ceil())
 	for x in horiz_range:
 		for y in ver_range:
 			var cell_coords := Vector2i(x, y) - offset_in_tiles
@@ -749,7 +764,7 @@ func update_texture(undo := false) -> void:
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
-		var rect := Rect2i(coords, tileset.tile_size)
+		var rect := Rect2i(coords, get_tile_size())
 		var image_portion := get_image_portion(rect)
 		var current_tile := tileset.tiles[index]
 		if index == 0:
@@ -771,7 +786,7 @@ func update_texture(undo := false) -> void:
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
-		var rect := Rect2i(coords, tileset.tile_size)
+		var rect := Rect2i(coords, get_tile_size())
 		var image_portion := get_image_portion(rect)
 		if editing_images.has(index):
 			var editing_portion := editing_images[index][0] as Vector2i

@@ -526,7 +526,7 @@ func _compute_segments_for_tilemap(pos: Vector2i, cel: CelTileMap, src_index: in
 	# initially allocate at least 1 segment per line of the tilemap
 	for j in range(cel.vertical_cell_min, cel.vertical_cell_max):
 		_add_new_segment(j)
-	pos /= cel.tileset.tile_size
+	pos /= cel.get_tile_size()
 	# start flood algorithm
 	_flood_line_around_point_tilemap(pos, cel, src_index)
 	# test all segments while also discovering more

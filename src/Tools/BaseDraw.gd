@@ -525,10 +525,9 @@ func draw_indicator(left: bool) -> void:
 	var snapped_position := snap_position(_cursor)
 	if Tools.is_placing_tiles():
 		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
-		var tileset := tilemap_cel.tileset
-		var grid_size := tileset.tile_size
+		var grid_size := tilemap_cel.get_tile_size()
 		var grid_center := Vector2()
-		if tileset.tile_shape != TileSet.TILE_SHAPE_SQUARE:
+		if tilemap_cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 			var cell_position := tilemap_cel.get_cell_position(
 				snapped_position + Vector2(grid_size / 2)
 			)

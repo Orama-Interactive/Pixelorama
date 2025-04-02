@@ -14,7 +14,7 @@ func _draw() -> void:
 	draw_set_transform(position, rotation, Vector2(scale_factor, scale_factor))
 	if current_cel is CelTileMap and Input.is_action_pressed("ctrl"):
 		var tilemap_cel := current_cel as CelTileMap
-		var tile_size := tilemap_cel.tileset.tile_size
+		var tile_size := tilemap_cel.get_tile_size()
 		var font := Themes.get_font()
 		for cell_coords: Vector2i in tilemap_cel.cells:
 			var cell := tilemap_cel.get_cell_at(cell_coords)

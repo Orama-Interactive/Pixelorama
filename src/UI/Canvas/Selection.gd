@@ -242,8 +242,7 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 			move.y = 0
 		var final_direction := (move * step).round()
 		if Tools.is_placing_tiles():
-			var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
-			var grid_size := tileset.tile_size
+			var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
 			final_direction *= Vector2(grid_size)
 		move_content(final_direction)
 
@@ -338,8 +337,8 @@ func _gizmo_resize() -> void:
 	var mouse_pos := image_current_pixel
 	if Tools.is_placing_tiles():
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
-		var offset := tilemap.offset % tilemap.tileset.tile_size
-		mouse_pos = mouse_pos.snapped(tilemap.tileset.tile_size) + Vector2(offset)
+		var offset := tilemap.offset % tilemap.get_tile_size()
+		mouse_pos = mouse_pos.snapped(tilemap.get_tile_size()) + Vector2(offset)
 	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
 		if dir.x != 0 and dir.y != 0:  # Border gizmos
@@ -414,8 +413,8 @@ func resize_selection() -> void:
 				if cel is not CelTileMap:
 					continue
 				var tilemap := cel as CelTileMap
-				var horizontal_size := size.x / tilemap.tileset.tile_size.x
-				var vertical_size := size.y / tilemap.tileset.tile_size.y
+				var horizontal_size := size.x / tilemap.get_tile_size().x
+				var vertical_size := size.y / tilemap.get_tile_size().y
 				var selected_cells := tilemap.resize_selection(
 					original_selected_tilemap_cells, horizontal_size, vertical_size
 				)
@@ -517,8 +516,7 @@ func move_borders(move: Vector2i) -> void:
 	marching_ants_outline.offset += Vector2(move)
 	big_bounding_rectangle.position += move
 	if Tools.is_placing_tiles():
-		var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
-		var grid_size := tileset.tile_size
+		var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
 		marching_ants_outline.offset = Tools.snap_to_rectangular_grid_boundary(
 			marching_ants_outline.offset, grid_size
 		)
@@ -581,8 +579,8 @@ func transform_content_confirm() -> void:
 				if cel is not CelTileMap:
 					continue
 				var tilemap := cel as CelTileMap
-				var horizontal_size := preview_image.get_width() / tilemap.tileset.tile_size.x
-				var vertical_size := preview_image.get_height() / tilemap.tileset.tile_size.y
+				var horizontal_size := preview_image.get_width() / tilemap.get_tile_size().x
+				var vertical_size := preview_image.get_height() / tilemap.get_tile_size().y
 				var selected_cells := tilemap.resize_selection(
 					original_selected_tilemap_cells, horizontal_size, vertical_size
 				)
@@ -866,16 +864,14 @@ func paste(in_place := false) -> void:
 			camera_center.y = 0
 		big_bounding_rectangle.position = Vector2i(camera_center.floor())
 		if Tools.is_placing_tiles():
-			var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
-			var grid_size := tileset.tile_size
+			var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
 			big_bounding_rectangle.position = Vector2i(
 				Tools.snap_to_rectangular_grid_boundary(big_bounding_rectangle.position, grid_size)
 			)
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 	else:
 		if Tools.is_placing_tiles():
-			var tileset := (Global.current_project.get_current_cel() as CelTileMap).tileset
-			var grid_size := tileset.tile_size
+			var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
 			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
 				project.selection_offset, grid_size
 			)
