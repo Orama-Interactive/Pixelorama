@@ -134,13 +134,12 @@ func set_index(
 			var coords := get_pixel_coords(cell_coords)
 			var prev_tile := tileset.tiles[previous_index].image
 			var prev_tile_size := prev_tile.get_size()
-			var mask = prev_tile
 			var blank := Image.create_empty(
 				prev_tile_size.x, prev_tile_size.y, false, prev_tile.get_format()
 			)
 			var tile_offset := (prev_tile_size - get_tile_size()) / 2
 			image.blit_rect_mask(
-				blank, mask, Rect2i(Vector2i.ZERO, prev_tile_size), coords - tile_offset
+				blank, prev_tile, Rect2i(Vector2i.ZERO, prev_tile_size), coords - tile_offset
 			)
 		_queue_update_cel_portions(true)
 	else:
@@ -167,7 +166,7 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
 	var offset_coords := pixel_coords - offset
 	var cell_coords := Vector2i()
-	if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		offset_coords -= get_tile_size() / 2
 		var godot_tileset := TileSet.new()
 		godot_tileset.tile_size = get_tile_size()
@@ -191,7 +190,7 @@ func get_cell_index_at_coords(coords: Vector2i) -> int:
 
 
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
-	if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		var godot_tileset := TileSet.new()
 		godot_tileset.tile_size = get_tile_size()
 		godot_tileset.tile_shape = get_tile_shape()
@@ -665,29 +664,33 @@ func _update_cell(cell: Cell) -> void:
 	var current_tile := tileset.tiles[index].image
 	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
 	if image_portion.get_data() != transformed_tile.get_data():
-		var transformed_tile_size := transformed_tile.get_size()
-		if index == 0 or get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
-			image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
-			if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not place_only_mode:
-				update_cel_portions()
-		else:
-			var tile_offset := (transformed_tile_size - get_tile_size()) / 2
-			var mask: Image
-			if place_only_mode:
-				mask = transformed_tile
-			else:
-				mask = Image.create_empty(
-					transformed_tile_size.x, transformed_tile_size.y, false, Image.FORMAT_LA8
-				)
-				mask.fill(Color(0, 0, 0, 0))
-				DrawingAlgos.generate_isometric_rectangle(mask)
-			image.blit_rect_mask(
-				transformed_tile,
-				mask,
-				Rect2i(Vector2i.ZERO, transformed_tile_size),
-				coords - tile_offset
-			)
+		_draw_cell(image, transformed_tile, coords, index == 0)
 		image.convert_rgb_to_indexed()
+
+
+func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i, force_square_blit: bool) -> void:
+	var transformed_tile_size := tile_image.get_size()
+	if force_square_blit or get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		source_image.blit_rect(tile_image, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
+		if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not place_only_mode:
+			update_cel_portions()
+	else:
+		var tile_offset := (transformed_tile_size - get_tile_size()) / 2
+		var mask: Image
+		if place_only_mode:
+			mask = tile_image
+		else:
+			mask = Image.create_empty(
+				transformed_tile_size.x, transformed_tile_size.y, false, Image.FORMAT_LA8
+			)
+			mask.fill(Color(0, 0, 0, 0))
+			DrawingAlgos.generate_isometric_rectangle(mask)
+		source_image.blit_rect_mask(
+			tile_image,
+			mask,
+			Rect2i(Vector2i.ZERO, transformed_tile_size),
+			coords - tile_offset
+		)
 
 
 ## Calls [method _update_cell] for all [member cells].
@@ -790,7 +793,7 @@ func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
 	else:
 		re_index_all_cells()
 	Global.canvas.update_all_layers = true
-	Global.canvas.queue_redraw()
+	Global.canvas.queue_redraw.call_deferred()
 
 
 func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
@@ -844,10 +847,7 @@ func update_texture(undo := false) -> void:
 		if index == 0:
 			if tileset.tiles.size() > 1:
 				# Prevent from drawing on empty image portions.
-				var current_tile_size := current_tile.image.get_size()
-				image.blit_rect(
-					current_tile.image, Rect2i(Vector2i.ZERO, current_tile_size), coords
-				)
+				_draw_cell(image, current_tile.image, coords, false)
 			continue
 		if not editing_images.has(index):
 			if not _tiles_equal(cell, image_portion, current_tile.image):
@@ -876,10 +876,7 @@ func update_texture(undo := false) -> void:
 				editing_image, cell.flip_h, cell.flip_v, cell.transpose
 			)
 			if not image_portion.get_data() == transformed_editing_image.get_data():
-				var current_tile_size := image_portion.get_size()
-				image.blit_rect(
-					transformed_editing_image, Rect2i(Vector2i.ZERO, current_tile_size), coords
-				)
+				_draw_cell(image, transformed_editing_image, coords, index == 0)
 	super.update_texture(undo)
 
 
