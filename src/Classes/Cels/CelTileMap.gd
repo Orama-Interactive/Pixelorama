@@ -670,12 +670,13 @@ func _update_cell(cell: Cell) -> void:
 
 func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i, force_square_blit: bool) -> void:
 	var transformed_tile_size := tile_image.get_size()
+	var tile_offset := (transformed_tile_size - get_tile_size()) / 2
+	coords -= tile_offset
 	if force_square_blit or get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 		source_image.blit_rect(tile_image, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
 		if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not place_only_mode:
 			update_cel_portions()
 	else:
-		var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 		var mask: Image
 		if place_only_mode:
 			mask = tile_image
@@ -689,7 +690,7 @@ func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i, force_
 			tile_image,
 			mask,
 			Rect2i(Vector2i.ZERO, transformed_tile_size),
-			coords - tile_offset
+			coords
 		)
 
 
