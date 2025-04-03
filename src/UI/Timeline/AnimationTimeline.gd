@@ -491,6 +491,10 @@ func copy_frames(
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
 				new_cel.offset = src_cel.offset
+				new_cel.place_only_mode = src_cel.place_only_mode
+				new_cel.tile_size = src_cel.tile_size
+				new_cel.tile_shape = src_cel.tile_shape
+				new_cel.tile_layout = src_cel.tile_layout
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -921,6 +925,10 @@ func _on_CloneLayer_pressed() -> void:
 		var cl_layer: BaseLayer
 		if src_layer is LayerTileMap:
 			cl_layer = LayerTileMap.new(project, src_layer.tileset)
+			cl_layer.place_only_mode = src_layer.place_only_mode
+			cl_layer.tile_size = src_layer.tile_size
+			cl_layer.tile_shape = src_layer.tile_shape
+			cl_layer.tile_layout = src_layer.tile_layout
 		else:
 			cl_layer = src_layer.get_script().new(project)
 			if src_layer is AudioLayer:
@@ -945,6 +953,10 @@ func _on_CloneLayer_pressed() -> void:
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
 				new_cel.offset = src_cel.offset
+				new_cel.place_only_mode = src_cel.place_only_mode
+				new_cel.tile_size = src_cel.tile_size
+				new_cel.tile_shape = src_cel.tile_shape
+				new_cel.tile_layout = src_cel.tile_layout
 			else:
 				new_cel = src_cel.get_script().new()
 

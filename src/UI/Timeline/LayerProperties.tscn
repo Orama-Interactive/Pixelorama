@@ -1,19 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3dt1gdlf7hox"]
+[gd_scene load_steps=4 format=3 uid="uid://d3dt1gdlf7hox"]
 
 [ext_resource type="Script" uid="uid://4onxshv5pult" path="res://src/UI/Timeline/LayerProperties.gd" id="1_54q1t"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_bwpwc"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_dij20"]
 
 [node name="LayerProperties" type="AcceptDialog"]
 title = "Layer properties"
 position = Vector2i(0, 36)
-size = Vector2i(425, 300)
+size = Vector2i(425, 332)
 script = ExtResource("1_54q1t")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 417.0
-offset_bottom = 251.0
+offset_bottom = 283.0
 columns = 2
 
 [node name="NameLabel" type="Label" parent="GridContainer"]
@@ -91,6 +92,54 @@ text = "Tileset:"
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
+[node name="PlaceOnlyModeLabel" type="Label" parent="GridContainer" groups=["TilemapLayers"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Place only mode:"
+
+[node name="PlaceOnlyModeCheckButton" type="CheckButton" parent="GridContainer" groups=["TilemapLayers"]]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="TileSizeLabel" type="Label" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile size:"
+
+[node name="TileSizeSlider" parent="GridContainer" groups=["TilemapLayersPlaceOnly"] instance=ExtResource("3_dij20")]
+visible = false
+layout_mode = 2
+value = Vector2(16, 16)
+min_value = Vector2(1, 1)
+max_value = Vector2(128, 128)
+allow_greater = true
+show_ratio = true
+prefix_x = "Width:"
+prefix_y = "Height:"
+suffix_x = "px"
+suffix_y = "px"
+
+[node name="TileShapeLabel" type="Label" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile shape:"
+
+[node name="TileShapeOptionButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Rectangular"
+popup/item_0/id = 0
+popup/item_1/text = "Isometric"
+popup/item_1/id = 1
+
 [node name="UserDataLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -128,6 +177,9 @@ filters = PackedStringArray("*.mp3 ; MP3 Audio", "*.wav; WAV Audio")
 [connection signal="pressed" from="GridContainer/AudioFileButton" to="." method="_on_audio_file_button_pressed"]
 [connection signal="value_changed" from="GridContainer/PlayAtFrameSlider" to="." method="_on_play_at_frame_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/TilesetOptionButton" to="." method="_on_tileset_option_button_item_selected"]
+[connection signal="toggled" from="GridContainer/PlaceOnlyModeCheckButton" to="." method="_on_place_only_mode_check_button_toggled"]
+[connection signal="value_changed" from="GridContainer/TileSizeSlider" to="." method="_on_tile_size_slider_value_changed"]
+[connection signal="item_selected" from="GridContainer/TileShapeOptionButton" to="." method="_on_tile_shape_option_button_item_selected"]
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="color_changed" from="GridContainer/UIColorPickerButton" to="." method="_on_ui_color_picker_button_color_changed"]
 [connection signal="file_selected" from="AudioFileDialog" to="." method="_on_audio_file_dialog_file_selected"]

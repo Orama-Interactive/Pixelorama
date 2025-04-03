@@ -12,6 +12,7 @@ var layer_indices: PackedInt32Array
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
 @onready var ui_color_picker_button := $GridContainer/UIColorPickerButton as ColorPickerButton
 @onready var tileset_option_button := $GridContainer/TilesetOptionButton as OptionButton
+@onready var place_only_mode_check_button := %PlaceOnlyModeCheckButton as CheckButton
 @onready var audio_file_dialog := $AudioFileDialog as FileDialog
 
 
@@ -42,6 +43,9 @@ func _on_visibility_changed() -> void:
 		get_tree().set_group(&"VisualLayers", "visible", first_layer is not AudioLayer)
 		get_tree().set_group(&"TilemapLayers", "visible", first_layer is LayerTileMap)
 		get_tree().set_group(&"AudioLayers", "visible", first_layer is AudioLayer)
+		var place_only_tilemap: bool = first_layer is LayerTileMap and first_layer.place_only_mode
+		place_only_mode_check_button.disabled = place_only_tilemap
+		get_tree().set_group(&"TilemapLayersPlaceOnly", "visible", place_only_tilemap)
 		tileset_option_button.clear()
 		if first_layer is LayerTileMap:
 			for i in project.tilesets.size():
@@ -200,3 +204,49 @@ func _on_audio_file_dialog_file_selected(path: String) -> void:
 		var layer := Global.current_project.layers[layer_index]
 		if layer is AudioLayer:
 			layer.audio = audio_stream
+
+
+func _on_place_only_mode_check_button_toggled(toggled_on: bool) -> void:
+	if not toggled_on:
+		return
+	var project := Global.current_project
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		layer.place_only_mode = true
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					cel.place_only_mode = true
+	place_only_mode_check_button.disabled = true
+	get_tree().set_group(&"TilemapLayersPlaceOnly", "visible", true)
+
+
+func _on_tile_size_slider_value_changed(value: Vector2) -> void:
+	var project := Global.current_project
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		layer.tile_size = value
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					cel.tile_size = value
+
+
+func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> void:
+	var project := Global.current_project
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		layer.tile_shape = index
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					cel.tile_shape = index

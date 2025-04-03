@@ -431,7 +431,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		# Parent references to other layers are created when deserializing
 		# a layer, so loop again after creating them:
 		for layer_i in dict.layers.size():
-			layers[layer_i].index = layer_i
+			var layer := layers[layer_i]
+			layer.index = layer_i
 			var layer_dict: Dictionary = dict.layers[layer_i]
 			# Ensure that loaded pxo files from v1.0-v1.0.3 have the correct
 			# blend mode, after the addition of the Erase mode in v1.0.4.
@@ -440,8 +441,13 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				if blend_mode >= BaseLayer.BlendModes.ERASE:
 					blend_mode += 1
 				layer_dict["blend_mode"] = blend_mode
-			layers[layer_i].deserialize(layer_dict)
-			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
+			layer.deserialize(layer_dict)
+			_deserialize_metadata(layer, dict.layers[layer_i])
+			if layer is LayerTileMap:
+				for frame in frames:
+					for cel_i in frame.cels.size():
+						if cel_i == layer_i:
+							layer.pass_variables_to_cel(frame.cels[cel_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			var new_tag := AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to)

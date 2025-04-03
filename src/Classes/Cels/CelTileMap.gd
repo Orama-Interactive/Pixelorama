@@ -17,14 +17,18 @@ var tileset: TileSetCustom
 var cells: Dictionary[Vector2i, Cell] = {}  ## Dictionary that contains the data of each cell.
 ## If [code]true[/code], users can only place tiles in the tilemap and not modify the tileset
 ## in any way, such as by drawing pixels.
+## Passed down from the cel's [LayerTileMap].
 var place_only_mode := false
 ## The size of each tile.
 ## Overwrites the [member tileset]'s tile size if [member place_only_mode] is [code]true[/code].
-var tile_size: Vector2i
+## Passed down from the cel's [LayerTileMap].
+var tile_size := Vector2i(16, 16)
 ## The shape of each tile.
 ## Overwrites the [member tileset]'s tile shape if [member place_only_mode] is [code]true[/code].
+## Passed down from the cel's [LayerTileMap].
 var tile_shape := TileSet.TILE_SHAPE_SQUARE
 ## The layout of the tiles. Used when [member place_only_mode] is [code]true[/code].
+## Passed down from the cel's [LayerTileMap].
 var tile_layout := TileSet.TILE_LAYOUT_DIAMOND_DOWN
 var vertical_cell_min := 0  ## The minimum vertical cell.
 var vertical_cell_max := 0  ## The maximum vertical cell.
@@ -871,10 +875,6 @@ func serialize() -> Dictionary:
 		cell_data[cell_coords] = cell.serialize()
 	dict["cell_data"] = cell_data
 	dict["offset"] = offset
-	dict["place_only_mode"] = place_only_mode
-	dict["tile_size"] = tile_size
-	dict["tile_shape"] = tile_shape
-	dict["tile_layout"] = tile_layout
 	return dict
 
 
@@ -889,9 +889,6 @@ func deserialize(dict: Dictionary) -> void:
 	var new_offset := str_to_var("Vector2i" + new_offset_str) as Vector2i
 	if new_offset != offset:
 		change_offset(new_offset)
-	tile_size = str_to_var("Vector2i" + dict.get("tile_size"))
-	tile_shape = dict.get("tile_shape", tile_shape)
-	tile_layout = dict.get("tile_layout", tile_layout)
 
 
 func get_class_name() -> String:
