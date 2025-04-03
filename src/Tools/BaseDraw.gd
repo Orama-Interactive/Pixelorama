@@ -152,6 +152,7 @@ func set_config(config: Dictionary) -> void:
 
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
+	$DensityValueSlider.value = _brush_density
 	$ColorInterpolation.value = _brush_interpolate
 	%FlipX.button_pressed = _brush_flip_x
 	%FlipY.button_pressed = _brush_flip_y
