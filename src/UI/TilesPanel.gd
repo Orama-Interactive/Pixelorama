@@ -117,6 +117,9 @@ func _on_cel_switched() -> void:
 	var cel := Global.current_project.get_current_cel() as CelTileMap
 	set_tileset(cel.tileset)
 	_update_tileset(cel, -1)
+	if cel.place_only_mode:
+		place_tiles.button_pressed = true
+	place_tiles.visible = not cel.place_only_mode
 
 
 func _update_tileset(_cel: BaseCel, _replace_index: int) -> void:
