@@ -242,7 +242,8 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 			move.y = 0
 		var final_direction := (move * step).round()
 		if Tools.is_placing_tiles():
-			var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
+			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
+			var grid_size := tilemap_cel.get_tile_size()
 			final_direction *= Vector2(grid_size)
 		move_content(final_direction)
 
@@ -864,14 +865,16 @@ func paste(in_place := false) -> void:
 			camera_center.y = 0
 		big_bounding_rectangle.position = Vector2i(camera_center.floor())
 		if Tools.is_placing_tiles():
-			var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
+			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
+			var grid_size := tilemap_cel.get_tile_size()
 			big_bounding_rectangle.position = Vector2i(
 				Tools.snap_to_rectangular_grid_boundary(big_bounding_rectangle.position, grid_size)
 			)
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 	else:
 		if Tools.is_placing_tiles():
-			var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
+			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
+			var grid_size := tilemap_cel.get_tile_size()
 			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
 				project.selection_offset, grid_size
 			)

@@ -116,7 +116,7 @@ func set_index(
 	cell.flip_v = flip_v
 	cell.transpose = transpose
 	if place_only_mode:
-		if previous_index != index: # Remove previous tile to avoid overlapped pixels
+		if previous_index != index:  # Remove previous tile to avoid overlapped pixels
 			var cell_coords := cells.find_key(cell) as Vector2i
 			var coords := get_pixel_coords(cell_coords)
 			var prev_tile := tileset.tiles[previous_index].image
@@ -126,7 +126,9 @@ func set_index(
 				prev_tile_size.x, prev_tile_size.y, false, prev_tile.get_format()
 			)
 			var tile_offset := (prev_tile_size - get_tile_size()) / 2
-			image.blit_rect_mask(blank, mask, Rect2i(Vector2i.ZERO, prev_tile_size), coords - tile_offset)
+			image.blit_rect_mask(
+				blank, mask, Rect2i(Vector2i.ZERO, prev_tile_size), coords - tile_offset
+			)
 		_queue_update_cel_portions(true)
 	else:
 		_update_cell(cell)
@@ -370,7 +372,9 @@ func apply_resizing_to_image(
 			)
 			if image_portion.get_data() != transformed_tile.get_data():
 				var transformed_tile_size := transformed_tile.get_size()
-				target_image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
+				target_image.blit_rect(
+					transformed_tile, Rect2i(Vector2i.ZERO, transformed_tile_size), coords
+				)
 				if target_image is ImageExtended:
 					target_image.convert_rgb_to_indexed()
 			if transform_confirmed:
@@ -657,7 +661,12 @@ func _update_cell(cell: Cell) -> void:
 				)
 				mask.fill(Color(0, 0, 0, 0))
 				DrawingAlgos.generate_isometric_rectangle(mask)
-			image.blit_rect_mask(transformed_tile, mask, Rect2i(Vector2i.ZERO, transformed_tile_size), coords - tile_offset)
+			image.blit_rect_mask(
+				transformed_tile,
+				mask,
+				Rect2i(Vector2i.ZERO, transformed_tile_size),
+				coords - tile_offset
+			)
 		image.convert_rgb_to_indexed()
 
 
@@ -816,7 +825,9 @@ func update_texture(undo := false) -> void:
 			if tileset.tiles.size() > 1:
 				# Prevent from drawing on empty image portions.
 				var current_tile_size := current_tile.image.get_size()
-				image.blit_rect(current_tile.image, Rect2i(Vector2i.ZERO, current_tile_size), coords)
+				image.blit_rect(
+					current_tile.image, Rect2i(Vector2i.ZERO, current_tile_size), coords
+				)
 			continue
 		if not editing_images.has(index):
 			if not _tiles_equal(cell, image_portion, current_tile.image):
@@ -846,7 +857,9 @@ func update_texture(undo := false) -> void:
 			)
 			if not image_portion.get_data() == transformed_editing_image.get_data():
 				var current_tile_size := image_portion.get_size()
-				image.blit_rect(transformed_editing_image, Rect2i(Vector2i.ZERO, current_tile_size), coords)
+				image.blit_rect(
+					transformed_editing_image, Rect2i(Vector2i.ZERO, current_tile_size), coords
+				)
 	super.update_texture(undo)
 
 
