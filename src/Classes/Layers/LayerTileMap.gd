@@ -56,7 +56,11 @@ func deserialize(dict: Dictionary) -> void:
 	tileset = project.tilesets[tileset_index]
 	place_only_mode = dict.get("place_only_mode", place_only_mode)
 	if dict.has("tile_size"):
-		tile_size = str_to_var("Vector2i" + dict.get("tile_size"))
+		var tile_size_from_dict = dict.get("tile_size")
+		if typeof(tile_size_from_dict) == TYPE_VECTOR2I:
+			tile_size = tile_size_from_dict
+		else:
+			tile_size = str_to_var("Vector2i" + tile_size_from_dict)
 	tile_shape = dict.get("tile_shape", tile_shape)
 	tile_layout = dict.get("tile_layout", tile_layout)
 
