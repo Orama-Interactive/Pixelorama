@@ -22,14 +22,23 @@ var place_only_mode := false
 ## The size of each tile.
 ## Overwrites the [member tileset]'s tile size if [member place_only_mode] is [code]true[/code].
 ## Passed down from the cel's [LayerTileMap].
-var tile_size := Vector2i(16, 16)
+var tile_size := Vector2i(16, 16):
+	set(value):
+		tile_size = value
+		re_order_tilemap()
 ## The shape of each tile.
 ## Overwrites the [member tileset]'s tile shape if [member place_only_mode] is [code]true[/code].
 ## Passed down from the cel's [LayerTileMap].
-var tile_shape := TileSet.TILE_SHAPE_SQUARE
+var tile_shape := TileSet.TILE_SHAPE_SQUARE:
+	set(value):
+		tile_shape = value
+		re_order_tilemap()
 ## The layout of the tiles. Used when [member place_only_mode] is [code]true[/code].
 ## Passed down from the cel's [LayerTileMap].
-var tile_layout := TileSet.TILE_LAYOUT_DIAMOND_DOWN
+var tile_layout := TileSet.TILE_LAYOUT_DIAMOND_DOWN:
+	set(value):
+		tile_layout = value
+		re_order_tilemap()
 var vertical_cell_min := 0  ## The minimum vertical cell.
 var vertical_cell_max := 0  ## The maximum vertical cell.
 var offset := Vector2i.ZERO  ## The offset of the tilemap.
@@ -223,6 +232,13 @@ func get_tile_shape() -> TileSet.TileShape:
 	if place_only_mode:
 		return tile_shape
 	return tileset.tile_shape
+
+
+func re_order_tilemap() -> void:
+	if not place_only_mode:
+		return
+	image.fill(Color(0, 0, 0, 0))
+	update_cel_portions(true)
 
 
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]

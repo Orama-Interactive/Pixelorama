@@ -222,6 +222,8 @@ func _on_place_only_mode_check_button_toggled(toggled_on: bool) -> void:
 					cel.place_only_mode = true
 	place_only_mode_check_button.disabled = true
 	get_tree().set_group(&"TilemapLayersPlaceOnly", "visible", true)
+	Global.canvas.queue_redraw()
+	Global.canvas.grid.queue_redraw()
 
 
 func _on_tile_size_slider_value_changed(value: Vector2) -> void:
@@ -236,6 +238,8 @@ func _on_tile_size_slider_value_changed(value: Vector2) -> void:
 				var cel := frame.cels[i]
 				if cel is CelTileMap and i == layer_index:
 					cel.tile_size = value
+	Global.canvas.queue_redraw()
+	Global.canvas.grid.queue_redraw()
 
 
 func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> void:
@@ -250,3 +254,21 @@ func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> voi
 				var cel := frame.cels[i]
 				if cel is CelTileMap and i == layer_index:
 					cel.tile_shape = index
+	Global.canvas.queue_redraw()
+	Global.canvas.grid.queue_redraw()
+
+
+func _on_tile_layout_option_button_item_selected(index: TileSet.TileLayout) -> void:
+	var project := Global.current_project
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		layer.tile_layout = index
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					cel.tile_layout = index
+	Global.canvas.queue_redraw()
+	Global.canvas.grid.queue_redraw()
