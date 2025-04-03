@@ -12,7 +12,10 @@ var layer_indices: PackedInt32Array
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
 @onready var ui_color_picker_button := $GridContainer/UIColorPickerButton as ColorPickerButton
 @onready var tileset_option_button := $GridContainer/TilesetOptionButton as OptionButton
-@onready var place_only_mode_check_button := %PlaceOnlyModeCheckButton as CheckButton
+@onready var place_only_mode_check_button := $GridContainer/PlaceOnlyModeCheckButton as CheckButton
+@onready var tile_size_slider: ValueSliderV2 = $GridContainer/TileSizeSlider
+@onready var tile_shape_option_button: OptionButton = $GridContainer/TileShapeOptionButton
+@onready var tile_layout_option_button: OptionButton = $GridContainer/TileLayoutOptionButton
 @onready var audio_file_dialog := $AudioFileDialog as FileDialog
 
 
@@ -53,6 +56,10 @@ func _on_visibility_changed() -> void:
 				tileset_option_button.add_item(tileset.get_text_info(i))
 				if tileset == first_layer.tileset:
 					tileset_option_button.select(i)
+			place_only_mode_check_button.button_pressed = first_layer.place_only_mode
+			tile_size_slider.value = first_layer.tile_size
+			tile_shape_option_button.selected = first_layer.tile_shape
+			tile_layout_option_button.selected = first_layer.tile_layout
 	else:
 		layer_indices = []
 
@@ -222,8 +229,7 @@ func _on_place_only_mode_check_button_toggled(toggled_on: bool) -> void:
 					cel.place_only_mode = true
 	place_only_mode_check_button.disabled = true
 	get_tree().set_group(&"TilemapLayersPlaceOnly", "visible", true)
-	Global.canvas.queue_redraw()
-	Global.canvas.grid.queue_redraw()
+	Global.cel_switched.emit()
 
 
 func _on_tile_size_slider_value_changed(value: Vector2) -> void:
