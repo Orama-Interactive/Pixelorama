@@ -15,9 +15,17 @@ extends PixelCel
 var tileset: TileSetCustom
 
 var cells: Dictionary[Vector2i, Cell] = {}  ## Dictionary that contains the data of each cell.
+## If [code]true[/code], users can only place tiles in the tilemap and not modify the tileset
+## in any way, such as by drawing pixels.
+var place_only_mode := false
+## The size of each tile.
+## Overwrites the [member tileset]'s tile size if [member place_only_mode] is [code]true[/code].
 var tile_size: Vector2i
+## The shape of each tile.
+## Overwrites the [member tileset]'s tile shape if [member place_only_mode] is [code]true[/code].
 var tile_shape := TileSet.TILE_SHAPE_SQUARE
-var locked := false
+## The layout of the tiles. Used when [member place_only_mode] is [code]true[/code].
+var tile_layout := TileSet.TILE_LAYOUT_DIAMOND_DOWN
 var vertical_cell_min := 0  ## The minimum vertical cell.
 var vertical_cell_max := 0  ## The maximum vertical cell.
 var offset := Vector2i.ZERO  ## The offset of the tilemap.
@@ -27,7 +35,9 @@ var prev_offset := offset  ## Used for undo/redo purposes.
 ## its image that is being changed when manual mode is enabled.
 ## Gets reset on [method update_tilemap].
 var editing_images: Dictionary[int, Array] = {}
-var pending_update := false
+
+## Used to ensure [method _queue_update_cel_portions] is only called once.
+var _pending_update := false
 
 
 ## An internal class of [CelTIleMap], which contains data used by individual cells of the tilemap.
@@ -105,7 +115,7 @@ func set_index(
 	cell.flip_h = flip_h
 	cell.flip_v = flip_v
 	cell.transpose = transpose
-	if locked:
+	if place_only_mode:
 		if previous_index != index: # Remove previous tile to avoid overlapped pixels
 			var cell_coords := cells.find_key(cell) as Vector2i
 			var coords := get_pixel_coords(cell_coords)
@@ -117,17 +127,10 @@ func set_index(
 			)
 			var tile_offset := (prev_tile_size - get_tile_size()) / 2
 			image.blit_rect_mask(blank, mask, Rect2i(Vector2i.ZERO, prev_tile_size), coords - tile_offset)
-		queue_update_cel_portions(true)
+		_queue_update_cel_portions(true)
 	else:
 		_update_cell(cell)
 	Global.canvas.queue_redraw()
-
-
-func queue_update_cel_portions(skip_zeroes := false) -> void:
-	if pending_update:
-		return
-	pending_update = true
-	update_cel_portions.call_deferred(skip_zeroes)
 
 
 ## Changes the [member offset] of the tilemap. Automatically resizes the cells and redraws the grid.
@@ -154,7 +157,7 @@ func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
 		var godot_tileset := TileSet.new()
 		godot_tileset.tile_size = get_tile_size()
 		godot_tileset.tile_shape = get_tile_shape()
-		#godot_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+		godot_tileset.tile_layout = tile_layout
 		var godot_tilemap := TileMapLayer.new()
 		godot_tilemap.tile_set = godot_tileset
 		cell_coords = godot_tilemap.local_to_map(offset_coords)
@@ -177,7 +180,7 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 		var godot_tileset := TileSet.new()
 		godot_tileset.tile_size = get_tile_size()
 		godot_tileset.tile_shape = get_tile_shape()
-		#godot_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+		godot_tileset.tile_layout = tile_layout
 		var godot_tilemap := TileMapLayer.new()
 		godot_tilemap.tile_set = godot_tileset
 		var pixel_coords := godot_tilemap.map_to_local(cell_coords) as Vector2i
@@ -205,13 +208,13 @@ func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 
 
 func get_tile_size() -> Vector2i:
-	if locked:
+	if place_only_mode:
 		return tile_size
 	return tileset.tile_size
 
 
 func get_tile_shape() -> TileSet.TileShape:
-	if locked:
+	if place_only_mode:
 		return tile_shape
 	return tileset.tile_shape
 
@@ -444,7 +447,7 @@ func update_tilemap(
 	tile_editing_mode := TileSetPanel.tile_editing_mode, source_image := image
 ) -> void:
 	editing_images.clear()
-	if locked:
+	if place_only_mode:
 		return
 	var tileset_size_before_update := tileset.tiles.size()
 	for cell_coords in cells:
@@ -641,12 +644,12 @@ func _update_cell(cell: Cell) -> void:
 		var transformed_tile_size := transformed_tile.get_size()
 		if index == 0 or get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 			image.blit_rect(transformed_tile, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
-			if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not locked:
+			if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not place_only_mode:
 				update_cel_portions()
 		else:
 			var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 			var mask: Image
-			if locked:
+			if place_only_mode:
 				mask = transformed_tile
 			else:
 				mask = Image.create_empty(
@@ -660,7 +663,7 @@ func _update_cell(cell: Cell) -> void:
 
 ## Calls [method _update_cell] for all [member cells].
 func update_cel_portions(skip_zeros := false) -> void:
-	pending_update = false
+	_pending_update = false
 	var cell_keys := cells.keys()
 	cell_keys.sort()
 	for cell_coords in cell_keys:
@@ -693,6 +696,13 @@ func re_index_all_cells(set_invisible_to_zero := false) -> void:
 			if _tiles_equal(cell, image_portion, tile.image):
 				cell.index = j
 				break
+
+
+func _queue_update_cel_portions(skip_zeroes := false) -> void:
+	if _pending_update:
+		return
+	_pending_update = true
+	update_cel_portions.call_deferred(skip_zeroes)
 
 
 ## Resizes the [member cells] array based on [param new_size].
@@ -787,7 +797,7 @@ func update_texture(undo := false) -> void:
 		or _is_redo()
 		or tile_editing_mode != TileSetPanel.TileEditingMode.MANUAL
 		or Tools.is_placing_tiles()
-		or locked
+		or place_only_mode
 	):
 		super.update_texture(undo)
 		editing_images.clear()
@@ -848,6 +858,10 @@ func serialize() -> Dictionary:
 		cell_data[cell_coords] = cell.serialize()
 	dict["cell_data"] = cell_data
 	dict["offset"] = offset
+	dict["place_only_mode"] = place_only_mode
+	dict["tile_size"] = tile_size
+	dict["tile_shape"] = tile_shape
+	dict["tile_layout"] = tile_layout
 	return dict
 
 
@@ -862,6 +876,9 @@ func deserialize(dict: Dictionary) -> void:
 	var new_offset := str_to_var("Vector2i" + new_offset_str) as Vector2i
 	if new_offset != offset:
 		change_offset(new_offset)
+	tile_size = dict.get("tile_size", tile_size)
+	tile_shape = dict.get("tile_shape", tile_shape)
+	tile_layout = dict.get("tile_layout", tile_layout)
 
 
 func get_class_name() -> String:

@@ -12,12 +12,12 @@ signal updated(cel: CelTileMap, replace_index: int)
 
 ## The tileset's name.
 var name := ""
-## The size of each individual tile.
-var tile_size: Vector2i
 ## The collection of tiles in the form of an [Array] of type [TileSetCustom.Tile].
 var tiles: Array[Tile] = []
+## The size of each tile.
+var tile_size: Vector2i
 ## The shape of each tile.
-var tile_shape := TileSet.TILE_SHAPE_ISOMETRIC
+var tile_shape := TileSet.TILE_SHAPE_SQUARE
 ## If [code]true[/code], the code in [method handle_project_resize] does not execute.
 ## This variable is used to prevent multiple cels from clearing the tileset at the same time.
 ## In [method handle_project_resize], the variable is set to [code]true[/code], and then
