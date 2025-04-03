@@ -5,6 +5,7 @@ extends ConfirmationDialog
 @onready var tileset_option_button: OptionButton = $GridContainer/TilesetOptionButton
 @onready var tileset_name_line_edit: LineEdit = $GridContainer/TilesetNameLineEdit
 @onready var tile_size_slider: ValueSliderV2 = $GridContainer/TileSizeSlider
+@onready var tile_shape_option_button: OptionButton = $GridContainer/TileShapeOptionButton
 
 
 func _on_confirmed() -> void:
@@ -12,9 +13,10 @@ func _on_confirmed() -> void:
 	var layer_name := name_line_edit.text
 	var tileset_name := tileset_name_line_edit.text
 	var tile_size := tile_size_slider.value
+	var tile_shape := tile_shape_option_button.selected
 	var tileset: TileSetCustom
 	if tileset_option_button.selected == 0:
-		tileset = TileSetCustom.new(tile_size, tileset_name)
+		tileset = TileSetCustom.new(tile_size, tileset_name, tile_shape)
 	else:
 		tileset = project.tilesets[tileset_option_button.selected - 1]
 	var layer := LayerTileMap.new(project, tileset, layer_name)
@@ -44,3 +46,4 @@ func _on_tileset_option_button_item_selected(index: int) -> void:
 		tile_size_slider.value = tileset.tile_size
 	tileset_name_line_edit.editable = index == 0
 	tile_size_slider.editable = tileset_name_line_edit.editable
+	tile_shape_option_button.disabled = not tileset_name_line_edit.editable

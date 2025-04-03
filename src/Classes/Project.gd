@@ -356,7 +356,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if dict.has("tilesets"):
 		for saved_tileset in dict["tilesets"]:
 			var tile_size = str_to_var("Vector2i" + saved_tileset.get("tile_size"))
-			var tileset := TileSetCustom.new(tile_size, "", false)
+			var tile_shape = dict.get("tile_shape", TileSet.TILE_SHAPE_SQUARE)
+			var tileset := TileSetCustom.new(tile_size, "", tile_shape, false)
 			tileset.deserialize(saved_tileset)
 			tilesets.append(tileset)
 	if dict.has("frames") and dict.has("layers"):

@@ -54,9 +54,15 @@ class Tile:
 		user_data = dict.get("user_data", user_data)
 
 
-func _init(_tile_size: Vector2i, _name := "", add_empty_tile := true) -> void:
+func _init(
+	_tile_size: Vector2i,
+	_name := "",
+	_tile_shape := TileSet.TILE_SHAPE_SQUARE,
+	add_empty_tile := true
+) -> void:
 	tile_size = _tile_size
 	name = _name
+	tile_shape = _tile_shape
 	if add_empty_tile:
 		var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
 		tiles.append(Tile.new(empty_image))
@@ -198,8 +204,8 @@ func serialize() -> Dictionary:
 ## which is used so data can be loaded from pxo files.
 func deserialize(dict: Dictionary) -> void:
 	name = dict.get("name", name)
-	tile_shape = dict.get("tile_shape", tile_shape)
 	tile_size = str_to_var("Vector2i" + dict.get("tile_size"))
+	tile_shape = dict.get("tile_shape", tile_shape)
 	var tile_data := dict.get("tile_data", {}) as Dictionary
 	for i_str in tile_data:
 		var i := int(i_str)

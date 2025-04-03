@@ -391,7 +391,10 @@ static func open_aseprite_file(path: String) -> void:
 							data_length, FileAccess.COMPRESSION_DEFLATE
 						)
 					var tileset := TileSetCustom.new(
-						Vector2i(tile_width, tile_height), tileset_name, false
+						Vector2i(tile_width, tile_height),
+						tileset_name,
+						TileSet.TILE_SHAPE_SQUARE,
+						false
 					)
 					for k in n_of_tiles:
 						var n_of_pixels := tile_width * tile_height * pixel_byte

@@ -65,7 +65,7 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 	var project := Global.current_project
 	var tileset := project.tilesets[tileset_index]
 	if id == 0:  # Duplicate
-		var new_tileset := TileSetCustom.new(tileset.tile_size, tileset.name)
+		var new_tileset := TileSetCustom.new(tileset.tile_size, tileset.name, tileset.tile_shape)
 		for i in range(1, tileset.tiles.size()):
 			var tile := tileset.tiles[i]
 			var new_image := Image.new()

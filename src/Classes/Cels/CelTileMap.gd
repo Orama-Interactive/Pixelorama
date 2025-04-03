@@ -889,7 +889,7 @@ func deserialize(dict: Dictionary) -> void:
 	var new_offset := str_to_var("Vector2i" + new_offset_str) as Vector2i
 	if new_offset != offset:
 		change_offset(new_offset)
-	tile_size = dict.get("tile_size", tile_size)
+	tile_size = str_to_var("Vector2i" + dict.get("tile_size"))
 	tile_shape = dict.get("tile_shape", tile_shape)
 	tile_layout = dict.get("tile_layout", tile_layout)
 
