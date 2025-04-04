@@ -742,24 +742,25 @@ func _queue_update_cel_portions(skip_zeroes := false) -> void:
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 	var horizontal_cells := ceili(float(new_size.x) / get_tile_size().x)
 	var vertical_cells := ceili(float(new_size.y) / get_tile_size().y)
-	var horiz_range := range(0, horizontal_cells)
-	var ver_range := range(0, vertical_cells)
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		var n_of_cells := get_cell_position(new_size)
-		horizontal_cells = n_of_cells.x
-		vertical_cells = n_of_cells.y + 1
-		horiz_range = range(-1, horizontal_cells)
-		ver_range = range(-1, vertical_cells)
-	if offset.x % get_tile_size().x != 0:
-		horizontal_cells += 1
-	if offset.y % get_tile_size().y != 0:
-		vertical_cells += 1
-	var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(get_tile_size())).ceil())
-	for x in horiz_range:
-		for y in ver_range:
-			var cell_coords := Vector2i(x, y) - offset_in_tiles
-			if not cells.has(cell_coords):
-				cells[cell_coords] = Cell.new()
+		var half_size := get_tile_size() / 2
+		for x in range(0, new_size.x + 1, half_size.x):
+			for y in range(0, new_size.y + 1, half_size.y):
+				var pixel_coords := Vector2i(x, y)
+				var cell_coords := get_cell_position(pixel_coords)
+				if not cells.has(cell_coords):
+					cells[cell_coords] = Cell.new()
+	else:
+		if offset.x % get_tile_size().x != 0:
+			horizontal_cells += 1
+		if offset.y % get_tile_size().y != 0:
+			vertical_cells += 1
+		var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(get_tile_size())).ceil())
+		for x in horizontal_cells:
+			for y in vertical_cells:
+				var cell_coords := Vector2i(x, y) - offset_in_tiles
+				if not cells.has(cell_coords):
+					cells[cell_coords] = Cell.new()
 	for cell_coords in cells:
 		if cell_coords.y < vertical_cell_min:
 			vertical_cell_min = cell_coords.y
