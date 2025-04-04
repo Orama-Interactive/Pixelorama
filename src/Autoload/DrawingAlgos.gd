@@ -606,11 +606,15 @@ func center(indices: Array) -> void:
 				continue
 			var cel_image := (cel as PixelCel).get_image()
 			var tmp_centered := project.new_empty_image()
-			tmp_centered.blend_rect(cel.image, used_rect, offset)
+			tmp_centered.blend_rect(cel_image, used_rect, offset)
 			var centered := ImageExtended.new()
 			centered.copy_from_custom(tmp_centered, cel_image.is_indexed)
 			if cel is CelTileMap:
-				(cel as CelTileMap).serialize_undo_data_source_image(centered, redo_data, undo_data)
+				var tilemap_cel := cel as CelTileMap
+				var tilemap_offset := (offset - used_rect.position) % tilemap_cel.get_tile_size()
+				tilemap_cel.serialize_undo_data_source_image(
+					centered, redo_data, undo_data, tilemap_offset
+				)
 			centered.add_data_to_dictionary(redo_data, cel_image)
 			cel_image.add_data_to_dictionary(undo_data)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
@@ -628,7 +632,9 @@ func scale_project(width: int, height: int, interpolation: int) -> void:
 		var cel_image := (cel as PixelCel).get_image()
 		var sprite := _resize_image(cel_image, width, height, interpolation) as ImageExtended
 		if cel is CelTileMap:
-			(cel as CelTileMap).serialize_undo_data_source_image(sprite, redo_data, undo_data)
+			(cel as CelTileMap).serialize_undo_data_source_image(
+				sprite, redo_data, undo_data, Vector2i.ZERO, true
+			)
 		sprite.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -683,7 +689,9 @@ func crop_to_selection() -> void:
 		var cropped := ImageExtended.new()
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
 		if cel is CelTileMap:
-			(cel as CelTileMap).serialize_undo_data_source_image(cropped, redo_data, undo_data)
+			var tilemap_cel := cel as CelTileMap
+			var offset := rect.position % tilemap_cel.get_tile_size()
+			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -722,7 +730,9 @@ func crop_to_content() -> void:
 		var cropped := ImageExtended.new()
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
 		if cel is CelTileMap:
-			(cel as CelTileMap).serialize_undo_data_source_image(cropped, redo_data, undo_data)
+			var tilemap_cel := cel as CelTileMap
+			var offset := used_rect.position % tilemap_cel.get_tile_size()
+			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -743,14 +753,8 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 		resized.convert_rgb_to_indexed()
 		if cel is CelTileMap:
 			var tilemap_cel := cel as CelTileMap
-			var skip_tileset := (
-				offset_x % tilemap_cel.tileset.tile_size.x == 0
-				and offset_y % tilemap_cel.tileset.tile_size.y == 0
-			)
 			var offset := Vector2i(offset_x, offset_y)
-			tilemap_cel.serialize_undo_data_source_image(
-				resized, redo_data, undo_data, offset, true
-			)
+			tilemap_cel.serialize_undo_data_source_image(resized, redo_data, undo_data, offset)
 		resized.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 

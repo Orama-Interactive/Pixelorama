@@ -1142,7 +1142,7 @@ func _on_MergeDownLayer_pressed() -> void:
 			var redo_data := {}
 			if bottom_cel is CelTileMap:
 				(bottom_cel as CelTileMap).serialize_undo_data_source_image(
-					new_bottom_image, redo_data, undo_data
+					new_bottom_image, redo_data, undo_data, Vector2i.ZERO, true
 				)
 			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
 			bottom_image.add_data_to_dictionary(undo_data)

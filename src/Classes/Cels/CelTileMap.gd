@@ -422,21 +422,21 @@ func serialize_undo_data_source_image(
 	redo_data: Dictionary,
 	undo_data: Dictionary,
 	new_offset := Vector2i.ZERO,
-	skip_tileset_resize := false
+	affect_tileset := false
 ) -> void:
 	undo_data[self] = serialize_undo_data()
 	if source_image.get_size() != image.get_size():
 		undo_data[self]["resize"] = true
 		_resize_cells(source_image.get_size())
-		if not skip_tileset_resize and not place_only_mode:
+		if affect_tileset and not place_only_mode:
 			tileset.handle_project_resize(self)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
-	if skip_tileset_resize:
-		re_index_all_cells()
-	else:
+	if affect_tileset:
 		update_tilemap(tile_editing_mode, source_image)
+	else:
+		re_index_all_cells()
 	redo_data[self] = serialize_undo_data()
 	redo_data[self]["resize"] = undo_data[self]["resize"]
 	if new_offset != Vector2i.ZERO:
