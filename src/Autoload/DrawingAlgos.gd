@@ -747,8 +747,9 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 				offset_x % tilemap_cel.tileset.tile_size.x == 0
 				and offset_y % tilemap_cel.tileset.tile_size.y == 0
 			)
+			var offset := Vector2i(offset_x, offset_y)
 			tilemap_cel.serialize_undo_data_source_image(
-				resized, redo_data, undo_data, skip_tileset
+				resized, redo_data, undo_data, offset, true
 			)
 		resized.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)

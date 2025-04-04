@@ -421,30 +421,41 @@ func serialize_undo_data_source_image(
 	source_image: ImageExtended,
 	redo_data: Dictionary,
 	undo_data: Dictionary,
+	new_offset := Vector2i.ZERO,
 	skip_tileset_resize := false
 ) -> void:
 	undo_data[self] = serialize_undo_data()
 	if source_image.get_size() != image.get_size():
 		undo_data[self]["resize"] = true
 		_resize_cells(source_image.get_size())
-		if not skip_tileset_resize:
+		if not skip_tileset_resize and not place_only_mode:
 			tileset.handle_project_resize(self)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
-	update_tilemap(tile_editing_mode, source_image)
+	if skip_tileset_resize:
+		re_index_all_cells()
+	else:
+		update_tilemap(tile_editing_mode, source_image)
 	redo_data[self] = serialize_undo_data()
 	redo_data[self]["resize"] = undo_data[self]["resize"]
+	if new_offset != Vector2i.ZERO:
+		undo_data[self]["offset"] = offset
+		redo_data[self]["offset"] = offset + new_offset
 
 
 ## Reads data from a [param dict] [Dictionary], and uses them to add methods to [param undo_redo].
 func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
 	var cell_data = dict.cell_data
 	if undo:
+		if dict.has("offset"):
+			undo_redo.add_undo_method(change_offset.bind(dict.offset))
 		undo_redo.add_undo_method(_deserialize_cell_data.bind(cell_data, dict.resize))
 		if dict.has("tileset"):
 			undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
 	else:
+		if dict.has("offset"):
+			undo_redo.add_do_method(change_offset.bind(dict.offset))
 		undo_redo.add_do_method(_deserialize_cell_data.bind(cell_data, dict.resize))
 		if dict.has("tileset"):
 			undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
