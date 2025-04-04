@@ -668,7 +668,9 @@ func _update_cell(cell: Cell) -> void:
 		image.convert_rgb_to_indexed()
 
 
-func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i, force_square_blit: bool) -> void:
+func _draw_cell(
+	source_image: Image, tile_image: Image, coords: Vector2i, force_square_blit: bool
+) -> void:
 	var transformed_tile_size := tile_image.get_size()
 	var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 	coords -= tile_offset
@@ -687,10 +689,7 @@ func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i, force_
 			mask.fill(Color(0, 0, 0, 0))
 			DrawingAlgos.generate_isometric_rectangle(mask)
 		source_image.blit_rect_mask(
-			tile_image,
-			mask,
-			Rect2i(Vector2i.ZERO, transformed_tile_size),
-			coords
+			tile_image, mask, Rect2i(Vector2i.ZERO, transformed_tile_size), coords
 		)
 
 
