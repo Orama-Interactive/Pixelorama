@@ -522,7 +522,7 @@ func update_tilemap(
 		var cell := cells[cell_coords]
 		var coords := get_pixel_coords(cell_coords)
 		var rect := Rect2i(coords, get_tile_size())
-		var image_portion := get_image_portion(rect)
+		var image_portion := get_image_portion(rect, source_image)
 		if not image_portion.is_invisible():
 			continue
 		var index := cell.index
