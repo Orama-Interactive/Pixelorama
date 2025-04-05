@@ -1220,15 +1220,22 @@ func _toggle_layer_buttons() -> void:
 		move_down_layer,
 		project.current_layer == child_count and not is_instance_valid(layer.parent)
 	)
+	var below_layer: BaseLayer = null
+	if project.current_layer - 1 >= 0:
+		below_layer = project.layers[project.current_layer - 1]
+	var is_place_only_tilemap := (
+		below_layer is LayerTileMap and (below_layer as LayerTileMap).place_only_mode
+	)
 	Global.disable_button(
 		merge_down_layer,
 		(
 			project.current_layer == child_count
 			or layer is GroupLayer
 			or layer is AudioLayer
-			or project.layers[project.current_layer - 1] is GroupLayer
-			or project.layers[project.current_layer - 1] is Layer3D
-			or project.layers[project.current_layer - 1] is AudioLayer
+			or is_place_only_tilemap
+			or below_layer is GroupLayer
+			or below_layer is Layer3D
+			or below_layer is AudioLayer
 		)
 	)
 	Global.disable_button(layer_fx, layer is AudioLayer)
