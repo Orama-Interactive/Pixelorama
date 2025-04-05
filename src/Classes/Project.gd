@@ -447,7 +447,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				for frame in frames:
 					for cel_i in frame.cels.size():
 						if cel_i == layer_i:
-							layer.pass_variables_to_cel(frame.cels[cel_i])
+							# Call deferred to ensure the tileset has been loaded first
+							layer.pass_variables_to_cel.call_deferred(frame.cels[cel_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			var new_tag := AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to)

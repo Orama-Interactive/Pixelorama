@@ -673,19 +673,19 @@ func _re_index_cells_after_index(index: int) -> void:
 
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
-func _update_cell(cell: Cell, source_image := image) -> void:
+func _update_cell(cell: Cell) -> void:
 	var cell_coords := cells.find_key(cell) as Vector2i
 	var coords := get_pixel_coords(cell_coords)
 	var rect := Rect2i(coords, get_tile_size())
-	var image_portion := get_image_portion(rect, source_image)
+	var image_portion := get_image_portion(rect)
 	var index := cell.index
 	if index >= tileset.tiles.size():
 		index = 0
 	var current_tile := tileset.tiles[index].image
 	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
 	if image_portion.get_data() != transformed_tile.get_data():
-		_draw_cell(source_image, transformed_tile, coords, index == 0)
-		source_image.convert_rgb_to_indexed()
+		_draw_cell(image, transformed_tile, coords, index == 0)
+		image.convert_rgb_to_indexed()
 
 
 func _draw_cell(
@@ -714,7 +714,7 @@ func _draw_cell(
 
 
 ## Calls [method _update_cell] for all [member cells].
-func update_cel_portions(skip_zeros := false, source_image := image) -> void:
+func update_cel_portions(skip_zeros := false) -> void:
 	_pending_update = false
 	var cell_keys := cells.keys()
 	cell_keys.sort()
@@ -722,7 +722,7 @@ func update_cel_portions(skip_zeros := false, source_image := image) -> void:
 		var cell := cells[cell_coords]
 		if cell.index == 0 and skip_zeros:
 			continue
-		_update_cell(cell, source_image)
+		_update_cell(cell)
 
 
 ## Loops through all [member cells] of the tilemap and updates their indices,
@@ -831,7 +831,7 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 			get_cell_at(cell_coords).deserialize(default_dict)
 	if resize:
 		image.fill(Color(0, 0, 0, 0))
-		update_cel_portions.call_deferred(true, image)
+		update_cel_portions.call_deferred(true)
 
 
 # Overridden Methods:
