@@ -9,6 +9,8 @@ extends RefCounted
 ## Emitted every time the tileset changes, such as when a tile is added, removed or replaced.
 ## The [CelTileMap] that the changes are coming from is referenced in the [param cel] parameter.
 signal updated(cel: CelTileMap, replace_index: int)
+## Emitted when the size of the tile images changes.
+signal resized_content
 
 ## The tileset's name.
 var name := ""
@@ -152,6 +154,7 @@ func handle_project_resize(
 		)
 	_tileset_has_been_resized = true
 	set_deferred("_tileset_has_been_resized", false)
+	resized_content.emit()
 
 
 ## Returns the tilemap's info, such as its name and tile size and with a given
@@ -236,6 +239,7 @@ func serialize_undo_data() -> Dictionary:
 ## Deserializes the data of each tile in [param dict], which is used by the undo/redo system.
 func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
 	tiles.resize(dict["tiles"].size())
+	var prev_tile_size := tile_size
 	tile_size = dict["tile_size"]
 	var i := 0
 	for image: Image in dict["tiles"]:
@@ -249,3 +253,5 @@ func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
 		tiles[i].deserialize(tile_dictionary)
 		i += 1
 	updated.emit(cel, -1)
+	if tile_size != prev_tile_size:
+		resized_content.emit()

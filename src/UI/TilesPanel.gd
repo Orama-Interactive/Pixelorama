@@ -92,12 +92,14 @@ func set_tileset(tileset: TileSetCustom) -> void:
 		return
 	if is_instance_valid(current_tileset) and current_tileset.updated.is_connected(_update_tileset):
 		current_tileset.updated.disconnect(_update_tileset)
+		current_tileset.resized_content.disconnect(_call_update_brushes)
 	current_tileset = tileset
 	if (
 		is_instance_valid(current_tileset)
 		and not current_tileset.updated.is_connected(_update_tileset)
 	):
 		current_tileset.updated.connect(_update_tileset)
+		current_tileset.resized_content.connect(_call_update_brushes)
 
 
 func update_tip() -> void:
