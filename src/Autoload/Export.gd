@@ -1,7 +1,7 @@
 extends Node
 
 enum ExportTab { IMAGE, SPRITESHEET }
-enum Orientation { COLUMNS, ROWS, TAGS_BY_COLUMN, TAGS_BY_ROW }
+enum Orientation { COLUMNS, ROWS, TAGS_BY_ROW, TAGS_BY_COLUMN }
 enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
@@ -201,7 +201,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 		if frames_without_tag == 0:
 			# If all frames have a tag, remove the first row
 			spritesheet_rows -= 1
-		if orientation == Orientation.TAGS_BY_ROW:
+		if orientation == Orientation.TAGS_BY_COLUMN:
 			# Switch rows and columns
 			var temp := spritesheet_rows
 			spritesheet_rows = spritesheet_columns
@@ -231,7 +231,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.y = 0
 				hh = 1
 				origin.x = project.size.x * vv
-		elif orientation == Orientation.TAGS_BY_COLUMN:
+		elif orientation == Orientation.TAGS_BY_ROW:
 			var frame_index := project.frames.find(frame)
 			var frame_has_tag := false
 			for i in project.animation_tags.size():
@@ -250,7 +250,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.x = project.size.x * tag_origins[0]
 				origin.y = 0
 				tag_origins[0] += 1
-		elif orientation == Orientation.TAGS_BY_ROW:
+		elif orientation == Orientation.TAGS_BY_COLUMN:
 			var frame_index := project.frames.find(frame)
 			var frame_has_tag := false
 			for i in project.animation_tags.size():

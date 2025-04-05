@@ -44,6 +44,7 @@ size_flags_vertical = 3
 [node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -81,11 +82,12 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 4
 popup/item_0/text = "Columns"
+popup/item_0/id = 0
 popup/item_1/text = "Rows"
 popup/item_1/id = 1
-popup/item_2/text = "Tags by column"
+popup/item_2/text = "Tags by row"
 popup/item_2/id = 2
-popup/item_3/text = "Tags by row"
+popup/item_3/text = "Tags by column"
 popup/item_3/id = 3
 
 [node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
@@ -114,6 +116,7 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "All frames"
+popup/item_0/id = 0
 popup/item_1/text = "Selected frames"
 popup/item_1/id = 1
 
@@ -127,6 +130,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "Visible layers"
+popup/item_0/id = 0
 popup/item_1/text = "Selected layers"
 popup/item_1/id = 1
 
@@ -142,6 +146,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Forward"
+popup/item_0/id = 0
 popup/item_1/text = "Backwards"
 popup/item_1/id = 1
 popup/item_2/text = "Ping-Pong"
@@ -276,6 +281,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 5
 popup/item_0/text = "Nearest"
+popup/item_0/id = 0
 popup/item_1/text = "Bilinear"
 popup/item_1/id = 1
 popup/item_2/text = "Cubic"
