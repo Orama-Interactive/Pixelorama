@@ -79,6 +79,8 @@ func _confirmed() -> void:
 			var cel := project.frames[cel_index[0]].cels[cel_index[1]]
 			if not cel is PixelCel:
 				continue
+			if cel is CelTileMap and cel.place_only_mode:
+				continue
 			commit_idx = cel_index[0]  # frame is cel_index[0] in this mode
 			commit_action(cel.image)
 		_commit_undo("Draw", undo_data, project)
@@ -90,6 +92,9 @@ func _confirmed() -> void:
 		commit_idx = project.current_frame
 		for cel in project.frames[project.current_frame].cels:
 			if not cel is PixelCel:
+				i += 1
+				continue
+			if cel is CelTileMap and cel.place_only_mode:
 				i += 1
 				continue
 			if project.layers[i].can_layer_get_drawn():
@@ -105,6 +110,9 @@ func _confirmed() -> void:
 			commit_idx += 1  # frames are simply increasing by 1 in this mode
 			for cel in frame.cels:
 				if not cel is PixelCel:
+					i += 1
+					continue
+				if cel is CelTileMap and cel.place_only_mode:
 					i += 1
 					continue
 				if project.layers[i].can_layer_get_drawn():
@@ -123,6 +131,9 @@ func _confirmed() -> void:
 				commit_idx += 1  # frames are simply increasing by 1 in this mode
 				for cel in frame.cels:
 					if not cel is PixelCel:
+						i += 1
+						continue
+					if cel is CelTileMap and cel.place_only_mode:
 						i += 1
 						continue
 					if _project.layers[i].can_layer_get_drawn():
