@@ -694,7 +694,7 @@ func crop_to_selection() -> void:
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
 		if cel is CelTileMap:
 			var tilemap_cel := cel as CelTileMap
-			var offset := rect.position % tilemap_cel.get_tile_size()
+			var offset := rect.position
 			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
@@ -735,7 +735,7 @@ func crop_to_content() -> void:
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
 		if cel is CelTileMap:
 			var tilemap_cel := cel as CelTileMap
-			var offset := used_rect.position % tilemap_cel.get_tile_size()
+			var offset := used_rect.position
 			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)

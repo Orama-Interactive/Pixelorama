@@ -41,7 +41,7 @@ var tile_layout := TileSet.TILE_LAYOUT_DIAMOND_DOWN:
 		re_order_tilemap()
 var vertical_cell_min := 0  ## The minimum vertical cell.
 var vertical_cell_max := 0  ## The maximum vertical cell.
-var offset := Vector2i.ZERO  ## The offset of the tilemap.
+var offset := Vector2i.ZERO  ## The offset of the tilemap in pixel coordinates.
 var prev_offset := offset  ## Used for undo/redo purposes.
 ## The key is the index of the tile in the tileset,
 ## and the value is the coords of the tilemap tile that changed first, along with
