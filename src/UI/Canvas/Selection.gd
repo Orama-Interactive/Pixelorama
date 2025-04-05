@@ -338,6 +338,8 @@ func _gizmo_resize() -> void:
 	var mouse_pos := image_current_pixel
 	if Tools.is_placing_tiles():
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
+		if tilemap.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+			return
 		var offset := tilemap.offset % tilemap.get_tile_size()
 		mouse_pos = mouse_pos.snapped(tilemap.get_tile_size()) + Vector2(offset)
 	if Input.is_action_pressed("shape_center"):
@@ -540,6 +542,15 @@ func move_borders_end() -> void:
 func transform_content_start() -> void:
 	if is_moving_content:
 		return
+	var project := Global.current_project
+	var current_cel := project.get_current_cel()
+	if current_cel is CelTileMap and Tools.is_placing_tiles():
+		if current_cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+			undo_data = get_undo_data(false)
+			return
+		original_selected_tilemap_cells = (current_cel as CelTileMap).get_selected_cells(
+			project.selection_map, big_bounding_rectangle
+		)
 	undo_data = get_undo_data(true)
 	temp_rect = big_bounding_rectangle
 	resized_rect = big_bounding_rectangle
@@ -548,15 +559,9 @@ func transform_content_start() -> void:
 		undo_data = get_undo_data(false)
 		return
 	is_moving_content = true
-	var project := Global.current_project
 	original_bitmap.copy_from(project.selection_map)
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = project.selection_offset
-	var current_cel := project.get_current_cel()
-	if current_cel is CelTileMap and Tools.is_placing_tiles():
-		original_selected_tilemap_cells = (current_cel as CelTileMap).get_selected_cells(
-			project.selection_map, big_bounding_rectangle
-		)
 	queue_redraw()
 	canvas.queue_redraw()
 
@@ -601,6 +606,8 @@ func transform_content_confirm() -> void:
 					src.flip_y()
 
 		if Tools.is_placing_tiles():
+			if cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+				continue
 			cel_image.blit_rect(
 				src,
 				Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
