@@ -26,9 +26,18 @@ var tile_layout := TileSet.TILE_LAYOUT_DIAMOND_DOWN
 
 func _init(_project: Project, _tileset: TileSetCustom, _name := "") -> void:
 	super._init(_project, _name)
-	tileset = _tileset
+	set_tileset(_tileset)
 	if not project.tilesets.has(tileset) and is_instance_valid(tileset):
 		project.add_tileset(tileset)
+
+
+func set_tileset(new_tileset: TileSetCustom) -> void:
+	if tileset == new_tileset:
+		return
+	tileset = new_tileset
+	if is_instance_valid(tileset):
+		tile_size = tileset.tile_size
+		tile_shape = tileset.tile_shape
 
 
 func pass_variables_to_cel(cel: CelTileMap) -> void:

@@ -104,6 +104,8 @@ func set_tileset(new_tileset: TileSetCustom, reset_indices := true) -> void:
 	tileset = new_tileset
 	if is_instance_valid(tileset):
 		_resize_cells(get_image().get_size(), reset_indices)
+		tile_size = tileset.tile_size
+		tile_shape = tileset.tile_shape
 		if not tileset.updated.is_connected(_on_tileset_updated):
 			tileset.updated.connect(_on_tileset_updated)
 
