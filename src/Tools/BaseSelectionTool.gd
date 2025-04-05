@@ -272,7 +272,9 @@ func _on_Size_value_changed(value: Vector2i) -> void:
 		if not selection_node.is_moving_content:
 			selection_node.original_bitmap.copy_from(Global.current_project.selection_map)
 	timer.start()
-	selection_node.big_bounding_rectangle.size = value
+	if selection_node.resized_rect.position != selection_node.big_bounding_rectangle.position:
+		selection_node.resized_rect = selection_node.big_bounding_rectangle
+	selection_node.resized_rect.size = value
 	selection_node.resize_selection()
 
 
