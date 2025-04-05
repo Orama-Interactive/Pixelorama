@@ -402,14 +402,17 @@ func apply_resizing_to_image(
 
 
 ## Appends data to a [Dictionary] to be used for undo/redo.
-func serialize_undo_data() -> Dictionary:
+## [param skip_tileset_undo] is used to avoid getting undo/redo data from the same tileset twice
+## by other tilemap cels sharing that exact tileset.
+func serialize_undo_data(skip_tileset_undo := false) -> Dictionary:
 	var dict := {}
 	var cell_data := {}
 	for cell_coords: Vector2i in cells:
 		var cell := cells[cell_coords]
 		cell_data[cell_coords] = cell.serialize()
 	dict["cell_data"] = cell_data
-	dict["tileset"] = tileset.serialize_undo_data()
+	if not skip_tileset_undo:
+		dict["tileset"] = tileset.serialize_undo_data()
 	dict["resize"] = false
 	return dict
 
@@ -422,22 +425,25 @@ func serialize_undo_data_source_image(
 	redo_data: Dictionary,
 	undo_data: Dictionary,
 	new_offset := Vector2i.ZERO,
-	affect_tileset := false
+	affect_tileset := false,
+	resize_interpolation := Image.INTERPOLATE_NEAREST,
+	skip_tileset_undo := false
 ) -> void:
-	undo_data[self] = serialize_undo_data()
+	undo_data[self] = serialize_undo_data(skip_tileset_undo)
 	if source_image.get_size() != image.get_size():
 		undo_data[self]["resize"] = true
 		_resize_cells(source_image.get_size())
 		if affect_tileset and not place_only_mode:
-			tileset.handle_project_resize(self)
+			var resize_factor := Vector2(source_image.get_size()) / Vector2(image.get_size())
+			tileset.handle_project_resize(self, resize_factor, resize_interpolation)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
-	if affect_tileset:
+	if affect_tileset and source_image.get_size() == image.get_size():
 		update_tilemap(tile_editing_mode, source_image)
 	else:
-		re_index_all_cells()
-	redo_data[self] = serialize_undo_data()
+		re_index_all_cells(false, source_image if affect_tileset else image)
+	redo_data[self] = serialize_undo_data(skip_tileset_undo)
 	redo_data[self]["resize"] = undo_data[self]["resize"]
 	if new_offset != Vector2i.ZERO:
 		undo_data[self]["offset"] = offset
@@ -718,12 +724,12 @@ func update_cel_portions(skip_zeros := false) -> void:
 
 ## Loops through all [member cells] of the tilemap and updates their indices,
 ## so they can remain mapped to the [member tileset]'s tiles.
-func re_index_all_cells(set_invisible_to_zero := false) -> void:
+func re_index_all_cells(set_invisible_to_zero := false, source_image := image) -> void:
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
 		var coords := get_pixel_coords(cell_coords)
 		var rect := Rect2i(coords, get_tile_size())
-		var image_portion := get_image_portion(rect)
+		var image_portion := get_image_portion(rect, source_image)
 		if image_portion.is_invisible():
 			if set_invisible_to_zero:
 				cell.index = 0

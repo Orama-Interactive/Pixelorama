@@ -22,7 +22,7 @@ var tile_shape := TileSet.TILE_SHAPE_SQUARE
 ## This variable is used to prevent multiple cels from clearing the tileset at the same time.
 ## In [method handle_project_resize], the variable is set to [code]true[/code], and then
 ## immediately set to [code]false[/code] in the next frame using [method Object.set_deferred].
-var _tileset_has_been_cleared := false
+var _tileset_has_been_resized := false
 
 
 ## An internal class of [TileSetCustom], which contains data used by individual tiles of a tileset.
@@ -139,16 +139,20 @@ func remove_unused_tiles(cel: CelTileMap) -> bool:
 
 ## Clears the used tiles of tileset. Called when the project gets resized,
 ## and tilemap cels are updating their size and clearing the tileset to re-create it.
-func handle_project_resize(cel: CelTileMap) -> void:
-	if _tileset_has_been_cleared:
+func handle_project_resize(
+	cel: CelTileMap, resize_factor: Vector2, resize_interpolation: Image.Interpolation
+) -> void:
+	if _tileset_has_been_resized:
 		return
+	tile_size = Vector2(tile_size) * resize_factor
 	for i in range(tiles.size() - 1, 0, -1):
 		var tile := tiles[i]
-		if tile.times_used > 0:
-			tiles.erase(tile)
+		tile.image = DrawingAlgos.resize_image(
+			tile.image, tile_size.x, tile_size.y, resize_interpolation
+		)
 	updated.emit(cel, -1)
-	_tileset_has_been_cleared = true
-	set_deferred("_tileset_has_been_cleared", false)
+	_tileset_has_been_resized = true
+	set_deferred("_tileset_has_been_resized", false)
 
 
 ## Returns the tilemap's info, such as its name and tile size and with a given
@@ -221,19 +225,20 @@ func deserialize(dict: Dictionary) -> void:
 ## Serializes the data of each tile in [member tiles] into the form of a [Dictionary],
 ## which is used by the undo/redo system.
 func serialize_undo_data() -> Dictionary:
-	var dict := {}
+	var dict := {"tile_size": tile_size, "tiles": {}}
 	for tile in tiles:
 		var image_data := tile.image.get_data()
-		dict[tile.image] = [image_data.compress(), image_data.size(), tile.serialize()]
+		dict["tiles"][tile.image] = [image_data.compress(), image_data.size(), tile.serialize()]
 	return dict
 
 
 ## Deserializes the data of each tile in [param dict], which is used by the undo/redo system.
 func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
-	tiles.resize(dict.size())
+	tiles.resize(dict["tiles"].size())
+	tile_size = dict["tile_size"]
 	var i := 0
-	for image: Image in dict:
-		var tile_data = dict[image]
+	for image: Image in dict["tiles"]:
+		var tile_data = dict["tiles"][image]
 		var buffer_size := tile_data[1] as int
 		var tile_dictionary := tile_data[2] as Dictionary
 		var image_data := (tile_data[0] as PackedByteArray).decompress(buffer_size)

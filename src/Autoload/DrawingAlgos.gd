@@ -626,22 +626,26 @@ func center(indices: Array) -> void:
 func scale_project(width: int, height: int, interpolation: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
+	var tilesets: Array[TileSetCustom] = []
 	for cel in Global.current_project.get_all_pixel_cels():
 		if not cel is PixelCel:
 			continue
 		var cel_image := (cel as PixelCel).get_image()
-		var sprite := _resize_image(cel_image, width, height, interpolation) as ImageExtended
+		var sprite := resize_image(cel_image, width, height, interpolation) as ImageExtended
 		if cel is CelTileMap:
-			(cel as CelTileMap).serialize_undo_data_source_image(
-				sprite, redo_data, undo_data, Vector2i.ZERO, true
+			var tilemap_cel := cel as CelTileMap
+			var skip_tileset_undo := tilesets.has(tilemap_cel.tileset)
+			tilemap_cel.serialize_undo_data_source_image(
+				sprite, redo_data, undo_data, Vector2i.ZERO, true, interpolation, skip_tileset_undo
 			)
+			tilesets.append(tilemap_cel.tileset)
 		sprite.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
 
-func _resize_image(
+func resize_image(
 	image: Image, width: int, height: int, interpolation: Image.Interpolation
 ) -> Image:
 	var new_image: Image
