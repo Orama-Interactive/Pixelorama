@@ -429,20 +429,20 @@ func serialize_undo_data_source_image(
 	resize_interpolation := Image.INTERPOLATE_NEAREST
 ) -> void:
 	undo_data[self] = serialize_undo_data(not affect_tileset)
+	undo_data[self]["tile_size"] = tile_size
+	var resize_factor := Vector2(source_image.get_size()) / Vector2(image.get_size())
 	if source_image.get_size() != image.get_size():
 		undo_data[self]["resize"] = true
 		_resize_cells(source_image.get_size(), false)
 		if affect_tileset:  # Happens only when scaling image
-			var resize_factor := Vector2(source_image.get_size()) / Vector2(image.get_size())
 			tileset.handle_project_resize(resize_factor, resize_interpolation)
-			source_image.fill(Color(0, 0, 0, 0))
-			update_cel_portions(true, source_image)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
 	if affect_tileset and source_image.get_size() == image.get_size():
 		update_tilemap(tile_editing_mode, source_image)
 	redo_data[self] = serialize_undo_data(not affect_tileset)
+	redo_data[self]["tile_size"] = Vector2(tile_size) * resize_factor
 	redo_data[self]["resize"] = undo_data[self]["resize"]
 	if new_offset != Vector2i.ZERO:
 		undo_data[self]["offset"] = offset
@@ -453,12 +453,16 @@ func serialize_undo_data_source_image(
 func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
 	var cell_data = dict.cell_data
 	if undo:
+		if dict.has("tile_size"):
+			undo_redo.add_undo_property(self, "tile_size", dict.tile_size)
 		if dict.has("offset"):
 			undo_redo.add_undo_method(change_offset.bind(dict.offset))
 		undo_redo.add_undo_method(_deserialize_cell_data.bind(cell_data, dict.resize))
 		if dict.has("tileset"):
 			undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
 	else:
+		if dict.has("tile_size"):
+			undo_redo.add_do_property(self, "tile_size", dict.tile_size)
 		if dict.has("offset"):
 			undo_redo.add_do_method(change_offset.bind(dict.offset))
 		undo_redo.add_do_method(_deserialize_cell_data.bind(cell_data, dict.resize))
@@ -825,6 +829,9 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 			# Happens when placing tiles on cells that had not been created before.
 			var default_dict := {"index": 0, "flip_h": false, "flip_v": false, "transpose": false}
 			get_cell_at(cell_coords).deserialize(default_dict)
+	if resize:
+		image.fill(Color(0, 0, 0, 0))
+		update_cel_portions.call_deferred(true, image)
 
 
 # Overridden Methods:
