@@ -426,24 +426,23 @@ func serialize_undo_data_source_image(
 	undo_data: Dictionary,
 	new_offset := Vector2i.ZERO,
 	affect_tileset := false,
-	resize_interpolation := Image.INTERPOLATE_NEAREST,
-	skip_tileset_undo := false
+	resize_interpolation := Image.INTERPOLATE_NEAREST
 ) -> void:
-	undo_data[self] = serialize_undo_data(skip_tileset_undo)
+	undo_data[self] = serialize_undo_data(not affect_tileset)
 	if source_image.get_size() != image.get_size():
 		undo_data[self]["resize"] = true
-		_resize_cells(source_image.get_size())
-		if affect_tileset and not place_only_mode:
+		_resize_cells(source_image.get_size(), false)
+		if affect_tileset:  # Happens only when scaling image
 			var resize_factor := Vector2(source_image.get_size()) / Vector2(image.get_size())
-			tileset.handle_project_resize(self, resize_factor, resize_interpolation)
+			tileset.handle_project_resize(resize_factor, resize_interpolation)
+			source_image.fill(Color(0, 0, 0, 0))
+			update_cel_portions(true, source_image)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
 	if affect_tileset and source_image.get_size() == image.get_size():
 		update_tilemap(tile_editing_mode, source_image)
-	else:
-		re_index_all_cells(false, source_image if affect_tileset else image)
-	redo_data[self] = serialize_undo_data(skip_tileset_undo)
+	redo_data[self] = serialize_undo_data(not affect_tileset)
 	redo_data[self]["resize"] = undo_data[self]["resize"]
 	if new_offset != Vector2i.ZERO:
 		undo_data[self]["offset"] = offset
@@ -668,21 +667,21 @@ func _re_index_cells_after_index(index: int) -> void:
 			cell.index -= 1
 
 
-## Updates the [member image] data of the cell of the tilemap in [param cell_position],
+## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
-func _update_cell(cell: Cell) -> void:
+func _update_cell(cell: Cell, source_image := image) -> void:
 	var cell_coords := cells.find_key(cell) as Vector2i
 	var coords := get_pixel_coords(cell_coords)
 	var rect := Rect2i(coords, get_tile_size())
-	var image_portion := get_image_portion(rect)
+	var image_portion := get_image_portion(rect, source_image)
 	var index := cell.index
 	if index >= tileset.tiles.size():
 		index = 0
 	var current_tile := tileset.tiles[index].image
 	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
 	if image_portion.get_data() != transformed_tile.get_data():
-		_draw_cell(image, transformed_tile, coords, index == 0)
-		image.convert_rgb_to_indexed()
+		_draw_cell(source_image, transformed_tile, coords, index == 0)
+		source_image.convert_rgb_to_indexed()
 
 
 func _draw_cell(
@@ -711,7 +710,7 @@ func _draw_cell(
 
 
 ## Calls [method _update_cell] for all [member cells].
-func update_cel_portions(skip_zeros := false) -> void:
+func update_cel_portions(skip_zeros := false, source_image := image) -> void:
 	_pending_update = false
 	var cell_keys := cells.keys()
 	cell_keys.sort()
@@ -719,7 +718,7 @@ func update_cel_portions(skip_zeros := false) -> void:
 		var cell := cells[cell_coords]
 		if cell.index == 0 and skip_zeros:
 			continue
-		_update_cell(cell)
+		_update_cell(cell, source_image)
 
 
 ## Loops through all [member cells] of the tilemap and updates their indices,

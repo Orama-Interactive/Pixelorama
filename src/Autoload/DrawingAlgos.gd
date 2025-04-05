@@ -634,9 +634,9 @@ func scale_project(width: int, height: int, interpolation: int) -> void:
 		var sprite := resize_image(cel_image, width, height, interpolation) as ImageExtended
 		if cel is CelTileMap:
 			var tilemap_cel := cel as CelTileMap
-			var skip_tileset_undo := tilesets.has(tilemap_cel.tileset)
+			var skip_tileset_undo := not tilesets.has(tilemap_cel.tileset)
 			tilemap_cel.serialize_undo_data_source_image(
-				sprite, redo_data, undo_data, Vector2i.ZERO, true, interpolation, skip_tileset_undo
+				sprite, redo_data, undo_data, Vector2i.ZERO, skip_tileset_undo, interpolation
 			)
 			tilesets.append(tilemap_cel.tileset)
 		sprite.add_data_to_dictionary(redo_data, cel_image)

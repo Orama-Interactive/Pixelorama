@@ -140,7 +140,7 @@ func remove_unused_tiles(cel: CelTileMap) -> bool:
 ## Clears the used tiles of tileset. Called when the project gets resized,
 ## and tilemap cels are updating their size and clearing the tileset to re-create it.
 func handle_project_resize(
-	cel: CelTileMap, resize_factor: Vector2, resize_interpolation: Image.Interpolation
+	resize_factor: Vector2, resize_interpolation: Image.Interpolation
 ) -> void:
 	if _tileset_has_been_resized:
 		return
@@ -150,7 +150,6 @@ func handle_project_resize(
 		tile.image = DrawingAlgos.resize_image(
 			tile.image, tile_size.x, tile_size.y, resize_interpolation
 		)
-	updated.emit(cel, -1)
 	_tileset_has_been_resized = true
 	set_deferred("_tileset_has_been_resized", false)
 
@@ -228,7 +227,9 @@ func serialize_undo_data() -> Dictionary:
 	var dict := {"tile_size": tile_size, "tiles": {}}
 	for tile in tiles:
 		var image_data := tile.image.get_data()
-		dict["tiles"][tile.image] = [image_data.compress(), image_data.size(), tile.serialize()]
+		dict["tiles"][tile.image] = [
+			image_data.compress(), image_data.size(), tile.image.get_size(), tile.serialize()
+		]
 	return dict
 
 
@@ -240,9 +241,10 @@ func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
 	for image: Image in dict["tiles"]:
 		var tile_data = dict["tiles"][image]
 		var buffer_size := tile_data[1] as int
-		var tile_dictionary := tile_data[2] as Dictionary
+		var image_size := tile_data[2] as Vector2i
+		var tile_dictionary := tile_data[3] as Dictionary
 		var image_data := (tile_data[0] as PackedByteArray).decompress(buffer_size)
-		image.set_data(tile_size.x, tile_size.y, false, image.get_format(), image_data)
+		image.set_data(image_size.x, image_size.y, false, image.get_format(), image_data)
 		tiles[i] = Tile.new(image)
 		tiles[i].deserialize(tile_dictionary)
 		i += 1
