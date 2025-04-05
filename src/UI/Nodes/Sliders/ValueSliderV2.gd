@@ -16,10 +16,8 @@ signal ratio_toggled(button_pressed: bool)
 @export var value := Vector2.ZERO:
 	set(val):
 		value = val
-		_can_emit_signal = false
-		$GridContainer/X.value = value.x
-		$GridContainer/Y.value = value.y
-		_can_emit_signal = true
+		$GridContainer/X.set_value_no_signal_update_display(value.x)
+		$GridContainer/Y.set_value_no_signal_update_display(value.y)
 @export var min_value := Vector2.ZERO:
 	set(val):
 		min_value = val
@@ -89,7 +87,6 @@ signal ratio_toggled(button_pressed: bool)
 
 var ratio := Vector2.ONE
 var _locked_ratio := false
-var _can_emit_signal := true
 
 
 func _ready() -> void:
@@ -105,6 +102,11 @@ func press_ratio_button(pressed: bool) -> void:
 	$"%RatioButton".button_pressed = pressed
 
 
+func set_value_no_signal(new_value: Vector2) -> void:
+	get_sliders()[0].set_value_no_signal_update_display(new_value.x)
+	get_sliders()[1].set_value_no_signal_update_display(new_value.y)
+
+
 ## Greatest common divisor
 func _gcd(a: int, b: int) -> int:
 	return a if b == 0 else _gcd(b, a % b)
@@ -114,16 +116,14 @@ func _on_X_value_changed(val: float) -> void:
 	value.x = val
 	if _locked_ratio:
 		value.y = maxf(min_value.y, (value.x / ratio.x) * ratio.y)
-	if _can_emit_signal:
-		value_changed.emit(value)
+	value_changed.emit(value)
 
 
 func _on_Y_value_changed(val: float) -> void:
 	value.y = val
 	if _locked_ratio:
 		value.x = maxf(min_value.x, (value.y / ratio.y) * ratio.x)
-	if _can_emit_signal:
-		value_changed.emit(value)
+	value_changed.emit(value)
 
 
 func _on_RatioButton_toggled(button_pressed: bool) -> void:

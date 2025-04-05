@@ -16,11 +16,9 @@ signal ratio_toggled(button_pressed: bool)
 @export var value := Vector3.ZERO:
 	set(val):
 		value = val
-		_can_emit_signal = false
-		$GridContainer/X.value = value.x
-		$GridContainer/Y.value = value.y
-		$GridContainer/Z.value = value.z
-		_can_emit_signal = true
+		$GridContainer/X.set_value_no_signal_update_display(value.x)
+		$GridContainer/Y.set_value_no_signal_update_display(value.y)
+		$GridContainer/Z.set_value_no_signal_update_display(value.z)
 @export var min_value := Vector3.ZERO:
 	set(val):
 		min_value = val
@@ -100,7 +98,6 @@ signal ratio_toggled(button_pressed: bool)
 
 var ratio := Vector3.ONE
 var _locked_ratio := false
-var _can_emit_signal := true
 
 
 func _ready() -> void:
@@ -116,6 +113,12 @@ func press_ratio_button(pressed: bool) -> void:
 	$"%RatioButton".button_pressed = pressed
 
 
+func set_value_no_signal(new_value: Vector3) -> void:
+	get_sliders()[0].set_value_no_signal_update_display(new_value.x)
+	get_sliders()[1].set_value_no_signal_update_display(new_value.y)
+	get_sliders()[2].set_value_no_signal_update_display(new_value.z)
+
+
 ## Greatest common divisor
 func _gcd(a: int, b: int) -> int:
 	return a if b == 0 else _gcd(b, a % b)
@@ -126,8 +129,7 @@ func _on_X_value_changed(val: float) -> void:
 	if _locked_ratio:
 		value.y = maxf(min_value.y, (value.x / ratio.x) * ratio.y)
 		value.z = maxf(min_value.z, (value.x / ratio.x) * ratio.z)
-	if _can_emit_signal:
-		value_changed.emit(value)
+	value_changed.emit(value)
 
 
 func _on_Y_value_changed(val: float) -> void:
@@ -135,8 +137,7 @@ func _on_Y_value_changed(val: float) -> void:
 	if _locked_ratio:
 		value.x = maxf(min_value.x, (value.y / ratio.y) * ratio.x)
 		value.z = maxf(min_value.z, (value.y / ratio.y) * ratio.z)
-	if _can_emit_signal:
-		value_changed.emit(value)
+	value_changed.emit(value)
 
 
 func _on_Z_value_changed(val: float) -> void:
@@ -144,8 +145,7 @@ func _on_Z_value_changed(val: float) -> void:
 	if _locked_ratio:
 		value.x = maxf(min_value.x, (value.z / ratio.z) * ratio.x)
 		value.y = maxf(min_value.y, (value.z / ratio.z) * ratio.y)
-	if _can_emit_signal:
-		value_changed.emit(value)
+	value_changed.emit(value)
 
 
 func _on_RatioButton_toggled(button_pressed: bool) -> void:
