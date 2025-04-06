@@ -561,22 +561,26 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 
 
 func generate_isometric_rectangle(image: Image) -> void:
-	var up := Vector2i(image.get_size().x / 2 - 1, 0)
-	var right := up
-	for i in range(0, image.get_size().x - up.x, 2):
-		image.set_pixelv(right, Color.WHITE)
-		image.set_pixelv(right + Vector2i.RIGHT, Color.WHITE)
-
-		var left := Vector2i(image.get_size().x - 1 - right.x, right.y)
-		for j in range(right.x, left.x - 2, -1):
-			image.set_pixel(j, right.y, Color.WHITE)
-			var mirror_y := Vector2i(j, image.get_size().y - 1 - right.y)
-			for k in range(right.y, mirror_y.y + 1):
+	var up := Vector2i(image.get_size().x / 2, 0)
+	var right := Vector2i(image.get_size().x, image.get_size().y / 2)
+	if image.get_height() < image.get_width():
+		up += Vector2i.LEFT
+	elif image.get_height() > image.get_width():
+		up += Vector2i.DOWN
+		right += Vector2i.DOWN
+	var up_right := Geometry2D.bresenham_line(up, right)
+	up_right.pop_back()
+	up_right.pop_back()
+	for pixel in up_right:
+		image.set_pixelv(pixel, Color.BLACK)
+		var left := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
+		for j in range(pixel.x, left.x - 1, -1):
+			image.set_pixel(j, pixel.y, Color.WHITE)
+			var mirror_y := Vector2i(j, image.get_size().y - 1 - pixel.y)
+			for k in range(pixel.y, mirror_y.y + 1):
 				image.set_pixel(j, k, Color.WHITE)
-		var mirror_right := Vector2i(right.x, image.get_size().y - 1 - right.y)
-		image.set_pixelv(mirror_right, Color.WHITE)
-		image.set_pixelv(mirror_right + Vector2i.RIGHT, Color.WHITE)
-		right = up + Vector2i(i, i / 2)
+		var mirror_right := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
+		image.set_pixelv(mirror_right, Color.GRAY)
 
 
 # Image effects
