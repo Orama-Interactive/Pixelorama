@@ -99,15 +99,19 @@ func set_tileset(new_tileset: TileSetCustom, reset_indices := true) -> void:
 	if tileset == new_tileset:
 		return
 	if is_instance_valid(tileset):
-		if tileset.updated.is_connected(_on_tileset_updated):
-			tileset.updated.disconnect(_on_tileset_updated)
+		if tileset.tile_added.is_connected(_on_tileset_tile_added):
+			tileset.tile_added.disconnect(_on_tileset_tile_added)
+			tileset.tile_removed.disconnect(_on_tileset_tile_removed)
+			tileset.tile_replaced.disconnect(_on_tileset_tile_replaced)
 	tileset = new_tileset
 	if is_instance_valid(tileset):
 		_resize_cells(get_image().get_size(), reset_indices)
 		tile_size = tileset.tile_size
 		tile_shape = tileset.tile_shape
-		if not tileset.updated.is_connected(_on_tileset_updated):
-			tileset.updated.connect(_on_tileset_updated)
+		if not tileset.tile_added.is_connected(_on_tileset_tile_added):
+			tileset.tile_added.connect(_on_tileset_tile_added)
+			tileset.tile_removed.connect(_on_tileset_tile_removed)
+			tileset.tile_replaced.connect(_on_tileset_tile_replaced)
 
 
 ## Maps the cell at position [param cell_position] to
@@ -664,13 +668,17 @@ func _handle_auto_editing_mode(
 
 
 ## Re-indexes all [member cells] that are larger or equal to [param index],
-## by reducing their value by one.
-func _re_index_cells_after_index(index: int) -> void:
+## by either reducing or increasing their value by one, whether [param decrease]
+## is [code]true[/code] or not.
+func _re_index_cells_after_index(index: int, decrease := true) -> void:
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
 		var tmp_index := cell.index
 		if tmp_index >= index:
-			cell.index -= 1
+			if decrease:
+				cell.index -= 1
+			else:
+				cell.index += 1
 
 
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
@@ -800,21 +808,36 @@ func _is_redo() -> bool:
 	return Global.control.redone
 
 
-## If the tileset has been modified by another [param cel],
-## make sure to also update it here.
-## If [param replace_index] is larger than -1, it means that manual mode
-## has been used to replace a tile in the tileset in another cel,
-## so call [method update_cel_portions] to update it in this cel as well.
-## Otherwise, call [method re_index_all_cells] to ensure that the cells have correct indices.
-func _on_tileset_updated(cel: CelTileMap, replace_index: int) -> void:
+## If a tile has been added to the tileset by another [param cel], also update the indices here.
+func _on_tileset_tile_added(cel: CelTileMap, index: int) -> void:
 	if cel == self:
 		return
 	if link_set != null and cel in link_set["cels"]:
 		return
-	if replace_index > -1:  # Manual mode
-		update_cel_portions()
-	else:
-		re_index_all_cells()
+	_re_index_cells_after_index(index, false)
+	Global.canvas.update_all_layers = true
+	Global.canvas.queue_redraw.call_deferred()
+
+
+## If a tile has been removed from the tileset by another [param cel], also update the indices here.
+func _on_tileset_tile_removed(cel: CelTileMap, index: int) -> void:
+	if cel == self:
+		return
+	if link_set != null and cel in link_set["cels"]:
+		return
+	_re_index_cells_after_index(index, true)
+	Global.canvas.update_all_layers = true
+	Global.canvas.queue_redraw.call_deferred()
+
+
+## If a tile has been replaced in the tileset by another [param cel]
+## when using manual mode, also update its image.
+func _on_tileset_tile_replaced(cel: CelTileMap, _index: int) -> void:
+	if cel == self:
+		return
+	if link_set != null and cel in link_set["cels"]:
+		return
+	update_cel_portions(true)
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw.call_deferred()
 

@@ -6,9 +6,14 @@ extends RefCounted
 ## and the collection of [TileSetCustom.Tile]s itself.
 ## Not to be confused with [TileSet], which is a Godot class.
 
-## Emitted every time the tileset changes, such as when a tile is added, removed or replaced.
-## The [CelTileMap] that the changes are coming from is referenced in the [param cel] parameter.
-signal updated(cel: CelTileMap, replace_index: int)
+## Emitted on undo/redo. Used to update the tiles panel.
+signal updated
+## Emitted when a new tile is added to the tileset by a [param cel] on [param index].
+signal tile_added(cel: CelTileMap, index: int)
+## Emitted when a tile is removed from the tileset by a [param cel] on [param index].
+signal tile_removed(cel: CelTileMap, index: int)
+## Emitted when a new tile is replaced in the tileset by a [param cel] on [param index].
+signal tile_replaced(cel: CelTileMap, index)
 ## Emitted when the size of the tile images changes.
 signal resized_content
 
@@ -77,7 +82,7 @@ func add_tile(image: Image, cel: CelTileMap, times_used := 1) -> void:
 	var tile := Tile.new(image)
 	tile.times_used = times_used
 	tiles.append(tile)
-	updated.emit(cel, -1)
+	tile_added.emit(cel, tiles.size() - 1)
 
 
 ## Adds a new [param image] as a tile in a given [param position] in the tileset.
@@ -86,7 +91,7 @@ func add_tile(image: Image, cel: CelTileMap, times_used := 1) -> void:
 func insert_tile(image: Image, position: int, cel: CelTileMap) -> void:
 	var tile := Tile.new(image)
 	tiles.insert(position, tile)
-	updated.emit(cel, -1)
+	tile_added.emit(cel, position)
 
 
 ## Reduces a tile's [member TileSetCustom.Tile.times_used] by one,
@@ -107,14 +112,14 @@ func unuse_tile_at_index(index: int, cel: CelTileMap) -> bool:
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from.
 func remove_tile_at_index(index: int, cel: CelTileMap) -> void:
 	tiles.remove_at(index)
-	updated.emit(cel, -1)
+	tile_removed.emit(cel, index)
 
 
 ## Replaces a tile in a given [param index] in the tileset with a [param new_tile].
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from.
 func replace_tile_at(new_tile: Image, index: int, cel: CelTileMap) -> void:
 	tiles[index].image.copy_from(new_tile)
-	updated.emit(cel, index)
+	tile_replaced.emit(cel, index)
 
 
 ## Finds and returns the position of a tile [param image] inside the tileset.
@@ -130,13 +135,13 @@ func find_tile(image: Image) -> int:
 ## Returns [code]true[/code] if at least one tile has been removed.
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from.
 func remove_unused_tiles(cel: CelTileMap) -> bool:
-	var tile_removed := false
+	var has_removed_tile := false
 	for i in range(tiles.size() - 1, 0, -1):
 		var tile := tiles[i]
 		if tile.can_be_removed():
 			remove_tile_at_index(i, cel)
-			tile_removed = true
-	return tile_removed
+			has_removed_tile = true
+	return has_removed_tile
 
 
 ## Clears the used tiles of tileset. Called when the project gets resized,
@@ -237,7 +242,7 @@ func serialize_undo_data() -> Dictionary:
 
 
 ## Deserializes the data of each tile in [param dict], which is used by the undo/redo system.
-func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
+func deserialize_undo_data(dict: Dictionary, _cel: CelTileMap) -> void:
 	tiles.resize(dict["tiles"].size())
 	var prev_tile_size := tile_size
 	tile_size = dict["tile_size"]
@@ -252,6 +257,6 @@ func deserialize_undo_data(dict: Dictionary, cel: CelTileMap) -> void:
 		tiles[i] = Tile.new(image)
 		tiles[i].deserialize(tile_dictionary)
 		i += 1
-	updated.emit(cel, -1)
+	updated.emit()
 	if tile_size != prev_tile_size:
 		resized_content.emit()
