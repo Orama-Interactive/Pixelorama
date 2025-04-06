@@ -100,6 +100,7 @@ text = "Place-only mode:"
 
 [node name="PlaceOnlyModeCheckButton" type="CheckButton" parent="GridContainer" groups=["TilemapLayers"]]
 layout_mode = 2
+tooltip_text = "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
 mouse_default_cursor_shape = 2
 text = "On"
 
@@ -143,7 +144,7 @@ popup/item_1/id = 1
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Tile shape:"
+text = "Tile layout:"
 
 [node name="TileLayoutOptionButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
 visible = false
