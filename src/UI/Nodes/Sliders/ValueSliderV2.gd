@@ -18,6 +18,8 @@ signal ratio_toggled(button_pressed: bool)
 		value = val
 		$GridContainer/X.set_value_no_signal_update_display(value.x)
 		$GridContainer/Y.set_value_no_signal_update_display(value.y)
+		if _can_emit_signal:
+			value_changed.emit(value)
 @export var min_value := Vector2.ZERO:
 	set(val):
 		min_value = val
@@ -87,6 +89,7 @@ signal ratio_toggled(button_pressed: bool)
 
 var ratio := Vector2.ONE
 var _locked_ratio := false
+var _can_emit_signal := true
 
 
 func _ready() -> void:
@@ -103,8 +106,9 @@ func press_ratio_button(pressed: bool) -> void:
 
 
 func set_value_no_signal(new_value: Vector2) -> void:
-	get_sliders()[0].set_value_no_signal_update_display(new_value.x)
-	get_sliders()[1].set_value_no_signal_update_display(new_value.y)
+	_can_emit_signal = false
+	value = new_value
+	_can_emit_signal = true
 
 
 ## Greatest common divisor
