@@ -96,7 +96,7 @@ mouse_default_cursor_shape = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Place only mode:"
+text = "Place-only mode:"
 
 [node name="PlaceOnlyModeCheckButton" type="CheckButton" parent="GridContainer" groups=["TilemapLayers"]]
 layout_mode = 2
@@ -194,6 +194,11 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.mp3 ; MP3 Audio", "*.wav; WAV Audio")
 
+[node name="PlaceOnlyConfirmationDialog" type="ConfirmationDialog" parent="."]
+size = Vector2i(300, 200)
+dialog_text = "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
+dialog_autowrap = true
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
@@ -208,3 +213,4 @@ filters = PackedStringArray("*.mp3 ; MP3 Audio", "*.wav; WAV Audio")
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="color_changed" from="GridContainer/UIColorPickerButton" to="." method="_on_ui_color_picker_button_color_changed"]
 [connection signal="file_selected" from="AudioFileDialog" to="." method="_on_audio_file_dialog_file_selected"]
+[connection signal="confirmed" from="PlaceOnlyConfirmationDialog" to="." method="_on_place_only_confirmation_dialog_confirmed"]

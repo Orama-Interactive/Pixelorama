@@ -17,6 +17,7 @@ var layer_indices: PackedInt32Array
 @onready var tile_shape_option_button: OptionButton = $GridContainer/TileShapeOptionButton
 @onready var tile_layout_option_button: OptionButton = $GridContainer/TileLayoutOptionButton
 @onready var audio_file_dialog := $AudioFileDialog as FileDialog
+@onready var place_only_confirmation_dialog: ConfirmationDialog = $PlaceOnlyConfirmationDialog
 
 
 func _ready() -> void:
@@ -56,7 +57,7 @@ func _on_visibility_changed() -> void:
 				tileset_option_button.add_item(tileset.get_text_info(i))
 				if tileset == first_layer.tileset:
 					tileset_option_button.select(i)
-			place_only_mode_check_button.button_pressed = first_layer.place_only_mode
+			place_only_mode_check_button.set_pressed_no_signal(first_layer.place_only_mode)
 			tile_size_slider.set_value_no_signal(first_layer.tile_size)
 			tile_shape_option_button.selected = first_layer.tile_shape
 			tile_layout_option_button.selected = first_layer.tile_layout
@@ -216,6 +217,11 @@ func _on_audio_file_dialog_file_selected(path: String) -> void:
 func _on_place_only_mode_check_button_toggled(toggled_on: bool) -> void:
 	if not toggled_on:
 		return
+	place_only_mode_check_button.set_pressed_no_signal(false)
+	place_only_confirmation_dialog.popup_centered()
+
+
+func _on_place_only_confirmation_dialog_confirmed() -> void:
 	var project := Global.current_project
 	project.undos += 1
 	project.undo_redo.create_action("Set place-only mode")
@@ -238,6 +244,7 @@ func _on_place_only_mode_check_button_toggled(toggled_on: bool) -> void:
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_undo_method(func(): Global.cel_switched.emit())
 	project.undo_redo.commit_action()
+	place_only_mode_check_button.set_pressed_no_signal(true)
 
 
 func _on_tile_size_slider_value_changed(value: Vector2) -> void:
