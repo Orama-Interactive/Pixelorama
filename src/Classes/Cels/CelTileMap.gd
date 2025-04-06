@@ -837,15 +837,31 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 
 
 # Overridden Methods:
+func get_content() -> Variant:
+	return [image, cells]
+
+
 func set_content(content, texture: ImageTexture = null) -> void:
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
 		if cell.index > 0:
 			tileset.tiles[cell.index].times_used -= 1
-	super.set_content(content, texture)
-	_resize_cells(image.get_size())
-	re_index_all_cells()
+	super.set_content(content[0], texture)
+	cells = content[1]
 	find_times_used_of_tiles()
+
+
+func copy_content() -> Array:
+	var tmp_image := Image.create_from_data(
+		image.get_width(), image.get_height(), false, image.get_format(), image.get_data()
+	)
+	var copy_image := ImageExtended.new()
+	copy_image.copy_from_custom(tmp_image, image.is_indexed)
+	var copied_cells: Dictionary[Vector2i, Cell] = {}
+	for cell in cells:
+		copied_cells[cell] = Cell.new()
+		copied_cells[cell].deserialize(cells[cell].serialize())
+	return [copy_image, copied_cells.duplicate(true)]
 
 
 func update_texture(undo := false) -> void:
