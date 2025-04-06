@@ -188,14 +188,18 @@ func pick_random_tile(selected_tile_indices: Array[int]) -> int:
 			selected_tile_indices.append(i)
 	var sum := 0.0
 	for i in selected_tile_indices:
-		sum += tiles[i].probability
+		if i < tiles.size():
+			sum += tiles[i].probability
 	var rand := randf_range(0.0, sum)
 	var current := 0.0
 	for i in selected_tile_indices:
-		current += tiles[i].probability
-		if current >= rand:
-			return i
-	return selected_tile_indices[0]
+		if i < tiles.size():
+			current += tiles[i].probability
+			if current >= rand:
+				return i
+	if selected_tile_indices[0] < tiles.size():
+		return selected_tile_indices[0]
+	return 0
 
 
 ## Serializes the data of this class into the form of a [Dictionary],
