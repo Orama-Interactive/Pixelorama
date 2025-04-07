@@ -205,19 +205,22 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 		godot_tilemap.tile_set = godot_tileset
 		var pixel_coords := godot_tilemap.map_to_local(cell_coords) as Vector2i
 		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
-			pixel_coords += Vector2i(0, 8)
+			pixel_coords += Vector2i(0, get_tile_size().y / 4)
 		godot_tilemap.queue_free()
 		return pixel_coords + offset
 	return cell_coords * get_tile_size() + offset
 
 
 func get_image_portion(rect: Rect2i, source_image := image) -> Image:
-	if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		var mask := Image.create_empty(
 			get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8
 		)
 		mask.fill(Color(0, 0, 0, 0))
-		DrawingAlgos.generate_isometric_rectangle(mask)
+		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+			DrawingAlgos.generate_isometric_rectangle(mask)
+		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+			DrawingAlgos.generate_hexagonal_shape(mask)
 		var to_return := Image.create_empty(
 			get_tile_size().x, get_tile_size().y, false, source_image.get_format()
 		)
@@ -719,7 +722,10 @@ func _draw_cell(
 				transformed_tile_size.x, transformed_tile_size.y, false, Image.FORMAT_LA8
 			)
 			mask.fill(Color(0, 0, 0, 0))
-			DrawingAlgos.generate_isometric_rectangle(mask)
+			if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+				DrawingAlgos.generate_isometric_rectangle(mask)
+			elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+				DrawingAlgos.generate_hexagonal_shape(mask)
 		source_image.blit_rect_mask(
 			tile_image, mask, Rect2i(Vector2i.ZERO, transformed_tile_size), coords
 		)

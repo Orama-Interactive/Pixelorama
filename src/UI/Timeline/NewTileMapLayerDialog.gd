@@ -13,7 +13,7 @@ func _on_confirmed() -> void:
 	var layer_name := name_line_edit.text
 	var tileset_name := tileset_name_line_edit.text
 	var tile_size := tile_size_slider.value
-	var tile_shape := tile_shape_option_button.selected
+	var tile_shape := tile_shape_option_button.get_item_id(tile_shape_option_button.selected)
 	var tileset: TileSetCustom
 	if tileset_option_button.selected == 0:
 		tileset = TileSetCustom.new(tile_size, tileset_name, tile_shape)

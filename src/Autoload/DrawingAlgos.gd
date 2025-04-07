@@ -561,8 +561,9 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 
 
 func generate_isometric_rectangle(image: Image) -> void:
-	var up := Vector2i(image.get_size().x / 2, 0)
-	var right := Vector2i(image.get_size().x, image.get_size().y / 2)
+	var half_size := image.get_size() / 2
+	var up := Vector2i(half_size.x, 0)
+	var right := Vector2i(image.get_size().x, half_size.y)
 	if image.get_height() < image.get_width():
 		up += Vector2i.LEFT
 	elif image.get_height() > image.get_width():
@@ -572,7 +573,7 @@ func generate_isometric_rectangle(image: Image) -> void:
 	up_right.pop_back()
 	up_right.pop_back()
 	for pixel in up_right:
-		image.set_pixelv(pixel, Color.BLACK)
+		image.set_pixelv(pixel, Color.WHITE)
 		var left := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
 		for j in range(pixel.x, left.x - 1, -1):
 			image.set_pixel(j, pixel.y, Color.WHITE)
@@ -580,7 +581,35 @@ func generate_isometric_rectangle(image: Image) -> void:
 			for k in range(pixel.y, mirror_y.y + 1):
 				image.set_pixel(j, k, Color.WHITE)
 		var mirror_right := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
-		image.set_pixelv(mirror_right, Color.GRAY)
+		image.set_pixelv(mirror_right, Color.WHITE)
+
+
+func generate_hexagonal_shape(image: Image) -> void:
+	var half_size := image.get_size() / 2
+	var quarter_size := image.get_size() / 4
+	var three_quarters_size := (image.get_size() * 3) / 4
+	var up := Vector2i(half_size.x, 0)
+	var quarter := Vector2i(image.get_size().x - 1, quarter_size.y)
+	var line := Geometry2D.bresenham_line(up, quarter)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var left := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
+		for j in range(pixel.x, left.x - 1, -1):
+			image.set_pixel(j, pixel.y, Color.WHITE)
+	var three_quarters := Vector2i(image.get_size().x - 1, three_quarters_size.y - 1)
+	line = Geometry2D.bresenham_line(quarter, three_quarters)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var left := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
+		for j in range(pixel.x, left.x - 1, -1):
+			image.set_pixel(j, pixel.y, Color.WHITE)
+	var down := Vector2i(half_size.x, image.get_size().y - 1)
+	line = Geometry2D.bresenham_line(three_quarters, down)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var left := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
+		for j in range(pixel.x, left.x - 1, -1):
+			image.set_pixel(j, pixel.y, Color.WHITE)
 
 
 # Image effects
