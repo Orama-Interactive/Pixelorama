@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-03-14 14:53\n"
+"PO-Revision-Date: 2025-04-07 01:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1114,7 +1114,7 @@ msgstr "Interpolazione"
 msgid "Reverse"
 msgstr "Inverti"
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr "Distribuisci punti equamente"
 
@@ -1777,15 +1777,15 @@ msgstr "Colore delle guide:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Un colore di guide per righello visualizzate sulla tela"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
 msgstr "Aggancio"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
 msgstr "Distanza di aggancio:"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
 msgstr "Questa è la distanza in pixel dello schermo in cui viene attivata la guida e il snapping della griglia."
 
@@ -1804,22 +1804,30 @@ msgstr "Rettangolare"
 msgid "Isometric"
 msgstr "Isometrica"
 
+#. Refers to a hexagonal type of grid.
+msgid "Hexagonal"
+msgstr ""
+
 msgid "All"
 msgstr "Tutte"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
-msgstr "Dimensione della griglia rettangolare:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
+msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
-msgstr "Dimensione della griglia isotometrica:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
+msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
 msgstr "Spostamento griglia:"
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr "Imposta lo spostamento della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
 
