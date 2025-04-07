@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-07 01:15\n"
+"PO-Revision-Date: 2025-04-07 17:01\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -672,7 +672,7 @@ msgstr "Lapisan:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr "Lapisan terlihat"
+msgstr "Lapisan tampak"
 
 #. Found in the export dialog
 msgid "Selected layers"
@@ -1511,7 +1511,7 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Seleksi Poligon\n\n"
+msgstr "Seleksi Poligonal\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Klik dua kali untuk menghubungkan titik akhir ke titik awal"
@@ -1807,22 +1807,22 @@ msgstr "Isometrik"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "Segi Enam"
 
 msgid "All"
 msgstr "Semua"
 
 #. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
 msgid "Grids visible:"
-msgstr ""
+msgstr "Kisi tampak:"
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "Kisi suntingan:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "Ukuran kisi:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
@@ -2968,7 +2968,7 @@ msgid "Elliptical Selection"
 msgstr "Seleksi Elips"
 
 msgid "Polygonal Selection"
-msgstr "Seleksi Poligon"
+msgstr "Seleksi Poligonal"
 
 msgid "Select By Color"
 msgstr "Pilih sesuai warna"
