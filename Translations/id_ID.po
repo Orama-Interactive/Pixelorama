@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-07 17:01\n"
+"PO-Revision-Date: 2025-04-07 18:10\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1797,7 +1797,7 @@ msgid "Grid type:"
 msgstr "Tipe kisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Menetapkan tipe kisi antara persegi panjang, isometrik, atau keduanya"
+msgstr "Menetapkan tipe kisi ke persegi panjang, isometrik, atau keduanya"
 
 msgid "Rectangular"
 msgstr "Persegi Panjang"
