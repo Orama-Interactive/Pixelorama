@@ -16,6 +16,7 @@ var layer_indices: PackedInt32Array
 @onready var tile_size_slider: ValueSliderV2 = $GridContainer/TileSizeSlider
 @onready var tile_shape_option_button: OptionButton = $GridContainer/TileShapeOptionButton
 @onready var tile_layout_option_button: OptionButton = $GridContainer/TileLayoutOptionButton
+@onready var tile_offset_axis_button: OptionButton = $GridContainer/TileOffsetAxisButton
 @onready var audio_file_dialog := $AudioFileDialog as FileDialog
 @onready var place_only_confirmation_dialog: ConfirmationDialog = $PlaceOnlyConfirmationDialog
 
@@ -61,6 +62,7 @@ func _on_visibility_changed() -> void:
 			tile_size_slider.set_value_no_signal(first_layer.tile_size)
 			tile_shape_option_button.selected = first_layer.tile_shape
 			tile_layout_option_button.selected = first_layer.tile_layout
+			tile_offset_axis_button.selected = first_layer.tile_offset_axis
 	else:
 		layer_indices = []
 
@@ -315,6 +317,34 @@ func _on_tile_layout_option_button_item_selected(index: TileSet.TileLayout) -> v
 				if cel is CelTileMap and i == layer_index:
 					project.undo_redo.add_do_property(cel, "tile_layout", index)
 					project.undo_redo.add_undo_property(cel, "tile_layout", cel.tile_layout)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.commit_action()
+
+
+func _on_tile_offset_axis_button_item_selected(index: TileSet.TileOffsetAxis) -> void:
+	var selected_id := tile_offset_axis_button.get_item_id(index)
+	var project := Global.current_project
+	project.undos += 1
+	project.undo_redo.create_action("Change tilemap settings")
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		project.undo_redo.add_do_property(layer, "tile_offset_axis", selected_id)
+		project.undo_redo.add_undo_property(layer, "tile_offset_axis", layer.tile_offset_axis)
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					project.undo_redo.add_do_property(cel, "tile_offset_axis", selected_id)
+					project.undo_redo.add_undo_property(
+						cel, "tile_offset_axis", cel.tile_offset_axis
+					)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
 	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())

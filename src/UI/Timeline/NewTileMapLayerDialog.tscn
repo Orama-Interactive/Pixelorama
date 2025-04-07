@@ -6,14 +6,14 @@
 [node name="NewTileMapLayerDialog" type="ConfirmationDialog"]
 title = "New layer"
 position = Vector2i(0, 36)
-size = Vector2i(300, 249)
+size = Vector2i(300, 284)
 script = ExtResource("1_y2r5h")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
-offset_bottom = 200.0
+offset_bottom = 235.0
 columns = 2
 
 [node name="NameLabel" type="Label" parent="GridContainer"]
@@ -81,6 +81,22 @@ popup/item_1/text = "Isometric"
 popup/item_1/id = 1
 popup/item_2/text = "Hexagonal"
 popup/item_2/id = 3
+
+[node name="TileOffsetAxisLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile offset axis:"
+
+[node name="TileOffsetAxisButton" type="OptionButton" parent="GridContainer"]
+layout_mode = 2
+tooltip_text = "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Horizontal"
+popup/item_0/id = 0
+popup/item_1/text = "Vertical"
+popup/item_1/id = 1
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]

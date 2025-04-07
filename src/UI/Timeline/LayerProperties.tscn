@@ -167,6 +167,22 @@ popup/item_4/id = 4
 popup/item_5/text = "Diamond down"
 popup/item_5/id = 5
 
+[node name="TileOffsetAxisLabel" type="Label" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile offset axis:"
+
+[node name="TileOffsetAxisButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+layout_mode = 2
+tooltip_text = "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Horizontal"
+popup/item_0/id = 0
+popup/item_1/text = "Vertical"
+popup/item_1/id = 1
+
 [node name="UserDataLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -213,6 +229,7 @@ dialog_autowrap = true
 [connection signal="value_changed" from="GridContainer/TileSizeSlider" to="." method="_on_tile_size_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/TileShapeOptionButton" to="." method="_on_tile_shape_option_button_item_selected"]
 [connection signal="item_selected" from="GridContainer/TileLayoutOptionButton" to="." method="_on_tile_layout_option_button_item_selected"]
+[connection signal="item_selected" from="GridContainer/TileOffsetAxisButton" to="." method="_on_tile_offset_axis_button_item_selected"]
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="color_changed" from="GridContainer/UIColorPickerButton" to="." method="_on_ui_color_picker_button_color_changed"]
 [connection signal="file_selected" from="AudioFileDialog" to="." method="_on_audio_file_dialog_file_selected"]

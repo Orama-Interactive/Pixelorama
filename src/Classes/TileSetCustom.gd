@@ -77,6 +77,12 @@ func _init(
 		tiles.append(Tile.new(empty_image))
 
 
+func duplicate() -> TileSetCustom:
+	var new_tileset := TileSetCustom.new(tile_size, name, tile_shape)
+	new_tileset.tile_offset_axis = tile_offset_axis
+	return new_tileset
+
+
 ## Adds a new [param image] as a tile to the tileset.
 ## The [param cel] parameter references the [CelTileMap] that this change is coming from,
 ## and the [param edit_mode] parameter contains the tile editing mode at the time of this change.

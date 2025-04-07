@@ -6,6 +6,7 @@ extends ConfirmationDialog
 @onready var tileset_name_line_edit: LineEdit = $GridContainer/TilesetNameLineEdit
 @onready var tile_size_slider: ValueSliderV2 = $GridContainer/TileSizeSlider
 @onready var tile_shape_option_button: OptionButton = $GridContainer/TileShapeOptionButton
+@onready var tile_offset_axis_button: OptionButton = $GridContainer/TileOffsetAxisButton
 
 
 func _on_confirmed() -> void:
@@ -14,9 +15,11 @@ func _on_confirmed() -> void:
 	var tileset_name := tileset_name_line_edit.text
 	var tile_size := tile_size_slider.value
 	var tile_shape := tile_shape_option_button.get_item_id(tile_shape_option_button.selected)
+	var tile_offset_axis := tile_offset_axis_button.get_item_id(tile_offset_axis_button.selected)
 	var tileset: TileSetCustom
 	if tileset_option_button.selected == 0:
 		tileset = TileSetCustom.new(tile_size, tileset_name, tile_shape)
+		tileset.tile_offset_axis = tile_offset_axis
 	else:
 		tileset = project.tilesets[tileset_option_button.selected - 1]
 	var layer := LayerTileMap.new(project, tileset, layer_name)
