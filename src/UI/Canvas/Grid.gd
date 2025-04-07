@@ -30,7 +30,7 @@ func _draw() -> void:
 			if cel.get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
 				grid_type = Global.GridTypes.ISOMETRIC
 			elif cel.get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
-				grid_type = Global.GridTypes.HEXAGONAL
+				grid_type = Global.GridTypes.HEXAGONAL_POINTY_TOP
 			else:
 				grid_type = Global.GridTypes.CARTESIAN
 		if grid_type == Global.GridTypes.CARTESIAN:
