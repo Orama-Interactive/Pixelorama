@@ -502,7 +502,7 @@ script = ExtResource("4_76iff")
 
 [node name="GridsCountLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 layout_mode = 2
-text = "Grids Visible:"
+text = "Grids visible:"
 
 [node name="Spacer" type="Control" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 layout_mode = 2
@@ -515,7 +515,7 @@ value = 1.0
 
 [node name="GridsSelectLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 layout_mode = 2
-text = "Editing Grid:"
+text = "Editing grid:"
 
 [node name="Spacer2" type="Control" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 layout_mode = 2
@@ -549,7 +549,7 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_vertical = 1
 mouse_filter = 0
-text = "Rectangular grid size:"
+text = "Grid size:"
 
 [node name="GridSizeValue" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource("7")]
 layout_mode = 2

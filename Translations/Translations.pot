@@ -1097,7 +1097,7 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr ""
 
@@ -1734,19 +1734,23 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
