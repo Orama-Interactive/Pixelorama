@@ -495,6 +495,7 @@ func copy_frames(
 				new_cel.tile_size = src_cel.tile_size
 				new_cel.tile_shape = src_cel.tile_shape
 				new_cel.tile_layout = src_cel.tile_layout
+				new_cel.tile_offset_axis = src_cel.tile_offset_axis
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -929,6 +930,7 @@ func _on_CloneLayer_pressed() -> void:
 			cl_layer.tile_size = src_layer.tile_size
 			cl_layer.tile_shape = src_layer.tile_shape
 			cl_layer.tile_layout = src_layer.tile_layout
+			cl_layer.tile_offset_axis = src_layer.tile_offset_axis
 		else:
 			cl_layer = src_layer.get_script().new(project)
 			if src_layer is AudioLayer:
@@ -957,6 +959,7 @@ func _on_CloneLayer_pressed() -> void:
 				new_cel.tile_size = src_cel.tile_size
 				new_cel.tile_shape = src_cel.tile_shape
 				new_cel.tile_layout = src_cel.tile_layout
+				new_cel.tile_offset_axis = src_cel.tile_offset_axis
 			else:
 				new_cel = src_cel.get_script().new()
 

@@ -22,6 +22,8 @@ var tile_size := Vector2i(16, 16)
 var tile_shape := TileSet.TILE_SHAPE_SQUARE
 ## The layout of the tiles. Used when [member place_only_mode] is [code]true[/code].
 var tile_layout := TileSet.TILE_LAYOUT_DIAMOND_DOWN
+## For all half-offset shapes (Isometric & Hexagonal), determines the offset axis.
+var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL
 
 
 func _init(_project: Project, _tileset: TileSetCustom, _name := "") -> void:
@@ -45,6 +47,7 @@ func pass_variables_to_cel(cel: CelTileMap) -> void:
 	cel.tile_size = tile_size
 	cel.tile_shape = tile_shape
 	cel.tile_layout = tile_layout
+	cel.tile_offset_axis = tile_offset_axis
 
 
 # Overridden Methods:
@@ -55,6 +58,7 @@ func serialize() -> Dictionary:
 	dict["tile_size"] = tile_size
 	dict["tile_shape"] = tile_shape
 	dict["tile_layout"] = tile_layout
+	dict["tile_offset_axis"] = tile_offset_axis
 	return dict
 
 
@@ -72,6 +76,7 @@ func deserialize(dict: Dictionary) -> void:
 			tile_size = str_to_var("Vector2i" + tile_size_from_dict)
 	tile_shape = dict.get("tile_shape", tile_shape)
 	tile_layout = dict.get("tile_layout", tile_layout)
+	tile_offset_axis = dict.get("tile_offset_axis", tile_offset_axis)
 
 
 func get_layer_type() -> int:

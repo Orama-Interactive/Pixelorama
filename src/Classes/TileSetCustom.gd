@@ -25,6 +25,8 @@ var tiles: Array[Tile] = []
 var tile_size: Vector2i
 ## The shape of each tile.
 var tile_shape := TileSet.TILE_SHAPE_SQUARE
+## For all half-offset shapes (Isometric & Hexagonal), determines the offset axis.
+var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL
 ## If [code]true[/code], the code in [method handle_project_resize] does not execute.
 ## This variable is used to prevent multiple cels from clearing the tileset at the same time.
 ## In [method handle_project_resize], the variable is set to [code]true[/code], and then

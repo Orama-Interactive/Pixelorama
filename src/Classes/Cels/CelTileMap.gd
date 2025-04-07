@@ -39,6 +39,12 @@ var tile_layout := TileSet.TILE_LAYOUT_DIAMOND_DOWN:
 	set(value):
 		tile_layout = value
 		re_order_tilemap()
+## For all half-offset shapes (Isometric & Hexagonal), determines the offset axis.
+## Passed down from the cel's [LayerTileMap].
+var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+	set(value):
+		tile_offset_axis = value
+		re_order_tilemap()
 var vertical_cell_min := 0  ## The minimum vertical cell.
 var vertical_cell_max := 0  ## The maximum vertical cell.
 var offset := Vector2i.ZERO  ## The offset of the tilemap in pixel coordinates.
@@ -178,6 +184,7 @@ func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
 		godot_tileset.tile_size = get_tile_size()
 		godot_tileset.tile_shape = get_tile_shape()
 		godot_tileset.tile_layout = tile_layout
+		godot_tileset.tile_offset_axis = get_tile_offset_axis()
 		var godot_tilemap := TileMapLayer.new()
 		godot_tilemap.tile_set = godot_tileset
 		cell_coords = godot_tilemap.local_to_map(offset_coords)
@@ -242,6 +249,12 @@ func get_tile_shape() -> TileSet.TileShape:
 	if place_only_mode:
 		return tile_shape
 	return tileset.tile_shape
+
+
+func get_tile_offset_axis() -> TileSet.TileOffsetAxis:
+	if place_only_mode:
+		return tile_offset_axis
+	return tileset.tile_offset_axis
 
 
 func re_order_tilemap() -> void:
