@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-03-13 17:59\n"
+"PO-Revision-Date: 2025-04-07 01:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1114,7 +1114,7 @@ msgstr "補間"
 msgid "Reverse"
 msgstr "反転"
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr "点数を均等に割り当てる"
 
@@ -1778,15 +1778,15 @@ msgstr "ガイドの色:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "キャンバスに表示されるルーラーガイドの色"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
 msgstr "スナップ"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
 msgstr "スナップ距離:"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
 msgstr "これは、ガイドとグリッドスナップが有効になる画面ピクセルの距離です。"
 
@@ -1805,22 +1805,30 @@ msgstr "長方形"
 msgid "Isometric"
 msgstr "アイソメトリック"
 
+#. Refers to a hexagonal type of grid.
+msgid "Hexagonal"
+msgstr ""
+
 msgid "All"
 msgstr "すべて"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
-msgstr "矩形グリッドのサイズ:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
+msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
-msgstr "等角グリッドのサイズ:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
+msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
 msgstr "グリッドオフセット:"
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr "キャンバスの原点 (画像の左上隅) からのグリッドのオフセットを設定します。"
 
