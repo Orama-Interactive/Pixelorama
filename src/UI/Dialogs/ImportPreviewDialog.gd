@@ -24,6 +24,8 @@ var recycle_last_slice_result := false  # Should we recycle the current sliced_r
 var sliced_rects: RegionUnpacker.RectData
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
+var tile_shape := TileSet.TILE_SHAPE_SQUARE
+var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL
 var brush_type := BrushTypes.FILE
 var opened_once := false
 var is_main := false
@@ -53,6 +55,7 @@ var custom_importers := {}
 # depending on what your import option requires.
 ## container of spritesheet related import options
 @onready var spritesheet_options := %ImportOptions/SpritesheetOptions as VBoxContainer
+@onready var tileset_options: GridContainer = %ImportOptions/TilesetOptions
 ## container of frame related import options
 @onready var at_frame_option := %ImportOptions/AtFrame as HBoxContainer
 ## container of layer related import options
@@ -214,11 +217,21 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 				if !recycle_last_slice_result:
 					obtain_sliced_data()
 				OpenSave.open_image_as_tileset_smart(
-					path, image, sliced_rects.rects, sliced_rects.frame_size
+					path,
+					image,
+					sliced_rects.rects,
+					sliced_rects.frame_size,
+					tile_shape,
+					tile_offset_axis
 				)
 			else:
 				OpenSave.open_image_as_tileset(
-					path, image, spritesheet_horizontal, spritesheet_vertical
+					path,
+					image,
+					spritesheet_horizontal,
+					spritesheet_vertical,
+					tile_shape,
+					tile_offset_axis
 				)
 
 		else:
@@ -320,6 +333,8 @@ func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 		spritesheet_options.visible = true
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
+		if id == ImageImportOptions.TILESET:
+			tileset_options.visible = true
 
 	elif id == ImageImportOptions.SPRITESHEET_LAYER:
 		frame_size_label.visible = true
@@ -444,6 +459,18 @@ func spritesheet_frame_value_changed() -> void:
 	var frame_width := floori(image.get_size().x / spritesheet_horizontal)
 	var frame_height := floori(image.get_size().y / spritesheet_vertical)
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
+	_call_queue_redraw()
+
+
+func _on_tile_shape_option_button_item_selected(index: int) -> void:
+	var tile_shape_option_button := tileset_options.get_node("TileShapeOptionButton")
+	tile_shape = tile_shape_option_button.get_item_id(tile_shape_option_button.selected)
+	_call_queue_redraw()
+
+
+func _on_tile_offset_axis_button_item_selected(index: int) -> void:
+	var tile_offset_axis_button := tileset_options.get_node("TileOffsetAxisButton")
+	tile_offset_axis = tile_offset_axis_button.get_item_id(tile_offset_axis_button.selected)
 	_call_queue_redraw()
 
 
