@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-04-07 01:16\n"
+"PO-Revision-Date: 2025-04-07 17:01\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -1747,10 +1747,10 @@ msgid "This is the distance in screen pixels where guide and grid snapping gets 
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "Kekisi"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Jenis kekisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
@@ -1763,18 +1763,18 @@ msgstr ""
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "Segi Enam"
 
 msgid "All"
 msgstr "Semua"
 
 #. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
 msgid "Grids visible:"
-msgstr ""
+msgstr "Kekisi nampak:"
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "Kekisi suntingan:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
