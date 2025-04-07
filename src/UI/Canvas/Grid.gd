@@ -29,8 +29,10 @@ func _draw() -> void:
 			_draw_cartesian_grid(grid_idx, target_rect)
 		elif grid_type == Global.GridTypes.ISOMETRIC:
 			_draw_isometric_grid(grid_idx, target_rect)
-		elif grid_type == Global.GridTypes.HEXAGONAL:
-			_draw_hexagonal_grid(grid_idx, target_rect)
+		elif grid_type == Global.GridTypes.HEXAGONAL_POINTY_TOP:
+			_draw_hexagonal_grid(grid_idx, target_rect, true)
+		elif grid_type == Global.GridTypes.HEXAGONAL_FLAT_TOP:
+			_draw_hexagonal_grid(grid_idx, target_rect, false)
 
 
 func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
@@ -131,7 +133,7 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		draw_multiline(grid_multiline_points, grid.grid_color)
 
 
-func _draw_hexagonal_grid(grid_index: int, target_rect: Rect2i) -> void:
+func _draw_hexagonal_grid(grid_index: int, target_rect: Rect2i, pointy_top: bool) -> void:
 	var grid := Global.grids[grid_index]
 	var grid_size := grid.grid_size
 	var grid_offset := grid.grid_offset
@@ -143,40 +145,79 @@ func _draw_hexagonal_grid(grid_index: int, target_rect: Rect2i) -> void:
 	var x: float = (
 		target_rect.position.x + fposmod(grid_offset.x - target_rect.position.x, grid_size.x)
 	)
-	x -= grid_size.x
 	var y: float = (
 		target_rect.position.y + fposmod(grid_offset.y - target_rect.position.y, grid_size.y)
 	)
+	if pointy_top:
+		x -= grid_size.x
+	else:
+		y -= grid_size.y
 	var half_size := grid_size / 2.0
 	var quarter_size := grid_size / 4.0
 	var three_quarters_size := (grid_size * 3.0) / 4.0
-	while x <= target_rect.end.x:
-		var i := 0
+	if pointy_top:
+		while x <= target_rect.end.x:
+			var i := 0
+			while y <= target_rect.end.y:
+				var xx := x
+				if i % 2 == 1:
+					@warning_ignore("integer_division")
+					xx += grid_size.x / 2
+				var width := xx + grid_size.x
+				var height := y + grid_size.y
+				var half := xx + half_size.x
+				var quarter := y + quarter_size.y
+				var third_quarter := y + three_quarters_size.y
+				grid_multiline_points.push_back(Vector2(half, y))
+				grid_multiline_points.push_back(Vector2(width, quarter))
+				grid_multiline_points.push_back(Vector2(width, quarter))
+				grid_multiline_points.push_back(Vector2(width, third_quarter))
+				grid_multiline_points.push_back(Vector2(width, third_quarter))
+				grid_multiline_points.push_back(Vector2(half, height))
+				grid_multiline_points.push_back(Vector2(half, height))
+				grid_multiline_points.push_back(Vector2(xx, third_quarter))
+				grid_multiline_points.push_back(Vector2(xx, third_quarter))
+				grid_multiline_points.push_back(Vector2(xx, quarter))
+				grid_multiline_points.push_back(Vector2(xx, quarter))
+				grid_multiline_points.push_back(Vector2(half, y))
+				y += ((grid_size.y * 3.0) / 4.0)
+				i += 1
+			y = (
+				target_rect.position.y
+				+ fposmod(grid_offset.y - target_rect.position.y, grid_size.y)
+			)
+			x += grid_size.x
+	else:
 		while y <= target_rect.end.y:
-			var xx := x
-			if i % 2 == 1:
-				@warning_ignore("integer_division")
-				xx += grid_size.x / 2
-			var width := xx + grid_size.x
-			var height := y + grid_size.y
-			var half := xx + half_size.x
-			var third := y + quarter_size.y
-			var second_third := y + three_quarters_size.y
-			grid_multiline_points.push_back(Vector2(half, y))
-			grid_multiline_points.push_back(Vector2(width, third))
-			grid_multiline_points.push_back(Vector2(width, third))
-			grid_multiline_points.push_back(Vector2(width, second_third))
-			grid_multiline_points.push_back(Vector2(width, second_third))
-			grid_multiline_points.push_back(Vector2(half, height))
-			grid_multiline_points.push_back(Vector2(half, height))
-			grid_multiline_points.push_back(Vector2(xx, second_third))
-			grid_multiline_points.push_back(Vector2(xx, second_third))
-			grid_multiline_points.push_back(Vector2(xx, third))
-			grid_multiline_points.push_back(Vector2(xx, third))
-			grid_multiline_points.push_back(Vector2(half, y))
-			y += ((grid_size.y * 3.0) / 4.0)
-			i += 1
-		y = (target_rect.position.y + fposmod(grid_offset.y - target_rect.position.y, grid_size.y))
-		x += grid_size.x
+			var i := 0
+			while x <= target_rect.end.x:
+				var yy := y
+				if i % 2 == 1:
+					@warning_ignore("integer_division")
+					yy += grid_size.y / 2
+				var width := x + grid_size.x
+				var height := yy + grid_size.y
+				var half := yy + half_size.y
+				var quarter := x + quarter_size.x
+				var third_quarter := x + three_quarters_size.x
+				grid_multiline_points.push_back(Vector2(x, half))
+				grid_multiline_points.push_back(Vector2(quarter, height))
+				grid_multiline_points.push_back(Vector2(quarter, height))
+				grid_multiline_points.push_back(Vector2(third_quarter, height))
+				grid_multiline_points.push_back(Vector2(third_quarter, height))
+				grid_multiline_points.push_back(Vector2(width, half))
+				grid_multiline_points.push_back(Vector2(width, half))
+				grid_multiline_points.push_back(Vector2(third_quarter, yy))
+				grid_multiline_points.push_back(Vector2(third_quarter, yy))
+				grid_multiline_points.push_back(Vector2(quarter, yy))
+				grid_multiline_points.push_back(Vector2(quarter, yy))
+				grid_multiline_points.push_back(Vector2(x, half))
+				x += ((grid_size.x * 3.0) / 4.0)
+				i += 1
+			x = (
+				target_rect.position.x
+				+ fposmod(grid_offset.x - target_rect.position.x, grid_size.x)
+			)
+			y += grid_size.y
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, grid.grid_color)
