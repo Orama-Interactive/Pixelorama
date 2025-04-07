@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-04-07 01:15\n"
+"PO-Revision-Date: 2025-04-07 08:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1804,22 +1804,22 @@ msgstr "Izometrică"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "Hexagonală"
 
 msgid "All"
 msgstr "Toate"
 
 #. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
 msgid "Grids visible:"
-msgstr ""
+msgstr "Grile vizibile:"
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "Grilă în editare:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "Dimensiune grilă:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
