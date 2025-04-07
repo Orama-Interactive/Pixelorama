@@ -464,13 +464,13 @@ func spritesheet_frame_value_changed() -> void:
 
 func _on_tile_shape_option_button_item_selected(index: int) -> void:
 	var tile_shape_option_button := tileset_options.get_node("TileShapeOptionButton")
-	tile_shape = tile_shape_option_button.get_item_id(tile_shape_option_button.selected)
+	tile_shape = tile_shape_option_button.get_item_id(index)
 	_call_queue_redraw()
 
 
 func _on_tile_offset_axis_button_item_selected(index: int) -> void:
 	var tile_offset_axis_button := tileset_options.get_node("TileOffsetAxisButton")
-	tile_offset_axis = tile_offset_axis_button.get_item_id(tile_offset_axis_button.selected)
+	tile_offset_axis = tile_offset_axis_button.get_item_id(index)
 	_call_queue_redraw()
 
 
