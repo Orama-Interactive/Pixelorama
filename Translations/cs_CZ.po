@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-03-21 15:25\n"
+"PO-Revision-Date: 2025-04-07 01:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1111,7 +1111,7 @@ msgstr "Interpolace"
 msgid "Reverse"
 msgstr "Obrátit"
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr ""
 
@@ -1762,15 +1762,15 @@ msgstr "Barva vodítek:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Barva vodítkových čar zobrazených přes plátno"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
 msgstr "Přichytávání"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
 msgstr "Vzdálenost přichytávání:"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
 msgstr "Vzdálenost v pixelech obrazovky, kdy je aktivována funkce přichytávání k vodítkům, nebo mřížce."
 
@@ -1789,22 +1789,30 @@ msgstr "Obdélníková"
 msgid "Isometric"
 msgstr "Isometrická"
 
+#. Refers to a hexagonal type of grid.
+msgid "Hexagonal"
+msgstr ""
+
 msgid "All"
 msgstr "Vše"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
-msgstr "Velikost obdélníkové mřížky:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
+msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
-msgstr "Velikost isometrické mřížky:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
+msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
 msgstr "Odsazení mřížky:"
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
