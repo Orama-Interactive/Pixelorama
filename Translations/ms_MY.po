@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-04-07 17:01\n"
+"PO-Revision-Date: 2025-04-07 18:10\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -635,7 +635,7 @@ msgid "Frame:"
 msgstr "Bingkai:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Arah Skrin:"
 
 msgid "Browse"
 msgstr "Cari"
@@ -781,49 +781,49 @@ msgstr "Imej Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Imej JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Imej SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Imej TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Imej WebP"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Palet Pixelorama"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "Palet GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
 msgstr "Pilihan lanjutan"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolasi:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "\"Nearest\""
 
 msgid "Bilinear"
-msgstr ""
+msgstr "\"Bilinear\""
 
 msgid "Cubic"
-msgstr ""
+msgstr "\"Cubic\""
 
 msgid "Trilinear"
-msgstr ""
+msgstr "\"Trilinear\""
 
 msgid "Constant"
-msgstr ""
+msgstr "Pemalar"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
@@ -834,32 +834,32 @@ msgid "Linear sRGB"
 msgstr ""
 
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 msgid "Startup"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 msgid "Interface"
-msgstr ""
+msgstr "Antaramuka"
 
 msgid "Themes"
-msgstr ""
+msgstr "Tema"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Kanvas"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Garis masa"
 
 msgid "Selection"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Pintasan"
 
 msgid "Backup"
 msgstr ""
@@ -885,7 +885,7 @@ msgid "Pixelorama must be restarted for changes to take effect."
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Hidup"
 
 msgid "Restore default value"
 msgstr ""
@@ -1778,7 +1778,7 @@ msgstr "Kekisi suntingan:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "Saiz kekisi:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
@@ -1795,13 +1795,13 @@ msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Warna kekisi:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Warna daripada kekisi"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Kekisi Piksel"
 
 msgid "Show at zoom:"
 msgstr "Papar semasa zum:"
@@ -1810,10 +1810,10 @@ msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Warna kekisi piksel:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Warna daripada kekisi piksel"
 
 msgid "Transparency"
 msgstr ""
@@ -2026,11 +2026,11 @@ msgstr ""
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr "Berus Asali"
+msgstr "Berus Lalai"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
-msgstr ""
+msgstr "Berus piksel"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Circle brush"
@@ -2480,7 +2480,7 @@ msgstr ""
 
 #. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
 msgid "Tilemap"
-msgstr ""
+msgstr "Peta jubin"
 
 msgid "Audio"
 msgstr ""
@@ -2909,7 +2909,7 @@ msgid "Preset:"
 msgstr "Pratetap:"
 
 msgid "Default"
-msgstr ""
+msgstr "Lalai"
 
 msgid "Custom"
 msgstr ""
@@ -3246,7 +3246,7 @@ msgstr "Perakam"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
-msgstr ""
+msgstr "Jubin"
 
 msgid "Crop"
 msgstr ""
