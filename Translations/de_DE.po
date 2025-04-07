@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-03-13 16:36\n"
+"PO-Revision-Date: 2025-04-07 01:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1113,7 +1113,7 @@ msgstr "Interpolation"
 msgid "Reverse"
 msgstr "Umgekehrt"
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr "Gleichmäßig verteilte Punkte"
 
@@ -1775,15 +1775,15 @@ msgstr "Guide-Farbe:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Eine Farbe der Lineal-Guides, die auf dem Canvas angezeigt werden"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
 msgstr "Einrasten"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
 msgstr "Einrastungs-Distanz:"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
 msgstr "Dies ist die Distanz in den Bildschirm-Pixel, in denen Guide- und Rastereinrastung aktiviert werden."
 
@@ -1802,22 +1802,30 @@ msgstr "Rechteckig"
 msgid "Isometric"
 msgstr "Isometrisch"
 
+#. Refers to a hexagonal type of grid.
+msgid "Hexagonal"
+msgstr ""
+
 msgid "All"
 msgstr "Alle"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
-msgstr "Rechtecksrastergröße:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
+msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
-msgstr "Isometrische Rastergröße:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
+msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
 msgstr "Raster-Offset:"
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr "Legt den Offset des Rasters vom Ursprung des Canvas fest (linke obere Ecke des Bilds)"
 
