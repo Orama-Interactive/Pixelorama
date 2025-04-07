@@ -204,6 +204,8 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 		var godot_tilemap := TileMapLayer.new()
 		godot_tilemap.tile_set = godot_tileset
 		var pixel_coords := godot_tilemap.map_to_local(cell_coords) as Vector2i
+		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+			pixel_coords += Vector2i(0, 8)
 		godot_tilemap.queue_free()
 		return pixel_coords + offset
 	return cell_coords * get_tile_size() + offset

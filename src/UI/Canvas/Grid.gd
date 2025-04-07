@@ -29,6 +29,8 @@ func _draw() -> void:
 		if cel is CelTileMap and grid_idx == 0:
 			if cel.get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
 				grid_type = Global.GridTypes.ISOMETRIC
+			elif cel.get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+				grid_type = Global.GridTypes.HEXAGONAL
 			else:
 				grid_type = Global.GridTypes.CARTESIAN
 		if grid_type == Global.GridTypes.CARTESIAN:

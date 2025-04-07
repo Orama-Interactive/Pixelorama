@@ -274,6 +274,7 @@ func _on_tile_size_slider_value_changed(value: Vector2) -> void:
 
 
 func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> void:
+	var selected_id := tile_shape_option_button.get_item_id(index)
 	var project := Global.current_project
 	project.undos += 1
 	project.undo_redo.create_action("Change tilemap settings")
@@ -281,13 +282,13 @@ func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> voi
 		var layer := project.layers[layer_index]
 		if layer is not LayerTileMap:
 			continue
-		project.undo_redo.add_do_property(layer, "tile_shape", index)
+		project.undo_redo.add_do_property(layer, "tile_shape", selected_id)
 		project.undo_redo.add_undo_property(layer, "tile_shape", layer.tile_shape)
 		for frame in project.frames:
 			for i in frame.cels.size():
 				var cel := frame.cels[i]
 				if cel is CelTileMap and i == layer_index:
-					project.undo_redo.add_do_property(cel, "tile_shape", index)
+					project.undo_redo.add_do_property(cel, "tile_shape", selected_id)
 					project.undo_redo.add_undo_property(cel, "tile_shape", cel.tile_shape)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
