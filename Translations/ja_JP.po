@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-04-07 01:15\n"
+"PO-Revision-Date: 2025-04-07 03:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1807,22 +1807,22 @@ msgstr "アイソメトリック"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "六角形の"
 
 msgid "All"
 msgstr "すべて"
 
 #. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
 msgid "Grids visible:"
-msgstr ""
+msgstr "グリッド表示："
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "グリッドの編集："
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "グリッドサイズ："
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
