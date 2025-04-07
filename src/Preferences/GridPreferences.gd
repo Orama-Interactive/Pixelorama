@@ -17,7 +17,6 @@ const INITIAL_GRID_COLORS := [
 var grid_preferences: Array[GridPreference] = [
 	GridPreference.new("grid_type", "GridType", "selected", Global.GridTypes.CARTESIAN),
 	GridPreference.new("grid_size", "GridSizeValue", "value", Vector2i(2, 2)),
-	GridPreference.new("isometric_grid_size", "IsometricGridSizeValue", "value", Vector2i(16, 8)),
 	GridPreference.new("grid_offset", "GridOffsetValue", "value", Vector2i.ZERO),
 	GridPreference.new("grid_draw_over_tile_mode", "GridDrawOverTileMode", "button_pressed", false),
 	GridPreference.new("grid_color", "GridColor", "color", Color.BLACK),
@@ -140,13 +139,8 @@ func _on_grids_count_value_changed(value: float) -> void:
 					# - Having all grids being same size initially may cause confusion for some
 					# users when they try to change color of a middle grid not seeing it's changing
 					# (due to being covered by grids above it).
-					if (
-						new_grid.has("grid_size")
-						and new_grid.has("isometric_grid_size")
-						and new_grid.has("grid_color")
-					):
+					if new_grid.has("grid_size") and new_grid.has("grid_color"):
 						new_grid["grid_size"] = last_grid["grid_size"] * 2
-						new_grid["isometric_grid_size"] = last_grid["isometric_grid_size"] * 2
 						if key < INITIAL_GRID_COLORS.size():
 							new_grid["grid_color"] = INITIAL_GRID_COLORS[key]
 				new_grids[key] = new_grid

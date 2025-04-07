@@ -15,7 +15,7 @@ signal project_data_changed(project: Project)  ## Emitted when project data is m
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
-enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
+enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL }
 ## ## Used to tell whether a color is being taken from the current theme,
 ## or if it is a custom color.
 enum ColorFrom { THEME, CUSTOM }
@@ -650,20 +650,12 @@ class Grid:
 			grid_type = value
 			if is_instance_valid(Global.canvas.grid):
 				Global.canvas.grid.queue_redraw()
-	## Found in Preferences. The size of rectangular grid.
+	## Found in Preferences. The size of the grid.
 	var grid_size := Vector2i(2, 2):
 		set(value):
 			if value == grid_size:
 				return
 			grid_size = value
-			if is_instance_valid(Global.canvas.grid):
-				Global.canvas.grid.queue_redraw()
-	## Found in Preferences. The size of isometric grid.
-	var isometric_grid_size := Vector2i(16, 8):
-		set(value):
-			if value == isometric_grid_size:
-				return
-			isometric_grid_size = value
 			if is_instance_valid(Global.canvas.grid):
 				Global.canvas.grid.queue_redraw()
 	## Found in Preferences. The grid offset from top-left corner of the canvas.
