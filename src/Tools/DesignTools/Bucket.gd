@@ -609,6 +609,8 @@ func _check_flooded_segment_tilemap(
 	while left <= right:
 		c = y
 		while true:
+			if c >= _allegro_flood_segments.size():
+				return ret
 			var segment := _allegro_flood_segments[c]
 			if left >= segment.left_position and left <= segment.right_position:
 				left = segment.right_position + 2
