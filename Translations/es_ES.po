@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-04-07 01:15\n"
+"PO-Revision-Date: 2025-04-08 16:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1804,22 +1804,22 @@ msgstr "Isométrico"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "Hexagonal"
 
 msgid "All"
 msgstr "Todo"
 
 #. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
 msgid "Grids visible:"
-msgstr ""
+msgstr "Cuadrículas visibles:"
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "Cuadrícula en edición:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "Tamaño de la cuadrícula:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
