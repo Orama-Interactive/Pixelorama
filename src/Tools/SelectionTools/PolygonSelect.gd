@@ -163,7 +163,9 @@ func select_pixel(point: Vector2i, project: Project, select: bool) -> void:
 		var tilemap := project.get_current_cel() as CelTileMap
 		var cell_position := tilemap.get_cell_position(point) * tilemap.tileset.tile_size
 		select_tilemap_cell(tilemap, cell_position, project.selection_map, select)
-	project.selection_map.select_pixel(point, select)
+	var selection_size := project.selection_map.get_size()
+	if point.x >= 0 and point.y >= 0 and point.x < selection_size.x and point.y < selection_size.y:
+		project.selection_map.select_pixel(point, select)
 
 
 # Thanks to
