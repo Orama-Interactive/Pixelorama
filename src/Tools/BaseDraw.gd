@@ -277,7 +277,10 @@ func prepare_undo(action: String) -> void:
 func commit_undo() -> void:
 	var project := Global.current_project
 	Global.canvas.update_selected_cels_textures(project)
-	project.update_tilemaps(_undo_data)
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if TileSetPanel.placing_tiles:
+		tile_editing_mode = TileSetPanel.TileEditingMode.STACK
+	project.update_tilemaps(_undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
