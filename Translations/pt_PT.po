@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-08 13:59\n"
+"PO-Revision-Date: 2025-04-08 18:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -105,7 +105,7 @@ msgstr "Incluir imagens mescladas"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Se ativado, as imagens mescladas finais também serão armazenadas no pxo, para cada frame. Isto faz o ficheiro pxo maior e serve para importar por software de terceiros ou exportação por CLI. Esta opção não é necessária para abrir ficheiros pxo em Plexorama."
 
 msgid "Import"
 msgstr "Importar"
@@ -147,21 +147,21 @@ msgid "Paste"
 msgstr "Colar"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Colar no Lugar"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Colar da Área de Transferência"
 
 msgid "Delete"
 msgstr "Apagar"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Apagar Permanentemente"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Mover para o Lixo"
 
 msgid "New Brush"
 msgstr "Novo Pincel"
@@ -177,52 +177,52 @@ msgstr "Percentagem"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Modo de cor:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Modo de Cor"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Indexado"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Recortar à Seleção"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Recortar ao Conteúdo"
 
 msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Deslocar Imagem"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Descolamento:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Envolver à volta:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Centrar Frames"
 
 msgid "Rotate Image"
 msgstr "Rodar Imagem"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Pivô x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Pivô y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Opções de smear:"
 
 msgid "Tolerance:"
 msgstr "Tolerância:"
@@ -232,7 +232,7 @@ msgstr "Ângulo inicial:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Envolver Pinceladas"
 
 msgid "Clear"
 msgstr "Limpar"
@@ -242,44 +242,44 @@ msgstr "Inverter"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Selecionar área de célula"
 
 msgid "Modify"
-msgstr ""
+msgstr "Modificar"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "Expandir Seleção"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Diminuir"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "Diminuir Seleção"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "Borda"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "Seleção da Borda"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Diamante"
 
 msgid "Circle"
-msgstr ""
+msgstr "Círculo"
 
 msgid "Square"
-msgstr ""
+msgstr "Quadrado"
 
 msgid "Grayscale View"
 msgstr "Visualização em escala de cinzentos"
@@ -298,19 +298,19 @@ msgstr "Preferencias"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Procedural"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Desfoque"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Carregado"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Centrar Tela"
 
 msgid "Tile Mode"
 msgstr "Modo de Azuleijo"
@@ -320,15 +320,15 @@ msgstr "Desvios do Modo Mosaico"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
-msgstr ""
+msgstr "Base X:"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "Y-basis:"
-msgstr ""
+msgstr "Base Y:"
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "Máscara:"
 
 #. Verb, resets something.
 msgid "Reset"
@@ -336,7 +336,7 @@ msgstr "Repor"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Repor %s"
 
 msgid "Use Current Frame"
 msgstr "Utilizar fotograma atual"
@@ -364,14 +364,14 @@ msgstr "Painéis amovíveis"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Tornar Flutuante"
 
 msgid "Manage Layouts"
 msgstr "Gerir disposições"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Pré-visualização"
 
 msgid "Add"
 msgstr "Adicionar"
@@ -381,20 +381,20 @@ msgstr "Adicionar disposição"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Apagar %s"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Copiar de"
 
 msgid "Rename"
-msgstr ""
+msgstr "Renomear"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Renomear Layout"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr ""
+msgstr "Layout atual"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Tem a certeza que pretende eliminar esta disposição?"
@@ -422,27 +422,27 @@ msgstr "Mostrar Guias"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Mostrar Guias do Rato"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Mostrar Imagens de Referência"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Mostrar Efeitos da Camada"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Encaixar a"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Encaixar ao Limite da Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Encaixar ao Centro da Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -926,18 +926,18 @@ msgstr ""
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Tipo de letra:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Tamanho do tipo de letra:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Escurecer interface durante uma caixa de diálogo"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
-msgstr ""
+msgstr "Mostrar etiquetas de notificação"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
