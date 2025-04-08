@@ -124,7 +124,7 @@ func _gui_input(event: InputEvent) -> void:
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):
 			state = TYPING
-			_line_edit.text = str(value)
+			_line_edit.text = _format_float_string(true)
 			_line_edit.editable = true
 			_line_edit.grab_focus()
 			_line_edit.selecting_enabled = true
@@ -281,7 +281,16 @@ func _reset_display(theme_has_changed := false) -> void:
 			tint_progress = get_theme_color("progress_color", "ValueSlider")
 		else:
 			tint_progress = Color.TRANSPARENT
-	_line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
+	_line_edit.text = _format_float_string()
+
+
+func _format_float_string(is_typing := false) -> String:
+	var format_string := "%*.*f"
+	var n_of_decimals := step_decimals(minf(step, snap_step))
+	var float_str := format_string % [0, n_of_decimals, value]
+	if is_typing:
+		return float_str
+	return str(tr(prefix), " ", float_str, " ", tr(suffix)).strip_edges()
 
 
 func _on_Value_button_down(direction: int) -> void:
