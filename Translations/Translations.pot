@@ -3645,7 +3645,7 @@ msgstr ""
 msgid "Tile size:"
 msgstr ""
 
-#. The shape of each tile in a tileset.
+#. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile shape:"
