@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Sinhala\n"
 "Language: si_LK\n"
-"PO-Revision-Date: 2025-04-07 01:16\n"
+"PO-Revision-Date: 2025-04-08 21:24\n"
 
 msgid "OK"
 msgstr "හරි"
@@ -3633,6 +3633,7 @@ msgstr ""
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tileset:"
 msgstr ""
 
@@ -3650,7 +3651,71 @@ msgid "Tileset name:"
 msgstr ""
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
+msgstr ""
+
+#. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile shape:"
+msgstr ""
+
+#. The layout that the tiles appear in, in a non-rectangular grid.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile layout:"
+msgstr ""
+
+#. The offset axis (horizontal or vertical) of non-rectangular tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile offset axis:"
+msgstr ""
+
+#. Tooltip of the "tile offset axis" option.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked offset"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs right"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs down"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond right"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond down"
+msgstr ""
+
+#. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Place-only mode:"
+msgstr ""
+
+#. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
 msgstr ""
 
 #: src/UI/TilesPanel.gd
