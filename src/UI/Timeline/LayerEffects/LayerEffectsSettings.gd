@@ -116,7 +116,6 @@ func _load_shader_file(file_path: String) -> void:
 		var new_effect := LayerEffect.new(effect_name, file, "Loaded")
 		effects.append(new_effect)
 		_add_effect_to_list(effects.size() - 1)
-		#effect_list.get_popup().add_item(effect_name)
 
 
 func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
@@ -127,11 +126,11 @@ func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
-	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw_all_layers)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
-	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw_all_layers)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()
 	_create_effect_ui(layer, effect)
@@ -188,7 +187,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 
 func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
 	effect.enabled = button_pressed
-	Global.canvas.queue_redraw()
+	Global.canvas.queue_redraw_all_layers()
 
 
 func move_effect(layer: BaseLayer, from_index: int, to_index: int) -> void:
