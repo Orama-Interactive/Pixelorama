@@ -213,10 +213,11 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 		godot_tilemap.tile_set = godot_tileset
 		var pixel_coords := godot_tilemap.map_to_local(cell_coords) as Vector2i
 		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+			var quarter_tile_size := get_tile_size() / 4
 			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
-				pixel_coords += Vector2i(0, get_tile_size().y / 4)
+				pixel_coords += Vector2i(0, quarter_tile_size.y)
 			else:
-				pixel_coords += Vector2i(get_tile_size().x / 4, 0)
+				pixel_coords += Vector2i(quarter_tile_size.x, 0)
 		godot_tilemap.queue_free()
 		return pixel_coords + offset
 	return cell_coords * get_tile_size() + offset
@@ -800,8 +801,6 @@ func _queue_update_cel_portions(skip_zeroes := false) -> void:
 
 ## Resizes the [member cells] array based on [param new_size].
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
-	var horizontal_cells := ceili(float(new_size.x) / get_tile_size().x)
-	var vertical_cells := ceili(float(new_size.y) / get_tile_size().y)
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		var half_size := get_tile_size() / 2
 		for x in range(0, new_size.x + 1, half_size.x):
@@ -811,6 +810,8 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 				if not cells.has(cell_coords):
 					cells[cell_coords] = Cell.new()
 	else:
+		var horizontal_cells := ceili(float(new_size.x) / get_tile_size().x)
+		var vertical_cells := ceili(float(new_size.y) / get_tile_size().y)
 		if offset.x % get_tile_size().x != 0:
 			horizontal_cells += 1
 		if offset.y % get_tile_size().y != 0:
