@@ -1,19 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3dt1gdlf7hox"]
+[gd_scene load_steps=4 format=3 uid="uid://d3dt1gdlf7hox"]
 
 [ext_resource type="Script" uid="uid://4onxshv5pult" path="res://src/UI/Timeline/LayerProperties.gd" id="1_54q1t"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_bwpwc"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_dij20"]
 
 [node name="LayerProperties" type="AcceptDialog"]
 title = "Layer properties"
 position = Vector2i(0, 36)
-size = Vector2i(425, 300)
+size = Vector2i(425, 332)
 script = ExtResource("1_54q1t")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 417.0
-offset_bottom = 251.0
+offset_bottom = 283.0
 columns = 2
 
 [node name="NameLabel" type="Label" parent="GridContainer"]
@@ -91,6 +92,97 @@ text = "Tileset:"
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
+[node name="PlaceOnlyModeLabel" type="Label" parent="GridContainer" groups=["TilemapLayers"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Place-only mode:"
+
+[node name="PlaceOnlyModeCheckButton" type="CheckButton" parent="GridContainer" groups=["TilemapLayers"]]
+layout_mode = 2
+tooltip_text = "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="TileSizeLabel" type="Label" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile size:"
+
+[node name="TileSizeSlider" parent="GridContainer" groups=["TilemapLayersPlaceOnly"] instance=ExtResource("3_dij20")]
+visible = false
+layout_mode = 2
+value = Vector2(16, 16)
+min_value = Vector2(1, 1)
+max_value = Vector2(128, 128)
+allow_greater = true
+show_ratio = true
+prefix_x = "Width:"
+prefix_y = "Height:"
+suffix_x = "px"
+suffix_y = "px"
+
+[node name="TileShapeLabel" type="Label" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile shape:"
+
+[node name="TileShapeOptionButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Rectangular"
+popup/item_0/id = 0
+popup/item_1/text = "Isometric"
+popup/item_1/id = 1
+popup/item_2/text = "Hexagon"
+popup/item_2/id = 3
+
+[node name="TileLayoutLabel" type="Label" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile layout:"
+
+[node name="TileLayoutOptionButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "Stacked"
+popup/item_0/id = 0
+popup/item_1/text = "Stacked offset"
+popup/item_1/id = 1
+popup/item_2/text = "Stairs right"
+popup/item_2/id = 2
+popup/item_3/text = "Stairs down"
+popup/item_3/id = 3
+popup/item_4/text = "Diamond right"
+popup/item_4/id = 4
+popup/item_5/text = "Diamond down"
+popup/item_5/id = 5
+
+[node name="TileOffsetAxisLabel" type="Label" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile offset axis:"
+
+[node name="TileOffsetAxisButton" type="OptionButton" parent="GridContainer" groups=["TilemapLayersPlaceOnly"]]
+layout_mode = 2
+tooltip_text = "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Horizontal"
+popup/item_0/id = 0
+popup/item_1/text = "Vertical"
+popup/item_1/id = 1
+
 [node name="UserDataLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -121,6 +213,11 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.mp3 ; MP3 Audio", "*.wav; WAV Audio")
 
+[node name="PlaceOnlyConfirmationDialog" type="ConfirmationDialog" parent="."]
+size = Vector2i(300, 200)
+dialog_text = "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
+dialog_autowrap = true
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
@@ -128,6 +225,12 @@ filters = PackedStringArray("*.mp3 ; MP3 Audio", "*.wav; WAV Audio")
 [connection signal="pressed" from="GridContainer/AudioFileButton" to="." method="_on_audio_file_button_pressed"]
 [connection signal="value_changed" from="GridContainer/PlayAtFrameSlider" to="." method="_on_play_at_frame_slider_value_changed"]
 [connection signal="item_selected" from="GridContainer/TilesetOptionButton" to="." method="_on_tileset_option_button_item_selected"]
+[connection signal="toggled" from="GridContainer/PlaceOnlyModeCheckButton" to="." method="_on_place_only_mode_check_button_toggled"]
+[connection signal="value_changed" from="GridContainer/TileSizeSlider" to="." method="_on_tile_size_slider_value_changed"]
+[connection signal="item_selected" from="GridContainer/TileShapeOptionButton" to="." method="_on_tile_shape_option_button_item_selected"]
+[connection signal="item_selected" from="GridContainer/TileLayoutOptionButton" to="." method="_on_tile_layout_option_button_item_selected"]
+[connection signal="item_selected" from="GridContainer/TileOffsetAxisButton" to="." method="_on_tile_offset_axis_button_item_selected"]
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="color_changed" from="GridContainer/UIColorPickerButton" to="." method="_on_ui_color_picker_button_color_changed"]
 [connection signal="file_selected" from="AudioFileDialog" to="." method="_on_audio_file_dialog_file_selected"]
+[connection signal="confirmed" from="PlaceOnlyConfirmationDialog" to="." method="_on_place_only_confirmation_dialog_confirmed"]

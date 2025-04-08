@@ -224,6 +224,8 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 		var cel := frame.cels[layer.index]
 		var cel_image := cel.get_image()
 		if cel is CelTileMap:
+			if cel.place_only_mode:
+				continue
 			undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 		if cel_image is ImageExtended:
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data

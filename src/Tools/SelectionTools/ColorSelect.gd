@@ -52,7 +52,7 @@ func apply_selection(pos: Vector2i) -> void:
 			var tile_index := tilemap_cel.get_cell_index_at_coords(pos)
 			for cell_coords: Vector2i in tilemap_cel.cells:
 				var cell := tilemap_cel.get_cell_at(cell_coords)
-				var p := cell_coords * tilemap_cel.tileset.tile_size
+				var p := cell_coords * tilemap_cel.get_tile_size()
 				if cell.index == tile_index:
 					if _intersect:
 						select_tilemap_cell(

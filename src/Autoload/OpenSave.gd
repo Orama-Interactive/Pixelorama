@@ -882,7 +882,13 @@ func import_reference_image_from_image(image: Image) -> void:
 
 
 func open_image_as_tileset(
-	path: String, image: Image, horiz: int, vert: int, project := Global.current_project
+	path: String,
+	image: Image,
+	horiz: int,
+	vert: int,
+	tile_shape: TileSet.TileShape,
+	tile_offset_axis: TileSet.TileOffsetAxis,
+	project := Global.current_project
 ) -> void:
 	image.convert(project.get_image_format())
 	horiz = mini(horiz, image.get_size().x)
@@ -890,7 +896,8 @@ func open_image_as_tileset(
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
 	var tile_size := Vector2i(frame_width, frame_height)
-	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file())
+	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file(), tile_shape)
+	tileset.tile_offset_axis = tile_offset_axis
 	for yy in range(vert):
 		for xx in range(horiz):
 			var cropped_image := image.get_region(
@@ -906,13 +913,16 @@ func open_image_as_tileset_smart(
 	image: Image,
 	sliced_rects: Array[Rect2i],
 	tile_size: Vector2i,
+	tile_shape: TileSet.TileShape,
+	tile_offset_axis: TileSet.TileOffsetAxis,
 	project := Global.current_project
 ) -> void:
 	image.convert(project.get_image_format())
 	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
 		tile_size = image.get_size()
 		sliced_rects.append(Rect2i(Vector2i.ZERO, tile_size))
-	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file())
+	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file(), tile_shape)
+	tileset.tile_offset_axis = tile_offset_axis
 	for rect in sliced_rects:
 		var offset: Vector2 = (0.5 * (tile_size - rect.size)).floor()
 		var cropped_image := Image.create(

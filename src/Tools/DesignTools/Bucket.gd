@@ -526,7 +526,7 @@ func _compute_segments_for_tilemap(pos: Vector2i, cel: CelTileMap, src_index: in
 	# initially allocate at least 1 segment per line of the tilemap
 	for j in range(cel.vertical_cell_min, cel.vertical_cell_max):
 		_add_new_segment(j)
-	pos /= cel.tileset.tile_size
+	pos /= cel.get_tile_size()
 	# start flood algorithm
 	_flood_line_around_point_tilemap(pos, cel, src_index)
 	# test all segments while also discovering more
@@ -609,6 +609,8 @@ func _check_flooded_segment_tilemap(
 	while left <= right:
 		c = y
 		while true:
+			if c >= _allegro_flood_segments.size():
+				return ret
 			var segment := _allegro_flood_segments[c]
 			if left >= segment.left_position and left <= segment.right_position:
 				left = segment.right_position + 2
@@ -630,7 +632,10 @@ func _color_segments_tilemap(cel: CelTileMap) -> void:
 
 func commit_undo() -> void:
 	var project := Global.current_project
-	project.update_tilemaps(_undo_data)
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if TileSetPanel.placing_tiles:
+		tile_editing_mode = TileSetPanel.TileEditingMode.STACK
+	project.update_tilemaps(_undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1

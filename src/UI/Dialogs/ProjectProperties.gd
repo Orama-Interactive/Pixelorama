@@ -63,9 +63,13 @@ func _on_user_data_text_edit_text_changed() -> void:
 func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi: int) -> void:
 	var tileset_index: int = item.get_metadata(column)
 	var project := Global.current_project
-	var tileset := project.tilesets[tileset_index]
+	var tileset: TileSetCustom
+	if tileset_index < project.tilesets.size():
+		tileset = project.tilesets[tileset_index]
+	else:
+		tileset = project.tilesets[-1]
 	if id == 0:  # Duplicate
-		var new_tileset := TileSetCustom.new(tileset.tile_size, tileset.name)
+		var new_tileset := tileset.duplicate()
 		for i in range(1, tileset.tiles.size()):
 			var tile := tileset.tiles[i]
 			var new_image := Image.new()
