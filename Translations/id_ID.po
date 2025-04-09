@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-09 15:46\n"
+"PO-Revision-Date: 2025-04-09 19:38\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -2814,7 +2814,7 @@ msgid "Redo: Change frame duration"
 msgstr "Ulangi: Ubah durasi bingkai"
 
 msgid "Move Guide"
-msgstr "Geser panduan"
+msgstr "Geser Panduan"
 
 msgid "File saved"
 msgstr "Berkas tersimpan"
@@ -3640,7 +3640,7 @@ msgstr "Pindahkan gambar rujukan terpilih ke kiri"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr "Memilih gambar rujukan untuk di kanvas"
+msgstr "Memilih gambar rujukan untuk kanvas"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
@@ -3797,11 +3797,11 @@ msgstr "Mengaktifkan mode hanya-taruh itu opsi permanen. Jika diaktifkan, nanti 
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr "Pilih petak untuk ditaruh pada kanvas."
+msgstr "Pilih petak untuk ditaruh ke kanvas."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr "Ubah petak pada kanvas."
+msgstr "Mengubah petak di kanvas."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
