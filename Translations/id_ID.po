@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-09 13:08\n"
+"PO-Revision-Date: 2025-04-09 15:46\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -2885,10 +2885,10 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Apakah ingin ada nama diri atau perusahaan pada layar splash?"
 
 msgid "Become a Platinum Sponsor"
-msgstr "Jadi Sponsor Platina"
+msgstr "Jadi Penaja Platinum"
 
 msgid "Become a Gold Sponsor"
-msgstr "Jadi Sponsor Emas"
+msgstr "Jadi Penaja Emas"
 
 msgid "Become a Patron"
 msgstr "Jadi Patron"
