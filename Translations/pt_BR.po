@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-04-09 18:39\n"
+"PO-Revision-Date: 2025-04-09 19:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3746,53 +3746,53 @@ msgstr "Layout dos tiles:"
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile offset axis:"
-msgstr ""
+msgstr "Eixo do deslocamento dos tiles:"
 
 #. Tooltip of the "tile offset axis" option.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
-msgstr ""
+msgstr "Para todos os formatos semi-deslocados (Isométrico & Hexagonal), determina o eixo do deslocamento."
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked"
-msgstr ""
+msgstr "Acumulado"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked offset"
-msgstr ""
+msgstr "Acumulado e deslocado"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs right"
-msgstr ""
+msgstr "Escadas à direita"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs down"
-msgstr ""
+msgstr "Escadas descendo"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond right"
-msgstr ""
+msgstr "Losango à direita"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond down"
-msgstr ""
+msgstr "Losango para baixo"
 
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Place-only mode:"
-msgstr ""
+msgstr "Somente colocar tiles:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr ""
+msgstr "Ativar o modo para somente colocar tiles é uma ação permanente. Após ativado, você só poderá colocar tiles, sem a possibilidade de modificar os tiles existentes nessa camada."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
