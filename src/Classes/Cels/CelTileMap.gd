@@ -70,6 +70,9 @@ class Cell:
 	## If [code]true[/code], the tile is rotated 90 degrees counter-clockwise,
 	## and then flipped vertically in this cell.
 	var transpose := false
+	## Used to ensure that each cell is only being updated once per frame,
+	## to avoid rare cases of infinite recursion.
+	var updated_this_frame := false
 
 	func _to_string() -> String:
 		var text := str(index)
@@ -710,6 +713,10 @@ func _re_index_cells_after_index(index: int, decrease := true) -> void:
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
 func _update_cell(cell: Cell) -> void:
+	if cell.updated_this_frame:
+		return
+	cell.updated_this_frame = true
+	cell.set_deferred("updated_this_frame", false)
 	var cell_coords := cells.find_key(cell) as Vector2i
 	var coords := get_pixel_coords(cell_coords)
 	var rect := Rect2i(coords, get_tile_size())
