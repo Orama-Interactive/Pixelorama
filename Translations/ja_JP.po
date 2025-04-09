@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-04-08 21:23\n"
+"PO-Revision-Date: 2025-04-09 02:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3736,64 +3736,64 @@ msgstr "タイルサイズ："
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile shape:"
-msgstr ""
+msgstr "タイル形状："
 
 #. The layout that the tiles appear in, in a non-rectangular grid.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile layout:"
-msgstr ""
+msgstr "タイルレイアウト："
 
 #. The offset axis (horizontal or vertical) of non-rectangular tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile offset axis:"
-msgstr ""
+msgstr "タイルオフセット軸："
 
 #. Tooltip of the "tile offset axis" option.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
-msgstr ""
+msgstr "すべてのハーフオフセット形状(アイソメトリックとヘキサナール)で、オフセット軸を決定します。"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked"
-msgstr ""
+msgstr "積み上げ"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked offset"
-msgstr ""
+msgstr "積み上げオフセット"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs right"
-msgstr ""
+msgstr "階段右"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs down"
-msgstr ""
+msgstr "階段下"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond right"
-msgstr ""
+msgstr "菱形右"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond down"
-msgstr ""
+msgstr "菱形下"
 
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Place-only mode:"
-msgstr ""
+msgstr "配置専用モード："
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr ""
+msgstr "配置専用モードを有効にすることは、永続的なアクションです。 一度有効にすると、タイルのみを配置でき、このレイヤー上の既存のタイルを変更することはできなくなります。"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
