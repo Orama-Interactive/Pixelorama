@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-09 11:35\n"
+"PO-Revision-Date: 2025-04-09 13:08\n"
 
 msgid "OK"
-msgstr "Oke"
+msgstr "Iya"
 
 msgid "Cancel"
 msgstr "Batal"
@@ -300,7 +300,7 @@ msgstr "Preferensi"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr "Tata Cara"
+msgstr "Pelengkap"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
@@ -362,7 +362,7 @@ msgid "Layouts"
 msgstr "Tata letak"
 
 msgid "Moveable Panels"
-msgstr "Panel Bisa Dipindah"
+msgstr "Panel Bisa Dilepas"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
@@ -483,7 +483,7 @@ msgid "Apply to all"
 msgstr "Terapkan ke semua"
 
 msgid "Recent projects"
-msgstr "Proyek yang tadi"
+msgstr "Proyek sebelumnya"
 
 msgid "New project"
 msgstr "Proyek baru"
@@ -1458,7 +1458,7 @@ msgstr "Perancang UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr "Pengarang"
+msgstr "Pembuat"
 
 msgid "Art by: %s"
 msgstr "Gambar oleh %s"
@@ -2429,7 +2429,7 @@ msgstr "Tag %s (Bingkai %s-%s)"
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
 msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
-"Jika tidak, maka animasi akan diputar untuk semua bingkai."
+"Jika tidak, maka animasi akan diputar pada semua bingkai."
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
@@ -3610,7 +3610,7 @@ msgstr "Ekawarna"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr "Saat membuka gambar, itu bisa diimpor sebagai rujukan."
+msgstr "Saat membuka gambar, bisa juga diimpor sebagai rujukan."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
@@ -3753,7 +3753,7 @@ msgstr "Sumbu offset petak:"
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
-msgstr ""
+msgstr "Mengubah sumbu offset dari semua bentuk setengah offset (Isometrik & Segi Enam)."
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
@@ -3768,22 +3768,22 @@ msgstr "Offset tumpukan"
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs right"
-msgstr ""
+msgstr "Tangga kanan"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs down"
-msgstr ""
+msgstr "Tangga turun"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond right"
-msgstr ""
+msgstr "Wajik kanan"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond down"
-msgstr ""
+msgstr "Wajik turun"
 
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
@@ -3793,7 +3793,7 @@ msgstr "Mode hanya-taruh:"
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr ""
+msgstr "Mengaktifkan mode hanya-taruh itu opsi permanen. Jika diaktifkan, nanti hanya bisa menaruh petak dan tidak bisa lagi mengubah petak yang ada pada lapisan ini."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
