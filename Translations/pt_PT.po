@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-08 21:23\n"
+"PO-Revision-Date: 2025-04-09 22:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -446,11 +446,11 @@ msgstr "Encaixar ao Centro da Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Encaixar às Guias"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Encaixar às Guias de Perspetiva"
 
 msgid "Show Animation Timeline"
 msgstr "Mostrar Linha de Tempo da Animação"
@@ -488,7 +488,7 @@ msgstr "Novo projeto"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (novo projeto)"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
@@ -505,7 +505,7 @@ msgid "New layer"
 msgstr "Nova camada"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Nova imagem de referência"
 
 msgid "New palette"
 msgstr "Nova palete"
@@ -524,33 +524,33 @@ msgstr "Fotogramas verticais:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Recorte Inteligente"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Limiar:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "Imagens que tiverem qualquer lado menor que este valor ultrapassará o limiar"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Mesclar distância:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "Imagens que ultrapassarem o limiar irão ser mescladas para uma imagem maior, se elas estiverem dentro desta distância"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "Atualizar"
 
 msgid "Start frame:"
 msgstr "Fotograma inicial:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Frame final:"
 
 msgid "At frame:"
 msgstr "No fotograma:"
@@ -584,7 +584,8 @@ msgstr "O ficheiro já existe, Substituir?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Os ficheiros seguintes já existem. Gostaria de os substituir?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Caminho do diretório inválido!"
@@ -642,7 +643,7 @@ msgstr "Redimensionar:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Qualidade:"
 
 msgid "Cancel Export"
 msgstr "Cancelar Exportar"
