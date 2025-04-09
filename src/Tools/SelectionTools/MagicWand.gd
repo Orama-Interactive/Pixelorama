@@ -329,7 +329,7 @@ func _select_segments_tilemap(project: Project, previous_selection_map: Selectio
 func _set_bit_rect(p: Vector2i, project: Project, prev_selection_map: SelectionMap) -> void:
 	var selection_map := project.selection_map
 	var tilemap := project.get_current_cel() as CelTileMap
-	var pixel_coords := p * tilemap.tileset.tile_size
+	var pixel_coords := p * tilemap.get_tile_size()
 	if _intersect:
 		select_tilemap_cell(
 			tilemap, pixel_coords, project.selection_map, prev_selection_map.is_pixel_selected(p)

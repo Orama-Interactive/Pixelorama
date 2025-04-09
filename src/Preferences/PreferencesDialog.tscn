@@ -536,13 +536,15 @@ size_flags_horizontal = 3
 tooltip_text = "Sets the type of the grid between rectangular, isometric or both"
 mouse_default_cursor_shape = 2
 selected = 0
-item_count = 3
+item_count = 4
 popup/item_0/text = "Rectangular"
 popup/item_0/id = 0
 popup/item_1/text = "Isometric"
 popup/item_1/id = 1
-popup/item_2/text = "Hexagonal"
+popup/item_2/text = "Hexagonal (pointy-top)"
 popup/item_2/id = 2
+popup/item_3/text = "Hexagonal (flat-top)"
+popup/item_3/id = 3
 
 [node name="GridSizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 custom_minimum_size = Vector2(110, 0)

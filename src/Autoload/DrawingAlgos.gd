@@ -560,6 +560,86 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 	)
 
 
+func generate_isometric_rectangle(image: Image) -> void:
+	var half_size := image.get_size() / 2
+	var up := Vector2i(half_size.x, 0)
+	var right := Vector2i(image.get_size().x, half_size.y)
+	if image.get_height() < image.get_width():
+		up += Vector2i.LEFT
+	elif image.get_height() > image.get_width():
+		up += Vector2i.DOWN
+		right += Vector2i.DOWN
+	var up_right := Geometry2D.bresenham_line(up, right)
+	up_right.pop_back()
+	up_right.pop_back()
+	for pixel in up_right:
+		image.set_pixelv(pixel, Color.WHITE)
+		var left := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
+		for j in range(pixel.x, left.x - 1, -1):
+			image.set_pixel(j, pixel.y, Color.WHITE)
+			var mirror_y := Vector2i(j, image.get_size().y - 1 - pixel.y)
+			for k in range(pixel.y, mirror_y.y + 1):
+				image.set_pixel(j, k, Color.WHITE)
+		var mirror_right := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
+		image.set_pixelv(mirror_right, Color.WHITE)
+
+
+func generate_hexagonal_pointy_top(image: Image) -> void:
+	var half_size := image.get_size() / 2
+	var quarter_size := image.get_size() / 4
+	var three_quarters_size := (image.get_size() * 3) / 4
+	var up := Vector2i(half_size.x, 0)
+	var quarter := Vector2i(image.get_size().x - 1, quarter_size.y)
+	var line := Geometry2D.bresenham_line(up, quarter)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var mirror := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
+		for j in range(pixel.x, mirror.x - 1, -1):
+			image.set_pixel(j, pixel.y, Color.WHITE)
+	var three_quarters := Vector2i(image.get_size().x - 1, three_quarters_size.y - 1)
+	line = Geometry2D.bresenham_line(quarter, three_quarters)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var mirror := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
+		for j in range(pixel.x, mirror.x - 1, -1):
+			image.set_pixel(j, pixel.y, Color.WHITE)
+	var down := Vector2i(half_size.x, image.get_size().y - 1)
+	line = Geometry2D.bresenham_line(three_quarters, down)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var mirror := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
+		for j in range(pixel.x, mirror.x - 1, -1):
+			image.set_pixel(j, pixel.y, Color.WHITE)
+
+
+func generate_hexagonal_flat_top(image: Image) -> void:
+	var half_size := image.get_size() / 2
+	var quarter_size := image.get_size() / 4
+	var three_quarters_size := (image.get_size() * 3) / 4
+	var left := Vector2i(0, half_size.y)
+	var quarter := Vector2i(quarter_size.x, image.get_size().y - 1)
+	var line := Geometry2D.bresenham_line(left, quarter)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var mirror := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
+		for j in range(pixel.y, mirror.y - 1, -1):
+			image.set_pixel(pixel.x, j, Color.WHITE)
+	var three_quarters := Vector2i(three_quarters_size.x - 1, image.get_size().y - 1)
+	line = Geometry2D.bresenham_line(quarter, three_quarters)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var mirror := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
+		for j in range(pixel.y, mirror.y - 1, -1):
+			image.set_pixel(pixel.x, j, Color.WHITE)
+	var down := Vector2i(image.get_size().x - 1, half_size.y)
+	line = Geometry2D.bresenham_line(three_quarters, down)
+	for pixel in line:
+		image.set_pixelv(pixel, Color.WHITE)
+		var mirror := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
+		for j in range(pixel.y, mirror.y - 1, -1):
+			image.set_pixel(pixel.x, j, Color.WHITE)
+
+
 # Image effects
 func center(indices: Array) -> void:
 	var project := Global.current_project
@@ -587,11 +667,15 @@ func center(indices: Array) -> void:
 				continue
 			var cel_image := (cel as PixelCel).get_image()
 			var tmp_centered := project.new_empty_image()
-			tmp_centered.blend_rect(cel.image, used_rect, offset)
+			tmp_centered.blend_rect(cel_image, used_rect, offset)
 			var centered := ImageExtended.new()
 			centered.copy_from_custom(tmp_centered, cel_image.is_indexed)
 			if cel is CelTileMap:
-				(cel as CelTileMap).serialize_undo_data_source_image(centered, redo_data, undo_data)
+				var tilemap_cel := cel as CelTileMap
+				var tilemap_offset := (offset - used_rect.position) % tilemap_cel.get_tile_size()
+				tilemap_cel.serialize_undo_data_source_image(
+					centered, redo_data, undo_data, tilemap_offset
+				)
 			centered.add_data_to_dictionary(redo_data, cel_image)
 			cel_image.add_data_to_dictionary(undo_data)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
@@ -603,20 +687,26 @@ func center(indices: Array) -> void:
 func scale_project(width: int, height: int, interpolation: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
+	var tilesets: Array[TileSetCustom] = []
 	for cel in Global.current_project.get_all_pixel_cels():
 		if not cel is PixelCel:
 			continue
 		var cel_image := (cel as PixelCel).get_image()
-		var sprite := _resize_image(cel_image, width, height, interpolation) as ImageExtended
+		var sprite := resize_image(cel_image, width, height, interpolation) as ImageExtended
 		if cel is CelTileMap:
-			(cel as CelTileMap).serialize_undo_data_source_image(sprite, redo_data, undo_data)
+			var tilemap_cel := cel as CelTileMap
+			var skip_tileset_undo := not tilesets.has(tilemap_cel.tileset)
+			tilemap_cel.serialize_undo_data_source_image(
+				sprite, redo_data, undo_data, Vector2i.ZERO, skip_tileset_undo, interpolation
+			)
+			tilesets.append(tilemap_cel.tileset)
 		sprite.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
 
-func _resize_image(
+func resize_image(
 	image: Image, width: int, height: int, interpolation: Image.Interpolation
 ) -> Image:
 	var new_image: Image
@@ -664,7 +754,9 @@ func crop_to_selection() -> void:
 		var cropped := ImageExtended.new()
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
 		if cel is CelTileMap:
-			(cel as CelTileMap).serialize_undo_data_source_image(cropped, redo_data, undo_data)
+			var tilemap_cel := cel as CelTileMap
+			var offset := rect.position
+			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -703,7 +795,9 @@ func crop_to_content() -> void:
 		var cropped := ImageExtended.new()
 		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
 		if cel is CelTileMap:
-			(cel as CelTileMap).serialize_undo_data_source_image(cropped, redo_data, undo_data)
+			var tilemap_cel := cel as CelTileMap
+			var offset := used_rect.position
+			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -724,13 +818,8 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 		resized.convert_rgb_to_indexed()
 		if cel is CelTileMap:
 			var tilemap_cel := cel as CelTileMap
-			var skip_tileset := (
-				offset_x % tilemap_cel.tileset.tile_size.x == 0
-				and offset_y % tilemap_cel.tileset.tile_size.y == 0
-			)
-			tilemap_cel.serialize_undo_data_source_image(
-				resized, redo_data, undo_data, skip_tileset
-			)
+			var offset := Vector2i(offset_x, offset_y)
+			tilemap_cel.serialize_undo_data_source_image(resized, redo_data, undo_data, offset)
 		resized.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 

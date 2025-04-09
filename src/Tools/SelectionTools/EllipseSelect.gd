@@ -135,8 +135,7 @@ func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
 func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 	if Tools.is_placing_tiles():
 		var cel := Global.current_project.get_current_cel() as CelTileMap
-		var tileset := cel.tileset
-		var grid_size := tileset.tile_size
+		var grid_size := cel.get_tile_size()
 		var offset := cel.offset % grid_size
 		origin = Tools.snap_to_rectangular_grid_boundary(origin, grid_size, offset)
 		dest = Tools.snap_to_rectangular_grid_boundary(dest, grid_size, offset)

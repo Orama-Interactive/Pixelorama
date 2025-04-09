@@ -154,13 +154,15 @@ func _commit_undo(action: String) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
+	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	if Tools.is_placing_tiles():
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
 			project.undo_redo.add_do_method(cel.change_offset.bind(cel.offset))
+			project.undo_redo.add_do_method(cel.re_order_tilemap)
 			project.undo_redo.add_undo_method(cel.change_offset.bind(cel.prev_offset))
-	project.deserialize_cel_undo_data(redo_data, _undo_data)
+			project.undo_redo.add_undo_method(cel.re_order_tilemap)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
