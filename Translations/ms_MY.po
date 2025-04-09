@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-04-08 21:24\n"
+"PO-Revision-Date: 2025-04-09 13:08\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -201,10 +201,10 @@ msgid "Resize Canvas"
 msgstr "Ubah Saiz Kanvas"
 
 msgid "Offset Image"
-msgstr "Pengimbang Gambar"
+msgstr "Offset Gambar"
 
 msgid "Offset:"
-msgstr "Pengimbang:"
+msgstr "Offset:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
@@ -1782,11 +1782,11 @@ msgstr "Saiz kekisi:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
-msgstr "Pengimbang kekisi:"
+msgstr "Offset kekisi:"
 
 #. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Menetapkan offset kekisi kanvas asal (pada sudut kiri atas imej)"
 
 msgid "Draw over Tile Mode:"
 msgstr ""
@@ -2159,7 +2159,7 @@ msgid "Pattern"
 msgstr ""
 
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 msgid "Simple Shading"
 msgstr ""
@@ -3397,7 +3397,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "Kiri ke kanan:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
@@ -3684,34 +3684,34 @@ msgstr ""
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile shape:"
-msgstr ""
+msgstr "Bentuk jubin:"
 
 #. The layout that the tiles appear in, in a non-rectangular grid.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile layout:"
-msgstr ""
+msgstr "Susun atur jubin:"
 
 #. The offset axis (horizontal or vertical) of non-rectangular tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile offset axis:"
-msgstr ""
+msgstr "Paksi offset jubin:"
 
 #. Tooltip of the "tile offset axis" option.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
-msgstr ""
+msgstr "Mengubah paksi offset daripada semua bentuk separuh offset (Isometrik & Segi Enam)."
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked"
-msgstr ""
+msgstr "Tindan"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked offset"
-msgstr ""
+msgstr "Offset tindan"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
@@ -3736,7 +3736,7 @@ msgstr ""
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Place-only mode:"
-msgstr ""
+msgstr "Mod letak sahaja:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
@@ -3779,12 +3779,12 @@ msgstr ""
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Bertindan"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
