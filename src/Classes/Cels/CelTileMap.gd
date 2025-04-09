@@ -826,7 +826,7 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 		if cell_coords.y < vertical_cell_min:
 			vertical_cell_min = cell_coords.y
 		if cell_coords.y > vertical_cell_max:
-			vertical_cell_max = cell_coords.y
+			vertical_cell_max = cell_coords.y + 1
 	for cell_coords in cells:
 		if reset_indices:
 			cells[cell_coords] = Cell.new()
