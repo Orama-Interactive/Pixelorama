@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-10 19:58\n"
+"PO-Revision-Date: 2025-04-10 20:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -742,7 +742,7 @@ msgid "Refresh files."
 msgstr "Atualizar ficheiros."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Alterar a visibilidade dos ficheiros escondidos."
 
 msgid "Directories & Files:"
 msgstr "Diretorias e Ficheiros:"
@@ -755,55 +755,55 @@ msgstr "Ficheiro:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Todos os Ficheiros"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Todos os Compatíveis"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Projeto Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Imagem PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Imagem BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Imagem Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Imagem JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Imagem SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Imagem TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Imagem WebP"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Paleta Pixelorama"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "Paleta GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Opções avançadas"
 
 msgid "Interpolation:"
 msgstr "Interpolação:"
@@ -825,11 +825,11 @@ msgstr "Constante"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Espaço de cores"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Linear sRGB"
 
 msgid "General"
 msgstr "Geral"
@@ -851,7 +851,7 @@ msgstr "Tela"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Cronologia"
 
 msgid "Selection"
 msgstr "Seleção"
@@ -867,7 +867,7 @@ msgstr "Performance"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Drivers"
 
 msgid "Extensions"
 msgstr "Extensões"
@@ -880,7 +880,7 @@ msgstr "Indicadores"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama precisa de ser reiniciado para estas alterações entrarem em vigor."
 
 msgid "On"
 msgstr "Ligado"
@@ -898,7 +898,7 @@ msgstr "Adiciona uma transição suave no durante o zoom"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Zoom Inteiro"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
