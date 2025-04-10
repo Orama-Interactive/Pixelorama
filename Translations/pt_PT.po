@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-09 22:41\n"
+"PO-Revision-Date: 2025-04-10 19:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -662,30 +662,30 @@ msgstr "Fundo de Ecrã:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Frames selecionados"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Camadas:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Camadas visíveis"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Camadas selecionadas"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Camada de pixel:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Camada de grupo:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Camada 3D:"
 
 msgid "Direction:"
 msgstr "Direção:"
@@ -713,33 +713,33 @@ msgstr "Linhas:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Etiquetas em coluna"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "Etiquetas em linha"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Exportar dimensões:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Salvar um Ficheiro"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Ir para a pasta anterior."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Ir para a pasta seguinte."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Ir para a pasta pai."
 
 msgid "Path:"
 msgstr "Caminho:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Atualizar ficheiros."
 
 msgid "Toggle the visibility of hidden files."
 msgstr ""
