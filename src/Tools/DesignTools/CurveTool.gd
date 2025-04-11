@@ -132,12 +132,11 @@ func draw_start(pos: Vector2i) -> void:
 		bezier_option_button.disabled = true
 		_drawing = true
 		_current_state = SingleState.START
-	if _bezier_mode == Bezier.SINGLE:
-		if _current_state == SingleState.START or _current_state == SingleState.END:
-			_curve.add_point(pos)
-		_current_state += 1
-	else:
+	# NOTE: _current_state of CHAINED mode is always SingleState.START so it will always pass this.
+	if _current_state == SingleState.START or _current_state == SingleState.END:
 		_curve.add_point(pos)
+	if _bezier_mode == Bezier.SINGLE:
+		_current_state += 1
 	_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
 
 
@@ -158,9 +157,10 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	_editing_bezier = false
-	if _is_hovering_first_position(pos) and _curve.point_count > 1:
-		_draw_shape()
-	if _current_state == SingleState.READY:
+	if (
+		(_is_hovering_first_position(pos) and _curve.point_count > 1)
+		or _current_state == SingleState.READY
+	):
 		_draw_shape()
 	super.draw_end(pos)
 
