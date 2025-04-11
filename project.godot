@@ -41,6 +41,7 @@ Palettes="*res://src/Autoload/Palettes.gd"
 Keychain="*res://addons/keychain/Keychain.gd"
 ExtensionsApi="*res://src/Autoload/ExtensionsApi.gd"
 Themes="*res://src/Autoload/Themes.gd"
+DrawingAlgosCppAutoload="*res://src/Autoload/DrawingAlgosCppAutoload.gd"
 
 [debug]
 
