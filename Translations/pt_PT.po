@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-03-13 16:37\n"
+"PO-Revision-Date: 2025-04-11 19:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,7 +74,7 @@ msgstr "Imagem"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projeto"
 
 msgid "Effects"
 msgstr "Efeitos"
@@ -99,13 +99,13 @@ msgstr "Gravar como..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Incluir imagens mescladas"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Se ativado, as imagens mescladas finais também serão armazenadas no pxo, para cada frame. Isto faz o ficheiro pxo maior e serve para importar por software de terceiros ou exportação por CLI. Esta opção não é necessária para abrir ficheiros pxo em Plexorama."
 
 msgid "Import"
 msgstr "Importar"
@@ -147,21 +147,21 @@ msgid "Paste"
 msgstr "Colar"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Colar no Lugar"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Colar da Área de Transferência"
 
 msgid "Delete"
 msgstr "Apagar"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Apagar Permanentemente"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Mover para o Lixo"
 
 msgid "New Brush"
 msgstr "Novo Pincel"
@@ -177,52 +177,52 @@ msgstr "Percentagem"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Modo de cor:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Modo de Cor"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Indexado"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Recortar à Seleção"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Recortar ao Conteúdo"
 
 msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Deslocar Imagem"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Descolamento:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Envolver à volta:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Centrar Frames"
 
 msgid "Rotate Image"
 msgstr "Rodar Imagem"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Pivô x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Pivô y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Opções de smear:"
 
 msgid "Tolerance:"
 msgstr "Tolerância:"
@@ -232,7 +232,7 @@ msgstr "Ângulo inicial:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Envolver Pinceladas"
 
 msgid "Clear"
 msgstr "Limpar"
@@ -242,44 +242,44 @@ msgstr "Inverter"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Selecionar área de célula"
 
 msgid "Modify"
-msgstr ""
+msgstr "Modificar"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "Expandir Seleção"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Diminuir"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "Diminuir Seleção"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "Borda"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "Seleção da Borda"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Diamante"
 
 msgid "Circle"
-msgstr ""
+msgstr "Círculo"
 
 msgid "Square"
-msgstr ""
+msgstr "Quadrado"
 
 msgid "Grayscale View"
 msgstr "Visualização em escala de cinzentos"
@@ -298,19 +298,19 @@ msgstr "Preferencias"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Procedural"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Desfoque"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Carregado"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Centrar Tela"
 
 msgid "Tile Mode"
 msgstr "Modo de Azuleijo"
@@ -320,15 +320,15 @@ msgstr "Desvios do Modo Mosaico"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
-msgstr ""
+msgstr "Base X:"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "Y-basis:"
-msgstr ""
+msgstr "Base Y:"
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "Máscara:"
 
 #. Verb, resets something.
 msgid "Reset"
@@ -336,7 +336,7 @@ msgstr "Repor"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Repor %s"
 
 msgid "Use Current Frame"
 msgstr "Utilizar fotograma atual"
@@ -364,14 +364,14 @@ msgstr "Painéis amovíveis"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Tornar Flutuante"
 
 msgid "Manage Layouts"
 msgstr "Gerir disposições"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Pré-visualização"
 
 msgid "Add"
 msgstr "Adicionar"
@@ -381,20 +381,20 @@ msgstr "Adicionar disposição"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Apagar %s"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Copiar de"
 
 msgid "Rename"
-msgstr ""
+msgstr "Renomear"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Renomear Layout"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr ""
+msgstr "Layout atual"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Tem a certeza que pretende eliminar esta disposição?"
@@ -422,35 +422,35 @@ msgstr "Mostrar Guias"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Mostrar Guias do Rato"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Mostrar Imagens de Referência"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Mostrar Efeitos da Camada"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Encaixar a"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Encaixar ao Limite da Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Encaixar ao Centro da Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Encaixar às Guias"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Encaixar às Guias de Perspetiva"
 
 msgid "Show Animation Timeline"
 msgstr "Mostrar Linha de Tempo da Animação"
@@ -488,7 +488,7 @@ msgstr "Novo projeto"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (novo projeto)"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
@@ -505,7 +505,7 @@ msgid "New layer"
 msgstr "Nova camada"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Nova imagem de referência"
 
 msgid "New palette"
 msgstr "Nova palete"
@@ -524,33 +524,33 @@ msgstr "Fotogramas verticais:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Recorte Inteligente"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Limiar:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "Imagens que tiverem qualquer lado menor que este valor ultrapassará o limiar"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Mesclar distância:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "Imagens que ultrapassarem o limiar irão ser mescladas para uma imagem maior, se elas estiverem dentro desta distância"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "Atualizar"
 
 msgid "Start frame:"
 msgstr "Fotograma inicial:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Frame final:"
 
 msgid "At frame:"
 msgstr "No fotograma:"
@@ -584,7 +584,8 @@ msgstr "O ficheiro já existe, Substituir?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Os ficheiros seguintes já existem. Gostaria de os substituir?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Caminho do diretório inválido!"
@@ -642,7 +643,7 @@ msgstr "Redimensionar:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Qualidade:"
 
 msgid "Cancel Export"
 msgstr "Cancelar Exportar"
@@ -661,30 +662,30 @@ msgstr "Fundo de Ecrã:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Frames selecionados"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Camadas:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Camadas visíveis"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Camadas selecionadas"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Camada de pixel:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Camada de grupo:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Camada 3D:"
 
 msgid "Direction:"
 msgstr "Direção:"
@@ -712,36 +713,36 @@ msgstr "Linhas:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Etiquetas em coluna"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "Etiquetas em linha"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Exportar dimensões:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Salvar um Ficheiro"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Ir para a pasta anterior."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Ir para a pasta seguinte."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Ir para a pasta pai."
 
 msgid "Path:"
 msgstr "Caminho:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Atualizar ficheiros."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Alterar a visibilidade dos ficheiros escondidos."
 
 msgid "Directories & Files:"
 msgstr "Diretorias e Ficheiros:"
@@ -754,55 +755,55 @@ msgstr "Ficheiro:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Todos os Ficheiros"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Todos os Compatíveis"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Projeto Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Imagem PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Imagem BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Imagem Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Imagem JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Imagem SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Imagem TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Imagem WebP"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Paleta Pixelorama"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
 msgid "GIMP palette"
-msgstr ""
+msgstr "Paleta GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Opções avançadas"
 
 msgid "Interpolation:"
 msgstr "Interpolação:"
@@ -824,11 +825,11 @@ msgstr "Constante"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Espaço de cores"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "Linear sRGB"
 
 msgid "General"
 msgstr "Geral"
@@ -850,7 +851,7 @@ msgstr "Tela"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Cronologia"
 
 msgid "Selection"
 msgstr "Seleção"
@@ -866,7 +867,7 @@ msgstr "Performance"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Drivers"
 
 msgid "Extensions"
 msgstr "Extensões"
@@ -879,7 +880,7 @@ msgstr "Indicadores"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama precisa de ser reiniciado para estas alterações entrarem em vigor."
 
 msgid "On"
 msgstr "Ligado"
@@ -897,11 +898,11 @@ msgstr "Adiciona uma transição suave no durante o zoom"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Zoom Inteiro"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Restringe o valor para ser um múltiplo inteiro de 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilidade de pressão no Tablet"
@@ -926,18 +927,18 @@ msgstr ""
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Tipo de letra:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Tamanho do tipo de letra:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Escurecer interface durante uma caixa de diálogo"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
-msgstr ""
+msgstr "Mostrar etiquetas de notificação"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
@@ -1109,7 +1110,7 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr ""
 
@@ -1752,15 +1753,15 @@ msgstr "Cor das Guias:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Cor das réguas de guia mostradas na tela"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
 msgstr ""
 
@@ -1779,22 +1780,30 @@ msgstr "Retangular"
 msgid "Isometric"
 msgstr "Isométrica"
 
+#. Refers to a hexagonal type of grid.
+msgid "Hexagonal"
+msgstr ""
+
 msgid "All"
 msgstr "Ambas"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
@@ -3671,6 +3680,7 @@ msgstr ""
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tileset:"
 msgstr ""
 
@@ -3688,7 +3698,71 @@ msgid "Tileset name:"
 msgstr ""
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
+msgstr ""
+
+#. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile shape:"
+msgstr ""
+
+#. The layout that the tiles appear in, in a non-rectangular grid.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile layout:"
+msgstr ""
+
+#. The offset axis (horizontal or vertical) of non-rectangular tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile offset axis:"
+msgstr ""
+
+#. Tooltip of the "tile offset axis" option.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked offset"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs right"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs down"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond right"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond down"
+msgstr ""
+
+#. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Place-only mode:"
+msgstr ""
+
+#. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
 msgstr ""
 
 #: src/UI/TilesPanel.gd

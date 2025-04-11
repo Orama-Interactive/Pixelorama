@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-03-13 21:13\n"
+"PO-Revision-Date: 2025-04-09 19:38\n"
 
 msgid "OK"
-msgstr "Oke"
+msgstr "Iya"
 
 msgid "Cancel"
 msgstr "Batal"
@@ -300,7 +300,7 @@ msgstr "Preferensi"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr "Tata Cara"
+msgstr "Pelengkap"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
@@ -362,7 +362,7 @@ msgid "Layouts"
 msgstr "Tata letak"
 
 msgid "Moveable Panels"
-msgstr "Panel Bisa Dipindah"
+msgstr "Panel Bisa Dilepas"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
@@ -483,7 +483,7 @@ msgid "Apply to all"
 msgstr "Terapkan ke semua"
 
 msgid "Recent projects"
-msgstr "Proyek yang tadi"
+msgstr "Proyek sebelumnya"
 
 msgid "New project"
 msgstr "Proyek baru"
@@ -672,7 +672,7 @@ msgstr "Lapisan:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr "Lapisan terlihat"
+msgstr "Lapisan tampak"
 
 #. Found in the export dialog
 msgid "Selected layers"
@@ -1114,7 +1114,7 @@ msgstr "Interpolasi"
 msgid "Reverse"
 msgstr "Terbalikkan"
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr "Sebar ratakan titik"
 
@@ -1458,7 +1458,7 @@ msgstr "Perancang UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr "Pengarang"
+msgstr "Pembuat"
 
 msgid "Art by: %s"
 msgstr "Gambar oleh %s"
@@ -1511,7 +1511,7 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Seleksi Poligon\n\n"
+msgstr "Seleksi Poligonal\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Klik dua kali untuk menghubungkan titik akhir ke titik awal"
@@ -1778,15 +1778,15 @@ msgstr "Warna panduan:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
 msgstr "Pencantolan"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
 msgstr "Jarak pencantolan:"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
 msgstr "Ini adalah jarak berukuran piksel saat pencatolan kisi dan panduan diaktifkan."
 
@@ -1797,7 +1797,7 @@ msgid "Grid type:"
 msgstr "Tipe kisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Menetapkan tipe kisi antara persegi panjang, isometrik, atau keduanya"
+msgstr "Menetapkan tipe kisi ke persegi panjang, isometrik, atau keduanya"
 
 msgid "Rectangular"
 msgstr "Persegi Panjang"
@@ -1805,22 +1805,30 @@ msgstr "Persegi Panjang"
 msgid "Isometric"
 msgstr "Isometrik"
 
+#. Refers to a hexagonal type of grid.
+msgid "Hexagonal"
+msgstr "Segi Enam"
+
 msgid "All"
 msgstr "Semua"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
-msgstr "Ukuran kisi persegi panjang:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
+msgstr "Kisi tampak:"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
-msgstr "Ukuran kisi isometrik:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
+msgstr "Kisi suntingan:"
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr "Ukuran kisi:"
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
 msgstr "Offset kisi:"
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr "Menetapkan offset kisi dari kanvas aslinya (di pojok kiri atas gambar)"
 
@@ -2421,7 +2429,7 @@ msgstr "Tag %s (Bingkai %s-%s)"
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
 msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
-"Jika tidak, maka animasi akan diputar untuk semua bingkai."
+"Jika tidak, maka animasi akan diputar pada semua bingkai."
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
@@ -2806,7 +2814,7 @@ msgid "Redo: Change frame duration"
 msgstr "Ulangi: Ubah durasi bingkai"
 
 msgid "Move Guide"
-msgstr "Geser panduan"
+msgstr "Geser Panduan"
 
 msgid "File saved"
 msgstr "Berkas tersimpan"
@@ -2877,10 +2885,10 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Apakah ingin ada nama diri atau perusahaan pada layar splash?"
 
 msgid "Become a Platinum Sponsor"
-msgstr "Jadi Sponsor Platina"
+msgstr "Jadi Penaja Platinum"
 
 msgid "Become a Gold Sponsor"
-msgstr "Jadi Sponsor Emas"
+msgstr "Jadi Penaja Emas"
 
 msgid "Become a Patron"
 msgstr "Jadi Patron"
@@ -2960,7 +2968,7 @@ msgid "Elliptical Selection"
 msgstr "Seleksi Elips"
 
 msgid "Polygonal Selection"
-msgstr "Seleksi Poligon"
+msgstr "Seleksi Poligonal"
 
 msgid "Select By Color"
 msgstr "Pilih sesuai warna"
@@ -3602,7 +3610,7 @@ msgstr "Ekawarna"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr "Saat membuka gambar, itu bisa diimpor sebagai rujukan."
+msgstr "Saat membuka gambar, bisa juga diimpor sebagai rujukan."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
@@ -3632,7 +3640,7 @@ msgstr "Pindahkan gambar rujukan terpilih ke kiri"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr "Memilih gambar rujukan untuk di kanvas"
+msgstr "Memilih gambar rujukan untuk kanvas"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
@@ -3702,6 +3710,7 @@ msgstr "Kotak petak"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tileset:"
 msgstr "Kotak petak:"
 
@@ -3719,16 +3728,80 @@ msgid "Tileset name:"
 msgstr "Nama kotak petak:"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
 msgstr "Ukuran petak:"
 
+#. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile shape:"
+msgstr "Bentuk petak:"
+
+#. The layout that the tiles appear in, in a non-rectangular grid.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile layout:"
+msgstr "Tata letak petak:"
+
+#. The offset axis (horizontal or vertical) of non-rectangular tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile offset axis:"
+msgstr "Sumbu offset petak:"
+
+#. Tooltip of the "tile offset axis" option.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+msgstr "Mengubah sumbu offset dari semua bentuk setengah offset (Isometrik & Segi Enam)."
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked"
+msgstr "Tumpukan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked offset"
+msgstr "Offset tumpukan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs right"
+msgstr "Tangga kanan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs down"
+msgstr "Tangga turun"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond right"
+msgstr "Wajik kanan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond down"
+msgstr "Wajik turun"
+
+#. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Place-only mode:"
+msgstr "Mode hanya-taruh:"
+
+#. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
+msgstr "Mengaktifkan mode hanya-taruh itu opsi permanen. Jika diaktifkan, nanti hanya bisa menaruh petak dan tidak bisa lagi mengubah petak yang ada pada lapisan ini."
+
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr "Pilih petak untuk ditaruh pada kanvas."
+msgstr "Pilih petak untuk ditaruh ke kanvas."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr "Ubah petak pada kanvas."
+msgstr "Mengubah petak di kanvas."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
