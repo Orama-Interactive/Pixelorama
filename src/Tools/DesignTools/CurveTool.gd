@@ -1,7 +1,7 @@
 extends BaseDrawTool
 
-enum Points {START, END, MIDDLE_A, MIDDLE_B, READY}
-enum Bezier {CHAINED, SINGLE}
+enum SingleState { START, END, MIDDLE_A, MIDDLE_B, READY }
+enum Bezier { CHAINED, SINGLE }
 
 var _curve := Curve2D.new()  ## The [Curve2D] responsible for the shape of the curve being drawn.
 var _drawing := false  ## Set to true when a curve is being drawn.
@@ -13,9 +13,10 @@ var _thickness := 1  ## The thickness of the curve.
 var _last_mouse_position := Vector2.INF  ## The last position of the mouse
 ## chained means Krita-like behavior, single means Aseprite-like.
 var _bezier_mode: int = Bezier.CHAINED
-var _current_point: int = Points.START  ## Current state of the bezier curve (in SINGLE mode)
+var _current_state: int = SingleState.START  ## Current state of the bezier curve (in SINGLE mode)
 
 @onready var bezier_option_button: OptionButton = $BezierOptions/BezierMode
+
 
 func _init() -> void:
 	# To prevent tool from remaining active when switching projects
@@ -88,13 +89,19 @@ func _input(event: InputEvent) -> void:
 			_last_mouse_position = Global.canvas.current_pixel.floor()
 			if Global.mirror_view:
 				_last_mouse_position.x = Global.current_project.size.x - 1 - _last_mouse_position.x
-			if _bezier_mode == Bezier.SINGLE and _current_point >= Points.MIDDLE_A:
+			if _bezier_mode == Bezier.SINGLE and _current_state >= SingleState.MIDDLE_A:
 				# if bezier's curvature is being changed in SINGLE mode
-				if _current_point == Points.MIDDLE_A:
+				if _current_state == SingleState.MIDDLE_A:
 					_curve.set_point_out(
 						0, Vector2(_last_mouse_position) - _curve.get_point_position(0)
 					)
-				_curve.set_point_in(1, Vector2(_last_mouse_position) - _curve.get_point_position(_curve.point_count - 1))
+				_curve.set_point_in(
+					1,
+					(
+						Vector2(_last_mouse_position)
+						- _curve.get_point_position(_curve.point_count - 1)
+					)
+				)
 		elif event is InputEventMouseButton:
 			if event.double_click and event.button_index == tool_slot.button:
 				$DoubleClickTimer.start()
@@ -124,11 +131,11 @@ func draw_start(pos: Vector2i) -> void:
 	if !_drawing:
 		bezier_option_button.disabled = true
 		_drawing = true
-		_current_point = Points.START
+		_current_state = SingleState.START
 	if _bezier_mode == Bezier.SINGLE:
-		if _current_point == Points.START or _current_point == Points.END:
+		if _current_state == SingleState.START or _current_state == SingleState.END:
 			_curve.add_point(pos)
-		_current_point += 1
+		_current_state += 1
 	else:
 		_curve.add_point(pos)
 	_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
@@ -153,7 +160,7 @@ func draw_end(pos: Vector2i) -> void:
 	_editing_bezier = false
 	if _is_hovering_first_position(pos) and _curve.point_count > 1:
 		_draw_shape()
-	if _current_point == Points.READY:
+	if _current_state == SingleState.READY:
 		_draw_shape()
 	super.draw_end(pos)
 
@@ -252,10 +259,10 @@ func _bezier() -> Array[Vector2i]:
 	if Global.mirror_view:
 		# Mirror the last point of the curve
 		last_pixel.x = (Global.current_project.size.x - 1) - last_pixel.x
-	if _current_point <= Points.END:  # this is general for both modes
+	if _current_state <= SingleState.END:  # this is general for both modes
 		_curve.add_point(last_pixel)
 	var points := _curve.get_baked_points()
-	if _current_point <= Points.END:  # this is general for both modes
+	if _current_state <= SingleState.END:  # this is general for both modes
 		_curve.remove_point(_curve.point_count - 1)
 	var final_points: Array[Vector2i] = []
 	for i in points.size() - 1:
