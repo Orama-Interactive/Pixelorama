@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-11 19:46\n"
+"PO-Revision-Date: 2025-04-11 21:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -923,7 +923,7 @@ msgid "System Language"
 msgstr "Linguagem de Sistema"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Mostrar escala:"
 
 #. Refers to the font of a text.
 msgid "Font:"
@@ -942,19 +942,19 @@ msgstr "Mostrar etiquetas de notificação"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Usar navegador de ficheiros nativo"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Quando esta preferência está ativada, a janela de seleção de ficheiros do sistema operativo será usada, em vez do personalizado do Pixelorama."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Modo de janela única"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Quando esta preferência está ativada, as subjanelas do Pixelorama vão ser embutidas na janela principal, senão qualquer diálogo irá ter a sua própria janela."
 
 msgid "Dark"
 msgstr "Escuro"
@@ -976,7 +976,7 @@ msgstr "Roxo"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Rosa"
 
 msgid "Theme"
 msgstr "Tema"
@@ -1001,12 +1001,13 @@ msgstr "Cor de fundo:"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
-msgstr ""
+msgstr "Partilhar opções entre as ferramentas da esquerda e da direita"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Se estiver ativada, as opções estarão sincronizadas entre a ferramenta da esquerda e da direita.\n"
+"Por exemplo, ambas as ferramentas irão partilhar o mesmo tamanho do pincel, e mudando-lo numa ferramenta irá mudar na outra instantaneamente."
 
 msgid "Left tool color:"
 msgstr "Cor da ferramenta esquerda:"
@@ -1066,36 +1067,36 @@ msgstr "Contorno"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Sombra Projetada"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Deslocamento X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Deslocamento Y:"
 
 msgid "Shadow color:"
 msgstr "Cor da sombra:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Desfoque Gaussiano"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Tipo de desfoque:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Quantidade de desfoque:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Raio do desfoque:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Direção do desfoque:"
 
 msgid "Gradient"
 msgstr "Gradiente"
@@ -1104,15 +1105,15 @@ msgid "Gradient Map"
 msgstr "Mapeamento gradiente"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Interpolação"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Reverter"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "Distribuir pontos uniformemente"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
@@ -1131,10 +1132,10 @@ msgstr "Quando ativado, o último ponto é adicionado ao fim do gradiente.\n"
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Salvar para predefinições"
 
 msgid "Shape:"
-msgstr ""
+msgstr "Forma:"
 
 msgid "Linear"
 msgstr "Linear"
@@ -1144,15 +1145,15 @@ msgstr "Radial"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Repetir:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Repetir"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Espelhar"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
