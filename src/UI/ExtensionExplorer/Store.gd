@@ -209,3 +209,7 @@ func parse_extension_data(raw_data: Array) -> Dictionary:
 						result["tags"] = item
 						search_manager.add_new_tags(item)
 	return result
+
+
+func _on_report_issue_pressed() -> void:
+	OS.shell_open("https://github.com/Orama-Interactive/PixeloramaExtensionRepository/issues")
