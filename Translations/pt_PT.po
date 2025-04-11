@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-10 20:59\n"
+"PO-Revision-Date: 2025-04-11 19:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -902,7 +902,7 @@ msgstr "Zoom Inteiro"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Restringe o valor para ser um múltiplo inteiro de 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilidade de pressão no Tablet"
