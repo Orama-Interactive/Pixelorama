@@ -277,7 +277,10 @@ func prepare_undo(action: String) -> void:
 func commit_undo() -> void:
 	var project := Global.current_project
 	Global.canvas.update_selected_cels_textures(project)
-	project.update_tilemaps(_undo_data)
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if TileSetPanel.placing_tiles:
+		tile_editing_mode = TileSetPanel.TileEditingMode.STACK
+	project.update_tilemaps(_undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
@@ -525,11 +528,15 @@ func draw_indicator(left: bool) -> void:
 	var snapped_position := snap_position(_cursor)
 	if Tools.is_placing_tiles():
 		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
-		var tileset := tilemap_cel.tileset
-		var grid_size := tileset.tile_size
-		var offset := tilemap_cel.offset % grid_size
-		var offset_pos := snapped_position - Vector2(grid_size / 2) - Vector2(offset)
-		var grid_center := offset_pos.snapped(grid_size) + Vector2(grid_size / 2) + Vector2(offset)
+		var grid_size := tilemap_cel.get_tile_size()
+		var grid_center := Vector2()
+		if tilemap_cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+			var cell_position := tilemap_cel.get_cell_position(snapped_position)
+			grid_center = tilemap_cel.get_pixel_coords(cell_position) + (grid_size / 2)
+		else:
+			var offset := tilemap_cel.offset % grid_size
+			var offset_pos := snapped_position - Vector2(grid_size / 2) - Vector2(offset)
+			grid_center = offset_pos.snapped(grid_size) + Vector2(grid_size / 2) + Vector2(offset)
 		snapped_position = grid_center.floor()
 	draw_indicator_at(snapped_position, Vector2i.ZERO, color)
 	if (

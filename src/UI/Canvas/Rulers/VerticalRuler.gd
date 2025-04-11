@@ -86,13 +86,9 @@ func _draw() -> void:
 			var text_xform := Transform2D(-PI / 2, Vector2(font.get_height() - 4, pos.y - 2))
 			draw_set_transform_matrix(get_transform() * text_xform)
 			var val := ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(0, j)).y
+			var str_to_draw := "%*.*f" % [0, step_decimals(val), snappedf(val, 0.1)]
 			draw_string(
-				font,
-				Vector2(),
-				str(snappedf(val, 0.1)),
-				HORIZONTAL_ALIGNMENT_LEFT,
-				-1,
-				Themes.get_font_size()
+				font, Vector2(), str_to_draw, HORIZONTAL_ALIGNMENT_LEFT, -1, Themes.get_font_size()
 			)
 			draw_set_transform_matrix(get_transform())
 		else:

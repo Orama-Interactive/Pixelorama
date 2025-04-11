@@ -491,6 +491,11 @@ func copy_frames(
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
 				new_cel.offset = src_cel.offset
+				new_cel.place_only_mode = src_cel.place_only_mode
+				new_cel.tile_size = src_cel.tile_size
+				new_cel.tile_shape = src_cel.tile_shape
+				new_cel.tile_layout = src_cel.tile_layout
+				new_cel.tile_offset_axis = src_cel.tile_offset_axis
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -921,6 +926,11 @@ func _on_CloneLayer_pressed() -> void:
 		var cl_layer: BaseLayer
 		if src_layer is LayerTileMap:
 			cl_layer = LayerTileMap.new(project, src_layer.tileset)
+			cl_layer.place_only_mode = src_layer.place_only_mode
+			cl_layer.tile_size = src_layer.tile_size
+			cl_layer.tile_shape = src_layer.tile_shape
+			cl_layer.tile_layout = src_layer.tile_layout
+			cl_layer.tile_offset_axis = src_layer.tile_offset_axis
 		else:
 			cl_layer = src_layer.get_script().new(project)
 			if src_layer is AudioLayer:
@@ -945,6 +955,11 @@ func _on_CloneLayer_pressed() -> void:
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
 				new_cel.offset = src_cel.offset
+				new_cel.place_only_mode = src_cel.place_only_mode
+				new_cel.tile_size = src_cel.tile_size
+				new_cel.tile_shape = src_cel.tile_shape
+				new_cel.tile_layout = src_cel.tile_layout
+				new_cel.tile_offset_axis = src_cel.tile_offset_axis
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -1130,7 +1145,7 @@ func _on_MergeDownLayer_pressed() -> void:
 			var redo_data := {}
 			if bottom_cel is CelTileMap:
 				(bottom_cel as CelTileMap).serialize_undo_data_source_image(
-					new_bottom_image, redo_data, undo_data
+					new_bottom_image, redo_data, undo_data, Vector2i.ZERO, true
 				)
 			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
 			bottom_image.add_data_to_dictionary(undo_data)
@@ -1208,15 +1223,22 @@ func _toggle_layer_buttons() -> void:
 		move_down_layer,
 		project.current_layer == child_count and not is_instance_valid(layer.parent)
 	)
+	var below_layer: BaseLayer = null
+	if project.current_layer - 1 >= 0:
+		below_layer = project.layers[project.current_layer - 1]
+	var is_place_only_tilemap := (
+		below_layer is LayerTileMap and (below_layer as LayerTileMap).place_only_mode
+	)
 	Global.disable_button(
 		merge_down_layer,
 		(
 			project.current_layer == child_count
 			or layer is GroupLayer
 			or layer is AudioLayer
-			or project.layers[project.current_layer - 1] is GroupLayer
-			or project.layers[project.current_layer - 1] is Layer3D
-			or project.layers[project.current_layer - 1] is AudioLayer
+			or is_place_only_tilemap
+			or below_layer is GroupLayer
+			or below_layer is Layer3D
+			or below_layer is AudioLayer
 		)
 	)
 	Global.disable_button(layer_fx, layer is AudioLayer)

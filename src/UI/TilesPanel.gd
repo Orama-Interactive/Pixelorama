@@ -92,12 +92,20 @@ func set_tileset(tileset: TileSetCustom) -> void:
 		return
 	if is_instance_valid(current_tileset) and current_tileset.updated.is_connected(_update_tileset):
 		current_tileset.updated.disconnect(_update_tileset)
+		current_tileset.tile_added.disconnect(_update_tileset_dummy_params)
+		current_tileset.tile_removed.disconnect(_update_tileset_dummy_params)
+		current_tileset.tile_replaced.disconnect(_update_tileset_dummy_params)
+		current_tileset.resized_content.disconnect(_call_update_brushes)
 	current_tileset = tileset
 	if (
 		is_instance_valid(current_tileset)
 		and not current_tileset.updated.is_connected(_update_tileset)
 	):
 		current_tileset.updated.connect(_update_tileset)
+		current_tileset.tile_added.connect(_update_tileset_dummy_params)
+		current_tileset.tile_removed.connect(_update_tileset_dummy_params)
+		current_tileset.tile_replaced.connect(_update_tileset_dummy_params)
+		current_tileset.resized_content.connect(_call_update_brushes)
 
 
 func update_tip() -> void:
@@ -116,10 +124,13 @@ func _on_cel_switched() -> void:
 		return
 	var cel := Global.current_project.get_current_cel() as CelTileMap
 	set_tileset(cel.tileset)
-	_update_tileset(cel, -1)
+	_update_tileset()
+	if cel.place_only_mode:
+		place_tiles.button_pressed = true
+	place_tiles.visible = not cel.place_only_mode
 
 
-func _update_tileset(_cel: BaseCel, _replace_index: int) -> void:
+func _update_tileset() -> void:
 	_clear_tile_buttons()
 	for tile_index in selected_tiles:
 		if tile_index >= current_tileset.tiles.size():
@@ -133,6 +144,10 @@ func _update_tileset(_cel: BaseCel, _replace_index: int) -> void:
 		if i in selected_tiles:
 			button.set_pressed_no_signal(true)
 		tile_button_container.add_child(button)
+
+
+func _update_tileset_dummy_params(_cel: BaseCel, _index: int) -> void:
+	_update_tileset()
 
 
 func _create_tile_button(texture: Texture2D, index: int) -> Button:
@@ -291,17 +306,32 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 		if tile_index_menu_popped == 0:
 			return
 		if selected_tile.can_be_removed():
-			var undo_data := current_tileset.serialize_undo_data()
-			current_tileset.tiles.remove_at(tile_index_menu_popped)
-			var redo_data := current_tileset.serialize_undo_data()
 			var project := Global.current_project
+			var tilemap_cels: Array[CelTileMap] = []
+			for cel in project.get_all_pixel_cels():
+				if cel is not CelTileMap:
+					continue
+				if cel.tileset == current_tileset:
+					tilemap_cels.append(cel)
+			var undo_data_tileset := current_tileset.serialize_undo_data()
+			var undo_data_tilemaps := {}
+			for cel in tilemap_cels:
+				undo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+			current_tileset.remove_tile_at_index(tile_index_menu_popped, null)
+			var redo_data_tileset := current_tileset.serialize_undo_data()
+			var redo_data_tilemaps := {}
+			for cel in tilemap_cels:
+				redo_data_tilemaps[cel] = cel.serialize_undo_data(true)
 			project.undo_redo.create_action("Delete tile")
 			project.undo_redo.add_do_method(
-				current_tileset.deserialize_undo_data.bind(redo_data, null)
+				current_tileset.deserialize_undo_data.bind(redo_data_tileset, null)
 			)
 			project.undo_redo.add_undo_method(
-				current_tileset.deserialize_undo_data.bind(undo_data, null)
+				current_tileset.deserialize_undo_data.bind(undo_data_tileset, null)
 			)
+			for cel in tilemap_cels:
+				cel.deserialize_undo_data(redo_data_tilemaps[cel], project.undo_redo, false)
+				cel.deserialize_undo_data(undo_data_tilemaps[cel], project.undo_redo, true)
 			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 			project.undo_redo.commit_action()

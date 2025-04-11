@@ -34,11 +34,8 @@ var layer_metadata_texture := ImageTexture.new()
 func _ready() -> void:
 	material.set_shader_parameter("layers", layer_texture_array)
 	material.set_shader_parameter("metadata", layer_metadata_texture)
-	Global.project_switched.connect(
-		func():
-			project_changed = true
-			queue_redraw()
-	)
+	Global.project_switched.connect(queue_redraw_all_layers)
+	Global.cel_switched.connect(queue_redraw_all_layers)
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE
@@ -101,6 +98,11 @@ func _input(event: InputEvent) -> void:
 	if sprite_changed_this_frame:
 		queue_redraw()
 		update_selected_cels_textures()
+
+
+func queue_redraw_all_layers() -> void:
+	project_changed = true
+	queue_redraw()
 
 
 func camera_zoom() -> void:

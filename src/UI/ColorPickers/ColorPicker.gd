@@ -109,7 +109,15 @@ func _on_color_picker_color_changed(color: Color) -> void:
 	# the color picker's UI.
 	color = Color(color.to_html())
 	_skip_color_picker_update = true
-	Tools.assign_color(color, Tools.picking_color_for)
+	# This was requested by Issue #54 on GitHub
+	# Do it here instead of in Tools.assign_color in order to ensure that the
+	# color picker's color value changes.
+	var c: Color = Tools._slots[Tools.picking_color_for].color
+	if color.a == 0:
+		if color.r != c.r or color.g != c.g or color.b != c.b:
+			color.a = 1
+			color_picker.color.a = 1
+	Tools.assign_color(color, Tools.picking_color_for, false)
 
 
 func _on_left_color_button_toggled(toggled_on: bool) -> void:

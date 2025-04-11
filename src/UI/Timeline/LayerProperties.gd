@@ -12,7 +12,13 @@ var layer_indices: PackedInt32Array
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
 @onready var ui_color_picker_button := $GridContainer/UIColorPickerButton as ColorPickerButton
 @onready var tileset_option_button := $GridContainer/TilesetOptionButton as OptionButton
+@onready var place_only_mode_check_button := $GridContainer/PlaceOnlyModeCheckButton as CheckButton
+@onready var tile_size_slider: ValueSliderV2 = $GridContainer/TileSizeSlider
+@onready var tile_shape_option_button: OptionButton = $GridContainer/TileShapeOptionButton
+@onready var tile_layout_option_button: OptionButton = $GridContainer/TileLayoutOptionButton
+@onready var tile_offset_axis_button: OptionButton = $GridContainer/TileOffsetAxisButton
 @onready var audio_file_dialog := $AudioFileDialog as FileDialog
+@onready var place_only_confirmation_dialog: ConfirmationDialog = $PlaceOnlyConfirmationDialog
 
 
 func _ready() -> void:
@@ -42,6 +48,9 @@ func _on_visibility_changed() -> void:
 		get_tree().set_group(&"VisualLayers", "visible", first_layer is not AudioLayer)
 		get_tree().set_group(&"TilemapLayers", "visible", first_layer is LayerTileMap)
 		get_tree().set_group(&"AudioLayers", "visible", first_layer is AudioLayer)
+		var place_only_tilemap: bool = first_layer is LayerTileMap and first_layer.place_only_mode
+		place_only_mode_check_button.disabled = place_only_tilemap
+		get_tree().set_group(&"TilemapLayersPlaceOnly", "visible", place_only_tilemap)
 		tileset_option_button.clear()
 		if first_layer is LayerTileMap:
 			for i in project.tilesets.size():
@@ -49,6 +58,11 @@ func _on_visibility_changed() -> void:
 				tileset_option_button.add_item(tileset.get_text_info(i))
 				if tileset == first_layer.tileset:
 					tileset_option_button.select(i)
+			place_only_mode_check_button.set_pressed_no_signal(first_layer.place_only_mode)
+			tile_size_slider.set_value_no_signal(first_layer.tile_size)
+			tile_shape_option_button.selected = first_layer.tile_shape
+			tile_layout_option_button.selected = first_layer.tile_layout
+			tile_offset_axis_button.selected = first_layer.tile_offset_axis
 	else:
 		layer_indices = []
 
@@ -155,8 +169,8 @@ func _on_tileset_option_button_item_selected(index: int) -> void:
 		if layer is not LayerTileMap:
 			continue
 		var previous_tileset := (layer as LayerTileMap).tileset
-		project.undo_redo.add_do_property(layer, "tileset", new_tileset)
-		project.undo_redo.add_undo_property(layer, "tileset", previous_tileset)
+		project.undo_redo.add_do_method(layer.set_tileset.bind(new_tileset))
+		project.undo_redo.add_undo_method(layer.set_tileset.bind(previous_tileset))
 		for frame in project.frames:
 			for i in frame.cels.size():
 				var cel := frame.cels[i]
@@ -200,3 +214,141 @@ func _on_audio_file_dialog_file_selected(path: String) -> void:
 		var layer := Global.current_project.layers[layer_index]
 		if layer is AudioLayer:
 			layer.audio = audio_stream
+
+
+func _on_place_only_mode_check_button_toggled(toggled_on: bool) -> void:
+	if not toggled_on:
+		return
+	place_only_mode_check_button.set_pressed_no_signal(false)
+	place_only_confirmation_dialog.popup_centered()
+
+
+func _on_place_only_confirmation_dialog_confirmed() -> void:
+	var project := Global.current_project
+	project.undos += 1
+	project.undo_redo.create_action("Set place-only mode")
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		project.undo_redo.add_do_property(layer, "place_only_mode", true)
+		project.undo_redo.add_undo_property(layer, "place_only_mode", layer.place_only_mode)
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					project.undo_redo.add_do_property(cel, "place_only_mode", true)
+					project.undo_redo.add_undo_property(cel, "place_only_mode", cel.place_only_mode)
+	place_only_mode_check_button.disabled = true
+	get_tree().set_group(&"TilemapLayersPlaceOnly", "visible", true)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(func(): Global.cel_switched.emit())
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(func(): Global.cel_switched.emit())
+	project.undo_redo.commit_action()
+	place_only_mode_check_button.set_pressed_no_signal(true)
+
+
+func _on_tile_size_slider_value_changed(value: Vector2) -> void:
+	var project := Global.current_project
+	project.undos += 1
+	project.undo_redo.create_action("Change tilemap settings")
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		project.undo_redo.add_do_property(layer, "tile_size", value)
+		project.undo_redo.add_undo_property(layer, "tile_size", layer.tile_size)
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					project.undo_redo.add_do_property(cel, "tile_size", value)
+					project.undo_redo.add_undo_property(cel, "tile_size", cel.tile_size)
+
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.commit_action()
+
+
+func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> void:
+	var selected_id := tile_shape_option_button.get_item_id(index)
+	var project := Global.current_project
+	project.undos += 1
+	project.undo_redo.create_action("Change tilemap settings")
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		project.undo_redo.add_do_property(layer, "tile_shape", selected_id)
+		project.undo_redo.add_undo_property(layer, "tile_shape", layer.tile_shape)
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					project.undo_redo.add_do_property(cel, "tile_shape", selected_id)
+					project.undo_redo.add_undo_property(cel, "tile_shape", cel.tile_shape)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.commit_action()
+
+
+func _on_tile_layout_option_button_item_selected(index: TileSet.TileLayout) -> void:
+	var project := Global.current_project
+	project.undos += 1
+	project.undo_redo.create_action("Change tilemap settings")
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		project.undo_redo.add_do_property(layer, "tile_layout", index)
+		project.undo_redo.add_undo_property(layer, "tile_layout", layer.tile_layout)
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					project.undo_redo.add_do_property(cel, "tile_layout", index)
+					project.undo_redo.add_undo_property(cel, "tile_layout", cel.tile_layout)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.commit_action()
+
+
+func _on_tile_offset_axis_button_item_selected(index: TileSet.TileOffsetAxis) -> void:
+	var selected_id := tile_offset_axis_button.get_item_id(index)
+	var project := Global.current_project
+	project.undos += 1
+	project.undo_redo.create_action("Change tilemap settings")
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+		if layer is not LayerTileMap:
+			continue
+		project.undo_redo.add_do_property(layer, "tile_offset_axis", selected_id)
+		project.undo_redo.add_undo_property(layer, "tile_offset_axis", layer.tile_offset_axis)
+		for frame in project.frames:
+			for i in frame.cels.size():
+				var cel := frame.cels[i]
+				if cel is CelTileMap and i == layer_index:
+					project.undo_redo.add_do_property(cel, "tile_offset_axis", selected_id)
+					project.undo_redo.add_undo_property(
+						cel, "tile_offset_axis", cel.tile_offset_axis
+					)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.commit_action()

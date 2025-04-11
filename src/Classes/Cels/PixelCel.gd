@@ -20,7 +20,7 @@ func image_changed(value: ImageExtended) -> void:
 		image_texture.set_image(image)
 
 
-func get_content() -> ImageExtended:
+func get_content() -> Variant:
 	return image
 
 
@@ -47,7 +47,7 @@ func create_empty_content() -> ImageExtended:
 	return new_image
 
 
-func copy_content() -> ImageExtended:
+func copy_content() -> Variant:
 	var tmp_image := Image.create_from_data(
 		image.get_width(), image.get_height(), false, image.get_format(), image.get_data()
 	)
