@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-11 21:31\n"
+"PO-Revision-Date: 2025-04-12 11:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1157,7 +1157,7 @@ msgstr "Espelhar"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Cortar"
 
 msgid "Transition size:"
 msgstr "Tamanho da transição:"
@@ -1166,7 +1166,7 @@ msgid "Center:"
 msgstr "Centro:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Padrão de dithering:"
 
 msgid "Type:"
 msgstr "Tipo:"
@@ -1196,56 +1196,56 @@ msgstr "Valor:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Ajustar Brilho/Contraste"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Brilho:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "Contraste:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "Valor do vermelho:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "Valor do verde:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Valor do azul:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Tonalidade:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Fator da tonalidade:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Curvas de Cor"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Canal:"
 
 msgid "Red"
-msgstr ""
+msgstr "Vermelho"
 
 msgid "Green"
-msgstr ""
+msgstr "Verde"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Presets"
-msgstr ""
+msgstr "Predefinições"
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -1267,23 +1267,23 @@ msgstr "Passos:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
-msgstr ""
+msgstr "Paletizar"
 
 #. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
-msgstr ""
+msgstr "Pixelizar"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Posterizar"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Níveis de posterização:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Intensidade de dither:"
 
 msgid "View Splash Screen"
 msgstr "Ver o ecrã inicial"
@@ -1296,7 +1296,7 @@ msgstr "Tracker de Problemas"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Abrir Pasta de Dados do Editor"
 
 msgid "Changelog"
 msgstr "Atualizações"
@@ -1306,7 +1306,7 @@ msgstr "Sobre Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Apoie o Desenvolvimento do Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - Pixeliza os teus sonhos!"
@@ -1322,7 +1322,7 @@ msgstr "Website"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Código Fonte"
 
 msgid "Donate"
 msgstr "Doar"
@@ -1345,7 +1345,7 @@ msgstr "Licenças"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "Licença"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
