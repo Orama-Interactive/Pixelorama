@@ -169,10 +169,8 @@ func draw_move(pos: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
-	if (
-		_current_state == SingleState.MIDDLE_A
-		or _current_state == SingleState.MIDDLE_B
-	):  # we still need preview when curve is in SINGLE mode.
+	# we still need bezier preview when curve is in SINGLE mode.
+	if _current_state == SingleState.MIDDLE_A or _current_state == SingleState.MIDDLE_B:
 		_editing_bezier = true
 	else:
 		_editing_bezier = false
