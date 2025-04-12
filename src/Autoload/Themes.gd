@@ -43,6 +43,7 @@ func remove_theme(theme: Theme) -> void:
 func change_theme(id: int) -> void:
 	theme_index = id
 	var theme := themes[id]
+	Global.theme_font_index = Global.theme_font_index  # Trigger the setter
 	if theme.default_font != Global.theme_font:
 		theme.default_font = Global.theme_font
 	theme.default_font_size = Global.font_size
