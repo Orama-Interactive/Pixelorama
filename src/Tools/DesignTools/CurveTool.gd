@@ -112,9 +112,21 @@ func _input(event: InputEvent) -> void:
 					_editing_out_control_point = true
 				elif event.is_action_released("shape_perfect"):
 					_editing_out_control_point = false
-				if event.is_action_pressed("change_tool_mode"):  # Control removes the last added point
-					if _curve.point_count > 1:
-						_curve.remove_point(_curve.point_count - 1)
+			if event.is_action_pressed("change_tool_mode"):  # Control removes the last added point
+				if _curve.point_count > 1:
+					match _current_state:
+						SingleState.START:  # Point removed in CHAINED mode
+							_curve.remove_point(_curve.point_count - 1)
+						SingleState.MIDDLE_A:  # End point is to be removed in SINGLE mode
+							_curve.remove_point(_curve.point_count - 1)
+							_curve.set_point_out(0, Vector2.ZERO)
+							_editing_bezier = false
+							_current_state -= 1
+						SingleState.MIDDLE_B:  # Bezier curvature is to be reset in SINGLE mode
+							_curve.set_point_out(
+								0, _last_mouse_position - _curve.get_point_position(0)
+							)
+							_current_state -= 1
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -126,6 +138,7 @@ func draw_start(pos: Vector2i) -> void:
 		_picking_color = true
 		_pick_color(pos)
 		return
+	_picking_color = false  # fixes _picking_color being true indefinitely after we pick color
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 	if !_drawing:
@@ -156,7 +169,13 @@ func draw_move(pos: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
-	_editing_bezier = false
+	if (
+		_current_state == SingleState.MIDDLE_A
+		or _current_state == SingleState.MIDDLE_B
+	):  # we still need preview when curve is in SINGLE mode.
+		_editing_bezier = true
+	else:
+		_editing_bezier = false
 	if (
 		(_is_hovering_first_position(pos) and _curve.point_count > 1)
 		or _current_state == SingleState.READY
@@ -195,11 +214,15 @@ func draw_preview() -> void:
 		circle_center += Vector2.ONE * 0.5
 		draw_empty_circle(canvas, circle_center, circle_radius * 2.0, Color.BLACK)
 	if _editing_bezier:
-		var current_position := _curve.get_point_position(_curve.point_count - 1)
+		var current_point = _curve.point_count - 1
+		if _current_state == SingleState.MIDDLE_A:
+			# We need this when we are modifying curve of "first" point in SINGLE mode
+			current_point = 0
+		var current_position := _curve.get_point_position(current_point)
 		var start := current_position
-		if _curve.point_count > 1:
-			start = current_position + _curve.get_point_in(_curve.point_count - 1)
-		var end := current_position + _curve.get_point_out(_curve.point_count - 1)
+		if current_point > 0:
+			start = current_position + _curve.get_point_in(current_point)
+		var end := current_position + _curve.get_point_out(current_point)
 		if Global.mirror_view:  # This fixes previewing in mirror mode
 			current_position.x = Global.current_project.size.x - current_position.x - 1
 			start.x = Global.current_project.size.x - start.x - 1
