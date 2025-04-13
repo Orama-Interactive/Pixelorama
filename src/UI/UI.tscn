@@ -277,7 +277,7 @@ tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource("3")
 
-[node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas" groups=["CanvasRulers"]]
+[node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas" node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
 clip_contents = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -286,6 +286,8 @@ mouse_default_cursor_shape = 14
 theme_type_variation = &"RulerButton"
 action_mode = 0
 script = ExtResource("6")
+viewport_container = NodePath("../ViewportandVerticalRuler/SubViewportContainer")
+camera = NodePath("../ViewportandVerticalRuler/SubViewportContainer/SubViewport/Camera2D")
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas"]
 layout_mode = 2
@@ -293,7 +295,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler" groups=["CanvasRulers"]]
+[node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler" node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
 clip_contents = true
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
@@ -304,6 +306,8 @@ mouse_default_cursor_shape = 15
 theme_type_variation = &"RulerButton"
 action_mode = 0
 script = ExtResource("4")
+viewport_container = NodePath("../SubViewportContainer")
+camera = NodePath("../SubViewportContainer/SubViewport/Camera2D")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
 layout_mode = 2

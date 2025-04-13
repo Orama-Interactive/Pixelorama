@@ -2,6 +2,9 @@ extends Button
 
 const RULER_WIDTH := 16
 
+@export var viewport_container: SubViewportContainer
+@export var camera: CanvasCamera
+
 var major_subdivision := 2
 var minor_subdivision := 4
 
@@ -11,9 +14,10 @@ var last: Vector2
 
 func _ready() -> void:
 	Global.project_switched.connect(queue_redraw)
-	Global.camera.zoom_changed.connect(queue_redraw)
-	Global.camera.rotation_changed.connect(queue_redraw)
-	Global.camera.offset_changed.connect(queue_redraw)
+	viewport_container.resized.connect(queue_redraw)
+	camera.zoom_changed.connect(queue_redraw)
+	camera.rotation_changed.connect(queue_redraw)
+	camera.offset_changed.connect(queue_redraw)
 	await get_tree().process_frame
 	await get_tree().process_frame
 	queue_redraw()
