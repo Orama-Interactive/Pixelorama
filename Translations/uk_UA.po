@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2025-04-08 21:23\n"
+"PO-Revision-Date: 2025-04-13 22:42\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -2249,6 +2249,19 @@ msgstr "Збільшити масштаб"
 
 msgid "Zoom out"
 msgstr "Зменшити масштаб"
+
+#. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
+msgid "Single"
+msgstr ""
+
+#. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
+msgid "Chained"
+msgstr ""
+
+#. Tooltip of the curve tool's "mode" option button.
+msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
+"Single: Makes a single bezier curve, similar to Aseprite's curve tool."
+msgstr ""
 
 msgid "Options"
 msgstr "Параметри"
