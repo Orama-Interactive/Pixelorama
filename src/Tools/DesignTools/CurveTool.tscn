@@ -25,14 +25,15 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="BezierOptions" index="0"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Mode:"
 
 [node name="BezierMode" type="OptionButton" parent="BezierOptions" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Chained: Makes a chain of multiple bezier curves (Krita inspired).
-
-Single: Makes a single bezier curve (Asiprite inspired)"
+tooltip_text = "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.
+Single: Makes a single bezier curve, similar to Aseprite's curve tool."
+mouse_default_cursor_shape = 2
 alignment = 1
 selected = 0
 item_count = 2
