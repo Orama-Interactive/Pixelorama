@@ -875,7 +875,7 @@ func on_add_layer_list_id_pressed(id: int) -> void:
 				layer = PixelLayer.new(project)
 			Global.LayerTypes.GROUP:
 				layer = GroupLayer.new(project)
-        SteamManager.set_achievement("ACH_STRONGER_TOGETHER")
+				SteamManager.set_achievement("ACH_STRONGER_TOGETHER")
 			Global.LayerTypes.THREE_D:
 				layer = Layer3D.new(project)
 				SteamManager.set_achievement("ACH_3D_LAYER")
