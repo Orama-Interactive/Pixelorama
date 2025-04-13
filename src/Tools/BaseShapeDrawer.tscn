@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://n40lhf8hm7o1"]
 
-[ext_resource type="Script" path="res://src/Tools/BaseShapeDrawer.gd" id="1"]
+[ext_resource type="Script" uid="uid://bjy2qqur055ui" path="res://src/Tools/BaseShapeDrawer.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_7w1wt"]
 resource_name = "rotate"

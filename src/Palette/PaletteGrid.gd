@@ -23,10 +23,6 @@ func _ready() -> void:
 
 
 func set_palette(new_palette: Palette) -> void:
-	# Only display valid palette objects
-	if not new_palette:
-		return
-
 	current_palette = new_palette
 	grid_window_origin = Vector2.ZERO
 
@@ -68,6 +64,7 @@ func draw_palette() -> void:
 			var grid_index := i + grid_size.x * j
 			var index := convert_grid_index_to_palette_index(grid_index)
 			var swatch := swatches[grid_index]
+			swatch.color_index = index
 			swatch.show_left_highlight = Palettes.left_selected_color == index
 			swatch.show_right_highlight = Palettes.right_selected_color == index
 			var color = current_palette.get_color(index)
@@ -86,21 +83,39 @@ func scroll_palette(origin: Vector2i) -> void:
 
 ## Called when the color changes, either the left or the right, determined by [param mouse_button].
 ## If current palette has [param target_color] as a [Color], then select it.
-func find_and_select_color(target_color: Color, mouse_button: int) -> void:
-	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
-	for color_ind in swatches.size():
-		if (
-			target_color.is_equal_approx(swatches[color_ind].color)
-			or target_color.to_html() == swatches[color_ind].color.to_html()
-		):
-			var index := convert_grid_index_to_palette_index(color_ind)
-			select_swatch(mouse_button, index, old_index)
-			match mouse_button:
-				MOUSE_BUTTON_LEFT:
-					Palettes.left_selected_color = index
-				MOUSE_BUTTON_RIGHT:
-					Palettes.right_selected_color = index
+## This is helpful when we select color indirectly (e.g through colorpicker)
+func find_and_select_color(color_info: Dictionary, mouse_button: int) -> void:
+	var target_color: Color = color_info.get("color", Color(0, 0, 0, 0))
+	var palette_color_index: int = color_info.get("index", -1)
+	if not is_instance_valid(current_palette):
+		return
+	var selected_index := Palettes.current_palette_get_selected_color_index(mouse_button)
+	if palette_color_index != -1:  # If color has a defined index in palette then priortize index
+		if selected_index == palette_color_index:  # Index already selected
 			return
+		select_swatch(mouse_button, palette_color_index, selected_index)
+		match mouse_button:
+			MOUSE_BUTTON_LEFT:
+				Palettes.left_selected_color = palette_color_index
+			MOUSE_BUTTON_RIGHT:
+				Palettes.right_selected_color = palette_color_index
+		return
+	else:  # If it doesn't then select the first match in the palette
+		if get_swatch_color(selected_index) == target_color:  # Color already selected
+			return
+		for color_ind in swatches.size():
+			if (
+				target_color.is_equal_approx(swatches[color_ind].color)
+				or target_color.to_html() == swatches[color_ind].color.to_html()
+			):
+				var index := convert_grid_index_to_palette_index(color_ind)
+				select_swatch(mouse_button, index, selected_index)
+				match mouse_button:
+					MOUSE_BUTTON_LEFT:
+						Palettes.left_selected_color = index
+					MOUSE_BUTTON_RIGHT:
+						Palettes.right_selected_color = index
+				return
 	# Unselect swatches when tools color is changed
 	var swatch_to_unselect := -1
 	if mouse_button == MOUSE_BUTTON_LEFT:
@@ -115,6 +130,8 @@ func find_and_select_color(target_color: Color, mouse_button: int) -> void:
 
 ## Displays a left/right highlight over a swatch
 func select_swatch(mouse_button: int, palette_index: int, old_palette_index: int) -> void:
+	if not is_instance_valid(current_palette):
+		return
 	var index := convert_palette_index_to_grid_index(palette_index)
 	var old_index := convert_palette_index_to_grid_index(old_palette_index)
 	if index >= 0 and index < swatches.size():
@@ -159,16 +176,17 @@ func convert_palette_index_to_grid_index(palette_index: int) -> int:
 
 
 func resize_grid(new_rect_size: Vector2) -> void:
-	if not is_instance_valid(current_palette):
-		return
 	var grid_x: int = (
 		new_rect_size.x / (swatch_size.x + get("theme_override_constants/h_separation"))
 	)
 	var grid_y: int = (
 		new_rect_size.y / (swatch_size.y + get("theme_override_constants/v_separation"))
 	)
-	grid_size.x = mini(grid_x, current_palette.width)
-	grid_size.y = mini(grid_y, current_palette.height)
+	if is_instance_valid(current_palette):
+		grid_size.x = mini(grid_x, current_palette.width)
+		grid_size.y = mini(grid_y, current_palette.height)
+	else:
+		grid_size = Vector2i.ZERO
 	setup_swatches()
 	draw_palette()
 

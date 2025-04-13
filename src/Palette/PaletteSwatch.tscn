@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwrn3rwka2ssa"]
 
-[ext_resource type="Script" path="res://src/Palette/PaletteSwatch.gd" id="1"]
+[ext_resource type="Script" uid="uid://l6fh38cc26m5" path="res://src/Palette/PaletteSwatch.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2_hujmr"]
 
 [node name="PaletteSwatch" type="ColorRect"]

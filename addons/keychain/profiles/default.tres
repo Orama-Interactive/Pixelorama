@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShortcutProfile" load_steps=2 format=3 uid="uid://df04uev1epmmo"]
 
-[ext_resource type="Script" path="res://addons/keychain/ShortcutProfile.gd" id="1"]
+[ext_resource type="Script" uid="uid://bmtkqh6xvat7" path="res://addons/keychain/ShortcutProfile.gd" id="1"]
 
 [resource]
 script = ExtResource("1")

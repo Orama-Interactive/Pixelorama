@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dnwoi64rtj5vt"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/FrameButton.gd" id="1"]
+[ext_resource type="Script" uid="uid://cvjnh0mh4knis" path="res://src/UI/Timeline/FrameButton.gd" id="1"]
 
 [node name="FrameButton" type="Button"]
 offset_right = 12.0
@@ -11,6 +11,7 @@ theme_type_variation = &"LayerFrameButton"
 toggle_mode = true
 button_mask = 7
 text = "1"
+clip_text = true
 script = ExtResource("1")
 
 [node name="PopupMenu" type="PopupMenu" parent="."]

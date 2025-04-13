@@ -43,15 +43,20 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 		if flip_v.button_pressed:
 			selected.flip_y()
 		cel.blend_rect(selected, Rect2i(Vector2i.ZERO, selected.get_size()), rectangle.position)
+	if cel is ImageExtended:
+		cel.convert_rgb_to_indexed()
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
 	_flip_selection(project)
-
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
+	project.update_tilemaps(undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	if redo_data.has("outline_offset"):
 		project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
 		project.undo_redo.add_undo_property(
@@ -66,14 +71,10 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 
 func _get_undo_data(project: Project) -> Dictionary:
 	var affect_selection := selection_checkbox.button_pressed and project.has_selection
-	var data := {}
+	var data := super._get_undo_data(project)
 	if affect_selection:
 		data[project.selection_map] = project.selection_map.data
 		data["outline_offset"] = project.selection_offset
-
-	var images := _get_selected_draw_images(project)
-	for image in images:
-		data[image] = image.data
 	return data
 
 

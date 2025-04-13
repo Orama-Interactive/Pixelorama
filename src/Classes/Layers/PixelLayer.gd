@@ -28,8 +28,18 @@ func get_layer_type() -> int:
 
 
 func new_empty_cel() -> BaseCel:
-	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var format := project.get_image_format()
+	var is_indexed := project.is_indexed()
+	var image := ImageExtended.create_custom(
+		project.size.x, project.size.y, false, format, is_indexed
+	)
 	return PixelCel.new(image)
+
+
+func new_cel_from_image(image: Image) -> PixelCel:
+	var pixelorama_image := ImageExtended.new()
+	pixelorama_image.copy_from_custom(image, project.is_indexed())
+	return PixelCel.new(pixelorama_image)
 
 
 func can_layer_get_drawn() -> bool:

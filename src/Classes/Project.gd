@@ -8,6 +8,9 @@ signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
 signal timeline_updated
+signal fps_changed
+
+const INDEXED_MODE := Image.FORMAT_MAX + 1
 
 var name := "":
 	set(value):
@@ -21,6 +24,18 @@ var undo_redo := UndoRedo.new()
 var tiles: Tiles
 var undos := 0  ## The number of times we added undo properties
 var can_undo := true
+var color_mode: int = Image.FORMAT_RGBA8:
+	set(value):
+		if color_mode != value:
+			color_mode = value
+			for cel in get_all_pixel_cels():
+				var image := cel.get_image()
+				image.is_indexed = is_indexed()
+				if image.is_indexed:
+					image.resize_indices()
+					image.select_palette("", false)
+					image.convert_rgb_to_indexed()
+		Global.canvas.color_index.queue_redraw()
 var fill_color := Color(0)
 var has_changed := false:
 	set(value):
@@ -51,13 +66,20 @@ var brushes: Array[Image] = []
 var reference_images: Array[ReferenceImage] = []
 var reference_index: int = -1  # The currently selected index ReferenceImage
 var vanishing_points := []  ## Array of Vanishing Points
-var fps := 6.0
+var fps := 6.0:
+	set(value):
+		fps = value
+		fps_changed.emit()
 var user_data := ""  ## User defined data, set in the project properties.
 
 var x_symmetry_point: float
 var y_symmetry_point: float
+var xy_symmetry_point: Vector2
+var x_minus_y_symmetry_point: Vector2
 var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
+var diagonal_xy_symmetry_axis := SymmetryGuide.new()
+var diagonal_x_minus_y_symmetry_axis := SymmetryGuide.new()
 
 var selection_map := SelectionMap.new()
 ## This is useful for when the selection is outside of the canvas boundaries,
@@ -67,6 +89,7 @@ var selection_offset := Vector2i.ZERO:
 		selection_offset = value
 		Global.canvas.selection.marching_ants_outline.offset = selection_offset
 var has_selection := false
+var tilesets: Array[TileSetCustom]
 
 ## For every camera (currently there are 3)
 var cameras_rotation: PackedFloat32Array = [0.0, 0.0, 0.0]
@@ -98,16 +121,31 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1
-	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
+	xy_symmetry_point = Vector2i(size.y, size.x) - Vector2i.ONE
+	x_minus_y_symmetry_point = Vector2(maxi(size.x - size.y, 0), maxi(size.y - size.x, 0))
+	x_symmetry_axis.type = Guide.Types.HORIZONTAL
 	x_symmetry_axis.project = self
 	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point / 2 + 0.5))
 	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point / 2 + 0.5))
 	Global.canvas.add_child(x_symmetry_axis)
-	y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
+
+	y_symmetry_axis.type = Guide.Types.VERTICAL
 	y_symmetry_axis.project = self
 	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, -19999))
 	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, 19999))
 	Global.canvas.add_child(y_symmetry_axis)
+
+	diagonal_xy_symmetry_axis.type = Guide.Types.XY
+	diagonal_xy_symmetry_axis.project = self
+	diagonal_xy_symmetry_axis.add_point(Vector2(19999, -19999))
+	diagonal_xy_symmetry_axis.add_point(Vector2(-19999, 19999) + xy_symmetry_point + Vector2.ONE)
+	Global.canvas.add_child(diagonal_xy_symmetry_axis)
+
+	diagonal_x_minus_y_symmetry_axis.type = Guide.Types.X_MINUS_Y
+	diagonal_x_minus_y_symmetry_axis.project = self
+	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(-19999, -19999))
+	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(19999, 19999) + x_minus_y_symmetry_point)
+	Global.canvas.add_child(diagonal_x_minus_y_symmetry_axis)
 
 	if OS.get_name() == "Web":
 		export_directory_path = "user://"
@@ -177,9 +215,24 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
+## Returns a new [Image] of size [member size] and format [method get_image_format].
+func new_empty_image() -> Image:
+	return Image.create(size.x, size.y, false, get_image_format())
+
+
 ## Returns the currently selected [BaseCel].
 func get_current_cel() -> BaseCel:
 	return frames[current_frame].cels[current_layer]
+
+
+func get_image_format() -> Image.Format:
+	if color_mode == INDEXED_MODE:
+		return Image.FORMAT_RGBA8
+	return color_mode
+
+
+func is_indexed() -> bool:
+	return color_mode == INDEXED_MODE
 
 
 func selection_map_changed() -> void:
@@ -189,8 +242,8 @@ func selection_map_changed() -> void:
 		image_texture = ImageTexture.create_from_image(selection_map)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
 	Global.top_menu_container.edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
-	Global.top_menu_container.image_menu.set_item_disabled(
-		Global.ImageMenu.CROP_TO_SELECTION, !has_selection
+	Global.top_menu_container.project_menu.set_item_disabled(
+		Global.ProjectMenu.CROP_TO_SELECTION, !has_selection
 	)
 
 
@@ -248,6 +301,9 @@ func serialize() -> Dictionary:
 	var reference_image_data := []
 	for reference_image in reference_images:
 		reference_image_data.append(reference_image.serialize())
+	var tileset_data := []
+	for tileset in tilesets:
+		tileset_data.append(tileset.serialize())
 
 	var metadata := _serialize_metadata(self)
 
@@ -256,6 +312,7 @@ func serialize() -> Dictionary:
 		"pxo_version": ProjectSettings.get_setting("application/config/Pxo_Version"),
 		"size_x": size.x,
 		"size_y": size.y,
+		"color_mode": color_mode,
 		"tile_mode_x_basis_x": tiles.x_basis.x,
 		"tile_mode_x_basis_y": tiles.x_basis.y,
 		"tile_mode_y_basis_x": tiles.y_basis.x,
@@ -267,6 +324,7 @@ func serialize() -> Dictionary:
 		"frames": frame_data,
 		"brushes": brush_data,
 		"reference_images": reference_image_data,
+		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
@@ -289,13 +347,22 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		size.y = dict.size_y
 		tiles.tile_size = size
 		selection_map.crop(size.x, size.y)
+	color_mode = dict.get("color_mode", color_mode)
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
 	if dict.has("tile_mode_y_basis_x") and dict.has("tile_mode_y_basis_y"):
 		tiles.y_basis.x = dict.tile_mode_y_basis_x
 		tiles.y_basis.y = dict.tile_mode_y_basis_y
+	if dict.has("tilesets"):
+		for saved_tileset in dict["tilesets"]:
+			var tile_size = str_to_var("Vector2i" + saved_tileset.get("tile_size"))
+			var tile_shape = dict.get("tile_shape", TileSet.TILE_SHAPE_SQUARE)
+			var tileset := TileSetCustom.new(tile_size, "", tile_shape, false)
+			tileset.deserialize(saved_tileset)
+			tilesets.append(tileset)
 	if dict.has("frames") and dict.has("layers"):
+		var audio_layers := 0
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
 				Global.LayerTypes.PIXEL:
@@ -304,27 +371,32 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 					layers.append(GroupLayer.new(self))
 				Global.LayerTypes.THREE_D:
 					layers.append(Layer3D.new(self))
+				Global.LayerTypes.TILEMAP:
+					layers.append(LayerTileMap.new(self, null))
+				Global.LayerTypes.AUDIO:
+					var layer := AudioLayer.new(self)
+					var audio_path := "audio/%s" % audio_layers
+					if zip_reader.file_exists(audio_path):
+						var audio_data := zip_reader.read_file(audio_path)
+						var stream: AudioStream
+						if saved_layer.get("audio_type", "") == "AudioStreamMP3":
+							stream = AudioStreamMP3.new()
+							stream.data = audio_data
+						elif saved_layer.get("audio_type", "") == "AudioStreamWAV":
+							stream = AudioStreamWAV.load_from_buffer(audio_data)
+						layer.audio = stream
+					layers.append(layer)
+					audio_layers += 1
 
 		var frame_i := 0
 		for frame in dict.frames:
 			var cels: Array[BaseCel] = []
 			var cel_i := 0
 			for cel in frame.cels:
-				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
+				var layer := layers[cel_i]
+				match layer.get_layer_type():
 					Global.LayerTypes.PIXEL:
-						var image := Image.new()
-						if is_instance_valid(zip_reader):  # For pxo files saved in 1.0+
-							var image_data := zip_reader.read_file(
-								"image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
-							)
-							image = Image.create_from_data(
-								size.x, size.y, false, Image.FORMAT_RGBA8, image_data
-							)
-						elif is_instance_valid(file):  # For pxo files saved in 0.x
-							var buffer := file.get_buffer(size.x * size.y * 4)
-							image = Image.create_from_data(
-								size.x, size.y, false, Image.FORMAT_RGBA8, buffer
-							)
+						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
 						cels.append(PixelCel.new(image))
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new())
@@ -333,6 +405,14 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 							# Don't do anything with it, just read it so that the file can move on
 							file.get_buffer(size.x * size.y * 4)
 						cels.append(Cel3D.new(size, true))
+					Global.LayerTypes.TILEMAP:
+						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
+						var tileset_index = dict.layers[cel_i].tileset_index
+						var tileset := tilesets[tileset_index]
+						var new_cel := CelTileMap.new(tileset, image)
+						cels.append(new_cel)
+					Global.LayerTypes.AUDIO:
+						cels.append(AudioCel.new())
 				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
@@ -352,7 +432,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		# Parent references to other layers are created when deserializing
 		# a layer, so loop again after creating them:
 		for layer_i in dict.layers.size():
-			layers[layer_i].index = layer_i
+			var layer := layers[layer_i]
+			layer.index = layer_i
 			var layer_dict: Dictionary = dict.layers[layer_i]
 			# Ensure that loaded pxo files from v1.0-v1.0.3 have the correct
 			# blend mode, after the addition of the Erase mode in v1.0.4.
@@ -361,8 +442,14 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				if blend_mode >= BaseLayer.BlendModes.ERASE:
 					blend_mode += 1
 				layer_dict["blend_mode"] = blend_mode
-			layers[layer_i].deserialize(layer_dict)
-			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
+			layer.deserialize(layer_dict)
+			_deserialize_metadata(layer, dict.layers[layer_i])
+			if layer is LayerTileMap:
+				for frame in frames:
+					for cel_i in frame.cels.size():
+						if cel_i == layer_i:
+							# Call deferred to ensure the tileset has been loaded first
+							layer.pass_variables_to_cel.call_deferred(frame.cels[cel_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			var new_tag := AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to)
@@ -419,6 +506,37 @@ func _deserialize_metadata(object: Object, dict: Dictionary) -> void:
 	var metadata: Dictionary = dict["metadata"]
 	for meta in metadata.keys():
 		object.set_meta(meta, metadata[meta])
+
+
+## Called by [method deserialize], this method loads an image at
+## a given [param frame_i] frame index and a [param cel_i] cel index from a pxo file,
+## and returns it as an [ImageExtended].
+## If the pxo file is saved with Pixelorama version 1.0 and on,
+## the [param zip_reader] is used to load the image. Otherwise, [param file] is used.
+func _load_image_from_pxo(
+	frame_i: int, cel_i: int, zip_reader: ZIPReader, file: FileAccess
+) -> ImageExtended:
+	var image: Image
+	var indices_data := PackedByteArray()
+	if is_instance_valid(zip_reader):  # For pxo files saved in 1.0+
+		var path := "image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
+		var image_data := zip_reader.read_file(path)
+		image = Image.create_from_data(size.x, size.y, false, get_image_format(), image_data)
+		var indices_path := "image_data/frames/%s/indices_layer_%s" % [frame_i + 1, cel_i + 1]
+		if zip_reader.file_exists(indices_path):
+			indices_data = zip_reader.read_file(indices_path)
+	elif is_instance_valid(file):  # For pxo files saved in 0.x
+		var buffer := file.get_buffer(size.x * size.y * 4)
+		image = Image.create_from_data(size.x, size.y, false, get_image_format(), buffer)
+	var pixelorama_image := ImageExtended.new()
+	pixelorama_image.is_indexed = is_indexed()
+	if not indices_data.is_empty() and is_indexed():
+		pixelorama_image.indices_image = Image.create_from_data(
+			size.x, size.y, false, Image.FORMAT_R8, indices_data
+		)
+	pixelorama_image.copy_from(image)
+	pixelorama_image.select_palette("", true)
+	return pixelorama_image
 
 
 func _size_changed(value: Vector2i) -> void:
@@ -486,11 +604,6 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	order_layers()
 	Global.transparent_checker.update_rect()
 	Global.cel_switched.emit()
-	if get_current_cel() is Cel3D:
-		await RenderingServer.frame_post_draw
-		await RenderingServer.frame_post_draw
-	Global.canvas.update_all_layers = true
-	Global.canvas.queue_redraw()
 
 
 func _animation_tags_changed(value: Array[AnimationTag]) -> void:
@@ -552,12 +665,85 @@ func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
 	var result: BaseCel
 	var cel := frame.cels[0]
 	var i := 0
-	while cel is GroupCel and i < layers.size():
+	while (cel is GroupCel or cel is AudioCel) and i < layers.size():
 		cel = frame.cels[i]
 		i += 1
-	if not cel is GroupCel:
+	if cel is not GroupCel and cel is not AudioCel:
 		result = cel
 	return result
+
+
+## Returns an [Array] of type [PixelCel] containing all of the pixel cels of the project.
+func get_all_pixel_cels() -> Array[PixelCel]:
+	var cels: Array[PixelCel]
+	for frame in frames:
+		for cel in frame.cels:
+			if cel is PixelCel:
+				cels.append(cel)
+	return cels
+
+
+func get_all_audio_layers(only_valid_streams := true) -> Array[AudioLayer]:
+	var audio_layers: Array[AudioLayer]
+	for layer in layers:
+		if layer is AudioLayer:
+			if only_valid_streams:
+				if is_instance_valid(layer.audio):
+					audio_layers.append(layer)
+			else:
+				audio_layers.append(layer)
+	return audio_layers
+
+
+## Reads data from [param cels] and appends them to [param data],
+## to be used for the undo/redo system.
+## It adds data such as the images of [PixelCel]s,
+## and calls [method CelTileMap.serialize_undo_data] for [CelTileMap]s.
+func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
+	var cels_to_serialize := cels
+	if not TileSetPanel.placing_tiles:
+		cels_to_serialize = find_same_tileset_tilemap_cels(cels)
+	for cel in cels_to_serialize:
+		if not cel is PixelCel:
+			continue
+		var image := (cel as PixelCel).get_image()
+		image.add_data_to_dictionary(data)
+		if cel is CelTileMap:
+			data[cel] = (cel as CelTileMap).serialize_undo_data()
+
+
+## Loads data from [param redo_data] and param [undo_data],
+## to be used for the undo/redo system.
+## It calls [method Global.undo_redo_compress_images], and
+## [method CelTileMap.deserialize_undo_data] for [CelTileMap]s.
+func deserialize_cel_undo_data(redo_data: Dictionary, undo_data: Dictionary) -> void:
+	Global.undo_redo_compress_images(redo_data, undo_data, self)
+	for cel in redo_data:
+		if cel is CelTileMap:
+			(cel as CelTileMap).deserialize_undo_data(redo_data[cel], undo_redo, false)
+	for cel in undo_data:
+		if cel is CelTileMap:
+			(cel as CelTileMap).deserialize_undo_data(undo_data[cel], undo_redo, true)
+
+
+## Returns all [BaseCel]s in [param cels], and for every [CelTileMap],
+## this methods finds all other [CelTileMap]s that share the same [TileSetCustom],
+## and appends them in the array that is being returned by this method.
+func find_same_tileset_tilemap_cels(cels: Array[BaseCel]) -> Array[BaseCel]:
+	var tilemap_cels: Array[BaseCel]
+	var current_tilesets: Array[TileSetCustom]
+	for cel in cels:
+		tilemap_cels.append(cel)
+		if cel is not CelTileMap:
+			continue
+		current_tilesets.append((cel as CelTileMap).tileset)
+	for cel in get_all_pixel_cels():
+		if cel is not CelTileMap:
+			continue
+		if (cel as CelTileMap).tileset in current_tilesets:
+			if cel not in cels:
+				tilemap_cels.append(cel)
+	return tilemap_cels
 
 
 ## Re-order layers to take each cel's z-index into account. If all z-indexes are 0,
@@ -714,13 +900,16 @@ func move_layers(
 		removed_cels.append([])
 		for frame in frames:
 			removed_cels[i].append(frame.cels.pop_at(from_indices[i] - i))
-		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
+		if Global.current_project == self:
+			Global.animation_timeline.project_layer_removed(from_indices[i] - i)
 	for i in to_indices.size():
 		layers.insert(to_indices[i], removed_layers[i])
 		for f in frames.size():
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
-		Global.animation_timeline.project_layer_added(to_indices[i])
-	_update_layer_ui()
+		if Global.current_project == self:
+			Global.animation_timeline.project_layer_added(to_indices[i])
+	if Global.current_project == self:
+		_update_layer_ui()
 
 
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.
@@ -859,3 +1048,18 @@ func reorder_reference_image(from: int, to: int) -> void:
 	var ri: ReferenceImage = reference_images.pop_at(from)
 	reference_images.insert(to, ri)
 	Global.canvas.reference_image_container.move_child(ri, to)
+
+
+## Adds a new [param tileset] to [member tilesets].
+func add_tileset(tileset: TileSetCustom) -> void:
+	tilesets.append(tileset)
+
+
+## Loops through all cels in [param cel_dictionary], and for [CelTileMap]s,
+## it calls [method CelTileMap.update_tilemap].
+func update_tilemaps(
+	cel_dictionary: Dictionary, tile_editing_mode := TileSetPanel.tile_editing_mode
+) -> void:
+	for cel in cel_dictionary:
+		if cel is CelTileMap:
+			(cel as CelTileMap).update_tilemap(tile_editing_mode)

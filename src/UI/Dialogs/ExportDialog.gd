@@ -63,6 +63,11 @@ func _ready() -> void:
 	else:
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
 
+	# TODO: Remove the loop when https://github.com/godotengine/godot/issues/92848 gets fixed.
+	for dialog_child in path_dialog_popup.find_children("", "Window", true, false):
+		if dialog_child is Window:
+			dialog_child.always_on_top = path_dialog_popup.always_on_top
+
 
 func show_tab() -> void:
 	get_tree().call_group("ExportImageOptions", "hide")
@@ -231,6 +236,8 @@ func create_layer_list() -> void:
 			layer_name = tr("Group layer:")
 		elif layer is Layer3D:
 			layer_name = tr("3D layer:")
+		elif layer is LayerTileMap:
+			layer_name = tr("Tilemap layer:")
 		layer_name += " %s" % layer.get_layer_path()
 		layers_option_button.add_item(layer_name)
 

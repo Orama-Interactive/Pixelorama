@@ -102,7 +102,7 @@ func blend_layers(
 				include = false
 		var cel := frame.cels[ordered_index]
 		var cel_image: Image
-		if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
+		if layer.is_blender():
 			cel_image = (layer as GroupLayer).blend_children(frame)
 		else:
 			cel_image = layer.display_effects(cel)

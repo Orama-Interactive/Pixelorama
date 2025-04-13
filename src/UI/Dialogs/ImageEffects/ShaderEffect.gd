@@ -3,8 +3,7 @@ extends ImageEffect
 var shader: Shader
 var params := {}
 
-@onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
-@onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
+@onready var shader_params := $VBoxContainer/ShaderParams as VBoxContainer
 
 
 func _about_to_popup() -> void:
@@ -17,36 +16,22 @@ func _about_to_popup() -> void:
 	super._about_to_popup()
 
 
-func commit_action(cel: Image, project := Global.current_project) -> void:
-	if !shader:
-		return
+func set_nodes() -> void:
+	aspect_ratio_container = $VBoxContainer/AspectRatioContainer
+	preview = $VBoxContainer/AspectRatioContainer/Preview
 
+
+func commit_action(cel: Image, project := Global.current_project) -> void:
+	if not is_instance_valid(shader):
+		return
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
-
-
-func _on_ChooseShader_pressed() -> void:
-	if OS.get_name() == "Web":
-		Html5FileExchange.load_shader()
-	else:
-		$FileDialog.popup_centered(Vector2(300, 340))
-
-
-func _on_FileDialog_file_selected(path: String) -> void:
-	var shader_tmp = load(path)
-	if !shader_tmp is Shader:
-		return
-	change_shader(shader_tmp, path.get_file().get_basename())
-
-
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
 
 
 func change_shader(shader_tmp: Shader, shader_name: String) -> void:
 	shader = shader_tmp
 	preview.material.shader = shader_tmp
-	shader_loaded_label.text = tr("Shader loaded:") + " " + shader_name
+	title = shader_name
 	params.clear()
 	for child in shader_params.get_children():
 		child.queue_free()

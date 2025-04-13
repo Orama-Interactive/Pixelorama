@@ -1,30 +1,31 @@
-[gd_scene load_steps=54 format=3 uid="uid://c8dsi6ggkqa7a"]
+[gd_scene load_steps=55 format=3 uid="uid://c8dsi6ggkqa7a"]
 
 [ext_resource type="PackedScene" uid="uid://byu3rtoipuvoc" path="res://src/UI/ToolsPanel/Tools.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
-[ext_resource type="Script" path="res://src/UI/Tabs.gd" id="3"]
-[ext_resource type="Script" path="res://src/UI/Canvas/Rulers/VerticalRuler.gd" id="4"]
+[ext_resource type="Script" uid="uid://dta2gofr682t4" path="res://src/UI/Tabs.gd" id="3"]
+[ext_resource type="Script" uid="uid://cqx80356eubav" path="res://src/UI/Canvas/Rulers/VerticalRuler.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="5"]
-[ext_resource type="Script" path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" id="6"]
-[ext_resource type="Script" path="res://src/UI/Canvas/CanvasCamera.gd" id="7"]
-[ext_resource type="Shader" path="res://src/Shaders/Greyscale.gdshader" id="8"]
-[ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
+[ext_resource type="Script" uid="uid://bs5pld0j5yvsk" path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" id="6"]
+[ext_resource type="Script" uid="uid://ctqrsfsbx4kwk" path="res://src/UI/Canvas/CanvasCamera.gd" id="7"]
+[ext_resource type="Shader" uid="uid://bhgdieau4cr1b" path="res://src/Shaders/Greyscale.gdshader" id="8"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
 [ext_resource type="PackedScene" uid="uid://wo0hqxkst808" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://cxhs8qy5ilufv" path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://cap1bhavhi33g" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://dl6ook010q86o" path="res://src/UI/Recorder/Recorder.tscn" id="13"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="14"]
+[ext_resource type="Script" uid="uid://icucbtatip66" path="res://addons/dockable_container/layout.gd" id="14"]
 [ext_resource type="PackedScene" uid="uid://ccsihk3yxwei5" path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.tscn" id="16"]
 [ext_resource type="PackedScene" uid="uid://c3vcvhh4d8hd7" path="res://src/UI/ColorPickers/ColorPicker.tscn" id="17"]
 [ext_resource type="PackedScene" uid="uid://dbr6mulku2qju" path="res://src/UI/Timeline/AnimationTimeline.tscn" id="18"]
 [ext_resource type="PackedScene" uid="uid://ba24iuv55m4l3" path="res://src/UI/Canvas/Canvas.tscn" id="19"]
 [ext_resource type="PackedScene" uid="uid://wplk62pbgih4" path="res://src/Palette/PalettePanel.tscn" id="20"]
-[ext_resource type="Script" path="res://src/UI/ViewportContainer.gd" id="23"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="27"]
-[ext_resource type="Script" path="res://addons/dockable_container/dockable_container.gd" id="35"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="36"]
-[ext_resource type="Script" path="res://src/UI/UI.gd" id="37"]
-[ext_resource type="Shader" path="res://src/Shaders/UITransparency.gdshader" id="38"]
+[ext_resource type="Script" uid="uid://dqwin6fl5qqn0" path="res://src/UI/ViewportContainer.gd" id="23"]
+[ext_resource type="PackedScene" uid="uid://bfbragmmdwfbl" path="res://src/UI/TilesPanel.tscn" id="23_wyr78"]
+[ext_resource type="Script" uid="uid://bvvbi3x82xnut" path="res://addons/dockable_container/layout_split.gd" id="27"]
+[ext_resource type="Script" uid="uid://bfi1mm158ge5l" path="res://addons/dockable_container/dockable_container.gd" id="35"]
+[ext_resource type="Script" uid="uid://da67x3ua6ietw" path="res://addons/dockable_container/layout_panel.gd" id="36"]
+[ext_resource type="Script" uid="uid://bssab6bm6lntw" path="res://src/UI/UI.gd" id="37"]
+[ext_resource type="Shader" uid="uid://bwtsxcdoe2ps1" path="res://src/Shaders/UITransparency.gdshader" id="38"]
 
 [sub_resource type="ShaderMaterial" id="26"]
 shader = ExtResource("38")
@@ -36,7 +37,7 @@ shader_parameter/size = Vector2(100, 100)
 [sub_resource type="Resource" id="Resource_xnnnd"]
 resource_name = "Tabs"
 script = ExtResource("36")
-names = PackedStringArray("Tools", "Reference Images")
+names = PackedStringArray("Tools", "Reference Images", "Tiles")
 current_tab = 0
 
 [sub_resource type="Resource" id="Resource_34hle"]
@@ -207,6 +208,7 @@ hidden_tabs = {
 }
 windows = {}
 save_on_change = false
+layout_reset_path = ""
 
 [sub_resource type="ShaderMaterial" id="2"]
 shader = ExtResource("9")
@@ -399,6 +401,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Palettes" parent="DockableContainer" instance=ExtResource("20")]
+layout_mode = 2
+
+[node name="Tiles" parent="DockableContainer" instance=ExtResource("23_wyr78")]
+visible = false
 layout_mode = 2
 
 [node name="Reference Images" parent="DockableContainer" instance=ExtResource("11")]

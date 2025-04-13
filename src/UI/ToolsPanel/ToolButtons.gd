@@ -15,9 +15,14 @@ func _input(event: InputEvent) -> void:
 		return
 	if not Global.can_draw:
 		return
+	if get_tree().current_scene.is_writing_text:
+		return
 	for action in ["undo", "redo"]:
 		if event.is_action_pressed(action):
 			return
+
+	if event.is_action_pressed("swap_tools"):
+		Tools.swap_tools()
 
 	for tool_name in Tools.tools:  # Handle tool shortcuts
 		if not get_node(tool_name).visible:
@@ -35,7 +40,7 @@ func _input(event: InputEvent) -> void:
 				return
 
 
-func _on_Tool_pressed(tool_pressed: BaseButton) -> void:
+func _on_tool_pressed(tool_pressed: BaseButton) -> void:
 	var button := -1
 	button = MOUSE_BUTTON_LEFT if Input.is_action_just_released("left_mouse") else button
 	button = (

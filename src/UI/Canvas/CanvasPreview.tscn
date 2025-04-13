@@ -1,13 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://c546tskdu53j1"]
 
-[ext_resource type="Script" path="res://src/UI/Canvas/CanvasPreview.gd" id="1"]
-[ext_resource type="Shader" path="res://src/Shaders/BlendLayers.gdshader" id="1_28j41"]
+[ext_resource type="Script" uid="uid://d0fky8xflhu6s" path="res://src/UI/Canvas/CanvasPreview.gd" id="1"]
+[ext_resource type="Shader" uid="uid://b3cj543ir4o23" path="res://src/Shaders/BlendLayers.gdshader" id="1_28j41"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_21d5l"]
 shader = ExtResource("1_28j41")
-shader_parameter/opacities = null
-shader_parameter/blend_modes = null
-shader_parameter/origins = null
+shader_parameter/origin_x_positive = true
+shader_parameter/origin_y_positive = true
 
 [node name="CanvasPreview" type="Node2D"]
 material = SubResource("ShaderMaterial_21d5l")

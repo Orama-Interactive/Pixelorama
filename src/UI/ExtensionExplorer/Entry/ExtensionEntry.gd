@@ -194,7 +194,7 @@ func _on_ProgressTimer_timeout() -> void:
 	update_progress()
 
 
-func _manage_enlarded_thumbnail_close() -> void:
+func _manage_enlarged_thumbnail_close() -> void:
 	enlarged_picture.get_parent().hide()
 
 

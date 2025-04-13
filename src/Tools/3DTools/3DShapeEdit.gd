@@ -8,7 +8,7 @@ var _has_been_dragged := false
 var _prev_mouse_pos := Vector2i.ZERO
 var _old_cel_image = null
 var _checker_update_qued := false
-var _object_names := {
+var _object_names: Dictionary[Cel3DObject.Type, String] = {
 	Cel3DObject.Type.BOX: "Box",
 	Cel3DObject.Type.SPHERE: "Sphere",
 	Cel3DObject.Type.CAPSULE: "Capsule",
@@ -33,7 +33,7 @@ var _object_names := {
 @onready var undo_redo_timer := $UndoRedoTimer as Timer
 @onready var load_model_dialog := $LoadModelDialog as FileDialog
 
-@onready var cel_properties := {
+@onready var cel_properties: Dictionary[NodePath, Control] = {
 	"camera:projection": $"%ProjectionOptionButton",
 	"camera:rotation_degrees": $"%CameraRotation",
 	"camera:fov": $"%CameraFOV",
@@ -42,7 +42,7 @@ var _object_names := {
 	"viewport:world_3d:environment:ambient_light_energy": $"%AmbientEnergy",
 }
 
-@onready var object_properties := {
+@onready var object_properties: Dictionary[NodePath, Control] = {
 	"visible": $"%VisibleCheckBox",
 	"position": $"%ObjectPosition",
 	"rotation_degrees": $"%ObjectRotation",
@@ -104,7 +104,7 @@ func _ready() -> void:
 		$"%MeshFont".add_item(font_name)
 	# Connect the signals of the cel property nodes
 	for prop in cel_properties:
-		var node: Control = cel_properties[prop]
+		var node := cel_properties[prop]
 		if node is ValueSliderV3:
 			node.value_changed.connect(_cel_property_vector3_changed.bind(prop))
 		elif node is Range:
@@ -338,15 +338,15 @@ func _selected_object(object: Cel3DObject) -> void:
 
 func _set_cel_node_values() -> void:
 	if _cel.camera.projection == Camera3D.PROJECTION_PERSPECTIVE:
-		_get_previous_node(cel_properties["camera:fov"]).visible = true
-		_get_previous_node(cel_properties["camera:size"]).visible = false
-		cel_properties["camera:fov"].visible = true
-		cel_properties["camera:size"].visible = false
+		_get_previous_node(cel_properties[^"camera:fov"]).visible = true
+		_get_previous_node(cel_properties[^"camera:size"]).visible = false
+		cel_properties[^"camera:fov"].visible = true
+		cel_properties[^"camera:size"].visible = false
 	else:
-		_get_previous_node(cel_properties["camera:size"]).visible = true
-		_get_previous_node(cel_properties["camera:fov"]).visible = false
-		cel_properties["camera:size"].visible = true
-		cel_properties["camera:fov"].visible = false
+		_get_previous_node(cel_properties[^"camera:size"]).visible = true
+		_get_previous_node(cel_properties[^"camera:fov"]).visible = false
+		cel_properties[^"camera:size"].visible = true
+		cel_properties[^"camera:fov"].visible = false
 	_can_start_timer = false
 	_set_node_values(_cel, cel_properties)
 	_can_start_timer = true
@@ -361,7 +361,7 @@ func _set_object_node_values() -> void:
 	_can_start_timer = true
 
 
-func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
+func _set_node_values(to_edit: Object, properties: Dictionary[NodePath, Control]) -> void:
 	for prop in properties:
 		var property_path: String = prop
 		if property_path.ends_with("v2"):
@@ -369,7 +369,7 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 		var value = to_edit.get_indexed(property_path)
 		if value == null:
 			continue
-		if "scale" in prop:
+		if "scale" in property_path:
 			value *= 100
 		if value is Font:
 			var font_name: String = value.get_font_name()
@@ -378,7 +378,7 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 				var item_name: String = %MeshFont.get_item_text(i)
 				if font_name == item_name:
 					value = i
-		var node: Control = properties[prop]
+		var node := properties[prop]
 		if node is Range or node is ValueSliderV3 or node is ValueSliderV2:
 			if typeof(node.value) != typeof(value) and typeof(value) != TYPE_INT:
 				continue

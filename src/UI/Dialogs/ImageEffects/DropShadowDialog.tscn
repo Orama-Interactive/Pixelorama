@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://duse1w3q7whmm"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1"]
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.gd" id="2"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="3"]
+[ext_resource type="Script" uid="uid://dhfp3uc7ikgw3" path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3"]
 
 [node name="DropShadowDialog" instance=ExtResource("1")]
 title = "Drop Shadow"

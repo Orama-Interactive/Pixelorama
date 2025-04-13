@@ -2,39 +2,18 @@ extends AcceptDialog
 
 var artworks: Array[Artwork] = [
 	Artwork.new(
-		preload("res://assets/graphics/splash_screen/artworks/roroto.tres"),
+		preload("res://assets/graphics/splash_screen/artworks/roroto.png"),
 		"Roroto Sic",
 		"https://linktr.ee/Roroto_Sic",
 		Color.WHITE,
 		"Licensed under CC-BY-NC-ND, https://creativecommons.org/licenses/by-nc-nd/4.0/"
 	),
 	Artwork.new(
-		preload("res://assets/graphics/splash_screen/artworks/uch.png"),
-		"Uch",
-		"https://www.instagram.com/vs.pxl/",
+		preload("res://assets/graphics/splash_screen/artworks/bearsaidno.png"),
+		"BearSaidNo",
+		"https://bearsaidno.neocities.org/",
 		Color.WHITE,
-		"Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
-	),
-	Artwork.new(
-		preload("res://assets/graphics/splash_screen/artworks/wishdream.png"),
-		"Wishdream",
-		"https://x.com/WishdreamStar",
-		Color.BLACK,
-		"Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
-	),
-	Artwork.new(
-		preload("res://assets/graphics/splash_screen/artworks/nighters.png"),
-		"Nighters",
-		"https://www.instagram.com/_artei",
-		Color.WHITE,
-		"Licensed under CC BY 3.0, https://creativecommons.org/licenses/by/3.0/"
-	),
-	Artwork.new(
-		preload("res://assets/graphics/splash_screen/artworks/kalpar.png"),
-		"Kalpar",
-		"https://linktr.ee/kalpar",
-		Color.BLACK,
-		"Licensed under CC BY 3.0, https://creativecommons.org/licenses/by/3.0/"
+		"Licensed under MIT"
 	),
 ]
 

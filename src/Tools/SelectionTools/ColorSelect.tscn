@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqr6hr0p3ew6a"]
 
 [ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/BaseSelectionTool.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Tools/SelectionTools/ColorSelect.gd" id="2"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="3_44rxy"]
+[ext_resource type="Script" uid="uid://bngph1iacnggo" path="res://src/Tools/SelectionTools/ColorSelect.gd" id="2"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_44rxy"]
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bq7ibhm0txl5p"]
 
-[ext_resource type="Script" path="res://addons/keychain/ShortcutEdit.gd" id="1"]
+[ext_resource type="Script" uid="uid://dpciapd2x2va6" path="res://addons/keychain/ShortcutEdit.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://ca58ufal2ufd8" path="res://addons/keychain/assets/joy_button.svg" id="2"]
 [ext_resource type="Texture2D" uid="uid://c2s5rm4nec5yh" path="res://addons/keychain/assets/keyboard.svg" id="3"]
 [ext_resource type="Texture2D" uid="uid://bb6q6om3d08cm" path="res://addons/keychain/assets/joy_axis.svg" id="4"]

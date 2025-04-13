@@ -19,7 +19,7 @@ func draw_move(pos_i: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if !_move:
-		append_gap(_last_position, pos)
+		_draw_points.append_array(Geometry2D.bresenham_line(_last_position, pos))
 		_last_position = pos
 		_draw_points.append(Vector2i(pos))
 		_offset = pos
@@ -46,31 +46,14 @@ func draw_preview() -> void:
 				image.set_pixelv(draw_point, Color.WHITE)
 
 		# Handle mirroring
-		if Tools.horizontal_mirror:
-			for point in mirror_array(_draw_points, true, false):
-				var draw_point := point
-				if Global.mirror_view:  # This fixes previewing in mirror mode
-					draw_point.x = image.get_width() - draw_point.x - 1
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-					image.set_pixelv(draw_point, Color.WHITE)
-			if Tools.vertical_mirror:
-				for point in mirror_array(_draw_points, true, true):
-					var draw_point := point
-					if Global.mirror_view:  # This fixes previewing in mirror mode
-						draw_point.x = image.get_width() - draw_point.x - 1
-					if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-						image.set_pixelv(draw_point, Color.WHITE)
-		if Tools.vertical_mirror:
-			for point in mirror_array(_draw_points, false, true):
-				var draw_point := point
-				if Global.mirror_view:  # This fixes previewing in mirror mode
-					draw_point.x = image.get_width() - draw_point.x - 1
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
-					image.set_pixelv(draw_point, Color.WHITE)
+		for point in mirror_array(_draw_points):
+			var draw_point := point
+			if Global.mirror_view:  # This fixes previewing in mirror mode
+				draw_point.x = image.get_width() - draw_point.x - 1
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
+				image.set_pixelv(draw_point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		canvas.texture = texture
-	else:
-		canvas.texture = null
 
 
 func apply_selection(_position) -> void:
@@ -85,19 +68,10 @@ func apply_selection(_position) -> void:
 	if _draw_points.size() > 3:
 		if _intersect:
 			project.selection_map.clear()
-		lasso_selection(project.selection_map, previous_selection_map, _draw_points)
-
+		lasso_selection(_draw_points, project, previous_selection_map)
 		# Handle mirroring
-		if Tools.horizontal_mirror:
-			var mirror_x := mirror_array(_draw_points, true, false)
-			lasso_selection(project.selection_map, previous_selection_map, mirror_x)
-			if Tools.vertical_mirror:
-				var mirror_xy := mirror_array(_draw_points, true, true)
-				lasso_selection(project.selection_map, previous_selection_map, mirror_xy)
-		if Tools.vertical_mirror:
-			var mirror_y := mirror_array(_draw_points, false, true)
-			lasso_selection(project.selection_map, previous_selection_map, mirror_y)
-
+		var callable := lasso_selection.bind(project, previous_selection_map)
+		mirror_array(_draw_points, callable)
 		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:
@@ -106,22 +80,24 @@ func apply_selection(_position) -> void:
 	Global.canvas.selection.commit_undo("Select", undo_data)
 	_draw_points.clear()
 	_last_position = Vector2.INF
+	Global.canvas.previews_sprite.texture = null
 
 
 func lasso_selection(
-	selection_map: SelectionMap, previous_selection_map: SelectionMap, points: Array[Vector2i]
+	points: Array[Vector2i], project: Project, previous_selection_map: SelectionMap
 ) -> void:
+	var selection_map := project.selection_map
 	var selection_size := selection_map.get_size()
 	var bounding_rect := Rect2i(points[0], Vector2i.ZERO)
 	for point in points:
+		bounding_rect = bounding_rect.expand(point)
 		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:
 			continue
-		bounding_rect = bounding_rect.expand(point)
 		if _intersect:
 			if previous_selection_map.is_pixel_selected(point):
-				selection_map.select_pixel(point, true)
+				select_pixel(point, project, true)
 		else:
-			selection_map.select_pixel(point, !_subtract)
+			select_pixel(point, project, !_subtract)
 
 	var v := Vector2i()
 	for x in bounding_rect.size.x:
@@ -131,28 +107,16 @@ func lasso_selection(
 			if Geometry2D.is_point_in_polygon(v, points):
 				if _intersect:
 					if previous_selection_map.is_pixel_selected(v):
-						selection_map.select_pixel(v, true)
+						select_pixel(v, project, true)
 				else:
-					selection_map.select_pixel(v, !_subtract)
+					select_pixel(v, project, !_subtract)
 
 
-# Bresenham's Algorithm
-# Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func append_gap(start: Vector2i, end: Vector2i) -> void:
-	var dx := absi(end.x - start.x)
-	var dy := -absi(end.y - start.y)
-	var err := dx + dy
-	var e2 := err << 1
-	var sx := 1 if start.x < end.x else -1
-	var sy := 1 if start.y < end.y else -1
-	var x := start.x
-	var y := start.y
-	while !(x == end.x && y == end.y):
-		e2 = err << 1
-		if e2 >= dy:
-			err += dy
-			x += sx
-		if e2 <= dx:
-			err += dx
-			y += sy
-		_draw_points.append(Vector2i(x, y))
+func select_pixel(point: Vector2i, project: Project, select: bool) -> void:
+	if Tools.is_placing_tiles():
+		var tilemap := project.get_current_cel() as CelTileMap
+		var cell_position := tilemap.get_cell_position(point) * tilemap.get_tile_size()
+		select_tilemap_cell(tilemap, cell_position, project.selection_map, select)
+	var selection_size := project.selection_map.get_size()
+	if point.x >= 0 and point.y >= 0 and point.x < selection_size.x and point.y < selection_size.y:
+		project.selection_map.select_pixel(point, select)

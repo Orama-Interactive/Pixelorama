@@ -3,6 +3,9 @@ extends Node
 
 signal project_saved
 signal reference_image_imported
+signal shader_copied(file_path: String)
+
+const SHADERS_DIRECTORY := "user://shaders"
 
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
 var preview_dialogs := []  ## Array of preview dialogs
@@ -22,14 +25,18 @@ func _ready() -> void:
 	update_autosave()
 
 
-func handle_loading_file(file: String) -> void:
+func handle_loading_file(file: String, force_import_dialog_on_images := false) -> void:
 	file = file.replace("\\", "/")
 	var file_ext := file.get_extension().to_lower()
 	if file_ext == "pxo":  # Pixelorama project file
 		open_pxo_file(file)
 
 	elif file_ext == "tres":  # Godot resource file
-		return
+		var resource := load(file)
+		if resource is VisualShader:
+			var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
+			DirAccess.copy_absolute(file, new_path)
+			shader_copied.emit(new_path)
 	elif file_ext == "tscn":  # Godot scene file
 		return
 
@@ -39,13 +46,19 @@ func handle_loading_file(file: String) -> void:
 	elif file_ext in ["pck", "zip"]:  # Godot resource pack file
 		Global.control.get_node("Extensions").install_extension(file)
 
-	elif file_ext == "shader" or file_ext == "gdshader":  # Godot shader file
+	elif file_ext == "gdshader":  # Godot shader file
 		var shader := load(file)
 		if not shader is Shader:
 			return
-		var file_name: String = file.get_file().get_basename()
-		Global.control.find_child("ShaderEffect").change_shader(shader, file_name)
-
+		var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
+		DirAccess.copy_absolute(file, new_path)
+		shader_copied.emit(new_path)
+	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
+		open_audio_file(file)
+	elif file_ext == "ora":
+		open_ora_file(file)
+	elif file_ext == "ase" or file_ext == "aseprite":
+		AsepriteParser.open_aseprite_file(file)
 	else:  # Image files
 		# Attempt to load as APNG.
 		# Note that the APNG importer will *only* succeed for *animated* PNGs.
@@ -64,7 +77,7 @@ func handle_loading_file(file: String) -> void:
 			var file_name: String = file.get_file()
 			Global.popup_error(tr("Can't load file '%s'.") % [file_name])
 			return
-		handle_loading_image(file, image)
+		handle_loading_image(file, image, force_import_dialog_on_images)
 
 
 func add_import_option(import_name: StringName, import_scene: PackedScene) -> int:
@@ -108,8 +121,12 @@ func load_image_from_buffer(buffer: PackedByteArray) -> Image:
 	return image
 
 
-func handle_loading_image(file: String, image: Image) -> void:
-	if Global.projects.size() <= 1 and Global.current_project.is_empty():
+func handle_loading_image(file: String, image: Image, force_import_dialog := false) -> void:
+	if (
+		Global.projects.size() <= 1
+		and Global.current_project.is_empty()
+		and not force_import_dialog
+	):
 		open_image_as_new_tab(file, image)
 		return
 	var preview_dialog := preview_dialog_tscn.instantiate() as ImportPreviewDialog
@@ -148,9 +165,9 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 		var aimg_frame: AImgIOFrame = v
 		var frame := Frame.new()
 		if not frames_agree:
-			frame.duration = aimg_frame.duration * project.fps
+			frame.set_duration_in_seconds(aimg_frame.duration, project.fps)
 		var content := aimg_frame.content
-		content.convert(Image.FORMAT_RGBA8)
+		content.convert(project.get_image_format())
 		frame.cels.append(PixelCel.new(content, 1))
 		project.frames.append(frame)
 
@@ -185,8 +202,8 @@ func handle_loading_video(file: String) -> bool:
 			project_size.x = temp_image.get_width()
 		if temp_image.get_height() > project_size.y:
 			project_size.y = temp_image.get_height()
-	DirAccess.remove_absolute(Export.TEMP_PATH)
 	if images_to_import.size() == 0 or project_size == Vector2i.ZERO:
+		DirAccess.remove_absolute(Export.TEMP_PATH)
 		return false  # We didn't find any images, return
 	# If we found images, create a new project out of them
 	var new_project := Project.new([], file.get_basename().get_file(), project_size)
@@ -196,6 +213,14 @@ func handle_loading_video(file: String) -> bool:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
+	var output_audio_file := temp_path_real.path_join("audio.mp3")
+	# ffmpeg -y -i input_file -vn audio.mp3
+	var ffmpeg_execute_audio: PackedStringArray = ["-y", "-i", file, "-vn", output_audio_file]
+	OS.execute(Global.ffmpeg_path, ffmpeg_execute_audio, [], true)
+	if FileAccess.file_exists(output_audio_file):
+		open_audio_file(output_audio_file)
+		temp_dir.remove("audio.mp3")
+	DirAccess.remove_absolute(Export.TEMP_PATH)
 	return true
 
 
@@ -212,7 +237,7 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 	elif err != OK:
 		Global.popup_error(tr("File failed to open. Error code %s (%s)") % [err, error_string(err)])
 		return
-	else:
+	else:  # Parse the ZIP file
 		if empty_project:
 			new_project = Global.current_project
 			new_project.frames = []
@@ -258,6 +283,24 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 				new_project.tiles.tile_mask = image
 			else:
 				new_project.tiles.reset_mask()
+		if result.has("tilesets"):
+			for i in result.tilesets.size():
+				var tileset_dict: Dictionary = result.tilesets[i]
+				var tileset := new_project.tilesets[i]
+				var tile_size := tileset.tile_size
+				var tile_amount: int = tileset_dict.tile_amount
+				for j in tile_amount:
+					var image_data := zip_reader.read_file("tilesets/%s/%s" % [i, j])
+					var image := Image.create_from_data(
+						tile_size.x, tile_size.y, false, new_project.get_image_format(), image_data
+					)
+					if j > tileset.tiles.size() - 1:
+						tileset.add_tile(image, null, 0)
+					else:
+						tileset.tiles[j].image = image
+			for cel in new_project.get_all_pixel_cels():
+				if cel is CelTileMap:
+					cel.find_times_used_of_tiles()
 		zip_reader.close()
 	new_project.export_directory_path = path.get_base_dir()
 
@@ -389,17 +432,22 @@ func save_pxo_file(
 	var frame_index := 1
 	for frame in project.frames:
 		if not autosave and include_blended:
-			var blended := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			var blended := project.new_empty_image()
 			DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
 			zip_packer.start_file("image_data/final_images/%s" % frame_index)
 			zip_packer.write_file(blended.get_data())
 			zip_packer.close_file()
 		var cel_index := 1
 		for cel in frame.cels:
-			var cel_image := cel.get_image()
+			var cel_image := cel.get_image() as ImageExtended
 			if is_instance_valid(cel_image) and cel is PixelCel:
 				zip_packer.start_file("image_data/frames/%s/layer_%s" % [frame_index, cel_index])
 				zip_packer.write_file(cel_image.get_data())
+				zip_packer.close_file()
+				zip_packer.start_file(
+					"image_data/frames/%s/indices_layer_%s" % [frame_index, cel_index]
+				)
+				zip_packer.write_file(cel_image.indices_image.get_data())
 				zip_packer.close_file()
 			cel_index += 1
 		frame_index += 1
@@ -413,6 +461,28 @@ func save_pxo_file(
 		zip_packer.start_file("image_data/tile_map")
 		zip_packer.write_file(project.tiles.tile_mask.get_data())
 		zip_packer.close_file()
+	for i in project.tilesets.size():
+		var tileset := project.tilesets[i]
+		var tileset_path := "tilesets/%s" % i
+		for j in tileset.tiles.size():
+			var tile := tileset.tiles[j]
+			zip_packer.start_file(tileset_path.path_join(str(j)))
+			zip_packer.write_file(tile.image.get_data())
+			zip_packer.close_file()
+	var audio_layers := project.get_all_audio_layers()
+	for i in audio_layers.size():
+		var layer := audio_layers[i]
+		var audio_path := "audio/%s" % i
+		if layer.audio is AudioStreamMP3:
+			zip_packer.start_file(audio_path)
+			zip_packer.write_file(layer.audio.data)
+			zip_packer.close_file()
+		elif layer.audio is AudioStreamWAV:
+			var tmp_wav := FileAccess.create_temp(FileAccess.READ, "tmp", "wav")
+			layer.audio.save_to_wav(tmp_wav.get_path())
+			zip_packer.start_file(audio_path)
+			zip_packer.write_file(tmp_wav.get_buffer(tmp_wav.get_length()))
+			zip_packer.close_file()
 	zip_packer.close()
 
 	if temp_path != path:
@@ -429,7 +499,7 @@ func save_pxo_file(
 		DirAccess.remove_absolute(path)
 
 	if autosave:
-		Global.notification_label("File autosaved")
+		Global.notification_label("Backup saved")
 	else:
 		# First remove backup then set current save path
 		if project.has_changed:
@@ -457,12 +527,13 @@ func save_pxo_file(
 
 func open_image_as_new_tab(path: String, image: Image) -> void:
 	var project := Project.new([], path.get_file(), image.get_size())
-	project.layers.append(PixelLayer.new(project))
+	var layer := PixelLayer.new(project)
+	project.layers.append(layer)
 	Global.projects.append(project)
 
 	var frame := Frame.new()
-	image.convert(Image.FORMAT_RGBA8)
-	frame.cels.append(PixelCel.new(image, 1))
+	image.convert(project.get_image_format())
+	frame.cels.append(layer.new_cel_from_image(image))
 
 	project.frames.append(frame)
 	set_new_imported_tab(project, path)
@@ -475,15 +546,18 @@ func open_image_as_spritesheet_tab_smart(
 		frame_size = image.get_size()
 		sliced_rects.append(Rect2i(Vector2i.ZERO, frame_size))
 	var project := Project.new([], path.get_file(), frame_size)
-	project.layers.append(PixelLayer.new(project))
+	var layer := PixelLayer.new(project)
+	project.layers.append(layer)
 	Global.projects.append(project)
 	for rect in sliced_rects:
 		var offset: Vector2 = (0.5 * (frame_size - rect.size)).floor()
 		var frame := Frame.new()
-		var cropped_image := Image.create(frame_size.x, frame_size.y, false, Image.FORMAT_RGBA8)
-		image.convert(Image.FORMAT_RGBA8)
+		var cropped_image := Image.create(
+			frame_size.x, frame_size.y, false, project.get_image_format()
+		)
+		image.convert(project.get_image_format())
 		cropped_image.blit_rect(image, rect, offset)
-		frame.cels.append(PixelCel.new(cropped_image, 1))
+		frame.cels.append(layer.new_cel_from_image(cropped_image))
 		project.frames.append(frame)
 	set_new_imported_tab(project, path)
 
@@ -494,7 +568,8 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
 	var project := Project.new([], path.get_file(), Vector2(frame_width, frame_height))
-	project.layers.append(PixelLayer.new(project))
+	var layer := PixelLayer.new(project)
+	project.layers.append(layer)
 	Global.projects.append(project)
 	for yy in range(vert):
 		for xx in range(horiz):
@@ -503,8 +578,8 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
 			project.size = cropped_image.get_size()
-			cropped_image.convert(Image.FORMAT_RGBA8)
-			frame.cels.append(PixelCel.new(cropped_image, 1))
+			cropped_image.convert(project.get_image_format())
+			frame.cels.append(layer.new_cel_from_image(cropped_image))
 			project.frames.append(frame)
 	set_new_imported_tab(project, path)
 
@@ -562,12 +637,12 @@ func open_image_as_spritesheet_layer_smart(
 		if f >= start_frame and f < (start_frame + sliced_rects.size()):
 			# Slice spritesheet
 			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
-			image.convert(Image.FORMAT_RGBA8)
+			image.convert(project.get_image_format())
 			var cropped_image := Image.create(
-				project_width, project_height, false, Image.FORMAT_RGBA8
+				project_width, project_height, false, project.get_image_format()
 			)
 			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
-			cels.append(PixelCel.new(cropped_image))
+			cels.append(layer.new_cel_from_image(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
 
@@ -644,16 +719,16 @@ func open_image_as_spritesheet_layer(
 			# Slice spritesheet
 			var xx := (f - start_frame) % horizontal
 			var yy := (f - start_frame) / horizontal
-			image.convert(Image.FORMAT_RGBA8)
+			image.convert(project.get_image_format())
 			var cropped_image := Image.create(
-				project_width, project_height, false, Image.FORMAT_RGBA8
+				project_width, project_height, false, project.get_image_format()
 			)
 			cropped_image.blit_rect(
 				image,
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height),
 				Vector2i.ZERO
 			)
-			cels.append(PixelCel.new(cropped_image))
+			cels.append(layer.new_cel_from_image(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
 
@@ -687,13 +762,20 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	var cel := project.frames[frame_index].cels[layer_index]
 	if not cel is PixelCel:
 		return
-	image.convert(Image.FORMAT_RGBA8)
-	var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+	image.convert(project.get_image_format())
+	var cel_image := (cel as PixelCel).get_image()
+	var undo_data := {}
+	if cel is CelTileMap:
+		undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
+	cel_image.add_data_to_dictionary(undo_data)
 	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-	Global.undo_redo_compress_images(
-		{cel.image: cel_image.data}, {cel.image: cel.image.data}, project
-	)
-
+	cel_image.convert_rgb_to_indexed()
+	var redo_data := {}
+	if cel is CelTileMap:
+		(cel as CelTileMap).update_tilemap()
+		redo_data[cel] = (cel as CelTileMap).serialize_undo_data()
+	cel_image.add_data_to_dictionary(redo_data)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_property(project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.change_cel.bind(frame_index, layer_index))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -716,11 +798,14 @@ func open_image_as_new_frame(
 
 	var frame := Frame.new()
 	for i in project.layers.size():
-		if i == layer_index:
-			image.convert(Image.FORMAT_RGBA8)
-			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+		var layer := project.layers[i]
+		if i == layer_index and layer is PixelLayer:
+			image.convert(project.get_image_format())
+			var cel_image := Image.create(
+				project_width, project_height, false, project.get_image_format()
+			)
 			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-			frame.cels.append(PixelCel.new(cel_image, 1))
+			frame.cels.append(layer.new_cel_from_image(cel_image))
 		else:
 			frame.cels.append(project.layers[i].new_empty_cel())
 	if not undo:
@@ -753,10 +838,12 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	Global.current_project.undo_redo.create_action("Add Layer")
 	for i in project.frames.size():
 		if i == frame_index:
-			image.convert(Image.FORMAT_RGBA8)
-			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			image.convert(project.get_image_format())
+			var cel_image := Image.create(
+				project_width, project_height, false, project.get_image_format()
+			)
 			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-			cels.append(PixelCel.new(cel_image, 1))
+			cels.append(layer.new_cel_from_image(cel_image))
 		else:
 			cels.append(layer.new_empty_cel())
 
@@ -794,6 +881,59 @@ func import_reference_image_from_image(image: Image) -> void:
 	reference_image_imported.emit()
 
 
+func open_image_as_tileset(
+	path: String,
+	image: Image,
+	horiz: int,
+	vert: int,
+	tile_shape: TileSet.TileShape,
+	tile_offset_axis: TileSet.TileOffsetAxis,
+	project := Global.current_project
+) -> void:
+	image.convert(project.get_image_format())
+	horiz = mini(horiz, image.get_size().x)
+	vert = mini(vert, image.get_size().y)
+	var frame_width := image.get_size().x / horiz
+	var frame_height := image.get_size().y / vert
+	var tile_size := Vector2i(frame_width, frame_height)
+	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file(), tile_shape)
+	tileset.tile_offset_axis = tile_offset_axis
+	for yy in range(vert):
+		for xx in range(horiz):
+			var cropped_image := image.get_region(
+				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
+			)
+			@warning_ignore("int_as_enum_without_cast")
+			tileset.add_tile(cropped_image, null, 0)
+	project.tilesets.append(tileset)
+
+
+func open_image_as_tileset_smart(
+	path: String,
+	image: Image,
+	sliced_rects: Array[Rect2i],
+	tile_size: Vector2i,
+	tile_shape: TileSet.TileShape,
+	tile_offset_axis: TileSet.TileOffsetAxis,
+	project := Global.current_project
+) -> void:
+	image.convert(project.get_image_format())
+	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
+		tile_size = image.get_size()
+		sliced_rects.append(Rect2i(Vector2i.ZERO, tile_size))
+	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file(), tile_shape)
+	tileset.tile_offset_axis = tile_offset_axis
+	for rect in sliced_rects:
+		var offset: Vector2 = (0.5 * (tile_size - rect.size)).floor()
+		var cropped_image := Image.create(
+			tile_size.x, tile_size.y, false, project.get_image_format()
+		)
+		cropped_image.blit_rect(image, rect, offset)
+		@warning_ignore("int_as_enum_without_cast")
+		tileset.add_tile(cropped_image, null, 0)
+	project.tilesets.append(tileset)
+
+
 func set_new_imported_tab(project: Project, path: String) -> void:
 	var prev_project_empty := Global.current_project.is_empty()
 	var prev_project_pos := Global.current_project_index
@@ -815,6 +955,138 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 
 	if prev_project_empty:
 		Global.tabs.delete_tab(prev_project_pos)
+
+
+func open_audio_file(path: String) -> void:
+	var audio_stream: AudioStream
+	var file := FileAccess.open(path, FileAccess.READ)
+	if path.get_extension().to_lower() == "mp3":
+		audio_stream = AudioStreamMP3.new()
+		audio_stream.data = file.get_buffer(file.get_length())
+	elif path.get_extension().to_lower() == "wav":
+		audio_stream = AudioStreamWAV.load_from_buffer(file.get_buffer(file.get_length()))
+	if not is_instance_valid(audio_stream):
+		return
+	var project := Global.current_project
+	for layer in project.layers:
+		if layer is AudioLayer and not is_instance_valid(layer.audio):
+			layer.audio = audio_stream
+			return
+	var new_layer := AudioLayer.new(project, path.get_basename().get_file())
+	new_layer.audio = audio_stream
+	Global.animation_timeline.add_layer(new_layer, project)
+
+
+# Based on https://www.openraster.org/
+func open_ora_file(path: String) -> void:
+	var zip_reader := ZIPReader.new()
+	var err := zip_reader.open(path)
+	if err != OK:
+		print("Error opening ora file: ", error_string(err))
+		return
+	var data_xml := zip_reader.read_file("stack.xml")
+	var parser := XMLParser.new()
+	err = parser.open_buffer(data_xml)
+	if err != OK:
+		print("Error parsing XML from ora file: ", error_string(err))
+		zip_reader.close()
+		return
+	var new_project := Project.new([Frame.new()], path.get_file().get_basename())
+	var selected_layer: BaseLayer
+	var stacks_found := 0
+	var current_stack: Array[GroupLayer] = []
+	while parser.read() != ERR_FILE_EOF:
+		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			var node_name := parser.get_node_name()
+			if node_name == "image":
+				var width := parser.get_named_attribute_value_safe("w")
+				if not width.is_empty():
+					new_project.size.x = str_to_var(width)
+				var height := parser.get_named_attribute_value_safe("h")
+				if not height.is_empty():
+					new_project.size.y = str_to_var(height)
+			elif node_name == "layer" or node_name == "stack":
+				for prev_layer in new_project.layers:
+					prev_layer.index += 1
+				var layer_name := parser.get_named_attribute_value_safe("name")
+				var layer: BaseLayer
+				if node_name == "stack":
+					stacks_found += 1
+					if stacks_found == 1:
+						continue
+					layer = GroupLayer.new(new_project, layer_name)
+					if current_stack.size() > 0:
+						layer.parent = current_stack[-1]
+					current_stack.append(layer)
+				else:
+					layer = PixelLayer.new(new_project, layer_name)
+					if current_stack.size() > 0:
+						layer.parent = current_stack[-1]
+				new_project.layers.insert(0, layer)
+				if new_project.layers.size() == 1:
+					selected_layer = layer
+				layer.index = 0
+				layer.opacity = float(parser.get_named_attribute_value_safe("opacity"))
+				if parser.get_named_attribute_value_safe("selected") == "true":
+					selected_layer = layer
+				layer.visible = parser.get_named_attribute_value_safe("visibility") != "hidden"
+				layer.locked = parser.get_named_attribute_value_safe("edit-locked") == "true"
+				var blend_mode := parser.get_named_attribute_value_safe("composite-op")
+				match blend_mode:
+					"svg:multiply":
+						layer.blend_mode = BaseLayer.BlendModes.MULTIPLY
+					"svg:screen":
+						layer.blend_mode = BaseLayer.BlendModes.SCREEN
+					"svg:overlay":
+						layer.blend_mode = BaseLayer.BlendModes.OVERLAY
+					"svg:darken":
+						layer.blend_mode = BaseLayer.BlendModes.DARKEN
+					"svg:lighten":
+						layer.blend_mode = BaseLayer.BlendModes.LIGHTEN
+					"svg:color-dodge":
+						layer.blend_mode = BaseLayer.BlendModes.COLOR_DODGE
+					"svg:hard-light":
+						layer.blend_mode = BaseLayer.BlendModes.HARD_LIGHT
+					"svg:soft-light":
+						layer.blend_mode = BaseLayer.BlendModes.SOFT_LIGHT
+					"svg:difference":
+						layer.blend_mode = BaseLayer.BlendModes.DIFFERENCE
+					"svg:color":
+						layer.blend_mode = BaseLayer.BlendModes.COLOR
+					"svg:luminosity":
+						layer.blend_mode = BaseLayer.BlendModes.LUMINOSITY
+					"svg:hue":
+						layer.blend_mode = BaseLayer.BlendModes.HUE
+					"svg:saturation":
+						layer.blend_mode = BaseLayer.BlendModes.SATURATION
+					"svg:dst-out":
+						layer.blend_mode = BaseLayer.BlendModes.ERASE
+					_:
+						if "divide" in blend_mode:  # For example, krita:divide
+							layer.blend_mode = BaseLayer.BlendModes.DIVIDE
+				# Create cel
+				var cel := layer.new_empty_cel()
+				if cel is PixelCel:
+					var image_path := parser.get_named_attribute_value_safe("src")
+					var image_data := zip_reader.read_file(image_path)
+					var image := Image.new()
+					image.load_png_from_buffer(image_data)
+					var image_rect := Rect2i(Vector2i.ZERO, image.get_size())
+					var image_x := int(parser.get_named_attribute_value("x"))
+					var image_y := int(parser.get_named_attribute_value("y"))
+					cel.get_image().blit_rect(image, image_rect, Vector2i(image_x, image_y))
+				new_project.frames[0].cels.insert(0, cel)
+		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
+			var node_name := parser.get_node_name()
+			if node_name == "stack":
+				current_stack.pop_back()
+	zip_reader.close()
+	new_project.order_layers()
+	new_project.selected_cels.clear()
+	new_project.change_cel(0, new_project.layers.find(selected_layer))
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
 
 
 func update_autosave() -> void:

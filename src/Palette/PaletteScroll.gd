@@ -4,9 +4,9 @@ var scroll := Vector2i.ZERO
 var drag_started := false
 var drag_start_position := Vector2i.ZERO
 
-@onready var h_slider := %HScrollBar
-@onready var v_slider := %VScrollBar
-@onready var palette_grid := %PaletteGrid
+@onready var h_slider := %HScrollBar as HScrollBar
+@onready var v_slider := %VScrollBar as VScrollBar
+@onready var palette_grid := %PaletteGrid as PaletteGrid
 
 
 func _input(event: InputEvent) -> void:
@@ -17,16 +17,21 @@ func _input(event: InputEvent) -> void:
 
 
 func set_sliders(palette: Palette, origin: Vector2i) -> void:
-	if not is_instance_valid(palette):
-		return
-	h_slider.value = origin.x
-	h_slider.max_value = palette.width
-	h_slider.page = palette_grid.grid_size.x
+	if is_instance_valid(palette):
+		h_slider.value = origin.x
+		h_slider.max_value = palette.width
+		h_slider.page = palette_grid.grid_size.x
+		v_slider.value = origin.y
+		v_slider.max_value = palette.height
+		v_slider.page = palette_grid.grid_size.y
+	else:
+		h_slider.value = 0
+		h_slider.max_value = 0
+		h_slider.page = 0
+		v_slider.value = 0
+		v_slider.max_value = 0
+		v_slider.page = 0
 	h_slider.visible = false if h_slider.max_value <= palette_grid.grid_size.x else true
-
-	v_slider.value = origin.y
-	v_slider.max_value = palette.height
-	v_slider.page = palette_grid.grid_size.y
 	v_slider.visible = false if v_slider.max_value <= palette_grid.grid_size.y else true
 
 
@@ -58,7 +63,7 @@ func _on_PaletteGrid_gui_input(event: InputEvent) -> void:
 			drag_started = true
 			# Keeps position where the dragging started
 			drag_start_position = (
-				event.position + Vector2i(h_slider.value, v_slider.value) * palette_grid.swatch_size
+				event.position + Vector2(h_slider.value, v_slider.value) * palette_grid.swatch_size
 			)
 
 	if event is InputEventMouseMotion and drag_started:

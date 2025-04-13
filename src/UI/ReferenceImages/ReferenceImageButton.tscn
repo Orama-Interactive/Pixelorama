@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://by3300fom3plf"]
 
-[ext_resource type="Script" path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" id="1_nf0dd"]
+[ext_resource type="Script" uid="uid://4uxpn601pvm4" path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" id="1_nf0dd"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2_mf5ob"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytt38"]

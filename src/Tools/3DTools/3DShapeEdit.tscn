@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://cg7d36746on67"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Tools/3DTools/3DShapeEdit.gd" id="2"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="4"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="5"]
-[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="6"]
-[ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/ValueSliderV3.tscn" id="7"]
+[ext_resource type="Script" uid="uid://d3my38wgqe4hq" path="res://src/Tools/3DTools/3DShapeEdit.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="5"]
+[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="6"]
+[ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/Sliders/ValueSliderV3.tscn" id="7"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_8sqgw"]
 action = &"delete"
@@ -34,6 +34,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 1
 popup/item_0/text = "None"
+popup/item_0/id = 0
 
 [node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="2"]
 unique_name_in_owner = true
@@ -82,6 +83,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Perspective"
+popup/item_0/id = 0
 popup/item_1/text = "Orthogonal"
 popup/item_1/id = 1
 popup/item_2/text = "Frustum"
@@ -521,7 +523,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-selected = 0
 
 [node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
 layout_mode = 2
@@ -653,6 +654,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 4
 popup/item_0/text = "Left"
+popup/item_0/id = 0
 popup/item_1/text = "Center"
 popup/item_1/id = 1
 popup/item_2/text = "Right"
@@ -674,6 +676,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Top"
+popup/item_0/id = 0
 popup/item_1/text = "Center"
 popup/item_1/id = 1
 popup/item_2/text = "Bottom"

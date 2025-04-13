@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://clgu8wb5o6oup"]
 
-[ext_resource type="Script" path="res://src/UI/Dialogs/ExportDialog.gd" id="1"]
+[ext_resource type="Script" uid="uid://cdgury33i7cuo" path="res://src/UI/Dialogs/ExportDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
-[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4"]
+[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4"]
 
 [node name="ExportDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
@@ -82,11 +82,12 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 4
 popup/item_0/text = "Columns"
+popup/item_0/id = 0
 popup/item_1/text = "Rows"
 popup/item_1/id = 1
-popup/item_2/text = "Tags by column"
+popup/item_2/text = "Tags by row"
 popup/item_2/id = 2
-popup/item_3/text = "Tags by row"
+popup/item_3/text = "Tags by column"
 popup/item_3/id = 3
 
 [node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
@@ -115,6 +116,7 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "All frames"
+popup/item_0/id = 0
 popup/item_1/text = "Selected frames"
 popup/item_1/id = 1
 
@@ -128,6 +130,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "Visible layers"
+popup/item_0/id = 0
 popup/item_1/text = "Selected layers"
 popup/item_1/id = 1
 
@@ -143,6 +146,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Forward"
+popup/item_0/id = 0
 popup/item_1/text = "Backwards"
 popup/item_1/id = 1
 popup/item_2/text = "Ping-Pong"
@@ -277,6 +281,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 5
 popup/item_0/text = "Nearest"
+popup/item_0/id = 0
 popup/item_1/text = "Bilinear"
 popup/item_1/id = 1
 popup/item_2/text = "Cubic"
@@ -335,19 +340,23 @@ text = "Clip image content to selection"
 mode = 2
 title = "Open a Directory"
 size = Vector2i(675, 500)
+always_on_top = true
 ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="."]
+always_on_top = true
 dialog_text = "DirAccess path and file name are not valid!"
 
 [node name="FileExistsAlert" type="AcceptDialog" parent="."]
+always_on_top = true
 dialog_text = "File %s already exists. Overwrite?"
 
 [node name="ExportProgressBar" type="Window" parent="."]
 visible = false
 exclusive = true
+always_on_top = true
 
 [node name="MarginContainer" type="MarginContainer" parent="ExportProgressBar"]
 anchors_preset = 15

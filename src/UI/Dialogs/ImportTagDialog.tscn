@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://clsp16gq4sng3"]
 
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImportTagDialog.gd" id="1_5fb6k"]
+[ext_resource type="Script" uid="uid://d4aa2j1wururl" path="res://src/UI/Dialogs/ImportTagDialog.gd" id="1_5fb6k"]
 
 [node name="ImportTagDialog" type="ConfirmationDialog"]
 title = "Import Tag"

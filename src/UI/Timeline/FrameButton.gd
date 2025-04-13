@@ -14,13 +14,16 @@ func _ready() -> void:
 	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
 	custom_minimum_size.x = Global.animation_timeline.cel_size
 	text = str(frame + 1)
+	if frame >= 99:
+		alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	pressed.connect(_button_pressed)
 	mouse_entered.connect(_update_tooltip)
 
 
 func _update_tooltip() -> void:
-	var duration := Global.current_project.frames[frame].duration
-	var duration_sec := duration * (1.0 / Global.current_project.fps)
+	var frame_class := Global.current_project.frames[frame]
+	var duration := frame_class.duration
+	var duration_sec := frame_class.get_duration_in_seconds(Global.current_project.fps)
 	var duration_str := str(duration_sec)
 	if "." in duration_str:  # If its a decimal value
 		duration_str = "%.2f" % duration_sec  # Up to 2 decimal places

@@ -5,7 +5,9 @@ extends RefCounted
 signal done
 
 
-func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector2i) -> void:
+func generate_image(
+	img: Image, shader: Shader, params: Dictionary, size: Vector2i, respect_indexed := true
+) -> void:
 	# duplicate shader before modifying code to avoid affecting original resource
 	var resized_width := false
 	var resized_height := false
@@ -54,10 +56,15 @@ func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector
 	RenderingServer.free_rid(ci_rid)
 	RenderingServer.free_rid(mat_rid)
 	RenderingServer.free_rid(texture)
+	if not is_instance_valid(viewport_texture):  # Very rare bug
+		done.emit()
+		return
 	viewport_texture.convert(img.get_format())
 	img.copy_from(viewport_texture)
 	if resized_width:
 		img.crop(img.get_width() - 1, img.get_height())
 	if resized_height:
 		img.crop(img.get_width(), img.get_height() - 1)
+	if img is ImageExtended and respect_indexed:
+		img.convert_rgb_to_indexed()
 	done.emit()

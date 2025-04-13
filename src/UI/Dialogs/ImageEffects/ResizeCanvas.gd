@@ -8,56 +8,66 @@ var image := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 
 @onready var width_spinbox: SpinBox = $VBoxContainer/OptionsContainer/WidthValue
 @onready var height_spinbox: SpinBox = $VBoxContainer/OptionsContainer/HeightValue
-@onready var x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
-@onready var y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
+@onready var x_offset_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XOffsetSpinBox
+@onready var y_offset_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YOffsetSpinBox
 @onready var aspect_ratio_container: AspectRatioContainer = $VBoxContainer/AspectRatioContainer
 @onready var preview_rect: TextureRect = $VBoxContainer/AspectRatioContainer/Preview
 
 
-func _on_ResizeCanvas_about_to_show() -> void:
+func _on_about_to_popup() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	image.resize(Global.current_project.size.x, Global.current_project.size.y)
 	image.fill(Color(0.0, 0.0, 0.0, 0.0))
 	var frame := Global.current_project.frames[Global.current_project.current_frame]
 	DrawingAlgos.blend_layers(image, frame)
-	width_spinbox.value = Global.current_project.size.x
-	height_spinbox.value = Global.current_project.size.y
+	if width_spinbox.value == Global.current_project.size.x:
+		_on_width_value_changed(width_spinbox.value)
+	else:
+		width_spinbox.value = Global.current_project.size.x
+	if height_spinbox.value == Global.current_project.size.y:
+		_on_height_value_changed(height_spinbox.value)
+	else:
+		height_spinbox.value = Global.current_project.size.y
 	update_preview()
 
 
-func _on_ResizeCanvas_confirmed() -> void:
+func _on_confirmed() -> void:
 	DrawingAlgos.resize_canvas(width, height, offset_x, offset_y)
 
 
-func _on_WidthValue_value_changed(value: int) -> void:
+func _on_width_value_changed(value: int) -> void:
 	width = value
-	x_spinbox.min_value = mini(width - Global.current_project.size.x, 0)
-	x_spinbox.max_value = maxi(width - Global.current_project.size.x, 0)
-	x_spinbox.value = clampi(x_spinbox.value, x_spinbox.min_value, x_spinbox.max_value)
+	x_offset_spinbox.min_value = mini(width - Global.current_project.size.x, 0)
+	x_offset_spinbox.max_value = maxi(width - Global.current_project.size.x, 0)
+	x_offset_spinbox.value = clampi(
+		x_offset_spinbox.value, x_offset_spinbox.min_value, x_offset_spinbox.max_value
+	)
 	update_preview()
 
 
-func _on_HeightValue_value_changed(value: int) -> void:
+func _on_height_value_changed(value: int) -> void:
 	height = value
-	y_spinbox.min_value = mini(height - Global.current_project.size.y, 0)
-	y_spinbox.max_value = maxi(height - Global.current_project.size.y, 0)
-	y_spinbox.value = clampi(y_spinbox.value, y_spinbox.min_value, y_spinbox.max_value)
+	y_offset_spinbox.min_value = mini(height - Global.current_project.size.y, 0)
+	y_offset_spinbox.max_value = maxi(height - Global.current_project.size.y, 0)
+	y_offset_spinbox.value = clampi(
+		y_offset_spinbox.value, y_offset_spinbox.min_value, y_offset_spinbox.max_value
+	)
 	update_preview()
 
 
-func _on_XSpinBox_value_changed(value: int) -> void:
+func _on_x_offset_spin_box_value_changed(value: int) -> void:
 	offset_x = value
 	update_preview()
 
 
-func _on_YSpinBox_value_changed(value: int) -> void:
+func _on_y_offset_spin_box_value_changed(value: int) -> void:
 	offset_y = value
 	update_preview()
 
 
-func _on_CenterButton_pressed() -> void:
-	x_spinbox.value = (x_spinbox.min_value + x_spinbox.max_value) / 2
-	y_spinbox.value = (y_spinbox.min_value + y_spinbox.max_value) / 2
+func _on_center_button_pressed() -> void:
+	x_offset_spinbox.value = (x_offset_spinbox.min_value + x_offset_spinbox.max_value) / 2
+	y_offset_spinbox.value = (y_offset_spinbox.min_value + y_offset_spinbox.max_value) / 2
 
 
 func update_preview() -> void:

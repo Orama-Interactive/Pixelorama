@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://drlvhuchtk6if"]
 
-[ext_resource type="Script" path="res://addons/dockable_container/dockable_container.gd" id="1"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="2"]
-[ext_resource type="Script" path="res://addons/dockable_container/samples/TestScene.gd" id="4"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="4_yhgfb"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="5"]
+[ext_resource type="Script" uid="uid://bfi1mm158ge5l" path="res://addons/dockable_container/dockable_container.gd" id="1"]
+[ext_resource type="Script" uid="uid://icucbtatip66" path="res://addons/dockable_container/layout.gd" id="2"]
+[ext_resource type="Script" uid="uid://bfkod42iqrybd" path="res://addons/dockable_container/samples/TestScene.gd" id="4"]
+[ext_resource type="Script" uid="uid://bvvbi3x82xnut" path="res://addons/dockable_container/layout_split.gd" id="4_yhgfb"]
+[ext_resource type="Script" uid="uid://da67x3ua6ietw" path="res://addons/dockable_container/layout_panel.gd" id="5"]
 
 [sub_resource type="Resource" id="Resource_8aoc2"]
 resource_name = "Tabs"
@@ -33,6 +33,7 @@ root = SubResource("Resource_hl8y1")
 hidden_tabs = {}
 windows = {}
 save_on_change = false
+layout_reset_path = ""
 
 [sub_resource type="Resource" id="Resource_ntwfj"]
 resource_name = "Tabs"
@@ -75,6 +76,7 @@ root = SubResource("Resource_jhibs")
 hidden_tabs = {}
 windows = {}
 save_on_change = false
+layout_reset_path = ""
 
 [node name="SampleScene" type="VBoxContainer"]
 anchors_preset = 15

@@ -5,6 +5,7 @@ const SPLASH_DIALOG_SCENE_PATH := "res://src/UI/Dialogs/SplashDialog.tscn"
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
+var is_writing_text := false
 var changed_projects_on_quit: Array[Project]
 var cursor_image := preload("res://assets/graphics/cursor.png")
 ## Used to download an image when dragged and dropped directly from a browser into Pixelorama
@@ -104,7 +105,10 @@ some useful [SYSTEM OPTIONS] are:
 
 	static func set_output(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
-			project.file_name = next_arg.get_basename()
+			project.file_name = next_arg.get_file().get_basename()
+			var directory_path = next_arg.get_base_dir()
+			if directory_path != ".":
+				project.export_directory_path = directory_path
 			var extension := next_arg.get_extension()
 			project.file_format = Export.get_file_format_from_extension(extension)
 
@@ -165,6 +169,12 @@ func _init() -> void:
 		DirAccess.make_dir_recursive_absolute("user://backups")
 	Global.shrink = _get_auto_display_scale()
 	_handle_layout_files()
+	# Load dither matrix images.
+	var dither_matrices_path := "user://dither_matrices"
+	if DirAccess.dir_exists_absolute(dither_matrices_path):
+		for file_name in DirAccess.get_files_at(dither_matrices_path):
+			var file_path := dither_matrices_path.path_join(file_name)
+			ShaderLoader.load_dither_matrix_from_file(file_path)
 
 
 func _ready() -> void:
@@ -180,13 +190,6 @@ func _ready() -> void:
 	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
-
-	open_sprite_dialog.current_dir = Global.config_cache.get_value(
-		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
-	)
-	save_sprite_dialog.current_dir = Global.config_cache.get_value(
-		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
-	)
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
@@ -199,6 +202,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if is_writing_text and event is InputEventKey and is_instance_valid(Global.main_viewport):
+		Global.main_viewport.get_child(0).push_input(event)
 	left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 
@@ -209,8 +214,8 @@ func _input(event: InputEvent) -> void:
 
 func _project_switched() -> void:
 	if Global.current_project.export_directory_path != "":
-		open_sprite_dialog.current_path = Global.current_project.export_directory_path
-		save_sprite_dialog.current_path = Global.current_project.export_directory_path
+		open_sprite_dialog.current_dir = Global.current_project.export_directory_path
+		save_sprite_dialog.current_dir = Global.current_project.export_directory_path
 
 
 # Taken from https://github.com/godotengine/godot/blob/3.x/editor/editor_settings.cpp#L1474
@@ -237,11 +242,18 @@ func _handle_layout_files() -> void:
 	if files.size() == 0:
 		for layout in Global.default_layouts:
 			var file_name := layout.resource_path.get_basename().get_file() + ".tres"
-			ResourceSaver.save(layout, Global.LAYOUT_DIR.path_join(file_name))
+			var new_layout := layout.clone()
+			new_layout.layout_reset_path = layout.resource_path
+			ResourceSaver.save(new_layout, Global.LAYOUT_DIR.path_join(file_name))
 		files = dir.get_files()
 	for file in files:
 		var layout := ResourceLoader.load(Global.LAYOUT_DIR.path_join(file))
 		if layout is DockableLayout:
+			if layout.layout_reset_path.is_empty():
+				if file == "Default.tres":
+					layout.layout_reset_path = Global.default_layouts[0].resource_path
+				elif file == "Tallscreen.tres":
+					layout.layout_reset_path = Global.default_layouts[1].resource_path
 			Global.layouts.append(layout)
 			# Save the layout every time it changes
 			layout.save_on_change = true
@@ -257,8 +269,15 @@ func _setup_application_window_size() -> void:
 
 	if OS.get_name() == "Web":
 		return
+
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
+		# Restore the window configuration if the screen in cache is not available
+		if (
+			DisplayServer.get_screen_count()
+			< (Global.config_cache.get_value("window", "screen") + 1)
+		):
+			return
 		get_window().current_screen = Global.config_cache.get_value("window", "screen")
 	if Global.config_cache.has_section_key("window", "maximized"):
 		get_window().mode = (
@@ -421,6 +440,7 @@ func load_last_project() -> void:
 		# Check if file still exists on disk
 		var file_path = Global.config_cache.get_value("data", "last_project_path")
 		load_recent_project_file(file_path)
+		(func(): Global.cel_switched.emit()).call_deferred()
 
 
 func load_recent_project_file(path: String) -> void:
@@ -436,16 +456,16 @@ func load_recent_project_file(path: String) -> void:
 
 func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 	for path in paths:
-		OpenSave.handle_loading_file(path)
+		OpenSave.handle_loading_file(path, true)
 	save_sprite_dialog.current_dir = paths[0].get_base_dir()
 
 
 func show_save_dialog(project := Global.current_project) -> void:
 	Global.dialog_open(true, true)
 	if OS.get_name() == "Web":
-		var save_filename := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_sprite_html5.popup_centered()
-		save_filename.text = project.name
+		var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
+		save_filename_line_edit.text = project.name
 	else:
 		save_sprite_dialog.popup_centered()
 		save_sprite_dialog.get_line_edit().text = project.name
@@ -460,12 +480,15 @@ func _on_save_sprite_visibility_changed() -> void:
 		is_quitting_on_save = false
 
 
-func save_project(path: String) -> void:
+func save_project(path: String, through_dialog := true) -> void:
 	var project_to_save := Global.current_project
 	if is_quitting_on_save:
 		project_to_save = changed_projects_on_quit[0]
 	var include_blended := false
 	if OS.get_name() == "Web":
+		if through_dialog:
+			var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
+			project_to_save.name = save_filename_line_edit.text
 		var file_name := project_to_save.name + ".pxo"
 		path = "user://".path_join(file_name)
 		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
@@ -600,6 +623,7 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("window", "size", get_window().size)
 	Global.config_cache.set_value("view_menu", "draw_grid", Global.draw_grid)
 	Global.config_cache.set_value("view_menu", "draw_pixel_grid", Global.draw_pixel_grid)
+	Global.config_cache.set_value("view_menu", "show_pixel_indices", Global.show_pixel_indices)
 	Global.config_cache.set_value("view_menu", "show_rulers", Global.show_rulers)
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)

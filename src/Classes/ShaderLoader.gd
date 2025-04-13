@@ -1,9 +1,34 @@
 class_name ShaderLoader
 extends RefCounted
 
-const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/ValueSliderV2.tscn")
-const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/BasisSliders.tscn")
+const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV2.tscn")
+const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/Sliders/BasisSliders.tscn")
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
+const NOISE_GENERATOR := preload("res://src/UI/Nodes/NoiseGeneratorDialog.tscn")
+
+static var dither_matrices: Array[DitherMatrix] = [
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png"), "Bayer 2x2"),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer4.png"), "Bayer 4x4"),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer8.png"), "Bayer 8x8"),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer16.png"), "Bayer 16x16"),
+]
+
+
+class DitherMatrix:
+	var texture: Texture2D
+	var name: String
+
+	func _init(_texture: Texture2D, _name: String) -> void:
+		texture = _texture
+		name = _name
+
+
+static func load_dither_matrix_from_file(file_path: String) -> void:
+	var dither_image := Image.load_from_file(file_path)
+	if is_instance_valid(dither_image):
+		var dither_tex := ImageTexture.create_from_image(dither_image)
+		var dither_matrix := DitherMatrix.new(dither_tex, file_path.get_file().get_basename())
+		dither_matrices.append(dither_matrix)
 
 
 static func create_ui_for_shader_uniforms(
@@ -18,6 +43,10 @@ static func create_ui_for_shader_uniforms(
 	var uniform_data: PackedStringArray = []
 	var description: String = ""
 	var description_began := false
+	# A Dictionary used to group together nodes
+	# under the same group_uniform. Currently only used for CurveTextures.
+	var group_nodes: Dictionary[String, Control] = {}
+	var color_button_hbox: HBoxContainer = null  # Used for RGBA buttons, if they exist.
 	for line in code:
 		# Management of "end" tags
 		if line.begins_with("// (end DESCRIPTION)"):
@@ -26,7 +55,7 @@ static func create_ui_for_shader_uniforms(
 			description += "\n" + line.strip_edges()
 
 		# Detection of uniforms
-		if line.begins_with("uniform"):
+		if line.begins_with("uniform") or line.begins_with("group_uniforms"):
 			uniforms.append(line)
 		if line.begins_with("// uniform_data"):
 			uniform_data.append(line)
@@ -43,6 +72,7 @@ static func create_ui_for_shader_uniforms(
 			"Description:\n", description.replace("//", "").strip_edges()
 		)
 
+	var current_group := ""
 	for uniform in uniforms:
 		# Example uniform:
 		# uniform float parameter_name : hint_range(0, 255) = 100.0;
@@ -60,8 +90,14 @@ static func create_ui_for_shader_uniforms(
 			u_hint = u_hint.replace(";", "")
 
 		var u_init := u_left_side[0].split(" ")
+		var uniform_string := u_init[0]
+		if uniform_string == "group_uniforms":
+			current_group = u_init[1]
+			continue
 		var u_type := u_init[1]
 		var u_name := u_init[2]
+		if u_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
+			continue
 		# Find custom data of the uniform, if any exists
 		# Right now it only checks if a uniform should have another type of node
 		# Such as integers having OptionButtons
@@ -114,6 +150,7 @@ static func create_ui_for_shader_uniforms(
 				var min_value := 0.0
 				var max_value := 255.0
 				var step := 1.0
+				var value := 0.0
 				var range_values_array: PackedStringArray
 				if "hint_range" in u_hint:
 					var range_values: String = u_hint.replace("hint_range(", "")
@@ -135,7 +172,7 @@ static func create_ui_for_shader_uniforms(
 						step = 0.01
 
 					if u_value != "":
-						slider.value = float(u_value)
+						value = float(u_value)
 				else:
 					if range_values_array.size() >= 1:
 						min_value = int(range_values_array[0])
@@ -147,10 +184,11 @@ static func create_ui_for_shader_uniforms(
 						step = int(range_values_array[2])
 
 					if u_value != "":
-						slider.value = int(u_value)
+						value = int(u_value)
 				slider.min_value = min_value
 				slider.max_value = max_value
 				slider.step = step
+				slider.value = value
 				if params.has(u_name):
 					slider.value = params[u_name]
 				else:
@@ -169,6 +207,8 @@ static func create_ui_for_shader_uniforms(
 			slider.allow_greater = true
 			if u_type != "uvec2":
 				slider.allow_lesser = true
+				if u_type != "ivec2":
+					slider.step = 0.01
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = vector2
 			if params.has(u_name):
@@ -233,73 +273,185 @@ static func create_ui_for_shader_uniforms(
 					func(): _shader_update_palette_texture(palette, value_changed, u_name)
 				)
 				continue
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			if u_name.begins_with("gradient_"):
-				var gradient_edit := GRADIENT_EDIT_TSCN.instantiate() as GradientEditNode
-				gradient_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				if params.has(u_name) and params[u_name] is GradientTexture2D:
-					gradient_edit.set_gradient_texture(params[u_name])
-				else:
-					params[u_name] = gradient_edit.texture
-				# This needs to be call_deferred because GradientTexture2D gets updated next frame.
-				# Without this, the texture is purple.
-				value_changed.call_deferred(gradient_edit.texture, u_name)
-				gradient_edit.updated.connect(
-					func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
+			var create_label := true
+			if not current_group.is_empty():
+				if u_name.begins_with("curve_"):
+					create_label = false
+				if u_name.begins_with("gradient_"):
+					var group_gradient_str := current_group + "_gradient"
+					if group_nodes.has(group_gradient_str):
+						create_label = false
+			var hbox: HBoxContainer
+			if create_label:
+				hbox = HBoxContainer.new()
+				var label := Label.new()
+				label.text = humanized_u_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				hbox.add_child(label)
+				parent_node.add_child(hbox)
+			if shader is VisualShader and u_name.begins_with("tex_frg_"):
+				var node_id := int(u_name.replace("tex_frg_", ""))
+				var shader_node := (shader as VisualShader).get_node(
+					VisualShader.TYPE_FRAGMENT, node_id
 				)
-				hbox.add_child(gradient_edit)
-			else:  ## Simple texture
-				var file_dialog := FileDialog.new()
-				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-				file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-				file_dialog.size = Vector2(384, 281)
-				file_dialog.file_selected.connect(file_selected.bind(u_name))
-				file_dialog.use_native_dialog = Global.use_native_file_dialogs
-				var button := Button.new()
-				button.text = "Load texture"
-				button.pressed.connect(file_dialog.popup_centered)
-				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				var mod_button := Button.new()
-				mod_button.text = "Modify"
-				mod_button.pressed.connect(
-					func():
-						_modify_texture_resource(
-							_get_loaded_texture(params, u_name),
-							u_name,
-							_shader_update_texture.bind(value_changed, u_name)
+				if shader_node is VisualShaderNodeTexture:
+					var texture := (shader_node as VisualShaderNodeTexture).texture
+					params[u_name] = texture
+					if texture is GradientTexture1D or texture is GradientTexture2D:
+						_create_gradient_texture_ui(params, u_name, hbox, value_changed)
+					elif texture is CurveTexture:
+						_create_curve_texture_ui(params, u_name, hbox, value_changed)
+					elif texture is NoiseTexture2D:
+						_create_noise_texture_ui(params, u_name, hbox, value_changed, parent_node)
+					else:  # Simple texture
+						_create_simple_texture_ui(
+							params, u_name, hbox, value_changed, parent_node, file_selected
 						)
+			elif u_name.begins_with("gradient_"):
+				if current_group.is_empty():
+					_create_gradient_texture_ui(params, u_name, hbox, value_changed)
+				else:
+					# If this curve uniform belongs in a group, group them into the same
+					# CurveEdit node and use an OptionButton to switch between the different curves.
+					var group_gradient_str := current_group + "_gradient"
+					if group_nodes.has(group_gradient_str):
+						var grad_edit := group_nodes[group_gradient_str] as GradientEditNode
+						if "no_interpolation" in u_name:
+							value_changed.call_deferred(
+								grad_edit.get_gradient_texture_no_interpolation(), u_name
+							)
+							grad_edit.updated.connect(
+								func(_gradient, _cc):
+									value_changed.call(
+										grad_edit.get_gradient_texture_no_interpolation(), u_name
+									)
+							)
+						elif "offset" in u_name:
+							value_changed.call_deferred(
+								grad_edit.get_gradient_offsets_texture(), u_name
+							)
+							grad_edit.updated.connect(
+								func(_gradient, _cc):
+									value_changed.call(
+										grad_edit.get_gradient_offsets_texture(), u_name
+									)
+							)
+						else:
+							value_changed.call_deferred(grad_edit.texture, u_name)
+							grad_edit.updated.connect(
+								func(_gradient, _cc): value_changed.call(grad_edit.texture, u_name)
+							)
+					else:
+						var grad_edit := _create_gradient_texture_ui(
+							params, u_name, hbox, value_changed
+						)
+						group_nodes[group_gradient_str] = grad_edit
+			elif u_name.begins_with("dither_texture"):
+				var option_button := OptionButton.new()
+				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				option_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				option_button.item_selected.connect(
+					func(index: int):
+						var dither_tex := dither_matrices[index].texture
+						value_changed.call(dither_tex, u_name)
 				)
-				mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				mod_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				hbox.add_child(button)
-				hbox.add_child(mod_button)
-				parent_node.add_child(file_dialog)
-			parent_node.add_child(hbox)
-
+				for matrix in dither_matrices:
+					option_button.add_item(matrix.name)
+				if params.has(u_name):
+					var matrix_index := 0
+					for i in dither_matrices.size():
+						if dither_matrices[i].texture == params[u_name]:
+							matrix_index = i
+							break
+					option_button.select(matrix_index)
+				else:
+					params[u_name] = dither_matrices[option_button.selected].texture
+				hbox.add_child(option_button)
+			elif u_name.begins_with("curve_"):
+				if current_group.is_empty():
+					_create_curve_texture_ui(params, u_name, hbox, value_changed)
+				else:
+					# If this curve uniform belongs in a group, group them into the same
+					# CurveEdit node and use an OptionButton to switch between the different curves.
+					var group_option_button_str := current_group + "_option_button"
+					if group_nodes.has(group_option_button_str):
+						# Add it to the current group CurveEdit and OptionButton.
+						var option_button := group_nodes[group_option_button_str] as OptionButton
+						if not params.has(u_name):
+							var new_curve := Curve.new()
+							# Set linear preset to the new curve
+							CurveEdit.set_curve_preset(new_curve, 0)
+							params[u_name] = CurveEdit.to_texture(new_curve)
+						option_button.add_item(
+							Keychain.humanize_snake_case(u_name.replace("curve_", ""))
+						)
+						option_button.set_item_metadata(option_button.item_count - 1, u_name)
+					else:  # Create a the group's CurveEdit and OptionButton.
+						var option_button := OptionButton.new()
+						parent_node.add_child(option_button)
+						var curve_edit := _create_curve_texture_ui(
+							params, u_name, parent_node, value_changed
+						)
+						option_button.add_item(
+							Keychain.humanize_snake_case(u_name.replace("curve_", ""))
+						)
+						option_button.set_item_metadata(option_button.item_count - 1, u_name)
+						option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+						option_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+						option_button.item_selected.connect(
+							# Disconnect all previous connections from the
+							# curve_edit's value_changed signal. Then change the curve, and then
+							# connect a new callable to the value_changed signal.
+							func(index: int):
+								var new_uniform_name = option_button.get_item_metadata(index)
+								for connection in curve_edit.value_changed.get_connections():
+									curve_edit.value_changed.disconnect(connection.callable)
+								curve_edit.curve = params[new_uniform_name].curve
+								curve_edit.value_changed.connect(
+									func(curve: Curve):
+										value_changed.call(
+											CurveEdit.to_texture(curve), new_uniform_name
+										)
+								)
+						)
+						group_nodes[group_option_button_str] = option_button
+			elif u_name.begins_with("noise_"):
+				_create_noise_texture_ui(params, u_name, hbox, value_changed, parent_node)
+			else:  # Simple texture
+				_create_simple_texture_ui(
+					params, u_name, hbox, value_changed, parent_node, file_selected
+				)
 		elif u_type == "bool":
-			var label := Label.new()
-			label.text = humanized_u_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var checkbox := CheckBox.new()
-			checkbox.text = "On"
-			if u_value == "true":
-				checkbox.button_pressed = true
-			if params.has(u_name):
-				checkbox.button_pressed = params[u_name]
+			var button: BaseButton
+			if u_name in ["red", "green", "blue", "alpha"]:
+				button = Button.new()
+				button.text = u_name[0].to_upper()
+				button.toggle_mode = true
+				if is_instance_valid(color_button_hbox):
+					color_button_hbox.add_child(button)
+				else:
+					color_button_hbox = HBoxContainer.new()
+					color_button_hbox.add_child(button)
+					parent_node.add_child(color_button_hbox)
 			else:
-				params[u_name] = checkbox.button_pressed
-			checkbox.toggled.connect(value_changed.bind(u_name))
-			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(checkbox)
-			parent_node.add_child(hbox)
+				button = CheckBox.new()
+				var label := Label.new()
+				label.text = humanized_u_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				button.text = "On"
+				var hbox := HBoxContainer.new()
+				hbox.add_child(label)
+				hbox.add_child(button)
+				parent_node.add_child(hbox)
+			if u_value == "true":
+				button.button_pressed = true
+			if params.has(u_name):
+				button.button_pressed = params[u_name]
+			else:
+				params[u_name] = button.button_pressed
+			button.toggled.connect(value_changed.bind(u_name))
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
 static func _vec2str_to_vector2(vec2: String) -> Vector2:
@@ -372,6 +524,108 @@ static func _mat3str_to_basis(mat3: String) -> Basis:
 		vec3_z = _vec3str_to_vector3(vec3_values[2])
 	var basis := Basis(vec3_x, vec3_y, vec3_z)
 	return basis
+
+
+static func _create_simple_texture_ui(
+	params: Dictionary,
+	u_name: String,
+	hbox: BoxContainer,
+	value_changed: Callable,
+	parent_node: Control,
+	file_selected: Callable
+) -> void:
+	var file_dialog := FileDialog.new()
+	file_dialog.always_on_top = true
+	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	file_dialog.size = Vector2(384, 281)
+	file_dialog.file_selected.connect(file_selected.bind(u_name))
+	file_dialog.use_native_dialog = Global.use_native_file_dialogs
+	var button := Button.new()
+	button.text = "Load texture"
+	button.pressed.connect(file_dialog.popup_centered)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	var mod_button := Button.new()
+	mod_button.text = "Modify"
+	mod_button.pressed.connect(
+		func():
+			_modify_texture_resource(
+				_get_loaded_texture(params, u_name),
+				u_name,
+				_shader_update_texture.bind(value_changed, u_name)
+			)
+	)
+	mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	mod_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	hbox.add_child(button)
+	hbox.add_child(mod_button)
+	parent_node.add_child(file_dialog)
+
+
+static func _create_gradient_texture_ui(
+	params: Dictionary, u_name: String, hbox: BoxContainer, value_changed: Callable
+) -> GradientEditNode:
+	var gradient_edit := GRADIENT_EDIT_TSCN.instantiate() as GradientEditNode
+	gradient_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if params.has(u_name):
+		var texture = params[u_name]
+		if texture is GradientTexture2D:
+			gradient_edit.set_gradient_texture(texture)
+		elif texture is GradientTexture1D:
+			gradient_edit.set_gradient_texture_1d(texture)
+	else:
+		params[u_name] = gradient_edit.texture
+	# This needs to be call_deferred because GradientTexture2D gets updated next frame.
+	# Without this, the texture is purple.
+	value_changed.call_deferred(gradient_edit.texture, u_name)
+	gradient_edit.updated.connect(
+		func(_gradient, _cc): value_changed.call(gradient_edit.texture, u_name)
+	)
+	hbox.add_child(gradient_edit)
+	return gradient_edit
+
+
+static func _create_curve_texture_ui(
+	params: Dictionary, u_name: String, parent: Control, value_changed: Callable
+) -> CurveEdit:
+	var curve_edit := CurveEdit.new()
+	curve_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if params.has(u_name) and params[u_name] is CurveTexture:
+		curve_edit.curve = params[u_name].curve
+	else:
+		curve_edit.set_default_curve()
+		params[u_name] = CurveEdit.to_texture(curve_edit.curve)
+	curve_edit.value_changed.connect(
+		func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), u_name)
+	)
+	parent.add_child(curve_edit)
+	return curve_edit
+
+
+static func _create_noise_texture_ui(
+	params: Dictionary,
+	u_name: String,
+	hbox: BoxContainer,
+	value_changed: Callable,
+	parent_node: Control
+) -> void:
+	var noise_generator_dialog := NOISE_GENERATOR.instantiate() as AcceptDialog
+	var noise_generator := noise_generator_dialog.get_child(0) as NoiseGenerator
+	if params.has(u_name) and params[u_name] is NoiseTexture2D:
+		noise_generator.noise_texture = params[u_name]
+	else:
+		params[u_name] = noise_generator.noise_texture
+	noise_generator.value_changed.connect(
+		func(noise_texture: NoiseTexture2D): value_changed.call(noise_texture, u_name)
+	)
+	parent_node.add_child(noise_generator_dialog)
+	var button := Button.new()
+	button.text = "Generate noise"
+	button.pressed.connect(noise_generator_dialog.popup_centered)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	hbox.add_child(button)
 
 
 static func _shader_change_palette(value_changed: Callable, parameter_name: String) -> void:

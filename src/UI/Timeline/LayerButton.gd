@@ -2,6 +2,13 @@ class_name LayerButton
 extends HBoxContainer
 
 const HIERARCHY_DEPTH_PIXEL_SHIFT := 16
+const ARRAY_TEXTURE_TYPES: Array[Texture2D] = [
+	preload("res://assets/graphics/layers/type_icons/layer_pixel.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_group.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_3d.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_tilemap.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_sound.png")
+]
 
 var layer_index := 0:
 	set(value):
@@ -14,7 +21,10 @@ var button_pressed := false:
 		main_button.button_pressed = value
 	get:
 		return main_button.button_pressed
+var animation_running := false
+var audio_playing_at_frame := 0
 
+var audio_player: AudioStreamPlayer
 @onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
 @onready var main_button := %LayerMainButton as Button
 @onready var expand_button := %ExpandButton as BaseButton
@@ -23,6 +33,9 @@ var button_pressed := false:
 @onready var label := %LayerNameLabel as Label
 @onready var line_edit := %LayerNameLineEdit as LineEdit
 @onready var hierarchy_spacer := %HierarchySpacer as Control
+@onready var layer_fx_texture_rect := %LayerFXTextureRect as TextureRect
+@onready var layer_type_texture_rect := %LayerTypeTextureRect as TextureRect
+@onready var layer_ui_color := $LayerMainButton/LayerUIColor as ColorRect
 @onready var linked_button := %LinkButton as BaseButton
 @onready var clipping_mask_icon := %ClippingMask as TextureRect
 @onready var popup_menu := $PopupMenu as PopupMenu
@@ -31,17 +44,34 @@ var button_pressed := false:
 func _ready() -> void:
 	main_button.layer_index = layer_index
 	main_button.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
-	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
+	Global.cel_switched.connect(_on_cel_switched)
 	var layer := Global.current_project.layers[layer_index]
 	layer.name_changed.connect(func(): label.text = layer.name)
-	layer.visibility_changed.connect(update_buttons)
+	layer.visibility_changed.connect(_on_layer_visibility_changed)
+	layer.ui_color_changed.connect(func(): layer_ui_color.color = layer.get_ui_color())
+	for ancestor in layer.get_ancestors():
+		ancestor.ui_color_changed.connect(func(): layer_ui_color.color = layer.get_ui_color())
 	if layer is PixelLayer:
 		linked_button.visible = true
 	elif layer is GroupLayer:
 		expand_button.visible = true
+	elif layer is AudioLayer:
+		audio_player = AudioStreamPlayer.new()
+		audio_player.stream = layer.audio
+		layer.audio_changed.connect(func(): audio_player.stream = layer.audio)
+		add_child(audio_player)
+		Global.animation_timeline.animation_started.connect(_on_animation_started)
+		Global.animation_timeline.animation_looped.connect(_on_animation_looped)
+		Global.animation_timeline.animation_finished.connect(_on_animation_finished)
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 	label.text = layer.name
 	line_edit.text = layer.name
+	layer_ui_color.color = layer.get_ui_color()
+	layer_fx_texture_rect.visible = layer.effects.size() > 0
+	layer_type_texture_rect.texture = ARRAY_TEXTURE_TYPES[layer.get_layer_type()]
+	layer.effects_added_removed.connect(
+		func(): layer_fx_texture_rect.visible = layer.effects.size() > 0
+	)
 	for child in $HBoxContainer.get_children():
 		if not child is Button:
 			continue
@@ -54,6 +84,76 @@ func _ready() -> void:
 	var hierarchy_depth := layer.get_hierarchy_depth()
 	hierarchy_spacer.custom_minimum_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 	update_buttons()
+
+
+func _on_cel_switched() -> void:
+	z_index = 1 if button_pressed else 0
+	var project := Global.current_project
+	var layer := project.layers[layer_index]
+	if layer is AudioLayer:
+		if not is_instance_valid(audio_player):
+			return
+		if not layer.is_visible_in_hierarchy():
+			audio_player.stop()
+			return
+		if animation_running:
+			var current_frame := project.current_frame
+			if (
+				current_frame == layer.playback_frame
+				or (current_frame == 0 and layer.playback_frame < 0)
+				## True when switching cels while the animation is running
+				or current_frame != audio_playing_at_frame + 1
+			):
+				_play_audio(false)
+			audio_playing_at_frame = current_frame
+		else:
+			_play_audio(true)
+
+
+func _on_layer_visibility_changed() -> void:
+	update_buttons()
+	var layer := Global.current_project.layers[layer_index]
+	if layer is AudioLayer:
+		_play_audio(not animation_running)
+
+
+func _on_animation_started(_dir: bool) -> void:
+	animation_running = true
+	_play_audio(false)
+
+
+func _on_animation_looped() -> void:
+	var layer := Global.current_project.layers[layer_index]
+	if layer is AudioLayer:
+		if layer.playback_frame > 0 or not layer.is_visible_in_hierarchy():
+			if is_instance_valid(audio_player):
+				audio_player.stop()
+
+
+func _on_animation_finished() -> void:
+	animation_running = false
+	if is_instance_valid(audio_player):
+		audio_player.stop()
+
+
+func _play_audio(single_frame: bool) -> void:
+	if not is_instance_valid(audio_player):
+		return
+	var project := Global.current_project
+	var layer := project.layers[layer_index] as AudioLayer
+	if not layer.is_visible_in_hierarchy():
+		return
+	var audio_length := layer.get_audio_length()
+	var frame := project.frames[project.current_frame]
+	var frame_pos := frame.position_in_seconds(project, layer.playback_frame)
+	if frame_pos >= 0 and frame_pos < audio_length:
+		audio_player.play(frame_pos)
+		audio_playing_at_frame = project.current_frame
+		if single_frame:
+			var timer := get_tree().create_timer(frame.get_duration_in_seconds(project.fps))
+			timer.timeout.connect(func(): audio_player.stop())
+	else:
+		audio_player.stop()
 
 
 func update_buttons() -> void:

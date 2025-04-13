@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://chy5d42l72crk"]
+[gd_scene load_steps=6 format=3 uid="uid://chy5d42l72crk"]
 
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Store.gd" id="1_pwcwi"]
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
-[ext_resource type="Script" path="res://src/UI/ExtensionExplorer/Subscripts/CustomStoreLinks.gd" id="3_dk1xf"]
+[ext_resource type="Script" uid="uid://3gweeb1iyr4l" path="res://src/UI/ExtensionExplorer/Store.gd" id="1_pwcwi"]
+[ext_resource type="Script" uid="uid://bax7ba3s0gq6a" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
+[ext_resource type="Texture2D" uid="uid://3v78ojo0pkfg" path="res://assets/graphics/misc/external_link.svg" id="3_6lb58"]
+[ext_resource type="Script" uid="uid://nu4gcburux0v" path="res://src/UI/ExtensionExplorer/Subscripts/CustomStoreLinks.gd" id="3_dk1xf"]
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="4_ntl7p"]
 
 [node name="Store" type="Window"]
@@ -12,6 +13,7 @@ size = Vector2i(760, 470)
 visible = false
 wrap_controls = true
 exclusive = true
+always_on_top = true
 script = ExtResource("1_pwcwi")
 
 [node name="TabContainer" type="TabContainer" parent="."]
@@ -24,9 +26,11 @@ offset_left = 7.0
 offset_top = 8.0
 offset_right = -7.0
 offset_bottom = -8.0
+current_tab = 0
 
 [node name="Store" type="MarginContainer" parent="TabContainer"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="StoreMainContainer" type="HSplitContainer" parent="TabContainer/Store"]
 layout_mode = 2
@@ -56,11 +60,26 @@ unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Store/StoreMainContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Store/StoreMainContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Store/StoreMainContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Content" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer/ContentScrollContainer"]
+[node name="ReportIssue" type="Button" parent="TabContainer/Store/StoreMainContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Report issue with an extension"
+icon = ExtResource("3_6lb58")
+
+[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Store/StoreMainContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Content" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer/VBoxContainer/ContentScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -68,6 +87,7 @@ size_flags_horizontal = 3
 [node name="Options" type="MarginContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Options"]
 layout_mode = 2
@@ -153,6 +173,7 @@ unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(511, 326)
 unresizable = true
+always_on_top = true
 popup_window = true
 
 [node name="Content" type="VBoxContainer" parent="Error"]
@@ -200,6 +221,7 @@ autowrap_mode = 3
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(357, 110)
+always_on_top = true
 popup_window = true
 
 [node name="Content" type="VBoxContainer" parent="ErrorCustom"]
@@ -222,6 +244,7 @@ layout_mode = 2
 [connection signal="about_to_popup" from="." to="." method="_on_Store_about_to_show"]
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
 [connection signal="text_changed" from="TabContainer/Store/StoreMainContainer/Parameters/SearchManager" to="TabContainer/Store/StoreMainContainer/Parameters/SearchManager" method="_on_SearchManager_text_changed"]
+[connection signal="pressed" from="TabContainer/Store/StoreMainContainer/VBoxContainer/HBoxContainer/ReportIssue" to="." method="_on_report_issue_pressed"]
 [connection signal="visibility_changed" from="TabContainer/Options" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Options_visibility_changed"]
 [connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/Guide" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Guide_pressed"]
 [connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/NewLink" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_NewLink_pressed"]

@@ -9,7 +9,7 @@ var chosen_dir := "":
 		chosen_dir = value
 		if chosen_dir.ends_with("/"):  # Remove end back-slashes if present
 			chosen_dir[-1] = ""
-var recorded_projects := {}  ## [Dictionary] of [Project] and [Recorder].
+var recorded_projects: Dictionary[Project, Recorder] = {}
 var save_dir := ""
 var skip_amount := 1  ## Number of "do" actions after which a frame can be captured.
 var resize_percent := 100
@@ -55,6 +55,7 @@ class Recorder:
 		dir.make_dir_recursive(save_directory)
 		project.removed.connect(recorder_panel.finalize_recording.bind(project))
 		project.undo_redo.version_changed.connect(capture_frame)
+		recorder_panel.captured_label.text = ""
 
 	func _notification(what: int) -> void:
 		if what == NOTIFICATION_PREDELETE:
@@ -70,7 +71,7 @@ class Recorder:
 			image = recorder_panel.get_window().get_texture().get_image()
 		else:
 			var frame := project.frames[project.current_frame]
-			image = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			image = project.new_empty_image()
 			DrawingAlgos.blend_layers(image, frame, Vector2i.ZERO, project)
 
 			if recorder_panel.resize_percent != 100:
@@ -100,6 +101,9 @@ func _on_project_switched() -> void:
 		initialize_recording()
 		start_button.set_pressed_no_signal(true)
 		Global.change_button_texturerect(start_button.get_child(0), "stop.png")
+		captured_label.text = str(
+			"Saved: ", recorded_projects[Global.current_project].frames_captured
+		)
 	else:
 		finalize_recording()
 		start_button.set_pressed_no_signal(false)

@@ -11,10 +11,10 @@ enum NewPalettePresetType {EMPTY, FROM_CURRENT_PALETTE, FROM_CURRENT_SPRITE, FRO
 enum GetColorsFrom { CURRENT_FRAME, CURRENT_CEL, ALL_FRAMES }
 const DEFAULT_PALETTE_NAME := "Default"
 ## Maximum allowed width of imported palettes.
-const MAX_IMPORT_PAL_WIDTH = 1 << 14
+const MAX_IMPORT_PAL_WIDTH := 1 << 14
 var palettes_write_path := Global.home_data_directory.path_join("Palettes")
 ## All available palettes
-var palettes := {}
+var palettes: Dictionary[String, Palette] = {}
 ## Currently displayed palette
 var current_palette: Palette = null
 
@@ -36,9 +36,10 @@ func does_palette_exist(palette_name: String) -> bool:
 
 
 func select_palette(palette_name: String) -> void:
-	current_palette = palettes.get(palette_name)
+	current_palette = palettes.get(palette_name, null)
 	_clear_selected_colors()
-	Global.config_cache.set_value("data", "last_palette", current_palette.name)
+	if is_instance_valid(current_palette):
+		Global.config_cache.set_value("data", "last_palette", current_palette.name)
 	palette_selected.emit(palette_name)
 
 
@@ -224,6 +225,7 @@ func current_palete_delete(permanent := true) -> void:
 		select_palette(palettes.keys()[0])
 	else:
 		current_palette = null
+		select_palette("")
 
 
 func current_palette_add_color(mouse_button: int, start_index := 0) -> void:
@@ -294,13 +296,13 @@ func current_palette_select_color(mouse_button: int, index: int) -> void:
 	if color == null:
 		return
 
+	_select_color(mouse_button, index)
+
 	match mouse_button:
 		MOUSE_BUTTON_LEFT:
-			Tools.assign_color(color, mouse_button)
+			Tools.assign_color(color, mouse_button, true, left_selected_color)
 		MOUSE_BUTTON_RIGHT:
-			Tools.assign_color(color, mouse_button)
-
-	_select_color(mouse_button, index)
+			Tools.assign_color(color, mouse_button, true, right_selected_color)
 
 
 func _select_color(mouse_button: int, index: int) -> void:

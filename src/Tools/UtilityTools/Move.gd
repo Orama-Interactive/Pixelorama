@@ -8,7 +8,7 @@ var _content_transformation_check := false
 var _snap_to_grid := false  ## Mouse Click + Ctrl
 var _undo_data := {}
 
-@onready var selection_node: Node2D = Global.canvas.selection
+@onready var selection_node := Global.canvas.selection
 
 
 func _input(event: InputEvent) -> void:
@@ -16,17 +16,17 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("transform_snap_grid"):
 		_snap_to_grid = true
-		_offset = _offset.snapped(Global.grid_size)
+		_offset = _offset.snapped(Global.grids[0].grid_size)
 		if Global.current_project.has_selection and selection_node.is_moving_content:
 			var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
 			selection_node.big_bounding_rectangle.position = Vector2i(
-				prev_pos.snapped(Global.grid_size)
+				prev_pos.snapped(Global.grids[0].grid_size)
 			)
 			# The first time transform_snap_grid is enabled then _snap_position() is not called
 			# and the selection had wrong offset, so do selection offsetting here
 			var grid_offset := Vector2i(
-				fmod(Global.grid_offset.x, Global.grid_size.x),
-				fmod(Global.grid_offset.y, Global.grid_size.y)
+				fmod(Global.grids[0].grid_offset.x, Global.grids[0].grid_size.x),
+				fmod(Global.grids[0].grid_offset.y, Global.grids[0].grid_size.y)
 			)
 			selection_node.big_bounding_rectangle.position += grid_offset
 			selection_node.marching_ants_outline.offset += Vector2(
@@ -43,8 +43,14 @@ func draw_start(pos: Vector2i) -> void:
 	_start_pos = pos
 	_offset = pos
 	_undo_data = _get_undo_data()
-	if Global.current_project.has_selection:
-		selection_node.transform_content_start()
+	if Tools.is_placing_tiles():
+		for cel in _get_selected_draw_cels():
+			if cel is not CelTileMap:
+				continue
+			(cel as CelTileMap).prev_offset = (cel as CelTileMap).offset
+	else:
+		if Global.current_project.has_selection:
+			selection_node.transform_content_start()
 	_content_transformation_check = selection_node.is_moving_content
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
@@ -60,43 +66,54 @@ func draw_move(pos: Vector2i) -> void:
 		return
 	pos = _snap_position(pos)
 
-	if Global.current_project.has_selection:
-		selection_node.move_content(pos - _offset)
-	else:
+	if Tools.is_placing_tiles():
+		for cel in _get_selected_draw_cels():
+			if cel is not CelTileMap:
+				continue
+			(cel as CelTileMap).change_offset(cel.offset + pos - _offset)
 		Global.canvas.move_preview_location = pos - _start_pos
+	else:
+		if Global.current_project.has_selection:
+			selection_node.move_content(pos - _offset)
+		else:
+			Global.canvas.move_preview_location = pos - _start_pos
 	_offset = pos
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
 
 
 func draw_end(pos: Vector2i) -> void:
-	super.draw_end(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		super.draw_end(pos)
 		return
 	if (
 		_start_pos != Vector2i(Vector2.INF)
 		and _content_transformation_check == selection_node.is_moving_content
 	):
 		pos = _snap_position(pos)
-		var project := Global.current_project
-
-		if project.has_selection:
+		if Global.current_project.has_selection and not Tools.is_placing_tiles():
 			selection_node.move_borders_end()
 		else:
 			var pixel_diff := pos - _start_pos
 			Global.canvas.move_preview_location = Vector2i.ZERO
 			var images := _get_selected_draw_images()
 			for image in images:
-				var image_copy := Image.new()
-				image_copy.copy_from(image)
-				image.fill(Color(0, 0, 0, 0))
-				image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, project.size), pixel_diff)
+				_move_image(image, pixel_diff)
+				_move_image(image.indices_image, pixel_diff)
 			_commit_undo("Draw")
 
 	_start_pos = Vector2.INF
 	_snap_to_grid = false
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.NONE)
+	super.draw_end(pos)
+
+
+func _move_image(image: Image, pixel_diff: Vector2i) -> void:
+	var image_copy := Image.new()
+	image_copy.copy_from(image)
+	image.fill(Color(0, 0, 0, 0))
+	image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, image.get_size()), pixel_diff)
 
 
 func _snap_position(pos: Vector2) -> Vector2:
@@ -107,16 +124,18 @@ func _snap_position(pos: Vector2) -> Vector2:
 		else:
 			pos.x = _start_pos.x
 	if _snap_to_grid:  # Snap to grid
-		pos = pos.snapped(Global.grid_size)
+		pos = pos.snapped(Global.grids[0].grid_size)
 		# The part below only corrects the offset for situations when there is no selection
 		# Offsets when there is selection is controlled in _input() function
 		if !Global.current_project.has_selection:
 			var move_offset := Vector2.ZERO
 			move_offset.x = (
-				_start_pos.x - (_start_pos.x / Global.grid_size.x) * Global.grid_size.x
+				_start_pos.x
+				- (_start_pos.x / Global.grids[0].grid_size.x) * Global.grids[0].grid_size.x
 			)
 			move_offset.y = (
-				_start_pos.y - (_start_pos.y / Global.grid_size.y) * Global.grid_size.y
+				_start_pos.y
+				- (_start_pos.y / Global.grids[0].grid_size.y) * Global.grids[0].grid_size.y
 			)
 			pos += move_offset
 
@@ -124,8 +143,9 @@ func _snap_position(pos: Vector2) -> Vector2:
 
 
 func _commit_undo(action: String) -> void:
-	var redo_data := _get_undo_data()
 	var project := Global.current_project
+	project.update_tilemaps(_undo_data, TileSetPanel.TileEditingMode.AUTO)
+	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
 	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -134,7 +154,15 @@ func _commit_undo(action: String) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, _undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, _undo_data)
+	if Tools.is_placing_tiles():
+		for cel in _get_selected_draw_cels():
+			if cel is not CelTileMap:
+				continue
+			project.undo_redo.add_do_method(cel.change_offset.bind(cel.offset))
+			project.undo_redo.add_do_method(cel.re_order_tilemap)
+			project.undo_redo.add_undo_method(cel.change_offset.bind(cel.prev_offset))
+			project.undo_redo.add_undo_method(cel.re_order_tilemap)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
@@ -152,9 +180,5 @@ func _get_undo_data() -> Dictionary:
 		for frame in project.frames:
 			var cel := frame.cels[project.current_layer]
 			cels.append(cel)
-	for cel in cels:
-		if not cel is PixelCel:
-			continue
-		var image: Image = cel.image
-		data[image] = image.data
+	project.serialize_cel_undo_data(cels, data)
 	return data

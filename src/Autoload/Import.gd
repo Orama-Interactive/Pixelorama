@@ -90,9 +90,9 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 func add_randomised_brush(fpaths: Array, tooltip_name: String) -> void:
 	# Attempt to load the images from the file paths.
 	var loaded_images: Array = []
-	for filen in fpaths:
+	for file in fpaths:
 		var image := Image.new()
-		var err := image.load(filen)
+		var err := image.load(file)
 		if err == OK:
 			image.convert(Image.FORMAT_RGBA8)
 			loaded_images.append(image)

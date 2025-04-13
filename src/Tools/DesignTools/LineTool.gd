@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 var _original_pos := Vector2i.ZERO
 var _start := Vector2i.ZERO
@@ -120,8 +120,8 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_end(pos)
 	if _picking_color:
+		super.draw_end(pos)
 		return
 
 	if _drawing:
@@ -142,14 +142,16 @@ func draw_end(pos: Vector2i) -> void:
 		_start = Vector2.ZERO
 		_dest = Vector2.ZERO
 		_drawing = false
+		Global.canvas.previews_sprite.texture = null
 		_displace_origin = false
 		cursor_text = ""
+	super.draw_end(pos)
 
 
 func draw_preview() -> void:
 	var canvas := Global.canvas.previews_sprite
 	if _drawing:
-		var points := _get_points()
+		var points := bresenham_line_thickness(_start, _dest, _thickness)
 		var image := Image.create(
 			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 		)
@@ -157,73 +159,29 @@ func draw_preview() -> void:
 			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
 				image.set_pixelv(point, Color.WHITE)
 		# Handle mirroring
-		if Tools.horizontal_mirror:
-			for point in mirror_array(points, true, false):
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-					image.set_pixelv(point, Color.WHITE)
-			if Tools.vertical_mirror:
-				for point in mirror_array(points, true, true):
-					if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-						image.set_pixelv(point, Color.WHITE)
-		if Tools.vertical_mirror:
-			for point in mirror_array(points, false, true):
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-					image.set_pixelv(point, Color.WHITE)
+		for point in mirror_array(points):
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+				image.set_pixelv(point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		canvas.texture = texture
-	else:
-		canvas.texture = null
 
 
 func _draw_shape() -> void:
-	var points := _get_points()
+	var points := bresenham_line_thickness(_start, _dest, _thickness)
 	prepare_undo("Draw Shape")
 	var images := _get_selected_draw_images()
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
-		# Draw each point offsetted based on the shape's thickness
-		if Global.current_project.can_pixel_get_drawn(point):
-			for image in images:
-				_drawer.set_pixel(image, point, tool_slot.color)
+		if Tools.is_placing_tiles():
+			draw_tile(point)
+		else:
+			# Draw each point offsetted based on the shape's thickness
+			if Global.current_project.can_pixel_get_drawn(point):
+				for image in images:
+					_drawer.set_pixel(image, point, tool_slot.color)
 
 	commit_undo()
-
-
-func _get_points() -> Array[Vector2i]:
-	var array: Array[Vector2i] = []
-	var dx := absi(_dest.x - _start.x)
-	var dy := -absi(_dest.y - _start.y)
-	var err := dx + dy
-	var e2 := err << 1
-	var sx := 1 if _start.x < _dest.x else -1
-	var sy := 1 if _start.y < _dest.y else -1
-	var x := _start.x
-	var y := _start.y
-
-	var start := _start - Vector2i.ONE * (_thickness >> 1)
-	var end := start + Vector2i.ONE * _thickness
-	for yy in range(start.y, end.y):
-		for xx in range(start.x, end.x):
-			array.append(Vector2i(xx, yy))
-
-	while !(x == _dest.x && y == _dest.y):
-		e2 = err << 1
-		if e2 >= dy:
-			err += dy
-			x += sx
-		if e2 <= dx:
-			err += dx
-			y += sy
-
-		var pos := Vector2i(x, y)
-		start = pos - Vector2i.ONE * (_thickness >> 1)
-		end = start + Vector2i.ONE * _thickness
-		for yy in range(start.y, end.y):
-			for xx in range(start.x, end.x):
-				array.append(Vector2i(xx, yy))
-
-	return array
 
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:

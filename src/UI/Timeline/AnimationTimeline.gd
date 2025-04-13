@@ -1,12 +1,20 @@
 extends Panel
 
+## Emitted when the animation starts playing.
 signal animation_started(forward: bool)
+## Emitted when the animation reaches the final frame and is not looping,
+## or if the animation is manually paused.
+## Note: This signal is not emitted if the animation is looping.
 signal animation_finished
+## Emitted when the animation loops, meaning when it reaches the final frame
+## and the animation keeps playing.
+signal animation_looped
 
 enum LoopType { NO, CYCLE, PINGPONG }
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
+const CEL_MIN_SIZE_OFFSET := 15
 
 var is_animation_running := false
 var animation_loop := LoopType.CYCLE
@@ -16,7 +24,11 @@ var last_frame := 0
 var is_mouse_hover := false
 var cel_size := 36:
 	set = _cel_size_changed
-var min_cel_size := 36
+var min_cel_size := 36:
+	set(value):
+		min_cel_size = value
+		if is_instance_valid(cel_size_slider):
+			cel_size_slider.min_value = min_cel_size
 var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
@@ -41,6 +53,7 @@ var global_layer_expand := true
 @onready var move_up_layer := %MoveUpLayer as Button
 @onready var move_down_layer := %MoveDownLayer as Button
 @onready var merge_down_layer := %MergeDownLayer as Button
+@onready var layer_fx := %LayerFX as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
@@ -55,22 +68,22 @@ var global_layer_expand := true
 @onready var play_forward := %PlayForward as Button
 @onready var fps_spinbox := %FPSValue as ValueSlider
 @onready var onion_skinning_button := %OnionSkinning as BaseButton
-@onready var timeline_settings := $TimelineSettings as Popup
 @onready var cel_size_slider := %CelSizeSlider as ValueSlider
 @onready var loop_animation_button := %LoopAnim as BaseButton
+@onready var timeline_settings := $TimelineSettings as Popup
+@onready var new_tile_map_layer_dialog := $NewTileMapLayerDialog as ConfirmationDialog
 @onready var drag_highlight := $DragHighlight as ColorRect
 
 
 func _ready() -> void:
 	Global.control.find_child("LayerProperties").layer_property_changed.connect(_update_layer_ui)
-	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
 	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 	layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
-	cel_size = min_cel_size
-	cel_size_slider.min_value = min_cel_size
+	var loaded_cel_size: int = Global.config_cache.get_value("timeline", "cel_size", 40)
+	min_cel_size = get_tree().current_scene.theme.default_font_size + CEL_MIN_SIZE_OFFSET
 	cel_size_slider.max_value = max_cel_size
-	cel_size_slider.value = cel_size
-	add_layer_list.get_popup().id_pressed.connect(add_layer)
+	cel_size = loaded_cel_size
+	add_layer_list.get_popup().id_pressed.connect(on_add_layer_list_id_pressed)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
 	animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
@@ -78,7 +91,6 @@ func _ready() -> void:
 	# Config loading.
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
 	layer_frame_header_h_split.split_offset = layer_frame_h_split.split_offset
-	cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
 	var past_rate = Global.config_cache.get_value(
 		"timeline", "past_rate", Global.onion_skinning_past_rate
 	)
@@ -116,6 +128,7 @@ func _notification(what: int) -> void:
 		drag_highlight.hide()
 	elif what == NOTIFICATION_THEME_CHANGED or what == NOTIFICATION_TRANSLATION_CHANGED:
 		await get_tree().process_frame
+		min_cel_size = get_tree().current_scene.theme.default_font_size + CEL_MIN_SIZE_OFFSET
 		if is_instance_valid(layer_settings_container):
 			layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 			layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
@@ -140,8 +153,10 @@ func _input(event: InputEvent) -> void:
 	var timeline_rect := Rect2(global_position, size)
 	if timeline_rect.has_point(mouse_pos):
 		if Input.is_key_pressed(KEY_CTRL):
-			cel_size += (2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out")))
-			get_viewport().set_input_as_handled()
+			var zoom := 2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out"))
+			cel_size += zoom
+			if zoom != 0:
+				get_viewport().set_input_as_handled()
 
 
 func reset_settings() -> void:
@@ -474,6 +489,14 @@ func copy_frames(
 				)
 				if src_cel.selected != null:
 					selected_id = src_cel.selected.id
+			elif src_cel is CelTileMap:
+				new_cel = CelTileMap.new(src_cel.tileset)
+				new_cel.offset = src_cel.offset
+				new_cel.place_only_mode = src_cel.place_only_mode
+				new_cel.tile_size = src_cel.tile_size
+				new_cel.tile_shape = src_cel.tile_shape
+				new_cel.tile_layout = src_cel.tile_layout
+				new_cel.tile_offset_axis = src_cel.tile_offset_axis
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -683,9 +706,11 @@ func _on_AnimationTimer_timeout() -> void:
 					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
+					animation_looped.emit()
 					animation_timer.start()
 				LoopType.PINGPONG:
 					animation_forward = false
+					animation_looped.emit()
 					_on_AnimationTimer_timeout()
 
 	else:
@@ -708,9 +733,11 @@ func _on_AnimationTimer_timeout() -> void:
 					animation_timer.wait_time = (
 						project.frames[project.current_frame].duration * (1 / fps)
 					)
+					animation_looped.emit()
 					animation_timer.start()
 				LoopType.PINGPONG:
 					animation_forward = true
+					animation_looped.emit()
 					_on_AnimationTimer_timeout()
 	frame_scroll_container.ensure_control_visible(
 		Global.frame_hbox.get_child(project.current_frame)
@@ -831,25 +858,37 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 
 # Layer buttons
-
-
-func add_layer(type := 0) -> void:
+func _on_add_layer_pressed() -> void:
 	var project := Global.current_project
-	var current_layer := project.layers[project.current_layer]
-	var l: BaseLayer
-	match type:
-		Global.LayerTypes.PIXEL:
-			l = PixelLayer.new(project)
-		Global.LayerTypes.GROUP:
-			l = GroupLayer.new(project)
-			SteamManager.set_achievement("ACH_STRONGER_TOGETHER")
-		Global.LayerTypes.THREE_D:
-			l = Layer3D.new(project)
-			SteamManager.set_achievement("ACH_3D_LAYER")
+	var layer := PixelLayer.new(project)
+	add_layer(layer, project)
 
+
+func on_add_layer_list_id_pressed(id: int) -> void:
+	if id == Global.LayerTypes.TILEMAP:
+		new_tile_map_layer_dialog.popup_centered()
+	else:
+		var project := Global.current_project
+		var layer: BaseLayer
+		match id:
+			Global.LayerTypes.PIXEL:
+				layer = PixelLayer.new(project)
+			Global.LayerTypes.GROUP:
+				layer = GroupLayer.new(project)
+        SteamManager.set_achievement("ACH_STRONGER_TOGETHER")
+			Global.LayerTypes.THREE_D:
+				layer = Layer3D.new(project)
+				SteamManager.set_achievement("ACH_3D_LAYER")
+			Global.LayerTypes.AUDIO:
+				layer = AudioLayer.new(project)
+		add_layer(layer, project)
+
+
+func add_layer(layer: BaseLayer, project: Project) -> void:
+	var current_layer := project.layers[project.current_layer]
 	var cels := []
 	for f in project.frames:
-		cels.append(l.new_empty_cel())
+		cels.append(layer.new_empty_cel())
 
 	var new_layer_idx := project.current_layer + 1
 	if current_layer is GroupLayer:
@@ -862,14 +901,14 @@ func add_layer(type := 0) -> void:
 				layer_button.visible = expanded
 				Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
 		# make layer child of group
-		l.parent = Global.current_project.layers[project.current_layer]
+		layer.parent = Global.current_project.layers[project.current_layer]
 	else:
 		# set the parent of layer to be the same as the layer below it
-		l.parent = Global.current_project.layers[project.current_layer].parent
+		layer.parent = Global.current_project.layers[project.current_layer].parent
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_method(project.add_layers.bind([l], [new_layer_idx], [cels]))
+	project.undo_redo.add_do_method(project.add_layers.bind([layer], [new_layer_idx], [cels]))
 	project.undo_redo.add_undo_method(project.remove_layers.bind([new_layer_idx]))
 	project.undo_redo.add_do_method(project.change_cel.bind(-1, new_layer_idx))
 	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
@@ -886,7 +925,18 @@ func _on_CloneLayer_pressed() -> void:
 	var clones: Array[BaseLayer] = []
 	var cels := []  # 2D Array of Cels
 	for src_layer in source_layers:
-		var cl_layer: BaseLayer = src_layer.get_script().new(project)
+		var cl_layer: BaseLayer
+		if src_layer is LayerTileMap:
+			cl_layer = LayerTileMap.new(project, src_layer.tileset)
+			cl_layer.place_only_mode = src_layer.place_only_mode
+			cl_layer.tile_size = src_layer.tile_size
+			cl_layer.tile_shape = src_layer.tile_shape
+			cl_layer.tile_layout = src_layer.tile_layout
+			cl_layer.tile_offset_axis = src_layer.tile_offset_axis
+		else:
+			cl_layer = src_layer.get_script().new(project)
+			if src_layer is AudioLayer:
+				cl_layer.audio = src_layer.audio
 		cl_layer.project = project
 		cl_layer.index = src_layer.index
 		var src_layer_data: Dictionary = src_layer.serialize()
@@ -904,6 +954,14 @@ func _on_CloneLayer_pressed() -> void:
 				new_cel = Cel3D.new(
 					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
+			elif src_cel is CelTileMap:
+				new_cel = CelTileMap.new(src_cel.tileset)
+				new_cel.offset = src_cel.offset
+				new_cel.place_only_mode = src_cel.place_only_mode
+				new_cel.tile_size = src_cel.tile_size
+				new_cel.tile_shape = src_cel.tile_shape
+				new_cel.tile_layout = src_cel.tile_layout
+				new_cel.tile_offset_axis = src_cel.tile_offset_axis
 			else:
 				new_cel = src_cel.get_script().new()
 
@@ -1047,9 +1105,10 @@ func _on_MergeDownLayer_pressed() -> void:
 		top_cels.append(top_cel)  # Store for undo purposes
 
 		var top_image := top_layer.display_effects(top_cel)
-		var bottom_cel := frame.cels[bottom_layer.index]
+		var bottom_cel := frame.cels[bottom_layer.index] as PixelCel
+		var bottom_image := bottom_cel.get_image()
 		var textures: Array[Image] = []
-		textures.append(bottom_cel.get_image())
+		textures.append(bottom_image)
 		textures.append(top_image)
 		var metadata_image := Image.create(2, 4, false, Image.FORMAT_R8)
 		DrawingAlgos.set_layer_metadata_image(bottom_layer, bottom_cel, metadata_image, 0)
@@ -1060,12 +1119,17 @@ func _on_MergeDownLayer_pressed() -> void:
 		var params := {
 			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
 		}
-		var bottom_image := Image.create(
-			top_image.get_width(), top_image.get_height(), false, top_image.get_format()
+		var new_bottom_image := ImageExtended.create_custom(
+			top_image.get_width(),
+			top_image.get_height(),
+			top_image.has_mipmaps(),
+			top_image.get_format(),
+			project.is_indexed()
 		)
+		# Merge the image itself.
 		var gen := ShaderImageEffect.new()
-		gen.generate_image(bottom_image, DrawingAlgos.blend_layers_shader, params, project.size)
-
+		gen.generate_image(new_bottom_image, DrawingAlgos.blend_layers_shader, params, project.size)
+		new_bottom_image.convert_rgb_to_indexed()
 		if (
 			bottom_cel.link_set != null
 			and bottom_cel.link_set.size() > 1
@@ -1076,14 +1140,18 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_undo_method(
 				bottom_layer.link_cel.bind(bottom_cel, bottom_cel.link_set)
 			)
-			project.undo_redo.add_do_property(bottom_cel, "image", bottom_image)
+			project.undo_redo.add_do_property(bottom_cel, "image", new_bottom_image)
 			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			Global.undo_redo_compress_images(
-				{bottom_cel.image: bottom_image.data},
-				{bottom_cel.image: bottom_cel.image.data},
-				project
-			)
+			var undo_data := {}
+			var redo_data := {}
+			if bottom_cel is CelTileMap:
+				(bottom_cel as CelTileMap).serialize_undo_data_source_image(
+					new_bottom_image, redo_data, undo_data, Vector2i.ZERO, true
+				)
+			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
+			bottom_image.add_data_to_dictionary(undo_data)
+			project.deserialize_cel_undo_data(redo_data, undo_data)
 
 	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
 	project.undo_redo.add_undo_method(
@@ -1157,15 +1225,25 @@ func _toggle_layer_buttons() -> void:
 		move_down_layer,
 		project.current_layer == child_count and not is_instance_valid(layer.parent)
 	)
+	var below_layer: BaseLayer = null
+	if project.current_layer - 1 >= 0:
+		below_layer = project.layers[project.current_layer - 1]
+	var is_place_only_tilemap := (
+		below_layer is LayerTileMap and (below_layer as LayerTileMap).place_only_mode
+	)
 	Global.disable_button(
 		merge_down_layer,
 		(
 			project.current_layer == child_count
 			or layer is GroupLayer
-			or project.layers[project.current_layer - 1] is GroupLayer
-			or project.layers[project.current_layer - 1] is Layer3D
+			or layer is AudioLayer
+			or is_place_only_tilemap
+			or below_layer is GroupLayer
+			or below_layer is Layer3D
+			or below_layer is AudioLayer
 		)
 	)
+	Global.disable_button(layer_fx, layer is AudioLayer)
 
 
 func project_changed() -> void:

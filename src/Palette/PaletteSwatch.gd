@@ -8,6 +8,7 @@ signal dropped(source_index: int, new_index: int)
 const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 
 var index := -1
+var color_index := -1
 var show_left_highlight := false
 var show_right_highlight := false
 var empty := true:
@@ -48,6 +49,22 @@ func _draw() -> void:
 		draw_rect(
 			Rect2(margin - Vector2.ONE, size - margin * 2 + Vector2(2, 2)), Color.WHITE, false, 1
 		)
+	if Global.show_pixel_indices:
+		var text := str(color_index + 1)
+		var font := Themes.get_font()
+		var str_pos := Vector2(size.x / 2, size.y - 2)
+		var text_color := Global.control.theme.get_color(&"font_color", &"Label")
+		draw_string_outline(
+			font,
+			str_pos,
+			text,
+			HORIZONTAL_ALIGNMENT_RIGHT,
+			-1,
+			size.x / 2,
+			1,
+			text_color.inverted()
+		)
+		draw_string(font, str_pos, text, HORIZONTAL_ALIGNMENT_RIGHT, -1, size.x / 2, text_color)
 
 
 ## Enables drawing of highlights which indicate selected swatches

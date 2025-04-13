@@ -168,16 +168,16 @@ class GeneralAPI:
 
 	## Returns a new ValueSliderV2. Useful for editing 2D vectors.
 	func create_value_slider_v2() -> ValueSliderV2:
-		return preload("res://src/UI/Nodes/ValueSliderV2.tscn").instantiate()
+		return preload("res://src/UI/Nodes/Sliders/ValueSliderV2.tscn").instantiate()
 
 	## Returns a new ValueSliderV3. Useful for editing 3D vectors.
 	func create_value_slider_v3() -> ValueSliderV3:
-		return preload("res://src/UI/Nodes/ValueSliderV3.tscn").instantiate()
+		return preload("res://src/UI/Nodes/Sliders/ValueSliderV3.tscn").instantiate()
 
 
 ## Gives ability to add/remove items from menus in the top bar.
 class MenuAPI:
-	enum { FILE, EDIT, SELECT, IMAGE, EFFECTS, VIEW, WINDOW, HELP }
+	enum { FILE, EDIT, SELECT, PROJECT, EFFECTS, VIEW, WINDOW, HELP }
 
 	# Menu methods
 	func _get_popup_menu(menu_type: int) -> PopupMenu:
@@ -188,8 +188,8 @@ class MenuAPI:
 				return Global.top_menu_container.edit_menu
 			SELECT:
 				return Global.top_menu_container.select_menu
-			IMAGE:
-				return Global.top_menu_container.image_menu
+			PROJECT:
+				return Global.top_menu_container.project_menu
 			EFFECTS:
 				return Global.top_menu_container.effects_menu
 			VIEW:
@@ -631,7 +631,7 @@ class ProjectAPI:
 
 	## Returns the current cel.
 	## Cel type can be checked using function [method get_class_name] inside the cel
-	## type can be GroupCel, PixelCel, Cel3D, or BaseCel.
+	## type can be GroupCel, PixelCel, Cel3D, CelTileMap, AudioCel or BaseCel.
 	func get_current_cel() -> BaseCel:
 		return current_project.get_current_cel()
 
@@ -673,7 +673,7 @@ class ProjectAPI:
 			var old_current := project.current_layer
 			project.current_layer = above_layer  # temporary assignment
 			if type >= 0 and type < Global.LayerTypes.size():
-				Global.animation_timeline.add_layer(type)
+				Global.animation_timeline.on_add_layer_list_id_pressed(type)
 				if name != "":
 					project.layers[above_layer + 1].name = name
 					var l_idx := Global.layer_vbox.get_child_count() - (above_layer + 2)
@@ -896,7 +896,7 @@ class SignalsAPI:
 	# TOOL RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever a tool changes color.[br]
-	## [b]Binds: [/b] It has two bind of type [Color] (indicating new color)
+	## [b]Binds: [/b] It has two bind of type [Color] (a dictionary with keys "color" and "index")
 	## and [int] (Indicating button that tool is assigned to, see [enum @GlobalScope.MouseButton])
 	func signal_tool_color_changed(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Tools.color_changed, callable, is_disconnecting)

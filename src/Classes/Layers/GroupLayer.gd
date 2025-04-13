@@ -13,7 +13,9 @@ func _init(_project: Project, _name := "") -> void:
 
 ## Blends all of the images of children layer of the group layer into a single image.
 func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
-	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var image := ImageExtended.create_custom(
+		project.size.x, project.size.y, false, project.get_image_format(), project.is_indexed()
+	)
 	var children := get_children(false)
 	if children.size() <= 0:
 		return image
@@ -22,9 +24,6 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 	var current_child_index := 0
 	for i in children.size():
 		var layer := children[i]
-		if not layer.is_visible_in_hierarchy():
-			current_child_index += 1
-			continue
 		if layer is GroupLayer:
 			current_child_index = _blend_child_group(
 				image,
@@ -66,7 +65,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 
 
 func _include_child_in_blending(
-	image: Image,
+	image: ImageExtended,
 	layer: BaseLayer,
 	frame: Frame,
 	textures: Array[Image],
@@ -100,7 +99,7 @@ func _include_child_in_blending(
 ## Gets called recursively if the child group has children groups of its own,
 ## and they are also set to pass through mode.
 func _blend_child_group(
-	image: Image,
+	image: ImageExtended,
 	layer: BaseLayer,
 	frame: Frame,
 	textures: Array[Image],
@@ -165,3 +164,7 @@ func set_name_to_default(number: int) -> void:
 
 func accepts_child(_layer: BaseLayer) -> bool:
 	return true
+
+
+func is_blender() -> bool:
+	return blend_mode != BlendModes.PASS_THROUGH

@@ -79,6 +79,8 @@ func _confirmed() -> void:
 			var cel := project.frames[cel_index[0]].cels[cel_index[1]]
 			if not cel is PixelCel:
 				continue
+			if cel is CelTileMap and cel.place_only_mode:
+				continue
 			commit_idx = cel_index[0]  # frame is cel_index[0] in this mode
 			commit_action(cel.image)
 		_commit_undo("Draw", undo_data, project)
@@ -90,6 +92,9 @@ func _confirmed() -> void:
 		commit_idx = project.current_frame
 		for cel in project.frames[project.current_frame].cels:
 			if not cel is PixelCel:
+				i += 1
+				continue
+			if cel is CelTileMap and cel.place_only_mode:
 				i += 1
 				continue
 			if project.layers[i].can_layer_get_drawn():
@@ -105,6 +110,9 @@ func _confirmed() -> void:
 			commit_idx += 1  # frames are simply increasing by 1 in this mode
 			for cel in frame.cels:
 				if not cel is PixelCel:
+					i += 1
+					continue
+				if cel is CelTileMap and cel.place_only_mode:
 					i += 1
 					continue
 				if project.layers[i].can_layer_get_drawn():
@@ -123,6 +131,9 @@ func _confirmed() -> void:
 				commit_idx += 1  # frames are simply increasing by 1 in this mode
 				for cel in frame.cels:
 					if not cel is PixelCel:
+						i += 1
+						continue
+					if cel is CelTileMap and cel.place_only_mode:
 						i += 1
 						continue
 					if _project.layers[i].can_layer_get_drawn():
@@ -144,8 +155,10 @@ func set_nodes() -> void:
 	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 	animate_panel = $"%AnimatePanel"
-	animate_panel.image_effect_node = self
-	live_checkbox.button_pressed = live_preview
+	if is_instance_valid(animate_panel):
+		animate_panel.image_effect_node = self
+	if is_instance_valid(live_checkbox):
+		live_checkbox.button_pressed = live_preview
 
 
 func display_animate_dialog() -> void:
@@ -157,10 +170,14 @@ func display_animate_dialog() -> void:
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
+	project.update_tilemaps(undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	Global.undo_redo_compress_images(redo_data, undo_data, project)
+	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, -1, -1, project))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, -1, -1, project))
 	project.undo_redo.commit_action()
@@ -168,24 +185,22 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 
 func _get_undo_data(project: Project) -> Dictionary:
 	var data := {}
-	var images := _get_selected_draw_images(project)
-	for image in images:
-		data[image] = image.data
+	project.serialize_cel_undo_data(_get_selected_draw_cels(project), data)
 	return data
 
 
-func _get_selected_draw_images(project: Project) -> Array[Image]:
-	var images: Array[Image] = []
+func _get_selected_draw_cels(project: Project) -> Array[BaseCel]:
+	var images: Array[BaseCel] = []
 	if affect == SELECTED_CELS:
 		for cel_index in project.selected_cels:
 			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 			if cel is PixelCel:
-				images.append(cel.get_image())
+				images.append(cel)
 	else:
 		for frame in project.frames:
 			for cel in frame.cels:
 				if cel is PixelCel:
-					images.append(cel.get_image())
+					images.append(cel)
 	return images
 
 

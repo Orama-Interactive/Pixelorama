@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3hkjj3s6pe4x"]
+[gd_scene load_steps=11 format=3 uid="uid://b3hkjj3s6pe4x"]
 
-[ext_resource type="Script" path="res://src/Preferences/PreferencesDialog.gd" id="1"]
+[ext_resource type="Script" uid="uid://dek2dqmbe5dt3" path="res://src/Preferences/PreferencesDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bq7ibhm0txl5p" path="res://addons/keychain/ShortcutEdit.tscn" id="3"]
-[ext_resource type="Script" path="res://src/Preferences/ThemesPreferences.gd" id="3_nvl8k"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="7"]
-[ext_resource type="Script" path="res://src/Preferences/ExtensionsPreferences.gd" id="7_8ume5"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="8"]
+[ext_resource type="Script" uid="uid://dx8vbnfkoahh6" path="res://src/Preferences/ThemesPreferences.gd" id="3_nvl8k"]
+[ext_resource type="Script" uid="uid://cybud13k7nk1c" path="res://src/Preferences/GridPreferences.gd" id="4_76iff"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="5_rlmsh"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="7"]
+[ext_resource type="Script" uid="uid://dxjamv5np8av3" path="res://src/Preferences/ExtensionsPreferences.gd" id="7_8ume5"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="8"]
 [ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/Store.tscn" id="8_jmnx8"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
@@ -226,6 +228,18 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
+[node name="ShowNotificationLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Show notification labels"
+
+[node name="ShowNotificationCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
 [node name="NativeFileDialogsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["DesktopOnly", "NoSandbox"]]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -307,6 +321,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Small"
+popup/item_0/id = 0
 popup/item_1/text = "Big"
 popup/item_1/id = 1
 
@@ -320,6 +335,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Theme"
+popup/item_0/id = 0
 popup/item_1/text = "Custom"
 popup/item_1/id = 1
 
@@ -482,6 +498,30 @@ layout_mode = 2
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
 columns = 3
+script = ExtResource("4_76iff")
+
+[node name="GridsCountLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+text = "Grids visible:"
+
+[node name="Spacer" type="Control" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+
+[node name="GridsCount" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource("5_rlmsh")]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="GridsSelectLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+text = "Editing grid:"
+
+[node name="Spacer2" type="Control" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+
+[node name="GridsSelectContainer" type="HFlowContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
 
 [node name="GridTypeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 layout_mode = 2
@@ -496,43 +536,28 @@ size_flags_horizontal = 3
 tooltip_text = "Sets the type of the grid between rectangular, isometric or both"
 mouse_default_cursor_shape = 2
 selected = 0
-item_count = 3
+item_count = 4
 popup/item_0/text = "Rectangular"
+popup/item_0/id = 0
 popup/item_1/text = "Isometric"
 popup/item_1/id = 1
-popup/item_2/text = "All"
+popup/item_2/text = "Hexagonal (pointy-top)"
 popup/item_2/id = 2
+popup/item_3/text = "Hexagonal (flat-top)"
+popup/item_3/id = 3
 
 [node name="GridSizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_vertical = 1
 mouse_filter = 0
-text = "Rectangular grid size:"
+text = "Grid size:"
 
 [node name="GridSizeValue" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource("7")]
 layout_mode = 2
 size_flags_horizontal = 3
 value = Vector2(2, 2)
 min_value = Vector2(1, 1)
-allow_greater = true
-show_ratio = true
-prefix_x = "Width:"
-prefix_y = "Height:"
-suffix_x = "px"
-suffix_y = "px"
-
-[node name="IsometricGridSizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
-layout_mode = 2
-size_flags_vertical = 1
-mouse_filter = 0
-text = "Isometric grid size:"
-
-[node name="IsometricGridSizeValue" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource("7")]
-layout_mode = 2
-size_flags_horizontal = 3
-value = Vector2(16, 8)
-min_value = Vector2(2, 2)
 allow_greater = true
 show_ratio = true
 prefix_x = "Width:"
@@ -792,6 +817,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Theme"
+popup/item_0/id = 0
 popup/item_1/text = "Custom"
 popup/item_1/id = 1
 
@@ -1116,15 +1142,25 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
-[node name="WindowTransparencyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+[node name="WindowTransparencyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
 layout_mode = 2
 tooltip_text = "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
 mouse_filter = 0
 text = "Enable window transparency"
 
-[node name="WindowTransparency" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
+[node name="WindowTransparency" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
 layout_mode = 2
 tooltip_text = "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="DummyAudioDriverLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
+layout_mode = 2
+mouse_filter = 0
+text = "Use dummy audio driver"
+
+[node name="DummyAudioDriver" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "On"
 
@@ -1447,6 +1483,7 @@ text = "Pixelorama must be restarted for changes to take effect."
 mode = 1
 title = "Open File(s)"
 size = Vector2i(560, 400)
+always_on_top = true
 ok_button_text = "Open"
 file_mode = 1
 access = 2
@@ -1458,6 +1495,7 @@ transient = true
 
 [node name="EnableExtensionConfirmation" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
+always_on_top = true
 dialog_text = "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
 dialog_autowrap = true
 
@@ -1465,11 +1503,13 @@ dialog_autowrap = true
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(400, 100)
+always_on_top = true
 ok_button_text = "Delete Permanently"
 dialog_text = "Are you sure you want to delete this extension?"
 dialog_autowrap = true
 
 [node name="ResetOptionsConfirmation" type="ConfirmationDialog" parent="."]
+always_on_top = true
 dialog_text = "Are you sure you want to reset the selected options? There will be no way to undo this."
 
 [connection signal="about_to_popup" from="." to="." method="_on_PreferencesDialog_about_to_show"]
@@ -1478,6 +1518,7 @@ dialog_text = "Are you sure you want to reset the selected options? There will b
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Language/System Language" to="." method="_on_language_pressed" binds= [1]]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer/ShrinkApplyButton" to="." method="_on_shrink_apply_button_pressed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/FontSizeContainer/FontSizeApplyButton" to="." method="_on_font_size_apply_button_pressed"]
+[connection signal="value_changed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions/GridsCount" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" method="_on_grids_count_value_changed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader/Explore" to="Store" method="_on_explore_pressed"]
 [connection signal="empty_clicked" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/InstalledExtensions" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_InstalledExtensions_empty_clicked"]
 [connection signal="item_selected" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/InstalledExtensions" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_InstalledExtensions_item_selected"]

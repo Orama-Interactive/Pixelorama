@@ -15,6 +15,7 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var currently_visible_frame := $CurrentlyVisibleFrame as SubViewport
 @onready var current_frame_drawer := $CurrentlyVisibleFrame/CurrentFrameDrawer as Node2D
 @onready var tile_mode := $TileMode as Node2D
+@onready var color_index := $ColorIndex as Node2D
 @onready var pixel_grid := $PixelGrid as Node2D
 @onready var grid := $Grid as Node2D
 @onready var selection := $Selection as SelectionNode
@@ -33,11 +34,8 @@ var layer_metadata_texture := ImageTexture.new()
 func _ready() -> void:
 	material.set_shader_parameter("layers", layer_texture_array)
 	material.set_shader_parameter("metadata", layer_metadata_texture)
-	Global.project_switched.connect(
-		func():
-			project_changed = true
-			queue_redraw()
-	)
+	Global.project_switched.connect(queue_redraw_all_layers)
+	Global.cel_switched.connect(queue_redraw_all_layers)
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE
@@ -67,6 +65,7 @@ func _draw() -> void:
 	current_frame_drawer.queue_redraw()
 	tile_mode.queue_redraw()
 	draw_set_transform(position, rotation, scale)
+	color_index.queue_redraw()
 
 
 func _input(event: InputEvent) -> void:
@@ -101,6 +100,11 @@ func _input(event: InputEvent) -> void:
 		update_selected_cels_textures()
 
 
+func queue_redraw_all_layers() -> void:
+	project_changed = true
+	queue_redraw()
+
+
 func camera_zoom() -> void:
 	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
 		camera.fit_to_frame(Global.current_project.size)
@@ -108,13 +112,15 @@ func camera_zoom() -> void:
 	Global.transparent_checker.update_rect()
 
 
-func update_texture(layer_i: int, frame_i := -1, project := Global.current_project) -> void:
+func update_texture(
+	layer_i: int, frame_i := -1, project := Global.current_project, undo := false
+) -> void:
 	if frame_i == -1:
 		frame_i = project.current_frame
 
 	if frame_i < project.frames.size() and layer_i < project.layers.size():
 		var current_cel := project.frames[frame_i].cels[layer_i]
-		current_cel.update_texture()
+		current_cel.update_texture(undo)
 		# Needed so that changes happening to the non-selected layer(s) are also visible
 		# e.g. when undoing/redoing, when applying image effects to the entire frame, etc
 		if frame_i != project.current_frame:
@@ -122,7 +128,7 @@ func update_texture(layer_i: int, frame_i := -1, project := Global.current_proje
 			return
 		var layer := project.layers[layer_i].get_blender_ancestor()
 		var cel_image: Image
-		if layer is GroupLayer:
+		if layer.is_blender():
 			cel_image = layer.blend_children(
 				project.frames[project.current_frame], Vector2i.ZERO, Global.display_layer_effects
 			)
@@ -213,7 +219,7 @@ func _update_texture_array_layer(
 	var ordered_index := project.ordered_layers[layer.index]
 	var cel := project.frames[project.current_frame].cels[layer.index]
 	var include := true
-	if layer is GroupLayer and layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
+	if layer.is_blender():
 		cel_image.copy_from(
 			layer.blend_children(
 				project.frames[project.current_frame],

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5x85ysdouh4t"]
 
-[ext_resource type="Script" path="res://src/UI/Buttons/BrushesPopup.gd" id="1"]
+[ext_resource type="Script" uid="uid://ba58pum22xsy4" path="res://src/UI/Buttons/BrushesPopup.gd" id="1"]
 
 [node name="BrushesPopup" type="Popup"]
 canvas_item_default_texture_filter = 0

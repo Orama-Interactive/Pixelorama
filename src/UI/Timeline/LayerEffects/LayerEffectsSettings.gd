@@ -5,27 +5,50 @@ const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
 	LayerEffect.new(
-		"Convolution Matrix", preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader")
+		"Convolution Matrix",
+		preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"),
+		"Color"
 	),
-	LayerEffect.new("Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader")),
-	LayerEffect.new("Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
-	LayerEffect.new("Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader")),
-	LayerEffect.new("Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader")),
-	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Effects/Invert.gdshader")),
-	LayerEffect.new("Desaturation", preload("res://src/Shaders/Effects/Desaturate.gdshader")),
 	LayerEffect.new(
-		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader")
+		"Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
+	),
+	LayerEffect.new(
+		"Offset", preload("res://src/Shaders/Effects/OffsetPixels.gdshader"), "Transform"
+	),
+	LayerEffect.new(
+		"Gradient", preload("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"
+	),
+	LayerEffect.new(
+		"Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
+	),
+	LayerEffect.new(
+		"Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"
+	),
+	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Effects/Invert.gdshader"), "Color"),
+	LayerEffect.new(
+		"Desaturation", preload("res://src/Shaders/Effects/Desaturate.gdshader"), "Color"
+	),
+	LayerEffect.new(
+		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader"), "Color"
 	),
 	LayerEffect.new(
 		"Adjust Brightness/Contrast",
-		preload("res://src/Shaders/Effects/BrightnessContrast.gdshader")
+		preload("res://src/Shaders/Effects/BrightnessContrast.gdshader"),
+		"Color"
 	),
-	LayerEffect.new("Palettize", preload("res://src/Shaders/Effects/Palettize.gdshader")),
-	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader")),
-	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader")),
-	LayerEffect.new("Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader")),
-	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader")),
+	LayerEffect.new(
+		"Color Curves", preload("res://src/Shaders/Effects/ColorCurves.gdshader"), "Color"
+	),
+	LayerEffect.new("Palettize", preload("res://src/Shaders/Effects/Palettize.gdshader"), "Color"),
+	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader"), "Blur"),
+	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader"), "Color"),
+	LayerEffect.new(
+		"Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader"), "Color"
+	),
+	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
 ]
+## A dictionary that maps each category to a [PopupMenu].
+var category_submenus: Dictionary[String, PopupMenu] = {}
 
 @onready var enabled_button: CheckButton = $VBoxContainer/HBoxContainer/EnabledButton
 @onready var effect_list: MenuButton = $VBoxContainer/HBoxContainer/EffectList
@@ -34,9 +57,16 @@ var effects: Array[LayerEffect] = [
 
 
 func _ready() -> void:
-	for effect in effects:
-		effect_list.get_popup().add_item(effect.name)
-	effect_list.get_popup().id_pressed.connect(_on_effect_list_id_pressed)
+	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var effect_list_popup := effect_list.get_popup()
+	for i in effects.size():
+		_add_effect_to_list(i)
+	if not DirAccess.dir_exists_absolute(OpenSave.SHADERS_DIRECTORY):
+		DirAccess.make_dir_recursive_absolute(OpenSave.SHADERS_DIRECTORY)
+	for file_name in DirAccess.get_files_at(OpenSave.SHADERS_DIRECTORY):
+		_load_shader_file(OpenSave.SHADERS_DIRECTORY.path_join(file_name))
+	OpenSave.shader_copied.connect(_load_shader_file)
+	effect_list_popup.index_pressed.connect(_on_effect_list_pressed.bind(effect_list_popup))
 
 
 func _notification(what: int) -> void:
@@ -48,7 +78,8 @@ func _on_about_to_popup() -> void:
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	enabled_button.button_pressed = layer.effects_enabled
 	for effect in layer.effects:
-		_create_effect_ui(layer, effect)
+		if is_instance_valid(effect.shader):
+			_create_effect_ui(layer, effect)
 
 
 func _on_visibility_changed() -> void:
@@ -58,16 +89,48 @@ func _on_visibility_changed() -> void:
 			child.queue_free()
 
 
-func _on_effect_list_id_pressed(index: int) -> void:
+func _add_effect_to_list(i: int) -> void:
+	var effect_list_popup := effect_list.get_popup()
+	var effect := effects[i]
+	if effect.category.is_empty():
+		effect_list_popup.add_item(effect.name)
+		effect_list_popup.set_item_metadata(effect_list_popup.item_count - 1, i)
+	else:
+		if category_submenus.has(effect.category):
+			var submenu := category_submenus[effect.category]
+			submenu.add_item(effect.name)
+			submenu.set_item_metadata(submenu.item_count - 1, i)
+		else:
+			var submenu := PopupMenu.new()
+			effect_list_popup.add_submenu_node_item(effect.category, submenu)
+			submenu.add_item(effect.name)
+			submenu.set_item_metadata(submenu.item_count - 1, i)
+			submenu.index_pressed.connect(_on_effect_list_pressed.bind(submenu))
+			category_submenus[effect.category] = submenu
+
+
+func _load_shader_file(file_path: String) -> void:
+	var file := load(file_path)
+	if file is Shader:
+		var effect_name := file_path.get_file().get_basename()
+		var new_effect := LayerEffect.new(effect_name, file, "Loaded")
+		effects.append(new_effect)
+		_add_effect_to_list(effects.size() - 1)
+
+
+func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
+	var index: int = menu.get_item_metadata(menu_item_index)
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var effect := effects[index].duplicate()
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
-	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw_all_layers)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.erase(effect))
-	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw_all_layers)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()
 	_create_effect_ui(layer, effect)
@@ -124,7 +187,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 
 func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
 	effect.enabled = button_pressed
-	Global.canvas.queue_redraw()
+	Global.canvas.queue_redraw_all_layers()
 
 
 func move_effect(layer: BaseLayer, from_index: int, to_index: int) -> void:
@@ -139,9 +202,11 @@ func _delete_effect(effect: LayerEffect) -> void:
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Delete layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
+	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
 	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
+	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
 	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()
@@ -149,28 +214,51 @@ func _delete_effect(effect: LayerEffect) -> void:
 
 
 func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
+	var project := Global.current_project
 	var index := layer.effects.find(effect)
 	var redo_data := {}
 	var undo_data := {}
-	for frame in Global.current_project.frames:
+	for i in project.frames.size():
+		var frame := project.frames[i]
 		var cel := frame.cels[layer.index]
-		var new_image := Image.new()
-		new_image.copy_from(cel.get_image())
-		var image_size := new_image.get_size()
+		var cel_image := cel.get_image()
+		if cel is CelTileMap:
+			if cel.place_only_mode:
+				continue
+			undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
+		if cel_image is ImageExtended:
+			undo_data[cel_image.indices_image] = cel_image.indices_image.data
+		undo_data[cel_image] = cel_image.data
+		var image_size := cel_image.get_size()
+		var params := effect.params
+		params["PXO_time"] = frame.position_in_seconds(project)
+		params["PXO_frame_index"] = i
+		params["PXO_layer_index"] = layer.index
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(new_image, effect.shader, effect.params, image_size)
-		redo_data[cel.image] = new_image.data
-		undo_data[cel.image] = cel.image.data
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Apply layer effect")
-	Global.undo_redo_compress_images(redo_data, undo_data)
-	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
-	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
-	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
-	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
-	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	Global.current_project.undo_redo.commit_action()
+		shader_image_effect.generate_image(cel_image, effect.shader, params, image_size)
+
+	var tile_editing_mode := TileSetPanel.tile_editing_mode
+	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
+		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
+	project.update_tilemaps(undo_data, tile_editing_mode)
+	for frame in project.frames:
+		var cel := frame.cels[layer.index]
+		var cel_image := cel.get_image()
+		if cel is CelTileMap:
+			redo_data[cel] = (cel as CelTileMap).serialize_undo_data()
+		if cel_image is ImageExtended:
+			redo_data[cel_image.indices_image] = cel_image.indices_image.data
+		redo_data[cel_image] = cel_image.data
+	project.undos += 1
+	project.undo_redo.create_action("Apply layer effect")
+	project.deserialize_cel_undo_data(redo_data, undo_data)
+	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
+	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
+	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
 	effect_container.get_child(index).queue_free()
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0p84w7umxwt1"]
 
-[ext_resource type="Script" path="res://src/Palette/EditPaletteDialog.gd" id="1"]
+[ext_resource type="Script" uid="uid://d31hld1f7vyhh" path="res://src/Palette/EditPaletteDialog.gd" id="1"]
 
 [node name="EditPaletteDialog" type="ConfirmationDialog"]
 title = "Edit Palette"

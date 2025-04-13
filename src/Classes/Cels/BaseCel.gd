@@ -24,6 +24,13 @@ func get_final_opacity(layer: BaseLayer) -> float:
 	return layer.opacity * opacity
 
 
+func get_frame(project: Project) -> Frame:
+	for frame in project.frames:
+		if frame.cels.has(self):
+			return frame
+	return null
+
+
 # Methods to Override:
 
 
@@ -67,7 +74,7 @@ func get_image() -> Image:
 
 
 ## Used to update the texture of the cel.
-func update_texture() -> void:
+func update_texture(_undo := false) -> void:
 	texture_changed.emit()
 	if link_set != null:
 		var frame := Global.current_project.current_frame
@@ -90,6 +97,10 @@ func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
 	z_index = dict.get("z_index", z_index)
 	user_data = dict.get("user_data", user_data)
+
+
+func size_changed(_new_size: Vector2i) -> void:
+	pass
 
 
 ## Used to perform cleanup after a cel is removed.

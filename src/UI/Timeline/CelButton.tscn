@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dw7ci3uixjuev"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/CelButton.gd" id="1_iewgo"]
+[ext_resource type="Script" uid="uid://dgc2ea2ye53p8" path="res://src/UI/Timeline/CelButton.gd" id="1_iewgo"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2_mi8wp"]
-[ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="3_qv21g"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="3_qv21g"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("3_qv21g")
@@ -74,7 +74,6 @@ grow_vertical = 2
 [node name="PopupMenu" type="PopupMenu" parent="."]
 item_count = 1
 item_0/text = "Properties"
-item_0/id = 0
 
 [connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]

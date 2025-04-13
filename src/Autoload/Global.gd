@@ -14,8 +14,8 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 
-enum LayerTypes { PIXEL, GROUP, THREE_D }
-enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
+enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
+enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
 ## ## Used to tell whether a color is being taken from the current theme,
 ## or if it is a custom color.
 enum ColorFrom { THEME, CUSTOM }
@@ -25,7 +25,18 @@ enum MeasurementMode { NONE, MOVE }
 ## Enumeration of items present in the File Menu.
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
 ## Enumeration of items present in the Edit Menu.
-enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
+enum EditMenu {
+	UNDO,
+	REDO,
+	COPY,
+	CUT,
+	PASTE,
+	PASTE_IN_PLACE,
+	PASTE_FROM_CLIPBOARD,
+	DELETE,
+	NEW_BRUSH,
+	PREFERENCES
+}
 ## Enumeration of items present in the View Menu.
 enum ViewMenu {
 	CENTER_CANVAS,
@@ -35,43 +46,27 @@ enum ViewMenu {
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
+	SHOW_PIXEL_INDICES,
 	SHOW_RULERS,
 	SHOW_GUIDES,
 	SHOW_MOUSE_GUIDES,
+	SHOW_REFERENCE_IMAGES,
 	DISPLAY_LAYER_EFFECTS,
 	SNAP_TO,
 }
 ## Enumeration of items present in the Window Menu.
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
 ## Enumeration of items present in the Image Menu.
-enum ImageMenu {
+enum ProjectMenu {
 	PROJECT_PROPERTIES,
+	COLOR_MODE,
 	RESIZE_CANVAS,
 	SCALE_IMAGE,
 	CROP_TO_SELECTION,
 	CROP_TO_CONTENT,
 }
-## Enumeration of items present in the Effects menu.
-enum EffectsMenu {
-	OFFSET_IMAGE,
-	FLIP,
-	ROTATE,
-	OUTLINE,
-	DROP_SHADOW,
-	INVERT_COLORS,
-	DESATURATION,
-	HSV,
-	BRIGHTNESS_SATURATION,
-	PALETTIZE,
-	PIXELIZE,
-	POSTERIZE,
-	GAUSSIAN_BLUR,
-	GRADIENT,
-	GRADIENT_MAP,
-	SHADER
-}
 ## Enumeration of items present in the Select Menu.
-enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE, MODIFY }
+enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, SELECT_CEL_AREA, WRAP_STROKES, MODIFY }
 ## Enumeration of items present in the Help Menu.
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN,
@@ -178,10 +173,14 @@ var can_draw := true
 var move_guides_on_canvas := true
 
 var play_only_tags := true  ## If [code]true[/code], animation plays only on frames of the same tag.
-## (Intended to be used as getter only) Tells if the x-symmetry guide ( -- ) is visible.
+## If true, the x symmetry guide ( -- ) is visible.
 var show_x_symmetry_axis := false
-## (Intended to be used as getter only) Tells if the y-symmetry guide ( | ) is visible.
+## If true, the y symmetry guide ( | ) is visible.
 var show_y_symmetry_axis := false
+## If true, the x=y symmetry guide ( / ) is visible.
+var show_xy_symmetry_axis := false
+## If true, the x==y symmetry guide ( \ ) is visible.
+var show_x_minus_y_symmetry_axis := false
 
 # Preferences
 ## Found in Preferences. If [code]true[/code], the last saved project will open on startup.
@@ -233,6 +232,8 @@ var theme_font_index := 1:
 var font_size := 16
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
+## Found in Preferences. If [code]true[/code], notification labels appear.
+var show_notification_label := true
 ## Found in Preferences. If [code]true[/code], the native file dialogs of the
 ## operating system are being used, instead of Godot's FileDialog node.
 var use_native_file_dialogs := false:
@@ -332,55 +333,8 @@ var default_height := 64  ## Found in Preferences. The default height of startup
 var default_fill_color := Color(0, 0, 0, 0)
 ## Found in Preferences. The distance to the guide or grig below which cursor snapping activates.
 var snapping_distance := 32.0
-## Found in Preferences. The grid type defined by [enum GridTypes] enum.
-var grid_type := GridTypes.CARTESIAN:
-	set(value):
-		if value == grid_type:
-			return
-		grid_type = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. The size of rectangular grid.
-var grid_size := Vector2i(2, 2):
-	set(value):
-		if value == grid_size:
-			return
-		grid_size = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. The size of isometric grid.
-var isometric_grid_size := Vector2i(16, 8):
-	set(value):
-		if value == isometric_grid_size:
-			return
-		isometric_grid_size = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. The grid offset from top-left corner of the canvas.
-var grid_offset := Vector2i.ZERO:
-	set(value):
-		if value == grid_offset:
-			return
-		grid_offset = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. If [code]true[/code], The grid draws over the area extended by
-## tile-mode as well.
-var grid_draw_over_tile_mode := false:
-	set(value):
-		if value == grid_draw_over_tile_mode:
-			return
-		grid_draw_over_tile_mode = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
-## Found in Preferences. The color of grid.
-var grid_color := Color.BLACK:
-	set(value):
-		if value == grid_color:
-			return
-		grid_color = value
-		if is_instance_valid(canvas.grid):
-			canvas.grid.queue_redraw()
+## Contains dictionaries of individual grids.
+var grids: Array[Grid] = []
 ## Found in Preferences. The minimum zoom after which pixel grid gets drawn if enabled.
 var pixel_grid_show_at_zoom := 1500.0:  # percentage
 	set(value):
@@ -531,6 +485,11 @@ var window_transparency := false:
 			return
 		window_transparency = value
 		_save_to_override_file()
+var dummy_audio_driver := false:
+	set(value):
+		if value != dummy_audio_driver:
+			dummy_audio_driver = value
+			_save_to_override_file()
 
 ## Found in Preferences. The time (in minutes) after which backup is created (if enabled).
 var autosave_interval := 1.0:
@@ -597,6 +556,17 @@ var show_rulers := true:
 var show_guides := true
 ## If [code]true[/code], the mouse guides are visible.
 var show_mouse_guides := false
+## If [code]true[/code], the indices of color are shown.
+var show_pixel_indices := false:
+	set(value):
+		show_pixel_indices = value
+		if is_instance_valid(canvas.color_index):
+			canvas.color_index.enabled = value
+var show_reference_images := true:
+	set(value):
+		show_reference_images = value
+		if is_instance_valid(canvas.reference_image_container):
+			canvas.reference_image_container.visible = show_reference_images
 var display_layer_effects := true:
 	set(value):
 		if value == display_layer_effects:
@@ -672,6 +642,54 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var error_dialog: AcceptDialog = control.find_child("ErrorDialog")
 
 
+class Grid:
+	var grid_type := GridTypes.CARTESIAN:
+		set(value):
+			if value == grid_type:
+				return
+			grid_type = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. The size of the grid.
+	var grid_size := Vector2i(2, 2):
+		set(value):
+			if value == grid_size:
+				return
+			grid_size = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. The grid offset from top-left corner of the canvas.
+	var grid_offset := Vector2i.ZERO:
+		set(value):
+			if value == grid_offset:
+				return
+			grid_offset = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. If [code]true[/code], The grid draws over the area extended by
+	## tile-mode as well.
+	var grid_draw_over_tile_mode := false:
+		set(value):
+			if value == grid_draw_over_tile_mode:
+				return
+			grid_draw_over_tile_mode = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. The color of grid.
+	var grid_color := Color.BLACK:
+		set(value):
+			if value == grid_color:
+				return
+			grid_color = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+
+	func _init(properties := {}) -> void:
+		Global.grids.append(self)
+		for prop in properties.keys():
+			set(prop, properties[prop])
+
+
 func _init() -> void:
 	# Load settings from the config file
 	config_cache.load(CONFIG_PATH)
@@ -705,9 +723,12 @@ func _init() -> void:
 	window_transparency = ProjectSettings.get_setting(
 		"display/window/per_pixel_transparency/allowed"
 	)
+	dummy_audio_driver = ProjectSettings.get_setting("audio/driver/driver") == "Dummy"
 
 
 func _ready() -> void:
+	# Initialize Grid
+	Grid.new()  # gets auto added to grids array
 	_initialize_keychain()
 	default_width = config_cache.get_value("preferences", "default_width", default_width)
 	default_height = config_cache.get_value("preferences", "default_height", default_height)
@@ -720,15 +741,31 @@ func _ready() -> void:
 	current_project.fill_color = default_fill_color
 
 	# Load preferences from the config file
-	for pref in config_cache.get_section_keys("preferences"):
-		if get(pref) == null:
-			continue
-		var value = config_cache.get_value("preferences", pref)
-		set(pref, value)
+	if config_cache.has_section("preferences"):
+		for pref in config_cache.get_section_keys("preferences"):
+			if get(pref) == null:
+				continue
+			var value = config_cache.get_value("preferences", pref)
+			if pref == "grids":
+				if value:
+					update_grids(value)
+			else:
+				set(pref, value)
 	if OS.is_sandboxed():
 		Global.use_native_file_dialogs = true
 	await get_tree().process_frame
 	project_switched.emit()
+	canvas.color_index.enabled = show_pixel_indices  # Initialize color index preview
+
+
+func update_grids(grids_data: Dictionary):
+	# Remove old grids
+	grids.clear()
+	if is_instance_valid(Global.canvas.grid):
+		Global.canvas.grid.queue_redraw()
+	# ADD new ones
+	for grid_idx in grids_data.size():
+		Grid.new(grids_data[grid_idx])  # gets auto added to grids array
 
 
 func _initialize_keychain() -> void:
@@ -748,6 +785,7 @@ func _initialize_keychain() -> void:
 		&"copy": Keychain.InputAction.new("", "Edit menu", true),
 		&"paste": Keychain.InputAction.new("", "Edit menu", true),
 		&"paste_in_place": Keychain.InputAction.new("", "Edit menu", true),
+		&"paste_from_clipboard": Keychain.InputAction.new("", "Edit menu", true),
 		&"delete": Keychain.InputAction.new("", "Edit menu", true),
 		&"new_brush": Keychain.InputAction.new("", "Edit menu", true),
 		&"preferences": Keychain.InputAction.new("", "Edit menu", true),
@@ -765,6 +803,7 @@ func _initialize_keychain() -> void:
 		&"drop_shadow": Keychain.InputAction.new("", "Effects menu", true),
 		&"adjust_hsv": Keychain.InputAction.new("", "Effects menu", true),
 		&"adjust_brightness_contrast": Keychain.InputAction.new("", "Effects menu", true),
+		&"color_curves": Keychain.InputAction.new("", "Effects menu", true),
 		&"gaussian_blur": Keychain.InputAction.new("", "Effects menu", true),
 		&"gradient": Keychain.InputAction.new("", "Effects menu", true),
 		&"gradient_map": Keychain.InputAction.new("", "Effects menu", true),
@@ -775,8 +814,10 @@ func _initialize_keychain() -> void:
 		&"mirror_view": Keychain.InputAction.new("", "View menu", true),
 		&"show_grid": Keychain.InputAction.new("", "View menu", true),
 		&"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),
+		&"show_pixel_indices": Keychain.InputAction.new("", "View menu", true),
 		&"show_guides": Keychain.InputAction.new("", "View menu", true),
 		&"show_rulers": Keychain.InputAction.new("", "View menu", true),
+		&"show_reference_images": Keychain.InputAction.new("", "View menu", true),
 		&"display_layer_effects": Keychain.InputAction.new("", "View menu", true),
 		&"moveable_panels": Keychain.InputAction.new("", "Window menu", true),
 		&"zen_mode": Keychain.InputAction.new("", "Window menu", true),
@@ -784,6 +825,7 @@ func _initialize_keychain() -> void:
 		&"clear_selection": Keychain.InputAction.new("", "Select menu", true),
 		&"select_all": Keychain.InputAction.new("", "Select menu", true),
 		&"invert_selection": Keychain.InputAction.new("", "Select menu", true),
+		&"select_cel_area": Keychain.InputAction.new("", "Select menu", true),
 		&"view_splash_screen": Keychain.InputAction.new("", "Help menu", true),
 		&"open_docs": Keychain.InputAction.new("", "Help menu", true),
 		&"issue_tracker": Keychain.InputAction.new("", "Help menu", true),
@@ -838,6 +880,7 @@ func _initialize_keychain() -> void:
 		&"brush_size_increment": Keychain.InputAction.new("", "Buttons"),
 		&"brush_size_decrement": Keychain.InputAction.new("", "Buttons"),
 		&"change_tool_mode": Keychain.InputAction.new("", "Tool modifiers", false),
+		&"swap_tools": Keychain.InputAction.new("", "Tool modifiers", false),
 		&"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_color_picker": Keychain.InputAction.new("Quick color picker", "Draw tools", false),
@@ -859,12 +902,21 @@ func _initialize_keychain() -> void:
 		&"reference_rotate": Keychain.InputAction.new("", "Reference images", false),
 		&"reference_scale": Keychain.InputAction.new("", "Reference images", false),
 		&"reference_quick_menu": Keychain.InputAction.new("", "Reference images", false),
-		&"cancel_reference_transform": Keychain.InputAction.new("", "Reference images", false)
+		&"cancel_reference_transform": Keychain.InputAction.new("", "Reference images", false),
+		&"toggle_draw_tiles_mode": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_edit_mode_manual": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_edit_mode_auto": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_edit_mode_stack": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_rotate_left": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_rotate_right": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_flip_horizontal": Keychain.InputAction.new("", "Tileset panel", false),
+		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false)
 	}
 
 	Keychain.groups = {
 		"Canvas": Keychain.InputGroup.new("", false),
 		"Cursor movement": Keychain.InputGroup.new("Canvas"),
+		"Reference images": Keychain.InputGroup.new("Canvas"),
 		"Buttons": Keychain.InputGroup.new(),
 		"Tools": Keychain.InputGroup.new(),
 		"Left": Keychain.InputGroup.new("Tools"),
@@ -883,13 +935,15 @@ func _initialize_keychain() -> void:
 		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
-		"Reference images": Keychain.InputGroup.new("Canvas")
+		"Tileset panel": Keychain.InputGroup.new()
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 
 
 ## Generates an animated notification label showing [param text].
 func notification_label(text: String) -> void:
+	if not show_notification_label:
+		return
 	var notif := NotificationLabel.new()
 	notif.text = tr(text)
 	notif.position = main_viewport.global_position
@@ -916,7 +970,7 @@ func general_redo(project := current_project) -> void:
 ## Performs actions done after an undo or redo is done. this takes [member general_undo] and
 ## [member general_redo] a step further. Does further work if the current action requires it
 ## like refreshing textures, redraw UI elements etc...[br]
-## [param frame_index] and [param layer_index] are there for optimizzation. if the undo or redo
+## [param frame_index] and [param layer_index] are there for optimization. if the undo or redo
 ## happens only in one cel then the cel's frame and layer should be passed to [param frame_index]
 ## and [param layer_index] respectively, otherwise the entire timeline will be refreshed.
 func undo_or_redo(
@@ -942,20 +996,24 @@ func undo_or_redo(
 		]
 	):
 		if layer_index > -1 and frame_index > -1:
-			canvas.update_texture(layer_index, frame_index, project)
+			var cel := project.frames[frame_index].cels[layer_index]
+			if action_name == "Scale":
+				cel.size_changed(project.size)
+			canvas.update_texture(layer_index, frame_index, project, undo)
 		else:
 			for i in project.frames.size():
 				for j in project.layers.size():
-					canvas.update_texture(j, i, project)
+					var cel := project.frames[i].cels[j]
+					if action_name == "Scale":
+						cel.size_changed(project.size)
+					canvas.update_texture(j, i, project, undo)
 
 		canvas.selection.queue_redraw()
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
 					var current_cel := project.frames[i].cels[j]
-					if current_cel is Cel3D:
-						current_cel.size_changed(project.size)
-					else:
+					if current_cel is not Cel3D:
 						current_cel.image_texture.set_image(current_cel.get_image())
 			canvas.camera_zoom()
 			canvas.grid.queue_redraw()
@@ -1061,7 +1119,9 @@ func get_available_font_names() -> PackedStringArray:
 		if font_name in font_names:
 			continue
 		font_names.append(font_name)
-	for system_font_name in OS.get_system_fonts():
+	var system_fonts := OS.get_system_fonts()
+	system_fonts.sort()
+	for system_font_name in system_fonts:
 		if system_font_name in font_names:
 			continue
 		font_names.append(system_font_name)
@@ -1071,7 +1131,7 @@ func get_available_font_names() -> PackedStringArray:
 func find_font_from_name(font_name: String) -> Font:
 	for font in loaded_fonts:
 		if font.get_font_name() == font_name:
-			return font
+			return font.duplicate()
 	for system_font_name in OS.get_system_fonts():
 		if system_font_name == font_name:
 			var system_font := SystemFont.new()
@@ -1113,8 +1173,17 @@ func undo_redo_compress_images(
 func undo_redo_draw_op(
 	image: Image, new_size: Vector2i, compressed_image_data: PackedByteArray, buffer_size: int
 ) -> void:
-	var decompressed := compressed_image_data.decompress(buffer_size)
-	image.set_data(new_size.x, new_size.y, image.has_mipmaps(), image.get_format(), decompressed)
+	if image is ImageExtended and image.is_indexed:
+		# If using indexed mode,
+		# just convert the indices to RGB instead of setting the image data directly.
+		if image.get_size() != new_size:
+			image.crop(new_size.x, new_size.y)
+		image.convert_indexed_to_rgb()
+	else:
+		var decompressed := compressed_image_data.decompress(buffer_size)
+		image.set_data(
+			new_size.x, new_size.y, image.has_mipmaps(), image.get_format(), decompressed
+		)
 
 
 ## This method is used to write project setting overrides to the override.cfg file, located
@@ -1129,3 +1198,6 @@ func _save_to_override_file() -> void:
 	file.store_line("[display]\n")
 	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
 	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)
+	if dummy_audio_driver:
+		file.store_line("[audio]\n")
+		file.store_line('driver/driver="Dummy"')

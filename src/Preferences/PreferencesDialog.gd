@@ -15,6 +15,12 @@ var preferences: Array[Preference] = [
 		"dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed", true
 	),
 	Preference.new(
+		"show_notification_label",
+		"Interface/InterfaceOptions/ShowNotificationCheckBox",
+		"button_pressed",
+		true
+	),
+	Preference.new(
 		"use_native_file_dialogs",
 		"Interface/InterfaceOptions/NativeFileDialogs",
 		"button_pressed",
@@ -94,21 +100,6 @@ var preferences: Array[Preference] = [
 	Preference.new("smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "button_pressed", true),
 	Preference.new("integer_zoom", "Canvas/ZoomOptions/IntegerZoom", "button_pressed", false),
 	Preference.new("snapping_distance", "Canvas/SnappingOptions/DistanceValue", "value", 32.0),
-	Preference.new(
-		"grid_type", "Canvas/GridOptions/GridType", "selected", Global.GridTypes.CARTESIAN
-	),
-	Preference.new("grid_size", "Canvas/GridOptions/GridSizeValue", "value", Vector2i(2, 2)),
-	Preference.new(
-		"isometric_grid_size", "Canvas/GridOptions/IsometricGridSizeValue", "value", Vector2i(16, 8)
-	),
-	Preference.new("grid_offset", "Canvas/GridOptions/GridOffsetValue", "value", Vector2i.ZERO),
-	Preference.new(
-		"grid_draw_over_tile_mode",
-		"Canvas/GridOptions/GridDrawOverTileMode",
-		"button_pressed",
-		false
-	),
-	Preference.new("grid_color", "Canvas/GridOptions/GridColor", "color", Color.BLACK),
 	Preference.new(
 		"pixel_grid_show_at_zoom", "Canvas/PixelGridOptions/ShowAtZoom", "value", 1500.0
 	),
@@ -192,6 +183,13 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"window_transparency",
 		"Performance/PerformanceContainer/WindowTransparency",
+		"button_pressed",
+		false,
+		true
+	),
+	Preference.new(
+		"dummy_audio_driver",
+		"Performance/PerformanceContainer/DummyAudioDriver",
 		"button_pressed",
 		false,
 		true

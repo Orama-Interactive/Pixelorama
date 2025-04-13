@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://omm7xmtf5kbj"]
 
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/ScaleImage.gd" id="1"]
+[ext_resource type="Script" uid="uid://cavkfeuobk4b7" path="res://src/UI/Dialogs/ImageEffects/ScaleImage.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://kd10jfc1dxf5" path="res://assets/graphics/misc/lock_aspect_guides.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://cancw70yw0pv7" path="res://assets/graphics/misc/lock_aspect_2.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://beqermx8s5q8y" path="res://assets/graphics/misc/lock_aspect.png" id="4"]

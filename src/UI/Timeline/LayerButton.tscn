@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://bai814sqvk68f"]
+[gd_scene load_steps=10 format=3 uid="uid://bai814sqvk68f"]
 
-[ext_resource type="Script" path="res://src/UI/Timeline/LayerButton.gd" id="1_6hlpe"]
+[ext_resource type="Script" uid="uid://dvexfklwk4l53" path="res://src/UI/Timeline/LayerButton.gd" id="1_6hlpe"]
 [ext_resource type="Texture2D" uid="uid://c2b3htff5yox8" path="res://assets/graphics/layers/layer_visible.png" id="2_ef6fb"]
 [ext_resource type="Texture2D" uid="uid://dndlglvqc7v6a" path="res://assets/graphics/layers/group_expanded.png" id="2_enrtd"]
 [ext_resource type="Texture2D" uid="uid://dhc0pnnqojd2m" path="res://assets/graphics/layers/unlock.png" id="3_ah1my"]
 [ext_resource type="Texture2D" uid="uid://cofw1x6chh4i" path="res://assets/graphics/layers/unlinked_layer.png" id="4_058qm"]
 [ext_resource type="Texture2D" uid="uid://ieo8fsapcgsy" path="res://assets/graphics/layers/clipping_mask.png" id="6_73j5q"]
-[ext_resource type="Script" path="res://src/UI/Timeline/LayerMainButton.gd" id="6_n8q6b"]
+[ext_resource type="Script" uid="uid://bgvjodkehy0qn" path="res://src/UI/Timeline/LayerMainButton.gd" id="6_n8q6b"]
+[ext_resource type="Texture2D" uid="uid://dv5y24sb8lxg2" path="res://assets/graphics/layers/layer_active_effect.png" id="8_7wf6f"]
+[ext_resource type="Texture2D" uid="uid://cjvk47bd56156" path="res://assets/graphics/layers/type_icons/layer_pixel.png" id="8_ce16y"]
 
 [node name="LayerButton" type="HBoxContainer"]
 anchors_preset = 15
@@ -125,6 +127,16 @@ theme_type_variation = &"LayerFrameButton"
 toggle_mode = true
 script = ExtResource("6_n8q6b")
 
+[node name="LayerUIColor" type="ColorRect" parent="LayerMainButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
 [node name="LayerName" type="HBoxContainer" parent="LayerMainButton"]
 layout_mode = 1
 anchors_preset = 15
@@ -164,6 +176,25 @@ text = "Layer 0"
 editable = false
 caret_blink = true
 caret_blink_interval = 0.5
+
+[node name="LayerFXTextureRect" type="TextureRect" parent="LayerMainButton/LayerName" groups=["UIButtons"]]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("8_7wf6f")
+stretch_mode = 3
+flip_v = true
+
+[node name="LayerTypeTextureRect" type="TextureRect" parent="LayerMainButton/LayerName" groups=["UIButtons"]]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 2
+texture = ExtResource("8_ce16y")
+stretch_mode = 3
+
+[node name="MarginSpacer" type="Control" parent="LayerMainButton/LayerName"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
 disable_3d = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://byu3rtoipuvoc"]
 
-[ext_resource type="Script" path="res://src/UI/ToolsPanel/ToolButtons.gd" id="1"]
+[ext_resource type="Script" uid="uid://wk8okc05jsil" path="res://src/UI/ToolsPanel/ToolButtons.gd" id="1"]
 
 [node name="Tools" type="ScrollContainer"]
 custom_minimum_size = Vector2(36, 36)

@@ -11,7 +11,8 @@ enum ImageImportOptions {
 	NEW_REFERENCE_IMAGE,
 	PALETTE,
 	BRUSH,
-	PATTERN
+	PATTERN,
+	TILESET
 }
 enum BrushTypes { FILE, PROJECT, RANDOM }
 
@@ -23,6 +24,8 @@ var recycle_last_slice_result := false  # Should we recycle the current sliced_r
 var sliced_rects: RegionUnpacker.RectData
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
+var tile_shape := TileSet.TILE_SHAPE_SQUARE
+var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL
 var brush_type := BrushTypes.FILE
 var opened_once := false
 var is_main := false
@@ -52,6 +55,7 @@ var custom_importers := {}
 # depending on what your import option requires.
 ## container of spritesheet related import options
 @onready var spritesheet_options := %ImportOptions/SpritesheetOptions as VBoxContainer
+@onready var tileset_options: GridContainer = %ImportOptions/TilesetOptions
 ## container of frame related import options
 @onready var at_frame_option := %ImportOptions/AtFrame as HBoxContainer
 ## container of layer related import options
@@ -75,6 +79,7 @@ func _on_ImportPreviewDialog_about_to_show() -> void:
 	import_option_button.add_item("New palette")
 	import_option_button.add_item("New brush")
 	import_option_button.add_item("New pattern")
+	import_option_button.add_item("Tileset")
 
 	# adding custom importers
 	for id in custom_importers.keys():
@@ -207,6 +212,27 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 			var location := "Patterns".path_join(file_name_ext)
 			var dir := DirAccess.open(path.get_base_dir())
 			dir.copy(path, Global.home_data_directory.path_join(location))
+		elif current_import_option == ImageImportOptions.TILESET:
+			if smart_slice:
+				if !recycle_last_slice_result:
+					obtain_sliced_data()
+				OpenSave.open_image_as_tileset_smart(
+					path,
+					image,
+					sliced_rects.rects,
+					sliced_rects.frame_size,
+					tile_shape,
+					tile_offset_axis
+				)
+			else:
+				OpenSave.open_image_as_tileset(
+					path,
+					image,
+					spritesheet_horizontal,
+					spritesheet_vertical,
+					tile_shape,
+					tile_offset_axis
+				)
 
 		else:
 			if current_import_option in custom_importers.keys():
@@ -250,7 +276,11 @@ func synchronize() -> void:
 			dialog.at_layer_option.get_node("AtLayerOption") as OptionButton
 		)
 		# Sync properties (if any)
-		if id == ImageImportOptions.SPRITESHEET_TAB or id == ImageImportOptions.SPRITESHEET_LAYER:
+		if (
+			id == ImageImportOptions.SPRITESHEET_TAB
+			or id == ImageImportOptions.SPRITESHEET_LAYER
+			or id == ImageImportOptions.TILESET
+		):
 			var h_frames := spritesheet_options.find_child("HorizontalFrames") as SpinBox
 			var v_frames := spritesheet_options.find_child("VerticalFrames") as SpinBox
 			var d_h_frames := dialog.spritesheet_options.find_child("HorizontalFrames") as SpinBox
@@ -298,11 +328,13 @@ func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 	_hide_all_options()
 	import_options.get_parent().visible = true
 
-	if id == ImageImportOptions.SPRITESHEET_TAB:
+	if id == ImageImportOptions.SPRITESHEET_TAB or id == ImageImportOptions.TILESET:
 		frame_size_label.visible = true
 		spritesheet_options.visible = true
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
+		if id == ImageImportOptions.TILESET:
+			tileset_options.visible = true
 
 	elif id == ImageImportOptions.SPRITESHEET_LAYER:
 		frame_size_label.visible = true
@@ -430,6 +462,18 @@ func spritesheet_frame_value_changed() -> void:
 	_call_queue_redraw()
 
 
+func _on_tile_shape_option_button_item_selected(index: int) -> void:
+	var tile_shape_option_button := tileset_options.get_node("TileShapeOptionButton")
+	tile_shape = tile_shape_option_button.get_item_id(index)
+	_call_queue_redraw()
+
+
+func _on_tile_offset_axis_button_item_selected(index: int) -> void:
+	var tile_offset_axis_button := tileset_options.get_node("TileOffsetAxisButton")
+	tile_offset_axis = tile_offset_axis_button.get_item_id(index)
+	_call_queue_redraw()
+
+
 func _on_BrushTypeOption_item_selected(index: BrushTypes) -> void:
 	brush_type = index
 	new_brush_options.get_node("BrushName").visible = false
@@ -505,6 +549,7 @@ func _call_queue_redraw() -> void:
 	if (
 		current_import_option == ImageImportOptions.SPRITESHEET_TAB
 		or current_import_option == ImageImportOptions.SPRITESHEET_LAYER
+		or current_import_option == ImageImportOptions.TILESET
 	):
 		if smart_slice:
 			if is_instance_valid(sliced_rects) and not sliced_rects.rects.is_empty():

@@ -63,22 +63,11 @@ func draw_preview() -> void:
 			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(points[i]):
 				image.set_pixelv(points[i], Color.WHITE)
 		# Handle mirroring
-		if Tools.horizontal_mirror:
-			for point in mirror_array(points, true, false):
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-					image.set_pixelv(point, Color.WHITE)
-			if Tools.vertical_mirror:
-				for point in mirror_array(points, true, true):
-					if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-						image.set_pixelv(point, Color.WHITE)
-		if Tools.vertical_mirror:
-			for point in mirror_array(points, false, true):
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-					image.set_pixelv(point, Color.WHITE)
+		for point in mirror_array(points):
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+				image.set_pixelv(point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		canvas.texture = texture
-	else:
-		canvas.texture = null
 
 
 func apply_selection(_position: Vector2i) -> void:
@@ -90,18 +79,37 @@ func apply_selection(_position: Vector2i) -> void:
 			Global.canvas.selection.commit_undo("Select", undo_data)
 	if _rect.size == Vector2i.ZERO:
 		return
-	set_ellipse(project.selection_map, _rect.position)
-	# Handle mirroring
-	var mirror_positions := Tools.get_mirrored_positions(_rect.position, project, 1)
-	var mirror_ends := Tools.get_mirrored_positions(_rect.end, project, 1)
-	for i in mirror_positions.size():
-		var mirror_rect := Rect2i()
-		mirror_rect.position = mirror_positions[i]
-		mirror_rect.end = mirror_ends[i]
-		set_ellipse(project.selection_map, mirror_rect.abs().position)
+	if Tools.is_placing_tiles():
+		var operation := 0
+		if _subtract:
+			operation = 1
+		elif _intersect:
+			operation = 2
+		Global.canvas.selection.select_rect(_rect, operation)
+		# Handle mirroring
+		var mirror_positions := Tools.get_mirrored_positions(_rect.position, project, 1)
+		var mirror_ends := Tools.get_mirrored_positions(_rect.end, project, 1)
+		for i in mirror_positions.size():
+			var mirror_rect := Rect2i()
+			mirror_rect.position = mirror_positions[i]
+			mirror_rect.end = mirror_ends[i]
+			Global.canvas.selection.select_rect(mirror_rect.abs(), operation)
 
-	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
-	Global.canvas.selection.commit_undo("Select", undo_data)
+		Global.canvas.selection.commit_undo("Select", undo_data)
+	else:
+		set_ellipse(project.selection_map, _rect.position)
+		# Handle mirroring
+		var mirror_positions := Tools.get_mirrored_positions(_rect.position, project, 1)
+		var mirror_ends := Tools.get_mirrored_positions(_rect.end, project, 1)
+		for i in mirror_positions.size():
+			var mirror_rect := Rect2i()
+			mirror_rect.position = mirror_positions[i]
+			mirror_rect.end = mirror_ends[i]
+			set_ellipse(project.selection_map, mirror_rect.abs().position)
+
+		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
+		Global.canvas.selection.commit_undo("Select", undo_data)
+	Global.canvas.previews_sprite.texture = null
 
 
 func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
@@ -125,8 +133,13 @@ func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
 # Given an origin point and destination point, returns a rect representing
 # where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
+	if Tools.is_placing_tiles():
+		var cel := Global.current_project.get_current_cel() as CelTileMap
+		var grid_size := cel.get_tile_size()
+		var offset := cel.offset % grid_size
+		origin = Tools.snap_to_rectangular_grid_boundary(origin, grid_size, offset)
+		dest = Tools.snap_to_rectangular_grid_boundary(dest, grid_size, offset)
 	var rect := Rect2i()
-
 	# Center the rect on the mouse
 	if _expand_from_center:
 		var new_size := dest - origin
@@ -149,6 +162,7 @@ func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 		rect.position = Vector2i(mini(origin.x, dest.x), mini(origin.y, dest.y))
 		rect.size = (origin - dest).abs()
 
-	rect.size += Vector2i.ONE
+	if not Tools.is_placing_tiles():
+		rect.size += Vector2i.ONE
 
 	return rect

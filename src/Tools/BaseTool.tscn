@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ctfgfelg0sho8"]
 
-[ext_resource type="Script" path="res://src/Tools/BaseTool.gd" id="1"]
+[ext_resource type="Script" uid="uid://cvovhck0o66tc" path="res://src/Tools/BaseTool.gd" id="1"]
 
 [node name="ToolOptions" type="VBoxContainer"]
 offset_left = 7.0

@@ -83,6 +83,8 @@ func get_leaf() -> DockableLayoutPanel:
 
 
 func get_layout_minimum_size() -> Vector2:
+	hide()
+	show()
 	return get_combined_minimum_size()
 
 

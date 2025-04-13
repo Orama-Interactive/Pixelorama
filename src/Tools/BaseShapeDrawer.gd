@@ -1,4 +1,4 @@
-extends "res://src/Tools/BaseDraw.gd"
+extends BaseDrawTool
 
 var _start := Vector2i.ZERO
 var _offset := Vector2i.ZERO
@@ -128,8 +128,8 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_end(pos)
 	if _picking_color:
+		super.draw_end(pos)
 		return
 
 	if _drawing:
@@ -148,8 +148,10 @@ func draw_end(pos: Vector2i) -> void:
 		_start = Vector2i.ZERO
 		_dest = Vector2i.ZERO
 		_drawing = false
+		Global.canvas.previews_sprite.texture = null
 		_displace_origin = false
 		cursor_text = ""
+	super.draw_end(pos)
 
 
 func draw_preview() -> void:
@@ -168,22 +170,11 @@ func draw_preview() -> void:
 			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(points[i]):
 				image.set_pixelv(points[i], Color.WHITE)
 		# Handle mirroring
-		if Tools.horizontal_mirror:
-			for point in mirror_array(points, true, false):
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-					image.set_pixelv(point, Color.WHITE)
-			if Tools.vertical_mirror:
-				for point in mirror_array(points, true, true):
-					if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-						image.set_pixelv(point, Color.WHITE)
-		if Tools.vertical_mirror:
-			for point in mirror_array(points, false, true):
-				if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-					image.set_pixelv(point, Color.WHITE)
+		for point in mirror_array(points):
+			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+				image.set_pixelv(point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
 		canvas.texture = texture
-	else:
-		canvas.texture = null
 
 
 func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
@@ -197,9 +188,12 @@ func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
 		var draw_pos := point + thickness_vector
-		if Global.current_project.can_pixel_get_drawn(draw_pos):
-			for image in images:
-				_drawer.set_pixel(image, draw_pos, tool_slot.color)
+		if Tools.is_placing_tiles():
+			draw_tile(draw_pos)
+		else:
+			if Global.current_project.can_pixel_get_drawn(draw_pos):
+				for image in images:
+					_drawer.set_pixel(image, draw_pos, tool_slot.color)
 
 	commit_undo()
 

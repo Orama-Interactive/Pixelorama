@@ -1,7 +1,7 @@
 class_name Guide
 extends Line2D
 
-enum Types { HORIZONTAL, VERTICAL }
+enum Types { HORIZONTAL, VERTICAL, XY, X_MINUS_Y }
 
 const INPUT_WIDTH := 4
 
@@ -31,12 +31,13 @@ func _input(_event: InputEvent) -> void:
 	if type == Types.HORIZONTAL:
 		point0.y -= width * INPUT_WIDTH
 		point1.y += width * INPUT_WIDTH
-	else:
+	elif type == Types.VERTICAL:
 		point0.x -= width * INPUT_WIDTH
 		point1.x += width * INPUT_WIDTH
 	var rect := Rect2()
 	rect.position = point0
 	rect.end = point1
+	rect = rect.abs()
 	if (
 		Input.is_action_just_pressed(&"left_mouse")
 		and Global.can_draw
@@ -55,7 +56,7 @@ func _input(_event: InputEvent) -> void:
 				var yy := snappedf(mouse_pos.y, 0.5)
 				points[0].y = yy
 				points[1].y = yy
-			else:
+			elif type == Types.VERTICAL:
 				var xx := snappedf(mouse_pos.x, 0.5)
 				points[0].x = xx
 				points[1].x = xx
@@ -221,14 +222,22 @@ func set_color(color: Color) -> void:
 	default_color = color
 
 
+func get_direction() -> Vector2:
+	return points[0].direction_to(points[1])
+
+
 func _project_switched() -> void:
 	if self in Global.current_project.guides:
 		visible = Global.show_guides
 		if self is SymmetryGuide:
 			if type == Types.HORIZONTAL:
 				visible = Global.show_x_symmetry_axis and Global.show_guides
-			else:
+			elif type == Types.VERTICAL:
 				visible = Global.show_y_symmetry_axis and Global.show_guides
+			elif type == Types.XY:
+				visible = Global.show_xy_symmetry_axis and Global.show_guides
+			elif type == Types.X_MINUS_Y:
+				visible = Global.show_x_minus_y_symmetry_axis and Global.show_guides
 	else:
 		visible = false
 

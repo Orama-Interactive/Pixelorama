@@ -90,13 +90,10 @@ func _draw() -> void:
 				Color.WHITE
 			)
 			var val := ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(j, 0)).x
+			var str_to_draw := "%*.*f" % [0, step_decimals(val), snappedf(val, 0.1)]
+			var draw_pos := Vector2(pos.x + RULER_WIDTH + 2, font.get_height() - 4)
 			draw_string(
-				font,
-				Vector2(pos.x + RULER_WIDTH + 2, font.get_height() - 4),
-				str(snappedf(val, 0.1)),
-				HORIZONTAL_ALIGNMENT_LEFT,
-				-1,
-				Themes.get_font_size()
+				font, draw_pos, str_to_draw, HORIZONTAL_ALIGNMENT_LEFT, -1, Themes.get_font_size()
 			)
 		else:
 			if j % minor_subdivision == 0:

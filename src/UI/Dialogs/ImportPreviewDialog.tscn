@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://nba3nryom3ud"]
 
-[ext_resource type="Script" path="res://src/UI/Dialogs/ImportPreviewDialog.gd" id="1_r16hn"]
-[ext_resource type="Script" path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" id="2_yokw4"]
-[ext_resource type="Script" path="res://src/UI/Dialogs/HelperScripts/SmartSlicePreview.gd" id="3_aeccv"]
-[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_7dy5o"]
-[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4_nmo33"]
+[ext_resource type="Script" uid="uid://brtcr6mrev52o" path="res://src/UI/Dialogs/ImportPreviewDialog.gd" id="1_r16hn"]
+[ext_resource type="Script" uid="uid://bvn632m4s6crv" path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" id="2_yokw4"]
+[ext_resource type="Script" uid="uid://crtwdohribibe" path="res://src/UI/Dialogs/HelperScripts/SmartSlicePreview.gd" id="3_aeccv"]
+[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_7dy5o"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4_nmo33"]
 
 [node name="ImportPreviewDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 36)
-size = Vector2i(316, 451)
+size = Vector2i(316, 516)
 script = ExtResource("1_r16hn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -182,6 +182,46 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Smart Slice"
 
+[node name="TilesetOptions" type="GridContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="TileShapeLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile shape:"
+
+[node name="TileShapeOptionButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Rectangular"
+popup/item_0/id = 0
+popup/item_1/text = "Isometric"
+popup/item_1/id = 1
+popup/item_2/text = "Hexagonal"
+popup/item_2/id = 3
+
+[node name="TileOffsetAxisLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile offset axis:"
+
+[node name="TileOffsetAxisButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Horizontal"
+popup/item_0/id = 0
+popup/item_1/text = "Vertical"
+popup/item_1/id = 1
+
 [node name="AtFrame" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
 visible = false
 layout_mode = 2
@@ -223,8 +263,8 @@ text = "Brush type:"
 [node name="BrushTypeOption" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "File brush"
 popup/item_0/id = 0
 popup/item_1/text = "Project brush"
@@ -256,4 +296,6 @@ layout_mode = 2
 [connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/MergeDist" to="." method="_on_merge_dist_value_changed"]
 [connection signal="pressed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/Slice" to="." method="_on_slice_pressed"]
 [connection signal="toggled" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/SmartSliceToggle" to="." method="_on_smart_slice_toggled"]
+[connection signal="item_selected" from="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions/TileShapeOptionButton" to="." method="_on_tile_shape_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions/TileOffsetAxisButton" to="." method="_on_tile_offset_axis_button_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type/BrushTypeOption" to="." method="_on_BrushTypeOption_item_selected"]

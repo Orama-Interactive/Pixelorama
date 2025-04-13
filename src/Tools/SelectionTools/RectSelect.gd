@@ -101,6 +101,12 @@ func apply_selection(pos: Vector2i) -> void:
 ## Given an origin point and destination point, returns a rect representing
 ## where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
+	if Tools.is_placing_tiles():
+		var cel := Global.current_project.get_current_cel() as CelTileMap
+		var grid_size := cel.get_tile_size()
+		var offset := cel.offset % grid_size
+		origin = Tools.snap_to_rectangular_grid_boundary(origin, grid_size, offset)
+		dest = Tools.snap_to_rectangular_grid_boundary(dest, grid_size, offset)
 	var rect := Rect2i()
 
 	# Center the rect on the mouse
@@ -125,6 +131,7 @@ func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 		rect.position = Vector2i(mini(origin.x, dest.x), mini(origin.y, dest.y))
 		rect.size = (origin - dest).abs()
 
-	rect.size += Vector2i.ONE
+	if not Tools.is_placing_tiles():
+		rect.size += Vector2i.ONE
 
 	return rect

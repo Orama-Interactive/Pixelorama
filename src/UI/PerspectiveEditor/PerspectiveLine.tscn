@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bft8ul5o3c75v"]
 
-[ext_resource type="Script" path="res://src/UI/PerspectiveEditor/PerspectiveLine.gd" id="1"]
+[ext_resource type="Script" uid="uid://cky8v02mkhfyr" path="res://src/UI/PerspectiveEditor/PerspectiveLine.gd" id="1"]
 
 [node name="PerspectiveLine" type="Line2D"]
 points = PackedVector2Array(0, 0, 64, 0)
