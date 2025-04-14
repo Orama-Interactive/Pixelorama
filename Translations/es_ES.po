@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-04-14 16:06\n"
+"PO-Revision-Date: 2025-04-14 17:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3793,7 +3793,7 @@ msgstr "Diamante a la derecha"
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond down"
-msgstr ""
+msgstr "Diamante abajo"
 
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
