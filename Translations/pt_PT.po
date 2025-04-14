@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-13 22:42\n"
+"PO-Revision-Date: 2025-04-14 10:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1800,30 +1800,30 @@ msgstr "Isométrica"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "Hexagonal"
 
 msgid "All"
 msgstr "Ambas"
 
 #. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
 msgid "Grids visible:"
-msgstr ""
+msgstr "Grades visíveis:"
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "A editar grade:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "Tamanho da grade:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Deslocamento da grade:"
 
 #. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Define o deslocamento da grade pela origem da tela (canto superior esquerdo da imagem)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Desenhar por cima do modo de Azuleijo"
@@ -1887,15 +1887,15 @@ msgstr "O checker transparente segue o nível de zoom do quadro"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Selecionar camada quando clicando num dos seus botões:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Cor passada do onion skinning:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Cor futura do onion skinning:"
 
 msgid "Animated selection borders"
 msgstr "Seleção de bordas animada"
@@ -1917,7 +1917,7 @@ msgstr "Define o limite de fotogramas por segundo da aplicação. Quanto mais ba
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Máximo de ações de desfazer:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
@@ -1929,39 +1929,39 @@ msgstr "Se ativado, e quando a janela da aplicação perder o foco, esta será p
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Atualizar continuamente"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Se esta opção estiver ativada, a aplicação irá redesenhar o ecrã continuamente, mesmo enquanto não estiver a ser utilizada. Desativando irá ajudar a reduzir utilização de CPU e GPU quando inativo."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Ativar transparência de janela"
 
 #. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Se ativado, a janela da aplicação pode ser transparente. Isto afeta desempenho, então será melhor ser desativada se não for necessária."
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Usar driver de áudio fictício"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Renderizador:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Especifica o driver de renderização/vídeo a ser usado. GLES2 é melhor para dispositivos mais antigos ou menos potentes, mas GLES3 poderá oferecer mais funcionalidades."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Driver de tablet:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Especifica a driver de tablet a ser usada em Windows. Se tiver Windows Ink ativado, selecione winink."
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -1981,31 +1981,31 @@ msgstr "Abrir pasta"
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
 msgid "Explore Online"
-msgstr ""
+msgstr "Explorar Online"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
 msgid "Store"
-msgstr ""
+msgstr "Loja"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 msgid "Search..."
-msgstr ""
+msgstr "Pesquisar..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 msgid "Tags:"
-msgstr ""
+msgstr "Etiquetas:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 msgid "Download"
-msgstr ""
+msgstr "Descarregar"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
 msgid "Store Links:"
-msgstr ""
+msgstr "Links de Lojas:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr ""
+msgstr "Cole o Link da Loja, dado pelo dono da loja (será automaticamente removido se deixado vazio)"
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
