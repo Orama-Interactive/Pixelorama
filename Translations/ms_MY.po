@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-04-13 22:42\n"
+"PO-Revision-Date: 2025-04-14 07:53\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -1228,21 +1228,21 @@ msgstr ""
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Lengkung Warna"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Saluran RGB:"
 
 msgid "Red"
-msgstr ""
+msgstr "Merah"
 
 msgid "Green"
-msgstr ""
+msgstr "Hijau"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 msgid "Presets"
 msgstr "Pratetap"
@@ -2222,16 +2222,17 @@ msgstr ""
 
 #. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
 msgid "Single"
-msgstr ""
+msgstr "Tunggal"
 
 #. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
 msgid "Chained"
-msgstr ""
+msgstr "Rantaian"
 
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "Rantaian: Mencipta rantaian lengkung Bezier, serupa alat garis lengkung Krita.\n"
+"Tunggal: Mencipta satu lengkung Bezier, serupa alat garis lengkung Aseprite."
 
 msgid "Options"
 msgstr ""
@@ -2453,7 +2454,7 @@ msgstr "Nyahpaut cel"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Mainkan audio di sini"
 
 msgid "Properties"
 msgstr ""
@@ -2671,14 +2672,14 @@ msgstr ""
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Fail audio:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Muatkan fail"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Mainkan di bingkai:"
 
 msgid "Palette"
 msgstr ""
@@ -3691,7 +3692,7 @@ msgstr ""
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
-msgstr ""
+msgstr "Saiz jubin:"
 
 #. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
@@ -3754,15 +3755,15 @@ msgstr "Mod letak sahaja:"
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr ""
+msgstr "Mengaktifkan mod letak sahaja ialah tindakan kekal. Jika diaktifkan, hanya dapat meletakkan jubin dan tidak dapat lagi mengubah jubin sedia ada pada lapisan ini."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Pilih jubin untuk diletakkan pada kanvas."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Mengubah jubin pada kanvas."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3787,7 +3788,7 @@ msgstr ""
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
@@ -3801,7 +3802,7 @@ msgstr "Bertindan"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Saiz butang jubin:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
@@ -3809,9 +3810,9 @@ msgstr "Paparkan jubin kosong:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Properti jubin"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Kebarangkalian:"
 
