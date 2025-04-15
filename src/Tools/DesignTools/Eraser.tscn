@@ -1,24 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://btmbrqqig7wys"]
+[gd_scene load_steps=4 format=3 uid="uid://btmbrqqig7wys"]
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1"]
 [ext_resource type="Script" uid="uid://c6yh8ratq60si" path="res://src/Tools/DesignTools/Eraser.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_7k1sb"]
-resource_name = "rotate"
-allow_unpress = true
-
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
-
-[node name="Rotate90" parent="RotationOptions/GridContainer/Rotate" index="0"]
-button_group = SubResource("ButtonGroup_7k1sb")
-
-[node name="Rotate180" parent="RotationOptions/GridContainer/Rotate" index="1"]
-button_group = SubResource("ButtonGroup_7k1sb")
-
-[node name="Rotate270" parent="RotationOptions/GridContainer/Rotate" index="2"]
-button_group = SubResource("ButtonGroup_7k1sb")
 
 [node name="OpacitySlider" parent="." index="5" instance=ExtResource("3")]
 layout_mode = 2

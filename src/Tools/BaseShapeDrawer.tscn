@@ -1,12 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://n40lhf8hm7o1"]
+[gd_scene load_steps=4 format=3 uid="uid://n40lhf8hm7o1"]
 
 [ext_resource type="Script" uid="uid://bjy2qqur055ui" path="res://src/Tools/BaseShapeDrawer.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_7w1wt"]
-resource_name = "rotate"
-allow_unpress = true
 
 [node name="ToolOptions" instance=ExtResource("2")]
 script = ExtResource("1")
@@ -26,16 +22,7 @@ tooltip_text = "Fills the drawn shape with color, instead of drawing a hollow sh
 mouse_default_cursor_shape = 2
 text = "Fill Shape"
 
-[node name="Rotate90" parent="RotationOptions/GridContainer/Rotate" index="0"]
-button_group = SubResource("ButtonGroup_7w1wt")
-
-[node name="Rotate180" parent="RotationOptions/GridContainer/Rotate" index="1"]
-button_group = SubResource("ButtonGroup_7w1wt")
-
-[node name="Rotate270" parent="RotationOptions/GridContainer/Rotate" index="2"]
-button_group = SubResource("ButtonGroup_7w1wt")
-
-[node name="Brush" parent="." index="5"]
+[node name="Brush" parent="." index="4"]
 visible = false
 
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
