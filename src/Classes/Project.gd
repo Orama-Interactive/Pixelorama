@@ -29,12 +29,7 @@ var color_mode: int = Image.FORMAT_RGBA8:
 		if color_mode != value:
 			color_mode = value
 			for cel in get_all_pixel_cels():
-				var image := cel.get_image()
-				image.is_indexed = is_indexed()
-				if image.is_indexed:
-					image.resize_indices()
-					image.select_palette("", false)
-					image.convert_rgb_to_indexed()
+				cel.set_indexed_mode(is_indexed())
 		Global.canvas.color_index.queue_redraw()
 var fill_color := Color(0)
 var has_changed := false:

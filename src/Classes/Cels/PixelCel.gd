@@ -20,6 +20,14 @@ func image_changed(value: ImageExtended) -> void:
 		image_texture.set_image(image)
 
 
+func set_indexed_mode(indexed: bool) -> void:
+	image.is_indexed = indexed
+	if image.is_indexed:
+		image.resize_indices()
+		image.select_palette("", false)
+		image.convert_rgb_to_indexed()
+
+
 func get_content() -> Variant:
 	return image
 
