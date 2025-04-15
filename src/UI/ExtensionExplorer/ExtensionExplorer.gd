@@ -36,7 +36,7 @@ func _ready() -> void:
 	main_store_link.text = STORE_LINK
 	# Get the path that pixelorama uses to store extensions
 	extension_path = ProjectSettings.globalize_path(Extensions.EXTENSIONS_PATH)
-	# tell the downloader where to download the store information
+	# tell the downloader where to download the repository information
 	store_info_downloader.download_file = extension_path.path_join(STORE_INFORMATION_FILE)
 
 
@@ -59,7 +59,7 @@ func _on_close_requested() -> void:
 
 func fetch_info(link: String) -> void:
 	if extension_path != "":  # Did everything went smoothly in _ready() function?
-		# everything is ready, now request the store information
+		# everything is ready, now request the repository information
 		# so that available extensions could be displayed
 		var error := store_info_downloader.request(link)
 		if error == OK:
@@ -109,7 +109,7 @@ func close_progress() -> void:
 				custom_link_error.popup_centered()
 
 
-## Signal connected from StoreButton.tscn
+# Signal connected from Preferences.tscn
 func _on_explore_pressed() -> void:
 	popup_centered()
 
@@ -176,7 +176,7 @@ func process_line(line: String) -> void:
 			var extension_data: Dictionary = parse_extension_data(raw_data)
 			add_entry(extension_data)
 		TYPE_STRING:
-			# it's most probably a store link
+			# it's most probably a repository link
 			var link: String = raw_data.strip_edges()
 			if !link in redirects and link.begins_with("http") and "://" in link:
 				redirects.append(link)

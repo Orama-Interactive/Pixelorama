@@ -1,16 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://chy5d42l72crk"]
 
-[ext_resource type="Script" uid="uid://3gweeb1iyr4l" path="res://src/UI/ExtensionExplorer/Store.gd" id="1_pwcwi"]
+[ext_resource type="Script" uid="uid://3gweeb1iyr4l" path="res://src/UI/ExtensionExplorer/ExtensionExplorer.gd" id="1_pwcwi"]
 [ext_resource type="Script" uid="uid://bax7ba3s0gq6a" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
 [ext_resource type="Texture2D" uid="uid://3v78ojo0pkfg" path="res://assets/graphics/misc/external_link.svg" id="3_6lb58"]
-[ext_resource type="Script" uid="uid://nu4gcburux0v" path="res://src/UI/ExtensionExplorer/Subscripts/CustomStoreLinks.gd" id="3_dk1xf"]
+[ext_resource type="Script" uid="uid://nu4gcburux0v" path="res://src/UI/ExtensionExplorer/Subscripts/CustomRepositoryLinks.gd" id="3_dk1xf"]
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="4_ntl7p"]
 
-[node name="Store" type="Window"]
+[node name="ExtensionExplorer" type="Window"]
 title = "Explore Online"
 position = Vector2i(0, 36)
 size = Vector2i(760, 470)
-visible = false
 wrap_controls = true
 exclusive = true
 always_on_top = true
@@ -28,58 +27,59 @@ offset_right = -7.0
 offset_bottom = -8.0
 current_tab = 0
 
-[node name="Store" type="MarginContainer" parent="TabContainer"]
+[node name="Extension Explorer" type="MarginContainer" parent="TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="StoreMainContainer" type="HSplitContainer" parent="TabContainer/Store"]
+[node name="StoreMainContainer" type="HSplitContainer" parent="TabContainer/Extension Explorer"]
 layout_mode = 2
 
-[node name="Parameters" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer"]
+[node name="Parameters" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="SearchManager" type="LineEdit" parent="TabContainer/Store/StoreMainContainer/Parameters"]
+[node name="SearchManager" type="LineEdit" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters"]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Search..."
 script = ExtResource("2_uqsvm")
 
-[node name="Header" type="Label" parent="TabContainer/Store/StoreMainContainer/Parameters"]
+[node name="Header" type="Label" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters"]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Tags:"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Store/StoreMainContainer/Parameters"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters"]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="TagList" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer/Parameters/ScrollContainer"]
+[node name="TagList" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Store/StoreMainContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="TabContainer/Store/StoreMainContainer/VBoxContainer/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ReportIssue" type="Button" parent="TabContainer/Store/StoreMainContainer/VBoxContainer/HBoxContainer"]
+[node name="ReportIssue" type="Button" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Report issue with an extension"
 icon = ExtResource("3_6lb58")
 
-[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Store/StoreMainContainer/VBoxContainer"]
+[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Content" type="VBoxContainer" parent="TabContainer/Store/StoreMainContainer/VBoxContainer/ContentScrollContainer"]
+[node name="Content" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/ContentScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -101,7 +101,7 @@ script = ExtResource("3_dk1xf")
 [node name="Header" type="Label" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
-text = "Store Links:"
+text = "Repository links:"
 
 [node name="MainStoreLink" type="LineEdit" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
 unique_name_in_owner = true
@@ -117,7 +117,7 @@ layout_mode = 2
 [node name="Guide" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer"]
 visible = false
 layout_mode = 2
-text = "Guide to making a Store File"
+text = "Guide to making a repository file"
 
 [node name="NewLink" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer"]
 custom_minimum_size = Vector2(24, 24)
@@ -157,8 +157,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="ProgressContainer"]
 layout_mode = 2
-text = "Fetching data from Remote Repository
-Please Wait"
+text = "Fetching data from remote repository.
+Please wait."
 horizontal_alignment = 1
 
 [node name="UpdateTimer" type="Timer" parent="ProgressContainer"]
@@ -192,7 +192,6 @@ custom_minimum_size = Vector2(495, 180)
 layout_mode = 2
 text = "Unable to get info from remote repository.
 
-Possible Solutions:
 - Make sure you are connected to the internet.
 - If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
 autowrap_mode = 2
@@ -214,7 +213,7 @@ text = "Copy"
 custom_minimum_size = Vector2(495, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Alternatively, you download Flatseal and set permissions for Flatpak apps there."
+text = "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
 autowrap_mode = 3
 
 [node name="ErrorCustom" type="AcceptDialog" parent="."]
@@ -243,8 +242,8 @@ layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_Store_about_to_show"]
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
-[connection signal="text_changed" from="TabContainer/Store/StoreMainContainer/Parameters/SearchManager" to="TabContainer/Store/StoreMainContainer/Parameters/SearchManager" method="_on_SearchManager_text_changed"]
-[connection signal="pressed" from="TabContainer/Store/StoreMainContainer/VBoxContainer/HBoxContainer/ReportIssue" to="." method="_on_report_issue_pressed"]
+[connection signal="text_changed" from="TabContainer/Extension Explorer/StoreMainContainer/Parameters/SearchManager" to="TabContainer/Extension Explorer/StoreMainContainer/Parameters/SearchManager" method="_on_SearchManager_text_changed"]
+[connection signal="pressed" from="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/HBoxContainer/ReportIssue" to="." method="_on_report_issue_pressed"]
 [connection signal="visibility_changed" from="TabContainer/Options" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Options_visibility_changed"]
 [connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/Guide" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_Guide_pressed"]
 [connection signal="pressed" from="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/NewLink" to="TabContainer/Options/ScrollContainer/CustomStoreLinks" method="_on_NewLink_pressed"]

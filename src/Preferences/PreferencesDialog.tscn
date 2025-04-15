@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="7"]
 [ext_resource type="Script" uid="uid://dxjamv5np8av3" path="res://src/Preferences/ExtensionsPreferences.gd" id="7_8ume5"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="8"]
-[ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/Store.tscn" id="8_jmnx8"]
+[ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/ExtensionExplorer.tscn" id="8_jmnx8"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
 
@@ -1224,6 +1224,7 @@ size_flags_horizontal = 3
 
 [node name="Explore" type="Button" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Explore Online"
 
 [node name="InstalledExtensions" type="ItemList" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions"]
@@ -1490,7 +1491,7 @@ access = 2
 filters = PackedStringArray("*.pck ; Godot Resource Pack File", "*.zip")
 show_hidden_files = true
 
-[node name="Store" parent="." instance=ExtResource("8_jmnx8")]
+[node name="ExtensionExplorer" parent="." instance=ExtResource("8_jmnx8")]
 transient = true
 
 [node name="EnableExtensionConfirmation" type="ConfirmationDialog" parent="."]
@@ -1519,7 +1520,7 @@ dialog_text = "Are you sure you want to reset the selected options? There will b
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer/ShrinkApplyButton" to="." method="_on_shrink_apply_button_pressed"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/FontSizeContainer/FontSizeApplyButton" to="." method="_on_font_size_apply_button_pressed"]
 [connection signal="value_changed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions/GridsCount" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" method="_on_grids_count_value_changed"]
-[connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader/Explore" to="Store" method="_on_explore_pressed"]
+[connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader/Explore" to="ExtensionExplorer" method="_on_explore_pressed"]
 [connection signal="empty_clicked" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/InstalledExtensions" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_InstalledExtensions_empty_clicked"]
 [connection signal="item_selected" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/InstalledExtensions" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_InstalledExtensions_item_selected"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/HBoxContainer/AddExtensionButton" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions" method="_on_AddExtensionButton_pressed"]

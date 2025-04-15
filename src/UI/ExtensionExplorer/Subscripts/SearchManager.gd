@@ -42,6 +42,7 @@ func add_new_tags(tag_array: PackedStringArray) -> void:
 			available_tags.append(tag)
 			var tag_checkbox := CheckBox.new()
 			tag_checkbox.text = tag
+			tag_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 			tag_list.add_child(tag_checkbox)
 			tag_checkbox.toggled.connect(start_tag_search)
 

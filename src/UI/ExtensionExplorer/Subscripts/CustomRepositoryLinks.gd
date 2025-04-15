@@ -24,7 +24,7 @@ func _on_NewLink_pressed() -> void:
 func add_field(link := "") -> void:
 	var link_field := LineEdit.new()
 	# gdlint: ignore=max-line-length
-	link_field.placeholder_text = "Paste Store link, given by the store owner (will automatically be removed if left empty)"
+	link_field.placeholder_text = "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
 	link_field.text = link
 	$Links.add_child(link_field)
 	link_field.text_changed.connect(field_text_changed)
