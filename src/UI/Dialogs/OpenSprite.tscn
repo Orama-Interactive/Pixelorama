@@ -6,4 +6,4 @@ size = Vector2i(558, 400)
 ok_button_text = "Open"
 file_mode = 1
 access = 2
-filters = PackedStringArray("*.pxo ; Pixelorama Project", "*.png ; PNG Image", "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image", "*.json; Pixelorama palette", "*.gpl; GIMP palette", "*pal; Palette")
+filters = PackedStringArray("*.pxo ; Pixelorama Project", "*.png ; PNG Image", "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image", "*ora; OpenRaster project", "*ase, *aseprite; Aseprite project", "*.json; Pixelorama palette", "*.gpl; GIMP palette", "*pal; Palette")
