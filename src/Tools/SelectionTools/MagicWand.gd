@@ -75,13 +75,11 @@ func _flood_fill(
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
-			var cell_pos := (cel as CelTileMap).get_cell_position(pos)
-			var tile_index := (cel as CelTileMap).get_cell_at(cell_pos).index
-			# init flood data structures
-			_allegro_flood_segments = []
-			_allegro_image_segments = []
-			_compute_segments_for_tilemap(cell_pos, cel, tile_index)
-			_select_segments_tilemap(project, previous_selection_map)
+			var tilemap_cel := cel as CelTileMap
+			var cell_pos := tilemap_cel.get_cell_position(pos)
+			tilemap_cel.bucket_fill(
+				cell_pos, -1, _set_bit_rect.bind(project, previous_selection_map)
+			)
 		return
 	var color := image.get_pixelv(pos)
 	# init flood data structures
@@ -219,114 +217,9 @@ func _set_bit(p: Vector2i, selection_map: SelectionMap, prev_selection_map: Sele
 		selection_map.select_pixel(p, !_subtract)
 
 
-func _compute_segments_for_tilemap(pos: Vector2i, cel: CelTileMap, src_index: int) -> void:
-	# initially allocate at least 1 segment per line of the tilemap
-	for j in range(cel.vertical_cell_min, cel.vertical_cell_max):
-		_add_new_segment(j)
-	# start flood algorithm
-	_flood_line_around_point_tilemap(pos, cel, src_index)
-	# test all segments while also discovering more
-	var done := false
-	while not done:
-		done = true
-		var max_index := _allegro_flood_segments.size()
-		for c in max_index:
-			var p := _allegro_flood_segments[c]
-			if p.todo_below:  # check below the segment?
-				p.todo_below = false
-				if _check_flooded_segment_tilemap(
-					p.y + 1, p.left_position, p.right_position, cel, src_index
-				):
-					done = false
-			if p.todo_above:  # check above the segment?
-				p.todo_above = false
-				if _check_flooded_segment_tilemap(
-					p.y - 1, p.left_position, p.right_position, cel, src_index
-				):
-					done = false
-
-
-## Fill an horizontal segment around the specified position, and adds it to the
-## list of segments filled. Returns the first x coordinate after the part of the
-## line that has been filled.
-## Τhis method is called by [method _flood_fill] after the required data structures
-## have been initialized.
-func _flood_line_around_point_tilemap(pos: Vector2i, cel: CelTileMap, src_index: int) -> int:
-	if cel.get_cell_at(pos).index != src_index:
-		return pos.x + 1
-	var west := pos
-	var east := pos
-	while cel.cells.has(west) && cel.get_cell_at(west).index == src_index:
-		west += Vector2i.LEFT
-	while cel.cells.has(east) && cel.get_cell_at(east).index == src_index:
-		east += Vector2i.RIGHT
-	# Make a note of the stuff we processed
-	var c := pos.y
-	var segment := _allegro_flood_segments[c]
-	# we may have already processed some segments on this y coordinate
-	if segment.flooding:
-		while segment.next > 0:
-			c = segment.next  # index of next segment in this line of image
-			segment = _allegro_flood_segments[c]
-		# found last current segment on this line
-		c = _allegro_flood_segments.size()
-		segment.next = c
-		_add_new_segment(pos.y)
-		segment = _allegro_flood_segments[c]
-	# set the values for the current segment
-	segment.flooding = true
-	segment.left_position = west.x + 1
-	segment.right_position = east.x - 1
-	segment.y = pos.y
-	segment.next = 0
-	# Should we process segments above or below this one?
-	# when there is a selected area, the pixels above and below the one we started creating this
-	# segment from may be outside it. It's easier to assume we should be checking for segments
-	# above and below this one than to specifically check every single pixel in it, because that
-	# test will be performed later anyway.
-	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
-	# there is no selection, so we don't need branching here.
-	segment.todo_above = pos.y > cel.vertical_cell_min
-	segment.todo_below = pos.y < cel.vertical_cell_max
-	# this is an actual segment we should be coloring, so we add it to the results for the
-	# current image
-	if segment.right_position >= segment.left_position:
-		_allegro_image_segments.append(segment)
-	# we know the point just east of the segment is not part of a segment that should be
-	# processed, else it would be part of this segment
-	return east.x + 1
-
-
-func _check_flooded_segment_tilemap(
-	y: int, left: int, right: int, cel: CelTileMap, src_index: int
-) -> bool:
-	var ret := false
-	var c := 0
-	while left <= right:
-		c = y
-		while true:
-			var segment := _allegro_flood_segments[c]
-			if left >= segment.left_position and left <= segment.right_position:
-				left = segment.right_position + 2
-				break
-			c = segment.next
-			if c == 0:  # couldn't find a valid segment, so we draw a new one
-				left = _flood_line_around_point_tilemap(Vector2i(left, y), cel, src_index)
-				ret = true
-				break
-	return ret
-
-
-func _select_segments_tilemap(project: Project, previous_selection_map: SelectionMap) -> void:
-	# short circuit for flat colors
-	for c in _allegro_image_segments.size():
-		var p := _allegro_image_segments[c]
-		for px in range(p.left_position, p.right_position + 1):
-			# We don't have to check again whether the point being processed is within the bounds
-			_set_bit_rect(Vector2i(px, p.y), project, previous_selection_map)
-
-
-func _set_bit_rect(p: Vector2i, project: Project, prev_selection_map: SelectionMap) -> void:
+func _set_bit_rect(
+	p: Vector2i, _index: int, project: Project, prev_selection_map: SelectionMap
+) -> void:
 	var selection_map := project.selection_map
 	var tilemap := project.get_current_cel() as CelTileMap
 	var pixel_coords := p * tilemap.get_tile_size()

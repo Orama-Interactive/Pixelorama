@@ -268,6 +268,36 @@ func get_tile_offset_axis() -> TileSet.TileOffsetAxis:
 	return tileset.tile_offset_axis
 
 
+func bucket_fill(cell_coords: Vector2i, index: int, callable: Callable) -> void:
+	var godot_tileset := TileSet.new()
+	godot_tileset.tile_size = get_tile_size()
+	godot_tileset.tile_shape = get_tile_shape()
+	godot_tileset.tile_layout = tile_layout
+	godot_tileset.tile_offset_axis = get_tile_offset_axis()
+	var godot_tilemap := TileMapLayer.new()
+	godot_tilemap.tile_set = godot_tileset
+	var source_cell := get_cell_at(cell_coords)
+	var source_index := source_cell.index
+	var already_checked: Array[Vector2i]
+	var to_check: Array[Vector2i]
+	to_check.push_back(cell_coords)
+	while not to_check.is_empty():
+		var coords := to_check.pop_back() as Vector2i
+		if not already_checked.has(coords):
+			if not cells.has(coords):
+				already_checked.append(coords)
+				continue
+			var current_cell := cells[coords]
+			if source_index == current_cell.index:
+				callable.call(coords, index)
+				# Get surrounding tiles (handles different tile shapes).
+				var around := godot_tilemap.get_surrounding_cells(coords)
+				for i in around.size():
+					to_check.push_back(around[i])
+			already_checked.append(coords)
+	godot_tilemap.queue_free()
+
+
 func re_order_tilemap() -> void:
 	if not place_only_mode:
 		return
