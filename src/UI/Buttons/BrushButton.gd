@@ -32,16 +32,10 @@ func _on_BrushButton_mouse_exited() -> void:
 		$DeleteButton.visible = false
 
 
-func _flip_rotate_updated(
-	flip_x: bool, flip_y: bool, rotate_90: bool, rotate_180: bool, rotate_270: bool
-):
+func _flip_rotate_updated(flip_x: bool, flip_y: bool, transposed: bool) -> void:
+	var brush_texture_rotation := 0
+	if transposed == true:
+		brush_texture_rotation -= 90
+	$BrushTexture.rotation_degrees = brush_texture_rotation
 	$BrushTexture.set_flip_h(flip_x)
 	$BrushTexture.set_flip_v(flip_y)
-	var brush_texture_rotation = 0
-	if rotate_90 == true:
-		brush_texture_rotation += 90
-	if rotate_180 == true:
-		brush_texture_rotation += 180
-	if rotate_270 == true:
-		brush_texture_rotation += 270
-	$BrushTexture.rotation_degrees = brush_texture_rotation

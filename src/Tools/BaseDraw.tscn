@@ -1,14 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://ubyatap3sylf"]
+[gd_scene load_steps=18 format=3 uid="uid://ubyatap3sylf"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" uid="uid://emctikok1t2" path="res://src/Tools/BaseDraw.gd" id="3"]
-[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3_76bek"]
+[ext_resource type="Texture2D" uid="uid://bv7ldl8obhawm" path="res://assets/graphics/misc/icon_reload.png" id="4_c1cak"]
+[ext_resource type="Texture2D" uid="uid://bpsfilx47bw3r" path="res://assets/graphics/misc/mirror_x.svg" id="5_4qg2a"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="5_kdxku"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_7u3x0"]
-resource_name = "rotate"
-allow_unpress = true
+[ext_resource type="Texture2D" uid="uid://bk6iaxiyl74ih" path="res://assets/graphics/misc/mirror_y.svg" id="6_p5353"]
 
 [sub_resource type="StyleBoxFlat" id="2"]
 bg_color = Color(1, 1, 1, 1)
@@ -28,76 +26,34 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing = false
 
+[sub_resource type="InputEventAction" id="InputEventAction_yr0lx"]
+action = &"tile_rotate_left"
+
+[sub_resource type="Shortcut" id="Shortcut_vtp7k"]
+events = [SubResource("InputEventAction_yr0lx")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_g6d5p"]
+action = &"tile_rotate_right"
+
+[sub_resource type="Shortcut" id="Shortcut_lc5ui"]
+events = [SubResource("InputEventAction_g6d5p")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_yh67l"]
+action = &"tile_flip_horizontal"
+
+[sub_resource type="Shortcut" id="Shortcut_mr3k5"]
+events = [SubResource("InputEventAction_yh67l")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_18g3a"]
+action = &"tile_flip_vertical"
+
+[sub_resource type="Shortcut" id="Shortcut_bx5hb"]
+events = [SubResource("InputEventAction_18g3a")]
+
 [node name="ToolOptions" instance=ExtResource("2")]
 script = ExtResource("3")
 
-[node name="RotationOptions" type="VBoxContainer" parent="." index="2"]
-visible = false
-layout_mode = 2
-theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("3_76bek")
-text = "Rotation options"
-flat = true
-
-[node name="GridContainer" type="GridContainer" parent="RotationOptions" index="1"]
-visible = false
-layout_mode = 2
-columns = 2
-
-[node name="FlipLabel" type="Label" parent="RotationOptions/GridContainer" index="0"]
-layout_mode = 2
-text = "Flip:"
-
-[node name="Flip" type="HBoxContainer" parent="RotationOptions/GridContainer" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FlipX" type="CheckBox" parent="RotationOptions/GridContainer/Flip" index="0"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "X"
-
-[node name="FlipY" type="CheckBox" parent="RotationOptions/GridContainer/Flip" index="1"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Y"
-
-[node name="RotateLabel" type="Label" parent="RotationOptions/GridContainer" index="2"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Rotate:"
-
-[node name="Rotate" type="HFlowContainer" parent="RotationOptions/GridContainer" index="3"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Rotate90" type="CheckBox" parent="RotationOptions/GridContainer/Rotate" index="0"]
-unique_name_in_owner = true
-layout_mode = 2
-tooltip_text = "rotate the brush 90 degrees"
-mouse_default_cursor_shape = 2
-button_group = SubResource("ButtonGroup_7u3x0")
-text = "90°"
-
-[node name="Rotate180" type="CheckBox" parent="RotationOptions/GridContainer/Rotate" index="1"]
-unique_name_in_owner = true
-layout_mode = 2
-tooltip_text = "rotate the brush 180 degrees"
-mouse_default_cursor_shape = 2
-button_group = SubResource("ButtonGroup_7u3x0")
-text = "180°"
-
-[node name="Rotate270" type="CheckBox" parent="RotationOptions/GridContainer/Rotate" index="2"]
-unique_name_in_owner = true
-layout_mode = 2
-tooltip_text = "rotate the brush 270 degrees"
-mouse_default_cursor_shape = 2
-button_group = SubResource("ButtonGroup_7u3x0")
-text = "270°"
-
-[node name="Brush" type="HBoxContainer" parent="." index="3"]
+[node name="Brush" type="HBoxContainer" parent="." index="2"]
 layout_mode = 2
 alignment = 1
 
@@ -131,6 +87,81 @@ suffix = "px"
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
+[node name="TransformButtonsContainer" type="HFlowContainer" parent="." index="3"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RotateLeftButton" type="Button" parent="TransformButtonsContainer" index="0" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Rotate tile left (counterclockwise)"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_vtp7k")
+
+[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/RotateLeftButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_c1cak")
+stretch_mode = 3
+
+[node name="RotateRightButton" type="Button" parent="TransformButtonsContainer" index="1" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Rotate tile right (clockwise)"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_lc5ui")
+
+[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/RotateRightButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_c1cak")
+stretch_mode = 3
+flip_h = true
+
+[node name="FlipHorizontalButton" type="Button" parent="TransformButtonsContainer" index="2" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Flip tile horizontally"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_mr3k5")
+
+[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/FlipHorizontalButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_4qg2a")
+stretch_mode = 3
+
+[node name="FlipVerticalButton" type="Button" parent="TransformButtonsContainer" index="3" groups=["UIButtons"]]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Flip tile vertically"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_bx5hb")
+
+[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/FlipVerticalButton" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_p5353")
+stretch_mode = 3
+
 [node name="DensityValueSlider" type="TextureProgressBar" parent="." index="4"]
 visible = false
 custom_minimum_size = Vector2(0, 24)
@@ -155,12 +186,11 @@ layout_mode = 2
 tooltip_text = "0: Color from the brush itself, 100: the currently selected color"
 prefix = "Brush color from:"
 
-[connection signal="toggled" from="RotationOptions/GridContainer/Flip/FlipX" to="." method="_on_flip_x_toggled"]
-[connection signal="toggled" from="RotationOptions/GridContainer/Flip/FlipY" to="." method="_on_flip_y_toggled"]
-[connection signal="toggled" from="RotationOptions/GridContainer/Rotate/Rotate90" to="." method="_on_rotate_90_toggled"]
-[connection signal="toggled" from="RotationOptions/GridContainer/Rotate/Rotate180" to="." method="_on_rotate_180_toggled"]
-[connection signal="toggled" from="RotationOptions/GridContainer/Rotate/Rotate270" to="." method="_on_rotate_270_toggled"]
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]
+[connection signal="pressed" from="TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
+[connection signal="pressed" from="TransformButtonsContainer/RotateRightButton" to="." method="_on_rotate_pressed" binds= [true]]
+[connection signal="pressed" from="TransformButtonsContainer/FlipHorizontalButton" to="." method="_on_flip_horizontal_button_pressed"]
+[connection signal="pressed" from="TransformButtonsContainer/FlipVerticalButton" to="." method="_on_flip_vertical_button_pressed"]
 [connection signal="value_changed" from="DensityValueSlider" to="." method="_on_density_value_slider_value_changed"]
 [connection signal="value_changed" from="ColorInterpolation" to="." method="_on_InterpolateFactor_value_changed"]

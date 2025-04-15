@@ -9,9 +9,7 @@ var _brush_size_dynamics := 1
 var _brush_density := 100
 var _brush_flip_x := false
 var _brush_flip_y := false
-var _brush_rotate_90 := false
-var _brush_rotate_180 := false
-var _brush_rotate_270 := false
+var _brush_transposed := false
 var _cache_limit := 3
 var _brush_interpolate := 0
 var _brush_image := Image.new()
@@ -65,13 +63,14 @@ func _on_BrushType_pressed() -> void:
 		if child is GridContainer:
 			child.columns = columns
 	Global.brushes_popup.popup_on_parent(Rect2(pop_position, Vector2(size_x, size_y)))
-	Tools.flip_rotated.emit(
-		_brush_flip_x, _brush_flip_y, _brush_rotate_90, _brush_rotate_180, _brush_rotate_270
-	)
+	Tools.flip_rotated.emit(_brush_flip_x, _brush_flip_y, _brush_transposed)
 
 
 func _on_Brush_selected(brush: Brushes.Brush) -> void:
 	_brush = brush
+	_brush_flip_x = false
+	_brush_flip_y = false
+	_brush_transposed = false
 	update_brush()
 	save_config()
 
@@ -125,11 +124,6 @@ func get_config() -> Dictionary:
 		"brush_size": _brush_size,
 		"brush_density": _brush_density,
 		"brush_interpolate": _brush_interpolate,
-		"brush_flip_x": _brush_flip_x,
-		"brush_flip_y": _brush_flip_y,
-		"brush_rotate_90": _brush_rotate_90,
-		"brush_rotate_180": _brush_rotate_180,
-		"brush_rotate_270": _brush_rotate_270,
 	}
 
 
@@ -143,22 +137,12 @@ func set_config(config: Dictionary) -> void:
 		_brush_size_dynamics = Tools.brush_size_min
 	_brush_density = config.get("brush_density", _brush_density)
 	_brush_interpolate = config.get("brush_interpolate", _brush_interpolate)
-	_brush_flip_x = config.get("brush_flip_x", _brush_flip_x)
-	_brush_flip_y = config.get("brush_flip_y", _brush_flip_y)
-	_brush_rotate_90 = config.get("brush_rotate_90", _brush_rotate_90)
-	_brush_rotate_180 = config.get("brush_rotate_180", _brush_rotate_180)
-	_brush_rotate_270 = config.get("brush_rotate_270", _brush_rotate_270)
 
 
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$DensityValueSlider.value = _brush_density
 	$ColorInterpolation.value = _brush_interpolate
-	%FlipX.button_pressed = _brush_flip_x
-	%FlipY.button_pressed = _brush_flip_y
-	%Rotate90.button_pressed = _brush_rotate_90
-	%Rotate180.button_pressed = _brush_rotate_180
-	%Rotate270.button_pressed = _brush_rotate_270
 	update_brush()
 
 
@@ -212,7 +196,7 @@ func update_brush() -> void:
 	$Brush/Type/Texture.texture = _brush_texture
 	$DensityValueSlider.visible = _brush.type not in IMAGE_BRUSHES
 	$ColorInterpolation.visible = _brush.type in IMAGE_BRUSHES
-	$RotationOptions.visible = _brush.type in IMAGE_BRUSHES
+	$TransformButtonsContainer.visible = _brush.type in IMAGE_BRUSHES
 	Global.canvas.indicators.queue_redraw()
 
 
@@ -238,16 +222,12 @@ func update_mirror_brush() -> void:
 
 
 func update_brush_image_flip_and_rotate() -> void:
+	if _brush_transposed == true:
+		_brush_image.rotate_90(COUNTERCLOCKWISE)
 	if _brush_flip_x == true:
 		_brush_image.flip_x()
 	if _brush_flip_y == true:
 		_brush_image.flip_y()
-	if _brush_rotate_90 == true:
-		_brush_image.rotate_90(CLOCKWISE)
-	if _brush_rotate_180 == true:
-		_brush_image.rotate_180()
-	if _brush_rotate_270 == true:
-		_brush_image.rotate_90(COUNTERCLOCKWISE)
 
 
 func update_mask(can_skip := true) -> void:
@@ -774,31 +754,35 @@ func _get_undo_data() -> Dictionary:
 	return data
 
 
-func _on_flip_x_toggled(button_pressed: bool) -> void:
-	_brush_flip_x = button_pressed
+func _on_flip_horizontal_button_pressed() -> void:
+	_brush_flip_x = not _brush_flip_x
 	update_brush()
 	save_config()
 
 
-func _on_flip_y_toggled(button_pressed: bool) -> void:
-	_brush_flip_y = button_pressed
+func _on_flip_vertical_button_pressed() -> void:
+	_brush_flip_y = not _brush_flip_y
 	update_brush()
 	save_config()
 
 
-func _on_rotate_90_toggled(button_pressed: bool) -> void:
-	_brush_rotate_90 = button_pressed
-	update_brush()
-	save_config()
-
-
-func _on_rotate_180_toggled(button_pressed: bool) -> void:
-	_brush_rotate_180 = button_pressed
-	update_brush()
-	save_config()
-
-
-func _on_rotate_270_toggled(button_pressed: bool) -> void:
-	_brush_rotate_270 = button_pressed
+func _on_rotate_pressed(clockwise: bool) -> void:
+	for i in TileSetPanel.ROTATION_MATRIX.size():
+		var final_i := i
+		if (
+			_brush_flip_x == TileSetPanel.ROTATION_MATRIX[i * 3]
+			&& _brush_flip_y == TileSetPanel.ROTATION_MATRIX[i * 3 + 1]
+			&& _brush_transposed == TileSetPanel.ROTATION_MATRIX[i * 3 + 2]
+		):
+			if clockwise:
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + posmod(i - 1, 4)
+			else:
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + (i + 1) % 4
+			_brush_flip_x = TileSetPanel.ROTATION_MATRIX[final_i * 3]
+			_brush_flip_y = TileSetPanel.ROTATION_MATRIX[final_i * 3 + 1]
+			_brush_transposed = TileSetPanel.ROTATION_MATRIX[final_i * 3 + 2]
+			break
 	update_brush()
 	save_config()

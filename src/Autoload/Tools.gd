@@ -6,7 +6,7 @@ signal color_changed(color_info: Dictionary, button: int)
 signal selected_tile_index_changed(tile_index: int)
 signal config_changed(slot_idx: int, config: Dictionary)
 @warning_ignore("unused_signal")
-signal flip_rotated(flip_x, flip_y, rotate_90, rotate_180, rotate_270)
+signal flip_rotated(flip_x: bool, flip_y: bool, transposed: bool)
 signal options_reset
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
