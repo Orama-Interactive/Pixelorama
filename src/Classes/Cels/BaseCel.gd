@@ -104,7 +104,12 @@ func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
 	z_index = dict.get("z_index", z_index)
 	user_data = dict.get("user_data", user_data)
-	ui_color = dict.get("ui_color", ui_color)
+	if dict.has("ui_color"):
+		var tmp_ui_color = dict.ui_color
+		if typeof(tmp_ui_color) == TYPE_STRING:
+			ui_color = str_to_var("Color" + tmp_ui_color)
+		else:
+			ui_color = tmp_ui_color
 
 
 func size_changed(_new_size: Vector2i) -> void:
