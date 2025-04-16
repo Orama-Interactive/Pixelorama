@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-16 12:37\n"
+"PO-Revision-Date: 2025-04-16 13:37\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -802,7 +802,7 @@ msgstr "Proyek OpenRaster"
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
-msgstr ""
+msgstr "Proyek Aseprite"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -2034,7 +2034,7 @@ msgstr "Tautan repositori:"
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Fetching data from remote repository.\n"
 "Please wait."
-msgstr "Mengambil data dari repositori jauh.\n"
+msgstr "Mengambil data repositori jarak jauh.\n"
 "Mohon tunggu."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
@@ -2042,7 +2042,7 @@ msgstr "Mengambil data dari repositori jauh.\n"
 msgid "Unable to get info from remote repository.\n\n"
 "- Make sure you are connected to the internet.\n"
 "- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
-msgstr "Tidak bisa mendapat info dari repositori jauh.\n\n"
+msgstr "Tidak bisa mendapat info repositori jarak jauh.\n\n"
 "- Pastikan sudah tersambung ke internet.\n"
 "- Jika menggunakan Pixelorama versi Flatpak, izinkan dulu untuk menyambung ke internet. Caranya, jalankan perintah berikut di terminal perintah:"
 
@@ -2054,7 +2054,7 @@ msgstr "Cara lainnya, unduh Flatseal dan atur izin internet untuk aplikasi Flatp
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr "Tidak bisa mendapat info dari repositori jauh."
+msgstr "Tidak bisa mendapat info repositori jarak jauh."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
