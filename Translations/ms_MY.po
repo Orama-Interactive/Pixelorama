@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-04-16 12:37\n"
+"PO-Revision-Date: 2025-04-16 13:37\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Simpan"
 
 msgid "Please Confirm..."
-msgstr "Tolong Sahkan..."
+msgstr "Harap Konfirmasi..."
 
 msgid "File Name:"
 msgstr "Nama Fail:"
@@ -797,11 +797,11 @@ msgstr "Imej WebP"
 
 #. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
 msgid "OpenRaster Project"
-msgstr ""
+msgstr "Projek OpenRaster"
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
-msgstr ""
+msgstr "Projek Aseprite"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -880,7 +880,7 @@ msgid "Drivers"
 msgstr ""
 
 msgid "Extensions"
-msgstr ""
+msgstr "Sambungan"
 
 msgid "Cursors"
 msgstr ""
@@ -1936,7 +1936,7 @@ msgstr ""
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
-msgstr ""
+msgstr "Tambah Sambungan"
 
 msgid "Enable"
 msgstr ""
@@ -1954,12 +1954,12 @@ msgstr ""
 #: src/Preferences/PreferencesDialog.tscn
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Explore Online"
-msgstr ""
+msgstr "Jelajah Dalam Talian"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Extension Explorer"
-msgstr "Toko Ekstensi"
+msgstr "Kedai Sambungan"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -1974,7 +1974,7 @@ msgstr "Tag:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr "Laporkan isu dengan ekstensi"
+msgstr "Laporkan isu dengan sambungan"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -1984,34 +1984,37 @@ msgstr "Muat turun"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Repository links:"
-msgstr "Tautan repositori:"
+msgstr "Pautan repositori:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Fetching data from remote repository.\n"
 "Please wait."
-msgstr ""
+msgstr "Mengambil data dari repositori jauh.\n"
+"Harap tunggu."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository.\n\n"
 "- Make sure you are connected to the internet.\n"
 "- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
-msgstr ""
+msgstr "Tidak boleh mendapatkan maklumat repositori jauh.\n\n"
+"- Pastikan telah disambungkan ke internet.\n"
+"- Jika menggunakan Pixelorama versi Flatpak, izinkan untuk menyambung ke internet. Lakukan dengan menjalankan perintah berikut pada terminal:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
-msgstr ""
+msgstr "Atau tidak, muat turun Flatseal dan tetapkan izin internet untuk aplikasi Flatpak di sana."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr ""
+msgstr "Tidak boleh mendapatkan maklumat repositori jauh."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr ""
+msgstr "Tampal pautan repositori pemilik repositori. Jika dibiarkan kosong, ia akan automatik dialih keluar."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2503,7 +2506,7 @@ msgid "Properties"
 msgstr ""
 
 msgid "Project Properties"
-msgstr ""
+msgstr "Perincian Projek"
 
 msgid "Frame properties"
 msgstr ""
@@ -2523,7 +2526,7 @@ msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Import Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -3091,7 +3094,7 @@ msgstr ""
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "Eksport data JSON"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
@@ -3173,7 +3176,7 @@ msgstr ""
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Data pengguna:"
 
 msgid "Duration"
 msgstr ""
@@ -3408,7 +3411,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Projeksi:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
@@ -3420,7 +3423,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Frustum"
 
 msgid "Rotation:"
 msgstr ""
