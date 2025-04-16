@@ -11,7 +11,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 Built using Godot 4.4
 
 ### Added
-- Implemented isometric & hexagonal tile sizes for tilemap layers! [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
+- Implemented isometric & hexagonal tile shapes for tilemap layers! [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Implemented a hexagonal grid type, with support for both pointy-top and flat-top orientations.
 - Added a single bezier mode in curve tool, that works similarly to Aseprite's curve tool. [#1216](https://github.com/Orama-Interactive/Pixelorama/pull/1216)
 - OpenRaster (`.ora`) and Aseprite (`.ase`/`.aseprite`) files are now being displayed as options in the "Open" dialog.
