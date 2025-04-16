@@ -332,7 +332,9 @@ static func open_aseprite_file(path: String) -> void:
 						var green := ase_file.get_8()
 						var blue := ase_file.get_8()
 						var alpha := ase_file.get_8()
-						if previous_chunk_type == ChunkTypes.LAYER:
+						if previous_chunk_type == ChunkTypes.CEL:
+							frame.cels[-1].ui_color = Color.from_rgba8(red, green, blue, alpha)
+						elif previous_chunk_type == ChunkTypes.LAYER:
 							new_project.layers[-1].ui_color = Color.from_rgba8(
 								red, green, blue, alpha
 							)
