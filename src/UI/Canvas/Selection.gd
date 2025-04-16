@@ -1061,7 +1061,9 @@ func select_cel_pixels(layer: BaseLayer, frame: Frame) -> void:
 		cel_image = (layer as GroupLayer).blend_children(frame)
 	else:
 		cel_image = current_cel.get_image()
+	var selection_format := project.selection_map.get_format()
 	project.selection_map.copy_from(cel_image)
+	project.selection_map.convert(selection_format)
 	project.selection_map_changed()
 	big_bounding_rectangle = project.selection_map.get_used_rect()
 	project.selection_offset = Vector2.ZERO
