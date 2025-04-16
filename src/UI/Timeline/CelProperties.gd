@@ -7,6 +7,7 @@ var cel_indices: Array
 @onready var opacity_slider := $GridContainer/OpacitySlider as ValueSlider
 @onready var z_index_slider := $GridContainer/ZIndexSlider as ValueSlider
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
+@onready var ui_color_picker_button := $GridContainer/UIColorPickerButton as ColorPickerButton
 
 
 func _on_visibility_changed() -> void:
@@ -26,6 +27,7 @@ func _on_visibility_changed() -> void:
 		opacity_slider.value = first_cel.opacity * 100.0
 		z_index_slider.value = first_cel.z_index
 		user_data_text_edit.text = first_cel.user_data
+		ui_color_picker_button.color = first_cel.ui_color
 		get_tree().set_group(&"VisualCels", "visible", first_layer is not AudioLayer)
 	else:
 		cel_indices = []
@@ -56,3 +58,9 @@ func _on_user_data_text_edit_text_changed() -> void:
 	for cel_index in cel_indices:
 		var cel := Global.current_project.frames[cel_index[0]].cels[cel_index[1]]
 		cel.user_data = user_data_text_edit.text
+
+
+func _on_ui_color_picker_button_color_changed(color: Color) -> void:
+	for cel_index in cel_indices:
+		var cel := Global.current_project.frames[cel_index[0]].cels[cel_index[1]]
+		cel.ui_color = color

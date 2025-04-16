@@ -4,6 +4,7 @@ extends RefCounted
 ## "Cel" is short for the term "celluloid" [url]https://en.wikipedia.org/wiki/Cel[/url].
 
 signal texture_changed  ## Emitted whenever the cel's texture is changed
+signal ui_color_changed  ## Emits when [member ui_color] is changed.
 
 var opacity := 1.0  ## Opacity/Transparency of the cel.
 ## The image stored in the cel.
@@ -18,6 +19,11 @@ var transformed_content: Image  ## Used in transformations (moving, scaling etc 
 ## their corresponding layer.
 var z_index := 0
 var user_data := ""  ## User defined data, set in the cel properties.
+## The color of the cel's button in the timeline. By default, it's the theme button color.
+var ui_color := Color(0, 0, 0, 0):
+	set(value):
+		ui_color = value
+		ui_color_changed.emit()
 
 
 func get_final_opacity(layer: BaseLayer) -> float:
@@ -89,6 +95,7 @@ func serialize() -> Dictionary:
 	var dict := {"opacity": opacity, "z_index": z_index}
 	if not user_data.is_empty():
 		dict["user_data"] = user_data
+	dict["ui_color"] = ui_color
 	return dict
 
 
@@ -97,6 +104,7 @@ func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
 	z_index = dict.get("z_index", z_index)
 	user_data = dict.get("user_data", user_data)
+	ui_color = dict.get("ui_color", ui_color)
 
 
 func size_changed(_new_size: Vector2i) -> void:

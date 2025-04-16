@@ -9,6 +9,7 @@ var cel: BaseCel
 var _is_guide_stylebox := false
 
 @onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
+@onready var ui_color_rect: ColorRect = $UIColorRect
 @onready var linked_rect: ColorRect = $Linked
 @onready var cel_texture: TextureRect = $CelTexture
 @onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
@@ -22,6 +23,8 @@ func _ready() -> void:
 	button_setup()
 	_dim_checker()
 	cel.texture_changed.connect(_dim_checker)
+	ui_color_rect.color = cel.ui_color
+	cel.ui_color_changed.connect(func(): ui_color_rect.color = cel.ui_color)
 	for selected in Global.current_project.selected_cels:
 		if selected[1] == layer and selected[0] == frame:
 			button_pressed = true

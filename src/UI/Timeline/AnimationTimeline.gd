@@ -513,6 +513,9 @@ func copy_frames(
 			else:
 				new_cel.set_content(src_cel.copy_content())
 			new_cel.opacity = src_cel.opacity
+			new_cel.z_index = src_cel.z_index
+			new_cel.user_data = src_cel.user_data
+			new_cel.ui_color = src_cel.ui_color
 
 			if new_cel is Cel3D:
 				if selected_id in new_cel.object_properties.keys():
@@ -977,6 +980,9 @@ func _on_CloneLayer_pressed() -> void:
 				new_cel.link_set["cels"].append(new_cel)
 
 			new_cel.opacity = src_cel.opacity
+			new_cel.z_index = src_cel.z_index
+			new_cel.user_data = src_cel.user_data
+			new_cel.ui_color = src_cel.ui_color
 			cels[-1].append(new_cel)
 
 	for cl_layer in clones:

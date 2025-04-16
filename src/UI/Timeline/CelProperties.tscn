@@ -5,14 +5,14 @@
 
 [node name="CelProperties" type="AcceptDialog"]
 title = "Cel properties"
-size = Vector2i(300, 188)
+size = Vector2i(300, 227)
 script = ExtResource("1_lyy7i")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
-offset_bottom = 139.0
+offset_bottom = 178.0
 columns = 2
 
 [node name="Frame" type="Label" parent="GridContainer"]
@@ -85,7 +85,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true
 
+[node name="UIColorLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Color:"
+
+[node name="UIColorPickerButton" type="ColorPickerButton" parent="GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="value_changed" from="GridContainer/OpacitySlider" to="." method="_on_opacity_slider_value_changed"]
 [connection signal="value_changed" from="GridContainer/ZIndexSlider" to="." method="_on_z_index_slider_value_changed"]
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
+[connection signal="color_changed" from="GridContainer/UIColorPickerButton" to="." method="_on_ui_color_picker_button_color_changed"]

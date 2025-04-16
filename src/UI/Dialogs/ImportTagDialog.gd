@@ -223,6 +223,9 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 						new_cel.set_content(copy)
 						new_cel.set_indexed_mode(project.is_indexed())
 					new_cel.opacity = src_cel.opacity
+					new_cel.z_index = src_cel.z_index
+					new_cel.user_data = src_cel.user_data
+					new_cel.ui_color = src_cel.ui_color
 
 					if new_cel is Cel3D:
 						if selected_id in new_cel.object_properties.keys():
