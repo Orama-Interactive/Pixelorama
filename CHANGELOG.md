@@ -15,6 +15,8 @@ Built using Godot 4.4
 - Implemented a hexagonal grid type, with support for both pointy-top and flat-top orientations.
 - Added a single bezier mode in curve tool, that works similarly to Aseprite's curve tool. [#1216](https://github.com/Orama-Interactive/Pixelorama/pull/1216)
 - OpenRaster (`.ora`) and Aseprite (`.ase`/`.aseprite`) files are now being displayed as options in the "Open" dialog.
+- Added shortcuts for going to the previous/next frame of the same tag. By default, they are mapped to <kbd>Control + <</kbd> and <kbd>Control + ></kbd> respectively.
+- Users can now color code their cels in the timeline.
 - A button for reporting extensions has been added to the extension explorer. [#1214](https://github.com/Orama-Interactive/Pixelorama/pull/1214)
 
 ### Changed
@@ -22,6 +24,8 @@ Built using Godot 4.4
 - Scaling the project also scales the size of the tiles by the same amount that the project was scaled. For example, scaling a 64x64 project to 128x64 would scale 16x16 tiles to 32x16. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Switched "tags by column" and "tags by rows" in the export dialog, when exporting spritesheets.
 - The pencil/eraser/shading brush flip/rotation UI is now consistent with the tiles panel flip/rotation UI, and it also supports the same shortcuts.
+- The shortcut groups in the Preferences have been re-organized. The Buttons group has been removed, instead the shortcuts are grouped according to their respective panels, such as Timeline, Global Tool Options and Palettes.
+- Cels with a non-zero z-index display a "z" in the timeline.
 - The reference image rotation incerement step was changed to 0.01. [#1210](https://github.com/Orama-Interactive/Pixelorama/pull/#1210)
 
 ### Fixed
@@ -34,6 +38,7 @@ Built using Godot 4.4
 - Fixed selection resizing not working from the tool options. [#1212](https://github.com/Orama-Interactive/Pixelorama/issues/1212)
 - The tile indices that appear when holding <kbd>Control</kbd> and a tilemap layer is selected, now scale based on the grid cell size. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Applying layer effects to passthrough group layer immediately updates the canvas.
+- The "select pixels" from the cel menu now works properly with undo.
 - Fixed a "section not found" error in the Preferences when launching Pixelorama for the first time. [#1211](https://github.com/Orama-Interactive/Pixelorama/pull/#1211)
 - Fixed the pencil density slider value not updating when switching between tools.
 - Fixed the color picker acting weirdly when the alpha of the color is set to 0.
