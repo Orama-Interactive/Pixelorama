@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-16 21:39\n"
+"PO-Revision-Date: 2025-04-16 22:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2035,69 +2035,71 @@ msgstr "A buscar data do repositório remoto.\n"
 msgid "Unable to get info from remote repository.\n\n"
 "- Make sure you are connected to the internet.\n"
 "- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
-msgstr ""
+msgstr "Não foi possível obter informação do repositório remoto.\n\n"
+"- Verifique a ligação à internet\n"
+"- Se estiver a usar a versão de Flatpak do Pixelorama, terá que dar permissão para conectar à internet. Para o fazer, pode correr o seguinte comando no seu terminal:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
-msgstr ""
+msgstr "Como alternativa, pode descarregar o Flatseal e definir as permissões para aplicações Flatpak aí."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr ""
+msgstr "Não foi possível obter informação do repositório remoto."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr ""
+msgstr "Cole o link do repositório, dado pelo dono do repositório. Se deixado em branco, será automaticamente removido."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
-msgstr ""
+msgstr "Tem a certeza que quer ativar esta extensão? Certifiue-se de ativar extensões apenas de fontes confiáveis."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to delete an extension.
 msgid "Are you sure you want to delete this extension?"
-msgstr ""
+msgstr "Tem a certeza que quer apagar esta extensão?"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "Dinâmica"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
-msgstr ""
+msgstr "Estabilizador"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "Pressão"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "Velocidade"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "Alpha"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "Tamanho"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "Limites de valor"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "Limiares"
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "Início"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "Fim"
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -2107,7 +2109,7 @@ msgstr "Selecionar pincel"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "Pincéis Padrão"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
@@ -2123,15 +2125,15 @@ msgstr "Pincel circular preenchido"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "Pincéis do Projeto"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Pincéis do Ficheiro"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "Neve"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
