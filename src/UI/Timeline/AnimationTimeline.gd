@@ -692,7 +692,9 @@ func _on_AnimationTimer_timeout() -> void:
 		if project.current_frame < last_frame:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame + 1, -1)
-			animation_timer.wait_time = project.frames[project.current_frame].duration * (1.0 / fps)
+			animation_timer.wait_time = (
+				project.frames[project.current_frame].get_duration_in_seconds(fps)
+			)
 			animation_timer.start()  # Change the frame, change the wait time and start a cycle
 		else:
 			match animation_loop:
@@ -706,7 +708,7 @@ func _on_AnimationTimer_timeout() -> void:
 					project.selected_cels.clear()
 					project.change_cel(first_frame, -1)
 					animation_timer.wait_time = (
-						project.frames[project.current_frame].duration * (1 / fps)
+						project.frames[project.current_frame].get_duration_in_seconds(fps)
 					)
 					animation_looped.emit()
 					animation_timer.start()
@@ -719,7 +721,9 @@ func _on_AnimationTimer_timeout() -> void:
 		if project.current_frame > first_frame:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame - 1, -1)
-			animation_timer.wait_time = project.frames[project.current_frame].duration * (1.0 / fps)
+			animation_timer.wait_time = (
+				project.frames[project.current_frame].get_duration_in_seconds(fps)
+			)
 			animation_timer.start()
 		else:
 			match animation_loop:
@@ -733,7 +737,7 @@ func _on_AnimationTimer_timeout() -> void:
 					project.selected_cels.clear()
 					project.change_cel(last_frame, -1)
 					animation_timer.wait_time = (
-						project.frames[project.current_frame].duration * (1 / fps)
+						project.frames[project.current_frame].get_duration_in_seconds(fps)
 					)
 					animation_looped.emit()
 					animation_timer.start()
@@ -747,16 +751,14 @@ func _on_AnimationTimer_timeout() -> void:
 
 
 func play_animation(play: bool, forward_dir: bool) -> void:
+	var project := Global.current_project
 	first_frame = 0
-	last_frame = Global.current_project.frames.size() - 1
+	last_frame = project.frames.size() - 1
 	if Global.play_only_tags:
-		for tag in Global.current_project.animation_tags:
-			if (
-				Global.current_project.current_frame + 1 >= tag.from
-				&& Global.current_project.current_frame + 1 <= tag.to
-			):
+		for tag in project.animation_tags:
+			if project.current_frame + 1 >= tag.from && project.current_frame + 1 <= tag.to:
 				first_frame = tag.from - 1
-				last_frame = mini(Global.current_project.frames.size() - 1, tag.to - 1)
+				last_frame = mini(project.frames.size() - 1, tag.to - 1)
 
 	if first_frame == last_frame:
 		if forward_dir:
@@ -778,10 +780,8 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 	if play:
 		animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
-		var duration: float = (
-			Global.current_project.frames[Global.current_project.current_frame].duration
-		)
-		animation_timer.wait_time = duration * (1 / Global.current_project.fps)
+		var frame := project.frames[project.current_frame]
+		animation_timer.wait_time = frame.get_duration_in_seconds(project.fps)
 		animation_timer.start()
 		animation_forward = forward_dir
 		animation_started.emit(forward_dir)
@@ -822,7 +822,7 @@ func _on_FirstFrame_pressed() -> void:
 
 func _on_FPSValue_value_changed(value: float) -> void:
 	Global.current_project.fps = value
-	animation_timer.wait_time = 1 / Global.current_project.fps
+	animation_timer.wait_time = 1.0 / Global.current_project.fps
 
 
 func _on_PastOnionSkinning_value_changed(value: float) -> void:

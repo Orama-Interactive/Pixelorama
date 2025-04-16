@@ -39,7 +39,7 @@ func _draw() -> void:
 			if animation_timer.is_stopped():
 				frame_index = project.current_frame
 			var frame := project.frames[frame_index]
-			animation_timer.wait_time = frame.duration * (1.0 / project.fps)
+			animation_timer.wait_time = frame.get_duration_in_seconds(project.fps)
 			# If we just use the first cel and it happens to be a GroupCel
 			# nothing will get drawn
 			var cel_to_draw := Global.current_project.find_first_drawable_cel(frame)
@@ -119,7 +119,8 @@ func _on_AnimationTimer_timeout() -> void:
 				frame_index += 1
 			else:
 				frame_index = first_frame
-			animation_timer.wait_time = project.frames[frame_index].duration * (1.0 / project.fps)
+			var frame := project.frames[frame_index]
+			animation_timer.wait_time = frame.get_duration_in_seconds(project.fps)
 
 		Mode.SPRITESHEET:
 			frame_index += 1
