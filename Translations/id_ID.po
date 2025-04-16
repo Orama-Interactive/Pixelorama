@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-15 18:30\n"
+"PO-Revision-Date: 2025-04-16 12:37\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -798,7 +798,7 @@ msgstr "Gambar WebP"
 
 #. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
 msgid "OpenRaster Project"
-msgstr ""
+msgstr "Proyek OpenRaster"
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
@@ -2003,7 +2003,7 @@ msgstr "Cari di Daring"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Extension Explorer"
-msgstr ""
+msgstr "Toko Ekstensi"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2018,7 +2018,7 @@ msgstr "Tag:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr ""
+msgstr "Laporkan isu dengan ekstensi"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2028,34 +2028,37 @@ msgstr "Unduh"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Repository links:"
-msgstr ""
+msgstr "Tautan repositori:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Fetching data from remote repository.\n"
 "Please wait."
-msgstr ""
+msgstr "Mengambil data dari repositori jauh.\n"
+"Mohon tunggu."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository.\n\n"
 "- Make sure you are connected to the internet.\n"
 "- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
-msgstr ""
+msgstr "Tidak bisa mendapat info dari repositori jauh.\n\n"
+"- Pastikan sudah tersambung ke internet.\n"
+"- Jika menggunakan Pixelorama versi Flatpak, izinkan dulu untuk menyambung ke internet. Caranya, jalankan perintah berikut di terminal perintah:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
-msgstr ""
+msgstr "Cara lainnya, unduh Flatseal dan atur izin internet untuk aplikasi Flatpak di situ."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr ""
+msgstr "Tidak bisa mendapat info dari repositori jauh."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr ""
+msgstr "Tempel tautan repositori pemilik repositori. Jika kolomnya kosong, tautannya akan otomatis dihapus."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
