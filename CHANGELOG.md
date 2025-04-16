@@ -4,6 +4,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.1] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.4
+
+### Added
+- Implemented isometric & hexagonal tile sizes for tilemap layers! [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
+- Implemented a hexagonal grid type, with support for both pointy-top and flat-top orientations.
+- Added a single bezier mode in curve tool, that works similarly to Aseprite's curve tool. [#1216](https://github.com/Orama-Interactive/Pixelorama/pull/1216)
+- OpenRaster (`.ora`) and Aseprite (`.ase`/`.aseprite`) files are now being displayed as options in the "Open" dialog.
+- A button for reporting extensions has been added to the extension explorer. [#1214](https://github.com/Orama-Interactive/Pixelorama/pull/1214)
+
+### Changed
+- Resizing the canvas, cropping to content and centering frames now moves the offset of each tilemap layer instead of affecting its tileset. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
+- Scaling the project also scales the size of the tiles by the same amount that the project was scaled. For example, scaling a 64x64 project to 128x64 would scale 16x16 tiles to 32x16. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
+- Switched "tags by column" and "tags by rows" in the export dialog, when exporting spritesheets.
+- The pencil/eraser/shading brush flip/rotation UI is now consistent with the tiles panel flip/rotation UI, and it also supports the same shortcuts.
+- The reference image rotation incerement step was changed to 0.01. [#1210](https://github.com/Orama-Interactive/Pixelorama/pull/#1210)
+
+### Fixed
+- Value sliders and rulers are no longer displaying integers as floats.
+- Fixed a crash when using the lasso and polygon select tools outside of the canvas.
+- Using the bucket tool on draw tiles mode on an empty tilemap no longer crashes the app. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
+- Fixed a crash when switching between tilemap layers with different tilesets, while having selected tiles the positions of which do not exist on the new tilemap's tileset. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
+- Duplicating tilesets in the project properties no longer crashes the app when a previously deleted tileset is still selected. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
+- Fixed the import tag option not pasting the frame content, and not working for tilemap and audio layers.
+- Fixed selection resizing not working from the tool options. [#1212](https://github.com/Orama-Interactive/Pixelorama/issues/1212)
+- The tile indices that appear when holding <kbd>Control</kbd> and a tilemap layer is selected, now scale based on the grid cell size. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
+- Applying layer effects to passthrough group layer immediately updates the canvas.
+- Fixed a "section not found" error in the Preferences when launching Pixelorama for the first time. [#1211](https://github.com/Orama-Interactive/Pixelorama/pull/#1211)
+- Fixed the pencil density slider value not updating when switching between tools.
+- Fixed the color picker acting weirdly when the alpha of the color is set to 0.
+- Rulers now update whenever the canvas panel resizes.
+- Fixed a regression in v1.1 where mouse button shortcuts (such as the mouse thumb buttons) were not activating tools.
+- Fixed issue where the wrong font would be chosen for the interface in certain circumstances. [#1217](https://github.com/Orama-Interactive/Pixelorama/pull/#1217)
+
+### Removed
+- The "All" grid type option has been removed, as it is no longer needed since we can now display multiple grids at once.
+
 ## [v1.1] - 2025-03-28
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Spencer Beckwith ([@spencerjbeckwith](https://github.com/spencerjbeckwith)), [@myyc](https://github.com/myyc), João Vitor ([@dev-joaovitor](https://github.com/dev-joaovitor))
