@@ -132,7 +132,8 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 		from_layers_size.sort()  # it's values should now be from (layer size - 1) to zero
 		for i in from_layers_size:
 			if layer_from_to[i] == -1:
-				var type = from_project.layers[i].get_layer_type()
+				var from_layer := from_project.layers[i]
+				var type = from_layer.get_layer_type()
 				var l: BaseLayer
 				match type:
 					Global.LayerTypes.PIXEL:
@@ -141,6 +142,16 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 						l = GroupLayer.new(project)
 					Global.LayerTypes.THREE_D:
 						l = Layer3D.new(project)
+					Global.LayerTypes.TILEMAP:
+						l = LayerTileMap.new(project, from_layer.tileset)
+						l.place_only_mode = from_layer.place_only_mode
+						l.tile_size = from_layer.tile_size
+						l.tile_shape = from_layer.tile_shape
+						l.tile_layout = from_layer.tile_layout
+						l.tile_offset_axis = from_layer.tile_offset_axis
+					Global.LayerTypes.AUDIO:
+						l = AudioLayer.new(project)
+						l.audio = from_layer.audio
 				if l == null:  # Ignore copying this layer if it isn't supported
 					continue
 				var cels := []
@@ -182,17 +193,35 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 					)
 					if src_cel.selected != null:
 						selected_id = src_cel.selected.id
+				elif src_cel is CelTileMap:
+					new_cel = CelTileMap.new(src_cel.tileset)
+					new_cel.offset = src_cel.offset
+					new_cel.place_only_mode = src_cel.place_only_mode
+					new_cel.tile_size = src_cel.tile_size
+					new_cel.tile_shape = src_cel.tile_shape
+					new_cel.tile_layout = src_cel.tile_layout
+					new_cel.tile_offset_axis = src_cel.tile_offset_axis
+					var copied_content := src_cel.copy_content() as Array
+					var src_img: ImageExtended = copied_content[0]
+					var empty := project.new_empty_image()
+					var copy := ImageExtended.new()
+					copy.copy_from_custom(empty, project.is_indexed())
+					copy.blit_rect(src_img, Rect2(Vector2.ZERO, src_img.get_size()), Vector2.ZERO)
+					new_cel.set_content([copy, copied_content[1]])
+					new_cel.set_indexed_mode(project.is_indexed())
 				else:
 					new_cel = src_cel.get_script().new()
-
-					# add more types here if they have a copy_content() method
+					# Add more types here if they have a copy_content() method.
 					if src_cel is PixelCel:
 						var src_img: ImageExtended = src_cel.copy_content()
-						var copy: ImageExtended = new_cel.create_empty_content()
+						var empty := project.new_empty_image()
+						var copy := ImageExtended.new()
+						copy.copy_from_custom(empty, project.is_indexed())
 						copy.blit_rect(
 							src_img, Rect2(Vector2.ZERO, src_img.get_size()), Vector2.ZERO
 						)
 						new_cel.set_content(copy)
+						new_cel.set_indexed_mode(project.is_indexed())
 					new_cel.opacity = src_cel.opacity
 
 					if new_cel is Cel3D:
