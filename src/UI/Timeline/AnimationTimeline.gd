@@ -136,18 +136,42 @@ func _notification(what: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	var project := Global.current_project
-	if event.is_action_pressed("go_to_previous_layer"):
+	if event.is_action_pressed(&"go_to_previous_layer"):
 		project.selected_cels.clear()
 		if project.current_layer > 0:
 			project.change_cel(-1, project.current_layer - 1)
 		else:
 			project.change_cel(-1, project.layers.size() - 1)
-	elif event.is_action_pressed("go_to_next_layer"):
+	elif event.is_action_pressed(&"go_to_next_layer"):
 		project.selected_cels.clear()
 		if project.current_layer < project.layers.size() - 1:
 			project.change_cel(-1, project.current_layer + 1)
 		else:
 			project.change_cel(-1, 0)
+	elif event.is_action_pressed(&"go_to_next_frame_with_same_tag"):
+		project.selected_cels.clear()
+		var from := 0
+		var to := project.frames.size() - 1
+		for tag in project.animation_tags:
+			if project.current_frame + 1 >= tag.from && project.current_frame + 1 <= tag.to:
+				from = tag.from - 1
+				to = mini(to, tag.to - 1)
+		if project.current_frame < to:
+			project.change_cel(project.current_frame + 1, -1)
+		else:
+			project.change_cel(from, -1)
+	elif event.is_action_pressed(&"go_to_previous_frame_with_same_tag"):
+		project.selected_cels.clear()
+		var from := 0
+		var to := project.frames.size() - 1
+		for tag in project.animation_tags:
+			if project.current_frame + 1 >= tag.from && project.current_frame + 1 <= tag.to:
+				from = tag.from - 1
+				to = mini(to, tag.to - 1)
+		if project.current_frame > from:
+			project.change_cel(project.current_frame - 1, -1)
+		else:
+			project.change_cel(to, -1)
 
 	var mouse_pos := get_global_mouse_position()
 	var timeline_rect := Rect2(global_position, size)
