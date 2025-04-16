@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-04-15 18:30\n"
+"PO-Revision-Date: 2025-04-16 12:37\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -1959,7 +1959,7 @@ msgstr ""
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Extension Explorer"
-msgstr ""
+msgstr "Toko Ekstensi"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -1974,7 +1974,7 @@ msgstr "Tag:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr ""
+msgstr "Laporkan isu dengan ekstensi"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -1984,7 +1984,7 @@ msgstr "Muat turun"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Repository links:"
-msgstr ""
+msgstr "Tautan repositori:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
