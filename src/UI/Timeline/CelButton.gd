@@ -13,6 +13,7 @@ var _is_guide_stylebox := false
 @onready var linked_rect: ColorRect = $Linked
 @onready var cel_texture: TextureRect = $CelTexture
 @onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
+@onready var z_index_indicator: TextureRect = $ZIndexIndicator
 @onready var properties: AcceptDialog = Global.control.find_child("CelProperties")
 
 
@@ -23,7 +24,9 @@ func _ready() -> void:
 	button_setup()
 	_dim_checker()
 	cel.texture_changed.connect(_dim_checker)
+	z_index_indicator.visible = cel.z_index != 0
 	ui_color_rect.color = cel.ui_color
+	cel.z_index_changed.connect(func(): z_index_indicator.visible = cel.z_index != 0)
 	cel.ui_color_changed.connect(func(): ui_color_rect.color = cel.ui_color)
 	for selected in Global.current_project.selected_cels:
 		if selected[1] == layer and selected[0] == frame:

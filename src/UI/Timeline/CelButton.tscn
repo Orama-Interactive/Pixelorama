@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw7ci3uixjuev"]
+[gd_scene load_steps=6 format=3 uid="uid://dw7ci3uixjuev"]
 
 [ext_resource type="Script" uid="uid://dgc2ea2ye53p8" path="res://src/UI/Timeline/CelButton.gd" id="1_iewgo"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2_mi8wp"]
 [ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="3_qv21g"]
+[ext_resource type="Texture2D" uid="uid://bsnfsiytk8sbs" path="res://assets/graphics/misc/z_index_indicator.png" id="4_64heq"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("3_qv21g")
@@ -80,6 +81,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ZIndexIndicator" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -18.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("4_64heq")
+stretch_mode = 5
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
 item_count = 1

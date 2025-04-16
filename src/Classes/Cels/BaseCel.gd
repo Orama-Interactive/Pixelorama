@@ -4,6 +4,7 @@ extends RefCounted
 ## "Cel" is short for the term "celluloid" [url]https://en.wikipedia.org/wiki/Cel[/url].
 
 signal texture_changed  ## Emitted whenever the cel's texture is changed
+signal z_index_changed  ## Emitted whenever [member z_index] is changed.
 signal ui_color_changed  ## Emits when [member ui_color] is changed.
 
 var opacity := 1.0  ## Opacity/Transparency of the cel.
@@ -17,7 +18,10 @@ var link_set = null  # { "cels": Array, "hue": float } or null
 var transformed_content: Image  ## Used in transformations (moving, scaling etc with selections).
 ## Used for individual cel ordering. Used for when cels need to be drawn above or below
 ## their corresponding layer.
-var z_index := 0
+var z_index := 0:
+	set(value):
+		z_index = value
+		z_index_changed.emit()
 var user_data := ""  ## User defined data, set in the cel properties.
 ## The color of the cel's button in the timeline. By default, it's the theme button color.
 var ui_color := Color(0, 0, 0, 0):
