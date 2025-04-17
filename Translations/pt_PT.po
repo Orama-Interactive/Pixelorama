@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-16 22:52\n"
+"PO-Revision-Date: 2025-04-17 09:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2137,15 +2137,15 @@ msgstr "Neve"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Pincéis Aleatórios de Ficheiro"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "Relva"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "Estrela"
 
 msgid "Custom brush"
 msgstr "Pincel personalizado"
@@ -2155,18 +2155,18 @@ msgstr "Tamanho de pincel:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "Opções de rotação"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "Inverter:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "Rodar:"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Substituir cor"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Sustitui a cor ao invés de a misturar. Esta opção é importante para cores que não são totalmente opacas"
@@ -2176,26 +2176,27 @@ msgstr "Pixel Perfeito"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pixel Perfect\n"
+"Torna as linhas suaves removendo pixeis extras nos cantos"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Trancar alpha"
 
 msgid "Fill inside"
 msgstr "Preencher interior"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Espaçamento"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Espaçamento X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Espaçamento Y:"
 
 msgid "Fill Shape"
 msgstr "Preencher forma"
@@ -2205,11 +2206,11 @@ msgstr "Preenche forma com cor, ao invés de desenhar uma forma vazia"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "Densidade:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
-msgstr ""
+msgstr "Intensidade da cor:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Cor do próprio pincel, 100: cor atualmente selecionada"
@@ -2264,14 +2265,14 @@ msgstr "Quantidade de Clareamento/Escurecimento"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "Substituir Cor"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Por favor seleciona uma cor da paleta."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Cores à direita:"
 
 msgid "Pick for:"
 msgstr "Escolher para:"
@@ -2284,15 +2285,15 @@ msgstr "Cor da Direita"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Modo de seleção:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Cor Superior"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Camada Atual"
 
 msgid "Mode:"
 msgstr "Modo:"
@@ -2305,19 +2306,20 @@ msgstr "Zoom para fora"
 
 #. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
 msgid "Single"
-msgstr ""
+msgstr "Único"
 
 #. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
 msgid "Chained"
-msgstr ""
+msgstr "Encadeado"
 
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "Encadeado: Faz uma cadeia de múltiplas curvas bezier, parecido à ferramenta de curva de Krita.\n"
+"Único: Faz apenas uma curva bezier, parecido à ferramenta de curva de Aseprite."
 
 msgid "Options"
-msgstr ""
+msgstr "Opções"
 
 msgid "Options:"
 msgstr "Opções:"
@@ -2330,7 +2332,7 @@ msgstr "100% Zoom"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Substituir seleção"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
