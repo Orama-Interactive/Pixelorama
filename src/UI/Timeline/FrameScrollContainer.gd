@@ -34,6 +34,13 @@ func _gui_input(event: InputEvent) -> void:
 					):
 						h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
 						accept_event()
+		# Pan scrolling, used by some MacOS devices
+		# (see: https://github.com/Orama-Interactive/Pixelorama/discussions/1218)
+		elif event is InputEventPanGesture:
+			if event.delta.x != 0:
+				h_scroll_bar.value += (
+					sign(event.delta.x) * (Global.animation_timeline.cel_size / 2 + 2)
+				)
 
 
 func _update_scroll() -> void:
