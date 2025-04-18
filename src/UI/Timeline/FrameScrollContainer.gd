@@ -26,8 +26,10 @@ func _gui_input(event: InputEvent) -> void:
 					h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
 		elif event is InputEventPanGesture and (event.shift_pressed or not vertical_scroll):
-			if event.delta.y != 0:
-				h_scroll_bar.value += sign(event.delta.y) * (Global.animation_timeline.cel_size / 2 + 2)
+			if event.delta.x != 0:
+				h_scroll_bar.value += (
+					sign(event.delta.x) * (Global.animation_timeline.cel_size / 2 + 2)
+				)
 
 
 func _update_scroll() -> void:
