@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-18 12:33\n"
+"PO-Revision-Date: 2025-04-18 14:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2486,11 +2486,11 @@ msgstr "Quando selecionado, a animação reproduz apenas os fotogramas com a mes
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr ""
+msgstr "Tamanho da célula:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Modo de cor"
 
 msgid "Show past frames:"
 msgstr "Mostrar fotogramas anteriores:"
@@ -2505,7 +2505,7 @@ msgid "Below canvas"
 msgstr "Abaixo da tela"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Se quer que uma camada ignore o onion skinning adicione o sufixo \"_io\" no seu nome."
 
 msgid "Add a new frame"
 msgstr "Adicionar um novo fotograma"
@@ -2527,7 +2527,7 @@ msgstr ""
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
-msgstr ""
+msgstr "Selecionar pixeis"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
