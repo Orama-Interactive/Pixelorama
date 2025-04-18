@@ -13,29 +13,21 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	print("=============================")
-	print("Event is: ", event)
-	if event is InputEventMouseButton:
-		print("Is shift: ", event.shift_pressed)
-		print("Button Index", event.button_index)
 	if get_child_count():
 		var vertical_scroll: bool = get_child(0).size.y >= size.y
-		# MOUSE_BUTTON_WHEEL_RIGHT/LEFT are inspired from
-		# https://github.com/godotengine/godot/issues/88356
+		print("Event:", event)
+		print("Shift pressed:",event.shift_pressed)
 		if event is InputEventMouseButton and (event.shift_pressed or not vertical_scroll):
 			if is_instance_valid(h_scroll_bar):
-				if (
-					event.button_index == MOUSE_BUTTON_WHEEL_UP
-					or event.button_index == MOUSE_BUTTON_WHEEL_RIGHT
-				):
+				if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 					h_scroll_bar.value -= Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
-				elif (
-					event.button_index == MOUSE_BUTTON_WHEEL_DOWN
-					or event.button_index == MOUSE_BUTTON_WHEEL_LEFT
-				):
+				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 					h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
+		elif event is InputEventPanGesture and (event.shift_pressed or not vertical_scroll):
+			if event.delta.y != 0:
+				h_scroll_bar.value += sign(event.delta.y) * (Global.animation_timeline.cel_size / 2 + 2)
 
 
 func _update_scroll() -> void:
