@@ -22,6 +22,9 @@ func update_measurement(mode_idx := Global.MeasurementMode.NONE) -> void:
 
 func _draw() -> void:
 	match mode:
+		Global.MeasurementMode.DISPLAY_RECT:
+			_prepare_cel_rect()
+			_draw_move_measurement()
 		Global.MeasurementMode.MOVE:
 			_prepare_movement_rect()
 			_draw_move_measurement()
@@ -29,8 +32,33 @@ func _draw() -> void:
 			rect_bounds = Rect2i()
 
 
-func _input(_event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	apparent_width = WIDTH / Global.camera.zoom.x
+	if event.is_action_released(&"change_layer_automatically"):
+		update_measurement(Global.MeasurementMode.NONE)
+	elif event.is_action(&"change_layer_automatically"):
+		update_measurement(Global.MeasurementMode.DISPLAY_RECT)
+	elif event is InputEventMouseMotion and mode == Global.MeasurementMode.DISPLAY_RECT:
+		update_measurement(Global.MeasurementMode.DISPLAY_RECT)
+
+
+func _prepare_cel_rect() -> void:
+	var pos := canvas.current_pixel.floor()
+	var project := Global.current_project
+	var cel := project.get_current_cel()
+	var image := cel.get_image()
+	rect_bounds = image.get_used_rect()
+	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
+		return
+
+	var curr_frame := project.frames[project.current_frame]
+	for layer in project.layers.size():
+		var layer_index := (project.layers.size() - 1) - layer
+		if project.layers[layer_index].is_visible_in_hierarchy():
+			image = curr_frame.cels[layer_index].get_image()
+			var color := image.get_pixelv(pos)
+			if not is_zero_approx(color.a):
+				rect_bounds = image.get_used_rect()
 
 
 func _prepare_movement_rect() -> void:
