@@ -15,12 +15,20 @@ func _ready() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if get_child_count():
 		var vertical_scroll: bool = get_child(0).size.y >= size.y
+		# MOUSE_BUTTON_WHEEL_RIGHT/LEFT are inspired from
+		# https://github.com/godotengine/godot/issues/88356
 		if event is InputEventMouseButton and (event.shift_pressed or not vertical_scroll):
 			if is_instance_valid(h_scroll_bar):
-				if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				if (
+					event.button_index == MOUSE_BUTTON_WHEEL_UP
+					or event.button_index == MOUSE_BUTTON_WHEEL_RIGHT
+				):
 					h_scroll_bar.value -= Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
-				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				elif (
+					event.button_index == MOUSE_BUTTON_WHEEL_DOWN
+					or event.button_index == MOUSE_BUTTON_WHEEL_LEFT
+				):
 					h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
 
