@@ -13,6 +13,11 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
+	print("=============================")
+	print("Event is: ", event)
+	if event is InputEventMouseButton:
+		print("Is shift: ", event.shift_pressed)
+		print("Button Index", event.button_index)
 	if get_child_count():
 		var vertical_scroll: bool = get_child(0).size.y >= size.y
 		# MOUSE_BUTTON_WHEEL_RIGHT/LEFT are inspired from
