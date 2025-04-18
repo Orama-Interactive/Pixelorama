@@ -141,7 +141,7 @@ func update_texture(
 			cel_image.get_size()
 			== Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
 		):
-			layer_texture_array.update_layer(cel_image, project.ordered_layers[layer.index])
+			layer_texture_array.update_layer(cel_image, project.ordered_layers.find(layer.index))
 
 
 func update_selected_cels_textures(project := Global.current_project) -> void:
@@ -171,7 +171,7 @@ func draw_layers(force_recreate := false) -> void:
 		# Draw current frame layers
 		for i in project.layers.size():
 			var layer := project.layers[i]
-			var ordered_index := project.ordered_layers[layer.index]
+			var ordered_index := project.ordered_layers.find(layer.index)
 			var cel_image := Image.new()
 			_update_texture_array_layer(project, layer, cel_image, false)
 			textures[ordered_index] = cel_image
@@ -194,7 +194,7 @@ func draw_layers(force_recreate := false) -> void:
 					if not test_array in project.selected_cels:
 						continue
 				var layer := project.layers[i]
-				var ordered_index := project.ordered_layers[layer.index]
+				var ordered_index := project.ordered_layers.find(layer.index)
 				var cel_image := Image.new()
 				_update_texture_array_layer(project, layer, cel_image, true)
 				var parent_layer := layer.get_blender_ancestor()
@@ -216,7 +216,7 @@ func draw_layers(force_recreate := false) -> void:
 func _update_texture_array_layer(
 	project: Project, layer: BaseLayer, cel_image: Image, update_layer: bool
 ) -> void:
-	var ordered_index := project.ordered_layers[layer.index]
+	var ordered_index := project.ordered_layers.find(layer.index)
 	var cel := project.frames[project.current_frame].cels[layer.index]
 	var include := true
 	if layer.is_blender():
