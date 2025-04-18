@@ -436,7 +436,7 @@ func _is_playing_audio() -> void:
 			project.frames[frame + 1].position_in_seconds(project, layer_class.playback_frame)
 			>= audio_length
 		)
-	if frame_pos == 0 or (is_last_frame and frame_pos < audio_length):
+	if frame_pos == 0 or (is_last_frame and frame_pos < audio_length and audio_length >= 1.0):
 		cel_texture.texture = preload("res://assets/graphics/misc/musical_note.png")
 		cel_texture.self_modulate = audio_color
 		linked_rect.visible = false
