@@ -15,8 +15,6 @@ func _ready() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if get_child_count():
 		var vertical_scroll: bool = get_child(0).size.y >= size.y
-		print("Event:", event)
-		print("Shift pressed:", event.shift_pressed)
 		var should_h_scroll = event.shift_pressed or not vertical_scroll
 		if event is InputEventMouseButton:
 			if event.button_index in [MOUSE_BUTTON_WHEEL_RIGHT, MOUSE_BUTTON_WHEEL_LEFT]:
@@ -36,11 +34,6 @@ func _gui_input(event: InputEvent) -> void:
 					):
 						h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
 						accept_event()
-		elif event is InputEventPanGesture:
-			if event.delta.x != 0:
-				h_scroll_bar.value += (
-					sign(event.delta.x) * (Global.animation_timeline.cel_size / 2 + 2)
-				)
 
 
 func _update_scroll() -> void:
