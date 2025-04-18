@@ -17,14 +17,25 @@ func _gui_input(event: InputEvent) -> void:
 		var vertical_scroll: bool = get_child(0).size.y >= size.y
 		print("Event:", event)
 		print("Shift pressed:",event.shift_pressed)
-		if event is InputEventMouseButton and (event.shift_pressed or not vertical_scroll):
-			if is_instance_valid(h_scroll_bar):
-				if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-					h_scroll_bar.value -= Global.animation_timeline.cel_size / 2 + 2
-					accept_event()
-				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-					h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
-					accept_event()
+		var should_h_scroll = (event.shift_pressed or not vertical_scroll)
+		if event is InputEventMouseButton:
+			if event.button_index in [MOUSE_BUTTON_WHEEL_RIGHT, MOUSE_BUTTON_WHEEL_LEFT]:
+				# This helps/allows two finger scrolling (on Laptops)
+				should_h_scroll = true
+			if should_h_scroll:
+				if is_instance_valid(h_scroll_bar):
+					if (
+						event.button_index == MOUSE_BUTTON_WHEEL_UP
+						or event.button_index == MOUSE_BUTTON_WHEEL_LEFT
+					):
+						h_scroll_bar.value -= Global.animation_timeline.cel_size / 2 + 2
+						accept_event()
+					elif (
+						event.button_index == MOUSE_BUTTON_WHEEL_DOWN
+						or event.button_index == MOUSE_BUTTON_WHEEL_RIGHT
+					):
+						h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
+						accept_event()
 		elif event is InputEventPanGesture and (event.shift_pressed or not vertical_scroll):
 			if event.delta.x != 0:
 				h_scroll_bar.value += (
