@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-17 09:36\n"
+"PO-Revision-Date: 2025-04-18 12:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2336,42 +2336,42 @@ msgstr "Substituir seleção"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Adicionar à seleção"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Subtrair da seleção"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Interseção das seleções"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Estilo:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Regular"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Bold"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Itálico"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Itálico Bold"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
-msgstr ""
+msgstr "Antialiasing"
 
 msgid "Grayscale"
-msgstr ""
+msgstr "Escala de cinza"
 
 msgid "Mirroring"
 msgstr "Espelhar"
@@ -2390,41 +2390,41 @@ msgstr "Habilitar o desenho espelhado verticalmente"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "Mover para o centro da tela"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "Mover para o centro da visão"
 
 msgid "Current frame:"
 msgstr "Fotograma atual:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Modo de animação:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Frame atual como spritesheet"
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "Saltar para o primeiro frame"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "Ir para o frame anterior"
 
 msgid "Play the animation backwards"
-msgstr ""
+msgstr "Reproduzir animação para trás"
 
 msgid "Play the animation forward"
-msgstr ""
+msgstr "Reproduzir animação"
 
 msgid "Go to the next frame"
-msgstr ""
+msgstr "Ir para o próximo frame"
 
 msgid "Jump to the last frame"
-msgstr ""
+msgstr "Saltar para o último frame"
 
 msgid "Timeline settings"
-msgstr ""
+msgstr "Defenições da linha de tempo"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Habilitar/desabilitar o modo Cebola"
