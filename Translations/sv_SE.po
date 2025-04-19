@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2025-04-19 09:53\n"
+"PO-Revision-Date: 2025-04-19 11:48\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -294,7 +294,7 @@ msgid "Flip Vertical"
 msgstr "Vänd Lodrätt"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Inställningar"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
@@ -345,7 +345,7 @@ msgid "Reset Mask"
 msgstr "Återställ Mask"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Fönster Opacitet"
 
 msgid "Window opacity does not work on fullscreen mode."
 msgstr ""
@@ -371,23 +371,23 @@ msgstr ""
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Förhandsvisa"
 
 msgid "Add"
 msgstr "Lägg till"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Lägg till Vy"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Ta bort %s"
 
 msgid "Copy from"
-msgstr ""
+msgstr "Kopiera från"
 
 msgid "Rename"
-msgstr ""
+msgstr "Döp om"
 
 msgid "Rename Layout"
 msgstr ""
