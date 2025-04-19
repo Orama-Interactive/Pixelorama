@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-18 14:06\n"
+"PO-Revision-Date: 2025-04-19 07:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2531,45 +2531,45 @@ msgstr "Selecionar pixeis"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "Associar células a"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr ""
+msgstr "Desassociar células"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Tocar áudio aqui"
 
 msgid "Properties"
-msgstr ""
+msgstr "Propriedades"
 
 msgid "Project Properties"
-msgstr ""
+msgstr "Propriedades do Projeto"
 
 msgid "Frame properties"
 msgstr "Propriedades do fotograma"
 
 msgid "Layer properties"
-msgstr ""
+msgstr "Propriedades da camada"
 
 msgid "Cel properties"
-msgstr ""
+msgstr "Propriedades da célula"
 
 msgid "Tag properties"
-msgstr ""
+msgstr "Propriedades da etiqueta"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, a new frame tag is added.
 msgid "New Tag"
-msgstr ""
+msgstr "Nova Etiqueta"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Importar Etiqueta"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "Inverter Frames"
 
 msgid "Layer"
 msgstr "Camada"
@@ -2579,17 +2579,17 @@ msgstr "Grupo"
 
 #. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
 msgid "Tilemap"
-msgstr ""
+msgstr "Tilemap"
 
 msgid "Audio"
-msgstr ""
+msgstr "Áudio"
 
 msgid "Layers"
 msgstr "Camadas"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr ""
+msgstr "Máscara de recorte"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2599,27 +2599,27 @@ msgstr "Criar uma nova camada"
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Adicionar Camada de Pixel"
 
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Adicionar Camada de Grupo"
 
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Adicionar Camada 3D"
 
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
-msgstr ""
+msgstr "Adicionar Camada de Tilemap"
 
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Audio Layer"
-msgstr ""
+msgstr "Adicionar Camada de Áudio"
 
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Remove current layer"
@@ -2643,27 +2643,27 @@ msgstr "Fundir a camada atual com a de baixo"
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "Blend mode:"
 
 #. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
 msgid "Pass through"
-msgstr ""
+msgstr "Pass through"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Apagar"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "Multiplicação"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr ""
+msgstr "Color burn"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
