@@ -212,24 +212,27 @@ func draw_preview() -> void:
 		circle_center += Vector2.ONE * 0.5
 		draw_empty_circle(canvas, circle_center, circle_radius * 2.0, Color.BLACK)
 	if _editing_bezier:
-		var current_point = _curve.point_count - 1
+		# Array of points whose bezier previews are required.
+		var preview_points: Array[int] = [_curve.point_count - 1]
 		if _current_state == SingleState.MIDDLE_A:
-			# We need this when we are modifying curve of "first" point in SINGLE mode
-			current_point = 0
-		var current_position := _curve.get_point_position(current_point)
-		var start := current_position
-		if current_point > 0:
-			start = current_position + _curve.get_point_in(current_point)
-		var end := current_position + _curve.get_point_out(current_point)
-		if Global.mirror_view:  # This fixes previewing in mirror mode
-			current_position.x = Global.current_project.size.x - current_position.x - 1
-			start.x = Global.current_project.size.x - start.x - 1
-			end.x = Global.current_project.size.x - end.x - 1
+			# We need this when we are modifying curve of "first" point in SINGLE mode.
+			# because while in MIDDLE_A state we modify the in/out of both points simultaneously.
+			preview_points.append(0)
+		for point in preview_points:
+			var current_position := _curve.get_point_position(point)
+			var start := current_position
+			if point > 0:
+				start = current_position + _curve.get_point_in(point)
+			var end := current_position + _curve.get_point_out(point)
+			if Global.mirror_view:  # This fixes previewing in mirror mode
+				current_position.x = Global.current_project.size.x - current_position.x - 1
+				start.x = Global.current_project.size.x - start.x - 1
+				end.x = Global.current_project.size.x - end.x - 1
 
-		canvas.draw_line(start, current_position, Color.BLACK)
-		canvas.draw_line(current_position, end, Color.BLACK)
-		draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
-		draw_empty_circle(canvas, end, circle_radius, Color.BLACK)
+			canvas.draw_line(start, current_position, Color.BLACK)
+			canvas.draw_line(current_position, end, Color.BLACK)
+			draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
+			draw_empty_circle(canvas, end, circle_radius, Color.BLACK)
 
 
 func _draw_shape() -> void:
