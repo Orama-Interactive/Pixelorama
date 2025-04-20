@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-19 07:52\n"
+"PO-Revision-Date: 2025-04-20 11:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2667,71 +2667,71 @@ msgstr "Color burn"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
-msgstr ""
+msgstr "Linear burn"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "Screen"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
-msgstr ""
+msgstr "Color dodge"
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Contraste"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Overlay"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Luz suave"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Luz forte"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Inversão"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Diferença"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Exclusão"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Subtração"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Dividir"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Componente"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Matriz"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Saturação"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Cor"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Luminosidade"
 
 msgid "Opacity:"
 msgstr "Opacidade:"
@@ -2758,14 +2758,14 @@ msgstr "Expandir/colapsar grupo"
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Ficheiro de áudio:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Carregar ficheiro"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Tocar no frame:"
 
 msgid "Palette"
 msgstr "Palete"
@@ -2874,7 +2874,7 @@ msgstr "Ficheiro Gravado"
 
 #. A notification label that appears when the backup of the currently opened project gets saved.
 msgid "Backup saved"
-msgstr ""
+msgstr "Backup salvo"
 
 msgid "File failed to open. Error code %s"
 msgstr "Problema ao abrir ficheiro. Código de erro %s"
