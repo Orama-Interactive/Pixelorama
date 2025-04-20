@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-20 11:01\n"
+"PO-Revision-Date: 2025-04-20 15:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2884,10 +2884,10 @@ msgstr "Problema ao gravar ficheiro. Código de erro %s"
 
 #. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
 msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
-msgstr ""
+msgstr "A exportação do vídeo falhou. Certifique-se que o FFMPEG está instalado corretamente."
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Ficheiro(s) exportado(s)"
 
 msgid "New Empty Palette"
 msgstr "Nova Palete Vazia"
@@ -2972,11 +2972,11 @@ msgstr "Cor de fundo de uma nova imagem"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all options available in the Preferences"
-msgstr ""
+msgstr "Redefinir todas as opções disponíveis nas Definições"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset timeline options"
-msgstr ""
+msgstr "Redefinir opções das linhas de tempo"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
