@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-20 15:54\n"
+"PO-Revision-Date: 2025-04-20 17:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2980,15 +2980,15 @@ msgstr "Redefinir opções das linhas de tempo"
 
 #. Found in the preferences, under the Reset category.
 msgid "Reset all tool options"
-msgstr ""
+msgstr "Redefinir todas as opções de ferramentas"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
-msgstr ""
+msgstr "Remover todas as extensões"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
-msgstr ""
+msgstr "Limpar a lista de arquivos abertos recentemente"
 
 msgid "Lock aspect ratio"
 msgstr "Trancar resolução"
@@ -3033,7 +3033,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Laço / Ferramenta de Seleção livre"
 
 msgid "Select by Drawing"
-msgstr ""
+msgstr "Seleção por Desenho"
 
 msgid "Move"
 msgstr "Mover"
@@ -3063,7 +3063,7 @@ msgid "Line Tool"
 msgstr "Ferramenta de Linha"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "Ferramenta de Curva"
 
 msgid "Rectangle Tool"
 msgstr "Ferramenta de Retangulo"
@@ -3121,7 +3121,7 @@ msgstr "Confirmação de saída"
 
 #. Found in the preferences, under the startup section. Path is a noun and it refers to the location in the device where FFMPEG is located at. FFMPEG is a software name and it should not be translated. See https://en.wikipedia.org/wiki/Path_(computing)
 msgid "FFMPEG path"
-msgstr ""
+msgstr "Caminho do FFMPEG"
 
 msgid "Enable autosave"
 msgstr "Ativar gravação automática"
@@ -3134,47 +3134,47 @@ msgstr "minuto(s)"
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "Exportar dados JSON"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
-msgstr ""
+msgstr "Dividir camadas"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Incluir etiquetas de frame no nome do arquivo"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Criar uma pasta para cada etiqueta de frame"
 
 #. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Cria múltiplos ficheiros mas cada ficheiro é guardado numa pasta que corresponde à sua etiqueta de frame"
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Carácter(es) separador(es):"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "O(s) carácter(es) que separam o nome do ficheiro do número do frame"
 
 #. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
 msgid "Trim images"
-msgstr ""
+msgstr "Cortar imagens"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
-msgstr ""
+msgstr "Corta as imagens exportadas para a sua porção visível, considerando cada pixel não totalmente transparente como visível."
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"
-msgstr ""
+msgstr "Cortar conteúdo da imagem à seleção"
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
-msgstr ""
+msgstr "Exportar apenas o conteúdo que está numa área selecionada."
 
 msgid "Close"
 msgstr "Fechar"
@@ -3213,11 +3213,11 @@ msgstr "Move o fotograma selecionado para a direita."
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
-msgstr ""
+msgstr "Duração do frame:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Dados do utilizador:"
 
 msgid "Duration"
 msgstr "Duração"
@@ -3257,11 +3257,11 @@ msgstr "Remove a cor selecionada"
 
 #. Tooltip of the Sort button found in the palette panel.
 msgid "Sort palette"
-msgstr ""
+msgstr "Ordenar paleta"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr ""
+msgstr "Inverter cores"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
