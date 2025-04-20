@@ -59,6 +59,7 @@ func _prepare_cel_rect() -> void:
 			var color := image.get_pixelv(pos)
 			if not is_zero_approx(color.a):
 				rect_bounds = image.get_used_rect()
+				break
 
 
 func _prepare_movement_rect() -> void:
