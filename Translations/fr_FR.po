@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2025-04-15 18:29\n"
+"PO-Revision-Date: 2025-04-20 17:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,7 +74,7 @@ msgstr "Image"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projet"
 
 msgid "Effects"
 msgstr "Effets"
@@ -274,13 +274,13 @@ msgstr ""
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Diamant"
 
 msgid "Circle"
-msgstr ""
+msgstr "Cercle"
 
 msgid "Square"
-msgstr ""
+msgstr "Carré"
 
 msgid "Grayscale View"
 msgstr "Affichage en niveaux de gris"
@@ -1244,10 +1244,10 @@ msgid "Channel:"
 msgstr ""
 
 msgid "Red"
-msgstr ""
+msgstr "Rouge"
 
 msgid "Green"
-msgstr ""
+msgstr "Vert"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
@@ -2123,7 +2123,7 @@ msgstr ""
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "Neige"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
@@ -2131,11 +2131,11 @@ msgstr ""
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "Herbe"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "Étoile"
 
 msgid "Custom brush"
 msgstr "Brosse personnalisée"
@@ -2644,7 +2644,7 @@ msgstr "Normal"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Effacer"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
@@ -3717,7 +3717,7 @@ msgstr "Rotation"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
-msgstr ""
+msgstr "Filtre"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
