@@ -14,6 +14,7 @@ const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
 var recent_projects := []
 var selected_layout := 0
 var zen_mode := false
+var can_save := true
 var tile_mode_submenu := PopupMenu.new()
 var selection_modify_submenu := PopupMenu.new()
 var color_mode_submenu := PopupMenu.new()
@@ -103,6 +104,7 @@ class Dialog:
 
 
 func _ready() -> void:
+	main.save_file_dialog_opened.connect(func(opened: bool): can_save = not opened)
 	Global.project_switched.connect(_project_switched)
 	Global.cel_switched.connect(_update_current_frame_mark)
 	OpenSave.shader_copied.connect(_load_shader_file)
@@ -633,7 +635,7 @@ func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
 
 
 func file_menu_id_pressed(id: int) -> void:
-	if main.is_quitting_on_save:
+	if not can_save:
 		return
 	match id:
 		Global.FileMenu.NEW:

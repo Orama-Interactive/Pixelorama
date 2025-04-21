@@ -1,5 +1,8 @@
 extends Control
 
+## Needed because it is not possible to detect if a native file dialog is open or not.
+signal save_file_dialog_opened(opened: bool)
+
 const SPLASH_DIALOG_SCENE_PATH := "res://src/UI/Dialogs/SplashDialog.tscn"
 
 var opensprite_file_selected := false
@@ -469,13 +472,16 @@ func show_save_dialog(project := Global.current_project) -> void:
 	else:
 		save_sprite_dialog.current_file = project.name + ".pxo"
 		save_sprite_dialog.popup_centered()
+		save_file_dialog_opened.emit(true)
 
 
 func _on_SaveSprite_file_selected(path: String) -> void:
 	save_project(path)
+	save_file_dialog_opened.emit(false)
 
 
 func _on_save_sprite_canceled() -> void:
+	save_file_dialog_opened.emit(false)
 	is_quitting_on_save = false
 
 

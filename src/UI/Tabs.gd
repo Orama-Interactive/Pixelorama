@@ -1,7 +1,11 @@
 extends TabBar
 
-@onready
-var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_child("UnsavedCanvasDialog")
+@onready var main := get_tree().current_scene
+@onready var unsaved_changes_dialog: ConfirmationDialog = main.find_child("UnsavedCanvasDialog")
+
+
+func _ready() -> void:
+	main.save_file_dialog_opened.connect(_disable_tabs)
 
 
 func _input(_event: InputEvent) -> void:
@@ -49,7 +53,7 @@ func _gui_input(event: InputEvent) -> void:
 		w += get_tab_rect(i).size.x
 		if w_limit < w:
 			return
-		if get_tab_rect(i).has_point(event.position):
+		if get_tab_rect(i).has_point(event.position) and not is_tab_disabled(i):
 			_on_tab_close_pressed(i)
 			return
 
@@ -75,6 +79,11 @@ func _on_active_tab_rearranged(idx_to: int) -> void:
 	var temp := Global.projects[Global.current_project_index]
 	Global.projects.erase(temp)
 	Global.projects.insert(idx_to, temp)
+
+
+func _disable_tabs(should_disable: bool) -> void:
+	for i in tab_count:
+		set_tab_disabled(i, should_disable)
 
 
 func delete_tab(tab: int) -> void:
