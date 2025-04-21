@@ -467,8 +467,8 @@ func show_save_dialog(project := Global.current_project) -> void:
 		var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_filename_line_edit.text = project.name
 	else:
+		save_sprite_dialog.current_file = project.name + ".pxo"
 		save_sprite_dialog.popup_centered()
-		save_sprite_dialog.get_line_edit().text = project.name
 
 
 func _on_SaveSprite_file_selected(path: String) -> void:
