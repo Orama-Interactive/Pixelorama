@@ -56,7 +56,8 @@ var loaded_effect_dialogs: Array[Dialog] = []
 var window_opacity_dialog := Dialog.new("res://src/UI/Dialogs/WindowOpacityDialog.tscn")
 var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 
-@onready var main_ui := Global.control.find_child("DockableContainer") as DockableContainer
+@onready var main := $"../.." as Control
+@onready var main_ui := main.find_child("DockableContainer") as DockableContainer
 @onready var ui_elements := main_ui.get_children()
 @onready var file_menu := $MarginContainer/HBoxContainer/MenuBar/File as PopupMenu
 @onready var edit_menu := $MarginContainer/HBoxContainer/MenuBar/Edit as PopupMenu
@@ -632,6 +633,8 @@ func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
 
 
 func file_menu_id_pressed(id: int) -> void:
+	if main.is_quitting_on_save:
+		return
 	match id:
 		Global.FileMenu.NEW:
 			new_image_dialog.popup()
@@ -642,13 +645,13 @@ func file_menu_id_pressed(id: int) -> void:
 		Global.FileMenu.SAVE:
 			_save_project_file()
 		Global.FileMenu.SAVE_AS:
-			Global.control.show_save_dialog()
+			main.show_save_dialog()
 		Global.FileMenu.EXPORT:
 			_export_file()
 		Global.FileMenu.EXPORT_AS:
 			_popup_dialog(Global.export_dialog)
 		Global.FileMenu.QUIT:
-			Global.control.show_quit_dialog()
+			main.show_quit_dialog()
 		_:
 			_handle_metadata(id, file_menu)
 
@@ -657,13 +660,13 @@ func _open_project_file() -> void:
 	if OS.get_name() == "Web":
 		Html5FileExchange.load_image()
 	else:
-		_popup_dialog(Global.control.open_sprite_dialog)
-		Global.control.opensprite_file_selected = false
+		_popup_dialog(main.open_sprite_dialog)
+		main.opensprite_file_selected = false
 
 
 func _on_open_last_project_file_menu_option_pressed() -> void:
 	if Global.config_cache.has_section_key("data", "last_project_path"):
-		Global.control.load_last_project()
+		main.load_last_project()
 	else:
 		Global.popup_error("You haven't saved or opened any project in Pixelorama yet!")
 
@@ -677,9 +680,9 @@ func _save_project_file() -> void:
 		return
 	var path: String = Global.current_project.save_path
 	if path == "":
-		Global.control.show_save_dialog()
+		main.show_save_dialog()
 	else:
-		Global.control.save_project(path, false)
+		main.save_project(path, false)
 
 
 func _export_file() -> void:
@@ -692,7 +695,7 @@ func _export_file() -> void:
 func _on_recent_projects_submenu_id_pressed(id: int) -> void:
 	var reversed_recent_projects := recent_projects.duplicate()
 	reversed_recent_projects.reverse()
-	Global.control.load_recent_project_file(reversed_recent_projects[id])
+	main.load_recent_project_file(reversed_recent_projects[id])
 
 
 func edit_menu_id_pressed(id: int) -> void:
@@ -894,7 +897,7 @@ func set_layout(id: int) -> void:
 		panels_submenu.set_item_checked(index, !is_hidden)
 
 	if zen_mode:  # Turn zen mode off
-		Global.control.find_child("TabsContainer").visible = true
+		main.find_child("TabsContainer").visible = true
 		zen_mode = false
 		window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, false)
 
@@ -904,7 +907,7 @@ func _on_add_layout_confirmation_confirmed() -> void:
 	var path := Global.LAYOUT_DIR.path_join(file_name)
 	var layout: DockableLayout
 	if layout_from_option_button.selected == 0:
-		layout = Global.control.main_ui.layout.clone()
+		layout = main.main_ui.layout.clone()
 		layout.layout_reset_path = ""
 	else:
 		layout = Global.default_layouts[layout_from_option_button.selected - 1].clone()
@@ -917,7 +920,7 @@ func _on_add_layout_confirmation_confirmed() -> void:
 	Global.layouts.append(layout)
 	# Save the layout every time it changes
 	layout.save_on_change = true
-	Global.control.main_ui.layout = layout
+	main.main_ui.layout = layout
 	Global.layouts.sort_custom(
 		func(a: DockableLayout, b: DockableLayout):
 			return a.resource_path.get_file() < b.resource_path.get_file()
@@ -1029,7 +1032,7 @@ func _toggle_zen_mode() -> void:
 		if !panels_submenu.is_item_checked(index):
 			continue
 		main_ui.set_control_hidden(ui_elements[i], !zen_mode)
-	Global.control.find_child("TabsContainer").visible = zen_mode
+	main.find_child("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, zen_mode)
 

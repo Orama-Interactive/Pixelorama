@@ -475,9 +475,8 @@ func _on_SaveSprite_file_selected(path: String) -> void:
 	save_project(path)
 
 
-func _on_save_sprite_visibility_changed() -> void:
-	if not save_sprite_dialog.visible:
-		is_quitting_on_save = false
+func _on_save_sprite_canceled() -> void:
+	is_quitting_on_save = false
 
 
 func save_project(path: String, through_dialog := true) -> void:
