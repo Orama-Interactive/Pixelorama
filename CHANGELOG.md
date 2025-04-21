@@ -16,6 +16,7 @@ Built using Godot 4.4
 - Added a single bezier mode in curve tool, that works similarly to Aseprite's curve tool. [#1216](https://github.com/Orama-Interactive/Pixelorama/pull/1216)
 - OpenRaster (`.ora`) and Aseprite (`.ase`/`.aseprite`) files are now being displayed as options in the "Open" dialog.
 - Added shortcuts for going to the previous/next frame of the same tag. By default, they are mapped to <kbd>Control + <</kbd> and <kbd>Control + ></kbd> respectively.
+- Holding the "automatically change layer" shortcut (<kbd>Control + Alt</kbd> by default) now displays a rectangle around the selected cel, or around the cel whose non-transparent pixels are being hovered by the cursor.
 - Users can now color code their cels in the timeline.
 - A button for reporting extensions has been added to the extension explorer. [#1214](https://github.com/Orama-Interactive/Pixelorama/pull/1214)
 
@@ -35,6 +36,8 @@ Built using Godot 4.4
 - Fixed a crash when switching between tilemap layers with different tilesets, while having selected tiles the positions of which do not exist on the new tilemap's tileset. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Duplicating tilesets in the project properties no longer crashes the app when a previously deleted tileset is still selected. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Fixed the import tag option not pasting the frame content, and not working for tilemap and audio layers.
+- Z-indexed cels are now being rendered with their proper order in the canvas. [#1220](https://github.com/Orama-Interactive/Pixelorama/issues/1220)
+- Fixed horizontal scrolling on the timeline on macOS. [#1219](https://github.com/Orama-Interactive/Pixelorama/pull/1219)
 - Fixed selection resizing not working from the tool options. [#1212](https://github.com/Orama-Interactive/Pixelorama/issues/1212)
 - The tile indices that appear when holding <kbd>Control</kbd> and a tilemap layer is selected, now scale based on the grid cell size. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Applying layer effects to passthrough group layer immediately updates the canvas.
@@ -44,6 +47,7 @@ Built using Godot 4.4
 - Fixed the color picker acting weirdly when the alpha of the color is set to 0.
 - Rulers now update whenever the canvas panel resizes.
 - Fixed a regression in v1.1 where mouse button shortcuts (such as the mouse thumb buttons) were not activating tools.
+- Empty audio layers now only show the audio icon in the frame where the audio is supposed to start playing.
 - Fixed issue where the wrong font would be chosen for the interface in certain circumstances. [#1217](https://github.com/Orama-Interactive/Pixelorama/pull/#1217)
 
 ### Removed
