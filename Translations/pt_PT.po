@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-20 17:46\n"
+"PO-Revision-Date: 2025-04-21 11:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3265,35 +3265,35 @@ msgstr "Inverter cores"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
-msgstr ""
+msgstr "Ordenar por matriz"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their saturation.
 msgid "Sort by saturation"
-msgstr ""
+msgstr "Ordenar por saturação"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their value.
 msgid "Sort by value"
-msgstr ""
+msgstr "Ordenar por valor"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their OKHSL Lightness.
 msgid "Sort by lightness"
-msgstr ""
+msgstr "Ordenar por luminosidade"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Ordenar por vermelho"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Ordenar por verde"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Ordenar por azul"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Ordenar por alpha"
 
 msgid "Palette with the same name and path already exists!"
 msgstr "Já existe uma palete com esse nome!"
@@ -3303,7 +3303,8 @@ msgstr "É necessário um nome para a palete!"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Reduzindo o tamanho da paleta irá redefinir as posições das cores.\n"
+"Cores que não cabem no novo tamanho da paleta serão perdidas!"
 
 msgid "Position:"
 msgstr "Posição:"
@@ -3318,16 +3319,16 @@ msgid "Second Canvas"
 msgstr "Tela secundária"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Linha do Tempo da Animação"
 
 msgid "Canvas Preview"
 msgstr "Pré-visualização da tela"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Seletores de Cor"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Opções de Ferramentas Global"
 
 msgid "Left Tool Options"
 msgstr "Opções da Ferramenta Esquerda"
@@ -3336,51 +3337,51 @@ msgid "Right Tool Options"
 msgstr "Opções da Ferramenta Direita"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "Imagens de Referência"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Editor de Perspetiva"
 
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
-msgstr ""
+msgstr "Gravador"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
-msgstr ""
+msgstr "Tiles"
 
 msgid "Crop"
-msgstr ""
+msgstr "Cortar"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Redimensionar a tela"
 
 msgid "Margins"
-msgstr ""
+msgstr "Margens"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Posição + Tamanho"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Proporção Trancada"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Margens:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Proporção:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Topo:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Base:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Esquerda:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Direita:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
