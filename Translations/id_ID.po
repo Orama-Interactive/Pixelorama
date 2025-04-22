@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-16 13:37\n"
+"PO-Revision-Date: 2025-04-22 22:52\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -2597,6 +2597,14 @@ msgstr "Lapisan"
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
 msgstr "Cuplik mask"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
+msgid "Flatten"
+msgstr ""
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
+msgid "Flatten visible"
+msgstr ""
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
