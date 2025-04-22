@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-21 11:13\n"
+"PO-Revision-Date: 2025-04-22 09:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3386,92 +3386,94 @@ msgstr "Direita:"
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Tamanho trancado\n\n"
+"Quando ativado usando a ferramenta na tela irá mover somente o retângulo de corte.\n\n"
+"Quando desativado usando a ferramenta na tela irá desenhar o triângulo."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Editar Forma 3D"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Caixa"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Esfera"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Cápsula"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Cilindro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Prisma"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Toro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Plano"
 
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Luz direcional"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Holofote"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Ponto de luz"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "Modelo customizado"
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Objeto selecionado:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Adicionar novo objeto"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Remover objeto"
 
 msgid "Camera"
-msgstr ""
+msgstr "Câmara"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Projeção:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Perspetiva"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "Ortogonal"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Frustum"
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Rotação:"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Escala:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
