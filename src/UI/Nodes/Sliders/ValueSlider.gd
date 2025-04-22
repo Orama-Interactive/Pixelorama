@@ -284,9 +284,15 @@ func _reset_display(theme_has_changed := false) -> void:
 	_line_edit.text = _format_float_string()
 
 
+## Format the value string so that integers won't appear as floats.
 func _format_float_string(is_typing := false) -> String:
 	var format_string := "%*.*f"
-	var n_of_decimals := step_decimals(minf(step, snap_step))
+	var split_str := str(minf(step, snap_step)).split(".")
+	var n_of_decimals := 0
+	if split_str.size() > 1:
+		var decimal_str := split_str[1]
+		if str_to_var(decimal_str) != 0:
+			n_of_decimals = split_str[1].length()
 	var float_str := format_string % [0, n_of_decimals, value]
 	if is_typing:
 		return float_str
