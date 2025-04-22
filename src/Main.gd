@@ -301,7 +301,7 @@ func set_display_scale() -> void:
 	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
-	root.min_size = Vector2(1024, 576)
+	root.min_size = Vector2(320, 200)
 	root.content_scale_factor = Global.shrink
 	set_custom_cursor()
 
