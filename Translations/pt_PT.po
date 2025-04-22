@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-22 09:08\n"
+"PO-Revision-Date: 2025-04-22 11:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3477,7 +3477,7 @@ msgstr "Escala:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Ambiente"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
