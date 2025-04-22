@@ -1,6 +1,8 @@
 class_name LayerButton
 extends HBoxContainer
 
+enum MenuOptions { PROPERTIES, CLIPPING_MASK, FLATTEN, FLATTEN_VISIBLE }
+
 const HIERARCHY_DEPTH_PIXEL_SHIFT := 16
 const ARRAY_TEXTURE_TYPES: Array[Texture2D] = [
 	preload("res://assets/graphics/layers/type_icons/layer_pixel.png"),
@@ -313,16 +315,23 @@ func _select_current_layer() -> void:
 
 
 func _on_popup_menu_id_pressed(id: int) -> void:
-	var layer := Global.current_project.layers[layer_index]
-	if id == 0:
+	var project := Global.current_project
+	var layer := project.layers[layer_index]
+	if id == MenuOptions.PROPERTIES:
 		properties.layer_indices = _get_layer_indices()
 		properties.popup_centered()
-	elif id == 1:
+	elif id == MenuOptions.CLIPPING_MASK:
 		layer.clipping_mask = not layer.clipping_mask
 		popup_menu.set_item_checked(id, layer.clipping_mask)
 		clipping_mask_icon.visible = layer.clipping_mask
 		Global.canvas.update_all_layers = true
 		Global.canvas.draw_layers()
+	elif id == MenuOptions.FLATTEN:
+		var indices := _get_layer_indices()
+		Global.animation_timeline.flatten_layers.call_deferred(indices, false)
+	elif id == MenuOptions.FLATTEN_VISIBLE:
+		var indices := _get_layer_indices()
+		Global.animation_timeline.flatten_layers.call_deferred(indices, true)
 
 
 func _get_layer_indices() -> PackedInt32Array:

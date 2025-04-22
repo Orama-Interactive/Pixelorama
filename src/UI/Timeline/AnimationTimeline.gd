@@ -925,11 +925,11 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 				var expanded := project.layers[layer_button.layer_index].is_expanded_in_hierarchy()
 				layer_button.visible = expanded
 				Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
-		# make layer child of group
-		layer.parent = Global.current_project.layers[project.current_layer]
+		# Make layer child of group.
+		layer.parent = project.layers[project.current_layer]
 	else:
-		# set the parent of layer to be the same as the layer below it
-		layer.parent = Global.current_project.layers[project.current_layer].parent
+		# Set the parent of layer to be the same as the layer below it.
+		layer.parent = project.layers[project.current_layer].parent
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
@@ -1193,6 +1193,108 @@ func _on_MergeDownLayer_pressed() -> void:
 	bottom_layer.visible = true
 
 
+func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
+	var project := Global.current_project
+	if indices.size() <= 1:
+		# If only the selected layer is about to be flattened,
+		# flatten all of the layers in the project
+		# If the selected layer is a group, flatten only its children.
+		var layer := project.layers[indices[0]]
+		if layer is GroupLayer and not only_visible:
+			var child_count := layer.get_child_count(true)
+			var children := layer.get_children(true)
+			indices.resize(child_count + 1)
+			for i in child_count:
+				var child_layer := children[i]
+				indices[i] = child_layer.index
+			indices[-1] = layer.index
+		else:
+			indices.resize(project.layers.size())
+			for l in project.layers:
+				indices[l.index] = l.index
+	else:
+		for i in indices.size():
+			var layer := project.layers[indices[i]]
+			if layer is GroupLayer:
+				for child in layer.get_children(true):
+					if not indices.has(child.index):
+						indices.append(child.index)
+		indices.sort()
+	if only_visible:
+		for i in range(indices.size() - 1, -1, -1):
+			var layer := project.layers[indices[i]]
+			var layer_parent := layer.parent
+			var should_remove := true
+			while layer_parent != null:
+				if indices.has(layer_parent.index):
+					should_remove = false
+					break
+				layer_parent = layer_parent.parent
+			if not layer.is_visible_in_hierarchy() and should_remove:
+				indices.remove_at(i)
+	if indices.size() == 0:
+		return
+	var new_layer := PixelLayer.new(project)
+	new_layer.name = "Flattened"
+	new_layer.index = indices[0]
+	var prev_layers := []
+	var prev_cels := []
+	var new_cels := []
+	prev_cels.resize(indices.size())
+	for i in indices.size():
+		prev_cels[i] = []
+	for frame_index in project.frames.size():
+		var frame := project.frames[frame_index]
+		var textures: Array[Image] = []
+		var metadata_image := Image.create(indices.size(), 4, false, Image.FORMAT_R8)
+		for i in indices.size():
+			var layer_index := indices[i]
+			var current_layer := project.layers[layer_index]
+			prev_layers.append(current_layer)  # Store for undo purposes
+			var current_cel := frame.cels[layer_index]
+			prev_cels[i].append(current_cel)  # Store for undo purposes
+			var current_image := current_layer.display_effects(current_cel)
+			textures.append(current_image)
+			DrawingAlgos.set_layer_metadata_image(current_layer, current_cel, metadata_image, i)
+			if not only_visible:
+				# Ensure that non-visible layers are still flattened.
+				var opacity := current_cel.get_final_opacity(current_layer)
+				metadata_image.set_pixel(i, 1, Color(opacity, 0.0, 0.0, 0.0))
+		var texture_array := Texture2DArray.new()
+		texture_array.create_from_images(textures)
+		var params := {
+			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
+		}
+		var new_image := ImageExtended.create_custom(
+			project.size.x, project.size.y, false, project.get_image_format(), project.is_indexed()
+		)
+		# Flatten the image.
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(new_image, DrawingAlgos.blend_layers_shader, params, project.size)
+		new_image.convert_rgb_to_indexed()
+		var new_cel := new_layer.new_cel_from_image(new_image)
+		new_cels.append(new_cel)
+	var bottom_layer := project.layers[indices[0]]
+	while bottom_layer.parent != null:
+		if not indices.has(bottom_layer.parent.index):
+			new_layer.parent = bottom_layer.parent
+			break
+		bottom_layer = bottom_layer.parent
+	project.undos += 1
+	project.undo_redo.create_action("Flatten layers")
+	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
+	project.undo_redo.add_do_method(
+		project.add_layers.bind([new_layer], [new_layer.index], [new_cels])
+	)
+	project.undo_redo.add_undo_method(project.remove_layers.bind([new_layer.index]))
+	project.undo_redo.add_undo_method(project.add_layers.bind(prev_layers, indices, prev_cels))
+	project.undo_redo.add_do_method(project.change_cel.bind(-1, maxi(new_layer.index, 0)))
+	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
+
+
 func _on_opacity_slider_value_changed(value: float) -> void:
 	var new_opacity := value / 100.0
 	for idx_pair in Global.current_project.selected_cels:
@@ -1370,8 +1472,10 @@ func project_layer_added(layer: int) -> void:
 
 func project_layer_removed(layer: int) -> void:
 	var count := Global.layer_vbox.get_child_count()
-	Global.layer_vbox.get_child(count - 1 - layer).free()
-	Global.cel_vbox.get_child(count - 1 - layer).free()
+	var layer_button := Global.layer_vbox.get_child(count - 1 - layer)
+	layer_button.free()
+	var cel_hbox := Global.cel_vbox.get_child(count - 1 - layer)
+	cel_hbox.free()
 	update_global_layer_buttons()
 
 
