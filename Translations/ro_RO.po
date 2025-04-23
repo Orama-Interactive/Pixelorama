@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-04-23 07:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1816,11 +1816,11 @@ msgstr "Hexagonală"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Hexagonală (cu vârf ascuțit)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Hexagonală (cu vârf plat)"
 
 msgid "All"
 msgstr "Toate"
@@ -2605,11 +2605,11 @@ msgstr "Mască de decupare"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr ""
+msgstr "Aplatizare"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr ""
+msgstr "Aplatizare straturi vizibile"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
