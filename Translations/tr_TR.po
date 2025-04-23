@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-04-22 22:52\n"
+"PO-Revision-Date: 2025-04-23 00:53\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1806,6 +1806,14 @@ msgstr "İzometrik"
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
 msgstr "Altıgen"
+
+#. Refers to a hexagonal type of grid, with pointy-top orientation.
+msgid "Hexagonal (pointy-top)"
+msgstr ""
+
+#. Refers to a hexagonal type of grid, with flat-top orientation.
+msgid "Hexagonal (flat-top)"
+msgstr ""
 
 msgid "All"
 msgstr "Tümü"
