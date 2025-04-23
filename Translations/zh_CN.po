@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-04-22 22:51\n"
+"PO-Revision-Date: 2025-04-23 00:53\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1816,6 +1816,14 @@ msgstr "几何体"
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
 msgstr "六边形"
+
+#. Refers to a hexagonal type of grid, with pointy-top orientation.
+msgid "Hexagonal (pointy-top)"
+msgstr ""
+
+#. Refers to a hexagonal type of grid, with flat-top orientation.
+msgid "Hexagonal (flat-top)"
+msgstr ""
 
 msgid "All"
 msgstr "全部"
