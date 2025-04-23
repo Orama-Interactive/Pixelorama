@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-04-23 09:53\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -742,7 +742,7 @@ msgid "Path:"
 msgstr "Jalur:"
 
 msgid "Refresh files."
-msgstr "Segarkan berkas."
+msgstr "Muat ulang berkas."
 
 msgid "Toggle the visibility of hidden files."
 msgstr "Menampil/hilangkan berkas sembunyi."
@@ -1310,7 +1310,7 @@ msgid "Open Editor Data Folder"
 msgstr "Buka Folder Data Penyunting"
 
 msgid "Changelog"
-msgstr "Catatan ubah"
+msgstr "Log Perubahan"
 
 msgid "About Pixelorama"
 msgstr "Tentang Pixelorama"
@@ -1796,7 +1796,7 @@ msgstr "Jarak pencantolan:"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr "Ini adalah jarak berukuran piksel saat pencatolan kisi dan panduan diaktifkan."
+msgstr "Ini adalah jarak piksel untuk kapan panduan dan pencatolan kisi diaktifkan."
 
 msgid "Grid"
 msgstr "Kisi"
@@ -1819,11 +1819,11 @@ msgstr "Segi Enam"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Segi enam (sudut tajam)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Segi enam (sudut tumpul)"
 
 msgid "All"
 msgstr "Semua"
@@ -1858,7 +1858,7 @@ msgid "Grid color:"
 msgstr "Warna Kisi:"
 
 msgid "A color of the grid"
-msgstr "Warna dari kisi"
+msgstr "Warna dari grid (kisi)"
 
 msgid "Pixel Grid"
 msgstr "Kisi Piksel"
@@ -2066,7 +2066,7 @@ msgstr "Tidak bisa mendapat info repositori jarak jauh."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr "Tempel tautan repositori pemilik repositori. Jika kolomnya kosong, tautannya akan otomatis dihapus."
+msgstr "Tempel tautan repositori pemilik repositori. Jika dibiarkan kosong, kolom ini akan otomatis dihapus."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -3374,7 +3374,7 @@ msgid "Tiles"
 msgstr "Petak"
 
 msgid "Crop"
-msgstr "Potong"
+msgstr "Pangkas"
 
 msgid "Resize the canvas"
 msgstr "Ubah ukuran kanvas"
