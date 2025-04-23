@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-23 09:53\n"
+"PO-Revision-Date: 2025-04-23 10:50\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -191,11 +191,11 @@ msgstr "Terindeks"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr "Potong ke Seleksi"
+msgstr "Pangkas ke Seleksi"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr "Potong ke Isi"
+msgstr "Pangkas ke Isi"
 
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
@@ -1511,7 +1511,7 @@ msgstr "Seleksi Persegi Panjang\n\n"
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Seleksi Elips\n\n"
+msgstr "Seleksi Melingkar\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan"
 
@@ -1629,7 +1629,7 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Alat Garis\n\n"
+msgstr "Garis Lurus\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Tahan %s untuk mencantol sudut garis\n"
@@ -1672,7 +1672,7 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Alat Elips\n\n"
+msgstr "Alat Melingkar\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Tahan %s untuk membuat bentuk 1:1\n"
@@ -1690,7 +1690,7 @@ msgid "Rectangle"
 msgstr "Persegi Panjang"
 
 msgid "Ellipse"
-msgstr "Elips"
+msgstr "Melingkar"
 
 msgid "Choose a color for the left tool"
 msgstr "Pilih warna untuk alat di sebelah kiri"
@@ -1719,7 +1719,7 @@ msgstr "Ketik kode heks (\"#ff0000\") atau nama warna (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr "Pilih bentuk pemilih."
+msgstr "Pilih bentuk bagan warna."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
@@ -1802,13 +1802,13 @@ msgid "Grid"
 msgstr "Kisi"
 
 msgid "Grid type:"
-msgstr "Tipe kisi:"
+msgstr "Pola kisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Menetapkan tipe kisi ke persegi panjang, isometrik, atau keduanya"
+msgstr "Menetapkan pola kisi ke persegi, isometrik, atau keduanya"
 
 msgid "Rectangular"
-msgstr "Persegi Panjang"
+msgstr "Persegi"
 
 msgid "Isometric"
 msgstr "Isometrik"
@@ -1819,11 +1819,11 @@ msgstr "Segi Enam"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr "Segi enam (sudut tajam)"
+msgstr "Segi enam (alas lancip)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr "Segi enam (sudut tumpul)"
+msgstr "Segi enam (alas tumpul)"
 
 msgid "All"
 msgstr "Semua"
@@ -3041,7 +3041,7 @@ msgid "Rectangular Selection"
 msgstr "Seleksi Persegi Panjang"
 
 msgid "Elliptical Selection"
-msgstr "Seleksi Elips"
+msgstr "Seleksi Melingkar"
 
 msgid "Polygonal Selection"
 msgstr "Seleksi Poligonal"
@@ -3083,7 +3083,7 @@ msgid "Shading Tool"
 msgstr "Alat Pembayang"
 
 msgid "Line Tool"
-msgstr "Alat Garis"
+msgstr "Garis Lurus"
 
 msgid "Curve Tool"
 msgstr "Garis Lengkung"
@@ -3092,7 +3092,7 @@ msgid "Rectangle Tool"
 msgstr "Alat Persegi Panjang"
 
 msgid "Ellipse Tool"
-msgstr "Alat Elips"
+msgstr "Alat Melingkar"
 
 msgid "Switch Colors"
 msgstr "Ganti Warna"
