@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-04-23 00:54\n"
+"PO-Revision-Date: 2025-04-23 12:18\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -1775,11 +1775,11 @@ msgstr "Segi Enam"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Segi enam (tapak runcing)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Segi enam (tapak rata)"
 
 msgid "All"
 msgstr "Semua"
@@ -2022,7 +2022,7 @@ msgstr "Tidak boleh mendapatkan maklumat repositori jauh."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr "Tampal pautan repositori pemilik repositori. Jika dibiarkan kosong, ia akan automatik dialih keluar."
+msgstr "Tampal pautan repositori pemilik repositori. Jika tetap kosong, lajur ini akan automatik dialih keluar."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2562,11 +2562,11 @@ msgstr ""
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr ""
+msgstr "Rata"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr ""
+msgstr "Rata nampak"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
