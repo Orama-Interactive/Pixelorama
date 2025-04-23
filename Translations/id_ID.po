@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-23 10:50\n"
+"PO-Revision-Date: 2025-04-23 12:18\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -1511,7 +1511,7 @@ msgstr "Seleksi Persegi Panjang\n\n"
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Seleksi Melingkar\n\n"
+msgstr "Seleksi Lingkaran\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan"
 
@@ -1672,7 +1672,7 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Alat Melingkar\n\n"
+msgstr "Alat Lingkaran\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Tahan %s untuk membuat bentuk 1:1\n"
@@ -1690,7 +1690,7 @@ msgid "Rectangle"
 msgstr "Persegi Panjang"
 
 msgid "Ellipse"
-msgstr "Melingkar"
+msgstr "Lingkaran"
 
 msgid "Choose a color for the left tool"
 msgstr "Pilih warna untuk alat di sebelah kiri"
@@ -1805,10 +1805,10 @@ msgid "Grid type:"
 msgstr "Pola kisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Menetapkan pola kisi ke persegi, isometrik, atau keduanya"
+msgstr "Menetapkan pola kisi ke segi empat, isometrik, atau keduanya"
 
 msgid "Rectangular"
-msgstr "Persegi"
+msgstr "Segi Empat"
 
 msgid "Isometric"
 msgstr "Isometrik"
@@ -1936,7 +1936,7 @@ msgid "Set application FPS limit:"
 msgstr "Batas FPS aplikasi:"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
+msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, semakin kurang penggunaan CPU; tapi aplikasi akan lambat, patah-patah, dan kurang tanggap. 0 berarti tanpa batas."
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
@@ -2217,7 +2217,7 @@ msgid "Fill Shape"
 msgstr "Warnai Bentuk"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr "Mewarnai isi bentuk yang digambar dan tidak menggambar bentuk berongga"
+msgstr "Mengisi bentuk gambar dengan warna daripada berongga"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
@@ -2446,8 +2446,8 @@ msgstr "Aktif/nonaktifkan Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Berapa bingkai yang harus diputar setiap detik di pratayang?\n"
-"Semakin banyak FPS, semakin cepat animasinya."
+msgstr "Jumlah bingkai yang diputar tiap detik di pratayang.\n"
+"Semakin tinggi FPS, semakin cepat animasinya."
 
 msgid "No loop"
 msgstr "Tidak berulang"
@@ -2608,11 +2608,11 @@ msgstr "Cuplik mask"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr ""
+msgstr "Gepeng"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr ""
+msgstr "Gepeng tampak"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -3041,7 +3041,7 @@ msgid "Rectangular Selection"
 msgstr "Seleksi Persegi Panjang"
 
 msgid "Elliptical Selection"
-msgstr "Seleksi Melingkar"
+msgstr "Seleksi Lingkaran"
 
 msgid "Polygonal Selection"
 msgstr "Seleksi Poligonal"
@@ -3092,7 +3092,7 @@ msgid "Rectangle Tool"
 msgstr "Alat Persegi Panjang"
 
 msgid "Ellipse Tool"
-msgstr "Alat Melingkar"
+msgstr "Alat Lingkaran"
 
 msgid "Switch Colors"
 msgstr "Ganti Warna"
