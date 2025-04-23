@@ -100,7 +100,7 @@ func _on_TileModeOffsetsDialog_size_changed() -> void:
 		update_preview()
 
 
-func _on_Reset_pressed() -> void:
+func _on_reset_pressed() -> void:
 	tile_mode.tiles.x_basis = Vector2i(Global.current_project.size.x, 0)
 	tile_mode.tiles.y_basis = Vector2i(0, Global.current_project.size.y)
 	x_basis.value = tile_mode.tiles.x_basis
@@ -112,6 +112,30 @@ func _on_isometric_pressed() -> void:
 	tile_mode.tiles.x_basis = Global.current_project.size / 2
 	tile_mode.tiles.x_basis.y *= -1
 	tile_mode.tiles.y_basis = Global.current_project.size / 2
+	x_basis.value = tile_mode.tiles.x_basis
+	y_basis.value = tile_mode.tiles.y_basis
+	update_preview()
+
+
+func _on_hexagonal_pointy_top_pressed() -> void:
+	var half := Global.current_project.size / 2
+	tile_mode.tiles.x_basis.x = half.x
+	@warning_ignore("integer_division")
+	tile_mode.tiles.x_basis.y = (Global.current_project.size.y + half.y) / 2
+	tile_mode.tiles.y_basis = tile_mode.tiles.x_basis
+	tile_mode.tiles.y_basis.y *= -1
+	x_basis.value = tile_mode.tiles.x_basis
+	y_basis.value = tile_mode.tiles.y_basis
+	update_preview()
+
+
+func _on_hexagonal_flat_top_pressed() -> void:
+	var half := Global.current_project.size / 2
+	@warning_ignore("integer_division")
+	tile_mode.tiles.x_basis.x = (Global.current_project.size.x + half.x) / 2
+	tile_mode.tiles.x_basis.y = half.y
+	tile_mode.tiles.y_basis = tile_mode.tiles.x_basis
+	tile_mode.tiles.y_basis.y *= -1
 	x_basis.value = tile_mode.tiles.x_basis
 	y_basis.value = tile_mode.tiles.y_basis
 	update_preview()

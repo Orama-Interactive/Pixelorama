@@ -1739,6 +1739,14 @@ msgstr ""
 msgid "Hexagonal"
 msgstr ""
 
+#. Refers to a hexagonal type of grid, with pointy-top orientation.
+msgid "Hexagonal (pointy-top)"
+msgstr ""
+
+#. Refers to a hexagonal type of grid, with flat-top orientation.
+msgid "Hexagonal (flat-top)"
+msgstr ""
+
 msgid "All"
 msgstr ""
 

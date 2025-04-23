@@ -12,13 +12,13 @@ blend_mode = 4
 canvas_item_default_texture_filter = 0
 title = "Tile Mode Offsets"
 position = Vector2i(0, 36)
-size = Vector2i(298, 536)
+size = Vector2i(600, 536)
 script = ExtResource("3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 290.0
+offset_right = 592.0
 offset_bottom = 487.0
 
 [node name="TileModeOffsets" type="Label" parent="VBoxContainer"]
@@ -66,17 +66,32 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Reset" type="Button" parent="VBoxContainer/OptionsContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Default"
 
-[node name="Isometric" type="Button" parent="VBoxContainer/OptionsContainer"]
+[node name="Isometric" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Isometric"
+
+[node name="HexagonalPointyTop" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Hexagonal (pointy-top)"
+
+[node name="HexagonalFlatTop" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Hexagonal (flat-top)"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -104,5 +119,7 @@ anchor_bottom = 1.0
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/XBasis" to="." method="_on_x_basis_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/YBasis" to="." method="_on_y_basis_value_changed"]
 [connection signal="toggled" from="VBoxContainer/OptionsContainer/Masking" to="." method="_on_Masking_toggled"]
-[connection signal="pressed" from="VBoxContainer/OptionsContainer/Reset" to="." method="_on_Reset_pressed"]
-[connection signal="pressed" from="VBoxContainer/OptionsContainer/Isometric" to="." method="_on_isometric_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Isometric" to="." method="_on_isometric_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HexagonalPointyTop" to="." method="_on_hexagonal_pointy_top_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HexagonalFlatTop" to="." method="_on_hexagonal_flat_top_pressed"]
