@@ -8,11 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
-Built using Godot 4.4
+Built using Godot 4.4.1
 
 ### Added
 - Implemented isometric & hexagonal tile shapes for tilemap layers! [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Implemented a hexagonal grid type, with support for both pointy-top and flat-top orientations.
+- It is now possible to flatten all selected layers into one layer.
+- Hexagonal pointy-top and flat-top presets have been added in the tile mode offsets dialog.
 - Added a single bezier mode in curve tool, that works similarly to Aseprite's curve tool. [#1216](https://github.com/Orama-Interactive/Pixelorama/pull/1216)
 - OpenRaster (`.ora`) and Aseprite (`.ase`/`.aseprite`) files are now being displayed as options in the "Open" dialog.
 - Added shortcuts for going to the previous/next frame of the same tag. By default, they are mapped to <kbd>Control + <</kbd> and <kbd>Control + ></kbd> respectively.
@@ -24,6 +26,7 @@ Built using Godot 4.4
 - Resizing the canvas, cropping to content and centering frames now moves the offset of each tilemap layer instead of affecting its tileset. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Scaling the project also scales the size of the tiles by the same amount that the project was scaled. For example, scaling a 64x64 project to 128x64 would scale 16x16 tiles to 32x16. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Switched "tags by column" and "tags by rows" in the export dialog, when exporting spritesheets.
+- The minimum window size has been decreased to (300, 200). [#1221](https://github.com/Orama-Interactive/Pixelorama/discussions/1221)
 - The pencil/eraser/shading brush flip/rotation UI is now consistent with the tiles panel flip/rotation UI, and it also supports the same shortcuts.
 - The shortcut groups in the Preferences have been re-organized. The Buttons group has been removed, instead the shortcuts are grouped according to their respective panels, such as Timeline, Global Tool Options and Palettes.
 - Cels with a non-zero z-index display a "z" in the timeline.
@@ -37,6 +40,9 @@ Built using Godot 4.4
 - Duplicating tilesets in the project properties no longer crashes the app when a previously deleted tileset is still selected. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
 - Fixed the import tag option not pasting the frame content, and not working for tilemap and audio layers.
 - Z-indexed cels are now being rendered with their proper order in the canvas. [#1220](https://github.com/Orama-Interactive/Pixelorama/issues/1220)
+- The "change layer automatically" shortcut (<kbd>Control + Alt</kbd> by default) no longer works when a selection tool is active, thus preventing the shortcut conflict with the "transform copy selected content" shortcut.
+- Prevent switching project tabs and saving, if a native save file dialog is already open. This prevents rare cases of saving two open projects with the same name, thus leading to data loss.
+- The native save file dialog now always has a default name for the saved .pxo file.
 - Fixed horizontal scrolling on the timeline on macOS. [#1219](https://github.com/Orama-Interactive/Pixelorama/pull/1219)
 - Fixed selection resizing not working from the tool options. [#1212](https://github.com/Orama-Interactive/Pixelorama/issues/1212)
 - The tile indices that appear when holding <kbd>Control</kbd> and a tilemap layer is selected, now scale based on the grid cell size. [#1213](https://github.com/Orama-Interactive/Pixelorama/pull/1213)
