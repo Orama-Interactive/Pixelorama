@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-03-13 21:13\n"
+"PO-Revision-Date: 2025-04-23 12:18\n"
 
 msgid "OK"
-msgstr "Oke"
+msgstr "Iya"
 
 msgid "Cancel"
 msgstr "Batal"
@@ -191,11 +191,11 @@ msgstr "Terindeks"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr "Potong ke Seleksi"
+msgstr "Pangkas ke Seleksi"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr "Potong ke Isi"
+msgstr "Pangkas ke Isi"
 
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
@@ -300,7 +300,7 @@ msgstr "Preferensi"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr "Tata Cara"
+msgstr "Pelengkap"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
@@ -362,7 +362,7 @@ msgid "Layouts"
 msgstr "Tata letak"
 
 msgid "Moveable Panels"
-msgstr "Panel Bisa Dipindah"
+msgstr "Panel Bisa Dilepas"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
@@ -483,7 +483,7 @@ msgid "Apply to all"
 msgstr "Terapkan ke semua"
 
 msgid "Recent projects"
-msgstr "Proyek yang tadi"
+msgstr "Proyek sebelumnya"
 
 msgid "New project"
 msgstr "Proyek baru"
@@ -672,7 +672,7 @@ msgstr "Lapisan:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr "Lapisan terlihat"
+msgstr "Lapisan tampak"
 
 #. Found in the export dialog
 msgid "Selected layers"
@@ -742,7 +742,7 @@ msgid "Path:"
 msgstr "Jalur:"
 
 msgid "Refresh files."
-msgstr "Segarkan berkas."
+msgstr "Muat ulang berkas."
 
 msgid "Toggle the visibility of hidden files."
 msgstr "Menampil/hilangkan berkas sembunyi."
@@ -796,11 +796,19 @@ msgstr "Gambar TGA"
 msgid "WebP Image"
 msgstr "Gambar WebP"
 
+#. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
+msgid "OpenRaster Project"
+msgstr "Proyek OpenRaster"
+
+#. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
+msgid "Aseprite Project"
+msgstr "Proyek Aseprite"
+
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
 msgstr "Palet Pixelorama"
 
-#. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
+#. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). Note that GIMP is a software and should remain untranslated.
 msgid "GIMP palette"
 msgstr "Palet GIMP"
 
@@ -1114,7 +1122,7 @@ msgstr "Interpolasi"
 msgid "Reverse"
 msgstr "Terbalikkan"
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr "Sebar ratakan titik"
 
@@ -1302,7 +1310,7 @@ msgid "Open Editor Data Folder"
 msgstr "Buka Folder Data Penyunting"
 
 msgid "Changelog"
-msgstr "Catatan ubah"
+msgstr "Log Perubahan"
 
 msgid "About Pixelorama"
 msgstr "Tentang Pixelorama"
@@ -1458,7 +1466,7 @@ msgstr "Perancang UI"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
-msgstr "Pengarang"
+msgstr "Pembuat"
 
 msgid "Art by: %s"
 msgstr "Gambar oleh %s"
@@ -1503,7 +1511,7 @@ msgstr "Seleksi Persegi Panjang\n\n"
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Seleksi Elips\n\n"
+msgstr "Seleksi Lingkaran\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan"
 
@@ -1511,7 +1519,7 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Seleksi Poligon\n\n"
+msgstr "Seleksi Poligonal\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Klik dua kali untuk menghubungkan titik akhir ke titik awal"
@@ -1621,7 +1629,7 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Alat Garis\n\n"
+msgstr "Garis Lurus\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Tahan %s untuk mencantol sudut garis\n"
@@ -1664,7 +1672,7 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Alat Elips\n\n"
+msgstr "Alat Lingkaran\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Tahan %s untuk membuat bentuk 1:1\n"
@@ -1682,7 +1690,7 @@ msgid "Rectangle"
 msgstr "Persegi Panjang"
 
 msgid "Ellipse"
-msgstr "Elips"
+msgstr "Lingkaran"
 
 msgid "Choose a color for the left tool"
 msgstr "Pilih warna untuk alat di sebelah kiri"
@@ -1711,7 +1719,7 @@ msgstr "Ketik kode heks (\"#ff0000\") atau nama warna (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr "Pilih bentuk pemilih."
+msgstr "Pilih bentuk bagan warna."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
@@ -1778,49 +1786,65 @@ msgstr "Warna panduan:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
 msgstr "Pencantolan"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
 msgstr "Jarak pencantolan:"
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr "Ini adalah jarak berukuran piksel saat pencatolan kisi dan panduan diaktifkan."
+msgstr "Ini adalah jarak piksel untuk kapan panduan dan pencatolan kisi diaktifkan."
 
 msgid "Grid"
 msgstr "Kisi"
 
 msgid "Grid type:"
-msgstr "Tipe kisi:"
+msgstr "Pola kisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Menetapkan tipe kisi antara persegi panjang, isometrik, atau keduanya"
+msgstr "Menetapkan pola kisi ke segi empat, isometrik, atau keduanya"
 
 msgid "Rectangular"
-msgstr "Persegi Panjang"
+msgstr "Segi Empat"
 
 msgid "Isometric"
 msgstr "Isometrik"
 
+#. Refers to a hexagonal type of grid.
+msgid "Hexagonal"
+msgstr "Segi Enam"
+
+#. Refers to a hexagonal type of grid, with pointy-top orientation.
+msgid "Hexagonal (pointy-top)"
+msgstr "Segi enam (alas lancip)"
+
+#. Refers to a hexagonal type of grid, with flat-top orientation.
+msgid "Hexagonal (flat-top)"
+msgstr "Segi enam (alas tumpul)"
+
 msgid "All"
 msgstr "Semua"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
-msgstr "Ukuran kisi persegi panjang:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
+msgstr "Kisi tampak:"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
-msgstr "Ukuran kisi isometrik:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
+msgstr "Kisi suntingan:"
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr "Ukuran kisi:"
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
 msgstr "Offset kisi:"
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr "Menetapkan offset kisi dari kanvas aslinya (di pojok kiri atas gambar)"
 
@@ -1834,7 +1858,7 @@ msgid "Grid color:"
 msgstr "Warna Kisi:"
 
 msgid "A color of the grid"
-msgstr "Warna dari kisi"
+msgstr "Warna dari grid (kisi)"
 
 msgid "Pixel Grid"
 msgstr "Kisi Piksel"
@@ -1912,7 +1936,7 @@ msgid "Set application FPS limit:"
 msgstr "Batas FPS aplikasi:"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
+msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, semakin kurang penggunaan CPU; tapi aplikasi akan lambat, patah-patah, dan kurang tanggap. 0 berarti tanpa batas."
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
@@ -1979,32 +2003,70 @@ msgid "Open Folder"
 msgstr "Buka Folder"
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+#: src/Preferences/PreferencesDialog.tscn
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Explore Online"
 msgstr "Cari di Daring"
 
-#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
-msgid "Store"
-msgstr "Toko"
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Extension Explorer"
+msgstr "Toko Ekstensi"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Search..."
 msgstr "Cari..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Tags:"
 msgstr "Tag:"
 
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Report issue with an extension"
+msgstr "Laporkan isu dengan ekstensi"
+
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Download"
 msgstr "Unduh"
 
-#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
-msgid "Store Links:"
-msgstr "Tautan Toko:"
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Repository links:"
+msgstr "Tautan repositori:"
 
-#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
-msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr "Tempelkan tautan pemilik toko (kolom akan hilang otomatis jika belum tempel)"
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Fetching data from remote repository.\n"
+"Please wait."
+msgstr "Mengambil data repositori jarak jauh.\n"
+"Mohon tunggu."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Unable to get info from remote repository.\n\n"
+"- Make sure you are connected to the internet.\n"
+"- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
+msgstr "Tidak bisa mendapat info repositori jarak jauh.\n\n"
+"- Pastikan sudah tersambung ke internet.\n"
+"- Jika menggunakan Pixelorama versi Flatpak, izinkan dulu untuk menyambung ke internet. Caranya, jalankan perintah berikut di terminal perintah:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
+msgstr "Cara lainnya, unduh Flatseal dan atur izin internet untuk aplikasi Flatpak di situ."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Unable to get info from remote repository."
+msgstr "Tidak bisa mendapat info repositori jarak jauh."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
+msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
+msgstr "Tempel tautan repositori pemilik repositori. Jika dibiarkan kosong, kolom ini akan otomatis dihapus."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2155,7 +2217,7 @@ msgid "Fill Shape"
 msgstr "Warnai Bentuk"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr "Mewarnai isi bentuk yang digambar dan tidak menggambar bentuk berongga"
+msgstr "Mengisi bentuk gambar dengan warna daripada berongga"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
@@ -2256,6 +2318,20 @@ msgstr "Perbesar"
 
 msgid "Zoom out"
 msgstr "Perkecil"
+
+#. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
+msgid "Single"
+msgstr "Tunggal"
+
+#. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
+msgid "Chained"
+msgstr "Berantai"
+
+#. Tooltip of the curve tool's "mode" option button.
+msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
+"Single: Makes a single bezier curve, similar to Aseprite's curve tool."
+msgstr "Berantai: Membuat lengkung Bezier berantai, mirip alat garis lengkung Krita.\n"
+"Tunggal: Membuat lengkung Bezier tunggal, mirip alat garis lengkung Aseprite."
 
 msgid "Options"
 msgstr "Opsi"
@@ -2370,8 +2446,8 @@ msgstr "Aktif/nonaktifkan Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Berapa bingkai yang harus diputar setiap detik di pratayang?\n"
-"Semakin banyak FPS, semakin cepat animasinya."
+msgstr "Jumlah bingkai yang diputar tiap detik di pratayang.\n"
+"Semakin tinggi FPS, semakin cepat animasinya."
 
 msgid "No loop"
 msgstr "Tidak berulang"
@@ -2421,7 +2497,7 @@ msgstr "Tag %s (Bingkai %s-%s)"
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
 msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
-"Jika tidak, maka animasi akan diputar untuk semua bingkai."
+"Jika tidak, maka animasi akan diputar pada semua bingkai."
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
@@ -2529,6 +2605,14 @@ msgstr "Lapisan"
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
 msgstr "Cuplik mask"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
+msgid "Flatten"
+msgstr "Gepeng"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
+msgid "Flatten visible"
+msgstr "Gepeng tampak"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2806,7 +2890,7 @@ msgid "Redo: Change frame duration"
 msgstr "Ulangi: Ubah durasi bingkai"
 
 msgid "Move Guide"
-msgstr "Geser panduan"
+msgstr "Geser Panduan"
 
 msgid "File saved"
 msgstr "Berkas tersimpan"
@@ -2877,10 +2961,10 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Apakah ingin ada nama diri atau perusahaan pada layar splash?"
 
 msgid "Become a Platinum Sponsor"
-msgstr "Jadi Sponsor Platina"
+msgstr "Jadi Penaja Platinum"
 
 msgid "Become a Gold Sponsor"
-msgstr "Jadi Sponsor Emas"
+msgstr "Jadi Penaja Emas"
 
 msgid "Become a Patron"
 msgstr "Jadi Patron"
@@ -2957,10 +3041,10 @@ msgid "Rectangular Selection"
 msgstr "Seleksi Persegi Panjang"
 
 msgid "Elliptical Selection"
-msgstr "Seleksi Elips"
+msgstr "Seleksi Lingkaran"
 
 msgid "Polygonal Selection"
-msgstr "Seleksi Poligon"
+msgstr "Seleksi Poligonal"
 
 msgid "Select By Color"
 msgstr "Pilih sesuai warna"
@@ -2999,7 +3083,7 @@ msgid "Shading Tool"
 msgstr "Alat Pembayang"
 
 msgid "Line Tool"
-msgstr "Alat Garis"
+msgstr "Garis Lurus"
 
 msgid "Curve Tool"
 msgstr "Garis Lengkung"
@@ -3008,7 +3092,7 @@ msgid "Rectangle Tool"
 msgstr "Alat Persegi Panjang"
 
 msgid "Ellipse Tool"
-msgstr "Alat Elips"
+msgstr "Alat Lingkaran"
 
 msgid "Switch Colors"
 msgstr "Ganti Warna"
@@ -3290,7 +3374,7 @@ msgid "Tiles"
 msgstr "Petak"
 
 msgid "Crop"
-msgstr "Potong"
+msgstr "Pangkas"
 
 msgid "Resize the canvas"
 msgstr "Ubah ukuran kanvas"
@@ -3602,7 +3686,7 @@ msgstr "Ekawarna"
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr "Saat membuka gambar, itu bisa diimpor sebagai rujukan."
+msgstr "Saat membuka gambar, bisa juga diimpor sebagai rujukan."
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
@@ -3632,7 +3716,7 @@ msgstr "Pindahkan gambar rujukan terpilih ke kiri"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr "Memilih gambar rujukan untuk di kanvas"
+msgstr "Memilih gambar rujukan untuk kanvas"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
@@ -3702,6 +3786,7 @@ msgstr "Kotak petak"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tileset:"
 msgstr "Kotak petak:"
 
@@ -3719,16 +3804,80 @@ msgid "Tileset name:"
 msgstr "Nama kotak petak:"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
 msgstr "Ukuran petak:"
 
+#. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile shape:"
+msgstr "Bentuk petak:"
+
+#. The layout that the tiles appear in, in a non-rectangular grid.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile layout:"
+msgstr "Tata letak petak:"
+
+#. The offset axis (horizontal or vertical) of non-rectangular tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile offset axis:"
+msgstr "Sumbu offset petak:"
+
+#. Tooltip of the "tile offset axis" option.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+msgstr "Mengubah sumbu offset dari semua bentuk setengah offset (Isometrik & Segi Enam)."
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked"
+msgstr "Tumpukan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked offset"
+msgstr "Offset tumpukan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs right"
+msgstr "Tangga kanan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs down"
+msgstr "Tangga turun"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond right"
+msgstr "Wajik kanan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond down"
+msgstr "Wajik turun"
+
+#. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Place-only mode:"
+msgstr "Mode hanya-taruh:"
+
+#. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
+msgstr "Mengaktifkan mode hanya-taruh ini opsi permanen. Jika diaktifkan, nanti hanya bisa menaruh petak dan tidak bisa lagi mengubah petak yang ada pada lapisan ini."
+
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr "Pilih petak untuk ditaruh pada kanvas."
+msgstr "Pilih petak untuk ditaruh ke kanvas."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr "Ubah petak pada kanvas."
+msgstr "Mengubah petak di kanvas."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"

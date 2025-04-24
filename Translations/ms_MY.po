@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-03-13 21:13\n"
+"PO-Revision-Date: 2025-04-23 12:18\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Simpan"
 
 msgid "Please Confirm..."
-msgstr "Tolong Sahkan..."
+msgstr "Harap Konfirmasi..."
 
 msgid "File Name:"
 msgstr "Nama Fail:"
@@ -201,10 +201,10 @@ msgid "Resize Canvas"
 msgstr "Ubah Saiz Kanvas"
 
 msgid "Offset Image"
-msgstr "Pengimbang Gambar"
+msgstr "Offset Gambar"
 
 msgid "Offset:"
-msgstr "Pengimbang:"
+msgstr "Offset:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
@@ -635,7 +635,7 @@ msgid "Frame:"
 msgstr "Bingkai:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Arah Skrin:"
 
 msgid "Browse"
 msgstr "Cari"
@@ -781,49 +781,57 @@ msgstr "Imej Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Imej JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Imej SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Imej TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Imej WebP"
+
+#. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
+msgid "OpenRaster Project"
+msgstr "Projek OpenRaster"
+
+#. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
+msgid "Aseprite Project"
+msgstr "Projek Aseprite"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
-msgstr ""
+msgstr "Palet Pixelorama"
 
-#. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). (Note that GIMP is a software and should remain untranslated)
+#. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). Note that GIMP is a software and should remain untranslated.
 msgid "GIMP palette"
-msgstr ""
+msgstr "Palet GIMP"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
 msgstr "Pilihan lanjutan"
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Interpolasi:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "\"Nearest\""
 
 msgid "Bilinear"
-msgstr ""
+msgstr "\"Bilinear\""
 
 msgid "Cubic"
-msgstr ""
+msgstr "\"Cubic\""
 
 msgid "Trilinear"
-msgstr ""
+msgstr "\"Trilinear\""
 
 msgid "Constant"
-msgstr ""
+msgstr "Pemalar"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
@@ -834,32 +842,32 @@ msgid "Linear sRGB"
 msgstr ""
 
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 msgid "Startup"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 msgid "Interface"
-msgstr ""
+msgstr "Antaramuka"
 
 msgid "Themes"
-msgstr ""
+msgstr "Tema"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Kanvas"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Garis masa"
 
 msgid "Selection"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Pintasan"
 
 msgid "Backup"
 msgstr ""
@@ -872,7 +880,7 @@ msgid "Drivers"
 msgstr ""
 
 msgid "Extensions"
-msgstr ""
+msgstr "Sambungan"
 
 msgid "Cursors"
 msgstr ""
@@ -885,7 +893,7 @@ msgid "Pixelorama must be restarted for changes to take effect."
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Hidup"
 
 msgid "Restore default value"
 msgstr ""
@@ -1112,7 +1120,7 @@ msgstr "Interpolasi"
 msgid "Reverse"
 msgstr "Sungsangkan"
 
-#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly ditributed across the gradient.
+#. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
 msgstr "Agih ratakan titik"
 
@@ -1228,21 +1236,21 @@ msgstr ""
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Lengkung Warna"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
-msgstr ""
+msgstr "Saluran RGB:"
 
 msgid "Red"
-msgstr ""
+msgstr "Merah"
 
 msgid "Green"
-msgstr ""
+msgstr "Hijau"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 msgid "Presets"
 msgstr "Pratetap"
@@ -1734,23 +1742,23 @@ msgstr ""
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
 msgstr ""
 
-#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+#. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "Kekisi"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Jenis kekisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
@@ -1761,24 +1769,40 @@ msgstr ""
 msgid "Isometric"
 msgstr ""
 
+#. Refers to a hexagonal type of grid.
+msgid "Hexagonal"
+msgstr "Segi Enam"
+
+#. Refers to a hexagonal type of grid, with pointy-top orientation.
+msgid "Hexagonal (pointy-top)"
+msgstr "Segi enam (tapak runcing)"
+
+#. Refers to a hexagonal type of grid, with flat-top orientation.
+msgid "Hexagonal (flat-top)"
+msgstr "Segi enam (tapak rata)"
+
 msgid "All"
 msgstr "Semua"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Rectangular grid size:"
-msgstr "Saiz kekisi persegi tepat:"
+#. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
+msgid "Grids visible:"
+msgstr "Kekisi nampak:"
 
-#. Found in the Preferences, in the Canvas tab.
-msgid "Isometric grid size:"
-msgstr "Saiz kekisi isometrik:"
+#. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
+msgid "Editing grid:"
+msgstr "Kekisi suntingan:"
 
-#. Found in the Preferences, in the Canvas tab.
+#. Found in the Preferences, in the Canvas category.
+msgid "Grid size:"
+msgstr "Saiz kekisi:"
+
+#. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
-msgstr "Pengimbang kekisi:"
+msgstr "Offset kekisi:"
 
-#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+#. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Menetapkan offset kekisi kanvas asal (pada sudut kiri atas imej)"
 
 msgid "Draw over Tile Mode:"
 msgstr ""
@@ -1787,13 +1811,13 @@ msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Warna kekisi:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Warna daripada kekisi"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Kekisi Piksel"
 
 msgid "Show at zoom:"
 msgstr "Papar semasa zum:"
@@ -1802,10 +1826,10 @@ msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Warna kekisi piksel:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Warna daripada kekisi piksel"
 
 msgid "Transparency"
 msgstr ""
@@ -1920,7 +1944,7 @@ msgstr ""
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
-msgstr ""
+msgstr "Tambah Sambungan"
 
 msgid "Enable"
 msgstr ""
@@ -1935,32 +1959,70 @@ msgid "Open Folder"
 msgstr ""
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
+#: src/Preferences/PreferencesDialog.tscn
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Explore Online"
-msgstr ""
+msgstr "Jelajah Dalam Talian"
 
-#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the Extensions Store, where you can download extensions.
-msgid "Store"
-msgstr "Kedai"
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Extension Explorer"
+msgstr "Kedai Sambungan"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Search..."
 msgstr "Cari..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Tags:"
 msgstr "Tag:"
 
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Report issue with an extension"
+msgstr "Laporkan isu dengan sambungan"
+
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Download"
 msgstr "Muat turun"
 
-#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension stores.
-msgid "Store Links:"
-msgstr "Pautan Kedai:"
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Repository links:"
+msgstr "Pautan repositori:"
 
-#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions store. "Will be automatically removed" refers to the text field itself, if no link is entered.
-msgid "Paste Store link, given by the store owner (will automatically be removed if left empty)"
-msgstr "Tampalkan pautan pemilik kedai (medan teks akan auto hilang jika belum tampal)"
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Fetching data from remote repository.\n"
+"Please wait."
+msgstr "Mengambil data dari repositori jauh.\n"
+"Harap tunggu."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Unable to get info from remote repository.\n\n"
+"- Make sure you are connected to the internet.\n"
+"- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
+msgstr "Tidak boleh mendapatkan maklumat repositori jauh.\n\n"
+"- Pastikan telah disambungkan ke internet.\n"
+"- Jika menggunakan Pixelorama versi Flatpak, izinkan untuk menyambung ke internet. Lakukan dengan menjalankan perintah berikut pada terminal:"
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
+msgstr "Atau tidak, muat turun Flatseal dan tetapkan izin internet untuk aplikasi Flatpak di sana."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup.
+#: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
+msgid "Unable to get info from remote repository."
+msgstr "Tidak boleh mendapatkan maklumat repositori jauh."
+
+#. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
+msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
+msgstr "Tampal pautan repositori pemilik repositori. Jika tetap kosong, lajur ini akan automatik dialih keluar."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2018,11 +2080,11 @@ msgstr ""
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr "Berus Asali"
+msgstr "Berus Lalai"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
-msgstr ""
+msgstr "Berus piksel"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Circle brush"
@@ -2151,7 +2213,7 @@ msgid "Pattern"
 msgstr ""
 
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 msgid "Simple Shading"
 msgstr ""
@@ -2211,6 +2273,20 @@ msgstr ""
 
 msgid "Zoom out"
 msgstr ""
+
+#. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
+msgid "Single"
+msgstr "Tunggal"
+
+#. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
+msgid "Chained"
+msgstr "Rantaian"
+
+#. Tooltip of the curve tool's "mode" option button.
+msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
+"Single: Makes a single bezier curve, similar to Aseprite's curve tool."
+msgstr "Rantaian: Mencipta rantaian lengkung Bezier, serupa alat garis lengkung Krita.\n"
+"Tunggal: Mencipta satu lengkung Bezier, serupa alat garis lengkung Aseprite."
 
 msgid "Options"
 msgstr ""
@@ -2432,13 +2508,13 @@ msgstr "Nyahpaut cel"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
-msgstr ""
+msgstr "Mainkan audio di sini"
 
 msgid "Properties"
 msgstr ""
 
 msgid "Project Properties"
-msgstr ""
+msgstr "Perincian Projek"
 
 msgid "Frame properties"
 msgstr ""
@@ -2458,7 +2534,7 @@ msgstr ""
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr ""
+msgstr "Import Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2472,7 +2548,7 @@ msgstr ""
 
 #. A tilemap is a type of layer, which is divided by grid cells, the size of which is determined by the tileset it uses. Each grid cell is mapped to a tile in the tileset. Tilemaps can be used to create game levels and layouts.
 msgid "Tilemap"
-msgstr ""
+msgstr "Peta jubin"
 
 msgid "Audio"
 msgstr ""
@@ -2483,6 +2559,14 @@ msgstr ""
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
 msgstr ""
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
+msgid "Flatten"
+msgstr "Rata"
+
+#. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
+msgid "Flatten visible"
+msgstr "Rata nampak"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2650,14 +2734,14 @@ msgstr ""
 
 #. Refers to the audio file of an audio layer.
 msgid "Audio file:"
-msgstr ""
+msgstr "Fail audio:"
 
 msgid "Load file"
-msgstr ""
+msgstr "Muatkan fail"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Mainkan di bingkai:"
 
 msgid "Palette"
 msgstr ""
@@ -2901,7 +2985,7 @@ msgid "Preset:"
 msgstr "Pratetap:"
 
 msgid "Default"
-msgstr ""
+msgstr "Lalai"
 
 msgid "Custom"
 msgstr ""
@@ -3026,7 +3110,7 @@ msgstr ""
 
 #. A setting found in the export dialog. When enabled, a JSON file containing the project's data is also being exported. JSON refers to this https://en.wikipedia.org/wiki/JSON
 msgid "Export JSON data"
-msgstr ""
+msgstr "Eksport data JSON"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
@@ -3108,7 +3192,7 @@ msgstr ""
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
-msgstr ""
+msgstr "Data pengguna:"
 
 msgid "Duration"
 msgstr ""
@@ -3238,7 +3322,7 @@ msgstr "Perakam"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
-msgstr ""
+msgstr "Jubin"
 
 msgid "Crop"
 msgstr ""
@@ -3343,7 +3427,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Projeksi:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
@@ -3355,7 +3439,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Frustum"
 
 msgid "Rotation:"
 msgstr ""
@@ -3389,7 +3473,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "Kiri ke kanan:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
@@ -3650,33 +3734,98 @@ msgstr "Kotak jubin"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tileset:"
-msgstr ""
+msgstr "Set jubin:"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Dialogs/ProjectProperties.tscn
 msgid "Tilesets"
-msgstr ""
+msgstr "Set jubin"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "New tileset"
-msgstr ""
+msgstr "Set jubin baru"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset name:"
-msgstr ""
+msgstr "Nama set jubin:"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
+msgstr "Saiz jubin:"
+
+#. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile shape:"
+msgstr "Bentuk jubin:"
+
+#. The layout that the tiles appear in, in a non-rectangular grid.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile layout:"
+msgstr "Susun atur jubin:"
+
+#. The offset axis (horizontal or vertical) of non-rectangular tiles.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Tile offset axis:"
+msgstr "Paksi offset jubin:"
+
+#. Tooltip of the "tile offset axis" option.
+#: src/UI/Timeline/NewTileMapLayerDialog.tscn
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
+msgstr "Mengubah paksi offset daripada semua bentuk separuh offset (Isometrik & Segi Enam)."
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked"
+msgstr "Tindan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stacked offset"
+msgstr "Offset tindan"
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs right"
 msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Stairs down"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond right"
+msgstr ""
+
+#. A tile layout option.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Diamond down"
+msgstr ""
+
+#. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Place-only mode:"
+msgstr "Mod letak sahaja:"
+
+#. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
+#: src/UI/Timeline/LayerProperties.tscn
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
+msgstr "Mengaktifkan mod letak sahaja ialah tindakan kekal. Jika diaktifkan, hanya dapat meletakkan jubin dan tidak dapat lagi mengubah jubin sedia ada pada lapisan ini."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Pilih jubin untuk diletakkan pada kanvas."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Mengubah jubin pada kanvas."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
@@ -3701,21 +3850,21 @@ msgstr ""
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Bertindan"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr ""
+msgstr "Saiz butang jubin:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
@@ -3723,9 +3872,9 @@ msgstr "Paparkan jubin kosong:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Properti jubin"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Kebarangkalian:"
 
