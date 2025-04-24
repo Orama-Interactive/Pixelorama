@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-04-24 00:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1818,11 +1818,11 @@ msgstr ""
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Esagonale (punta appuntita)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Esagonale (punta piatta)"
 
 msgid "All"
 msgstr "Tutte"
