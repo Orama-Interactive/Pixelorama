@@ -41,6 +41,7 @@ func _ready() -> void:
 	onion_future.type = onion_future.FUTURE
 	onion_future.blue_red_color = Global.onion_skinning_future_color
 	await get_tree().process_frame
+	await get_tree().process_frame
 	camera_zoom()
 
 
