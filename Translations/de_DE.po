@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-04-25 19:13\n"
+"PO-Revision-Date: 2025-04-25 20:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2059,11 +2059,11 @@ msgstr "Alternativ können Sie Flatseal herunterladen und Berechtigungen für Fl
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr ""
+msgstr "Info aus dem Remote-Repository konnte nicht abgerufen werden."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr ""
+msgstr "Repository-Link einfügen, der vom Repository-Besitzer angegeben wurde. Wenn es leer bleibt, wird er automatisch entfernt."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2318,16 +2318,17 @@ msgstr "Verkleinern"
 
 #. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
 msgid "Single"
-msgstr ""
+msgstr "Einzel"
 
 #. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
 msgid "Chained"
-msgstr ""
+msgstr "Ketten"
 
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "Ketten: Erzeugt eine Kette von mehreren Bézierkurven, ähnlich wie Kritas Kurvenwerkzeug.\n"
+"Einzel: Macht eine einzelne Bézierkurve, ähnlich wie Aseprites Kurvenwerkzeug."
 
 msgid "Options"
 msgstr "Optionen"
@@ -2604,11 +2605,11 @@ msgstr "Clipping-Maske"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr ""
+msgstr "Abflachen"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr ""
+msgstr "Sichtbare abflachen"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2893,7 +2894,7 @@ msgstr "Datei gespeichert"
 
 #. A notification label that appears when the backup of the currently opened project gets saved.
 msgid "Backup saved"
-msgstr ""
+msgstr "Backup gespeichert"
 
 msgid "File failed to open. Error code %s"
 msgstr "Datei konnte nicht geöffnet werden. Fehlercode %s"
@@ -3807,64 +3808,64 @@ msgstr "Tileset Größe:"
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile shape:"
-msgstr ""
+msgstr "Tile-Größe:"
 
 #. The layout that the tiles appear in, in a non-rectangular grid.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile layout:"
-msgstr ""
+msgstr "Tile-Layout:"
 
 #. The offset axis (horizontal or vertical) of non-rectangular tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile offset axis:"
-msgstr ""
+msgstr "Tile-Offset-Achse:"
 
 #. Tooltip of the "tile offset axis" option.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
-msgstr ""
+msgstr "Für alle halb-Offset-Formen (Isometrisch & Hexagonal) bestimmt die Offset-Achse."
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked"
-msgstr ""
+msgstr "Gestapelt"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked offset"
-msgstr ""
+msgstr "Gestapelter-Offset"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs right"
-msgstr ""
+msgstr "Treppe rechts"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs down"
-msgstr ""
+msgstr "Treppe unten"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond right"
-msgstr ""
+msgstr "Diamant rechts"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond down"
-msgstr ""
+msgstr "Diamant unten"
 
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Place-only mode:"
-msgstr ""
+msgstr "Nur-Platzierungsmodus:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr ""
+msgstr "Die Aktivierung des Nur-Platzierungsmodus ist eine permanente Aktion. Nach der Aktivierung können Sie nur Tiles platzieren und die vorhandenen Tiles auf dieser Ebene nicht mehr ändern."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
