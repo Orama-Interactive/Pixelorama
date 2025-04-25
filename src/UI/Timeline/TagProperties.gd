@@ -35,6 +35,7 @@ func show_dialog(
 		popup_centered()
 	else:
 		popup(popup_rect)
+	name_line_edit.grab_focus()
 
 
 func _on_confirmed() -> void:
