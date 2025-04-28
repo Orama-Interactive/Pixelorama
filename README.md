@@ -61,7 +61,7 @@ As of right now, most of the code is written using GDScript, so the mono version
 - **Wide Range of Tools:** Customize your workflow by dynamically mapping tools to the left and right mouse buttons, making your creation process faster and more intuitive.
 - **Advanced Animation Support:** Create animations with a timeline composed of layers and frames, including features like onion skinning, audio synchronization, frame tags, and the ability to draw while the animation is playing.
 - **Pixel Art Focused:** Perfect pixel lines, indexed mode, and rotation and scaling algorithms tailored specifically to pixel art, like [cleanEdge](http://torcado.com/cleanEdge/), OmniScale, and rotxel.
-- **Seamless Tilemap Creation:** Use Pixelorama's tilemap layers to create tiles for your games.
+- **Seamless Tilemap Creation:** Use Pixelorama's tilemap layers to create rectangular, isometric or hexagonal tiles for your games.
 - **Powerful Layer System:** Utilize clipping masks and non-destructive visual effects like outlines, gradient maps, drop shadows, and more. Perfect for experimenting with styles and compositions, as changes can be applied without altering your original artwork.
 - **Palette Management:** Bring color into your canvas by choosing from pre-made palettes, importing your own, or creating custom ones inside the software to suit your unique style.
 - **Visual Effects:** Multiple image effects for fine-tuning your artwork.
