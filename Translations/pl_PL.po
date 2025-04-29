@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-04-24 19:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1815,11 +1815,11 @@ msgstr "Sześciokątny"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Sześciokątny (o spiczastym wierzchołku)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Sześciokątny (płaski wierzchołek)"
 
 msgid "All"
 msgstr "Wszystkie"
@@ -2603,11 +2603,11 @@ msgstr "Maska przycinająca"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr ""
+msgstr "Wyrównaj"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr ""
+msgstr "Wyrównaj widoczne"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
