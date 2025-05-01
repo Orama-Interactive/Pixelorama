@@ -190,11 +190,19 @@ func draw_layers(force_recreate := false) -> void:
 	else:  # Update the TextureArray
 		if layer_texture_array.get_layers() > 0:
 			for i in project.layers.size():
+				var layer := project.layers[i]
 				if not update_all_layers:
 					var test_array := [project.current_frame, i]
 					if not test_array in project.selected_cels:
-						continue
-				var layer := project.layers[i]
+						var include := false
+						var parents := layer.get_ancestors()
+						for parent in parents:
+							if parent.blend_mode == BaseLayer.BlendModes.PASS_THROUGH:
+								var test_array_parent := [project.current_frame, parent.index]
+								if test_array_parent in project.selected_cels:
+									include = true
+						if not include:
+							continue
 				var ordered_index := project.ordered_layers.find(layer.index)
 				var cel_image := Image.new()
 				_update_texture_array_layer(project, layer, cel_image, true)
