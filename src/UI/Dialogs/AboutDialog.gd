@@ -103,6 +103,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Donda": ["Polish"],
 	"Piotr Kostrzewski (piotrkostrzewski)": ["Polish"],
 	"Tmpod": ["Portuguese"],
+	"Pastel de N4ta (N4ta)": ["Portuguese"],
 	"Michael Alexsander (YeldhamDev)": ["Brazilian Portuguese"],
 	"Cedulio Cezar (ceduliocezar)": ["Brazilian Portuguese"],
 	"Alexandre Oliveira (rockytvbr)": ["Brazilian Portuguese"],
