@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2025-05-03 13:39\n"
+"PO-Revision-Date: 2025-05-03 14:36\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -310,7 +310,7 @@ msgstr ""
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "מרכוז קנבס"
 
 msgid "Tile Mode"
 msgstr "מצב אריח"
@@ -320,15 +320,15 @@ msgstr ""
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
-msgstr ""
+msgstr "בסיס-X:"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "Y-basis:"
-msgstr ""
+msgstr "בסיס-Y:"
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "מסיכה:"
 
 #. Verb, resets something.
 msgid "Reset"
@@ -336,13 +336,13 @@ msgstr "איפוס"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "איפוס %s"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "שימוש בפריים נוכחי"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "איפוס מסיכה"
 
 msgid "Window Opacity"
 msgstr "אטימות חלון"
@@ -499,7 +499,7 @@ msgstr "פריים חדש"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
-msgstr ""
+msgstr "החלפת cel"
 
 msgid "New layer"
 msgstr "שכבה חדשה"
@@ -524,7 +524,7 @@ msgstr "פריימים מאונכים:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "חיתוך חכם"
 
 #. A value that is a threshold
 msgid "Threshold:"
@@ -536,7 +536,7 @@ msgstr "תמונות בעלות צד הקטן מהערך הזה יחצו את ה
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "מרחק מיזוג:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
@@ -544,13 +544,13 @@ msgstr ""
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "ריענון"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "פריים התחלה:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "פריים סיום:"
 
 msgid "At frame:"
 msgstr "בפריים:"
@@ -571,20 +571,21 @@ msgid "Random brush"
 msgstr "מברשת אקראית"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "שמירת ספרייט כקובץ .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "ייצוא ספרייט כקובץ .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "ייצוא ספרייט"
 
 msgid "File Exists, Overwrite?"
 msgstr "הקובץ קיים. להחליף?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "הקבצים הבאים כבר קיימים. האם ברצונך להחליף אותם?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "נתיב תיקייה לא תקין!"
@@ -642,7 +643,7 @@ msgstr "שינוי גודל:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "איכות:"
 
 msgid "Cancel Export"
 msgstr "ביטול ייצוא"
@@ -712,24 +713,24 @@ msgstr "שורות:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "תגים לפי עמודה"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "תגים לפי שורה"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
 msgstr "מימדי ייצוא:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "שמירת קובץ"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "לתיקייה הקודמת."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "לתיקייה הבאה."
 
 msgid "Go to parent folder."
 msgstr ""
@@ -738,7 +739,7 @@ msgid "Path:"
 msgstr "נתיב:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "רענון קבצים."
 
 msgid "Toggle the visibility of hidden files."
 msgstr ""
@@ -754,51 +755,51 @@ msgstr "קובץ:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "כל הקבצים"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "כל המזוהים"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "פרויקט Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "תמונת PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "תמונת BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "תמונת Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "תמונת JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "תמונת SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "תמונת TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "תמונת WebP"
 
 #. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
 msgid "OpenRaster Project"
-msgstr ""
+msgstr "פרויקט OpenRaster"
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
-msgstr ""
+msgstr "פרויקט Aseprite"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -825,18 +826,18 @@ msgid "Cubic"
 msgstr ""
 
 msgid "Trilinear"
-msgstr ""
+msgstr "טריליניארי"
 
 msgid "Constant"
-msgstr ""
+msgstr "קבוע"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "מרחב צבע"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "sRGB ליניארי"
 
 msgid "General"
 msgstr "כללי"
@@ -851,7 +852,7 @@ msgid "Interface"
 msgstr "ממשק"
 
 msgid "Themes"
-msgstr ""
+msgstr "ערכות נושא"
 
 msgid "Canvas"
 msgstr "קנבס"
@@ -867,23 +868,23 @@ msgid "Shortcuts"
 msgstr "קיצורי דרך"
 
 msgid "Backup"
-msgstr ""
+msgstr "גיבוי"
 
 msgid "Performance"
-msgstr ""
+msgstr "ביצועים"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr ""
 
 msgid "Extensions"
-msgstr ""
+msgstr "הרחבות"
 
 msgid "Cursors"
-msgstr ""
+msgstr "סמנים"
 
 msgid "Indicators"
-msgstr ""
+msgstr "חיוויים"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
@@ -1065,7 +1066,7 @@ msgstr ""
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
-msgstr ""
+msgstr "הפחתת רוויה"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
@@ -1086,40 +1087,40 @@ msgstr "צבע צל:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "טשטוש גאוס"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "סוג טשטוש:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "כמות טשטוש:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "רדיוס טשטוש:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "כיוון טשטוש:"
 
 msgid "Gradient"
-msgstr ""
+msgstr "מעבר צבע"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "מפת מעבר צבע"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "אינטרפולציה"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "היפוך"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "נקודות פרוסות באופן אחיד"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
@@ -1133,7 +1134,8 @@ msgstr "הוספת נקודות בסוף"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "אם מופעל, הנקודה האחרונה מתווספת לסוף מעבר הצבע.\n"
+"כבו את האפשרות כדי לגרום למעבר הצבע להיות בעל אינטרפולציה קבועה, כך שהצבע האחרון יילקח בחשבון."
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
@@ -1162,16 +1164,16 @@ msgstr "מראה"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "קיצוץ"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "גודל מעבר:"
 
 msgid "Center:"
 msgstr "מרכז:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "תבנית גוונון:"
 
 msgid "Type:"
 msgstr "סוג:"
@@ -1181,11 +1183,11 @@ msgstr "זווית:"
 
 #. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "שינוי גוון/רוויה/ערך"
 
 #. HSV stands for Hue, Saturation & Value.
 msgid "Adjust HSV"
-msgstr ""
+msgstr "שינוי HSV"
 
 #. Refers to the hue of the colors of an image.
 msgid "Hue:"
@@ -1193,35 +1195,35 @@ msgstr "גוון:"
 
 #. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
-msgstr ""
+msgstr "רוויה:"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
-msgstr ""
+msgstr "ערך:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "שינוי בהירות/ניגודיות"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "בהירות:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "ניגודיות:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
-msgstr ""
+msgstr "ערך אדום:"
 
 #. Refers to the green value of the colors of an image.
 msgid "Green value:"
-msgstr ""
+msgstr "ערך ירוק:"
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "ערך כחול:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
@@ -1240,17 +1242,17 @@ msgid "Channel:"
 msgstr ""
 
 msgid "Red"
-msgstr ""
+msgstr "אדום"
 
 msgid "Green"
-msgstr ""
+msgstr "ירוק"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value"
-msgstr ""
+msgstr "ערך"
 
 msgid "Presets"
-msgstr ""
+msgstr "הגדרות קבועות מראש"
 
 msgid "Apply"
 msgstr "אישור"
@@ -1276,11 +1278,11 @@ msgstr ""
 
 #. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
-msgstr ""
+msgstr "פיקסול"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "פוסטריזציה"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
@@ -1288,10 +1290,10 @@ msgstr ""
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "עוצמת גוונון:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "הצגת מסך פתיחה"
 
 msgid "Online Docs"
 msgstr ""
@@ -1301,17 +1303,17 @@ msgstr ""
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "פתיחת תיקיית נתוני עורך"
 
 msgid "Changelog"
-msgstr ""
+msgstr "רשימת שינויים"
 
 msgid "About Pixelorama"
 msgstr "אודות Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "תמיכה בפיתוח Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr ""
@@ -1320,14 +1322,14 @@ msgid "Developed by Orama Interactive"
 msgstr "פותח על ידי Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-הווה ע\"י Orama Interactive ותורמים"
 
 msgid "Website"
 msgstr "אתר אינטרנט"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "קוד מקור"
 
 msgid "Donate"
 msgstr "תרומות"
@@ -1676,7 +1678,7 @@ msgstr ""
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "צבעים אחרונים"
 
 msgid "Left tool"
 msgstr "כלי שמאלי"
@@ -1697,16 +1699,16 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr ""
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "הצגת אייקון כלי שמאלי"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "הצגת האייקון של הכלי השמאלי הנבחר לצד הסמן על הקנבס"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "הצגת אייקון כלי ימני"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "הצגת האייקון של הכלי הימני הנבחר לצד הסמן על הקנבס"
 
 msgid "Use native mouse cursors"
 msgstr ""
@@ -1715,13 +1717,13 @@ msgid "Use cross cursor for the canvas"
 msgstr ""
 
 msgid "Guides"
-msgstr ""
+msgstr "קווי הנחיה"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "צבע קווי הנחיה:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "צבע קווי ההנחייה המוצגים על הקנבס"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
@@ -1745,22 +1747,22 @@ msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "מלבני"
 
 msgid "Isometric"
-msgstr ""
+msgstr "שומר מידה"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "משושה"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "משושה (קודקוד למעלה)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "משושה (צלע למעלה)"
 
 msgid "All"
 msgstr "הכל"
@@ -1834,7 +1836,7 @@ msgid "Second color of the transparent checker background"
 msgstr ""
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "מעקב אחר תזוזת קנבס"
 
 msgid "The transparent checker follow the movement of canvas"
 msgstr ""
@@ -1925,13 +1927,13 @@ msgstr ""
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
-msgstr ""
+msgstr "הוספת הרחבה"
 
 msgid "Enable"
-msgstr ""
+msgstr "הפעלה"
 
 msgid "Disable"
-msgstr ""
+msgstr "כיבוי"
 
 msgid "Uninstall"
 msgstr "הסרת התקנה"
@@ -1943,7 +1945,7 @@ msgstr "פתיחת תיקייה"
 #: src/Preferences/PreferencesDialog.tscn
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Explore Online"
-msgstr ""
+msgstr "חיפוש ברשת"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -1953,22 +1955,22 @@ msgstr ""
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Search..."
-msgstr ""
+msgstr "חיפוש..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Tags:"
-msgstr ""
+msgstr "תגים:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr ""
+msgstr "דיווח על בעיה עם הרחבה"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Download"
-msgstr ""
+msgstr "הורדה"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2036,7 +2038,7 @@ msgstr "גודל"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "גבולות ערך"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
@@ -2058,7 +2060,7 @@ msgstr "בחירת מברשת"
 
 #. Found when selecting a brush. It's a section that shows the default Pixelorama brushes.
 msgid "Default Brushes"
-msgstr ""
+msgstr "מברשת ברירת-מחדל"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
@@ -2074,27 +2076,27 @@ msgstr "מברשת עיגול מלא"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "מברשות פרויקט"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "מברשות קובץ"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "שלג"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "מברשת קובץ אקראית"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "דשא"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "כוכב"
 
 msgid "Custom brush"
 msgstr ""
@@ -2104,15 +2106,15 @@ msgstr "גודל מברשת:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "אפשרויות סיבוב"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "היפוך:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "סיבוב:"
 
 msgid "Overwrite color"
 msgstr ""
@@ -2136,15 +2138,15 @@ msgstr "מילוי בפנים"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "מרווח"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "מרווח X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "מרווח Y:"
 
 msgid "Fill Shape"
 msgstr "מילוי צורה"
@@ -2154,11 +2156,11 @@ msgstr "ממלא את הצורה המצוירת בצבע, במקום לצייר 
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "צפיפות:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
-msgstr ""
+msgstr "צבע מברשת מ:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: צבע מהמברשת עצמה, 100: הצבע המסומן"
@@ -2337,11 +2339,11 @@ msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr ""
+msgstr "הזזה למרכז הקנבס"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr ""
+msgstr "הזזה למרכז התצוגה"
 
 msgid "Current frame:"
 msgstr "פריים נוכחי:"
@@ -2353,10 +2355,10 @@ msgid "Current frame as spritesheet"
 msgstr ""
 
 msgid "Jump to the first frame"
-msgstr ""
+msgstr "קפיצה לפריים הראשון"
 
 msgid "Go to the previous frame"
-msgstr ""
+msgstr "מעבר לפריים הקודם"
 
 msgid "Play the animation backwards"
 msgstr ""
