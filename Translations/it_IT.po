@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-05-03 14:36\n"
+"PO-Revision-Date: 2025-05-03 15:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1837,7 +1837,7 @@ msgstr "Modifica griglia:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "Dimensione griglia:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
@@ -2010,7 +2010,7 @@ msgstr "Esplora Online"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Extension Explorer"
-msgstr ""
+msgstr "Esplora Estensioni"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2025,7 +2025,7 @@ msgstr "Etichette:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr ""
+msgstr "Segnala un problema con un'estensione"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2035,34 +2035,37 @@ msgstr "Scarica"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Repository links:"
-msgstr ""
+msgstr "Link alla repository:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Fetching data from remote repository.\n"
 "Please wait."
-msgstr ""
+msgstr "Recupero dati dalla repository remota.\n"
+"Attendere prego."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository.\n\n"
 "- Make sure you are connected to the internet.\n"
 "- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
-msgstr ""
+msgstr "Impossibile ottenere informazioni dalla repository remota.\n\n"
+"- Verificare la connessione a Internet.\n"
+"- Se si utilizza la versione Flatpak di Pixelorama, è necessario concedere l'autorizzazione per connettersi a Internet. Per farlo, è possibile eseguire il seguente comando sul terminale:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
-msgstr ""
+msgstr "In alternativa, è possibile scaricare Flatseal e impostare lì i permessi per le applicazioni Flatpak."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr ""
+msgstr "Impossibile ottenere informazioni dalla repository remota."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr ""
+msgstr "Incolla il link della reposiory, dato dal proprietario della repository. Se lasciato vuoto, verrà automaticamente rimosso."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2317,16 +2320,17 @@ msgstr "Riduci zoom"
 
 #. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
 msgid "Single"
-msgstr ""
+msgstr "Singola"
 
 #. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
 msgid "Chained"
-msgstr ""
+msgstr "A catena"
 
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "A catena: crea una catena di curve di Bézier, in maniera simile allo strumento curva di Krita.\n"
+"Singola: crea una singola curva di Bézier, in maniera simile allo strumento curva di Krita."
 
 msgid "Options"
 msgstr "Opzioni"
@@ -2603,11 +2607,11 @@ msgstr "Maschera di ritaglio"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr ""
+msgstr "Appiattisci"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr ""
+msgstr "Appiattisci visibile"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -3806,24 +3810,24 @@ msgstr "Dimensione caselle:"
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile shape:"
-msgstr ""
+msgstr "Forma riquadro:"
 
 #. The layout that the tiles appear in, in a non-rectangular grid.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile layout:"
-msgstr ""
+msgstr "Layout riquadro:"
 
 #. The offset axis (horizontal or vertical) of non-rectangular tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile offset axis:"
-msgstr ""
+msgstr "Asse offset riquadri:"
 
 #. Tooltip of the "tile offset axis" option.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
-msgstr ""
+msgstr "Per tutte le forme semioffset (Isometrica & Esagonale), determina l'asse dell'offset."
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
