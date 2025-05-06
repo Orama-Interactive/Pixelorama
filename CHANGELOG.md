@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.1.1] - Unreleased
+## [v1.1.1] - 2025-05-06
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
@@ -31,6 +31,7 @@ Built using Godot 4.4.1
 - The shortcut groups in the Preferences have been re-organized. The Buttons group has been removed, instead the shortcuts are grouped according to their respective panels, such as Timeline, Global Tool Options and Palettes.
 - Cels with a non-zero z-index display a "z" in the timeline.
 - The reference image rotation incerement step was changed to 0.01. [#1210](https://github.com/Orama-Interactive/Pixelorama/pull/#1210)
+- When opening the new tag dialog, the name field automatically grabs focus.
 
 ### Fixed
 - Value sliders and rulers are no longer displaying integers as floats.
@@ -55,6 +56,7 @@ Built using Godot 4.4.1
 - Fixed a regression in v1.1 where mouse button shortcuts (such as the mouse thumb buttons) were not activating tools.
 - Empty audio layers now only show the audio icon in the frame where the audio is supposed to start playing.
 - Fixed issue where the wrong font would be chosen for the interface in certain circumstances. [#1217](https://github.com/Orama-Interactive/Pixelorama/pull/#1217)
+- Fixed canvas preview's camera not being fit to frame when Pixelorama first launches and the canvas preview is visible.
 
 ### Removed
 - The "All" grid type option has been removed, as it is no longer needed since we can now display multiple grids at once.

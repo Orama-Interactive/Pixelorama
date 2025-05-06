@@ -148,6 +148,7 @@ const TRANSLATORS_DICTIONARY := {
 	"StarFang208": ["Italian"],
 	"Damiano Guida (damiano.guida22)": ["Italian"],
 	"albano battistella (albanobattistella)": ["Italian"],
+	"Mattia Castorino (Mattness)": ["Italian"],
 	"Azagaya VJ (azagaya.games)": ["Spanish"],
 	"Lilly And (KatieAnd)": ["Spanish"],
 	"UncleFangs": ["Spanish"],
