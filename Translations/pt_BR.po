@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-05-06 04:50\n"
+"PO-Revision-Date: 2025-05-06 06:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1819,11 +1819,11 @@ msgstr "Hexagonal"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Hexagonal (vértices na vertical)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Hexagonal (vértices na horizontal)"
 
 msgid "All"
 msgstr "Tudo"
@@ -2011,7 +2011,7 @@ msgstr "Explorar Online"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Extension Explorer"
-msgstr ""
+msgstr "Explorador de Extensões"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2026,7 +2026,7 @@ msgstr "Tags:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr ""
+msgstr "Relatar um problema com uma extensão"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2036,34 +2036,37 @@ msgstr "Baixar"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Repository links:"
-msgstr ""
+msgstr "Links de repositórios:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Fetching data from remote repository.\n"
 "Please wait."
-msgstr ""
+msgstr "Buscando dados do repositório remoto.\n"
+"Aguarde."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository.\n\n"
 "- Make sure you are connected to the internet.\n"
 "- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
-msgstr ""
+msgstr "Não foi possível obter informações do repositório remoto.\n\n"
+"- Certifique-se de que seu dispositivo está conectado à internet.\n"
+"- Se estiver usando a versão de Flatpak do Pixelorama, você precisa conceder ao programa a permissão de se conectar à internet. Para tanto, você pode executar o seguinte comando no seu terminal:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
-msgstr ""
+msgstr "Como alternativa, você pode baixar o Flatseal e nele configurar as permissões de aplicativos Flatpak."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr ""
+msgstr "Não foi possível obter informações do repositório remoto."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr ""
+msgstr "Cole aqui o link do repositório, fornecido pelo dono. Se este campo for deixado vazio, será automaticamente removido."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2318,16 +2321,17 @@ msgstr "Diminuir zoom"
 
 #. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
 msgid "Single"
-msgstr ""
+msgstr "Simples"
 
 #. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
 msgid "Chained"
-msgstr ""
+msgstr "Cadeia"
 
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "Cadeia: Faz uma cadeia de múltiplas curvas de Bézier, de modo similar à ferramenta de curva do Krita.\n"
+"Simples: Faz uma única curva de Bézier, de modo similar à ferramenta de curva do Aseprite."
 
 msgid "Options"
 msgstr "Opções"
@@ -2604,11 +2608,11 @@ msgstr "Máscara de recorte"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr ""
+msgstr "Achatar"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr ""
+msgstr "Achatar visíveis"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
