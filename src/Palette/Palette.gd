@@ -41,7 +41,7 @@ class PaletteColor:
 		if dict.has("color"):
 			color = dict["color"]
 		if dict.has("index"):
-			color = dict["index"]
+			index = dict["index"]
 
 
 func _init(
