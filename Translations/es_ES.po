@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-04-23 01:49\n"
+"PO-Revision-Date: 2025-05-09 16:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1911,11 +1911,11 @@ msgstr "Seleccionar capa al hacer clic en uno de sus botones:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr "Color anterior de la hoja cebolla:"
+msgstr "Color anterior del papel cebolla:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr "Color futuro de la hoja cebolla:"
+msgstr "Color futuro del papel cebolla:"
 
 msgid "Animated selection borders"
 msgstr "Bordes de selección animados"
@@ -2438,7 +2438,7 @@ msgid "Timeline settings"
 msgstr "Configuración de la línea de tiempo"
 
 msgid "Enable/disable Onion Skinning"
-msgstr "Activar/desactivar Piel de Cebolla"
+msgstr "Activar/desactivar Papel Cebolla"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -2455,7 +2455,7 @@ msgid "Ping-pong loop"
 msgstr "Bucle ping-pong"
 
 msgid "Onion Skinning:"
-msgstr "Piel de cebolla:"
+msgstr "Papel Cebolla:"
 
 msgid "Past Frames"
 msgstr "Fotogramas Anteriores"
@@ -2516,7 +2516,7 @@ msgid "Below canvas"
 msgstr "Debajo del lienzo"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr "Si desea que una capa ignore multiples capas al mismo tiempo simplemente añada \"_io\" en el final del nombre de la capa."
+msgstr "Si deseas que una capa ignore multiples capas al mismo tiempo simplemente añade \"_io\" al final del nombre de la capa."
 
 msgid "Add a new frame"
 msgstr "Añadir un nuevo fotograma"
