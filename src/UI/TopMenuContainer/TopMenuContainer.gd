@@ -137,6 +137,9 @@ func _input(event: InputEvent) -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and Global.current_project != null:
 		_update_file_menu_buttons(Global.current_project)
+	elif what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if zen_mode:
+			_toggle_zen_mode()
 
 
 func _project_switched() -> void:
