@@ -273,7 +273,7 @@ func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 	return scaled
 
 
-func transform(
+func transform_image_with_algorithm(
 	image: Image, params: Dictionary, algorithm: RotationAlgorithm, expand := false
 ) -> void:
 	var transformation_matrix: Transform2D = params.get("transformation_matrix", Transform2D())
@@ -314,6 +314,74 @@ func transform(
 
 func type_is_shader(algorithm: RotationAlgorithm) -> bool:
 	return algorithm <= RotationAlgorithm.NNS
+
+
+func get_transformed_bounds(image_size: Vector2i, transform: Transform2D) -> Rect2:
+	var corners: Array[Vector2] = [
+		transform * (Vector2(0, 0)),
+		transform * (Vector2(image_size.x, 0)),
+		transform * (Vector2(0, image_size.y)),
+		transform * (Vector2(image_size.x, image_size.y))
+	]
+	var min_corner := corners[0]
+	var max_corner := corners[0]
+	for corner in corners:
+		min_corner = min_corner.min(corner)
+		max_corner = max_corner.max(corner)
+	return Rect2(min_corner, max_corner - min_corner)
+
+
+func transform_image_with_transform2d(original_image: Image, transform_matrix: Transform2D, pivot: Vector2) -> void:
+	# Compute the transformation with pivot support
+	var move_to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot)  # translate pivot to origin
+	var move_back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot)  # move pivot back
+	var full_transform := move_back * transform_matrix * move_to_origin
+
+	# Estimate new bounding box
+	var bounds := get_transformed_bounds(original_image.get_size(), full_transform)
+	var viewport_size := bounds.size.ceil()
+
+	# Create viewport and canvas
+	var vp := RenderingServer.viewport_create()
+	var canvas := RenderingServer.canvas_create()
+	RenderingServer.viewport_attach_canvas(vp, canvas)
+	RenderingServer.viewport_set_size(vp, viewport_size.x, viewport_size.y)
+	RenderingServer.viewport_set_disable_3d(vp, true)
+	RenderingServer.viewport_set_active(vp, true)
+	RenderingServer.viewport_set_transparent_background(vp, true)
+	RenderingServer.viewport_set_default_canvas_item_texture_filter(
+		vp, RenderingServer.CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+	)
+
+	# Apply transform offset to align within new bounding box
+	var ci_rid := RenderingServer.canvas_item_create()
+	var offset_transform := full_transform.translated(-bounds.position)
+	RenderingServer.viewport_set_canvas_transform(vp, canvas, offset_transform)
+	RenderingServer.canvas_item_set_parent(ci_rid, canvas)
+
+	# Draw the texture
+	var texture := RenderingServer.texture_2d_create(original_image)
+	RenderingServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2.ZERO, original_image.get_size()), texture)
+
+	# Render once
+	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
+	RenderingServer.force_draw(false)
+	var viewport_texture := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
+
+	# Clean up
+	RenderingServer.free_rid(vp)
+	RenderingServer.free_rid(canvas)
+	RenderingServer.free_rid(ci_rid)
+	RenderingServer.free_rid(texture)
+
+	# Copy result
+	if not is_instance_valid(viewport_texture):
+		return
+	viewport_texture.convert(original_image.get_format())
+	original_image.copy_from(viewport_texture)
+
+	if original_image is ImageExtended:
+		original_image.convert_rgb_to_indexed()
 
 
 func transform_rectangle(rect: Rect2, matrix: Transform2D, pivot := rect.size / 2) -> Rect2:

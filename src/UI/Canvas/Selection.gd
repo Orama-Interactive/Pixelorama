@@ -109,7 +109,7 @@ func _ready() -> void:
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(0, 1)))  # Center bottom
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, 1)))  # Bottom left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, 0)))  # Center left
-	#gizmos.append(Gizmo.new(Gizmo.Type.ROTATE))  # Rotation gizmo (temp)
+	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE))  # Rotation gizmo (temp)
 
 
 func _input(event: InputEvent) -> void:
@@ -313,9 +313,9 @@ func _update_gizmos() -> void:
 	)
 
 	# Rotation gizmo (temp)
-	#gizmos[8].rect = Rect2(
-	#Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size
-	#)
+	gizmos[8].rect = Rect2(
+		Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size
+	)
 	queue_redraw()
 
 
@@ -401,9 +401,10 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 
 func resize_selection() -> void:
 	var project := Global.current_project
-	var transformation_matrix := Transform2D(angle, Vector2.ZERO)
-	big_bounding_rectangle = DrawingAlgos.transform_rectangle(resized_rect, transformation_matrix)
 	var size := resized_rect.size.abs()
+	var scale_amount := Vector2(size) / Vector2(original_preview_image.get_size())
+	var transformation_matrix := Transform2D(angle, Vector2.ZERO).scaled(scale_amount)
+	big_bounding_rectangle = DrawingAlgos.transform_rectangle(original_big_bounding_rectangle, transformation_matrix)
 	content_pivot = size / 2.0
 	if original_bitmap.is_empty():
 		print("original_bitmap is empty, this shouldn't happen.")
@@ -427,8 +428,8 @@ func resize_selection() -> void:
 				)
 		else:
 			var params := {"transformation_matrix": transformation_matrix, "pivot": content_pivot}
-			preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-			DrawingAlgos.transform(preview_image, params, rotation_algorithm, true)
+			#preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+			DrawingAlgos.transform_image_with_transform2d(preview_image, transformation_matrix, content_pivot)
 			if temp_rect.size.x < 0:
 				preview_image.flip_x()
 			if temp_rect.size.y < 0:
@@ -438,20 +439,24 @@ func resize_selection() -> void:
 	project.selection_map.copy_from(original_bitmap)
 
 	var bitmap_params := {"transformation_matrix": transformation_matrix, "pivot": content_pivot}
-	project.selection_map.resize_bitmap_values(
-		project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
-	)
+	#project.selection_map.resize_bitmap_values(
+		#project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
+	#)
 	var transformed_map := Image.new()
 	transformed_map = project.selection_map.get_region(project.selection_map.get_used_rect())
 	project.selection_map.clear()
-	DrawingAlgos.transform(transformed_map, bitmap_params, rotation_algorithm, true)
+	DrawingAlgos.transform_image_with_transform2d(transformed_map, transformation_matrix, content_pivot)
 	var dst := big_bounding_rectangle.position
 	if dst.x < 0:
 		dst.x = 0
 	if dst.y < 0:
 		dst.y = 0
+	var new_bitmap_size := project.selection_map.get_size()
+	new_bitmap_size.x = maxi(project.selection_map.get_size().x, absi(big_bounding_rectangle.position.x) + size.x)
+	new_bitmap_size.y = maxi(project.selection_map.get_size().y, absi(big_bounding_rectangle.position.y) + size.y)
+	project.selection_map.crop(new_bitmap_size.x, new_bitmap_size.y)
 	project.selection_map.blit_rect(
-		transformed_map, Rect2i(Vector2i.ZERO, project.selection_map.get_size()), dst
+		transformed_map, Rect2i(Vector2i.ZERO, new_bitmap_size), dst
 	)
 	project.selection_map_changed()
 	queue_redraw()
@@ -599,7 +604,7 @@ func transform_content_confirm() -> void:
 				}
 				var size := resized_rect.size.abs()
 				src.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-				DrawingAlgos.transform(src, params, rotation_algorithm, true)
+				DrawingAlgos.transform_image_with_algorithm(src, params, rotation_algorithm, true)
 				if temp_rect.size.x < 0:
 					src.flip_x()
 				if temp_rect.size.y < 0:
