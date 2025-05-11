@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-04-24 19:45\n"
+"PO-Revision-Date: 2025-05-08 19:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,7 +74,7 @@ msgstr "Obraz"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projekt"
 
 msgid "Effects"
 msgstr "Efekty"
@@ -366,7 +366,7 @@ msgstr "Ruchome panele"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Odczep okno"
 
 msgid "Manage Layouts"
 msgstr "Zarządzaj szablonami"
@@ -1237,7 +1237,7 @@ msgstr "Współczynnik efektu odcienia:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Krzywe koloru"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
@@ -2140,7 +2140,7 @@ msgstr "Pędzle projektu"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Pędzle z pliku"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
@@ -2148,7 +2148,7 @@ msgstr "Śnieg"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Losowe pędzle z pliku"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
@@ -3801,7 +3801,7 @@ msgstr "Nazwa kafelków:"
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
-msgstr ""
+msgstr "Rozmiar kafelka:"
 
 #. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
