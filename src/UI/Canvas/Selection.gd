@@ -404,7 +404,7 @@ func resize_selection() -> void:
 	var size := resized_rect.size.abs()
 	var scale_amount := Vector2(size) / Vector2(original_preview_image.get_size())
 	var transformation_matrix := Transform2D(angle, Vector2.ZERO).scaled(scale_amount)
-	big_bounding_rectangle = DrawingAlgos.transform_rectangle(original_big_bounding_rectangle, transformation_matrix)
+	big_bounding_rectangle = DrawingAlgos.transform_rectangle(original_big_bounding_rectangle, transformation_matrix, original_big_bounding_rectangle.size / 2.0, Vector2(0.5, 0.5))
 	content_pivot = size / 2.0
 	if original_bitmap.is_empty():
 		print("original_bitmap is empty, this shouldn't happen.")

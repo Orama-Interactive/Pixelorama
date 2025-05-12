@@ -384,12 +384,19 @@ func transform_image_with_transform2d(original_image: Image, transform_matrix: T
 		original_image.convert_rgb_to_indexed()
 
 
-func transform_rectangle(rect: Rect2, matrix: Transform2D, pivot := rect.size / 2) -> Rect2:
+func transform_rectangle(
+	rect: Rect2,
+	matrix: Transform2D,
+	pivot := rect.size / 2,
+	anchor := Vector2(0.5, 0.5)  # normalized: (0,0)=top-left, (1,1)=bottom-right
+) -> Rect2:
 	var offset_rect := rect
-	var offset_pos := -pivot
-	offset_rect.position = offset_pos
+	var anchor_point := rect.position + rect.size * anchor
+	var offset := anchor_point - pivot
+
+	offset_rect.position -= offset
 	offset_rect = offset_rect * matrix
-	offset_rect.position = rect.position + offset_rect.position - offset_pos
+	offset_rect.position = pivot + (offset_rect.position - pivot) + offset
 	return offset_rect
 
 
