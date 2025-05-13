@@ -5,7 +5,6 @@ const ICON := preload("res://assets/graphics/splash_screen/orama_64x64.png")
 const HANDLE_RADIUS := 1.0
 const RS_HANDLE_DISTANCE := 0.1
 
-# Raw image data and baked texture
 var base_image: Image
 var image_texture: ImageTexture
 
@@ -13,7 +12,10 @@ var image_texture: ImageTexture
 var preview_transform := Transform2D()
 
 # Tracking handles
-var active_handle: TransformHandle
+var active_handle: TransformHandle:
+	set(value):
+		active_handle = value
+		Global.can_draw = not is_instance_valid(active_handle)
 
 var handles: Array[TransformHandle] = [
 	TransformHandle.new(TransformHandle.Type.MOVE),  # Not a visible handle
@@ -88,18 +90,24 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	var project := Global.current_project
+	if not project.layers[project.current_layer].can_layer_get_drawn():
+		return
 	var mouse_pos := canvas.current_pixel
 	var hovered_handle := _get_hovered_handle(mouse_pos)
 	if is_instance_valid(hovered_handle):
-		var cursor_shape := Input.CURSOR_POINTING_HAND
-		if hovered_handle.type != TransformHandle.Type.ROTATE:
-			var local_direction := hovered_handle.get_direction().normalized()
-			var global_direction := preview_transform.basis_xform(local_direction.normalized())
-			var angle := global_direction.angle()
-			if hovered_handle.type == TransformHandle.Type.SKEW:
-				angle += PI / 2
-			cursor_shape = angle_to_cursor(angle)
-		Input.set_default_cursor_shape(cursor_shape)
+		if hovered_handle.type == TransformHandle.Type.MOVE:
+			_set_default_cursor()
+		else:
+			var cursor_shape := Input.CURSOR_POINTING_HAND
+			if hovered_handle.type != TransformHandle.Type.ROTATE:
+				var local_direction := hovered_handle.get_direction().normalized()
+				var global_direction := preview_transform.basis_xform(local_direction.normalized())
+				var angle := global_direction.angle()
+				if hovered_handle.type == TransformHandle.Type.SKEW:
+					angle += PI / 2
+				cursor_shape = angle_to_cursor(angle)
+			Input.set_default_cursor_shape(cursor_shape)
 	else:
 		_set_default_cursor()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -110,7 +118,7 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion:
 		if active_handle != null:
 			_handle_mouse_drag(mouse_pos)
-	elif event.is_action_pressed(&"ui_accept"):  # TEMP
+	elif event.is_action_pressed(&"transformation_confirm"):  # TEMP
 		bake_transform()
 
 
@@ -167,17 +175,16 @@ func _handle_mouse_press(mouse_pos: Vector2, hovered_handle: TransformHandle) ->
 
 func _handle_mouse_drag(mouse_pos: Vector2) -> void:
 	# Update preview_transform based which handle we're dragging, or moving the image
-	preview_transform = start_transform
 	var delta := mouse_pos - drag_start
 	match active_handle.type:
 		TransformHandle.Type.MOVE:
-			preview_transform = preview_transform.translated(delta)
+			preview_transform = start_transform.translated(delta)
 		TransformHandle.Type.SCALE:
-			preview_transform = apply_resize(preview_transform, active_handle, delta)
+			preview_transform = apply_resize(start_transform, active_handle, delta)
 		TransformHandle.Type.ROTATE:
-			preview_transform = apply_rotate(preview_transform, mouse_pos)
+			preview_transform = apply_rotate(start_transform, mouse_pos)
 		TransformHandle.Type.SKEW:
-			preview_transform = apply_shear(preview_transform, delta, active_handle)
+			preview_transform = apply_shear(start_transform, delta, active_handle)
 	queue_redraw()
 
 
@@ -199,10 +206,10 @@ func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 	return rect
 
 
-func get_handle_position(handle: TransformHandle) -> Vector2:
+func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vector2:
 	var image_size := base_image.get_size()
 	var local := Vector2(image_size.x * handle.pos.x, image_size.y * handle.pos.y)
-	return preview_transform * local
+	return t * local
 
 
 ## Apply an affine transform [param m] around [param pivot_local] onto [param t].
@@ -265,7 +272,7 @@ func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 
 func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Transform2D:
 	var image_size := base_image.get_size() as Vector2
-	var handle_global_position := get_handle_position(handle)
+	var handle_global_position := get_handle_position(handle, t)
 	var center := t * pivot
 	var handle_vector := (handle_global_position - center).normalized()
 	var handle_angle := rad_to_deg(fposmod(handle_vector.angle(), TAU))
@@ -292,7 +299,7 @@ func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Tra
 		shear_matrix = Transform2D(Vector2(1, shear_amount), Vector2(0, 1), Vector2())
 
 	# Apply the shear matrix in local space around pivot
-	return transform_around(start_transform, shear_matrix, pivot)
+	return transform_around(t, shear_matrix, pivot)
 
 
 ## Checks if [param angle] is between [param lower] and [param upper] degrees.
