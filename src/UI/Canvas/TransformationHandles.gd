@@ -2,7 +2,7 @@ class_name TransformationHandles
 extends Node2D
 
 const ICON := preload("res://assets/graphics/splash_screen/orama_64x64.png")
-const HANDLE_RADIUS := 2.0
+const HANDLE_RADIUS := 1.0
 const RS_HANDLE_DISTANCE := 0.1
 
 # Raw image data and baked texture
@@ -72,8 +72,12 @@ class TransformHandle:
 			anchor.y = 0
 		return anchor
 
+	func get_direction() -> Vector2:
+		return pos * 2 - Vector2.ONE
+
 
 func _ready() -> void:
+	Global.camera.zoom_changed.connect(queue_redraw)
 	var img := ICON.get_image()
 	base_image = Image.create_from_data(
 		ICON.get_width(), ICON.get_height(), false, img.get_format(), img.get_data()
@@ -85,18 +89,33 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	var mouse_pos := canvas.current_pixel
+	var hovered_handle := _get_hovered_handle(mouse_pos)
+	if is_instance_valid(hovered_handle):
+		var cursor_shape := Input.CURSOR_POINTING_HAND
+		if hovered_handle.type != TransformHandle.Type.ROTATE:
+			var local_direction := hovered_handle.get_direction().normalized()
+			var global_direction := preview_transform.basis_xform(local_direction.normalized())
+			var angle := global_direction.angle()
+			if hovered_handle.type == TransformHandle.Type.SKEW:
+				angle += PI / 2
+			cursor_shape = angle_to_cursor(angle)
+		Input.set_default_cursor_shape(cursor_shape)
+	else:
+		_set_default_cursor()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			_handle_mouse_press(mouse_pos)
+			_handle_mouse_press(mouse_pos, hovered_handle)
 		else:
 			active_handle = null
-	elif event is InputEventMouseMotion and active_handle != null:
-		_handle_mouse_drag(mouse_pos)
+	elif event is InputEventMouseMotion:
+		if active_handle != null:
+			_handle_mouse_drag(mouse_pos)
 	elif event.is_action_pressed(&"ui_accept"):  # TEMP
 		bake_transform()
 
 
 func _draw() -> void:
+	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
 	image_texture.set_image(base_image)
 	draw_set_transform_matrix(preview_transform)
 	draw_texture(image_texture, Vector2.ZERO)
@@ -105,25 +124,34 @@ func _draw() -> void:
 	# Draw handles
 	for handle in handles:
 		var pos := get_handle_position(handle)
-		var color := Color.RED
 		if handle.type == TransformHandle.Type.MOVE:
 			continue
+		elif handle.type == TransformHandle.Type.SCALE:
+			draw_rect(
+				_circle_to_square(pos, HANDLE_RADIUS * zoom_value), Global.selection_border_color_2
+			)
+			draw_rect(
+				_circle_to_square(pos, (HANDLE_RADIUS - 0.3) * zoom_value),
+				Global.selection_border_color_1
+			)
 		elif handle.type == TransformHandle.Type.ROTATE:
-			color = Color.ORANGE
+			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.ORANGE)
 		elif handle.type == TransformHandle.Type.SKEW:
-			color = Color.GREEN
-		draw_circle(pos, HANDLE_RADIUS, color)
+			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.GREEN)
 
 
-func _handle_mouse_press(mouse_pos: Vector2) -> void:
-	# Begin dragging handle or moving the image.
-	var clicked_handle: TransformHandle = null
+func _get_hovered_handle(mouse_pos: Vector2) -> TransformHandle:
+	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
 	for handle in handles:
-		if get_handle_position(handle).distance_to(mouse_pos) < HANDLE_RADIUS:
-			clicked_handle = handle
-			break
-	if clicked_handle != null:
-		active_handle = clicked_handle
+		if get_handle_position(handle).distance_to(mouse_pos) < HANDLE_RADIUS * zoom_value.x:
+			return handle
+	return null
+
+
+func _handle_mouse_press(mouse_pos: Vector2, hovered_handle: TransformHandle) -> void:
+	# Begin dragging handle or moving the image.
+	if hovered_handle != null:
+		active_handle = hovered_handle
 	else:
 		# Start moving if clicked inside image.
 		var local_click := preview_transform.affine_inverse() * mouse_pos
@@ -151,6 +179,24 @@ func _handle_mouse_drag(mouse_pos: Vector2) -> void:
 		TransformHandle.Type.SKEW:
 			preview_transform = apply_shear(preview_transform, delta, active_handle)
 	queue_redraw()
+
+
+func _set_default_cursor() -> void:
+	var project := Global.current_project
+	var cursor := Input.CURSOR_ARROW
+	if Global.cross_cursor:
+		cursor = Input.CURSOR_CROSS
+	var layer: BaseLayer = project.layers[project.current_layer]
+	if not layer.can_layer_get_drawn():
+		cursor = Input.CURSOR_FORBIDDEN
+
+	if DisplayServer.cursor_get_shape() != cursor:
+		Input.set_default_cursor_shape(cursor)
+
+
+func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
+	var rect := Rect2(center - radius / 2, radius)
+	return rect
 
 
 func get_handle_position(handle: TransformHandle) -> Vector2:
@@ -257,6 +303,29 @@ func in_range(angle: float, lower: float, upper: float) -> bool:
 	if lower > upper:
 		return angle >= lower or angle <= upper
 	return angle > lower and angle < upper
+
+
+func angle_to_cursor(angle: float) -> Input.CursorShape:
+	var deg := fmod(rad_to_deg(angle) + 360.0, 360.0)
+
+	if deg >= 337.5 or deg < 22.5:
+		return Input.CURSOR_HSIZE  # Right
+	elif deg < 67.5:
+		return Input.CURSOR_FDIAGSIZE  # Bottom-right
+	elif deg < 112.5:
+		return Input.CURSOR_VSIZE  # Down
+	elif deg < 157.5:
+		return Input.CURSOR_BDIAGSIZE  # Bottom-left
+	elif deg < 202.5:
+		return Input.CURSOR_HSIZE  # Left
+	elif deg < 247.5:
+		return Input.CURSOR_FDIAGSIZE  # Top-left
+	elif deg < 292.5:
+		return Input.CURSOR_VSIZE  # Up
+	elif deg < 337.5:
+		return Input.CURSOR_BDIAGSIZE  # Top-right
+
+	return Input.CURSOR_ARROW
 
 
 func bake_transform() -> void:
