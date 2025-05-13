@@ -266,7 +266,7 @@ func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Transform2D:
 	var image_size := base_image.get_size() as Vector2
 	var handle_global_position := get_handle_position(handle)
-	var center := pivot * t
+	var center := t * pivot
 	var handle_vector := (handle_global_position - center).normalized()
 	var handle_angle := rad_to_deg(fposmod(handle_vector.angle(), TAU))
 	var is_horizontal := true
