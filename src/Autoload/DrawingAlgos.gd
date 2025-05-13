@@ -378,7 +378,7 @@ func transform_image_with_transform2d(original_image: Image, transform_matrix: T
 	if not is_instance_valid(viewport_texture):
 		return
 	viewport_texture.convert(original_image.get_format())
-	original_image.copy_from(viewport_texture)
+	original_image.copy_from(viewport_texture.get_region(viewport_texture.get_used_rect()))
 
 	if original_image is ImageExtended:
 		original_image.convert_rgb_to_indexed()
