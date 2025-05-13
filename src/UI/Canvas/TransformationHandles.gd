@@ -5,7 +5,15 @@ const ICON := preload("res://assets/graphics/splash_screen/orama_64x64.png")
 const HANDLE_RADIUS := 1.0
 const RS_HANDLE_DISTANCE := 0.1
 
-var base_image: Image
+var base_image: Image:
+	set(value):
+		base_image = value
+		if is_instance_valid(base_image):
+			image_texture = ImageTexture.create_from_image(base_image)
+			pivot = base_image.get_size() / 2
+		set_process_input(is_instance_valid(base_image))
+		queue_redraw()
+
 var image_texture: ImageTexture
 
 # Preview transform, not yet applied to base_image
@@ -80,13 +88,7 @@ class TransformHandle:
 
 func _ready() -> void:
 	Global.camera.zoom_changed.connect(queue_redraw)
-	var img := ICON.get_image()
-	base_image = Image.create_from_data(
-		ICON.get_width(), ICON.get_height(), false, img.get_format(), img.get_data()
-	)
-	image_texture = ImageTexture.create_from_image(base_image)
-	pivot = base_image.get_size() / 2
-	queue_redraw()
+	set_process_input(false)
 
 
 func _input(event: InputEvent) -> void:
@@ -120,9 +122,13 @@ func _input(event: InputEvent) -> void:
 			_handle_mouse_drag(mouse_pos)
 	elif event.is_action_pressed(&"transformation_confirm"):  # TEMP
 		bake_transform()
+	elif event.is_action_pressed("transformation_cancel"):
+		cancel_transform()
 
 
 func _draw() -> void:
+	if not is_instance_valid(base_image):
+		return
 	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
 	image_texture.set_image(base_image)
 	draw_set_transform_matrix(preview_transform)
@@ -333,6 +339,11 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 		return Input.CURSOR_BDIAGSIZE  # Top-right
 
 	return Input.CURSOR_ARROW
+
+
+func cancel_transform() -> void:
+	preview_transform = Transform2D()
+	queue_redraw()
 
 
 func bake_transform() -> void:
