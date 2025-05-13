@@ -331,9 +331,12 @@ func get_transformed_bounds(image_size: Vector2i, transform: Transform2D) -> Rec
 	return Rect2(min_corner, max_corner - min_corner)
 
 
-func transform_image_with_transform2d(original_image: Image, transform_matrix: Transform2D, pivot: Vector2) -> void:
+func transform_image_with_transform2d(
+	original_image: Image, transform_matrix: Transform2D, pivot: Vector2
+) -> void:
 	# Compute the transformation with pivot support
-	var move_to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot)  # translate pivot to origin
+	# translate pivot to origin
+	var move_to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot)
 	var move_back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot)  # move pivot back
 	var full_transform := move_back * transform_matrix * move_to_origin
 
@@ -361,7 +364,9 @@ func transform_image_with_transform2d(original_image: Image, transform_matrix: T
 
 	# Draw the texture
 	var texture := RenderingServer.texture_2d_create(original_image)
-	RenderingServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2.ZERO, original_image.get_size()), texture)
+	RenderingServer.canvas_item_add_texture_rect(
+		ci_rid, Rect2(Vector2.ZERO, original_image.get_size()), texture
+	)
 
 	# Render once
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
@@ -385,10 +390,7 @@ func transform_image_with_transform2d(original_image: Image, transform_matrix: T
 
 
 func transform_rectangle(
-	rect: Rect2,
-	matrix: Transform2D,
-	pivot := rect.size / 2,
-	anchor := Vector2(0.5, 0.5)  # normalized: (0,0)=top-left, (1,1)=bottom-right
+	rect: Rect2, matrix: Transform2D, pivot := rect.size / 2, anchor := Vector2(0.5, 0.5)
 ) -> Rect2:
 	var offset_rect := rect
 	var anchor_point := rect.position + rect.size * anchor

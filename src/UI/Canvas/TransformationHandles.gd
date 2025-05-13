@@ -25,16 +25,22 @@ var handles: Array[TransformHandle] = [
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0.5, 1)),  # Center bottom
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0, 1)),  # Bottom left
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0, 0.5)),  # Center left
-
-	TransformHandle.new(TransformHandle.Type.ROTATE, Vector2(0 - RS_HANDLE_DISTANCE, 0 - RS_HANDLE_DISTANCE)),  # Top left
-	TransformHandle.new(TransformHandle.Type.ROTATE, Vector2(1 + RS_HANDLE_DISTANCE, 0 - RS_HANDLE_DISTANCE)),  # Top right
-	TransformHandle.new(TransformHandle.Type.ROTATE, Vector2(1 + RS_HANDLE_DISTANCE, 1 + RS_HANDLE_DISTANCE)),  # Bottom right
-	TransformHandle.new(TransformHandle.Type.ROTATE, Vector2(0 - RS_HANDLE_DISTANCE, 1 + RS_HANDLE_DISTANCE)),  # Bottom left
-
-	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0.5, 0 - RS_HANDLE_DISTANCE)),  # Center top
-	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(1 + RS_HANDLE_DISTANCE, 0.5)),  # Center right
-	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0.5, 1 + RS_HANDLE_DISTANCE)),  # Center bottom
-	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0 - RS_HANDLE_DISTANCE, 0.5))  # Center left
+	TransformHandle.new(
+		TransformHandle.Type.ROTATE, Vector2(0 - RS_HANDLE_DISTANCE, 0 - RS_HANDLE_DISTANCE)
+	),  # Top left
+	TransformHandle.new(
+		TransformHandle.Type.ROTATE, Vector2(1 + RS_HANDLE_DISTANCE, 0 - RS_HANDLE_DISTANCE)
+	),  # Top right
+	TransformHandle.new(
+		TransformHandle.Type.ROTATE, Vector2(1 + RS_HANDLE_DISTANCE, 1 + RS_HANDLE_DISTANCE)
+	),  # Bottom right
+	TransformHandle.new(
+		TransformHandle.Type.ROTATE, Vector2(0 - RS_HANDLE_DISTANCE, 1 + RS_HANDLE_DISTANCE)
+	),  # Bottom left
+	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0.5, 0 - RS_HANDLE_DISTANCE)),
+	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(1 + RS_HANDLE_DISTANCE, 0.5)),
+	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0.5, 1 + RS_HANDLE_DISTANCE)),
+	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0 - RS_HANDLE_DISTANCE, 0.5))
 ]
 var drag_start: Vector2
 var start_transform := Transform2D()
@@ -42,6 +48,7 @@ var start_transform := Transform2D()
 ## The transformation's pivot. By default it is set to the center of the image.
 var pivot := Vector2.ZERO
 @onready var canvas := get_parent().get_parent() as Canvas
+
 
 class TransformHandle:
 	enum Type { SCALE, ROTATE, SKEW, MOVE }
@@ -68,26 +75,44 @@ class TransformHandle:
 
 func _ready() -> void:
 	var img := ICON.get_image()
-	base_image = Image.create_from_data(ICON.get_width(), ICON.get_height(), false, img.get_format(), img.get_data())
+	base_image = Image.create_from_data(
+		ICON.get_width(), ICON.get_height(), false, img.get_format(), img.get_data()
+	)
 	image_texture = ImageTexture.create_from_image(base_image)
 	pivot = base_image.get_size() / 2
 	queue_redraw()
 
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	var mouse_pos := canvas.current_pixel
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			_handle_mouse_press(mouse_pos)
 		else:
-		# On release, bake the transform if needed
-			#if active_handle != -1:
-				#bake_transform()
 			active_handle = null
 	elif event is InputEventMouseMotion and active_handle != null:
 		_handle_mouse_drag(mouse_pos)
 	elif event.is_action_pressed(&"ui_accept"):  # TEMP
 		bake_transform()
+
+
+func _draw() -> void:
+	image_texture.set_image(base_image)
+	draw_set_transform_matrix(preview_transform)
+	draw_texture(image_texture, Vector2.ZERO)
+	draw_set_transform_matrix(Transform2D.IDENTITY)
+
+	# Draw handles
+	for handle in handles:
+		var pos := get_handle_position(handle)
+		var color := Color.RED
+		if handle.type == TransformHandle.Type.MOVE:
+			continue
+		elif handle.type == TransformHandle.Type.ROTATE:
+			color = Color.ORANGE
+		elif handle.type == TransformHandle.Type.SKEW:
+			color = Color.GREEN
+		draw_circle(pos, HANDLE_RADIUS, color)
 
 
 func _handle_mouse_press(mouse_pos: Vector2) -> void:
@@ -128,25 +153,6 @@ func _handle_mouse_drag(mouse_pos: Vector2) -> void:
 	queue_redraw()
 
 
-func _draw() -> void:
-	image_texture.set_image(base_image)
-	draw_set_transform_matrix(preview_transform)
-	draw_texture(image_texture, Vector2.ZERO)
-	draw_set_transform_matrix(Transform2D.IDENTITY)
-
-	# Draw handles
-	for handle in handles:
-		var pos := get_handle_position(handle)
-		var color := Color.RED
-		if handle.type == TransformHandle.Type.MOVE:
-			continue
-		elif handle.type == TransformHandle.Type.ROTATE:
-			color = Color.ORANGE
-		elif handle.type == TransformHandle.Type.SKEW:
-			color = Color.GREEN
-		draw_circle(pos, HANDLE_RADIUS, color)
-
-
 func get_handle_position(handle: TransformHandle) -> Vector2:
 	var image_size := base_image.get_size()
 	var local := Vector2(image_size.x * handle.pos.x, image_size.y * handle.pos.y)
@@ -171,18 +177,18 @@ func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Tr
 	# Step 2: Determine resize axis and direction
 	var scale_x := 1.0
 	var scale_y := 1.0
-	var anchor_norm := handle.get_anchor()
-	if anchor_norm.x == 0:
+	var anchor := handle.get_anchor()
+	if anchor.x == 0:
 		scale_x = (image_size.x + local_delta.x) / image_size.x
-	elif anchor_norm.x == 1:
+	elif anchor.x == 1:
 		scale_x = (image_size.x - local_delta.x) / image_size.x
-	if anchor_norm.y == 0:
+	if anchor.y == 0:
 		scale_y = (image_size.y + local_delta.y) / image_size.y
-	elif anchor_norm.y == 1:
+	elif anchor.y == 1:
 		scale_y = (image_size.y - local_delta.y) / image_size.y
 
 	if Input.is_action_pressed("shape_center"):
-		anchor_norm = Vector2(0.5, 0.5)
+		anchor = Vector2(0.5, 0.5)
 	if Input.is_action_pressed("shape_perfect"):
 		var u := 1.0 + maxf(local_delta.x / image_size.x, local_delta.y / image_size.y)
 		scale_x = u
@@ -193,7 +199,7 @@ func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Tr
 	var new_t := Transform2D(bx, by, t.origin)
 
 	# Step 4: Keep anchor in place
-	var local_anchor := anchor_norm * image_size
+	var local_anchor := anchor * image_size
 	var world_anchor_before := t * local_anchor
 	var world_anchor_after := new_t * local_anchor
 	new_t.origin += world_anchor_before - world_anchor_after

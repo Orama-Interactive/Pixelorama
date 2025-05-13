@@ -404,7 +404,12 @@ func resize_selection() -> void:
 	var size := resized_rect.size.abs()
 	var scale_amount := Vector2(size) / Vector2(original_preview_image.get_size())
 	var transformation_matrix := Transform2D(angle, Vector2.ZERO).scaled(scale_amount)
-	big_bounding_rectangle = DrawingAlgos.transform_rectangle(original_big_bounding_rectangle, transformation_matrix, original_big_bounding_rectangle.size / 2.0, Vector2(0.5, 0.5))
+	big_bounding_rectangle = DrawingAlgos.transform_rectangle(
+		original_big_bounding_rectangle,
+		transformation_matrix,
+		original_big_bounding_rectangle.size / 2.0,
+		Vector2(0.5, 0.5)
+	)
 	content_pivot = size / 2.0
 	if original_bitmap.is_empty():
 		print("original_bitmap is empty, this shouldn't happen.")
@@ -429,7 +434,9 @@ func resize_selection() -> void:
 		else:
 			var params := {"transformation_matrix": transformation_matrix, "pivot": content_pivot}
 			#preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
-			DrawingAlgos.transform_image_with_transform2d(preview_image, transformation_matrix, content_pivot)
+			DrawingAlgos.transform_image_with_transform2d(
+				preview_image, transformation_matrix, content_pivot
+			)
 			if temp_rect.size.x < 0:
 				preview_image.flip_x()
 			if temp_rect.size.y < 0:
@@ -440,24 +447,28 @@ func resize_selection() -> void:
 
 	var bitmap_params := {"transformation_matrix": transformation_matrix, "pivot": content_pivot}
 	#project.selection_map.resize_bitmap_values(
-		#project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
+	#project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
 	#)
 	var transformed_map := Image.new()
 	transformed_map = project.selection_map.get_region(project.selection_map.get_used_rect())
 	project.selection_map.clear()
-	DrawingAlgos.transform_image_with_transform2d(transformed_map, transformation_matrix, content_pivot)
+	DrawingAlgos.transform_image_with_transform2d(
+		transformed_map, transformation_matrix, content_pivot
+	)
 	var dst := big_bounding_rectangle.position
 	if dst.x < 0:
 		dst.x = 0
 	if dst.y < 0:
 		dst.y = 0
 	var new_bitmap_size := project.selection_map.get_size()
-	new_bitmap_size.x = maxi(project.selection_map.get_size().x, absi(big_bounding_rectangle.position.x) + size.x)
-	new_bitmap_size.y = maxi(project.selection_map.get_size().y, absi(big_bounding_rectangle.position.y) + size.y)
-	project.selection_map.crop(new_bitmap_size.x, new_bitmap_size.y)
-	project.selection_map.blit_rect(
-		transformed_map, Rect2i(Vector2i.ZERO, new_bitmap_size), dst
+	new_bitmap_size.x = maxi(
+		project.selection_map.get_size().x, absi(big_bounding_rectangle.position.x) + size.x
 	)
+	new_bitmap_size.y = maxi(
+		project.selection_map.get_size().y, absi(big_bounding_rectangle.position.y) + size.y
+	)
+	project.selection_map.crop(new_bitmap_size.x, new_bitmap_size.y)
+	project.selection_map.blit_rect(transformed_map, Rect2i(Vector2i.ZERO, new_bitmap_size), dst)
 	project.selection_map_changed()
 	queue_redraw()
 	canvas.queue_redraw()
