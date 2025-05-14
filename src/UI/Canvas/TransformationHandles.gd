@@ -1,22 +1,26 @@
 class_name TransformationHandles
 extends Node2D
 
-const ICON := preload("res://assets/graphics/splash_screen/orama_64x64.png")
 const HANDLE_RADIUS := 1.0
 const RS_HANDLE_DISTANCE := 0.1
 
-var base_image: Image:
+var transformed_selection_map: SelectionMap:
 	set(value):
-		base_image = value
-		if is_instance_valid(base_image):
-			image_texture = ImageTexture.create_from_image(base_image)
-			pivot = base_image.get_size() / 2
-		set_process_input(is_instance_valid(base_image))
+		transformed_selection_map = value
+		if is_instance_valid(transformed_selection_map):
+			pivot = transformed_selection_map.get_size() / 2
+		set_process_input(is_instance_valid(transformed_selection_map))
+		queue_redraw()
+var transformed_image: Image:
+	set(value):
+		transformed_image = value
+		if is_instance_valid(transformed_image):
+			image_texture = ImageTexture.create_from_image(transformed_image)
 		queue_redraw()
 
 var image_texture: ImageTexture
 
-# Preview transform, not yet applied to base_image
+# Preview transform, not yet applied to transformed_image
 var preview_transform := Transform2D()
 
 # Tracking handles
@@ -127,10 +131,10 @@ func _input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
-	if not is_instance_valid(base_image):
+	if not is_instance_valid(transformed_image):
 		return
 	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
-	image_texture.set_image(base_image)
+	image_texture.set_image(transformed_image)
 	draw_set_transform_matrix(preview_transform)
 	draw_texture(image_texture, Vector2.ZERO)
 	draw_set_transform_matrix(Transform2D.IDENTITY)
@@ -169,7 +173,7 @@ func _handle_mouse_press(mouse_pos: Vector2, hovered_handle: TransformHandle) ->
 	else:
 		# Start moving if clicked inside image.
 		var local_click := preview_transform.affine_inverse() * mouse_pos
-		var img_rect := Rect2(Vector2.ZERO, base_image.get_size())
+		var img_rect := Rect2(Vector2.ZERO, transformed_image.get_size())
 		if img_rect.has_point(local_click):
 			active_handle = handles[0]
 		else:
@@ -213,7 +217,7 @@ func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 
 
 func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vector2:
-	var image_size := base_image.get_size()
+	var image_size := transformed_image.get_size()
 	var local := Vector2(image_size.x * handle.pos.x, image_size.y * handle.pos.y)
 	return t * local
 
@@ -227,7 +231,7 @@ func transform_around(t: Transform2D, m: Transform2D, pivot_local: Vector2) -> T
 
 
 func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:
-	var image_size := base_image.get_size() as Vector2
+	var image_size := transformed_image.get_size() as Vector2
 	# Step 1: Convert drag to local space
 	var local_start := t.affine_inverse() * drag_start
 	var local_now := t.affine_inverse() * (drag_start + delta)
@@ -277,7 +281,7 @@ func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 
 
 func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Transform2D:
-	var image_size := base_image.get_size() as Vector2
+	var image_size := transformed_image.get_size() as Vector2
 	var handle_global_position := get_handle_position(handle, t)
 	var center := t * pivot
 	var handle_vector := (handle_global_position - center).normalized()
@@ -347,9 +351,11 @@ func cancel_transform() -> void:
 
 
 func bake_transform() -> void:
-	# Destructively apply preview_transform to base_image
-	DrawingAlgos.transform_image_with_transform2d(base_image, preview_transform, pivot)
-	pivot = base_image.get_size() / 2
+	# TODO: Handle undo/redo
+	# Destructively apply preview_transform to transformed_image
+	DrawingAlgos.transform_image_with_transform2d(transformed_selection_map, preview_transform, pivot)
+	DrawingAlgos.transform_image_with_transform2d(transformed_image, preview_transform, pivot)
+	pivot = transformed_image.get_size() / 2
 	# Reset preview_transform
 	#var offset := preview_transform.get_origin()
 	preview_transform = Transform2D()

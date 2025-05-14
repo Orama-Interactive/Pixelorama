@@ -6,8 +6,8 @@ const OUTLINE_INLINE_SHADER := preload("res://src/Shaders/Effects/OutlineInline.
 
 
 func is_pixel_selected(pixel: Vector2i, calculate_offset := true) -> bool:
-	var selection_position: Vector2i = Global.canvas.selection.big_bounding_rectangle.position
 	if calculate_offset:
+		var selection_position: Vector2i = Global.canvas.selection.big_bounding_rectangle.position
 		if selection_position.x < 0:
 			pixel.x -= selection_position.x
 		if selection_position.y < 0:
@@ -120,11 +120,9 @@ func return_cropped_copy(size: Vector2i) -> SelectionMap:
 
 func move_bitmap_values(project: Project, move_offset := true) -> void:
 	var size := project.size
-	var selection_node = Global.canvas.selection
-	var selection_position: Vector2i = selection_node.big_bounding_rectangle.position
-	var selection_end: Vector2i = selection_node.big_bounding_rectangle.end
-
 	var selection_rect := get_used_rect()
+	var selection_position := selection_rect.position + project.selection_offset
+	var selection_end := selection_rect.end + project.selection_offset
 	var smaller_image := get_region(selection_rect)
 	clear()
 	var dst := selection_position
@@ -163,13 +161,12 @@ func resize_bitmap_values(
 	project: Project, new_size: Vector2i, flip_hor: bool, flip_ver: bool
 ) -> void:
 	var size := project.size
-	var selection_node: Node2D = Global.canvas.selection
-	var selection_position: Vector2i = selection_node.big_bounding_rectangle.position
+	var selection_rect := get_used_rect()
+	var selection_position := selection_rect.position + project.selection_offset
 	var dst := selection_position
 	var new_bitmap_size := size
 	new_bitmap_size.x = maxi(size.x, absi(selection_position.x) + new_size.x)
 	new_bitmap_size.y = maxi(size.y, absi(selection_position.y) + new_size.y)
-	var selection_rect := get_used_rect()
 	var smaller_image := get_region(selection_rect)
 	if selection_position.x <= 0:
 		project.selection_offset.x = selection_position.x
