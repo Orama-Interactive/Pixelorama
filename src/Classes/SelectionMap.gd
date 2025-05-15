@@ -98,6 +98,13 @@ func invert() -> void:
 	gen.generate_image(self, INVERT_SHADER, params, get_size())
 
 
+func get_selection_rect(project: Project) -> Rect2i:
+	var rect := get_used_rect()
+	rect.position += project.selection_offset
+	rect.end += project.selection_offset
+	return rect
+
+
 ## Returns a copy of itself that is cropped to [param size].
 ## Used for when the selection map is bigger than the [Project] size.
 func return_cropped_copy(size: Vector2i) -> SelectionMap:
@@ -120,9 +127,9 @@ func return_cropped_copy(size: Vector2i) -> SelectionMap:
 
 func move_bitmap_values(project: Project, move_offset := true) -> void:
 	var size := project.size
-	var selection_rect := get_used_rect()
-	var selection_position := selection_rect.position + project.selection_offset
-	var selection_end := selection_rect.end + project.selection_offset
+	var selection_rect := get_selection_rect(project)
+	var selection_position := selection_rect.position
+	var selection_end := selection_rect.end
 	var smaller_image := get_region(selection_rect)
 	clear()
 	var dst := selection_position
@@ -161,8 +168,8 @@ func resize_bitmap_values(
 	project: Project, new_size: Vector2i, flip_hor: bool, flip_ver: bool
 ) -> void:
 	var size := project.size
-	var selection_rect := get_used_rect()
-	var selection_position := selection_rect.position + project.selection_offset
+	var selection_rect := get_selection_rect(project)
+	var selection_position := selection_rect.position
 	var dst := selection_position
 	var new_bitmap_size := size
 	new_bitmap_size.x = maxi(size.x, absi(selection_position.x) + new_size.x)

@@ -17,7 +17,7 @@ var transformed_image: Image:
 		if is_instance_valid(transformed_image):
 			image_texture = ImageTexture.create_from_image(transformed_image)
 		queue_redraw()
-
+var pre_transform_selection_offset: Vector2
 var image_texture: ImageTexture
 
 # Preview transform, not yet applied to transformed_image
@@ -361,6 +361,17 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 		return Input.CURSOR_BDIAGSIZE  # Top-right
 
 	return Input.CURSOR_ARROW
+
+
+func begin_transform(image: Image = null, project := Global.current_project) -> void:
+	preview_transform = Transform2D()
+	if is_instance_valid(image):
+		transformed_image = image
+		return
+	transformed_image = project.new_empty_image()
+	DrawingAlgos.blend_layers(
+		transformed_image, project.frames[project.current_frame], Vector2i.ZERO, project, true
+	)
 
 
 func cancel_transform() -> void:
