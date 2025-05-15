@@ -216,10 +216,27 @@ func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 	return rect
 
 
+func is_transforming_content() -> bool:
+	return preview_transform != Transform2D.IDENTITY
+
+
 func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vector2:
 	var image_size := transformed_image.get_size()
 	var local := Vector2(image_size.x * handle.pos.x, image_size.y * handle.pos.y)
-	return t * local
+	var world_pos := t * local
+	if handle.type == TransformHandle.Type.ROTATE or handle.type == TransformHandle.Type.SKEW:
+		# Determine direction of offset from center
+		var rot_and_skew := transform_remove_scale(t)
+		var offset := rot_and_skew.basis_xform(handle.get_direction() * RS_HANDLE_DISTANCE)
+		offset = offset.normalized() * RS_HANDLE_DISTANCE
+		world_pos += offset
+	return world_pos
+
+
+func transform_remove_scale(t: Transform2D) -> Transform2D:
+	var x := t.x.normalized()
+	var y := t.y.normalized()
+	return Transform2D(x, y, Vector2.ZERO)
 
 
 ## Apply an affine transform [param m] around [param pivot_local] onto [param t].
@@ -253,7 +270,7 @@ func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Tr
 	if Input.is_action_pressed("shape_center"):
 		anchor = Vector2(0.5, 0.5)
 	if Input.is_action_pressed("shape_perfect"):
-		var u := 1.0 + maxf(local_delta.x / image_size.x, local_delta.y / image_size.y)
+		var u := 1.0 + maxf(delta.x / image_size.x, delta.y / image_size.y)
 		scale_x = u
 		scale_y = u
 	# Step 3: Build scaled basis vectors from original
@@ -273,8 +290,9 @@ func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Tr
 ## Rotation around pivot based on initial drag.
 func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 	# Compute initial and current angles
-	var start_vec := drag_start - pivot
-	var curr_vec := mouse_pos - pivot
+	var pivot_world := t * pivot
+	var start_vec := drag_start - pivot_world
+	var curr_vec := mouse_pos - pivot_world
 	var delta_ang := fposmod(curr_vec.angle() - start_vec.angle(), TAU)
 	var m := Transform2D().rotated(delta_ang)
 	return transform_around(t, m, pivot)
@@ -327,19 +345,19 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 
 	if deg >= 337.5 or deg < 22.5:
 		return Input.CURSOR_HSIZE  # Right
-	elif deg < 67.5:
+	if deg < 67.5:
 		return Input.CURSOR_FDIAGSIZE  # Bottom-right
-	elif deg < 112.5:
+	if deg < 112.5:
 		return Input.CURSOR_VSIZE  # Down
-	elif deg < 157.5:
+	if deg < 157.5:
 		return Input.CURSOR_BDIAGSIZE  # Bottom-left
-	elif deg < 202.5:
+	if deg < 202.5:
 		return Input.CURSOR_HSIZE  # Left
-	elif deg < 247.5:
+	if deg < 247.5:
 		return Input.CURSOR_FDIAGSIZE  # Top-left
-	elif deg < 292.5:
+	if deg < 292.5:
 		return Input.CURSOR_VSIZE  # Up
-	elif deg < 337.5:
+	if deg < 337.5:
 		return Input.CURSOR_BDIAGSIZE  # Top-right
 
 	return Input.CURSOR_ARROW
@@ -348,6 +366,10 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 func cancel_transform() -> void:
 	preview_transform = Transform2D()
 	queue_redraw()
+
+
+func bake_transform_to_image(image: Image) -> void:
+	DrawingAlgos.transform_image_with_transform2d(image, preview_transform, pivot)
 
 
 func bake_transform() -> void:
