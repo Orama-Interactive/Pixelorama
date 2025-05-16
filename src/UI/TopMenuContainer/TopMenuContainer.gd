@@ -990,6 +990,8 @@ func _toggle_show_grid() -> void:
 func _toggle_show_pixel_grid() -> void:
 	Global.draw_pixel_grid = !Global.draw_pixel_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_PIXEL_GRID, Global.draw_pixel_grid)
+	if Global.canvas.pixel_grid:
+		Global.canvas.pixel_grid.queue_redraw()
 
 
 func _toggle_show_pixel_indices() -> void:
