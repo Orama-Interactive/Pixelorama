@@ -823,7 +823,7 @@ func crop_to_selection() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var redo_data := {}
 	var undo_data := {}
-	var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
+	var rect := Global.current_project.selection_map.get_selection_rect(Global.current_project)
 	# Loop through all the cels to crop them
 	for cel in Global.current_project.get_all_pixel_cels():
 		var cel_image := cel.get_image()

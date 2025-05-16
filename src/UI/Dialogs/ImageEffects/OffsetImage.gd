@@ -31,7 +31,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	var offset := Vector2(offset_x, offset_y)
 	var selection_tex: ImageTexture
 	if selection_checkbox.button_pressed and project.has_selection:
-		var selection := project.selection_map.return_cropped_copy(project.size)
+		var selection := project.selection_map.return_cropped_copy(project, project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
 
 	var params := {"offset": offset, "wrap_around": wrap_around, "selection": selection_tex}

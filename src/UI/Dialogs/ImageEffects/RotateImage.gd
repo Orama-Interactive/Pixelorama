@@ -85,7 +85,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	var image := Image.new()
 	image.copy_from(cel)
 	if project.has_selection and selection_checkbox.button_pressed:
-		var selection := project.selection_map.return_cropped_copy(project.size)
+		var selection := project.selection_map.return_cropped_copy(project, project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
 
 		if not DrawingAlgos.type_is_shader(rotation_algorithm):

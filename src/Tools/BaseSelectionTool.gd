@@ -67,7 +67,8 @@ func update_config() -> void:
 
 func set_spinbox_values() -> void:
 	_skip_slider_logic = true
-	var select_rect: Rect2i = selection_node.big_bounding_rectangle
+	var project := Global.current_project
+	var select_rect := project.selection_map.get_selection_rect(project)
 	var has_selection := select_rect.has_area()
 	if not has_selection:
 		size_sliders.press_ratio_button(false)
@@ -84,6 +85,7 @@ func draw_start(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	var project := Global.current_project
+	var select_rect := project.selection_map.get_selection_rect(project)
 	undo_data = selection_node.get_undo_data(false)
 	_intersect = Input.is_action_pressed("selection_intersect", true)
 	_add = Input.is_action_pressed("selection_add", true)
@@ -109,7 +111,7 @@ func draw_start(pos: Vector2i) -> void:
 						selection_node.preview_image,
 						selection_node.preview_image,
 						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-						selection_node.big_bounding_rectangle.position
+						select_rect.position
 					)
 
 				project.selection_map.move_bitmap_values(project)
@@ -122,7 +124,7 @@ func draw_start(pos: Vector2i) -> void:
 						selection_node.preview_image,
 						selection_node.preview_image,
 						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-						selection_node.big_bounding_rectangle.position
+						select_rect.position
 					)
 				Global.canvas.update_selected_cels_textures()
 
@@ -151,9 +153,10 @@ func draw_move(pos: Vector2i) -> void:
 		return
 	if not _move:
 		return
-
+	var project := Global.current_project
+	var select_rect := project.selection_map.get_selection_rect(project)
 	if Tools.is_placing_tiles():
-		var cel := Global.current_project.get_current_cel() as CelTileMap
+		var cel := project.get_current_cel() as CelTileMap
 		var grid_size := cel.get_tile_size()
 		var offset := cel.offset % grid_size
 		pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size, offset)
@@ -165,11 +168,9 @@ func draw_move(pos: Vector2i) -> void:
 			pos.x = _start_pos.x
 	if Input.is_action_pressed("transform_snap_grid"):
 		_offset = _offset.snapped(Global.grids[0].grid_size)
-		var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
-		selection_node.big_bounding_rectangle.position = prev_pos.snapped(Global.grids[0].grid_size)
-		selection_node.marching_ants_outline.offset += Vector2(
-			selection_node.big_bounding_rectangle.position - prev_pos
-		)
+		var prev_pos: Vector2i = select_rect.position
+		#big_bounding_rectangle.position = prev_pos.snapped(Global.grids[0].grid_size)
+		selection_node.marching_ants_outline.offset += Vector2(select_rect.position - prev_pos)
 		pos = pos.snapped(Global.grids[0].grid_size)
 		var grid_offset := Global.grids[0].grid_offset
 		grid_offset = Vector2i(
@@ -184,7 +185,7 @@ func draw_move(pos: Vector2i) -> void:
 		selection_node.move_borders(pos - _offset)
 
 	_offset = pos
-	_set_cursor_text(selection_node.big_bounding_rectangle)
+	_set_cursor_text(select_rect)
 
 
 func draw_end(pos: Vector2i) -> void:
@@ -254,7 +255,7 @@ func _on_Position_value_changed(value: Vector2i) -> void:
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
 	timer.start()
-	selection_node.big_bounding_rectangle.position = value
+	#selection_node.big_bounding_rectangle.position = value
 
 	project.selection_map.move_bitmap_values(project)
 	project.selection_map_changed()

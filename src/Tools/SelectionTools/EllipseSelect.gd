@@ -107,7 +107,6 @@ func apply_selection(_position: Vector2i) -> void:
 			mirror_rect.end = mirror_ends[i]
 			set_ellipse(project.selection_map, mirror_rect.abs().position)
 
-		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 		Global.canvas.selection.commit_undo("Select", undo_data)
 	Global.canvas.previews_sprite.texture = null
 

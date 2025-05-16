@@ -66,9 +66,9 @@ func _prepare_movement_rect() -> void:
 	var project := Global.current_project
 	if project.has_selection:
 		rect_bounds = canvas.selection.preview_image.get_used_rect()
-		rect_bounds.position += Vector2i(canvas.selection.big_bounding_rectangle.position)
+		rect_bounds.position += Vector2i(project.selection_map.get_selection_rect(project).position)
 		if !rect_bounds.has_area():
-			rect_bounds = canvas.selection.big_bounding_rectangle
+			rect_bounds = project.selection_map.get_selection_rect(project)
 		return
 	if rect_bounds.has_area():
 		return

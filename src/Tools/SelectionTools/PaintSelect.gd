@@ -102,7 +102,6 @@ func apply_selection(pos: Vector2i) -> void:
 		# Handle mirroring
 		var mirror := mirror_array(_draw_points)
 		paint_selection(project, previous_selection_map, mirror)
-		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:
 			Global.canvas.selection.clear_selection()

@@ -5,9 +5,9 @@ const INVERT_SHADER := preload("res://src/Shaders/Effects/Invert.gdshader")
 const OUTLINE_INLINE_SHADER := preload("res://src/Shaders/Effects/OutlineInline.gdshader")
 
 
-func is_pixel_selected(pixel: Vector2i, calculate_offset := true) -> bool:
+func is_pixel_selected(pixel: Vector2i, calculate_offset := true, project := Global.current_project) -> bool:
 	if calculate_offset:
-		var selection_position: Vector2i = Global.canvas.selection.big_bounding_rectangle.position
+		var selection_position := get_selection_rect(project).position
 		if selection_position.x < 0:
 			pixel.x -= selection_position.x
 		if selection_position.y < 0:
@@ -101,17 +101,16 @@ func invert() -> void:
 func get_selection_rect(project: Project) -> Rect2i:
 	var rect := get_used_rect()
 	rect.position += project.selection_offset
-	rect.end += project.selection_offset
 	return rect
 
 
 ## Returns a copy of itself that is cropped to [param size].
 ## Used for when the selection map is bigger than the [Project] size.
-func return_cropped_copy(size: Vector2i) -> SelectionMap:
+func return_cropped_copy(project: Project, size: Vector2i) -> SelectionMap:
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(self)
 	var diff := Vector2i.ZERO
-	var selection_position: Vector2i = Global.canvas.selection.big_bounding_rectangle.position
+	var selection_position := project.selection_offset
 	if selection_position.x < 0:
 		diff.x += selection_position.x
 	if selection_position.y < 0:
@@ -125,12 +124,13 @@ func return_cropped_copy(size: Vector2i) -> SelectionMap:
 	return selection_map_copy
 
 
+## TODO: Add move_to as a parameter, or perhaps even remove this method completely.
 func move_bitmap_values(project: Project, move_offset := true) -> void:
 	var size := project.size
 	var selection_rect := get_selection_rect(project)
 	var selection_position := selection_rect.position
 	var selection_end := selection_rect.end
-	var smaller_image := get_region(selection_rect)
+	var smaller_image := get_region(get_used_rect())
 	clear()
 	var dst := selection_position
 	var x_diff := selection_end.x - size.x
@@ -162,38 +162,6 @@ func move_bitmap_values(project: Project, move_offset := true) -> void:
 
 	crop(nw, nh)
 	blit_rect(smaller_image, Rect2i(Vector2i.ZERO, Vector2i(nw, nh)), dst)
-
-
-func resize_bitmap_values(
-	project: Project, new_size: Vector2i, flip_hor: bool, flip_ver: bool
-) -> void:
-	var size := project.size
-	var selection_rect := get_selection_rect(project)
-	var selection_position := selection_rect.position
-	var dst := selection_position
-	var new_bitmap_size := size
-	new_bitmap_size.x = maxi(size.x, absi(selection_position.x) + new_size.x)
-	new_bitmap_size.y = maxi(size.y, absi(selection_position.y) + new_size.y)
-	var smaller_image := get_region(selection_rect)
-	if selection_position.x <= 0:
-		project.selection_offset.x = selection_position.x
-		dst.x = 0
-	else:
-		project.selection_offset.x = 0
-	if selection_position.y <= 0:
-		project.selection_offset.y = selection_position.y
-		dst.y = 0
-	else:
-		project.selection_offset.y = 0
-	clear()
-	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
-	if flip_hor:
-		smaller_image.flip_x()
-	if flip_ver:
-		smaller_image.flip_y()
-	if new_bitmap_size != size:
-		crop(new_bitmap_size.x, new_bitmap_size.y)
-	blit_rect(smaller_image, Rect2i(Vector2i.ZERO, new_bitmap_size), dst)
 
 
 func expand(width: int, brush: int) -> void:

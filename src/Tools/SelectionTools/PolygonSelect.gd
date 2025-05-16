@@ -112,7 +112,6 @@ func apply_selection(pos: Vector2i) -> void:
 		# Handle mirroring
 		var callable := lasso_selection.bind(project, previous_selection_map)
 		mirror_array(_draw_points, callable)
-		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:
 			Global.canvas.selection.clear_selection()

@@ -515,7 +515,7 @@ func delete(selected_cels := true) -> void:
 
 	if project.has_selection:
 		var blank := project.new_empty_image()
-		var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
+		var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
 		var selection_rect := project.selection_map.get_selection_rect(project)
 		for image in images:
 			image.blit_rect_mask(blank, selection_map_copy, selection_rect, selection_rect.position)
@@ -622,6 +622,6 @@ func _get_selected_image(cel_image: Image) -> Image:
 	var image := Image.create(
 		selection_rect.size.x, selection_rect.size.y, false, project.get_image_format()
 	)
-	var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
+	var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
 	image.blit_rect_mask(cel_image, selection_map_copy, selection_rect, Vector2i.ZERO)
 	return image
