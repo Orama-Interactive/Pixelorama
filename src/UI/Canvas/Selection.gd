@@ -11,7 +11,9 @@ var flag_tilemode := false
 var undo_data: Dictionary
 var arrow_key_move := false
 var is_pasting := false
-## The bounding rectangle of the selection. Always has a non-negative size.
+
+var preview_selection_map := SelectionMap.new()
+var preview_selection_texture := ImageTexture.new()
 
 @onready var canvas := get_parent() as Canvas
 @onready var transformation_handles := $TransformationHandles as TransformationHandles
@@ -19,6 +21,8 @@ var is_pasting := false
 
 
 func _ready() -> void:
+	marching_ants_outline.texture = preview_selection_texture
+	transformation_handles.preview_transform_changed.connect(_update_marching_ants)
 	Global.project_switched.connect(_project_switched)
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 
@@ -158,15 +162,16 @@ func transform_content_confirm() -> void:
 		return
 	var project := Global.current_project
 	var preview_image := transformation_handles.transformed_image
-	var matrix := transformation_handles.preview_transform
-	var transformed_selection := Image.new()
-	transformed_selection.copy_from(transformation_handles.transformed_selection_map)
-	var transformation_origin := DrawingAlgos.get_transformed_bounds(transformed_selection.get_size(), matrix).position.ceil()
-	transformation_handles.bake_transform_to_image(transformed_selection)
-	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
-	project.selection_map.clear()
-	project.selection_map.blit_rect(transformed_selection, selection_size_rect, transformation_origin)
+	transformation_handles.bake_transform_to_selection(project.selection_map)
+	#var matrix := transformation_handles.preview_transform
+	#var transformed_selection := SelectionMap.new()
+	#transformed_selection.copy_from(transformation_handles.transformed_selection_map)
+	#var transformation_origin := DrawingAlgos.get_transformed_bounds(transformed_selection.get_size(), matrix).position.ceil()
+	#transformation_handles.bake_transform_to_image(transformed_selection)
+	#var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
+	#project.selection_map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)
 	var selection_rect := project.selection_map.get_selection_rect(project)
+	var selection_size_rect := Rect2i(Vector2i.ZERO, selection_rect.size)
 	for cel in _get_selected_draw_cels():
 		var cel_image := cel.get_image()
 		var src := Image.new()
@@ -268,6 +273,13 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	if undo_image:
 		Global.current_project.serialize_cel_undo_data(_get_selected_draw_cels(), data)
 	return data
+
+
+func _update_marching_ants() -> void:
+	preview_selection_map.copy_from(Global.current_project.selection_map)
+	if is_instance_valid(transformation_handles.transformed_selection_map):
+		transformation_handles.bake_transform_to_selection(preview_selection_map)
+	preview_selection_texture.set_image(preview_selection_map)
 
 
 # TODO: Change BaseCel to PixelCel if Godot ever fixes issues
@@ -486,7 +498,7 @@ func delete(selected_cels := true) -> void:
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if transformation_handles.is_transforming_content():
-		transformation_handles.cancel_transform()
+		transformation_handles.reset_transform()
 		is_pasting = false
 		queue_redraw()
 		commit_undo("Draw", undo_data)
@@ -599,6 +611,7 @@ func select_cel_pixels(layer: BaseLayer, frame: Frame) -> void:
 
 func _project_switched() -> void:
 	marching_ants_outline.offset = Global.current_project.selection_offset
+	_update_marching_ants()
 	queue_redraw()
 
 

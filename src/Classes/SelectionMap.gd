@@ -124,6 +124,11 @@ func return_cropped_copy(project: Project, size: Vector2i) -> SelectionMap:
 	return selection_map_copy
 
 
+func blit_rect_custom(new_map: SelectionMap, rect: Rect2i, origin: Vector2i) -> void:
+	clear()
+	blit_rect(new_map, rect, origin)
+
+
 ## TODO: Add move_to as a parameter, or perhaps even remove this method completely.
 func move_bitmap_values(project: Project, move_offset := true) -> void:
 	var size := project.size

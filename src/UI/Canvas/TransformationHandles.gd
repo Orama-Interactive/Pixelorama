@@ -2,6 +2,7 @@ class_name TransformationHandles
 extends Node2D
 
 signal is_transforming_content_changed
+signal preview_transform_changed
 
 const HANDLE_RADIUS := 1.0
 const RS_HANDLE_DISTANCE := 2
@@ -23,7 +24,10 @@ var pre_transform_selection_offset: Vector2
 var image_texture: ImageTexture
 
 # Preview transform, not yet applied to transformed_image
-var preview_transform := Transform2D()
+var preview_transform := Transform2D():
+	set(value):
+		preview_transform = value
+		preview_transform_changed.emit()
 
 # Tracking handles
 var active_handle: TransformHandle:
@@ -383,7 +387,7 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 	)
 
 
-func cancel_transform() -> void:
+func reset_transform() -> void:
 	preview_transform = Transform2D()
 	is_transforming_content_changed.emit()
 	queue_redraw()
@@ -393,11 +397,10 @@ func bake_transform_to_image(image: Image) -> void:
 	DrawingAlgos.transform_image_with_transform2d(image, preview_transform, pivot)
 
 
-func bake_transform() -> void:
-	# TODO: Handle undo/redo
-	# Destructively apply preview_transform to transformed_image
-	DrawingAlgos.transform_image_with_transform2d(transformed_selection_map, preview_transform, pivot)
-	if is_instance_valid(transformed_image):
-		DrawingAlgos.transform_image_with_transform2d(transformed_image, preview_transform, pivot)
-	pivot = transformed_selection_map.get_size() / 2
-	cancel_transform()
+func bake_transform_to_selection(map: SelectionMap) -> void:
+	var transformed_selection := SelectionMap.new()
+	transformed_selection.copy_from(transformed_selection_map)
+	var transformation_origin := DrawingAlgos.get_transformed_bounds(transformed_selection.get_size(), preview_transform).position.ceil()
+	bake_transform_to_image(transformed_selection)
+	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
+	map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)
