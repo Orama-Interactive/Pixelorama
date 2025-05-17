@@ -97,18 +97,19 @@ func _ready() -> void:
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_SORT_CHILDREN:
-		_resort()
-	elif (
-		what == NOTIFICATION_DRAG_BEGIN
-		and _can_handle_drag_data(get_viewport().gui_get_drag_data())
-		and not hide_single_tab
-	):
-		_drag_n_drop_panel.set_enabled(true, not _layout.root.is_empty())
-		set_process_input(true)
-	elif what == NOTIFICATION_DRAG_END:
-		_drag_n_drop_panel.set_enabled(false)
-		set_process_input(false)
+	match what:
+		NOTIFICATION_SORT_CHILDREN:
+			_resort()
+		NOTIFICATION_DRAG_BEGIN:
+			if not _can_handle_drag_data(get_viewport().gui_get_drag_data()):
+				return
+			if hide_single_tab:  # Moveable Panels is disabled
+				return
+			_drag_n_drop_panel.set_enabled(true, not _layout.root.is_empty())
+			set_process_input(true)
+		NOTIFICATION_DRAG_END:
+			_drag_n_drop_panel.set_enabled(false)
+			set_process_input(false)
 
 
 func _input(event: InputEvent) -> void:
