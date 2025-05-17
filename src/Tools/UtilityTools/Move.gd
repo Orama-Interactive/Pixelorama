@@ -17,7 +17,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("transform_snap_grid"):
 		_snap_to_grid = true
 		_offset = _offset.snapped(Global.grids[0].grid_size)
-		if Global.current_project.has_selection and selection_node.is_moving_content:
+		if Global.current_project.has_selection and selection_node.transformation_handles.is_transforming_content():
 			var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
 			selection_node.big_bounding_rectangle.position = Vector2i(
 				prev_pos.snapped(Global.grids[0].grid_size)
@@ -51,7 +51,7 @@ func draw_start(pos: Vector2i) -> void:
 	else:
 		if Global.current_project.has_selection:
 			selection_node.transform_content_start()
-	_content_transformation_check = selection_node.is_moving_content
+	_content_transformation_check = selection_node.transformation_handles.is_transforming_content()
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
 
@@ -62,7 +62,7 @@ func draw_move(pos: Vector2i) -> void:
 		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
 	# while the content is being moved
-	if _content_transformation_check != selection_node.is_moving_content:
+	if _content_transformation_check != selection_node.transformation_handles.is_transforming_content():
 		return
 	pos = _snap_position(pos)
 
@@ -88,7 +88,7 @@ func draw_end(pos: Vector2i) -> void:
 		return
 	if (
 		_start_pos != Vector2i(Vector2.INF)
-		and _content_transformation_check == selection_node.is_moving_content
+		and _content_transformation_check == selection_node.transformation_handles.is_transforming_content()
 	):
 		pos = _snap_position(pos)
 		if Global.current_project.has_selection and not Tools.is_placing_tiles():

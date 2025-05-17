@@ -1,8 +1,6 @@
 class_name SelectionNode
 extends Node2D
 
-signal is_moving_content_changed
-
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
 const KEY_MOVE_ACTION_NAMES: PackedStringArray = [&"ui_up", &"ui_down", &"ui_left", &"ui_right"]
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
@@ -11,10 +9,6 @@ const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 var flag_tilemode := false
 
 var undo_data: Dictionary
-var is_moving_content := false:
-	set(value):
-		is_moving_content = value
-		is_moving_content_changed.emit()
 var arrow_key_move := false
 var is_pasting := false
 ## The bounding rectangle of the selection. Always has a non-negative size.
@@ -26,18 +20,16 @@ var is_pasting := false
 
 func _ready() -> void:
 	Global.project_switched.connect(_project_switched)
-	# It's being set to true only when the big_bounding_rectangle has a size larger than 0
-	set_process_input(false)
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 
 
-#func _input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	#var project := Global.current_project
-	#if is_moving_content:
-		#if event.is_action_pressed(&"transformation_confirm"):
-			#transform_content_confirm()
-		#elif event.is_action_pressed(&"transformation_cancel"):
-			#transform_content_cancel()
+	if transformation_handles.is_transforming_content():
+		if event.is_action_pressed(&"transformation_confirm"):
+			transform_content_confirm()
+		elif event.is_action_pressed(&"transformation_cancel"):
+			transform_content_cancel()
 	#if not project.layers[project.current_layer].can_layer_get_drawn():
 		#return
 	#if event is InputEventKey:
@@ -162,12 +154,19 @@ func select_rect(rect: Rect2i, operation := SelectionOperation.ADD) -> void:
 
 
 func transform_content_confirm() -> void:
-	if not is_moving_content:
+	if not transformation_handles.is_transforming_content():
 		return
 	var project := Global.current_project
 	var preview_image := transformation_handles.transformed_image
-	var transformed_selection := transformation_handles.transformed_selection_map
-	var selection_rect := transformed_selection.get_selection_rect(project)
+	var matrix := transformation_handles.preview_transform
+	var transformed_selection := Image.new()
+	transformed_selection.copy_from(transformation_handles.transformed_selection_map)
+	var transformation_origin := DrawingAlgos.get_transformed_bounds(transformed_selection.get_size(), matrix).position.ceil()
+	transformation_handles.bake_transform_to_image(transformed_selection)
+	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
+	project.selection_map.clear()
+	project.selection_map.blit_rect(transformed_selection, selection_size_rect, transformation_origin)
+	var selection_rect := project.selection_map.get_selection_rect(project)
 	for cel in _get_selected_draw_cels():
 		var cel_image := cel.get_image()
 		var src := Image.new()
@@ -192,22 +191,13 @@ func transform_content_confirm() -> void:
 		if Tools.is_placing_tiles():
 			if cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 				continue
-			cel_image.blit_rect(
-				src,
-				Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-				selection_rect.position
-			)
+			cel_image.blit_rect(src, selection_size_rect, selection_rect.position)
 		else:
-			cel_image.blit_rect_mask(
-				src,
-				src,
-				Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-				selection_rect.position
-			)
+			cel_image.blit_rect_mask(src, src, selection_size_rect, selection_rect.position)
 		cel_image.convert_rgb_to_indexed()
+	project.selection_map_changed()
 	commit_undo("Move Selection", undo_data)
 
-	is_moving_content = false
 	is_pasting = false
 	queue_redraw()
 	canvas.queue_redraw()
@@ -219,7 +209,6 @@ func transform_content_cancel() -> void:
 	var project := Global.current_project
 	project.selection_offset = transformation_handles.pre_transform_selection_offset
 
-	is_moving_content = false
 	#project.selection_map.copy_from(original_bitmap)
 	project.selection_map_changed()
 	for cel in _get_selected_draw_cels():
@@ -315,7 +304,7 @@ func get_enclosed_image() -> Image:
 
 	var image := project.get_current_cel().get_image()
 	var enclosed_img := Image.new()
-	if is_moving_content:
+	if transformation_handles.is_transforming_content():
 		enclosed_img.copy_from(transformation_handles.transformed_image)
 	else:
 		enclosed_img = _get_selected_image(image)
@@ -347,7 +336,7 @@ func copy() -> void:
 		cl_big_bounding_rectangle = Rect2(Vector2.ZERO, project.size)
 	else:
 		var selection_rect := project.selection_map.get_selection_rect(project)
-		if is_moving_content:
+		if transformation_handles.is_transforming_content():
 			to_copy.copy_from(transformation_handles.transformed_image)
 			project.selection_map.move_bitmap_values(project, false)
 			cl_selection_map = project.selection_map
@@ -404,7 +393,7 @@ func paste(in_place := false) -> void:
 	if clipboard.image.is_empty():
 		return
 
-	if is_moving_content:
+	if transformation_handles.is_transforming_content():
 		transform_content_confirm()
 	undo_data = get_undo_data(true)
 	clear_selection()
@@ -453,7 +442,6 @@ func paste(in_place := false) -> void:
 				#Tools.snap_to_rectangular_grid_boundary(big_bounding_rectangle.position, grid_size)
 			#)
 
-	is_moving_content = true
 	is_pasting = true
 	transformation_handles.begin_transform(clipboard.image)
 	project.selection_map_changed()
@@ -465,7 +453,7 @@ func paste_from_clipboard() -> void:
 	var clipboard_image := DisplayServer.clipboard_get_image()
 	if clipboard_image.is_empty() or clipboard_image.is_invisible():
 		return
-	if is_moving_content:
+	if transformation_handles.is_transforming_content():
 		transform_content_confirm()
 	undo_data = get_undo_data(true)
 	clear_selection()
@@ -488,7 +476,6 @@ func paste_from_clipboard() -> void:
 	project.selection_map.copy_from(clip_map)
 	project.selection_map.crop(max_size.x, max_size.y)
 	transformation_handles.begin_transform(clipboard_image)
-	is_moving_content = true
 	is_pasting = true
 	project.selection_map_changed()
 
@@ -498,8 +485,7 @@ func delete(selected_cels := true) -> void:
 	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
-	if is_moving_content:
-		is_moving_content = false
+	if transformation_handles.is_transforming_content():
 		transformation_handles.cancel_transform()
 		is_pasting = false
 		queue_redraw()

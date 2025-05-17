@@ -1,6 +1,8 @@
 class_name TransformationHandles
 extends Node2D
 
+signal is_transforming_content_changed
+
 const HANDLE_RADIUS := 1.0
 const RS_HANDLE_DISTANCE := 2
 
@@ -116,10 +118,6 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion:
 		if active_handle != null:
 			_handle_mouse_drag(mouse_pos)
-	elif event.is_action_pressed(&"transformation_confirm"):  # TEMP
-		bake_transform()
-	elif event.is_action_pressed("transformation_cancel"):
-		cancel_transform()
 
 
 func _draw() -> void:
@@ -210,7 +208,9 @@ func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 
 
 func is_transforming_content() -> bool:
-	return preview_transform != Transform2D.IDENTITY
+	var transform_no_origin := preview_transform.translated(-preview_transform.origin)
+	#print(transform_no_origin, " ", Transform2D.IDENTITY, " ", transform_no_origin == Transform2D.IDENTITY)
+	return transform_no_origin != Transform2D.IDENTITY
 
 
 func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vector2:
@@ -238,6 +238,13 @@ func transform_around(t: Transform2D, m: Transform2D, pivot_local: Vector2) -> T
 	var to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot_world)
 	var back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot_world)
 	return back * m * to_origin * t
+
+
+func get_no_pivot_transform(pivot_transform := preview_transform, pivot_local := pivot) -> Transform2D:
+	var pivot_world := pivot_transform * pivot_local
+	var to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot_world)
+	var back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot_world)
+	return back.affine_inverse() * pivot_transform * to_origin.affine_inverse()
 
 
 func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:
@@ -356,8 +363,17 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 	return Input.CURSOR_ARROW
 
 
+func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
+	transformed_selection_map = selection_map
+	if is_instance_valid(transformed_selection_map):
+		preview_transform = Transform2D().translated(selection_rect.position)
+	else:
+		preview_transform = Transform2D.IDENTITY
+	queue_redraw()
+
+
 func begin_transform(image: Image = null, project := Global.current_project) -> void:
-	preview_transform = Transform2D()
+	is_transforming_content_changed.emit()
 	if is_instance_valid(image):
 		transformed_image = image
 		return
@@ -369,6 +385,7 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 
 func cancel_transform() -> void:
 	preview_transform = Transform2D()
+	is_transforming_content_changed.emit()
 	queue_redraw()
 
 
@@ -383,8 +400,4 @@ func bake_transform() -> void:
 	if is_instance_valid(transformed_image):
 		DrawingAlgos.transform_image_with_transform2d(transformed_image, preview_transform, pivot)
 	pivot = transformed_selection_map.get_size() / 2
-	# Reset preview_transform
-	#var offset := preview_transform.get_origin()
-	preview_transform = Transform2D()
-	#preview_transform = Transform2D().translated(offset)
-	queue_redraw()
+	cancel_transform()

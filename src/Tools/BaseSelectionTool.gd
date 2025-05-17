@@ -34,11 +34,11 @@ func _ready() -> void:
 	set_confirm_buttons_visibility()
 	set_spinbox_values()
 	refresh_options()
-	selection_node.is_moving_content_changed.connect(set_confirm_buttons_visibility)
+	selection_node.transformation_handles.is_transforming_content_changed.connect(set_confirm_buttons_visibility)
 
 
 func set_confirm_buttons_visibility() -> void:
-	confirm_buttons.visible = selection_node.is_moving_content
+	confirm_buttons.visible = selection_node.transformation_handles.is_transforming_content()
 
 
 ## Ensure all items are added when we are selecting an option.
@@ -105,7 +105,7 @@ func draw_start(pos: Vector2i) -> void:
 		_move = true
 		if quick_copy:  # Move selection without cutting it from the original position (quick copy)
 			_move_content = true
-			if selection_node.is_moving_content:
+			if selection_node.transformation_handles.is_transforming_content():
 				for image in _get_selected_draw_images():
 					image.blit_rect_mask(
 						selection_node.preview_image,
@@ -139,7 +139,7 @@ func draw_start(pos: Vector2i) -> void:
 	else:  # No moving
 		selection_node.transform_content_confirm()
 
-	_content_transformation_check = selection_node.is_moving_content
+	_content_transformation_check = selection_node.transformation_handles.is_transforming_content()
 
 
 func draw_move(pos: Vector2i) -> void:
@@ -149,7 +149,7 @@ func draw_move(pos: Vector2i) -> void:
 		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
 	# while the content is being moved
-	if _content_transformation_check != selection_node.is_moving_content:
+	if _content_transformation_check != selection_node.transformation_handles.is_transforming_content():
 		return
 	if not _move:
 		return
@@ -193,7 +193,7 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	if selection_node.arrow_key_move:
 		return
-	if _content_transformation_check == selection_node.is_moving_content:
+	if _content_transformation_check == selection_node.transformation_handles.is_transforming_content():
 		if _move:
 			selection_node.move_borders_end()
 		else:
@@ -225,13 +225,11 @@ func select_tilemap_cell(
 
 
 func _on_confirm_button_pressed() -> void:
-	if selection_node.is_moving_content:
-		selection_node.transform_content_confirm()
+	selection_node.transform_content_confirm()
 
 
 func _on_cancel_button_pressed() -> void:
-	if selection_node.is_moving_content:
-		selection_node.transform_content_cancel()
+	selection_node.transform_content_cancel()
 
 
 func _on_Modes_item_selected(index: int) -> void:
@@ -269,7 +267,7 @@ func _on_Size_value_changed(value: Vector2i) -> void:
 
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
-		if not selection_node.is_moving_content:
+		if not selection_node.transformation_handles.is_transforming_content():
 			selection_node.original_bitmap.copy_from(Global.current_project.selection_map)
 	timer.start()
 	if selection_node.resized_rect.position != selection_node.big_bounding_rectangle.position:
@@ -283,5 +281,5 @@ func _on_Size_ratio_toggled(button_pressed: bool) -> void:
 
 
 func _on_Timer_timeout() -> void:
-	if not selection_node.is_moving_content:
+	if not selection_node.transformation_handles.is_transforming_content():
 		selection_node.commit_undo("Move Selection", undo_data)
