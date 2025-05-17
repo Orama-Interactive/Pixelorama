@@ -2,7 +2,7 @@ class_name TransformationHandles
 extends Node2D
 
 const HANDLE_RADIUS := 1.0
-const RS_HANDLE_DISTANCE := 0.1
+const RS_HANDLE_DISTANCE := 2
 
 var transformed_selection_map: SelectionMap:
 	set(value):
@@ -39,22 +39,14 @@ var handles: Array[TransformHandle] = [
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0.5, 1)),  # Center bottom
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0, 1)),  # Bottom left
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0, 0.5)),  # Center left
-	TransformHandle.new(
-		TransformHandle.Type.ROTATE, Vector2(0 - RS_HANDLE_DISTANCE, 0 - RS_HANDLE_DISTANCE)
-	),  # Top left
-	TransformHandle.new(
-		TransformHandle.Type.ROTATE, Vector2(1 + RS_HANDLE_DISTANCE, 0 - RS_HANDLE_DISTANCE)
-	),  # Top right
-	TransformHandle.new(
-		TransformHandle.Type.ROTATE, Vector2(1 + RS_HANDLE_DISTANCE, 1 + RS_HANDLE_DISTANCE)
-	),  # Bottom right
-	TransformHandle.new(
-		TransformHandle.Type.ROTATE, Vector2(0 - RS_HANDLE_DISTANCE, 1 + RS_HANDLE_DISTANCE)
-	),  # Bottom left
-	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0.5, 0 - RS_HANDLE_DISTANCE)),
-	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(1 + RS_HANDLE_DISTANCE, 0.5)),
-	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0.5, 1 + RS_HANDLE_DISTANCE)),
-	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0 - RS_HANDLE_DISTANCE, 0.5))
+	TransformHandle.new(TransformHandle.Type.ROTATE, Vector2(0, 0)),  # Top left
+	TransformHandle.new(TransformHandle.Type.ROTATE, Vector2(1, 0)),  # Top right
+	TransformHandle.new(TransformHandle.Type.ROTATE, Vector2(1, 1)),  # Bottom right
+	TransformHandle.new(TransformHandle.Type.ROTATE, Vector2(0, 1)),  # Bottom left
+	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0.5, 0)),  # Center top
+	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(1, 0.5)),  # Center right
+	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0.5, 1)),  # Center bottom
+	TransformHandle.new(TransformHandle.Type.SKEW, Vector2(0, 0.5))  # Center left
 ]
 var drag_start: Vector2
 var start_transform := Transform2D()
@@ -131,13 +123,14 @@ func _input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
-	if not is_instance_valid(transformed_image):
+	if not is_instance_valid(transformed_selection_map):
 		return
 	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
-	image_texture.set_image(transformed_image)
-	draw_set_transform_matrix(preview_transform)
-	draw_texture(image_texture, Vector2.ZERO)
-	draw_set_transform_matrix(Transform2D.IDENTITY)
+	if is_instance_valid(transformed_image):
+		image_texture.set_image(transformed_image)
+		draw_set_transform_matrix(preview_transform)
+		draw_texture(image_texture, Vector2.ZERO)
+		draw_set_transform_matrix(Transform2D.IDENTITY)
 
 	# Draw handles
 	for handle in handles:
@@ -173,7 +166,7 @@ func _handle_mouse_press(mouse_pos: Vector2, hovered_handle: TransformHandle) ->
 	else:
 		# Start moving if clicked inside image.
 		var local_click := preview_transform.affine_inverse() * mouse_pos
-		var img_rect := Rect2(Vector2.ZERO, transformed_image.get_size())
+		var img_rect := Rect2(Vector2.ZERO, transformed_selection_map.get_size())
 		if img_rect.has_point(local_click):
 			active_handle = handles[0]
 		else:
@@ -221,7 +214,7 @@ func is_transforming_content() -> bool:
 
 
 func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vector2:
-	var image_size := transformed_image.get_size()
+	var image_size := transformed_selection_map.get_size()
 	var local := Vector2(image_size.x * handle.pos.x, image_size.y * handle.pos.y)
 	var world_pos := t * local
 	if handle.type == TransformHandle.Type.ROTATE or handle.type == TransformHandle.Type.SKEW:
@@ -248,7 +241,7 @@ func transform_around(t: Transform2D, m: Transform2D, pivot_local: Vector2) -> T
 
 
 func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:
-	var image_size := transformed_image.get_size() as Vector2
+	var image_size := transformed_selection_map.get_size() as Vector2
 	# Step 1: Convert drag to local space
 	var local_start := t.affine_inverse() * drag_start
 	var local_now := t.affine_inverse() * (drag_start + delta)
@@ -299,7 +292,7 @@ func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 
 
 func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Transform2D:
-	var image_size := transformed_image.get_size() as Vector2
+	var image_size := transformed_selection_map.get_size() as Vector2
 	var handle_global_position := get_handle_position(handle, t)
 	var center := t * pivot
 	var handle_vector := (handle_global_position - center).normalized()
@@ -387,8 +380,9 @@ func bake_transform() -> void:
 	# TODO: Handle undo/redo
 	# Destructively apply preview_transform to transformed_image
 	DrawingAlgos.transform_image_with_transform2d(transformed_selection_map, preview_transform, pivot)
-	DrawingAlgos.transform_image_with_transform2d(transformed_image, preview_transform, pivot)
-	pivot = transformed_image.get_size() / 2
+	if is_instance_valid(transformed_image):
+		DrawingAlgos.transform_image_with_transform2d(transformed_image, preview_transform, pivot)
+	pivot = transformed_selection_map.get_size() / 2
 	# Reset preview_transform
 	#var offset := preview_transform.get_origin()
 	preview_transform = Transform2D()
