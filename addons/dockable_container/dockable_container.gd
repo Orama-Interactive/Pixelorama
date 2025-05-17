@@ -102,6 +102,7 @@ func _notification(what: int) -> void:
 	elif (
 		what == NOTIFICATION_DRAG_BEGIN
 		and _can_handle_drag_data(get_viewport().gui_get_drag_data())
+		and not hide_single_tab
 	):
 		_drag_n_drop_panel.set_enabled(true, not _layout.root.is_empty())
 		set_process_input(true)
