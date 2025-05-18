@@ -58,7 +58,7 @@ func _input(event: InputEvent) -> void:
 			#transform_content_confirm()
 			#move_borders_start()
 		#else:
-			#transform_content_start()
+			#transformation_handles.begin_transform()
 	#if _is_action_direction_released(event) and arrow_key_move:
 		#arrow_key_move = false
 		#move_borders_end()
@@ -80,7 +80,7 @@ func _input(event: InputEvent) -> void:
 			#var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 			#var grid_size := tilemap_cel.get_tile_size()
 			#final_direction *= Vector2(grid_size)
-		#move_content(final_direction)
+		#transformation_handles.move(pos - _offset)(final_direction)
 
 
 ## Check if an event is a ui_up/down/left/right event pressed

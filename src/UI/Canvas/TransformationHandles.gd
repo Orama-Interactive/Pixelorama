@@ -36,7 +36,6 @@ var active_handle: TransformHandle:
 		Global.can_draw = not is_instance_valid(active_handle)
 
 var handles: Array[TransformHandle] = [
-	TransformHandle.new(TransformHandle.Type.MOVE),  # Not a visible handle
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0, 0)),  # Top left
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0.5, 0)),  # Center top
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(1, 0)),  # Top right
@@ -63,7 +62,7 @@ var pivot := Vector2.ZERO
 
 
 class TransformHandle:
-	enum Type { SCALE, ROTATE, SKEW, MOVE }
+	enum Type { SCALE, ROTATE, SKEW }
 
 	var type := Type.SCALE
 	var pos := Vector2(0.5, 0.5)
@@ -100,18 +99,15 @@ func _input(event: InputEvent) -> void:
 	var mouse_pos := canvas.current_pixel
 	var hovered_handle := _get_hovered_handle(mouse_pos)
 	if is_instance_valid(hovered_handle):
-		if hovered_handle.type == TransformHandle.Type.MOVE:
-			_set_default_cursor()
-		else:
-			var cursor_shape := Input.CURSOR_POINTING_HAND
-			if hovered_handle.type != TransformHandle.Type.ROTATE:
-				var local_direction := hovered_handle.get_direction().normalized()
-				var global_direction := preview_transform.basis_xform(local_direction.normalized())
-				var angle := global_direction.angle()
-				if hovered_handle.type == TransformHandle.Type.SKEW:
-					angle += PI / 2
-				cursor_shape = angle_to_cursor(angle)
-			Input.set_default_cursor_shape(cursor_shape)
+		var cursor_shape := Input.CURSOR_POINTING_HAND
+		if hovered_handle.type != TransformHandle.Type.ROTATE:
+			var local_direction := hovered_handle.get_direction().normalized()
+			var global_direction := preview_transform.basis_xform(local_direction.normalized())
+			var angle := global_direction.angle()
+			if hovered_handle.type == TransformHandle.Type.SKEW:
+				angle += PI / 2
+			cursor_shape = angle_to_cursor(angle)
+		Input.set_default_cursor_shape(cursor_shape)
 	else:
 		_set_default_cursor()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -137,9 +133,7 @@ func _draw() -> void:
 	# Draw handles
 	for handle in handles:
 		var pos := get_handle_position(handle)
-		if handle.type == TransformHandle.Type.MOVE:
-			continue
-		elif handle.type == TransformHandle.Type.SCALE:
+		if handle.type == TransformHandle.Type.SCALE:
 			draw_rect(
 				_circle_to_square(pos, HANDLE_RADIUS * zoom_value), Global.selection_border_color_2
 			)
@@ -165,25 +159,13 @@ func _handle_mouse_press(mouse_pos: Vector2, hovered_handle: TransformHandle) ->
 	# Begin dragging handle or moving the image.
 	if hovered_handle != null:
 		active_handle = hovered_handle
-	else:
-		# Start moving if clicked inside image.
-		var local_click := preview_transform.affine_inverse() * mouse_pos
-		var img_rect := Rect2(Vector2.ZERO, transformed_selection_map.get_size())
-		if img_rect.has_point(local_click):
-			active_handle = handles[0]
-		else:
-			active_handle = null
-	if active_handle != null:
-		drag_start = mouse_pos
-		start_transform = preview_transform
+		begin_drag(mouse_pos)
 
 
 func _handle_mouse_drag(mouse_pos: Vector2) -> void:
 	# Update preview_transform based which handle we're dragging, or moving the image
 	var delta := mouse_pos - drag_start
 	match active_handle.type:
-		TransformHandle.Type.MOVE:
-			preview_transform = start_transform.translated(delta)
 		TransformHandle.Type.SCALE:
 			preview_transform = apply_resize(start_transform, active_handle, delta)
 		TransformHandle.Type.ROTATE:
@@ -213,8 +195,15 @@ func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 
 func is_transforming_content() -> bool:
 	var transform_no_origin := preview_transform.translated(-preview_transform.origin)
-	#print(transform_no_origin, " ", Transform2D.IDENTITY, " ", transform_no_origin == Transform2D.IDENTITY)
 	return transform_no_origin != Transform2D.IDENTITY
+
+
+func is_position_inside_selection(pos: Vector2) -> bool:
+	if not is_instance_valid(transformed_selection_map):
+		return false
+	var local_click := preview_transform.affine_inverse() * pos
+	var img_rect := Rect2(Vector2.ZERO, transformed_selection_map.get_size())
+	return img_rect.has_point(local_click)
 
 
 func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vector2:
@@ -249,6 +238,16 @@ func get_no_pivot_transform(pivot_transform := preview_transform, pivot_local :=
 	var to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot_world)
 	var back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot_world)
 	return back.affine_inverse() * pivot_transform * to_origin.affine_inverse()
+
+
+func begin_drag(mouse_pos: Vector2) -> void:
+	drag_start = mouse_pos
+	start_transform = preview_transform
+
+
+func move(pos: Vector2) -> void:
+	preview_transform = preview_transform.translated(pos)
+	queue_redraw()
 
 
 func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:

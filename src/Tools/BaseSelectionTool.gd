@@ -23,6 +23,7 @@ var _content_transformation_check := false
 var _skip_slider_logic := false
 
 @onready var selection_node := Global.canvas.selection
+@onready var transformation_handles := selection_node.transformation_handles
 @onready var confirm_buttons := $ConfirmButtons as HBoxContainer
 @onready var position_sliders := $Position as ValueSliderV2
 @onready var size_sliders := $Size as ValueSliderV2
@@ -95,7 +96,7 @@ func draw_start(pos: Vector2i) -> void:
 
 	var quick_copy := Input.is_action_pressed("transform_copy_selection_content", true)
 	if (
-		project.selection_map.is_pixel_selected(pos)
+		transformation_handles.is_position_inside_selection(pos)
 		and (!_add and !_subtract and !_intersect or quick_copy)
 		and !_ongoing_selection
 	):
@@ -118,7 +119,7 @@ func draw_start(pos: Vector2i) -> void:
 				selection_node.commit_undo("Move Selection", selection_node.undo_data)
 				selection_node.undo_data = selection_node.get_undo_data(true)
 			else:
-				selection_node.transform_content_start()
+				transformation_handles.begin_transform()
 				for image in _get_selected_draw_images():
 					image.blit_rect_mask(
 						selection_node.preview_image,
@@ -134,7 +135,6 @@ func draw_start(pos: Vector2i) -> void:
 			selection_node.move_borders_start()
 		else:  # Move selection and content normally
 			_move_content = true
-			selection_node.transform_content_start()
 
 	else:  # No moving
 		selection_node.transform_content_confirm()
@@ -180,9 +180,9 @@ func draw_move(pos: Vector2i) -> void:
 		pos += grid_offset
 
 	if _move_content:
-		selection_node.move_content(pos - _offset)
+		transformation_handles.move(pos - _offset)
 	else:
-		selection_node.move_borders(pos - _offset)
+		transformation_handles.move(pos - _offset)
 
 	_offset = pos
 	_set_cursor_text(select_rect)
@@ -194,9 +194,7 @@ func draw_end(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	if _content_transformation_check == selection_node.transformation_handles.is_transforming_content():
-		if _move:
-			selection_node.move_borders_end()
-		else:
+		if not _move:
 			apply_selection(pos)
 
 	_move = false

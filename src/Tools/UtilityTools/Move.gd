@@ -50,7 +50,7 @@ func draw_start(pos: Vector2i) -> void:
 			(cel as CelTileMap).prev_offset = (cel as CelTileMap).offset
 	else:
 		if Global.current_project.has_selection:
-			selection_node.transform_content_start()
+			selection_node.transformation_handles.begin_transform()
 	_content_transformation_check = selection_node.transformation_handles.is_transforming_content()
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
@@ -74,7 +74,7 @@ func draw_move(pos: Vector2i) -> void:
 		Global.canvas.move_preview_location = pos - _start_pos
 	else:
 		if Global.current_project.has_selection:
-			selection_node.move_content(pos - _offset)
+			selection_node.transformation_handles.move(pos - _offset)
 		else:
 			Global.canvas.move_preview_location = pos - _start_pos
 	_offset = pos
@@ -91,9 +91,7 @@ func draw_end(pos: Vector2i) -> void:
 		and _content_transformation_check == selection_node.transformation_handles.is_transforming_content()
 	):
 		pos = _snap_position(pos)
-		if Global.current_project.has_selection and not Tools.is_placing_tiles():
-			selection_node.move_borders_end()
-		else:
+		if not (Global.current_project.has_selection and not Tools.is_placing_tiles()):
 			var pixel_diff := pos - _start_pos
 			Global.canvas.move_preview_location = Vector2i.ZERO
 			var images := _get_selected_draw_images()

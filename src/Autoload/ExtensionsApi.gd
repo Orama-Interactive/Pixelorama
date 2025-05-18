@@ -517,7 +517,7 @@ class SelectionAPI:
 			Global.canvas.selection.transform_content_start()
 		var selection_rectangle: Rect2i = Global.canvas.selection.big_bounding_rectangle
 		var rel_direction := destination - selection_rectangle.position
-		Global.canvas.selection.move_content(rel_direction)
+		Global.canvas.selection.transformation_handles.move(rel_direction)
 		Global.canvas.selection.move_borders_end()
 		if not transform_standby and with_content:
 			Global.canvas.selection.transform_content_confirm()
