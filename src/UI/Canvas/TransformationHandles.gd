@@ -38,6 +38,7 @@ var active_handle: TransformHandle:
 		Global.can_draw = not is_instance_valid(active_handle)
 
 var handles: Array[TransformHandle] = [
+	TransformHandle.new(TransformHandle.Type.PIVOT),
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0, 0)),  # Top left
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(0.5, 0)),  # Center top
 	TransformHandle.new(TransformHandle.Type.SCALE, Vector2(1, 0)),  # Top right
@@ -59,12 +60,17 @@ var drag_start: Vector2
 var start_transform := Transform2D()
 
 ## The transformation's pivot. By default it is set to the center of the image.
-var pivot := Vector2.ZERO
+var pivot := Vector2.ZERO:
+	set(value):
+		pivot = value
+		if is_instance_valid(transformed_selection_map):
+			var image_size := transformed_selection_map.get_size() as Vector2
+			handles[0].pos = pivot / image_size
 @onready var canvas := get_parent().get_parent() as Canvas
 
 
 class TransformHandle:
-	enum Type { SCALE, ROTATE, SKEW }
+	enum Type { SCALE, ROTATE, SKEW, PIVOT }
 
 	var type := Type.SCALE
 	var pos := Vector2(0.5, 0.5)
@@ -101,15 +107,19 @@ func _input(event: InputEvent) -> void:
 	var mouse_pos := canvas.current_pixel
 	var hovered_handle := _get_hovered_handle(mouse_pos)
 	if is_instance_valid(hovered_handle):
-		var cursor_shape := Input.CURSOR_POINTING_HAND
-		if hovered_handle.type != TransformHandle.Type.ROTATE:
+		if hovered_handle.type == TransformHandle.Type.PIVOT:
+			Input.set_default_cursor_shape(Input.CURSOR_MOVE)
+		elif hovered_handle.type == TransformHandle.Type.ROTATE:
+			Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+		else:
+			var cursor_shape := Input.CURSOR_POINTING_HAND
 			var local_direction := hovered_handle.get_direction().normalized()
 			var global_direction := preview_transform.basis_xform(local_direction.normalized())
 			var angle := global_direction.angle()
 			if hovered_handle.type == TransformHandle.Type.SKEW:
 				angle += PI / 2
 			cursor_shape = angle_to_cursor(angle)
-		Input.set_default_cursor_shape(cursor_shape)
+			Input.set_default_cursor_shape(cursor_shape)
 	else:
 		_set_default_cursor()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -147,6 +157,8 @@ func _draw() -> void:
 			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.ORANGE)
 		elif handle.type == TransformHandle.Type.SKEW:
 			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.GREEN)
+		elif handle.type == TransformHandle.Type.PIVOT:
+			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.WHITE)
 
 
 func _get_hovered_handle(mouse_pos: Vector2) -> TransformHandle:
@@ -174,6 +186,8 @@ func _handle_mouse_drag(mouse_pos: Vector2) -> void:
 			preview_transform = apply_rotate(start_transform, mouse_pos)
 		TransformHandle.Type.SKEW:
 			preview_transform = apply_shear(start_transform, delta, active_handle)
+		TransformHandle.Type.PIVOT:
+			handle_pivot_drag(mouse_pos, start_transform)
 	queue_redraw()
 
 
@@ -302,6 +316,11 @@ func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 	return transform_around(t, m, pivot)
 
 
+func handle_pivot_drag(mouse_pos: Vector2, t: Transform2D) -> void:
+	var local_mouse := t.affine_inverse() * mouse_pos
+	pivot = local_mouse
+
+
 func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Transform2D:
 	var image_size := transformed_selection_map.get_size() as Vector2
 	var handle_global_position := get_handle_position(handle, t)
@@ -390,6 +409,8 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 
 func reset_transform() -> void:
 	preview_transform = Transform2D()
+	if is_instance_valid(transformed_selection_map):
+		pivot = transformed_selection_map.get_size() / 2
 	is_transforming_content_changed.emit()
 	queue_redraw()
 
