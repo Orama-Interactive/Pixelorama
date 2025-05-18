@@ -17,9 +17,6 @@ var _add := false  ## Shift + Mouse Click
 var _subtract := false  ## Ctrl + Mouse Click
 var _intersect := false  ## Shift + Ctrl + Mouse Click
 
-## Used to check if the state of content transformation has been changed
-## while draw_move() is being called. For example, pressing Enter while still moving content
-var _content_transformation_check := false
 var _skip_slider_logic := false
 
 @onready var selection_node := Global.canvas.selection
@@ -139,17 +136,11 @@ func draw_start(pos: Vector2i) -> void:
 	else:  # No moving
 		selection_node.transform_content_confirm()
 
-	_content_transformation_check = selection_node.transformation_handles.is_transforming_content()
-
 
 func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if selection_node.arrow_key_move:
-		return
-	# This is true if content transformation has been confirmed (pressed Enter for example)
-	# while the content is being moved
-	if _content_transformation_check != selection_node.transformation_handles.is_transforming_content():
 		return
 	if not _move:
 		return
@@ -193,9 +184,8 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	if selection_node.arrow_key_move:
 		return
-	if _content_transformation_check == selection_node.transformation_handles.is_transforming_content():
-		if not _move:
-			apply_selection(pos)
+	if not _move:
+		apply_selection(pos)
 
 	_move = false
 	cursor_text = ""

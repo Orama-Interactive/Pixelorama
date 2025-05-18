@@ -23,13 +23,15 @@ var transformed_image: Image:
 var pre_transform_selection_offset: Vector2
 var image_texture: ImageTexture
 
-# Preview transform, not yet applied to transformed_image
+## Preview transform, not yet applied to transformed_image
 var preview_transform := Transform2D():
 	set(value):
 		preview_transform = value
 		preview_transform_changed.emit()
 
-# Tracking handles
+var original_selection_transform := Transform2D()
+
+## Tracking handles
 var active_handle: TransformHandle:
 	set(value):
 		active_handle = value
@@ -194,8 +196,7 @@ func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 
 
 func is_transforming_content() -> bool:
-	var transform_no_origin := preview_transform.translated(-preview_transform.origin)
-	return transform_no_origin != Transform2D.IDENTITY
+	return preview_transform != original_selection_transform
 
 
 func is_position_inside_selection(pos: Vector2) -> bool:
@@ -372,6 +373,7 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 		preview_transform = Transform2D().translated(selection_rect.position)
 	else:
 		preview_transform = Transform2D.IDENTITY
+	original_selection_transform = preview_transform
 	queue_redraw()
 
 
