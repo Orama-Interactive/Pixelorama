@@ -128,10 +128,6 @@ func draw_start(pos: Vector2i) -> void:
 				Global.canvas.queue_redraw()
 
 		else:
-			# Doesn't move content
-			if Input.is_action_pressed("transform_move_selection_only", true):
-				selection_node.transform_content_confirm()
-				selection_node.move_borders_start()
 			transformation_handles.begin_transform()
 
 	else:  # No moving

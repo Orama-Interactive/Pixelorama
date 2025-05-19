@@ -8,6 +8,7 @@ const RS_HANDLE_DISTANCE := 2
 const KEY_MOVE_ACTION_NAMES: PackedStringArray = [&"ui_up", &"ui_down", &"ui_left", &"ui_right"]
 
 var arrow_key_move := false
+var only_transforms_selection := false
 var transformed_selection_map: SelectionMap:
 	set(value):
 		transformed_selection_map = value
@@ -189,10 +190,6 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 		return
 	if _is_action_direction_pressed(event) and !arrow_key_move:
 		arrow_key_move = true
-		#if Input.is_key_pressed(KEY_ALT):
-			#transform_content_confirm()
-			#move_borders_start()
-		#else:
 		begin_transform()
 	if _is_action_direction_released(event) and arrow_key_move:
 		arrow_key_move = false
@@ -482,6 +479,13 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 
 
 func begin_transform(image: Image = null, project := Global.current_project) -> void:
+	if Input.is_action_pressed(&"transform_move_selection_only"):
+		only_transforms_selection = true
+		return
+	else:
+		if only_transforms_selection:
+			selection_node.transform_content_confirm()
+			only_transforms_selection = false
 	if not pre_transformed_image.is_empty():
 		return
 	if is_instance_valid(image):
