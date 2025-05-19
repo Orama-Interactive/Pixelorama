@@ -251,6 +251,7 @@ func get_no_pivot_transform(pivot_transform := preview_transform, pivot_local :=
 func begin_drag(mouse_pos: Vector2) -> void:
 	drag_start = mouse_pos
 	start_transform = preview_transform
+	begin_transform()
 
 
 func move(pos: Vector2) -> void:
