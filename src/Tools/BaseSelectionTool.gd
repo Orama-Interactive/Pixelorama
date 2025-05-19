@@ -31,10 +31,11 @@ func _ready() -> void:
 	set_confirm_buttons_visibility()
 	set_spinbox_values()
 	refresh_options()
-	selection_node.transformation_handles.is_transforming_content_changed.connect(set_confirm_buttons_visibility)
+	selection_node.transformation_handles.preview_transform_changed.connect(set_confirm_buttons_visibility)
 
 
 func set_confirm_buttons_visibility() -> void:
+	await get_tree().process_frame
 	confirm_buttons.visible = selection_node.transformation_handles.is_transforming_content()
 
 

@@ -1,7 +1,6 @@
 class_name TransformationHandles
 extends Node2D
 
-signal is_transforming_content_changed
 signal preview_transform_changed
 
 const HANDLE_RADIUS := 1.0
@@ -394,7 +393,6 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 func begin_transform(image: Image = null, project := Global.current_project) -> void:
 	if not transformed_image.is_empty():
 		return
-	is_transforming_content_changed.emit()
 	if is_instance_valid(image):
 		transformed_image = image
 		return
@@ -417,7 +415,6 @@ func reset_transform() -> void:
 		pivot = transformed_selection_map.get_size() / 2
 	transformed_image = Image.new()
 	image_texture.set_image(transformed_image)
-	is_transforming_content_changed.emit()
 	queue_redraw()
 
 
