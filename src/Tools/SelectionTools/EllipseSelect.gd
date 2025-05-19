@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 
 
 func draw_move(pos: Vector2i) -> void:
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	pos = snap_position(pos)
 	super.draw_move(pos)
@@ -37,7 +37,7 @@ func draw_move(pos: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	pos = snap_position(pos)
 	super.draw_end(pos)

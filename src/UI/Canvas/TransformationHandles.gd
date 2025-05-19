@@ -5,7 +5,9 @@ signal preview_transform_changed
 
 const HANDLE_RADIUS := 1.0
 const RS_HANDLE_DISTANCE := 2
+const KEY_MOVE_ACTION_NAMES: PackedStringArray = [&"ui_up", &"ui_down", &"ui_left", &"ui_right"]
 
+var arrow_key_move := false
 var transformed_selection_map: SelectionMap:
 	set(value):
 		transformed_selection_map = value
@@ -107,6 +109,8 @@ func _input(event: InputEvent) -> void:
 	var project := Global.current_project
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
+	if event is InputEventKey:
+		_move_with_arrow_keys(event)
 	var mouse_pos := canvas.current_pixel
 	if Global.mirror_view:
 		mouse_pos.x = Global.current_project.size.x - mouse_pos.x
@@ -171,6 +175,48 @@ func _draw() -> void:
 			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.WHITE)
 
 
+func _move_with_arrow_keys(event: InputEvent) -> void:
+	var selection_tool_selected := false
+	for slot in Tools._slots.values():
+		if slot.tool_node is BaseSelectionTool:
+			selection_tool_selected = true
+			break
+	if !selection_tool_selected:
+		return
+	if not Global.current_project.has_selection:
+		return
+	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		return
+	if _is_action_direction_pressed(event) and !arrow_key_move:
+		arrow_key_move = true
+		#if Input.is_key_pressed(KEY_ALT):
+			#transform_content_confirm()
+			#move_borders_start()
+		#else:
+		begin_transform()
+	if _is_action_direction_released(event) and arrow_key_move:
+		arrow_key_move = false
+
+	if _is_action_direction(event) and arrow_key_move:
+		var step := Vector2.ONE
+		if Input.is_key_pressed(KEY_CTRL):
+			step = Global.grids[0].grid_size
+		var input := Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
+		var final_input := input.rotated(snappedf(Global.camera.camera_angle, PI / 2))
+		# These checks are needed to fix a bug where the selection got stuck
+		# to the canvas boundaries when they were 1px away from them
+		if is_zero_approx(absf(final_input.x)):
+			final_input.x = 0
+		if is_zero_approx(absf(final_input.y)):
+			final_input.y = 0
+		var final_direction := (final_input * step).round()
+		if Tools.is_placing_tiles():
+			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
+			var grid_size := tilemap_cel.get_tile_size()
+			final_direction *= Vector2(grid_size)
+		move(final_direction)
+
+
 func _get_hovered_handle(mouse_pos: Vector2) -> TransformHandle:
 	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
 	for handle in handles:
@@ -199,6 +245,30 @@ func _handle_mouse_drag(mouse_pos: Vector2) -> void:
 		TransformHandle.Type.PIVOT:
 			handle_pivot_drag(mouse_pos, start_transform)
 	queue_redraw()
+
+
+## Check if an event is a ui_up/down/left/right event pressed
+func _is_action_direction_pressed(event: InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action_pressed(action, false, true):
+			return true
+	return false
+
+
+## Check if an event is a ui_up/down/left/right event
+func _is_action_direction(event: InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action(action, true):
+			return true
+	return false
+
+
+## Check if an event is a ui_up/down/left/right event release
+func _is_action_direction_released(event: InputEvent) -> bool:
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action_released(action, true):
+			return true
+	return false
 
 
 func _set_default_cursor() -> void:

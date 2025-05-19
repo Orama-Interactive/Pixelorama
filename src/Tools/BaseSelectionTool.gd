@@ -80,7 +80,7 @@ func set_spinbox_values() -> void:
 func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	var project := Global.current_project
 	var select_rect := project.selection_map.get_selection_rect(project)
@@ -141,7 +141,7 @@ func draw_start(pos: Vector2i) -> void:
 func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	if not _move:
 		return
@@ -179,7 +179,7 @@ func draw_move(pos: Vector2i) -> void:
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_end(pos)
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	if not _move:
 		apply_selection(pos)
