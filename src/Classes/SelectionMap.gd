@@ -129,6 +129,17 @@ func blit_rect_custom(new_map: SelectionMap, rect: Rect2i, origin: Vector2i) -> 
 	blit_rect(new_map, rect, origin)
 
 
+func ensure_selection_fits(project: Project, rect: Rect2i) -> void:
+	var current_size := Rect2i(Vector2i.ZERO, get_size())
+	if current_size.encloses(rect):
+		project.selection_offset = Vector2.ZERO
+		return
+	var new_size := current_size.merge(rect).size
+	var offset := current_size.position.min(rect.position)
+	crop(new_size.x, new_size.y)
+	project.selection_offset = Vector2.ZERO.min(offset)
+
+
 ## TODO: Add move_to as a parameter, or perhaps even remove this method completely.
 func move_bitmap_values(project: Project, move_offset := true) -> void:
 	var size := project.size

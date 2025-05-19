@@ -544,10 +544,11 @@ func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
 
 func bake_transform_to_selection(map: SelectionMap) -> void:
 	var bounds := DrawingAlgos.get_transformed_bounds(transformed_selection_map.get_size(), preview_transform)
+	map.ensure_selection_fits(Global.current_project, bounds)
 	bounds.position -= bounds.position
 	var transformed_selection := SelectionMap.new()
 	transformed_selection.copy_from(transformed_selection_map)
-	var transformation_origin := get_transform_top_left()
+	var transformation_origin := get_transform_top_left().max(Vector2.ZERO)
 	bake_transform_to_image(transformed_selection, bounds)
 	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
 	map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)

@@ -89,13 +89,6 @@ func transform_content_confirm() -> void:
 	var project := Global.current_project
 	var preview_image := transformation_handles.pre_transformed_image
 	transformation_handles.bake_transform_to_selection(project.selection_map)
-	var matrix := transformation_handles.preview_transform
-	#var transformed_selection := SelectionMap.new()
-	#transformed_selection.copy_from(transformation_handles.transformed_selection_map)
-	#var transformation_origin := DrawingAlgos.get_transformed_bounds(transformed_selection.get_size(), matrix).position.ceil()
-	#transformation_handles.bake_transform_to_image(transformed_selection)
-	#var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
-	#project.selection_map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)
 	var selection_rect := project.selection_map.get_selection_rect(project)
 	var selection_size_rect := Rect2i(Vector2i.ZERO, selection_rect.size)
 	for cel in get_selected_draw_cels():
@@ -103,6 +96,8 @@ func transform_content_confirm() -> void:
 		var src := Image.new()
 		src.copy_from(preview_image)
 		if not is_pasting:
+			if not is_instance_valid(cel.transformed_content):
+				continue
 			src.copy_from(cel.transformed_content)
 			cel.transformed_content = null
 		var transformation_origin := transformation_handles.get_transform_top_left(src.get_size())
@@ -544,10 +539,10 @@ func _project_switched() -> void:
 
 func get_selected_image(cel_image: Image) -> Image:
 	var project := Global.current_project
-	var selection_rect := project.selection_map.get_selection_rect(project)
+	var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
+	var selection_rect := selection_map_copy.get_selection_rect(project)
 	var image := Image.create(
 		selection_rect.size.x, selection_rect.size.y, false, project.get_image_format()
 	)
-	var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
 	image.blit_rect_mask(cel_image, selection_map_copy, selection_rect, Vector2i.ZERO)
 	return image
