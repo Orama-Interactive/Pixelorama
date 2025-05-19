@@ -103,12 +103,13 @@ func draw_start(pos: Vector2i) -> void:
 		_move = true
 		if quick_copy:  # Move selection without cutting it from the original position (quick copy)
 			if transformation_handles.is_transforming_content():
-				for image in _get_selected_draw_images():
+				for cel in _get_selected_draw_unlocked_cels():
+					var image := cel.get_image()
 					image.blit_rect_mask(
-						selection_node.preview_image,
-						selection_node.preview_image,
+						cel.transformed_content,
+						cel.transformed_content,
 						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-						select_rect.position
+						transformation_handles.get_transform_top_left()
 					)
 
 				project.selection_map.move_bitmap_values(project)
@@ -116,14 +117,15 @@ func draw_start(pos: Vector2i) -> void:
 				selection_node.undo_data = selection_node.get_undo_data(true)
 			else:
 				transformation_handles.begin_transform()
-				for image in _get_selected_draw_images():
+				for cel in _get_selected_draw_unlocked_cels():
+					var image := cel.get_image()
 					image.blit_rect_mask(
-						selection_node.preview_image,
-						selection_node.preview_image,
+						cel.transformed_content,
+						cel.transformed_content,
 						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 						select_rect.position
 					)
-				Global.canvas.update_selected_cels_textures()
+				Global.canvas.queue_redraw()
 
 		else:
 			# Doesn't move content
@@ -205,6 +207,19 @@ func select_tilemap_cell(
 ) -> void:
 	var rect := Rect2i(cell_position + cel.offset, cel.get_tile_size())
 	selection.select_rect(rect, select)
+
+
+func _get_selected_draw_unlocked_cels() -> Array[BaseCel]:
+	var cels: Array[BaseCel]
+	var project := Global.current_project
+	for cel_index in project.selected_cels:
+		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		if not cel is PixelCel:
+			continue
+		if not project.layers[cel_index[1]].can_layer_get_drawn():
+			continue
+		cels.append(cel)
+	return cels
 
 
 func _on_confirm_button_pressed() -> void:
