@@ -108,6 +108,8 @@ func _input(event: InputEvent) -> void:
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	var mouse_pos := canvas.current_pixel
+	if Global.mirror_view:
+		mouse_pos.x = Global.current_project.size.x - mouse_pos.x
 	var hovered_handle := _get_hovered_handle(mouse_pos)
 	if is_instance_valid(hovered_handle):
 		if hovered_handle.type == TransformHandle.Type.PIVOT:
@@ -139,12 +141,17 @@ func _draw() -> void:
 	if not is_instance_valid(transformed_selection_map):
 		return
 	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
+	var position_tmp := position
+	var position_top_left := position + get_transform_top_left()
+	var scale_tmp := scale
+	if Global.mirror_view:
+		position_tmp.x = Global.current_project.size.x - position_tmp.x
+		position_top_left.x = Global.current_project.size.x - position_top_left.x
+		scale_tmp.x = -1
 	if is_instance_valid(transformed_image) and not transformed_image.is_empty():
-		#draw_set_transform_matrix(preview_transform)
-		draw_set_transform_matrix(Transform2D.IDENTITY.translated(get_transform_top_left()))
+		draw_set_transform(position_top_left, rotation, scale_tmp)
 		draw_texture(image_texture, Vector2.ZERO, Color(1, 1, 1, 0.5))
-		draw_set_transform_matrix(Transform2D.IDENTITY)
-
+	draw_set_transform(position_tmp, rotation, scale_tmp)
 	# Draw handles
 	for handle in handles:
 		var pos := get_handle_position(handle)
@@ -375,19 +382,27 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 	if deg >= 337.5 or deg < 22.5:
 		return Input.CURSOR_HSIZE  # Right
 	if deg < 67.5:
+		if Global.mirror_view:
+			return Input.CURSOR_BDIAGSIZE
 		return Input.CURSOR_FDIAGSIZE  # Bottom-right
 	if deg < 112.5:
 		return Input.CURSOR_VSIZE  # Down
 	if deg < 157.5:
+		if Global.mirror_view:
+			return Input.CURSOR_FDIAGSIZE
 		return Input.CURSOR_BDIAGSIZE  # Bottom-left
 	if deg < 202.5:
 		return Input.CURSOR_HSIZE  # Left
 	if deg < 247.5:
+		if Global.mirror_view:
+			return Input.CURSOR_BDIAGSIZE
 		return Input.CURSOR_FDIAGSIZE  # Top-left
 	if deg < 292.5:
 		return Input.CURSOR_VSIZE  # Up
 	if deg < 337.5:
-		return Input.CURSOR_BDIAGSIZE  # Top-right
+		if Global.mirror_view:
+			return Input.CURSOR_FDIAGSIZE
+		return Input.CURSOR_BDIAGSIZE # Top-right
 
 	return Input.CURSOR_ARROW
 
