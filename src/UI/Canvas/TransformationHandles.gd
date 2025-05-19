@@ -14,14 +14,21 @@ var transformed_selection_map: SelectionMap:
 		set_process_input(is_instance_valid(transformed_selection_map))
 		queue_redraw()
 var transformed_image := Image.new()
+var pre_transformed_image := Image.new()
 var pre_transform_selection_offset: Vector2
 var image_texture := ImageTexture.new()
 
-## Preview transform, not yet applied to transformed_image
+## Preview transform, not yet applied to the image.
 var preview_transform := Transform2D():
 	set(value):
 		preview_transform = value
 		preview_transform_changed.emit()
+		if not pre_transformed_image.is_empty():
+			transformed_image.copy_from(pre_transformed_image)
+			var bounds := DrawingAlgos.get_transformed_bounds(transformed_selection_map.get_size(), preview_transform)
+			bounds.position -= bounds.position
+			bake_transform_to_image(transformed_image, bounds)
+			image_texture.set_image(transformed_image)
 
 var original_selection_transform := Transform2D()
 
@@ -131,7 +138,8 @@ func _draw() -> void:
 		return
 	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
 	if is_instance_valid(transformed_image) and not transformed_image.is_empty():
-		draw_set_transform_matrix(preview_transform)
+		#draw_set_transform_matrix(preview_transform)
+		draw_set_transform_matrix(Transform2D.IDENTITY.translated(get_transform_top_left()))
 		draw_texture(image_texture, Vector2.ZERO, Color(1, 1, 1, 0.5))
 		draw_set_transform_matrix(Transform2D.IDENTITY)
 
@@ -382,6 +390,7 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 
 func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 	transformed_selection_map = selection_map
+	pre_transformed_image = Image.new()
 	transformed_image = Image.new()
 	if is_instance_valid(transformed_selection_map):
 		preview_transform = Transform2D().translated(selection_rect.position)
@@ -392,10 +401,10 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 
 
 func begin_transform(image: Image = null, project := Global.current_project) -> void:
-	if not transformed_image.is_empty():
+	if not pre_transformed_image.is_empty():
 		return
 	if is_instance_valid(image):
-		transformed_image = image
+		pre_transformed_image = image
 		return
 	var blended_image := project.new_empty_image()
 	DrawingAlgos.blend_layers(
@@ -403,20 +412,30 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 	)
 	var map_copy := project.selection_map.return_cropped_copy(project, project.size)
 	var selection_rect := map_copy.get_used_rect()
-	transformed_image = Image.create(
+	pre_transformed_image = Image.create(
 		selection_rect.size.x, selection_rect.size.y, false, project.get_image_format()
 	)
-	transformed_image.blit_rect_mask(blended_image, map_copy, selection_rect, Vector2i.ZERO)
-	image_texture.set_image(transformed_image)
+	pre_transformed_image.blit_rect_mask(blended_image, map_copy, selection_rect, Vector2i.ZERO)
+	image_texture.set_image(pre_transformed_image)
 
 
 func reset_transform() -> void:
 	preview_transform = Transform2D()
 	if is_instance_valid(transformed_selection_map):
 		pivot = transformed_selection_map.get_size() / 2
+	pre_transformed_image = Image.new()
 	transformed_image = Image.new()
-	image_texture.set_image(transformed_image)
 	queue_redraw()
+
+
+func get_transform_top_left(size := transformed_selection_map.get_size()) -> Vector2:
+	var move_to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot)
+	var move_back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot)  # move pivot back
+	var full_transform := move_back * preview_transform * move_to_origin
+
+	# Estimate new bounding box
+	var bounds := DrawingAlgos.get_transformed_bounds(size, preview_transform)
+	return bounds.position.ceil()
 
 
 func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
@@ -426,7 +445,7 @@ func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
 func bake_transform_to_selection(map: SelectionMap) -> void:
 	var transformed_selection := SelectionMap.new()
 	transformed_selection.copy_from(transformed_selection_map)
-	var transformation_origin := DrawingAlgos.get_transformed_bounds(transformed_selection.get_size(), preview_transform).position.ceil()
+	var transformation_origin := get_transform_top_left()
 	bake_transform_to_image(transformed_selection)
 	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
 	map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)

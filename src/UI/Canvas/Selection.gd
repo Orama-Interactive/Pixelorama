@@ -161,7 +161,7 @@ func transform_content_confirm() -> void:
 	if not transformation_handles.is_transforming_content():
 		return
 	var project := Global.current_project
-	var preview_image := transformation_handles.transformed_image
+	var preview_image := transformation_handles.pre_transformed_image
 	transformation_handles.bake_transform_to_selection(project.selection_map)
 	var matrix := transformation_handles.preview_transform
 	#var transformed_selection := SelectionMap.new()
@@ -176,10 +176,10 @@ func transform_content_confirm() -> void:
 		var cel_image := cel.get_image()
 		var src := Image.new()
 		src.copy_from(preview_image)
-		var transformation_origin := DrawingAlgos.get_transformed_bounds(src.get_size(), matrix).position.ceil()
+		var transformation_origin := transformation_handles.get_transform_top_left(src.get_size())
 		if not is_pasting:
 			src.copy_from(cel.transformed_content)
-			transformation_origin = DrawingAlgos.get_transformed_bounds(src.get_size(), matrix).position.ceil()
+			transformation_origin = transformation_handles.get_transform_top_left(src.get_size())
 			cel.transformed_content = null
 			if Tools.is_placing_tiles():
 				if cel is not CelTileMap:
