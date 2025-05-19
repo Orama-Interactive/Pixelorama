@@ -31,12 +31,12 @@ func _ready() -> void:
 	set_confirm_buttons_visibility()
 	set_spinbox_values()
 	refresh_options()
-	selection_node.transformation_handles.preview_transform_changed.connect(set_confirm_buttons_visibility)
+	transformation_handles.preview_transform_changed.connect(set_confirm_buttons_visibility)
 
 
 func set_confirm_buttons_visibility() -> void:
 	await get_tree().process_frame
-	confirm_buttons.visible = selection_node.transformation_handles.is_transforming_content()
+	confirm_buttons.visible = transformation_handles.is_transforming_content()
 
 
 ## Ensure all items are added when we are selecting an option.
@@ -93,7 +93,7 @@ func draw_start(pos: Vector2i) -> void:
 
 	var quick_copy := Input.is_action_pressed("transform_copy_selection_content", true)
 	if (
-		transformation_handles.is_position_inside_selection(pos)
+		selection_node.preview_selection_map.is_pixel_selected(pos)
 		and (!_add and !_subtract and !_intersect or quick_copy)
 		and !_ongoing_selection
 	):
@@ -102,7 +102,7 @@ func draw_start(pos: Vector2i) -> void:
 		# Move current selection
 		_move = true
 		if quick_copy:  # Move selection without cutting it from the original position (quick copy)
-			if selection_node.transformation_handles.is_transforming_content():
+			if transformation_handles.is_transforming_content():
 				for image in _get_selected_draw_images():
 					image.blit_rect_mask(
 						selection_node.preview_image,
@@ -250,7 +250,7 @@ func _on_Size_value_changed(value: Vector2i) -> void:
 
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
-		if not selection_node.transformation_handles.is_transforming_content():
+		if not transformation_handles.is_transforming_content():
 			selection_node.original_bitmap.copy_from(Global.current_project.selection_map)
 	timer.start()
 	if selection_node.resized_rect.position != selection_node.big_bounding_rectangle.position:
@@ -264,5 +264,5 @@ func _on_Size_ratio_toggled(button_pressed: bool) -> void:
 
 
 func _on_Timer_timeout() -> void:
-	if not selection_node.transformation_handles.is_transforming_content():
+	if not transformation_handles.is_transforming_content():
 		selection_node.commit_undo("Move Selection", undo_data)

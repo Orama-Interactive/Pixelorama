@@ -225,14 +225,6 @@ func is_transforming_content() -> bool:
 	return preview_transform != original_selection_transform
 
 
-func is_position_inside_selection(pos: Vector2) -> bool:
-	if not is_instance_valid(transformed_selection_map):
-		return false
-	var local_click := preview_transform.affine_inverse() * pos
-	var img_rect := Rect2(Vector2.ZERO, transformed_selection_map.get_size())
-	return img_rect.has_point(local_click)
-
-
 func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vector2:
 	var image_size := transformed_selection_map.get_size()
 	var local := Vector2(image_size.x * handle.pos.x, image_size.y * handle.pos.y)
