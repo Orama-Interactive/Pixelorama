@@ -176,24 +176,23 @@ func transform_content_confirm() -> void:
 		var cel_image := cel.get_image()
 		var src := Image.new()
 		src.copy_from(preview_image)
-		var transformation_origin := transformation_handles.get_transform_top_left(src.get_size())
 		if not is_pasting:
 			src.copy_from(cel.transformed_content)
-			transformation_origin = transformation_handles.get_transform_top_left(src.get_size())
 			cel.transformed_content = null
-			if Tools.is_placing_tiles():
-				if cel is not CelTileMap:
-					continue
-				#var tilemap := cel as CelTileMap
-				#var horizontal_size := preview_image.get_width() / tilemap.get_tile_size().x
-				#var vertical_size := preview_image.get_height() / tilemap.get_tile_size().y
-				#var selected_cells := tilemap.resize_selection(
-					#original_selected_tilemap_cells, horizontal_size, vertical_size
-				#)
-				#src.crop(preview_image.get_width(), preview_image.get_height())
-				#tilemap.apply_resizing_to_image(src, selected_cells, selection_rect, true)
-			else:
-				transformation_handles.bake_transform_to_image(src, selection_size_rect)
+		var transformation_origin := transformation_handles.get_transform_top_left(src.get_size())
+		if Tools.is_placing_tiles():
+			if cel is not CelTileMap:
+				continue
+			#var tilemap := cel as CelTileMap
+			#var horizontal_size := preview_image.get_width() / tilemap.get_tile_size().x
+			#var vertical_size := preview_image.get_height() / tilemap.get_tile_size().y
+			#var selected_cells := tilemap.resize_selection(
+				#original_selected_tilemap_cells, horizontal_size, vertical_size
+			#)
+			#src.crop(preview_image.get_width(), preview_image.get_height())
+			#tilemap.apply_resizing_to_image(src, selected_cells, selection_rect, true)
+		else:
+			transformation_handles.bake_transform_to_image(src, selection_size_rect)
 
 		if Tools.is_placing_tiles():
 			if cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
@@ -457,8 +456,8 @@ func paste(in_place := false) -> void:
 			#)
 
 	is_pasting = true
-	transformation_handles.begin_transform(clipboard.image)
 	project.selection_map_changed()
+	transformation_handles.begin_transform(clipboard.image)
 
 
 func paste_from_clipboard() -> void:
@@ -489,9 +488,9 @@ func paste_from_clipboard() -> void:
 
 	project.selection_map.copy_from(clip_map)
 	project.selection_map.crop(max_size.x, max_size.y)
+	project.selection_map_changed()
 	transformation_handles.begin_transform(clipboard_image)
 	is_pasting = true
-	project.selection_map_changed()
 
 
 ## Deletes the drawing enclosed within the selection's area.

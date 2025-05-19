@@ -213,6 +213,8 @@ func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 
 
 func is_transforming_content() -> bool:
+	if selection_node.is_pasting:
+		return true
 	return preview_transform != original_selection_transform
 
 
@@ -407,6 +409,8 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 		return
 	if is_instance_valid(image):
 		pre_transformed_image = image
+		transformed_image.copy_from(pre_transformed_image)
+		image_texture.set_image(transformed_image)
 		return
 	var blended_image := project.new_empty_image()
 	DrawingAlgos.blend_layers(
@@ -449,11 +453,6 @@ func reset_transform() -> void:
 
 
 func get_transform_top_left(size := transformed_selection_map.get_size()) -> Vector2:
-	var move_to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot)
-	var move_back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot)  # move pivot back
-	var full_transform := move_back * preview_transform * move_to_origin
-
-	# Estimate new bounding box
 	var bounds := DrawingAlgos.get_transformed_bounds(size, preview_transform)
 	return bounds.position.ceil()
 
