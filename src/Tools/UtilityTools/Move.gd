@@ -2,9 +2,6 @@ extends BaseTool
 
 var _start_pos: Vector2i
 var _offset: Vector2i
-## Used to check if the state of content transformation has been changed
-## while draw_move() is being called. For example, pressing Enter while still moving content
-var _content_transformation_check := false
 var _snap_to_grid := false  ## Mouse Click + Ctrl
 var _undo_data := {}
 
@@ -51,7 +48,6 @@ func draw_start(pos: Vector2i) -> void:
 	else:
 		if Global.current_project.has_selection:
 			selection_node.transformation_handles.begin_transform()
-	_content_transformation_check = selection_node.transformation_handles.is_transforming_content()
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
 
@@ -59,10 +55,6 @@ func draw_start(pos: Vector2i) -> void:
 func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
-		return
-	# This is true if content transformation has been confirmed (pressed Enter for example)
-	# while the content is being moved
-	if _content_transformation_check != selection_node.transformation_handles.is_transforming_content():
 		return
 	pos = _snap_position(pos)
 
@@ -86,10 +78,7 @@ func draw_end(pos: Vector2i) -> void:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		super.draw_end(pos)
 		return
-	if (
-		_start_pos != Vector2i(Vector2.INF)
-		and _content_transformation_check == selection_node.transformation_handles.is_transforming_content()
-	):
+	if _start_pos != Vector2i(Vector2.INF):
 		pos = _snap_position(pos)
 		if not (Global.current_project.has_selection and not Tools.is_placing_tiles()):
 			var pixel_diff := pos - _start_pos
