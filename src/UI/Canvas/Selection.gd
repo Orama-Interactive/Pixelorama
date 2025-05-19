@@ -422,7 +422,7 @@ func paste(in_place := false) -> void:
 	project.selection_map.crop(max_size.x, max_size.y)
 	var selection_rect := project.selection_map.get_selection_rect(project)
 	project.selection_offset = clipboard.selection_offset
-	#big_bounding_rectangle = clipboard.big_bounding_rectangle
+	var transform_origin: Vector2 = clipboard.big_bounding_rectangle.position
 	if not in_place:  # If "Paste" is selected, and not "Paste in Place"
 		var camera_center := Global.camera.camera_screen_center
 		camera_center -= Vector2(selection_rect.size) / 2.0
@@ -435,13 +435,13 @@ func paste(in_place := false) -> void:
 			camera_center.y = clampf(camera_center.y, 0, max_pos.y)
 		else:
 			camera_center.y = 0
-		#big_bounding_rectangle.position = Vector2i(camera_center.floor())
+		transform_origin = Vector2i(camera_center.floor())
 		if Tools.is_placing_tiles():
 			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 			var grid_size := tilemap_cel.get_tile_size()
-			#big_bounding_rectangle.position = Vector2i(
-				#Tools.snap_to_rectangular_grid_boundary(big_bounding_rectangle.position, grid_size)
-			#)
+			transform_origin = Vector2i(
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size)
+			)
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 	else:
 		if Tools.is_placing_tiles():
@@ -450,13 +450,14 @@ func paste(in_place := false) -> void:
 			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
 				project.selection_offset, grid_size
 			)
-			#big_bounding_rectangle.position = Vector2i(
-				#Tools.snap_to_rectangular_grid_boundary(big_bounding_rectangle.position, grid_size)
-			#)
+			transform_origin = Vector2i(
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size)
+			)
 
 	is_pasting = true
 	project.selection_map_changed()
 	transformation_handles.begin_transform(clipboard.image)
+	transformation_handles.preview_transform.origin = transform_origin
 
 
 func paste_from_clipboard() -> void:
