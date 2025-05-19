@@ -14,14 +14,9 @@ var transformed_selection_map: SelectionMap:
 			pivot = transformed_selection_map.get_size() / 2
 		set_process_input(is_instance_valid(transformed_selection_map))
 		queue_redraw()
-var transformed_image: Image:
-	set(value):
-		transformed_image = value
-		if is_instance_valid(transformed_image):
-			image_texture = ImageTexture.create_from_image(transformed_image)
-		queue_redraw()
+var transformed_image := Image.new()
 var pre_transform_selection_offset: Vector2
-var image_texture: ImageTexture
+var image_texture := ImageTexture.new()
 
 ## Preview transform, not yet applied to transformed_image
 var preview_transform := Transform2D():
@@ -136,10 +131,9 @@ func _draw() -> void:
 	if not is_instance_valid(transformed_selection_map):
 		return
 	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
-	if is_instance_valid(transformed_image):
-		image_texture.set_image(transformed_image)
+	if is_instance_valid(transformed_image) and not transformed_image.is_empty():
 		draw_set_transform_matrix(preview_transform)
-		draw_texture(image_texture, Vector2.ZERO)
+		draw_texture(image_texture, Vector2.ZERO, Color(1, 1, 1, 0.5))
 		draw_set_transform_matrix(Transform2D.IDENTITY)
 
 	# Draw handles
@@ -169,15 +163,15 @@ func _get_hovered_handle(mouse_pos: Vector2) -> TransformHandle:
 	return null
 
 
+## Begin dragging handle.
 func _handle_mouse_press(mouse_pos: Vector2, hovered_handle: TransformHandle) -> void:
-	# Begin dragging handle or moving the image.
 	if hovered_handle != null:
 		active_handle = hovered_handle
 		begin_drag(mouse_pos)
 
 
+## Update [member preview_transform] based which handle we're dragging.
 func _handle_mouse_drag(mouse_pos: Vector2) -> void:
-	# Update preview_transform based which handle we're dragging, or moving the image
 	var delta := mouse_pos - drag_start
 	match active_handle.type:
 		TransformHandle.Type.SCALE:
@@ -388,6 +382,7 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 
 func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 	transformed_selection_map = selection_map
+	transformed_image = Image.new()
 	if is_instance_valid(transformed_selection_map):
 		preview_transform = Transform2D().translated(selection_rect.position)
 	else:
@@ -397,26 +392,37 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 
 
 func begin_transform(image: Image = null, project := Global.current_project) -> void:
+	if not transformed_image.is_empty():
+		return
 	is_transforming_content_changed.emit()
 	if is_instance_valid(image):
 		transformed_image = image
 		return
-	transformed_image = project.new_empty_image()
+	var blended_image := project.new_empty_image()
 	DrawingAlgos.blend_layers(
-		transformed_image, project.frames[project.current_frame], Vector2i.ZERO, project, true
+		blended_image, project.frames[project.current_frame], Vector2i.ZERO, project, true
 	)
+	var map_copy := project.selection_map.return_cropped_copy(project, project.size)
+	var selection_rect := map_copy.get_used_rect()
+	transformed_image = Image.create(
+		selection_rect.size.x, selection_rect.size.y, false, project.get_image_format()
+	)
+	transformed_image.blit_rect_mask(blended_image, map_copy, selection_rect, Vector2i.ZERO)
+	image_texture.set_image(transformed_image)
 
 
 func reset_transform() -> void:
 	preview_transform = Transform2D()
 	if is_instance_valid(transformed_selection_map):
 		pivot = transformed_selection_map.get_size() / 2
+	transformed_image = Image.new()
+	image_texture.set_image(transformed_image)
 	is_transforming_content_changed.emit()
 	queue_redraw()
 
 
-func bake_transform_to_image(image: Image) -> void:
-	DrawingAlgos.transform_image_with_transform2d(image, preview_transform, pivot)
+func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
+	DrawingAlgos.transform_image_with_transform2d(image, preview_transform, pivot, used_rect)
 
 
 func bake_transform_to_selection(map: SelectionMap) -> void:

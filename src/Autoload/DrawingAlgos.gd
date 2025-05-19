@@ -332,7 +332,7 @@ func get_transformed_bounds(image_size: Vector2i, transform: Transform2D) -> Rec
 
 
 func transform_image_with_transform2d(
-	original_image: Image, transform_matrix: Transform2D, pivot: Vector2
+	original_image: Image, transform_matrix: Transform2D, pivot: Vector2, used_rect := Rect2i()
 ) -> void:
 	# Compute the transformation with pivot support
 	# translate pivot to origin
@@ -383,7 +383,8 @@ func transform_image_with_transform2d(
 	if not is_instance_valid(viewport_texture):
 		return
 	viewport_texture.convert(original_image.get_format())
-	original_image.copy_from(viewport_texture.get_region(viewport_texture.get_used_rect()))
+	var region := viewport_texture.get_used_rect() if used_rect == Rect2i() else used_rect
+	original_image.copy_from(viewport_texture.get_region(region))
 
 	if original_image is ImageExtended:
 		original_image.convert_rgb_to_indexed()

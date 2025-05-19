@@ -163,7 +163,7 @@ func transform_content_confirm() -> void:
 	var project := Global.current_project
 	var preview_image := transformation_handles.transformed_image
 	transformation_handles.bake_transform_to_selection(project.selection_map)
-	#var matrix := transformation_handles.preview_transform
+	var matrix := transformation_handles.preview_transform
 	#var transformed_selection := SelectionMap.new()
 	#transformed_selection.copy_from(transformation_handles.transformed_selection_map)
 	#var transformation_origin := DrawingAlgos.get_transformed_bounds(transformed_selection.get_size(), matrix).position.ceil()
@@ -176,8 +176,10 @@ func transform_content_confirm() -> void:
 		var cel_image := cel.get_image()
 		var src := Image.new()
 		src.copy_from(preview_image)
+		var transformation_origin := DrawingAlgos.get_transformed_bounds(src.get_size(), matrix).position.ceil()
 		if not is_pasting:
 			src.copy_from(cel.transformed_content)
+			transformation_origin = DrawingAlgos.get_transformed_bounds(src.get_size(), matrix).position.ceil()
 			cel.transformed_content = null
 			if Tools.is_placing_tiles():
 				if cel is not CelTileMap:
@@ -191,14 +193,14 @@ func transform_content_confirm() -> void:
 				#src.crop(preview_image.get_width(), preview_image.get_height())
 				#tilemap.apply_resizing_to_image(src, selected_cells, selection_rect, true)
 			else:
-				transformation_handles.bake_transform_to_image(src)
+				transformation_handles.bake_transform_to_image(src, selection_size_rect)
 
 		if Tools.is_placing_tiles():
 			if cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 				continue
-			cel_image.blit_rect(src, selection_size_rect, selection_rect.position)
+			cel_image.blit_rect(src, selection_size_rect, transformation_origin)
 		else:
-			cel_image.blit_rect_mask(src, src, selection_size_rect, selection_rect.position)
+			cel_image.blit_rect_mask(src, src, selection_size_rect, transformation_origin)
 		cel_image.convert_rgb_to_indexed()
 	project.selection_map_changed()
 	commit_undo("Move Selection", undo_data)
