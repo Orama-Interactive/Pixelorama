@@ -67,6 +67,8 @@ var pivot := Vector2.ZERO:
 		if is_instance_valid(transformed_selection_map):
 			var image_size := transformed_selection_map.get_size() as Vector2
 			handles[0].pos = pivot / image_size
+
+@onready var selection_node := get_parent() as SelectionNode
 @onready var canvas := get_parent().get_parent() as Canvas
 
 
@@ -417,6 +419,24 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 	)
 	pre_transformed_image.blit_rect_mask(blended_image, map_copy, selection_rect, Vector2i.ZERO)
 	image_texture.set_image(pre_transformed_image)
+	# Remove content from the cels
+	var clear_image := Image.create(
+		pre_transformed_image.get_width(),
+		pre_transformed_image.get_height(),
+		pre_transformed_image.has_mipmaps(),
+		pre_transformed_image.get_format()
+	)
+	for cel in selection_node.get_selected_draw_cels():
+		var cel_image := cel.get_image()
+		cel.transformed_content = selection_node.get_selected_image(cel_image)
+		cel_image.blit_rect_mask(
+			clear_image,
+			cel.transformed_content,
+			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
+			selection_rect.position
+		)
+	for cel_index in project.selected_cels:
+		canvas.update_texture(cel_index[1])
 
 
 func reset_transform() -> void:

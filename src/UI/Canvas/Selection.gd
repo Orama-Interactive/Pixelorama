@@ -172,7 +172,7 @@ func transform_content_confirm() -> void:
 	#project.selection_map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)
 	var selection_rect := project.selection_map.get_selection_rect(project)
 	var selection_size_rect := Rect2i(Vector2i.ZERO, selection_rect.size)
-	for cel in _get_selected_draw_cels():
+	for cel in get_selected_draw_cels():
 		var cel_image := cel.get_image()
 		var src := Image.new()
 		src.copy_from(preview_image)
@@ -218,7 +218,7 @@ func transform_content_cancel() -> void:
 
 	#project.selection_map.copy_from(original_bitmap)
 	project.selection_map_changed()
-	for cel in _get_selected_draw_cels():
+	for cel in get_selected_draw_cels():
 		var cel_image := cel.get_image()
 		if !is_pasting:
 			cel_image.blit_rect_mask(
@@ -273,7 +273,7 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	data["undo_image"] = undo_image
 
 	if undo_image:
-		Global.current_project.serialize_cel_undo_data(_get_selected_draw_cels(), data)
+		Global.current_project.serialize_cel_undo_data(get_selected_draw_cels(), data)
 	return data
 
 
@@ -286,7 +286,7 @@ func _update_marching_ants() -> void:
 
 # TODO: Change BaseCel to PixelCel if Godot ever fixes issues
 # with typed arrays being cast into other types.
-func _get_selected_draw_cels() -> Array[BaseCel]:
+func get_selected_draw_cels() -> Array[BaseCel]:
 	var cels: Array[BaseCel] = []
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
@@ -321,7 +321,7 @@ func get_enclosed_image() -> Image:
 	if transformation_handles.is_transforming_content():
 		enclosed_img.copy_from(transformation_handles.transformed_image)
 	else:
-		enclosed_img = _get_selected_image(image)
+		enclosed_img = get_selected_image(image)
 	return enclosed_img
 
 
@@ -617,7 +617,7 @@ func _project_switched() -> void:
 	queue_redraw()
 
 
-func _get_selected_image(cel_image: Image) -> Image:
+func get_selected_image(cel_image: Image) -> Image:
 	var project := Global.current_project
 	var selection_rect := project.selection_map.get_selection_rect(project)
 	var image := Image.create(
