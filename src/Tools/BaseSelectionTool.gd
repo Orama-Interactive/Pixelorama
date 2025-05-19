@@ -5,7 +5,6 @@ enum Mode { DEFAULT, ADD, SUBTRACT, INTERSECT }
 
 var undo_data: Dictionary
 var _move := false
-var _move_content := true
 var _start_pos := Vector2i.ZERO
 var _offset := Vector2i.ZERO
 ## For tools such as the Polygon selection tool where you have to
@@ -102,7 +101,6 @@ func draw_start(pos: Vector2i) -> void:
 		# Move current selection
 		_move = true
 		if quick_copy:  # Move selection without cutting it from the original position (quick copy)
-			_move_content = true
 			if selection_node.transformation_handles.is_transforming_content():
 				for image in _get_selected_draw_images():
 					image.blit_rect_mask(
@@ -126,12 +124,12 @@ func draw_start(pos: Vector2i) -> void:
 					)
 				Global.canvas.update_selected_cels_textures()
 
-		elif Input.is_action_pressed("transform_move_selection_only", true):  # Doesn't move content
-			selection_node.transform_content_confirm()
-			_move_content = false
-			selection_node.move_borders_start()
-		else:  # Move selection and content normally
-			_move_content = true
+		else:
+			# Doesn't move content
+			if Input.is_action_pressed("transform_move_selection_only", true):
+				selection_node.transform_content_confirm()
+				selection_node.move_borders_start()
+			transformation_handles.begin_transform()
 
 	else:  # No moving
 		selection_node.transform_content_confirm()
@@ -170,11 +168,7 @@ func draw_move(pos: Vector2i) -> void:
 		)
 		pos += grid_offset
 
-	if _move_content:
-		transformation_handles.move(pos - _offset)
-	else:
-		transformation_handles.move(pos - _offset)
-
+	transformation_handles.move(pos - _offset)
 	_offset = pos
 	_set_cursor_text(select_rect)
 
