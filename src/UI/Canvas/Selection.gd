@@ -351,8 +351,7 @@ func copy() -> void:
 		var selection_rect := project.selection_map.get_selection_rect(project)
 		if transformation_handles.is_transforming_content():
 			to_copy.copy_from(transformation_handles.transformed_image)
-			project.selection_map.move_bitmap_values(project, false)
-			cl_selection_map = project.selection_map
+			cl_selection_map = preview_selection_map
 		else:
 			to_copy = image.get_region(selection_rect)
 			# Remove unincluded pixels if the selection is not a single rectangle
