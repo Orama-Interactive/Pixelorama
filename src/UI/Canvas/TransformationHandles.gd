@@ -572,10 +572,15 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 
 
 func begin_transform(
-	image: Image = null, project := Global.current_project, force_move_content := false
+	image: Image = null,
+	project := Global.current_project,
+	force_move_content := false,
+	force_move_selection_only := false
 ) -> void:
 	currently_transforming = true
-	if Input.is_action_pressed(&"transform_move_selection_only", true) and not force_move_content:
+	var selection_only_action := Input.is_action_pressed(&"transform_move_selection_only", true)
+	var move_selection_only := selection_only_action or force_move_selection_only
+	if move_selection_only and not force_move_content:
 		if not only_transforms_selection:
 			selection_node.undo_data = selection_node.get_undo_data(false)
 			only_transforms_selection = true

@@ -499,7 +499,7 @@ class SelectionAPI:
 	## (0 for adding, 1 for subtracting, 2 for intersection).
 	func select_rect(rect: Rect2i, operation := 0) -> void:
 		Global.canvas.selection.transform_content_confirm()
-		var undo_data_tmp = Global.canvas.selection.get_undo_data(false)
+		var undo_data_tmp := Global.canvas.selection.get_undo_data(false)
 		Global.canvas.selection.select_rect(rect, operation)
 		Global.canvas.selection.commit_undo("Select", undo_data_tmp)
 
@@ -510,17 +510,19 @@ class SelectionAPI:
 	func move_selection(
 		destination: Vector2i, with_content := true, transform_standby := false
 	) -> void:
-		if not with_content:
-			Global.canvas.selection.transform_content_confirm()
-			Global.canvas.selection.move_borders_start()
-		else:
-			Global.canvas.selection.transform_content_start()
-		var selection_rectangle: Rect2i = Global.canvas.selection.big_bounding_rectangle
-		var rel_direction := destination - selection_rectangle.position
-		Global.canvas.selection.transformation_handles.move(rel_direction)
-		Global.canvas.selection.move_borders_end()
-		if not transform_standby and with_content:
-			Global.canvas.selection.transform_content_confirm()
+		var selection_node := Global.canvas.selection
+		selection_node.transform_content_confirm()
+		selection_node.transformation_handles.begin_transform(
+			null, Global.current_project, false, not with_content
+		)
+		var selection_rectangle := DrawingAlgos.get_transformed_bounds(
+			selection_node.transformation_handles.transformed_selection_map.get_size(),
+			selection_node.transformation_handles.preview_transform
+		)
+		var rel_direction := destination - (selection_rectangle.position as Vector2i)
+		selection_node.transformation_handles.move_transform(rel_direction)
+		if not transform_standby:
+			selection_node.transform_content_confirm()
 
 	## Resizes the selection to [param new_size],
 	## with content if [param with_content] is [code]true[/code].
@@ -529,19 +531,15 @@ class SelectionAPI:
 	func resize_selection(
 		new_size: Vector2i, with_content := true, transform_standby := false
 	) -> void:
-		if not with_content:
-			Global.canvas.selection.transform_content_confirm()
-			Global.canvas.selection.move_borders_start()
-		else:
-			Global.canvas.selection.transform_content_start()
-
-		if Global.canvas.selection.original_bitmap.is_empty():  # To avoid copying twice.
-			Global.canvas.selection.original_bitmap.copy_from(Global.current_project.selection_map)
-
-		Global.canvas.selection.big_bounding_rectangle.size = new_size
-		Global.canvas.selection.resize_selection()
-		Global.canvas.selection.move_borders_end()
-		if not transform_standby and with_content:
+		var selection_node := Global.canvas.selection
+		selection_node.transform_content_confirm()
+		selection_node.transformation_handles.begin_transform(
+			null, Global.current_project, false, not with_content
+		)
+		var image_size := selection_node.preview_selection_map.get_used_rect().size
+		var delta := new_size - image_size
+		selection_node.transformation_handles.resize_transform(delta)
+		if not transform_standby:
 			Global.canvas.selection.transform_content_confirm()
 
 	## Inverts the selection.
