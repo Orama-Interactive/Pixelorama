@@ -86,7 +86,6 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	var project := Global.current_project
 	var select_rect := project.selection_map.get_selection_rect(project)
-	undo_data = selection_node.get_undo_data(false)
 	_intersect = Input.is_action_pressed("selection_intersect", true)
 	_add = Input.is_action_pressed("selection_add", true)
 	_subtract = Input.is_action_pressed("selection_subtract", true)
@@ -134,6 +133,7 @@ func draw_start(pos: Vector2i) -> void:
 
 	else:  # No moving
 		selection_node.transform_content_confirm()
+	undo_data = selection_node.get_undo_data(false)
 
 
 func draw_move(pos: Vector2i) -> void:
