@@ -7,6 +7,7 @@ const HANDLE_RADIUS := 1.0
 const RS_HANDLE_DISTANCE := 2
 const KEY_MOVE_ACTION_NAMES: PackedStringArray = [&"ui_up", &"ui_down", &"ui_left", &"ui_right"]
 
+var currently_transforming := false
 var arrow_key_move := false
 var only_transforms_selection := false
 var transformed_selection_map: SelectionMap:
@@ -287,9 +288,7 @@ func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 
 
 func is_transforming_content() -> bool:
-	if selection_node.is_pasting:
-		return true
-	return preview_transform != original_selection_transform
+	return currently_transforming
 
 
 func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vector2:
@@ -467,6 +466,7 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 
 
 func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
+	currently_transforming = false
 	transformed_selection_map = selection_map
 	pre_transformed_image = Image.new()
 	transformed_image = Image.new()
@@ -479,6 +479,7 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 
 
 func begin_transform(image: Image = null, project := Global.current_project) -> void:
+	currently_transforming = true
 	if Input.is_action_pressed(&"transform_move_selection_only"):
 		only_transforms_selection = true
 		return
@@ -504,6 +505,10 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 	)
 	pre_transformed_image.blit_rect_mask(blended_image, map_copy, selection_rect, Vector2i.ZERO)
 	image_texture.set_image(pre_transformed_image)
+	if pre_transformed_image.is_empty():
+		return
+	transformed_image.copy_from(pre_transformed_image)
+	queue_redraw()
 	# Remove content from the cels
 	var clear_image := Image.create(
 		pre_transformed_image.get_width(),
@@ -525,6 +530,7 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 
 
 func reset_transform() -> void:
+	currently_transforming = false
 	preview_transform = original_selection_transform
 	if is_instance_valid(transformed_selection_map):
 		pivot = transformed_selection_map.get_size() / 2
