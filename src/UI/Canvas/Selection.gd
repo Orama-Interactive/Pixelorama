@@ -420,11 +420,16 @@ func delete(selected_cels := true) -> void:
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if transformation_handles.is_transforming_content():
-		transformation_handles.reset_transform()
-		is_pasting = false
-		queue_redraw()
-		commit_undo("Draw", undo_data)
-		return
+		if transformation_handles.transformed_image.is_empty():
+			transform_content_confirm()
+		else:
+			transformation_handles.reset_transform()
+			clear_selection()
+			transformation_handles.set_selection(null, Rect2())
+			is_pasting = false
+			queue_redraw()
+			commit_undo("Draw", undo_data)
+			return
 
 	var undo_data_tmp := get_undo_data(true)
 	var images: Array[ImageExtended]
@@ -436,7 +441,7 @@ func delete(selected_cels := true) -> void:
 	if project.has_selection:
 		var blank := project.new_empty_image()
 		var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
-		var selection_rect := project.selection_map.get_selection_rect(project)
+		var selection_rect := selection_map_copy.get_used_rect()
 		for image in images:
 			image.blit_rect_mask(blank, selection_map_copy, selection_rect, selection_rect.position)
 			image.convert_rgb_to_indexed()
@@ -444,6 +449,7 @@ func delete(selected_cels := true) -> void:
 		for image in images:
 			image.fill(0)
 			image.convert_rgb_to_indexed()
+	clear_selection()
 	commit_undo("Draw", undo_data_tmp)
 
 

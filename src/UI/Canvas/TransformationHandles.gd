@@ -525,11 +525,13 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 
 
 func reset_transform() -> void:
-	preview_transform = Transform2D()
+	preview_transform = original_selection_transform
 	if is_instance_valid(transformed_selection_map):
 		pivot = transformed_selection_map.get_size() / 2
 	pre_transformed_image = Image.new()
 	transformed_image = Image.new()
+	for cel in selection_node.get_selected_draw_cels():
+		cel.transformed_content = null
 	queue_redraw()
 
 
