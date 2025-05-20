@@ -106,13 +106,13 @@ func transform_content_confirm() -> void:
 				continue
 			var tilemap := cel as CelTileMap
 			@warning_ignore("integer_division")
-			var horizontal_size := preview_image.get_width() / tilemap.get_tile_size().x
+			var horizontal_size := selection_rect.size.x / tilemap.get_tile_size().x
 			@warning_ignore("integer_division")
-			var vertical_size := preview_image.get_height() / tilemap.get_tile_size().y
+			var vertical_size := selection_rect.size.y / tilemap.get_tile_size().y
 			var selected_cells := tilemap.resize_selection(
 				transformation_handles.pre_transform_tilemap_cells, horizontal_size, vertical_size
 			)
-			src.crop(preview_image.get_width(), preview_image.get_height())
+			src.crop(selection_rect.size.x, selection_rect.size.y)
 			tilemap.apply_resizing_to_image(src, selected_cells, selection_rect, true)
 		else:
 			transformation_handles.bake_transform_to_image(src, selection_size_rect)
