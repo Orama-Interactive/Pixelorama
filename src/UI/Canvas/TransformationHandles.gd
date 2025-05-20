@@ -20,6 +20,7 @@ var transformed_selection_map: SelectionMap:
 var transformed_image := Image.new()
 var pre_transformed_image := Image.new()
 var pre_transform_selection_offset: Vector2
+var pre_transform_tilemap_cells: Array[Array]
 var image_texture := ImageTexture.new()
 
 ## Preview transform, not yet applied to the image.
@@ -27,12 +28,6 @@ var preview_transform := Transform2D():
 	set(value):
 		preview_transform = value
 		preview_transform_changed.emit()
-		if not pre_transformed_image.is_empty():
-			transformed_image.copy_from(pre_transformed_image)
-			var bounds := DrawingAlgos.get_transformed_bounds(transformed_selection_map.get_size(), preview_transform)
-			bounds.position -= bounds.position
-			bake_transform_to_image(transformed_image, bounds)
-			image_texture.set_image(transformed_image)
 
 var original_selection_transform := Transform2D()
 
@@ -103,6 +98,7 @@ class TransformHandle:
 
 
 func _ready() -> void:
+	preview_transform_changed.connect(_on_preview_transform_changed)
 	Global.camera.zoom_changed.connect(queue_redraw)
 	set_process_input(false)
 
@@ -269,6 +265,32 @@ func _is_action_direction_released(event: InputEvent) -> bool:
 	return false
 
 
+func _on_preview_transform_changed() -> void:
+	if not pre_transformed_image.is_empty():
+		transformed_image.copy_from(pre_transformed_image)
+		var bounds := DrawingAlgos.get_transformed_bounds(
+			transformed_selection_map.get_size(), preview_transform
+		)
+		if Tools.is_placing_tiles():
+			for cel in selection_node.get_selected_draw_cels():
+				if cel is not CelTileMap:
+					continue
+				var tilemap := cel as CelTileMap
+				var horizontal_size := bounds.size.x / tilemap.get_tile_size().x
+				var vertical_size := bounds.size.y / tilemap.get_tile_size().y
+				var selected_cells := tilemap.resize_selection(
+					pre_transform_tilemap_cells, horizontal_size, vertical_size
+				)
+				transformed_image.crop(bounds.size.x, bounds.size.y)
+				tilemap.apply_resizing_to_image(
+					transformed_image, selected_cells, bounds, false
+				)
+		else:
+			bounds.position -= bounds.position
+			bake_transform_to_image(transformed_image, bounds)
+		image_texture.set_image(transformed_image)
+
+
 func _set_default_cursor() -> void:
 	var project := Global.current_project
 	var cursor := Input.CURSOR_ARROW
@@ -332,11 +354,22 @@ func begin_drag(mouse_pos: Vector2) -> void:
 
 
 func move(pos: Vector2) -> void:
-	preview_transform = preview_transform.translated(pos)
+	var final_pos := pos
+	if Tools.is_placing_tiles():
+		var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
+		final_pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size)
+	preview_transform = preview_transform.translated(final_pos)
 	queue_redraw()
 
 
 func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:
+	if Tools.is_placing_tiles():
+		var tilemap := Global.current_project.get_current_cel() as CelTileMap
+		if tilemap.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+			return t
+		var offset := tilemap.offset % tilemap.get_tile_size()
+		drag_start = drag_start.snapped(tilemap.get_tile_size()) + Vector2(offset)
+		delta = delta.snapped(tilemap.get_tile_size()) + Vector2(offset)
 	var image_size := transformed_selection_map.get_size() as Vector2
 	# Step 1: Convert drag to local space
 	var local_start := t.affine_inverse() * drag_start
@@ -378,6 +411,8 @@ func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Tr
 
 ## Rotation around pivot based on initial drag.
 func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
+	if Tools.is_placing_tiles():
+		return t
 	# Compute initial and current angles
 	var pivot_world := t * pivot
 	var start_vec := drag_start - pivot_world
@@ -393,6 +428,8 @@ func handle_pivot_drag(mouse_pos: Vector2, t: Transform2D) -> void:
 
 
 func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Transform2D:
+	if Tools.is_placing_tiles():
+		return t
 	var image_size := transformed_selection_map.get_size() as Vector2
 	var handle_global_position := get_handle_position(handle, t)
 	var center := t * pivot
@@ -475,6 +512,7 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 	else:
 		preview_transform = Transform2D.IDENTITY
 	original_selection_transform = preview_transform
+	pre_transform_tilemap_cells.clear()
 	queue_redraw()
 
 
@@ -494,12 +532,19 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 		transformed_image.copy_from(pre_transformed_image)
 		image_texture.set_image(transformed_image)
 		return
+	var map_copy := project.selection_map.return_cropped_copy(project, project.size)
+	var selection_rect := map_copy.get_used_rect()
+	var current_cel := project.get_current_cel()
+	if current_cel is CelTileMap and Tools.is_placing_tiles():
+		if current_cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+			return
+		pre_transform_tilemap_cells = (current_cel as CelTileMap).get_selected_cells(
+			project.selection_map, selection_rect
+		)
 	var blended_image := project.new_empty_image()
 	DrawingAlgos.blend_layers(
 		blended_image, project.frames[project.current_frame], Vector2i.ZERO, project, true
 	)
-	var map_copy := project.selection_map.return_cropped_copy(project, project.size)
-	var selection_rect := map_copy.get_used_rect()
 	pre_transformed_image = Image.create(
 		selection_rect.size.x, selection_rect.size.y, false, project.get_image_format()
 	)
@@ -536,6 +581,7 @@ func reset_transform() -> void:
 		pivot = transformed_selection_map.get_size() / 2
 	pre_transformed_image = Image.new()
 	transformed_image = Image.new()
+	pre_transform_tilemap_cells.clear()
 	for cel in selection_node.get_selected_draw_cels():
 		cel.transformed_content = null
 	queue_redraw()
