@@ -165,12 +165,17 @@ func _draw() -> void:
 				_circle_to_square(pos, (HANDLE_RADIUS - 0.3) * zoom_value),
 				Global.selection_border_color_1
 			)
-		elif handle.type == TransformHandle.Type.ROTATE:
-			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.ORANGE)
-		elif handle.type == TransformHandle.Type.SKEW:
-			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.GREEN)
 		elif handle.type == TransformHandle.Type.PIVOT:
-			draw_circle(pos, HANDLE_RADIUS * zoom_value.x, Color.WHITE)
+			if is_rotated_or_skewed():
+				var final_size := HANDLE_RADIUS * zoom_value.x * 2
+				draw_arc(pos, final_size * 0.25, 0, 360, 360, Color.YELLOW)
+				draw_arc(pos, final_size * 0.5, 0, 360, 360, Color.WHITE)
+				draw_line(
+					pos - Vector2.UP * final_size, pos - Vector2.DOWN * final_size, Color.WHITE
+				)
+				draw_line(
+					pos - Vector2.RIGHT * final_size, pos - Vector2.LEFT * final_size, Color.WHITE
+				)
 
 
 func _move_with_arrow_keys(event: InputEvent) -> void:
@@ -214,6 +219,8 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 func _get_hovered_handle(mouse_pos: Vector2) -> TransformHandle:
 	var zoom_value := Vector2.ONE / Global.camera.zoom * 10
 	for handle in handles:
+		if handle.type == TransformHandle.Type.PIVOT and not is_rotated_or_skewed():
+			continue
 		if get_handle_position(handle).distance_to(mouse_pos) < HANDLE_RADIUS * zoom_value.x:
 			return handle
 	return null
@@ -329,6 +336,10 @@ func _set_default_cursor() -> void:
 func _circle_to_square(center: Vector2, radius: Vector2) -> Rect2:
 	var rect := Rect2(center - radius / 2, radius)
 	return rect
+
+
+func is_rotated_or_skewed() -> bool:
+	return preview_transform.get_rotation() != 0 or preview_transform.get_skew() != 0
 
 
 func is_transforming_content() -> bool:
