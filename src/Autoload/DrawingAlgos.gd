@@ -331,7 +331,7 @@ func get_transformed_bounds(image_size: Vector2i, transform: Transform2D) -> Rec
 	return Rect2(min_corner, max_corner - min_corner)
 
 
-func transform_image_with_transform2d(
+func transform_image_with_viewport(
 	original_image: Image, transform_matrix: Transform2D, pivot: Vector2, used_rect := Rect2i()
 ) -> void:
 	# Compute the transformation with pivot support

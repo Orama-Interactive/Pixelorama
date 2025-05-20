@@ -571,6 +571,7 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 	queue_redraw()
 
 
+## Called when a transformation begins to happen.
 func begin_transform(
 	image: Image = null,
 	project := Global.current_project,
@@ -658,7 +659,7 @@ func get_transform_top_left(size := transformed_selection_map.get_size()) -> Vec
 
 
 func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
-	DrawingAlgos.transform_image_with_transform2d(image, preview_transform, pivot, used_rect)
+	DrawingAlgos.transform_image_with_viewport(image, preview_transform, pivot, used_rect)
 
 
 func bake_transform_to_selection(map: SelectionMap) -> void:
