@@ -26,7 +26,7 @@ var image_texture := ImageTexture.new()
 ## Preview transform, not yet applied to the image.
 var preview_transform := Transform2D():
 	set(value):
-		preview_transform = value
+		preview_transform = clamp_transform_image_space(value, pre_transformed_image.get_size())
 		preview_transform_changed.emit()
 
 var original_selection_transform := Transform2D()
@@ -263,6 +263,28 @@ func _is_action_direction_released(event: InputEvent) -> bool:
 		if event.is_action_released(action, true):
 			return true
 	return false
+
+
+func clamp_transform_image_space(t: Transform2D, image_size: Vector2, min_pixels := 1.0) -> Transform2D:
+	var bounds := DrawingAlgos.get_transformed_bounds(image_size, t)
+	var width := bounds.size.x
+	var height := bounds.size.y
+
+	if width < min_pixels or height < min_pixels:
+		# Compute scale correction in local space to ensure 1-pixel size
+		var scale_x := width < min_pixels and width != 0
+		var scale_y := height < min_pixels and height != 0
+		var sx := t.x.length()
+		var sy := t.y.length()
+		if scale_x:
+			sx = sx * (min_pixels / width)
+		if scale_y:
+			sy = sy * (min_pixels / height)
+		# Re-apply scale preserving direction and orientation
+		t.x = t.x.normalized() * sx
+		t.y = t.y.normalized() * sy
+
+	return t
 
 
 func _on_preview_transform_changed() -> void:
