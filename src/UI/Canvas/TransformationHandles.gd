@@ -386,6 +386,13 @@ func move(pos: Vector2) -> void:
 	queue_redraw()
 
 
+## Called by the sliders in the selection tool options.
+func resize(delta: Vector2) -> void:
+	var bottom_right_handle := handles[5]
+	preview_transform = apply_resize(preview_transform, bottom_right_handle, delta)
+	queue_redraw()
+
+
 func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:
 	if Tools.is_placing_tiles():
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap

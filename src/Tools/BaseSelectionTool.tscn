@@ -88,14 +88,8 @@ show_ratio = true
 prefix_x = "Width:"
 prefix_y = "Height:"
 
-[node name="Timer" type="Timer" parent="." index="9"]
-wait_time = 0.2
-one_shot = true
-
 [connection signal="pressed" from="ConfirmButtons/ConfirmButton" to="." method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ConfirmButtons/CancelButton" to="." method="_on_cancel_button_pressed"]
-[connection signal="item_selected" from="Modes" to="." method="_on_Modes_item_selected"]
-[connection signal="value_changed" from="Position" to="." method="_on_Position_value_changed"]
-[connection signal="ratio_toggled" from="Size" to="." method="_on_Size_ratio_toggled"]
-[connection signal="value_changed" from="Size" to="." method="_on_Size_value_changed"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="item_selected" from="Modes" to="." method="_on_modes_item_selected"]
+[connection signal="value_changed" from="Position" to="." method="_on_position_value_changed"]
+[connection signal="value_changed" from="Size" to="." method="_on_size_value_changed"]

@@ -23,7 +23,6 @@ var _skip_slider_logic := false
 @onready var confirm_buttons := $ConfirmButtons as HBoxContainer
 @onready var position_sliders := $Position as ValueSliderV2
 @onready var size_sliders := $Size as ValueSliderV2
-@onready var timer := $Timer as Timer
 
 
 func _ready() -> void:
@@ -36,6 +35,7 @@ func _ready() -> void:
 
 func set_confirm_buttons_visibility() -> void:
 	await get_tree().process_frame
+	set_spinbox_values()
 	confirm_buttons.visible = transformation_handles.is_transforming_content()
 
 
@@ -70,6 +70,8 @@ func set_spinbox_values() -> void:
 	var has_selection := select_rect.has_area()
 	if not has_selection:
 		size_sliders.press_ratio_button(false)
+	if transformation_handles.is_transforming_content():
+		select_rect = selection_node.preview_selection_map.get_selection_rect(project)
 	position_sliders.editable = has_selection
 	position_sliders.value = select_rect.position
 	size_sliders.editable = has_selection
@@ -157,7 +159,6 @@ func draw_move(pos: Vector2i) -> void:
 	if Input.is_action_pressed("transform_snap_grid"):
 		_offset = _offset.snapped(Global.grids[0].grid_size)
 		var prev_pos: Vector2i = select_rect.position
-		#big_bounding_rectangle.position = prev_pos.snapped(Global.grids[0].grid_size)
 		selection_node.marching_ants_outline.offset += Vector2(select_rect.position - prev_pos)
 		pos = pos.snapped(Global.grids[0].grid_size)
 		var grid_offset := Global.grids[0].grid_offset
@@ -226,7 +227,7 @@ func _on_cancel_button_pressed() -> void:
 	selection_node.transform_content_cancel()
 
 
-func _on_Modes_item_selected(index: int) -> void:
+func _on_modes_item_selected(index: int) -> void:
 	_mode_selected = index
 	save_config()
 
@@ -237,43 +238,23 @@ func _set_cursor_text(rect: Rect2i) -> void:
 	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
 
 
-func _on_Position_value_changed(value: Vector2i) -> void:
-	if _skip_slider_logic:
-		return
-	var project := Global.current_project
-	if !project.has_selection:
-		return
-
-	if timer.is_stopped():
-		undo_data = selection_node.get_undo_data(false)
-	timer.start()
-	#selection_node.big_bounding_rectangle.position = value
-
-	project.selection_map.move_bitmap_values(project)
-	project.selection_map_changed()
-
-
-func _on_Size_value_changed(value: Vector2i) -> void:
+func _on_position_value_changed(value: Vector2) -> void:
 	if _skip_slider_logic:
 		return
 	if !Global.current_project.has_selection:
 		return
-
-	if timer.is_stopped():
-		undo_data = selection_node.get_undo_data(false)
-		if not transformation_handles.is_transforming_content():
-			selection_node.original_bitmap.copy_from(Global.current_project.selection_map)
-	timer.start()
-	if selection_node.resized_rect.position != selection_node.big_bounding_rectangle.position:
-		selection_node.resized_rect = selection_node.big_bounding_rectangle
-	selection_node.resized_rect.size = value
-	selection_node.resize_selection()
-
-
-func _on_Size_ratio_toggled(button_pressed: bool) -> void:
-	selection_node.resize_keep_ratio = button_pressed
-
-
-func _on_Timer_timeout() -> void:
 	if not transformation_handles.is_transforming_content():
-		selection_node.commit_undo("Move Selection", undo_data)
+		transformation_handles.begin_transform()
+	transformation_handles.move(value - transformation_handles.preview_transform.origin)
+
+
+func _on_size_value_changed(value: Vector2i) -> void:
+	if _skip_slider_logic:
+		return
+	if !Global.current_project.has_selection:
+		return
+	if not transformation_handles.is_transforming_content():
+		transformation_handles.begin_transform()
+	var image_size := selection_node.preview_selection_map.get_used_rect().size
+	var delta := value - image_size
+	transformation_handles.resize(delta)
