@@ -391,6 +391,7 @@ func paste_from_clipboard() -> void:
 	undo_data = get_undo_data(true)
 	clear_selection()
 	var project := Global.current_project
+	clipboard_image.convert(project.get_image_format())
 	var clip_map := SelectionMap.new()
 	clip_map.copy_from(
 		Image.create(
