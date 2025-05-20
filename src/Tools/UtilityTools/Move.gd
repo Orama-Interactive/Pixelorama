@@ -51,7 +51,7 @@ func draw_move(pos: Vector2i) -> void:
 		Global.canvas.move_preview_location = pos - _start_pos
 	else:
 		if Global.current_project.has_selection:
-			selection_node.transformation_handles.move(pos - _offset)
+			selection_node.transformation_handles.move_transform(pos - _offset)
 		else:
 			Global.canvas.move_preview_location = pos - _start_pos
 	_offset = pos
