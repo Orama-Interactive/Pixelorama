@@ -546,7 +546,7 @@ func _project_switched() -> void:
 func get_selected_image(cel_image: Image) -> Image:
 	var project := Global.current_project
 	var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
-	var selection_rect := selection_map_copy.get_selection_rect(project)
+	var selection_rect := selection_map_copy.get_used_rect()
 	var image := Image.create(
 		selection_rect.size.x, selection_rect.size.y, false, project.get_image_format()
 	)
