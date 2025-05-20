@@ -90,7 +90,6 @@ func draw_start(pos: Vector2i) -> void:
 	if transformation_handles.arrow_key_move:
 		return
 	var project := Global.current_project
-	var select_rect := project.selection_map.get_selection_rect(project)
 	_intersect = Input.is_action_pressed("selection_intersect", true)
 	_add = Input.is_action_pressed("selection_add", true)
 	_subtract = Input.is_action_pressed("selection_subtract", true)
@@ -109,29 +108,18 @@ func draw_start(pos: Vector2i) -> void:
 		_move = true
 		if quick_copy:  # Move selection without cutting it from the original position (quick copy)
 			if transformation_handles.is_transforming_content():
-				for cel in _get_selected_draw_unlocked_cels():
-					var image := cel.get_image()
-					image.blit_rect_mask(
-						cel.transformed_content,
-						cel.transformed_content,
-						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-						transformation_handles.get_transform_top_left()
-					)
-
-				project.selection_map.move_bitmap_values(project)
-				selection_node.commit_undo("Move Selection", selection_node.undo_data)
-				selection_node.undo_data = selection_node.get_undo_data(true)
-			else:
-				transformation_handles.begin_transform()
-				for cel in _get_selected_draw_unlocked_cels():
-					var image := cel.get_image()
-					image.blit_rect_mask(
-						cel.transformed_content,
-						cel.transformed_content,
-						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-						select_rect.position
-					)
-				Global.canvas.queue_redraw()
+				selection_node.transform_content_confirm()
+			transformation_handles.begin_transform(null, project, true)
+			var select_rect := project.selection_map.get_selection_rect(project)
+			for cel in _get_selected_draw_unlocked_cels():
+				var image := cel.get_image()
+				image.blit_rect_mask(
+					cel.transformed_content,
+					cel.transformed_content,
+					Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
+					select_rect.position
+				)
+			Global.canvas.queue_redraw()
 
 		else:
 			transformation_handles.begin_transform()
