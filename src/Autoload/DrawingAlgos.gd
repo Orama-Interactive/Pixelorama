@@ -390,19 +390,6 @@ func transform_image_with_transform2d(
 		original_image.convert_rgb_to_indexed()
 
 
-func transform_rectangle(
-	rect: Rect2, matrix: Transform2D, pivot := rect.size / 2, anchor := Vector2(0.5, 0.5)
-) -> Rect2:
-	var offset_rect := rect
-	var anchor_point := rect.position + rect.size * anchor
-	var offset := anchor_point - pivot
-
-	offset_rect.position -= offset
-	offset_rect = offset_rect * matrix
-	offset_rect.position = pivot + (offset_rect.position - pivot) + offset
-	return offset_rect
-
-
 func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 	if is_zero_approx(angle) or is_equal_approx(angle, TAU):
 		return
