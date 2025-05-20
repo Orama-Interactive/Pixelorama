@@ -419,7 +419,10 @@ func delete(selected_cels := true) -> void:
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if transformation_handles.is_transforming_content():
-		if transformation_handles.transformed_image.is_empty() or transformation_handles.transformed_image.is_invisible():
+		if (
+			transformation_handles.transformed_image.is_empty()
+			or transformation_handles.transformed_image.is_invisible()
+		):
 			transform_content_confirm()
 		else:
 			transformation_handles.reset_transform()

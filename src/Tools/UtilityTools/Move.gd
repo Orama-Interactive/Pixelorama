@@ -14,7 +14,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("transform_snap_grid"):
 		_snap_to_grid = true
 		_offset = _offset.snapped(Global.grids[0].grid_size)
-		if Global.current_project.has_selection and selection_node.transformation_handles.is_transforming_content():
+		if (
+			Global.current_project.has_selection
+			and selection_node.transformation_handles.is_transforming_content()
+		):
 			var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
 			selection_node.big_bounding_rectangle.position = Vector2i(
 				prev_pos.snapped(Global.grids[0].grid_size)

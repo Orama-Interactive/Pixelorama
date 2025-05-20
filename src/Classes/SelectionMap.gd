@@ -5,7 +5,9 @@ const INVERT_SHADER := preload("res://src/Shaders/Effects/Invert.gdshader")
 const OUTLINE_INLINE_SHADER := preload("res://src/Shaders/Effects/OutlineInline.gdshader")
 
 
-func is_pixel_selected(pixel: Vector2i, calculate_offset := true, project := Global.current_project) -> bool:
+func is_pixel_selected(
+	pixel: Vector2i, calculate_offset := true, project := Global.current_project
+) -> bool:
 	if calculate_offset:
 		var selection_position := get_selection_rect(project).position
 		if selection_position.x < 0:

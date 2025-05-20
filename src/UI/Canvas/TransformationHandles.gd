@@ -265,7 +265,9 @@ func _is_action_direction_released(event: InputEvent) -> bool:
 	return false
 
 
-func clamp_transform_image_space(t: Transform2D, image_size: Vector2, min_pixels := 1.0) -> Transform2D:
+func clamp_transform_image_space(
+	t: Transform2D, image_size: Vector2, min_pixels := 1.0
+) -> Transform2D:
 	var bounds := DrawingAlgos.get_transformed_bounds(image_size, t)
 	var width := bounds.size.x
 	var height := bounds.size.y
@@ -304,9 +306,7 @@ func _on_preview_transform_changed() -> void:
 					pre_transform_tilemap_cells, horizontal_size, vertical_size
 				)
 				transformed_image.crop(bounds.size.x, bounds.size.y)
-				tilemap.apply_resizing_to_image(
-					transformed_image, selected_cells, bounds, false
-				)
+				tilemap.apply_resizing_to_image(transformed_image, selected_cells, bounds, false)
 		else:
 			bounds.position -= bounds.position
 			bake_transform_to_image(transformed_image, bounds)
@@ -362,7 +362,9 @@ func transform_around(t: Transform2D, m: Transform2D, pivot_local: Vector2) -> T
 	return back * m * to_origin * t
 
 
-func get_no_pivot_transform(pivot_transform := preview_transform, pivot_local := pivot) -> Transform2D:
+func get_no_pivot_transform(
+	pivot_transform := preview_transform, pivot_local := pivot
+) -> Transform2D:
 	var pivot_world := pivot_transform * pivot_local
 	var to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot_world)
 	var back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot_world)
@@ -519,7 +521,7 @@ func angle_to_cursor(angle: float) -> Input.CursorShape:
 	if deg < 337.5:
 		if Global.mirror_view:
 			return Input.CURSOR_FDIAGSIZE
-		return Input.CURSOR_BDIAGSIZE # Top-right
+		return Input.CURSOR_BDIAGSIZE  # Top-right
 
 	return Input.CURSOR_ARROW
 
@@ -622,7 +624,9 @@ func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
 
 
 func bake_transform_to_selection(map: SelectionMap) -> void:
-	var bounds := DrawingAlgos.get_transformed_bounds(transformed_selection_map.get_size(), preview_transform)
+	var bounds := DrawingAlgos.get_transformed_bounds(
+		transformed_selection_map.get_size(), preview_transform
+	)
 	map.ensure_selection_fits(Global.current_project, bounds)
 	bounds.position -= bounds.position
 	var transformed_selection := SelectionMap.new()

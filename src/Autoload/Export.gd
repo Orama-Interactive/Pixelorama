@@ -293,7 +293,9 @@ func process_animation(project := Global.current_project) -> void:
 			image.copy_from(blended_frames[frame])
 			if erase_unselected_area and project.has_selection:
 				var crop := project.new_empty_image()
-				var selection_image := project.selection_map.return_cropped_copy(project, project.size)
+				var selection_image := project.selection_map.return_cropped_copy(
+					project, project.size
+				)
 				crop.blit_rect_mask(
 					image, selection_image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO
 				)

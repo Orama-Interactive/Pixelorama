@@ -280,7 +280,9 @@ func fill_in_selection() -> void:
 		if project.has_selection:
 			var filler := project.new_empty_image()
 			filler.fill(tool_slot.color)
-			var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
+			var selection_map_copy := project.selection_map.return_cropped_copy(
+				project, project.size
+			)
 			var rect: Rect2i = selection_map_copy.get_used_rect()
 			for image in images:
 				image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
