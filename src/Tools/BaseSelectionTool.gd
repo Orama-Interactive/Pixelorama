@@ -245,7 +245,7 @@ func _on_position_value_changed(value: Vector2) -> void:
 		return
 	if not transformation_handles.is_transforming_content():
 		transformation_handles.begin_transform()
-	transformation_handles.move(value - transformation_handles.preview_transform.origin)
+	transformation_handles.move_transform(value - transformation_handles.preview_transform.origin)
 
 
 func _on_size_value_changed(value: Vector2i) -> void:
@@ -257,4 +257,4 @@ func _on_size_value_changed(value: Vector2i) -> void:
 		transformation_handles.begin_transform()
 	var image_size := selection_node.preview_selection_map.get_used_rect().size
 	var delta := value - image_size
-	transformation_handles.resize(delta)
+	transformation_handles.resize_transform(delta)

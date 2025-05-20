@@ -208,7 +208,7 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 			var grid_size := tilemap_cel.get_tile_size()
 			final_direction *= Vector2(grid_size)
-		move(final_direction)
+		move_transform(final_direction)
 
 
 func _get_hovered_handle(mouse_pos: Vector2) -> TransformHandle:
@@ -231,11 +231,11 @@ func _handle_mouse_drag(mouse_pos: Vector2) -> void:
 	var delta := mouse_pos - drag_start
 	match active_handle.type:
 		TransformHandle.Type.SCALE:
-			preview_transform = apply_resize(start_transform, active_handle, delta)
+			preview_transform = resize_transform_handle(start_transform, active_handle, delta)
 		TransformHandle.Type.ROTATE:
-			preview_transform = apply_rotate(start_transform, mouse_pos)
+			preview_transform = rotate_transform_handle(start_transform, mouse_pos)
 		TransformHandle.Type.SKEW:
-			preview_transform = apply_shear(start_transform, delta, active_handle)
+			preview_transform = shear_transform_handle(start_transform, delta, active_handle)
 		TransformHandle.Type.PIVOT:
 			handle_pivot_drag(mouse_pos, start_transform)
 	queue_redraw()
@@ -377,7 +377,7 @@ func begin_drag(mouse_pos: Vector2) -> void:
 	begin_transform()
 
 
-func move(pos: Vector2) -> void:
+func move_transform(pos: Vector2) -> void:
 	var final_pos := pos
 	if Tools.is_placing_tiles():
 		var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
@@ -387,13 +387,22 @@ func move(pos: Vector2) -> void:
 
 
 ## Called by the sliders in the selection tool options.
-func resize(delta: Vector2) -> void:
+func resize_transform(delta: Vector2) -> void:
 	var bottom_right_handle := handles[5]
-	preview_transform = apply_resize(preview_transform, bottom_right_handle, delta)
+	preview_transform = resize_transform_handle(preview_transform, bottom_right_handle, delta)
 	queue_redraw()
 
 
-func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:
+## Rotation around pivot based on initial drag.
+func rotate_transform(angle: float) -> void:
+	if Tools.is_placing_tiles():
+		return
+	var delta_ang := angle - preview_transform.get_rotation()
+	var m := Transform2D().rotated(delta_ang)
+	preview_transform = transform_around(preview_transform, m, pivot)
+
+
+func resize_transform_handle(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:
 	if Tools.is_placing_tiles():
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
 		if tilemap.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
@@ -441,7 +450,7 @@ func apply_resize(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Tr
 
 
 ## Rotation around pivot based on initial drag.
-func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
+func rotate_transform_handle(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 	if Tools.is_placing_tiles():
 		return t
 	# Compute initial and current angles
@@ -453,12 +462,7 @@ func apply_rotate(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 	return transform_around(t, m, pivot)
 
 
-func handle_pivot_drag(mouse_pos: Vector2, t: Transform2D) -> void:
-	var local_mouse := t.affine_inverse() * mouse_pos
-	pivot = local_mouse
-
-
-func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Transform2D:
+func shear_transform_handle(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Transform2D:
 	if Tools.is_placing_tiles():
 		return t
 	var image_size := transformed_selection_map.get_size() as Vector2
@@ -490,6 +494,11 @@ func apply_shear(t: Transform2D, delta: Vector2, handle: TransformHandle) -> Tra
 
 	# Apply the shear matrix in local space around pivot
 	return transform_around(t, shear_matrix, pivot)
+
+
+func handle_pivot_drag(mouse_pos: Vector2, t: Transform2D) -> void:
+	var local_mouse := t.affine_inverse() * mouse_pos
+	pivot = local_mouse
 
 
 ## Checks if [param angle] is between [param lower] and [param upper] degrees.
