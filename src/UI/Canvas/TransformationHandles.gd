@@ -519,7 +519,9 @@ func set_selection(selection_map: SelectionMap, selection_rect: Rect2i) -> void:
 func begin_transform(image: Image = null, project := Global.current_project) -> void:
 	currently_transforming = true
 	if Input.is_action_pressed(&"transform_move_selection_only"):
-		only_transforms_selection = true
+		if not only_transforms_selection:
+			selection_node.undo_data = selection_node.get_undo_data(false)
+			only_transforms_selection = true
 		return
 	else:
 		if only_transforms_selection:
@@ -532,6 +534,7 @@ func begin_transform(image: Image = null, project := Global.current_project) -> 
 		transformed_image.copy_from(pre_transformed_image)
 		image_texture.set_image(transformed_image)
 		return
+	selection_node.undo_data = selection_node.get_undo_data(true)
 	var map_copy := project.selection_map.return_cropped_copy(project, project.size)
 	var selection_rect := map_copy.get_used_rect()
 	var current_cel := project.get_current_cel()

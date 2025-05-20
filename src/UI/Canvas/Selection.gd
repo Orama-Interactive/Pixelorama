@@ -124,7 +124,6 @@ func transform_content_confirm() -> void:
 		else:
 			cel_image.blit_rect_mask(src, src, selection_size_rect, transformation_origin)
 		cel_image.convert_rgb_to_indexed()
-	project.selection_map_changed()
 	commit_undo("Move Selection", undo_data)
 
 	is_pasting = false
@@ -137,8 +136,6 @@ func transform_content_cancel() -> void:
 		return
 	var project := Global.current_project
 	project.selection_offset = transformation_handles.pre_transform_selection_offset
-
-	#project.selection_map.copy_from(original_bitmap)
 	project.selection_map_changed()
 	for cel in get_selected_draw_cels():
 		var cel_image := cel.get_image()
