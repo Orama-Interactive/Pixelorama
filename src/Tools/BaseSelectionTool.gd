@@ -20,9 +20,10 @@ var _skip_slider_logic := false
 
 @onready var selection_node := Global.canvas.selection
 @onready var transformation_handles := selection_node.transformation_handles
-@onready var confirm_buttons := $ConfirmButtons as HBoxContainer
 @onready var position_sliders := $Position as ValueSliderV2
 @onready var size_sliders := $Size as ValueSliderV2
+@onready var rotation_slider := $Rotation as ValueSlider
+@onready var shear_slider := $Shear as ValueSlider
 
 
 func _ready() -> void:
@@ -36,7 +37,9 @@ func _ready() -> void:
 func set_confirm_buttons_visibility() -> void:
 	await get_tree().process_frame
 	set_spinbox_values()
-	confirm_buttons.visible = transformation_handles.is_transforming_content()
+	get_tree().set_group(
+		&"ShowOnActiveTransformation", "visible", transformation_handles.is_transforming_content()
+	)
 
 
 ## Ensure all items are added when we are selecting an option.
@@ -70,11 +73,13 @@ func set_spinbox_values() -> void:
 	var has_selection := select_rect.has_area()
 	if not has_selection:
 		size_sliders.press_ratio_button(false)
+	position_sliders.editable = has_selection
+	size_sliders.editable = has_selection
 	if transformation_handles.is_transforming_content():
 		select_rect = selection_node.preview_selection_map.get_selection_rect(project)
-	position_sliders.editable = has_selection
+		rotation_slider.value = rad_to_deg(transformation_handles.preview_transform.get_rotation())
+		shear_slider.value = rad_to_deg(transformation_handles.preview_transform.get_skew())
 	position_sliders.value = select_rect.position
-	size_sliders.editable = has_selection
 	size_sliders.value = select_rect.size
 	_skip_slider_logic = false
 
@@ -168,7 +173,7 @@ func draw_move(pos: Vector2i) -> void:
 		)
 		pos += grid_offset
 
-	transformation_handles.move(pos - _offset)
+	transformation_handles.move_transform(pos - _offset)
 	_offset = pos
 	_set_cursor_text(select_rect)
 
@@ -258,3 +263,25 @@ func _on_size_value_changed(value: Vector2i) -> void:
 	var image_size := selection_node.preview_selection_map.get_used_rect().size
 	var delta := value - image_size
 	transformation_handles.resize_transform(delta)
+
+
+func _on_rotation_value_changed(value: float) -> void:
+	if _skip_slider_logic:
+		return
+	if !Global.current_project.has_selection:
+		return
+	if not transformation_handles.is_transforming_content():
+		transformation_handles.begin_transform()
+	var angle := deg_to_rad(value)
+	transformation_handles.rotate_transform(angle)
+
+
+func _on_shear_value_changed(value: float) -> void:
+	if _skip_slider_logic:
+		return
+	if !Global.current_project.has_selection:
+		return
+	if not transformation_handles.is_transforming_content():
+		transformation_handles.begin_transform()
+	var angle := deg_to_rad(value)
+	transformation_handles.shear_transform(angle)

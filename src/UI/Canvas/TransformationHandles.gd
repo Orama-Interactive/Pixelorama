@@ -393,16 +393,31 @@ func resize_transform(delta: Vector2) -> void:
 	queue_redraw()
 
 
-## Rotation around pivot based on initial drag.
+## Called by the sliders in the selection tool options.
 func rotate_transform(angle: float) -> void:
 	if Tools.is_placing_tiles():
 		return
 	var delta_ang := angle - preview_transform.get_rotation()
 	var m := Transform2D().rotated(delta_ang)
 	preview_transform = transform_around(preview_transform, m, pivot)
+	queue_redraw()
 
 
-func resize_transform_handle(t: Transform2D, handle: TransformHandle, delta: Vector2) -> Transform2D:
+## Called by the sliders in the selection tool options.
+func shear_transform(angle: float) -> void:
+	if Tools.is_placing_tiles():
+		return
+	var t_rotation := preview_transform.get_rotation()
+	var t_scale := preview_transform.get_scale()
+	var t_origin := preview_transform.origin
+
+	preview_transform = Transform2D(t_rotation, t_scale, angle, t_origin)
+	queue_redraw()
+
+
+func resize_transform_handle(
+	t: Transform2D, handle: TransformHandle, delta: Vector2
+) -> Transform2D:
 	if Tools.is_placing_tiles():
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
 		if tilemap.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd62qfjn380wf"]
+[gd_scene load_steps=11 format=3 uid="uid://bd62qfjn380wf"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://coj8ex4hmag1m" path="res://src/Tools/BaseSelectionTool.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://d267xalp3p7ru" path="res://assets/graphics/misc/check_plain.png" id="3_mtv71"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://bnc78807k1xjv" path="res://assets/graphics/misc/close.png" id="4_ad04n"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="6_2bdjf"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_gfv4x"]
 action = &"transformation_confirm"
@@ -21,7 +22,7 @@ events = [SubResource("InputEventAction_nadbx")]
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="ConfirmButtons" type="HBoxContainer" parent="." index="2"]
+[node name="ConfirmButtons" type="HBoxContainer" parent="." index="2" groups=["ShowOnActiveTransformation"]]
 layout_mode = 2
 
 [node name="ConfirmButton" type="Button" parent="ConfirmButtons" index="0"]
@@ -88,8 +89,48 @@ show_ratio = true
 prefix_x = "Width:"
 prefix_y = "Height:"
 
+[node name="RotationLabel" type="Label" parent="." index="9" groups=["ShowOnActiveTransformation"]]
+layout_mode = 2
+text = "Rotation:"
+
+[node name="Rotation" type="TextureProgressBar" parent="." index="10" groups=["ShowOnActiveTransformation"]]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -180.0
+max_value = 180.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("6_2bdjf")
+suffix = "°"
+metadata/_custom_type_script = "uid://tfdhqto6j5j0"
+
+[node name="Shear" type="TextureProgressBar" parent="." index="11" groups=["ShowOnActiveTransformation"]]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = -90.0
+max_value = 90.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("6_2bdjf")
+suffix = "°"
+metadata/_custom_type_script = "uid://tfdhqto6j5j0"
+
 [connection signal="pressed" from="ConfirmButtons/ConfirmButton" to="." method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ConfirmButtons/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="item_selected" from="Modes" to="." method="_on_modes_item_selected"]
 [connection signal="value_changed" from="Position" to="." method="_on_position_value_changed"]
 [connection signal="value_changed" from="Size" to="." method="_on_size_value_changed"]
+[connection signal="value_changed" from="Rotation" to="." method="_on_rotation_value_changed"]
+[connection signal="value_changed" from="Shear" to="." method="_on_shear_value_changed"]
