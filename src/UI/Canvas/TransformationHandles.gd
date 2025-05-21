@@ -167,15 +167,9 @@ func _draw() -> void:
 			)
 		elif handle.type == TransformHandle.Type.PIVOT:
 			if is_rotated_or_skewed():
-				var final_size := HANDLE_RADIUS * zoom_value.x * 2
-				draw_arc(pos, final_size * 0.25, 0, 360, 360, Color.YELLOW)
-				draw_arc(pos, final_size * 0.5, 0, 360, 360, Color.WHITE)
-				draw_line(
-					pos - Vector2.UP * final_size, pos - Vector2.DOWN * final_size, Color.WHITE
-				)
-				draw_line(
-					pos - Vector2.RIGHT * final_size, pos - Vector2.LEFT * final_size, Color.WHITE
-				)
+				var final_size := HANDLE_RADIUS * zoom_value.x
+				draw_circle(pos, final_size, Color.WHITE, false)
+				draw_circle(pos, final_size * 0.25, Color.WHITE)
 
 
 func _move_with_arrow_keys(event: InputEvent) -> void:
