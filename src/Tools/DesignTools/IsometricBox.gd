@@ -172,7 +172,7 @@ func _draw_shape() -> void:
 			_fill_inside_rect = _fill_inside_rect.expand(point)
 			# Draw each point offsetted based on the shape's thickness
 			_draw_pixel(point, images)
-		_clear()
+	_clear()
 	commit_undo()
 
 
@@ -196,38 +196,70 @@ func _clear() -> void:
 ## Get the [member _curve]'s baked points, and draw lines between them
 ## using [method Geometry2D.bresenham_line].
 func _iso_box_outline() -> Array[Vector2i]:
-	var thick
+	var new_thickness = _thickness
+	if _fill_inside:
+		new_thickness = 1
 	var last_pixel: Vector2i = Global.canvas.current_pixel.floor()
 	var preview: Array[Vector2i]
 	if _current_state < SingleState.READY:
 		_basis_points.append(last_pixel)
 	match _basis_points.size():
 		1:
-			preview.append_array(bresenham_line_thickness(_origin, _basis_points[0], _thickness))
+			# a line
+			preview.append_array(bresenham_line_thickness(_origin, _basis_points[0], new_thickness))
 		2:
-			preview = outline_poly(_origin, _basis_points[0], _basis_points[1])
+			# an isometric "rextangle"
+			preview.append_array(bresenham_line_thickness(_origin, _basis_points[0], new_thickness))
+			preview.append_array(
+				bresenham_line_thickness(_basis_points[0], _basis_points[1], new_thickness)
+			)
+			preview.append_array(bresenham_line_thickness(
+				_basis_points[1], _basis_points[1] - _basis_points[0] + _origin, new_thickness)
+			)
+			preview.append_array(bresenham_line_thickness(
+				_basis_points[1] - _basis_points[0] + _origin, _origin, new_thickness)
+			)
 		3:
-			var diff = (_basis_points[2] - _basis_points[1])
+			# an isometric "box"
+			var diff = _basis_points[2] - _basis_points[1]
 			diff.x = 0
 			diff.y = min(0, diff.y)
-			preview = outline_poly(
-					_origin + diff, _basis_points[0] + diff, _basis_points[1] + diff
+			# outer outline (arranged clockwise)
+			preview.append_array(
+				bresenham_line_thickness(
+					_basis_points[1] - _basis_points[0] + _origin + diff,
+					_origin + diff,
+					new_thickness
 				)
-			preview.append_array(
-				bresenham_line_thickness(_origin, _basis_points[0], _thickness)
 			)
 			preview.append_array(
-				bresenham_line_thickness(_basis_points[0], _basis_points[1], _thickness)
-			)
-			# joining vertical lines
-			preview.append_array(
-				bresenham_line_thickness(_origin, _origin + diff, _thickness)
-			)
-			preview.append_array(
-				bresenham_line_thickness(_basis_points[0], _basis_points[0] + diff, _thickness)
+				bresenham_line_thickness(
+					_basis_points[1] + diff,
+					_basis_points[1] - _basis_points[0] + _origin + diff,
+					new_thickness
+				)
 			)
 			preview.append_array(
-				bresenham_line_thickness(_basis_points[1], _basis_points[1] + diff, _thickness)
+				bresenham_line_thickness(_basis_points[1], _basis_points[1] + diff, new_thickness)
+			)
+			preview.append_array(
+				bresenham_line_thickness(_basis_points[0], _basis_points[1], new_thickness)
+			)
+			preview.append_array(
+				bresenham_line_thickness(_origin, _basis_points[0], new_thickness)
+			)
+			preview.append_array(
+				bresenham_line_thickness(_origin, _origin + diff, new_thickness)
+			)
+			# inner lines
+			preview.append_array(bresenham_line_thickness(
+				_basis_points[0] + diff, _basis_points[1] + diff, new_thickness)
+			)
+			preview.append_array(
+				bresenham_line_thickness(_origin + diff, _basis_points[0] + diff, new_thickness)
+			)
+			preview.append_array(
+				bresenham_line_thickness(_basis_points[0], _basis_points[0] + diff, new_thickness)
 			)
 	if _current_state < SingleState.READY:
 		_basis_points.resize(_basis_points.size() - 1)
@@ -253,9 +285,9 @@ func generate_isometric_box(
 	var edge_1_2 := PackedVector2Array()
 	var upper_roof_start = base_start - Vector2i(0, box_height)
 	if edge:
-		edge_0_1 = Geometry2D.bresenham_line(upper_roof_start, upper_roof_start + a)
-		edge_0_2 = Geometry2D.bresenham_line(upper_roof_start + a, upper_roof_start + a + b)
-		edge_1_2 = Geometry2D.bresenham_line(upper_roof_start + a, base_start + a)
+		edge_0_1 = bresenham_line_thickness(upper_roof_start, upper_roof_start + a, _thickness)
+		edge_0_2 = bresenham_line_thickness(upper_roof_start + a, upper_roof_start + a + b, _thickness)
+		edge_1_2 = bresenham_line_thickness(upper_roof_start + a, base_start + a, _thickness)
 	var top_poly: PackedVector2Array = [
 		upper_roof_start,
 		base_start + a - Vector2i(0, box_height),
@@ -274,6 +306,8 @@ func generate_isometric_box(
 		base_start + a + b - Vector2i(0, box_height),
 		base_start + a - Vector2i(0, box_height)
 	]
+	width = absi(width)
+	height = absi(height)
 	var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
 	for x: int in width:
 		for y: int in height:
