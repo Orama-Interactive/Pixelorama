@@ -30,6 +30,10 @@ var preview_transform := Transform2D():
 		preview_transform_changed.emit()
 
 var original_selection_transform := Transform2D()
+var transformation_algorithm := 0:
+	set(value):
+		transformation_algorithm = value
+		preview_transform_changed.emit()
 
 ## Tracking handles
 var active_handle: TransformHandle:
@@ -655,7 +659,9 @@ func get_transform_top_left(size := transformed_selection_map.get_size()) -> Vec
 
 
 func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
-	DrawingAlgos.transform_image_with_viewport(image, preview_transform, pivot, used_rect)
+	DrawingAlgos.transform_image_with_viewport(
+		image, preview_transform, pivot, transformation_algorithm, used_rect
+	)
 
 
 func bake_transform_to_selection(map: SelectionMap) -> void:

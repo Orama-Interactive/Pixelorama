@@ -67,20 +67,24 @@ text = "Mode:"
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="PositionLabel" type="Label" parent="." index="5"]
+[node name="Algorithm" type="OptionButton" parent="." index="5"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="PositionLabel" type="Label" parent="." index="6"]
 layout_mode = 2
 text = "Position:"
 
-[node name="Position" parent="." index="6" instance=ExtResource("4")]
+[node name="Position" parent="." index="7" instance=ExtResource("4")]
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
-[node name="SizeLabel" type="Label" parent="." index="7"]
+[node name="SizeLabel" type="Label" parent="." index="8"]
 layout_mode = 2
 text = "Size:"
 
-[node name="Size" parent="." index="8" instance=ExtResource("4")]
+[node name="Size" parent="." index="9" instance=ExtResource("4")]
 layout_mode = 2
 value = Vector2(1, 1)
 min_value = Vector2(1, 1)
@@ -89,11 +93,11 @@ show_ratio = true
 prefix_x = "Width:"
 prefix_y = "Height:"
 
-[node name="RotationLabel" type="Label" parent="." index="9" groups=["ShowOnActiveTransformation"]]
+[node name="RotationLabel" type="Label" parent="." index="10" groups=["ShowOnActiveTransformation"]]
 layout_mode = 2
 text = "Rotation:"
 
-[node name="Rotation" type="TextureProgressBar" parent="." index="10" groups=["ShowOnActiveTransformation"]]
+[node name="Rotation" type="TextureProgressBar" parent="." index="11" groups=["ShowOnActiveTransformation"]]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2
@@ -110,7 +114,7 @@ script = ExtResource("6_2bdjf")
 suffix = "°"
 metadata/_custom_type_script = "uid://tfdhqto6j5j0"
 
-[node name="Shear" type="TextureProgressBar" parent="." index="11" groups=["ShowOnActiveTransformation"]]
+[node name="Shear" type="TextureProgressBar" parent="." index="12" groups=["ShowOnActiveTransformation"]]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2
@@ -130,6 +134,7 @@ metadata/_custom_type_script = "uid://tfdhqto6j5j0"
 [connection signal="pressed" from="ConfirmButtons/ConfirmButton" to="." method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ConfirmButtons/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="item_selected" from="Modes" to="." method="_on_modes_item_selected"]
+[connection signal="item_selected" from="Algorithm" to="." method="_on_algorithm_item_selected"]
 [connection signal="value_changed" from="Position" to="." method="_on_position_value_changed"]
 [connection signal="value_changed" from="Size" to="." method="_on_size_value_changed"]
 [connection signal="value_changed" from="Rotation" to="." method="_on_rotation_value_changed"]

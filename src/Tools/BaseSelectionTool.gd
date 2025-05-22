@@ -20,6 +20,7 @@ var _skip_slider_logic := false
 
 @onready var selection_node := Global.canvas.selection
 @onready var transformation_handles := selection_node.transformation_handles
+@onready var algorithm_option_button := $Algorithm as OptionButton
 @onready var position_sliders := $Position as ValueSliderV2
 @onready var size_sliders := $Size as ValueSliderV2
 @onready var rotation_slider := $Rotation as ValueSlider
@@ -28,6 +29,10 @@ var _skip_slider_logic := false
 
 func _ready() -> void:
 	super._ready()
+	algorithm_option_button.add_item("Viewport")
+	algorithm_option_button.add_item("cleanEdge", DrawingAlgos.RotationAlgorithm.CLEANEDGE)
+	algorithm_option_button.add_item("OmniScale", DrawingAlgos.RotationAlgorithm.OMNISCALE)
+	algorithm_option_button.select(0)
 	set_confirm_buttons_visibility()
 	set_spinbox_values()
 	refresh_options()
@@ -223,6 +228,11 @@ func _on_cancel_button_pressed() -> void:
 func _on_modes_item_selected(index: int) -> void:
 	_mode_selected = index
 	save_config()
+
+
+func _on_algorithm_item_selected(index: int) -> void:
+	var id := algorithm_option_button.get_item_id(index)
+	transformation_handles.transformation_algorithm = id
 
 
 func _set_cursor_text(rect: Rect2i) -> void:

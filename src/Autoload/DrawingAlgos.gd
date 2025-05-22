@@ -328,7 +328,11 @@ func get_transformed_bounds(image_size: Vector2i, transform: Transform2D) -> Rec
 
 
 func transform_image_with_viewport(
-	original_image: Image, transform_matrix: Transform2D, pivot: Vector2, used_rect := Rect2i()
+	original_image: Image,
+	transform_matrix: Transform2D,
+	pivot: Vector2,
+	algorithm: RotationAlgorithm,
+	used_rect := Rect2i()
 ) -> void:
 	# Compute the transformation with pivot support
 	# translate pivot to origin
@@ -363,6 +367,18 @@ func transform_image_with_viewport(
 	RenderingServer.canvas_item_add_texture_rect(
 		ci_rid, Rect2(Vector2.ZERO, original_image.get_size()), texture
 	)
+	var mat_rid := RenderingServer.material_create()
+	var shader: Shader = null
+	match algorithm:
+		RotationAlgorithm.CLEANEDGE:
+			shader = clean_edge_shader
+		RotationAlgorithm.OMNISCALE:
+			shader = omniscale_shader
+		RotationAlgorithm.NNS:
+			shader = nn_shader
+	if is_instance_valid(shader):
+		RenderingServer.material_set_shader(mat_rid, shader.get_rid())
+	RenderingServer.canvas_item_set_material(ci_rid, mat_rid)
 
 	# Render once
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
@@ -373,6 +389,7 @@ func transform_image_with_viewport(
 	RenderingServer.free_rid(vp)
 	RenderingServer.free_rid(canvas)
 	RenderingServer.free_rid(ci_rid)
+	RenderingServer.free_rid(mat_rid)
 	RenderingServer.free_rid(texture)
 
 	# Copy result
