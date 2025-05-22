@@ -560,6 +560,89 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 	)
 
 
+func generate_isometric_box(
+	a: Vector2i,
+	b: Vector2i,
+	box_height: int,
+	c_t: Color,
+	c_l: Color,
+	c_r: Color,
+	edge := false
+):
+	# a is ↘, b is ↗  (both of them are basis vectors)
+	var base_start := Vector2i(0, -b.y + box_height)
+	var width = a.x + b.x + 1
+	var height = -b.y + a.y + box_height + 1
+
+	var edge_0_1 := PackedVector2Array()
+	var edge_0_2 := PackedVector2Array()
+	var edge_1_2 := PackedVector2Array()
+	var outline_points := PackedVector2Array()
+	var upper_roof_start = base_start - Vector2i(0, box_height)
+	if edge:
+		edge_0_1 = Geometry2D.bresenham_line(upper_roof_start, upper_roof_start + a)
+		edge_0_2 = Geometry2D.bresenham_line(upper_roof_start + a, upper_roof_start + a + b)
+		edge_1_2 = Geometry2D.bresenham_line(upper_roof_start + a, base_start + a)
+	var top_poly: PackedVector2Array = [
+		upper_roof_start,
+		base_start + a - Vector2i(0, box_height),
+		base_start + a + b - Vector2i(0, box_height),
+		base_start + b - Vector2i(0, box_height)
+	]
+	var b_l_poly: PackedVector2Array = [
+		base_start,
+		base_start + a,
+		base_start + a - Vector2i(0, box_height),
+		upper_roof_start
+	]
+	var b_r_poly: PackedVector2Array = [
+		base_start + a,
+		base_start + a + b,
+		base_start + a + b - Vector2i(0, box_height),
+		base_start + a - Vector2i(0, box_height)
+	]
+	var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
+	for x: int in width:
+		for y: int in height:
+			var point = Vector2(x, y)
+			# Outline coloring
+			if point in outline_points:
+				image.set_pixel(x, y, Color.BLACK)
+				continue
+			# Edge coloring
+			elif point in edge_0_1:
+				image.set_pixel(x, y, Color(
+						c_t.r + c_l.r,
+						c_t.g + c_l.g,
+						c_t.b + c_l.b,
+						c_t.a + c_l.a)
+					)
+				continue
+			elif point in edge_0_2:
+				image.set_pixel(x, y, Color(
+						c_t.r + c_r.r,
+						c_t.g + c_r.g,
+						c_t.b + c_r.b,
+						c_t.a + c_r.a)
+					)
+				continue
+			elif point in edge_1_2:
+				image.set_pixel(x, y, Color(
+						c_l.r + c_r.r,
+						c_l.g + c_r.g,
+						c_l.b + c_r.b,
+						c_l.a + c_r.a)
+					)
+				continue
+			# Shape
+			if Geometry2D.is_point_in_polygon(point, top_poly):
+				image.set_pixel(x, y, c_t)
+			elif Geometry2D.is_point_in_polygon(point, b_l_poly):
+				image.set_pixel(x, y, c_l)
+			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
+				image.set_pixel(x, y, c_r)
+
+
 func generate_isometric_rectangle(image: Image) -> void:
 	var half_size := image.get_size() / 2
 	var up := Vector2i(half_size.x, 0)
