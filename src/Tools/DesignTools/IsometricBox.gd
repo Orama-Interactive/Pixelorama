@@ -6,12 +6,9 @@ var _drawing := false  ## Set to true when a curve is being drawn.
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _thickness := 1  ## The thickness of the curve.
-var _last_mouse_position := Vector2.INF  ## The last position of the mouse
-## chained means Krita-like behavior, single means Aseprite-like.
 var _current_state: int = SingleState.A  ## Current state of the bezier curve (in SINGLE mode)
 var _basis_points: Array[Vector2i]
 var _origin: Vector2i
-@onready var bezier_option_button: OptionButton = $BezierOptions/BezierMode
 
 
 func _init() -> void:
@@ -73,9 +70,6 @@ func _create_brush_indicator() -> BitMap:
 func _input(event: InputEvent) -> void:
 	if _drawing:
 		if event is InputEventMouseMotion:
-			_last_mouse_position = Global.canvas.current_pixel.floor()
-			if Global.mirror_view:
-				_last_mouse_position.x = Global.current_project.size.x - 1 - _last_mouse_position.x
 
 			if event.is_action_pressed("shape_perfect"):
 				pass
@@ -96,13 +90,18 @@ func draw_start(pos: Vector2i) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 	if !_drawing:
-		bezier_option_button.disabled = true
 		_drawing = true
 		_current_state = SingleState.A
 		_origin = pos
 	else:
 		if _current_state == SingleState.H:
 			pos.x = 0
+		elif _current_state == SingleState.A:
+			pos.x = max(_origin.x, pos.x)
+		elif _current_state == SingleState.B:  # restriction on B
+			pos.x = max(_basis_points[0].x, pos.x)
+			if Vector2(pos - _origin).angle() >= Vector2(_basis_points[0] - _origin).angle():
+				pos = _basis_points[0]
 		if _current_state < SingleState.READY:
 			_basis_points.append(pos)
 		_current_state += 1
@@ -151,19 +150,21 @@ func draw_preview() -> void:
 
 
 func _draw_shape() -> void:
-	bezier_option_button.disabled = false
 	prepare_undo("Draw Shape")
 	var images := _get_selected_draw_images()
-	if _fill_inside:
+	if _fill_inside:  # Thickness isn't supported for this mode
 		var a = _basis_points[0] - _origin
 		var b = _basis_points[1] - _basis_points[0]
 		var h = _basis_points[2] - _basis_points[1]
-		h.y = max(0, -h.y)
+		h.y = abs(h.y)
 		var color = tool_slot.color
-		var box_img = generate_isometric_box(a, b, h.y, color, color.darkened(0.5), color.lightened(0.5))
-		var dst := Vector2i(0, -b.y + h.y)
+		var box_img = generate_isometric_box(
+			a, b, h.y, color, color.darkened(0.5), color.lightened(0.5), true
+		)
+		var offset = min(0, a.y, (a + b).y, b.y)
+		var dst := Vector2i(0, - h.y + offset)
 		for img: ImageExtended in images:
-			img.blend_rect(box_img, Rect2i(Vector2i.ZERO, box_img.get_size()), _origin - dst)
+			img.blend_rect(box_img, Rect2i(Vector2i.ZERO, box_img.get_size()), _origin + dst)
 	else:
 		var points := _iso_box_outline()
 		for point in points:
@@ -202,6 +203,13 @@ func _iso_box_outline() -> Array[Vector2i]:
 	var last_pixel: Vector2i = Global.canvas.current_pixel.floor()
 	var preview: Array[Vector2i]
 	if _current_state < SingleState.READY:
+		if _current_state == SingleState.A:
+			last_pixel.x = max(_origin.x, last_pixel.x)
+		if _current_state == SingleState.B:
+			# restriction on b point (For preview only)
+			last_pixel.x = max(_basis_points[0].x, last_pixel.x)
+			if Vector2(last_pixel - _origin).angle() >= Vector2(_basis_points[0] - _origin).angle():
+				last_pixel = _basis_points[0]
 		_basis_points.append(last_pixel)
 	match _basis_points.size():
 		1:
@@ -276,23 +284,25 @@ func generate_isometric_box(
 	edge := false
 ) -> Image:
 	# a is ↘, b is ↗  (both of them are basis vectors)
-	var base_start := Vector2i(0, -b.y + box_height)
-	var width = a.x + b.x + 1
-	var height = -b.y + a.y + box_height + 1
+	var width: int =  max(0, a.x, (a + b).x, b.x)
+	var height: int = max(0, a.y, (a + b).y, b.y) - min(0, a.y, (a + b).y, b.y) + box_height
+	var offset = Vector2i(0, abs(min(0, a.y, (a + b).y, b.y)))
+	var upper_roof_start = Vector2i.ZERO + offset
+	var base_start = upper_roof_start + Vector2i(0, box_height)
 
 	var edge_0_1 := PackedVector2Array()
 	var edge_0_2 := PackedVector2Array()
 	var edge_1_2 := PackedVector2Array()
-	var upper_roof_start = base_start - Vector2i(0, box_height)
 	if edge:
+		edge_0_1 = bresenham_line_thickness(upper_roof_start, upper_roof_start + a, _thickness)
 		edge_0_1 = bresenham_line_thickness(upper_roof_start, upper_roof_start + a, _thickness)
 		edge_0_2 = bresenham_line_thickness(upper_roof_start + a, upper_roof_start + a + b, _thickness)
 		edge_1_2 = bresenham_line_thickness(upper_roof_start + a, base_start + a, _thickness)
 	var top_poly: PackedVector2Array = [
 		upper_roof_start,
-		base_start + a - Vector2i(0, box_height),
-		base_start + a + b - Vector2i(0, box_height),
-		base_start + b - Vector2i(0, box_height)
+		a + offset,
+		a + b + offset,
+		b + offset
 	]
 	var b_l_poly: PackedVector2Array = [
 		base_start,
@@ -306,13 +316,13 @@ func generate_isometric_box(
 		base_start + a + b - Vector2i(0, box_height),
 		base_start + a - Vector2i(0, box_height)
 	]
-	width = absi(width)
-	height = absi(height)
+	if width <= 0 or height <= 0:
+		return
 	var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
 	for x: int in width:
 		for y: int in height:
 			var point = Vector2(x, y)
-			# Edge coloring
+			 # Edge coloring
 			if point in edge_0_1:
 				image.set_pixel(x, y, Color(
 						c_t.r + c_l.r,
@@ -344,7 +354,7 @@ func generate_isometric_box(
 				image.set_pixel(x, y, c_l)
 			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
 				image.set_pixel(x, y, c_r)
-	return image
+	return image.get_region(image.get_used_rect())
 
 
 func outline_poly(a: Vector2i, b: Vector2i, c: Vector2i):
