@@ -183,7 +183,7 @@ Hold %s to displace the shape's origin""",
 			"CurveTool",
 			"Curve Tool",
 			"curvetool",
-			"res://src/Tools/DesignTools/CurveTool.tscn",
+			"res://src/Tools/DesignTools/IsometricBox.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws bezier curves
 Press %s/%s to add new points

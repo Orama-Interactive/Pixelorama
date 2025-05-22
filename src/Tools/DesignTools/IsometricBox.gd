@@ -1,20 +1,16 @@
 extends BaseDrawTool
 
-enum SingleState { START, END, MIDDLE_A, MIDDLE_B, READY }
-enum Bezier { CHAINED, SINGLE }
+enum SingleState { A, B, H, READY }
 
-var _curve := Curve2D.new()  ## The [Curve2D] responsible for the shape of the curve being drawn.
 var _drawing := false  ## Set to true when a curve is being drawn.
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
-var _editing_bezier := false  ## Needed to determine when to show the control points preview line.
-var _editing_out_control_point := false  ## True when controlling the out control point only.
 var _thickness := 1  ## The thickness of the curve.
 var _last_mouse_position := Vector2.INF  ## The last position of the mouse
 ## chained means Krita-like behavior, single means Aseprite-like.
-var _bezier_mode: int = Bezier.CHAINED
-var _current_state: int = SingleState.START  ## Current state of the bezier curve (in SINGLE mode)
-
+var _current_state: int = SingleState.A  ## Current state of the bezier curve (in SINGLE mode)
+var _basis_points: Array[Vector2i]
+var _origin: Vector2i
 @onready var bezier_option_button: OptionButton = $BezierOptions/BezierMode
 
 
@@ -32,12 +28,6 @@ func update_brush() -> void:
 func _on_thickness_value_changed(value: int) -> void:
 	_thickness = value
 	update_indicator()
-	update_config()
-	save_config()
-
-
-func _on_bezier_mode_item_selected(index: int) -> void:
-	_bezier_mode = index
 	update_config()
 	save_config()
 
@@ -60,7 +50,6 @@ func get_config() -> Dictionary:
 	var config := super.get_config()
 	config["fill_inside"] = _fill_inside
 	config["thickness"] = _thickness
-	config["bezier_mode"] = _bezier_mode
 	return config
 
 
@@ -68,14 +57,12 @@ func set_config(config: Dictionary) -> void:
 	super.set_config(config)
 	_fill_inside = config.get("fill_inside", _fill_inside)
 	_thickness = config.get("thickness", _thickness)
-	_bezier_mode = config.get("bezier_mode", _bezier_mode)
 
 
 func update_config() -> void:
 	super.update_config()
 	$FillCheckbox.button_pressed = _fill_inside
 	$ThicknessSlider.value = _thickness
-	bezier_option_button.select(_bezier_mode)
 
 
 ## This tool has no brush, so just return the indicator as it is.
@@ -89,49 +76,16 @@ func _input(event: InputEvent) -> void:
 			_last_mouse_position = Global.canvas.current_pixel.floor()
 			if Global.mirror_view:
 				_last_mouse_position.x = Global.current_project.size.x - 1 - _last_mouse_position.x
-			if _bezier_mode == Bezier.SINGLE and _current_state >= SingleState.MIDDLE_A:
-				# if bezier's curvature is being changed in SINGLE mode
-				if _current_state == SingleState.MIDDLE_A:
-					_curve.set_point_out(
-						0, Vector2(_last_mouse_position) - _curve.get_point_position(0)
-					)
-				_curve.set_point_in(
-					1,
-					(
-						Vector2(_last_mouse_position)
-						- _curve.get_point_position(_curve.point_count - 1)
-					)
-				)
-		elif event is InputEventMouseButton:
-			if event.double_click and event.button_index == tool_slot.button:
-				$DoubleClickTimer.start()
-				_draw_shape()
-		else:
-			if _bezier_mode == Bezier.CHAINED:
-				if event.is_action_pressed("shape_perfect"):
-					_editing_out_control_point = true
-				elif event.is_action_released("shape_perfect"):
-					_editing_out_control_point = false
-			if event.is_action_pressed("change_tool_mode"):  # Control removes the last added point
-				if _curve.point_count > 1:
-					match _current_state:
-						SingleState.START:  # Point removed in CHAINED mode
-							_curve.remove_point(_curve.point_count - 1)
-						SingleState.MIDDLE_A:  # End point is to be removed in SINGLE mode
-							_curve.remove_point(_curve.point_count - 1)
-							_curve.set_point_out(0, Vector2.ZERO)
-							_editing_bezier = false
-							_current_state -= 1
-						SingleState.MIDDLE_B:  # Bezier curvature is to be reset in SINGLE mode
-							_curve.set_point_out(
-								0, _last_mouse_position - _curve.get_point_position(0)
-							)
-							_current_state -= 1
+
+			if event.is_action_pressed("shape_perfect"):
+				pass
+			elif event.is_action_released("shape_perfect"):
+				pass
+			if event.is_action_pressed("change_tool_mode"):
+				pass
 
 
 func draw_start(pos: Vector2i) -> void:
-	if !$DoubleClickTimer.is_stopped():
-		return
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if Input.is_action_pressed("shape_displace"):
@@ -144,11 +98,13 @@ func draw_start(pos: Vector2i) -> void:
 	if !_drawing:
 		bezier_option_button.disabled = true
 		_drawing = true
-		_current_state = SingleState.START
-	# NOTE: _current_state of CHAINED mode is always SingleState.START so it will always pass this.
-	if _current_state == SingleState.START or _current_state == SingleState.END:
-		_curve.add_point(pos)
-	if _bezier_mode == Bezier.SINGLE:
+		_current_state = SingleState.A
+		_origin = pos
+	else:
+		if _current_state == SingleState.H:
+			pos.x = 0
+		if _current_state < SingleState.READY:
+			_basis_points.append(pos)
 		_current_state += 1
 	_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
 
@@ -160,24 +116,11 @@ func draw_move(pos: Vector2i) -> void:
 		if Input.is_action_pressed("shape_displace"):
 			_pick_color(pos)
 		return
-	if _drawing and _bezier_mode == Bezier.CHAINED:
-		_editing_bezier = true
-		var current_position := _curve.get_point_position(_curve.point_count - 1) - Vector2(pos)
-		if not _editing_out_control_point:
-			_curve.set_point_in(_curve.point_count - 1, current_position)
-		_curve.set_point_out(_curve.point_count - 1, -current_position)
 
 
 func draw_end(pos: Vector2i) -> void:
 	# we still need bezier preview when curve is in SINGLE mode.
-	if _current_state == SingleState.MIDDLE_A or _current_state == SingleState.MIDDLE_B:
-		_editing_bezier = true
-	else:
-		_editing_bezier = false
-	if (
-		(_is_hovering_first_position(pos) and _curve.point_count > 1)
-		or _current_state == SingleState.READY
-	):
+	if _current_state == SingleState.READY:
 		_draw_shape()
 	super.draw_end(pos)
 
@@ -186,7 +129,7 @@ func draw_preview() -> void:
 	var previews := Global.canvas.previews_sprite
 	if not _drawing:
 		return
-	var points := _bezier()
+	var points := _iso_box_outline()
 	var image := Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 	)
@@ -205,56 +148,31 @@ func draw_preview() -> void:
 
 	var canvas := Global.canvas.previews
 	var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
-	if _is_hovering_first_position(_last_mouse_position) and _curve.point_count > 1:
-		var circle_center := _curve.get_point_position(0)
-		if Global.mirror_view:  # This fixes previewing in mirror mode
-			circle_center.x = Global.current_project.size.x - circle_center.x - 1
-		circle_center += Vector2.ONE * 0.5
-		draw_empty_circle(canvas, circle_center, circle_radius * 2.0, Color.BLACK)
-	if _editing_bezier:
-		# Array of points whose bezier previews are required.
-		var preview_points: Array[int] = [_curve.point_count - 1]
-		if _current_state == SingleState.MIDDLE_A:
-			# We need this when we are modifying curve of "first" point in SINGLE mode.
-			# because while in MIDDLE_A state we modify the in/out of both points simultaneously.
-			preview_points.append(0)
-		for point in preview_points:
-			var current_position := _curve.get_point_position(point)
-			var start := current_position
-			if point > 0:
-				start = current_position + _curve.get_point_in(point)
-			var end := current_position + _curve.get_point_out(point)
-			if Global.mirror_view:  # This fixes previewing in mirror mode
-				current_position.x = Global.current_project.size.x - current_position.x - 1
-				start.x = Global.current_project.size.x - start.x - 1
-				end.x = Global.current_project.size.x - end.x - 1
-
-			canvas.draw_line(start, current_position, Color.BLACK)
-			canvas.draw_line(current_position, end, Color.BLACK)
-			draw_empty_circle(canvas, start, circle_radius, Color.BLACK)
-			draw_empty_circle(canvas, end, circle_radius, Color.BLACK)
 
 
 func _draw_shape() -> void:
 	bezier_option_button.disabled = false
-	var points := _bezier()
 	prepare_undo("Draw Shape")
 	var images := _get_selected_draw_images()
-	for point in points:
-		# Reset drawer every time because pixel perfect sometimes breaks the tool
-		_drawer.reset()
-		_fill_inside_rect = _fill_inside_rect.expand(point)
-		# Draw each point offsetted based on the shape's thickness
-		_draw_pixel(point, images)
 	if _fill_inside:
-		var v := Vector2i()
-		for x in _fill_inside_rect.size.x:
-			v.x = x + _fill_inside_rect.position.x
-			for y in _fill_inside_rect.size.y:
-				v.y = y + _fill_inside_rect.position.y
-				if Geometry2D.is_point_in_polygon(v, points):
-					_draw_pixel(v, images)
-	_clear()
+		var a = _basis_points[0] - _origin
+		var b = _basis_points[1] - _basis_points[0]
+		var h = _basis_points[2] - _basis_points[1]
+		h.y = max(0, -h.y)
+		var color = tool_slot.color
+		var box_img = generate_isometric_box(a, b, h.y, color, color.darkened(0.5), color.lightened(0.5))
+		var dst := Vector2i(0, -b.y + h.y)
+		for img: ImageExtended in images:
+			img.blend_rect(box_img, Rect2i(Vector2i.ZERO, box_img.get_size()), _origin - dst)
+	else:
+		var points := _iso_box_outline()
+		for point in points:
+			# Reset drawer every time because pixel perfect sometimes breaks the tool
+			_drawer.reset()
+			_fill_inside_rect = _fill_inside_rect.expand(point)
+			# Draw each point offsetted based on the shape's thickness
+			_draw_pixel(point, images)
+		_clear()
 	commit_undo()
 
 
@@ -268,32 +186,144 @@ func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
 
 
 func _clear() -> void:
-	_curve.clear_points()
+	_basis_points.clear()
 	_fill_inside_rect = Rect2i()
 	_drawing = false
 	Global.canvas.previews_sprite.texture = null
-	_editing_out_control_point = false
 	Global.canvas.previews.queue_redraw()
 
 
 ## Get the [member _curve]'s baked points, and draw lines between them
 ## using [method Geometry2D.bresenham_line].
-func _bezier() -> Array[Vector2i]:
-	var last_pixel := Global.canvas.current_pixel.floor()
-	if Global.mirror_view:
-		# Mirror the last point of the curve
-		last_pixel.x = (Global.current_project.size.x - 1) - last_pixel.x
-	if _current_state <= SingleState.END:  # this is general for both modes
-		_curve.add_point(last_pixel)
-	var points := _curve.get_baked_points()
-	if _current_state <= SingleState.END:  # this is general for both modes
-		_curve.remove_point(_curve.point_count - 1)
-	var final_points: Array[Vector2i] = []
-	for i in points.size() - 1:
-		var point1 := points[i]
-		var point2 := points[i + 1]
-		final_points.append_array(bresenham_line_thickness(point1, point2, _thickness))
-	return final_points
+func _iso_box_outline() -> Array[Vector2i]:
+	var thick
+	var last_pixel: Vector2i = Global.canvas.current_pixel.floor()
+	var preview: Array[Vector2i]
+	if _current_state < SingleState.READY:
+		_basis_points.append(last_pixel)
+	match _basis_points.size():
+		1:
+			preview.append_array(bresenham_line_thickness(_origin, _basis_points[0], _thickness))
+		2:
+			preview = outline_poly(_origin, _basis_points[0], _basis_points[1])
+		3:
+			var diff = (_basis_points[2] - _basis_points[1])
+			diff.x = 0
+			diff.y = min(0, diff.y)
+			preview = outline_poly(
+					_origin + diff, _basis_points[0] + diff, _basis_points[1] + diff
+				)
+			preview.append_array(
+				bresenham_line_thickness(_origin, _basis_points[0], _thickness)
+			)
+			preview.append_array(
+				bresenham_line_thickness(_basis_points[0], _basis_points[1], _thickness)
+			)
+			# joining vertical lines
+			preview.append_array(
+				bresenham_line_thickness(_origin, _origin + diff, _thickness)
+			)
+			preview.append_array(
+				bresenham_line_thickness(_basis_points[0], _basis_points[0] + diff, _thickness)
+			)
+			preview.append_array(
+				bresenham_line_thickness(_basis_points[1], _basis_points[1] + diff, _thickness)
+			)
+	if _current_state < SingleState.READY:
+		_basis_points.resize(_basis_points.size() - 1)
+	return preview
+
+
+func generate_isometric_box(
+	a: Vector2i,
+	b: Vector2i,
+	box_height: int,
+	c_t: Color,
+	c_l: Color,
+	c_r: Color,
+	edge := false
+) -> Image:
+	# a is ↘, b is ↗  (both of them are basis vectors)
+	var base_start := Vector2i(0, -b.y + box_height)
+	var width = a.x + b.x + 1
+	var height = -b.y + a.y + box_height + 1
+
+	var edge_0_1 := PackedVector2Array()
+	var edge_0_2 := PackedVector2Array()
+	var edge_1_2 := PackedVector2Array()
+	var upper_roof_start = base_start - Vector2i(0, box_height)
+	if edge:
+		edge_0_1 = Geometry2D.bresenham_line(upper_roof_start, upper_roof_start + a)
+		edge_0_2 = Geometry2D.bresenham_line(upper_roof_start + a, upper_roof_start + a + b)
+		edge_1_2 = Geometry2D.bresenham_line(upper_roof_start + a, base_start + a)
+	var top_poly: PackedVector2Array = [
+		upper_roof_start,
+		base_start + a - Vector2i(0, box_height),
+		base_start + a + b - Vector2i(0, box_height),
+		base_start + b - Vector2i(0, box_height)
+	]
+	var b_l_poly: PackedVector2Array = [
+		base_start,
+		base_start + a,
+		base_start + a - Vector2i(0, box_height),
+		upper_roof_start
+	]
+	var b_r_poly: PackedVector2Array = [
+		base_start + a,
+		base_start + a + b,
+		base_start + a + b - Vector2i(0, box_height),
+		base_start + a - Vector2i(0, box_height)
+	]
+	var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
+	for x: int in width:
+		for y: int in height:
+			var point = Vector2(x, y)
+			# Edge coloring
+			if point in edge_0_1:
+				image.set_pixel(x, y, Color(
+						c_t.r + c_l.r,
+						c_t.g + c_l.g,
+						c_t.b + c_l.b,
+						c_t.a + c_l.a)
+					)
+				continue
+			elif point in edge_0_2:
+				image.set_pixel(x, y, Color(
+						c_t.r + c_r.r,
+						c_t.g + c_r.g,
+						c_t.b + c_r.b,
+						c_t.a + c_r.a)
+					)
+				continue
+			elif point in edge_1_2:
+				image.set_pixel(x, y, Color(
+						c_l.r + c_r.r,
+						c_l.g + c_r.g,
+						c_l.b + c_r.b,
+						c_l.a + c_r.a)
+					)
+				continue
+			# Shape
+			if Geometry2D.is_point_in_polygon(point, top_poly):
+				image.set_pixel(x, y, c_t)
+			elif Geometry2D.is_point_in_polygon(point, b_l_poly):
+				image.set_pixel(x, y, c_l)
+			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
+				image.set_pixel(x, y, c_r)
+	return image
+
+
+func outline_poly(a: Vector2i, b: Vector2i, c: Vector2i):
+	var out: Array[Vector2i]
+	out.append_array(bresenham_line_thickness(a, b, _thickness))
+	out.append_array(bresenham_line_thickness(b, c, _thickness))
+	out.append_array(bresenham_line_thickness(
+		c, c - b + a, _thickness)
+	)
+	out.append_array(bresenham_line_thickness(
+		c - b + a, a, _thickness)
+	)
+	return out
 
 
 func _fill_bitmap_with_points(points: Array[Vector2i], bitmap_size: Vector2i) -> BitMap:
@@ -306,27 +336,3 @@ func _fill_bitmap_with_points(points: Array[Vector2i], bitmap_size: Vector2i) ->
 		bitmap.set_bitv(point, 1)
 
 	return bitmap
-
-
-func _is_hovering_first_position(pos: Vector2) -> bool:
-	return _curve.point_count > 0 and _curve.get_point_position(0) == pos
-
-
-# Thanks to
-# https://www.reddit.com/r/godot/comments/3ktq39/drawing_empty_circles_and_curves/cv0f4eo/
-func draw_empty_circle(
-	canvas: CanvasItem, circle_center: Vector2, circle_radius: Vector2, color: Color
-) -> void:
-	var draw_counter := 1
-	var line_origin := Vector2()
-	var line_end := Vector2()
-	line_origin = circle_radius + circle_center
-
-	while draw_counter <= 360:
-		line_end = circle_radius.rotated(deg_to_rad(draw_counter)) + circle_center
-		canvas.draw_line(line_origin, line_end, color)
-		draw_counter += 1
-		line_origin = line_end
-
-	line_end = circle_radius.rotated(TAU) + circle_center
-	canvas.draw_line(line_origin, line_end, color)
