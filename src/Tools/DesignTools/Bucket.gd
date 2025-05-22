@@ -283,7 +283,7 @@ func fill_in_selection() -> void:
 			var selection_map_copy := project.selection_map.return_cropped_copy(
 				project, project.size
 			)
-			var rect: Rect2i = selection_map_copy.get_used_rect()
+			var rect := selection_map_copy.get_used_rect()
 			for image in images:
 				image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
 				image.convert_rgb_to_indexed()

@@ -367,15 +367,6 @@ func transform_around(t: Transform2D, m: Transform2D, pivot_local: Vector2) -> T
 	return back * m * to_origin * t
 
 
-func get_no_pivot_transform(
-	pivot_transform := preview_transform, pivot_local := pivot
-) -> Transform2D:
-	var pivot_world := pivot_transform * pivot_local
-	var to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot_world)
-	var back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot_world)
-	return back.affine_inverse() * pivot_transform * to_origin.affine_inverse()
-
-
 func begin_drag(mouse_pos: Vector2) -> void:
 	drag_start = mouse_pos
 	start_transform = preview_transform

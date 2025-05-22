@@ -142,7 +142,6 @@ func ensure_selection_fits(project: Project, rect: Rect2i) -> void:
 	project.selection_offset = Vector2.ZERO.min(offset)
 
 
-## TODO: Add move_to as a parameter, or perhaps even remove this method completely.
 func move_bitmap_values(project: Project, move_offset := true) -> void:
 	var size := project.size
 	var selection_rect := get_selection_rect(project)
