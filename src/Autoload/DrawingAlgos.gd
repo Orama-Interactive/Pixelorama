@@ -274,22 +274,16 @@ func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 
 
 func transform_image_with_algorithm(
-	image: Image, params: Dictionary, algorithm: RotationAlgorithm, expand := false
+	image: Image, params: Dictionary, algorithm: RotationAlgorithm, used_rect := Rect2i()
 ) -> void:
 	var transformation_matrix: Transform2D = params.get("transformation_matrix", Transform2D())
+	var new_image_size := used_rect.size
+	if new_image_size == Vector2i.ZERO:
+		new_image_size = image.get_size()
 	var pivot: Vector2 = params.get("pivot", image.get_size() / 2)
-	if expand:
-		var image_rect := Rect2(Vector2.ZERO, image.get_size())
-		var new_image_rect := image_rect * transformation_matrix as Rect2i
-		var new_image_size := new_image_rect.size
-		if image.get_size() != new_image_size:
-			pivot = new_image_size / 2 - (Vector2i(pivot) - image.get_size() / 2)
-			var tmp_image := Image.create_empty(
-				new_image_size.x, new_image_size.y, image.has_mipmaps(), image.get_format()
-			)
-			tmp_image.blit_rect(image, image_rect, (new_image_size - image.get_size()) / 2)
-			image.copy_from(tmp_image)
 	if type_is_shader(algorithm):
+		transformation_matrix = TransformationHandles.transform_remove_scale(transformation_matrix)
+		params["transformation_matrix"] = transformation_matrix
 		params["pivot"] = pivot / Vector2(image.get_size())
 		var shader := rotxel_shader
 		match algorithm:
@@ -300,7 +294,7 @@ func transform_image_with_algorithm(
 			RotationAlgorithm.NNS:
 				shader = nn_shader
 		var gen := ShaderImageEffect.new()
-		gen.generate_image(image, shader, params, image.get_size())
+		gen.generate_image(image, shader, params, new_image_size)
 	else:
 		var angle := transformation_matrix.get_rotation()
 		match algorithm:
@@ -310,6 +304,8 @@ func transform_image_with_algorithm(
 				nn_rotate(image, angle, pivot)
 			RotationAlgorithm.URD:
 				fake_rotsprite(image, angle, pivot)
+	if image is ImageExtended:
+		image.convert_rgb_to_indexed()
 
 
 func type_is_shader(algorithm: RotationAlgorithm) -> bool:
@@ -414,7 +410,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 				var divk := -1 + int(k / 3)
 				var dir := atan2(dy + divk, dx + modk)
 				var mag := sqrt(pow(dx + modk, 2) + pow(dy + divk, 2))
-				dir -= angle
+				dir += angle
 				ox = roundi(pivot.x * 3 + 1 + mag * cos(dir))
 				oy = roundi(pivot.y * 3 + 1 + mag * sin(dir))
 
@@ -606,8 +602,8 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 	var angle_cos := cos(angle)
 	for x in range(sprite.get_width()):
 		for y in range(sprite.get_height()):
-			var ox := (x - pivot.x) * angle_cos + (y - pivot.y) * angle_sin + pivot.x
-			var oy := -(x - pivot.x) * angle_sin + (y - pivot.y) * angle_cos + pivot.y
+			var ox := (x - pivot.x) * angle_cos - (y - pivot.y) * angle_sin + pivot.x
+			var oy := (x - pivot.x) * angle_sin + (y - pivot.y) * angle_cos + pivot.y
 			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
 				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
 			else:

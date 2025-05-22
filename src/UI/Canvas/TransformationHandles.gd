@@ -353,7 +353,7 @@ func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vec
 	return world_pos
 
 
-func transform_remove_scale(t: Transform2D) -> Transform2D:
+static func transform_remove_scale(t: Transform2D) -> Transform2D:
 	var x := t.x.normalized()
 	var y := t.y.normalized()
 	return Transform2D(x, y, Vector2.ZERO)

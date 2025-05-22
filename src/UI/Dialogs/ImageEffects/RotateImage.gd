@@ -99,7 +99,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 			)
 	var transformation_matrix := Transform2D(angle, Vector2.ZERO)
 	var params := {
-		"transformation_matrix": transformation_matrix,
+		"transformation_matrix": transformation_matrix.affine_inverse(),
 		"pivot": pivot,
 		"selection_tex": selection_tex,
 		"initial_angle": init_angle,
