@@ -190,9 +190,8 @@ func draw_preview() -> void:
 		var canvas = Global.canvas.previews
 		var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
 		var idx = maxi(BoxState.A, _current_state - 1)
-		var focus_point =  _control_pts[idx]
+		var focus_point = _control_pts[idx]
 		var prev_point: Vector2 = _origin
-		print(idx)
 		if idx > 0:
 			prev_point = _control_pts[idx - 1]
 		canvas.draw_circle(focus_point, circle_radius.x, Color.WHITE)
@@ -236,7 +235,7 @@ func _draw_shape() -> void:
 		if !box_img:  # Invalid shape
 			_clear()
 		var offset = min(0, a.y, (a + b).y, b.y)
-		var dst := Vector2i(0, - h.y + offset)
+		var dst := Vector2i(0, -h.y + offset)
 		for img: ImageExtended in images:
 			img.blend_rect(box_img, Rect2i(Vector2i.ZERO, box_img.get_size()), _origin + dst)
 	else:
@@ -287,12 +286,16 @@ func _iso_box_outline() -> Array[Vector2i]:
 			preview.append_array(
 				bresenham_line_thickness(_control_pts[0], _control_pts[1], new_thickness)
 			)
-			preview.append_array(bresenham_line_thickness(
-				_control_pts[1], _control_pts[1] - _control_pts[0] + _origin, new_thickness)
+			preview.append_array(
+				bresenham_line_thickness(
+					_control_pts[1], _control_pts[1] - _control_pts[0] + _origin, new_thickness
+				)
 			)
-			preview.append_array(bresenham_line_thickness(
-				_control_pts[1] - _control_pts[0] + _origin, _origin, new_thickness)
-			)
+			preview.append_array(
+				bresenham_line_thickness(
+					_control_pts[1] - _control_pts[0] + _origin, _origin, new_thickness
+				)
+ 			)
 		3:
 			# an isometric "box"
 			var diff = _control_pts[2] - _control_pts[1]
@@ -319,12 +322,8 @@ func _iso_box_outline() -> Array[Vector2i]:
 			preview.append_array(
 				bresenham_line_thickness(_control_pts[0], _control_pts[1], new_thickness)
 			)
-			preview.append_array(
-				bresenham_line_thickness(_origin, _control_pts[0], new_thickness)
-			)
-			preview.append_array(
-				bresenham_line_thickness(_origin, _origin - diff, new_thickness)
-			)
+			preview.append_array(bresenham_line_thickness(_origin, _control_pts[0], new_thickness))
+			preview.append_array(bresenham_line_thickness(_origin, _origin - diff, new_thickness))
 			# inner lines
 			if _fill_inside and _drawing:
 				# This part will only be visible on preview
@@ -333,8 +332,10 @@ func _iso_box_outline() -> Array[Vector2i]:
 				canvas.draw_dashed_line(_origin - diff, _control_pts[0] - diff, Color.WHITE)
 				canvas.draw_dashed_line(_control_pts[0], _control_pts[0] - diff, Color.WHITE)
 			else:
-				preview.append_array(bresenham_line_thickness(
-					_control_pts[0] - diff, _control_pts[1] - diff, new_thickness)
+				preview.append_array(
+					bresenham_line_thickness(
+						_control_pts[0] - diff, _control_pts[1] - diff, new_thickness
+					)
 				)
 				preview.append_array(
 					bresenham_line_thickness(_origin - diff, _control_pts[0] - diff, new_thickness)
@@ -348,17 +349,11 @@ func _iso_box_outline() -> Array[Vector2i]:
 
 
 func generate_isometric_box(
-	a: Vector2i,
-	b: Vector2i,
-	box_height: int,
-	c_t: Color,
-	c_l: Color,
-	c_r: Color,
-	edge := false
+	a: Vector2i, b: Vector2i, box_height: int, c_t: Color, c_l: Color, c_r: Color, edge := false
 ) -> Image:
 	# a is ↘, b is ↗  (both of them are basis vectors)
 	var c := Vector2i(0, box_height)
-	var width: int =  max(0, a.x, (a + b).x, b.x) + 1
+	var width: int = max(0, a.x, (a + b).x, b.x) + 1
 	var height: int = max(0, a.y, (a + b).y, b.y) - min(0, a.y, (a + b).y, b.y) + box_height
 	var offset = Vector2i(0, abs(min(0, a.y, (a + b).y, b.y)))
 
@@ -395,7 +390,7 @@ func generate_isometric_box(
 		for y: int in height:
 			var point = Vector2(x, y)
 
-			 # Edge coloring
+			# Edge coloring
 			var edge_color: Color
 			var should_color := false
 			if point in edge_0_1 and is_canon_edge.call(point, 0, 1):
@@ -440,7 +435,9 @@ func angle_constraint(point: Vector2) -> Vector2i:
 			var f := p.y if absf(diff.x) > absf(diff.y) else p.x
 			return Vector2i((prev_point + diff.sign() * v * f - diff.sign()).round())
 		else:
-			return Vector2i((prev_point + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance).round())
+			return Vector2i(
+				(prev_point + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance).round()
+			)
 	return Vector2i(point)
 
 

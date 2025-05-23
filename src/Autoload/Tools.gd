@@ -225,7 +225,10 @@ Press %s to edit the last added basis""",
 			[
 				"activate_left_tool",
 				"activate_right_tool",
-				"shape_perfect", "shape_displace", "change_tool_mode"]
+				"shape_perfect",
+				"shape_displace",
+				"change_tool_mode"
+			]
 		)
 	),
 	"EllipseTool":
