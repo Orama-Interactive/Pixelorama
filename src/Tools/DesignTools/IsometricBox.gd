@@ -2,12 +2,14 @@ extends BaseDrawTool
 
 enum SingleState { A, B, H, READY }
 
-var _drawing := false  ## Set to true when a curve is being drawn.
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
-var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _thickness := 1  ## The thickness of the curve.
+var _drawing := false  ## Set to true when a curve is being drawn.
+var _visible_edges := false  ## When true, the inside area of the curve gets filled.
+var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _current_state: int = SingleState.A  ## Current state of the bezier curve (in SINGLE mode)
-var _basis_points: Array[Vector2i]
+var _last_pixel: Vector2i
+var _control_pts: Array[Vector2i]
 var _origin: Vector2i
 
 
@@ -35,6 +37,12 @@ func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
 	save_config()
 
 
+func _on_edges_checkbox_toggled(toggled_on: bool) -> void:
+	_visible_edges = toggled_on
+	update_config()
+	save_config()
+
+
 func update_indicator() -> void:
 	var bitmap := BitMap.new()
 	bitmap.create(Vector2i.ONE * _thickness)
@@ -45,21 +53,25 @@ func update_indicator() -> void:
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
-	config["fill_inside"] = _fill_inside
 	config["thickness"] = _thickness
+	config["fill_inside"] = _fill_inside
+	config["visible_edges"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
 	super.set_config(config)
-	_fill_inside = config.get("fill_inside", _fill_inside)
 	_thickness = config.get("thickness", _thickness)
+	_fill_inside = config.get("fill_inside", _fill_inside)
+	_visible_edges = config.get("visible_edges", _visible_edges)
 
 
 func update_config() -> void:
 	super.update_config()
-	$FillCheckbox.button_pressed = _fill_inside
 	$ThicknessSlider.value = _thickness
+	$FillCheckbox.button_pressed = _fill_inside
+	$EdgesCheckbox.visible = _fill_inside
+	$EdgesCheckbox.button_pressed = _visible_edges
 
 
 ## This tool has no brush, so just return the indicator as it is.
@@ -70,7 +82,6 @@ func _create_brush_indicator() -> BitMap:
 func _input(event: InputEvent) -> void:
 	if _drawing:
 		if event is InputEventMouseMotion:
-
 			if event.is_action_pressed("shape_perfect"):
 				pass
 			elif event.is_action_released("shape_perfect"):
@@ -99,13 +110,22 @@ func draw_start(pos: Vector2i) -> void:
 		elif _current_state == SingleState.A:
 			pos.x = max(_origin.x, pos.x)
 		elif _current_state == SingleState.B:  # restriction on B
-			pos.x = max(_basis_points[0].x, pos.x)
-			if Vector2(pos - _origin).angle() >= Vector2(_basis_points[0] - _origin).angle():
-				pos = _basis_points[0]
+			pos.x = max(_control_pts[0].x, pos.x)
+			if Vector2(pos - _origin).angle() >= Vector2(_control_pts[0] - _origin).angle():
+				pos = _control_pts[0]
 		if _current_state < SingleState.READY:
-			_basis_points.append(pos)
+			_control_pts.append(pos)
 		_current_state += 1
 	_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
+
+
+func cursor_move(pos: Vector2i):
+	super.cursor_move(pos)
+	if Input.is_action_pressed("shape_displace"):
+		_origin += pos - _last_pixel
+		for i in _control_pts.size():
+			_control_pts[i] = _control_pts[i] + pos - _last_pixel
+	_last_pixel = pos
 
 
 func draw_move(pos: Vector2i) -> void:
@@ -128,6 +148,7 @@ func draw_preview() -> void:
 	var previews := Global.canvas.previews_sprite
 	if not _drawing:
 		return
+
 	var points := _iso_box_outline()
 	var image := Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
@@ -145,22 +166,25 @@ func draw_preview() -> void:
 	var texture := ImageTexture.create_from_image(image)
 	previews.texture = texture
 
-	var canvas := Global.canvas.previews
-	var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
-
 
 func _draw_shape() -> void:
+	_drawing = false
 	prepare_undo("Draw Shape")
 	var images := _get_selected_draw_images()
 	if _fill_inside:  # Thickness isn't supported for this mode
-		var a = _basis_points[0] - _origin
-		var b = _basis_points[1] - _basis_points[0]
-		var h = _basis_points[2] - _basis_points[1]
+		# converting control points to local basis vectors
+		var a = _control_pts[0] - _origin
+		var b = _control_pts[1] - _control_pts[0]
+		var h = _control_pts[2] - _control_pts[1]
 		h.y = abs(h.y)
 		var color = tool_slot.color
+		if color.a == 0:
+			return
 		var box_img = generate_isometric_box(
-			a, b, h.y, color, color.darkened(0.5), color.lightened(0.5), true
+			a, b, h.y, color, color.darkened(0.5), color.lightened(0.5), _visible_edges
 		)
+		if !box_img:  # Invalid shape
+			return
 		var offset = min(0, a.y, (a + b).y, b.y)
 		var dst := Vector2i(0, - h.y + offset)
 		for img: ImageExtended in images:
@@ -187,9 +211,8 @@ func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
 
 
 func _clear() -> void:
-	_basis_points.clear()
+	_control_pts.clear()
 	_fill_inside_rect = Rect2i()
-	_drawing = false
 	Global.canvas.previews_sprite.texture = null
 	Global.canvas.previews.queue_redraw()
 
@@ -200,77 +223,83 @@ func _iso_box_outline() -> Array[Vector2i]:
 	var new_thickness = _thickness
 	if _fill_inside:
 		new_thickness = 1
-	var last_pixel: Vector2i = Global.canvas.current_pixel.floor()
 	var preview: Array[Vector2i]
 	if _current_state < SingleState.READY:
 		if _current_state == SingleState.A:
-			last_pixel.x = max(_origin.x, last_pixel.x)
+			_last_pixel.x = max(_origin.x, _last_pixel.x)
 		if _current_state == SingleState.B:
 			# restriction on b point (For preview only)
-			last_pixel.x = max(_basis_points[0].x, last_pixel.x)
-			if Vector2(last_pixel - _origin).angle() >= Vector2(_basis_points[0] - _origin).angle():
-				last_pixel = _basis_points[0]
-		_basis_points.append(last_pixel)
-	match _basis_points.size():
+			_last_pixel.x = max(_control_pts[0].x, _last_pixel.x)
+			if Vector2(_last_pixel - _origin).angle() >= Vector2(_control_pts[0] - _origin).angle():
+				_last_pixel = _control_pts[0]
+		_control_pts.append(_last_pixel)
+	match _control_pts.size():
 		1:
 			# a line
-			preview.append_array(bresenham_line_thickness(_origin, _basis_points[0], new_thickness))
+			preview.append_array(bresenham_line_thickness(_origin, _control_pts[0], new_thickness))
 		2:
 			# an isometric "rextangle"
-			preview.append_array(bresenham_line_thickness(_origin, _basis_points[0], new_thickness))
+			preview.append_array(bresenham_line_thickness(_origin, _control_pts[0], new_thickness))
 			preview.append_array(
-				bresenham_line_thickness(_basis_points[0], _basis_points[1], new_thickness)
+				bresenham_line_thickness(_control_pts[0], _control_pts[1], new_thickness)
 			)
 			preview.append_array(bresenham_line_thickness(
-				_basis_points[1], _basis_points[1] - _basis_points[0] + _origin, new_thickness)
+				_control_pts[1], _control_pts[1] - _control_pts[0] + _origin, new_thickness)
 			)
 			preview.append_array(bresenham_line_thickness(
-				_basis_points[1] - _basis_points[0] + _origin, _origin, new_thickness)
+				_control_pts[1] - _control_pts[0] + _origin, _origin, new_thickness)
 			)
 		3:
 			# an isometric "box"
-			var diff = _basis_points[2] - _basis_points[1]
+			var diff = _control_pts[2] - _control_pts[1]
 			diff.x = 0
 			diff.y = min(0, diff.y)
 			# outer outline (arranged clockwise)
 			preview.append_array(
 				bresenham_line_thickness(
-					_basis_points[1] - _basis_points[0] + _origin + diff,
+					_control_pts[1] - _control_pts[0] + _origin + diff,
 					_origin + diff,
 					new_thickness
 				)
 			)
 			preview.append_array(
 				bresenham_line_thickness(
-					_basis_points[1] + diff,
-					_basis_points[1] - _basis_points[0] + _origin + diff,
+					_control_pts[1] + diff,
+					_control_pts[1] - _control_pts[0] + _origin + diff,
 					new_thickness
 				)
 			)
 			preview.append_array(
-				bresenham_line_thickness(_basis_points[1], _basis_points[1] + diff, new_thickness)
+				bresenham_line_thickness(_control_pts[1], _control_pts[1] + diff, new_thickness)
 			)
 			preview.append_array(
-				bresenham_line_thickness(_basis_points[0], _basis_points[1], new_thickness)
+				bresenham_line_thickness(_control_pts[0], _control_pts[1], new_thickness)
 			)
 			preview.append_array(
-				bresenham_line_thickness(_origin, _basis_points[0], new_thickness)
+				bresenham_line_thickness(_origin, _control_pts[0], new_thickness)
 			)
 			preview.append_array(
 				bresenham_line_thickness(_origin, _origin + diff, new_thickness)
 			)
 			# inner lines
-			preview.append_array(bresenham_line_thickness(
-				_basis_points[0] + diff, _basis_points[1] + diff, new_thickness)
-			)
-			preview.append_array(
-				bresenham_line_thickness(_origin + diff, _basis_points[0] + diff, new_thickness)
-			)
-			preview.append_array(
-				bresenham_line_thickness(_basis_points[0], _basis_points[0] + diff, new_thickness)
-			)
+			if _fill_inside and _drawing:
+				# This part will only be visible on preview
+				var canvas = Global.canvas.previews
+				canvas.draw_dashed_line(_control_pts[0] + diff, _control_pts[1] + diff, Color.WHITE)
+				canvas.draw_dashed_line(_origin + diff, _control_pts[0] + diff, Color.WHITE)
+				canvas.draw_dashed_line(_control_pts[0], _control_pts[0] + diff, Color.WHITE)
+			else:
+				preview.append_array(bresenham_line_thickness(
+					_control_pts[0] + diff, _control_pts[1] + diff, new_thickness)
+				)
+				preview.append_array(
+					bresenham_line_thickness(_origin + diff, _control_pts[0] + diff, new_thickness)
+				)
+				preview.append_array(
+					bresenham_line_thickness(_control_pts[0], _control_pts[0] + diff, new_thickness)
+				)
 	if _current_state < SingleState.READY:
-		_basis_points.resize(_basis_points.size() - 1)
+		_control_pts.resize(_control_pts.size() - 1)
 	return preview
 
 
@@ -284,70 +313,65 @@ func generate_isometric_box(
 	edge := false
 ) -> Image:
 	# a is ↘, b is ↗  (both of them are basis vectors)
-	var width: int =  max(0, a.x, (a + b).x, b.x)
+	var c := Vector2i(0, box_height)
+	var width: int =  max(0, a.x, (a + b).x, b.x) + 1
 	var height: int = max(0, a.y, (a + b).y, b.y) - min(0, a.y, (a + b).y, b.y) + box_height
 	var offset = Vector2i(0, abs(min(0, a.y, (a + b).y, b.y)))
-	var upper_roof_start = Vector2i.ZERO + offset
-	var base_start = upper_roof_start + Vector2i(0, box_height)
+
+	# starting point of upper plate
+	var u_st = Vector2i.ZERO + offset
+	# starting point of lower plate
+	var b_st = u_st + c
 
 	var edge_0_1 := PackedVector2Array()
 	var edge_0_2 := PackedVector2Array()
 	var edge_1_2 := PackedVector2Array()
 	if edge:
-		edge_0_1 = bresenham_line_thickness(upper_roof_start, upper_roof_start + a, _thickness)
-		edge_0_1 = bresenham_line_thickness(upper_roof_start, upper_roof_start + a, _thickness)
-		edge_0_2 = bresenham_line_thickness(upper_roof_start + a, upper_roof_start + a + b, _thickness)
-		edge_1_2 = bresenham_line_thickness(upper_roof_start + a, base_start + a, _thickness)
-	var top_poly: PackedVector2Array = [
-		upper_roof_start,
-		a + offset,
-		a + b + offset,
-		b + offset
-	]
-	var b_l_poly: PackedVector2Array = [
-		base_start,
-		base_start + a,
-		base_start + a - Vector2i(0, box_height),
-		upper_roof_start
-	]
-	var b_r_poly: PackedVector2Array = [
-		base_start + a,
-		base_start + a + b,
-		base_start + a + b - Vector2i(0, box_height),
-		base_start + a - Vector2i(0, box_height)
-	]
+		edge_0_1 = bresenham_line_thickness(u_st, u_st + a, _thickness)
+		edge_0_1 = bresenham_line_thickness(u_st, u_st + a, _thickness)
+		edge_0_2 = bresenham_line_thickness(u_st + a, u_st + a + b, _thickness)
+		edge_1_2 = bresenham_line_thickness(u_st + a, b_st + a, _thickness)
+
+	var top_poly: PackedVector2Array = [u_st, a + offset, a + b + offset, b + offset]
+	var b_l_poly: PackedVector2Array = [b_st, b_st + a, b_st + a - c, u_st]
+	var b_r_poly: PackedVector2Array = [b_st + a, b_st + a + b, b_st + a + b - c, b_st + a - c]
+
 	if width <= 0 or height <= 0:
 		return
 	var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
+
+	# a convenient lambdha function
+	var is_canon_edge := func(point, a: int, b: int):
+		var poly = [top_poly, b_l_poly, b_r_poly]
+		return (
+			Geometry2D.is_point_in_polygon(point, poly[a])
+			or Geometry2D.is_point_in_polygon(point, poly[b])
+		)
 	for x: int in width:
 		for y: int in height:
 			var point = Vector2(x, y)
+
 			 # Edge coloring
-			if point in edge_0_1:
-				image.set_pixel(x, y, Color(
-						c_t.r + c_l.r,
-						c_t.g + c_l.g,
-						c_t.b + c_l.b,
-						c_t.a + c_l.a)
-					)
+			var edge_color: Color
+			var should_color := false
+			if point in edge_0_1 and is_canon_edge.call(point, 0, 1):
+				edge_color = Color(c_t.r + c_l.r, c_t.g + c_l.g, c_t.b + c_l.b, c_t.a + c_l.a)
+				should_color = true
+			elif point in edge_0_2 and is_canon_edge.call(point, 0, 2):
+				edge_color = Color(c_t.r + c_r.r, c_t.g + c_r.g, c_t.b + c_r.b, c_t.a + c_r.a)
+				if should_color:
+					continue
+				should_color = true
+			elif point in edge_1_2 and is_canon_edge.call(point, 1, 2):
+				edge_color = Color(c_l.r + c_r.r, c_l.g + c_r.g, c_l.b + c_r.b, c_l.a + c_r.a)
+				if should_color:
+					continue
+				should_color = true
+			if should_color:
+				image.set_pixelv(point, edge_color)
 				continue
-			elif point in edge_0_2:
-				image.set_pixel(x, y, Color(
-						c_t.r + c_r.r,
-						c_t.g + c_r.g,
-						c_t.b + c_r.b,
-						c_t.a + c_r.a)
-					)
-				continue
-			elif point in edge_1_2:
-				image.set_pixel(x, y, Color(
-						c_l.r + c_r.r,
-						c_l.g + c_r.g,
-						c_l.b + c_r.b,
-						c_l.a + c_r.a)
-					)
-				continue
-			# Shape
+
+			# Shape filling
 			if Geometry2D.is_point_in_polygon(point, top_poly):
 				image.set_pixel(x, y, c_t)
 			elif Geometry2D.is_point_in_polygon(point, b_l_poly):
@@ -355,28 +379,3 @@ func generate_isometric_box(
 			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
 				image.set_pixel(x, y, c_r)
 	return image.get_region(image.get_used_rect())
-
-
-func outline_poly(a: Vector2i, b: Vector2i, c: Vector2i):
-	var out: Array[Vector2i]
-	out.append_array(bresenham_line_thickness(a, b, _thickness))
-	out.append_array(bresenham_line_thickness(b, c, _thickness))
-	out.append_array(bresenham_line_thickness(
-		c, c - b + a, _thickness)
-	)
-	out.append_array(bresenham_line_thickness(
-		c - b + a, a, _thickness)
-	)
-	return out
-
-
-func _fill_bitmap_with_points(points: Array[Vector2i], bitmap_size: Vector2i) -> BitMap:
-	var bitmap := BitMap.new()
-	bitmap.create(bitmap_size)
-
-	for point in points:
-		if point.x < 0 or point.y < 0 or point.x >= bitmap_size.x or point.y >= bitmap_size.y:
-			continue
-		bitmap.set_bitv(point, 1)
-
-	return bitmap
