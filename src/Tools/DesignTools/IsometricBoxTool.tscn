@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cop8ckecfyxli"]
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1_a3u7o"]
-[ext_resource type="Script" uid="uid://8bbs5tywj2ya" path="res://src/Tools/DesignTools/IsometricBox.gd" id="2_g8u0x"]
+[ext_resource type="Script" uid="uid://8bbs5tywj2ya" path="res://src/Tools/DesignTools/IsometricBoxTool.gd" id="2_g8u0x"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3_xw18e"]
 
 [node name="ToolOptions" instance=ExtResource("1_a3u7o")]

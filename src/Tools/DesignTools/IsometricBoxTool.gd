@@ -79,13 +79,6 @@ func _create_brush_indicator() -> BitMap:
 	return _indicator
 
 
-#func _input(event: InputEvent) -> void:
-	#if _drawing:
-		#if Input.is_action_just_pressed("change_tool_mode"):
-			#_current_state = maxi(BoxState.A, _current_state - 1)
-			#_control_pts.resize(_current_state)
-
-
 func cursor_move(pos: Vector2i):
 	super.cursor_move(pos)
 	if _drawing:
@@ -97,7 +90,9 @@ func cursor_move(pos: Vector2i):
 			if _control_pts.size() > 0:
 				var temp_state = maxi(BoxState.A, _current_state - 1)
 				var new_value := _control_pts[temp_state] + pos - _last_pixel
-				_control_pts[temp_state] = box_constraint(_control_pts[temp_state], new_value, temp_state)
+				_control_pts[temp_state] = box_constraint(
+					_control_pts[temp_state], new_value, temp_state
+				)
 
 		## This is used for preview
 		pos = box_constraint(_last_pixel, pos, _current_state)
@@ -157,6 +152,13 @@ func draw_preview() -> void:
 			points[i].x = image.get_width() - points[i].x - 1
 		if Rect2i(Vector2i.ZERO, image.get_size()).has_point(points[i]):
 			image.set_pixelv(points[i], Color.WHITE)
+
+	if Input.is_action_pressed("change_tool_mode") and _control_pts.size() > 0:
+		var canvas = Global.canvas.previews
+		var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
+		var focus_point =  _control_pts[maxi(BoxState.A, _current_state - 1)]
+		canvas.draw_circle(focus_point, circle_radius.x, Color.WHITE)
+		canvas.draw_circle(focus_point, circle_radius.x * 2, Color.WHITE, false)
 
 	# Handle mirroring
 	for point in mirror_array(points):
@@ -395,8 +397,8 @@ func angle_constraint(point: Vector2) -> Vector2i:
 func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2i:
 	if state == BoxState.A:
 		point.x = max(_origin.x, point.x)
-		if state < _current_state:
-			if point.y <= _origin.y:
+		if state != _current_state:
+			if Vector2(_last_pixel - _origin).angle() >= Vector2(point - _origin).angle():
 				point = old_point
 	elif state == BoxState.B:
 		# restriction on B
