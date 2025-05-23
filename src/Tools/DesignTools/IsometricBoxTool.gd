@@ -5,7 +5,7 @@ enum BoxState { A, B, H, READY }
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _thickness := 1  ## The thickness of the curve.
 var _drawing := false  ## Set to true when a curve is being drawn.
-var _visible_edges := false  ## When true, the inside area of the curve gets filled.
+var _blend_edges := false  ## When true, the inside area of the curve gets filled.
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _current_state: int = BoxState.A  ## Current state of the bezier curve (in SINGLE mode)
 var _last_pixel: Vector2i
@@ -40,7 +40,7 @@ func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
 
 
 func _on_edges_checkbox_toggled(toggled_on: bool) -> void:
-	_visible_edges = toggled_on
+	_blend_edges = toggled_on
 	update_config()
 	save_config()
 
@@ -79,7 +79,7 @@ func get_config() -> Dictionary:
 	var config := super.get_config()
 	config["thickness"] = _thickness
 	config["fill_inside"] = _fill_inside
-	config["visible_edges"] = _thickness
+	config["blend_edges"] = _blend_edges
 	config["left_shade_value"] = _left_shade_value
 	config["right_shade_value"] = _right_shade_value
 	config["left_shade_option"] = %LeftShadeOption.selected
@@ -91,7 +91,7 @@ func set_config(config: Dictionary) -> void:
 	super.set_config(config)
 	_thickness = config.get("thickness", _thickness)
 	_fill_inside = config.get("fill_inside", _fill_inside)
-	_visible_edges = config.get("visible_edges", _visible_edges)
+	_blend_edges = config.get("blend_edges", _blend_edges)
 	_left_shade_value = config.get("left_shade_value", _left_shade_value)
 	_right_shade_value = config.get("right_shade_value", _right_shade_value)
 	%LeftShadeOption.select(config.get("left_shade_option", 1))
@@ -103,7 +103,7 @@ func update_config() -> void:
 	$ThicknessSlider.value = _thickness
 	$FillCheckbox.button_pressed = _fill_inside
 	$FillOptions.visible = _fill_inside
-	$FillOptions/EdgesCheckbox.button_pressed = _visible_edges
+	$FillOptions/EdgesCheckbox.button_pressed = _blend_edges
 	%LeftShadeSlider.value = _left_shade_value
 	%RightShadeSlider.value = _right_shade_value
 
@@ -232,7 +232,7 @@ func _draw_shape() -> void:
 			else color.darkened(_right_shade_value)
 		)
 		var box_img = generate_isometric_box(
-			a, b, h.y, color, left_color, right_color, _visible_edges
+			a, b, h.y, color, left_color, right_color, _blend_edges
 		)
 		if !box_img:  # Invalid shape
 			_clear()
