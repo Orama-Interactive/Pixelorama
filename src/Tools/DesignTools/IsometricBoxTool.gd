@@ -234,10 +234,51 @@ func _draw_shape() -> void:
 		)
 		if !box_img:  # Invalid shape
 			_clear()
+		# Fill mode works differently, (we have to consider all 8 surrounding points)
+		var project := Global.current_project
+		var central_point := project.tiles.get_canon_position(_origin)
+		var positions := project.tiles.get_point_in_tiles(central_point)
 		var offset = min(0, a.y, (a + b).y, b.y)
-		var dst := Vector2i(0, -h.y + offset)
-		for img: ImageExtended in images:
-			img.blend_rect(box_img, Rect2i(Vector2i.ZERO, box_img.get_size()), _origin + dst)
+		var draw_rectangle := _get_draw_rect()
+		if Global.current_project.has_selection and project.tiles.mode == Tiles.MODE.NONE:
+			positions = Global.current_project.selection_map.get_point_in_tile_mode(central_point)
+		var box_size = box_img.get_size()
+		for i in positions.size():
+			var pos := positions[i]
+			var dst := Vector2i(0, -h.y + offset) + pos
+			var dst_rect := Rect2i(dst, box_size)
+			dst_rect = dst_rect.intersection(draw_rectangle)
+			if dst_rect.size == Vector2i.ZERO:
+				continue
+			var src_rect := Rect2i(dst_rect.position - dst, dst_rect.size)
+			var brush_image: Image = remove_unselected_parts_of_brush(box_img, dst)
+			dst = dst_rect.position
+			_draw_brush_image(brush_image, src_rect, dst)
+
+			# Handle Mirroring
+			var mirror_x := (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
+			var mirror_y := (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
+
+			if Tools.horizontal_mirror or Tools.vertical_mirror:
+				var brush_copy_x = brush_image.duplicate()
+				brush_copy_x.flip_x()
+				var brush_copy_y = brush_image.duplicate()
+				brush_copy_y.flip_y()
+				if Tools.horizontal_mirror:
+					var x_dst := Vector2i(mirror_x, dst.y)
+					var mirror_brush_x = remove_unselected_parts_of_brush(brush_copy_x, x_dst)
+					_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, box_size, true, false), x_dst)
+					if Tools.vertical_mirror:
+						brush_copy_x.flip_y()
+						var xy_dst := Vector2i(mirror_x, mirror_y)
+						var mirror_brush_xy := remove_unselected_parts_of_brush(brush_copy_x, xy_dst)
+						_draw_brush_image(
+							mirror_brush_xy, _flip_rect(src_rect, box_size, true, true), xy_dst
+						)
+				if Tools.vertical_mirror:
+					var y_dst := Vector2i(dst.x, mirror_y)
+					var mirror_brush_y := remove_unselected_parts_of_brush(brush_copy_y, y_dst)
+					_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, box_size, false, true), y_dst)
 	else:
 		var points := _iso_box_outline()
 		for point in points:
@@ -354,7 +395,7 @@ func generate_isometric_box(
 	# a is ↘, b is ↗  (both of them are basis vectors)
 	var c := Vector2i(0, box_height)
 	var width: int = max(0, a.x, (a + b).x, b.x) + 1
-	var height: int = max(0, a.y, (a + b).y, b.y) - min(0, a.y, (a + b).y, b.y) + box_height
+	var height: int = max(0, a.y, (a + b).y, b.y) - min(0, a.y, (a + b).y, b.y) + box_height + 1
 	var offset = Vector2i(0, abs(min(0, a.y, (a + b).y, b.y)))
 
 	# starting point of upper plate
@@ -453,3 +494,14 @@ func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2
 		if Vector2(point - _origin).angle() >= Vector2(_control_pts[0] - _origin).angle():
 			point = old_point
 	return point
+
+
+func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
+	var images := _get_selected_draw_images()
+	for draw_image in images:
+		if Tools.alpha_locked:
+			var mask := draw_image.get_region(Rect2i(dst, brush_image.get_size()))
+			draw_image.blend_rect_mask(brush_image, mask, src_rect, dst)
+		else:
+			draw_image.blend_rect(brush_image, src_rect, dst)
+		draw_image.convert_rgb_to_indexed()
