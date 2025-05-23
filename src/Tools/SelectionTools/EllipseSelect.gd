@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 
 
 func draw_move(pos: Vector2i) -> void:
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	pos = snap_position(pos)
 	super.draw_move(pos)
@@ -37,7 +37,7 @@ func draw_move(pos: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	pos = snap_position(pos)
 	super.draw_end(pos)
@@ -107,7 +107,6 @@ func apply_selection(_position: Vector2i) -> void:
 			mirror_rect.end = mirror_ends[i]
 			set_ellipse(project.selection_map, mirror_rect.abs().position)
 
-		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 		Global.canvas.selection.commit_undo("Select", undo_data)
 	Global.canvas.previews_sprite.texture = null
 

@@ -85,7 +85,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	var image := Image.new()
 	image.copy_from(cel)
 	if project.has_selection and selection_checkbox.button_pressed:
-		var selection := project.selection_map.return_cropped_copy(project.size)
+		var selection := project.selection_map.return_cropped_copy(project, project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
 
 		if not DrawingAlgos.type_is_shader(rotation_algorithm):
@@ -99,7 +99,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 			)
 	var transformation_matrix := Transform2D(angle, Vector2.ZERO)
 	var params := {
-		"transformation_matrix": transformation_matrix,
+		"transformation_matrix": transformation_matrix.affine_inverse(),
 		"pivot": pivot,
 		"selection_tex": selection_tex,
 		"initial_angle": init_angle,
@@ -114,9 +114,9 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 				preview.material.set_shader_parameter(param, params[param])
 		else:
 			params["preview"] = false
-			DrawingAlgos.transform(cel, params, rotation_algorithm)
+			DrawingAlgos.transform_image_with_algorithm(cel, params, rotation_algorithm)
 	else:
-		DrawingAlgos.transform(image, params, rotation_algorithm)
+		DrawingAlgos.transform_image_with_algorithm(image, params, rotation_algorithm)
 		if project.has_selection and selection_checkbox.button_pressed:
 			cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 		else:

@@ -12,6 +12,25 @@ func _ready() -> void:
 	camera.zoom_changed.connect(_zoom_changed)
 
 
+func _gui_input(event: InputEvent) -> void:
+	var checker: ColorRect = $VBox/HBox/PreviewViewportContainer/SubViewport/TransparentChecker
+	if event is InputEventMouseButton:
+		var mouse_pos = checker.get_local_mouse_position()
+		if (
+			mouse_pos.x >= 0
+			and mouse_pos.y >= 0
+			and mouse_pos.x <= checker.size.x
+			and mouse_pos.y <= checker.size.y
+		):
+			if event.double_click:
+				if canvas_preview.mode == canvas_preview.Mode.SPRITESHEET:
+					var sprite_sheet_idx = canvas_preview.frame_index
+					var x: int = sprite_sheet_idx % canvas_preview.h_frames
+					var y: int = sprite_sheet_idx / canvas_preview.v_frames
+					mouse_pos += Vector2(x, y) * checker.size
+				Global.camera.offset = mouse_pos
+
+
 func _zoom_changed() -> void:
 	preview_zoom_slider.value = camera.zoom.x
 

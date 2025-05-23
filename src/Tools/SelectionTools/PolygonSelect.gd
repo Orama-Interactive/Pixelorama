@@ -40,14 +40,14 @@ func draw_start(pos: Vector2i) -> void:
 
 
 func draw_move(pos: Vector2i) -> void:
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	pos = snap_position(pos)
 	super.draw_move(pos)
 
 
 func draw_end(pos: Vector2i) -> void:
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	pos = snap_position(pos)
 	if !_move and _draw_points:
@@ -112,7 +112,6 @@ func apply_selection(pos: Vector2i) -> void:
 		# Handle mirroring
 		var callable := lasso_selection.bind(project, previous_selection_map)
 		mirror_array(_draw_points, callable)
-		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:
 			Global.canvas.selection.clear_selection()

@@ -37,7 +37,6 @@ func _on_confirmed() -> void:
 		project.selection_map.shrink(width, brush)
 	else:
 		project.selection_map.border(width, brush)
-	selection_node.big_bounding_rectangle = project.selection_map.get_used_rect()
 	project.selection_offset = Vector2.ZERO
 	selection_node.commit_undo("Modify Selection", undo_data_tmp)
 	selection_node.queue_redraw()
