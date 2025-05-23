@@ -45,12 +45,12 @@ func _on_edges_checkbox_toggled(toggled_on: bool) -> void:
 	save_config()
 
 
-func _on_left_shade_option_item_selected(index: int) -> void:
+func _on_left_shade_option_item_selected(_index: int) -> void:
 	update_config()
 	save_config()
 
 
-func _on_right_shade_option_item_selected(index: int) -> void:
+func _on_right_shade_option_item_selected(_index: int) -> void:
 	update_config()
 	save_config()
 
