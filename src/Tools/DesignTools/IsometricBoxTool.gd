@@ -180,12 +180,14 @@ func _draw_shape() -> void:
 		h.y = abs(h.y)
 		var color = tool_slot.color
 		if color.a == 0:
-			return
+			_clear()
+			commit_undo()
 		var box_img = generate_isometric_box(
 			a, b, h.y, color, color.darkened(0.5), color.lightened(0.5), _visible_edges
 		)
 		if !box_img:  # Invalid shape
-			return
+			_clear()
+			commit_undo()
 		var offset = min(0, a.y, (a + b).y, b.y)
 		var dst := Vector2i(0, - h.y + offset)
 		for img: ImageExtended in images:
