@@ -219,7 +219,10 @@ func _get_hovered_handle(mouse_pos: Vector2) -> TransformHandle:
 	for handle in handles:
 		if handle.type == TransformHandle.Type.PIVOT and not is_rotated_or_skewed():
 			continue
-		if get_handle_position(handle).distance_to(mouse_pos) < HANDLE_RADIUS * zoom_value.x:
+		var total_radius := HANDLE_RADIUS * zoom_value.x
+		if handle.type == TransformHandle.Type.ROTATE or handle.type == TransformHandle.Type.SKEW:
+			total_radius *= 2
+		if get_handle_position(handle).distance_to(mouse_pos) < total_radius:
 			return handle
 	return null
 
