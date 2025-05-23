@@ -11,6 +11,8 @@ var _current_state: int = BoxState.A  ## Current state of the bezier curve (in S
 var _last_pixel: Vector2i
 var _control_pts: Array[Vector2i]
 var _origin: Vector2i
+var _left_shade_value := 0.5
+var _right_shade_value := 0.5
 
 
 func _init() -> void:
@@ -43,6 +45,28 @@ func _on_edges_checkbox_toggled(toggled_on: bool) -> void:
 	save_config()
 
 
+func _on_left_shade_option_item_selected(index: int) -> void:
+	update_config()
+	save_config()
+
+
+func _on_right_shade_option_item_selected(index: int) -> void:
+	update_config()
+	save_config()
+
+
+func _on_left_shade_slider_value_changed(value: float) -> void:
+	_left_shade_value = value
+	update_config()
+	save_config()
+
+
+func _on_right_shade_slider_value_changed(value: float) -> void:
+	_right_shade_value = value
+	update_config()
+	save_config()
+
+
 func update_indicator() -> void:
 	var bitmap := BitMap.new()
 	bitmap.create(Vector2i.ONE * _thickness)
@@ -56,6 +80,10 @@ func get_config() -> Dictionary:
 	config["thickness"] = _thickness
 	config["fill_inside"] = _fill_inside
 	config["visible_edges"] = _thickness
+	config["left_shade_value"] = _left_shade_value
+	config["right_shade_value"] = _right_shade_value
+	config["left_shade_option"] = %LeftShadeOption.selected
+	config["right_shade_option"] = %RightShadeOption.selected
 	return config
 
 
@@ -64,14 +92,20 @@ func set_config(config: Dictionary) -> void:
 	_thickness = config.get("thickness", _thickness)
 	_fill_inside = config.get("fill_inside", _fill_inside)
 	_visible_edges = config.get("visible_edges", _visible_edges)
+	_left_shade_value = config.get("left_shade_value", _left_shade_value)
+	_right_shade_value = config.get("right_shade_value", _right_shade_value)
+	%LeftShadeOption.select(config.get("left_shade_option", 1))
+	%RightShadeOption.select(config.get("right_shade_option", 0))
 
 
 func update_config() -> void:
 	super.update_config()
 	$ThicknessSlider.value = _thickness
 	$FillCheckbox.button_pressed = _fill_inside
-	$EdgesCheckbox.visible = _fill_inside
-	$EdgesCheckbox.button_pressed = _visible_edges
+	$FillOptions.visible = _fill_inside
+	$FillOptions/EdgesCheckbox.button_pressed = _visible_edges
+	%LeftShadeSlider.value = _left_shade_value
+	%RightShadeSlider.value = _right_shade_value
 
 
 ## This tool has no brush, so just return the indicator as it is.
@@ -180,8 +214,18 @@ func _draw_shape() -> void:
 		var color = tool_slot.color
 		if color.a == 0:
 			_clear()
+		var left_color = (
+			color.lightened(_left_shade_value)
+			if %LeftShadeOption.selected == 0
+			else color.darkened(_left_shade_value)
+		)
+		var right_color = (
+			color.lightened(_right_shade_value)
+			if %RightShadeOption.selected == 0
+			else color.darkened(_right_shade_value)
+		)
 		var box_img = generate_isometric_box(
-			a, b, h.y, color, color.darkened(0.5), color.lightened(0.5), _visible_edges
+			a, b, h.y, color, left_color, right_color, _visible_edges
 		)
 		if !box_img:  # Invalid shape
 			_clear()
