@@ -282,7 +282,7 @@ func transform_image_with_algorithm(
 		new_image_size = image.get_size()
 	var pivot: Vector2 = params.get("pivot", image.get_size() / 2)
 	if type_is_shader(algorithm):
-		transformation_matrix = TransformationHandles.transform_remove_scale(transformation_matrix)
+		transformation_matrix = transform_remove_scale(transformation_matrix)
 		params["transformation_matrix"] = transformation_matrix
 		params["pivot"] = pivot / Vector2(image.get_size())
 		var shader := rotxel_shader
@@ -306,25 +306,6 @@ func transform_image_with_algorithm(
 				fake_rotsprite(image, angle, pivot)
 	if image is ImageExtended:
 		image.convert_rgb_to_indexed()
-
-
-func type_is_shader(algorithm: RotationAlgorithm) -> bool:
-	return algorithm <= RotationAlgorithm.NNS
-
-
-func get_transformed_bounds(image_size: Vector2i, transform: Transform2D) -> Rect2:
-	var corners: Array[Vector2] = [
-		transform * (Vector2(0, 0)),
-		transform * (Vector2(image_size.x, 0)),
-		transform * (Vector2(0, image_size.y)),
-		transform * (Vector2(image_size.x, image_size.y))
-	]
-	var min_corner := corners[0]
-	var max_corner := corners[0]
-	for corner in corners:
-		min_corner = min_corner.min(corner)
-		max_corner = max_corner.max(corner)
-	return Rect2(min_corner, max_corner - min_corner)
 
 
 func transform_image_with_viewport(
@@ -401,6 +382,31 @@ func transform_image_with_viewport(
 
 	if original_image is ImageExtended:
 		original_image.convert_rgb_to_indexed()
+
+
+func type_is_shader(algorithm: RotationAlgorithm) -> bool:
+	return algorithm <= RotationAlgorithm.NNS
+
+
+func get_transformed_bounds(image_size: Vector2i, transform: Transform2D) -> Rect2:
+	var corners: Array[Vector2] = [
+		transform * (Vector2(0, 0)),
+		transform * (Vector2(image_size.x, 0)),
+		transform * (Vector2(0, image_size.y)),
+		transform * (Vector2(image_size.x, image_size.y))
+	]
+	var min_corner := corners[0]
+	var max_corner := corners[0]
+	for corner in corners:
+		min_corner = min_corner.min(corner)
+		max_corner = max_corner.max(corner)
+	return Rect2(min_corner, max_corner - min_corner)
+
+
+func transform_remove_scale(t: Transform2D) -> Transform2D:
+	var x := t.x.normalized()
+	var y := t.y.normalized()
+	return Transform2D(x, y, Vector2.ZERO)
 
 
 func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:

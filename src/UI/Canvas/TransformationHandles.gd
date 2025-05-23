@@ -353,17 +353,11 @@ func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vec
 	var world_pos := t * local
 	if handle.type == TransformHandle.Type.ROTATE or handle.type == TransformHandle.Type.SKEW:
 		# Determine direction of offset from center
-		var rot_and_skew := transform_remove_scale(t)
+		var rot_and_skew := DrawingAlgos.transform_remove_scale(t)
 		var offset := rot_and_skew.basis_xform(handle.get_direction() * RS_HANDLE_DISTANCE)
 		offset = offset.normalized() * RS_HANDLE_DISTANCE
 		world_pos += offset
 	return world_pos
-
-
-static func transform_remove_scale(t: Transform2D) -> Transform2D:
-	var x := t.x.normalized()
-	var y := t.y.normalized()
-	return Transform2D(x, y, Vector2.ZERO)
 
 
 ## Apply an affine transform [param m] around [param pivot_local] onto [param t].
