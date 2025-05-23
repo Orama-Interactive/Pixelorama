@@ -29,7 +29,7 @@ var _skip_slider_logic := false
 
 func _ready() -> void:
 	super._ready()
-	algorithm_option_button.add_item("Viewport")
+	algorithm_option_button.add_item("Nearest Neighbor")
 	algorithm_option_button.add_item("cleanEdge", DrawingAlgos.RotationAlgorithm.CLEANEDGE)
 	algorithm_option_button.add_item("OmniScale", DrawingAlgos.RotationAlgorithm.OMNISCALE)
 	algorithm_option_button.select(0)
