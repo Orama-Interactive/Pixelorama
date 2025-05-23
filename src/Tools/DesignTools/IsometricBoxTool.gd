@@ -115,6 +115,8 @@ func _create_brush_indicator() -> BitMap:
 
 func cursor_move(pos: Vector2i):
 	super.cursor_move(pos)
+	if Global.mirror_view:
+		pos.x = Global.current_project.size.x - pos.x - 1
 	if _drawing:
 		if Input.is_action_pressed("shape_displace"):
 			_origin += pos - _last_pixel
@@ -369,9 +371,18 @@ func _iso_box_outline() -> Array[Vector2i]:
 			if _fill_inside and _drawing:
 				# This part will only be visible on preview
 				var canvas = Global.canvas.previews
-				canvas.draw_dashed_line(_control_pts[0] - diff, _control_pts[1] - diff, Color.WHITE)
-				canvas.draw_dashed_line(_origin - diff, _control_pts[0] - diff, Color.WHITE)
-				canvas.draw_dashed_line(_control_pts[0], _control_pts[0] - diff, Color.WHITE)
+				var intersection = _control_pts[0] - diff
+				var pt_0 = _control_pts[0]
+				var pt_1 = _control_pts[1] - diff
+				var pt_2 = _origin - diff
+				if Global.mirror_view:  # This fixes previewing in mirror mode
+					pt_0.x = Global.current_project.size.x - pt_0.x - 1
+					pt_1.x = Global.current_project.size.x - pt_1.x - 1
+					pt_2.x = Global.current_project.size.x - pt_2.x - 1
+					intersection.x = Global.current_project.size.x - intersection.x - 1
+				canvas.draw_dashed_line(intersection, pt_1, Color.WHITE)
+				canvas.draw_dashed_line(pt_2, intersection, Color.WHITE)
+				canvas.draw_dashed_line(pt_0, intersection, Color.WHITE)
 			else:
 				preview.append_array(
 					bresenham_line_thickness(
