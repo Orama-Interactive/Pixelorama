@@ -137,6 +137,14 @@ func is_locked_in_hierarchy() -> bool:
 	return locked
 
 
+## Returns [code]true[/code] if the layer is visible and not locked in hierarchy.
+## Some layer types use this method in [method can_layer_get_drawn], but the difference
+## between these two methods is that some layer types cannot be drawn in at all,
+## such as group & audio layers, but they can be modified in other ways.
+func can_layer_be_modified() -> bool:
+	return is_visible_in_hierarchy() && not is_locked_in_hierarchy()
+
+
 ## Returns [code]true[/code] if the layer has at least one ancestor
 ## that does not have its blend mode set to pass through.
 func is_blended_by_ancestor() -> bool:

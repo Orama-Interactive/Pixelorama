@@ -43,4 +43,4 @@ func new_cel_from_image(image: Image) -> PixelCel:
 
 
 func can_layer_get_drawn() -> bool:
-	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()
+	return can_layer_be_modified()

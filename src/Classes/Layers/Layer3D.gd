@@ -26,4 +26,4 @@ func new_empty_cel() -> BaseCel:
 
 
 func can_layer_get_drawn() -> bool:
-	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()
+	return can_layer_be_modified()
