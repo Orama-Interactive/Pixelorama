@@ -208,6 +208,21 @@ Hold %s to displace the shape's origin""",
 			["shape_perfect", "shape_center", "shape_displace"]
 		)
 	),
+	"EllipseTool":
+	(
+		Tool
+		. new(
+			"EllipseTool",
+			"Ellipse Tool",
+			"ellipsetool",
+			"res://src/Tools/DesignTools/EllipseTool.tscn",
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
+			"""Hold %s to create a 1:1 shape
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin""",
+			["shape_perfect", "shape_center", "shape_displace"]
+		)
+	),
 	"IsometricBoxTool":
 	(
 		Tool
@@ -229,21 +244,6 @@ Press %s to edit the last added basis""",
 				"shape_displace",
 				"change_tool_mode"
 			]
-		)
-	),
-	"EllipseTool":
-	(
-		Tool
-		. new(
-			"EllipseTool",
-			"Ellipse Tool",
-			"ellipsetool",
-			"res://src/Tools/DesignTools/EllipseTool.tscn",
-			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
-			"""Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin""",
-			["shape_perfect", "shape_center", "shape_displace"]
 		)
 	),
 	"3DShapeEdit":
