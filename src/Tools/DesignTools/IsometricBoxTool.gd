@@ -180,13 +180,11 @@ func _draw_shape() -> void:
 		var color = tool_slot.color
 		if color.a == 0:
 			_clear()
-			commit_undo()
 		var box_img = generate_isometric_box(
 			a, b, h.y, color, color.darkened(0.5), color.lightened(0.5), _visible_edges
 		)
 		if !box_img:  # Invalid shape
 			_clear()
-			commit_undo()
 		var offset = min(0, a.y, (a + b).y, b.y)
 		var dst := Vector2i(0, - h.y + offset)
 		for img: ImageExtended in images:
@@ -374,7 +372,7 @@ func generate_isometric_box(
 				image.set_pixel(x, y, c_l)
 			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
 				image.set_pixel(x, y, c_r)
-	return image.get_region(image.get_used_rect())
+	return image
 
 
 func angle_constraint(point: Vector2) -> Vector2i:
