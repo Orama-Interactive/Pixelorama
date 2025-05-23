@@ -272,7 +272,20 @@ func _on_expand_button_pressed() -> void:
 func _on_visibility_button_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var layer := Global.current_project.layers[layer_index]
-	layer.visible = !layer.visible
+	if Input.is_key_pressed(KEY_ALT):
+		var one_hidden_by_other_layer := false
+		for other_layer in Global.current_project.layers:
+			if other_layer.hidden_by_other_layer:
+				one_hidden_by_other_layer = true
+				break
+		for other_layer in Global.current_project.layers:
+			if other_layer != layer and other_layer not in layer.get_ancestors():
+				other_layer.visible = one_hidden_by_other_layer
+			else:
+				other_layer.visible = true
+			other_layer.hidden_by_other_layer = not one_hidden_by_other_layer
+	else:
+		layer.visible = not layer.visible
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw()
 	if Global.select_layer_on_button_click:
