@@ -268,19 +268,19 @@ func _draw_shape() -> void:
 				brush_copy_y.flip_y()
 				if Tools.horizontal_mirror:
 					var x_dst := Vector2i(mirror_x, dst.y)
-					var mirror_brush_x = remove_unselected_parts_of_brush(brush_copy_x, x_dst)
-					_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, box_size, true, false), x_dst)
+					var mirr_b_x = remove_unselected_parts_of_brush(brush_copy_x, x_dst)
+					_draw_brush_image(mirr_b_x, _flip_rect(src_rect, box_size, true, false), x_dst)
 					if Tools.vertical_mirror:
 						brush_copy_x.flip_y()
 						var xy_dst := Vector2i(mirror_x, mirror_y)
-						var mirror_brush_xy := remove_unselected_parts_of_brush(brush_copy_x, xy_dst)
+						var mirr_b_xy := remove_unselected_parts_of_brush(brush_copy_x, xy_dst)
 						_draw_brush_image(
-							mirror_brush_xy, _flip_rect(src_rect, box_size, true, true), xy_dst
+							mirr_b_xy, _flip_rect(src_rect, box_size, true, true), xy_dst
 						)
 				if Tools.vertical_mirror:
 					var y_dst := Vector2i(dst.x, mirror_y)
-					var mirror_brush_y := remove_unselected_parts_of_brush(brush_copy_y, y_dst)
-					_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, box_size, false, true), y_dst)
+					var mirr_b_y := remove_unselected_parts_of_brush(brush_copy_y, y_dst)
+					_draw_brush_image(mirr_b_y, _flip_rect(src_rect, box_size, false, true), y_dst)
 	else:
 		var points := _iso_box_outline()
 		for point in points:
