@@ -189,9 +189,15 @@ func draw_preview() -> void:
 	if Input.is_action_pressed("change_tool_mode") and _control_pts.size() > 0:
 		var canvas = Global.canvas.previews
 		var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
-		var focus_point =  _control_pts[maxi(BoxState.A, _current_state - 1)]
+		var idx = maxi(BoxState.A, _current_state - 1)
+		var focus_point =  _control_pts[idx]
+		var prev_point: Vector2 = _origin
+		print(idx)
+		if idx > 0:
+			prev_point = _control_pts[idx - 1]
 		canvas.draw_circle(focus_point, circle_radius.x, Color.WHITE)
 		canvas.draw_circle(focus_point, circle_radius.x * 2, Color.WHITE, false)
+		canvas.draw_line(prev_point, focus_point, Color.WHITE, 1)
 
 	# Handle mirroring
 	for point in mirror_array(points):
