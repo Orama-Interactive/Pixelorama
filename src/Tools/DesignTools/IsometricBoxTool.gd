@@ -112,7 +112,6 @@ func draw_start(pos: Vector2i) -> void:
 	update_mask()
 	if !_drawing:
 		_drawing = true
-		_current_state = BoxState.A
 		_origin = pos
 	else:
 		pos = box_constraint(_last_pixel, pos, _current_state)
@@ -216,6 +215,7 @@ func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
 func _clear() -> void:
 	_control_pts.clear()
 	_fill_inside_rect = Rect2i()
+	_current_state = BoxState.A
 	Global.canvas.previews_sprite.texture = null
 	Global.canvas.previews.queue_redraw()
 
