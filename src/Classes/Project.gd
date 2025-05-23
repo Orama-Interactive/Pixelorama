@@ -183,7 +183,7 @@ func remove_backup_file() -> void:
 func commit_undo() -> void:
 	if not can_undo:
 		return
-	if Global.canvas.selection.is_moving_content:
+	if Global.canvas.selection.transformation_handles.is_transforming_content():
 		Global.canvas.selection.transform_content_cancel()
 	else:
 		undo_redo.undo()
@@ -230,11 +230,14 @@ func is_indexed() -> bool:
 
 
 func selection_map_changed() -> void:
-	var image_texture: ImageTexture
 	has_selection = !selection_map.is_invisible()
+	var transformation_handles := Global.canvas.selection.transformation_handles
 	if has_selection:
-		image_texture = ImageTexture.create_from_image(selection_map)
-	Global.canvas.selection.marching_ants_outline.texture = image_texture
+		var used_map := SelectionMap.new()
+		used_map.copy_from(selection_map.get_region(selection_map.get_used_rect()))
+		transformation_handles.set_selection(used_map, selection_map.get_selection_rect(self))
+	else:
+		transformation_handles.set_selection(null, Rect2i())
 	Global.top_menu_container.edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 	Global.top_menu_container.project_menu.set_item_disabled(
 		Global.ProjectMenu.CROP_TO_SELECTION, !has_selection

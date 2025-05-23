@@ -25,7 +25,7 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 	else:
 		# Create a temporary image that only has the selected pixels in it
 		var selected := Image.new()
-		var rectangle: Rect2i = Global.canvas.selection.big_bounding_rectangle
+		var rectangle: Rect2i = project.selection_map.get_selection_rect(project)
 		if project != Global.current_project:
 			rectangle = project.selection_map.get_used_rect()
 		selected = cel.get_region(rectangle)

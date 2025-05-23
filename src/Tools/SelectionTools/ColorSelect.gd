@@ -73,5 +73,4 @@ func apply_selection(pos: Vector2i) -> void:
 		cel_image.convert(Image.FORMAT_LA8)
 
 		project.selection_map.copy_from(cel_image)
-	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)

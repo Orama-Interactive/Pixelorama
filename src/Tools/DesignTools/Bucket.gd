@@ -157,6 +157,7 @@ func draw_start(pos: Vector2i) -> void:
 		_pick_color(pos)
 		return
 	_picking_color = false
+	Global.canvas.selection.transform_content_confirm()
 	_undo_data = _get_undo_data()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
@@ -171,7 +172,6 @@ func draw_move(pos: Vector2i) -> void:
 		if Input.is_action_pressed(&"draw_color_picker", true):
 			_pick_color(pos)
 		return
-	Global.canvas.selection.transform_content_confirm()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	if not Global.current_project.can_pixel_get_drawn(pos):
@@ -233,7 +233,7 @@ func fill_in_color(pos: Vector2i) -> void:
 		var selection: Image
 		var selection_tex: ImageTexture
 		if project.has_selection:
-			selection = project.selection_map.return_cropped_copy(project.size)
+			selection = project.selection_map.return_cropped_copy(project, project.size)
 		else:
 			selection = project.new_empty_image()
 			selection.fill(Color(1, 1, 1, 1))
@@ -280,8 +280,10 @@ func fill_in_selection() -> void:
 		if project.has_selection:
 			var filler := project.new_empty_image()
 			filler.fill(tool_slot.color)
-			var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
-			var selection_map_copy := project.selection_map.return_cropped_copy(project.size)
+			var selection_map_copy := project.selection_map.return_cropped_copy(
+				project, project.size
+			)
+			var rect := selection_map_copy.get_used_rect()
 			for image in images:
 				image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
 				image.convert_rgb_to_indexed()
@@ -299,7 +301,7 @@ func fill_in_selection() -> void:
 		var selection: Image
 		var selection_tex: ImageTexture
 		if project.has_selection:
-			selection = project.selection_map.return_cropped_copy(project.size)
+			selection = project.selection_map.return_cropped_copy(project, project.size)
 		else:
 			selection = project.new_empty_image()
 			selection.fill(Color(1, 1, 1, 1))

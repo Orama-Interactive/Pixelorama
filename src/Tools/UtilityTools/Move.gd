@@ -2,9 +2,6 @@ extends BaseTool
 
 var _start_pos: Vector2i
 var _offset: Vector2i
-## Used to check if the state of content transformation has been changed
-## while draw_move() is being called. For example, pressing Enter while still moving content
-var _content_transformation_check := false
 var _snap_to_grid := false  ## Mouse Click + Ctrl
 var _undo_data := {}
 
@@ -17,21 +14,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("transform_snap_grid"):
 		_snap_to_grid = true
 		_offset = _offset.snapped(Global.grids[0].grid_size)
-		if Global.current_project.has_selection and selection_node.is_moving_content:
-			var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
-			selection_node.big_bounding_rectangle.position = Vector2i(
-				prev_pos.snapped(Global.grids[0].grid_size)
-			)
-			# The first time transform_snap_grid is enabled then _snap_position() is not called
-			# and the selection had wrong offset, so do selection offsetting here
-			var grid_offset := Vector2i(
-				fmod(Global.grids[0].grid_offset.x, Global.grids[0].grid_size.x),
-				fmod(Global.grids[0].grid_offset.y, Global.grids[0].grid_size.y)
-			)
-			selection_node.big_bounding_rectangle.position += grid_offset
-			selection_node.marching_ants_outline.offset += Vector2(
-				selection_node.big_bounding_rectangle.position - prev_pos
-			)
 	elif event.is_action_released("transform_snap_grid"):
 		_snap_to_grid = false
 
@@ -50,8 +32,7 @@ func draw_start(pos: Vector2i) -> void:
 			(cel as CelTileMap).prev_offset = (cel as CelTileMap).offset
 	else:
 		if Global.current_project.has_selection:
-			selection_node.transform_content_start()
-	_content_transformation_check = selection_node.is_moving_content
+			selection_node.transformation_handles.begin_transform()
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.MOVE)
 
@@ -59,10 +40,6 @@ func draw_start(pos: Vector2i) -> void:
 func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
-		return
-	# This is true if content transformation has been confirmed (pressed Enter for example)
-	# while the content is being moved
-	if _content_transformation_check != selection_node.is_moving_content:
 		return
 	pos = _snap_position(pos)
 
@@ -74,7 +51,7 @@ func draw_move(pos: Vector2i) -> void:
 		Global.canvas.move_preview_location = pos - _start_pos
 	else:
 		if Global.current_project.has_selection:
-			selection_node.move_content(pos - _offset)
+			selection_node.transformation_handles.move_transform(pos - _offset)
 		else:
 			Global.canvas.move_preview_location = pos - _start_pos
 	_offset = pos
@@ -86,14 +63,9 @@ func draw_end(pos: Vector2i) -> void:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		super.draw_end(pos)
 		return
-	if (
-		_start_pos != Vector2i(Vector2.INF)
-		and _content_transformation_check == selection_node.is_moving_content
-	):
+	if _start_pos != Vector2i(Vector2.INF):
 		pos = _snap_position(pos)
-		if Global.current_project.has_selection and not Tools.is_placing_tiles():
-			selection_node.move_borders_end()
-		else:
+		if not (Global.current_project.has_selection and not Tools.is_placing_tiles()):
 			var pixel_diff := pos - _start_pos
 			Global.canvas.move_preview_location = Vector2i.ZERO
 			var images := _get_selected_draw_images()

@@ -8,7 +8,7 @@ vec2 rotate(vec2 uv, float ratio) {
 	uv -= pivot;
 
 	// Rotate image
-	uv *= transformation_matrix;
+	uv = transformation_matrix * uv;
 	uv.x /= ratio;
 	uv += pivot;
 
