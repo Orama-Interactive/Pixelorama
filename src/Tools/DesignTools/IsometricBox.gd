@@ -1,13 +1,13 @@
 extends BaseDrawTool
 
-enum SingleState { A, B, H, READY }
+enum BoxState { A, B, H, READY }
 
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _thickness := 1  ## The thickness of the curve.
 var _drawing := false  ## Set to true when a curve is being drawn.
 var _visible_edges := false  ## When true, the inside area of the curve gets filled.
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
-var _current_state: int = SingleState.A  ## Current state of the bezier curve (in SINGLE mode)
+var _current_state: int = BoxState.A  ## Current state of the bezier curve (in SINGLE mode)
 var _last_pixel: Vector2i
 var _control_pts: Array[Vector2i]
 var _origin: Vector2i
@@ -79,15 +79,29 @@ func _create_brush_indicator() -> BitMap:
 	return _indicator
 
 
-func _input(event: InputEvent) -> void:
+#func _input(event: InputEvent) -> void:
+	#if _drawing:
+		#if Input.is_action_just_pressed("change_tool_mode"):
+			#_current_state = maxi(BoxState.A, _current_state - 1)
+			#_control_pts.resize(_current_state)
+
+
+func cursor_move(pos: Vector2i):
+	super.cursor_move(pos)
 	if _drawing:
-		if event is InputEventMouseMotion:
-			if event.is_action_pressed("shape_perfect"):
-				pass
-			elif event.is_action_released("shape_perfect"):
-				pass
-			if event.is_action_pressed("change_tool_mode"):
-				pass
+		if Input.is_action_pressed("shape_displace"):
+			_origin += pos - _last_pixel
+			for i in _control_pts.size():
+				_control_pts[i] = _control_pts[i] + pos - _last_pixel
+		if Input.is_action_pressed("change_tool_mode"):
+			if _control_pts.size() > 0:
+				var temp_state = maxi(BoxState.A, _current_state - 1)
+				var new_value := _control_pts[temp_state] + pos - _last_pixel
+				_control_pts[temp_state] = box_constraint(_control_pts[temp_state], new_value, temp_state)
+
+		## This is used for preview
+		pos = box_constraint(_last_pixel, pos, _current_state)
+	_last_pixel = angle_constraint(Vector2(pos))
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -97,35 +111,20 @@ func draw_start(pos: Vector2i) -> void:
 		_picking_color = true
 		_pick_color(pos)
 		return
+	pos = angle_constraint(Vector2(pos))
 	_picking_color = false  # fixes _picking_color being true indefinitely after we pick color
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 	if !_drawing:
 		_drawing = true
-		_current_state = SingleState.A
+		_current_state = BoxState.A
 		_origin = pos
 	else:
-		if _current_state == SingleState.H:
-			pos.x = 0
-		elif _current_state == SingleState.A:
-			pos.x = max(_origin.x, pos.x)
-		elif _current_state == SingleState.B:  # restriction on B
-			pos.x = max(_control_pts[0].x, pos.x)
-			if Vector2(pos - _origin).angle() >= Vector2(_control_pts[0] - _origin).angle():
-				pos = _control_pts[0]
-		if _current_state < SingleState.READY:
+		pos = box_constraint(_last_pixel, pos, _current_state)
+		if _current_state < BoxState.READY:
 			_control_pts.append(pos)
 		_current_state += 1
 	_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
-
-
-func cursor_move(pos: Vector2i):
-	super.cursor_move(pos)
-	if Input.is_action_pressed("shape_displace"):
-		_origin += pos - _last_pixel
-		for i in _control_pts.size():
-			_control_pts[i] = _control_pts[i] + pos - _last_pixel
-	_last_pixel = pos
 
 
 func draw_move(pos: Vector2i) -> void:
@@ -139,7 +138,7 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	# we still need bezier preview when curve is in SINGLE mode.
-	if _current_state == SingleState.READY:
+	if _current_state == BoxState.READY:
 		_draw_shape()
 	super.draw_end(pos)
 
@@ -224,14 +223,7 @@ func _iso_box_outline() -> Array[Vector2i]:
 	if _fill_inside:
 		new_thickness = 1
 	var preview: Array[Vector2i]
-	if _current_state < SingleState.READY:
-		if _current_state == SingleState.A:
-			_last_pixel.x = max(_origin.x, _last_pixel.x)
-		if _current_state == SingleState.B:
-			# restriction on b point (For preview only)
-			_last_pixel.x = max(_control_pts[0].x, _last_pixel.x)
-			if Vector2(_last_pixel - _origin).angle() >= Vector2(_control_pts[0] - _origin).angle():
-				_last_pixel = _control_pts[0]
+	if _current_state < BoxState.READY:
 		_control_pts.append(_last_pixel)
 	match _control_pts.size():
 		1:
@@ -253,24 +245,24 @@ func _iso_box_outline() -> Array[Vector2i]:
 			# an isometric "box"
 			var diff = _control_pts[2] - _control_pts[1]
 			diff.x = 0
-			diff.y = min(0, diff.y)
+			diff.y = abs(diff.y)
 			# outer outline (arranged clockwise)
 			preview.append_array(
 				bresenham_line_thickness(
-					_control_pts[1] - _control_pts[0] + _origin + diff,
-					_origin + diff,
+					_control_pts[1] - _control_pts[0] + _origin - diff,
+					_origin - diff,
 					new_thickness
 				)
 			)
 			preview.append_array(
 				bresenham_line_thickness(
-					_control_pts[1] + diff,
-					_control_pts[1] - _control_pts[0] + _origin + diff,
+					_control_pts[1] - diff,
+					_control_pts[1] - _control_pts[0] + _origin - diff,
 					new_thickness
 				)
 			)
 			preview.append_array(
-				bresenham_line_thickness(_control_pts[1], _control_pts[1] + diff, new_thickness)
+				bresenham_line_thickness(_control_pts[1], _control_pts[1] - diff, new_thickness)
 			)
 			preview.append_array(
 				bresenham_line_thickness(_control_pts[0], _control_pts[1], new_thickness)
@@ -279,26 +271,26 @@ func _iso_box_outline() -> Array[Vector2i]:
 				bresenham_line_thickness(_origin, _control_pts[0], new_thickness)
 			)
 			preview.append_array(
-				bresenham_line_thickness(_origin, _origin + diff, new_thickness)
+				bresenham_line_thickness(_origin, _origin - diff, new_thickness)
 			)
 			# inner lines
 			if _fill_inside and _drawing:
 				# This part will only be visible on preview
 				var canvas = Global.canvas.previews
-				canvas.draw_dashed_line(_control_pts[0] + diff, _control_pts[1] + diff, Color.WHITE)
-				canvas.draw_dashed_line(_origin + diff, _control_pts[0] + diff, Color.WHITE)
-				canvas.draw_dashed_line(_control_pts[0], _control_pts[0] + diff, Color.WHITE)
+				canvas.draw_dashed_line(_control_pts[0] - diff, _control_pts[1] - diff, Color.WHITE)
+				canvas.draw_dashed_line(_origin - diff, _control_pts[0] - diff, Color.WHITE)
+				canvas.draw_dashed_line(_control_pts[0], _control_pts[0] - diff, Color.WHITE)
 			else:
 				preview.append_array(bresenham_line_thickness(
-					_control_pts[0] + diff, _control_pts[1] + diff, new_thickness)
+					_control_pts[0] - diff, _control_pts[1] - diff, new_thickness)
 				)
 				preview.append_array(
-					bresenham_line_thickness(_origin + diff, _control_pts[0] + diff, new_thickness)
+					bresenham_line_thickness(_origin - diff, _control_pts[0] - diff, new_thickness)
 				)
 				preview.append_array(
-					bresenham_line_thickness(_control_pts[0], _control_pts[0] + diff, new_thickness)
+					bresenham_line_thickness(_control_pts[0], _control_pts[0] - diff, new_thickness)
 				)
-	if _current_state < SingleState.READY:
+	if _current_state < BoxState.READY:
 		_control_pts.resize(_control_pts.size() - 1)
 	return preview
 
@@ -341,11 +333,11 @@ func generate_isometric_box(
 	var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
 
 	# a convenient lambdha function
-	var is_canon_edge := func(point, a: int, b: int):
+	var is_canon_edge := func(point, edge_1: int, edge_2: int):
 		var poly = [top_poly, b_l_poly, b_r_poly]
 		return (
-			Geometry2D.is_point_in_polygon(point, poly[a])
-			or Geometry2D.is_point_in_polygon(point, poly[b])
+			Geometry2D.is_point_in_polygon(point, poly[edge_1])
+			or Geometry2D.is_point_in_polygon(point, poly[edge_2])
 		)
 	for x: int in width:
 		for y: int in height:
@@ -379,3 +371,36 @@ func generate_isometric_box(
 			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
 				image.set_pixel(x, y, c_r)
 	return image.get_region(image.get_used_rect())
+
+
+func angle_constraint(point: Vector2) -> Vector2i:
+	if Input.is_action_pressed("shape_perfect") and _current_state < BoxState.H:
+		var prev_point: Vector2 = _origin
+		if _control_pts.size() > 0:
+			prev_point = _control_pts[-1]
+		var angle := rad_to_deg(prev_point.angle_to_point(point))
+		var distance := prev_point.distance_to(point)
+		angle = snappedf(angle, 22.5)
+		if step_decimals(angle) != 0:
+			var diff := point - prev_point
+			var v := Vector2(2, 1) if absf(diff.x) > absf(diff.y) else Vector2(1, 2)
+			var p := diff.project(diff.sign() * v).abs().round()
+			var f := p.y if absf(diff.x) > absf(diff.y) else p.x
+			return Vector2i((prev_point + diff.sign() * v * f - diff.sign()).round())
+		else:
+			return Vector2i((prev_point + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance).round())
+	return Vector2i(point)
+
+
+func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2i:
+	if state == BoxState.A:
+		point.x = max(_origin.x, point.x)
+		if state < _current_state:
+			if point.y <= _origin.y:
+				point = old_point
+	elif state == BoxState.B:
+		# restriction on B
+		point.x = max(_control_pts[0].x, point.x)
+		if Vector2(point - _origin).angle() >= Vector2(_control_pts[0] - _origin).angle():
+			point = old_point
+	return point
