@@ -48,7 +48,7 @@ func _prepare_cel_rect() -> void:
 	var cel := project.get_current_cel()
 	var image := cel.get_image()
 	rect_bounds = image.get_used_rect()
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
+	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1 or pos.x < 0 or pos.y < 0:
 		return
 
 	var curr_frame := project.frames[project.current_frame]
