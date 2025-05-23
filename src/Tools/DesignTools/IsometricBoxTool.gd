@@ -295,7 +295,7 @@ func _iso_box_outline() -> Array[Vector2i]:
 				bresenham_line_thickness(
 					_control_pts[1] - _control_pts[0] + _origin, _origin, new_thickness
 				)
- 			)
+			)
 		3:
 			# an isometric "box"
 			var diff = _control_pts[2] - _control_pts[1]
