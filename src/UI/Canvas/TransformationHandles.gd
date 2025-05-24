@@ -352,10 +352,12 @@ func get_handle_position(handle: TransformHandle, t := preview_transform) -> Vec
 	var local := Vector2(image_size.x * handle.pos.x, image_size.y * handle.pos.y)
 	var world_pos := t * local
 	if handle.type == TransformHandle.Type.ROTATE or handle.type == TransformHandle.Type.SKEW:
+		var zoom_value := Vector2.ONE / Global.camera.zoom * 10
+		var handle_distance := RS_HANDLE_DISTANCE * zoom_value
 		# Determine direction of offset from center
 		var rot_and_skew := DrawingAlgos.transform_remove_scale(t)
-		var offset := rot_and_skew.basis_xform(handle.get_direction() * RS_HANDLE_DISTANCE)
-		offset = offset.normalized() * RS_HANDLE_DISTANCE
+		var offset := rot_and_skew.basis_xform(handle.get_direction() * handle_distance)
+		offset = offset.normalized() * handle_distance
 		world_pos += offset
 	return world_pos
 
