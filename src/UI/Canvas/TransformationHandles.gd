@@ -658,6 +658,10 @@ func get_transform_top_left(size := transformed_selection_map.get_size()) -> Vec
 
 
 func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
+	if used_rect.size.x < 1:
+		used_rect.size.x = 1
+	if used_rect.size.y < 1:
+		used_rect.size.y = 1
 	DrawingAlgos.transform_image_with_viewport(
 		image, preview_transform, pivot, transformation_algorithm, used_rect
 	)

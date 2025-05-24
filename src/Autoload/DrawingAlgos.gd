@@ -323,7 +323,11 @@ func transform_image_with_viewport(
 
 	# Estimate new bounding box
 	var bounds := get_transformed_bounds(original_image.get_size(), full_transform)
-	var viewport_size := bounds.size.ceil()
+	var viewport_size := bounds.size.ceil() as Vector2i
+	if viewport_size.x == 1:
+		viewport_size.x = 2
+	if viewport_size.y == 1:
+		viewport_size.y = 2
 
 	# Create viewport and canvas
 	var vp := RenderingServer.viewport_create()
