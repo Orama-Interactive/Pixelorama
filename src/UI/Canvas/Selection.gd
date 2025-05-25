@@ -1,6 +1,9 @@
 class_name SelectionNode
 extends Node2D
 
+signal transformation_confirmed
+signal transformation_canceled
+
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
@@ -129,6 +132,7 @@ func transform_content_confirm() -> void:
 	is_pasting = false
 	queue_redraw()
 	canvas.queue_redraw()
+	transformation_confirmed.emit()
 
 
 func transform_content_cancel() -> void:
@@ -152,6 +156,7 @@ func transform_content_cancel() -> void:
 	is_pasting = false
 	queue_redraw()
 	canvas.queue_redraw()
+	transformation_canceled.emit()
 
 
 func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:

@@ -16,6 +16,9 @@ var _add := false  ## Shift + Mouse Click
 var _subtract := false  ## Ctrl + Mouse Click
 var _intersect := false  ## Shift + Ctrl + Mouse Click
 
+## Used to check if the state of content transformation has been changed
+## while draw_move() is being called. For example, pressing Enter while still moving content
+var _transformation_status_changed := false
 var _skip_slider_logic := false
 
 @onready var selection_node := Global.canvas.selection
@@ -28,14 +31,16 @@ var _skip_slider_logic := false
 
 
 func _ready() -> void:
-	super._ready()
-	algorithm_option_button.add_item("Nearest Neighbor")
+	super()
+	algorithm_option_button.add_item("Nearest neighbor")
 	algorithm_option_button.add_item("cleanEdge", DrawingAlgos.RotationAlgorithm.CLEANEDGE)
 	algorithm_option_button.add_item("OmniScale", DrawingAlgos.RotationAlgorithm.OMNISCALE)
 	algorithm_option_button.select(0)
 	set_confirm_buttons_visibility()
 	set_spinbox_values()
 	refresh_options()
+	selection_node.transformation_confirmed.connect(func(): _transformation_status_changed = true)
+	selection_node.transformation_canceled.connect(func(): _transformation_status_changed = true)
 	transformation_handles.preview_transform_changed.connect(set_confirm_buttons_visibility)
 
 
@@ -91,7 +96,8 @@ func set_spinbox_values() -> void:
 
 func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_start(pos)
+	super(pos)
+	_transformation_status_changed = false
 	if transformation_handles.arrow_key_move:
 		return
 	var project := Global.current_project
@@ -136,8 +142,10 @@ func draw_start(pos: Vector2i) -> void:
 
 func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_move(pos)
+	super(pos)
 	if transformation_handles.arrow_key_move:
+		return
+	if _transformation_status_changed:
 		return
 	if not _move:
 		return
@@ -173,7 +181,7 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	super.draw_end(pos)
+	super(pos)
 	if transformation_handles.arrow_key_move:
 		return
 	if not _move:

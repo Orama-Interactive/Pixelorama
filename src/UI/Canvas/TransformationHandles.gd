@@ -102,6 +102,8 @@ class TransformHandle:
 
 
 func _ready() -> void:
+	selection_node.transformation_confirmed.connect(func(): active_handle = null)
+	selection_node.transformation_canceled.connect(func(): active_handle = null)
 	preview_transform_changed.connect(_on_preview_transform_changed)
 	Global.camera.zoom_changed.connect(queue_redraw)
 	set_process_input(false)
