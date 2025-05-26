@@ -28,7 +28,7 @@ func _draw() -> void:
 		var cel := Global.current_project.get_current_cel()
 		if cel is CelTileMap and grid_idx == 0:
 			if cel.get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-				grid_type = Global.GridTypes.ISOMETRIC
+				grid_type = Global.GridTypes.ISOMETRIC_PIXEL_REGULAR
 			elif cel.get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 				if cel.get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 					grid_type = Global.GridTypes.HEXAGONAL_POINTY_TOP
@@ -38,8 +38,12 @@ func _draw() -> void:
 				grid_type = Global.GridTypes.CARTESIAN
 		if grid_type == Global.GridTypes.CARTESIAN:
 			_draw_cartesian_grid(grid_idx, target_rect)
-		elif grid_type == Global.GridTypes.ISOMETRIC:
+		elif grid_type == Global.GridTypes.ISOMETRIC_REGULAR:
 			_draw_pixelated_isometric_grid(grid_idx, target_rect)
+		elif grid_type == Global.GridTypes.ISOMETRIC_PIXEL_REGULAR:
+			_draw_pixelated_isometric_grid(grid_idx, target_rect)
+		elif grid_type == Global.GridTypes.ISOMETRIC_PIXEL_STACKED:
+			_draw_pixelated_isometric_grid(grid_idx, target_rect, true)
 		elif grid_type == Global.GridTypes.HEXAGONAL_POINTY_TOP:
 			_draw_hexagonal_grid(grid_idx, target_rect, true)
 		elif grid_type == Global.GridTypes.HEXAGONAL_FLAT_TOP:
