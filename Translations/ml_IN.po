@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2025-04-23 00:54\n"
+"PO-Revision-Date: 2025-05-26 21:50\n"
 
 msgid "OK"
 msgstr "ഓക്കേ"
@@ -1859,6 +1859,10 @@ msgid "Border color 1:"
 msgstr ""
 
 msgid "Border color 2:"
+msgstr ""
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
 msgstr ""
 
 msgid "Only custom preset can be modified"
