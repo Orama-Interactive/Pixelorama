@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-05-26 13:11\n"
+"PO-Revision-Date: 2025-05-26 20:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3859,7 +3859,7 @@ msgstr ""
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Place-only mode:"
-msgstr "Режим построения"
+msgstr ""
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
