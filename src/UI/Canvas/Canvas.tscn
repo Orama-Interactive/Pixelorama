@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ba24iuv55m4l3"]
+[gd_scene load_steps=26 format=3 uid="uid://ba24iuv55m4l3"]
 
 [ext_resource type="Script" uid="uid://xagqbybf2bic" path="res://src/UI/Canvas/Canvas.gd" id="1"]
 [ext_resource type="Shader" uid="uid://b3cj543ir4o23" path="res://src/Shaders/BlendLayers.gdshader" id="1_253dh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://df031dm6pgp2j" path="res://src/UI/Canvas/Previews.gd" id="7"]
 [ext_resource type="Script" uid="uid://bcxi23cv8j5vr" path="res://src/UI/Canvas/Selection.gd" id="8"]
 [ext_resource type="Shader" uid="uid://droyxrcawbpcn" path="res://src/Shaders/MarchingAntsOutline.gdshader" id="9"]
+[ext_resource type="Script" uid="uid://dtu2ddt5gojeb" path="res://src/UI/Canvas/TransformationHandles.gd" id="10_crpat"]
 [ext_resource type="PackedScene" uid="uid://no3w7e2264u4" path="res://src/UI/Canvas/MouseGuideContainer.tscn" id="11"]
 [ext_resource type="Script" uid="uid://dpem6717iqxdc" path="res://src/UI/Canvas/OnionSkinning.gd" id="12"]
 [ext_resource type="Script" uid="uid://c17sncjk3paec" path="res://src/UI/Canvas/CropRect.gd" id="13"]
@@ -78,6 +79,9 @@ script = ExtResource("2")
 
 [node name="Selection" type="Node2D" parent="."]
 script = ExtResource("8")
+
+[node name="TransformationHandles" type="Node2D" parent="Selection"]
+script = ExtResource("10_crpat")
 
 [node name="MarchingAntsOutline" type="Sprite2D" parent="Selection"]
 material = SubResource("2")

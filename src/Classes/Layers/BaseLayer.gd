@@ -49,6 +49,9 @@ var visible := true:  ## Sets visibility of the layer.
 		visibility_changed.emit()
 var locked := false  ## Images of a locked layer won't be overritten.
 var new_cels_linked := false  ## Determines if new cel of the layer should be linked or not.
+## Is [code]true[/code] when the layer's visibility has been changed
+## when holding Alt and clicking on the visible button on another layer.
+var hidden_by_other_layer := false
 var blend_mode := BlendModes.NORMAL  ## Blend mode of the current layer.
 var clipping_mask := false  ## If [code]true[/code], the layer acts as a clipping mask.
 var opacity := 1.0  ## The opacity of the layer, affects all frames that belong to that layer.
@@ -132,6 +135,14 @@ func is_locked_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and not locked:
 		return parent.is_locked_in_hierarchy()
 	return locked
+
+
+## Returns [code]true[/code] if the layer is visible and not locked in hierarchy.
+## Some layer types use this method in [method can_layer_get_drawn], but the difference
+## between these two methods is that some layer types cannot be drawn in at all,
+## such as group & audio layers, but they can be modified in other ways.
+func can_layer_be_modified() -> bool:
+	return is_visible_in_hierarchy() && not is_locked_in_hierarchy()
 
 
 ## Returns [code]true[/code] if the layer has at least one ancestor

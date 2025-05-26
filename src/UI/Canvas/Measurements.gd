@@ -48,7 +48,7 @@ func _prepare_cel_rect() -> void:
 	var cel := project.get_current_cel()
 	var image := cel.get_image()
 	rect_bounds = image.get_used_rect()
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
+	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1 or pos.x < 0 or pos.y < 0:
 		return
 
 	var curr_frame := project.frames[project.current_frame]
@@ -65,10 +65,12 @@ func _prepare_cel_rect() -> void:
 func _prepare_movement_rect() -> void:
 	var project := Global.current_project
 	if project.has_selection:
-		rect_bounds = canvas.selection.preview_image.get_used_rect()
-		rect_bounds.position += Vector2i(canvas.selection.big_bounding_rectangle.position)
+		rect_bounds = canvas.selection.preview_selection_map.get_used_rect()
+		rect_bounds.position = Vector2i(
+			canvas.selection.transformation_handles.preview_transform.origin
+		)
 		if !rect_bounds.has_area():
-			rect_bounds = canvas.selection.big_bounding_rectangle
+			rect_bounds = project.selection_map.get_selection_rect(project)
 		return
 	if rect_bounds.has_area():
 		return

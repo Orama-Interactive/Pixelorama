@@ -41,7 +41,7 @@ func draw_start(pos: Vector2i) -> void:
 
 
 func draw_move(pos_i: Vector2i) -> void:
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	var pos := _get_stabilized_position(pos_i)
 	pos = snap_position(pos)
@@ -55,7 +55,7 @@ func draw_move(pos_i: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
-	if selection_node.arrow_key_move:
+	if transformation_handles.arrow_key_move:
 		return
 	pos = snap_position(pos)
 	super.draw_end(pos)
@@ -102,7 +102,6 @@ func apply_selection(pos: Vector2i) -> void:
 		# Handle mirroring
 		var mirror := mirror_array(_draw_points)
 		paint_selection(project, previous_selection_map, mirror)
-		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	else:
 		if !cleared:
 			Global.canvas.selection.clear_selection()

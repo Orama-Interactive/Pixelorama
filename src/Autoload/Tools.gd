@@ -223,6 +223,29 @@ Hold %s to displace the shape's origin""",
 			["shape_perfect", "shape_center", "shape_displace"]
 		)
 	),
+	"IsometricBoxTool":
+	(
+		Tool
+		. new(
+			"IsometricBoxTool",
+			"Isometric Box Tool",
+			"isometricboxtool",
+			"res://src/Tools/DesignTools/IsometricBoxTool.tscn",
+			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
+			"""Draws an isometric box
+Press %s/%s to add a basis point
+Hold %s to snap the angle of the basis point
+Hold %s to displace the shape's origin
+Press %s to edit the last added basis""",
+			[
+				"activate_left_tool",
+				"activate_right_tool",
+				"shape_perfect",
+				"shape_displace",
+				"change_tool_mode"
+			]
+		)
+	),
 	"3DShapeEdit":
 	Tool.new(
 		"3DShapeEdit",

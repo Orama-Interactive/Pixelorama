@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.2] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@VernalUmbrella](https://github.com/VernalUmbrella)
+
+Built using Godot 4.4.1
+
+### Added
+- The selection transformation system has been completely remade, finally allowing support for easy rotation and skewing! [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
+- A new isometric box tool! [#1246](https://github.com/Orama-Interactive/Pixelorama/pull/1246)
+- Using the move tool on a layer group now moves the content of all of its children.
+- You can now hide all other layers when holding Alt and clicking on the visibility button of a layer.
+- Added the ability to double-click on the canvas preview to get at the same point on the main canvas. [#1244](https://github.com/Orama-Interactive/Pixelorama/pull/1244)
+
+### Fixed
+- Transformed content no longer gets lost when pressing Control + an arrow key. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
+- Fixed a bug where pasting images from the clipboard sometimes did not work, due to them being in different formats than the project image. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
+- Closing the app with Zen Mode no longer hides all panels when opening the app again. [#1238](https://github.com/Orama-Interactive/Pixelorama/issues/1238)
+- Panels can no longer be moved if the Moveable Panels option is turned off. [#1242](https://github.com/Orama-Interactive/Pixelorama/pull/1242)
+- Using the bucket tool now confirms the active transformation. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
+- The canvas rotation now affects the direction of the arrow keys. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
+- The pixel grid gets immediately redrawn when its visibility is toggled. [#1240](https://github.com/Orama-Interactive/Pixelorama/pull/1240)
+
 ## [v1.1.1] - 2025-05-06
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))

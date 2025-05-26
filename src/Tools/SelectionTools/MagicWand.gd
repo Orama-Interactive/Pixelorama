@@ -39,7 +39,6 @@ func apply_selection(pos: Vector2i) -> void:
 	for mirror_pos in Tools.get_mirrored_positions(pos):
 		_flood_fill(mirror_pos, cel_image, project, previous_selection_map)
 
-	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)
 
 

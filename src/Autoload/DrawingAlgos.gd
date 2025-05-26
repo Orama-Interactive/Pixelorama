@@ -273,23 +273,17 @@ func scale_3x(sprite: Image, tol := 0.196078) -> Image:
 	return scaled
 
 
-func transform(
-	image: Image, params: Dictionary, algorithm: RotationAlgorithm, expand := false
+func transform_image_with_algorithm(
+	image: Image, params: Dictionary, algorithm: RotationAlgorithm, used_rect := Rect2i()
 ) -> void:
 	var transformation_matrix: Transform2D = params.get("transformation_matrix", Transform2D())
+	var new_image_size := used_rect.size
+	if new_image_size == Vector2i.ZERO:
+		new_image_size = image.get_size()
 	var pivot: Vector2 = params.get("pivot", image.get_size() / 2)
-	if expand:
-		var image_rect := Rect2(Vector2.ZERO, image.get_size())
-		var new_image_rect := image_rect * transformation_matrix as Rect2i
-		var new_image_size := new_image_rect.size
-		if image.get_size() != new_image_size:
-			pivot = new_image_size / 2 - (Vector2i(pivot) - image.get_size() / 2)
-			var tmp_image := Image.create_empty(
-				new_image_size.x, new_image_size.y, image.has_mipmaps(), image.get_format()
-			)
-			tmp_image.blit_rect(image, image_rect, (new_image_size - image.get_size()) / 2)
-			image.copy_from(tmp_image)
 	if type_is_shader(algorithm):
+		transformation_matrix = transform_remove_scale(transformation_matrix)
+		params["transformation_matrix"] = transformation_matrix
 		params["pivot"] = pivot / Vector2(image.get_size())
 		var shader := rotxel_shader
 		match algorithm:
@@ -300,7 +294,7 @@ func transform(
 			RotationAlgorithm.NNS:
 				shader = nn_shader
 		var gen := ShaderImageEffect.new()
-		gen.generate_image(image, shader, params, image.get_size())
+		gen.generate_image(image, shader, params, new_image_size)
 	else:
 		var angle := transformation_matrix.get_rotation()
 		match algorithm:
@@ -310,19 +304,113 @@ func transform(
 				nn_rotate(image, angle, pivot)
 			RotationAlgorithm.URD:
 				fake_rotsprite(image, angle, pivot)
+	if image is ImageExtended:
+		image.convert_rgb_to_indexed()
+
+
+func transform_image_with_viewport(
+	original_image: Image,
+	transform_matrix: Transform2D,
+	pivot: Vector2,
+	algorithm: RotationAlgorithm,
+	used_rect := Rect2i()
+) -> void:
+	# Compute the transformation with pivot support
+	# translate pivot to origin
+	var move_to_origin := Transform2D(Vector2(1, 0), Vector2(0, 1), -pivot)
+	var move_back := Transform2D(Vector2(1, 0), Vector2(0, 1), pivot)  # move pivot back
+	var full_transform := move_back * transform_matrix * move_to_origin
+
+	# Estimate new bounding box
+	var bounds := get_transformed_bounds(original_image.get_size(), full_transform)
+	var viewport_size := bounds.size.ceil() as Vector2i
+	if viewport_size.x == 1:
+		viewport_size.x = 2
+	if viewport_size.y == 1:
+		viewport_size.y = 2
+
+	# Create viewport and canvas
+	var vp := RenderingServer.viewport_create()
+	var canvas := RenderingServer.canvas_create()
+	RenderingServer.viewport_attach_canvas(vp, canvas)
+	RenderingServer.viewport_set_size(vp, viewport_size.x, viewport_size.y)
+	RenderingServer.viewport_set_disable_3d(vp, true)
+	RenderingServer.viewport_set_active(vp, true)
+	RenderingServer.viewport_set_transparent_background(vp, true)
+	RenderingServer.viewport_set_default_canvas_item_texture_filter(
+		vp, RenderingServer.CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+	)
+
+	# Apply transform offset to align within new bounding box
+	var ci_rid := RenderingServer.canvas_item_create()
+	var offset_transform := full_transform.translated(-bounds.position)
+	RenderingServer.viewport_set_canvas_transform(vp, canvas, offset_transform)
+	RenderingServer.canvas_item_set_parent(ci_rid, canvas)
+
+	# Draw the texture
+	var texture := RenderingServer.texture_2d_create(original_image)
+	RenderingServer.canvas_item_add_texture_rect(
+		ci_rid, Rect2(Vector2.ZERO, original_image.get_size()), texture
+	)
+	var mat_rid := RenderingServer.material_create()
+	var shader: Shader = null
+	match algorithm:
+		RotationAlgorithm.CLEANEDGE:
+			shader = clean_edge_shader
+		RotationAlgorithm.OMNISCALE:
+			shader = omniscale_shader
+		RotationAlgorithm.NNS:
+			shader = nn_shader
+	if is_instance_valid(shader):
+		RenderingServer.material_set_shader(mat_rid, shader.get_rid())
+	RenderingServer.canvas_item_set_material(ci_rid, mat_rid)
+
+	# Render once
+	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
+	RenderingServer.force_draw(false)
+	var viewport_texture := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
+
+	# Clean up
+	RenderingServer.free_rid(vp)
+	RenderingServer.free_rid(canvas)
+	RenderingServer.free_rid(ci_rid)
+	RenderingServer.free_rid(mat_rid)
+	RenderingServer.free_rid(texture)
+
+	# Copy result
+	if not is_instance_valid(viewport_texture):
+		return
+	viewport_texture.convert(original_image.get_format())
+	var region := viewport_texture.get_used_rect() if used_rect == Rect2i() else used_rect
+	original_image.copy_from(viewport_texture.get_region(region))
+
+	if original_image is ImageExtended:
+		original_image.convert_rgb_to_indexed()
 
 
 func type_is_shader(algorithm: RotationAlgorithm) -> bool:
 	return algorithm <= RotationAlgorithm.NNS
 
 
-func transform_rectangle(rect: Rect2, matrix: Transform2D, pivot := rect.size / 2) -> Rect2:
-	var offset_rect := rect
-	var offset_pos := -pivot
-	offset_rect.position = offset_pos
-	offset_rect = offset_rect * matrix
-	offset_rect.position = rect.position + offset_rect.position - offset_pos
-	return offset_rect
+func get_transformed_bounds(image_size: Vector2i, transform: Transform2D) -> Rect2:
+	var corners: Array[Vector2] = [
+		transform * (Vector2(0, 0)),
+		transform * (Vector2(image_size.x, 0)),
+		transform * (Vector2(0, image_size.y)),
+		transform * (Vector2(image_size.x, image_size.y))
+	]
+	var min_corner := corners[0]
+	var max_corner := corners[0]
+	for corner in corners:
+		min_corner = min_corner.min(corner)
+		max_corner = max_corner.max(corner)
+	return Rect2(min_corner, max_corner - min_corner)
+
+
+func transform_remove_scale(t: Transform2D) -> Transform2D:
+	var x := t.x.normalized()
+	var y := t.y.normalized()
+	return Transform2D(x, y, Vector2.ZERO)
 
 
 func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
@@ -349,7 +437,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 				var divk := -1 + int(k / 3)
 				var dir := atan2(dy + divk, dx + modk)
 				var mag := sqrt(pow(dx + modk, 2) + pow(dy + divk, 2))
-				dir -= angle
+				dir += angle
 				ox = roundi(pivot.x * 3 + 1 + mag * cos(dir))
 				oy = roundi(pivot.y * 3 + 1 + mag * sin(dir))
 
@@ -541,8 +629,8 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 	var angle_cos := cos(angle)
 	for x in range(sprite.get_width()):
 		for y in range(sprite.get_height()):
-			var ox := (x - pivot.x) * angle_cos + (y - pivot.y) * angle_sin + pivot.x
-			var oy := -(x - pivot.x) * angle_sin + (y - pivot.y) * angle_cos + pivot.y
+			var ox := (x - pivot.x) * angle_cos - (y - pivot.y) * angle_sin + pivot.x
+			var oy := (x - pivot.x) * angle_sin + (y - pivot.y) * angle_cos + pivot.y
 			if ox >= 0 && ox < sprite.get_width() && oy >= 0 && oy < sprite.get_height():
 				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
 			else:
@@ -746,7 +834,7 @@ func crop_to_selection() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var redo_data := {}
 	var undo_data := {}
-	var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
+	var rect := Global.current_project.selection_map.get_selection_rect(Global.current_project)
 	# Loop through all the cels to crop them
 	for cel in Global.current_project.get_all_pixel_cels():
 		var cel_image := cel.get_image()
