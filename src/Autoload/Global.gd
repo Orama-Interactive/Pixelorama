@@ -22,7 +22,7 @@ enum GridTypes {
 	ISOMETRIC_PIXEL_STACKED,
 	HEXAGONAL_POINTY_TOP,
 	HEXAGONAL_FLAT_TOP
-	}
+}
 ## ## Used to tell whether a color is being taken from the current theme,
 ## or if it is a custom color.
 enum ColorFrom { THEME, CUSTOM }

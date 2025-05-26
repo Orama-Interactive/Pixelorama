@@ -403,7 +403,9 @@ func _create_polylines(points: Array[Vector2i], bound: Rect2i) -> Array:
 
 
 ## Helper functions for _draw_pixelated_isometric_grid()
-func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound, is_stacked := false) -> PackedVector2Array:
+func get_isometric_polyline(
+	point: Vector2, tile_size: Vector2, bound, is_stacked := false
+) -> PackedVector2Array:
 	var lines = PackedVector2Array()
 	var centre = ((tile_size - Vector2.ONE) / 2).floor()
 	var tile_size_x = Vector2i(tile_size.x, 0)
