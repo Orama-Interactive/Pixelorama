@@ -475,6 +475,8 @@ func rotate_transform_handle(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 	var start_vec := drag_start - pivot_world
 	var curr_vec := mouse_pos - pivot_world
 	var delta_ang := fposmod(curr_vec.angle() - start_vec.angle(), TAU)
+	if Input.is_action_pressed("shape_perfect"):
+		delta_ang = snappedf(delta_ang, PI / 8)
 	var m := Transform2D().rotated(delta_ang)
 	return transform_around(t, m, pivot)
 
