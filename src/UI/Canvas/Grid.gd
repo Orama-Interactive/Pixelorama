@@ -107,7 +107,7 @@ func _create_polylines(points: Array[Vector2i], bound: Rect2i) -> Array:
 	return lines
 
 
-func get_isometric_shape(point: Vector2, tile_size: Vector2, bound) -> PackedVector2Array:
+func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound) -> PackedVector2Array:
 	var lines = PackedVector2Array()
 	var centre = ((tile_size - Vector2.ONE) / 2).floor()
 	var tile_size_x = Vector2i(tile_size.x, 0)
@@ -156,6 +156,7 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 	if cel is CelTileMap and grid_index == 0:
 		cell_size = (cel as CelTileMap).get_tile_size()
 		origin_offset = (cel as CelTileMap).offset
+		origin_offset = Vector2((cel as CelTileMap).offset - target_rect.position).posmodv(cell_size)
 	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
 	var start_offset = origin_offset - cell_size + Vector2(target_rect.position)
 
@@ -163,7 +164,7 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		for cel_y in range(0, max_cell_count.y + 2):
 			var cel_pos: Vector2 = Vector2(cel_x, cel_y) * cell_size + start_offset
 			grid_multiline_points.append_array(
-				get_isometric_shape(cel_pos, cell_size, target_rect)
+				get_isometric_polyline(cel_pos, cell_size, target_rect)
 			)
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, grid.grid_color)
