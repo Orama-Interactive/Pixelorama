@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-05-09 00:46\n"
+"PO-Revision-Date: 2025-05-26 21:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1927,6 +1927,10 @@ msgstr "Colore bordo 1:"
 
 msgid "Border color 2:"
 msgstr "Colore bordo 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Solo il preset personalizzato può essere modificato"
