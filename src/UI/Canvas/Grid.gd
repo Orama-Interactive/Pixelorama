@@ -79,6 +79,73 @@ func _draw_cartesian_grid(grid_index: int, target_rect: Rect2i) -> void:
 		draw_multiline(grid_multiline_points, grid.grid_color)
 
 
+func _create_polylines(points: Array[Vector2i], bound: Rect2i) -> Array:
+	var lines = []
+	for i in points.size():
+		var point = points[i]
+		if i < points.size() - 1:
+			var next_point = points[i + 1]
+			if (
+				point.x < bound.position.x
+				or point.x > bound.end.x
+				or point.y < bound.position.y
+				or point.y > bound.end.y
+				or next_point.x < bound.position.x
+				or next_point.x > bound.end.x
+				or next_point.y < bound.position.y
+				or next_point.y > bound.end.y
+			):
+				continue
+			lines.append(point)
+			if next_point.y < point.y:
+				lines.append(point + Vector2i.UP)
+				lines.append(point + Vector2i.UP)
+			elif next_point.y > point.y:
+				lines.append(point + Vector2i.DOWN)
+				lines.append(point + Vector2i.DOWN)
+			lines.append(next_point)
+	return lines
+
+
+func get_isometric_shape(point: Vector2, tile_size: Vector2, bound) -> PackedVector2Array:
+	var lines = PackedVector2Array()
+	var centre = ((tile_size - Vector2.ONE) / 2).floor()
+	var tile_size_x = Vector2i(tile_size.x, 0)
+	var tile_size_y = Vector2i(0, tile_size.y)
+	var top_left = Geometry2D.bresenham_line(
+		Vector2i(point) + Vector2i(centre.x, 0), Vector2i(point) + Vector2i(0, centre.y)
+		)
+	# x-mirror of the top_left array
+	var top_right = Geometry2D.bresenham_line(
+		tile_size_x + Vector2i(point) - Vector2i(centre.x, 0),
+		tile_size_x + Vector2i(point) + Vector2i(0, centre.y)
+	)
+	# y-mirror of the top_left array
+	var down_left = Geometry2D.bresenham_line(
+		tile_size_y + Vector2i(point) + Vector2i(centre.x, 0),
+		tile_size_y + Vector2i(point) - Vector2i(0, centre.y)
+	)
+	# xy-mirror of the top_left array
+	var down_right = Geometry2D.bresenham_line(
+		Vector2i(tile_size) + Vector2i(point) - Vector2i(centre.x, 0),
+		Vector2i(tile_size) + Vector2i(point) - Vector2i(0, centre.y)
+	)
+	# Add tile separators
+	var separator_points: Array[Vector2i] = [top_right[0], top_left[0], top_left[-1], down_right[-1]]
+	var adders = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.UP]
+	for i in separator_points.size():
+		var sep = separator_points[i]
+		if !bound.has_point(sep) or !bound.has_point(sep + adders[i]):
+			continue
+		lines.append(sep)
+		lines.append(sep + adders[i])
+	lines.append_array(_create_polylines(top_left, bound))
+	lines.append_array(_create_polylines(top_right, bound))
+	lines.append_array(_create_polylines(down_left, bound))
+	lines.append_array(_create_polylines(down_right, bound))
+	return lines
+
+
 func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 	var grid := Global.grids[grid_index]
 	var grid_multiline_points := PackedVector2Array()
@@ -90,60 +157,14 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		cell_size = (cel as CelTileMap).get_tile_size()
 		origin_offset = (cel as CelTileMap).offset
 	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
+	var start_offset = origin_offset - cell_size
 
-	# lines ↗↗↗ (from bottom-left to top-right)
-	var per_cell_offset: Vector2 = cell_size * Vector2(1, -1)
-
-	#  lines ↗↗↗ starting from the rect's left side (top to bottom):
-	var y: float = fposmod(
-		origin_offset.y + cell_size.y * (0.5 + origin_offset.x / cell_size.x), cell_size.y
-	)
-	while y < target_rect.size.y:
-		var start: Vector2 = Vector2(target_rect.position) + Vector2(0, y)
-		var cells_to_rect_bounds: float = minf(max_cell_count.x, y / cell_size.y)
-		var end := start + cells_to_rect_bounds * per_cell_offset
-		if not start in unique_iso_lines:
-			grid_multiline_points.push_back(start)
-			grid_multiline_points.push_back(end)
-		y += cell_size.y
-
-	#  lines ↗↗↗ starting from the rect's bottom side (left to right):
-	var x: float = (y - target_rect.size.y) / cell_size.y * cell_size.x
-	while x < target_rect.size.x:
-		var start: Vector2 = Vector2(target_rect.position) + Vector2(x, target_rect.size.y)
-		var cells_to_rect_bounds: float = minf(max_cell_count.y, max_cell_count.x - x / cell_size.x)
-		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
-		if not start in unique_iso_lines:
-			grid_multiline_points.push_back(start)
-			grid_multiline_points.push_back(end)
-		x += cell_size.x
-
-	# lines ↘↘↘ (from top-left to bottom-right)
-	per_cell_offset = cell_size
-
-	#  lines ↘↘↘ starting from the rect's left side (top to bottom):
-	y = fposmod(origin_offset.y - cell_size.y * (0.5 + origin_offset.x / cell_size.x), cell_size.y)
-	while y < target_rect.size.y:
-		var start: Vector2 = Vector2(target_rect.position) + Vector2(0, y)
-		var cells_to_rect_bounds: float = minf(max_cell_count.x, max_cell_count.y - y / cell_size.y)
-		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
-		if not start in unique_iso_lines:
-			grid_multiline_points.push_back(start)
-			grid_multiline_points.push_back(end)
-		y += cell_size.y
-
-	#  lines ↘↘↘ starting from the rect's top side (left to right):
-	x = fposmod(origin_offset.x - cell_size.x * (0.5 + origin_offset.y / cell_size.y), cell_size.x)
-	while x < target_rect.size.x:
-		var start: Vector2 = Vector2(target_rect.position) + Vector2(x, 0)
-		var cells_to_rect_bounds: float = minf(max_cell_count.y, max_cell_count.x - x / cell_size.x)
-		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
-		if not start in unique_iso_lines:
-			grid_multiline_points.push_back(start)
-			grid_multiline_points.push_back(end)
-		x += cell_size.x
-	grid_multiline_points.append_array(grid_multiline_points)
-
+	for cel_x in range(0, max_cell_count.x + 2):
+		for cel_y in range(0, max_cell_count.y + 2):
+			var cel_pos: Vector2 = Vector2(cel_x, cel_y) * cell_size + start_offset
+			grid_multiline_points.append_array(
+				get_isometric_shape(cel_pos, cell_size, target_rect)
+			)
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, grid.grid_color)
 
