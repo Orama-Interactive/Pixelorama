@@ -5,13 +5,18 @@ extends Node
 ## This Autoload contains signals, enums, constants, variables and
 ## references to many UI elements used within Pixelorama.
 
+@warning_ignore("unused_signal")
 signal pixelorama_opened  ## Emitted as soon as Pixelorama fully opens up.
+@warning_ignore("unused_signal")
 signal pixelorama_about_to_close  ## Emitted just before Pixelorama is about to close.
+@warning_ignore("unused_signal")
 signal project_created(project: Project)  ## Emitted when a new project class is initialized.
 signal project_about_to_switch  ## Emitted before a project is about to be switched
 signal project_switched  ## Emitted whenever you switch to some other project tab.
 signal cel_switched  ## Emitted whenever you select a different cel.
+@warning_ignore("unused_signal")
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
+@warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }

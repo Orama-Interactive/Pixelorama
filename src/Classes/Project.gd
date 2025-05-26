@@ -222,7 +222,7 @@ func get_current_cel() -> BaseCel:
 func get_image_format() -> Image.Format:
 	if color_mode == INDEXED_MODE:
 		return Image.FORMAT_RGBA8
-	return color_mode
+	return color_mode as Image.Format
 
 
 func is_indexed() -> bool:
