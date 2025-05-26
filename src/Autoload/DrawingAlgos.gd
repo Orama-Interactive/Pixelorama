@@ -656,17 +656,47 @@ func generate_isometric_rectangle(image: Image, is_gap: bool) -> void:
 	var right := Vector2i(image.get_size().x - 1, half_size.y)
 	if is_gap:
 		var test = Geometry2D.bresenham_line(up, right)
+		var a: Vector2i
+		var b = test[-1] + Vector2i.UP
+		var line_r = []
+		var first_right := false
+		var sub_position_x := []
+		var sub_position_y := []
 		for i in test.size():
-			var idx = test.size() - 1 - i
-			if right.y == test[idx].y:
-				right += Vector2i.LEFT
-			else:
-				break
-		for i in test.size():
-			if up.x == test[i].x:
-				up += Vector2i.DOWN
-			else:
-				break
+			if up.y == test[i].y:
+				a = test[i] + Vector2i.RIGHT
+			var pt: Vector2i = test[i]
+			if not pt + Vector2i.RIGHT in test:
+				if !first_right:
+					first_right = true
+					continue
+			if first_right:
+				line_r.push_front(
+					Vector2i(test[i].x, image.get_size().y - test[i].y)
+				)
+				sub_position_x.append(test[i].x)
+				sub_position_y.append(image.get_size().y - test[i].y)
+		var pos = Vector2i(sub_position_x.min(), sub_position_y.min())
+		var sub_size_x = (b.x - a.x + 1) * 2
+		var sub_size_y = (b.y - a.y + 1) * 2
+		var offset_x: int = floori((sub_size_x - image.get_size().x) / 2.0)
+		var offset_y: int = floori((sub_size_y - image.get_size().y) / 2.0)
+		var offset := Vector2i(-offset_x, -offset_y)
+		for i in line_r.size():
+			var val_local = line_r[i] - pos
+			line_r[i] = Vector2i(sub_size_x - 1 - val_local.x, val_local.y)
+		for pixel in line_r:
+			image.set_pixelv(pixel + offset, Color.WHITE)
+			var left := Vector2i(sub_size_x - 1 - pixel.x, pixel.y)
+			for j in range(pixel.x, left.x - 1, -1):
+				image.set_pixel(j + offset.x, pixel.y + offset.y, Color.WHITE)
+				var mirror_y := Vector2i(j, sub_size_y - 1 - pixel.y)
+				for k in range(pixel.y, mirror_y.y + 1):
+					image.set_pixel(j + offset.x, k + offset.y, Color.WHITE)
+			var mirror_right := Vector2i(pixel.x, sub_size_y - 1 - pixel.y)
+			image.set_pixelv(mirror_right + offset, Color.WHITE)
+		return
+
 	var up_right := Geometry2D.bresenham_line(up, right)
 	for pixel in up_right:
 		image.set_pixelv(pixel, Color.WHITE)

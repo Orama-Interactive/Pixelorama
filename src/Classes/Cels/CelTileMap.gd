@@ -233,7 +233,7 @@ func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 		)
 		mask.fill(Color(0, 0, 0, 0))
 		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-			var grid_coord = Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())
+			var grid_coord = (Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).ceil()
 			DrawingAlgos.generate_isometric_rectangle(mask, int(grid_coord.y) % 2 != 0)
 		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
