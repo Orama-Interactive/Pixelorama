@@ -114,7 +114,7 @@ func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound) -> Packed
 	var tile_size_y = Vector2i(0, tile_size.y)
 	var top_left = Geometry2D.bresenham_line(
 		Vector2i(point) + Vector2i(centre.x, 0), Vector2i(point) + Vector2i(0, centre.y)
-		)
+	)
 	# x-mirror of the top_left array
 	var top_right = Geometry2D.bresenham_line(
 		tile_size_x + Vector2i(point) - Vector2i(centre.x, 0),
@@ -131,7 +131,9 @@ func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound) -> Packed
 		Vector2i(tile_size) + Vector2i(point) - Vector2i(0, centre.y)
 	)
 	# Add tile separators
-	var separator_points: Array[Vector2i] = [top_right[0], top_left[0], top_left[-1], down_right[-1]]
+	var separator_points: Array[Vector2i] = [
+		top_right[0], top_left[0], top_left[-1], down_right[-1]
+	]
 	var adders = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.UP]
 	for i in separator_points.size():
 		var sep = separator_points[i]
@@ -156,7 +158,9 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 	if cel is CelTileMap and grid_index == 0:
 		cell_size = (cel as CelTileMap).get_tile_size()
 		origin_offset = (cel as CelTileMap).offset
-		origin_offset = Vector2((cel as CelTileMap).offset - target_rect.position).posmodv(cell_size)
+		origin_offset = Vector2((cel as CelTileMap).offset - target_rect.position).posmodv(
+			cell_size
+		)
 	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
 	var start_offset = origin_offset - cell_size + Vector2(target_rect.position)
 
