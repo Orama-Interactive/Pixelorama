@@ -175,7 +175,7 @@ func _draw_pixelated_isometric_grid(grid_index: int, target_rect: Rect2i, stacke
 	if cel is CelTileMap and grid_index == 0:
 		cell_size = (cel as CelTileMap).get_tile_size()
 		origin_offset = Vector2((cel as CelTileMap).offset - target_rect.position).posmodv(
-			cell_size + Vector2(0, 2)
+			cell_size + stack_offset
 		)
 	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
 	var start_offset = origin_offset - cell_size + Vector2(target_rect.position)
