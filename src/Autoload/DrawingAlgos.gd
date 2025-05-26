@@ -648,18 +648,26 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 	)
 
 
-func generate_isometric_rectangle(image: Image) -> void:
-	var half_size := image.get_size() / 2
-	var up := Vector2i(half_size.x, 0)
-	var right := Vector2i(image.get_size().x, half_size.y)
-	if image.get_height() < image.get_width():
-		up += Vector2i.LEFT
-	elif image.get_height() > image.get_width():
+func generate_isometric_rectangle(image: Image, is_gap: bool) -> void:
+	var half_size := ((Vector2(image.get_size()) - Vector2.ONE) / 2).floor()
+	var even_check = image.get_size() % 2
+	var even_offset = Vector2i(even_check.x == 0, even_check.y == 0)
+	#print(even_offset)
+	# 16, 0   ---- 31, 7
+	var up := Vector2i(half_size.x + even_offset.x, 0)
+	var right := Vector2i(image.get_size().x - 1, half_size.y)
+	if is_gap:
 		up += Vector2i.DOWN
-		right += Vector2i.DOWN
+		right += Vector2i.LEFT
+	#if image.get_height() < image.get_width():
+		#up += Vector2i.LEFT
+	#elif image.get_height() > image.get_width():
+		#up += Vector2i.DOWN
+		#right += Vector2i.DOWN
 	var up_right := Geometry2D.bresenham_line(up, right)
-	up_right.pop_back()
-	up_right.pop_back()
+	#up_right.pop_back()
+	if !is_gap:
+		print(up, "  ", right)
 	for pixel in up_right:
 		image.set_pixelv(pixel, Color.WHITE)
 		var left := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
@@ -670,6 +678,10 @@ func generate_isometric_rectangle(image: Image) -> void:
 				image.set_pixel(j, k, Color.WHITE)
 		var mirror_right := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
 		image.set_pixelv(mirror_right, Color.WHITE)
+	if !is_gap:
+		image.save_png("res://out/out.png")
+	else:
+		image.save_png("res://out/gap.png")
 
 
 func generate_hexagonal_pointy_top(image: Image) -> void:

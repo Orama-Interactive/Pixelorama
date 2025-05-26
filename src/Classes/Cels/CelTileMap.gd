@@ -233,7 +233,8 @@ func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 		)
 		mask.fill(Color(0, 0, 0, 0))
 		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-			DrawingAlgos.generate_isometric_rectangle(mask)
+			var grid_coord = Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())
+			DrawingAlgos.generate_isometric_rectangle(mask, int(grid_coord.y) % 2 != 0)
 		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 				DrawingAlgos.generate_hexagonal_pointy_top(mask)
@@ -781,7 +782,8 @@ func _draw_cell(
 			)
 			mask.fill(Color(0, 0, 0, 0))
 			if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-				DrawingAlgos.generate_isometric_rectangle(mask)
+				var grid_coord = Vector2(coords - offset) * 2 / Vector2(get_tile_size())
+				DrawingAlgos.generate_isometric_rectangle(mask, int(grid_coord.y) % 2 != 0)
 			elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 				if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 					DrawingAlgos.generate_hexagonal_pointy_top(mask)
