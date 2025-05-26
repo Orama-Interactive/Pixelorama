@@ -158,7 +158,8 @@ func _draw() -> void:
 		scale_tmp.x = -1
 	if is_instance_valid(transformed_image) and not transformed_image.is_empty():
 		draw_set_transform(position_top_left, rotation, scale_tmp)
-		draw_texture(image_texture, Vector2.ZERO, Color(1, 1, 1, 0.5))
+		var preview_color := Color(1, 1, 1, Global.transformation_preview_alpha)
+		draw_texture(image_texture, Vector2.ZERO, preview_color)
 	draw_set_transform(position_tmp, rotation, scale_tmp)
 	# Draw handles
 	for handle in handles:
