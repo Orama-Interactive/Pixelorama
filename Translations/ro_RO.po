@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-05-08 16:29\n"
+"PO-Revision-Date: 2025-05-26 21:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1925,6 +1925,10 @@ msgstr "Culoarea marginii 1:"
 
 msgid "Border color 2:"
 msgstr "Culoarea marginii 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Doar presetarea personalizată poate fi modificată"
