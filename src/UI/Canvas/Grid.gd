@@ -39,7 +39,7 @@ func _draw() -> void:
 		if grid_type == Global.GridTypes.CARTESIAN:
 			_draw_cartesian_grid(grid_idx, target_rect)
 		elif grid_type == Global.GridTypes.ISOMETRIC:
-			_draw_isometric_grid(grid_idx, target_rect)
+			_draw_pixelated_isometric_grid(grid_idx, target_rect)
 		elif grid_type == Global.GridTypes.HEXAGONAL_POINTY_TOP:
 			_draw_hexagonal_grid(grid_idx, target_rect, true)
 		elif grid_type == Global.GridTypes.HEXAGONAL_FLAT_TOP:
@@ -107,7 +107,7 @@ func _create_polylines(points: Array[Vector2i], bound: Rect2i) -> Array:
 	return lines
 
 
-func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound) -> PackedVector2Array:
+func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound, is_stacked := false) -> PackedVector2Array:
 	var lines = PackedVector2Array()
 	var centre = ((tile_size - Vector2.ONE) / 2).floor()
 	var tile_size_x = Vector2i(tile_size.x, 0)
@@ -131,25 +131,26 @@ func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound) -> Packed
 		Vector2i(tile_size) + Vector2i(point) - Vector2i(0, centre.y)
 	)
 	## Add tile separators
-	var separator_points: Array[Vector2i] = [top_left[0], down_left[0]]
-	var adders = [Vector2i.UP, Vector2i.DOWN]
-	var compensation := Vector2i.RIGHT
-	if tile_size.y > tile_size.x:
-		separator_points = [top_left[-1], top_right[-1]]
-		adders = [Vector2i.LEFT, Vector2i.RIGHT]
-		compensation = Vector2i.DOWN
-	if tile_size.y == tile_size.x:
-		separator_points.clear()
-		adders.clear()
-		compensation = Vector2i.ZERO
-	for i in separator_points.size():
-		var sep = separator_points[i]
-		if !bound.has_point(sep) or !bound.has_point(sep + adders[i]):
-			continue
-		lines.append(sep)
-		lines.append(sep + compensation)
-		lines.append(sep + compensation)
-		lines.append(sep + compensation + adders[i])
+	if is_stacked:
+		var separator_points: Array[Vector2i] = [top_left[0], down_left[0]]
+		var adders = [Vector2i.UP, Vector2i.DOWN]
+		var compensation := Vector2i.RIGHT
+		if tile_size.y > tile_size.x:
+			separator_points = [top_left[-1], top_right[-1]]
+			adders = [Vector2i.LEFT, Vector2i.RIGHT]
+			compensation = Vector2i.DOWN
+		if tile_size.y == tile_size.x:
+			separator_points.clear()
+			adders.clear()
+			compensation = Vector2i.ZERO
+		for i in separator_points.size():
+			var sep = separator_points[i]
+			if !bound.has_point(sep) or !bound.has_point(sep + adders[i]):
+				continue
+			lines.append(sep)
+			lines.append(sep + compensation)
+			lines.append(sep + compensation)
+			lines.append(sep + compensation + adders[i])
 	lines.append_array(_create_polylines(top_left, bound))
 	lines.append_array(_create_polylines(top_right, bound))
 	lines.append_array(_create_polylines(down_left, bound))
@@ -184,23 +185,25 @@ func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound) -> Packed
 	return lines
 
 
-func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
+func _draw_pixelated_isometric_grid(grid_index: int, target_rect: Rect2i, stacked := false) -> void:
 	var grid := Global.grids[grid_index]
 	var grid_multiline_points := PackedVector2Array()
-
 	var cell_size: Vector2 = grid.grid_size
 	var stack_offset := Vector2.ZERO
-	if cell_size.x > cell_size.y:
-		if int(cell_size.y) % 2 == 0:
-			stack_offset.y = 2
-		else:
-			stack_offset.y = 1
-	elif cell_size.y > cell_size.x:
-		if int(cell_size.x) % 2 == 0:
-			stack_offset.x = 2
-		else:
-			stack_offset.x = 1
-	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(cell_size + stack_offset)
+	if stacked:
+		if cell_size.x > cell_size.y:
+			if int(cell_size.y) % 2 == 0:
+				stack_offset.y = 2
+			else:
+				stack_offset.y = 1
+		elif cell_size.y > cell_size.x:
+			if int(cell_size.x) % 2 == 0:
+				stack_offset.x = 2
+			else:
+				stack_offset.x = 1
+	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(
+		cell_size + stack_offset
+	)
 	var cel := Global.current_project.get_current_cel()
 	if cel is CelTileMap and grid_index == 0:
 		cell_size = (cel as CelTileMap).get_tile_size()
@@ -214,7 +217,7 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		for cel_x in range(0, max_cell_count.x + 2):
 			var cel_pos: Vector2 = Vector2(cel_x, cel_y) * cell_size + start_offset + tile_sep
 			grid_multiline_points.append_array(
-				get_isometric_polyline(cel_pos, cell_size, target_rect)
+				get_isometric_polyline(cel_pos, cell_size, target_rect, stacked)
 			)
 			if cell_size.y > cell_size.x:
 				tile_sep.x += stack_offset.x
