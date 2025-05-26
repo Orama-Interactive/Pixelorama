@@ -157,7 +157,7 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		cell_size = (cel as CelTileMap).get_tile_size()
 		origin_offset = (cel as CelTileMap).offset
 	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
-	var start_offset = origin_offset - cell_size
+	var start_offset = origin_offset - cell_size + Vector2(target_rect.position)
 
 	for cel_x in range(0, max_cell_count.x + 2):
 		for cel_y in range(0, max_cell_count.y + 2):
