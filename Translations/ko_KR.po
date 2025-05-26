@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-05-26 21:49\n"
 
 msgid "OK"
 msgstr "예"
@@ -1907,6 +1907,10 @@ msgstr "테두리 색상 1:"
 
 msgid "Border color 2:"
 msgstr "테두리 색상 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "커스텀 프리셋만 수정 가능함"
