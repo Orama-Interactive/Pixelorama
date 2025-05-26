@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-05-24 12:32\n"
+"PO-Revision-Date: 2025-05-26 13:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1811,15 +1811,15 @@ msgstr "Изометрическая"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "Шестиугольная сетка"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Шестиугольная сетка (с острыми шестиугольниками)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Шестиугольная сетка (с плоскими шестиугольниками)"
 
 msgid "All"
 msgstr "Все"
@@ -2317,16 +2317,17 @@ msgstr "Уменьшить"
 
 #. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
 msgid "Single"
-msgstr ""
+msgstr "Одиночный режим"
 
 #. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
 msgid "Chained"
-msgstr ""
+msgstr "Режим цепи"
 
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "Режим цепи: Делает цепь из кривых безье, схоже с инструментом для создания кривых в Krita'a.\n"
+"Одиночный режим: Делает одиночную кривую безье, схоже с инструментов для создания кривых Aseprite'a."
 
 msgid "Options"
 msgstr "Настройки"
@@ -3806,12 +3807,12 @@ msgstr "Размер тайла:"
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile shape:"
-msgstr ""
+msgstr "Форма фигуры"
 
 #. The layout that the tiles appear in, in a non-rectangular grid.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile layout:"
-msgstr ""
+msgstr "Расположение фигур"
 
 #. The offset axis (horizontal or vertical) of non-rectangular tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
@@ -3828,7 +3829,7 @@ msgstr ""
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked"
-msgstr ""
+msgstr "Сложённо"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
@@ -3858,12 +3859,12 @@ msgstr ""
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Place-only mode:"
-msgstr ""
+msgstr "Режим построения"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr ""
+msgstr "Включение режима построения является необратимым действием. При включении этого режима вы не сможете редактировать уже существующие фигуры на этом слое."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
