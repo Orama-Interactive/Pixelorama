@@ -154,7 +154,6 @@ func get_isometric_polyline(point: Vector2, tile_size: Vector2, bound) -> Packed
 	lines.append_array(_create_polylines(top_right, bound))
 	lines.append_array(_create_polylines(down_left, bound))
 	lines.append_array(_create_polylines(down_right, bound))
-	var even_check = Vector2i(tile_size) % 2
 	# Connect un-connected sides left in the shape
 	# top/down peaks
 	if (
@@ -190,13 +189,23 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 	var grid_multiline_points := PackedVector2Array()
 
 	var cell_size: Vector2 = grid.grid_size
-	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(cell_size)
+	var stack_offset := Vector2.ZERO
+	if cell_size.x > cell_size.y:
+		if int(cell_size.y) % 2 == 0:
+			stack_offset.y = 2
+		else:
+			stack_offset.y = 1
+	elif cell_size.y > cell_size.x:
+		if int(cell_size.x) % 2 == 0:
+			stack_offset.x = 2
+		else:
+			stack_offset.x = 1
+	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(cell_size + stack_offset)
 	var cel := Global.current_project.get_current_cel()
 	if cel is CelTileMap and grid_index == 0:
 		cell_size = (cel as CelTileMap).get_tile_size()
-		origin_offset = (cel as CelTileMap).offset
 		origin_offset = Vector2((cel as CelTileMap).offset - target_rect.position).posmodv(
-			cell_size
+			cell_size + Vector2(0, 2)
 		)
 	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
 	var start_offset = origin_offset - cell_size + Vector2(target_rect.position)
@@ -208,10 +217,10 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 				get_isometric_polyline(cel_pos, cell_size, target_rect)
 			)
 			if cell_size.y > cell_size.x:
-				tile_sep.x += 2
+				tile_sep.x += stack_offset.x
 		tile_sep.x = 0
 		if cell_size.x > cell_size.y:
-			tile_sep.y += 2
+			tile_sep.y += stack_offset.y
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, grid.grid_color)
 
