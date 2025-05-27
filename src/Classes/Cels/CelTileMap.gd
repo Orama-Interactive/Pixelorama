@@ -239,7 +239,10 @@ func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
 			var old_clip := _should_clip_tiles
 			# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
-			if Tools.is_placing_tiles():
+			if (
+				Tools.is_placing_tiles()
+				or TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
+			):
 				_should_clip_tiles = false
 			var grid_coord = (Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
 			var is_smaller_tile = int(grid_coord.y) % 2 != 0
