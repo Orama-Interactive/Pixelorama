@@ -659,23 +659,31 @@ func generate_isometric_rectangle(image: Image, is_gap: bool) -> void:
 		var a: Vector2i
 		var b = test[-1] + Vector2i.UP
 		var line_r = []
-		var first_right := false
 		var sub_position_x := []
 		var sub_position_y := []
+		var scan_dir = [Vector2i.RIGHT]
 		for i in test.size():
 			if up.y == test[i].y:
 				a = test[i] + Vector2i.RIGHT
 			var pt: Vector2i = test[i]
-			if not pt + Vector2i.RIGHT in test:
-				if !first_right:
-					first_right = true
-					continue
-			if first_right:
-				line_r.push_front(
-					Vector2i(test[i].x, image.get_size().y - test[i].y)
-				)
-				sub_position_x.append(test[i].x)
-				sub_position_y.append(image.get_size().y - test[i].y)
+			if i == test.size() - 1:
+				scan_dir.erase(Vector2i.RIGHT)
+			for dir in scan_dir:
+				if (
+					Rect2i(Vector2i.ZERO, image.get_size()).has_point(test[i] + dir)
+					and !line_r.has(
+						Vector2i((test[i] + dir).x, image.get_size().y - 1 - (test[i] + dir).y)
+					)
+					and !test.has(test[i] + dir)
+				):
+					var small_point = test[i] + dir
+					line_r.push_front(
+						Vector2i(small_point.x, image.get_size().y - 1 - small_point.y)
+					)
+					sub_position_x.append(small_point.x)
+					sub_position_y.append(image.get_size().y - 1 - small_point.y)
+			if not pt + Vector2i.RIGHT in test and not scan_dir.has(Vector2i.UP):
+				scan_dir.push_front(Vector2i.UP)
 		var pos = Vector2i(sub_position_x.min(), sub_position_y.min())
 		var sub_size_x = (b.x - a.x + 1) * 2
 		var sub_size_y = (b.y - a.y + 1) * 2
