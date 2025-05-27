@@ -648,13 +648,13 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 	)
 
 
-func generate_isometric_rectangle(image: Image, is_gap: bool) -> void:
+func generate_isometric_rectangle(image: Image, is_gap_tile: bool) -> void:
 	var half_size := ((Vector2(image.get_size()) - Vector2.ONE) / 2).floor()
 	var even_check = image.get_size() % 2
 	var even_offset = Vector2i(even_check.x == 0, even_check.y == 0)
 	var up := Vector2i(half_size.x + even_offset.x, 0)
 	var right := Vector2i(image.get_size().x - 1, half_size.y)
-	if is_gap:
+	if is_gap_tile:
 		var test = Geometry2D.bresenham_line(up, right)
 		var a: Vector2i
 		var b = test[-1] + Vector2i.UP

@@ -54,6 +54,10 @@ var prev_offset := offset  ## Used for undo/redo purposes.
 ## its image that is being changed when manual mode is enabled.
 ## Gets reset on [method update_tilemap].
 var editing_images: Dictionary[int, Array] = {}
+## When enabled, the tile is defined by content strictly inside it's grid,
+## and tile when placed in area smaller than it's size gets assigned a different index.
+## useful when drawing (should be disabled when placing tiles instead)
+var _should_clip_tiles: bool = true
 
 ## Used to ensure [method _queue_update_cel_portions] is only called once.
 var _pending_update := false
@@ -233,8 +237,14 @@ func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 		)
 		mask.fill(Color(0, 0, 0, 0))
 		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+			var old_clip := _should_clip_tiles
+			# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
+			if Tools.is_placing_tiles():
+				_should_clip_tiles = false
 			var grid_coord = (Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
-			DrawingAlgos.generate_isometric_rectangle(mask, int(grid_coord.y) % 2 != 0)
+			var is_smaller_tile = int(grid_coord.y) % 2 != 0
+			DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
+			_should_clip_tiles = old_clip
 		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 				DrawingAlgos.generate_hexagonal_pointy_top(mask)
@@ -783,7 +793,15 @@ func _draw_cell(
 			mask.fill(Color(0, 0, 0, 0))
 			if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
 				var grid_coord = (Vector2(coords - offset) * 2 / Vector2(get_tile_size())).round()
-				DrawingAlgos.generate_isometric_rectangle(mask, int(grid_coord.y) % 2 != 0)
+				var is_smaller_tile = int(grid_coord.y) % 2 != 0
+				var old_clip := _should_clip_tiles
+				# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
+				if Tools.is_placing_tiles():
+					_should_clip_tiles = false
+				DrawingAlgos.generate_isometric_rectangle(
+					mask, is_smaller_tile and _should_clip_tiles
+				)
+				_should_clip_tiles = old_clip
 			elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 				if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 					DrawingAlgos.generate_hexagonal_pointy_top(mask)
