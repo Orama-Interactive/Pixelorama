@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-05-26 21:49\n"
+"PO-Revision-Date: 2025-05-27 10:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1927,7 +1927,7 @@ msgstr "Kolor obramowania 2:"
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "Podgląd transformacji alfa:"
 
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
