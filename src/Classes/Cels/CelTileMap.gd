@@ -214,7 +214,7 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 		godot_tileset.tile_offset_axis = get_tile_offset_axis()
 		var godot_tilemap := TileMapLayer.new()
 		godot_tilemap.tile_set = godot_tileset
-		var pixel_coords := godot_tilemap.map_to_local(cell_coords) as Vector2i
+		var pixel_coords := godot_tilemap.map_to_local(cell_coords).floor() as Vector2i
 		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			var quarter_tile_size := get_tile_size() / 4
 			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
@@ -233,7 +233,7 @@ func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 		)
 		mask.fill(Color(0, 0, 0, 0))
 		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-			var grid_coord = (Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).ceil()
+			var grid_coord = (Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
 			DrawingAlgos.generate_isometric_rectangle(mask, int(grid_coord.y) % 2 != 0)
 		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
@@ -782,7 +782,7 @@ func _draw_cell(
 			)
 			mask.fill(Color(0, 0, 0, 0))
 			if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-				var grid_coord = Vector2(coords - offset) * 2 / Vector2(get_tile_size())
+				var grid_coord = (Vector2(coords - offset) * 2 / Vector2(get_tile_size())).round()
 				DrawingAlgos.generate_isometric_rectangle(mask, int(grid_coord.y) % 2 != 0)
 			elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 				if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
