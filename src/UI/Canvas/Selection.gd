@@ -222,12 +222,15 @@ func get_selected_draw_cels() -> Array[BaseCel]:
 	return cels
 
 
-func _get_selected_draw_images() -> Array[ImageExtended]:
+func _get_selected_draw_images(tile_cel_pointer: Array[CelTileMap]) -> Array[ImageExtended]:
 	var images: Array[ImageExtended] = []
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 		if not cel is PixelCel:
+			continue
+		if cel is CelTileMap and Tools.is_placing_tiles():
+			tile_cel_pointer.append(cel)
 			continue
 		if project.layers[cel_index[1]].can_layer_get_drawn():
 			images.append(cel.get_image())
@@ -441,10 +444,15 @@ func delete(selected_cels := true) -> void:
 
 	var undo_data_tmp := get_undo_data(true)
 	var images: Array[ImageExtended]
+	var tile_cels: Array[CelTileMap]
 	if selected_cels:
-		images = _get_selected_draw_images()
+		images = _get_selected_draw_images(tile_cels)
 	else:
 		images = [project.get_current_cel().get_image()]
+		if project.get_current_cel() is CelTileMap:
+			if Tools.is_placing_tiles():
+				images.clear()
+				tile_cels.append(project.get_current_cel())
 
 	if project.has_selection:
 		var blank := project.new_empty_image()
@@ -453,6 +461,26 @@ func delete(selected_cels := true) -> void:
 		for image in images:
 			image.blit_rect_mask(blank, selection_map_copy, selection_rect, selection_rect.position)
 			image.convert_rgb_to_indexed()
+		var selection = project.selection_map.get_used_rect()
+		for tile_cel: CelTileMap in tile_cels:
+			var row := 0
+			for y in range(
+				selection.position.y,
+				selection.end.y,
+				floori(tile_cel.tile_size.y / 2)
+			):
+				var current_offset := floori(tile_cel.tile_size.x / 2) if row % 2 != 0 else 0
+				for x in range(
+					selection.position.x + current_offset,
+					selection.end.x,
+					tile_cel.tile_size.x
+				):
+					var point = Vector2i(x, y) + Vector2i((Vector2(tile_cel.tile_size) / 2).ceil())
+					if selection.has_point(point):
+						var tile_position := tile_cel.get_cell_position(point)
+						var cell := tile_cel.get_cell_at(tile_position)
+						tile_cel.set_index(cell, 0)
+						tile_cel.update_tilemap()
 	else:
 		for image in images:
 			image.fill(0)
