@@ -768,23 +768,25 @@ func _update_cell(cell: Cell) -> void:
 	var index := cell.index
 	if index >= tileset.tiles.size():
 		index = 0
+	if image_portion.get_used_rect().size == Vector2i.ZERO and index != 0:
+		set_index(cell, 0)
 	var current_tile := tileset.tiles[index].image
 	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
 	if image_portion.get_data() != transformed_tile.get_data():
-		_draw_cell(image, transformed_tile, coords, index == 0)
+		_draw_cell(image, transformed_tile, coords)
 		image.convert_rgb_to_indexed()
+	if index == 0:
+		update_cel_portions()
 
 
 func _draw_cell(
-	source_image: Image, tile_image: Image, coords: Vector2i, force_square_blit: bool
+	source_image: Image, tile_image: Image, coords: Vector2i,
 ) -> void:
 	var transformed_tile_size := tile_image.get_size()
 	var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 	coords -= tile_offset
-	if force_square_blit or get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 		source_image.blit_rect(tile_image, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
-		if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not place_only_mode:
-			update_cel_portions()
 	else:
 		var mask: Image
 		if place_only_mode:
@@ -1004,7 +1006,7 @@ func update_texture(undo := false) -> void:
 		if index == 0:
 			if tileset.tiles.size() > 1:
 				# Prevent from drawing on empty image portions.
-				_draw_cell(image, current_tile.image, coords, false)
+				_draw_cell(image, current_tile.image, coords)
 			continue
 		if not editing_images.has(index):
 			if not _tiles_equal(cell, image_portion, current_tile.image):
@@ -1033,7 +1035,9 @@ func update_texture(undo := false) -> void:
 				editing_image, cell.flip_h, cell.flip_v, cell.transpose
 			)
 			if not image_portion.get_data() == transformed_editing_image.get_data():
-				_draw_cell(image, transformed_editing_image, coords, index == 0)
+				_draw_cell(image, transformed_editing_image, coords)
+				if index == 0:
+					update_cel_portions()
 	super.update_texture(undo)
 
 
