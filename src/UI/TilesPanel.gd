@@ -305,15 +305,16 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 	elif index == 1:  # Delete
 		if tile_index_menu_popped == 0:
 			return
-		selected_tiles.sort()
-		selected_tiles.reverse()
+		var select_copy = selected_tiles.duplicate()
+		select_copy.sort()
+		select_copy.reverse()
 		var action_started := false
 		var project := Global.current_project
 		var undo_data_tileset := current_tileset.serialize_undo_data()
 		var tilemap_cels: Array[CelTileMap] = []
 		var redo_data_tilemaps := {}
 		var undo_data_tilemaps := {}
-		for i in selected_tiles:
+		for i in select_copy:
 			selected_tile = current_tileset.tiles[i]
 			if selected_tile.can_be_removed():
 				if !action_started:
