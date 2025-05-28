@@ -467,9 +467,9 @@ func delete(selected_cels := true) -> void:
 			for y in range(
 				selection.position.y,
 				selection.end.y,
-				floori(tile_cel.tile_size.y / 2)
+				floori(tile_cel.tile_size.y / 2.0)
 			):
-				var current_offset := floori(tile_cel.tile_size.x / 2) if row % 2 != 0 else 0
+				var current_offset := floori(tile_cel.tile_size.x / 2.0) if row % 2 != 0 else 0
 				for x in range(
 					selection.position.x + current_offset,
 					selection.end.x,
@@ -481,6 +481,7 @@ func delete(selected_cels := true) -> void:
 						var cell := tile_cel.get_cell_at(tile_position)
 						tile_cel.set_index(cell, 0)
 						tile_cel.update_tilemap()
+				row += 1
 	else:
 		for image in images:
 			image.fill(0)
