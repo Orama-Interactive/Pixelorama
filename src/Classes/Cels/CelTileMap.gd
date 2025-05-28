@@ -766,8 +766,6 @@ func _update_cell(cell: Cell, prev_index := -1) -> void:
 	var rect := Rect2i(coords, get_tile_size())
 	var image_portion := get_image_portion(rect)
 	var index := cell.index
-	if prev_index == -1:
-		prev_index = cell.index
 	if index >= tileset.tiles.size():
 		index = 0
 	if prev_index != index:
