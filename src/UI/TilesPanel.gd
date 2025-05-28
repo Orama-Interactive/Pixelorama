@@ -305,29 +305,37 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 	elif index == 1:  # Delete
 		if tile_index_menu_popped == 0:
 			return
-		if selected_tile.can_be_removed():
-			var project := Global.current_project
-			var tilemap_cels: Array[CelTileMap] = []
-			for cel in project.get_all_pixel_cels():
-				if cel is not CelTileMap:
-					continue
-				if cel.tileset == current_tileset:
-					tilemap_cels.append(cel)
-			var undo_data_tileset := current_tileset.serialize_undo_data()
-			var undo_data_tilemaps := {}
-			for cel in tilemap_cels:
-				undo_data_tilemaps[cel] = cel.serialize_undo_data(true)
-			current_tileset.remove_tile_at_index(tile_index_menu_popped, null)
+		selected_tiles.sort()
+		selected_tiles.reverse()
+		var action_started := false
+		var project := Global.current_project
+		var undo_data_tileset := current_tileset.serialize_undo_data()
+		var tilemap_cels: Array[CelTileMap] = []
+		var redo_data_tilemaps := {}
+		var undo_data_tilemaps := {}
+		for i in selected_tiles:
+			selected_tile = current_tileset.tiles[i]
+			if selected_tile.can_be_removed():
+				if !action_started:
+					action_started = true
+					project.undo_redo.create_action("Delete tile")
+				for cel in project.get_all_pixel_cels():
+					if cel is not CelTileMap:
+						continue
+					if cel.tileset == current_tileset:
+						tilemap_cels.append(cel)
+				for cel in tilemap_cels:
+					undo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+				current_tileset.remove_tile_at_index(i, null)
+				for cel in tilemap_cels:
+					redo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+		if action_started:
 			var redo_data_tileset := current_tileset.serialize_undo_data()
-			var redo_data_tilemaps := {}
-			for cel in tilemap_cels:
-				redo_data_tilemaps[cel] = cel.serialize_undo_data(true)
-			project.undo_redo.create_action("Delete tile")
-			project.undo_redo.add_do_method(
-				current_tileset.deserialize_undo_data.bind(redo_data_tileset, null)
-			)
 			project.undo_redo.add_undo_method(
 				current_tileset.deserialize_undo_data.bind(undo_data_tileset, null)
+			)
+			project.undo_redo.add_do_method(
+				current_tileset.deserialize_undo_data.bind(redo_data_tileset, null)
 			)
 			for cel in tilemap_cels:
 				cel.deserialize_undo_data(redo_data_tilemaps[cel], project.undo_redo, false)
