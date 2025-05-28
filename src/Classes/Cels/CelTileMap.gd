@@ -230,7 +230,7 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 	return cell_coords * get_tile_size() + offset
 
 
-func get_image_portion(rect: Rect2i, source_image := image) -> Image:
+func get_image_portion(rect: Rect2i, source_image := image, force_disable_clip := false) -> Image:
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		var mask := Image.create_empty(
 			get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8
@@ -242,6 +242,7 @@ func get_image_portion(rect: Rect2i, source_image := image) -> Image:
 			if (
 				Tools.is_placing_tiles()
 				or TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
+				or force_disable_clip
 			):
 				_should_clip_tiles = false
 			var grid_coord = (Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
@@ -576,7 +577,7 @@ func update_tilemap(
 		var cell := get_cell_at(cell_coords)
 		var coords := get_pixel_coords(cell_coords)
 		var rect := Rect2i(coords, get_tile_size())
-		var image_portion := get_image_portion(rect, source_image)
+		var image_portion := get_image_portion(rect, source_image, true)
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
