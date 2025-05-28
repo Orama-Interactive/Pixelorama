@@ -134,11 +134,11 @@ func set_index(
 	index: int,
 	flip_h := TileSetPanel.is_flipped_h,
 	flip_v := TileSetPanel.is_flipped_v,
-	transpose := TileSetPanel.is_transposed
+	transpose := TileSetPanel.is_transposed,
+	requires_update := true
 ) -> void:
 	index = clampi(index, 0, tileset.tiles.size() - 1)
 	var previous_index := cell.index
-
 	if previous_index != index:
 		if previous_index > 0 and previous_index < tileset.tiles.size():
 			tileset.tiles[previous_index].times_used -= 1
@@ -162,7 +162,8 @@ func set_index(
 			)
 		_queue_update_cel_portions(true)
 	else:
-		_update_cell(cell)
+		if requires_update:
+			_update_cell(cell, requires_update, previous_index)
 	Global.canvas.queue_redraw()
 
 
@@ -757,7 +758,7 @@ func _re_index_cells_after_index(index: int, decrease := true) -> void:
 
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
-func _update_cell(cell: Cell) -> void:
+func _update_cell(cell: Cell, should_update_texture := true, prev_index := -1) -> void:
 	if cell.updated_this_frame:
 		return
 	cell.updated_this_frame = true
@@ -767,17 +768,29 @@ func _update_cell(cell: Cell) -> void:
 	var rect := Rect2i(coords, get_tile_size())
 	var image_portion := get_image_portion(rect)
 	var index := cell.index
+	if prev_index == -1:
+		prev_index = cell.index
 	if index >= tileset.tiles.size():
 		index = 0
+	## it may be that when a tile is erased, it's edge's data survive as neighboring cels.
+	## update those cell's indices to zero as well so that the edges remain erased.
 	if image_portion.get_used_rect().size == Vector2i.ZERO and index != 0:
-		set_index(cell, 0)
-	var current_tile := tileset.tiles[index].image
-	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
-	if image_portion.get_data() != transformed_tile.get_data():
-		_draw_cell(image, transformed_tile, coords)
-		image.convert_rgb_to_indexed()
-	if index == 0:
-		update_cel_portions()
+		set_index(
+			cell
+			,0
+			,TileSetPanel.is_flipped_h
+			,TileSetPanel.is_flipped_v
+			,TileSetPanel.is_transposed
+			,false
+		)
+	if should_update_texture and prev_index != index:
+		var current_tile := tileset.tiles[index].image
+		var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
+		if image_portion.get_data() != transformed_tile.get_data():
+			_draw_cell(image, transformed_tile, coords)
+			image.convert_rgb_to_indexed()
+		if index == 0:
+			update_cel_portions()
 
 
 func _draw_cell(
