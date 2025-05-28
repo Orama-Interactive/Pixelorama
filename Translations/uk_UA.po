@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-05-26 21:49\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1913,6 +1913,10 @@ msgstr "Колір рамки 1:"
 
 msgid "Border color 2:"
 msgstr "Колір рамки 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Можна міняти тільки користувацький набір налаштувань"
