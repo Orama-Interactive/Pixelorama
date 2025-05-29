@@ -176,15 +176,27 @@ static func _update_tile(
 	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
 	if is_instance_valid(target_project) and is_instance_valid(tileset):
 		if tile_idx <= tileset.tiles.size():
+			if !tileset.tiles[tile_idx].image:
+				return
+			if updated_image.get_data() == tileset.tiles[tile_idx].image.get_data():
+				return
 			tileset.tiles[tile_idx].image = updated_image
 			tileset.updated.emit()
 			for _p_frame in target_project.frames:
 				for cel in _p_frame.cels:
 					if cel is CelTileMap:
-						if cel.place_only_mode:
-							cel.queue_update_cel_portions(true)
-						else:
-							cel.update_cel_portions(true)
+						if cel.tileset == tileset:
+							var has_tile := false
+							for cell in cel.cells.values():
+								if cell.index == tile_idx:
+									has_tile = true
+									break
+							if has_tile:
+								cel.image.fill(Color(0, 0, 0, 0))
+								if cel.place_only_mode:
+									cel.queue_update_cel_portions()
+								else:
+									cel.update_cel_portions()
 	if not warnings.is_empty():
 		Global.popup_error(warnings)
 
