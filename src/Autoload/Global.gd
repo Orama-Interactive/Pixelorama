@@ -15,12 +15,7 @@ signal project_data_changed(project: Project)  ## Emitted when project data is m
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
-enum GridTypes {
-	CARTESIAN,
-	ISOMETRIC,
-	HEXAGONAL_POINTY_TOP,
-	HEXAGONAL_FLAT_TOP
-}
+enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
 ## ## Used to tell whether a color is being taken from the current theme,
 ## or if it is a custom color.
 enum ColorFrom { THEME, CUSTOM }
