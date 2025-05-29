@@ -536,19 +536,15 @@ size_flags_horizontal = 3
 tooltip_text = "Sets the type of the grid between rectangular, isometric or both"
 mouse_default_cursor_shape = 2
 selected = 0
-item_count = 6
+item_count = 4
 popup/item_0/text = "Rectangular"
 popup/item_0/id = 0
-popup/item_1/text = "Isometric (Regular)"
+popup/item_1/text = "Isometric"
 popup/item_1/id = 1
-popup/item_2/text = "Isometric (Pixel-Regular)"
+popup/item_2/text = "Hexagonal (pointy-top)"
 popup/item_2/id = 2
-popup/item_3/text = "Isometric (Pixel-Stacked)"
+popup/item_3/text = "Hexagonal (flat-top)"
 popup/item_3/id = 3
-popup/item_4/text = "Hexagonal (pointy-top)"
-popup/item_4/id = 4
-popup/item_5/text = "Hexagonal (flat-top)"
-popup/item_5/id = 5
 
 [node name="GridSizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 custom_minimum_size = Vector2(110, 0)
@@ -596,7 +592,26 @@ text = "Draw over Tile Mode:"
 layout_mode = 2
 tooltip_text = "If disabled, the grid will be drawn only over the original image"
 mouse_default_cursor_shape = 2
-text = "On"
+
+[node name="PixelatedLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+text = "Pixelated"
+
+[node name="GridPixelated" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+disabled = true
+clip_text = true
+
+[node name="YSeperatedLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+text = "Y Separated"
+
+[node name="GridYSeperated" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+tooltip_text = "Disabled: Tiles below start immediately after above tiles.
+
+Enabled: Tiles below start with a vertical offset depending on tile size"
+disabled = true
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 layout_mode = 2

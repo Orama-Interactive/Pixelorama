@@ -25,10 +25,15 @@ func _draw() -> void:
 			return
 
 		var grid_type := Global.grids[grid_idx].grid_type
+		var flags: PackedStringArray = Global.grids[grid_idx].special_flags
+		var is_y_separated: bool = flags.has("y_separated")
+		var is_pixelated: bool = Global.grids[grid_idx].is_pixelated
 		var cel := Global.current_project.get_current_cel()
 		if cel is CelTileMap and grid_idx == 0:
 			if cel.get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-				grid_type = Global.GridTypes.ISOMETRIC_PIXEL_REGULAR
+				grid_type = Global.GridTypes.ISOMETRIC
+				is_pixelated = true
+				is_y_separated = false
 			elif cel.get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 				if cel.get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 					grid_type = Global.GridTypes.HEXAGONAL_POINTY_TOP
@@ -38,12 +43,11 @@ func _draw() -> void:
 				grid_type = Global.GridTypes.CARTESIAN
 		if grid_type == Global.GridTypes.CARTESIAN:
 			_draw_cartesian_grid(grid_idx, target_rect)
-		elif grid_type == Global.GridTypes.ISOMETRIC_REGULAR:
-			_draw_isometric_grid(grid_idx, target_rect)
-		elif grid_type == Global.GridTypes.ISOMETRIC_PIXEL_REGULAR:
-			_draw_pixelated_isometric_grid(grid_idx, target_rect)
-		elif grid_type == Global.GridTypes.ISOMETRIC_PIXEL_STACKED:
-			_draw_pixelated_isometric_grid(grid_idx, target_rect, true)
+		elif grid_type == Global.GridTypes.ISOMETRIC:
+			if is_pixelated:
+				_draw_pixelated_isometric_grid(grid_idx, target_rect, is_y_separated)
+			else:
+				_draw_isometric_grid(grid_idx, target_rect)
 		elif grid_type == Global.GridTypes.HEXAGONAL_POINTY_TOP:
 			_draw_hexagonal_grid(grid_idx, target_rect, true)
 		elif grid_type == Global.GridTypes.HEXAGONAL_FLAT_TOP:

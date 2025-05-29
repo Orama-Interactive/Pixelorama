@@ -19,6 +19,8 @@ var grid_preferences: Array[GridPreference] = [
 	GridPreference.new("grid_size", "GridSizeValue", "value", Vector2i(2, 2)),
 	GridPreference.new("grid_offset", "GridOffsetValue", "value", Vector2i.ZERO),
 	GridPreference.new("grid_draw_over_tile_mode", "GridDrawOverTileMode", "button_pressed", false),
+	GridPreference.new("is_pixelated", "GridPixelated", "button_pressed", false),
+	GridPreference.new("y_separated", "GridYSeperated", "button_pressed", false),
 	GridPreference.new("grid_color", "GridColor", "color", Color.BLACK),
 ]
 
@@ -34,7 +36,7 @@ var grid_selected: int = 0:
 			"preferences", "grids", {0: create_default_properties()}
 		)
 		if grids.has(key):
-			update_pref_ui(grids[key])
+			load_grid_ui(grids[key])
 
 @onready var grids_select_container: HFlowContainer = $GridsSelectContainer
 
@@ -107,9 +109,10 @@ func _on_grid_pref_value_changed(value, pref: GridPreference, button: RestoreDef
 	var grids: Dictionary = Global.config_cache.get_value(
 		"preferences", "grids", {0: create_default_properties()}
 	)
+	var prop := pref.prop_name
+	var grid_info := {}
 	if grids.has(grid_selected):  # Failsafe (Always true)
-		var grid_info: Dictionary = grids[grid_selected]
-		var prop := pref.prop_name
+		grid_info = grids[grid_selected]
 		grid_info[prop] = value
 		grids[grid_selected] = grid_info
 		Global.update_grids(grids)
@@ -119,6 +122,7 @@ func _on_grid_pref_value_changed(value, pref: GridPreference, button: RestoreDef
 			disable = value.is_equal_approx(default_value)
 		disable_restore_default_button(button, disable)
 	Global.config_cache.set_value("preferences", "grids", grids)
+	manage_button_disabling(grid_info)
 
 
 func _on_grids_count_value_changed(value: float) -> void:
@@ -183,7 +187,7 @@ func add_remove_select_button(grid_idx: int, remove := false):
 			grids_select_container.get_child(grid_idx).queue_free()
 
 
-func update_pref_ui(grid_data: Dictionary):
+func load_grid_ui(grid_data: Dictionary):
 	for pref in grid_preferences:
 		var key = pref.prop_name
 		if grid_data.has(key):
@@ -192,3 +196,15 @@ func update_pref_ui(grid_data: Dictionary):
 			if pref.value_type == "color":
 				# the signal doesn't seem to be emitted automatically
 				node.color_changed.emit(grid_data[key])
+	manage_button_disabling(grid_data)
+
+
+func manage_button_disabling(grid_data: Dictionary):
+	$GridPixelated.disabled = true
+	$GridYSeperated.disabled = true
+	if grid_data.get("grid_type", 0) == Global.GridTypes.ISOMETRIC:
+		$GridPixelated.disabled = false
+		if grid_data.get("is_pixelated", false) == true:
+			$GridYSeperated.disabled = false
+	$GridPixelated.text = "Disabled" if $GridPixelated.disabled else ""
+	$GridYSeperated.text = "Disabled" if $GridYSeperated.disabled else ""
