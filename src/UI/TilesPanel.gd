@@ -146,6 +146,49 @@ func _update_tileset() -> void:
 		tile_button_container.add_child(button)
 
 
+static func _modify_texture_resource(tile_idx, tileset: TileSetCustom, project: Project) -> void:
+	var tile = tileset.tiles[tile_idx]
+	if tile.image:
+		var v_proj_name = str(tileset.name, " Tile: ", tile_idx)
+		var resource_proj := ResourceProject.new([], v_proj_name, tile.image.get_size())
+		resource_proj.layers.append(PixelLayer.new(resource_proj))
+		resource_proj.frames.append(resource_proj.new_empty_frame())
+		resource_proj.frames[0].cels[0].set_content(tile.image)
+		resource_proj.resource_updated.connect(_update_tile.bind(project, tileset, tile_idx))
+		Global.projects.append(resource_proj)
+		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+		Global.canvas.camera_zoom()
+
+
+static func _update_tile(
+	resource_proj: ResourceProject, target_project: Project, tileset: TileSetCustom, tile_idx: int
+) -> void:
+	var warnings := ""
+	if resource_proj.frames.size() > 1:
+		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
+	if resource_proj.layers.size() > 1:
+		warnings += "\nThis resource is intended to have 1 layer only. layers will be blended."
+
+	var updated_image := Image.create_empty(
+		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
+	)
+	var frame := resource_proj.frames[0]
+	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
+	if is_instance_valid(target_project) and is_instance_valid(tileset):
+		if tile_idx <= tileset.tiles.size():
+			tileset.tiles[tile_idx].image = updated_image
+			tileset.updated.emit()
+			for _p_frame in target_project.frames:
+				for cel in _p_frame.cels:
+					if cel is CelTileMap:
+						if cel.place_only_mode:
+							cel.queue_update_cel_portions(true)
+						else:
+							cel.update_cel_portions(true)
+	if not warnings.is_empty():
+		Global.popup_error(warnings)
+
+
 func _update_tileset_dummy_params(_cel: BaseCel, _index: int) -> void:
 	_update_tileset()
 
@@ -217,7 +260,10 @@ func _on_tile_button_gui_input(event: InputEvent, index: int) -> void:
 		tile_button_popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
 		tile_index_menu_popped = index
 		tile_button_popup_menu.set_item_disabled(
-			1, not current_tileset.tiles[index].can_be_removed()
+			1, tile_index_menu_popped == 0
+		)
+		tile_button_popup_menu.set_item_disabled(
+			2, not current_tileset.tiles[index].can_be_removed()
 		)
 
 
@@ -302,7 +348,11 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 		tile_probability_slider.value = selected_tile.probability
 		tile_user_data_text_edit.text = selected_tile.user_data
 		tile_properties.popup_centered()
-	elif index == 1:  # Delete
+	if index == 1:  # Edit tile
+		_modify_texture_resource(
+			tile_index_menu_popped, current_tileset, Global.current_project
+		)
+	elif index == 2:  # Delete
 		if tile_index_menu_popped == 0:
 			return
 		var select_copy = selected_tiles.duplicate()

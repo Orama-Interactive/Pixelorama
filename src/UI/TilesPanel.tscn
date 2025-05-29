@@ -343,11 +343,13 @@ button_pressed = true
 text = "On"
 
 [node name="TileButtonPopupMenu" type="PopupMenu" parent="."]
-item_count = 2
+item_count = 3
 item_0/text = "Properties"
 item_0/id = 0
-item_1/text = "Delete"
+item_1/text = "Edit tile"
 item_1/id = 1
+item_2/text = "Delete"
+item_2/id = 2
 
 [node name="TileProperties" type="AcceptDialog" parent="."]
 title = "Tile properties"
