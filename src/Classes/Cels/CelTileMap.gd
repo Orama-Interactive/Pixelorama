@@ -59,7 +59,7 @@ var editing_images: Dictionary[int, Array] = {}
 ## useful when drawing (should be disabled when placing tiles instead)
 var _should_clip_tiles: bool = true
 
-## Used to ensure [method _queue_update_cel_portions] is only called once.
+## Used to ensure [method queue_update_cel_portions] is only called once.
 var _pending_update := false
 
 
@@ -159,7 +159,7 @@ func set_index(
 			image.blit_rect_mask(
 				blank, prev_tile, Rect2i(Vector2i.ZERO, prev_tile_size), coords - tile_offset
 			)
-		_queue_update_cel_portions(true)
+		queue_update_cel_portions(true)
 	else:
 		_update_cell(cell, previous_index)
 	Global.canvas.queue_redraw()
@@ -851,7 +851,7 @@ func re_index_all_cells(set_invisible_to_zero := false, source_image := image) -
 				break
 
 
-func _queue_update_cel_portions(skip_zeroes := false) -> void:
+func queue_update_cel_portions(skip_zeroes := false) -> void:
 	if _pending_update:
 		return
 	_pending_update = true
