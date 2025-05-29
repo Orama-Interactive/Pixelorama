@@ -182,21 +182,21 @@ static func _update_tile(
 				return
 			tileset.tiles[tile_idx].image = updated_image
 			tileset.updated.emit()
-			for _p_frame in target_project.frames:
-				for cel in _p_frame.cels:
-					if cel is CelTileMap:
-						if cel.tileset == tileset:
-							var has_tile := false
-							for cell in cel.cells.values():
-								if cell.index == tile_idx:
-									has_tile = true
-									break
-							if has_tile:
-								cel.image.fill(Color(0, 0, 0, 0))
-								if cel.place_only_mode:
-									cel.queue_update_cel_portions()
-								else:
-									cel.update_cel_portions()
+			for cel in target_project.get_all_pixel_cels():
+				if cel is not CelTileMap:
+					continue
+				if cel.tileset == tileset:
+					var has_tile := false
+					for cell in cel.cells.values():
+						if cell.index == tile_idx:
+							has_tile = true
+							break
+					if has_tile:
+						cel.image.fill(Color(0, 0, 0, 0))
+						if cel.place_only_mode:
+							cel.queue_update_cel_portions()
+						else:
+							cel.update_cel_portions()
 	if not warnings.is_empty():
 		Global.popup_error(warnings)
 
@@ -402,6 +402,11 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 			project.undo_redo.commit_action()
+	elif index == 3:  # Duplicate tile
+		var project = Global.current_project
+		var tile_cel = Global.current_project.get_current_cel()
+		if tile_cel is CelTileMap:
+			current_tileset.add_tile(selected_tile.image, tile_cel, 0)
 
 
 func _on_tile_probability_slider_value_changed(value: float) -> void:
