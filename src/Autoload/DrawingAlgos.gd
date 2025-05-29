@@ -710,7 +710,7 @@ func generate_isometric_rectangle(image: Image, is_gap_tile: bool) -> void:
 					image.set_pixel(j + offset.x, k + offset.y, Color.WHITE)
 			var mirror_right := Vector2i(pixel.x, sub_size_y - 1 - pixel.y)
 			image.set_pixelv(mirror_right + offset, Color.WHITE)
-			isometric_tile_cache.get_or_add(image.get_size(), {})[is_gap_tile]  = image.duplicate()
+			isometric_tile_cache.get_or_add(image.get_size(), {})[is_gap_tile] = image.duplicate()
 		return
 
 	var up_right := Geometry2D.bresenham_line(up, right)
@@ -724,7 +724,7 @@ func generate_isometric_rectangle(image: Image, is_gap_tile: bool) -> void:
 				image.set_pixel(j, k, Color.WHITE)
 		var mirror_right := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
 		image.set_pixelv(mirror_right, Color.WHITE)
-		isometric_tile_cache.get_or_add(image.get_size(), {})[is_gap_tile]  = image.duplicate()
+		isometric_tile_cache.get_or_add(image.get_size(), {})[is_gap_tile] = image.duplicate()
 
 
 func generate_hexagonal_pointy_top(image: Image) -> void:

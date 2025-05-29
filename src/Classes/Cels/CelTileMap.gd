@@ -244,7 +244,9 @@ func get_image_portion(rect: Rect2i, source_image := image, force_disable_clip :
 				or force_disable_clip
 			):
 				_should_clip_tiles = false
-			var grid_coord = (Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
+			var grid_coord = (
+				(Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
+			)
 			var is_smaller_tile = int(grid_coord.y) % 2 != 0
 			DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
 			_should_clip_tiles = old_clip
@@ -770,15 +772,15 @@ func _update_cell(cell: Cell, prev_index := -1) -> void:
 		index = 0
 	if prev_index != index:
 		var current_tile := tileset.tiles[index].image
-		var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
+		var transformed_tile := transform_tile(
+			current_tile, cell.flip_h, cell.flip_v, cell.transpose
+		)
 		if image_portion.get_data() != transformed_tile.get_data():
 			_draw_cell(image, transformed_tile, coords)
 			image.convert_rgb_to_indexed()
 
 
-func _draw_cell(
-	source_image: Image, tile_image: Image, coords: Vector2i,
-) -> void:
+func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i) -> void:
 	var transformed_tile_size := tile_image.get_size()
 	var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 	coords -= tile_offset

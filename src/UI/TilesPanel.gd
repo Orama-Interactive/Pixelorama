@@ -259,9 +259,7 @@ func _on_tile_button_gui_input(event: InputEvent, index: int) -> void:
 	if event.is_action(&"right_mouse"):
 		tile_button_popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
 		tile_index_menu_popped = index
-		tile_button_popup_menu.set_item_disabled(
-			1, tile_index_menu_popped == 0
-		)
+		tile_button_popup_menu.set_item_disabled(1, tile_index_menu_popped == 0)
 		tile_button_popup_menu.set_item_disabled(
 			2, not current_tileset.tiles[index].can_be_removed()
 		)
@@ -349,9 +347,7 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 		tile_user_data_text_edit.text = selected_tile.user_data
 		tile_properties.popup_centered()
 	if index == 1:  # Edit tile
-		_modify_texture_resource(
-			tile_index_menu_popped, current_tileset, Global.current_project
-		)
+		_modify_texture_resource(tile_index_menu_popped, current_tileset, Global.current_project)
 	elif index == 2:  # Delete
 		if tile_index_menu_popped == 0:
 			return

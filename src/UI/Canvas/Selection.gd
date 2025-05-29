@@ -465,15 +465,11 @@ func delete(selected_cels := true) -> void:
 		for tile_cel: CelTileMap in tile_cels:
 			var row := 0
 			for y in range(
-				selection.position.y,
-				selection.end.y,
-				floori(tile_cel.tile_size.y / 2.0)
+				selection.position.y, selection.end.y, floori(tile_cel.tile_size.y / 2.0)
 			):
 				var current_offset := floori(tile_cel.tile_size.x / 2.0) if row % 2 != 0 else 0
 				for x in range(
-					selection.position.x + current_offset,
-					selection.end.x,
-					tile_cel.tile_size.x
+					selection.position.x + current_offset, selection.end.x, tile_cel.tile_size.x
 				):
 					var point = Vector2i(x, y) + Vector2i((Vector2(tile_cel.tile_size) / 2).ceil())
 					if selection.has_point(point):
