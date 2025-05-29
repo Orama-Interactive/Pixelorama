@@ -175,7 +175,7 @@ static func _update_tile(
 	var frame := resource_proj.frames[0]
 	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
 	if is_instance_valid(target_project) and is_instance_valid(tileset):
-		if tile_idx <= tileset.tiles.size():
+		if tile_idx < tileset.tiles.size():
 			if !tileset.tiles[tile_idx].image:
 				return
 			if updated_image.get_data() == tileset.tiles[tile_idx].image.get_data():
@@ -405,8 +405,41 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 	elif index == 3:  # Duplicate tile
 		var project = Global.current_project
 		var tile_cel = Global.current_project.get_current_cel()
-		if tile_cel is CelTileMap:
-			current_tileset.add_tile(selected_tile.image, tile_cel, 0)
+		var undo_data_tileset := current_tileset.serialize_undo_data()
+		var tilemap_cels: Array[CelTileMap] = []
+		var redo_data_tilemaps := {}
+		var undo_data_tilemaps := {}
+		project.undo_redo.create_action("Duplicate tile")
+		for cel in project.get_all_pixel_cels():
+			if cel is not CelTileMap:
+				continue
+			if cel.tileset == current_tileset:
+				tilemap_cels.append(cel)
+		for cel in tilemap_cels:
+			undo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+		var variant := Image.create_from_data(
+			selected_tile.image.get_width(),
+			selected_tile.image.get_height(),
+			selected_tile.image.has_mipmaps(),
+			selected_tile.image.get_format(),
+			selected_tile.image.get_data()
+		)
+		current_tileset.add_tile(variant, null, 0)
+		for cel in tilemap_cels:
+			redo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+		var redo_data_tileset := current_tileset.serialize_undo_data()
+		project.undo_redo.add_undo_method(
+			current_tileset.deserialize_undo_data.bind(undo_data_tileset, null)
+		)
+		project.undo_redo.add_do_method(
+			current_tileset.deserialize_undo_data.bind(redo_data_tileset, null)
+		)
+		for cel in tilemap_cels:
+			cel.deserialize_undo_data(redo_data_tilemaps[cel], project.undo_redo, false)
+			cel.deserialize_undo_data(undo_data_tilemaps[cel], project.undo_redo, true)
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.commit_action()
 
 
 func _on_tile_probability_slider_value_changed(value: float) -> void:
