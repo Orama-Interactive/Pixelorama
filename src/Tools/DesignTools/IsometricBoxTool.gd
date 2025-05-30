@@ -451,9 +451,11 @@ func generate_isometric_box(
 	# starting point of upper plate
 	var u_st = Vector2i(
 		floori(_thickness / 2.0),
-		abs(min(0, a.y, b.y, (b + gap).y, (a + gap).y, (a + gap + b).y))
-		+ 1
-		+ floori(_thickness / 2.0)
+		(
+			abs(min(0, a.y, b.y, (b + gap).y, (a + gap).y, (a + gap + b).y))
+			+ 1
+			+ floori(_thickness / 2.0)
+		)
 	)
 	# starting point of lower plate
 	var b_st = u_st + h
