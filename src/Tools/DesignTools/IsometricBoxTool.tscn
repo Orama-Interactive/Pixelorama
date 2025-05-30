@@ -25,11 +25,23 @@ text = "Fill Shape"
 [node name="FillOptions" type="VBoxContainer" parent="." index="4"]
 layout_mode = 2
 
-[node name="EdgesCheckbox" type="CheckBox" parent="FillOptions" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="FillOptions" index="0"]
 layout_mode = 2
-tooltip_text = "Fills the drawn shape with color, instead of drawing a hollow shape"
-mouse_default_cursor_shape = 2
-text = "Blend edges"
+
+[node name="Label" type="Label" parent="FillOptions/HBoxContainer" index="0"]
+layout_mode = 2
+text = "Edge Color"
+
+[node name="EdgeBehavior" type="OptionButton" parent="FillOptions/HBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Constant (Auto)"
+popup/item_0/id = 0
+popup/item_1/text = "Blend at interface"
+popup/item_1/id = 1
 
 [node name="LabelContainer" type="HBoxContainer" parent="FillOptions" index="1"]
 layout_mode = 2
@@ -98,7 +110,7 @@ one_shot = true
 
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_thickness_value_changed"]
 [connection signal="toggled" from="FillCheckbox" to="." method="_on_fill_checkbox_toggled"]
-[connection signal="toggled" from="FillOptions/EdgesCheckbox" to="." method="_on_edges_checkbox_toggled"]
+[connection signal="item_selected" from="FillOptions/HBoxContainer/EdgeBehavior" to="." method="_on_edge_behavior_item_selected"]
 [connection signal="item_selected" from="FillOptions/LeftShadeOption" to="." method="_on_left_shade_option_item_selected"]
 [connection signal="value_changed" from="FillOptions/LeftShadeSlider" to="." method="_on_left_shade_slider_value_changed"]
 [connection signal="item_selected" from="FillOptions/RightShadeOption" to="." method="_on_right_shade_option_item_selected"]

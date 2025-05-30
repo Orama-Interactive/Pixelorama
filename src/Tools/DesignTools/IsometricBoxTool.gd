@@ -5,7 +5,8 @@ enum BoxState { SIDE_A, SIDE_GAP, SIDE_B, H, READY }
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _thickness := 1  ## The thickness of the curve.
 var _drawing := false  ## Set to true when a curve is being drawn.
-var _blend_edges := false  ## When true, the inside area of the curve gets filled.
+## 0 - the edge blends at face interface. 1 - the edge is calculated based on all colors.
+var _blend_edge_mode := 0
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _current_state: int = BoxState.SIDE_A  ## Current state of the bezier curve (in SINGLE mode)
 var _last_pixel: Vector2i
@@ -39,8 +40,8 @@ func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
 	save_config()
 
 
-func _on_edges_checkbox_toggled(toggled_on: bool) -> void:
-	_blend_edges = toggled_on
+func _on_edge_behavior_item_selected(index: int) -> void:
+	_blend_edge_mode = index
 	update_config()
 	save_config()
 
@@ -79,7 +80,7 @@ func get_config() -> Dictionary:
 	var config := super.get_config()
 	config["thickness"] = _thickness
 	config["fill_inside"] = _fill_inside
-	config["blend_edges"] = _blend_edges
+	config["blend_edge_mode"] = _blend_edge_mode
 	config["left_shade_value"] = _left_shade_value
 	config["right_shade_value"] = _right_shade_value
 	config["left_shade_option"] = %LeftShadeOption.selected
@@ -91,7 +92,7 @@ func set_config(config: Dictionary) -> void:
 	super.set_config(config)
 	_thickness = config.get("thickness", _thickness)
 	_fill_inside = config.get("fill_inside", _fill_inside)
-	_blend_edges = config.get("blend_edges", _blend_edges)
+	_blend_edge_mode = config.get("blend_edge_mode", _blend_edge_mode)
 	_left_shade_value = config.get("left_shade_value", _left_shade_value)
 	_right_shade_value = config.get("right_shade_value", _right_shade_value)
 	%LeftShadeOption.select(config.get("left_shade_option", 1))
@@ -103,9 +104,10 @@ func update_config() -> void:
 	$ThicknessSlider.value = _thickness
 	$FillCheckbox.button_pressed = _fill_inside
 	$FillOptions.visible = _fill_inside
-	$FillOptions/EdgesCheckbox.button_pressed = _blend_edges
+	%EdgeBehavior.selected = _blend_edge_mode
 	%LeftShadeSlider.value = _left_shade_value
 	%RightShadeSlider.value = _right_shade_value
+
 
 
 ## This tool has no brush, so just return the indicator as it is.
@@ -258,7 +260,7 @@ func _draw_shape() -> void:
 			else color.darkened(_right_shade_value)
 		)
 		var box_img = generate_isometric_box(
-			a, gap, b, h.y, color, left_color, right_color, _blend_edges
+			a, gap, b, h.y, color, left_color, right_color, _blend_edge_mode == 1
 		)
 		if !box_img:  # Invalid shape
 			_clear()
@@ -503,6 +505,7 @@ func generate_isometric_box(
 			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
 				image.set_pixelv(point, c_r)
 			if should_color:
+				edge_color = edge_color if box_height > 0 else c_t
 				if !blend_edge:
 					edge_color = (c_t + c_l + c_r) / 3.0
 					if edge_color.is_equal_approx(c_t):
