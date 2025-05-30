@@ -48,6 +48,8 @@ func pass_variables_to_cel(cel: CelTileMap) -> void:
 	cel.tile_shape = tile_shape
 	cel.tile_layout = tile_layout
 	cel.tile_offset_axis = tile_offset_axis
+	if cel.place_only_mode:
+		cel.queue_update_cel_portions(true)
 
 
 # Overridden Methods:
