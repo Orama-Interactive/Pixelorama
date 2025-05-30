@@ -57,7 +57,7 @@ class Tile:
 		return {"times_used": times_used, "probability": probability, "user_data": user_data}
 
 	func deserialize(dict: Dictionary, skip_times_used := false) -> void:
-		times_used = 0  # We have just now, creating the tile and havent placed it anywhere
+		times_used = 0  # We have just now, created the tile and haven't placed it anywhere yet.
 		if not skip_times_used:
 			# We are likely loading from a pxo file and would like to re-calculate it for good
 			# measure
