@@ -3,8 +3,8 @@ extends BaseDrawTool
 enum BoxState { SIDE_A, SIDE_GAP, SIDE_B, H, READY }
 
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
-var _thickness := 1  ## The thickness of the curve.
-var _drawing := false  ## Set to true when a curve is being drawn.
+var _thickness := 1  ## The thickness of the Edge.
+var _drawing := false  ## Set to true when shape is being drawn.
 ## 0 - the edge blends at face interface. 1 - the edge is calculated based on all colors.
 var _blend_edge_mode := 0
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
@@ -237,7 +237,7 @@ func _draw_shape() -> void:
 	_drawing = false
 	prepare_undo("Draw Shape")
 	var images := _get_selected_draw_images()
-	if _fill_inside:  # Thickness isn't supported for this mode
+	if _fill_inside:
 		# converting control points to local basis vectors
 		var a = _control_pts[0] - _origin
 		var gap = _control_pts[1] - _control_pts[0]
@@ -273,7 +273,11 @@ func _draw_shape() -> void:
 		var box_size = box_img.get_size()
 		for i in positions.size():
 			var pos := positions[i]
-			var dst := Vector2i(0, -h.y + offset) + pos
+			var dst := (
+				Vector2i(0, -h.y + offset)
+				+ pos
+				- Vector2i(floori(_thickness / 2.0), floori(_thickness / 2.0))
+			)
 			var dst_rect := Rect2i(dst, box_size)
 			dst_rect = dst_rect.intersection(draw_rectangle)
 			if dst_rect.size == Vector2i.ZERO:
@@ -438,15 +442,19 @@ func generate_isometric_box(
 ) -> Image:
 	# a is ↘, b is ↗  (both of them are basis vectors)
 	var h := Vector2i(0, box_height)
-	var width: int = (a + gap + b).x + 1
+	var width: int = (a + gap + b).x + _thickness
 	var height: int = (
 		max(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y)
 		- min(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y)
-		+ abs(box_height + 2)
+		+ abs(box_height + _thickness + 1)
 	)
-
 	# starting point of upper plate
-	var u_st = Vector2i(0, abs(min(0, a.y, b.y, (b + gap).y, (a + gap).y, (a + gap + b).y)) + 1)
+	var u_st = Vector2i(
+		floori(_thickness / 2.0),
+		abs(min(0, a.y, b.y, (b + gap).y, (a + gap).y, (a + gap + b).y))
+		+ 1
+		+ floori(_thickness / 2.0)
+	)
 	# starting point of lower plate
 	var b_st = u_st + h
 	# a convenient lambdha function
