@@ -166,6 +166,12 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"selection_border_color_2", "Selection/SelectionOptions/BorderColor2", "color", Color.BLACK
 	),
+	Preference.new(
+		"transformation_preview_alpha",
+		"Selection/SelectionOptions/TransformationPreviewAlpha",
+		"value",
+		0.5
+	),
 	Preference.new("fps_limit", "Performance/PerformanceContainer/SetFPSLimit", "value", 0),
 	Preference.new("max_undo_steps", "Performance/PerformanceContainer/MaxUndoSteps", "value", 0),
 	Preference.new(
