@@ -559,7 +559,7 @@ func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2
 		# restriction on Gap joining two sides:
 		# It should always be the same height as SIDE_A with x-value greater or equal than SIDE_A)
 		point.x = max(_control_pts[0].x, point.x)
-		if Vector2(point - _origin).angle() >= Vector2(_control_pts[0] - _origin).angle():
+		if Vector2(point - _origin).angle() > Vector2(_control_pts[0] - _origin).angle():
 			point = old_point
 	elif state == BoxState.SIDE_B:
 		# restriction on B:
@@ -569,7 +569,7 @@ func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2
 		point.x = max(_control_pts[1].x, point.x)
 		if (
 			Vector2(point - _control_pts[0]).angle()
-			>= Vector2(_control_pts[1] - _control_pts[0]).angle()
+			> Vector2(_control_pts[1] - _control_pts[0]).angle()
 		):
 			point = old_point
 	return point
