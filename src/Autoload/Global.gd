@@ -5,13 +5,18 @@ extends Node
 ## This Autoload contains signals, enums, constants, variables and
 ## references to many UI elements used within Pixelorama.
 
+@warning_ignore("unused_signal")
 signal pixelorama_opened  ## Emitted as soon as Pixelorama fully opens up.
+@warning_ignore("unused_signal")
 signal pixelorama_about_to_close  ## Emitted just before Pixelorama is about to close.
+@warning_ignore("unused_signal")
 signal project_created(project: Project)  ## Emitted when a new project class is initialized.
 signal project_about_to_switch  ## Emitted before a project is about to be switched
 signal project_switched  ## Emitted whenever you switch to some other project tab.
 signal cel_switched  ## Emitted whenever you select a different cel.
+@warning_ignore("unused_signal")
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
+@warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
@@ -434,7 +439,7 @@ var selection_animated_borders := true:
 		if is_instance_valid(canvas.selection):
 			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 			marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
-## Found in Preferences. The first color of border.
+## Found in Preferences. The first color of the selection borders.
 var selection_border_color_1 := Color.WHITE:
 	set(value):
 		if value == selection_border_color_1:
@@ -444,7 +449,7 @@ var selection_border_color_1 := Color.WHITE:
 			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 			marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
 			canvas.selection.queue_redraw()
-## Found in Preferences. The second color of border.
+## Found in Preferences. The second color of the selection borders.
 var selection_border_color_2 := Color.BLACK:
 	set(value):
 		if value == selection_border_color_2:
@@ -454,8 +459,16 @@ var selection_border_color_2 := Color.BLACK:
 			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 			marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
 			canvas.selection.queue_redraw()
+## Found in Preferences. The second color of the selection borders.
+var transformation_preview_alpha := 0.5:
+	set(value):
+		if value == transformation_preview_alpha:
+			return
+		transformation_preview_alpha = value
+		if is_instance_valid(canvas.selection):
+			canvas.selection.queue_redraw()
 
-## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save cpu usage.
+## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save CPU usage.
 var pause_when_unfocused := true
 ## Found in Preferences. The maximum FPS value Pixelorama can reach. 0 means no limit.
 var fps_limit := 0:

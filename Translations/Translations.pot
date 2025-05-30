@@ -1851,6 +1851,10 @@ msgstr ""
 msgid "Border color 2:"
 msgstr ""
 
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
+
 msgid "Only custom preset can be modified"
 msgstr ""
 
