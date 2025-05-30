@@ -25,14 +25,11 @@ text = "Fill Shape"
 [node name="FillOptions" type="VBoxContainer" parent="." index="4"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="FillOptions" index="0"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="FillOptions/HBoxContainer" index="0"]
+[node name="Label" type="Label" parent="FillOptions" index="0"]
 layout_mode = 2
 text = "Edge Color"
 
-[node name="EdgeBehavior" type="OptionButton" parent="FillOptions/HBoxContainer" index="1"]
+[node name="EdgeBehavior" type="OptionButton" parent="FillOptions" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -43,7 +40,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Blend at interface"
 popup/item_1/id = 1
 
-[node name="LabelContainer" type="HBoxContainer" parent="FillOptions" index="1"]
+[node name="LabelContainer" type="HBoxContainer" parent="FillOptions" index="2"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="FillOptions/LabelContainer" index="0"]
@@ -54,7 +51,7 @@ text = "Left Face"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LeftShadeOption" type="OptionButton" parent="FillOptions" index="2"]
+[node name="LeftShadeOption" type="OptionButton" parent="FillOptions" index="3"]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 1
@@ -64,7 +61,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Darken"
 popup/item_1/id = 1
 
-[node name="LeftShadeSlider" parent="FillOptions" index="3" instance=ExtResource("3_xw18e")]
+[node name="LeftShadeSlider" parent="FillOptions" index="4" instance=ExtResource("3_xw18e")]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -72,7 +69,7 @@ step = 0.01
 value = 0.5
 prefix = "Amount:"
 
-[node name="LabelContainer2" type="HBoxContainer" parent="FillOptions" index="4"]
+[node name="LabelContainer2" type="HBoxContainer" parent="FillOptions" index="5"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="FillOptions/LabelContainer2" index="0"]
@@ -83,7 +80,7 @@ text = "Right Face"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RightShadeOption" type="OptionButton" parent="FillOptions" index="5"]
+[node name="RightShadeOption" type="OptionButton" parent="FillOptions" index="6"]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -93,7 +90,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Darken"
 popup/item_1/id = 1
 
-[node name="RightShadeSlider" parent="FillOptions" index="6" instance=ExtResource("3_xw18e")]
+[node name="RightShadeSlider" parent="FillOptions" index="7" instance=ExtResource("3_xw18e")]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -110,7 +107,7 @@ one_shot = true
 
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_thickness_value_changed"]
 [connection signal="toggled" from="FillCheckbox" to="." method="_on_fill_checkbox_toggled"]
-[connection signal="item_selected" from="FillOptions/HBoxContainer/EdgeBehavior" to="." method="_on_edge_behavior_item_selected"]
+[connection signal="item_selected" from="FillOptions/EdgeBehavior" to="." method="_on_edge_behavior_item_selected"]
 [connection signal="item_selected" from="FillOptions/LeftShadeOption" to="." method="_on_left_shade_option_item_selected"]
 [connection signal="value_changed" from="FillOptions/LeftShadeSlider" to="." method="_on_left_shade_slider_value_changed"]
 [connection signal="item_selected" from="FillOptions/RightShadeOption" to="." method="_on_right_shade_option_item_selected"]

@@ -109,7 +109,6 @@ func update_config() -> void:
 	%RightShadeSlider.value = _right_shade_value
 
 
-
 ## This tool has no brush, so just return the indicator as it is.
 func _create_brush_indicator() -> BitMap:
 	return _indicator
@@ -198,9 +197,8 @@ func draw_preview() -> void:
 		canvas.draw_line(Vector2.RIGHT * 0.5, Vector2.LEFT * 0.5, Color.WHITE)
 		var current_pixel = Global.canvas.current_pixel.floor()
 		if i == 3:
-			Global.canvas.measurements.draw.connect(
-				_preview_measurement.bind(current_pixel, point)
-			)
+			# We are using the measurementsnode for measurement based previews.
+			Global.canvas.measurements.draw.connect(_preview_measurement.bind(current_pixel, point))
 			Global.canvas.measurements.queue_redraw()
 
 	for points: Array[Vector2i] in _iso_box_outline(box_points).values():
@@ -230,7 +228,7 @@ func _preview_measurement(point_a: Vector2, point_b: Vector2) -> void:
 	measurements.draw_set_transform(
 		point_b + Vector2(0.5, 0.5), Global.camera.rotation, Vector2.ONE / Global.camera.zoom
 	)
-	var pos = Vector2(3, -length/2.0) * Global.camera.zoom
+	var pos = Vector2(3, -length / 2.0) * Global.camera.zoom
 	measurements.draw_string(font, pos, str(length))
 	Global.canvas.measurements.draw.disconnect(_preview_measurement)
 
@@ -342,7 +340,9 @@ func _clear() -> void:
 
 
 ## Get the [member _curve]'s baked points, and draw lines between them
-## using [method Geometry2D.bresenham_line].
+## using [method Geometry2D.bresenham_line]. [param box_points] contains the minimum number of
+## points required to construct a box.
+## namely origin, first edge end, gap end, second edge end, height end
 func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 	var new_thickness = _thickness
 	var origin: Vector2i = box_points.pop_front()
@@ -375,20 +375,16 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 					bresenham_line_thickness(box_points[0] + gap, point_b, new_thickness)
 				)
 			# draw the other sides of isometric polygon (we also add a 1px vertical offset)
-			var upper_a = point_b - box_points[1] + origin + Vector2i.UP # origin + point A basis
+			var upper_a = point_b - box_points[1] + origin + Vector2i.UP  # origin + point A basis
 			# (point B --> upper_a + gap)
 			edge_up.append_array(
 				bresenham_line_thickness(point_b + Vector2i.UP, upper_a + gap, new_thickness)
 			)
 			# (upper_a + gap --> upper_a)
-			edge_up.append_array(
-				bresenham_line_thickness(upper_a + gap, upper_a, new_thickness)
-			)
+			edge_up.append_array(bresenham_line_thickness(upper_a + gap, upper_a, new_thickness))
 			# (upper_a --> origin)
 			edge_up.append_array(
-				bresenham_line_thickness(
-					upper_a, origin + Vector2i.UP, new_thickness
-				)
+				bresenham_line_thickness(upper_a, origin + Vector2i.UP, new_thickness)
 			)
 			if box_points.size() == 4:
 				# move the polygon up a height
@@ -415,9 +411,7 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 				)
 				edge_1_2.clear()
 				for point in gap_points:
-					edge_1_2.append_array(
-						Geometry2D.bresenham_line(point, point + height)
-					)
+					edge_1_2.append_array(Geometry2D.bresenham_line(point, point + height))
 	if _current_state < BoxState.READY:
 		box_points.resize(box_points.size() - 1)
 	return {
@@ -433,14 +427,22 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 
 
 func generate_isometric_box(
-	a: Vector2i, gap: Vector2i, b: Vector2i, box_height: int, c_t: Color, c_l: Color, c_r: Color, blend_edge := false
+	a: Vector2i,
+	gap: Vector2i,
+	b: Vector2i,
+	box_height: int,
+	c_t: Color,
+	c_l: Color,
+	c_r: Color,
+	blend_edge := false
 ) -> Image:
 	# a is ↘, b is ↗  (both of them are basis vectors)
 	var h := Vector2i(0, box_height)
 	var width: int = (a + gap + b).x + 1
 	var height: int = (
 		max(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y)
-		- min(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y) + abs(box_height + 2)
+		- min(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y)
+		+ abs(box_height + 2)
 	)
 
 	# starting point of upper plate
