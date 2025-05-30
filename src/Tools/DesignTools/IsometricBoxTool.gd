@@ -113,6 +113,14 @@ func _create_brush_indicator() -> BitMap:
 	return _indicator
 
 
+func _input(event: InputEvent) -> void:
+	if _drawing:
+		if event.is_action_pressed("change_tool_mode"):
+			if _control_pts.size() > 0:
+				_current_state -= 1
+				_control_pts.resize(_control_pts.size() - 1)
+
+
 func cursor_move(pos: Vector2i):
 	super.cursor_move(pos)
 	if Global.mirror_view:
@@ -122,14 +130,6 @@ func cursor_move(pos: Vector2i):
 			_origin += pos - _last_pixel
 			for i in _control_pts.size():
 				_control_pts[i] = _control_pts[i] + pos - _last_pixel
-		if Input.is_action_pressed("change_tool_mode"):
-			if _control_pts.size() > 0:
-				var temp_state = maxi(BoxState.SIDE_A, _current_state - 1)
-				var new_value := _control_pts[temp_state] + pos - _last_pixel
-				_control_pts[temp_state] = box_constraint(
-					_control_pts[temp_state], new_value, temp_state
-				)
-
 		## This is used for preview
 		pos = box_constraint(_last_pixel, pos, _current_state)
 	_last_pixel = angle_constraint(Vector2(pos))
@@ -185,30 +185,19 @@ func draw_preview() -> void:
 	box_points.push_front(_origin)
 	var canvas = Global.canvas.previews
 
-	var focus_idx = _current_state
-	var prev_point: Vector2 = _origin
 	canvas.draw_set_transform(Vector2(0.5, 0.5))
-	if Input.is_action_pressed("change_tool_mode") and _control_pts.size() > 0:
-		var circle_radius := Vector2.ONE * (5.0 / Global.camera.zoom.x)
-		focus_idx = maxi(BoxState.SIDE_A, focus_idx - 1)
-		var focus_point: = Vector2(_control_pts[focus_idx])
-		if focus_idx > 0:
-			prev_point = _control_pts[focus_idx - 1]
-		canvas.draw_line(prev_point, focus_point, Color.WHITE)
-		var arrow = (prev_point - focus_point).normalized()
-		canvas.draw_line(focus_point, focus_point + arrow.rotated(deg_to_rad(15)), Color.WHITE)
-		canvas.draw_line(focus_point, focus_point + arrow.rotated(deg_to_rad(-15)), Color.WHITE)
-
 	for i: int in box_points.size():
 		var point: Vector2 = box_points[i]
 		canvas.draw_set_transform(point + Vector2(0.5, 0.5))
-		canvas.draw_arc(Vector2.ZERO, 0.2, 0, 360, 360, Color.YELLOW)
-		canvas.draw_arc(Vector2.ZERO, 0.4, 0, 360, 360, Color.WHITE)
+		# Draw points on screen
+		canvas.draw_circle(Vector2.ZERO, 0.2, Color.WHITE, false)
+		canvas.draw_circle(Vector2.ZERO, 0.4, Color.WHITE, false)
 		canvas.draw_line(Vector2.UP * 0.5, Vector2.DOWN * 0.5, Color.WHITE)
 		canvas.draw_line(Vector2.RIGHT * 0.5, Vector2.LEFT * 0.5, Color.WHITE)
+		var current_pixel = Global.canvas.current_pixel.floor()
 		if i == 3:
 			Global.canvas.measurements.draw.connect(
-				_preview_measurement.bind(Global.canvas.current_pixel.floor(), point)
+				_preview_measurement.bind(current_pixel, point)
 			)
 			Global.canvas.measurements.queue_redraw()
 
@@ -277,7 +266,7 @@ func _draw_shape() -> void:
 		var project := Global.current_project
 		var central_point := project.tiles.get_canon_position(_origin)
 		var positions := project.tiles.get_point_in_tiles(central_point)
-		var offset = min(0, a.y, (a + b).y, b.y) - 1
+		var offset = min(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y) - 1
 		var draw_rectangle := _get_draw_rect()
 		if Global.current_project.has_selection and project.tiles.mode == Tiles.MODE.NONE:
 			positions = Global.current_project.selection_map.get_point_in_tile_mode(central_point)
@@ -446,11 +435,14 @@ func generate_isometric_box(
 ) -> Image:
 	# a is ↘, b is ↗  (both of them are basis vectors)
 	var h := Vector2i(0, box_height)
-	var width: int = max(0, a.x, (a + gap).x, (a + gap + b).x, b.x) + 1
-	var height: int = max(0, a.y, (a + gap + b).y, b.y) - min(0, a.y, (a + gap + b).y, b.y) + box_height + 2
+	var width: int = (a + gap + b).x + 1
+	var height: int = (
+		max(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y)
+		- min(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y) + abs(box_height + 2)
+	)
 
 	# starting point of upper plate
-	var u_st = Vector2i(0, abs(min(0, a.y, (a + gap + b).y, b.y)) + 1)
+	var u_st = Vector2i(0, abs(min(0, a.y, b.y, (b + gap).y, (a + gap).y, (a + gap + b).y)) + 1)
 	# starting point of lower plate
 	var b_st = u_st + h
 	# a convenient lambdha function
@@ -503,17 +495,21 @@ func generate_isometric_box(
 			elif point in edge_right or point in edge_down_right:
 				edge_color = c_r
 				should_color = true
-			if should_color:
-				image.set_pixelv(point, edge_color)
-				continue
-
 			## Shape filling
-			if Geometry2D.is_point_in_polygon(point, top_poly):
-				image.set_pixel(x, y, c_t)
+			elif Geometry2D.is_point_in_polygon(point, top_poly):
+				image.set_pixelv(point, c_t)
 			elif Geometry2D.is_point_in_polygon(point, b_l_poly):
-				image.set_pixel(x, y, c_l)
+				image.set_pixelv(point, c_l)
 			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
-				image.set_pixel(x, y, c_r)
+				image.set_pixelv(point, c_r)
+			if should_color:
+				if !blend_edge:
+					edge_color = (c_t + c_l + c_r) / 3.0
+					if edge_color.is_equal_approx(c_t):
+						edge_color = edge_color.darkened(0.5)
+						if edge_color.is_equal_approx(c_t):
+							edge_color = edge_color.lightened(0.5)
+				image.set_pixelv(point, edge_color)
 	return image
 
 
