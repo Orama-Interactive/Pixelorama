@@ -172,6 +172,7 @@ func draw_end(pos: Vector2i) -> void:
 	if _current_state == BoxState.READY:
 		_draw_shape()
 	super.draw_end(pos)
+	Global.canvas.measurements.queue_redraw()
 
 
 func draw_preview() -> void:
@@ -195,11 +196,15 @@ func draw_preview() -> void:
 		canvas.draw_circle(Vector2.ZERO, 0.4, Color.WHITE, false)
 		canvas.draw_line(Vector2.UP * 0.5, Vector2.DOWN * 0.5, Color.WHITE)
 		canvas.draw_line(Vector2.RIGHT * 0.5, Vector2.LEFT * 0.5, Color.WHITE)
+	if box_points.size() in [2, 4]:
 		var current_pixel = Global.canvas.current_pixel.floor()
-		if i == 3:
-			# We are using the measurementsnode for measurement based previews.
-			Global.canvas.measurements.draw.connect(_preview_measurement.bind(current_pixel, point))
-			Global.canvas.measurements.queue_redraw()
+		current_pixel = box_constraint(_last_pixel, current_pixel, _current_state)
+		var prefix = "Corner" if box_points.size() == 2 else "Height"
+		# We are using the measurementsnode for measurement based previews.
+		Global.canvas.measurements.draw.connect(
+			_preview_measurement.bind(current_pixel, box_points[-1], prefix, "px")
+		)
+		Global.canvas.measurements.queue_redraw()
 
 	for points: Array[Vector2i] in _iso_box_outline(box_points).values():
 		for i in points.size():
@@ -216,20 +221,21 @@ func draw_preview() -> void:
 	previews.texture = texture
 
 
-func _preview_measurement(point_a: Vector2, point_b: Vector2) -> void:
+func _preview_measurement(point_a: Vector2, point_b: Vector2, prefix := "", suffix := "") -> void:
 	var measurements = Global.canvas.measurements
 	var font = measurements.font
 	var line_color = Color.WHITE
-	measurements.draw_set_transform(point_b + Vector2(0.5, 0.5))
-	var length = absi(point_a.y - point_b.y)
-	measurements.draw_line(Vector2(2, -length), Vector2.RIGHT * 2, line_color)
-	measurements.draw_line(Vector2.RIGHT, Vector2.RIGHT * 2, line_color)
-	measurements.draw_line(Vector2(1, -length), Vector2(2, -length), line_color)
+	var offset = (point_a - point_b).rotated(PI / 2).normalized()
+	measurements.draw_set_transform(Vector2(0.5, 0.5) + offset)
+	var length = int(point_a.distance_to(point_b))
+	measurements.draw_line(point_a + offset, point_b + offset, line_color)
+	measurements.draw_line(point_a, point_a + offset, line_color)
+	measurements.draw_line(point_b, point_b + offset, line_color)
+	var pos = point_a + (point_b - point_a) / 2
 	measurements.draw_set_transform(
-		point_b + Vector2(0.5, 0.5), Global.camera.rotation, Vector2.ONE / Global.camera.zoom
+		pos + offset * 5, Global.camera.rotation, Vector2.ONE / Global.camera.zoom
 	)
-	var pos = Vector2(3, -length / 2.0) * Global.camera.zoom
-	measurements.draw_string(font, pos, str(length))
+	measurements.draw_string(font, Vector2i.ZERO, str(prefix, ": ", length, " ", suffix))
 	Global.canvas.measurements.draw.disconnect(_preview_measurement)
 
 
@@ -572,6 +578,11 @@ func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2
 			> Vector2(_control_pts[1] - _control_pts[0]).angle()
 		):
 			point = old_point
+	elif state == BoxState.H:
+		# restriction on H:
+		# It's x-value is always constant. and y-value is always in upward direction
+		point.x = _control_pts[2].x
+		point.y = _control_pts[2].y - abs(floori(point.distance_to(_control_pts[2])))
 	return point
 
 
