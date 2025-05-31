@@ -441,9 +441,8 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 				edge_1_2.clear()
 				for point in gap_points:
 					# NOTE: Height vector is negative so that it points upwards
-					var end = point + height
-					if height != Vector2i.ZERO:
-						end += Vector2i(0, _thickness - 1)
+					var end = point + height #+ Vector2i(0, _thickness)
+					end.y = min(point.y, end.y)
 					edge_1_2.append_array(Geometry2D.bresenham_line(point, end))
 	if _current_state < BoxState.READY:
 		box_points.resize(box_points.size() - 1)
@@ -515,24 +514,35 @@ func generate_isometric_box(
 		return
 	var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
 	for x: int in width:
+		var top_started: bool = false
+		var middle_edge_offset := INF  # Allows top polygon to be drawn before starting middle edge.
 		for y: int in height:
 			var point = Vector2i(x, y)
 			## Edge coloring
 			var edge_color: Color
 			var should_color := false
-			if point in edge_1_2:
+			if point in edge_0_1:
+				edge_color = get_blend_color(c_t, c_l, blend_mode)
+				top_started = false
+				should_color = true
+			elif point in edge_0_2:
+				edge_color = get_blend_color(c_t, c_r, blend_mode)
+				top_started = false
+				should_color = true
+			elif point in edge_1_2:
+				if middle_edge_offset == INF:
+					middle_edge_offset = y + _thickness
+				if top_started:  # Fills any points missed by top ponygon
+					if point.y < middle_edge_offset and blend_mode == EdgeBlend.NONE:
+						image.set_pixelv(point, c_t)
+						continue
 				var least_x = edge_1_2[0].x
 				var max_x = edge_1_2[edge_1_2.size() - 1].x
 				if point.x <= least_x + floori((max_x - least_x) / 2.0):
 					edge_color = get_blend_color(c_l, c_r, blend_mode)
 				else:
 					edge_color = get_blend_color(c_r, c_l, blend_mode)
-				should_color = true
-			elif point in edge_0_1:
-				edge_color = get_blend_color(c_t, c_l, blend_mode)
-				should_color = true
-			elif point in edge_0_2:
-				edge_color = get_blend_color(c_t, c_r, blend_mode)
+				top_started = false
 				should_color = true
 			elif point in edge_up:
 				edge_color = get_blend_color(c_t, c_t, blend_mode)
@@ -545,6 +555,7 @@ func generate_isometric_box(
 				should_color = true
 			## Shape filling
 			elif Geometry2D.is_point_in_polygon(point, top_poly):
+				top_started = true
 				image.set_pixelv(point, c_t)
 			elif Geometry2D.is_point_in_polygon(point, b_l_poly):
 				image.set_pixelv(point, c_l)
