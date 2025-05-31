@@ -594,6 +594,28 @@ tooltip_text = "If disabled, the grid will be drawn only over the original image
 mouse_default_cursor_shape = 2
 text = "On"
 
+[node name="PixelatedLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+text = "Pixelated"
+
+[node name="GridPixelated" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+disabled = true
+text = "On"
+clip_text = true
+
+[node name="YSeperatedLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+text = "Y Separated"
+
+[node name="GridYSeperated" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
+layout_mode = 2
+tooltip_text = "Disabled: Tiles below start immediately after above tiles.
+
+Enabled: Tiles below start with a vertical offset depending on tile size"
+disabled = true
+text = "On"
+
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 layout_mode = 2
 tooltip_text = "A color of the grid"
