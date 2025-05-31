@@ -1,7 +1,7 @@
 extends BaseDrawTool
 
 enum BoxState { SIDE_A, SIDE_GAP, SIDE_B, H, READY }
-enum EdgeBlend { TOOL_COLOR, ADJUSTED_AVERAGE, BLEND_INTERFACE, NONE}
+enum EdgeBlend { TOOL_COLOR, ADJUSTED_AVERAGE, BLEND_INTERFACE, NONE }
 
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _thickness := 1  ## The thickness of the Edge.
