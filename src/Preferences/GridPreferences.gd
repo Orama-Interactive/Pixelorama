@@ -206,5 +206,5 @@ func manage_button_disabling(grid_data: Dictionary):
 		$GridPixelated.disabled = false
 		if grid_data.get("is_pixelated", false) == true:
 			$GridYSeperated.disabled = false
-	$GridPixelated.text = "Disabled" if $GridPixelated.disabled else ""
-	$GridYSeperated.text = "Disabled" if $GridYSeperated.disabled else ""
+	$GridPixelated.text = "Disabled" if $GridPixelated.disabled else "On"
+	$GridYSeperated.text = "Disabled" if $GridYSeperated.disabled else "On"
