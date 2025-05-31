@@ -115,9 +115,17 @@ func _on_grid_pref_value_changed(value, pref: GridPreference, button: RestoreDef
 		grid_info = grids[grid_selected]
 		grid_info[prop] = value
 		grids[grid_selected] = grid_info
+		# NOTE: All prop values of bool type in grid_info that don't have a direct mapping in
+		# the Grid class gets assigned or removed from the special_flags based on if it's value
+		# is true or false.
 		Global.update_grids(grids)
 		var default_value = pref.default_value
 		var disable: bool = Global.grids[grid_selected].get(prop) == default_value
+		# NOTE: special_flags are special switches that may be different for different grids
+		# for example the y_separated flag is only specific to the isometric grid.
+		var special_flags = Global.grids[grid_selected].get("special_flags")
+		if special_flags and typeof(special_flags) == TYPE_PACKED_STRING_ARRAY:
+			disable = (prop in special_flags) == default_value if !disable else disable
 		if typeof(value) == TYPE_COLOR:
 			disable = value.is_equal_approx(default_value)
 		disable_restore_default_button(button, disable)
