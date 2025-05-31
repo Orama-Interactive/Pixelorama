@@ -34,13 +34,23 @@ unique_name_in_owner = true
 layout_mode = 2
 selected = 0
 fit_to_longest_item = false
-item_count = 2
-popup/item_0/text = "Constant (Auto)"
+item_count = 4
+popup/item_0/text = "Tool color"
 popup/item_0/id = 0
-popup/item_1/text = "Blend at interface"
+popup/item_1/text = "Adjusted average"
 popup/item_1/id = 1
+popup/item_2/text = "Blend at interface"
+popup/item_2/id = 2
+popup/item_3/text = "None"
+popup/item_3/id = 3
 
-[node name="LabelContainer" type="HBoxContainer" parent="FillOptions" index="2"]
+[node name="ColorFromTool" type="CheckBox" parent="FillOptions" index="2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "From other tool"
+
+[node name="LabelContainer" type="HBoxContainer" parent="FillOptions" index="3"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="FillOptions/LabelContainer" index="0"]
@@ -51,7 +61,7 @@ text = "Left Face"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LeftShadeOption" type="OptionButton" parent="FillOptions" index="3"]
+[node name="LeftShadeOption" type="OptionButton" parent="FillOptions" index="4"]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 1
@@ -61,7 +71,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Darken"
 popup/item_1/id = 1
 
-[node name="LeftShadeSlider" parent="FillOptions" index="4" instance=ExtResource("3_xw18e")]
+[node name="LeftShadeSlider" parent="FillOptions" index="5" instance=ExtResource("3_xw18e")]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -69,7 +79,7 @@ step = 0.01
 value = 0.5
 prefix = "Amount:"
 
-[node name="LabelContainer2" type="HBoxContainer" parent="FillOptions" index="5"]
+[node name="LabelContainer2" type="HBoxContainer" parent="FillOptions" index="6"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="FillOptions/LabelContainer2" index="0"]
@@ -80,7 +90,7 @@ text = "Right Face"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RightShadeOption" type="OptionButton" parent="FillOptions" index="6"]
+[node name="RightShadeOption" type="OptionButton" parent="FillOptions" index="7"]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -90,7 +100,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Darken"
 popup/item_1/id = 1
 
-[node name="RightShadeSlider" parent="FillOptions" index="7" instance=ExtResource("3_xw18e")]
+[node name="RightShadeSlider" parent="FillOptions" index="8" instance=ExtResource("3_xw18e")]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -108,6 +118,7 @@ one_shot = true
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_thickness_value_changed"]
 [connection signal="toggled" from="FillCheckbox" to="." method="_on_fill_checkbox_toggled"]
 [connection signal="item_selected" from="FillOptions/EdgeBehavior" to="." method="_on_edge_behavior_item_selected"]
+[connection signal="toggled" from="FillOptions/ColorFromTool" to="." method="_on_color_from_tool_toggled"]
 [connection signal="item_selected" from="FillOptions/LeftShadeOption" to="." method="_on_left_shade_option_item_selected"]
 [connection signal="value_changed" from="FillOptions/LeftShadeSlider" to="." method="_on_left_shade_slider_value_changed"]
 [connection signal="item_selected" from="FillOptions/RightShadeOption" to="." method="_on_right_shade_option_item_selected"]

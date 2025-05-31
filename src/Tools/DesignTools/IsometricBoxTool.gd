@@ -1,12 +1,13 @@
 extends BaseDrawTool
 
 enum BoxState { SIDE_A, SIDE_GAP, SIDE_B, H, READY }
+enum EdgeBlend { TOOL_COLOR, ADJUSTED_AVERAGE, BLEND_INTERFACE, NONE}
 
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _thickness := 1  ## The thickness of the Edge.
 var _drawing := false  ## Set to true when shape is being drawn.
-## 0 - the edge blends at face interface. 1 - the edge is calculated based on all colors.
-var _blend_edge_mode := 0
+var _blend_edge_mode := EdgeBlend.TOOL_COLOR  ## The blend method used by edges
+var _color_from_other_tool := false
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _current_state: int = BoxState.SIDE_A  ## Current state of the bezier curve (in SINGLE mode)
 var _last_pixel: Vector2i
@@ -35,15 +36,25 @@ func _on_thickness_value_changed(value: int) -> void:
 
 
 func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
-	_fill_inside = toggled_on
-	update_config()
-	save_config()
+	if _fill_inside != toggled_on:
+		_fill_inside = toggled_on
+		update_config()
+		save_config()
 
 
 func _on_edge_behavior_item_selected(index: int) -> void:
+	@warning_ignore("int_as_enum_without_cast")
 	_blend_edge_mode = index
+	%ColorFromTool.visible = _blend_edge_mode == EdgeBlend.TOOL_COLOR
 	update_config()
 	save_config()
+
+
+func _on_color_from_tool_toggled(toggled_on: bool) -> void:
+	if _color_from_other_tool != toggled_on:
+		_color_from_other_tool = toggled_on
+		update_config()
+		save_config()
 
 
 func _on_left_shade_option_item_selected(_index: int) -> void:
@@ -57,15 +68,17 @@ func _on_right_shade_option_item_selected(_index: int) -> void:
 
 
 func _on_left_shade_slider_value_changed(value: float) -> void:
-	_left_shade_value = value
-	update_config()
-	save_config()
+	if _left_shade_value != value:
+		_left_shade_value = value
+		update_config()
+		save_config()
 
 
 func _on_right_shade_slider_value_changed(value: float) -> void:
-	_right_shade_value = value
-	update_config()
-	save_config()
+	if _right_shade_value != value:
+		_left_shade_value = value
+		update_config()
+		save_config()
 
 
 func update_indicator() -> void:
@@ -81,6 +94,7 @@ func get_config() -> Dictionary:
 	config["thickness"] = _thickness
 	config["fill_inside"] = _fill_inside
 	config["blend_edge_mode"] = _blend_edge_mode
+	config["color_from_other_tool"] = _color_from_other_tool
 	config["left_shade_value"] = _left_shade_value
 	config["right_shade_value"] = _right_shade_value
 	config["left_shade_option"] = %LeftShadeOption.selected
@@ -93,10 +107,14 @@ func set_config(config: Dictionary) -> void:
 	_thickness = config.get("thickness", _thickness)
 	_fill_inside = config.get("fill_inside", _fill_inside)
 	_blend_edge_mode = config.get("blend_edge_mode", _blend_edge_mode)
+	_color_from_other_tool = config.get("color_from_other_tool", _color_from_other_tool)
 	_left_shade_value = config.get("left_shade_value", _left_shade_value)
 	_right_shade_value = config.get("right_shade_value", _right_shade_value)
+
 	%LeftShadeOption.select(config.get("left_shade_option", 1))
 	%RightShadeOption.select(config.get("right_shade_option", 0))
+	%ColorFromTool.visible = _blend_edge_mode == EdgeBlend.TOOL_COLOR
+	%ColorFromTool.button_pressed = _color_from_other_tool
 
 
 func update_config() -> void:
@@ -105,6 +123,7 @@ func update_config() -> void:
 	$FillCheckbox.button_pressed = _fill_inside
 	$FillOptions.visible = _fill_inside
 	%EdgeBehavior.selected = _blend_edge_mode
+	%ColorFromTool.button_pressed = _color_from_other_tool
 	%LeftShadeSlider.value = _left_shade_value
 	%RightShadeSlider.value = _right_shade_value
 
@@ -199,10 +218,12 @@ func draw_preview() -> void:
 	if box_points.size() in [2, 4]:
 		var current_pixel = Global.canvas.current_pixel.floor()
 		current_pixel = box_constraint(_last_pixel, current_pixel, _current_state)
+		var length = int(current_pixel.distance_to(box_points[-1]))
 		var prefix = "Corner" if box_points.size() == 2 else "Height"
+		var str_val = str(prefix, ": ", length + 1 if box_points.size() == 2 else length, " ", "px")
 		# We are using the measurementsnode for measurement based previews.
 		Global.canvas.measurements.draw.connect(
-			_preview_measurement.bind(current_pixel, box_points[-1], prefix, "px")
+			_preview_updater.bind(current_pixel, box_points[-1], str_val)
 		)
 		Global.canvas.measurements.queue_redraw()
 
@@ -221,13 +242,12 @@ func draw_preview() -> void:
 	previews.texture = texture
 
 
-func _preview_measurement(point_a: Vector2, point_b: Vector2, prefix := "", suffix := "") -> void:
+func _preview_updater(point_a: Vector2, point_b: Vector2, str_value: String) -> void:
 	var measurements = Global.canvas.measurements
 	var font = measurements.font
 	var line_color = Color.WHITE
 	var offset = (point_a - point_b).rotated(PI / 2).normalized()
 	measurements.draw_set_transform(Vector2(0.5, 0.5) + offset)
-	var length = int(point_a.distance_to(point_b))
 	measurements.draw_line(point_a + offset, point_b + offset, line_color)
 	measurements.draw_line(point_a, point_a + offset, line_color)
 	measurements.draw_line(point_b, point_b + offset, line_color)
@@ -235,8 +255,8 @@ func _preview_measurement(point_a: Vector2, point_b: Vector2, prefix := "", suff
 	measurements.draw_set_transform(
 		pos + offset * 5, Global.camera.rotation, Vector2.ONE / Global.camera.zoom
 	)
-	measurements.draw_string(font, Vector2i.ZERO, str(prefix, ": ", length, " ", suffix))
-	Global.canvas.measurements.draw.disconnect(_preview_measurement)
+	measurements.draw_string(font, Vector2i.ZERO, str_value)
+	Global.canvas.measurements.draw.disconnect(_preview_updater)
 
 
 func _draw_shape() -> void:
@@ -264,7 +284,7 @@ func _draw_shape() -> void:
 			else color.darkened(_right_shade_value)
 		)
 		var box_img = generate_isometric_box(
-			a, gap, b, h.y, color, left_color, right_color, _blend_edge_mode == 1
+			a, gap, b, h.y, color, left_color, right_color, _blend_edge_mode
 		)
 		if !box_img:  # Invalid shape
 			_clear()
@@ -354,7 +374,6 @@ func _clear() -> void:
 ## points required to construct a box.
 ## namely origin, first edge end, gap end, second edge end, height end
 func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
-	var new_thickness = _thickness
 	var origin: Vector2i = box_points.pop_front()
 	if _current_state < BoxState.READY:
 		box_points.append(_last_pixel)
@@ -368,13 +387,13 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 	var edge_1_2: Array[Vector2i]
 	if box_points.size() >= 1:  # Line
 		# (origin --> point A)
-		edge_0_1.append_array(bresenham_line_thickness(origin, box_points[0], new_thickness))
+		edge_0_1.append_array(bresenham_line_thickness(origin, box_points[0], _thickness))
 		if box_points.size() >= 2:  # Isometric box
 			# (point A --> point A + gap)
 			var gap = box_points[1] - box_points[0]
 			var point_b = box_points[1]  # Assume it's the same as gap point for now
 			var gap_points = bresenham_line_thickness(
-				box_points[0], box_points[0] + gap, new_thickness
+				box_points[0], box_points[0] + gap, _thickness
 			)
 			if box_points.size() < 4:  # Optimization
 				edge_1_2.append_array(gap_points)
@@ -382,19 +401,19 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 				# (point A + gap --> point B)
 				point_b = box_points[2]
 				edge_0_2.append_array(
-					bresenham_line_thickness(box_points[0] + gap, point_b, new_thickness)
+					bresenham_line_thickness(box_points[0] + gap, point_b, _thickness)
 				)
 			# draw the other sides of isometric polygon (we also add a 1px vertical offset)
 			var upper_a = point_b - box_points[1] + origin + Vector2i.UP  # origin + point A basis
 			# (point B --> upper_a + gap)
 			edge_up.append_array(
-				bresenham_line_thickness(point_b + Vector2i.UP, upper_a + gap, new_thickness)
+				bresenham_line_thickness(point_b + Vector2i.UP, upper_a + gap, _thickness)
 			)
 			# (upper_a + gap --> upper_a)
-			edge_up.append_array(bresenham_line_thickness(upper_a + gap, upper_a, new_thickness))
+			edge_up.append_array(bresenham_line_thickness(upper_a + gap, upper_a, _thickness))
 			# (upper_a --> origin)
 			edge_up.append_array(
-				bresenham_line_thickness(upper_a, origin + Vector2i.UP, new_thickness)
+				bresenham_line_thickness(upper_a, origin + Vector2i.UP, _thickness)
 			)
 			if box_points.size() == 4:
 				# move the polygon up a height
@@ -407,21 +426,25 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 					edge_up[i] += height
 				## Add new foundation lines
 				edge_down_left.append_array(
-					bresenham_line_thickness(origin, box_points[0], new_thickness)
+					bresenham_line_thickness(origin, box_points[0], _thickness)
 				)
 				edge_down_right.append_array(
-					bresenham_line_thickness(box_points[0] + gap, point_b, new_thickness)
+					bresenham_line_thickness(box_points[0] + gap, point_b, _thickness)
 				)
 				# Draw left/right vertical boundaries
 				edge_left.append_array(
-					bresenham_line_thickness(origin, origin + height, new_thickness)
+					bresenham_line_thickness(origin, origin + height, _thickness)
 				)
 				edge_right.append_array(
-					bresenham_line_thickness(point_b, point_b + height, new_thickness)
+					bresenham_line_thickness(point_b, point_b + height, _thickness)
 				)
 				edge_1_2.clear()
 				for point in gap_points:
-					edge_1_2.append_array(Geometry2D.bresenham_line(point, point + height))
+					# NOTE: Height vector is negative so that it points upwards
+					var end = point + height
+					if height != Vector2i.ZERO:
+						end += Vector2i(0, _thickness - 1)
+					edge_1_2.append_array(Geometry2D.bresenham_line(point, end))
 	if _current_state < BoxState.READY:
 		box_points.resize(box_points.size() - 1)
 	return {
@@ -444,7 +467,7 @@ func generate_isometric_box(
 	c_t: Color,
 	c_l: Color,
 	c_r: Color,
-	blend_edge := false
+	blend_mode := EdgeBlend.TOOL_COLOR
 ) -> Image:
 	# a is ↘, b is ↗  (both of them are basis vectors)
 	var h := Vector2i(0, box_height)
@@ -498,22 +521,27 @@ func generate_isometric_box(
 			var edge_color: Color
 			var should_color := false
 			if point in edge_1_2:
-				edge_color = Color(c_l.r + c_r.r, c_l.g + c_r.g, c_l.b + c_r.b, c_l.a + c_r.a)
+				var least_x = edge_1_2[0].x
+				var max_x = edge_1_2[edge_1_2.size() - 1].x
+				if point.x <= least_x + floori((max_x - least_x) / 2.0):
+					edge_color = get_blend_color(c_l, c_r, blend_mode)
+				else:
+					edge_color = get_blend_color(c_r, c_l, blend_mode)
 				should_color = true
 			elif point in edge_0_1:
-				edge_color = Color(c_t.r + c_l.r, c_t.g + c_l.g, c_t.b + c_l.b, c_t.a + c_l.a)
+				edge_color = get_blend_color(c_t, c_l, blend_mode)
 				should_color = true
 			elif point in edge_0_2:
-				edge_color = Color(c_t.r + c_r.r, c_t.g + c_r.g, c_t.b + c_r.b, c_t.a + c_r.a)
+				edge_color = get_blend_color(c_t, c_r, blend_mode)
 				should_color = true
 			elif point in edge_up:
-				edge_color = c_t
+				edge_color = get_blend_color(c_t, c_t, blend_mode)
 				should_color = true
 			elif point in edge_left or point in edge_down_left:
-				edge_color = c_l
+				edge_color = get_blend_color(c_l, c_l, blend_mode)
 				should_color = true
 			elif point in edge_right or point in edge_down_right:
-				edge_color = c_r
+				edge_color = get_blend_color(c_r, c_r, blend_mode)
 				should_color = true
 			## Shape filling
 			elif Geometry2D.is_point_in_polygon(point, top_poly):
@@ -523,15 +551,34 @@ func generate_isometric_box(
 			elif Geometry2D.is_point_in_polygon(point, b_r_poly):
 				image.set_pixelv(point, c_r)
 			if should_color:
-				edge_color = edge_color if box_height > 0 else c_t
-				if !blend_edge:
-					edge_color = (c_t + c_l + c_r) / 3.0
+				if blend_mode == EdgeBlend.ADJUSTED_AVERAGE:
+					edge_color = (c_t + c_l + c_r) / 3
+					# If the color gets equal to the top tool color, then this only happens when
+					# all sides have same color and we'd end up getting a single colored blob so
+					# we cheat a bit and change the color a little.
 					if edge_color.is_equal_approx(c_t):
 						edge_color = edge_color.darkened(0.5)
 						if edge_color.is_equal_approx(c_t):
 							edge_color = edge_color.lightened(0.5)
+				edge_color = edge_color if box_height > 0 else c_t
 				image.set_pixelv(point, edge_color)
 	return image
+
+
+func get_blend_color(face_color: Color, interface_color: Color, blend_mode):
+	var tool_color = tool_slot.color
+	match blend_mode:
+		EdgeBlend.TOOL_COLOR:
+			if _color_from_other_tool:
+				var button = MOUSE_BUTTON_LEFT
+				if tool_slot.button == MOUSE_BUTTON_LEFT:
+					button = MOUSE_BUTTON_RIGHT
+				return Tools.get_assigned_color(button)
+			return tool_color
+		EdgeBlend.BLEND_INTERFACE:
+			return (face_color + interface_color) / 2
+		_:
+			return face_color
 
 
 func angle_constraint(point: Vector2) -> Vector2i:
