@@ -441,7 +441,7 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 				edge_1_2.clear()
 				for point in gap_points:
 					# NOTE: Height vector is negative so that it points upwards
-					var end = point + height #+ Vector2i(0, _thickness)
+					var end = point + height
 					end.y = min(point.y, end.y)
 					edge_1_2.append_array(Geometry2D.bresenham_line(point, end))
 	if _current_state < BoxState.READY:
