@@ -47,14 +47,10 @@ popup/item_1/id = 1
 popup/item_2/text = "Whole selection"
 popup/item_2/id = 2
 
-[node name="AreaOptions" type="OptionButton" parent="." index="4"]
-visible = false
+[node name="MergeAreaOptions" type="CheckBox" parent="." index="4"]
 layout_mode = 2
-item_count = 2
-popup/item_0/text = "Sample cel area"
-popup/item_0/id = 0
-popup/item_1/text = "Sample frame area"
-popup/item_1/id = 1
+text = "Fill regions from the merging of all layers"
+autowrap_mode = 3
 
 [node name="ToleranceSlider" type="TextureProgressBar" parent="." index="5"]
 custom_minimum_size = Vector2(32, 24)
@@ -120,7 +116,7 @@ layout_mode = 2
 prefix = "Offset Y:"
 
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
-[connection signal="item_selected" from="AreaOptions" to="." method="_on_area_options_item_selected"]
+[connection signal="toggled" from="MergeAreaOptions" to="." method="_on_merge_area_options_toggled"]
 [connection signal="value_changed" from="ToleranceSlider" to="." method="_on_tolerance_slider_value_changed"]
 [connection signal="item_selected" from="FillWithOptions" to="." method="_on_FillWithOptions_item_selected"]
 [connection signal="pressed" from="FillPattern/Type" to="." method="_on_PatternType_pressed"]

@@ -1,7 +1,6 @@
 extends BaseTool
 
 enum FillArea { AREA, COLORS, SELECTION }
-enum AreaSample { CEL_AREA, FRAME_AREA }
 enum FillWith { COLOR, PATTERN }
 
 const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.gdshader")
@@ -14,14 +13,15 @@ var _pattern: Patterns.Pattern
 var _tolerance := 0.003
 var _fill_area: int = FillArea.AREA
 var _fill_with: int = FillWith.COLOR
-var _area_sample_mode := AreaSample.CEL_AREA
+var _fill_merged_area := false  ## Fill regions from the merging of all layers
 var _offset_x := 0
 var _offset_y := 0
 ## Working array used as buffer for segments while flooding
 var _allegro_flood_segments: Array[Segment]
 ## Results array per image while flooding
 var _allegro_image_segments: Array[Segment]
-
+## Used for _fill_merged_area = true
+var sample_masks: Dictionary[Frame, Image] = {}
 
 class Segment:
 	var flooding := false
@@ -61,16 +61,15 @@ func _on_FillAreaOptions_item_selected(index: int) -> void:
 	save_config()
 
 
-func _on_area_options_item_selected(index: int) -> void:
-	@warning_ignore("int_as_enum_without_cast")
-	_area_sample_mode = index
+func _on_merge_area_options_toggled(toggled_on: bool) -> void:
+	_fill_merged_area = toggled_on
 	update_config()
 	save_config()
 
 
 func _select_fill_area_optionbutton() -> void:
 	$FillAreaOptions.selected = _fill_area
-	$AreaOptions.visible = _fill_area == FillArea.AREA
+	$MergeAreaOptions.visible = _fill_area == FillArea.AREA
 	$ToleranceSlider.visible = (_fill_area != FillArea.SELECTION)
 
 
@@ -115,14 +114,14 @@ func get_config() -> Dictionary:
 	if !_pattern:
 		return {
 			"fill_area": _fill_area,
-			"area_sample_mode": _area_sample_mode,
+			"fill_merged_area": _fill_merged_area,
 			"fill_with": _fill_with,
 			"tolerance": _tolerance
 		}
 	return {
 		"pattern_index": _pattern.index,
 		"fill_area": _fill_area,
-		"area_sample_mode": _area_sample_mode,
+		"fill_merged_area": _fill_merged_area,
 		"fill_with": _fill_with,
 		"tolerance": _tolerance,
 		"offset_x": _offset_x,
@@ -135,7 +134,7 @@ func set_config(config: Dictionary) -> void:
 		var index = config.get("pattern_index", _pattern.index)
 		_pattern = Global.patterns_popup.get_pattern(index)
 	_fill_area = config.get("fill_area", _fill_area)
-	_area_sample_mode = config.get("area_sample_mode", _area_sample_mode)
+	_fill_merged_area = config.get("fill_merged_area", _fill_merged_area)
 	_fill_with = config.get("fill_with", _fill_with)
 	_tolerance = config.get("tolerance", _tolerance)
 	_offset_x = config.get("offset_x", _offset_x)
@@ -150,7 +149,7 @@ func update_config() -> void:
 	$FillPattern.visible = _fill_with == FillWith.PATTERN
 	$FillPattern/OffsetX.value = _offset_x
 	$FillPattern/OffsetY.value = _offset_y
-	$AreaOptions.selected = _area_sample_mode
+	$MergeAreaOptions.button_pressed = _fill_merged_area
 
 
 func update_pattern() -> void:
@@ -181,6 +180,18 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	if not Global.current_project.can_pixel_get_drawn(pos):
 		return
+	if _fill_merged_area and _fill_area == FillArea.AREA:
+		var project := Global.current_project
+		for frame_layer: Array in project.selected_cels:
+			if project.frames[frame_layer[0]].cels[frame_layer[0]] is PixelCel:
+				var frame := project.frames[frame_layer[0]]
+				if not sample_masks.has(frame):
+					var mask := Image.create(
+						project.size.x, project.size.y, false, Image.FORMAT_RGBA8
+					)
+					mask.fill(Color(0, 0, 0, 0))
+					DrawingAlgos.blend_layers(mask, frame)
+					sample_masks[frame] = mask
 	fill(pos)
 
 
@@ -201,6 +212,7 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	if _picking_color:
 		return
+	sample_masks.clear()
 	commit_undo()
 
 
@@ -362,27 +374,13 @@ func _flood_fill(pos: Vector2i) -> void:
 		return
 
 	var cels = _get_selected_draw_cels()
-	var sample_masks: Dictionary[Frame, Image] = {}
-	var cel_frame: Dictionary[BaseCel, Frame] = {}
 	for cel: PixelCel in cels:
-		if _area_sample_mode == AreaSample.FRAME_AREA:
-			for frame_layer: Array in project.selected_cels:
-				if project.frames[frame_layer[0]].cels.has(cel):
-					var frame := project.frames[frame_layer[0]]
-					if not sample_masks.has(frame):
-						var mask := Image.create(
-							project.size.x, project.size.y, false, Image.FORMAT_RGBA8
-						)
-						mask.fill(Color(0, 0, 0, 0))
-						DrawingAlgos.blend_layers(mask, frame)
-						cel_frame[cel] = frame
-						sample_masks[frame] = mask
 		var image: ImageExtended = cel.image
 		if Tools.check_alpha_lock(image, pos):
 			continue
 		var color: Color = image.get_pixelv(pos)
-		if _area_sample_mode == AreaSample.FRAME_AREA:
-			color = sample_masks[cel_frame[cel]].get_pixelv(pos)
+		if _fill_merged_area:
+			color = sample_masks.get(cel.get_frame(project), cel.image).get_pixelv(pos)
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
@@ -398,7 +396,7 @@ func _flood_fill(pos: Vector2i) -> void:
 		_compute_segments_for_image(
 			pos,
 			project,
-			image if _area_sample_mode != AreaSample.FRAME_AREA else sample_masks[cel_frame[cel]],
+			image if !_fill_merged_area else sample_masks.get(cel.get_frame(project), cel.image),
 			color
 		)
 		# now actually color the image: since we have already checked a few things for the points
