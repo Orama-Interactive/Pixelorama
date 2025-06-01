@@ -580,6 +580,8 @@ func assign_color(color: Color, button: int, change_alpha := true, index: int = 
 
 
 func get_assigned_color(button: int) -> Color:
+	if !_slots.has(button):  # Failsafe
+		return Color(0, 0, 0, 0)
 	return _slots[button].color
 
 
