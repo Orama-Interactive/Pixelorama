@@ -124,7 +124,11 @@ func _on_grid_pref_value_changed(value, pref: GridPreference, button: RestoreDef
 		# NOTE: special_flags are special switches that may be different for different grids
 		# for example the y_separated flag is only specific to the isometric grid.
 		var special_flags = Global.grids[grid_selected].get("special_flags")
-		if special_flags and typeof(special_flags) == TYPE_PACKED_STRING_ARRAY:
+		if (
+			special_flags
+			and typeof(special_flags) == TYPE_PACKED_STRING_ARRAY
+			and typeof(default_value) == TYPE_BOOL
+		):
 			disable = (prop in special_flags) == default_value if !disable else disable
 		if typeof(value) == TYPE_COLOR:
 			disable = value.is_equal_approx(default_value)
