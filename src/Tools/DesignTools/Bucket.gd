@@ -1,6 +1,7 @@
 extends BaseTool
 
 enum FillArea { AREA, COLORS, SELECTION }
+enum AreaSample { CEL_AREA, FRAME_AREA }
 enum FillWith { COLOR, PATTERN }
 
 const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.gdshader")
@@ -13,6 +14,7 @@ var _pattern: Patterns.Pattern
 var _tolerance := 0.003
 var _fill_area: int = FillArea.AREA
 var _fill_with: int = FillWith.COLOR
+var _area_sample_mode := AreaSample.CEL_AREA
 var _offset_x := 0
 var _offset_y := 0
 ## Working array used as buffer for segments while flooding
@@ -59,8 +61,16 @@ func _on_FillAreaOptions_item_selected(index: int) -> void:
 	save_config()
 
 
+func _on_area_options_item_selected(index: int) -> void:
+	@warning_ignore("int_as_enum_without_cast")
+	_area_sample_mode = index
+	update_config()
+	save_config()
+
+
 func _select_fill_area_optionbutton() -> void:
 	$FillAreaOptions.selected = _fill_area
+	$AreaOptions.visible = _fill_area == FillArea.AREA
 	$ToleranceSlider.visible = (_fill_area != FillArea.SELECTION)
 
 
@@ -103,10 +113,16 @@ func _on_PatternOffsetY_value_changed(value: float) -> void:
 
 func get_config() -> Dictionary:
 	if !_pattern:
-		return {"fill_area": _fill_area, "fill_with": _fill_with, "tolerance": _tolerance}
+		return {
+			"fill_area": _fill_area,
+			"area_sample_mode": _area_sample_mode,
+			"fill_with": _fill_with,
+			"tolerance": _tolerance
+		}
 	return {
 		"pattern_index": _pattern.index,
 		"fill_area": _fill_area,
+		"area_sample_mode": _area_sample_mode,
 		"fill_with": _fill_with,
 		"tolerance": _tolerance,
 		"offset_x": _offset_x,
@@ -119,6 +135,7 @@ func set_config(config: Dictionary) -> void:
 		var index = config.get("pattern_index", _pattern.index)
 		_pattern = Global.patterns_popup.get_pattern(index)
 	_fill_area = config.get("fill_area", _fill_area)
+	_area_sample_mode = config.get("area_sample_mode", _area_sample_mode)
 	_fill_with = config.get("fill_with", _fill_with)
 	_tolerance = config.get("tolerance", _tolerance)
 	_offset_x = config.get("offset_x", _offset_x)
@@ -133,6 +150,7 @@ func update_config() -> void:
 	$FillPattern.visible = _fill_with == FillWith.PATTERN
 	$FillPattern/OffsetX.value = _offset_x
 	$FillPattern/OffsetY.value = _offset_y
+	$AreaOptions.selected = _area_sample_mode
 
 
 func update_pattern() -> void:
@@ -343,11 +361,28 @@ func _flood_fill(pos: Vector2i) -> void:
 			)
 		return
 
-	var images := _get_selected_draw_images()
-	for image in images:
+	var cels = _get_selected_draw_cels()
+	var sample_masks: Dictionary[Frame, Image] = {}
+	var cel_frame: Dictionary[BaseCel, Frame] = {}
+	for cel: PixelCel in cels:
+		if _area_sample_mode == AreaSample.FRAME_AREA:
+			for frame_layer: Array in project.selected_cels:
+				if project.frames[frame_layer[0]].cels.has(cel):
+					var frame := project.frames[frame_layer[0]]
+					if not sample_masks.has(frame):
+						var mask := Image.create(
+							project.size.x, project.size.y, false, Image.FORMAT_RGBA8
+						)
+						mask.fill(Color(0, 0, 0, 0))
+						DrawingAlgos.blend_layers(mask, frame)
+						cel_frame[cel] = frame
+						sample_masks[frame] = mask
+		var image: ImageExtended = cel.image
 		if Tools.check_alpha_lock(image, pos):
 			continue
 		var color: Color = image.get_pixelv(pos)
+		if _area_sample_mode == AreaSample.FRAME_AREA:
+			color = sample_masks[cel_frame[cel]].get_pixelv(pos)
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
@@ -360,7 +395,12 @@ func _flood_fill(pos: Vector2i) -> void:
 		# init flood data structures
 		_allegro_flood_segments = []
 		_allegro_image_segments = []
-		_compute_segments_for_image(pos, project, image, color)
+		_compute_segments_for_image(
+			pos,
+			project,
+			image if _area_sample_mode != AreaSample.FRAME_AREA else sample_masks[cel_frame[cel]],
+			color
+		)
 		# now actually color the image: since we have already checked a few things for the points
 		# we'll process here, we're going to skip a bunch of safety checks to speed things up.
 		_color_segments(image)
