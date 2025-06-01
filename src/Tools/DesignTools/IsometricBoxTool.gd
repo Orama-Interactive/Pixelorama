@@ -139,6 +139,9 @@ func _input(event: InputEvent) -> void:
 			if _control_pts.size() > 0:
 				_current_state -= 1
 				_control_pts.resize(_control_pts.size() - 1)
+			else:
+				_drawing = false
+				_clear()
 
 
 func cursor_move(pos: Vector2i):
