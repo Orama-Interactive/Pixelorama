@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-05-26 21:50\n"
+"PO-Revision-Date: 2025-06-01 20:35\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -1064,7 +1064,7 @@ msgid "Modify Blue Channel"
 msgstr "Ubah Saluran Biru"
 
 msgid "Modify Alpha Channel"
-msgstr "Ubah Saluran Lutsinar"
+msgstr "Ubah Saluran Alfa"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
@@ -1887,7 +1887,7 @@ msgstr ""
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "Lutsinar pralihat ubah bentuk:"
 
 msgid "Only custom preset can be modified"
 msgstr "Hanya pratetap tersuai boleh disunting"
@@ -3469,7 +3469,7 @@ msgstr ""
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Ubah bentuk"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
