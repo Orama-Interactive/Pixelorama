@@ -266,7 +266,7 @@ func _draw_shape() -> void:
 	_drawing = false
 	prepare_undo("Draw Shape")
 	var images := _get_selected_draw_images()
-	if _fill_inside:
+	if _fill_inside and !Tools.is_placing_tiles():
 		# converting control points to local basis vectors
 		var a = _control_pts[0] - _origin
 		var gap = _control_pts[1] - _control_pts[0]
