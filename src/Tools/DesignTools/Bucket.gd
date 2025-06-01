@@ -183,7 +183,7 @@ func draw_start(pos: Vector2i) -> void:
 	if _fill_merged_area and _fill_area == FillArea.AREA:
 		var project := Global.current_project
 		for frame_layer: Array in project.selected_cels:
-			if project.frames[frame_layer[0]].cels[frame_layer[0]] is PixelCel:
+			if project.frames[frame_layer[0]].cels[frame_layer[1]] is PixelCel:
 				var frame := project.frames[frame_layer[0]]
 				if not sample_masks.has(frame):
 					var mask := Image.create(
