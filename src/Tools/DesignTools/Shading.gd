@@ -357,14 +357,14 @@ func construct_preview() -> void:
 		if i < colors_container.get_child_count():
 			colors_container.get_child(i).color = color
 		else:
-			var color_rect := ColorRect.new()
-			color_rect.color = color
-			color_rect.custom_minimum_size = Vector2(20, 20)
+			var color_rect_node := ColorRect.new()
+			color_rect_node.color = color
+			color_rect_node.custom_minimum_size = Vector2(20, 20)
 			var checker = preload("res://src/UI/Nodes/TransparentChecker.tscn").instantiate()
 			checker.show_behind_parent = true
 			checker.set_anchors_preset(Control.PRESET_FULL_RECT)
-			color_rect.add_child(checker)
-			colors_container.add_child(color_rect)
+			color_rect_node.add_child(checker)
+			colors_container.add_child(color_rect_node)
 
 
 func palette_changed(_palette_name):

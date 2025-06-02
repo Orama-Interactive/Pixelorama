@@ -1,6 +1,7 @@
 class_name ResourceProject
 extends Project
 
+@warning_ignore("unused_signal")
 signal resource_updated
 
 

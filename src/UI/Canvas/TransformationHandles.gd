@@ -158,7 +158,8 @@ func _draw() -> void:
 		scale_tmp.x = -1
 	if is_instance_valid(transformed_image) and not transformed_image.is_empty():
 		draw_set_transform(position_top_left, rotation, scale_tmp)
-		draw_texture(image_texture, Vector2.ZERO, Color(1, 1, 1, 0.5))
+		var preview_color := Color(1, 1, 1, Global.transformation_preview_alpha)
+		draw_texture(image_texture, Vector2.ZERO, preview_color)
 	draw_set_transform(position_tmp, rotation, scale_tmp)
 	# Draw handles
 	for handle in handles:
@@ -474,6 +475,8 @@ func rotate_transform_handle(t: Transform2D, mouse_pos: Vector2) -> Transform2D:
 	var start_vec := drag_start - pivot_world
 	var curr_vec := mouse_pos - pivot_world
 	var delta_ang := fposmod(curr_vec.angle() - start_vec.angle(), TAU)
+	if Input.is_action_pressed("shape_perfect"):
+		delta_ang = snappedf(delta_ang, PI / 8)
 	var m := Transform2D().rotated(delta_ang)
 	return transform_around(t, m, pivot)
 
