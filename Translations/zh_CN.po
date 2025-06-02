@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-05-26 21:49\n"
+"PO-Revision-Date: 2025-06-02 13:37\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1679,6 +1679,16 @@ msgstr "椭圆工具\n\n"
 "按住 %s 使形状在单击原点居中\n"
 "按住 %s 移动形状的原点"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -2392,6 +2402,28 @@ msgstr "抗锯齿"
 msgid "Grayscale"
 msgstr "灰度"
 
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr ""
+
 msgid "Mirroring"
 msgstr "镜像"
 
@@ -3097,6 +3129,9 @@ msgstr "矩形工具"
 
 msgid "Ellipse Tool"
 msgstr "椭圆工具"
+
+msgid "Isometric Box Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "切换颜色"
