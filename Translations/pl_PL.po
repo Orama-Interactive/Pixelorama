@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-05-27 10:28\n"
+"PO-Revision-Date: 2025-06-02 13:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1675,6 +1675,16 @@ msgstr "Elipsa\n\n"
 "Przytrzymaj %s aby wyśrodkować kształt na miejscu kliknięcia\n"
 "Przytrzymaj %s aby przemieścić pozycję źródłową kształtu"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -2387,6 +2397,28 @@ msgstr "Antyaliasing"
 msgid "Grayscale"
 msgstr "Skala szarości"
 
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr ""
+
 msgid "Mirroring"
 msgstr "Lustrzane odbicie"
 
@@ -3092,6 +3124,9 @@ msgstr "Prostokąt"
 
 msgid "Ellipse Tool"
 msgstr "Elipsa"
+
+msgid "Isometric Box Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Zmień kolory"
