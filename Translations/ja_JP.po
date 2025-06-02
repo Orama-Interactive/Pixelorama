@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-05-27 04:50\n"
+"PO-Revision-Date: 2025-06-02 13:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1679,6 +1679,16 @@ msgstr "楕円形ツール\n\n"
 "%s を長押ししてクリックした原点を図形の中心に配置\n"
 "%sを長押しして図形の原点を変更"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -2392,6 +2402,28 @@ msgstr "アンチエイリアシング"
 msgid "Grayscale"
 msgstr "グレースケール"
 
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr ""
+
 msgid "Mirroring"
 msgstr "ミラーリング"
 
@@ -3097,6 +3129,9 @@ msgstr "矩形ツール"
 
 msgid "Ellipse Tool"
 msgstr "楕円形ツール"
+
+msgid "Isometric Box Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "色の切り替え"
