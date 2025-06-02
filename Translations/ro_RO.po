@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-06-02 13:36\n"
+"PO-Revision-Date: 2025-06-02 14:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2401,17 +2401,17 @@ msgstr "Tonuri de gri"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Culoare margine"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Culoare instrument"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Medie ajustată"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Amestecare la interfață"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
