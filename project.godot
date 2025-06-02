@@ -1006,6 +1006,14 @@ show_reference_images={
 "deadzone": 0.5,
 "events": []
 }
+left_isometricboxtool_tool={
+"deadzone": 0.2,
+"events": []
+}
+right_isometricboxtool_tool={
+"deadzone": 0.2,
+"events": []
+}
 
 [input_devices]
 
