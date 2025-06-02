@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-06-02 13:37\n"
+"PO-Revision-Date: 2025-06-02 17:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1686,7 +1686,14 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "Strumento Casella Isometrica\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse\n\n"
+"Disegna una casella isometrica\n"
+"Premi %s/%s per aggiungere un punto base\n"
+"Tieni premuto %s per agganciare l'angolo del punto base\n"
+"Tieni premuto %s per spostare l'origine della forma\n"
+"Premi %s per modificare l'ultima base aggiunta"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -2403,25 +2410,25 @@ msgstr "Scala di grigi"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Colore Margine"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Colore strumento"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Media corretta"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Sfumatura all'interfaccia"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Volto Sinistro"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Volto Destro"
 
 msgid "Mirroring"
 msgstr "Specchiatura"
@@ -3130,7 +3137,7 @@ msgid "Ellipse Tool"
 msgstr "Strumento Ellissi"
 
 msgid "Isometric Box Tool"
-msgstr ""
+msgstr "Strumento Casella Isometrica"
 
 msgid "Switch Colors"
 msgstr "Inverti Colori"
