@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-05-27 16:35\n"
+"PO-Revision-Date: 2025-06-02 13:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1676,6 +1676,16 @@ msgstr "Instrument Elipsă\n\n"
 "Ține apăsată tasta %s pentru a centra forma pe originea clicului\n"
 "Ține apăsată tasta %s pentru a deplasa originea formei"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -2389,6 +2399,28 @@ msgstr "Anticrenelaj"
 msgid "Grayscale"
 msgstr "Tonuri de gri"
 
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr ""
+
 msgid "Mirroring"
 msgstr "Oglindire"
 
@@ -3094,6 +3126,9 @@ msgstr "Instrument Dreptunghi"
 
 msgid "Ellipse Tool"
 msgstr "Instrument Elipsă"
+
+msgid "Isometric Box Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Comutare culori"
