@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-06-02 13:37\n"
+"PO-Revision-Date: 2025-06-02 18:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1683,7 +1683,13 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy\n"
+"Rysuje prostopadłościan izometryczny\n"
+"Naciśnij %s/%s aby dodać punkt bazowy\n"
+"Przytrzymaj %s aby przyciągnąć kąt punktu początkowego\n"
+"Przytrzymaj %s aby zmienić położenie punktu bazowego kształtu\n"
+"Naciśnij %s aby edytować ostatnio dodany punkt bazowy"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -2399,25 +2405,25 @@ msgstr "Skala szarości"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Kolor krawędzi"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Kolor narzędzia"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Skorygowana średnia"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Mieszanie na styku"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Lewa ściana"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Prawa ściana"
 
 msgid "Mirroring"
 msgstr "Lustrzane odbicie"
@@ -3126,7 +3132,7 @@ msgid "Ellipse Tool"
 msgstr "Elipsa"
 
 msgid "Isometric Box Tool"
-msgstr ""
+msgstr "Narzędzie \"Prostopadłościan izometryczny\""
 
 msgid "Switch Colors"
 msgstr "Zmień kolory"
