@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-06-02 18:45\n"
+"PO-Revision-Date: 2025-06-02 20:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2412,7 +2412,7 @@ msgid "Tool color"
 msgstr "Kolor narzędzia"
 
 msgid "Adjusted average"
-msgstr "Skorygowana średnia"
+msgstr "Tryb dopasowania koloru krawędzi"
 
 msgid "Blend at interface"
 msgstr "Mieszanie na styku"
