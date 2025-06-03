@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform sampler2D selection : filter_nearest;
 uniform vec2 offset = vec2(0.0); // In pixels
-uniform float zoom_amount = 1.0;
+uniform float zoom_amount: hint_range(0.02, 100.0) = 1.0;
 uniform bool wrap_around = false;
 
 void fragment() {
