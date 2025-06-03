@@ -23,6 +23,7 @@ var _allegro_image_segments: Array[Segment]
 ## Used for _fill_merged_area = true
 var sample_masks: Dictionary[Frame, Image] = {}
 
+
 class Segment:
 	var flooding := false
 	var todo_above := false
