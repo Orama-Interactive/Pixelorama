@@ -18,9 +18,7 @@ func _ready() -> void:
 	animate_panel.add_float_property(
 		"Offset Y", $VBoxContainer/OffsetOptions/OffsetSliders.get_sliders()[1]
 	)
-	animate_panel.add_float_property(
-		"Zoom", $VBoxContainer/OffsetOptions/ZoomValueSlider
-	)
+	animate_panel.add_float_property("Zoom", $VBoxContainer/OffsetOptions/ZoomValueSlider)
 
 
 func _about_to_popup() -> void:
