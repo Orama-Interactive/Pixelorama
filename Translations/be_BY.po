@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2025-06-02 13:36\n"
+"PO-Revision-Date: 2025-06-04 09:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2198,6 +2198,10 @@ msgstr ""
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
 msgstr "Усё вылучэнне"
+
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
 
 msgid "Fill with:"
 msgstr ""
