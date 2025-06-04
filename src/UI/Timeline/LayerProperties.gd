@@ -143,6 +143,16 @@ func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> 
 	project.undo_redo.commit_action()
 
 
+func _on_onion_ignore_button_toggled(toggled_on: bool) -> void:
+	if layer_indices.size() == 0:
+		return
+	for layer_index in layer_indices:
+		var layer := Global.current_project.layers[layer_index]
+		layer.ignore_onion = toggled_on
+	_emit_layer_property_signal()
+	Global.canvas.refresh_onion()
+
+
 func _on_user_data_text_edit_text_changed() -> void:
 	for layer_index in layer_indices:
 		var layer := Global.current_project.layers[layer_index]
