@@ -2180,6 +2180,10 @@ msgstr ""
 msgid "Whole selection"
 msgstr ""
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr ""
 

@@ -49,6 +49,7 @@ popup/item_2/id = 2
 
 [node name="MergeAreaOptions" type="CheckBox" parent="." index="4"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Fill regions from the merging of all layers"
 autowrap_mode = 3
 
