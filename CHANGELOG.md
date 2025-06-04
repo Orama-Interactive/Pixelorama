@@ -13,8 +13,10 @@ Built using Godot 4.4.1
 ### Added
 - The selection transformation system has been completely remade, finally allowing support for easy rotation and skewing! [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
 - A new isometric box tool! [#1246](https://github.com/Orama-Interactive/Pixelorama/pull/1246)
+- Added bucket tool fill mode where regions from the merging of all layers are filled. [#1258](https://github.com/Orama-Interactive/Pixelorama/pull/1258)
 - Using the move tool on a layer group now moves the content of all of its children.
 - You can now hide all other layers when holding Alt and clicking on the visibility button of a layer.
+- Users can now change the alpha of the transformation preview from the preferences.
 - Added the ability to double-click on the canvas preview to get at the same point on the main canvas. [#1244](https://github.com/Orama-Interactive/Pixelorama/pull/1244)
 
 ### Fixed
