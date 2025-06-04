@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-06-04 09:37\n"
+"PO-Revision-Date: 2025-06-04 11:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2264,7 +2264,7 @@ msgstr "Całe zaznaczenie"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Wypełnij obszary z połączenia wszystkich warstw"
 
 msgid "Fill with:"
 msgstr "Wypełnij za pomocą:"
