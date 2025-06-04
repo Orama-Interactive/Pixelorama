@@ -21,7 +21,7 @@ var _allegro_flood_segments: Array[Segment]
 ## Results array per image while flooding
 var _allegro_image_segments: Array[Segment]
 ## Used for _fill_merged_area = true
-var sample_masks: Dictionary[Frame, Image] = {}
+var _sample_masks: Dictionary[Frame, Image] = {}
 
 
 class Segment:
@@ -186,13 +186,13 @@ func draw_start(pos: Vector2i) -> void:
 		for frame_layer: Array in project.selected_cels:
 			if project.frames[frame_layer[0]].cels[frame_layer[1]] is PixelCel:
 				var frame := project.frames[frame_layer[0]]
-				if not sample_masks.has(frame):
+				if not _sample_masks.has(frame):
 					var mask := Image.create(
 						project.size.x, project.size.y, false, Image.FORMAT_RGBA8
 					)
 					mask.fill(Color(0, 0, 0, 0))
 					DrawingAlgos.blend_layers(mask, frame)
-					sample_masks[frame] = mask
+					_sample_masks[frame] = mask
 	fill(pos)
 
 
@@ -213,7 +213,7 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	if _picking_color:
 		return
-	sample_masks.clear()
+	_sample_masks.clear()
 	commit_undo()
 
 
@@ -381,7 +381,7 @@ func _flood_fill(pos: Vector2i) -> void:
 			continue
 		var color: Color = image.get_pixelv(pos)
 		if _fill_merged_area:
-			color = sample_masks.get(cel.get_frame(project), cel.image).get_pixelv(pos)
+			color = _sample_masks.get(cel.get_frame(project), cel.image).get_pixelv(pos)
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
@@ -397,7 +397,7 @@ func _flood_fill(pos: Vector2i) -> void:
 		_compute_segments_for_image(
 			pos,
 			project,
-			image if !_fill_merged_area else sample_masks.get(cel.get_frame(project), cel.image),
+			image if !_fill_merged_area else _sample_masks.get(cel.get_frame(project), cel.image),
 			color
 		)
 		# now actually color the image: since we have already checked a few things for the points
