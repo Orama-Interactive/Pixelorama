@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-06-04 09:37\n"
+"PO-Revision-Date: 2025-06-04 14:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2259,7 +2259,7 @@ msgstr "Selecția completă"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Umple regiunile de la îmbinarea tuturor straturilor"
 
 msgid "Fill with:"
 msgstr "Umplere cu:"
