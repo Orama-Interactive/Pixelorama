@@ -8,6 +8,7 @@ var layer_indices: PackedInt32Array
 @onready var name_line_edit := $GridContainer/NameLineEdit as LineEdit
 @onready var opacity_slider := $GridContainer/OpacitySlider as ValueSlider
 @onready var blend_modes_button := $GridContainer/BlendModeOptionButton as OptionButton
+@onready var ignore_onion_check_button := $GridContainer/OnionIgnoreButton as CheckButton
 @onready var play_at_frame_slider := $GridContainer/PlayAtFrameSlider as ValueSlider
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
 @onready var ui_color_picker_button := $GridContainer/UIColorPickerButton as ColorPickerButton
@@ -40,6 +41,7 @@ func _on_visibility_changed() -> void:
 		opacity_slider.value = first_layer.opacity * 100.0
 		var blend_mode_index := blend_modes_button.get_item_index(first_layer.blend_mode)
 		blend_modes_button.selected = blend_mode_index
+		ignore_onion_check_button.set_pressed_no_signal(first_layer.ignore_onion)
 		if first_layer is AudioLayer:
 			play_at_frame_slider.value = first_layer.playback_frame + 1
 		play_at_frame_slider.max_value = project.frames.size()
