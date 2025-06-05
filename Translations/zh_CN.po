@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-06-04 09:37\n"
+"PO-Revision-Date: 2025-06-05 13:35\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1687,7 +1687,14 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "等距框工具\n\n"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键\n\n"
+"绘制等距框\n"
+"按 %s/%s 添加基点\n"
+"按住 %s 捕捉基点的角度\n"
+"按住 %s 移动形状原点\n"
+"按 %s 编辑最后添加的基点"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -1941,7 +1948,7 @@ msgstr "边框颜色 2："
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "变换预览 alpha："
 
 msgid "Only custom preset can be modified"
 msgstr "仅修改自定义预设"
@@ -2262,7 +2269,7 @@ msgstr "全部选区"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "通过合并所有图层来填充区域"
 
 msgid "Fill with:"
 msgstr "填充使用："
@@ -2408,25 +2415,25 @@ msgstr "灰度"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "边缘颜色"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "工具颜色"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "调整平均值"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "在接口混合时"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "左面"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "右面"
 
 msgid "Mirroring"
 msgstr "镜像"
@@ -3135,7 +3142,7 @@ msgid "Ellipse Tool"
 msgstr "椭圆工具"
 
 msgid "Isometric Box Tool"
-msgstr ""
+msgstr "等距框工具"
 
 msgid "Switch Colors"
 msgstr "切换颜色"
