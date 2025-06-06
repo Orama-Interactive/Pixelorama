@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-05-03 15:48\n"
+"PO-Revision-Date: 2025-06-04 09:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1678,6 +1678,23 @@ msgstr "Strumento Ellisse\n\n"
 "Tieni premuto %s per centrare la forma sull'origine del clic\n"
 "Tieni premuto %s per spostare l'origine della forma"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr "Strumento Casella Isometrica\n\n"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse\n\n"
+"Disegna una casella isometrica\n"
+"Premi %s/%s per aggiungere un punto base\n"
+"Tieni premuto %s per agganciare l'angolo del punto base\n"
+"Tieni premuto %s per spostare l'origine della forma\n"
+"Premi %s per modificare l'ultima base aggiunta"
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1927,6 +1944,10 @@ msgstr "Colore bordo 1:"
 
 msgid "Border color 2:"
 msgstr "Colore bordo 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr "Anteprima di trasformazione alfa:"
 
 msgid "Only custom preset can be modified"
 msgstr "Solo il preset personalizzato può essere modificato"
@@ -2245,6 +2266,10 @@ msgstr "Colori simili"
 msgid "Whole selection"
 msgstr "Selezione intera"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Riempi con:"
 
@@ -2386,6 +2411,28 @@ msgstr "Antialiasing"
 
 msgid "Grayscale"
 msgstr "Scala di grigi"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr "Colore Margine"
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr "Colore strumento"
+
+msgid "Adjusted average"
+msgstr "Media corretta"
+
+msgid "Blend at interface"
+msgstr "Sfumatura all'interfaccia"
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr "Volto Sinistro"
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr "Volto Destro"
 
 msgid "Mirroring"
 msgstr "Specchiatura"
@@ -3092,6 +3139,9 @@ msgstr "Rettangolo"
 
 msgid "Ellipse Tool"
 msgstr "Strumento Ellissi"
+
+msgid "Isometric Box Tool"
+msgstr "Strumento Casella Isometrica"
 
 msgid "Switch Colors"
 msgstr "Inverti Colori"
@@ -3832,12 +3882,12 @@ msgstr "Per tutte le forme semioffset (Isometrica & Esagonale), determina l'asse
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked"
-msgstr ""
+msgstr "Accatastato"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked offset"
-msgstr ""
+msgstr "Scostamento sovrapposto"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
@@ -3862,12 +3912,12 @@ msgstr ""
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Place-only mode:"
-msgstr ""
+msgstr "Modalità di posizionamento:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr ""
+msgstr "Abilitare la modalità di posizionamento è un'azione permanente. Una volta attivato, sarai solo in grado di posizionare i riquadri e non sarai più in grado di modificare i riquadri esistenti su questo livello."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
@@ -3922,9 +3972,9 @@ msgstr "Mostra piatra vuota:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr ""
+msgstr "Proprietà piastrella"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
-msgstr ""
+msgstr "Probabilità:"
 

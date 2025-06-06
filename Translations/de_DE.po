@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-04-25 20:34\n"
+"PO-Revision-Date: 2025-06-04 09:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1676,6 +1676,16 @@ msgstr "Ellipse Tool\n\n"
 "Halten Sie %s gedrückt, um die Form auf dem Klick-Ursprung zu zentrieren.\n"
 "Halten Sie %s gedrückt, um die Form zu verschieben"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1925,6 +1935,10 @@ msgstr "Rahmenfarbe 1:"
 
 msgid "Border color 2:"
 msgstr "Rahmenfarbe 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
@@ -2243,6 +2257,10 @@ msgstr "Ähnliche Farben"
 msgid "Whole selection"
 msgstr "Ganze Auswahl"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Füllen mit:"
 
@@ -2384,6 +2402,28 @@ msgstr "Anti-Aliasing"
 
 msgid "Grayscale"
 msgstr "Graustufen"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -3090,6 +3130,9 @@ msgstr "Rechteck-Werkzeug"
 
 msgid "Ellipse Tool"
 msgstr "Ellipse-Werkzeug"
+
+msgid "Isometric Box Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Wechsle Farben"

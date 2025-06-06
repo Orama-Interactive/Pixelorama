@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-06-04 09:37\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1664,6 +1664,16 @@ msgstr "Eina d'el·lipsi\n\n"
 "Mantén %s per centrar la forma al clic d'origen\n"
 "Mantén %s per desplaçar l'origen de la forma"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1911,6 +1921,10 @@ msgstr "Color de la vora 1:"
 
 msgid "Border color 2:"
 msgstr "Color de la vora 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Només es poden modificar els presets personalitzats"
@@ -2226,6 +2240,10 @@ msgstr ""
 msgid "Whole selection"
 msgstr ""
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Omplir amb:"
 
@@ -2365,6 +2383,28 @@ msgid "Antialiasing"
 msgstr ""
 
 msgid "Grayscale"
+msgstr ""
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
 msgstr ""
 
 msgid "Mirroring"
@@ -3069,6 +3109,9 @@ msgid "Rectangle Tool"
 msgstr ""
 
 msgid "Ellipse Tool"
+msgstr ""
+
+msgid "Isometric Box Tool"
 msgstr ""
 
 msgid "Switch Colors"
