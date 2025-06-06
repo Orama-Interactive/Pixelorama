@@ -54,8 +54,12 @@ var prev_offset := offset  ## Used for undo/redo purposes.
 ## its image that is being changed when manual mode is enabled.
 ## Gets reset on [method update_tilemap].
 var editing_images: Dictionary[int, Array] = {}
+## When enabled, the tile is defined by content strictly inside it's grid,
+## and tile when placed in area smaller than it's size gets assigned a different index.
+## useful when drawing (should be disabled when placing tiles instead)
+var _should_clip_tiles: bool = true
 
-## Used to ensure [method _queue_update_cel_portions] is only called once.
+## Used to ensure [method queue_update_cel_portions] is only called once.
 var _pending_update := false
 
 
@@ -130,11 +134,10 @@ func set_index(
 	index: int,
 	flip_h := TileSetPanel.is_flipped_h,
 	flip_v := TileSetPanel.is_flipped_v,
-	transpose := TileSetPanel.is_transposed
+	transpose := TileSetPanel.is_transposed,
 ) -> void:
 	index = clampi(index, 0, tileset.tiles.size() - 1)
 	var previous_index := cell.index
-
 	if previous_index != index:
 		if previous_index > 0 and previous_index < tileset.tiles.size():
 			tileset.tiles[previous_index].times_used -= 1
@@ -156,9 +159,9 @@ func set_index(
 			image.blit_rect_mask(
 				blank, prev_tile, Rect2i(Vector2i.ZERO, prev_tile_size), coords - tile_offset
 			)
-		_queue_update_cel_portions(true)
+		queue_update_cel_portions(true)
 	else:
-		_update_cell(cell)
+		_update_cell(cell, previous_index)
 	Global.canvas.queue_redraw()
 
 
@@ -214,7 +217,7 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 		godot_tileset.tile_offset_axis = get_tile_offset_axis()
 		var godot_tilemap := TileMapLayer.new()
 		godot_tilemap.tile_set = godot_tileset
-		var pixel_coords := godot_tilemap.map_to_local(cell_coords) as Vector2i
+		var pixel_coords := godot_tilemap.map_to_local(cell_coords).floor() as Vector2i
 		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			var quarter_tile_size := get_tile_size() / 4
 			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
@@ -226,14 +229,27 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 	return cell_coords * get_tile_size() + offset
 
 
-func get_image_portion(rect: Rect2i, source_image := image) -> Image:
+func get_image_portion(rect: Rect2i, source_image := image, force_disable_clip := false) -> Image:
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		var mask := Image.create_empty(
 			get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8
 		)
 		mask.fill(Color(0, 0, 0, 0))
 		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-			DrawingAlgos.generate_isometric_rectangle(mask)
+			var old_clip := _should_clip_tiles
+			# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
+			if (
+				Tools.is_placing_tiles()
+				or TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
+				or force_disable_clip
+			):
+				_should_clip_tiles = false
+			var grid_coord = (
+				(Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
+			)
+			var is_smaller_tile = int(grid_coord.y) % 2 != 0
+			DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
+			_should_clip_tiles = old_clip
 		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 				DrawingAlgos.generate_hexagonal_pointy_top(mask)
@@ -562,7 +578,7 @@ func update_tilemap(
 		var cell := get_cell_at(cell_coords)
 		var coords := get_pixel_coords(cell_coords)
 		var rect := Rect2i(coords, get_tile_size())
-		var image_portion := get_image_portion(rect, source_image)
+		var image_portion := get_image_portion(rect, source_image, true)
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
@@ -742,7 +758,7 @@ func _re_index_cells_after_index(index: int, decrease := true) -> void:
 
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
-func _update_cell(cell: Cell) -> void:
+func _update_cell(cell: Cell, prev_index := -1) -> void:
 	if cell.updated_this_frame:
 		return
 	cell.updated_this_frame = true
@@ -754,23 +770,22 @@ func _update_cell(cell: Cell) -> void:
 	var index := cell.index
 	if index >= tileset.tiles.size():
 		index = 0
-	var current_tile := tileset.tiles[index].image
-	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
-	if image_portion.get_data() != transformed_tile.get_data():
-		_draw_cell(image, transformed_tile, coords, index == 0)
-		image.convert_rgb_to_indexed()
+	if prev_index != index:
+		var current_tile := tileset.tiles[index].image
+		var transformed_tile := transform_tile(
+			current_tile, cell.flip_h, cell.flip_v, cell.transpose
+		)
+		if image_portion.get_data() != transformed_tile.get_data():
+			_draw_cell(image, transformed_tile, coords)
+			image.convert_rgb_to_indexed()
 
 
-func _draw_cell(
-	source_image: Image, tile_image: Image, coords: Vector2i, force_square_blit: bool
-) -> void:
+func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i) -> void:
 	var transformed_tile_size := tile_image.get_size()
 	var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 	coords -= tile_offset
-	if force_square_blit or get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 		source_image.blit_rect(tile_image, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
-		if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE and not place_only_mode:
-			update_cel_portions()
 	else:
 		var mask: Image
 		if place_only_mode:
@@ -781,7 +796,16 @@ func _draw_cell(
 			)
 			mask.fill(Color(0, 0, 0, 0))
 			if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-				DrawingAlgos.generate_isometric_rectangle(mask)
+				var grid_coord = (Vector2(coords - offset) * 2 / Vector2(get_tile_size())).round()
+				var is_smaller_tile = int(grid_coord.y) % 2 != 0
+				var old_clip := _should_clip_tiles
+				# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
+				if Tools.is_placing_tiles():
+					_should_clip_tiles = false
+				DrawingAlgos.generate_isometric_rectangle(
+					mask, is_smaller_tile and _should_clip_tiles
+				)
+				_should_clip_tiles = old_clip
 			elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 				if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 					DrawingAlgos.generate_hexagonal_pointy_top(mask)
@@ -829,7 +853,7 @@ func re_index_all_cells(set_invisible_to_zero := false, source_image := image) -
 				break
 
 
-func _queue_update_cel_portions(skip_zeroes := false) -> void:
+func queue_update_cel_portions(skip_zeroes := false) -> void:
 	if _pending_update:
 		return
 	_pending_update = true
@@ -981,7 +1005,7 @@ func update_texture(undo := false) -> void:
 		if index == 0:
 			if tileset.tiles.size() > 1:
 				# Prevent from drawing on empty image portions.
-				_draw_cell(image, current_tile.image, coords, false)
+				_draw_cell(image, current_tile.image, coords)
 			continue
 		if not editing_images.has(index):
 			if not _tiles_equal(cell, image_portion, current_tile.image):
@@ -1010,7 +1034,9 @@ func update_texture(undo := false) -> void:
 				editing_image, cell.flip_h, cell.flip_v, cell.transpose
 			)
 			if not image_portion.get_data() == transformed_editing_image.get_data():
-				_draw_cell(image, transformed_editing_image, coords, index == 0)
+				_draw_cell(image, transformed_editing_image, coords)
+				if index == 0:
+					update_cel_portions()
 	super.update_texture(undo)
 
 
