@@ -469,6 +469,7 @@ func _on_CopyFrame_pressed() -> void:
 func copy_frames(
 	indices := [], destination := -1, select_all_cels := true, tag_name_from: AnimationTag = null
 ) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	var project := Global.current_project
 
 	if indices.size() == 0:
@@ -951,6 +952,7 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 
 
 func _on_CloneLayer_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	var project := Global.current_project
 	var source_layers := project.layers[project.current_layer].get_children(true)
 	source_layers.append(project.layers[project.current_layer])
