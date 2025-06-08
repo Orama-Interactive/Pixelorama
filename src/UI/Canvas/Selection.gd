@@ -92,7 +92,7 @@ func transform_content_confirm() -> void:
 	var project := Global.current_project
 	var preview_image := transformation_handles.pre_transformed_image
 	var original_selection_rect = project.selection_map.get_selection_rect(project)
-	transformation_handles.bake_transform_to_selection(project.selection_map)
+	transformation_handles.bake_transform_to_selection(project.selection_map, true)
 	var bounds := DrawingAlgos.get_transformed_bounds(
 		original_selection_rect.size, transformation_handles.preview_transform
 	)
