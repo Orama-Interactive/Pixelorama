@@ -688,6 +688,5 @@ func bake_transform_to_selection(map: SelectionMap, is_confirmed := false) -> vo
 	var transformed_selection := SelectionMap.new()
 	transformed_selection.copy_from(transformed_selection_map)
 	bake_transform_to_image(transformed_selection, bounds)
-
 	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
 	map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)
