@@ -91,11 +91,13 @@ func transform_content_confirm() -> void:
 		return
 	var project := Global.current_project
 	var preview_image := transformation_handles.pre_transformed_image
-	var un_rotated_selection_rect := project.selection_map.get_selection_rect(project)
+	var original_selection_rect = project.selection_map.get_selection_rect(project)
 	transformation_handles.bake_transform_to_selection(project.selection_map)
-	var selection_rect := project.selection_map.get_selection_rect(project)
-	var selection_size_rect := Rect2i(Vector2i.ZERO, selection_rect.size)
-	var un_rotated_selection_size_rect := Rect2i(Vector2i.ZERO, un_rotated_selection_rect.size)
+	var bounds := DrawingAlgos.get_transformed_bounds(
+		original_selection_rect.size,
+		transformation_handles.preview_transform
+	)
+	bounds.position -= bounds.position
 	for cel in get_selected_draw_cels():
 		var cel_image := cel.get_image()
 		var src := Image.new()
@@ -111,23 +113,23 @@ func transform_content_confirm() -> void:
 				continue
 			var tilemap := cel as CelTileMap
 			@warning_ignore("integer_division")
-			var horizontal_size := selection_rect.size.x / tilemap.get_tile_size().x
+			var horizontal_size := bounds.size.x / tilemap.get_tile_size().x
 			@warning_ignore("integer_division")
-			var vertical_size := selection_rect.size.y / tilemap.get_tile_size().y
+			var vertical_size := bounds.size.y / tilemap.get_tile_size().y
 			var selected_cells := tilemap.resize_selection(
 				transformation_handles.pre_transform_tilemap_cells, horizontal_size, vertical_size
 			)
-			src.crop(selection_rect.size.x, selection_rect.size.y)
-			tilemap.apply_resizing_to_image(src, selected_cells, selection_rect, true)
+			src.crop(bounds.size.x, bounds.size.y)
+			tilemap.apply_resizing_to_image(src, selected_cells, bounds, true)
 		else:
-			transformation_handles.bake_transform_to_image(src, un_rotated_selection_size_rect)
+			transformation_handles.bake_transform_to_image(src, bounds)
 
 		if Tools.is_placing_tiles():
 			if cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 				continue
-			cel_image.blit_rect(src, un_rotated_selection_size_rect, transformation_origin)
+			cel_image.blit_rect(src, bounds, transformation_origin)
 		else:
-			cel_image.blit_rect_mask(src, src, un_rotated_selection_size_rect, transformation_origin)
+			cel_image.blit_rect_mask(src, src, bounds, transformation_origin)
 		cel_image.convert_rgb_to_indexed()
 	commit_undo("Move Selection", undo_data)
 
