@@ -672,7 +672,6 @@ func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
 	)
 
 
-
 func bake_transform_to_selection(map: SelectionMap, is_confirmed := false) -> void:
 	var bounds := DrawingAlgos.get_transformed_bounds(
 		transformed_selection_map.get_size(), preview_transform
