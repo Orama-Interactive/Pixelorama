@@ -94,8 +94,7 @@ func transform_content_confirm() -> void:
 	var original_selection_rect = project.selection_map.get_selection_rect(project)
 	transformation_handles.bake_transform_to_selection(project.selection_map)
 	var bounds := DrawingAlgos.get_transformed_bounds(
-		original_selection_rect.size,
-		transformation_handles.preview_transform
+		original_selection_rect.size, transformation_handles.preview_transform
 	)
 	bounds.position -= bounds.position
 	for cel in get_selected_draw_cels():
