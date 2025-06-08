@@ -22,7 +22,6 @@ var pre_transformed_image := Image.new()
 var pre_transform_selection_offset: Vector2
 var pre_transform_tilemap_cells: Array[Array]
 var image_texture := ImageTexture.new()
-var transform_confirm_offset: Vector2i
 
 ## Preview transform, not yet applied to the image.
 var preview_transform := Transform2D():
@@ -675,7 +674,6 @@ func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
 
 
 func bake_transform_to_selection(map: SelectionMap, is_confirmed := false) -> void:
-	var offset := transform_confirm_offset
 	var bounds := DrawingAlgos.get_transformed_bounds(
 		transformed_selection_map.get_size(), preview_transform
 	)
@@ -684,14 +682,13 @@ func bake_transform_to_selection(map: SelectionMap, is_confirmed := false) -> vo
 		var position_top_left := position + get_transform_top_left()
 		transformation_origin = position_top_left
 		map.crop(Global.current_project.size.x, Global.current_project.size.y)
-		Global.current_project.selection_offset = Vector2.ZERO.min(offset)
+		Global.current_project.selection_offset = Vector2.ZERO
 	else:
 		map.ensure_selection_fits(Global.current_project, bounds)
 	bounds.position -= bounds.position
 	var transformed_selection := SelectionMap.new()
 	transformed_selection.copy_from(transformed_selection_map)
 	bake_transform_to_image(transformed_selection, bounds)
-	transform_confirm_offset = transformed_selection.get_used_rect().position
 
 	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
 	map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)
