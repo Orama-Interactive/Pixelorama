@@ -113,6 +113,11 @@ func _blend_child_group(
 	var cel := frame.cels[layer.index]
 	if layer.blend_mode == BlendModes.PASS_THROUGH:
 		var children := layer.get_children(false)
+		if children.size() == 0:
+			# This is done to re-calibrate current_child_index += 1 in blend_children()
+			# without this visual bugs appear for example see:
+			# https://github.com/Orama-Interactive/Pixelorama/issues/1256
+			return new_i - 1
 		for j in children.size():
 			var child := children[j]
 			if child is GroupLayer:
