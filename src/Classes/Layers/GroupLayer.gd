@@ -26,7 +26,6 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 	for i in children.size():
 		var layer := children[i]
 		if layer is GroupLayer:
-			# incrementation of current_metadata_index is done internally in _blend_child_group()
 			current_metadata_index = _blend_child_group(
 				image,
 				layer,
@@ -37,6 +36,8 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 				origin,
 				apply_effects
 			)
+			# NOTE: incrementation of current_metadata_index is done internally in
+			# _blend_child_group(), so we don't have to use current_metadata_index += 1 here
 		else:
 			_include_child_in_blending(
 				image,
@@ -50,8 +51,6 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 			)
 			current_metadata_index += 1
 
-	for i in textures.size():
-		textures[i].save_png("out/"+str(i, ".png"))
 	if DisplayServer.get_name() != "headless" and textures.size() > 0:
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
@@ -136,6 +135,7 @@ func _blend_child_group(
 		else:
 			textures.append(blended_children)
 			DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
+		new_i += 1
 	return new_i
 
 
