@@ -22,6 +22,9 @@ var preview_selection_texture := ImageTexture.new()
 
 
 func _ready() -> void:
+	# Ensure to only call _input() if the cursor is inside the main canvas viewport
+	Global.main_viewport.mouse_entered.connect(set_process_input.bind(true))
+	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
 	marching_ants_outline.texture = preview_selection_texture
 	transformation_handles.preview_transform_changed.connect(_update_marching_ants)
 	Global.project_switched.connect(_project_switched)
