@@ -21,17 +21,19 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 		return image
 	var textures: Array[Image] = []
 	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RGF)
-	var current_child_index := 0
+	# Corresponding to the index of texture in textures. This is not the layer index
+	var current_metadata_index := 0
 	for i in children.size():
 		var layer := children[i]
 		if layer is GroupLayer:
-			current_child_index = _blend_child_group(
+			# incrementation of current_metadata_index is done internally in _blend_child_group()
+			current_metadata_index = _blend_child_group(
 				image,
 				layer,
 				frame,
 				textures,
 				metadata_image,
-				current_child_index,
+				current_metadata_index,
 				origin,
 				apply_effects
 			)
@@ -42,12 +44,14 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 				frame,
 				textures,
 				metadata_image,
-				current_child_index,
+				current_metadata_index,
 				origin,
 				apply_effects
 			)
-		current_child_index += 1
+			current_metadata_index += 1
 
+	for i in textures.size():
+		textures[i].save_png("out/"+str(i, ".png"))
 	if DisplayServer.get_name() != "headless" and textures.size() > 0:
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
@@ -113,23 +117,18 @@ func _blend_child_group(
 	var cel := frame.cels[layer.index]
 	if layer.blend_mode == BlendModes.PASS_THROUGH:
 		var children := layer.get_children(false)
-		if children.size() == 0:
-			# This is done to re-calibrate current_child_index += 1 in blend_children()
-			# without this visual bugs appear for example see:
-			# https://github.com/Orama-Interactive/Pixelorama/issues/1256
-			return new_i - 1
 		for j in children.size():
 			var child := children[j]
 			if child is GroupLayer:
 				new_i = _blend_child_group(
-					image, child, frame, textures, metadata_image, i + j, origin, apply_effects
+					image, child, frame, textures, metadata_image, new_i, origin, apply_effects
 				)
 			else:
-				new_i += j
 				metadata_image.crop(metadata_image.get_width() + 1, metadata_image.get_height())
 				_include_child_in_blending(
 					image, child, frame, textures, metadata_image, new_i, origin, apply_effects
 				)
+				new_i += 1
 	else:
 		var blended_children := (layer as GroupLayer).blend_children(frame, origin)
 		if DisplayServer.get_name() == "headless":
