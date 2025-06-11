@@ -6,6 +6,7 @@ signal done
 var cache_mat_rid: RID  # reference to the cache material
 var cache_shader: Shader  # it's just used to keep track of shader when dest_mat_after_gen is false
 
+
 func generate_image(
 	img: Image,
 	shader: Shader,
