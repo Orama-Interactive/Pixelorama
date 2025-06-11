@@ -81,9 +81,6 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 			_blend_generator.generate_image(
 				image, DrawingAlgos.blend_layers_shader, params, project.size, true, false
 			)
-			_blend_generator.generate_image(
-				image, DrawingAlgos.blend_layers_shader, params, project.size, true, true
-			)
 			_group_cache[c_key] = image.get_data()
 		if apply_effects:
 			image = display_effects(frame.cels[index], image)
