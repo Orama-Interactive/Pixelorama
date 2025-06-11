@@ -64,14 +64,16 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 			"origin_x_positive": origin.x > 0,
 			"origin_y_positive": origin.y > 0,
 		}
-		var c_key := [
-			_cache_texture_data, metadata_image.get_data(), origin.x > 0, origin.y > 0
-		]
+		var c_key := [_cache_texture_data, metadata_image.get_data(), origin.x > 0, origin.y > 0]
 		_group_cache.has(c_key)
 		if _group_cache.has(c_key):
 			# Don't waste time re-generating for groups that have remained unchanged
 			var cache_image = Image.create_from_data(
-			project.size.x, project.size.y, false, project.get_image_format(), _group_cache[c_key]
+				project.size.x,
+				project.size.y,
+				false,
+				project.get_image_format(),
+				_group_cache[c_key]
 			)
 			image.blit_rect(
 				cache_image, Rect2i(Vector2i.ZERO, cache_image.get_size()), Vector2i.ZERO
