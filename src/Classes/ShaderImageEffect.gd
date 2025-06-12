@@ -83,3 +83,9 @@ func generate_image(
 	if img is ImageExtended and respect_indexed:
 		img.convert_rgb_to_indexed()
 	done.emit()
+
+
+func _notification(what: int) -> void:
+	# Frees material or the reference is no longer tracked by anyone e.g undo/redo or project.
+	if what == NOTIFICATION_PREDELETE and cache_mat_rid.is_valid():
+		RenderingServer.free_rid(cache_mat_rid)
