@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Persian\n"
 "Language: fa_IR\n"
-"PO-Revision-Date: 2025-06-04 09:38\n"
+"PO-Revision-Date: 2025-06-09 17:06\n"
 
 msgid "OK"
 msgstr "باشه"
@@ -74,7 +74,7 @@ msgstr "تصویر"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "پروژه"
 
 msgid "Effects"
 msgstr "جلوه‌ها"
@@ -244,7 +244,7 @@ msgstr "واروندن"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "گزینش منطقهٔ سِل"
 
 msgid "Modify"
 msgstr "پیرایش"
@@ -304,11 +304,11 @@ msgstr "روالی"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "تاری"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "بارشده"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
@@ -366,7 +366,7 @@ msgstr "پهنه‌های جابه‌جایی‌پذیر"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "شناورسازی"
 
 msgid "Manage Layouts"
 msgstr "مدیریت چیدمان‌ها"
@@ -519,22 +519,22 @@ msgid "New pattern"
 msgstr "الگوی نو"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "فریم‌های افقی:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "فریم‌های عمودی"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "برش هوشمند"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "آستانه:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "تصویرهایی که هر کدام از پهلوهایشان کوچکتر از این مقدار باشد از آستانه رد خواهند شد."
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
@@ -546,123 +546,126 @@ msgstr ""
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "نوگردانی"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "فریم آغاز:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "فریم پایان:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "در فریم:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "در لایهٔ:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "گونهٔ قلم‌مو:"
 
 msgid "File brush"
-msgstr ""
+msgstr "قلم‌موی پرونده"
 
 msgid "Project brush"
-msgstr ""
+msgstr "قلم‌موی پروژه"
 
 msgid "Random brush"
-msgstr ""
+msgstr "قلم‌موی تصادفی"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "ذخیره‌سازی اسپرایت به‌عنوان .pxo"
 
 msgid "Export Sprite as .png"
-msgstr ""
+msgstr "برون‌برد اسپرایت به‌عنوان .png"
 
 msgid "Export Sprite"
-msgstr ""
+msgstr "برون‌برد اسپرایت"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "پرونده وجود دارد، بازنویسی شود؟"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "پرونده‌های زیر هم‌اکنون وجود دارند. آیا می‌خواهید آنها را بازنویسی کنید؟\n"
+"%s"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "مسیر پوشه‌دان معتبر نیست!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "نام پرونده معتبر نیست!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "مسیر پوشه‌دان و نام پرونده معتبر نیستند!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "برون‌برد در جریان است..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "ناتوانی در بار کردن پروندهٔ «%s»."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "ناتوانی در بار کردن پروندهٔ «%s».\n"
+"کد خطا: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "ناتوانی در بار کردن پروندهٔ «%s».\n"
+"این پروندهٔ تخته‌رنگ معتبر نیست."
 
 msgid "Frame"
-msgstr ""
+msgstr "فریم"
 
 msgid "Frames:"
-msgstr ""
+msgstr "فریم‌ها:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "همهٔ فریم‌ها"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "اسپرایت‌برگ"
 
 msgid "Animation"
-msgstr ""
+msgstr "پویانمایی"
 
 msgid "Preview:"
-msgstr ""
+msgstr "پیش‌نمایش:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "فریم:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "جهت:"
 
 msgid "Browse"
-msgstr ""
+msgstr "مرور"
 
 msgid "Resize:"
-msgstr ""
+msgstr "تغییر اندازه:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "کیفیت:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "لغو برون‌برد"
 
 msgid "Alert!"
-msgstr ""
+msgstr "هشدار!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "گزینش پوشهٔ کنونی"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "گشودن پوشه‌دان"
 
 msgid "Background:"
-msgstr ""
+msgstr "پس‌زمینه:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "فریم‌های برگزیده"
 
 msgid "Layers:"
 msgstr ""
