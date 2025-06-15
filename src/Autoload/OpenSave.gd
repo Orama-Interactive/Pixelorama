@@ -59,6 +59,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		open_ora_file(file)
 	elif file_ext == "ase" or file_ext == "aseprite":
 		AsepriteParser.open_aseprite_file(file)
+	elif file_ext == "psd":
+		PhotoshopParser.open_photoshop_file(file)
 	else:  # Image files
 		# Attempt to load as APNG.
 		# Note that the APNG importer will *only* succeed for *animated* PNGs.
