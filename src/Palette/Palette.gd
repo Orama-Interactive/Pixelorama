@@ -79,7 +79,9 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 
 func duplicate() -> Palette:
 	var new_palette := Palette.new(name, width, height, comment)
-	var new_colors := colors.duplicate(true)
+	var new_colors: Dictionary[int, PaletteColor]
+	for color in colors:
+		new_colors[color] = colors[color].duplicate()
 	new_palette.colors = new_colors
 	return new_palette
 
