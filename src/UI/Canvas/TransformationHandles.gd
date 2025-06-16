@@ -15,6 +15,8 @@ var transformed_selection_map: SelectionMap:
 		transformed_selection_map = value
 		if is_instance_valid(transformed_selection_map):
 			pivot = transformed_selection_map.get_size() / 2
+		else:
+			_set_default_cursor()
 		set_process_input(is_instance_valid(transformed_selection_map))
 		queue_redraw()
 var transformed_image := Image.new()
