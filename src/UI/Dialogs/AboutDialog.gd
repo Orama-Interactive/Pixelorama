@@ -64,6 +64,7 @@ const AUTHORS: PackedStringArray = [
 	"TheLsbt",
 	"THWLF",
 	"Vaibhav Kubre (kubre)",
+	"VernalUmbrella",
 	"Vriska Weaver (henlo-birb)",
 ]
 
@@ -102,6 +103,7 @@ const TRANSLATORS_DICTIONARY := {
 	"makabeus": ["Polish"],
 	"Donda": ["Polish"],
 	"Piotr Kostrzewski (piotrkostrzewski)": ["Polish"],
+	"Krylan (Krylann)": ["Polish"],
 	"Tmpod": ["Portuguese"],
 	"Pastel de N4ta (N4ta)": ["Portuguese"],
 	"Michael Alexsander (YeldhamDev)": ["Brazilian Portuguese"],
@@ -126,6 +128,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Daniil Belyakov (ermegil)": ["Russian"],
 	"Elijah Fronzak (pincetgore)": ["Russian"],
 	"toxidcheckery": ["Russian"],
+	"POCAT228": ["Russian"],
 	"stomleny_cmok": ["Russian", "Ukrainian"],
 	"Bohdan Matviiv (BodaMat)": ["Ukrainian"],
 	"Ruslan Hryschuk (kifflow)": ["Ukrainian"],
