@@ -21,7 +21,7 @@ Built using Godot 4.4.1
 
 ### Fixed
 - Transformed content no longer gets lost when pressing Control + an arrow key. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
-- Transformed content no longer gets lost when copying layers & frames.
+- Transformed content no longer gets lost when cloning layers & frames.
 - Pressing Enter or Cancel when changing the value of a slider in the options of a selection tool when there is an active transformation, no longer confirms/cancels the transformation.
 - Fixed a bug where some child layer of group layers were not rendered. [#1268](https://github.com/Orama-Interactive/Pixelorama/pull/1268)
 - Group layers with blend modes other than passthrough received a performance boost. [#1269](https://github.com/Orama-Interactive/Pixelorama/pull/1269)
