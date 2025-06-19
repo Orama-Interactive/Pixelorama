@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-06-04 14:58\n"
+"PO-Revision-Date: 2025-06-16 09:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1684,7 +1684,14 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "Instrument Cutie izometrică\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Desenează o cutie izometrică\n"
+"Apasă %s/%s pentru a adăuga un punct de bază\n"
+"Ține apăsat %s pentru a fixa unghiul punctului de bază\n"
+"Ține apăsat %s pentru a disloca originea formei\n"
+"Apasă %s pentru a edita ultima bază adăugată"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -2419,11 +2426,11 @@ msgstr "Amestecare la interfață"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Latura stângă"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Latura dreaptă"
 
 msgid "Mirroring"
 msgstr "Oglindire"
@@ -3132,7 +3139,7 @@ msgid "Ellipse Tool"
 msgstr "Instrument Elipsă"
 
 msgid "Isometric Box Tool"
-msgstr ""
+msgstr "Instrument Cutie izometrică"
 
 msgid "Switch Colors"
 msgstr "Comutare culori"
