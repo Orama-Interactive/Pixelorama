@@ -161,6 +161,38 @@ func _drop_data(_pos: Vector2, data) -> void:
 			if drop_frame < frame:
 				to_frame -= 1
 		var to_frames := range(to_frame, to_frame + drop_frames.size())
+		# Code to RECALCULATE tags due to frame movement
+		var new_animation_tags := project.animation_tags.duplicate()
+		# Loop through the tags to create new classes for them, so that they won't be the same
+		# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+		for i in new_animation_tags.size():
+			new_animation_tags[i] = new_animation_tags[i].duplicate()
+		for tag: AnimationTag in new_animation_tags:
+			if tag.from - 1 in drop_frames:  # check if the calculation is needed
+				# move tag if all it's frames are moved
+				if tag.frames_array().all(func(element): return element in drop_frames):
+					tag.from += to_frames[0] - drop_frames[0]
+					tag.to += to_frames[0] - drop_frames[0]
+					continue
+			var new_from := tag.from
+			var new_to := tag.to
+			for i in drop_frames:  # calculation of new tag positions (When frames are taken away)
+				if tag.has_frame(i):
+					new_to -= 1
+				elif i < tag.to - 1:
+					new_from -= 1
+					new_to -= 1
+			tag.from = new_from
+			tag.to = new_to
+			# calculation of new tag positions (When frames are added back)
+			for i in to_frames:
+				if tag.has_frame(i) and tag.from != i + 1:
+					tag.to += 1
+				elif i <= tag.from - 1:
+					tag.from += 1
+					tag.to += 1
+		project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
+		project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 		project.undo_redo.add_do_method(project.move_frames.bind(drop_frames, to_frames))
 		project.undo_redo.add_undo_method(project.move_frames.bind(to_frames, drop_frames))
 
