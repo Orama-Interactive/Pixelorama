@@ -76,6 +76,10 @@ func has_frame(index: int) -> bool:
 	return from <= (index + 1) and (index + 1) <= to
 
 
+func frames_array() -> Array:
+	return range(from - 1, to)
+
+
 func get_position() -> Vector2:
 	var tag_base_size: int = Global.animation_timeline.cel_size + CEL_SEPARATION
 	return Vector2((from - 1) * tag_base_size + 1, 1)
