@@ -644,9 +644,9 @@ func move_frames(frame: int, rate: int) -> void:
 		tag.to = new_to
 		# calculation of new tag positions (When frames are added back)
 		for i in moved_frame_indices:
-			if tag.has_frame(i) and tag.from != i + 1:
+			if tag.has_frame(i) or i == tag.to:
 				tag.to += 1
-			elif i <= tag.from - 1:
+			elif i < tag.from - 1:
 				tag.from += 1
 				tag.to += 1
 
