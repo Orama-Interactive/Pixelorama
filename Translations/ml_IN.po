@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2025-06-04 09:38\n"
+"PO-Revision-Date: 2025-06-19 14:42\n"
 
 msgid "OK"
 msgstr "ഓക്കേ"
@@ -74,13 +74,13 @@ msgstr ""
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "പ്രോജെക്ട്"
 
 msgid "Effects"
-msgstr ""
+msgstr "ഇഫക്റ്റുകൾ"
 
 msgid "Help"
-msgstr ""
+msgstr "സഹായം"
 
 msgid "New"
 msgstr ""
@@ -92,10 +92,10 @@ msgid "Open..."
 msgstr ""
 
 msgid "Save..."
-msgstr ""
+msgstr "സേവ് ചെയ്യുക..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "ഇത് പോലെ സേവ് ചെയ്യുക..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
@@ -108,10 +108,10 @@ msgid "If enabled, the final blended images are also being stored in the pxo, fo
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "ഇമ്പോർട്ട്"
 
 msgid "Export"
-msgstr ""
+msgstr "എക്സ്പോർട്ട്"
 
 msgid "Overwrite"
 msgstr ""
