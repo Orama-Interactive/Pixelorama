@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.1.2] - Unreleased
+## [v1.1.2] - 2025-06-26
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@VernalUmbrella](https://github.com/VernalUmbrella), [@zibetnu](https://github.com/zibetnu)
 
