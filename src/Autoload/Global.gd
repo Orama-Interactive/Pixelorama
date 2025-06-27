@@ -439,7 +439,7 @@ var selection_animated_borders := true:
 		if is_instance_valid(canvas.selection):
 			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 			marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
-## Found in Preferences. The first color of border.
+## Found in Preferences. The first color of the selection borders.
 var selection_border_color_1 := Color.WHITE:
 	set(value):
 		if value == selection_border_color_1:
@@ -449,7 +449,7 @@ var selection_border_color_1 := Color.WHITE:
 			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 			marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
 			canvas.selection.queue_redraw()
-## Found in Preferences. The second color of border.
+## Found in Preferences. The second color of the selection borders.
 var selection_border_color_2 := Color.BLACK:
 	set(value):
 		if value == selection_border_color_2:
@@ -459,8 +459,16 @@ var selection_border_color_2 := Color.BLACK:
 			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
 			marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
 			canvas.selection.queue_redraw()
+## Found in Preferences. The second color of the selection borders.
+var transformation_preview_alpha := 0.5:
+	set(value):
+		if value == transformation_preview_alpha:
+			return
+		transformation_preview_alpha = value
+		if is_instance_valid(canvas.selection):
+			canvas.selection.queue_redraw()
 
-## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save cpu usage.
+## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save CPU usage.
 var pause_when_unfocused := true
 ## Found in Preferences. The maximum FPS value Pixelorama can reach. 0 means no limit.
 var fps_limit := 0:
@@ -1203,7 +1211,7 @@ func undo_redo_draw_op(
 ## users who have already saved an override.cfg file, leading into confusion.
 ## To avoid this issue, we just write the lines we want to the override.cfg file.
 func _save_to_override_file() -> void:
-	var file := FileAccess.open(OVERRIDE_FILE, FileAccess.WRITE)
+	var file := FileAccess.open(root_directory.path_join(OVERRIDE_FILE), FileAccess.WRITE)
 	file.store_line("[display]\n")
 	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
 	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)

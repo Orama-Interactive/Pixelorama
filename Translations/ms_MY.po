@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-04-23 12:18\n"
+"PO-Revision-Date: 2025-06-04 09:38\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -1064,7 +1064,7 @@ msgid "Modify Blue Channel"
 msgstr "Ubah Saluran Biru"
 
 msgid "Modify Alpha Channel"
-msgstr "Ubah Saluran Lutsinar"
+msgstr "Ubah Saluran Alfa"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
@@ -1635,6 +1635,16 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to displace the shape's origin"
 msgstr ""
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1884,6 +1894,10 @@ msgstr ""
 
 msgid "Border color 2:"
 msgstr ""
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr "Lutsinar pralihat ubah bentuk:"
 
 msgid "Only custom preset can be modified"
 msgstr "Hanya pratetap tersuai boleh disunting"
@@ -2201,6 +2215,10 @@ msgstr ""
 msgid "Whole selection"
 msgstr ""
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr ""
 
@@ -2341,6 +2359,28 @@ msgid "Antialiasing"
 msgstr ""
 
 msgid "Grayscale"
+msgstr ""
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
 msgstr ""
 
 msgid "Mirroring"
@@ -3047,6 +3087,9 @@ msgstr ""
 msgid "Ellipse Tool"
 msgstr ""
 
+msgid "Isometric Box Tool"
+msgstr ""
+
 msgid "Switch Colors"
 msgstr ""
 
@@ -3465,7 +3508,7 @@ msgstr ""
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Ubah bentuk"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"

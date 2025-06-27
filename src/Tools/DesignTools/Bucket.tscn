@@ -41,12 +41,19 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Similar area"
+popup/item_0/id = 0
 popup/item_1/text = "Similar colors"
 popup/item_1/id = 1
 popup/item_2/text = "Whole selection"
 popup/item_2/id = 2
 
-[node name="ToleranceSlider" type="TextureProgressBar" parent="." index="4"]
+[node name="MergeAreaOptions" type="CheckBox" parent="." index="4"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Fill regions from the merging of all layers"
+autowrap_mode = 3
+
+[node name="ToleranceSlider" type="TextureProgressBar" parent="." index="5"]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
@@ -61,22 +68,23 @@ stretch_margin_bottom = 3
 script = ExtResource("4_1pngp")
 prefix = "Tolerance:"
 
-[node name="FillWith" type="Label" parent="." index="5"]
+[node name="FillWith" type="Label" parent="." index="6"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Fill with:"
 
-[node name="FillWithOptions" type="OptionButton" parent="." index="6"]
+[node name="FillWithOptions" type="OptionButton" parent="." index="7"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Selected color"
+popup/item_0/id = 0
 popup/item_1/text = "Pattern"
 popup/item_1/id = 1
 
-[node name="FillPattern" type="VBoxContainer" parent="." index="7"]
+[node name="FillPattern" type="VBoxContainer" parent="." index="8"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -109,6 +117,7 @@ layout_mode = 2
 prefix = "Offset Y:"
 
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
+[connection signal="toggled" from="MergeAreaOptions" to="." method="_on_merge_area_options_toggled"]
 [connection signal="value_changed" from="ToleranceSlider" to="." method="_on_tolerance_slider_value_changed"]
 [connection signal="item_selected" from="FillWithOptions" to="." method="_on_FillWithOptions_item_selected"]
 [connection signal="pressed" from="FillPattern/Type" to="." method="_on_PatternType_pressed"]

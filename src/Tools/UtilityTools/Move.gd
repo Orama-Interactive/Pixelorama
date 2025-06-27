@@ -149,7 +149,8 @@ func _commit_undo(action: String) -> void:
 	var layer := -1
 	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
 		frame = project.current_frame
-		layer = project.current_layer
+		if project.get_current_cel() is not GroupCel:
+			layer = project.current_layer
 
 	project.undos += 1
 	project.undo_redo.create_action(action)

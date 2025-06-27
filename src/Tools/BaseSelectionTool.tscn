@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd62qfjn380wf"]
+[gd_scene load_steps=7 format=3 uid="uid://bd62qfjn380wf"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://coj8ex4hmag1m" path="res://src/Tools/BaseSelectionTool.gd" id="2"]
@@ -6,18 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://bnc78807k1xjv" path="res://assets/graphics/misc/close.png" id="4_ad04n"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="6_2bdjf"]
-
-[sub_resource type="InputEventAction" id="InputEventAction_gfv4x"]
-action = &"transformation_confirm"
-
-[sub_resource type="Shortcut" id="Shortcut_5gq73"]
-events = [SubResource("InputEventAction_gfv4x")]
-
-[sub_resource type="InputEventAction" id="InputEventAction_nadbx"]
-action = &"transformation_cancel"
-
-[sub_resource type="Shortcut" id="Shortcut_04tjd"]
-events = [SubResource("InputEventAction_nadbx")]
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
@@ -30,7 +18,6 @@ custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-shortcut = SubResource("Shortcut_5gq73")
 
 [node name="TextureRect" type="TextureRect" parent="ConfirmButtons/ConfirmButton" index="0" groups=["UIButtons"]]
 layout_mode = 1
@@ -47,7 +34,6 @@ custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-shortcut = SubResource("Shortcut_04tjd")
 
 [node name="TextureRect" type="TextureRect" parent="ConfirmButtons/CancelButton" index="0" groups=["UIButtons"]]
 layout_mode = 1
@@ -105,6 +91,7 @@ mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -180.0
 max_value = 180.0
+step = 0.01
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
@@ -120,8 +107,9 @@ layout_mode = 2
 focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
-min_value = -90.0
-max_value = 90.0
+min_value = -80.0
+max_value = 80.0
+step = 0.01
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3

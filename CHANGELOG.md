@@ -4,23 +4,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.1.2] - Unreleased
+## [v1.1.2] - 2025-06-26
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@VernalUmbrella](https://github.com/VernalUmbrella)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@VernalUmbrella](https://github.com/VernalUmbrella), [@zibetnu](https://github.com/zibetnu)
 
 Built using Godot 4.4.1
 
 ### Added
 - The selection transformation system has been completely remade, finally allowing support for easy rotation and skewing! [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
 - A new isometric box tool! [#1246](https://github.com/Orama-Interactive/Pixelorama/pull/1246)
+- Added bucket tool fill mode where regions from the merging of all layers are filled. [#1258](https://github.com/Orama-Interactive/Pixelorama/pull/1258)
 - Using the move tool on a layer group now moves the content of all of its children.
 - You can now hide all other layers when holding Alt and clicking on the visibility button of a layer.
+- Users can now change the alpha of the transformation preview from the preferences.
 - Added the ability to double-click on the canvas preview to get at the same point on the main canvas. [#1244](https://github.com/Orama-Interactive/Pixelorama/pull/1244)
 
 ### Fixed
 - Transformed content no longer gets lost when pressing Control + an arrow key. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
+- Transformed content no longer gets lost when cloning layers & frames.
+- Pressing Enter or Cancel when changing the value of a slider in the options of a selection tool when there is an active transformation, no longer confirms/cancels the transformation.
+- Fixed a bug where some child layer of group layers were not rendered. [#1268](https://github.com/Orama-Interactive/Pixelorama/pull/1268)
+- Group layers with blend modes other than passthrough received a performance boost. [#1269](https://github.com/Orama-Interactive/Pixelorama/pull/1269)
 - Fixed a bug where pasting images from the clipboard sometimes did not work, due to them being in different formats than the project image. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
+- Fixed a bug where changing a palette color in a copied palette also changed the color in the original palette as well. [#1274](https://github.com/Orama-Interactive/Pixelorama/issues/1274)
 - Closing the app with Zen Mode no longer hides all panels when opening the app again. [#1238](https://github.com/Orama-Interactive/Pixelorama/issues/1238)
+- Fixed broken tool shortcuts on some keyboard layouts. [#1283](https://github.com/Orama-Interactive/Pixelorama/pull/1283)
+- The override.cfg file is now being saved to the correct directory. [#1285](https://github.com/Orama-Interactive/Pixelorama/pull/1285)
 - Panels can no longer be moved if the Moveable Panels option is turned off. [#1242](https://github.com/Orama-Interactive/Pixelorama/pull/1242)
 - Using the bucket tool now confirms the active transformation. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
 - The canvas rotation now affects the direction of the arrow keys. [#1245](https://github.com/Orama-Interactive/Pixelorama/pull/1245)
