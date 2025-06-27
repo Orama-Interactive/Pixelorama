@@ -1211,7 +1211,7 @@ func undo_redo_draw_op(
 ## users who have already saved an override.cfg file, leading into confusion.
 ## To avoid this issue, we just write the lines we want to the override.cfg file.
 func _save_to_override_file() -> void:
-	var file := FileAccess.open(OVERRIDE_FILE, FileAccess.WRITE)
+	var file := FileAccess.open(root_directory.path_join(OVERRIDE_FILE), FileAccess.WRITE)
 	file.store_line("[display]\n")
 	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
 	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)

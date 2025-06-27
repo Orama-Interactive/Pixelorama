@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-04-23 09:53\n"
+"PO-Revision-Date: 2025-06-04 09:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1679,6 +1679,23 @@ msgstr "楕円形ツール\n\n"
 "%s を長押ししてクリックした原点を図形の中心に配置\n"
 "%sを長押しして図形の原点を変更"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr "アイソメトリックボックスツール\n\n"
+"%sでマウスの左ボタンを アイソメトリックボックスツール に変更\n"
+"%sでマウスの右ボタンを アイソメトリックボックスツール に変更\n\n"
+"アイソメトリックボックスを描画\n"
+"%s/%sを押して基準点を追加\n"
+"%sを長押しして基準点の角度をスナップ\n"
+"%sを長押しして形状の原点を置き換え\n"
+"%sを押して最後に追加した基準点を編集"
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1928,6 +1945,10 @@ msgstr "境界色 1:"
 
 msgid "Border color 2:"
 msgstr "境界色 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr "変換プレビューアルファ:"
 
 msgid "Only custom preset can be modified"
 msgstr "カスタムプリセットのみ変更できます"
@@ -2246,6 +2267,10 @@ msgstr "類似色"
 msgid "Whole selection"
 msgstr "全て選択"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "次で塗りつぶし:"
 
@@ -2387,6 +2412,28 @@ msgstr "アンチエイリアシング"
 
 msgid "Grayscale"
 msgstr "グレースケール"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr "エッジの色"
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr "ツールの色"
+
+msgid "Adjusted average"
+msgstr "調整平均"
+
+msgid "Blend at interface"
+msgstr "インターフェイスでブレンド"
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr "左面"
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr "右面"
 
 msgid "Mirroring"
 msgstr "ミラーリング"
@@ -3093,6 +3140,9 @@ msgstr "矩形ツール"
 
 msgid "Ellipse Tool"
 msgstr "楕円形ツール"
+
+msgid "Isometric Box Tool"
+msgstr "アイソメトリックボックスツール"
 
 msgid "Switch Colors"
 msgstr "色の切り替え"

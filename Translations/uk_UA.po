@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-06-04 09:37\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1666,6 +1666,16 @@ msgstr "Еліпс\n\n"
 "Утримуйте %s, щоб встановити центр лінії в місці початку малювання\n"
 "Утримуйте %s, щоб пересувати початкову точку фігури"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1913,6 +1923,10 @@ msgstr "Колір рамки 1:"
 
 msgid "Border color 2:"
 msgstr "Колір рамки 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Можна міняти тільки користувацький набір налаштувань"
@@ -2228,6 +2242,10 @@ msgstr "Подібні кольори"
 msgid "Whole selection"
 msgstr "Все виділення"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Чим залити:"
 
@@ -2368,6 +2386,28 @@ msgstr "Згладжування"
 
 msgid "Grayscale"
 msgstr "Відтінки сірого"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Віддзеркалення"
@@ -3074,6 +3114,9 @@ msgstr "Прямокутник"
 
 msgid "Ellipse Tool"
 msgstr "Еліпс"
+
+msgid "Isometric Box Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Поміняти кольори місцями"

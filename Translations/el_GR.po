@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-04-23 12:18\n"
+"PO-Revision-Date: 2025-06-04 20:24\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1678,6 +1678,23 @@ msgstr "Εργαλείο έλλειψης\n\n"
 "Κρατήστε το %s για να κεντράρετε το σχήμα στην αρχή του κλικ\n"
 "Κρατήστε το %s για να μετακινήσετε την προέλευση του σχήματος"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr "Εργαλείο ισομετρικού κουτιού\n\n"
+"%s για το αριστερό πλήκτρο του ποντικιού\n"
+"%s για το δεξί πλήκτρο του ποντικιού\n\n"
+"Σχεδιάζει ένα ισομετρικό κουτί\n"
+"Πατήστε %s/%s για να προσθέσετε ένα σημείο βάσης\n"
+"Κρατήστε το %s για να κολλήσετε τη γωνία του σημείου βάσης\n"
+"Κρατήστε πατημένο το %s για να μετατοπίσετε την θέση του σχήματος\n"
+"Πατήστε %s για να επεξεργαστείτε την τελευταία προστιθέμενη βάση"
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1927,6 +1944,10 @@ msgstr "Χρώμα περιγράμματος 1:"
 
 msgid "Border color 2:"
 msgstr "Χρώμα περιγράμματος 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr "Αδιαφάνεια προεπισκόπησης μετασχηματισμού:"
 
 msgid "Only custom preset can be modified"
 msgstr "Μόνο η προσαρμοσμένη προεπιλογή μπορεί να τροποποιηθεί"
@@ -2245,6 +2266,10 @@ msgstr "Παρόμοια χρώματα"
 msgid "Whole selection"
 msgstr "Ολόκληρη επιλογή"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr "Γέμισμα περιοχών από τη συγχώνευση όλων των στρώσεων"
+
 msgid "Fill with:"
 msgstr "Γέμισμα με:"
 
@@ -2386,6 +2411,28 @@ msgstr "Εξομάλυνση"
 
 msgid "Grayscale"
 msgstr "Κλίμακα του γκρι"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr "Χρώμα άκρου"
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr "Χρώμα εργαλείου"
+
+msgid "Adjusted average"
+msgstr "Προσαρμοσμένος μέσος όρος"
+
+msgid "Blend at interface"
+msgstr "Ανάμειξη στη διεπαφή"
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr "Αριστερή όψη"
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr "Δεξιά όψη"
 
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
@@ -3092,6 +3139,9 @@ msgstr "Ορθογώνιο εργαλείο"
 
 msgid "Ellipse Tool"
 msgstr "Εργαλείο έλλειψης"
+
+msgid "Isometric Box Tool"
+msgstr "Εργαλείο ισομετρικού κουτιού"
 
 msgid "Switch Colors"
 msgstr "Εναλλαγή χρωμάτων"

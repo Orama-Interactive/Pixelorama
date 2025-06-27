@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-04-23 12:18\n"
+"PO-Revision-Date: 2025-06-04 09:38\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -1679,6 +1679,16 @@ msgstr "Alat Lingkaran\n\n"
 "Tahan %s untuk membuat bentuk di tengah klik\n"
 "Tahan %s untuk menggeser bentuk saat ini"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1928,6 +1938,10 @@ msgstr "Warna tepian 1:"
 
 msgid "Border color 2:"
 msgstr "Warna tepian 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr "Kelegapan pratayang ubah bentuk:"
 
 msgid "Only custom preset can be modified"
 msgstr "Hanya praatur kustom yang bisa disunting"
@@ -2246,6 +2260,10 @@ msgstr "Warna serupa"
 msgid "Whole selection"
 msgstr "Seluruh seleksi"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Isi dengan:"
 
@@ -2387,6 +2405,28 @@ msgstr "Anti-buram"
 
 msgid "Grayscale"
 msgstr "Skala kelabu"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Pencerminan"
@@ -3094,6 +3134,9 @@ msgstr "Alat Persegi Panjang"
 msgid "Ellipse Tool"
 msgstr "Alat Lingkaran"
 
+msgid "Isometric Box Tool"
+msgstr ""
+
 msgid "Switch Colors"
 msgstr "Ganti Warna"
 
@@ -3189,7 +3232,7 @@ msgstr "Pangkas gambar"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
-msgstr "Memangkas gambar terekspor ke bagian terlihat, piksel apa pun bersaluran alfa bukan nol akan dianggap terlihat."
+msgstr "Memangkas gambar terekspor ke bagian terlihat, piksel apa pun bersaluran alfa tidak nol akan dianggap terlihat."
 
 #. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
 msgid "Clip image content to selection"

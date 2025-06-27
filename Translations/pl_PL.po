@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-04-24 19:45\n"
+"PO-Revision-Date: 2025-06-04 11:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -74,7 +74,7 @@ msgstr "Obraz"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projekt"
 
 msgid "Effects"
 msgstr "Efekty"
@@ -366,7 +366,7 @@ msgstr "Ruchome panele"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Odczep okno"
 
 msgid "Manage Layouts"
 msgstr "Zarządzaj szablonami"
@@ -1237,7 +1237,7 @@ msgstr "Współczynnik efektu odcienia:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Krzywe koloru"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
@@ -1675,6 +1675,22 @@ msgstr "Elipsa\n\n"
 "Przytrzymaj %s aby wyśrodkować kształt na miejscu kliknięcia\n"
 "Przytrzymaj %s aby przemieścić pozycję źródłową kształtu"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr "%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy\n"
+"Rysuje prostopadłościan izometryczny\n"
+"Naciśnij %s/%s aby dodać punkt bazowy\n"
+"Przytrzymaj %s aby przyciągnąć kąt punktu początkowego\n"
+"Przytrzymaj %s aby zmienić położenie punktu bazowego kształtu\n"
+"Naciśnij %s aby edytować ostatnio dodany punkt bazowy"
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1925,6 +1941,10 @@ msgstr "Kolor obramowania 1:"
 msgid "Border color 2:"
 msgstr "Kolor obramowania 2:"
 
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr "Podgląd transformacji alfa:"
+
 msgid "Only custom preset can be modified"
 msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
 
@@ -2140,7 +2160,7 @@ msgstr "Pędzle projektu"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Pędzle z pliku"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
@@ -2148,7 +2168,7 @@ msgstr "Śnieg"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Losowe pędzle z pliku"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
@@ -2241,6 +2261,10 @@ msgstr "Podobne kolory"
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
 msgstr "Całe zaznaczenie"
+
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr "Wypełnij obszary z połączenia wszystkich warstw"
 
 msgid "Fill with:"
 msgstr "Wypełnij za pomocą:"
@@ -2382,6 +2406,28 @@ msgstr "Antyaliasing"
 
 msgid "Grayscale"
 msgstr "Skala szarości"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr "Kolor krawędzi"
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr "Kolor narzędzia"
+
+msgid "Adjusted average"
+msgstr "Tryb dopasowania koloru krawędzi"
+
+msgid "Blend at interface"
+msgstr "Mieszanie na styku"
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr "Lewa ściana"
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr "Prawa ściana"
 
 msgid "Mirroring"
 msgstr "Lustrzane odbicie"
@@ -3088,6 +3134,9 @@ msgstr "Prostokąt"
 
 msgid "Ellipse Tool"
 msgstr "Elipsa"
+
+msgid "Isometric Box Tool"
+msgstr "Narzędzie \"Prostopadłościan izometryczny\""
 
 msgid "Switch Colors"
 msgstr "Zmień kolory"
@@ -3801,7 +3850,7 @@ msgstr "Nazwa kafelków:"
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
-msgstr ""
+msgstr "Rozmiar kafelka:"
 
 #. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn

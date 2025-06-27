@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-04-25 10:42\n"
+"PO-Revision-Date: 2025-06-04 09:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1672,6 +1672,16 @@ msgstr "Ferramenta de Elipse%s para botão de lado esquerdo do rato%s para botã
 "Pressione %s para centrar a forma na origem\n"
 "Pressione %s para deslocar a origem da forma"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1921,6 +1931,10 @@ msgstr "Cor de borda 1:"
 
 msgid "Border color 2:"
 msgstr "Cor de borda 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "Apenas presets personalizados podem ser modificados"
@@ -2239,6 +2253,10 @@ msgstr "Cores semelhantes"
 msgid "Whole selection"
 msgstr "Toda a seleção"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Preencher com:"
 
@@ -2380,6 +2398,28 @@ msgstr "Antialiasing"
 
 msgid "Grayscale"
 msgstr "Escala de cinza"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "Espelhar"
@@ -3086,6 +3126,9 @@ msgstr "Ferramenta de Retangulo"
 
 msgid "Ellipse Tool"
 msgstr "Ferramenta de Elipse"
+
+msgid "Isometric Box Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Trocar cores"

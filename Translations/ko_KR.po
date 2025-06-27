@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-06-04 09:37\n"
 
 msgid "OK"
 msgstr "예"
@@ -1660,6 +1660,16 @@ msgstr "원 툴\n\n"
 "%s 를 눌러 도형의 클릭 원점 중앙에 놓음\n"
 "%s 를 눌러 원점을 바꿈"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr ""
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1907,6 +1917,10 @@ msgstr "테두리 색상 1:"
 
 msgid "Border color 2:"
 msgstr "테두리 색상 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr ""
 
 msgid "Only custom preset can be modified"
 msgstr "커스텀 프리셋만 수정 가능함"
@@ -2222,6 +2236,10 @@ msgstr ""
 msgid "Whole selection"
 msgstr ""
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "이것으로 채우기:"
 
@@ -2361,6 +2379,28 @@ msgid "Antialiasing"
 msgstr ""
 
 msgid "Grayscale"
+msgstr ""
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr ""
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr ""
+
+msgid "Adjusted average"
+msgstr ""
+
+msgid "Blend at interface"
+msgstr ""
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr ""
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
 msgstr ""
 
 msgid "Mirroring"
@@ -3067,6 +3107,9 @@ msgstr "사각형 툴"
 
 msgid "Ellipse Tool"
 msgstr "원형 툴"
+
+msgid "Isometric Box Tool"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "색상 전환"

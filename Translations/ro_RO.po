@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-04-23 07:39\n"
+"PO-Revision-Date: 2025-06-16 09:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -796,11 +796,11 @@ msgstr "Imagine WebP"
 
 #. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
 msgid "OpenRaster Project"
-msgstr ""
+msgstr "Proiect OpenRaster"
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
-msgstr ""
+msgstr "Proiect Aseprite"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -1676,6 +1676,23 @@ msgstr "Instrument Elipsă\n\n"
 "Ține apăsată tasta %s pentru a centra forma pe originea clicului\n"
 "Ține apăsată tasta %s pentru a deplasa originea formei"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr "Instrument Cutie izometrică\n\n"
+"%s pentru butonul din stânga al mausului\n"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Desenează o cutie izometrică\n"
+"Apasă %s/%s pentru a adăuga un punct de bază\n"
+"Ține apăsat %s pentru a fixa unghiul punctului de bază\n"
+"Ține apăsat %s pentru a disloca originea formei\n"
+"Apasă %s pentru a edita ultima bază adăugată"
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1925,6 +1942,10 @@ msgstr "Culoarea marginii 1:"
 
 msgid "Border color 2:"
 msgstr "Culoarea marginii 2:"
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr "Previzualizare transformare alfa:"
 
 msgid "Only custom preset can be modified"
 msgstr "Doar presetarea personalizată poate fi modificată"
@@ -2243,6 +2264,10 @@ msgstr "Culori similare"
 msgid "Whole selection"
 msgstr "Selecția completă"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr "Umple regiunile de la îmbinarea tuturor straturilor"
+
 msgid "Fill with:"
 msgstr "Umplere cu:"
 
@@ -2384,6 +2409,28 @@ msgstr "Anticrenelaj"
 
 msgid "Grayscale"
 msgstr "Tonuri de gri"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr "Culoare margine"
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr "Culoare instrument"
+
+msgid "Adjusted average"
+msgstr "Medie ajustată"
+
+msgid "Blend at interface"
+msgstr "Amestecare la interfață"
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr "Latura stângă"
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr "Latura dreaptă"
 
 msgid "Mirroring"
 msgstr "Oglindire"
@@ -3090,6 +3137,9 @@ msgstr "Instrument Dreptunghi"
 
 msgid "Ellipse Tool"
 msgstr "Instrument Elipsă"
+
+msgid "Isometric Box Tool"
+msgstr "Instrument Cutie izometrică"
 
 msgid "Switch Colors"
 msgstr "Comutare culori"

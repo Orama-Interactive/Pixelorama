@@ -15,6 +15,8 @@ var transformed_selection_map: SelectionMap:
 		transformed_selection_map = value
 		if is_instance_valid(transformed_selection_map):
 			pivot = transformed_selection_map.get_size() / 2
+		else:
+			_set_default_cursor()
 		set_process_input(is_instance_valid(transformed_selection_map))
 		queue_redraw()
 var transformed_image := Image.new()
@@ -672,15 +674,21 @@ func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
 	)
 
 
-func bake_transform_to_selection(map: SelectionMap) -> void:
+func bake_transform_to_selection(map: SelectionMap, is_confirmed := false) -> void:
 	var bounds := DrawingAlgos.get_transformed_bounds(
 		transformed_selection_map.get_size(), preview_transform
 	)
-	map.ensure_selection_fits(Global.current_project, bounds)
+	var transformation_origin := get_transform_top_left().max(Vector2.ZERO)
+	if is_confirmed:
+		var position_top_left := position + get_transform_top_left()
+		transformation_origin = position_top_left
+		map.crop(Global.current_project.size.x, Global.current_project.size.y)
+		Global.current_project.selection_offset = Vector2.ZERO
+	else:
+		map.ensure_selection_fits(Global.current_project, bounds)
 	bounds.position -= bounds.position
 	var transformed_selection := SelectionMap.new()
 	transformed_selection.copy_from(transformed_selection_map)
-	var transformation_origin := get_transform_top_left().max(Vector2.ZERO)
 	bake_transform_to_image(transformed_selection, bounds)
 	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
 	map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)

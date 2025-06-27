@@ -3,6 +3,9 @@ extends BaseLayer
 ## A class for group layer properties
 
 var expanded := true
+var _group_cache: Dictionary
+var _cache_texture_data: Array[PackedByteArray]
+var _blend_generator := ShaderImageEffect.new()
 
 
 func _init(_project: Project, _name := "") -> void:
@@ -20,21 +23,25 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 	if children.size() <= 0:
 		return image
 	var textures: Array[Image] = []
+	_cache_texture_data.clear()
 	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RGF)
-	var current_child_index := 0
+	# Corresponding to the index of texture in textures. This is not the layer index
+	var current_metadata_index := 0
 	for i in children.size():
 		var layer := children[i]
 		if layer is GroupLayer:
-			current_child_index = _blend_child_group(
+			current_metadata_index = _blend_child_group(
 				image,
 				layer,
 				frame,
 				textures,
 				metadata_image,
-				current_child_index,
+				current_metadata_index,
 				origin,
 				apply_effects
 			)
+			# NOTE: incrementation of current_metadata_index is done internally in
+			# _blend_child_group(), so we don't have to use current_metadata_index += 1 here
 		else:
 			_include_child_in_blending(
 				image,
@@ -42,11 +49,11 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 				frame,
 				textures,
 				metadata_image,
-				current_child_index,
+				current_metadata_index,
 				origin,
 				apply_effects
 			)
-		current_child_index += 1
+			current_metadata_index += 1
 
 	if DisplayServer.get_name() != "headless" and textures.size() > 0:
 		var texture_array := Texture2DArray.new()
@@ -57,8 +64,25 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 			"origin_x_positive": origin.x > 0,
 			"origin_y_positive": origin.y > 0,
 		}
-		var gen := ShaderImageEffect.new()
-		gen.generate_image(image, DrawingAlgos.blend_layers_shader, params, project.size)
+		var c_key := [_cache_texture_data, metadata_image.get_data(), origin.x > 0, origin.y > 0]
+		if _group_cache.has(c_key):
+			# Don't waste time re-generating for groups that have remained unchanged
+			var cache_image = Image.create_from_data(
+				project.size.x,
+				project.size.y,
+				false,
+				project.get_image_format(),
+				_group_cache[c_key]
+			)
+			image.blit_rect(
+				cache_image, Rect2i(Vector2i.ZERO, cache_image.get_size()), Vector2i.ZERO
+			)
+		else:
+			_group_cache.clear()
+			_blend_generator.generate_image(
+				image, DrawingAlgos.blend_layers_shader, params, project.size, true, false
+			)
+			_group_cache[c_key] = image.get_data()
 		if apply_effects:
 			image = display_effects(frame.cels[index], image)
 	return image
@@ -84,6 +108,7 @@ func _include_child_in_blending(
 		else:
 			cel_image = cel.get_image()
 		textures.append(cel_image)
+		_cache_texture_data.append(cel_image.get_data())
 		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
 		if origin != Vector2i.ZERO:
 			# Only used as a preview for the move tool, when used on a group's children
@@ -117,21 +142,23 @@ func _blend_child_group(
 			var child := children[j]
 			if child is GroupLayer:
 				new_i = _blend_child_group(
-					image, child, frame, textures, metadata_image, i + j, origin, apply_effects
+					image, child, frame, textures, metadata_image, new_i, origin, apply_effects
 				)
 			else:
-				new_i += j
 				metadata_image.crop(metadata_image.get_width() + 1, metadata_image.get_height())
 				_include_child_in_blending(
 					image, child, frame, textures, metadata_image, new_i, origin, apply_effects
 				)
+				new_i += 1
 	else:
 		var blended_children := (layer as GroupLayer).blend_children(frame, origin)
 		if DisplayServer.get_name() == "headless":
 			image.blend_rect(blended_children, blend_rect, origin)
 		else:
 			textures.append(blended_children)
+			_cache_texture_data.append(blended_children.get_data())
 			DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
+		new_i += 1
 	return new_i
 
 
