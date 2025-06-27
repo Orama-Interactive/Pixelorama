@@ -35,7 +35,7 @@ func _draw() -> void:
 				var layer: BaseLayer = project.layers[layer_i]
 				if layer.is_visible_in_hierarchy():
 					# Ignore layer if it has the "_io" suffix in its name (case in-sensitive)
-					if not (layer.name.to_lower().ends_with("_io")):
+					if not layer.ignore_onion:
 						color.a = opacity / i
 						if [change, layer_i] in project.selected_cels:
 							draw_texture(cel.image_texture, canvas.move_preview_location, color)
