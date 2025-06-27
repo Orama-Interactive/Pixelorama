@@ -66,6 +66,7 @@ const AUTHORS: PackedStringArray = [
 	"Vaibhav Kubre (kubre)",
 	"VernalUmbrella",
 	"Vriska Weaver (henlo-birb)",
+	"zibetnu",
 ]
 
 const TRANSLATORS_DICTIONARY := {
