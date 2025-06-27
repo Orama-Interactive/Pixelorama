@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-04-23 00:53\n"
+"PO-Revision-Date: 2025-06-05 13:35\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1679,6 +1679,23 @@ msgstr "椭圆工具\n\n"
 "按住 %s 使形状在单击原点居中\n"
 "按住 %s 移动形状的原点"
 
+msgid "Isometric Box Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Draws an isometric box\n"
+"Press %s/%s to add a basis point\n"
+"Hold %s to snap the angle of the basis point\n"
+"Hold %s to displace the shape's origin\n"
+"Press %s to edit the last added basis"
+msgstr "等距框工具\n\n"
+"%s 为鼠标左键\n"
+"%s 为鼠标右键\n\n"
+"绘制等距框\n"
+"按 %s/%s 添加基点\n"
+"按住 %s 捕捉基点的角度\n"
+"按住 %s 移动形状原点\n"
+"按 %s 编辑最后添加的基点"
+
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
@@ -1819,11 +1836,11 @@ msgstr "六边形"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "六角形（尖顶）"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "六角形（平顶）"
 
 msgid "All"
 msgstr "全部"
@@ -1928,6 +1945,10 @@ msgstr "边框颜色 1："
 
 msgid "Border color 2:"
 msgstr "边框颜色 2："
+
+#. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
+msgid "Transformation preview alpha:"
+msgstr "变换预览 alpha："
 
 msgid "Only custom preset can be modified"
 msgstr "仅修改自定义预设"
@@ -2246,6 +2267,10 @@ msgstr "相似颜色"
 msgid "Whole selection"
 msgstr "全部选区"
 
+#. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
+msgid "Fill regions from the merging of all layers"
+msgstr "通过合并所有图层来填充区域"
+
 msgid "Fill with:"
 msgstr "填充使用："
 
@@ -2387,6 +2412,28 @@ msgstr "抗锯齿"
 
 msgid "Grayscale"
 msgstr "灰度"
+
+#. Refers to the color of a shape's edge.
+msgid "Edge Color"
+msgstr "边缘颜色"
+
+#. Refers to the color of a tool.
+msgid "Tool color"
+msgstr "工具颜色"
+
+msgid "Adjusted average"
+msgstr "调整平均值"
+
+msgid "Blend at interface"
+msgstr "在接口混合时"
+
+#. Refers to the left face of a box shape.
+msgid "Left Face"
+msgstr "左面"
+
+#. Refers to the right face of a box shape.
+msgid "Right Face"
+msgstr "右面"
 
 msgid "Mirroring"
 msgstr "镜像"
@@ -2608,11 +2655,11 @@ msgstr "剪切蒙版"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr ""
+msgstr "展平"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr ""
+msgstr "展平可见"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -3093,6 +3140,9 @@ msgstr "矩形工具"
 
 msgid "Ellipse Tool"
 msgstr "椭圆工具"
+
+msgid "Isometric Box Tool"
+msgstr "等距框工具"
 
 msgid "Switch Colors"
 msgstr "切换颜色"

@@ -76,7 +76,7 @@ func _on_left_shade_slider_value_changed(value: float) -> void:
 
 func _on_right_shade_slider_value_changed(value: float) -> void:
 	if _right_shade_value != value:
-		_left_shade_value = value
+		_right_shade_value = value
 		update_config()
 		save_config()
 
