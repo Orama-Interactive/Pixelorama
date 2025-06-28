@@ -40,163 +40,143 @@ static func open_photoshop_file(path: String) -> void:
 	var layer_and_mask_info_section_length := psd_file.get_32()
 	# Layer info
 	var layer_info_length := psd_file.get_32()
-	var layer_count := psd_file.get_16()
+	var layer_count_buffer := psd_file.get_buffer(2)
+	layer_count_buffer.reverse()
+	var layer_count := layer_count_buffer.decode_s16(0)
+	if layer_count < 0:
+		layer_count = -layer_count
 	print("Layer count: ", layer_count)
-	var layers_channels: Array[int] = []
-	layers_channels.resize(layer_count)
-	var layer_rectangles: Array[PackedByteArray] = []
-	layer_rectangles.resize(layer_count)
+	var psd_layers: Array[Dictionary] = []
 	# Layer records
 	for i in layer_count:
-		var layer_rectangle := psd_file.get_buffer(16)
-		layer_rectangles[i] = layer_rectangle
-		var layer_channels := psd_file.get_16()
-		layers_channels[i] = layer_channels
-		var channel_information := psd_file.get_buffer(6 * layer_channels)
+		var layer := {}
+		layer.top = psd_file.get_32()
+		layer.left = psd_file.get_32()
+		layer.bottom = psd_file.get_32()
+		layer.right = psd_file.get_32()
+		layer.width = layer.right - layer.left
+		layer.height = layer.bottom - layer.top
+		layer.name = "Layer %s" % i
+
+		var num_channels := psd_file.get_16()
+		layer.channels = []
+
+		for j in range(num_channels):
+			var channel := {}
+			var channel_id_buffer := psd_file.get_buffer(2)
+			channel_id_buffer.reverse()
+			channel.id = channel_id_buffer.decode_s16(0)
+			channel.length = psd_file.get_32()
+			layer.channels.append(channel)
 		var blend_mode_signature := psd_file.get_buffer(4).get_string_from_utf8()
 		if blend_mode_signature != "8BIM":
 			return
 		var blend_mode_key := psd_file.get_buffer(4).get_string_from_utf8()
+		layer.blend_mode = blend_mode_key
 		var opacity := psd_file.get_8()
+		layer.opacity = opacity
 		var clipping := psd_file.get_8()
 		var flags := psd_file.get_8()
+		layer.visible = flags & 2 != 2
 		var _filler := psd_file.get_8()
 		var extra_data_field_length := psd_file.get_32()
+		var extra_start := psd_file.get_position()
+		var extra_end := extra_start + extra_data_field_length
 		var _all_extra_data_fields := psd_file.get_buffer(extra_data_field_length)
-		#print("length: ", extra_data_field_length)
-		# Layer mask / adjustment layer data
-		#var layer_mask_data_size := psd_file.get_32()
-		#if layer_mask_data_size != 0:
-			#var layer_mask_rectangle := psd_file.get_buffer(16)
-			#var layer_mask_default_color := psd_file.get_8()
-			#var layer_mask_flags := psd_file.get_8()
-			#if layer_mask_flags & 4 == 4:
-				#var layer_mask_parameters := psd_file.get_8()
-				#if layer_mask_parameters & 0 == 0:
-					#var user_mask_density := psd_file.get_8()
-				#if layer_mask_parameters & 1 == 1:
-					#var user_mask_feather := psd_file.get_buffer(8)
-				#if layer_mask_parameters & 2 == 2:
-					#var vector_mask_density := psd_file.get_8()
-				#if layer_mask_parameters & 3 == 3:
-					#var vector_mask_feather := psd_file.get_buffer(8)
-			#if layer_mask_data_size == 20:
-				#var padding := psd_file.get_16()
-			#else:
-				#var real_flags := psd_file.get_8()
-				#var real_mask_bg := psd_file.get_8()
-				#var layer_mask_rectangle_2 := psd_file.get_buffer(16)
-		## Layer blending ranges data
-		#var layer_blending_ranged_data_length := psd_file.get_32()
-		#var composite_gray_blend_source := psd_file.get_32()
-		#var composite_gray_blend_destination_range := psd_file.get_32()
-		#for j in n_of_channels:
-			#var channel_source_range := psd_file.get_32()
-			#var channel_destination_range := psd_file.get_32()
-	# Channel image data
-	for i in layer_count:
-		var image := read_channel_image_data(psd_file, layers_channels[i], layer_rectangles[i])
-		if is_instance_valid(image):
-			var layer := PixelLayer.new(new_project)
+		psd_layers.append(layer)
+
+	# Track file offset for each layer's image data at Channel Image Data block
+	for layer in psd_layers:
+		for channel in layer.channels:
+			channel.data_offset = psd_file.get_position()
+			psd_file.seek(psd_file.get_position() + channel.length)
+
+	var layer_index := 0
+	for psd_layer in psd_layers:
+		var image := decode_psd_layer(psd_file, psd_layer)
+		if is_instance_valid(image) and not image.is_empty():
+			image.crop(width, height)
+			var img_copy := Image.new()
+			img_copy.copy_from(image)
+			image.fill(Color(0, 0, 0, 0))
+			var offset := Vector2i(psd_layer.left, psd_layer.top)
+			image.blit_rect(img_copy, Rect2i(Vector2i.ZERO, image.get_size()), offset)
+			prints(image.get_size(), image.get_format())
+			var layer := PixelLayer.new(new_project, psd_layer.name)
+			layer.visible = psd_layer.visible
+			layer.opacity = psd_layer.opacity / 255.0
+			layer.index = layer_index
 			var cel := layer.new_cel_from_image(image)
 			frame.cels.append(cel)
 			new_project.layers.append(layer)
+			layer_index += 1
+
 	#var layer_and_mask_info_section := psd_file.get_buffer(layer_and_mask_info_section_length - 6-16)
 	#prints(layer_info, layer_count)
 	psd_file.close()
 
 	new_project.frames.append(frame)
+	new_project.order_layers()
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
 
-static func read_channel_image_data(psd_file: FileAccess, n_of_channels: int, layer_rectangle: PackedByteArray) -> Image:
-	var top_buffer := layer_rectangle.slice(0, 4)
-	var left_buffer := layer_rectangle.slice(4, 8)
-	var bottom_buffer := layer_rectangle.slice(8, 12)
-	var right_buffer := layer_rectangle.slice(12, 16)
-	top_buffer.reverse()
-	left_buffer.reverse()
-	bottom_buffer.reverse()
-	right_buffer.reverse()
-	var top := top_buffer.decode_u32(0)
-	var left := left_buffer.decode_u32(0)
-	var bottom := bottom_buffer.decode_u32(0)
-	var right := right_buffer.decode_u32(0)
-	var width := right - left
-	var height := bottom - top
-	var compression := psd_file.get_16()
-	prints(compression, n_of_channels, layer_rectangle, top, left, bottom, right, height)
+static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
+	var img_channels := {}
+	for channel in layer.channels:
+		psd_file.seek(channel.data_offset)
 
-	var _image: Image
-	if compression == 0:
-		var byte_size := n_of_channels * height * width
-		var image_data := psd_file.get_buffer(byte_size)
-		var _data: PackedByteArray = []
-		# Raw data is stored by channel: [RRR...][GGG...][BBB...][AAA...]
-		for y in range(height):
-			for x in range(width):
-				var pixel_index := y * width + x
-				for c in range(n_of_channels):
-					var byte_index := c * width * height + pixel_index
-					if byte_index >= image_data.size():
-						push_error("byte_index out of bounds: %d / %d" % [byte_index, image_data.size()])
-						break
-					_data.append(image_data.decode_u8(byte_index))
+		var compression := psd_file.get_16()
+		var width: int = layer.width
+		var height: int = layer.height
+		var size: int = width * height
 
-		# Pick correct format based on channel count
-		if n_of_channels == 3:
-			_image = Image.create_from_data(width, height, false, Image.FORMAT_RGB8, _data)
-		elif n_of_channels == 4:
-			_image = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, _data)
+		var raw_data := PackedByteArray()
 
-	elif compression == 1:
-		# Step 1: Read RLE line byte counts
-		var rle_line_counts: PackedInt32Array
-		for c in n_of_channels:
-			for y in height:
-				var count_bytes := psd_file.get_buffer(2)
-				count_bytes.reverse()
-				var count := count_bytes.decode_u16(0)
-				rle_line_counts.append(count)
+		if compression == 0:  # Raw Data
+			raw_data = psd_file.get_buffer(size)
+		elif compression == 1:  # RLE
+			var scanline_counts: PackedInt32Array = []
+			for i in range(height):
+				scanline_counts.append(psd_file.get_16())
 
-		# Step 2: Sum total data size
-		var total_rle_data_size := 0
-		for count in rle_line_counts:
-			total_rle_data_size += count
+			for i in range(height):
+				var scanline := PackedByteArray()
+				var bytes_remaining := scanline_counts[i]
+				while scanline.size() < width and bytes_remaining > 0:
+					var n := psd_file.get_8()
+					bytes_remaining -= 1
+					if n >= 128:
+						var count := 257 - n
+						var val := psd_file.get_8()
+						bytes_remaining -= 1
+						for j in range(count):
+							scanline.append(val)
+					else:
+						var count := n + 1
+						for j in range(count):
+							var val := psd_file.get_8()
+							scanline.append(val)
+						bytes_remaining -= count
+				raw_data.append_array(scanline)
+		else:
+			push_error("Unsupported compression: %d" % compression)
+			continue
 
-		# Step 3: Read actual image data
-		var image_data := psd_file.get_buffer(total_rle_data_size)
-		var decoded_data: PackedByteArray = []
-		var index := 0
-		while index < image_data.size():
-			var _d := image_data.decode_u8(index)
-			if _d >= 0x80:  # Run-length encoded
-				index += 1
-				for i in range(256 - _d + 1):
-					decoded_data.append(image_data.decode_u8(index))
-			else:  # Raw data
-				for i in range(_d + 1):
-					index += 1
-					decoded_data.append(image_data.decode_u8(index))
-			index += 1
-		var _data: PackedByteArray = []
-		index = 0
-		while index < width * height:
-			for i in range(n_of_channels):
-				var byte_offset := index + width * height * i
-				if byte_offset <= decoded_data.size():
-					var _d := decoded_data.decode_u8(byte_offset)
-					_data.append(_d)
-			index += 1
+		img_channels[channel.id] = raw_data
 
-		if n_of_channels == 3:
-			_image = Image.create_from_data(width, height, false, Image.FORMAT_RGB8, _data)
-		elif n_of_channels == 4:
-			_image = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, _data)
+	# Rebuild image
+	var img_data := PackedByteArray()
+	for i in range(layer.width * layer.height):
+		var r = img_channels[0][i] if img_channels.has(0) else 255
+		var g = img_channels[1][i] if img_channels.has(1) else 255
+		var b = img_channels[2][i] if img_channels.has(2) else 255
+		var a = img_channels[-1][i] if img_channels.has(-1) else 255
+		img_data.append_array([r, g, b, a])
 
-	return _image
+	var image := Image.create_from_data(layer.width, layer.height, false, Image.FORMAT_RGBA8, img_data)
+	return image
 
 
 static func open_photoshop_file_single_image(path: String) -> void:
@@ -238,11 +218,11 @@ static func open_photoshop_file_single_image(path: String) -> void:
 	var compression := psd_file.get_16()
 	print("Compression: ", compression)
 	# Remaining image data
-	var len := psd_file.get_length()
+	var length := psd_file.get_length()
 	#print("File Size: ", len)
 	var pos := psd_file.get_position()
 	#print("Current Position: ", pos)
-	var image_data := psd_file.get_buffer(len - pos)
+	var image_data := psd_file.get_buffer(length - pos)
 
 	var _image: Image
 	if compression == 0:
