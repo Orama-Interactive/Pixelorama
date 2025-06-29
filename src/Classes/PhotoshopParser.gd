@@ -172,6 +172,12 @@ static func open_photoshop_file(path: String) -> void:
 				frame.cels.append(cel)
 
 	psd_file.close()
+	if new_project.layers.size() == 0:
+		var layer := PixelLayer.new(new_project)
+		layer.index = 0
+		new_project.layers.append(layer)
+		var cel := layer.new_empty_cel()
+		frame.cels.append(cel)
 	organize_layer_child_levels(new_project)
 	new_project.frames.append(frame)
 	new_project.order_layers()
@@ -189,6 +195,8 @@ static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
 		var width: int = layer.width
 		var height: int = layer.height
 		var size: int = width * height
+		if size <= 0:
+			continue
 
 		var raw_data := PackedByteArray()
 
@@ -222,7 +230,8 @@ static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
 			push_error("Unsupported compression: %d" % compression)
 			continue
 
-		img_channels[channel.id] = raw_data
+		if not raw_data.is_empty():
+			img_channels[channel.id] = raw_data
 
 	# Rebuild image
 	var img_data := PackedByteArray()
