@@ -39,9 +39,7 @@ static func open_photoshop_file(path: String) -> void:
 	var layer_and_mask_info_section_length := psd_file.get_32()
 	# Layer info
 	var layer_info_length := psd_file.get_32()
-	var layer_count_buffer := psd_file.get_buffer(2)
-	layer_count_buffer.reverse()
-	var layer_count := layer_count_buffer.decode_s16(0)
+	var layer_count := get_signed_16(psd_file)
 	if layer_count < 0:
 		layer_count = -layer_count
 	print("Layer count: ", layer_count)
@@ -50,10 +48,10 @@ static func open_photoshop_file(path: String) -> void:
 	# Layer records
 	for i in layer_count:
 		var layer := {}
-		layer.top = psd_file.get_32()
-		layer.left = psd_file.get_32()
-		layer.bottom = psd_file.get_32()
-		layer.right = psd_file.get_32()
+		layer.top = get_signed_32(psd_file)
+		layer.left = get_signed_32(psd_file)
+		layer.bottom = get_signed_32(psd_file)
+		layer.right = get_signed_32(psd_file)
 		layer.width = layer.right - layer.left
 		layer.height = layer.bottom - layer.top
 		layer.name = "Layer %s" % i
@@ -64,9 +62,7 @@ static func open_photoshop_file(path: String) -> void:
 
 		for j in range(num_channels):
 			var channel := {}
-			var channel_id_buffer := psd_file.get_buffer(2)
-			channel_id_buffer.reverse()
-			channel.id = channel_id_buffer.decode_s16(0)
+			channel.id = get_signed_16(psd_file)
 			channel.length = psd_file.get_32()
 			layer.channels.append(channel)
 		var blend_mode_signature := psd_file.get_buffer(4).get_string_from_utf8()
@@ -125,7 +121,6 @@ static func open_photoshop_file(path: String) -> void:
 			psd_file.seek(data_start + ((length + 1) & ~1))
 
 		layer.layer_child_level = layer_child_level
-		prints(layer.name, layer.group_type, layer.layer_child_level)
 		psd_layers.append(layer)
 
 	# Track file offset for each layer's image data at Channel Image Data block
@@ -164,7 +159,6 @@ static func open_photoshop_file(path: String) -> void:
 				image.fill(Color(0, 0, 0, 0))
 				var offset := Vector2i(psd_layer.left, psd_layer.top)
 				image.blit_rect(img_copy, Rect2i(Vector2i.ZERO, image.get_size()), offset)
-				prints(image.get_size(), image.get_format())
 				var cel := layer.new_cel_from_image(image)
 				frame.cels.append(cel)
 			else:
@@ -184,6 +178,18 @@ static func open_photoshop_file(path: String) -> void:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
+
+
+static func get_signed_16(file: FileAccess) -> int:
+	var buffer := file.get_buffer(2)
+	buffer.reverse()
+	return buffer.decode_s16(0)
+
+
+static func get_signed_32(file: FileAccess) -> int:
+	var buffer := file.get_buffer(4)
+	buffer.reverse()
+	return buffer.decode_s32(0)
 
 
 static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
@@ -312,9 +318,7 @@ static func open_photoshop_file_single_image(path: String) -> void:
 	print("Compression: ", compression)
 	# Remaining image data
 	var length := psd_file.get_length()
-	#print("File Size: ", len)
 	var pos := psd_file.get_position()
-	#print("Current Position: ", pos)
 	var image_data := psd_file.get_buffer(length - pos)
 
 	var image: Image
