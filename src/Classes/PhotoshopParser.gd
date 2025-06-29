@@ -17,8 +17,8 @@ static func open_photoshop_file(path: String) -> void:
 	print("version: ", version)
 	psd_file.get_buffer(6)  # Reserved
 	var n_of_channels := psd_file.get_16()
-	var width := psd_file.get_32()
 	var height := psd_file.get_32()
+	var width := psd_file.get_32()
 	var project_size := Vector2i(width, height)
 	var new_project := Project.new([], path.get_file().get_basename(), project_size)
 	var frame := Frame.new()
