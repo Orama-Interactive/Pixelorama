@@ -45,6 +45,7 @@ static func open_photoshop_file(path: String) -> void:
 	if layer_count < 0:
 		layer_count = -layer_count
 	print("Layer count: ", layer_count)
+	var layer_child_level := 0
 	var psd_layers: Array[Dictionary] = []
 	# Layer records
 	for i in layer_count:
@@ -108,8 +109,10 @@ static func open_photoshop_file(path: String) -> void:
 				match section_type:
 					1, 2:
 						layer.group_type = "start"
+						layer_child_level -= 1
 					3:
 						layer.group_type = "end"
+						layer_child_level += 1
 					_:
 						layer.group_type = "layer"
 			elif key == "luni":
@@ -121,7 +124,8 @@ static func open_photoshop_file(path: String) -> void:
 			# Move to next block (align length to even)
 			psd_file.seek(data_start + ((length + 1) & ~1))
 
-		prints(layer.name, layer.group_type)
+		layer.layer_child_level = layer_child_level
+		prints(layer.name, layer.group_type, layer.layer_child_level)
 		psd_layers.append(layer)
 
 	# Track file offset for each layer's image data at Channel Image Data block
@@ -132,26 +136,43 @@ static func open_photoshop_file(path: String) -> void:
 
 	var layer_index := 0
 	for psd_layer in psd_layers:
-		var image := decode_psd_layer(psd_file, psd_layer)
-		if is_instance_valid(image) and not image.is_empty():
-			image.crop(width, height)
-			var img_copy := Image.new()
-			img_copy.copy_from(image)
-			image.fill(Color(0, 0, 0, 0))
-			var offset := Vector2i(psd_layer.left, psd_layer.top)
-			image.blit_rect(img_copy, Rect2i(Vector2i.ZERO, image.get_size()), offset)
-			prints(image.get_size(), image.get_format())
+		if psd_layer.group_type == "end":
+			continue
+		if psd_layer.group_type == "start":
+			var layer := GroupLayer.new(new_project, psd_layer.name)
+			layer.visible = psd_layer.visible
+			layer.opacity = psd_layer.opacity / 255.0
+			layer.index = layer_index
+			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
+			var cel := layer.new_empty_cel()
+			frame.cels.append(cel)
+			new_project.layers.append(layer)
+			layer_index += 1
+		else:
 			var layer := PixelLayer.new(new_project, psd_layer.name)
 			layer.visible = psd_layer.visible
 			layer.opacity = psd_layer.opacity / 255.0
 			layer.index = layer_index
-			var cel := layer.new_cel_from_image(image)
-			frame.cels.append(cel)
+			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
 			new_project.layers.append(layer)
 			layer_index += 1
+			var image := decode_psd_layer(psd_file, psd_layer)
+			if is_instance_valid(image) and not image.is_empty():
+				image.crop(width, height)
+				var img_copy := Image.new()
+				img_copy.copy_from(image)
+				image.fill(Color(0, 0, 0, 0))
+				var offset := Vector2i(psd_layer.left, psd_layer.top)
+				image.blit_rect(img_copy, Rect2i(Vector2i.ZERO, image.get_size()), offset)
+				prints(image.get_size(), image.get_format())
+				var cel := layer.new_cel_from_image(image)
+				frame.cels.append(cel)
+			else:
+				var cel := layer.new_empty_cel()
+				frame.cels.append(cel)
 
 	psd_file.close()
-
+	organize_layer_child_levels(new_project)
 	new_project.frames.append(frame)
 	new_project.order_layers()
 	Global.projects.append(new_project)
@@ -212,10 +233,34 @@ static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
 		var a = img_channels[-1][i] if img_channels.has(-1) else 255
 		img_data.append_array([r, g, b, a])
 
-	var image := Image.create_from_data(
-		layer.width, layer.height, false, Image.FORMAT_RGBA8, img_data
-	)
+	var image: Image
+	if layer.width > 0 and layer.height > 0:
+		image = Image.create_from_data(
+			layer.width, layer.height, false, Image.FORMAT_RGBA8, img_data
+		)
 	return image
+
+
+static func organize_layer_child_levels(project: Project) -> void:
+	for i in project.layers.size():
+		var layer := project.layers[i]
+		var layer_child_level: int = layer.get_meta(&"layer_child_level", 0)
+		if layer_child_level > 0:
+			var parent_layer: GroupLayer = null
+			var parent_i := 1
+			while parent_layer == null and i + parent_i < project.layers.size():
+				var prev_layer := project.layers[i + parent_i]
+				if prev_layer is GroupLayer:
+					if prev_layer.get_meta(&"layer_child_level", 0) == layer_child_level - 1:
+						parent_layer = prev_layer
+						break
+				parent_i += 1
+			if is_instance_valid(parent_layer):
+				layer.parent = parent_layer
+	for i in project.layers.size():
+		var layer := project.layers[i]
+		layer.remove_meta(&"layer_child_level")
+		layer.index = i
 
 
 static func open_photoshop_file_single_image(path: String) -> void:
