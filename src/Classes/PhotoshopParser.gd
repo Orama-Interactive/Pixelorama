@@ -137,6 +137,7 @@ static func open_photoshop_file(path: String) -> void:
 			var layer := GroupLayer.new(new_project, psd_layer.name)
 			layer.visible = psd_layer.visible
 			layer.opacity = psd_layer.opacity / 255.0
+			layer.blend_mode = match_blend_modes(psd_layer.blend_mode)
 			layer.index = layer_index
 			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
 			var cel := layer.new_empty_cel()
@@ -147,6 +148,7 @@ static func open_photoshop_file(path: String) -> void:
 			var layer := PixelLayer.new(new_project, psd_layer.name)
 			layer.visible = psd_layer.visible
 			layer.opacity = psd_layer.opacity / 255.0
+			layer.blend_mode = match_blend_modes(psd_layer.blend_mode)
 			layer.index = layer_index
 			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
 			new_project.layers.append(layer)
@@ -254,6 +256,61 @@ static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
 			layer.width, layer.height, false, Image.FORMAT_RGBA8, img_data
 		)
 	return image
+
+
+## Match Photoshop's blend modes to Pixelorama's
+static func match_blend_modes(blend_mode: String) -> BaseLayer.BlendModes:
+	match blend_mode:
+		"pass":  # Only used for group layers
+			return BaseLayer.BlendModes.PASS_THROUGH
+		"norm":
+			return BaseLayer.BlendModes.NORMAL
+		"eras":
+			return BaseLayer.BlendModes.ERASE
+		"dark":
+			return BaseLayer.BlendModes.DARKEN
+		"mul ":
+			return BaseLayer.BlendModes.MULTIPLY
+		"burn":
+			return BaseLayer.BlendModes.COLOR_BURN
+		"ldbr":
+			return BaseLayer.BlendModes.LINEAR_BURN
+		"lite":
+			return BaseLayer.BlendModes.LIGHTEN
+		"scrn":
+			return BaseLayer.BlendModes.SCREEN
+		"div ":
+			return BaseLayer.BlendModes.DIVIDE
+		"diff":
+			return BaseLayer.BlendModes.DIFFERENCE
+		"smud":  # Not used here, legacy
+			return BaseLayer.BlendModes.NORMAL
+		"idiv":
+			return BaseLayer.BlendModes.DIVIDE
+		"dodg":
+			return BaseLayer.BlendModes.COLOR_DODGE
+		"add ":
+			return BaseLayer.BlendModes.ADD
+		"over":
+			return BaseLayer.BlendModes.OVERLAY
+		"sLit":
+			return BaseLayer.BlendModes.SOFT_LIGHT
+		"hLit":
+			return BaseLayer.BlendModes.HARD_LIGHT
+		"excl":
+			return BaseLayer.BlendModes.EXCLUSION
+		"sub ":
+			return BaseLayer.BlendModes.SUBTRACT
+		"hue ":
+			return BaseLayer.BlendModes.HUE
+		"sat ":
+			return BaseLayer.BlendModes.SATURATION
+		"colr":
+			return BaseLayer.BlendModes.COLOR
+		"lum ":
+			return BaseLayer.BlendModes.LUMINOSITY
+		_:
+			return BaseLayer.BlendModes.NORMAL
 
 
 static func organize_layer_child_levels(project: Project) -> void:
