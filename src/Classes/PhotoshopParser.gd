@@ -212,7 +212,9 @@ static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
 		var a = img_channels[-1][i] if img_channels.has(-1) else 255
 		img_data.append_array([r, g, b, a])
 
-	var image := Image.create_from_data(layer.width, layer.height, false, Image.FORMAT_RGBA8, img_data)
+	var image := Image.create_from_data(
+		layer.width, layer.height, false, Image.FORMAT_RGBA8, img_data
+	)
 	return image
 
 
@@ -261,48 +263,48 @@ static func open_photoshop_file_single_image(path: String) -> void:
 	#print("Current Position: ", pos)
 	var image_data := psd_file.get_buffer(length - pos)
 
-	var _image: Image
+	var image: Image
 	if compression == 0:
-		var _data:PackedByteArray = []
+		var _data: PackedByteArray = []
 		var index = 0
 		while index < width * height:
 			for i in range(4):
-				var _d = image_data.decode_u8(index + width * height * i)
-				_data.append(_d)
+				var d := image_data.decode_u8(index + width * height * i)
+				_data.append(d)
 			index += 1
-		_image = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, _data)
+		image = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, _data)
 
 	elif compression == 1:
 		# Skip per-row RLE headers (2 bytes per channel per row)
 		image_data = image_data.slice(n_of_channels * 2 * height)
-		var decoded_data:PackedByteArray = []
+		var decoded_data: PackedByteArray = []
 		var index := 0
 		while index < image_data.size():
-			var _d := image_data.decode_u8(index)
-			if _d >= 0x80:  # Run-length encoded
+			var d := image_data.decode_u8(index)
+			if d >= 0x80:  # Run-length encoded
 				index += 1
-				for i in range(256 - _d + 1):
+				for i in range(256 - d + 1):
 					decoded_data.append(image_data.decode_u8(index))
 			else:  # Raw data
-				for i in range(_d + 1):
+				for i in range(d + 1):
 					index += 1
 					decoded_data.append(image_data.decode_u8(index))
 			index += 1
-		var _data: PackedByteArray = []
+		var data: PackedByteArray = []
 		index = 0
 		while index < width * height:
 			for i in range(n_of_channels):
-				var _d := decoded_data.decode_u8(index + width * height * i)
-				_data.append(_d)
+				var d := decoded_data.decode_u8(index + width * height * i)
+				data.append(d)
 			index += 1
 
 		if n_of_channels == 3:
-			_image = Image.create_from_data(width, height, false, Image.FORMAT_RGB8, _data)
+			image = Image.create_from_data(width, height, false, Image.FORMAT_RGB8, data)
 		elif n_of_channels == 4:
-			_image = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, _data)
+			image = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, data)
 	psd_file.close()
 	var layer := PixelLayer.new(new_project)
-	var cel := layer.new_cel_from_image(_image)
+	var cel := layer.new_cel_from_image(image)
 	frame.cels.append(cel)
 	new_project.layers.append(layer)
 	new_project.frames.append(frame)
