@@ -21,7 +21,6 @@ static func open_photoshop_file(path: String) -> void:
 	var height := psd_file.get_32()
 	var project_size := Vector2i(width, height)
 	var new_project := Project.new([], path.get_file().get_basename(), project_size)
-	new_project.fps = 1.0
 	var frame := Frame.new()
 	prints(width, height)
 	var depth := psd_file.get_16()
@@ -57,6 +56,7 @@ static func open_photoshop_file(path: String) -> void:
 		layer.width = layer.right - layer.left
 		layer.height = layer.bottom - layer.top
 		layer.name = "Layer %s" % i
+		layer.group_type = "layer"
 
 		var num_channels := psd_file.get_16()
 		layer.channels = []
@@ -82,7 +82,46 @@ static func open_photoshop_file(path: String) -> void:
 		var extra_data_field_length := psd_file.get_32()
 		var extra_start := psd_file.get_position()
 		var extra_end := extra_start + extra_data_field_length
-		var _all_extra_data_fields := psd_file.get_buffer(extra_data_field_length)
+
+		# First 4 bytes: Layer mask data length (skip it)
+		var layer_mask_data_len := psd_file.get_32()
+		psd_file.seek(psd_file.get_position() + layer_mask_data_len)
+
+		# Next 4 bytes: Layer blending ranges data length (skip it)
+		var blend_range_len := psd_file.get_32()
+		psd_file.seek(psd_file.get_position() + blend_range_len)
+
+		# Next: Pascal string (layer name)
+		var name_length := psd_file.get_8()
+		var padded_length := (((name_length + 4) / 4) * 4) - 1
+		layer.name = psd_file.get_buffer(padded_length).get_string_from_utf8()
+
+		# Remaining: Additional Layer Information blocks
+		while psd_file.get_position() < extra_end:
+			var sig := psd_file.get_buffer(4).get_string_from_utf8()  # Should be "8BIM"
+			var key := psd_file.get_buffer(4).get_string_from_utf8()
+			var length := psd_file.get_32()
+			var data_start := psd_file.get_position()
+
+			if key == "lsct":
+				var section_type := psd_file.get_32()
+				match section_type:
+					1, 2:
+						layer.group_type = "start"
+					3:
+						layer.group_type = "end"
+					_:
+						layer.group_type = "layer"
+			elif key == "luni":
+				# Unicode layer name (UTF-16 string length, then UTF-16 content)
+				name_length = psd_file.get_32()
+				var name_utf16 := psd_file.get_buffer(name_length * 2)
+				#layer.name = name_utf16.get_string_from_utf16()
+
+			# Move to next block (align length to even)
+			psd_file.seek(data_start + ((length + 1) & ~1))
+
+		prints(layer.name, layer.group_type)
 		psd_layers.append(layer)
 
 	# Track file offset for each layer's image data at Channel Image Data block
@@ -111,8 +150,6 @@ static func open_photoshop_file(path: String) -> void:
 			new_project.layers.append(layer)
 			layer_index += 1
 
-	#var layer_and_mask_info_section := psd_file.get_buffer(layer_and_mask_info_section_length - 6-16)
-	#prints(layer_info, layer_count)
 	psd_file.close()
 
 	new_project.frames.append(frame)
