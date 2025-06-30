@@ -155,6 +155,8 @@ static func open_photoshop_file(path: String) -> void:
 				name_length = psd_file.get_32()
 				var name_utf16 := psd_file.get_buffer(name_length * 2)
 				#layer.name = name_utf16.get_string_from_utf16()
+			elif key == "lclr":
+				layer.color = parse_lclr_block(psd_file.get_buffer(8))
 
 			# Move to next block (align length to even)
 			psd_file.seek(data_start + ((length + 1) & ~1))
@@ -181,6 +183,7 @@ static func open_photoshop_file(path: String) -> void:
 			layer.opacity = psd_layer.opacity / 255.0
 			layer.clipping_mask = psd_layer.clipping
 			layer.blend_mode = match_blend_modes(psd_layer.blend_mode)
+			layer.ui_color = psd_layer.color
 			layer.index = layer_index
 			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
 			layer.expanded = psd_layer.group_type == "start"
@@ -194,6 +197,7 @@ static func open_photoshop_file(path: String) -> void:
 			layer.opacity = psd_layer.opacity / 255.0
 			layer.clipping_mask = psd_layer.clipping
 			layer.blend_mode = match_blend_modes(psd_layer.blend_mode)
+			layer.ui_color = psd_layer.color
 			layer.index = layer_index
 			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
 			new_project.layers.append(layer)
@@ -359,6 +363,32 @@ static func match_blend_modes(blend_mode: String) -> BaseLayer.BlendModes:
 			return BaseLayer.BlendModes.LUMINOSITY
 		_:
 			return BaseLayer.BlendModes.NORMAL
+
+
+## Used to determine the color of the layer in the UI.
+static func parse_lclr_block(buffer: PackedByteArray) -> Color:
+	if buffer.size() < 8:
+		return Color(0, 0, 0, 0)
+	var color_index := buffer[1]
+	match color_index:
+		0:
+			return Color(0, 0, 0, 0)
+		1:
+			return Color.RED
+		2:
+			return Color.ORANGE
+		3:
+			return Color.YELLOW
+		4:
+			return Color.GREEN
+		5:
+			return Color.BLUE
+		6:
+			return Color.VIOLET
+		7:
+			return Color.GRAY
+		_:
+			return Color(0, 0, 0, 0)
 
 
 static func organize_layer_child_levels(project: Project) -> void:
