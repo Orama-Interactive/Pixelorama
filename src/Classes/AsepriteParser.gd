@@ -210,8 +210,7 @@ static func open_aseprite_file(path: String) -> void:
 						var _diagonal_flip_bitmask := ase_file.get_32()
 						ase_file.get_buffer(10)  # Reserved
 						var tilemap_cel := cel as CelTileMap
-						@warning_ignore("integer_division")
-						var bytes_per_tile := bits_per_tile / 8
+						@warning_ignore("integer_division") var bytes_per_tile := bits_per_tile / 8
 						var tile_data_compressed := ase_file.get_buffer(
 							chunk_size - TILEMAP_CEL_CHUNK_SIZE
 						)
