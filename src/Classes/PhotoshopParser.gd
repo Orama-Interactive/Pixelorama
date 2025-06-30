@@ -1,6 +1,22 @@
 class_name PhotoshopParser
 extends RefCounted
 
+const PSB_EIGHT_BYTE_ADDITIONAL_LAYER_KEYS: PackedStringArray = [
+	"LMsk",
+	"Lr16",
+	"Lr32",
+	"Layr",
+	"Mt16",
+	"Mt32",
+	"Mtrn",
+	"Alph",
+	"FMsk",
+	"lnk2",
+	"FEid",
+	"FXid",
+	"PxSD"
+]
+
 
 # https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
 # https://github.com/gaoyan2659365465/Godot4Library/blob/main/addons/psd/psd.gd
@@ -14,7 +30,9 @@ static func open_photoshop_file(path: String) -> void:
 	if signature != "8BPS":
 		return
 	var version := psd_file.get_16()
-	print("version: ", version)
+	if version != 1 and version != 2:
+		return
+	var is_psb := version == 2
 	psd_file.get_buffer(6)  # Reserved
 	var n_of_channels := psd_file.get_16()
 	var height := psd_file.get_32()
@@ -23,18 +41,26 @@ static func open_photoshop_file(path: String) -> void:
 	# Color Mode Data
 	var color_mode := psd_file.get_16()
 	var color_data_length := psd_file.get_32()
-	print("Color data length: ", color_data_length)
 	if color_data_length > 0:
-		var color_data := psd_file.get_buffer(color_data_length)
+		var data_start := psd_file.get_position()
+		psd_file.seek(data_start + color_data_length)
 	# Image Resources
 	var image_resources_length := psd_file.get_32()
-	print("Image resources length: ", image_resources_length)
 	if image_resources_length > 0:
-		var image_resources := psd_file.get_buffer(image_resources_length)
+		var data_start := psd_file.get_position()
+		psd_file.seek(data_start + image_resources_length)
 	# Layer and Mask Information Section
-	var layer_and_mask_info_section_length := psd_file.get_32()
+	var layer_and_mask_info_section_length: int
+	if is_psb:
+		layer_and_mask_info_section_length = psd_file.get_64()
+	else:
+		layer_and_mask_info_section_length = psd_file.get_32()
 	# Layer info
-	var layer_info_length := psd_file.get_32()
+	var layer_info_length: int
+	if is_psb:
+		layer_info_length = psd_file.get_64()
+	else:
+		layer_info_length = psd_file.get_32()
 	var layer_count := get_signed_16(psd_file)
 	if layer_count < 0:
 		layer_count = -layer_count
@@ -59,7 +85,10 @@ static func open_photoshop_file(path: String) -> void:
 		for j in range(num_channels):
 			var channel := {}
 			channel.id = get_signed_16(psd_file)
-			channel.length = psd_file.get_32()
+			if is_psb:
+				channel.length = psd_file.get_64()
+			else:
+				channel.length = psd_file.get_32()
 			layer.channels.append(channel)
 		var blend_mode_signature := psd_file.get_buffer(4).get_string_from_utf8()
 		if blend_mode_signature != "8BIM":
@@ -93,7 +122,11 @@ static func open_photoshop_file(path: String) -> void:
 		while psd_file.get_position() < extra_end:
 			var sig := psd_file.get_buffer(4).get_string_from_utf8()  # Should be "8BIM"
 			var key := psd_file.get_buffer(4).get_string_from_utf8()
-			var length := psd_file.get_32()
+			var length: int
+			if is_psb and key in PSB_EIGHT_BYTE_ADDITIONAL_LAYER_KEYS:
+				length = psd_file.get_64()
+			else:
+				length = psd_file.get_32()
 			var data_start := psd_file.get_position()
 
 			if key == "lsct":
@@ -162,7 +195,7 @@ static func open_photoshop_file(path: String) -> void:
 			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
 			new_project.layers.append(layer)
 			layer_index += 1
-			var image := decode_psd_layer(psd_file, psd_layer)
+			var image := decode_psd_layer(psd_file, psd_layer, is_psb)
 			if is_instance_valid(image) and not image.is_empty():
 				image.crop(width, height)
 				var img_copy := Image.new()
@@ -203,7 +236,7 @@ static func get_signed_32(file: FileAccess) -> int:
 	return buffer.decode_s32(0)
 
 
-static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
+static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary, is_psb: bool) -> Image:
 	var img_channels := {}
 	for channel in layer.channels:
 		psd_file.seek(channel.data_offset)
@@ -222,7 +255,10 @@ static func decode_psd_layer(psd_file: FileAccess, layer: Dictionary) -> Image:
 		elif compression == 1:  # RLE
 			var scanline_counts: PackedInt32Array = []
 			for i in range(height):
-				scanline_counts.append(psd_file.get_16())
+				if is_psb:
+					scanline_counts.append(psd_file.get_32())
+				else:
+					scanline_counts.append(psd_file.get_16())
 
 			for i in range(height):
 				var scanline := PackedByteArray()
