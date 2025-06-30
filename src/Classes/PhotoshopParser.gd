@@ -103,8 +103,11 @@ static func open_photoshop_file(path: String) -> void:
 			if key == "lsct":
 				var section_type := psd_file.get_32()
 				match section_type:
-					1, 2:
+					1:
 						layer.group_type = "start"
+						layer_child_level -= 1
+					2:
+						layer.group_type = "start_closed"
 						layer_child_level -= 1
 					3:
 						layer.group_type = "end"
@@ -133,13 +136,14 @@ static func open_photoshop_file(path: String) -> void:
 	for psd_layer in psd_layers:
 		if psd_layer.group_type == "end":
 			continue
-		if psd_layer.group_type == "start":
+		if psd_layer.group_type.begins_with("start"):
 			var layer := GroupLayer.new(new_project, psd_layer.name)
 			layer.visible = psd_layer.visible
 			layer.opacity = psd_layer.opacity / 255.0
 			layer.blend_mode = match_blend_modes(psd_layer.blend_mode)
 			layer.index = layer_index
 			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
+			layer.expanded = psd_layer.group_type == "start"
 			var cel := layer.new_empty_cel()
 			frame.cels.append(cel)
 			new_project.layers.append(layer)
