@@ -19,10 +19,6 @@ static func open_photoshop_file(path: String) -> void:
 	var n_of_channels := psd_file.get_16()
 	var height := psd_file.get_32()
 	var width := psd_file.get_32()
-	var project_size := Vector2i(width, height)
-	var new_project := Project.new([], path.get_file().get_basename(), project_size)
-	var frame := Frame.new()
-	prints(width, height)
 	var depth := psd_file.get_16()
 	# Color Mode Data
 	var color_mode := psd_file.get_16()
@@ -114,6 +110,12 @@ static func open_photoshop_file(path: String) -> void:
 						layer_child_level += 1
 					_:
 						layer.group_type = "layer"
+				if length >= 12:
+					var section_signature := psd_file.get_buffer(4).get_string_from_utf8()
+					var section_blend_mode_key := psd_file.get_buffer(4).get_string_from_utf8()
+					layer.blend_mode = section_blend_mode_key
+					if length >= 16:
+						var sub_type := psd_file.get_32()
 			elif key == "luni":
 				# Unicode layer name (UTF-16 string length, then UTF-16 content)
 				name_length = psd_file.get_32()
@@ -132,6 +134,9 @@ static func open_photoshop_file(path: String) -> void:
 			channel.data_offset = psd_file.get_position()
 			psd_file.seek(psd_file.get_position() + channel.length)
 
+	var project_size := Vector2i(width, height)
+	var new_project := Project.new([], path.get_file().get_basename(), project_size)
+	var frame := Frame.new()
 	var layer_index := 0
 	for psd_layer in psd_layers:
 		if psd_layer.group_type == "end":
