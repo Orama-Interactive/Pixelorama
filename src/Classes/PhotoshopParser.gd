@@ -98,6 +98,7 @@ static func open_photoshop_file(path: String) -> void:
 		var opacity := psd_file.get_8()
 		layer.opacity = opacity
 		var clipping := psd_file.get_8()
+		layer.clipping = clipping
 		var flags := psd_file.get_8()
 		layer.visible = flags & 2 != 2
 		var _filler := psd_file.get_8()
@@ -178,6 +179,7 @@ static func open_photoshop_file(path: String) -> void:
 			var layer := GroupLayer.new(new_project, psd_layer.name)
 			layer.visible = psd_layer.visible
 			layer.opacity = psd_layer.opacity / 255.0
+			layer.clipping_mask = psd_layer.clipping
 			layer.blend_mode = match_blend_modes(psd_layer.blend_mode)
 			layer.index = layer_index
 			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
@@ -190,6 +192,7 @@ static func open_photoshop_file(path: String) -> void:
 			var layer := PixelLayer.new(new_project, psd_layer.name)
 			layer.visible = psd_layer.visible
 			layer.opacity = psd_layer.opacity / 255.0
+			layer.clipping_mask = psd_layer.clipping
 			layer.blend_mode = match_blend_modes(psd_layer.blend_mode)
 			layer.index = layer_index
 			layer.set_meta(&"layer_child_level", psd_layer.layer_child_level)
