@@ -20,6 +20,7 @@ const PSB_EIGHT_BYTE_ADDITIONAL_LAYER_KEYS: PackedStringArray = [
 
 # https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
 # https://github.com/gaoyan2659365465/Godot4Library/blob/main/addons/psd/psd.gd
+# gdlint: disable=function-variable-name
 static func open_photoshop_file(path: String) -> void:
 	var psd_file := FileAccess.open(path, FileAccess.READ)
 	if FileAccess.get_open_error() != OK or psd_file == null:
@@ -34,17 +35,17 @@ static func open_photoshop_file(path: String) -> void:
 		return
 	var is_psb := version == 2
 	psd_file.get_buffer(6)  # Reserved
-	var n_of_channels := psd_file.get_16()
+	var _n_of_channels := psd_file.get_16()
 	var height := psd_file.get_32()
 	var width := psd_file.get_32()
-	var depth := psd_file.get_16()
-	var guides: Array[Dictionary] = []
+	var _depth := psd_file.get_16()
 	# Color Mode Data
-	var color_mode := psd_file.get_16()
+	var _color_mode := psd_file.get_16()
 	var color_data_length := psd_file.get_32()
 	if color_data_length > 0:
 		var data_start := psd_file.get_position()
 		psd_file.seek(data_start + color_data_length)
+	var guides: Array[Dictionary] = []
 	# Image Resources
 	var image_resources_length := psd_file.get_32()
 	if image_resources_length > 0:
@@ -52,9 +53,11 @@ static func open_photoshop_file(path: String) -> void:
 		var data_end := data_start + image_resources_length
 		while psd_file.get_position() < data_end:
 			var image_resources_signature := psd_file.get_buffer(4).get_string_from_ascii()
+			if image_resources_signature != "8BIM":
+				return
 			var resource_id := psd_file.get_16()
 			var name_len := psd_file.get_8()
-			var name := psd_file.get_buffer(name_len).get_string_from_utf8()
+			var _name := psd_file.get_buffer(name_len).get_string_from_utf8()
 			# Pad to even byte count
 			if (name_len + 1) % 2 != 0:
 				psd_file.get_8()  # Padding byte
@@ -66,7 +69,7 @@ static func open_photoshop_file(path: String) -> void:
 			if resource_id == 1032:  # Grid and guides
 				var gg_version_buffer := data.slice(0, 4)
 				gg_version_buffer.reverse()
-				var gg_version := gg_version_buffer.decode_s32(0)
+				var _gg_version := gg_version_buffer.decode_s32(0)
 				var guide_count_buffer := data.slice(12, 16)
 				guide_count_buffer.reverse()
 				var guide_count := guide_count_buffer.decode_s32(0)
@@ -80,17 +83,17 @@ static func open_photoshop_file(path: String) -> void:
 					guides.append({"position": guide_location / 32.0, "direction": guide_direction})
 		psd_file.seek(data_end)
 	# Layer and Mask Information Section
-	var layer_and_mask_info_section_length: int
+	var _layer_and_mask_info_section_length: int
 	if is_psb:
-		layer_and_mask_info_section_length = psd_file.get_64()
+		_layer_and_mask_info_section_length = psd_file.get_64()
 	else:
-		layer_and_mask_info_section_length = psd_file.get_32()
+		_layer_and_mask_info_section_length = psd_file.get_32()
 	# Layer info
-	var layer_info_length: int
+	var _layer_info_length: int
 	if is_psb:
-		layer_info_length = psd_file.get_64()
+		_layer_info_length = psd_file.get_64()
 	else:
-		layer_info_length = psd_file.get_32()
+		_layer_info_length = psd_file.get_32()
 	var layer_count := get_signed_16(psd_file)
 	if layer_count < 0:
 		layer_count = -layer_count
@@ -146,12 +149,12 @@ static func open_photoshop_file(path: String) -> void:
 
 		# Next: Pascal string (layer name)
 		var name_length := psd_file.get_8()
-		var padded_length := (((name_length + 4) / 4) * 4) - 1
+		@warning_ignore("integer_division") var padded_length := (((name_length + 4) / 4) * 4) - 1
 		layer.name = psd_file.get_buffer(padded_length).get_string_from_utf8()
 
 		# Remaining: Additional Layer Information blocks
 		while psd_file.get_position() < extra_end:
-			var sig := psd_file.get_buffer(4).get_string_from_utf8()  # Should be "8BIM"
+			var _sig := psd_file.get_buffer(4).get_string_from_utf8()
 			var key := psd_file.get_buffer(4).get_string_from_utf8()
 			var length: int
 			if is_psb and key in PSB_EIGHT_BYTE_ADDITIONAL_LAYER_KEYS:
@@ -175,15 +178,16 @@ static func open_photoshop_file(path: String) -> void:
 					_:
 						layer.group_type = "layer"
 				if length >= 12:
-					var section_signature := psd_file.get_buffer(4).get_string_from_utf8()
+					var _section_signature := psd_file.get_buffer(4).get_string_from_utf8()
 					var section_blend_mode_key := psd_file.get_buffer(4).get_string_from_utf8()
 					layer.blend_mode = section_blend_mode_key
 					if length >= 16:
-						var sub_type := psd_file.get_32()
+						# 0 = normal, 1 = scene group, affects the animation timeline.
+						var _sub_type := psd_file.get_32()
 			elif key == "luni":
 				# Unicode layer name (UTF-16 string length, then UTF-16 content)
 				name_length = psd_file.get_32()
-				var name_utf16 := psd_file.get_buffer(name_length * 2)
+				var _name_utf16 := psd_file.get_buffer(name_length * 2)
 				#layer.name = name_utf16.get_string_from_utf16()
 			elif key == "lclr":
 				layer.color = parse_lclr_block(psd_file.get_buffer(8))
@@ -278,13 +282,15 @@ static func open_photoshop_file(path: String) -> void:
 
 static func get_signed_16(file: FileAccess) -> int:
 	var buffer := file.get_buffer(2)
-	buffer.reverse()
+	if file.big_endian:
+		buffer.reverse()
 	return buffer.decode_s16(0)
 
 
 static func get_signed_32(file: FileAccess) -> int:
 	var buffer := file.get_buffer(4)
-	buffer.reverse()
+	if file.big_endian:
+		buffer.reverse()
 	return buffer.decode_s32(0)
 
 
@@ -456,96 +462,3 @@ static func organize_layer_child_levels(project: Project) -> void:
 		var layer := project.layers[i]
 		layer.remove_meta(&"layer_child_level")
 		layer.index = i
-
-
-static func open_photoshop_file_single_image(path: String) -> void:
-	var psd_file := FileAccess.open(path, FileAccess.READ)
-	if FileAccess.get_open_error() != OK or psd_file == null:
-		return
-	psd_file.big_endian = true
-	# File header
-	var signature := psd_file.get_buffer(4).get_string_from_utf8()
-	if signature != "8BPS":
-		return
-	var version := psd_file.get_16()
-	print("version: ", version)
-	psd_file.get_buffer(6)  # Reserved
-	var n_of_channels := psd_file.get_16()
-	var width := psd_file.get_32()
-	var height := psd_file.get_32()
-	var project_size := Vector2i(width, height)
-	var new_project := Project.new([], path.get_file().get_basename(), project_size)
-	new_project.fps = 1.0
-	var frame := Frame.new()
-	prints(width, height)
-	var depth := psd_file.get_16()
-	# Color Mode Data
-	var color_mode := psd_file.get_16()
-	var color_data_length := psd_file.get_32()
-	print("Color data length: ", color_data_length)
-	if color_data_length > 0:
-		var color_data := psd_file.get_buffer(color_data_length)
-	# Image Resources
-	var image_resources_length := psd_file.get_32()
-	print("Image resources length: ", image_resources_length)
-	if image_resources_length > 0:
-		var image_resources := psd_file.get_buffer(image_resources_length)
-	# Layer and Mask Information Section
-	var layer_and_mask_info_section_length := psd_file.get_32()
-	var layer_and_mask_info_section := psd_file.get_buffer(layer_and_mask_info_section_length)
-	# Image data
-	var compression := psd_file.get_16()
-	print("Compression: ", compression)
-	# Remaining image data
-	var length := psd_file.get_length()
-	var pos := psd_file.get_position()
-	var image_data := psd_file.get_buffer(length - pos)
-
-	var image: Image
-	if compression == 0:
-		var _data: PackedByteArray = []
-		var index = 0
-		while index < width * height:
-			for i in range(4):
-				var d := image_data.decode_u8(index + width * height * i)
-				_data.append(d)
-			index += 1
-		image = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, _data)
-
-	elif compression == 1:
-		# Skip per-row RLE headers (2 bytes per channel per row)
-		image_data = image_data.slice(n_of_channels * 2 * height)
-		var decoded_data: PackedByteArray = []
-		var index := 0
-		while index < image_data.size():
-			var d := image_data.decode_u8(index)
-			if d >= 0x80:  # Run-length encoded
-				index += 1
-				for i in range(256 - d + 1):
-					decoded_data.append(image_data.decode_u8(index))
-			else:  # Raw data
-				for i in range(d + 1):
-					index += 1
-					decoded_data.append(image_data.decode_u8(index))
-			index += 1
-		var data: PackedByteArray = []
-		index = 0
-		while index < width * height:
-			for i in range(n_of_channels):
-				var d := decoded_data.decode_u8(index + width * height * i)
-				data.append(d)
-			index += 1
-
-		if n_of_channels == 3:
-			image = Image.create_from_data(width, height, false, Image.FORMAT_RGB8, data)
-		elif n_of_channels == 4:
-			image = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, data)
-	psd_file.close()
-	var layer := PixelLayer.new(new_project)
-	var cel := layer.new_cel_from_image(image)
-	frame.cels.append(cel)
-	new_project.layers.append(layer)
-	new_project.frames.append(frame)
-	Global.projects.append(new_project)
-	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
