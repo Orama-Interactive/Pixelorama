@@ -97,7 +97,6 @@ static func open_photoshop_file(path: String) -> void:
 	var layer_count := get_signed_16(psd_file)
 	if layer_count < 0:
 		layer_count = -layer_count
-	print("Layer count: ", layer_count)
 	var layer_child_level := 0
 	var psd_layers: Array[Dictionary] = []
 	# Layer records

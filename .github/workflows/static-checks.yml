@@ -27,6 +27,5 @@ jobs:
       - name: Spell checks via codespell
         uses: codespell-project/actions-codespell@v2
         with:
-          skip: ./addons,*.po
-          exclude_file: src/UI/Dialogs/AboutDialog.gd, src/Classes/PhotoshopParser.gd
+          skip: ./addons,*.po.src/UI/Dialogs/AboutDialog.gd,src/Classes/PhotoshopParser.gd
           ignore_words_list: chello,doubleclick,Manuel, SectionIn
