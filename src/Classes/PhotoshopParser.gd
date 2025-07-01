@@ -38,6 +38,7 @@ static func open_photoshop_file(path: String) -> void:
 	var height := psd_file.get_32()
 	var width := psd_file.get_32()
 	var depth := psd_file.get_16()
+	var guides: Array[Dictionary] = []
 	# Color Mode Data
 	var color_mode := psd_file.get_16()
 	var color_data_length := psd_file.get_32()
@@ -48,7 +49,36 @@ static func open_photoshop_file(path: String) -> void:
 	var image_resources_length := psd_file.get_32()
 	if image_resources_length > 0:
 		var data_start := psd_file.get_position()
-		psd_file.seek(data_start + image_resources_length)
+		var data_end := data_start + image_resources_length
+		while psd_file.get_position() < data_end:
+			var image_resources_signature := psd_file.get_buffer(4).get_string_from_ascii()
+			var resource_id := psd_file.get_16()
+			var name_len := psd_file.get_8()
+			var name := psd_file.get_buffer(name_len).get_string_from_utf8()
+			# Pad to even byte count
+			if (name_len + 1) % 2 != 0:
+				psd_file.get_8()  # Padding byte
+
+			var size := psd_file.get_32()
+			var data := psd_file.get_buffer(size)
+			if size % 2 != 0:
+				psd_file.get_8()  # Padding byte
+			if resource_id == 1032:  # Grid and guides
+				var gg_version_buffer := data.slice(0, 4)
+				gg_version_buffer.reverse()
+				var gg_version := gg_version_buffer.decode_s32(0)
+				var guide_count_buffer := data.slice(12, 16)
+				guide_count_buffer.reverse()
+				var guide_count := guide_count_buffer.decode_s32(0)
+				var byte_index := 16
+				for i in guide_count:
+					var guide_location_buffer := data.slice(byte_index, byte_index + 4)
+					guide_location_buffer.reverse()
+					var guide_location := guide_location_buffer.decode_s32(0)
+					var guide_direction := data[byte_index + 4]
+					byte_index += 5
+					guides.append({"position": guide_location / 32.0, "direction": guide_direction})
+		psd_file.seek(data_end)
 	# Layer and Mask Information Section
 	var layer_and_mask_info_section_length: int
 	if is_psb:
@@ -226,6 +256,21 @@ static func open_photoshop_file(path: String) -> void:
 	organize_layer_child_levels(new_project)
 	new_project.frames.append(frame)
 	new_project.order_layers()
+	for psd_guide in guides:
+		var guide := Guide.new()
+		if psd_guide.direction == 0:
+			guide.type = Guide.Types.VERTICAL
+			guide.add_point(Vector2(psd_guide.position, -99999))
+			guide.add_point(Vector2(psd_guide.position, 99999))
+		else:
+			guide.type = Guide.Types.HORIZONTAL
+			guide.add_point(Vector2(-99999, psd_guide.position))
+			guide.add_point(Vector2(99999, psd_guide.position))
+		guide.has_focus = false
+		guide.project = new_project
+		new_project.guides.append(guide)
+		Global.canvas.add_child(guide)
+
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
