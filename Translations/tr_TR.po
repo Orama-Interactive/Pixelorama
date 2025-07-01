@@ -10,13 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-06-04 09:37\n"
+"PO-Revision-Date: 2025-07-01 18:34\n"
 
 msgid "OK"
 msgstr "Tamam"
 
 msgid "Cancel"
-msgstr "İptal Et"
+msgstr "İptal"
 
 msgid "Open"
 msgstr "Aç"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Kaydet"
 
 msgid "Please Confirm..."
-msgstr "Lütfen Doğrulayın..."
+msgstr "Lütfen Olaylayın..."
 
 msgid "File Name:"
 msgstr "Dosya Adı:"
@@ -110,10 +110,10 @@ msgstr "Etkinleştirilirse, son harmanlanmış görüntüler de her kare için p
 "Pixelorama'da pxo dosyalarını yüklemek için bu seçeneğin etkinleştirilmesine gerek yoktur."
 
 msgid "Import"
-msgstr "İçe aktar"
+msgstr "İçe Aktar"
 
 msgid "Export"
-msgstr "Dışa aktar"
+msgstr "Dışa Aktar"
 
 msgid "Overwrite"
 msgstr "Üzerine Yaz"
@@ -128,13 +128,13 @@ msgid "Export PNG..."
 msgstr "PNG'yi Dışa Aktar..."
 
 msgid "Export PNG as..."
-msgstr "PNG'yi Dışa Farklı Aktar..."
+msgstr "PNG'yi Farklı Dışa Aktar..."
 
 msgid "Quit"
 msgstr "Çık"
 
 msgid "Undo"
-msgstr "Geri Al"
+msgstr "Geri"
 
 msgid "Redo"
 msgstr "Yinele"
@@ -163,7 +163,7 @@ msgstr "Kalıcı Olarak Sil"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr "Çöp Kutusuna Taşı"
+msgstr "Çöp Kutusuna taşı"
 
 msgid "New Brush"
 msgstr "Yeni Fırça"
@@ -179,15 +179,15 @@ msgstr "Yüzde"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr "Renk kipi:"
+msgstr "Renk modu:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr "Renk Kipi"
+msgstr "Renk Modu"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr "İndeksli"
+msgstr "Numaralı"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -201,10 +201,10 @@ msgid "Resize Canvas"
 msgstr "Tuvali Yeniden Boyutlandır"
 
 msgid "Offset Image"
-msgstr "Resim Uzaklığı"
+msgstr "Resmi Ötele"
 
 msgid "Offset:"
-msgstr "Uzaklık:"
+msgstr "Ötele:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
@@ -383,7 +383,7 @@ msgstr "Düzen Ekle"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr "%s sil"
+msgstr "Sil: %s"
 
 msgid "Copy from"
 msgstr "Şuradan kopyala"
@@ -458,7 +458,7 @@ msgid "Show Animation Timeline"
 msgstr "Animasyon Çizelgesini Göster"
 
 msgid "Zen Mode"
-msgstr "Zen Kipi"
+msgstr "Sade Mod"
 
 msgid "Fullscreen Mode"
 msgstr "Tam Ekran Kipi"
@@ -798,11 +798,11 @@ msgstr "WebP Görüntüsü"
 
 #. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
 msgid "OpenRaster Project"
-msgstr ""
+msgstr "OpenRaster Projesi"
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
-msgstr ""
+msgstr "Aseprite Projesi"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -1586,7 +1586,10 @@ msgid "Crop\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Kırp\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
+"Tuvali yeniden boyutlandır"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1819,11 +1822,11 @@ msgstr "Altıgen"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Altıgensel (sivri üst)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Altıgensel (düz üst)"
 
 msgid "All"
 msgstr "Tümü"
@@ -2015,7 +2018,7 @@ msgstr "Çevrimiçi Keşfet"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Extension Explorer"
-msgstr ""
+msgstr "Uzantı Gezgini"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2030,7 +2033,7 @@ msgstr "Etiketler:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr ""
+msgstr "Uzantıyla hata raporla"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2040,30 +2043,33 @@ msgstr "İndir"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Repository links:"
-msgstr ""
+msgstr "Depo bağlantıları:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Fetching data from remote repository.\n"
 "Please wait."
-msgstr ""
+msgstr "Uzak depodan veri çekiliyor.\n"
+"Lütfen bekleyin."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository.\n\n"
 "- Make sure you are connected to the internet.\n"
 "- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
-msgstr ""
+msgstr "Uzak depodan bilgi alınamadı.\n\n"
+"- İnternete bağlı olduğunuzdan emin olun.\n"
+"- Eğer Pixelorama'nın Flatpak sürümünü kullanıyorsanız, internete bağlanması için yetki vermeniz gerekmektedir. Bunu yapmak için terminalde şu kodu çalıştırabilirsiniz:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
-msgstr ""
+msgstr "Ya da Flatseal'ı indirebilir ve Flatpak uygulamalarının izinlerini oradan verebilirsiniz."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr ""
+msgstr "Uzak depodan bilgi alınamadı."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
@@ -2398,7 +2404,7 @@ msgstr ""
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Araç rengi"
 
 msgid "Adjusted average"
 msgstr ""
@@ -2408,11 +2414,11 @@ msgstr ""
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Sol Yüz"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Sağ Yüz"
 
 msgid "Mirroring"
 msgstr "Yansıtma"
