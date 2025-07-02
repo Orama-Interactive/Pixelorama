@@ -36,6 +36,7 @@ var omniscale_shader_premul_alpha: Shader:
 		return omniscale_shader_premul_alpha
 var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
 var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
+var isometric_tile_cache := {}
 
 
 ## Blends canvas layers into passed image starting from the origin position
@@ -669,18 +670,71 @@ func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
 	)
 
 
-func generate_isometric_rectangle(image: Image) -> void:
-	var half_size := image.get_size() / 2
-	var up := Vector2i(half_size.x, 0)
-	var right := Vector2i(image.get_size().x, half_size.y)
-	if image.get_height() < image.get_width():
-		up += Vector2i.LEFT
-	elif image.get_height() > image.get_width():
-		up += Vector2i.DOWN
-		right += Vector2i.DOWN
+func generate_isometric_rectangle(image: Image, is_gap_tile: bool) -> void:
+	if isometric_tile_cache.has(image.get_size()):
+		if isometric_tile_cache[image.get_size()].has(is_gap_tile):
+			var cache_img: Image = isometric_tile_cache[image.get_size()][is_gap_tile]
+			image.blit_rect(cache_img, Rect2i(Vector2i.ZERO, cache_img.get_size()), Vector2i.ZERO)
+			return
+		isometric_tile_cache.clear()
+	var half_size := ((Vector2(image.get_size()) - Vector2.ONE) / 2).floor()
+	var even_check = image.get_size() % 2
+	var even_offset = Vector2i(even_check.x == 0, even_check.y == 0)
+	var up := Vector2i(half_size.x + even_offset.x, 0)
+	var right := Vector2i(image.get_size().x - 1, half_size.y)
+	if is_gap_tile:
+		var test = Geometry2D.bresenham_line(up, right)
+		var a: Vector2i
+		var b = test[-1] + Vector2i.UP
+		var line_r = []
+		var sub_position_x := []
+		var sub_position_y := []
+		var scan_dir = [Vector2i.RIGHT]
+		for i in test.size():
+			if up.y == test[i].y:
+				a = test[i] + Vector2i.RIGHT
+			var pt: Vector2i = test[i]
+			if i == test.size() - 1:
+				scan_dir.erase(Vector2i.RIGHT)
+			for dir in scan_dir:
+				if (
+					Rect2i(Vector2i.ZERO, image.get_size()).has_point(test[i] + dir)
+					and !line_r.has(
+						Vector2i((test[i] + dir).x, image.get_size().y - 1 - (test[i] + dir).y)
+					)
+					and !test.has(test[i] + dir)
+				):
+					var small_point = test[i] + dir
+					line_r.push_front(
+						Vector2i(small_point.x, image.get_size().y - 1 - small_point.y)
+					)
+					sub_position_x.append(small_point.x)
+					sub_position_y.append(image.get_size().y - 1 - small_point.y)
+			if not pt + Vector2i.RIGHT in test and not scan_dir.has(Vector2i.UP):
+				scan_dir.push_front(Vector2i.UP)
+		var pos = Vector2i(sub_position_x.min(), sub_position_y.min())
+		var sub_size_x = (b.x - a.x + 1) * 2
+		var sub_size_y = (b.y - a.y + 1) * 2
+		var offset_x: int = floori((sub_size_x - image.get_size().x) / 2.0)
+		var offset_y: int = floori((sub_size_y - image.get_size().y) / 2.0)
+		var offset := Vector2i(-offset_x, -offset_y)
+		for i in line_r.size():
+			var val_local = line_r[i] - pos
+			line_r[i] = Vector2i(sub_size_x - 1 - val_local.x, val_local.y)
+		for pixel in line_r:
+			image.set_pixelv(pixel + offset, Color.WHITE)
+			var left := Vector2i(sub_size_x - 1 - pixel.x, pixel.y)
+			for j in range(pixel.x, left.x - 1, -1):
+				image.set_pixel(j + offset.x, pixel.y + offset.y, Color.WHITE)
+				var mirror_y := Vector2i(j, sub_size_y - 1 - pixel.y)
+				for k in range(pixel.y, mirror_y.y + 1):
+					image.set_pixel(j + offset.x, k + offset.y, Color.WHITE)
+			var mirror_right := Vector2i(pixel.x, sub_size_y - 1 - pixel.y)
+			image.set_pixelv(mirror_right + offset, Color.WHITE)
+			isometric_tile_cache.get_or_add(image.get_size(), {})[is_gap_tile] = image.duplicate()
+		return
+
 	var up_right := Geometry2D.bresenham_line(up, right)
-	up_right.pop_back()
-	up_right.pop_back()
 	for pixel in up_right:
 		image.set_pixelv(pixel, Color.WHITE)
 		var left := Vector2i(image.get_size().x - 1 - pixel.x, pixel.y)
@@ -691,6 +745,7 @@ func generate_isometric_rectangle(image: Image) -> void:
 				image.set_pixel(j, k, Color.WHITE)
 		var mirror_right := Vector2i(pixel.x, image.get_size().y - 1 - pixel.y)
 		image.set_pixelv(mirror_right, Color.WHITE)
+		isometric_tile_cache.get_or_add(image.get_size(), {})[is_gap_tile] = image.duplicate()
 
 
 func generate_hexagonal_pointy_top(image: Image) -> void:
