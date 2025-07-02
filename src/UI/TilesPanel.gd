@@ -326,11 +326,9 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			&& is_transposed == ROTATION_MATRIX[i * 3 + 2]
 		):
 			if clockwise:
-				@warning_ignore("integer_division")
-				final_i = i / 4 * 4 + posmod(i - 1, 4)
+				@warning_ignore("integer_division") final_i = i / 4 * 4 + posmod(i - 1, 4)
 			else:
-				@warning_ignore("integer_division")
-				final_i = i / 4 * 4 + (i + 1) % 4
+				@warning_ignore("integer_division") final_i = i / 4 * 4 + (i + 1) % 4
 			is_flipped_h = ROTATION_MATRIX[final_i * 3]
 			is_flipped_v = ROTATION_MATRIX[final_i * 3 + 1]
 			is_transposed = ROTATION_MATRIX[final_i * 3 + 2]

@@ -903,8 +903,7 @@ func open_image_as_tileset(
 			var cropped_image := image.get_region(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
-			@warning_ignore("int_as_enum_without_cast")
-			tileset.add_tile(cropped_image, null, 0)
+			@warning_ignore("int_as_enum_without_cast") tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
 
 
@@ -929,8 +928,7 @@ func open_image_as_tileset_smart(
 			tile_size.x, tile_size.y, false, project.get_image_format()
 		)
 		cropped_image.blit_rect(image, rect, offset)
-		@warning_ignore("int_as_enum_without_cast")
-		tileset.add_tile(cropped_image, null, 0)
+		@warning_ignore("int_as_enum_without_cast") tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
 
 

@@ -4,6 +4,9 @@ enum RotationAlgorithm { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, UR
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 ## Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
+
+const DUMMY_PRE_MUL_ALPHA_SHADER := preload("res://src/Shaders/DummyPreMulAlpha.gdshader")
+
 var blend_layers_shader := preload("res://src/Shaders/BlendLayers.gdshader")
 var clean_edge_shader: Shader:
 	get:
@@ -15,6 +18,22 @@ var omniscale_shader: Shader:
 		if omniscale_shader == null:
 			omniscale_shader = load("res://src/Shaders/Effects/Rotation/OmniScale.gdshader")
 		return omniscale_shader
+var clean_edge_shader_premul_alpha: Shader:
+	get:
+		if clean_edge_shader_premul_alpha == null:
+			clean_edge_shader_premul_alpha = clean_edge_shader.duplicate()
+			clean_edge_shader_premul_alpha.code = clean_edge_shader.code.replace(
+				"unshaded", "unshaded, blend_premul_alpha"
+			)
+		return clean_edge_shader_premul_alpha
+var omniscale_shader_premul_alpha: Shader:
+	get:
+		if omniscale_shader_premul_alpha == null:
+			omniscale_shader_premul_alpha = omniscale_shader.duplicate()
+			omniscale_shader_premul_alpha.code = omniscale_shader.code.replace(
+				"unshaded", "unshaded, blend_premul_alpha"
+			)
+		return omniscale_shader_premul_alpha
 var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
 var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var isometric_tile_cache := {}
@@ -357,11 +376,13 @@ func transform_image_with_viewport(
 	var shader: Shader = null
 	match algorithm:
 		RotationAlgorithm.CLEANEDGE:
-			shader = clean_edge_shader
+			shader = clean_edge_shader_premul_alpha
 		RotationAlgorithm.OMNISCALE:
-			shader = omniscale_shader
+			shader = omniscale_shader_premul_alpha
 		RotationAlgorithm.NNS:
 			shader = nn_shader
+		_:
+			shader = DUMMY_PRE_MUL_ALPHA_SHADER
 	if is_instance_valid(shader):
 		RenderingServer.material_set_shader(mat_rid, shader.get_rid())
 	RenderingServer.canvas_item_set_material(ci_rid, mat_rid)
