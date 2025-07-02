@@ -168,7 +168,9 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 			frame.set_duration_in_seconds(aimg_frame.duration, project.fps)
 		var content := aimg_frame.content
 		content.convert(project.get_image_format())
-		frame.cels.append(PixelCel.new(content, 1))
+		var image_extended := ImageExtended.new()
+		image_extended.copy_from_custom(content)
+		frame.cels.append(PixelCel.new(image_extended, 1))
 		project.frames.append(frame)
 
 	set_new_imported_tab(project, path)
