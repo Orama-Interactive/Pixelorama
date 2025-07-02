@@ -25,10 +25,15 @@ func _draw() -> void:
 			return
 
 		var grid_type := Global.grids[grid_idx].grid_type
+		var flags: PackedStringArray = Global.grids[grid_idx].special_flags
+		var is_y_separated: bool = flags.has("y_separated")
+		var is_pixelated: bool = Global.grids[grid_idx].is_pixelated
 		var cel := Global.current_project.get_current_cel()
 		if cel is CelTileMap and grid_idx == 0:
 			if cel.get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
 				grid_type = Global.GridTypes.ISOMETRIC
+				is_pixelated = true
+				is_y_separated = false
 			elif cel.get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 				if cel.get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 					grid_type = Global.GridTypes.HEXAGONAL_POINTY_TOP
@@ -39,7 +44,10 @@ func _draw() -> void:
 		if grid_type == Global.GridTypes.CARTESIAN:
 			_draw_cartesian_grid(grid_idx, target_rect)
 		elif grid_type == Global.GridTypes.ISOMETRIC:
-			_draw_isometric_grid(grid_idx, target_rect)
+			if is_pixelated:
+				_draw_pixelated_isometric_grid(grid_idx, target_rect, is_y_separated)
+			else:
+				_draw_isometric_grid(grid_idx, target_rect)
 		elif grid_type == Global.GridTypes.HEXAGONAL_POINTY_TOP:
 			_draw_hexagonal_grid(grid_idx, target_rect, true)
 		elif grid_type == Global.GridTypes.HEXAGONAL_FLAT_TOP:
@@ -144,6 +152,49 @@ func _draw_isometric_grid(grid_index: int, target_rect: Rect2i) -> void:
 		x += cell_size.x
 	grid_multiline_points.append_array(grid_multiline_points)
 
+	if not grid_multiline_points.is_empty():
+		draw_multiline(grid_multiline_points, grid.grid_color)
+
+
+func _draw_pixelated_isometric_grid(grid_index: int, target_rect: Rect2i, stacked := false) -> void:
+	var grid := Global.grids[grid_index]
+	var grid_multiline_points := PackedVector2Array()
+	var cell_size: Vector2 = grid.grid_size
+	var stack_offset := Vector2.ZERO
+	if stacked:
+		if cell_size.x > cell_size.y:
+			if int(cell_size.y) % 2 == 0:
+				stack_offset.y = 2
+			else:
+				stack_offset.y = 1
+		elif cell_size.y > cell_size.x:
+			if int(cell_size.x) % 2 == 0:
+				stack_offset.x = 2
+			else:
+				stack_offset.x = 1
+	var origin_offset: Vector2 = Vector2(grid.grid_offset - target_rect.position).posmodv(
+		cell_size + stack_offset
+	)
+	var cel := Global.current_project.get_current_cel()
+	if cel is CelTileMap and grid_index == 0:
+		cell_size = (cel as CelTileMap).get_tile_size()
+		origin_offset = Vector2((cel as CelTileMap).offset - target_rect.position).posmodv(
+			cell_size + stack_offset
+		)
+	var max_cell_count: Vector2 = Vector2(target_rect.size) / cell_size
+	var start_offset = origin_offset - cell_size + Vector2(target_rect.position)
+	var tile_sep = Vector2.ZERO
+	for cel_y in range(0, max_cell_count.y + 2):
+		for cel_x in range(0, max_cell_count.x + 2):
+			var cel_pos: Vector2 = Vector2(cel_x, cel_y) * cell_size + start_offset + tile_sep
+			grid_multiline_points.append_array(
+				get_isometric_polyline(cel_pos, cell_size, target_rect, stacked)
+			)
+			if cell_size.y > cell_size.x:
+				tile_sep.x += stack_offset.x
+		tile_sep.x = 0
+		if cell_size.x > cell_size.y:
+			tile_sep.y += stack_offset.y
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, grid.grid_color)
 
@@ -322,3 +373,113 @@ func _hexagonal_cell_points_append(
 			grid_multiline_points.push_back(b)
 			var xx := (rect.position.y - b.y) / m + b.x
 			grid_multiline_points.push_back(Vector2(xx, rect.position.y))
+
+
+## Helper functions for _draw_pixelated_isometric_grid()
+func _create_polylines(points: Array[Vector2i], bound: Rect2i) -> Array:
+	var lines = []
+	for i in points.size():
+		var point = points[i]
+		if i < points.size() - 1:
+			var next_point = points[i + 1]
+			if (
+				point.x < bound.position.x
+				or point.x > bound.end.x
+				or point.y < bound.position.y
+				or point.y > bound.end.y
+				or next_point.x < bound.position.x
+				or next_point.x > bound.end.x
+				or next_point.y < bound.position.y
+				or next_point.y > bound.end.y
+			):
+				continue
+			lines.append(point)
+			if next_point.y < point.y:
+				lines.append(point + Vector2i.UP)
+				lines.append(point + Vector2i.UP)
+			elif next_point.y > point.y:
+				lines.append(point + Vector2i.DOWN)
+				lines.append(point + Vector2i.DOWN)
+			lines.append(next_point)
+	return lines
+
+
+## Helper functions for _draw_pixelated_isometric_grid()
+func get_isometric_polyline(
+	point: Vector2, tile_size: Vector2, bound, is_stacked := false
+) -> PackedVector2Array:
+	var lines = PackedVector2Array()
+	var centre = ((tile_size - Vector2.ONE) / 2).floor()
+	var tile_size_x = Vector2i(tile_size.x, 0)
+	var tile_size_y = Vector2i(0, tile_size.y)
+	var top_left = Geometry2D.bresenham_line(
+		Vector2i(point) + Vector2i(centre.x, 0), Vector2i(point) + Vector2i(0, centre.y)
+	)
+	# x-mirror of the top_left array
+	var top_right = Geometry2D.bresenham_line(
+		tile_size_x + Vector2i(point) - Vector2i(centre.x, 0),
+		tile_size_x + Vector2i(point) + Vector2i(0, centre.y)
+	)
+	# y-mirror of the top_left array
+	var down_left = Geometry2D.bresenham_line(
+		tile_size_y + Vector2i(point) + Vector2i(centre.x, 0),
+		tile_size_y + Vector2i(point) - Vector2i(0, centre.y)
+	)
+	# xy-mirror of the top_left array
+	var down_right = Geometry2D.bresenham_line(
+		Vector2i(tile_size) + Vector2i(point) - Vector2i(centre.x, 0),
+		Vector2i(tile_size) + Vector2i(point) - Vector2i(0, centre.y)
+	)
+	## Add tile separators
+	if is_stacked:
+		var separator_points: Array[Vector2i] = [top_left[0], down_left[0]]
+		var adders = [Vector2i.UP, Vector2i.DOWN]
+		var compensation := Vector2i.RIGHT
+		if tile_size.y > tile_size.x:
+			separator_points = [top_left[-1], top_right[-1]]
+			adders = [Vector2i.LEFT, Vector2i.RIGHT]
+			compensation = Vector2i.DOWN
+		if tile_size.y == tile_size.x:
+			separator_points.clear()
+			adders.clear()
+			compensation = Vector2i.ZERO
+		for i in separator_points.size():
+			var sep = separator_points[i]
+			if !bound.has_point(sep) or !bound.has_point(sep + adders[i]):
+				continue
+			lines.append(sep)
+			lines.append(sep + compensation)
+			lines.append(sep + compensation)
+			lines.append(sep + compensation + adders[i])
+	lines.append_array(_create_polylines(top_left, bound))
+	lines.append_array(_create_polylines(top_right, bound))
+	lines.append_array(_create_polylines(down_left, bound))
+	lines.append_array(_create_polylines(down_right, bound))
+	# Connect un-connected sides left in the shape
+	# top/down peaks
+	if (
+		bound.has_point(Vector2i(point) + Vector2i(centre.x, 0))
+		and bound.has_point(tile_size_x + Vector2i(point) - Vector2i(centre.x, 0))
+	):
+		lines.append(Vector2i(point) + Vector2i(centre.x, 0))
+		lines.append(tile_size_x + Vector2i(point) - Vector2i(centre.x, 0))
+	if (
+		bound.has_point(tile_size_y + Vector2i(point) + Vector2i(centre.x, 0))
+		and bound.has_point(Vector2i(tile_size) + Vector2i(point) - Vector2i(centre.x, 0))
+	):
+		lines.append(tile_size_y + Vector2i(point) + Vector2i(centre.x, 0))
+		lines.append(Vector2i(tile_size) + Vector2i(point) - Vector2i(centre.x, 0))
+	# side peaks
+	if (
+		bound.has_point(Vector2i(point) + Vector2i(0, centre.y))
+		and bound.has_point(tile_size_y + Vector2i(point) - Vector2i(0, centre.y))
+	):
+		lines.append(Vector2i(point) + Vector2i(0, centre.y))
+		lines.append(tile_size_y + Vector2i(point) - Vector2i(0, centre.y))
+	if (
+		bound.has_point(tile_size_x + Vector2i(point) + Vector2i(0, centre.y))
+		and bound.has_point(Vector2i(tile_size) + Vector2i(point) - Vector2i(0, centre.y))
+	):
+		lines.append(tile_size_x + Vector2i(point) + Vector2i(0, centre.y))
+		lines.append(Vector2i(tile_size) + Vector2i(point) - Vector2i(0, centre.y))
+	return lines
