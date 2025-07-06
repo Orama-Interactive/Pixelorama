@@ -1,6 +1,6 @@
 extends Window
 
-const months := [
+const MONTHS := [
 	"JANUARY",
 	"FEBRUARY",
 	"MARCH",
@@ -51,7 +51,7 @@ func humanize_session_name(session_name: StringName) -> StringName:
 	var info_array = session_name.split("_", false)
 	var year := int(info_array[0])
 	# using clamp here just to make sure this doesn't cause any problems
-	var month_name: String = months[clamp(int(info_array[1]) - 1, 0, 11)]
+	var month_name: String = MONTHS[clamp(int(info_array[1]) - 1, 0, 11)]
 	var day := int(info_array[2])
 	var hour := int(info_array[3])
 	var minute := int(info_array[4])
