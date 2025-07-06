@@ -13,7 +13,7 @@ const months := [
 	"OCTOBER",
 	"NOVEMBER",
 	"DECEMBER"
-	]
+]
 
 var selected_session: String
 var session_directories: Array
@@ -42,9 +42,7 @@ func populate_info():
 
 	for i in session_directories.size():
 		if i == 0:
-			sessions_list.add_item(
-				"(Current Session)"
-			)
+			sessions_list.add_item("(Current Session)")
 		else:
 			sessions_list.add_item(humanize_session_name(session_directories[i]))
 
@@ -92,7 +90,6 @@ func load_session(index: int) -> void:
 			added_project.save_path = ""
 
 
-
 func update_project_list(index: int, _at_pos: Vector2, _m_button_idx: int) -> void:
 	projects_list.clear()
 	selected_session = session_directories[index]
@@ -106,10 +103,8 @@ func update_project_list(index: int, _at_pos: Vector2, _m_button_idx: int) -> vo
 
 func load_project(index: int, _at_pos: Vector2, _m_button_idx: int) -> void:
 	# Load the project
-	var p_path = (
-		OpenSave.BACKUPS_DIRECTORY.path_join(
-			selected_session
-		).path_join(session_project_files[index])
+	var p_path = OpenSave.BACKUPS_DIRECTORY.path_join(selected_session).path_join(
+		session_project_files[index]
 	)
 	OpenSave.open_pxo_file(p_path, false, false)
 	# remove the project's save_path so that uses doesn't accidentaly save IN the
@@ -120,7 +115,6 @@ func load_project(index: int, _at_pos: Vector2, _m_button_idx: int) -> void:
 
 
 func _on_close_requested() -> void:
-	print("close")
 	hide()
 
 

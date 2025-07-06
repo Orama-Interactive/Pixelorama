@@ -28,9 +28,7 @@ func _ready() -> void:
 	update_autosave()
 	# Remove empty sessions
 	for session_folder in DirAccess.get_directories_at(BACKUPS_DIRECTORY):
-		if DirAccess.get_files_at(
-			BACKUPS_DIRECTORY.path_join(session_folder)
-		).size() == 0:
+		if DirAccess.get_files_at(BACKUPS_DIRECTORY.path_join(session_folder)).size() == 0:
 			DirAccess.remove_absolute(BACKUPS_DIRECTORY.path_join(session_folder))
 	# Make folder for current session
 	var date_time: Dictionary = Time.get_datetime_dict_from_system()
@@ -1147,11 +1145,9 @@ func _on_Autosave_timeout() -> void:
 		var project := Global.projects[i]
 		var p_name: String = project.file_name
 		if project.backup_path.is_empty():
-			project.backup_path = (
-				current_session_backup.path_join(
-					"(" + p_name + " backup)-" + str(Time.get_unix_time_from_system()) + "-%s" % i
-				)
-			)
+			project.backup_path = (current_session_backup.path_join(
+				"(" + p_name + " backup)-" + str(Time.get_unix_time_from_system()) + "-%s" % i
+			))
 		save_pxo_file(project.backup_path, true, false, project)
 
 
