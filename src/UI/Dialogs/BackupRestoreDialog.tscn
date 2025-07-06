@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx25yonx40ehr"]
+
+[ext_resource type="Script" uid="uid://dlld4mki8ajhn" path="res://src/UI/Dialogs/BackupRestoreDialog.gd" id="1_5v3pd"]
+
+[node name="BackupRestoreDialog" type="Popup"]
+title = "Past Sessions "
+position = Vector2i(0, 36)
+size = Vector2i(450, 300)
+visible = true
+unresizable = false
+borderless = false
+script = ExtResource("1_5v3pd")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Double Click - Load the entire session.
+Single Click - Choose project from session."
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SessionLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderSmall"
+text = "Sessions"
+
+[node name="ProjectsLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Projects"
+
+[node name="sessions" type="ItemList" parent="PanelContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="projects" type="ItemList" parent="PanelContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="item_activated" from="PanelContainer/VBoxContainer/GridContainer/sessions" to="." method="load_session"]
+[connection signal="item_clicked" from="PanelContainer/VBoxContainer/GridContainer/sessions" to="." method="update_project_list"]
+[connection signal="item_clicked" from="PanelContainer/VBoxContainer/GridContainer/projects" to="." method="load_project"]
