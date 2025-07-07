@@ -234,6 +234,16 @@ func _on_PaletteGrid_swatch_dropped(source_index: int, target_index: int) -> voi
 
 func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
 	# Gets previously selected color index
+	var is_empty_swatch = Palettes.current_palette.get_color(index) == null
+	if is_empty_swatch:
+		# Gets the grid index that corresponds to the top left of current grid window
+		# Color will be added at the start of the currently scrolled part of palette
+		# - not the absolute beginning of palette
+		var start_index := palette_grid.convert_grid_index_to_palette_index(index)
+		Palettes.current_palette_add_color(mouse_button, start_index)
+		redraw_current_palette()
+		toggle_add_delete_buttons()
+	# Gets previously selected color index
 	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	Palettes.current_palette_select_color(mouse_button, index)
 	palette_grid.select_swatch(mouse_button, index, old_index)

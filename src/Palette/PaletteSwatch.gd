@@ -99,8 +99,8 @@ func _drop_data(_position: Vector2, data) -> void:
 
 
 func _on_PaletteSlot_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and not empty:
-		if event.double_click:
+	if event is InputEventMouseButton and event.is_pressed():
+		if event.double_click and not empty:
 			double_clicked.emit(event.button_index, get_global_rect().position)
 		else:
 			pressed.emit(event.button_index)

@@ -34,6 +34,7 @@ layout_mode = 2
 
 [node name="AddColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Add a new color"
