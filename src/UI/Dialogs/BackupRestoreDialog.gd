@@ -101,7 +101,7 @@ func update_project_list(index: int) -> void:
 	projects_visible(true)
 
 
-func load_project(index: int, _at_pos: Vector2, _m_button_idx: int) -> void:
+func load_project(index: int) -> void:
 	# Load the project
 	var p_path = OpenSave.BACKUPS_DIRECTORY.path_join(selected_session).path_join(
 		session_project_files[index]

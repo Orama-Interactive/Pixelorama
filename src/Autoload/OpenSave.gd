@@ -5,7 +5,6 @@ signal project_saved
 signal reference_image_imported
 signal shader_copied(file_path: String)
 
-const MAX_BACKUP_SESSIONS = 20
 const BACKUPS_DIRECTORY := "user://backups"
 const SHADERS_DIRECTORY := "user://shaders"
 
@@ -55,15 +54,7 @@ func _ready() -> void:
 		)
 	)
 	DirAccess.make_dir_recursive_absolute(current_session_backup)
-	# Enforce session limit
-	var old_folders = DirAccess.get_directories_at(BACKUPS_DIRECTORY)
-	if old_folders.size() > MAX_BACKUP_SESSIONS:
-		# Remove oldest folder. The array is sorted alphabetically so the oldest folder
-		# is the first in array
-		var oldest = BACKUPS_DIRECTORY.path_join(old_folders[0])
-		for file in DirAccess.get_files_at(oldest):
-			DirAccess.remove_absolute(oldest.path_join(file))
-		DirAccess.remove_absolute(oldest)
+	enforce_backed_sessions_limit()
 
 
 func handle_loading_file(file: String, force_import_dialog_on_images := false) -> void:
@@ -1128,6 +1119,21 @@ func open_ora_file(path: String) -> void:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
+
+
+func enforce_backed_sessions_limit() -> void:
+	# Enforce session limit
+	var old_folders = DirAccess.get_directories_at(BACKUPS_DIRECTORY)
+	if old_folders.size() > Global.max_backed_sessions:
+		var excess = old_folders.size() - Global.max_backed_sessions
+		for i in excess:
+			# Remove oldest folder. The array is sorted alphabetically so the oldest folder
+			# is the first in array
+			var oldest = BACKUPS_DIRECTORY.path_join(old_folders[0])
+			for file in DirAccess.get_files_at(oldest):
+				DirAccess.remove_absolute(oldest.path_join(file))
+			DirAccess.remove_absolute(oldest)
+			old_folders.remove_at(0)
 
 
 func update_autosave() -> void:

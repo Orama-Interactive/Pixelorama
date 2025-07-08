@@ -505,6 +505,13 @@ var dummy_audio_driver := false:
 			dummy_audio_driver = value
 			_save_to_override_file()
 
+## Found in Preferences. The maximum limit of recent sessions that can be stored as backup.
+var max_backed_sessions := 20.0:
+	set(value):
+		if value == max_backed_sessions:
+			return
+		max_backed_sessions = value
+		OpenSave.enforce_backed_sessions_limit()
 ## Found in Preferences. The time (in minutes) after which backup is created (if enabled).
 var autosave_interval := 1.0:
 	set(value):
