@@ -90,7 +90,7 @@ func load_session(index: int) -> void:
 			added_project.save_path = ""
 
 
-func update_project_list(index: int, _at_pos: Vector2, _m_button_idx: int) -> void:
+func update_project_list(index: int) -> void:
 	projects_list.clear()
 	selected_session = session_directories[index]
 	session_project_files = DirAccess.get_files_at(
