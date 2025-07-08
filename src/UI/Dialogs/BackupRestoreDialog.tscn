@@ -61,5 +61,5 @@ layout_mode = 2
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="item_activated" from="PanelContainer/VBoxContainer/GridContainer/sessions" to="." method="load_session"]
-[connection signal="item_clicked" from="PanelContainer/VBoxContainer/GridContainer/sessions" to="." method="update_project_list"]
-[connection signal="item_clicked" from="PanelContainer/VBoxContainer/GridContainer/projects" to="." method="load_project"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/GridContainer/sessions" to="." method="update_project_list"]
+[connection signal="item_activated" from="PanelContainer/VBoxContainer/GridContainer/projects" to="." method="load_project"]
