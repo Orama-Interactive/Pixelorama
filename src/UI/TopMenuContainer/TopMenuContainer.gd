@@ -56,6 +56,7 @@ var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.
 var loaded_effect_dialogs: Array[Dialog] = []
 var window_opacity_dialog := Dialog.new("res://src/UI/Dialogs/WindowOpacityDialog.tscn")
 var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
+var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 
 @onready var main := $"../.." as Control
 @onready var main_ui := main.find_child("DockableContainer") as DockableContainer
@@ -569,6 +570,7 @@ func _setup_help_menu() -> void:
 		"View Splash Screen": "view_splash_screen",
 		"Online Docs": "open_docs",
 		"Issue Tracker": "issue_tracker",
+		"Restore Backup": &"",
 		"Open Editor Data Folder": "open_editor_data_folder",
 		"Changelog": "changelog",
 		"About Pixelorama": "about_pixelorama",
@@ -1147,6 +1149,8 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.ONLINE_DOCS:
 			OS.shell_open(DOCS_URL)
 			SteamManager.set_achievement("ACH_ONLINE_DOCS")
+		Global.HelpMenu.RESTORE_BACKUP:
+			backup_dialog.popup()
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open(ISSUES_URL)
 		Global.HelpMenu.OPEN_EDITOR_DATA_FOLDER:

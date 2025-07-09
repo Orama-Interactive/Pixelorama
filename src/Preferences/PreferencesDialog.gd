@@ -90,6 +90,9 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"cross_cursor", "Cursors/CursorsContainer/CrossCursorCheckbox", "button_pressed", true
 	),
+	Preference.new(
+		"max_backed_sessions", "Backup/AutosaveContainer/MaxStoredSessions", "value", 20.0
+	),
 	Preference.new("autosave_interval", "Backup/AutosaveContainer/AutosaveInterval", "value", 1.0),
 	Preference.new(
 		"enable_autosave", "Backup/AutosaveContainer/EnableAutosave", "button_pressed", true

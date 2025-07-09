@@ -152,7 +152,6 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 
 
 func remove() -> void:
-	remove_backup_file()
 	undo_redo.free()
 	for ri in reference_images:
 		ri.queue_free()
@@ -172,12 +171,6 @@ func remove() -> void:
 	layers.clear()
 	Global.projects.erase(self)
 	removed.emit()
-
-
-func remove_backup_file() -> void:
-	if not backup_path.is_empty():
-		if FileAccess.file_exists(backup_path):
-			DirAccess.remove_absolute(backup_path)
 
 
 func commit_undo() -> void:
