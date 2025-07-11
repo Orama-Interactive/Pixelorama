@@ -78,7 +78,7 @@ func _ready() -> void:
 	hidden_color_picker.get_picker().presets_visible = false
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Palettes.auto_add_colors and Tools.active_button != -1:
 		var new_color := Tools.get_assigned_color(Tools.active_button)
 		if not Palettes.current_palette.has_theme_color(new_color):
