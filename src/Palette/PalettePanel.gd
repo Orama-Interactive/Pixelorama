@@ -143,13 +143,11 @@ func toggle_add_delete_buttons() -> void:
 	else:
 		add_color_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 	delete_color_button.disabled = Palettes.current_palette.is_empty()
-	sort_button.disabled = Palettes.current_palette.is_empty()
+	sort_button_popup.set_item_disabled(1, Palettes.current_palette.is_empty())
 	if delete_color_button.disabled:
 		delete_color_button.mouse_default_cursor_shape = CURSOR_FORBIDDEN
-		sort_button.mouse_default_cursor_shape = CURSOR_FORBIDDEN
 	else:
 		delete_color_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
-		sort_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 
 
 func _on_AddPalette_pressed() -> void:

@@ -102,5 +102,5 @@ func _on_PaletteSlot_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.double_click and not empty:
 			double_clicked.emit(event.button_index, get_global_rect().position)
-		else:
+		elif event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
 			pressed.emit(event.button_index)
