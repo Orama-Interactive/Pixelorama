@@ -9,6 +9,7 @@ var palettes_id_path := {}
 
 var edited_swatch_index := -1
 var edited_swatch_color := Color.TRANSPARENT
+var sort_submenu := PopupMenu.new()
 
 var create_palette_dialog: ConfirmationDialog:
 	get:
@@ -41,30 +42,50 @@ var edit_palette_dialog: ConfirmationDialog:
 
 
 func _ready() -> void:
-	sort_button_popup.add_check_item("Create a new palette", Palettes.SortOptions.NEW_PALETTE)
-	sort_button_popup.set_item_checked(Palettes.SortOptions.NEW_PALETTE, true)
-	sort_button_popup.add_item("Reverse colors", Palettes.SortOptions.REVERSE)
-	sort_button_popup.add_separator()
-	sort_button_popup.add_item("Sort by hue", Palettes.SortOptions.HUE)
-	sort_button_popup.add_item("Sort by saturation", Palettes.SortOptions.SATURATION)
-	sort_button_popup.add_item("Sort by value", Palettes.SortOptions.VALUE)
-	sort_button_popup.add_separator()
-	sort_button_popup.add_item("Sort by lightness", Palettes.SortOptions.LIGHTNESS)
-	sort_button_popup.add_separator()
-	sort_button_popup.add_item("Sort by red", Palettes.SortOptions.RED)
-	sort_button_popup.add_item("Sort by green", Palettes.SortOptions.GREEN)
-	sort_button_popup.add_item("Sort by blue", Palettes.SortOptions.BLUE)
-	sort_button_popup.add_item("Sort by alpha", Palettes.SortOptions.ALPHA)
+	sort_button_popup.add_check_item("Auto add new colors", 0)
+	sort_submenu.add_check_item("Create a new palette", Palettes.SortOptions.NEW_PALETTE)
+	sort_submenu.set_item_checked(Palettes.SortOptions.NEW_PALETTE, true)
+	sort_submenu.add_item("Reverse colors", Palettes.SortOptions.REVERSE)
+	sort_submenu.add_separator()
+	sort_submenu.add_item("Sort by hue", Palettes.SortOptions.HUE)
+	sort_submenu.add_item("Sort by saturation", Palettes.SortOptions.SATURATION)
+	sort_submenu.add_item("Sort by value", Palettes.SortOptions.VALUE)
+	sort_submenu.add_separator()
+	sort_submenu.add_item("Sort by lightness", Palettes.SortOptions.LIGHTNESS)
+	sort_submenu.add_separator()
+	sort_submenu.add_item("Sort by red", Palettes.SortOptions.RED)
+	sort_submenu.add_item("Sort by green", Palettes.SortOptions.GREEN)
+	sort_submenu.add_item("Sort by blue", Palettes.SortOptions.BLUE)
+	sort_submenu.add_item("Sort by alpha", Palettes.SortOptions.ALPHA)
+	sort_button_popup.add_child(sort_submenu)
+	sort_button_popup.add_submenu_node_item("Palette Sort", sort_submenu)
+
+
 	Palettes.palette_selected.connect(select_palette)
 	Palettes.new_palette_created.connect(_new_palette_created)
 	Palettes.new_palette_imported.connect(setup_palettes_selector)
-	sort_button_popup.id_pressed.connect(sort_pressed)
+	sort_submenu.id_pressed.connect(sort_pressed)
+	sort_button_popup.id_pressed.connect(
+		func(id: int):
+			if id == 0:
+				sort_button_popup.set_item_checked(0, not Palettes.auto_add_colors)
+				Palettes.auto_add_colors = sort_button_popup.is_item_checked(0)
+	)
 
 	setup_palettes_selector()
 	redraw_current_palette()
 
 	# Hide presets from color picker
 	hidden_color_picker.get_picker().presets_visible = false
+
+
+func _input(event: InputEvent) -> void:
+	if Palettes.auto_add_colors and Tools.active_button != -1:
+		var new_color := Tools.get_assigned_color(Tools.active_button)
+		if not Palettes.current_palette.has_theme_color(new_color):
+			Palettes.current_palette_add_color(Tools.active_button, 0)
+			redraw_current_palette()
+			toggle_add_delete_buttons()
 
 
 ## Setup palettes selector with available palettes
@@ -176,9 +197,9 @@ func _on_DeleteColor_gui_input(event: InputEvent) -> void:
 
 
 func sort_pressed(id: Palettes.SortOptions) -> void:
-	var new_palette := sort_button_popup.is_item_checked(Palettes.SortOptions.NEW_PALETTE)
+	var new_palette := sort_submenu.is_item_checked(Palettes.SortOptions.NEW_PALETTE)
 	if id == Palettes.SortOptions.NEW_PALETTE:
-		sort_button_popup.set_item_checked(Palettes.SortOptions.NEW_PALETTE, not new_palette)
+		sort_submenu.set_item_checked(Palettes.SortOptions.NEW_PALETTE, not new_palette)
 		return
 	if new_palette:
 		Palettes.copy_palette()
@@ -234,8 +255,9 @@ func _on_PaletteGrid_swatch_dropped(source_index: int, target_index: int) -> voi
 
 func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
 	# Gets previously selected color index
+	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	var is_empty_swatch = Palettes.current_palette.get_color(index) == null
-	if is_empty_swatch:
+	if is_empty_swatch:  # Add colors with Left/Right Click
 		# Gets the grid index that corresponds to the top left of current grid window
 		# Color will be added at the start of the currently scrolled part of palette
 		# - not the absolute beginning of palette
@@ -243,8 +265,13 @@ func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
 		Palettes.current_palette_add_color(mouse_button, start_index)
 		redraw_current_palette()
 		toggle_add_delete_buttons()
+	else:
+		if Input.is_key_pressed(KEY_CTRL):  # Delete colors with Ctrl + Click
+			Palettes.current_palette_delete_color(index)
+			redraw_current_palette()
+			toggle_add_delete_buttons()
+			return
 	# Gets previously selected color index
-	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	Palettes.current_palette_select_color(mouse_button, index)
 	palette_grid.select_swatch(mouse_button, index, old_index)
 
