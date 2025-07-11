@@ -60,7 +60,6 @@ func _ready() -> void:
 	sort_button_popup.add_child(sort_submenu)
 	sort_button_popup.add_submenu_node_item("Palette Sort", sort_submenu)
 
-
 	Palettes.palette_selected.connect(select_palette)
 	Palettes.new_palette_created.connect(_new_palette_created)
 	Palettes.new_palette_imported.connect(setup_palettes_selector)
