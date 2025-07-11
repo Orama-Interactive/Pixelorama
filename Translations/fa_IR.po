@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Persian\n"
 "Language: fa_IR\n"
-"PO-Revision-Date: 2025-07-09 03:52\n"
+"PO-Revision-Date: 2025-07-11 15:09\n"
 
 msgid "OK"
 msgstr "باشه"
@@ -836,7 +836,7 @@ msgstr "ثابت"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "فضای رنگ"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -887,7 +887,7 @@ msgid "Cursors"
 msgstr "نشانگرها"
 
 msgid "Indicators"
-msgstr ""
+msgstr "نشانه‌ها"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
@@ -909,7 +909,7 @@ msgstr "گذار نرم‌تری را هنگام بزرگنمایی یا کوچ�
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "بزرگنمایی صحیح"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
@@ -987,7 +987,7 @@ msgstr "بنفش"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "رنگ گلی"
 
 msgid "Theme"
 msgstr "زمینه"
@@ -1035,13 +1035,13 @@ msgid "Big"
 msgstr "بزرگ"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "اثرگذاری تنها بر روی برگزیده‌ها"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "گزینش سل‌ها"
 
 msgid "Current cel"
-msgstr ""
+msgstr "سل کنونی"
 
 msgid "Current frame"
 msgstr "فریم کنونی"
@@ -1053,7 +1053,7 @@ msgid "All projects"
 msgstr "همهٔ پروژه‌ها"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "وارون کردن رنگ‌ها"
 
 msgid "Modify Red Channel"
 msgstr ""
@@ -1069,7 +1069,7 @@ msgstr ""
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
-msgstr ""
+msgstr "اشباع‌زدایی"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
@@ -1080,17 +1080,17 @@ msgid "Drop Shadow"
 msgstr "سایه برجسته"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "بازه از مبدا ایکس:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "بازه از مبدا ایگرگ:"
 
 msgid "Shadow color:"
 msgstr "رنگ سایه:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "تاری گاسی"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
@@ -1185,11 +1185,11 @@ msgstr "زاویه:"
 
 #. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "میزان کردن فام/اشباع رنگ/ارزش"
 
 #. HSV stands for Hue, Saturation & Value.
 msgid "Adjust HSV"
-msgstr ""
+msgstr "میزان کردن اچ.اس.وی"
 
 #. Refers to the hue of the colors of an image.
 msgid "Hue:"
@@ -1197,7 +1197,7 @@ msgstr "فام:"
 
 #. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
-msgstr ""
+msgstr "اشباع رنگ:"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
@@ -1205,15 +1205,15 @@ msgstr "ارزش:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "میزان کردن درخشندگی/کنتراست"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "درخشندگی:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "کنتراست:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
@@ -1229,7 +1229,7 @@ msgstr "ارزش آبی:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "رنگِ رنگ‌آمیزه:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
@@ -1237,7 +1237,7 @@ msgstr ""
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "منحنی‌های رنگ"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
@@ -1260,13 +1260,13 @@ msgid "Apply"
 msgstr "به‌کاربندی"
 
 msgid "Diagonal"
-msgstr ""
+msgstr "اُریبی"
 
 msgid "Place inside image"
 msgstr "گذاشتن درون تصویر"
 
 msgid "Thickness:"
-msgstr ""
+msgstr "کلفتی:"
 
 msgid "Colors:"
 msgstr "رنگ‌ها:"
@@ -1295,13 +1295,13 @@ msgid "Dither intensity:"
 msgstr ""
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "دیدن صفحهٔ معرفی"
 
 msgid "Online Docs"
 msgstr "مستندات برخط"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "ردیاب مشکل"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
@@ -1321,10 +1321,10 @@ msgid "Pixelorama - Pixelate your dreams!"
 msgstr "پیکسلوراما - رویاهایتان را پیکسلی کنید!"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "توسعه‌یافته به‌دست اوراما اینترکتیو"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©۲۰۱۹-اکنون توسط اوراما اینترکتیو و مشارکت‌کنندگان"
 
 msgid "Website"
 msgstr "وبگاه"
@@ -1467,7 +1467,7 @@ msgid "Authors"
 msgstr "پدید‌آورنگان"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "نگاره از: %s"
 
 msgid "untitled"
 msgstr "بی‌عنوان"
@@ -1485,13 +1485,13 @@ msgid "Unsaved Image"
 msgstr "تصویر ذخیره‌سازی‌نشده"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "تغییرهای ذخیره‌نشده دارید. اگر ادامه دهید پیشرفت‌تان از دست خواهد رفت."
 
 msgid "Save before exiting?"
 msgstr "ذخیره‌سازی پیش از خروج؟"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "پروژهٔ %s پیشرفت ذخیره‌نشده دارد. چگونه می‌خواهید ادامه دهید؟"
 
 msgid "Save & Exit"
 msgstr "ذخیره‌سازی و خروج"
@@ -1502,18 +1502,25 @@ msgstr "خروج بی‌ذخیره‌سازی"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "گزینش مستطیلی\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "گزینش بیضی‌ای\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک"
 
 msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "گزینش چندضلعی‌ای\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک\n\n"
+"برای اتصال دادن آخرین نقطه به نخستین نقطه جفت‌کلیک کنید"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1525,17 +1532,23 @@ msgstr "گزینش بر پایهٔ رنگ\n\n"
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "چوب جادویی\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "ابزار آزادگزینی/کمند\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک"
 
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "گزینش با کشیدن\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
@@ -1560,35 +1573,51 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "رنگ‌گزین\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک\n\n"
+"رنگی را از پیکسلی در اسپرایت برمی‌گزیند\n"
 
 msgid "Crop\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "برش دادن\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک\n\n"
+"اندازهٔ بوم را تغییر می‌دهد"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "مداد\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک\n\n"
+"برای خط صاف %s را نگه دارید"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "پاک‌کن\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک\n\n"
+"برای خط صاف %s را نگه دارید"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "سطل رنگ\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "ابزار سایه‌زنی\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -1606,7 +1635,14 @@ msgid "Curve Tool\n\n"
 "Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "ابزار منحنی\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک\n\n"
+"منحنی بزیه می‌کشد\n"
+"برای افزودن نقطه‌های نو %s/%s را بفشارید\n"
+"برای پایان دادن به منحنی‌کشی جفت‌کلیک کنید\n"
+"برای کنترل کردن انحنا بفشارید و بکشانید\n"
+"برای برچیدن آخرین نقطهٔ افزوده %s را بفشارید"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1614,7 +1650,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "ابزار مستطیل\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک\n\n"
+"برای ساخت مستطیل ۱:۱ %s را بفشارید\n"
+"برای مرکز قرار دادن جایگاه کلیک به‌عنوان مبدا شکل %s را بفشارید\n"
+"برای جابه‌جایی مبدا شکل %s را بفشارید"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -1622,7 +1663,12 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "ابزار بیضی\n\n"
+"%s برای چپ‌کلیک\n"
+"%s برای راست‌کلیک\n\n"
+"برای ساخت شکل ۱:۱ %s را بفشارید\n"
+"برای مرکز قرار دادن جایگاه کلیک به‌عنوان مبدا شکل %s را بفشارید\n"
+"برای جابه‌جایی مبدا شکل %s را بفشارید"
 
 msgid "Isometric Box Tool\n\n"
 "%s for left mouse button\n"
@@ -1655,18 +1701,18 @@ msgstr "گزینش رنگ برای ابزار راست"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "رنگ‌های چپ و راست را تعویض کنید."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
 msgstr "رنگ میانگین"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "رنگ‌ها را به وضعیت پیش‌فرض‌شان برگردانید (سیاه برای چپ و سفید برای راست)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the application window."
-msgstr ""
+msgstr "رنگی را از پنجرهٔ برنامه برگزینید."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
@@ -1674,7 +1720,7 @@ msgstr ""
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "شکل رنگ‌گزین را برگزینید."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
@@ -1682,7 +1728,7 @@ msgstr "گزینه‌های رنگ"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "حالت رنگ‌گزین را برگزینید."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
@@ -1703,31 +1749,31 @@ msgid "Right tool"
 msgstr "ابزار راست"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "نشانهٔ پیکسل چپ"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "نمایش نشانهٔ پیکسل چپ موس یا قلم‌مو روی بوم هنگام کشیدن"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "نشانهٔ پیکسل راست"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "نمایش نشانهٔ پیکسل راست موس یا قلم‌مو روی بوم هنگام کشیدن"
 
 msgid "Show left tool icon"
 msgstr "نمایش نماد ابزار چپ"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "نماد ابزار برگزیدهٔ چپ را کنار نشانگر روی بوم نمایش می‌دهد"
 
 msgid "Show right tool icon"
 msgstr "نمایش نماد ابزار راست"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "نماد ابزار برگزیدهٔ راست را کنار نشانگر روی بوم نمایش می‌دهد"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "به‌کارگیری نشانگر موس بومی"
 
 msgid "Use cross cursor for the canvas"
 msgstr ""
@@ -1743,119 +1789,119 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "چفت"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "فاصلهٔ چفت:"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "این فاصله‌ای میان پیکسل‌های صفحه است که راهنما و چفت توری فعال می‌شوند."
 
 msgid "Grid"
-msgstr ""
+msgstr "توری"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "گونهٔ توری:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "گونهٔ توری را میان مستطیلی، ایزومتری یا هردو می‌نشاند"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "مستطیلی"
 
 msgid "Isometric"
-msgstr ""
+msgstr "ایزومتری"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "شش‌ضلعی‌وار"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "شش‌ضلعی‌وار (سرتیز)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "شش‌ضلعی‌وار (سرتخت)"
 
 msgid "All"
-msgstr ""
+msgstr "همه"
 
 #. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
 msgid "Grids visible:"
-msgstr ""
+msgstr "توری‌های پدیدار:"
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "توری در حال ویرایش:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "اندازهٔ توری:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
-msgstr ""
+msgstr "بازه از مبدای توری:"
 
 #. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "بازه از مبدای توری را نسبت به مبدای بوم (گوشهٔ چپ بالای تصویر) می‌نشاند"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "کشیدن در حالت کاشی:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "اگر ازکارافتاده باشد، توری تنها روی تصویر اصلی کشیده خواهد شد"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "رنگ توری:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "رنگی از توری"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "توری پیکسلی"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "نمایش در کوچکنمایی:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "کمترین میزان کوچکنمایی‌ای که توری پیکسلی در آن نمایش داده خواهد شد را می‌نشاند"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "رنگ توری پیکسلی"
 
 msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
-msgstr ""
+msgstr "ترانمایی"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "اندازهٔ شطرنجی:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "اندازهٔ پس‌زمینهٔ شطرنجی ترانما"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "رنگ ۱ شطرنجی:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "نخستین رنگ پس‌زمینهٔ شطرنجی ترانما"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "رنگ ۲ شطرنجی:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "دومین رنگ پس‌زمینهٔ شطرنجی ترانما"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "دنبال کردن جنبش بوم"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "پس‌زمینهٔ شطرنجی جنبش بوم را دنبال می‌کند"
 
 msgid "Follow Canvas Zoom Level"
 msgstr ""
@@ -1869,11 +1915,11 @@ msgstr ""
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "رنگ گذشتهٔ پوست‌پیازی:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "رنگ آیندهٔ‌ پوست‌پیازی:"
 
 msgid "Animated selection borders"
 msgstr ""
@@ -1947,55 +1993,55 @@ msgstr ""
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
-msgstr ""
+msgstr "افزودن افزونه"
 
 msgid "Enable"
-msgstr ""
+msgstr "به‌کاراندازی"
 
 msgid "Disable"
-msgstr ""
+msgstr "ازکاراندازی"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "حذف نصب"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "گشودن پوشه"
 
 #. Found in the Preferences, under Extensions. It is a button that, when clicked, opens up the extension explorer which allows users to download extensions from the Internet.
 #: src/Preferences/PreferencesDialog.tscn
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Explore Online"
-msgstr ""
+msgstr "کاوش آنلاین"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Extension Explorer"
-msgstr ""
+msgstr "کاوشگر افزونه"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Search..."
-msgstr ""
+msgstr "جستجو..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Tags:"
-msgstr ""
+msgstr "برچسب‌ها:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr ""
+msgstr "مشکل افزونه‌ای را گزارش دهید"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Download"
-msgstr ""
+msgstr "بارگیری"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Repository links:"
-msgstr ""
+msgstr "پیوندهای مخزن:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
