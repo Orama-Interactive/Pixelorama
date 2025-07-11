@@ -5,8 +5,10 @@ signal project_saved
 signal reference_image_imported
 signal shader_copied(file_path: String)
 
+const BACKUPS_DIRECTORY := "user://backups"
 const SHADERS_DIRECTORY := "user://shaders"
 
+var current_session_backup := ""
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
 var preview_dialogs := []  ## Array of preview dialogs
 var last_dialog_option := 0
@@ -23,6 +25,36 @@ func _ready() -> void:
 	autosave_timer.timeout.connect(_on_Autosave_timeout)
 	add_child(autosave_timer)
 	update_autosave()
+	# Remove empty sessions
+	for session_folder in DirAccess.get_directories_at(BACKUPS_DIRECTORY):
+		if DirAccess.get_files_at(BACKUPS_DIRECTORY.path_join(session_folder)).size() == 0:
+			DirAccess.remove_absolute(BACKUPS_DIRECTORY.path_join(session_folder))
+	# Make folder for current session
+	var date_time: Dictionary = Time.get_datetime_dict_from_system()
+	var string_dict = {}
+	for key in date_time.keys():
+		var value = int(date_time[key])
+		var value_string = str(value)
+		if value <= 9:
+			value_string = str("0", value_string)
+		string_dict[key] = value_string
+	current_session_backup = BACKUPS_DIRECTORY.path_join(
+		str(
+			string_dict.year,
+			"_",
+			string_dict.month,
+			"_",
+			string_dict.day,
+			"_",
+			string_dict.hour,
+			"_",
+			string_dict.minute,
+			"_",
+			string_dict.second
+		)
+	)
+	DirAccess.make_dir_recursive_absolute(current_session_backup)
+	enforce_backed_sessions_limit()
 
 
 func handle_loading_file(file: String, force_import_dialog_on_images := false) -> void:
@@ -418,9 +450,9 @@ func save_pxo_file(
 	var zip_packer := ZIPPacker.new()
 	var err := zip_packer.open(temp_path)
 	if err != OK:
+		Global.popup_error(tr("File failed to save. Error code %s (%s)") % [err, error_string(err)])
 		if temp_path.is_valid_filename():
 			return false
-		Global.popup_error(tr("File failed to save. Error code %s (%s)") % [err, error_string(err)])
 		if zip_packer:  # this would be null if we attempt to save filenames such as "//\\||.pxo"
 			zip_packer.close()
 		return false
@@ -1089,6 +1121,21 @@ func open_ora_file(path: String) -> void:
 	Global.canvas.camera_zoom()
 
 
+func enforce_backed_sessions_limit() -> void:
+	# Enforce session limit
+	var old_folders = DirAccess.get_directories_at(BACKUPS_DIRECTORY)
+	if old_folders.size() > Global.max_backed_sessions:
+		var excess = old_folders.size() - Global.max_backed_sessions
+		for i in excess:
+			# Remove oldest folder. The array is sorted alphabetically so the oldest folder
+			# is the first in array
+			var oldest = BACKUPS_DIRECTORY.path_join(old_folders[0])
+			for file in DirAccess.get_files_at(oldest):
+				DirAccess.remove_absolute(oldest.path_join(file))
+			DirAccess.remove_absolute(oldest)
+			old_folders.remove_at(0)
+
+
 func update_autosave() -> void:
 	if not is_instance_valid(autosave_timer):
 		return
@@ -1102,21 +1149,12 @@ func update_autosave() -> void:
 func _on_Autosave_timeout() -> void:
 	for i in Global.projects.size():
 		var project := Global.projects[i]
+		var p_name: String = project.file_name
 		if project.backup_path.is_empty():
-			project.backup_path = (
-				"user://backups/backup-" + str(Time.get_unix_time_from_system()) + "-%s" % i
-			)
+			project.backup_path = (current_session_backup.path_join(
+				"(" + p_name + " backup)-" + str(Time.get_unix_time_from_system()) + "-%s" % i
+			))
 		save_pxo_file(project.backup_path, true, false, project)
-
-
-## Load the backup files
-func reload_backup_file() -> void:
-	var dir := DirAccess.open("user://backups")
-	var i := 0
-	for file in dir.get_files():
-		open_pxo_file("user://backups".path_join(file), true, i == 0)
-		i += 1
-	Global.notification_label("Backup reloaded")
 
 
 func save_project_to_recent_list(path: String) -> void:
