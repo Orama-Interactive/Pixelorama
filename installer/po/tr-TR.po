@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-05-21 17:41\n"
+"PO-Revision-Date: 2025-07-01 17:14\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
@@ -25,12 +25,12 @@ msgstr "Yükle ${APPNAME}"
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr "Başlat Menüsü Kısayolu Ekle (opsiyonel)"
+msgstr "Başlat Menüsü Kısayolu oluştur (isteğe bağlı)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
-msgstr "Masaüstüne Kısayol Oluştur (opsiyonel)"
+msgstr "Masaüstü Kısayolu oluştur (isteğe bağlı)"
 
 #. un.SecUninstall
 #: ..\pixelorama.nsi:87
@@ -40,22 +40,22 @@ msgstr "Kaldır ${APPNAME} ${APPVERSION}"
 #. un.SecConfig
 #: ..\pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
-msgstr "Konfigürasyon dosyalarını sil (opsiyonel)"
+msgstr "Konfigürasyon dosyalarını sil (isteğe bağlı)"
 
 #. DESC_SecInstall
 #: ..\pixelorama.nsi:200
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr "${APPNAME}${APPVERSION} indirilir."
+msgstr "${APPNAME} ${APPVERSION} indirilir."
 
 #. DESC_SecStartmenu
 #: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr "${APPNAME} için başlat menüsünde kısayol oluşturur."
+msgstr "${APPNAME} için başlat menüsü kısayolu oluşturur."
 
 #. DESC_SecDesktop
 #: ..\pixelorama.nsi:202
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr "${APPNAME} için masaüstünde kısayol oluşturur."
+msgstr "${APPNAME} için masaüstü kısayolu oluşturur."
 
 #. DESC_un.SecUninstall
 #: ..\pixelorama.nsi:203
