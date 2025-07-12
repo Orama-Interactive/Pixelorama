@@ -82,7 +82,7 @@ func scroll_palette(origin: Vector2i) -> void:
 
 
 ## Called when the color changes, either the left or the right, determined by [param mouse_button].
-## If current palette has [param target_color] as a [Color], then select it.
+## If current palette has [param color_info], then select the first slot that has it.
 ## This is helpful when we select color indirectly (e.g through colorpicker)
 func find_and_select_color(color_info: Dictionary, mouse_button: int) -> void:
 	var target_color: Color = color_info.get("color", Color(0, 0, 0, 0))
