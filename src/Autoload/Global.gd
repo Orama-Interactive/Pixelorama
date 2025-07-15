@@ -704,10 +704,29 @@ class Grid:
 			grid_color = value
 			if is_instance_valid(Global.canvas.grid):
 				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. The enables/disables pixelation mode of grid.
+	var is_pixelated := false:
+		set(value):
+			if value == is_pixelated:
+				return
+			is_pixelated = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
+	## Found in Preferences. contains special keywords that may not be common among grids.
+	var special_flags := PackedStringArray():
+		set(value):
+			if value == special_flags:
+				return
+			special_flags = value
+			if is_instance_valid(Global.canvas.grid):
+				Global.canvas.grid.queue_redraw()
 
 	func _init(properties := {}) -> void:
 		Global.grids.append(self)
 		for prop in properties.keys():
+			if !get(prop) and typeof(properties[prop]) == TYPE_BOOL:
+				if properties[prop]:
+					special_flags.append(prop)
 			set(prop, properties[prop])
 
 
