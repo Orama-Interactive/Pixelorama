@@ -6,7 +6,7 @@ const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v111---2025-05-06"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v112---2025-06-26"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -56,6 +56,7 @@ var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.
 var loaded_effect_dialogs: Array[Dialog] = []
 var window_opacity_dialog := Dialog.new("res://src/UI/Dialogs/WindowOpacityDialog.tscn")
 var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
+var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 
 @onready var main := $"../.." as Control
 @onready var main_ui := main.find_child("DockableContainer") as DockableContainer
@@ -569,6 +570,7 @@ func _setup_help_menu() -> void:
 		"View Splash Screen": "view_splash_screen",
 		"Online Docs": "open_docs",
 		"Issue Tracker": "issue_tracker",
+		"Restore Backup": &"",
 		"Open Editor Data Folder": "open_editor_data_folder",
 		"Changelog": "changelog",
 		"About Pixelorama": "about_pixelorama",
@@ -1147,6 +1149,8 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.ONLINE_DOCS:
 			OS.shell_open(DOCS_URL)
 			SteamManager.set_achievement("ACH_ONLINE_DOCS")
+		Global.HelpMenu.RESTORE_BACKUP:
+			backup_dialog.popup()
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open(ISSUES_URL)
 		Global.HelpMenu.OPEN_EDITOR_DATA_FOLDER:

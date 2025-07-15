@@ -235,8 +235,7 @@ func _draw_hexagonal_grid(grid_index: int, target_rect: Rect2i, pointy_top: bool
 			while y < target_rect.end.y:
 				var xx := x
 				if i % 2 == 1:
-					@warning_ignore("integer_division")
-					xx += grid_size.x / 2
+					@warning_ignore("integer_division") xx += grid_size.x / 2
 				var width := xx + grid_size.x
 				var height := y + grid_size.y
 				var half := xx + half_size.x
@@ -281,8 +280,7 @@ func _draw_hexagonal_grid(grid_index: int, target_rect: Rect2i, pointy_top: bool
 			while x < target_rect.end.x:
 				var yy := y
 				if i % 2 == 1:
-					@warning_ignore("integer_division")
-					yy += grid_size.y / 2
+					@warning_ignore("integer_division") yy += grid_size.y / 2
 				var width := x + grid_size.x
 				var height := yy + grid_size.y
 				var half := yy + half_size.y

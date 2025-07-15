@@ -356,12 +356,7 @@ func add_frame() -> void:
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
-		new_animation_tags[i] = AnimationTag.new(
-			new_animation_tags[i].name,
-			new_animation_tags[i].color,
-			new_animation_tags[i].from,
-			new_animation_tags[i].to
-		)
+		new_animation_tags[i] = new_animation_tags[i].duplicate()
 	# Loop through the tags to see if the frame is in one
 	for tag in new_animation_tags:
 		if frame_add_index >= tag.from && frame_add_index <= tag.to:
@@ -412,12 +407,7 @@ func delete_frames(indices: PackedInt32Array = []) -> void:
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
-		new_animation_tags[i] = AnimationTag.new(
-			new_animation_tags[i].name,
-			new_animation_tags[i].color,
-			new_animation_tags[i].from,
-			new_animation_tags[i].to
-		)
+		new_animation_tags[i] = new_animation_tags[i].duplicate()
 
 	for f in indices:
 		frames.append(project.frames[f])
@@ -469,6 +459,7 @@ func _on_CopyFrame_pressed() -> void:
 func copy_frames(
 	indices := [], destination := -1, select_all_cels := true, tag_name_from: AnimationTag = null
 ) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	var project := Global.current_project
 
 	if indices.size() == 0:
@@ -489,12 +480,7 @@ func copy_frames(
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
-		new_animation_tags[i] = AnimationTag.new(
-			new_animation_tags[i].name,
-			new_animation_tags[i].color,
-			new_animation_tags[i].from,
-			new_animation_tags[i].to
-		)
+		new_animation_tags[i] = new_animation_tags[i].duplicate()
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	var last_focus_cels := []
@@ -632,9 +618,43 @@ func move_frames(frame: int, rate: int) -> void:
 		# Don't allow frames to be moved if they are out of bounds
 		if moved_index < 0 or moved_index >= project.frames.size():
 			return
+
+	# Code to RECALCULATE tags due to frame movement
+	var new_animation_tags := project.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = new_animation_tags[i].duplicate()
+	for tag: AnimationTag in new_animation_tags:
+		if tag.from - 1 in frame_indices:  # check if the calculation is needed
+			# move tag if all it's frames are moved
+			if tag.frames_array().all(func(element): return element in frame_indices):
+				tag.from += moved_frame_indices[0] - frame_indices[0]
+				tag.to += moved_frame_indices[0] - frame_indices[0]
+				continue
+		var new_from := tag.from
+		var new_to := tag.to
+		for i in frame_indices:  # calculation of new tag positions (When frames are taken away)
+			if tag.has_frame(i):
+				new_to -= 1
+			elif i < tag.to - 1:
+				new_from -= 1
+				new_to -= 1
+		tag.from = new_from
+		tag.to = new_to
+		# calculation of new tag positions (When frames are added back)
+		for i in moved_frame_indices:
+			if tag.has_frame(i) or i == tag.to:
+				tag.to += 1
+			elif i < tag.from - 1:
+				tag.from += 1
+				tag.to += 1
+
 	project.undo_redo.create_action("Change Frame Order")
 	project.undo_redo.add_do_method(project.move_frames.bind(frame_indices, moved_frame_indices))
 	project.undo_redo.add_undo_method(project.move_frames.bind(moved_frame_indices, frame_indices))
+	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
+	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 
 	if project.current_frame in frame_indices:
 		project.undo_redo.add_do_method(project.change_cel.bind(frame + rate))
@@ -951,6 +971,7 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 
 
 func _on_CloneLayer_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
 	var project := Global.current_project
 	var source_layers := project.layers[project.current_layer].get_children(true)
 	source_layers.append(project.layers[project.current_layer])

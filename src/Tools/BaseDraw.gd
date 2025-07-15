@@ -279,7 +279,7 @@ func commit_undo() -> void:
 
 func draw_tool(pos: Vector2i) -> void:
 	if Global.mirror_view:
-		# Even brushes are not perfectly centred and are offsetted by 1 px so we add it
+		# Even brushes are not perfectly centered and are offsetted by 1 px, so we add it.
 		if int(_stroke_dimensions.x) % 2 == 0:
 			pos.x += 1
 	_prepare_tool()
@@ -775,11 +775,9 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			&& _brush_transposed == TileSetPanel.ROTATION_MATRIX[i * 3 + 2]
 		):
 			if clockwise:
-				@warning_ignore("integer_division")
-				final_i = i / 4 * 4 + posmod(i - 1, 4)
+				@warning_ignore("integer_division") final_i = i / 4 * 4 + posmod(i - 1, 4)
 			else:
-				@warning_ignore("integer_division")
-				final_i = i / 4 * 4 + (i + 1) % 4
+				@warning_ignore("integer_division") final_i = i / 4 * 4 + (i + 1) % 4
 			_brush_flip_x = TileSetPanel.ROTATION_MATRIX[final_i * 3]
 			_brush_flip_y = TileSetPanel.ROTATION_MATRIX[final_i * 3 + 1]
 			_brush_transposed = TileSetPanel.ROTATION_MATRIX[final_i * 3 + 2]

@@ -79,7 +79,9 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 
 func duplicate() -> Palette:
 	var new_palette := Palette.new(name, width, height, comment)
-	var new_colors := colors.duplicate(true)
+	var new_colors: Dictionary[int, PaletteColor]
+	for color in colors:
+		new_colors[color] = colors[color].duplicate()
 	new_palette.colors = new_colors
 	return new_palette
 
@@ -162,7 +164,7 @@ func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
 func reindex_colors_on_width_increase(old_width: int) -> void:
 	var sorted_colors_indices := colors.keys()
 	sorted_colors_indices.sort()
-	var new_colors := {}
+	var new_colors: Dictionary[int, PaletteColor]
 	for old_index: int in sorted_colors_indices:
 		var new_index := old_index + (width - old_width) * (old_index / old_width)
 		new_colors[new_index] = colors[old_index]

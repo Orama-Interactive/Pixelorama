@@ -8,9 +8,9 @@ signal value_changed(value: Basis)
 	set(val):
 		value = val
 		_can_emit_signal = false
-		get_sliders()[0].value = value.x
-		get_sliders()[1].value = value.y
-		get_sliders()[2].value = value.z
+		get_sliders()[0].set_value_no_signal(value.x)
+		get_sliders()[1].set_value_no_signal(value.y)
+		get_sliders()[2].set_value_no_signal(value.z)
 		_can_emit_signal = true
 @export var min_value := Vector3.ZERO:
 	set(val):

@@ -17,6 +17,7 @@ var palettes_write_path := Global.home_data_directory.path_join("Palettes")
 var palettes: Dictionary[String, Palette] = {}
 ## Currently displayed palette
 var current_palette: Palette = null
+var auto_add_colors := false
 
 # Indexes of colors that are selected in palette
 # by left and right mouse button

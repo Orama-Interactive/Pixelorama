@@ -43,8 +43,7 @@ func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
 
 
 func _on_edge_behavior_item_selected(index: int) -> void:
-	@warning_ignore("int_as_enum_without_cast")
-	_blend_edge_mode = index
+	@warning_ignore("int_as_enum_without_cast") _blend_edge_mode = index
 	%ColorFromTool.visible = _blend_edge_mode == EdgeBlend.TOOL_COLOR
 	update_config()
 	save_config()
@@ -76,7 +75,7 @@ func _on_left_shade_slider_value_changed(value: float) -> void:
 
 func _on_right_shade_slider_value_changed(value: float) -> void:
 	if _right_shade_value != value:
-		_left_shade_value = value
+		_right_shade_value = value
 		update_config()
 		save_config()
 

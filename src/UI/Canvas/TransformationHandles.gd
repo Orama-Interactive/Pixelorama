@@ -15,6 +15,8 @@ var transformed_selection_map: SelectionMap:
 		transformed_selection_map = value
 		if is_instance_valid(transformed_selection_map):
 			pivot = transformed_selection_map.get_size() / 2
+		else:
+			_set_default_cursor()
 		set_process_input(is_instance_valid(transformed_selection_map))
 		queue_redraw()
 var transformed_image := Image.new()
@@ -424,9 +426,8 @@ func resize_transform_handle(
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
 		if tilemap.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 			return t
-		var offset := tilemap.offset % tilemap.get_tile_size()
-		drag_start = drag_start.snapped(tilemap.get_tile_size()) + Vector2(offset)
-		delta = delta.snapped(tilemap.get_tile_size()) + Vector2(offset)
+		drag_start = drag_start.snapped(tilemap.get_tile_size())
+		delta = delta.snapped(tilemap.get_tile_size())
 	var image_size := transformed_selection_map.get_size() as Vector2
 	# Step 1: Convert drag to local space
 	var local_start := t.affine_inverse() * drag_start
@@ -449,9 +450,16 @@ func resize_transform_handle(
 	if Input.is_action_pressed("shape_center"):
 		anchor = Vector2(0.5, 0.5)
 	if Input.is_action_pressed("shape_perfect"):
-		var u := 1.0 + maxf(delta.x / image_size.x, delta.y / image_size.y)
-		scale_x = u
-		scale_y = u
+		if anchor.x == 0 or anchor.x == 1:
+			if anchor.y == 0.5:
+				scale_y = absf(scale_x)
+			else:
+				scale_y = scale_x
+		else:
+			if anchor.x == 0.5:
+				scale_x = absf(scale_y)
+			else:
+				scale_x = scale_y
 	# Step 3: Build scaled basis vectors from original
 	var bx := t.x.normalized() * t.x.length() * scale_x
 	var by := t.y.normalized() * t.y.length() * scale_y
@@ -672,15 +680,21 @@ func bake_transform_to_image(image: Image, used_rect := Rect2i()) -> void:
 	)
 
 
-func bake_transform_to_selection(map: SelectionMap) -> void:
+func bake_transform_to_selection(map: SelectionMap, is_confirmed := false) -> void:
 	var bounds := DrawingAlgos.get_transformed_bounds(
 		transformed_selection_map.get_size(), preview_transform
 	)
-	map.ensure_selection_fits(Global.current_project, bounds)
+	var transformation_origin := get_transform_top_left().max(Vector2.ZERO)
+	if is_confirmed:
+		var position_top_left := position + get_transform_top_left()
+		transformation_origin = position_top_left
+		map.crop(Global.current_project.size.x, Global.current_project.size.y)
+		Global.current_project.selection_offset = Vector2.ZERO
+	else:
+		map.ensure_selection_fits(Global.current_project, bounds)
 	bounds.position -= bounds.position
 	var transformed_selection := SelectionMap.new()
 	transformed_selection.copy_from(transformed_selection_map)
-	var transformation_origin := get_transform_top_left().max(Vector2.ZERO)
 	bake_transform_to_image(transformed_selection, bounds)
 	var selection_size_rect := Rect2i(Vector2i.ZERO, transformed_selection.get_size())
 	map.blit_rect_custom(transformed_selection, selection_size_rect, transformation_origin)

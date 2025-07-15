@@ -1094,6 +1094,20 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
+[node name="MaxStoredSessionsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Backup/AutosaveContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Maximum backed sessions:"
+
+[node name="MaxStoredSessions" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Backup/AutosaveContainer"]
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+min_value = 1.0
+value = 20.0
+allow_greater = true
+
 [node name="AutosaveIntervalLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Backup/AutosaveContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
