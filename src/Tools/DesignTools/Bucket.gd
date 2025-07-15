@@ -35,8 +35,9 @@ class Segment:
 	var y := 0
 	var next := 0
 
-	func _init(_y: int) -> void:
+	func _init(_y: int, _next) -> void:
 		y = _y
+		next = _next
 
 
 func _ready() -> void:
@@ -450,7 +451,7 @@ func _compute_segments_for_image(
 
 ## Add a new segment to the array
 func _add_new_segment(y := 0) -> void:
-	_allegro_flood_segments.append(Segment.new(y))
+	_allegro_flood_segments.append(Segment.new(y, _area_start_idx))
 
 
 ## Fill an horizontal segment around the specified position, and adds it to the
@@ -493,11 +494,11 @@ func _flood_line_around_point(
 	# we may have already processed some segments on this y coordinate
 	if segment.flooding:
 		while segment.next > _area_start_idx:
-			c = segment.next  # index of next segment in this line of image
+			c = segment.next - _area_start_idx  # index of next segment in this line of image
 			segment = _allegro_flood_segments[c]
 		# found last current segment on this line
 		c = _allegro_flood_segments.size()
-		segment.next = c
+		segment.next = c + _area_start_idx
 		_add_new_segment(pos.y)
 		segment = _allegro_flood_segments[c]
 	# set the values for the current segment
@@ -536,8 +537,8 @@ func _check_flooded_segment(
 			if left >= segment.left_position and left <= segment.right_position:
 				left = segment.right_position + 2
 				break
-			c = segment.next
-			if c == _area_start_idx:  # couldn't find a valid segment, so we draw a new one
+			c = segment.next - _area_start_idx
+			if c == 0:  # couldn't find a valid segment, so we draw a new one
 				left = _flood_line_around_point(Vector2i(left, y), project, image, src_color)
 				ret = true
 				break
