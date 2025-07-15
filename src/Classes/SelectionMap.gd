@@ -4,6 +4,9 @@ extends Image
 const INVERT_SHADER := preload("res://src/Shaders/Effects/Invert.gdshader")
 const OUTLINE_INLINE_SHADER := preload("res://src/Shaders/Effects/OutlineInline.gdshader")
 
+## An optimization technique
+var _selection_rect_cache := Rect2i()
+
 
 func is_pixel_selected(
 	pixel: Vector2i, calculate_offset := true, project := Global.current_project
@@ -100,7 +103,19 @@ func invert() -> void:
 	gen.generate_image(self, INVERT_SHADER, params, get_size())
 
 
+## An optimization. Stores existing selection rect as cache and forces [method get_selection_rect]
+## to use cache instead. use this to save time when the rect isn't meant to change between repeated
+## calls (e.g see Bucket tool)
+func lock_selection_rect(project: Project, locked := false):
+	if locked:
+		_selection_rect_cache = get_selection_rect(project)
+	else:
+		_selection_rect_cache = Rect2i()
+
+
 func get_selection_rect(project: Project) -> Rect2i:
+	if _selection_rect_cache != Rect2i():
+		return _selection_rect_cache
 	var rect := get_used_rect()
 	rect.position += project.selection_offset
 	return rect

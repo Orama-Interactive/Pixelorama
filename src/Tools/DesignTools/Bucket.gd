@@ -452,6 +452,7 @@ func _flood_line_around_point(
 	var west := pos
 	var east := pos
 	if project.has_selection:
+		project.selection_map.lock_selection_rect(project, true)
 		while (
 			project.can_pixel_get_drawn(west)
 			&& DrawingAlgos.similar_colors(image.get_pixelv(west), src_color, _tolerance)
@@ -462,6 +463,7 @@ func _flood_line_around_point(
 			&& DrawingAlgos.similar_colors(image.get_pixelv(east), src_color, _tolerance)
 		):
 			east += Vector2i.RIGHT
+		project.selection_map.lock_selection_rect(project, false)
 	else:
 		while (
 			west.x >= 0
