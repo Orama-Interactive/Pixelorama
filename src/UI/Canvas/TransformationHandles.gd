@@ -426,9 +426,8 @@ func resize_transform_handle(
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
 		if tilemap.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 			return t
-		var offset := tilemap.offset % tilemap.get_tile_size()
-		drag_start = drag_start.snapped(tilemap.get_tile_size()) + Vector2(offset)
-		delta = delta.snapped(tilemap.get_tile_size()) + Vector2(offset)
+		drag_start = drag_start.snapped(tilemap.get_tile_size())
+		delta = delta.snapped(tilemap.get_tile_size())
 	var image_size := transformed_selection_map.get_size() as Vector2
 	# Step 1: Convert drag to local space
 	var local_start := t.affine_inverse() * drag_start
