@@ -26,10 +26,16 @@ subpixel_positioning=1
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
-fallbacks=[]
+fallbacks=[Resource("res://assets/fonts/NotoSans/NotoSansSC-Regular.ttf"), Resource("res://assets/fonts/NotoSans/NotoSansTC-Regular.ttf"), Resource("res://assets/fonts/NotoSans/NotoSansJP-Regular.ttf"), Resource("res://assets/fonts/NotoSans/NotoSansKR-Regular.ttf")]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0),
+&"variation_embolden": 0.0
+}]
 language_support={}
 script_support={}
 opentype_features={}
