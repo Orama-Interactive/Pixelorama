@@ -538,7 +538,6 @@ func save_pxo_file(
 		# First remove backup then set current save path
 		if project.has_changed:
 			project.has_changed = false
-		Global.current_project.remove_backup_file()
 		Global.notification_label("File saved")
 		get_window().title = project.name + " - Pixelorama " + Global.current_version
 
