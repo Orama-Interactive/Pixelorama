@@ -537,7 +537,7 @@ func _check_flooded_segment(
 				left = segment.right_position + 2
 				break
 			c = segment.next
-			if c == 0:  # couldn't find a valid segment, so we draw a new one
+			if c == _area_start_idx:  # couldn't find a valid segment, so we draw a new one
 				left = _flood_line_around_point(Vector2i(left, y), project, image, src_color)
 				ret = true
 				break
