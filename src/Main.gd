@@ -21,7 +21,6 @@ var splash_dialog: AcceptDialog:
 		return splash_dialog
 
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
-@onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 ## Dialog used to open images and project (.pxo) files.
 @onready var open_sprite_dialog := $Dialogs/OpenSprite as FileDialog
 ## Dialog used to save project (.pxo) files.
@@ -168,8 +167,8 @@ some useful [SYSTEM OPTIONS] are:
 
 func _init() -> void:
 	Global.project_switched.connect(_project_switched)
-	if not DirAccess.dir_exists_absolute("user://backups"):
-		DirAccess.make_dir_recursive_absolute("user://backups")
+	if not DirAccess.dir_exists_absolute(OpenSave.BACKUPS_DIRECTORY):
+		DirAccess.make_dir_recursive_absolute(OpenSave.BACKUPS_DIRECTORY)
 	Global.shrink = _get_auto_display_scale()
 	_handle_layout_files()
 	# Load dither matrix images.
@@ -197,7 +196,8 @@ func _ready() -> void:
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
 		OS.request_permissions()
-	_handle_backup()
+	if Global.open_last_project:
+		load_last_project()
 	await get_tree().process_frame
 	_setup_application_window_size()
 	_show_splash_screen()
@@ -331,22 +331,6 @@ func _show_splash_screen() -> void:
 
 		splash_dialog.popup_centered()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
-
-
-func _handle_backup() -> void:
-	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
-	backup_confirmation.add_button("Discard All", false, "discard")
-	var backup_dir := DirAccess.open("user://backups")
-	if backup_dir.get_files().size() > 0:
-		# Temporatily stop autosave until user confirms backup
-		OpenSave.autosave_timer.stop()
-		backup_confirmation.confirmed.connect(_on_BackupConfirmation_confirmed)
-		backup_confirmation.custom_action.connect(_on_BackupConfirmation_custom_action)
-		backup_confirmation.popup_centered()
-		modulate = Color(0.5, 0.5, 0.5)
-	else:
-		if Global.open_last_project:
-			load_last_project()
 
 
 func _handle_cmdline_arguments() -> void:
@@ -576,38 +560,9 @@ func _quit() -> void:
 	get_tree().quit()
 
 
-func _on_BackupConfirmation_confirmed() -> void:
-	OpenSave.reload_backup_file()
-
-
-func _on_BackupConfirmation_custom_action(action: String) -> void:
-	backup_confirmation.hide()
-	if action != "discard":
-		return
-	_clear_backup_files()
-	# Reopen last project
-	if Global.open_last_project:
-		load_last_project()
-
-
-func _on_backup_confirmation_visibility_changed() -> void:
-	if backup_confirmation.visible:
-		return
-	if Global.enable_autosave:
-		OpenSave.autosave_timer.start()
-	Global.dialog_open(false)
-
-
-func _clear_backup_files() -> void:
-	for file in DirAccess.get_files_at("user://backups"):
-		DirAccess.remove_absolute("user://backups".path_join(file))
-
-
 func _exit_tree() -> void:
 	for project in Global.projects:
 		project.remove()
-	# For some reason, the above is not enough to remove all backup files
-	_clear_backup_files()
 	if DisplayServer.get_name() == "headless":
 		return
 	Global.config_cache.set_value("window", "layout", Global.layouts.find(main_ui.layout))

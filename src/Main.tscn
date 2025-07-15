@@ -72,12 +72,6 @@ dialog_text = "Project %s has unsaved progress. How do you wish to proceed?"
 [node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
 dialog_text = "This is an error message!"
 
-[node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
-size = Vector2i(320, 200)
-dialog_text = "Autosaved project(s) from a crashed session were found.
-Do you want to recover the data?"
-dialog_autowrap = true
-
 [node name="CelProperties" parent="Dialogs" instance=ExtResource("17_ucs64")]
 
 [node name="FrameProperties" parent="Dialogs" instance=ExtResource("9")]
@@ -127,6 +121,5 @@ script = ExtResource("17_k1xhp")
 [connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="visibility_changed" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="visibility_changed" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
-[connection signal="visibility_changed" from="Dialogs/BackupConfirmation" to="." method="_on_backup_confirmation_visibility_changed"]
 [connection signal="confirmed" from="Dialogs/DownloadImageConfirmationDialog" to="." method="_on_download_image_confirmation_dialog_confirmed"]
 [connection signal="request_completed" from="ImageRequest" to="." method="_on_image_request_request_completed"]

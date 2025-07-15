@@ -426,9 +426,8 @@ func resize_transform_handle(
 		var tilemap := Global.current_project.get_current_cel() as CelTileMap
 		if tilemap.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 			return t
-		var offset := tilemap.offset % tilemap.get_tile_size()
-		drag_start = drag_start.snapped(tilemap.get_tile_size()) + Vector2(offset)
-		delta = delta.snapped(tilemap.get_tile_size()) + Vector2(offset)
+		drag_start = drag_start.snapped(tilemap.get_tile_size())
+		delta = delta.snapped(tilemap.get_tile_size())
 	var image_size := transformed_selection_map.get_size() as Vector2
 	# Step 1: Convert drag to local space
 	var local_start := t.affine_inverse() * drag_start
@@ -451,9 +450,16 @@ func resize_transform_handle(
 	if Input.is_action_pressed("shape_center"):
 		anchor = Vector2(0.5, 0.5)
 	if Input.is_action_pressed("shape_perfect"):
-		var u := 1.0 + maxf(delta.x / image_size.x, delta.y / image_size.y)
-		scale_x = u
-		scale_y = u
+		if anchor.x == 0 or anchor.x == 1:
+			if anchor.y == 0.5:
+				scale_y = absf(scale_x)
+			else:
+				scale_y = scale_x
+		else:
+			if anchor.x == 0.5:
+				scale_x = absf(scale_y)
+			else:
+				scale_x = scale_y
 	# Step 3: Build scaled basis vectors from original
 	var bx := t.x.normalized() * t.x.length() * scale_x
 	var by := t.y.normalized() * t.y.length() * scale_y
