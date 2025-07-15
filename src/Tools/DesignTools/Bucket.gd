@@ -16,6 +16,8 @@ var _fill_with: int = FillWith.COLOR
 var _fill_merged_area := false  ## Fill regions from the merging of all layers
 var _offset_x := 0
 var _offset_y := 0
+var _area_start_idx: int = 0
+var _area_end_idx: int = 0
 ## Working array used as buffer for segments while flooding
 var _allegro_flood_segments: Array[Segment]
 ## Results array per image while flooding
@@ -363,6 +365,8 @@ func _flood_fill(pos: Vector2i) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
 	var project := Global.current_project
+	if project.has_selection:
+		project.selection_map.lock_selection_rect(project, true)
 	if Tools.is_placing_tiles():
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
@@ -403,13 +407,23 @@ func _flood_fill(pos: Vector2i) -> void:
 		# now actually color the image: since we have already checked a few things for the points
 		# we'll process here, we're going to skip a bunch of safety checks to speed things up.
 		_color_segments(image)
+	if project.has_selection:
+		project.selection_map.lock_selection_rect(project, false)
 
 
 func _compute_segments_for_image(
 	pos: Vector2i, project: Project, image: Image, src_color: Color
 ) -> void:
 	# initially allocate at least 1 segment per line of image
-	for j in image.get_height():
+	var y_range = [0, image.get_height()]
+	_area_end_idx = project.size.y - 1
+	_area_start_idx = 0
+	if project.has_selection:
+		var selection_rect := project.selection_map.get_selection_rect(project)
+		_area_start_idx = selection_rect.position.y
+		_area_end_idx = selection_rect.end.y - 1
+		y_range = [selection_rect.position.y, selection_rect.end.y]
+	for j in range(y_range[0], y_range[1]):
 		_add_new_segment(j)
 	# start flood algorithm
 	_flood_line_around_point(pos, project, image, src_color)
@@ -452,7 +466,6 @@ func _flood_line_around_point(
 	var west := pos
 	var east := pos
 	if project.has_selection:
-		project.selection_map.lock_selection_rect(project, true)
 		while (
 			project.can_pixel_get_drawn(west)
 			&& DrawingAlgos.similar_colors(image.get_pixelv(west), src_color, _tolerance)
@@ -463,7 +476,6 @@ func _flood_line_around_point(
 			&& DrawingAlgos.similar_colors(image.get_pixelv(east), src_color, _tolerance)
 		):
 			east += Vector2i.RIGHT
-		project.selection_map.lock_selection_rect(project, false)
 	else:
 		while (
 			west.x >= 0
@@ -476,11 +488,11 @@ func _flood_line_around_point(
 		):
 			east += Vector2i.RIGHT
 	# Make a note of the stuff we processed
-	var c := pos.y
+	var c := pos.y - _area_start_idx
 	var segment := _allegro_flood_segments[c]
 	# we may have already processed some segments on this y coordinate
 	if segment.flooding:
-		while segment.next > 0:
+		while segment.next > _area_start_idx:
 			c = segment.next  # index of next segment in this line of image
 			segment = _allegro_flood_segments[c]
 		# found last current segment on this line
@@ -493,7 +505,7 @@ func _flood_line_around_point(
 	segment.left_position = west.x + 1
 	segment.right_position = east.x - 1
 	segment.y = pos.y
-	segment.next = 0
+	segment.next = _area_start_idx
 	# Should we process segments above or below this one?
 	# when there is a selected area, the pixels above and below the one we started creating this
 	# segment from may be outside it. It's easier to assume we should be checking for segments
@@ -501,8 +513,8 @@ func _flood_line_around_point(
 	# test will be performed later anyway.
 	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
 	# there is no selection, so we don't need branching here.
-	segment.todo_above = pos.y > 0
-	segment.todo_below = pos.y < project.size.y - 1
+	segment.todo_above = pos.y > _area_start_idx
+	segment.todo_below = pos.y < _area_end_idx
 	# this is an actual segment we should be coloring, so we add it to the results for the
 	# current image
 	if segment.right_position >= segment.left_position:
@@ -518,7 +530,7 @@ func _check_flooded_segment(
 	var ret := false
 	var c: int = 0
 	while left <= right:
-		c = y
+		c = y - _area_start_idx
 		while true:
 			var segment := _allegro_flood_segments[c]
 			if left >= segment.left_position and left <= segment.right_position:
