@@ -224,7 +224,7 @@ filters = PackedStringArray("*.mp3 ; MP3 Audio", "*.wav; WAV Audio")
 
 [node name="PlaceOnlyConfirmationDialog" type="ConfirmationDialog" parent="."]
 size = Vector2i(300, 200)
-dialog_text = "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
+dialog_text = "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
 dialog_autowrap = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

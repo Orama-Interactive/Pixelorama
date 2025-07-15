@@ -146,6 +146,61 @@ func _update_tileset() -> void:
 		tile_button_container.add_child(button)
 
 
+static func _modify_texture_resource(tile_idx, tileset: TileSetCustom, project: Project) -> void:
+	var tile = tileset.tiles[tile_idx]
+	if tile.image:
+		var v_proj_name = str(tileset.name, " Tile: ", tile_idx)
+		var resource_proj := ResourceProject.new([], v_proj_name, tile.image.get_size())
+		resource_proj.layers.append(PixelLayer.new(resource_proj))
+		resource_proj.frames.append(resource_proj.new_empty_frame())
+		resource_proj.frames[0].cels[0].set_content(tile.image)
+		resource_proj.resource_updated.connect(_update_tile.bind(project, tileset, tile_idx))
+		Global.projects.append(resource_proj)
+		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+		Global.canvas.camera_zoom()
+
+
+static func _update_tile(
+	resource_proj: ResourceProject, target_project: Project, tileset: TileSetCustom, tile_idx: int
+) -> void:
+	var warnings := ""
+	if resource_proj.frames.size() > 1:
+		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
+	if resource_proj.layers.size() > 1:
+		warnings += "\nThis resource is intended to have 1 layer only. layers will be blended."
+
+	var updated_image := Image.create_empty(
+		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
+	)
+	var frame := resource_proj.frames[0]
+	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
+	if is_instance_valid(target_project) and is_instance_valid(tileset):
+		if tile_idx < tileset.tiles.size():
+			if !tileset.tiles[tile_idx].image:
+				return
+			if updated_image.get_data() == tileset.tiles[tile_idx].image.get_data():
+				return
+			tileset.tiles[tile_idx].image = updated_image
+			tileset.updated.emit()
+			for cel in target_project.get_all_pixel_cels():
+				if cel is not CelTileMap:
+					continue
+				if cel.tileset == tileset:
+					var has_tile := false
+					for cell in cel.cells.values():
+						if cell.index == tile_idx:
+							has_tile = true
+							break
+					if has_tile:
+						cel.image.fill(Color(0, 0, 0, 0))
+						if cel.place_only_mode:
+							cel.queue_update_cel_portions()
+						else:
+							cel.update_cel_portions()
+	if not warnings.is_empty():
+		Global.popup_error(warnings)
+
+
 func _update_tileset_dummy_params(_cel: BaseCel, _index: int) -> void:
 	_update_tileset()
 
@@ -216,8 +271,9 @@ func _on_tile_button_gui_input(event: InputEvent, index: int) -> void:
 	if event.is_action(&"right_mouse"):
 		tile_button_popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
 		tile_index_menu_popped = index
+		tile_button_popup_menu.set_item_disabled(1, tile_index_menu_popped == 0)
 		tile_button_popup_menu.set_item_disabled(
-			1, not current_tileset.tiles[index].can_be_removed()
+			2, not current_tileset.tiles[index].can_be_removed()
 		)
 
 
@@ -300,32 +356,43 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 		tile_probability_slider.value = selected_tile.probability
 		tile_user_data_text_edit.text = selected_tile.user_data
 		tile_properties.popup_centered()
-	elif index == 1:  # Delete
+	if index == 1:  # Edit tile
+		_modify_texture_resource(tile_index_menu_popped, current_tileset, Global.current_project)
+	elif index == 2:  # Delete
 		if tile_index_menu_popped == 0:
 			return
-		if selected_tile.can_be_removed():
-			var project := Global.current_project
-			var tilemap_cels: Array[CelTileMap] = []
-			for cel in project.get_all_pixel_cels():
-				if cel is not CelTileMap:
-					continue
-				if cel.tileset == current_tileset:
-					tilemap_cels.append(cel)
-			var undo_data_tileset := current_tileset.serialize_undo_data()
-			var undo_data_tilemaps := {}
-			for cel in tilemap_cels:
-				undo_data_tilemaps[cel] = cel.serialize_undo_data(true)
-			current_tileset.remove_tile_at_index(tile_index_menu_popped, null)
+		var select_copy = selected_tiles.duplicate()
+		select_copy.sort()
+		select_copy.reverse()
+		var action_started := false
+		var project := Global.current_project
+		var undo_data_tileset := current_tileset.serialize_undo_data()
+		var tilemap_cels: Array[CelTileMap] = []
+		var redo_data_tilemaps := {}
+		var undo_data_tilemaps := {}
+		for i in select_copy:
+			selected_tile = current_tileset.tiles[i]
+			if selected_tile.can_be_removed():
+				if !action_started:
+					action_started = true
+					project.undo_redo.create_action("Delete tile")
+				for cel in project.get_all_pixel_cels():
+					if cel is not CelTileMap:
+						continue
+					if cel.tileset == current_tileset:
+						tilemap_cels.append(cel)
+				for cel in tilemap_cels:
+					undo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+				current_tileset.remove_tile_at_index(i, null)
+				for cel in tilemap_cels:
+					redo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+		if action_started:
 			var redo_data_tileset := current_tileset.serialize_undo_data()
-			var redo_data_tilemaps := {}
-			for cel in tilemap_cels:
-				redo_data_tilemaps[cel] = cel.serialize_undo_data(true)
-			project.undo_redo.create_action("Delete tile")
-			project.undo_redo.add_do_method(
-				current_tileset.deserialize_undo_data.bind(redo_data_tileset, null)
-			)
 			project.undo_redo.add_undo_method(
 				current_tileset.deserialize_undo_data.bind(undo_data_tileset, null)
+			)
+			project.undo_redo.add_do_method(
+				current_tileset.deserialize_undo_data.bind(redo_data_tileset, null)
 			)
 			for cel in tilemap_cels:
 				cel.deserialize_undo_data(redo_data_tilemaps[cel], project.undo_redo, false)
@@ -333,6 +400,44 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 			project.undo_redo.commit_action()
+	elif index == 3:  # Duplicate tile
+		var project = Global.current_project
+		var tile_cel = Global.current_project.get_current_cel()
+		var undo_data_tileset := current_tileset.serialize_undo_data()
+		var tilemap_cels: Array[CelTileMap] = []
+		var redo_data_tilemaps := {}
+		var undo_data_tilemaps := {}
+		project.undo_redo.create_action("Duplicate tile")
+		for cel in project.get_all_pixel_cels():
+			if cel is not CelTileMap:
+				continue
+			if cel.tileset == current_tileset:
+				tilemap_cels.append(cel)
+		for cel in tilemap_cels:
+			undo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+		var variant := Image.create_from_data(
+			selected_tile.image.get_width(),
+			selected_tile.image.get_height(),
+			selected_tile.image.has_mipmaps(),
+			selected_tile.image.get_format(),
+			selected_tile.image.get_data()
+		)
+		current_tileset.add_tile(variant, null, 0)
+		for cel in tilemap_cels:
+			redo_data_tilemaps[cel] = cel.serialize_undo_data(true)
+		var redo_data_tileset := current_tileset.serialize_undo_data()
+		project.undo_redo.add_undo_method(
+			current_tileset.deserialize_undo_data.bind(undo_data_tileset, null)
+		)
+		project.undo_redo.add_do_method(
+			current_tileset.deserialize_undo_data.bind(redo_data_tileset, null)
+		)
+		for cel in tilemap_cels:
+			cel.deserialize_undo_data(redo_data_tilemaps[cel], project.undo_redo, false)
+			cel.deserialize_undo_data(undo_data_tilemaps[cel], project.undo_redo, true)
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.commit_action()
 
 
 func _on_tile_probability_slider_value_changed(value: float) -> void:
