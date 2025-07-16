@@ -8,7 +8,8 @@ var _fill_inside := false
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _draw_points := PackedVector2Array()
 var _old_spacing_mode := false  ## Needed to reset spacing mode in case we change it
-
+var _locked_centre := Vector2.INF
+var _locked_angle := INF
 
 class PencilOp:
 	extends Drawer.ColorOp
@@ -64,6 +65,21 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("change_tool_mode"):
 		overwrite_button.set_pressed_no_signal(_prev_mode)
 		_overwrite = overwrite_button.button_pressed
+
+	if !_draw_line:
+		if Input.is_action_pressed("draw_create_line"):
+			if _locked_centre == Vector2.INF:
+				_locked_centre = Global.canvas.current_pixel.floor()
+			if (Global.canvas.current_pixel - _locked_centre).length() > 2.9 and _locked_angle == INF:
+				_locked_angle = snappedf(
+					(
+						Global.canvas.current_pixel - _locked_centre - Vector2(0.5, 0.5)
+					).angle(),
+					deg_to_rad(22.5)
+				)
+		else:
+			_locked_centre = Vector2.INF
+			_locked_angle = INF
 
 
 func get_config() -> Dictionary:
@@ -136,6 +152,12 @@ func draw_start(pos: Vector2i) -> void:
 
 func draw_move(pos_i: Vector2i) -> void:
 	var pos := _get_stabilized_position(pos_i)
+	if !_draw_line:
+		if Input.is_action_pressed("draw_create_line"):
+			var difference := pos - _locked_centre
+			var distance := difference.length()
+			if _locked_angle != INF:
+				pos = _locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
