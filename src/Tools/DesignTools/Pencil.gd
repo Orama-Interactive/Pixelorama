@@ -13,6 +13,7 @@ var _old_spacing_mode := false  ## Needed to reset spacing mode in case we chang
 var _locked_centre := Vector2.INF
 var _locked_angle: float = INF
 var _lastNDrawnPixels: Array[Vector2]
+var _is_drawing := false
 
 
 class PencilOp:
@@ -70,7 +71,7 @@ func _input(event: InputEvent) -> void:
 		overwrite_button.set_pressed_no_signal(_prev_mode)
 		_overwrite = overwrite_button.button_pressed
 
-	if !_draw_line:
+	if !_draw_line and _is_drawing:
 		if !Input.is_action_pressed("draw_create_line"):
 			_lastNDrawnPixels.append(Global.canvas.current_pixel)
 			if _lastNDrawnPixels.size() > NUMBER_OF_PIXELS_FOR_SAMPLE:
@@ -93,15 +94,16 @@ func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 			Input.is_action_pressed("draw_create_line")
 			and _locked_angle != INF
 			and _locked_centre != Vector2.INF
+			and _is_drawing
 		):
 			var difference := Vector2(pos) - _locked_centre
 			var distance := difference.length()
 			if _locked_angle != INF:
 				pos = _locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
-			var end = _locked_centre.direction_to(
+			var guide_end = _locked_centre.direction_to(
 				_locked_centre + Vector2.RIGHT.rotated(_locked_angle)
 				) * 19999
-			Global.canvas.indicators.draw_line(_locked_centre, end, Global.guide_color)
+			Global.canvas.indicators.draw_line(_locked_centre, guide_end, Global.guide_color)
 	super.draw_indicator_at(pos, offset, color)
 
 
@@ -150,6 +152,7 @@ func draw_start(pos: Vector2i) -> void:
 	_changed = false
 	_drawer.color_op.changed = false
 	_drawer.color_op.overwrite = _overwrite
+	_is_drawing = true
 	_draw_points = []
 
 	_drawer.reset()
@@ -244,6 +247,7 @@ func draw_end(pos: Vector2i) -> void:
 	cursor_text = ""
 	update_random_image()
 	_spacing_mode = _old_spacing_mode
+	_is_drawing = false
 
 
 func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
