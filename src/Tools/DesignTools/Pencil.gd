@@ -1,5 +1,7 @@
 extends BaseDrawTool
 
+const NUMBER_OF_PIXELS_FOR_SAMPLE: int = 5
+
 var _prev_mode := false
 var _last_position := Vector2i(Vector2.INF)
 var _changed := false
@@ -9,7 +11,9 @@ var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area t
 var _draw_points := PackedVector2Array()
 var _old_spacing_mode := false  ## Needed to reset spacing mode in case we change it
 var _locked_centre := Vector2.INF
-var _locked_angle := INF
+var _locked_angle: float = INF
+var _lastNDrawnPixels: Array[Vector2]
+
 
 class PencilOp:
 	extends Drawer.ColorOp
@@ -67,19 +71,38 @@ func _input(event: InputEvent) -> void:
 		_overwrite = overwrite_button.button_pressed
 
 	if !_draw_line:
+		if !Input.is_action_pressed("draw_create_line"):
+			_lastNDrawnPixels.append(Global.canvas.current_pixel)
+			if _lastNDrawnPixels.size() > NUMBER_OF_PIXELS_FOR_SAMPLE:
+				_lastNDrawnPixels.pop_front()
 		if Input.is_action_pressed("draw_create_line"):
-			if _locked_centre == Vector2.INF:
-				_locked_centre = Global.canvas.current_pixel.floor()
-			if (Global.canvas.current_pixel - _locked_centre).length() > 2.9 and _locked_angle == INF:
-				_locked_angle = snappedf(
-					(
-						Global.canvas.current_pixel - _locked_centre - Vector2(0.5, 0.5)
-					).angle(),
-					deg_to_rad(22.5)
-				)
+			if _locked_centre == Vector2.INF:  ## We just pressed Shift now
+				_locked_centre = _lastNDrawnPixels.front()
+			if _lastNDrawnPixels.size() == NUMBER_OF_PIXELS_FOR_SAMPLE and _locked_angle == INF:
+				var _dirVec = _lastNDrawnPixels.front().direction_to(_lastNDrawnPixels.back())
+				_locked_angle = _dirVec.angle()
+				_lastNDrawnPixels.clear()
 		else:
 			_locked_centre = Vector2.INF
 			_locked_angle = INF
+
+
+func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
+	if !_draw_line:
+		if (
+			Input.is_action_pressed("draw_create_line")
+			and _locked_angle != INF
+			and _locked_centre != Vector2.INF
+		):
+			var difference := Vector2(pos) - _locked_centre
+			var distance := difference.length()
+			if _locked_angle != INF:
+				pos = _locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
+			var end = _locked_centre.direction_to(
+				_locked_centre + Vector2.RIGHT.rotated(_locked_angle)
+				) * 19999
+			Global.canvas.indicators.draw_line(_locked_centre, end, Global.guide_color)
+	super.draw_indicator_at(pos, offset, color)
 
 
 func get_config() -> Dictionary:
