@@ -377,6 +377,8 @@ func _flood_fill(pos: Vector2i) -> void:
 			tilemap_cel.bucket_fill(
 				cell_pos, TileSetPanel.selected_tile_index, draw_tile.bind(tilemap_cel)
 			)
+		if project.has_selection:
+			project.selection_map.lock_selection_rect(project, false)
 		return
 
 	var cels = _get_selected_draw_cels()
@@ -395,6 +397,8 @@ func _flood_fill(pos: Vector2i) -> void:
 			# end early if we are filling with an empty pattern
 			var pattern_size := _pattern.image.get_size()
 			if pattern_size.x == 0 or pattern_size.y == 0:
+				if project.has_selection:
+					project.selection_map.lock_selection_rect(project, false)
 				return
 		# init flood data structures
 		_allegro_flood_segments = []
