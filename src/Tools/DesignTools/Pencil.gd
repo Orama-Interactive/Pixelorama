@@ -12,7 +12,7 @@ var _draw_points := PackedVector2Array()
 var _old_spacing_mode := false  ## Needed to reset spacing mode in case we change it
 var _locked_centre := Vector2.INF
 var _locked_angle: float = INF
-var _last_n_Pixels: Array[Vector2]
+var _last_n_pixels: Array[Vector2]
 var _is_drawing := false
 
 
@@ -73,17 +73,16 @@ func _input(event: InputEvent) -> void:
 
 	if !_draw_line and _is_drawing:
 		if !Input.is_action_pressed("draw_create_line"):
-			_last_n_Pixels.append(Global.canvas.current_pixel)
-			if _last_n_Pixels.size() > NUMBER_OF_PIXELS_FOR_SAMPLE:
-				_last_n_Pixels.pop_front()
+			_last_n_pixels.append(Global.canvas.current_pixel)
+			if _last_n_pixels.size() > NUMBER_OF_PIXELS_FOR_SAMPLE:
+				_last_n_pixels.pop_front()
 			_locked_centre = Vector2.INF
 			_locked_angle = INF
 		else:
-			if _last_n_Pixels.size() == NUMBER_OF_PIXELS_FOR_SAMPLE and _locked_angle == INF:
-				_locked_centre = _last_n_Pixels.front()
-				var _dir_vec = _last_n_Pixels.front().direction_to(_last_n_Pixels.back())
-				_locked_angle = _dir_vec.angle()
-				_last_n_Pixels.clear()
+			if _last_n_pixels.size() == NUMBER_OF_PIXELS_FOR_SAMPLE and _locked_angle == INF:
+				_locked_centre = _last_n_pixels.front()
+				_locked_angle = _last_n_pixels.front().direction_to(_last_n_pixels.back()).angle()
+				_last_n_pixels.clear()
 
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
