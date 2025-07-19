@@ -97,10 +97,13 @@ func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 			var difference := Vector2(pos) - _locked_centre
 			var distance := difference.length()
 			if _locked_angle != INF:
-				pos = _locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
-			var guide_end = _locked_centre.direction_to(
-				_locked_centre + Vector2.RIGHT.rotated(_locked_angle)
-				) * 19999
+				pos = (
+					_locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
+				)
+			var guide_end = (
+				_locked_centre.direction_to(_locked_centre + Vector2.RIGHT.rotated(_locked_angle))
+				* 19999
+			)
 			Global.canvas.indicators.draw_line(_locked_centre, guide_end, Global.guide_color)
 	super.draw_indicator_at(pos, offset, color)
 
@@ -178,12 +181,16 @@ func draw_move(pos_i: Vector2i) -> void:
 	var pos := _get_stabilized_position(pos_i)
 	if !_draw_line:
 		if Input.is_action_pressed("draw_create_line"):
-			var difference := (pos - _locked_centre)
+			var difference := pos - _locked_centre
 			var distance := floori(difference.length())
 			if _locked_angle != INF:
 				pos = (
-					_locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
-				).floor()
+					(
+						_locked_centre
+						+ Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
+					)
+					. floor()
+				)
 
 	pos = snap_position(pos)
 	super.draw_move(pos)
