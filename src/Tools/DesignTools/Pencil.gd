@@ -76,16 +76,14 @@ func _input(event: InputEvent) -> void:
 			_lastNDrawnPixels.append(Global.canvas.current_pixel)
 			if _lastNDrawnPixels.size() > NUMBER_OF_PIXELS_FOR_SAMPLE:
 				_lastNDrawnPixels.pop_front()
-		if Input.is_action_pressed("draw_create_line"):
-			if _locked_centre == Vector2.INF:  ## We just pressed Shift now
-				_locked_centre = _lastNDrawnPixels.front()
+			_locked_centre = Vector2.INF
+			_locked_angle = INF
+		else:
 			if _lastNDrawnPixels.size() == NUMBER_OF_PIXELS_FOR_SAMPLE and _locked_angle == INF:
+				_locked_centre = _lastNDrawnPixels.front()
 				var _dirVec = _lastNDrawnPixels.front().direction_to(_lastNDrawnPixels.back())
 				_locked_angle = _dirVec.angle()
 				_lastNDrawnPixels.clear()
-		else:
-			_locked_centre = Vector2.INF
-			_locked_angle = INF
 
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
@@ -180,10 +178,13 @@ func draw_move(pos_i: Vector2i) -> void:
 	var pos := _get_stabilized_position(pos_i)
 	if !_draw_line:
 		if Input.is_action_pressed("draw_create_line"):
-			var difference := pos - _locked_centre
-			var distance := difference.length()
+			var difference := (pos - _locked_centre)
+			var distance := floori(difference.length())
 			if _locked_angle != INF:
-				pos = _locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
+				pos = (
+					_locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
+				).floor()
+
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
@@ -248,6 +249,8 @@ func draw_end(pos: Vector2i) -> void:
 	update_random_image()
 	_spacing_mode = _old_spacing_mode
 	_is_drawing = false
+	_locked_centre = Vector2.INF
+	_locked_angle = INF
 
 
 func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
