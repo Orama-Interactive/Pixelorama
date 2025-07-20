@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-06-06 15:16\n"
+"PO-Revision-Date: 2025-07-20 23:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -28,19 +28,19 @@ msgid "Please Confirm..."
 msgstr "Per favore conferma..."
 
 msgid "File Name:"
-msgstr "Nome File:"
+msgstr "Nome file:"
 
 msgid "Project Name:"
-msgstr "Nome Progetto:"
+msgstr "Nome progetto:"
 
 msgid "Image Size"
 msgstr "Dimensione dell'immagine"
 
 msgid "Canvas Size"
-msgstr "Dimensione Canvas"
+msgstr "Dimensioni della tela"
 
 msgid "Frame Size"
-msgstr "Dimensione Frame"
+msgstr "Dimensione della cornice"
 
 msgid "Size:"
 msgstr "Dimensione:"
