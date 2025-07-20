@@ -578,8 +578,7 @@ func _color_segments(image: ImageExtended) -> void:
 			var p := _allegro_image_segments[c]
 			# We don't have to check again whether the point being processed is within the bounds
 			var rect = Rect2(
-				Vector2i(p.left_position, p.y),
-				Vector2i(p.right_position - p.left_position + 1, 1)
+				Vector2i(p.left_position, p.y), Vector2i(p.right_position - p.left_position + 1, 1)
 			)
 			image.fill_rect(rect, color)
 		image.convert_rgb_to_indexed()
