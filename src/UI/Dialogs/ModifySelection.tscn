@@ -6,14 +6,15 @@
 [node name="ModifySelection" type="ConfirmationDialog"]
 title = "Expand selection"
 position = Vector2i(0, 36)
-size = Vector2i(260, 130)
+size = Vector2i(266, 144)
+visible = true
 script = ExtResource("1_w6rs7")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 252.0
-offset_bottom = 81.0
+offset_right = 258.0
+offset_bottom = 95.0
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="GridContainer"]
@@ -51,10 +52,20 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Diamond"
+popup/item_0/id = 0
 popup/item_1/text = "Circle"
 popup/item_1/id = 1
 popup/item_2/text = "Square"
 popup/item_2/id = 2
 
+[node name="ContentLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "transform content"
+
+[node name="WithContent" type="CheckBox" parent="GridContainer"]
+layout_mode = 2
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="toggled" from="GridContainer/WithContent" to="." method="_on_with_content_toggled"]
