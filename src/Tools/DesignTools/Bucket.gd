@@ -393,6 +393,16 @@ func _flood_fill(pos: Vector2i) -> void:
 			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
 				continue
+			# Fill all area if it's completely empty and _fill_merged_area = false
+			if image.get_used_rect().size == Vector2i.ZERO and not _fill_merged_area:
+				if project.has_selection:
+					var s_rect = project.selection_map.get_selection_rect(project)
+					if image.get_region(s_rect).get_used_rect().size == Vector2i.ZERO:
+						image.fill_rect(s_rect, tool_slot.color)
+						continue
+				else:
+					image.fill(tool_slot.color)
+					continue
 		else:
 			# end early if we are filling with an empty pattern
 			var pattern_size := _pattern.image.get_size()
