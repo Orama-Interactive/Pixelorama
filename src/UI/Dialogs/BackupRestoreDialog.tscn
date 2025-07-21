@@ -3,10 +3,9 @@
 [ext_resource type="Script" uid="uid://clahbctkpotb2" path="res://src/UI/Dialogs/BackupRestoreDialog.gd" id="1_5v3pd"]
 
 [node name="BackupRestoreDialog" type="Window"]
-title = "Past Sessions "
+title = "Past sessions"
 position = Vector2i(0, 36)
-size = Vector2i(450, 300)
-visible = false
+size = Vector2i(541, 300)
 wrap_controls = true
 exclusive = true
 script = ExtResource("1_5v3pd")
@@ -23,8 +22,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Double Click - Load the entire session.
-Single Click - Choose project from session."
+text = "Double click to load an entire session, or a specific project."
+autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -42,6 +41,7 @@ text = "Sessions"
 [node name="ProjectsLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 theme_type_variation = &"HeaderSmall"
 text = "Projects"
 
