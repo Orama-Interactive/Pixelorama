@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-07-24 10:40\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -185,7 +185,7 @@ msgstr ""
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "مفهرس"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -450,7 +450,7 @@ msgstr ""
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "محاذاة إلى دلائل المنظور"
 
 msgid "Show Animation Timeline"
 msgstr "إظهار الخيط الزمني للرسوم المتحركة"
