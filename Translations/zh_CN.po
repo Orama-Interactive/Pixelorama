@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-07-25 08:44\n"
 
 msgid "OK"
 msgstr "确定"
@@ -187,7 +187,7 @@ msgstr "颜色模式"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr "已索引"
+msgstr "索引颜色"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
@@ -1327,7 +1327,7 @@ msgstr ""
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "（当前会话）"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
@@ -3358,7 +3358,7 @@ msgstr "排序调色板"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette get reversed.
 msgid "Reverse colors"
-msgstr "反向颜色"
+msgstr "颜色反转"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their hue.
 msgid "Sort by hue"
