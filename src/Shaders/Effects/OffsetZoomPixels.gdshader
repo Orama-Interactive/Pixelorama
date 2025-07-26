@@ -2,7 +2,7 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform sampler2D selection : filter_nearest;
-uniform vec2 offset = vec2(0.0); // In pixels
+uniform ivec2 offset = ivec2(0.0); // In pixels
 uniform float zoom_amount: hint_range(0.02, 100.0) = 1.0;
 uniform bool wrap_around = false;
 
@@ -10,7 +10,7 @@ void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
 
-	vec2 uv = UV - (offset * TEXTURE_PIXEL_SIZE); // Offset the uv by an amount of pixels
+	vec2 uv = UV - (vec2(offset) * TEXTURE_PIXEL_SIZE); // Offset the uv by an amount of pixels
 	vec2 zoomed_uv = (uv - vec2(0.5)) * zoom_amount + vec2(0.5);
 	if (wrap_around) {
 		zoomed_uv = fract(zoomed_uv);
