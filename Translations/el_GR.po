@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-07-26 20:28\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1307,27 +1307,27 @@ msgstr "Καταγραφές προβλημάτων"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "Επαναφορά αντιγράφου"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "Προηγούμενες συνεδρίες"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "Κάντε διπλό κλικ για να φορτώσετε μια ολόκληρη συνεδρία ή ένα συγκεκριμένο έργο."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
-msgstr ""
+msgstr "Συνεδρίες"
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "Έργα"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "(Τρέχουσα Συνεδρία)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
