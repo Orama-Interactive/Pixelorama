@@ -9,20 +9,24 @@ enum Types { EXPAND, SHRINK, BORDER, CENTER }
 			title = "Expand Selection"
 		elif type == Types.SHRINK:
 			title = "Shrink Selection"
-		else:
+		elif type == Types.BORDER:
 			title = "Border Selection"
+		else:
+			title = "Center Selection"
 
-@onready var width_slider: ValueSlider = $GridContainer/WidthSlider
-@onready var brush_option_button: OptionButton = $GridContainer/BrushOptionButton
-@onready var with_content_node := $GridContainer/WithContent
+@onready var width_slider: ValueSlider = $Options/ExpandShrinkBorder/WidthSlider
+@onready var brush_option_button: OptionButton = $Options/ExpandShrinkBorder/BrushOptionButton
+@onready var with_content_node := $Options/HBoxContainer/WithContent
+@onready var relative_checkbox := $Options/CenterContent/RelativeCheckbox
 @onready var selection_node := Global.canvas.selection
 
 
 func _on_about_to_popup() -> void:
 	await get_tree().process_frame
-	with_content_node.visible = type != Types.BORDER
-	$GridContainer/ContentLabel.visible = type != Types.BORDER
-	if not with_content_node.visible:
+	$Options/HBoxContainer.visible = type != Types.BORDER
+	$Options/ExpandShrinkBorder.visible = type != Types.CENTER
+	$Options/CenterContent.visible = type == Types.CENTER and with_content_node.button_pressed
+	if not with_content_node.is_visible_in_tree():
 		with_content_node.button_pressed = false
 
 
@@ -46,6 +50,20 @@ func _on_confirmed() -> void:
 				selection_node.transformation_handles.resize_transform(delta)
 			Types.SHRINK:
 				selection_node.transformation_handles.resize_transform(-delta)
+			Types.CENTER:
+				var old_pos = selection_node.transformation_handles.preview_transform.origin
+				var used_rect := Rect2i(
+					old_pos, project.selection_map.get_selection_rect(project).size
+				)
+				if relative_checkbox.button_pressed:
+					var transformed_image = selection_node.transformation_handles.transformed_image
+					if is_instance_valid(transformed_image):
+						used_rect = transformed_image.get_used_rect()
+						used_rect.position += Vector2i(old_pos)
+				if not used_rect.has_area():
+					return
+				var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
+				selection_node.transformation_handles.move_transform(offset - used_rect.position)
 		return
 	selection_node.transform_content_confirm()
 	var undo_data_tmp := selection_node.get_undo_data(false)
@@ -55,8 +73,10 @@ func _on_confirmed() -> void:
 		project.selection_map.expand(width, brush)
 	elif type == Types.SHRINK:
 		project.selection_map.shrink(width, brush)
-	else:
+	elif type == Types.BORDER:
 		project.selection_map.border(width, brush)
+	else:
+		project.selection_map.center()
 	project.selection_offset = Vector2.ZERO
 	selection_node.commit_undo("Modify Selection", undo_data_tmp)
 	selection_node.queue_redraw()
@@ -67,3 +87,4 @@ func _on_with_content_toggled(toggled_on: bool) -> void:
 		brush_option_button.select(2)  # Square
 	brush_option_button.set_item_disabled(0, toggled_on)  # Diamond
 	brush_option_button.set_item_disabled(1, toggled_on)  # Circle
+	$Options/CenterContent.visible = type == Types.CENTER and with_content_node.button_pressed
