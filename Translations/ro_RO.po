@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-06-16 09:38\n"
+"PO-Revision-Date: 2025-07-21 12:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1302,6 +1302,30 @@ msgstr "Documentație virtuală"
 
 msgid "Issue Tracker"
 msgstr "Monitor de probleme"
+
+#. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
+msgid "Restore Backup"
+msgstr "Restaurare copie de siguranță"
+
+#. Found in the Restore Backup dialog.
+msgid "Past sessions"
+msgstr "Sesiuni anterioare"
+
+#. Found in the Restore Backup dialog.
+msgid "Double click to load an entire session, or a specific project."
+msgstr "Dă dublu clic pentru a încărca o sesiune integrală sau un proiect specific."
+
+#. Found in the Restore Backup dialog.
+msgid "Sessions"
+msgstr "Sesiuni"
+
+#. Found in the Restore Backup dialog.
+msgid "Projects"
+msgstr "Proiecte"
+
+#. Found in the Restore Backup dialog.
+msgid "(Current Session)"
+msgstr "(Sesiune curentă)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"

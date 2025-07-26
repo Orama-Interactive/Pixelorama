@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2025-06-04 09:37\n"
+"PO-Revision-Date: 2025-07-21 09:54\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1301,6 +1301,30 @@ msgstr "Documentació en línia"
 
 msgid "Issue Tracker"
 msgstr "Rastrejador d'incidències"
+
+#. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
+msgid "Restore Backup"
+msgstr ""
+
+#. Found in the Restore Backup dialog.
+msgid "Past sessions"
+msgstr ""
+
+#. Found in the Restore Backup dialog.
+msgid "Double click to load an entire session, or a specific project."
+msgstr ""
+
+#. Found in the Restore Backup dialog.
+msgid "Sessions"
+msgstr ""
+
+#. Found in the Restore Backup dialog.
+msgid "Projects"
+msgstr ""
+
+#. Found in the Restore Backup dialog.
+msgid "(Current Session)"
+msgstr ""
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
