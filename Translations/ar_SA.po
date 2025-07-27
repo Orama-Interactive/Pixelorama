@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2025-07-24 10:40\n"
+"PO-Revision-Date: 2025-07-27 01:11\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -348,7 +348,7 @@ msgid "Window Opacity"
 msgstr "شفافية النافذة"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "لا تعمل شفافية النافذة في وضع ملء الشاشة."
 
 msgid "Panel Layout"
 msgstr ""
@@ -540,7 +540,7 @@ msgstr "مسافة الدمج:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "الصور التي تتجاوز الحد الأدنى ستدمج في صورة أكبر، إذا كانت داخل هذه المسافة"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
