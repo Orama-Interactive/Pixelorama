@@ -653,6 +653,10 @@ resize_canvas={
 "deadzone": 0.5,
 "events": []
 }
+reapply_last_effect={
+"deadzone": 0.2,
+"events": []
+}
 offset_image={
 "deadzone": 0.5,
 "events": []
