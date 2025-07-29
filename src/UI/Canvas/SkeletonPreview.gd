@@ -73,12 +73,12 @@ func _draw_gizmo(layer: BoneLayer, camera_zoom: Vector2, chained := false, paren
 		var font = Themes.get_font()
 		draw_set_transform(bone.gizmo_origin + bone.start_point, rotation, Vector2.ONE / camera_zoom.x)
 		var line_size = bone.gizmo_length
-		var fade_ratio = (line_size/font.get_string_size(bone.bone_name).x) * camera_zoom.x
+		var fade_ratio = (line_size/font.get_string_size(layer.name).x) * camera_zoom.x
 		var alpha = clampf(fade_ratio, 0.6, 1)
 		if fade_ratio < 0.3:
 			alpha = 0
 		draw_string(
-			font, Vector2.ZERO, bone.bone_name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1, 1, 1, alpha)
+			font, Vector2.ZERO, layer.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1, 1, 1, alpha)
 		)
 
 func announce_tool_removal(tool_node):
@@ -88,11 +88,12 @@ func announce_tool_removal(tool_node):
 ## This manages the hovering mechanism of gizmo
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
+		## Bone Selection
 		var project: Project = Global.current_project
 		var bone_layer = project.layers[project.current_layer]
 		if not bone_layer is BoneLayer:
 			return
-		var pos = event.position
+		var pos = Global.canvas.current_pixel
 		if selected_bone:  # Check if we are still hovering over the same gizmo
 			if (
 				selected_bone.hover_mode(pos, Global.camera.zoom) == selected_bone.NONE

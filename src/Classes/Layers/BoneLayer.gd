@@ -23,6 +23,15 @@ func _init(_project: Project, _name := "") -> void:
 	blend_mode = BlendModes.NORMAL
 
 
+func get_parent_bone():
+	var bone_parent = parent
+	while bone_parent != null:
+		bone_parent = bone_parent.parent
+		if bone_parent is BoneLayer:
+			break
+	return bone_parent
+
+
 ## Returns a new empty [BaseCel]
 func new_empty_cel() -> BaseCel:
 	return BoneCel.new()
@@ -39,11 +48,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 func _apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 	if not enabled:
 		return cel_image
-	var bone_parent = parent
-	while bone_parent != null:
-		bone_parent = bone_parent.parent
-		if bone_parent is BoneLayer:
-			break
+	var bone_parent = get_parent_bone()
 	if bone_parent == null:
 		return cel_image
 	var bone_cel: BoneCel = at_frame.cels[bone_parent.index]

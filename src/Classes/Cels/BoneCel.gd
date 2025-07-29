@@ -14,36 +14,30 @@ const WIDTH: float = 2
 const DESELECT_WIDTH: float = 1
 
 # Variables set using serialize()
-var bone_name: String
-var parent_bone_name: String:
-	set(value):
-		if value != parent_bone_name:
-			parent_bone_name = value
-			update_children(bone_name ,"parent_bone_name", false, "")
 var gizmo_origin: Vector2:
 	set(value):
 		if value != gizmo_origin:
 			var diff = value - gizmo_origin
 			gizmo_origin = value
-			update_children(bone_name ,"gizmo_origin", false, diff)
+			update_children("gizmo_origin", false, diff)
 var gizmo_rotate_origin: float = 0:  ## Unit is Radians
 	set(value):
 		if value != gizmo_rotate_origin:
 			var diff = value - gizmo_rotate_origin
 			gizmo_rotate_origin = value
-			update_children(bone_name ,"gizmo_rotate_origin", false, diff)
+			update_children("gizmo_rotate_origin", false, diff)
 var start_point: Vector2:  ## This is relative to the gizmo_origin
 	set(value):
 		if value != start_point:
 			var diff = value - start_point
 			start_point = value
-			update_children(bone_name ,"start_point", true, diff)
+			update_children("start_point", true, diff)
 var bone_rotation: float = 0:  ## This is relative to the gizmo_rotate_origin (Radians)
 	set(value):
 		if value != bone_rotation:
 			var diff = value - bone_rotation
 			bone_rotation = value
-			update_children(bone_name ,"bone_rotation", true, diff)
+			update_children("bone_rotation", true, diff)
 var gizmo_length: int:
 	set(value):
 		if gizmo_length != value and value > int(MIN_LENGTH):
@@ -52,7 +46,7 @@ var gizmo_length: int:
 				value = int(MIN_LENGTH)
 				diff = 0
 			gizmo_length = value
-			update_children(bone_name ,"gizmo_length", false, diff)
+			update_children("gizmo_length", false, diff)
 
 # Properties determined using above variables
 var end_point: Vector2:  ## This is relative to the gizmo_origin
@@ -93,6 +87,7 @@ func deserialize(data: Dictionary) -> void:
 
 func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 	var local_mouse_pos = rel_to_origin(mouse_position)
+	print(local_mouse_pos)
 	if (start_point).distance_to(local_mouse_pos) <= InteractionDistance / camera_zoom.x:
 		return DISPLACE
 	elif (
@@ -145,7 +140,7 @@ func rel_to_global(pos: Vector2) -> Vector2:
 	#return reset_data
 
 
-func update_children(parent_name: String, property: String, should_propagate: bool, diff):
+func update_children(property: String, should_propagate: bool, diff):
 	var project = Global.current_project
 	var layer: BoneLayer = project.layers[project.current_layer]
 	if not is_instance_valid(project):

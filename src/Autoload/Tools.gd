@@ -254,6 +254,14 @@ Press %s to edit the last added basis""",
 		"res://src/Tools/3DTools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
+	"Skeleton":
+	Tool.new(
+		"Skeleton",
+		"Skeleton",
+		"skeleton",
+		"res://src/Tools/DesignTools/SkeletonTool.tscn",
+		[Global.LayerTypes.BONE]
+	),
 }
 
 var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
@@ -264,11 +272,13 @@ var _left_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Pencil",
 	Global.LayerTypes.TILEMAP: "Pencil",
 	Global.LayerTypes.THREE_D: "3DShapeEdit",
+	Global.LayerTypes.BONE: "Skeleton",
 }
 var _right_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Eraser",
 	Global.LayerTypes.TILEMAP: "Eraser",
 	Global.LayerTypes.THREE_D: "Pan",
+	Global.LayerTypes.BONE: "Skeleton",
 }
 var _tool_buttons: Node
 var _last_position := Vector2i(Vector2.INF)
@@ -859,7 +869,7 @@ func _cel_switched() -> void:
 	# Do not make any changes when its the same type of layer, or a group layer
 	if (
 		layer_type == _curr_layer_type
-		or layer_type in [Global.LayerTypes.GROUP, Global.LayerTypes.AUDIO, Global.LayerTypes.BONE]
+		or layer_type in [Global.LayerTypes.GROUP, Global.LayerTypes.AUDIO]
 	):
 		return
 	_show_relevant_tools(layer_type)

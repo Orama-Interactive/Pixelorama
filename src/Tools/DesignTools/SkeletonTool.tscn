@@ -1,0 +1,193 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmm1oev1lo72t"]
+
+[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1_ppngp"]
+[ext_resource type="Script" uid="uid://bsfqeyfc7cifm" path="res://src/Tools/DesignTools/SkeletonTool.gd" id="1_wwq80"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_d5th2"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4_m4bea"]
+
+[node name="ToolOptions" instance=ExtResource("1_ppngp")]
+script = ExtResource("1_wwq80")
+
+[node name="BoneProps" type="VBoxContainer" parent="." index="2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Section3" type="HBoxContainer" parent="BoneProps" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BoneProps/Section3" index="0"]
+layout_mode = 2
+text = "Bone properties"
+
+[node name="HSeparator" type="HSeparator" parent="BoneProps/Section3" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BoneLabel" type="Label" parent="BoneProps" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Name:"
+
+[node name="BonePositionSlider" parent="BoneProps" index="2" instance=ExtResource("3_d5th2")]
+layout_mode = 2
+allow_greater = true
+allow_lesser = true
+suffix_x = "px"
+suffix_y = "px"
+
+[node name="BoneRotationSlider" parent="BoneProps" index="3" instance=ExtResource("4_m4bea")]
+layout_mode = 2
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+prefix = "Rotation:"
+suffix = "°"
+
+[node name="Section3" type="HBoxContainer" parent="." index="3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Section3" index="0"]
+layout_mode = 2
+text = "General"
+
+[node name="HSeparator" type="HSeparator" parent="Section3" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="." index="4"]
+layout_mode = 2
+columns = 2
+
+[node name="LiveUpdateCheckbox" type="CheckBox" parent="GridContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "(Enabled) The update happens continuously
+as the bone is modified
+
+(Disabled) The update only happens at the end of modification."
+
+[node name="Label" type="Label" parent="GridContainer" index="1"]
+layout_mode = 2
+tooltip_text = "(Enabled) The update happens continuously
+as the bone is modified
+
+(Disabled) The update only happens at the end of modification."
+mouse_filter = 1
+text = "Live Update (slower)"
+
+[node name="AllowChaining" type="CheckBox" parent="GridContainer" index="2"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "When enabled, it will be possible to displace bone and
+rotate it's parent at the same time (like a chain)."
+
+[node name="Label3" type="Label" parent="GridContainer" index="3"]
+layout_mode = 2
+tooltip_text = "When enabled, it will be possible to displace bone and
+rotate it's parent at the same time (like a chain)."
+mouse_filter = 1
+text = "Allow Chaining"
+
+[node name="IncludeChildrenCheckbox" type="CheckBox" parent="GridContainer" index="4"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Manipulations done through the buttons below
+will also propagate down the child bones one by one.
+
+Note that transformations are done to children redardless of
+the state of this checkbox. For example resetting a bone with
+this checkbox enabled will reset it's children as well, otherwise
+the children will just move/rotate according to new state of the
+bone"
+button_pressed = true
+
+[node name="Label2" type="Label" parent="GridContainer" index="5"]
+layout_mode = 2
+tooltip_text = "Manipulations done through the buttons below
+will also propagate down the child bones one by one.
+
+Note that transformations are done to children redardless of
+the state of this checkbox. For example resetting a bone with
+this checkbox enabled will reset it's children as well, otherwise
+the children will just move/rotate according to new state of the
+bone"
+mouse_filter = 1
+text = "Include bone children"
+
+[node name="Section2" type="HBoxContainer" parent="." index="5"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Section2" index="0"]
+layout_mode = 2
+text = "Skeleton"
+
+[node name="HSeparator" type="HSeparator" parent="Section2" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuickSetBones" type="MenuButton" parent="." index="6"]
+layout_mode = 2
+tooltip_text = "Quickly place bones over their respective sprites."
+text = "Quick Set Bones"
+flat = false
+
+[node name="CopyPoseFrom" type="MenuButton" parent="." index="7"]
+layout_mode = 2
+tooltip_text = "Copies properties of selected bones from chosen frame to current frame."
+text = "Copy Pose From"
+flat = false
+
+[node name="ForceRefreshPose" type="MenuButton" parent="." index="8"]
+layout_mode = 2
+tooltip_text = "Force re-generates the pose of chosen frames"
+text = "Force Refresh Pose"
+flat = false
+
+[node name="Section4" type="HBoxContainer" parent="." index="9"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Section4" index="0"]
+layout_mode = 2
+text = "Interpolation"
+
+[node name="HSeparator" type="HSeparator" parent="Section4" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Warn" type="Button" parent="Section4" index="2"]
+layout_mode = 2
+text = "[⚠️]"
+flat = true
+
+[node name="TweenSkeleton" type="MenuButton" parent="." index="10"]
+layout_mode = 2
+tooltip_text = "Gererates In-Betweens from a chosen start frame to the current frame."
+text = "Tween Skeleton"
+flat = false
+
+[node name="Section" type="HBoxContainer" parent="." index="11"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Section" index="0"]
+layout_mode = 2
+text = "Reset"
+
+[node name="HSeparator" type="HSeparator" parent="Section" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RotationReset" type="MenuButton" parent="." index="12"]
+layout_mode = 2
+tooltip_text = "Resets the rotation of selected bones"
+text = "Bone Rotation"
+flat = false
+
+[node name="PositionReset" type="MenuButton" parent="." index="13"]
+layout_mode = 2
+tooltip_text = "Resets the position of selected bones"
+text = "Bone Position"
+flat = false
+
+[connection signal="pressed" from="Section4/Warn" to="." method="_on_warn_pressed"]
+[connection signal="about_to_popup" from="TweenSkeleton" to="." method="_on_tween_skeleton_about_to_popup"]
