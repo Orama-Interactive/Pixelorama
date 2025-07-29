@@ -9,7 +9,6 @@ extends GroupLayer
 #var current_frame: int = -1
 #var prev_layer_count: int = 0
 #var prev_frame_count: int = 0
-#var ignore_render_once := false  ## used to check if we need a new render or not (used in _input())
 #var queue_generate := false
 ## The shader is located in pixelorama
 var allow_chaining := false
@@ -48,10 +47,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 func _apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 	if not enabled:
 		return cel_image
-	var bone_parent = get_parent_bone()
-	if bone_parent == null:
-		return cel_image
-	var bone_cel: BoneCel = at_frame.cels[bone_parent.index]
+	var bone_cel: BoneCel = at_frame.cels[index]
 	var used_region := cel_image.get_used_rect()
 	var start_point: Vector2i = bone_cel.start_point
 	var gizmo_origin: Vector2i = bone_cel.gizmo_origin.floor()

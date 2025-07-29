@@ -13,7 +13,7 @@ var _displace_offset := Vector2.ZERO
 var _prev_mouse_position := Vector2.INF
 var _distance_to_parent: float = 0
 var _chained_gizmo = null
-var current_selected_bone: BoneCel
+var current_selected_bone: BoneLayer  # Just to keep reference easy nothing more
 
 @onready var _pos_slider: ValueSliderV2 = $BoneProps/BonePositionSlider
 @onready var _rot_slider: ValueSlider = $BoneProps/BoneRotationSlider
@@ -111,23 +111,26 @@ func draw_start(_pos: Vector2i) -> void:
 	var mouse_point: Vector2 = Global.canvas.current_pixel
 	if !current_selected_bone:
 		return
-	if current_selected_bone.modify_mode == NONE:
+	var bone_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
+		current_selected_bone.index
+	]
+	if bone_cel.modify_mode == NONE:
 		# When moving mouse we may stop hovering but we are still modifying that bone.
 		# this is why we need a sepatate modify_mode variable
-		current_selected_bone.modify_mode = current_selected_bone.hover_mode(
+		bone_cel.modify_mode = bone_cel.hover_mode(
 			Vector2(mouse_point), Global.camera.zoom
 		)
 	if _prev_mouse_position == Vector2.INF:
-		_displace_offset = current_selected_bone.rel_to_start_point(mouse_point)
+		_displace_offset = bone_cel.rel_to_start_point(mouse_point)
 		_prev_mouse_position = mouse_point
 
 	## TODO Fix later
 	## Check if bone is a parent of anything (skip if it is)
-	#if _allow_chaining and current_selected_bone.parent_bone_name in _skeleton_preview.current_frame_bones.keys():
-		#var parent_bone = _skeleton_preview.current_frame_bones[current_selected_bone.parent_bone_name]
-		#var bone_start: Vector2i = current_selected_bone.rel_to_global(current_selected_bone.start_point)
-		#var parent_start: Vector2i = parent_bone.rel_to_global(parent_bone.start_point)
-		#_distance_to_parent = bone_start.distance_to(parent_start)
+	if _allow_chaining and current_selected_bone.get_parent_bone():
+		var parent_bone = _skeleton_preview.current_frame_bones[bone_cel.parent_bone_name]
+		var bone_start: Vector2i = bone_cel.rel_to_global(bone_cel.start_point)
+		var parent_start: Vector2i = parent_bone.rel_to_global(parent_bone.start_point)
+		_distance_to_parent = bone_start.distance_to(parent_start)
 	display_props()
 
 
@@ -142,45 +145,48 @@ func draw_move(_pos: Vector2i) -> void:
 	var offset := mouse_point - _prev_mouse_position
 	if !current_selected_bone:
 		return
-	if _allow_chaining and current_selected_bone.parent_bone_name in _skeleton_preview.current_frame_bones.keys():
-		match current_selected_bone.modify_mode:  # This manages chaining
+	var bone_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
+		current_selected_bone.index
+	]
+	if _allow_chaining and current_selected_bone.get_parent_bone():
+		match bone_cel.modify_mode:  # This manages chaining
 			DISPLACE:
 				_chained_gizmo = current_selected_bone
-				current_selected_bone = _skeleton_preview.current_frame_bones[current_selected_bone.parent_bone_name]
+				current_selected_bone = current_selected_bone.get_parent_bone()
 				current_selected_bone.modify_mode = BoneCel.ROTATE
 				_skeleton_preview.selected_bone = current_selected_bone
 				_chained_gizmo.modify_mode = NONE
-	if current_selected_bone.modify_mode == BoneCel.DISPLACE:
+	if bone_cel.modify_mode == BoneCel.DISPLACE:
 		if Input.is_key_pressed(KEY_CTRL):
 			_skeleton_preview.ignore_render_once = true
-			current_selected_bone.gizmo_origin += offset.rotated(-current_selected_bone.bone_rotation)
-		current_selected_bone.start_point = Vector2i(current_selected_bone.rel_to_origin(mouse_point) - _displace_offset)
+			bone_cel.gizmo_origin += offset.rotated(-bone_cel.bone_rotation)
+		bone_cel.start_point = Vector2i(bone_cel.rel_to_origin(mouse_point) - _displace_offset)
 	elif (
-		current_selected_bone.modify_mode == ROTATE
-		or current_selected_bone.modify_mode == SCALE
+		bone_cel.modify_mode == ROTATE
+		or bone_cel.modify_mode == SCALE
 	):
-		var localized_mouse_norm: Vector2 = current_selected_bone.rel_to_start_point(mouse_point).normalized()
-		var localized_prev_mouse_norm: Vector2 = current_selected_bone.rel_to_start_point(
+		var localized_mouse_norm: Vector2 = bone_cel.rel_to_start_point(mouse_point).normalized()
+		var localized_prev_mouse_norm: Vector2 = bone_cel.rel_to_start_point(
 			_prev_mouse_position
 		).normalized()
 		var diff := localized_mouse_norm.angle_to(localized_prev_mouse_norm)
 		if Input.is_key_pressed(KEY_CTRL):
 			_skeleton_preview.ignore_render_once = true
-			current_selected_bone.gizmo_rotate_origin -= diff
-			if current_selected_bone.modify_mode == SCALE:
-				current_selected_bone.gizmo_length = current_selected_bone.rel_to_start_point(mouse_point).length()
+			bone_cel.gizmo_rotate_origin -= diff
+			if bone_cel.modify_mode == SCALE:
+				bone_cel.gizmo_length = bone_cel.rel_to_start_point(mouse_point).length()
 		else:
-			current_selected_bone.bone_rotation -= diff
+			bone_cel.bone_rotation -= diff
 			if _allow_chaining and _chained_gizmo:
 				_chained_gizmo.bone_rotation += diff
 	if _live_update:
 		if ProjectSettings.get_setting("rendering/driver/threads/thread_model") != 2:
-			_skeleton_preview.generate_pose()
+			Global.canvas.queue_redraw()
 		else:  # Multi-threaded mode (Currently pixelorama is single threaded)
 			if not live_thread.is_alive():
-				var error := live_thread.start(_skeleton_preview.generate_pose)
+				var error := live_thread.start(Global.canvas.queue_redraw)
 				if error != OK:  # Thread failed, so do this the hard way.
-					_skeleton_preview.generate_pose()
+					Global.canvas.queue_redraw()
 	_prev_mouse_position = mouse_point
 	display_props()
 
@@ -196,15 +202,15 @@ func draw_end(_pos: Vector2i) -> void:
 		is_transforming = false
 		_skeleton_preview.transformation_active = false
 		if current_selected_bone:
-			if current_selected_bone.modify_mode != NONE:
-				_skeleton_preview.generate_pose()
-				_skeleton_preview.selected_bone.modify_mode = NONE
-			if (
-				_allow_chaining
-				and current_selected_bone.parent_bone_name in _skeleton_preview.current_frame_bones.keys()
-			):
-				if current_selected_bone.modify_mode == DISPLACE:
-					_skeleton_preview.current_frame_bones[current_selected_bone.parent_bone_name].modify_mode = NONE
+			var bone_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
+				current_selected_bone.index
+			]
+			if bone_cel.modify_mode != NONE:
+				Global.canvas.queue_redraw()
+				bone_cel.modify_mode = NONE
+			if _allow_chaining and current_selected_bone.get_parent_bone():
+				if bone_cel.modify_mode == DISPLACE:
+					current_selected_bone.get_parent_bone().modify_mode = NONE
 	Global.current_project.has_changed = true
 	display_props()
 
@@ -222,7 +228,7 @@ func quick_set_bones(bone_id: int):
 		_skeleton_preview.current_frame_data = new_data
 		_skeleton_preview.save_frame_info(Global.current_project)
 		_skeleton_preview.queue_redraw()
-		_skeleton_preview.generate_pose()
+		Global.canvas.queue_redraw()
 
 
 func copy_bone_data(bone_id: int, from_frame: int, popup: PopupMenu, old_current_frame: int):
@@ -242,7 +248,7 @@ func copy_bone_data(bone_id: int, from_frame: int, popup: PopupMenu, old_current
 		_skeleton_preview.current_frame_data = new_data
 		_skeleton_preview.save_frame_info(Global.current_project)
 		_skeleton_preview.queue_redraw()
-		_skeleton_preview.generate_pose()
+		Global.canvas.queue_redraw()
 		copy_pose_from.get_popup().hide()
 		copy_pose_from.get_popup().clear(true)  # To save Memory
 
@@ -301,7 +307,7 @@ func reset_bone_angle(bone_id: int):
 		if bone_name in _skeleton_preview.current_frame_bones.keys():
 			_skeleton_preview.current_frame_bones[bone_name].bone_rotation = 0
 	_skeleton_preview.queue_redraw()
-	_skeleton_preview.generate_pose()
+	Global.canvas.queue_redraw()
 
 
 func reset_bone_position(bone_id: int):
@@ -310,7 +316,7 @@ func reset_bone_position(bone_id: int):
 		if bone_name in _skeleton_preview.current_frame_bones.keys():
 			_skeleton_preview.current_frame_bones[bone_name].start_point = Vector2.ZERO
 	_skeleton_preview.queue_redraw()
-	_skeleton_preview.generate_pose()
+	Global.canvas.queue_redraw()
 
 
 func _on_rotation_changed(value: float):
@@ -319,7 +325,7 @@ func _on_rotation_changed(value: float):
 		if current_selected_bone in _skeleton_preview.current_frame_bones.values():
 			current_selected_bone.bone_rotation = deg_to_rad(value)
 			_skeleton_preview.queue_redraw()
-			_skeleton_preview.generate_pose()
+			Global.canvas.queue_redraw()
 
 
 func _on_position_changed(value: Vector2):
@@ -327,7 +333,7 @@ func _on_position_changed(value: Vector2):
 		if current_selected_bone in _skeleton_preview.current_frame_bones.values():
 			current_selected_bone.start_point = current_selected_bone.rel_to_origin(value).ceil()
 			_skeleton_preview.queue_redraw()
-			_skeleton_preview.generate_pose()
+			Global.canvas.queue_redraw()
 
 
 func _on_quick_set_bones_menu_about_to_popup() -> void:
@@ -470,55 +476,17 @@ func get_selected_bone_names(popup: PopupMenu, bone_index: int) -> PackedStringA
 	return bone_names
 
 
-### This manages the hovering mechanism of gizmo
-#func cursor_move(pos: Vector2i) -> void:
-	#var global = Global
-	#if _skeleton_preview.selected_bone:  # Check if we are still hovering over the same gizmo
-		#if (
-			#_skeleton_preview.selected_bone.hover_mode(pos, global.camera.zoom) == NONE
-			#and _skeleton_preview.selected_bone.modify_mode == NONE
-		#):
-			#_skeleton_preview.selected_bone = null
-	#if !_skeleton_preview.selected_bone:  # If in the prevoius check we deselected the gizmo then search for a new one.
-		#for bone in _skeleton_preview.current_frame_bones.values():
-			#if (
-				#bone.hover_mode(pos, global.camera.zoom) != NONE
-				#or bone.modify_mode != NONE
-			#):
-				#var skip_gizmo := false
-				#if (
-					#_allow_chaining
-					#and (
-						#bone.modify_mode == ROTATE
-						#or bone.hover_mode(pos, global.camera.zoom) == ROTATE
-						#)
-				#):
-					## Check if bone is a parent of anything (if it has, skip it)
-					#for other_gizmo in _skeleton_preview.current_frame_bones.values():
-						#print("================")
-						#print(other_gizmo.bone_name)
-						#print(bone.parent_bone_name)
-						#if other_gizmo.bone_name == bone.parent_bone_name:
-							#skip_gizmo = true
-							#break
-				#if skip_gizmo:
-					#continue
-				#_skeleton_preview.selected_bone = bone
-				#_skeleton_preview.update_frame_data()
-				#break
-		#_skeleton_preview.queue_redraw()
-
-
 func display_props():
 	if _rot_slider.value_changed.is_connected(_on_rotation_changed):  # works for both signals
 		_rot_slider.value_changed.disconnect(_on_rotation_changed)
 		_pos_slider.value_changed.disconnect(_on_position_changed)
-	if current_selected_bone is BoneCel:
+	if current_selected_bone is BoneLayer:
+		var frame_cels = Global.current_project.frames[Global.current_project.current_frame].cels
 		%BoneProps.visible = true
 		%BoneLabel.text = tr("Name:") + " " + current_selected_bone.name
-		_rot_slider.value = rad_to_deg(current_selected_bone.bone_rotation)
-		_pos_slider.value = current_selected_bone.rel_to_global(
-			current_selected_bone.start_point
+		_rot_slider.value = rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation)
+		_pos_slider.value = frame_cels[current_selected_bone.index].rel_to_global(
+			frame_cels[current_selected_bone.index].start_point
 		)
 		_rot_slider.value_changed.connect(_on_rotation_changed)
 		_pos_slider.value_changed.connect(_on_position_changed)

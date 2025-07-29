@@ -14,7 +14,7 @@ const WIDTH: float = 2
 const DESELECT_WIDTH: float = 1
 
 # Variables set using serialize()
-var gizmo_origin: Vector2:
+var gizmo_origin := Vector2.ZERO:
 	set(value):
 		if value != gizmo_origin:
 			var diff = value - gizmo_origin
@@ -26,7 +26,7 @@ var gizmo_rotate_origin: float = 0:  ## Unit is Radians
 			var diff = value - gizmo_rotate_origin
 			gizmo_rotate_origin = value
 			update_children("gizmo_rotate_origin", false, diff)
-var start_point: Vector2:  ## This is relative to the gizmo_origin
+var start_point := Vector2.ZERO:  ## This is relative to the gizmo_origin
 	set(value):
 		if value != start_point:
 			var diff = value - start_point
@@ -38,7 +38,7 @@ var bone_rotation: float = 0:  ## This is relative to the gizmo_rotate_origin (R
 			var diff = value - bone_rotation
 			bone_rotation = value
 			update_children("bone_rotation", true, diff)
-var gizmo_length: int:
+var gizmo_length: int = MIN_LENGTH:
 	set(value):
 		if gizmo_length != value and value > int(MIN_LENGTH):
 			var diff = value - gizmo_length
@@ -47,6 +47,7 @@ var gizmo_length: int:
 				diff = 0
 			gizmo_length = value
 			update_children("gizmo_length", false, diff)
+var associated_layer: BaseLayer   ## only used in update_children()
 
 # Properties determined using above variables
 var end_point: Vector2:  ## This is relative to the gizmo_origin
@@ -65,13 +66,9 @@ func get_class_name() -> String:
 	return "BoneCel"
 
 
-static func generate_empty_data(
-	cel_bone_name := "Invalid Name", cel_parent_bone_name := "Invalid Parent"
-) -> Dictionary:
+static func generate_empty_data() -> Dictionary:
 	# Make sure the name/types are the same as the variable names/types
 	return {
-		"bone_name": cel_bone_name,
-		"parent_bone_name": cel_parent_bone_name,
 		"gizmo_origin": Vector2.ZERO,
 		"gizmo_rotate_origin": 0,
 		"start_point": Vector2.ZERO,
@@ -87,7 +84,6 @@ func deserialize(data: Dictionary) -> void:
 
 func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 	var local_mouse_pos = rel_to_origin(mouse_position)
-	print(local_mouse_pos)
 	if (start_point).distance_to(local_mouse_pos) <= InteractionDistance / camera_zoom.x:
 		return DISPLACE
 	elif (
@@ -142,7 +138,11 @@ func rel_to_global(pos: Vector2) -> Vector2:
 
 func update_children(property: String, should_propagate: bool, diff):
 	var project = Global.current_project
-	var layer: BoneLayer = project.layers[project.current_layer]
+	if associated_layer:
+		if project.frames[project.current_frame].cels[associated_layer.index] != self:
+			associated_layer = null
+	if !associated_layer:
+		associated_layer = project.layers[project.current_layer]
 	if not is_instance_valid(project):
 		return
 	if !should_propagate:
@@ -151,17 +151,17 @@ func update_children(property: String, should_propagate: bool, diff):
 		# chain.
 		return
 	## update first child (This will trigger a chain process)
-	for child_layers in layer.get_children(false):
-		if layer.get_layer_type() == Global.LayerTypes.BONE:
-			var bone_cel: BoneCel = project.frames[project.current_frame].cels[layer.index]
-			if bone_cel.get(property) == null:
+	for child_layer in associated_layer.get_children(false):
+		if child_layer.get_layer_type() == Global.LayerTypes.BONE:
+			var child_cel: BoneCel = project.frames[project.current_frame].cels[child_layer.index]
+			if child_cel.get(property) == null:
 				continue
-			bone_cel.set(property, bone_cel.get(property) + diff)
+			child_cel.set(property, child_cel.get(property) + diff)
 			if property == "bone_rotation":
 				var displacement := rel_to_start_point(
-					bone_cel.rel_to_global(bone_cel.start_point)
+					child_cel.rel_to_global(child_cel.start_point)
 				)
 				displacement = displacement.rotated(diff)
-				bone_cel.start_point = bone_cel.rel_to_origin(
+				child_cel.start_point = child_cel.rel_to_origin(
 					rel_to_global(start_point) + displacement
 				)

@@ -1,9 +1,10 @@
 extends Node2D
 
 ## A Dictionary of bone names as keys and their "Gizmo" as values.
-var selected_bone: BoneCel
+var selected_bone: BoneLayer
 var active_skeleton_tools := Array()
 var transformation_active := false
+var ignore_render_once := false  ## used to check if we need a new render or not (used in _input())
 
 
 func _ready() -> void:
@@ -14,71 +15,79 @@ func _ready() -> void:
 func _draw() -> void:
 	var project = Global.current_project
 	var layer = project.layers[project.current_layer]
-	if not layer is BoneLayer:
+	while layer != null:
+		if layer is BoneLayer:
+			break
+		layer = layer.parent
+	if layer == null:
 		return
 	_draw_gizmo(layer, Global.camera.zoom)
 
 
 ## Generates a gizmo (for preview) based on the given data
-func _draw_gizmo(layer: BoneLayer, camera_zoom: Vector2, chained := false, parent = null) -> void:
+func _draw_gizmo(
+	bone: BoneLayer, camera_zoom: Vector2, chained := false, parent: BoneLayer = null
+) -> void:
 	var project = Global.current_project
-	if not project.layers[project.current_layer] is BoneLayer:
-		return
-	var bone: BoneCel = project.frames[project.current_frame].cels[layer.index]
+	var frame_cels = project.frames[project.current_frame].cels
+	var bone_cel: BoneCel = frame_cels[bone.index]
+
 	var width: float = (
-		bone.WIDTH if (bone == selected_bone) else bone.DESELECT_WIDTH
+		bone_cel.WIDTH if (bone == selected_bone) else bone_cel.DESELECT_WIDTH
 	) / camera_zoom.x
 	var main_color := Color.WHITE if (bone == selected_bone) else Color.GRAY
 	var dim_color := Color(main_color.r, main_color.g, main_color.b, 0.8)
 	var mouse_point: Vector2 = Global.canvas.current_pixel
-	var hover_mode = max(bone.modify_mode, bone.hover_mode(mouse_point, camera_zoom))
-	draw_set_transform(bone.gizmo_origin)
+	var hover_mode = max(bone_cel.modify_mode, bone_cel.hover_mode(mouse_point, camera_zoom))
+	draw_set_transform(bone_cel.gizmo_origin)
 	draw_circle(
-		bone.start_point,
-		bone.START_RADIUS / camera_zoom.x,
-		main_color if (hover_mode == bone.DISPLACE) else dim_color, false,
+		bone_cel.start_point,
+		bone_cel.START_RADIUS / camera_zoom.x,
+		main_color if (hover_mode == bone_cel.DISPLACE) else dim_color, false,
 		width
 	)
 	var skip_rotation_gizmo := false
 	# TODO: figure out later
-	if chained:  # Check if it's a parent of another bone.
-		for potential_child in bone.get_children():
-			if potential_child == BoneLayer:
+	for potential_child in bone.get_children(false):
+		if potential_child is BoneLayer:
+			if chained:  # Check if it's a parent of another bone.
 				skip_rotation_gizmo = true
-				_draw_gizmo(potential_child, camera_zoom, chained, bone)
-	bone.ignore_rotation_hover = skip_rotation_gizmo
+			_draw_gizmo(potential_child, camera_zoom, chained, bone)
+	bone_cel.ignore_rotation_hover = skip_rotation_gizmo
 	if !skip_rotation_gizmo:
 		draw_line(
-			bone.start_point,
-			bone.start_point + bone.end_point,
-			main_color if (hover_mode == bone.ROTATE) else dim_color,
-			width if (hover_mode == bone.ROTATE) else bone.DESELECT_WIDTH / camera_zoom.x
+			bone_cel.start_point,
+			bone_cel.start_point + bone_cel.end_point,
+			main_color if (hover_mode == bone_cel.ROTATE) else dim_color,
+			width if (hover_mode == bone_cel.ROTATE) else bone_cel.DESELECT_WIDTH / camera_zoom.x
 		)
 		draw_circle(
-			bone.start_point + bone.end_point,
-			bone.END_RADIUS / camera_zoom.x,
-			main_color if (hover_mode == bone.SCALE) else dim_color,
+			bone_cel.start_point + bone_cel.end_point,
+			bone_cel.END_RADIUS / camera_zoom.x,
+			main_color if (hover_mode == bone_cel.SCALE) else dim_color,
 			false,
 			width
 		)
 	## Show connection to parent
 	if parent:
 		draw_dashed_line(
-			bone.start_point,
-			bone.rel_to_origin(parent.rel_to_global(parent.start_point)),
+			bone_cel.start_point,
+			bone_cel.rel_to_origin(
+				frame_cels[parent.index].rel_to_global(frame_cels[parent.index].start_point)
+			),
 			main_color,
 			width,
 		)
 	if Themes:
 		var font = Themes.get_font()
-		draw_set_transform(bone.gizmo_origin + bone.start_point, rotation, Vector2.ONE / camera_zoom.x)
-		var line_size = bone.gizmo_length
-		var fade_ratio = (line_size/font.get_string_size(layer.name).x) * camera_zoom.x
+		draw_set_transform(bone_cel.gizmo_origin + bone_cel.start_point, rotation, Vector2.ONE / camera_zoom.x)
+		var line_size = bone_cel.gizmo_length
+		var fade_ratio = (line_size/font.get_string_size(bone.name).x) * camera_zoom.x
 		var alpha = clampf(fade_ratio, 0.6, 1)
 		if fade_ratio < 0.3:
 			alpha = 0
 		draw_string(
-			font, Vector2.ZERO, layer.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1, 1, 1, alpha)
+			font, Vector2.ZERO, bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1, 1, 1, alpha)
 		)
 
 func announce_tool_removal(tool_node):
@@ -95,9 +104,10 @@ func _input(event: InputEvent) -> void:
 			return
 		var pos = Global.canvas.current_pixel
 		if selected_bone:  # Check if we are still hovering over the same gizmo
+			var frame_cels = project.frames[project.current_frame].cels
 			if (
-				selected_bone.hover_mode(pos, Global.camera.zoom) == selected_bone.NONE
-				and selected_bone.modify_mode == selected_bone.NONE
+				frame_cels[selected_bone.index].hover_mode(pos, Global.camera.zoom) == BoneCel.NONE
+				and frame_cels[selected_bone.index].modify_mode == BoneCel.NONE
 			):
 				selected_bone = null
 		if !selected_bone:  # If in the prevoius check we deselected the gizmo then search for a new one.
@@ -125,4 +135,4 @@ func get_selected(initial_layer: BoneLayer, pos: Vector2, project: Project):
 					get_selected(child_bone_layer, pos, project)
 				if selected_bone:
 					break
-		selected_bone = bone_cel
+		selected_bone = initial_layer
