@@ -934,6 +934,8 @@ func on_add_layer_list_id_pressed(id: int) -> void:
 				SteamManager.set_achievement("ACH_3D_LAYER")
 			Global.LayerTypes.AUDIO:
 				layer = AudioLayer.new(project)
+			Global.LayerTypes.BONE:
+				layer = BoneLayer.new(project)
 		add_layer(layer, project)
 
 

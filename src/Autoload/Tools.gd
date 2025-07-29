@@ -859,7 +859,7 @@ func _cel_switched() -> void:
 	# Do not make any changes when its the same type of layer, or a group layer
 	if (
 		layer_type == _curr_layer_type
-		or layer_type in [Global.LayerTypes.GROUP, Global.LayerTypes.AUDIO]
+		or layer_type in [Global.LayerTypes.GROUP, Global.LayerTypes.AUDIO, Global.LayerTypes.BONE]
 	):
 		return
 	_show_relevant_tools(layer_type)

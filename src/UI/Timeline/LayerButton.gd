@@ -9,7 +9,8 @@ const ARRAY_TEXTURE_TYPES: Array[Texture2D] = [
 	preload("res://assets/graphics/layers/type_icons/layer_group.png"),
 	preload("res://assets/graphics/layers/type_icons/layer_3d.png"),
 	preload("res://assets/graphics/layers/type_icons/layer_tilemap.png"),
-	preload("res://assets/graphics/layers/type_icons/layer_sound.png")
+	preload("res://assets/graphics/layers/type_icons/layer_sound.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_group.png")  ## TODO: change this
 ]
 
 var layer_index := 0:

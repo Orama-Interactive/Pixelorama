@@ -14,6 +14,11 @@ func _init(_project: Project, _name := "") -> void:
 	blend_mode = BlendModes.PASS_THROUGH
 
 
+## Returns a new empty [BaseCel]
+func new_empty_cel() -> BaseCel:
+	return GroupCel.new()
+
+
 ## Blends all of the images of children layer of the group layer into a single image.
 func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
 	var image := ImageExtended.create_custom(
@@ -179,10 +184,6 @@ func deserialize(dict: Dictionary) -> void:
 
 func get_layer_type() -> int:
 	return Global.LayerTypes.GROUP
-
-
-func new_empty_cel() -> BaseCel:
-	return GroupCel.new()
 
 
 func set_name_to_default(number: int) -> void:
