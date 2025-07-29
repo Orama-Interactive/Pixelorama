@@ -137,9 +137,9 @@ func get_selected(initial_layer: BoneLayer, pos: Vector2, project: Project):
 			and selected_bone.modify_mode == selected_bone.NONE
 		):
 			selected_bone = null
-	if !selected_bone:  # If in the prevoius check we deselected the gizmo then search for a new one.
+	if !selected_bone:  # If in the upper check we deselected the gizmo then search for a new one.
 		var frame = project.frames[project.current_frame]
-		for bone_child_layer in initial_layer.get_children(false):
+		for bone_child_layer in initial_layer.get_children(true):
 			if not bone_child_layer is BoneLayer:
 				continue
 			var bone_cel = frame.cels[bone_child_layer.index]
@@ -155,10 +155,12 @@ func get_selected(initial_layer: BoneLayer, pos: Vector2, project: Project):
 						or bone_cel.hover_mode(pos, Global.camera.zoom) == bone_cel.ROTATE
 						)
 				):
-					# Check if bone is a parent of anything (if it is, skip it)
+					# Check if bone is a child of anything (if it is, skip it)
 					for child_bone_layer in bone_child_layer.get_children(false):
 						if child_bone_layer is BoneLayer:
 							get_selected(child_bone_layer, pos, project)
+							break
+						if other_gizmo.bone_name == bone.parent_bone_name:
 							skip_gizmo = true
 							break
 				if skip_gizmo:
@@ -166,4 +168,4 @@ func get_selected(initial_layer: BoneLayer, pos: Vector2, project: Project):
 				selected_bone = bone
 				skeleton_manager.update_frame_data()
 				break
-		skeleton_manager.queue_redraw()
+		queue_redraw()
