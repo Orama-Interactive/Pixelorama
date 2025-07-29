@@ -90,7 +90,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var project: Project = Global.current_project
 		var bone_layer = project.layers[project.current_layer]
-		if bone_layer is BoneLayer:
+		if not bone_layer is BoneLayer:
 			return
 		var pos = event.position
 		if selected_bone:  # Check if we are still hovering over the same gizmo
@@ -100,72 +100,28 @@ func _input(event: InputEvent) -> void:
 			):
 				selected_bone = null
 		if !selected_bone:  # If in the prevoius check we deselected the gizmo then search for a new one.
-			var frame = project.frames[project.current_frame]
-			for bone_child_layer in bone_layer.get_children(false):
-				if not bone_child_layer is BoneLayer:
-					continue
-				var bone_cel = frame.cels[bone_child_layer.index]
-				if (
-					bone_cel.hover_mode(pos, Global.camera.zoom) != bone_cel.NONE
-					or bone_cel.modify_mode != bone_cel.NONE
-				):
-					var skip_gizmo := false
-					if (
-						bone_layer.allow_chaining
-						and (
-							bone_cel.modify_mode == bone_cel.ROTATE
-							or bone_cel.hover_mode(pos, Global.camera.zoom) == bone_cel.ROTATE
-							)
-					):
-						# Check if bone is a parent of anything (if it has, skip it)
-						for other_gizmo in bone_child_layer.get_children(false):
-							if other_gizmo.bone_name == bone.parent_bone_name:
-								skip_gizmo = true
-								break
-					if skip_gizmo:
-						continue
-					selected_bone = bone
-					skeleton_manager.update_frame_data()
-					break
-			skeleton_manager.queue_redraw()
+			get_selected(bone_layer, pos, project)
+		queue_redraw()
 
 
 func get_selected(initial_layer: BoneLayer, pos: Vector2, project: Project):
-	if selected_bone:  # Check if we are still hovering over the same gizmo
+	var frame = project.frames[project.current_frame]
+	var bone_cel = frame.cels[initial_layer.index]
+	if (
+		bone_cel.hover_mode(pos, Global.camera.zoom) != bone_cel.NONE
+		or bone_cel.modify_mode != bone_cel.NONE
+	):
 		if (
-			selected_bone.hover_mode(pos, Global.camera.zoom) == selected_bone.NONE
-			and selected_bone.modify_mode == selected_bone.NONE
+			initial_layer.allow_chaining
+			and (
+				bone_cel.modify_mode == bone_cel.ROTATE
+				or bone_cel.hover_mode(pos, Global.camera.zoom) == bone_cel.ROTATE
+				)
 		):
-			selected_bone = null
-	if !selected_bone:  # If in the upper check we deselected the gizmo then search for a new one.
-		var frame = project.frames[project.current_frame]
-		for bone_child_layer in initial_layer.get_children(true):
-			if not bone_child_layer is BoneLayer:
-				continue
-			var bone_cel = frame.cels[bone_child_layer.index]
-			if (
-				bone_cel.hover_mode(pos, Global.camera.zoom) != bone_cel.NONE
-				or bone_cel.modify_mode != bone_cel.NONE
-			):
-				var skip_gizmo := false
-				if (
-					initial_layer.allow_chaining
-					and (
-						bone_cel.modify_mode == bone_cel.ROTATE
-						or bone_cel.hover_mode(pos, Global.camera.zoom) == bone_cel.ROTATE
-						)
-				):
-					# Check if bone is a child of anything (if it is, skip it)
-					for child_bone_layer in bone_child_layer.get_children(false):
-						if child_bone_layer is BoneLayer:
-							get_selected(child_bone_layer, pos, project)
-							break
-						if other_gizmo.bone_name == bone.parent_bone_name:
-							skip_gizmo = true
-							break
-				if skip_gizmo:
-					continue
-				selected_bone = bone
-				skeleton_manager.update_frame_data()
-				break
-		queue_redraw()
+			# Check if bone_child_layer is a child of anything (if it is, skip it)
+			for child_bone_layer in initial_layer.get_children(false):
+				if child_bone_layer is BoneLayer:
+					get_selected(child_bone_layer, pos, project)
+				if selected_bone:
+					break
+		selected_bone = bone_cel
