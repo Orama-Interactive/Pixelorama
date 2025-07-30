@@ -32,6 +32,8 @@ func get_parent_bone():
 
 
 func apply_bone(render: ImageExtended, cel_image: ImageExtended, at_frame: Frame) -> Image:
+	if name == "Group 2":
+		cel_image.save_png("out/a")
 	if not enabled:
 		return cel_image
 	var bone_cel: BoneCel = at_frame.cels[index]
@@ -39,6 +41,12 @@ func apply_bone(render: ImageExtended, cel_image: ImageExtended, at_frame: Frame
 	var start_point: Vector2i = bone_cel.start_point
 	var gizmo_origin: Vector2i = bone_cel.gizmo_origin.floor()
 	var angle: float = bone_cel.bone_rotation
+	var bone_parent = get_parent_bone()
+	if bone_parent:
+		start_point -= Vector2i(at_frame.cels[bone_parent.index].start_point)
+		gizmo_origin -= Vector2i(at_frame.cels[bone_parent.index].gizmo_origin)
+	else:
+		angle = 0
 	if angle == 0 and start_point == Vector2i.ZERO:
 		return cel_image
 	if used_region.size == Vector2i.ZERO:
@@ -83,6 +91,9 @@ func apply_bone(render: ImageExtended, cel_image: ImageExtended, at_frame: Frame
 			)
 			bone_cache.clear()
 			bone_cache[cache_key] = square_image
+	if name == "Group 2":
+		square_image.save_png("out/test")
+		cel_image.save_png("out/cel %s" % name)
 	var pivot: Vector2i = gizmo_origin
 	var bone_start_global: Vector2i = gizmo_origin + start_point
 	var square_image_start: Vector2i = used_region.position - s_offset

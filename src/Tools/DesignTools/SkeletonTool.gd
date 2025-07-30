@@ -35,8 +35,8 @@ func _ready() -> void:
 		$ColorRect.color = Global.right_tool_color
 	$Label.text = "Skeleton Options"
 
-	Global.cel_switched.connect(display_props)
-	Global.project_switched.connect(display_props)
+	Global.cel_switched.connect(queue_display_props)
+	Global.project_switched.connect(queue_display_props)
 	Global.project_data_changed.connect(_on_project_data_changed)
 
 	quick_set_bones_menu.get_popup().index_pressed.connect(quick_set_bones)
@@ -89,12 +89,18 @@ func save_config() -> void:
 	Global.config_cache.set_value(tool_slot.kname, kname, config)
 
 
+func queue_display_props() -> void:
+	if is_inside_tree():
+		await get_tree().process_frame
+	display_props()
+
+
 func _exit_tree() -> void:
 	if _skeleton_preview:
 		_skeleton_preview.announce_tool_removal(self)
 		_skeleton_preview.queue_redraw()
-	Global.cel_switched.disconnect(display_props)
-	Global.project_switched.disconnect(display_props)
+	Global.cel_switched.disconnect(queue_display_props)
+	Global.project_switched.disconnect(queue_display_props)
 	Global.project_data_changed.disconnect(_on_project_data_changed)
 
 
@@ -481,6 +487,7 @@ func get_selected_bone_names(popup: PopupMenu, bone_index: int) -> PackedStringA
 
 
 func display_props():
+	current_selected_bone = _skeleton_preview.selected_bone
 	if _rot_slider.value_changed.is_connected(_on_rotation_changed):  # works for both signals
 		_rot_slider.value_changed.disconnect(_on_rotation_changed)
 		_pos_slider.value_changed.disconnect(_on_position_changed)
