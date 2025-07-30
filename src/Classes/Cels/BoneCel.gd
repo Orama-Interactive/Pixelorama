@@ -1,10 +1,8 @@
 class_name BoneCel
 extends GroupCel
-## A class for the properties of cels in GroupLayers.
+## A class for the properties of cels in BoneLayers.
 ## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
-
-## This class is used/created to perform calculations
 const MIN_LENGTH: float = 10
 const START_RADIUS: float = 6
 const END_RADIUS: float = 4
@@ -56,25 +54,22 @@ func _init(_opacity := 1.0) -> void:
 	image_texture = ImageTexture.new()
 
 
-func get_class_name() -> String:
-	return "BoneCel"
-
-
-static func generate_empty_data() -> Dictionary:
+func serialize() -> Dictionary:
 	# Make sure the name/types are the same as the variable names/types
 	return {
-		"gizmo_origin": Vector2.ZERO,
-		"gizmo_rotate_origin": 0,
-		"start_point": Vector2.ZERO,
-		"bone_rotation": 0,
-		"gizmo_length": MIN_LENGTH,
+		"gizmo_origin": gizmo_origin,
+		"gizmo_rotate_origin": gizmo_rotate_origin,
+		"start_point": start_point,
+		"bone_rotation": bone_rotation,
+		"gizmo_length": gizmo_length,
 	}
 
 func deserialize(data: Dictionary) -> void:
-	var reference_data = generate_empty_data()
-	for key in reference_data.keys():
-		if get(key) != data.get(key, reference_data[key]):
-			set(key, data.get(key, reference_data[key]))
+	gizmo_origin = data.get("gizmo_origin", gizmo_origin)
+	gizmo_rotate_origin = data.get("gizmo_rotate_origin", gizmo_rotate_origin)
+	start_point = data.get("start_point", start_point)
+	bone_rotation = data.get("bone_rotation", bone_rotation)
+	gizmo_length = data.get("gizmo_length", gizmo_length)
 
 
 func update_children(property: String, should_propagate: bool, diff):
@@ -113,3 +108,7 @@ func update_children(property: String, should_propagate: bool, diff):
 					child_cel.start_point = child_layer.rel_to_origin(
 						child_layer.get_parent_bone().rel_to_global(start_point) + displacement
 					)
+
+
+func get_class_name() -> String:
+	return "BoneCel"

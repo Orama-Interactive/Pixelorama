@@ -1,29 +1,25 @@
 class_name BoneLayer
 extends GroupLayer
 
-
-#var group_names_ordered: PackedStringArray
-### A Dictionary with Bone names as keys and their "Data Dictionary" as values.
-#var current_frame_data: Dictionary
-#var bones_chained := false
-#var current_frame: int = -1
-#var prev_layer_count: int = 0
-#var prev_frame_count: int = 0
-#var queue_generate := false
-
 enum {NONE, DISPLACE, ROTATE, SCALE}  ## I planned to add scaling too but decided to give up
 const InteractionDistance = 20
 const DESELECT_WIDTH: float = 1
-var modify_mode := NONE
-var ignore_rotation_hover := false
-var generation_cache: Dictionary
+
 var enabled := true
+var ignore_rotation_hover := false
+var modify_mode := NONE
+var generation_cache: Dictionary
 
 
 func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
 	blend_mode = BlendModes.NORMAL
+
+
+## Returns a new empty [BaseCel]
+func new_empty_cel() -> BaseCel:
+	return BoneCel.new()
 
 
 func get_parent_bone():
@@ -35,21 +31,7 @@ func get_parent_bone():
 	return bone_parent
 
 
-## Returns a new empty [BaseCel]
-func new_empty_cel() -> BaseCel:
-	return BoneCel.new()
-
-
-## Blends all of the images of children layer of the group layer into a single image.
-func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
-	var image = super.blend_children(frame, origin, apply_effects)
-	if project.current_layer == index:
-		Global.canvas.skeleton.queue_redraw()
-	#return image
-	return _apply_bone(image, frame)
-
-
-func _apply_bone(cel_image: Image, at_frame: Frame) -> Image:
+func apply_bone(render: ImageExtended, cel_image: ImageExtended, at_frame: Frame) -> Image:
 	if not enabled:
 		return cel_image
 	var bone_cel: BoneCel = at_frame.cels[index]
@@ -113,13 +95,14 @@ func _apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 		square_image_start
 		+ Vector2i((global_rotated_new_centre - global_square_centre).floor())
 	)
-	cel_image.fill(Color(0, 0, 0, 0))
-	cel_image.blit_rect(
+	if !render.is_empty():
+		render.fill(Color(0, 0, 0, 0))
+	render.blit_rect(
 		square_image,
 		Rect2i(Vector2.ZERO, square_image.get_size()),
 		Vector2i(new_start)
 	)
-	return cel_image
+	return render
 
 
 #func get_best_origin(layer_idx: int) -> Vector2i:
@@ -142,6 +125,7 @@ func get_current_bone_cel() -> BoneCel:
 	return Global.current_project.frames[Global.current_project.current_frame].cels[index]
 
 
+## Calculates hover mode of current BoneLayer
 func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 	var bone_cel := get_current_bone_cel()
 	var local_mouse_pos = rel_to_origin(mouse_position)
@@ -153,7 +137,7 @@ func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 	):
 		if !ignore_rotation_hover:
 			return SCALE
-	elif is_close_to_segment(
+	elif _is_close_to_segment(
 		rel_to_start_point(mouse_position),
 		InteractionDistance / camera_zoom.x,
 		Vector2.ZERO, bone_cel.end_point
@@ -162,24 +146,18 @@ func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 			return ROTATE
 	return NONE
 
-static func is_close_to_segment(
-	pos: Vector2, detect_distance: float, s1: Vector2, s2: Vector2
-) -> bool:
-	var test_line := (s2 - s1).rotated(deg_to_rad(90)).normalized()
-	var from_a := pos - test_line * detect_distance
-	var from_b := pos + test_line * detect_distance
-	if Geometry2D.segment_intersects_segment(from_a, from_b, s1, s2):
-		return true
-	return false
 
+## Converts to position relative to it's gizmo origin in current frame
 func rel_to_origin(pos: Vector2) -> Vector2:
 	var bone_cel := get_current_bone_cel()
 	return pos - bone_cel.gizmo_origin
 
+## Converts to position relative to it's start point in current frame
 func rel_to_start_point(pos: Vector2) -> Vector2:
 	var bone_cel := get_current_bone_cel()
 	return pos - bone_cel.gizmo_origin - bone_cel.start_point
 
+## Converts to position relative to canvas
 func rel_to_global(pos: Vector2) -> Vector2:
 	var bone_cel := get_current_bone_cel()
 	return pos + bone_cel.gizmo_origin
@@ -198,6 +176,60 @@ func rel_to_global(pos: Vector2) -> Vector2:
 	#for connection: Dictionary in connection_array:
 		#update_property.connect(connection["callable"])
 	#return reset_data
+
+
+static func _is_close_to_segment(
+	pos: Vector2, detect_distance: float, s1: Vector2, s2: Vector2
+) -> bool:
+	var test_line := (s2 - s1).rotated(deg_to_rad(90)).normalized()
+	var from_a := pos - test_line * detect_distance
+	var from_b := pos + test_line * detect_distance
+	if Geometry2D.segment_intersects_segment(from_a, from_b, s1, s2):
+		return true
+	return false
+
+## Overrides
+
+func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
+	if project.current_layer == index:
+		Global.canvas.skeleton.queue_redraw()
+	var image = super.blend_children(frame, origin, apply_effects)
+	if get_parent_bone() == null:
+		image = apply_bone(image, image, frame)
+	return image
+
+## Include a child group in the blending process.
+## If the child group is set to pass through mode, loop through its children
+## and include them as separate images, instead of blending them all together.
+## Gets called recursively if the child group has children groups of its own,
+## and they are also set to pass through mode.
+func _blend_child_group(
+	image: ImageExtended,
+	layer: BaseLayer,
+	frame: Frame,
+	textures: Array[Image],
+	metadata_image: Image,
+	i: int,
+	origin: Vector2i,
+	apply_effects: bool
+) -> int:
+	var new_i := i
+	var blend_rect := Rect2i(Vector2i.ZERO, project.size)
+	var cel := frame.cels[layer.index]
+	var blended_children := (layer as GroupLayer).blend_children(frame, origin)
+	if layer is BoneLayer:
+		var bone_render = ImageExtended.create_custom(
+		project.size.x, project.size.y, false, project.get_image_format(), project.is_indexed()
+		)
+		blended_children = layer.apply_bone(bone_render, blended_children, frame)
+	if DisplayServer.get_name() == "headless":
+		image.blend_rect(blended_children, blend_rect, origin)
+	else:
+		textures.append(blended_children)
+		_cache_texture_data.append(blended_children.get_data())
+		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
+	new_i += 1
+	return new_i
 
 
 func get_layer_type() -> int:
