@@ -1,6 +1,5 @@
 extends BaseTool
 
-enum {NONE, DISPLACE, ROTATE, SCALE}  ## same as the one in SkeletonGizmo class
 var _skeleton_preview: Node2D
 var is_transforming := false
 var generation_threshold: float = 20
@@ -81,7 +80,7 @@ func update_config() -> void:
 	%AllowChaining.button_pressed = _allow_chaining
 	%IncludeChildrenCheckbox.button_pressed = _include_children
 	if _skeleton_preview:
-		#_skeleton_preview.bones_chained = _allow_chaining
+		_skeleton_preview.chaining_mode = _allow_chaining
 		_skeleton_preview.queue_redraw()
 
 
@@ -111,25 +110,26 @@ func draw_start(_pos: Vector2i) -> void:
 	var mouse_point: Vector2 = Global.canvas.current_pixel
 	if !current_selected_bone:
 		return
-	var bone_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
-		current_selected_bone.index
-	]
-	if bone_cel.modify_mode == NONE:
+	var bone_cel = current_selected_bone.get_current_bone_cel()
+	if current_selected_bone.modify_mode == BoneLayer.NONE:
 		# When moving mouse we may stop hovering but we are still modifying that bone.
 		# this is why we need a sepatate modify_mode variable
-		bone_cel.modify_mode = bone_cel.hover_mode(
+		current_selected_bone.modify_mode = current_selected_bone.hover_mode(
 			Vector2(mouse_point), Global.camera.zoom
 		)
 	if _prev_mouse_position == Vector2.INF:
-		_displace_offset = bone_cel.rel_to_start_point(mouse_point)
+		_displace_offset = current_selected_bone.rel_to_start_point(mouse_point)
 		_prev_mouse_position = mouse_point
 
 	## TODO Fix later
 	## Check if bone is a parent of anything (skip if it is)
 	if _allow_chaining and current_selected_bone.get_parent_bone():
-		var parent_bone = _skeleton_preview.current_frame_bones[bone_cel.parent_bone_name]
-		var bone_start: Vector2i = bone_cel.rel_to_global(bone_cel.start_point)
-		var parent_start: Vector2i = parent_bone.rel_to_global(parent_bone.start_point)
+		var parent_bone = current_selected_bone.get_parent_bone()
+		var parent_b_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
+			parent_bone.index
+		]
+		var bone_start: Vector2i = current_selected_bone.rel_to_global(bone_cel.start_point)
+		var parent_start: Vector2i = parent_bone.rel_to_global(parent_b_cel.start_point)
 		_distance_to_parent = bone_start.distance_to(parent_start)
 	display_props()
 
@@ -145,40 +145,38 @@ func draw_move(_pos: Vector2i) -> void:
 	var offset := mouse_point - _prev_mouse_position
 	if !current_selected_bone:
 		return
-	var bone_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
-		current_selected_bone.index
-	]
+	var bone_cel = current_selected_bone.get_current_bone_cel()
 	if _allow_chaining and current_selected_bone.get_parent_bone():
-		match bone_cel.modify_mode:  # This manages chaining
-			DISPLACE:
+		match current_selected_bone.modify_mode:  # This manages chaining
+			BoneLayer.DISPLACE:
 				_chained_gizmo = current_selected_bone
 				current_selected_bone = current_selected_bone.get_parent_bone()
-				current_selected_bone.modify_mode = BoneCel.ROTATE
+				current_selected_bone.modify_mode = BoneLayer.ROTATE
 				_skeleton_preview.selected_bone = current_selected_bone
-				_chained_gizmo.modify_mode = NONE
-	if bone_cel.modify_mode == BoneCel.DISPLACE:
+				_chained_gizmo.modify_mode = BoneLayer.NONE
+	if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
 		if Input.is_key_pressed(KEY_CTRL):
 			_skeleton_preview.ignore_render_once = true
 			bone_cel.gizmo_origin += offset.rotated(-bone_cel.bone_rotation)
-		bone_cel.start_point = Vector2i(bone_cel.rel_to_origin(mouse_point) - _displace_offset)
+		bone_cel.start_point = Vector2i(current_selected_bone.rel_to_origin(mouse_point) - _displace_offset)
 	elif (
-		bone_cel.modify_mode == ROTATE
-		or bone_cel.modify_mode == SCALE
+		current_selected_bone.modify_mode == BoneLayer.ROTATE
+		or current_selected_bone.modify_mode == BoneLayer.SCALE
 	):
-		var localized_mouse_norm: Vector2 = bone_cel.rel_to_start_point(mouse_point).normalized()
-		var localized_prev_mouse_norm: Vector2 = bone_cel.rel_to_start_point(
+		var localized_mouse_norm: Vector2 = current_selected_bone.rel_to_start_point(mouse_point).normalized()
+		var localized_prev_mouse_norm: Vector2 = current_selected_bone.rel_to_start_point(
 			_prev_mouse_position
 		).normalized()
 		var diff := localized_mouse_norm.angle_to(localized_prev_mouse_norm)
 		if Input.is_key_pressed(KEY_CTRL):
 			_skeleton_preview.ignore_render_once = true
 			bone_cel.gizmo_rotate_origin -= diff
-			if bone_cel.modify_mode == SCALE:
-				bone_cel.gizmo_length = bone_cel.rel_to_start_point(mouse_point).length()
+			if current_selected_bone.modify_mode == BoneLayer.SCALE:
+				bone_cel.gizmo_length = current_selected_bone.rel_to_start_point(mouse_point).length()
 		else:
 			bone_cel.bone_rotation -= diff
 			if _allow_chaining and _chained_gizmo:
-				_chained_gizmo.bone_rotation += diff
+				_chained_gizmo.get_current_bone_cel().bone_rotation += diff
 	if _live_update:
 		if ProjectSettings.get_setting("rendering/driver/threads/thread_model") != 2:
 			Global.canvas.queue_redraw()
@@ -202,64 +200,65 @@ func draw_end(_pos: Vector2i) -> void:
 		is_transforming = false
 		_skeleton_preview.transformation_active = false
 		if current_selected_bone:
-			var bone_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
-				current_selected_bone.index
-			]
-			if bone_cel.modify_mode != NONE:
+			var bone_cel = current_selected_bone.get_current_bone_cel()
+			if current_selected_bone.modify_mode != BoneLayer.NONE:
 				Global.canvas.queue_redraw()
-				bone_cel.modify_mode = NONE
+				current_selected_bone.modify_mode = BoneLayer.NONE
 			if _allow_chaining and current_selected_bone.get_parent_bone():
-				if bone_cel.modify_mode == DISPLACE:
-					current_selected_bone.get_parent_bone().modify_mode = NONE
+				if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
+					current_selected_bone.get_parent_bone().modify_mode = BoneLayer.NONE
 	Global.current_project.has_changed = true
 	display_props()
 
 
 func quick_set_bones(bone_id: int):
-	if _skeleton_preview:
-		var bone_names = get_selected_bone_names(quick_set_bones_menu.get_popup(), bone_id)
-		var new_data = _skeleton_preview.current_frame_data.duplicate(true)
-		for layer_idx: int in Global.current_project.layers.size():
-			var bone_name: StringName = Global.current_project.layers[layer_idx].name
-			if bone_name in bone_names:
-				new_data[bone_name] = _skeleton_preview.current_frame_bones[bone_name].reset_bone(
-					{"gizmo_origin": Vector2(_skeleton_preview.get_best_origin(layer_idx))}
-				)
-		_skeleton_preview.current_frame_data = new_data
-		_skeleton_preview.save_frame_info(Global.current_project)
-		_skeleton_preview.queue_redraw()
-		Global.canvas.queue_redraw()
+	pass
+	#if _skeleton_preview:
+		#var bone_names = get_selected_bone_names(quick_set_bones_menu.get_popup(), bone_id)
+		#var new_data = _skeleton_preview.current_frame_data.duplicate(true)
+		#for layer_idx: int in Global.current_project.layers.size():
+			#var bone_name: StringName = Global.current_project.layers[layer_idx].name
+			#if bone_name in bone_names:
+				#new_data[bone_name] = _skeleton_preview.current_frame_bones[bone_name].reset_bone(
+					#{"gizmo_origin": Vector2(_skeleton_preview.get_best_origin(layer_idx))}
+				#)
+		#_skeleton_preview.current_frame_data = new_data
+		#_skeleton_preview.save_frame_info(Global.current_project)
+		#_skeleton_preview.queue_redraw()
+		#Global.canvas.queue_redraw()
 
 
 func copy_bone_data(bone_id: int, from_frame: int, popup: PopupMenu, old_current_frame: int):
-	if _skeleton_preview:
-		if old_current_frame != _skeleton_preview.current_frame:
-			return
-		var bone_names := get_selected_bone_names(popup, bone_id)
-		var new_data = _skeleton_preview.current_frame_data.duplicate(true)
-		var copy_data: Dictionary = _skeleton_preview.load_frame_info(
-			Global.current_project, from_frame
-		)
-		for bone_name in bone_names:
-			if bone_name in _skeleton_preview.current_frame_bones.keys():
-				new_data[bone_name] = _skeleton_preview.current_frame_bones[bone_name].reset_bone(
-					copy_data.get(bone_name, {})
-				)
-		_skeleton_preview.current_frame_data = new_data
-		_skeleton_preview.save_frame_info(Global.current_project)
-		_skeleton_preview.queue_redraw()
-		Global.canvas.queue_redraw()
-		copy_pose_from.get_popup().hide()
-		copy_pose_from.get_popup().clear(true)  # To save Memory
+	pass
+	#if _skeleton_preview:
+		#if old_current_frame != _skeleton_preview.current_frame:
+			#return
+		#var bone_names := get_selected_bone_names(popup, bone_id)
+		#var new_data = _skeleton_preview.current_frame_data.duplicate(true)
+		#var copy_data: Dictionary = _skeleton_preview.load_frame_info(
+			#Global.current_project, from_frame
+		#)
+		#for bone_name in bone_names:
+			#if bone_name in _skeleton_preview.current_frame_bones.keys():
+				#new_data[bone_name] = _skeleton_preview.current_frame_bones[bone_name].reset_bone(
+					#copy_data.get(bone_name, {})
+				#)
+		#_skeleton_preview.current_frame_data = new_data
+		#_skeleton_preview.save_frame_info(Global.current_project)
+		#_skeleton_preview.queue_redraw()
+		#Global.canvas.queue_redraw()
+		#copy_pose_from.get_popup().hide()
+		#copy_pose_from.get_popup().clear(true)  # To save Memory
 
 
 func refresh_pose(refresh_mode: int):
-	if _skeleton_preview:
-		var frames := [_skeleton_preview.current_frame]
-		if refresh_mode == 0:  # All frames
-			frames = range(0, Global.current_project.frames.size())
-		for frame_idx in frames:
-			_skeleton_preview.generate_pose(frame_idx)
+	pass
+	#if _skeleton_preview:
+		#var frames := [_skeleton_preview.current_frame]
+		#if refresh_mode == 0:  # All frames
+			#frames = range(0, Global.current_project.frames.size())
+		#for frame_idx in frames:
+			#_skeleton_preview.generate_pose(frame_idx)
 
 
 func tween_skeleton_data(bone_id: int, from_frame: int, popup: PopupMenu, current_frame: int):
@@ -301,39 +300,43 @@ func tween_skeleton_data(bone_id: int, from_frame: int, popup: PopupMenu, curren
 
 
 func reset_bone_angle(bone_id: int):
-	## This rotation will also rotate the child bones as the parent bone's angle is changed.
-	var bone_names := get_selected_bone_names(rotation_reset_menu.get_popup(), bone_id)
-	for bone_name in bone_names:
-		if bone_name in _skeleton_preview.current_frame_bones.keys():
-			_skeleton_preview.current_frame_bones[bone_name].bone_rotation = 0
-	_skeleton_preview.queue_redraw()
-	Global.canvas.queue_redraw()
+	pass
+	### This rotation will also rotate the child bones as the parent bone's angle is changed.
+	#var bone_names := get_selected_bone_names(rotation_reset_menu.get_popup(), bone_id)
+	#for bone_name in bone_names:
+		#if bone_name in _skeleton_preview.current_frame_bones.keys():
+			#_skeleton_preview.current_frame_bones[bone_name].bone_rotation = 0
+	#_skeleton_preview.queue_redraw()
+	#Global.canvas.queue_redraw()
 
 
 func reset_bone_position(bone_id: int):
-	var bone_names := get_selected_bone_names(position_reset_menu.get_popup(), bone_id)
-	for bone_name in bone_names:
-		if bone_name in _skeleton_preview.current_frame_bones.keys():
-			_skeleton_preview.current_frame_bones[bone_name].start_point = Vector2.ZERO
-	_skeleton_preview.queue_redraw()
-	Global.canvas.queue_redraw()
+	pass
+	#var bone_names := get_selected_bone_names(position_reset_menu.get_popup(), bone_id)
+	#for bone_name in bone_names:
+		#if bone_name in _skeleton_preview.current_frame_bones.keys():
+			#_skeleton_preview.current_frame_bones[bone_name].start_point = Vector2.ZERO
+	#_skeleton_preview.queue_redraw()
+	#Global.canvas.queue_redraw()
 
 
 func _on_rotation_changed(value: float):
-	## This rotation will also rotate the child bones as the parent bone's angle is changed.
-	if current_selected_bone:
-		if current_selected_bone in _skeleton_preview.current_frame_bones.values():
-			current_selected_bone.bone_rotation = deg_to_rad(value)
-			_skeleton_preview.queue_redraw()
-			Global.canvas.queue_redraw()
+	pass
+	### This rotation will also rotate the child bones as the parent bone's angle is changed.
+	#if current_selected_bone:
+		#if current_selected_bone in _skeleton_preview.current_frame_bones.values():
+			#current_selected_bone.bone_rotation = deg_to_rad(value)
+			#_skeleton_preview.queue_redraw()
+			#Global.canvas.queue_redraw()
 
 
 func _on_position_changed(value: Vector2):
-	if current_selected_bone:
-		if current_selected_bone in _skeleton_preview.current_frame_bones.values():
-			current_selected_bone.start_point = current_selected_bone.rel_to_origin(value).ceil()
-			_skeleton_preview.queue_redraw()
-			Global.canvas.queue_redraw()
+	pass
+	#if current_selected_bone:
+		#if current_selected_bone in _skeleton_preview.current_frame_bones.values():
+			#current_selected_bone.start_point = current_selected_bone.rel_to_origin(value).ceil()
+			#_skeleton_preview.queue_redraw()
+			#Global.canvas.queue_redraw()
 
 
 func _on_quick_set_bones_menu_about_to_popup() -> void:
@@ -429,50 +432,51 @@ func _on_live_update_pressed(toggled_on: bool) -> void:
 
 
 func populate_popup(popup: PopupMenu, reference_properties := {}):
-	popup.clear()
-	if !_skeleton_preview:
-		return
-	if _skeleton_preview.group_names_ordered.is_empty():
-		return
-	popup.add_item("All Bones")
-	var items_added_after_prev_separator := true
-	for bone_key in _skeleton_preview.group_names_ordered:
-		var bone_reset_reference = reference_properties
-		if bone_key in _skeleton_preview.current_frame_bones.keys():
-			var bone = _skeleton_preview.current_frame_bones[bone_key]
-			if bone.parent_bone_name == "" and items_added_after_prev_separator:  ## Root nodes
-				popup.add_separator(str("Root:", bone.bone_name))
-				items_added_after_prev_separator = false
-			# NOTE: root node may or may not get added to list but we still need a separator
-			if bone_reset_reference.is_empty():
-				popup.add_item(bone.bone_name)
-				items_added_after_prev_separator = true
-			else:
-				if bone_key in reference_properties.keys():
-					bone_reset_reference = reference_properties[bone_key]
-				for property: String in bone_reset_reference.keys():
-					if bone.get(property) != bone_reset_reference[property]:
-						popup.add_item(bone.bone_name)
-						items_added_after_prev_separator = true
-						break
-	if popup.is_item_separator(popup.item_count - 1):
-		popup.remove_item(popup.item_count - 1)
+	pass
+	#popup.clear()
+	#if !_skeleton_preview:
+		#return
+	#if _skeleton_preview.group_names_ordered.is_empty():
+		#return
+	#popup.add_item("All Bones")
+	#var items_added_after_prev_separator := true
+	#for bone_key in _skeleton_preview.group_names_ordered:
+		#var bone_reset_reference = reference_properties
+		#if bone_key in _skeleton_preview.current_frame_bones.keys():
+			#var bone = _skeleton_preview.current_frame_bones[bone_key]
+			#if bone.parent_bone_name == "" and items_added_after_prev_separator:  ## Root nodes
+				#popup.add_separator(str("Root:", bone.bone_name))
+				#items_added_after_prev_separator = false
+			## NOTE: root node may or may not get added to list but we still need a separator
+			#if bone_reset_reference.is_empty():
+				#popup.add_item(bone.bone_name)
+				#items_added_after_prev_separator = true
+			#else:
+				#if bone_key in reference_properties.keys():
+					#bone_reset_reference = reference_properties[bone_key]
+				#for property: String in bone_reset_reference.keys():
+					#if bone.get(property) != bone_reset_reference[property]:
+						#popup.add_item(bone.bone_name)
+						#items_added_after_prev_separator = true
+						#break
+	#if popup.is_item_separator(popup.item_count - 1):
+		#popup.remove_item(popup.item_count - 1)
 
 
 func get_selected_bone_names(popup: PopupMenu, bone_index: int) -> PackedStringArray:
-	var frame_bones: Array = _skeleton_preview.group_names_ordered
+	#var frame_bones: Array = _skeleton_preview.group_names_ordered
 	var bone_names = PackedStringArray()
-	if bone_index == 0: # All bones
-		bone_names = frame_bones
-	else:
-		var bone_name: String = popup.get_item_text(bone_index)
-		bone_names.append(bone_name)
-		if _include_children:
-			for bone_key: String in frame_bones:
-				if bone_key in _skeleton_preview.current_frame_bones.keys():
-					var bone = _skeleton_preview.current_frame_bones[bone_key]
-					if bone.parent_bone_name in bone_names:
-						bone_names.append(bone.bone_name)
+	#if bone_index == 0: # All bones
+		#bone_names = frame_bones
+	#else:
+		#var bone_name: String = popup.get_item_text(bone_index)
+		#bone_names.append(bone_name)
+		#if _include_children:
+			#for bone_key: String in frame_bones:
+				#if bone_key in _skeleton_preview.current_frame_bones.keys():
+					#var bone = _skeleton_preview.current_frame_bones[bone_key]
+					#if bone.parent_bone_name in bone_names:
+						#bone_names.append(bone.bone_name)
 	return bone_names
 
 
@@ -485,7 +489,7 @@ func display_props():
 		%BoneProps.visible = true
 		%BoneLabel.text = tr("Name:") + " " + current_selected_bone.name
 		_rot_slider.value = rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation)
-		_pos_slider.value = frame_cels[current_selected_bone.index].rel_to_global(
+		_pos_slider.value = current_selected_bone.rel_to_global(
 			frame_cels[current_selected_bone.index].start_point
 		)
 		_rot_slider.value_changed.connect(_on_rotation_changed)

@@ -5,13 +5,10 @@ extends GroupCel
 
 
 ## This class is used/created to perform calculations
-enum {NONE, DISPLACE, ROTATE, SCALE}  ## I planned to add scaling too but decided to give up
-const InteractionDistance = 20
 const MIN_LENGTH: float = 10
 const START_RADIUS: float = 6
 const END_RADIUS: float = 4
 const WIDTH: float = 2
-const DESELECT_WIDTH: float = 1
 
 # Variables set using serialize()
 var gizmo_origin := Vector2.ZERO:
@@ -46,15 +43,12 @@ var gizmo_length: int = MIN_LENGTH:
 				value = int(MIN_LENGTH)
 				diff = 0
 			gizmo_length = value
-			update_children("gizmo_length", false, diff)
-var associated_layer: BaseLayer   ## only used in update_children()
+var associated_layer: BoneLayer   ## only used in update_children()
 
 # Properties determined using above variables
 var end_point: Vector2:  ## This is relative to the gizmo_origin
 	get():
 		return Vector2(gizmo_length, 0).rotated(gizmo_rotate_origin + bone_rotation)
-var modify_mode := NONE
-var ignore_rotation_hover := false
 
 
 func _init(_opacity := 1.0) -> void:
@@ -82,67 +76,19 @@ func deserialize(data: Dictionary) -> void:
 		if get(key) != data.get(key, reference_data[key]):
 			set(key, data.get(key, reference_data[key]))
 
-func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
-	var local_mouse_pos = rel_to_origin(mouse_position)
-	if (start_point).distance_to(local_mouse_pos) <= InteractionDistance / camera_zoom.x:
-		return DISPLACE
-	elif (
-		(start_point + end_point).distance_to(local_mouse_pos)
-		<= InteractionDistance / camera_zoom.x
-	):
-		if !ignore_rotation_hover:
-			return SCALE
-	elif is_close_to_segment(
-		rel_to_start_point(mouse_position),
-		InteractionDistance / camera_zoom.x,
-		Vector2.ZERO, end_point
-	):
-		if !ignore_rotation_hover:
-			return ROTATE
-	return NONE
-
-static func is_close_to_segment(
-	pos: Vector2, detect_distance: float, s1: Vector2, s2: Vector2
-) -> bool:
-	var test_line := (s2 - s1).rotated(deg_to_rad(90)).normalized()
-	var from_a := pos - test_line * detect_distance
-	var from_b := pos + test_line * detect_distance
-	if Geometry2D.segment_intersects_segment(from_a, from_b, s1, s2):
-		return true
-	return false
-
-func rel_to_origin(pos: Vector2) -> Vector2:
-	return pos - gizmo_origin
-
-func rel_to_start_point(pos: Vector2) -> Vector2:
-	return pos - gizmo_origin - start_point
-
-func rel_to_global(pos: Vector2) -> Vector2:
-	return pos + gizmo_origin
-
-#func reset_bone(overrides := {}) -> Dictionary:
-	#var reset_data = generate_empty_data(bone_name, parent_bone_name)
-	#var connection_array := update_property.get_connections()
-	#for connection: Dictionary in connection_array:
-		#update_property.disconnect(connection["callable"])
-	#for key in reset_data.keys():
-		#if key in overrides.keys():
-			#set(key, overrides[key])
-			#reset_data[key] = overrides[key]
-		#else:
-			#set(key, reset_data[key])
-	#for connection: Dictionary in connection_array:
-		#update_property.connect(connection["callable"])
-	#return reset_data
-
 
 func update_children(property: String, should_propagate: bool, diff):
 	var project = Global.current_project
-	if associated_layer:
+	# NOTE: The update is done only on the cels that are part of the current frame so
+	# the approach to get associated layer should be enough
+	if associated_layer:  # sanity check
 		if project.frames[project.current_frame].cels[associated_layer.index] != self:
 			associated_layer = null
 	if !associated_layer:
-		associated_layer = project.layers[project.current_layer]
+		var layer_idx = project.frames[project.current_frame].cels.find(self)
+		if layer_idx != -1:
+			associated_layer = project.layers[layer_idx]
+
 	if not is_instance_valid(project):
 		return
 	if !should_propagate:
@@ -158,10 +104,12 @@ func update_children(property: String, should_propagate: bool, diff):
 				continue
 			child_cel.set(property, child_cel.get(property) + diff)
 			if property == "bone_rotation":
-				var displacement := rel_to_start_point(
-					child_cel.rel_to_global(child_cel.start_point)
-				)
-				displacement = displacement.rotated(diff)
-				child_cel.start_point = child_cel.rel_to_origin(
-					rel_to_global(start_point) + displacement
-				)
+				var parent: BoneLayer = child_layer.get_parent_bone()
+				if parent:
+					var displacement := parent.rel_to_start_point(
+						child_layer.rel_to_global(child_cel.start_point)
+					)
+					displacement = displacement.rotated(diff)
+					child_cel.start_point = child_layer.rel_to_origin(
+						child_layer.get_parent_bone().rel_to_global(start_point) + displacement
+					)

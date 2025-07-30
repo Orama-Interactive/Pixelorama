@@ -10,8 +10,12 @@ extends GroupLayer
 #var prev_layer_count: int = 0
 #var prev_frame_count: int = 0
 #var queue_generate := false
-## The shader is located in pixelorama
-var allow_chaining := false
+
+enum {NONE, DISPLACE, ROTATE, SCALE}  ## I planned to add scaling too but decided to give up
+const InteractionDistance = 20
+const DESELECT_WIDTH: float = 1
+var modify_mode := NONE
+var ignore_rotation_hover := false
 var generation_cache: Dictionary
 var enabled := true
 
@@ -25,9 +29,9 @@ func _init(_project: Project, _name := "") -> void:
 func get_parent_bone():
 	var bone_parent = parent
 	while bone_parent != null:
-		bone_parent = bone_parent.parent
 		if bone_parent is BoneLayer:
 			break
+		bone_parent = bone_parent.parent
 	return bone_parent
 
 
@@ -41,6 +45,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 	var image = super.blend_children(frame, origin, apply_effects)
 	if project.current_layer == index:
 		Global.canvas.skeleton.queue_redraw()
+	#return image
 	return _apply_bone(image, frame)
 
 
@@ -131,7 +136,68 @@ func _apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 						#if cel_rect.has_area():
 							#used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
 				#return used_rect.position + (used_rect.size / 2)
-	#return Vector2i.ZERO
+	#return Vector2i.ZERO\
+
+func get_current_bone_cel() -> BoneCel:
+	return Global.current_project.frames[Global.current_project.current_frame].cels[index]
+
+
+func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
+	var bone_cel := get_current_bone_cel()
+	var local_mouse_pos = rel_to_origin(mouse_position)
+	if (bone_cel.start_point).distance_to(local_mouse_pos) <= InteractionDistance / camera_zoom.x:
+		return DISPLACE
+	elif (
+		(bone_cel.start_point + bone_cel.end_point).distance_to(local_mouse_pos)
+		<= InteractionDistance / camera_zoom.x
+	):
+		if !ignore_rotation_hover:
+			return SCALE
+	elif is_close_to_segment(
+		rel_to_start_point(mouse_position),
+		InteractionDistance / camera_zoom.x,
+		Vector2.ZERO, bone_cel.end_point
+	):
+		if !ignore_rotation_hover:
+			return ROTATE
+	return NONE
+
+static func is_close_to_segment(
+	pos: Vector2, detect_distance: float, s1: Vector2, s2: Vector2
+) -> bool:
+	var test_line := (s2 - s1).rotated(deg_to_rad(90)).normalized()
+	var from_a := pos - test_line * detect_distance
+	var from_b := pos + test_line * detect_distance
+	if Geometry2D.segment_intersects_segment(from_a, from_b, s1, s2):
+		return true
+	return false
+
+func rel_to_origin(pos: Vector2) -> Vector2:
+	var bone_cel := get_current_bone_cel()
+	return pos - bone_cel.gizmo_origin
+
+func rel_to_start_point(pos: Vector2) -> Vector2:
+	var bone_cel := get_current_bone_cel()
+	return pos - bone_cel.gizmo_origin - bone_cel.start_point
+
+func rel_to_global(pos: Vector2) -> Vector2:
+	var bone_cel := get_current_bone_cel()
+	return pos + bone_cel.gizmo_origin
+
+#func reset_bone(overrides := {}) -> Dictionary:
+	#var reset_data = generate_empty_data(bone_name, parent_bone_name)
+	#var connection_array := update_property.get_connections()
+	#for connection: Dictionary in connection_array:
+		#update_property.disconnect(connection["callable"])
+	#for key in reset_data.keys():
+		#if key in overrides.keys():
+			#set(key, overrides[key])
+			#reset_data[key] = overrides[key]
+		#else:
+			#set(key, reset_data[key])
+	#for connection: Dictionary in connection_array:
+		#update_property.connect(connection["callable"])
+	#return reset_data
 
 
 func get_layer_type() -> int:

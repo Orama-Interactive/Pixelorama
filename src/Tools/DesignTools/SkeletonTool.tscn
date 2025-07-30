@@ -189,5 +189,7 @@ tooltip_text = "Resets the position of selected bones"
 text = "Bone Position"
 flat = false
 
+[connection signal="toggled" from="GridContainer/AllowChaining" to="." method="_on_allow_chaining_toggled"]
+[connection signal="toggled" from="GridContainer/IncludeChildrenCheckbox" to="." method="_on_include_children_checkbox_toggled"]
 [connection signal="pressed" from="Section4/Warn" to="." method="_on_warn_pressed"]
 [connection signal="about_to_popup" from="TweenSkeleton" to="." method="_on_tween_skeleton_about_to_popup"]

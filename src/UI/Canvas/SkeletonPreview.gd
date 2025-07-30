@@ -2,6 +2,7 @@ extends Node2D
 
 ## A Dictionary of bone names as keys and their "Gizmo" as values.
 var selected_bone: BoneLayer
+var chaining_mode := false
 var active_skeleton_tools := Array()
 var transformation_active := false
 var ignore_render_once := false  ## used to check if we need a new render or not (used in _input())
@@ -21,50 +22,53 @@ func _draw() -> void:
 		layer = layer.parent
 	if layer == null:
 		return
-	_draw_gizmo(layer, Global.camera.zoom)
+	var canon_bones = layer.get_children(true)
+	canon_bones.push_front(layer)
+	for bone in canon_bones:
+		if bone is BoneLayer:
+			_draw_gizmo(bone, Global.camera.zoom, canon_bones)
 
 
 ## Generates a gizmo (for preview) based on the given data
 func _draw_gizmo(
-	bone: BoneLayer, camera_zoom: Vector2, chained := false, parent: BoneLayer = null
+	bone: BoneLayer, camera_zoom: Vector2, canon_bones := []
 ) -> void:
 	var project = Global.current_project
 	var frame_cels = project.frames[project.current_frame].cels
 	var bone_cel: BoneCel = frame_cels[bone.index]
 
 	var width: float = (
-		bone_cel.WIDTH if (bone == selected_bone) else bone_cel.DESELECT_WIDTH
+		bone_cel.WIDTH if (bone == selected_bone) else BoneLayer.DESELECT_WIDTH
 	) / camera_zoom.x
 	var main_color := Color.WHITE if (bone == selected_bone) else Color.GRAY
 	var dim_color := Color(main_color.r, main_color.g, main_color.b, 0.8)
 	var mouse_point: Vector2 = Global.canvas.current_pixel
-	var hover_mode = max(bone_cel.modify_mode, bone_cel.hover_mode(mouse_point, camera_zoom))
+	var hover_mode = max(bone.modify_mode, bone.hover_mode(mouse_point, camera_zoom))
 	draw_set_transform(bone_cel.gizmo_origin)
 	draw_circle(
 		bone_cel.start_point,
 		bone_cel.START_RADIUS / camera_zoom.x,
-		main_color if (hover_mode == bone_cel.DISPLACE) else dim_color, false,
+		main_color if (hover_mode == BoneLayer.DISPLACE) else dim_color, false,
 		width
 	)
 	var skip_rotation_gizmo := false
 	# TODO: figure out later
-	for potential_child in bone.get_children(false):
-		if potential_child is BoneLayer:
-			if chained:  # Check if it's a parent of another bone.
-				skip_rotation_gizmo = true
-			_draw_gizmo(potential_child, camera_zoom, chained, bone)
-	bone_cel.ignore_rotation_hover = skip_rotation_gizmo
+	var parent = bone.get_parent_bone()
+	if chaining_mode:
+		if parent in canon_bones:
+			skip_rotation_gizmo = true
+	bone.ignore_rotation_hover = skip_rotation_gizmo
 	if !skip_rotation_gizmo:
 		draw_line(
 			bone_cel.start_point,
 			bone_cel.start_point + bone_cel.end_point,
-			main_color if (hover_mode == bone_cel.ROTATE) else dim_color,
-			width if (hover_mode == bone_cel.ROTATE) else bone_cel.DESELECT_WIDTH / camera_zoom.x
+			main_color if (hover_mode == BoneLayer.ROTATE) else dim_color,
+			width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
 		)
 		draw_circle(
 			bone_cel.start_point + bone_cel.end_point,
-			bone_cel.END_RADIUS / camera_zoom.x,
-			main_color if (hover_mode == bone_cel.SCALE) else dim_color,
+			BoneCel.END_RADIUS / camera_zoom.x,
+			main_color if (hover_mode == BoneLayer.SCALE) else dim_color,
 			false,
 			width
 		)
@@ -72,9 +76,7 @@ func _draw_gizmo(
 	if parent:
 		draw_dashed_line(
 			bone_cel.start_point,
-			bone_cel.rel_to_origin(
-				frame_cels[parent.index].rel_to_global(frame_cels[parent.index].start_point)
-			),
+			bone.rel_to_origin(parent.rel_to_global(frame_cels[parent.index].start_point)),
 			main_color,
 			width,
 		)
@@ -98,41 +100,46 @@ func announce_tool_removal(tool_node):
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		## Bone Selection
-		var project: Project = Global.current_project
-		var bone_layer = project.layers[project.current_layer]
-		if not bone_layer is BoneLayer:
-			return
-		var pos = Global.canvas.current_pixel
-		if selected_bone:  # Check if we are still hovering over the same gizmo
-			var frame_cels = project.frames[project.current_frame].cels
-			if (
-				frame_cels[selected_bone.index].hover_mode(pos, Global.camera.zoom) == BoneCel.NONE
-				and frame_cels[selected_bone.index].modify_mode == BoneCel.NONE
-			):
-				selected_bone = null
-		if !selected_bone:  # If in the prevoius check we deselected the gizmo then search for a new one.
-			get_selected(bone_layer, pos, project)
-		queue_redraw()
+		get_selected_bone()
 
 
-func get_selected(initial_layer: BoneLayer, pos: Vector2, project: Project):
-	var frame = project.frames[project.current_frame]
-	var bone_cel = frame.cels[initial_layer.index]
-	if (
-		bone_cel.hover_mode(pos, Global.camera.zoom) != bone_cel.NONE
-		or bone_cel.modify_mode != bone_cel.NONE
-	):
+## This manages the hovering mechanism of gizmo
+func get_selected_bone() -> void:
+	var pos: Vector2i = Global.canvas.current_pixel.floor()
+	var project: Project = Global.current_project
+	var bone_layer = project.layers[project.current_layer]
+	if not bone_layer is BoneLayer:
+		return
+	if selected_bone:  # Check if we are still hovering over the same gizmo
 		if (
-			initial_layer.allow_chaining
-			and (
-				bone_cel.modify_mode == bone_cel.ROTATE
-				or bone_cel.hover_mode(pos, Global.camera.zoom) == bone_cel.ROTATE
-				)
+			selected_bone.hover_mode(pos, Global.camera.zoom) == BoneLayer.NONE
+			and selected_bone.modify_mode == BoneLayer.NONE
 		):
-			# Check if bone_child_layer is a child of anything (if it is, skip it)
-			for child_bone_layer in initial_layer.get_children(false):
-				if child_bone_layer is BoneLayer:
-					get_selected(child_bone_layer, pos, project)
-				if selected_bone:
-					break
-		selected_bone = initial_layer
+			selected_bone = null
+	if !selected_bone:  # If in the prevoius check we deselected the gizmo then search for a new one.
+		var canon_bones = bone_layer.get_children(true)
+		canon_bones.push_front(bone_layer)
+		for bone in canon_bones:
+			if not bone is BoneLayer:
+				continue
+			if (
+				bone.hover_mode(pos, Global.camera.zoom) != BoneLayer.NONE
+				or bone.modify_mode != BoneLayer.NONE
+			):
+				var skip_gizmo := false
+				if (
+					chaining_mode
+					and (
+						bone.modify_mode == BoneLayer.ROTATE
+						or bone.hover_mode(pos, Global.camera.zoom) == BoneLayer.ROTATE
+						)
+				):
+					# Check if bone is a parent of anything (if it has, skip it)
+					if bone.get_parent_bone() in canon_bones:
+						skip_gizmo = true
+						break
+				if skip_gizmo:
+					continue
+				selected_bone = bone
+				break
+		queue_redraw()
