@@ -126,7 +126,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 
 func generate_pose(frame: Frame) -> ImageExtended:
 	# Do we even need to generate a pose?
-	var project = Global.current_project
+	var project := Global.current_project
 	var image = ImageExtended.create_custom(
 		project.size.x, project.size.y, false, project.get_image_format(), project.is_indexed()
 	)
@@ -146,28 +146,31 @@ func generate_pose(frame: Frame) -> ImageExtended:
 	# clipping mask booleans.
 	var metadata_image := Image.create_empty(project.layers.size(), 4, false, Image.FORMAT_R8)
 	for i in project.layers.size():
-		var ordered_index = project.ordered_layers[i]
-		var layer = project.layers[ordered_index]
+		var ordered_index := project.ordered_layers[i]
+		var layer := project.layers[ordered_index]
+		var include := true if layer.is_visible_in_hierarchy() else false
 		var bone_layer = layer.parent
 		# Ignore visibility for group layers
 		if bone_layer:
 			if bone_layer != self and not self.is_ancestor_of(bone_layer):
 				continue
 		var cel = frame.cels[ordered_index]
-		var cel_image: Image
+		var cel_image := ImageExtended.create_custom(
+			project.size.x, project.size.y, false, project.get_image_format(), project.is_indexed()
+		)
 		if layer == self or not is_instance_valid(bone_layer):
 			_set_layer_metadata_image(layer, cel, metadata_image, ordered_index, false)
 			continue
 
-		var include := true if layer.is_visible_in_hierarchy() else false
-		print(layer, include)
 		if layer.is_blender():
 			cel_image = layer.blend_children(frame)
 		else:
-			cel_image = layer.display_effects(cel)
+			if include:
+				cel_image = layer.display_effects(cel)
 
-		#if bone_layer is BoneLayer and is_instance_valid(bone_layer):
-			#bone_layer.apply_bone(cel_image, frame)
+		if bone_layer is BoneLayer and is_instance_valid(bone_layer):
+			bone_layer.apply_bone(cel_image, frame)
+
 
 		textures.append(cel_image)
 		if (
@@ -218,8 +221,6 @@ func _set_layer_metadata_image(
 
 
 func apply_bone(cel_image: ImageExtended, at_frame: Frame) -> Image:
-	if name == "Group 2":
-		cel_image.save_png("out/a")
 	if not enabled:
 		return cel_image
 	var bone_cel: BoneCel = at_frame.cels[index]
@@ -271,9 +272,6 @@ func apply_bone(cel_image: ImageExtended, at_frame: Frame) -> Image:
 			)
 			bone_cache.clear()
 			bone_cache[cache_key] = square_image
-	if name == "Group 2":
-		square_image.save_png("out/test")
-		cel_image.save_png("out/cel %s" % name)
 	var pivot: Vector2i = gizmo_origin
 	var bone_start_global: Vector2i = gizmo_origin + start_point
 	var square_image_start: Vector2i = used_region.position - s_offset
