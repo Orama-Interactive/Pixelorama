@@ -161,7 +161,7 @@ func _play_audio(single_frame: bool) -> void:
 
 func update_buttons() -> void:
 	var layer := Global.current_project.layers[layer_index]
-	if layer is GroupLayer:
+	if layer is BoneLayer:
 		if layer.expanded:
 			Global.change_button_texturerect(expand_button.get_child(0), "skeleton_expanded.png")
 		else:
