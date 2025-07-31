@@ -117,44 +117,34 @@ static func _is_close_to_segment(
 
 ## Overrides
 
+func get_child_bones(recursive: bool) -> Array[BoneLayer]:
+	var children: Array[BoneLayer] = []
+	if recursive:
+		for i in index:
+			if is_ancestor_of(project.layers[i]) and project.layers[i] is BoneLayer:
+				children.append(project.layers[i])
+	else:
+		for i in index:
+			if project.layers[i].parent == self:
+				if project.layers[i] is BoneLayer:
+					children.append(project.layers[i])
+				elif project.layers[i] is GroupLayer:
+					var groups_to_scan = [project.layers[i]]
+					while groups_to_scan.size() != 0:
+						for child in groups_to_scan.pop_front().get_children(false):
+							if child is BoneLayer:
+								children.append(child)
+							elif child is GroupLayer:
+								groups_to_scan.append(child)
+					pass
+	return children
+
+
 ## Blends all of the images of children layer of the group layer into a single image.
 func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
 	if project.current_layer == index:
 		Global.canvas.skeleton.queue_redraw()
 	return super.blend_children(frame, origin, apply_effects)
-
-
-func _include_child_in_blending(
-	image: ImageExtended,
-	layer: BaseLayer,
-	frame: Frame,
-	textures: Array[Image],
-	metadata_image: Image,
-	i: int,
-	origin: Vector2i,
-	apply_effects: bool
-) -> void:
-	var cel := frame.cels[layer.index]
-	if DisplayServer.get_name() == "headless":
-		DrawingAlgos.blend_layers_headless(image, project, layer, cel, origin)
-	else:
-		var cel_image: Image
-		if apply_effects:
-			cel_image = layer.display_effects(cel)
-		else:
-			cel_image = cel.get_image()
-		var bone_layer := BoneLayer.get_parent_bone(layer)
-		if bone_layer:
-			cel_image = apply_bone(cel_image, frame)
-		textures.append(cel_image)
-		_cache_texture_data.append(cel_image.get_data())
-		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
-		if origin != Vector2i.ZERO:
-			# Only used as a preview for the move tool, when used on a group's children
-			var test_array := [project.frames.find(frame), project.layers.find(layer)]
-			if test_array in project.selected_cels:
-				var origin_fixed := Vector2(origin).abs() / Vector2(cel_image.get_size())
-				metadata_image.set_pixel(i, 2, Color(origin_fixed.x, origin_fixed.y, 0.0, 0.0))
 
 
 func apply_bone(cel_image: ImageExtended, at_frame: Frame) -> Image:
@@ -232,3 +222,7 @@ func apply_bone(cel_image: ImageExtended, at_frame: Frame) -> Image:
 
 func get_layer_type() -> int:
 	return Global.LayerTypes.BONE
+
+
+func set_name_to_default(number: int) -> void:
+	name = tr("Bone") + " %s" % number

@@ -276,7 +276,7 @@ func _fill_blend_modes_option_button() -> void:
 	else:
 		for idx_pair in Global.current_project.selected_cels:
 			var layer := Global.current_project.layers[idx_pair[1]]
-			if not layer is GroupLayer:
+			if not layer is GroupLayer or layer is BoneLayer:
 				selected_layers_are_groups = false
 				break
 	if selected_layers_are_groups:

@@ -36,10 +36,8 @@ var bone_rotation: float = 0:  ## This is relative to the gizmo_rotate_origin (R
 var gizmo_length: int = MIN_LENGTH:
 	set(value):
 		if gizmo_length != value and value > int(MIN_LENGTH):
-			var diff = value - gizmo_length
 			if value < int(MIN_LENGTH):
 				value = int(MIN_LENGTH)
-				diff = 0
 			gizmo_length = value
 var associated_layer: BoneLayer   ## only used in update_children()
 
@@ -92,7 +90,7 @@ func update_children(property: String, should_propagate: bool, diff):
 		# chain.
 		return
 	## update first child (This will trigger a chain process)
-	for child_layer in associated_layer.get_children(false):
+	for child_layer in associated_layer.get_child_bones(false):
 		if child_layer.get_layer_type() == Global.LayerTypes.BONE:
 			var child_cel: BoneCel = project.frames[project.current_frame].cels[child_layer.index]
 			if child_cel.get(property) == null:
