@@ -502,6 +502,8 @@ func copy_frames(
 				)
 				if src_cel.selected != null:
 					selected_id = src_cel.selected.id
+			elif src_cel is BoneCel:
+				new_cel = BoneCel.new(src_cel.opacity, src_cel.serialize())
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
 				new_cel.offset = src_cel.offset
@@ -1010,6 +1012,8 @@ func _on_CloneLayer_pressed() -> void:
 				new_cel = Cel3D.new(
 					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
+			elif src_cel is BoneCel:
+				new_cel = BoneCel.new(src_cel.opacity, src_cel.serialize())
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
 				new_cel.offset = src_cel.offset

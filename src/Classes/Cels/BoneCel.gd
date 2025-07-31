@@ -49,9 +49,11 @@ var end_point: Vector2:  ## This is relative to the gizmo_origin
 		return Vector2(gizmo_length, 0).rotated(gizmo_rotate_origin + bone_rotation)
 
 
-func _init(_opacity := 1.0) -> void:
+func _init(_opacity := 1.0, properties := {}) -> void:
 	opacity = _opacity
 	image_texture = ImageTexture.new()
+	if not properties.is_empty():
+		deserialize(properties)
 
 
 func serialize() -> Dictionary:
