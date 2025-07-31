@@ -99,14 +99,14 @@ func update_children(property: String, should_propagate: bool, diff):
 				continue
 			child_cel.set(property, child_cel.get(property) + diff)
 			if property == "bone_rotation":
-				var parent: BoneLayer = child_layer.get_parent_bone()
+				var parent: BoneLayer = BoneLayer.get_parent_bone(child_layer)
 				if parent:
 					var displacement := parent.rel_to_start_point(
 						child_layer.rel_to_global(child_cel.start_point)
 					)
 					displacement = displacement.rotated(diff)
 					child_cel.start_point = child_layer.rel_to_origin(
-						child_layer.get_parent_bone().rel_to_global(start_point) + displacement
+						BoneLayer.get_parent_bone(child_layer).rel_to_global(start_point) + displacement
 					)
 
 

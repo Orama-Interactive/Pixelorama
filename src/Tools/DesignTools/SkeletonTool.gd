@@ -129,8 +129,8 @@ func draw_start(_pos: Vector2i) -> void:
 
 	## TODO Fix later
 	## Check if bone is a parent of anything (skip if it is)
-	if _allow_chaining and current_selected_bone.get_parent_bone():
-		var parent_bone = current_selected_bone.get_parent_bone()
+	if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
+		var parent_bone = BoneLayer.get_parent_bone(current_selected_bone)
 		var parent_b_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
 			parent_bone.index
 		]
@@ -152,11 +152,11 @@ func draw_move(_pos: Vector2i) -> void:
 	if !current_selected_bone:
 		return
 	var bone_cel = current_selected_bone.get_current_bone_cel()
-	if _allow_chaining and current_selected_bone.get_parent_bone():
+	if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
 		match current_selected_bone.modify_mode:  # This manages chaining
 			BoneLayer.DISPLACE:
 				_chained_gizmo = current_selected_bone
-				current_selected_bone = current_selected_bone.get_parent_bone()
+				current_selected_bone = BoneLayer.get_parent_bone(current_selected_bone)
 				current_selected_bone.modify_mode = BoneLayer.ROTATE
 				_skeleton_preview.selected_bone = current_selected_bone
 				_chained_gizmo.modify_mode = BoneLayer.NONE
@@ -210,9 +210,9 @@ func draw_end(_pos: Vector2i) -> void:
 			if current_selected_bone.modify_mode != BoneLayer.NONE:
 				Global.canvas.queue_redraw()
 				current_selected_bone.modify_mode = BoneLayer.NONE
-			if _allow_chaining and current_selected_bone.get_parent_bone():
+			if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
 				if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
-					current_selected_bone.get_parent_bone().modify_mode = BoneLayer.NONE
+					BoneLayer.get_parent_bone(current_selected_bone).modify_mode = BoneLayer.NONE
 	Global.current_project.has_changed = true
 	display_props()
 

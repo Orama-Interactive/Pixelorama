@@ -53,7 +53,7 @@ func _draw_gizmo(
 	)
 	var skip_rotation_gizmo := false
 	# TODO: figure out later
-	var parent = bone.get_parent_bone()
+	var parent = BoneLayer.get_parent_bone(bone)
 	if chaining_mode:
 		if parent in canon_bones:
 			skip_rotation_gizmo = true
@@ -135,7 +135,7 @@ func get_selected_bone() -> void:
 						)
 				):
 					# Check if bone is a parent of anything (if it has, skip it)
-					if bone.get_parent_bone() in canon_bones:
+					if BoneLayer.get_parent_bone(bone) in canon_bones:
 						skip_gizmo = true
 						break
 				if skip_gizmo:
