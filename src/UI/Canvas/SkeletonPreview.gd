@@ -16,12 +16,18 @@ func _ready() -> void:
 func _draw() -> void:
 	var project = Global.current_project
 	var layer = project.layers[project.current_layer]
-	while layer != null:
-		if layer is BoneLayer:
-			break
-		layer = layer.parent
-	if layer == null:
+	var font = Themes.get_font()
+	draw_set_transform(Vector2.UP, 0.0, Vector2.ONE / Global.camera.zoom.x)
+	var text_offset := Vector2(0, -5)
+	if not layer is BoneLayer:
+		if BoneLayer.get_parent_bone(layer) != null:
+			draw_string(
+				font, text_offset, tr("(Bone) Edit mode"), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.WHITE
+			)
 		return
+	draw_string(
+		font, text_offset, tr("(Bone) Pose mode"), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.WHITE
+	)
 	var canon_bones = layer.get_children(true)
 	canon_bones.push_front(layer)
 	for bone in canon_bones:
@@ -80,17 +86,16 @@ func _draw_gizmo(
 			main_color,
 			width,
 		)
-	if Themes:
-		var font = Themes.get_font()
-		draw_set_transform(bone_cel.gizmo_origin + bone_cel.start_point, rotation, Vector2.ONE / camera_zoom.x)
-		var line_size = bone_cel.gizmo_length
-		var fade_ratio = (line_size/font.get_string_size(bone.name).x) * camera_zoom.x
-		var alpha = clampf(fade_ratio, 0.6, 1)
-		if fade_ratio < 0.3:
-			alpha = 0
-		draw_string(
-			font, Vector2.ZERO, bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1, 1, 1, alpha)
-		)
+	var font = Themes.get_font()
+	draw_set_transform(bone_cel.gizmo_origin + bone_cel.start_point, rotation, Vector2.ONE / camera_zoom.x)
+	var line_size = bone_cel.gizmo_length
+	var fade_ratio = (line_size/font.get_string_size(bone.name).x) * camera_zoom.x
+	var alpha = clampf(fade_ratio, 0.6, 1)
+	if fade_ratio < 0.3:
+		alpha = 0
+	draw_string(
+		font, Vector2.ZERO, bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1, 1, 1, alpha)
+	)
 
 func announce_tool_removal(tool_node):
 	active_skeleton_tools.erase(tool_node)

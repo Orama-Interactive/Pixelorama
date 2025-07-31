@@ -162,6 +162,12 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 func apply_bone(cel_image: ImageExtended, at_frame: Frame) -> Image:
 	if not enabled:
 		return cel_image
+	if (
+		not project.layers[project.current_layer] is BoneLayer
+		and Global.canvas.is_updating
+		and not BoneLayer.get_parent_bone(project.layers[project.current_layer]) == null
+	):
+		return cel_image
 	var bone_cel: BoneCel = at_frame.cels[index]
 	var used_region := cel_image.get_used_rect()
 	var start_point: Vector2i = bone_cel.start_point
