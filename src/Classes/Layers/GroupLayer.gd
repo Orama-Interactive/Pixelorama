@@ -167,7 +167,6 @@ func _blend_child_group(
 			_cache_texture_data.append(blended_children.get_data())
 			DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
 		new_i += 1
-	image.save_png(layer.name)
 	return new_i
 
 
