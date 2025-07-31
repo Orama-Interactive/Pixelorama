@@ -105,6 +105,7 @@ func _exit_tree() -> void:
 
 
 func draw_start(_pos: Vector2i) -> void:
+	Global.current_project.undo_redo.create_action("Move bone")
 	if !_skeleton_preview:
 		return
 	# If this tool is on both sides then only allow one at a time
@@ -137,6 +138,9 @@ func draw_start(_pos: Vector2i) -> void:
 		var bone_start: Vector2i = current_selected_bone.rel_to_global(bone_cel.start_point)
 		var parent_start: Vector2i = parent_bone.rel_to_global(parent_b_cel.start_point)
 		_distance_to_parent = bone_start.distance_to(parent_start)
+
+	var old_transform = bone_cel.serialize()
+	Global.current_project.undo_redo.add_undo_method(bone_cel.deserialize.bind(old_transform, true))
 	display_props()
 
 
@@ -202,19 +206,34 @@ func draw_end(_pos: Vector2i) -> void:
 	if _skeleton_preview:
 		# Another tool is already active
 		if not is_transforming:
+			commit_undo()
 			return
 		is_transforming = false
 		_skeleton_preview.transformation_active = false
 		if current_selected_bone:
 			var bone_cel = current_selected_bone.get_current_bone_cel()
+			var new_transform = bone_cel.serialize()
+			Global.current_project.undo_redo.add_do_method(
+				bone_cel.deserialize.bind(new_transform, true)
+			)
 			if current_selected_bone.modify_mode != BoneLayer.NONE:
 				Global.canvas.queue_redraw()
 				current_selected_bone.modify_mode = BoneLayer.NONE
 			if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
 				if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
 					BoneLayer.get_parent_bone(current_selected_bone).modify_mode = BoneLayer.NONE
+	commit_undo()
 	Global.current_project.has_changed = true
 	display_props()
+
+
+func commit_undo():
+	var undo_redo = Global.current_project.undo_redo
+	undo_redo.add_do_method(Global.canvas.queue_redraw)
+	undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	undo_redo.commit_action(false)
 
 
 func quick_set_bones(bone_id: int):

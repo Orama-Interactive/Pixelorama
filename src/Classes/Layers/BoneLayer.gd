@@ -6,6 +6,7 @@ const InteractionDistance = 20
 const DESELECT_WIDTH: float = 1
 
 var enabled := true
+
 var ignore_rotation_hover := false
 var modify_mode := NONE
 var generation_cache: Dictionary
@@ -16,6 +17,17 @@ func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
 	blend_mode = BlendModes.NORMAL
+
+
+func serialize() -> Dictionary:
+	var data := super.serialize()
+	data["enabled"] = enabled
+	return data
+
+
+func deserialize(dict: Dictionary) -> void:
+	super.deserialize(dict)
+	enabled = dict.get("enabled", true)
 
 
 ## Returns a new empty [BaseCel]

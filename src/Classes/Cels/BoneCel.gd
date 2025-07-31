@@ -26,20 +26,22 @@ var start_point := Vector2.ZERO:  ## This is relative to the gizmo_origin
 		if value != start_point:
 			var diff = value - start_point
 			start_point = value
-			update_children("start_point", true, diff)
+			update_children("start_point", _should_propagate, diff)
 var bone_rotation: float = 0:  ## This is relative to the gizmo_rotate_origin (Radians)
 	set(value):
 		if value != bone_rotation:
 			var diff = value - bone_rotation
 			bone_rotation = value
-			update_children("bone_rotation", true, diff)
+			update_children("bone_rotation", _should_propagate, diff)
 var gizmo_length: int = MIN_LENGTH:
 	set(value):
 		if gizmo_length != value and value > int(MIN_LENGTH):
 			if value < int(MIN_LENGTH):
 				value = int(MIN_LENGTH)
 			gizmo_length = value
+
 var associated_layer: BoneLayer   ## only used in update_children()
+var _should_propagate := true
 
 # Properties determined using above variables
 var end_point: Vector2:  ## This is relative to the gizmo_origin
@@ -54,20 +56,28 @@ func _init(_opacity := 1.0) -> void:
 
 func serialize() -> Dictionary:
 	# Make sure the name/types are the same as the variable names/types
-	return {
-		"gizmo_origin": gizmo_origin,
-		"gizmo_rotate_origin": gizmo_rotate_origin,
-		"start_point": start_point,
-		"bone_rotation": bone_rotation,
-		"gizmo_length": gizmo_length,
-	}
+	var data := super.serialize()
+	data["gizmo_origin"] = var_to_str(gizmo_origin)
+	data["gizmo_rotate_origin"] = var_to_str(gizmo_rotate_origin)
+	data["start_point"] = var_to_str(start_point)
+	data["bone_rotation"] = bone_rotation
+	data["gizmo_length"] = gizmo_length
+	return data
 
-func deserialize(data: Dictionary) -> void:
-	gizmo_origin = data.get("gizmo_origin", gizmo_origin)
-	gizmo_rotate_origin = data.get("gizmo_rotate_origin", gizmo_rotate_origin)
-	start_point = data.get("start_point", start_point)
+
+func deserialize(data: Dictionary, update_children := false) -> void:
+	if not update_children:
+		_should_propagate = false
+	super.deserialize(data)
+	if typeof(data.get("gizmo_origin", gizmo_origin)) == TYPE_STRING:  # sanity check
+		gizmo_origin = str_to_var(data.get("gizmo_origin", var_to_str(gizmo_origin)))
+		gizmo_rotate_origin = str_to_var(
+			data.get("gizmo_rotate_origin", var_to_str(gizmo_rotate_origin))
+		)
+		start_point = str_to_var(data.get("start_point", var_to_str(start_point)))
 	bone_rotation = data.get("bone_rotation", bone_rotation)
 	gizmo_length = data.get("gizmo_length", gizmo_length)
+	_should_propagate = true
 
 
 func update_children(property: String, should_propagate: bool, diff):
@@ -82,7 +92,7 @@ func update_children(property: String, should_propagate: bool, diff):
 		if layer_idx != -1:
 			associated_layer = project.layers[layer_idx]
 
-	if not is_instance_valid(project):
+	if not is_instance_valid(project) or !associated_layer:
 		return
 	if !should_propagate:
 		# If ignore_render_once is true this probably means we are in the process of modifying
