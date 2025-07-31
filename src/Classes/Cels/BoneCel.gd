@@ -14,25 +14,25 @@ var gizmo_origin := Vector2.ZERO:
 		if value != gizmo_origin:
 			var diff = value - gizmo_origin
 			gizmo_origin = value
-			update_children("gizmo_origin", false, diff)
 var gizmo_rotate_origin: float = 0:  ## Unit is Radians
 	set(value):
 		if value != gizmo_rotate_origin:
 			var diff = value - gizmo_rotate_origin
 			gizmo_rotate_origin = value
-			update_children("gizmo_rotate_origin", false, diff)
 var start_point := Vector2.ZERO:  ## This is relative to the gizmo_origin
 	set(value):
 		if value != start_point:
 			var diff = value - start_point
 			start_point = value
-			update_children("start_point", _should_propagate, diff)
+			if should_update_children:
+				update_children("start_point", diff)
 var bone_rotation: float = 0:  ## This is relative to the gizmo_rotate_origin (Radians)
 	set(value):
 		if value != bone_rotation:
 			var diff = value - bone_rotation
 			bone_rotation = value
-			update_children("bone_rotation", _should_propagate, diff)
+			if should_update_children:
+				update_children("bone_rotation", diff)
 var gizmo_length: int = MIN_LENGTH:
 	set(value):
 		if gizmo_length != value and value > int(MIN_LENGTH):
@@ -41,7 +41,7 @@ var gizmo_length: int = MIN_LENGTH:
 			gizmo_length = value
 
 var associated_layer: BoneLayer   ## only used in update_children()
-var _should_propagate := true
+var should_update_children := true
 
 # Properties determined using above variables
 var end_point: Vector2:  ## This is relative to the gizmo_origin
@@ -67,7 +67,7 @@ func serialize() -> Dictionary:
 
 func deserialize(data: Dictionary, update_children := false) -> void:
 	if not update_children:
-		_should_propagate = false
+		should_update_children = false
 	super.deserialize(data)
 	if typeof(data.get("gizmo_origin", gizmo_origin)) == TYPE_STRING:  # sanity check
 		gizmo_origin = str_to_var(data.get("gizmo_origin", var_to_str(gizmo_origin)))
@@ -77,10 +77,10 @@ func deserialize(data: Dictionary, update_children := false) -> void:
 		start_point = str_to_var(data.get("start_point", var_to_str(start_point)))
 	bone_rotation = data.get("bone_rotation", bone_rotation)
 	gizmo_length = data.get("gizmo_length", gizmo_length)
-	_should_propagate = true
+	should_update_children = true
 
 
-func update_children(property: String, should_propagate: bool, diff):
+func update_children(property: String, diff):
 	var project = Global.current_project
 	# NOTE: The update is done only on the cels that are part of the current frame so
 	# the approach to get associated layer should be enough
@@ -93,11 +93,6 @@ func update_children(property: String, should_propagate: bool, diff):
 			associated_layer = project.layers[layer_idx]
 
 	if not is_instance_valid(project) or !associated_layer:
-		return
-	if !should_propagate:
-		# If ignore_render_once is true this probably means we are in the process of modifying
-		# "Individual" properties of the bone and don't want them to propagate down the
-		# chain.
 		return
 	## update first child (This will trigger a chain process)
 	for child_layer in associated_layer.get_child_bones(false):
