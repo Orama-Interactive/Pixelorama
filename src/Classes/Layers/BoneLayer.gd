@@ -1,7 +1,7 @@
 class_name BoneLayer
 extends GroupLayer
 
-enum {NONE, DISPLACE, ROTATE, SCALE}  ## I planned to add scaling too but decided to give up
+enum {NONE, DISPLACE, ROTATE, EXTEND}  ## I planned to add scaling too but decided to give up
 const InteractionDistance = 20
 const DESELECT_WIDTH: float = 1
 
@@ -75,7 +75,7 @@ func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 		<= InteractionDistance / camera_zoom.x
 	):
 		if !ignore_rotation_hover:
-			return SCALE
+			return EXTEND
 	elif _is_close_to_segment(
 		rel_to_start_point(mouse_position),
 		InteractionDistance / camera_zoom.x,

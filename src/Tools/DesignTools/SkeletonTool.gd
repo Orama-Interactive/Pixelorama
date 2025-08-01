@@ -12,7 +12,7 @@ var _displace_offset := Vector2.ZERO
 var _prev_mouse_position := Vector2.INF
 var _distance_to_parent: float = 0
 var _chained_gizmo = null
-var current_selected_bone: BoneLayer  # Just to keep reference easy nothing more
+var current_selected_bone: BoneLayer  # needed for chain mode to work
 
 @onready var _pos_slider: ValueSliderV2 = $BoneProps/BonePositionSlider
 @onready var _rot_slider: ValueSlider = $BoneProps/BoneRotationSlider
@@ -26,15 +26,6 @@ var current_selected_bone: BoneLayer  # Just to keep reference easy nothing more
 
 func _ready() -> void:
 	_skeleton_preview = Global.canvas.skeleton
-	if _skeleton_preview:
-		_skeleton_preview.active_skeleton_tools.append(self)
-		_skeleton_preview.queue_redraw()
-	if tool_slot.name == "Left tool":
-		$ColorRect.color = Global.left_tool_color
-	else:
-		$ColorRect.color = Global.right_tool_color
-	$Label.text = "Skeleton Options"
-
 	Global.cel_switched.connect(queue_display_props)
 	Global.project_switched.connect(queue_display_props)
 	Global.project_data_changed.connect(_on_project_data_changed)
@@ -43,8 +34,7 @@ func _ready() -> void:
 	rotation_reset_menu.get_popup().index_pressed.connect(reset_bone_angle)
 	position_reset_menu.get_popup().index_pressed.connect(reset_bone_position)
 	force_refresh_pose.get_popup().index_pressed.connect(refresh_pose)
-	kname = name.replace(" ", "_").to_lower()
-	load_config()
+	super._ready()
 
 
 func _on_warn_pressed() -> void:
@@ -97,7 +87,6 @@ func queue_display_props() -> void:
 
 func _exit_tree() -> void:
 	if _skeleton_preview:
-		_skeleton_preview.announce_tool_removal(self)
 		_skeleton_preview.queue_redraw()
 	Global.cel_switched.disconnect(queue_display_props)
 	Global.project_switched.disconnect(queue_display_props)
@@ -148,8 +137,6 @@ func draw_move(_pos: Vector2i) -> void:
 	# Another tool is already active
 	if not is_transforming:
 		return
-	if !_skeleton_preview:
-		return
 	# We need mouse_point to be a Vector2 in order for rotation to work properly.
 	var mouse_point: Vector2 = Global.canvas.current_pixel
 	var offset := mouse_point - _prev_mouse_position
@@ -165,23 +152,21 @@ func draw_move(_pos: Vector2i) -> void:
 				_skeleton_preview.selected_bone = current_selected_bone
 				_chained_gizmo.modify_mode = BoneLayer.NONE
 	if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
-		if Input.is_key_pressed(KEY_CTRL):
-			_skeleton_preview.ignore_render_once = true
+		if Input.is_action_pressed(&"transform_move_selection_only", true):
 			bone_cel.gizmo_origin += offset.rotated(-bone_cel.bone_rotation)
 		bone_cel.start_point = Vector2i(current_selected_bone.rel_to_origin(mouse_point) - _displace_offset)
 	elif (
 		current_selected_bone.modify_mode == BoneLayer.ROTATE
-		or current_selected_bone.modify_mode == BoneLayer.SCALE
+		or current_selected_bone.modify_mode == BoneLayer.EXTEND
 	):
 		var localized_mouse_norm: Vector2 = current_selected_bone.rel_to_start_point(mouse_point).normalized()
 		var localized_prev_mouse_norm: Vector2 = current_selected_bone.rel_to_start_point(
 			_prev_mouse_position
 		).normalized()
 		var diff := localized_mouse_norm.angle_to(localized_prev_mouse_norm)
-		if Input.is_key_pressed(KEY_CTRL):
-			_skeleton_preview.ignore_render_once = true
+		if Input.is_action_pressed(&"transform_move_selection_only", true):
 			bone_cel.gizmo_rotate_origin -= diff
-			if current_selected_bone.modify_mode == BoneLayer.SCALE:
+			if current_selected_bone.modify_mode == BoneLayer.EXTEND:
 				bone_cel.gizmo_length = current_selected_bone.rel_to_start_point(mouse_point).length()
 		else:
 			bone_cel.bone_rotation -= diff
@@ -195,6 +180,8 @@ func draw_move(_pos: Vector2i) -> void:
 				var error := live_thread.start(Global.canvas.queue_redraw)
 				if error != OK:  # Thread failed, so do this the hard way.
 					Global.canvas.queue_redraw()
+	else:
+		Global.canvas.skeleton.queue_redraw()
 	_prev_mouse_position = mouse_point
 	display_props()
 
@@ -346,22 +333,24 @@ func reset_bone_position(bone_id: int):
 
 
 func _on_rotation_changed(value: float):
-	pass
-	### This rotation will also rotate the child bones as the parent bone's angle is changed.
-	#if current_selected_bone:
-		#if current_selected_bone in _skeleton_preview.current_frame_bones.values():
-			#current_selected_bone.bone_rotation = deg_to_rad(value)
-			#_skeleton_preview.queue_redraw()
-			#Global.canvas.queue_redraw()
+	## This rotation will also rotate the child bones as the parent bone's angle is changed.
+	if current_selected_bone:
+			var bone_cel = current_selected_bone.get_current_bone_cel()
+			var old_update_children = bone_cel.should_update_children
+			bone_cel.should_update_children = _include_children
+			bone_cel.bone_rotation = deg_to_rad(value)
+			Global.canvas.queue_redraw()
+			bone_cel.should_update_children = old_update_children
 
 
 func _on_position_changed(value: Vector2):
-	pass
-	#if current_selected_bone:
-		#if current_selected_bone in _skeleton_preview.current_frame_bones.values():
-			#current_selected_bone.start_point = current_selected_bone.rel_to_origin(value).ceil()
-			#_skeleton_preview.queue_redraw()
-			#Global.canvas.queue_redraw()
+	if current_selected_bone:
+		var bone_cel = current_selected_bone.get_current_bone_cel()
+		var old_update_children = bone_cel.should_update_children
+		bone_cel.should_update_children = _include_children
+		bone_cel.start_point = current_selected_bone.rel_to_origin(value).ceil()
+		Global.canvas.queue_redraw()
+		bone_cel.should_update_children = old_update_children
 
 
 func _on_quick_set_bones_menu_about_to_popup() -> void:
@@ -450,7 +439,7 @@ func _on_allow_chaining_toggled(toggled_on: bool) -> void:
 	save_config()
 
 
-func _on_live_update_pressed(toggled_on: bool) -> void:
+func _on_live_update_toggled(toggled_on: bool) -> void:
 	_live_update = toggled_on
 	update_config()
 	save_config()
@@ -507,19 +496,16 @@ func get_selected_bone_names(popup: PopupMenu, bone_index: int) -> PackedStringA
 
 func display_props():
 	current_selected_bone = _skeleton_preview.selected_bone
-	if _rot_slider.value_changed.is_connected(_on_rotation_changed):  # works for both signals
-		_rot_slider.value_changed.disconnect(_on_rotation_changed)
-		_pos_slider.value_changed.disconnect(_on_position_changed)
 	if current_selected_bone is BoneLayer:
 		var frame_cels = Global.current_project.frames[Global.current_project.current_frame].cels
 		%BoneProps.visible = true
 		%BoneLabel.text = tr("Name:") + " " + current_selected_bone.name
-		_rot_slider.value = rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation)
-		_pos_slider.value = current_selected_bone.rel_to_global(
-			frame_cels[current_selected_bone.index].start_point
+		_rot_slider.set_value_no_signal(rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation))
+		_pos_slider.set_value_no_signal(
+			current_selected_bone.rel_to_global(
+				frame_cels[current_selected_bone.index].start_point
+			)
 		)
-		_rot_slider.value_changed.connect(_on_rotation_changed)
-		_pos_slider.value_changed.connect(_on_position_changed)
 	else:
 		%BoneProps.visible = false
 

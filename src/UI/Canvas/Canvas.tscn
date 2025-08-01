@@ -96,6 +96,7 @@ script = ExtResource("13")
 script = ExtResource("3")
 
 [node name="Skeleton" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_ascg6")
 script = ExtResource("14_iv77e")
 
 [node name="Previews" type="Node2D" parent="."]

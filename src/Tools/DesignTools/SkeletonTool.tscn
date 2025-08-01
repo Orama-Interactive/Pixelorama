@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_d5th2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4_m4bea"]
 
-[node name="ToolOptions" instance=ExtResource("1_ppngp")]
+[node name="SkeletonOptions" instance=ExtResource("1_ppngp")]
 script = ExtResource("1_wwq80")
 
 [node name="BoneProps" type="VBoxContainer" parent="." index="2"]
@@ -189,6 +189,9 @@ tooltip_text = "Resets the position of selected bones"
 text = "Bone Position"
 flat = false
 
+[connection signal="value_changed" from="BoneProps/BonePositionSlider" to="." method="_on_position_changed"]
+[connection signal="value_changed" from="BoneProps/BoneRotationSlider" to="." method="_on_rotation_changed"]
+[connection signal="toggled" from="GridContainer/LiveUpdateCheckbox" to="." method="_on_live_update_toggled"]
 [connection signal="toggled" from="GridContainer/AllowChaining" to="." method="_on_allow_chaining_toggled"]
 [connection signal="toggled" from="GridContainer/IncludeChildrenCheckbox" to="." method="_on_include_children_checkbox_toggled"]
 [connection signal="pressed" from="Section4/Warn" to="." method="_on_warn_pressed"]
