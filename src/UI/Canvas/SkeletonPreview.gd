@@ -125,19 +125,20 @@ func _draw_gizmo(
 			parent_start = bone.rel_to_origin(
 				parent.rel_to_global(parent_cel.start_point)
 			) + parent_cel.end_point
-		draw_dashed_line(
-			bone_start,
-			parent_start,
-			bone_color,
-			BoneLayer.DESELECT_WIDTH / camera_zoom.x
-		)
 		if not parent in canon_bones:
+			parent_start = bone.rel_to_origin(parent.rel_to_global(parent_cel.start_point))
 			draw_circle(
 				parent_start,
 				bone_cel.START_RADIUS / camera_zoom.x,
 				Color.GRAY,
 				true
 			)
+		draw_dashed_line(
+			bone_start,
+			parent_start,
+			bone_color,
+			BoneLayer.DESELECT_WIDTH / camera_zoom.x
+		)
 		draw_set_transform(Vector2.ZERO)
 	var font = Themes.get_font()
 	var line_size = bone_cel.gizmo_length
@@ -156,6 +157,23 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		## Bone Selection
 		get_selected_bone()
+	elif event is InputEventMouseButton:
+		if event.is_released() and !selected_bone:
+			var project: Project = Global.current_project
+			var bone_layer = project.layers[project.current_layer]
+			if not bone_layer is BoneLayer:
+				return
+			var parent := BoneLayer.get_parent_bone(bone_layer)
+			if parent:  # We wish to switch to parent
+				var p_cel = parent.get_current_bone_cel()
+				var pos: Vector2i = Global.canvas.current_pixel.floor()
+				if Geometry2D.is_point_in_circle(
+					pos,
+					parent.rel_to_global(p_cel.start_point),
+					p_cel.START_RADIUS / Global.camera.zoom.x
+				):
+					project.selected_cels.clear()
+					project.change_cel(-1, parent.index)
 
 
 ## This manages the hovering mechanism of gizmo

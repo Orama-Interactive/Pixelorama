@@ -71,15 +71,35 @@ func deserialize(data: Dictionary, update_children := false) -> void:
 	if not update_children:
 		should_update_children = false
 	super.deserialize(data)
-	if typeof(data.get("gizmo_origin", gizmo_origin)) == TYPE_STRING:  # sanity check
-		gizmo_origin = str_to_var(data.get("gizmo_origin", var_to_str(gizmo_origin)))
-		gizmo_rotate_origin = str_to_var(
-			data.get("gizmo_rotate_origin", var_to_str(gizmo_rotate_origin))
+	# These need conversion before setting
+	if typeof(data.get("gizmo_origin", gizmo_origin)) == TYPE_STRING:
+		data["gizmo_origin"] = str_to_var(data.get("gizmo_origin", var_to_str(gizmo_origin)))
+
+	if typeof(data.get("start_point", start_point)) == TYPE_STRING:
+		data["start_point"] = str_to_var(data.get("start_point", start_point))
+
+	if typeof(data.get("gizmo_rotate_origin", gizmo_rotate_origin)) == TYPE_STRING:
+		data["gizmo_rotate_origin"] = str_to_var(
+			data.get("gizmo_rotate_origin", gizmo_rotate_origin)
 		)
-		start_point = str_to_var(data.get("start_point", var_to_str(start_point)))
+	gizmo_origin = data.get("gizmo_origin", gizmo_origin)
+	gizmo_rotate_origin = data.get("gizmo_rotate_origin", gizmo_rotate_origin)
+	start_point = data.get("start_point", start_point)
 	bone_rotation = data.get("bone_rotation", bone_rotation)
 	gizmo_length = data.get("gizmo_length", gizmo_length)
 	should_update_children = true
+
+
+## Doesn't propagate to children
+func reset(overrides := {}) -> void:
+	var data := serialize()
+	data["gizmo_origin"] = Vector2.ZERO
+	data["start_point"] = Vector2.ZERO
+	data["gizmo_rotate_origin"] = 0
+	data["bone_rotation"] = 0
+	data["gizmo_length"] = MIN_LENGTH
+	overrides.merge(data)  # NOTE: duplicate keys are not copied over, unless overwrite is true.
+	deserialize(overrides)
 
 
 func update_children(property: String, diff):

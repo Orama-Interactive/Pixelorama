@@ -44,21 +44,18 @@ static func get_parent_bone(layer) -> BoneLayer:
 	return bone_parent
 
 
-#func get_best_origin(layer_idx: int) -> Vector2i:
-	#var project = Global.current_project
-	#if current_frame >= 0 and current_frame < project.frames.size():
-		#if layer_idx >= 0 and layer_idx < project.layers.size():
-			#if project.layers[layer_idx].get_layer_type() == 1:
-				#var used_rect := Rect2i()
-				#for child_layer in project.layers[layer_idx].get_children(false):
-					#if project.frames[current_frame].cels[child_layer.index].get_class_name() == "PixelCel":
-						#var cel_rect = (
-								#project.frames[current_frame].cels[child_layer.index].get_image()
-							#).get_used_rect()
-						#if cel_rect.has_area():
-							#used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
-				#return used_rect.position + (used_rect.size / 2)
-	#return Vector2i.ZERO\
+func get_best_origin(frame: Frame) -> Vector2i:
+	var project = Global.current_project
+	var used_rect := Rect2i()
+	for child_layer in project.layers[index].get_children(false):
+		if !child_layer is GroupLayer:
+			var cel_rect = (
+					frame.cels[child_layer.index].get_image()
+				).get_used_rect()
+			if cel_rect.has_area():
+				used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
+	return used_rect.position + (used_rect.size / 2)
+
 
 func get_current_bone_cel() -> BoneCel:
 	return Global.current_project.frames[Global.current_project.current_frame].cels[index]
