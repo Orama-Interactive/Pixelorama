@@ -81,38 +81,38 @@ func _draw_gizmo(
 		)
 		draw_set_transform(Vector2.ZERO)
 	bone.ignore_rotation_hover = chaining_mode
-	#if !chaining_mode:
-	net_width = width + (width / 2 if (hover_mode == BoneLayer.ROTATE) else 0)
-	draw_set_transform(bone_cel.gizmo_origin)
-	# Draw the line joining the position and rotation circles
-	draw_line(
-		bone_start,
-		bone_start + bone_end,
-		bone_color,
-		net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
-	)
-	# Draw rotation circle (pose mode) or arrow (edit mode)
-	if edit_mode:
+	if !chaining_mode:
+		net_width = width + (width / 2 if (hover_mode == BoneLayer.ROTATE) else 0)
+		draw_set_transform(bone_cel.gizmo_origin)
+		# Draw the line joining the position and rotation circles
 		draw_line(
-			bone_end,
-			bone_end + (bone_end).normalized().rotated(PI * 3.0/4),
-			bone_color,
-			net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
-		)
-		draw_line(
-			bone_end,
-			bone_end + (bone_end).normalized().rotated(PI * 1.25),
-			bone_color,
-			net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
-		)
-	else:
-		draw_circle(
+			bone_start,
 			bone_start + bone_end,
-			BoneCel.END_RADIUS / camera_zoom.x,
 			bone_color,
-			false,
 			net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
 		)
+		# Draw rotation circle (pose mode) or arrow (edit mode)
+		if edit_mode:
+			draw_line(
+				bone_end,
+				bone_end + (bone_end).normalized().rotated(PI * 3.0/4),
+				bone_color,
+				net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			)
+			draw_line(
+				bone_end,
+				bone_end + (bone_end).normalized().rotated(PI * 1.25),
+				bone_color,
+				net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			)
+		else:
+			draw_circle(
+				bone_start + bone_end,
+				BoneCel.END_RADIUS / camera_zoom.x,
+				bone_color,
+				false,
+				net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			)
 	draw_set_transform(Vector2.ZERO)
 	## Show connection to parent
 	var parent = BoneLayer.get_parent_bone(bone)

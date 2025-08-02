@@ -137,7 +137,7 @@ func draw_move(_pos: Vector2i) -> void:
 	if not is_transforming:
 		return
 	# We need mouse_point to be a Vector2 in order for rotation to work properly.
-	var mouse_point: Vector2 = Global.canvas.current_pixel
+	var mouse_point: Vector2 = Global.canvas.current_pixel.floor()
 	var offset := mouse_point - _prev_mouse_position
 	if !current_selected_bone:
 		return
@@ -151,9 +151,15 @@ func draw_move(_pos: Vector2i) -> void:
 				_skeleton_preview.selected_bone = current_selected_bone
 				_chained_gizmo.modify_mode = BoneLayer.NONE
 	if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
+		var gizmo_origin_changed := false
+		var old_update_children = bone_cel.should_update_children
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
 			bone_cel.gizmo_origin += offset.rotated(-bone_cel.bone_rotation)
-		bone_cel.start_point = Vector2i(current_selected_bone.rel_to_origin(mouse_point) - _displace_offset)
+			bone_cel.should_update_children = false
+		bone_cel.start_point = Vector2i(
+			(current_selected_bone.rel_to_origin(mouse_point) - _displace_offset)
+		)
+		bone_cel.should_update_children = old_update_children
 	elif (
 		current_selected_bone.modify_mode == BoneLayer.ROTATE
 		or current_selected_bone.modify_mode == BoneLayer.EXTEND
