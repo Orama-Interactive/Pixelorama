@@ -34,6 +34,8 @@ func _draw() -> void:
 	draw_set_transform(Vector2.ZERO)
 	if layer == null:
 		return
+	if Global.animation_timeline.is_animation_running:
+		return
 	var canon_bones = layer.get_children(true)
 	canon_bones.push_front(layer)
 	for bone in canon_bones:

@@ -387,10 +387,6 @@ func _on_copy_pose_from_about_to_popup() -> void:
 			continue
 		var frame_data = merge_bone_data(frame_idx, bone_layers)
 		if reference_props != frame_data:  # Checks if this pose is already added to list
-			print(reference_props)
-			print("========")
-			print(frame_data)
-			print(project.current_frame, " ",frame_idx)
 			var popup_submenu = PopupMenu.new()
 			popup_submenu.about_to_popup.connect(
 				populate_popup.bind(popup_submenu, reference_props, frame_idx)
