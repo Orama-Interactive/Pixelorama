@@ -5,6 +5,7 @@ var selected_bone: BoneLayer
 var chaining_mode := false
 var transformation_active := false
 
+@warning_ignore("unused_signal")
 signal sync_ui(from_idx: int, data: Dictionary)
 
 
@@ -50,7 +51,6 @@ func _draw_gizmo(
 	var project = Global.current_project
 	var frame_cels = project.frames[project.current_frame].cels
 	var bone_cel: BoneCel = frame_cels[bone.index]
-	var current_layer = project.layers[project.current_layer]
 	var mouse_point: Vector2 = Global.canvas.current_pixel
 
 	var width: float = (
@@ -58,7 +58,7 @@ func _draw_gizmo(
 	) / camera_zoom.x
 	var net_width = width
 	var bone_color := Color.WHITE if (bone == selected_bone) else Color.GRAY
-	var hover_mode = max(bone.modify_mode, bone.hover_mode(mouse_point, camera_zoom))
+	var hover_mode := maxi(bone.modify_mode, bone.hover_mode(mouse_point, camera_zoom))
 	if hover_mode == BoneLayer.EXTEND:
 		hover_mode = BoneLayer.ROTATE
 	if bone.hover_mode(mouse_point, camera_zoom) == BoneLayer.NONE:
@@ -120,9 +120,6 @@ func _draw_gizmo(
 	var parent = BoneLayer.get_parent_bone(bone)
 	if parent:
 		var parent_cel :=  parent.get_current_bone_cel()
-		var parent_end := Vector2(parent_cel.gizmo_length, 0).rotated(
-			parent_cel.gizmo_rotate_origin
-			)
 		var p_start := Vector2.ZERO if edit_mode else parent_cel.start_point
 		var p_rot := parent_cel.bone_rotation if edit_mode else 0.0
 		var p_end := Vector2.ZERO if (not parent in canon_bones or chaining_mode) else parent_cel.end_point
@@ -146,14 +143,12 @@ func _draw_gizmo(
 		draw_set_transform(Vector2.ZERO)
 	var font = Themes.get_font()
 	var line_size = bone_cel.gizmo_length
-	var fade_ratio = (line_size/font.get_string_size(bone.name).x) * camera_zoom.x
-	var alpha = clampf(fade_ratio, 0.6, 1)
-	if fade_ratio < 0.3:
-		alpha = 0
-	draw_set_transform(bone_cel.gizmo_origin + bone_start, rotation, Vector2.ONE / camera_zoom.x)
-	draw_string(
-		font, Vector2(3, -3), bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, bone_color
-	)
+	var fade_ratio = (line_size / font.get_string_size(bone.name).x) * (camera_zoom.x) / (line_size / font.get_string_size(bone.name).x)
+	if fade_ratio > 2:  # Hide names if we have zoomed far
+		draw_set_transform(bone_cel.gizmo_origin + bone_start, rotation, Vector2.ONE / camera_zoom.x)
+		draw_string(
+			font, Vector2(3, -3), bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, bone_color
+		)
 
 
 ## This manages the hovering mechanism of gizmo
