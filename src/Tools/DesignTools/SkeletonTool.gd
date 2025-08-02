@@ -94,8 +94,6 @@ func _exit_tree() -> void:
 
 func draw_start(_pos: Vector2i) -> void:
 	Global.current_project.undo_redo.create_action("Move bone")
-	if !_skeleton_preview:
-		return
 	# If this tool is on both sides then only allow one at a time
 	if _skeleton_preview.transformation_active:
 		return
@@ -228,16 +226,16 @@ func commit_undo():
 	undo_redo.commit_action(false)
 
 
-func quick_set_bones(bone_id: int):
+func quick_set_bones(bone_index: int):
 	# TODO: add undo/redo later
-	var bones = get_selected_bones(quick_set_bones_menu.get_popup(), bone_id)
+	var bones = get_selected_bones(quick_set_bones_menu.get_popup(), bone_index)
 	var project = Global.current_project
 	for bone: BoneLayer in bones:
 		var bone_cel := bone.get_current_bone_cel()
 		bone_cel.reset(
 			{"gizmo_origin": Vector2(bone.get_best_origin(project.frames[project.current_frame]))}
 		)
-		if _include_children and bone_id != 0:
+		if _include_children or bone_index == 0:
 			for child_bone in bone.get_child_bones(true):
 				var child_bone_cel := child_bone.get_current_bone_cel()
 				child_bone_cel.reset(
@@ -250,27 +248,22 @@ func quick_set_bones(bone_id: int):
 	Global.canvas.queue_redraw()
 
 
-func copy_bone_data(bone_id: int, from_frame: int, popup: PopupMenu, old_current_frame: int):
-	pass
-	#if _skeleton_preview:
-		#if old_current_frame != _skeleton_preview.current_frame:
-			#return
-		#var bone_names := get_selected_bone_names(popup, bone_id)
-		#var new_data = _skeleton_preview.current_frame_data.duplicate(true)
-		#var copy_data: Dictionary = _skeleton_preview.load_frame_info(
-			#Global.current_project, from_frame
-		#)
-		#for bone_name in bone_names:
-			#if bone_name in _skeleton_preview.current_frame_bones.keys():
-				#new_data[bone_name] = _skeleton_preview.current_frame_bones[bone_name].reset_bone(
-					#copy_data.get(bone_name, {})
-				#)
-		#_skeleton_preview.current_frame_data = new_data
-		#_skeleton_preview.save_frame_info(Global.current_project)
-		#_skeleton_preview.queue_redraw()
-		#Global.canvas.queue_redraw()
-		#copy_pose_from.get_popup().hide()
-		#copy_pose_from.get_popup().clear(true)  # To save Memory
+func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
+	var bones := get_selected_bones(popup, bone_index)
+	var project := Global.current_project
+	for bone: BoneLayer in bones:
+		var bone_cel := bone.get_current_bone_cel()
+		var from_cel: BoneCel = project.frames[from_frame].cels[bone.index]
+		bone_cel.deserialize(from_cel.serialize())
+		if _include_children or bone_index == 0:
+			for child_bone in bone.get_child_bones(true):
+				var child_bone_cel := child_bone.get_current_bone_cel()
+				child_bone_cel.deserialize(
+					project.frames[from_frame].cels[child_bone.index].serialize()
+				)
+	copy_pose_from.get_popup().hide()
+	copy_pose_from.get_popup().clear(true)  # To save Memory
+	Global.canvas.queue_redraw()
 
 
 func refresh_pose(refresh_mode: int):
@@ -380,30 +373,43 @@ func _on_position_reset_menu_about_to_popup() -> void:
 func _on_copy_pose_from_about_to_popup() -> void:
 	var popup := copy_pose_from.get_popup()
 	popup.clear(true)
-	if !_skeleton_preview:
-		return
 	var project = Global.current_project
-	var reference_bone_data: Dictionary = _skeleton_preview.current_frame_data
-	for frame_idx in Global.current_project.frames.size():
-		if _skeleton_preview.current_frame == frame_idx:
+	var bone_layers = PackedInt32Array()
+	for layer in project.layers:
+		if layer is BoneLayer:
+			bone_layers.push_back(layer.index)
+	var reference_props := merge_bone_data(project.current_frame, bone_layers)
+	bone_layers.reverse()  ## makes the parent bones come first
+	for frame_idx in project.frames.size():
+		if project.current_frame == frame_idx:
 			# It won't make a difference if we skip it or not (as the system will autoatically)
 			# skip it anyway (but it's bet to skip it ourselves to avoid unnecessary calculations)
 			continue
-		var frame_data: Dictionary = _skeleton_preview.load_frame_info(project, frame_idx)
-		if (
-			frame_data != _skeleton_preview.current_frame_data  # Different pose detected
-		):
-			if reference_bone_data != frame_data:  # Checks if this pose is already added to list
-				reference_bone_data = frame_data  # Mark this pose as seen
-				var popup_submenu = PopupMenu.new()
-				popup_submenu.about_to_popup.connect(
-					populate_popup.bind(popup_submenu, reference_bone_data)
-				)
-				popup.add_submenu_node_item(str("Frame ", frame_idx + 1), popup_submenu)
-				popup_submenu.index_pressed.connect(
-					copy_bone_data.bind(frame_idx, popup_submenu, _skeleton_preview.current_frame)
-				)
+		var frame_data = merge_bone_data(frame_idx, bone_layers)
+		if reference_props != frame_data:  # Checks if this pose is already added to list
+			print(reference_props)
+			print("========")
+			print(frame_data)
+			print(project.current_frame, " ",frame_idx)
+			var popup_submenu = PopupMenu.new()
+			popup_submenu.about_to_popup.connect(
+				populate_popup.bind(popup_submenu, reference_props, frame_idx)
+			)
+			popup.add_submenu_node_item(str("Frame ", frame_idx + 1), popup_submenu)
+			popup_submenu.index_pressed.connect(
+				copy_bone_data.bind(frame_idx, popup_submenu)
+			)
 
+
+func merge_bone_data(frame_idx: int, bones: PackedInt32Array) -> Dictionary:
+	var data = {}
+	var project = Global.current_project
+	for i in bones.size():
+		var test_cel = project.frames[frame_idx].cels[bones[i]]
+		if test_cel is BoneCel:
+			var cel_data = test_cel.serialize()
+			data[bones[i]] = cel_data
+	return data
 
 #func _on_tween_skeleton_about_to_popup() -> void:
 	#var popup := tween_skeleton_menu.get_popup()
@@ -447,13 +453,15 @@ func _on_live_update_toggled(toggled_on: bool) -> void:
 	save_config()
 
 
-func populate_popup(popup: PopupMenu, reference_properties := {}):
+func populate_popup(
+	popup: PopupMenu, reference_properties := {}, frame_idx := Global.current_project.current_frame
+):
 	popup.clear()
 	popup.add_item("All Bones")
 	var items_added_after_prev_separator := true
-	var project = Global.current_project
+	var project := Global.current_project
 	for bone_idx in range(project.layers.size() - 1, -1, -1):
-		var bone = project.layers[bone_idx]
+		var bone: BaseLayer = project.layers[bone_idx]
 		if !bone is BoneLayer:
 			continue
 		var bone_reset_reference = reference_properties
@@ -465,10 +473,13 @@ func populate_popup(popup: PopupMenu, reference_properties := {}):
 			popup.add_item(bone.name, bone_idx)
 			items_added_after_prev_separator = true
 		else:
-			if bone.name in reference_properties.keys():
-				bone_reset_reference = reference_properties[bone.name]
+			if bone.index in reference_properties.keys():
+				bone_reset_reference = reference_properties[bone.index]
+			var bone_cel: BoneCel = project.frames[frame_idx].cels[bone.index]
 			for property: String in bone_reset_reference.keys():
-				if bone.get(property, null) != bone_reset_reference[property]:
+				if typeof(bone_reset_reference[property]) == TYPE_STRING:
+					bone_reset_reference[property] = str_to_var(bone_reset_reference[property])
+				if bone_cel.get(property) != bone_reset_reference[property]:
 					popup.add_item(bone.name, bone_idx)
 					items_added_after_prev_separator = true
 					break
@@ -486,7 +497,8 @@ func get_selected_bones(popup: PopupMenu, bone_index: int) -> Array[BoneLayer]:
 	else:
 		var bone_idx: int = popup.get_item_id(bone_index)
 		if bone_idx < project.layers.size() and bone_idx >= 0:
-			bone_names.append(project.layers[bone_idx])
+			if project.layers[bone_idx] is BoneLayer:
+				bone_names.append(project.layers[bone_idx])
 	return bone_names
 
 
