@@ -5,6 +5,8 @@ var selected_bone: BoneLayer
 var chaining_mode := false
 var transformation_active := false
 
+signal sync_ui(from_idx: int, data: Dictionary)
+
 
 func _ready() -> void:
 	Global.camera.zoom_changed.connect(queue_redraw)
@@ -46,87 +48,87 @@ func _draw_gizmo(
 	var project = Global.current_project
 	var frame_cels = project.frames[project.current_frame].cels
 	var bone_cel: BoneCel = frame_cels[bone.index]
+	var current_layer = project.layers[project.current_layer]
+	var mouse_point: Vector2 = Global.canvas.current_pixel
 
 	var width: float = (
 		bone_cel.WIDTH if (bone == selected_bone) else BoneLayer.DESELECT_WIDTH
 	) / camera_zoom.x
+	var net_width = width
 	var bone_color := Color.WHITE if (bone == selected_bone) else Color.GRAY
-	var current_layer = project.layers[project.current_layer]
-	var mouse_point: Vector2 = Global.canvas.current_pixel
 	var hover_mode = max(bone.modify_mode, bone.hover_mode(mouse_point, camera_zoom))
 	if hover_mode == BoneLayer.EXTEND:
 		hover_mode = BoneLayer.ROTATE
 	if bone.hover_mode(mouse_point, camera_zoom) == BoneLayer.NONE:
 		hover_mode = BoneLayer.NONE
 
+	# Start with values assumed for Edit Mode
 	var bone_start := Vector2.ZERO
 	var bone_end := Vector2(bone_cel.gizmo_length, 0).rotated(bone_cel.gizmo_rotate_origin)
-	var skip_rotation_gizmo := false
-	var parent = BoneLayer.get_parent_bone(bone)
-	if chaining_mode:
-		if parent in canon_bones:
-			skip_rotation_gizmo = true
 	if not edit_mode:
 		bone_start = bone_cel.start_point
 		bone_end = bone_cel.end_point
+	# Draw the position circle
+	if not edit_mode or chaining_mode:
 		draw_set_transform(bone_cel.gizmo_origin)
-		width += width / 2 if (hover_mode == BoneLayer.DISPLACE) else 0
+		net_width = width + (width / 2 if (hover_mode == BoneLayer.DISPLACE) else 0)
 		draw_circle(
 			bone_start,
 			bone_cel.START_RADIUS / camera_zoom.x,
 			bone_color,
 			false,
-			width if (hover_mode == BoneLayer.DISPLACE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			net_width if (hover_mode == BoneLayer.DISPLACE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
 		)
-		width -= width / 2 if (hover_mode == BoneLayer.DISPLACE) else 0
 		draw_set_transform(Vector2.ZERO)
-	bone.ignore_rotation_hover = skip_rotation_gizmo
-	if !skip_rotation_gizmo:
-		width += width / 2 if (hover_mode == BoneLayer.ROTATE) else 0
-		draw_set_transform(bone_cel.gizmo_origin)
+	bone.ignore_rotation_hover = chaining_mode
+	#if !chaining_mode:
+	net_width = width + (width / 2 if (hover_mode == BoneLayer.ROTATE) else 0)
+	draw_set_transform(bone_cel.gizmo_origin)
+	# Draw the line joining the position and rotation circles
+	draw_line(
+		bone_start,
+		bone_start + bone_end,
+		bone_color,
+		net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+	)
+	# Draw rotation circle (pose mode) or arrow (edit mode)
+	if edit_mode:
 		draw_line(
-			bone_start,
-			bone_start + bone_end,
+			bone_end,
+			bone_end + (bone_end).normalized().rotated(PI * 3.0/4),
 			bone_color,
-			width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
 		)
-		if edit_mode:
-			draw_line(
-				bone_end,
-				bone_end + (bone_end).normalized().rotated(PI * 3.0/4),
-				bone_color,
-				width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
-			)
-			draw_line(
-				bone_end,
-				bone_end + (bone_end).normalized().rotated(PI * 1.25),
-				bone_color,
-				width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
-			)
-		else:
-			draw_circle(
-				bone_start + bone_end,
-				BoneCel.END_RADIUS / camera_zoom.x,
-				bone_color,
-				false,
-				width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
-			)
-		width -= width / 2 if (hover_mode == BoneLayer.ROTATE) else 0
-		draw_set_transform(Vector2.ZERO)
+		draw_line(
+			bone_end,
+			bone_end + (bone_end).normalized().rotated(PI * 1.25),
+			bone_color,
+			net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+		)
+	else:
+		draw_circle(
+			bone_start + bone_end,
+			BoneCel.END_RADIUS / camera_zoom.x,
+			bone_color,
+			false,
+			net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+		)
+	draw_set_transform(Vector2.ZERO)
 	## Show connection to parent
+	var parent = BoneLayer.get_parent_bone(bone)
 	if parent:
-		draw_set_transform(bone_cel.gizmo_origin)
-		var parent_cel =  parent.get_current_bone_cel()
+		var parent_cel :=  parent.get_current_bone_cel()
+		var parent_end := Vector2(parent_cel.gizmo_length, 0).rotated(
+			parent_cel.gizmo_rotate_origin
+			)
+		var p_start := Vector2.ZERO if edit_mode else parent_cel.start_point
+		var p_rot := parent_cel.bone_rotation if edit_mode else 0.0
+		var p_end := Vector2.ZERO if (not parent in canon_bones or chaining_mode) else parent_cel.end_point
 		var parent_start = bone.rel_to_origin(
-			parent.rel_to_global(Vector2.ZERO)
-		) + parent_cel.end_point
-		var parent_end := Vector2(parent_cel.gizmo_length, 0).rotated(parent_cel.gizmo_rotate_origin)
-		if not edit_mode:
-			parent_start = bone.rel_to_origin(
-				parent.rel_to_global(parent_cel.start_point)
-			) + parent_cel.end_point
+			parent.rel_to_global(p_start)
+		) + (p_end).rotated(-p_rot)
+		draw_set_transform(bone_cel.gizmo_origin)
 		if not parent in canon_bones:
-			parent_start = bone.rel_to_origin(parent.rel_to_global(parent_cel.start_point))
 			draw_circle(
 				parent_start,
 				bone_cel.START_RADIUS / camera_zoom.x,
@@ -134,8 +136,8 @@ func _draw_gizmo(
 				true
 			)
 		draw_dashed_line(
-			bone_start,
-			parent_start,
+			bone_start,  # Connected to tail of bone
+			parent_start,  # Connected to head of parent (or tail in chained mode)
 			bone_color,
 			BoneLayer.DESELECT_WIDTH / camera_zoom.x
 		)

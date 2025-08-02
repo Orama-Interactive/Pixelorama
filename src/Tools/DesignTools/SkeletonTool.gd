@@ -25,6 +25,7 @@ var current_selected_bone: BoneLayer  # needed for chain mode to work
 
 func _ready() -> void:
 	_skeleton_preview = Global.canvas.skeleton
+	_skeleton_preview.sync_ui.connect(sync_ui)
 	Global.cel_switched.connect(queue_display_props)
 	Global.project_switched.connect(queue_display_props)
 	Global.project_data_changed.connect(_on_project_data_changed)
@@ -43,14 +44,8 @@ large rotations, and have "Include bone children" enabled.
 	Global.popup_error(warn_text)
 
 
-func load_config() -> void:
-	var value = Global.config_cache.get_value(tool_slot.kname, kname, {})
-	set_config(value)
-	update_config()
-
-
 func get_config() -> Dictionary:
-	var config :Dictionary
+	var config := super.get_config()
 	config["live_update"] = _live_update
 	config["allow_chaining"] = _allow_chaining
 	config["include_children"] = _include_children
@@ -58,23 +53,29 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
+	super.set_config(config)
 	_live_update = config.get("live_update", _live_update)
 	_allow_chaining = config.get("allow_chaining", _allow_chaining)
 	_include_children = config.get("include_children", _include_children)
 
 
+func sync_ui(from_idx: int, data: Dictionary):
+	if tool_slot.button != from_idx:
+		_skeleton_preview.sync_ui.disconnect(sync_ui)
+		set_config(data)
+		update_config()
+		save_config()
+		_skeleton_preview.sync_ui.connect(sync_ui)
+
+
 func update_config() -> void:
-	%LiveUpdateCheckbox.button_pressed = _live_update
-	%AllowChaining.button_pressed = _allow_chaining
-	%IncludeChildrenCheckbox.button_pressed = _include_children
-	if _skeleton_preview:
-		_skeleton_preview.chaining_mode = _allow_chaining
-		_skeleton_preview.queue_redraw()
-
-
-func save_config() -> void:
-	var config := get_config()
-	Global.config_cache.set_value(tool_slot.kname, kname, config)
+	super.update_config()
+	%LiveUpdateCheckbox.set_pressed_no_signal(_live_update)
+	%AllowChaining.set_pressed_no_signal(_allow_chaining)
+	%IncludeChildrenCheckbox.set_pressed_no_signal(_include_children)
+	_skeleton_preview.chaining_mode = _allow_chaining
+	_skeleton_preview.sync_ui.emit(tool_slot.button, get_config())
+	_skeleton_preview.queue_redraw()
 
 
 func queue_display_props() -> void:
