@@ -247,6 +247,9 @@ func _update_texture_array_layer(
 			cel_image.copy_from(layer.display_effects(cel))
 		else:
 			cel_image.copy_from(cel.get_image())
+		var bone_layer := BoneLayer.get_parent_bone(layer)
+		if bone_layer:
+			cel_image = bone_layer.apply_bone(cel_image, project.frames[project.current_frame])
 	if layer.is_blended_by_ancestor():
 		include = false
 	if update_layer:

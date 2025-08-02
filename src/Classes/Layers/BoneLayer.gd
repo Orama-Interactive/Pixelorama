@@ -10,13 +10,6 @@ var enabled := true
 var ignore_rotation_hover := false
 var modify_mode := NONE
 var generation_cache: Dictionary
-var render_array: Array[ImageExtended]
-
-
-func _init(_project: Project, _name := "") -> void:
-	project = _project
-	name = _name
-	blend_mode = BlendModes.NORMAL
 
 
 func serialize() -> Dictionary:
@@ -156,7 +149,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 	return super.blend_children(frame, origin, apply_effects)
 
 
-func apply_bone(cel_image: ImageExtended, at_frame: Frame) -> Image:
+func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 	if not enabled:
 		return cel_image
 	if (
