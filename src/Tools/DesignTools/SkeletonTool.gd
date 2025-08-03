@@ -1,6 +1,5 @@
 extends BaseTool
 
-var _skeleton_preview: Node2D
 var is_transforming := false
 var generation_threshold: float = 20
 var live_thread := Thread.new()
@@ -24,8 +23,7 @@ var current_selected_bone: BoneLayer  # needed for chain mode to work
 
 
 func _ready() -> void:
-	_skeleton_preview = Global.canvas.skeleton
-	_skeleton_preview.sync_ui.connect(_sync_ui)
+	Global.canvas.skeleton.sync_ui.connect(_sync_ui)
 	Global.cel_switched.connect(_queue_display_props)
 	Global.project_switched.connect(_queue_display_props)
 	Global.project_data_changed.connect(_on_project_data_changed)
@@ -64,14 +62,12 @@ func update_config() -> void:
 	%LiveUpdateCheckbox.set_pressed_no_signal(_live_update)
 	%AllowChaining.set_pressed_no_signal(_allow_chaining)
 	%IncludeChildrenCheckbox.set_pressed_no_signal(_include_children)
-	_skeleton_preview.chaining_mode = _allow_chaining
-	_skeleton_preview.sync_ui.emit(tool_slot.button, get_config())
-	_skeleton_preview.queue_redraw()
+	Global.canvas.skeleton.chaining_mode = _allow_chaining
+	Global.canvas.skeleton.sync_ui.emit(tool_slot.button, get_config())
+	Global.canvas.skeleton.queue_redraw()
 
 
 func _exit_tree() -> void:
-	if _skeleton_preview:
-		_skeleton_preview.queue_redraw()
 	Global.cel_switched.disconnect(_queue_display_props)
 	Global.project_switched.disconnect(_queue_display_props)
 	Global.project_data_changed.disconnect(_on_project_data_changed)
@@ -103,7 +99,7 @@ func _on_rotation_changed(value: float):
 		var old_update_children = bone_cel.should_update_children
 		bone_cel.should_update_children = _include_children
 		bone_cel.bone_rotation = deg_to_rad(value)
-		_skeleton_preview.queue_redraw()
+		Global.canvas.skeleton.queue_redraw()
 		Global.canvas.queue_redraw()
 		bone_cel.should_update_children = old_update_children
 
@@ -115,7 +111,7 @@ func _on_position_changed(value: Vector2):
 		var old_update_children = bone_cel.should_update_children
 		bone_cel.should_update_children = _include_children
 		bone_cel.start_point = current_selected_bone.rel_to_origin(value).ceil()
-		_skeleton_preview.queue_redraw()
+		Global.canvas.skeleton.queue_redraw()
 		Global.canvas.queue_redraw()
 		bone_cel.should_update_children = old_update_children
 
@@ -190,11 +186,11 @@ func _on_tween_skeleton_about_to_popup() -> void:
 # UI "updating" signals
 func _sync_ui(from_idx: int, data: Dictionary):
 	if tool_slot.button != from_idx:
-		_skeleton_preview.sync_ui.disconnect(_sync_ui)
+		Global.canvas.skeleton.sync_ui.disconnect(_sync_ui)
 		set_config(data)
 		update_config()
 		save_config()
-		_skeleton_preview.sync_ui.connect(_sync_ui)
+		Global.canvas.skeleton.sync_ui.connect(_sync_ui)
 
 
 func _queue_display_props() -> void:
@@ -209,18 +205,24 @@ func _on_project_data_changed(_project):
 
 # Bone "apply" signals
 func quick_set_bones(bone_index: int):
-	# TODO: add undo/redo later
+	Global.current_project.undo_redo.create_action("Quick set bones")
 	var bones = get_selected_bones(quick_set_bones_menu.get_popup(), bone_index)
-	var project = Global.current_project
+	var project := Global.current_project
+	var frame := project.frames[project.current_frame]
 	for bone: BoneLayer in bones:
 		if _include_children or bone_index == 0:
 			for child_bone in bone.get_child_bones(true):
 				bones.append(child_bone)
 		var bone_cel := bone.get_current_bone_cel()
-		bone_cel.reset(
-			{"gizmo_origin": Vector2(bone.get_best_origin(project.frames[project.current_frame]))}
+		var old_data := bone_cel.serialize()
+		var best_origin := Vector2(bone.get_best_origin(frame))
+		project.undo_redo.add_do_method(
+			bone_cel.reset.bind({"gizmo_origin": best_origin})
 		)
-	Global.canvas.queue_redraw()
+		project.undo_redo.add_undo_method(
+			bone_cel.deserialize.bind(old_data, false)
+		)
+	commit_undo(true)
 
 
 func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
@@ -265,7 +267,7 @@ func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 							Tween.EASE_IN
 						)
 					)
-			bone_cel.should_update_children = true
+			bone_cel.should_update_children = old_update
 	copy_pose_from.get_popup().hide()
 	copy_pose_from.get_popup().clear(true)  # To save Memory
 	Global.canvas.queue_redraw()
@@ -283,7 +285,7 @@ func reset_bone_angle(bone_index: int):
 		bone_cel.should_update_children = false
 		bone_cel.bone_rotation = 0
 		bone_cel.should_update_children = true
-	_skeleton_preview.queue_redraw()
+	Global.canvas.skeleton.queue_redraw()
 	Global.canvas.queue_redraw()
 
 
@@ -299,7 +301,7 @@ func reset_bone_position(bone_index: int):
 		bone_cel.should_update_children = false
 		bone_cel.start_point = Vector2.ZERO
 		bone_cel.should_update_children = true
-	_skeleton_preview.queue_redraw()
+	Global.canvas.skeleton.queue_redraw()
 	Global.canvas.queue_redraw()
 
 
@@ -307,11 +309,11 @@ func reset_bone_position(bone_index: int):
 func draw_start(_pos: Vector2i) -> void:
 	Global.current_project.undo_redo.create_action("Move bone")
 	# If this tool is on both sides then only allow one at a time
-	if _skeleton_preview.transformation_active:
+	if Global.canvas.skeleton.transformation_active:
 		return
-	_skeleton_preview.transformation_active = true
+	Global.canvas.skeleton.transformation_active = true
 	is_transforming = true
-	current_selected_bone = _skeleton_preview.selected_bone
+	current_selected_bone = Global.canvas.skeleton.selected_bone
 	var mouse_point: Vector2 = Global.canvas.current_pixel
 	if !current_selected_bone:
 		return
@@ -327,6 +329,9 @@ func draw_start(_pos: Vector2i) -> void:
 		_prev_mouse_position = mouse_point
 
 	## Check if bone is a parent of anything (skip if it is)
+	Global.current_project.undo_redo.add_undo_method(
+		bone_cel.deserialize.bind(bone_cel.serialize(), true)
+	)
 	if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
 		var parent_bone = BoneLayer.get_parent_bone(current_selected_bone)
 		var parent_b_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
@@ -335,9 +340,10 @@ func draw_start(_pos: Vector2i) -> void:
 		var bone_start: Vector2i = current_selected_bone.rel_to_global(bone_cel.start_point)
 		var parent_start: Vector2i = parent_bone.rel_to_global(parent_b_cel.start_point)
 		_distance_to_parent = bone_start.distance_to(parent_start)
+		Global.current_project.undo_redo.add_undo_method(
+			parent_b_cel.deserialize.bind(parent_b_cel.serialize(), false)
+		)
 
-	var old_transform = bone_cel.serialize()
-	Global.current_project.undo_redo.add_undo_method(bone_cel.deserialize.bind(old_transform, true))
 	display_props()
 
 
@@ -352,12 +358,14 @@ func draw_move(_pos: Vector2i) -> void:
 		return
 	var bone_cel = current_selected_bone.get_current_bone_cel()
 	if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
-		match current_selected_bone.modify_mode:  # This manages chaining
+		# This section manages chaining. It changes the Global.canvas.skeleton.selected_bone
+		# to point the parent instead if chained
+		match current_selected_bone.modify_mode:
 			BoneLayer.DISPLACE:
 				_chained_gizmo = current_selected_bone
 				current_selected_bone = BoneLayer.get_parent_bone(current_selected_bone)
 				current_selected_bone.modify_mode = BoneLayer.ROTATE
-				_skeleton_preview.selected_bone = current_selected_bone
+				Global.canvas.skeleton.selected_bone = current_selected_bone
 				_chained_gizmo.modify_mode = BoneLayer.NONE
 	if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
 		var old_update_children = bone_cel.should_update_children
@@ -403,38 +411,40 @@ func draw_end(_pos: Vector2i) -> void:
 	_prev_mouse_position = Vector2.INF
 	_displace_offset = Vector2.ZERO
 	_chained_gizmo = null
-	if _skeleton_preview:
+	if Global.canvas.skeleton:
 		# Another tool is already active
 		if not is_transforming:
 			commit_undo()
 			return
 		is_transforming = false
-		_skeleton_preview.transformation_active = false
+		Global.canvas.skeleton.transformation_active = false
 		if current_selected_bone:
 			var bone_cel = current_selected_bone.get_current_bone_cel()
-			var new_transform = bone_cel.serialize()
 			Global.current_project.undo_redo.add_do_method(
-				bone_cel.deserialize.bind(new_transform, true)
+				bone_cel.deserialize.bind(bone_cel.serialize(), true)
 			)
 			if current_selected_bone.modify_mode != BoneLayer.NONE:
 				Global.canvas.queue_redraw()
 				current_selected_bone.modify_mode = BoneLayer.NONE
-			if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
-				if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
-					BoneLayer.get_parent_bone(current_selected_bone).modify_mode = BoneLayer.NONE
+			if _allow_chaining:
+				for child in current_selected_bone.get_child_bones(false):
+					var child_cel = child.get_current_bone_cel()
+					Global.current_project.undo_redo.add_do_method(
+						child_cel.deserialize.bind(child_cel.serialize(), true)
+					)
 	commit_undo()
 	Global.current_project.has_changed = true
 	display_props()
 
 
 ## Helper functions
-func commit_undo():
+func commit_undo(execute := false):
 	var undo_redo = Global.current_project.undo_redo
 	undo_redo.add_do_method(Global.canvas.queue_redraw)
 	undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	undo_redo.commit_action(false)
+	undo_redo.commit_action(execute)
 
 
 func populate_popup(
@@ -487,7 +497,7 @@ func get_selected_bones(popup: PopupMenu, bone_index: int) -> Array[BoneLayer]:
 
 
 func display_props():
-	current_selected_bone = _skeleton_preview.selected_bone
+	current_selected_bone = Global.canvas.skeleton.selected_bone
 	if current_selected_bone is BoneLayer:
 		var frame_cels = Global.current_project.frames[Global.current_project.current_frame].cels
 		%BoneProps.visible = true

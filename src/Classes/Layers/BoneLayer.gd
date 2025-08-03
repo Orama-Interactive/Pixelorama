@@ -1,7 +1,7 @@
 class_name BoneLayer
 extends GroupLayer
 
-enum {NONE, DISPLACE, ROTATE, EXTEND}  ## I planned to add scaling too but decided to give up
+enum {NONE, DISPLACE, ROTATE, EXTEND}
 const InteractionDistance = 20
 const DESELECT_WIDTH: float = 1
 
@@ -22,8 +22,8 @@ func serialize() -> Dictionary:
 
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
-	enabled = dict.get("enabled", true)
-	algorithm = dict.get("algorithm", true)
+	enabled = dict.get("enabled", enabled)
+	algorithm = dict.get("algorithm", algorithm)
 
 
 ## Returns a new empty [BaseCel]
@@ -131,13 +131,6 @@ func get_child_bones(recursive: bool) -> Array[BoneLayer]:
 	return children
 
 
-## Blends all of the images of children layer of the group layer into a single image.
-func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
-	if project.current_layer == index:
-		Global.canvas.skeleton.queue_redraw()
-	return super.blend_children(frame, origin, apply_effects)
-
-
 func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 	if not enabled:
 		return cel_image
@@ -190,7 +183,8 @@ func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 			rotation_renderer.generate_image(
 				square_image,
 				algorithm,
-				rotate_params, square_image.get_size(),
+				rotate_params,
+				square_image.get_size(),
 				true,
 				false
 			)

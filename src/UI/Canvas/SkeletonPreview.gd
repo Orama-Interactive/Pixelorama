@@ -11,7 +11,6 @@ signal sync_ui(from_idx: int, data: Dictionary)
 
 func _ready() -> void:
 	Global.camera.zoom_changed.connect(queue_redraw)
-	Global.cel_switched.connect(queue_redraw)
 
 
 func _draw() -> void:

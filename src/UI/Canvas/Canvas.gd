@@ -71,6 +71,7 @@ func _draw() -> void:
 	draw_set_transform(position, rotation, scale)
 	color_index.queue_redraw()
 	is_updating = false
+	skeleton.queue_redraw()
 
 
 func _input(event: InputEvent) -> void:
