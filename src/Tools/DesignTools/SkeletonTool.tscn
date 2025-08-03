@@ -8,44 +8,7 @@
 [node name="SkeletonOptions" instance=ExtResource("1_ppngp")]
 script = ExtResource("1_wwq80")
 
-[node name="BoneProps" type="VBoxContainer" parent="." index="2"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="Section3" type="HBoxContainer" parent="BoneProps" index="0"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="BoneProps/Section3" index="0"]
-layout_mode = 2
-text = "Bone properties"
-
-[node name="HSeparator" type="HSeparator" parent="BoneProps/Section3" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="BoneLabel" type="Label" parent="BoneProps" index="1"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Name:"
-
-[node name="BonePositionSlider" parent="BoneProps" index="2" instance=ExtResource("3_d5th2")]
-layout_mode = 2
-allow_greater = true
-allow_lesser = true
-suffix_x = "px"
-suffix_y = "px"
-
-[node name="BoneRotationSlider" parent="BoneProps" index="3" instance=ExtResource("4_m4bea")]
-layout_mode = 2
-max_value = 360.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-prefix = "Rotation:"
-suffix = "°"
-
-[node name="Section3" type="HBoxContainer" parent="." index="3"]
+[node name="Section3" type="HBoxContainer" parent="." index="2"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Section3" index="0"]
@@ -56,7 +19,7 @@ text = "General"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="." index="4"]
+[node name="GridContainer" type="GridContainer" parent="." index="3"]
 layout_mode = 2
 columns = 2
 
@@ -116,7 +79,67 @@ bone"
 mouse_filter = 1
 text = "Include bone children"
 
-[node name="Section2" type="HBoxContainer" parent="." index="5"]
+[node name="BoneProps" type="VBoxContainer" parent="." index="4"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Section3" type="HBoxContainer" parent="BoneProps" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BoneProps/Section3" index="0"]
+layout_mode = 2
+text = "Bone properties"
+
+[node name="HSeparator" type="HSeparator" parent="BoneProps/Section3" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BoneLabel" type="Label" parent="BoneProps" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Name:"
+
+[node name="BonePositionSlider" parent="BoneProps" index="2" instance=ExtResource("3_d5th2")]
+layout_mode = 2
+allow_greater = true
+allow_lesser = true
+suffix_x = "px"
+suffix_y = "px"
+
+[node name="BoneRotationSlider" parent="BoneProps" index="3" instance=ExtResource("4_m4bea")]
+layout_mode = 2
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+prefix = "Rotation:"
+suffix = "°"
+
+[node name="Section" type="HBoxContainer" parent="." index="5"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Section" index="0"]
+layout_mode = 2
+text = "Reset"
+
+[node name="HSeparator" type="HSeparator" parent="Section" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RotationReset" type="MenuButton" parent="." index="6"]
+layout_mode = 2
+tooltip_text = "Resets the rotation of selected bones"
+text = "Bone Rotation"
+flat = false
+
+[node name="PositionReset" type="MenuButton" parent="." index="7"]
+layout_mode = 2
+tooltip_text = "Resets the position of selected bones"
+text = "Bone Position"
+flat = false
+
+[node name="Section2" type="HBoxContainer" parent="." index="8"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Section2" index="0"]
@@ -127,19 +150,19 @@ text = "Skeleton"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="QuickSetBones" type="MenuButton" parent="." index="6"]
+[node name="QuickSetBones" type="MenuButton" parent="." index="9"]
 layout_mode = 2
 tooltip_text = "Quickly place bones over their respective sprites."
 text = "Quick Set Bones"
 flat = false
 
-[node name="CopyPoseFrom" type="MenuButton" parent="." index="7"]
+[node name="CopyPoseFrom" type="MenuButton" parent="." index="10"]
 layout_mode = 2
 tooltip_text = "Copies properties of selected bones from chosen frame to current frame."
 text = "Copy Pose From"
 flat = false
 
-[node name="Section4" type="HBoxContainer" parent="." index="8"]
+[node name="Section4" type="HBoxContainer" parent="." index="11"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Section4" index="0"]
@@ -155,40 +178,19 @@ layout_mode = 2
 text = "[⚠️]"
 flat = true
 
-[node name="TweenSkeleton" type="MenuButton" parent="." index="9"]
+[node name="TweenSkeleton" type="MenuButton" parent="." index="12"]
 layout_mode = 2
 tooltip_text = "Gererates In-Betweens from a chosen start frame to the current frame."
 text = "Tween Skeleton"
 flat = false
 
-[node name="Section" type="HBoxContainer" parent="." index="10"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Section" index="0"]
-layout_mode = 2
-text = "Reset"
-
-[node name="HSeparator" type="HSeparator" parent="Section" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RotationReset" type="MenuButton" parent="." index="11"]
-layout_mode = 2
-tooltip_text = "Resets the rotation of selected bones"
-text = "Bone Rotation"
-flat = false
-
-[node name="PositionReset" type="MenuButton" parent="." index="12"]
-layout_mode = 2
-tooltip_text = "Resets the position of selected bones"
-text = "Bone Position"
-flat = false
-
-[connection signal="value_changed" from="BoneProps/BonePositionSlider" to="." method="_on_position_changed"]
-[connection signal="value_changed" from="BoneProps/BoneRotationSlider" to="." method="_on_rotation_changed"]
 [connection signal="toggled" from="GridContainer/LiveUpdateCheckbox" to="." method="_on_live_update_toggled"]
 [connection signal="toggled" from="GridContainer/AllowChaining" to="." method="_on_allow_chaining_toggled"]
 [connection signal="toggled" from="GridContainer/IncludeChildrenCheckbox" to="." method="_on_include_children_checkbox_toggled"]
+[connection signal="value_changed" from="BoneProps/BonePositionSlider" to="." method="_on_position_changed"]
+[connection signal="value_changed" from="BoneProps/BoneRotationSlider" to="." method="_on_rotation_changed"]
+[connection signal="about_to_popup" from="RotationReset" to="." method="_on_rotation_reset_menu_about_to_popup"]
+[connection signal="about_to_popup" from="PositionReset" to="." method="_on_position_reset_menu_about_to_popup"]
 [connection signal="about_to_popup" from="QuickSetBones" to="." method="_on_quick_set_bones_menu_about_to_popup"]
 [connection signal="about_to_popup" from="CopyPoseFrom" to="." method="_on_copy_pose_from_about_to_popup"]
 [connection signal="pressed" from="Section4/Warn" to="." method="_on_warn_pressed"]

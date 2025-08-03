@@ -254,16 +254,6 @@ func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
 	Global.canvas.queue_redraw()
 
 
-func refresh_pose(refresh_mode: int):
-	pass
-	#if _skeleton_preview:
-		#var frames := [_skeleton_preview.current_frame]
-		#if refresh_mode == 0:  # All frames
-			#frames = range(0, Global.current_project.frames.size())
-		#for frame_idx in frames:
-			#_skeleton_preview.generate_pose(frame_idx)
-
-
 func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 	var bones := get_selected_bones(popup, bone_index)
 	var project := Global.current_project
@@ -297,37 +287,48 @@ func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 	Global.canvas.queue_redraw()
 
 
-func reset_bone_angle(bone_id: int):
-	pass
-	### This rotation will also rotate the child bones as the parent bone's angle is changed.
-	#var bone_names := get_selected_bone_names(rotation_reset_menu.get_popup(), bone_id)
-	#for bone_name in bone_names:
-		#if bone_name in _skeleton_preview.current_frame_bones.keys():
-			#_skeleton_preview.current_frame_bones[bone_name].bone_rotation = 0
-	#_skeleton_preview.queue_redraw()
-	#Global.canvas.queue_redraw()
+func reset_bone_angle(bone_index: int):
+	var bones := get_selected_bones(rotation_reset_menu.get_popup(), bone_index)
+	var project := Global.current_project
+	for bone: BoneLayer in bones:
+		if _include_children or bone_index == 0:
+			for child_bone in bone.get_child_bones(true):
+				bones.append(child_bone)
+		var bone_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
+		var old_update = bone_cel.should_update_children
+		bone_cel.should_update_children = false
+		bone_cel.bone_rotation = 0
+		bone_cel.should_update_children = true
+	_skeleton_preview.queue_redraw()
+	Global.canvas.queue_redraw()
 
 
-func reset_bone_position(bone_id: int):
-	pass
-	#var bone_names := get_selected_bone_names(position_reset_menu.get_popup(), bone_id)
-	#for bone_name in bone_names:
-		#if bone_name in _skeleton_preview.current_frame_bones.keys():
-			#_skeleton_preview.current_frame_bones[bone_name].start_point = Vector2.ZERO
-	#_skeleton_preview.queue_redraw()
-	#Global.canvas.queue_redraw()
+func reset_bone_position(bone_index: int):
+	var bones := get_selected_bones(position_reset_menu.get_popup(), bone_index)
+	var project := Global.current_project
+	for bone: BoneLayer in bones:
+		if _include_children or bone_index == 0:
+			for child_bone in bone.get_child_bones(true):
+				bones.append(child_bone)
+		var bone_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
+		var old_update = bone_cel.should_update_children
+		bone_cel.should_update_children = false
+		bone_cel.start_point = Vector2.ZERO
+		bone_cel.should_update_children = true
+	_skeleton_preview.queue_redraw()
+	Global.canvas.queue_redraw()
 
 
 func _on_rotation_changed(value: float):
 	# TODO: add undo/redo later
-	## This rotation will also rotate the child bones as the parent bone's angle is changed.
 	if current_selected_bone:
-			var bone_cel = current_selected_bone.get_current_bone_cel()
-			var old_update_children = bone_cel.should_update_children
-			bone_cel.should_update_children = _include_children
-			bone_cel.bone_rotation = deg_to_rad(value)
-			Global.canvas.queue_redraw()
-			bone_cel.should_update_children = old_update_children
+		var bone_cel = current_selected_bone.get_current_bone_cel()
+		var old_update_children = bone_cel.should_update_children
+		bone_cel.should_update_children = _include_children
+		bone_cel.bone_rotation = deg_to_rad(value)
+		_skeleton_preview.queue_redraw()
+		Global.canvas.queue_redraw()
+		bone_cel.should_update_children = old_update_children
 
 
 func _on_position_changed(value: Vector2):
@@ -337,6 +338,7 @@ func _on_position_changed(value: Vector2):
 		var old_update_children = bone_cel.should_update_children
 		bone_cel.should_update_children = _include_children
 		bone_cel.start_point = current_selected_bone.rel_to_origin(value).ceil()
+		_skeleton_preview.queue_redraw()
 		Global.canvas.queue_redraw()
 		bone_cel.should_update_children = old_update_children
 
@@ -492,12 +494,13 @@ func display_props():
 		var frame_cels = Global.current_project.frames[Global.current_project.current_frame].cels
 		%BoneProps.visible = true
 		%BoneLabel.text = tr("Name:") + " " + current_selected_bone.name
-		_rot_slider.set_value_no_signal(rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation))
+		_rot_slider.set_value_no_signal_update_display(rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation))
 		_pos_slider.set_value_no_signal(
 			current_selected_bone.rel_to_global(
 				frame_cels[current_selected_bone.index].start_point
 			)
 		)
+		_pos_slider.max_value = Global.current_project.size
 	else:
 		%BoneProps.visible = false
 
