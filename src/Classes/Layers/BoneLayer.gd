@@ -11,6 +11,7 @@ var ignore_rotation_hover := false
 var modify_mode := NONE
 var generation_cache: Dictionary
 
+var rotation_renderer := ShaderImageEffect.new()
 
 func serialize() -> Dictionary:
 	var data := super.serialize()
@@ -86,25 +87,11 @@ func rel_to_start_point(pos: Vector2) -> Vector2:
 	var bone_cel := get_current_bone_cel()
 	return pos - bone_cel.gizmo_origin - bone_cel.start_point
 
+
 ## Converts to position relative to canvas
 func rel_to_global(pos: Vector2) -> Vector2:
 	var bone_cel := get_current_bone_cel()
 	return pos + bone_cel.gizmo_origin
-
-#func reset_bone(overrides := {}) -> Dictionary:
-	#var reset_data = generate_empty_data(bone_name, parent_bone_name)
-	#var connection_array := update_property.get_connections()
-	#for connection: Dictionary in connection_array:
-		#update_property.disconnect(connection["callable"])
-	#for key in reset_data.keys():
-		#if key in overrides.keys():
-			#set(key, overrides[key])
-			#reset_data[key] = overrides[key]
-		#else:
-			#set(key, reset_data[key])
-	#for connection: Dictionary in connection_array:
-		#update_property.connect(connection["callable"])
-	#return reset_data
 
 
 static func _is_close_to_segment(
@@ -159,12 +146,11 @@ func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 	):
 		return cel_image
 	var bone_cel: BoneCel = at_frame.cels[index]
-	var used_region := cel_image.get_used_rect()
 	var start_point: Vector2i = bone_cel.start_point
-	var gizmo_origin: Vector2i = bone_cel.gizmo_origin.floor()
 	var angle: float = bone_cel.bone_rotation
 	if angle == 0 and start_point == Vector2i.ZERO:
 		return cel_image
+	var used_region := cel_image.get_used_rect()
 	if used_region.size == Vector2i.ZERO:
 		return cel_image
 	# Imprint on a square for rotation
@@ -194,19 +180,21 @@ func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 		# NOTE: I tried cacheing entire poses (that remain same) as well. It was faster than this
 		# approach but only by a few milliseconds. I don't think straining the memory for only
 		# a boost of a few millisec was worth it so i declare this the most optimal approach.
-		var cache_key := {"angle": angle, "cel_content": cel_image.get_data()}
+		var cache_key := {"angle": angle, "un_transformed": square_image.get_data()}
 		var bone_cache: Dictionary = generation_cache.get_or_add(bone_cel, {})
 		if cache_key in bone_cache.keys():
 			square_image = bone_cache[cache_key]
 		else:
-			var gen = ShaderImageEffect.new()
-			gen.generate_image(
+			rotation_renderer.generate_image(
 				square_image,
 				DrawingAlgos.nn_shader,
-				rotate_params, square_image.get_size()
+				rotate_params, square_image.get_size(),
+				true,
+				false
 			)
 			bone_cache.clear()
 			bone_cache[cache_key] = square_image
+	var gizmo_origin: Vector2i = bone_cel.gizmo_origin.floor()
 	var pivot: Vector2i = gizmo_origin
 	var bone_start_global: Vector2i = gizmo_origin + start_point
 	var square_image_start: Vector2i = used_region.position - s_offset
