@@ -114,7 +114,6 @@ func draw_start(_pos: Vector2i) -> void:
 		_displace_offset = current_selected_bone.rel_to_start_point(mouse_point)
 		_prev_mouse_position = mouse_point
 
-	## TODO Fix later
 	## Check if bone is a parent of anything (skip if it is)
 	if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
 		var parent_bone = BoneLayer.get_parent_bone(current_selected_bone)
@@ -149,7 +148,6 @@ func draw_move(_pos: Vector2i) -> void:
 				_skeleton_preview.selected_bone = current_selected_bone
 				_chained_gizmo.modify_mode = BoneLayer.NONE
 	if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
-		var gizmo_origin_changed := false
 		var old_update_children = bone_cel.should_update_children
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
 			bone_cel.gizmo_origin += offset.rotated(-bone_cel.bone_rotation)
@@ -231,20 +229,13 @@ func quick_set_bones(bone_index: int):
 	var bones = get_selected_bones(quick_set_bones_menu.get_popup(), bone_index)
 	var project = Global.current_project
 	for bone: BoneLayer in bones:
+		if _include_children or bone_index == 0:
+			for child_bone in bone.get_child_bones(true):
+				bones.append(child_bone)
 		var bone_cel := bone.get_current_bone_cel()
 		bone_cel.reset(
 			{"gizmo_origin": Vector2(bone.get_best_origin(project.frames[project.current_frame]))}
 		)
-		if _include_children or bone_index == 0:
-			for child_bone in bone.get_child_bones(true):
-				var child_bone_cel := child_bone.get_current_bone_cel()
-				child_bone_cel.reset(
-					{
-						"gizmo_origin": Vector2(
-							child_bone.get_best_origin(project.frames[project.current_frame])
-						)
-					}
-				)
 	Global.canvas.queue_redraw()
 
 
@@ -252,15 +243,12 @@ func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
 	var bones := get_selected_bones(popup, bone_index)
 	var project := Global.current_project
 	for bone: BoneLayer in bones:
+		if _include_children or bone_index == 0:
+			for child_bone in bone.get_child_bones(true):
+				bones.append(child_bone)
 		var bone_cel := bone.get_current_bone_cel()
 		var from_cel: BoneCel = project.frames[from_frame].cels[bone.index]
 		bone_cel.deserialize(from_cel.serialize())
-		if _include_children or bone_index == 0:
-			for child_bone in bone.get_child_bones(true):
-				var child_bone_cel := child_bone.get_current_bone_cel()
-				child_bone_cel.deserialize(
-					project.frames[from_frame].cels[child_bone.index].serialize()
-				)
 	copy_pose_from.get_popup().hide()
 	copy_pose_from.get_popup().clear(true)  # To save Memory
 	Global.canvas.queue_redraw()
@@ -276,42 +264,37 @@ func refresh_pose(refresh_mode: int):
 			#_skeleton_preview.generate_pose(frame_idx)
 
 
-#func tween_skeleton_data(bone_id: int, from_frame: int, popup: PopupMenu, current_frame: int):
-	#if _skeleton_preview:
-		#if current_frame != _skeleton_preview.current_frame:
-			#return
-		#var bone_names := get_selected_bone_names(popup, bone_id)
-		#var start_data: Dictionary = _skeleton_preview.load_frame_info(
-			#Global.current_project, from_frame
-		#)
-		#var end_data: Dictionary = _skeleton_preview.load_frame_info(
-			#Global.current_project, current_frame
-		#)
-		#for frame_idx in range(from_frame + 1, current_frame):
-			#var frame_info: Dictionary = _skeleton_preview.load_frame_info(
-				#Global.current_project, frame_idx
-			#)
-			#for bone_name in bone_names:
-				#if (
-					#bone_name in frame_info.keys()
-					#and bone_name in start_data.keys()
-					#and bone_name in end_data.keys()
-				#):
-					#var bone_dict: Dictionary = frame_info[bone_name]
-					#for data_key: String in bone_dict.keys():
-						#if typeof(bone_dict[data_key]) != TYPE_STRING:
-							#bone_dict[data_key] = Tween.interpolate_value(
-								#start_data[bone_name][data_key],
-								#end_data[bone_name][data_key] - start_data[bone_name][data_key],
-								#frame_idx - from_frame,
-								#current_frame - from_frame,
-								#Tween.TRANS_LINEAR,
-								#Tween.EASE_IN
-							#)
-			#_skeleton_preview.save_frame_info(Global.current_project, frame_info, frame_idx)
-			#_skeleton_preview.generate_pose(frame_idx)
-		#copy_pose_from.get_popup().hide()
-		#copy_pose_from.get_popup().clear(true)  # To save Memory
+func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
+	var bones := get_selected_bones(popup, bone_index)
+	var project := Global.current_project
+	var props := bones[0].get_current_bone_cel().serialize().keys()
+	for frame_idx in range(from_frame + 1, project.current_frame):
+		for bone: BoneLayer in bones:
+			if _include_children or bone_index == 0:
+				for child_bone in bone.get_child_bones(true):
+					bones.append(child_bone)
+			var to_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
+			var bone_cel: BoneCel = project.frames[frame_idx].cels[bone.index]
+			var from_cel: BoneCel = project.frames[from_frame].cels[bone.index]
+			var old_update = bone_cel.should_update_children
+			bone_cel.should_update_children = false
+			for property: String in props:
+				if typeof(bone_cel.get(property)) != TYPE_STRING:
+					bone_cel.set(
+						property,
+						Tween.interpolate_value(
+							from_cel.get(property),
+							to_cel.get(property) - from_cel.get(property),
+							frame_idx - from_frame,
+							project.current_frame - from_frame,
+							Tween.TRANS_LINEAR,
+							Tween.EASE_IN
+						)
+					)
+			bone_cel.should_update_children = true
+	copy_pose_from.get_popup().hide()
+	copy_pose_from.get_popup().clear(true)  # To save Memory
+	Global.canvas.queue_redraw()
 
 
 func reset_bone_angle(bone_id: int):
@@ -397,6 +380,34 @@ func _on_copy_pose_from_about_to_popup() -> void:
 			)
 
 
+func _on_tween_skeleton_about_to_popup() -> void:
+	var popup := tween_skeleton_menu.get_popup()
+	var project = Global.current_project
+	popup.clear(true)
+	var bone_layers = PackedInt32Array()
+	for layer in project.layers:
+		if layer is BoneLayer:
+			bone_layers.push_back(layer.index)
+	var reference_props := merge_bone_data(project.current_frame, bone_layers)
+	bone_layers.reverse()  ## makes the parent bones come first
+	popup.add_separator("Start From")
+	for frame_idx in project.frames.size():
+		if frame_idx >= project.current_frame:
+			# It won't make a difference if we skip it or not (as the system will autoatically)
+			# skip it anyway (but it's bet to skip it ourselves to avoid unnecessary calculations)
+			break
+		var frame_data = merge_bone_data(frame_idx, bone_layers)
+		if reference_props != frame_data:  # Checks if this pose is already added to list
+			var popup_submenu = PopupMenu.new()
+			popup_submenu.about_to_popup.connect(
+				populate_popup.bind(popup_submenu, reference_props, frame_idx)
+			)
+			popup.add_submenu_node_item(str("Frame ", frame_idx + 1), popup_submenu)
+			popup_submenu.index_pressed.connect(
+				tween_skeleton_data.bind(frame_idx, popup_submenu)
+			)
+
+
 func merge_bone_data(frame_idx: int, bones: PackedInt32Array) -> Dictionary:
 	var data = {}
 	var project = Global.current_project
@@ -407,29 +418,6 @@ func merge_bone_data(frame_idx: int, bones: PackedInt32Array) -> Dictionary:
 			data[bones[i]] = cel_data
 	return data
 
-#func _on_tween_skeleton_about_to_popup() -> void:
-	#var popup := tween_skeleton_menu.get_popup()
-	#var project = Global.current_project
-	#popup.clear(true)
-	#popup.add_separator("Start From")
-	#var reference_bone_data: Dictionary = _skeleton_preview.current_frame_data
-	#for frame_idx in Global.current_project.frames.size():
-		#if frame_idx >= _skeleton_preview.current_frame - 1:
-			#break
-		#var frame_data: Dictionary = _skeleton_preview.load_frame_info(project, frame_idx)
-		#if (
-			#frame_data != _skeleton_preview.current_frame_data  # Different pose detected
-		#):
-			#if reference_bone_data != frame_data:  # Checks if this pose is already added to list
-				#reference_bone_data = frame_data  # Mark this pose as seen
-				#var popup_submenu = PopupMenu.new()
-				#popup_submenu.about_to_popup.connect(
-					#populate_popup.bind(popup_submenu, reference_bone_data)
-				#)
-				#popup.add_submenu_node_item(str("Frame ", frame_idx + 1), popup_submenu)
-				#popup_submenu.index_pressed.connect(
-					#tween_skeleton_data.bind(frame_idx, popup_submenu, _skeleton_preview.current_frame)
-				#)
 
 func _on_include_children_checkbox_toggled(toggled_on: bool) -> void:
 	_include_children = toggled_on
