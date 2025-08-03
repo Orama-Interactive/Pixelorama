@@ -960,6 +960,8 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 		# Make layer child of group.
 		layer.parent = project.layers[project.current_layer]
 	else:
+		if layer is BoneLayer:
+			new_layer_idx = project.current_layer
 		# Set the parent of layer to be the same as the layer below it.
 		layer.parent = project.layers[project.current_layer].parent
 
