@@ -6,22 +6,24 @@ const InteractionDistance = 20
 const DESELECT_WIDTH: float = 1
 
 var enabled := true
+var algorithm = DrawingAlgos.nn_shader
 
 var ignore_rotation_hover := false
 var modify_mode := NONE
 var generation_cache: Dictionary
-
 var rotation_renderer := ShaderImageEffect.new()
 
 func serialize() -> Dictionary:
 	var data := super.serialize()
 	data["enabled"] = enabled
+	data["algorithm"] = algorithm
 	return data
 
 
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
 	enabled = dict.get("enabled", true)
+	algorithm = dict.get("algorithm", true)
 
 
 ## Returns a new empty [BaseCel]
@@ -187,7 +189,7 @@ func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 		else:
 			rotation_renderer.generate_image(
 				square_image,
-				DrawingAlgos.nn_shader,
+				algorithm,
 				rotate_params, square_image.get_size(),
 				true,
 				false
