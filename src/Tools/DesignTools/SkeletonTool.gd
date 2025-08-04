@@ -247,6 +247,7 @@ func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
 
 
 func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
+	Global.current_project.undo_redo.create_action("Tween Skeleton")
 	var bones := get_selected_bones(popup, bone_index)
 	var project := Global.current_project
 	var props := bones[0].get_current_bone_cel().serialize().keys()
@@ -259,10 +260,14 @@ func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 			var bone_cel: BoneCel = project.frames[frame_idx].cels[bone.index]
 			var from_cel: BoneCel = project.frames[from_frame].cels[bone.index]
 			var old_update = bone_cel.should_update_children
-			bone_cel.should_update_children = false
+			project.undo_redo.add_do_property(bone_cel, "should_update_children", false)
+			project.undo_redo.add_undo_property(bone_cel, "should_update_children", false)
 			for property: String in props:
 				if typeof(bone_cel.get(property)) != TYPE_STRING:
-					bone_cel.set(
+					project.undo_redo.add_undo_method(
+						bone_cel.set.bind(property, bone_cel.get(property))
+					)
+					project.undo_redo.add_do_method(bone_cel.set.bind(
 						property,
 						Tween.interpolate_value(
 							from_cel.get(property),
@@ -273,10 +278,12 @@ func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 							Tween.EASE_IN
 						)
 					)
-			bone_cel.should_update_children = old_update
+				)
+			project.undo_redo.add_undo_property(bone_cel, "should_update_children", old_update)
+			project.undo_redo.add_do_property(bone_cel, "should_update_children", old_update)
 	copy_pose_from.get_popup().hide()
 	copy_pose_from.get_popup().clear(true)  # To save Memory
-	Global.canvas.queue_redraw()
+	commit_undo(true)
 
 
 func reset_bone_angle(bone_index: int):
