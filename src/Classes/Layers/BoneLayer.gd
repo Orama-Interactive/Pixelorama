@@ -6,24 +6,22 @@ const InteractionDistance = 20
 const DESELECT_WIDTH: float = 1
 
 var enabled := true
-var algorithm = DrawingAlgos.nn_shader
 
 var ignore_rotation_hover := false
 var modify_mode := NONE
 var generation_cache: Dictionary
 var rotation_renderer := ShaderImageEffect.new()
+var algorithm := DrawingAlgos.nn_shader
 
 func serialize() -> Dictionary:
 	var data := super.serialize()
 	data["enabled"] = enabled
-	data["algorithm"] = algorithm
 	return data
 
 
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
 	enabled = dict.get("enabled", enabled)
-	algorithm = dict.get("algorithm", algorithm)
 
 
 ## Returns a new empty [BaseCel]

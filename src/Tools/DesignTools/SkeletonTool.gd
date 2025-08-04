@@ -220,12 +220,13 @@ func quick_set_bones(bone_index: int):
 			bone_cel.reset.bind({"gizmo_origin": best_origin})
 		)
 		project.undo_redo.add_undo_method(
-			bone_cel.deserialize.bind(old_data, false)
+			bone_cel.deserialize.bind(old_data)
 		)
 	commit_undo(true)
 
 
 func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
+	Global.current_project.undo_redo.create_action("Copy pose")
 	var bones := get_selected_bones(popup, bone_index)
 	var project := Global.current_project
 	for bone: BoneLayer in bones:
@@ -234,10 +235,15 @@ func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
 				bones.append(child_bone)
 		var bone_cel := bone.get_current_bone_cel()
 		var from_cel: BoneCel = project.frames[from_frame].cels[bone.index]
-		bone_cel.deserialize(from_cel.serialize())
+		project.undo_redo.add_undo_method(
+			bone_cel.deserialize.bind(bone_cel.serialize())
+		)
+		project.undo_redo.add_do_method(
+			bone_cel.deserialize.bind(from_cel.serialize())
+		)
 	copy_pose_from.get_popup().hide()
 	copy_pose_from.get_popup().clear(true)  # To save Memory
-	Global.canvas.queue_redraw()
+	commit_undo(true)
 
 
 func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):

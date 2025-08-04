@@ -144,10 +144,10 @@ func _draw_gizmo(
 		draw_set_transform(Vector2.ZERO)
 	var font = Themes.get_font()
 	var line_size = bone_cel.gizmo_length
-	var fade_ratio = (line_size / font.get_string_size(bone.name).x) * (camera_zoom.x) / (line_size / font.get_string_size(bone.name).x)
+	var fade_ratio = (line_size * camera_zoom.x) / (font.get_string_size(bone.name).x)
 	if chaining_mode:
-		fade_ratio = max(2, fade_ratio)
-	if fade_ratio >= 2:  # Hide names if we have zoomed far
+		fade_ratio = max(0.3, fade_ratio)
+	if fade_ratio >= 0.4:  # Hide names if we have zoomed far
 		draw_set_transform(bone_cel.gizmo_origin + bone_start, rotation, Vector2.ONE / camera_zoom.x)
 		draw_string(
 			font, Vector2(3, -3), bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, bone_color
