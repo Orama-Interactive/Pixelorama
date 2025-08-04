@@ -124,8 +124,8 @@ func _draw_gizmo(
 		var p_start := Vector2.ZERO if edit_mode else parent_cel.start_point
 		var p_rot := parent_cel.bone_rotation if edit_mode else 0.0
 		var p_end := Vector2.ZERO if (not parent in canon_bones or chaining_mode) else parent_cel.end_point
-		var parent_start = bone.rel_to_origin(
-			parent.rel_to_global(p_start)
+		var parent_start = bone_cel.rel_to_origin(
+			parent_cel.rel_to_canvas(p_start)
 		) + (p_end).rotated(-p_rot)
 		draw_set_transform(bone_cel.gizmo_origin)
 		if not parent in canon_bones:
@@ -171,7 +171,7 @@ func _input(event: InputEvent) -> void:
 				var pos: Vector2i = Global.canvas.current_pixel.floor()
 				if Geometry2D.is_point_in_circle(
 					pos,
-					parent.rel_to_global(p_cel.start_point),
+					p_cel.rel_to_canvas(p_cel.start_point),
 					p_cel.START_RADIUS / Global.camera.zoom.x
 				):
 					project.selected_cels.clear()

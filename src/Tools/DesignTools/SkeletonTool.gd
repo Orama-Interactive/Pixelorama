@@ -10,7 +10,7 @@ var _include_children := true
 var _displace_offset := Vector2.ZERO
 var _prev_mouse_position := Vector2.INF
 var _distance_to_parent: float = 0
-var _chained_gizmo = null
+var _hover_layer_in_chain = null
 var current_selected_bone: BoneLayer  # needed for chain mode to work
 
 @onready var _pos_slider: ValueSliderV2 = $BoneProps/BonePositionSlider
@@ -108,7 +108,7 @@ func _on_position_changed(value: Vector2):
 		var bone_cel = current_selected_bone.get_current_bone_cel()
 		var old_update_children = bone_cel.should_update_children
 		bone_cel.should_update_children = _include_children
-		bone_cel.start_point = current_selected_bone.rel_to_origin(value).ceil()
+		bone_cel.start_point = bone_cel.rel_to_origin(value).ceil()
 		Global.canvas.skeleton.queue_redraw()
 		Global.canvas.queue_redraw()
 		bone_cel.should_update_children = old_update_children
@@ -343,10 +343,10 @@ func draw_start(_pos: Vector2i) -> void:
 			Vector2(mouse_point), Global.camera.zoom
 		)
 	if _prev_mouse_position == Vector2.INF:
-		_displace_offset = current_selected_bone.rel_to_start_point(mouse_point)
+		_displace_offset = bone_cel.rel_to_start_point(mouse_point)
 		_prev_mouse_position = mouse_point
 
-	## Check if bone is a parent of anything (skip if it is)
+	# Check if bone is a parent of anything (skip if it is)
 	Global.current_project.undo_redo.add_undo_method(
 		bone_cel.deserialize.bind(bone_cel.serialize(), true)
 	)
@@ -355,8 +355,8 @@ func draw_start(_pos: Vector2i) -> void:
 		var parent_b_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
 			parent_bone.index
 		]
-		var bone_start: Vector2i = current_selected_bone.rel_to_global(bone_cel.start_point)
-		var parent_start: Vector2i = parent_bone.rel_to_global(parent_b_cel.start_point)
+		var bone_start: Vector2i = bone_cel.rel_to_canvas(bone_cel.start_point)
+		var parent_start: Vector2i = parent_b_cel.rel_to_canvas(parent_b_cel.start_point)
 		_distance_to_parent = bone_start.distance_to(parent_start)
 		Global.current_project.undo_redo.add_undo_method(
 			parent_b_cel.deserialize.bind(parent_b_cel.serialize(), false)
@@ -370,47 +370,66 @@ func draw_move(_pos: Vector2i) -> void:
 	if not is_transforming:
 		return
 	# We need mouse_point to be a Vector2 in order for rotation to work properly.
-	var mouse_point: Vector2 = Global.canvas.current_pixel.floor()
+	var mouse_point: Vector2 = Global.canvas.current_pixel
 	var offset := mouse_point - _prev_mouse_position
-	if !current_selected_bone:
+	if !current_selected_bone or !current_selected_bone is BoneLayer:
 		return
-	var bone_cel = current_selected_bone.get_current_bone_cel()
-	if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
+	# This is thae cel that is the main focus of rotation
+	var bone_cel_in_focus = current_selected_bone.get_current_bone_cel()
+	if (
+		_allow_chaining
+		and BoneLayer.get_parent_bone(current_selected_bone)
+		and not Input.is_action_pressed(&"transform_move_selection_only", true)
+
+	):
 		# This section manages chaining. It changes the Global.canvas.skeleton.selected_bone
 		# to point the parent instead if chained
+		var bone_cels: Array[BoneCel] = []
+		var i = 0
+		var p = current_selected_bone
+		while p:
+			bone_cels.push_front(p.get_current_bone_cel())
+			p = BoneLayer.get_parent_bone(p)
+			i += 1
+			if i > 2:
+				break
 		match current_selected_bone.modify_mode:
 			BoneLayer.DISPLACE:
-				_chained_gizmo = current_selected_bone
+				calculate_fabrik(bone_cels, mouse_point)
+				Global.canvas.queue_redraw()
+				return
+				_hover_layer_in_chain = current_selected_bone
 				current_selected_bone = BoneLayer.get_parent_bone(current_selected_bone)
+				bone_cel_in_focus = current_selected_bone.get_current_bone_cel()
 				current_selected_bone.modify_mode = BoneLayer.ROTATE
 				Global.canvas.skeleton.selected_bone = current_selected_bone
-				_chained_gizmo.modify_mode = BoneLayer.NONE
+				_hover_layer_in_chain.modify_mode = BoneLayer.NONE
 	if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
-		var old_update_children = bone_cel.should_update_children
+		var old_update_children = bone_cel_in_focus.should_update_children
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
-			bone_cel.gizmo_origin += offset.rotated(-bone_cel.bone_rotation)
-			bone_cel.should_update_children = false
-		bone_cel.start_point = Vector2i(
-			(current_selected_bone.rel_to_origin(mouse_point) - _displace_offset)
+			bone_cel_in_focus.gizmo_origin += offset.rotated(-bone_cel_in_focus.bone_rotation)
+			bone_cel_in_focus.should_update_children = false
+		bone_cel_in_focus.start_point = Vector2i(
+			(bone_cel_in_focus.rel_to_origin(mouse_point) - _displace_offset)
 		)
-		bone_cel.should_update_children = old_update_children
+		bone_cel_in_focus.should_update_children = old_update_children
 	elif (
 		current_selected_bone.modify_mode == BoneLayer.ROTATE
 		or current_selected_bone.modify_mode == BoneLayer.EXTEND
 	):
-		var localized_mouse_norm: Vector2 = current_selected_bone.rel_to_start_point(mouse_point).normalized()
-		var localized_prev_mouse_norm: Vector2 = current_selected_bone.rel_to_start_point(
+		var localized_mouse_norm: Vector2 = bone_cel_in_focus.rel_to_start_point(mouse_point).normalized()
+		var localized_prev_mouse_norm: Vector2 = bone_cel_in_focus.rel_to_start_point(
 			_prev_mouse_position
 		).normalized()
 		var diff := localized_mouse_norm.angle_to(localized_prev_mouse_norm)
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
-			bone_cel.gizmo_rotate_origin -= diff
+			bone_cel_in_focus.gizmo_rotate_origin -= diff
 			if current_selected_bone.modify_mode == BoneLayer.EXTEND:
-				bone_cel.gizmo_length = current_selected_bone.rel_to_start_point(mouse_point).length()
+				bone_cel_in_focus.gizmo_length = bone_cel_in_focus.rel_to_start_point(mouse_point).length()
 		else:
-			bone_cel.bone_rotation -= diff
-			if _allow_chaining and _chained_gizmo:
-				_chained_gizmo.get_current_bone_cel().bone_rotation += diff
+			bone_cel_in_focus.bone_rotation -= diff
+			if _allow_chaining and _hover_layer_in_chain:
+				_hover_layer_in_chain.get_current_bone_cel().bone_rotation += diff
 	if _live_update:
 		if ProjectSettings.get_setting("rendering/driver/threads/thread_model") != 2:
 			Global.canvas.queue_redraw()
@@ -428,7 +447,7 @@ func draw_move(_pos: Vector2i) -> void:
 func draw_end(_pos: Vector2i) -> void:
 	_prev_mouse_position = Vector2.INF
 	_displace_offset = Vector2.ZERO
-	_chained_gizmo = null
+	_hover_layer_in_chain = null
 	if Global.canvas.skeleton:
 		# Another tool is already active
 		if not is_transforming:
@@ -522,7 +541,7 @@ func display_props():
 		%BoneLabel.text = tr("Name:") + " " + current_selected_bone.name
 		_rot_slider.set_value_no_signal_update_display(rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation))
 		_pos_slider.set_value_no_signal(
-			current_selected_bone.rel_to_global(
+			frame_cels[current_selected_bone.index].rel_to_canvas(
 				frame_cels[current_selected_bone.index].start_point
 			)
 		)
@@ -540,3 +559,77 @@ func merge_bone_data(frame_idx: int, bones: PackedInt32Array) -> Dictionary:
 			var cel_data = test_cel.serialize()
 			data[bones[i]] = cel_data
 	return data
+
+
+func calculate_fabrik(
+		bone_cels: Array[BoneCel], mouse_pos, max_itterations := 30, errorMargin: = 0.1
+	)->void:
+		var posList := PackedVector2Array()
+		var lenghts := PackedFloat32Array()
+		var totalLength := 0
+		for i in bone_cels.size() - 1:
+			var p_1 := bone_cels[i].rel_to_canvas(bone_cels[i].start_point)
+			var p_2 := bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+			posList.append(p_1)
+			if i == bone_cels.size() - 2:
+				posList.append(p_2)
+			var l = p_2.distance_to(p_1)
+			lenghts.append(l)
+			totalLength += l
+		var old_poslist := posList.duplicate()
+		var start_global = posList[0]
+		var end_global = posList[posList.size() - 1]
+		var distance: float = (mouse_pos - start_global).length()
+		# out of reach, no point of IK
+		if distance >= totalLength or posList.size() <= 2:
+			#return
+			var direction:Vector2 = (mouse_pos - start_global).normalized()
+			var old_dir: Vector2 = (end_global - start_global).normalized()
+			for i in bone_cels.size():
+				var cel := bone_cels[i]
+				cel.should_update_children = false
+				cel.start_point = cel.rel_to_origin(start_global)
+				cel.bone_rotation += old_dir.angle_to(direction)
+				cel.should_update_children = true
+				if i < lenghts.size():
+					start_global += (direction * lenghts[i])
+		else:
+			var errorDist:float = (mouse_pos - end_global).length()
+			var itterations: = 0
+			# limit the itteration count
+			while errorDist > errorMargin && itterations < max_itterations:
+				backward_reach(posList, mouse_pos, lenghts)  # start at endPos
+				forward_reach(posList, start_global, lenghts)  # start at pinPos
+				errorDist = (mouse_pos - posList[posList.size() -1]).length()
+				itterations += 1
+			for i in bone_cels.size():
+				var cel := bone_cels[i]
+				cel.should_update_children = false
+				#if i < bone_cels.size() - 1:
+					#var old_dir = old_poslist[i].direction_to(old_poslist[i + 1])
+					#var new_dir = posList[i].direction_to(posList[i + 1])
+					#print(rad_to_deg(old_dir.angle_to(new_dir)))
+					#cel.bone_rotation += old_dir.angle_to(new_dir)
+				cel.start_point = cel.rel_to_origin(posList[i])
+				cel.should_update_children = true
+
+
+func backward_reach(posList: PackedVector2Array, ending, lenghts)->void:
+	var last: = posList.size() - 1
+	posList[last] = ending
+	for i in last:
+		var p1: Vector2 = posList[last - i]
+		var p2: Vector2 = posList[last - i - 1]
+		var dir: Vector2 = (p2 - p1).normalized()
+		p2 = p1 + (dir * lenghts[i - 1])
+		posList[last -1 - i] = p2
+
+
+func forward_reach(posList: PackedVector2Array, starting, lenghts)-> void:
+	posList[0] = starting
+	for i in posList.size() - 1:
+		var p1:Vector2 = posList[i]
+		var p2:Vector2 = posList[i +1]
+		var dir:Vector2 = (p2 -p1).normalized()
+		p2 = p1 + (dir * lenghts[i])
+		posList[i +1] = p2

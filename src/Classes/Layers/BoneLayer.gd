@@ -58,7 +58,7 @@ func get_current_bone_cel() -> BoneCel:
 ## Calculates hover mode of current BoneLayer
 func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 	var bone_cel := get_current_bone_cel()
-	var local_mouse_pos = rel_to_origin(mouse_position)
+	var local_mouse_pos = bone_cel.rel_to_origin(mouse_position)
 	if (bone_cel.start_point).distance_to(local_mouse_pos) <= InteractionDistance / camera_zoom.x:
 		return DISPLACE
 	elif (
@@ -68,30 +68,13 @@ func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 		if !ignore_rotation_hover:
 			return EXTEND
 	elif _is_close_to_segment(
-		rel_to_start_point(mouse_position),
+		bone_cel.rel_to_start_point(mouse_position),
 		InteractionDistance / camera_zoom.x,
 		Vector2.ZERO, bone_cel.end_point
 	):
 		if !ignore_rotation_hover:
 			return ROTATE
 	return NONE
-
-
-## Converts to position relative to it's gizmo origin in current frame
-func rel_to_origin(pos: Vector2) -> Vector2:
-	var bone_cel := get_current_bone_cel()
-	return pos - bone_cel.gizmo_origin
-
-## Converts to position relative to it's start point in current frame
-func rel_to_start_point(pos: Vector2) -> Vector2:
-	var bone_cel := get_current_bone_cel()
-	return pos - bone_cel.gizmo_origin - bone_cel.start_point
-
-
-## Converts to position relative to canvas
-func rel_to_global(pos: Vector2) -> Vector2:
-	var bone_cel := get_current_bone_cel()
-	return pos + bone_cel.gizmo_origin
 
 
 static func _is_close_to_segment(

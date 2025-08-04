@@ -44,9 +44,28 @@ var associated_layer: BoneLayer   ## only used in update_children()
 var should_update_children := true
 
 # Properties determined using above variables
-var end_point: Vector2:  ## This is relative to the gizmo_origin
+var end_point: Vector2:  ## This is relative to the start_point
 	get():
 		return Vector2(gizmo_length, 0).rotated(gizmo_rotate_origin + bone_rotation)
+
+
+## Converts coordinates that are relative to canvas get converted to position relative to
+## gizmo_origin.
+func rel_to_origin(pos: Vector2) -> Vector2:
+	return pos - gizmo_origin
+
+
+## Converts coordinates that are relative to canvas get converted to position relative to
+## start point (the bigger circle).
+func rel_to_start_point(pos: Vector2) -> Vector2:
+	return pos - gizmo_origin - start_point
+
+
+## Converts coordinates that are relative to gizmo_origin get converted to position relative to
+## canvas.
+func rel_to_canvas(pos: Vector2, is_rel_to_start_point := false) -> Vector2:
+	var diff = start_point if is_rel_to_start_point else Vector2.ZERO
+	return pos + gizmo_origin + diff
 
 
 func _init(_opacity := 1.0, properties := {}) -> void:
@@ -126,12 +145,13 @@ func update_children(property: String, diff):
 			if property == "bone_rotation":
 				var parent: BoneLayer = BoneLayer.get_parent_bone(child_layer)
 				if parent:
-					var displacement := parent.rel_to_start_point(
-						child_layer.rel_to_global(child_cel.start_point)
+					var p_cel: BoneCel = project.frames[project.current_frame].cels[parent.index]
+					var displacement := p_cel.rel_to_start_point(
+						child_cel.rel_to_canvas(child_cel.start_point)
 					)
 					displacement = displacement.rotated(diff)
-					child_cel.start_point = child_layer.rel_to_origin(
-						BoneLayer.get_parent_bone(child_layer).rel_to_global(start_point) + displacement
+					child_cel.start_point = child_cel.rel_to_origin(
+						p_cel.rel_to_canvas(start_point) + displacement
 					)
 
 
