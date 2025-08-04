@@ -31,7 +31,7 @@ func _ready() -> void:
 	quick_set_bones_menu.get_popup().index_pressed.connect(quick_set_bones)
 	rotation_reset_menu.get_popup().index_pressed.connect(reset_bone_angle)
 	position_reset_menu.get_popup().index_pressed.connect(reset_bone_position)
-	super._ready()
+	super()
 
 
 func _on_warn_pressed() -> void:
@@ -93,7 +93,6 @@ func _on_include_children_checkbox_toggled(toggled_on: bool) -> void:
 
 
 func _on_rotation_changed(value: float):
-	# TODO: add undo/redo later
 	if current_selected_bone:
 		var bone_cel = current_selected_bone.get_current_bone_cel()
 		var old_update_children = bone_cel.should_update_children
@@ -105,7 +104,6 @@ func _on_rotation_changed(value: float):
 
 
 func _on_position_changed(value: Vector2):
-	# TODO: add undo/redo later
 	if current_selected_bone:
 		var bone_cel = current_selected_bone.get_current_bone_cel()
 		var old_update_children = bone_cel.should_update_children
@@ -207,12 +205,14 @@ func _on_project_data_changed(_project):
 func quick_set_bones(bone_index: int):
 	Global.current_project.undo_redo.create_action("Quick set bones")
 	var bones = get_selected_bones(quick_set_bones_menu.get_popup(), bone_index)
+	var looper := bones.duplicate()
 	var project := Global.current_project
 	var frame := project.frames[project.current_frame]
-	for bone: BoneLayer in bones:
-		if _include_children or bone_index == 0:
-			for child_bone in bone.get_child_bones(true):
-				bones.append(child_bone)
+	for bone: BoneLayer in looper:
+		if (_include_children or bone_index == 0) and bone in bones:
+			var child_bones = bone.get_child_bones(true)
+			child_bones.reverse()
+			looper.append_array(child_bones)
 		var bone_cel := bone.get_current_bone_cel()
 		var old_data := bone_cel.serialize()
 		var best_origin := Vector2(bone.get_best_origin(frame))
@@ -228,11 +228,13 @@ func quick_set_bones(bone_index: int):
 func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
 	Global.current_project.undo_redo.create_action("Copy pose")
 	var bones := get_selected_bones(popup, bone_index)
+	var looper := bones.duplicate()
 	var project := Global.current_project
-	for bone: BoneLayer in bones:
-		if _include_children or bone_index == 0:
-			for child_bone in bone.get_child_bones(true):
-				bones.append(child_bone)
+	for bone: BoneLayer in looper:
+		if (_include_children or bone_index == 0) and bone in bones:
+			var child_bones = bone.get_child_bones(true)
+			child_bones.reverse()
+			looper.append_array(child_bones)
 		var bone_cel := bone.get_current_bone_cel()
 		var from_cel: BoneCel = project.frames[from_frame].cels[bone.index]
 		project.undo_redo.add_undo_method(
@@ -249,13 +251,15 @@ func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
 func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 	Global.current_project.undo_redo.create_action("Tween Skeleton")
 	var bones := get_selected_bones(popup, bone_index)
+	var looper := bones.duplicate()
 	var project := Global.current_project
 	var props := bones[0].get_current_bone_cel().serialize().keys()
 	for frame_idx in range(from_frame + 1, project.current_frame):
-		for bone: BoneLayer in bones:
-			if _include_children or bone_index == 0:
-				for child_bone in bone.get_child_bones(true):
-					bones.append(child_bone)
+		for bone: BoneLayer in looper:
+			if (_include_children or bone_index == 0) and bone in bones:
+				var child_bones = bone.get_child_bones(true)
+				child_bones.reverse()
+				looper.append_array(child_bones)
 			var to_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
 			var bone_cel: BoneCel = project.frames[frame_idx].cels[bone.index]
 			var from_cel: BoneCel = project.frames[from_frame].cels[bone.index]
@@ -287,35 +291,36 @@ func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 
 
 func reset_bone_angle(bone_index: int):
+	Global.current_project.undo_redo.create_action("Reset Rotation")
 	var bones := get_selected_bones(rotation_reset_menu.get_popup(), bone_index)
+	var looper := bones.duplicate()
 	var project := Global.current_project
-	for bone: BoneLayer in bones:
-		if _include_children or bone_index == 0:
-			for child_bone in bone.get_child_bones(true):
-				bones.append(child_bone)
+	for bone: BoneLayer in looper:
+		if (_include_children or bone_index == 0) and bone in bones:
+			var child_bones = bone.get_child_bones(true)
+			child_bones.reverse()
+			looper.append_array(child_bones)
 		var bone_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
 		var old_update = bone_cel.should_update_children
-		bone_cel.should_update_children = false
-		bone_cel.bone_rotation = 0
-		bone_cel.should_update_children = true
-	Global.canvas.skeleton.queue_redraw()
-	Global.canvas.queue_redraw()
+		project.undo_redo.add_undo_property(bone_cel, "bone_rotation", bone_cel.bone_rotation)
+		project.undo_redo.add_do_property(bone_cel, "bone_rotation", 0)
+	commit_undo(true)
 
 
 func reset_bone_position(bone_index: int):
+	Global.current_project.undo_redo.create_action("Reset Position")
 	var bones := get_selected_bones(position_reset_menu.get_popup(), bone_index)
+	var looper := bones.duplicate()
 	var project := Global.current_project
-	for bone: BoneLayer in bones:
-		if _include_children or bone_index == 0:
-			for child_bone in bone.get_child_bones(true):
-				bones.append(child_bone)
+	for bone: BoneLayer in looper:
+		if (_include_children or bone_index == 0) and bone in bones:
+			var child_bones = bone.get_child_bones(true)
+			child_bones.reverse()
+			looper.append_array(child_bones)
 		var bone_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
-		var old_update = bone_cel.should_update_children
-		bone_cel.should_update_children = false
-		bone_cel.start_point = Vector2.ZERO
-		bone_cel.should_update_children = true
-	Global.canvas.skeleton.queue_redraw()
-	Global.canvas.queue_redraw()
+		project.undo_redo.add_undo_property(bone_cel, "start_point", bone_cel.start_point)
+		project.undo_redo.add_do_property(bone_cel, "start_point", Vector2.ZERO)
+	commit_undo(true)
 
 
 # Tool draw actions
