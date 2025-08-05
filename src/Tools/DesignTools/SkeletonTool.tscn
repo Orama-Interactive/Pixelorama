@@ -134,6 +134,7 @@ prefix = "Iterations:"
 [node name="IKErrorMargin" parent="ChainingOptions/IKOptions" index="4" instance=ExtResource("4_m4bea")]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Inverse Kinematic Mode"
 max_value = 10.0
 value = 1.0
 allow_greater = true

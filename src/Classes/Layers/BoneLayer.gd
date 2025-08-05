@@ -51,7 +51,7 @@ func get_best_origin(frame: Frame) -> Vector2i:
 	return used_rect.position + (used_rect.size / 2)
 
 
-func get_current_bone_cel() -> BoneCel:
+func get_current_bone_cel(frame_idx := Global.current_project.current_frame) -> BoneCel:
 	return Global.current_project.frames[Global.current_project.current_frame].cels[index]
 
 

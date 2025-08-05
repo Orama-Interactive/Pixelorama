@@ -15,8 +15,8 @@ var _ik_error_margin: float = 0.1
 var _include_children := true
 var _displace_offset := Vector2.ZERO
 var _prev_mouse_position := Vector2.INF
-var _distance_to_parent: float = 0
 var _hover_layer_in_chain = null
+var _undo_target_frames := PackedInt32Array()
 var current_selected_bone: BoneLayer  # needed for chain mode to work
 
 @onready var _pos_slider: ValueSliderV2 = $BoneProps/BonePositionSlider
@@ -377,6 +377,7 @@ func reset_bone_position(bone_index: int):
 
 # Tool draw actions
 func draw_start(_pos: Vector2i) -> void:
+	_undo_target_frames.clear()
 	Global.current_project.undo_redo.create_action("Move bone")
 	# If this tool is on both sides then only allow one at a time
 	if Global.canvas.skeleton.transformation_active:
@@ -398,30 +399,33 @@ func draw_start(_pos: Vector2i) -> void:
 		_displace_offset = bone_cel.rel_to_start_point(mouse_point)
 		_prev_mouse_position = mouse_point
 
-	Global.current_project.undo_redo.add_undo_method(
-		bone_cel.deserialize.bind(bone_cel.serialize(), true)
-	)
-	# Check if bone is a parent of anything (skip if it is)
-	if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
-		if _use_ik:
-			for cel in get_ik_cels(current_selected_bone):
-				Global.current_project.undo_redo.add_undo_method(
-					cel.deserialize.bind(cel.serialize(), false)
-				)
-		var parent_bone = BoneLayer.get_parent_bone(current_selected_bone)
-		var parent_b_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
-			parent_bone.index
-		]
-		var bone_start: Vector2i = bone_cel.rel_to_canvas(bone_cel.start_point)
-		var parent_start: Vector2i = parent_b_cel.rel_to_canvas(parent_b_cel.start_point)
-		_distance_to_parent = bone_start.distance_to(parent_start)
-		Global.current_project.undo_redo.add_undo_method(
-			parent_b_cel.deserialize.bind(parent_b_cel.serialize(), false)
-		)
 	display_props()
 
 
+func add_undo_draw_data():
+	if !Global.current_project.current_frame in _undo_target_frames:
+		var current_cel = current_selected_bone.get_current_bone_cel()
+		_undo_target_frames.append(Global.current_project.current_frame)
+		Global.current_project.undo_redo.add_undo_method(
+			current_cel.deserialize.bind(current_cel.serialize(), true)
+		)
+		# Check if bone is a parent of anything (skip if it is)
+		if _allow_chaining and BoneLayer.get_parent_bone(current_selected_bone):
+			if _use_ik:
+				for cel in get_ik_cels(current_selected_bone):
+					Global.current_project.undo_redo.add_undo_method(
+						cel.deserialize.bind(cel.serialize(), false)
+					)
+			var parent_bone = BoneLayer.get_parent_bone(current_selected_bone)
+			var parent_b_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
+				parent_bone.index
+			]
+			Global.current_project.undo_redo.add_undo_method(
+				parent_b_cel.deserialize.bind(parent_b_cel.serialize(), false)
+			)
+
 func draw_move(_pos: Vector2i) -> void:
+	add_undo_draw_data()  # This is done so we can animate while playing
 	# Another tool is already active
 	if not is_transforming:
 		return
@@ -519,25 +523,29 @@ func draw_end(_pos: Vector2i) -> void:
 		is_transforming = false
 		Global.canvas.skeleton.transformation_active = false
 		if current_selected_bone:
-			var bone_cel = current_selected_bone.get_current_bone_cel()
-			Global.current_project.undo_redo.add_do_method(
-				bone_cel.deserialize.bind(bone_cel.serialize(), true)
-			)
-			if current_selected_bone.modify_mode != BoneLayer.NONE:
-				Global.canvas.queue_redraw()
-				current_selected_bone.modify_mode = BoneLayer.NONE
-			if _allow_chaining:
-				if _use_ik:
-					for cel in get_ik_cels(current_selected_bone):
-						Global.current_project.undo_redo.add_do_method(
-							cel.deserialize.bind(cel.serialize(), true)
-						)
-				else:
-					for child in current_selected_bone.get_child_bones(false):
-						var child_cel = child.get_current_bone_cel()
-						Global.current_project.undo_redo.add_do_method(
-							child_cel.deserialize.bind(child_cel.serialize(), true)
-						)
+			var project := Global.current_project
+			for frame_idx in _undo_target_frames:
+				var bone_cel = current_selected_bone.get_current_bone_cel(frame_idx)
+				if not bone_cel is BoneCel:
+					continue
+				Global.current_project.undo_redo.add_do_method(
+					bone_cel.deserialize.bind(bone_cel.serialize(), true)
+				)
+				if current_selected_bone.modify_mode != BoneLayer.NONE:
+					Global.canvas.queue_redraw()
+					current_selected_bone.modify_mode = BoneLayer.NONE
+				if _allow_chaining:
+					if _use_ik:
+						for cel in get_ik_cels(current_selected_bone, frame_idx):
+							Global.current_project.undo_redo.add_do_method(
+								cel.deserialize.bind(cel.serialize(), true)
+							)
+					else:
+						for child in current_selected_bone.get_child_bones(false):
+							var child_cel = child.get_current_bone_cel(frame_idx)
+							Global.current_project.undo_redo.add_do_method(
+								child_cel.deserialize.bind(child_cel.serialize(), true)
+							)
 	commit_undo()
 	Global.current_project.has_changed = true
 	display_props()
@@ -776,7 +784,9 @@ class CCDIK:
 		return cel.rel_to_canvas(cel.start_point)
 
 
-func get_ik_cels(start_layer: BoneLayer) -> Array[BoneCel]:
+func get_ik_cels(
+	start_layer: BoneLayer, frame_idx := Global.current_project.current_frame
+) -> Array[BoneCel]:
 	var bone_cels: Array[BoneCel] = []
 	var i = 0
 	var p = start_layer

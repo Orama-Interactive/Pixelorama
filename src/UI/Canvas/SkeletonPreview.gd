@@ -2,7 +2,7 @@ extends Node2D
 
 ## A Dictionary of bone names as keys and their "Gizmo" as values.
 var selected_bone: BoneLayer
-var chaining_mode := false
+var chaining_mode := true
 var transformation_active := false
 
 @warning_ignore("unused_signal")
