@@ -122,7 +122,6 @@ func _on_inverse_kinematics_toggled(toggled_on: bool) -> void:
 
 
 func _on_algorithm_selected(index: int) -> void:
-	print(index)
 	_ik_protocol = index
 	update_config()
 	save_config()
@@ -444,22 +443,23 @@ func draw_move(_pos: Vector2i) -> void:
 		match current_selected_bone.modify_mode:
 			BoneLayer.DISPLACE:
 				if _use_ik:
+					var update_canvas := true
 					match _ik_protocol:
 						IKAlgorithms.FABRIK:
-							FABRIK.calculate(
+							update_canvas = FABRIK.calculate(
 								get_ik_cels(current_selected_bone),
 								mouse_point,
 								_max_ik_itterations,
 								_ik_error_margin
 							)
 						IKAlgorithms.CCDIK:
-							CCDIK.calculate(
+							update_canvas = CCDIK.calculate(
 								get_ik_cels(current_selected_bone),
 								mouse_point,
 								_max_ik_itterations,
 								_ik_error_margin
 							)
-					if _live_update:
+					if _live_update and update_canvas:
 						Global.canvas.queue_redraw()
 					else:
 						Global.canvas.skeleton.queue_redraw()
@@ -637,21 +637,23 @@ func merge_bone_data(frame_idx: int, bones: PackedInt32Array) -> Dictionary:
 class FABRIK:
 	# Initial Implementation by:
 	# https://github.com/nezvers/Godot_Public_Examples/blob/master/Nature_code/Kinematics/FABRIK.gd
+	# see https://www.youtube.com/watch?v=Ihp6tOCYHug for an intuitive explanation.
 	static func calculate(
 			bone_cels: Array[BoneCel], target_pos: Vector2, max_itterations: int, errorMargin: float
-		)->void:
+		) -> bool:
 			var posList := PackedVector2Array()
 			var lenghts := PackedFloat32Array()
 			var totalLength := 0
 			for i in bone_cels.size() - 1:
-				var p_1 := bone_cels[i].rel_to_canvas(bone_cels[i].start_point)
-				var p_2 := bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+				var p_1 := _get_global_start(bone_cels[i])
+				var p_2 := _get_global_start(bone_cels[i + 1])
 				posList.append(p_1)
 				if i == bone_cels.size() - 2:
 					posList.append(p_2)
 				var l = p_2.distance_to(p_1)
 				lenghts.append(l)
 				totalLength += l
+			var old_points = posList.duplicate()
 			var start_global = posList[0]
 			var end_global = posList[posList.size() - 1]
 			var distance: float = (target_pos - start_global).length()
@@ -661,12 +663,14 @@ class FABRIK:
 					var cel := bone_cels[i]
 					if i < bone_cels.size() - 1:
 						# find how much to rotate to bring next start point to mach the one in poslist
-						var cel_start = cel.rel_to_canvas(cel.start_point)
-						var look_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+						var cel_start = _get_global_start(cel)
+						var look_old = _get_global_start(bone_cels[i + 1])
 						var look_new = target_pos  # what we should look at
 						# Rotate to look at the next point
 						var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
-						cel.bone_rotation += angle_diff
+						if !is_equal_approx(angle_diff, 0.0):
+							cel.bone_rotation += angle_diff
+				return true
 			else:
 				var errorDist:float = (target_pos - end_global).length()
 				var itterations: = 0
@@ -676,46 +680,55 @@ class FABRIK:
 					_forward_reach(posList, start_global, lenghts)  # start at pinPos
 					errorDist = (target_pos - posList[posList.size() -1]).length()
 					itterations += 1
+				if old_points == posList:
+					return false
 				for i in bone_cels.size():
 					var cel := bone_cels[i]
 					if i < bone_cels.size() - 1:
 						# find how much to rotate to bring next start point to mach the one in poslist
-						var cel_start = cel.rel_to_canvas(cel.start_point)
-						var next_start_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)  # current situation
+						var cel_start = _get_global_start(cel)
+						var next_start_old = _get_global_start(bone_cels[i + 1])  # current situation
 						var next_start_new = posList[i + 1]  # what should have been
 						# Rotate to look at the next point
 						var angle_diff = cel_start.angle_to_point(next_start_new) - cel_start.angle_to_point(next_start_old)
-						cel.bone_rotation += angle_diff
+						if !is_equal_approx(angle_diff, 0.0):
+							cel.bone_rotation += angle_diff
+				return true
 
 	static func _backward_reach(posList: PackedVector2Array, ending: Vector2, lenghts)->void:
 		var last: = posList.size() - 1
-		posList[last] = ending
+		posList[last] = ending  # Place the tail of last vector at ending
 		for i in last:
-			var p1: Vector2 = posList[last - i]
-			var p2: Vector2 = posList[last - i - 1]
-			var dir: Vector2 = (p2 - p1).normalized()
-			p2 = p1 + (dir * lenghts[i - 1])
-			posList[last -1 - i] = p2
+			var head_of_last: Vector2 = posList[last - i]
+			var tail_of_next: Vector2 = posList[last - i - 1]
+			var dir: Vector2 = (tail_of_next - head_of_last).normalized()
+			tail_of_next = head_of_last + (dir * lenghts[i - 1])
+			posList[last - 1 - i] = tail_of_next
 
 
 	static func _forward_reach(posList: PackedVector2Array, starting: Vector2, lenghts)-> void:
-		posList[0] = starting
+		posList[0] = starting  # Place the tail of first vector at starting
 		for i in posList.size() - 1:
-			var p1:Vector2 = posList[i]
-			var p2:Vector2 = posList[i +1]
-			var dir:Vector2 = (p2 -p1).normalized()
-			p2 = p1 + (dir * lenghts[i])
-			posList[i +1] = p2
+			var head_of_last: Vector2 = posList[i]
+			var tail_of_next: Vector2 = posList[i + 1]
+			var dir: Vector2 = (tail_of_next - head_of_last).normalized()
+			tail_of_next = head_of_last + (dir * lenghts[i])
+			posList[i + 1] = tail_of_next
+
+	static func _get_global_start(cel: BaseCel) -> Vector2:
+		return cel.rel_to_canvas(cel.start_point)
 
 class CCDIK:
 	# Inspired from:
 	# https://github.com/chFleschutz/inverse-kinematics-algorithms/blob/main/src/CCD.h
-	static func calculate(bone_cels: Array[BoneCel], target_pos: Vector2, max_iterations: int, errorMargin: float) -> void:
+	static func calculate(
+		bone_cels: Array[BoneCel], target_pos: Vector2, max_iterations: int, errorMargin: float
+	) -> bool:
 		var lenghts := PackedFloat32Array()
 		var totalLength := 0
 		for i in bone_cels.size() - 1:
-			var p_1 := bone_cels[i].rel_to_canvas(bone_cels[i].start_point)
-			var p_2 := bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+			var p_1 := _get_global_start(bone_cels[i])
+			var p_2 := _get_global_start(bone_cels[i + 1])
 			var l = p_2.distance_to(p_1)
 			lenghts.append(l)
 			totalLength += l
@@ -727,13 +740,14 @@ class CCDIK:
 				var cel := bone_cels[i]
 				if i < bone_cels.size() - 1:
 					# find how much to rotate to bring next start point to mach the one in poslist
-					var cel_start = cel.rel_to_canvas(cel.start_point)
-					var look_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+					var cel_start = _get_global_start(cel)
+					var look_old = _get_global_start(bone_cels[i + 1])
 					var look_new = target_pos  # what we should look at
 					# Rotate to look at the next point
 					var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
-					cel.bone_rotation += angle_diff
-			return
+					if !is_equal_approx(angle_diff, 0.0):
+						cel.bone_rotation += angle_diff
+			return true
 		for _i in range(max_iterations):
 			# Adjust rotation of each bone in the skeleton
 			for i in range(bone_cels.size() - 2, -1, -1):
@@ -749,12 +763,14 @@ class CCDIK:
 				var dot = base_pivot_vec.dot(base_target_vec)
 				var det = base_pivot_vec.x * base_target_vec.y - base_pivot_vec.y * base_target_vec.x
 				var angle_delta = atan2(det, dot)
-				bone_cels[i].bone_rotation += angle_delta
+				if !is_equal_approx(angle_delta, 0.0):
+					bone_cels[i].bone_rotation += angle_delta
 
 			# Check for convergence
 			var last_cel = bone_cels[bone_cels.size() - 1]
 			if (target_pos - last_cel.rel_to_canvas(last_cel.start_point)).length() < errorMargin:
-				return
+				return true
+		return true
 
 	static func _get_global_start(cel: BaseCel) -> Vector2:
 		return cel.rel_to_canvas(cel.start_point)
