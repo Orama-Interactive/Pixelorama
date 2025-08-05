@@ -29,6 +29,7 @@ var start_point := Vector2.ZERO:  ## This is relative to the gizmo_origin
 var bone_rotation: float = 0:  ## This is relative to the gizmo_rotate_origin (Radians)
 	set(value):
 		if value != bone_rotation:
+			value = snappedf(wrapf(value, -PI, PI), 0.0001)
 			var diff = value - bone_rotation
 			bone_rotation = value
 			if should_update_children:
@@ -75,12 +76,17 @@ func _init(_opacity := 1.0, properties := {}) -> void:
 		deserialize(properties)
 
 
-func serialize() -> Dictionary:
+func serialize(vector_to_string := true) -> Dictionary:
 	# Make sure the name/types are the same as the variable names/types
 	var data := super.serialize()
-	data["gizmo_origin"] = var_to_str(gizmo_origin)
-	data["gizmo_rotate_origin"] = var_to_str(gizmo_rotate_origin)
-	data["start_point"] = var_to_str(start_point)
+	if vector_to_string:
+		data["gizmo_origin"] = var_to_str(gizmo_origin)
+		data["gizmo_rotate_origin"] = var_to_str(gizmo_rotate_origin)
+		data["start_point"] = var_to_str(start_point)
+	else:
+		data["gizmo_origin"] = gizmo_origin
+		data["gizmo_rotate_origin"] = gizmo_rotate_origin
+		data["start_point"] = start_point
 	data["bone_rotation"] = bone_rotation
 	data["gizmo_length"] = gizmo_length
 	return data

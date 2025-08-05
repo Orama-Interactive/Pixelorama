@@ -84,7 +84,8 @@ func _draw_gizmo(
 	bone.ignore_rotation_hover = chaining_mode
 	if bone.get_child_bones(false).is_empty():
 		bone.ignore_rotation_hover = false
-	if !bone.ignore_rotation_hover:
+	#if !bone.ignore_rotation_hover:
+	if true:
 		net_width = width + (width / 2 if (hover_mode == BoneLayer.ROTATE) else 0)
 		draw_set_transform(bone_cel.gizmo_origin)
 		# Draw the line joining the position and rotation circles
