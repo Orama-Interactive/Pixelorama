@@ -3,7 +3,7 @@ extends GroupCel
 ## A class for the properties of cels in BoneLayers.
 ## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
-const MIN_LENGTH: float = 10
+const MIN_LENGTH: float = 5
 const START_RADIUS: float = 6
 const END_RADIUS: float = 4
 const WIDTH: float = 2
@@ -11,32 +11,32 @@ const WIDTH: float = 2
 # Variables set using serialize()
 var gizmo_origin := Vector2.ZERO:
 	set(value):
-		if value != gizmo_origin:
+		if not gizmo_origin.is_equal_approx(value):
 			var diff = value - gizmo_origin
 			gizmo_origin = value
 var gizmo_rotate_origin: float = 0:  ## Unit is Radians
 	set(value):
-		if value != gizmo_rotate_origin:
+		if not is_equal_approx(value, gizmo_rotate_origin):
 			var diff = value - gizmo_rotate_origin
 			gizmo_rotate_origin = value
 var start_point := Vector2.ZERO:  ## This is relative to the gizmo_origin
 	set(value):
-		if value != start_point:
+		if not start_point.is_equal_approx(value):
 			var diff = value - start_point
 			start_point = value
 			if should_update_children:
 				update_children("start_point", diff)
 var bone_rotation: float = 0:  ## This is relative to the gizmo_rotate_origin (Radians)
 	set(value):
-		if value != bone_rotation:
-			value = snappedf(wrapf(value, -PI, PI), 0.0001)
+		if not is_equal_approx(value, bone_rotation):
+			value = wrapf(value, -PI, PI)
 			var diff = value - bone_rotation
 			bone_rotation = value
 			if should_update_children:
 				update_children("bone_rotation", diff)
-var gizmo_length: int = MIN_LENGTH:
+var gizmo_length: int = MIN_LENGTH + 5:
 	set(value):
-		if gizmo_length != value and value > int(MIN_LENGTH):
+		if not is_equal_approx(value, gizmo_length) and value > int(MIN_LENGTH):
 			if value < int(MIN_LENGTH):
 				value = int(MIN_LENGTH)
 			gizmo_length = value

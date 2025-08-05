@@ -84,8 +84,7 @@ func _draw_gizmo(
 	bone.ignore_rotation_hover = chaining_mode
 	if bone.get_child_bones(false).is_empty():
 		bone.ignore_rotation_hover = false
-	#if !bone.ignore_rotation_hover:
-	if true:
+	if !bone.ignore_rotation_hover:
 		net_width = width + (width / 2 if (hover_mode == BoneLayer.ROTATE) else 0)
 		draw_set_transform(bone_cel.gizmo_origin)
 		# Draw the line joining the position and rotation circles
@@ -148,7 +147,7 @@ func _draw_gizmo(
 	var fade_ratio = (line_size * camera_zoom.x) / (font.get_string_size(bone.name).x)
 	if chaining_mode:
 		fade_ratio = max(0.3, fade_ratio)
-	if fade_ratio >= 0.4:  # Hide names if we have zoomed far
+	if fade_ratio >= 0.4 and !transformation_active:  # Hide names if we have zoomed far
 		draw_set_transform(bone_cel.gizmo_origin + bone_start, rotation, Vector2.ONE / camera_zoom.x)
 		draw_string(
 			font, Vector2(3, -3), bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, bone_color
@@ -169,7 +168,7 @@ func _input(event: InputEvent) -> void:
 			var parent := BoneLayer.get_parent_bone(bone_layer)
 			if parent:  # We wish to switch to parent
 				var p_cel = parent.get_current_bone_cel()
-				var pos: Vector2i = Global.canvas.current_pixel.floor()
+				var pos: Vector2i = Global.canvas.current_pixel
 				if Geometry2D.is_point_in_circle(
 					pos,
 					p_cel.rel_to_canvas(p_cel.start_point),
@@ -181,7 +180,7 @@ func _input(event: InputEvent) -> void:
 
 ## This manages the hovering mechanism of gizmo
 func get_selected_bone() -> void:
-	var pos: Vector2i = Global.canvas.current_pixel.floor()
+	var pos: Vector2i = Global.canvas.current_pixel
 	var project: Project = Global.current_project
 	var bone_layer = project.layers[project.current_layer]
 	if not bone_layer is BoneLayer:

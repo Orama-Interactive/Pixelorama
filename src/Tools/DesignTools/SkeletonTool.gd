@@ -8,6 +8,8 @@ var _live_update := false
 var _allow_chaining := false
 var _use_ik := true
 var _chain_length: int = 2
+var _max_ik_itterations: int = 20
+var _ik_error_margin: float = 0.1
 var _include_children := true
 var _displace_offset := Vector2.ZERO
 var _prev_mouse_position := Vector2.INF
@@ -49,6 +51,9 @@ func get_config() -> Dictionary:
 	config["live_update"] = _live_update
 	config["allow_chaining"] = _allow_chaining
 	config["use_ik"] = _use_ik
+	config["chain_length"] = _chain_length
+	config["max_ik_itterations"] = _max_ik_itterations
+	config["ik_error_margin"] = _ik_error_margin
 	config["include_children"] = _include_children
 	return config
 
@@ -58,6 +63,9 @@ func set_config(config: Dictionary) -> void:
 	_live_update = config.get("live_update", _live_update)
 	_allow_chaining = config.get("allow_chaining", _allow_chaining)
 	_use_ik = config.get("use_ik", _use_ik)
+	_chain_length = config.get("chain_length", _chain_length)
+	_max_ik_itterations = config.get("max_ik_itterations", _max_ik_itterations)
+	_ik_error_margin = config.get("ik_error_margin", _ik_error_margin)
 	_include_children = config.get("include_children", _include_children)
 
 
@@ -66,8 +74,12 @@ func update_config() -> void:
 	%LiveUpdateCheckbox.set_pressed_no_signal(_live_update)
 	%AllowChaining.set_pressed_no_signal(_allow_chaining)
 	%InverseKinematics.set_pressed_no_signal(_use_ik)
+	%ChainSize.set_value_no_signal_update_display(_chain_length)
+	%IKIterations.set_value_no_signal_update_display(_max_ik_itterations)
+	%IKErrorMargin.set_value_no_signal_update_display(_ik_error_margin)
 	%IncludeChildrenCheckbox.set_pressed_no_signal(_include_children)
 	%ChainingOptions.visible = _allow_chaining
+	%IKOptions.visible = _use_ik
 	Global.canvas.skeleton.chaining_mode = _allow_chaining
 	Global.canvas.skeleton.sync_ui.emit(tool_slot.button, get_config())
 	Global.canvas.skeleton.queue_redraw()
@@ -100,6 +112,24 @@ func _on_inverse_kinematics_toggled(toggled_on: bool) -> void:
 
 func _on_include_children_checkbox_toggled(toggled_on: bool) -> void:
 	_include_children = toggled_on
+	update_config()
+	save_config()
+
+
+func _on_chain_size_value_changed(value: float) -> void:
+	_chain_length = value
+	update_config()
+	save_config()
+
+
+func _on_ik_iterations_value_changed(value: float) -> void:
+	_max_ik_itterations = value
+	update_config()
+	save_config()
+
+
+func _on_ik_error_margin_value_changed(value: float) -> void:
+	_ik_error_margin = value
 	update_config()
 	save_config()
 
@@ -403,7 +433,12 @@ func draw_move(_pos: Vector2i) -> void:
 		match current_selected_bone.modify_mode:
 			BoneLayer.DISPLACE:
 				if _use_ik:
-					calculate_fabrik(get_ik_cels(current_selected_bone), mouse_point)
+					calculate_fabrik(
+						get_ik_cels(current_selected_bone),
+						mouse_point,
+						_max_ik_itterations,
+						_ik_error_margin
+					)
 					if _live_update:
 						Global.canvas.queue_redraw()
 					else:
@@ -548,6 +583,10 @@ func get_selected_bones(popup: PopupMenu, bone_index: int) -> Array[BoneLayer]:
 
 
 func display_props():
+	if not _pos_slider.max_value.is_equal_approx(Global.current_project.size):
+		# temporarily set it to null to avoid unnecessary update
+		current_selected_bone = null
+		_pos_slider.max_value = Global.current_project.size
 	current_selected_bone = Global.canvas.skeleton.selected_bone
 	if current_selected_bone is BoneLayer:
 		var frame_cels = Global.current_project.frames[Global.current_project.current_frame].cels
@@ -559,7 +598,7 @@ func display_props():
 				frame_cels[current_selected_bone.index].start_point
 			)
 		)
-		_pos_slider.max_value = Global.current_project.size
+		return
 	else:
 		%BoneProps.visible = false
 
@@ -576,7 +615,7 @@ func merge_bone_data(frame_idx: int, bones: PackedInt32Array) -> Dictionary:
 
 
 func calculate_fabrik(
-		bone_cels: Array[BoneCel], mouse_pos, max_itterations := 30, errorMargin: = 0.1
+		bone_cels: Array[BoneCel], mouse_pos: Vector2, max_itterations: int, errorMargin: float
 	)->void:
 		var posList := PackedVector2Array()
 		var lenghts := PackedFloat32Array()
@@ -594,6 +633,7 @@ func calculate_fabrik(
 		var start_global = posList[0]
 		var end_global = posList[posList.size() - 1]
 		var distance: float = (mouse_pos - start_global).length()
+		var last_rotation := bone_cels[bone_cels.size() - 1].bone_rotation
 		# out of reach, no point of IK
 		if distance >= totalLength or posList.size() <= 2:
 			var direction:Vector2 = (mouse_pos - start_global).normalized()

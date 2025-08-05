@@ -81,6 +81,7 @@ text = "Allow Chaining"
 
 [node name="ChainingOptions" type="VBoxContainer" parent="." index="4"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ChainingOptions" index="0"]
@@ -93,6 +94,35 @@ layout_mode = 2
 [node name="Label4" type="Label" parent="ChainingOptions/HBoxContainer" index="1"]
 layout_mode = 2
 text = "Inverse Kinematics"
+
+[node name="IKOptions" type="VBoxContainer" parent="ChainingOptions" index="1"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="ChainSize" parent="ChainingOptions/IKOptions" index="0" instance=ExtResource("4_m4bea")]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 2.0
+allow_greater = true
+prefix = "Mas Chain Size:"
+
+[node name="IKIterations" parent="ChainingOptions/IKOptions" index="1" instance=ExtResource("4_m4bea")]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+value = 20.0
+allow_greater = true
+prefix = "Iterations:"
+
+[node name="IKErrorMargin" parent="ChainingOptions/IKOptions" index="2" instance=ExtResource("4_m4bea")]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+step = 0.01
+value = 0.1
 
 [node name="BoneProps" type="VBoxContainer" parent="." index="5"]
 unique_name_in_owner = true
@@ -203,6 +233,9 @@ flat = false
 [connection signal="toggled" from="GridContainer/IncludeChildrenCheckbox" to="." method="_on_include_children_checkbox_toggled"]
 [connection signal="toggled" from="GridContainer/AllowChaining" to="." method="_on_allow_chaining_toggled"]
 [connection signal="toggled" from="ChainingOptions/HBoxContainer/InverseKinematics" to="." method="_on_inverse_kinematics_toggled"]
+[connection signal="value_changed" from="ChainingOptions/IKOptions/ChainSize" to="." method="_on_chain_size_value_changed"]
+[connection signal="value_changed" from="ChainingOptions/IKOptions/IKIterations" to="." method="_on_ik_iterations_value_changed"]
+[connection signal="value_changed" from="ChainingOptions/IKOptions/IKErrorMargin" to="." method="_on_ik_error_margin_value_changed"]
 [connection signal="value_changed" from="BoneProps/BonePositionSlider" to="." method="_on_position_changed"]
 [connection signal="value_changed" from="BoneProps/BoneRotationSlider" to="." method="_on_rotation_changed"]
 [connection signal="about_to_popup" from="RotationReset" to="." method="_on_rotation_reset_menu_about_to_popup"]
