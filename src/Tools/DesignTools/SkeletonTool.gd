@@ -433,7 +433,7 @@ func draw_move(_pos: Vector2i) -> void:
 		match current_selected_bone.modify_mode:
 			BoneLayer.DISPLACE:
 				if _use_ik:
-					calculate_fabrik(
+					FABRIK.calculate(
 						get_ik_cels(current_selected_bone),
 						mouse_point,
 						_max_ik_itterations,
@@ -614,76 +614,82 @@ func merge_bone_data(frame_idx: int, bones: PackedInt32Array) -> Dictionary:
 	return data
 
 
-# Initial Implementation by:
-# https://github.com/nezvers/Godot_Public_Examples/blob/master/Nature_code/Kinematics/FABRIK.gd
-func calculate_fabrik(
-		bone_cels: Array[BoneCel], mouse_pos: Vector2, max_itterations: int, errorMargin: float
-	)->void:
-		var posList := PackedVector2Array()
-		var lenghts := PackedFloat32Array()
-		var totalLength := 0
-		for i in bone_cels.size() - 1:
-			var p_1 := bone_cels[i].rel_to_canvas(bone_cels[i].start_point)
-			var p_2 := bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
-			posList.append(p_1)
-			if i == bone_cels.size() - 2:
-				posList.append(p_2)
-			var l = p_2.distance_to(p_1)
-			lenghts.append(l)
-			totalLength += l
-		var oldposList = posList.duplicate()
-		var start_global = posList[0]
-		var end_global = posList[posList.size() - 1]
-		var distance: float = (mouse_pos - start_global).length()
-		var last_rotation := bone_cels[bone_cels.size() - 1].bone_rotation
-		# out of reach, no point of IK
-		if distance >= totalLength or posList.size() <= 2:
-			var direction:Vector2 = (mouse_pos - start_global).normalized()
-			for i in bone_cels.size():
-				var cel := bone_cels[i]
-				if i < bone_cels.size() - 1:
-					var old_dir: Vector2 = (posList[i + 1] - start_global).normalized()
-					cel.bone_rotation += old_dir.angle_to(direction)
-		else:
-			var errorDist:float = (mouse_pos - end_global).length()
-			var itterations: = 0
-			# limit the itteration count
-			while errorDist > errorMargin && itterations < max_itterations:
-				backward_reach(posList, mouse_pos, lenghts)  # start at endPos
-				forward_reach(posList, start_global, lenghts)  # start at pinPos
-				errorDist = (mouse_pos - posList[posList.size() -1]).length()
-				itterations += 1
-			for i in bone_cels.size():
-				var cel := bone_cels[i]
-				if i < bone_cels.size() - 1:
-					# find how much to rotate to bring next start point to mach the one in poslist
-					var cel_start = cel.rel_to_canvas(cel.start_point)
-					var next_start_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)  # current situation
-					var next_start_new = posList[i + 1]  # what should have been
-					# Rotate to look at the next point
-					var angle_diff = cel_start.angle_to_point(next_start_new) - cel_start.angle_to_point(next_start_old)
-					cel.bone_rotation += angle_diff
+class FABRIK:
+	# Initial Implementation by:
+	# https://github.com/nezvers/Godot_Public_Examples/blob/master/Nature_code/Kinematics/FABRIK.gd
+	static func calculate(
+			bone_cels: Array[BoneCel], mouse_pos: Vector2, max_itterations: int, errorMargin: float
+		)->void:
+			var posList := PackedVector2Array()
+			var lenghts := PackedFloat32Array()
+			var totalLength := 0
+			for i in bone_cels.size() - 1:
+				var p_1 := bone_cels[i].rel_to_canvas(bone_cels[i].start_point)
+				var p_2 := bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+				posList.append(p_1)
+				if i == bone_cels.size() - 2:
+					posList.append(p_2)
+				var l = p_2.distance_to(p_1)
+				lenghts.append(l)
+				totalLength += l
+			var oldposList = posList.duplicate()
+			var start_global = posList[0]
+			var end_global = posList[posList.size() - 1]
+			var distance: float = (mouse_pos - start_global).length()
+			var last_rotation := bone_cels[bone_cels.size() - 1].bone_rotation
+			# out of reach, no point of IK
+			if distance >= totalLength or posList.size() <= 2:
+				var direction:Vector2 = (mouse_pos - start_global).normalized()
+				for i in bone_cels.size():
+					var cel := bone_cels[i]
+					if i < bone_cels.size() - 1:
+						# find how much to rotate to bring next start point to mach the one in poslist
+						var cel_start = cel.rel_to_canvas(cel.start_point)
+						var look_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+						var look_new = mouse_pos  # what we should look at
+						# Rotate to look at the next point
+						var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
+						cel.bone_rotation += angle_diff
+			else:
+				var errorDist:float = (mouse_pos - end_global).length()
+				var itterations: = 0
+				# limit the itteration count
+				while errorDist > errorMargin && itterations < max_itterations:
+					_backward_reach(posList, mouse_pos, lenghts)  # start at endPos
+					_forward_reach(posList, start_global, lenghts)  # start at pinPos
+					errorDist = (mouse_pos - posList[posList.size() -1]).length()
+					itterations += 1
+				for i in bone_cels.size():
+					var cel := bone_cels[i]
+					if i < bone_cels.size() - 1:
+						# find how much to rotate to bring next start point to mach the one in poslist
+						var cel_start = cel.rel_to_canvas(cel.start_point)
+						var next_start_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)  # current situation
+						var next_start_new = posList[i + 1]  # what should have been
+						# Rotate to look at the next point
+						var angle_diff = cel_start.angle_to_point(next_start_new) - cel_start.angle_to_point(next_start_old)
+						cel.bone_rotation += angle_diff
+
+	static func _backward_reach(posList: PackedVector2Array, ending: Vector2, lenghts)->void:
+		var last: = posList.size() - 1
+		posList[last] = ending
+		for i in last:
+			var p1: Vector2 = posList[last - i]
+			var p2: Vector2 = posList[last - i - 1]
+			var dir: Vector2 = (p2 - p1).normalized()
+			p2 = p1 + (dir * lenghts[i - 1])
+			posList[last -1 - i] = p2
 
 
-func backward_reach(posList: PackedVector2Array, ending: Vector2, lenghts)->void:
-	var last: = posList.size() - 1
-	posList[last] = ending
-	for i in last:
-		var p1: Vector2 = posList[last - i]
-		var p2: Vector2 = posList[last - i - 1]
-		var dir: Vector2 = (p2 - p1).normalized()
-		p2 = p1 + (dir * lenghts[i - 1])
-		posList[last -1 - i] = p2
+	static func _forward_reach(posList: PackedVector2Array, starting: Vector2, lenghts)-> void:
+		posList[0] = starting
+		for i in posList.size() - 1:
+			var p1:Vector2 = posList[i]
+			var p2:Vector2 = posList[i +1]
+			var dir:Vector2 = (p2 -p1).normalized()
+			p2 = p1 + (dir * lenghts[i])
+			posList[i +1] = p2
 
-
-func forward_reach(posList: PackedVector2Array, starting: Vector2, lenghts)-> void:
-	posList[0] = starting
-	for i in posList.size() - 1:
-		var p1:Vector2 = posList[i]
-		var p2:Vector2 = posList[i +1]
-		var dir:Vector2 = (p2 -p1).normalized()
-		p2 = p1 + (dir * lenghts[i])
-		posList[i +1] = p2
 
 
 func get_ik_cels(start_layer: BoneLayer, store_cache := false) -> Array[BoneCel]:
