@@ -1,5 +1,6 @@
 extends BaseTool
 
+enum IKAlgorithms { FABRIK, CCDIK }
 var is_transforming := false
 var generation_threshold: float = 20
 var live_thread := Thread.new()
@@ -7,6 +8,7 @@ var live_thread := Thread.new()
 var _live_update := false
 var _allow_chaining := false
 var _use_ik := true
+var _ik_protocol: int = IKAlgorithms.FABRIK
 var _chain_length: int = 2
 var _max_ik_itterations: int = 20
 var _ik_error_margin: float = 0.1
@@ -51,6 +53,7 @@ func get_config() -> Dictionary:
 	config["live_update"] = _live_update
 	config["allow_chaining"] = _allow_chaining
 	config["use_ik"] = _use_ik
+	config["ik_protocol"] = _ik_protocol
 	config["chain_length"] = _chain_length
 	config["max_ik_itterations"] = _max_ik_itterations
 	config["ik_error_margin"] = _ik_error_margin
@@ -63,6 +66,7 @@ func set_config(config: Dictionary) -> void:
 	_live_update = config.get("live_update", _live_update)
 	_allow_chaining = config.get("allow_chaining", _allow_chaining)
 	_use_ik = config.get("use_ik", _use_ik)
+	_ik_protocol = config.get("ik_protocol", _ik_protocol)
 	_chain_length = config.get("chain_length", _chain_length)
 	_max_ik_itterations = config.get("max_ik_itterations", _max_ik_itterations)
 	_ik_error_margin = config.get("ik_error_margin", _ik_error_margin)
@@ -74,6 +78,7 @@ func update_config() -> void:
 	%LiveUpdateCheckbox.set_pressed_no_signal(_live_update)
 	%AllowChaining.set_pressed_no_signal(_allow_chaining)
 	%InverseKinematics.set_pressed_no_signal(_use_ik)
+	%AlgorithmOption.select(_ik_protocol)
 	%ChainSize.set_value_no_signal_update_display(_chain_length)
 	%IKIterations.set_value_no_signal_update_display(_max_ik_itterations)
 	%IKErrorMargin.set_value_no_signal_update_display(_ik_error_margin)
@@ -104,14 +109,21 @@ func _on_allow_chaining_toggled(toggled_on: bool) -> void:
 	save_config()
 
 
+func _on_include_children_checkbox_toggled(toggled_on: bool) -> void:
+	_include_children = toggled_on
+	update_config()
+	save_config()
+
+
 func _on_inverse_kinematics_toggled(toggled_on: bool) -> void:
 	_use_ik = toggled_on
 	update_config()
 	save_config()
 
 
-func _on_include_children_checkbox_toggled(toggled_on: bool) -> void:
-	_include_children = toggled_on
+func _on_algorithm_selected(index: int) -> void:
+	print(index)
+	_ik_protocol = index
 	update_config()
 	save_config()
 
@@ -343,7 +355,6 @@ func reset_bone_angle(bone_index: int):
 			child_bones.reverse()
 			looper.append_array(child_bones)
 		var bone_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
-		var old_update = bone_cel.should_update_children
 		project.undo_redo.add_undo_property(bone_cel, "bone_rotation", bone_cel.bone_rotation)
 		project.undo_redo.add_do_property(bone_cel, "bone_rotation", 0)
 	commit_undo(true)
@@ -433,12 +444,21 @@ func draw_move(_pos: Vector2i) -> void:
 		match current_selected_bone.modify_mode:
 			BoneLayer.DISPLACE:
 				if _use_ik:
-					FABRIK.calculate(
-						get_ik_cels(current_selected_bone),
-						mouse_point,
-						_max_ik_itterations,
-						_ik_error_margin
-					)
+					match _ik_protocol:
+						IKAlgorithms.FABRIK:
+							FABRIK.calculate(
+								get_ik_cels(current_selected_bone),
+								mouse_point,
+								_max_ik_itterations,
+								_ik_error_margin
+							)
+						IKAlgorithms.CCDIK:
+							CCDIK.calculate(
+								get_ik_cels(current_selected_bone),
+								mouse_point,
+								_max_ik_itterations,
+								_ik_error_margin
+							)
 					if _live_update:
 						Global.canvas.queue_redraw()
 					else:
@@ -618,7 +638,7 @@ class FABRIK:
 	# Initial Implementation by:
 	# https://github.com/nezvers/Godot_Public_Examples/blob/master/Nature_code/Kinematics/FABRIK.gd
 	static func calculate(
-			bone_cels: Array[BoneCel], mouse_pos: Vector2, max_itterations: int, errorMargin: float
+			bone_cels: Array[BoneCel], target_pos: Vector2, max_itterations: int, errorMargin: float
 		)->void:
 			var posList := PackedVector2Array()
 			var lenghts := PackedFloat32Array()
@@ -632,32 +652,29 @@ class FABRIK:
 				var l = p_2.distance_to(p_1)
 				lenghts.append(l)
 				totalLength += l
-			var oldposList = posList.duplicate()
 			var start_global = posList[0]
 			var end_global = posList[posList.size() - 1]
-			var distance: float = (mouse_pos - start_global).length()
-			var last_rotation := bone_cels[bone_cels.size() - 1].bone_rotation
+			var distance: float = (target_pos - start_global).length()
 			# out of reach, no point of IK
 			if distance >= totalLength or posList.size() <= 2:
-				var direction:Vector2 = (mouse_pos - start_global).normalized()
 				for i in bone_cels.size():
 					var cel := bone_cels[i]
 					if i < bone_cels.size() - 1:
 						# find how much to rotate to bring next start point to mach the one in poslist
 						var cel_start = cel.rel_to_canvas(cel.start_point)
 						var look_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
-						var look_new = mouse_pos  # what we should look at
+						var look_new = target_pos  # what we should look at
 						# Rotate to look at the next point
 						var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
 						cel.bone_rotation += angle_diff
 			else:
-				var errorDist:float = (mouse_pos - end_global).length()
+				var errorDist:float = (target_pos - end_global).length()
 				var itterations: = 0
 				# limit the itteration count
 				while errorDist > errorMargin && itterations < max_itterations:
-					_backward_reach(posList, mouse_pos, lenghts)  # start at endPos
+					_backward_reach(posList, target_pos, lenghts)  # start at endPos
 					_forward_reach(posList, start_global, lenghts)  # start at pinPos
-					errorDist = (mouse_pos - posList[posList.size() -1]).length()
+					errorDist = (target_pos - posList[posList.size() -1]).length()
 					itterations += 1
 				for i in bone_cels.size():
 					var cel := bone_cels[i]
@@ -690,14 +707,64 @@ class FABRIK:
 			p2 = p1 + (dir * lenghts[i])
 			posList[i +1] = p2
 
+class CCDIK:
+	# Inspired from:
+	# https://github.com/chFleschutz/inverse-kinematics-algorithms/blob/main/src/CCD.h
+	static func calculate(bone_cels: Array[BoneCel], target_pos: Vector2, max_iterations: int, errorMargin: float) -> void:
+		var lenghts := PackedFloat32Array()
+		var totalLength := 0
+		for i in bone_cels.size() - 1:
+			var p_1 := bone_cels[i].rel_to_canvas(bone_cels[i].start_point)
+			var p_2 := bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+			var l = p_2.distance_to(p_1)
+			lenghts.append(l)
+			totalLength += l
+		var distance: float = (target_pos - _get_global_start(bone_cels[0])).length()
+		# Check if the target is reachable
+		if totalLength < distance:
+			# Stretch
+			for i in bone_cels.size():
+				var cel := bone_cels[i]
+				if i < bone_cels.size() - 1:
+					# find how much to rotate to bring next start point to mach the one in poslist
+					var cel_start = cel.rel_to_canvas(cel.start_point)
+					var look_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)
+					var look_new = target_pos  # what we should look at
+					# Rotate to look at the next point
+					var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
+					cel.bone_rotation += angle_diff
+			return
+		for _i in range(max_iterations):
+			# Adjust rotation of each bone in the skeleton
+			for i in range(bone_cels.size() - 2, -1, -1):
+				var pivot_pos = _get_global_start(bone_cels[-1])
+				var current_base_pos = _get_global_start(bone_cels[i])
+				var base_pivot_vec = pivot_pos - current_base_pos
+				var base_target_vec = target_pos - current_base_pos
+
+				# Normalize vectors
+				base_pivot_vec = base_pivot_vec.normalized()
+				base_target_vec = base_target_vec.normalized()
+
+				var dot = base_pivot_vec.dot(base_target_vec)
+				var det = base_pivot_vec.x * base_target_vec.y - base_pivot_vec.y * base_target_vec.x
+				var angle_delta = atan2(det, dot)
+				bone_cels[i].bone_rotation += angle_delta
+
+			# Check for convergence
+			var last_cel = bone_cels[bone_cels.size() - 1]
+			if (target_pos - last_cel.rel_to_canvas(last_cel.start_point)).length() < errorMargin:
+				return
+
+	static func _get_global_start(cel: BaseCel) -> Vector2:
+		return cel.rel_to_canvas(cel.start_point)
 
 
-func get_ik_cels(start_layer: BoneLayer, store_cache := false) -> Array[BoneCel]:
+func get_ik_cels(start_layer: BoneLayer) -> Array[BoneCel]:
 	var bone_cels: Array[BoneCel] = []
 	var i = 0
 	var p = start_layer
 	while p:
-		var p_cel := p.get_current_bone_cel()
 		bone_cels.push_front(p.get_current_bone_cel())
 		p = BoneLayer.get_parent_bone(p)
 		i += 1
