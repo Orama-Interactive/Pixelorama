@@ -603,7 +603,6 @@ func calculate_fabrik(
 					var old_dir: Vector2 = (posList[i + 1] - start_global).normalized()
 					cel.bone_rotation += old_dir.angle_to(direction)
 		else:
-			return
 			var errorDist:float = (mouse_pos - end_global).length()
 			var itterations: = 0
 			# limit the itteration count
@@ -614,20 +613,14 @@ func calculate_fabrik(
 				itterations += 1
 			for i in bone_cels.size():
 				var cel := bone_cels[i]
-				cel.should_update_children = false
 				if i < bone_cels.size() - 1:
-					var a = (cel.gizmo_origin - cel.start_point - oldposList[i + 1])
-					var b = (cel.gizmo_origin - cel.rel_to_origin(posList[i]) - posList[i + 1])
-					var angle_diff = wrapf(b.angle_to(a), -PI, PI)
-					# Due to dealing with floats, our angle_diff is not actually correct (errors)
-					# so we cheat by assuming it is correct and modify the next point accordingly.
-					cel.bone_rotation -= angle_diff
-					#var old_dir = old_poslist[i].direction_to(old_poslist[i + 1])
-					#posList[i + 1] = (
-						#posList[i] + old_dir.rotated(angle_diff) * lenghts[i]
-					#).floor()
-				cel.start_point = cel.rel_to_origin(posList[i])
-				cel.should_update_children = true
+					# find how much to rotate to bring next start point to mach the one in poslist
+					var cel_start = cel.rel_to_canvas(cel.start_point)
+					var next_start_old = bone_cels[i + 1].rel_to_canvas(bone_cels[i + 1].start_point)  # current situation
+					var next_start_new = posList[i + 1]  # what should have been
+					# Rotate to look at the next point
+					var angle_diff = cel_start.angle_to_point(next_start_new) - cel_start.angle_to_point(next_start_old)
+					cel.bone_rotation += angle_diff
 
 
 func backward_reach(posList: PackedVector2Array, ending: Vector2, lenghts)->void:
