@@ -614,6 +614,8 @@ func merge_bone_data(frame_idx: int, bones: PackedInt32Array) -> Dictionary:
 	return data
 
 
+# Initial Implementation by:
+# https://github.com/nezvers/Godot_Public_Examples/blob/master/Nature_code/Kinematics/FABRIK.gd
 func calculate_fabrik(
 		bone_cels: Array[BoneCel], mouse_pos: Vector2, max_itterations: int, errorMargin: float
 	)->void:
