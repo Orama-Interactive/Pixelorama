@@ -29,7 +29,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 - Resizing selections while holding Shift now works properly from all corners.
 - Fixed resizing tilemap selection when the tilemap cel grid has an offset.
 - Fixed loading APNGs.
-- Significally improved performance of the bucket tool, when a selection is active. [#1304](https://github.com/Orama-Interactive/Pixelorama/pull/1304)
+- Significantly improved performance of the bucket tool, when a selection is active. [#1304](https://github.com/Orama-Interactive/Pixelorama/pull/1304)
 - Made the offset pixels effect only accept integer values for the offset.
 - The FX icon in the layer button is now properly if all effects have been applied.
 - Fixed crash when increasing the width of a palette.
