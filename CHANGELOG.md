@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
+Built using Godot 4.4.1
+
 ### Added
 - Implemented limited support of Photoshop (.psd) file importing. [#1308](https://github.com/Orama-Interactive/Pixelorama/pull/1308)
 - Added ability to edit individual tiles in tilemap layers even in place only mode. [#1253](https://github.com/Orama-Interactive/Pixelorama/pull/1253)
