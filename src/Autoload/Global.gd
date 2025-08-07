@@ -834,6 +834,7 @@ func _initialize_keychain() -> void:
 		&"crop_to_selection": Keychain.InputAction.new("", "Image menu", true),
 		&"crop_to_content": Keychain.InputAction.new("", "Image menu", true),
 		&"resize_canvas": Keychain.InputAction.new("", "Image menu", true),
+		&"reapply_last_effect": Keychain.InputAction.new("", "Effects menu", true),
 		&"offset_image": Keychain.InputAction.new("", "Effects menu", true),
 		&"mirror_image": Keychain.InputAction.new("", "Effects menu", true),
 		&"rotate_image": Keychain.InputAction.new("", "Effects menu", true),

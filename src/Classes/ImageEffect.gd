@@ -68,6 +68,11 @@ func prepare_animator(project: Project) -> void:
 
 func _confirmed() -> void:
 	has_been_confirmed = true
+	Global.top_menu_container.last_applied_effect = self
+	Global.top_menu_container.effects_menu.set_item_disabled(0, false)
+	Global.top_menu_container.effects_menu.set_item_text(
+		0, "Re-apply %s" % name.replace("Dialog", "").capitalize()
+	)
 	commit_idx = -1
 	var project := Global.current_project
 	if affect == SELECTED_CELS:

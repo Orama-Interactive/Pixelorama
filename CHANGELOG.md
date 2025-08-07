@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.3] - 2025-08-06
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.4.1
+
+### Added
+- Implemented limited support of Photoshop (.psd) file importing. [#1308](https://github.com/Orama-Interactive/Pixelorama/pull/1308)
+- Added ability to edit individual tiles in tilemap layers even in place only mode. [#1253](https://github.com/Orama-Interactive/Pixelorama/pull/1253)
+- Added support for batch removal of unused tiles in tilemap layers. [#1253](https://github.com/Orama-Interactive/Pixelorama/pull/1253)
+- Added a way to re-apply the last image effect from the Effects menu. [#1310](https://github.com/Orama-Interactive/Pixelorama/pull/1310)
+- Clicking a palette swatch with the left/right color now directly adds the color to that swatch. [#1300](https://github.com/Orama-Interactive/Pixelorama/pull/1300)
+- You can now remove colors from palette swatches by holding <kbd>Control</kbd> while clicking on them. [#1300](https://github.com/Orama-Interactive/Pixelorama/pull/1300)
+- A new "Auto add colors" option has been added. When enabled, new colors drawn on canvas will automatically get added to the palette, if space is available. [#1300](https://github.com/Orama-Interactive/Pixelorama/pull/1300)
+- An "ignore in onion skinning" layer property has been added.
+
+### Changed
+- The tilemap layer system has been refactored behind the scenes. **This has changed how isometric tiles are being handled, so make sure to keep backups of your old projects if they contain isometric tiles.** [#1253](https://github.com/Orama-Interactive/Pixelorama/pull/1253)
+- Isometric tilemap layers now use a pixelated grid that is more accurate. [#1252](https://github.com/Orama-Interactive/Pixelorama/pull/1252)
+- The backup system has been re-written, now multiple old sessions are being stored, regardless if Pixelorama crashes or not.  [#1299](https://github.com/Orama-Interactive/Pixelorama/pull/1299)
+- Made the movement of frame tags more intuitive. [#1281](https://github.com/Orama-Interactive/Pixelorama/pull/1281)
+
+### Fixed
+- Fixed transformations making semi-transparent pixels darker due to alpha pre-multiplication.
+- Resizing selections while holding Shift now works properly from all corners.
+- Fixed resizing tilemap selection when the tilemap cel grid has an offset.
+- Fixed loading APNGs.
+- Significantly improved performance of the bucket tool, when a selection is active. [#1304](https://github.com/Orama-Interactive/Pixelorama/pull/1304)
+- Made the offset pixels effect only accept integer values for the offset.
+- The FX icon in the layer button is now properly if all effects have been applied.
+- Fixed crash when increasing the width of a palette.
+- Fixed crash when creating a convolution matrix layer effect.
+
 ## [v1.1.2] - 2025-06-26
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@VernalUmbrella](https://github.com/VernalUmbrella), [@zibetnu](https://github.com/zibetnu)
