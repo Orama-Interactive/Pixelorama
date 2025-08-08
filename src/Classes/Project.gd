@@ -377,6 +377,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						layer.audio = stream
 					layers.append(layer)
 					audio_layers += 1
+				Global.LayerTypes.BONE:
+					layers.append(BoneLayer.new(self))
 
 		var frame_i := 0
 		for frame in dict.frames:
@@ -403,6 +405,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						cels.append(new_cel)
 					Global.LayerTypes.AUDIO:
 						cels.append(AudioCel.new())
+					Global.LayerTypes.BONE:
+						cels.append(BoneCel.new())
 				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)

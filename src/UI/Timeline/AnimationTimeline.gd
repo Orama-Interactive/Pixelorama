@@ -502,6 +502,8 @@ func copy_frames(
 				)
 				if src_cel.selected != null:
 					selected_id = src_cel.selected.id
+			elif src_cel is BoneCel:
+				new_cel = BoneCel.new(src_cel.opacity, src_cel.serialize())
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
 				new_cel.offset = src_cel.offset
@@ -934,6 +936,8 @@ func on_add_layer_list_id_pressed(id: int) -> void:
 				SteamManager.set_achievement("ACH_3D_LAYER")
 			Global.LayerTypes.AUDIO:
 				layer = AudioLayer.new(project)
+			Global.LayerTypes.BONE:
+				layer = BoneLayer.new(project)
 		add_layer(layer, project)
 
 
@@ -956,6 +960,8 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 		# Make layer child of group.
 		layer.parent = project.layers[project.current_layer]
 	else:
+		if layer is BoneLayer:
+			new_layer_idx = project.current_layer
 		# Set the parent of layer to be the same as the layer below it.
 		layer.parent = project.layers[project.current_layer].parent
 
@@ -1008,6 +1014,8 @@ func _on_CloneLayer_pressed() -> void:
 				new_cel = Cel3D.new(
 					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
+			elif src_cel is BoneCel:
+				new_cel = BoneCel.new(src_cel.opacity, src_cel.serialize())
 			elif src_cel is CelTileMap:
 				new_cel = CelTileMap.new(src_cel.tileset)
 				new_cel.offset = src_cel.offset
