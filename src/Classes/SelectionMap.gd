@@ -217,6 +217,16 @@ func shrink(width: int, brush: int) -> void:
 	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
 
 
+func center() -> void:
+	var used_rect := get_used_rect()
+	if not used_rect.has_area():
+		return
+	var offset: Vector2i = (0.5 * (get_size() - used_rect.size)).floor()
+	var cel_image := get_region(used_rect)
+	clear()
+	blend_rect(cel_image, Rect2i(Vector2i.ZERO, used_rect.size), offset)
+
+
 func border(width: int, brush: int) -> void:
 	var params := {
 		"color": Color(1, 1, 1, 1),
