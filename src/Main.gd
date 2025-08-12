@@ -205,6 +205,18 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"layer_visibility"):
+		for selected_cel in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[selected_cel[1]]
+			layer.visible = not layer.visible
+		Global.canvas.update_all_layers = true
+		Global.canvas.queue_redraw()
+	if event.is_action_pressed(&"layer_lock"):
+		for selected_cel in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[selected_cel[1]]
+			layer.locked = not layer.locked
+		Global.canvas.update_all_layers = true
+		Global.canvas.queue_redraw()
 	if is_writing_text and event is InputEventKey and is_instance_valid(Global.main_viewport):
 		Global.main_viewport.get_child(0).push_input(event)
 	left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)

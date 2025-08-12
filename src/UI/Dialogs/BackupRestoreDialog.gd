@@ -83,7 +83,7 @@ func load_session(index: int) -> void:
 		# Load the project
 		OpenSave.open_pxo_file(session_path.path_join(project_file), false, false)
 
-		# remove the project's save_path so that uses doesn't accidentaly save IN the
+		# remove the project's save_path so that uses doesn't accidentally save IN the
 		# backup folder
 		var added_project = Global.projects[-1]
 		if added_project.name == project_file.get_basename():
@@ -107,7 +107,7 @@ func load_project(index: int) -> void:
 		session_project_files[index]
 	)
 	OpenSave.open_pxo_file(p_path, false, false)
-	# remove the project's save_path so that uses doesn't accidentaly save IN the
+	# remove the project's save_path so that uses doesn't accidentally save IN the
 	# backup folder
 	var added_project = Global.projects[-1]
 	if added_project.name == session_project_files[index].get_basename():

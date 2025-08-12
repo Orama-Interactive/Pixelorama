@@ -1018,6 +1018,14 @@ right_isometricboxtool_tool={
 "deadzone": 0.2,
 "events": []
 }
+layer_visibility={
+"deadzone": 0.2,
+"events": []
+}
+layer_lock={
+"deadzone": 0.2,
+"events": []
+}
 
 [input_devices]
 
