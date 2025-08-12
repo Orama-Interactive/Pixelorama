@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.4] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.4.1
+
+### Added
+- Implemented the ability to set shortcuts for toggling layer visibility and lock from the preferences. There are no default shortcuts for these at the moment.
+
+### Fixed
+- Fixed selection tools selecting pixels in wrong positions. [#1318](https://github.com/Orama-Interactive/Pixelorama/pull/1318)
+
 ## [v1.1.3] - 2025-08-06
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
