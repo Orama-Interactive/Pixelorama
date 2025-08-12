@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-08-12 08:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1304,11 +1304,11 @@ msgstr "Tracker de Problemas"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "Restaurar Backup"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "Sessões anteriores"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
