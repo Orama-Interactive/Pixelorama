@@ -341,9 +341,29 @@ func _handle_cmdline_arguments() -> void:
 	# Load the files first
 	for arg in args:
 		var file_path := arg
+		# if we think the file could be a potential relative path it can mean two things:
+		# 1. The file is relative to executable
+		# 2. The file is relative to the working directory.
 		if file_path.is_relative_path():
-			file_path = OS.get_executable_path().get_base_dir().path_join(arg)
-		OpenSave.handle_loading_file(file_path)
+			# we first try to convert it to be relative to executable
+			if file_path.is_relative_path():
+				file_path = OS.get_executable_path().get_base_dir().path_join(arg)
+			if !FileAccess.file_exists(file_path):
+				# it is not relative to executable so we have to convert it to an
+				# absolute path instead (this is when file is relative to working directory)
+				var output = []
+				match OS.get_name():
+					"Linux":
+						OS.execute("pwd", [], output)
+					"macOS":
+						OS.execute("pwd", [], output)
+					"Windows":
+						OS.execute("cd", [], output)
+				if output.size() > 0:
+					file_path = str(output[0]).strip_edges().path_join(arg)
+		# Do one last failsafe to see everything is in order
+		if FileAccess.file_exists(file_path):
+			OpenSave.handle_loading_file(file_path)
 
 	var project := Global.current_project
 	# True when exporting from the CLI.
