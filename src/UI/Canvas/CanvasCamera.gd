@@ -185,10 +185,7 @@ func update_transparent_checker_offset() -> void:
 func _update_viewport_transform() -> void:
 	if not is_instance_valid(viewport):
 		return
-	var zoom_scale := Vector2(
-		1.0 / zoom.x,
-		1.0 / (zoom.y * maxf(Global.vertical_zoom, 0.01))
-	)
+	var zoom_scale := Vector2(1.0 / zoom.x, 1.0 / (zoom.y * maxf(Global.vertical_zoom, 0.01)))
 	var viewport_size := get_viewport_rect().size
 	var screen_offset := viewport_size * 0.5 * zoom_scale
 	screen_offset = screen_offset.rotated(camera_angle)
