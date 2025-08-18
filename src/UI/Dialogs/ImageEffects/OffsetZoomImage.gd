@@ -55,8 +55,8 @@ func _on_OffsetSliders_value_changed(_value: Vector2) -> void:
 
 
 func _on_ZoomValueSlider_value_changed(_value: float) -> void:
-	offset_sliders.min_value = -Global.current_project.size * int(_value / 100)
-	offset_sliders.max_value = Global.current_project.size * int(_value / 100)
+	offset_sliders.min_value = (-Global.current_project.size * _value / 100).floor()
+	offset_sliders.max_value = (Global.current_project.size * _value / 100).floor()
 	update_preview()  # (from here, commit_action will be called, and then recalculate_preview)
 
 

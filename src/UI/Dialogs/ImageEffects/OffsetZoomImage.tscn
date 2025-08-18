@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://q355qqjvuajs"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_7hdx0"]
-[ext_resource type="Script" uid="uid://cxs0b83pxx3j8" path="res://src/UI/Dialogs/ImageEffects/OffsetImage.gd" id="2_wtcan"]
+[ext_resource type="Script" uid="uid://cxs0b83pxx3j8" path="res://src/UI/Dialogs/ImageEffects/OffsetZoomImage.gd" id="2_wtcan"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_nls83"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4_30qvy"]
 
