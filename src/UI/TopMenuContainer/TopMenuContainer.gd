@@ -471,7 +471,7 @@ func _setup_color_mode_submenu(item: String) -> void:
 func _setup_effects_menu() -> void:
 	_set_menu_shortcut(&"reapply_last_effect", effects_menu, 0, "Re-apply last effect")
 	effects_menu.set_item_disabled(0, true)
-	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset Image")
+	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset/Zoom Image")
 	_set_menu_shortcut(&"mirror_image", effects_transform_submenu, 1, "Mirror Image")
 	_set_menu_shortcut(&"rotate_image", effects_transform_submenu, 2, "Rotate Image")
 	effects_transform_submenu.id_pressed.connect(_on_effects_transform_submenu_id_pressed)
