@@ -18,7 +18,7 @@ void fragment() {
 
 	vec4 output = texture(TEXTURE, zoomed_uv);
 	// Cut original selected content
-	original_color.a = 0.0 * step(0.5, selection_color.a) + original_color.a * step(selection_color.a, 0.5);
+	original_color.a = original_color.a * step(selection_color.a, 0.5);
 	output.a = min(step(zoomed_uv.x, 1.0) * step(0.0, zoomed_uv.x), output.a); // Remove left and right edges
 	output.a = min(step(zoomed_uv.y, 1.0) * step(0.0, zoomed_uv.y), output.a); // Remove up and bottom edges
 
