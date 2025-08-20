@@ -41,7 +41,7 @@ var gizmo_length: int = MIN_LENGTH + 5:
 				value = int(MIN_LENGTH)
 			gizmo_length = value
 
-var associated_layer: BoneLayer   ## only used in update_children()
+var associated_layer: BoneLayer  ## only used in update_children()
 var should_update_children := true
 
 # Properties determined using above variables

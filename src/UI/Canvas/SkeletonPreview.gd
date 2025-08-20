@@ -23,13 +23,25 @@ func _draw() -> void:
 	if not layer is BoneLayer:
 		if BoneLayer.get_parent_bone(layer) != null:
 			draw_string(
-				font, text_offset, tr("(Bone) Edit mode"), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.WHITE
+				font,
+				text_offset,
+				tr("(Bone) Edit mode"),
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				16,
+				Color.WHITE
 			)
 		edit_mode = true
 		layer = BoneLayer.get_parent_bone(layer)
 	else:
 		draw_string(
-			font, text_offset, tr("(Bone) Pose mode"), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.WHITE
+			font,
+			text_offset,
+			tr("(Bone) Pose mode"),
+			HORIZONTAL_ALIGNMENT_LEFT,
+			-1,
+			16,
+			Color.WHITE
 		)
 	draw_set_transform(Vector2.ZERO)
 	if layer == null:
@@ -53,8 +65,8 @@ func _draw_gizmo(
 	var mouse_point: Vector2 = Global.canvas.current_pixel
 
 	var width: float = (
-		bone_cel.WIDTH if (bone == selected_bone) else BoneLayer.DESELECT_WIDTH
-	) / camera_zoom.x
+		(bone_cel.WIDTH if (bone == selected_bone) else BoneLayer.DESELECT_WIDTH) / camera_zoom.x
+	)
 	var net_width = width
 	var bone_color := Color.WHITE if (bone == selected_bone) else Color.GRAY
 	var hover_mode := maxi(bone.modify_mode, bone.hover_mode(mouse_point, camera_zoom))
@@ -78,7 +90,11 @@ func _draw_gizmo(
 			bone_cel.START_RADIUS / camera_zoom.x,
 			bone_color,
 			false,
-			net_width if (hover_mode == BoneLayer.DISPLACE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			(
+				net_width
+				if (hover_mode == BoneLayer.DISPLACE)
+				else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			)
 		)
 		draw_set_transform(Vector2.ZERO)
 	bone.ignore_rotation_hover = chaining_mode
@@ -92,21 +108,33 @@ func _draw_gizmo(
 			bone_start,
 			bone_start + bone_end,
 			bone_color,
-			net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			(
+				net_width
+				if (hover_mode == BoneLayer.ROTATE)
+				else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			)
 		)
 		# Draw rotation circle (pose mode) or arrow (edit mode)
 		if edit_mode:
 			draw_line(
 				bone_end,
-				bone_end + (bone_end).normalized().rotated(PI * 3.0/4),
+				bone_end + (bone_end).normalized().rotated(PI * 3.0 / 4),
 				bone_color,
-				net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+				(
+					net_width
+					if (hover_mode == BoneLayer.ROTATE)
+					else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+				)
 			)
 			draw_line(
 				bone_end,
 				bone_end + (bone_end).normalized().rotated(PI * 1.25),
 				bone_color,
-				net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+				(
+					net_width
+					if (hover_mode == BoneLayer.ROTATE)
+					else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+				)
 			)
 		else:
 			draw_circle(
@@ -114,27 +142,28 @@ func _draw_gizmo(
 				BoneCel.END_RADIUS / camera_zoom.x,
 				bone_color,
 				false,
-				net_width if (hover_mode == BoneLayer.ROTATE) else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+				(
+					net_width
+					if (hover_mode == BoneLayer.ROTATE)
+					else BoneLayer.DESELECT_WIDTH / camera_zoom.x
+				)
 			)
 	draw_set_transform(Vector2.ZERO)
 	## Show connection to parent
 	var parent = BoneLayer.get_parent_bone(bone)
 	if parent:
-		var parent_cel :=  parent.get_current_bone_cel()
+		var parent_cel := parent.get_current_bone_cel()
 		var p_start := Vector2.ZERO if edit_mode else parent_cel.start_point
 		var p_rot := parent_cel.bone_rotation if edit_mode else 0.0
-		var p_end := Vector2.ZERO if (not parent in canon_bones or chaining_mode) else parent_cel.end_point
-		var parent_start = bone_cel.rel_to_origin(
-			parent_cel.rel_to_canvas(p_start)
-		) + (p_end).rotated(-p_rot)
+		var p_end := (
+			Vector2.ZERO if (not parent in canon_bones or chaining_mode) else parent_cel.end_point
+		)
+		var parent_start = (
+			bone_cel.rel_to_origin(parent_cel.rel_to_canvas(p_start)) + (p_end).rotated(-p_rot)
+		)
 		draw_set_transform(bone_cel.gizmo_origin)
 		if not parent in canon_bones:
-			draw_circle(
-				parent_start,
-				bone_cel.START_RADIUS / camera_zoom.x,
-				Color.GRAY,
-				true
-			)
+			draw_circle(parent_start, bone_cel.START_RADIUS / camera_zoom.x, Color.GRAY, true)
 		draw_dashed_line(
 			bone_start,  # Connected to tail of bone
 			parent_start,  # Connected to head of parent (or tail in chained mode)
@@ -148,10 +177,10 @@ func _draw_gizmo(
 	if chaining_mode:
 		fade_ratio = max(0.3, fade_ratio)
 	if fade_ratio >= 0.4 and !transformation_active:  # Hide names if we have zoomed far
-		draw_set_transform(bone_cel.gizmo_origin + bone_start, rotation, Vector2.ONE / camera_zoom.x)
-		draw_string(
-			font, Vector2(3, -3), bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, bone_color
+		draw_set_transform(
+			bone_cel.gizmo_origin + bone_start, rotation, Vector2.ONE / camera_zoom.x
 		)
+		draw_string(font, Vector2(3, -3), bone.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, bone_color)
 
 
 ## This manages the hovering mechanism of gizmo
@@ -207,7 +236,7 @@ func get_selected_bone() -> void:
 					and (
 						bone.modify_mode == BoneLayer.ROTATE
 						or bone.hover_mode(pos, Global.camera.zoom) == BoneLayer.ROTATE
-						)
+					)
 				):
 					# Check if bone is a parent of anything (if it has, skip it)
 					if BoneLayer.get_parent_bone(bone) in canon_bones:

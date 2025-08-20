@@ -201,9 +201,7 @@ func _on_copy_pose_from_about_to_popup() -> void:
 				populate_popup.bind(popup_submenu, reference_props, frame_idx)
 			)
 			popup.add_submenu_node_item(str("Frame ", frame_idx + 1), popup_submenu)
-			popup_submenu.index_pressed.connect(
-				copy_bone_data.bind(frame_idx, popup_submenu)
-			)
+			popup_submenu.index_pressed.connect(copy_bone_data.bind(frame_idx, popup_submenu))
 
 
 func _on_tween_skeleton_about_to_popup() -> void:
@@ -229,9 +227,7 @@ func _on_tween_skeleton_about_to_popup() -> void:
 				populate_popup.bind(popup_submenu, reference_props, frame_idx)
 			)
 			popup.add_submenu_node_item(str("Frame ", frame_idx + 1), popup_submenu)
-			popup_submenu.index_pressed.connect(
-				tween_skeleton_data.bind(frame_idx, popup_submenu)
-			)
+			popup_submenu.index_pressed.connect(tween_skeleton_data.bind(frame_idx, popup_submenu))
 
 
 # UI "updating" signals
@@ -269,12 +265,8 @@ func quick_set_bones(bone_index: int):
 		var bone_cel := bone.get_current_bone_cel()
 		var old_data := bone_cel.serialize()
 		var best_origin := Vector2(bone.get_best_origin(frame))
-		project.undo_redo.add_do_method(
-			bone_cel.reset.bind({"gizmo_origin": best_origin})
-		)
-		project.undo_redo.add_undo_method(
-			bone_cel.deserialize.bind(old_data)
-		)
+		project.undo_redo.add_do_method(bone_cel.reset.bind({"gizmo_origin": best_origin}))
+		project.undo_redo.add_undo_method(bone_cel.deserialize.bind(old_data))
 	commit_undo(true)
 
 
@@ -290,12 +282,8 @@ func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
 			looper.append_array(child_bones)
 		var bone_cel := bone.get_current_bone_cel()
 		var from_cel: BoneCel = project.frames[from_frame].cels[bone.index]
-		project.undo_redo.add_undo_method(
-			bone_cel.deserialize.bind(bone_cel.serialize())
-		)
-		project.undo_redo.add_do_method(
-			bone_cel.deserialize.bind(from_cel.serialize())
-		)
+		project.undo_redo.add_undo_method(bone_cel.deserialize.bind(bone_cel.serialize()))
+		project.undo_redo.add_do_method(bone_cel.deserialize.bind(from_cel.serialize()))
 	copy_pose_from.get_popup().hide()
 	copy_pose_from.get_popup().clear(true)  # To save Memory
 	commit_undo(true)
@@ -324,18 +312,19 @@ func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 					project.undo_redo.add_undo_method(
 						bone_cel.set.bind(property, bone_cel.get(property))
 					)
-					project.undo_redo.add_do_method(bone_cel.set.bind(
-						property,
-						Tween.interpolate_value(
-							from_cel.get(property),
-							to_cel.get(property) - from_cel.get(property),
-							frame_idx - from_frame,
-							project.current_frame - from_frame,
-							Tween.TRANS_LINEAR,
-							Tween.EASE_IN
+					project.undo_redo.add_do_method(
+						bone_cel.set.bind(
+							property,
+							Tween.interpolate_value(
+								from_cel.get(property),
+								to_cel.get(property) - from_cel.get(property),
+								frame_idx - from_frame,
+								project.current_frame - from_frame,
+								Tween.TRANS_LINEAR,
+								Tween.EASE_IN
+							)
 						)
 					)
-				)
 			project.undo_redo.add_undo_property(bone_cel, "should_update_children", old_update)
 			project.undo_redo.add_do_property(bone_cel, "should_update_children", old_update)
 	copy_pose_from.get_popup().hide()
@@ -417,12 +406,16 @@ func add_undo_draw_data():
 						cel.deserialize.bind(cel.serialize(), false)
 					)
 			var parent_bone = BoneLayer.get_parent_bone(current_selected_bone)
-			var parent_b_cel = Global.current_project.frames[Global.current_project.current_frame].cels[
-				parent_bone.index
-			]
+			var parent_b_cel = (
+				Global
+				. current_project
+				. frames[Global.current_project.current_frame]
+				. cels[parent_bone.index]
+			)
 			Global.current_project.undo_redo.add_undo_method(
 				parent_b_cel.deserialize.bind(parent_b_cel.serialize(), false)
 			)
+
 
 func draw_move(_pos: Vector2i) -> void:
 	add_undo_draw_data()  # This is done so we can animate while playing
@@ -440,7 +433,6 @@ func draw_move(_pos: Vector2i) -> void:
 		_allow_chaining
 		and BoneLayer.get_parent_bone(current_selected_bone)
 		and not Input.is_action_pressed(&"transform_move_selection_only", true)
-
 	):
 		# This section manages chaining. It changes the Global.canvas.skeleton.selected_bone
 		# to point the parent instead if chained
@@ -483,22 +475,26 @@ func draw_move(_pos: Vector2i) -> void:
 			bone_cel_in_focus.gizmo_origin += offset.rotated(-bone_cel_in_focus.bone_rotation)
 			bone_cel_in_focus.should_update_children = false
 		bone_cel_in_focus.start_point = Vector2i(
-			(bone_cel_in_focus.rel_to_origin(mouse_point) - _displace_offset)
+			bone_cel_in_focus.rel_to_origin(mouse_point) - _displace_offset
 		)
 		bone_cel_in_focus.should_update_children = old_update_children
 	elif (
 		current_selected_bone.modify_mode == BoneLayer.ROTATE
 		or current_selected_bone.modify_mode == BoneLayer.EXTEND
 	):
-		var localized_mouse_norm: Vector2 = bone_cel_in_focus.rel_to_start_point(mouse_point).normalized()
-		var localized_prev_mouse_norm: Vector2 = bone_cel_in_focus.rel_to_start_point(
-			_prev_mouse_position
-		).normalized()
+		var localized_mouse_norm: Vector2 = (
+			bone_cel_in_focus.rel_to_start_point(mouse_point).normalized()
+		)
+		var localized_prev_mouse_norm: Vector2 = (
+			bone_cel_in_focus.rel_to_start_point(_prev_mouse_position).normalized()
+		)
 		var diff := localized_mouse_norm.angle_to(localized_prev_mouse_norm)
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
 			bone_cel_in_focus.gizmo_rotate_origin -= diff
 			if current_selected_bone.modify_mode == BoneLayer.EXTEND:
-				bone_cel_in_focus.gizmo_length = bone_cel_in_focus.rel_to_start_point(mouse_point).length()
+				bone_cel_in_focus.gizmo_length = (
+					bone_cel_in_focus.rel_to_start_point(mouse_point).length()
+				)
 		else:
 			bone_cel_in_focus.bone_rotation -= diff
 			if _allow_chaining and _hover_layer_in_chain:
@@ -598,7 +594,7 @@ func populate_popup(
 func get_selected_bones(popup: PopupMenu, bone_index: int) -> Array[BoneLayer]:
 	var bone_names: Array[BoneLayer] = []
 	var project := Global.current_project
-	if bone_index == 0: # All bones (we only need root layers for this)
+	if bone_index == 0:  # All bones (we only need root layers for this)
 		for layer in project.layers:
 			if layer is BaseLayer and BoneLayer.get_parent_bone(layer) == null:
 				bone_names.append(layer)
@@ -620,7 +616,9 @@ func display_props():
 		var frame_cels = Global.current_project.frames[Global.current_project.current_frame].cels
 		%BoneProps.visible = true
 		%BoneLabel.text = tr("Name:") + " " + current_selected_bone.name
-		_rot_slider.set_value_no_signal_update_display(rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation))
+		_rot_slider.set_value_no_signal_update_display(
+			rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation)
+		)
 		_pos_slider.set_value_no_signal(
 			frame_cels[current_selected_bone.index].rel_to_canvas(
 				frame_cels[current_selected_bone.index].start_point
@@ -647,61 +645,61 @@ class FABRIK:
 	# https://github.com/nezvers/Godot_Public_Examples/blob/master/Nature_code/Kinematics/FABRIK.gd
 	# see https://www.youtube.com/watch?v=Ihp6tOCYHug for an intuitive explanation.
 	static func calculate(
-			bone_cels: Array[BoneCel], target_pos: Vector2, max_itterations: int, errorMargin: float
-		) -> bool:
-			var posList := PackedVector2Array()
-			var lenghts := PackedFloat32Array()
-			var totalLength := 0
-			for i in bone_cels.size() - 1:
-				var p_1 := _get_global_start(bone_cels[i])
-				var p_2 := _get_global_start(bone_cels[i + 1])
-				posList.append(p_1)
-				if i == bone_cels.size() - 2:
-					posList.append(p_2)
-				var l = p_2.distance_to(p_1)
-				lenghts.append(l)
-				totalLength += l
-			var old_points = posList.duplicate()
-			var start_global = posList[0]
-			var end_global = posList[posList.size() - 1]
-			var distance: float = (target_pos - start_global).length()
-			# out of reach, no point of IK
-			if distance >= totalLength or posList.size() <= 2:
-				for i in bone_cels.size():
-					var cel := bone_cels[i]
-					if i < bone_cels.size() - 1:
-						# find how much to rotate to bring next start point to mach the one in poslist
-						var cel_start = _get_global_start(cel)
-						var look_old = _get_global_start(bone_cels[i + 1])
-						var look_new = target_pos  # what we should look at
-						# Rotate to look at the next point
-						var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
-						if !is_equal_approx(angle_diff, 0.0):
-							cel.bone_rotation += angle_diff
-				return true
-			else:
-				var errorDist:float = (target_pos - end_global).length()
-				var itterations: = 0
-				# limit the itteration count
-				while errorDist > errorMargin && itterations < max_itterations:
-					_backward_reach(posList, target_pos, lenghts)  # start at endPos
-					_forward_reach(posList, start_global, lenghts)  # start at pinPos
-					errorDist = (target_pos - posList[posList.size() -1]).length()
-					itterations += 1
-				if old_points == posList:
-					return false
-				for i in bone_cels.size():
-					var cel := bone_cels[i]
-					if i < bone_cels.size() - 1:
-						# find how much to rotate to bring next start point to mach the one in poslist
-						var cel_start = _get_global_start(cel)
-						var next_start_old = _get_global_start(bone_cels[i + 1])  # current situation
-						var next_start_new = posList[i + 1]  # what should have been
-						# Rotate to look at the next point
-						var angle_diff = cel_start.angle_to_point(next_start_new) - cel_start.angle_to_point(next_start_old)
-						if !is_equal_approx(angle_diff, 0.0):
-							cel.bone_rotation += angle_diff
-				return true
+		bone_cels: Array[BoneCel], target_pos: Vector2, max_itterations: int, errorMargin: float
+	) -> bool:
+		var posList := PackedVector2Array()
+		var lenghts := PackedFloat32Array()
+		var totalLength := 0
+		for i in bone_cels.size() - 1:
+			var p_1 := _get_global_start(bone_cels[i])
+			var p_2 := _get_global_start(bone_cels[i + 1])
+			posList.append(p_1)
+			if i == bone_cels.size() - 2:
+				posList.append(p_2)
+			var l = p_2.distance_to(p_1)
+			lenghts.append(l)
+			totalLength += l
+		var old_points = posList.duplicate()
+		var start_global = posList[0]
+		var end_global = posList[posList.size() - 1]
+		var distance: float = (target_pos - start_global).length()
+		# out of reach, no point of IK
+		if distance >= totalLength or posList.size() <= 2:
+			for i in bone_cels.size():
+				var cel := bone_cels[i]
+				if i < bone_cels.size() - 1:
+					# find how much to rotate to bring next start point to mach the one in poslist
+					var cel_start = _get_global_start(cel)
+					var look_old = _get_global_start(bone_cels[i + 1])
+					var look_new = target_pos  # what we should look at
+					# Rotate to look at the next point
+					var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
+					if !is_equal_approx(angle_diff, 0.0):
+						cel.bone_rotation += angle_diff
+			return true
+		else:
+			var errorDist:float = (target_pos - end_global).length()
+			var itterations: = 0
+			# limit the itteration count
+			while errorDist > errorMargin && itterations < max_itterations:
+				_backward_reach(posList, target_pos, lenghts)  # start at endPos
+				_forward_reach(posList, start_global, lenghts)  # start at pinPos
+				errorDist = (target_pos - posList[posList.size() -1]).length()
+				itterations += 1
+			if old_points == posList:
+				return false
+			for i in bone_cels.size():
+				var cel := bone_cels[i]
+				if i < bone_cels.size() - 1:
+					# find how much to rotate to bring next start point to mach the one in poslist
+					var cel_start = _get_global_start(cel)
+					var next_start_old = _get_global_start(bone_cels[i + 1])  # current situation
+					var next_start_new = posList[i + 1]  # what should have been
+					# Rotate to look at the next point
+					var angle_diff = cel_start.angle_to_point(next_start_new) - cel_start.angle_to_point(next_start_old)
+					if !is_equal_approx(angle_diff, 0.0):
+						cel.bone_rotation += angle_diff
+			return true
 
 	static func _backward_reach(posList: PackedVector2Array, ending: Vector2, lenghts)->void:
 		var last: = posList.size() - 1
@@ -752,7 +750,9 @@ class CCDIK:
 					var look_old = _get_global_start(bone_cels[i + 1])
 					var look_new = target_pos  # what we should look at
 					# Rotate to look at the next point
-					var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
+					var angle_diff = (
+						cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
+					)
 					if !is_equal_approx(angle_diff, 0.0):
 						cel.bone_rotation += angle_diff
 			return true
@@ -769,7 +769,9 @@ class CCDIK:
 				base_target_vec = base_target_vec.normalized()
 
 				var dot = base_pivot_vec.dot(base_target_vec)
-				var det = base_pivot_vec.x * base_target_vec.y - base_pivot_vec.y * base_target_vec.x
+				var det = (
+					base_pivot_vec.x * base_target_vec.y - base_pivot_vec.y * base_target_vec.x
+				)
 				var angle_delta = atan2(det, dot)
 				if !is_equal_approx(angle_delta, 0.0):
 					bone_cels[i].bone_rotation += angle_delta
