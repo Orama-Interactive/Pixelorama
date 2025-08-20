@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2025-08-20 17:35\n"
+"PO-Revision-Date: 2025-08-20 18:40\n"
 
 msgid "OK"
 msgstr "確定"
@@ -508,7 +508,7 @@ msgid "New reference image"
 msgstr ""
 
 msgid "New palette"
-msgstr "新增調色盤"
+msgstr "新增色盤"
 
 msgid "New brush"
 msgstr "新增畫筆"
@@ -1188,15 +1188,15 @@ msgstr "調整HSV"
 
 #. Refers to the hue of the colors of an image.
 msgid "Hue:"
-msgstr ""
+msgstr "色相："
 
 #. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
-msgstr ""
+msgstr "飽和度："
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
-msgstr ""
+msgstr "亮度："
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
@@ -1510,7 +1510,7 @@ msgid "Save before exiting?"
 msgstr "要先儲存再離開嗎?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "「%s」有未儲存的進度，要如何處置？"
 
 msgid "Save & Exit"
 msgstr "儲存並離開"
@@ -2208,19 +2208,19 @@ msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "填滿區域："
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "相連區域"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "相似顏色"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "全部已選取區域"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
@@ -2241,7 +2241,7 @@ msgid "Offset"
 msgstr "偏移"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "亮度"
 
 msgid "Hue Shifting"
 msgstr ""
@@ -3079,19 +3079,19 @@ msgid "Bucket"
 msgstr "油漆桶"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "陰影"
 
 msgid "Line Tool"
 msgstr "直線工具"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "曲線工具"
 
 msgid "Rectangle Tool"
 msgstr "矩形工具"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "橢圓工具"
 
 msgid "Isometric Box Tool"
 msgstr ""
