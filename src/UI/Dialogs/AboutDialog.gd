@@ -148,11 +148,13 @@ const TRANSLATORS_DICTIONARY := {
 	"ppphp": ["Chinese Simplified"],
 	"lxhzzy06": ["Chinese Simplified"],
 	"Mozt": ["Chinese Simplified"],
+	"OuO": ["Chinese Simplified"],
 	"Marco Galli (Gaarco)": ["Italian"],
 	"StarFang208": ["Italian"],
 	"Damiano Guida (damiano.guida22)": ["Italian"],
 	"albano battistella (albanobattistella)": ["Italian"],
 	"Mattia Castorino (Mattness)": ["Italian"],
+	"TM (-TM-)": ["Italian"],
 	"Azagaya VJ (azagaya.games)": ["Spanish"],
 	"Lilly And (KatieAnd)": ["Spanish"],
 	"UncleFangs": ["Spanish"],
@@ -205,6 +207,7 @@ const TRANSLATORS_DICTIONARY := {
 	"libre ajans (libreajans)": ["Turkish"],
 	"Sabri Ünal (yakushabb)": ["Turkish"],
 	"Lucifer25x": ["Turkish"],
+	"izan (i.zan)": ["Turkish"],
 	"CaelusV": ["Danish"],
 	"Jonas Vejlin (jonas.vejlin)": ["Danish"],
 	"Cat (cultcats)": ["Danish"],
@@ -230,7 +233,8 @@ const DONORS: PackedStringArray = [
 	"Jonas Rudlang",
 	"Mike King",
 	"ShikadiGum",
-	"Ormanus"
+	"Ormanus",
+	"Tronexer",
 ]
 
 @export_multiline var licenses: PackedStringArray

@@ -5,6 +5,7 @@ extends RefCounted
 
 signal name_changed  ## Emits when [member name] is changed.
 signal visibility_changed  ## Emits when [member visible] is changed.
+signal locked_changed  ## Emits when [member locked] is changed.
 signal effects_added_removed  ## Emits when an effect is added or removed to/from [member effects].
 signal ui_color_changed  ## Emits when [member ui_color] is changed.
 
@@ -47,7 +48,10 @@ var visible := true:  ## Sets visibility of the layer.
 	set(value):
 		visible = value
 		visibility_changed.emit()
-var locked := false  ## Images of a locked layer won't be overritten.
+var locked := false:  ## Images of a locked layer won't be overritten.
+	set(value):
+		locked = value
+		locked_changed.emit()
 var new_cels_linked := false  ## Determines if new cel of the layer should be linked or not.
 ## Is [code]true[/code] when the layer's visibility has been changed
 ## when holding Alt and clicking on the visible button on another layer.

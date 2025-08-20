@@ -15,7 +15,7 @@ jobs:
       image: docker://barichello/godot-ci:3.5
     steps:
       - name: Clone source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Linux Build 🔧
@@ -40,7 +40,7 @@ jobs:
           - arm64
     steps:
       - name: Clone source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install clickable dependencies
         run: |
           sudo add-apt-repository ppa:bhdouglass/clickable
@@ -51,7 +51,7 @@ jobs:
       - name: Remove existing click folder
         run: rm -r ./Misc/Clickable
       - name: Download click data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: pixelorama_click_data
           path: ./Misc/Clickable
