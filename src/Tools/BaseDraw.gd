@@ -403,7 +403,7 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 	for c in coords_to_draw.keys():
 		_set_pixel_no_cache(c)
 	if project.has_selection:
-		project.selection_map.lock_selection_rect(project, true)
+		project.selection_map.lock_selection_rect(project, false)
 
 
 ## Calls [method Geometry2D.bresenham_line] and takes [param thickness] into account.
