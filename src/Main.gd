@@ -205,6 +205,18 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"layer_visibility"):
+		for selected_cel in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[selected_cel[1]]
+			layer.visible = not layer.visible
+		Global.canvas.update_all_layers = true
+		Global.canvas.queue_redraw()
+	if event.is_action_pressed(&"layer_lock"):
+		for selected_cel in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[selected_cel[1]]
+			layer.locked = not layer.locked
+		Global.canvas.update_all_layers = true
+		Global.canvas.queue_redraw()
 	if is_writing_text and event is InputEventKey and is_instance_valid(Global.main_viewport):
 		Global.main_viewport.get_child(0).push_input(event)
 	left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
@@ -341,9 +353,29 @@ func _handle_cmdline_arguments() -> void:
 	# Load the files first
 	for arg in args:
 		var file_path := arg
+		# if we think the file could be a potential relative path it can mean two things:
+		# 1. The file is relative to executable
+		# 2. The file is relative to the working directory.
 		if file_path.is_relative_path():
-			file_path = OS.get_executable_path().get_base_dir().path_join(arg)
-		OpenSave.handle_loading_file(file_path)
+			# we first try to convert it to be relative to executable
+			if file_path.is_relative_path():
+				file_path = OS.get_executable_path().get_base_dir().path_join(arg)
+			if !FileAccess.file_exists(file_path):
+				# it is not relative to executable so we have to convert it to an
+				# absolute path instead (this is when file is relative to working directory)
+				var output = []
+				match OS.get_name():
+					"Linux":
+						OS.execute("pwd", [], output)
+					"macOS":
+						OS.execute("pwd", [], output)
+					"Windows":
+						OS.execute("cd", [], output)
+				if output.size() > 0:
+					file_path = str(output[0]).strip_edges().path_join(arg)
+		# Do one last failsafe to see everything is in order
+		if FileAccess.file_exists(file_path):
+			OpenSave.handle_loading_file(file_path)
 
 	var project := Global.current_project
 	# True when exporting from the CLI.

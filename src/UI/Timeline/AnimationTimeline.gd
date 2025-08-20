@@ -20,6 +20,8 @@ var is_animation_running := false
 var animation_loop := LoopType.CYCLE
 var animation_forward := true
 var first_frame := 0
+## Keeps track of the frame idx that is "supposed" to be currently shown frame in the animation.
+var animation_canon_frame: int = 0
 var last_frame := 0
 var is_mouse_hover := false
 var cel_size := 36:
@@ -738,6 +740,9 @@ func _on_AnimationTimer_timeout() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var project := Global.current_project
 	var fps := project.fps
+	# Recalculate start and end points if user deliberately changed the frame.
+	if project.current_frame != animation_canon_frame:
+		calculate_start_end(project)
 	if animation_forward:
 		if project.current_frame < last_frame:
 			project.selected_cels.clear()
@@ -798,10 +803,10 @@ func _on_AnimationTimer_timeout() -> void:
 	frame_scroll_container.ensure_control_visible(
 		Global.frame_hbox.get_child(project.current_frame)
 	)
+	animation_canon_frame = project.current_frame
 
 
-func play_animation(play: bool, forward_dir: bool) -> void:
-	var project := Global.current_project
+func calculate_start_end(project: Project) -> void:
 	first_frame = 0
 	last_frame = project.frames.size() - 1
 	if Global.play_only_tags:
@@ -809,6 +814,11 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 			if project.current_frame + 1 >= tag.from && project.current_frame + 1 <= tag.to:
 				first_frame = tag.from - 1
 				last_frame = mini(project.frames.size() - 1, tag.to - 1)
+
+
+func play_animation(play: bool, forward_dir: bool) -> void:
+	var project := Global.current_project
+	calculate_start_end(project)
 
 	if first_frame == last_frame:
 		if forward_dir:
@@ -831,6 +841,7 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 	if play:
 		animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
 		var frame := project.frames[project.current_frame]
+		animation_canon_frame = project.current_frame
 		animation_timer.wait_time = frame.get_duration_in_seconds(project.fps)
 		animation_timer.start()
 		animation_forward = forward_dir

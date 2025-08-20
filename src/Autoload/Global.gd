@@ -918,6 +918,8 @@ func _initialize_keychain() -> void:
 		&"onion_skinning_toggle": Keychain.InputAction.new("", "Timeline"),
 		&"loop_toggle": Keychain.InputAction.new("", "Timeline"),
 		&"onion_skinning_settings": Keychain.InputAction.new("", "Timeline"),
+		&"layer_visibility": Keychain.InputAction.new("", "Timeline"),
+		&"layer_lock": Keychain.InputAction.new("", "Timeline"),
 		&"new_palette": Keychain.InputAction.new("", "Palettes"),
 		&"edit_palette": Keychain.InputAction.new("", "Palettes"),
 		&"brush_size_increment": Keychain.InputAction.new("", "Tool modifiers"),

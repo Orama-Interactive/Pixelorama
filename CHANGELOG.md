@@ -4,9 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.1.3] - Unreleased
+## [v1.1.4] - 2025-08-13
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.4.1
+
+### Added
+- Implemented the ability to set shortcuts for toggling layer visibility and lock from the preferences. There are no default shortcuts for these at the moment.
+
+### Fixed
+- Fixed selection tools selecting pixels in wrong positions. [#1318](https://github.com/Orama-Interactive/Pixelorama/pull/1318)
+
+## [v1.1.3] - 2025-08-06
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.4.1
 
 ### Added
 - Implemented limited support of Photoshop (.psd) file importing. [#1308](https://github.com/Orama-Interactive/Pixelorama/pull/1308)
@@ -29,7 +43,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 - Resizing selections while holding Shift now works properly from all corners.
 - Fixed resizing tilemap selection when the tilemap cel grid has an offset.
 - Fixed loading APNGs.
-- Significally improved performance of the bucket tool, when a selection is active. [#1304](https://github.com/Orama-Interactive/Pixelorama/pull/1304)
+- Significantly improved performance of the bucket tool, when a selection is active. [#1304](https://github.com/Orama-Interactive/Pixelorama/pull/1304)
 - Made the offset pixels effect only accept integer values for the offset.
 - The FX icon in the layer button is now properly if all effects have been applied.
 - Fixed crash when increasing the width of a palette.

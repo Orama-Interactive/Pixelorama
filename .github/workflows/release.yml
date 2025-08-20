@@ -7,7 +7,7 @@ on:
 env:
   GODOT_VERSION: 4.4.1
   EXPORT_NAME: Pixelorama
-  TAG: v1.1.2
+  TAG: v1.1.4
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           echo 'export/windows/wine = "/usr/bin/wine64-stable"' >> ~/.config/godot/editor_settings-4.4.tres
           echo 'export/windows/rcedit = "/opt/rcedit.exe"' >> ~/.config/godot/editor_settings-4.4.tres
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup 💻
@@ -77,7 +77,7 @@ jobs:
       image: docker://barichello/godot-ci:4.4.1
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup 💻
@@ -133,7 +133,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup environment 🔧
@@ -196,7 +196,7 @@ jobs:
       image: docker://barichello/godot-ci:4.4.1
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup 💻

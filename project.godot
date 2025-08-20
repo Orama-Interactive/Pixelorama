@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Pixelorama"
 config/description="Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features."
-config/version="v1.1.3-rc1"
+config/version="v1.1.4-stable"
 config/tags=PackedStringArray("pixelorama")
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
@@ -1015,6 +1015,14 @@ left_isometricboxtool_tool={
 "events": []
 }
 right_isometricboxtool_tool={
+"deadzone": 0.2,
+"events": []
+}
+layer_visibility={
+"deadzone": 0.2,
+"events": []
+}
+layer_lock={
 "deadzone": 0.2,
 "events": []
 }

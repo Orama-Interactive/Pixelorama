@@ -6,7 +6,7 @@
 ; Helper variables so that we don't change 20 instances of the version for every update
 
   !define APPNAME "Pixelorama"
-  !define APPVERSION "v1.1.2"
+  !define APPVERSION "v1.1.4"
   !define COMPANYNAME "Orama Interactive"
 
 

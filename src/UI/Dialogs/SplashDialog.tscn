@@ -206,7 +206,7 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "ShikadiGum
 Hugo Locurcio
-Jacob"
+Tronexer"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
 layout_mode = 2

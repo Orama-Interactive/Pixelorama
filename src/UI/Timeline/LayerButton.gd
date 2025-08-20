@@ -51,6 +51,7 @@ func _ready() -> void:
 	var layer := Global.current_project.layers[layer_index]
 	layer.name_changed.connect(func(): label.text = layer.name)
 	layer.visibility_changed.connect(_on_layer_visibility_changed)
+	layer.locked_changed.connect(update_buttons)
 	layer.ui_color_changed.connect(func(): layer_ui_color.color = layer.get_ui_color())
 	for ancestor in layer.get_ancestors():
 		ancestor.ui_color_changed.connect(func(): layer_ui_color.color = layer.get_ui_color())
