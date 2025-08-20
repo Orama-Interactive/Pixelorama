@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-08-20 12:39\n"
 
 msgid "OK"
 msgstr "確定"
@@ -74,7 +74,7 @@ msgstr "圖片"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "專案"
 
 msgid "Effects"
 msgstr "效果"
@@ -114,7 +114,7 @@ msgid "Export"
 msgstr "輸出"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "覆寫"
 
 msgid "Export..."
 msgstr "輸出..."
@@ -151,13 +151,13 @@ msgstr "原位黏貼"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "從剪貼簿貼上"
 
 msgid "Delete"
 msgstr "刪除"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "永久刪除"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
@@ -481,7 +481,7 @@ msgid "Apply to all"
 msgstr ""
 
 msgid "Recent projects"
-msgstr ""
+msgstr "最近使用的專案"
 
 msgid "New project"
 msgstr ""
@@ -1334,7 +1334,7 @@ msgstr "關於 Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "贊助支持 Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - 像素化你的夢想！"
@@ -2936,7 +2936,7 @@ msgid "Error"
 msgstr "錯誤"
 
 msgid "Error: Palette must have a valid name."
-msgstr "錯誤: 色盤名字無法使用"
+msgstr "錯誤: 色盤名稱無法使用"
 
 msgid "Invalid Palette file!"
 msgstr "色盤檔無法使用"
@@ -2951,7 +2951,7 @@ msgid "Get colors only from selection"
 msgstr "只從選取區塊獲取顏色"
 
 msgid "Get colors from"
-msgstr "獲取顏色從"
+msgstr "顏色來源"
 
 msgid "Patrons:"
 msgstr "贊助者："
@@ -3256,19 +3256,19 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "創建新的色盤"
 
 msgid "Comment:"
-msgstr ""
+msgstr "描述："
 
 msgid "Empty"
-msgstr ""
+msgstr "空色盤"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "以當前色盤爲顏色來源"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "以這個專案爲顏色來源"
 
 msgid "From Current Selection"
 msgstr ""
@@ -3320,10 +3320,10 @@ msgid "Sort by alpha"
 msgstr ""
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "與另一個同名又同檔案路徑的色盤衝突！"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "色盤必須有名稱！"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
@@ -3342,7 +3342,7 @@ msgid "Second Canvas"
 msgstr ""
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "動畫時間線"
 
 msgid "Canvas Preview"
 msgstr ""
@@ -3360,7 +3360,7 @@ msgid "Right Tool Options"
 msgstr ""
 
 msgid "Reference Images"
-msgstr ""
+msgstr "參考圖"
 
 msgid "Perspective Editor"
 msgstr ""
@@ -3684,7 +3684,7 @@ msgstr ""
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "圖片檔可以匯入成參考圖。"
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
