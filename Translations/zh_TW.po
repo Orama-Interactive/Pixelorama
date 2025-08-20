@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2025-08-20 12:39\n"
+"PO-Revision-Date: 2025-08-20 17:35\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1699,7 +1699,7 @@ msgstr ""
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "顏色選項"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
@@ -1715,7 +1715,7 @@ msgstr ""
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "最近使用的顏色"
 
 msgid "Left tool"
 msgstr "左鍵工具"
@@ -2158,7 +2158,7 @@ msgid "Rotate:"
 msgstr ""
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "覆寫顏色"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "覆寫顏色而不是混合顏色，此選項只適用於半透明的顏色"
@@ -2197,7 +2197,7 @@ msgstr ""
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "像素隨機填入比例："
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
