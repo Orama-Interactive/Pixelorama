@@ -1,22 +1,84 @@
 class_name LayerEffect
 extends RefCounted
 
+const MAX_FRAME_INDEX := 9999999
+
 var name := ""
 var shader: Shader
 var category := ""
 var params := {}
+var animated_params := {}
 var enabled := true
+var animated := false
 
 
-func _init(_name := "", _shader: Shader = null, _category := "", _params := {}) -> void:
+func _init(_name := "", _shader: Shader = null, _category := "", _animated_params := {}) -> void:
 	name = _name
 	shader = _shader
 	category = _category
-	params = _params
+	animated_params = _animated_params
+	if not animated_params.has(0):
+		animated_params[0] = {}
 
 
 func duplicate() -> LayerEffect:
 	return LayerEffect.new(name, shader, category, params.duplicate())
+
+
+func get_params(frame_index: int) -> Dictionary:
+	if not animated:
+		return animated_params[0]
+	if not animated_params.has(frame_index):
+		if animated_params.size() == 1:
+			return animated_params[0]
+		var frame_edges := find_frame_edges(frame_index)
+		var min_params: Dictionary = animated_params[frame_edges[0]]
+		if frame_edges[1] >= MAX_FRAME_INDEX:
+			return min_params
+		var max_params: Dictionary = animated_params[frame_edges[1]]
+		var interpolated_params := {}
+		for param in animated_params[0]:
+			#prints(param, animated_params[0][param])
+			if param.begins_with("PXO_"):
+				continue
+			if param not in min_params or param not in max_params:
+				interpolated_params[param] = animated_params[0][param]
+				continue
+			var min_param = min_params[param]
+			var max_param = max_params[param]
+			if not is_interpolatable_type(min_param):
+				interpolated_params[param] = animated_params[0][param]
+				continue
+			var elapsed := frame_index - frame_edges[0]
+			var delta = max_param - min_param
+			var duration := frame_edges[1] - frame_edges[0]
+			interpolated_params[param] = Tween.interpolate_value(
+				min_param, delta, elapsed, duration, Tween.TRANS_LINEAR, Tween.EASE_IN
+			)
+		return interpolated_params
+	return animated_params[frame_index]
+
+
+func is_interpolatable_type(value: Variant) -> bool:
+	var type := typeof(value)
+	match type:
+		TYPE_INT, TYPE_FLOAT, TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_QUATERNION:
+			return true
+		_:
+			return false
+
+
+func find_frame_edges(frame_index: int) -> Array[int]:
+	var param_keys := animated_params.keys()
+	param_keys.sort()
+	var minimum := 0
+	var maximum := MAX_FRAME_INDEX
+	for key in param_keys:
+		if key > minimum and key <= frame_index:
+			minimum = key
+		if key < maximum and key >= frame_index:
+			maximum = key
+	return [minimum, maximum]
 
 
 func serialize() -> Dictionary:
@@ -43,3 +105,4 @@ func deserialize(dict: Dictionary) -> void:
 			params = str_to_var(dict["params"])
 	if dict.has("enabled"):
 		enabled = dict["enabled"]
+	animated = dict.get("animated", animated)

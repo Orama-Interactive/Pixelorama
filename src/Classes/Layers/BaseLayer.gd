@@ -258,10 +258,11 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	for effect in effects:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
-		var params := effect.params
 		var frame := cel.get_frame(project)
+		var frame_index := project.frames.find(frame)
+		var params := effect.get_params(frame_index)
 		params["PXO_time"] = frame.position_in_seconds(project)
-		params["PXO_frame_index"] = project.frames.find(frame)
+		params["PXO_frame_index"] = frame_index
 		params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, params, image_size)

@@ -143,6 +143,13 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	var label := Label.new()
 	label.text = effect.name
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var animated_checkbutton := CheckButton.new()
+	animated_checkbutton.button_pressed = effect.animated
+	animated_checkbutton.text = "Animated"
+	animated_checkbutton.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	animated_checkbutton.toggled.connect(
+		func(button_pressed: bool): effect.animated = button_pressed
+	)
 	var delete_button := TextureButton.new()
 	delete_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	delete_button.texture_normal = DELETE_TEXTURE
@@ -152,6 +159,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	delete_button.pressed.connect(_delete_effect.bind(effect))
 	hbox.add_child(enable_checkbox)
 	hbox.add_child(label)
+	hbox.add_child(animated_checkbutton)
 	if layer is PixelLayer:
 		var apply_button := Button.new()
 		apply_button.text = "Apply"
@@ -159,13 +167,14 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 		apply_button.pressed.connect(_apply_effect.bind(layer, effect))
 		hbox.add_child(apply_button)
 	hbox.add_child(delete_button)
+	var frame_index := Global.current_project.current_frame
 	var parameter_vbox := CollapsibleContainer.new()
 	ShaderLoader.create_ui_for_shader_uniforms(
 		effect.shader,
-		effect.params,
+		effect.get_params(frame_index),
 		parameter_vbox,
-		_set_parameter.bind(effect),
-		_load_parameter_texture.bind(effect)
+		_set_parameter.bind(effect, frame_index),
+		_load_parameter_texture.bind(effect, frame_index)
 	)
 	var collapsible_button := parameter_vbox.get_button()
 	collapsible_button.set_script(LAYER_EFFECT_BUTTON)
@@ -258,19 +267,28 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	effect_container.get_child(index).queue_free()
 
 
-func _set_parameter(value, param: String, effect: LayerEffect) -> void:
-	effect.params[param] = value
+func _set_parameter(value, param: String, effect: LayerEffect, frame_index: int) -> void:
+	if not effect.animated:
+		# Effects that are not being animated only need one sub-dictionary
+		# for the first frame, since all frames share the same parameters.
+		frame_index = 0
+	if not effect.animated_params.has(frame_index):
+		effect.animated_params[frame_index] = effect.get_params(frame_index).duplicate()
+		prints(frame_index, param, value)
+	effect.animated_params[frame_index][param] = value
 	Global.canvas.queue_redraw()
 
 
-func _load_parameter_texture(path: String, param: String, effect: LayerEffect) -> void:
+func _load_parameter_texture(
+	path: String, param: String, effect: LayerEffect, frame_index: int
+) -> void:
 	var image := Image.new()
 	image.load(path)
 	if !image:
 		print("Error loading texture")
 		return
 	var image_tex := ImageTexture.create_from_image(image)
-	_set_parameter(image_tex, param, effect)
+	_set_parameter(image_tex, param, effect, frame_index)
 
 
 func _on_enabled_button_toggled(button_pressed: bool) -> void:
