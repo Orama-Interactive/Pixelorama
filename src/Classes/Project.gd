@@ -58,6 +58,8 @@ var animation_tags: Array[AnimationTag] = []:
 	set = _animation_tags_changed
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
+var palettes: Dictionary[String, Palette] = {}
+var current_palette: String = ""  # Name of selected palette (for "project" palettes only)
 var reference_images: Array[ReferenceImage] = []
 var reference_index: int = -1  # The currently selected index ReferenceImage
 var vanishing_points := []  ## Array of Vanishing Points
@@ -257,6 +259,10 @@ func serialize() -> Dictionary:
 	for layer in layers:
 		layer_data.append(layer.serialize())
 		layer_data[-1]["metadata"] = _serialize_metadata(layer)
+	var palette_data := []
+	for palette_name in palettes:
+		var data: String = palettes[palette_name].serialize()
+		palette_data.append({palette_name: data})
 	var tag_data := []
 	for tag in animation_tags:
 		tag_data.append(tag.serialize())
@@ -313,6 +319,7 @@ func serialize() -> Dictionary:
 		"symmetry_points": [x_symmetry_point, y_symmetry_point],
 		"frames": frame_data,
 		"brushes": brush_data,
+		"palettes": palette_data,
 		"reference_images": reference_image_data,
 		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
@@ -351,6 +358,14 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			var tileset := TileSetCustom.new(tile_size, "", tile_shape, false)
 			tileset.deserialize(saved_tileset)
 			tilesets.append(tileset)
+	if dict.has("palettes"):
+		for palette_entry: Dictionary in dict["palettes"]:
+			if palette_entry.keys().size() == 1:  # Failsafe
+				var palette_name: String = palette_entry.keys()[0]
+				var palette = Palette.new(palette_name)
+				palette.is_project_palette = true
+				palette.deserialize(palette_entry[palette_name])
+				palettes[palette_name] = palette
 	if dict.has("frames") and dict.has("layers"):
 		var audio_layers := 0
 		for saved_layer in dict.layers:

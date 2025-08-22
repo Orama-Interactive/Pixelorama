@@ -30,14 +30,25 @@ func _ready() -> void:
 
 
 func does_palette_exist(palette_name: String) -> bool:
-	for name_to_test: String in palettes.keys():
+	var keys = palettes.keys()
+	if Global.current_project:
+		keys.append_array(Global.current_project.palettes.keys())
+	for name_to_test: String in keys:
 		if name_to_test == palette_name:
 			return true
 	return false
 
 
 func select_palette(palette_name: String) -> void:
-	current_palette = palettes.get(palette_name, null)
+	var project: Project = Global.current_project
+	project.current_palette = ""
+	current_palette = null
+	if palettes.has(palette_name):
+		current_palette = palettes.get(palette_name, null)
+	elif project.palettes.has(palette_name):
+		current_palette = project.palettes.get(palette_name, null)
+		if current_palette:
+			project.current_palette = palette_name
 	_clear_selected_colors()
 	if is_instance_valid(current_palette):
 		Global.config_cache.set_value("data", "last_palette", current_palette.name)
@@ -57,6 +68,8 @@ func _ensure_palette_directory_exists() -> void:
 
 
 func save_palette(palette: Palette = current_palette) -> void:
+	if palette.is_project_palette:  # Failsafe
+		return
 	_ensure_palette_directory_exists()
 	if not is_instance_valid(palette):
 		return
@@ -74,10 +87,13 @@ func save_palette(palette: Palette = current_palette) -> void:
 		Global.popup_error("Failed to save palette. Error code %s (%s)" % [err, error_string(err)])
 
 
-func copy_palette() -> void:
-	var new_palette_name := current_palette.name
+func copy_palette(new_palette_name := current_palette.name) -> void:
+	var copies := 0
+	var suffix
 	while does_palette_exist(new_palette_name):
-		new_palette_name += " copy"
+		suffix = " copy" + (str(copies) if copies != 0 else "")
+		new_palette_name = current_palette.name + suffix
+		copies += 1
 	var comment := current_palette.comment
 	_create_new_palette_from_current_palette(new_palette_name, comment)
 
@@ -124,8 +140,10 @@ func _create_new_palette_from_current_palette(palette_name: String, comment: Str
 	new_palette.name = palette_name
 	new_palette.comment = comment
 	new_palette.path = palettes_write_path.path_join(new_palette.name) + ".json"
-	save_palette(new_palette)
-	palettes[palette_name] = new_palette
+	#save_palette(new_palette)
+	new_palette.is_project_palette = true
+	Global.current_project.palettes[new_palette.name] = new_palette
+	#palettes[palette_name] = new_palette
 	select_palette(palette_name)
 
 

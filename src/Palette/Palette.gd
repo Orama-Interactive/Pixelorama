@@ -12,6 +12,11 @@ var name := "Custom Palette":
 		name = value.strip_edges()
 var comment := ""
 var path := ""
+var is_project_palette := false:
+	set(value):
+		if value:
+			path = ""
+		is_project_palette = value
 
 ## The width of the grid.
 var width := DEFAULT_WIDTH
@@ -86,7 +91,7 @@ func duplicate() -> Palette:
 	return new_palette
 
 
-func _serialize() -> String:
+func serialize() -> String:
 	var serialize_data := {"comment": comment, "colors": [], "width": width, "height": height}
 	for color in colors:
 		serialize_data.colors.push_back(colors[color].serialize())
@@ -131,10 +136,12 @@ func deserialize_from_dictionary(data: Dictionary) -> void:
 
 
 func save_to_file() -> Error:
+	if is_project_palette:  ## TODO: There might be a better way for this
+		return OK
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if not is_instance_valid(file):
 		return FileAccess.get_open_error()
-	file.store_string(_serialize())
+	file.store_string(serialize())
 	file.close()
 	return OK
 

@@ -4,8 +4,8 @@ extends Container
 const CREATE_PALETTE_SCENE_PATH := "res://src/Palette/CreatePaletteDialog.tscn"
 const EDIT_PALETTE_SCENE_PATH := "res://src/Palette/EditPaletteDialog.tscn"
 
-var palettes_path_id := {}
-var palettes_id_path := {}
+var palettes_name_id := {}
+var palettes_id_name := {}
 
 var edited_swatch_index := -1
 var edited_swatch_color := Color.TRANSPARENT
@@ -28,7 +28,7 @@ var edit_palette_dialog: ConfirmationDialog:
 			add_child(edit_palette_dialog)
 		return edit_palette_dialog
 
-@onready var palette_select := $"%PaletteSelect"
+@onready var palette_select := $"%PaletteSelect" as OptionButton
 @onready var palette_grid := $"%PaletteGrid" as PaletteGrid
 @onready var palette_scroll := $"%PaletteScroll"
 
@@ -63,6 +63,7 @@ func _ready() -> void:
 	Palettes.palette_selected.connect(select_palette)
 	Palettes.new_palette_created.connect(_new_palette_created)
 	Palettes.new_palette_imported.connect(setup_palettes_selector)
+	Global.project_switched.connect(setup_palettes_selector)
 	sort_submenu.id_pressed.connect(sort_pressed)
 	sort_button_popup.id_pressed.connect(
 		func(id: int):
@@ -90,23 +91,46 @@ func _input(_event: InputEvent) -> void:
 ## Setup palettes selector with available palettes
 func setup_palettes_selector() -> void:
 	# Clear selector
-	palettes_path_id.clear()
-	palettes_id_path.clear()
+	palettes_name_id.clear()
+	palettes_id_name.clear()
 	palette_select.clear()
 
 	var id := 0
+	var selected_id := 0
 	for palette_name in Palettes.palettes:
 		# Add palette selector item
 		palette_select.add_item(Palettes.palettes[palette_name].name, id)
 
-		# Map palette paths to item id's and otherwise
-		palettes_path_id[palette_name] = id
-		palettes_id_path[id] = palette_name
+		# Map palette name to item id's and otherwise
+		palettes_name_id[palette_name] = id
+		palettes_id_name[id] = palette_name
 		id += 1
+	var project := Global.current_project
+	if project:
+		if project.palettes.size() == 0 and Palettes.palettes.size() != 0:
+			# Copy the current palette
+			Palettes.copy_palette("Project Palette")
+		if project.palettes.size() > 0:
+			palette_select.add_separator("Project Palettes")
+			id += 1
+			selected_id = id  # we should select the first project palette
+		for palette_name in project.palettes:
+			# Add palette selector item
+			palette_select.add_item(project.palettes[palette_name].name, id)
+			if palette_name == project.current_palette:
+				selected_id = id  # we should select the current palette
+
+			# Map palette name to item id's and otherwise
+			palettes_name_id[palette_name] = id
+			palettes_id_name[id] = palette_name
+			id += 1
+	if id > 0:  # Fix for zero palettes
+		palette_select.selected = selected_id
+		palette_select.item_selected.emit(selected_id)
 
 
 func select_palette(palette_name: String) -> void:
-	var palette_id = palettes_path_id.get(palette_name)
+	var palette_id = palettes_name_id.get(palette_name)
 	if palette_id != null:
 		palette_select.selected = palette_id
 	palette_grid.set_palette(Palettes.current_palette)
@@ -159,7 +183,7 @@ func _on_EditPalette_pressed() -> void:
 
 
 func _on_PaletteSelect_item_selected(index: int) -> void:
-	Palettes.select_palette(palettes_id_path.get(index))
+	Palettes.select_palette(palettes_id_name.get(index))
 
 
 func _on_AddColor_gui_input(event: InputEvent) -> void:
