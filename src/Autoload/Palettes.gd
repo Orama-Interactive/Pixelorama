@@ -234,7 +234,12 @@ func _delete_palette(palette: Palette, permanent := true) -> void:
 			DirAccess.remove_absolute(palette.path)
 		else:
 			OS.move_to_trash(palette.path)
-	palettes.erase(palette.name)
+	if palette.name in palettes:
+		palettes.erase(palette.name)
+		return
+	if Global.current_project:
+		if palette.name in Global.current_project.palettes:
+			Global.current_project.palettes.erase(palette.name)
 
 
 func current_palete_delete(permanent := true) -> void:
