@@ -16,6 +16,7 @@ var origin_width := 0
 var origin_height := 0
 
 var old_name := ""
+var trash_button: Button
 
 @onready var name_input := $VBoxContainer/PaletteMetadata/Name
 @onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
@@ -34,11 +35,12 @@ func _ready() -> void:
 	# Add delete and export buttons to edit palette dialog
 	add_button("Delete", false, DELETE_ACTION)
 	add_button("Export", false, EXPORT_ACTION)
-	delete_confirmation.add_button("Move to Trash", false, BIN_ACTION)
+	trash_button = delete_confirmation.add_button("Move to Trash", false, BIN_ACTION)
 
 
 func open(current_palette: Palette) -> void:
 	if current_palette:
+		trash_button.visible = !current_palette.is_project_palette
 		name_input.text = current_palette.name
 		comment_input.text = current_palette.comment
 		width_input.value = current_palette.width

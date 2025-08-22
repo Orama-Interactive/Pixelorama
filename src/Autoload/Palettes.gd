@@ -229,7 +229,7 @@ func current_palette_edit(palette_name: String, comment: String, width: int, hei
 
 
 func _delete_palette(palette: Palette, permanent := true) -> void:
-	if not palette.path.is_empty():
+	if not palette.path.is_empty() and not palette.is_project_palette:
 		if permanent:
 			DirAccess.remove_absolute(palette.path)
 		else:
