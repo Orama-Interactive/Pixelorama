@@ -109,8 +109,8 @@ func add_palette_as_project_palette(new_palette: Palette) -> void:
 	new_palette.is_project_palette = true
 	new_palette.name = create_valid_name(new_palette.name)
 	Global.current_project.palettes[new_palette.name] = new_palette
+	current_palette = new_palette
 	new_palette_created.emit()
-	select_palette(new_palette.name)
 
 
 func undo_redo_add_palette(new_palette: Palette):
@@ -192,12 +192,13 @@ func _create_new_palette_from_current_palette(
 	if is_global:
 		save_palette(new_palette)
 		palettes[palette_name] = new_palette
+		select_palette(palette_name)
 	else:
 		if is_undoable:
 			undo_redo_add_palette(new_palette)
 		else :
 			add_palette_as_project_palette(new_palette)
-	select_palette(palette_name)
+			select_palette(palette_name)
 
 
 func _create_new_palette_from_current_selection(
@@ -277,30 +278,39 @@ func _fill_new_palette_with_colors(
 	if is_global:
 		save_palette(new_palette)
 		palettes[new_palette.name] = new_palette
+		select_palette(new_palette.name)
 	else:
 		undo_redo_add_palette(new_palette)
-
-	select_palette(new_palette.name)
 
 
 func current_palette_edit(
 	palette_name: String, comment: String, width: int, height: int, is_global: bool
 ) -> void:
-	unparent_palette(current_palette)
 	_check_palette_settings_values(palette_name, width, height)
-	current_palette.edit(palette_name, width, height, comment)
 	if is_global:
+		current_palette.edit(palette_name, width, height, comment)
 		if current_palette.is_project_palette:
 			_delete_palette(current_palette)
 			current_palette.is_project_palette = false
 		save_palette()
 		palettes[palette_name] = current_palette
+		select_palette(palette_name)
 	else:
 		if not current_palette.is_project_palette:
-			_delete_palette(current_palette, true)
-			current_palette.is_project_palette = true
-		Global.current_project.palettes[current_palette.name] = current_palette
-		select_palette(palette_name)
+			var undo_redo := Global.current_project.undo_redo
+			undo_redo.create_action("Edit Properties")
+			undo_redo.add_undo_method(
+				current_palette.edit.bind(
+					current_palette.name,
+					current_palette.width,
+					current_palette.height,
+					current_palette.comment
+				)
+			)
+			copy_palette(palette_name, false)
+			undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+			undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+			undo_redo.commit_action()
 
 
 ## Deletes palette but does not reselect

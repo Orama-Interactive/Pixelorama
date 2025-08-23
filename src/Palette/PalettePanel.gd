@@ -98,11 +98,8 @@ func setup_palettes_selector() -> void:
 	palette_select.clear()
 
 	var id := 0
-	var selected_id := -1
 	for palette_name in Palettes.palettes:
 		# Add palette selector item
-		if Palettes.palettes[palette_name] == Palettes.current_palette:
-			selected_id = id
 		palette_select.add_item(Palettes.palettes[palette_name].name, id)
 
 		# Map palette name to item id's and otherwise
@@ -113,26 +110,19 @@ func setup_palettes_selector() -> void:
 	if project:
 		if project.palettes.size() == 0 and Palettes.palettes.size() != 0:
 			# Copy the current palette
-			Palettes.copy_palette(
-				Palettes.create_valid_name("Custom Palette", "(Project)"), false, false
-			)
-			selected_id = id + 2  # we should select the first project palette
+			var palette := Palette.new(Palettes.create_valid_name("Custom Palette", "(Project)"))
+			project.palettes[palette.name] = palette
 		if project.palettes.size() > 0:
-			palette_select.add_separator("Project Palettes")
+			palette_select.add_separator("")
 			id += 1
 		for palette_name in project.palettes:
 			# Add palette selector item
 			palette_select.add_item(project.palettes[palette_name].name, id)
-			if palette_name == project.current_palette:
-				selected_id = id  # we should select the current palette
 
 			# Map palette name to item id's and otherwise
 			palettes_name_id[palette_name] = id
 			palettes_id_name[id] = palette_name
 			id += 1
-	if id > 0 and selected_id != -1:  # Fix for zero palettes
-		palette_select.selected = selected_id
-		palette_select.item_selected.emit(selected_id)
 
 
 func select_palette(palette_name: String) -> void:
@@ -396,7 +386,10 @@ func _on_edit_palette_dialog_deleted(permanent: bool) -> void:
 
 
 func _project_switched() -> void:
+	var proj_palette_name := Global.current_project.current_palette
 	setup_palettes_selector()
+	if Global.current_project.current_palette != "":
+		Palettes.select_palette(proj_palette_name)
 	redraw_current_palette()
 
 
