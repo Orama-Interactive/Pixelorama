@@ -2,6 +2,7 @@ extends Node
 
 signal palette_selected(palette_name: String)
 signal new_palette_created
+signal palette_removed
 signal new_palette_imported
 
 enum SortOptions {NEW_PALETTE, REVERSE, HUE, SATURATION, VALUE, LIGHTNESS, RED, GREEN, BLUE, ALPHA}
@@ -87,10 +88,35 @@ func save_palette(palette: Palette = current_palette) -> void:
 		Global.popup_error("Failed to save palette. Error code %s (%s)" % [err, error_string(err)])
 
 
-func copy_palette(new_palette_name := current_palette.name, is_global := false) -> void:
+func copy_palette(
+	new_palette_name := current_palette.name, is_global := false, is_undoable := true
+) -> void:
 	new_palette_name = create_valid_name(new_palette_name)
 	var comment := current_palette.comment
-	_create_new_palette_from_current_palette(new_palette_name, comment, is_global)
+	_create_new_palette_from_current_palette(new_palette_name, comment, is_global, is_undoable)
+
+
+func unparent_palette(palette: Palette):
+	if palette.name in palettes:
+		palettes.erase(palette.name)
+		return
+	if Global.current_project:
+		if palette.name in Global.current_project.palettes:
+			Global.current_project.palettes.erase(palette.name)
+
+
+func add_palette_as_project_palette(new_palette: Palette) -> void:
+	new_palette.is_project_palette = true
+	new_palette.name = create_valid_name(new_palette.name)
+	Global.current_project.palettes[new_palette.name] = new_palette
+	new_palette_created.emit()
+	select_palette(new_palette.name)
+
+
+func undo_redo_add_palette(new_palette: Palette):
+	var undo_redo = Global.current_project.undo_redo
+	undo_redo.add_do_method(add_palette_as_project_palette.bind(new_palette))
+	undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
 
 
 func create_valid_name(initial_palette_name: String, suffix := "copy") -> String:
@@ -117,6 +143,8 @@ func create_new_palette(
 	get_colors_from: int,
 	is_global: bool
 ) -> void:
+	if !is_global:
+		Global.current_project.undo_redo.create_action("Create new palette")
 	_check_palette_settings_values(palette_name, width, height)
 	match preset:
 		NewPalettePresetType.EMPTY:
@@ -131,7 +159,12 @@ func create_new_palette(
 			_create_new_palette_from_current_selection(
 				palette_name, comment, width, height, add_alpha_colors, get_colors_from, is_global
 			)
-	new_palette_created.emit()
+	if !is_global:
+		Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		Global.current_project.undo_redo.commit_action()
+	else:
+		new_palette_created.emit()
 
 
 func _create_new_empty_palette(
@@ -141,14 +174,13 @@ func _create_new_empty_palette(
 	if is_global:
 		save_palette(new_palette)
 		palettes[palette_name] = new_palette
+		select_palette(palette_name)
 	else:
-		new_palette.is_project_palette = true
-		Global.current_project.palettes[new_palette.name] = new_palette
-	select_palette(palette_name)
+		undo_redo_add_palette(new_palette)
 
 
 func _create_new_palette_from_current_palette(
-	palette_name: String, comment: String, is_global: bool
+	palette_name: String, comment: String, is_global: bool, is_undoable := true
 ) -> void:
 	if !current_palette:
 		return
@@ -161,8 +193,10 @@ func _create_new_palette_from_current_palette(
 		save_palette(new_palette)
 		palettes[palette_name] = new_palette
 	else:
-		new_palette.is_project_palette = true
-		Global.current_project.palettes[new_palette.name] = new_palette
+		if is_undoable:
+			undo_redo_add_palette(new_palette)
+		else :
+			add_palette_as_project_palette(new_palette)
 	select_palette(palette_name)
 
 
@@ -244,8 +278,7 @@ func _fill_new_palette_with_colors(
 		save_palette(new_palette)
 		palettes[new_palette.name] = new_palette
 	else:
-		new_palette.is_project_palette = true
-		Global.current_project.palettes[new_palette.name] = new_palette
+		undo_redo_add_palette(new_palette)
 
 	select_palette(new_palette.name)
 
@@ -253,6 +286,7 @@ func _fill_new_palette_with_colors(
 func current_palette_edit(
 	palette_name: String, comment: String, width: int, height: int, is_global: bool
 ) -> void:
+	unparent_palette(current_palette)
 	_check_palette_settings_values(palette_name, width, height)
 	current_palette.edit(palette_name, width, height, comment)
 	if is_global:
@@ -269,27 +303,27 @@ func current_palette_edit(
 		select_palette(palette_name)
 
 
+## Deletes palette but does not reselect
 func _delete_palette(palette: Palette, permanent := true) -> void:
 	if not palette.path.is_empty() and not palette.is_project_palette:
 		if permanent:
 			DirAccess.remove_absolute(palette.path)
 		else:
 			OS.move_to_trash(palette.path)
-	if palette.name in palettes:
-		palettes.erase(palette.name)
-		return
-	if Global.current_project:
-		if palette.name in Global.current_project.palettes:
-			Global.current_project.palettes.erase(palette.name)
+	unparent_palette(palette)
+	palette_removed.emit()
 
 
-func current_palete_delete(permanent := true) -> void:
-	_delete_palette(current_palette, permanent)
-
+## Deletes palette and reselects some other palette
+func palette_delete_and_reselect(permanent := true, palette := current_palette) -> void:
+	# NOTE: The undo redo for deletion is handled in
+	# [method _on_edit_palette_dialog_deleted] of PalettePanel.gd
+	_delete_palette(palette, permanent)
 	if palettes.size() > 0:
 		select_palette(palettes.keys()[0])
 	else:
-		current_palette = null
+		if palette == current_palette:
+			current_palette = null
 		select_palette("")
 
 
