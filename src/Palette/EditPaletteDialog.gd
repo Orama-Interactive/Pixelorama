@@ -24,7 +24,7 @@ var trash_button: Button
 @onready var width_input := $VBoxContainer/PaletteMetadata/Width
 @onready var height_input := $VBoxContainer/PaletteMetadata/Height
 @onready var path_input := $VBoxContainer/PaletteMetadata/Path
-@onready var local_global_checkbox: CheckBox = $VBoxContainer/PaletteMetadata/LocalGlobalCheckBox
+@onready var local_checkbox: CheckBox = $VBoxContainer/PaletteTypeSettings/TypeCheckBox
 
 @onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
 @onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
@@ -45,7 +45,7 @@ func open(current_palette: Palette) -> void:
 		trash_button.visible = !current_palette.is_project_palette
 		path_input.visible = !current_palette.is_project_palette
 		$VBoxContainer/PaletteMetadata/PathLabel.visible = path_input.visible
-		local_global_checkbox.button_pressed = !current_palette.is_project_palette
+		local_checkbox.button_pressed = current_palette.is_project_palette
 		delete_button.visible = true
 		if current_palette.is_project_palette and Global.current_project.palettes.size() == 1:
 			delete_button.visible = false
@@ -99,7 +99,7 @@ func _on_EditPaletteDialog_confirmed() -> void:
 		comment_input.text,
 		width_input.value,
 		height_input.value,
-		local_global_checkbox.button_pressed
+		!local_checkbox.button_pressed
 	)
 
 

@@ -11,6 +11,7 @@ var current_palette: Palette
 @onready var comment_input := $VBoxContainer/PaletteMetadata/Comment as TextEdit
 @onready var width_input := $VBoxContainer/PaletteMetadata/Width as SpinBox
 @onready var height_input := $VBoxContainer/PaletteMetadata/Height as SpinBox
+@onready var local_checkbox := $VBoxContainer/PaletteTypeSettings/TypeCheckBox as CheckBox
 @onready var alpha_colors_input := $VBoxContainer/ColorsSettings/AddAlphaColors as CheckBox
 @onready var get_colors_from_input := (
 	$VBoxContainer/ColorsSettings/GetColorsFrom/GetColorsFrom as OptionButton
@@ -82,7 +83,8 @@ func _on_CreatePaletteDialog_confirmed() -> void:
 		width_input.value,
 		height_input.value,
 		alpha_colors_input.button_pressed,
-		get_colors_from_input.selected
+		get_colors_from_input.selected,
+		!local_checkbox.button_pressed
 	)
 
 

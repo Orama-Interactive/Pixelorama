@@ -824,7 +824,6 @@ class PaletteAPI:
 		Palettes.new_palette_created.emit()
 
 
-
 ## Gives access to the basic commonly used signals.
 ##
 ## Gives access to the basic commonly used signals.

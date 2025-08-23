@@ -99,6 +99,8 @@ func setup_palettes_selector() -> void:
 	var selected_id := 0
 	for palette_name in Palettes.palettes:
 		# Add palette selector item
+		if Palettes.palettes[palette_name] == Palettes.current_palette:
+			selected_id = id
 		palette_select.add_item(Palettes.palettes[palette_name].name, id)
 
 		# Map palette name to item id's and otherwise
@@ -110,10 +112,10 @@ func setup_palettes_selector() -> void:
 		if project.palettes.size() == 0 and Palettes.palettes.size() != 0:
 			# Copy the current palette
 			Palettes.copy_palette(Palettes.create_valid_name("Custom Palette", "(Project)"))
+			selected_id = id + 2  # we should select the first project palette
 		if project.palettes.size() > 0:
 			palette_select.add_separator("Project Palettes")
 			id += 1
-			selected_id = id  # we should select the first project palette
 		for palette_name in project.palettes:
 			# Add palette selector item
 			palette_select.add_item(project.palettes[palette_name].name, id)
