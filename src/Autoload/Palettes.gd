@@ -101,8 +101,8 @@ func create_valid_name(initial_palette_name: String, suffix := "copy") -> String
 	initial_palette_name = initial_palette_name.strip_edges()
 	var palette_name := initial_palette_name
 	while does_palette_exist(palette_name):
-		var _suffix = " %s" % suffix + (str(" ", copies) if copies != 0 else "")
-		palette_name = initial_palette_name + _suffix
+		var final_suffix = " %s" % suffix + (str(" ", copies) if copies != 0 else "")
+		palette_name = initial_palette_name + final_suffix
 		copies += 1
 	return palette_name
 
