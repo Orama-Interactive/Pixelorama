@@ -364,7 +364,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				var palette_name: String = palette_entry.keys()[0]
 				# There may be a case where a Global palette has same name as project palette
 				var corrected_palette_name := Palettes.create_valid_name(palette_name, "(Project)")
-				var palette = Palette.new(corrected_palette_name)
+				var palette := Palette.new(corrected_palette_name)
 				palette.is_project_palette = true
 				palette.deserialize(palette_entry[palette_name])
 				palettes[corrected_palette_name] = palette

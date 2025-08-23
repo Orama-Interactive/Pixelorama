@@ -201,9 +201,7 @@ func _create_new_palette_from_current_sprite(
 	for x in current_project.size.x:
 		for y in current_project.size.y:
 			pixels.append(Vector2i(x, y))
-	_fill_new_palette_with_colors(
-		pixels, new_palette, add_alpha_colors, get_colors_from, is_global
-	)
+	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from, is_global)
 
 
 ## Fills [param new_palette] with the colors of the [param pixels] of the current sprite.
