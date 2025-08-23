@@ -109,7 +109,7 @@ func setup_palettes_selector() -> void:
 	if project:
 		if project.palettes.size() == 0 and Palettes.palettes.size() != 0:
 			# Copy the current palette
-			Palettes.copy_palette("Project Palette")
+			Palettes.copy_palette(Palettes.create_valid_name("Custom Palette", "(Project)"))
 		if project.palettes.size() > 0:
 			palette_select.add_separator("Project Palettes")
 			id += 1
@@ -236,17 +236,18 @@ func _on_create_palette_dialog_saved(
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
-	colors_from: int
+	colors_from: int,
+	is_global: bool
 ) -> void:
 	Palettes.create_new_palette(
-		preset, palette_name, comment, width, height, add_alpha_colors, colors_from
+		preset, palette_name, comment, width, height, add_alpha_colors, colors_from, is_global
 	)
 
 
 func _on_edit_palette_dialog_saved(
-	palette_name: String, comment: String, width: int, height: int
+	palette_name: String, comment: String, width: int, height: int, is_global
 ) -> void:
-	Palettes.current_palette_edit(palette_name, comment, width, height)
+	Palettes.current_palette_edit(palette_name, comment, width, height, is_global)
 	setup_palettes_selector()
 	redraw_current_palette()
 
