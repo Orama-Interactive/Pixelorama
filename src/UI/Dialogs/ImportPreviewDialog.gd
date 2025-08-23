@@ -357,8 +357,9 @@ func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 				continue
 			at_layer_option_button.add_item(l.name, l.index)
 			at_layer_option_button.set_item_tooltip(i, l.get_layer_path())
+			if l.index == Global.current_project.current_layer:
+				at_layer_option_button.selected = i
 			i += 1
-		at_layer_option_button.selected = at_layer_option_button.get_item_count() - 1
 
 	elif id == ImageImportOptions.REPLACE_CEL:
 		at_frame_option.visible = true
@@ -369,21 +370,23 @@ func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 		var layers := Global.current_project.layers.duplicate()
 		layers.reverse()
 		var i := 0
-		for l in layers:
+		for l: BaseLayer in layers:
 			if not l is PixelLayer:
 				continue
 			at_layer_option_button.add_item(l.name, l.index)
 			at_layer_option_button.set_item_tooltip(i, l.get_layer_path())
+			if l.index == Global.current_project.current_layer:
+				at_layer_option_button.selected = i
 			i += 1
-		at_layer_option_button.selected = at_layer_option_button.get_item_count() - 1
 		var at_frame_spinbox: SpinBox = at_frame_option.get_node("AtFrameSpinbox")
 		at_frame_spinbox.max_value = Global.current_project.frames.size()
+		at_frame_spinbox.value = Global.current_project.current_frame + 1
 
 	elif id == ImageImportOptions.NEW_LAYER:
 		at_frame_option.visible = true
-		at_frame_option.get_node("AtFrameSpinbox").max_value = (
-			Global.current_project.frames.size()
-		)
+		var at_frame_spinbox: SpinBox = at_frame_option.get_node("AtFrameSpinbox")
+		at_frame_spinbox.max_value = Global.current_project.frames.size()
+		at_frame_spinbox.value = Global.current_project.current_frame + 1
 
 	elif id == ImageImportOptions.BRUSH:
 		new_brush_options.visible = true
