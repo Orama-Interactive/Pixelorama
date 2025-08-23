@@ -180,6 +180,7 @@ func commit_undo() -> void:
 		Global.canvas.selection.transform_content_cancel()
 	else:
 		undo_redo.undo()
+	SteamManager.set_achievement("ACH_TIME_TRAVELER")
 
 
 func commit_redo() -> void:
