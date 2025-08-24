@@ -430,7 +430,6 @@ func commit_undo() -> void:
 
 
 func _current_palette_undo_redo_add_color(color: Color, start_index := 0) -> void:
-	# NOTE: in the first path we will add an undo_redo entry but we won't use it directly
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add palette color")
 	var palette_in_focus = Palettes.current_palette

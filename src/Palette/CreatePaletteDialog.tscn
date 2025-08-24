@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ddiwy0yrvpblt" path="res://src/Palette/CreatePaletteDialog.gd" id="1"]
 
 [node name="CreatePaletteDialog" type="ConfirmationDialog"]
-title = "Create a new palette"
+title = "Create a new project palette"
 position = Vector2i(0, 36)
 size = Vector2i(421, 315)
 script = ExtResource("1")
@@ -84,16 +84,6 @@ size_flags_horizontal = 3
 min_value = 1.0
 max_value = 64.0
 value = 1.0
-
-[node name="PaletteTypeSettings" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/PaletteTypeSettings"]
-layout_mode = 2
-
-[node name="TypeCheckBox" type="CheckBox" parent="VBoxContainer/PaletteTypeSettings"]
-layout_mode = 2
-text = "Make palette local to project"
 
 [node name="ColorsSettings" type="VBoxContainer" parent="VBoxContainer"]
 visible = false
