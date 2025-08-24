@@ -110,7 +110,8 @@ func setup_palettes_selector() -> void:
 	if project:
 		if project.palettes.size() == 0 and Palettes.palettes.size() != 0:
 			# Copy the current palette
-			var palette := Palette.new(Palettes.create_valid_name("Custom Palette", "(Project)"))
+			var palette := Palette.new(Palettes.create_valid_name("Project palette", ""))
+			palette.is_project_palette = true
 			project.palettes[palette.name] = palette
 		if project.palettes.size() > 0:
 			palette_select.add_separator("")
@@ -219,7 +220,7 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 		sort_submenu.set_item_checked(Palettes.SortOptions.NEW_PALETTE, not new_palette)
 		return
 	if new_palette:
-		Palettes.copy_palette()
+		Palettes.copy_current_palette()
 		setup_palettes_selector()
 	Palettes.current_palette_sort_colors(id)
 	redraw_current_palette()
@@ -277,37 +278,31 @@ func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
 	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	var is_empty_swatch = Palettes.current_palette.get_color(index) == null
 	if is_empty_swatch:  # Add colors with Left/Right Click
-		if Palettes.current_palette.is_project_palette:
+		var undo_redo := Global.current_project.undo_redo
+		undo_redo.create_action("Add palette color")
+		if not Palettes.current_palette.is_project_palette:
+			Palettes.copy_current_palette(Palettes.current_palette.name)
+		undo_redo.add_do_method(Palettes.current_palette_add_color.bind(mouse_button, index))
+		undo_redo.add_undo_method(Palettes.current_palette_delete_color.bind(index))
+		undo_redo.add_do_method(redraw_current_palette)
+		undo_redo.add_undo_method(redraw_current_palette)
+		undo_redo.add_do_method(toggle_add_delete_buttons)
+		undo_redo.add_undo_method(toggle_add_delete_buttons)
+		commit_undo()
+	else:
+		if Input.is_key_pressed(KEY_CTRL):  # Delete colors with Ctrl + Click
 			var undo_redo := Global.current_project.undo_redo
-			undo_redo.create_action("Add palette color")
-			undo_redo.add_do_method(Palettes.current_palette_add_color.bind(mouse_button, index))
-			undo_redo.add_undo_method(Palettes.current_palette_delete_color.bind(index))
+			undo_redo.create_action("Remove palette color")
+			var old_color := Palettes.current_palette_get_color(index)
+			if not Palettes.current_palette.is_project_palette:
+				Palettes.copy_current_palette(Palettes.current_palette.name)
+			undo_redo.add_do_method(Palettes.current_palette_delete_color.bind(index))
+			undo_redo.add_undo_method(Palettes.current_palette.add_color.bind(old_color, index))
 			undo_redo.add_do_method(redraw_current_palette)
 			undo_redo.add_undo_method(redraw_current_palette)
 			undo_redo.add_do_method(toggle_add_delete_buttons)
 			undo_redo.add_undo_method(toggle_add_delete_buttons)
 			commit_undo()
-		else:
-			Palettes.current_palette_add_color(mouse_button, index)
-			redraw_current_palette()
-			toggle_add_delete_buttons()
-	else:
-		if Input.is_key_pressed(KEY_CTRL):  # Delete colors with Ctrl + Click
-			if Palettes.current_palette.is_project_palette:
-				var undo_redo := Global.current_project.undo_redo
-				undo_redo.create_action("Remove palette color")
-				var old_color := Palettes.current_palette_get_color(index)
-				undo_redo.add_do_method(Palettes.current_palette_delete_color.bind(index))
-				undo_redo.add_undo_method(Palettes.current_palette.add_color.bind(old_color, index))
-				undo_redo.add_do_method(redraw_current_palette)
-				undo_redo.add_undo_method(redraw_current_palette)
-				undo_redo.add_do_method(toggle_add_delete_buttons)
-				undo_redo.add_undo_method(toggle_add_delete_buttons)
-				commit_undo()
-			else:
-				Palettes.current_palette_delete_color(index)
-				redraw_current_palette()
-				toggle_add_delete_buttons()
 			return
 	# Gets previously selected color index
 	Palettes.current_palette_select_color(mouse_button, index)
@@ -318,7 +313,6 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 	if edited_swatch_index != -1:
 		edited_swatch_color = color
 		palette_grid.set_swatch_color(edited_swatch_index, color)
-
 		if (
 			edited_swatch_index
 			== Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
@@ -334,41 +328,43 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 
 func _on_colorpicker_visibility_changed() -> void:
 	if hidden_color_picker.get_picker().is_visible_in_tree():
-		if Palettes.current_palette.is_project_palette:
-			var undo_redo := Global.current_project.undo_redo
-			undo_redo.create_action("Change swatch color")
-			var old_color := Palettes.current_palette_get_color(edited_swatch_index)
-			undo_redo.add_undo_method(
-				Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
-			)
-			undo_redo.add_undo_method(
-				Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
-			)
-			undo_redo.add_undo_method(
-				palette_grid.set_swatch_color.bind(edited_swatch_index, old_color)
-			)
-
-
-## Saves edited swatch to palette file when color selection dialog is closed
-func _on_HiddenColorPickerButton_popup_closed() -> void:
-	if Palettes.current_palette.is_project_palette:
 		var undo_redo := Global.current_project.undo_redo
-		undo_redo.add_do_method(
-			Palettes.current_palette_set_color.bind(edited_swatch_index, edited_swatch_color)
+		undo_redo.create_action("Change swatch color")
+		var old_color := Palettes.current_palette_get_color(edited_swatch_index)
+		if not Palettes.current_palette.is_project_palette:
+			# Reset color on the original palette, and make a copy instead
+			undo_redo.add_do_method(
+				Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
+			)
+			Palettes.copy_current_palette(Palettes.current_palette.name)
+		undo_redo.add_undo_method(
+			Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
 		)
-		undo_redo.add_do_method(
-			palette_grid.set_swatch_color.bind(edited_swatch_index, edited_swatch_color)
+		undo_redo.add_undo_method(
+			Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
 		)
-		commit_undo()
-		return
-	Palettes.current_palette_set_color(edited_swatch_index, edited_swatch_color)
+		undo_redo.add_undo_method(
+			palette_grid.set_swatch_color.bind(edited_swatch_index, old_color)
+		)
+
+
+## Saves edited swatch to palette file when color selection dialog is closed.
+func _on_HiddenColorPickerButton_popup_closed() -> void:
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.add_do_method(
+		Palettes.current_palette_set_color.bind(edited_swatch_index, edited_swatch_color)
+	)
+	undo_redo.add_do_method(
+		palette_grid.set_swatch_color.bind(edited_swatch_index, edited_swatch_color)
+	)
+	commit_undo()
 
 
 func _on_edit_palette_dialog_deleted(permanent: bool) -> void:
 	if Palettes.current_palette.is_project_palette:
 		var undo_redo = Global.current_project.undo_redo
 		undo_redo.create_action("Remove project palette")
-		undo_redo.add_do_method(Palettes.palette_delete_and_reselect.bind(permanent))
+		undo_redo.add_do_method(Palettes.palette_delete_and_reselect)
 		undo_redo.add_undo_method(
 			Palettes.add_palette_as_project_palette.bind(Palettes.current_palette)
 		)

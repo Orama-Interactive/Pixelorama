@@ -88,7 +88,8 @@ func save_palette(palette: Palette = current_palette) -> void:
 		Global.popup_error("Failed to save palette. Error code %s (%s)" % [err, error_string(err)])
 
 
-func copy_palette(
+## Copies the current_palette and assigns it as the new current palette
+func copy_current_palette(
 	new_palette_name := current_palette.name, is_global := false, is_undoable := true
 ) -> void:
 	new_palette_name = create_valid_name(new_palette_name)
@@ -96,6 +97,7 @@ func copy_palette(
 	_create_new_palette_from_current_palette(new_palette_name, comment, is_global, is_undoable)
 
 
+## De-lists the palette from the project and global palette dictionaries
 func unparent_palette(palette: Palette):
 	if palette.name in palettes:
 		palettes.erase(palette.name)
@@ -110,6 +112,7 @@ func add_palette_as_project_palette(new_palette: Palette) -> void:
 	new_palette.name = create_valid_name(new_palette.name)
 	Global.current_project.palettes[new_palette.name] = new_palette
 	current_palette = new_palette
+	print("current palette: ", current_palette.name)
 	new_palette_created.emit()
 
 
@@ -296,21 +299,42 @@ func current_palette_edit(
 		palettes[palette_name] = current_palette
 		select_palette(palette_name)
 	else:
+		# track old data
+		var old_name = current_palette.name
+		var old_width = current_palette.width
+		var old_height = current_palette.height
+		var old_comment = current_palette.comment
+		var undo_redo := Global.current_project.undo_redo
+		undo_redo.create_action("Edit Properties")
+		# track the palette to edit
+		var palette_to_edit := current_palette
+		var palette_just_added := false
 		if not current_palette.is_project_palette:
-			var undo_redo := Global.current_project.undo_redo
-			undo_redo.create_action("Edit Properties")
+			palette_to_edit = current_palette.duplicate()
+			palette_just_added = true
+		else:
+			# unparent palette so that it can be manipulated without consequences
+			undo_redo.add_do_method(unparent_palette.bind(palette_to_edit))
+			undo_redo.add_undo_method(unparent_palette.bind(palette_to_edit))
+		# Edit the data and re-parent the palette. Note that the conflicts in name will be auto
+		# resolved when [method add_palette_as_project_palette] is called.
+		undo_redo.add_do_method(
+			palette_to_edit.edit.bind(palette_name, width, height, comment)
+		)
+		undo_redo.add_do_method(add_palette_as_project_palette.bind(palette_to_edit))
+		if palette_just_added:
+			# if the palette was recently added then only simple deletion is needed
+			undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, palette_to_edit))
+		else:
+			# if the palette was already existing then re-set old data. Note that the conflicts in
+			# name will be auto resolved when [method add_palette_as_project_palette] is called.
 			undo_redo.add_undo_method(
-				current_palette.edit.bind(
-					current_palette.name,
-					current_palette.width,
-					current_palette.height,
-					current_palette.comment
-				)
+				palette_to_edit.edit.bind(old_name, old_width, old_height, old_comment)
 			)
-			copy_palette(palette_name, false)
-			undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-			undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-			undo_redo.commit_action()
+			undo_redo.add_undo_method(add_palette_as_project_palette.bind(palette_to_edit))
+		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		undo_redo.commit_action()
 
 
 ## Deletes palette but does not reselect
