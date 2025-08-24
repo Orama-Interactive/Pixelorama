@@ -112,7 +112,6 @@ func add_palette_as_project_palette(new_palette: Palette) -> void:
 	new_palette.name = create_valid_name(new_palette.name)
 	Global.current_project.palettes[new_palette.name] = new_palette
 	current_palette = new_palette
-	print("current palette: ", current_palette.name)
 	new_palette_created.emit()
 
 
@@ -199,7 +198,7 @@ func _create_new_palette_from_current_palette(
 	else:
 		if is_undoable:
 			undo_redo_add_palette(new_palette)
-		else :
+		else:
 			add_palette_as_project_palette(new_palette)
 			select_palette(palette_name)
 
@@ -386,13 +385,13 @@ func current_palette_delete_color(index: int) -> void:
 	save_palette()
 
 
-func current_palette_sort_colors(id: SortOptions) -> void:
+func sort_colors(id: SortOptions, palette := current_palette) -> void:
 	if id == SortOptions.NEW_PALETTE:
 		return
 	if id == SortOptions.REVERSE:
-		current_palette.reverse_colors()
+		palette.reverse_colors()
 	else:
-		current_palette.sort(id)
+		palette.sort(id)
 	save_palette()
 
 

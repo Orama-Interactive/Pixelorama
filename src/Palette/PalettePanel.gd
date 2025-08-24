@@ -219,11 +219,27 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 	if id == Palettes.SortOptions.NEW_PALETTE:
 		sort_submenu.set_item_checked(Palettes.SortOptions.NEW_PALETTE, not new_palette)
 		return
-	if new_palette:
-		Palettes.copy_current_palette()
-		setup_palettes_selector()
-	Palettes.current_palette_sort_colors(id)
-	redraw_current_palette()
+	if Palettes.current_palette.is_project_palette or new_palette:
+		var palette_to_sort := Palettes.current_palette
+		var undo_redo := Global.current_project.undo_redo
+		undo_redo.create_action("Sort Palette")
+		if new_palette:
+			palette_to_sort = palette_to_sort.duplicate()
+			palette_to_sort.is_project_palette = true
+			Palettes.undo_redo_add_palette(palette_to_sort)
+			undo_redo.add_undo_method(
+				Palettes.palette_delete_and_reselect.bind(true, palette_to_sort)
+			)
+		else:
+			var old_colors := Palette.duplicate_color_data(palette_to_sort.colors)
+			undo_redo.add_undo_method(palette_to_sort.set_color_data.bind(old_colors))
+			undo_redo.add_undo_method(redraw_current_palette)
+		undo_redo.add_do_method(Palettes.sort_colors.bind(id, palette_to_sort))
+		undo_redo.add_do_method(redraw_current_palette)
+		commit_undo()
+	else:
+		Palettes.sort_colors(id)
+		redraw_current_palette()
 
 
 func _on_create_palette_dialog_saved(
@@ -294,13 +310,20 @@ func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
 			var undo_redo := Global.current_project.undo_redo
 			undo_redo.create_action("Remove palette color")
 			var old_color := Palettes.current_palette_get_color(index)
-			if not Palettes.current_palette.is_project_palette:
-				Palettes.copy_current_palette(Palettes.current_palette.name)
+			var palette_in_focus = Palettes.current_palette
+			if not palette_in_focus.is_project_palette:
+				palette_in_focus = palette_in_focus.duplicate()
+				palette_in_focus.is_project_palette = true
+				Palettes.undo_redo_add_palette(palette_in_focus)
+				undo_redo.add_undo_method(
+					Palettes.palette_delete_and_reselect.bind(true, palette_in_focus)
+				)
 			undo_redo.add_do_method(Palettes.current_palette_delete_color.bind(index))
-			undo_redo.add_undo_method(Palettes.current_palette.add_color.bind(old_color, index))
+			if palette_in_focus == Palettes.current_palette:  # We didn't made a new palette
+				undo_redo.add_undo_method(palette_in_focus.add_color.bind(old_color, index))
 			undo_redo.add_do_method(redraw_current_palette)
-			undo_redo.add_undo_method(redraw_current_palette)
 			undo_redo.add_do_method(toggle_add_delete_buttons)
+			undo_redo.add_undo_method(redraw_current_palette)
 			undo_redo.add_undo_method(toggle_add_delete_buttons)
 			commit_undo()
 			return
@@ -337,9 +360,6 @@ func _on_colorpicker_visibility_changed() -> void:
 				Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
 			)
 			Palettes.copy_current_palette(Palettes.current_palette.name)
-		undo_redo.add_undo_method(
-			Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
-		)
 		undo_redo.add_undo_method(
 			Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
 		)

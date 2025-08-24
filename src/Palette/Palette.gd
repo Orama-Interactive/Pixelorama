@@ -84,11 +84,14 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 
 func duplicate() -> Palette:
 	var new_palette := Palette.new(name, width, height, comment)
-	var new_colors: Dictionary[int, PaletteColor]
-	for color in colors:
-		new_colors[color] = colors[color].duplicate()
-	new_palette.colors = new_colors
+	new_palette.set_color_data(colors)
 	return new_palette
+
+
+## Sets data without referencing the new_colors array. Useful for undo/redo.
+func set_color_data(new_colors: Dictionary[int, PaletteColor]):
+	for color in new_colors:
+		colors[color] = new_colors[color].duplicate()
 
 
 func serialize() -> String:
@@ -358,6 +361,16 @@ func has_theme_color(color: Color) -> bool:
 		if palette_color.color == color:
 			return true
 	return false
+
+
+## Makes an un-referenced copy of the color_data. Useful for undo/redo.
+static func duplicate_color_data(
+	color_data: Dictionary[int, PaletteColor]
+) -> Dictionary[int, PaletteColor]:
+	var new_colors: Dictionary[int, PaletteColor]
+	for color in color_data:
+		new_colors[color] = color_data[color].duplicate()
+	return new_colors
 
 
 static func strip_unvalid_characters(string_to_strip: String) -> String:
