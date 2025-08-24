@@ -7,6 +7,7 @@ const EDIT_PALETTE_SCENE_PATH := "res://src/Palette/EditPaletteDialog.tscn"
 var palettes_name_id := {}
 var palettes_id_name := {}
 
+var new_scanned_colors: PackedColorArray
 var edited_swatch_index := -1
 var edited_swatch_color := Color.TRANSPARENT
 var sort_submenu := PopupMenu.new()
@@ -82,12 +83,20 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	if Palettes.auto_add_colors and Tools.active_button != -1:
-		var new_color := Tools.get_assigned_color(Tools.active_button)
-		if not Palettes.current_palette.has_theme_color(new_color):
-			Palettes.current_palette_add_color(Tools.active_button, 0)
-			redraw_current_palette()
-			toggle_add_delete_buttons()
+	if Palettes.auto_add_colors:
+		# NOTE: As the tool's undo is also active at this point, so in order to not
+		# conflict with it's undo, we wait till it's finished (i-e we use else statement)
+		if Tools.active_button != -1:
+			var new_color := Tools.get_assigned_color(Tools.active_button)
+			if (
+				not Palettes.current_palette.has_theme_color(new_color)
+				and not new_scanned_colors.has(new_color)
+			):
+				new_scanned_colors.append(new_color)
+		else:
+			for color: Color in new_scanned_colors:
+				_current_palette_undo_redo_add_color(color, 0)
+			new_scanned_colors.clear()
 
 
 ## Setup palettes selector with available palettes
@@ -294,38 +303,11 @@ func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
 	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	var is_empty_swatch = Palettes.current_palette.get_color(index) == null
 	if is_empty_swatch:  # Add colors with Left/Right Click
-		var undo_redo := Global.current_project.undo_redo
-		undo_redo.create_action("Add palette color")
-		if not Palettes.current_palette.is_project_palette:
-			Palettes.copy_current_palette(Palettes.current_palette.name)
-		undo_redo.add_do_method(Palettes.current_palette_add_color.bind(mouse_button, index))
-		undo_redo.add_undo_method(Palettes.current_palette_delete_color.bind(index))
-		undo_redo.add_do_method(redraw_current_palette)
-		undo_redo.add_undo_method(redraw_current_palette)
-		undo_redo.add_do_method(toggle_add_delete_buttons)
-		undo_redo.add_undo_method(toggle_add_delete_buttons)
-		commit_undo()
+		var new_color := Tools.get_assigned_color(mouse_button)
+		_current_palette_undo_redo_add_color(new_color, index)
 	else:
 		if Input.is_key_pressed(KEY_CTRL):  # Delete colors with Ctrl + Click
-			var undo_redo := Global.current_project.undo_redo
-			undo_redo.create_action("Remove palette color")
-			var old_color := Palettes.current_palette_get_color(index)
-			var palette_in_focus = Palettes.current_palette
-			if not palette_in_focus.is_project_palette:
-				palette_in_focus = palette_in_focus.duplicate()
-				palette_in_focus.is_project_palette = true
-				Palettes.undo_redo_add_palette(palette_in_focus)
-				undo_redo.add_undo_method(
-					Palettes.palette_delete_and_reselect.bind(true, palette_in_focus)
-				)
-			undo_redo.add_do_method(Palettes.current_palette_delete_color.bind(index))
-			if palette_in_focus == Palettes.current_palette:  # We didn't made a new palette
-				undo_redo.add_undo_method(palette_in_focus.add_color.bind(old_color, index))
-			undo_redo.add_do_method(redraw_current_palette)
-			undo_redo.add_do_method(toggle_add_delete_buttons)
-			undo_redo.add_undo_method(redraw_current_palette)
-			undo_redo.add_undo_method(toggle_add_delete_buttons)
-			commit_undo()
+			_current_palette_undo_redo_remove_color(index)
 			return
 	# Gets previously selected color index
 	Palettes.current_palette_select_color(mouse_button, index)
@@ -432,8 +414,55 @@ func _on_edit_palette_dialog_exported(path := "") -> void:
 			image.save_webp(path)
 
 
-func commit_undo():
+func commit_undo(execute := true) -> void:
 	var undo_redo = Global.current_project.undo_redo
-	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	undo_redo.commit_action()
+	undo_redo.add_undo_method(Global.general_undo)
+	undo_redo.add_do_method(Global.general_redo)
+	undo_redo.commit_action(execute)
+
+
+func _current_palette_undo_redo_add_color(color: Color, start_index := 0) -> void:
+	# NOTE: in the first path we will add an undo_redo entry but we won't use it directly
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Add palette color")
+	var palette_in_focus = Palettes.current_palette
+	if not palette_in_focus.is_project_palette:
+		palette_in_focus = palette_in_focus.duplicate()
+		palette_in_focus.is_project_palette = true
+		Palettes.undo_redo_add_palette(palette_in_focus)
+	# Get an estimate of where the color will end up (used for undo)
+	var index := start_index
+	var color_max: int = palette_in_focus.colors_max
+	# If palette is full automatically increase the palette height
+	if palette_in_focus.is_full():
+		color_max = palette_in_focus.width * (palette_in_focus.height + 1)
+	for i in range(start_index, color_max):
+		if not palette_in_focus.colors.has(i):
+			index = i
+			break
+	undo_redo.add_do_method(palette_in_focus.add_color.bind(color, start_index))
+	undo_redo.add_undo_method(palette_in_focus.remove_color.bind(index))
+	undo_redo.add_do_method(redraw_current_palette)
+	undo_redo.add_undo_method(redraw_current_palette)
+	undo_redo.add_do_method(toggle_add_delete_buttons)
+	undo_redo.add_undo_method(toggle_add_delete_buttons)
+	commit_undo()
+
+
+func _current_palette_undo_redo_remove_color(index := 0) -> void:
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Remove palette color")
+	var old_color := Palettes.current_palette_get_color(index)
+	var palette_in_focus = Palettes.current_palette
+	if not palette_in_focus.is_project_palette:
+		palette_in_focus = palette_in_focus.duplicate()
+		palette_in_focus.is_project_palette = true
+		Palettes.undo_redo_add_palette(palette_in_focus)
+	undo_redo.add_do_method(palette_in_focus.remove_color.bind(index))
+	if palette_in_focus == Palettes.current_palette:  # We didn't made a new palette
+		undo_redo.add_undo_method(palette_in_focus.add_color.bind(old_color, index))
+	undo_redo.add_do_method(redraw_current_palette)
+	undo_redo.add_do_method(toggle_add_delete_buttons)
+	undo_redo.add_undo_method(redraw_current_palette)
+	undo_redo.add_undo_method(toggle_add_delete_buttons)
+	commit_undo()

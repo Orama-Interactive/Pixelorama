@@ -90,6 +90,7 @@ func duplicate() -> Palette:
 
 ## Sets data without referencing the new_colors array. Useful for undo/redo.
 func set_color_data(new_colors: Dictionary[int, PaletteColor]):
+	colors.clear()
 	for color in new_colors:
 		colors[color] = new_colors[color].duplicate()
 
@@ -191,6 +192,7 @@ func add_color(new_color: Color, start_index := 0) -> void:
 	# If palette is full automatically increase the palette height
 	if is_full():
 		height += 1
+		colors_max = width * height
 
 	# Find the first empty index since start index and insert a new color
 	for i in range(start_index, colors_max):
@@ -358,7 +360,7 @@ func is_empty() -> bool:
 
 func has_theme_color(color: Color) -> bool:
 	for palette_color in colors.values():
-		if palette_color.color == color:
+		if palette_color.color.is_equal_approx(color):
 			return true
 	return false
 
