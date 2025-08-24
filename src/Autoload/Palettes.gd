@@ -92,7 +92,7 @@ func save_palette(palette: Palette = current_palette) -> void:
 func copy_current_palette(
 	new_palette_name := current_palette.name, is_global := false, is_undoable := true
 ) -> void:
-	new_palette_name = create_valid_name(new_palette_name)
+	new_palette_name = get_valid_name(new_palette_name)
 	var comment := current_palette.comment
 	_create_new_palette_from_current_palette(new_palette_name, comment, is_global, is_undoable)
 
@@ -109,7 +109,7 @@ func unparent_palette(palette: Palette):
 
 func add_palette_as_project_palette(new_palette: Palette) -> void:
 	new_palette.is_project_palette = true
-	new_palette.name = create_valid_name(new_palette.name)
+	new_palette.name = get_valid_name(new_palette.name)
 	Global.current_project.palettes[new_palette.name] = new_palette
 	current_palette = new_palette
 	new_palette_created.emit()
@@ -121,18 +121,30 @@ func undo_redo_add_palette(new_palette: Palette):
 	undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
 
 
-func create_valid_name(initial_palette_name: String, suffix := "copy") -> String:
+func get_valid_name(initial_palette_name: String, suffix := "copy") -> String:
 	var copies := 0
 	# Remove any previous suffixes
-	if initial_palette_name.contains(suffix) and initial_palette_name != suffix:
-		initial_palette_name = initial_palette_name.substr(0, initial_palette_name.rfind(suffix))
-	initial_palette_name = initial_palette_name.strip_edges()
+	initial_palette_name = get_name_without_suffix(initial_palette_name)
 	var palette_name := initial_palette_name
 	while does_palette_exist(palette_name):
 		var final_suffix = " %s" % suffix + (str(" ", copies) if copies != 0 else "")
 		palette_name = initial_palette_name + final_suffix
 		copies += 1
 	return palette_name
+
+
+func get_name_without_suffix(
+	palette_name: String, include_count := false , suffix := "copy"
+) -> String:
+	# Remove any previous suffixes
+	var result := palette_name
+	if palette_name.contains(suffix) and palette_name != suffix:
+		result = palette_name.substr(0, palette_name.rfind(suffix)).strip_edges()
+		if include_count:
+			var start = palette_name.rfind(suffix) + suffix.length()
+			var length = palette_name.length() - start
+			result += " " + palette_name.substr(start, length).strip_edges()
+	return result
 
 
 func create_new_palette(

@@ -812,7 +812,7 @@ class PaletteAPI:
 		palette_name: String, data: Dictionary, is_global := true
 	) -> void:
 		# There may be a case where a Global palette has same name as project palette
-		var palette := Palette.new(Palettes.create_valid_name(palette_name))
+		var palette := Palette.new(Palettes.get_valid_name(palette_name))
 		palette.deserialize_from_dictionary(data)
 		if is_global:
 			Palettes.save_palette(palette)

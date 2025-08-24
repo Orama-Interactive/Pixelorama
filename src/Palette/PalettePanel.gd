@@ -119,7 +119,7 @@ func setup_palettes_selector() -> void:
 	if project:
 		if project.palettes.size() == 0 and Palettes.palettes.size() != 0:
 			# Copy the current palette
-			var palette := Palette.new(Palettes.create_valid_name("Project palette", ""))
+			var palette := Palette.new(Palettes.get_valid_name("Project palette", ""))
 			palette.is_project_palette = true
 			project.palettes[palette.name] = palette
 		if project.palettes.size() > 0:
@@ -127,7 +127,10 @@ func setup_palettes_selector() -> void:
 			id += 1
 		for palette_name in project.palettes:
 			# Add palette selector item
-			palette_select.add_item(project.palettes[palette_name].name, id)
+			var disp_name := Palettes.get_name_without_suffix(
+				project.palettes[palette_name].name, true
+			)
+			palette_select.add_item("%s (project palette)" % disp_name, id)
 
 			# Map palette name to item id's and otherwise
 			palettes_name_id[palette_name] = id
@@ -205,9 +208,8 @@ func _on_AddColor_gui_input(event: InputEvent) -> void:
 			# Color will be added at the start of the currently scrolled part of palette
 			# - not the absolute beginning of palette
 			var start_index := palette_grid.convert_grid_index_to_palette_index(0)
-			Palettes.current_palette_add_color(event.button_index, start_index)
-			redraw_current_palette()
-			toggle_add_delete_buttons()
+			var new_color := Tools.get_assigned_color(event.button_index)
+			_current_palette_undo_redo_add_color(new_color, start_index)
 
 
 func _on_DeleteColor_gui_input(event: InputEvent) -> void:
@@ -218,9 +220,7 @@ func _on_DeleteColor_gui_input(event: InputEvent) -> void:
 			)
 
 			if selected_color_index != -1:
-				Palettes.current_palette_delete_color(selected_color_index)
-				redraw_current_palette()
-				toggle_add_delete_buttons()
+				_current_palette_undo_redo_remove_color(selected_color_index)
 
 
 func sort_pressed(id: Palettes.SortOptions) -> void:
