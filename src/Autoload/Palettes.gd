@@ -301,13 +301,14 @@ func current_palette_edit(
 	palette_name: String, comment: String, width: int, height: int, is_global: bool
 ) -> void:
 	_check_palette_settings_values(palette_name, width, height)
-	if is_global:
-		current_palette.edit(palette_name, width, height, comment)
-		if current_palette.is_project_palette:
-			_delete_palette(current_palette)
-			current_palette.is_project_palette = false
-		save_palette()
-		palettes[palette_name] = current_palette
+	if is_global:  # Create a global copy
+		var palette_to_edit := current_palette
+		if current_palette.is_project_palette:  # Create a global copy of the local palette
+			palette_name = get_valid_name(palette_name)
+			palette_to_edit = current_palette.duplicate()
+		palette_to_edit.edit(palette_name, width, height, comment)
+		save_palette(palette_to_edit)
+		palettes[palette_name] = palette_to_edit
 		select_palette(palette_name)
 	else:
 		# track old data
@@ -320,7 +321,7 @@ func current_palette_edit(
 		# track the palette to edit
 		var palette_to_edit := current_palette
 		var palette_just_added := false
-		if not current_palette.is_project_palette:
+		if not current_palette.is_project_palette:  # Create a local copy of the global palette
 			palette_to_edit = current_palette.duplicate()
 			palette_just_added = true
 		else:

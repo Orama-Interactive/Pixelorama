@@ -17,13 +17,14 @@ var origin_height := 0
 
 var old_name := ""
 var trash_button: Button
+var is_proj_palette := false
 
 @onready var name_input := $VBoxContainer/PaletteMetadata/Name
 @onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
 @onready var width_input := $VBoxContainer/PaletteMetadata/Width
 @onready var height_input := $VBoxContainer/PaletteMetadata/Height
 @onready var path_input := $VBoxContainer/PaletteMetadata/Path
-@onready var local_checkbox: CheckBox = $VBoxContainer/PaletteTypeSettings/TypeCheckBox
+@onready var type_checkbox: CheckBox = $VBoxContainer/PaletteTypeSettings/TypeCheckBox
 
 @onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
 @onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
@@ -41,10 +42,13 @@ func _ready() -> void:
 
 func open(current_palette: Palette) -> void:
 	if current_palette:
+		is_proj_palette = current_palette.is_project_palette
+		var type := "global" if current_palette.is_project_palette else "project wide"
+		type_checkbox.text = "Apply changes to a %s copy" % type
+		type_checkbox.button_pressed = false
 		trash_button.visible = !current_palette.is_project_palette
 		path_input.visible = !current_palette.is_project_palette
 		$VBoxContainer/PaletteMetadata/PathLabel.visible = path_input.visible
-		local_checkbox.button_pressed = current_palette.is_project_palette
 		name_input.text = current_palette.name
 		comment_input.text = current_palette.comment
 		width_input.value = current_palette.width
@@ -90,12 +94,14 @@ func _on_EditPaletteDialog_visibility_changed() -> void:
 
 
 func _on_EditPaletteDialog_confirmed() -> void:
+	if type_checkbox.button_pressed:
+		is_proj_palette = !is_proj_palette
 	saved.emit(
 		name_input.text,
 		comment_input.text,
 		width_input.value,
 		height_input.value,
-		!local_checkbox.button_pressed
+		!is_proj_palette
 	)
 
 

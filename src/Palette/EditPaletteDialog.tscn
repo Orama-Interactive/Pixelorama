@@ -85,7 +85,6 @@ layout_mode = 2
 
 [node name="TypeCheckBox" type="CheckBox" parent="VBoxContainer/PaletteTypeSettings"]
 layout_mode = 2
-text = "local to project"
 
 [node name="SizeReducedWarning" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 27)
