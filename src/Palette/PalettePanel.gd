@@ -91,7 +91,8 @@ func _input(_event: InputEvent) -> void:
 		if Palettes.auto_add_colors:
 			if not Palettes.current_palette.has_theme_color(new_color):
 				if not new_scanned_colors.has(new_color):
-					was_global_palette_used = true
+					if not Palettes.current_palette.is_project_palette:
+						was_global_palette_used = true
 					new_scanned_colors.append(new_color)
 		if not was_global_palette_used and not Palettes.current_palette.is_project_palette:
 			if Palettes.current_palette.has_theme_color(new_color):
