@@ -330,11 +330,8 @@ func current_palette_edit(
 		# Edit the data and re-parent the palette. Note that the conflicts in name will be auto
 		# resolved when [method add_palette_as_project_palette] is called.
 		undo_redo.add_do_method(palette_to_edit.edit.bind(palette_name, width, height, comment))
-		undo_redo.add_do_method(add_palette_as_project_palette.bind(palette_to_edit))
-		if palette_just_added:
-			# if the palette was recently added then only simple deletion is needed
-			undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, palette_to_edit))
-		else:
+		undo_redo_add_palette(palette_to_edit)
+		if not palette_just_added:
 			# if the palette was already existing then re-set old data. Note that the conflicts in
 			# name will be auto resolved when [method add_palette_as_project_palette] is called.
 			undo_redo.add_undo_method(
