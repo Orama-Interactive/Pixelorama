@@ -134,7 +134,7 @@ func get_valid_name(initial_palette_name: String, suffix := "copy") -> String:
 
 
 func get_name_without_suffix(
-	palette_name: String, include_count := false , suffix := "copy"
+	palette_name: String, include_count := false, suffix := "copy"
 ) -> String:
 	# Remove any previous suffixes
 	var result := palette_name
@@ -329,9 +329,7 @@ func current_palette_edit(
 			undo_redo.add_undo_method(unparent_palette.bind(palette_to_edit))
 		# Edit the data and re-parent the palette. Note that the conflicts in name will be auto
 		# resolved when [method add_palette_as_project_palette] is called.
-		undo_redo.add_do_method(
-			palette_to_edit.edit.bind(palette_name, width, height, comment)
-		)
+		undo_redo.add_do_method(palette_to_edit.edit.bind(palette_name, width, height, comment))
 		undo_redo.add_do_method(add_palette_as_project_palette.bind(palette_to_edit))
 		if palette_just_added:
 			# if the palette was recently added then only simple deletion is needed
