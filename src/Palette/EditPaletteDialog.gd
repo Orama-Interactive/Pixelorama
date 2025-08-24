@@ -97,11 +97,7 @@ func _on_EditPaletteDialog_confirmed() -> void:
 	if type_checkbox.button_pressed:
 		is_proj_palette = !is_proj_palette
 	saved.emit(
-		name_input.text,
-		comment_input.text,
-		width_input.value,
-		height_input.value,
-		!is_proj_palette
+		name_input.text, comment_input.text, width_input.value, height_input.value, !is_proj_palette
 	)
 
 
