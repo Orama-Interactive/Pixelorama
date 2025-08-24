@@ -16,7 +16,6 @@ var origin_width := 0
 var origin_height := 0
 
 var old_name := ""
-var delete_button: Button
 var trash_button: Button
 
 @onready var name_input := $VBoxContainer/PaletteMetadata/Name
@@ -35,7 +34,7 @@ var trash_button: Button
 func _ready() -> void:
 	export_file_dialog.use_native_dialog = Global.use_native_file_dialogs
 	# Add delete and export buttons to edit palette dialog
-	delete_button = add_button("Delete", false, DELETE_ACTION)
+	add_button("Delete", false, DELETE_ACTION)
 	add_button("Export", false, EXPORT_ACTION)
 	trash_button = delete_confirmation.add_button("Move to Trash", false, BIN_ACTION)
 
@@ -46,9 +45,6 @@ func open(current_palette: Palette) -> void:
 		path_input.visible = !current_palette.is_project_palette
 		$VBoxContainer/PaletteMetadata/PathLabel.visible = path_input.visible
 		local_checkbox.button_pressed = current_palette.is_project_palette
-		delete_button.visible = true
-		if current_palette.is_project_palette and Global.current_project.palettes.size() == 1:
-			delete_button.visible = false
 		name_input.text = current_palette.name
 		comment_input.text = current_palette.comment
 		width_input.value = current_palette.width

@@ -129,11 +129,6 @@ func setup_palettes_selector() -> void:
 		id += 1
 	var project := Global.current_project
 	if project:
-		if project.palettes.size() == 0 and Palettes.palettes.size() != 0:
-			# Copy the current palette
-			var palette := Palette.new(Palettes.get_valid_name("Project palette", ""))
-			palette.is_project_palette = true
-			project.palettes[palette.name] = palette
 		if project.palettes.size() > 0:
 			palette_select.add_separator("")
 			id += 1
