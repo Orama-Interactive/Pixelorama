@@ -6,22 +6,37 @@
 [node name="ModifySelection" type="ConfirmationDialog"]
 title = "Expand selection"
 position = Vector2i(0, 36)
-size = Vector2i(260, 130)
+size = Vector2i(266, 152)
+visible = true
 script = ExtResource("1_w6rs7")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="Options" type="VBoxContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 252.0
-offset_bottom = 81.0
+offset_right = 258.0
+offset_bottom = 103.0
+
+[node name="CenterContent" type="HBoxContainer" parent="Options"]
+visible = false
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Options/CenterContent"]
+layout_mode = 2
+text = "Center relative to content:"
+
+[node name="RelativeCheckbox" type="CheckBox" parent="Options/CenterContent"]
+layout_mode = 2
+
+[node name="ExpandShrinkBorder" type="GridContainer" parent="Options"]
+layout_mode = 2
 columns = 2
 
-[node name="WidthLabel" type="Label" parent="GridContainer"]
+[node name="WidthLabel" type="Label" parent="Options/ExpandShrinkBorder"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Width:"
 
-[node name="WidthSlider" type="TextureProgressBar" parent="GridContainer"]
+[node name="WidthSlider" type="TextureProgressBar" parent="Options/ExpandShrinkBorder"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -39,22 +54,38 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("1_3jelw")
 
-[node name="BrushLabel" type="Label" parent="GridContainer"]
+[node name="BrushLabel" type="Label" parent="Options/ExpandShrinkBorder"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Brush:"
 
-[node name="BrushOptionButton" type="OptionButton" parent="GridContainer"]
+[node name="BrushOptionButton" type="OptionButton" parent="Options/ExpandShrinkBorder"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Diamond"
+popup/item_0/id = 0
 popup/item_1/text = "Circle"
 popup/item_1/id = 1
 popup/item_2/text = "Square"
 popup/item_2/id = 2
 
+[node name="HSeparator" type="HSeparator" parent="Options"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+
+[node name="ContentLabel" type="Label" parent="Options/HBoxContainer"]
+layout_mode = 2
+text = "Transform content"
+
+[node name="WithContent" type="CheckBox" parent="Options/HBoxContainer"]
+layout_mode = 2
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="toggled" from="Options/HBoxContainer/WithContent" to="." method="_on_with_content_toggled"]

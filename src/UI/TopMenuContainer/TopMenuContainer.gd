@@ -6,7 +6,7 @@ const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v112---2025-06-26"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v114---2025-08-13"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -33,7 +33,7 @@ var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
 var project_properties_dialog := Dialog.new("res://src/UI/Dialogs/ProjectProperties.tscn")
 var preferences_dialog := Dialog.new("res://src/Preferences/PreferencesDialog.tscn")
 var modify_selection := Dialog.new("res://src/UI/Dialogs/ModifySelection.tscn")
-var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetImage.tscn")
+var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetZoomImage.tscn")
 var scale_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn")
 var resize_canvas_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn")
 var mirror_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn")
@@ -54,6 +54,7 @@ var palettize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PalettizeD
 var pixelize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/PixelizeDialog.tscn")
 var posterize_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/Posterize.tscn")
 var loaded_effect_dialogs: Array[Dialog] = []
+var last_applied_effect: Window
 var window_opacity_dialog := Dialog.new("res://src/UI/Dialogs/WindowOpacityDialog.tscn")
 var about_dialog := Dialog.new("res://src/UI/Dialogs/AboutDialog.tscn")
 var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
@@ -468,7 +469,9 @@ func _setup_color_mode_submenu(item: String) -> void:
 
 
 func _setup_effects_menu() -> void:
-	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset Image")
+	_set_menu_shortcut(&"reapply_last_effect", effects_menu, 0, "Re-apply last effect")
+	effects_menu.set_item_disabled(0, true)
+	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset/Zoom Image")
 	_set_menu_shortcut(&"mirror_image", effects_transform_submenu, 1, "Mirror Image")
 	_set_menu_shortcut(&"rotate_image", effects_transform_submenu, 2, "Rotate Image")
 	effects_transform_submenu.id_pressed.connect(_on_effects_transform_submenu_id_pressed)
@@ -559,6 +562,7 @@ func _setup_selection_modify_submenu(item: String) -> void:
 	selection_modify_submenu.add_item("Expand")
 	selection_modify_submenu.add_item("Shrink")
 	selection_modify_submenu.add_item("Border")
+	selection_modify_submenu.add_item("Center")
 	selection_modify_submenu.id_pressed.connect(_selection_modify_submenu_id_pressed)
 	select_menu.add_child(selection_modify_submenu)
 	select_menu.add_submenu_item(item, selection_modify_submenu.get_name())
@@ -1073,6 +1077,10 @@ func project_menu_id_pressed(id: int) -> void:
 
 
 func effects_menu_id_pressed(id: int) -> void:
+	if id == 0:  # Re-apply
+		if is_instance_valid(last_applied_effect):
+			if last_applied_effect.has_signal("confirmed"):
+				last_applied_effect.confirmed.emit()
 	_handle_metadata(id, effects_menu)
 
 

@@ -20,7 +20,7 @@ jobs:
       image: docker://barichello/godot-ci:4.4.1
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup 💻

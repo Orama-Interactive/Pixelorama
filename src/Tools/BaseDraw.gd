@@ -278,6 +278,9 @@ func commit_undo() -> void:
 
 
 func draw_tool(pos: Vector2i) -> void:
+	var project := Global.current_project
+	if project.has_selection:
+		project.selection_map.lock_selection_rect(project, true)
 	if Global.mirror_view:
 		# Even brushes are not perfectly centered and are offsetted by 1 px, so we add it.
 		if int(_stroke_dimensions.x) % 2 == 0:
@@ -286,6 +289,8 @@ func draw_tool(pos: Vector2i) -> void:
 	var coords_to_draw := _draw_tool(pos)
 	for coord in coords_to_draw:
 		_set_pixel_no_cache(coord)
+	if project.has_selection:
+		project.selection_map.lock_selection_rect(project, false)
 
 
 func draw_end(pos: Vector2i) -> void:
@@ -377,6 +382,9 @@ func _draw_tool(pos: Vector2) -> PackedVector2Array:
 
 
 func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
+	var project := Global.current_project
+	if project.has_selection:
+		project.selection_map.lock_selection_rect(project, true)
 	if Global.mirror_view:
 		# Even brushes are not perfectly centred and are offsetted by 1 px so we add it
 		if int(_stroke_dimensions.x) % 2 == 0:
@@ -394,6 +402,8 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 			coords_to_draw[coord] = 0
 	for c in coords_to_draw.keys():
 		_set_pixel_no_cache(c)
+	if project.has_selection:
+		project.selection_map.lock_selection_rect(project, false)
 
 
 ## Calls [method Geometry2D.bresenham_line] and takes [param thickness] into account.

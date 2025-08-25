@@ -61,7 +61,9 @@ func get_animated_value(frame_idx: int, property_idx := 0) -> float:
 		else:
 			return resetter_values[property_idx]
 	else:
-		printerr("Property index is exceeding the bounds of the number of properties")
+		printerr(
+			"(AnimatePanel) Property index is exceeding the bounds of the number of properties"
+		)
 		return 0.0
 
 

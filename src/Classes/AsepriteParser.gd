@@ -435,25 +435,10 @@ static func open_aseprite_file(path: String) -> void:
 				var layer := new_project.layers[j]
 				var cel := layer.new_empty_cel()
 				frame.cels.append(cel)
-	for i in new_project.layers.size():
-		var layer := new_project.layers[i]
-		var layer_child_level: int = layer.get_meta(&"layer_child_level", 0)
-		if layer_child_level > 0:
-			var parent_layer: GroupLayer = null
-			var parent_i := 1
-			while parent_layer == null:
-				var prev_layer := new_project.layers[i - parent_i]
-				if prev_layer is GroupLayer:
-					if prev_layer.get_meta(&"layer_child_level", 0) == layer_child_level - 1:
-						parent_layer = prev_layer
-						break
-				parent_i += 1
-			new_project.move_layers([i], [i - parent_i], [parent_layer])
-	for i in new_project.layers.size():
-		var layer := new_project.layers[i]
-		layer.remove_meta(&"layer_child_level")
-		layer.index = i
+	organize_layer_child_levels(new_project)
 	new_project.order_layers()
+	new_project.save_path = path.get_basename() + ".pxo"
+	new_project.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
@@ -554,3 +539,24 @@ static func parse_aseprite_variant(ase_file: FileAccess, property_type: int) -> 
 		0x0013:  # UUID
 			property = ase_file.get_buffer(16)
 	return property
+
+
+static func organize_layer_child_levels(project: Project) -> void:
+	for i in project.layers.size():
+		var layer := project.layers[i]
+		var layer_child_level: int = layer.get_meta(&"layer_child_level", 0)
+		if layer_child_level > 0:
+			var parent_layer: GroupLayer = null
+			var parent_i := 1
+			while parent_layer == null:
+				var prev_layer := project.layers[i - parent_i]
+				if prev_layer is GroupLayer:
+					if prev_layer.get_meta(&"layer_child_level", 0) == layer_child_level - 1:
+						parent_layer = prev_layer
+						break
+				parent_i += 1
+			project.move_layers([i], [i - parent_i], [parent_layer])
+	for i in project.layers.size():
+		var layer := project.layers[i]
+		layer.remove_meta(&"layer_child_level")
+		layer.index = i
