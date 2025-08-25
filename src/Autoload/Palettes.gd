@@ -2,6 +2,7 @@ extends Node
 
 signal palette_selected(palette_name: String)
 signal new_palette_created
+signal palette_removed
 signal new_palette_imported
 
 enum SortOptions {NEW_PALETTE, REVERSE, HUE, SATURATION, VALUE, LIGHTNESS, RED, GREEN, BLUE, ALPHA}
@@ -29,15 +30,38 @@ func _ready() -> void:
 	_load_palettes()
 
 
-func does_palette_exist(palette_name: String) -> bool:
-	for name_to_test: String in palettes.keys():
+func does_palette_exist(palette_name: String, in_project := Global.current_project) -> bool:
+	var keys = palettes.keys()
+	if in_project:
+		keys.append_array(in_project.palettes.keys())
+	for name_to_test: String in keys:
 		if name_to_test == palette_name:
 			return true
 	return false
 
 
 func select_palette(palette_name: String) -> void:
-	current_palette = palettes.get(palette_name, null)
+	var project: Project = Global.current_project
+	project.project_current_palette_name = ""
+	current_palette = null
+	if palettes.has(palette_name):
+		current_palette = palettes.get(palette_name, null)
+	elif project.palettes.has(palette_name):
+		current_palette = project.palettes.get(palette_name, null)
+		if current_palette:
+			project.project_current_palette_name = palette_name
+	else:
+		# Attemt to find the last used palette (select if it's a global palette)
+		var last_active_palette: String = Global.config_cache.get_value(
+			"data", "last_palette", DEFAULT_PALETTE_NAME
+		)
+		current_palette = palettes.get(last_active_palette, null)
+		if !current_palette:  # Fallback to the palette that the last palette is derived from
+			current_palette = palettes.get(get_name_without_suffix(last_active_palette), null)
+			if !current_palette:  # Fallback to default palette
+				current_palette = palettes.get(DEFAULT_PALETTE_NAME, null)
+		if current_palette:
+			palette_name = current_palette.name
 	_clear_selected_colors()
 	if is_instance_valid(current_palette):
 		Global.config_cache.set_value("data", "last_palette", current_palette.name)
@@ -57,6 +81,8 @@ func _ensure_palette_directory_exists() -> void:
 
 
 func save_palette(palette: Palette = current_palette) -> void:
+	if palette.is_project_palette:  # Failsafe
+		return
 	_ensure_palette_directory_exists()
 	if not is_instance_valid(palette):
 		return
@@ -74,12 +100,61 @@ func save_palette(palette: Palette = current_palette) -> void:
 		Global.popup_error("Failed to save palette. Error code %s (%s)" % [err, error_string(err)])
 
 
-func copy_palette() -> void:
-	var new_palette_name := current_palette.name
-	while does_palette_exist(new_palette_name):
-		new_palette_name += " copy"
+## Copies the current_palette and assigns it as the new current palette
+func copy_current_palette(
+	new_palette_name := current_palette.name, is_global := false, is_undoable := true
+) -> void:
+	new_palette_name = get_valid_name(new_palette_name)
 	var comment := current_palette.comment
-	_create_new_palette_from_current_palette(new_palette_name, comment)
+	_create_new_palette_from_current_palette(new_palette_name, comment, is_global, is_undoable)
+
+
+## De-lists the palette from the project and global palette dictionaries
+func unparent_palette(palette: Palette):
+	if palette.name in palettes:
+		palettes.erase(palette.name)
+		return
+	if Global.current_project:
+		if palette.name in Global.current_project.palettes:
+			Global.current_project.palettes.erase(palette.name)
+
+
+func add_palette_as_project_palette(new_palette: Palette) -> void:
+	new_palette.is_project_palette = true
+	new_palette.name = get_valid_name(new_palette.name)
+	Global.current_project.palettes[new_palette.name] = new_palette
+	current_palette = new_palette
+	new_palette_created.emit()
+
+
+func undo_redo_add_palette(new_palette: Palette):
+	var undo_redo = Global.current_project.undo_redo
+	undo_redo.add_do_method(add_palette_as_project_palette.bind(new_palette))
+	undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
+
+
+func get_valid_name(initial_palette_name: String, project := Global.current_project) -> String:
+	var copies := 0
+	# Remove any previous suffixes
+	initial_palette_name = get_name_without_suffix(initial_palette_name)
+	var palette_name := initial_palette_name
+	while does_palette_exist(palette_name, project):
+		var final_suffix = " copy" + (str(" ", copies) if copies != 0 else "")
+		palette_name = initial_palette_name + final_suffix
+		copies += 1
+	return palette_name
+
+
+func get_name_without_suffix(palette_name: String, include_count := false) -> String:
+	# Remove any previous suffixes
+	var result := palette_name
+	if palette_name.contains("copy") and palette_name != "copy":
+		result = palette_name.substr(0, palette_name.rfind("copy")).strip_edges()
+		if include_count:
+			var start = palette_name.rfind("copy") + 4  # NOTE: (4 == "copy".length())
+			var length = palette_name.length() - start
+			result += " " + palette_name.substr(start, length).strip_edges()
+	return result
 
 
 func create_new_palette(
@@ -89,44 +164,65 @@ func create_new_palette(
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
-	get_colors_from: int
+	get_colors_from: int,
+	is_global: bool
 ) -> void:
+	if !is_global:
+		Global.current_project.undo_redo.create_action("Create new palette")
 	_check_palette_settings_values(palette_name, width, height)
 	match preset:
 		NewPalettePresetType.EMPTY:
-			_create_new_empty_palette(palette_name, comment, width, height)
+			_create_new_empty_palette(palette_name, comment, width, height, is_global)
 		NewPalettePresetType.FROM_CURRENT_PALETTE:
-			_create_new_palette_from_current_palette(palette_name, comment)
+			_create_new_palette_from_current_palette(palette_name, comment, is_global)
 		NewPalettePresetType.FROM_CURRENT_SPRITE:
 			_create_new_palette_from_current_sprite(
-				palette_name, comment, width, height, add_alpha_colors, get_colors_from
+				palette_name, comment, width, height, add_alpha_colors, get_colors_from, is_global
 			)
 		NewPalettePresetType.FROM_CURRENT_SELECTION:
 			_create_new_palette_from_current_selection(
-				palette_name, comment, width, height, add_alpha_colors, get_colors_from
+				palette_name, comment, width, height, add_alpha_colors, get_colors_from, is_global
 			)
-	new_palette_created.emit()
+	if !is_global:
+		Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		Global.current_project.undo_redo.commit_action()
+	else:
+		new_palette_created.emit()
 
 
 func _create_new_empty_palette(
-	palette_name: String, comment: String, width: int, height: int
+	palette_name: String, comment: String, width: int, height: int, is_global: bool
 ) -> void:
 	var new_palette := Palette.new(palette_name, width, height, comment)
-	save_palette(new_palette)
-	palettes[palette_name] = new_palette
-	select_palette(palette_name)
+	if is_global:
+		save_palette(new_palette)
+		palettes[palette_name] = new_palette
+		select_palette(palette_name)
+	else:
+		undo_redo_add_palette(new_palette)
 
 
-func _create_new_palette_from_current_palette(palette_name: String, comment: String) -> void:
+func _create_new_palette_from_current_palette(
+	palette_name: String, comment: String, is_global: bool, is_undoable := true
+) -> void:
 	if !current_palette:
 		return
 	var new_palette := current_palette.duplicate()
 	new_palette.name = palette_name
 	new_palette.comment = comment
+	new_palette.is_project_palette = false
 	new_palette.path = palettes_write_path.path_join(new_palette.name) + ".json"
-	save_palette(new_palette)
-	palettes[palette_name] = new_palette
-	select_palette(palette_name)
+	if is_global:
+		save_palette(new_palette)
+		palettes[palette_name] = new_palette
+		select_palette(palette_name)
+	else:
+		if is_undoable:
+			undo_redo_add_palette(new_palette)
+		else:
+			add_palette_as_project_palette(new_palette)
+			select_palette(palette_name)
 
 
 func _create_new_palette_from_current_selection(
@@ -135,7 +231,8 @@ func _create_new_palette_from_current_selection(
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
-	get_colors_from: int
+	get_colors_from: int,
+	is_global: bool
 ) -> void:
 	var new_palette := Palette.new(palette_name, width, height, comment)
 	var current_project := Global.current_project
@@ -145,7 +242,7 @@ func _create_new_palette_from_current_selection(
 			var pos := Vector2i(x, y)
 			if current_project.selection_map.is_pixel_selected(pos):
 				pixels.append(pos)
-	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from)
+	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from, is_global)
 
 
 func _create_new_palette_from_current_sprite(
@@ -154,7 +251,8 @@ func _create_new_palette_from_current_sprite(
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
-	get_colors_from: int
+	get_colors_from: int,
+	is_global: bool
 ) -> void:
 	var new_palette := Palette.new(palette_name, width, height, comment)
 	var current_project := Global.current_project
@@ -162,13 +260,17 @@ func _create_new_palette_from_current_sprite(
 	for x in current_project.size.x:
 		for y in current_project.size.y:
 			pixels.append(Vector2i(x, y))
-	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from)
+	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from, is_global)
 
 
 ## Fills [param new_palette] with the colors of the [param pixels] of the current sprite.
 ## Used when creating a new palette from the UI.
 func _fill_new_palette_with_colors(
-	pixels: Array[Vector2i], new_palette: Palette, add_alpha_colors: bool, get_colors_from: int
+	pixels: Array[Vector2i],
+	new_palette: Palette,
+	add_alpha_colors: bool,
+	get_colors_from: int,
+	is_global: bool
 ) -> void:
 	var current_project := Global.current_project
 	var cels: Array[BaseCel] = []
@@ -197,35 +299,82 @@ func _fill_new_palette_with_colors(
 					color.a = 1
 				if not new_palette.has_theme_color(color):
 					new_palette.add_color(color)
+	if is_global:
+		save_palette(new_palette)
+		palettes[new_palette.name] = new_palette
+		select_palette(new_palette.name)
+	else:
+		undo_redo_add_palette(new_palette)
 
-	save_palette(new_palette)
-	palettes[new_palette.name] = new_palette
-	select_palette(new_palette.name)
 
-
-func current_palette_edit(palette_name: String, comment: String, width: int, height: int) -> void:
+func current_palette_edit(
+	palette_name: String, comment: String, width: int, height: int, is_global: bool
+) -> void:
 	_check_palette_settings_values(palette_name, width, height)
-	current_palette.edit(palette_name, width, height, comment)
-	save_palette()
-	palettes[palette_name] = current_palette
+	if is_global:  # Create a global copy
+		var palette_to_edit := current_palette
+		if current_palette.is_project_palette:  # Create a global copy of the local palette
+			palette_name = get_valid_name(palette_name)
+			palette_to_edit = current_palette.duplicate()
+		palette_to_edit.edit(palette_name, width, height, comment)
+		save_palette(palette_to_edit)
+		palettes[palette_name] = palette_to_edit
+		select_palette(palette_name)
+	else:
+		# track old data
+		var old_name = current_palette.name
+		var old_width = current_palette.width
+		var old_height = current_palette.height
+		var old_comment = current_palette.comment
+		var undo_redo := Global.current_project.undo_redo
+		undo_redo.create_action("Edit Properties")
+		# track the palette to edit
+		var palette_to_edit := current_palette
+		var palette_just_added := false
+		if not current_palette.is_project_palette:  # Create a local copy of the global palette
+			palette_to_edit = current_palette.duplicate()
+			palette_just_added = true
+		else:
+			# unparent palette so that it can be manipulated without consequences
+			undo_redo.add_do_method(unparent_palette.bind(palette_to_edit))
+			undo_redo.add_undo_method(unparent_palette.bind(palette_to_edit))
+		# Edit the data and re-parent the palette. Note that the conflicts in name will be auto
+		# resolved when [method add_palette_as_project_palette] is called.
+		undo_redo.add_do_method(palette_to_edit.edit.bind(palette_name, width, height, comment))
+		undo_redo_add_palette(palette_to_edit)
+		if not palette_just_added:
+			# if the palette was already existing then re-set old data. Note that the conflicts in
+			# name will be auto resolved when [method add_palette_as_project_palette] is called.
+			undo_redo.add_undo_method(
+				palette_to_edit.edit.bind(old_name, old_width, old_height, old_comment)
+			)
+			undo_redo.add_undo_method(add_palette_as_project_palette.bind(palette_to_edit))
+		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		undo_redo.commit_action()
 
 
+## Deletes palette but does not reselect
 func _delete_palette(palette: Palette, permanent := true) -> void:
-	if not palette.path.is_empty():
+	if not palette.path.is_empty() and not palette.is_project_palette:
 		if permanent:
 			DirAccess.remove_absolute(palette.path)
 		else:
 			OS.move_to_trash(palette.path)
-	palettes.erase(palette.name)
+	unparent_palette(palette)
+	palette_removed.emit()
 
 
-func current_palete_delete(permanent := true) -> void:
-	_delete_palette(current_palette, permanent)
-
+## Deletes palette and reselects some other palette
+func palette_delete_and_reselect(permanent := true, palette := current_palette) -> void:
+	# NOTE: The undo redo for deletion is handled in
+	# [method _on_edit_palette_dialog_deleted] of PalettePanel.gd
+	_delete_palette(palette, permanent)
 	if palettes.size() > 0:
 		select_palette(palettes.keys()[0])
 	else:
-		current_palette = null
+		if palette == current_palette:
+			current_palette = null
 		select_palette("")
 
 
@@ -254,13 +403,13 @@ func current_palette_delete_color(index: int) -> void:
 	save_palette()
 
 
-func current_palette_sort_colors(id: SortOptions) -> void:
+func sort_colors(id: SortOptions, palette := current_palette) -> void:
 	if id == SortOptions.NEW_PALETTE:
 		return
 	if id == SortOptions.REVERSE:
-		current_palette.reverse_colors()
+		palette.reverse_colors()
 	else:
-		current_palette.sort(id)
+		palette.sort(id)
 	save_palette()
 
 

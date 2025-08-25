@@ -12,6 +12,11 @@ var name := "Custom Palette":
 		name = value.strip_edges()
 var comment := ""
 var path := ""
+var is_project_palette := false:
+	set(value):
+		if value:
+			path = ""
+		is_project_palette = value
 
 ## The width of the grid.
 var width := DEFAULT_WIDTH
@@ -79,14 +84,26 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 
 func duplicate() -> Palette:
 	var new_palette := Palette.new(name, width, height, comment)
-	var new_colors: Dictionary[int, PaletteColor]
-	for color in colors:
-		new_colors[color] = colors[color].duplicate()
-	new_palette.colors = new_colors
+	new_palette.set_color_data(colors)
 	return new_palette
 
 
-func _serialize() -> String:
+## Sets data without referencing the new_colors dictionary. Useful for undo/redo.
+func set_color_data(new_colors: Dictionary[int, PaletteColor]):
+	colors.clear()
+	for color in new_colors:
+		colors[color] = new_colors[color].duplicate()
+
+
+## Gets data without referencing the original dictionary. Useful for undo/redo.
+func get_color_data() -> Dictionary[int, PaletteColor]:
+	var color_data: Dictionary[int, PaletteColor] = {}
+	for color in colors:
+		color_data[color] = colors[color].duplicate()
+	return color_data
+
+
+func serialize() -> String:
 	var serialize_data := {"comment": comment, "colors": [], "width": width, "height": height}
 	for color in colors:
 		serialize_data.colors.push_back(colors[color].serialize())
@@ -131,10 +148,12 @@ func deserialize_from_dictionary(data: Dictionary) -> void:
 
 
 func save_to_file() -> Error:
+	if is_project_palette:  ## TODO: There might be a better way for this
+		return OK
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if not is_instance_valid(file):
 		return FileAccess.get_open_error()
-	file.store_string(_serialize())
+	file.store_string(serialize())
 	file.close()
 	return OK
 
@@ -181,6 +200,7 @@ func add_color(new_color: Color, start_index := 0) -> void:
 	# If palette is full automatically increase the palette height
 	if is_full():
 		height += 1
+		colors_max = width * height
 
 	# Find the first empty index since start index and insert a new color
 	for i in range(start_index, colors_max):
@@ -348,9 +368,19 @@ func is_empty() -> bool:
 
 func has_theme_color(color: Color) -> bool:
 	for palette_color in colors.values():
-		if palette_color.color == color:
+		if palette_color.color.is_equal_approx(color):
 			return true
 	return false
+
+
+## Makes an un-referenced copy of the color_data. Useful for undo/redo.
+static func duplicate_color_data(
+	color_data: Dictionary[int, PaletteColor]
+) -> Dictionary[int, PaletteColor]:
+	var new_colors: Dictionary[int, PaletteColor]
+	for color in color_data:
+		new_colors[color] = color_data[color].duplicate()
+	return new_colors
 
 
 static func strip_unvalid_characters(string_to_strip: String) -> String:
