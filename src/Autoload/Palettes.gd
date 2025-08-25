@@ -30,10 +30,10 @@ func _ready() -> void:
 	_load_palettes()
 
 
-func does_palette_exist(palette_name: String) -> bool:
+func does_palette_exist(palette_name: String, in_project := Global.current_project) -> bool:
 	var keys = palettes.keys()
-	if Global.current_project:
-		keys.append_array(Global.current_project.palettes.keys())
+	if in_project:
+		keys.append_array(in_project.palettes.keys())
 	for name_to_test: String in keys:
 		if name_to_test == palette_name:
 			return true
@@ -42,14 +42,14 @@ func does_palette_exist(palette_name: String) -> bool:
 
 func select_palette(palette_name: String) -> void:
 	var project: Project = Global.current_project
-	project.current_palette = ""
+	project.project_current_palette_name = ""
 	current_palette = null
 	if palettes.has(palette_name):
 		current_palette = palettes.get(palette_name, null)
 	elif project.palettes.has(palette_name):
 		current_palette = project.palettes.get(palette_name, null)
 		if current_palette:
-			project.current_palette = palette_name
+			project.project_current_palette_name = palette_name
 	else:
 		# Attemt to find the last used palette (select if it's a global palette)
 		var last_active_palette: String = Global.config_cache.get_value(
@@ -133,27 +133,25 @@ func undo_redo_add_palette(new_palette: Palette):
 	undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
 
 
-func get_valid_name(initial_palette_name: String, suffix := "copy") -> String:
+func get_valid_name(initial_palette_name: String, project := Global.current_project) -> String:
 	var copies := 0
 	# Remove any previous suffixes
 	initial_palette_name = get_name_without_suffix(initial_palette_name)
 	var palette_name := initial_palette_name
-	while does_palette_exist(palette_name):
-		var final_suffix = " %s" % suffix + (str(" ", copies) if copies != 0 else "")
+	while does_palette_exist(palette_name, project):
+		var final_suffix = " copy" + (str(" ", copies) if copies != 0 else "")
 		palette_name = initial_palette_name + final_suffix
 		copies += 1
 	return palette_name
 
 
-func get_name_without_suffix(
-	palette_name: String, include_count := false, suffix := "copy"
-) -> String:
+func get_name_without_suffix(palette_name: String, include_count := false) -> String:
 	# Remove any previous suffixes
 	var result := palette_name
-	if palette_name.contains(suffix) and palette_name != suffix:
-		result = palette_name.substr(0, palette_name.rfind(suffix)).strip_edges()
+	if palette_name.contains("copy") and palette_name != "copy":
+		result = palette_name.substr(0, palette_name.rfind("copy")).strip_edges()
 		if include_count:
-			var start = palette_name.rfind(suffix) + suffix.length()
+			var start = palette_name.rfind("copy") + 4  # NOTE: (4 == "copy".length())
 			var length = palette_name.length() - start
 			result += " " + palette_name.substr(start, length).strip_edges()
 	return result

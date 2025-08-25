@@ -411,10 +411,10 @@ func _on_edit_palette_dialog_deleted(permanent: bool) -> void:
 
 
 func _project_switched() -> void:
-	var proj_palette_name := Global.current_project.current_palette
+	var proj_palette_name := Global.current_project.project_current_palette_name
 	setup_palettes_selector()
 	# Switch to the recent active project palette if it exists
-	if Global.current_project.current_palette != "":
+	if proj_palette_name != "":
 		Palettes.select_palette(proj_palette_name)
 	redraw_current_palette()
 
