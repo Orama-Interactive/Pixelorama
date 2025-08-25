@@ -60,6 +60,8 @@ func select_palette(palette_name: String) -> void:
 			current_palette = palettes.get(get_name_without_suffix(last_active_palette), null)
 			if !current_palette:  # Fallback to default palette
 				current_palette = palettes.get(DEFAULT_PALETTE_NAME, null)
+		if current_palette:
+			palette_name = current_palette.name
 	_clear_selected_colors()
 	if is_instance_valid(current_palette):
 		Global.config_cache.set_value("data", "last_palette", current_palette.name)
