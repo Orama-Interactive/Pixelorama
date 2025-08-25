@@ -40,6 +40,7 @@ var mouse_pos := Vector2.ZERO
 var drag := false
 var rotation_slider: ValueSlider
 var zoom_slider: ValueSlider
+var vertical_zoom_slider: ValueSlider
 var should_tween := true
 
 @onready var viewport := get_viewport()
@@ -55,6 +56,8 @@ func _ready() -> void:
 		rotation_slider.value_changed.connect(_rotation_slider_value_changed)
 		zoom_slider = Global.top_menu_container.get_node("%ZoomSlider")
 		zoom_slider.value_changed.connect(_zoom_slider_value_changed)
+		vertical_zoom_slider = Global.top_menu_container.get_node("%VerticalZoomSlider")
+		vertical_zoom_slider.value_changed.connect(_vertical_zoom_slider_value_changed)
 	zoom_changed.connect(_zoom_changed)
 	rotation_changed.connect(_rotation_changed)
 	viewport_container = get_viewport().get_parent()
@@ -182,7 +185,7 @@ func update_transparent_checker_offset() -> void:
 func _update_viewport_transform() -> void:
 	if not is_instance_valid(viewport):
 		return
-	var zoom_scale := Vector2.ONE / zoom
+	var zoom_scale := Vector2(1.0 / zoom.x, 1.0 / (zoom.y * maxf(Global.vertical_zoom, 0.01)))
 	var viewport_size := get_viewport_rect().size
 	var screen_offset := viewport_size * 0.5 * zoom_scale
 	screen_offset = screen_offset.rotated(camera_angle)
@@ -198,6 +201,7 @@ func _zoom_changed() -> void:
 	if index == Cameras.MAIN:
 		should_tween = false
 		zoom_slider.value = zoom.x * 100.0
+		vertical_zoom_slider.value = Global.vertical_zoom * 100.0
 		should_tween = true
 		for guide in Global.current_project.guides:
 			guide.width = 1.0 / zoom.x * 2
@@ -231,6 +235,14 @@ func _rotation_slider_value_changed(value: float) -> void:
 	camera_angle = angle
 
 
+func _vertical_zoom_slider_value_changed(value: float) -> void:
+	# Convert percentage to factor
+	var factor := value / 100.0
+	if is_equal_approx(Global.vertical_zoom, factor):
+		return
+	Global.vertical_zoom = factor
+
+
 func _has_selection_tool() -> bool:
 	for slot in Tools._slots.values():
 		if slot.tool_node is BaseSelectionTool:
@@ -242,6 +254,9 @@ func _project_switched() -> void:
 	offset = Global.current_project.cameras_offset[index]
 	camera_angle = Global.current_project.cameras_rotation[index]
 	zoom = Global.current_project.cameras_zoom[index]
+	# Restore session vertical zoom per project
+	if index == Cameras.MAIN:
+		Global.vertical_zoom = Global.current_project.vertical_zoom
 
 
 func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:

@@ -35,13 +35,14 @@ func _draw() -> void:
 	var ruler_transform := Transform2D()
 	var major_subdivide := Transform2D()
 	var minor_subdivide := Transform2D()
-	var zoom := Global.camera.zoom.x
-	transform.y = Vector2(zoom, zoom)
+	# Use effective Y scale: base zoom times vertical display zoom
+	var y_zoom := Global.camera.zoom.x * maxf(Global.vertical_zoom, 0.01)
+	transform.y = Vector2(y_zoom, y_zoom)
 
 	# This tracks the "true" top left corner of the drawing:
 	transform.origin = (
 		Global.main_viewport.size / 2
-		+ Global.camera.offset.rotated(-Global.camera.rotation) * -zoom
+		+ Global.camera.offset.rotated(-Global.camera.rotation) * -y_zoom
 	)
 
 	var proj_size := Global.current_project.size
@@ -51,15 +52,15 @@ func _draw() -> void:
 	var b := Vector2(proj_size.x, 0).rotated(-Global.camera.rotation)  # Top right
 	var c := Vector2(0, proj_size.y).rotated(-Global.camera.rotation)  # Bottom left
 	var d := Vector2(proj_size.x, proj_size.y).rotated(-Global.camera.rotation)  # Bottom right
-	transform.origin.y += minf(minf(a.y, b.y), minf(c.y, d.y)) * zoom
+	transform.origin.y += minf(minf(a.y, b.y), minf(c.y, d.y)) * y_zoom
 
 	var basic_rule := 100.0
 	var i := 0
-	while basic_rule * zoom > 100:
+	while basic_rule * y_zoom > 100:
 		basic_rule /= 5.0 if i % 2 else 2.0
 		i += 1
 	i = 0
-	while basic_rule * zoom < 100:
+	while basic_rule * y_zoom < 100:
 		basic_rule *= 2.0 if i % 2 else 5.0
 		i += 1
 

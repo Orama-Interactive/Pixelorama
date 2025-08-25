@@ -214,6 +214,28 @@ var integer_zoom := false:
 			zoom_slider.step = 1
 		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
+## Vertical display zoom factor for the canvas (Y axis only).
+## 1.0 means no vertical stretch; 2.0 doubles visible height of pixels.
+var vertical_zoom := 1.0:
+	set(value):
+		if is_equal_approx(value, vertical_zoom):
+			return
+		vertical_zoom = value
+		if is_instance_valid(top_menu_container):
+			var vzs: ValueSlider = top_menu_container.get_node("%VerticalZoomSlider")
+			if is_instance_valid(vzs) and !is_equal_approx(vzs.value, vertical_zoom * 100.0):
+				vzs.value = vertical_zoom * 100.0
+		# Persist with the current project like normal zoom (session-only)
+		if is_instance_valid(current_project):
+			current_project.vertical_zoom = vertical_zoom
+		# Update all canvas cameras to apply new transform and checkerboard scale
+		for cam in get_tree().get_nodes_in_group("CanvasCameras"):
+			if cam is CanvasCamera:
+				cam._update_viewport_transform()
+				cam.update_transparent_checker_offset()
+		# Ensure rulers refresh to reflect new pixel size
+		get_tree().call_group("CanvasRulers", "queue_redraw")
+
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
 var theme_font := loaded_fonts[theme_font_index]:

@@ -67,6 +67,9 @@ var fps := 6.0:
 		fps_changed.emit()
 var user_data := ""  ## User defined data, set in the project properties.
 
+# Session-only view state
+var vertical_zoom := 1.0
+
 var x_symmetry_point: float
 var y_symmetry_point: float
 var xy_symmetry_point: Vector2
