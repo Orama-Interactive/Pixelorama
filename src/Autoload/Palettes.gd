@@ -50,6 +50,16 @@ func select_palette(palette_name: String) -> void:
 		current_palette = project.palettes.get(palette_name, null)
 		if current_palette:
 			project.current_palette = palette_name
+	else:
+		# Attemt to find the last used palette (select if it's a global palette)
+		var last_active_palette: String = Global.config_cache.get_value(
+			"data", "last_palette", DEFAULT_PALETTE_NAME
+		)
+		current_palette = palettes.get(last_active_palette, null)
+		if !current_palette:  # Fallback to the palette that the last palette is derived from
+			current_palette = palettes.get(get_name_without_suffix(last_active_palette), null)
+			if !current_palette:  # Fallback to default palette
+				current_palette = palettes.get(DEFAULT_PALETTE_NAME, null)
 	_clear_selected_colors()
 	if is_instance_valid(current_palette):
 		Global.config_cache.set_value("data", "last_palette", current_palette.name)
