@@ -294,15 +294,34 @@ func _on_PaletteGrid_swatch_double_clicked(_mb: int, index: int, click_position:
 	popup.popup_on_parent(Rect2i(popup_position, Vector2i.ONE))
 
 
-func _on_PaletteGrid_swatch_dropped(source_index: int, target_index: int) -> void:
+func _on_PaletteGrid_swatch_dropped(s_index: int, t_index: int) -> void:
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Swatch dropped")
+	var palette_in_focus = Palettes.current_palette
+	if not palette_in_focus.is_project_palette:
+		palette_in_focus = palette_in_focus.duplicate()
+		palette_in_focus.is_project_palette = true
+		undo_redo.add_do_method(Palettes.add_palette_as_project_palette.bind(palette_in_focus))
 	if Input.is_key_pressed(KEY_SHIFT):
-		Palettes.current_palette_insert_color(source_index, target_index)
+		undo_redo.add_do_method(Palettes.current_palette_insert_color.bind(s_index, t_index))
+		undo_redo.add_undo_method(
+			palette_in_focus.set_color_data.bind(palette_in_focus.get_color_data())
+		)
+		undo_redo.add_undo_property(palette_in_focus, "width", palette_in_focus.width)
+		undo_redo.add_undo_property(palette_in_focus, "height", palette_in_focus.height)
+		undo_redo.add_undo_property(palette_in_focus, "colors_max", palette_in_focus.colors_max)
 	elif Input.is_key_pressed(KEY_CTRL):
-		Palettes.current_palette_copy_colors(source_index, target_index)
+		undo_redo.add_do_method(Palettes.current_palette_copy_colors.bind(s_index, t_index))
+		var old_color = palette_in_focus.get_color(t_index)
+		undo_redo.add_undo_method(palette_in_focus.set_color.bind(t_index, old_color))
 	else:
-		Palettes.current_palette_swap_colors(source_index, target_index)
-
-	redraw_current_palette()
+		undo_redo.add_do_method(Palettes.current_palette_swap_colors.bind(s_index, t_index))
+		undo_redo.add_undo_method(Palettes.current_palette_swap_colors.bind(t_index, s_index))
+	if Palettes.current_palette != palette_in_focus:
+		undo_redo.add_undo_method(Palettes.palette_delete_and_reselect.bind(true, palette_in_focus))
+	undo_redo.add_do_method(redraw_current_palette)
+	undo_redo.add_undo_method(redraw_current_palette)
+	commit_undo()
 
 
 func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
@@ -422,6 +441,9 @@ func _on_edit_palette_dialog_exported(path := "") -> void:
 			image.save_webp(path)
 
 
+## Helper methods for undo/redo
+
+
 func commit_undo() -> void:
 	var undo_redo = Global.current_project.undo_redo
 	undo_redo.add_undo_method(Global.general_undo)
@@ -466,8 +488,7 @@ func _current_palette_undo_redo_remove_color(index := 0) -> void:
 		palette_in_focus.is_project_palette = true
 		Palettes.undo_redo_add_palette(palette_in_focus)
 	undo_redo.add_do_method(palette_in_focus.remove_color.bind(index))
-	if palette_in_focus == Palettes.current_palette:  # We didn't made a new palette
-		undo_redo.add_undo_method(palette_in_focus.add_color.bind(old_color, index))
+	undo_redo.add_undo_method(palette_in_focus.add_color.bind(old_color, index))
 	undo_redo.add_do_method(redraw_current_palette)
 	undo_redo.add_do_method(toggle_add_delete_buttons)
 	undo_redo.add_undo_method(redraw_current_palette)

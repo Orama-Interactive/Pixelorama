@@ -88,11 +88,19 @@ func duplicate() -> Palette:
 	return new_palette
 
 
-## Sets data without referencing the new_colors array. Useful for undo/redo.
+## Sets data without referencing the new_colors dictionary. Useful for undo/redo.
 func set_color_data(new_colors: Dictionary[int, PaletteColor]):
 	colors.clear()
 	for color in new_colors:
 		colors[color] = new_colors[color].duplicate()
+
+
+## Gets data without referencing the original dictionary. Useful for undo/redo.
+func get_color_data() -> Dictionary[int, PaletteColor]:
+	var color_data: Dictionary[int, PaletteColor] = {}
+	for color in colors:
+		color_data[color] = colors[color].duplicate()
+	return color_data
 
 
 func serialize() -> String:
