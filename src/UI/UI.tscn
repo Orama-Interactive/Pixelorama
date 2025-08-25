@@ -272,6 +272,7 @@ theme_override_constants/separation = 0
 layout_mode = 2
 
 [node name="TabBar" type="TabBar" parent="DockableContainer/Main Canvas/TabsContainer"]
+auto_translate_mode = 2
 layout_mode = 2
 tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
