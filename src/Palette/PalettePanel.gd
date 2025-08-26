@@ -83,35 +83,6 @@ func _ready() -> void:
 	hidden_color_picker.get_picker().visibility_changed.connect(_on_colorpicker_visibility_changed)
 
 
-func _input(_event: InputEvent) -> void:
-	if Tools.active_button != -1:
-		# NOTE: As the tool's undo is also active at this point, so in order to not
-		# conflict with it's undo, we wait till it's finished (i-e we use else statement)
-		var new_color := Tools.get_assigned_color(Tools.active_button)
-		if Palettes.auto_add_colors:
-			if not Palettes.current_palette.has_theme_color(new_color):
-				if not new_scanned_colors.has(new_color):
-					if not Palettes.current_palette.is_project_palette:
-						was_global_palette_used = true
-					new_scanned_colors.append(new_color)
-		if not was_global_palette_used and not Palettes.current_palette.is_project_palette:
-			if Palettes.current_palette.has_theme_color(new_color):
-				was_global_palette_used = true
-	else:
-		if was_global_palette_used:
-			was_global_palette_used = false
-			var undo_redo := Global.current_project.undo_redo
-			undo_redo.create_action("Add project palette")
-			var palette_in_focus := Palettes.current_palette.duplicate()
-			palette_in_focus.is_project_palette = true
-			Palettes.undo_redo_add_palette(palette_in_focus)
-			commit_undo()
-		if Palettes.auto_add_colors:
-			for color: Color in new_scanned_colors:
-				_current_palette_undo_redo_add_color(color, 0)
-			new_scanned_colors.clear()
-
-
 ## Setup palettes selector with available palettes
 func setup_palettes_selector() -> void:
 	# Clear selector

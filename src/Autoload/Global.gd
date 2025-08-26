@@ -643,6 +643,8 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
+## The palette panel. It has the [param PalettePanel.gd] script attached.
+@onready var palette_panel: PalettePanel = control.find_child("Palettes")
 ## The container of frame buttons
 @onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
 ## The container of layer buttons
