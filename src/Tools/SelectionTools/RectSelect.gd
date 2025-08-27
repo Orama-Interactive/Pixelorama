@@ -131,7 +131,11 @@ func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 		rect.position = Vector2i(mini(origin.x, dest.x), mini(origin.y, dest.y))
 		rect.size = (origin - dest).abs()
 
-	if not Tools.is_placing_tiles():
+	if (
+		not Tools.is_placing_tiles()
+		and not Global.snap_to_rectangular_grid_boundary
+		and not Global.snap_to_rectangular_grid_center
+	):
 		rect.size += Vector2i.ONE
 
 	return rect
