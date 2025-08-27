@@ -164,11 +164,10 @@ func _draw_gizmo(
 		draw_set_transform(bone_cel.gizmo_origin)
 		if not parent in canon_bones:
 			draw_circle(parent_start, bone_cel.START_RADIUS / camera_zoom.x, Color.GRAY, true)
+		# NOTE: bone_start is coordinate of tail of bone, parent_start is head of parent
+		# (or tail in chained mode)
 		draw_dashed_line(
-			bone_start,  # Connected to tail of bone
-			parent_start,  # Connected to head of parent (or tail in chained mode)
-			bone_color,
-			BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			bone_start, parent_start, bone_color, BoneLayer.DESELECT_WIDTH / camera_zoom.x
 		)
 		draw_set_transform(Vector2.ZERO)
 	var font = Themes.get_font()

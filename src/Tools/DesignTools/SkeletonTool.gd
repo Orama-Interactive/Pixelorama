@@ -673,18 +673,20 @@ class FABRIK:
 					var look_old = _get_global_start(bone_cels[i + 1])
 					var look_new = target_pos  # what we should look at
 					# Rotate to look at the next point
-					var angle_diff = cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
+					var angle_diff = (
+						cel_start.angle_to_point(look_new) - cel_start.angle_to_point(look_old)
+					)
 					if !is_equal_approx(angle_diff, 0.0):
 						cel.bone_rotation += angle_diff
 			return true
 		else:
-			var errorDist:float = (target_pos - end_global).length()
-			var itterations: = 0
+			var errorDist: float = (target_pos - end_global).length()
+			var itterations := 0
 			# limit the itteration count
 			while errorDist > errorMargin && itterations < max_itterations:
 				_backward_reach(posList, target_pos, lenghts)  # start at endPos
 				_forward_reach(posList, start_global, lenghts)  # start at pinPos
-				errorDist = (target_pos - posList[posList.size() -1]).length()
+				errorDist = (target_pos - posList[posList.size() - 1]).length()
 				itterations += 1
 			if old_points == posList:
 				return false
@@ -696,13 +698,16 @@ class FABRIK:
 					var next_start_old = _get_global_start(bone_cels[i + 1])  # current situation
 					var next_start_new = posList[i + 1]  # what should have been
 					# Rotate to look at the next point
-					var angle_diff = cel_start.angle_to_point(next_start_new) - cel_start.angle_to_point(next_start_old)
+					var angle_diff = (
+						cel_start.angle_to_point(next_start_new)
+						- cel_start.angle_to_point(next_start_old)
+					)
 					if !is_equal_approx(angle_diff, 0.0):
 						cel.bone_rotation += angle_diff
 			return true
 
-	static func _backward_reach(posList: PackedVector2Array, ending: Vector2, lenghts)->void:
-		var last: = posList.size() - 1
+	static func _backward_reach(posList: PackedVector2Array, ending: Vector2, lenghts) -> void:
+		var last := posList.size() - 1
 		posList[last] = ending  # Place the tail of last vector at ending
 		for i in last:
 			var head_of_last: Vector2 = posList[last - i]
@@ -723,6 +728,7 @@ class FABRIK:
 
 	static func _get_global_start(cel: BaseCel) -> Vector2:
 		return cel.rel_to_canvas(cel.start_point)
+
 
 class CCDIK:
 	# Inspired from:
@@ -786,6 +792,7 @@ class CCDIK:
 		return cel.rel_to_canvas(cel.start_point)
 
 
+## Returns the cels in the IK chain in order, with the last bone at the end
 func get_ik_cels(
 	start_layer: BoneLayer, frame_idx := Global.current_project.current_frame
 ) -> Array[BoneCel]:
