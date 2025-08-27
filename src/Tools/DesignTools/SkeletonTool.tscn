@@ -237,7 +237,7 @@ size_flags_horizontal = 3
 
 [node name="Warn" type="Button" parent="Section4" index="2"]
 layout_mode = 2
-text = "[⚠️]"
+text = "[ ! ]"
 flat = true
 
 [node name="TweenSkeleton" type="MenuButton" parent="." index="13"]

@@ -111,21 +111,31 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 	# the goal of this section is to mark existing layers with their indices else with -1
 	var layer_from_to := {}  # indices of layers from and to
 	for from in from_project.layers.size():
-		var to = layer_to_names.find(from_project.layers[from].name)
-		if project.layers[to].get_layer_type() != from_project.layers[from].get_layer_type():
-			to = -1
-		if to in layer_from_to.values():  # from_project has layers with duplicate frames
-			to = -1
+		var to := -1
+		var pos := 0
+		for i in layer_to_names.count(from_project.layers[from].name):
+			pos = layer_to_names.find(from_project.layers[from].name, pos)
+			# if layer types don't match, the destination is invalid.
+			if project.layers[pos].get_layer_type() != from_project.layers[from].get_layer_type():
+				pos += 1
+				continue
+			# if destination is already assigned to another layer, then don't use it here.
+			if pos in layer_from_to.values():
+				pos += 1
+				continue
+			to = pos
+			break
 		layer_from_to[from] = to
 
 	# Step 2: generate required layers
-	var combined_copy := Array()  # Makes calculations easy
+	var combined_copy := Array()  # Makes calculations easy (contains preview of final layer order).
 	combined_copy.append_array(project.layers)
 	var added_layers := Array()  # Array of layers
 	# Array of indices to add the respective layers (in added_layers) to
 	var added_idx := PackedInt32Array()
 	var added_cels := Array()  # Array of an Array of cels (added in same order as their layer)
 
+	# Create destinations for layers that don't have one yet
 	if layer_from_to.values().count(-1) > 0:
 		# As it is extracted from a dictionary, so i assume the keys aren't sorted
 		var from_layers_size = layer_from_to.keys().duplicate(true)
@@ -152,6 +162,9 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 					Global.LayerTypes.AUDIO:
 						l = AudioLayer.new(project)
 						l.audio = from_layer.audio
+					Global.LayerTypes.BONE:
+						l = BoneLayer.new(project)
+						l.enabled = from_layer.enabled
 				if l == null:  # Ignore copying this layer if it isn't supported
 					continue
 				var cels := []
@@ -180,21 +193,32 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 		var new_frame := Frame.new()
 		imported_frames.append(new_frame)
 		new_frame.duration = src_frame.duration
+		# Used to set common_properties after instanciating
+		var set_base_values := func (base_cel: BaseCel, src_cel: BaseCel):
+			base_cel.opacity = src_cel.opacity
+			base_cel.z_index = src_cel.z_index
+			base_cel.user_data = src_cel.user_data
+			base_cel.ui_color = src_cel.ui_color
 		for to in combined_copy.size():
 			var new_cel: BaseCel
-			if to in layer_from_to.values():
+			if to in layer_from_to.values():  # We have data to Import to this layer index
 				var from = layer_from_to.find_key(to)
 				# Cel we're copying from, the source
 				var src_cel: BaseCel = from_project.frames[f].cels[from]
-				var selected_id := -1
 				if src_cel is Cel3D:
+					set_base_values.call(new_cel, src_cel)
 					new_cel = src_cel.get_script().new(
 						project.size, false, src_cel.object_properties, src_cel.scene_properties
 					)
 					if src_cel.selected != null:
-						selected_id = src_cel.selected.id
+						if (
+							src_cel.selected.id in new_cel.object_properties.keys()
+							and src_cel.selected.id != -1
+						):
+							new_cel.selected = new_cel.get_object_from_id(src_cel.selected.id)
 				elif src_cel is CelTileMap:
 					new_cel = CelTileMap.new(src_cel.tileset)
+					set_base_values.call(new_cel, src_cel)
 					new_cel.offset = src_cel.offset
 					new_cel.place_only_mode = src_cel.place_only_mode
 					new_cel.tile_size = src_cel.tile_size
@@ -209,10 +233,19 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 					copy.blit_rect(src_img, Rect2(Vector2.ZERO, src_img.get_size()), Vector2.ZERO)
 					new_cel.set_content([copy, copied_content[1]])
 					new_cel.set_indexed_mode(project.is_indexed())
+				elif src_cel is BoneCel:
+					new_cel = BoneCel.new(src_cel.opacity, src_cel.serialize())
+					set_base_values.call(new_cel, src_cel)
 				else:
+					# NOTE: This section handles the import of layers whose import logic
+					# isn't defined yet. this is likely because a pxo file from a future version is
+					# being loaded and we don't want to crash the software.
 					new_cel = src_cel.get_script().new()
-					# Add more types here if they have a copy_content() method.
+					set_base_values.call(new_cel, src_cel)
 					if src_cel is PixelCel:
+						# NOTE: The PixelCel import is done here (instead of outside the else loop)
+						# in order for cel types that extend from PixelCel have something to
+						# fall back to other than BaseCel (because they need ImageExtended)
 						var src_img: ImageExtended = src_cel.copy_content()
 						var empty := project.new_empty_image()
 						var copy := ImageExtended.new()
@@ -222,15 +255,6 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 						)
 						new_cel.set_content(copy)
 						new_cel.set_indexed_mode(project.is_indexed())
-					new_cel.opacity = src_cel.opacity
-					new_cel.z_index = src_cel.z_index
-					new_cel.user_data = src_cel.user_data
-					new_cel.ui_color = src_cel.ui_color
-
-					if new_cel is Cel3D:
-						if selected_id in new_cel.object_properties.keys():
-							if selected_id != -1:
-								new_cel.selected = new_cel.get_object_from_id(selected_id)
 			else:
 				new_cel = combined_copy[to].new_empty_cel()
 			new_frame.cels.append(new_cel)
