@@ -89,6 +89,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		open_audio_file(file)
 	elif file_ext == "ora":
 		open_ora_file(file)
+	elif file_ext == "kra":
+		KritaParser.open_kra_file(file)
 	elif file_ext == "ase" or file_ext == "aseprite":
 		AsepriteParser.open_aseprite_file(file)
 	elif file_ext == "psd":
@@ -1117,6 +1119,8 @@ func open_ora_file(path: String) -> void:
 	new_project.order_layers()
 	new_project.selected_cels.clear()
 	new_project.change_cel(0, new_project.layers.find(selected_layer))
+	new_project.save_path = path.get_basename() + ".pxo"
+	new_project.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()

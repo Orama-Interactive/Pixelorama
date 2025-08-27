@@ -437,6 +437,8 @@ static func open_aseprite_file(path: String) -> void:
 				frame.cels.append(cel)
 	organize_layer_child_levels(new_project)
 	new_project.order_layers()
+	new_project.save_path = path.get_basename() + ".pxo"
+	new_project.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
