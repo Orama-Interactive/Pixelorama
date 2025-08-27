@@ -194,7 +194,7 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 		imported_frames.append(new_frame)
 		new_frame.duration = src_frame.duration
 		# Used to set common_properties after instanciating
-		var set_base_values := func (base_cel: BaseCel, src_cel: BaseCel):
+		var set_base_values := func(base_cel: BaseCel, src_cel: BaseCel):
 			base_cel.opacity = src_cel.opacity
 			base_cel.z_index = src_cel.z_index
 			base_cel.user_data = src_cel.user_data
