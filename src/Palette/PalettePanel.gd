@@ -429,6 +429,9 @@ func _current_palette_undo_redo_add_color(color: Color, start_index := 0) -> voi
 		palette_in_focus = palette_in_focus.duplicate()
 		palette_in_focus.is_project_palette = true
 		Palettes.undo_redo_add_palette(palette_in_focus)
+		undo_redo.add_do_property(
+			palette_grid, "grid_window_origin", palette_grid.grid_window_origin
+		)
 	# Get an estimate of where the color will end up (used for undo)
 	var index := start_index
 	var color_max: int = palette_in_focus.colors_max
@@ -457,6 +460,9 @@ func _current_palette_undo_redo_remove_color(index := 0) -> void:
 		palette_in_focus = palette_in_focus.duplicate()
 		palette_in_focus.is_project_palette = true
 		Palettes.undo_redo_add_palette(palette_in_focus)
+		undo_redo.add_do_property(
+			palette_grid, "grid_window_origin", palette_grid.grid_window_origin
+		)
 	undo_redo.add_do_method(palette_in_focus.remove_color.bind(index))
 	undo_redo.add_undo_method(palette_in_focus.add_color.bind(old_color, index))
 	undo_redo.add_do_method(redraw_current_palette)

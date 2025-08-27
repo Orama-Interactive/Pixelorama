@@ -23,8 +23,9 @@ func _ready() -> void:
 
 
 func set_palette(new_palette: Palette) -> void:
-	current_palette = new_palette
-	grid_window_origin = Vector2.ZERO
+	if current_palette != new_palette:
+		current_palette = new_palette
+		grid_window_origin = Vector2.ZERO
 
 
 func setup_swatches() -> void:
