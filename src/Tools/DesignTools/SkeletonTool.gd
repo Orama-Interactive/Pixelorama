@@ -716,7 +716,6 @@ class FABRIK:
 			tail_of_next = head_of_last + (dir * lenghts[i - 1])
 			posList[last - 1 - i] = tail_of_next
 
-
 	static func _forward_reach(posList: PackedVector2Array, starting: Vector2, lenghts) -> void:
 		posList[0] = starting  # Place the tail of first vector at starting
 		for i in posList.size() - 1:
