@@ -7,8 +7,6 @@ const EDIT_PALETTE_SCENE_PATH := "res://src/Palette/EditPaletteDialog.tscn"
 var palettes_name_id := {}
 var palettes_id_name := {}
 
-var new_scanned_colors: PackedColorArray
-var was_global_palette_used := false
 var edited_swatch_index := -1
 var edited_swatch_color := Color.TRANSPARENT
 var sort_submenu := PopupMenu.new()
