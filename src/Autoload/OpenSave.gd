@@ -89,6 +89,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		open_audio_file(file)
 	elif file_ext == "ora":
 		open_ora_file(file)
+	elif file_ext == "kra":
+		KritaParser.open_kra_file(file)
 	elif file_ext == "ase" or file_ext == "aseprite":
 		AsepriteParser.open_aseprite_file(file)
 	elif file_ext == "psd":
