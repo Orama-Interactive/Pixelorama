@@ -89,10 +89,14 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		open_audio_file(file)
 	elif file_ext == "ora":
 		open_ora_file(file)
+	elif file_ext == "kra":
+		KritaParser.open_kra_file(file)
 	elif file_ext == "ase" or file_ext == "aseprite":
 		AsepriteParser.open_aseprite_file(file)
 	elif file_ext == "psd":
 		PhotoshopParser.open_photoshop_file(file)
+	elif file_ext == "piskel":
+		open_piskel_file(file)
 	else:  # Image files
 		# Attempt to load as APNG.
 		# Note that the APNG importer will *only* succeed for *animated* PNGs.
@@ -1117,6 +1121,53 @@ func open_ora_file(path: String) -> void:
 	new_project.order_layers()
 	new_project.selected_cels.clear()
 	new_project.change_cel(0, new_project.layers.find(selected_layer))
+	new_project.save_path = path.get_basename() + ".pxo"
+	new_project.file_name = new_project.name
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+
+
+func open_piskel_file(path: String) -> void:
+	var file_json = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if typeof(file_json) != TYPE_DICTIONARY:
+		return
+	var piskel: Dictionary = file_json.piskel
+	var project_name: String = piskel.get("name", path.get_file().get_basename())
+	var new_project := Project.new([], project_name)
+	new_project.size = Vector2i(piskel.width, piskel.height)
+	new_project.fps = piskel.fps
+	new_project.save_path = path.get_basename() + ".pxo"
+	new_project.file_name = new_project.name
+	var n_of_frames := 0
+	for i in piskel.layers.size():
+		var piskel_layer_str = piskel.layers[i]
+		var piskel_layer: Dictionary = JSON.parse_string(piskel_layer_str)
+		var layer := PixelLayer.new(new_project, piskel_layer.name)
+		layer.opacity = piskel_layer.opacity
+		layer.index = i
+		if piskel_layer.frameCount > n_of_frames:
+			for j in range(n_of_frames, piskel_layer.frameCount):
+				var frame := Frame.new()
+				new_project.frames.append(frame)
+			n_of_frames = piskel_layer.frameCount
+		var layer_image: Image = null
+		for chunk in piskel_layer.chunks:
+			var chunk_image := Image.new()
+			var base64_str: String = chunk.base64PNG.trim_prefix("data:image/png;base64,")
+			chunk_image.load_png_from_buffer(Marshalls.base64_to_raw(base64_str))
+			if not is_instance_valid(layer_image):
+				layer_image = chunk_image
+			else:
+				var src_rect := Rect2i(Vector2i.ZERO, chunk_image.get_size())
+				layer_image.blend_rect(chunk_image, src_rect, Vector2i.ZERO)
+		for j in new_project.frames.size():
+			var region := Rect2i(Vector2i(j * new_project.size.x, 0), new_project.size)
+			var cel_image := layer_image.get_region(region)
+			var cel := layer.new_cel_from_image(cel_image)
+			new_project.frames[j].cels.append(cel)
+		new_project.layers.append(layer)
+	new_project.order_layers()
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
