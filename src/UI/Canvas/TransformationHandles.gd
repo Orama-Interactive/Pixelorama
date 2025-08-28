@@ -384,10 +384,10 @@ func begin_drag(mouse_pos: Vector2) -> void:
 func move_transform(pos: Vector2) -> void:
 	var final_pos := pos
 	if Tools.is_placing_tiles():
-		var tilemap_cel := (Global.current_project.get_current_cel() as CelTileMap)
-		var grid_size := tilemap_cel.get_tile_size()
-		var offset := tilemap_cel.offset % grid_size
-		final_pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size, offset)
+		# NOTE: we don't use offset here because the [param pos] is expected to already have
+		# offseted coordinates.
+		var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
+		final_pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size, Vector2.ZERO)
 	preview_transform = preview_transform.translated(final_pos)
 	queue_redraw()
 

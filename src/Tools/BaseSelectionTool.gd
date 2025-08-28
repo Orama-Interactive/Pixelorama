@@ -155,6 +155,7 @@ func draw_move(pos: Vector2i) -> void:
 		var cel := project.get_current_cel() as CelTileMap
 		var grid_size := cel.get_tile_size()
 		var offset := cel.offset % grid_size
+		_offset = Tools.snap_to_rectangular_grid_boundary(_offset, grid_size, offset)
 		pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size, offset)
 	if Input.is_action_pressed("transform_snap_axis"):  # Snap to axis
 		var angle := Vector2(pos).angle_to_point(_start_pos)

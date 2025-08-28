@@ -371,7 +371,7 @@ func paste(in_place := false) -> void:
 			camera_center.y = 0
 		transform_origin = Vector2i(camera_center.floor())
 		if Tools.is_placing_tiles():
-			var tilemap_cel := (Global.current_project.get_current_cel() as CelTileMap)
+			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 			var grid_size := tilemap_cel.get_tile_size()
 			var offset := tilemap_cel.offset % grid_size
 			transform_origin = Vector2i(
