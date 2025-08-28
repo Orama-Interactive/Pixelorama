@@ -377,6 +377,18 @@ func paste(in_place := false) -> void:
 			transform_origin = Vector2i(
 				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, offset)
 			)
+		elif Global.snap_to_rectangular_grid_center:
+			var grid_size := Global.grids[0].grid_size
+			var grid_offset := Global.grids[0].grid_offset
+			transform_origin = Vector2i(
+				Tools.snap_to_rectangular_grid_center(transform_origin, grid_size, grid_offset)
+			)
+		elif Global.snap_to_rectangular_grid_boundary:
+			var grid_size := Global.grids[0].grid_size
+			var grid_offset := Global.grids[0].grid_offset
+			transform_origin = Vector2i(
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, grid_offset)
+			)
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 	else:
 		if Tools.is_placing_tiles():

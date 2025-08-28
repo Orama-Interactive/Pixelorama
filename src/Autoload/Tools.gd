@@ -691,25 +691,9 @@ func get_closest_point_to_segment(
 func snap_to_rectangular_grid_boundary(
 	pos: Vector2, grid_size: Vector2i, grid_offset: Vector2i, snapping_distance := 9999.0
 ) -> Vector2:
+	# Get the closest grid intersection
 	var grid_pos := pos.snapped(grid_size)
-	grid_pos += Vector2(grid_offset)
-	# keeping grid_pos as is would have been fine but this adds extra accuracy as to
-	# which snap point (from the list below) is closest to mouse and occupy THAT point
-	# t_l is for "top left" and so on
-	var t_l := grid_pos + Vector2(-grid_size.x, -grid_size.y)
-	var t_c := grid_pos + Vector2(0, -grid_size.y)
-	var t_r := grid_pos + Vector2(grid_size.x, -grid_size.y)
-	var m_l := grid_pos + Vector2(-grid_size.x, 0)
-	var m_c := grid_pos
-	var m_r := grid_pos + Vector2(grid_size.x, 0)
-	var b_l := grid_pos + Vector2(-grid_size.x, grid_size.y)
-	var b_c := grid_pos + Vector2(0, grid_size.y)
-	var b_r := grid_pos + Vector2(grid_size)
-	var vec_arr: PackedVector2Array = [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
-	for vec in vec_arr:
-		if vec.distance_to(pos) < grid_pos.distance_to(pos):
-			grid_pos = vec
-
+	# Get the point on boundary of grid box (that contains the intersection)
 	var grid_point := _get_closest_point_to_grid(pos, snapping_distance, grid_pos)
 	if grid_point != Vector2.INF:
 		pos = grid_point.floor()
@@ -721,22 +705,6 @@ func snap_to_rectangular_grid_center(
 ) -> Vector2:
 	var grid_center := pos.snapped(grid_size) + Vector2(grid_size / 2)
 	grid_center += Vector2(grid_offset)
-	# keeping grid_center as is would have been fine but this adds extra accuracy as to
-	# which snap point (from the list below) is closest to mouse and occupy THAT point
-	# t_l is for "top left" and so on
-	var t_l := grid_center + Vector2(-grid_size.x, -grid_size.y)
-	var t_c := grid_center + Vector2(0, -grid_size.y)
-	var t_r := grid_center + Vector2(grid_size.x, -grid_size.y)
-	var m_l := grid_center + Vector2(-grid_size.x, 0)
-	var m_c := grid_center
-	var m_r := grid_center + Vector2(grid_size.x, 0)
-	var b_l := grid_center + Vector2(-grid_size.x, grid_size.y)
-	var b_c := grid_center + Vector2(0, grid_size.y)
-	var b_r := grid_center + Vector2(grid_size)
-	var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
-	for vec in vec_arr:
-		if vec.distance_to(pos) < grid_center.distance_to(pos):
-			grid_center = vec
 	if snapping_distance < 0:
 		pos = grid_center.floor()
 	else:

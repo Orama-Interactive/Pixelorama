@@ -94,8 +94,8 @@ func set_spinbox_values() -> void:
 	_skip_slider_logic = false
 
 
-func draw_start(pos: Vector2i) -> void:
-	pos = snap_position(pos)
+func draw_start(mouse_pos: Vector2i) -> void:
+	var pos: Vector2i = snap_position(mouse_pos)
 	super(pos)
 	_transformation_status_changed = false
 	if transformation_handles.arrow_key_move:
@@ -108,8 +108,9 @@ func draw_start(pos: Vector2i) -> void:
 	_offset = pos
 
 	var quick_copy := Input.is_action_pressed("transform_copy_selection_content", true)
+	# we check if the un-snapped point was hovering a selection
 	if (
-		selection_node.preview_selection_map.is_pixel_selected(pos)
+		selection_node.preview_selection_map.is_pixel_selected(mouse_pos)
 		and (!_add and !_subtract and !_intersect or quick_copy)
 		and !_ongoing_selection
 	):
