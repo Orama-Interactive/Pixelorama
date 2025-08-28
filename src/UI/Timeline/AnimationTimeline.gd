@@ -1078,17 +1078,25 @@ func _on_RemoveLayer_pressed() -> void:
 	if project.layers.size() == 1:
 		return
 
-	var layers := project.layers[project.current_layer].get_children(true)
-	layers.append(project.layers[project.current_layer])
 	var indices := PackedInt32Array()
-	for l in layers:
-		indices.append(l.index)
+	for cel in project.selected_cels:
+		var layer_index: int = cel[1]
+		var layer := project.layers[layer_index]
+		if not layer_index in indices:
+			var children := project.layers[layer_index].get_children(true)
+			for child in children:
+				if not child.index in indices:
+					indices.append(child.index)
+			indices.append(layer.index)
+	indices.sort()
 
+	var layers: Array[BaseLayer]
 	var cels := []
-	for l in layers:
+	for index in indices:
+		layers.append(project.layers[index])
 		cels.append([])
-		for f in project.frames:
-			cels[-1].append(f.cels[l.index])
+		for frame in project.frames:
+			cels[-1].append(frame.cels[index])
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Layer")

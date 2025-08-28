@@ -319,6 +319,8 @@ func serialize() -> Dictionary:
 		"guides": guide_data,
 		"symmetry_points": [x_symmetry_point, y_symmetry_point],
 		"frames": frame_data,
+		"current_frame": current_frame,
+		"current_layer": current_layer,
 		"brushes": brush_data,
 		"palettes": palette_data,
 		"project_current_palette_name": project_current_palette_name,
@@ -504,8 +506,12 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	file_format = dict.get("export_file_format", file_name)
 	fps = dict.get("fps", file_name)
 	user_data = dict.get("user_data", user_data)
+	var loaded_current_frame = dict.get("current_frame", current_frame)
+	var loaded_current_layer = dict.get("current_layer", current_layer)
 	_deserialize_metadata(self, dict)
 	order_layers()
+	selected_cels.clear()
+	change_cel.call_deferred(loaded_current_frame, loaded_current_layer)
 
 
 func _serialize_metadata(object: Object) -> Dictionary:
@@ -859,7 +865,7 @@ func swap_frame(a_index: int, b_index: int) -> void:
 
 func reverse_frames(frame_indices: PackedInt32Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
-	for i in frame_indices.size() / 2:
+	@warning_ignore("integer_division") for i in frame_indices.size() / 2:
 		var index := frame_indices[i]
 		var reverse_index := frame_indices[-i - 1]
 		var temp := frames[index]
