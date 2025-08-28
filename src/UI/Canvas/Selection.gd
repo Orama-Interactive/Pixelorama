@@ -149,7 +149,7 @@ func transform_content_cancel() -> void:
 	project.selection_map_changed()
 	for cel in get_selected_draw_cels():
 		var cel_image := cel.get_image()
-		if !is_pasting:
+		if !is_pasting and cel.transformed_content:
 			cel_image.blit_rect_mask(
 				cel.transformed_content,
 				cel.transformed_content,

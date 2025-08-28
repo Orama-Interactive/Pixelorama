@@ -27,6 +27,11 @@ func draw_start(pos: Vector2i) -> void:
 	_offset = pos
 	_undo_data = _get_undo_data()
 	if Tools.is_placing_tiles():
+		# Clear selection if it it present (i tried moving the selection proview only but the)
+		# code for it gets too complex so i chose to clear it instead
+		if project.has_selection:
+			Global.canvas.selection.clear_selection(true)
+			project.selection_map_changed()
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
