@@ -639,7 +639,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 		line_number += 1
 
 	if line_number > 0:
-		return _fill_imported_palette_with_colors(palette_name, colors, comments, columns)
+		return fill_imported_palette_with_colors(palette_name, colors, comments, columns)
 	return result
 
 
@@ -662,7 +662,7 @@ func _import_pal_palette(path: String, text: String) -> Palette:
 		var color := Color(red, green, blue)
 		colors.append(color)
 
-	return _fill_imported_palette_with_colors(path.get_basename().get_file(), colors)
+	return fill_imported_palette_with_colors(path.get_basename().get_file(), colors)
 
 
 func _import_image_palette(path: String, image: Image) -> Palette:
@@ -677,13 +677,13 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 			if !colors.has(color):
 				colors.append(color)
 
-	return _fill_imported_palette_with_colors(path.get_basename().get_file(), colors)
+	return fill_imported_palette_with_colors(path.get_basename().get_file(), colors)
 
 
 ## Fills a new [Palette] with colors. Used when importing files. Dimensions are
 ## determined by taking colors as a one-dimensional array that is wrapped by
 ## width.
-func _fill_imported_palette_with_colors(
+func fill_imported_palette_with_colors(
 	palette_name: String,
 	colors: PackedColorArray,
 	comment := "",
