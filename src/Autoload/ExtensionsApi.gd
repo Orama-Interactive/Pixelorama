@@ -808,12 +808,19 @@ class PaletteAPI:
 	## "width": 8
 	## }
 	## [/codeblock]
-	func create_palette_from_data(palette_name: String, data: Dictionary) -> void:
-		var palette := Palette.new(palette_name)
+	func create_palette_from_data(
+		palette_name: String, data: Dictionary, is_global := true
+	) -> void:
+		# There may be a case where a Global palette has same name as project palette
+		var palette := Palette.new(Palettes.get_valid_name(palette_name))
 		palette.deserialize_from_dictionary(data)
-		Palettes.save_palette(palette)
-		Palettes.palettes[palette_name] = palette
-		Palettes.select_palette(palette_name)
+		if is_global:
+			Palettes.save_palette(palette)
+			Palettes.palettes[palette.name] = palette
+		else:
+			palette.is_project_palette = true
+			Global.current_project.palettes[palette.name] = palette
+		Palettes.select_palette(palette.name)
 		Palettes.new_palette_created.emit()
 
 

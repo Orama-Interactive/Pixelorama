@@ -58,8 +58,11 @@ var animation_tags: Array[AnimationTag] = []:
 	set = _animation_tags_changed
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
+var palettes: Dictionary[String, Palette] = {}
+## Name of selected palette (for "project" palettes only)
+var project_current_palette_name: String = ""
 var reference_images: Array[ReferenceImage] = []
-var reference_index: int = -1  # The currently selected index ReferenceImage
+var reference_index: int = -1  ## The currently selected index ReferenceImage
 var vanishing_points := []  ## Array of Vanishing Points
 var fps := 6.0:
 	set(value):
@@ -257,6 +260,10 @@ func serialize() -> Dictionary:
 	for layer in layers:
 		layer_data.append(layer.serialize())
 		layer_data[-1]["metadata"] = _serialize_metadata(layer)
+	var palette_data := []
+	for palette_name in palettes:
+		var data: String = palettes[palette_name].serialize()
+		palette_data.append({palette_name: data})
 	var tag_data := []
 	for tag in animation_tags:
 		tag_data.append(tag.serialize())
@@ -315,6 +322,8 @@ func serialize() -> Dictionary:
 		"current_frame": current_frame,
 		"current_layer": current_layer,
 		"brushes": brush_data,
+		"palettes": palette_data,
+		"project_current_palette_name": project_current_palette_name,
 		"reference_images": reference_image_data,
 		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
@@ -353,6 +362,22 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			var tileset := TileSetCustom.new(tile_size, "", tile_shape, false)
 			tileset.deserialize(saved_tileset)
 			tilesets.append(tileset)
+	if dict.has("palettes"):
+		# The actual palette name could be different if a global palette of the same name is
+		# already present, so we need that palette's valid name.
+		var current_palette_name: String = dict.get("project_current_palette_name", "")
+		if current_palette_name != "":
+			Palettes.get_valid_name(current_palette_name, self)
+		for palette_entry: Dictionary in dict["palettes"]:
+			if palette_entry.keys().size() == 1:  # Failsafe
+				var palette_name: String = palette_entry.keys()[0]
+				# There may be a case where a Global palette has same name as project palette
+				var corrected_palette_name := Palettes.get_valid_name(palette_name, self)
+				var palette := Palette.new(corrected_palette_name, true)
+				palette.is_project_palette = true
+				palette.deserialize(palette_entry[palette_name])
+				palettes[corrected_palette_name] = palette
+		project_current_palette_name = current_palette_name
 	if dict.has("frames") and dict.has("layers"):
 		var audio_layers := 0
 		for saved_layer in dict.layers:
