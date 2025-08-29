@@ -689,11 +689,12 @@ func get_closest_point_to_segment(
 
 
 func snap_to_rectangular_grid_boundary(
-	pos: Vector2, grid_size: Vector2i, grid_offset: Vector2i, snapping_distance := 9999.0
+	pos: Vector2, grid_size: Vector2i, grid_offset: Vector2, snapping_distance := 9999.0
 ) -> Vector2:
-	# Get the closest grid intersection
-	var grid_pos := pos.snapped(grid_size)
-	# Get the point on boundary of grid box (that contains the intersection)
+	## Get the closest grid intersection
+	var grid_pos := (pos - grid_offset).snapped(grid_size)  # Get closest box without offset
+	grid_pos += Vector2(grid_offset)  # apply offset
+	## Get the point on boundary of grid box (that contains the intersection)
 	var grid_point := _get_closest_point_to_grid(pos, snapping_distance, grid_pos)
 	if grid_point != Vector2.INF:
 		pos = grid_point.floor()

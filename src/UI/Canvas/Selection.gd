@@ -392,7 +392,7 @@ func paste(in_place := false) -> void:
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 	else:
 		if Tools.is_placing_tiles():
-			var tilemap_cel := (Global.current_project.get_current_cel() as CelTileMap)
+			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 			var grid_size := tilemap_cel.get_tile_size()
 			var offset := tilemap_cel.offset % grid_size
 			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
