@@ -110,7 +110,7 @@ func transform_content_confirm() -> void:
 			src.copy_from(cel.transformed_content)
 			cel.transformed_content = null
 		var transformation_origin := transformation_handles.get_transform_top_left(src.get_size())
-		if Tools.is_placing_tiles():
+		if Tools.is_placing_tiles() and not is_pasting:
 			if cel is not CelTileMap:
 				continue
 			var tilemap := cel as CelTileMap
@@ -170,7 +170,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 		print("No undo data found!")
 		return
 	var project := Global.current_project
-	if Tools.is_placing_tiles():
+	if Tools.is_placing_tiles() and not is_pasting:
 		for cel in undo_data_tmp:
 			if cel is CelTileMap:
 				(cel as CelTileMap).re_index_all_cells(true)

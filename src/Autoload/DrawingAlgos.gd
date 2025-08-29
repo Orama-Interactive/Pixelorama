@@ -343,6 +343,8 @@ func transform_image_with_viewport(
 
 	# Estimate new bounding box
 	var bounds := get_transformed_bounds(original_image.get_size(), full_transform)
+	if bounds.size.x == 0 or bounds.size.y == 0:
+		return
 	var viewport_size := bounds.size.ceil() as Vector2i
 	if viewport_size.x == 1:
 		viewport_size.x = 2

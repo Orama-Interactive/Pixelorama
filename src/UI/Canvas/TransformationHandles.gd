@@ -308,6 +308,8 @@ func _on_preview_transform_changed() -> void:
 		var bounds := DrawingAlgos.get_transformed_bounds(
 			transformed_selection_map.get_size(), preview_transform
 		)
+		if bounds.size.x == 0 or bounds.size.y == 0:
+			return
 		if Tools.is_placing_tiles():
 			for cel in selection_node.get_selected_draw_cels():
 				if cel is not CelTileMap:
@@ -686,6 +688,8 @@ func bake_transform_to_selection(map: SelectionMap, is_confirmed := false) -> vo
 	var bounds := DrawingAlgos.get_transformed_bounds(
 		transformed_selection_map.get_size(), preview_transform
 	)
+	if bounds.size.x == 0 or bounds.size.y == 0:
+		return
 	var transformation_origin := get_transform_top_left().max(Vector2.ZERO)
 	if is_confirmed:
 		var position_top_left := position + get_transform_top_left()
