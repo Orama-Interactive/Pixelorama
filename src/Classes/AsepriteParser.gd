@@ -313,9 +313,11 @@ static func open_aseprite_file(path: String) -> void:
 						if flags & 1 == 1:
 							var _name := parse_aseprite_string(ase_file)
 					var palette_name := "Imported Palette %s" % palettes.size()
-					var palette := Palettes.fill_imported_palette_with_colors(palette_name, colors)
-					palettes[palette_name] = palette
-					project_current_palette_name = palette_name
+					var correct_name := Palettes.get_valid_name(palette_name, new_project)
+					var palette := Palettes.fill_imported_palette_with_colors(correct_name, colors)
+					palette.is_project_palette = true
+					palettes[correct_name] = palette
+					project_current_palette_name = correct_name
 				ChunkTypes.USER_DATA:
 					var flags := ase_file.get_32()
 					if previous_chunk_type == ChunkTypes.TAGS:

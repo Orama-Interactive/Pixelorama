@@ -367,7 +367,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		# already present, so we need that palette's valid name.
 		var current_palette_name: String = dict.get("project_current_palette_name", "")
 		if current_palette_name != "":
-			Palettes.get_valid_name(current_palette_name, self)
+			current_palette_name = Palettes.get_valid_name(current_palette_name, self)
 		for palette_entry: Dictionary in dict["palettes"]:
 			if palette_entry.keys().size() == 1:  # Failsafe
 				var palette_name: String = palette_entry.keys()[0]
