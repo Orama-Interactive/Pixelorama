@@ -559,8 +559,7 @@ func save_pxo_file(
 		)
 		project_saved.emit()
 		SteamManager.set_achievement("ACH_SAVE")
-
-	save_project_to_recent_list(path)
+		save_project_to_recent_list(path)
 	return true
 
 
