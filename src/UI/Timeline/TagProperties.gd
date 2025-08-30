@@ -62,7 +62,6 @@ func _on_confirmed() -> void:
 		new_animation_tags[current_tag_id].user_data = user_data
 
 	# Handle Undo/Redo
-	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Modify Frame Tag")
 	Global.current_project.undo_redo.add_do_method(Global.general_redo)
 	Global.current_project.undo_redo.add_undo_method(Global.general_undo)
@@ -81,7 +80,6 @@ func _on_custom_action(action: StringName) -> void:
 	var new_animation_tags := Global.current_project.animation_tags.duplicate()
 	new_animation_tags.remove_at(current_tag_id)
 	# Handle Undo/Redo
-	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Delete Frame Tag")
 	Global.current_project.undo_redo.add_do_method(Global.general_redo)
 	Global.current_project.undo_redo.add_undo_method(Global.general_undo)

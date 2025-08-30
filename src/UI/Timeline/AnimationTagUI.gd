@@ -49,7 +49,6 @@ func _resize_tag(resize: Drag, value: int) -> void:
 		new_animation_tags[tag_id].to = value
 
 	# Handle Undo/Redo
-	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Resize Frame Tag")
 	Global.current_project.undo_redo.add_do_method(Global.general_redo)
 	Global.current_project.undo_redo.add_undo_method(Global.general_undo)

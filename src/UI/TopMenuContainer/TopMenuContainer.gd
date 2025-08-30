@@ -821,7 +821,6 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 	project.update_tilemaps(undo_data, TileSetPanel.TileEditingMode.AUTO)
 	project.serialize_cel_undo_data(pixel_cels, redo_data)
 	project.undo_redo.create_action("Change color mode")
-	project.undos += 1
 	var palette_in_focus = Palettes.current_palette
 	if not palette_in_focus.is_project_palette and project.color_mode == Project.INDEXED_MODE:
 		palette_in_focus = palette_in_focus.duplicate()

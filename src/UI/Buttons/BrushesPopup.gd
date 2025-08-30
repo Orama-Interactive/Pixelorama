@@ -131,7 +131,6 @@ func remove_brush(brush_button: Node) -> void:
 		container.visible = false
 		Global.brushes_popup.get_node("Background/Brushes/Categories/ProjectLabel").visible = false
 
-	project.undos += 1
 	project.undo_redo.create_action("Delete Custom Brush")
 	project.undo_redo.add_do_property(project, "brushes", project.brushes)
 	project.undo_redo.add_undo_property(project, "brushes", undo_brushes)

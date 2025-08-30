@@ -1002,15 +1002,12 @@ func notification_label(text: String) -> void:
 
 ## Performs the general, bare minimum stuff needed after an undo is done.
 func general_undo(project := current_project) -> void:
-	project.undos -= 1
 	var action_name := project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
 ## Performs the general, bare minimum stuff needed after a redo is done.
 func general_redo(project := current_project) -> void:
-	if project.undos < project.undo_redo.get_version():  # If we did undo and then redo
-		project.undos = project.undo_redo.get_version()
 	if control.redone:
 		var action_name := project.undo_redo.get_current_action_name()
 		notification_label("Redo: %s" % action_name)

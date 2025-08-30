@@ -177,7 +177,6 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	else:
 		project.update_tilemaps(undo_data_tmp, TileSetPanel.TileEditingMode.AUTO)
 	var redo_data := get_undo_data(undo_data_tmp["undo_image"])
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, undo_data_tmp)
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])

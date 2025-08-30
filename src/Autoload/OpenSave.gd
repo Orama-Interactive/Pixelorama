@@ -638,7 +638,6 @@ func open_image_as_spritesheet_layer_smart(
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	# Initialize undo mechanism
-	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
 
 	# Create new frames (if needed)
@@ -719,7 +718,6 @@ func open_image_as_spritesheet_layer(
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	# Initialize undo mechanism
-	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
 
 	# Create new frames (if needed)
@@ -794,7 +792,6 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	var project_height := maxi(image.get_height(), project.size.y)
 	if project.size < Vector2i(project_width, project_height):
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
-	project.undos += 1
 	project.undo_redo.create_action("Replaced Cel")
 
 	var cel := project.frames[frame_index].cels[layer_index]
@@ -849,7 +846,6 @@ func open_image_as_new_frame(
 	if not undo:
 		project.frames.append(frame)
 		return
-	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(project.add_frames.bind([frame], [project.frames.size()]))
@@ -872,7 +868,6 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
 
-	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Layer")
 	for i in project.frames.size():
 		if i == frame_index:
