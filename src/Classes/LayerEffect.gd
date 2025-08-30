@@ -38,7 +38,6 @@ func get_params(frame_index: int) -> Dictionary:
 		var max_params: Dictionary = animated_params[frame_edges[1]]
 		var interpolated_params := {}
 		for param in animated_params[0]:
-			#prints(param, animated_params[0][param])
 			if param.begins_with("PXO_"):
 				continue
 			if param not in min_params or param not in max_params:
@@ -62,7 +61,7 @@ func get_params(frame_index: int) -> Dictionary:
 func is_interpolatable_type(value: Variant) -> bool:
 	var type := typeof(value)
 	match type:
-		TYPE_INT, TYPE_FLOAT, TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_QUATERNION:
+		TYPE_INT, TYPE_FLOAT, TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR, TYPE_QUATERNION:
 			return true
 		_:
 			return false
