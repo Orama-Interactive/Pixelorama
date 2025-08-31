@@ -38,6 +38,7 @@ var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gds
 var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var isometric_tile_cache := {}
 
+
 ## Blends canvas layers into passed image starting from the origin position
 func blend_layers(
 	image: Image,
