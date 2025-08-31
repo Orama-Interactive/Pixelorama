@@ -157,7 +157,6 @@ func _commit_undo(action: String) -> void:
 		if project.get_current_cel() is not GroupCel:
 			layer = project.current_layer
 
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	if Tools.is_placing_tiles():

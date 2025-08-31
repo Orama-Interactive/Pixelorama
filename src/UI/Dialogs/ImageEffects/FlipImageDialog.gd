@@ -54,7 +54,6 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
 	project.update_tilemaps(undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data(project)
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
 	if redo_data.has("outline_offset"):

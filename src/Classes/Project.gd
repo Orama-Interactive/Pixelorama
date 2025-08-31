@@ -22,7 +22,6 @@ var size: Vector2i:
 	set = _size_changed
 var undo_redo := UndoRedo.new()
 var tiles: Tiles
-var undos := 0  ## The number of times we added undo properties
 var can_undo := true
 var color_mode: int = Image.FORMAT_RGBA8:
 	set(value):

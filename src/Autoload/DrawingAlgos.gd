@@ -812,7 +812,6 @@ func center(indices: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var redo_data := {}
 	var undo_data := {}
-	project.undos += 1
 	project.undo_redo.create_action("Center Frames")
 	for frame in indices:
 		# Find used rect of the current frame (across all of the layers)
@@ -1015,7 +1014,6 @@ func general_do_and_undo_scale(
 	new_y_symmetry_axis_points[0].x /= x_ratio
 	new_y_symmetry_axis_points[1].x /= x_ratio
 
-	project.undos += 1
 	project.undo_redo.create_action("Scale")
 	project.undo_redo.add_do_property(project, "size", size)
 	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
