@@ -396,17 +396,15 @@ func _flood_fill(pos: Vector2i) -> void:
 			# Fill all area if it's completely empty and _fill_merged_area = false
 			if image.get_used_rect().size == Vector2i.ZERO and not _fill_merged_area:
 				if project.has_selection:
-					var s_rect = project.selection_map.get_selection_rect(project)
-					if image.get_region(s_rect).get_used_rect().size == Vector2i.ZERO:
-						var filler := project.new_empty_image()
-						filler.fill(tool_slot.color)
-						var selection_map_copy := project.selection_map.return_cropped_copy(
-							project, project.size
-						)
-						var rect := selection_map_copy.get_used_rect()
-						image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
-						image.convert_rgb_to_indexed()
-						continue
+					var filler := project.new_empty_image()
+					filler.fill(tool_slot.color)
+					var selection_map_copy := project.selection_map.return_cropped_copy(
+						project, project.size
+					)
+					var rect := selection_map_copy.get_used_rect()
+					image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
+					image.convert_rgb_to_indexed()
+					continue
 				else:
 					image.fill(tool_slot.color)
 					image.convert_rgb_to_indexed()
