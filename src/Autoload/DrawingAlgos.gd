@@ -664,6 +664,10 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 ## Compares two colors, and returns [code]true[/code] if the difference of these colors is
 ## less or equal to the tolerance [param tol]. [param tol] is in the range of 0-1.
 func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
+	if c1.is_equal_approx(c2):  # Optimization
+		return true
+	if tol == 0.0:  # if it skipped the above check then it's obviously false
+		return false
 	return (
 		absf(c1.r - c2.r) <= tol
 		&& absf(c1.g - c2.g) <= tol
