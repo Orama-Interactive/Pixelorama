@@ -1,6 +1,8 @@
 class_name LayerEffect
 extends RefCounted
 
+signal animated_changed(animated_state: bool)
+
 const MAX_FRAME_INDEX := 9999999
 
 var name := ""
@@ -8,8 +10,12 @@ var shader: Shader
 var category := ""
 var params := {}
 var animated_params := {}
+var animated_tween_params: Dictionary[String, Dictionary] = {}
 var enabled := true
-var animated := false
+var animated := false:
+	set(value):
+		animated = value
+		animated_changed.emit(animated)
 
 
 func _init(_name := "", _shader: Shader = null, _category := "", _animated_params := {}) -> void:
@@ -51,8 +57,13 @@ func get_params(frame_index: int) -> Dictionary:
 			var elapsed := frame_index - frame_edges[0]
 			var delta = max_param - min_param
 			var duration := frame_edges[1] - frame_edges[0]
+			var trans_type := Tween.TRANS_LINEAR
+			var ease_type := Tween.EASE_IN
+			if animated_tween_params.has(param):
+				trans_type = animated_tween_params[param].get("trans_type", trans_type)
+				ease_type = animated_tween_params[param].get("ease_type", ease_type)
 			interpolated_params[param] = Tween.interpolate_value(
-				min_param, delta, elapsed, duration, Tween.TRANS_LINEAR, Tween.EASE_IN
+				min_param, delta, elapsed, duration, trans_type, ease_type
 			)
 		return interpolated_params
 	return animated_params[frame_index]

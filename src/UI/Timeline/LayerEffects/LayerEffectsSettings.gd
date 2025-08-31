@@ -174,7 +174,11 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 		effect.get_params(frame_index),
 		parameter_vbox,
 		_set_parameter.bind(effect, frame_index),
-		_load_parameter_texture.bind(effect, frame_index)
+		_load_parameter_texture.bind(effect, frame_index),
+		effect.animated,
+		effect.animated_tween_params,
+		_set_animated_property.bind(effect),
+		effect.animated_changed
 	)
 	var collapsible_button := parameter_vbox.get_button()
 	collapsible_button.set_script(LAYER_EFFECT_BUTTON)
@@ -289,6 +293,16 @@ func _load_parameter_texture(
 		return
 	var image_tex := ImageTexture.create_from_image(image)
 	_set_parameter(image_tex, param, effect, frame_index)
+
+
+func _set_animated_property(index: int, type: int, param: String, effect: LayerEffect) -> void:
+	if not effect.animated_tween_params.has(param):
+		effect.animated_tween_params[param] = {"trans_type": Tween.TRANS_LINEAR, "ease_type": Tween.EASE_IN}
+	if type == 0:
+		effect.animated_tween_params[param]["trans_type"] = index
+	else:
+		effect.animated_tween_params[param]["ease_type"] = index
+	Global.canvas.queue_redraw()
 
 
 func _on_enabled_button_toggled(button_pressed: bool) -> void:
