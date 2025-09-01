@@ -2,6 +2,7 @@ class_name LayerEffect
 extends RefCounted
 
 signal animated_changed(animated_state: bool)
+signal keyframe_set(frame_index: int)
 
 const MAX_FRAME_INDEX := 9999999
 
@@ -67,6 +68,16 @@ func get_params(frame_index: int) -> Dictionary:
 			)
 		return interpolated_params
 	return animated_params[frame_index]
+
+
+func set_keyframe(frame_index: int) -> void:
+	animated_params[frame_index] = get_params(frame_index).duplicate()
+	keyframe_set.emit(frame_index)
+
+
+func delete_keyframe(frame_index: int) -> void:
+	animated_params.erase(frame_index)
+	keyframe_set.emit(frame_index)
 
 
 func is_interpolatable_type(value: Variant) -> bool:

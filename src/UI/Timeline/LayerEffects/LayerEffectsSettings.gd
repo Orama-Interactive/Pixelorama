@@ -89,6 +89,8 @@ func _on_visibility_changed() -> void:
 		for effect in layer.effects:
 			for connection in effect.animated_changed.get_connections():
 				effect.animated_changed.disconnect(connection["callable"])
+			for connection in effect.keyframe_set.get_connections():
+				effect.keyframe_set.disconnect(connection["callable"])
 
 
 func _add_effect_to_list(i: int) -> void:
@@ -144,9 +146,25 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	enable_checkbox.button_pressed = effect.enabled
 	enable_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	enable_checkbox.toggled.connect(_enable_effect.bind(effect))
+	hbox.add_child(enable_checkbox)
 	var label := Label.new()
 	label.text = effect.name
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hbox.add_child(label)
+
+	var frame_index := Global.current_project.current_frame
+	if frame_index > 0:
+		var keyframe_button := Button.new()
+		keyframe_button.text = "Remove keyframe"
+		keyframe_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		keyframe_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		if not effect.animated or not effect.animated_params.has(frame_index):
+			keyframe_button.visible = false
+		hbox.add_child(keyframe_button)
+		keyframe_button.pressed.connect(_on_remove_keyframe_pressed.bind(effect, frame_index))
+		effect.animated_changed.connect(func(animated: bool): keyframe_button.visible = animated and effect.animated_params.has(frame_index))
+		effect.keyframe_set.connect(func(keyframe_frame_index: int): keyframe_button.visible = effect.animated and effect.animated_params.has(frame_index) and keyframe_frame_index == frame_index)
+
 	var animated_checkbutton := CheckButton.new()
 	animated_checkbutton.button_pressed = effect.animated
 	animated_checkbutton.text = "Animated"
@@ -154,6 +172,16 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	animated_checkbutton.toggled.connect(
 		func(button_pressed: bool): effect.animated = button_pressed
 	)
+	hbox.add_child(animated_checkbutton)
+
+	if layer is PixelLayer:
+		var apply_button := Button.new()
+		apply_button.text = "Apply"
+		apply_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		apply_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		apply_button.pressed.connect(_apply_effect.bind(layer, effect))
+		hbox.add_child(apply_button)
+
 	var delete_button := TextureButton.new()
 	delete_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	delete_button.texture_normal = DELETE_TEXTURE
@@ -161,21 +189,13 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	delete_button.add_to_group(&"UIButtons")
 	delete_button.modulate = Global.modulate_icon_color
 	delete_button.pressed.connect(_delete_effect.bind(effect))
-	hbox.add_child(enable_checkbox)
-	hbox.add_child(label)
-	hbox.add_child(animated_checkbutton)
-	if layer is PixelLayer:
-		var apply_button := Button.new()
-		apply_button.text = "Apply"
-		apply_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		apply_button.pressed.connect(_apply_effect.bind(layer, effect))
-		hbox.add_child(apply_button)
 	hbox.add_child(delete_button)
-	var frame_index := Global.current_project.current_frame
+
+	var params := effect.get_params(frame_index)
 	var parameter_vbox := CollapsibleContainer.new()
 	ShaderLoader.create_ui_for_shader_uniforms(
 		effect.shader,
-		effect.get_params(frame_index),
+		params,
 		parameter_vbox,
 		_set_parameter.bind(effect, frame_index),
 		_load_parameter_texture.bind(effect, frame_index),
@@ -281,8 +301,7 @@ func _set_parameter(value, param: String, effect: LayerEffect, frame_index: int)
 		# for the first frame, since all frames share the same parameters.
 		frame_index = 0
 	if not effect.animated_params.has(frame_index):
-		effect.animated_params[frame_index] = effect.get_params(frame_index).duplicate()
-		prints(frame_index, param, value)
+		effect.set_keyframe(frame_index)
 	effect.animated_params[frame_index][param] = value
 	Global.canvas.queue_redraw()
 
@@ -312,4 +331,9 @@ func _set_animated_property(index: int, type: int, param: String, effect: LayerE
 func _on_enabled_button_toggled(button_pressed: bool) -> void:
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	layer.effects_enabled = button_pressed
+	Global.canvas.queue_redraw()
+
+
+func _on_remove_keyframe_pressed(effect: LayerEffect, frame_index: int) -> void:
+	effect.delete_keyframe(frame_index)
 	Global.canvas.queue_redraw()
