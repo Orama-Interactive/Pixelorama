@@ -1,12 +1,12 @@
 extends Node2D
 
+@warning_ignore("unused_signal")
+signal sync_ui(from_idx: int, data: Dictionary)
+
 ## A Dictionary of bone names as keys and their "Gizmo" as values.
 var selected_bone: BoneLayer
 var chaining_mode := true
 var transformation_active := false
-
-@warning_ignore("unused_signal")
-signal sync_ui(from_idx: int, data: Dictionary)
 
 
 func _ready() -> void:

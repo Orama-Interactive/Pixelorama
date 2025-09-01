@@ -2,7 +2,7 @@ class_name BoneLayer
 extends GroupLayer
 
 enum { NONE, DISPLACE, ROTATE, EXTEND }
-const InteractionDistance = 20
+const INTERACTION_DISTANCE: float = 20
 const DESELECT_WIDTH: float = 1
 
 var enabled := true
@@ -51,24 +51,24 @@ func get_best_origin(frame: Frame) -> Vector2i:
 
 
 func get_current_bone_cel(frame_idx := Global.current_project.current_frame) -> BoneCel:
-	return Global.current_project.frames[Global.current_project.current_frame].cels[index]
+	return Global.current_project.frames[frame_idx].cels[index]
 
 
 ## Calculates hover mode of current BoneLayer
 func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 	var bone_cel := get_current_bone_cel()
 	var local_mouse_pos = bone_cel.rel_to_origin(mouse_position)
-	if (bone_cel.start_point).distance_to(local_mouse_pos) <= InteractionDistance / camera_zoom.x:
+	if (bone_cel.start_point).distance_to(local_mouse_pos) <= INTERACTION_DISTANCE / camera_zoom.x:
 		return DISPLACE
 	elif (
 		(bone_cel.start_point + bone_cel.end_point).distance_to(local_mouse_pos)
-		<= InteractionDistance / camera_zoom.x
+		<= INTERACTION_DISTANCE / camera_zoom.x
 	):
 		if !ignore_rotation_hover:
 			return EXTEND
 	elif _is_close_to_segment(
 		bone_cel.rel_to_start_point(mouse_position),
-		InteractionDistance / camera_zoom.x,
+		INTERACTION_DISTANCE / camera_zoom.x,
 		Vector2.ZERO,
 		bone_cel.end_point
 	):
@@ -110,7 +110,6 @@ func get_child_bones(recursive: bool) -> Array[BoneLayer]:
 								children.append(child)
 							elif child is GroupLayer:
 								groups_to_scan.append(child)
-					pass
 	return children
 
 
