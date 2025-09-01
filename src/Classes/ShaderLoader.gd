@@ -259,6 +259,14 @@ static func create_ui_for_shader_uniforms(
 				var hbox := HBoxContainer.new()
 				hbox.add_child(label)
 				hbox.add_child(color_button)
+				_create_animation_property_ui(
+					u_name,
+					animated_tween_params,
+					hbox,
+					is_animated,
+					animated_property_changed,
+					on_effect_animated_changed
+				)
 				parent_node.add_child(hbox)
 		elif u_type == "mat3":
 			var label := Label.new()
@@ -483,33 +491,31 @@ static func _create_animation_property_ui(
 	on_effect_animated_changed: Signal
 ) -> void:
 	var trans_type_options := OptionButton.new()
-	trans_type_options.fit_to_longest_item = false
 	trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	trans_type_options.visible = is_animated
 	on_effect_animated_changed.connect(func(animated): trans_type_options.visible = animated)
 	trans_type_options.add_item("Linear", Tween.TRANS_LINEAR)
-	trans_type_options.add_item("Quadratic (power of 2)", Tween.TRANS_QUAD)
-	trans_type_options.add_item("Cubic (power of 3)", Tween.TRANS_CUBIC)
-	trans_type_options.add_item("Quartic (power of 4)", Tween.TRANS_QUART)
-	trans_type_options.add_item("Quintic (power of 5)", Tween.TRANS_QUINT)
-	trans_type_options.add_item("Exponential (power of x)", Tween.TRANS_EXPO)
+	trans_type_options.add_item("Quadratic", Tween.TRANS_QUAD)
+	trans_type_options.add_item("Cubic", Tween.TRANS_CUBIC)
+	trans_type_options.add_item("Quartic", Tween.TRANS_QUART)
+	trans_type_options.add_item("Quintic", Tween.TRANS_QUINT)
+	trans_type_options.add_item("Exponential", Tween.TRANS_EXPO)
 	trans_type_options.add_item("Square root", Tween.TRANS_CIRC)
 	trans_type_options.add_item("Sine", Tween.TRANS_SINE)
-	trans_type_options.add_item("Wiggling around the edges", Tween.TRANS_ELASTIC)
-	trans_type_options.add_item("Bouncing at the end", Tween.TRANS_BOUNCE)
-	trans_type_options.add_item("Backing out at ends", Tween.TRANS_BACK)
-	trans_type_options.add_item("Spring towards the end", Tween.TRANS_SPRING)
+	trans_type_options.add_item("Elastic", Tween.TRANS_ELASTIC)
+	trans_type_options.add_item("Bounce", Tween.TRANS_BOUNCE)
+	trans_type_options.add_item("Back", Tween.TRANS_BACK)
+	trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
 	trans_type_options.item_selected.connect(animated_property_changed.bind(0, param_name))
 
 	var ease_type_options := OptionButton.new()
-	ease_type_options.fit_to_longest_item = false
 	ease_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	ease_type_options.visible = is_animated
 	on_effect_animated_changed.connect(func(animated): ease_type_options.visible = animated)
-	ease_type_options.add_item("Starts slowly and speeds up towards the end", Tween.EASE_IN)
-	ease_type_options.add_item("Starts quickly and slows down towards the end", Tween.EASE_OUT)
-	ease_type_options.add_item("Slowest at both ends, fast at middle", Tween.EASE_IN_OUT)
-	ease_type_options.add_item("Fast at both ends, slow at middle", Tween.EASE_OUT_IN)
+	ease_type_options.add_item("Ease in", Tween.EASE_IN)
+	ease_type_options.add_item("Ease out", Tween.EASE_OUT)
+	ease_type_options.add_item("Ease in out", Tween.EASE_IN_OUT)
+	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
 	ease_type_options.item_selected.connect(animated_property_changed.bind(1, param_name))
 	if animated_tween_params.has(param_name):
 		trans_type_options.select(animated_tween_params[param_name].get("trans_type", Tween.TRANS_LINEAR))
