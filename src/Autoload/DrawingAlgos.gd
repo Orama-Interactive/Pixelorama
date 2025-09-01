@@ -80,14 +80,7 @@ func blend_layers(
 		if DisplayServer.get_name() == "headless":
 			blend_layers_headless(image, project, layer, cel, origin)
 		else:
-			var is_blender := layer.is_blender()
-			if layer is BoneLayer:
-				is_blender = layer.is_edit_mode()
-				if DrawingAlgos.force_bone_mode == BoneRenderMode.EDIT:
-					is_blender = false
-				elif DrawingAlgos.force_bone_mode == BoneRenderMode.POSE:
-					is_blender = true
-			if is_blender:
+			if layer.is_blender():
 				var cel_image := (layer as GroupLayer).blend_children(frame)
 				textures.append(cel_image)
 			else:

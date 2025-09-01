@@ -197,3 +197,14 @@ func is_edit_mode() -> bool:
 		and not BoneLayer.get_parent_bone(project.layers[project.current_layer]) == null
 	)
 	return edit_mode
+
+
+func is_blender() -> bool:
+	if blend_mode != BlendModes.PASS_THROUGH:
+		return true
+	else:
+		if DrawingAlgos.force_bone_mode == DrawingAlgos.BoneRenderMode.EDIT:
+			return false
+		elif DrawingAlgos.force_bone_mode == DrawingAlgos.BoneRenderMode.POSE:
+			return true
+	return false
