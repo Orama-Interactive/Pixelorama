@@ -832,6 +832,10 @@ func center(indices: Array) -> void:
 		# Now apply centering
 		var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
 		for cel in project.frames[frame].cels:
+			if cel is BoneCel:
+				var bone_offset := Vector2(offset - used_rect.position)
+				redo_data[cel] = {"gizmo_origin": cel.gizmo_origin + bone_offset}
+				undo_data[cel] = {"gizmo_origin": cel.gizmo_origin}
 			if not cel is PixelCel:
 				continue
 			var cel_image := (cel as PixelCel).get_image()
