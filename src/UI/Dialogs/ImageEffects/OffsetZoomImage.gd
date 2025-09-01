@@ -68,7 +68,7 @@ func _on_WrapCheckBox_toggled(button_pressed: bool) -> void:
 func recalculate_preview(params: Dictionary) -> void:
 	var frame := Global.current_project.frames[_preview_idx]
 	commit_idx = _preview_idx
-	DrawingAlgos.preview_in_edit_mode = true
+	DrawingAlgos.force_bone_mode = DrawingAlgos.BoneRenderMode.EDIT
 	match affect:
 		SELECTED_CELS:
 			selected_cels.fill(Color(0, 0, 0, 0))
@@ -78,7 +78,7 @@ func recalculate_preview(params: Dictionary) -> void:
 			current_frame.fill(Color(0, 0, 0, 0))
 			blend_layers(current_frame, frame, params)
 			preview_image.copy_from(current_frame)
-	DrawingAlgos.preview_in_edit_mode = false
+	DrawingAlgos.force_bone_mode = DrawingAlgos.BoneRenderMode.NONE
 
 
 ## Altered version of blend_layers() located in DrawingAlgos.gd
@@ -120,7 +120,11 @@ func blend_layers(
 		var cel_image: Image
 		var is_blender := layer.is_blender()
 		if layer is BoneLayer:
-			is_blender = not layer.is_edit_mode() and not DrawingAlgos.preview_in_edit_mode
+			is_blender = layer.is_edit_mode()
+			if DrawingAlgos.force_bone_mode == DrawingAlgos.BoneRenderMode.EDIT:
+				is_blender = false
+			elif DrawingAlgos.force_bone_mode == DrawingAlgos.BoneRenderMode.POSE:
+				is_blender = true
 		if is_blender:
 			cel_image = (layer as GroupLayer).blend_children(frame)
 		else:

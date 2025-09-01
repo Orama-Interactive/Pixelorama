@@ -115,8 +115,9 @@ func get_child_bones(recursive: bool) -> Array[BoneLayer]:
 
 
 func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
-	if is_edit_mode():
-		return cel_image
+	if is_edit_mode() or DrawingAlgos.force_bone_mode == DrawingAlgos.BoneRenderMode.EDIT:
+		if DrawingAlgos.force_bone_mode != DrawingAlgos.BoneRenderMode.POSE:
+			return cel_image
 
 	var bone_cel: BoneCel = at_frame.cels[index]
 	var start_point: Vector2i = bone_cel.start_point
@@ -189,9 +190,10 @@ func set_name_to_default(number: int) -> void:
 
 
 func is_edit_mode() -> bool:
+	# Edit mode is when, if current layer isn't a BoneLayer, or a part of BoneLayer or is
+	# BoneLayer but not enabled
 	var edit_mode := not enabled or (
 		not project.layers[project.current_layer] is BoneLayer
-		and DrawingAlgos.preview_in_edit_mode
 		and not BoneLayer.get_parent_bone(project.layers[project.current_layer]) == null
 	)
 	return edit_mode

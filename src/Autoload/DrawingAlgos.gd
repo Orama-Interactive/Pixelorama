@@ -4,6 +4,7 @@ enum RotationAlgorithm { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, UR
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 ## Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
+enum BoneRenderMode { EDIT, POSE, NONE }
 
 const DUMMY_PRE_MUL_ALPHA_SHADER := preload("res://src/Shaders/DummyPreMulAlpha.gdshader")
 
@@ -37,7 +38,9 @@ var omniscale_shader_premul_alpha: Shader:
 var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
 var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var isometric_tile_cache := {}
-var preview_in_edit_mode := false
+## For some special situations, the blend_layers need preview (always) in bone edit or pose mode,
+## regardless of the selected layer, for such cases we use force_bone_mode
+var force_bone_mode := BoneRenderMode.NONE
 
 
 ## Blends canvas layers into passed image starting from the origin position
@@ -79,7 +82,11 @@ func blend_layers(
 		else:
 			var is_blender := layer.is_blender()
 			if layer is BoneLayer:
-				is_blender = not layer.is_edit_mode() and not DrawingAlgos.preview_in_edit_mode
+				is_blender = layer.is_edit_mode()
+				if DrawingAlgos.force_bone_mode == BoneRenderMode.EDIT:
+					is_blender = false
+				elif DrawingAlgos.force_bone_mode == BoneRenderMode.POSE:
+					is_blender = true
 			if is_blender:
 				var cel_image := (layer as GroupLayer).blend_children(frame)
 				textures.append(cel_image)
@@ -92,7 +99,6 @@ func blend_layers(
 				and not only_selected_layers
 			):
 				include = false
-			print(layer.name, " ", layer.is_blended_by_ancestor())
 			set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
 	if DisplayServer.get_name() != "headless":
 		var texture_array := Texture2DArray.new()
