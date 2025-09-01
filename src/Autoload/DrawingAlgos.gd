@@ -861,6 +861,7 @@ func scale_project(width: int, height: int, interpolation: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
 	var tilesets: Array[TileSetCustom] = []
+	var factor := Vector2(width, height) / Vector2(Global.current_project.size)
 	for cel in Global.current_project.get_all_pixel_cels():
 		if not cel is PixelCel:
 			continue
@@ -875,6 +876,17 @@ func scale_project(width: int, height: int, interpolation: int) -> void:
 			tilesets.append(tilemap_cel.tileset)
 		sprite.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
+	for cel in Global.current_project.get_all_bone_cels():
+		redo_data[cel] = {
+			"gizmo_origin": (cel.gizmo_origin * factor).floor(),
+			"start_point": (cel.start_point * factor).floor(),
+			"gizmo_length": floori(cel.gizmo_length * factor.length())
+		}
+		undo_data[cel] = {
+			"gizmo_origin": cel.gizmo_origin,
+			"start_point": cel.start_point,
+			"gizmo_length": cel.gizmo_length
+		}
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
