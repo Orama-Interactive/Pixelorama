@@ -37,6 +37,7 @@ var omniscale_shader_premul_alpha: Shader:
 var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
 var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var isometric_tile_cache := {}
+var preview_in_edit_mode := false
 
 
 ## Blends canvas layers into passed image starting from the origin position
@@ -76,7 +77,10 @@ func blend_layers(
 		if DisplayServer.get_name() == "headless":
 			blend_layers_headless(image, project, layer, cel, origin)
 		else:
-			if layer.is_blender():
+			var is_blender := layer.is_blender()
+			if layer is BoneLayer:
+				is_blender = not layer.is_edit_mode() and not DrawingAlgos.preview_in_edit_mode
+			if is_blender:
 				var cel_image := (layer as GroupLayer).blend_children(frame)
 				textures.append(cel_image)
 			else:

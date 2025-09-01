@@ -115,13 +115,9 @@ func get_child_bones(recursive: bool) -> Array[BoneLayer]:
 
 
 func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
-	if not enabled:
+	if is_edit_mode():
 		return cel_image
-	if (
-		not project.layers[project.current_layer] is BoneLayer
-		and not BoneLayer.get_parent_bone(project.layers[project.current_layer]) == null
-	):
-		return cel_image
+
 	var bone_cel: BoneCel = at_frame.cels[index]
 	var start_point: Vector2i = bone_cel.start_point
 	var angle: float = bone_cel.bone_rotation
@@ -190,3 +186,12 @@ func get_layer_type() -> int:
 
 func set_name_to_default(number: int) -> void:
 	name = tr("Bone") + " %s" % number
+
+
+func is_edit_mode() -> bool:
+	var edit_mode := not enabled or (
+		not project.layers[project.current_layer] is BoneLayer
+		and DrawingAlgos.preview_in_edit_mode
+		and not BoneLayer.get_parent_bone(project.layers[project.current_layer]) == null
+	)
+	return edit_mode
