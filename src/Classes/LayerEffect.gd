@@ -104,9 +104,18 @@ func find_frame_edges(frame_index: int) -> Array[int]:
 
 func serialize() -> Dictionary:
 	var p_str := {}
-	for param in params:
-		p_str[param] = var_to_str(params[param])
-	return {"name": name, "shader_path": shader.resource_path, "params": p_str, "enabled": enabled}
+	for frame_index in animated_params:
+		p_str[frame_index] = {}
+		for param in animated_params[frame_index]:
+			p_str[frame_index][param] = var_to_str(animated_params[frame_index][param])
+	return {
+		"name": name,
+		"shader_path": shader.resource_path,
+		"enabled": enabled,
+		"animated_params": p_str,
+		"animated_tween_params": animated_tween_params,
+		"animated": animated
+	}
 
 
 func deserialize(dict: Dictionary) -> void:
@@ -117,6 +126,21 @@ func deserialize(dict: Dictionary) -> void:
 		var shader_to_load := load(path)
 		if is_instance_valid(shader_to_load) and shader_to_load is Shader:
 			shader = shader_to_load
+	if dict.has("enabled"):
+		enabled = dict["enabled"]
+	if dict.has("animated_params"):
+		for frame_index_str in dict["animated_params"]:
+			var frame_params = dict["animated_params"][frame_index_str]
+			var frame_index := int(frame_index_str)
+			for param in frame_params:
+				if typeof(frame_params[param]) == TYPE_STRING:
+					frame_params[param] = str_to_var(frame_params[param])
+			animated_params[frame_index] = frame_params
+	if dict.has("animated_tween_params"):
+		for param in dict["animated_tween_params"]:
+			animated_tween_params[param] = dict["animated_tween_params"][param]
+	animated = dict.get("animated", animated)
+	# Compatibility with pre-v1.2 pxo files
 	if dict.has("params"):
 		if typeof(dict["params"]) == TYPE_DICTIONARY:
 			for param in dict["params"]:
@@ -124,6 +148,4 @@ func deserialize(dict: Dictionary) -> void:
 					params[param] = str_to_var(dict["params"][param])
 		else:
 			params = str_to_var(dict["params"])
-	if dict.has("enabled"):
-		enabled = dict["enabled"]
 	animated = dict.get("animated", animated)
