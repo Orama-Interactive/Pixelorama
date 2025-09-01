@@ -192,9 +192,12 @@ func set_name_to_default(number: int) -> void:
 func is_edit_mode() -> bool:
 	# Edit mode is when, if current layer isn't a BoneLayer, or a part of BoneLayer or is
 	# BoneLayer but not enabled
-	var edit_mode := not enabled or (
-		not project.layers[project.current_layer] is BoneLayer
-		and not BoneLayer.get_parent_bone(project.layers[project.current_layer]) == null
+	var edit_mode := (
+		not enabled
+		or (
+			not project.layers[project.current_layer] is BoneLayer
+			and not BoneLayer.get_parent_bone(project.layers[project.current_layer]) == null
+		)
 	)
 	return edit_mode
 
