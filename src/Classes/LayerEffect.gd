@@ -83,7 +83,9 @@ func delete_keyframe(frame_index: int) -> void:
 func is_interpolatable_type(value: Variant) -> bool:
 	var type := typeof(value)
 	match type:
-		TYPE_INT, TYPE_FLOAT, TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR, TYPE_QUATERNION:
+		TYPE_INT, TYPE_FLOAT, TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR3I:
+			return true
+		TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR, TYPE_QUATERNION:
 			return true
 		_:
 			return false

@@ -518,7 +518,9 @@ static func _create_animation_property_ui(
 	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
 	ease_type_options.item_selected.connect(animated_property_changed.bind(1, param_name))
 	if animated_tween_params.has(param_name):
-		trans_type_options.select(animated_tween_params[param_name].get("trans_type", Tween.TRANS_LINEAR))
+		trans_type_options.select(
+			animated_tween_params[param_name].get("trans_type", Tween.TRANS_LINEAR)
+		)
 		ease_type_options.select(animated_tween_params[param_name].get("ease_type", Tween.EASE_IN))
 	parent_node.add_child(trans_type_options)
 	parent_node.add_child(ease_type_options)

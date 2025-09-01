@@ -162,8 +162,18 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 			keyframe_button.visible = false
 		hbox.add_child(keyframe_button)
 		keyframe_button.pressed.connect(_on_remove_keyframe_pressed.bind(effect, frame_index))
-		effect.animated_changed.connect(func(animated: bool): keyframe_button.visible = animated and effect.animated_params.has(frame_index))
-		effect.keyframe_set.connect(func(keyframe_frame_index: int): keyframe_button.visible = effect.animated and effect.animated_params.has(frame_index) and keyframe_frame_index == frame_index)
+		effect.animated_changed.connect(
+			func(animated: bool):
+				keyframe_button.visible = animated and effect.animated_params.has(frame_index)
+		)
+		effect.keyframe_set.connect(
+			func(keyframe_frame_index: int):
+				keyframe_button.visible = (
+					effect.animated
+					and effect.animated_params.has(frame_index)
+					and keyframe_frame_index == frame_index
+				)
+		)
 
 	var animated_checkbutton := CheckButton.new()
 	animated_checkbutton.button_pressed = effect.animated
@@ -320,7 +330,9 @@ func _load_parameter_texture(
 
 func _set_animated_property(index: int, type: int, param: String, effect: LayerEffect) -> void:
 	if not effect.animated_tween_params.has(param):
-		effect.animated_tween_params[param] = {"trans_type": Tween.TRANS_LINEAR, "ease_type": Tween.EASE_IN}
+		effect.animated_tween_params[param] = {
+			"trans_type": Tween.TRANS_LINEAR, "ease_type": Tween.EASE_IN
+		}
 	if type == 0:
 		effect.animated_tween_params[param]["trans_type"] = index
 	else:
