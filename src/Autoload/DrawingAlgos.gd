@@ -928,6 +928,10 @@ func crop_to_selection() -> void:
 			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
+	for cel in Global.current_project.get_all_bone_cels():
+		var offset := rect.position
+		redo_data[cel] = {"gizmo_origin": cel.gizmo_origin - Vector2(offset)}
+		undo_data[cel] = {"gizmo_origin": cel.gizmo_origin}
 
 	general_do_and_undo_scale(rect.size.x, rect.size.y, redo_data, undo_data)
 
