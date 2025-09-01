@@ -28,7 +28,6 @@ func _on_FrameProperties_confirmed() -> void:
 	var project := Global.current_project
 	var new_duration: float = frame_dur.get_value()
 	var new_user_data := user_data_text_edit.text
-	project.undos += 1
 	project.undo_redo.create_action("Change frame duration")
 	for frame_idx in frame_indices:
 		var frame := project.frames[frame_idx]

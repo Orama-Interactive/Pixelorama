@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.5] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.4.1
+
+### Added
+- Implemented loading Krita (`.kra`) files with animation support. Only projects using RGBA with 8-bit color depth are supported at the moment.
+- Loading animations from Photoshop (`.psd`) files is now possible.
+- Implemented loading Piskel (`.piskel`) files with animation support.
+- Added a zoom parameter to the offset shader. [#1330](https://github.com/Orama-Interactive/Pixelorama/pull/1330)
+- The currently selected frame & layer are now remembered inside `.pxo` files.
+- Added an option to transform content in Modify selection. [#1309](https://github.com/Orama-Interactive/Pixelorama/pull/1309)
+- Relative paths are now supported in the CLI. [#1326](https://github.com/Orama-Interactive/Pixelorama/pull/1326)
+
+### Changed
+- When clicking on the remove layer button, now all selected layers get removed. This is consistent with how frames get deleted, and is what users would expect.
+- During animation playback on frames of a tag, if the user changes to a frame of a different tag, then the frames of that tag are being played. [#1311](https://github.com/Orama-Interactive/Pixelorama/pull/1311)
+
+### Fixed
+- Creating rectangular selections now snap to the grid correctly, if snapping is enabled. [#1338](https://github.com/Orama-Interactive/Pixelorama/pull/1338)
+- The names of the projects are no longer being translated in tabs. [#1334](https://github.com/Orama-Interactive/Pixelorama/issues/1334)
+
 ## [v1.1.4] - 2025-08-13
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
@@ -23,7 +46,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 Built using Godot 4.4.1
 
 ### Added
-- Implemented limited support of Photoshop (.psd) file importing. [#1308](https://github.com/Orama-Interactive/Pixelorama/pull/1308)
+- Implemented limited support of Photoshop (`.psd`) file importing. [#1308](https://github.com/Orama-Interactive/Pixelorama/pull/1308)
 - Added ability to edit individual tiles in tilemap layers even in place only mode. [#1253](https://github.com/Orama-Interactive/Pixelorama/pull/1253)
 - Added support for batch removal of unused tiles in tilemap layers. [#1253](https://github.com/Orama-Interactive/Pixelorama/pull/1253)
 - Added a way to re-apply the last image effect from the Effects menu. [#1310](https://github.com/Orama-Interactive/Pixelorama/pull/1310)

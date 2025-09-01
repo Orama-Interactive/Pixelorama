@@ -298,7 +298,6 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	var redo_data: Dictionary = get_undo_data()
 	var project := Global.current_project
 
-	project.undos += 1
 	project.undo_redo.create_action(action)
 
 	for key in undo_data_tmp.keys():

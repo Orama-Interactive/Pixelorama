@@ -101,7 +101,6 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 	var copied_indices: PackedInt32Array = range(
 		destination + 1, (destination + 1) + indices.size()
 	)
-	project.undos += 1
 	project.undo_redo.create_action("Import Tag")
 	# Step 1: calculate layers to generate
 	var layer_to_names := PackedStringArray()  # names of currently existing layers

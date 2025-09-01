@@ -171,7 +171,6 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 		frame = project.current_frame
 		layer = project.current_layer
 
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))

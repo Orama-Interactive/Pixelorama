@@ -237,7 +237,6 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 func _delete_cel_content() -> void:
 	var indices := _get_cel_indices()
 	var project := Global.current_project
-	project.undos += 1
 	project.undo_redo.create_action("Draw")
 	for cel_index in indices:
 		var frame_index: int = cel_index[0]

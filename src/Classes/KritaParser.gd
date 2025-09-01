@@ -8,31 +8,37 @@ static func open_kra_file(path: String) -> void:
 	var zip_reader := ZIPReader.new()
 	var err := zip_reader.open(path)
 	if err != OK:
-		print("Error opening kra file: ", error_string(err))
+		printerr("Error opening kra file: ", error_string(err))
 		return
 	var data_xml := zip_reader.read_file("maindoc.xml")
 	var parser := XMLParser.new()
 	err = parser.open_buffer(data_xml)
 	if err != OK:
-		print("Error parsing XML from kra file: ", error_string(err))
+		printerr("Error parsing XML from kra file: ", error_string(err))
 		zip_reader.close()
 		return
+	var xml_as_string := data_xml.get_string_from_utf8()
+	var has_animation := xml_as_string.contains("keyframes")
 	var new_project := Project.new([Frame.new()], path.get_file().get_basename())
 	var selected_layer: BaseLayer
 	var group_layer_found := false
 	var current_stack: Array[GroupLayer] = []
+
+	var n_of_frames := 0
+	var starting_frame := 0
 	var is_parsing_horizontal_guides := false
 	var is_parsing_vertical_guides := false
+	# First pass: get project, animation and guide data.
 	while parser.read() != ERR_FILE_EOF:
 		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
 			var node_name := parser.get_node_name()
 			if node_name == "IMAGE":
 				var width := parser.get_named_attribute_value_safe("width")
 				if not width.is_empty():
-					new_project.size.x = str_to_var(width)
+					new_project.size.x = int(width)
 				var height := parser.get_named_attribute_value_safe("height")
 				if not height.is_empty():
-					new_project.size.y = str_to_var(height)
+					new_project.size.y = int(height)
 				var project_name := parser.get_named_attribute_value_safe("name")
 				if not project_name.is_empty():
 					new_project.name = project_name
@@ -45,70 +51,15 @@ static func open_kra_file(path: String) -> void:
 				if framerate_type == "value":
 					var framerate := parser.get_named_attribute_value_safe("value")
 					if not framerate.is_empty():
-						new_project.fps = str_to_var(framerate)
-			elif node_name == "layer":
-				var layer_type := parser.get_named_attribute_value_safe("nodetype")
-				for prev_layer in new_project.layers:
-					prev_layer.index += 1
-				var layer_name := parser.get_named_attribute_value_safe("name")
-				var layer: BaseLayer
-				var is_shape_layer := false
-				if layer_type == "grouplayer":
-					group_layer_found = true
-					layer = GroupLayer.new(new_project, layer_name)
-					if current_stack.size() > 0:
-						layer.parent = current_stack[-1]
-					layer.expanded = parser.get_named_attribute_value_safe("collapsed") == "0"
-					var passthrough := parser.get_named_attribute_value_safe("passthrough")
-					if passthrough == "1":
-						layer.blend_mode = BaseLayer.BlendModes.PASS_THROUGH
-					current_stack.append(layer)
-				elif layer_type == "paintlayer":
-					layer = PixelLayer.new(new_project, layer_name)
-					if current_stack.size() > 0:
-						layer.parent = current_stack[-1]
-				## TODO: Change to VectorLayer once we support them.
-				elif layer_type == "shapelayer":
-					is_shape_layer = true
-					layer = PixelLayer.new(new_project, layer_name)
-					if current_stack.size() > 0:
-						layer.parent = current_stack[-1]
-				if not is_instance_valid(layer):
-					continue
-				new_project.layers.insert(0, layer)
-				if new_project.layers.size() == 1:
-					selected_layer = layer
-				layer.index = 0
-				layer.opacity = float(parser.get_named_attribute_value_safe("opacity")) / 255.0
-				if parser.get_named_attribute_value_safe("selected") == "true":
-					selected_layer = layer
-				layer.visible = parser.get_named_attribute_value_safe("visible") == "1"
-				layer.locked = parser.get_named_attribute_value_safe("locked") == "1"
-				if layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
-					var blend_mode := parser.get_named_attribute_value_safe("compositeop")
-					layer.blend_mode = match_blend_modes(blend_mode)
-				var image_x := int(parser.get_named_attribute_value("x"))
-				var image_y := int(parser.get_named_attribute_value("y"))
-				# Create cel
-				var cel := layer.new_empty_cel()
-				if cel is PixelCel:
-					var image_filename := parser.get_named_attribute_value_safe("filename")
-					var image_path := new_project.name.path_join("layers").path_join(image_filename)
-					var image: Image
-					if is_shape_layer:
-						image_path += ".shapelayer".path_join("content.svg")
-						var svg_binary := zip_reader.read_file(image_path)
-						image = Image.new()
-						image.load_svg_from_buffer(svg_binary)
-					else:
-						var image_data := zip_reader.read_file(image_path)
-						image = read_krita_image(image_data)
-					if not image.is_empty():
-						var image_rect := Rect2i(Vector2i.ZERO, image.get_size())
-						cel.get_image().blit_rect(image, image_rect, Vector2i(image_x, image_y))
-				new_project.frames[0].cels.insert(0, cel)
-			elif node_name == "layers" and group_layer_found:
-				group_layer_found = false
+						new_project.fps = float(framerate)
+			elif node_name == "range":
+				var type := parser.get_named_attribute_value_safe("type")
+				if type == "timerange":
+					var to := parser.get_named_attribute_value_safe("to")
+					var from := parser.get_named_attribute_value_safe("from")
+					if not to.is_empty() and not from.is_empty():
+						starting_frame = int(from)
+						n_of_frames = int(to) - starting_frame + 1
 			elif node_name == "horizontalGuides":
 				is_parsing_horizontal_guides = true
 			elif node_name == "verticalGuides":
@@ -142,21 +93,145 @@ static func open_kra_file(path: String) -> void:
 					Global.canvas.add_child(guide)
 		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
 			var node_name := parser.get_node_name()
-			if node_name == "layers":
-				current_stack.pop_back()
-			elif node_name == "horizontalGuides":
+			if node_name == "horizontalGuides":
 				is_parsing_horizontal_guides = false
 			elif node_name == "verticalGuides":
 				is_parsing_vertical_guides = false
 
+	# Create frames if there is animation.
+	if has_animation:
+		for i in range(1, n_of_frames):
+			var frame := Frame.new()
+			new_project.frames.append(frame)
+
+	n_of_frames = new_project.frames.size()
+	parser.seek(0)
+	# Second pass: create layers. Needs to happen after frames have been created.
+	while parser.read() != ERR_FILE_EOF:
+		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			var node_name := parser.get_node_name()
+			if node_name == "layer":
+				var layer_type := parser.get_named_attribute_value_safe("nodetype")
+				for prev_layer in new_project.layers:
+					prev_layer.index += 1
+				var layer_name := parser.get_named_attribute_value_safe("name")
+				var layer: BaseLayer
+				var is_shape_layer := false
+				if layer_type == "grouplayer":
+					group_layer_found = true
+					layer = GroupLayer.new(new_project, layer_name)
+					if current_stack.size() > 0:
+						layer.parent = current_stack[-1]
+					layer.expanded = parser.get_named_attribute_value_safe("collapsed") == "0"
+					var passthrough := parser.get_named_attribute_value_safe("passthrough")
+					if passthrough == "1":
+						layer.blend_mode = BaseLayer.BlendModes.PASS_THROUGH
+					current_stack.append(layer)
+				elif layer_type == "paintlayer":
+					layer = PixelLayer.new(new_project, layer_name)
+					if current_stack.size() > 0:
+						layer.parent = current_stack[-1]
+				# TODO: Change to VectorLayer once we support them.
+				elif layer_type == "shapelayer":
+					is_shape_layer = true
+					layer = PixelLayer.new(new_project, layer_name)
+					if current_stack.size() > 0:
+						layer.parent = current_stack[-1]
+				if not is_instance_valid(layer):
+					continue
+				new_project.layers.insert(0, layer)
+				if new_project.layers.size() == 1:
+					selected_layer = layer
+				layer.index = 0
+				layer.opacity = float(parser.get_named_attribute_value_safe("opacity")) / 255.0
+				if parser.get_named_attribute_value_safe("selected") == "true":
+					selected_layer = layer
+				layer.visible = parser.get_named_attribute_value_safe("visible") == "1"
+				layer.locked = parser.get_named_attribute_value_safe("locked") == "1"
+				if layer.blend_mode != BaseLayer.BlendModes.PASS_THROUGH:
+					var blend_mode := parser.get_named_attribute_value_safe("compositeop")
+					layer.blend_mode = match_blend_modes(blend_mode)
+				var keyframes := parser.get_named_attribute_value_safe("keyframes")
+
+				# Create cel
+				var image_x := int(parser.get_named_attribute_value("x"))
+				var image_y := int(parser.get_named_attribute_value("y"))
+				var offset := Vector2i(image_x, image_y)
+				if layer is PixelLayer:
+					var image_filename := parser.get_named_attribute_value_safe("filename")
+					var image_path := new_project.name.path_join("layers").path_join(image_filename)
+					var image: Image
+					if is_shape_layer:
+						image_path += ".shapelayer".path_join("content.svg")
+						var svg_binary := zip_reader.read_file(image_path)
+						image = Image.new()
+						image.load_svg_from_buffer(svg_binary)
+					else:
+						var image_data := zip_reader.read_file(image_path)
+						image = read_krita_image(image_data)
+
+					if keyframes.is_empty():
+						# If there are no keyframes, fill all cels with the same layer image.
+						fill_frames(new_project, layer, image, 0, n_of_frames, offset)
+					else:
+						# Add animation frames, if they exist.
+						var keyframes_path := new_project.name.path_join("layers").path_join(
+							keyframes
+						)
+						var keyframes_xml_buffer := zip_reader.read_file(keyframes_path)
+						var keyframe_data := get_keyframe_data(keyframes_xml_buffer)
+						if keyframe_data.is_empty():
+							fill_frames(new_project, layer, image, 0, n_of_frames, offset)
+						else:
+							var prev_time := 0
+							var prev_image := image
+							for keyframe in keyframe_data:
+								var time: int = int(keyframe["time"]) - starting_frame
+								if time < 0:
+									time = 0
+								# Fill potentially empty frames with the image of the previous keyframe.
+								fill_frames(new_project, layer, prev_image, prev_time, time, offset)
+								var frame_file: String = keyframe["frame"]
+								var frame_path := new_project.name.path_join("layers").path_join(
+									frame_file
+								)
+								var image_data := zip_reader.read_file(frame_path)
+								var frame_image := read_krita_image(image_data)
+								if not frame_image.is_empty():
+									var current_cel := layer.new_empty_cel()
+									var image_rect := Rect2i(Vector2i.ZERO, frame_image.get_size())
+									current_cel.get_image().blit_rect(
+										frame_image, image_rect, Vector2i(image_x, image_y)
+									)
+									new_project.frames[time].cels.insert(0, current_cel)
+								prev_time = time + 1
+								prev_image = frame_image
+							if prev_time < n_of_frames:
+								# Fill potentially empty frames with the image of the previous keyframe.
+								fill_frames(
+									new_project, layer, prev_image, prev_time, n_of_frames, offset
+								)
+
+				else:  # If group layer, fill all frames with empty group cels.
+					for i in n_of_frames:
+						var frame := new_project.frames[i]
+						var empty_cel := layer.new_empty_cel()
+						frame.cels.insert(0, empty_cel)
+			elif node_name == "layers" and group_layer_found:
+				group_layer_found = false
+		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
+			var node_name := parser.get_node_name()
+			if node_name == "layers":
+				current_stack.pop_back()
+
 	zip_reader.close()
 	new_project.order_layers()
 	new_project.selected_cels.clear()
-	new_project.change_cel(0, new_project.layers.find(selected_layer))
 	new_project.save_path = path.get_basename() + ".pxo"
 	new_project.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	new_project.change_cel(0, new_project.layers.find(selected_layer))
 	Global.canvas.camera_zoom()
 
 
@@ -327,6 +402,33 @@ static func lzf_decompress(data_in: PackedByteArray, len_data_out: int) -> Packe
 				ref += 1
 
 	return data_out
+
+
+static func fill_frames(
+	project: Project, layer: BaseLayer, image: Image, from: int, to: int, offset: Vector2i
+) -> void:
+	for i in range(from, to):
+		var frame := project.frames[i]
+		var current_cel := layer.new_empty_cel()
+		var image_rect := Rect2i(Vector2i.ZERO, image.get_size())
+		current_cel.get_image().blit_rect(image, image_rect, offset)
+		frame.cels.insert(0, current_cel)
+
+
+static func get_keyframe_data(keyframe_buffer: PackedByteArray) -> Array[Dictionary]:
+	var keyframe_data: Array[Dictionary] = []
+	var parser := XMLParser.new()
+	var err := parser.open_buffer(keyframe_buffer)
+	if err != OK:
+		return keyframe_data
+	while parser.read() != ERR_FILE_EOF:
+		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			var node_name := parser.get_node_name()
+			if node_name == "keyframe":
+				var time := parser.get_named_attribute_value_safe("time")
+				var frame := parser.get_named_attribute_value_safe("frame")
+				keyframe_data.append({"time": time, "frame": frame})
+	return keyframe_data
 
 
 ## Match Krita's blend modes to Pixelorama's.

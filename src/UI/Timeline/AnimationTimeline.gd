@@ -339,7 +339,6 @@ func add_frame() -> void:
 	var project := Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame := project.new_empty_frame()
-	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
@@ -430,7 +429,6 @@ func delete_frames(indices: PackedInt32Array = []) -> void:
 				tag.to -= 1
 		frame_correction += 1  # Compensation for the next batch
 
-	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
 	project.undo_redo.add_do_method(project.remove_frames.bind(indices))
 	project.undo_redo.add_undo_method(project.add_frames.bind(frames, indices))
@@ -483,7 +481,6 @@ func copy_frames(
 	# as project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
 		new_animation_tags[i] = new_animation_tags[i].duplicate()
-	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	var last_focus_cels := []
 	for f in indices:
@@ -976,7 +973,6 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 		# Set the parent of layer to be the same as the layer below it.
 		layer.parent = project.layers[project.current_layer].parent
 
-	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
 	project.undo_redo.add_do_method(project.add_layers.bind([layer], [new_layer_idx], [cels]))
 	project.undo_redo.add_undo_method(project.remove_layers.bind([new_layer_idx]))
@@ -1068,7 +1064,6 @@ func _on_CloneLayer_pressed() -> void:
 		project.current_layer + 1, project.current_layer + clones.size() + 1
 	)
 
-	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
 	project.undo_redo.add_do_method(project.add_layers.bind(clones, indices, cels))
 	project.undo_redo.add_undo_method(project.remove_layers.bind(indices))
@@ -1086,19 +1081,26 @@ func _on_RemoveLayer_pressed() -> void:
 	if project.layers.size() == 1:
 		return
 
-	var layers := project.layers[project.current_layer].get_children(true)
-	layers.append(project.layers[project.current_layer])
 	var indices := PackedInt32Array()
-	for l in layers:
-		indices.append(l.index)
+	for cel in project.selected_cels:
+		var layer_index: int = cel[1]
+		var layer := project.layers[layer_index]
+		if not layer_index in indices:
+			var children := project.layers[layer_index].get_children(true)
+			for child in children:
+				if not child.index in indices:
+					indices.append(child.index)
+			indices.append(layer.index)
+	indices.sort()
 
+	var layers: Array[BaseLayer]
 	var cels := []
-	for l in layers:
+	for index in indices:
+		layers.append(project.layers[index])
 		cels.append([])
-		for f in project.frames:
-			cels[-1].append(f.cels[l.index])
+		for frame in project.frames:
+			cels[-1].append(frame.cels[index])
 
-	project.undos += 1
 	project.undo_redo.create_action("Remove Layer")
 	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
 	project.undo_redo.add_undo_method(project.add_layers.bind(layers, indices, cels))
@@ -1174,7 +1176,6 @@ func _on_MergeDownLayer_pressed() -> void:
 		return
 	var top_cels := []
 
-	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
 	for frame in project.frames:
 		var top_cel := frame.cels[top_layer.index]
@@ -1328,7 +1329,6 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 			new_layer.parent = bottom_layer.parent
 			break
 		bottom_layer = bottom_layer.parent
-	project.undos += 1
 	project.undo_redo.create_action("Flatten layers")
 	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
 	project.undo_redo.add_do_method(

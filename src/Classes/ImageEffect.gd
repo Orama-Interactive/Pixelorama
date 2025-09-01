@@ -180,7 +180,6 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
 	project.update_tilemaps(undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data(project)
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, -1, -1, project))
