@@ -392,7 +392,7 @@ func draw_start(_pos: Vector2i) -> void:
 
 
 func add_undo_draw_data():
-	if !Global.current_project.current_frame in _undo_target_frames:
+	if !Global.current_project.current_frame in _undo_target_frames and current_selected_bone:
 		var current_cel = current_selected_bone.get_current_bone_cel()
 		_undo_target_frames.append(Global.current_project.current_frame)
 		Global.current_project.undo_redo.add_undo_method(

@@ -119,7 +119,6 @@ func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 		return cel_image
 	if (
 		not project.layers[project.current_layer] is BoneLayer
-		and Global.canvas.is_updating
 		and not BoneLayer.get_parent_bone(project.layers[project.current_layer]) == null
 	):
 		return cel_image
