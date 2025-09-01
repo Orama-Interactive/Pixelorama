@@ -969,6 +969,10 @@ func crop_to_content() -> void:
 			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
+	for cel in Global.current_project.get_all_bone_cels():
+		var offset := used_rect.position
+		redo_data[cel] = {"gizmo_origin": cel.gizmo_origin - Vector2(offset)}
+		undo_data[cel] = {"gizmo_origin": cel.gizmo_origin}
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
@@ -991,7 +995,9 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 			tilemap_cel.serialize_undo_data_source_image(resized, redo_data, undo_data, offset)
 		resized.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
-
+	for cel in Global.current_project.get_all_bone_cels():
+		redo_data[cel] = {"gizmo_origin": cel.gizmo_origin + Vector2(offset_x, offset_y)}
+		undo_data[cel] = {"gizmo_origin": cel.gizmo_origin}
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
 

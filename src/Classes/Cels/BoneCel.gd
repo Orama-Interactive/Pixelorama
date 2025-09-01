@@ -92,10 +92,11 @@ func serialize(vector_to_string := true) -> Dictionary:
 	return data
 
 
-func deserialize(data: Dictionary, update_children := false) -> void:
+func deserialize(data: Dictionary, update_children := false, update_super := true) -> void:
 	if not update_children:
 		should_update_children = false
-	super.deserialize(data)
+	if update_super:
+		super.deserialize(data)
 	# These need conversion before setting
 	if typeof(data.get("gizmo_origin", gizmo_origin)) == TYPE_STRING:
 		data["gizmo_origin"] = str_to_var(data.get("gizmo_origin", var_to_str(gizmo_origin)))
