@@ -156,12 +156,13 @@ func is_blended_by_ancestor() -> bool:
 	var is_blended := false
 	for ancestor in get_ancestors():
 		if ancestor is BoneLayer:
+			is_blended = true
 			# Only treat bone layer as blender if it's not in edit mode and isn't being used
 			# to update any previews that require it to be in edit mode
-			if ancestor.is_edit_mode() and not DrawingAlgos.preview_in_edit_mode:
-				is_blended = true
-				break
-		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
+			if ancestor.is_edit_mode() or DrawingAlgos.preview_in_edit_mode:
+				is_blended = false
+			break
+		elif ancestor.blend_mode != BlendModes.PASS_THROUGH:
 			is_blended = true
 			break
 	return is_blended

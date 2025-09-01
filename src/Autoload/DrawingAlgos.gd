@@ -92,6 +92,7 @@ func blend_layers(
 				and not only_selected_layers
 			):
 				include = false
+			print(layer.name, " ", layer.is_blended_by_ancestor())
 			set_layer_metadata_image(layer, cel, metadata_image, ordered_index, include)
 	if DisplayServer.get_name() != "headless":
 		var texture_array := Texture2DArray.new()

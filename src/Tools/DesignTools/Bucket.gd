@@ -186,6 +186,7 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	if _fill_merged_area and _fill_area == FillArea.AREA:
 		var project := Global.current_project
+		#DrawingAlgos.preview_in_edit_mode = true
 		for frame_layer: Array in project.selected_cels:
 			if project.frames[frame_layer[0]].cels[frame_layer[1]] is PixelCel:
 				var frame := project.frames[frame_layer[0]]
@@ -196,6 +197,7 @@ func draw_start(pos: Vector2i) -> void:
 					mask.fill(Color(0, 0, 0, 0))
 					DrawingAlgos.blend_layers(mask, frame)
 					_sample_masks[frame] = mask
+		#DrawingAlgos.preview_in_edit_mode = false
 	fill(pos)
 
 
