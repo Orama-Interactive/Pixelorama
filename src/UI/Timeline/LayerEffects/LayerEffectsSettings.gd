@@ -85,6 +85,10 @@ func _on_visibility_changed() -> void:
 		Global.dialog_open(false)
 		for child in effect_container.get_children():
 			child.queue_free()
+		var layer := Global.current_project.layers[Global.current_project.current_layer]
+		for effect in layer.effects:
+			for connection in effect.animated_changed.get_connections():
+				effect.animated_changed.disconnect(connection["callable"])
 
 
 func _add_effect_to_list(i: int) -> void:
