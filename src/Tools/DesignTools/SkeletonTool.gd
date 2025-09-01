@@ -20,13 +20,13 @@ var _prev_mouse_position := Vector2.INF
 var _hover_layer_in_chain = null
 var _undo_target_frames := PackedInt32Array()
 
-@onready var _pos_slider: ValueSliderV2 = $BoneProps/BonePositionSlider
-@onready var _rot_slider: ValueSlider = $BoneProps/BoneRotationSlider
 @onready var quick_set_bones_menu: MenuButton = $QuickSetBones
 @onready var rotation_reset_menu: MenuButton = $RotationReset
 @onready var position_reset_menu: MenuButton = $PositionReset
 @onready var copy_pose_from: MenuButton = $CopyPoseFrom
 @onready var tween_skeleton_menu: MenuButton = $TweenSkeleton
+@onready var pos_slider: ValueSliderV2 = $BoneProps/BonePositionSlider
+@onready var rot_slider: ValueSlider = $BoneProps/BoneRotationSlider
 
 
 func _ready() -> void:
@@ -607,19 +607,19 @@ func get_selected_bones(popup: PopupMenu, bone_index: int) -> Array[BoneLayer]:
 
 
 func display_props():
-	if not _pos_slider.max_value.is_equal_approx(Global.current_project.size):
+	if not pos_slider.max_value.is_equal_approx(Global.current_project.size):
 		# temporarily set it to null to avoid unnecessary update
 		current_selected_bone = null
-		_pos_slider.max_value = Global.current_project.size
+		pos_slider.max_value = Global.current_project.size
 	current_selected_bone = Global.canvas.skeleton.selected_bone
 	if current_selected_bone is BoneLayer:
 		var frame_cels = Global.current_project.frames[Global.current_project.current_frame].cels
 		%BoneProps.visible = true
 		%BoneLabel.text = tr("Name:") + " " + current_selected_bone.name
-		_rot_slider.set_value_no_signal_update_display(
+		rot_slider.set_value_no_signal_update_display(
 			rad_to_deg(frame_cels[current_selected_bone.index].bone_rotation)
 		)
-		_pos_slider.set_value_no_signal(
+		pos_slider.set_value_no_signal(
 			frame_cels[current_selected_bone.index].rel_to_canvas(
 				frame_cels[current_selected_bone.index].start_point
 			)
