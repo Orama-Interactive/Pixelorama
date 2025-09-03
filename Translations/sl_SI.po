@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-09-03 00:21\n"
 
 msgid "OK"
 msgstr ""
@@ -797,6 +797,18 @@ msgstr ""
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
+msgid "Krita Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
+msgid "Piskel Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
+msgid "Photoshop Project"
 msgstr ""
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
@@ -3245,6 +3257,10 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
+msgstr ""
+
+#. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
+msgid "Create a new project palette"
 msgstr ""
 
 msgid "Comment:"
