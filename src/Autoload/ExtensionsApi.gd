@@ -599,6 +599,21 @@ class ProjectAPI:
 		Global.projects.append(new_proj)
 		return new_proj
 
+	func new_image_extended(
+		width: int,
+		height: int,
+		mipmaps: bool,
+		format: Image.Format,
+		is_indexed := false,
+		from_data := PackedByteArray()
+	) -> ImageExtended:
+		if not from_data.is_empty():
+			var tmp_image := Image.create_from_data(width, height, mipmaps, format, from_data)
+			var new_image := ImageExtended.new()
+			new_image.copy_from_custom(tmp_image, is_indexed)
+			return new_image
+		return ImageExtended.create_custom(width, height, mipmaps, format, is_indexed)
+
 	## Creates and returns a new [Project] in a new tab, with an optional [param name].
 	## Unlike [method new_project], no starting frame/layer gets created.
 	## Useful if you want to deserialize project data.
