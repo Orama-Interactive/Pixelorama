@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnpb1aip3wdvw"]
+[gd_scene load_steps=14 format=3 uid="uid://bnpb1aip3wdvw"]
 
 [ext_resource type="Script" uid="uid://qtjfdid13awe" path="res://src/UI/Dialogs/SplashDialog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="3"]
@@ -20,13 +20,16 @@ bg_color = Color(1, 1, 1, 0)
 [sub_resource type="StyleBoxFlat" id="3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ehexy"]
+font_size = 26
+
 [sub_resource type="LabelSettings" id="LabelSettings_32icc"]
 font_size = 12
 
 [node name="SplashDialog" type="AcceptDialog"]
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 36)
-size = Vector2i(602, 650)
+size = Vector2i(758, 650)
 script = ExtResource("1")
 
 [node name="Contents" type="VBoxContainer" parent="."]
@@ -193,6 +196,13 @@ layout_mode = 2
 [node name="PatronContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PlatinumSponsor" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_vertical = 8
+text = "Platinum Sponsor: Astropulse"
+label_settings = SubResource("LabelSettings_ehexy")
 
 [node name="PatronsLabel" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
 custom_minimum_size = Vector2(230, 0)
