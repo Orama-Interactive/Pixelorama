@@ -612,9 +612,7 @@ class ProjectAPI:
 			var new_image := ImageExtended.new()
 			new_image.copy_from_custom(tmp_image, is_indexed)
 			return new_image
-		return ImageExtended.create_custom(
-			width, height, mipmaps, format, is_indexed
-		)
+		return ImageExtended.create_custom(width, height, mipmaps, format, is_indexed)
 
 	## Creates and returns a new [Project] in a new tab, with an optional [param name].
 	## Unlike [method new_project], no starting frame/layer gets created.
