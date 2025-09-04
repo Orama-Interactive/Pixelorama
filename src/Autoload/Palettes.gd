@@ -51,7 +51,7 @@ func select_palette(palette_name: String) -> void:
 		if current_palette:
 			project.project_current_palette_name = palette_name
 	else:
-		# Attemt to find the last used palette (select if it's a global palette)
+		# Attempt to find the last used palette (select if it's a global palette)
 		var last_active_palette: String = Global.config_cache.get_value(
 			"data", "last_palette", DEFAULT_PALETTE_NAME
 		)
