@@ -879,11 +879,13 @@ class SignalsAPI:
 		signal_class: Signal, callable: Callable, is_disconnecting := false
 	) -> void:
 		if !is_disconnecting:
-			signal_class.connect(callable)
-			ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
+			if not signal_class.is_connected(callable):
+				signal_class.connect(callable)
+				ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
 		else:
-			signal_class.disconnect(callable)
-			ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
+			if signal_class.is_connected(callable):
+				signal_class.disconnect(callable)
+				ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
 
 	# APP RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
