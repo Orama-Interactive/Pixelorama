@@ -15,6 +15,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	super._init(_frames, _name + " (Virtual Resource)", _size)
 
 
+## Returns the full image of the [Frame] at [param frame_idx] in resource project.
 func get_frame_image(frame_idx: int) -> Image:
 	var frame_image := Image.create_empty(size.x, size.y, false, Image.FORMAT_RGBA8)
 	if frame_idx >= 0 and frame_idx < frames.size():
