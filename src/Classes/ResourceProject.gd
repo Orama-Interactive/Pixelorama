@@ -6,7 +6,6 @@ extends Project
 ## (as a .pxo file), instead, a [signal resource_updated] signal is emitted which can
 ## be used to update the resource in the [Project].[br]
 
-
 ## Emitted when the [ResourceProject] is saved.
 @warning_ignore("unused_signal")
 signal resource_updated(project: Project)
