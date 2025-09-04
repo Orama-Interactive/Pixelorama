@@ -169,11 +169,7 @@ static func _update_tile(
 	if resource_proj.layers.size() > 1:
 		warnings += "\nThis resource is intended to have 1 layer only. layers will be blended."
 
-	var updated_image := Image.create_empty(
-		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
-	)
-	var frame := resource_proj.frames[0]
-	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
+	var updated_image := resource_proj.get_frame_image(0)
 	if is_instance_valid(target_project) and is_instance_valid(tileset):
 		if tile_idx < tileset.tiles.size():
 			if !tileset.tiles[tile_idx].image:

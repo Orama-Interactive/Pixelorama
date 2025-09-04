@@ -13,3 +13,19 @@ signal resource_updated(project: Project)
 
 func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2i(64, 64)) -> void:
 	super._init(_frames, _name + " (Virtual Resource)", _size)
+
+
+func get_frame_image(frame_idx: int) -> Image:
+	var frame_image := Image.create_empty(
+		size.x, size.y, false, Image.FORMAT_RGBA8
+	)
+	if frame_idx >= 0 and frame_idx < frames.size():
+		var frame := frames[frame_idx]
+		DrawingAlgos.blend_layers(frame_image, frame, Vector2i.ZERO, self)
+	else:
+		printerr(
+			"frame index: %s not found in ResourceProject, frames.size(): %s" % [
+				str(frame_idx), str(frames.size())
+			]
+		)
+	return frame_image
