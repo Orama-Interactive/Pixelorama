@@ -11,8 +11,10 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 Built using Godot 4.4.1
 
 ### Added
+- Project palettes have been implemented, with undo/redo support! [#1335](https://github.com/Orama-Interactive/Pixelorama/pull/1335)
 - Implemented loading Krita (`.kra`) files with animation support. Only projects using RGBA with 8-bit color depth are supported at the moment.
 - Loading animations from Photoshop (`.psd`) files is now possible.
+- Loading palettes from Aseprite (`.ase`/`.aseprite`) files is now possible.
 - Implemented loading Piskel (`.piskel`) files with animation support.
 - Added a zoom parameter to the offset shader. [#1330](https://github.com/Orama-Interactive/Pixelorama/pull/1330)
 - The currently selected frame & layer are now remembered inside `.pxo` files.
@@ -20,11 +22,18 @@ Built using Godot 4.4.1
 - Relative paths are now supported in the CLI. [#1326](https://github.com/Orama-Interactive/Pixelorama/pull/1326)
 
 ### Changed
+- Bumped extensions API version to 7.
 - When clicking on the remove layer button, now all selected layers get removed. This is consistent with how frames get deleted, and is what users would expect.
 - During animation playback on frames of a tag, if the user changes to a frame of a different tag, then the frames of that tag are being played. [#1311](https://github.com/Orama-Interactive/Pixelorama/pull/1311)
+- Using the move tool on a tilemap layer while draw tiles mode is active now clears the selection, if there is any. [#1340](https://github.com/Orama-Interactive/Pixelorama/pull/1340)
+- Current frame & layer are used as default values when importing an image as a new frame, new layer or to replace a cel.
 
 ### Fixed
+- The bucket tool's flood fill has been further optimized. [#1306](https://github.com/Orama-Interactive/Pixelorama/pull/1306)
 - Creating rectangular selections now snap to the grid correctly, if snapping is enabled. [#1338](https://github.com/Orama-Interactive/Pixelorama/pull/1338)
+- Pasted selections now get snapped to grid. [#1340](https://github.com/Orama-Interactive/Pixelorama/pull/1340)
+- Pasting a selection on a tilemap layer while draw tiles mode is active now updates the tileset. [#1340](https://github.com/Orama-Interactive/Pixelorama/pull/1340)
+- Backups no longer appear in the recent project list. [#1341](https://github.com/Orama-Interactive/Pixelorama/pull/1341)
 - The names of the projects are no longer being translated in tabs. [#1334](https://github.com/Orama-Interactive/Pixelorama/issues/1334)
 
 ## [v1.1.4] - 2025-08-13
@@ -68,7 +77,7 @@ Built using Godot 4.4.1
 - Fixed loading APNGs.
 - Significantly improved performance of the bucket tool, when a selection is active. [#1304](https://github.com/Orama-Interactive/Pixelorama/pull/1304)
 - Made the offset pixels effect only accept integer values for the offset.
-- The FX icon in the layer button is now properly if all effects have been applied.
+- The FX icon in the layer button is now being properly hidden if all effects have been applied.
 - Fixed crash when increasing the width of a palette.
 - Fixed crash when creating a convolution matrix layer effect.
 

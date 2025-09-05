@@ -51,7 +51,7 @@ func select_palette(palette_name: String) -> void:
 		if current_palette:
 			project.project_current_palette_name = palette_name
 	else:
-		# Attemt to find the last used palette (select if it's a global palette)
+		# Attempt to find the last used palette (select if it's a global palette)
 		var last_active_palette: String = Global.config_cache.get_value(
 			"data", "last_palette", DEFAULT_PALETTE_NAME
 		)
@@ -131,6 +131,7 @@ func undo_redo_add_palette(new_palette: Palette):
 	var undo_redo = Global.current_project.undo_redo
 	undo_redo.add_do_method(add_palette_as_project_palette.bind(new_palette))
 	undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
+	undo_redo.add_undo_method(select_palette.bind(current_palette.name))
 
 
 func get_valid_name(initial_palette_name: String, project := Global.current_project) -> String:

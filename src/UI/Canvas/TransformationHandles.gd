@@ -387,7 +387,7 @@ func move_transform(pos: Vector2) -> void:
 	var final_pos := pos
 	if Tools.is_placing_tiles():
 		# NOTE: we don't use offset here because the [param pos] is expected to already have
-		# offseted coordinates.
+		# offsetted coordinates.
 		var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
 		final_pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size, Vector2.ZERO)
 	preview_transform = preview_transform.translated(final_pos)

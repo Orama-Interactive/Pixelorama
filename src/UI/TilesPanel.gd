@@ -402,7 +402,6 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 			project.undo_redo.commit_action()
 	elif index == 3:  # Duplicate tile
 		var project = Global.current_project
-		var tile_cel = Global.current_project.get_current_cel()
 		var undo_data_tileset := current_tileset.serialize_undo_data()
 		var tilemap_cels: Array[CelTileMap] = []
 		var redo_data_tilemaps := {}

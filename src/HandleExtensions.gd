@@ -15,7 +15,7 @@ var extension_selected := -1
 var damaged_extensions := PackedStringArray()
 var prev_damaged_extensions := PackedStringArray()
 ## Extensions built using the versions in this array are considered compatible with the current Api
-var legacy_api_versions = [5, 4]
+var legacy_api_versions = [6, 5, 4]
 var sane_timer := Timer.new()  # Used to ping that at least one session is alive during Timer's run.
 
 
