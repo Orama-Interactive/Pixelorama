@@ -581,18 +581,24 @@ class ProjectAPI:
 	## name [param name], size [param size], fill color [param fill_color] and
 	## frames [param frames]. The created project also gets returned.[br][br]
 	## [param frames] is an [Array] of type [Frame]. Usually it can be left as [code][][/code].
+	## If [param is_resource] is [code]true[/code] then a [ResourceProject] is created.
 	func new_project(
 		frames: Array[Frame] = [],
 		name := tr("untitled"),
 		size := Vector2(64, 64),
-		fill_color := Color.TRANSPARENT
+		fill_color := Color.TRANSPARENT,
+		is_resource := false
 	) -> Project:
 		if !name.is_valid_filename():
 			name = tr("untitled")
 		if size.x <= 0 or size.y <= 0:
 			size.x = 1
 			size.y = 1
-		var new_proj := Project.new(frames, name, size.floor())
+		var new_proj: Project
+		if is_resource:
+			new_proj = ResourceProject.new(frames, name, size.floor())
+		else:
+			new_proj = Project.new(frames, name, size.floor())
 		new_proj.layers.append(PixelLayer.new(new_proj))
 		new_proj.fill_color = fill_color
 		new_proj.frames.append(new_proj.new_empty_frame())
@@ -617,8 +623,13 @@ class ProjectAPI:
 	## Creates and returns a new [Project] in a new tab, with an optional [param name].
 	## Unlike [method new_project], no starting frame/layer gets created.
 	## Useful if you want to deserialize project data.
-	func new_empty_project(name := tr("untitled")) -> Project:
-		var new_proj := Project.new([], name)
+	## If [param is_resource] is [code]true[/code] then a [ResourceProject] is created.
+	func new_empty_project(name := tr("untitled"), is_resource := false) -> Project:
+		var new_proj: Project
+		if is_resource:
+			new_proj = ResourceProject.new([], name)
+		else:
+			new_proj = Project.new([], name)
 		Global.projects.append(new_proj)
 		return new_proj
 
@@ -868,11 +879,13 @@ class SignalsAPI:
 		signal_class: Signal, callable: Callable, is_disconnecting := false
 	) -> void:
 		if !is_disconnecting:
-			signal_class.connect(callable)
-			ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
+			if not signal_class.is_connected(callable):
+				signal_class.connect(callable)
+				ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
 		else:
-			signal_class.disconnect(callable)
-			ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
+			if signal_class.is_connected(callable):
+				signal_class.disconnect(callable)
+				ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
 
 	# APP RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
