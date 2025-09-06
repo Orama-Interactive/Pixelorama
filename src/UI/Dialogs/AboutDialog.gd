@@ -234,6 +234,7 @@ const DONORS: PackedStringArray = [
 	"Jérôme P.",
 	"Jonas Rudlang",
 	"Mike King",
+	"Nappa9693",
 	"ShikadiGum",
 	"Ormanus",
 	"Tronexer",
