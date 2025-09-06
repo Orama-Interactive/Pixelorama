@@ -162,7 +162,9 @@ func cache_blended_frames(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
 	for frame in frames:
 		var image := project.new_empty_image()
+		DrawingAlgos.force_bone_mode = DrawingAlgos.BoneRenderMode.POSE
 		_blend_layers(image, frame)
+		DrawingAlgos.force_bone_mode = DrawingAlgos.BoneRenderMode.NONE
 		blended_frames[frame] = image
 
 
