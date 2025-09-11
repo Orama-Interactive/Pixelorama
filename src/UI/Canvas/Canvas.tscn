@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ba24iuv55m4l3"]
+[gd_scene load_steps=27 format=3 uid="uid://ba24iuv55m4l3"]
 
 [ext_resource type="Script" uid="uid://xagqbybf2bic" path="res://src/UI/Canvas/Canvas.gd" id="1"]
 [ext_resource type="Shader" uid="uid://b3cj543ir4o23" path="res://src/Shaders/BlendLayers.gdshader" id="1_253dh"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dpem6717iqxdc" path="res://src/UI/Canvas/OnionSkinning.gd" id="12"]
 [ext_resource type="Script" uid="uid://c17sncjk3paec" path="res://src/UI/Canvas/CropRect.gd" id="13"]
 [ext_resource type="Script" uid="uid://dln7rbciajoaa" path="res://src/UI/Canvas/Gizmos3D.gd" id="14"]
+[ext_resource type="Script" uid="uid://cv80s0exwl77t" path="res://src/UI/Canvas/SkeletonPreview.gd" id="14_iv77e"]
 [ext_resource type="Script" uid="uid://b570gjxdcfmv1" path="res://src/UI/Canvas/Measurements.gd" id="16_nxilb"]
 [ext_resource type="Shader" uid="uid://jvo6i3t4snow" path="res://src/Shaders/AutoInvertColors.gdshader" id="17_lowhf"]
 [ext_resource type="Script" uid="uid://bpp7sufx80fs4" path="res://src/UI/Canvas/ReferenceImages.gd" id="17_qfjb4"]
@@ -93,6 +94,10 @@ script = ExtResource("13")
 
 [node name="Indicators" type="Node2D" parent="."]
 script = ExtResource("3")
+
+[node name="Skeleton" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_ascg6")
+script = ExtResource("14_iv77e")
 
 [node name="Previews" type="Node2D" parent="."]
 material = SubResource("3")
