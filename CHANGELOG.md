@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.1.5] - Unreleased
+## [v1.1.5] - 2025-09-06
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
@@ -35,6 +35,7 @@ Built using Godot 4.4.1
 - Pasting a selection on a tilemap layer while draw tiles mode is active now updates the tileset. [#1340](https://github.com/Orama-Interactive/Pixelorama/pull/1340)
 - Backups no longer appear in the recent project list. [#1341](https://github.com/Orama-Interactive/Pixelorama/pull/1341)
 - The names of the projects are no longer being translated in tabs. [#1334](https://github.com/Orama-Interactive/Pixelorama/issues/1334)
+- Fixed the drop shadow dialog not having a selected option by default for the affect option button.
 
 ## [v1.1.4] - 2025-08-13
 This update has been brought to you by the contributions of:

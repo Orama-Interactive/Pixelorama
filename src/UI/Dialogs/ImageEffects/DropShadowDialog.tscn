@@ -51,9 +51,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.0823529, 0.0823529, 0.0823529, 0.627451)
 
-[node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-selected = -1
-
 [node name="AnimatePanel" parent="AnimateDialog" index="0"]
 grow_horizontal = 2
 grow_vertical = 2
