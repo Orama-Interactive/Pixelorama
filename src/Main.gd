@@ -164,7 +164,7 @@ some useful [SYSTEM OPTIONS] are:
 
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
-	
+
 	static func dummy(_project: Project, _next_arg: String) -> void:
 		pass
 

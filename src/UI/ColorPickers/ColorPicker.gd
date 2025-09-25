@@ -4,7 +4,7 @@ const VALUE_ARROW := preload("res://assets/graphics/misc/value_arrow_right.svg")
 const VALUE_ARROW_EXPANDED := preload("res://assets/graphics/misc/value_arrow.svg")
 
 ## The HBoxContainer parent of the picker shapes.
-var shapes_container: HBoxContainer 
+var shapes_container: HBoxContainer
 ## The internal control node of the HSV Rectangle of the [ColorPicker] node.
 var hsv_rectangle: Control
 ## The internal control node of the HSV Wheel of the [ColorPicker] node.
@@ -144,7 +144,7 @@ func _on_shape_popup_menu_id_pressed(id: ColorPicker.PickerShapeType) -> void:
 		else:
 			vhs_circle = shapes_container.get_child(-2, true)
 			_modify_color_shapes(vhs_circle, false)
-	elif id == ColorPicker.SHAPE_OKHSL_CIRCLE :
+	elif id == ColorPicker.SHAPE_OKHSL_CIRCLE:
 		if is_instance_valid(okhsl_circle):
 			okhsl_circle.get_parent().visible = true
 		else:
