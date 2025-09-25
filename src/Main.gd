@@ -50,7 +50,8 @@ class CLI:
 		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
 		["--json"]: [CLI.set_json, "Export the JSON data of the project"],
 		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
-		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"]
+		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"],
+		["--scene"]: [CLI.dummy, "Used internally by Godot."]
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
@@ -163,6 +164,9 @@ some useful [SYSTEM OPTIONS] are:
 
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
+	
+	static func dummy(_project: Project, _next_arg: String) -> void:
+		pass
 
 
 func _init() -> void:

@@ -3,10 +3,20 @@ extends Container
 const VALUE_ARROW := preload("res://assets/graphics/misc/value_arrow_right.svg")
 const VALUE_ARROW_EXPANDED := preload("res://assets/graphics/misc/value_arrow.svg")
 
+## The HBoxContainer parent of the picker shapes.
+var shapes_container: HBoxContainer 
 ## The internal control node of the HSV Rectangle of the [ColorPicker] node.
-var hsv_rectangle_control: Control
-## The internal aspect ratio container node of other color shapes of the [ColorPicker] node.
-var shape_aspect_ratio: AspectRatioContainer
+var hsv_rectangle: Control
+## The internal control node of the HSV Wheel of the [ColorPicker] node.
+var hsv_wheel: MarginContainer
+## The internal control node of the VHS Circle of the [ColorPicker] node.
+var vhs_circle: MarginContainer
+## The internal control node of OKHSL VHS Circle of the [ColorPicker] node.
+var okhsl_circle: MarginContainer
+## The internal control node of the OK HS Rectangle of the [ColorPicker] node.
+var ok_hs_rectangle: MarginContainer
+## The internal control node of the OK HL Rectangle of the [ColorPicker] node.
+var ok_hl_rectangle: MarginContainer
 ## The internal swatches button of the [ColorPicker] node.
 ## Used to ensure that swatches are always invisible.
 var swatches_button: HBoxContainer
@@ -38,15 +48,12 @@ func _ready() -> void:
 	var picker_margin_container := color_picker.get_child(0, true) as MarginContainer
 	picker_margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	var picker_vbox_container := picker_margin_container.get_child(0, true) as VBoxContainer
-	# The HBoxContainer of the picker shapes.
-	var shapes_container := picker_vbox_container.get_child(0, true) as HBoxContainer
+
+	shapes_container = picker_vbox_container.get_child(0, true)
+	shapes_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	shapes_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	# The Control of the HSV Rectangle picker shape
-	hsv_rectangle_control = shapes_container.get_child(0, true) as Control
-	hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
-	# The AspectRatioContainer that holds the rest of the picker shapes
-	shape_aspect_ratio = shapes_container.get_child(1, true) as AspectRatioContainer
-	shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
+	hsv_rectangle = shapes_container.get_child(0, true) as Control
+	hsv_rectangle.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	# The HBoxContainer of the screen color picker, the color preview rectangle and the
 	# button that lets users change the picker shape. It is visible because
 	# color_picker.sampler_visible is set to true.
@@ -56,6 +63,9 @@ func _ready() -> void:
 	# The color preview rectangle that we're hiding.
 	var color_texture_rect := sampler_cont.get_child(1, true) as TextureRect
 	color_texture_rect.visible = false
+	var shape_menu_button := sampler_cont.get_child(2, true) as MenuButton
+	var shape_popup_menu := shape_menu_button.get_popup()
+	shape_popup_menu.id_pressed.connect(_on_shape_popup_menu_id_pressed)
 	# The HBoxContainer where we get the hex LineEdit node from, and moving it to sampler_cont
 	var hex_cont := picker_vbox_container.get_child(4, true) as Container
 	var hex_edit := hex_cont.get_child(2, true)
@@ -89,15 +99,11 @@ func _ready() -> void:
 	expand_button.button_pressed = Global.config_cache.get_value(
 		"color_picker", "is_expanded", false
 	)
+	_on_shape_popup_menu_id_pressed(color_picker.picker_shape)
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_THEME_CHANGED and is_instance_valid(hsv_rectangle_control):
-		# If there's a theme change, reset the custom minimum sizes of the color shapes
-		await get_tree().process_frame
-		hsv_rectangle_control.custom_minimum_size = Vector2(32, 32)
-		shape_aspect_ratio.custom_minimum_size = Vector2(32, 32)
-	elif what == NOTIFICATION_TRANSLATION_CHANGED and is_instance_valid(left_color_rect):
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_instance_valid(left_color_rect):
 		_average(left_color_rect.color, right_color_rect.color)
 
 
@@ -118,6 +124,60 @@ func _on_color_picker_color_changed(color: Color) -> void:
 			color.a = 1
 			color_picker.color.a = 1
 	Tools.assign_color(color, Tools.picking_color_for, false)
+
+
+func _on_shape_popup_menu_id_pressed(id: ColorPicker.PickerShapeType) -> void:
+	Global.config_cache.set_value("color_picker", "picker_shape", color_picker.picker_shape)
+	# All of this is needed so that the shape controls scale well when resized.
+	# The internal AspectRatioContainer was removed in Godot 4.5 so we have to add our own
+	# for the non-rectangular shapes.
+	_hide_shape_controls()
+	if id == ColorPicker.SHAPE_HSV_WHEEL:
+		if is_instance_valid(hsv_wheel):
+			hsv_wheel.get_parent().visible = true
+		else:
+			hsv_wheel = shapes_container.get_child(-1, true)
+			_modify_color_shapes(hsv_wheel, false)
+	elif id == ColorPicker.SHAPE_VHS_CIRCLE:
+		if is_instance_valid(vhs_circle):
+			vhs_circle.get_parent().visible = true
+		else:
+			vhs_circle = shapes_container.get_child(-2, true)
+			_modify_color_shapes(vhs_circle, false)
+	elif id == ColorPicker.SHAPE_OKHSL_CIRCLE :
+		if is_instance_valid(okhsl_circle):
+			okhsl_circle.get_parent().visible = true
+		else:
+			okhsl_circle = shapes_container.get_child(-2, true)
+			_modify_color_shapes(okhsl_circle, false)
+	elif id == ColorPicker.SHAPE_OK_HS_RECTANGLE and not is_instance_valid(ok_hs_rectangle):
+		ok_hs_rectangle = shapes_container.get_child(-2, true)
+		_modify_color_shapes(ok_hs_rectangle, true)
+	elif id == ColorPicker.SHAPE_OK_HL_RECTANGLE and not is_instance_valid(ok_hl_rectangle):
+		ok_hl_rectangle = shapes_container.get_child(-2, true)
+		_modify_color_shapes(ok_hl_rectangle, true)
+
+
+func _modify_color_shapes(node: Control, rectangle: bool) -> void:
+	node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if not rectangle:
+		var aspect_ratio_container := AspectRatioContainer.new()
+		aspect_ratio_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		aspect_ratio_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		var node_index := node.get_index(true)
+		shapes_container.remove_child(node)
+		aspect_ratio_container.add_child(node)
+		shapes_container.add_child(aspect_ratio_container)
+		shapes_container.move_child(aspect_ratio_container, node_index)
+
+
+func _hide_shape_controls() -> void:
+	if is_instance_valid(hsv_wheel):
+		hsv_wheel.get_parent().visible = false
+	if is_instance_valid(vhs_circle):
+		vhs_circle.get_parent().visible = false
+	if is_instance_valid(okhsl_circle):
+		okhsl_circle.get_parent().visible = false
 
 
 func _on_left_color_button_toggled(toggled_on: bool) -> void:
