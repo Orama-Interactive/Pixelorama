@@ -28,8 +28,8 @@ var _object_names: Dictionary[Cel3DObject.Type, String] = {
 @onready var remove_object_button := $"%RemoveObject" as Button
 @onready var cel_options := $"%CelOptions" as Container
 @onready var object_options := $"%ObjectOptions" as Container
-@onready var mesh_options := $"%MeshOptions" as VBoxContainer
-@onready var light_options := $"%LightOptions" as VBoxContainer
+@onready var mesh_options := $"%MeshOptions" as FoldableContainer
+@onready var light_options := $"%LightOptions" as FoldableContainer
 @onready var undo_redo_timer := $UndoRedoTimer as Timer
 @onready var load_model_dialog := $LoadModelDialog as FileDialog
 

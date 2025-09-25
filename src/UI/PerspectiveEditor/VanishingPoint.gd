@@ -1,5 +1,7 @@
 extends VBoxContainer
 
+const LINE_BUTTON_TSCN := preload("res://src/UI/PerspectiveEditor/LineButton.tscn")
+
 var is_focused := false
 var perspective_lines := []
 var color := Color(randf(), randf(), randf(), 1)
@@ -191,13 +193,13 @@ func add_line(loaded_line_data := {}, is_tracker := false) -> void:
 		# This is not related to the disable tracker toggle in perspective editor
 		tracker_line.hide_perspective_line()
 	else:  # Settings for Normal mode
-		var line_button := preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instantiate()
+		var line_button := LINE_BUTTON_TSCN.instantiate() as FoldableContainer
 		line_buttons_container.add_child(line_button)
 		var index := line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
 
 		var line_name := str("Line", line_button.get_index() + 1, " (", absi(line_data.angle), "°)")
-		line_button.text = line_name
+		line_button.title = line_name
 
 		var remove_button := line_button.find_child("Delete")
 		var angle_slider := line_button.find_child("AngleSlider")
@@ -249,7 +251,7 @@ func refresh_line(index: int) -> void:
 	var line_button := line_buttons_container.get_child(index)
 	var line_data = perspective_lines[index].serialize()
 	var line_name := str("Line", line_button.get_index() + 1, " (", absi(line_data.angle), "°)")
-	line_button.text = line_name
+	line_button.title = line_name
 	perspective_lines[index].refresh()
 
 

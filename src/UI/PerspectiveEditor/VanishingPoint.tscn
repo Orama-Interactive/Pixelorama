@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://calecly82t1aw"]
+[gd_scene load_steps=5 format=3 uid="uid://calecly82t1aw"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="1"]
 [ext_resource type="Script" uid="uid://dngll5lpmi016" path="res://src/UI/PerspectiveEditor/VanishingPoint.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://ct8wn8m6x4m54" path="res://assets/graphics/misc/value_arrow.svg" id="4"]
 [ext_resource type="Script" uid="uid://36g7rc3uvfqv" path="res://src/UI/PerspectiveEditor/PointCollapseContainer.gd" id="5"]
-[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="5_xveuc"]
 
 [node name="VanishingPoint" type="VBoxContainer" groups=["Entry"]]
 offset_right = 261.0
@@ -90,30 +89,30 @@ allow_greater = true
 allow_lesser = true
 prefix = "Y :"
 
-[node name="CollapsibleContainer" type="VBoxContainer" parent="Content/VBoxContainer"]
+[node name="FoldableContainer" type="FoldableContainer" parent="Content/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("5_xveuc")
-text = "Lines"
+folded = true
+title = "Lines"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Content/VBoxContainer/CollapsibleContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/VBoxContainer/FoldableContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Content/VBoxContainer/FoldableContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Content/VBoxContainer/FoldableContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="LinesContainer" type="VBoxContainer" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
+[node name="LinesContainer" type="VBoxContainer" parent="Content/VBoxContainer/FoldableContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="AddLine" type="Button" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer/LinesContainer"]
+[node name="AddLine" type="Button" parent="Content/VBoxContainer/FoldableContainer/HBoxContainer/LinesContainer"]
 layout_mode = 2
 text = "Add Line"
 
@@ -135,5 +134,5 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [connection signal="toggled" from="TitleContainer/PointCollapseContainer" to="TitleContainer/PointCollapseContainer" method="_on_Button_toggled"]
-[connection signal="pressed" from="Content/VBoxContainer/CollapsibleContainer/HBoxContainer/LinesContainer/AddLine" to="." method="_on_AddLine_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/FoldableContainer/HBoxContainer/LinesContainer/AddLine" to="." method="_on_AddLine_pressed"]
 [connection signal="pressed" from="Content/VBoxContainer/Delete" to="." method="_on_Delete_pressed"]
