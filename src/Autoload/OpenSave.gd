@@ -7,6 +7,9 @@ signal shader_copied(file_path: String)
 
 const BACKUPS_DIRECTORY := "user://backups"
 const SHADERS_DIRECTORY := "user://shaders"
+const FONT_FILE_EXTENSIONS: PackedStringArray = [
+	"ttf", "otf", "woff", "woff2", "pfb", "pfm", "fnt", "font"
+]
 
 var current_session_backup := ""
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
@@ -87,6 +90,15 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		shader_copied.emit(new_path)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
+	elif file_ext in FONT_FILE_EXTENSIONS:
+		var font_file := open_font_file(file)
+		if font_file.data.is_empty():
+			return
+		if not DirAccess.dir_exists_absolute(Global.FONTS_DIR_PATH):
+			DirAccess.make_dir_absolute(Global.FONTS_DIR_PATH)
+		var new_path := Global.FONTS_DIR_PATH.path_join(file.get_file())
+		DirAccess.copy_absolute(file, new_path)
+		Global.loaded_fonts.append(font_file)
 	elif file_ext == "ora":
 		open_ora_file(file)
 	elif file_ext == "kra":
@@ -1006,6 +1018,15 @@ func open_audio_file(path: String) -> void:
 	var new_layer := AudioLayer.new(project, path.get_basename().get_file())
 	new_layer.audio = audio_stream
 	Global.animation_timeline.add_layer(new_layer, project)
+
+
+func open_font_file(path: String) -> FontFile:
+	var font_file := FontFile.new()
+	if path.to_lower().get_extension() == "fnt" or path.to_lower().get_extension() == "font":
+		font_file.load_bitmap_font(path)
+	else:
+		font_file.load_dynamic_font(path)
+	return font_file
 
 
 # Based on https://www.openraster.org/

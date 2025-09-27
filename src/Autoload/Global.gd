@@ -121,6 +121,8 @@ const HOME_SUBDIR_NAME := "pixelorama"
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
 ## The path of the directory where the UI layouts are being stored.
 const LAYOUT_DIR := "user://layouts"
+## The path of the ditectory where users can load custom fonts.
+const FONTS_DIR_PATH := "user://fonts"
 
 ## It is path to the executable's base drectory.
 var root_directory := "."
@@ -769,6 +771,13 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	if DirAccess.dir_exists_absolute(FONTS_DIR_PATH):
+		var fonts_dir := DirAccess.open(FONTS_DIR_PATH)
+		var files := fonts_dir.get_files()
+		for file in files:
+			var font_file := OpenSave.open_font_file(FONTS_DIR_PATH.path_join(file))
+			if not font_file.data.is_empty():
+				loaded_fonts.append(font_file)
 	# Initialize Grid
 	Grid.new()  # gets auto added to grids array
 	_initialize_keychain()
