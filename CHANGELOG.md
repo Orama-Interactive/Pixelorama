@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.6] - Unreleased
+Built using Godot 4.5
+
+### Added
+- Two new color picker shapes, OK HS Rectangle and OK HL Rectangle.
+- Users can now drag and drop font files to load them. Fonts can be used by the text tool, text meshes in 3D layers and the user interface itself.
+
+### Fixed
+- The screen color picker now works properly on Linux, users can pick colors outside of Pixelorama's window.
+- The color picker's RGB values can no longer go higher than 255. [#349](https://github.com/Orama-Interactive/Pixelorama/issues/349)
+
 ## [v1.1.5] - 2025-09-06
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
