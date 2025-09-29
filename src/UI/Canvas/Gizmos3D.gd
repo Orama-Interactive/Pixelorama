@@ -73,6 +73,10 @@ func get_hovering_gizmo(pos: Vector2) -> int:
 
 
 func _cel_switched() -> void:
+	for object in points_per_object:
+		if not object.find_cel():
+			if object.selected:
+				object.deselect()
 	queue_redraw()
 
 
@@ -186,10 +190,6 @@ func _draw() -> void:
 	if points_per_object.is_empty():
 		return
 	for object in points_per_object:
-		if not object.find_cel():
-			if object.selected:
-				object.deselect()
-			continue
 		var points: PackedVector2Array = points_per_object[object]
 		if points.is_empty():
 			continue

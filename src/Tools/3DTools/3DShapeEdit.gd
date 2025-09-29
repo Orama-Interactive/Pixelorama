@@ -229,7 +229,7 @@ func _cel_switched() -> void:
 		return
 	get_child(0).visible = true
 	_cel = Global.current_project.get_current_cel()
-	var selected = _cel.selected
+	var selected := _cel.selected
 	_cel.selected = null
 	if not _cel.scene_property_changed.is_connected(_set_cel_node_values):
 		_cel.scene_property_changed.connect(_set_cel_node_values)
@@ -240,10 +240,6 @@ func _cel_switched() -> void:
 	_set_cel_node_values()
 	_fill_object_option_button()
 	sprite_changed_this_frame()
-
-	# Two awaits are required
-	await get_tree().process_frame
-	await get_tree().process_frame
 	_cel.selected = selected
 
 
