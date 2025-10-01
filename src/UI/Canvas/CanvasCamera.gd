@@ -184,12 +184,10 @@ func _update_viewport_transform() -> void:
 		return
 	var zoom_scale := Vector2.ONE / zoom
 	var viewport_size := get_viewport_rect().size
-	var screen_offset := viewport_size * 0.5 * zoom_scale
-	screen_offset = screen_offset.rotated(camera_angle)
-	var screen_rect := Rect2(-screen_offset, viewport_size * zoom_scale)
-	screen_rect.position += offset
-	var xform := Transform2D(camera_angle, zoom_scale, 0, screen_rect.position)
-	camera_screen_center = xform * (viewport_size * 0.5)
+	var half_size := viewport_size * 0.5
+	var screen_offset := -(half_size * zoom_scale).rotated(camera_angle) + offset
+	var xform := Transform2D(camera_angle, zoom_scale, 0, screen_offset)
+	camera_screen_center = xform * half_size
 	viewport.canvas_transform = xform.affine_inverse()
 
 
