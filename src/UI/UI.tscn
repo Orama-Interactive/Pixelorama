@@ -38,25 +38,20 @@ shader_parameter/size = Vector2(100, 100)
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Tools", "Reference Images", "Tiles")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_34hle"]
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Main Canvas")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_l6i6g"]
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Perspective Editor")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_r2r5t"]
 resource_name = "Split"
 script = ExtResource("27")
-direction = 0
-percent = 0.5
 first = SubResource("Resource_34hle")
 second = SubResource("Resource_l6i6g")
 
@@ -64,12 +59,10 @@ second = SubResource("Resource_l6i6g")
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Second Canvas")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_l142s"]
 resource_name = "Split"
 script = ExtResource("27")
-direction = 0
 percent = 0.980952
 first = SubResource("Resource_r2r5t")
 second = SubResource("Resource_k7omi")
@@ -78,7 +71,6 @@ second = SubResource("Resource_k7omi")
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Animation Timeline")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_85y6p"]
 resource_name = "Split"
@@ -92,31 +84,26 @@ second = SubResource("Resource_wobi1")
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Canvas Preview")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_fcw5v"]
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Color Picker")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_c7hpy"]
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Global Tool Options")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_56tpw"]
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Recorder")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_fhmn0"]
 resource_name = "Split"
 script = ExtResource("27")
 direction = 1
-percent = 0.5
 first = SubResource("Resource_c7hpy")
 second = SubResource("Resource_56tpw")
 
@@ -124,7 +111,6 @@ second = SubResource("Resource_56tpw")
 resource_name = "Split"
 script = ExtResource("27")
 direction = 1
-percent = 0.5
 first = SubResource("Resource_fcw5v")
 second = SubResource("Resource_fhmn0")
 
@@ -140,19 +126,15 @@ second = SubResource("Resource_u1u2a")
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Left Tool Options")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_24rfh"]
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Right Tool Options")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_tcb26"]
 resource_name = "Split"
 script = ExtResource("27")
-direction = 0
-percent = 0.5
 first = SubResource("Resource_6pwxm")
 second = SubResource("Resource_24rfh")
 
@@ -160,7 +142,6 @@ second = SubResource("Resource_24rfh")
 resource_name = "Tabs"
 script = ExtResource("36")
 names = PackedStringArray("Palettes")
-current_tab = 0
 
 [sub_resource type="Resource" id="Resource_hr77s"]
 resource_name = "Split"
@@ -181,7 +162,6 @@ second = SubResource("Resource_hr77s")
 [sub_resource type="Resource" id="Resource_s2xu6"]
 resource_name = "Split"
 script = ExtResource("27")
-direction = 0
 percent = 0.727569
 first = SubResource("Resource_85y6p")
 second = SubResource("Resource_l8roh")
@@ -189,7 +169,6 @@ second = SubResource("Resource_l8roh")
 [sub_resource type="Resource" id="Resource_cwe4h"]
 resource_name = "Split"
 script = ExtResource("27")
-direction = 0
 percent = 0.0103806
 first = SubResource("Resource_xnnnd")
 second = SubResource("Resource_s2xu6")
@@ -206,9 +185,6 @@ hidden_tabs = {
 "Reference Images": true,
 "Second Canvas": true
 }
-windows = {}
-save_on_change = false
-layout_reset_path = ""
 
 [sub_resource type="ShaderMaterial" id="2"]
 shader = ExtResource("9")
@@ -323,7 +299,7 @@ camera_path = NodePath("SubViewport/Camera2D")
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(862, 515)
+size = Vector2i(821, 515)
 render_target_update_mode = 4
 
 [node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("5")]
