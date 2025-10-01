@@ -41,16 +41,16 @@ func _draw() -> void:
 	# This tracks the "true" top left corner of the drawing:
 	transform.origin = (
 		Global.main_viewport.size / 2
-		+ Global.camera.offset.rotated(-Global.camera.rotation) * -zoom
+		+ Global.camera.offset.rotated(-Global.camera.camera_angle) * -zoom
 	)
 
 	var proj_size := Global.current_project.size
 
 	# Calculating the rotated corners of the image, use min to find the top one
 	var a := Vector2.ZERO  # Top left
-	var b := Vector2(proj_size.x, 0).rotated(-Global.camera.rotation)  # Top right
-	var c := Vector2(0, proj_size.y).rotated(-Global.camera.rotation)  # Bottom left
-	var d := Vector2(proj_size.x, proj_size.y).rotated(-Global.camera.rotation)  # Bottom right
+	var b := Vector2(proj_size.x, 0).rotated(-Global.camera.camera_angle)  # Top right
+	var c := Vector2(0, proj_size.y).rotated(-Global.camera.camera_angle)  # Bottom left
+	var d := Vector2(proj_size.x, proj_size.y).rotated(-Global.camera.camera_angle)  # Bottom right
 	transform.origin.y += minf(minf(a.y, b.y), minf(c.y, d.y)) * zoom
 
 	var basic_rule := 100.0
@@ -114,7 +114,7 @@ func create_guide() -> void:
 	if !Global.show_guides:
 		return
 	var guide := Guide.new()
-	if absf(Global.camera.rotation_degrees) < 45 or absf(Global.camera.rotation_degrees) > 135:
+	if absf(Global.camera.camera_angle_degrees) < 45 or absf(Global.camera.camera_angle_degrees) > 135:
 		guide.type = guide.Types.VERTICAL
 		guide.add_point(Vector2(Global.canvas.current_pixel.x, -19999))
 		guide.add_point(Vector2(Global.canvas.current_pixel.x, 19999))
