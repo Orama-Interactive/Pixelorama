@@ -2,20 +2,21 @@ extends Line2D
 
 enum Types { VERTICAL, HORIZONTAL }
 const INPUT_WIDTH := 4
+const DOTTED_LINE_TEXTURE := preload("res://assets/graphics/dotted_line.png")
+
 @export var type := 0
 var track_mouse := true
-var _texture := preload("res://assets/graphics/dotted_line.png")
 
 
 func _ready() -> void:
 	# Add a subtle difference to the normal guide color by mixing in some green
 	default_color = Global.guide_color.lerp(Color(0.2, 0.92, 0.2), .6)
-	texture = _texture
+	texture = DOTTED_LINE_TEXTURE
 	texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	texture_mode = Line2D.LINE_TEXTURE_TILE
 	await get_tree().process_frame
 	await get_tree().process_frame
-	width = 2.0 / Global.camera.zoom.x
+	width = 2.0 / get_viewport().canvas_transform.get_scale().x
 	draw_guide_line()
 
 
@@ -51,9 +52,15 @@ func _input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
-	width = 2.0 / Global.camera.zoom.x
 	var viewport_size := get_viewport_rect().size
-	var zoom := Global.camera.zoom
+	var half_size := viewport_size * 0.5
+	var zoom := get_viewport().canvas_transform.get_scale()
+	var canvas_rotation := -get_viewport().canvas_transform.get_rotation()
+	var origin := get_viewport().canvas_transform.get_origin()
+	var pure_origin := (origin / zoom).rotated(canvas_rotation)
+	var zoom_scale := Vector2.ONE / zoom
+	var offset := -pure_origin + (half_size * zoom_scale).rotated(canvas_rotation)
+	width = 2.0 / zoom.x
 
 	# An array of the points that make up the corners of the viewport
 	var viewport_poly := PackedVector2Array(
@@ -62,15 +69,9 @@ func _draw() -> void:
 	# Adjusting viewport_poly to take into account the camera offset, zoom, and rotation
 	for p in range(viewport_poly.size()):
 		viewport_poly[p] = (
-			viewport_poly[p].rotated(Global.camera.rotation) * zoom
+			viewport_poly[p].rotated(canvas_rotation) * zoom
 			+ Vector2(
-				(
-					Global.camera.offset.x
-					- (viewport_size.rotated(Global.camera.rotation).x / 2) / zoom.x
-				),
-				(
-					Global.camera.offset.y
-					- (viewport_size.rotated(Global.camera.rotation).y / 2) / zoom.y
-				)
+				offset.x - (viewport_size.rotated(canvas_rotation).x / 2) / zoom.x,
+				offset.y - (viewport_size.rotated(canvas_rotation).y / 2) / zoom.y
 			)
 		)
