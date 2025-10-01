@@ -5,6 +5,7 @@ shader_type canvas_item;
 // https://en.wikipedia.org/wiki/Kernel_(image_processing)
 
 uniform mat3 kernel = mat3(vec3(0, 0, 0), vec3(0, 1, 0), vec3(0, 0, 0));
+uniform float kernel_normalization = 1.0;
 
 // Find coordinate of matrix element from index
 vec2 kpos(int index, vec2 iResolution)
@@ -52,6 +53,7 @@ vec3 convolution(sampler2D sampler, vec2 uv, vec2 iResolution)
 
 	// Extract a 3x3 region centered in uv
 	mat3[3] region = region3x3(sampler, uv, iResolution);
+	mat3 normalized_kernel = kernel / kernel_normalization;
 
 	// for each color channel of region
 	for (int i = 0; i < 3; i++)
@@ -59,7 +61,7 @@ vec3 convolution(sampler2D sampler, vec2 uv, vec2 iResolution)
 		// get region channel
 		mat3 rc = region[i];
 		// component wise multiplication of kernel by region channel
-		mat3 c = matrixCompMult(kernel, rc);
+		mat3 c = matrixCompMult(normalized_kernel, rc);
 		// add each component of matrix
 		float r = c[0][0] + c[1][0] + c[2][0]
 				+ c[0][1] + c[1][1] + c[2][1]
