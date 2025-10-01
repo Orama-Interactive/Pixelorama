@@ -11,7 +11,7 @@ func _ready() -> void:
 	texture = _texture
 	texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	texture_mode = Line2D.LINE_TEXTURE_TILE
-	width = 4.0 / Global.camera.zoom.x
+	width = 4.0 / get_viewport().canvas_transform.get_scale().x
 	set_color(Global.guide_color)
 
 

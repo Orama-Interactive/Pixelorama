@@ -14,7 +14,7 @@ var project := Global.current_project
 
 func _ready() -> void:
 	Global.project_switched.connect(_project_switched)
-	width = 2.0 / Global.camera.zoom.x
+	width = 2.0 / get_viewport().canvas_transform.get_scale().x
 	default_color = Global.guide_color
 	project.guides.append(self)
 	if _outside_canvas():
@@ -75,7 +75,13 @@ func _draw() -> void:
 	if !has_focus:
 		return
 	var viewport_size := get_viewport_rect().size
-	var zoom := Global.camera.zoom
+	var half_size := viewport_size * 0.5
+	var zoom := get_viewport().canvas_transform.get_scale()
+	var canvas_rotation := -get_viewport().canvas_transform.get_rotation()
+	var origin := get_viewport().canvas_transform.get_origin()
+	var pure_origin := (origin / zoom).rotated(canvas_rotation)
+	var zoom_scale := Vector2.ONE / zoom
+	var offset := -pure_origin + (half_size * zoom_scale).rotated(canvas_rotation)
 
 	# An array of the points that make up the corners of the viewport
 	var viewport_poly := PackedVector2Array(
@@ -84,16 +90,10 @@ func _draw() -> void:
 	# Adjusting viewport_poly to take into account the camera offset, zoom, and rotation
 	for p in range(viewport_poly.size()):
 		viewport_poly[p] = (
-			viewport_poly[p].rotated(Global.camera.rotation) * zoom
+			viewport_poly[p].rotated(canvas_rotation) * zoom
 			+ Vector2(
-				(
-					Global.camera.offset.x
-					- (viewport_size.rotated(Global.camera.rotation).x / 2) / zoom.x
-				),
-				(
-					Global.camera.offset.y
-					- (viewport_size.rotated(Global.camera.rotation).y / 2) / zoom.y
-				)
+				offset.x - (viewport_size.rotated(canvas_rotation).x / 2) / zoom.x,
+				offset.y - (viewport_size.rotated(canvas_rotation).y / 2) / zoom.y
 			)
 		)
 
@@ -114,7 +114,7 @@ func _draw() -> void:
 	)
 
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
+		draw_set_transform(intersection, canvas_rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[0])
 			< intersection.distance_squared_to(viewport_poly[1])
@@ -144,7 +144,7 @@ func _draw() -> void:
 		points[0], points[1], viewport_poly[3], viewport_poly[0]
 	)
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
+		draw_set_transform(intersection, canvas_rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[3])
 			< intersection.distance_squared_to(viewport_poly[0])
@@ -175,7 +175,7 @@ func _draw() -> void:
 	)
 
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
+		draw_set_transform(intersection, canvas_rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[1])
 			< intersection.distance_squared_to(viewport_poly[2])
@@ -202,7 +202,7 @@ func _draw() -> void:
 		return
 
 	# If there's no intersection with a viewport edge, show string in top left corner
-	draw_set_transform(viewport_poly[0], Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
+	draw_set_transform(viewport_poly[0], canvas_rotation, Vector2(2.0, 2.0) / zoom)
 	draw_string(
 		font,
 		Vector2(x_offset, font_height),
