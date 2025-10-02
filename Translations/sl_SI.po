@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
-"PO-Revision-Date: 2025-09-03 00:21\n"
+"PO-Revision-Date: 2025-10-02 22:12\n"
 
 msgid "OK"
 msgstr ""
@@ -3208,8 +3208,7 @@ msgstr ""
 msgid "Discard All"
 msgstr ""
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
 msgstr ""
 
 msgid "Backup reloaded"
