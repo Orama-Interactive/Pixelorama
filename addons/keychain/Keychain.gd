@@ -6,13 +6,11 @@ const PROFILES_PATH := "user://shortcut_profiles"
 var profiles: Array[ShortcutProfile] = [preload("profiles/default.tres")]
 var selected_profile := profiles[0]  ## The currently selected [ShortcutProfile].
 var profile_index := 0  ## The index of the currently selected [ShortcutProfile].
-## [Dictionary] of [String] and [InputAction].
 ## Syntax: "action_name": InputAction.new("Action Display Name", "Group", true)
 ## Note that "action_name" must already exist in the Project's Input Map.
-var actions := {}
-## [Dictionary] of [String] and [InputGroup].
+var actions: Dictionary[StringName, InputAction] = {}
 ## Syntax: "Group Name": InputGroup.new("Parent Group Name")
-var groups := {}
+var groups: Dictionary[StringName, InputGroup] = {}
 var ignore_actions: Array[StringName] = []  ## [Array] of [StringName] input map actions to ignore.
 ## If [code]true[/code], ignore Godot's default "ui_" input map actions.
 var ignore_ui_actions := true
