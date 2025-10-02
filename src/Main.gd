@@ -31,7 +31,9 @@ var splash_dialog: AcceptDialog:
 @onready var tile_mode_offsets_dialog: ConfirmationDialog = $Dialogs/TileModeOffsetsDialog
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 @onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
-@onready var restore_session_confirmation_dialog := $Dialogs/RestoreSessionConfirmationDialog as ConfirmationDialog
+@onready var restore_session_confirmation_dialog := (
+	$Dialogs/RestoreSessionConfirmationDialog as ConfirmationDialog
+)
 @onready var download_confirmation := $Dialogs/DownloadImageConfirmationDialog as ConfirmationDialog
 @onready var left_cursor: Sprite2D = $LeftCursor
 @onready var right_cursor: Sprite2D = $RightCursor
@@ -205,7 +207,7 @@ func _ready() -> void:
 		OS.request_permissions()
 	if Global.open_last_project:
 		load_last_project()
-	
+
 	# Detect if Pixelorama crashed last time.
 	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
 	if crashed_last_time and OpenSave.had_backups_on_startup:
