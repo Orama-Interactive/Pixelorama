@@ -12,6 +12,7 @@ const FONT_FILE_EXTENSIONS: PackedStringArray = [
 ]
 
 var current_session_backup := ""
+var had_backups_on_startup := false
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
 var preview_dialogs := []  ## Array of preview dialogs
 var last_dialog_option := 0
@@ -32,6 +33,8 @@ func _ready() -> void:
 	for session_folder in DirAccess.get_directories_at(BACKUPS_DIRECTORY):
 		if DirAccess.get_files_at(BACKUPS_DIRECTORY.path_join(session_folder)).size() == 0:
 			DirAccess.remove_absolute(BACKUPS_DIRECTORY.path_join(session_folder))
+	var backups := DirAccess.get_directories_at(OpenSave.BACKUPS_DIRECTORY)
+	had_backups_on_startup = backups.size() > 0
 	# Make folder for current session
 	var date_time: Dictionary = Time.get_datetime_dict_from_system()
 	var string_dict = {}
