@@ -17,7 +17,7 @@ shader_parameter/follow_scale = false
 
 [node name="TransparentChecker" type="ColorRect"]
 material = SubResource("1")
-anchors_preset = -1
+layout_direction = 2
 mouse_filter = 2
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true

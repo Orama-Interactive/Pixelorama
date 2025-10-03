@@ -6,6 +6,7 @@
 
 [node name="Tool" type="Button" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
+layout_direction = 2
 offset_right = 24.0
 offset_bottom = 24.0
 tooltip_text = "Rectangular Selection

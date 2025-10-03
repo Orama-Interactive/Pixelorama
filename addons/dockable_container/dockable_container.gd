@@ -110,6 +110,10 @@ func _notification(what: int) -> void:
 		NOTIFICATION_DRAG_END:
 			_drag_n_drop_panel.set_enabled(false)
 			set_process_input(false)
+		NOTIFICATION_TRANSLATION_CHANGED:
+			# This is needed when switching to a language with a different layout,
+			# such as from a LTR to a RTL language and vice versa.
+			_resort.call_deferred()
 
 
 func _input(event: InputEvent) -> void:

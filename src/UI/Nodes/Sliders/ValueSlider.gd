@@ -61,6 +61,10 @@ func _init() -> void:
 	stretch_margin_right = 3
 	stretch_margin_bottom = 3
 	theme_type_variation = "ValueSlider"
+	if is_layout_rtl():
+		fill_mode = FILL_RIGHT_TO_LEFT
+	else:
+		fill_mode = FILL_LEFT_TO_RIGHT
 
 
 func _ready() -> void:
@@ -78,6 +82,10 @@ func _notification(what: int) -> void:
 		_reset_display(true)
 	elif what == NOTIFICATION_TRANSLATION_CHANGED:
 		_reset_display(false)
+		if is_layout_rtl():
+			fill_mode = FILL_RIGHT_TO_LEFT
+		else:
+			fill_mode = FILL_LEFT_TO_RIGHT
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -151,7 +159,11 @@ func _gui_input(event: InputEvent) -> void:
 				set_meta("start_ratio", ratio)
 				set_meta("start_value", value)
 				set_meta("shift_pressed", event.shift_pressed)
-			var x_delta: float = get_local_mouse_position().x - get_meta("mouse_start_position").x
+			var x_delta := 0.0
+			if is_layout_rtl():
+				x_delta = get_meta("mouse_start_position").x - get_local_mouse_position().x
+			else:
+				x_delta = get_local_mouse_position().x - get_meta("mouse_start_position").x
 			# Slow down to allow for more precision
 			if event.shift_pressed:
 				x_delta *= 0.1
