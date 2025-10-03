@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-10-02 22:12\n"
+"PO-Revision-Date: 2025-10-03 00:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3291,7 +3291,7 @@ msgid "Discard All"
 msgstr "Scarta Tutto"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "Pixelorama non si è chiuso correttamente l'ultima volta. Vuoi ripristinare una sessione precedente?"
 
 msgid "Backup reloaded"
 msgstr "Backup ricaricato"
