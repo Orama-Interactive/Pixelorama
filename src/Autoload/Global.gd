@@ -18,6 +18,8 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
+@warning_ignore("unused_signal")
+signal on_cursor_position_text_changed(text: String)
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
@@ -156,8 +158,8 @@ var current_project_index := 0:
 		if value >= projects.size():
 			return
 		canvas.selection.transform_content_confirm()
-		current_project_index = value
 		project_about_to_switch.emit()
+		current_project_index = value
 		current_project = projects[value]
 		project_switched.connect(current_project.change_project)
 		project_switched.emit()
@@ -641,8 +643,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var perspective_editor := control.find_child("Perspective Editor")
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
-## The label indicating cursor position.
-@onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
 ## The palette panel. It has the [param PalettePanel.gd] script attached.
@@ -1074,7 +1074,6 @@ func undo_or_redo(
 			canvas.grid.queue_redraw()
 			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()
-			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()

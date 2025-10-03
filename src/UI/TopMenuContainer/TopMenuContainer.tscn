@@ -92,6 +92,7 @@ suffix = "%"
 snap_step = 100.0
 
 [node name="CursorPosition" type="Label" parent="MarginContainer/HBoxContainer/TopLabels"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "[64×64]"
 

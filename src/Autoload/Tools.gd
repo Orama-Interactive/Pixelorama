@@ -847,7 +847,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		text += "    %s" % _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text
 	if not _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text.is_empty():
 		text += "    %s" % _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text
-	Global.cursor_position_label.text = text
+	Global.on_cursor_position_text_changed.emit(text)
 
 
 ## Returns [code]true[/code] if [member alpha_locked] is [code]true[/code]

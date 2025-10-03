@@ -11,6 +11,7 @@ const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.sv
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
 
+var text_server := TextServerManager.get_primary_interface()
 var recent_projects := []
 var selected_layout := 0
 var zen_mode := false
@@ -74,9 +75,10 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var delete_layout_confirmation := $DeleteLayoutConfirmation as ConfirmationDialog
 @onready var layout_name_line_edit := %LayoutName as LineEdit
 @onready var layout_from_option_button := %LayoutFrom as OptionButton
+@onready var cursor_position_label := %CursorPosition as Label
+@onready var current_frame_mark := %CurrentFrameMark as Label
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
-@onready var current_frame_mark := %CurrentFrameMark as Label
 
 
 class Dialog:
@@ -107,8 +109,10 @@ class Dialog:
 
 func _ready() -> void:
 	main.save_file_dialog_opened.connect(func(opened: bool): can_save = not opened)
-	Global.project_switched.connect(_project_switched)
+	Global.project_about_to_switch.connect(_on_project_about_to_switch)
+	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(_update_current_frame_mark)
+	Global.on_cursor_position_text_changed.connect(_on_cursor_position_text_changed)
 	OpenSave.shader_copied.connect(_load_shader_file)
 	_setup_file_menu()
 	_setup_edit_menu()
@@ -144,15 +148,32 @@ func _notification(what: int) -> void:
 			_toggle_zen_mode()
 
 
-func _project_switched() -> void:
+func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
+	project.resized.disconnect(_on_project_resized)
+
+
+func _on_project_switched() -> void:
+	var project := Global.current_project
+	project.resized.connect(_on_project_resized)
+	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
+	_on_cursor_position_text_changed(project_size_text)
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
 	_update_file_menu_buttons(project)
 	for j in Tiles.MODE.values():
 		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
 	_check_color_mode_submenu_item(project)
-
 	_update_current_frame_mark()
+
+
+func _on_project_resized() -> void:
+	var project := Global.current_project
+	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
+	_on_cursor_position_text_changed(project_size_text)
+
+
+func _on_cursor_position_text_changed(text: String) -> void:
+	cursor_position_label.text = text_server.format_number(text)
 
 
 func _update_file_menu_buttons(project: Project) -> void:
@@ -174,7 +195,9 @@ func _update_file_menu_buttons(project: Project) -> void:
 
 func _update_current_frame_mark() -> void:
 	var project := Global.current_project
-	current_frame_mark.text = "%s/%s" % [str(project.current_frame + 1), project.frames.size()]
+	var current_frame := text_server.format_number(str(project.current_frame + 1))
+	var n_of_frames := text_server.format_number(str(project.frames.size()))
+	current_frame_mark.text = "%s/%s" % [current_frame, n_of_frames]
 
 
 func _setup_file_menu() -> void:
