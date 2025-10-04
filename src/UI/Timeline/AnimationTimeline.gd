@@ -328,6 +328,7 @@ func _on_blend_modes_item_selected(index: int) -> void:
 	project.undo_redo.add_undo_method(_update_layer_ui)
 	project.undo_redo.add_undo_method(_update_layers)
 	project.undo_redo.commit_action()
+	SteamManager.set_achievement("ACH_BLEND_IN")
 
 
 func _update_layers() -> void:
@@ -937,6 +938,7 @@ func on_add_layer_list_id_pressed(id: int) -> void:
 				layer = PixelLayer.new(project)
 			Global.LayerTypes.GROUP:
 				layer = GroupLayer.new(project)
+				SteamManager.set_achievement("ACH_STRONGER_TOGETHER")
 			Global.LayerTypes.THREE_D:
 				layer = Layer3D.new(project)
 				SteamManager.set_achievement("ACH_3D_LAYER")
