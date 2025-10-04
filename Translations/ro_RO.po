@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-10-02 22:11\n"
+"PO-Revision-Date: 2025-10-04 22:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3289,7 +3289,7 @@ msgid "Discard All"
 msgstr "Renunțare la toate"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "Pixelorama nu s-a închis bine ultima dată. Dorești să restaurezi o sesiune anterioară?"
 
 msgid "Backup reloaded"
 msgstr "Copie de rezervă reîncărcată"
