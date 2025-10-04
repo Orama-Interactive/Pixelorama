@@ -7,6 +7,7 @@ var enabled: bool = false:
 	set(value):
 		enabled = value
 		queue_redraw()
+var text_server := TextServerManager.get_primary_interface()
 
 
 func _ready() -> void:
@@ -41,7 +42,7 @@ func _draw() -> void:
 			draw_string(
 				font,
 				Vector2(x, y) * 20 + Vector2.DOWN * 16,
-				str(index),
+				text_server.format_number(str(index)),
 				HORIZONTAL_ALIGNMENT_LEFT,
 				-1,
 				FONT_SIZE if (index < 100) else int(FONT_SIZE / 1.5)

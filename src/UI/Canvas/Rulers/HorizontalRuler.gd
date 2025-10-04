@@ -10,6 +10,7 @@ var minor_subdivision := 4
 
 var first: Vector2
 var last: Vector2
+var text_server := TextServerManager.get_primary_interface()
 
 @onready var vertical_ruler := $"../ViewportandVerticalRuler/VerticalRuler" as Button
 
@@ -84,6 +85,7 @@ func _draw() -> void:
 			)
 			var val := ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(j, 0)).x
 			var str_to_draw := "%*.*f" % [0, step_decimals(val), snappedf(val, 0.1)]
+			str_to_draw = text_server.format_number(str_to_draw)
 			var draw_pos := Vector2(pos.x + RULER_WIDTH + 2, font.get_height() - 4)
 			draw_string(
 				font, draw_pos, str_to_draw, HORIZONTAL_ALIGNMENT_LEFT, -1, Themes.get_font_size()

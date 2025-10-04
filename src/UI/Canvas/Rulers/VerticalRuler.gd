@@ -10,6 +10,7 @@ var minor_subdivision := 4
 
 var first: Vector2
 var last: Vector2
+var text_server := TextServerManager.get_primary_interface()
 
 
 func _ready() -> void:
@@ -76,14 +77,20 @@ func _draw() -> void:
 		var pos: Vector2 = final_transform * Vector2(0, j)
 		if j % (major_subdivision * minor_subdivision) == 0:
 			draw_line(Vector2(0, pos.y), Vector2(RULER_WIDTH, pos.y), Color.WHITE)
-			var text_xform := Transform2D(-PI / 2, Vector2(font.get_height() - 4, pos.y - 2))
-			draw_set_transform_matrix(get_transform() * text_xform)
+			var text_angle := -PI / 2
+			var text_pos := Vector2(font.get_height() - 4, pos.y - 2)
+			if is_layout_rtl():
+				text_angle = PI / 2
+				text_pos = Vector2(font.get_height() - 18, pos.y + 2)
+			var text_xform := Transform2D(text_angle, text_pos)
+			draw_set_transform_matrix(text_xform)
 			var val := ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(0, j)).y
 			var str_to_draw := "%*.*f" % [0, step_decimals(val), snappedf(val, 0.1)]
+			str_to_draw = text_server.format_number(str_to_draw)
 			draw_string(
 				font, Vector2(), str_to_draw, HORIZONTAL_ALIGNMENT_LEFT, -1, Themes.get_font_size()
 			)
-			draw_set_transform_matrix(get_transform())
+			draw_set_transform_matrix(Transform2D())
 		else:
 			if j % minor_subdivision == 0:
 				draw_line(

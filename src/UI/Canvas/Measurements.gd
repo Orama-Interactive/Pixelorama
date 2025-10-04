@@ -7,6 +7,7 @@ var line_color := Global.guide_color
 var mode := Global.MeasurementMode.NONE
 var apparent_width: float = WIDTH
 var rect_bounds: Rect2i
+var text_server := TextServerManager.get_primary_interface()
 
 @onready var canvas := get_parent() as Canvas
 
@@ -163,6 +164,7 @@ func _draw_move_measurement() -> void:
 		var canvas_rotation := -get_viewport().canvas_transform.get_rotation()
 		var string_vec := line[0] + (line[1] - line[0]) / 2.0
 		var string_pos := (string_vec * canvas_zoom).rotated(-canvas_rotation)
+		var string := text_server.format_number(str(line[0].distance_to(line[1]), "px"))
 		draw_set_transform(Vector2.ZERO, canvas_rotation, Vector2.ONE / canvas_zoom)
-		draw_string(font, string_pos, str(line[0].distance_to(line[1]), "px"))
+		draw_string(font, string_pos, string)
 		draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)

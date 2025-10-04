@@ -45,6 +45,7 @@ enum { NORMAL, HELD, SLIDING, TYPING }
 @export var global_increment_action := ""  ## Global shortcut to increment
 @export var global_decrement_action := ""  ## Global shortcut to decrement
 
+var text_server := TextServerManager.get_primary_interface()
 var state := NORMAL
 var arrow_is_held := 0  ## Used for arrow button echo behavior. Is 1 for ValueUp, -1 for ValueDown.
 
@@ -306,6 +307,7 @@ func _format_float_string(is_typing := false) -> String:
 		if str_to_var(decimal_str) != 0:
 			n_of_decimals = split_str[1].length()
 	var float_str := format_string % [0, n_of_decimals, value]
+	float_str = text_server.format_number(float_str)
 	if is_typing:
 		return float_str
 	return str(tr(prefix), " ", float_str, " ", tr(suffix)).strip_edges()

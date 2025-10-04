@@ -69,6 +69,7 @@ var ui_color := Color(0, 0, 0, 0):
 	set(value):
 		ui_color = value
 		ui_color_changed.emit()
+var text_server := TextServerManager.get_primary_interface()
 
 
 ## Returns true if this is a direct or indirect parent of layer
@@ -379,7 +380,7 @@ func new_empty_cel() -> BaseCel:
 
 ## Sets layer name to the default name followed by [param number].
 func set_name_to_default(number: int) -> void:
-	name = tr("Layer") + " %s" % number
+	name = tr("Layer") + " %s" % text_server.format_number(str(number))
 
 
 ## Tells if the user is allowed to draw on current layer ([code]true[/code])

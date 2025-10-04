@@ -10,6 +10,7 @@ var has_focus := true
 var mouse_pos := Vector2.ZERO
 var type := Types.HORIZONTAL
 var project := Global.current_project
+var text_server := TextServerManager.get_primary_interface()
 
 
 func _ready() -> void:
@@ -43,10 +44,8 @@ func _input(_event: InputEvent) -> void:
 		and Global.can_draw
 		and rect.has_point(mouse_pos)
 	):
-		if (
-			!Rect2i(Vector2i.ZERO, project.size).has_point(Global.canvas.current_pixel)
-			or Global.move_guides_on_canvas
-		):
+		var project_rect := Rect2i(Vector2i.ZERO, project.size)
+		if not project_rect.has_point(mouse_pos) or Global.move_guides_on_canvas:
 			has_focus = true
 			Global.can_draw = false
 			queue_redraw()
@@ -100,6 +99,7 @@ func _draw() -> void:
 	var string := (
 		"%spx" % str(snappedf(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
 	)
+	string = text_server.format_number(string)
 	var color: Color = Global.control.theme.get_color("font_color", "Label")
 	# X and Y offsets for nicer looking spacing
 	var x_offset := 5
