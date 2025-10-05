@@ -95,6 +95,12 @@ var _can_emit_signal := true
 func _ready() -> void:
 	if not Engine.is_editor_hint():  # Pixelorama specific code
 		$Ratio.modulate = Global.modulate_icon_color
+	$Ratio/RatioGuides.scale.x = -1.0 if is_layout_rtl() else 1.0
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		$Ratio/RatioGuides.scale.x = -1.0 if is_layout_rtl() else 1.0
 
 
 func get_sliders() -> Array[ValueSlider]:

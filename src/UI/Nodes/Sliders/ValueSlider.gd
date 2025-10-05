@@ -307,7 +307,8 @@ func _format_float_string(is_typing := false) -> String:
 		if str_to_var(decimal_str) != 0:
 			n_of_decimals = split_str[1].length()
 	var float_str := format_string % [0, n_of_decimals, value]
-	float_str = text_server.format_number(float_str)
+	if localize_numeral_system:
+		float_str = text_server.format_number(float_str)
 	if is_typing:
 		return float_str
 	return str(tr(prefix), " ", float_str, " ", tr(suffix)).strip_edges()
