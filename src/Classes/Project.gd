@@ -247,7 +247,6 @@ func change_project() -> void:
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 	Global.transparent_checker.update_rect()
-	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 	Global.get_window().title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.get_window().title = Global.get_window().title + "(*)"
