@@ -481,6 +481,31 @@ func save_pxo_file(
 	zip_packer.write_file(to_save.to_utf8_buffer())
 	zip_packer.close_file()
 
+	zip_packer.start_file("mimetype")
+	zip_packer.write_file("image/pxo".to_utf8_buffer())
+	zip_packer.close_file()
+
+	var current_frame := project.frames[project.current_frame]
+	# Generate a preview image of the current frame.
+	# File managers can later use this as a thumbnail for pxo files.
+	var preview := project.new_empty_image()
+	DrawingAlgos.blend_layers(preview, current_frame, Vector2i.ZERO, project)
+	var new_width := preview.get_width()
+	var new_height := preview.get_height()
+	var aspect_ratio := float(new_width) / float(new_height)
+	if new_width > new_height:
+		new_width = 256
+		new_height = new_width / aspect_ratio
+	else:
+		new_height = 256
+		new_width = new_height * aspect_ratio
+	var scaled_preview := Image.new()
+	scaled_preview.copy_from(preview)
+	scaled_preview.resize(new_width, new_height, Image.INTERPOLATE_NEAREST)
+	zip_packer.start_file("preview.png")
+	zip_packer.write_file(scaled_preview.save_png_to_buffer())
+	zip_packer.close_file()
+
 	if not autosave:
 		project.save_path = path
 
@@ -488,7 +513,10 @@ func save_pxo_file(
 	for frame in project.frames:
 		if not autosave and include_blended:
 			var blended := project.new_empty_image()
-			DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
+			if frame == current_frame:
+				blended = preview
+			else:
+				DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
 			zip_packer.start_file("image_data/final_images/%s" % frame_index)
 			zip_packer.write_file(blended.get_data())
 			zip_packer.close_file()
