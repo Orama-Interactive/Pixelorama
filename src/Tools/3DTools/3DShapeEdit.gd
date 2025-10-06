@@ -240,7 +240,8 @@ func _cel_switched() -> void:
 	_set_cel_node_values()
 	_fill_object_option_button()
 	sprite_changed_this_frame()
-	_cel.selected = selected
+	if is_instance_valid(selected):
+		_cel.selected = selected
 
 
 func _new_object_popup_id_pressed(id: int) -> void:
