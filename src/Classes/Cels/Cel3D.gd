@@ -170,6 +170,17 @@ func get_image() -> Image:
 	return viewport.get_texture().get_image()
 
 
+func duplicate_cel() -> Cel3D:
+	var new_cel := Cel3D.new(size, false, object_properties, scene_properties)
+	new_cel.opacity = opacity
+	new_cel.z_index = z_index
+	new_cel.user_data = user_data
+	new_cel.ui_color = ui_color
+	if selected != null:
+		new_cel.selected = new_cel.get_object_from_id(selected.id)
+	return new_cel
+
+
 func serialize() -> Dictionary:
 	var dict := super.serialize()
 	var scene_properties_str := {}

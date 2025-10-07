@@ -492,25 +492,7 @@ func copy_frames(
 			if [f, l] in project.selected_cels:
 				last_focus_cels.append([copied_indices[indices.find(f)], l])
 			var src_cel := project.frames[f].cels[l]  # Cel we're copying from, the source
-			var new_cel: BaseCel
-			var selected_id := -1
-			if src_cel is Cel3D:
-				new_cel = Cel3D.new(
-					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
-				)
-				if src_cel.selected != null:
-					selected_id = src_cel.selected.id
-			elif src_cel is CelTileMap:
-				new_cel = CelTileMap.new(src_cel.tileset)
-				new_cel.offset = src_cel.offset
-				new_cel.place_only_mode = src_cel.place_only_mode
-				new_cel.tile_size = src_cel.tile_size
-				new_cel.tile_shape = src_cel.tile_shape
-				new_cel.tile_layout = src_cel.tile_layout
-				new_cel.tile_offset_axis = src_cel.tile_offset_axis
-			else:
-				new_cel = src_cel.get_script().new()
-
+			var new_cel: BaseCel = src_cel.duplicate_cel()
 			if project.layers[l].new_cels_linked:
 				if src_cel.link_set == null:
 					src_cel.link_set = {}
@@ -524,15 +506,7 @@ func copy_frames(
 				new_cel.link_set = src_cel.link_set
 			else:
 				new_cel.set_content(src_cel.copy_content())
-			new_cel.opacity = src_cel.opacity
-			new_cel.z_index = src_cel.z_index
-			new_cel.user_data = src_cel.user_data
-			new_cel.ui_color = src_cel.ui_color
 
-			if new_cel is Cel3D:
-				if selected_id in new_cel.object_properties.keys():
-					if selected_id != -1:
-						new_cel.selected = new_cel.get_object_from_id(selected_id)
 			new_frame.cels.append(new_cel)
 
 		# After adding one frame, loop through the tags to see if the frame was in an animation tag
@@ -1009,21 +983,7 @@ func _on_CloneLayer_pressed() -> void:
 
 		for frame in project.frames:
 			var src_cel := frame.cels[src_layer.index]
-			var new_cel: BaseCel
-			if src_cel is Cel3D:
-				new_cel = Cel3D.new(
-					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
-				)
-			elif src_cel is CelTileMap:
-				new_cel = CelTileMap.new(src_cel.tileset)
-				new_cel.offset = src_cel.offset
-				new_cel.place_only_mode = src_cel.place_only_mode
-				new_cel.tile_size = src_cel.tile_size
-				new_cel.tile_shape = src_cel.tile_shape
-				new_cel.tile_layout = src_cel.tile_layout
-				new_cel.tile_offset_axis = src_cel.tile_offset_axis
-			else:
-				new_cel = src_cel.get_script().new()
+			var new_cel: BaseCel = src_cel.duplicate_cel()
 
 			if src_cel.link_set == null:
 				new_cel.set_content(src_cel.copy_content())
@@ -1038,10 +998,6 @@ func _on_CloneLayer_pressed() -> void:
 					new_cel.set_content(src_cel.copy_content())
 				new_cel.link_set["cels"].append(new_cel)
 
-			new_cel.opacity = src_cel.opacity
-			new_cel.z_index = src_cel.z_index
-			new_cel.user_data = src_cel.user_data
-			new_cel.ui_color = src_cel.ui_color
 			cels[-1].append(new_cel)
 
 	for cl_layer in clones:
