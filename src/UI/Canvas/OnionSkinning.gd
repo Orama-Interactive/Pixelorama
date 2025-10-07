@@ -34,12 +34,20 @@ func _draw() -> void:
 			for cel in project.frames[change].cels:
 				var layer: BaseLayer = project.layers[layer_i]
 				if layer.is_visible_in_hierarchy():
+					var parent_bone := BoneLayer.get_parent_bone(layer)
+					var bone_offset := Vector2i.ZERO
+					if parent_bone:
+						if not parent_bone.is_edit_mode():
+							var bone_cel := parent_bone.get_current_bone_cel(change)
+							bone_offset = bone_cel.start_point
 					# Ignore layer if it has the "_io" suffix in its name (case in-sensitive)
 					if not layer.ignore_onion:
 						color.a = opacity / i
 						if [change, layer_i] in project.selected_cels:
-							draw_texture(cel.image_texture, canvas.move_preview_location, color)
+							draw_texture(
+								cel.image_texture, canvas.move_preview_location + bone_offset, color
+							)
 						else:
-							draw_texture(cel.image_texture, Vector2.ZERO, color)
+							draw_texture(cel.image_texture, bone_offset, color)
 				layer_i += 1
 	draw_set_transform(position, rotation, scale)

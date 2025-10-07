@@ -21,7 +21,7 @@ signal font_loaded  ## Emitted when a new font has been loaded, or an old one ge
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
 
-enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
+enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO, BONE }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
 ## ## Used to tell whether a color is being taken from the current theme,
 ## or if it is a custom color.
