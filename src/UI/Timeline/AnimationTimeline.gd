@@ -45,7 +45,6 @@ var global_layer_lock := false
 var global_layer_expand := true
 
 @onready var animation_timer := $AnimationTimer as Timer
-@onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer.
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
