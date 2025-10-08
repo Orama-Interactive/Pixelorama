@@ -625,14 +625,15 @@ func calculate_mirror_vertical(pos: Vector2i, project: Project, offset := 0) -> 
 
 
 func calculate_mirror_xy(pos: Vector2i, project: Project) -> Vector2i:
-	return Vector2i(Vector2(pos).reflect(XY_LINE).round()) + Vector2i(project.xy_symmetry_point)
+	var local_pos := Vector2(pos) - project.xy_symmetry_point
+	var reflected := local_pos.reflect(XY_LINE)
+	return (reflected + project.xy_symmetry_point).round()
 
 
 func calculate_mirror_x_minus_y(pos: Vector2i, project: Project) -> Vector2i:
-	return (
-		Vector2i(Vector2(pos).reflect(X_MINUS_Y_LINE).round())
-		+ Vector2i(project.x_minus_y_symmetry_point)
-	)
+	var local_pos := Vector2(pos) - project.x_minus_y_symmetry_point
+	var reflected := local_pos.reflect(X_MINUS_Y_LINE)
+	return (reflected + project.x_minus_y_symmetry_point).round()
 
 
 func is_placing_tiles() -> bool:
