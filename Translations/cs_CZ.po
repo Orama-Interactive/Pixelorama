@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-10-02 22:11\n"
+"PO-Revision-Date: 2025-10-08 22:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2451,14 +2451,24 @@ msgstr "Zrcadlení"
 msgid "Horizontal"
 msgstr "Vodorovně"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Povolit kreslení ve vodorovném zrcadlení"
 
 msgid "Vertical"
 msgstr "Svisle"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Povolit kreslení ve svislém zrcadlení"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
