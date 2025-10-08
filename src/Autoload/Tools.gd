@@ -11,8 +11,8 @@ signal options_reset
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 
-const XY_LINE := Vector2(-0.707107, 0.707107)
-const X_MINUS_Y_LINE := Vector2(0.707107, 0.707107)
+const XY_LINE := Vector2(-0.70710677, 0.70710677)
+const X_MINUS_Y_LINE := Vector2(0.70710677, 0.70710677)
 
 var active_button := -1
 var picking_color_for := MOUSE_BUTTON_LEFT
@@ -596,23 +596,23 @@ func get_mirrored_positions(
 			positions.append(calculate_mirror_vertical(mirror_x, project, offset))
 		else:
 			if diagonal_xy_mirror:
-				positions.append(calculate_mirror_xy(mirror_x, project))
+				positions.append(calculate_mirror_diagonal(mirror_x, project))
 			if diagonal_x_minus_y_mirror:
-				positions.append(calculate_mirror_x_minus_y(mirror_x, project))
+				positions.append(calculate_mirror_diagonal(mirror_x, project, true))
 	if vertical_mirror:
 		var mirror_y := calculate_mirror_vertical(pos, project, offset)
 		positions.append(mirror_y)
 		if diagonal_xy_mirror:
-			positions.append(calculate_mirror_xy(mirror_y, project))
+			positions.append(calculate_mirror_diagonal(mirror_y, project))
 		if diagonal_x_minus_y_mirror:
-			positions.append(calculate_mirror_x_minus_y(mirror_y, project))
+			positions.append(calculate_mirror_diagonal(mirror_y, project, true))
 	if diagonal_xy_mirror:
-		var mirror_diagonal := calculate_mirror_xy(pos, project)
+		var mirror_diagonal := calculate_mirror_diagonal(pos, project)
 		positions.append(mirror_diagonal)
 		if not horizontal_mirror and not vertical_mirror and diagonal_x_minus_y_mirror:
-			positions.append(calculate_mirror_x_minus_y(mirror_diagonal, project))
+			positions.append(calculate_mirror_diagonal(mirror_diagonal, project, true))
 	if diagonal_x_minus_y_mirror:
-		positions.append(calculate_mirror_x_minus_y(pos, project))
+		positions.append(calculate_mirror_diagonal(pos, project, true))
 	return positions
 
 
@@ -624,16 +624,13 @@ func calculate_mirror_vertical(pos: Vector2i, project: Project, offset := 0) -> 
 	return Vector2i(pos.x, project.y_symmetry_point - pos.y + offset)
 
 
-func calculate_mirror_xy(pos: Vector2i, project: Project) -> Vector2i:
-	var local_pos := Vector2(pos) - project.xy_symmetry_point
-	var reflected := local_pos.reflect(XY_LINE)
-	return (reflected + project.xy_symmetry_point).round()
-
-
-func calculate_mirror_x_minus_y(pos: Vector2i, project: Project) -> Vector2i:
-	var local_pos := Vector2(pos) - project.x_minus_y_symmetry_point
-	var reflected := local_pos.reflect(X_MINUS_Y_LINE)
-	return (reflected + project.x_minus_y_symmetry_point).round()
+func calculate_mirror_diagonal(pos: Vector2i, project: Project, flipped := false) -> Vector2i:
+	var symmetry_point := project.x_minus_y_symmetry_point if flipped else project.xy_symmetry_point
+	var symmetry_line := X_MINUS_Y_LINE if flipped else XY_LINE
+	var offset := Vector2(0.5, 0.5)
+	var local_pos := Vector2(pos) + offset - symmetry_point
+	var reflected := local_pos.reflect(symmetry_line)
+	return (reflected + symmetry_point - offset).round()
 
 
 func is_placing_tiles() -> bool:

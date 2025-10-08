@@ -118,7 +118,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1
-	xy_symmetry_point = Vector2(size.x, 0) * 0.5 + Vector2(0, size.y) * 0.5
+	xy_symmetry_point = size * 0.5
 	x_minus_y_symmetry_point = xy_symmetry_point
 	x_symmetry_axis.type = Guide.Types.HORIZONTAL
 	x_symmetry_axis.project = self

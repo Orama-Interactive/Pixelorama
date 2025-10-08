@@ -3,7 +3,7 @@ extends Line2D
 
 enum Types { HORIZONTAL, VERTICAL, XY, X_MINUS_Y }
 
-const INPUT_WIDTH := 4
+const INPUT_WIDTH := 4.0
 
 var font := Themes.get_font()
 var has_focus := true
@@ -26,24 +26,8 @@ func _input(_event: InputEvent) -> void:
 	if not visible:
 		return
 	mouse_pos = get_local_mouse_position()
-
-	var point0 := points[0]
-	var point1 := points[1]
-	if type == Types.HORIZONTAL:
-		point0.y -= width * INPUT_WIDTH
-		point1.y += width * INPUT_WIDTH
-	elif type == Types.VERTICAL:
-		point0.x -= width * INPUT_WIDTH
-		point1.x += width * INPUT_WIDTH
-	var rect := Rect2()
-	rect.position = point0
-	rect.end = point1
-	rect = rect.abs()
-	if (
-		Input.is_action_just_pressed(&"left_mouse")
-		and Global.can_draw
-		and rect.has_point(mouse_pos)
-	):
+	var is_hovering := is_pos_over_line(mouse_pos)
+	if Input.is_action_just_pressed(&"left_mouse") and Global.can_draw and is_hovering:
 		var project_rect := Rect2i(Vector2i.ZERO, project.size)
 		if not project_rect.has_point(mouse_pos) or Global.move_guides_on_canvas:
 			has_focus = true
@@ -59,6 +43,19 @@ func _input(_event: InputEvent) -> void:
 				var xx := snappedf(mouse_pos.x, 0.5)
 				points[0].x = xx
 				points[1].x = xx
+			elif type == Types.XY or type == Types.X_MINUS_Y:
+				var normal := Tools.X_MINUS_Y_LINE
+				if type == Types.X_MINUS_Y:
+					normal = Tools.XY_LINE
+				var c := normal.dot(mouse_pos)
+				c = snappedf(c, 0.5)
+
+				var dir := (normal * Vector2(1, -1)).normalized()
+				var half_len := (points[1] - points[0]).length() / 2.0
+				var center := normal * c
+
+				points[0] = center - dir * half_len
+				points[1] = center + dir * half_len
 			modulate.a = 0.5 if _outside_canvas() else 1.0
 		elif Input.is_action_just_released(&"left_mouse"):
 			Global.can_draw = true
@@ -224,6 +221,23 @@ func set_color(color: Color) -> void:
 
 func get_direction() -> Vector2:
 	return points[0].direction_to(points[1])
+
+
+func is_pos_over_line(pos: Vector2, thickness := INPUT_WIDTH) -> bool:
+	var start := points[0]
+	var end := points[1]
+	var line_vec := end - start
+	var len_sq := line_vec.length_squared()
+	if len_sq == 0.0:
+		return (pos - start).length() <= thickness
+
+	# Project the mouse onto the line segment (clamped between 0 and 1).
+	var t := clampf((pos - start).dot(line_vec) / len_sq, 0.0, 1.0)
+	var projection := start + t * line_vec
+
+	# Distance from mouse to closest point on the segment.
+	var dist := pos.distance_to(projection)
+	return dist <= thickness
 
 
 func _project_switched() -> void:
