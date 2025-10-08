@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2025-10-02 22:12\n"
+"PO-Revision-Date: 2025-10-08 22:37\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -2462,14 +2462,24 @@ msgstr "Yansıtma"
 msgid "Horizontal"
 msgstr "Yatay"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Çizim için yatay aynamalamayı etkinleştir"
 
 msgid "Vertical"
 msgstr "Dikey"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Çizim için dikey aynamalamayı etkinleştir"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
