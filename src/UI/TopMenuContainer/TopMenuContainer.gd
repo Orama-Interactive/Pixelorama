@@ -155,7 +155,8 @@ func _on_project_about_to_switch() -> void:
 
 func _on_project_switched() -> void:
 	var project := Global.current_project
-	project.resized.connect(_on_project_resized)
+	if not project.resized.is_connected(_on_project_resized):
+		project.resized.connect(_on_project_resized)
 	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
 	_on_cursor_position_text_changed(project_size_text)
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
