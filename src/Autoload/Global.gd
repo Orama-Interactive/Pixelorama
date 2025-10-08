@@ -903,6 +903,8 @@ func _initialize_keychain() -> void:
 		&"switch_colors": Keychain.InputAction.new("", "Global tool options"),
 		&"horizontal_mirror": Keychain.InputAction.new("", "Global tool options"),
 		&"vertical_mirror": Keychain.InputAction.new("", "Global tool options"),
+		&"diagonal_xy_mirror": Keychain.InputAction.new("", "Global tool options"),
+		&"diagonal_x_minus_y_mirror": Keychain.InputAction.new("", "Global tool options"),
 		&"pixel_perfect": Keychain.InputAction.new("", "Global tool options"),
 		&"alpha_lock": Keychain.InputAction.new("", "Global tool options"),
 		&"new_layer": Keychain.InputAction.new("", "Timeline"),
