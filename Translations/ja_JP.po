@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-10-03 08:35\n"
+"PO-Revision-Date: 2025-10-08 22:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2477,14 +2477,24 @@ msgstr "ミラーリング"
 msgid "Horizontal"
 msgstr "水平"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "左右対称描画を有効化"
 
 msgid "Vertical"
 msgstr "垂直方向"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "上下対称描画を有効化"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
