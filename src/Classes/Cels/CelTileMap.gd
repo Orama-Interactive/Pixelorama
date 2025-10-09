@@ -1015,6 +1015,9 @@ func update_texture(undo := false) -> void:
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
+		var image_rect := Rect2i(Vector2i.ZERO, get_image().get_size())
+		if not image_rect.has_point(coords):
+			continue
 		var rect := Rect2i(coords, get_tile_size())
 		var image_portion := get_image_portion(rect)
 		var current_tile := tileset.tiles[index]
