@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-10-08 22:37\n"
+"PO-Revision-Date: 2025-10-10 15:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -105,7 +105,7 @@ msgstr "Incluir imágenes mezcladas"
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr "Si está habilitado, las imágenes mezcladas finales también se almacenarán en el pxo, por cada fotograma. Esto hace que el archivo pxo sea más grande, y es útil para la importación mediante software de terceros o la exportación CLI. No es necesario que esta opción esté habilitada para cargar archivos pxo en Pixelorama."
+msgstr "Si está activado, las imágenes mezcladas finales también se almacenarán en el pxo, por cada fotograma. Esto hace que el archivo pxo sea más grande, y es útil para la importación mediante software de terceros o la exportación CLI. No es necesario que esta opción esté habilitada para cargar archivos pxo en Pixelorama."
 
 msgid "Import"
 msgstr "Importar"
@@ -2014,7 +2014,7 @@ msgstr "Si se activa esta opción, la aplicación volverá a dibujar la pantalla
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr "Habilitar transparencia de ventana"
+msgstr "Activar transparencia de ventana"
 
 #. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
@@ -2038,17 +2038,17 @@ msgstr "Controlador de tableta:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr "Especifica el controlador de tableta usado en Windows. Si tiene Windows Ink habilitado, seleccione winink."
+msgstr "Especifica el controlador de tableta usado en Windows. Si tienes Windows Ink activado, selecciona winink."
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Agregar Extensión"
 
 msgid "Enable"
-msgstr "Habilitar"
+msgstr "Activar"
 
 msgid "Disable"
-msgstr "Deshabilitar"
+msgstr "Desactivar"
 
 msgid "Uninstall"
 msgstr "Desinstalar"
@@ -2486,11 +2486,11 @@ msgstr "Activar dibujo de espejo vertical"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Activar dibujo de espejo diagonal (↗)"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Activar dibujo de espejo diagonal (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3504,8 +3504,8 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Tamaño bloqueado\n\n"
-"Cuando está habilitado, usar la herramienta en el lienzo solo moverá el rectángulo de recorte.\n\n"
-"Cuando está deshabilitado, usar la herramienta en el lienzo dibujará el rectángulo."
+"Cuando está activado, usar la herramienta en el lienzo solo moverá el rectángulo de recorte.\n\n"
+"Cuando está desactivado, usar la herramienta en el lienzo dibujará el rectángulo."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
@@ -3858,7 +3858,7 @@ msgstr "Compresión de colores"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr "Habilitado"
+msgstr "Activado"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
