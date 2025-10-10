@@ -6,12 +6,8 @@
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("1")
 shader_parameter/size = 10.0
-shader_parameter/alpha = 1.0
 shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(0, 0)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 

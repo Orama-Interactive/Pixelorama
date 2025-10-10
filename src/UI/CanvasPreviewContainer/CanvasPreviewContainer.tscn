@@ -1,24 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccsihk3yxwei5"]
+[gd_scene load_steps=7 format=3 uid="uid://ccsihk3yxwei5"]
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
-[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="2"]
 [ext_resource type="Script" uid="uid://b6l0yorq5b46r" path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="5"]
 [ext_resource type="Script" uid="uid://ctqrsfsbx4kwk" path="res://src/UI/Canvas/CanvasCamera.gd" id="5_ge2km"]
 [ext_resource type="Texture2D" uid="uid://c7smxwfa8826j" path="res://assets/graphics/timeline/play.png" id="6"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="8"]
-
-[sub_resource type="ShaderMaterial" id="1"]
-shader = ExtResource("2")
-shader_parameter/size = 10.0
-shader_parameter/alpha = 1.0
-shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
-shader_parameter/color2 = Color(1, 1, 1, 1)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(0, 0)
-shader_parameter/follow_movement = false
-shader_parameter/follow_scale = false
 
 [node name="CanvasPreviewContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 110)
@@ -70,8 +57,6 @@ size = Vector2i(308, 139)
 render_target_update_mode = 4
 
 [node name="TransparentChecker" parent="VBox/HBox/PreviewViewportContainer/SubViewport" instance=ExtResource("1")]
-material = SubResource("1")
-anchors_preset = 0
 
 [node name="CanvasPreview" parent="VBox/HBox/PreviewViewportContainer/SubViewport" groups=["CanvasPreviews"] instance=ExtResource("5")]
 unique_name_in_owner = true
