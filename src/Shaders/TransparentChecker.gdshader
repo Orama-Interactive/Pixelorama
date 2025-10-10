@@ -2,15 +2,14 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform float size = 10.0;
+uniform float alpha = 1.0;
 uniform vec4 color1 : source_color = vec4(0.7, 0.7, 0.7, 1.0);
 uniform vec4 color2 : source_color = vec4(1.0);
+uniform vec2 offset = vec2(0.0);
+uniform vec2 scale = vec2(0.0);
+uniform vec2 rect_size = vec2(0.0);
 uniform bool follow_movement = false;
 uniform bool follow_scale = false;
-
-instance uniform float alpha = 1.0;
-instance uniform vec2 rect_size = vec2(0.0);
-instance uniform vec2 offset = vec2(0.0);
-instance uniform vec2 scale = vec2(1.0);
 
 void fragment() {
 	vec2 ref_pos = FRAGCOORD.xy;

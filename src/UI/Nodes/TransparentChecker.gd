@@ -35,12 +35,12 @@ func update_rect() -> void:
 
 
 func update_offset(offset: Vector2, canvas_scale: Vector2) -> void:
-	set_instance_shader_parameter(&"offset", offset)
-	set_instance_shader_parameter(&"scale", canvas_scale)
+	material.set_shader_parameter(&"offset", offset)
+	material.set_shader_parameter(&"scale", canvas_scale)
 
 
 func _on_resized() -> void:
-	set_instance_shader_parameter(&"rect_size", size)
+	material.set_shader_parameter(&"rect_size", size)
 
 
 func set_bounds(bounds: Vector2) -> void:
@@ -65,4 +65,4 @@ func update_transparency(value: float) -> void:
 		get_window().transparent_bg = true
 
 	# Set a minimum amount for the fade so the canvas won't disappear
-	set_instance_shader_parameter(&"alpha", clampf(value, 0.1, 1))
+	material.set_shader_parameter(&"alpha", clampf(value, 0.1, 1))
