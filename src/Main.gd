@@ -370,6 +370,9 @@ func _handle_cmdline_arguments() -> void:
 		return
 	# Load the files first
 	for arg in args:
+		if arg.begins_with("lospec-palette://"):
+			Palettes.import_lospec_palette(arg)
+			break
 		var file_path := arg
 		# if we think the file could be a potential relative path it can mean two things:
 		# 1. The file is relative to executable

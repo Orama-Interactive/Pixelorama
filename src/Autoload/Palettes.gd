@@ -699,3 +699,47 @@ func fill_imported_palette_with_colors(
 		result.add_color(color)
 
 	return result
+
+
+func import_lospec_palette(url: String) -> void:
+	var palette_name := url.get_slice("://", 1)
+	var api_url := "https://lospec.com/palette-list/" + palette_name + ".json"
+	print("Importing palette:", palette_name)
+
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(_on_lospec_palette_downloaded.bind(http))
+	var err := http.request(api_url)
+	if err != OK:
+		push_error("Failed to request palette: %s" % palette_name)
+
+
+func _on_lospec_palette_downloaded(
+	result: int,
+	response_code: int,
+	_headers: PackedStringArray,
+	body: PackedByteArray,
+	http: HTTPRequest
+) -> void:
+	http.queue_free()
+	if response_code != 200 or result != HTTPRequest.RESULT_SUCCESS:
+		push_error("Palette download failed: %s" % response_code)
+		return
+	var data = JSON.parse_string(body.get_string_from_utf8())
+	if not data or not typeof(data) == TYPE_DICTIONARY:
+		push_error("Palette download failed")
+	var colors = data.colors
+	# Convert hex colors to Color() objects and add to Pixelorama's palette
+	var pixelorama_json_colors := []
+	var palette := []
+	for i in colors.size():
+		var color_hex = colors[i]
+		var color := Color(color_hex)
+		pixelorama_json_colors.append({"color": color, "index": i})
+	var pixelorama_json := {
+		"comment": data["author"],
+		"width": colors.size(),
+		"height": 1,
+		"colors": pixelorama_json_colors
+	}
+	ExtensionsApi.palette.create_palette_from_data(data["name"], pixelorama_json)
