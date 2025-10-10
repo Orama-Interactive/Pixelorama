@@ -21,6 +21,22 @@ var empty := true:
 			mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
+func _init() -> void:
+	color = DEFAULT_COLOR
+	custom_minimum_size = Vector2(8, 8)
+	size = Vector2(8, 8)
+	mouse_filter = Control.MOUSE_FILTER_PASS
+	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	gui_input.connect(_on_gui_input)
+
+
+func _ready() -> void:
+	var transparent_checker := TransparentChecker.new()
+	transparent_checker.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	transparent_checker.show_behind_parent = true
+	add_child(transparent_checker)
+
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED:
 		if empty:
@@ -98,7 +114,7 @@ func _drop_data(_position: Vector2, data) -> void:
 	dropped.emit(data.source_index, index)
 
 
-func _on_PaletteSlot_gui_input(event: InputEvent) -> void:
+func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.double_click and not empty:
 			double_clicked.emit(event.button_index, get_global_rect().position)

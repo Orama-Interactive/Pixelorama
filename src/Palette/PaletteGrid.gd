@@ -5,7 +5,6 @@ signal swatch_pressed(mouse_button: int, index: int)
 signal swatch_double_clicked(mouse_button: int, index: int, position: Vector2)
 signal swatch_dropped(source_index: int, target_index: int)
 
-const PALETTE_SWATCH_SCENE := preload("res://src/Palette/PaletteSwatch.tscn")
 const DEFAULT_SWATCH_SIZE := Vector2(26, 26)
 const MIN_SWATCH_SIZE := Vector2(8, 8)
 const MAX_SWATCH_SIZE := Vector2(64, 64)
@@ -32,7 +31,7 @@ func setup_swatches() -> void:
 	columns = maxi(1, grid_size.x)  # Columns cannot be 0
 	if grid_size.x * grid_size.y > swatches.size():
 		for i in range(swatches.size(), grid_size.x * grid_size.y):
-			var swatch := PALETTE_SWATCH_SCENE.instantiate() as PaletteSwatch
+			var swatch := PaletteSwatch.new()
 			swatch.index = i
 			init_swatch(swatch)
 			swatch.pressed.connect(_on_PaletteSwatch_pressed.bind(i))

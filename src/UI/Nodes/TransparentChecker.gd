@@ -1,4 +1,16 @@
+@tool
+class_name TransparentChecker
 extends ColorRect
+
+const TRANSPARENT_CHECKER := preload("uid://c50kmfvf635kb")
+
+
+func _init() -> void:
+	material = ShaderMaterial.new()
+	material.shader = TRANSPARENT_CHECKER
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layout_direction = Control.LAYOUT_DIRECTION_LTR
+	resized.connect(_on_resized)
 
 
 func _ready() -> void:
@@ -6,6 +18,8 @@ func _ready() -> void:
 
 
 func update_rect() -> void:
+	if Engine.is_editor_hint():
+		return
 	if not get_parent() is Control:
 		# Set the size to be the same as the project size if the parent is a SubViewport
 		set_bounds(Global.current_project.size)
@@ -25,7 +39,7 @@ func update_offset(offset: Vector2, canvas_scale: Vector2) -> void:
 	set_instance_shader_parameter(&"scale", canvas_scale)
 
 
-func _on_TransparentChecker_resized() -> void:
+func _on_resized() -> void:
 	set_instance_shader_parameter(&"rect_size", size)
 
 
