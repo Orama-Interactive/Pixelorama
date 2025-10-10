@@ -694,6 +694,8 @@ func fill_imported_palette_with_colors(
 		width = Palette.DEFAULT_WIDTH
 	width = clampi(width, 1, MAX_IMPORT_PAL_WIDTH)
 	var height := ceili(colors.size() / float(width))
+	if height == 1:
+		width = colors.size()
 	var result := Palette.new(palette_name, width, height, comment)
 	for color in colors:
 		result.add_color(color)
