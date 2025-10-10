@@ -173,7 +173,6 @@ func fit_to_frame(size: Vector2) -> void:
 func update_transparent_checker_offset() -> void:
 	var o := get_global_transform_with_canvas().get_origin()
 	var s := get_global_transform_with_canvas().get_scale()
-	o.y = get_viewport_rect().size.y - o.y
 	transparent_checker.update_offset(o, s)
 
 
