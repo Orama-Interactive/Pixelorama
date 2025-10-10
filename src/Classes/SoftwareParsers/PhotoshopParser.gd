@@ -220,7 +220,8 @@ static func open_photoshop_file(path: String) -> void:
 
 		# Next: Pascal string (layer name)
 		var name_length := psd_file.get_8()
-		@warning_ignore("integer_division") var padded_length := (((name_length + 4) / 4) * 4) - 1
+		@warning_ignore("integer_division")
+		var padded_length := (((name_length + 4) / 4) * 4) - 1
 		layer.name = psd_file.get_buffer(padded_length).get_string_from_utf8()
 
 		# Remaining: Additional Layer Information blocks
