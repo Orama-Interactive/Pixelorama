@@ -34,6 +34,7 @@ func _ready() -> void:
 	var transparent_checker := TransparentChecker.new()
 	transparent_checker.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	transparent_checker.show_behind_parent = true
+	transparent_checker.visible = not is_equal_approx(color.a, 1.0)
 	add_child(transparent_checker)
 
 
@@ -41,6 +42,12 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED:
 		if empty:
 			empty = true
+
+
+func set_swatch_color(new_color: Color) -> void:
+	color = new_color
+	if get_child_count() > 0:
+		get_child(0).visible = not is_equal_approx(color.a, 1.0)
 
 
 func set_swatch_size(swatch_size: Vector2) -> void:

@@ -51,7 +51,7 @@ func setup_swatches() -> void:
 
 
 func init_swatch(swatch: PaletteSwatch) -> void:
-	swatch.color = PaletteSwatch.DEFAULT_COLOR
+	swatch.set_swatch_color(PaletteSwatch.DEFAULT_COLOR)
 	swatch.show_left_highlight = false
 	swatch.show_right_highlight = false
 	swatch.empty = true
@@ -69,10 +69,10 @@ func draw_palette() -> void:
 			swatch.show_right_highlight = Palettes.right_selected_color == index
 			var color = current_palette.get_color(index)
 			if color != null:
-				swatch.color = color
+				swatch.set_swatch_color(color)
 				swatch.empty = false
 			else:
-				swatch.color = PaletteSwatch.DEFAULT_COLOR
+				swatch.set_swatch_color(PaletteSwatch.DEFAULT_COLOR)
 				swatch.empty = true
 
 
@@ -151,7 +151,7 @@ func unselect_swatch(mouse_button: int, palette_index: int) -> void:
 func set_swatch_color(palette_index: int, color: Color) -> void:
 	var index := convert_palette_index_to_grid_index(palette_index)
 	if index >= 0 and index < swatches.size():
-		swatches[index].color = color
+		swatches[index].set_swatch_color(color)
 
 
 func get_swatch_color(palette_index: int) -> Color:
