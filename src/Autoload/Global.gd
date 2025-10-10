@@ -89,6 +89,7 @@ enum HelpMenu {
 const LANGUAGES_DICT := {
 	"en_US": ["English", "English"],
 	"cs_CZ": ["Czech", "Czech"],
+	"ar_SA": ["Arabic", "Arabic"],
 	"da_DK": ["Dansk", "Danish"],
 	"de_DE": ["Deutsch", "German"],
 	"el_GR": ["Ελληνικά", "Greek"],
