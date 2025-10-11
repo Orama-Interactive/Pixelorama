@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-10-03 12:22\n"
+"PO-Revision-Date: 2025-10-08 22:37\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2476,14 +2476,24 @@ msgstr "Κατοπτρισμός"
 msgid "Horizontal"
 msgstr "Οριζόντια"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό"
 
 msgid "Vertical"
 msgstr "Κάθετα"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
