@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-10-11 16:46\n"
+"PO-Revision-Date: 2025-10-11 18:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1981,7 +1981,7 @@ msgstr "Rahmenfarbe 2:"
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "Transformationsvorschau-Alpha:"
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
@@ -2302,7 +2302,7 @@ msgstr "Ganze Auswahl"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Füllen Sie Regionen aus dem Zusammenführen aller Ebenen"
 
 msgid "Fill with:"
 msgstr "Füllen mit:"
@@ -2448,25 +2448,25 @@ msgstr "Graustufen"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Kantenfarbe"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Werkzeugfarbe"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Angepasster Durchschnitt"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Am Interface mischen"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Linke Seite"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Rechte Seite"
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -3185,7 +3185,7 @@ msgid "Ellipse Tool"
 msgstr "Ellipse-Werkzeug"
 
 msgid "Isometric Box Tool"
-msgstr ""
+msgstr "Isometrische Box Werkzeug"
 
 msgid "Switch Colors"
 msgstr "Wechsle Farben"
@@ -3299,7 +3299,7 @@ msgid "Discard All"
 msgstr "Alle verwerfen"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "Pixelorama wurde beim letzten Mal nicht richtig geschlossen. Möchten Sie eine vorherige Sitzung wiederherstellen?"
 
 msgid "Backup reloaded"
 msgstr "Backup neu geladen"
@@ -3350,7 +3350,7 @@ msgstr "Neue Palette erstellen"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "Neue Projektpalette erstellen"
 
 msgid "Comment:"
 msgstr "Kommentar:"
