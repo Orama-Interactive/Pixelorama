@@ -170,6 +170,31 @@ some useful [SYSTEM OPTIONS] are:
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
 
+	static func export_current_theme(_project: Project, _next_arg: String) -> void:
+		var export_theme: Theme = Global.control.theme.duplicate(true)
+		if export_theme:
+			var icon_type_list := export_theme.get_icon_type_list()
+			if icon_type_list.size() > 0:
+				print("The following trxtures need to be re-assigned:")
+				for type_name: String in icon_type_list:
+					var icon_list = export_theme.get_icon_list(type_name)
+					if icon_list.size() > 0:
+						print("====== In type: %s" % type_name)
+						for icon_name in icon_list:
+							print(icon_name)
+							export_theme.clear_icon(icon_name, type_name)
+			var font_type_list := export_theme.get_font_type_list()
+			if font_type_list.size() > 0:
+				print("The following trxtures need to be re-assigned:")
+				for type_name: String in font_type_list:
+					var font_list = export_theme.get_icon_list(type_name)
+					if font_list.size() > 0:
+						print("====== In type: %s" % type_name)
+						for font_name in font_list:
+							print(font_name)
+							export_theme.clear_font(font_name, type_name)
+			ResourceSaver.save(export_theme)
+
 	static func dummy(_project: Project, _next_arg: String) -> void:
 		pass
 
@@ -220,6 +245,7 @@ func _ready() -> void:
 	_setup_application_window_size()
 	_show_splash_screen()
 	Global.pixelorama_opened.emit()
+	#CLI.export_current_theme(null, "")
 
 
 func _input(event: InputEvent) -> void:

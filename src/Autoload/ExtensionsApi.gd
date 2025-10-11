@@ -385,6 +385,17 @@ class ThemeAPI:
 	func autoload() -> Themes:
 		return Themes
 
+	## Returns the current theme resource.
+	func change_theme_main_colors(color_1: Color, color_2: Color):
+		var theme := Global.control.theme
+		var panel_stylebox: StyleBox = theme.get_stylebox("panel", "Panel")
+		var panel_container_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
+		if panel_stylebox is StyleBoxFlat and panel_container_stylebox is StyleBoxFlat:
+			panel_stylebox.bg_color = color_1
+			panel_container_stylebox.bg_color = color_2
+			theme.set_stylebox("panel", "Panel", panel_stylebox)
+			theme.set_stylebox("panel", "PanelContainer", panel_container_stylebox)
+
 	## Adds the [param theme] to [code]Edit -> Preferences -> Interface -> Themes[/code].
 	func add_theme(theme: Theme) -> void:
 		Themes.add_theme(theme)
@@ -739,6 +750,7 @@ class ExportAPI:
 		tab := ExportTab.IMAGE,
 		is_animated := true
 	) -> int:
+		print(format_info)
 		# Separate enum name and file name
 		var extension := ""
 		var format_name := ""
