@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-10-08 22:37\n"
+"PO-Revision-Date: 2025-10-11 16:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -805,15 +805,15 @@ msgstr "Aseprite Projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Krita-Projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Piskel-Projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Photoshop-Projekt"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -1318,27 +1318,27 @@ msgstr "Problemverfolger"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "Backup wiederherstellen"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "Vergangene Sitzungen"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "Doppelklicken um eine ganze Sitzung oder ein bestimmtes Projekt zu laden."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
-msgstr ""
+msgstr "Sitzungen"
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "Projekte"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "(Aktuelle Sitzung)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
@@ -1720,7 +1720,14 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "Isometrische Box Werkzeug\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"Zeichnet ein isometrisches Feld\n"
+"Drücke %s/%s, um einen Basispunkt\n"
+"Halte %s gedrückt, um den Winkel des Basispunktes einrasten zu lassen\n"
+"Halte %s gedrückt, um den Ursprung der Form zu verschieben\n"
+"Drücke %s, um die zuletzt hinzugefügte Basis zu bearbeiten"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -2480,11 +2487,11 @@ msgstr "Aktiviere vertikal gespiegelte Zeichnung"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Aktiviere diagonal gespiegelte (↗) Zeichnung"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Aktiviere diagonal gespiegelte (↘) Zeichnung"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
