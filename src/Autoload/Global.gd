@@ -18,6 +18,8 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
+@warning_ignore("unused_signal")
+signal on_cursor_position_text_changed(text: String)
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
@@ -87,6 +89,7 @@ enum HelpMenu {
 const LANGUAGES_DICT := {
 	"en_US": ["English", "English"],
 	"cs_CZ": ["Czech", "Czech"],
+	"ar_SA": ["Arabic", "Arabic"],
 	"da_DK": ["Dansk", "Danish"],
 	"de_DE": ["Deutsch", "German"],
 	"el_GR": ["Ελληνικά", "Greek"],
@@ -121,6 +124,8 @@ const HOME_SUBDIR_NAME := "pixelorama"
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
 ## The path of the directory where the UI layouts are being stored.
 const LAYOUT_DIR := "user://layouts"
+## The path of the ditectory where users can load custom fonts.
+const FONTS_DIR_PATH := "user://fonts"
 
 ## It is path to the executable's base drectory.
 var root_directory := "."
@@ -154,8 +159,8 @@ var current_project_index := 0:
 		if value >= projects.size():
 			return
 		canvas.selection.transform_content_confirm()
-		current_project_index = value
 		project_about_to_switch.emit()
+		current_project_index = value
 		current_project = projects[value]
 		project_switched.connect(current_project.change_project)
 		project_switched.emit()
@@ -639,10 +644,10 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var perspective_editor := control.find_child("Perspective Editor")
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
-## The label indicating cursor position.
-@onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
+## The palette panel. It has the [param PalettePanel.gd] script attached.
+@onready var palette_panel: PalettePanel = control.find_child("Palettes")
 ## The container of frame buttons
 @onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
 ## The container of layer buttons
@@ -767,6 +772,13 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	if DirAccess.dir_exists_absolute(FONTS_DIR_PATH):
+		var fonts_dir := DirAccess.open(FONTS_DIR_PATH)
+		var files := fonts_dir.get_files()
+		for file in files:
+			var font_file := OpenSave.open_font_file(FONTS_DIR_PATH.path_join(file))
+			if not font_file.data.is_empty():
+				loaded_fonts.append(font_file)
 	# Initialize Grid
 	Grid.new()  # gets auto added to grids array
 	_initialize_keychain()
@@ -892,6 +904,8 @@ func _initialize_keychain() -> void:
 		&"switch_colors": Keychain.InputAction.new("", "Global tool options"),
 		&"horizontal_mirror": Keychain.InputAction.new("", "Global tool options"),
 		&"vertical_mirror": Keychain.InputAction.new("", "Global tool options"),
+		&"diagonal_xy_mirror": Keychain.InputAction.new("", "Global tool options"),
+		&"diagonal_x_minus_y_mirror": Keychain.InputAction.new("", "Global tool options"),
 		&"pixel_perfect": Keychain.InputAction.new("", "Global tool options"),
 		&"alpha_lock": Keychain.InputAction.new("", "Global tool options"),
 		&"new_layer": Keychain.InputAction.new("", "Timeline"),
@@ -1000,15 +1014,12 @@ func notification_label(text: String) -> void:
 
 ## Performs the general, bare minimum stuff needed after an undo is done.
 func general_undo(project := current_project) -> void:
-	project.undos -= 1
 	var action_name := project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
 ## Performs the general, bare minimum stuff needed after a redo is done.
 func general_redo(project := current_project) -> void:
-	if project.undos < project.undo_redo.get_version():  # If we did undo and then redo
-		project.undos = project.undo_redo.get_version()
 	if control.redone:
 		var action_name := project.undo_redo.get_current_action_name()
 		notification_label("Redo: %s" % action_name)
@@ -1066,7 +1077,6 @@ func undo_or_redo(
 			canvas.grid.queue_redraw()
 			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()
-			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()

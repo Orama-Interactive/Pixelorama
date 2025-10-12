@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://be14ffwmcp5xy"]
+[gd_scene load_steps=6 format=3 uid="uid://be14ffwmcp5xy"]
 
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="1_evt0j"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1_pm12o"]
 [ext_resource type="Script" uid="uid://bt8qvbe6t6qjo" path="res://src/UI/Nodes/NoiseGenerator.gd" id="1_uxdt4"]
 [ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="2_nxkb0"]
 [ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/Sliders/ValueSliderV3.tscn" id="3_ffklk"]
-[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_r1f12"]
 
 [node name="NoiseGenerator" type="ScrollContainer"]
 anchors_preset = 15
@@ -131,6 +130,7 @@ mouse_default_cursor_shape = 2
 selected = 1
 item_count = 6
 popup/item_0/text = "Simplex"
+popup/item_0/id = 0
 popup/item_1/text = "Simplex Smooth"
 popup/item_1/id = 1
 popup/item_2/text = "Cellural"
@@ -202,11 +202,11 @@ min_value = Vector3(-1000, -1000, -1000)
 max_value = Vector3(1000, 1000, 1000)
 grid_columns = 3
 
-[node name="FractalOptions" type="VBoxContainer" parent="VSplitContainer/VBoxContainer"]
+[node name="FractalOptions" type="FoldableContainer" parent="VSplitContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("4_r1f12")
-text = "Fractal"
+folded = true
+title = "Fractal"
 
 [node name="GridContainer" type="GridContainer" parent="VSplitContainer/VBoxContainer/FractalOptions"]
 visible = false
@@ -226,6 +226,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 4
 popup/item_0/text = "None"
+popup/item_0/id = 0
 popup/item_1/text = "FBM"
 popup/item_1/id = 1
 popup/item_2/text = "Ridged"
@@ -327,11 +328,11 @@ stretch_margin_bottom = 3
 script = ExtResource("1_pm12o")
 snap_step = 0.1
 
-[node name="DomainWarpOptions" type="VBoxContainer" parent="VSplitContainer/VBoxContainer"]
+[node name="DomainWarpOptions" type="FoldableContainer" parent="VSplitContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("4_r1f12")
-text = "Domain Warp"
+folded = true
+title = "Domain Warp"
 
 [node name="GridContainer" type="GridContainer" parent="VSplitContainer/VBoxContainer/DomainWarpOptions"]
 visible = false
@@ -362,6 +363,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Simplex"
+popup/item_0/id = 0
 popup/item_1/text = "Simplex Reduced"
 popup/item_1/id = 1
 popup/item_2/text = "Basic Grid"
@@ -404,7 +406,7 @@ theme_type_variation = &"ValueSlider"
 min_value = -20.0
 max_value = 20.0
 step = 0.001
-value = 0.05
+value = 0.05000000000000071
 allow_greater = true
 allow_lesser = true
 nine_patch_stretch = true
@@ -428,6 +430,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "None"
+popup/item_0/id = 0
 popup/item_1/text = "Progressive"
 popup/item_1/id = 1
 popup/item_2/text = "Independent"

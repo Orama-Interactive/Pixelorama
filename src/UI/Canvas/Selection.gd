@@ -110,7 +110,7 @@ func transform_content_confirm() -> void:
 			src.copy_from(cel.transformed_content)
 			cel.transformed_content = null
 		var transformation_origin := transformation_handles.get_transform_top_left(src.get_size())
-		if Tools.is_placing_tiles():
+		if Tools.is_placing_tiles() and not is_pasting:
 			if cel is not CelTileMap:
 				continue
 			var tilemap := cel as CelTileMap
@@ -149,7 +149,7 @@ func transform_content_cancel() -> void:
 	project.selection_map_changed()
 	for cel in get_selected_draw_cels():
 		var cel_image := cel.get_image()
-		if !is_pasting:
+		if !is_pasting and cel.transformed_content:
 			cel_image.blit_rect_mask(
 				cel.transformed_content,
 				cel.transformed_content,
@@ -170,14 +170,13 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 		print("No undo data found!")
 		return
 	var project := Global.current_project
-	if Tools.is_placing_tiles():
+	if Tools.is_placing_tiles() and not is_pasting:
 		for cel in undo_data_tmp:
 			if cel is CelTileMap:
 				(cel as CelTileMap).re_index_all_cells(true)
 	else:
 		project.update_tilemaps(undo_data_tmp, TileSetPanel.TileEditingMode.AUTO)
 	var redo_data := get_undo_data(undo_data_tmp["undo_image"])
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, undo_data_tmp)
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
@@ -373,19 +372,51 @@ func paste(in_place := false) -> void:
 		if Tools.is_placing_tiles():
 			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 			var grid_size := tilemap_cel.get_tile_size()
+			var offset := tilemap_cel.offset % grid_size
 			transform_origin = Vector2i(
-				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size)
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, offset)
+			)
+		elif Global.snap_to_rectangular_grid_center:
+			var grid_size := Global.grids[0].grid_size
+			var grid_offset := Global.grids[0].grid_offset
+			transform_origin = Vector2i(
+				Tools.snap_to_rectangular_grid_center(transform_origin, grid_size, grid_offset)
+			)
+		elif Global.snap_to_rectangular_grid_boundary:
+			var grid_size := Global.grids[0].grid_size
+			var grid_offset := Global.grids[0].grid_offset
+			transform_origin = Vector2i(
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, grid_offset)
 			)
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 	else:
 		if Tools.is_placing_tiles():
 			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 			var grid_size := tilemap_cel.get_tile_size()
+			var offset := tilemap_cel.offset % grid_size
 			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
-				project.selection_offset, grid_size
+				project.selection_offset, grid_size, offset
 			)
 			transform_origin = Vector2i(
-				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size)
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, offset)
+			)
+		elif Global.snap_to_rectangular_grid_center:
+			var grid_size := Global.grids[0].grid_size
+			var grid_offset := Global.grids[0].grid_offset
+			project.selection_offset = Tools.snap_to_rectangular_grid_center(
+				project.selection_offset, grid_size, grid_offset
+			)
+			transform_origin = Vector2i(
+				Tools.snap_to_rectangular_grid_center(transform_origin, grid_size, grid_offset)
+			)
+		elif Global.snap_to_rectangular_grid_boundary:
+			var grid_size := Global.grids[0].grid_size
+			var grid_offset := Global.grids[0].grid_offset
+			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
+				project.selection_offset, grid_size, grid_offset
+			)
+			transform_origin = Vector2i(
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, grid_offset)
 			)
 
 	is_pasting = true

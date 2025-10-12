@@ -52,7 +52,7 @@ func _ready() -> void:
 
 func find_cel() -> bool:
 	var project := Global.current_project
-	return cel == project.frames[project.current_frame].cels[project.current_layer]
+	return cel == project.get_current_cel()
 
 
 func serialize() -> Dictionary:

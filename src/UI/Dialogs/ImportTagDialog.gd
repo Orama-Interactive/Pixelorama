@@ -101,7 +101,6 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 	var copied_indices: PackedInt32Array = range(
 		destination + 1, (destination + 1) + indices.size()
 	)
-	project.undos += 1
 	project.undo_redo.create_action("Import Tag")
 	# Step 1: calculate layers to generate
 	var layer_to_names := PackedStringArray()  # names of currently existing layers
@@ -186,21 +185,10 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 				var from = layer_from_to.find_key(to)
 				# Cel we're copying from, the source
 				var src_cel: BaseCel = from_project.frames[f].cels[from]
-				var selected_id := -1
+				new_cel = src_cel.duplicate_cel()
 				if src_cel is Cel3D:
-					new_cel = src_cel.get_script().new(
-						project.size, false, src_cel.object_properties, src_cel.scene_properties
-					)
-					if src_cel.selected != null:
-						selected_id = src_cel.selected.id
+					new_cel.size_changed(project.size)
 				elif src_cel is CelTileMap:
-					new_cel = CelTileMap.new(src_cel.tileset)
-					new_cel.offset = src_cel.offset
-					new_cel.place_only_mode = src_cel.place_only_mode
-					new_cel.tile_size = src_cel.tile_size
-					new_cel.tile_shape = src_cel.tile_shape
-					new_cel.tile_layout = src_cel.tile_layout
-					new_cel.tile_offset_axis = src_cel.tile_offset_axis
 					var copied_content := src_cel.copy_content() as Array
 					var src_img: ImageExtended = copied_content[0]
 					var empty := project.new_empty_image()
@@ -210,7 +198,6 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 					new_cel.set_content([copy, copied_content[1]])
 					new_cel.set_indexed_mode(project.is_indexed())
 				else:
-					new_cel = src_cel.get_script().new()
 					# Add more types here if they have a copy_content() method.
 					if src_cel is PixelCel:
 						var src_img: ImageExtended = src_cel.copy_content()
@@ -222,15 +209,7 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 						)
 						new_cel.set_content(copy)
 						new_cel.set_indexed_mode(project.is_indexed())
-					new_cel.opacity = src_cel.opacity
-					new_cel.z_index = src_cel.z_index
-					new_cel.user_data = src_cel.user_data
-					new_cel.ui_color = src_cel.ui_color
 
-					if new_cel is Cel3D:
-						if selected_id in new_cel.object_properties.keys():
-							if selected_id != -1:
-								new_cel.selected = new_cel.get_object_from_id(selected_id)
 			else:
 				new_cel = combined_copy[to].new_empty_cel()
 			new_frame.cels.append(new_cel)

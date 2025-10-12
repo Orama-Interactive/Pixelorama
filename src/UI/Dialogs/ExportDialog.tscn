@@ -1,15 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://clgu8wb5o6oup"]
+[gd_scene load_steps=4 format=3 uid="uid://clgu8wb5o6oup"]
 
 [ext_resource type="Script" uid="uid://cdgury33i7cuo" path="res://src/UI/Dialogs/ExportDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
-[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4"]
 
 [node name="ExportDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
 title = "Export..."
 position = Vector2i(0, 36)
-size = Vector2i(700, 600)
+size = Vector2i(700, 626)
 dialog_hide_on_ok = false
 script = ExtResource("1")
 
@@ -18,7 +18,7 @@ custom_minimum_size = Vector2(330, 0)
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 692.0
-offset_bottom = 551.0
+offset_bottom = 577.0
 size_flags_vertical = 3
 
 [node name="TabBar" type="TabBar" parent="VBoxContainer"]
@@ -256,11 +256,11 @@ mouse_default_cursor_shape = 2
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="AdvancedOptions" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+[node name="AdvancedOptions" type="FoldableContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("3")
-text = "Advanced options"
+folded = true
+title = "Advanced options"
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions"]
 visible = false

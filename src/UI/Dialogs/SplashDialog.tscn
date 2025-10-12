@@ -1,12 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnpb1aip3wdvw"]
+[gd_scene load_steps=19 format=3 uid="uid://bnpb1aip3wdvw"]
 
 [ext_resource type="Script" uid="uid://qtjfdid13awe" path="res://src/UI/Dialogs/SplashDialog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://dywk5yd41twch" path="res://assets/graphics/splash_screen/version.png" id="5"]
+[ext_resource type="FontFile" uid="uid://cvc4lelf6hl7x" path="res://assets/fonts/Roboto-Regular.ttf" id="5_rbw0r"]
 [ext_resource type="Texture2D" uid="uid://du0tqirgve32c" path="res://assets/graphics/splash_screen/discord.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://bnhuqq1ucdlw2" path="res://assets/graphics/splash_screen/github_32px.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://c587jfnyu84ro" path="res://assets/graphics/splash_screen/patreon_mark_white.png" id="11"]
+
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="5"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -14,19 +18,35 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="4"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="2"]
-bg_color = Color(1, 1, 1, 0)
-
 [sub_resource type="StyleBoxFlat" id="3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rbw0r"]
+
+[sub_resource type="FontVariation" id="FontVariation_jexkq"]
+base_font = ExtResource("5_rbw0r")
+variation_embolden = 0.6
+
+[sub_resource type="LabelSettings" id="LabelSettings_ehexy"]
+font = SubResource("FontVariation_jexkq")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_rbw0r"]
+line_spacing = 0.0
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_uckow"]
+line_spacing = 0.0
+font = SubResource("FontVariation_jexkq")
 
 [sub_resource type="LabelSettings" id="LabelSettings_32icc"]
 font_size = 12
 
 [node name="SplashDialog" type="AcceptDialog"]
 canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
 position = Vector2i(0, 36)
-size = Vector2i(602, 650)
+size = Vector2i(758, 650)
 script = ExtResource("1")
 
 [node name="Contents" type="VBoxContainer" parent="."]
@@ -47,6 +67,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" groups=["UIButtons"]]
+layout_direction = 2
 layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -55,10 +76,10 @@ offset_top = -10.0
 offset_right = 30.0
 offset_bottom = 10.0
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("5")
-theme_override_styles/hover = SubResource("4")
-theme_override_styles/pressed = SubResource("5")
 theme_override_styles/normal = SubResource("2")
+theme_override_styles/pressed = SubResource("5")
+theme_override_styles/hover = SubResource("4")
+theme_override_styles/focus = SubResource("5")
 
 [node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnLeft"]
 layout_mode = 0
@@ -75,6 +96,7 @@ expand_mode = 1
 flip_h = true
 
 [node name="ChangeArtBtnRight" type="Button" parent="Contents/SplashArt" groups=["UIButtons"]]
+layout_direction = 2
 layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
@@ -85,10 +107,10 @@ offset_top = -10.0
 offset_right = -5.0
 offset_bottom = 10.0
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("5")
-theme_override_styles/hover = SubResource("5")
-theme_override_styles/pressed = SubResource("5")
 theme_override_styles/normal = SubResource("3")
+theme_override_styles/pressed = SubResource("5")
+theme_override_styles/hover = SubResource("5")
+theme_override_styles/focus = SubResource("5")
 
 [node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnRight"]
 layout_mode = 0
@@ -153,93 +175,109 @@ mouse_default_cursor_shape = 2
 text = "Art by: %s"
 flat = true
 
-[node name="ButtonsPatronsLogos" type="HBoxContainer" parent="Contents"]
+[node name="MarginContainer" type="MarginContainer" parent="Contents"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="ButtonsPatronsLogos" type="HBoxContainer" parent="Contents/MarginContainer"]
 layout_mode = 2
 
-[node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos"]
-custom_minimum_size = Vector2(4, 0)
-layout_mode = 2
-
-[node name="Buttons" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos"]
+[node name="Buttons" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos"]
 custom_minimum_size = Vector2(290, 0)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="NewBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
+[node name="NewBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "New"
 
-[node name="OpenBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
+[node name="OpenBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Open"
 
-[node name="OpenLastBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
+[node name="OpenLastBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Open Last Project"
 
-[node name="Info" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos"]
+[node name="VSeparator" type="VSeparator" parent="Contents/MarginContainer/ButtonsPatronsLogos"]
+layout_mode = 2
+
+[node name="Info" type="HBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos/Info"]
+[node name="SpacerControl" type="Control" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="PatronContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
+[node name="PatronContainer" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PatronsLabel" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
+[node name="PlatinumSponsor" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer"]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
-size_flags_vertical = 8
-text = "Patrons:"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
+text = "Platinum Sponsor:"
+label_settings = SubResource("LabelSettings_ehexy")
 
-[node name="PatronsLabel2" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
+[node name="PlatinumSponsor2" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer"]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
-size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
+text = "Astropulse
+"
+label_settings = SubResource("LabelSettings_rbw0r")
+
+[node name="PatronsLabel" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
+text = "Patrons:"
+label_settings = SubResource("LabelSettings_uckow")
+
+[node name="PatronsLabel2" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
 text = "ShikadiGum
 Hugo Locurcio
 Tronexer"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Branding" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer"]
+[node name="Branding" type="HBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
 
-[node name="Links" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding"]
+[node name="Links" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding"]
 layout_mode = 2
 
-[node name="GithubButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
+[node name="GithubButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("10")
 
-[node name="DiscordButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
+[node name="DiscordButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9")
 
-[node name="PatreonButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
+[node name="PatreonButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("11")
-
-[node name="EmptySpacer" type="Control" parent="Contents/ButtonsPatronsLogos/Info"]
-custom_minimum_size = Vector2(4, 0)
-layout_mode = 2
 
 [node name="CopyrightLabel" type="Label" parent="Contents"]
 layout_mode = 2
@@ -270,10 +308,10 @@ text = "Don't show again"
 [connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnLeft" to="." method="_on_ChangeArtBtnLeft_pressed"]
 [connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnRight" to="." method="_on_ChangeArtBtnRight_pressed"]
 [connection signal="pressed" from="Contents/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn" to="." method="_on_OpenBtn_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/PatreonButton" to="." method="_on_PatreonButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/ButtonsPatronsLogos/Buttons/OpenBtn" to="." method="_on_OpenBtn_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/ButtonsPatronsLogos/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/PatreonButton" to="." method="_on_PatreonButton_pressed"]
 [connection signal="toggled" from="Contents/CopyrightLabel/HBoxContainer/ShowOnStartup" to="." method="_on_ShowOnStartup_toggled"]

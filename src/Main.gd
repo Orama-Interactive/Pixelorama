@@ -3,6 +3,7 @@ extends Control
 ## Needed because it is not possible to detect if a native file dialog is open or not.
 signal save_file_dialog_opened(opened: bool)
 
+const RUNNING_FILE_PATH := "user://.running"
 const SPLASH_DIALOG_SCENE_PATH := "res://src/UI/Dialogs/SplashDialog.tscn"
 
 var opensprite_file_selected := false
@@ -20,6 +21,7 @@ var splash_dialog: AcceptDialog:
 			add_child(splash_dialog)
 		return splash_dialog
 
+@onready var top_menu_container := $MenuAndUI/TopMenuContainer as Panel
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 ## Dialog used to open images and project (.pxo) files.
 @onready var open_sprite_dialog := $Dialogs/OpenSprite as FileDialog
@@ -29,6 +31,9 @@ var splash_dialog: AcceptDialog:
 @onready var tile_mode_offsets_dialog: ConfirmationDialog = $Dialogs/TileModeOffsetsDialog
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 @onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
+@onready var restore_session_confirmation_dialog := (
+	$Dialogs/RestoreSessionConfirmationDialog as ConfirmationDialog
+)
 @onready var download_confirmation := $Dialogs/DownloadImageConfirmationDialog as ConfirmationDialog
 @onready var left_cursor: Sprite2D = $LeftCursor
 @onready var right_cursor: Sprite2D = $RightCursor
@@ -50,7 +55,8 @@ class CLI:
 		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
 		["--json"]: [CLI.set_json, "Export the JSON data of the project"],
 		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
-		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"]
+		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"],
+		["--scene"]: [CLI.dummy, "Used internally by Godot."]
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
@@ -164,6 +170,9 @@ some useful [SYSTEM OPTIONS] are:
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
 
+	static func dummy(_project: Project, _next_arg: String) -> void:
+		pass
+
 
 func _init() -> void:
 	Global.project_switched.connect(_project_switched)
@@ -198,6 +207,15 @@ func _ready() -> void:
 		OS.request_permissions()
 	if Global.open_last_project:
 		load_last_project()
+
+	# Detect if Pixelorama crashed last time.
+	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
+	if crashed_last_time and OpenSave.had_backups_on_startup:
+		restore_session_confirmation_dialog.popup_centered()
+	# Create a file that only exists while Pixelorama is running,
+	# and delete it when it closes. If Pixelorama opens and this file exists,
+	# it means that Pixelorama crashed last time.
+	FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
 	await get_tree().process_frame
 	_setup_application_window_size()
 	_show_splash_screen()
@@ -352,6 +370,9 @@ func _handle_cmdline_arguments() -> void:
 		return
 	# Load the files first
 	for arg in args:
+		if arg.begins_with("lospec-palette://"):
+			Palettes.import_lospec_palette(arg)
+			break
 		var file_path := arg
 		# if we think the file could be a potential relative path it can mean two things:
 		# 1. The file is relative to executable
@@ -535,6 +556,10 @@ func _can_draw_true() -> void:
 	Global.dialog_open(false)
 
 
+func _on_restore_session_confirmation_dialog_confirmed() -> void:
+	$MenuAndUI/TopMenuContainer.backup_dialog.popup()
+
+
 func show_quit_dialog() -> void:
 	changed_projects_on_quit = []
 	for project in Global.projects:
@@ -593,6 +618,7 @@ func _quit() -> void:
 
 
 func _exit_tree() -> void:
+	DirAccess.remove_absolute(RUNNING_FILE_PATH)
 	for project in Global.projects:
 		project.remove()
 	if DisplayServer.get_name() == "headless":

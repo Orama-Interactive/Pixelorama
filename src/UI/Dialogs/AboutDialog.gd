@@ -140,6 +140,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Aden Pun (adenpun2000)": ["Chinese Traditional"],
 	"NoahsarkTaiwan": ["Chinese Traditional"],
 	"EarthlyEric (EarthlyEric6)": ["Chinese Traditional"],
+	"jy (jyIntrovert)": ["Chinese Traditional"],
 	"Chenxu Wang": ["Chinese Simplified"],
 	"Catherine Yang (qzcyyw13)": ["Chinese Simplified"],
 	"王晨旭 (wcxu21)": ["Chinese Simplified"],
@@ -225,6 +226,7 @@ const TRANSLATORS_DICTIONARY := {
 }
 
 const DONORS: PackedStringArray = [
+	"Astropulse",
 	"BasicIncomePlz",
 	"Benedikt",
 	"Hugo Locurcio",
@@ -232,6 +234,7 @@ const DONORS: PackedStringArray = [
 	"Jérôme P.",
 	"Jonas Rudlang",
 	"Mike King",
+	"Nappa9693",
 	"ShikadiGum",
 	"Ormanus",
 	"Tronexer",

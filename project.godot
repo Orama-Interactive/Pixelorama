@@ -12,12 +12,12 @@ config_version=5
 
 config/name="Pixelorama"
 config/description="Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features."
-config/version="v1.1.4-stable"
+config/version="v1.1.6-dev"
 config/tags=PackedStringArray("pixelorama")
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="pixelorama"
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.5")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.145098, 0.145098, 0.164706, 1)
 boot_splash/use_filter=false
@@ -25,7 +25,7 @@ boot_splash/image="res://assets/graphics/splash.png"
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/ExtensionsAPI_Version=6
+config/ExtensionsAPI_Version=7
 config/Pxo_Version=5
 
 [autoload]
@@ -1023,6 +1023,14 @@ layer_visibility={
 "events": []
 }
 layer_lock={
+"deadzone": 0.2,
+"events": []
+}
+diagonal_xy_mirror={
+"deadzone": 0.2,
+"events": []
+}
+diagonal_x_minus_y_mirror={
 "deadzone": 0.2,
 "events": []
 }

@@ -7,6 +7,7 @@ var line_color := Global.guide_color
 var mode := Global.MeasurementMode.NONE
 var apparent_width: float = WIDTH
 var rect_bounds: Rect2i
+var text_server := TextServerManager.get_primary_interface()
 
 @onready var canvas := get_parent() as Canvas
 
@@ -33,7 +34,7 @@ func _draw() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	apparent_width = WIDTH / Global.camera.zoom.x
+	apparent_width = WIDTH / get_viewport().canvas_transform.get_scale().x
 	if event.is_action_released(&"change_layer_automatically"):
 		update_measurement(Global.MeasurementMode.NONE)
 	elif event.is_action(&"change_layer_automatically"):
@@ -64,7 +65,7 @@ func _prepare_cel_rect() -> void:
 
 func _prepare_movement_rect() -> void:
 	var project := Global.current_project
-	if project.has_selection:
+	if project.has_selection and not Tools.is_placing_tiles():
 		rect_bounds = canvas.selection.preview_selection_map.get_used_rect()
 		rect_bounds.position = Vector2i(
 			canvas.selection.transformation_handles.preview_transform.origin
@@ -159,7 +160,11 @@ func _draw_move_measurement() -> void:
 			var offset := (point_b - point_a).normalized() * (boundary.size / 2.0)
 			draw_dashed_line(point_a + offset, point_b + offset, dashed_color, apparent_width)
 		draw_line(line[0], line[1], line_color, apparent_width)
+		var canvas_zoom := get_viewport().canvas_transform.get_scale()
+		var canvas_rotation := -get_viewport().canvas_transform.get_rotation()
 		var string_vec := line[0] + (line[1] - line[0]) / 2.0
-		draw_set_transform(Vector2.ZERO, Global.camera.rotation, Vector2.ONE / Global.camera.zoom)
-		draw_string(font, string_vec * Global.camera.zoom, str(line[0].distance_to(line[1]), "px"))
-		draw_set_transform(Vector2.ZERO, Global.camera.rotation, Vector2.ONE)
+		var string_pos := (string_vec * canvas_zoom).rotated(-canvas_rotation)
+		var string := text_server.format_number(str(line[0].distance_to(line[1]), "px"))
+		draw_set_transform(Vector2.ZERO, canvas_rotation, Vector2.ONE / canvas_zoom)
+		draw_string(font, string_pos, string)
+		draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)

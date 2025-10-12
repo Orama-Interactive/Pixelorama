@@ -788,6 +788,18 @@ msgstr ""
 msgid "Aseprite Project"
 msgstr ""
 
+#. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
+msgid "Krita Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
+msgid "Piskel Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
+msgid "Photoshop Project"
+msgstr ""
+
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
 msgstr ""
@@ -2377,13 +2389,23 @@ msgstr ""
 msgid "Horizontal"
 msgstr ""
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
 msgstr ""
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
 msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
@@ -3188,8 +3210,7 @@ msgstr ""
 msgid "Discard All"
 msgstr ""
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
 msgstr ""
 
 msgid "Backup reloaded"
@@ -3237,6 +3258,10 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
+msgstr ""
+
+#. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
+msgid "Create a new project palette"
 msgstr ""
 
 msgid "Comment:"

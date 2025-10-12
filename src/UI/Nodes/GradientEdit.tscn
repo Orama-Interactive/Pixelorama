@@ -43,6 +43,7 @@ selected = 0
 fit_to_longest_item = false
 item_count = 3
 popup/item_0/text = "Linear"
+popup/item_0/id = 0
 popup/item_1/text = "Constant"
 popup/item_1/id = 1
 popup/item_2/text = "Cubic"
@@ -58,6 +59,7 @@ selected = 0
 fit_to_longest_item = false
 item_count = 3
 popup/item_0/text = "sRGB"
+popup/item_0/id = 0
 popup/item_1/text = "Linear sRGB"
 popup/item_1/id = 1
 popup/item_2/text = "Oklab"
@@ -73,6 +75,7 @@ flat = false
 icon_alignment = 1
 item_count = 3
 popup/item_0/text = "Reverse"
+popup/item_0/id = 0
 popup/item_1/text = "Evenly distribute points"
 popup/item_1/id = 1
 popup/item_2/text = "Divide into equal parts"
@@ -106,6 +109,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(0, 30)
+layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 1
@@ -118,7 +122,7 @@ borderless = false
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 302.0
-offset_bottom = 580.0
+offset_bottom = 611.0
 
 [node name="DivideConfirmationDialog" type="ConfirmationDialog" parent="."]
 

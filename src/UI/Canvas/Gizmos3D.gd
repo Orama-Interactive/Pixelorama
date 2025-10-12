@@ -37,7 +37,6 @@ var gizmo_rot_z := PackedVector2Array()
 
 
 func _ready() -> void:
-	set_process_input(false)
 	Global.cel_switched.connect(_cel_switched)
 	Global.camera.zoom_changed.connect(queue_redraw)
 
@@ -74,8 +73,11 @@ func get_hovering_gizmo(pos: Vector2) -> int:
 
 
 func _cel_switched() -> void:
+	for object in points_per_object:
+		if not object.find_cel():
+			if object.selected:
+				object.deselect()
 	queue_redraw()
-	set_process_input(Global.current_project.get_current_cel() is Cel3D)
 
 
 func _find_selected_object() -> Cel3DObject:
@@ -188,10 +190,6 @@ func _draw() -> void:
 	if points_per_object.is_empty():
 		return
 	for object in points_per_object:
-		if not object.find_cel():
-			if object.selected:
-				object.deselect()
-			continue
 		var points: PackedVector2Array = points_per_object[object]
 		if points.is_empty():
 			continue

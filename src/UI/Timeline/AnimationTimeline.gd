@@ -45,7 +45,6 @@ var global_layer_lock := false
 var global_layer_expand := true
 
 @onready var animation_timer := $AnimationTimer as Timer
-@onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer.
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
@@ -339,7 +338,6 @@ func add_frame() -> void:
 	var project := Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame := project.new_empty_frame()
-	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
@@ -430,7 +428,6 @@ func delete_frames(indices: PackedInt32Array = []) -> void:
 				tag.to -= 1
 		frame_correction += 1  # Compensation for the next batch
 
-	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
 	project.undo_redo.add_do_method(project.remove_frames.bind(indices))
 	project.undo_redo.add_undo_method(project.add_frames.bind(frames, indices))
@@ -483,7 +480,6 @@ func copy_frames(
 	# as project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
 		new_animation_tags[i] = new_animation_tags[i].duplicate()
-	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	var last_focus_cels := []
 	for f in indices:
@@ -496,25 +492,7 @@ func copy_frames(
 			if [f, l] in project.selected_cels:
 				last_focus_cels.append([copied_indices[indices.find(f)], l])
 			var src_cel := project.frames[f].cels[l]  # Cel we're copying from, the source
-			var new_cel: BaseCel
-			var selected_id := -1
-			if src_cel is Cel3D:
-				new_cel = Cel3D.new(
-					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
-				)
-				if src_cel.selected != null:
-					selected_id = src_cel.selected.id
-			elif src_cel is CelTileMap:
-				new_cel = CelTileMap.new(src_cel.tileset)
-				new_cel.offset = src_cel.offset
-				new_cel.place_only_mode = src_cel.place_only_mode
-				new_cel.tile_size = src_cel.tile_size
-				new_cel.tile_shape = src_cel.tile_shape
-				new_cel.tile_layout = src_cel.tile_layout
-				new_cel.tile_offset_axis = src_cel.tile_offset_axis
-			else:
-				new_cel = src_cel.get_script().new()
-
+			var new_cel := src_cel.duplicate_cel()
 			if project.layers[l].new_cels_linked:
 				if src_cel.link_set == null:
 					src_cel.link_set = {}
@@ -528,15 +506,7 @@ func copy_frames(
 				new_cel.link_set = src_cel.link_set
 			else:
 				new_cel.set_content(src_cel.copy_content())
-			new_cel.opacity = src_cel.opacity
-			new_cel.z_index = src_cel.z_index
-			new_cel.user_data = src_cel.user_data
-			new_cel.ui_color = src_cel.ui_color
 
-			if new_cel is Cel3D:
-				if selected_id in new_cel.object_properties.keys():
-					if selected_id != -1:
-						new_cel.selected = new_cel.get_object_from_id(selected_id)
 			new_frame.cels.append(new_cel)
 
 		# After adding one frame, loop through the tags to see if the frame was in an animation tag
@@ -558,8 +528,8 @@ func copy_frames(
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	# Note: temporarily set the selected cels to an empty array (needed for undo/redo)
-	project.undo_redo.add_do_property(Global.current_project, "selected_cels", [])
-	project.undo_redo.add_undo_property(Global.current_project, "selected_cels", [])
+	project.undo_redo.add_do_property(project, "selected_cels", [])
+	project.undo_redo.add_undo_property(project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.add_frames.bind(copied_frames, copied_indices))
 	project.undo_redo.add_undo_method(project.remove_frames.bind(copied_indices))
 	if select_all_cels:
@@ -572,18 +542,16 @@ func copy_frames(
 		if frame_diff_sign == 0:
 			frame_diff_sign = 1
 		for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
-			for j in range(0, Global.current_project.layers.size()):
+			for j in range(0, project.layers.size()):
 				var frame_layer := [i, j]
 				if !all_new_cels.has(frame_layer):
 					all_new_cels.append(frame_layer)
-		project.undo_redo.add_do_property(Global.current_project, "selected_cels", all_new_cels)
+		project.undo_redo.add_do_property(project, "selected_cels", all_new_cels)
 		project.undo_redo.add_do_method(project.change_cel.bind(range_end))
 	else:
-		project.undo_redo.add_do_property(Global.current_project, "selected_cels", last_focus_cels)
+		project.undo_redo.add_do_property(project, "selected_cels", last_focus_cels)
 		project.undo_redo.add_do_method(project.change_cel.bind(copied_indices[0]))
-	project.undo_redo.add_undo_property(
-		Global.current_project, "selected_cels", project.selected_cels
-	)
+	project.undo_redo.add_undo_property(project, "selected_cels", project.selected_cels)
 	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
@@ -970,7 +938,6 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 		# Set the parent of layer to be the same as the layer below it.
 		layer.parent = project.layers[project.current_layer].parent
 
-	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
 	project.undo_redo.add_do_method(project.add_layers.bind([layer], [new_layer_idx], [cels]))
 	project.undo_redo.add_undo_method(project.remove_layers.bind([new_layer_idx]))
@@ -1014,21 +981,7 @@ func _on_CloneLayer_pressed() -> void:
 
 		for frame in project.frames:
 			var src_cel := frame.cels[src_layer.index]
-			var new_cel: BaseCel
-			if src_cel is Cel3D:
-				new_cel = Cel3D.new(
-					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
-				)
-			elif src_cel is CelTileMap:
-				new_cel = CelTileMap.new(src_cel.tileset)
-				new_cel.offset = src_cel.offset
-				new_cel.place_only_mode = src_cel.place_only_mode
-				new_cel.tile_size = src_cel.tile_size
-				new_cel.tile_shape = src_cel.tile_shape
-				new_cel.tile_layout = src_cel.tile_layout
-				new_cel.tile_offset_axis = src_cel.tile_offset_axis
-			else:
-				new_cel = src_cel.get_script().new()
+			var new_cel := src_cel.duplicate_cel()
 
 			if src_cel.link_set == null:
 				new_cel.set_content(src_cel.copy_content())
@@ -1043,10 +996,6 @@ func _on_CloneLayer_pressed() -> void:
 					new_cel.set_content(src_cel.copy_content())
 				new_cel.link_set["cels"].append(new_cel)
 
-			new_cel.opacity = src_cel.opacity
-			new_cel.z_index = src_cel.z_index
-			new_cel.user_data = src_cel.user_data
-			new_cel.ui_color = src_cel.ui_color
 			cels[-1].append(new_cel)
 
 	for cl_layer in clones:
@@ -1060,7 +1009,6 @@ func _on_CloneLayer_pressed() -> void:
 		project.current_layer + 1, project.current_layer + clones.size() + 1
 	)
 
-	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
 	project.undo_redo.add_do_method(project.add_layers.bind(clones, indices, cels))
 	project.undo_redo.add_undo_method(project.remove_layers.bind(indices))
@@ -1078,19 +1026,26 @@ func _on_RemoveLayer_pressed() -> void:
 	if project.layers.size() == 1:
 		return
 
-	var layers := project.layers[project.current_layer].get_children(true)
-	layers.append(project.layers[project.current_layer])
 	var indices := PackedInt32Array()
-	for l in layers:
-		indices.append(l.index)
+	for cel in project.selected_cels:
+		var layer_index: int = cel[1]
+		var layer := project.layers[layer_index]
+		if not layer_index in indices:
+			var children := project.layers[layer_index].get_children(true)
+			for child in children:
+				if not child.index in indices:
+					indices.append(child.index)
+			indices.append(layer.index)
+	indices.sort()
 
+	var layers: Array[BaseLayer]
 	var cels := []
-	for l in layers:
+	for index in indices:
+		layers.append(project.layers[index])
 		cels.append([])
-		for f in project.frames:
-			cels[-1].append(f.cels[l.index])
+		for frame in project.frames:
+			cels[-1].append(frame.cels[index])
 
-	project.undos += 1
 	project.undo_redo.create_action("Remove Layer")
 	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
 	project.undo_redo.add_undo_method(project.add_layers.bind(layers, indices, cels))
@@ -1166,7 +1121,6 @@ func _on_MergeDownLayer_pressed() -> void:
 		return
 	var top_cels := []
 
-	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
 	for frame in project.frames:
 		var top_cel := frame.cels[top_layer.index]
@@ -1320,7 +1274,6 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 			new_layer.parent = bottom_layer.parent
 			break
 		bottom_layer = bottom_layer.parent
-	project.undos += 1
 	project.undo_redo.create_action("Flatten layers")
 	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
 	project.undo_redo.add_do_method(
@@ -1489,7 +1442,7 @@ func project_layer_added(layer: int) -> void:
 	var layer_button := project.layers[layer].instantiate_layer_button() as LayerButton
 	layer_button.layer_index = layer
 	if project.layers[layer].name == "":
-		project.layers[layer].set_name_to_default(Global.current_project.layers.size())
+		project.layers[layer].set_name_to_default(project.layers.size())
 
 	var cel_hbox := HBoxContainer.new()
 	cel_hbox.add_theme_constant_override("separation", 0)
@@ -1499,7 +1452,7 @@ func project_layer_added(layer: int) -> void:
 		cel_button.layer = layer
 		cel_hbox.add_child(cel_button)
 
-	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()
+	layer_button.visible = project.layers[layer].is_expanded_in_hierarchy()
 	cel_hbox.visible = layer_button.visible
 
 	Global.layer_vbox.add_child(layer_button)

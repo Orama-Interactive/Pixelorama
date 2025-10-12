@@ -7,8 +7,12 @@ signal shader_copied(file_path: String)
 
 const BACKUPS_DIRECTORY := "user://backups"
 const SHADERS_DIRECTORY := "user://shaders"
+const FONT_FILE_EXTENSIONS: PackedStringArray = [
+	"ttf", "otf", "woff", "woff2", "pfb", "pfm", "fnt", "font"
+]
 
 var current_session_backup := ""
+var had_backups_on_startup := false
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
 var preview_dialogs := []  ## Array of preview dialogs
 var last_dialog_option := 0
@@ -29,6 +33,8 @@ func _ready() -> void:
 	for session_folder in DirAccess.get_directories_at(BACKUPS_DIRECTORY):
 		if DirAccess.get_files_at(BACKUPS_DIRECTORY.path_join(session_folder)).size() == 0:
 			DirAccess.remove_absolute(BACKUPS_DIRECTORY.path_join(session_folder))
+	var backups := DirAccess.get_directories_at(OpenSave.BACKUPS_DIRECTORY)
+	had_backups_on_startup = backups.size() > 0
 	# Make folder for current session
 	var date_time: Dictionary = Time.get_datetime_dict_from_system()
 	var string_dict = {}
@@ -87,12 +93,25 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		shader_copied.emit(new_path)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
+	elif file_ext in FONT_FILE_EXTENSIONS:
+		var font_file := open_font_file(file)
+		if font_file.data.is_empty():
+			return
+		if not DirAccess.dir_exists_absolute(Global.FONTS_DIR_PATH):
+			DirAccess.make_dir_absolute(Global.FONTS_DIR_PATH)
+		var new_path := Global.FONTS_DIR_PATH.path_join(file.get_file())
+		DirAccess.copy_absolute(file, new_path)
+		Global.loaded_fonts.append(font_file)
 	elif file_ext == "ora":
 		open_ora_file(file)
+	elif file_ext == "kra":
+		KritaParser.open_kra_file(file)
 	elif file_ext == "ase" or file_ext == "aseprite":
 		AsepriteParser.open_aseprite_file(file)
 	elif file_ext == "psd":
 		PhotoshopParser.open_photoshop_file(file)
+	elif file_ext == "piskel":
+		open_piskel_file(file)
 	else:  # Image files
 		# Attempt to load as APNG.
 		# Note that the APNG importer will *only* succeed for *animated* PNGs.
@@ -462,6 +481,31 @@ func save_pxo_file(
 	zip_packer.write_file(to_save.to_utf8_buffer())
 	zip_packer.close_file()
 
+	zip_packer.start_file("mimetype")
+	zip_packer.write_file("image/pxo".to_utf8_buffer())
+	zip_packer.close_file()
+
+	var current_frame := project.frames[project.current_frame]
+	# Generate a preview image of the current frame.
+	# File managers can later use this as a thumbnail for pxo files.
+	var preview := project.new_empty_image()
+	DrawingAlgos.blend_layers(preview, current_frame, Vector2i.ZERO, project)
+	var new_width := preview.get_width()
+	var new_height := preview.get_height()
+	var aspect_ratio := float(new_width) / float(new_height)
+	if new_width > new_height:
+		new_width = 256
+		new_height = new_width / aspect_ratio
+	else:
+		new_height = 256
+		new_width = new_height * aspect_ratio
+	var scaled_preview := Image.new()
+	scaled_preview.copy_from(preview)
+	scaled_preview.resize(new_width, new_height, Image.INTERPOLATE_NEAREST)
+	zip_packer.start_file("preview.png")
+	zip_packer.write_file(scaled_preview.save_png_to_buffer())
+	zip_packer.close_file()
+
 	if not autosave:
 		project.save_path = path
 
@@ -469,7 +513,10 @@ func save_pxo_file(
 	for frame in project.frames:
 		if not autosave and include_blended:
 			var blended := project.new_empty_image()
-			DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
+			if frame == current_frame:
+				blended = preview
+			else:
+				DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
 			zip_packer.start_file("image_data/final_images/%s" % frame_index)
 			zip_packer.write_file(blended.get_data())
 			zip_packer.close_file()
@@ -555,8 +602,7 @@ func save_pxo_file(
 		)
 		project_saved.emit()
 		SteamManager.set_achievement("ACH_SAVE")
-
-	save_project_to_recent_list(path)
+		save_project_to_recent_list(path)
 	return true
 
 
@@ -635,7 +681,6 @@ func open_image_as_spritesheet_layer_smart(
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	# Initialize undo mechanism
-	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
 
 	# Create new frames (if needed)
@@ -716,7 +761,6 @@ func open_image_as_spritesheet_layer(
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	# Initialize undo mechanism
-	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
 
 	# Create new frames (if needed)
@@ -791,7 +835,6 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	var project_height := maxi(image.get_height(), project.size.y)
 	if project.size < Vector2i(project_width, project_height):
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
-	project.undos += 1
 	project.undo_redo.create_action("Replaced Cel")
 
 	var cel := project.frames[frame_index].cels[layer_index]
@@ -846,7 +889,6 @@ func open_image_as_new_frame(
 	if not undo:
 		project.frames.append(frame)
 		return
-	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(project.add_frames.bind([frame], [project.frames.size()]))
@@ -869,7 +911,6 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
 
-	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Layer")
 	for i in project.frames.size():
 		if i == frame_index:
@@ -938,7 +979,8 @@ func open_image_as_tileset(
 			var cropped_image := image.get_region(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
-			@warning_ignore("int_as_enum_without_cast") tileset.add_tile(cropped_image, null, 0)
+			@warning_ignore("int_as_enum_without_cast")
+			tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
 
 
@@ -963,7 +1005,8 @@ func open_image_as_tileset_smart(
 			tile_size.x, tile_size.y, false, project.get_image_format()
 		)
 		cropped_image.blit_rect(image, rect, offset)
-		@warning_ignore("int_as_enum_without_cast") tileset.add_tile(cropped_image, null, 0)
+		@warning_ignore("int_as_enum_without_cast")
+		tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
 
 
@@ -1008,6 +1051,15 @@ func open_audio_file(path: String) -> void:
 	var new_layer := AudioLayer.new(project, path.get_basename().get_file())
 	new_layer.audio = audio_stream
 	Global.animation_timeline.add_layer(new_layer, project)
+
+
+func open_font_file(path: String) -> FontFile:
+	var font_file := FontFile.new()
+	if path.to_lower().get_extension() == "fnt" or path.to_lower().get_extension() == "font":
+		font_file.load_bitmap_font(path)
+	else:
+		font_file.load_dynamic_font(path)
+	return font_file
 
 
 # Based on https://www.openraster.org/
@@ -1119,6 +1171,51 @@ func open_ora_file(path: String) -> void:
 	new_project.change_cel(0, new_project.layers.find(selected_layer))
 	new_project.save_path = path.get_basename() + ".pxo"
 	new_project.file_name = new_project.name
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+
+
+func open_piskel_file(path: String) -> void:
+	var file_json = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if typeof(file_json) != TYPE_DICTIONARY:
+		return
+	var piskel: Dictionary = file_json.piskel
+	var project_name: String = piskel.get("name", path.get_file().get_basename())
+	var new_project := Project.new([], project_name)
+	new_project.size = Vector2i(piskel.width, piskel.height)
+	new_project.fps = piskel.fps
+	new_project.save_path = path.get_basename() + ".pxo"
+	new_project.file_name = new_project.name
+	var n_of_frames := 0
+	for i in piskel.layers.size():
+		var piskel_layer_str = piskel.layers[i]
+		var piskel_layer: Dictionary = JSON.parse_string(piskel_layer_str)
+		var layer := PixelLayer.new(new_project, piskel_layer.name)
+		layer.opacity = piskel_layer.opacity
+		layer.index = i
+		if piskel_layer.frameCount > n_of_frames:
+			for j in range(n_of_frames, piskel_layer.frameCount):
+				var frame := Frame.new()
+				new_project.frames.append(frame)
+			n_of_frames = piskel_layer.frameCount
+		var layer_image: Image = null
+		for chunk in piskel_layer.chunks:
+			var chunk_image := Image.new()
+			var base64_str: String = chunk.base64PNG.trim_prefix("data:image/png;base64,")
+			chunk_image.load_png_from_buffer(Marshalls.base64_to_raw(base64_str))
+			if not is_instance_valid(layer_image):
+				layer_image = chunk_image
+			else:
+				var src_rect := Rect2i(Vector2i.ZERO, chunk_image.get_size())
+				layer_image.blend_rect(chunk_image, src_rect, Vector2i.ZERO)
+		for j in new_project.frames.size():
+			var region := Rect2i(Vector2i(j * new_project.size.x, 0), new_project.size)
+			var cel_image := layer_image.get_region(region)
+			var cel := layer.new_cel_from_image(cel_image)
+			new_project.frames[j].cels.append(cel)
+		new_project.layers.append(layer)
+	new_project.order_layers()
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()

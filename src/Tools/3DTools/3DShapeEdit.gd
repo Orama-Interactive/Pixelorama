@@ -28,8 +28,8 @@ var _object_names: Dictionary[Cel3DObject.Type, String] = {
 @onready var remove_object_button := $"%RemoveObject" as Button
 @onready var cel_options := $"%CelOptions" as Container
 @onready var object_options := $"%ObjectOptions" as Container
-@onready var mesh_options := $"%MeshOptions" as VBoxContainer
-@onready var light_options := $"%LightOptions" as VBoxContainer
+@onready var mesh_options := $"%MeshOptions" as FoldableContainer
+@onready var light_options := $"%LightOptions" as FoldableContainer
 @onready var undo_redo_timer := $UndoRedoTimer as Timer
 @onready var load_model_dialog := $LoadModelDialog as FileDialog
 
@@ -229,7 +229,7 @@ func _cel_switched() -> void:
 		return
 	get_child(0).visible = true
 	_cel = Global.current_project.get_current_cel()
-	var selected = _cel.selected
+	var selected := _cel.selected
 	_cel.selected = null
 	if not _cel.scene_property_changed.is_connected(_set_cel_node_values):
 		_cel.scene_property_changed.connect(_set_cel_node_values)
@@ -240,11 +240,8 @@ func _cel_switched() -> void:
 	_set_cel_node_values()
 	_fill_object_option_button()
 	sprite_changed_this_frame()
-
-	# Two awaits are required
-	await get_tree().process_frame
-	await get_tree().process_frame
-	_cel.selected = selected
+	if is_instance_valid(selected):
+		_cel.selected = selected
 
 
 func _new_object_popup_id_pressed(id: int) -> void:

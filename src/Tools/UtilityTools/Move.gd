@@ -27,6 +27,11 @@ func draw_start(pos: Vector2i) -> void:
 	_offset = pos
 	_undo_data = _get_undo_data()
 	if Tools.is_placing_tiles():
+		# Clear selection if it it present (i tried moving the selection proview only but the)
+		# code for it gets too complex so i chose to clear it instead
+		if project.has_selection:
+			Global.canvas.selection.clear_selection(true)
+			project.selection_map_changed()
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
@@ -152,7 +157,6 @@ func _commit_undo(action: String) -> void:
 		if project.get_current_cel() is not GroupCel:
 			layer = project.current_layer
 
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	if Tools.is_placing_tiles():

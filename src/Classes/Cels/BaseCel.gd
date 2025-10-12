@@ -83,6 +83,11 @@ func get_image() -> Image:
 	return null
 
 
+## Returns a copy of the cel.
+func duplicate_cel() -> BaseCel:
+	return get_script().new()
+
+
 ## Used to update the texture of the cel.
 func update_texture(_undo := false) -> void:
 	texture_changed.emit()

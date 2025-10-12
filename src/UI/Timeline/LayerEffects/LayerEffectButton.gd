@@ -41,7 +41,6 @@ func _drop_data(_pos: Vector2, data) -> void:
 		to_index = panel.get_index() + 1
 	if drop_index < panel.get_index():
 		to_index -= 1
-	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Re-arrange layer effect")
 	Global.current_project.undo_redo.add_do_method(
 		layer_effects_settings.move_effect.bind(layer, drop_index, to_index)

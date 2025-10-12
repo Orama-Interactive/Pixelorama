@@ -393,6 +393,22 @@ func _flood_fill(pos: Vector2i) -> void:
 			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
 				continue
+			# Fill all area if it's completely empty and _fill_merged_area = false
+			if image.get_used_rect().size == Vector2i.ZERO and not _fill_merged_area:
+				if project.has_selection:
+					var filler := project.new_empty_image()
+					filler.fill(tool_slot.color)
+					var selection_map_copy := project.selection_map.return_cropped_copy(
+						project, project.size
+					)
+					var rect := selection_map_copy.get_used_rect()
+					image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
+					image.convert_rgb_to_indexed()
+					continue
+				else:
+					image.fill(tool_slot.color)
+					image.convert_rgb_to_indexed()
+					continue
 		else:
 			# end early if we are filling with an empty pattern
 			var pattern_size := _pattern.image.get_size()
@@ -558,9 +574,12 @@ func _color_segments(image: ImageExtended) -> void:
 		# short circuit for flat colors
 		for c in _allegro_image_segments.size():
 			var p := _allegro_image_segments[c]
-			for px in range(p.left_position, p.right_position + 1):
-				# We don't have to check again whether the point being processed is within the bounds
-				image.set_pixel_custom(px, p.y, color)
+			# We don't have to check again whether the point being processed is within the bounds
+			var rect = Rect2(
+				Vector2i(p.left_position, p.y), Vector2i(p.right_position - p.left_position + 1, 1)
+			)
+			image.fill_rect(rect, color)
+		image.convert_rgb_to_indexed()
 	else:
 		# shortcircuit tests for patternfills
 		var pattern_size := _pattern.image.get_size()
@@ -592,7 +611,6 @@ func commit_undo() -> void:
 		frame = project.current_frame
 		layer = project.current_layer
 
-	project.undos += 1
 	project.undo_redo.create_action("Draw")
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
