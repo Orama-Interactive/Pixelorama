@@ -385,16 +385,36 @@ class ThemeAPI:
 	func autoload() -> Themes:
 		return Themes
 
-	## Returns the current theme resource.
-	func change_theme_main_colors(color_1: Color, color_2: Color):
-		var theme := Global.control.theme
-		var panel_stylebox: StyleBox = theme.get_stylebox("panel", "Panel")
-		var panel_container_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
-		if panel_stylebox is StyleBoxFlat and panel_container_stylebox is StyleBoxFlat:
-			panel_stylebox.bg_color = color_1
-			panel_container_stylebox.bg_color = color_2
-			theme.set_stylebox("panel", "Panel", panel_stylebox)
-			theme.set_stylebox("panel", "PanelContainer", panel_container_stylebox)
+	## Returns the colors used by the given [param theme] as a [Dictionary]. To set colors, see
+	## [method set_theme_colors]
+	func get_theme_colors(theme: Theme) -> Dictionary:
+		var colors: Dictionary[String, String]= {}
+		var color_theme_type_list := theme.get_color_type_list()
+		if color_theme_type_list.size() > 0:
+			for color_theme_type: String in color_theme_type_list:
+				var color_list = theme.get_color_list(color_theme_type)
+				if color_list.size() > 0:
+					for color_title in color_list:
+						var color: Color = theme.get_color(color_title, color_theme_type)
+						colors[str(color_theme_type, ":", color_title)] = color.to_html()
+		return colors
+
+	## Changes the colors of the given [param theme] according to the given [param data]. Only the
+	## colors specified by [param data] are changed and the rest remain the same as original.
+	func set_theme_colors(theme: Theme, data: Dictionary[String, String]):
+		var color_theme_type_list := theme.get_color_type_list()
+		for key: String in data.keys():
+			var theme_type_and_name := key.split(":", false)
+			if theme_type_and_name.size() == 2:
+				if color_theme_type_list.has(theme_type_and_name[0]):
+					if theme.get_color_list(theme_type_and_name[0]).has(theme_type_and_name[1]):
+						var color_html := data[key]
+						if Color.html_is_valid(color_html):
+							theme.set_color(
+								theme_type_and_name[1],
+								theme_type_and_name[0],
+								Color.html(color_html)
+							)
 
 	## Adds the [param theme] to [code]Edit -> Preferences -> Interface -> Themes[/code].
 	func add_theme(theme: Theme) -> void:
