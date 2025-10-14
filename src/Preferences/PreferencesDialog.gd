@@ -296,6 +296,7 @@ func _ready() -> void:
 		button.tooltip_text = Global.LANGUAGES_DICT[locale][1]
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		button.button_group = button_group
+		button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		if locale == TranslationServer.get_locale():
 			button.button_pressed = true
 		language.add_child(button)
