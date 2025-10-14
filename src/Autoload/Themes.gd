@@ -21,6 +21,9 @@ var themes: Array[Theme] = [
 
 func _ready() -> void:
 	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
+	## Wait two frames so that extensions are loaded
+	await get_tree().process_frame
+	await get_tree().process_frame
 	if theme_id >= themes.size():
 		theme_id = 0
 	if theme_id != 0:
