@@ -168,7 +168,7 @@ func draw_preview() -> void:
 
 func _draw_shape() -> void:
 	var points := bresenham_line_thickness(_start, _dest, _thickness)
-	prepare_undo("Draw Shape")
+	prepare_undo()
 	var images := _get_selected_draw_images()
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
@@ -181,7 +181,7 @@ func _draw_shape() -> void:
 				for image in images:
 					_drawer.set_pixel(image, point, tool_slot.color)
 
-	commit_undo()
+	commit_undo("Draw Shape")
 
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:

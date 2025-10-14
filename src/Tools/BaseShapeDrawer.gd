@@ -180,7 +180,7 @@ func draw_preview() -> void:
 func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 	var rect := _get_result_rect(origin, dest)
 	var points := _get_points(rect.size)
-	prepare_undo("Draw Shape")
+	prepare_undo()
 	var images := _get_selected_draw_images()
 	var thickness_vector := rect.position - Vector2i((Vector2(0.5, 0.5) * (_thickness - 1)).ceil())
 	for point in points:
@@ -195,7 +195,7 @@ func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 				for image in images:
 					_drawer.set_pixel(image, draw_pos, tool_slot.color)
 
-	commit_undo()
+	commit_undo("Draw Shape")
 
 
 ## Given an origin point and destination point, returns a rect representing

@@ -247,7 +247,7 @@ func draw_start(pos: Vector2i) -> void:
 	_changed = false
 	_drawer.color_op.changed = false
 
-	prepare_undo("Draw")
+	prepare_undo()
 	_drawer.reset()
 
 	_draw_line = Input.is_action_pressed("draw_create_line")
