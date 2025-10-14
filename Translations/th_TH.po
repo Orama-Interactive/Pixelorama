@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Thai\n"
 "Language: th_TH\n"
-"PO-Revision-Date: 2025-10-08 22:37\n"
+"PO-Revision-Date: 2025-10-14 14:10\n"
 
 msgid "OK"
 msgstr ""
@@ -135,6 +135,14 @@ msgid "Undo"
 msgstr ""
 
 msgid "Redo"
+msgstr ""
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
 msgstr ""
 
 msgid "Copy"
