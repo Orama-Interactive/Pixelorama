@@ -137,15 +137,23 @@ func draw_end(pos: Vector2i) -> void:
 				_offset.x += 1
 				_dest.x += 1
 		_draw_shape()
-
-		_original_pos = Vector2.ZERO
-		_start = Vector2.ZERO
-		_dest = Vector2.ZERO
-		_drawing = false
-		Global.canvas.previews_sprite.texture = null
-		_displace_origin = false
-		cursor_text = ""
+		_reset_tool()
 	super.draw_end(pos)
+
+
+func cancel_tool() -> void:
+	super()
+	_reset_tool()
+
+
+func _reset_tool() -> void:
+	_original_pos = Vector2.ZERO
+	_start = Vector2.ZERO
+	_dest = Vector2.ZERO
+	_drawing = false
+	Global.canvas.previews_sprite.texture = null
+	_displace_origin = false
+	cursor_text = ""
 
 
 func draw_preview() -> void:

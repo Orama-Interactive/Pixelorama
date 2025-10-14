@@ -197,6 +197,11 @@ func draw_end(pos: Vector2i) -> void:
 	Global.canvas.measurements.queue_redraw()
 
 
+func cancel_tool() -> void:
+	super()
+	_clear()
+
+
 func draw_preview() -> void:
 	var previews := Global.canvas.previews_sprite
 	if not _drawing:

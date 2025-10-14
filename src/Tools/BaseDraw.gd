@@ -347,6 +347,18 @@ func draw_end(pos: Vector2i) -> void:
 	_polylines = _create_polylines(_indicator)
 
 
+func cancel_tool() -> void:
+	super()
+	for data in _undo_data:
+		if data is not Image:
+			continue
+		var image_data = _undo_data[data]["data"]
+		data.set_data(
+			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
+		)
+	Global.canvas.sprite_changed_this_frame = true
+
+
 func draw_tile(pos: Vector2i) -> void:
 	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
 	var mirrored_positions := Tools.get_mirrored_positions(pos, Global.current_project)
