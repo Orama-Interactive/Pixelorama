@@ -180,6 +180,7 @@ offset_bottom = 160.0
 script = ExtResource("1")
 
 [node name="TimelineContainer" type="VBoxContainer" parent="."]
+layout_direction = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -198,6 +199,7 @@ layout_mode = 2
 
 [node name="LayerSettingsContainer" type="VBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/MarginContainer"]
 unique_name_in_owner = true
+layout_direction = 1
 layout_mode = 2
 
 [node name="LayerButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer"]
@@ -433,6 +435,7 @@ layout_mode = 2
 
 [node name="AnimationButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/MarginContainer"]
 custom_minimum_size = Vector2(0, 24)
+layout_direction = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 24
@@ -553,6 +556,7 @@ offset_bottom = 5.5
 texture = ExtResource("8")
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/MarginContainer/AnimationButtons"]
+layout_direction = 2
 layout_mode = 2
 
 [node name="FirstFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/MarginContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
