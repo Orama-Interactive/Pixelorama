@@ -389,7 +389,7 @@ class ThemeAPI:
 	## [StyleBox] colors. For use in script use it with JSON.stringify() for more friendly format.
 	## [br]To set colors, see [method set_theme_colors].
 	func get_theme_colors(theme: Theme) -> Dictionary[String, String]:
-		var colors: Dictionary[String, String]= {}
+		var colors: Dictionary[String, String] = {}
 		var color_theme_type_list := theme.get_color_type_list()
 		if color_theme_type_list.size() > 0:
 			for color_theme_type: String in color_theme_type_list:
@@ -421,17 +421,17 @@ class ThemeAPI:
 
 	## Changes the colors of the given [param theme] according to the given [param data]. Only the
 	## colors specified by [param data] are changed and the rest remain the same as original.
-	## Make sure you don't set call this method using currently active (otherwise it will be slow)
-	func set_theme_colors(theme: Theme, data: Dictionary[String, String]):
+	## Make sure you don't set call this method using currently active (otherwise it will be slow).
+	## The parameter [param show_warnings] is for debug purpose to let the developer know about the
+	## changes that are to be done in order for colors to be properly visible.
+	func set_theme_colors(theme: Theme, data: Dictionary[String, String], show_warnings := false):
 		for key: String in data.keys():
 			var name_and_theme_type := key.split(":", false)
 			if name_and_theme_type.size() == 2:
 				var color_html := data[key]
 				if Color.html_is_valid(color_html):
 					theme.set_color(
-						name_and_theme_type[0],
-						name_and_theme_type[1],
-						Color.html(color_html)
+						name_and_theme_type[0], name_and_theme_type[1], Color.html(color_html)
 					)
 			if name_and_theme_type.size() == 3:  # Stylebox (in this case there's an extra param)
 				var s_box := theme.get_stylebox(name_and_theme_type[0], name_and_theme_type[1])
@@ -439,37 +439,35 @@ class ThemeAPI:
 				if Color.html_is_valid(color_html):
 					var color = Color.html(data[key])
 					if s_box is StyleBoxFlat:
-							match name_and_theme_type[2]:
-								"background_color":
-									if !s_box.draw_center:
-										print("Warning: Set draw_center of stylebox -> %s " % key)
-									s_box.bg_color = color
-								"border_color":
-									if (
-										s_box.border_width_left == 0
-										and s_box.border_width_right == 0
-										and s_box.border_width_top == 0
-										and s_box.border_width_bottom == 0
-									):
-										print("Warning: Set border widths of stylebox -> %s " % key)
-									s_box.border_color = color
-								"shadow_color":
-									if (
-										s_box.shadow_size == 0
-										and s_box.shadow_offset == Vector2.ZERO
-									):
-										print(
-											(
-												"Warning: Set Shadow size/offset of stylebox -> %s "
-												% key
-											)
-										)
-									s_box.shadow_color = color
+						match name_and_theme_type[2]:
+							"background_color":
+								if !s_box.draw_center and show_warnings:
+									print("Warning: Set draw_center of stylebox -> %s " % key)
+								s_box.bg_color = color
+							"border_color":
+								if (
+									s_box.border_width_left == 0
+									and s_box.border_width_right == 0
+									and s_box.border_width_top == 0
+									and s_box.border_width_bottom == 0
+									and show_warnings
+								):
+									print("Warning: Set border widths of stylebox -> %s " % key)
+								s_box.border_color = color
+							"shadow_color":
+								if (
+									s_box.shadow_size == 0
+									and s_box.shadow_offset == Vector2.ZERO
+									and show_warnings
+								):
+									print(
+										"Warning: Set Shadow size/offset of stylebox -> %s " % key
+									)
+								s_box.shadow_color = color
 					elif s_box is StyleBoxLine:
 						match name_and_theme_type[2]:
 							"color":
 								s_box.color = color
-
 
 	## Adds the [param theme] to [code]Edit -> Preferences -> Interface -> Themes[/code].
 	func add_theme(theme: Theme) -> void:
