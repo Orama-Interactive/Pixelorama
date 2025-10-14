@@ -1034,6 +1034,10 @@ diagonal_x_minus_y_mirror={
 "deadzone": 0.2,
 "events": []
 }
+undo_history={
+"deadzone": 0.2,
+"events": []
+}
 
 [input_devices]
 
