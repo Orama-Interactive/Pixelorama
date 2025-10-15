@@ -283,6 +283,8 @@ func _ready() -> void:
 		get_tree().call_group(&"NoSandbox", &"free")
 	if not OS.has_feature("pc"):
 		get_tree().call_group(&"DesktopOnly", &"free")
+	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE):
+		get_tree().call_group(&"NativeFileDialog", &"free")
 
 	for child in right_side.get_children():
 		content_list.append(child.name)
