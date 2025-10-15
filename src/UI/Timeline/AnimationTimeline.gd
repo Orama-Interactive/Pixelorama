@@ -1416,10 +1416,6 @@ func project_frame_added(frame: int) -> void:
 	button.frame = frame
 	Global.frame_hbox.add_child(button)
 	Global.frame_hbox.move_child(button, frame)
-	# Make it visible, yes 3 call_deferreds are required
-	frame_scroll_container.call_deferred(
-		&"call_deferred", &"call_deferred", &"ensure_control_visible", button
-	)
 	var layer := Global.cel_vbox.get_child_count() - 1
 	for cel_hbox in Global.cel_vbox.get_children():
 		var cel_button := project.frames[frame].cels[layer].instantiate_cel_button()
@@ -1428,6 +1424,8 @@ func project_frame_added(frame: int) -> void:
 		cel_hbox.add_child(cel_button)
 		cel_hbox.move_child(cel_button, frame)
 		layer -= 1
+	await get_tree().process_frame
+	frame_scroll_container.ensure_control_visible(button)
 
 
 func project_frame_removed(frame: int) -> void:
@@ -1444,7 +1442,6 @@ func project_layer_added(layer: int) -> void:
 	layer_button.layer_index = layer
 	if project.layers[layer].name == "":
 		project.layers[layer].set_name_to_default(project.layers.size())
-	timeline_scroll.call_deferred(&"call_deferred", &"ensure_control_visible", layer_button)
 
 	var cel_hbox := HBoxContainer.new()
 	cel_hbox.add_theme_constant_override("separation", 0)
@@ -1463,6 +1460,8 @@ func project_layer_added(layer: int) -> void:
 	Global.cel_vbox.add_child(cel_hbox)
 	Global.cel_vbox.move_child(cel_hbox, count - 1 - layer)
 	update_global_layer_buttons()
+	await get_tree().process_frame
+	timeline_scroll.ensure_control_visible(layer_button)
 
 
 func project_layer_removed(layer: int) -> void:
