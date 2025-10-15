@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-10-15 18:46\n"
+"PO-Revision-Date: 2025-10-15 19:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3361,7 +3361,7 @@ msgstr "Criar uma nova paleta"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "Criar uma nova paleta de projeto"
 
 msgid "Comment:"
 msgstr "Comentário:"
