@@ -58,6 +58,7 @@ var global_layer_expand := true
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
+@onready var timeline_scroll := %TimelineScroll as ScrollContainer
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
@@ -1443,6 +1444,7 @@ func project_layer_added(layer: int) -> void:
 	layer_button.layer_index = layer
 	if project.layers[layer].name == "":
 		project.layers[layer].set_name_to_default(project.layers.size())
+	timeline_scroll.call_deferred(&"call_deferred", &"ensure_control_visible", layer_button)
 
 	var cel_hbox := HBoxContainer.new()
 	cel_hbox.add_theme_constant_override("separation", 0)
