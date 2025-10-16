@@ -767,9 +767,6 @@ func _on_AnimationTimer_timeout() -> void:
 					animation_forward = true
 					animation_looped.emit()
 					_on_AnimationTimer_timeout()
-	frame_scroll_container.ensure_control_visible(
-		Global.frame_hbox.get_child(project.current_frame)
-	)
 	animation_canon_frame = project.current_frame
 
 
@@ -1317,6 +1314,12 @@ func _cel_switched() -> void:
 	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
 	_update_layer_ui()
 	opacity_slider.value_changed.connect(_on_opacity_slider_value_changed)
+	var project := Global.current_project
+	frame_scroll_container.ensure_control_visible(
+		Global.frame_hbox.get_child(project.current_frame)
+	)
+	var layer_index := project.layers.size() - project.current_layer - 1
+	timeline_scroll.ensure_control_visible(Global.layer_vbox.get_child(layer_index))
 
 
 func _update_layer_ui() -> void:
