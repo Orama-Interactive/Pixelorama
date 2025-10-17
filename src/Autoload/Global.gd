@@ -1049,7 +1049,8 @@ func undo_or_redo(
 			"Center Frames",
 			"Merge Layer",
 			"Link Cel",
-			"Unlink Cel"
+			"Unlink Cel",
+			"Ripple Cel"
 		]
 	):
 		if layer_index > -1 and frame_index > -1:

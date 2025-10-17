@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw7ci3uixjuev"]
+[gd_scene load_steps=7 format=3 uid="uid://dw7ci3uixjuev"]
 
 [ext_resource type="Script" uid="uid://dgc2ea2ye53p8" path="res://src/UI/Timeline/CelButton.gd" id="1_iewgo"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2_mi8wp"]
 [ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="3_qv21g"]
 [ext_resource type="Texture2D" uid="uid://bsnfsiytk8sbs" path="res://assets/graphics/misc/z_index_indicator.png" id="4_64heq"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="5_qau3o"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("3_qv21g")
@@ -100,9 +101,33 @@ texture = ExtResource("4_64heq")
 stretch_mode = 5
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
+oversampling_override = 1.0
+size = Vector2i(101, 100)
 item_count = 1
 item_0/text = "Properties"
 item_0/id = 0
 
+[node name="RippleOptions" type="AcceptDialog" parent="."]
+oversampling_override = 1.0
+title = "Ripple Cel"
+position = Vector2i(0, 36)
+size = Vector2i(350, 100)
+
+[node name="PanelContainer" type="PanelContainer" parent="RippleOptions"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 342.0
+offset_bottom = 51.0
+
+[node name="RippleSlider" parent="RippleOptions/PanelContainer" instance=ExtResource("5_qau3o")]
+layout_mode = 2
+tooltip_text = "Maximum amount of allowed Ripples. The actual count is limited by the frame count"
+min_value = 1.0
+value = 1.0
+allow_greater = true
+prefix = "Max Ripples:"
+suffix = "times"
+
 [connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
+[connection signal="confirmed" from="RippleOptions" to="." method="_on_ripple_options_confirmed"]
