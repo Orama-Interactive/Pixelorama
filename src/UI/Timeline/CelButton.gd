@@ -194,9 +194,7 @@ func _on_ripple_options_confirmed() -> void:
 	for cel_pos in selected_cels:
 		var link_set_array := [cel_pos]
 		for i in ripple_amount:
-			var offset = (
-				cel_pos[0] + (move_amounts[cel_pos[1]] * (i + 1))
-			)
+			var offset = cel_pos[0] + (move_amounts[cel_pos[1]] * (i + 1))
 			if offset >= project.frames.size():
 				break
 			link_set_array.append([offset, cel_pos[1]])
@@ -228,9 +226,7 @@ func set_link_cels(template_cel_pos: Array, linker_cels: Array):
 				continue
 			if s_cel.link_set == link_set:  # Skip cels that were already linked
 				continue
-			project.undo_redo.add_do_method(
-				project.layers[layer].link_cel.bind(s_cel, link_set)
-			)
+			project.undo_redo.add_do_method(project.layers[layer].link_cel.bind(s_cel, link_set))
 			project.undo_redo.add_undo_method(
 				project.layers[layer].link_cel.bind(s_cel, s_cel.link_set)
 			)
@@ -249,9 +245,7 @@ func set_link_cels(template_cel_pos: Array, linker_cels: Array):
 			var s_cel := project.frames[cel_index[0]].cels[cel_index[1]]
 			if s_cel.link_set == null:  # Skip cels that aren't linked
 				continue
-			project.undo_redo.add_do_method(
-				project.layers[layer].link_cel.bind(s_cel, null)
-			)
+			project.undo_redo.add_do_method(project.layers[layer].link_cel.bind(s_cel, null))
 			project.undo_redo.add_undo_method(
 				project.layers[layer].link_cel.bind(s_cel, s_cel.link_set)
 			)
