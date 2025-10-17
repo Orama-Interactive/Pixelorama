@@ -773,6 +773,13 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	var draw_pos := position
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
+	if event is InputEventGesture:
+		if active_button == MOUSE_BUTTON_LEFT:
+			_slots[active_button].tool_node.cancel_tool()
+			active_button = -1
+		elif active_button == MOUSE_BUTTON_RIGHT:
+			_slots[active_button].tool_node.cancel_tool()
+			active_button = -1
 	if Input.is_action_pressed(&"change_layer_automatically", true):
 		if event.is_action(&"activate_left_tool"):
 			if _slots[MOUSE_BUTTON_LEFT].tool_node is not BaseSelectionTool:

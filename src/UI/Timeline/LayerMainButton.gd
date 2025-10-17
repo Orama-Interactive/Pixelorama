@@ -34,6 +34,20 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 	if data[0] != "Layer":
 		Global.animation_timeline.drag_highlight.visible = false
 		return false
+	# Ensure that the target and its neighbors remain visible.
+	var layer_button := get_parent()
+	var layer_button_index := layer_button.get_index()
+	var layer_container := layer_button.get_parent()
+	Global.animation_timeline.timeline_scroll.ensure_control_visible(layer_button)
+	if pos.y > size.y / 2.0 and layer_button_index + 1 < layer_container.get_child_count():
+		Global.animation_timeline.timeline_scroll.ensure_control_visible(
+			layer_container.get_child(layer_button_index + 1)
+		)
+	if pos.y < size.y / 2.0 and layer_button_index - 1 > 0:
+		Global.animation_timeline.timeline_scroll.ensure_control_visible(
+			layer_container.get_child(layer_button_index - 1)
+		)
+
 	var curr_layer := Global.current_project.layers[layer_index]
 	var drop_layers: PackedInt32Array = data[1]
 	# Can't move to the same layer

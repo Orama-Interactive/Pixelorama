@@ -58,6 +58,7 @@ var global_layer_expand := true
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
+@onready var timeline_scroll := %TimelineScroll as ScrollContainer
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
@@ -766,9 +767,6 @@ func _on_AnimationTimer_timeout() -> void:
 					animation_forward = true
 					animation_looped.emit()
 					_on_AnimationTimer_timeout()
-	frame_scroll_container.ensure_control_visible(
-		Global.frame_hbox.get_child(project.current_frame)
-	)
 	animation_canon_frame = project.current_frame
 
 
@@ -1316,6 +1314,12 @@ func _cel_switched() -> void:
 	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
 	_update_layer_ui()
 	opacity_slider.value_changed.connect(_on_opacity_slider_value_changed)
+	var project := Global.current_project
+	frame_scroll_container.ensure_control_visible(
+		Global.frame_hbox.get_child(project.current_frame)
+	)
+	var layer_index := project.layers.size() - project.current_layer - 1
+	timeline_scroll.ensure_control_visible(Global.layer_vbox.get_child(layer_index))
 
 
 func _update_layer_ui() -> void:
@@ -1415,10 +1419,6 @@ func project_frame_added(frame: int) -> void:
 	button.frame = frame
 	Global.frame_hbox.add_child(button)
 	Global.frame_hbox.move_child(button, frame)
-	# Make it visible, yes 3 call_deferreds are required
-	frame_scroll_container.call_deferred(
-		&"call_deferred", &"call_deferred", &"ensure_control_visible", button
-	)
 	var layer := Global.cel_vbox.get_child_count() - 1
 	for cel_hbox in Global.cel_vbox.get_children():
 		var cel_button := project.frames[frame].cels[layer].instantiate_cel_button()
@@ -1427,6 +1427,8 @@ func project_frame_added(frame: int) -> void:
 		cel_hbox.add_child(cel_button)
 		cel_hbox.move_child(cel_button, frame)
 		layer -= 1
+	await get_tree().process_frame
+	frame_scroll_container.ensure_control_visible(button)
 
 
 func project_frame_removed(frame: int) -> void:
@@ -1461,6 +1463,8 @@ func project_layer_added(layer: int) -> void:
 	Global.cel_vbox.add_child(cel_hbox)
 	Global.cel_vbox.move_child(cel_hbox, count - 1 - layer)
 	update_global_layer_buttons()
+	await get_tree().process_frame
+	timeline_scroll.ensure_control_visible(layer_button)
 
 
 func project_layer_removed(layer: int) -> void:

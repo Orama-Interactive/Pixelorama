@@ -248,13 +248,11 @@ func update_line_polylines(start: Vector2i, end: Vector2i) -> void:
 	_line_polylines = _create_polylines(indicator)
 
 
-func prepare_undo(action: String) -> void:
-	var project := Global.current_project
+func prepare_undo() -> void:
 	_undo_data = _get_undo_data()
-	project.undo_redo.create_action(action)
 
 
-func commit_undo() -> void:
+func commit_undo(action := "Draw") -> void:
 	var project := Global.current_project
 	Global.canvas.update_selected_cels_textures(project)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
@@ -269,6 +267,7 @@ func commit_undo() -> void:
 		frame = project.current_frame
 		layer = project.current_layer
 
+	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
@@ -346,6 +345,18 @@ func draw_end(pos: Vector2i) -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
+
+
+func cancel_tool() -> void:
+	super()
+	for data in _undo_data:
+		if data is not Image:
+			continue
+		var image_data = _undo_data[data]["data"]
+		data.set_data(
+			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
+		)
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func draw_tile(pos: Vector2i) -> void:

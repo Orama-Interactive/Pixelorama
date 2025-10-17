@@ -284,7 +284,7 @@ func _get_drag_data(_position: Vector2) -> Variant:
 	return ["Cel", _get_cel_indices()]
 
 
-func _can_drop_data(_pos: Vector2, data) -> bool:
+func _can_drop_data(pos: Vector2, data) -> bool:
 	var project := Global.current_project
 	if typeof(data) != TYPE_ARRAY:
 		Global.animation_timeline.drag_highlight.visible = false
@@ -292,6 +292,28 @@ func _can_drop_data(_pos: Vector2, data) -> bool:
 	if data[0] != "Cel":
 		Global.animation_timeline.drag_highlight.visible = false
 		return false
+	# Ensure that the target and its neighbors remain visible.
+	Global.animation_timeline.frame_scroll_container.ensure_control_visible(self)
+	var frame_container := get_parent()
+	if pos.x > size.x / 2.0 and get_index() + 1 < frame_container.get_child_count():
+		Global.animation_timeline.frame_scroll_container.ensure_control_visible(
+			frame_container.get_child(get_index() + 1)
+		)
+	if pos.x < size.x / 2.0 and get_index() - 1 >= 0:
+		Global.animation_timeline.frame_scroll_container.ensure_control_visible(
+			frame_container.get_child(get_index() - 1)
+		)
+	var cel_vbox := frame_container.get_parent()
+	var frame_container_index := frame_container.get_index()
+	if pos.y > size.y / 2.0 and frame_container_index + 1 < cel_vbox.get_child_count():
+		Global.animation_timeline.timeline_scroll.ensure_control_visible(
+			cel_vbox.get_child(frame_container_index + 1)
+		)
+	if pos.y < size.y / 2.0 and frame_container_index - 1 > 0:
+		Global.animation_timeline.timeline_scroll.ensure_control_visible(
+			cel_vbox.get_child(frame_container_index - 1)
+		)
+
 	var drop_cels: Array = data[1]
 	drop_cels.sort_custom(_sort_cel_indices_by_frame)
 	var drop_frames: PackedInt32Array = []

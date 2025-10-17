@@ -147,9 +147,11 @@ func add_import_option(import_name: StringName, import_scene: PackedScene) -> in
 			break
 
 	# Obtain a unique id
+	# Start with the least possible id for custom exporter
 	var id := ImportPreviewDialog.ImageImportOptions.size()
 	for i in custom_import_names.size():
-		var format_id := id + i
+		# Increment ids by 1 till we find one that isn't in use
+		var format_id := id + i + 1
 		if !custom_import_names.values().has(i):
 			id = format_id
 	# Add to custom_file_formats

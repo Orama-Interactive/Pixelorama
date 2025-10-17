@@ -194,7 +194,7 @@ func _zoom_changed() -> void:
 	update_transparent_checker_offset()
 	if index == Cameras.MAIN:
 		should_tween = false
-		zoom_slider.value = zoom.x * 100.0
+		zoom_slider.set_value_no_signal_update_display(zoom.x * 100.0)
 		should_tween = true
 		for guide in Global.current_project.guides:
 			guide.width = 1.0 / zoom.x * 2

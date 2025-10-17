@@ -933,6 +933,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="TimelineScroll" type="ScrollContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 

@@ -35,6 +35,7 @@ enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXP
 enum EditMenu {
 	UNDO,
 	REDO,
+	UNDO_HISTORY,
 	COPY,
 	CUT,
 	PASTE,
@@ -89,7 +90,7 @@ enum HelpMenu {
 const LANGUAGES_DICT := {
 	"en_US": ["English", "English"],
 	"cs_CZ": ["Czech", "Czech"],
-	"ar_SA": ["Arabic", "Arabic"],
+	"ar_SA": ["العربيّة", "Arabic"],
 	"da_DK": ["Dansk", "Danish"],
 	"de_DE": ["Deutsch", "German"],
 	"el_GR": ["Ελληνικά", "Greek"],
@@ -833,6 +834,7 @@ func _initialize_keychain() -> void:
 		&"quit": Keychain.InputAction.new("", "File menu", true),
 		&"redo": Keychain.InputAction.new("", "Edit menu", true),
 		&"undo": Keychain.InputAction.new("", "Edit menu", true),
+		&"undo_history": Keychain.InputAction.new("", "Edit menu", true),
 		&"cut": Keychain.InputAction.new("", "Edit menu", true),
 		&"copy": Keychain.InputAction.new("", "Edit menu", true),
 		&"paste": Keychain.InputAction.new("", "Edit menu", true),

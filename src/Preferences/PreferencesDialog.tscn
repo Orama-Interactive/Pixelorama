@@ -13,6 +13,7 @@
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
+oversampling_override = 1.0
 title = "Preferences"
 position = Vector2i(0, 36)
 size = Vector2i(800, 500)
@@ -65,6 +66,7 @@ text = "Startup"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/StartupHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="StartupContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup"]
 layout_mode = 2
@@ -115,9 +117,11 @@ text = "Language"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Language/LanguageHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="System Language" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Language"]
 layout_mode = 2
+size_flags_horizontal = 0
 tooltip_text = "System Language"
 mouse_default_cursor_shape = 2
 button_pressed = true
@@ -140,6 +144,7 @@ text = "Interface"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="InterfaceOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
 layout_mode = 2
@@ -240,12 +245,12 @@ mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"
 
-[node name="NativeFileDialogsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["DesktopOnly", "NoSandbox"]]
+[node name="NativeFileDialogsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["NativeFileDialog", "NoSandbox"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Use native file dialogs"
 
-[node name="NativeFileDialogs" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["DesktopOnly", "NoSandbox"]]
+[node name="NativeFileDialogs" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["NativeFileDialog", "NoSandbox"]]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
@@ -278,6 +283,7 @@ text = "Themes"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemesHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Themes" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
 layout_mode = 2
@@ -304,6 +310,7 @@ text = "Buttons"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="ButtonOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
 layout_mode = 2
@@ -365,6 +372,7 @@ text = "Zoom"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="ZoomOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 layout_mode = 2
@@ -410,6 +418,7 @@ text = "Guides"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GuideHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="GuideOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 layout_mode = 2
@@ -422,7 +431,7 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "A color of ruler guides displayed on the canvas"
-mouse_filter = 0
+mouse_filter = 1
 text = "Guides color:"
 
 [node name="GuideColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GuideOptions"]
@@ -445,6 +454,7 @@ text = "Snapping"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="SnappingOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 layout_mode = 2
@@ -457,7 +467,7 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "This is the distance in screen pixels where guide and grid snapping gets activated."
-mouse_filter = 0
+mouse_filter = 1
 text = "Snapping distance:"
 
 [node name="DistanceValue" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingOptions"]
@@ -492,6 +502,7 @@ text = "Grid"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="GridOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 layout_mode = 2
@@ -527,7 +538,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the type of the grid between rectangular, isometric or both"
-mouse_filter = 0
+mouse_filter = 1
 text = "Grid type:"
 
 [node name="GridType" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
@@ -550,7 +561,7 @@ popup/item_3/id = 3
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_vertical = 1
-mouse_filter = 0
+mouse_filter = 1
 text = "Grid size:"
 
 [node name="GridSizeValue" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource("7")]
@@ -569,7 +580,7 @@ suffix_y = "px"
 layout_mode = 2
 size_flags_vertical = 1
 tooltip_text = "Sets grid's offset from the canvas origin (top left corner of the image)"
-mouse_filter = 0
+mouse_filter = 1
 text = "Grid offset:"
 
 [node name="GridOffsetValue" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource("7")]
@@ -585,7 +596,7 @@ suffix_y = "px"
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 tooltip_text = "If disabled, the grid will be drawn only over the original image"
-mouse_filter = 0
+mouse_filter = 1
 text = "Draw over Tile Mode:"
 
 [node name="GridDrawOverTileMode" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
@@ -619,7 +630,7 @@ text = "On"
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 layout_mode = 2
 tooltip_text = "A color of the grid"
-mouse_filter = 0
+mouse_filter = 1
 text = "Grid color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
@@ -640,6 +651,7 @@ text = "Pixel Grid"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="PixelGridOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 layout_mode = 2
@@ -652,7 +664,7 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the minimal zoom at which pixel grid will be shown"
-mouse_filter = 0
+mouse_filter = 1
 text = "Show at zoom:"
 
 [node name="ShowAtZoom" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
@@ -679,7 +691,7 @@ snap_step = 100.0
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
 layout_mode = 2
 tooltip_text = "A color of the pixel grid"
-mouse_filter = 0
+mouse_filter = 1
 text = "Pixel grid color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
@@ -701,6 +713,7 @@ text = "Transparency"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/TransparencyHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="CheckerOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 layout_mode = 2
@@ -713,7 +726,7 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Size of the transparent checker background"
-mouse_filter = 0
+mouse_filter = 1
 text = "Checker size:"
 
 [node name="CheckerSizeValue" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
@@ -738,7 +751,7 @@ snap_step = 10.0
 [node name="CheckerColor1Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 layout_mode = 2
 tooltip_text = "First color of the transparent checker background"
-mouse_filter = 0
+mouse_filter = 1
 text = "Checker color 1:"
 
 [node name="CheckerColor1" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
@@ -751,7 +764,7 @@ color = Color(0.470588, 0.470588, 0.470588, 1)
 [node name="CheckerColor2Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 layout_mode = 2
 tooltip_text = "Second color of the transparent checker background"
-mouse_filter = 0
+mouse_filter = 1
 text = "Checker color 2:"
 
 [node name="CheckerColor2" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
@@ -764,6 +777,7 @@ color = Color(0.341176, 0.34902, 0.341176, 1)
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "Follow Canvas Movement"
 
 [node name="CheckerFollowMovement" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
@@ -775,6 +789,7 @@ text = "On"
 [node name="Label2" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "Follow Canvas Zoom Level"
 
 [node name="CheckerFollowScale" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
@@ -786,7 +801,7 @@ text = "On"
 [node name="Label3" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
-mouse_filter = 0
+mouse_filter = 1
 text = "Tile mode opacity:"
 
 [node name="TileModeOpacity" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
@@ -818,6 +833,7 @@ text = "Background"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="BackgroundOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 layout_mode = 2
@@ -829,7 +845,7 @@ columns = 3
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 0
+mouse_filter = 1
 text = "Background color from:"
 
 [node name="ColorOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundOptions"]
@@ -845,7 +861,7 @@ popup/item_1/id = 1
 
 [node name="ColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundOptions"]
 layout_mode = 2
-mouse_filter = 0
+mouse_filter = 1
 text = "Background color:"
 
 [node name="BackgroundColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundOptions"]
@@ -870,6 +886,7 @@ text = "Timeline"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="TimelineOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline"]
 layout_mode = 2
@@ -881,7 +898,6 @@ columns = 3
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 0
 text = "Select layer when clicking on one of its buttons:"
 
 [node name="SelectLayerOnButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
@@ -892,7 +908,6 @@ text = "On"
 
 [node name="OnionSkinningPastColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
 layout_mode = 2
-mouse_filter = 0
 text = "Onion skinning past color:"
 
 [node name="OnionSkinningPastColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
@@ -903,7 +918,6 @@ color = Color(1, 0, 0, 1)
 
 [node name="OnionSkinningFutureColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
 layout_mode = 2
-mouse_filter = 0
 text = "Onion skinning future color:"
 
 [node name="OnionSkinningFutureColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
@@ -976,6 +990,7 @@ text = "Selection"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection/SelectionHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="SelectionOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection"]
 layout_mode = 2
@@ -987,7 +1002,6 @@ columns = 3
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 0
 text = "Animated selection borders"
 
 [node name="Animate" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection/SelectionOptions"]
@@ -999,7 +1013,6 @@ text = "On"
 
 [node name="BorderColor1Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection/SelectionOptions"]
 layout_mode = 2
-mouse_filter = 0
 text = "Border color 1:"
 
 [node name="BorderColor1" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection/SelectionOptions"]
@@ -1010,7 +1023,6 @@ color = Color(1, 1, 1, 1)
 
 [node name="BorderColor2Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection/SelectionOptions"]
 layout_mode = 2
-mouse_filter = 0
 text = "Border color 2:"
 
 [node name="BorderColor2" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection/SelectionOptions"]
@@ -1020,7 +1032,6 @@ mouse_default_cursor_shape = 2
 
 [node name="TransformationPreviewAlphaLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection/SelectionOptions"]
 layout_mode = 2
-mouse_filter = 0
 text = "Transformation preview alpha:"
 
 [node name="TransformationPreviewAlpha" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Selection/SelectionOptions"]
@@ -1057,6 +1068,7 @@ text = "Shortcuts"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Shortcuts/ShortcutHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="ShortcutEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Shortcuts" instance=ExtResource("3")]
 layout_mode = 2
@@ -1077,6 +1089,7 @@ text = "Backup"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Backup/BackupHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="AutosaveContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Backup"]
 layout_mode = 2
@@ -1140,6 +1153,7 @@ text = "Performance"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="PerformanceContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance"]
 layout_mode = 2
@@ -1149,7 +1163,7 @@ columns = 3
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-mouse_filter = 0
+mouse_filter = 1
 text = "Set application FPS limit:"
 
 [node name="SetFPSLimit" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
@@ -1163,7 +1177,7 @@ max_value = 144.0
 [node name="MaxUndoStepsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 0
+mouse_filter = 1
 text = "Max undo steps:"
 
 [node name="MaxUndoSteps" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
@@ -1177,7 +1191,7 @@ allow_greater = true
 [node name="PauseAppFocusLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
 layout_mode = 2
 tooltip_text = "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-mouse_filter = 0
+mouse_filter = 1
 text = "Pause application when it loses focus"
 
 [node name="PauseAppFocus" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
@@ -1190,7 +1204,7 @@ text = "On"
 [node name="UpdateContinuouslyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
 layout_mode = 2
 tooltip_text = "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-mouse_filter = 0
+mouse_filter = 1
 text = "Update continuously"
 
 [node name="UpdateContinuously" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer"]
@@ -1203,7 +1217,7 @@ text = "On"
 [node name="WindowTransparencyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
 layout_mode = 2
 tooltip_text = "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-mouse_filter = 0
+mouse_filter = 1
 text = "Enable window transparency"
 
 [node name="WindowTransparency" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
@@ -1214,7 +1228,7 @@ text = "On"
 
 [node name="DummyAudioDriverLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
 layout_mode = 2
-mouse_filter = 0
+mouse_filter = 1
 text = "Use dummy audio driver"
 
 [node name="DummyAudioDriver" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" groups=["DesktopOnly"]]
@@ -1238,6 +1252,7 @@ text = "Drivers"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers/DriversHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="DriversContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers"]
 layout_mode = 2
@@ -1248,7 +1263,6 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 0
 text = "Tablet driver:"
 
 [node name="TabletDriver" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers/DriversContainer"]
@@ -1279,6 +1293,7 @@ text = "Extensions"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Explore" type="Button" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Extensions/ExtensionsHeader"]
 layout_mode = 2
@@ -1330,6 +1345,7 @@ text = "Cursors"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Cursors/CursorsHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="CursorsContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Cursors"]
 layout_mode = 2
@@ -1421,6 +1437,7 @@ text = "Image"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Image/ImageHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="ImageOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Image"]
 layout_mode = 2
@@ -1433,7 +1450,7 @@ custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "A default width of a new image"
-mouse_filter = 0
+mouse_filter = 1
 text = "Default width:"
 
 [node name="ImageDefaultWidth" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Image/ImageOptions"]
@@ -1450,7 +1467,7 @@ suffix = "px"
 [node name="DefaultHeightLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Image/ImageOptions"]
 layout_mode = 2
 tooltip_text = "A default height of a new image"
-mouse_filter = 0
+mouse_filter = 1
 text = "Default height:"
 
 [node name="ImageDefaultHeight" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Image/ImageOptions"]
@@ -1466,7 +1483,7 @@ suffix = "px"
 [node name="DefaultFillColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Image/ImageOptions"]
 layout_mode = 2
 tooltip_text = "A default background color of a new image"
-mouse_filter = 0
+mouse_filter = 1
 text = "Default fill color:"
 
 [node name="DefaultFillColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Image/ImageOptions"]
@@ -1492,6 +1509,7 @@ text = "Reset"
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset/ResetHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="ResetPreferences" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
 unique_name_in_owner = true

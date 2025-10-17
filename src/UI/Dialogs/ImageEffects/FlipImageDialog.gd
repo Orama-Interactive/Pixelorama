@@ -23,20 +23,17 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 		if flip_v.button_pressed:
 			cel.flip_y()
 	else:
+		var cel_rect := Rect2i(Vector2i.ZERO, cel.get_size())
 		# Create a temporary image that only has the selected pixels in it
-		var selected := Image.new()
-		var rectangle: Rect2i = project.selection_map.get_selection_rect(project)
+		var selected := Image.create(cel.get_width(), cel.get_height(), false, cel.get_format())
+		selected.blit_rect_mask(cel, project.selection_map, cel_rect, Vector2i.ZERO)
+		var clear_image := Image.create(cel.get_width(), cel.get_height(), false, cel.get_format())
+		clear_image.fill(Color(0, 0, 0, 0))
+		cel.blit_rect_mask(clear_image, project.selection_map, cel_rect, Vector2i.ZERO)
+		var rectangle := project.selection_map.get_selection_rect(project)
 		if project != Global.current_project:
 			rectangle = project.selection_map.get_used_rect()
-		selected = cel.get_region(rectangle)
-		for x in selected.get_width():
-			for y in selected.get_height():
-				var pos := Vector2i(x, y)
-				var cel_pos := pos + rectangle.position
-				if project.can_pixel_get_drawn(cel_pos):
-					cel.set_pixelv(cel_pos, Color(0, 0, 0, 0))
-				else:
-					selected.set_pixelv(pos, Color(0, 0, 0, 0))
+		selected = selected.get_region(rectangle)
 
 		if flip_h.button_pressed:
 			selected.flip_x()

@@ -24,3 +24,7 @@ func _on_RestoreDefaultButton_pressed() -> void:
 	if not require_restart:
 		Global.config_cache.set_value("preferences", setting_name, default_value)
 	node.set(value_type, default_value)
+	if node is LineEdit:
+		node.text_changed.emit(default_value)
+	elif node is ColorPickerButton:
+		node.color_changed.emit(default_value)
