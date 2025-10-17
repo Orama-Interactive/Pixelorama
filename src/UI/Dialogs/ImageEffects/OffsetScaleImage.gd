@@ -26,7 +26,7 @@ func _about_to_popup() -> void:
 func commit_action(cel: Image, project := Global.current_project) -> void:
 	var offset_x := animate_panel.get_animated_value(commit_idx, Animate.OFFSET_X)
 	var offset_y := animate_panel.get_animated_value(commit_idx, Animate.OFFSET_Y)
-	var zoom_amount := 100.0 / animate_panel.get_animated_value(commit_idx, Animate.ZOOM)
+	var scale_amount := animate_panel.get_animated_value(commit_idx, Animate.ZOOM) / 100.0
 	var offset := Vector2(offset_x, offset_y)
 	var selection_tex: ImageTexture
 	if selection_checkbox.button_pressed and project.has_selection:
@@ -35,7 +35,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 
 	var params := {
 		"offset": offset,
-		"scale_amount": zoom_amount,
+		"scale_amount": scale_amount,
 		"wrap_around": wrap_around,
 		"selection": selection_tex
 	}

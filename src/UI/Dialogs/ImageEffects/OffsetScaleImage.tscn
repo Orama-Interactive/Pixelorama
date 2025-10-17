@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4_30qvy"]
 
 [node name="OffsetScaleImage" instance=ExtResource("1_7hdx0")]
-title = "Offset/Zoom Image"
+title = "Offset & Scale Image"
 size = Vector2i(362, 491)
 script = ExtResource("2_wtcan")
 

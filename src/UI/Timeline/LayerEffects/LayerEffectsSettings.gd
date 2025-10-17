@@ -4,7 +4,7 @@ const LAYER_EFFECT_BUTTON = preload("res://src/UI/Timeline/LayerEffects/LayerEff
 const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
-	LayerEffect.new("Offset/Scale", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
+	LayerEffect.new("Offset & Scale", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new(
 		"Convolution Matrix",
 		preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"),
