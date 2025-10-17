@@ -41,10 +41,20 @@ func draw_end(pos: Vector2i) -> void:
 		return
 	pos = snap_position(pos)
 	super.draw_end(pos)
+	_reset_tool()
+
+
+func cancel_tool() -> void:
+	super()
+	_reset_tool()
+
+
+func _reset_tool() -> void:
 	_rect = Rect2i(0, 0, 0, 0)
 	_square = false
 	_expand_from_center = false
 	_displace_origin = false
+	Global.canvas.previews_sprite.texture = null
 
 
 func draw_preview() -> void:
@@ -108,7 +118,6 @@ func apply_selection(_position: Vector2i) -> void:
 			set_ellipse(project.selection_map, mirror_rect.abs().position)
 
 		Global.canvas.selection.commit_undo("Select", undo_data)
-	Global.canvas.previews_sprite.texture = null
 
 
 func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:

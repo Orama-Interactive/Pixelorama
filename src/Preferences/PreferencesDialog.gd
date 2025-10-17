@@ -283,6 +283,8 @@ func _ready() -> void:
 		get_tree().call_group(&"NoSandbox", &"free")
 	if not OS.has_feature("pc"):
 		get_tree().call_group(&"DesktopOnly", &"free")
+	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE):
+		get_tree().call_group(&"NativeFileDialog", &"free")
 
 	for child in right_side.get_children():
 		content_list.append(child.name)
@@ -296,6 +298,7 @@ func _ready() -> void:
 		button.tooltip_text = Global.LANGUAGES_DICT[locale][1]
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		button.button_group = button_group
+		button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		if locale == TranslationServer.get_locale():
 			button.button_pressed = true
 		language.add_child(button)

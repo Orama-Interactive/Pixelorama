@@ -4,6 +4,7 @@ const LAYER_EFFECT_BUTTON = preload("res://src/UI/Timeline/LayerEffects/LayerEff
 const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
+	LayerEffect.new("Offset/Scale", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new(
 		"Convolution Matrix",
 		preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"),
@@ -172,7 +173,6 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	var collapsible_button := parameter_vbox.get_button()
 	collapsible_button.set_script(LAYER_EFFECT_BUTTON)
 	collapsible_button.layer = layer
-	collapsible_button.layer_effects_settings = self
 	collapsible_button.add_child(hbox)
 	hbox.anchor_left = 0.05
 	hbox.anchor_top = 0

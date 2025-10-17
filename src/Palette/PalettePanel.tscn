@@ -235,4 +235,3 @@ layout_mode = 2
 [connection signal="value_changed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/HScrollBar" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_HSlider_value_changed"]
 [connection signal="value_changed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/MarginContainer/VScrollBar" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_VSlider_value_changed"]
 [connection signal="color_changed" from="HiddenColorPickerButton" to="." method="_on_ColorPicker_color_changed"]
-[connection signal="popup_closed" from="HiddenColorPickerButton" to="." method="_on_HiddenColorPickerButton_popup_closed"]

@@ -117,13 +117,25 @@ func _get_drag_data(_position: Vector2) -> Variant:
 	return ["Frame", _get_frame_indices()]
 
 
-func _can_drop_data(_pos: Vector2, data) -> bool:
+func _can_drop_data(pos: Vector2, data) -> bool:
 	if typeof(data) != TYPE_ARRAY:
 		Global.animation_timeline.drag_highlight.visible = false
 		return false
 	if data[0] != "Frame":
 		Global.animation_timeline.drag_highlight.visible = false
 		return false
+	# Ensure that the target and its neighbors remain visible.
+	Global.animation_timeline.frame_scroll_container.ensure_control_visible(self)
+	var frame_container := get_parent()
+	if pos.x > size.x / 2.0 and get_index() + 1 < frame_container.get_child_count():
+		Global.animation_timeline.frame_scroll_container.ensure_control_visible(
+			frame_container.get_child(get_index() + 1)
+		)
+	if pos.x < size.x / 2.0 and get_index() - 1 >= 0:
+		Global.animation_timeline.frame_scroll_container.ensure_control_visible(
+			frame_container.get_child(get_index() - 1)
+		)
+
 	var drop_frames: PackedInt32Array = data[1]
 	# Can't move to same frame
 	for drop_frame in drop_frames:
