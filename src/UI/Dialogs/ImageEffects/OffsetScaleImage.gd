@@ -12,12 +12,8 @@ var wrap_around := false
 func _ready() -> void:
 	super._ready()
 	# Set in the order of the Animate enum
-	animate_panel.add_float_property(
-		"Offset X", offset_sliders.get_sliders()[0]
-	)
-	animate_panel.add_float_property(
-		"Offset Y", offset_sliders.get_sliders()[1]
-	)
+	animate_panel.add_float_property("Offset X", offset_sliders.get_sliders()[0])
+	animate_panel.add_float_property("Offset Y", offset_sliders.get_sliders()[1])
 	animate_panel.add_float_property("Scale", scale_value)
 
 

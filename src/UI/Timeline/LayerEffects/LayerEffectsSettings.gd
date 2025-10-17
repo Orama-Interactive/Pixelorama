@@ -14,9 +14,6 @@ var effects: Array[LayerEffect] = [
 		"Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
 	),
 	LayerEffect.new(
-		"Offset/Scale", preload("res://src/Shaders/Effects/OffsetPixels.gdshader"), "Transform"
-	),
-	LayerEffect.new(
 		"Gradient", preload("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"
 	),
 	LayerEffect.new(
