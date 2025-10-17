@@ -6,19 +6,19 @@ var shader := preload("res://src/Shaders/Effects/OffsetPixels.gdshader")
 var wrap_around := false
 
 @onready var offset_sliders := $VBoxContainer/OffsetOptions/OffsetSliders as ValueSliderV2
-@onready var zoom_value := $VBoxContainer/OffsetOptions/ZoomValueSlider as ValueSlider
+@onready var scale_value := $VBoxContainer/OffsetOptions/ScaleValueSlider as ValueSlider
 
 
 func _ready() -> void:
 	super._ready()
 	# Set in the order of the Animate enum
 	animate_panel.add_float_property(
-		"Offset X", $VBoxContainer/OffsetOptions/OffsetSliders.get_sliders()[0]
+		"Offset X", offset_sliders.get_sliders()[0]
 	)
 	animate_panel.add_float_property(
-		"Offset Y", $VBoxContainer/OffsetOptions/OffsetSliders.get_sliders()[1]
+		"Offset Y", offset_sliders.get_sliders()[1]
 	)
-	animate_panel.add_float_property("Zoom", $VBoxContainer/OffsetOptions/ZoomValueSlider)
+	animate_panel.add_float_property("Scale", scale_value)
 
 
 func _about_to_popup() -> void:
@@ -39,7 +39,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 
 	var params := {
 		"offset": offset,
-		"zoom_amount": zoom_amount,
+		"scale_amount": zoom_amount,
 		"wrap_around": wrap_around,
 		"selection": selection_tex
 	}

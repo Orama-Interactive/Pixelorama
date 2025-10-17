@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://q355qqjvuajs"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_7hdx0"]
-[ext_resource type="Script" uid="uid://cxs0b83pxx3j8" path="res://src/UI/Dialogs/ImageEffects/OffsetZoomImage.gd" id="2_wtcan"]
+[ext_resource type="Script" uid="uid://cxs0b83pxx3j8" path="res://src/UI/Dialogs/ImageEffects/OffsetScaleImage.gd" id="2_wtcan"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_nls83"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4_30qvy"]
 
-[node name="OffsetZoomImage" instance=ExtResource("1_7hdx0")]
+[node name="OffsetScaleImage" instance=ExtResource("1_7hdx0")]
 title = "Offset/Zoom Image"
 size = Vector2i(362, 491)
 script = ExtResource("2_wtcan")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2"]
 offset_bottom = 442.0
 
 [node name="OffsetOptions" type="GridContainer" parent="VBoxContainer" index="2"]
@@ -33,12 +33,12 @@ show_ratio = true
 suffix_x = "px"
 suffix_y = "px"
 
-[node name="ZoomLabel" type="Label" parent="VBoxContainer/OffsetOptions" index="2"]
+[node name="ScaleLabel" type="Label" parent="VBoxContainer/OffsetOptions" index="2"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Zoom:"
+text = "Scale:"
 
-[node name="ZoomValueSlider" parent="VBoxContainer/OffsetOptions" index="3" instance=ExtResource("4_30qvy")]
+[node name="ScaleValueSlider" parent="VBoxContainer/OffsetOptions" index="3" instance=ExtResource("4_30qvy")]
 layout_mode = 2
 min_value = 1.0
 max_value = 5000.0
@@ -58,5 +58,5 @@ mouse_default_cursor_shape = 2
 text = "On"
 
 [connection signal="value_changed" from="VBoxContainer/OffsetOptions/OffsetSliders" to="." method="_on_OffsetSliders_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OffsetOptions/ZoomValueSlider" to="." method="_on_ZoomValueSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OffsetOptions/ScaleValueSlider" to="." method="_on_ZoomValueSlider_value_changed"]
 [connection signal="toggled" from="VBoxContainer/OffsetOptions/WrapCheckBox" to="." method="_on_WrapCheckBox_toggled"]
