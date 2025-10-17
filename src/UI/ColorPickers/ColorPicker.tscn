@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3vcvhh4d8hd7"]
+[gd_scene load_steps=10 format=3 uid="uid://c3vcvhh4d8hd7"]
 
 [ext_resource type="Script" uid="uid://y2yilvjc63c" path="res://src/UI/ColorPickers/ColorPicker.gd" id="1_r8ot0"]
 [ext_resource type="Texture2D" uid="uid://d0v821l01w7go" path="res://assets/graphics/misc/color_switch.png" id="2_ojj3i"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="3_vjkb0"]
-[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="4_oxnnt"]
 [ext_resource type="Texture2D" uid="uid://cefhafnbc8upf" path="res://assets/graphics/misc/value_arrow_right.svg" id="5_hhe4d"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_02x7w"]
@@ -13,18 +12,6 @@ action = &"switch_colors"
 
 [sub_resource type="Shortcut" id="19"]
 events = [SubResource("InputEventAction_5llr2")]
-
-[sub_resource type="ShaderMaterial" id="1"]
-shader = ExtResource("4_oxnnt")
-shader_parameter/size = 10.0
-shader_parameter/alpha = 1.0
-shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
-shader_parameter/color2 = Color(1, 1, 1, 1)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(0, 0)
-shader_parameter/follow_movement = false
-shader_parameter/follow_scale = false
 
 [sub_resource type="InputEventAction" id="InputEventAction_nptxe"]
 action = &"reset_colors_default"
@@ -163,7 +150,6 @@ metadata/_edit_lock_ = true
 [node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage/AverageColor" instance=ExtResource("3_vjkb0")]
 unique_name_in_owner = true
 show_behind_parent = true
-material = SubResource("1")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

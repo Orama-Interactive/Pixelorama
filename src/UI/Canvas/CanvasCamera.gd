@@ -173,7 +173,6 @@ func fit_to_frame(size: Vector2) -> void:
 func update_transparent_checker_offset() -> void:
 	var o := get_global_transform_with_canvas().get_origin()
 	var s := get_global_transform_with_canvas().get_scale()
-	o.y = get_viewport_rect().size.y - o.y
 	transparent_checker.update_offset(o, s)
 
 
@@ -195,7 +194,7 @@ func _zoom_changed() -> void:
 	update_transparent_checker_offset()
 	if index == Cameras.MAIN:
 		should_tween = false
-		zoom_slider.value = zoom.x * 100.0
+		zoom_slider.set_value_no_signal_update_display(zoom.x * 100.0)
 		should_tween = true
 		for guide in Global.current_project.guides:
 			guide.width = 1.0 / zoom.x * 2

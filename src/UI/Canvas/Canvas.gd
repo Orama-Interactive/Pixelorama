@@ -77,7 +77,7 @@ func _input(event: InputEvent) -> void:
 	# Don't process anything below if the input isn't a mouse event, a tool activation shortcut,
 	# or the numpad keys that move the cursor.
 	# This decreases CPU/GPU usage slightly.
-	if not event is InputEventMouseMotion:
+	if event is not InputEventMouseMotion and event is not InputEventGesture:
 		if (
 			mouse_movement == Vector2.ZERO
 			and not (

@@ -71,6 +71,7 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var view_menu := $MarginContainer/HBoxContainer/MenuBar/View as PopupMenu
 @onready var window_menu := $MarginContainer/HBoxContainer/MenuBar/Window as PopupMenu
 @onready var help_menu := $MarginContainer/HBoxContainer/MenuBar/Help as PopupMenu
+@onready var undo_history_dialog := $UndoHistoryDialog as AcceptDialog
 @onready var add_layout_confirmation := $AddLayoutConfirmation as ConfirmationDialog
 @onready var delete_layout_confirmation := $DeleteLayoutConfirmation as ConfirmationDialog
 @onready var layout_name_line_edit := %LayoutName as LineEdit
@@ -251,6 +252,7 @@ func _setup_edit_menu() -> void:
 	var edit_menu_items := {
 		"Undo": "undo",
 		"Redo": "redo",
+		"Undo History": "undo_history",
 		"Copy": "copy",
 		"Cut": "cut",
 		"Paste": "paste",
@@ -739,6 +741,8 @@ func edit_menu_id_pressed(id: int) -> void:
 			Global.current_project.commit_undo()
 		Global.EditMenu.REDO:
 			Global.current_project.commit_redo()
+		Global.EditMenu.UNDO_HISTORY:
+			undo_history_dialog.popup_centered()
 		Global.EditMenu.COPY:
 			Global.canvas.selection.copy()
 		Global.EditMenu.CUT:

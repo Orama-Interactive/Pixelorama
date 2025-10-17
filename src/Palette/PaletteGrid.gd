@@ -5,7 +5,6 @@ signal swatch_pressed(mouse_button: int, index: int)
 signal swatch_double_clicked(mouse_button: int, index: int, position: Vector2)
 signal swatch_dropped(source_index: int, target_index: int)
 
-const PALETTE_SWATCH_SCENE := preload("res://src/Palette/PaletteSwatch.tscn")
 const DEFAULT_SWATCH_SIZE := Vector2(26, 26)
 const MIN_SWATCH_SIZE := Vector2(8, 8)
 const MAX_SWATCH_SIZE := Vector2(64, 64)
@@ -32,7 +31,7 @@ func setup_swatches() -> void:
 	columns = maxi(1, grid_size.x)  # Columns cannot be 0
 	if grid_size.x * grid_size.y > swatches.size():
 		for i in range(swatches.size(), grid_size.x * grid_size.y):
-			var swatch := PALETTE_SWATCH_SCENE.instantiate() as PaletteSwatch
+			var swatch := PaletteSwatch.new()
 			swatch.index = i
 			init_swatch(swatch)
 			swatch.pressed.connect(_on_PaletteSwatch_pressed.bind(i))
@@ -52,7 +51,7 @@ func setup_swatches() -> void:
 
 
 func init_swatch(swatch: PaletteSwatch) -> void:
-	swatch.color = PaletteSwatch.DEFAULT_COLOR
+	swatch.set_swatch_color(PaletteSwatch.DEFAULT_COLOR)
 	swatch.show_left_highlight = false
 	swatch.show_right_highlight = false
 	swatch.empty = true
@@ -70,10 +69,10 @@ func draw_palette() -> void:
 			swatch.show_right_highlight = Palettes.right_selected_color == index
 			var color = current_palette.get_color(index)
 			if color != null:
-				swatch.color = color
+				swatch.set_swatch_color(color)
 				swatch.empty = false
 			else:
-				swatch.color = PaletteSwatch.DEFAULT_COLOR
+				swatch.set_swatch_color(PaletteSwatch.DEFAULT_COLOR)
 				swatch.empty = true
 
 
@@ -152,7 +151,7 @@ func unselect_swatch(mouse_button: int, palette_index: int) -> void:
 func set_swatch_color(palette_index: int, color: Color) -> void:
 	var index := convert_palette_index_to_grid_index(palette_index)
 	if index >= 0 and index < swatches.size():
-		swatches[index].color = color
+		swatches[index].set_swatch_color(color)
 
 
 func get_swatch_color(palette_index: int) -> Color:

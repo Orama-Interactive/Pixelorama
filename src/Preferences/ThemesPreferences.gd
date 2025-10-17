@@ -26,6 +26,7 @@ func _add_theme(theme: Theme) -> void:
 	button.text = theme_name
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	button.button_group = theme_button_group
+	button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	buttons_container.add_child(button)
 	button.pressed.connect(_on_theme_pressed.bind(button.get_index()))
 

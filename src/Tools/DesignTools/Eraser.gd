@@ -44,7 +44,7 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	_picking_color = false
 	Global.canvas.selection.transform_content_confirm()
-	prepare_undo("Draw")
+	prepare_undo()
 	update_mask(_strength == 1)
 	_changed = false
 	_drawer.color_op.changed = false

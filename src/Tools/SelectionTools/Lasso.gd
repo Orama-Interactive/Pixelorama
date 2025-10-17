@@ -32,6 +32,17 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 
 
+func cancel_tool() -> void:
+	super()
+	_reset_tool()
+
+
+func _reset_tool() -> void:
+	_draw_points.clear()
+	_last_position = Vector2.INF
+	Global.canvas.previews_sprite.texture = null
+
+
 func draw_preview() -> void:
 	var canvas := Global.canvas.previews_sprite
 	if _last_position != Vector2.INF and !_move:
@@ -77,9 +88,7 @@ func apply_selection(_position) -> void:
 			Global.canvas.selection.clear_selection()
 
 	Global.canvas.selection.commit_undo("Select", undo_data)
-	_draw_points.clear()
-	_last_position = Vector2.INF
-	Global.canvas.previews_sprite.texture = null
+	_reset_tool()
 
 
 func lasso_selection(

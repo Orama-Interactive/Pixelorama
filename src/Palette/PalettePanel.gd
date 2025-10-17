@@ -328,8 +328,8 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 
 
 func _on_colorpicker_visibility_changed() -> void:
+	var undo_redo := Global.current_project.undo_redo
 	if hidden_color_picker.get_picker().is_visible_in_tree():
-		var undo_redo := Global.current_project.undo_redo
 		undo_redo.create_action("Change swatch color")
 		var old_color := Palettes.current_palette_get_color(edited_swatch_index)
 		if not Palettes.current_palette.is_project_palette:
@@ -344,18 +344,14 @@ func _on_colorpicker_visibility_changed() -> void:
 		undo_redo.add_undo_method(
 			palette_grid.set_swatch_color.bind(edited_swatch_index, old_color)
 		)
-
-
-## Saves edited swatch to palette file when color selection dialog is closed.
-func _on_HiddenColorPickerButton_popup_closed() -> void:
-	var undo_redo := Global.current_project.undo_redo
-	undo_redo.add_do_method(
-		Palettes.current_palette_set_color.bind(edited_swatch_index, edited_swatch_color)
-	)
-	undo_redo.add_do_method(
-		palette_grid.set_swatch_color.bind(edited_swatch_index, edited_swatch_color)
-	)
-	commit_undo()
+	else:
+		undo_redo.add_do_method(
+			Palettes.current_palette_set_color.bind(edited_swatch_index, edited_swatch_color)
+		)
+		undo_redo.add_do_method(
+			palette_grid.set_swatch_color.bind(edited_swatch_index, edited_swatch_color)
+		)
+		commit_undo()
 
 
 func _on_edit_palette_dialog_deleted(permanent: bool) -> void:
@@ -415,7 +411,7 @@ func _on_edit_palette_dialog_exported(path := "") -> void:
 
 
 func commit_undo() -> void:
-	var undo_redo = Global.current_project.undo_redo
+	var undo_redo := Global.current_project.undo_redo
 	undo_redo.add_undo_method(Global.general_undo)
 	undo_redo.add_do_method(Global.general_redo)
 	undo_redo.commit_action()

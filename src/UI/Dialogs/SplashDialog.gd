@@ -18,6 +18,7 @@ var artworks: Array[Artwork] = [
 ]
 
 var chosen_artwork: int
+@onready var open_last_btn := %OpenLastBtn as Button
 @onready var art_by_label := %ArtistName as Button
 @onready var splash_art_texturerect := %SplashArt as TextureRect
 @onready var version_text := %VersionText as TextureRect
@@ -48,7 +49,7 @@ class Artwork:
 func _ready() -> void:
 	get_ok_button().visible = false
 	if OS.get_name() == "Web":
-		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
+		open_last_btn.visible = false
 
 
 func _process(_delta: float) -> void:
