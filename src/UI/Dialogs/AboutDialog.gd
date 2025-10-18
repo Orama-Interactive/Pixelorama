@@ -365,7 +365,7 @@ func _on_groups_item_selected() -> void:
 
 
 func _on_website_pressed() -> void:
-	OS.shell_open("https://www.oramainteractive.com")
+	OS.shell_open("https://www.pixelorama.org/")
 
 
 func _on_github_pressed() -> void:
