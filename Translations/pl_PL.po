@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-10-14 14:10\n"
+"PO-Revision-Date: 2025-10-19 16:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2394,7 +2394,8 @@ msgstr ""
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "Łańcuchowy: tworzy łańcuch wielu krzywych Beziera, podobne do narzędzia krzywej w Krita.\n"
+"Pojedynczy: tworzy pojedynczą krzywą Beziera, podobne do narzędzia krzywej w Asperite."
 
 msgid "Options"
 msgstr "Opcje"
@@ -4002,7 +4003,7 @@ msgstr "Odwróć kafelek w pionie"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Ręczny"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
