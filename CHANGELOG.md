@@ -20,13 +20,15 @@ Built using Godot 4.5
 - The convolution matrix layer effect now has a kernel normalization factor.
 - Added Arabic translation and made improvements to the UI so that it works better for Right-To-Left languages.
 - Pixelorama can now load Lospec palettes if started with "lospec-palette://" plus the palette's name as a CLI argument. In theory, this allows Pixelorama to open when clicking on the "Open In App" button on a palette on Lospec's website, but for now **it does not work automatically**, as it requires different setup for different operating systems.
-- A preview.png file is now saved inside pxo files. This can help file managers to generate thumbnails for pxo files. **Note that this doesn't mean that you will automatically see thumbnails for pxo files - it's up to file managers to implement this.**
+- A preview.png file is now saved inside pxo files. This can help file managers to generate thumbnails for pxo files. **Note that this doesn't mean that you will automatically see thumbnails for pxo files — it's up to file managers to implement this.**
 
 ### Changed
+- **Extensions made for previous versions of Pixelorama will fail to load on this version.** Make sure to re-download the extensions you want.
 - The timeline now scrolls when adding/moving layers, when the current cel is changing from shortcuts or from the timeline buttons, and when cels, frames and layers are being dragged.
 - The layer effect settings dialog now scrolls automatically when dragging layer effects to re-order them.
 - When moving frames using the arrow buttons in the timeline, all moved cels are now being selected. [#1358](https://github.com/Orama-Interactive/Pixelorama/pull/1358)
 - The "Offset/Zoom" effect has been renamed to "Offset & Scale". [#1362](https://github.com/Orama-Interactive/Pixelorama/pull/1362)
+- On Linux, the native screen color picker of the operating system is now used.
 
 ### Fixed
 - The canvas no longer jitters when it is zoomed out a lot and smooth zoom is enabled.
