@@ -382,7 +382,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				Global.LayerTypes.GROUP:
 					layers.append(GroupLayer.new(self))
 				Global.LayerTypes.THREE_D:
-					layers.append(Layer3D.new(self))
+					layers.append(Layer3D.new(self, "", true))
 				Global.LayerTypes.TILEMAP:
 					layers.append(LayerTileMap.new(self, null))
 				Global.LayerTypes.AUDIO:
@@ -416,7 +416,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						if is_instance_valid(file):  # For pxo files saved in 0.x
 							# Don't do anything with it, just read it so that the file can move on
 							file.get_buffer(size.x * size.y * 4)
-						cels.append(Cel3D.new(size, true))
+						cels.append(layer.new_empty_cel())
 					Global.LayerTypes.TILEMAP:
 						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
 						var tileset_index = dict.layers[cel_i].tileset_index
@@ -836,11 +836,12 @@ func remove_layers(indices: PackedInt32Array) -> void:
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
-		layers.remove_at(indices[i] - i)
+		var layer_index := indices[i] - i
+		layers.remove_at(layer_index)
 		for frame in frames:
-			frame.cels[indices[i] - i].on_remove()
-			frame.cels.remove_at(indices[i] - i)
-		Global.animation_timeline.project_layer_removed(indices[i] - i)
+			frame.cels[layer_index].on_remove()
+			frame.cels.remove_at(layer_index)
+		Global.animation_timeline.project_layer_removed(layer_index)
 	layers_updated.emit()
 
 

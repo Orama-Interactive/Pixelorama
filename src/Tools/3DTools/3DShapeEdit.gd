@@ -1,5 +1,6 @@
 extends BaseTool
 
+var layer_3d: Layer3D
 var _cel: Cel3D
 var _can_start_timer := true
 var _hovering: Cel3DObject = null
@@ -8,19 +9,19 @@ var _has_been_dragged := false
 var _prev_mouse_pos := Vector2i.ZERO
 var _old_cel_image = null
 var _checker_update_qued := false
-var _object_names: Dictionary[Cel3DObject.Type, String] = {
-	Cel3DObject.Type.BOX: "Box",
-	Cel3DObject.Type.SPHERE: "Sphere",
-	Cel3DObject.Type.CAPSULE: "Capsule",
-	Cel3DObject.Type.CYLINDER: "Cylinder",
-	Cel3DObject.Type.PRISM: "Prism",
-	Cel3DObject.Type.TORUS: "Torus",
-	Cel3DObject.Type.PLANE: "Plane",
-	Cel3DObject.Type.TEXT: "Text",
-	Cel3DObject.Type.DIR_LIGHT: "Directional light",
-	Cel3DObject.Type.SPOT_LIGHT: "Spotlight",
-	Cel3DObject.Type.OMNI_LIGHT: "Point light",
-	Cel3DObject.Type.IMPORTED: "Custom model",
+var _object_names: Dictionary[Layer3D.ObjectType, String] = {
+	Layer3D.ObjectType.BOX: "Box",
+	Layer3D.ObjectType.SPHERE: "Sphere",
+	Layer3D.ObjectType.CAPSULE: "Capsule",
+	Layer3D.ObjectType.CYLINDER: "Cylinder",
+	Layer3D.ObjectType.PRISM: "Prism",
+	Layer3D.ObjectType.TORUS: "Torus",
+	Layer3D.ObjectType.PLANE: "Plane",
+	Layer3D.ObjectType.TEXT: "Text",
+	Layer3D.ObjectType.ARRAY_MESH: "Custom model",
+	Layer3D.ObjectType.DIR_LIGHT: "Directional light",
+	Layer3D.ObjectType.SPOT_LIGHT: "Spotlight",
+	Layer3D.ObjectType.OMNI_LIGHT: "Point light",
 }
 
 @onready var object_option_button := $"%ObjectOptionButton" as OptionButton
@@ -78,9 +79,10 @@ var _object_names: Dictionary[Cel3DObject.Type, String] = {
 
 
 func sprite_changed_this_frame() -> void:
+	Global.canvas.sprite_changed_this_frame = true
+	return
 	_checker_update_qued = true
 	_old_cel_image = _cel.get_image()
-	Global.canvas.sprite_changed_this_frame = true
 
 
 func _input(_event: InputEvent) -> void:
@@ -141,28 +143,29 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	if not project.layers[project.current_layer].can_layer_be_modified():
 		return
-	var found_cel := false
+	var found_layer := false
 	for frame_layer in project.selected_cels:
-		if _cel == project.frames[frame_layer[0]].cels[frame_layer[1]]:
-			found_cel = true
-	if not found_cel:
+		if layer_3d == project.layers[frame_layer[1]]:
+			found_layer = true
+	if not found_layer:
 		return
+
 	if DisplayServer.is_touchscreen_available():
 		cursor_move(pos)
-	if is_instance_valid(_cel.selected):
+	if is_instance_valid(layer_3d.selected):
 		# Needs canvas.current_pixel, because draw_start()'s position is floored
-		_cel.selected.applying_gizmos = Global.canvas.gizmos_3d.get_hovering_gizmo(
+		Global.canvas.gizmos_3d.applying_gizmos = Global.canvas.gizmos_3d.get_hovering_gizmo(
 			Global.canvas.current_pixel
 		)
 	if is_instance_valid(_hovering):
-		_cel.selected = _hovering
+		layer_3d.selected = _hovering
 		_dragging = true
 		_prev_mouse_pos = pos
 	else:  # We're not hovering
-		if is_instance_valid(_cel.selected):
+		if is_instance_valid(layer_3d.selected):
 			# If we're not clicking on a gizmo, unselect
-			if _cel.selected.applying_gizmos == Cel3DObject.Gizmos.NONE:
-				_cel.selected = null
+			if Global.canvas.gizmos_3d.applying_gizmos == Cel3DObject.Gizmos.NONE:
+				layer_3d.selected = null
 			else:
 				_dragging = true
 				_prev_mouse_pos = pos
@@ -171,12 +174,12 @@ func draw_start(pos: Vector2i) -> void:
 func draw_move(pos: Vector2i) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
-	var camera: Camera3D = _cel.camera
+	var camera := layer_3d.camera
 	if _dragging:
 		_has_been_dragged = true
 		var proj_mouse_pos := camera.project_position(pos, camera.position.z)
 		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.position.z)
-		_cel.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
+		layer_3d.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
 		_prev_mouse_pos = pos
 	sprite_changed_this_frame()
 
@@ -185,9 +188,9 @@ func draw_end(_position: Vector2i) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	_dragging = false
-	if is_instance_valid(_cel.selected) and _has_been_dragged:
-		_cel.selected.applying_gizmos = Cel3DObject.Gizmos.NONE
-		_object_property_changed(_cel.selected)
+	if is_instance_valid(layer_3d.selected) and _has_been_dragged:
+		Global.canvas.gizmos_3d.applying_gizmos = Cel3DObject.Gizmos.NONE
+		_object_property_changed(layer_3d.selected)
 	_has_been_dragged = false
 	sprite_changed_this_frame()
 
@@ -197,7 +200,7 @@ func cursor_move(pos: Vector2i) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	# Hover logic
-	var camera: Camera3D = _cel.camera
+	var camera := layer_3d.camera
 	var ray_from := camera.project_ray_origin(pos)
 	var ray_to := ray_from + camera.project_ray_normal(pos) * 20
 	var space_state := camera.get_world_3d().direct_space_state
@@ -214,14 +217,14 @@ func cursor_move(pos: Vector2i) -> void:
 
 
 func _on_ObjectOptionButton_item_selected(index: int) -> void:
-	if not _cel is Cel3D:
+	if not Global.current_project.get_current_cel() is Cel3D:
 		return
-	var id := object_option_button.get_item_id(index) - 1
-	var object := _cel.get_object_from_id(id)
-	if not is_instance_valid(object):
-		_cel.selected = null
-		return
-	_cel.selected = object
+	#var id := object_option_button.get_item_id(index) - 1
+	#var object := _cel.get_object_from_id(id)
+	#if not is_instance_valid(object):
+		#layer_3d.selected = null
+		#return
+	#layer_3d.selected = object
 
 
 func _cel_switched() -> void:
@@ -229,61 +232,58 @@ func _cel_switched() -> void:
 		get_child(0).visible = false  # Just to ensure that the content of the tool is hidden
 		return
 	get_child(0).visible = true
-	_cel = Global.current_project.get_current_cel()
-	var selected := _cel.selected
-	_cel.selected = null
-	if not _cel.scene_property_changed.is_connected(_set_cel_node_values):
-		_cel.scene_property_changed.connect(_set_cel_node_values)
-		_cel.objects_changed.connect(_fill_object_option_button)
-		_cel.selected_object.connect(_selected_object)
+	layer_3d = Global.current_project.layers[Global.current_project.current_layer]
+	var selected := layer_3d.selected
+	layer_3d.selected = null
+	#if not _cel.scene_property_changed.is_connected(_set_cel_node_values):
+		#_cel.scene_property_changed.connect(_set_cel_node_values)
+		#_cel.objects_changed.connect(_fill_object_option_button)
+		#_cel.selected_object.connect(_selected_object)
 	cel_options.visible = true
 	object_options.visible = false
 	_set_cel_node_values()
 	_fill_object_option_button()
 	sprite_changed_this_frame()
 	if is_instance_valid(selected):
-		_cel.selected = selected
+		layer_3d.selected = selected
 
 
-func _new_object_popup_id_pressed(id: int) -> void:
-	if id == Cel3DObject.Type.IMPORTED:
+func _new_object_popup_id_pressed(id: Layer3D.ObjectType) -> void:
+	if id == Layer3D.ObjectType.ARRAY_MESH:
 		load_model_dialog.popup_centered_clamped()
 		Global.dialog_open(true, true)
 	else:
 		_add_object(id)
 
 
-func _add_object(type: int, file_path := "") -> void:
-	var dict := {"type": type, "file_path": file_path}
-	var new_objects := _cel.object_properties.duplicate()
-	new_objects[_cel.current_object_id] = dict
+func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
+	var node3d := layer_3d.create_node(type, custom_mesh)
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add 3D object")
-	undo_redo.add_do_property(_cel, "object_properties", new_objects)
-	undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
-	undo_redo.add_do_method(_cel._add_object_node.bind(_cel.current_object_id))
-	undo_redo.add_undo_method(_cel._remove_object_node.bind(_cel.current_object_id))
+	undo_redo.add_do_method(layer_3d.parent_node.add_child.bind(node3d))
+	undo_redo.add_do_reference(node3d)
+	undo_redo.add_undo_method(layer_3d.parent_node.remove_child.bind(node3d))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
 	sprite_changed_this_frame()
-	_cel.current_object_id += 1
+	#_cel.current_object_id += 1
 
 
 func _on_RemoveObject_pressed() -> void:
-	if is_instance_valid(_cel.selected):
+	if is_instance_valid(layer_3d.selected):
 		var new_objects := _cel.object_properties.duplicate()
-		new_objects.erase(_cel.selected.id)
+		new_objects.erase(layer_3d.selected.id)
 		var undo_redo: UndoRedo = Global.current_project.undo_redo
 		undo_redo.create_action("Remove 3D object")
 		undo_redo.add_do_property(_cel, "object_properties", new_objects)
 		undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
-		undo_redo.add_do_method(_cel._remove_object_node.bind(_cel.selected.id))
-		undo_redo.add_undo_method(_cel._add_object_node.bind(_cel.selected.id))
+		undo_redo.add_do_method(_cel._remove_object_node.bind(layer_3d.selected.id))
+		undo_redo.add_undo_method(_cel._add_object_node.bind(layer_3d.selected.id))
 		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 		undo_redo.commit_action()
-		_cel.selected = null
+		layer_3d.selected = null
 		sprite_changed_this_frame()
 
 
@@ -335,7 +335,8 @@ func _selected_object(object: Cel3DObject) -> void:
 
 
 func _set_cel_node_values() -> void:
-	if _cel.camera.projection == Camera3D.PROJECTION_PERSPECTIVE:
+	return
+	if layer_3d.camera.projection == Camera3D.PROJECTION_PERSPECTIVE:
 		_get_previous_node(cel_properties[^"camera:fov"]).visible = true
 		_get_previous_node(cel_properties[^"camera:size"]).visible = false
 		cel_properties[^"camera:fov"].visible = true
@@ -351,7 +352,8 @@ func _set_cel_node_values() -> void:
 
 
 func _set_object_node_values() -> void:
-	var object: Cel3DObject = _cel.selected
+	return
+	var object := layer_3d.selected
 	if not is_instance_valid(object):
 		return
 	_can_start_timer = false
@@ -434,37 +436,37 @@ func _cel_property_color_changed(value: Color, prop: String) -> void:
 
 
 func _object_property_vector3_changed(value: Vector3, prop: String) -> void:
-	_set_value_from_node(_cel.selected, value, prop)
+	_set_value_from_node(layer_3d.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_vector2_changed(value: Vector2, prop: String) -> void:
-	_set_value_from_node(_cel.selected, value, prop)
+	_set_value_from_node(layer_3d.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_value_changed(value: float, prop: String) -> void:
-	_set_value_from_node(_cel.selected, value, prop)
+	_set_value_from_node(layer_3d.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_item_selected(value: int, prop: String) -> void:
-	_set_value_from_node(_cel.selected, value, prop)
+	_set_value_from_node(layer_3d.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_color_changed(value: Color, prop: String) -> void:
-	_set_value_from_node(_cel.selected, value, prop)
+	_set_value_from_node(layer_3d.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_toggled(value: bool, prop: String) -> void:
-	_set_value_from_node(_cel.selected, value, prop)
+	_set_value_from_node(layer_3d.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_text_changed(text_edit: TextEdit, prop: String) -> void:
-	_set_value_from_node(_cel.selected, text_edit.text, prop)
+	_set_value_from_node(layer_3d.selected, text_edit.text, prop)
 	_value_handle_change()
 
 
@@ -491,8 +493,8 @@ func _fill_object_option_button() -> void:
 
 
 func _on_UndoRedoTimer_timeout() -> void:
-	if is_instance_valid(_cel.selected):
-		_object_property_changed(_cel.selected)
+	if is_instance_valid(layer_3d.selected):
+		_object_property_changed(layer_3d.selected)
 	else:
 		var undo_redo: UndoRedo = Global.current_project.undo_redo
 		undo_redo.create_action("Change 3D layer properties")
@@ -507,7 +509,8 @@ func _on_UndoRedoTimer_timeout() -> void:
 
 func _on_LoadModelDialog_files_selected(paths: PackedStringArray) -> void:
 	for path in paths:
-		_add_object(Cel3DObject.Type.IMPORTED, path)
+		var mesh := ObjParse.load_obj(path)
+		_add_object(Layer3D.ObjectType.ARRAY_MESH, mesh)
 
 
 func _on_load_model_dialog_visibility_changed() -> void:

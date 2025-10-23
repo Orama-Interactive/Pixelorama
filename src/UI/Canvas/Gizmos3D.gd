@@ -10,6 +10,7 @@ const SCALE_CIRCLE_RADIUS := 1
 const CHAR_SCALE := 0.10
 const DISAPPEAR_THRESHOLD := 1  ## length of arrow below which system won't draw it (for cleaner UI)
 
+var applying_gizmos := Layer3D.Gizmos.NONE
 var always_visible: Dictionary[Cel3DObject, Texture2D] = {}
 var points_per_object: Dictionary[Cel3DObject, PackedVector2Array] = {}
 var selected_color := Color.WHITE
@@ -41,7 +42,7 @@ func _ready() -> void:
 	Global.camera.zoom_changed.connect(queue_redraw)
 
 
-func get_hovering_gizmo(pos: Vector2) -> int:
+func get_hovering_gizmo(pos: Vector2) -> Layer3D.Gizmos:
 	var draw_scale := Vector2(10.0, 10.0) / Global.camera.zoom
 	pos -= gizmos_origin
 	# Scale the position based on the zoom, has the same effect as enlarging the shapes
@@ -52,24 +53,24 @@ func get_hovering_gizmo(pos: Vector2) -> int:
 	var rot_z_offset := Geometry2D.offset_polyline(gizmo_rot_z, 1)[0]
 
 	if Geometry2D.is_point_in_circle(pos, proj_right_local_scale, SCALE_CIRCLE_RADIUS):
-		return Cel3DObject.Gizmos.X_SCALE
+		return Layer3D.Gizmos.X_SCALE
 	elif Geometry2D.is_point_in_circle(pos, proj_up_local_scale, SCALE_CIRCLE_RADIUS):
-		return Cel3DObject.Gizmos.Y_SCALE
+		return Layer3D.Gizmos.Y_SCALE
 	elif Geometry2D.is_point_in_circle(pos, proj_back_local_scale, SCALE_CIRCLE_RADIUS):
-		return Cel3DObject.Gizmos.Z_SCALE
+		return Layer3D.Gizmos.Z_SCALE
 	elif Geometry2D.point_is_inside_triangle(pos, gizmo_pos_x[0], gizmo_pos_x[1], gizmo_pos_x[2]):
-		return Cel3DObject.Gizmos.X_POS
+		return Layer3D.Gizmos.X_POS
 	elif Geometry2D.point_is_inside_triangle(pos, gizmo_pos_y[0], gizmo_pos_y[1], gizmo_pos_y[2]):
-		return Cel3DObject.Gizmos.Y_POS
+		return Layer3D.Gizmos.Y_POS
 	elif Geometry2D.point_is_inside_triangle(pos, gizmo_pos_z[0], gizmo_pos_z[1], gizmo_pos_z[2]):
-		return Cel3DObject.Gizmos.Z_POS
+		return Layer3D.Gizmos.Z_POS
 	elif Geometry2D.is_point_in_polygon(pos, rot_x_offset):
-		return Cel3DObject.Gizmos.X_ROT
+		return Layer3D.Gizmos.X_ROT
 	elif Geometry2D.is_point_in_polygon(pos, rot_y_offset):
-		return Cel3DObject.Gizmos.Y_ROT
+		return Layer3D.Gizmos.Y_ROT
 	elif Geometry2D.is_point_in_polygon(pos, rot_z_offset):
-		return Cel3DObject.Gizmos.Z_ROT
-	return Cel3DObject.Gizmos.NONE
+		return Layer3D.Gizmos.Z_ROT
+	return Layer3D.Gizmos.NONE
 
 
 func _cel_switched() -> void:
