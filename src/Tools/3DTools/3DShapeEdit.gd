@@ -212,7 +212,6 @@ func cursor_move(pos: Vector2i) -> void:
 	_hovering = currently_hovering
 
 
-
 func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D) -> Array:
 	var scenario := camera.get_world_3d().scenario
 	var ray_from := camera.project_ray_origin(pos)
@@ -221,8 +220,9 @@ func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D) -> Array:
 	for obj in intersecting_objects:
 		var intersect_node := instance_from_id(obj)
 		if intersect_node is MeshInstance3D:
-			var tri_mesh := (intersect_node as MeshInstance3D).mesh.generate_triangle_mesh()
-			var intersect := tri_mesh.intersect_ray(ray_from, ray_to)
+			var mesh_instance := intersect_node as MeshInstance3D
+			var tri_mesh := mesh_instance.mesh.generate_triangle_mesh()
+			var intersect := tri_mesh.intersect_ray(ray_from * mesh_instance.get_transform(), ray_to)
 			if not intersect.is_empty():
 				return [intersect_node, intersect]
 	return []
@@ -240,13 +240,18 @@ func _on_ObjectOptionButton_item_selected(index: int) -> void:
 
 
 func _cel_switched() -> void:
+	if is_instance_valid(layer_3d):
+		if layer_3d.selected_object_changed.is_connected(_on_selected_object):
+			layer_3d.selected_object_changed.disconnect(_on_selected_object)
 	if not Global.current_project.get_current_cel() is Cel3D:
+		layer_3d = null
 		get_child(0).visible = false  # Just to ensure that the content of the tool is hidden
 		return
 	get_child(0).visible = true
 	layer_3d = Global.current_project.layers[Global.current_project.current_layer]
 	var selected := layer_3d.selected
 	layer_3d.selected = null
+	layer_3d.selected_object_changed.connect(_on_selected_object)
 	#if not _cel.scene_property_changed.is_connected(_set_cel_node_values):
 		#_cel.scene_property_changed.connect(_set_cel_node_values)
 		#_cel.objects_changed.connect(_fill_object_option_button)
@@ -313,7 +318,7 @@ func _object_property_changed(object: Cel3DObject) -> void:
 	undo_redo.commit_action()
 
 
-func _selected_object(object: Cel3DObject) -> void:
+func _on_selected_object(object: Node3D, _old_object: Node3D) -> void:
 	if is_instance_valid(object):
 		cel_options.visible = false
 		object_options.visible = true
@@ -333,12 +338,12 @@ func _selected_object(object: Cel3DObject) -> void:
 			if node.get_index() > 0:
 				_get_previous_node(node).visible = property_exists
 			node.visible = property_exists
-		mesh_options.visible = object.node3d_type is MeshInstance3D
-		light_options.visible = object.node3d_type is Light3D
+		mesh_options.visible = object is MeshInstance3D
+		light_options.visible = object is Light3D
 		_set_object_node_values()
-		if not object.property_changed.is_connected(_set_object_node_values):
-			object.property_changed.connect(_set_object_node_values)
-		object_option_button.select(object_option_button.get_item_index(object.id + 1))
+		#if not object.property_changed.is_connected(_set_object_node_values):
+			#object.property_changed.connect(_set_object_node_values)
+		#object_option_button.select(object_option_button.get_item_index(object.id + 1))
 	else:
 		cel_options.visible = true
 		object_options.visible = false
