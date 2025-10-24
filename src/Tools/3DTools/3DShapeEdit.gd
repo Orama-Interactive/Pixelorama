@@ -279,7 +279,7 @@ func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
 	undo_redo.create_action("Add 3D object")
 	undo_redo.add_do_method(layer_3d.parent_node.add_child.bind(node3d))
 	undo_redo.add_do_reference(node3d)
-	undo_redo.add_undo_method(layer_3d.parent_node.remove_child.bind(node3d))
+	undo_redo.add_undo_method(_remove_node.bind(node3d))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
@@ -288,20 +288,23 @@ func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
 
 
 func _on_RemoveObject_pressed() -> void:
-	if is_instance_valid(layer_3d.selected):
-		var new_objects := _cel.object_properties.duplicate()
-		new_objects.erase(layer_3d.selected.id)
-		var undo_redo: UndoRedo = Global.current_project.undo_redo
-		undo_redo.create_action("Remove 3D object")
-		undo_redo.add_do_property(_cel, "object_properties", new_objects)
-		undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
-		undo_redo.add_do_method(_cel._remove_object_node.bind(layer_3d.selected.id))
-		undo_redo.add_undo_method(_cel._add_object_node.bind(layer_3d.selected.id))
-		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-		undo_redo.commit_action()
+	if not is_instance_valid(layer_3d.selected):
+		return
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Remove 3D object")
+	undo_redo.add_do_method(_remove_node.bind(layer_3d.selected))
+	undo_redo.add_undo_method(layer_3d.parent_node.add_child.bind(layer_3d.selected))
+	undo_redo.add_undo_reference(layer_3d.selected)
+	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	undo_redo.commit_action()
+	sprite_changed_this_frame()
+
+
+func _remove_node(node: Node) -> void:
+	layer_3d.parent_node.remove_child(node)
+	if layer_3d.selected == node:
 		layer_3d.selected = null
-		sprite_changed_this_frame()
 
 
 func _object_property_changed(object: Cel3DObject) -> void:
