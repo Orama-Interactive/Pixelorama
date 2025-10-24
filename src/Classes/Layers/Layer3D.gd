@@ -2,6 +2,10 @@ class_name Layer3D
 extends BaseLayer
 ## A class for 3D layer properties.
 
+signal selected_object_changed(new_selected: Node3D, old_selected: Node3D)
+@warning_ignore("unused_signal")
+signal object_hovered(new_hovered: Node3D, old_hovered: Node3D, is_selected: bool)
+
 enum ObjectType {
 	BOX,
 	SPHERE,
@@ -27,7 +31,10 @@ var viewport: SubViewport  ## SubViewport used by the layer.
 var parent_node: Node3D  ## Parent node of the 3D objects placed in the layer.
 var camera: Camera3D  ## Camera that is used to render the Image.
 ## The currently selected [Cel3DObject].
-var selected: Node3D = null
+var selected: Node3D = null:
+	set(value):
+		selected_object_changed.emit(value, selected)
+		selected = value
 var gizmos_3d: Node2D = Global.canvas.gizmos_3d
 
 
@@ -101,13 +108,13 @@ func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 			node3d.mesh = custom_mesh
 		ObjectType.DIR_LIGHT:
 			node3d = DirectionalLight3D.new()
-			gizmos_3d.add_always_visible(self, DIR_LIGHT_TEXTURE)
+			gizmos_3d.add_always_visible(node3d, DIR_LIGHT_TEXTURE)
 		ObjectType.SPOT_LIGHT:
 			node3d = SpotLight3D.new()
-			gizmos_3d.add_always_visible(self, SPOT_LIGHT_TEXTURE)
+			gizmos_3d.add_always_visible(node3d, SPOT_LIGHT_TEXTURE)
 		ObjectType.OMNI_LIGHT:
 			node3d = OmniLight3D.new()
-			gizmos_3d.add_always_visible(self, OMNI_LIGHT_TEXTURE)
+			gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
 	#parent_node.add_child(node3d)
 	return node3d
 

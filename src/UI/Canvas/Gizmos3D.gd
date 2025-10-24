@@ -10,9 +10,16 @@ const SCALE_CIRCLE_RADIUS := 1
 const CHAR_SCALE := 0.10
 const DISAPPEAR_THRESHOLD := 1  ## length of arrow below which system won't draw it (for cleaner UI)
 
+const EDGES: Array[Array] = [
+	[0,1],[0,2],[1,3],[2,3],  # bottom face
+	[4,5],[4,6],[5,7],[6,7],  # top face
+	[0,4],[1,5],[2,6],[3,7],  # vertical edges
+]
+
+var layer_3d: Layer3D
 var applying_gizmos := Layer3D.Gizmos.NONE
-var always_visible: Dictionary[Cel3DObject, Texture2D] = {}
-var points_per_object: Dictionary[Cel3DObject, PackedVector2Array] = {}
+var always_visible: Dictionary[Node3D, Texture2D] = {}
+var points_per_object: Dictionary[Node3D, PackedVector2Array] = {}
 var selected_color := Color.WHITE
 var hovered_color := Color.GRAY
 
@@ -74,11 +81,36 @@ func get_hovering_gizmo(pos: Vector2) -> Layer3D.Gizmos:
 
 
 func _cel_switched() -> void:
+	if is_instance_valid(layer_3d):
+		if layer_3d.selected_object_changed.is_connected(_on_selected_object):
+			layer_3d.selected_object_changed.disconnect(_on_selected_object)
+			layer_3d.object_hovered.disconnect(_on_hovered_object)
 	for object in points_per_object:
-		if not object.find_cel():
-			if object.selected:
-				object.deselect()
+		clear_points(object)
+	if not Global.current_project.get_current_cel() is Cel3D:
+		queue_redraw()
+		return
+	layer_3d = Global.current_project.layers[Global.current_project.current_layer]
+	layer_3d.selected_object_changed.connect(_on_selected_object)
+	layer_3d.object_hovered.connect(_on_hovered_object)
+	var selected := layer_3d.selected
+	if is_instance_valid(selected):
+		get_points(selected, true)
 	queue_redraw()
+
+
+func _on_selected_object(new_object: Node3D, old_object: Node3D) -> void:
+	if is_instance_valid(new_object):
+		get_points(new_object, true)
+	if is_instance_valid(old_object) and new_object != old_object:
+		clear_points(old_object)
+
+
+func _on_hovered_object(new_object: Node3D, old_object: Node3D, is_selected: bool) -> void:
+	if is_instance_valid(new_object):
+		get_points(new_object, is_selected)
+	if is_instance_valid(old_object) and new_object != old_object and not is_selected:
+		clear_points(old_object)
 
 
 func _find_selected_object() -> Cel3DObject:
@@ -88,27 +120,38 @@ func _find_selected_object() -> Cel3DObject:
 	return null
 
 
-func add_always_visible(object3d: Cel3DObject, texture: Texture2D) -> void:
+func add_always_visible(object3d: VisualInstance3D, texture: Texture2D) -> void:
 	always_visible[object3d] = texture
 	queue_redraw()
 
 
-func remove_always_visible(object3d: Cel3DObject) -> void:
+func remove_always_visible(object3d: VisualInstance3D) -> void:
 	always_visible.erase(object3d)
 	queue_redraw()
 
 
-func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
-	var debug_mesh := object3d.box_shape.get_debug_mesh()
-	var arrays := debug_mesh.surface_get_arrays(0)
+func get_points(object3d: VisualInstance3D, selected: bool) -> void:
+	if not is_instance_valid(object3d):
+		return
+	var camera := object3d.get_viewport().get_camera_3d()
+	var aabb := object3d.get_aabb()
+	var corners := PackedVector2Array()
+	var corner_per_dimension := PackedInt32Array([0, 1])
+	for x in corner_per_dimension:
+		for y in corner_per_dimension:
+			for z in corner_per_dimension:
+				var local := aabb.position + Vector3(x, y, z) * aabb.size
+				var world := object3d.global_transform * local
+				if camera.is_position_behind(world):
+					continue
+				corners.append(camera.unproject_position(world))
 	var points := PackedVector2Array()
-	for vertex in arrays[ArrayMesh.ARRAY_VERTEX]:
-		var x_vertex: Vector3 = object3d.transform * (vertex)
-		var point := camera.unproject_position(x_vertex)
-		if not camera.is_position_behind(x_vertex):
-			points.append(point)
+	for edge in EDGES:
+		points.append(corners[edge[0]])
+		points.append(corners[edge[1]])
 	points_per_object[object3d] = points
-	if object3d.selected:
+
+	if selected:
 		gizmos_origin = camera.unproject_position(object3d.position)
 		var right := object3d.position + object3d.transform.basis.x.normalized()
 		var left := object3d.position - object3d.transform.basis.x.normalized()
@@ -117,14 +160,14 @@ func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
 		var back := object3d.position + object3d.transform.basis.z.normalized()
 		var front := object3d.position - object3d.transform.basis.z.normalized()
 
-		var camera_right = camera.transform.basis.x.normalized()
+		var camera_right := camera.transform.basis.x.normalized()
 		right_axis_width = lerpf(0.5, 0.1, (1 + (camera_right - right).z) / 2.0)
 		up_axis_width = lerpf(0.5, 0.1, (1 + (camera_right - up).z) / 2.0)
 		back_axis_width = lerpf(0.5, 0.1, (1 + (camera_right - back).z) / 2.0)
 
-		var proj_right := object3d.camera.unproject_position(right)
-		var proj_up := object3d.camera.unproject_position(up)
-		var proj_back := object3d.camera.unproject_position(back)
+		var proj_right := camera.unproject_position(right)
+		var proj_up := camera.unproject_position(up)
+		var proj_back := camera.unproject_position(back)
 
 		proj_right_local = proj_right - gizmos_origin
 		proj_up_local = proj_up - gizmos_origin
@@ -134,11 +177,11 @@ func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
 		var curve_up_local := proj_up_local
 		var curve_back_local := proj_back_local
 		if right.distance_to(camera.position) > left.distance_to(camera.position):
-			curve_right_local = object3d.camera.unproject_position(left) - gizmos_origin
+			curve_right_local = camera.unproject_position(left) - gizmos_origin
 		if up.distance_to(camera.position) > down.distance_to(camera.position):
-			curve_up_local = object3d.camera.unproject_position(down) - gizmos_origin
+			curve_up_local = camera.unproject_position(down) - gizmos_origin
 		if back.distance_to(camera.position) > front.distance_to(camera.position):
-			curve_back_local = object3d.camera.unproject_position(front) - gizmos_origin
+			curve_back_local = camera.unproject_position(front) - gizmos_origin
 
 		proj_right_local = _resize_vector(proj_right_local, ARROW_LENGTH)
 		proj_up_local = _resize_vector(proj_up_local, ARROW_LENGTH)
@@ -160,7 +203,7 @@ func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
 	queue_redraw()
 
 
-func clear_points(object3d: Cel3DObject) -> void:
+func clear_points(object3d: VisualInstance3D) -> void:
 	points_per_object.erase(object3d)
 	queue_redraw()
 
@@ -190,21 +233,24 @@ func _draw() -> void:
 
 	if points_per_object.is_empty():
 		return
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	if not layer is Layer3D:
+		return
 	for object in points_per_object:
 		var points: PackedVector2Array = points_per_object[object]
 		if points.is_empty():
 			continue
-		if object.selected:
+		if (layer as Layer3D).selected == object:
 			var is_applying_gizmos = false
 			# Draw bounding box outline
 			draw_multiline(points, selected_color, 0.5)
-			if object.applying_gizmos == Cel3DObject.Gizmos.X_ROT:
+			if applying_gizmos == Layer3D.Gizmos.X_ROT:
 				draw_line(gizmos_origin, canvas.current_pixel, Color.RED)
 				is_applying_gizmos = true
-			elif object.applying_gizmos == Cel3DObject.Gizmos.Y_ROT:
+			elif applying_gizmos == Layer3D.Gizmos.Y_ROT:
 				draw_line(gizmos_origin, canvas.current_pixel, Color.GREEN)
 				is_applying_gizmos = true
-			elif object.applying_gizmos == Cel3DObject.Gizmos.Z_ROT:
+			elif applying_gizmos == Layer3D.Gizmos.Z_ROT:
 				draw_line(gizmos_origin, canvas.current_pixel, Color.BLUE)
 				is_applying_gizmos = true
 			draw_set_transform(gizmos_origin, 0, draw_scale)
@@ -241,7 +287,7 @@ func _draw() -> void:
 			draw_char(font, proj_up_local_scale / CHAR_SCALE, "Y")
 			draw_char(font, proj_back_local_scale / CHAR_SCALE, "Z")
 			draw_set_transform_matrix(Transform2D())
-		elif object.hovered:
+		else:
 			draw_multiline(points, hovered_color)
 
 

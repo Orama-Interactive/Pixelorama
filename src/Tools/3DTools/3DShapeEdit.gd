@@ -3,7 +3,10 @@ extends BaseTool
 var layer_3d: Layer3D
 var _cel: Cel3D
 var _can_start_timer := true
-var _hovering: Cel3DObject = null
+var _hovering: Node3D = null:
+	set(value):
+		layer_3d.object_hovered.emit(value, _hovering, layer_3d.selected == _hovering)
+		_hovering = value
 var _dragging := false
 var _has_been_dragged := false
 var _prev_mouse_pos := Vector2i.ZERO
@@ -152,6 +155,7 @@ func draw_start(pos: Vector2i) -> void:
 
 	if DisplayServer.is_touchscreen_available():
 		cursor_move(pos)
+
 	if is_instance_valid(layer_3d.selected):
 		# Needs canvas.current_pixel, because draw_start()'s position is floored
 		Global.canvas.gizmos_3d.applying_gizmos = Global.canvas.gizmos_3d.get_hovering_gizmo(
@@ -159,12 +163,13 @@ func draw_start(pos: Vector2i) -> void:
 		)
 	if is_instance_valid(_hovering):
 		layer_3d.selected = _hovering
+		Global.canvas.gizmos_3d.get_points(_hovering, true)
 		_dragging = true
 		_prev_mouse_pos = pos
 	else:  # We're not hovering
 		if is_instance_valid(layer_3d.selected):
 			# If we're not clicking on a gizmo, unselect
-			if Global.canvas.gizmos_3d.applying_gizmos == Cel3DObject.Gizmos.NONE:
+			if Global.canvas.gizmos_3d.applying_gizmos == Layer3D.Gizmos.NONE:
 				layer_3d.selected = null
 			else:
 				_dragging = true
@@ -189,7 +194,7 @@ func draw_end(_position: Vector2i) -> void:
 		return
 	_dragging = false
 	if is_instance_valid(layer_3d.selected) and _has_been_dragged:
-		Global.canvas.gizmos_3d.applying_gizmos = Cel3DObject.Gizmos.NONE
+		Global.canvas.gizmos_3d.applying_gizmos = Layer3D.Gizmos.NONE
 		_object_property_changed(layer_3d.selected)
 	_has_been_dragged = false
 	sprite_changed_this_frame()
@@ -200,20 +205,27 @@ func cursor_move(pos: Vector2i) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	# Hover logic
-	var camera := layer_3d.camera
+	var currently_hovering: Node3D = null
+	var intersect_info := get_3d_node_at_pos(pos, layer_3d.camera)
+	if not intersect_info.is_empty():
+		currently_hovering = intersect_info[0]
+	_hovering = currently_hovering
+
+
+
+func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D) -> Array:
+	var scenario := camera.get_world_3d().scenario
 	var ray_from := camera.project_ray_origin(pos)
-	var ray_to := ray_from + camera.project_ray_normal(pos) * 20
-	var space_state := camera.get_world_3d().direct_space_state
-	var selection := space_state.intersect_ray(PhysicsRayQueryParameters3D.create(ray_from, ray_to))
-	if selection.is_empty():
-		if is_instance_valid(_hovering):
-			_hovering.unhover()
-			_hovering = null
-	else:
-		if is_instance_valid(_hovering):
-			_hovering.unhover()
-		_hovering = selection["collider"].get_parent()
-		_hovering.hover()
+	var ray_to := camera.project_ray_normal(pos)
+	var intersecting_objects := RenderingServer.instances_cull_ray(ray_from, ray_to, scenario)
+	for obj in intersecting_objects:
+		var intersect_node := instance_from_id(obj)
+		if intersect_node is MeshInstance3D:
+			var tri_mesh := (intersect_node as MeshInstance3D).mesh.generate_triangle_mesh()
+			var intersect := tri_mesh.intersect_ray(ray_from, ray_to)
+			if not intersect.is_empty():
+				return [intersect_node, intersect]
+	return []
 
 
 func _on_ObjectOptionButton_item_selected(index: int) -> void:
