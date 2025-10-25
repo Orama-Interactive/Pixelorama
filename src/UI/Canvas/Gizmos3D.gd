@@ -85,6 +85,7 @@ func _cel_switched() -> void:
 		if layer_3d.selected_object_changed.is_connected(_on_selected_object):
 			layer_3d.selected_object_changed.disconnect(_on_selected_object)
 			layer_3d.object_hovered.disconnect(_on_hovered_object)
+			layer_3d.node_property_changed.disconnect(_on_node_property_changed)
 	for object in points_per_object:
 		clear_points(object)
 	if not Global.current_project.get_current_cel() is Cel3D:
@@ -93,6 +94,7 @@ func _cel_switched() -> void:
 	layer_3d = Global.current_project.layers[Global.current_project.current_layer]
 	layer_3d.selected_object_changed.connect(_on_selected_object)
 	layer_3d.object_hovered.connect(_on_hovered_object)
+	layer_3d.node_property_changed.connect(_on_node_property_changed)
 	var selected := layer_3d.selected
 	if is_instance_valid(selected):
 		get_points(selected, true)
@@ -111,6 +113,12 @@ func _on_hovered_object(new_object: Node3D, old_object: Node3D, is_selected: boo
 		get_points(new_object, is_selected)
 	if is_instance_valid(old_object) and new_object != old_object and not is_selected:
 		clear_points(old_object)
+
+
+func _on_node_property_changed(node: Node3D) -> void:
+	if node == layer_3d.selected:
+		get_points(node, true)
+	queue_redraw()
 
 
 func _find_selected_object() -> Cel3DObject:

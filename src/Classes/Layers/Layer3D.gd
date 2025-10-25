@@ -5,6 +5,7 @@ extends BaseLayer
 signal selected_object_changed(new_selected: Node3D, old_selected: Node3D)
 @warning_ignore("unused_signal")
 signal object_hovered(new_hovered: Node3D, old_hovered: Node3D, is_selected: bool)
+signal node_property_changed(node: Node3D)
 
 enum ObjectType {
 	BOX,
@@ -115,8 +116,76 @@ func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 		ObjectType.OMNI_LIGHT:
 			node3d = OmniLight3D.new()
 			gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
-	#parent_node.add_child(node3d)
 	return node3d
+
+
+func node_change_transform(node: Node3D, a: Vector3, b: Vector3, applying_gizmos: Gizmos) -> void:
+	var diff := a - b
+	match applying_gizmos:
+		Gizmos.X_POS:
+			node_move_axis(node, diff, node.transform.basis.x)
+		Gizmos.Y_POS:
+			node_move_axis(node, diff, node.transform.basis.y)
+		Gizmos.Z_POS:
+			node_move_axis(node, diff, node.transform.basis.z)
+		Gizmos.X_ROT:
+			node_change_rotation(node, a, b, node.transform.basis.x)
+		Gizmos.Y_ROT:
+			node_change_rotation(node, a, b, node.transform.basis.y)
+		Gizmos.Z_ROT:
+			node_change_rotation(node, a, b, node.transform.basis.z)
+		Gizmos.X_SCALE:
+			node_change_scale(node, diff, node.transform.basis.x, Vector3.RIGHT)
+		Gizmos.Y_SCALE:
+			node_change_scale(node, diff, node.transform.basis.y, Vector3.UP)
+		Gizmos.Z_SCALE:
+			node_change_scale(node, diff, node.transform.basis.z, Vector3.BACK)
+		_:
+			node_move(node, diff)
+
+
+func node_move(node: Node3D, pos: Vector3) -> void:
+	node.position += pos
+	node_change_property(node)
+
+
+## Move the object in the direction it is facing, and restrict mouse movement in that axis
+func node_move_axis(node: Node3D, diff: Vector3, axis: Vector3) -> void:
+	var axis_v2 := Vector2(axis.x, axis.y).normalized()
+	if axis_v2 == Vector2.ZERO:
+		axis_v2 = Vector2(axis.y, axis.z).normalized()
+	var diff_v2 := Vector2(diff.x, diff.y).normalized()
+	node.position += axis * axis_v2.dot(diff_v2) * diff.length()
+	node_change_property(node)
+
+
+func node_change_rotation(node: Node3D, a: Vector3, b: Vector3, axis: Vector3) -> void:
+	var a_local := a - node.position
+	var a_local_v2 := Vector2(a_local.x, a_local.y)
+	var b_local := b - node.position
+	var b_local_v2 := Vector2(b_local.x, b_local.y)
+	var angle := b_local_v2.angle_to(a_local_v2)
+	# Rotate the object around a basis axis, instead of a fixed axis, such as
+	# Vector3.RIGHT, Vector3.UP or Vector3.BACK
+	node.rotate(axis.normalized(), angle)
+	node.rotation.x = wrapf(node.rotation.x, -PI, PI)
+	node.rotation.y = wrapf(node.rotation.y, -PI, PI)
+	node.rotation.z = wrapf(node.rotation.z, -PI, PI)
+	node_change_property(node)
+
+
+## Scale the object in the direction it is facing, and restrict mouse movement in that axis
+func node_change_scale(node: Node3D, diff: Vector3, axis: Vector3, dir: Vector3) -> void:
+	var axis_v2 := Vector2(axis.x, axis.y).normalized()
+	if axis_v2 == Vector2.ZERO:
+		axis_v2 = Vector2(axis.y, axis.z).normalized()
+	var diff_v2 := Vector2(diff.x, diff.y).normalized()
+	node.scale += dir * axis_v2.dot(diff_v2) * diff.length()
+	node_change_property(node)
+
+
+func node_change_property(node: Node3D) -> void:
+	node_property_changed.emit(node)
 
 
 #func type_is_mesh(type: ObjectType) -> bool:

@@ -5,7 +5,10 @@ var _cel: Cel3D
 var _can_start_timer := true
 var _hovering: Node3D = null:
 	set(value):
-		layer_3d.object_hovered.emit(value, _hovering, layer_3d.selected == _hovering)
+		var selected := layer_3d.selected == _hovering
+		if not is_instance_valid(layer_3d.selected):
+			selected = false
+		layer_3d.object_hovered.emit(value, _hovering, selected)
 		_hovering = value
 var _dragging := false
 var _has_been_dragged := false
@@ -184,7 +187,7 @@ func draw_move(pos: Vector2i) -> void:
 		_has_been_dragged = true
 		var proj_mouse_pos := camera.project_position(pos, camera.position.z)
 		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.position.z)
-		layer_3d.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
+		layer_3d.node_change_transform(layer_3d.selected, proj_mouse_pos, proj_prev_mouse_pos, Global.canvas.gizmos_3d.applying_gizmos)
 		_prev_mouse_pos = pos
 	sprite_changed_this_frame()
 
@@ -204,6 +207,8 @@ func cursor_move(pos: Vector2i) -> void:
 	super.cursor_move(pos)
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
+	if _dragging:
+		return
 	# Hover logic
 	var currently_hovering: Node3D = null
 	var intersect_info := get_3d_node_at_pos(pos, layer_3d.camera)
@@ -212,17 +217,30 @@ func cursor_move(pos: Vector2i) -> void:
 	_hovering = currently_hovering
 
 
-func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D) -> Array:
+func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> Array:
 	var scenario := camera.get_world_3d().scenario
 	var ray_from := camera.project_ray_origin(pos)
-	var ray_to := camera.project_ray_normal(pos)
+	var ray_dir := camera.project_ray_normal(pos)
+	var ray_to := ray_from + ray_dir * max_distance
 	var intersecting_objects := RenderingServer.instances_cull_ray(ray_from, ray_to, scenario)
 	for obj in intersecting_objects:
 		var intersect_node := instance_from_id(obj)
 		if intersect_node is MeshInstance3D:
 			var mesh_instance := intersect_node as MeshInstance3D
-			var tri_mesh := mesh_instance.mesh.generate_triangle_mesh()
-			var intersect := tri_mesh.intersect_ray(ray_from * mesh_instance.get_transform(), ray_to)
+			var mesh := mesh_instance.mesh
+			if mesh == null:
+				continue
+
+			var tri_mesh := mesh.generate_triangle_mesh()
+			if tri_mesh == null:
+				continue
+			# Convert ray into the mesh’s local space
+			var to_local := mesh_instance.global_transform.affine_inverse()
+			var local_from := to_local * ray_from
+			var local_to := to_local * ray_to
+
+			# Intersect ray with local-space triangles
+			var intersect := tri_mesh.intersect_ray(local_from, local_to)
 			if not intersect.is_empty():
 				return [intersect_node, intersect]
 	return []
@@ -307,15 +325,11 @@ func _remove_node(node: Node) -> void:
 		layer_3d.selected = null
 
 
-func _object_property_changed(object: Cel3DObject) -> void:
+func _object_property_changed(object: Node3D) -> void:
 	var undo_redo := Global.current_project.undo_redo
-	var new_properties := _cel.object_properties.duplicate()
-	new_properties[object.id] = object.serialize()
 	undo_redo.create_action("Change object transform")
-	undo_redo.add_do_property(_cel, "object_properties", new_properties)
-	undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
-	undo_redo.add_do_method(_cel._update_objects_transform.bind(object.id))
-	undo_redo.add_undo_method(_cel._update_objects_transform.bind(object.id))
+	#undo_redo.add_do_method(_cel._update_objects_transform.bind(object.id))
+	#undo_redo.add_undo_method(_cel._update_objects_transform.bind(object.id))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
