@@ -23,8 +23,12 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("swap_tools"):
 		Tools.swap_tools()
+		if Global.swap_color_on_tool_swap:
+			Tools.swap_color()
 	if event.is_action_released("swap_tools") and Global.reset_swap_on_shortcut_release:
 		Tools.swap_tools()
+		if Global.swap_color_on_tool_swap:
+			Tools.swap_color()
 
 	for tool_name in Tools.tools:  # Handle tool shortcuts
 		if not get_node(tool_name).visible:

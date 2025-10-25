@@ -49,6 +49,12 @@ var preferences: Array[Preference] = [
 		false
 	),
 	Preference.new(
+		"swap_color_on_tool_swap",
+		"Tools/ToolOptions/SwapColorWithToolCheckBox",
+		"button_pressed",
+		false
+	),
+	Preference.new(
 		"share_options_between_tools",
 		"Tools/ToolOptions/ShareOptionsCheckBox",
 		"button_pressed",

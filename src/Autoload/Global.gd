@@ -311,6 +311,8 @@ var tool_button_size := ButtonSize.SMALL:
 		Tools.set_button_size(tool_button_size)
 ## Found in Preferences. Determines behavior of the swap_tools action.
 var reset_swap_on_shortcut_release := false
+## Found in Preferences. Determines if color should swap on tool swap.
+var swap_color_on_tool_swap := false
 ## Found in Preferences.
 var share_options_between_tools := false:
 	set(value):
