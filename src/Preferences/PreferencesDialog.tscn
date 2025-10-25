@@ -934,6 +934,22 @@ layout_mode = 2
 layout_mode = 2
 columns = 3
 
+[node name="ResetSwapLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, options will be synced between the left and the right tool.
+For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+mouse_filter = 1
+text = "Share options between the left and the right tools"
+
+[node name="ResetSwapCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, options will be synced between the left and the right tool.
+For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
+mouse_default_cursor_shape = 2
+text = "Reverse tool swap when it's shortcut is released."
+
 [node name="ShareOptionsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
 layout_mode = 2
 size_flags_horizontal = 3

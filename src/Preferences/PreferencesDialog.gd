@@ -43,6 +43,12 @@ var preferences: Array[Preference] = [
 		"custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color", Color.GRAY
 	),
 	Preference.new(
+		"reset_swap_on_shortcut_release",
+		"Tools/ToolOptions/ResetSwapCheckBox",
+		"button_pressed",
+		false
+	),
+	Preference.new(
 		"share_options_between_tools",
 		"Tools/ToolOptions/ShareOptionsCheckBox",
 		"button_pressed",
