@@ -129,6 +129,9 @@ func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 			node3d = OmniLight3D.new()
 			node3d.omni_range = 1.0
 			gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
+	if node3d is MeshInstance3D:
+		var material := StandardMaterial3D.new()
+		node3d.mesh.surface_set_material(0, material)
 	return node3d
 
 
@@ -201,46 +204,7 @@ func node_change_property(node: Node3D, property := &"", by_undo_redo := false) 
 	node_property_changed.emit(node, property, by_undo_redo)
 
 
-#func type_is_mesh(type: ObjectType) -> bool:
-	#if type == ObjectType.DIR_LIGHT or type == ObjectType.SPOT_LIGHT or type == ObjectType.OMNI_LIGHT:
-		#return false
-	#return true
-
-
-#func _add_object_node(id: int) -> void:
-	#if not object_properties.has(id):
-		#print("Object id not found.")
-		#return
-	#var node3d := Cel3DObject.new()
-	#node3d.id = id
-	#node3d.cel = self
-	#parent_node.add_child(node3d)
-	#if object_properties[id].has("id"):
-		#node3d.deserialize(object_properties[id])
-	#else:
-		#if object_properties[id].has("transform"):
-			#node3d.transform = object_properties[id]["transform"]
-		#if object_properties[id].has("file_path"):
-			#node3d.file_path = object_properties[id]["file_path"]
-		#if object_properties[id].has("type"):
-			#node3d.type = object_properties[id]["type"]
-		#object_properties[id] = node3d.serialize()
-	#objects_changed.emit()
-#
-#
-#func _remove_object_node(id: int) -> void:  ## Called by undo/redo
-	#var object := get_object_from_id(id)
-	#if is_instance_valid(object):
-		#if selected == object:
-			#selected = null
-		#object.queue_free()
-	#objects_changed.emit()
-
-
-
 # Overridden Methods:
-
-
 func serialize() -> Dictionary:
 	var dict := super()
 	dict["type"] = get_layer_type()
