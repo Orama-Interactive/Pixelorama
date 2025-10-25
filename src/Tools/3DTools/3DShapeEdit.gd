@@ -54,33 +54,33 @@ var _object_names: Dictionary[Layer3D.ObjectType, String] = {
 	"position": $"%ObjectPosition",
 	"rotation_degrees": $"%ObjectRotation",
 	"scale": $"%ObjectScale",
-	"node3d_type:mesh:size": $"%MeshSize",
-	"node3d_type:mesh:sizev2": $"%MeshSizeV2",
-	"node3d_type:mesh:left_to_right": $"%MeshLeftToRight",
-	"node3d_type:mesh:radius": $"%MeshRadius",
-	"node3d_type:mesh:height": $"%MeshHeight",
-	"node3d_type:mesh:radial_segments": $"%MeshRadialSegments",
-	"node3d_type:mesh:rings": $"%MeshRings",
-	"node3d_type:mesh:is_hemisphere": $"%MeshIsHemisphere",
-	"node3d_type:mesh:top_radius": $"%MeshTopRadius",
-	"node3d_type:mesh:bottom_radius": $"%MeshBottomRadius",
-	"node3d_type:mesh:text": $"%MeshText",
-	"node3d_type:mesh:font": $"%MeshFont",
-	"node3d_type:mesh:pixel_size": $"%MeshPixelSize",
-	"node3d_type:mesh:font_size": $"%MeshFontSize",
-	"node3d_type:mesh:offset": $"%MeshOffsetV2",
-	"node3d_type:mesh:depth": $"%MeshDepth",
-	"node3d_type:mesh:curve_step": $"%MeshCurveStep",
-	"node3d_type:mesh:horizontal_alignment": $"%MeshHorizontalAlignment",
-	"node3d_type:mesh:vertical_alignment": $"%MeshVerticalAlignment",
-	"node3d_type:mesh:line_spacing": $"%MeshLineSpacing",
-	"node3d_type:light_color": $"%LightColor",
-	"node3d_type:light_energy": $"%LightEnergy",
-	"node3d_type:light_negative": $"%LightNegative",
-	"node3d_type:shadow_enabled": $"%ShadowEnabled",
-	"node3d_type:omni_range": $"%OmniRange",
-	"node3d_type:spot_range": $"%SpotRange",
-	"node3d_type:spot_angle": $"%SpotAngle",
+	"mesh:size": $"%MeshSize",
+	"mesh:sizev2": $"%MeshSizeV2",
+	"mesh:left_to_right": $"%MeshLeftToRight",
+	"mesh:radius": $"%MeshRadius",
+	"mesh:height": $"%MeshHeight",
+	"mesh:radial_segments": $"%MeshRadialSegments",
+	"mesh:rings": $"%MeshRings",
+	"mesh:is_hemisphere": $"%MeshIsHemisphere",
+	"mesh:top_radius": $"%MeshTopRadius",
+	"mesh:bottom_radius": $"%MeshBottomRadius",
+	"mesh:text": $"%MeshText",
+	"mesh:font": $"%MeshFont",
+	"mesh:pixel_size": $"%MeshPixelSize",
+	"mesh:font_size": $"%MeshFontSize",
+	"mesh:offset": $"%MeshOffsetV2",
+	"mesh:depth": $"%MeshDepth",
+	"mesh:curve_step": $"%MeshCurveStep",
+	"mesh:horizontal_alignment": $"%MeshHorizontalAlignment",
+	"mesh:vertical_alignment": $"%MeshVerticalAlignment",
+	"mesh:line_spacing": $"%MeshLineSpacing",
+	"light_color": $"%LightColor",
+	"light_energy": $"%LightEnergy",
+	"light_negative": $"%LightNegative",
+	"shadow_enabled": $"%ShadowEnabled",
+	"omni_range": $"%OmniRange",
+	"spot_range": $"%SpotRange",
+	"spot_angle": $"%SpotAngle",
 }
 
 
@@ -225,24 +225,30 @@ func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) 
 	var intersecting_objects := RenderingServer.instances_cull_ray(ray_from, ray_to, scenario)
 	for obj in intersecting_objects:
 		var intersect_node := instance_from_id(obj)
+		if intersect_node is not Node3D:
+			continue
+		# Convert ray into the node’s local space
+		var to_local := (intersect_node as Node3D).global_transform.affine_inverse()
+		var local_from := to_local * ray_from
+		var local_to := to_local * ray_to
 		if intersect_node is MeshInstance3D:
 			var mesh_instance := intersect_node as MeshInstance3D
 			var mesh := mesh_instance.mesh
 			if mesh == null:
 				continue
-
 			var tri_mesh := mesh.generate_triangle_mesh()
 			if tri_mesh == null:
 				continue
-			# Convert ray into the mesh’s local space
-			var to_local := mesh_instance.global_transform.affine_inverse()
-			var local_from := to_local * ray_from
-			var local_to := to_local * ray_to
-
 			# Intersect ray with local-space triangles
 			var intersect := tri_mesh.intersect_ray(local_from, local_to)
 			if not intersect.is_empty():
 				return [intersect_node, intersect]
+		elif intersect_node is Light3D:
+			var light_3d := intersect_node as Light3D
+			var aabb := light_3d.get_aabb()
+			var intersect = aabb.intersects_ray(local_from, local_to)
+			if intersect != null:
+				return [intersect_node]
 	return []
 
 
@@ -297,7 +303,7 @@ func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
 	undo_redo.create_action("Add 3D object")
 	undo_redo.add_do_method(layer_3d.parent_node.add_child.bind(node3d))
 	undo_redo.add_do_reference(node3d)
-	undo_redo.add_undo_method(_remove_node.bind(node3d))
+	undo_redo.add_undo_method(layer_3d.parent_node.remove_child.bind(node3d))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
@@ -310,19 +316,13 @@ func _on_RemoveObject_pressed() -> void:
 		return
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Remove 3D object")
-	undo_redo.add_do_method(_remove_node.bind(layer_3d.selected))
+	undo_redo.add_do_method(layer_3d.parent_node.remove_child.bind(layer_3d.selected))
 	undo_redo.add_undo_method(layer_3d.parent_node.add_child.bind(layer_3d.selected))
 	undo_redo.add_undo_reference(layer_3d.selected)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
 	sprite_changed_this_frame()
-
-
-func _remove_node(node: Node) -> void:
-	layer_3d.parent_node.remove_child(node)
-	if layer_3d.selected == node:
-		layer_3d.selected = null
 
 
 func _object_property_changed(object: Node3D) -> void:

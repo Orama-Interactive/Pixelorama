@@ -130,6 +130,9 @@ func _find_selected_object() -> Cel3DObject:
 
 func add_always_visible(object3d: VisualInstance3D, texture: Texture2D) -> void:
 	always_visible[object3d] = texture
+	if not object3d.tree_exiting.is_connected(remove_always_visible):
+		object3d.tree_exiting.connect(remove_always_visible.bind(object3d))
+		object3d.tree_entered.connect(add_always_visible.bind(object3d, texture))
 	queue_redraw()
 
 
@@ -150,8 +153,8 @@ func get_points(object3d: VisualInstance3D, selected: bool) -> void:
 			for z in corner_per_dimension:
 				var local := aabb.position + Vector3(x, y, z) * aabb.size
 				var world := object3d.global_transform * local
-				if camera.is_position_behind(world):
-					continue
+				#if camera.is_position_behind(world):
+					#continue
 				corners.append(camera.unproject_position(world))
 	var points := PackedVector2Array()
 	for edge in EDGES:
@@ -217,32 +220,31 @@ func clear_points(object3d: VisualInstance3D) -> void:
 
 
 func _draw() -> void:
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	if not layer is Layer3D:
+		return
 	var draw_scale := Vector2(10.0, 10.0) / Global.camera.zoom
 	for object in always_visible:
 		if not always_visible[object]:
 			continue
-		if not object.find_cel():
-			continue
 		var texture: Texture2D = always_visible[object]
 		var center := Vector2(8, 8)
-		var pos: Vector2 = object.camera.unproject_position(object.position)
+		var camera := object.get_viewport().get_camera_3d()
+		var pos: Vector2 = camera.unproject_position(object.position)
 		var back: Vector3 = object.position - object.transform.basis.z
-		var back_proj: Vector2 = object.camera.unproject_position(back) - pos
+		var back_proj: Vector2 = camera.unproject_position(back) - pos
 		back_proj = _resize_vector(back_proj, LIGHT_ARROW_LENGTH)
 		draw_set_transform(pos, 0, draw_scale / 4)
 		draw_texture(texture, -center)
 		draw_set_transform(pos, 0, draw_scale / 2)
-		if object.type == Cel3DObject.Type.DIR_LIGHT:
-			var line_width = lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - back).z) / 2.0)
+		if object is DirectionalLight3D:
+			var line_width := lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - back).z) / 2.0)
 			draw_line(Vector2.ZERO, back_proj, Color.WHITE, line_width)
 			var arrow := _find_arrow(back_proj)
 			_draw_arrow(arrow, Color.WHITE)
 		draw_set_transform_matrix(Transform2D())
 
 	if points_per_object.is_empty():
-		return
-	var layer := Global.current_project.layers[Global.current_project.current_layer]
-	if not layer is Layer3D:
 		return
 	for object in points_per_object:
 		var points: PackedVector2Array = points_per_object[object]

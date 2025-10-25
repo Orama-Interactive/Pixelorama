@@ -34,8 +34,16 @@ var camera: Camera3D  ## Camera that is used to render the Image.
 ## The currently selected [Cel3DObject].
 var selected: Node3D = null:
 	set(value):
+		# If there was a previously selected object, disconnect the tree_exiting signal.
+		if is_instance_valid(selected) and selected.tree_exiting.is_connected(unselect):
+			selected.tree_exiting.disconnect(unselect)
 		selected_object_changed.emit(value, selected)
 		selected = value
+		# If we selected an object, connect its tree_exiting signal to the unselect method.
+		# This is needed in case the selected object gets removed, in which case,
+		# we want to unselect that object.
+		if is_instance_valid(selected) and not selected.tree_exiting.is_connected(unselect):
+			selected.tree_exiting.connect(unselect)
 var gizmos_3d: Node2D = Global.canvas.gizmos_3d
 
 
@@ -66,12 +74,16 @@ func _add_nodes(size: Vector2i) -> void:
 	camera.current = true
 	camera.position.z = 3
 	camera.fov = 70
-	var dir_light := DirectionalLight3D.new()
+	var dir_light := create_node(ObjectType.DIR_LIGHT)
 	dir_light.transform = Transform3D(Basis(), Vector3(-2.5, 0, 0))
 	parent_node.add_child(dir_light)
 	viewport.add_child(camera)
 	viewport.add_child(parent_node)
 	Global.canvas.add_child(viewport)
+
+
+func unselect() -> void:
+	selected = null
 
 
 func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
@@ -115,6 +127,7 @@ func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 			gizmos_3d.add_always_visible(node3d, SPOT_LIGHT_TEXTURE)
 		ObjectType.OMNI_LIGHT:
 			node3d = OmniLight3D.new()
+			node3d.omni_range = 1.0
 			gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
 	return node3d
 
