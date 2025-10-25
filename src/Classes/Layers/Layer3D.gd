@@ -5,7 +5,7 @@ extends BaseLayer
 signal selected_object_changed(new_selected: Node3D, old_selected: Node3D)
 @warning_ignore("unused_signal")
 signal object_hovered(new_hovered: Node3D, old_hovered: Node3D, is_selected: bool)
-signal node_property_changed(node: Node3D)
+signal node_property_changed(node: Node3D, property_name: StringName, by_undo_redo: bool)
 
 enum ObjectType {
 	BOX,
@@ -159,7 +159,7 @@ func node_change_transform(node: Node3D, a: Vector3, b: Vector3, applying_gizmos
 
 func node_move(node: Node3D, pos: Vector3) -> void:
 	node.position += pos
-	node_change_property(node)
+	node_change_property(node, &"position")
 
 
 ## Move the object in the direction it is facing, and restrict mouse movement in that axis
@@ -169,7 +169,7 @@ func node_move_axis(node: Node3D, diff: Vector3, axis: Vector3) -> void:
 		axis_v2 = Vector2(axis.y, axis.z).normalized()
 	var diff_v2 := Vector2(diff.x, diff.y).normalized()
 	node.position += axis * axis_v2.dot(diff_v2) * diff.length()
-	node_change_property(node)
+	node_change_property(node, &"position")
 
 
 func node_change_rotation(node: Node3D, a: Vector3, b: Vector3, axis: Vector3) -> void:
@@ -184,7 +184,7 @@ func node_change_rotation(node: Node3D, a: Vector3, b: Vector3, axis: Vector3) -
 	node.rotation.x = wrapf(node.rotation.x, -PI, PI)
 	node.rotation.y = wrapf(node.rotation.y, -PI, PI)
 	node.rotation.z = wrapf(node.rotation.z, -PI, PI)
-	node_change_property(node)
+	node_change_property(node, &"rotation")
 
 
 ## Scale the object in the direction it is facing, and restrict mouse movement in that axis
@@ -194,11 +194,11 @@ func node_change_scale(node: Node3D, diff: Vector3, axis: Vector3, dir: Vector3)
 		axis_v2 = Vector2(axis.y, axis.z).normalized()
 	var diff_v2 := Vector2(diff.x, diff.y).normalized()
 	node.scale += dir * axis_v2.dot(diff_v2) * diff.length()
-	node_change_property(node)
+	node_change_property(node, &"scale")
 
 
-func node_change_property(node: Node3D) -> void:
-	node_property_changed.emit(node)
+func node_change_property(node: Node3D, property := &"", by_undo_redo := false) -> void:
+	node_property_changed.emit(node, property, by_undo_redo)
 
 
 #func type_is_mesh(type: ObjectType) -> bool:

@@ -1,6 +1,7 @@
 extends BaseTool
 
 var layer_3d: Layer3D
+var _undo_data: Dictionary[StringName, Variant] = {}
 var _cel: Cel3D
 var _can_start_timer := true
 var _hovering: Node3D = null:
@@ -168,6 +169,7 @@ func draw_start(pos: Vector2i) -> void:
 		layer_3d.selected = _hovering
 		Global.canvas.gizmos_3d.get_points(_hovering, true)
 		_dragging = true
+		_undo_data = _get_undo_data(layer_3d.selected)
 		_prev_mouse_pos = pos
 	else:  # We're not hovering
 		if is_instance_valid(layer_3d.selected):
@@ -176,6 +178,7 @@ func draw_start(pos: Vector2i) -> void:
 				layer_3d.selected = null
 			else:
 				_dragging = true
+				_undo_data = _get_undo_data(layer_3d.selected)
 				_prev_mouse_pos = pos
 
 
@@ -198,7 +201,7 @@ func draw_end(_position: Vector2i) -> void:
 	_dragging = false
 	if is_instance_valid(layer_3d.selected) and _has_been_dragged:
 		Global.canvas.gizmos_3d.applying_gizmos = Layer3D.Gizmos.NONE
-		_object_property_changed(layer_3d.selected)
+		Global.canvas.gizmos_3d.queue_redraw()
 	_has_been_dragged = false
 	sprite_changed_this_frame()
 
@@ -252,6 +255,14 @@ func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) 
 	return []
 
 
+func _get_undo_data(node: Node3D) -> Dictionary[StringName, Variant]:
+	var data: Dictionary[StringName, Variant]
+	data[&"position"] = node.position
+	data[&"rotation"] = node.rotation
+	data[&"scale"] = node.scale
+	return data
+
+
 func _on_ObjectOptionButton_item_selected(index: int) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
@@ -267,6 +278,7 @@ func _cel_switched() -> void:
 	if is_instance_valid(layer_3d):
 		if layer_3d.selected_object_changed.is_connected(_on_selected_object):
 			layer_3d.selected_object_changed.disconnect(_on_selected_object)
+			layer_3d.node_property_changed.disconnect(_object_property_changed)
 	if not Global.current_project.get_current_cel() is Cel3D:
 		layer_3d = null
 		get_child(0).visible = false  # Just to ensure that the content of the tool is hidden
@@ -276,6 +288,7 @@ func _cel_switched() -> void:
 	var selected := layer_3d.selected
 	layer_3d.selected = null
 	layer_3d.selected_object_changed.connect(_on_selected_object)
+	layer_3d.node_property_changed.connect(_object_property_changed)
 	#if not _cel.scene_property_changed.is_connected(_set_cel_node_values):
 		#_cel.scene_property_changed.connect(_set_cel_node_values)
 		#_cel.objects_changed.connect(_fill_object_option_button)
@@ -325,9 +338,18 @@ func _on_RemoveObject_pressed() -> void:
 	sprite_changed_this_frame()
 
 
-func _object_property_changed(object: Node3D) -> void:
+func _object_property_changed(object: Node3D, property: StringName, by_undo_redo: bool) -> void:
+	if by_undo_redo:
+		return
+	if property not in _undo_data:
+		print(property, " not found in undo data.")
+		return
 	var undo_redo := Global.current_project.undo_redo
-	undo_redo.create_action("Change object transform")
+	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)
+	undo_redo.add_do_property(object, property, object.get(property))
+	undo_redo.add_do_method(layer_3d.emit_signal.bind(&"node_property_changed", object, property, true))
+	undo_redo.add_undo_property(object, property, _undo_data[property])
+	undo_redo.add_undo_method(layer_3d.emit_signal.bind(&"node_property_changed", object, property, true))
 	#undo_redo.add_do_method(_cel._update_objects_transform.bind(object.id))
 	#undo_redo.add_undo_method(_cel._update_objects_transform.bind(object.id))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -528,7 +550,8 @@ func _fill_object_option_button() -> void:
 
 func _on_UndoRedoTimer_timeout() -> void:
 	if is_instance_valid(layer_3d.selected):
-		_object_property_changed(layer_3d.selected)
+		pass
+		#_object_property_changed(layer_3d.selected)
 	else:
 		var undo_redo: UndoRedo = Global.current_project.undo_redo
 		undo_redo.create_action("Change 3D layer properties")
