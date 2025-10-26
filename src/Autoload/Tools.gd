@@ -565,6 +565,8 @@ func swap_tools() -> void:
 				_slots[MOUSE_BUTTON_RIGHT].tool_node.set_config(left_config)
 				_slots[MOUSE_BUTTON_LEFT].tool_node.update_config()
 				_slots[MOUSE_BUTTON_RIGHT].tool_node.update_config()
+				if Global.swap_color_on_tool_swap:
+					Tools.swap_color()
 
 
 func assign_color(color: Color, button: int, change_alpha := true, index: int = -1) -> void:
