@@ -128,7 +128,7 @@ func add_palette_as_project_palette(new_palette: Palette) -> void:
 
 
 func undo_redo_add_palette(new_palette: Palette):
-	var undo_redo = Global.current_project.undo_redo
+	var undo_redo := Global.current_project.undo_redo
 	undo_redo.add_do_method(add_palette_as_project_palette.bind(new_palette))
 	undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
 	undo_redo.add_undo_method(select_palette.bind(current_palette.name))

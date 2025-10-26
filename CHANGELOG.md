@@ -5,15 +5,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 <br><br>
 
 ## [v1.1.6] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
 Built using Godot 4.5
 
 ### Added
+- Made a new website for Pixelorama! You can visit it on: https://www.pixelorama.org/
+- Added buttons that enable diagonal symmetry!
+- If Pixelorama crashed in the previous session, a window will appear the next time it is launched to let the user know that they can restore data, if there are any projects that can be restored.
 - Two new color picker shapes, OK HS Rectangle and OK HL Rectangle.
 - Users can now drag and drop font files to load them. Fonts can be used by the text tool, text meshes in 3D layers and the user interface itself.
+- Added an Undo History dialog.
+- The convolution matrix layer effect now has a kernel normalization factor.
+- Added Arabic translation and made improvements to the UI so that it works better for Right-To-Left languages.
+- Pixelorama can now load Lospec palettes if started with "lospec-palette://" plus the palette's name as a CLI argument. In theory, this allows Pixelorama to open when clicking on the "Open In App" button on a palette on Lospec's website, but for now **it does not work automatically**, as it requires different setup for different operating systems.
+- A preview.png file is now saved inside pxo files. This can help file managers to generate thumbnails for pxo files. **Note that this doesn't mean that you will automatically see thumbnails for pxo files — it's up to file managers to implement this.**
+
+### Changed
+- **Extensions made for previous versions of Pixelorama will fail to load on this version.** Make sure to re-download the extensions you want.
+- The timeline now scrolls when adding/moving layers, when the current cel is changing from shortcuts or from the timeline buttons, and when cels, frames and layers are being dragged.
+- The layer effect settings dialog now scrolls automatically when dragging layer effects to re-order them.
+- When moving frames using the arrow buttons in the timeline, all moved cels are now being selected. [#1358](https://github.com/Orama-Interactive/Pixelorama/pull/1358)
+- The "Offset/Zoom" effect has been renamed to "Offset & Scale". [#1362](https://github.com/Orama-Interactive/Pixelorama/pull/1362)
+- On Linux, the native screen color picker of the operating system is now used.
 
 ### Fixed
+- The canvas no longer jitters when it is zoomed out a lot and smooth zoom is enabled.
 - The screen color picker now works properly on Linux, users can pick colors outside of Pixelorama's window.
+- Optimized the "Mirror Image" effect when a selection is active. Now it should no longer lag on big canvases.
+- Fixed a crash when a user selects a 3D object, then does an undo or redo [#1353](https://github.com/Orama-Interactive/Pixelorama/pull/1353)
+- Fixed tilemap cells being erased in manual mode if there are cells outside of the canvas boundaries.
+- Fixed  transparent checkers not following canvas movement vertically, if "Follow canvs movement" was enabled, and "Follow canvas zoom level" was disabled from the Preferences.
 - The color picker's RGB values can no longer go higher than 255. [#349](https://github.com/Orama-Interactive/Pixelorama/issues/349)
+- Fixed the restore to default button in the Preferences not hiding after being clicked next to text fields and color buttons.
+- Fixed the "Open last project" button in the splash screen not hiding in the Web version.
 
 ## [v1.1.5] - 2025-09-06
 This update has been brought to you by the contributions of:

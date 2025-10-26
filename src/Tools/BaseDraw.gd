@@ -258,7 +258,6 @@ func commit_undo(action := "Draw") -> void:
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if TileSetPanel.placing_tiles:
 		tile_editing_mode = TileSetPanel.TileEditingMode.STACK
-	manage_undo_redo_palettes()
 	project.update_tilemaps(_undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data()
 	var frame := -1
@@ -268,6 +267,7 @@ func commit_undo(action := "Draw") -> void:
 		layer = project.current_layer
 
 	project.undo_redo.create_action(action)
+	manage_undo_redo_palettes()
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
@@ -277,7 +277,7 @@ func commit_undo(action := "Draw") -> void:
 
 
 ## Manages conversion of global palettes into local if a drawable tool is used
-func manage_undo_redo_palettes():
+func manage_undo_redo_palettes() -> void:
 	if _is_eraser:
 		return
 	var palette_in_focus := Palettes.current_palette
