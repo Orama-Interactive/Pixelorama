@@ -5,7 +5,7 @@ extends BaseLayer
 signal selected_object_changed(new_selected: Node3D, old_selected: Node3D)
 @warning_ignore("unused_signal")
 signal object_hovered(new_hovered: Node3D, old_hovered: Node3D, is_selected: bool)
-signal node_property_changed(node: Node3D, property_name: StringName, by_undo_redo: bool)
+signal node_property_changed(node: Object, property_name: StringName, by_undo_redo: bool)
 
 enum ObjectType {
 	BOX,
@@ -44,7 +44,22 @@ var selected: Node3D = null:
 		# we want to unselect that object.
 		if is_instance_valid(selected) and not selected.tree_exiting.is_connected(unselect):
 			selected.tree_exiting.connect(unselect)
-var gizmos_3d: Node2D = Global.canvas.gizmos_3d
+
+static var properties_to_exclude: Array[String] = [
+	"process_mode",
+	"process_priority",
+	"process_physics_priority",
+	"process_thread_group",
+	"physics_interpolation_mode",
+	"auto_translate_mode",
+	"editor_description",
+	"rotation_edit_mode",
+	"top_level",
+	"current",
+	"resource_local_to_scene",
+	"resource_name",
+	"resource_path",
+]
 
 
 func _init(_project: Project, _name := "", from_pxo := false) -> void:
@@ -86,7 +101,7 @@ func unselect() -> void:
 	selected = null
 
 
-func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
+static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 	var node3d: Node3D
 	match type:
 		ObjectType.BOX:
@@ -121,18 +136,51 @@ func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 			node3d.mesh = custom_mesh
 		ObjectType.DIR_LIGHT:
 			node3d = DirectionalLight3D.new()
-			gizmos_3d.add_always_visible(node3d, DIR_LIGHT_TEXTURE)
+			Global.canvas.gizmos_3d.add_always_visible(node3d, DIR_LIGHT_TEXTURE)
 		ObjectType.SPOT_LIGHT:
 			node3d = SpotLight3D.new()
-			gizmos_3d.add_always_visible(node3d, SPOT_LIGHT_TEXTURE)
+			Global.canvas.gizmos_3d.add_always_visible(node3d, SPOT_LIGHT_TEXTURE)
 		ObjectType.OMNI_LIGHT:
 			node3d = OmniLight3D.new()
 			node3d.omni_range = 1.0
-			gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
+			Global.canvas.gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
 	if node3d is MeshInstance3D:
 		var material := StandardMaterial3D.new()
 		node3d.mesh.surface_set_material(0, material)
+		#print(node3d.mesh.get_property_list())
+		#print(material.get_property_list())
+	#print(node3d.get_property_list())
 	return node3d
+
+
+static func get_object_property_list(object: Object) -> Array[Dictionary]:
+	var property_list := object.get_property_list()
+	property_list = property_list.filter(filter_object_properties)
+	#if object is MeshInstance3D:
+		#if is_instance_valid(object.mesh):
+			#var mesh := object.mesh as Mesh
+			#var mesh_property_list := get_object_property_list(mesh)
+			#for mesh_prop in mesh_property_list:
+				#mesh_prop["name"] = "mesh:%s" % mesh_prop["name"]
+			#property_list.append_array(mesh_property_list)
+			#if is_instance_valid(mesh.surface_get_material(0)):
+				#var material := mesh.surface_get_material(0) as BaseMaterial3D
+				#var material_property_list := get_object_property_list(material)
+				#for mat_prop in material_property_list:
+					#mat_prop["name"] = "mesh:material:%s" % mat_prop["name"]
+				#property_list.append_array(material_property_list)
+	return property_list
+
+
+static func filter_object_properties(dict: Dictionary) -> bool:
+	var prop_name := dict["name"] as String
+	if prop_name in properties_to_exclude:
+		return false
+	var usage := dict["usage"] as int
+	var type := dict["type"] as Variant.Type
+	var usage_editor := usage & PROPERTY_USAGE_EDITOR == PROPERTY_USAGE_EDITOR
+	var is_type := type in [TYPE_BOOL, TYPE_INT, TYPE_FLOAT, TYPE_STRING, TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR3I, TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR, TYPE_STRING_NAME]
+	return usage_editor and is_type
 
 
 func node_change_transform(node: Node3D, a: Vector3, b: Vector3, applying_gizmos: Gizmos) -> void:
