@@ -144,7 +144,7 @@ static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 			node3d = OmniLight3D.new()
 			node3d.omni_range = 1.0
 			Global.canvas.gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
-	if node3d is MeshInstance3D:
+	if node3d is MeshInstance3D and not is_instance_valid(node3d.mesh.surface_get_material(0)):
 		var material := StandardMaterial3D.new()
 		node3d.mesh.surface_set_material(0, material)
 		#print(node3d.mesh.get_property_list())

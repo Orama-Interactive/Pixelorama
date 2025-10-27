@@ -3,6 +3,7 @@ extends BaseTool
 const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV2.tscn")
 const VALUE_SLIDER_V3_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV3.tscn")
 
+const FOLDABLE_CONTAINER_GROUP_NAME := &"3DObjectPropertyNodes"
 var layer_3d: Layer3D
 var _undo_data: Dictionary[StringName, Variant] = {}
 var _cel: Cel3D
@@ -33,7 +34,6 @@ var _object_names: Dictionary[Layer3D.ObjectType, String] = {
 	Layer3D.ObjectType.OMNI_LIGHT: "Point light",
 }
 
-@onready var object_option_button := $"%ObjectOptionButton" as OptionButton
 @onready var new_object_menu_button := $"%NewObjectMenuButton" as MenuButton
 @onready var remove_object_button := $"%RemoveObject" as Button
 @onready var load_model_dialog := $LoadModelDialog as FileDialog
@@ -184,17 +184,6 @@ func _get_undo_data(node: Object) -> Dictionary[StringName, Variant]:
 	return data
 
 
-func _on_ObjectOptionButton_item_selected(index: int) -> void:
-	if not Global.current_project.get_current_cel() is Cel3D:
-		return
-	#var id := object_option_button.get_item_id(index) - 1
-	#var object := _cel.get_object_from_id(id)
-	#if not is_instance_valid(object):
-		#layer_3d.selected = null
-		#return
-	#layer_3d.selected = object
-
-
 func _cel_switched() -> void:
 	if is_instance_valid(layer_3d):
 		if layer_3d.selected_object_changed.is_connected(_on_selected_object):
@@ -210,12 +199,7 @@ func _cel_switched() -> void:
 	layer_3d.selected = null
 	layer_3d.selected_object_changed.connect(_on_selected_object)
 	layer_3d.node_property_changed.connect(_object_property_changed)
-	#if not _cel.scene_property_changed.is_connected(_set_cel_node_values):
-		#_cel.scene_property_changed.connect(_set_cel_node_values)
-		#_cel.objects_changed.connect(_fill_object_option_button)
-		#_cel.selected_object.connect(_selected_object)
 	_set_cel_node_values()
-	_fill_object_option_button()
 	sprite_changed_this_frame()
 	if is_instance_valid(selected):
 		layer_3d.selected = selected
@@ -240,7 +224,6 @@ func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
 	sprite_changed_this_frame()
-	#_cel.current_object_id += 1
 
 
 func _on_RemoveObject_pressed() -> void:
@@ -258,6 +241,23 @@ func _on_RemoveObject_pressed() -> void:
 
 
 func _object_property_changed(object: Object, property: StringName, by_undo_redo: bool) -> void:
+	var curr_value = object.get(property)
+	for foldable in get_tree().get_nodes_in_group(FOLDABLE_CONTAINER_GROUP_NAME):
+		if foldable.get_meta(&"object") != object:
+			continue
+		var grid_container := foldable.get_child(0)
+		for property_editor_node in grid_container.get_children():
+			if property_editor_node.name == property:
+				if property_editor_node is CheckBox:
+					property_editor_node.set_pressed_no_signal(curr_value)
+				elif property_editor_node is ValueSlider:
+					property_editor_node.set_value_no_signal_update_display(curr_value)
+				elif property_editor_node is ValueSliderV2:
+					property_editor_node.set_value_no_signal(curr_value)
+				elif property_editor_node is ValueSliderV3:
+					property_editor_node.set_value_no_signal(curr_value)
+				elif property_editor_node is ColorPickerButton:
+					property_editor_node.color = curr_value
 	if by_undo_redo:
 		return
 	if property not in _undo_data:
@@ -265,12 +265,10 @@ func _object_property_changed(object: Object, property: StringName, by_undo_redo
 		return
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)
-	undo_redo.add_do_property(object, property, object.get(property))
+	undo_redo.add_do_property(object, property, curr_value)
 	undo_redo.add_do_method(layer_3d.emit_signal.bind(&"node_property_changed", object, property, true))
 	undo_redo.add_undo_property(object, property, _undo_data[property])
 	undo_redo.add_undo_method(layer_3d.emit_signal.bind(&"node_property_changed", object, property, true))
-	#undo_redo.add_do_method(_cel._update_objects_transform.bind(object.id))
-	#undo_redo.add_undo_method(_cel._update_objects_transform.bind(object.id))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
@@ -279,36 +277,35 @@ func _object_property_changed(object: Object, property: StringName, by_undo_redo
 func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
 	if object == old_object:
 		return
-	get_tree().call_group(&"3DObjectPropertyNodes", &"queue_free")
+	get_tree().call_group(FOLDABLE_CONTAINER_GROUP_NAME, &"queue_free")
 	if is_instance_valid(object):
 		remove_object_button.disabled = false
-		_create_object_property_nodes(object)
+		var node_foldable := _create_object_property_nodes(object)
+		node_foldable.set_meta("object", object)
+		node_foldable.title = "Node"
 		if object is MeshInstance3D:
 			if is_instance_valid(object.mesh):
 				var mesh := object.mesh as Mesh
-				_create_object_property_nodes(mesh)
-				#var mesh_property_list := get_object_property_list(mesh)
-				#for mesh_prop in mesh_property_list:
-					#mesh_prop["name"] = "mesh:%s" % mesh_prop["name"]
-				#property_list.append_array(mesh_property_list)
+				var mesh_foldable := _create_object_property_nodes(mesh)
+				mesh_foldable.set_meta("object", mesh)
+				mesh_foldable.title = "Mesh"
+				mesh_foldable.fold()
 				if is_instance_valid(mesh.surface_get_material(0)):
 					var mat := mesh.surface_get_material(0) as BaseMaterial3D
-					_create_object_property_nodes(mat)
-					#var material_property_list := get_object_property_list(material)
-					#for mat_prop in material_property_list:
-						#mat_prop["name"] = "mesh:material:%s" % mat_prop["name"]
-					#property_list.append_array(material_property_list)
-		#if not object.property_changed.is_connected(_set_object_node_values):
-			#object.property_changed.connect(_set_object_node_values)
-		#object_option_button.select(object_option_button.get_item_index(object.id + 1))
+					var mat_foldable := _create_object_property_nodes(mat)
+					mat_foldable.set_meta("object", mat)
+					mat_foldable.title = "Material"
+					mat_foldable.fold()
 	else:
 		var camera_foldable := _create_object_property_nodes(layer_3d.camera)
+		camera_foldable.set_meta("object", layer_3d.camera)
 		camera_foldable.title = "Camera"
-		var environment_foldable := _create_object_property_nodes(layer_3d.viewport.world_3d.environment)
+		var environment := layer_3d.viewport.world_3d.environment
+		var environment_foldable := _create_object_property_nodes(environment)
+		environment_foldable.set_meta("object", environment)
 		environment_foldable.title = "Environment"
 		environment_foldable.fold()
 		remove_object_button.disabled = true
-		object_option_button.select(0)
 
 
 func _set_cel_node_values() -> void:
@@ -317,7 +314,7 @@ func _set_cel_node_values() -> void:
 
 func _create_object_property_nodes(object: Object) -> FoldableContainer:
 	var foldable_container := FoldableContainer.new()
-	foldable_container.add_to_group(&"3DObjectPropertyNodes")
+	foldable_container.add_to_group(FOLDABLE_CONTAINER_GROUP_NAME)
 	add_child(foldable_container)
 	var grid_container := GridContainer.new()
 	grid_container.columns = 2
@@ -325,6 +322,7 @@ func _create_object_property_nodes(object: Object) -> FoldableContainer:
 	var property_list := Layer3D.get_object_property_list(object)
 	for prop in property_list:
 		var prop_name: String = prop["name"]
+		var curr_value = object.get(prop_name)
 		var humanized_name := Keychain.humanize_snake_case(prop_name, true)
 		var type: Variant.Type = prop["type"]
 		var hint: PropertyHint = prop["hint"]
@@ -337,11 +335,14 @@ func _create_object_property_nodes(object: Object) -> FoldableContainer:
 				check_box.name = prop_name
 				check_box.text = "On"
 				check_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				check_box.button_pressed = object.get_indexed(prop_name) == true
-				check_box.toggled.connect(_object_property_toggled.bind(object, prop_name))
+				check_box.button_pressed = curr_value == true
+				check_box.button_down.connect(func(): _undo_data = _get_undo_data(object))
+				check_box.toggled.connect(_set_value_from_node.bind(object, prop_name))
 				grid_container.add_child(label)
 				grid_container.add_child(check_box)
 			TYPE_INT, TYPE_FLOAT:
+				if hint == PROPERTY_HINT_FLAGS:
+					continue
 				if hint != PROPERTY_HINT_ENUM and hint != PROPERTY_HINT_ENUM_SUGGESTION:
 					var label := Label.new()
 					label.text = humanized_name
@@ -353,9 +354,28 @@ func _create_object_property_nodes(object: Object) -> FoldableContainer:
 					slider.allow_lesser = true
 					slider.allow_greater = true
 					slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-					slider.value = object.get_indexed(prop_name)
+					slider.value = curr_value
+					slider.drag_started.connect(func(): _undo_data = _get_undo_data(object))
+					slider.value_changed.connect(_set_value_from_node.bind(object, prop_name))
 					grid_container.add_child(label)
 					grid_container.add_child(slider)
+			TYPE_VECTOR2, TYPE_VECTOR2I:
+				var label := Label.new()
+				label.text = humanized_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				var slider := VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
+				slider.name = prop_name
+				slider.show_ratio = true
+				if type == TYPE_VECTOR2:
+					slider.step = 0.01
+				slider.allow_lesser = true
+				slider.allow_greater = true
+				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				slider.value = curr_value
+				slider.drag_started.connect(func(): _undo_data = _get_undo_data(object))
+				slider.value_changed.connect(_set_value_from_node.bind(object, prop_name))
+				grid_container.add_child(label)
+				grid_container.add_child(slider)
 			TYPE_VECTOR3, TYPE_VECTOR3I:
 				var label := Label.new()
 				label.text = humanized_name
@@ -368,105 +388,33 @@ func _create_object_property_nodes(object: Object) -> FoldableContainer:
 				slider.allow_lesser = true
 				slider.allow_greater = true
 				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				slider.value = object.get_indexed(prop_name)
+				slider.value = curr_value
+				slider.drag_started.connect(func(): _undo_data = _get_undo_data(object))
+				slider.value_changed.connect(_set_value_from_node.bind(object, prop_name))
 				grid_container.add_child(label)
 				grid_container.add_child(slider)
-				#layer_3d.node_property_changed.connect(_update_property_sliders.bind(slider, object))
+			TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR:
+				var label := Label.new()
+				label.text = humanized_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				var color_picker_button := ColorPickerButton.new()
+				color_picker_button.name = prop_name
+				color_picker_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				color_picker_button.color = curr_value
+				color_picker_button.button_down.connect(func(): _undo_data = _get_undo_data(object))
+				color_picker_button.color_changed.connect(_set_value_from_node.bind(object, prop_name))
+				grid_container.add_child(label)
+				grid_container.add_child(color_picker_button)
 	return foldable_container
 
 
-## TODO: Remove, doesn't work properly.
-## Update the value of sliders when an object gets transformed by gizmos.
-func _update_property_sliders(
-	node_changed: Node3D, property_name: StringName, _by_undo_redo: bool, slider, target_node: Node3D
-) -> void:
-	if node_changed != target_node:
-		return
-	if not is_instance_valid(slider):
-		return
-	var new_value = node_changed.get(property_name)
-	slider.set_value_no_signal(new_value)
-
-
-func _get_previous_node(node: Node) -> Node:
-	return node.get_parent().get_child(node.get_index() - 1)
-
-
-func _set_value_from_node(to_edit: Object, value, prop: String) -> void:
+func _set_value_from_node(value, to_edit: Object, prop: String) -> void:
 	if not is_instance_valid(to_edit):
 		return
-	#if "mesh_" in prop:
-		#prop = prop.replace("mesh_", "")
-		#to_edit = to_edit.node3d_type.mesh
-	#if "scale" in prop:
-		#value /= 100
 	#if "font" in prop and not "font_" in prop:
 		#value = Global.find_font_from_name(%MeshFont.get_item_text(value))
-	to_edit.set_indexed(prop, value)
+	to_edit.set(prop, value)
 	layer_3d.node_property_changed.emit(to_edit, prop, false)
-
-
-func _object_property_vector3_changed(value: Vector3, prop: String) -> void:
-	_set_value_from_node(layer_3d.selected, value, prop)
-	#Global.canvas.gizmos_3d.queue_redraw()
-
-
-func _object_property_vector2_changed(value: Vector2, prop: String) -> void:
-	_set_value_from_node(layer_3d.selected, value, prop)
-
-
-func _object_property_value_changed(value: float, prop: String) -> void:
-	_set_value_from_node(layer_3d.selected, value, prop)
-
-
-func _object_property_item_selected(value: int, prop: String) -> void:
-	_set_value_from_node(layer_3d.selected, value, prop)
-
-
-func _object_property_color_changed(value: Color, prop: String) -> void:
-	_set_value_from_node(layer_3d.selected, value, prop)
-
-
-func _object_property_toggled(value: bool, object: Object, prop: String) -> void:
-	_undo_data = _get_undo_data(object)
-	_set_value_from_node(object, value, prop)
-
-
-func _object_property_text_changed(text_edit: TextEdit, prop: String) -> void:
-	_set_value_from_node(layer_3d.selected, text_edit.text, prop)
-
-
-func _fill_object_option_button() -> void:
-	if not _cel is Cel3D:
-		return
-	object_option_button.clear()
-	object_option_button.add_item("None", 0)
-	var existing_names := {}
-	for id in _cel.object_properties:
-		var item_name: String = _object_names[_cel.object_properties[id]["type"]]
-		if item_name in existing_names:
-			# If there is already an object with the same name, under a number next to it
-			existing_names[item_name] += 1
-			item_name += " (%s)" % existing_names[item_name]
-		else:
-			existing_names[item_name] = 1
-		object_option_button.add_item(item_name, id + 1)
-
-
-func _on_UndoRedoTimer_timeout() -> void:
-	if is_instance_valid(layer_3d.selected):
-		pass
-		#_object_property_changed(layer_3d.selected)
-	else:
-		var undo_redo: UndoRedo = Global.current_project.undo_redo
-		undo_redo.create_action("Change 3D layer properties")
-		undo_redo.add_do_property(_cel, "scene_properties", _cel.serialize_scene_properties())
-		undo_redo.add_undo_property(_cel, "scene_properties", _cel.scene_properties)
-		undo_redo.add_do_method(_cel._scene_property_changed)
-		undo_redo.add_undo_method(_cel._scene_property_changed)
-		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-		undo_redo.commit_action()
 
 
 func _on_LoadModelDialog_files_selected(paths: PackedStringArray) -> void:

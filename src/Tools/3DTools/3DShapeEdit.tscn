@@ -16,22 +16,7 @@ script = ExtResource("2")
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="HandleObjects" index="0"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Selected object:"
-
-[node name="ObjectOptionButton" type="OptionButton" parent="HandleObjects" index="1"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-selected = 0
-item_count = 1
-popup/item_0/text = "None"
-popup/item_0/id = 0
-
-[node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="2"]
+[node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="0"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -40,7 +25,7 @@ mouse_default_cursor_shape = 2
 text = "Add new object"
 flat = false
 
-[node name="RemoveObject" type="Button" parent="HandleObjects" index="3"]
+[node name="RemoveObject" type="Button" parent="HandleObjects" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -59,7 +44,6 @@ access = 2
 filters = PackedStringArray("*.obj")
 show_hidden_files = true
 
-[connection signal="item_selected" from="HandleObjects/ObjectOptionButton" to="." method="_on_ObjectOptionButton_item_selected"]
 [connection signal="pressed" from="HandleObjects/RemoveObject" to="." method="_on_RemoveObject_pressed"]
 [connection signal="files_selected" from="LoadModelDialog" to="." method="_on_LoadModelDialog_files_selected"]
 [connection signal="visibility_changed" from="LoadModelDialog" to="." method="_on_load_model_dialog_visibility_changed"]
