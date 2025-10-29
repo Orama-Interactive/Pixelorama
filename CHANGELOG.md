@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
-Built using Godot 4.5
+Built using Godot 4.5.1
 
 ### Added
 - Made a new website for Pixelorama! You can visit it on: https://www.pixelorama.org/
