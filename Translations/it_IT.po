@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-10-03 00:34\n"
+"PO-Revision-Date: 2025-10-16 01:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -138,6 +138,14 @@ msgstr "Annulla"
 
 msgid "Redo"
 msgstr "Ripeti"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr "Cronologia Annullamenti"
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr "Stato iniziale"
 
 msgid "Copy"
 msgstr "Copia"
@@ -2476,14 +2484,24 @@ msgstr "Specchiatura"
 msgid "Horizontal"
 msgstr "Orizzontale"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Abilita disegno orizzontale a specchio"
 
 msgid "Vertical"
 msgstr "Verticale"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Abilita disegno verticale a specchio"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr "Abilita disegno diagonale (↗) specchiato"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr "Abilita disegno diagonale (↘) specchiato"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"

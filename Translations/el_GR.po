@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-10-03 12:22\n"
+"PO-Revision-Date: 2025-10-22 22:26\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -138,6 +138,14 @@ msgstr "Αναίρεση"
 
 msgid "Redo"
 msgstr "Ακύρωση αναίρεσης"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr "Ιστορικό αναίρεσης"
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr "Αρχική κατάσταση"
 
 msgid "Copy"
 msgstr "Αντιγραφή"
@@ -2476,14 +2484,24 @@ msgstr "Κατοπτρισμός"
 msgid "Horizontal"
 msgstr "Οριζόντια"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με οριζόντιο κατοπτρισμό"
 
 msgid "Vertical"
 msgstr "Κάθετα"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Ενεργοποίηση ζωγραφικής με κάθετο κατοπτρισμό"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr "Ενεργοποίηση ζωγραφικής με διαγώνιο (↗) κατοπτρισμό"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr "Ενεργοποίηση ζωγραφικής με διαγώνιο (↘) κατοπτρισμό"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
