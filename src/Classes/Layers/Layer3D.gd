@@ -5,7 +5,7 @@ extends BaseLayer
 signal selected_object_changed(new_selected: Node3D, old_selected: Node3D)
 @warning_ignore("unused_signal")
 signal object_hovered(new_hovered: Node3D, old_hovered: Node3D, is_selected: bool)
-signal node_property_changed(node: Object, property_name: StringName, by_undo_redo: bool)
+signal node_property_changed(node: Node, property_name: StringName)
 
 enum ObjectType {
 	BOX,
@@ -30,7 +30,10 @@ const OMNI_LIGHT_TEXTURE := preload("res://assets/graphics/gizmos/omni_light.svg
 
 var viewport: SubViewport  ## SubViewport used by the layer.
 var parent_node: Node3D  ## Parent node of the 3D objects placed in the layer.
+var world_environment: WorldEnvironment
 var camera: Camera3D  ## Camera that is used to render the Image.
+var animation_player: AnimationPlayer
+var animation: Animation
 ## The currently selected [Cel3DObject].
 var selected: Node3D = null:
 	set(value):
@@ -59,6 +62,7 @@ static var properties_to_exclude: Array[String] = [
 	"resource_local_to_scene",
 	"resource_name",
 	"resource_path",
+	"editor_only",
 ]
 
 
@@ -80,19 +84,28 @@ func _add_nodes(size: Vector2i) -> void:
 	viewport.size = size
 	viewport.own_world_3d = true
 	viewport.transparent_bg = true
-	var world := World3D.new()
-	world.environment = Environment.new()
-	world.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	viewport.world_3d = world
+	world_environment = WorldEnvironment.new()
+	world_environment.environment = Environment.new()
+	world_environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	parent_node = Node3D.new()
 	camera = Camera3D.new()
 	camera.current = true
 	camera.position.z = 3
 	camera.fov = 70
+	animation_player = AnimationPlayer.new()
+	var animation_library := AnimationLibrary.new()
+	animation = Animation.new()
+	animation_library.add_animation(&"__pxo_anim", animation)
+	animation_player.add_animation_library(&"__pxo_anim_lib", animation_library)
+	animation_player.current_animation = "__pxo_anim_lib/__pxo_anim"
+	animation_player.speed_scale = project.fps
+	animation.length = project.frames.size()
 	var dir_light := create_node(ObjectType.DIR_LIGHT)
 	dir_light.transform = Transform3D(Basis(), Vector3(-2.5, 0, 0))
 	parent_node.add_child(dir_light)
+	viewport.add_child(animation_player)
 	viewport.add_child(camera)
+	viewport.add_child(world_environment)
 	viewport.add_child(parent_node)
 	Global.canvas.add_child(viewport)
 
@@ -156,19 +169,25 @@ static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 static func get_object_property_list(object: Object) -> Array[Dictionary]:
 	var property_list := object.get_property_list()
 	property_list = property_list.filter(filter_object_properties)
-	#if object is MeshInstance3D:
-		#if is_instance_valid(object.mesh):
-			#var mesh := object.mesh as Mesh
-			#var mesh_property_list := get_object_property_list(mesh)
-			#for mesh_prop in mesh_property_list:
-				#mesh_prop["name"] = "mesh:%s" % mesh_prop["name"]
-			#property_list.append_array(mesh_property_list)
-			#if is_instance_valid(mesh.surface_get_material(0)):
-				#var material := mesh.surface_get_material(0) as BaseMaterial3D
-				#var material_property_list := get_object_property_list(material)
-				#for mat_prop in material_property_list:
-					#mat_prop["name"] = "mesh:material:%s" % mat_prop["name"]
-				#property_list.append_array(material_property_list)
+	if object is MeshInstance3D:
+		if is_instance_valid(object.mesh):
+			var mesh := object.mesh as Mesh
+			var mesh_property_list := get_object_property_list(mesh)
+			for mesh_prop in mesh_property_list:
+				mesh_prop["name"] = "mesh:%s" % mesh_prop["name"]
+			property_list.append_array(mesh_property_list)
+			if is_instance_valid(mesh.surface_get_material(0)):
+				var material := mesh.surface_get_material(0) as BaseMaterial3D
+				var material_property_list := get_object_property_list(material)
+				for mat_prop in material_property_list:
+					mat_prop["name"] = "mesh:material:%s" % mat_prop["name"]
+				property_list.append_array(material_property_list)
+	elif object is WorldEnvironment:
+		if is_instance_valid(object.environment):
+			var env_property_list := get_object_property_list(object.environment)
+			for env_prop in env_property_list:
+				env_prop["name"] = "environment:%s" % env_prop["name"]
+			property_list = env_property_list
 	return property_list
 
 
@@ -209,21 +228,24 @@ func node_change_transform(node: Node3D, a: Vector3, b: Vector3, applying_gizmos
 
 
 func node_move(node: Node3D, pos: Vector3) -> void:
+	var prev_pos := node.position
 	node.position += pos
-	node_change_property(node, &"position")
+	update_animation_track(node, &"position", node.position, prev_pos, project.current_frame)
 
 
 ## Move the object in the direction it is facing, and restrict mouse movement in that axis
 func node_move_axis(node: Node3D, diff: Vector3, axis: Vector3) -> void:
+	var prev_pos := node.position
 	var axis_v2 := Vector2(axis.x, axis.y).normalized()
 	if axis_v2 == Vector2.ZERO:
 		axis_v2 = Vector2(axis.y, axis.z).normalized()
 	var diff_v2 := Vector2(diff.x, diff.y).normalized()
 	node.position += axis * axis_v2.dot(diff_v2) * diff.length()
-	node_change_property(node, &"position")
+	update_animation_track(node, &"position", node.position, prev_pos, project.current_frame)
 
 
 func node_change_rotation(node: Node3D, a: Vector3, b: Vector3, axis: Vector3) -> void:
+	var prev_rot := node.rotation
 	var a_local := a - node.position
 	var a_local_v2 := Vector2(a_local.x, a_local.y)
 	var b_local := b - node.position
@@ -235,21 +257,43 @@ func node_change_rotation(node: Node3D, a: Vector3, b: Vector3, axis: Vector3) -
 	node.rotation.x = wrapf(node.rotation.x, -PI, PI)
 	node.rotation.y = wrapf(node.rotation.y, -PI, PI)
 	node.rotation.z = wrapf(node.rotation.z, -PI, PI)
-	node_change_property(node, &"rotation")
+	update_animation_track(node, &"rotation", node.rotation, prev_rot, project.current_frame)
 
 
 ## Scale the object in the direction it is facing, and restrict mouse movement in that axis
 func node_change_scale(node: Node3D, diff: Vector3, axis: Vector3, dir: Vector3) -> void:
+	var prev_scale := node.scale
 	var axis_v2 := Vector2(axis.x, axis.y).normalized()
 	if axis_v2 == Vector2.ZERO:
 		axis_v2 = Vector2(axis.y, axis.z).normalized()
 	var diff_v2 := Vector2(diff.x, diff.y).normalized()
 	node.scale += dir * axis_v2.dot(diff_v2) * diff.length()
-	node_change_property(node, &"scale")
+	update_animation_track(node, &"scale", node.scale, prev_scale, project.current_frame)
 
 
-func node_change_property(node: Node3D, property := &"", by_undo_redo := false) -> void:
-	node_property_changed.emit(node, property, by_undo_redo)
+func update_animation_track(object: Node, property: StringName, current_value: Variant, prev_value: Variant, frame_index: int) -> void:
+	var undo_redo := project.undo_redo
+	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)
+	var property_path := NodePath(String(viewport.get_path_to(object)) + ":" + property)
+	var track_idx := animation.find_track(property_path, Animation.TYPE_VALUE)
+	if track_idx == -1:
+		track_idx = animation.get_track_count()
+		animation.add_track(Animation.TYPE_VALUE)
+		animation.track_set_path(track_idx, property_path)
+
+	var key_idx := animation.track_find_key(track_idx, frame_index, Animation.FIND_MODE_APPROX)
+	if key_idx == -1:
+		key_idx = animation.track_get_key_count(track_idx)
+		animation.track_insert_key(track_idx, frame_index, prev_value)
+	undo_redo.add_do_method(animation.track_set_key_value.bind(track_idx, key_idx, current_value))
+	undo_redo.add_undo_method(animation.track_set_key_value.bind(track_idx, key_idx, prev_value))
+	undo_redo.add_do_method(animation_player.seek.bind(frame_index, true))
+	undo_redo.add_undo_method(animation_player.seek.bind(frame_index, true))
+	undo_redo.add_do_method(emit_signal.bind(&"node_property_changed", object, property))
+	undo_redo.add_undo_method(emit_signal.bind(&"node_property_changed", object, property))
+	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	undo_redo.commit_action()
 
 
 # Overridden Methods:
