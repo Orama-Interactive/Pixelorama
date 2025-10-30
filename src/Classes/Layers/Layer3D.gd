@@ -84,6 +84,7 @@ func _add_nodes(size: Vector2i) -> void:
 	viewport.size = size
 	viewport.own_world_3d = true
 	viewport.transparent_bg = true
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	world_environment = WorldEnvironment.new()
 	world_environment.environment = Environment.new()
 	world_environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
@@ -271,6 +272,7 @@ func node_change_scale(node: Node3D, diff: Vector3, axis: Vector3, dir: Vector3)
 	update_animation_track(node, &"scale", node.scale, prev_scale, project.current_frame)
 
 
+## TODO: On undo, check if keys and tracks are empty and remove them.
 func update_animation_track(object: Node, property: StringName, current_value: Variant, prev_value: Variant, frame_index: int) -> void:
 	var undo_redo := project.undo_redo
 	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)

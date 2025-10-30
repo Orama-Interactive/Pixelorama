@@ -40,6 +40,7 @@ var _object_names: Dictionary[Layer3D.ObjectType, String] = {
 
 
 func sprite_changed_this_frame() -> void:
+	layer_3d.project.get_current_cel().update_texture()
 	Global.canvas.sprite_changed_this_frame = true
 	return
 	_checker_update_qued = true
