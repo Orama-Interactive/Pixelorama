@@ -29,6 +29,7 @@ Built using Godot 4.5.1
 - When moving frames using the arrow buttons in the timeline, all moved cels are now being selected. [#1358](https://github.com/Orama-Interactive/Pixelorama/pull/1358)
 - The "Offset/Zoom" effect has been renamed to "Offset & Scale". [#1362](https://github.com/Orama-Interactive/Pixelorama/pull/1362)
 - On Linux, the native screen color picker of the operating system is now used.
+- The canvas can now be moved by arrow keys if there is a selection tool selected, but there is not an active selection. If there is, the selection itself gets moved, just like before.
 
 ### Fixed
 - The canvas no longer jitters when it is zoomed out a lot and smooth zoom is enabled.
@@ -36,7 +37,8 @@ Built using Godot 4.5.1
 - Optimized the "Mirror Image" effect when a selection is active. Now it should no longer lag on big canvases.
 - Fixed a crash when a user selects a 3D object, then does an undo or redo [#1353](https://github.com/Orama-Interactive/Pixelorama/pull/1353)
 - Fixed tilemap cells being erased in manual mode if there are cells outside of the canvas boundaries.
-- Fixed  transparent checkers not following canvas movement vertically, if "Follow canvs movement" was enabled, and "Follow canvas zoom level" was disabled from the Preferences.
+- Invisible layers are no longer included when exporting images in headless mode, such as from the command line. [#1368](https://github.com/Orama-Interactive/Pixelorama/issues/1368)
+- Fixed transparent checkers not following canvas movement vertically, if "Follow canvas movement" was enabled, and "Follow canvas zoom level" was disabled from the Preferences.
 - The color picker's RGB values can no longer go higher than 255. [#349](https://github.com/Orama-Interactive/Pixelorama/issues/349)
 - Fixed the restore to default button in the Preferences not hiding after being clicked next to text fields and color buttons.
 - Fixed the "Open last project" button in the splash screen not hiding in the Web version.
