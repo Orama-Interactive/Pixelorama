@@ -17,6 +17,7 @@ config/tags=PackedStringArray("pixelorama")
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="pixelorama"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.5")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.145098, 0.145098, 0.164706, 1)

@@ -436,7 +436,7 @@ func _notification(what: int) -> void:
 	if not is_inside_tree():
 		return
 	match what:
-		NOTIFICATION_WM_CLOSE_REQUEST:
+		NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST:
 			show_quit_dialog()
 		# If the mouse exits the window and another application has the focus,
 		# pause the application
