@@ -229,6 +229,8 @@ func _rotation_slider_value_changed(value: float) -> void:
 
 
 func _has_selection_tool() -> bool:
+	if not Global.current_project.has_selection:
+		return false
 	for slot in Tools._slots.values():
 		if slot.tool_node is BaseSelectionTool:
 			return true
