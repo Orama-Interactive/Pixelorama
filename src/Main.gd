@@ -252,9 +252,10 @@ func _project_switched() -> void:
 		save_sprite_dialog.current_dir = Global.current_project.export_directory_path
 
 
-# Taken from https://github.com/godotengine/godot/blob/3.x/editor/editor_settings.cpp#L1474
+# Taken from
+# https://github.com/godotengine/godot/blob/master/editor/settings/editor_settings.cpp#L1801
 func _get_auto_display_scale() -> float:
-	if OS.get_name() == "macOS":
+	if OS.get_name() == "macOS" or OS.get_name() == "Android":
 		return DisplayServer.screen_get_max_scale()
 
 	var dpi := DisplayServer.screen_get_dpi()
@@ -265,6 +266,9 @@ func _get_auto_display_scale() -> float:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
 		return 1.5  # Likely a hiDPI display, but we aren't certain due to the returned DPI.
+	elif smallest_dimension <= 800:
+		# Small loDPI display. Use a smaller display scale so that editor elements fit more easily.
+		return 0.75
 	return 1.0
 
 
