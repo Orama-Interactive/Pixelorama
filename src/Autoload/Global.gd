@@ -222,6 +222,8 @@ var integer_zoom := false:
 
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
+## The default value of the scale of the interface.
+var auto_content_scale_factor := 1.0
 var theme_font := loaded_fonts[theme_font_index]:
 	set(value):
 		theme_font = value

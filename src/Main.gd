@@ -179,6 +179,7 @@ func _init() -> void:
 	if not DirAccess.dir_exists_absolute(OpenSave.BACKUPS_DIRECTORY):
 		DirAccess.make_dir_recursive_absolute(OpenSave.BACKUPS_DIRECTORY)
 	Global.shrink = _get_auto_display_scale()
+	Global.auto_content_scale_factor = _get_auto_display_scale()
 	_handle_layout_files()
 	# Load dither matrix images.
 	var dither_matrices_path := "user://dither_matrices"

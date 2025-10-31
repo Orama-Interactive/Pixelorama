@@ -8,7 +8,7 @@ var preferences: Array[Preference] = [
 		"quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "button_pressed", false
 	),
 	Preference.new("ffmpeg_path", "Startup/StartupContainer/FFMPEGPath", "text", ""),
-	Preference.new("shrink", "%ShrinkSlider", "value", 1.0),
+	Preference.new("shrink", "%ShrinkSlider", "value", Global.auto_content_scale_factor),
 	Preference.new("theme_font_index", "%FontOptionButton", "selected", 1),
 	Preference.new("font_size", "%FontSizeSlider", "value", 16),
 	Preference.new(
@@ -464,9 +464,10 @@ func _on_reset_options_confirmation_confirmed() -> void:
 		for pref in preferences:
 			var property_name := pref.prop_name
 			var default_value = pref.default_value
-			var node := right_side.get_node(pref.node_path)
-			if is_instance_valid(node):
-				node.set(pref.value_type, default_value)
+			if right_side.has_node(pref.node_path):
+				var node := right_side.get_node(pref.node_path)
+				if is_instance_valid(node):
+					node.set(pref.value_type, default_value)
 			Global.set(property_name, default_value)
 		_on_shrink_apply_button_pressed()
 		_on_font_size_apply_button_pressed()
