@@ -5,7 +5,7 @@ extends BaseLayer
 signal selected_object_changed(new_selected: Node3D, old_selected: Node3D)
 @warning_ignore("unused_signal")
 signal object_hovered(new_hovered: Node3D, old_hovered: Node3D, is_selected: bool)
-signal node_property_changed(node: Node, property_name: StringName)
+signal node_property_changed(node: Node, property_name: StringName, frame_index: int)
 
 enum ObjectType {
 	BOX,
@@ -71,6 +71,7 @@ func _init(_project: Project, _name := "", from_pxo := false) -> void:
 	name = _name
 	if not from_pxo:
 		_add_nodes(project.size)
+	node_property_changed.connect(_on_node_property_changed)
 
 
 func _notification(what: int) -> void:
@@ -289,13 +290,20 @@ func update_animation_track(object: Node, property: StringName, current_value: V
 		animation.track_insert_key(track_idx, frame_index, prev_value)
 	undo_redo.add_do_method(animation.track_set_key_value.bind(track_idx, key_idx, current_value))
 	undo_redo.add_undo_method(animation.track_set_key_value.bind(track_idx, key_idx, prev_value))
-	undo_redo.add_do_method(animation_player.seek.bind(frame_index, true))
-	undo_redo.add_undo_method(animation_player.seek.bind(frame_index, true))
-	undo_redo.add_do_method(emit_signal.bind(&"node_property_changed", object, property))
-	undo_redo.add_undo_method(emit_signal.bind(&"node_property_changed", object, property))
+	undo_redo.add_do_method(emit_signal.bind(&"node_property_changed", object, property, frame_index))
+	undo_redo.add_undo_method(emit_signal.bind(&"node_property_changed", object, property, frame_index))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
+
+
+func _on_node_property_changed(_node: Node, _property: StringName, frame_index: int) -> void:
+	animation_player.seek(frame_index, true)
+	#await RenderingServer.frame_post_draw
+	project.frames[frame_index].cels[index].update_texture()
+	if frame_index != project.current_frame:
+		animation_player.seek(project.current_frame, true)
+	#Global.canvas.queue_redraw()
 
 
 # Overridden Methods:

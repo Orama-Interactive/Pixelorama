@@ -6,7 +6,6 @@ const VALUE_SLIDER_V3_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV3.
 const FOLDABLE_CONTAINER_GROUP_NAME := &"3DObjectPropertyNodes"
 var layer_3d: Layer3D
 var _undo_data: Dictionary[StringName, Variant] = {}
-var _cel: Cel3D
 var _hovering: Node3D = null:
 	set(value):
 		var selected := layer_3d.selected == _hovering
@@ -17,8 +16,6 @@ var _hovering: Node3D = null:
 var _dragging := false
 var _has_been_dragged := false
 var _prev_mouse_pos := Vector2i.ZERO
-var _old_cel_image = null
-var _checker_update_qued := false
 var _object_names: Dictionary[Layer3D.ObjectType, String] = {
 	Layer3D.ObjectType.BOX: "Box",
 	Layer3D.ObjectType.SPHERE: "Sphere",
@@ -42,16 +39,6 @@ var _object_names: Dictionary[Layer3D.ObjectType, String] = {
 func sprite_changed_this_frame() -> void:
 	layer_3d.project.get_current_cel().update_texture()
 	Global.canvas.sprite_changed_this_frame = true
-	return
-	_checker_update_qued = true
-	_old_cel_image = _cel.get_image()
-
-
-func _input(_event: InputEvent) -> void:
-	if _checker_update_qued:
-		if _old_cel_image != _cel.get_image():
-			_checker_update_qued = false
-			_cel.update_texture()
 
 
 func _ready() -> void:
@@ -206,6 +193,9 @@ func _cel_switched() -> void:
 	sprite_changed_this_frame()
 	if is_instance_valid(selected):
 		layer_3d.selected = selected
+	else:
+		get_tree().call_group(FOLDABLE_CONTAINER_GROUP_NAME, &"queue_free")
+		_show_node_property_nodes()
 
 
 func _new_object_popup_id_pressed(id: Layer3D.ObjectType) -> void:
@@ -243,7 +233,9 @@ func _on_RemoveObject_pressed() -> void:
 	sprite_changed_this_frame()
 
 
-func _object_property_changed(object: Node, property: String) -> void:
+func _object_property_changed(object: Node, property: String, frame_index: int) -> void:
+	if frame_index != layer_3d.project.current_frame:
+		return
 	var curr_value = object.get_indexed(property)
 	for foldable in get_tree().get_nodes_in_group(FOLDABLE_CONTAINER_GROUP_NAME):
 		if foldable.get_meta(&"object") != object:
@@ -287,15 +279,19 @@ func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
 					#mat_foldable.title = "Material"
 					#mat_foldable.fold()
 	else:
-		var camera_foldable := _create_object_property_nodes(layer_3d.camera)
-		camera_foldable.set_meta("object", layer_3d.camera)
-		camera_foldable.title = "Camera"
-		var environment := layer_3d.world_environment
-		var environment_foldable := _create_object_property_nodes(environment)
-		environment_foldable.set_meta("object", environment)
-		environment_foldable.title = "Environment"
-		environment_foldable.fold()
-		remove_object_button.disabled = true
+		_show_node_property_nodes()
+
+
+func _show_node_property_nodes() -> void:
+	var camera_foldable := _create_object_property_nodes(layer_3d.camera)
+	camera_foldable.set_meta("object", layer_3d.camera)
+	camera_foldable.title = "Camera"
+	var environment := layer_3d.world_environment
+	var environment_foldable := _create_object_property_nodes(environment)
+	environment_foldable.set_meta("object", environment)
+	environment_foldable.title = "Environment"
+	environment_foldable.fold()
+	remove_object_button.disabled = true
 
 
 func _create_object_property_nodes(object: Node) -> FoldableContainer:

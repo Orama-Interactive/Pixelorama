@@ -115,7 +115,9 @@ func _on_hovered_object(new_object: Node3D, old_object: Node3D, is_selected: boo
 		clear_points(old_object)
 
 
-func _on_node_property_changed(node: Node, _property: StringName) -> void:
+func _on_node_property_changed(node: Node, _property: StringName, frame_index: int) -> void:
+	if frame_index != layer_3d.project.current_frame:
+		return
 	if node == layer_3d.selected:
 		get_points(node, true)
 	queue_redraw()
