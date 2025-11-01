@@ -86,7 +86,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		PROPERTIES:
 			frame_properties.frame_indices = indices
-			frame_properties.popup_centered()
+			frame_properties.popup_centered_clamped()
 			Global.dialog_open(true)
 		REMOVE:
 			Global.animation_timeline.delete_frames(indices)

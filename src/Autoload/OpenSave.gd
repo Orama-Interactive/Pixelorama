@@ -194,7 +194,7 @@ func handle_loading_image(file: String, image: Image, force_import_dialog := fal
 	preview_dialog.path = file
 	preview_dialog.image = image
 	Global.control.add_child(preview_dialog)
-	preview_dialog.popup_centered()
+	preview_dialog.popup_centered_clamped()
 	Global.dialog_open(true)
 
 

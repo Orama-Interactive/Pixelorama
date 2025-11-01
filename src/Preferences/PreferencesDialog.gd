@@ -425,7 +425,7 @@ func _on_List_item_selected(index: int) -> void:
 func _on_shrink_apply_button_pressed() -> void:
 	Global.control.set_display_scale()
 	hide()
-	popup_centered(Vector2(600, 400))
+	popup_centered_clamped(Vector2(600, 400))
 	Global.dialog_open(true)
 	await get_tree().process_frame
 	Global.camera.fit_to_frame(Global.current_project.size)
@@ -451,7 +451,7 @@ func _on_language_pressed(index: int) -> void:
 
 
 func _on_reset_button_pressed() -> void:
-	$ResetOptionsConfirmation.popup_centered()
+	$ResetOptionsConfirmation.popup_centered_clamped()
 
 
 func _on_reset_options_confirmation_confirmed() -> void:

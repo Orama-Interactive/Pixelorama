@@ -321,7 +321,7 @@ func _on_tools_menu_button_index_pressed(index: int) -> void:
 		_create_cursors()
 		updated.emit(gradient, continuous_change)
 	elif index == 2:  # Divide into equal parts
-		divide_dialog.popup_centered()
+		divide_dialog.popup_centered_clamped()
 
 
 func _initialize_presets() -> void:

@@ -1107,7 +1107,7 @@ func dialog_open(open: bool, is_file_dialog := false) -> void:
 
 func popup_error(text: String) -> void:
 	error_dialog.set_text(text)
-	error_dialog.popup_centered()
+	error_dialog.popup_centered_clamped()
 	dialog_open(true)
 
 

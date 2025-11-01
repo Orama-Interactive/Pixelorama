@@ -144,7 +144,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		MenuOptions.PROPERTIES:
 			properties.cel_indices = _get_cel_indices()
-			properties.popup_centered()
+			properties.popup_centered_clamped()
 		MenuOptions.SELECT_PIXELS:
 			var layer_class := project.layers[layer]
 			if layer_class is AudioLayer:

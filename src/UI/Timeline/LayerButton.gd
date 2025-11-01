@@ -333,7 +333,7 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 	var layer := project.layers[layer_index]
 	if id == MenuOptions.PROPERTIES:
 		properties.layer_indices = _get_layer_indices()
-		properties.popup_centered()
+		properties.popup_centered_clamped()
 	elif id == MenuOptions.CLIPPING_MASK:
 		layer.clipping_mask = not layer.clipping_mask
 		popup_menu.set_item_checked(id, layer.clipping_mask)

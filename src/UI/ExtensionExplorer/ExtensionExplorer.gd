@@ -106,12 +106,12 @@ func close_progress() -> void:
 				faulty_links_label.text = ""
 				for link in faulty_custom_links:
 					faulty_links_label.text += str(link, "\n")
-				custom_link_error.popup_centered()
+				custom_link_error.popup_centered_clamped()
 
 
 # Signal connected from Preferences.tscn
 func _on_explore_pressed() -> void:
-	popup_centered()
+	popup_centered_clamped()
 
 
 ## Function related to error dialog
@@ -133,7 +133,7 @@ func error_getting_info(result: int) -> void:
 	# Shows a popup if error is from main link (i-e MainStore)
 	# Popups for errors in custom_links are handled in close_progress()
 	if custom_links_remaining == custom_store_links.custom_links.size():
-		error_get_info.popup_centered()
+		error_get_info.popup_centered_clamped()
 		error_get_info.title = error_string(result)
 	else:
 		faulty_custom_links.append(custom_store_links.custom_links[custom_links_remaining])

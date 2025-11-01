@@ -246,7 +246,7 @@ func _cel_switched() -> void:
 
 func _new_object_popup_id_pressed(id: int) -> void:
 	if id == Cel3DObject.Type.IMPORTED:
-		load_model_dialog.popup_centered()
+		load_model_dialog.popup_centered_clamped()
 		Global.dialog_open(true, true)
 	else:
 		_add_object(id)

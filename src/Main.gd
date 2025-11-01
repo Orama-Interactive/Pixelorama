@@ -212,7 +212,7 @@ func _ready() -> void:
 	# Detect if Pixelorama crashed last time.
 	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
 	if crashed_last_time and OpenSave.had_backups_on_startup:
-		restore_session_confirmation_dialog.popup_centered()
+		restore_session_confirmation_dialog.popup_centered_clamped()
 	# Create a file that only exists while Pixelorama is running,
 	# and delete it when it closes. If Pixelorama opens and this file exists,
 	# it means that Pixelorama crashed last time.
@@ -364,7 +364,7 @@ func _show_splash_screen() -> void:
 		# Wait for the window to adjust itself, so the popup is correctly centered
 		await get_tree().process_frame
 
-		splash_dialog.popup_centered()  # Splash screen
+		splash_dialog.popup_centered_clamped()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
 
 
@@ -470,7 +470,7 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 			download_confirmation.dialog_text = (
 				tr("Do you want to download the image from %s?") % file
 			)
-			download_confirmation.popup_centered()
+			download_confirmation.popup_centered_clamped()
 			url_to_download = file
 		OpenSave.handle_loading_file(file)
 	if splash_dialog.visible:
@@ -508,12 +508,12 @@ func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 func show_save_dialog(project := Global.current_project) -> void:
 	Global.dialog_open(true, true)
 	if OS.get_name() == "Web":
-		save_sprite_html5.popup_centered()
+		save_sprite_html5.popup_centered_clamped()
 		var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_filename_line_edit.text = project.name
 	else:
 		save_sprite_dialog.current_file = project.name + ".pxo"
-		save_sprite_dialog.popup_centered()
+		save_sprite_dialog.popup_centered_clamped()
 		save_file_dialog_opened.emit(true)
 
 
@@ -574,7 +574,7 @@ func show_quit_dialog() -> void:
 	if not quit_dialog.visible:
 		if changed_projects_on_quit.size() == 0:
 			if Global.quit_confirmation:
-				quit_dialog.popup_centered()
+				quit_dialog.popup_centered_clamped()
 			else:
 				_quit()
 		else:
@@ -582,7 +582,7 @@ func show_quit_dialog() -> void:
 				tr("Project %s has unsaved progress. How do you wish to proceed?")
 				% changed_projects_on_quit[0].name
 			)
-			quit_and_save_dialog.popup_centered()
+			quit_and_save_dialog.popup_centered_clamped()
 
 	Global.dialog_open(true)
 
@@ -595,7 +595,7 @@ func _save_on_quit_confirmation() -> void:
 			tr("Project %s has unsaved progress. How do you wish to proceed?")
 			% changed_projects_on_quit[0].name
 		)
-		quit_and_save_dialog.popup_centered()
+		quit_and_save_dialog.popup_centered_clamped()
 		Global.dialog_open(true)
 
 

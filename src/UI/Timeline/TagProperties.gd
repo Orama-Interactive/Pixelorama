@@ -32,7 +32,7 @@ func show_dialog(
 		user_data_text_edit.text = ""
 		delete_tag_button.visible = false
 	if popup_rect == Rect2i():
-		popup_centered()
+		popup_centered_clamped()
 	else:
 		popup(popup_rect)
 	name_line_edit.grab_focus()
