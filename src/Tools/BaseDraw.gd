@@ -281,6 +281,8 @@ func manage_undo_redo_palettes() -> void:
 	if _is_eraser:
 		return
 	var palette_in_focus := Palettes.current_palette
+	if not is_instance_valid(palette_in_focus):
+		return
 	var palette_has_color := Palettes.current_palette.has_theme_color(tool_slot.color)
 	if not palette_in_focus.is_project_palette:
 		# Make a project copy of the palette if it has (or about to have) the color
