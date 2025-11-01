@@ -220,6 +220,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("37")
 
 [node name="DockableContainer" type="Container" parent="."]
@@ -304,7 +305,8 @@ render_target_update_mode = 4
 
 [node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("5")]
 material = SubResource("2")
-anchors_preset = 0
+layout_direction = 2
+mouse_filter = 2
 
 [node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("19")]
 
@@ -340,7 +342,8 @@ render_target_update_mode = 0
 
 [node name="TransparentChecker" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("5")]
 material = SubResource("3")
-anchors_preset = 0
+layout_direction = 2
+mouse_filter = 2
 
 [node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" groups=["CanvasPreviews"] instance=ExtResource("2")]
 

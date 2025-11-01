@@ -20,6 +20,13 @@ var _mouse_hovering := false
 var _dragging := false
 
 
+func _ready() -> void:
+	await get_tree().process_frame
+	if not is_instance_valid(layout_split):
+		return
+	mouse_default_cursor_shape = SPLIT_MOUSE_CURSOR_SHAPE[layout_split.direction]
+
+
 func _draw() -> void:
 	var theme_class := SPLIT_THEME_CLASS[layout_split.direction]
 	var icon := get_theme_icon("grabber", theme_class)
@@ -50,12 +57,10 @@ func _gui_input(event: InputEvent) -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_MOUSE_ENTER:
 		_mouse_hovering = true
-		set_split_cursor(true)
 		if bool(get_theme_constant("autohide", SPLIT_THEME_CLASS[layout_split.direction])):
 			queue_redraw()
 	elif what == NOTIFICATION_MOUSE_EXIT:
 		_mouse_hovering = false
-		set_split_cursor(false)
 		if bool(get_theme_constant("autohide", SPLIT_THEME_CLASS[layout_split.direction])):
 			queue_redraw()
 	elif what == NOTIFICATION_FOCUS_EXIT:
@@ -76,13 +81,6 @@ func get_layout_minimum_size() -> Vector2:
 			maxf(first_minimum_size.x, second_minimum_size.x),
 			first_minimum_size.y + separation + second_minimum_size.y
 		)
-
-
-func set_split_cursor(value: bool) -> void:
-	if value:
-		mouse_default_cursor_shape = SPLIT_MOUSE_CURSOR_SHAPE[layout_split.direction]
-	else:
-		mouse_default_cursor_shape = CURSOR_ARROW
 
 
 func get_split_rects(rect: Rect2) -> Dictionary:
