@@ -1,6 +1,10 @@
 extends Container
 
 const PADDING := 1
+# https://github.com/godotengine/godot/blob/master/scene/gui/scroll_bar.h#L113
+const PAGE_DIVISOR := 8
+# https://github.com/godotengine/godot/pull/111305
+const PAN_MULTIPLIER := 5
 
 @export var h_scroll_bar: HScrollBar
 
@@ -17,7 +21,6 @@ func _gui_input(event: InputEvent) -> void:
 		return
 	var vertical_scroll: bool = get_child(0).size.y >= size.y
 	var should_h_scroll := not vertical_scroll
-	var cel_size: int = Global.animation_timeline.cel_size / 2 + 2
 	if event is InputEventWithModifiers and not should_h_scroll:
 		should_h_scroll = event.shift_pressed
 	if event is InputEventMouseButton:
@@ -30,27 +33,32 @@ func _gui_input(event: InputEvent) -> void:
 					event.button_index == MOUSE_BUTTON_WHEEL_UP
 					or event.button_index == MOUSE_BUTTON_WHEEL_LEFT
 				):
-					h_scroll_bar.value -= cel_size
+					h_scroll_bar.value -= PAGE_DIVISOR * event.factor
 					accept_event()
 				elif (
 					event.button_index == MOUSE_BUTTON_WHEEL_DOWN
 					or event.button_index == MOUSE_BUTTON_WHEEL_RIGHT
 				):
-					h_scroll_bar.value += cel_size
+					h_scroll_bar.value += PAGE_DIVISOR * event.factor
 					accept_event()
 	# Pan scrolling, used by some MacOS devices
 	# (see: https://github.com/Orama-Interactive/Pixelorama/discussions/1218)
 	elif event is InputEventPanGesture:
 		if event.delta.x != 0:
-			h_scroll_bar.value += signf(event.delta.x) * cel_size
+			h_scroll_bar.value += signf(event.delta.x) * PAN_MULTIPLIER
 
 
 func _update_scroll() -> void:
 	if get_child_count() > 0 and is_instance_valid(h_scroll_bar):
-		h_scroll_bar.max_value = get_child(0).size.x
-		h_scroll_bar.page = size.x
-		h_scroll_bar.visible = h_scroll_bar.page < h_scroll_bar.max_value
-		get_child(0).position.x = -h_scroll_bar.value + PADDING
+		var cel_margin_container := get_child(0) as Control
+		var child_min_size := cel_margin_container.get_combined_minimum_size()
+		h_scroll_bar.visible = child_min_size.x > size.x
+		h_scroll_bar.max_value = child_min_size.x
+		if h_scroll_bar.visible:
+			h_scroll_bar.page = size.x - h_scroll_bar.get_combined_minimum_size().x
+		else:
+			h_scroll_bar.page = size.x
+		cel_margin_container.position.x = -h_scroll_bar.value + PADDING
 
 
 func ensure_control_visible(control: Control) -> void:
@@ -72,8 +80,10 @@ func _on_sort_children() -> void:
 		_update_scroll()
 
 
-func _on_scroll_bar_value_changed(_value: float) -> void:
-	_update_scroll()
+func _on_scroll_bar_value_changed(value: float) -> void:
+	if get_child_count() > 0 and is_instance_valid(h_scroll_bar):
+		var cel_margin_container := get_child(0) as Control
+		cel_margin_container.position.x = -value + PADDING
 
 
 func _clips_input() -> bool:
