@@ -63,7 +63,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	get_window().gui_release_focus()
+	if not DisplayServer.is_touchscreen_available():
+		get_window().gui_release_focus()
 	if !Global.can_draw:
 		drag = false
 		return
