@@ -18,6 +18,8 @@ var _is_guide_stylebox := false
 
 
 func _ready() -> void:
+	if DisplayServer.is_touchscreen_available():
+		mouse_filter = Control.MOUSE_FILTER_PASS
 	Global.cel_switched.connect(cel_switched)
 	Themes.theme_switched.connect(cel_switched.bind(true))
 	cel = Global.current_project.frames[frame].cels[layer]
@@ -271,6 +273,8 @@ func _dim_checker() -> void:
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
+	if DisplayServer.is_touchscreen_available():
+		return null
 	var button := Button.new()
 	button.size = size
 	button.theme = Global.control.theme

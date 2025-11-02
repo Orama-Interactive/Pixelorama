@@ -44,6 +44,8 @@ var audio_player: AudioStreamPlayer
 
 
 func _ready() -> void:
+	if DisplayServer.is_touchscreen_available():
+		mouse_filter = Control.MOUSE_FILTER_PASS
 	main_button.layer_index = layer_index
 	main_button.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
 	Global.cel_switched.connect(_on_cel_switched)

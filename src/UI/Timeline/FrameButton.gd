@@ -11,6 +11,8 @@ var frame := 0
 
 
 func _ready() -> void:
+	if DisplayServer.is_touchscreen_available():
+		mouse_filter = Control.MOUSE_FILTER_PASS
 	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
 	custom_minimum_size.x = Global.animation_timeline.cel_size
 	text = str(frame + 1)
@@ -108,6 +110,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
+	if DisplayServer.is_touchscreen_available():
+		return null
 	var button := Button.new()
 	button.size = size
 	button.theme = Global.control.theme
