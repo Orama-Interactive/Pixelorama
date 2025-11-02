@@ -273,7 +273,7 @@ func _dim_checker() -> void:
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
-	if DisplayServer.is_touchscreen_available():
+	if DisplayServer.is_touchscreen_available() and not button_pressed:
 		return null
 	var button := Button.new()
 	button.size = size

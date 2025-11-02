@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
-	if DisplayServer.is_touchscreen_available():
+	if DisplayServer.is_touchscreen_available() and not button_pressed:
 		return null
 	var layers := _get_layer_indices()
 	for layer_i in layers:  # Add child layers, if we have selected groups

@@ -120,17 +120,22 @@ func _gui_input(event: InputEvent) -> void:
 				):
 					h_scroll_bar.value -= PAGE_DIVISOR * event.factor
 					accept_event()
-				elif (
+					return
+				if (
 					event.button_index == MOUSE_BUTTON_WHEEL_DOWN
 					or event.button_index == MOUSE_BUTTON_WHEEL_RIGHT
 				):
 					h_scroll_bar.value += PAGE_DIVISOR * event.factor
 					accept_event()
+					return
 	_touchscreen_scroll(event)
 
 
 func _touchscreen_scroll(event: InputEvent) -> void:
 	if not DisplayServer.is_touchscreen_available():
+		return
+	if get_viewport().gui_is_dragging() and not scroll_on_drag_hover:
+		_cancel_drag()
 		return
 	var prev_h_scroll := h_scroll_bar.value
 	# Handle mouse button input
