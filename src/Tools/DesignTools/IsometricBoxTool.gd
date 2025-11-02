@@ -165,6 +165,7 @@ func draw_start(pos: Vector2i) -> void:
 		_picking_color = true
 		_pick_color(pos)
 		return
+	cursor_move(pos)
 	pos = angle_constraint(Vector2(pos))
 	_picking_color = false  # fixes _picking_color being true indefinitely after we pick color
 	Global.canvas.selection.transform_content_confirm()
