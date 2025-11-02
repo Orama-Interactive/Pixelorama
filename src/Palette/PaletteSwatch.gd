@@ -122,8 +122,9 @@ func _drop_data(_position: Vector2, data) -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton:
 		if event.double_click and not empty:
 			double_clicked.emit(event.button_index, get_global_rect().position)
-		elif event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
-			pressed.emit(event.button_index)
+		if event.is_released():
+			if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
+				pressed.emit(event.button_index)
