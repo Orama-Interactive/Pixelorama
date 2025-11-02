@@ -102,23 +102,26 @@ func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
-	var data = null
-	if not empty:
-		var drag_icon: PaletteSwatch = self.duplicate()
-		drag_icon.show_left_highlight = false
-		drag_icon.show_right_highlight = false
-		drag_icon.empty = false
-		set_drag_preview(drag_icon)
-		data = {source_index = index}
-	return data
+	if empty:
+		return ["Swatch", null]
+	var drag_icon: PaletteSwatch = self.duplicate()
+	drag_icon.show_left_highlight = false
+	drag_icon.show_right_highlight = false
+	drag_icon.empty = false
+	set_drag_preview(drag_icon)
+	return ["Swatch", {source_index = index}]
 
 
-func _can_drop_data(_position: Vector2, _data) -> bool:
+func _can_drop_data(_position: Vector2, data) -> bool:
+	if typeof(data) != TYPE_ARRAY:
+		return false
+	if data[0] != "Swatch":
+		return false
 	return true
 
 
 func _drop_data(_position: Vector2, data) -> void:
-	dropped.emit(data.source_index, index)
+	dropped.emit(data[1].source_index, index)
 
 
 func _on_gui_input(event: InputEvent) -> void:
