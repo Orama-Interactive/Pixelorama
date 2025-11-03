@@ -11,20 +11,17 @@ const SPLIT_MOUSE_CURSOR_SHAPE: Array[Control.CursorShape] = [
 	Control.CURSOR_VSPLIT,  # SPLIT_MOUSE_CURSOR_SHAPE[DockableLayoutSplit.Direction.VERTICAL]
 ]
 
-var layout_split: DockableLayoutSplit
+var layout_split: DockableLayoutSplit:
+	set(value):
+		layout_split = value
+		if is_instance_valid(layout_split):
+			mouse_default_cursor_shape = SPLIT_MOUSE_CURSOR_SHAPE[layout_split.direction]
 var first_minimum_size: Vector2
 var second_minimum_size: Vector2
 
 var _parent_rect: Rect2
 var _mouse_hovering := false
 var _dragging := false
-
-
-func _ready() -> void:
-	await get_tree().process_frame
-	if not is_instance_valid(layout_split):
-		return
-	mouse_default_cursor_shape = SPLIT_MOUSE_CURSOR_SHAPE[layout_split.direction]
 
 
 func _draw() -> void:
