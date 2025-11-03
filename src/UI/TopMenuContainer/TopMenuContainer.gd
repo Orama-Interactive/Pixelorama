@@ -752,6 +752,10 @@ func edit_menu_id_pressed(id: int) -> void:
 		Global.EditMenu.PASTE_IN_PLACE:
 			Global.canvas.selection.paste(true)
 		Global.EditMenu.PASTE_FROM_CLIPBOARD:
+			if not DisplayServer.clipboard_has_image():
+				var clipboard := DisplayServer.clipboard_get()
+				if clipboard.begins_with("lospec-palette://"):
+					Palettes.import_lospec_palette(clipboard)
 			Global.canvas.selection.paste_from_clipboard()
 		Global.EditMenu.DELETE:
 			Global.canvas.selection.delete()
