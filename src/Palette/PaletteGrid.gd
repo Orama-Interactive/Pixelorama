@@ -199,11 +199,12 @@ func change_swatch_size(size_diff: Vector2) -> void:
 		swatch.set_swatch_size(swatch_size)
 
 	Global.config_cache.set_value("palettes", "swatch_size", swatch_size)
+	_on_resized()
 
 
 func _on_resized() -> void:
 	if not grid_locked:
-		columns = maxi(1, size.x / 36.5)
+		columns = maxi(1, size.x / (swatch_size.x + 3))
 
 
 func _on_palette_swatch_pressed(mouse_button: int, index: int) -> void:
