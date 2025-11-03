@@ -15,6 +15,7 @@ size_flags_vertical = 0
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="ToolButtons" type="HFlowContainer" parent="PanelContainer"]
 layout_mode = 2
