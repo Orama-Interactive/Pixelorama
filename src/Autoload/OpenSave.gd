@@ -121,6 +121,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 			# No error - this is an APNG!
 			if typeof(apng_res[1]) == TYPE_ARRAY:
 				handle_loading_aimg(file, apng_res[1])
+			elif typeof(apng_res[1]) == TYPE_STRING:
+				print(apng_res[1])
 			return
 		# Attempt to load as a regular image.
 		var image := Image.load_from_file(file)

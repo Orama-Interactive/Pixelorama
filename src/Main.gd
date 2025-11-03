@@ -181,6 +181,7 @@ func _init() -> void:
 	Global.shrink = _get_auto_display_scale()
 	Global.auto_content_scale_factor = _get_auto_display_scale()
 	_handle_layout_files()
+	Applinks.data_received.connect(_on_applinks_data_received)
 	# Load dither matrix images.
 	var dither_matrices_path := "user://dither_matrices"
 	if DirAccess.dir_exists_absolute(dither_matrices_path):
@@ -206,6 +207,9 @@ func _ready() -> void:
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
 		OS.request_permissions()
+		var intent_data := Applinks.get_data()
+		if not intent_data.is_empty():
+			_on_applinks_data_received(intent_data)
 	if Global.open_last_project:
 		load_last_project()
 
@@ -435,6 +439,18 @@ func _handle_cmdline_arguments() -> void:
 				break
 	if should_export:
 		Export.external_export(project)
+
+
+func _on_applinks_data_received(uri: String) -> void:
+	if uri.begins_with("lospec-palette://"):
+		Palettes.import_lospec_palette(uri)
+	elif uri.begins_with("content://"):
+		var path = Applinks.get_file_from_content_uri(uri)
+		if path:
+			OpenSave.handle_loading_file(path)
+	elif uri.begins_with("file://"):
+		var path := uri.trim_prefix("file://")
+		OpenSave.handle_loading_file(path)
 
 
 func _notification(what: int) -> void:

@@ -42,6 +42,7 @@ Palettes="*res://src/Autoload/Palettes.gd"
 Keychain="*res://addons/keychain/Keychain.gd"
 ExtensionsApi="*res://src/Autoload/ExtensionsApi.gd"
 Themes="*res://src/Autoload/Themes.gd"
+Applinks="*res://addons/applinks/applinks.gd"
 
 [debug]
 
@@ -53,12 +54,13 @@ gdscript/warnings/narrowing_conversion=false
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/energy_saving/keep_screen_on=false
+window/handheld/orientation=6
 window/per_pixel_transparency/allowed.android=false
 window/per_pixel_transparency/allowed.web=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg")
+enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/applinks/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg")
 
 [global_group]
 

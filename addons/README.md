@@ -6,6 +6,11 @@
 - Version: ba00188e9da1ae229181f106788fcb72ccdd85fa
 - License: [Unlicense](https://gitlab.com/20kdc/20kdc_godot_addons/-/blob/master/godot4/addons/aimg_io/COPYING.txt)
 
+## applinks
+- Upstream: https://github.com/OverloadedOrama/Godot-Applinks-Android-Plugin/tree/for-pixelorama
+- Version: [2112eb427de7434e5973298ec4473bd3f370bea7](https://github.com/OverloadedOrama/Godot-Applinks-Android-Plugin/commit/2112eb427de7434e5973298ec4473bd3f370bea7)
+- License: [MIT](https://github.com/FoolLin/Godot-Applinks-Android-Plugin/blob/main/LICENSE)
+
 ## Keychain
 
 - Upstream: https://github.com/Orama-Interactive/Keychain
