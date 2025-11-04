@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-11-04 01:00\n"
+"PO-Revision-Date: 2025-11-04 06:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -964,7 +964,7 @@ msgstr "Dimensiunea fontului:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Orientarea ecranului:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Întunecă interfața la apariția ferestrei de dialog"
