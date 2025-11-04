@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-11-04 01:00\n"
+"PO-Revision-Date: 2025-11-04 02:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -966,7 +966,7 @@ msgstr "Dimensione carattere:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Orientamento schermo:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Oscura l'interfaccia nella finestra di dialogo"
