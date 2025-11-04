@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2025-10-14 14:09\n"
+"PO-Revision-Date: 2025-11-04 01:00\n"
 
 msgid "OK"
 msgstr "예"
@@ -960,6 +960,10 @@ msgstr "폰트:"
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "폰트 크기:"
+
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "대화 상자 팝업에 인터페이스를 희미하"
