@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-11-04 16:55\n"
+"PO-Revision-Date: 2025-11-04 18:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -814,15 +814,15 @@ msgstr "Aseprite プロジェクト"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Kritaプロジェクト"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Piskel プロジェクト"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Photoshop プロジェクト"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -966,7 +966,7 @@ msgstr "フォントサイズ:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "画面の向き："
 
 msgid "Dim interface on dialog popup"
 msgstr "ダイアログポップアップ時にインターフェースを薄暗くする"
@@ -1036,11 +1036,11 @@ msgstr "背景色:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "単一ツールモード"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "これが有効な場合、マウスの右ボタンは常にマウスの左ボタンと同じツールが有効になります。"
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -1339,27 +1339,27 @@ msgstr "課題管理"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "バックアップを復元"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "過去のセッション"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "セッション全体または特定のプロジェクトをロードするには、ダブルクリックしてください。"
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
-msgstr ""
+msgstr "セッション"
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "プロジェクト"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "(現在のセッション)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
@@ -2325,7 +2325,7 @@ msgstr "全て選択"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "すべてのレイヤーを統合してリージョンを塗りつぶす"
 
 msgid "Fill with:"
 msgstr "次で塗りつぶし:"
@@ -3124,7 +3124,7 @@ msgstr "すべての拡張機能を削除"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "すべてのバックアップを削除"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3377,7 +3377,7 @@ msgstr "新しいパレットを作成"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "新しいプロジェクトパレットを作成"
 
 msgid "Comment:"
 msgstr "コメント:"
