@@ -16,14 +16,19 @@ func _ready() -> void:
 	texture_disabled = ImageTexture.new()
 	size_flags_horizontal = Control.SIZE_SHRINK_END
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	pressed.connect(_on_RestoreDefaultButton_pressed)
+	pressed.connect(_on_pressed)
 
 
-func _on_RestoreDefaultButton_pressed() -> void:
+func _on_pressed() -> void:
 	Global.set(setting_name, default_value)
 	if not require_restart:
 		Global.config_cache.set_value("preferences", setting_name, default_value)
-	node.set(value_type, default_value)
+	if node is OptionButton:
+		var item_index = node.get_item_index(default_value)
+		node.set(value_type, item_index)
+		node.item_selected.emit(item_index)
+	else:
+		node.set(value_type, default_value)
 	if node is LineEdit:
 		node.text_changed.emit(default_value)
 	elif node is ColorPickerButton:

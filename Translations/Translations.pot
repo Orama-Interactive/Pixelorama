@@ -948,6 +948,10 @@ msgstr ""
 msgid "Font size:"
 msgstr ""
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr ""
+
 msgid "Dim interface on dialog popup"
 msgstr ""
 

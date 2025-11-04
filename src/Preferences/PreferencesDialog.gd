@@ -15,6 +15,12 @@ var preferences: Array[Preference] = [
 		"dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed", true
 	),
 	Preference.new(
+		"screen_orientation",
+		"Interface/InterfaceOptions/ScreenOrientationOptionButton",
+		"selected",
+		DisplayServer.SCREEN_SENSOR
+	),
+	Preference.new(
 		"show_notification_label",
 		"Interface/InterfaceOptions/ShowNotificationCheckBox",
 		"button_pressed",
@@ -283,6 +289,8 @@ func _ready() -> void:
 		get_tree().call_group(&"NoSandbox", &"free")
 	if not OS.has_feature("pc"):
 		get_tree().call_group(&"DesktopOnly", &"free")
+	if not OS.has_feature("mobile"):
+		get_tree().call_group(&"MobileOnly", &"free")
 	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE):
 		get_tree().call_group(&"NativeFileDialog", &"free")
 
@@ -350,7 +358,11 @@ func _ready() -> void:
 				)
 
 		var value = Global.get(pref.prop_name)
-		node.set(pref.value_type, value)
+		if node is OptionButton:
+			var item_index = node.get_item_index(value)
+			node.set(pref.value_type, item_index)
+		else:
+			node.set(pref.value_type, value)
 		var is_default: bool = value == pref.default_value
 		# This is needed because color_changed doesn't fire if the color changes in code
 		if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
@@ -362,6 +374,9 @@ func _ready() -> void:
 func _on_Preference_value_changed(value, pref: Preference, button: RestoreDefaultButton) -> void:
 	var prop := pref.prop_name
 	var default_value = pref.default_value
+	var node := right_side.get_node(pref.node_path)
+	if node is OptionButton:
+		value = node.get_item_id(value)
 	Global.set(prop, value)
 	if not pref.require_restart:
 		Global.config_cache.set_value("preferences", prop, value)

@@ -221,6 +221,22 @@ text = "Font:"
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="ScreenOrientationLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["MobileOnly"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Screen orientation:"
+
+[node name="ScreenOrientationOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["MobileOnly"]]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Auto"
+popup/item_0/id = 6
+popup/item_1/text = "Landscape"
+popup/item_1/id = 4
+popup/item_2/text = "Portrait"
+popup/item_2/id = 5
+
 [node name="DimLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
 layout_mode = 2
 size_flags_horizontal = 3

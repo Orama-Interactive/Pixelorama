@@ -244,6 +244,11 @@ var theme_font_index := 1:
 				theme_font = loaded_fonts[1]  # Fall back to Roboto if out of bounds
 ## Found in Preferences. The font size used by the interface.
 var font_size := 16
+## Found in Preferences. The orientation of the screen, used by mobile devices.
+var screen_orientation := DisplayServer.SCREEN_SENSOR:
+	set(value):
+		screen_orientation = value
+		DisplayServer.screen_set_orientation(screen_orientation)
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
 ## Found in Preferences. If [code]true[/code], notification labels appear.
