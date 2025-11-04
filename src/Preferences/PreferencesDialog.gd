@@ -49,6 +49,12 @@ var preferences: Array[Preference] = [
 		"custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color", Color.GRAY
 	),
 	Preference.new(
+		"single_tool_mode",
+		"Tools/ToolOptions/SingleToolModeCheckBox",
+		"button_pressed",
+		DisplayServer.is_touchscreen_available()
+	),
+	Preference.new(
 		"share_options_between_tools",
 		"Tools/ToolOptions/ShareOptionsCheckBox",
 		"button_pressed",

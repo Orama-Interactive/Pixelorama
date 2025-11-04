@@ -367,6 +367,7 @@ class Slot:
 func _ready() -> void:
 	options_reset.connect(reset_options)
 	Global.cel_switched.connect(_cel_switched)
+	Global.single_tool_mode_changed.connect(_on_single_tool_mode_changed)
 	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
@@ -514,6 +515,8 @@ func get_tool(button: int) -> Slot:
 
 
 func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
+	if Global.single_tool_mode and button == MOUSE_BUTTON_LEFT:
+		assign_tool(tool_name, MOUSE_BUTTON_RIGHT, allow_refresh)
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
 
@@ -737,8 +740,15 @@ func update_tool_buttons() -> void:
 	for child in _tool_buttons.get_children():
 		var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 		var right_background: NinePatchRect = child.get_node("BackgroundRight")
-		left_background.visible = _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
-		right_background.visible = _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
+		var is_left_tool := _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
+		var is_right_tool := _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
+		left_background.visible = is_left_tool
+		if Global.single_tool_mode:
+			right_background.visible = false
+			left_background.anchor_right = 1.0
+		else:
+			right_background.visible = is_right_tool
+			left_background.anchor_right = 0.5
 
 
 func update_hint_tooltips() -> void:
@@ -900,6 +910,13 @@ func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 
 func _is_tool_available(layer_type: int, t: Tool) -> bool:
 	return t.layer_types.is_empty() or layer_type in t.layer_types
+
+
+func _on_single_tool_mode_changed(mode: bool) -> void:
+	if mode:
+		assign_tool(get_tool(MOUSE_BUTTON_LEFT).tool_node.name, MOUSE_BUTTON_RIGHT, true)
+	else:
+		update_tool_buttons()
 
 
 func change_layer_automatically(pos: Vector2i) -> void:

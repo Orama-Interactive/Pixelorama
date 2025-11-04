@@ -950,6 +950,20 @@ layout_mode = 2
 layout_mode = 2
 columns = 3
 
+[node name="SingleToolModeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+mouse_filter = 1
+text = "Single tool mode"
+
+[node name="SingleToolModeCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+mouse_default_cursor_shape = 2
+text = "On"
+
 [node name="ShareOptionsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
 layout_mode = 2
 size_flags_horizontal = 3

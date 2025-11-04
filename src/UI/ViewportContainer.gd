@@ -14,6 +14,8 @@ func _on_ViewportContainer_mouse_entered() -> void:
 	camera.set_process_input(true)
 	Global.control.left_cursor.visible = Global.show_left_tool_icon
 	Global.control.right_cursor.visible = Global.show_right_tool_icon
+	if Global.single_tool_mode:
+		Global.control.right_cursor.visible = false
 	if Global.cross_cursor:
 		Input.set_default_cursor_shape(Input.CURSOR_CROSS)
 

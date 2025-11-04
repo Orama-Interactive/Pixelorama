@@ -18,6 +18,7 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
+signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
 
@@ -316,6 +317,12 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences.
+## If enabled, the right mouse button is always mapped to the same tool as the left button.
+var single_tool_mode := DisplayServer.is_touchscreen_available():
+	set(value):
+		single_tool_mode = value
+		single_tool_mode_changed.emit(single_tool_mode)
 ## Found in Preferences.
 var share_options_between_tools := false:
 	set(value):

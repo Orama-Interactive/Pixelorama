@@ -1018,6 +1018,14 @@ msgstr ""
 msgid "Background color:"
 msgstr ""
 
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr ""
+
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
 msgstr ""
