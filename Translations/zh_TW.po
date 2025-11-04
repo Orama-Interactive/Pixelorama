@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2025-11-04 01:01\n"
+"PO-Revision-Date: 2025-11-04 16:56\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1027,6 +1027,14 @@ msgid "Background color from:"
 msgstr ""
 
 msgid "Background color:"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
 msgstr ""
 
 #. Found in the preferences, under the Tools category.
@@ -3040,6 +3048,10 @@ msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
 msgstr ""
 
 #. Found in the preferences, under the Reset category.
