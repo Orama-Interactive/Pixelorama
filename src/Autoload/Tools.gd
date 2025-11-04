@@ -426,7 +426,7 @@ func _ready() -> void:
 ## NOTE: For optimization, if there is already a ready made config available, then we will use that
 ## instead of re-calculating the config, else we have no choice but to re-generate it
 func attempt_config_share(from_idx: int, config: Dictionary = {}) -> void:
-	if not Global.share_options_between_tools:
+	if not Global.share_options_between_tools and not Global.single_tool_mode:
 		return
 	if _slots.is_empty():
 		return
@@ -765,7 +765,7 @@ func update_tool_cursors() -> void:
 
 
 func draw_indicator() -> void:
-	if Global.right_square_indicator_visible:
+	if Global.right_square_indicator_visible and not Global.single_tool_mode:
 		_slots[MOUSE_BUTTON_RIGHT].tool_node.draw_indicator(false)
 	if Global.left_square_indicator_visible:
 		_slots[MOUSE_BUTTON_LEFT].tool_node.draw_indicator(true)
