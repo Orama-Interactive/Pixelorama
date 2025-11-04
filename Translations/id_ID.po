@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-10-14 14:10\n"
+"PO-Revision-Date: 2025-11-04 01:01\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -963,6 +963,10 @@ msgstr "Font:"
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
 msgstr "Ukuran font:"
+
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Redupkan antarmuka pada sembulan"
