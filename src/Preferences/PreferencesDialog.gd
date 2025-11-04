@@ -511,6 +511,14 @@ func _on_reset_options_confirmation_confirmed() -> void:
 		for extension in extensions_list:
 			extensions_node.uninstall_extension(extension)
 		Global.config_cache.erase_section("extensions")
+	# Remove all backups
+	if %RemoveAllBackups.button_pressed:
+		for session_folder in DirAccess.get_directories_at(OpenSave.BACKUPS_DIRECTORY):
+			var folder_path := OpenSave.BACKUPS_DIRECTORY.path_join(session_folder)
+			for file in DirAccess.get_files_at(folder_path):
+				var file_path := folder_path.path_join(file)
+				DirAccess.remove_absolute(file_path)
+			DirAccess.remove_absolute(folder_path)
 	# Clear recent files list
 	if %ClearRecentFiles.button_pressed:
 		Global.config_cache.erase_section_key("data", "last_project_path")

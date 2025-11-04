@@ -1258,6 +1258,8 @@ func _on_Autosave_timeout() -> void:
 			project.backup_path = (current_session_backup.path_join(
 				"(" + p_name + " backup)-" + str(Time.get_unix_time_from_system()) + "-%s" % i
 			))
+		if not DirAccess.dir_exists_absolute(current_session_backup):
+			DirAccess.make_dir_recursive_absolute(current_session_backup)
 		save_pxo_file(project.backup_path, true, false, project)
 
 
