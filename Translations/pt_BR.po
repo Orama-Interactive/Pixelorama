@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-11-04 01:01\n"
+"PO-Revision-Date: 2025-11-04 16:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1033,6 +1033,14 @@ msgstr "Cor de fundo de:"
 
 msgid "Background color:"
 msgstr "Cor de fundo:"
+
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr ""
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -3113,6 +3121,10 @@ msgstr "Redefinir todas as opções de ferramenta"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "Remover todas as extensões"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
