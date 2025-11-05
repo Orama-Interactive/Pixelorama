@@ -117,7 +117,7 @@ func make_proper_size(color_table: Array) -> Array:
 
 
 func calc_delay_time(frame_delay: float) -> int:
-	return int(ceili(frame_delay / 0.01))
+	return ceili(frame_delay / 0.01)
 
 
 func color_table_to_indexes(colors: Array) -> PackedByteArray:
@@ -249,22 +249,20 @@ func add_image_descriptor(pos: Vector2, size: Vector2, l_color_table_size: int) 
 func color_table_bit_size(color_table: Array) -> int:
 	if color_table.size() <= 1:
 		return 0
-	var bit_size := int(ceil(log(color_table.size()) / log(2.0)))
+	var bit_size := ceili(log(color_table.size()) / log(2.0))
 	return bit_size - 1
 
 
 func add_local_color_table(color_table: Array) -> void:
 	for color in color_table:
-		data.append(color[0])
-		data.append(color[1])
-		data.append(color[2])
+		data.append_array([color[0], color[1], color[2]])
 
 	var size := color_table_bit_size(color_table)
 	var proper_size := int(pow(2, size + 1))
 
 	if color_table.size() != proper_size:
 		for i in range(proper_size - color_table.size()):
-			data += PackedByteArray([0, 0, 0])
+			data.append_array([0, 0, 0])
 
 
 func add_image_data_block(lzw_min_code_size: int, _data: PackedByteArray) -> void:

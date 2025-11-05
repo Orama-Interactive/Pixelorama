@@ -20,7 +20,7 @@
 ## gdgifexporter
 
 - Upstream: https://github.com/jegor377/godot-gdgifexporter
-- Version: c368952a97bbbbcfa491358a61043be7009536a6
+- Version: 0db799034397541b7e59c0a3ed9a7056a8bfdf81
 - License: [MIT](https://github.com/jegor377/godot-gdgifexporter/blob/master/LICENSE)
 
 Files extracted from source:
