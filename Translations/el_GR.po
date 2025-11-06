@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-11-06 12:57\n"
+"PO-Revision-Date: 2025-11-06 14:33\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1040,7 +1040,7 @@ msgstr "Λειτουργία ενός εργαλείου"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Αν είναι ενεργοποιημένο, το δεξί κουμπί του ποντικιού θα ενεργοποιεί πάντα το ίδιο εργαλείο με το αριστερό κουμπί του ποντικιού."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -3123,7 +3123,7 @@ msgstr "Διαγραφή όλων των επεκτάσεων"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Διαγραφή όλων των αντιγράφων ασφαλείας"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
