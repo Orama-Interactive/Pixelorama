@@ -37,8 +37,8 @@ func add_logical_screen_descriptor(width: int, height: int) -> void:
 	var background_color_index: int = 0
 	var pixel_aspect_ratio: int = 0
 
-	data += little_endian.int_to_2bytes(width)
-	data += little_endian.int_to_2bytes(height)
+	data += little_endian.int_to_word(width)
+	data += little_endian.int_to_word(height)
 	data.append(packed_fields)
 	data.append(background_color_index)
 	data.append(pixel_aspect_ratio)
@@ -228,7 +228,7 @@ func add_graphic_constrol_ext(_delay_time: float, tci: int = -1) -> void:
 
 	data.append(block_size)
 	data.append(packed_fields)
-	data += little_endian.int_to_2bytes(delay_time)
+	data += little_endian.int_to_word(delay_time)
 	data.append(transparent_color_index)
 
 	data.append(0)
@@ -239,10 +239,10 @@ func add_image_descriptor(pos: Vector2, size: Vector2, l_color_table_size: int) 
 	var packed_fields: int = 0b10000000 | (0b111 & l_color_table_size)
 
 	data.append(image_separator)
-	data += little_endian.int_to_2bytes(int(pos.x))  # left pos
-	data += little_endian.int_to_2bytes(int(pos.y))  # top pos
-	data += little_endian.int_to_2bytes(int(size.x))  # width
-	data += little_endian.int_to_2bytes(int(size.y))  # height
+	data += little_endian.int_to_word(int(pos.x))  # left pos
+	data += little_endian.int_to_word(int(pos.y))  # top pos
+	data += little_endian.int_to_word(int(size.x))  # width
+	data += little_endian.int_to_word(int(size.y))  # height
 	data.append(packed_fields)
 
 

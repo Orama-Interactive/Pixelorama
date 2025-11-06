@@ -1,10 +1,30 @@
 extends RefCounted
 
 var lsbbitpacker := preload("./lsbbitpacker.gd")
-var lsbbitunpacker := preload("./lsbbitunpacker.gd")
 
-var code_table := {}
+var code_table: Dictionary[PackedByteArray, int] = {}
 var entries_counter := 0
+
+
+class BitReader:
+	var bytes: PackedByteArray
+	var bit_pos := 0
+
+	func _init(data: PackedByteArray) -> void:
+		bytes = data
+
+	func read_bits(num_bits: int) -> int:
+		var result := 0
+		var bits_read := 0
+		while bits_read < num_bits:
+			var byte_index := bit_pos >> 3
+			var bit_index := bit_pos & 7
+			var b := bytes[byte_index]
+			var bit := (b >> bit_index) & 1
+			result |= bit << bits_read
+			bit_pos += 1
+			bits_read += 1
+		return result
 
 
 func get_bit_length(value: int) -> int:
@@ -13,12 +33,17 @@ func get_bit_length(value: int) -> int:
 	return ceili(log(value | 0x1 + 1) / 0.6931471805599453)
 
 
+func _get_clear_code_index(colors: PackedByteArray) -> int:
+	var last_color_index: int = colors.size() - 1
+	return pow(2, get_bit_length(last_color_index))
+
+
 func initialize_color_code_table(colors: PackedByteArray) -> void:
 	code_table.clear()
 	entries_counter = 0
 	for color_id in colors:
-		# warning-ignore:return_value_discarded
-		code_table[PackedByteArray([color_id])] = entries_counter
+		var entry := PackedByteArray([color_id])
+		code_table[entry] = entries_counter
 		entries_counter += 1
 	# move counter to the first available compression code index
 	var last_color_index: int = colors.size() - 1
@@ -39,8 +64,7 @@ func compress_lzw(index_stream: PackedByteArray, colors: PackedByteArray) -> Arr
 	# all colors (for example 16 colors) with indexes from 0 to 15.
 	# Number 15 is in binary 0b1111, so we'll need 4 bits to write all
 	# colors down.
-	var last_color_index: int = colors.size() - 1
-	var clear_code_index: int = pow(2, get_bit_length(last_color_index))
+	var clear_code_index: int = _get_clear_code_index(colors)
 	var current_code_size: int = get_bit_length(clear_code_index)
 	var binary_code_stream = lsbbitpacker.LSBLZWBitPacker.new()
 
@@ -67,8 +91,7 @@ func compress_lzw(index_stream: PackedByteArray, colors: PackedByteArray) -> Arr
 
 			# We don't want to add new code to code table if we've exceeded 4095
 			# index.
-			var last_entry_index: int = entries_counter - 1
-			if last_entry_index != 4095:
+			if entries_counter - 1 != 4095:
 				# Output the code for just the index buffer to our code stream
 				# warning-ignore:return_value_discarded
 				code_table[new_index_buffer] = entries_counter
@@ -100,3 +123,63 @@ func compress_lzw(index_stream: PackedByteArray, colors: PackedByteArray) -> Arr
 	var min_code_size: int = get_bit_length(clear_code_index) - 1
 
 	return [binary_code_stream.pack(), min_code_size]
+
+
+func decompress_lzw(min_code_size: int, data: PackedByteArray) -> PackedByteArray:
+	var clear_code := 1 << min_code_size
+	var end_code := clear_code + 1
+	var next_code := end_code + 1
+	var code_size := min_code_size + 1
+	var max_code := (1 << code_size) - 1
+
+	# Initialize dictionary
+	var dict: Dictionary[int, PackedByteArray] = {}
+	for i in range(clear_code):
+		dict[i] = PackedByteArray([i])
+
+	var result: PackedByteArray = []
+	var reader := BitReader.new(data)
+	var prev := -1
+	while true:
+		var code := reader.read_bits(code_size)
+
+		if code == clear_code:
+			# Reset dictionary
+			dict.clear()
+			for i in range(clear_code):
+				dict[i] = PackedByteArray([i])
+			code_size = min_code_size + 1
+			next_code = end_code + 1
+			max_code = (1 << code_size) - 1
+			prev = -1
+			continue
+
+		elif code == end_code:
+			break
+
+		var entry: PackedByteArray = []
+		if dict.has(code):
+			entry = dict[code]
+		elif code == next_code and prev != -1:
+			entry = dict[prev] + PackedByteArray([dict[prev][0]])
+		else:
+			# invalid (corrupted GIF)
+			break
+
+		# Output
+		for c in entry:
+			result.append(c)
+
+		if prev != -1:
+			var new_entry := dict[prev] + PackedByteArray([entry[0]])
+			dict[next_code] = new_entry
+			next_code += 1
+
+			# Increase code size if needed
+			if next_code > max_code and code_size < 12:
+				code_size += 1
+				max_code = (1 << code_size) - 1
+
+		prev = code
+
+	return result

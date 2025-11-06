@@ -20,11 +20,8 @@
 ## gdgifexporter
 
 - Upstream: https://github.com/jegor377/godot-gdgifexporter
-- Version: 0db799034397541b7e59c0a3ed9a7056a8bfdf81
+- Version: [76bd1f8b3f47ffe977a20673c13a0e16de7c5e61](https://github.com/jegor377/godot-gdgifexporter/commit/76bd1f8b3f47ffe977a20673c13a0e16de7c5e61)
 - License: [MIT](https://github.com/jegor377/godot-gdgifexporter/blob/master/LICENSE)
-
-Files extracted from source:
-- `gdgifexporter/quantization/enhanced_uniform_quantization.gd`
 
 ## godot-dockable-container
 
@@ -37,5 +34,3 @@ Files extracted from source:
 - Upstream: https://github.com/Variable-Interactive/SmartSlicer
 - Version: Based on git commit fd2b423497a377937dbc988e309cc95afd1436ca with a modification on SmartSlicePreview.gd (lines 31-32). Only the contents of addons folder are used and the script SmartSlicePreview.gd is moved to res://src/UI/Dialogs/HelperScripts/ for better organization
 - License: [MIT](https://github.com/Variable-Interactive/SmartSlicer/blob/main/LICENSE)
-
-

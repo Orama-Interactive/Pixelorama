@@ -488,7 +488,8 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 			)
 			download_confirmation.popup_centered_clamped()
 			url_to_download = file
-		OpenSave.handle_loading_file(file)
+		else:
+			OpenSave.handle_loading_file(file)
 	if splash_dialog.visible:
 		splash_dialog.hide()
 
