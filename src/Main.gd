@@ -457,8 +457,15 @@ func _notification(what: int) -> void:
 	if not is_inside_tree():
 		return
 	match what:
-		NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST:
+		NOTIFICATION_WM_CLOSE_REQUEST:
 			show_quit_dialog()
+		NOTIFICATION_WM_GO_BACK_REQUEST:
+			var subwindows := get_window().get_embedded_subwindows()
+			if subwindows.is_empty():
+				show_quit_dialog()
+			else:
+				for subwindow in subwindows:
+					subwindow.hide()
 		# If the mouse exits the window and another application has the focus,
 		# pause the application
 		NOTIFICATION_APPLICATION_FOCUS_OUT:
