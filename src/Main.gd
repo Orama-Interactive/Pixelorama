@@ -464,6 +464,8 @@ func _notification(what: int) -> void:
 			if subwindows.is_empty():
 				show_quit_dialog()
 			else:
+				if subwindows[-1] == save_sprite_dialog:
+					_on_save_sprite_canceled()
 				subwindows[-1].hide()
 		# If the mouse exits the window and another application has the focus,
 		# pause the application
