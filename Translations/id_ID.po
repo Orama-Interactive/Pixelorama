@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-11-08 16:28\n"
+"PO-Revision-Date: 2025-11-08 17:42\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -1040,7 +1040,7 @@ msgstr "Mode alat segerak"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Jika ini diaktifkan, tetikus kanan akan mengaktifkan alat yang sama dengan tetikus kiri."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -1347,7 +1347,7 @@ msgstr "Sesi sebelumnya"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "Pencet dua kali untuk memuat seluruh sesi / proyek tertentu."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
@@ -1707,7 +1707,7 @@ msgstr "Garis Lengkung\n\n"
 "Tekan %s/%s untuk menambah titik\n"
 "Pencet dua kali untuk sudahi menggaris\n"
 "Tekan dan seret untuk melengkungkan\n"
-"Tekan %s untuk menghapus titik tadi"
+"Tekan %s untuk hapus titik yang tadi"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1743,7 +1743,14 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "Kotak Isometrik\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Menggambar kotak isometrik\n"
+"Tekan %s/%s untuk menambah titik\n"
+"Tahan %s untuk mengikut sudut arah titik\n"
+"Tahan %s untuk memindahkan bentuk\n"
+"Tekan %s untuk ubah titik yang tadi"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -2503,11 +2510,11 @@ msgstr "Aktifkan gambar dicerminkan menegak"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Aktifkan gambar dicerminkan menyudut (↗)"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Aktifkan gambar dicerminkan menyudut (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3117,7 +3124,7 @@ msgstr "Hapus semua ekstensi"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Hapus semua cadangan"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3319,7 +3326,7 @@ msgid "Discard All"
 msgstr "Buang Semua"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "Pixelorama tadi ditutup tidak benar. Apakah ingin memulihkan sesi sebelumnya?"
 
 msgid "Backup reloaded"
 msgstr "Cadangan dimuat ulang"
@@ -3370,7 +3377,7 @@ msgstr "Buat palet baru"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "Buat palet proyek baru"
 
 msgid "Comment:"
 msgstr "Komentar:"
