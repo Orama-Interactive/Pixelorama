@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-11-04 16:56\n"
+"PO-Revision-Date: 2025-11-08 17:42\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -134,7 +134,7 @@ msgid "Quit"
 msgstr "Keluar"
 
 msgid "Undo"
-msgstr "Undurkan"
+msgstr "Batalkan"
 
 msgid "Redo"
 msgstr "Ulangi"
@@ -597,13 +597,13 @@ msgid "The following files already exist. Do you wish to overwrite them?\n"
 msgstr ""
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Laluan direktori tidak sah!"
 
 msgid "File name is not valid!"
 msgstr "Nama fail tidak sah!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Laluan direktori dan nama fail tidak sah!"
 
 msgid "Exporting in progress..."
 msgstr "Tengah mengeksport..."
