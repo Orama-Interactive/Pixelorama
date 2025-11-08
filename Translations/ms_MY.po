@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-11-08 17:42\n"
+"PO-Revision-Date: 2025-11-08 19:20\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -99,13 +99,13 @@ msgstr "Simpan sebagai..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr "Sertakan imej campuran"
+msgstr "Sertakan gambar campuran"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr "Jika didayakan, bentuk akhir imej campuran disimpan sebagai pxo pada setiap bingkai.\n"
+msgstr "Jika didayakan, bentuk akhir imej campuran disimpan sebagai pxo, pada setiap bingkai.\n"
 "Fail pxo akan membesar dan berguna untuk diimport dengan perisian pihak ketiga\n"
 "atau dieksport CLI. Membuka pxo pada Pixelorama tidak perlu pilihan ini didayakan."
 
@@ -141,11 +141,11 @@ msgstr "Ulangi"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Batalkan Riwayat"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Keadaan awal"
 
 msgid "Copy"
 msgstr "Salin"
@@ -177,7 +177,7 @@ msgid "New Brush"
 msgstr "Berus Baru"
 
 msgid "Scale Image"
-msgstr "Skalakan imej"
+msgstr "Skalakan gambar"
 
 msgid "Pixels"
 msgstr "Piksel"
@@ -436,7 +436,7 @@ msgstr "Paparkan Panduan Tetikus"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr "Paparkan Imej Rujukan"
+msgstr "Paparkan Gambar Rujukan"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -488,7 +488,7 @@ msgstr "Import kepada:"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
-msgstr "Sapukan ke semua"
+msgstr "Pakai ke semua"
 
 msgid "Recent projects"
 msgstr "Projek terkini"
@@ -515,7 +515,7 @@ msgid "New layer"
 msgstr "Lapisan baru"
 
 msgid "New reference image"
-msgstr "Imej rujukan baru"
+msgstr "Gambar rujukan baru"
 
 msgid "New palette"
 msgstr "Palet baru"
@@ -1303,7 +1303,7 @@ msgid "Colors:"
 msgstr ""
 
 msgid "Steps:"
-msgstr ""
+msgstr "Step:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
@@ -1966,7 +1966,7 @@ msgstr ""
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Maks. batal step:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
@@ -2507,7 +2507,7 @@ msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Berapa sepatutnya animasi pralihat dimainkan setiap saat?\n"
+msgstr "Jumlah bingkai yang dimainkan per saat pada pralihat.\n"
 "Lagi banyak FPS, lagi cepat animasi dimainkan."
 
 msgid "No loop"
@@ -2865,7 +2865,7 @@ msgid "Choose a palette"
 msgstr ""
 
 msgid "Undo: Draw"
-msgstr ""
+msgstr "Batalkan: Menggambar"
 
 msgid "Redo: Draw"
 msgstr ""
@@ -3281,7 +3281,7 @@ msgid "Remove currently selected palette"
 msgstr ""
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "Adakah mahu mengalih keluar palet ini? (Tak boleh dibatalkan)"
 
 msgid "You can't remove more palettes!"
 msgstr ""
@@ -3628,7 +3628,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "Step lengkung:"
 
 msgid "Horizontal alignment:"
 msgstr ""
@@ -3723,11 +3723,11 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Punca kuasa dua"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
-msgstr ""
+msgstr "Sinus"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
@@ -3840,7 +3840,7 @@ msgstr "Tambah kesan"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr ""
+msgstr "Adakah mahu muat turun gambar daripada %s?"
 
 #. A tileset is a collection of tiles.
 #: src/Classes/TileSetCustom.gd
