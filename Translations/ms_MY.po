@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-11-08 20:30\n"
+"PO-Revision-Date: 2025-11-08 21:34\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -99,7 +99,7 @@ msgstr "Simpan sebagai..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr "Sertakan gambar campuran"
+msgstr "Sertakan imej campuran"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
@@ -177,7 +177,7 @@ msgid "New Brush"
 msgstr "Berus Baru"
 
 msgid "Scale Image"
-msgstr "Skalakan gambar"
+msgstr "Skalakan imej"
 
 msgid "Pixels"
 msgstr "Piksel"
@@ -209,7 +209,7 @@ msgid "Resize Canvas"
 msgstr "Ubah Saiz Kanvas"
 
 msgid "Offset Image"
-msgstr "Offset Gambar"
+msgstr "Pengimbang Imej"
 
 msgid "Offset:"
 msgstr "Offset:"
@@ -223,7 +223,7 @@ msgid "Center Frames"
 msgstr "Pusatkan Bingkai"
 
 msgid "Rotate Image"
-msgstr "Pusing Gambar"
+msgstr "Pusing Imej"
 
 msgid "Pivot x:"
 msgstr "Pangsi x:"
@@ -295,7 +295,7 @@ msgid "Grayscale View"
 msgstr "Paparan Skala Kelabu"
 
 msgid "Mirror Image"
-msgstr "Cerminkan Gambar"
+msgstr "Cerminkan Imej"
 
 msgid "Flip Horizontal"
 msgstr "Balikkan Mendatar"
@@ -436,7 +436,7 @@ msgstr "Paparkan Panduan Tetikus"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr "Paparkan Gambar Rujukan"
+msgstr "Paparkan Imej Rujukan"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
@@ -444,23 +444,23 @@ msgstr "Timbulkan Kesan Lapisan"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Petik Ke"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Petik ke Sempadan Kekisi Segi Empat"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Petik ke Pusat Kekisi Segi Empat"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Petik ke Panduan"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Petik ke Panduan Perspektif"
 
 msgid "Show Animation Timeline"
 msgstr "Paparkan Bingkai Animasi"
@@ -515,7 +515,7 @@ msgid "New layer"
 msgstr "Lapisan baru"
 
 msgid "New reference image"
-msgstr "Gambar rujukan baru"
+msgstr "Imej rujukan baru"
 
 msgid "New palette"
 msgstr "Palet baru"
@@ -813,15 +813,15 @@ msgstr "Projek Aseprite"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Projek Krita"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Projek Piskel"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Projek Photoshop"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -859,13 +859,13 @@ msgstr "Ruang warna"
 
 #. A type of color space.
 msgid "Linear sRGB"
-msgstr ""
+msgstr "sRGB linear"
 
 msgid "General"
 msgstr "Umum"
 
 msgid "Startup"
-msgstr ""
+msgstr "Permulaan"
 
 msgid "Language"
 msgstr "Bahasa"
@@ -884,29 +884,29 @@ msgid "Timeline"
 msgstr "Garis masa"
 
 msgid "Selection"
-msgstr ""
+msgstr "Seleksi"
 
 msgid "Shortcuts"
 msgstr "Pintasan"
 
 msgid "Backup"
-msgstr ""
+msgstr "Sandaran"
 
 msgid "Performance"
-msgstr ""
+msgstr "Prestasi"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Pemacu"
 
 msgid "Extensions"
 msgstr "Sambungan"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Kursor"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Penunjuk"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
@@ -920,7 +920,7 @@ msgstr ""
 
 #. Found in the preferences, under Canvas.
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Zum Lancar"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Smooth Zoom".
 msgid "Adds a smoother transition when zooming in or out"
@@ -1035,7 +1035,7 @@ msgstr "Warna latar belakang:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "Mod alat segerak"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
@@ -1709,7 +1709,7 @@ msgstr "Teks\n\n"
 "%s untuk tetikus kanan"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Segi Empat Tepat"
 
 msgid "Ellipse"
 msgstr ""
@@ -1830,7 +1830,7 @@ msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Segi Empat"
 
 msgid "Isometric"
 msgstr ""
@@ -2697,7 +2697,7 @@ msgstr ""
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
 msgid "Add Tilemap Layer"
-msgstr ""
+msgstr "Tambah Lapisan Jubin"
 
 #. One of the options of the create new layer button.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2820,7 +2820,7 @@ msgid "Opacity:"
 msgstr ""
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Kelegapan mod jubin:"
 
 msgid "Toggle layer's visibility"
 msgstr ""
@@ -3070,7 +3070,7 @@ msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Padamkan semua sandaran"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3119,7 +3119,7 @@ msgid "Lasso / Free Select Tool"
 msgstr ""
 
 msgid "Select by Drawing"
-msgstr "Pilih dgn Menggambar"
+msgstr "Pilih Menggambar"
 
 msgid "Move"
 msgstr ""
@@ -3152,7 +3152,7 @@ msgid "Curve Tool"
 msgstr ""
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Alat Segi Empat"
 
 msgid "Ellipse Tool"
 msgstr ""
@@ -3310,13 +3310,13 @@ msgid "Duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Berjubin Kedua-dua Paksi"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Berjubin di Paksi X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Berjubin di Paksi Y"
 
 msgid "Create a new palette"
 msgstr ""
@@ -3840,7 +3840,7 @@ msgstr "Tambah kesan"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr "Adakah mahu muat turun gambar daripada %s?"
+msgstr "Adakah mahu muat turun imej daripada %s?"
 
 #. A tileset is a collection of tiles.
 #: src/Classes/TileSetCustom.gd
@@ -3945,23 +3945,23 @@ msgstr "Mengubah jubin pada kanvas."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr ""
+msgstr "Buatkan jubin"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr ""
+msgstr "Pusing jubin ke kiri"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr ""
+msgstr "Pusing jubin ke kanan"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr ""
+msgstr "Jubin dibalik mendatar"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr ""
+msgstr "Jubin dibalik menegak"
 
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
