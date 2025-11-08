@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-10-14 14:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -138,6 +138,14 @@ msgstr "Rückgängig"
 
 msgid "Redo"
 msgstr "Wiederherstellen"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr ""
 
 msgid "Copy"
 msgstr "Kopieren"
@@ -803,6 +811,18 @@ msgstr "OpenRaster-Projekt"
 msgid "Aseprite Project"
 msgstr "Aseprite Projekt"
 
+#. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
+msgid "Krita Project"
+msgstr "Krita-Projekt"
+
+#. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
+msgid "Piskel Project"
+msgstr "Piskel-Projekt"
+
+#. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
+msgid "Photoshop Project"
+msgstr "Photoshop-Projekt"
+
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
 msgstr "Pixelorama-Palette"
@@ -1306,27 +1326,27 @@ msgstr "Problemverfolger"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "Backup wiederherstellen"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "Vergangene Sitzungen"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "Doppelklicken um eine ganze Sitzung oder ein bestimmtes Projekt zu laden."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
-msgstr ""
+msgstr "Sitzungen"
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "Projekte"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "(Aktuelle Sitzung)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
@@ -1708,7 +1728,14 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "Isometrische Box Werkzeug\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"Zeichnet ein isometrisches Feld\n"
+"Drücke %s/%s, um einen Basispunkt\n"
+"Halte %s gedrückt, um den Winkel des Basispunktes einrasten zu lassen\n"
+"Halte %s gedrückt, um den Ursprung der Form zu verschieben\n"
+"Drücke %s, um die zuletzt hinzugefügte Basis zu bearbeiten"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -1962,7 +1989,7 @@ msgstr "Rahmenfarbe 2:"
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "Transformationsvorschau-Alpha:"
 
 msgid "Only custom preset can be modified"
 msgstr "Nur benutzerdefinierte Voreinstellung kann geändert werden"
@@ -2283,7 +2310,7 @@ msgstr "Ganze Auswahl"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Füllen Sie Regionen aus dem Zusammenführen aller Ebenen"
 
 msgid "Fill with:"
 msgstr "Füllen mit:"
@@ -2429,25 +2456,25 @@ msgstr "Graustufen"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Kantenfarbe"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Werkzeugfarbe"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Angepasster Durchschnitt"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Am Interface mischen"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Linke Seite"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Rechte Seite"
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -2455,14 +2482,24 @@ msgstr "Spiegeln"
 msgid "Horizontal"
 msgstr "Horizontal spiegeln"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Aktiviere horizontal gespiegelte Zeichnung"
 
 msgid "Vertical"
 msgstr "Vertikal"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Aktiviere vertikal gespiegelte Zeichnung"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr "Aktiviere diagonal gespiegelte (↗) Zeichnung"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr "Aktiviere diagonal gespiegelte (↘) Zeichnung"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3156,7 +3193,7 @@ msgid "Ellipse Tool"
 msgstr "Ellipse-Werkzeug"
 
 msgid "Isometric Box Tool"
-msgstr ""
+msgstr "Isometrische Box Werkzeug"
 
 msgid "Switch Colors"
 msgstr "Wechsle Farben"
@@ -3269,9 +3306,8 @@ msgstr "Schließen"
 msgid "Discard All"
 msgstr "Alle verwerfen"
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
-msgstr "Automatisch gespeicherte(s) Projekt(e) von einer vorherigen Sitzung gefunden. Möchten Sie die Daten wiederherstellen?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
+msgstr "Pixelorama wurde beim letzten Mal nicht richtig geschlossen. Möchten Sie eine vorherige Sitzung wiederherstellen?"
 
 msgid "Backup reloaded"
 msgstr "Backup neu geladen"
@@ -3319,6 +3355,10 @@ msgstr "In Y-Achse gekachelt"
 
 msgid "Create a new palette"
 msgstr "Neue Palette erstellen"
+
+#. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
+msgid "Create a new project palette"
+msgstr "Neue Projektpalette erstellen"
 
 msgid "Comment:"
 msgstr "Kommentar:"

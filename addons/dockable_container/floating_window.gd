@@ -28,7 +28,8 @@ func _ready() -> void:
 		position = DisplayServer.window_get_size() / 2 - size / 2
 	else:
 		position = DisplayServer.screen_get_usable_rect().size / 2 - size / 2
-	# Enable always_on_top for all child windows.
+	# Enable always_on_top for all child windows,
+	# to fix a bug where the child windows of floating windows appear behind them.
 	# TODO: Remove the loop when this bug gets fixed in Godot's side.
 	# Probably when https://github.com/godotengine/godot/issues/92848 is closed.
 	for dialog_child in find_children("", "Window", true, false):

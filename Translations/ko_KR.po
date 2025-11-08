@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-10-14 14:09\n"
 
 msgid "OK"
 msgstr "예"
@@ -74,7 +74,7 @@ msgstr "이미지"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "프로젝트"
 
 msgid "Effects"
 msgstr "효과"
@@ -136,6 +136,14 @@ msgstr "실행 취소"
 
 msgid "Redo"
 msgstr "다시 실행"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr ""
 
 msgid "Copy"
 msgstr "복사"
@@ -298,11 +306,11 @@ msgstr "환경설정"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "절차적 생성"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "블러"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
@@ -801,6 +809,18 @@ msgstr ""
 msgid "Aseprite Project"
 msgstr ""
 
+#. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
+msgid "Krita Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
+msgid "Piskel Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
+msgid "Photoshop Project"
+msgstr ""
+
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
 msgstr ""
@@ -931,15 +951,15 @@ msgid "System Language"
 msgstr "시스템 언어"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "화면 배율:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "폰트:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "폰트 크기:"
 
 msgid "Dim interface on dialog popup"
 msgstr "대화 상자 팝업에 인터페이스를 희미하"
@@ -1087,23 +1107,23 @@ msgstr "그림자 색상:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "가우시안 블러"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "블러 종류:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "블러 강도:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "블러 범위:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "블러 방향:"
 
 msgid "Gradient"
 msgstr "그레디언트"
@@ -1151,19 +1171,19 @@ msgstr "반지름"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "반복:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "반복"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "반전"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "절단"
 
 msgid "Transition size:"
 msgstr "전환 크기:"
@@ -1202,15 +1222,15 @@ msgstr "명도:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "밝기/대비 조정"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "밝기:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
-msgstr ""
+msgstr "대비:"
 
 #. Refers to the red value of the colors of an image.
 msgid "Red value:"
@@ -1512,7 +1532,7 @@ msgid "Save before exiting?"
 msgstr "종료하기 전에 저장할까요?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "%s 프로젝트에 저장되지 않은 작업물이 있습니다. 계속하시겠습니까?"
 
 msgid "Save & Exit"
 msgstr "저장 및 종료"
@@ -2433,14 +2453,24 @@ msgstr "미러링"
 msgid "Horizontal"
 msgstr "수평"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "수평 대칭 그리기 활성화"
 
 msgid "Vertical"
 msgstr "수직"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "수직 대칭 그리기 활성화"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3246,9 +3276,8 @@ msgstr "닫기"
 msgid "Discard All"
 msgstr "모두 버리기"
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
-msgstr "충돌한 세션에서 자동 저장된 프로젝트가 발견되었습니다. 데이터를 복구하시겠습니까?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "백업본을 다시 불러오는 중"
@@ -3296,6 +3325,10 @@ msgstr "Y 축으로 타일을 두르기"
 
 msgid "Create a new palette"
 msgstr "새 팔레트 생성"
+
+#. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
+msgid "Create a new project palette"
+msgstr ""
 
 msgid "Comment:"
 msgstr "댓글:"

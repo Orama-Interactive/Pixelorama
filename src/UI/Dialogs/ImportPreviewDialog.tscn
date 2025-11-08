@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://nba3nryom3ud"]
+[gd_scene load_steps=5 format=3 uid="uid://nba3nryom3ud"]
 
 [ext_resource type="Script" uid="uid://brtcr6mrev52o" path="res://src/UI/Dialogs/ImportPreviewDialog.gd" id="1_r16hn"]
 [ext_resource type="Script" uid="uid://bvn632m4s6crv" path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" id="2_yokw4"]
 [ext_resource type="Script" uid="uid://crtwdohribibe" path="res://src/UI/Dialogs/HelperScripts/SmartSlicePreview.gd" id="3_aeccv"]
-[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="4_7dy5o"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4_nmo33"]
 
 [node name="ImportPreviewDialog" type="ConfirmationDialog"]
@@ -93,11 +92,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 
-[node name="ImportOptionsContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="ImportOptionsContainer" type="FoldableContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("4_7dy5o")
-text = "Import Options"
+folded = true
+title = "Import Options"
 
 [node name="ImportOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer"]
 unique_name_in_owner = true

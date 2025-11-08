@@ -248,13 +248,11 @@ func update_line_polylines(start: Vector2i, end: Vector2i) -> void:
 	_line_polylines = _create_polylines(indicator)
 
 
-func prepare_undo(action: String) -> void:
-	var project := Global.current_project
+func prepare_undo() -> void:
 	_undo_data = _get_undo_data()
-	project.undo_redo.create_action(action)
 
 
-func commit_undo() -> void:
+func commit_undo(action := "Draw") -> void:
 	var project := Global.current_project
 	Global.canvas.update_selected_cels_textures(project)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
@@ -268,13 +266,52 @@ func commit_undo() -> void:
 		frame = project.current_frame
 		layer = project.current_layer
 
-	project.undos += 1
+	project.undo_redo.create_action(action)
+	manage_undo_redo_palettes()
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
 
 	_undo_data.clear()
+
+
+## Manages conversion of global palettes into local if a drawable tool is used
+func manage_undo_redo_palettes() -> void:
+	if _is_eraser:
+		return
+	var palette_in_focus := Palettes.current_palette
+	if not is_instance_valid(palette_in_focus):
+		return
+	var palette_has_color := Palettes.current_palette.has_theme_color(tool_slot.color)
+	if not palette_in_focus.is_project_palette:
+		# Make a project copy of the palette if it has (or about to have) the color
+		# and is still global
+		if palette_has_color or Palettes.auto_add_colors:
+			palette_in_focus = palette_in_focus.duplicate()
+			palette_in_focus.is_project_palette = true
+			Palettes.undo_redo_add_palette(palette_in_focus)
+	if Palettes.auto_add_colors and not palette_has_color:
+		# Get an estimate of where the color will end up (used for undo)
+		var index := 0
+		var color_max: int = palette_in_focus.colors_max
+		# If palette is full automatically increase the palette height
+		if palette_in_focus.is_full():
+			color_max = palette_in_focus.width * (palette_in_focus.height + 1)
+		for i in range(0, color_max):
+			if not palette_in_focus.colors.has(i):
+				index = i
+				break
+		var undo_redo := Global.current_project.undo_redo
+		undo_redo.add_do_method(palette_in_focus.add_color.bind(tool_slot.color, 0))
+		undo_redo.add_undo_method(palette_in_focus.remove_color.bind(index))
+		if not Global.palette_panel:  # Failsafe
+			printerr("Missing global reference to PalettePanel")
+			return
+		undo_redo.add_do_method(Global.palette_panel.redraw_current_palette)
+		undo_redo.add_undo_method(Global.palette_panel.redraw_current_palette)
+		undo_redo.add_do_method(Global.palette_panel.toggle_add_delete_buttons)
+		undo_redo.add_undo_method(Global.palette_panel.toggle_add_delete_buttons)
 
 
 func draw_tool(pos: Vector2i) -> void:
@@ -310,6 +347,18 @@ func draw_end(pos: Vector2i) -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
+
+
+func cancel_tool() -> void:
+	super()
+	for data in _undo_data:
+		if data is not Image:
+			continue
+		var image_data = _undo_data[data]["data"]
+		data.set_data(
+			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
+		)
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func draw_tile(pos: Vector2i) -> void:
@@ -785,9 +834,11 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			&& _brush_transposed == TileSetPanel.ROTATION_MATRIX[i * 3 + 2]
 		):
 			if clockwise:
-				@warning_ignore("integer_division") final_i = i / 4 * 4 + posmod(i - 1, 4)
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + posmod(i - 1, 4)
 			else:
-				@warning_ignore("integer_division") final_i = i / 4 * 4 + (i + 1) % 4
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + (i + 1) % 4
 			_brush_flip_x = TileSetPanel.ROTATION_MATRIX[final_i * 3]
 			_brush_flip_y = TileSetPanel.ROTATION_MATRIX[final_i * 3 + 1]
 			_brush_transposed = TileSetPanel.ROTATION_MATRIX[final_i * 3 + 2]

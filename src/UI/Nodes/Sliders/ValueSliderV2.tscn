@@ -52,9 +52,11 @@ layout_mode = 2
 
 [node name="RatioGuides" type="NinePatchRect" parent="Ratio" groups=["UIButtons"]]
 custom_minimum_size = Vector2(9, 0)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 9.0
+pivot_offset = Vector2(4, 26)
 texture = ExtResource("4")
 region_rect = Rect2(0, 0, 9, 44)
 patch_margin_top = 15

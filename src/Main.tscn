@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://dbylw5k04ulp8"]
 
-[ext_resource type="Theme" uid="uid://bkb4syj8110el" path="res://assets/themes/dark/theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://dog5j8wjiwikc" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://dlxqc0hc51xu4" path="res://src/Main.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bsgwar3l6qtgv" path="res://src/UI/TopMenuContainer/TopMenuContainer.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://c8dsi6ggkqa7a" path="res://src/UI/UI.tscn" id="4"]
@@ -26,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1")
 script = ExtResource("2")
 
@@ -68,6 +69,9 @@ dialog_text = "Are you sure you want to exit Pixelorama?"
 title = "Save before exiting?"
 ok_button_text = "Save & Exit"
 dialog_text = "Project %s has unsaved progress. How do you wish to proceed?"
+
+[node name="RestoreSessionConfirmationDialog" type="ConfirmationDialog" parent="Dialogs"]
+dialog_text = "Pixelorama did not close properly last time. Would you like to restore a previous session?"
 
 [node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
 dialog_text = "This is an error message!"
@@ -120,6 +124,7 @@ script = ExtResource("17_k1xhp")
 [connection signal="confirmed" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_confirmed"]
 [connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="visibility_changed" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
+[connection signal="confirmed" from="Dialogs/RestoreSessionConfirmationDialog" to="." method="_on_restore_session_confirmation_dialog_confirmed"]
 [connection signal="visibility_changed" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="Dialogs/DownloadImageConfirmationDialog" to="." method="_on_download_image_confirmation_dialog_confirmed"]
 [connection signal="request_completed" from="ImageRequest" to="." method="_on_image_request_request_completed"]

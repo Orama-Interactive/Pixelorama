@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-10-14 14:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -137,6 +137,14 @@ msgstr "Отменить"
 
 msgid "Redo"
 msgstr "Повторить"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr ""
 
 msgid "Copy"
 msgstr "Копировать"
@@ -802,6 +810,18 @@ msgstr "OpenRaster Проект"
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
 msgstr "Проект Aseprite"
+
+#. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
+msgid "Krita Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
+msgid "Piskel Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
+msgid "Photoshop Project"
+msgstr ""
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -2454,14 +2474,24 @@ msgstr "Зеркало"
 msgid "Horizontal"
 msgstr "Горизонально"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Режим рисования с горизонтальным зеркалированием"
 
 msgid "Vertical"
 msgstr "Вертикально"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Режим рисования с вертикальным зеркалированием"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3268,10 +3298,8 @@ msgstr "Закрыть"
 msgid "Discard All"
 msgstr "Отменить все"
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
-msgstr "Найдены автоматически сохранённые проекты (проект) из аварийно завершённой сессии.\n"
-"Восстановить данные?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "Резервная копия восстановлена"
@@ -3319,6 +3347,10 @@ msgstr "Повторять по оси Y"
 
 msgid "Create a new palette"
 msgstr "Создать новую палитру"
+
+#. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
+msgid "Create a new project palette"
+msgstr ""
 
 msgid "Comment:"
 msgstr "Комментарий:"

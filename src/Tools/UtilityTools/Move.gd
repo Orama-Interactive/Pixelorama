@@ -27,6 +27,11 @@ func draw_start(pos: Vector2i) -> void:
 	_offset = pos
 	_undo_data = _get_undo_data()
 	if Tools.is_placing_tiles():
+		# Clear selection if it it present (i tried moving the selection proview only but the)
+		# code for it gets too complex so i chose to clear it instead
+		if project.has_selection:
+			Global.canvas.selection.clear_selection(true)
+			project.selection_map_changed()
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
@@ -70,18 +75,27 @@ func draw_end(pos: Vector2i) -> void:
 		pos = _snap_position(pos)
 		if not (project.has_selection and not Tools.is_placing_tiles()):
 			var pixel_diff := pos - _start_pos
-			Global.canvas.move_preview_location = Vector2i.ZERO
 			for cel in _get_affected_cels():
 				var image := cel.get_image()
 				_move_image(image, pixel_diff)
 				_move_image(image.indices_image, pixel_diff)
 			_commit_undo("Draw")
 
+	_reset_tool()
+	super.draw_end(pos)
+
+
+func cancel_tool() -> void:
+	super()
+	_reset_tool()
+
+
+func _reset_tool() -> void:
+	Global.canvas.move_preview_location = Vector2i.ZERO
 	_start_pos = Vector2.INF
 	_snap_to_grid = false
 	Global.canvas.sprite_changed_this_frame = true
 	Global.canvas.measurements.update_measurement(Global.MeasurementMode.NONE)
-	super.draw_end(pos)
 
 
 func _get_affected_cels() -> Array[BaseCel]:
@@ -152,7 +166,6 @@ func _commit_undo(action: String) -> void:
 		if project.get_current_cel() is not GroupCel:
 			layer = project.current_layer
 
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	if Tools.is_placing_tiles():

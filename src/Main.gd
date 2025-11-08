@@ -3,6 +3,7 @@ extends Control
 ## Needed because it is not possible to detect if a native file dialog is open or not.
 signal save_file_dialog_opened(opened: bool)
 
+const RUNNING_FILE_PATH := "user://.running"
 const SPLASH_DIALOG_SCENE_PATH := "res://src/UI/Dialogs/SplashDialog.tscn"
 
 var opensprite_file_selected := false
@@ -20,6 +21,7 @@ var splash_dialog: AcceptDialog:
 			add_child(splash_dialog)
 		return splash_dialog
 
+@onready var top_menu_container := $MenuAndUI/TopMenuContainer as Panel
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 ## Dialog used to open images and project (.pxo) files.
 @onready var open_sprite_dialog := $Dialogs/OpenSprite as FileDialog
@@ -29,6 +31,9 @@ var splash_dialog: AcceptDialog:
 @onready var tile_mode_offsets_dialog: ConfirmationDialog = $Dialogs/TileModeOffsetsDialog
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 @onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
+@onready var restore_session_confirmation_dialog := (
+	$Dialogs/RestoreSessionConfirmationDialog as ConfirmationDialog
+)
 @onready var download_confirmation := $Dialogs/DownloadImageConfirmationDialog as ConfirmationDialog
 @onready var left_cursor: Sprite2D = $LeftCursor
 @onready var right_cursor: Sprite2D = $RightCursor
@@ -50,7 +55,8 @@ class CLI:
 		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
 		["--json"]: [CLI.set_json, "Export the JSON data of the project"],
 		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
-		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"]
+		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"],
+		["--scene"]: [CLI.dummy, "Used internally by Godot."]
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
@@ -164,13 +170,18 @@ some useful [SYSTEM OPTIONS] are:
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
 
+	static func dummy(_project: Project, _next_arg: String) -> void:
+		pass
+
 
 func _init() -> void:
 	Global.project_switched.connect(_project_switched)
 	if not DirAccess.dir_exists_absolute(OpenSave.BACKUPS_DIRECTORY):
 		DirAccess.make_dir_recursive_absolute(OpenSave.BACKUPS_DIRECTORY)
 	Global.shrink = _get_auto_display_scale()
+	Global.auto_content_scale_factor = _get_auto_display_scale()
 	_handle_layout_files()
+	Applinks.data_received.connect(_on_applinks_data_received)
 	# Load dither matrix images.
 	var dither_matrices_path := "user://dither_matrices"
 	if DirAccess.dir_exists_absolute(dither_matrices_path):
@@ -196,8 +207,20 @@ func _ready() -> void:
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
 		OS.request_permissions()
+		var intent_data := Applinks.get_data()
+		if not intent_data.is_empty():
+			_on_applinks_data_received(intent_data)
 	if Global.open_last_project:
 		load_last_project()
+
+	# Detect if Pixelorama crashed last time.
+	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
+	if crashed_last_time and OpenSave.had_backups_on_startup:
+		restore_session_confirmation_dialog.popup_centered_clamped()
+	# Create a file that only exists while Pixelorama is running,
+	# and delete it when it closes. If Pixelorama opens and this file exists,
+	# it means that Pixelorama crashed last time.
+	FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
 	await get_tree().process_frame
 	_setup_application_window_size()
 	_show_splash_screen()
@@ -233,9 +256,10 @@ func _project_switched() -> void:
 		save_sprite_dialog.current_dir = Global.current_project.export_directory_path
 
 
-# Taken from https://github.com/godotengine/godot/blob/3.x/editor/editor_settings.cpp#L1474
+# Taken from
+# https://github.com/godotengine/godot/blob/master/editor/settings/editor_settings.cpp#L1801
 func _get_auto_display_scale() -> float:
-	if OS.get_name() == "macOS":
+	if OS.get_name() == "macOS" or OS.get_name() == "Android":
 		return DisplayServer.screen_get_max_scale()
 
 	var dpi := DisplayServer.screen_get_dpi()
@@ -246,6 +270,9 @@ func _get_auto_display_scale() -> float:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
 		return 1.5  # Likely a hiDPI display, but we aren't certain due to the returned DPI.
+	elif smallest_dimension <= 800:
+		# Small loDPI display. Use a smaller display scale so that editor elements fit more easily.
+		return 0.75
 	return 1.0
 
 
@@ -341,7 +368,7 @@ func _show_splash_screen() -> void:
 		# Wait for the window to adjust itself, so the popup is correctly centered
 		await get_tree().process_frame
 
-		splash_dialog.popup_centered()  # Splash screen
+		splash_dialog.popup_centered_clamped()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
 
 
@@ -352,6 +379,9 @@ func _handle_cmdline_arguments() -> void:
 		return
 	# Load the files first
 	for arg in args:
+		if arg.begins_with("lospec-palette://"):
+			Palettes.import_lospec_palette(arg)
+			break
 		var file_path := arg
 		# if we think the file could be a potential relative path it can mean two things:
 		# 1. The file is relative to executable
@@ -411,12 +441,32 @@ func _handle_cmdline_arguments() -> void:
 		Export.external_export(project)
 
 
+func _on_applinks_data_received(uri: String) -> void:
+	if uri.begins_with("lospec-palette://"):
+		Palettes.import_lospec_palette(uri)
+	elif uri.begins_with("content://"):
+		var path = Applinks.get_file_from_content_uri(uri)
+		if path:
+			OpenSave.handle_loading_file(path)
+	elif uri.begins_with("file://"):
+		var path := uri.trim_prefix("file://")
+		OpenSave.handle_loading_file(path)
+
+
 func _notification(what: int) -> void:
 	if not is_inside_tree():
 		return
 	match what:
 		NOTIFICATION_WM_CLOSE_REQUEST:
 			show_quit_dialog()
+		NOTIFICATION_WM_GO_BACK_REQUEST:
+			var subwindows := get_window().get_embedded_subwindows()
+			if subwindows.is_empty():
+				show_quit_dialog()
+			else:
+				if subwindows[-1] == save_sprite_dialog:
+					_on_save_sprite_canceled()
+				subwindows[-1].hide()
 		# If the mouse exits the window and another application has the focus,
 		# pause the application
 		NOTIFICATION_APPLICATION_FOCUS_OUT:
@@ -444,9 +494,10 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 			download_confirmation.dialog_text = (
 				tr("Do you want to download the image from %s?") % file
 			)
-			download_confirmation.popup_centered()
+			download_confirmation.popup_centered_clamped()
 			url_to_download = file
-		OpenSave.handle_loading_file(file)
+		else:
+			OpenSave.handle_loading_file(file)
 	if splash_dialog.visible:
 		splash_dialog.hide()
 
@@ -482,12 +533,12 @@ func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
 func show_save_dialog(project := Global.current_project) -> void:
 	Global.dialog_open(true, true)
 	if OS.get_name() == "Web":
-		save_sprite_html5.popup_centered()
+		save_sprite_html5.popup_centered_clamped()
 		var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_filename_line_edit.text = project.name
 	else:
 		save_sprite_dialog.current_file = project.name + ".pxo"
-		save_sprite_dialog.popup_centered()
+		save_sprite_dialog.popup_centered_clamped()
 		save_file_dialog_opened.emit(true)
 
 
@@ -535,6 +586,10 @@ func _can_draw_true() -> void:
 	Global.dialog_open(false)
 
 
+func _on_restore_session_confirmation_dialog_confirmed() -> void:
+	$MenuAndUI/TopMenuContainer.backup_dialog.popup()
+
+
 func show_quit_dialog() -> void:
 	changed_projects_on_quit = []
 	for project in Global.projects:
@@ -544,7 +599,7 @@ func show_quit_dialog() -> void:
 	if not quit_dialog.visible:
 		if changed_projects_on_quit.size() == 0:
 			if Global.quit_confirmation:
-				quit_dialog.popup_centered()
+				quit_dialog.popup_centered_clamped()
 			else:
 				_quit()
 		else:
@@ -552,7 +607,7 @@ func show_quit_dialog() -> void:
 				tr("Project %s has unsaved progress. How do you wish to proceed?")
 				% changed_projects_on_quit[0].name
 			)
-			quit_and_save_dialog.popup_centered()
+			quit_and_save_dialog.popup_centered_clamped()
 
 	Global.dialog_open(true)
 
@@ -565,7 +620,7 @@ func _save_on_quit_confirmation() -> void:
 			tr("Project %s has unsaved progress. How do you wish to proceed?")
 			% changed_projects_on_quit[0].name
 		)
-		quit_and_save_dialog.popup_centered()
+		quit_and_save_dialog.popup_centered_clamped()
 		Global.dialog_open(true)
 
 
@@ -593,6 +648,7 @@ func _quit() -> void:
 
 
 func _exit_tree() -> void:
+	DirAccess.remove_absolute(RUNNING_FILE_PATH)
 	for project in Global.projects:
 		project.remove()
 	if DisplayServer.get_name() == "headless":

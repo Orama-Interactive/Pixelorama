@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2025-07-21 09:54\n"
+"PO-Revision-Date: 2025-10-14 14:10\n"
 
 msgid "OK"
 msgstr "確定"
@@ -74,7 +74,7 @@ msgstr "圖片"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "專案"
 
 msgid "Effects"
 msgstr "效果"
@@ -114,7 +114,7 @@ msgid "Export"
 msgstr "輸出"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "覆寫"
 
 msgid "Export..."
 msgstr "輸出..."
@@ -137,6 +137,14 @@ msgstr "取消"
 msgid "Redo"
 msgstr "復原"
 
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr ""
+
 msgid "Copy"
 msgstr "複製"
 
@@ -151,13 +159,13 @@ msgstr "原位黏貼"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "從剪貼簿貼上"
 
 msgid "Delete"
 msgstr "刪除"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "永久刪除"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
@@ -302,7 +310,7 @@ msgstr ""
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "模糊"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
@@ -481,7 +489,7 @@ msgid "Apply to all"
 msgstr ""
 
 msgid "Recent projects"
-msgstr ""
+msgstr "最近使用的專案"
 
 msgid "New project"
 msgstr ""
@@ -508,7 +516,7 @@ msgid "New reference image"
 msgstr ""
 
 msgid "New palette"
-msgstr "新增調色盤"
+msgstr "新增色盤"
 
 msgid "New brush"
 msgstr "新增畫筆"
@@ -797,6 +805,18 @@ msgstr ""
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
+msgid "Krita Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
+msgid "Piskel Project"
+msgstr ""
+
+#. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
+msgid "Photoshop Project"
 msgstr ""
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
@@ -1188,15 +1208,15 @@ msgstr "調整HSV"
 
 #. Refers to the hue of the colors of an image.
 msgid "Hue:"
-msgstr ""
+msgstr "色相："
 
 #. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
-msgstr ""
+msgstr "飽和度："
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
-msgstr ""
+msgstr "亮度："
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
@@ -1334,7 +1354,7 @@ msgstr "關於 Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "贊助支持 Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - 像素化你的夢想！"
@@ -1510,7 +1530,7 @@ msgid "Save before exiting?"
 msgstr "要先儲存再離開嗎?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "「%s」有未儲存的進度，要如何處置？"
 
 msgid "Save & Exit"
 msgstr "儲存並離開"
@@ -1699,7 +1719,7 @@ msgstr ""
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "顏色選項"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
@@ -1715,7 +1735,7 @@ msgstr ""
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "最近使用的顏色"
 
 msgid "Left tool"
 msgstr "左鍵工具"
@@ -2158,7 +2178,7 @@ msgid "Rotate:"
 msgstr ""
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "覆寫顏色"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "覆寫顏色而不是混合顏色，此選項只適用於半透明的顏色"
@@ -2197,7 +2217,7 @@ msgstr ""
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "像素隨機填入比例："
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
@@ -2208,19 +2228,19 @@ msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "填滿區域："
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "相連區域"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "相似顏色"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "全部已選取區域"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
@@ -2241,7 +2261,7 @@ msgid "Offset"
 msgstr "偏移"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "亮度"
 
 msgid "Hue Shifting"
 msgstr ""
@@ -2395,14 +2415,24 @@ msgstr "鏡像"
 msgid "Horizontal"
 msgstr "水平"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "開啟水平鏡像"
 
 msgid "Vertical"
 msgstr "垂直"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "開啟垂直鏡像"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -2936,7 +2966,7 @@ msgid "Error"
 msgstr "錯誤"
 
 msgid "Error: Palette must have a valid name."
-msgstr "錯誤: 色盤名字無法使用"
+msgstr "錯誤: 色盤名稱無法使用"
 
 msgid "Invalid Palette file!"
 msgstr "色盤檔無法使用"
@@ -2951,7 +2981,7 @@ msgid "Get colors only from selection"
 msgstr "只從選取區塊獲取顏色"
 
 msgid "Get colors from"
-msgstr "獲取顏色從"
+msgstr "顏色來源"
 
 msgid "Patrons:"
 msgstr "贊助者："
@@ -3079,19 +3109,19 @@ msgid "Bucket"
 msgstr "油漆桶"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "陰影"
 
 msgid "Line Tool"
 msgstr "直線工具"
 
 msgid "Curve Tool"
-msgstr ""
+msgstr "曲線工具"
 
 msgid "Rectangle Tool"
 msgstr "矩形工具"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "橢圓工具"
 
 msgid "Isometric Box Tool"
 msgstr ""
@@ -3207,8 +3237,7 @@ msgstr "關閉"
 msgid "Discard All"
 msgstr ""
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
 msgstr ""
 
 msgid "Backup reloaded"
@@ -3256,19 +3285,23 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
+msgstr "創建新的色盤"
+
+#. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
+msgid "Create a new project palette"
 msgstr ""
 
 msgid "Comment:"
-msgstr ""
+msgstr "描述："
 
 msgid "Empty"
-msgstr ""
+msgstr "空色盤"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "以當前色盤爲顏色來源"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "以這個專案爲顏色來源"
 
 msgid "From Current Selection"
 msgstr ""
@@ -3320,10 +3353,10 @@ msgid "Sort by alpha"
 msgstr ""
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "與另一個同名又同檔案路徑的色盤衝突！"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "色盤必須有名稱！"
 
 msgid "Reducing palette size will reset positions of colors.\n"
 "Colors that don't fit in new palette size will be lost!"
@@ -3342,7 +3375,7 @@ msgid "Second Canvas"
 msgstr ""
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "動畫時間線"
 
 msgid "Canvas Preview"
 msgstr ""
@@ -3360,7 +3393,7 @@ msgid "Right Tool Options"
 msgstr ""
 
 msgid "Reference Images"
-msgstr ""
+msgstr "參考圖"
 
 msgid "Perspective Editor"
 msgstr ""
@@ -3684,7 +3717,7 @@ msgstr ""
 
 #. Found in the Reference Images panel when no reference image has been imported.
 msgid "When opening an image, it may be imported as a reference."
-msgstr ""
+msgstr "圖片檔可以匯入成參考圖。"
 
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"

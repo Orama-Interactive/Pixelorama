@@ -543,7 +543,7 @@ static func _create_simple_texture_ui(
 	file_dialog.use_native_dialog = Global.use_native_file_dialogs
 	var button := Button.new()
 	button.text = "Load texture"
-	button.pressed.connect(file_dialog.popup_centered)
+	button.pressed.connect(file_dialog.popup_centered_clamped)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	var mod_button := Button.new()
@@ -622,7 +622,7 @@ static func _create_noise_texture_ui(
 	parent_node.add_child(noise_generator_dialog)
 	var button := Button.new()
 	button.text = "Generate noise"
-	button.pressed.connect(noise_generator_dialog.popup_centered)
+	button.pressed.connect(noise_generator_dialog.popup_centered_clamped)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	hbox.add_child(button)
@@ -660,11 +660,7 @@ static func _shader_update_texture(
 	if resource_proj.layers.size() > 1:
 		warnings += "\nThis resource is intended to have 1 layer only. layers will be blended."
 
-	var updated_image := Image.create_empty(
-		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
-	)
-	var frame := resource_proj.frames[0]
-	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
+	var updated_image := resource_proj.get_frame_image(0)
 	value_changed.call(ImageTexture.create_from_image(updated_image), parameter_name)
 	if not warnings.is_empty():
 		Global.popup_error(warnings)

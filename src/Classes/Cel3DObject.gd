@@ -52,7 +52,7 @@ func _ready() -> void:
 
 func find_cel() -> bool:
 	var project := Global.current_project
-	return cel == project.frames[project.current_frame].cels[project.current_layer]
+	return cel == project.get_current_cel()
 
 
 func serialize() -> Dictionary:
@@ -232,7 +232,7 @@ func _set_type(value: Type) -> void:
 			node3d_type = MeshInstance3D.new()
 			var mesh: Mesh
 			if not file_path.is_empty():
-				mesh = ObjParse.load_obj(file_path)
+				mesh = ObjParse.from_path(file_path)
 			node3d_type.mesh = mesh
 	add_child(node3d_type)
 
@@ -244,7 +244,7 @@ func _set_file_path(value: String) -> void:
 	if file_path.is_empty():
 		return
 	if type == Type.IMPORTED:
-		node3d_type.mesh = ObjParse.load_obj(file_path)
+		node3d_type.mesh = ObjParse.from_path(file_path)
 
 
 func _notification(what: int) -> void:

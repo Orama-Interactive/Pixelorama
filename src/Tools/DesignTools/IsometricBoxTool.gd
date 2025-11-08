@@ -43,7 +43,8 @@ func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
 
 
 func _on_edge_behavior_item_selected(index: int) -> void:
-	@warning_ignore("int_as_enum_without_cast") _blend_edge_mode = index
+	@warning_ignore("int_as_enum_without_cast")
+	_blend_edge_mode = index
 	%ColorFromTool.visible = _blend_edge_mode == EdgeBlend.TOOL_COLOR
 	update_config()
 	save_config()
@@ -164,6 +165,7 @@ func draw_start(pos: Vector2i) -> void:
 		_picking_color = true
 		_pick_color(pos)
 		return
+	cursor_move(pos)
 	pos = angle_constraint(Vector2(pos))
 	_picking_color = false  # fixes _picking_color being true indefinitely after we pick color
 	Global.canvas.selection.transform_content_confirm()
@@ -196,6 +198,11 @@ func draw_end(pos: Vector2i) -> void:
 	Global.canvas.measurements.queue_redraw()
 
 
+func cancel_tool() -> void:
+	super()
+	_clear()
+
+
 func draw_preview() -> void:
 	var previews := Global.canvas.previews_sprite
 	if not _drawing:
@@ -206,7 +213,7 @@ func draw_preview() -> void:
 
 	var box_points = _control_pts.duplicate()
 	box_points.push_front(_origin)
-	var canvas = Global.canvas.previews
+	var canvas := Global.canvas.previews
 
 	canvas.draw_set_transform(Vector2(0.5, 0.5))
 	for i: int in box_points.size():
@@ -218,11 +225,13 @@ func draw_preview() -> void:
 		canvas.draw_line(Vector2.UP * 0.5, Vector2.DOWN * 0.5, Color.WHITE)
 		canvas.draw_line(Vector2.RIGHT * 0.5, Vector2.LEFT * 0.5, Color.WHITE)
 	if box_points.size() in [2, 4]:
-		var current_pixel = Global.canvas.current_pixel.floor()
+		var current_pixel := Global.canvas.current_pixel.floor()
 		current_pixel = box_constraint(_last_pixel, current_pixel, _current_state)
-		var length = int(current_pixel.distance_to(box_points[-1]))
-		var prefix = "Corner" if box_points.size() == 2 else "Height"
-		var str_val = str(prefix, ": ", length + 1 if box_points.size() == 2 else length, " ", "px")
+		var length := int(current_pixel.distance_to(box_points[-1]))
+		var prefix := "Corner" if box_points.size() == 2 else "Height"
+		var str_val := str(
+			prefix, ": ", length + 1 if box_points.size() == 2 else length, " ", "px"
+		)
 		# We are using the measurementsnode for measurement based previews.
 		Global.canvas.measurements.draw.connect(
 			_preview_updater.bind(current_pixel, box_points[-1], str_val)
@@ -263,7 +272,7 @@ func _preview_updater(point_a: Vector2, point_b: Vector2, str_value: String) -> 
 
 func _draw_shape() -> void:
 	_drawing = false
-	prepare_undo("Draw Shape")
+	prepare_undo()
 	var images := _get_selected_draw_images()
 	if _fill_inside and !Tools.is_placing_tiles():
 		# converting control points to local basis vectors
@@ -350,7 +359,7 @@ func _draw_shape() -> void:
 				# Draw each point offsetted based on the shape's thickness
 				_draw_pixel(point, images)
 	_clear()
-	commit_undo()
+	commit_undo("Draw Shape")
 
 
 func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:

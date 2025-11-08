@@ -171,7 +171,6 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 		frame = project.current_frame
 		layer = project.current_layer
 
-	project.undos += 1
 	project.undo_redo.create_action(action)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
@@ -235,11 +234,13 @@ func _on_italic_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_horizontal_alignment_button_pressed(button: BaseButton) -> void:
-	@warning_ignore("int_as_enum_without_cast") horizontal_alignment = button.get_index()
+	@warning_ignore("int_as_enum_without_cast")
+	horizontal_alignment = button.get_index()
 
 
 func _on_antialiasing_button_pressed(button: BaseButton) -> void:
-	@warning_ignore("int_as_enum_without_cast") antialiasing = button.get_index()
+	@warning_ignore("int_as_enum_without_cast")
+	antialiasing = button.get_index()
 
 
 func _exit_tree() -> void:

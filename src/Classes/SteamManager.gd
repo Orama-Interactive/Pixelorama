@@ -32,13 +32,11 @@ func _init() -> void:
 func _ready() -> void:
 	if not is_instance_valid(steam_class):
 		return
-	var response: Dictionary = steam_class.steamInitEx(true, APP_ID)
+	var response: Dictionary = steam_class.steamInitEx(APP_ID)
 	print(response)
 	if not steam_class.isSteamRunning():
 		print("Steam is not running!")
 		return
-	#var id: int = steam_class.getSteamID()
-	#var username: String = steam_class.getFriendPersonaName(id)
 
 
 ## Unlocks an achievement on Steam based on its [param achievement_name].

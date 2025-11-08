@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 4.4.1
+  GODOT_VERSION: 4.5.1
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -23,14 +23,8 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.4.1
+      image: docker://barichello/godot-ci:4.5.1
     steps:
-      - name: Setup WINE and rcedit 🍷
-        run: |
-          chown root:root -R ~
-          godot --headless --quit
-          echo 'export/windows/wine = "/usr/bin/wine64-stable"' >> ~/.config/godot/editor_settings-4.4.tres
-          echo 'export/windows/rcedit = "/opt/rcedit.exe"' >> ~/.config/godot/editor_settings-4.4.tres
       - name: Checkout 🛎️
         uses: actions/checkout@v5
         with:
@@ -49,7 +43,7 @@ jobs:
           cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Windows-64bit
           rm ./build/${EXPORT_NAME}-Windows-64bit/pixelorama_data/.gdignore
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{env.EXPORT_NAME}}-Windows-64bit
           path: ./build/${{env.EXPORT_NAME}}-Windows-64bit/
@@ -59,7 +53,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.4.1
+      image: docker://barichello/godot-ci:4.5.1
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v5
@@ -91,13 +85,13 @@ jobs:
           tar zcvf ${EXPORT_NAME}-Linux-64bit.tar.gz ${EXPORT_NAME}-Linux-64bit
           tar zcvf ${EXPORT_NAME}-Linux-ARM64.tar.gz ${EXPORT_NAME}-Linux-ARM64
       - name: Upload Linux x86_64 Artifact 🚀
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{env.EXPORT_NAME}}-Linux-64bit
           path: ./build/${{env.EXPORT_NAME}}-Linux-64bit.tar.gz
           retention-days: 14
       - name: Upload Linux ARM64 Artifact 🚀
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{env.EXPORT_NAME}}-Linux-ARM64
           path: ./build/${{env.EXPORT_NAME}}-Linux-ARM64.tar.gz
@@ -151,7 +145,7 @@ jobs:
       - name: Create DMG archive 🔧
         run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname ${EXPORT_NAME} ./build/mac/${EXPORT_NAME}.dmg
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{env.EXPORT_NAME}}-Mac
           path: ./build/mac/${{env.EXPORT_NAME}}.dmg

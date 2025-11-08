@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://bybqhhayl5ay5"]
+[gd_scene load_steps=8 format=3 uid="uid://bybqhhayl5ay5"]
 
 [ext_resource type="PackedScene" uid="uid://dmlgx1jgau8a5" path="res://src/UI/Nodes/AnimatePanel.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
 [ext_resource type="Script" uid="uid://cix6kinxmv8q2" path="res://src/Classes/ImageEffect.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://blrd4x0ma7b3h" path="res://assets/graphics/misc/animate.png" id="4"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="4_irxkv"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4_whox6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p71nj"]
+shader = ExtResource("4_irxkv")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(200, 200)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
 
 [node name="ImageEffectParent" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
@@ -49,10 +62,12 @@ stretch_mode = 4
 
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("2")]
 show_behind_parent = true
+material = SubResource("ShaderMaterial_p71nj")
+layout_direction = 2
 layout_mode = 0
-anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="LiveSettings" type="VBoxContainer" parent="VBoxContainer"]
 visible = false
@@ -91,8 +106,8 @@ text = "Only affect selection"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "Selected cels"
 popup/item_0/id = 0
 popup/item_1/text = "Current frame"

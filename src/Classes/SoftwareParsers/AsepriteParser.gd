@@ -86,6 +86,8 @@ static func open_aseprite_file(path: String) -> void:
 	var _grid_width := ase_file.get_16()
 	var _grid_height := ase_file.get_16()
 	ase_file.get_buffer(84)  # For future
+	var palettes: Dictionary[String, Palette]
+	var project_current_palette_name := ""
 
 	for i in frames:
 		var _frame_bytes := ase_file.get_32()
@@ -210,7 +212,8 @@ static func open_aseprite_file(path: String) -> void:
 						var _diagonal_flip_bitmask := ase_file.get_32()
 						ase_file.get_buffer(10)  # Reserved
 						var tilemap_cel := cel as CelTileMap
-						@warning_ignore("integer_division") var bytes_per_tile := bits_per_tile / 8
+						@warning_ignore("integer_division")
+						var bytes_per_tile := bits_per_tile / 8
 						var tile_data_compressed := ase_file.get_buffer(
 							chunk_size - TILEMAP_CEL_CHUNK_SIZE
 						)
@@ -300,14 +303,22 @@ static func open_aseprite_file(path: String) -> void:
 					var first_index_to_change := ase_file.get_32()
 					var last_index_to_change := ase_file.get_32()
 					ase_file.get_buffer(8)  # For future
+					var colors: PackedColorArray
 					for k in range(first_index_to_change, last_index_to_change + 1):
 						var flags := ase_file.get_16()
-						var _red := ase_file.get_8()
-						var _green := ase_file.get_8()
-						var _blue := ase_file.get_8()
-						var _alpha := ase_file.get_8()
+						var red := ase_file.get_8()
+						var green := ase_file.get_8()
+						var blue := ase_file.get_8()
+						var alpha := ase_file.get_8()
+						colors.append(Color.from_rgba8(red, green, blue, alpha))
 						if flags & 1 == 1:
 							var _name := parse_aseprite_string(ase_file)
+					var palette_name := "Imported Palette %s" % palettes.size()
+					var correct_name := Palettes.get_valid_name(palette_name, new_project)
+					var palette := Palettes.fill_imported_palette_with_colors(correct_name, colors)
+					palette.is_project_palette = true
+					palettes[correct_name] = palette
+					project_current_palette_name = correct_name
 				ChunkTypes.USER_DATA:
 					var flags := ase_file.get_32()
 					if previous_chunk_type == ChunkTypes.TAGS:
@@ -439,6 +450,8 @@ static func open_aseprite_file(path: String) -> void:
 	new_project.order_layers()
 	new_project.save_path = path.get_basename() + ".pxo"
 	new_project.file_name = new_project.name
+	new_project.palettes = palettes
+	new_project.project_current_palette_name = project_current_palette_name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()

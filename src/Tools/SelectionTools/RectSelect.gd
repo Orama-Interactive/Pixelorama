@@ -41,6 +41,15 @@ func draw_end(pos: Vector2i) -> void:
 		return
 	pos = snap_position(pos)
 	super.draw_end(pos)
+	_reset_tool()
+
+
+func cancel_tool() -> void:
+	super()
+	_reset_tool()
+
+
+func _reset_tool() -> void:
 	_rect = Rect2i()
 	_square = false
 	_expand_from_center = false
@@ -131,7 +140,11 @@ func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 		rect.position = Vector2i(mini(origin.x, dest.x), mini(origin.y, dest.y))
 		rect.size = (origin - dest).abs()
 
-	if not Tools.is_placing_tiles():
+	if (
+		not Tools.is_placing_tiles()
+		and not Global.snap_to_rectangular_grid_boundary
+		and not Global.snap_to_rectangular_grid_center
+	):
 		rect.size += Vector2i.ONE
 
 	return rect

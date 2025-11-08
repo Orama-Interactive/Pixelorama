@@ -6,7 +6,14 @@ var layer_index := 0
 var hierarchy_depth_pixel_shift := 16
 
 
+func _ready() -> void:
+	if DisplayServer.is_touchscreen_available():
+		mouse_filter = Control.MOUSE_FILTER_PASS
+
+
 func _get_drag_data(_position: Vector2) -> Variant:
+	if DisplayServer.is_touchscreen_available() and not button_pressed:
+		return null
 	var layers := _get_layer_indices()
 	for layer_i in layers:  # Add child layers, if we have selected groups
 		var layer := Global.current_project.layers[layer_i]
@@ -34,6 +41,20 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 	if data[0] != "Layer":
 		Global.animation_timeline.drag_highlight.visible = false
 		return false
+	# Ensure that the target and its neighbors remain visible.
+	var layer_button := get_parent()
+	var layer_button_index := layer_button.get_index()
+	var layer_container := layer_button.get_parent()
+	Global.animation_timeline.timeline_scroll.ensure_control_visible(layer_button)
+	if pos.y > size.y / 2.0 and layer_button_index + 1 < layer_container.get_child_count():
+		Global.animation_timeline.timeline_scroll.ensure_control_visible(
+			layer_container.get_child(layer_button_index + 1)
+		)
+	if pos.y < size.y / 2.0 and layer_button_index - 1 > 0:
+		Global.animation_timeline.timeline_scroll.ensure_control_visible(
+			layer_container.get_child(layer_button_index - 1)
+		)
+
 	var curr_layer := Global.current_project.layers[layer_index]
 	var drop_layers: PackedInt32Array = data[1]
 	# Can't move to the same layer

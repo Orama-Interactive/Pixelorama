@@ -4,6 +4,78 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.6] - 2025-10-31
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.5.1
+
+### Added
+- Made a new website for Pixelorama! You can visit it on: https://www.pixelorama.org/
+- Added buttons that enable diagonal symmetry!
+- If Pixelorama crashed in the previous session, a window will appear the next time it is launched to let the user know that they can restore data, if there are any projects that can be restored.
+- Two new color picker shapes, OK HS Rectangle and OK HL Rectangle.
+- Users can now drag and drop font files to load them. Fonts can be used by the text tool, text meshes in 3D layers and the user interface itself.
+- Added an Undo History dialog.
+- The convolution matrix layer effect now has a kernel normalization factor.
+- Added Arabic translation and made improvements to the UI so that it works better for Right-To-Left languages.
+- Pixelorama can now load Lospec palettes if started with "lospec-palette://" plus the palette's name as a CLI argument. In theory, this allows Pixelorama to open when clicking on the "Open In App" button on a palette on Lospec's website, but for now **it does not work automatically**, as it requires different setup for different operating systems.
+- A preview.png file is now saved inside pxo files. This can help file managers to generate thumbnails for pxo files. **Note that this doesn't mean that you will automatically see thumbnails for pxo files — it's up to file managers to implement this.**
+
+### Changed
+- **Extensions made for previous versions of Pixelorama will fail to load on this version.** Make sure to re-download the extensions you want.
+- The timeline now scrolls when adding/moving layers, when the current cel is changing from shortcuts or from the timeline buttons, and when cels, frames and layers are being dragged.
+- The layer effect settings dialog now scrolls automatically when dragging layer effects to re-order them.
+- When moving frames using the arrow buttons in the timeline, all moved cels are now being selected. [#1358](https://github.com/Orama-Interactive/Pixelorama/pull/1358)
+- The "Offset/Zoom" effect has been renamed to "Offset & Scale". [#1362](https://github.com/Orama-Interactive/Pixelorama/pull/1362)
+- On Linux, the native screen color picker of the operating system is now used.
+- The canvas can now be moved by arrow keys if there is a selection tool selected, but there is not an active selection. If there is, the selection itself gets moved, just like before.
+
+### Fixed
+- The canvas no longer jitters when it is zoomed out a lot and smooth zoom is enabled.
+- The screen color picker now works properly on Linux, users can pick colors outside of Pixelorama's window.
+- Optimized the "Mirror Image" effect when a selection is active. Now it should no longer lag on big canvases.
+- Fixed a crash when a user selects a 3D object, then does an undo or redo [#1353](https://github.com/Orama-Interactive/Pixelorama/pull/1353)
+- Fixed tilemap cells being erased in manual mode if there are cells outside of the canvas boundaries.
+- Invisible layers are no longer included when exporting images in headless mode, such as from the command line. [#1368](https://github.com/Orama-Interactive/Pixelorama/issues/1368)
+- Fixed transparent checkers not following canvas movement vertically, if "Follow canvas movement" was enabled, and "Follow canvas zoom level" was disabled from the Preferences.
+- The color picker's RGB values can no longer go higher than 255. [#349](https://github.com/Orama-Interactive/Pixelorama/issues/349)
+- Fixed the restore to default button in the Preferences not hiding after being clicked next to text fields and color buttons.
+- Fixed the "Open last project" button in the splash screen not hiding in the Web version.
+
+## [v1.1.5] - 2025-09-06
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.4.1
+
+### Added
+- Project palettes have been implemented, with undo/redo support! [#1335](https://github.com/Orama-Interactive/Pixelorama/pull/1335)
+- Implemented loading Krita (`.kra`) files with animation support. Only projects using RGBA with 8-bit color depth are supported at the moment.
+- Loading animations from Photoshop (`.psd`) files is now possible.
+- Loading palettes from Aseprite (`.ase`/`.aseprite`) files is now possible.
+- Implemented loading Piskel (`.piskel`) files with animation support.
+- Added a zoom parameter to the offset shader. [#1330](https://github.com/Orama-Interactive/Pixelorama/pull/1330)
+- The currently selected frame & layer are now remembered inside `.pxo` files.
+- Added an option to transform content in Modify selection. [#1309](https://github.com/Orama-Interactive/Pixelorama/pull/1309)
+- Relative paths are now supported in the CLI. [#1326](https://github.com/Orama-Interactive/Pixelorama/pull/1326)
+
+### Changed
+- Bumped extensions API version to 7.
+- When clicking on the remove layer button, now all selected layers get removed. This is consistent with how frames get deleted, and is what users would expect.
+- During animation playback on frames of a tag, if the user changes to a frame of a different tag, then the frames of that tag are being played. [#1311](https://github.com/Orama-Interactive/Pixelorama/pull/1311)
+- Using the move tool on a tilemap layer while draw tiles mode is active now clears the selection, if there is any. [#1340](https://github.com/Orama-Interactive/Pixelorama/pull/1340)
+- Current frame & layer are used as default values when importing an image as a new frame, new layer or to replace a cel.
+
+### Fixed
+- The bucket tool's flood fill has been further optimized. [#1306](https://github.com/Orama-Interactive/Pixelorama/pull/1306)
+- Creating rectangular selections now snap to the grid correctly, if snapping is enabled. [#1338](https://github.com/Orama-Interactive/Pixelorama/pull/1338)
+- Pasted selections now get snapped to grid. [#1340](https://github.com/Orama-Interactive/Pixelorama/pull/1340)
+- Pasting a selection on a tilemap layer while draw tiles mode is active now updates the tileset. [#1340](https://github.com/Orama-Interactive/Pixelorama/pull/1340)
+- Backups no longer appear in the recent project list. [#1341](https://github.com/Orama-Interactive/Pixelorama/pull/1341)
+- The names of the projects are no longer being translated in tabs. [#1334](https://github.com/Orama-Interactive/Pixelorama/issues/1334)
+- Fixed the drop shadow dialog not having a selected option by default for the affect option button.
+
 ## [v1.1.4] - 2025-08-13
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
@@ -23,7 +95,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 Built using Godot 4.4.1
 
 ### Added
-- Implemented limited support of Photoshop (.psd) file importing. [#1308](https://github.com/Orama-Interactive/Pixelorama/pull/1308)
+- Implemented limited support of Photoshop (`.psd`) file importing. [#1308](https://github.com/Orama-Interactive/Pixelorama/pull/1308)
 - Added ability to edit individual tiles in tilemap layers even in place only mode. [#1253](https://github.com/Orama-Interactive/Pixelorama/pull/1253)
 - Added support for batch removal of unused tiles in tilemap layers. [#1253](https://github.com/Orama-Interactive/Pixelorama/pull/1253)
 - Added a way to re-apply the last image effect from the Effects menu. [#1310](https://github.com/Orama-Interactive/Pixelorama/pull/1310)
@@ -45,7 +117,7 @@ Built using Godot 4.4.1
 - Fixed loading APNGs.
 - Significantly improved performance of the bucket tool, when a selection is active. [#1304](https://github.com/Orama-Interactive/Pixelorama/pull/1304)
 - Made the offset pixels effect only accept integer values for the offset.
-- The FX icon in the layer button is now properly if all effects have been applied.
+- The FX icon in the layer button is now being properly hidden if all effects have been applied.
 - Fixed crash when increasing the width of a palette.
 - Fixed crash when creating a convolution matrix layer effect.
 

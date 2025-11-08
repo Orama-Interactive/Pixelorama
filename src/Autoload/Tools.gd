@@ -11,8 +11,8 @@ signal options_reset
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 
-const XY_LINE := Vector2(-0.707107, 0.707107)
-const X_MINUS_Y_LINE := Vector2(0.707107, 0.707107)
+const XY_LINE := Vector2(-0.70710677, 0.70710677)
+const X_MINUS_Y_LINE := Vector2(0.70710677, 0.70710677)
 
 var active_button := -1
 var picking_color_for := MOUSE_BUTTON_LEFT
@@ -367,6 +367,7 @@ class Slot:
 func _ready() -> void:
 	options_reset.connect(reset_options)
 	Global.cel_switched.connect(_cel_switched)
+	Global.single_tool_mode_changed.connect(_on_single_tool_mode_changed)
 	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
@@ -425,7 +426,7 @@ func _ready() -> void:
 ## NOTE: For optimization, if there is already a ready made config available, then we will use that
 ## instead of re-calculating the config, else we have no choice but to re-generate it
 func attempt_config_share(from_idx: int, config: Dictionary = {}) -> void:
-	if not Global.share_options_between_tools:
+	if not Global.share_options_between_tools and not Global.single_tool_mode:
 		return
 	if _slots.is_empty():
 		return
@@ -514,6 +515,8 @@ func get_tool(button: int) -> Slot:
 
 
 func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
+	if Global.single_tool_mode and button == MOUSE_BUTTON_LEFT:
+		assign_tool(tool_name, MOUSE_BUTTON_RIGHT, allow_refresh)
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
 
@@ -596,23 +599,23 @@ func get_mirrored_positions(
 			positions.append(calculate_mirror_vertical(mirror_x, project, offset))
 		else:
 			if diagonal_xy_mirror:
-				positions.append(calculate_mirror_xy(mirror_x, project))
+				positions.append(calculate_mirror_diagonal(mirror_x, project))
 			if diagonal_x_minus_y_mirror:
-				positions.append(calculate_mirror_x_minus_y(mirror_x, project))
+				positions.append(calculate_mirror_diagonal(mirror_x, project, true))
 	if vertical_mirror:
 		var mirror_y := calculate_mirror_vertical(pos, project, offset)
 		positions.append(mirror_y)
 		if diagonal_xy_mirror:
-			positions.append(calculate_mirror_xy(mirror_y, project))
+			positions.append(calculate_mirror_diagonal(mirror_y, project))
 		if diagonal_x_minus_y_mirror:
-			positions.append(calculate_mirror_x_minus_y(mirror_y, project))
+			positions.append(calculate_mirror_diagonal(mirror_y, project, true))
 	if diagonal_xy_mirror:
-		var mirror_diagonal := calculate_mirror_xy(pos, project)
+		var mirror_diagonal := calculate_mirror_diagonal(pos, project)
 		positions.append(mirror_diagonal)
 		if not horizontal_mirror and not vertical_mirror and diagonal_x_minus_y_mirror:
-			positions.append(calculate_mirror_x_minus_y(mirror_diagonal, project))
+			positions.append(calculate_mirror_diagonal(mirror_diagonal, project, true))
 	if diagonal_x_minus_y_mirror:
-		positions.append(calculate_mirror_x_minus_y(pos, project))
+		positions.append(calculate_mirror_diagonal(pos, project, true))
 	return positions
 
 
@@ -624,15 +627,13 @@ func calculate_mirror_vertical(pos: Vector2i, project: Project, offset := 0) -> 
 	return Vector2i(pos.x, project.y_symmetry_point - pos.y + offset)
 
 
-func calculate_mirror_xy(pos: Vector2i, project: Project) -> Vector2i:
-	return Vector2i(Vector2(pos).reflect(XY_LINE).round()) + Vector2i(project.xy_symmetry_point)
-
-
-func calculate_mirror_x_minus_y(pos: Vector2i, project: Project) -> Vector2i:
-	return (
-		Vector2i(Vector2(pos).reflect(X_MINUS_Y_LINE).round())
-		+ Vector2i(project.x_minus_y_symmetry_point)
-	)
+func calculate_mirror_diagonal(pos: Vector2i, project: Project, flipped := false) -> Vector2i:
+	var symmetry_point := project.x_minus_y_symmetry_point if flipped else project.xy_symmetry_point
+	var symmetry_line := X_MINUS_Y_LINE if flipped else XY_LINE
+	var offset := Vector2(0.5, 0.5)
+	var local_pos := Vector2(pos) + offset - symmetry_point
+	var reflected := local_pos.reflect(symmetry_line)
+	return (reflected + symmetry_point - offset).round()
 
 
 func is_placing_tiles() -> bool:
@@ -689,31 +690,42 @@ func get_closest_point_to_segment(
 
 
 func snap_to_rectangular_grid_boundary(
-	pos: Vector2, grid_size: Vector2i, grid_offset := Vector2i.ZERO, snapping_distance := 9999.0
+	pos: Vector2, grid_size: Vector2i, grid_offset: Vector2, snapping_distance := 9999.0
 ) -> Vector2:
-	var grid_pos := pos.snapped(grid_size)
-	grid_pos += Vector2(grid_offset)
-	# keeping grid_pos as is would have been fine but this adds extra accuracy as to
-	# which snap point (from the list below) is closest to mouse and occupy THAT point
-	# t_l is for "top left" and so on
-	var t_l := grid_pos + Vector2(-grid_size.x, -grid_size.y)
-	var t_c := grid_pos + Vector2(0, -grid_size.y)
-	var t_r := grid_pos + Vector2(grid_size.x, -grid_size.y)
-	var m_l := grid_pos + Vector2(-grid_size.x, 0)
-	var m_c := grid_pos
-	var m_r := grid_pos + Vector2(grid_size.x, 0)
-	var b_l := grid_pos + Vector2(-grid_size.x, grid_size.y)
-	var b_c := grid_pos + Vector2(0, grid_size.y)
-	var b_r := grid_pos + Vector2(grid_size)
-	var vec_arr: PackedVector2Array = [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
-	for vec in vec_arr:
-		if vec.distance_to(pos) < grid_pos.distance_to(pos):
-			grid_pos = vec
-
+	## Get the closest grid intersection
+	var grid_pos := (pos - grid_offset).snapped(grid_size)  # Get closest box without offset
+	grid_pos += Vector2(grid_offset)  # apply offset
+	## Get the point on boundary of grid box (that contains the intersection)
 	var grid_point := _get_closest_point_to_grid(pos, snapping_distance, grid_pos)
 	if grid_point != Vector2.INF:
 		pos = grid_point.floor()
 	return pos
+
+
+func snap_to_rectangular_grid_center(
+	pos: Vector2, grid_size: Vector2i, grid_offset: Vector2i, snapping_distance := 9999.0
+) -> Vector2:
+	var grid_center := pos.snapped(grid_size) + Vector2(grid_size / 2)
+	grid_center += Vector2(grid_offset)
+	if snapping_distance < 0:
+		pos = grid_center.floor()
+	else:
+		if grid_center.distance_to(pos) <= snapping_distance:
+			pos = grid_center.floor()
+	return pos
+
+
+func snap_to_guide(
+	snap_to: Vector2, pos: Vector2, distance: float, s1: Vector2, s2: Vector2
+) -> Vector2:
+	var closest_point := Tools.get_closest_point_to_segment(pos, distance, s1, s2)
+	if closest_point == Vector2.INF:  # Is not close to a guide
+		return Vector2.INF
+	# Snap to the closest guide
+	if snap_to == Vector2.INF or (snap_to - pos).length() > (closest_point - pos).length():
+		snap_to = closest_point
+
+	return snap_to
 
 
 func set_button_size(button_size: int) -> void:
@@ -728,8 +740,15 @@ func update_tool_buttons() -> void:
 	for child in _tool_buttons.get_children():
 		var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 		var right_background: NinePatchRect = child.get_node("BackgroundRight")
-		left_background.visible = _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
-		right_background.visible = _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
+		var is_left_tool := _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
+		var is_right_tool := _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
+		left_background.visible = is_left_tool
+		if Global.single_tool_mode:
+			right_background.visible = false
+			left_background.anchor_right = 1.0
+		else:
+			right_background.visible = is_right_tool
+			left_background.anchor_right = 0.5
 
 
 func update_hint_tooltips() -> void:
@@ -746,7 +765,7 @@ func update_tool_cursors() -> void:
 
 
 func draw_indicator() -> void:
-	if Global.right_square_indicator_visible:
+	if Global.right_square_indicator_visible and not Global.single_tool_mode:
 		_slots[MOUSE_BUTTON_RIGHT].tool_node.draw_indicator(false)
 	if Global.left_square_indicator_visible:
 		_slots[MOUSE_BUTTON_LEFT].tool_node.draw_indicator(true)
@@ -764,6 +783,13 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	var draw_pos := position
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
+	if event is InputEventGesture:
+		if active_button == MOUSE_BUTTON_LEFT:
+			_slots[active_button].tool_node.cancel_tool()
+			active_button = -1
+		elif active_button == MOUSE_BUTTON_RIGHT:
+			_slots[active_button].tool_node.cancel_tool()
+			active_button = -1
 	if Input.is_action_pressed(&"change_layer_automatically", true):
 		if event.is_action(&"activate_left_tool"):
 			if _slots[MOUSE_BUTTON_LEFT].tool_node is not BaseSelectionTool:
@@ -836,7 +862,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		text += "    %s" % _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text
 	if not _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text.is_empty():
 		text += "    %s" % _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text
-	Global.cursor_position_label.text = text
+	Global.on_cursor_position_text_changed.emit(text)
 
 
 ## Returns [code]true[/code] if [member alpha_locked] is [code]true[/code]
@@ -884,6 +910,13 @@ func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 
 func _is_tool_available(layer_type: int, t: Tool) -> bool:
 	return t.layer_types.is_empty() or layer_type in t.layer_types
+
+
+func _on_single_tool_mode_changed(mode: bool) -> void:
+	if mode:
+		assign_tool(get_tool(MOUSE_BUTTON_LEFT).tool_node.name, MOUSE_BUTTON_RIGHT, true)
+	else:
+		update_tool_buttons()
 
 
 func change_layer_automatically(pos: Vector2i) -> void:

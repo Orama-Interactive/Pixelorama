@@ -385,6 +385,95 @@ class ThemeAPI:
 	func autoload() -> Themes:
 		return Themes
 
+	## Returns the colors used by the given [param theme] as a [Dictionary]. This includes
+	## [StyleBox] colors. For use in script use it with JSON.stringify() for more friendly format.
+	## [br]To set colors, see [method set_theme_colors].
+	func get_theme_colors(theme: Theme) -> Dictionary[String, String]:
+		var colors: Dictionary[String, String] = {}
+		var color_theme_type_list := theme.get_color_type_list()
+		if color_theme_type_list.size() > 0:
+			for color_theme_type: String in color_theme_type_list:
+				var color_list = theme.get_color_list(color_theme_type)
+				if color_list.size() > 0:
+					for color_title in color_list:
+						var color: Color = theme.get_color(color_title, color_theme_type)
+						colors[str(color_title, ":", color_theme_type)] = color.to_html()
+		# Detect colors that are part of styleboxes
+		var s_box_theme_type_list := theme.get_stylebox_type_list()
+		if s_box_theme_type_list.size() > 0:
+			for s_box_theme_type: String in s_box_theme_type_list:
+				var s_box_list = theme.get_stylebox_list(s_box_theme_type)
+				if s_box_list.size() > 0:
+					for s_box_title in s_box_list:
+						var s_box: StyleBox = theme.get_stylebox(s_box_title, s_box_theme_type)
+						var main_key := str(s_box_title, ":", s_box_theme_type, ":%s")
+						if s_box is StyleBoxFlat:
+							var bg_color_key := main_key % "background_color"
+							colors[bg_color_key] = s_box.bg_color.to_html()
+							var border_color_key := main_key % "border_color"
+							colors[border_color_key] = s_box.border_color.to_html()
+							var shadow_color_key := main_key % "shadow_color"
+							colors[shadow_color_key] = s_box.shadow_color.to_html()
+						elif s_box is StyleBoxLine:
+							var color_key := main_key % "color"
+							colors[color_key] = s_box.color.to_html()
+		return colors
+
+	## Changes the colors of the given [param theme] according to the given [param data]. Only the
+	## colors specified by [param data] are changed and the rest remain the same as original.
+	## Make sure you don't set call this method using currently active (otherwise it will be slow).
+	## The parameter [param debug_mode] is for debug purpose to let the developer know about the
+	## changes that are to be done in order for colors to be properly visible.
+	func set_theme_colors(theme: Theme, data: Dictionary[String, String], debug_mode := false):
+		for key: String in data.keys():
+			var name_and_theme_type := key.split(":", false)
+			if name_and_theme_type.size() == 2:
+				var color_html := data[key]
+				if Color.html_is_valid(color_html):
+					theme.set_color(
+						name_and_theme_type[0], name_and_theme_type[1], Color.html(color_html)
+					)
+			if name_and_theme_type.size() == 3:  # Stylebox (in this case there's an extra param)
+				var s_box := theme.get_stylebox(name_and_theme_type[0], name_and_theme_type[1])
+				var color_html := data[key]
+				if Color.html_is_valid(color_html):
+					var color = Color.html(data[key])
+					if s_box is StyleBoxFlat:
+						match name_and_theme_type[2]:
+							"background_color":
+								if !s_box.draw_center and debug_mode:
+									data.erase(key)
+									print("Warning: Set draw_center of stylebox -> %s " % key)
+								s_box.bg_color = color
+							"border_color":
+								if (
+									s_box.border_width_left == 0
+									and s_box.border_width_right == 0
+									and s_box.border_width_top == 0
+									and s_box.border_width_bottom == 0
+									and debug_mode
+								):
+									data.erase(key)
+									print("Warning: Set border widths of stylebox -> %s " % key)
+								s_box.border_color = color
+							"shadow_color":
+								if (
+									s_box.shadow_size == 0
+									and s_box.shadow_offset == Vector2.ZERO
+									and debug_mode
+								):
+									data.erase(key)
+									print(
+										"Warning: Set Shadow size/offset of stylebox -> %s " % key
+									)
+								s_box.shadow_color = color
+					elif s_box is StyleBoxLine:
+						match name_and_theme_type[2]:
+							"color":
+								s_box.color = color
+		if debug_mode:
+			print("clean data: ", JSON.stringify(data, "\t"))
+
 	## Adds the [param theme] to [code]Edit -> Preferences -> Interface -> Themes[/code].
 	func add_theme(theme: Theme) -> void:
 		Themes.add_theme(theme)
@@ -581,29 +670,55 @@ class ProjectAPI:
 	## name [param name], size [param size], fill color [param fill_color] and
 	## frames [param frames]. The created project also gets returned.[br][br]
 	## [param frames] is an [Array] of type [Frame]. Usually it can be left as [code][][/code].
+	## If [param is_resource] is [code]true[/code] then a [ResourceProject] is created.
 	func new_project(
 		frames: Array[Frame] = [],
 		name := tr("untitled"),
 		size := Vector2(64, 64),
-		fill_color := Color.TRANSPARENT
+		fill_color := Color.TRANSPARENT,
+		is_resource := false
 	) -> Project:
 		if !name.is_valid_filename():
 			name = tr("untitled")
 		if size.x <= 0 or size.y <= 0:
 			size.x = 1
 			size.y = 1
-		var new_proj := Project.new(frames, name, size.floor())
+		var new_proj: Project
+		if is_resource:
+			new_proj = ResourceProject.new(frames, name, size.floor())
+		else:
+			new_proj = Project.new(frames, name, size.floor())
 		new_proj.layers.append(PixelLayer.new(new_proj))
 		new_proj.fill_color = fill_color
 		new_proj.frames.append(new_proj.new_empty_frame())
 		Global.projects.append(new_proj)
 		return new_proj
 
+	func new_image_extended(
+		width: int,
+		height: int,
+		mipmaps: bool,
+		format: Image.Format,
+		is_indexed := false,
+		from_data := PackedByteArray()
+	) -> ImageExtended:
+		if not from_data.is_empty():
+			var tmp_image := Image.create_from_data(width, height, mipmaps, format, from_data)
+			var new_image := ImageExtended.new()
+			new_image.copy_from_custom(tmp_image, is_indexed)
+			return new_image
+		return ImageExtended.create_custom(width, height, mipmaps, format, is_indexed)
+
 	## Creates and returns a new [Project] in a new tab, with an optional [param name].
 	## Unlike [method new_project], no starting frame/layer gets created.
 	## Useful if you want to deserialize project data.
-	func new_empty_project(name := tr("untitled")) -> Project:
-		var new_proj := Project.new([], name)
+	## If [param is_resource] is [code]true[/code] then a [ResourceProject] is created.
+	func new_empty_project(name := tr("untitled"), is_resource := false) -> Project:
+		var new_proj: Project
+		if is_resource:
+			new_proj = ResourceProject.new([], name)
+		else:
+			new_proj = Project.new([], name)
 		Global.projects.append(new_proj)
 		return new_proj
 
@@ -808,12 +923,19 @@ class PaletteAPI:
 	## "width": 8
 	## }
 	## [/codeblock]
-	func create_palette_from_data(palette_name: String, data: Dictionary) -> void:
-		var palette := Palette.new(palette_name)
+	func create_palette_from_data(
+		palette_name: String, data: Dictionary, is_global := true
+	) -> void:
+		# There may be a case where a Global palette has same name as project palette
+		var palette := Palette.new(Palettes.get_valid_name(palette_name))
 		palette.deserialize_from_dictionary(data)
-		Palettes.save_palette(palette)
-		Palettes.palettes[palette_name] = palette
-		Palettes.select_palette(palette_name)
+		if is_global:
+			Palettes.save_palette(palette)
+			Palettes.palettes[palette.name] = palette
+		else:
+			palette.is_project_palette = true
+			Global.current_project.palettes[palette.name] = palette
+		Palettes.select_palette(palette.name)
 		Palettes.new_palette_created.emit()
 
 
@@ -846,11 +968,13 @@ class SignalsAPI:
 		signal_class: Signal, callable: Callable, is_disconnecting := false
 	) -> void:
 		if !is_disconnecting:
-			signal_class.connect(callable)
-			ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
+			if not signal_class.is_connected(callable):
+				signal_class.connect(callable)
+				ExtensionsApi.add_action("SignalsAPI", signal_class.get_name())
 		else:
-			signal_class.disconnect(callable)
-			ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
+			if signal_class.is_connected(callable):
+				signal_class.disconnect(callable)
+				ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
 
 	# APP RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits

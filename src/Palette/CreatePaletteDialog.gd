@@ -42,7 +42,7 @@ func open(opened_current_palette: Palette) -> void:
 
 	# Stop all inputs in the rest of the app
 	Global.dialog_open(true)
-	popup_centered()
+	popup_centered_clamped()
 	width_input.editable = true
 	height_input.editable = true
 
@@ -82,7 +82,8 @@ func _on_CreatePaletteDialog_confirmed() -> void:
 		width_input.value,
 		height_input.value,
 		alpha_colors_input.button_pressed,
-		get_colors_from_input.selected
+		get_colors_from_input.selected,
+		false
 	)
 
 

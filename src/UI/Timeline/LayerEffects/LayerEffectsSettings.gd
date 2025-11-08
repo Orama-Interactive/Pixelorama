@@ -4,6 +4,7 @@ const LAYER_EFFECT_BUTTON = preload("res://src/UI/Timeline/LayerEffects/LayerEff
 const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
+	LayerEffect.new("Offset & Scale", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new(
 		"Convolution Matrix",
 		preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"),
@@ -11,9 +12,6 @@ var effects: Array[LayerEffect] = [
 	),
 	LayerEffect.new(
 		"Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
-	),
-	LayerEffect.new(
-		"Offset/Zoom", preload("res://src/Shaders/Effects/OffsetPixels.gdshader"), "Transform"
 	),
 	LayerEffect.new(
 		"Gradient", preload("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"
@@ -122,7 +120,6 @@ func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
 	var index: int = menu.get_item_metadata(menu_item_index)
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var effect := effects[index].duplicate()
-	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
@@ -173,7 +170,6 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	var collapsible_button := parameter_vbox.get_button()
 	collapsible_button.set_script(LAYER_EFFECT_BUTTON)
 	collapsible_button.layer = layer
-	collapsible_button.layer_effects_settings = self
 	collapsible_button.add_child(hbox)
 	hbox.anchor_left = 0.05
 	hbox.anchor_top = 0
@@ -199,7 +195,6 @@ func move_effect(layer: BaseLayer, from_index: int, to_index: int) -> void:
 func _delete_effect(effect: LayerEffect) -> void:
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var index := layer.effects.find(effect)
-	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Delete layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
@@ -249,7 +244,6 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 		if cel_image is ImageExtended:
 			redo_data[cel_image.indices_image] = cel_image.indices_image.data
 		redo_data[cel_image] = cel_image.data
-	project.undos += 1
 	project.undo_redo.create_action("Apply layer effect")
 	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))

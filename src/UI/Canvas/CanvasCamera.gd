@@ -63,7 +63,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	get_window().gui_release_focus()
+	if not DisplayServer.is_touchscreen_available():
+		get_window().gui_release_focus()
 	if !Global.can_draw:
 		drag = false
 		return
@@ -173,7 +174,6 @@ func fit_to_frame(size: Vector2) -> void:
 func update_transparent_checker_offset() -> void:
 	var o := get_global_transform_with_canvas().get_origin()
 	var s := get_global_transform_with_canvas().get_scale()
-	o.y = get_viewport_rect().size.y - o.y
 	transparent_checker.update_offset(o, s)
 
 
@@ -184,12 +184,10 @@ func _update_viewport_transform() -> void:
 		return
 	var zoom_scale := Vector2.ONE / zoom
 	var viewport_size := get_viewport_rect().size
-	var screen_offset := viewport_size * 0.5 * zoom_scale
-	screen_offset = screen_offset.rotated(camera_angle)
-	var screen_rect := Rect2(-screen_offset, viewport_size * zoom_scale)
-	screen_rect.position += offset
-	var xform := Transform2D(camera_angle, zoom_scale, 0, screen_rect.position)
-	camera_screen_center = xform * (viewport_size * 0.5)
+	var half_size := viewport_size * 0.5
+	var screen_offset := -(half_size * zoom_scale).rotated(camera_angle) + offset
+	var xform := Transform2D(camera_angle, zoom_scale, 0, screen_offset)
+	camera_screen_center = xform * half_size
 	viewport.canvas_transform = xform.affine_inverse()
 
 
@@ -197,7 +195,7 @@ func _zoom_changed() -> void:
 	update_transparent_checker_offset()
 	if index == Cameras.MAIN:
 		should_tween = false
-		zoom_slider.value = zoom.x * 100.0
+		zoom_slider.set_value_no_signal_update_display(zoom.x * 100.0)
 		should_tween = true
 		for guide in Global.current_project.guides:
 			guide.width = 1.0 / zoom.x * 2
@@ -232,6 +230,8 @@ func _rotation_slider_value_changed(value: float) -> void:
 
 
 func _has_selection_tool() -> bool:
+	if not Global.current_project.has_selection:
+		return false
 	for slot in Tools._slots.values():
 		if slot.tool_node is BaseSelectionTool:
 			return true

@@ -980,6 +980,22 @@ func copy_content() -> Array:
 	return [copy_image, copied_cells.duplicate(true)]
 
 
+func duplicate_cel() -> CelTileMap:
+	var new_cel := CelTileMap.new(tileset)
+	new_cel.opacity = opacity
+	new_cel.z_index = z_index
+	new_cel.user_data = user_data
+	new_cel.ui_color = ui_color
+
+	new_cel.offset = offset
+	new_cel.place_only_mode = place_only_mode
+	new_cel.tile_size = tile_size
+	new_cel.tile_shape = tile_shape
+	new_cel.tile_layout = tile_layout
+	new_cel.tile_offset_axis = tile_offset_axis
+	return new_cel
+
+
 func update_texture(undo := false) -> void:
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if (
@@ -999,6 +1015,9 @@ func update_texture(undo := false) -> void:
 		var index := cell.index
 		if index >= tileset.tiles.size():
 			index = 0
+		var image_rect := Rect2i(Vector2i.ZERO, get_image().get_size())
+		if not image_rect.has_point(coords):
+			continue
 		var rect := Rect2i(coords, get_tile_size())
 		var image_portion := get_image_portion(rect)
 		var current_tile := tileset.tiles[index]

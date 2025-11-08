@@ -6,12 +6,14 @@
 
 [node name="Tool" type="Button" groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
+layout_direction = 2
 offset_right = 24.0
 offset_bottom = 24.0
 tooltip_text = "Rectangular Selection
 
 %s for left mouse button
 %s for right mouse button"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 button_mask = 3
 

@@ -220,7 +220,8 @@ static func open_photoshop_file(path: String) -> void:
 
 		# Next: Pascal string (layer name)
 		var name_length := psd_file.get_8()
-		@warning_ignore("integer_division") var padded_length := (((name_length + 4) / 4) * 4) - 1
+		@warning_ignore("integer_division")
+		var padded_length := (((name_length + 4) / 4) * 4) - 1
 		layer.name = psd_file.get_buffer(padded_length).get_string_from_utf8()
 
 		# Remaining: Additional Layer Information blocks
@@ -332,7 +333,7 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 		var psd_frame := psd_project.frames[frame_id]
 		var frame := Frame.new()
 		var delay_cs := psd_frame.delay_cs
-		frame.duration = delay_cs / 100.0
+		frame.set_duration_in_seconds(delay_cs / 100.0, new_project.fps)
 		frames.append(frame)
 
 	# Initialize layers

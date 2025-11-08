@@ -75,7 +75,6 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 			var new_image := Image.new()
 			new_image.copy_from(tile.image)
 			new_tileset.add_tile(new_image, null)
-		project.undos += 1
 		project.undo_redo.create_action("Duplicate tileset")
 		project.undo_redo.add_do_method(func(): project.tilesets.append(new_tileset))
 		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -86,7 +85,6 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 	if id == 1:  # Delete
 		if tileset.find_using_layers(project).size() > 0:
 			return
-		project.undos += 1
 		project.undo_redo.create_action("Delete tileset")
 		project.undo_redo.add_do_method(func(): project.tilesets.erase(tileset))
 		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))

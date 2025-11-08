@@ -129,7 +129,6 @@ func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> 
 	Global.canvas.update_all_layers = true
 	var project := Global.current_project
 	var current_mode := blend_modes_button.get_item_id(index)
-	project.undos += 1
 	project.undo_redo.create_action("Set Blend Mode")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
@@ -174,7 +173,6 @@ func _emit_layer_property_signal() -> void:
 func _on_tileset_option_button_item_selected(index: int) -> void:
 	var project := Global.current_project
 	var new_tileset := project.tilesets[index]
-	project.undos += 1
 	project.undo_redo.create_action("Set Tileset")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
@@ -201,7 +199,7 @@ func _on_tileset_option_button_item_selected(index: int) -> void:
 
 
 func _on_audio_file_button_pressed() -> void:
-	audio_file_dialog.popup_centered()
+	audio_file_dialog.popup_centered_clamped()
 
 
 func _on_play_at_frame_slider_value_changed(value: float) -> void:
@@ -232,12 +230,11 @@ func _on_place_only_mode_check_button_toggled(toggled_on: bool) -> void:
 	if not toggled_on:
 		return
 	place_only_mode_check_button.set_pressed_no_signal(false)
-	place_only_confirmation_dialog.popup_centered()
+	place_only_confirmation_dialog.popup_centered_clamped()
 
 
 func _on_place_only_confirmation_dialog_confirmed() -> void:
 	var project := Global.current_project
-	project.undos += 1
 	project.undo_redo.create_action("Set place-only mode")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
@@ -263,7 +260,6 @@ func _on_place_only_confirmation_dialog_confirmed() -> void:
 
 func _on_tile_size_slider_value_changed(value: Vector2) -> void:
 	var project := Global.current_project
-	project.undos += 1
 	project.undo_redo.create_action("Change tilemap settings")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
@@ -290,7 +286,6 @@ func _on_tile_size_slider_value_changed(value: Vector2) -> void:
 func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> void:
 	var selected_id := tile_shape_option_button.get_item_id(index)
 	var project := Global.current_project
-	project.undos += 1
 	project.undo_redo.create_action("Change tilemap settings")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
@@ -315,7 +310,6 @@ func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> voi
 
 func _on_tile_layout_option_button_item_selected(index: TileSet.TileLayout) -> void:
 	var project := Global.current_project
-	project.undos += 1
 	project.undo_redo.create_action("Change tilemap settings")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
@@ -341,7 +335,6 @@ func _on_tile_layout_option_button_item_selected(index: TileSet.TileLayout) -> v
 func _on_tile_offset_axis_button_item_selected(index: TileSet.TileOffsetAxis) -> void:
 	var selected_id := tile_offset_axis_button.get_item_id(index)
 	var project := Global.current_project
-	project.undos += 1
 	project.undo_redo.create_action("Change tilemap settings")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]

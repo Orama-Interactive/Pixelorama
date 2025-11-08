@@ -258,17 +258,17 @@ func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 
 	path_validation_alert_popup.dialog_text = error_text
 	print(error_text)
-	path_validation_alert_popup.popup_centered()
+	path_validation_alert_popup.popup_centered_clamped()
 
 
 func open_file_exists_alert_popup(text: String) -> void:
 	file_exists_alert_popup.dialog_text = text
-	file_exists_alert_popup.popup_centered()
+	file_exists_alert_popup.popup_centered_clamped()
 
 
 func toggle_export_progress_popup(open: bool) -> void:
 	if open:
-		export_progress_popup.popup_centered()
+		export_progress_popup.popup_centered_clamped()
 	else:
 		export_progress_popup.hide()
 
@@ -368,7 +368,7 @@ func _on_confirmed() -> void:
 
 
 func _on_path_button_pressed() -> void:
-	path_dialog_popup.popup_centered()
+	path_dialog_popup.popup_centered_clamped()
 
 
 func _on_path_line_edit_text_changed(new_text: String) -> void:

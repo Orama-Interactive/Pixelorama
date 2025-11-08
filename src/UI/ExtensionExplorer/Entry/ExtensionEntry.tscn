@@ -10,6 +10,7 @@ custom_minimum_size = Vector2(300, 150)
 offset_right = 310.0
 offset_bottom = 150.0
 size_flags_horizontal = 3
+mouse_filter = 1
 script = ExtResource("1_3no3v")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -22,6 +23,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2_qhsve")
 ignore_texture_size = true

@@ -74,7 +74,8 @@ func blend_layers(
 				include = false
 		var cel := frame.cels[ordered_index]
 		if DisplayServer.get_name() == "headless":
-			blend_layers_headless(image, project, layer, cel, origin)
+			if include:
+				blend_layers_headless(image, project, layer, cel, origin)
 		else:
 			if layer.is_blender():
 				var cel_image := (layer as GroupLayer).blend_children(frame)
@@ -343,6 +344,8 @@ func transform_image_with_viewport(
 
 	# Estimate new bounding box
 	var bounds := get_transformed_bounds(original_image.get_size(), full_transform)
+	if bounds.size.x == 0 or bounds.size.y == 0:
+		return
 	var viewport_size := bounds.size.ceil() as Vector2i
 	if viewport_size.x == 1:
 		viewport_size.x = 2
@@ -662,6 +665,10 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 ## Compares two colors, and returns [code]true[/code] if the difference of these colors is
 ## less or equal to the tolerance [param tol]. [param tol] is in the range of 0-1.
 func similar_colors(c1: Color, c2: Color, tol := 0.392157) -> bool:
+	if c1.is_equal_approx(c2):  # Optimization
+		return true
+	if tol == 0.0:  # if it skipped the above check then it's obviously false
+		return false
 	return (
 		absf(c1.r - c2.r) <= tol
 		&& absf(c1.g - c2.g) <= tol
@@ -683,13 +690,13 @@ func generate_isometric_rectangle(image: Image, is_gap_tile: bool) -> void:
 	var up := Vector2i(half_size.x + even_offset.x, 0)
 	var right := Vector2i(image.get_size().x - 1, half_size.y)
 	if is_gap_tile:
-		var test = Geometry2D.bresenham_line(up, right)
+		var test := Geometry2D.bresenham_line(up, right)
 		var a: Vector2i
-		var b = test[-1] + Vector2i.UP
-		var line_r = []
+		var b := test[-1] + Vector2i.UP
+		var line_r := []
 		var sub_position_x := []
 		var sub_position_y := []
-		var scan_dir = [Vector2i.RIGHT]
+		var scan_dir := [Vector2i.RIGHT]
 		for i in test.size():
 			if up.y == test[i].y:
 				a = test[i] + Vector2i.RIGHT
@@ -712,11 +719,11 @@ func generate_isometric_rectangle(image: Image, is_gap_tile: bool) -> void:
 					sub_position_y.append(image.get_size().y - 1 - small_point.y)
 			if not pt + Vector2i.RIGHT in test and not scan_dir.has(Vector2i.UP):
 				scan_dir.push_front(Vector2i.UP)
-		var pos = Vector2i(sub_position_x.min(), sub_position_y.min())
-		var sub_size_x = (b.x - a.x + 1) * 2
-		var sub_size_y = (b.y - a.y + 1) * 2
-		var offset_x: int = floori((sub_size_x - image.get_size().x) / 2.0)
-		var offset_y: int = floori((sub_size_y - image.get_size().y) / 2.0)
+		var pos := Vector2i(sub_position_x.min(), sub_position_y.min())
+		var sub_size_x := (b.x - a.x + 1) * 2
+		var sub_size_y := (b.y - a.y + 1) * 2
+		var offset_x := floori((sub_size_x - image.get_size().x) / 2.0)
+		var offset_y := floori((sub_size_y - image.get_size().y) / 2.0)
 		var offset := Vector2i(-offset_x, -offset_y)
 		for i in line_r.size():
 			var val_local = line_r[i] - pos
@@ -810,7 +817,6 @@ func center(indices: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var redo_data := {}
 	var undo_data := {}
-	project.undos += 1
 	project.undo_redo.create_action("Center Frames")
 	for frame in indices:
 		# Find used rect of the current frame (across all of the layers)
@@ -1013,7 +1019,6 @@ func general_do_and_undo_scale(
 	new_y_symmetry_axis_points[0].x /= x_ratio
 	new_y_symmetry_axis_points[1].x /= x_ratio
 
-	project.undos += 1
 	project.undo_redo.create_action("Scale")
 	project.undo_redo.add_do_property(project, "size", size)
 	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)

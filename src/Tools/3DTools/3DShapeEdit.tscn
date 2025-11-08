@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cg7d36746on67"]
+[gd_scene load_steps=9 format=3 uid="uid://cg7d36746on67"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://d3my38wgqe4hq" path="res://src/Tools/3DTools/3DShapeEdit.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="4"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="5"]
-[ext_resource type="Script" uid="uid://cca0fmlwaqjh1" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/Sliders/ValueSliderV3.tscn" id="7"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_8sqgw"]
@@ -59,14 +58,12 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CameraOptions" type="VBoxContainer" parent="CelOptions" index="0"]
+[node name="CameraOptions" type="FoldableContainer" parent="CelOptions" index="0"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("6")
-text = "Camera"
-visible_content = true
+title = "Camera"
 
-[node name="GridContainer" type="GridContainer" parent="CelOptions/CameraOptions" index="1"]
+[node name="GridContainer" type="GridContainer" parent="CelOptions/CameraOptions" index="0"]
 layout_mode = 2
 columns = 2
 
@@ -151,13 +148,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="EnvironmentOptions" type="VBoxContainer" parent="CelOptions" index="1"]
+[node name="EnvironmentOptions" type="FoldableContainer" parent="CelOptions" index="1"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("6")
-text = "Environment"
+folded = true
+title = "Environments"
 
-[node name="GridContainer" type="GridContainer" parent="CelOptions/EnvironmentOptions" index="1"]
+[node name="GridContainer" type="GridContainer" parent="CelOptions/EnvironmentOptions" index="0"]
 visible = false
 layout_mode = 2
 columns = 2
@@ -208,14 +205,14 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="TransformOptions" type="VBoxContainer" parent="ObjectOptions" index="1"]
+[node name="TransformOptions" type="FoldableContainer" parent="ObjectOptions" index="1"]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("6")
-text = "Transform"
-visible_content = true
+folded = true
+title = "Transform"
 
-[node name="GridContainer" type="GridContainer" parent="ObjectOptions/TransformOptions" index="1"]
+[node name="GridContainer" type="GridContainer" parent="ObjectOptions/TransformOptions" index="0"]
+visible = false
 layout_mode = 2
 columns = 2
 
@@ -275,14 +272,14 @@ suffix_x = "%"
 suffix_y = "%"
 suffix_z = "%"
 
-[node name="MeshOptions" type="VBoxContainer" parent="ObjectOptions" index="2"]
+[node name="MeshOptions" type="FoldableContainer" parent="ObjectOptions" index="2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("6")
-text = "Mesh"
+folded = true
+title = "Mesh"
 
-[node name="GridContainer" type="GridContainer" parent="ObjectOptions/MeshOptions" index="1"]
+[node name="GridContainer" type="GridContainer" parent="ObjectOptions/MeshOptions" index="0"]
 visible = false
 layout_mode = 2
 columns = 2
@@ -540,7 +537,7 @@ theme_type_variation = &"ValueSlider"
 min_value = 0.001
 max_value = 10.0
 step = 0.001
-value = 0.01
+value = 0.009999999999999998
 allow_greater = true
 nine_patch_stretch = true
 stretch_margin_left = 3
@@ -707,14 +704,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="LightOptions" type="VBoxContainer" parent="ObjectOptions" index="3"]
+[node name="LightOptions" type="FoldableContainer" parent="ObjectOptions" index="3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
-script = ExtResource("6")
-text = "Light"
+folded = true
+title = "Light"
 
-[node name="GridContainer" type="GridContainer" parent="ObjectOptions/LightOptions" index="1"]
+[node name="GridContainer" type="GridContainer" parent="ObjectOptions/LightOptions" index="0"]
 visible = false
 layout_mode = 2
 columns = 2

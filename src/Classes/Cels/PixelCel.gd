@@ -68,6 +68,15 @@ func get_image() -> ImageExtended:
 	return image
 
 
+func duplicate_cel() -> PixelCel:
+	var new_cel := PixelCel.new()
+	new_cel.opacity = opacity
+	new_cel.z_index = z_index
+	new_cel.user_data = user_data
+	new_cel.ui_color = ui_color
+	return new_cel
+
+
 func update_texture(undo := false) -> void:
 	image_texture.set_image(image)
 	super.update_texture(undo)

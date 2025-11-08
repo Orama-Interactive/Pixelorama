@@ -169,11 +169,7 @@ static func _update_tile(
 	if resource_proj.layers.size() > 1:
 		warnings += "\nThis resource is intended to have 1 layer only. layers will be blended."
 
-	var updated_image := Image.create_empty(
-		resource_proj.size.x, resource_proj.size.y, false, Image.FORMAT_RGBA8
-	)
-	var frame := resource_proj.frames[0]
-	DrawingAlgos.blend_layers(updated_image, frame, Vector2i.ZERO, resource_proj)
+	var updated_image := resource_proj.get_frame_image(0)
 	if is_instance_valid(target_project) and is_instance_valid(tileset):
 		if tile_idx < tileset.tiles.size():
 			if !tileset.tiles[tile_idx].image:
@@ -326,9 +322,11 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			&& is_transposed == ROTATION_MATRIX[i * 3 + 2]
 		):
 			if clockwise:
-				@warning_ignore("integer_division") final_i = i / 4 * 4 + posmod(i - 1, 4)
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + posmod(i - 1, 4)
 			else:
-				@warning_ignore("integer_division") final_i = i / 4 * 4 + (i + 1) % 4
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + (i + 1) % 4
 			is_flipped_h = ROTATION_MATRIX[final_i * 3]
 			is_flipped_v = ROTATION_MATRIX[final_i * 3 + 1]
 			is_transposed = ROTATION_MATRIX[final_i * 3 + 2]
@@ -355,7 +353,7 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 	if index == 0:  # Properties
 		tile_probability_slider.value = selected_tile.probability
 		tile_user_data_text_edit.text = selected_tile.user_data
-		tile_properties.popup_centered()
+		tile_properties.popup_centered_clamped()
 	if index == 1:  # Edit tile
 		_modify_texture_resource(tile_index_menu_popped, current_tileset, Global.current_project)
 	elif index == 2:  # Delete
@@ -402,7 +400,6 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 			project.undo_redo.commit_action()
 	elif index == 3:  # Duplicate tile
 		var project = Global.current_project
-		var tile_cel = Global.current_project.get_current_cel()
 		var undo_data_tileset := current_tileset.serialize_undo_data()
 		var tilemap_cels: Array[CelTileMap] = []
 		var redo_data_tilemaps := {}

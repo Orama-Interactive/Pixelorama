@@ -117,7 +117,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey:
 		_move_with_arrow_keys(event)
-	var mouse_pos := canvas.current_pixel
+	var mouse_pos := get_local_mouse_position()
 	if Global.mirror_view:
 		mouse_pos.x = Global.current_project.size.x - mouse_pos.x
 	var hovered_handle := _get_hovered_handle(mouse_pos)
@@ -308,6 +308,8 @@ func _on_preview_transform_changed() -> void:
 		var bounds := DrawingAlgos.get_transformed_bounds(
 			transformed_selection_map.get_size(), preview_transform
 		)
+		if bounds.size.x == 0 or bounds.size.y == 0:
+			return
 		if Tools.is_placing_tiles():
 			for cel in selection_node.get_selected_draw_cels():
 				if cel is not CelTileMap:
@@ -384,8 +386,10 @@ func begin_drag(mouse_pos: Vector2) -> void:
 func move_transform(pos: Vector2) -> void:
 	var final_pos := pos
 	if Tools.is_placing_tiles():
+		# NOTE: we don't use offset here because the [param pos] is expected to already have
+		# offsetted coordinates.
 		var grid_size := (Global.current_project.get_current_cel() as CelTileMap).get_tile_size()
-		final_pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size)
+		final_pos = Tools.snap_to_rectangular_grid_boundary(pos, grid_size, Vector2.ZERO)
 	preview_transform = preview_transform.translated(final_pos)
 	queue_redraw()
 
@@ -684,6 +688,8 @@ func bake_transform_to_selection(map: SelectionMap, is_confirmed := false) -> vo
 	var bounds := DrawingAlgos.get_transformed_bounds(
 		transformed_selection_map.get_size(), preview_transform
 	)
+	if bounds.size.x == 0 or bounds.size.y == 0:
+		return
 	var transformation_origin := get_transform_top_left().max(Vector2.ZERO)
 	if is_confirmed:
 		var position_top_left := position + get_transform_top_left()

@@ -79,6 +79,12 @@ func draw_end(_pos: Vector2i) -> void:
 	project.can_undo = true
 
 
+func cancel_tool() -> void:
+	is_moving = false
+	_draw_cache = []
+	Global.current_project.can_undo = true
+
+
 func get_cell_position(pos: Vector2i) -> Vector2i:
 	var tile_pos := Vector2i.ZERO
 	if Global.current_project.get_current_cel() is not CelTileMap:
@@ -144,7 +150,7 @@ func snap_position(pos: Vector2) -> Vector2:
 		)
 
 	if Global.snap_to_rectangular_grid_center:
-		pos = _snap_to_rectangular_grid_center(
+		pos = Tools.snap_to_rectangular_grid_center(
 			pos, Global.grids[0].grid_size, Global.grids[0].grid_offset, snapping_distance
 		)
 
@@ -155,7 +161,7 @@ func snap_position(pos: Vector2) -> Vector2:
 				continue
 			var s1: Vector2 = guide.points[0]
 			var s2: Vector2 = guide.points[1]
-			var snap := _snap_to_guide(snap_to, pos, snapping_distance, s1, s2)
+			var snap := Tools.snap_to_guide(snap_to, pos, snapping_distance, s1, s2)
 			if snap == Vector2.INF:
 				continue
 			snap_to = snap
@@ -171,7 +177,7 @@ func snap_position(pos: Vector2) -> Vector2:
 					var start := Vector2(point.pos_x, point.pos_y)
 					var s1 := start
 					var s2 := s1 + Vector2(length * cos(angle), length * sin(angle))
-					var snap := _snap_to_guide(snap_to, pos, snapping_distance, s1, s2)
+					var snap := Tools.snap_to_guide(snap_to, pos, snapping_distance, s1, s2)
 					if snap == Vector2.INF:
 						continue
 					snap_to = snap
@@ -210,48 +216,6 @@ func mirror_array(array: Array[Vector2i], callable := func(_array): pass) -> Arr
 		new_array += v_array
 
 	return new_array
-
-
-func _snap_to_rectangular_grid_center(
-	pos: Vector2, grid_size: Vector2i, grid_offset: Vector2i, snapping_distance: float
-) -> Vector2:
-	var grid_center := pos.snapped(grid_size) + Vector2(grid_size / 2)
-	grid_center += Vector2(grid_offset)
-	# keeping grid_center as is would have been fine but this adds extra accuracy as to
-	# which snap point (from the list below) is closest to mouse and occupy THAT point
-	# t_l is for "top left" and so on
-	var t_l := grid_center + Vector2(-grid_size.x, -grid_size.y)
-	var t_c := grid_center + Vector2(0, -grid_size.y)
-	var t_r := grid_center + Vector2(grid_size.x, -grid_size.y)
-	var m_l := grid_center + Vector2(-grid_size.x, 0)
-	var m_c := grid_center
-	var m_r := grid_center + Vector2(grid_size.x, 0)
-	var b_l := grid_center + Vector2(-grid_size.x, grid_size.y)
-	var b_c := grid_center + Vector2(0, grid_size.y)
-	var b_r := grid_center + Vector2(grid_size)
-	var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
-	for vec in vec_arr:
-		if vec.distance_to(pos) < grid_center.distance_to(pos):
-			grid_center = vec
-	if snapping_distance < 0:
-		pos = grid_center.floor()
-	else:
-		if grid_center.distance_to(pos) <= snapping_distance:
-			pos = grid_center.floor()
-	return pos
-
-
-func _snap_to_guide(
-	snap_to: Vector2, pos: Vector2, distance: float, s1: Vector2, s2: Vector2
-) -> Vector2:
-	var closest_point := Tools.get_closest_point_to_segment(pos, distance, s1, s2)
-	if closest_point == Vector2.INF:  # Is not close to a guide
-		return Vector2.INF
-	# Snap to the closest guide
-	if snap_to == Vector2.INF or (snap_to - pos).length() > (closest_point - pos).length():
-		snap_to = closest_point
-
-	return snap_to
 
 
 func _get_stabilized_position(normal_pos: Vector2) -> Vector2:
