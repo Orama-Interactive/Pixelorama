@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-11-08 19:20\n"
+"PO-Revision-Date: 2025-11-08 20:30\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -34,7 +34,7 @@ msgid "Project Name:"
 msgstr "Nama Projek:"
 
 msgid "Image Size"
-msgstr "Saiz Gambar"
+msgstr "Saiz Imej"
 
 msgid "Canvas Size"
 msgstr "Saiz Kanvas"
@@ -70,7 +70,7 @@ msgid "Window"
 msgstr "Tingkap"
 
 msgid "Image"
-msgstr "Gambar"
+msgstr "Imej"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
