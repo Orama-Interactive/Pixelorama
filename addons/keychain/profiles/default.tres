@@ -6,4 +6,3 @@
 script = ExtResource("1")
 name = "Default"
 customizable = false
-bindings = {}

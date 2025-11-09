@@ -1041,6 +1041,11 @@ undo_history={
 "deadzone": 0.2,
 "events": []
 }
+mm_change_brush_size={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194328,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [input_devices]
 

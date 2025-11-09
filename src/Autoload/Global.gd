@@ -836,6 +836,10 @@ func update_grids(grids_data: Dictionary):
 
 
 func _initialize_keychain() -> void:
+	var mm_change_brush_size := Keychain.MouseMovementInputAction.new(
+		"Change brush size", "Mouse drag", false
+	)
+	mm_change_brush_size.action_name = &"mm_change_brush_size"
 	Keychain.config_file = config_cache
 	Keychain.actions = {
 		&"new_file": Keychain.InputAction.new("", "File menu", true),
@@ -985,7 +989,8 @@ func _initialize_keychain() -> void:
 		&"tile_rotate_left": Keychain.InputAction.new("", "Tileset panel", false),
 		&"tile_rotate_right": Keychain.InputAction.new("", "Tileset panel", false),
 		&"tile_flip_horizontal": Keychain.InputAction.new("", "Tileset panel", false),
-		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false)
+		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false),
+		&"mm_change_brush_size": mm_change_brush_size,
 	}
 
 	Keychain.groups = {
@@ -1012,7 +1017,8 @@ func _initialize_keychain() -> void:
 		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
-		"Tileset panel": Keychain.InputGroup.new()
+		"Tileset panel": Keychain.InputGroup.new(),
+		"Mouse drag": Keychain.InputGroup.new(),
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 

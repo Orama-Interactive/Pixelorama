@@ -38,14 +38,24 @@ var _stroke_project: Project
 var _stroke_images: Array[ImageExtended] = []
 var _is_mask_size_zero := true
 var _circle_tool_shortcut: Array[Vector2i]
+var _mm_action: Keychain.MouseMovementInputAction
 
 
 func _ready() -> void:
 	super._ready()
+	_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
+	if tool_slot.button == MOUSE_BUTTON_RIGHT:
+		_mm_action = Keychain.MouseMovementInputAction.new()
+		_mm_action.action_name = &"mm_change_brush_size"
 	Global.cel_switched.connect(update_brush)
 	Global.global_tool_options.dynamics_panel.dynamics_changed.connect(_reset_dynamics)
 	Tools.color_changed.connect(_on_Color_changed)
 	Global.brushes_popup.brush_removed.connect(_on_Brush_removed)
+
+
+func _input(event: InputEvent) -> void:
+	var brush_size_value := _mm_action.get_action_distance_int(event)
+	$Brush/BrushSize.value += brush_size_value
 
 
 func _on_BrushType_pressed() -> void:
