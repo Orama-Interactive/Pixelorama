@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-10-14 15:51\n"
+"PO-Revision-Date: 2025-11-04 18:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -962,6 +962,10 @@ msgstr "Font:"
 msgid "Font size:"
 msgstr "Dimensiunea fontului:"
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr "Orientarea ecranului:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Întunecă interfața la apariția ferestrei de dialog"
 
@@ -1027,6 +1031,14 @@ msgstr "Culoare de fundal din:"
 
 msgid "Background color:"
 msgstr "Culoare de fundal:"
+
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr "Mod instrument unic"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr "Dacă această opțiune este activată, butonul din dreapta al mausului va activa întotdeauna același instrument ca butonul din stânga al mausului."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -3106,6 +3118,10 @@ msgstr "Resetați toate opțiunile de instrumente"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "Elimină toate extensiile"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr "Elimină toate copiile de rezervă"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
