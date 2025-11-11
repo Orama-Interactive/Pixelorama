@@ -26,13 +26,14 @@ func fill_bindings(should_save := true) -> void:
 
 func copy_bindings_from(other_profile: ShortcutProfile) -> void:
 	bindings = other_profile.bindings.duplicate(true)
+	mouse_movement_options = other_profile.mouse_movement_options.duplicate(true)
 	save()
 
 
-func change_action(action: String) -> void:
+func change_action(action_name: String) -> void:
 	if not customizable:
 		return
-	bindings[action] = InputMap.action_get_events(action)
+	bindings[action_name] = InputMap.action_get_events(action_name)
 	save()
 
 

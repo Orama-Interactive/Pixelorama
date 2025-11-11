@@ -1,5 +1,7 @@
 extends Node
 
+signal action_changed(action_name: String)
+
 const PROFILES_PATH := "user://shortcut_profiles"
 const DEFAULT_PROFILE := preload("profiles/default.tres")
 
@@ -120,6 +122,7 @@ func _ready() -> void:
 			if file_name.get_extension() == "tres":
 				var file := load(PROFILES_PATH.path_join(file_name))
 				if file is ShortcutProfile:
+					file.fill_bindings()
 					profiles.append(file)
 		file_name = profile_dir.get_next()
 
@@ -155,10 +158,16 @@ func change_profile(index: int) -> void:
 					input_action.restore_to_default()
 
 
+func change_action(action_name: String) -> void:
+	selected_profile.change_action(action_name)
+	action_changed.emit(action_name)
+
+
 func change_mouse_movement_action_settings(action: MouseMovementInputAction) -> void:
 	var action_name := action.action_name
 	selected_profile.mouse_movement_options[action_name] = action.serialize()
 	selected_profile.save()
+	action_changed.emit(action_name)
 
 
 func action_add_event(action: StringName, event: InputEvent) -> void:

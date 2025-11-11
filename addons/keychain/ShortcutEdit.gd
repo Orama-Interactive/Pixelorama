@@ -163,6 +163,7 @@ func _construct_tree() -> void:
 		tree_item.add_button(0, add_tex, 0, buttons_disabled, "Add")
 		tree_item.add_button(0, delete_tex, 1, buttons_disabled, "Delete")
 		tree_item.collapsed = true
+	mouse_movement_options.hide()
 
 
 func _fill_selector_options() -> void:
@@ -289,7 +290,7 @@ func _on_shortcut_tree_button_clicked(item: TreeItem, _column: int, id: int, _mb
 			shortcut_type_menu.popup_on_parent(rect)
 		elif id == 1:  # Delete
 			Keychain.action_erase_events(action)
-			Keychain.selected_profile.change_action(action)
+			Keychain.change_action(action)
 			for child in item.get_children():
 				child.free()
 
@@ -308,7 +309,7 @@ func _on_shortcut_tree_button_clicked(item: TreeItem, _column: int, id: int, _mb
 			if not parent_action is StringName:
 				return
 			Keychain.action_erase_event(parent_action, action)
-			Keychain.selected_profile.change_action(parent_action)
+			Keychain.change_action(parent_action)
 			item.free()
 
 
