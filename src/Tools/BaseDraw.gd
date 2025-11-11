@@ -43,10 +43,11 @@ var _mm_action: Keychain.MouseMovementInputAction
 
 func _ready() -> void:
 	super._ready()
-	_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
 	if tool_slot.button == MOUSE_BUTTON_RIGHT:
-		_mm_action = Keychain.MouseMovementInputAction.new()
-		_mm_action.action_name = &"mm_change_brush_size"
+		_update_mm_action("mm_change_brush_size")
+		Keychain.action_changed.connect(_update_mm_action)
+	else:
+		_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
 	Global.cel_switched.connect(update_brush)
 	Global.global_tool_options.dynamics_panel.dynamics_changed.connect(_reset_dynamics)
 	Tools.color_changed.connect(_on_Color_changed)
@@ -855,3 +856,14 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			break
 	update_brush()
 	save_config()
+
+
+func _update_mm_action(action_name: String) -> void:
+	if action_name != "mm_change_brush_size":
+		return
+	_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
+	var new_mm_action := Keychain.MouseMovementInputAction.new()
+	new_mm_action.action_name = &"mm_change_brush_size"
+	new_mm_action.mouse_dir = _mm_action.mouse_dir
+	new_mm_action.distance = _mm_action.distance
+	_mm_action = new_mm_action
