@@ -10,7 +10,7 @@ Built using Godot 4.5.1
 
 ### Added
 - Importing GIF files is now possible without needing FFMPEG!
-- Holding <kbd>Control + Alt</kbd> and moving the mouse right or left now changes the brush size. This shortcut can be changed from the Preferences.
+- Holding <kbd>Control + Shift</kbd> and moving the mouse right or left now changes the brush size. This shortcut can be changed from the Preferences.
 - Added a button in the palette panel that unlocks the palette grid, making the swatches automatically resize based on the available free space of the panel, instead of having a fixed width and height.
 - A single tool mode has been added as a preference that makes the right mouse button activate the same tool as the left mouse button, instead of being independent.
 - Selecting "Paste from clipboard" while having a Lospec Palette URI copied will now automatically download that palette.
