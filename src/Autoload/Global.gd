@@ -990,6 +990,32 @@ func _initialize_keychain() -> void:
 		Keychain.MouseMovementInputAction.new(
 			"Change brush size", "Mouse drag", false, &"mm_change_brush_size"
 		),
+		&"mm_color_change_hue":
+		Keychain.MouseMovementInputAction.new(
+			"Color change hue", "Mouse drag", false, &"mm_color_change_hue", Vector2.DOWN, 0.001
+		),
+		&"mm_color_change_saturation":
+		Keychain.MouseMovementInputAction.new(
+			"Color change saturation",
+			"Mouse drag",
+			false,
+			&"mm_color_change_saturation",
+			Vector2.RIGHT,
+			0.001
+		),
+		&"mm_color_change_value":
+		Keychain.MouseMovementInputAction.new(
+			"Color change value", "Mouse drag", false, &"mm_color_change_value", Vector2.DOWN, 0.001
+		),
+		&"mm_color_change_alpha":
+		Keychain.MouseMovementInputAction.new(
+			"Color change alpha",
+			"Mouse drag",
+			false,
+			&"mm_color_change_alpha",
+			Vector2.RIGHT,
+			0.001
+		),
 	}
 
 	Keychain.groups = {
