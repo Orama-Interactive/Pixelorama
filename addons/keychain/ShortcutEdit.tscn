@@ -168,6 +168,18 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("9_v7k3h")
 icon_alignment = 1
 
+[node name="SensitivityLabel" type="Label" parent="VBoxContainer/MouseMovementOptions"]
+layout_mode = 2
+text = "Sensitivity:"
+
+[node name="SensitivityRange" type="SpinBox" parent="VBoxContainer/MouseMovementOptions"]
+layout_mode = 2
+min_value = 0.001
+step = 0.001
+value = 0.1
+allow_greater = true
+custom_arrow_step = 0.1
+
 [node name="ShortcutTypeMenu" type="PopupMenu" parent="."]
 size = Vector2i(154, 116)
 item_count = 4
@@ -224,6 +236,7 @@ dialog_text = "Are you sure you want to restore all shortcuts to their default s
 [connection signal="button_clicked" from="VBoxContainer/ShortcutTree" to="." method="_on_shortcut_tree_button_clicked"]
 [connection signal="item_activated" from="VBoxContainer/ShortcutTree" to="." method="_on_ShortcutTree_item_activated"]
 [connection signal="item_selected" from="VBoxContainer/ShortcutTree" to="." method="_on_shortcut_tree_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/MouseMovementOptions/SensitivityRange" to="." method="_on_sensitivity_range_value_changed"]
 [connection signal="id_pressed" from="ShortcutTypeMenu" to="." method="_on_ShortcutTypeMenu_id_pressed"]
 [connection signal="confirmed" from="ProfileSettings" to="." method="_on_ProfileSettings_confirmed"]
 [connection signal="confirmed" from="DeleteConfirmation" to="." method="_on_DeleteConfirmation_confirmed"]

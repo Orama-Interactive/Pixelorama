@@ -93,6 +93,7 @@ var folder_tex: Texture2D = preload("assets/folder.svg")
 @onready var mm_bottom_left: Button = %MMBottomLeft
 @onready var mm_bottom: Button = %MMBottom
 @onready var mm_bottom_right: Button = %MMBottomRight
+@onready var sensitivity_range: SpinBox = $VBoxContainer/MouseMovementOptions/SensitivityRange
 
 @onready var shortcut_type_menu: PopupMenu = $ShortcutTypeMenu
 @onready var keyboard_shortcut_selector: ConfirmationDialog = $KeyboardShortcutSelectorDialog
@@ -325,6 +326,9 @@ func _on_shortcut_tree_item_selected() -> void:
 			mouse_movement_options.visible = true
 			currently_editing_mouse_movement_action = keychain_action
 			_press_mouse_movement_angle_button()
+			sensitivity_range.set_value_no_signal(
+				currently_editing_mouse_movement_action.sensitivity
+			)
 		else:
 			mouse_movement_options.visible = false
 
@@ -386,6 +390,11 @@ func _press_mouse_movement_angle_button() -> void:
 			mm_bottom.button_pressed = true
 		Vector2(1, 1):
 			mm_bottom_right.button_pressed = true
+
+
+func _on_sensitivity_range_value_changed(value: float) -> void:
+	currently_editing_mouse_movement_action.sensitivity = value
+	Keychain.change_mouse_movement_action_settings(currently_editing_mouse_movement_action)
 
 
 func _on_ProfileOptionButton_item_selected(index: int) -> void:

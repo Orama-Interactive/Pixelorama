@@ -1,5 +1,6 @@
 extends Node
 
+signal profile_switched(profile: ShortcutProfile)
 signal action_changed(action_name: String)
 
 const PROFILES_PATH := "user://shortcut_profiles"
@@ -46,31 +47,44 @@ class MouseMovementInputAction:
 	## The default direction of the mouse, towards where the value increments.
 	## This should be set only once during an instance's initialization.
 	var default_mouse_dir := Vector2.RIGHT
-	## The default distance that the mouse must travel for the value to change.
+	## The default sensitivity of the mouse for the value to change.
 	## This should be set only once during an instance's initialization.
-	var default_distance := 0.1
+	var default_sensitivity := 0.1
 
 	var mouse_dir := default_mouse_dir
-	var distance := default_distance:
+	var sensitivity := default_sensitivity:
 		set(value):
 			if is_zero_approx(value):
-				distance = 1.0
+				sensitivity = 0.001
 			else:
-				distance = value
+				sensitivity = value
 
 	var motion_accum := 0.0
+
+	func _init(
+		_display_name := "",
+		_group := "",
+		_global := true,
+		_action_name := &"",
+		_default_mouse_dir := Vector2.RIGHT,
+		_default_sensitivity := 0.1
+	) -> void:
+		super(_display_name, _group, _global)
+		action_name = _action_name
+		default_mouse_dir = _default_mouse_dir
+		default_sensitivity = _default_sensitivity
 
 	func get_action_distance(event: InputEvent, exact_match := false) -> float:
 		if event is InputEventMouseMotion and Input.is_action_pressed(action_name, exact_match):
 			var relative := (event as InputEventMouseMotion).relative
-			var delta := relative.dot(mouse_dir.normalized()) * distance
+			var delta := relative.dot(mouse_dir.normalized()) * sensitivity
 			return delta
 		return 0.0
 
 	func get_action_distance_int(event: InputEvent, exact_match := false) -> int:
 		if event is InputEventMouseMotion and Input.is_action_pressed(action_name, exact_match):
 			var relative := (event as InputEventMouseMotion).relative
-			var delta := relative.dot(mouse_dir.normalized()) * distance
+			var delta := relative.dot(mouse_dir.normalized()) * sensitivity
 			motion_accum += delta
 
 			var step := int(motion_accum)
@@ -81,14 +95,14 @@ class MouseMovementInputAction:
 
 	func restore_to_default() -> void:
 		mouse_dir = default_mouse_dir
-		distance = default_distance
+		sensitivity = default_sensitivity
 
 	func serialize() -> Dictionary:
-		return {"mouse_dir": mouse_dir, "distance": distance}
+		return {"mouse_dir": mouse_dir, "sensitivity": sensitivity}
 
 	func deserialize(dict: Dictionary) -> void:
 		mouse_dir = dict.get("mouse_dir", mouse_dir)
-		distance = dict.get("distance", distance)
+		sensitivity = dict.get("sensitivity", sensitivity)
 
 
 class InputGroup:
@@ -156,6 +170,7 @@ func change_profile(index: int) -> void:
 					input_action.deserialize(mm_options)
 				else:
 					input_action.restore_to_default()
+	profile_switched.emit(selected_profile)
 
 
 func change_action(action_name: String) -> void:

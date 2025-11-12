@@ -46,6 +46,7 @@ func _ready() -> void:
 	if tool_slot.button == MOUSE_BUTTON_RIGHT:
 		_update_mm_action("mm_change_brush_size")
 		Keychain.action_changed.connect(_update_mm_action)
+		Keychain.profile_switched.connect(func(_prof): _update_mm_action("mm_change_brush_size"))
 	else:
 		_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
 	Global.cel_switched.connect(update_brush)
@@ -865,5 +866,5 @@ func _update_mm_action(action_name: String) -> void:
 	var new_mm_action := Keychain.MouseMovementInputAction.new()
 	new_mm_action.action_name = &"mm_change_brush_size"
 	new_mm_action.mouse_dir = _mm_action.mouse_dir
-	new_mm_action.distance = _mm_action.distance
+	new_mm_action.sensitivity = _mm_action.sensitivity
 	_mm_action = new_mm_action
