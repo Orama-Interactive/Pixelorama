@@ -337,6 +337,8 @@ func _on_ShortcutTree_item_activated() -> void:
 	var selected_item: TreeItem = tree.get_selected()
 	if selected_item.get_button_count(0) > 0 and !selected_item.is_button_disabled(0, 0):
 		_on_shortcut_tree_button_clicked(tree.get_selected(), 0, 0, 0)
+	elif selected_item.get_button_count(0) == 0:  # Group item
+		selected_item.collapsed = not selected_item.collapsed
 
 
 func _on_ShortcutTypeMenu_id_pressed(id: int) -> void:
