@@ -270,9 +270,8 @@ func _get_auto_display_scale() -> float:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
 		return 1.5  # Likely a hiDPI display, but we aren't certain due to the returned DPI.
-	elif smallest_dimension <= 800:
-		# Small loDPI display. Use a smaller display scale so that editor elements fit more easily.
-		return 0.75
+	# TODO: Return 0.75 if smallest_dimension <= 800, once we make icons looks good
+	# when scaled to non-integer display scale values. Might need SVGs.
 	return 1.0
 
 
