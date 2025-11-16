@@ -54,6 +54,7 @@ func _on_Spacing_value_changed(value: Vector2) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	super(event)
 	var overwrite_button: CheckBox = $Overwrite
 
 	if event.is_action_pressed("change_tool_mode"):

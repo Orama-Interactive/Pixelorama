@@ -147,7 +147,8 @@ func draw_start(pos: Vector2i) -> void:
 			found_cel = true
 	if not found_cel:
 		return
-
+	if DisplayServer.is_touchscreen_available():
+		cursor_move(pos)
 	if is_instance_valid(_cel.selected):
 		# Needs canvas.current_pixel, because draw_start()'s position is floored
 		_cel.selected.applying_gizmos = Global.canvas.gizmos_3d.get_hovering_gizmo(
@@ -246,7 +247,7 @@ func _cel_switched() -> void:
 
 func _new_object_popup_id_pressed(id: int) -> void:
 	if id == Cel3DObject.Type.IMPORTED:
-		load_model_dialog.popup_centered()
+		load_model_dialog.popup_centered_clamped()
 		Global.dialog_open(true, true)
 	else:
 		_add_object(id)

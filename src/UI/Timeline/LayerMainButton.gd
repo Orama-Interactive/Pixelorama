@@ -6,7 +6,14 @@ var layer_index := 0
 var hierarchy_depth_pixel_shift := 16
 
 
+func _ready() -> void:
+	if DisplayServer.is_touchscreen_available():
+		mouse_filter = Control.MOUSE_FILTER_PASS
+
+
 func _get_drag_data(_position: Vector2) -> Variant:
+	if DisplayServer.is_touchscreen_available() and not button_pressed:
+		return null
 	var layers := _get_layer_indices()
 	for layer_i in layers:  # Add child layers, if we have selected groups
 		var layer := Global.current_project.layers[layer_i]

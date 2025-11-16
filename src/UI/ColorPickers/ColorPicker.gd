@@ -24,12 +24,25 @@ var swatches_button: HBoxContainer
 var color_slider_types_hbox: HBoxContainer
 var color_sliders_grid: GridContainer
 var _skip_color_picker_update := false
+
 @onready var color_picker := %ColorPicker as ColorPicker
 @onready var color_buttons := %ColorButtons as HBoxContainer
 @onready var left_color_rect := %LeftColorRect as ColorRect
 @onready var right_color_rect := %RightColorRect as ColorRect
 @onready var average_color := %AverageColor as ColorRect
 @onready var expand_button: Button = $ScrollContainer/VerticalContainer/ExpandButton
+
+@onready
+var _mm_change_hue := Keychain.actions[&"mm_color_change_hue"] as Keychain.MouseMovementInputAction
+@onready var _mm_change_sat := (
+	Keychain.actions[&"mm_color_change_saturation"] as Keychain.MouseMovementInputAction
+)
+@onready var _mm_change_value := (
+	Keychain.actions[&"mm_color_change_value"] as Keychain.MouseMovementInputAction
+)
+@onready var _mm_change_alpha := (
+	Keychain.actions[&"mm_color_change_alpha"] as Keychain.MouseMovementInputAction
+)
 
 
 func _ready() -> void:
@@ -105,6 +118,26 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_instance_valid(left_color_rect):
 		_average(left_color_rect.color, right_color_rect.color)
+
+
+func _input(event: InputEvent) -> void:
+	var hue_value := _mm_change_hue.get_action_distance(event)
+	var sat_value := _mm_change_sat.get_action_distance(event)
+	var value_value := _mm_change_value.get_action_distance(event)
+	var alpha_value := _mm_change_alpha.get_action_distance(event)
+	if (
+		is_zero_approx(hue_value)
+		and is_zero_approx(sat_value)
+		and is_zero_approx(value_value)
+		and is_zero_approx(alpha_value)
+	):
+		return
+	var c: Color = Tools._slots[Tools.picking_color_for].color
+	c.h += hue_value
+	c.s += sat_value
+	c.v += value_value
+	c.a += alpha_value
+	Tools.assign_color(c, Tools.picking_color_for, false)
 
 
 func _on_color_picker_color_changed(color: Color) -> void:

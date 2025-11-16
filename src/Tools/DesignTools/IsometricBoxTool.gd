@@ -3,6 +3,7 @@ extends BaseDrawTool
 enum BoxState { SIDE_A, SIDE_GAP, SIDE_B, H, READY }
 enum EdgeBlend { TOOL_COLOR, ADJUSTED_AVERAGE, BLEND_INTERFACE, NONE }
 
+var text_server := TextServerManager.get_primary_interface()
 var _fill_inside := false  ## When true, the inside area of the curve gets filled.
 var _thickness := 1  ## The thickness of the Edge.
 var _drawing := false  ## Set to true when shape is being drawn.
@@ -142,9 +143,12 @@ func _input(event: InputEvent) -> void:
 			else:
 				_drawing = false
 				_clear()
+	else:
+		var brush_size_value := _mm_action.get_action_distance_int(event)
+		$ThicknessSlider.value += brush_size_value
 
 
-func cursor_move(pos: Vector2i):
+func cursor_move(pos: Vector2i) -> void:
 	super.cursor_move(pos)
 	if Global.mirror_view:
 		pos.x = Global.current_project.size.x - pos.x - 1
@@ -153,7 +157,7 @@ func cursor_move(pos: Vector2i):
 			_origin += pos - _last_pixel
 			for i in _control_pts.size():
 				_control_pts[i] = _control_pts[i] + pos - _last_pixel
-		## This is used for preview
+		# This is used for preview
 		pos = box_constraint(_last_pixel, pos, _current_state)
 	_last_pixel = angle_constraint(Vector2(pos))
 
@@ -165,6 +169,7 @@ func draw_start(pos: Vector2i) -> void:
 		_picking_color = true
 		_pick_color(pos)
 		return
+	cursor_move(pos)
 	pos = angle_constraint(Vector2(pos))
 	_picking_color = false  # fixes _picking_color being true indefinitely after we pick color
 	Global.canvas.selection.transform_content_confirm()
@@ -231,6 +236,7 @@ func draw_preview() -> void:
 		var str_val := str(
 			prefix, ": ", length + 1 if box_points.size() == 2 else length, " ", "px"
 		)
+		str_val = text_server.format_number(str_val)
 		# We are using the measurementsnode for measurement based previews.
 		Global.canvas.measurements.draw.connect(
 			_preview_updater.bind(current_pixel, box_points[-1], str_val)

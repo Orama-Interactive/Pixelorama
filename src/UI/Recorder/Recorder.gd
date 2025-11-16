@@ -164,7 +164,7 @@ func _on_SpinBox_value_changed(value: float) -> void:
 
 
 func _on_Choose_pressed() -> void:
-	_path_dialog.popup_centered()
+	_path_dialog.popup_centered_clamped()
 	_path_dialog.current_dir = chosen_dir
 
 

@@ -117,7 +117,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey:
 		_move_with_arrow_keys(event)
-	var mouse_pos := canvas.current_pixel
+	var mouse_pos := get_local_mouse_position()
 	if Global.mirror_view:
 		mouse_pos.x = Global.current_project.size.x - mouse_pos.x
 	var hovered_handle := _get_hovered_handle(mouse_pos)

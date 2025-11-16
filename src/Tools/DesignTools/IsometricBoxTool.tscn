@@ -18,6 +18,7 @@ global_decrement_action = "brush_size_decrement"
 
 [node name="FillCheckbox" type="CheckBox" parent="." index="3"]
 layout_mode = 2
+size_flags_horizontal = 0
 tooltip_text = "Fills the drawn shape with color, instead of drawing a hollow shape"
 mouse_default_cursor_shape = 2
 text = "Fill Shape"
@@ -32,6 +33,7 @@ text = "Edge Color"
 [node name="EdgeBehavior" type="OptionButton" parent="FillOptions" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 selected = 0
 fit_to_longest_item = false
 item_count = 4
@@ -48,22 +50,18 @@ popup/item_3/id = 3
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
 text = "From other tool"
 
-[node name="LabelContainer" type="HBoxContainer" parent="FillOptions" index="3"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="FillOptions/LabelContainer" index="0"]
+[node name="LeftFaceLabel" type="Label" parent="FillOptions" index="3"]
 layout_mode = 2
 text = "Left Face"
-
-[node name="HSeparator" type="HSeparator" parent="FillOptions/LabelContainer" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="LeftShadeOption" type="OptionButton" parent="FillOptions" index="4"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 selected = 1
 item_count = 2
 popup/item_0/text = "Lighten"
@@ -79,20 +77,14 @@ step = 0.01
 value = 0.5
 prefix = "Amount:"
 
-[node name="LabelContainer2" type="HBoxContainer" parent="FillOptions" index="6"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="FillOptions/LabelContainer2" index="0"]
+[node name="RightFaceLabel" type="Label" parent="FillOptions" index="6"]
 layout_mode = 2
 text = "Right Face"
-
-[node name="HSeparator" type="HSeparator" parent="FillOptions/LabelContainer2" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="RightShadeOption" type="OptionButton" parent="FillOptions" index="7"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Lighten"

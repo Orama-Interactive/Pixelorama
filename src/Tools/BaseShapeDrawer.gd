@@ -84,6 +84,9 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = true
 		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
+	else:
+		var brush_size_value := _mm_action.get_action_distance_int(event)
+		$ThicknessSlider.value += brush_size_value
 
 
 func draw_start(pos: Vector2i) -> void:

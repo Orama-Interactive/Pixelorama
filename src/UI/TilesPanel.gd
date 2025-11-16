@@ -353,7 +353,7 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 	if index == 0:  # Properties
 		tile_probability_slider.value = selected_tile.probability
 		tile_user_data_text_edit.text = selected_tile.user_data
-		tile_properties.popup_centered()
+		tile_properties.popup_centered_clamped()
 	if index == 1:  # Edit tile
 		_modify_texture_resource(tile_index_menu_popped, current_tileset, Global.current_project)
 	elif index == 2:  # Delete

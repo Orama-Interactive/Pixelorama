@@ -3,14 +3,16 @@ extends Resource
 
 @export var name := ""
 @export var customizable := true
-@export var bindings := {}
+@export var bindings: Dictionary[StringName, Array] = {}
+@export var mouse_movement_options: Dictionary[StringName, Dictionary] = {}
 
 
 func _init() -> void:
 	bindings = bindings.duplicate(true)
+	fill_bindings(false)
 
 
-func fill_bindings() -> void:
+func fill_bindings(should_save := true) -> void:
 	var unnecessary_actions = bindings.duplicate()  # Checks if the profile has any unused actions
 	for action in InputMap.get_actions():
 		if not action in bindings:
@@ -18,13 +20,20 @@ func fill_bindings() -> void:
 		unnecessary_actions.erase(action)
 	for action in unnecessary_actions:
 		bindings.erase(action)
+	if should_save:
+		save()
+
+
+func copy_bindings_from(other_profile: ShortcutProfile) -> void:
+	bindings = other_profile.bindings.duplicate(true)
+	mouse_movement_options = other_profile.mouse_movement_options.duplicate(true)
 	save()
 
 
-func change_action(action: String) -> void:
+func change_action(action_name: String) -> void:
 	if not customizable:
 		return
-	bindings[action] = InputMap.action_get_events(action)
+	bindings[action_name] = InputMap.action_get_events(action_name)
 	save()
 
 

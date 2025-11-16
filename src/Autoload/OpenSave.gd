@@ -10,6 +10,7 @@ const SHADERS_DIRECTORY := "user://shaders"
 const FONT_FILE_EXTENSIONS: PackedStringArray = [
 	"ttf", "otf", "woff", "woff2", "pfb", "pfm", "fnt", "font"
 ]
+const GifImporter := preload("uid://bml2q6e8rr82h")
 
 var current_session_backup := ""
 var had_backups_on_startup := false
@@ -102,6 +103,9 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		var new_path := Global.FONTS_DIR_PATH.path_join(file.get_file())
 		DirAccess.copy_absolute(file, new_path)
 		Global.loaded_fonts.append(font_file)
+	elif file_ext == "gif":
+		if not open_gif_file(file):
+			handle_loading_video(file)
 	elif file_ext == "ora":
 		open_ora_file(file)
 	elif file_ext == "kra":
@@ -121,6 +125,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 			# No error - this is an APNG!
 			if typeof(apng_res[1]) == TYPE_ARRAY:
 				handle_loading_aimg(file, apng_res[1])
+			elif typeof(apng_res[1]) == TYPE_STRING:
+				print(apng_res[1])
 			return
 		# Attempt to load as a regular image.
 		var image := Image.load_from_file(file)
@@ -194,7 +200,7 @@ func handle_loading_image(file: String, image: Image, force_import_dialog := fal
 	preview_dialog.path = file
 	preview_dialog.image = image
 	Global.control.add_child(preview_dialog)
-	preview_dialog.popup_centered()
+	preview_dialog.popup_centered_clamped()
 	Global.dialog_open(true)
 
 
@@ -1064,6 +1070,41 @@ func open_font_file(path: String) -> FontFile:
 	return font_file
 
 
+func open_gif_file(path: String) -> bool:
+	var file := FileAccess.open(path, FileAccess.READ)
+	var importer := GifImporter.new(file)
+	var result = importer.import()
+	file.close()
+	if result != GifImporter.Error.OK:
+		printerr("An error has occurred while importing: %d" % [result])
+		return false
+	var imported_frames := importer.frames
+	if imported_frames.size() == 0:
+		printerr("An error has occurred while importing the gif")
+		return false
+	var new_project := Project.new([], path.get_file().get_basename())
+	var size := Vector2i(importer.get_logical_screen_width(), importer.get_logical_screen_height())
+	new_project.size = size
+	new_project.fps = 1.0
+	var layer := PixelLayer.new(new_project)
+	new_project.layers.append(layer)
+	for gif_frame in imported_frames:
+		var frame_image := gif_frame.image
+		frame_image.crop(new_project.size.x, new_project.size.y)
+		var cel := layer.new_cel_from_image(frame_image)
+		var delay := gif_frame.delay
+		if delay <= 0.0:
+			delay = 0.1
+		var frame := Frame.new([cel], delay)
+		new_project.frames.append(frame)
+	new_project.save_path = path.get_basename() + ".pxo"
+	new_project.file_name = new_project.name
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+	return true
+
+
 # Based on https://www.openraster.org/
 func open_ora_file(path: String) -> void:
 	var zip_reader := ZIPReader.new()
@@ -1256,6 +1297,8 @@ func _on_Autosave_timeout() -> void:
 			project.backup_path = (current_session_backup.path_join(
 				"(" + p_name + " backup)-" + str(Time.get_unix_time_from_system()) + "-%s" % i
 			))
+		if not DirAccess.dir_exists_absolute(current_session_backup):
+			DirAccess.make_dir_recursive_absolute(current_session_backup)
 		save_pxo_file(project.backup_path, true, false, project)
 
 

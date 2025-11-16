@@ -911,7 +911,7 @@ func _on_add_layer_pressed() -> void:
 
 func on_add_layer_list_id_pressed(id: int) -> void:
 	if id == Global.LayerTypes.TILEMAP:
-		new_tile_map_layer_dialog.popup_centered()
+		new_tile_map_layer_dialog.popup_centered_clamped()
 	else:
 		var project := Global.current_project
 		var layer: BaseLayer
@@ -1506,7 +1506,7 @@ func project_cel_removed(frame: int, layer: int) -> void:
 
 
 func _on_layer_fx_pressed() -> void:
-	layer_effect_settings.popup_centered()
+	layer_effect_settings.popup_centered_clamped()
 	Global.dialog_open(true)
 
 
