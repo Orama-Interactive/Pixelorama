@@ -8,11 +8,17 @@ var preferences: Array[Preference] = [
 		"quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "button_pressed", false
 	),
 	Preference.new("ffmpeg_path", "Startup/StartupContainer/FFMPEGPath", "text", ""),
-	Preference.new("shrink", "%ShrinkSlider", "value", 1.0),
+	Preference.new("shrink", "%ShrinkSlider", "value", Global.auto_content_scale_factor),
 	Preference.new("theme_font_index", "%FontOptionButton", "selected", 1),
 	Preference.new("font_size", "%FontSizeSlider", "value", 16),
 	Preference.new(
 		"dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed", true
+	),
+	Preference.new(
+		"screen_orientation",
+		"Interface/InterfaceOptions/ScreenOrientationOptionButton",
+		"selected",
+		DisplayServer.SCREEN_SENSOR
 	),
 	Preference.new(
 		"show_notification_label",
@@ -41,6 +47,12 @@ var preferences: Array[Preference] = [
 	),
 	Preference.new(
 		"custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color", Color.GRAY
+	),
+	Preference.new(
+		"single_tool_mode",
+		"Tools/ToolOptions/SingleToolModeCheckBox",
+		"button_pressed",
+		DisplayServer.is_touchscreen_available()
 	),
 	Preference.new(
 		"share_options_between_tools",
@@ -283,6 +295,8 @@ func _ready() -> void:
 		get_tree().call_group(&"NoSandbox", &"free")
 	if not OS.has_feature("pc"):
 		get_tree().call_group(&"DesktopOnly", &"free")
+	if not OS.has_feature("mobile"):
+		get_tree().call_group(&"MobileOnly", &"free")
 	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE):
 		get_tree().call_group(&"NativeFileDialog", &"free")
 
@@ -350,7 +364,11 @@ func _ready() -> void:
 				)
 
 		var value = Global.get(pref.prop_name)
-		node.set(pref.value_type, value)
+		if node is OptionButton:
+			var item_index = node.get_item_index(value)
+			node.set(pref.value_type, item_index)
+		else:
+			node.set(pref.value_type, value)
 		var is_default: bool = value == pref.default_value
 		# This is needed because color_changed doesn't fire if the color changes in code
 		if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
@@ -362,6 +380,9 @@ func _ready() -> void:
 func _on_Preference_value_changed(value, pref: Preference, button: RestoreDefaultButton) -> void:
 	var prop := pref.prop_name
 	var default_value = pref.default_value
+	var node := right_side.get_node(pref.node_path)
+	if node is OptionButton:
+		value = node.get_item_id(value)
 	Global.set(prop, value)
 	if not pref.require_restart:
 		Global.config_cache.set_value("preferences", prop, value)
@@ -425,7 +446,7 @@ func _on_List_item_selected(index: int) -> void:
 func _on_shrink_apply_button_pressed() -> void:
 	Global.control.set_display_scale()
 	hide()
-	popup_centered(Vector2(600, 400))
+	popup_centered_clamped(Vector2(600, 400))
 	Global.dialog_open(true)
 	await get_tree().process_frame
 	Global.camera.fit_to_frame(Global.current_project.size)
@@ -451,7 +472,7 @@ func _on_language_pressed(index: int) -> void:
 
 
 func _on_reset_button_pressed() -> void:
-	$ResetOptionsConfirmation.popup_centered()
+	$ResetOptionsConfirmation.popup_centered_clamped()
 
 
 func _on_reset_options_confirmation_confirmed() -> void:
@@ -464,9 +485,10 @@ func _on_reset_options_confirmation_confirmed() -> void:
 		for pref in preferences:
 			var property_name := pref.prop_name
 			var default_value = pref.default_value
-			var node := right_side.get_node(pref.node_path)
-			if is_instance_valid(node):
-				node.set(pref.value_type, default_value)
+			if right_side.has_node(pref.node_path):
+				var node := right_side.get_node(pref.node_path)
+				if is_instance_valid(node):
+					node.set(pref.value_type, default_value)
 			Global.set(property_name, default_value)
 		_on_shrink_apply_button_pressed()
 		_on_font_size_apply_button_pressed()
@@ -489,6 +511,14 @@ func _on_reset_options_confirmation_confirmed() -> void:
 		for extension in extensions_list:
 			extensions_node.uninstall_extension(extension)
 		Global.config_cache.erase_section("extensions")
+	# Remove all backups
+	if %RemoveAllBackups.button_pressed:
+		for session_folder in DirAccess.get_directories_at(OpenSave.BACKUPS_DIRECTORY):
+			var folder_path := OpenSave.BACKUPS_DIRECTORY.path_join(session_folder)
+			for file in DirAccess.get_files_at(folder_path):
+				var file_path := folder_path.path_join(file)
+				DirAccess.remove_absolute(file_path)
+			DirAccess.remove_absolute(folder_path)
 	# Clear recent files list
 	if %ClearRecentFiles.button_pressed:
 		Global.config_cache.erase_section_key("data", "last_project_path")

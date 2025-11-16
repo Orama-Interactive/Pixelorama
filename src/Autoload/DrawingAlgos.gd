@@ -74,7 +74,8 @@ func blend_layers(
 				include = false
 		var cel := frame.cels[ordered_index]
 		if DisplayServer.get_name() == "headless":
-			blend_layers_headless(image, project, layer, cel, origin)
+			if include:
+				blend_layers_headless(image, project, layer, cel, origin)
 		else:
 			if layer.is_blender():
 				var cel_image := (layer as GroupLayer).blend_children(frame)

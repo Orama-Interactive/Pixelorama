@@ -48,7 +48,7 @@ func _on_tab_close_pressed(tab: int) -> void:
 	if Global.projects[tab].has_changed:
 		if !unsaved_changes_dialog.confirmed.is_connected(delete_tab):
 			unsaved_changes_dialog.confirmed.connect(delete_tab.bind(tab))
-		unsaved_changes_dialog.popup_centered()
+		unsaved_changes_dialog.popup_centered_clamped()
 		Global.dialog_open(true)
 	else:
 		delete_tab(tab)

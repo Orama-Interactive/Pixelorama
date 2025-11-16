@@ -2,11 +2,11 @@ extends Panel
 
 enum ColorModes { RGBA, INDEXED }
 
-const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
+const DOCS_URL := "https://www.pixelorama.org/Introduction/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v115---2025-09-06"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v116---2025-10-31"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -34,7 +34,7 @@ var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
 var project_properties_dialog := Dialog.new("res://src/UI/Dialogs/ProjectProperties.tscn")
 var preferences_dialog := Dialog.new("res://src/Preferences/PreferencesDialog.tscn")
 var modify_selection := Dialog.new("res://src/UI/Dialogs/ModifySelection.tscn")
-var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetZoomImage.tscn")
+var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetScaleImage.tscn")
 var scale_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn")
 var resize_canvas_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn")
 var mirror_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn")
@@ -95,7 +95,7 @@ class Dialog:
 	func popup(dialog_size := Vector2i.ZERO) -> void:
 		if not is_instance_valid(node):
 			instantiate_scene()
-		node.popup_centered(dialog_size)
+		node.popup_centered_clamped(dialog_size)
 		var is_file_dialog := node is FileDialog
 		Global.dialog_open(true, is_file_dialog)
 
@@ -497,7 +497,7 @@ func _setup_color_mode_submenu(item: String) -> void:
 func _setup_effects_menu() -> void:
 	_set_menu_shortcut(&"reapply_last_effect", effects_menu, 0, "Re-apply last effect")
 	effects_menu.set_item_disabled(0, true)
-	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset/Zoom Image")
+	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset & Scale Image")
 	_set_menu_shortcut(&"mirror_image", effects_transform_submenu, 1, "Mirror Image")
 	_set_menu_shortcut(&"rotate_image", effects_transform_submenu, 2, "Rotate Image")
 	effects_transform_submenu.id_pressed.connect(_on_effects_transform_submenu_id_pressed)
@@ -664,7 +664,7 @@ func _handle_metadata(id: int, popup_menu: PopupMenu) -> void:
 
 
 func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
-	dialog.popup_centered(dialog_size)
+	dialog.popup_centered_clamped(dialog_size)
 	var is_file_dialog := dialog is FileDialog
 	Global.dialog_open(true, is_file_dialog)
 
@@ -742,7 +742,7 @@ func edit_menu_id_pressed(id: int) -> void:
 		Global.EditMenu.REDO:
 			Global.current_project.commit_redo()
 		Global.EditMenu.UNDO_HISTORY:
-			undo_history_dialog.popup_centered()
+			undo_history_dialog.popup_centered_clamped()
 		Global.EditMenu.COPY:
 			Global.canvas.selection.copy()
 		Global.EditMenu.CUT:
@@ -752,6 +752,10 @@ func edit_menu_id_pressed(id: int) -> void:
 		Global.EditMenu.PASTE_IN_PLACE:
 			Global.canvas.selection.paste(true)
 		Global.EditMenu.PASTE_FROM_CLIPBOARD:
+			if not DisplayServer.clipboard_has_image():
+				var clipboard := DisplayServer.clipboard_get()
+				if clipboard.begins_with("lospec-palette://"):
+					Palettes.import_lospec_palette(clipboard)
 			Global.canvas.selection.paste_from_clipboard()
 		Global.EditMenu.DELETE:
 			Global.canvas.selection.delete()
@@ -910,9 +914,9 @@ func _layouts_submenu_id_pressed(id: int) -> void:
 		set_layout(id)
 	elif id == layout_count + 1:
 		layout_name_line_edit.text = "New layout"
-		add_layout_confirmation.popup_centered()
+		add_layout_confirmation.popup_centered_clamped()
 	elif id == layout_count + 2:
-		delete_layout_confirmation.popup_centered()
+		delete_layout_confirmation.popup_centered_clamped()
 	elif id == layout_count + 3:
 		Global.layouts[selected_layout].reset()
 

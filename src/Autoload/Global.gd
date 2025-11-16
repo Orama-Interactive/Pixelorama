@@ -18,6 +18,7 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
+signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
 
@@ -222,6 +223,8 @@ var integer_zoom := false:
 
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
+## The default value of the scale of the interface.
+var auto_content_scale_factor := 1.0
 var theme_font := loaded_fonts[theme_font_index]:
 	set(value):
 		theme_font = value
@@ -242,6 +245,11 @@ var theme_font_index := 1:
 				theme_font = loaded_fonts[1]  # Fall back to Roboto if out of bounds
 ## Found in Preferences. The font size used by the interface.
 var font_size := 16
+## Found in Preferences. The orientation of the screen, used by mobile devices.
+var screen_orientation := DisplayServer.SCREEN_SENSOR:
+	set(value):
+		screen_orientation = value
+		DisplayServer.screen_set_orientation(screen_orientation)
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
 ## Found in Preferences. If [code]true[/code], notification labels appear.
@@ -309,6 +317,12 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences.
+## If enabled, the right mouse button is always mapped to the same tool as the left button.
+var single_tool_mode := DisplayServer.is_touchscreen_available():
+	set(value):
+		single_tool_mode = value
+		single_tool_mode_changed.emit(single_tool_mode)
 ## Found in Preferences.
 var share_options_between_tools := false:
 	set(value):
@@ -971,7 +985,37 @@ func _initialize_keychain() -> void:
 		&"tile_rotate_left": Keychain.InputAction.new("", "Tileset panel", false),
 		&"tile_rotate_right": Keychain.InputAction.new("", "Tileset panel", false),
 		&"tile_flip_horizontal": Keychain.InputAction.new("", "Tileset panel", false),
-		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false)
+		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false),
+		&"mm_change_brush_size":
+		Keychain.MouseMovementInputAction.new(
+			"Change brush size", "Mouse drag", false, &"mm_change_brush_size"
+		),
+		&"mm_color_change_hue":
+		Keychain.MouseMovementInputAction.new(
+			"Color change hue", "Mouse drag", false, &"mm_color_change_hue", Vector2.DOWN, 0.001
+		),
+		&"mm_color_change_saturation":
+		Keychain.MouseMovementInputAction.new(
+			"Color change saturation",
+			"Mouse drag",
+			false,
+			&"mm_color_change_saturation",
+			Vector2.RIGHT,
+			0.001
+		),
+		&"mm_color_change_value":
+		Keychain.MouseMovementInputAction.new(
+			"Color change value", "Mouse drag", false, &"mm_color_change_value", Vector2.DOWN, 0.001
+		),
+		&"mm_color_change_alpha":
+		Keychain.MouseMovementInputAction.new(
+			"Color change alpha",
+			"Mouse drag",
+			false,
+			&"mm_color_change_alpha",
+			Vector2.RIGHT,
+			0.001
+		),
 	}
 
 	Keychain.groups = {
@@ -998,7 +1042,8 @@ func _initialize_keychain() -> void:
 		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
-		"Tileset panel": Keychain.InputGroup.new()
+		"Tileset panel": Keychain.InputGroup.new(),
+		"Mouse drag": Keychain.InputGroup.new(),
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 
@@ -1106,7 +1151,7 @@ func dialog_open(open: bool, is_file_dialog := false) -> void:
 
 func popup_error(text: String) -> void:
 	error_dialog.set_text(text)
-	error_dialog.popup_centered()
+	error_dialog.popup_centered_clamped()
 	dialog_open(true)
 
 

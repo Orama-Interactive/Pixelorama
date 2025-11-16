@@ -14,7 +14,7 @@ shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(24, 24)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
@@ -76,12 +76,14 @@ stretch_mode = 5
 [node name="TransparentChecker" parent="CelTexture" instance=ExtResource("2_mi8wp")]
 show_behind_parent = true
 material = SubResource("1")
+layout_direction = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ZIndexIndicator" type="TextureRect" parent="."]
 visible = false

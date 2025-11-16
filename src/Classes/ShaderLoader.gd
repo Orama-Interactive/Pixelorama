@@ -543,7 +543,7 @@ static func _create_simple_texture_ui(
 	file_dialog.use_native_dialog = Global.use_native_file_dialogs
 	var button := Button.new()
 	button.text = "Load texture"
-	button.pressed.connect(file_dialog.popup_centered)
+	button.pressed.connect(file_dialog.popup_centered_clamped)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	var mod_button := Button.new()
@@ -622,7 +622,7 @@ static func _create_noise_texture_ui(
 	parent_node.add_child(noise_generator_dialog)
 	var button := Button.new()
 	button.text = "Generate noise"
-	button.pressed.connect(noise_generator_dialog.popup_centered)
+	button.pressed.connect(noise_generator_dialog.popup_centered_clamped)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	hbox.add_child(button)

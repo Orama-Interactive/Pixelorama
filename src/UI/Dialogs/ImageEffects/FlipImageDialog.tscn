@@ -7,7 +7,7 @@
 title = "Mirror Image"
 script = ExtResource("1")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2"]
 offset_bottom = 288.0
 
 [node name="ShowAnimate" parent="VBoxContainer" index="0"]

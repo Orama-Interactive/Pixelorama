@@ -126,6 +126,7 @@ func _init() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	super(event)
 	var options: OptionButton = $LightenDarken
 
 	if event.is_action_pressed("change_tool_mode"):

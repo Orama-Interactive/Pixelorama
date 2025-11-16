@@ -63,7 +63,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	get_window().gui_release_focus()
+	if not DisplayServer.is_touchscreen_available():
+		get_window().gui_release_focus()
 	if !Global.can_draw:
 		drag = false
 		return
@@ -229,6 +230,8 @@ func _rotation_slider_value_changed(value: float) -> void:
 
 
 func _has_selection_tool() -> bool:
+	if not Global.current_project.has_selection:
+		return false
 	for slot in Tools._slots.values():
 		if slot.tool_node is BaseSelectionTool:
 			return true

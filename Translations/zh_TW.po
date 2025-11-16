@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2025-10-02 22:12\n"
+"PO-Revision-Date: 2025-10-14 14:10\n"
 
 msgid "OK"
 msgstr "確定"
@@ -136,6 +136,14 @@ msgstr "取消"
 
 msgid "Redo"
 msgstr "復原"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr ""
 
 msgid "Copy"
 msgstr "複製"
@@ -2407,14 +2415,24 @@ msgstr "鏡像"
 msgid "Horizontal"
 msgstr "水平"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "開啟水平鏡像"
 
 msgid "Vertical"
 msgstr "垂直"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "開啟垂直鏡像"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"

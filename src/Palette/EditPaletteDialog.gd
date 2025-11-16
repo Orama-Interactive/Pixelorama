@@ -68,7 +68,7 @@ func open(current_palette: Palette) -> void:
 
 		# Stop all inputs in the rest of the app
 		Global.dialog_open(true)
-		popup_centered()
+		popup_centered_clamped()
 
 
 ## Shows/hides a warning when palette size is being reduced
@@ -103,12 +103,12 @@ func _on_EditPaletteDialog_confirmed() -> void:
 
 func _on_EditPaletteDialog_custom_action(action: StringName) -> void:
 	if action == DELETE_ACTION:
-		delete_confirmation.popup_centered()
+		delete_confirmation.popup_centered_clamped()
 	elif action == EXPORT_ACTION:
 		if OS.has_feature("web"):
 			exported.emit()
 		else:
-			export_file_dialog.popup_centered()
+			export_file_dialog.popup_centered_clamped()
 
 
 func _on_delete_confirmation_confirmed() -> void:

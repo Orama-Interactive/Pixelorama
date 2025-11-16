@@ -51,7 +51,7 @@ func prepare_and_show(frame_no: int) -> void:
 	# Populate tag list
 	refresh_list()
 	title = str("Import Tag (After Frame ", frame + 1, ")")
-	popup_centered()
+	popup_centered_clamped()
 
 
 func _on_FromProject_changed(id: int) -> void:

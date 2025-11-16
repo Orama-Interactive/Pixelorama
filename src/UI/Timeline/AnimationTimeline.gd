@@ -627,11 +627,25 @@ func move_frames(frame: int, rate: int) -> void:
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 
+	# If current frame was part of the moved frames (select all  frames)
 	if project.current_frame in frame_indices:
+		var all_new_cels := []
+		# Select all the new frames so that it is easier to move/offset collectively if user wants
+		# To ease animation workflow, new current frame is the first copied frame instead of the last
+		var range_start := moved_frame_indices[-1]
+		var range_end := moved_frame_indices[0]
+		var frame_diff_sign := signi(range_end - range_start)
+		if frame_diff_sign == 0:
+			frame_diff_sign = 1
+		for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
+			for j in range(0, project.layers.size()):
+				var frame_layer := [i, j]
+				if !all_new_cels.has(frame_layer):
+					all_new_cels.append(frame_layer)
+		project.undo_redo.add_do_property(project, "selected_cels", all_new_cels)
 		project.undo_redo.add_do_method(project.change_cel.bind(frame + rate))
 	else:
 		project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame))
-
 	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -897,7 +911,7 @@ func _on_add_layer_pressed() -> void:
 
 func on_add_layer_list_id_pressed(id: int) -> void:
 	if id == Global.LayerTypes.TILEMAP:
-		new_tile_map_layer_dialog.popup_centered()
+		new_tile_map_layer_dialog.popup_centered_clamped()
 	else:
 		var project := Global.current_project
 		var layer: BaseLayer
@@ -1492,7 +1506,7 @@ func project_cel_removed(frame: int, layer: int) -> void:
 
 
 func _on_layer_fx_pressed() -> void:
-	layer_effect_settings.popup_centered()
+	layer_effect_settings.popup_centered_clamped()
 	Global.dialog_open(true)
 
 

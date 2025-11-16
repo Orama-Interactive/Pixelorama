@@ -85,13 +85,11 @@ func _input(event: InputEvent) -> void:
 			)
 		):
 			return
-	# Get the viewport's mouse position instead of the local mouse position to use warp_mouse
-	var tmp_position := get_viewport().get_mouse_position()
 	if mouse_movement != Vector2.ZERO:
+		var tmp_position := get_viewport().get_mouse_position()
 		tmp_position += mouse_movement * CURSOR_SPEED_RATE
 		get_viewport().warp_mouse(tmp_position)
-	var tmp_transform := get_canvas_transform().affine_inverse()
-	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
+	current_pixel = get_local_mouse_position()
 
 	sprite_changed_this_frame = false
 	Tools.handle_draw(Vector2i(current_pixel.floor()), event)

@@ -429,6 +429,7 @@ vertical_scroll_mode = 0
 [node name="AnimationTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools"]
 layout_mode = 2
