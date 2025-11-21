@@ -98,7 +98,9 @@ func draw_move(pos: Vector2i) -> void:
 		_has_been_dragged = true
 		var proj_mouse_pos := camera.project_position(pos, camera.position.z)
 		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.position.z)
-		layer_3d.node_change_transform(layer_3d.selected, proj_mouse_pos, proj_prev_mouse_pos, Global.canvas.gizmos_3d.applying_gizmos)
+		layer_3d.node_change_transform(
+			layer_3d.selected, proj_mouse_pos, proj_prev_mouse_pos, Global.canvas.gizmos_3d.applying_gizmos
+		)
 		_prev_mouse_pos = pos
 	sprite_changed_this_frame()
 

@@ -25,7 +25,7 @@ func size_changed(new_size: Vector2i) -> void:
 	await RenderingServer.frame_post_draw
 	var viewport_image := viewport.get_texture().get_image()
 	#viewport_image.convert(Image.FORMAT_RGBA8)
-	(image_texture as ImageTexture).update(viewport_image)
+	(image_texture as ImageTexture).set_image(viewport_image)
 
 # Overridden methods
 
