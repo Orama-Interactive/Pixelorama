@@ -663,10 +663,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
 ## The palette panel. It has the [param PalettePanel.gd] script attached.
 @onready var palette_panel: PalettePanel = control.find_child("Palettes")
-## The container of frame buttons
-@onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
-## The container of layer buttons
-@onready var layer_vbox: VBoxContainer = animation_timeline.find_child("LayerVBox")
 ## At runtime HBoxContainers containing cel buttons get added to it.
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
 ## The container of animation tags.

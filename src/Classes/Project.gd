@@ -7,8 +7,9 @@ signal removed
 signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
-signal timeline_updated
 signal fps_changed
+signal layers_updated
+signal frames_updated
 
 const INDEXED_MODE := Image.FORMAT_MAX + 1
 
@@ -611,20 +612,7 @@ func _animation_tags_changed(value: Array[AnimationTag]) -> void:
 		var tag_position := Global.tag_container.get_child_count() - 1
 		Global.tag_container.move_child(tag_c, tag_position)
 
-	_set_timeline_first_and_last_frames()
-
-
-func _set_timeline_first_and_last_frames() -> void:
-	# This is useful in case tags get modified DURING the animation is playing
-	# otherwise, this code is useless in this context, since these values are being set
-	# when the play buttons get pressed anyway
-	Global.animation_timeline.first_frame = 0
-	Global.animation_timeline.last_frame = frames.size() - 1
-	if Global.play_only_tags:
-		for tag in animation_tags:
-			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
-				Global.animation_timeline.first_frame = tag.from - 1
-				Global.animation_timeline.last_frame = mini(frames.size() - 1, tag.to - 1)
+	Global.animation_timeline.set_timeline_first_and_last_frames()
 
 
 func is_empty() -> bool:
@@ -785,7 +773,7 @@ func add_frames(new_frames: Array, indices: PackedInt32Array) -> void:
 		# Add frame
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
-	_update_frame_ui()
+	frames_updated.emit()
 
 
 func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in ascending order
@@ -804,7 +792,7 @@ func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in a
 		# Remove frame
 		frames.remove_at(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
-	_update_frame_ui()
+	frames_updated.emit()
 
 
 # from_indices and to_indicies should be in ascending order
@@ -819,7 +807,7 @@ func move_frames(from_indices: PackedInt32Array, to_indices: PackedInt32Array) -
 	for i in to_indices.size():
 		frames.insert(to_indices[i], removed_frames[i])
 		Global.animation_timeline.project_frame_added(to_indices[i])
-	_update_frame_ui()
+	frames_updated.emit()
 
 
 func swap_frame(a_index: int, b_index: int) -> void:
@@ -832,7 +820,7 @@ func swap_frame(a_index: int, b_index: int) -> void:
 	Global.animation_timeline.project_frame_added(a_index)
 	Global.animation_timeline.project_frame_removed(b_index)
 	Global.animation_timeline.project_frame_added(b_index)
-	_set_timeline_first_and_last_frames()
+	Global.animation_timeline.set_timeline_first_and_last_frames()
 
 
 func reverse_frames(frame_indices: PackedInt32Array) -> void:
@@ -848,7 +836,7 @@ func reverse_frames(frame_indices: PackedInt32Array) -> void:
 		Global.animation_timeline.project_frame_added(index)
 		Global.animation_timeline.project_frame_removed(reverse_index)
 		Global.animation_timeline.project_frame_added(reverse_index)
-	_set_timeline_first_and_last_frames()
+	Global.animation_timeline.set_timeline_first_and_last_frames()
 	change_cel(-1)
 
 
@@ -862,7 +850,7 @@ func add_layers(new_layers: Array, indices: PackedInt32Array, cels: Array) -> vo
 			frames[f].cels.insert(indices[i], cels[i][f])
 		new_layers[i].project = self
 		Global.animation_timeline.project_layer_added(indices[i])
-	_update_layer_ui()
+	layers_updated.emit()
 
 
 func remove_layers(indices: PackedInt32Array) -> void:
@@ -875,7 +863,7 @@ func remove_layers(indices: PackedInt32Array) -> void:
 			frame.cels[indices[i] - i].on_remove()
 			frame.cels.remove_at(indices[i] - i)
 		Global.animation_timeline.project_layer_removed(indices[i] - i)
-	_update_layer_ui()
+	layers_updated.emit()
 
 
 # from_indices and to_indicies should be in ascending order
@@ -903,7 +891,7 @@ func move_layers(
 		if Global.current_project == self:
 			Global.animation_timeline.project_layer_added(to_indices[i])
 	if Global.current_project == self:
-		_update_layer_ui()
+		layers_updated.emit()
 
 
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.
@@ -942,7 +930,7 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 		for f in frames.size():
 			frames[f].cels.insert(b.to[i], b_cels[i][f])
 		Global.animation_timeline.project_layer_added(b.to[i])
-	_update_layer_ui()
+	layers_updated.emit()
 
 
 ## Moves multiple cels between different frames, but on the same layer.
@@ -991,32 +979,6 @@ func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
 	Global.animation_timeline.project_cel_added(a_frame, a_layer)
 	Global.animation_timeline.project_cel_removed(b_frame, b_layer)
 	Global.animation_timeline.project_cel_added(b_frame, b_layer)
-
-
-func _update_frame_ui() -> void:
-	for f in frames.size():  # Update the frames and frame buttons
-		Global.frame_hbox.get_child(f).frame = f
-		Global.frame_hbox.get_child(f).text = str(f + 1)
-
-	for l in layers.size():  # Update the cel buttons
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).frame = f
-			cel_hbox.get_child(f).button_setup()
-	_set_timeline_first_and_last_frames()
-	timeline_updated.emit()
-
-
-## Update the layer indices and layer/cel buttons
-func _update_layer_ui() -> void:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer_index = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	timeline_updated.emit()
 
 
 ## Change the current reference image
