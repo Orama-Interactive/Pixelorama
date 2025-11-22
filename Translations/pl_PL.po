@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-09-03 09:56\n"
+"PO-Revision-Date: 2025-10-19 16:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -138,6 +138,14 @@ msgstr "Cofnij"
 
 msgid "Redo"
 msgstr "Przywróć zmiany"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr ""
 
 msgid "Copy"
 msgstr "Kopiuj"
@@ -2386,7 +2394,8 @@ msgstr ""
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "Łańcuchowy: tworzy łańcuch wielu krzywych Beziera, podobne do narzędzia krzywej w Krita.\n"
+"Pojedynczy: tworzy pojedynczą krzywą Beziera, podobne do narzędzia krzywej w Asperite."
 
 msgid "Options"
 msgstr "Opcje"
@@ -2471,14 +2480,24 @@ msgstr "Lustrzane odbicie"
 msgid "Horizontal"
 msgstr "Poziome"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Włącza lustrzane odbicie w poziomie podczas rysowania"
 
 msgid "Vertical"
 msgstr "Pionowe"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Włącza lustrzane odbicie w pionie podczas rysowania"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3285,10 +3304,8 @@ msgstr "Zamknij"
 msgid "Discard All"
 msgstr "Odrzuć Wszystkie"
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
-msgstr "Znaleziono automatycznie wybrane projekty z uszkodzonej sesji.\n"
-"Czy chcesz odzyskać dane?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "Wczytano ponownię kopię zapasową"
@@ -3986,7 +4003,7 @@ msgstr "Odwróć kafelek w pionie"
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Ręczny"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn

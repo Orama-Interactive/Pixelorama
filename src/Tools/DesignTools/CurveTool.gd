@@ -127,6 +127,9 @@ func _input(event: InputEvent) -> void:
 								0, _last_mouse_position - _curve.get_point_position(0)
 							)
 							_current_state -= 1
+	else:
+		var brush_size_value := _mm_action.get_action_distance_int(event)
+		$ThicknessSlider.value += brush_size_value
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -180,6 +183,11 @@ func draw_end(pos: Vector2i) -> void:
 	):
 		_draw_shape()
 	super.draw_end(pos)
+
+
+func cancel_tool() -> void:
+	super()
+	_clear()
 
 
 func draw_preview() -> void:
@@ -238,7 +246,7 @@ func draw_preview() -> void:
 func _draw_shape() -> void:
 	bezier_option_button.disabled = false
 	var points := _bezier()
-	prepare_undo("Draw Shape")
+	prepare_undo()
 	var images := _get_selected_draw_images()
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
@@ -255,7 +263,7 @@ func _draw_shape() -> void:
 				if Geometry2D.is_point_in_polygon(v, points):
 					_draw_pixel(v, images)
 	_clear()
-	commit_undo()
+	commit_undo("Draw Shape")
 
 
 func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:

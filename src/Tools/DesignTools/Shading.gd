@@ -126,6 +126,7 @@ func _init() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	super(event)
 	var options: OptionButton = $LightenDarken
 
 	if event.is_action_pressed("change_tool_mode"):
@@ -247,7 +248,7 @@ func draw_start(pos: Vector2i) -> void:
 	_changed = false
 	_drawer.color_op.changed = false
 
-	prepare_undo("Draw")
+	prepare_undo()
 	_drawer.reset()
 
 	_draw_line = Input.is_action_pressed("draw_create_line")

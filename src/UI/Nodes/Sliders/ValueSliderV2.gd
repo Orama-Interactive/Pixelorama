@@ -6,6 +6,14 @@ extends HBoxContainer
 
 signal value_changed(value: Vector2)
 signal ratio_toggled(button_pressed: bool)
+## Emitted when the grabber starts being dragged.
+## This is emitted before the corresponding [signal value_changed] signal.
+@warning_ignore("unused_signal")
+signal drag_started
+## Emitted when the grabber stops being dragged.
+## If value_changed is true, [member value] is different from the value
+## when the dragging was started.
+signal drag_ended(value_changed: bool)
 
 @export var editable := true:
 	set(val):
@@ -95,6 +103,15 @@ var _can_emit_signal := true
 func _ready() -> void:
 	if not Engine.is_editor_hint():  # Pixelorama specific code
 		$Ratio.modulate = Global.modulate_icon_color
+	$Ratio/RatioGuides.scale.x = -1.0 if is_layout_rtl() else 1.0
+	for slider in get_sliders():
+		slider.drag_started.connect(emit_signal.bind(&"drag_started"))
+		slider.drag_ended.connect(func(changed: bool): drag_ended.emit(changed))
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		$Ratio/RatioGuides.scale.x = -1.0 if is_layout_rtl() else 1.0
 
 
 func get_sliders() -> Array[ValueSlider]:

@@ -128,10 +128,11 @@ func add_palette_as_project_palette(new_palette: Palette) -> void:
 
 
 func undo_redo_add_palette(new_palette: Palette):
-	var undo_redo = Global.current_project.undo_redo
+	var undo_redo := Global.current_project.undo_redo
 	undo_redo.add_do_method(add_palette_as_project_palette.bind(new_palette))
 	undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
-	undo_redo.add_undo_method(select_palette.bind(current_palette.name))
+	if is_instance_valid(current_palette):
+		undo_redo.add_undo_method(select_palette.bind(current_palette.name))
 
 
 func get_valid_name(initial_palette_name: String, project := Global.current_project) -> String:
@@ -694,8 +695,49 @@ func fill_imported_palette_with_colors(
 		width = Palette.DEFAULT_WIDTH
 	width = clampi(width, 1, MAX_IMPORT_PAL_WIDTH)
 	var height := ceili(colors.size() / float(width))
+	if height == 1:
+		width = colors.size()
 	var result := Palette.new(palette_name, width, height, comment)
 	for color in colors:
 		result.add_color(color)
 
 	return result
+
+
+func import_lospec_palette(url: String) -> void:
+	var palette_name := url.get_slice("://", 1)
+	var api_url := "https://lospec.com/palette-list/" + palette_name + ".json"
+	print("Importing palette:", palette_name)
+
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(_on_lospec_palette_downloaded.bind(http))
+	var err := http.request(api_url)
+	if err != OK:
+		push_error("Failed to request palette: %s" % palette_name)
+
+
+func _on_lospec_palette_downloaded(
+	result: int,
+	response_code: int,
+	_headers: PackedStringArray,
+	body: PackedByteArray,
+	http: HTTPRequest
+) -> void:
+	http.queue_free()
+	if response_code != 200 or result != HTTPRequest.RESULT_SUCCESS:
+		push_error("Palette download failed: %s" % response_code)
+		return
+	var data = JSON.parse_string(body.get_string_from_utf8())
+	if not data or not typeof(data) == TYPE_DICTIONARY:
+		push_error("Palette download failed")
+	var colors_hex = data.colors
+	var colors: PackedColorArray = []
+	for color_hex in colors_hex:
+		var color := Color(color_hex)
+		colors.append(color)
+	var palette := fill_imported_palette_with_colors(data["name"], colors, data["author"])
+	save_palette(palette)
+	palettes[palette.name] = palette
+	select_palette(palette.name)
+	new_palette_created.emit()

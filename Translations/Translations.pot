@@ -126,6 +126,14 @@ msgstr ""
 msgid "Redo"
 msgstr ""
 
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr ""
+
 msgid "Copy"
 msgstr ""
 
@@ -940,6 +948,10 @@ msgstr ""
 msgid "Font size:"
 msgstr ""
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr ""
+
 msgid "Dim interface on dialog popup"
 msgstr ""
 
@@ -1004,6 +1016,14 @@ msgid "Background color from:"
 msgstr ""
 
 msgid "Background color:"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
 msgstr ""
 
 #. Found in the preferences, under the Tools category.
@@ -2389,13 +2409,23 @@ msgstr ""
 msgid "Horizontal"
 msgstr ""
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
 msgstr ""
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
 msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
@@ -3002,6 +3032,10 @@ msgid "Remove all extensions"
 msgstr ""
 
 #. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr ""
+
+#. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
 msgstr ""
 
@@ -3200,8 +3234,7 @@ msgstr ""
 msgid "Discard All"
 msgstr ""
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
 msgstr ""
 
 msgid "Backup reloaded"

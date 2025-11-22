@@ -80,7 +80,7 @@ func _on_InstalledExtensions_empty_clicked(_position: Vector2, _button_index: in
 
 
 func _on_AddExtensionButton_pressed() -> void:
-	add_extension_file_dialog.popup_centered()
+	add_extension_file_dialog.popup_centered_clamped()
 
 
 func _on_EnableButton_pressed() -> void:
@@ -104,11 +104,11 @@ func _on_EnableButton_pressed() -> void:
 			enable_confirmation.confirmed.connect(
 				_on_enable_extension_confirmation_confirmed.bind(extension)
 			)
-			enable_confirmation.popup_centered()
+			enable_confirmation.popup_centered_clamped()
 
 
 func _on_UninstallButton_pressed() -> void:
-	delete_confirmation.popup_centered()
+	delete_confirmation.popup_centered_clamped()
 
 
 func _on_OpenFolderButton_pressed() -> void:

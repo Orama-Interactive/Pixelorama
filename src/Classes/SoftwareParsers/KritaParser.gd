@@ -318,7 +318,8 @@ static func read_krita_image(image_data: PackedByteArray) -> Image:
 
 		# Krita stores color data in the following format:
 		# B_1, B_2, ..., B_end, G_1, G_2, ..., G_end, R_1, R_2, ..., R_end, A_1, A_2, ..., A_end
-		@warning_ignore("integer_division") var n_of_pixels := decompressed_data.size() / 4
+		@warning_ignore("integer_division")
+		var n_of_pixels := decompressed_data.size() / 4
 		var final_data := PackedByteArray()
 		for i in n_of_pixels:
 			var blue := decompressed_data[i]

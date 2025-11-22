@@ -322,9 +322,11 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			&& is_transposed == ROTATION_MATRIX[i * 3 + 2]
 		):
 			if clockwise:
-				@warning_ignore("integer_division") final_i = i / 4 * 4 + posmod(i - 1, 4)
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + posmod(i - 1, 4)
 			else:
-				@warning_ignore("integer_division") final_i = i / 4 * 4 + (i + 1) % 4
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + (i + 1) % 4
 			is_flipped_h = ROTATION_MATRIX[final_i * 3]
 			is_flipped_v = ROTATION_MATRIX[final_i * 3 + 1]
 			is_transposed = ROTATION_MATRIX[final_i * 3 + 2]
@@ -351,7 +353,7 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 	if index == 0:  # Properties
 		tile_probability_slider.value = selected_tile.probability
 		tile_user_data_text_edit.text = selected_tile.user_data
-		tile_properties.popup_centered()
+		tile_properties.popup_centered_clamped()
 	if index == 1:  # Edit tile
 		_modify_texture_resource(tile_index_menu_popped, current_tileset, Global.current_project)
 	elif index == 2:  # Delete

@@ -51,7 +51,7 @@ func prepare_and_show(frame_no: int) -> void:
 	# Populate tag list
 	refresh_list()
 	title = str("Import Tag (After Frame ", frame + 1, ")")
-	popup_centered()
+	popup_centered_clamped()
 
 
 func _on_FromProject_changed(id: int) -> void:
@@ -192,38 +192,16 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 		var new_frame := Frame.new()
 		imported_frames.append(new_frame)
 		new_frame.duration = src_frame.duration
-		# Used to set common_properties after instanciating
-		var set_base_values := func(base_cel: BaseCel, src_cel: BaseCel):
-			base_cel.opacity = src_cel.opacity
-			base_cel.z_index = src_cel.z_index
-			base_cel.user_data = src_cel.user_data
-			base_cel.ui_color = src_cel.ui_color
 		for to in combined_copy.size():
 			var new_cel: BaseCel
 			if to in layer_from_to.values():  # We have data to Import to this layer index
 				var from = layer_from_to.find_key(to)
 				# Cel we're copying from, the source
 				var src_cel: BaseCel = from_project.frames[f].cels[from]
+				new_cel = src_cel.duplicate_cel()
 				if src_cel is Cel3D:
-					set_base_values.call(new_cel, src_cel)
-					new_cel = src_cel.get_script().new(
-						project.size, false, src_cel.object_properties, src_cel.scene_properties
-					)
-					if src_cel.selected != null:
-						if (
-							src_cel.selected.id in new_cel.object_properties.keys()
-							and src_cel.selected.id != -1
-						):
-							new_cel.selected = new_cel.get_object_from_id(src_cel.selected.id)
+					new_cel.size_changed(project.size)
 				elif src_cel is CelTileMap:
-					new_cel = CelTileMap.new(src_cel.tileset)
-					set_base_values.call(new_cel, src_cel)
-					new_cel.offset = src_cel.offset
-					new_cel.place_only_mode = src_cel.place_only_mode
-					new_cel.tile_size = src_cel.tile_size
-					new_cel.tile_shape = src_cel.tile_shape
-					new_cel.tile_layout = src_cel.tile_layout
-					new_cel.tile_offset_axis = src_cel.tile_offset_axis
 					var copied_content := src_cel.copy_content() as Array
 					var src_img: ImageExtended = copied_content[0]
 					var empty := project.new_empty_image()
@@ -232,15 +210,8 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 					copy.blit_rect(src_img, Rect2(Vector2.ZERO, src_img.get_size()), Vector2.ZERO)
 					new_cel.set_content([copy, copied_content[1]])
 					new_cel.set_indexed_mode(project.is_indexed())
-				elif src_cel is BoneCel:
-					new_cel = BoneCel.new(src_cel.opacity, src_cel.serialize())
-					set_base_values.call(new_cel, src_cel)
 				else:
-					# NOTE: This section handles the import of layers whose import logic
-					# isn't defined yet. this is likely because a pxo file from a future version is
-					# being loaded and we don't want to crash the software.
-					new_cel = src_cel.get_script().new()
-					set_base_values.call(new_cel, src_cel)
+					# Add more types here if they have a copy_content() method.
 					if src_cel is PixelCel:
 						# NOTE: The PixelCel import is done here (instead of outside the else loop)
 						# in order for cel types that extend from PixelCel have something to

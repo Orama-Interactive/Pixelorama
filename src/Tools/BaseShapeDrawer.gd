@@ -84,6 +84,9 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = true
 		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
+	else:
+		var brush_size_value := _mm_action.get_action_distance_int(event)
+		$ThicknessSlider.value += brush_size_value
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -144,14 +147,22 @@ func draw_end(pos: Vector2i) -> void:
 				_dest.x += 1
 				pos.x += 1
 		_draw_shape(_start, pos)
-
-		_start = Vector2i.ZERO
-		_dest = Vector2i.ZERO
-		_drawing = false
-		Global.canvas.previews_sprite.texture = null
-		_displace_origin = false
-		cursor_text = ""
+		_reset_tool()
 	super.draw_end(pos)
+
+
+func cancel_tool() -> void:
+	super()
+	_reset_tool()
+
+
+func _reset_tool() -> void:
+	_start = Vector2i.ZERO
+	_dest = Vector2i.ZERO
+	_drawing = false
+	Global.canvas.previews_sprite.texture = null
+	_displace_origin = false
+	cursor_text = ""
 
 
 func draw_preview() -> void:
@@ -180,7 +191,7 @@ func draw_preview() -> void:
 func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 	var rect := _get_result_rect(origin, dest)
 	var points := _get_points(rect.size)
-	prepare_undo("Draw Shape")
+	prepare_undo()
 	var images := _get_selected_draw_images()
 	var thickness_vector := rect.position - Vector2i((Vector2(0.5, 0.5) * (_thickness - 1)).ceil())
 	for point in points:
@@ -195,7 +206,7 @@ func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 				for image in images:
 					_drawer.set_pixel(image, draw_pos, tool_slot.color)
 
-	commit_undo()
+	commit_undo("Draw Shape")
 
 
 ## Given an origin point and destination point, returns a rect representing

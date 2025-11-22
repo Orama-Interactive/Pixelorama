@@ -11,8 +11,8 @@ signal options_reset
 
 enum Dynamics { NONE, PRESSURE, VELOCITY }
 
-const XY_LINE := Vector2(-0.707107, 0.707107)
-const X_MINUS_Y_LINE := Vector2(0.707107, 0.707107)
+const XY_LINE := Vector2(-0.70710677, 0.70710677)
+const X_MINUS_Y_LINE := Vector2(0.70710677, 0.70710677)
 
 var active_button := -1
 var picking_color_for := MOUSE_BUTTON_LEFT
@@ -377,6 +377,7 @@ class Slot:
 func _ready() -> void:
 	options_reset.connect(reset_options)
 	Global.cel_switched.connect(_cel_switched)
+	Global.single_tool_mode_changed.connect(_on_single_tool_mode_changed)
 	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
@@ -435,7 +436,7 @@ func _ready() -> void:
 ## NOTE: For optimization, if there is already a ready made config available, then we will use that
 ## instead of re-calculating the config, else we have no choice but to re-generate it
 func attempt_config_share(from_idx: int, config: Dictionary = {}) -> void:
-	if not Global.share_options_between_tools:
+	if not Global.share_options_between_tools and not Global.single_tool_mode:
 		return
 	if _slots.is_empty():
 		return
@@ -524,6 +525,8 @@ func get_tool(button: int) -> Slot:
 
 
 func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
+	if Global.single_tool_mode and button == MOUSE_BUTTON_LEFT:
+		assign_tool(tool_name, MOUSE_BUTTON_RIGHT, allow_refresh)
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
 
@@ -606,23 +609,23 @@ func get_mirrored_positions(
 			positions.append(calculate_mirror_vertical(mirror_x, project, offset))
 		else:
 			if diagonal_xy_mirror:
-				positions.append(calculate_mirror_xy(mirror_x, project))
+				positions.append(calculate_mirror_diagonal(mirror_x, project))
 			if diagonal_x_minus_y_mirror:
-				positions.append(calculate_mirror_x_minus_y(mirror_x, project))
+				positions.append(calculate_mirror_diagonal(mirror_x, project, true))
 	if vertical_mirror:
 		var mirror_y := calculate_mirror_vertical(pos, project, offset)
 		positions.append(mirror_y)
 		if diagonal_xy_mirror:
-			positions.append(calculate_mirror_xy(mirror_y, project))
+			positions.append(calculate_mirror_diagonal(mirror_y, project))
 		if diagonal_x_minus_y_mirror:
-			positions.append(calculate_mirror_x_minus_y(mirror_y, project))
+			positions.append(calculate_mirror_diagonal(mirror_y, project, true))
 	if diagonal_xy_mirror:
-		var mirror_diagonal := calculate_mirror_xy(pos, project)
+		var mirror_diagonal := calculate_mirror_diagonal(pos, project)
 		positions.append(mirror_diagonal)
 		if not horizontal_mirror and not vertical_mirror and diagonal_x_minus_y_mirror:
-			positions.append(calculate_mirror_x_minus_y(mirror_diagonal, project))
+			positions.append(calculate_mirror_diagonal(mirror_diagonal, project, true))
 	if diagonal_x_minus_y_mirror:
-		positions.append(calculate_mirror_x_minus_y(pos, project))
+		positions.append(calculate_mirror_diagonal(pos, project, true))
 	return positions
 
 
@@ -634,15 +637,13 @@ func calculate_mirror_vertical(pos: Vector2i, project: Project, offset := 0) -> 
 	return Vector2i(pos.x, project.y_symmetry_point - pos.y + offset)
 
 
-func calculate_mirror_xy(pos: Vector2i, project: Project) -> Vector2i:
-	return Vector2i(Vector2(pos).reflect(XY_LINE).round()) + Vector2i(project.xy_symmetry_point)
-
-
-func calculate_mirror_x_minus_y(pos: Vector2i, project: Project) -> Vector2i:
-	return (
-		Vector2i(Vector2(pos).reflect(X_MINUS_Y_LINE).round())
-		+ Vector2i(project.x_minus_y_symmetry_point)
-	)
+func calculate_mirror_diagonal(pos: Vector2i, project: Project, flipped := false) -> Vector2i:
+	var symmetry_point := project.x_minus_y_symmetry_point if flipped else project.xy_symmetry_point
+	var symmetry_line := X_MINUS_Y_LINE if flipped else XY_LINE
+	var offset := Vector2(0.5, 0.5)
+	var local_pos := Vector2(pos) + offset - symmetry_point
+	var reflected := local_pos.reflect(symmetry_line)
+	return (reflected + symmetry_point - offset).round()
 
 
 func is_placing_tiles() -> bool:
@@ -749,8 +750,15 @@ func update_tool_buttons() -> void:
 	for child in _tool_buttons.get_children():
 		var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 		var right_background: NinePatchRect = child.get_node("BackgroundRight")
-		left_background.visible = _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
-		right_background.visible = _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
+		var is_left_tool := _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
+		var is_right_tool := _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
+		left_background.visible = is_left_tool
+		if Global.single_tool_mode:
+			right_background.visible = false
+			left_background.anchor_right = 1.0
+		else:
+			right_background.visible = is_right_tool
+			left_background.anchor_right = 0.5
 
 
 func update_hint_tooltips() -> void:
@@ -767,7 +775,7 @@ func update_tool_cursors() -> void:
 
 
 func draw_indicator() -> void:
-	if Global.right_square_indicator_visible:
+	if Global.right_square_indicator_visible and not Global.single_tool_mode:
 		_slots[MOUSE_BUTTON_RIGHT].tool_node.draw_indicator(false)
 	if Global.left_square_indicator_visible:
 		_slots[MOUSE_BUTTON_LEFT].tool_node.draw_indicator(true)
@@ -785,6 +793,13 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	var draw_pos := position
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
+	if event is InputEventGesture:
+		if active_button == MOUSE_BUTTON_LEFT:
+			_slots[active_button].tool_node.cancel_tool()
+			active_button = -1
+		elif active_button == MOUSE_BUTTON_RIGHT:
+			_slots[active_button].tool_node.cancel_tool()
+			active_button = -1
 	if Input.is_action_pressed(&"change_layer_automatically", true):
 		if event.is_action(&"activate_left_tool"):
 			if _slots[MOUSE_BUTTON_LEFT].tool_node is not BaseSelectionTool:
@@ -857,7 +872,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		text += "    %s" % _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text
 	if not _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text.is_empty():
 		text += "    %s" % _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text
-	Global.cursor_position_label.text = text
+	Global.on_cursor_position_text_changed.emit(text)
 
 
 ## Returns [code]true[/code] if [member alpha_locked] is [code]true[/code]
@@ -905,6 +920,13 @@ func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 
 func _is_tool_available(layer_type: int, t: Tool) -> bool:
 	return t.layer_types.is_empty() or layer_type in t.layer_types
+
+
+func _on_single_tool_mode_changed(mode: bool) -> void:
+	if mode:
+		assign_tool(get_tool(MOUSE_BUTTON_LEFT).tool_node.name, MOUSE_BUTTON_RIGHT, true)
+	else:
+		update_tool_buttons()
 
 
 func change_layer_automatically(pos: Vector2i) -> void:

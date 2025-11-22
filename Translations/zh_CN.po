@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-09-03 00:21\n"
+"PO-Revision-Date: 2025-10-14 14:10\n"
 
 msgid "OK"
 msgstr "确定"
@@ -138,6 +138,14 @@ msgstr "撤消"
 
 msgid "Redo"
 msgstr "重做"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr ""
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr ""
 
 msgid "Copy"
 msgstr "复制"
@@ -2477,14 +2485,24 @@ msgstr "镜像"
 msgid "Horizontal"
 msgstr "水平"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "启用水平镜像绘图"
 
 msgid "Vertical"
 msgstr "垂直"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "启用垂直镜像绘图"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr ""
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr ""
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3291,10 +3309,8 @@ msgstr "关闭"
 msgid "Discard All"
 msgstr "放弃全部"
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
-msgstr "从崩溃的会话中找到了自动保存的项目。\n"
-"您要恢复数据吗？"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "重新加载备份"

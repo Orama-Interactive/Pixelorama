@@ -11,6 +11,8 @@ var frame := 0
 
 
 func _ready() -> void:
+	if DisplayServer.is_touchscreen_available():
+		mouse_filter = Control.MOUSE_FILTER_PASS
 	Global.cel_switched.connect(func(): z_index = 1 if button_pressed else 0)
 	custom_minimum_size.x = Global.animation_timeline.cel_size
 	text = str(frame + 1)
@@ -86,7 +88,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		PROPERTIES:
 			frame_properties.frame_indices = indices
-			frame_properties.popup_centered()
+			frame_properties.popup_centered_clamped()
 			Global.dialog_open(true)
 		REMOVE:
 			Global.animation_timeline.delete_frames(indices)
@@ -108,6 +110,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
+	if DisplayServer.is_touchscreen_available() and not button_pressed:
+		return null
 	var button := Button.new()
 	button.size = size
 	button.theme = Global.control.theme
@@ -117,13 +121,25 @@ func _get_drag_data(_position: Vector2) -> Variant:
 	return ["Frame", _get_frame_indices()]
 
 
-func _can_drop_data(_pos: Vector2, data) -> bool:
+func _can_drop_data(pos: Vector2, data) -> bool:
 	if typeof(data) != TYPE_ARRAY:
 		Global.animation_timeline.drag_highlight.visible = false
 		return false
 	if data[0] != "Frame":
 		Global.animation_timeline.drag_highlight.visible = false
 		return false
+	# Ensure that the target and its neighbors remain visible.
+	Global.animation_timeline.frame_scroll_container.ensure_control_visible(self)
+	var frame_container := get_parent()
+	if pos.x > size.x / 2.0 and get_index() + 1 < frame_container.get_child_count():
+		Global.animation_timeline.frame_scroll_container.ensure_control_visible(
+			frame_container.get_child(get_index() + 1)
+		)
+	if pos.x < size.x / 2.0 and get_index() - 1 >= 0:
+		Global.animation_timeline.frame_scroll_container.ensure_control_visible(
+			frame_container.get_child(get_index() - 1)
+		)
+
 	var drop_frames: PackedInt32Array = data[1]
 	# Can't move to same frame
 	for drop_frame in drop_frames:

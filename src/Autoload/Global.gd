@@ -18,6 +18,9 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
+signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
+@warning_ignore("unused_signal")
+signal on_cursor_position_text_changed(text: String)
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO, BONE }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
@@ -33,6 +36,7 @@ enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXP
 enum EditMenu {
 	UNDO,
 	REDO,
+	UNDO_HISTORY,
 	COPY,
 	CUT,
 	PASTE,
@@ -87,6 +91,7 @@ enum HelpMenu {
 const LANGUAGES_DICT := {
 	"en_US": ["English", "English"],
 	"cs_CZ": ["Czech", "Czech"],
+	"ar_SA": ["العربيّة", "Arabic"],
 	"da_DK": ["Dansk", "Danish"],
 	"de_DE": ["Deutsch", "German"],
 	"el_GR": ["Ελληνικά", "Greek"],
@@ -121,6 +126,8 @@ const HOME_SUBDIR_NAME := "pixelorama"
 const CONFIG_SUBDIR_NAME := "pixelorama_data"
 ## The path of the directory where the UI layouts are being stored.
 const LAYOUT_DIR := "user://layouts"
+## The path of the ditectory where users can load custom fonts.
+const FONTS_DIR_PATH := "user://fonts"
 
 ## It is path to the executable's base drectory.
 var root_directory := "."
@@ -154,8 +161,8 @@ var current_project_index := 0:
 		if value >= projects.size():
 			return
 		canvas.selection.transform_content_confirm()
-		current_project_index = value
 		project_about_to_switch.emit()
+		current_project_index = value
 		current_project = projects[value]
 		project_switched.connect(current_project.change_project)
 		project_switched.emit()
@@ -216,6 +223,8 @@ var integer_zoom := false:
 
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
+## The default value of the scale of the interface.
+var auto_content_scale_factor := 1.0
 var theme_font := loaded_fonts[theme_font_index]:
 	set(value):
 		theme_font = value
@@ -236,6 +245,11 @@ var theme_font_index := 1:
 				theme_font = loaded_fonts[1]  # Fall back to Roboto if out of bounds
 ## Found in Preferences. The font size used by the interface.
 var font_size := 16
+## Found in Preferences. The orientation of the screen, used by mobile devices.
+var screen_orientation := DisplayServer.SCREEN_SENSOR:
+	set(value):
+		screen_orientation = value
+		DisplayServer.screen_set_orientation(screen_orientation)
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
 ## Found in Preferences. If [code]true[/code], notification labels appear.
@@ -303,6 +317,12 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences.
+## If enabled, the right mouse button is always mapped to the same tool as the left button.
+var single_tool_mode := DisplayServer.is_touchscreen_available():
+	set(value):
+		single_tool_mode = value
+		single_tool_mode_changed.emit(single_tool_mode)
 ## Found in Preferences.
 var share_options_between_tools := false:
 	set(value):
@@ -639,8 +659,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var perspective_editor := control.find_child("Perspective Editor")
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
-## The label indicating cursor position.
-@onready var cursor_position_label: Label = top_menu_container.find_child("CursorPosition")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
 ## The palette panel. It has the [param PalettePanel.gd] script attached.
@@ -769,6 +787,13 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	if DirAccess.dir_exists_absolute(FONTS_DIR_PATH):
+		var fonts_dir := DirAccess.open(FONTS_DIR_PATH)
+		var files := fonts_dir.get_files()
+		for file in files:
+			var font_file := OpenSave.open_font_file(FONTS_DIR_PATH.path_join(file))
+			if not font_file.data.is_empty():
+				loaded_fonts.append(font_file)
 	# Initialize Grid
 	Grid.new()  # gets auto added to grids array
 	_initialize_keychain()
@@ -823,6 +848,7 @@ func _initialize_keychain() -> void:
 		&"quit": Keychain.InputAction.new("", "File menu", true),
 		&"redo": Keychain.InputAction.new("", "Edit menu", true),
 		&"undo": Keychain.InputAction.new("", "Edit menu", true),
+		&"undo_history": Keychain.InputAction.new("", "Edit menu", true),
 		&"cut": Keychain.InputAction.new("", "Edit menu", true),
 		&"copy": Keychain.InputAction.new("", "Edit menu", true),
 		&"paste": Keychain.InputAction.new("", "Edit menu", true),
@@ -894,6 +920,8 @@ func _initialize_keychain() -> void:
 		&"switch_colors": Keychain.InputAction.new("", "Global tool options"),
 		&"horizontal_mirror": Keychain.InputAction.new("", "Global tool options"),
 		&"vertical_mirror": Keychain.InputAction.new("", "Global tool options"),
+		&"diagonal_xy_mirror": Keychain.InputAction.new("", "Global tool options"),
+		&"diagonal_x_minus_y_mirror": Keychain.InputAction.new("", "Global tool options"),
 		&"pixel_perfect": Keychain.InputAction.new("", "Global tool options"),
 		&"alpha_lock": Keychain.InputAction.new("", "Global tool options"),
 		&"new_layer": Keychain.InputAction.new("", "Timeline"),
@@ -957,7 +985,37 @@ func _initialize_keychain() -> void:
 		&"tile_rotate_left": Keychain.InputAction.new("", "Tileset panel", false),
 		&"tile_rotate_right": Keychain.InputAction.new("", "Tileset panel", false),
 		&"tile_flip_horizontal": Keychain.InputAction.new("", "Tileset panel", false),
-		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false)
+		&"tile_flip_vertical": Keychain.InputAction.new("", "Tileset panel", false),
+		&"mm_change_brush_size":
+		Keychain.MouseMovementInputAction.new(
+			"Change brush size", "Mouse drag", false, &"mm_change_brush_size"
+		),
+		&"mm_color_change_hue":
+		Keychain.MouseMovementInputAction.new(
+			"Color change hue", "Mouse drag", false, &"mm_color_change_hue", Vector2.DOWN, 0.001
+		),
+		&"mm_color_change_saturation":
+		Keychain.MouseMovementInputAction.new(
+			"Color change saturation",
+			"Mouse drag",
+			false,
+			&"mm_color_change_saturation",
+			Vector2.RIGHT,
+			0.001
+		),
+		&"mm_color_change_value":
+		Keychain.MouseMovementInputAction.new(
+			"Color change value", "Mouse drag", false, &"mm_color_change_value", Vector2.DOWN, 0.001
+		),
+		&"mm_color_change_alpha":
+		Keychain.MouseMovementInputAction.new(
+			"Color change alpha",
+			"Mouse drag",
+			false,
+			&"mm_color_change_alpha",
+			Vector2.RIGHT,
+			0.001
+		),
 	}
 
 	Keychain.groups = {
@@ -984,7 +1042,8 @@ func _initialize_keychain() -> void:
 		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
-		"Tileset panel": Keychain.InputGroup.new()
+		"Tileset panel": Keychain.InputGroup.new(),
+		"Mouse drag": Keychain.InputGroup.new(),
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 
@@ -1065,7 +1124,6 @@ func undo_or_redo(
 			canvas.grid.queue_redraw()
 			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()
-			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()
@@ -1092,7 +1150,7 @@ func dialog_open(open: bool, is_file_dialog := false) -> void:
 
 func popup_error(text: String) -> void:
 	error_dialog.set_text(text)
-	error_dialog.popup_centered()
+	error_dialog.popup_centered_clamped()
 	dialog_open(true)
 
 

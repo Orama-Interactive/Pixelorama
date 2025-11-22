@@ -7,8 +7,13 @@ signal shader_copied(file_path: String)
 
 const BACKUPS_DIRECTORY := "user://backups"
 const SHADERS_DIRECTORY := "user://shaders"
+const FONT_FILE_EXTENSIONS: PackedStringArray = [
+	"ttf", "otf", "woff", "woff2", "pfb", "pfm", "fnt", "font"
+]
+const GifImporter := preload("uid://bml2q6e8rr82h")
 
 var current_session_backup := ""
+var had_backups_on_startup := false
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/ImportPreviewDialog.tscn")
 var preview_dialogs := []  ## Array of preview dialogs
 var last_dialog_option := 0
@@ -29,6 +34,8 @@ func _ready() -> void:
 	for session_folder in DirAccess.get_directories_at(BACKUPS_DIRECTORY):
 		if DirAccess.get_files_at(BACKUPS_DIRECTORY.path_join(session_folder)).size() == 0:
 			DirAccess.remove_absolute(BACKUPS_DIRECTORY.path_join(session_folder))
+	var backups := DirAccess.get_directories_at(OpenSave.BACKUPS_DIRECTORY)
+	had_backups_on_startup = backups.size() > 0
 	# Make folder for current session
 	var date_time: Dictionary = Time.get_datetime_dict_from_system()
 	var string_dict = {}
@@ -87,6 +94,18 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		shader_copied.emit(new_path)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
+	elif file_ext in FONT_FILE_EXTENSIONS:
+		var font_file := open_font_file(file)
+		if font_file.data.is_empty():
+			return
+		if not DirAccess.dir_exists_absolute(Global.FONTS_DIR_PATH):
+			DirAccess.make_dir_absolute(Global.FONTS_DIR_PATH)
+		var new_path := Global.FONTS_DIR_PATH.path_join(file.get_file())
+		DirAccess.copy_absolute(file, new_path)
+		Global.loaded_fonts.append(font_file)
+	elif file_ext == "gif":
+		if not open_gif_file(file):
+			handle_loading_video(file)
 	elif file_ext == "ora":
 		open_ora_file(file)
 	elif file_ext == "kra":
@@ -106,6 +125,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 			# No error - this is an APNG!
 			if typeof(apng_res[1]) == TYPE_ARRAY:
 				handle_loading_aimg(file, apng_res[1])
+			elif typeof(apng_res[1]) == TYPE_STRING:
+				print(apng_res[1])
 			return
 		# Attempt to load as a regular image.
 		var image := Image.load_from_file(file)
@@ -132,9 +153,11 @@ func add_import_option(import_name: StringName, import_scene: PackedScene) -> in
 			break
 
 	# Obtain a unique id
+	# Start with the least possible id for custom exporter
 	var id := ImportPreviewDialog.ImageImportOptions.size()
 	for i in custom_import_names.size():
-		var format_id := id + i
+		# Increment ids by 1 till we find one that isn't in use
+		var format_id := id + i + 1
 		if !custom_import_names.values().has(i):
 			id = format_id
 	# Add to custom_file_formats
@@ -177,7 +200,7 @@ func handle_loading_image(file: String, image: Image, force_import_dialog := fal
 	preview_dialog.path = file
 	preview_dialog.image = image
 	Global.control.add_child(preview_dialog)
-	preview_dialog.popup_centered()
+	preview_dialog.popup_centered_clamped()
 	Global.dialog_open(true)
 
 
@@ -466,6 +489,31 @@ func save_pxo_file(
 	zip_packer.write_file(to_save.to_utf8_buffer())
 	zip_packer.close_file()
 
+	zip_packer.start_file("mimetype")
+	zip_packer.write_file("image/pxo".to_utf8_buffer())
+	zip_packer.close_file()
+
+	var current_frame := project.frames[project.current_frame]
+	# Generate a preview image of the current frame.
+	# File managers can later use this as a thumbnail for pxo files.
+	var preview := project.new_empty_image()
+	DrawingAlgos.blend_layers(preview, current_frame, Vector2i.ZERO, project)
+	var new_width := preview.get_width()
+	var new_height := preview.get_height()
+	var aspect_ratio := float(new_width) / float(new_height)
+	if new_width > new_height:
+		new_width = 256
+		new_height = new_width / aspect_ratio
+	else:
+		new_height = 256
+		new_width = new_height * aspect_ratio
+	var scaled_preview := Image.new()
+	scaled_preview.copy_from(preview)
+	scaled_preview.resize(new_width, new_height, Image.INTERPOLATE_NEAREST)
+	zip_packer.start_file("preview.png")
+	zip_packer.write_file(scaled_preview.save_png_to_buffer())
+	zip_packer.close_file()
+
 	if not autosave:
 		project.save_path = path
 
@@ -473,7 +521,10 @@ func save_pxo_file(
 	for frame in project.frames:
 		if not autosave and include_blended:
 			var blended := project.new_empty_image()
-			DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
+			if frame == current_frame:
+				blended = preview
+			else:
+				DrawingAlgos.blend_layers(blended, frame, Vector2i.ZERO, project)
 			zip_packer.start_file("image_data/final_images/%s" % frame_index)
 			zip_packer.write_file(blended.get_data())
 			zip_packer.close_file()
@@ -936,7 +987,8 @@ func open_image_as_tileset(
 			var cropped_image := image.get_region(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
-			@warning_ignore("int_as_enum_without_cast") tileset.add_tile(cropped_image, null, 0)
+			@warning_ignore("int_as_enum_without_cast")
+			tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
 
 
@@ -961,7 +1013,8 @@ func open_image_as_tileset_smart(
 			tile_size.x, tile_size.y, false, project.get_image_format()
 		)
 		cropped_image.blit_rect(image, rect, offset)
-		@warning_ignore("int_as_enum_without_cast") tileset.add_tile(cropped_image, null, 0)
+		@warning_ignore("int_as_enum_without_cast")
+		tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
 
 
@@ -1006,6 +1059,50 @@ func open_audio_file(path: String) -> void:
 	var new_layer := AudioLayer.new(project, path.get_basename().get_file())
 	new_layer.audio = audio_stream
 	Global.animation_timeline.add_layer(new_layer, project)
+
+
+func open_font_file(path: String) -> FontFile:
+	var font_file := FontFile.new()
+	if path.to_lower().get_extension() == "fnt" or path.to_lower().get_extension() == "font":
+		font_file.load_bitmap_font(path)
+	else:
+		font_file.load_dynamic_font(path)
+	return font_file
+
+
+func open_gif_file(path: String) -> bool:
+	var file := FileAccess.open(path, FileAccess.READ)
+	var importer := GifImporter.new(file)
+	var result = importer.import()
+	file.close()
+	if result != GifImporter.Error.OK:
+		printerr("An error has occurred while importing: %d" % [result])
+		return false
+	var imported_frames := importer.frames
+	if imported_frames.size() == 0:
+		printerr("An error has occurred while importing the gif")
+		return false
+	var new_project := Project.new([], path.get_file().get_basename())
+	var size := Vector2i(importer.get_logical_screen_width(), importer.get_logical_screen_height())
+	new_project.size = size
+	new_project.fps = 1.0
+	var layer := PixelLayer.new(new_project)
+	new_project.layers.append(layer)
+	for gif_frame in imported_frames:
+		var frame_image := gif_frame.image
+		frame_image.crop(new_project.size.x, new_project.size.y)
+		var cel := layer.new_cel_from_image(frame_image)
+		var delay := gif_frame.delay
+		if delay <= 0.0:
+			delay = 0.1
+		var frame := Frame.new([cel], delay)
+		new_project.frames.append(frame)
+	new_project.save_path = path.get_basename() + ".pxo"
+	new_project.file_name = new_project.name
+	Global.projects.append(new_project)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+	return true
 
 
 # Based on https://www.openraster.org/
@@ -1200,6 +1297,8 @@ func _on_Autosave_timeout() -> void:
 			project.backup_path = (current_session_backup.path_join(
 				"(" + p_name + " backup)-" + str(Time.get_unix_time_from_system()) + "-%s" % i
 			))
+		if not DirAccess.dir_exists_absolute(current_session_backup):
+			DirAccess.make_dir_recursive_absolute(current_session_backup)
 		save_pxo_file(project.backup_path, true, false, project)
 
 

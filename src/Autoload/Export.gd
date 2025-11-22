@@ -104,9 +104,10 @@ func add_custom_file_format(
 	format_name: String, extension: String, exporter_generator: Object, tab: int, is_animated: bool
 ) -> int:
 	# Obtain a unique id
-	var id := Export.FileFormat.size()
+	var id := Export.FileFormat.size()  # Start with the least possible id for custom exporter
 	for i in Export.custom_file_formats.size():
-		var format_id = id + i
+		# Increment ids by 1 till we find one that isn't in use
+		var format_id = id + i + 1
 		if !Export.custom_file_formats.values().has(i):
 			id = format_id
 	# Add to custom_file_formats
@@ -365,6 +366,7 @@ func export_processed_images(
 		var layer_index := -1
 		var actual_frame_index := processed_images[i].frame_index
 		if split_layers:
+			@warning_ignore("integer_division")
 			frame_index = i / project.layers.size() + 1
 			layer_index = posmod(i, project.layers.size())
 		var export_path := _create_export_path(

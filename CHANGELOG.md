@@ -4,6 +4,71 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.7] - Unreleased
+
+Built using Godot 4.5.1
+
+### Added
+- Importing GIF files is now possible without needing FFMPEG!
+- Holding <kbd>Control + Shift</kbd> and moving the mouse right or left now changes the brush size. This shortcut can be changed from the Preferences.
+- Added a button in the palette panel that unlocks the palette grid, making the swatches automatically resize based on the available free space of the panel, instead of having a fixed width and height.
+- A single tool mode has been added as a preference that makes the right mouse button activate the same tool as the left mouse button, instead of being independent.
+- Selecting "Paste from clipboard" while having a Lospec Palette URI copied will now automatically download that palette.
+- Removing all backups is now possible from the Preferences, under the Reset category.
+
+### Changed
+- The default UI scale factor now depends on the monitor properties, instead of always being set to 1.0.
+- In the shortcut category of the Preferences, the Default shortcut profile is no longer selectable, and the Custom profile is now the default one. If you want to restore the default shortcuts, you can press the new "Reset" button.
+- The distance between panels in the interface has been increased from 8 to 12, making it a bit easier to grab the split handler in order to resize the panels.
+- Palette swatches get selected on mouse button *release* and not *press*, making them more consistent with the rest of the buttons in the interface.
+- Scrolling on the palette panel is now smoother and works like the rest of the scrollable areas on the interface.
+
+### Fixed
+- Fixed crash when drawing and there is no active palette.
+- Fixed crash when adding a new palette when there is none.
+- Fixed crash when drag and dropping something that is not a palette swatch (such as a cel button) into a swatch.
+- Fixed subwindow dialogs being too big compared to the main window size, if the UI is scaled.
+- Fixed error code 1 when saving a backup, if the current session backup directory is removed while Pixelorama is running. Now, it always checks if the directory exists and re-creates it, if it is deleted.
+
+## [v1.1.6] - 2025-10-31
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.5.1
+
+### Added
+- Made a new website for Pixelorama! You can visit it on: https://www.pixelorama.org/
+- Added buttons that enable diagonal symmetry!
+- If Pixelorama crashed in the previous session, a window will appear the next time it is launched to let the user know that they can restore data, if there are any projects that can be restored.
+- Two new color picker shapes, OK HS Rectangle and OK HL Rectangle.
+- Users can now drag and drop font files to load them. Fonts can be used by the text tool, text meshes in 3D layers and the user interface itself.
+- Added an Undo History dialog.
+- The convolution matrix layer effect now has a kernel normalization factor.
+- Added Arabic translation and made improvements to the UI so that it works better for Right-To-Left languages.
+- Pixelorama can now load Lospec palettes if started with "lospec-palette://" plus the palette's name as a CLI argument. In theory, this allows Pixelorama to open when clicking on the "Open In App" button on a palette on Lospec's website, but for now **it does not work automatically**, as it requires different setup for different operating systems.
+- A preview.png file is now saved inside pxo files. This can help file managers to generate thumbnails for pxo files. **Note that this doesn't mean that you will automatically see thumbnails for pxo files — it's up to file managers to implement this.**
+
+### Changed
+- **Extensions made for previous versions of Pixelorama will fail to load on this version.** Make sure to re-download the extensions you want.
+- The timeline now scrolls when adding/moving layers, when the current cel is changing from shortcuts or from the timeline buttons, and when cels, frames and layers are being dragged.
+- The layer effect settings dialog now scrolls automatically when dragging layer effects to re-order them.
+- When moving frames using the arrow buttons in the timeline, all moved cels are now being selected. [#1358](https://github.com/Orama-Interactive/Pixelorama/pull/1358)
+- The "Offset/Zoom" effect has been renamed to "Offset & Scale". [#1362](https://github.com/Orama-Interactive/Pixelorama/pull/1362)
+- On Linux, the native screen color picker of the operating system is now used.
+- The canvas can now be moved by arrow keys if there is a selection tool selected, but there is not an active selection. If there is, the selection itself gets moved, just like before.
+
+### Fixed
+- The canvas no longer jitters when it is zoomed out a lot and smooth zoom is enabled.
+- The screen color picker now works properly on Linux, users can pick colors outside of Pixelorama's window.
+- Optimized the "Mirror Image" effect when a selection is active. Now it should no longer lag on big canvases.
+- Fixed a crash when a user selects a 3D object, then does an undo or redo [#1353](https://github.com/Orama-Interactive/Pixelorama/pull/1353)
+- Fixed tilemap cells being erased in manual mode if there are cells outside of the canvas boundaries.
+- Invisible layers are no longer included when exporting images in headless mode, such as from the command line. [#1368](https://github.com/Orama-Interactive/Pixelorama/issues/1368)
+- Fixed transparent checkers not following canvas movement vertically, if "Follow canvas movement" was enabled, and "Follow canvas zoom level" was disabled from the Preferences.
+- The color picker's RGB values can no longer go higher than 255. [#349](https://github.com/Orama-Interactive/Pixelorama/issues/349)
+- Fixed the restore to default button in the Preferences not hiding after being clicked next to text fields and color buttons.
+- Fixed the "Open last project" button in the splash screen not hiding in the Web version.
+
 ## [v1.1.5] - 2025-09-06
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))

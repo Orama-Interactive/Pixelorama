@@ -105,6 +105,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Donda": ["Polish"],
 	"Piotr Kostrzewski (piotrkostrzewski)": ["Polish"],
 	"Krylan (Krylann)": ["Polish"],
+	"Karol Haliński (HalinSky)": ["Polish"],
 	"Tmpod": ["Portuguese"],
 	"Pastel de N4ta (N4ta)": ["Portuguese"],
 	"Michael Alexsander (YeldhamDev)": ["Brazilian Portuguese"],
@@ -122,6 +123,7 @@ const TRANSLATORS_DICTIONARY := {
 	"snorring_parrot": ["Brazilian Portuguese"],
 	"iLeonardito (iLeoww)": ["Brazilian Portuguese"],
 	"Heliana Moreira (helimoreira)": ["Brazilian Portuguese"],
+	"Jhonatan Mello de Oliveira Milheiros (-Mello-)": ["Brazilian Portuguese"],
 	"Andreev Andrei": ["Russian"],
 	"ax trifonov (ax34)": ["Russian"],
 	"Artem (blinovartem)": ["Russian"],
@@ -189,6 +191,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Aninus Partikler (aninuscsalas)": ["Hungarian"],
 	"jaehyeon1090": ["Korean"],
 	"sfun_G": ["Korean"],
+	"랄이 (lalicraft)": ["Korean"],
 	"KripC2160": ["Korean", "Japanese"],
 	"daisuke osada (barlog)": ["Japanese"],
 	"Motomo.exe": ["Japanese"],
@@ -365,7 +368,7 @@ func _on_groups_item_selected() -> void:
 
 
 func _on_website_pressed() -> void:
-	OS.shell_open("https://www.oramainteractive.com")
+	OS.shell_open("https://www.pixelorama.org/")
 
 
 func _on_github_pressed() -> void:

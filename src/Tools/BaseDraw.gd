@@ -38,14 +38,26 @@ var _stroke_project: Project
 var _stroke_images: Array[ImageExtended] = []
 var _is_mask_size_zero := true
 var _circle_tool_shortcut: Array[Vector2i]
+var _mm_action: Keychain.MouseMovementInputAction
 
 
 func _ready() -> void:
 	super._ready()
+	if tool_slot.button == MOUSE_BUTTON_RIGHT:
+		_update_mm_action("mm_change_brush_size")
+		Keychain.action_changed.connect(_update_mm_action)
+		Keychain.profile_switched.connect(func(_prof): _update_mm_action("mm_change_brush_size"))
+	else:
+		_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
 	Global.cel_switched.connect(update_brush)
 	Global.global_tool_options.dynamics_panel.dynamics_changed.connect(_reset_dynamics)
 	Tools.color_changed.connect(_on_Color_changed)
 	Global.brushes_popup.brush_removed.connect(_on_Brush_removed)
+
+
+func _input(event: InputEvent) -> void:
+	var brush_size_value := _mm_action.get_action_distance_int(event)
+	$Brush/BrushSize.value += brush_size_value
 
 
 func _on_BrushType_pressed() -> void:
@@ -248,19 +260,16 @@ func update_line_polylines(start: Vector2i, end: Vector2i) -> void:
 	_line_polylines = _create_polylines(indicator)
 
 
-func prepare_undo(action: String) -> void:
-	var project := Global.current_project
+func prepare_undo() -> void:
 	_undo_data = _get_undo_data()
-	project.undo_redo.create_action(action)
 
 
-func commit_undo() -> void:
+func commit_undo(action := "Draw") -> void:
 	var project := Global.current_project
 	Global.canvas.update_selected_cels_textures(project)
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if TileSetPanel.placing_tiles:
 		tile_editing_mode = TileSetPanel.TileEditingMode.STACK
-	manage_undo_redo_palettes()
 	project.update_tilemaps(_undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data()
 	var frame := -1
@@ -269,6 +278,8 @@ func commit_undo() -> void:
 		frame = project.current_frame
 		layer = project.current_layer
 
+	project.undo_redo.create_action(action)
+	manage_undo_redo_palettes()
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
@@ -278,10 +289,12 @@ func commit_undo() -> void:
 
 
 ## Manages conversion of global palettes into local if a drawable tool is used
-func manage_undo_redo_palettes():
+func manage_undo_redo_palettes() -> void:
 	if _is_eraser:
 		return
 	var palette_in_focus := Palettes.current_palette
+	if not is_instance_valid(palette_in_focus):
+		return
 	var palette_has_color := Palettes.current_palette.has_theme_color(tool_slot.color)
 	if not palette_in_focus.is_project_palette:
 		# Make a project copy of the palette if it has (or about to have) the color
@@ -346,6 +359,18 @@ func draw_end(pos: Vector2i) -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
+
+
+func cancel_tool() -> void:
+	super()
+	for data in _undo_data:
+		if data is not Image:
+			continue
+		var image_data = _undo_data[data]["data"]
+		data.set_data(
+			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
+		)
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func draw_tile(pos: Vector2i) -> void:
@@ -821,12 +846,25 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			&& _brush_transposed == TileSetPanel.ROTATION_MATRIX[i * 3 + 2]
 		):
 			if clockwise:
-				@warning_ignore("integer_division") final_i = i / 4 * 4 + posmod(i - 1, 4)
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + posmod(i - 1, 4)
 			else:
-				@warning_ignore("integer_division") final_i = i / 4 * 4 + (i + 1) % 4
+				@warning_ignore("integer_division")
+				final_i = i / 4 * 4 + (i + 1) % 4
 			_brush_flip_x = TileSetPanel.ROTATION_MATRIX[final_i * 3]
 			_brush_flip_y = TileSetPanel.ROTATION_MATRIX[final_i * 3 + 1]
 			_brush_transposed = TileSetPanel.ROTATION_MATRIX[final_i * 3 + 2]
 			break
 	update_brush()
 	save_config()
+
+
+func _update_mm_action(action_name: String) -> void:
+	if action_name != "mm_change_brush_size":
+		return
+	_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
+	var new_mm_action := Keychain.MouseMovementInputAction.new()
+	new_mm_action.action_name = &"mm_change_brush_size"
+	new_mm_action.mouse_dir = _mm_action.mouse_dir
+	new_mm_action.sensitivity = _mm_action.sensitivity
+	_mm_action = new_mm_action

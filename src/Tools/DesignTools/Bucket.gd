@@ -220,6 +220,18 @@ func draw_end(pos: Vector2i) -> void:
 	commit_undo()
 
 
+func cancel_tool() -> void:
+	super()
+	for data in _undo_data:
+		if data is not Image:
+			continue
+		var image_data = _undo_data[data]["data"]
+		data.set_data(
+			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
+		)
+	Global.canvas.sprite_changed_this_frame = true
+
+
 func draw_tile(cell_coords: Vector2i, index: int, tilemap_cel: CelTileMap) -> void:
 	tilemap_cel.set_index(tilemap_cel.get_cell_at(cell_coords), index)
 

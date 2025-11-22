@@ -78,7 +78,8 @@ func blend_layers(
 				include = false
 		var cel := frame.cels[ordered_index]
 		if DisplayServer.get_name() == "headless":
-			blend_layers_headless(image, project, layer, cel, origin)
+			if include:
+				blend_layers_headless(image, project, layer, cel, origin)
 		else:
 			if layer.is_blender():
 				var cel_image := (layer as GroupLayer).blend_children(frame)
@@ -693,13 +694,13 @@ func generate_isometric_rectangle(image: Image, is_gap_tile: bool) -> void:
 	var up := Vector2i(half_size.x + even_offset.x, 0)
 	var right := Vector2i(image.get_size().x - 1, half_size.y)
 	if is_gap_tile:
-		var test = Geometry2D.bresenham_line(up, right)
+		var test := Geometry2D.bresenham_line(up, right)
 		var a: Vector2i
-		var b = test[-1] + Vector2i.UP
-		var line_r = []
+		var b := test[-1] + Vector2i.UP
+		var line_r := []
 		var sub_position_x := []
 		var sub_position_y := []
-		var scan_dir = [Vector2i.RIGHT]
+		var scan_dir := [Vector2i.RIGHT]
 		for i in test.size():
 			if up.y == test[i].y:
 				a = test[i] + Vector2i.RIGHT
@@ -722,11 +723,11 @@ func generate_isometric_rectangle(image: Image, is_gap_tile: bool) -> void:
 					sub_position_y.append(image.get_size().y - 1 - small_point.y)
 			if not pt + Vector2i.RIGHT in test and not scan_dir.has(Vector2i.UP):
 				scan_dir.push_front(Vector2i.UP)
-		var pos = Vector2i(sub_position_x.min(), sub_position_y.min())
-		var sub_size_x = (b.x - a.x + 1) * 2
-		var sub_size_y = (b.y - a.y + 1) * 2
-		var offset_x: int = floori((sub_size_x - image.get_size().x) / 2.0)
-		var offset_y: int = floori((sub_size_y - image.get_size().y) / 2.0)
+		var pos := Vector2i(sub_position_x.min(), sub_position_y.min())
+		var sub_size_x := (b.x - a.x + 1) * 2
+		var sub_size_y := (b.y - a.y + 1) * 2
+		var offset_x := floori((sub_size_x - image.get_size().x) / 2.0)
+		var offset_y := floori((sub_size_y - image.get_size().y) / 2.0)
 		var offset := Vector2i(-offset_x, -offset_y)
 		for i in line_r.size():
 			var val_local = line_r[i] - pos

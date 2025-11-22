@@ -4,6 +4,14 @@ extends TextureProgressBar
 ## Custom node that combines the behavior of a Slider and a SpinBox.
 ## Initial version made by MrTriPie, has been modified by Overloaded.
 
+## Emitted when the grabber starts being dragged.
+## This is emitted before the corresponding [signal Range.value_changed] signal.
+signal drag_started
+## Emitted when the grabber stops being dragged.
+## If value_changed is true, [member Range.value] is different from the value
+## when the dragging was started.
+signal drag_ended(value_changed: bool)
+
 enum { NORMAL, HELD, SLIDING, TYPING }
 
 @export var editable := true:
@@ -45,9 +53,11 @@ enum { NORMAL, HELD, SLIDING, TYPING }
 @export var global_increment_action := ""  ## Global shortcut to increment
 @export var global_decrement_action := ""  ## Global shortcut to decrement
 
+var text_server := TextServerManager.get_primary_interface()
 var state := NORMAL
 var arrow_is_held := 0  ## Used for arrow button echo behavior. Is 1 for ValueUp, -1 for ValueDown.
 
+var _start_value := value
 var _line_edit := LineEdit.new()
 var _value_up_button := TextureButton.new()
 var _value_down_button := TextureButton.new()
@@ -61,6 +71,10 @@ func _init() -> void:
 	stretch_margin_right = 3
 	stretch_margin_bottom = 3
 	theme_type_variation = "ValueSlider"
+	if is_layout_rtl():
+		fill_mode = FILL_RIGHT_TO_LEFT
+	else:
+		fill_mode = FILL_LEFT_TO_RIGHT
 
 
 func _ready() -> void:
@@ -78,6 +92,10 @@ func _notification(what: int) -> void:
 		_reset_display(true)
 	elif what == NOTIFICATION_TRANSLATION_CHANGED:
 		_reset_display(false)
+		if is_layout_rtl():
+			fill_mode = FILL_RIGHT_TO_LEFT
+		else:
+			fill_mode = FILL_LEFT_TO_RIGHT
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -124,6 +142,8 @@ func _gui_input(event: InputEvent) -> void:
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):
 			state = TYPING
+			drag_started.emit()
+			_start_value = value
 			_line_edit.text = _format_float_string(true)
 			_line_edit.editable = true
 			_line_edit.grab_focus()
@@ -134,31 +154,36 @@ func _gui_input(event: InputEvent) -> void:
 		elif event is InputEventMouseMotion:
 			if get_meta("mouse_start_position").distance_to(get_local_mouse_position()) > 2:
 				state = SLIDING
+				drag_started.emit()
 				set_meta("shift_pressed", event.shift_pressed)
 				set_meta("start_ratio", ratio)
-				set_meta("start_value", value)
+				_start_value = value
 	elif state == SLIDING:
 		if event.is_action_released("left_mouse"):
 			state = NORMAL
+			drag_ended.emit(not is_equal_approx(_start_value, value))
 			remove_meta("mouse_start_position")
 			remove_meta("start_ratio")
-			remove_meta("start_value")
 			remove_meta("shift_pressed")
 		if event is InputEventMouseMotion:
 			# When pressing/releasing Shift, reset starting values to prevent slider jumping around
 			if get_meta("shift_pressed") != event.shift_pressed:
 				set_meta("mouse_start_position", get_local_mouse_position())
 				set_meta("start_ratio", ratio)
-				set_meta("start_value", value)
+				_start_value = value
 				set_meta("shift_pressed", event.shift_pressed)
-			var x_delta: float = get_local_mouse_position().x - get_meta("mouse_start_position").x
+			var x_delta := 0.0
+			if is_layout_rtl():
+				x_delta = get_meta("mouse_start_position").x - get_local_mouse_position().x
+			else:
+				x_delta = get_local_mouse_position().x - get_meta("mouse_start_position").x
 			# Slow down to allow for more precision
 			if event.shift_pressed:
 				x_delta *= 0.1
 			if show_progress:
 				ratio = get_meta("start_ratio") + x_delta / size.x
 			else:
-				value = get_meta("start_value") + x_delta * step
+				value = _start_value + x_delta * step
 			# Snap when snap_by_default is true, do the opposite when Control is pressed
 			if snap_by_default:
 				if not event.ctrl_pressed:
@@ -194,8 +219,8 @@ func _setup_nodes() -> void:  ## Only called once on _ready()
 	_value_up_button.offset_bottom = value_up_texture_size.y * 2
 	_value_up_button.focus_mode = Control.FOCUS_NONE
 	_value_up_button.add_to_group("UIButtons")
-	_value_up_button.button_down.connect(_on_Value_button_down.bind(1))
-	_value_up_button.button_up.connect(_on_Value_button_up)
+	_value_up_button.button_down.connect(_on_value_button_down.bind(1))
+	_value_up_button.button_up.connect(_on_value_button_up)
 	add_child(_value_up_button)
 
 	var value_down_texture_size := Vector2.ONE
@@ -211,11 +236,11 @@ func _setup_nodes() -> void:  ## Only called once on _ready()
 	_value_down_button.offset_bottom = 0
 	_value_up_button.focus_mode = Control.FOCUS_NONE
 	_value_down_button.add_to_group("UIButtons")
-	_value_down_button.button_down.connect(_on_Value_button_down.bind(-1))
-	_value_down_button.button_up.connect(_on_Value_button_up)
+	_value_down_button.button_down.connect(_on_value_button_down.bind(-1))
+	_value_down_button.button_up.connect(_on_value_button_up)
 	add_child(_value_down_button)
 
-	_timer.timeout.connect(_on_Timer_timeout)
+	_timer.timeout.connect(_on_timer_timeout)
 	add_child(_timer)
 
 
@@ -252,6 +277,7 @@ func _confirm_text(confirm := true) -> void:
 			_reset_display(true)
 			return
 		value = result
+	drag_ended.emit(not is_equal_approx(_start_value, value))
 	_reset_display(true)
 
 
@@ -294,14 +320,18 @@ func _format_float_string(is_typing := false) -> String:
 		if str_to_var(decimal_str) != 0:
 			n_of_decimals = split_str[1].length()
 	var float_str := format_string % [0, n_of_decimals, value]
+	if localize_numeral_system:
+		float_str = text_server.format_number(float_str)
 	if is_typing:
 		return float_str
 	return str(tr(prefix), " ", float_str, " ", tr(suffix)).strip_edges()
 
 
-func _on_Value_button_down(direction: int) -> void:
+func _on_value_button_down(direction: int) -> void:
 	if not editable:
 		return
+	_start_value = value
+	drag_started.emit()
 	# Direction is either 1 or -1
 	value += (snap_step if Input.is_action_pressed("ctrl") else step) * direction
 	arrow_is_held = direction
@@ -310,13 +340,14 @@ func _on_Value_button_down(direction: int) -> void:
 	_timer.start()
 
 
-func _on_Value_button_up() -> void:
+func _on_value_button_up() -> void:
+	drag_ended.emit(not is_equal_approx(_start_value, value))
 	arrow_is_held = 0
 	_timer.stop()
 
 
 ## Echo behavior. If the user keeps pressing the button, the value keeps changing.
-func _on_Timer_timeout() -> void:
+func _on_timer_timeout() -> void:
 	if arrow_is_held == 0:
 		_timer.stop()
 		return

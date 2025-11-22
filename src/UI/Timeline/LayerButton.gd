@@ -45,6 +45,8 @@ var audio_player: AudioStreamPlayer
 
 
 func _ready() -> void:
+	if DisplayServer.is_touchscreen_available():
+		mouse_filter = Control.MOUSE_FILTER_PASS
 	main_button.layer_index = layer_index
 	main_button.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
 	Global.cel_switched.connect(_on_cel_switched)
@@ -339,7 +341,7 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 	var layer := project.layers[layer_index]
 	if id == MenuOptions.PROPERTIES:
 		properties.layer_indices = _get_layer_indices()
-		properties.popup_centered()
+		properties.popup_centered_clamped()
 	elif id == MenuOptions.CLIPPING_MASK:
 		layer.clipping_mask = not layer.clipping_mask
 		popup_menu.set_item_checked(id, layer.clipping_mask)

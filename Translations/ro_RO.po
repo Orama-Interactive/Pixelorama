@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-09-03 11:33\n"
+"PO-Revision-Date: 2025-10-14 15:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,6 +136,14 @@ msgstr "Anulare"
 
 msgid "Redo"
 msgstr "Refacere"
+
+#. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
+msgid "Undo History"
+msgstr "Istoric anulări editări"
+
+#. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
+msgid "Initial state"
+msgstr "Stare inițială"
 
 msgid "Copy"
 msgstr "Copiere"
@@ -907,7 +915,7 @@ msgid "On"
 msgstr "Pornit"
 
 msgid "Restore default value"
-msgstr "Resetare la valoarea implicită"
+msgstr "Restabilire valoare implicită"
 
 #. Found in the preferences, under Canvas.
 msgid "Smooth Zoom"
@@ -1317,7 +1325,7 @@ msgstr "Monitor de probleme"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr "Restaurare copie de siguranță"
+msgstr "Restabilire copie de siguranță"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
@@ -1325,7 +1333,7 @@ msgstr "Sesiuni anterioare"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr "Dă dublu clic pentru a încărca o sesiune integrală sau un proiect specific."
+msgstr "Dă dublu clic pentru a încărca o sesiune întreagă sau un proiect specific."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
@@ -2474,14 +2482,24 @@ msgstr "Oglindire"
 msgid "Horizontal"
 msgstr "Orizontal"
 
+#. Found in the global tool options, tooltip of the horizontal mirror button.
 msgid "Enable horizontal mirrored drawing"
 msgstr "Activează desenul oglindit orizontal"
 
 msgid "Vertical"
 msgstr "Vertical"
 
+#. Found in the global tool options, tooltip of the vertical mirror button.
 msgid "Enable vertical mirrored drawing"
 msgstr "Activează desenul oglindit vertical"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↗) mirrored drawing"
+msgstr "Activează desenarea oglindită diagonală (↗)"
+
+#. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
+msgid "Enable diagonal (↘) mirrored drawing"
+msgstr "Activează desenarea oglindită diagonală (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3288,10 +3306,8 @@ msgstr "Închide"
 msgid "Discard All"
 msgstr "Renunțare la toate"
 
-msgid "Autosaved project(s) from a crashed session were found.\n"
-"Do you want to recover the data?"
-msgstr "Au fost găsite proiecte salvate automat de la o sesiune căzută.\n"
-"Dorești să recuperezi datele?"
+msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
+msgstr "Pixelorama nu s-a închis corespunzător ultima dată. Dorești să restabilești o sesiune anterioară?"
 
 msgid "Backup reloaded"
 msgstr "Copie de rezervă reîncărcată"

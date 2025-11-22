@@ -3,18 +3,19 @@ extends Line2D
 
 enum Types { HORIZONTAL, VERTICAL, XY, X_MINUS_Y }
 
-const INPUT_WIDTH := 4
+const INPUT_WIDTH := 4.0
 
 var font := Themes.get_font()
 var has_focus := true
 var mouse_pos := Vector2.ZERO
 var type := Types.HORIZONTAL
 var project := Global.current_project
+var text_server := TextServerManager.get_primary_interface()
 
 
 func _ready() -> void:
 	Global.project_switched.connect(_project_switched)
-	width = 2.0 / Global.camera.zoom.x
+	width = 2.0 / get_viewport().canvas_transform.get_scale().x
 	default_color = Global.guide_color
 	project.guides.append(self)
 	if _outside_canvas():
@@ -25,28 +26,10 @@ func _input(_event: InputEvent) -> void:
 	if not visible:
 		return
 	mouse_pos = get_local_mouse_position()
-
-	var point0 := points[0]
-	var point1 := points[1]
-	if type == Types.HORIZONTAL:
-		point0.y -= width * INPUT_WIDTH
-		point1.y += width * INPUT_WIDTH
-	elif type == Types.VERTICAL:
-		point0.x -= width * INPUT_WIDTH
-		point1.x += width * INPUT_WIDTH
-	var rect := Rect2()
-	rect.position = point0
-	rect.end = point1
-	rect = rect.abs()
-	if (
-		Input.is_action_just_pressed(&"left_mouse")
-		and Global.can_draw
-		and rect.has_point(mouse_pos)
-	):
-		if (
-			!Rect2i(Vector2i.ZERO, project.size).has_point(Global.canvas.current_pixel)
-			or Global.move_guides_on_canvas
-		):
+	var is_hovering := is_pos_over_line(mouse_pos)
+	if Input.is_action_just_pressed(&"left_mouse") and Global.can_draw and is_hovering:
+		var project_rect := Rect2i(Vector2i.ZERO, project.size)
+		if not project_rect.has_point(mouse_pos) or Global.move_guides_on_canvas:
 			has_focus = true
 			Global.can_draw = false
 			queue_redraw()
@@ -60,6 +43,19 @@ func _input(_event: InputEvent) -> void:
 				var xx := snappedf(mouse_pos.x, 0.5)
 				points[0].x = xx
 				points[1].x = xx
+			elif type == Types.XY or type == Types.X_MINUS_Y:
+				var normal := Tools.X_MINUS_Y_LINE
+				if type == Types.X_MINUS_Y:
+					normal = Tools.XY_LINE
+				var c := normal.dot(mouse_pos)
+				c = snappedf(c, 0.5)
+
+				var dir := (normal * Vector2(1, -1)).normalized()
+				var half_len := (points[1] - points[0]).length() / 2.0
+				var center := normal * c
+
+				points[0] = center - dir * half_len
+				points[1] = center + dir * half_len
 			modulate.a = 0.5 if _outside_canvas() else 1.0
 		elif Input.is_action_just_released(&"left_mouse"):
 			Global.can_draw = true
@@ -75,7 +71,13 @@ func _draw() -> void:
 	if !has_focus:
 		return
 	var viewport_size := get_viewport_rect().size
-	var zoom := Global.camera.zoom
+	var half_size := viewport_size * 0.5
+	var zoom := get_viewport().canvas_transform.get_scale()
+	var canvas_rotation := -get_viewport().canvas_transform.get_rotation()
+	var origin := get_viewport().canvas_transform.get_origin()
+	var pure_origin := (origin / zoom).rotated(canvas_rotation)
+	var zoom_scale := Vector2.ONE / zoom
+	var offset := -pure_origin + (half_size * zoom_scale).rotated(canvas_rotation)
 
 	# An array of the points that make up the corners of the viewport
 	var viewport_poly := PackedVector2Array(
@@ -84,22 +86,17 @@ func _draw() -> void:
 	# Adjusting viewport_poly to take into account the camera offset, zoom, and rotation
 	for p in range(viewport_poly.size()):
 		viewport_poly[p] = (
-			viewport_poly[p].rotated(Global.camera.rotation) * zoom
+			viewport_poly[p].rotated(canvas_rotation) * zoom
 			+ Vector2(
-				(
-					Global.camera.offset.x
-					- (viewport_size.rotated(Global.camera.rotation).x / 2) / zoom.x
-				),
-				(
-					Global.camera.offset.y
-					- (viewport_size.rotated(Global.camera.rotation).y / 2) / zoom.y
-				)
+				offset.x - (viewport_size.rotated(canvas_rotation).x / 2) / zoom.x,
+				offset.y - (viewport_size.rotated(canvas_rotation).y / 2) / zoom.y
 			)
 		)
 
 	var string := (
 		"%spx" % str(snappedf(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
 	)
+	string = text_server.format_number(string)
 	var color: Color = Global.control.theme.get_color("font_color", "Label")
 	# X and Y offsets for nicer looking spacing
 	var x_offset := 5
@@ -114,7 +111,7 @@ func _draw() -> void:
 	)
 
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
+		draw_set_transform(intersection, canvas_rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[0])
 			< intersection.distance_squared_to(viewport_poly[1])
@@ -144,7 +141,7 @@ func _draw() -> void:
 		points[0], points[1], viewport_poly[3], viewport_poly[0]
 	)
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
+		draw_set_transform(intersection, canvas_rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[3])
 			< intersection.distance_squared_to(viewport_poly[0])
@@ -175,7 +172,7 @@ func _draw() -> void:
 	)
 
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
+		draw_set_transform(intersection, canvas_rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[1])
 			< intersection.distance_squared_to(viewport_poly[2])
@@ -202,7 +199,7 @@ func _draw() -> void:
 		return
 
 	# If there's no intersection with a viewport edge, show string in top left corner
-	draw_set_transform(viewport_poly[0], Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
+	draw_set_transform(viewport_poly[0], canvas_rotation, Vector2(2.0, 2.0) / zoom)
 	draw_string(
 		font,
 		Vector2(x_offset, font_height),
@@ -224,6 +221,23 @@ func set_color(color: Color) -> void:
 
 func get_direction() -> Vector2:
 	return points[0].direction_to(points[1])
+
+
+func is_pos_over_line(pos: Vector2, thickness := INPUT_WIDTH) -> bool:
+	var start := points[0]
+	var end := points[1]
+	var line_vec := end - start
+	var len_sq := line_vec.length_squared()
+	if len_sq == 0.0:
+		return (pos - start).length() <= thickness
+
+	# Project the mouse onto the line segment (clamped between 0 and 1).
+	var t := clampf((pos - start).dot(line_vec) / len_sq, 0.0, 1.0)
+	var projection := start + t * line_vec
+
+	# Distance from mouse to closest point on the segment.
+	var dist := pos.distance_to(projection)
+	return dist <= thickness
 
 
 func _project_switched() -> void:

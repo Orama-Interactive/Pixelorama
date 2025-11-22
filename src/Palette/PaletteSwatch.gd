@@ -21,10 +21,33 @@ var empty := true:
 			mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
+func _init() -> void:
+	color = DEFAULT_COLOR
+	custom_minimum_size = Vector2(8, 8)
+	size = Vector2(8, 8)
+	mouse_filter = Control.MOUSE_FILTER_PASS
+	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	gui_input.connect(_on_gui_input)
+
+
+func _ready() -> void:
+	var transparent_checker := TransparentChecker.new()
+	transparent_checker.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	transparent_checker.show_behind_parent = true
+	transparent_checker.visible = not is_equal_approx(color.a, 1.0)
+	add_child(transparent_checker)
+
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED:
 		if empty:
 			empty = true
+
+
+func set_swatch_color(new_color: Color) -> void:
+	color = new_color
+	if get_child_count() > 0:
+		get_child(0).visible = not is_equal_approx(color.a, 1.0)
 
 
 func set_swatch_size(swatch_size: Vector2) -> void:
@@ -79,28 +102,39 @@ func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
-	var data = null
-	if not empty:
-		var drag_icon: PaletteSwatch = self.duplicate()
-		drag_icon.show_left_highlight = false
-		drag_icon.show_right_highlight = false
-		drag_icon.empty = false
-		set_drag_preview(drag_icon)
-		data = {source_index = index}
-	return data
+	if DisplayServer.is_touchscreen_available() and not show_left_highlight:
+		return null
+	if empty:
+		return ["Swatch", null]
+	var drag_icon: PaletteSwatch = duplicate()
+	drag_icon.show_left_highlight = false
+	drag_icon.show_right_highlight = false
+	drag_icon.empty = false
+	set_drag_preview(drag_icon)
+	return ["Swatch", {source_index = index}]
 
 
-func _can_drop_data(_position: Vector2, _data) -> bool:
+func _can_drop_data(_position: Vector2, data) -> bool:
+	if typeof(data) != TYPE_ARRAY:
+		return false
+	if data[0] != "Swatch":
+		return false
 	return true
 
 
 func _drop_data(_position: Vector2, data) -> void:
-	dropped.emit(data.source_index, index)
+	dropped.emit(data[1].source_index, index)
 
 
-func _on_PaletteSlot_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if not get_global_rect().has_point(event.global_position):
+			return
 		if event.double_click and not empty:
 			double_clicked.emit(event.button_index, get_global_rect().position)
-		elif event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
-			pressed.emit(event.button_index)
+		if event.is_released():
+			if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
+				pressed.emit(event.button_index)
+		elif event.is_pressed():
+			if DisplayServer.is_touchscreen_available() and show_left_highlight:
+				accept_event()

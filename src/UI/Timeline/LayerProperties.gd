@@ -199,7 +199,7 @@ func _on_tileset_option_button_item_selected(index: int) -> void:
 
 
 func _on_audio_file_button_pressed() -> void:
-	audio_file_dialog.popup_centered()
+	audio_file_dialog.popup_centered_clamped()
 
 
 func _on_play_at_frame_slider_value_changed(value: float) -> void:
@@ -230,7 +230,7 @@ func _on_place_only_mode_check_button_toggled(toggled_on: bool) -> void:
 	if not toggled_on:
 		return
 	place_only_mode_check_button.set_pressed_no_signal(false)
-	place_only_confirmation_dialog.popup_centered()
+	place_only_confirmation_dialog.popup_centered_clamped()
 
 
 func _on_place_only_confirmation_dialog_confirmed() -> void:

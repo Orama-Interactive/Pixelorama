@@ -2,15 +2,16 @@ extends Panel
 
 enum ColorModes { RGBA, INDEXED }
 
-const DOCS_URL := "https://www.oramainteractive.com/Pixelorama-Docs/"
+const DOCS_URL := "https://www.pixelorama.org/Introduction/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v115---2025-09-06"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v116---2025-10-31"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
 
+var text_server := TextServerManager.get_primary_interface()
 var recent_projects := []
 var selected_layout := 0
 var zen_mode := false
@@ -33,7 +34,7 @@ var new_image_dialog := Dialog.new("res://src/UI/Dialogs/CreateNewImage.tscn")
 var project_properties_dialog := Dialog.new("res://src/UI/Dialogs/ProjectProperties.tscn")
 var preferences_dialog := Dialog.new("res://src/Preferences/PreferencesDialog.tscn")
 var modify_selection := Dialog.new("res://src/UI/Dialogs/ModifySelection.tscn")
-var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetZoomImage.tscn")
+var offset_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OffsetScaleImage.tscn")
 var scale_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn")
 var resize_canvas_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn")
 var mirror_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn")
@@ -70,13 +71,15 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var view_menu := $MarginContainer/HBoxContainer/MenuBar/View as PopupMenu
 @onready var window_menu := $MarginContainer/HBoxContainer/MenuBar/Window as PopupMenu
 @onready var help_menu := $MarginContainer/HBoxContainer/MenuBar/Help as PopupMenu
+@onready var undo_history_dialog := $UndoHistoryDialog as AcceptDialog
 @onready var add_layout_confirmation := $AddLayoutConfirmation as ConfirmationDialog
 @onready var delete_layout_confirmation := $DeleteLayoutConfirmation as ConfirmationDialog
 @onready var layout_name_line_edit := %LayoutName as LineEdit
 @onready var layout_from_option_button := %LayoutFrom as OptionButton
+@onready var cursor_position_label := %CursorPosition as Label
+@onready var current_frame_mark := %CurrentFrameMark as Label
 
 @onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
-@onready var current_frame_mark := %CurrentFrameMark as Label
 
 
 class Dialog:
@@ -92,7 +95,7 @@ class Dialog:
 	func popup(dialog_size := Vector2i.ZERO) -> void:
 		if not is_instance_valid(node):
 			instantiate_scene()
-		node.popup_centered(dialog_size)
+		node.popup_centered_clamped(dialog_size)
 		var is_file_dialog := node is FileDialog
 		Global.dialog_open(true, is_file_dialog)
 
@@ -107,8 +110,10 @@ class Dialog:
 
 func _ready() -> void:
 	main.save_file_dialog_opened.connect(func(opened: bool): can_save = not opened)
-	Global.project_switched.connect(_project_switched)
+	Global.project_about_to_switch.connect(_on_project_about_to_switch)
+	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(_update_current_frame_mark)
+	Global.on_cursor_position_text_changed.connect(_on_cursor_position_text_changed)
 	OpenSave.shader_copied.connect(_load_shader_file)
 	_setup_file_menu()
 	_setup_edit_menu()
@@ -144,15 +149,33 @@ func _notification(what: int) -> void:
 			_toggle_zen_mode()
 
 
-func _project_switched() -> void:
+func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
+	project.resized.disconnect(_on_project_resized)
+
+
+func _on_project_switched() -> void:
+	var project := Global.current_project
+	if not project.resized.is_connected(_on_project_resized):
+		project.resized.connect(_on_project_resized)
+	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
+	_on_cursor_position_text_changed(project_size_text)
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
 	_update_file_menu_buttons(project)
 	for j in Tiles.MODE.values():
 		tile_mode_submenu.set_item_checked(j, j == project.tiles.mode)
 	_check_color_mode_submenu_item(project)
-
 	_update_current_frame_mark()
+
+
+func _on_project_resized() -> void:
+	var project := Global.current_project
+	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
+	_on_cursor_position_text_changed(project_size_text)
+
+
+func _on_cursor_position_text_changed(text: String) -> void:
+	cursor_position_label.text = text_server.format_number(text)
 
 
 func _update_file_menu_buttons(project: Project) -> void:
@@ -174,7 +197,9 @@ func _update_file_menu_buttons(project: Project) -> void:
 
 func _update_current_frame_mark() -> void:
 	var project := Global.current_project
-	current_frame_mark.text = "%s/%s" % [str(project.current_frame + 1), project.frames.size()]
+	var current_frame := text_server.format_number(str(project.current_frame + 1))
+	var n_of_frames := text_server.format_number(str(project.frames.size()))
+	current_frame_mark.text = "%s/%s" % [current_frame, n_of_frames]
 
 
 func _setup_file_menu() -> void:
@@ -227,6 +252,7 @@ func _setup_edit_menu() -> void:
 	var edit_menu_items := {
 		"Undo": "undo",
 		"Redo": "redo",
+		"Undo History": "undo_history",
 		"Copy": "copy",
 		"Cut": "cut",
 		"Paste": "paste",
@@ -471,7 +497,7 @@ func _setup_color_mode_submenu(item: String) -> void:
 func _setup_effects_menu() -> void:
 	_set_menu_shortcut(&"reapply_last_effect", effects_menu, 0, "Re-apply last effect")
 	effects_menu.set_item_disabled(0, true)
-	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset/Zoom Image")
+	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset & Scale Image")
 	_set_menu_shortcut(&"mirror_image", effects_transform_submenu, 1, "Mirror Image")
 	_set_menu_shortcut(&"rotate_image", effects_transform_submenu, 2, "Rotate Image")
 	effects_transform_submenu.id_pressed.connect(_on_effects_transform_submenu_id_pressed)
@@ -638,7 +664,7 @@ func _handle_metadata(id: int, popup_menu: PopupMenu) -> void:
 
 
 func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
-	dialog.popup_centered(dialog_size)
+	dialog.popup_centered_clamped(dialog_size)
 	var is_file_dialog := dialog is FileDialog
 	Global.dialog_open(true, is_file_dialog)
 
@@ -715,6 +741,8 @@ func edit_menu_id_pressed(id: int) -> void:
 			Global.current_project.commit_undo()
 		Global.EditMenu.REDO:
 			Global.current_project.commit_redo()
+		Global.EditMenu.UNDO_HISTORY:
+			undo_history_dialog.popup_centered_clamped()
 		Global.EditMenu.COPY:
 			Global.canvas.selection.copy()
 		Global.EditMenu.CUT:
@@ -724,6 +752,10 @@ func edit_menu_id_pressed(id: int) -> void:
 		Global.EditMenu.PASTE_IN_PLACE:
 			Global.canvas.selection.paste(true)
 		Global.EditMenu.PASTE_FROM_CLIPBOARD:
+			if not DisplayServer.clipboard_has_image():
+				var clipboard := DisplayServer.clipboard_get()
+				if clipboard.begins_with("lospec-palette://"):
+					Palettes.import_lospec_palette(clipboard)
 			Global.canvas.selection.paste_from_clipboard()
 		Global.EditMenu.DELETE:
 			Global.canvas.selection.delete()
@@ -882,9 +914,9 @@ func _layouts_submenu_id_pressed(id: int) -> void:
 		set_layout(id)
 	elif id == layout_count + 1:
 		layout_name_line_edit.text = "New layout"
-		add_layout_confirmation.popup_centered()
+		add_layout_confirmation.popup_centered_clamped()
 	elif id == layout_count + 2:
-		delete_layout_confirmation.popup_centered()
+		delete_layout_confirmation.popup_centered_clamped()
 	elif id == layout_count + 3:
 		Global.layouts[selected_layout].reset()
 

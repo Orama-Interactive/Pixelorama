@@ -30,12 +30,12 @@ var edit_palette_dialog: ConfirmationDialog:
 
 @onready var palette_select := $"%PaletteSelect" as OptionButton
 @onready var palette_grid := $"%PaletteGrid" as PaletteGrid
-@onready var palette_scroll := $"%PaletteScroll"
 
 @onready var add_color_button := $"%AddColor"
 @onready var delete_color_button := $"%DeleteColor"
 @onready var sort_button := %Sort as MenuButton
 @onready var sort_button_popup := sort_button.get_popup()
+@onready var lock_grid: Button = %LockGrid
 
 ## This color picker button itself is hidden, but its popup is used to edit color swatches.
 @onready var hidden_color_picker := $"%HiddenColorPickerButton" as ColorPickerButton
@@ -59,6 +59,9 @@ func _ready() -> void:
 	sort_submenu.add_item("Sort by alpha", Palettes.SortOptions.ALPHA)
 	sort_button_popup.add_child(sort_submenu)
 	sort_button_popup.add_submenu_node_item("Palette Sort", sort_submenu)
+	lock_grid.button_pressed = Global.config_cache.get_value(
+		"palettes", "palette_locked", palette_grid.grid_locked
+	)
 
 	Palettes.palette_selected.connect(select_palette)
 	Palettes.new_palette_created.connect(_new_palette_created)
@@ -119,15 +122,6 @@ func select_palette(palette_name: String) -> void:
 	var palette_id = palettes_name_id.get(palette_name)
 	if palette_id != null:
 		palette_select.selected = palette_id
-	palette_grid.set_palette(Palettes.current_palette)
-	palette_scroll.resize_grid()
-	palette_scroll.set_sliders(Palettes.current_palette, palette_grid.grid_window_origin)
-
-	var left_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
-	var right_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
-	palette_grid.select_swatch(MOUSE_BUTTON_LEFT, left_selected, left_selected)
-	palette_grid.select_swatch(MOUSE_BUTTON_RIGHT, right_selected, right_selected)
-
 	toggle_add_delete_buttons()
 
 
@@ -226,6 +220,16 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 	else:
 		Palettes.sort_colors(id)
 		redraw_current_palette()
+
+
+func _on_lock_grid_toggled(toggled_on: bool) -> void:
+	palette_grid.grid_locked = toggled_on
+	var texture_button: TextureRect = lock_grid.get_node("TextureRect")
+	var file_name := "lock.png"
+	if not toggled_on:
+		file_name = "unlock.png"
+	Global.change_button_texturerect(texture_button, file_name)
+	Global.config_cache.set_value("palettes", "palette_locked", toggled_on)
 
 
 func _on_create_palette_dialog_saved(
@@ -328,8 +332,8 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 
 
 func _on_colorpicker_visibility_changed() -> void:
+	var undo_redo := Global.current_project.undo_redo
 	if hidden_color_picker.get_picker().is_visible_in_tree():
-		var undo_redo := Global.current_project.undo_redo
 		undo_redo.create_action("Change swatch color")
 		var old_color := Palettes.current_palette_get_color(edited_swatch_index)
 		if not Palettes.current_palette.is_project_palette:
@@ -344,18 +348,14 @@ func _on_colorpicker_visibility_changed() -> void:
 		undo_redo.add_undo_method(
 			palette_grid.set_swatch_color.bind(edited_swatch_index, old_color)
 		)
-
-
-## Saves edited swatch to palette file when color selection dialog is closed.
-func _on_HiddenColorPickerButton_popup_closed() -> void:
-	var undo_redo := Global.current_project.undo_redo
-	undo_redo.add_do_method(
-		Palettes.current_palette_set_color.bind(edited_swatch_index, edited_swatch_color)
-	)
-	undo_redo.add_do_method(
-		palette_grid.set_swatch_color.bind(edited_swatch_index, edited_swatch_color)
-	)
-	commit_undo()
+	else:
+		undo_redo.add_do_method(
+			Palettes.current_palette_set_color.bind(edited_swatch_index, edited_swatch_color)
+		)
+		undo_redo.add_do_method(
+			palette_grid.set_swatch_color.bind(edited_swatch_index, edited_swatch_color)
+		)
+		commit_undo()
 
 
 func _on_edit_palette_dialog_deleted(permanent: bool) -> void:
@@ -415,7 +415,7 @@ func _on_edit_palette_dialog_exported(path := "") -> void:
 
 
 func commit_undo() -> void:
-	var undo_redo = Global.current_project.undo_redo
+	var undo_redo := Global.current_project.undo_redo
 	undo_redo.add_undo_method(Global.general_undo)
 	undo_redo.add_do_method(Global.general_redo)
 	undo_redo.commit_action()

@@ -118,8 +118,8 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 
 	x_symmetry_point = size.x - 1
 	y_symmetry_point = size.y - 1
-	xy_symmetry_point = Vector2i(size.y, size.x) - Vector2i.ONE
-	x_minus_y_symmetry_point = Vector2(maxi(size.x - size.y, 0), maxi(size.y - size.x, 0))
+	xy_symmetry_point = size * 0.5
+	x_minus_y_symmetry_point = xy_symmetry_point
 	x_symmetry_axis.type = Guide.Types.HORIZONTAL
 	x_symmetry_axis.project = self
 	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point / 2 + 0.5))
@@ -135,13 +135,15 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	diagonal_xy_symmetry_axis.type = Guide.Types.XY
 	diagonal_xy_symmetry_axis.project = self
 	diagonal_xy_symmetry_axis.add_point(Vector2(19999, -19999))
-	diagonal_xy_symmetry_axis.add_point(Vector2(-19999, 19999) + xy_symmetry_point + Vector2.ONE)
+	diagonal_xy_symmetry_axis.add_point(Vector2(-19999, 19999) + xy_symmetry_point * 2.0)
 	Global.canvas.add_child(diagonal_xy_symmetry_axis)
 
 	diagonal_x_minus_y_symmetry_axis.type = Guide.Types.X_MINUS_Y
 	diagonal_x_minus_y_symmetry_axis.project = self
 	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(-19999, -19999))
-	diagonal_x_minus_y_symmetry_axis.add_point(Vector2(19999, 19999) + x_minus_y_symmetry_point)
+	diagonal_x_minus_y_symmetry_axis.add_point(
+		Vector2(19999, 19999) + x_minus_y_symmetry_point * 2.0
+	)
 	Global.canvas.add_child(diagonal_x_minus_y_symmetry_axis)
 
 	if OS.get_name() == "Web":
@@ -247,7 +249,6 @@ func change_project() -> void:
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 	Global.transparent_checker.update_rect()
-	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 	Global.get_window().title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
 		Global.get_window().title = Global.get_window().title + "(*)"
@@ -884,7 +885,8 @@ func swap_frame(a_index: int, b_index: int) -> void:
 
 func reverse_frames(frame_indices: PackedInt32Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
-	@warning_ignore("integer_division") for i in frame_indices.size() / 2:
+	@warning_ignore("integer_division")
+	for i in frame_indices.size() / 2:
 		var index := frame_indices[i]
 		var reverse_index := frame_indices[-i - 1]
 		var temp := frames[index]
