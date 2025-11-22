@@ -584,37 +584,9 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if new_layer < 0:
 		new_layer = current_layer
 	Global.canvas.selection.transform_content_confirm()
-	# Unpress all buttons
-	for i in frames.size():
-		var frame_button: BaseButton = Global.frame_hbox.get_child(i)
-		frame_button.button_pressed = false  # Unpress all frame buttons
-		for cel_hbox in Global.cel_vbox.get_children():
-			if i < cel_hbox.get_child_count():
-				cel_hbox.get_child(i).button_pressed = false  # Unpress all cel buttons
-
-	for layer_button in Global.layer_vbox.get_children():
-		layer_button.button_pressed = false  # Unpress all layer buttons
 
 	if selected_cels.is_empty():
 		selected_cels.append([new_frame, new_layer])
-	for cel in selected_cels:  # Press selected buttons
-		var frame: int = cel[0]
-		var layer: int = cel[1]
-		if frame < Global.frame_hbox.get_child_count():
-			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
-			frame_button.button_pressed = true  # Press selected frame buttons
-
-		var layer_vbox_child_count: int = Global.layer_vbox.get_child_count()
-		if layer < layer_vbox_child_count:
-			var layer_button = Global.layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
-			layer_button.button_pressed = true  # Press selected layer buttons
-
-		var cel_vbox_child_count: int = Global.cel_vbox.get_child_count()
-		if layer < cel_vbox_child_count:
-			var cel_hbox: Container = Global.cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
-			if frame < cel_hbox.get_child_count():
-				var cel_button: BaseButton = cel_hbox.get_child(frame)
-				cel_button.button_pressed = true  # Press selected cel buttons
 
 	if new_frame != current_frame:  # If the frame has changed
 		current_frame = new_frame

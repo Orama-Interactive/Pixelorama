@@ -1321,6 +1321,35 @@ func _on_timeline_settings_visibility_changed() -> void:
 
 
 func _cel_switched() -> void:
+	# Unpress all buttons
+	for i in Global.current_project.frames.size():
+		var frame_button: BaseButton = Global.frame_hbox.get_child(i)
+		frame_button.button_pressed = false  # Unpress all frame buttons
+		for cel_hbox in Global.cel_vbox.get_children():
+			if i < cel_hbox.get_child_count():
+				cel_hbox.get_child(i).button_pressed = false  # Unpress all cel buttons
+
+	for layer_button in layer_vbox.get_children():
+		layer_button.button_pressed = false  # Unpress all layer buttons
+
+	for cel in Global.current_project.selected_cels:  # Press selected buttons
+		var frame: int = cel[0]
+		var layer: int = cel[1]
+		if frame < Global.frame_hbox.get_child_count():
+			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
+			frame_button.button_pressed = true  # Press selected frame buttons
+
+		var layer_vbox_child_count: int = layer_vbox.get_child_count()
+		if layer < layer_vbox_child_count:
+			var layer_button = layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
+			layer_button.button_pressed = true  # Press selected layer buttons
+
+		var cel_vbox_child_count: int = Global.cel_vbox.get_child_count()
+		if layer < cel_vbox_child_count:
+			var cel_hbox: Container = Global.cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
+			if frame < cel_hbox.get_child_count():
+				var cel_button: BaseButton = cel_hbox.get_child(frame)
+				cel_button.button_pressed = true  # Press selected cel buttons
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
 	_fill_blend_modes_option_button()
