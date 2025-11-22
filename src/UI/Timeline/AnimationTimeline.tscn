@@ -959,6 +959,7 @@ layout_mode = 2
 theme_override_constants/separation = 1
 
 [node name="LayerVBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0

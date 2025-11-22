@@ -48,6 +48,7 @@ var global_layer_expand := true
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
+@onready var layer_vbox := %LayerVBox as VBoxContainer
 @onready var layer_header_container := %LayerHeaderContainer as HBoxContainer
 @onready var add_layer_list := %AddLayerList as MenuButton
 @onready var remove_layer := %RemoveLayer as Button
@@ -122,7 +123,7 @@ func _ready() -> void:
 	%FuturePlacement.item_selected.emit(0 if future_above else 1)
 	Global.cel_switched.connect(_cel_switched)
 	# Makes sure that the frame and tag scroll bars are in the right place:
-	Global.layer_vbox.emit_signal.call_deferred("resized")
+	layer_vbox.emit_signal.call_deferred("resized")
 
 
 func _notification(what: int) -> void:
@@ -207,9 +208,9 @@ func reset_settings() -> void:
 func _get_minimum_size() -> Vector2:
 	# X targets enough to see layers, 1 frame, vertical scrollbar, and padding
 	# Y targets enough to see 1 layer
-	if not is_instance_valid(Global.layer_vbox):
+	if not is_instance_valid(layer_vbox):
 		return Vector2.ZERO
-	return Vector2(Global.layer_vbox.size.x + cel_size + 26, cel_size + 105)
+	return Vector2(layer_vbox.size.x + cel_size + 26, cel_size + 105)
 
 
 func _frame_scroll_changed(_value: float) -> void:
@@ -251,7 +252,7 @@ func _cel_size_changed(value: int) -> void:
 	cel_size_slider.value = cel_size
 	update_minimum_size()
 	Global.config_cache.set_value("timeline", "cel_size", cel_size)
-	for layer_button: Control in Global.layer_vbox.get_children():
+	for layer_button: Control in layer_vbox.get_children():
 		layer_button.custom_minimum_size.y = cel_size
 		layer_button.size.y = cel_size
 	for cel_hbox: Control in Global.cel_vbox.get_children():
@@ -939,7 +940,7 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 		new_layer_idx = project.current_layer
 		if !current_layer.expanded:
 			current_layer.expanded = true
-			for layer_button: LayerButton in Global.layer_vbox.get_children():
+			for layer_button: LayerButton in layer_vbox.get_children():
 				layer_button.update_buttons()
 				var expanded := project.layers[layer_button.layer_index].is_expanded_in_hierarchy()
 				layer_button.visible = expanded
@@ -1333,7 +1334,7 @@ func _cel_switched() -> void:
 		Global.frame_hbox.get_child(project.current_frame)
 	)
 	var layer_index := project.layers.size() - project.current_layer - 1
-	timeline_scroll.ensure_control_visible(Global.layer_vbox.get_child(layer_index))
+	timeline_scroll.ensure_control_visible(layer_vbox.get_child(layer_index))
 
 
 func _update_layer_ui() -> void:
@@ -1394,7 +1395,7 @@ func project_changed() -> void:
 	_toggle_layer_buttons()
 	# These must be removed from tree immediately to not mess up the indices of
 	# the new buttons, so use either free or queue_free + parent.remove_child
-	for layer_button in Global.layer_vbox.get_children():
+	for layer_button in layer_vbox.get_children():
 		layer_button.free()
 	for frame_button in Global.frame_hbox.get_children():
 		frame_button.free()
@@ -1423,7 +1424,7 @@ func project_changed() -> void:
 				var cel_button := cel_hbox.get_child(frame)
 				cel_button.button_pressed = true
 
-			var layer_button := Global.layer_vbox.get_child(vbox_child_count - 1 - layer)
+			var layer_button := layer_vbox.get_child(vbox_child_count - 1 - layer)
 			layer_button.button_pressed = true
 
 
@@ -1471,9 +1472,9 @@ func project_layer_added(layer: int) -> void:
 	layer_button.visible = project.layers[layer].is_expanded_in_hierarchy()
 	cel_hbox.visible = layer_button.visible
 
-	Global.layer_vbox.add_child(layer_button)
-	var count := Global.layer_vbox.get_child_count()
-	Global.layer_vbox.move_child(layer_button, count - 1 - layer)
+	layer_vbox.add_child(layer_button)
+	var count := layer_vbox.get_child_count()
+	layer_vbox.move_child(layer_button, count - 1 - layer)
 	Global.cel_vbox.add_child(cel_hbox)
 	Global.cel_vbox.move_child(cel_hbox, count - 1 - layer)
 	update_global_layer_buttons()
@@ -1482,8 +1483,8 @@ func project_layer_added(layer: int) -> void:
 
 
 func project_layer_removed(layer: int) -> void:
-	var count := Global.layer_vbox.get_child_count()
-	var layer_button := Global.layer_vbox.get_child(count - 1 - layer)
+	var count := layer_vbox.get_child_count()
+	var layer_button := layer_vbox.get_child(count - 1 - layer)
 	layer_button.free()
 	var cel_hbox := Global.cel_vbox.get_child(count - 1 - layer)
 	cel_hbox.free()
@@ -1524,7 +1525,7 @@ func _on_onion_skinning_opacity_value_changed(value: float) -> void:
 
 func _on_global_visibility_button_pressed() -> void:
 	var layer_visible := !global_layer_visibility
-	for layer_button: LayerButton in Global.layer_vbox.get_children():
+	for layer_button: LayerButton in layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer.visible != layer_visible:
 			layer_button.visibility_button.pressed.emit()
@@ -1532,7 +1533,7 @@ func _on_global_visibility_button_pressed() -> void:
 
 func _on_global_lock_button_pressed() -> void:
 	var locked := !global_layer_lock
-	for layer_button: LayerButton in Global.layer_vbox.get_children():
+	for layer_button: LayerButton in layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer.locked != locked:
 			layer_button.lock_button.pressed.emit()
@@ -1540,7 +1541,7 @@ func _on_global_lock_button_pressed() -> void:
 
 func _on_global_expand_button_pressed() -> void:
 	var expand := !global_layer_expand
-	for layer_button: LayerButton in Global.layer_vbox.get_children():
+	for layer_button: LayerButton in layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer is GroupLayer and layer.expanded != expand:
 			layer_button.expand_button.pressed.emit()
