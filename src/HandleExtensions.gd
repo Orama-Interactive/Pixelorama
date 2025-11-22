@@ -132,7 +132,8 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 	var err := FileAccess.get_open_error()
 	if err != OK:
 		print("Error loading config file: ", err, " (", error_string(err), ")")
-		extension_config_file.close()
+		if extension_config_file:
+			extension_config_file.close()
 		return
 
 	var test_json_conv := JSON.new()
