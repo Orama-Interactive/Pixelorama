@@ -12,12 +12,10 @@ const WIDTH: float = 2
 var gizmo_origin := Vector2.ZERO:
 	set(value):
 		if not gizmo_origin.is_equal_approx(value):
-			var diff = value - gizmo_origin
 			gizmo_origin = value
 var gizmo_rotate_origin: float = 0:  ## Unit is Radians
 	set(value):
 		if not is_equal_approx(value, gizmo_rotate_origin):
-			var diff = value - gizmo_rotate_origin
 			gizmo_rotate_origin = value
 var start_point := Vector2.ZERO:  ## This is relative to the gizmo_origin
 	set(value):
@@ -92,8 +90,8 @@ func serialize(vector_to_string := true) -> Dictionary:
 	return data
 
 
-func deserialize(data: Dictionary, update_children := false, update_super := true) -> void:
-	if not update_children:
+func deserialize(data: Dictionary, silent_update := false, update_super := true) -> void:
+	if not silent_update:
 		should_update_children = false
 	if update_super:
 		super.deserialize(data)
@@ -160,6 +158,11 @@ func update_children(property: String, diff):
 					child_cel.start_point = child_cel.rel_to_origin(
 						p_cel.rel_to_canvas(start_point) + displacement
 					)
+
+
+func duplicate_cel() -> BoneCel:
+	var new_cel := BoneCel.new(opacity, serialize(false))
+	return new_cel
 
 
 func get_class_name() -> String:
