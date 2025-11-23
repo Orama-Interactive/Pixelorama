@@ -1543,7 +1543,7 @@ func project_changed() -> void:
 	await get_tree().process_frame
 	frame_scroll_container.ensure_control_visible(frame_hbox.get_child(project.current_frame))
 	var layer_index := project.layers.size() - project.current_layer - 1
-	timeline_scroll.ensure_control_visible(layer_vbox.get_child(layer_index))
+	timeline_scroll.ensure_control_visible.call_deferred(layer_vbox.get_child(layer_index))
 
 
 func project_frame_added(frame: int) -> void:
