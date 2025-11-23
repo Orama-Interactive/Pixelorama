@@ -659,8 +659,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
-## The perspective editor. It has the [param PerspectiveEditor.gd] script attached.
-@onready var perspective_editor := control.find_child("Perspective Editor")
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.

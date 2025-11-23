@@ -65,7 +65,7 @@ func _input(event: InputEvent) -> void:
 		var project_size := Global.current_project.size
 
 		if track_mouse:
-			if !Global.can_draw or Global.perspective_editor.tracker_disabled:
+			if !Global.can_draw or _vanishing_point.perspective_editor.tracker_disabled:
 				hide_perspective_line()
 				return
 			default_color.a = 0.5
