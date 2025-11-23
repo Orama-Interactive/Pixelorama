@@ -1541,6 +1541,9 @@ func project_changed() -> void:
 	# ensure_control_visible. If waiting wasn't needed, this piece of code wouldn't be needed
 	# anyway, since _cel_switched already calls ensure_control_visible.
 	await get_tree().process_frame
+	if project != Global.current_project:
+		# Needed in case we load multiple projects at once.
+		return
 	frame_scroll_container.ensure_control_visible(frame_hbox.get_child(project.current_frame))
 	var layer_index := project.layers.size() - project.current_layer - 1
 	timeline_scroll.ensure_control_visible.call_deferred(layer_vbox.get_child(layer_index))
@@ -1597,6 +1600,8 @@ func project_layer_added(layer: int) -> void:
 	cel_vbox.move_child(cel_hbox, count - 1 - layer)
 	update_global_layer_buttons()
 	await get_tree().process_frame
+	if not is_instance_valid(layer_button):
+		return
 	timeline_scroll.ensure_control_visible(layer_button)
 
 
