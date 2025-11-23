@@ -161,12 +161,6 @@ func remove() -> void:
 	undo_redo.free()
 	for ri in reference_images:
 		ri.queue_free()
-	if self == Global.current_project:
-		# If the project is not current_project then the points need not be removed
-		for point_idx in vanishing_points.size():
-			var editor = Global.perspective_editor
-			for c in editor.vanishing_point_container.get_children():
-				c.queue_free()
 	for guide in guides:
 		guide.queue_free()
 	for frame in frames:
