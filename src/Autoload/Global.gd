@@ -667,13 +667,9 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
 ## The palette panel. It has the [param PalettePanel.gd] script attached.
 @onready var palette_panel: PalettePanel = control.find_child("Palettes")
-## At runtime HBoxContainers containing cel buttons get added to it.
-@onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
-## The brushes popup dialog used to display brushes.
-## It has the [param BrushesPopup.gd] script attached.
+## Popup dialog that displays brushes. It has the [param BrushesPopup.gd] script attached.
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")
-## The patterns popup dialog used to display patterns
-## It has the [param PatternsPopup.gd] script attached.
+## Popup dialog that displays patterns. It has the [param PatternsPopup.gd] script attached.
 @onready var patterns_popup: Popup = control.find_child("PatternsPopup")
 ## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")

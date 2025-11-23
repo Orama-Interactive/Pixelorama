@@ -949,10 +949,7 @@ func move_cels_same_layer(
 		Global.animation_timeline.project_cel_added(to_indices[i], layer)
 
 	# Update the cel buttons for this layer:
-	var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - layer)
-	for f in frames.size():
-		cel_hbox.get_child(f).frame = f
-		cel_hbox.get_child(f).button_setup()
+	Global.animation_timeline.update_cel_button_ui(layer)
 
 
 func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
