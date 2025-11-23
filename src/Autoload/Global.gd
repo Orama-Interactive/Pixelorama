@@ -5,6 +5,7 @@ extends Node
 ## This Autoload contains signals, enums, constants, variables and
 ## references to many UI elements used within Pixelorama.
 
+#region signals
 @warning_ignore("unused_signal")
 signal pixelorama_opened  ## Emitted as soon as Pixelorama fully opens up.
 @warning_ignore("unused_signal")
@@ -23,6 +24,7 @@ signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool
 signal on_cursor_position_text_changed(text: String)
 @warning_ignore("unused_signal")
 signal dynamics_changed
+#endregion
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
@@ -194,10 +196,10 @@ var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
 ## If true, the x=y symmetry guide ( / ) is visible.
 var show_xy_symmetry_axis := false
-## If true, the x==y symmetry guide ( \ ) is visible.
+## If true, the x=-y symmetry guide ( \ ) is visible.
 var show_x_minus_y_symmetry_axis := false
 
-# Preferences
+#region Preferences
 ## Found in Preferences. If [code]true[/code], the last saved project will open on startup.
 var open_last_project := false
 ## Found in Preferences. If [code]true[/code], asks for permission to quit on exit.
@@ -580,8 +582,9 @@ var native_cursors := false:
 			control.set_custom_cursor()
 ## Found in Preferences. If [code]true[/code], cursor becomes cross shaped when hovering the canvas.
 var cross_cursor := true
+#endregion
 
-# View menu options
+#region View menu options
 ## If [code]true[/code], the canvas is in greyscale.
 var greyscale_view := false
 ## If [code]true[/code], the content of canvas is flipped.
@@ -626,6 +629,7 @@ var snap_to_rectangular_grid_center := false
 var snap_to_guides := false
 ## If [code]true[/code], cursor snaps to perspective guides.
 var snap_to_perspective_guides := false
+#endregion
 
 # Onion skinning options
 var onion_skinning := false  ## If [code]true[/code], onion skinning is enabled.
@@ -665,8 +669,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var palette_panel: PalettePanel = control.find_child("Palettes")
 ## At runtime HBoxContainers containing cel buttons get added to it.
 @onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
-## The container of animation tags.
-@onready var tag_container: Control = animation_timeline.find_child("TagContainer")
 ## The brushes popup dialog used to display brushes.
 ## It has the [param BrushesPopup.gd] script attached.
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")

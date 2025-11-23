@@ -13,6 +13,7 @@ signal animation_looped
 enum LoopType { NO, CYCLE, PINGPONG }
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
+const ANIMATION_TAG_TSCN := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 const CEL_MIN_SIZE_OFFSET := 15
 
@@ -63,6 +64,7 @@ var global_layer_expand := true
 @onready var timeline_scroll := %TimelineScroll as ScrollContainer
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
+@onready var tag_container: Control = %TagContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
 @onready var layer_frame_header_h_split := %LayerFrameHeaderHSplit as HSplitContainer
 @onready var delete_frame := %DeleteFrame as Button
@@ -235,7 +237,7 @@ func adjust_scroll_container() -> void:
 		frame_scroll_container.global_position.x - tag_scroll_container.global_position.x
 	)
 	tag_scroll_container.get_child(0).custom_minimum_size.x = frame_hbox.size.x
-	Global.tag_container.custom_minimum_size = frame_hbox.size
+	tag_container.custom_minimum_size = frame_hbox.size
 	tag_scroll_container.scroll_horizontal = frame_scroll_bar.value
 
 
@@ -270,7 +272,7 @@ func _cel_size_changed(value: int) -> void:
 		frame_id.custom_minimum_size.x = cel_size
 		frame_id.size.x = cel_size
 
-	for tag_c: Control in Global.tag_container.get_children():
+	for tag_c: Control in tag_container.get_children():
 		tag_c.update_position_and_size()
 
 
@@ -1325,6 +1327,7 @@ func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
 	project.layers_updated.disconnect(_update_layer_ui)
 	project.frames_updated.disconnect(_update_frame_ui)
+	project.tags_changed.disconnect(_on_animation_tags_changed)
 
 
 func _on_project_switched() -> void:
@@ -1333,6 +1336,8 @@ func _on_project_switched() -> void:
 		project.layers_updated.connect(_update_layer_ui)
 	if not project.frames_updated.is_connected(_update_frame_ui):
 		project.frames_updated.connect(_update_frame_ui)
+	if not project.tags_changed.is_connected(_on_animation_tags_changed):
+		project.tags_changed.connect(_on_animation_tags_changed)
 
 
 # Methods to update the UI in response to changes in the current project
@@ -1413,6 +1418,21 @@ func _update_frame_ui() -> void:
 		for f in project.frames.size():
 			cel_hbox.get_child(f).frame = f
 			cel_hbox.get_child(f).button_setup()
+	set_timeline_first_and_last_frames()
+
+
+func _on_animation_tags_changed() -> void:
+	var project := Global.current_project
+	for child in tag_container.get_children():
+		child.queue_free()
+
+	for tag in project.animation_tags:
+		var tag_c := ANIMATION_TAG_TSCN.instantiate()
+		tag_c.tag = tag
+		tag_container.add_child(tag_c)
+		var tag_position := tag_container.get_child_count() - 1
+		tag_container.move_child(tag_c, tag_position)
+
 	set_timeline_first_and_last_frames()
 
 

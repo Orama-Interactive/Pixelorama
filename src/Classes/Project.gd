@@ -10,6 +10,7 @@ signal resized
 signal fps_changed
 signal layers_updated
 signal frames_updated
+signal tags_changed
 
 const INDEXED_MODE := Image.FORMAT_MAX + 1
 
@@ -55,7 +56,9 @@ var selected_cels := [[0, 0]]  ## Array of Arrays of 2 integers (frame & layer)
 var ordered_layers: Array[int] = [0]
 
 var animation_tags: Array[AnimationTag] = []:
-	set = _animation_tags_changed
+	set(value):
+		animation_tags = value
+		tags_changed.emit()
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
 var palettes: Dictionary[String, Palette] = {}
@@ -104,8 +107,6 @@ var file_format := Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 var backup_path := ""
-
-var animation_tag_node := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
 func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2i(64, 64)) -> void:
@@ -598,21 +599,6 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	order_layers()
 	Global.transparent_checker.update_rect()
 	Global.cel_switched.emit()
-
-
-func _animation_tags_changed(value: Array[AnimationTag]) -> void:
-	animation_tags = value
-	for child in Global.tag_container.get_children():
-		child.queue_free()
-
-	for tag in animation_tags:
-		var tag_c := animation_tag_node.instantiate()
-		tag_c.tag = tag
-		Global.tag_container.add_child(tag_c)
-		var tag_position := Global.tag_container.get_child_count() - 1
-		Global.tag_container.move_child(tag_c, tag_position)
-
-	Global.animation_timeline.set_timeline_first_and_last_frames()
 
 
 func is_empty() -> bool:
